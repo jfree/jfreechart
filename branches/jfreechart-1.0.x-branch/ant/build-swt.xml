@@ -1,0 +1,88 @@
+<project name="jfreechart-swt" default="all" basedir="..">
+
+    <!-- Initialisation. -->
+    <target name="initialise" description="Initialise required settings.">
+        <tstamp />
+        <property name="jfreechart.name" value="jfreechart" />
+        <property name="jfreechart.version" value="1.0.6" />
+        <property name="jcommon.name" value="jcommon" />
+        <property name="jcommon.version" value="1.0.10" />
+        <property name="builddir" value="${basedir}/build" />
+        <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
+        <property name="jfreechart.jar" value="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
+    	<!-- Edit the next line to link to the swt library you want, see README file in the swt folder -->
+        <property name="swt.jar" value="${basedir}/libswt/swt-gtk-linux-x86/swt.jar"/>
+        <available classname="javax.imageio.ImageIO" property="ImageIO.present"/>
+        <path id="build.classpath">
+            <pathelement location="${jcommon.jar}"/>
+            <pathelement location="${jfreechart.jar}"/>
+            <pathelement location="${swt.jar}"/>
+        </path>
+
+    </target>
+	
+    <!-- Compile the JFreeChart SWT classes -->
+    <target name="compile-swtgraphics" depends="initialise"
+            description="Compile and package some utility SWT source code.">
+
+        <!-- create a temp build directory -->
+        <mkdir dir="${basedir}/build" />
+
+        <!-- compile the source -->
+        <javac srcdir="${basedir}/swt" 
+               destdir="${basedir}/build"
+               debug="on"
+               deprecation="on"
+               source="1.3"
+               target="1.3">
+            <classpath refid="build.classpath" />
+            <include name="org/jfree/experimental/swt/**/*.java"/>
+        </javac>
+
+        <!-- make the jar -->
+        <jar jarfile="${basedir}/swtgraphics2d.jar"
+             basedir="${basedir}/build" >
+        </jar>
+
+        <!-- delete the temp directory -->
+        <delete dir="${basedir}/build" />
+
+    </target>
+
+	<!-- Compile the JFreeChart SWT classes -->
+    <target name="compile-swt" depends="initialise"
+            description="Compile and package the JFreeChart SWT source code.">
+
+        <!-- create a temp build directory -->
+        <mkdir dir="${basedir}/build" />
+
+        <!-- compile the source -->
+        <javac srcdir="${basedir}/swt" 
+               destdir="${basedir}/build"
+               debug="on"
+               deprecation="on"
+               source="1.3"
+               target="1.3">
+            <classpath refid="build.classpath" />
+            <include name="org/jfree/experimental/chart/**/*.java"/>
+        </javac>
+
+        <!-- make the jar -->
+        <jar jarfile="${basedir}/${jfreechart.name}-${jfreechart.version}-swt.jar"
+             basedir="${basedir}/build" >
+        </jar>
+
+        <!-- delete the temp directory -->
+        <delete dir="${basedir}/build" />
+
+    </target>
+
+    <!-- ALL -->
+    <target name="all" 
+            depends="compile-swtgraphics,compile-swt"
+            description="Compiles and package in jar files all the SWT related code in JFreeChart.">
+
+    </target>
+
+</project>
+ 

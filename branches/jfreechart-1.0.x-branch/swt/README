@@ -1,0 +1,48 @@
+EXPERIMENTAL SWT CODE FOR JFREECHART
+------------------------------------
+
+07 November 2006
+
+SWT is the Java Standard Widget Toolkit [1], an open source (released under the
+Eclipse Public License) and portable library to create user interfaces. The 
+SWT interfaces will use native widget on any operating system it supports.
+
+This code provide support for using the JFreeChart library directly into 
+SWT Composites. Note that there is the alternative to use the SWT_AWT class 
+but it will run only with SUN JRE and Java 1.5 (and it is not native, so 
+potentially much slower).
+
+To compile this code, you will need to link it against the swt.jar of the 
+target os. Indeed while the API is totally cross platform, the implementation 
+is platform dependent since it calls on native widget if available (much 
+faster) and only rely on a Java implementation if it is not. An ant script:
+build-swt.xml is provided to help you build the code. This file contains two 
+compile targets to build the following jar:
+
+ * swtgraphics2d.jar - The generic classes not JFreeChart specific.
+ * jfreechart-1.0.x-swt.jar - The specific JFreeChart SWT classes.
+
+To get a successful build id pretty straightforward, download the SWT library 
+from eclipse.org [1]. Unpack the archive in the JFreeChart tree as libswt. 
+If you need to build for multiple OS, put all the SWT in there. For instance
+(with SWT version 3.2):
+
+libswt
+  |
+  `--swt-linux-gtk-x86
+  |   |
+  |   `--swt.jar
+  |   `--libswt-gtk-3232.so
+  |   `-- etc...
+  `--swt-win32-win32-x86
+      |
+      `--swt.jar
+      `--swt-win32-3232.dll
+
+Then you need to edit the build-swt.xml script and change line 14 to what is 
+needed. Of course all of the paths are relative. You can change it to whatever
+you like provided the path in the xml file is correct. Then just run: 
+
+ant -buildfile build-swt.xml
+
+[1] http://www.eclipse.org/swt/
