@@ -1,0 +1,365 @@
+<!-- An ANT build file for JFreeChart -->
+
+<!-- Written by David Gilbert. -->
+<!-- 2-Jan-2003 -->
+
+<!-- Tested with Ant 1.6.5 -->
+<!-- To run this script, you need to make sure the libraries used by -->
+<!-- JFreeChart are copied to the ../lib directory (or edit the -->
+<!-- initialise task to point to the appropriate jar files). -->
+
+<!-- This script will create temporary directories ../build and -->
+<!-- ../distribution, as working areas.  A ../javadoc directory will -->
+<!-- be created for the Javadoc HTML pages. -->
+
+<!-- If you have comments about this script, please post a message -->
+<!-- on the JFreeChart developers mailing list. -->
+
+<project name="jfreechart" default="all" basedir="..">
+
+    <!-- Initialisation. -->
+    <target name="initialise" description="Initialise required settings.">
+        <tstamp />
+        <property name="jfreechart.name" value="jfreechart" />
+        <property name="jfreechart.version" value="1.0.6" />
+        <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
+        <property name="jcommon.name" value="jcommon" />
+        <property name="jcommon.version" value="1.0.10" />
+        <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
+        <property name="itext.name" value="itext" />
+        <property name="itext.version" value="2.0.2" />
+        <property name="itext.jar" value="${basedir}/lib/${itext.name}-${itext.version}.jar"/>
+        <property name="builddir" value="${basedir}/build" />
+        <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
+        <property name="gnujaxp.jar" value="${basedir}/lib/gnujaxp.jar"/>
+        <property name="junit.jar" value="${basedir}/lib/junit.jar"/>
+        <available classname="javax.imageio.ImageIO" property="ImageIO.present"/>
+        <path id="build.classpath">
+            <pathelement location="${jcommon.jar}"/>
+            <pathelement location="${servlet.jar}"/>
+            <pathelement location="${gnujaxp.jar}"/>
+        </path>
+
+    </target>
+
+    <!-- Compile the JFreeChart classes -->
+    <target name="compile" depends="initialise"
+            description="Compile the JFreeChart source code.">
+
+        <!-- create a temp build directory -->
+        <mkdir dir="${basedir}/build" />
+
+        <!-- compile the source -->
+        <javac srcdir="${basedir}/source" 
+               destdir="${basedir}/build"
+               debug="on"
+               deprecation="false"
+               source="1.3"
+               target="1.3">
+            <classpath refid="build.classpath" />
+            <include name="org/jfree/**"/>
+            <exclude name="org/jfree/chart/xml/**"/>
+            <exclude name="org/jfree/chart/encoders/SunPNGEncoderAdapter.java" unless="ImageIO.present"/>
+            <exclude name="org/jfree/chart/encoders/SunJPEGEncoderAdapter.java" unless="ImageIO.present"/>        	
+        </javac>
+
+        <!-- copy across gorilla.jpg -->
+        <copy file="${basedir}/source/org/jfree/chart/gorilla.jpg" tofile="${basedir}/build/org/jfree/chart/gorilla.jpg" />
+
+        <!-- copy across .properties files -->
+        <copy todir="${basedir}/build/org/jfree/chart/">
+            <fileset dir="${basedir}/source/org/jfree/chart">
+                <include name="*.properties" />
+            </fileset>
+        </copy>
+        <copy todir="${basedir}/build/org/jfree/chart/plot">
+            <fileset dir="${basedir}/source/org/jfree/chart/plot">
+                <include name="*.properties" />
+            </fileset>
+        </copy>
+        <copy todir="${basedir}/build/org/jfree/chart/editor">
+            <fileset dir="${basedir}/source/org/jfree/chart/editor">
+                <include name="*.properties" />
+            </fileset>
+        </copy>
+
+        <!-- make the jar -->
+        <jar jarfile="${basedir}/${jfreechart.name}-${jfreechart.version}.jar"
+             basedir="${basedir}/build" >
+        </jar>
+
+        <!-- delete the temp directory -->
+        <delete dir="${basedir}/build" />
+
+    </target>
+
+
+    <!-- Compile the experimental classes --> 
+    <target name="compile-experimental" depends="compile" 
+            description="Compile the JFreeChart experimental classes"> 
+
+        <!-- create a temp build directory -->
+        <mkdir dir="${basedir}/build" />
+
+        <path id="build.experimental.classpath">
+            <pathelement location="${jcommon.jar}"/>
+            <pathelement location="${servlet.jar}"/>
+            <pathelement location="${gnujaxp.jar}"/>
+            <pathelement location="${basedir}/${jfreechart.name}-${jfreechart.version}.jar"/>
+        </path>
+
+        <!-- compile the source -->
+        <javac srcdir="${basedir}/experimental" 
+               destdir="${basedir}/build"
+               debug="on"
+               deprecation="false"
+               source="1.3"
+               target="1.3">
+            <classpath refid="build.experimental.classpath" />
+            <include name="org/jfree/experimental/**"/>
+            <exclude name="org/jfree/experimental/**/junit/*"/>
+        </javac>
+
+        <!-- make the jar -->
+        <jar jarfile="${basedir}/${jfreechart.name}-${jfreechart.version}-experimental.jar"
+             basedir="${basedir}/build" >
+        </jar>
+
+        <!-- delete the temp directory -->
+        <delete dir="${basedir}/build" />
+    </target>
+
+
+    <!-- Generate the JFreeChart API HTML pages -->
+    <target name="javadoc" depends="initialise">
+        <delete dir="${basedir}/javadoc" />
+        <mkdir dir="${basedir}/javadoc" />
+        <javadoc destdir="${basedir}/javadoc" 
+                 windowtitle="JFreeChart Class Library (version ${jfreechart.version})"
+                 overview="${basedir}/source/overview.html"
+                 use="yes"
+                 linksource="yes"
+                 splitindex="yes">
+            <classpath refid="build.classpath" />
+            <packageset dir="${basedir}/source" defaultexcludes="yes">
+                <include name="org/jfree/**"/>
+                <exclude name="org/jfree/chart/xml/**"/>
+            </packageset>
+        </javadoc>
+    </target>
+	
+	
+    <!-- Create zip file containing the API HTML pages. -->
+    <target name="zip-javadocs" depends="javadoc">
+        <!-- make the zip file -->
+        <zip zipfile="${basedir}/${jfreechart.name}-${jfreechart.version}-javadocs.zip">
+             <zipfileset dir="${basedir}/javadoc"
+                         prefix="${jfreechart.name}-${jfreechart.version}-javadocs" />
+        </zip>
+    </target>
+
+
+    <!-- Fill the 'distribution' directory. -->
+    <target name="fill-distribution" depends="compile">
+	
+        <!-- delete the temporary distribution directory, if there is one -->
+        <delete dir="${basedir}/distribution" />
+
+    	<!-- make a temporary distribution directory -->
+        <mkdir dir="${basedir}/distribution" />
+
+        <!-- copy across README and CHANGELOG -->
+        <copy file="${basedir}/README.txt" tofile="${basedir}/distribution/README.txt" />
+        <copy file="${basedir}/NEWS" tofile="${basedir}/distribution/NEWS" />
+        <copy file="${basedir}/CHANGELOG.txt" tofile="${basedir}/distribution/CHANGELOG.txt" />
+        <copy file="${basedir}/ChangeLog" tofile="${basedir}/distribution/ChangeLog" />
+        <copy file="${basedir}/maven-jfreechart-project.xml" tofile="${basedir}/distribution/maven-jfreechart-project.xml" />
+
+        <!-- copy across LICENCE -->
+        <copy file="${basedir}/licence-LGPL.txt" tofile="${basedir}/distribution/licence-LGPL.txt" />
+
+        <!-- copy across runtime jar file and demo jar file -->
+        <copy file="${basedir}/${jfreechart.name}-${jfreechart.version}.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}.jar" />
+        <copy file="${basedir}/${jfreechart.name}-${jfreechart.version}-experimental.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar" />
+        <copy file="${basedir}/${jfreechart.name}-${jfreechart.version}-demo.jar" tofile="${basedir}/distribution/${jfreechart.name}-${jfreechart.version}-demo.jar" failonerror="false" />
+    
+        <!-- copy across source files -->
+        <copy todir="${basedir}/distribution/source">
+            <fileset dir="${basedir}/source">
+              <exclude name="**/CVS/*"/>
+              <exclude name="org/jfree/chart/xml/**"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${basedir}/distribution/experimental">
+            <fileset dir="${basedir}/experimental">
+              <exclude name="**/CVS/*"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${basedir}/distribution/tests">
+            <fileset dir="${basedir}/tests">
+              <exclude name="**/CVS/*"/>
+            </fileset>
+        </copy>
+    	
+        <copy todir="${basedir}/distribution/swt">
+            <fileset dir="${basedir}/swt">
+              <exclude name="**/CVS/*"/>
+            </fileset>
+        </copy>    	
+
+        <!-- copy across lib files -->
+        <copy file="${jcommon.jar}" tofile="${basedir}/distribution/lib/${jcommon.name}-${jcommon.version}.jar" />
+        <copy file="${basedir}/lib/swtgraphics2d.jar" tofile="${basedir}/distribution/lib/swtgraphics2d.jar" />
+        <copy file="${basedir}/lib/jfreechart-${jfreechart.version}-swt.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-swt.jar" />
+        <copy file="${servlet.jar}" tofile="${basedir}/distribution/lib/servlet.jar" />
+        <copy file="${gnujaxp.jar}" tofile="${basedir}/distribution/lib/gnujaxp.jar" />
+        <copy file="${junit.jar}" tofile="${basedir}/distribution/lib/junit.jar" />
+        <copy file="${itext.jar}" tofile="${basedir}/distribution/lib/${itext.name}-${itext.version}.jar" />
+
+        <!-- copy across ant build files -->
+        <copy file="${basedir}/ant/build.xml" tofile="${basedir}/distribution/ant/build.xml" />
+        <copy file="${basedir}/ant/build-swt.xml" tofile="${basedir}/distribution/ant/build-swt.xml" />
+
+        <!-- copy across checkstyle property file -->
+        <copy todir="${basedir}/distribution/checkstyle">
+            <fileset dir="${basedir}/checkstyle" />
+        </copy>
+
+        <!-- convert end-of-line characters in text files -->
+        <fixcrlf srcdir="${basedir}/distribution/source"
+                 eol="crlf" eof="remove"
+                 excludes="**/*.jpg" />
+
+        <fixcrlf srcdir="${basedir}/distribution/experimental"
+                 eol="lf" eof="remove"
+                 excludes="**/*.jpg" />
+
+    	<fixcrlf srcdir="${basedir}/distribution/swt"
+                 eol="lf" eof="remove"
+                 excludes="**/*.jpg" />
+
+    	<fixcrlf srcdir="${basedir}/distribution/tests"
+                 eol="lf" eof="remove"
+                 excludes="**/*.jpg" />
+
+    </target>
+
+    <!-- Make .zip distribution for JFreeChart -->
+    <target name="zip" depends="fill-distribution">
+
+        <!-- make the zip file -->
+        <zip zipfile="${basedir}/${jfreechart.name}-${jfreechart.version}.zip">
+             <zipfileset dir="${basedir}/distribution"
+                         prefix="${jfreechart.name}-${jfreechart.version}" />
+        </zip>
+
+    </target>
+
+    <!-- Make .tar.gz distribution for JFreeChart -->
+    <target name="targz" depends="fill-distribution">
+
+        <!-- make the tar.gz file -->
+        <tar tarfile="${basedir}/${jfreechart.name}-${jfreechart.version}.tar">
+             <tarfileset dir="${basedir}/distribution"
+                         prefix="${jfreechart.name}-${jfreechart.version}" />
+        </tar>
+        <gzip zipfile="${basedir}/${jfreechart.name}-${jfreechart.version}.tar.gz"   
+              src="${basedir}/${jfreechart.name}-${jfreechart.version}.tar" />
+        <delete file="${basedir}/${jfreechart.name}-${jfreechart.version}.tar" />
+
+    </target>
+
+  <target name="maven-bundle" depends="zip" >
+    <!-- make a temporary distribution directory -->
+    <mkdir dir="distribution"/>
+    <!-- copy across LICENCE -->
+    <copy file="licence-LGPL.txt" tofile="distribution/LICENSE.txt"/>
+    
+    <filterchain id="version.filters">
+       <replacetokens>
+         <token key="VERSION" value="${jfreechart.version}"/>
+         <token key="JCOMMON.VERSION" value="${jcommon.version}"/>
+       </replacetokens>
+    </filterchain>
+    <copy file="maven-jfreechart-project.xml" tofile="distribution/project.xml">
+	<filterchain refid="version.filters"/>
+    </copy>
+    
+    <!-- copy across runtime jar file -->
+    <copy file="${jfreechart.name}-${jfreechart.version}.jar" tofile="distribution/${jfreechart.name}-${jfreechart.version}.jar"/>
+
+    <!-- make the jar -->
+    <jar jarfile="${jfreechart-bundle-file}" basedir="distribution"/>
+
+    <!-- delete the temporary distribution directory -->
+    <delete dir="distribution"/>
+  </target>
+
+
+    <!-- COMPILE THE JUNIT TESTS. -->  
+    <target name="compile-tests" 
+            depends="compile,compile-experimental"
+            description="Compile the test code">
+        
+        <mkdir dir="${basedir}/build-tests"/>
+        <javac srcdir="${basedir}/tests" 
+               destdir="${basedir}/build-tests" 
+               source="1.3"
+               target="1.3" 
+               debug="true" 
+               deprecation="false"
+               optimize="false">
+            <classpath>
+                <path refid="build.classpath"/>
+                <pathelement location="${junit.jar}"/>
+                <pathelement location="${basedir}/${jfreechart.name}-${jfreechart.version}.jar"/>
+                <pathelement location="${basedir}/${jfreechart.name}-${jfreechart.version}-experimental.jar"/>
+                <pathelement location="${basedir}/build-tests"/>
+            </classpath>
+        </javac>
+    
+    </target>
+
+
+    <!-- RUN THE JUNIT TESTS. -->
+    <target name="test" 
+            depends="compile-tests"
+            description="Run the test cases">
+        
+        <mkdir dir="${basedir}/build-tests-reports"/>
+        
+        <junit printSummary="yes" 
+               haltonerror="true" 
+               haltonfailure="true"
+               fork="true" 
+               dir=".">
+            
+            <sysproperty key="basedir" value="."/>
+            <formatter type="plain" usefile="false"/>
+            <classpath>
+                <path refid="build.classpath"/>
+                <pathelement location="${junit.jar}"/>
+                <pathelement location="${basedir}/${jfreechart.name}-${jfreechart.version}.jar"/>
+                <pathelement location="${basedir}/${jfreechart.name}-${jfreechart.version}-experimental.jar"/>
+                <pathelement location="${basedir}/build-tests"/>
+            </classpath>
+            <batchtest todir="${basedir}/build-tests-reports">
+                <fileset dir="${basedir}/tests">
+                    <include name="**/*Tests.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- ALL -->
+    <target name="all" 
+            depends="compile,compile-experimental,zip-javadocs,zip,targz,maven-bundle"
+            description="Compiles JFreeChart, builds the jar files, generates the Javadoc HTML pages and creates distribution files (.zip and .tar.gz).">
+
+        <!-- delete the temporary distribution directory -->
+        <delete dir="${basedir}/distribution" />    
+    </target>
+
+</project>

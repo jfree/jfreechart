@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<project
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
+  <pomVersion>3</pomVersion>
+  <id>jfreechart</id>
+  <name>JFreechart</name>
+  <groupId>jfree</groupId>
+  <currentVersion>@VERSION@</currentVersion>
+  <organization>
+    <name>JFree.org</name>
+    <url>http://www.jfree.org/</url>
+  </organization>
+  <inceptionYear>2001</inceptionYear>
+
+  <description>
+    JFreeChart is a class library, written in Java, for generating charts. 
+    Utilising the Java2D APIs, it currently supports bar charts, pie charts, 
+    line charts, XY-plots and time series plots.
+  </description>
+
+  <shortDescription>A free Java class library for generating charts.</shortDescription>
+
+  <url>http://www.jfree.org/jfreechart/</url>
+  <issueTrackingUrl>http://sourceforge.net/tracker/?group_id=15494</issueTrackingUrl>
+
+  <repository>
+    <connection>
+      scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jfreechart:jfreechart
+    </connection>
+    <url>http://cvs.sourceforge.net/viewcvs.py/jfreechart/jfreechart</url>
+  </repository>
+
+  <mailingLists>
+    <mailingList>
+      <name>JFreeChart Developer List</name>
+      <subscribe>
+        jfreechart-dev-request@lists.sourceforge.net?subject=subscribe
+      </subscribe>
+      <unsubscribe>
+        jfreechart-dev-request@lists.sourceforge.net?subject=unsubscribe
+      </unsubscribe>
+      <archive>
+        http://sourceforge.net/mailarchive/forum.php?forum=jfreechart-dev
+      </archive>
+    </mailingList>
+  </mailingLists>
+
+  <developers>
+    <!--
+    For an up to date list of developers and contributors have a look at
+    the project info implementations.
+    -->
+  </developers>
+
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public Licence</name>
+      <url>http://www.gnu.org/licenses/lgpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <dependencies>
+    <dependency>
+      <groupId>jfree</groupId>
+      <artifactId>jcommon</artifactId>
+      <version>@JCOMMON.VERSION@</version>
+      <url>http://www.jfree.org/jcommon/</url>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.7</version>
+      <url>http://www.junit.org/</url>
+    </dependency>
+
+    <dependency>
+      <groupId>gnujaxp</groupId>
+      <artifactId>gnujaxp</artifactId>
+      <version>1.0.0</version>
+      <jar>gnujaxp.jar</jar>
+      <url>http://www.gnu.org/software/classpathx/jaxp/jaxp.html</url>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- We don't use Maven as build system. -->
+  </build>
+</project>

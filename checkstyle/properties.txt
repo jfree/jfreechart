@@ -1,0 +1,6 @@
+checkstyle.allow.tabs no
+checkstyle.maxlinelen 100
+checkstyle.maxparameters 20
+checkstyle.rcurly alone
+checkstyle.ignore.public.in.interface yes
+checkstyle.javadoc.checkUnusedThrows yes
