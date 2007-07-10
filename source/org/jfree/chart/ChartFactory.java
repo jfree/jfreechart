@@ -115,6 +115,8 @@
  *               generator is a DateAxis is requested (DG);
  * 17-Jan-2007 : Added createBoxAndWhiskerChart() method from patch 1603937
  *               submitted by Darren Jung (DG);
+ * 10-Jul-2007 : Added new methods to create pie charts with locale for
+ *               section label and tool tip formatting (DG);
  *
  */
 
@@ -126,6 +128,7 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryAxis3D;
@@ -226,6 +229,36 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
+     * @param locale  the locale (<code>null</code> not permitted).
+     *
+     * @return A pie chart.
+     * 
+     * @since 1.0.7
+     */
+    public static JFreeChart createPieChart(String title, PieDataset dataset,
+            boolean legend, boolean tooltips, Locale locale) {
+
+        PiePlot plot = new PiePlot(dataset);
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(locale));
+        plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
+        if (tooltips) {
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
+        }
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+                legend);
+
+    }
+
+    /**
+     * Creates a pie chart with default settings.
+     * <P>
+     * The chart object returned by this method uses a {@link PiePlot} instance 
+     * as the plot.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     * @param legend  a flag specifying whether or not a legend is required.
+     * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
      * @return A pie chart.
@@ -240,8 +273,7 @@ public abstract class ChartFactory {
         plot.setLabelGenerator(new StandardPieSectionLabelGenerator());
         plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
         if (tooltips) {
-            plot.setToolTipGenerator(new StandardPieToolTipGenerator(
-                    StandardPieToolTipGenerator.DEFAULT_SECTION_LABEL_FORMAT));
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator());
         }
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
@@ -249,6 +281,125 @@ public abstract class ChartFactory {
         return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
                 legend);
 
+    }
+
+    /**
+     * Creates a pie chart with default settings that compares 2 datasets.  
+     * The colour of each section will be determined by the move from the value
+     * for the same key in <code>previousDataset</code>. ie if value1 > value2 
+     * then the section will be in green (unless <code>greenForIncrease</code> 
+     * is <code>false</code>, in which case it would be <code>red</code>).  
+     * Each section can have a shade of red or green as the difference can be 
+     * tailored between 0% (black) and percentDiffForMaxScale% (bright 
+     * red/green).
+     * <p>
+     * For instance if <code>percentDiffForMaxScale</code> is 10 (10%), a 
+     * difference of 5% will have a half shade of red/green, a difference of 
+     * 10% or more will have a maximum shade/brightness of red/green.
+     * <P>
+     * The chart object returned by this method uses a {@link PiePlot} instance
+     * as the plot.
+     * <p>
+     * Written by <a href="mailto:opensource@objectlab.co.uk">Benoit 
+     * Xhenseval</a>.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     * @param previousDataset  the dataset for the last run, this will be used 
+     *                         to compare each key in the dataset
+     * @param percentDiffForMaxScale scale goes from bright red/green to black,
+     *                               percentDiffForMaxScale indicate the change 
+     *                               required to reach top scale.
+     * @param greenForIncrease  an increase since previousDataset will be 
+     *                          displayed in green (decrease red) if true.
+     * @param legend  a flag specifying whether or not a legend is required.
+     * @param tooltips  configure chart to generate tool tips?
+     * @param locale  the locale (<code>null</code> not permitted).
+     * @param subTitle displays a subtitle with colour scheme if true
+     * @param showDifference  create a new dataset that will show the % 
+     *                        difference between the two datasets. 
+     *
+     * @return A pie chart.
+     * 
+     * @since 1.0.7
+     */
+    public static JFreeChart createPieChart(String title, PieDataset dataset,
+            PieDataset previousDataset, int percentDiffForMaxScale,
+            boolean greenForIncrease, boolean legend, boolean tooltips,
+            Locale locale, boolean subTitle, boolean showDifference) {
+
+        PiePlot plot = new PiePlot(dataset);
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(locale));
+        plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
+
+        if (tooltips) {
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
+        }
+
+        List keys = dataset.getKeys();
+        DefaultPieDataset series = null;
+        if (showDifference) {
+            series = new DefaultPieDataset();
+        }
+
+        double colorPerPercent = 255.0 / percentDiffForMaxScale;
+        for (Iterator it = keys.iterator(); it.hasNext();) {
+            Comparable key = (Comparable) it.next();
+            Number newValue = dataset.getValue(key);
+            Number oldValue = previousDataset.getValue(key);
+
+            if (oldValue == null) {
+                if (greenForIncrease) {
+                    plot.setSectionPaint(key, Color.green);
+                } 
+                else {
+                    plot.setSectionPaint(key, Color.red);
+                }
+                if (showDifference) {
+                    series.setValue(key + " (+100%)", newValue);
+                }
+            }
+            else {
+                double percentChange = (newValue.doubleValue() 
+                        / oldValue.doubleValue() - 1.0) * 100.0;
+                double shade
+                    = (Math.abs(percentChange) >= percentDiffForMaxScale ? 255
+                    : Math.abs(percentChange) * colorPerPercent);
+                if (greenForIncrease 
+                        && newValue.doubleValue() > oldValue.doubleValue()
+                        || !greenForIncrease && newValue.doubleValue() 
+                        < oldValue.doubleValue()) {
+                    plot.setSectionPaint(key, new Color(0, (int) shade, 0));
+                }
+                else {
+                    plot.setSectionPaint(key, new Color((int) shade, 0, 0));
+                }
+                if (showDifference) {
+                    series.setValue(key + " (" + (percentChange >= 0 ? "+" : "") 
+                            + NumberFormat.getPercentInstance().format(
+                            percentChange / 100.0) + ")", newValue);
+                }
+            }
+        }
+
+        if (showDifference) {
+            plot.setDataset(series);
+        }
+
+        JFreeChart chart =  new JFreeChart(title, 
+                JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
+
+        if (subTitle) {
+            TextTitle subtitle = null;
+            subtitle = new TextTitle("Bright " + (greenForIncrease ? "red" 
+                    : "green") + "=change >=-" + percentDiffForMaxScale 
+                    + "%, Bright " + (!greenForIncrease ? "red" : "green") 
+                    + "=change >=+" + percentDiffForMaxScale + "%", 
+                    new Font("SansSerif", Font.PLAIN, 10));
+            chart.addSubtitle(subtitle);
+        }
+
+        return chart;
     }
 
     /**
@@ -305,8 +456,7 @@ public abstract class ChartFactory {
         plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
 
         if (tooltips) {
-            plot.setToolTipGenerator(new StandardPieToolTipGenerator(
-                    StandardPieToolTipGenerator.DEFAULT_SECTION_LABEL_FORMAT));
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator());
         }
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
@@ -362,9 +512,8 @@ public abstract class ChartFactory {
             plot.setDataset(series);
         }
 
-        JFreeChart chart =  new JFreeChart(
-            title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend
-        );
+        JFreeChart chart =  new JFreeChart(title, 
+                JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
 
         if (subTitle) {
             TextTitle subtitle = null;
@@ -389,9 +538,39 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
+     * @param locale  the locale (<code>null</code> not permitted).
+     *
+     * @return A ring chart.
+     * 
+     * @since 1.0.7
+     */
+    public static JFreeChart createRingChart(String title, PieDataset dataset,
+            boolean legend, boolean tooltips, Locale locale) {
+
+        RingPlot plot = new RingPlot(dataset);
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(locale));
+        plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
+        if (tooltips) {
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
+        }
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+                legend);
+
+    }
+
+    /**
+     * Creates a ring chart with default settings.
+     * <P>
+     * The chart object returned by this method uses a {@link RingPlot} 
+     * instance as the plot.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     * @param legend  a flag specifying whether or not a legend is required.
+     * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
-     * @return A pie chart.
+     * @return A ring chart.
      */
     public static JFreeChart createRingChart(String title,
                                              PieDataset dataset,
@@ -403,8 +582,7 @@ public abstract class ChartFactory {
         plot.setLabelGenerator(new StandardPieSectionLabelGenerator());
         plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
         if (tooltips) {
-            plot.setToolTipGenerator(new StandardPieToolTipGenerator(
-                    StandardPieToolTipGenerator.DEFAULT_SECTION_LABEL_FORMAT));
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator());
         }
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
@@ -461,6 +639,34 @@ public abstract class ChartFactory {
                 plot, legend);
 
         return chart;
+
+    }
+
+    /**
+     * Creates a 3D pie chart using the specified dataset.  The chart object 
+     * returned by this method uses a {@link PiePlot3D} instance as the
+     * plot.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     * @param legend  a flag specifying whether or not a legend is required.
+     * @param tooltips  configure chart to generate tool tips?
+     * @param locale  the locale (<code>null</code> not permitted).
+     *
+     * @return A pie chart.
+     * 
+     * @since 1.0.7
+     */
+    public static JFreeChart createPieChart3D(String title, PieDataset dataset,
+            boolean legend, boolean tooltips, Locale locale) {
+
+        PiePlot3D plot = new PiePlot3D(dataset);
+        plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
+        if (tooltips) {
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
+        }
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+                legend);
 
     }
 
