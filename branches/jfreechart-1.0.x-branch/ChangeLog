@@ -1,5 +1,15 @@
 2007-07-10  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* tests/org/jfree/chart/renderer/xy/junit/ClusteredXYBarRendererTests.java
+	(EPSILON): New field,
+	(testFindDomainBounds): Fixed compile errors,
+	* tests/org/jfree/data/time/junit/TimePeriodValuesCollectionTests.java
+	(EPSILON): New field,
+	(testGetDomainBoundsWithoutInterval): Fixed compile errors,
+	(testGetDomainBoundsWithInterval): Likewise.
+
+2007-07-10  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/data/statistics/SimpleHistogramDataset.java
 	(SimpleHistogramDataset): Check for null argument.
 
