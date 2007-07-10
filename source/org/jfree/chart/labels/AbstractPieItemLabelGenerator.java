@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------
  * AbstractPieItemLabelGenerator.java
  * ----------------------------------
- * (C) Copyright 2004-2006, by Object Refinery Limited.
+ * (C) Copyright 2004-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -91,8 +91,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
         }
         if (percentFormat == null) {
             throw new IllegalArgumentException(
-                "Null 'percentFormat' argument."
-            );   
+                    "Null 'percentFormat' argument.");   
         }
         this.labelFormat = labelFormat;
         this.numberFormat = numberFormat;
@@ -199,7 +198,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
         }
         
         AbstractPieItemLabelGenerator that 
-            = (AbstractPieItemLabelGenerator) obj;
+                = (AbstractPieItemLabelGenerator) obj;
         if (!this.labelFormat.equals(that.labelFormat)) {
             return false;
         }
@@ -222,7 +221,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      */
     public Object clone() throws CloneNotSupportedException {      
         AbstractPieItemLabelGenerator clone 
-            = (AbstractPieItemLabelGenerator) super.clone();
+                = (AbstractPieItemLabelGenerator) super.clone();
         if (this.numberFormat != null) {
             clone.numberFormat = (NumberFormat) this.numberFormat.clone();
         }
