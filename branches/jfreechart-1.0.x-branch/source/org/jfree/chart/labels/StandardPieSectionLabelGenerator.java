@@ -41,6 +41,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 03-May-2006 : Modified DEFAULT_SECTION_LABEL_FORMAT (DG);
  * 10-Jan-2007 : Include attributedLabels in equals() test (DG);
+ * 10-Jul-2007 : Added constructors with locale parameter (DG);
  *
  */
 
@@ -52,6 +53,7 @@ import java.awt.font.TextAttribute;
 import java.io.Serializable;
 import java.text.AttributedString;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.ObjectList;
@@ -66,8 +68,8 @@ import org.jfree.util.ObjectList;
  * <code>apple = 120 (5%)</code>.
  */
 public class StandardPieSectionLabelGenerator 
-    extends AbstractPieItemLabelGenerator
-    implements PieSectionLabelGenerator, Cloneable, Serializable {
+        extends AbstractPieItemLabelGenerator
+        implements PieSectionLabelGenerator, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 3064190563760203668L;
@@ -91,6 +93,17 @@ public class StandardPieSectionLabelGenerator
     }
 
     /**
+     * Creates a new instance for the specified locale.
+     * 
+     * @param locale  the local (<code>null</code> not permitted).
+     * 
+     * @since 1.0.7
+     */
+    public StandardPieSectionLabelGenerator(Locale locale) {
+        this(DEFAULT_SECTION_LABEL_FORMAT, locale);
+    }
+    
+    /**
      * Creates a new section label generator using the specified label format
      * string, and platform default number and percentage formatters.
      * 
@@ -99,6 +112,19 @@ public class StandardPieSectionLabelGenerator
     public StandardPieSectionLabelGenerator(String labelFormat) {
         this(labelFormat, NumberFormat.getNumberInstance(), 
                 NumberFormat.getPercentInstance());   
+    }
+    
+    /**
+     * Creates a new instance for the specified locale.
+     * 
+     * @param labelFormat  the label format (<code>null</code> not permitted).
+     * @param locale  the local (<code>null</code> not permitted).
+     * 
+     * @since 1.0.7
+     */
+    public StandardPieSectionLabelGenerator(String labelFormat, Locale locale) {
+        this(labelFormat, NumberFormat.getNumberInstance(locale),
+                NumberFormat.getPercentInstance(locale));
     }
     
     /**
@@ -112,12 +138,9 @@ public class StandardPieSectionLabelGenerator
      *                       (<code>null</code> not permitted).
      */
     public StandardPieSectionLabelGenerator(String labelFormat,
-                                         NumberFormat numberFormat, 
-                                         NumberFormat percentFormat) {
-
+            NumberFormat numberFormat, NumberFormat percentFormat) {
         super(labelFormat, numberFormat, percentFormat);
         this.attributedLabels = new ObjectList();
-
     }
 
     /**

@@ -1,5 +1,22 @@
 2007-07-10  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/ChartFactory.java
+	(createPieChart(String, PieDataset, boolean, boolean, Locale)): New method,
+	(createPieChart(String, PieDataset, PieDataset, int, boolean, boolean, 
+	    boolean, Locale, boolean, boolean)) : Likewise,
+	(createRingChart(String, PieDataset, boolean, boolean, Locale)): Likewise,
+	(createPieChart3D(String, PieDataset, boolean, boolean, Locale)): Likewise,
+	* source/org/jfree/chart/labels/StandardPieSectionLabelGenerator.java
+	(StandardPieSectionLabelGenerator(Locale)): New constructor,
+	(StandardPieSectionLabelGenerator(String labelFormat, Locale)): Likewise,
+	* source/org/jfree/chart/labels/StandardPieToolTipGenerator.java
+	(StandardPieToolTipGenerator): Delegate,
+	(StandardPieToolTipGenerator(Locale)): New constructor,
+	(StandardPieToolTipGenerator(String)): Delegate,
+	(StandardPieToolTipGenerator(String labelFormat, Locale)): New constructor.
+
+2007-07-10  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* tests/org/jfree/chart/renderer/xy/junit/ClusteredXYBarRendererTests.java
 	(EPSILON): New field,
 	(testFindDomainBounds): Fixed compile errors,
