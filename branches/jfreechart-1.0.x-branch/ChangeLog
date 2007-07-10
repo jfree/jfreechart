@@ -1,4 +1,9 @@
-2007-06-10  David Gilbert  <david.gilbert@object-refinery.com>
+2007-07-10  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/data/statistics/SimpleHistogramDataset.java
+	(SimpleHistogramDataset): Check for null argument.
+
+2007-07-10  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/plot/CategoryPlot.java
 	(getRangeAxisIndex): New method.
