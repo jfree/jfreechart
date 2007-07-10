@@ -146,8 +146,9 @@
  *               ignored) (DG);
  * 13-Mar-2007 : Added null argument checks for setRangeCrosshairPaint() and
  *               setRangeCrosshairStroke(), fixed clipping for 
- *               anntotations (DG);
+ *               annotations (DG);
  * 07-Jun-2007 : Override drawBackground() for new GradientPaint handling (DG);
+ * 10-Jul-2007 : Added getRangeAxisIndex(ValueAxis) method (DG);
  * 
  */
 
@@ -694,6 +695,30 @@ public class CategoryPlot extends Plot
      */
     public int getDomainAxisIndex(CategoryAxis axis) {
         return this.domainAxes.indexOf(axis);
+    }
+
+    /**
+     * Returns the index of the specified axis, or <code>-1</code> if the axis
+     * is not assigned to the plot.
+     *
+     * @param axis  the axis.
+     *
+     * @return The axis index.
+     * 
+     * @see #getDomainAxisIndex(CategoryAxis)
+     * 
+     * @since 1.0.7
+     */
+    public int getRangeAxisIndex(ValueAxis axis) {
+        int result = this.rangeAxes.indexOf(axis);
+        if (result < 0) { // try the parent plot
+            Plot parent = getParent();
+            if (parent instanceof CategoryPlot) {
+                CategoryPlot p = (CategoryPlot) parent;
+                result = p.getRangeAxisIndex(axis);
+            }
+        }
+        return result;
     }
     
     /**
