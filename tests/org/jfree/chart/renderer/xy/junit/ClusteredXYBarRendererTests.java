@@ -38,7 +38,7 @@
  * -------
  * 25-Mar-2003 : Version 1 (DG);
  * 22-Oct-2003 : Added hashCode test (DG);
- *
+ * 10-Jul-2007 : Fixed compile errors (DG);
  */
 
 package org.jfree.chart.renderer.xy.junit;
@@ -56,7 +56,6 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.renderer.xy.AbstractXYItemRenderer;
 import org.jfree.chart.renderer.xy.ClusteredXYBarRenderer;
-import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultIntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -159,6 +158,8 @@ public class ClusteredXYBarRendererTests extends TestCase {
 
     }
 
+    private static final double EPSILON = 0.0000000001;
+    
     /**
      * Some checks for the findDomainBounds() method (which requires special
      * handling when the centerBarAtStartValue flag is set to true).
@@ -167,13 +168,13 @@ public class ClusteredXYBarRendererTests extends TestCase {
         AbstractXYItemRenderer renderer = new ClusteredXYBarRenderer();
         XYDataset dataset = createSampleDataset1();
         Range r = renderer.findDomainBounds(dataset);
-        assertEquals(0.9, r.getLowerBound());
-        assertEquals(13.1, r.getUpperBound());
+        assertEquals(0.9, r.getLowerBound(), EPSILON);
+        assertEquals(13.1, r.getUpperBound(), EPSILON);
         
         renderer = new ClusteredXYBarRenderer(0.0, true);
         r = renderer.findDomainBounds(dataset);
-        assertEquals(0.8, r.getLowerBound());
-        assertEquals(13.0, r.getUpperBound());
+        assertEquals(0.8, r.getLowerBound(), EPSILON);
+        assertEquals(13.0, r.getUpperBound(), EPSILON);
         
         // check that a null dataset returns null bounds
         assertTrue(renderer.findDomainBounds(null) == null);
