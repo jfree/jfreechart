@@ -1,5 +1,19 @@
 2007-07-11  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/axis/SegmentedTimeline.java
+	(FIRST_MONDAY_AFTER_1900): Deprecated,
+	(NO_DST_TIME_ZONE): Likewise,
+	(DEFAULT_TIME_ZONE): Likewise,
+	(workingCalendarNoDST): Initialise in constructor,
+	(SegmentedTimeline): Initialise workingCalendarNoDST,
+	(firstMondayAfter1900): New method,
+	(newMondayThroughFridayTimeline): Use new method for first monday,
+	(newFifteenMinuteTimeline): Likewise,
+	* tests/org/jfree/chart/axis/junit/SegmentedTimelineTests2.java: 
+	Save and restore time zone in all tests.
+
+2007-07-11  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* tests/org/jfree/data/time/junit/DayTests.java
 	(testGetFirstMillisecond): Set/restore time zone,
 	(testGetFirstMillisecondWithCalendar): Set time zone,

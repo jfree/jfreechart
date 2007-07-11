@@ -46,6 +46,7 @@ package org.jfree.chart.axis.junit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import junit.framework.TestCase;
 
@@ -68,7 +69,10 @@ public class SegmentedTimelineTests2 extends TestCase {
      * back again correctly.  This is prior to Daylight Saving.
      */
     public void test1() {
-
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
+        Locale savedLocale = Locale.getDefault();
+        Locale.setDefault(Locale.UK);
         Calendar cal = Calendar.getInstance(Locale.UK);
         cal.set(Calendar.YEAR, 2004);
         cal.set(Calendar.MONTH, Calendar.MARCH);
@@ -82,14 +86,13 @@ public class SegmentedTimelineTests2 extends TestCase {
         SegmentedTimeline timeline = getTimeline();      
         long value = timeline.toTimelineValue(date);   
         long ms = timeline.toMillisecond(value);
-      
         Calendar cal2 = Calendar.getInstance(Locale.UK);
         cal2.setTime(new Date(ms));
         Date reverted = cal2.getTime();
-      
         assertTrue("test1", value == (900000 * 34) 
                 && date.getTime() == reverted.getTime());
- 
+        TimeZone.setDefault(savedZone);
+        Locale.setDefault(savedLocale);
     }
 
     /**
@@ -97,6 +100,8 @@ public class SegmentedTimelineTests2 extends TestCase {
      * and back again correctly.  This is prior to Daylight Saving.
      */
     public void test2() {
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Calendar cal = Calendar.getInstance(Locale.UK);
         cal.set(Calendar.YEAR, 2004);
         cal.set(Calendar.MONTH, Calendar.MARCH);
@@ -118,6 +123,7 @@ public class SegmentedTimelineTests2 extends TestCase {
             "test2", value == (900000 * 34 + 900000) 
             && date.getTime() == reverted.getTime()
         );
+        TimeZone.setDefault(savedZone);
      }
 
     /**
@@ -125,6 +131,8 @@ public class SegmentedTimelineTests2 extends TestCase {
      * and back again correctly.  This is prior to Daylight Saving.
      */
     public void test3() {
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Calendar cal = Calendar.getInstance(Locale.UK);
         cal.set(Calendar.YEAR, 2004);
         cal.set(Calendar.MONTH, Calendar.MARCH);
@@ -146,6 +154,7 @@ public class SegmentedTimelineTests2 extends TestCase {
             "test2", value == (900000 * 34 + 900000 * 2) 
             && date.getTime() == reverted.getTime()
         );
+        TimeZone.setDefault(savedZone);
     }
 
     /**
@@ -154,6 +163,8 @@ public class SegmentedTimelineTests2 extends TestCase {
      * Saving.
      */
     public void test4() {
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Calendar cal = Calendar.getInstance(Locale.UK);
         cal.set(Calendar.YEAR, 2004);
         cal.set(Calendar.MONTH, Calendar.MARCH);
@@ -174,6 +185,7 @@ public class SegmentedTimelineTests2 extends TestCase {
             "test4", value == (900000 * 34 + 900000 * 2 + 1) 
             && date.getTime() == reverted.getTime()
         );
+        TimeZone.setDefault(savedZone);
     }
 
     /**
@@ -183,6 +195,8 @@ public class SegmentedTimelineTests2 extends TestCase {
      * Daylight Saving.
      */
     public void test5() {
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Calendar cal = Calendar.getInstance(Locale.UK);
         cal.set(Calendar.YEAR, 2004);
         cal.set(Calendar.MONTH, Calendar.MARCH);
@@ -212,6 +226,7 @@ public class SegmentedTimelineTests2 extends TestCase {
             "test5", value == (900000 * 34) 
             && expectedReverted.getTime().getTime() == reverted.getTime()
         );
+        TimeZone.setDefault(savedZone);
     }
 
     /**
@@ -221,6 +236,8 @@ public class SegmentedTimelineTests2 extends TestCase {
      * Monday 29 March 2004. This is during daylight saving.
      */
     public void test6() {
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Calendar cal = Calendar.getInstance(Locale.UK);
         cal.set(Calendar.YEAR, 2004);
         cal.set(Calendar.MONTH, Calendar.MARCH);
@@ -251,6 +268,7 @@ public class SegmentedTimelineTests2 extends TestCase {
             "test6", value == (900000 * 34 * 2) 
             && expectedReverted.getTime().getTime() == reverted.getTime()
         );
+        TimeZone.setDefault(savedZone);
     }
              
     /**
@@ -258,6 +276,8 @@ public class SegmentedTimelineTests2 extends TestCase {
      * back again correctly.  This is during Daylight Saving.
      */
     public void test7() {
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Calendar cal = Calendar.getInstance(Locale.UK);
         cal.set(Calendar.YEAR, 2004);
         cal.set(Calendar.MONTH, Calendar.MARCH);
@@ -289,12 +309,15 @@ public class SegmentedTimelineTests2 extends TestCase {
             "test7", value == (900000 * 34 * 2) 
             && expectedReverted.getTime().getTime() == reverted.getTime()
         );
+        TimeZone.setDefault(savedZone);
     }
 
     /**
      * Test 8.
      */
     public void test8() {
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Calendar cal = Calendar.getInstance(Locale.UK);
         cal.set(Calendar.YEAR, 2004);
         cal.set(Calendar.MONTH, Calendar.MARCH);
@@ -337,6 +360,7 @@ public class SegmentedTimelineTests2 extends TestCase {
             "test8", value == (900000 * 34 * 2 + 900000 * (4 - 1)) 
             && expectedReverted.getTime().getTime() == reverted.getTime()
         );
+        TimeZone.setDefault(savedZone);
     }
    
     /**

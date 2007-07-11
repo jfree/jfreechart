@@ -45,6 +45,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 14-Nov-2006 : Fix in toTimelineValue(long) to avoid stack overflow (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 11-Jul-2007 : Fixed time zone bugs (DG);
  * 
  */
 
@@ -58,6 +59,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
@@ -193,6 +195,9 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * 1/1/1970.  This should be used when creating a SegmentedTimeline for 
      * Monday through Friday. See static block below for calculation of this 
      * constant.
+     * 
+     * @deprecated As of 1.0.7.  This field doesn't take into account changes
+     *         to the default time zone.
      */
     public static long FIRST_MONDAY_AFTER_1900;
 
@@ -200,6 +205,10 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * Utility TimeZone object that has no DST and an offset equal to the 
      * default TimeZone. This allows easy arithmetic between days as each one 
      * will have equal size.
+     * 
+     * @deprecated As of 1.0.7.  This field is initialised based on the 
+     *         default time zone, and doesn't take into account subsequent 
+     *         changes to the default.
      */
     public static TimeZone NO_DST_TIME_ZONE;
 
@@ -208,6 +217,9 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * getTime() below where we make use of certain transformations between 
      * times in the default time zone and the no-dst time zone used for our 
      * calculations.
+     * 
+     * @deprecated As of 1.0.7.  When the default time zone is required,
+     *         just call <code>TimeZone.getDefault()</code>.
      */
     public static TimeZone DEFAULT_TIME_ZONE = TimeZone.getDefault();
 
@@ -215,8 +227,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * This will be a utility calendar that has no DST but is shifted relative 
      * to the default time zone's offset.
      */
-    private Calendar workingCalendarNoDST 
-        = new GregorianCalendar(NO_DST_TIME_ZONE);
+    private Calendar workingCalendarNoDST;
 
     /**
      * This will be a utility calendar that used the default time zone.
@@ -327,9 +338,37 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         this.segmentsExcludedSize = this.segmentsExcluded * this.segmentSize;
         this.segmentsGroupSize = this.segmentsIncludedSize 
                                  + this.segmentsExcludedSize;
-
+        int offset = TimeZone.getDefault().getRawOffset();
+        TimeZone z = new SimpleTimeZone(offset, "UTC-" + offset);        
+        this.workingCalendarNoDST = new GregorianCalendar(z, 
+                Locale.getDefault());
     }
 
+    /**
+     * Returns the milliseconds for midnight of the first Monday after 
+     * 1-Jan-1900, ignoring daylight savings.
+     * 
+     * @return The milliseconds.
+     * 
+     * @since 1.0.7
+     */
+    public static long firstMondayAfter1900() {
+        int offset = TimeZone.getDefault().getRawOffset();
+        TimeZone z = new SimpleTimeZone(offset, "UTC-" + offset);        
+        
+        // calculate midnight of first monday after 1/1/1900 relative to 
+        // current locale
+        Calendar cal = new GregorianCalendar(z);
+        cal.set(1900, 0, 1, 0, 0, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        while (cal.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            cal.add(Calendar.DATE, 1);
+        }
+        //return cal.getTimeInMillis();
+        // preceding code won't work with JDK 1.3
+        return cal.getTime().getTime();  
+    }
+    
     /**
      * Factory method to create a Monday through Friday SegmentedTimeline.
      * <P>
@@ -341,7 +380,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
     public static SegmentedTimeline newMondayThroughFridayTimeline() {
         SegmentedTimeline timeline 
             = new SegmentedTimeline(DAY_SEGMENT_SIZE, 5, 2);
-        timeline.setStartTime(FIRST_MONDAY_AFTER_1900);
+        timeline.setStartTime(firstMondayAfter1900());
         return timeline;
     }
 
@@ -363,11 +402,10 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * @return A fully initialized SegmentedTimeline.
      */
     public static SegmentedTimeline newFifteenMinuteTimeline() {
-        SegmentedTimeline timeline 
-            = new SegmentedTimeline(FIFTEEN_MINUTE_SEGMENT_SIZE, 28, 68);
-        timeline.setStartTime(
-            FIRST_MONDAY_AFTER_1900 + 36 * timeline.getSegmentSize()
-        );
+        SegmentedTimeline timeline = new SegmentedTimeline(
+                FIFTEEN_MINUTE_SEGMENT_SIZE, 28, 68);
+        timeline.setStartTime(firstMondayAfter1900() + 36 
+                * timeline.getSegmentSize());
         timeline.setBaseTimeline(newMondayThroughFridayTimeline());
         return timeline;
     }
