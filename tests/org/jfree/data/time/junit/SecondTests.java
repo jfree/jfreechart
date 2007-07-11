@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * SecondTests.java
  * ----------------
- * (C) Copyright 2002-2006, by Object Refinery Limited.
+ * (C) Copyright 2002-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,6 +41,7 @@
  * 13-Oct-2003 : Added serialization test (DG);
  * 11-Jan-2005 : Added test for non-clonability (DG);
  * 06-Oct-2006 : Added some new tests (DG);
+ * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -213,9 +214,12 @@ public class SecondTests extends TestCase {
     public void testGetFirstMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Second s = new Second(15, 43, 15, 1, 4, 2006);
         assertEquals(1143902595000L, s.getFirstMillisecond());
         Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -243,7 +247,8 @@ public class SecondTests extends TestCase {
     public void testGetFirstMillisecondWithCalendar() {
         Second s = new Second(55, 40, 2, 15, 4, 2000);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
-        assertEquals(955762855000L, s.getFirstMillisecond(calendar));
+        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
+        assertEquals(955766455000L, s.getFirstMillisecond(calendar));
         
         // try null calendar
         boolean pass = false;
@@ -262,9 +267,12 @@ public class SecondTests extends TestCase {
     public void testGetLastMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Second s = new Second(1, 1, 1, 1, 1, 1970);
         assertEquals(61999L, s.getLastMillisecond());
         Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -292,7 +300,8 @@ public class SecondTests extends TestCase {
     public void testGetLastMillisecondWithCalendar() {
         Second s = new Second(50, 45, 21, 21, 4, 2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
-        assertEquals(987885950999L, s.getLastMillisecond(calendar));
+        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
+        assertEquals(987889550999L, s.getLastMillisecond(calendar));
         
         // try null calendar
         boolean pass = false;

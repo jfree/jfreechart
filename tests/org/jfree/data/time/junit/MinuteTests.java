@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * MinuteTests.java
  * ----------------
- * (C) Copyright 2002-2006 by Object Refinery Limited.
+ * (C) Copyright 2002-2007 by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,6 +43,7 @@
  * 11-Jan-2005 : Added test for non-clonability (DG);
  * 05-Oct-2006 : Added new tests (DG);
  * 11-Dec-2006 : Added test1611872() (DG);
+ * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -213,9 +214,12 @@ public class MinuteTests extends TestCase {
     public void testGetFirstMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Minute m = new Minute(43, 15, 1, 4, 2006);
         assertEquals(1143902580000L, m.getFirstMillisecond());
         Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -243,7 +247,8 @@ public class MinuteTests extends TestCase {
     public void testGetFirstMillisecondWithCalendar() {
         Minute m = new Minute(40, 2, 15, 4, 2000);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
-        assertEquals(955762800000L, m.getFirstMillisecond(calendar));
+        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));        
+        assertEquals(955766400000L, m.getFirstMillisecond(calendar));
         
         // try null calendar
         boolean pass = false;
@@ -262,9 +267,12 @@ public class MinuteTests extends TestCase {
     public void testGetLastMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Minute m = new Minute(1, 1, 1, 1, 1970);
         assertEquals(119999L, m.getLastMillisecond());
         Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -292,7 +300,8 @@ public class MinuteTests extends TestCase {
     public void testGetLastMillisecondWithCalendar() {
         Minute m = new Minute(45, 21, 21, 4, 2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
-        assertEquals(987885959999L, m.getLastMillisecond(calendar));
+        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
+        assertEquals(987889559999L, m.getLastMillisecond(calendar));
         
         // try null calendar
         boolean pass = false;
@@ -336,12 +345,15 @@ public class MinuteTests extends TestCase {
     public void testGetStart() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.ITALY);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/Rome"));
         Calendar cal = Calendar.getInstance(Locale.ITALY);
         cal.set(2006, Calendar.JANUARY, 16, 3, 47, 0);
         cal.set(Calendar.MILLISECOND, 0);
         Minute m = new Minute(47, 3, 16, 1, 2006);
         assertEquals(cal.getTime(), m.getStart());
-        Locale.setDefault(saved);        
+        Locale.setDefault(saved);       
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -350,12 +362,15 @@ public class MinuteTests extends TestCase {
     public void testGetEnd() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.ITALY);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/Rome"));
         Calendar cal = Calendar.getInstance(Locale.ITALY);
         cal.set(2006, Calendar.JANUARY, 16, 3, 47, 59);
         cal.set(Calendar.MILLISECOND, 999);
         Minute m = new Minute(47, 3, 16, 1, 2006);
         assertEquals(cal.getTime(), m.getEnd());
-        Locale.setDefault(saved);                
+        Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**

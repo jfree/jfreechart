@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -45,6 +45,7 @@
  * 21-Oct-2003 : Added hashCode test (DG);
  * 11-Jan-2005 : Added non-clonability test (DG);
  * 05-Oct-2006 : Added some new tests (DG);
+ * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -299,9 +300,12 @@ public class MonthTests extends TestCase {
     public void testGetFirstMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Month m = new Month(3, 1970);
         assertEquals(5094000000L, m.getFirstMillisecond());
         Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -329,6 +333,7 @@ public class MonthTests extends TestCase {
     public void testGetFirstMillisecondWithCalendar() {
         Month m = new Month(1, 2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
+        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(978307200000L, m.getFirstMillisecond(calendar));
         
         // try null calendar
@@ -348,9 +353,12 @@ public class MonthTests extends TestCase {
     public void testGetLastMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Month m = new Month(3, 1970);
         assertEquals(7772399999L, m.getLastMillisecond());
         Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -378,7 +386,8 @@ public class MonthTests extends TestCase {
     public void testGetLastMillisecondWithCalendar() {
         Month m = new Month(3, 2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
-        assertEquals(986079599999L, m.getLastMillisecond(calendar));
+        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
+        assertEquals(986083199999L, m.getLastMillisecond(calendar));
         
         // try null calendar
         boolean pass = false;
