@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * YearTests.java
  * --------------
- * (C) Copyright 2001-2006, by Object Refinery Limited.
+ * (C) Copyright 2001-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,6 +43,7 @@
  * 13-Mar-2003 : Added serialization test (DG);
  * 11-Jan-2005 : Added test for non-clonability (DG);
  * 05-Oct-2006 : Added some new tests (DG);
+ * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -281,10 +282,13 @@ public class YearTests extends TestCase {
     public void testGetFirstMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Year y = new Year(1970);
         // TODO: Check this result...
         assertEquals(-3600000L, y.getFirstMillisecond());
         Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -312,6 +316,7 @@ public class YearTests extends TestCase {
     public void testGetFirstMillisecondWithCalendar() {
         Year y = new Year(2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
+        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(978307200000L, y.getFirstMillisecond(calendar));
         
         // try null calendar
@@ -331,10 +336,13 @@ public class YearTests extends TestCase {
     public void testGetLastMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Year y = new Year(1970);
         // TODO: Check this result...
         assertEquals(31532399999L, y.getLastMillisecond());
         Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -362,6 +370,7 @@ public class YearTests extends TestCase {
     public void testGetLastMillisecondWithCalendar() {
         Year y = new Year(2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
+        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(1009843199999L, y.getLastMillisecond(calendar));
         
         // try null calendar

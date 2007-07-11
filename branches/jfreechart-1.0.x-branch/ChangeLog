@@ -1,3 +1,29 @@
+2007-07-11  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* tests/org/jfree/data/time/junit/DayTests.java
+	(testGetFirstMillisecond): Set/restore time zone,
+	(testGetFirstMillisecondWithCalendar): Set time zone,
+	(testGetLastMillisecond): Set/restore time zone,
+	(testGetLastMillisecondWithCalendar): Set time zone,
+	* tests/org/jfree/data/time/junit/HourTests.java: Likewise,
+	* tests/org/jfree/data/time/junit/MillisecondTests.java: Likewise,
+	* tests/org/jfree/data/time/junit/MinuteTests.java:
+	(testGetFirstMillisecond): Set/restore time zone,
+	(testGetFirstMillisecondWithCalendar): Set time zone,
+	(testGetLastMillisecond): Set/restore time zone,
+	(testGetLastMillisecondWithCalendar): Set time zone,
+	(testGetStart): Set/restore time zone,
+	(testGetEnd): Likewise,
+	* tests/org/jfree/data/time/junit/MonthTests.java
+	(testGetFirstMillisecond): Set/restore time zone,
+	(testGetFirstMillisecondWithCalendar): Set time zone,
+	(testGetLastMillisecond): Set/restore time zone,
+	(testGetLastMillisecondWithCalendar): Set time zone,
+	* tests/org/jfree/data/time/junit/QuarterTests.java: Likewise,
+	* tests/org/jfree/data/time/junit/SecondTests.java: Likewise,
+	* tests/org/jfree/data/time/junit/WeekTests.java: Likewise,
+	* tests/org/jfree/data/time/junit/YearTests.java: Likewise.
+
 2007-07-10  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/ChartFactory.java

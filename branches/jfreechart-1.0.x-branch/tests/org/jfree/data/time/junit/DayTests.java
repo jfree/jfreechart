@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -45,6 +45,7 @@
  * 21-Oct-2003 : Added hashCode test (DG);
  * 11-Jan-2005 : Added test for non-clonability (DG);
  * 03-Oct-2006 : Added testGetSerialIndex() (DG);
+ * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -56,6 +57,7 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -294,9 +296,12 @@ public class DayTests extends TestCase {
     public void testGetFirstMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Day d = new Day(1, 3, 1970);
         assertEquals(5094000000L, d.getFirstMillisecond());
         Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -324,6 +329,7 @@ public class DayTests extends TestCase {
     public void testGetFirstMillisecondWithCalendar() {
         Day d = new Day(1, 12, 2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
+        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(1007164800000L, d.getFirstMillisecond(calendar));
         
         // try null calendar
@@ -343,9 +349,12 @@ public class DayTests extends TestCase {
     public void testGetLastMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
+        TimeZone savedZone = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
         Day d = new Day(1, 1, 1970);
         assertEquals(82799999L, d.getLastMillisecond());
         Locale.setDefault(saved);
+        TimeZone.setDefault(savedZone);
     }
     
     /**
@@ -371,8 +380,10 @@ public class DayTests extends TestCase {
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
     public void testGetLastMillisecondWithCalendar() {
+
         Day d = new Day(4, 5, 2001);
-        GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
+        Calendar calendar = Calendar.getInstance(
+                TimeZone.getTimeZone("Europe/London"), Locale.UK);
         assertEquals(989017199999L, d.getLastMillisecond(calendar));
         
         // try null calendar
