@@ -1,5 +1,11 @@
 2007-07-11  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* experimental/org/jfree/experimental/chart/axis/LogAxis.java
+	(setSmallestValue): Added event notification,
+	(zoomRange): New method override.
+
+2007-07-11  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/axis/SegmentedTimeline.java
 	(FIRST_MONDAY_AFTER_1900): Deprecated,
 	(NO_DST_TIME_ZONE): Likewise,
