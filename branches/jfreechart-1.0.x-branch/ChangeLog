@@ -1,3 +1,8 @@
+2007-07-18  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/plot/CombinedRangeXYPlot.java
+	(remove): Actually remove the subplot.
+
 2007-07-11  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* experimental/org/jfree/experimental/chart/axis/LogAxis.java

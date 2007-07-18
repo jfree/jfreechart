@@ -86,7 +86,8 @@
  * 06-Feb-2007 : Fixed bug 1606205, draw shared axis after subplots (DG);
  * 23-Mar-2007 : Reverted previous patch (DG);
  * 17-Apr-2007 : Added null argument checks to findSubplot() (DG);
- *
+ * 18-Jul-2007 : Fixed bug in removeSubplot (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -253,6 +254,7 @@ public class CombinedRangeXYPlot extends XYPlot
             i++;
         }
         if (position != -1) {
+            this.subplots.remove(position);
             subplot.setParent(null);
             subplot.removeChangeListener(this);
             this.totalWeight -= subplot.getWeight();
