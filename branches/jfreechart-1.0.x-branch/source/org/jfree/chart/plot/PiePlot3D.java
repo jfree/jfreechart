@@ -73,7 +73,8 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 27-Sep-2006 : Updated draw() method for new lookup methods (DG);
  * 22-Mar-2007 : Added equals() override (DG);
- * 
+ * 18-Jun-2007 : Added handling for simple label option (DG);
+ *
  */
 
 package org.jfree.chart.plot;
@@ -501,7 +502,14 @@ public class PiePlot3D extends PiePlot implements Serializable {
                     originalPlotArea.getX(), originalPlotArea.getY(), 
                     originalPlotArea.getWidth(), originalPlotArea.getHeight() 
                     - depth);
-            drawLabels(g2, keys, totalValue, adjustedPlotArea, linkArea, state);
+            if (getSimpleLabels()) {
+                drawSimpleLabels(g2, keys, totalValue, adjustedPlotArea, 
+                        linkArea, state);
+            }
+            else {
+                drawLabels(g2, keys, totalValue, adjustedPlotArea, linkArea, 
+                        state);
+            }
         }
 
         g2.setClip(savedClip);

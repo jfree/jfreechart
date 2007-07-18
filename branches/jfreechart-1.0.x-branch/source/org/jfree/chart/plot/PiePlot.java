@@ -146,7 +146,8 @@
  * 19-Apr-2007 : Deprecated override settings (DG);
  * 18-May-2007 : Set dataset for LegendItem (DG);
  * 14-Jun-2007 : Added label distributor attribute (DG);
- *          
+ * 18-Jul-2007 : Added simple label option (DG);
+ *    
  */
 
 package org.jfree.chart.plot;
@@ -156,6 +157,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
@@ -197,11 +199,13 @@ import org.jfree.text.TextBox;
 import org.jfree.text.TextUtilities;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleInsets;
+import org.jfree.ui.TextAnchor;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.Rotation;
 import org.jfree.util.ShapeUtilities;
+import org.jfree.util.UnitType;
 
 /**
  * A plot that displays data in the form of a pie chart, using data from any 
@@ -225,7 +229,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     private static final long serialVersionUID = -795612466005590431L;
     
     /** The default interior gap. */
-    public static final double DEFAULT_INTERIOR_GAP = 0.25;
+    public static final double DEFAULT_INTERIOR_GAP = 0.1;
 
     /** The maximum interior gap (currently 40%). */
     public static final double MAX_INTERIOR_GAP = 0.40;
@@ -252,7 +256,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             0.5f);
     
     /** The default section label shadow paint. */
-    public static final Paint DEFAULT_LABEL_SHADOW_PAINT = Color.lightGray;
+    public static final Paint DEFAULT_LABEL_SHADOW_PAINT = new Color(151, 151, 
+            151, 128);
     
     /** The default minimum arc angle to draw. */
     public static final double DEFAULT_MINIMUM_ARC_ANGLE_TO_DRAW = 0.00001;
@@ -350,7 +355,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /** The color used to draw the section labels. */
     private transient Paint labelPaint;
     
-    /** The color used to draw the background of the section labels. */
+    /** 
+     * The color used to draw the background of the section labels.  If this
+     * is <code>null</code>, the background is not filled.
+     */
     private transient Paint labelBackgroundPaint;
 
     /** 
@@ -370,6 +378,28 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * (<code>null</code> permitted). 
      */
     private transient Paint labelShadowPaint;
+    
+    /**
+     * A flag that controls whether simple or extended labels are used.
+     * 
+     * @since 1.0.7
+     */
+    private boolean simpleLabels = true;
+    
+    /**
+     * The padding between the labels and the label outlines.  This is not
+     * allowed to be <code>null</code>.
+     * 
+     * @since 1.0.7
+     */
+    private RectangleInsets labelPadding;
+    
+    /**
+     * The simple label offset.
+     * 
+     * @since 1.0.7
+     */
+    private RectangleInsets simpleLabelOffset;
     
     /** The maximum label width as a percentage of the plot width. */
     private double maximumLabelWidth = 0.20;
@@ -462,6 +492,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public PiePlot(PieDataset dataset) {
         super();
+        setBackgroundPaint(new Color(230, 230, 230));
         this.dataset = dataset;
         if (dataset != null) {
             dataset.addChangeListener(this);
@@ -473,7 +504,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         this.startAngle = DEFAULT_START_ANGLE;
         this.direction = Rotation.CLOCKWISE;
         this.minimumArcAngleToDraw = DEFAULT_MINIMUM_ARC_ANGLE_TO_DRAW;
-        
+
         this.sectionPaint = null;
         this.sectionPaintMap = new PaintMap();
         this.baseSectionPaint = Color.gray;
@@ -498,6 +529,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         this.labelShadowPaint = DEFAULT_LABEL_SHADOW_PAINT;
         this.labelLinksVisible = true;
         this.labelDistributor = new PieLabelDistributor(0);
+        
+        this.simpleLabels = false;
+        this.simpleLabelOffset = new RectangleInsets(UnitType.RELATIVE, 0.18, 
+                0.18, 0.18, 0.18);
+        this.labelPadding = new RectangleInsets(2, 2, 2, 2);
         
         this.toolTipGenerator = null;
         this.urlGenerator = null;
@@ -652,13 +688,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setInteriorGap(double percent) {
 
-        // check arguments...
         if ((percent < 0.0) || (percent > MAX_INTERIOR_GAP)) {
             throw new IllegalArgumentException(
                 "Invalid 'percent' (" + percent + ") argument.");
         }
 
-        // make the change...
         if (this.interiorGap != percent) {
             this.interiorGap = percent;
             notifyListeners(new PlotChangeEvent(this));
@@ -1807,7 +1841,95 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         this.labelShadowPaint = paint;
         notifyListeners(new PlotChangeEvent(this));
     }
+    
+    /**
+     * Returns the label padding.
+     * 
+     * @return The label padding (never <code>null</code>).
+     * 
+     * @since 1.0.7
+     * 
+     * @see #setLabelPadding(RectangleInsets)
+     */
+    public RectangleInsets getLabelPadding() {
+        return this.labelPadding;
+    }
+    
+    /**
+     * Sets the padding between each label and its outline and sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @param padding  the padding (<code>null</code> not permitted).
+     * 
+     * @since 1.0.7
+     * 
+     * @see #getLabelPadding()
+     */
+    public void setLabelPadding(RectangleInsets padding) {
+        if (padding == null) {
+            throw new IllegalArgumentException("Null 'padding' argument.");
+        }
+        this.labelPadding = padding;
+        notifyListeners(new PlotChangeEvent(this));
+    }
 
+    /**
+     * Returns the flag that controls whether simple or extended labels are
+     * displayed on the plot.
+     * 
+     * @return A boolean.
+     * 
+     * @since 1.0.7
+     */
+    public boolean getSimpleLabels() {
+        return this.simpleLabels;
+    }
+    
+    /**
+     * Sets the flag that controls whether simple or extended labels are 
+     * displayed on the plot, and sends a {@link PlotChangeEvent} to all 
+     * registered listeners.
+     * 
+     * @param simple  the new flag value.
+     * 
+     * @since 1.0.7
+     */
+    public void setSimpleLabels(boolean simple) {
+        this.simpleLabels = simple;
+        notifyListeners(new PlotChangeEvent(this));
+    }
+    
+    /**
+     * Returns the offset used for the simple labels, if they are displayed.
+     * 
+     * @return The offset (never <code>null</code>).
+     * 
+     * @since 1.0.7
+     * 
+     * @see #setSimpleLabelOffset(RectangleInsets)
+     */
+    public RectangleInsets getSimpleLabelOffset() {
+        return this.simpleLabelOffset;
+    }
+    
+    /**
+     * Sets the offset for the simple labels and sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @param offset  the offset (<code>null</code> not permitted).
+     * 
+     * @since 1.0.7
+     * 
+     * @see #getSimpleLabelOffset()
+     */
+    public void setSimpleLabelOffset(RectangleInsets offset) {
+        if (offset == null) {
+            throw new IllegalArgumentException("Null 'offset' argument.");
+        }
+        this.simpleLabelOffset = offset;
+        notifyListeners(new PlotChangeEvent(this));        
+    }
+    
     /**
      * Returns the object responsible for the vertical layout of the pie 
      * section labels.
@@ -2116,7 +2238,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
         // adjust the plot area for interior spacing and labels...
         double labelWidth = 0.0;
-        if (this.labelGenerator != null) {
+        if (this.labelGenerator != null && !this.simpleLabels) {
             labelWidth = this.labelGap + this.maximumLabelWidth 
                          + this.labelLinkMargin;    
         }
@@ -2147,8 +2269,12 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         // the explode area defines the max circle/ellipse for the exploded 
         // pie sections.  it is defined by shrinking the linkArea by the 
         // linkMargin factor.
-        double hh = linkArea.getWidth() * this.labelLinkMargin;
-        double vv = linkArea.getHeight() * this.labelLinkMargin;
+        double lm = 0.0;
+        if (!this.simpleLabels) {
+            lm = this.labelLinkMargin;
+        }
+        double hh = linkArea.getWidth() * lm;
+        double vv = linkArea.getHeight() * lm;
         Rectangle2D explodeArea = new Rectangle2D.Double(linkX + hh / 2.0, 
                 linkY + vv / 2.0, linkW - hh, linkH - vv);
        
@@ -2171,6 +2297,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         state.setPieCenterY(pieArea.getCenterY());
         state.setPieWRadius(pieArea.getWidth() / 2.0);
         state.setPieHRadius(pieArea.getHeight() / 2.0);
+        
         // plot the data (unless the dataset is null)...
         if ((this.dataset != null) && (this.dataset.getKeys().size() > 0)) {
 
@@ -2192,8 +2319,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                     } 
                 }
             }
-            
-            drawLabels(g2, keys, totalValue, plotArea, linkArea, state);
+            if (this.simpleLabels) {
+                drawSimpleLabels(g2, keys, totalValue, plotArea, linkArea, 
+                        state);
+            }
+            else {
+                drawLabels(g2, keys, totalValue, plotArea, linkArea, state);
+            }
 
         }
         else {
@@ -2295,6 +2427,100 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
     
     /**
+     * Draws the pie section labels in the simple form.
+     * 
+     * @param g2  the graphics device.
+     * @param keys  the section keys.
+     * @param totalValue  the total value for all sections in the pie.
+     * @param plotArea  the plot area.
+     * @param pieArea  the area containing the pie.
+     * @param state  the plot state.
+     *
+     * @since 1.0.7
+     */
+    protected void drawSimpleLabels(Graphics2D g2, List keys, double totalValue, 
+            Rectangle2D plotArea, Rectangle2D pieArea, PiePlotState state) {
+        
+        Composite originalComposite = g2.getComposite();
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 
+                1.0f));
+
+        RectangleInsets labelInsets = new RectangleInsets(UnitType.RELATIVE, 
+                0.18, 0.18, 0.18, 0.18);
+        Rectangle2D labelsArea = labelInsets.createInsetRectangle(pieArea);
+        double runningTotal = 0.0;
+        Iterator iterator = keys.iterator();
+        while (iterator.hasNext()) {
+            Comparable key = (Comparable) iterator.next();
+            boolean include = true;
+            double v = 0.0;
+            Number n = getDataset().getValue(key);
+            if (n == null) {
+                include = !getIgnoreNullValues();
+            }
+            else {
+                v = n.doubleValue();
+                include = getIgnoreZeroValues() ? v > 0.0 : v >= 0.0;
+            }
+
+            if (include) {
+                runningTotal = runningTotal + v;
+                // work out the mid angle (0 - 90 and 270 - 360) = right, 
+                // otherwise left
+                double mid = getStartAngle() + (getDirection().getFactor()
+                        * ((runningTotal - v / 2.0) * 360) / totalValue);
+                
+                Arc2D arc = new Arc2D.Double(labelsArea, getStartAngle(), 
+                        mid - getStartAngle(), Arc2D.OPEN);
+                int x = (int) arc.getEndPoint().getX();
+                int y = (int) arc.getEndPoint().getY();
+                
+                PieSectionLabelGenerator labelGenerator = getLabelGenerator();
+                if (labelGenerator == null) {
+                    continue;
+                }
+                String label = labelGenerator.generateSectionLabel(
+                        this.dataset, key);
+                if (label == null) {
+                    continue;
+                }
+                g2.setFont(this.labelFont);
+                FontMetrics fm = g2.getFontMetrics();
+                Rectangle2D bounds = TextUtilities.getTextBounds(label, g2, fm);
+                Rectangle2D out = this.labelPadding.createOutsetRectangle(bounds);
+                Shape bg = ShapeUtilities.createTranslatedShape(out, 
+                        x - bounds.getCenterX(), y - bounds.getCenterY());
+                if (this.labelShadowPaint != null) {
+                    Shape shadow = ShapeUtilities.createTranslatedShape(bg, 
+                            this.shadowXOffset, this.shadowYOffset);
+                    g2.setPaint(this.labelShadowPaint);
+                    g2.fill(shadow);
+                }
+                if (this.labelBackgroundPaint != null) {
+                    g2.setPaint(this.labelBackgroundPaint);
+                    g2.fill(bg);
+                }
+                if (this.labelOutlinePaint != null 
+                        && this.labelOutlineStroke != null) {
+                    g2.setPaint(this.labelOutlinePaint);
+                    g2.setStroke(this.labelOutlineStroke);
+                    g2.draw(bg);
+                }
+                
+                g2.setPaint(this.labelPaint);
+                g2.setFont(this.labelFont);
+                TextUtilities.drawAlignedString(getLabelGenerator()
+                        .generateSectionLabel(getDataset(), key), g2, x, y, 
+                        TextAnchor.CENTER);
+                
+            }
+        }
+       
+        g2.setComposite(originalComposite);
+
+    }
+
+    /**
      * Draws the labels for the pie sections.
      * 
      * @param g2  the graphics device.
@@ -2309,17 +2535,17 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                               PiePlotState state) {   
 
         Composite originalComposite = g2.getComposite();
-        g2.setComposite(
-                AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 
+                1.0f));
 
         // classify the keys according to which side the label will appear...
         DefaultKeyedValues leftKeys = new DefaultKeyedValues();
         DefaultKeyedValues rightKeys = new DefaultKeyedValues();
        
-        double runningTotal1 = 0.0;
-        Iterator iterator1 = keys.iterator();
-        while (iterator1.hasNext()) {
-            Comparable key = (Comparable) iterator1.next();
+        double runningTotal = 0.0;
+        Iterator iterator = keys.iterator();
+        while (iterator.hasNext()) {
+            Comparable key = (Comparable) iterator.next();
             boolean include = true;
             double v = 0.0;
             Number n = this.dataset.getValue(key);
@@ -2332,11 +2558,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             }
 
             if (include) {
-                runningTotal1 = runningTotal1 + v;
+                runningTotal = runningTotal + v;
                 // work out the mid angle (0 - 90 and 270 - 360) = right, 
                 // otherwise left
                 double mid = this.startAngle + (this.direction.getFactor()
-                    * ((runningTotal1 - v / 2.0) * 360) / totalValue);
+                        * ((runningTotal - v / 2.0) * 360) / totalValue);
                 if (Math.cos(Math.toRadians(mid)) < 0.0) {
                     leftKeys.addValue(key, new Double(mid));
                 }
@@ -2347,8 +2573,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         }
        
         g2.setFont(getLabelFont());
-        float maxLabelWidth 
-            = (float) (getMaximumLabelWidth() * plotArea.getWidth());
+        float maxLabelWidth = (float) (getMaximumLabelWidth() 
+                * plotArea.getWidth());
         
         // draw the labels...
         if (this.labelGenerator != null) {
@@ -2392,6 +2618,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 labelBox.setOutlinePaint(this.labelOutlinePaint);
                 labelBox.setOutlineStroke(this.labelOutlineStroke);
                 labelBox.setShadowPaint(this.labelShadowPaint);
+                labelBox.setInteriorGap(this.labelPadding);
                 double theta = Math.toRadians(
                         leftKeys.getValue(i).doubleValue());
                 double baseY = state.getPieCenterY() - Math.sin(theta) 
@@ -2444,6 +2671,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 labelBox.setOutlinePaint(this.labelOutlinePaint);
                 labelBox.setOutlineStroke(this.labelOutlineStroke);
                 labelBox.setShadowPaint(this.labelShadowPaint);
+                labelBox.setInteriorGap(this.labelPadding);
                 double theta = Math.toRadians(keys.getValue(i).doubleValue());
                 double baseY = state.getPieCenterY() 
                               - Math.sin(theta) * verticalLinkRadius;
@@ -2765,6 +2993,15 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         }
         if (!PaintUtilities.equal(this.labelShadowPaint, 
                 that.labelShadowPaint)) {
+            return false;
+        }
+        if (this.simpleLabels != that.simpleLabels) {
+            return false;
+        }
+        if (!this.simpleLabelOffset.equals(that.simpleLabelOffset)) {
+            return false;
+        }
+        if (!this.labelPadding.equals(that.labelPadding)) {
             return false;
         }
         if (!(this.maximumLabelWidth == that.maximumLabelWidth)) {
