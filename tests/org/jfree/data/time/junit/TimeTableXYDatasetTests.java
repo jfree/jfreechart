@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,17 @@
  * ----------------------------
  * TimeTableXYDatasetTests.java
  * ----------------------------
- * (C) Copyright 2004, by Object Refinery Limited.
+ * (C) Copyright 2004, 2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Rob Eden;
  *
  * $Id: TimeTableXYDatasetTests.java,v 1.1.2.1 2006/10/03 15:41:39 mungady Exp $
  *
  * Changes
  * -------
  * 15-Sep-2004 : Version 1 (DG);
+ * 25-Jul-2007 : Added test for clear() method, by Rob Eden (DG);
  *
  */
 
@@ -132,9 +133,8 @@ public class TimeTableXYDatasetTests extends TestCase {
         assertTrue(d1.equals(d2));
         
         d1 = new TimeTableXYDataset(TimeZone.getTimeZone("GMT"));
-        d2 = new TimeTableXYDataset(
-            TimeZone.getTimeZone("America/Los_Angeles")
-        );
+        d2 = new TimeTableXYDataset(TimeZone.getTimeZone(
+                "America/Los_Angeles"));
         assertFalse(d1.equals(d2));
     }
     
@@ -175,17 +175,32 @@ public class TimeTableXYDatasetTests extends TestCase {
             out.writeObject(d1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             d2 = (TimeTableXYDataset) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertTrue(d1.equals(d2));
 
+    }
+    
+    /**
+     * Test clearing data.
+     */
+    public void testClear() {
+        TimeTableXYDataset d = new TimeTableXYDataset();
+        d.add(new Year(1999), 1.0, "Series 1");
+        assertEquals(d.getItemCount(), 1);
+        assertEquals(d.getSeriesCount(), 1);
+        d.add(new Year(2000), 2.0, "Series 2"); 
+
+        d.clear();
+        // Make sure there's nothing left
+        assertEquals(0, d.getItemCount());
+        assertEquals(0, d.getSeriesCount());
     }
 
 }
