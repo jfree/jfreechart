@@ -37,7 +37,8 @@
  * Changes
  * -------
  * 26-Mar-2003 : Version 1 (DG);
- *
+ * 25-Jul-2007 : Added new field in testEquals() (DG);
+ * 
  */
 
 package org.jfree.chart.axis.junit;
@@ -142,14 +143,19 @@ public class SymbolAxisTests extends TestCase {
         a2 = new SymbolAxis("Axis 2", new String[] {"C", "B"});
         assertTrue(a1.equals(a2));    
         
+        a1.setGridBandsVisible(false);
+        assertFalse(a1.equals(a2));
+        a2.setGridBandsVisible(false);
+        assertTrue(a1.equals(a2));
+
         a1.setGridBandPaint(Color.black);
         assertFalse(a1.equals(a2));
         a2.setGridBandPaint(Color.black);
         assertTrue(a1.equals(a2));
         
-        a1.setGridBandsVisible(false);
+        a1.setGridBandAlternatePaint(Color.red);
         assertFalse(a1.equals(a2));
-        a2.setGridBandsVisible(false);
+        a2.setGridBandAlternatePaint(Color.red);
         assertTrue(a1.equals(a2));
     }
 

@@ -73,6 +73,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 28-Feb-2007 : Fixed bug 1669302 (tick label overlap) (DG);
+ * 25-Jul-2007 : Added new field for alternate grid band paint (DG);
  * 
  */
 
@@ -118,14 +119,29 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     public static final Paint DEFAULT_GRID_BAND_PAINT 
             = new Color(232, 234, 232, 128);
 
+    /**
+     * The default paint for alternate grid bands.
+     * 
+     * @since 1.0.7
+     */
+    public static final Paint DEFAULT_GRID_BAND_ALTERNATE_PAINT
+            = new Color(0, 0, 0, 0);  // transparent
+    
     /** The list of symbols to display instead of the numeric values. */
     private List symbols;
 
-    /** The paint used to color the grid bands (if the bands are visible). */
-    private transient Paint gridBandPaint;
-
     /** Flag that indicates whether or not grid bands are visible. */
     private boolean gridBandsVisible;
+
+    /** The paint used to color the grid bands (if the bands are visible). */
+    private transient Paint gridBandPaint;
+    
+    /** 
+     * The paint used to fill the alternate grid bands.
+     * 
+     * @since 1.0.7
+     */
+    private transient Paint gridBandAlternatePaint;
 
     /**
      * Constructs a symbol axis, using default attribute values where 
@@ -140,7 +156,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         this.symbols = Arrays.asList(sv);
         this.gridBandsVisible = true;
         this.gridBandPaint = DEFAULT_GRID_BAND_PAINT;
-
+        this.gridBandAlternatePaint = DEFAULT_GRID_BAND_ALTERNATE_PAINT;
         setAutoTickUnitSelection(false, false);
         setAutoRangeStickyZero(false);
 
@@ -155,6 +171,34 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         String[] result = new String[this.symbols.size()];
         result = (String[]) this.symbols.toArray(result);
         return result;
+    }
+
+    /**
+     * Returns <code>true</code> if the grid bands are showing, and
+     * <code>false</code> otherwise.
+     *
+     * @return <code>true</code> if the grid bands are showing, and 
+     *         <code>false</code> otherwise.
+     *         
+     * @see #setGridBandsVisible(boolean)
+     */
+    public boolean isGridBandsVisible() {
+        return this.gridBandsVisible;
+    }
+
+    /**
+     * Sets the visibility of the grid bands and notifies registered
+     * listeners that the axis has been modified.
+     *
+     * @param flag  the new setting.
+     * 
+     * @see #isGridBandsVisible()
+     */
+    public void setGridBandsVisible(boolean flag) {
+        if (this.gridBandsVisible != flag) {
+            this.gridBandsVisible = flag;
+            notifyListeners(new AxisChangeEvent(this));
+        }
     }
 
     /**
@@ -184,35 +228,40 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         this.gridBandPaint = paint;
         notifyListeners(new AxisChangeEvent(this));
     }
+
+    /**
+     * Returns the paint used for alternate grid bands.
+     * 
+     * @return The paint (never <code>null</code>).
+     * 
+     * @see #setGridBandAlternatePaint(Paint)
+     * @see #getGridBandPaint()
+     * 
+     * @since 1.0.7
+     */
+    public Paint getGridBandAlternatePaint() {
+        return this.gridBandAlternatePaint;
+    }
     
     /**
-     * Returns <code>true</code> if the grid bands are showing, and
-     * <code>false</code> otherwise.
-     *
-     * @return <code>true</code> if the grid bands are showing, and 
-     *         <code>false</code> otherwise.
-     *         
-     * @see #setGridBandsVisible(boolean)
-     */
-    public boolean isGridBandsVisible() {
-        return this.gridBandsVisible;
-    }
-
-    /**
-     * Sets the visibility of the grid bands and notifies registered
-     * listeners that the axis has been modified.
-     *
-     * @param flag  the new setting.
+     * Sets the paint used for alternate grid bands and sends a 
+     * {@link AxisChangeEvent} to all registered listeners.
      * 
-     * @see #isGridBandsVisible()
+     * @param paint  the paint (<code>null</code> not permitted).
+     * 
+     * @see #getGridBandAlternatePaint()
+     * @see #setGridBandPaint(Paint)
+     * 
+     * @since 1.0.7
      */
-    public void setGridBandsVisible(boolean flag) {
-        if (this.gridBandsVisible != flag) {
-            this.gridBandsVisible = flag;
-            notifyListeners(new AxisChangeEvent(this));
+    public void setGridBandAlternatePaint(Paint paint) {
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
         }
+        this.gridBandAlternatePaint = paint;
+        notifyListeners(new AxisChangeEvent(this));
     }
-
+    
     /**
      * This operation is not supported by this axis.
      *
@@ -733,6 +782,10 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         if (!PaintUtilities.equal(this.gridBandPaint, that.gridBandPaint)) {
             return false;
         }
+        if (!PaintUtilities.equal(this.gridBandAlternatePaint, 
+                that.gridBandAlternatePaint)) {
+            return false;
+        }
         return super.equals(obj);
     }
     
@@ -746,6 +799,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         SerialUtilities.writePaint(this.gridBandPaint, stream);
+        SerialUtilities.writePaint(this.gridBandAlternatePaint, stream);
     }
 
     /**
@@ -760,6 +814,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.gridBandPaint = SerialUtilities.readPaint(stream);
+        this.gridBandAlternatePaint = SerialUtilities.readPaint(stream);
     }
 
 }
