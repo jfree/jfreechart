@@ -31,6 +31,7 @@
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *                   Rob Eden;
  *
  * $Id: TimeTableXYDataset.java,v 1.10.2.3 2007/03/09 15:43:09 mungady Exp $
  *
@@ -48,6 +49,7 @@
  *               release (DG);
  * 27-Jan-2005 : Modified to use TimePeriod rather than RegularTimePeriod (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 25-Jul-2007 : Added clear() method by Rob Eden, see patch 1752205 (DG);
  *
  */
 
@@ -250,6 +252,19 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
         }
     }
 
+    /**
+     * Removes all data items from the dataset and sends a
+     * {@link DatasetChangeEvent} to all registered listeners.
+     * 
+     * @since 1.0.7
+     */
+    public void clear() {
+        if (this.values.getRowCount() > 0) {
+            this.values.clear();
+            fireDatasetChanged();
+        }
+    }
+    
     /**
      * Returns the time period for the specified item.  Bear in mind that all
      * series share the same set of time periods.

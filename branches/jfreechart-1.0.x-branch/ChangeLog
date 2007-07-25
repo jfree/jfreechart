@@ -1,5 +1,13 @@
 2007-07-25  David Gilbert  <david.gilbert@object-refinery.com>
 
+	Patch 1752205:
+	* source/org/jfree/data/time/TimeTableXYDataset.java
+	(clear): New method,
+	* tests/org/jfree/data/time/junit/TimeTableXYDatasetTests.java
+	(testClear): New method.
+
+2007-07-25  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/renderer/xy/XYSplineAndShapeRenderer.java: 
 	New file, contributed by Klaus Rheinwald.
 
