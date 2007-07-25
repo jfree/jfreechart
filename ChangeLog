@@ -1,3 +1,17 @@
+2007-07-25  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/axis/SymbolAxis.java
+	(DEFAULT_GRID_BAND_ALTERNATE_PAINT): New field,
+	(gridBandAlternatePaint): New field,
+	(SymbolAxis): Initialise new field,
+	(getGridBandAlternatePaint): New method,
+	(setGridBandAlternatePaint): Likewise,
+	(equals): Test new field,
+	(writeObject): Handle new field,
+	(readObject): Likewise,
+	* tests/org/jfree/chart/axis/junit/SymbolAxisTests.java
+	(testEquals): Added check for new field.
+	
 2007-07-18	David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/demo/PieChartDemo1.java
