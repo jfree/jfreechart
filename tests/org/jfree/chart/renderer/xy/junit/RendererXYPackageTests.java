@@ -45,6 +45,7 @@
  * 26-Feb-2007 : Added DeviationRendererTests (DG);
  * 30-Apr-2007 : Added XYLine3DRendererTests (DG);
  * 25-May-2007 : Added VectorRendererTests (DG);
+ * 25-Jul-2007 : Added XYSplineAndRendererTests (DG);
  *
  */
 

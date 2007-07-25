@@ -1,5 +1,10 @@
 2007-07-25  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/renderer/xy/XYSplineAndShapeRenderer.java: 
+	New file, contributed by Klaus Rheinwald.
+
+2007-07-25  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/axis/SymbolAxis.java
 	(DEFAULT_GRID_BAND_ALTERNATE_PAINT): New field,
 	(gridBandAlternatePaint): New field,
