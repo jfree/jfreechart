@@ -1,3 +1,9 @@
+2007-07-31  David Gilbert  <david.gilbert@object-refinery.com>
+
+	Bug 1763413:
+	* source/org/jfree/chart/axis/PeriodAxis.java
+	(drawTickLabels): Calculate tick label width correctly for inverted axis.
+
 2007-07-25  David Gilbert  <david.gilbert@object-refinery.com>
 
 	Patch 1752205:
