@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * LegendGraphic.java
  * ------------------
- * (C) Copyright 2004-2006, by Object Refinery Limited.
+ * (C) Copyright 2004-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,6 +46,7 @@
  * 13-Dec-2006 : Added fillPaintTransformer attribute, so legend graphics can
  *               display gradient paint correctly, updated equals() and 
  *               corrected clone() (DG);
+ * 01-Aug-2007 : Updated API docs (DG);
  * 
  */
 
@@ -171,6 +172,8 @@ public class LegendGraphic extends AbstractBlock
      * is visible.
      * 
      * @return A boolean.
+     * 
+     * @see #setShapeVisible(boolean)
      */
     public boolean isShapeVisible() {
         return this.shapeVisible;
@@ -181,6 +184,8 @@ public class LegendGraphic extends AbstractBlock
      * visible.
      * 
      * @param visible  the flag.
+     * 
+     * @see #isShapeVisible()
      */
     public void setShapeVisible(boolean visible) {
         this.shapeVisible = visible;
@@ -190,6 +195,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns the shape.
      * 
      * @return The shape.
+     * 
+     * @see #setShape(Shape)
      */
     public Shape getShape() {
         return this.shape;
@@ -199,6 +206,8 @@ public class LegendGraphic extends AbstractBlock
      * Sets the shape.
      * 
      * @param shape  the shape.
+     * 
+     * @see #getShape()
      */
     public void setShape(Shape shape) {
         this.shape = shape;
@@ -209,6 +218,8 @@ public class LegendGraphic extends AbstractBlock
      * are filled.
      * 
      * @return A boolean.
+     * 
+     * @see #setShapeFilled(boolean)
      */
     public boolean isShapeFilled() {
         return this.shapeFilled;
@@ -219,6 +230,8 @@ public class LegendGraphic extends AbstractBlock
      * filled.
      * 
      * @param filled  the flag.
+     * 
+     * @see #isShapeFilled()
      */
     public void setShapeFilled(boolean filled) {
         this.shapeFilled = filled;
@@ -228,6 +241,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns the paint used to fill the shape.
      * 
      * @return The fill paint.
+     * 
+     * @see #setFillPaint(Paint)
      */
     public Paint getFillPaint() {
         return this.fillPaint;
@@ -237,6 +252,8 @@ public class LegendGraphic extends AbstractBlock
      * Sets the paint used to fill the shape.
      * 
      * @param paint  the paint.
+     * 
+     * @see #getFillPaint()
      */
     public void setFillPaint(Paint paint) {
         this.fillPaint = paint;
@@ -249,6 +266,8 @@ public class LegendGraphic extends AbstractBlock
      * @return The transformer (never <code>null</code>).
      * 
      * @since 1.0.4.
+     * 
+     * @see #setFillPaintTransformer(GradientPaintTransformer)
      */
     public GradientPaintTransformer getFillPaintTransformer() {
         return this.fillPaintTransformer;
@@ -261,6 +280,8 @@ public class LegendGraphic extends AbstractBlock
      * @param transformer  the transformer (<code>null</code> not permitted).
      * 
      * @since 1.0.4
+     * 
+     * @see #getFillPaintTransformer()
      */
     public void setFillPaintTransformer(GradientPaintTransformer transformer) {
         if (transformer == null) {
@@ -273,6 +294,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns a flag that controls whether the shape outline is visible.
      * 
      * @return A boolean.
+     * 
+     * @see #setShapeOutlineVisible(boolean)
      */
     public boolean isShapeOutlineVisible() {
         return this.shapeOutlineVisible;
@@ -283,6 +306,8 @@ public class LegendGraphic extends AbstractBlock
      * is visible.
      * 
      * @param visible  the flag.
+     * 
+     * @see #isShapeOutlineVisible()
      */
     public void setShapeOutlineVisible(boolean visible) {
         this.shapeOutlineVisible = visible;
@@ -292,6 +317,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns the outline paint.
      * 
      * @return The paint.
+     * 
+     * @see #setOutlinePaint(Paint)
      */
     public Paint getOutlinePaint() {
         return this.outlinePaint;
@@ -301,6 +328,8 @@ public class LegendGraphic extends AbstractBlock
      * Sets the outline paint.
      * 
      * @param paint  the paint.
+     * 
+     * @see #getOutlinePaint()
      */
     public void setOutlinePaint(Paint paint) {
         this.outlinePaint = paint;
@@ -310,6 +339,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns the outline stroke.
      * 
      * @return The stroke.
+     * 
+     * @see #setOutlineStroke(Stroke)
      */
     public Stroke getOutlineStroke() {
         return this.outlineStroke;
@@ -319,6 +350,8 @@ public class LegendGraphic extends AbstractBlock
      * Sets the outline stroke.
      * 
      * @param stroke  the stroke.
+     * 
+     * @see #getOutlineStroke()
      */
     public void setOutlineStroke(Stroke stroke) {
         this.outlineStroke = stroke;
@@ -328,6 +361,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns the shape anchor.
      * 
      * @return The shape anchor.
+     * 
+     * @see #getShapeAnchor()
      */
     public RectangleAnchor getShapeAnchor() {
         return this.shapeAnchor;
@@ -338,6 +373,8 @@ public class LegendGraphic extends AbstractBlock
      * rectangle that will be used to align the shape to a location.
      * 
      * @param anchor  the anchor (<code>null</code> not permitted).
+     * 
+     * @see #setShapeAnchor(RectangleAnchor)
      */
     public void setShapeAnchor(RectangleAnchor anchor) {
         if (anchor == null) {
@@ -350,6 +387,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns the shape location.
      * 
      * @return The shape location.
+     * 
+     * @see #setShapeLocation(RectangleAnchor)
      */
     public RectangleAnchor getShapeLocation() {
         return this.shapeLocation;
@@ -360,6 +399,8 @@ public class LegendGraphic extends AbstractBlock
      * area that will be used to align the shape to.
      * 
      * @param location  the location (<code>null</code> not permitted).
+     * 
+     * @see #getShapeLocation()
      */
     public void setShapeLocation(RectangleAnchor location) {
         if (location == null) {
@@ -372,6 +413,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns the flag that controls whether or not the line is visible.
      * 
      * @return A boolean.
+     * 
+     * @see #setLineVisible(boolean)
      */
     public boolean isLineVisible() {
         return this.lineVisible;
@@ -381,6 +424,8 @@ public class LegendGraphic extends AbstractBlock
      * Sets the flag that controls whether or not the line is visible.
      * 
      * @param visible  the flag.
+     * 
+     * @see #isLineVisible()
      */
     public void setLineVisible(boolean visible) {
         this.lineVisible = visible;
@@ -390,6 +435,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns the line centered about (0, 0).
      * 
      * @return The line.
+     * 
+     * @see #setLine(Shape)
      */
     public Shape getLine() {
         return this.line;
@@ -400,6 +447,8 @@ public class LegendGraphic extends AbstractBlock
      * GeneralPath or any other Shape to represent the line.
      * 
      * @param line  the line.
+     * 
+     * @see #getLine()
      */
     public void setLine(Shape line) {
         this.line = line;
@@ -409,6 +458,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns the line paint.
      * 
      * @return The paint.
+     * 
+     * @see #setLinePaint(Paint)
      */
     public Paint getLinePaint() {
         return this.linePaint;
@@ -418,6 +469,8 @@ public class LegendGraphic extends AbstractBlock
      * Sets the line paint.
      * 
      * @param paint  the paint.
+     * 
+     * @see #getLinePaint()
      */
     public void setLinePaint(Paint paint) {
         this.linePaint = paint;
@@ -427,6 +480,8 @@ public class LegendGraphic extends AbstractBlock
      * Returns the line stroke.
      * 
      * @return The stroke.
+     * 
+     * @see #setLineStroke(Stroke)
      */
     public Stroke getLineStroke() {
         return this.lineStroke;
@@ -436,6 +491,8 @@ public class LegendGraphic extends AbstractBlock
      * Sets the line stroke.
      * 
      * @param stroke  the stroke.
+     * 
+     * @see #getLineStroke()
      */
     public void setLineStroke(Stroke stroke) {
         this.lineStroke = stroke;
@@ -531,25 +588,21 @@ public class LegendGraphic extends AbstractBlock
         area = trimPadding(area);
         
         if (this.lineVisible) {
-            Point2D location = RectangleAnchor.coordinates(
-                area, this.shapeLocation
-            );
-            Shape aLine = ShapeUtilities.createTranslatedShape(
-                getLine(), this.shapeAnchor, location.getX(), location.getY()
-            );
+            Point2D location = RectangleAnchor.coordinates(area, 
+                    this.shapeLocation);
+            Shape aLine = ShapeUtilities.createTranslatedShape(getLine(), 
+                    this.shapeAnchor, location.getX(), location.getY());
             g2.setPaint(this.linePaint);
             g2.setStroke(this.lineStroke);
             g2.draw(aLine);
         }
         
         if (this.shapeVisible) {
-            Point2D location = RectangleAnchor.coordinates(
-                area, this.shapeLocation
-            );
+            Point2D location = RectangleAnchor.coordinates(area, 
+                    this.shapeLocation);
             
-            Shape s = ShapeUtilities.createTranslatedShape(
-                this.shape, this.shapeAnchor, location.getX(), location.getY()
-            );
+            Shape s = ShapeUtilities.createTranslatedShape(this.shape, 
+                    this.shapeAnchor, location.getX(), location.getY());
             if (this.shapeFilled) {
                 Paint p = this.fillPaint;
                 if (p instanceof GradientPaint) {
@@ -694,8 +747,7 @@ public class LegendGraphic extends AbstractBlock
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
     private void readObject(ObjectInputStream stream) 
-        throws IOException, ClassNotFoundException 
-    {
+            throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.shape = SerialUtilities.readShape(stream);
         this.fillPaint = SerialUtilities.readPaint(stream);
