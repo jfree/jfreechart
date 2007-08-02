@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * TickUnits.java
  * --------------
- * (C) Copyright 2001-2005, by Object Refinery Limited.
+ * (C) Copyright 2001-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -83,20 +83,17 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
     }
 
     /**
-     * Adds a tick unit to the collection.
-     * <P>
-     * The tick units are maintained in ascending order.
+     * Adds a tick unit to the collection.  The tick units are maintained in 
+     * ascending order.
      *
-     * @param unit  the tick unit to add.
+     * @param unit  the tick unit to add (<code>null</code> not permitted).
      */
     public void add(TickUnit unit) {
-
         if (unit == null) {
             throw new NullPointerException("Null 'unit' argument.");
         }
         this.tickUnits.add(unit);
         Collections.sort(this.tickUnits);
-
     }
 
     /**
@@ -140,9 +137,8 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
             index = -index;
         }
 
-        return (TickUnit) this.tickUnits.get(
-            Math.min(index, this.tickUnits.size() - 1)
-        );
+        return (TickUnit) this.tickUnits.get(Math.min(index, 
+                this.tickUnits.size() - 1));
 
     }
 
@@ -162,9 +158,8 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
         }
         else {
             index = -(index + 1);
-            return (TickUnit) this.tickUnits.get(
-                Math.min(index, this.tickUnits.size() - 1)
-            );
+            return (TickUnit) this.tickUnits.get(Math.min(index, 
+                    this.tickUnits.size() - 1));
         }
 
     }
@@ -199,22 +194,19 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
     /**
      * Tests an object for equality with this instance.
      *
-     * @param object  the object to test.
+     * @param obj  the object to test (<code>null</code> permitted).
      *
      * @return A boolean.
      */
-    public boolean equals(Object object) {
-        if (object == null) {
-            return false;
-        }
-        if (object == this) {
+    public boolean equals(Object obj) {
+        if (obj == this) {
             return true;
         }
-        if (object instanceof TickUnits) {
-            TickUnits tu = (TickUnits) object;
-            return tu.tickUnits.equals(this.tickUnits);
+        if (!(obj instanceof TickUnits)) {
+            return false;
         }
-        return false;
+        TickUnits that = (TickUnits) obj;
+        return that.tickUnits.equals(this.tickUnits);
     }
 
 }

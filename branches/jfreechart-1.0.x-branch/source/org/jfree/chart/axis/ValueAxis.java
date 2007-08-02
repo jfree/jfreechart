@@ -97,6 +97,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 10-Oct-2006 : Source reformatting (DG);
  * 22-Mar-2007 : Added new defaultAutoRange attribute (DG);
+ * 02-Aug-2007 : Check for major tick when drawing label (DG);
  *
  */
 
@@ -697,7 +698,7 @@ public abstract class ValueAxis extends Axis
                         tick.getAngle(), tick.getRotationAnchor());
             }
 
-            if (isTickMarksVisible()) {
+            if (isTickMarksVisible() && tick.getTickType().equals(TickType.MAJOR)) {
                 float xx = (float) valueToJava2D(tick.getValue(), dataArea, 
                         edge);
                 Line2D mark = null;
