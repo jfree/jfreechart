@@ -66,14 +66,11 @@ import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.TextAnchor;
 
 /**
- * A numerical axis that uses a logarithmic scale.  The plan is for this class
- * to replace the {@link LogarithmicAxis} class.
+ * A numerical axis that uses a logarithmic scale.  The class is an 
+ * alternative to the {@link LogarithmicAxis} class.
  * 
- * WARNING: THIS CLASS IS NOT PART OF THE STANDARD JFREECHART API AND IS 
- * SUBJECT TO ALTERATION OR REMOVAL.  DO NOT RELY ON THIS CLASS FOR 
- * PRODUCTION USE.  Please experiment with this code and provide feedback.
+ * @since 1.0.7
  */
-
 public class LogAxis extends ValueAxis {
 
     /** The logarithm base. */
