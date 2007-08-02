@@ -27,7 +27,7 @@
  * -------------
  * TickUnit.java
  * -------------
- * (C) Copyright 2001-2005, by Object Refinery Limited.
+ * (C) Copyright 2001-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@
  * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
  * 26-Mar-2003 : Implemented Serializable (DG);
  * 05-Sep-2005 : Implemented hashCode(), thanks to Thomas Morgner (DG);
+ * 02-Aug-2007 : Added minorTickCount attribute (DG);
  *
  */
 
@@ -70,6 +71,13 @@ public abstract class TickUnit implements Comparable, Serializable {
     private double size;
 
     /**
+     * The number of minor ticks.
+     * 
+     * @since 1.0.7
+     */
+    private int minorTickCount;
+    
+    /**
      * Constructs a new tick unit.
      *
      * @param size  the tick unit size.
@@ -77,6 +85,19 @@ public abstract class TickUnit implements Comparable, Serializable {
     public TickUnit(double size) {
         this.size = size;
     }
+    
+    /**
+     * Constructs a new tick unit.
+     *
+     * @param size  the tick unit size.
+     * @param minorTickCount  the minor tick count.
+     * 
+     * @since 1.0.7
+     */
+    public TickUnit(double size, int minorTickCount) {
+        this.size = size;
+        this.minorTickCount = minorTickCount;
+    }    
 
     /**
      * Returns the size of the tick unit.
@@ -85,6 +106,17 @@ public abstract class TickUnit implements Comparable, Serializable {
      */
     public double getSize() {
         return this.size;
+    }
+    
+    /**
+     * Returns the minor tick count.
+     * 
+     * @return The minor tick count.
+     * 
+     * @since 1.0.7
+     */
+    public int getMinorTickCount() {
+        return this.minorTickCount;
     }
 
     /**
@@ -137,19 +169,20 @@ public abstract class TickUnit implements Comparable, Serializable {
      * @return <code>true</code> or <code>false</code>.
      */
     public boolean equals(Object obj) {
-
-        if (obj == null) {
-            return false;
-        }
         if (obj == this) {
             return true;
         }
-        if (obj instanceof TickUnit) {
-            TickUnit tu = (TickUnit) obj;
-            return this.size == tu.size;
+        if (!(obj instanceof TickUnit)) {
+            return false;
         }
-        return false;
-
+        TickUnit that = (TickUnit) obj;
+        if (this.size != that.size) {
+            return false;
+        }
+        if (this.minorTickCount != that.minorTickCount) {
+            return false;
+        }
+        return true;
     }
 
     /**

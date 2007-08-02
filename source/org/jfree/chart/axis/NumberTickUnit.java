@@ -44,6 +44,7 @@
  * 26-Mar-2003 : Implemented Serializable (DG);
  * 05-Jul-2005 : Added equals() implementation (DG);
  * 05-Sep-2005 : Implemented hashCode(), thanks to Thomas Morgner (DG);
+ * 02-Aug-2007 : Added new constructor with minorTickCount (DG);
  *
  */
 
@@ -88,6 +89,25 @@ public class NumberTickUnit extends TickUnit implements Serializable {
     }
 
     /**
+     * Creates a new number tick unit.
+     *
+     * @param size  the size of the tick unit.
+     * @param formatter  a number formatter for the tick unit (<code>null</code>
+     *                   not permitted).
+     * @param minorTickCount  the number of minor ticks.
+     *
+     * @since 1.0.7
+     */
+    public NumberTickUnit(double size, NumberFormat formatter,
+            int minorTickCount) {
+        super(size, minorTickCount);
+        if (formatter == null) {
+            throw new IllegalArgumentException("Null 'formatter' argument.");
+        }
+        this.formatter = formatter;
+    }
+
+    /**
      * Converts a value to a string.
      *
      * @param value  the value.
@@ -120,6 +140,15 @@ public class NumberTickUnit extends TickUnit implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Returns a string representing this unit.
+     * 
+     * @return A string.
+     */
+    public String toString() {
+        return "[size=" + this.valueToString(this.getSize()) + "]";
     }
 
     /**
