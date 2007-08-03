@@ -1,3 +1,8 @@
+2007-08-03  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/LegendItem.java
+	(LegendItem): Initialise GradientPaintTransformer.
+
 2007-08-02  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* experimental/org/jfree/experimental/chart/axis/LogAxis.java
