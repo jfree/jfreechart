@@ -34,11 +34,10 @@
  *                       http://www.wam.umd.edu/~petersd/);
  *                   David Gilbert (for Object Refinery Limited);
  *
- * $Id: XYLineAndShapeRenderer.java,v 1.20.2.13 2007/06/08 13:29:38 mungady Exp $
- *
  * Changes:
  * --------
  * 25-Jul-2007 : Version 1, contributed by Klaus Rheinwald (DG);
+ * 03-Aug-2007 : Added new constructor (KR);
  *
  */
 
@@ -75,16 +74,28 @@ public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
     /**
      * Resolution of splines (number of line segments between points)
      */
-    private int precision = 10;
+    private int precision;
 
     /**
      * Creates a new instance with the 'precision' attribute defaulting to 
-     * 10.
+     * 5.
      */
     public XYSplineAndShapeRenderer() {
-        super();
-        this.precision = 10;
+        this(5);
     }
+	
+    /**
+     * Creates a new renderer with the specified precision.
+     * 
+     * @param precision  the number of points between data items.
+     */
+    public XYSplineAndShapeRenderer(int precision) {
+        super();
+        if (precision <= 0) {
+            throw new IllegalArgumentException("Requires precision > 0.");
+        }
+        this.precision = precision;
+    }    
     
     /**
      * Get the resolution of splines.
@@ -112,7 +123,6 @@ public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
         this.precision = p;
         notifyListeners(new RendererChangeEvent(this));
     }
-
 
     /**
      * Initialises the renderer.
@@ -188,7 +198,8 @@ public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
                 ControlPoint cp0 = (ControlPoint) this.points.get(0);
                 s.seriesPath.moveTo(cp0.x, cp0.y);
                 if (this.points.size() == 2) {
-                    // we need at least 3 points to spline. Draw simple line for two points
+                    // we need at least 3 points to spline. Draw simple line 
+                    // for two points
                     ControlPoint cp1 = (ControlPoint) this.points.get(1);
                     s.seriesPath.lineTo(cp1.x, cp1.y);
                 } 
