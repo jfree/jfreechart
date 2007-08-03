@@ -1,3 +1,49 @@
+2007-08-02  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* experimental/org/jfree/experimental/chart/axis/LogAxis.java
+	(LogAxis(String)): Leave tick marks visible,
+	(autoAdjustRange): Apply margins to log scale, and don't allow auto-range 
+	to go below minimum value,
+	(refreshTicksHorizontal): Improved handling of ticks and labels,
+	(refreshTicksVertical): Likewise,
+	(selectAutoTickUnit): New method,
+	(selectHorizontalAutoTickUnit): Likewise,
+	(selectVerticalAutoTickUnit): Likewise,
+	(exponentLengthToJava2D): Likewise,
+	(estimateMaximumTickLabelHeight): Likewise,
+	(estimateMaximumTickLabelWidth): Likewise,
+	(equals): New method override,
+	(hashCode): Likewise,
+	(createLogTickUnits): New method,
+	and moved to source/org/jfree/chart/axis/,
+	* source/org/jfree/chart/axis/NumberTick.java
+	(NumberTick(TickType, double, String, TextAnchor, TextAnchor, double)): 
+	New constructor,
+	* source/org/jfree/chart/axis/NumberTickUnit.java
+	(NumberTickUnit(double, NumberFormat, int)): New constructor,
+    (toString): New method override,
+    * source/org/jfree/chart/axis/TickType.java: New file,
+    * source/org/jfree/chart/axis/TickUnit.java
+    (minorTickCount): New field,
+    (TickUnit(double, int)): New constructor,
+    (getMinorTickCount): New method,
+    (equals): Updated for new field,
+    * source/org/jfree/chart/axis/TickUnits.java: Reformatting only,
+    * source/org/jfree/chart/axis/ValueAxis.java
+    (drawTickMarksAndLabels): Check for major tick before writing label,
+    * source/org/jfree/chart/axis/ValueTick.java:
+    (tickType): New field,
+    (ValueTick(TickType, double, String, TextAnchor, TextAnchor, double)):
+    New constructor,
+    (getTickType): New method,
+    (equals): Updated for new field,
+	* source/org/jfree/chart/util/LogFormat.java: New file,
+	* tests/org/jfree/chart/axis/junit/AxisPackageTests.java
+	(suite): Added LogAxisTests and TickUnitsTests,
+	* tests/org/jfree/chart/axis/junit/LogAxisTests.java:
+	New file,
+	* tests/org/jfree/chart/axis/junit/TickUnitsTests.java: Likewise.
+
 2007-07-31  David Gilbert  <david.gilbert@object-refinery.com>
 
 	Bug 1763413:
