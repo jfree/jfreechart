@@ -39,6 +39,7 @@
  * 05-Jul-2006 : Version 1 (DG);
  * 02-Feb-2007 : Added getPaintScale() method (DG);
  * 09-Mar-2007 : Fixed cloning (DG);
+ * 03-Aug-2007 : Fix for bug 1766646 (DG);
  * 
  */
 
@@ -276,12 +277,19 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * 
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
+     *         
+     * @see #findRangeBounds(XYDataset)
      */
     public Range findDomainBounds(XYDataset dataset) {
         if (dataset != null) {
             Range r = DatasetUtilities.findDomainBounds(dataset, false);
-            return new Range(r.getLowerBound() + this.xOffset, 
-                    r.getUpperBound() + this.blockWidth + this.xOffset);
+            if (r == null) {
+                return null; 
+            }
+            else {
+                return new Range(r.getLowerBound() + this.xOffset, 
+                        r.getUpperBound() + this.blockWidth + this.xOffset);
+            }
         }
         else {
             return null;
@@ -296,12 +304,19 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * 
      * @return The range (<code>null</code> if the dataset is <code>null</code> 
      *         or empty).
+     *         
+     * @see #findDomainBounds(XYDataset)
      */
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset != null) {
             Range r = DatasetUtilities.findRangeBounds(dataset, false);
-            return new Range(r.getLowerBound() + this.yOffset, 
-                    r.getUpperBound() + this.blockHeight + this.yOffset);
+            if (r == null) {
+                return null; 
+            }
+            else {
+                return new Range(r.getLowerBound() + this.yOffset, 
+                        r.getUpperBound() + this.blockHeight + this.yOffset);
+            }
         }
         else {
             return null;

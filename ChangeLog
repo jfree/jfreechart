@@ -1,5 +1,12 @@
 2007-08-03  David Gilbert  <david.gilbert@object-refinery.com>
 
+	Fix for bug 1766646:
+	* source/org/jfree/chart/renderer/xy/XYBlockRenderer.java
+	(findDomainBounds): Check for null,
+	(findRangeBounds): Likewise.
+
+2007-08-03  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/LegendItem.java
 	(LegendItem): Initialise GradientPaintTransformer.
 
