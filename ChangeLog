@@ -1,5 +1,13 @@
 2007-08-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/data/time/Week.java
+	(Week(Date, TimeZone)): Deprecated,
+	(Week(Date, TimeZone, Locale)): New constructor,
+	* tests/org/jfree/data/time/junit/WeekTests.java
+	(testConstructor): New test.
+
+2007-08-28  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/renderer/category/StatisticalBarRenderer.java
 	(drawHorizontalItem): Check for null data items,
 	(drawVerticalItem): Likewise,

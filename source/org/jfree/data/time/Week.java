@@ -65,6 +65,8 @@
  * 05-Oct-2006 : Updated API docs (DG);
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
  * 09-Jan-2007 : Fixed bug in next() (DG);
+ * 28-Aug-2007 : Added new constructor to avoid problem in creating new 
+ *               instances (DG);
  *
  */
 
@@ -73,6 +75,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -156,7 +159,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      */
     public Week(Date time) {
         // defer argument checking...
-        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE);
+        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, Locale.getDefault());
     }
 
     /**
@@ -165,15 +168,35 @@ public class Week extends RegularTimePeriod implements Serializable {
      *
      * @param time  the date/time (<code>null</code> not permitted).
      * @param zone  the time zone (<code>null</code> not permitted).
+     * 
+     * @deprecated As of 1.0.7, use {@link #Week(Date, TimeZone, Locale)}.
      */
     public Week(Date time, TimeZone zone) {
+        // defer argument checking...
+        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, Locale.getDefault());
+    }
+    
+    /**
+     * Creates a time period for the week in which the specified date/time 
+     * falls, calculated relative to the specified time zone.
+     *
+     * @param time  the date/time (<code>null</code> not permitted).
+     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param locale  the locale (<code>null</code> not permitted).
+     * 
+     * @since 1.0.7
+     */
+    public Week(Date time, TimeZone zone, Locale locale) {
         if (time == null) {
             throw new IllegalArgumentException("Null 'time' argument.");   
         }
         if (zone == null) {
             throw new IllegalArgumentException("Null 'zone' argument.");   
         }
-        Calendar calendar = Calendar.getInstance(zone);
+        if (locale == null) {
+            throw new IllegalArgumentException("Null 'locale' argument.");
+        }
+        Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
 
         // sometimes the last few days of the year are considered to fall in 
@@ -197,7 +220,6 @@ public class Week extends RegularTimePeriod implements Serializable {
             this.year = (short) yyyy;
         }
         peg(calendar);
-
     }
 
     /**
@@ -522,8 +544,7 @@ public class Week extends RegularTimePeriod implements Serializable {
                     w = Week.stringToWeek(s2);
                     if (w == -1) {
                         throw new TimePeriodFormatException(
-                            "Can't evaluate the week."
-                        );
+                                "Can't evaluate the week.");
                     }
                     result = new Week(w, y);
                 }
@@ -533,23 +554,20 @@ public class Week extends RegularTimePeriod implements Serializable {
                         w = Week.stringToWeek(s1);
                         if (w == -1) {
                             throw new TimePeriodFormatException(
-                                "Can't evaluate the week."
-                            );
+                                    "Can't evaluate the week.");
                         }
                         result = new Week(w, y);
                     }
                     else {
                         throw new TimePeriodFormatException(
-                            "Can't evaluate the year."
-                        );
+                                "Can't evaluate the year.");
                     }
                 }
 
             }
             else {
                 throw new TimePeriodFormatException(
-                    "Could not find separator."
-                );
+                        "Could not find separator.");
             }
 
         }
