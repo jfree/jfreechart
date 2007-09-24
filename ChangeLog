@@ -1,5 +1,25 @@
 2007-09-24  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/renderer/category/LineAndShapeRenderer.java
+	(linesVisible): Deprecated,
+	(shapesVisible): Likewise,
+	(shapesFilled): Likewise,
+	(getLinesVisible): Likewise,
+	(setLinesVisible(Boolean)): Likewise,
+	(setLinesVisible(boolean)): Likewise,
+	(getShapesVisible): Likewise,
+	(setShapesVisible(Boolean)): Likewise,
+	(setShapesVisible(boolean)): Likewise,
+	(setUseOutlinePaint): Fire change event,
+	(getShapesFilled): Deprecated,
+	(setShapesFilled(Boolean)): Likewise,
+	(setShapesFilled(boolean)): Likewise,
+	(setSeriesShapesFilled): Fire change event,
+	(setBaseShapesFilled): Likewise,
+	(equals): Minor tidy up.
+
+2007-09-24  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/ChartPanel.java
 	(paintComponent): Clear chart buffer before refreshing.
 
