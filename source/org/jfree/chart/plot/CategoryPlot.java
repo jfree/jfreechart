@@ -149,6 +149,7 @@
  *               annotations (DG);
  * 07-Jun-2007 : Override drawBackground() for new GradientPaint handling (DG);
  * 10-Jul-2007 : Added getRangeAxisIndex(ValueAxis) method (DG);
+ * 24-Sep-2007 : Implemented new zoom methods (DG);
  * 
  */
 
@@ -217,11 +218,9 @@ import org.jfree.util.SortOrder;
  * A general plotting class that uses data from a {@link CategoryDataset} and 
  * renders each data item using a {@link CategoryItemRenderer}.
  */
-public class CategoryPlot extends Plot 
-                          implements ValueAxisPlot, 
-                                     Zoomable,
-                                     RendererChangeListener,
-                                     Cloneable, PublicCloneable, Serializable {
+public class CategoryPlot extends Plot implements ValueAxisPlot, 
+        Zoomable, RendererChangeListener, Cloneable, PublicCloneable, 
+        Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -3537691700434728188L;
@@ -240,18 +239,15 @@ public class CategoryPlot extends Plot
 
     /** The default grid line stroke. */
     public static final Stroke DEFAULT_GRIDLINE_STROKE = new BasicStroke(0.5f,
-        BasicStroke.CAP_BUTT,
-        BasicStroke.JOIN_BEVEL,
-        0.0f,
-        new float[] {2.0f, 2.0f},
-        0.0f);
+            BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0.0f, new float[] 
+            {2.0f, 2.0f}, 0.0f);
 
     /** The default grid line paint. */
     public static final Paint DEFAULT_GRIDLINE_PAINT = Color.lightGray;
 
     /** The default value label font. */
-    public static final Font DEFAULT_VALUE_LABEL_FONT 
-            = new Font("SansSerif", Font.PLAIN, 10);
+    public static final Font DEFAULT_VALUE_LABEL_FONT = new Font("SansSerif", 
+            Font.PLAIN, 10);
 
     /** 
      * The default crosshair visibility. 
@@ -277,7 +273,8 @@ public class CategoryPlot extends Plot
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources 
-        = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
+            = ResourceBundle.getBundle(
+            "org.jfree.chart.plot.LocalizationBundle");
 
     /** The plot orientation. */
     private PlotOrientation orientation;
@@ -3365,6 +3362,24 @@ public class CategoryPlot extends Plot
                                PlotRenderingInfo state, Point2D source) {
         // can't zoom domain axis
     }
+    
+    /**
+     * This method does nothing, because <code>CategoryPlot</code> doesn't 
+     * support zooming on the domain.
+     *
+     * @param factor  the zoom factor.
+     * @param info  the plot rendering info.
+     * @param source  the source point (in Java2D space).
+     * @param useAnchor  use source point as zoom anchor?
+     * 
+     * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)
+     * 
+     * @since 1.0.7
+     */
+    public void zoomDomainAxes(double factor, PlotRenderingInfo info,
+                               Point2D source, boolean useAnchor) {
+        // can't zoom domain axis
+    }
 
     /**
      * Multiplies the range on the range axis/axes by the specified factor.
@@ -3375,10 +3390,44 @@ public class CategoryPlot extends Plot
      */
     public void zoomRangeAxes(double factor, PlotRenderingInfo state, 
                               Point2D source) {
+        // delegate to other method
+        zoomRangeAxes(factor, state, source, false);    
+    }
+
+    /**
+     * Multiplies the range on the range axis/axes by the specified factor.
+     *
+     * @param factor  the zoom factor.
+     * @param info  the plot rendering info.
+     * @param source  the source point.
+     * @param useAnchor  a flag that controls whether or not the source point
+     *         is used for the zoom anchor.
+     * 
+     * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)
+     * 
+     * @since 1.0.7
+     */
+    public void zoomRangeAxes(double factor, PlotRenderingInfo info,
+                              Point2D source, boolean useAnchor) {
+                
+        // perform the zoom on each range axis
         for (int i = 0; i < this.rangeAxes.size(); i++) {
             ValueAxis rangeAxis = (ValueAxis) this.rangeAxes.get(i);
             if (rangeAxis != null) {
-                rangeAxis.resizeRange(factor);
+                if (useAnchor) {
+                    // get the relevant source coordinate given the plot 
+                    // orientation
+                    double sourceY = source.getY();
+                    if (this.orientation == PlotOrientation.HORIZONTAL) {
+                        sourceY = source.getX();
+                    }
+                    double anchorY = rangeAxis.java2DToValue(sourceY, 
+                            info.getDataArea(), getRangeAxisEdge());
+                    rangeAxis.resizeRange(factor, anchorY);
+                }
+                else {
+                    rangeAxis.resizeRange(factor);
+                }
             }
         }
     }

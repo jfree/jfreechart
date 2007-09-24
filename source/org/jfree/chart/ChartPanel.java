@@ -134,6 +134,7 @@
  * 24-May-2007 : When the look-and-feel changes, update the popup menu if there 
  *               is one (DG);
  * 06-Jun-2007 : Fixed coordinates for drawing buffer image (DG);
+ * 24-Sep-2007 : Added zoomAroundAnchor flag (DG);
  *               
  */
 
@@ -422,6 +423,14 @@ public class ChartPanel extends JPanel
     /** The factor used to zoom out on an axis range. */
     private double zoomOutFactor = 2.0;
     
+    /**
+     * A flag that controls whether zoom operations are centred on the
+     * current anchor point, or the centre point of the relevant axis.
+     *
+     * @since 1.0.7
+     */
+    private boolean zoomAroundAnchor;
+    
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources 
         = ResourceBundle.getBundle("org.jfree.chart.LocalizationBundle");
@@ -587,6 +596,7 @@ public class ChartPanel extends JPanel
         this.ownToolTipDismissDelay = ttm.getDismissDelay();
         this.ownToolTipReshowDelay = ttm.getReshowDelay();
 
+        this.zoomAroundAnchor = false;
     }
 
     /**
@@ -1018,6 +1028,34 @@ public class ChartPanel extends JPanel
     public void setEnforceFileExtensions(boolean enforce) {
         this.enforceFileExtensions = enforce;
     }
+    
+    /**
+     * Returns the flag that controls whether or not zoom operations are 
+     * centered around the current anchor point.
+     * 
+     * @return A boolean.
+     * 
+     * @since 1.0.7
+     * 
+     * @see #setZoomAroundAnchor(boolean)
+     */
+    public boolean getZoomAroundAnchor() {
+        return this.zoomAroundAnchor;
+    }
+    
+    /**
+     * Sets the flag that controls whether or not zoom operations are
+     * centered around the current anchor point.
+     * 
+     * @param zoomAroundAnchor  the new flag value.
+     * 
+     * @since 1.0.7
+     * 
+     * @see #getZoomAroundAnchor()
+     */
+    public void setZoomAroundAnchor(boolean zoomAroundAnchor) {
+        this.zoomAroundAnchor = zoomAroundAnchor;
+    }
 
     /**
      * Switches the display of tooltips for the panel on or off.  Note that 
@@ -1077,9 +1115,10 @@ public class ChartPanel extends JPanel
     }
 
     /**
-     * Translates a screen location to a Java2D point.
+     * Translates a panel (component) location to a Java2D point.
      *
-     * @param screenPoint  the screen location.
+     * @param screenPoint  the screen location (<code>null</code> not 
+     *                     permitted).
      *
      * @return The Java2D coordinates.
      */
@@ -1711,7 +1750,8 @@ public class ChartPanel extends JPanel
         if (p instanceof Zoomable) {
             Zoomable plot = (Zoomable) p;
             plot.zoomDomainAxes(this.zoomInFactor, this.info.getPlotInfo(), 
-                    translateScreenToJava2D(new Point((int) x, (int) y)));
+                    translateScreenToJava2D(new Point((int) x, (int) y)),
+                    this.zoomAroundAnchor);
         }
     }
 
@@ -1728,7 +1768,8 @@ public class ChartPanel extends JPanel
         if (p instanceof Zoomable) {
             Zoomable z = (Zoomable) p;
             z.zoomRangeAxes(this.zoomInFactor, this.info.getPlotInfo(), 
-                    translateScreenToJava2D(new Point((int) x, (int) y)));
+                    translateScreenToJava2D(new Point((int) x, (int) y)), 
+                    this.zoomAroundAnchor);
         }
     }
 
@@ -1756,7 +1797,8 @@ public class ChartPanel extends JPanel
         if (p instanceof Zoomable) {
             Zoomable z = (Zoomable) p;
             z.zoomDomainAxes(this.zoomOutFactor, this.info.getPlotInfo(), 
-                    translateScreenToJava2D(new Point((int) x, (int) y)));
+                    translateScreenToJava2D(new Point((int) x, (int) y)),
+                    this.zoomAroundAnchor);
         }
     }
 
@@ -1773,7 +1815,8 @@ public class ChartPanel extends JPanel
         if (p instanceof Zoomable) {
             Zoomable z = (Zoomable) p;
             z.zoomRangeAxes(this.zoomOutFactor, this.info.getPlotInfo(), 
-                    translateScreenToJava2D(new Point((int) x, (int) y)));
+                    translateScreenToJava2D(new Point((int) x, (int) y)),
+                    this.zoomAroundAnchor);
         }
     }
 

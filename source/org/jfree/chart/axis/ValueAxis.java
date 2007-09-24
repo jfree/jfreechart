@@ -1485,6 +1485,8 @@ public abstract class ValueAxis extends Axis
      * To halve the length of the axis range, use 50% (0.5).
      *
      * @param percent  the resize factor.
+     * 
+     * @see #resizeRange(double, double)
      */
     public void resizeRange(double percent) {
         resizeRange(percent, this.range.getCentralValue());
@@ -1500,6 +1502,8 @@ public abstract class ValueAxis extends Axis
      *
      * @param percent  the resize factor.
      * @param anchorValue  the new central value after the resize.
+     * 
+     * @see #resizeRange(double)
      */
     public void resizeRange(double percent, double anchorValue) {
         if (percent > 0.0) {

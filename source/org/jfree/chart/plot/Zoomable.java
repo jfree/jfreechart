@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,7 +28,7 @@
  * Zoomable.java
  * -------------
  *
- * (C) Copyright 2004, 2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Rune Fauske;
@@ -38,6 +38,9 @@
  * 12-Nov-2004 : Version 1 (DG);
  * 26-Jan-2004 : Added getOrientation() method (DG);
  * 04-Sep-2006 : Added credit for Rune Fauske, see patch 1050659 (DG);
+ * 21-Sep-2007 : Added new zooming methods with 'useAnchor' flag.  This breaks
+ *               the API, but is the cleanest way I can think of to fix a 
+ *               long-standing bug (DG);
  *
  */
 
@@ -58,6 +61,8 @@ public interface Zoomable {
      * <code>false</code> otherwise.
      * 
      * @return A boolean.
+     * 
+     * @see #isRangeZoomable()
      */
     public boolean isDomainZoomable();
     
@@ -66,6 +71,8 @@ public interface Zoomable {
      * <code>false</code> otherwise.
      * 
      * @return A boolean.
+     * 
+     * @see #isDomainZoomable()
      */
     public boolean isRangeZoomable();
 
@@ -78,42 +85,94 @@ public interface Zoomable {
     
     /**
      * Multiplies the range on the domain axis/axes by the specified factor.
+     * The <code>source</code> point can be used in some cases to identify a 
+     * subplot, or to determine the center of zooming (refer to the 
+     * documentation of the implementing class for details).
      *
      * @param factor  the zoom factor.
      * @param state  the plot state.
      * @param source  the source point (in Java2D coordinates).
+     * 
+     * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D)
      */
     public void zoomDomainAxes(double factor, PlotRenderingInfo state, 
                                Point2D source);
 
     /**
-     * Zooms in on the domain axes.
+     * Multiplies the range on the domain axis/axes by the specified factor.
+     * The <code>source</code> point can be used in some cases to identify a 
+     * subplot, or to determine the center of zooming (refer to the 
+     * documentation of the implementing class for details).
+     *
+     * @param factor  the zoom factor.
+     * @param state  the plot state.
+     * @param source  the source point (in Java2D coordinates).
+     * @param useAnchor  use source point as zoom anchor?
+     * 
+     * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)
+     * 
+     * @since 1.0.7
+     */
+    public void zoomDomainAxes(double factor, PlotRenderingInfo state, 
+                               Point2D source, boolean useAnchor);
+
+    /**
+     * Zooms in on the domain axes.  The <code>source</code> point can be used 
+     * in some cases to identify a subplot for zooming.
      * 
      * @param lowerPercent  the new lower bound.
      * @param upperPercent  the new upper bound.
      * @param state  the plot state.
      * @param source  the source point (in Java2D coordinates).
+     * 
+     * @see #zoomRangeAxes(double, double, PlotRenderingInfo, Point2D)
      */
     public void zoomDomainAxes(double lowerPercent, double upperPercent, 
                                PlotRenderingInfo state, Point2D source);
 
     /**
      * Multiplies the range on the range axis/axes by the specified factor.
+     * The <code>source</code> point can be used in some cases to identify a 
+     * subplot, or to determine the center of zooming (refer to the 
+     * documentation of the implementing class for details).
      *
      * @param factor  the zoom factor.
      * @param state  the plot state.
      * @param source  the source point (in Java2D coordinates).
+     * 
+     * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D)
      */
     public void zoomRangeAxes(double factor, PlotRenderingInfo state, 
                               Point2D source);
 
     /**
-     * Zooms in on the range axes.
+     * Multiplies the range on the range axis/axes by the specified factor.
+     * The <code>source</code> point can be used in some cases to identify a 
+     * subplot, or to determine the center of zooming (refer to the 
+     * documentation of the implementing class for details).
+     *
+     * @param factor  the zoom factor.
+     * @param state  the plot state.
+     * @param source  the source point (in Java2D coordinates).
+     * @param useAnchor  use source point as zoom anchor?
+     * 
+     * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D)
+     * 
+     * @since 1.0.7
+     */
+    public void zoomRangeAxes(double factor, PlotRenderingInfo state, 
+                              Point2D source, boolean useAnchor);
+    
+    /**
+     * Zooms in on the range axes.  The <code>source</code> point can be used 
+     * in some cases to identify a subplot for zooming.
      * 
      * @param lowerPercent  the new lower bound.
      * @param upperPercent  the new upper bound.
      * @param state  the plot state.
      * @param source  the source point (in Java2D coordinates).
+     * 
+     * @see #zoomDomainAxes(double, double, PlotRenderingInfo, Point2D)
      */
     public void zoomRangeAxes(double lowerPercent, double upperPercent, 
                               PlotRenderingInfo state, Point2D source);
