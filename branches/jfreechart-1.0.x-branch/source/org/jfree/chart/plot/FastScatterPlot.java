@@ -56,6 +56,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 10-Nov-2006 : Fixed bug 1593150, by not allowing null axes, and added
  *               setDomainAxis() and setRangeAxis() methods (DG);
+ * 24-Sep-2007 : Implemented new zooming methods (DG);
  *
  */
 
@@ -98,19 +99,15 @@ import org.jfree.util.PaintUtilities;
  * A fast scatter plot.
  */
 public class FastScatterPlot extends Plot implements ValueAxisPlot, 
-                                                     Zoomable, 
-                                                     Cloneable, Serializable {
+        Zoomable, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7871545897358563521L;
     
     /** The default grid line stroke. */
     public static final Stroke DEFAULT_GRIDLINE_STROKE = new BasicStroke(0.5f,
-            BasicStroke.CAP_BUTT,
-            BasicStroke.JOIN_BEVEL,
-            0.0f,
-            new float[] {2.0f, 2.0f},
-            0.0f);
+            BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0.0f, new float[] 
+            {2.0f, 2.0f}, 0.0f);
 
     /** The default grid line paint. */
     public static final Paint DEFAULT_GRIDLINE_PAINT = Color.lightGray;
@@ -153,7 +150,8 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources = 
-        ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
+            ResourceBundle.getBundle(
+            "org.jfree.chart.plot.LocalizationBundle");
 
     /**
      * Creates a new instance of <code>FastScatterPlot</code> with default 
@@ -752,7 +750,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Multiplies the range on the domain axis/axes by the specified factor.
+     * Multiplies the range on the domain axis by the specified factor.
      *
      * @param factor  the zoom factor.
      * @param info  the plot rendering info.
@@ -761,6 +759,35 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     public void zoomDomainAxes(double factor, PlotRenderingInfo info, 
                                Point2D source) {
         this.domainAxis.resizeRange(factor);
+    }
+    
+    /**
+     * Multiplies the range on the domain axis by the specified factor.
+     *
+     * @param factor  the zoom factor.
+     * @param info  the plot rendering info.
+     * @param source  the source point (in Java2D space).
+     * @param useAnchor  use source point as zoom anchor?
+     * 
+     * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)
+     * 
+     * @since 1.0.7
+     */
+    public void zoomDomainAxes(double factor, PlotRenderingInfo info,
+                               Point2D source, boolean useAnchor) {
+                
+        if (useAnchor) {
+            // get the source coordinate - this plot has always a VERTICAL
+            // orientation
+            double sourceX = source.getX();
+            double anchorX = this.domainAxis.java2DToValue(sourceX, 
+                    info.getDataArea(), RectangleEdge.BOTTOM);
+            this.domainAxis.resizeRange(factor, anchorX);
+        }
+        else {
+            this.domainAxis.resizeRange(factor);
+        }
+        
     }
 
     /**
@@ -790,6 +817,35 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
         this.rangeAxis.resizeRange(factor);
     }
 
+    /**
+     * Multiplies the range on the range axis by the specified factor.
+     *
+     * @param factor  the zoom factor.
+     * @param info  the plot rendering info.
+     * @param source  the source point (in Java2D space).
+     * @param useAnchor  use source point as zoom anchor?
+     * 
+     * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)
+     * 
+     * @since 1.0.7
+     */
+    public void zoomRangeAxes(double factor, PlotRenderingInfo info,
+                              Point2D source, boolean useAnchor) {
+                
+        if (useAnchor) {
+            // get the source coordinate - this plot has always a VERTICAL
+            // orientation
+            double sourceX = source.getX();
+            double anchorX = this.rangeAxis.java2DToValue(sourceX, 
+                    info.getDataArea(), RectangleEdge.LEFT);
+            this.rangeAxis.resizeRange(factor, anchorX);
+        }
+        else {
+            this.rangeAxis.resizeRange(factor);
+        }
+        
+    }
+    
     /**
      * Zooms in on the range axes.
      * 

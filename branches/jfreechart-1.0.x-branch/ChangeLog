@@ -1,3 +1,36 @@
+2007-09-24  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/ChartPanel.java
+	(zoomAroundAnchor): New field,
+	(getZoomAroundAnchor): New method,
+	(setZoomAroundAnchor): Likewise,
+	(zoomInDomain): Use zoomAroundAnchor flag,
+	(zoomInRange): Likewise,
+	(zoomOutDomain): Likewise,
+	(zoomOutRange): Likewise,
+	* source/org/jfree/chart/plot/CategoryPlot.java
+	(zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
+	(zoomRangeAxes(double, PlotRenderingInfo, Point2D)): Delegate to new method,
+	(zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
+	* source/org/jfree/chart/plot/FastScatterPlot.java
+	(zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
+	(zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): Likewise,
+	* source/org/jfree/chart/PolarPlot.java
+	(zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
+	(zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): Likewise,
+	* source/org/jfree/chart/ThermometerPlot.java
+	(zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
+	(zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): Likewise,
+	* source/org/jfree/chart/XYPlot.java
+	(zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
+	(zoomDomainAxes(double, PlotRenderingInfo, Point2D)): Delegate to new 
+	method,
+	(zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
+	(zoomRangeAxes(double, PlotRenderingInfo, Point2D)): Delegate to new method,
+	* source/org/jfree/chart/plot/Zoomable.java
+	(zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
+	(zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): Likewise.	
+
 2007-09-21  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/data/statistics/SimpleHistogramDataset.java: 

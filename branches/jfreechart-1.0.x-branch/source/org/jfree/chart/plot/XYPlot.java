@@ -187,6 +187,7 @@
  * 24-May-2007 : Fixed bug in render method for an empty series (DG);
  * 07-Jun-2007 : Modified drawBackground() to pass orientation to 
  *               fillBackground() for handling GradientPaint (DG);
+ * 24-Sep-2007 : Added new zoom methods (DG);
  *
  */
 
@@ -4172,14 +4173,49 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      *
      * @param factor  the zoom factor.
      * @param info  the plot rendering info.
-     * @param source  the source point.
+     * @param source  the source point (in Java2D space).
+     * 
+     * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D)
      */
     public void zoomDomainAxes(double factor, PlotRenderingInfo info,
                                Point2D source) {
+        // delegate to other method
+        zoomDomainAxes(factor, info, source, false);
+    }
+
+    /**
+     * Multiplies the range on the domain axis/axes by the specified factor.
+     *
+     * @param factor  the zoom factor.
+     * @param info  the plot rendering info.
+     * @param source  the source point (in Java2D space).
+     * @param useAnchor  use source point as zoom anchor?
+     * 
+     * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)
+     * 
+     * @since 1.0.7
+     */
+    public void zoomDomainAxes(double factor, PlotRenderingInfo info,
+                               Point2D source, boolean useAnchor) {
+                
+        // perform the zoom on each domain axis
         for (int i = 0; i < this.domainAxes.size(); i++) {
             ValueAxis domainAxis = (ValueAxis) this.domainAxes.get(i);
             if (domainAxis != null) {
-                domainAxis.resizeRange(factor);
+                if (useAnchor) {
+                    // get the relevant source coordinate given the plot 
+                    // orientation
+                    double sourceX = source.getX();
+                    if (this.orientation == PlotOrientation.HORIZONTAL) {
+                        sourceX = source.getY();
+                    }
+                    double anchorX = domainAxis.java2DToValue(sourceX, 
+                            info.getDataArea(), getDomainAxisEdge());
+                    domainAxis.resizeRange(factor, anchorX);
+                }
+                else {
+                    domainAxis.resizeRange(factor);
+                }
             }
         }
     }
@@ -4194,7 +4230,9 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      * @param upperPercent  a percentage that determines the new upper bound
      *                      for the axis (e.g. 0.80 is eighty percent).
      * @param info  the plot rendering info.
-     * @param source  the source point.
+     * @param source  the source point (ignored).
+     * 
+     * @see #zoomRangeAxes(double, double, PlotRenderingInfo, Point2D)
      */
     public void zoomDomainAxes(double lowerPercent, double upperPercent,
                                PlotRenderingInfo info, Point2D source) {
@@ -4212,13 +4250,49 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      * @param factor  the zoom factor.
      * @param info  the plot rendering info.
      * @param source  the source point.
+     * 
+     * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)
      */
     public void zoomRangeAxes(double factor, PlotRenderingInfo info,
                               Point2D source) {
+        // delegate to other method
+        zoomRangeAxes(factor, info, source, false);    
+    }
+    
+    /**
+     * Multiplies the range on the range axis/axes by the specified factor.
+     *
+     * @param factor  the zoom factor.
+     * @param info  the plot rendering info.
+     * @param source  the source point.
+     * @param useAnchor  a flag that controls whether or not the source point
+     *         is used for the zoom anchor.
+     * 
+     * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)
+     * 
+     * @since 1.0.7
+     */
+    public void zoomRangeAxes(double factor, PlotRenderingInfo info,
+                              Point2D source, boolean useAnchor) {
+                
+        // perform the zoom on each range axis
         for (int i = 0; i < this.rangeAxes.size(); i++) {
             ValueAxis rangeAxis = (ValueAxis) this.rangeAxes.get(i);
             if (rangeAxis != null) {
-                rangeAxis.resizeRange(factor);
+                if (useAnchor) {
+                    // get the relevant source coordinate given the plot 
+                    // orientation
+                    double sourceY = source.getY();
+                    if (this.orientation == PlotOrientation.HORIZONTAL) {
+                        sourceY = source.getX();
+                    }
+                    double anchorY = rangeAxis.java2DToValue(sourceY, 
+                            info.getDataArea(), getRangeAxisEdge());
+                    rangeAxis.resizeRange(factor, anchorY);
+                }
+                else {
+                    rangeAxis.resizeRange(factor);
+                }
             }
         }
     }
@@ -4230,6 +4304,8 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      * @param upperPercent  the upper bound.
      * @param info  the plot rendering info.
      * @param source  the source point.
+     * 
+     * @see #zoomDomainAxes(double, double, PlotRenderingInfo, Point2D)
      */
     public void zoomRangeAxes(double lowerPercent, double upperPercent,
                               PlotRenderingInfo info, Point2D source) {
@@ -4356,9 +4432,6 @@ public class XYPlot extends Plot implements ValueAxisPlot,
             return true;
         }
         if (!(obj instanceof XYPlot)) {
-            return false;
-        }
-        if (!super.equals(obj))  {
             return false;
         }
 
@@ -4519,7 +4592,7 @@ public class XYPlot extends Plot implements ValueAxisPlot,
                 return false;
             }
         }
-        return true;
+        return super.equals(obj);
     }
 
     /**
@@ -4543,8 +4616,8 @@ public class XYPlot extends Plot implements ValueAxisPlot,
                 clonedAxis.addChangeListener(clone);
             }
         }
-        clone.domainAxisLocations
-            = (ObjectList) this.domainAxisLocations.clone();
+        clone.domainAxisLocations = (ObjectList) 
+                this.domainAxisLocations.clone();
 
         clone.rangeAxes = (ObjectList) ObjectUtilities.clone(this.rangeAxes);
         for (int i = 0; i < this.rangeAxes.size(); i++) {
@@ -4556,8 +4629,8 @@ public class XYPlot extends Plot implements ValueAxisPlot,
                 clonedAxis.addChangeListener(clone);
             }
         }
-        clone.rangeAxisLocations
-            = (ObjectList) ObjectUtilities.clone(this.rangeAxisLocations);
+        clone.rangeAxisLocations = (ObjectList) ObjectUtilities.clone(
+                this.rangeAxisLocations);
 
         // the datasets are not cloned, but listeners need to be added...
         clone.datasets = (ObjectList) ObjectUtilities.clone(this.datasets);

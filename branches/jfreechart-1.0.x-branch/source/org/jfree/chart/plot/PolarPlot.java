@@ -44,6 +44,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 07-Feb-2007 : Fixed bug 1599761, data value less than axis minimum (DG);
  * 21-Mar-2007 : Fixed serialization bug (DG);
+ * 24-Sep-2007 : Implemented new zooming methods (DG);
  *
  */
 
@@ -98,11 +99,8 @@ import org.jfree.util.PaintUtilities;
  * Plots data that is in (theta, radius) pairs where
  * theta equal to zero is due north and increases clockwise.
  */
-public class PolarPlot extends Plot implements ValueAxisPlot, 
-                                               Zoomable,
-                                               RendererChangeListener, 
-                                               Cloneable, 
-                                               Serializable {
+public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
+        RendererChangeListener, Cloneable, Serializable {
    
     /** For serialization. */
     private static final long serialVersionUID = 3794383185924179525L;
@@ -1087,6 +1085,22 @@ public class PolarPlot extends Plot implements ValueAxisPlot,
     /**
      * This method is required by the {@link Zoomable} interface, but since
      * the plot does not have any domain axes, it does nothing.
+     *
+     * @param factor  the zoom factor.
+     * @param state  the plot state.
+     * @param source  the source point (in Java2D coordinates).
+     * @param useAnchor  use source point as zoom anchor?
+     * 
+     * @since 1.0.7
+     */
+    public void zoomDomainAxes(double factor, PlotRenderingInfo state, 
+                               Point2D source, boolean useAnchor) {
+        // do nothing
+    }
+   
+    /**
+     * This method is required by the {@link Zoomable} interface, but since
+     * the plot does not have any domain axes, it does nothing.
      * 
      * @param lowerPercent  the new lower bound.
      * @param upperPercent  the new upper bound.
@@ -1097,7 +1111,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot,
                                PlotRenderingInfo state, Point2D source) {
         // do nothing
     }
-   
+
     /**
      * Multiplies the range on the range axis/axes by the specified factor.
      *
@@ -1110,6 +1124,35 @@ public class PolarPlot extends Plot implements ValueAxisPlot,
         zoom(factor);
     }
    
+    /**
+     * Multiplies the range on the range axis by the specified factor.
+     *
+     * @param factor  the zoom factor.
+     * @param info  the plot rendering info.
+     * @param source  the source point (in Java2D space).
+     * @param useAnchor  use source point as zoom anchor?
+     * 
+     * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)
+     * 
+     * @since 1.0.7
+     */
+    public void zoomRangeAxes(double factor, PlotRenderingInfo info,
+                              Point2D source, boolean useAnchor) {
+                
+        if (useAnchor) {
+            // get the source coordinate - this plot has always a VERTICAL
+            // orientation
+            double sourceX = source.getX();
+            double anchorX = this.axis.java2DToValue(sourceX, 
+                    info.getDataArea(), RectangleEdge.BOTTOM);
+            this.axis.resizeRange(factor, anchorX);
+        }
+        else {
+            axis.resizeRange(factor);
+        }
+        
+    }
+    
     /**
      * Zooms in on the range axes.
      * 
