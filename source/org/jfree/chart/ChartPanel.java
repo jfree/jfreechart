@@ -134,7 +134,8 @@
  * 24-May-2007 : When the look-and-feel changes, update the popup menu if there 
  *               is one (DG);
  * 06-Jun-2007 : Fixed coordinates for drawing buffer image (DG);
- * 24-Sep-2007 : Added zoomAroundAnchor flag (DG);
+ * 24-Sep-2007 : Added zoomAroundAnchor flag, and handle clearing of chart
+ *               buffer (DG);
  *               
  */
 
@@ -1249,20 +1250,24 @@ public class ChartPanel extends JPanel
         // are we using the chart buffer?
         if (this.useBuffer) {
 
+            // if buffer is being refreshed, it needs clearing unless it is
+            // new - use the following flag to track this...
+            boolean clearBuffer = true;
+            
             // do we need to resize the buffer?
             if ((this.chartBuffer == null) 
                     || (this.chartBufferWidth != available.getWidth())
-                    || (this.chartBufferHeight != available.getHeight())
-            ) {
+                    || (this.chartBufferHeight != available.getHeight())) {
                 this.chartBufferWidth = (int) available.getWidth();
                 this.chartBufferHeight = (int) available.getHeight();
-                this.chartBuffer = createImage(
-                        this.chartBufferWidth, this.chartBufferHeight);
+                this.chartBuffer = createImage(this.chartBufferWidth, 
+                        this.chartBufferHeight);
 //                GraphicsConfiguration gc = g2.getDeviceConfiguration();
 //                this.chartBuffer = gc.createCompatibleImage(
 //                        this.chartBufferWidth, this.chartBufferHeight, 
 //                        Transparency.TRANSLUCENT);
                 this.refreshBuffer = true;
+                clearBuffer = false;  // buffer is new, no clearing required
             }
 
             // do we need to redraw the buffer?
@@ -1271,8 +1276,12 @@ public class ChartPanel extends JPanel
                 Rectangle2D bufferArea = new Rectangle2D.Double(
                         0, 0, this.chartBufferWidth, this.chartBufferHeight);
 
-                Graphics2D bufferG2 
-                    = (Graphics2D) this.chartBuffer.getGraphics();
+                Graphics2D bufferG2 = (Graphics2D) 
+                        this.chartBuffer.getGraphics();
+                if (clearBuffer) {
+                    bufferG2.clearRect(0, 0, this.chartBufferWidth, 
+                            this.chartBufferHeight);
+                }
                 if (scale) {
                     AffineTransform saved = bufferG2.getTransform();
                     AffineTransform st = AffineTransform.getScaleInstance(
