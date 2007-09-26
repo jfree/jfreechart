@@ -142,7 +142,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
      * @param dataset  the dataset (a {@link StatisticalCategoryDataset} is
-     *   required).
+     *                 required).
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      * @param pass  the pass.
@@ -166,7 +166,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         // nothing is drawn for null...
         Number v = dataset.getValue(row, column);
         if (v == null) {
-          return;
+            return;
         }
 
         // if the dataset is not a StatisticalCategoryDataset then just revert
@@ -306,12 +306,12 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         // draw the item label if there is one...
         if (isItemLabelVisible(row, column)) {
             if (orientation == PlotOrientation.HORIZONTAL) {
-              drawItemLabel(g2, orientation, dataset, row, column,
-                  y1, x1, (meanValue.doubleValue() < 0.0));
+                drawItemLabel(g2, orientation, dataset, row, column,
+                        y1, x1, (meanValue.doubleValue() < 0.0));
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-              drawItemLabel(g2, orientation, dataset, row, column,
-                  x1, y1, (meanValue.doubleValue() < 0.0));
+                drawItemLabel(g2, orientation, dataset, row, column,
+                        x1, y1, (meanValue.doubleValue() < 0.0));
             }
         }
 
@@ -385,7 +385,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
     private void readObject(ObjectInputStream stream)
-        throws IOException, ClassNotFoundException {
+            throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.errorIndicatorPaint = SerialUtilities.readPaint(stream);
     }
