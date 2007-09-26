@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * ValueMarkerTests.java
  * ---------------------
- * (C) Copyright 2003-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  * 14-Jun-2004 : Renamed MarkerTests --> ValueMarkerTests (DG);
  * 01-Jun-2005 : Strengthened equals() test (DG);
  * 05-Sep-2006 : Added checks for MarkerChangeEvent generation (DG);
+ * 26-Sep-2007 : Added test1802195() method (DG);
  *
  */
 
@@ -243,6 +244,42 @@ public class ValueMarkerTests
 
     public void markerChanged(MarkerChangeEvent event) {
         this.lastEvent = event;
+    }
+
+    /**
+     * A test for bug 1802195.
+     */
+    public void test1802195() {
+
+        ValueMarker m1 = new ValueMarker(25.0);
+        ValueMarker m2 = null;
+
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            ObjectOutput out = new ObjectOutputStream(buffer);
+            out.writeObject(m1);
+            out.close();
+
+            ObjectInput in = new ObjectInputStream(
+                    new ByteArrayInputStream(buffer.toByteArray()));
+            m2 = (ValueMarker) in.readObject();
+            in.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        boolean b = m1.equals(m2);
+        assertTrue(b);
+
+        boolean pass = true;
+        try {
+            m2.setValue(-10.0);
+        }
+        catch (NullPointerException e) {
+            pass = false;
+        }
+        assertTrue(pass);
+
     }
 
 }
