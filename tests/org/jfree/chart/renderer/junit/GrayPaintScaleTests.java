@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * GrayPaintScaleTests.java
  * ------------------------
- * (C) Copyright 2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,11 +37,13 @@
  * Changes
  * -------
  * 05-Jul-2006 : Version 1 (DG);
+ * 26-Sep-2007 : Added testConstructor() and testGetPaint() (DG);
  *
  */
 
 package org.jfree.chart.renderer.junit;
 
+import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -49,11 +51,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
-import org.jfree.chart.renderer.GrayPaintScale;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.jfree.chart.renderer.GrayPaintScale;
 
 
 /**
@@ -77,6 +79,35 @@ public class GrayPaintScaleTests extends TestCase {
      */
     public GrayPaintScaleTests(String name) {
         super(name);
+    }
+    
+    private static final double EPSILON = 0.000000001;
+    
+    /** 
+     * Simple check for the default constructor.
+     */
+    public void testConstructor() {
+        GrayPaintScale gps = new GrayPaintScale();
+        assertEquals(0.0, gps.getLowerBound(), EPSILON);
+        assertEquals(1.0, gps.getUpperBound(), EPSILON);
+    }
+    
+    /**
+     * Some checks for the getPaint() method.
+     */
+    public void testGetPaint() {
+        GrayPaintScale gps = new GrayPaintScale();
+        Color c = (Color) gps.getPaint(0.0);
+        assertTrue(c.equals(Color.black));
+        c = (Color) gps.getPaint(1.0);
+        assertTrue(c.equals(Color.white));
+        
+        // check lookup values that are outside the bounds - see bug report
+        // 1767315
+        c = (Color) gps.getPaint(-0.5);
+        assertTrue(c.equals(Color.black));
+        c = (Color) gps.getPaint(1.5);
+        assertTrue(c.equals(Color.white));
     }
     
     /**
