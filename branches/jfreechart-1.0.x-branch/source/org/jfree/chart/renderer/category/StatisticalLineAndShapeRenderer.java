@@ -39,7 +39,7 @@
  * 01-Feb-2005 : Version 1, contributed by Mofeed Shahin (DG);
  * 16-Jun-2005 : Added errorIndicatorPaint to be consistent with
  *               StatisticalBarRenderer (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 11-Apr-2006 : Fixed bug 1468794, error bars drawn incorrectly when rendering
  *               plots with horizontal orientation (DG);
  * 25-Sep-2006 : Fixed bug 1562759, constructor ignoring arguments (DG);
@@ -64,10 +64,8 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.entity.CategoryItemEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
-import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
@@ -116,6 +114,8 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      *
      * @return The paint used for the error indicators (possibly
      *         <code>null</code>).
+     *         
+     * @see #setErrorIndicatorPaint(Paint)
      */
     public Paint getErrorIndicatorPaint() {
         return this.errorIndicatorPaint;
@@ -123,9 +123,12 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
 
     /**
      * Sets the paint used for the error indicators (if <code>null</code>,
-     * the item outline paint is used instead)
+     * the item outline paint is used instead) and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> permitted).
+     * 
+     * @see #getErrorIndicatorPaint()
      */
     public void setErrorIndicatorPaint(Paint paint) {
         this.errorIndicatorPaint = paint;
@@ -315,28 +318,10 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
             }
         }
 
-        // collect entity and tool tip information...
-        if (state.getInfo() != null) {
-            EntityCollection entities = state.getEntityCollection();
-            if (entities != null && shape != null) {
-                String tip = null;
-                CategoryToolTipGenerator tipster = getToolTipGenerator(row,
-                        column);
-                if (tipster != null) {
-                    tip = tipster.generateToolTip(dataset, row, column);
-                }
-                String url = null;
-                if (getItemURLGenerator(row, column) != null) {
-                    url = getItemURLGenerator(row, column).generateURL(
-                            dataset, row, column);
-                }
-                CategoryItemEntity entity = new CategoryItemEntity(shape, tip,
-                        url, dataset, dataset.getRowKey(row),
-                        dataset.getColumnKey(column));
-                entities.add(entity);
-
-            }
-
+        // add an item entity, if this information is being collected
+        EntityCollection entities = state.getEntityCollection();
+        if (entities != null && shape != null) {
+            addItemEntity(entities, dataset, row, column, shape);
         }
 
     }
