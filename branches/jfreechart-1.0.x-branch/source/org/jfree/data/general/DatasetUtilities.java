@@ -592,20 +592,14 @@ public final class DatasetUtilities {
      * @return A boolean.
      */
     public static boolean isEmptyOrNull(XYDataset dataset) {
-
-        boolean result = true;
-
         if (dataset != null) {
             for (int s = 0; s < dataset.getSeriesCount(); s++) {
                 if (dataset.getItemCount(s) > 0) {
-                    result = false;
-                    continue;
+                    return false;
                 }
             }
         }
-
-        return result;
-
+        return true;
     }
 
     /**

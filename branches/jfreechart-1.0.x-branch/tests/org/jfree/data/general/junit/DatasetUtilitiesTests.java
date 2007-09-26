@@ -41,7 +41,8 @@
  * 04-Oct-2004 : Eliminated NumberUtils usage (DG);
  * 07-Jan-2005 : Updated for method name changes (DG);
  * 03-Feb-2005 : Added testFindStackedRangeBounds2() method (DG);
- *
+ * 26-Sep-2007 : Added testIsEmptyOrNullXYDataset() method (DG);
+ * 
  */
 
 package org.jfree.data.general.junit;
@@ -50,7 +51,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.jfree.data.DomainOrder;
 import org.jfree.data.KeyToGroupMap;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
@@ -59,7 +59,6 @@ import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.xy.DefaultTableXYDataset;
-import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
@@ -406,6 +405,23 @@ public class DatasetUtilitiesTests extends TestCase {
         Range r = DatasetUtilities.findStackedRangeBounds(d, map);
         assertEquals(0.0, r.getLowerBound(), EPSILON);
         assertEquals(9.0, r.getUpperBound(), EPSILON);        
+    }
+    
+    /**
+     * Some checks for the isEmptyOrNull(XYDataset) method.
+     */
+    public void testIsEmptyOrNullXYDataset() {
+        XYSeriesCollection dataset = null;
+        assertTrue(DatasetUtilities.isEmptyOrNull(dataset));
+        dataset = new XYSeriesCollection();
+        assertTrue(DatasetUtilities.isEmptyOrNull(dataset));
+        XYSeries s1 = new XYSeries("S1");
+        dataset.addSeries(s1);
+        assertTrue(DatasetUtilities.isEmptyOrNull(dataset));
+        s1.add(1.0, 2.0);
+        assertFalse(DatasetUtilities.isEmptyOrNull(dataset));
+        s1.clear();
+        assertTrue(DatasetUtilities.isEmptyOrNull(dataset));
     }
     
     /**

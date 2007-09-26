@@ -1,5 +1,13 @@
 2007-09-26  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/plot/PlotUtilities.java: New class,
+	* source/org/jfree/data/general/DatasetUtilities.java
+	(isEmptyOrNull(XYDataset)): Return early if not empty,
+	* tests/org/jfree/data/general/junit/DatasetUtilitiesTests.java
+	(testIsEmptyOrNullXYDataset): New test method.
+
+2007-09-26  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/data/general/Series.java
 	(getItemCount): New abstract method,
 	(isEmpty): New method.
