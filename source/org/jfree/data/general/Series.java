@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Series.java
  * -----------
- * (C) Copyright 2001-2006, by Object Refinery Limited.
+ * (C) Copyright 2001-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,8 +48,9 @@
  * 15-Oct-2003 : Added a flag to control whether or not change events are sent 
  *               to registered listeners (DG);
  * 19-May-2005 : Made abstract (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 04-May-2006 : Updated API docs (DG);
+ * 26-Sep-2007 : Added isEmpty() and getItemCount() methods (DG);
  * 
  */
 
@@ -199,6 +200,25 @@ public abstract class Series implements Cloneable, Serializable {
             fireSeriesChanged();
         }
     }
+    
+    /**
+     * Returns <code>true</code> if the series contains no data items, and
+     * <code>false</code> otherwise.
+     * 
+     * @return A boolean.
+     * 
+     * @since 1.0.7
+     */
+    public boolean isEmpty() {
+        return (getItemCount() == 0);
+    }
+    
+    /**
+     * Returns the number of data items in the series.
+     * 
+     * @return The number of data items in the series.
+     */
+    public abstract int getItemCount();
     
     /**
      * Returns a clone of the series.
