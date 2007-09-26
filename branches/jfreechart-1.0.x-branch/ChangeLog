@@ -1,5 +1,13 @@
 2007-09-26  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/plot/XYPlot.java
+	(getQuadrantPaint): Improve exception text,
+	(setQuadrantPaint): Likewise,
+	(getDomainAxisForDataset): Likewise,
+	(getRangeAxisForDataset): Likewise.
+
+2007-09-26  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/plot/Marker.java
 	(readObject): Initialise listener list,
 	* tests/org/jfree/chart/plot/junit/ValueMarkerTests.java
