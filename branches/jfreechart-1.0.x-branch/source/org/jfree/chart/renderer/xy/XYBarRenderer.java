@@ -33,6 +33,7 @@
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
  *                   Bill Kelemen;
+ *                   Marc van Glabbeek (bug 1775452);
  *
  * $Id: XYBarRenderer.java,v 1.14.2.17 2007/06/15 12:43:24 mungady Exp $
  *
@@ -86,6 +87,8 @@
  * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 15-Jun-2007 : Changed default for drawBarOutline to false (DG);
+ * 26-Sep-2007 : Fixed bug 1775452, problem with bar margins for inverted
+ *               axes, thanks to Marc van Glabbeek (DG);
  *
  */
 
@@ -627,11 +630,12 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
         double translatedWidth = Math.max(1, Math.abs(translatedEndX 
                 - translatedStartX));
-
+        
+        double left = Math.min(translatedStartX, translatedEndX);
         if (getMargin() > 0.0) {
             double cut = translatedWidth * getMargin();
             translatedWidth = translatedWidth - cut;
-            translatedStartX = translatedStartX + cut / 2;
+            left = left + cut / 2;
         }
 
         Rectangle2D bar = null;
@@ -641,18 +645,14 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             bottom = Math.max(bottom, dataArea.getMinX());
             top = Math.min(top, dataArea.getMaxX());
             bar = new Rectangle2D.Double(
-                bottom, 
-                Math.min(translatedStartX, translatedEndX),
-                top - bottom, translatedWidth);
+                bottom, left, top - bottom, translatedWidth);
         }
         else if (orientation == PlotOrientation.VERTICAL) {
             // clip top and bottom bounds to data area
             bottom = Math.max(bottom, dataArea.getMinY());
             top = Math.min(top, dataArea.getMaxY());
-            bar = new Rectangle2D.Double(
-                Math.min(translatedStartX, translatedEndX), 
-                bottom, 
-                translatedWidth, top - bottom);
+            bar = new Rectangle2D.Double(left, bottom, translatedWidth, 
+                    top - bottom);
         }
 
         Paint itemPaint = getItemPaint(series, item);
