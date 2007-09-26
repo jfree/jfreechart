@@ -48,6 +48,8 @@ import org.jfree.data.xy.XYDataset;
 
 /**
  * Some utility methods related to the plot classes.
+ * 
+ * @since 1.0.7
  */
 public class PlotUtilities {
     
