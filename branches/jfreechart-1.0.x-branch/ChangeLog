@@ -1,5 +1,11 @@
 2007-09-26  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/data/general/Series.java
+	(getItemCount): New abstract method,
+	(isEmpty): New method.
+
+2007-09-26  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/plot/XYPlot.java
 	(getQuadrantPaint): Improve exception text,
 	(setQuadrantPaint): Likewise,
