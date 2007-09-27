@@ -83,6 +83,7 @@
  * 30-Oct-2006 : Updated refreshTicks() method to account for possibility of
  *               multiple domain axes (DG);
  * 07-Mar-2007 : Fixed bug in axis label positioning (DG);
+ * 27-Sep-2007 : Added getCategorySeriesMiddle() method (DG);
  *
  */
 
@@ -110,6 +111,7 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.G2TextMeasurer;
 import org.jfree.text.TextBlock;
@@ -644,6 +646,43 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         return getCategoryStart(category, categoryCount, area, edge)
                + calculateCategorySize(categoryCount, area, edge);
 
+    }
+    
+    /**
+     * Returns the middle coordinate (in Java2D space) for a series within a 
+     * category.
+     * 
+     * @param category  the category (<code>null</code> not permitted).
+     * @param seriesKey  the series key (<code>null</code> not permitted).
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param itemMargin  the item margin (0.0 <= itemMargin < 1.0);
+     * @param area  the area (<code>null</code> not permitted).
+     * @param edge  the edge (<code>null</code> not permitted).
+     * 
+     * @return The coordinate in Java2D space.
+     * 
+     * @since 1.0.7
+     */
+    public double getCategorySeriesMiddle(Comparable category, 
+            Comparable seriesKey, CategoryDataset dataset, double itemMargin,
+            Rectangle2D area, RectangleEdge edge) {
+        
+        int categoryIndex = dataset.getColumnIndex(category);
+        int categoryCount = dataset.getColumnCount();
+        int seriesIndex = dataset.getRowIndex(seriesKey);
+        int seriesCount = dataset.getRowCount();
+        double start = getCategoryStart(categoryIndex, categoryCount, area, 
+                edge);
+        double end = getCategoryEnd(categoryIndex, categoryCount, area, edge);
+        double width = end - start;
+        if (seriesCount == 1) {
+            return start + width / 2.0;
+        }
+        else {
+            double gap = (width * itemMargin) / (seriesCount - 1);
+            double ww = (width * (1 - itemMargin)) / seriesCount;
+            return start + (seriesIndex * (ww + gap)) + ww / 2.0;
+        }
     }
 
     /**
