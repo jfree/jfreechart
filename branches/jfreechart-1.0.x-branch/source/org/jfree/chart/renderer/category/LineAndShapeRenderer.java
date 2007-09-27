@@ -1083,7 +1083,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
         clone.seriesLinesVisible 
             = (BooleanList) this.seriesLinesVisible.clone();
         clone.seriesShapesVisible 
-            = (BooleanList) this.seriesLinesVisible.clone();
+            = (BooleanList) this.seriesShapesVisible.clone();
         clone.seriesShapesFilled 
             = (BooleanList) this.seriesShapesFilled.clone();
         return clone;
