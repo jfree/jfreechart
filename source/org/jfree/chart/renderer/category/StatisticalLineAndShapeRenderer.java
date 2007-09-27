@@ -47,6 +47,8 @@
  *               visible (DG);
  * 14-Jun-2007 : If the dataset is not a StatisticalCategoryDataset, revert
  *               to the drawing behaviour of LineAndShapeRenderer (DG);
+ * 27-Sep-2007 : Added offset option to match new option in 
+ *               LineAndShapeRenderer (DG);
  *
  */
 
@@ -188,8 +190,16 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         PlotOrientation orientation = plot.getOrientation();
 
         // current data point...
-        double x1 = domainAxis.getCategoryMiddle(column, getColumnCount(),
-                dataArea, plot.getDomainAxisEdge());
+        double x1;
+        if (getUseSeriesOffset()) {
+            x1 = domainAxis.getCategorySeriesMiddle(dataset.getColumnKey(
+                    column), dataset.getRowKey(row), dataset, getItemMargin(), 
+                    dataArea, plot.getDomainAxisEdge());            
+        }
+        else {
+            x1 = domainAxis.getCategoryMiddle(column, getColumnCount(), 
+                    dataArea, plot.getDomainAxisEdge());
+        }
 
         double y1 = rangeAxis.valueToJava2D(meanValue.doubleValue(), dataArea,
                 plot.getRangeAxisEdge());
@@ -227,9 +237,19 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
 
                     // previous data point...
                     double previous = previousValue.doubleValue();
-                    double x0 = domainAxis.getCategoryMiddle(column - 1,
-                            getColumnCount(), dataArea,
-                            plot.getDomainAxisEdge());
+                    double x0;
+                    if (getUseSeriesOffset()) {
+                        x0 = domainAxis.getCategorySeriesMiddle(
+                                dataset.getColumnKey(column - 1), 
+                                dataset.getRowKey(row), dataset, 
+                                getItemMargin(), dataArea, 
+                                plot.getDomainAxisEdge());
+                    }
+                    else {
+                        x0 = domainAxis.getCategoryMiddle(column - 1, 
+                                getColumnCount(), dataArea, 
+                                plot.getDomainAxisEdge());
+                    }
                     double y0 = rangeAxis.valueToJava2D(previous, dataArea,
                             plot.getRangeAxisEdge());
 
@@ -248,12 +268,6 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         }
 
         RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
-        RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
-        double rectX = domainAxis.getCategoryStart(column, getColumnCount(),
-                dataArea, xAxisLocation);
-
-        rectX = rectX + row * state.getBarWidth();
-
         g2.setPaint(getItemPaint(row, column));
 
         //standard deviation lines
