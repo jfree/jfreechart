@@ -38,6 +38,7 @@
  * -------
  * 22-Sep-2003 : Version 1 (DG);
  * 17-May-2007 : Added check for getLegendItem() method (DG);
+ * 27-Sep-2007 : Extended equals() test (DG);
  *
  */
 
@@ -142,6 +143,16 @@ public class LineAndShapeRendererTests extends TestCase {
         r1.setUseOutlinePaint(true);
         assertFalse(r1.equals(r2));
         r2.setUseOutlinePaint(true);
+        assertTrue(r1.equals(r2));
+        
+        r1.setUseSeriesOffset(true);
+        assertFalse(r1.equals(r2));
+        r2.setUseSeriesOffset(true);
+        assertTrue(r1.equals(r2));
+        
+        r1.setItemMargin(0.14);
+        assertFalse(r1.equals(r2));
+        r2.setItemMargin(0.14);
         assertTrue(r1.equals(r2));
         
     }
