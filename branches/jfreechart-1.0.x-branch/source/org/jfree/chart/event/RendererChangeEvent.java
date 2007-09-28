@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: RendererChangeEvent.java,v 1.2.2.2 2007/04/04 09:55:54 mungady Exp $
- *
  * Changes
  * -------
  * 23-Oct-2003 : Version 1 (DG);

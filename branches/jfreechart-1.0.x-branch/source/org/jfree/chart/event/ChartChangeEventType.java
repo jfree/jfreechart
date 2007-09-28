@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * -------------------------
  * ChartChangeEventType.java
  * -------------------------
- * (C) Copyright 2005, by Object Refinery Limited.
+ * (C) Copyright 2005, 2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: ChartChangeEventType.java,v 1.2.2.1 2005/10/25 20:42:25 mungady Exp $
  *
  * Changes:
  * --------
@@ -55,15 +53,15 @@ public final class ChartChangeEventType implements Serializable {
     
     /** GENERAL. */
     public static final ChartChangeEventType GENERAL 
-        = new ChartChangeEventType("ChartChangeEventType.GENERAL");
+            = new ChartChangeEventType("ChartChangeEventType.GENERAL");
 
     /** NEW_DATASET. */
     public static final ChartChangeEventType NEW_DATASET 
-        = new ChartChangeEventType("ChartChangeEventType.NEW_DATASET");
+            = new ChartChangeEventType("ChartChangeEventType.NEW_DATASET");
 
     /** DATASET_UPDATED. */
     public static final ChartChangeEventType DATASET_UPDATED
-        = new ChartChangeEventType("ChartChangeEventType.DATASET_UPDATED");
+            = new ChartChangeEventType("ChartChangeEventType.DATASET_UPDATED");
 
     /** The name. */
     private String name;

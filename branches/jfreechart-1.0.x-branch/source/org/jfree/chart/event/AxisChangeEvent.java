@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * --------------------
  * AxisChangeEvent.java
  * --------------------
- * (C) Copyright 2000-2004, by Object Refinery Limited.
+ * (C) Copyright 2000-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: AxisChangeEvent.java,v 1.3.2.1 2005/10/25 20:42:25 mungady Exp $
  *
  * Changes (from 24-Aug-2001)
  * --------------------------
@@ -47,7 +45,6 @@ import org.jfree.chart.axis.Axis;
 
 /**
  * A change event that encapsulates information about a change to an axis.
- *
  */
 public class AxisChangeEvent extends ChartChangeEvent {
 
