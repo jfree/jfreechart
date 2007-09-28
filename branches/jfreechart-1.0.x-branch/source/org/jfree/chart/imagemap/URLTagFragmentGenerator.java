@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,9 @@
  * ----------------------------
  * URLTagFragmentGenerator.java
  * ----------------------------
- * (C) Copyright 2003-2006, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2007, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
- *
- * $Id: URLTagFragmentGenerator.java,v 1.3.2.2 2006/12/08 09:55:13 mungady Exp $
  *
  * Changes
  * -------

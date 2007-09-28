@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,12 @@
  * ---------------------
  * ServletUtilities.java
  * ---------------------
- * (C) Copyright 2002-2006, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2007, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   J?rgen Hoffman;
  *                   David Gilbert (for Object Refinery Limited);
  *                   Douglas Clayton;
- *
- * $Id: ServletUtilities.java,v 1.3.2.3 2006/09/13 15:42:38 mungady Exp $
  *
  * Changes
  * -------
@@ -49,7 +47,7 @@
  *               by System property java.io.tmpdir, rather than default (RA);
  * 24-Mar-2004 : Added temp filename prefix attribute (DG);
  * 09-Mar-2005 : Added "one time" file option (DG);
- * ------------- JFREECHART 1.0.0 RELEASED ------------------------------------
+ * ------------- JFREECHART 1.0.x RELEASED ------------------------------------
  * 10-Jan-2006 : Updated API docs and reformatted (DG);
  * 13-Sep-2006 : Format date in response header in English, not locale default
  *               (see bug 1557141) (DG);
@@ -57,7 +55,6 @@
  */
 
 package org.jfree.chart.servlet;
-
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

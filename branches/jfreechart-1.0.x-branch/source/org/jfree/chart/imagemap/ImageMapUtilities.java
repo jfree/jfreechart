@@ -32,8 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: ImageMapUtilities.java,v 1.3.2.3 2007/02/06 11:28:53 mungady Exp $
- *
  * Changes
  * -------
  * 02-Aug-2004 : Initial version (RA);

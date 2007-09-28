@@ -31,8 +31,6 @@
  *
  * Original Author:  Richard Atkinson;
  *
- * $Id: OverLIBToolTipTagFragmentGenerator.java,v 1.3.2.2 2007/01/16 09:58:12 mungady Exp $
- *
  * Changes
  * -------
  * 12-Aug-2003 : Version 1 (RA);
