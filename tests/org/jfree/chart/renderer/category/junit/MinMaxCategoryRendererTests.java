@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * MinMaxCategoryRendererTests.java
  * --------------------------------
- * (C) Copyright 2003-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,11 +37,15 @@
  * Changes
  * -------
  * 22-Oct-2003 : Version 1 (DG);
+ * 28-Sep-2007 : Added testEquals() method (DG);
  *
  */
 
 package org.jfree.chart.renderer.category.junit;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.GradientPaint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -90,6 +94,23 @@ public class MinMaxCategoryRendererTests extends TestCase {
         MinMaxCategoryRenderer r1 = new MinMaxCategoryRenderer();
         MinMaxCategoryRenderer r2 = new MinMaxCategoryRenderer();
         assertEquals(r1, r2);
+        
+        r1.setDrawLines(true);
+        assertFalse(r1.equals(r2));
+        r2.setDrawLines(true);
+        assertTrue(r1.equals(r2));
+        
+        r1.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, 
+                Color.yellow));
+        assertFalse(r1.equals(r2));
+        r2.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, 
+                Color.yellow));
+        assertTrue(r1.equals(r2));
+        
+        r1.setGroupStroke(new BasicStroke(1.2f));
+        assertFalse(r1.equals(r2));
+        r2.setGroupStroke(new BasicStroke(1.2f));
+        assertTrue(r1.equals(r2));
     }
 
     /**
