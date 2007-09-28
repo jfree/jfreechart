@@ -32,8 +32,6 @@
  * Original Author:  Richard West;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: HexNumberFormat.java,v 1.1.2.1 2007/06/14 09:16:42 mungady Exp $
- *
  * Changes:
  * --------
  * 14-Jun-2007 : Version 1 (RW);
@@ -49,6 +47,8 @@ import java.text.ParsePosition;
 /**
  * A custom number formatter that formats numbers as hexadecimal strings.
  * There are some limitations, so be careful using this class.
+ * 
+ * @since 1.0.6
  */
 public class HexNumberFormat extends NumberFormat {
 
