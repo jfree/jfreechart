@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: ItemLabelPosition.java,v 1.3.2.2 2007/01/10 12:25:21 mungady Exp $
- *
  * Changes
  * -------
  * 27-Oct-2003 : Version 1 (DG);

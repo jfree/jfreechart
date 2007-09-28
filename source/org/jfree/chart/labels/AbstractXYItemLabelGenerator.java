@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: AbstractXYItemLabelGenerator.java,v 1.9.2.4 2007/01/25 11:54:23 mungady Exp $
- *
  * Changes
  * -------
  * 27-Feb-2004 : Version 1 (DG);

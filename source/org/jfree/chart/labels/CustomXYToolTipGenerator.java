@@ -32,8 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: CustomXYToolTipGenerator.java,v 1.3.2.2 2007/02/02 15:52:42 mungady Exp $
- *
  * Changes:
  * --------
  * 05-Aug-2002 : Version 1, contributed by Richard Atkinson (RA);

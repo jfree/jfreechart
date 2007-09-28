@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: StandardXYToolTipGenerator.java,v 1.3.2.3 2007/02/02 11:07:00 mungady Exp $
- *
  * Changes
  * -------
  * 12-May-2004 : Version 1 (DG);
