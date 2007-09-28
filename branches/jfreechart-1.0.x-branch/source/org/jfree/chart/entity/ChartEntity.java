@@ -34,8 +34,6 @@
  *                   Xavier Poinsard;
  *                   Robert Fuller;
  *
- * $Id: ChartEntity.java,v 1.8.2.2 2007/02/06 11:28:53 mungady Exp $
- *
  * Changes:
  * --------
  * 23-May-2002 : Version 1 (DG);

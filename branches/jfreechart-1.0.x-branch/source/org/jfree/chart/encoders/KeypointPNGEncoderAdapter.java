@@ -32,8 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
  *
- * $Id: KeypointPNGEncoderAdapter.java,v 1.4.2.4 2007/04/17 11:01:42 mungady Exp $
- *
  * Changes
  * -------
  * 01-Aug-2004 : Initial version (RA);

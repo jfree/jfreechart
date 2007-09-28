@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
- *                   
- * $Id: PieSectionEntity.java,v 1.5.2.2 2007/05/17 09:26:24 mungady Exp $
  *
  * Changes:
  * --------

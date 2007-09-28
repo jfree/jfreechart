@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LegendItemEntity.java,v 1.3.2.2 2007/05/18 10:28:19 mungady Exp $
- *
  * Changes:
  * --------
  * 05-Jun-2003 : Version 1 (DG);
