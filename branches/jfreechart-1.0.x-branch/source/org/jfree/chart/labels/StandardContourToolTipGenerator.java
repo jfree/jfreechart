@@ -32,8 +32,6 @@
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: StandardContourToolTipGenerator.java,v 1.4.2.4 2007/04/04 09:10:49 mungady Exp $
- *
  * Changes
  * -------
  * 23-Jan-2003 : Added standard header (DG);

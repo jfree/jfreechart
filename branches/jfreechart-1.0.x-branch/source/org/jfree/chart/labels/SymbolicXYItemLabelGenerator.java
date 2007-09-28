@@ -31,8 +31,6 @@
  *
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * $Id: SymbolicXYItemLabelGenerator.java,v 1.5.2.2 2007/02/02 15:52:42 mungady Exp $
  * 
  * Changes
  * -------

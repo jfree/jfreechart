@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: StandardXYItemLabelGenerator.java,v 1.2.2.3 2007/02/02 11:07:00 mungady Exp $
- *
  * Changes
  * -------
  * 13-Dec-2001 : Version 1 (DG);

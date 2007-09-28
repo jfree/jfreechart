@@ -32,13 +32,11 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: AbstractPieItemLabelGenerator.java,v 1.5.2.2 2006/05/03 10:46:36 mungady Exp $
- *
  * Changes
  * -------
  * 09-Nov-2004 : Version 1, draws out code from StandardPieItemLabelGenerator 
  *               and StandardPieToolTipGenerator (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 03-May-2006 : Fixed bug 1480978, a problem in the clone() method (DG);
  * 
  */

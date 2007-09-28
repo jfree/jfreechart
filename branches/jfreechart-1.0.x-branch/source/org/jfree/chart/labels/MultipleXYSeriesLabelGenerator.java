@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: MultipleXYSeriesLabelGenerator.java,v 1.5.2.2 2007/02/20 15:32:06 mungady Exp $
- *
  * Changes
  * -------
  * 19-Nov-2004 : Version 1 (DG);

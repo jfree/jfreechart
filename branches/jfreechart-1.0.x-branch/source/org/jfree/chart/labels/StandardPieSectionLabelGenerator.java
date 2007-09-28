@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: StandardPieSectionLabelGenerator.java,v 1.4.2.7 2007/01/16 11:45:36 mungady Exp $
- *
  * Changes
  * -------
  * 09-Nov-2004 : Version 1, derived from StandardPieItemLabelGenerator (DG);

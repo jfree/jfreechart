@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * ------------------------------
  * HighLowItemLabelGenerator.java
  * ------------------------------
- * (C) Copyright 2001-2005, by Object Refinery Limited.
+ * (C) Copyright 2001-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   David Basten;
- *
- * $Id: HighLowItemLabelGenerator.java,v 1.7.2.1 2005/10/25 20:49:02 mungady Exp $
  *
  * Changes
  * -------
@@ -101,13 +99,11 @@ public class HighLowItemLabelGenerator implements XYItemLabelGenerator,
                                      NumberFormat numberFormatter) {
         if (dateFormatter == null) {
             throw new IllegalArgumentException(
-                "Null 'dateFormatter' argument."
-            );   
+                    "Null 'dateFormatter' argument.");   
         }
         if (numberFormatter == null) {
             throw new IllegalArgumentException(
-                "Null 'numberFormatter' argument."
-            );
+                    "Null 'numberFormatter' argument.");
         }
         this.dateFormatter = dateFormatter;
         this.numberFormatter = numberFormatter;
