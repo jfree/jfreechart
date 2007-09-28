@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,15 @@
  * ------------------------
  * KeyedObjects2DTests.java
  * ------------------------
- * (C) Copyright 2004, 2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: KeyedObjects2DTests.java,v 1.1.2.1 2006/10/03 15:41:43 mungady Exp $
- *
  * Changes
  * -------
  * 01-Mar-2004 : Version 1 (DG);
+ * 28-Sep-2007 : Added testEquals() and enhanced testClone() (DG);
  *
  */
 
@@ -77,6 +76,21 @@ public class KeyedObjects2DTests extends TestCase {
     public KeyedObjects2DTests(String name) {
         super(name);
     }
+    
+    /**
+     * Some checks for the equals() method.
+     */
+    public void testEquals() {
+        KeyedObjects2D k1 = new KeyedObjects2D();
+        KeyedObjects2D k2 = new KeyedObjects2D();
+        assertTrue(k1.equals(k2));
+        assertTrue(k2.equals(k1));
+        
+        k1.addObject(new Integer(99), "R1", "C1");
+        assertFalse(k1.equals(k2));
+        k2.addObject(new Integer(99), "R1", "C1");
+        assertTrue(k1.equals(k2)); 
+    }
 
     /**
      * Confirm that cloning works.
@@ -91,11 +105,15 @@ public class KeyedObjects2DTests extends TestCase {
             o2 = (KeyedObjects2D) o1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(o1 != o2);
         assertTrue(o1.getClass() == o2.getClass());
         assertTrue(o1.equals(o2));
+        
+        // check independence
+        o1.addObject("XX", "R1", "C1");
+        assertFalse(o1.equals(o2));
     }
     
     /**
@@ -118,13 +136,12 @@ public class KeyedObjects2DTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             ko2D2 = (KeyedObjects2D) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(ko2D1, ko2D2);
 

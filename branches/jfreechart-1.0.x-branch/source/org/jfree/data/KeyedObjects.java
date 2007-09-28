@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,17 @@
  * -----------------
  * KeyedObjects.java
  * -----------------
- * (C) Copyright 2003-2005, by Object Refinery Limited.
+ * (C) Copyright 2003-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: KeyedObjects.java,v 1.5.2.1 2005/10/25 21:29:13 mungady Exp $
  *
  * Changes:
  * --------
  * 31-Oct-2002 : Version 1 (DG);
  * 11-Jan-2005 : Minor tidy up (DG);
- * 
+ * 28-Sep-2007 : Clean up equals() method (DG);
+ *
  */
 
 package org.jfree.data;
@@ -52,7 +51,7 @@ import org.jfree.util.PublicCloneable;
 /**
  * A collection of (key, object) pairs.
  */
-public class KeyedObjects  implements Cloneable, PublicCloneable, Serializable {
+public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 1321582394193530984L;
@@ -95,13 +94,13 @@ public class KeyedObjects  implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns a key.
+     * Returns the key at the specified position in the list.
      *
      * @param index  the item index (zero-based).
      *
-     * @return The row key.
+     * @return The row key (or <code>null</code>).
      * 
-     * @throws IndexOutOfBoundsException if <code>index</code> is out of bounds.
+     * @see #getIndex(Comparable)
      */
     public Comparable getKey(int index) {
         Comparable result = null;
@@ -120,6 +119,8 @@ public class KeyedObjects  implements Cloneable, PublicCloneable, Serializable {
      * @param key  the key.
      *
      * @return The index, or <code>-1</code> if the key is unrecognised.
+     * 
+     * @see #getKey(int)
      */
     public int getIndex(Comparable key) {
         int result = -1;
@@ -136,7 +137,7 @@ public class KeyedObjects  implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the keys.
+     * Returns a list containing all the keys in the list.
      *
      * @return The keys (never <code>null</code>).
      */
@@ -157,6 +158,8 @@ public class KeyedObjects  implements Cloneable, PublicCloneable, Serializable {
      * @param key  the key.
      *
      * @return The object (possibly <code>null</code>).
+     * 
+     * @see #addObject(Comparable, Object)
      */
     public Object getObject(Comparable key) {
         return getObject(getIndex(key));
@@ -168,6 +171,8 @@ public class KeyedObjects  implements Cloneable, PublicCloneable, Serializable {
      *
      * @param key  the key.
      * @param object  the object.
+     * 
+     * @see #getObject(Comparable)
      */
     public void addObject(Comparable key, Object object) {
         setObject(key, object);
@@ -180,6 +185,8 @@ public class KeyedObjects  implements Cloneable, PublicCloneable, Serializable {
      *
      * @param key  the key.
      * @param object  the object.
+     * 
+     * @see #getObject(Comparable)
      */
     public void setObject(Comparable key, Object object) {
         int keyIndex = getIndex(key);
@@ -212,7 +219,9 @@ public class KeyedObjects  implements Cloneable, PublicCloneable, Serializable {
     }
     
     /**
-     * Returns a clone of this object.
+     * Returns a clone of this object.  Keys in the list should be immutable
+     * and are not cloned.  Objects in the list are cloned only if they
+     * implement {@link PublicCloneable}.
      * 
      * @return A clone.
      * 
@@ -230,39 +239,34 @@ public class KeyedObjects  implements Cloneable, PublicCloneable, Serializable {
     }
     
     /**
-     * Tests if this object is equal to another.
+     * Tests this object for equality with an arbitrary object.
      *
-     * @param o  the other object.
+     * @param obj  the object (<code>null</code> permitted).
      *
      * @return A boolean.
      */
-    public boolean equals(Object o) {
+    public boolean equals(Object obj) {
 
-        if (o == null) {
-            return false;
-        }
-        if (o == this) {
+        if (obj == this) {
             return true;
         }
-
-        if (!(o instanceof KeyedObjects)) {
+        if (!(obj instanceof KeyedObjects)) {
             return false;
         }
-
-        KeyedObjects kos = (KeyedObjects) o;
+        KeyedObjects that = (KeyedObjects) obj;
         int count = getItemCount();
-        if (count != kos.getItemCount()) {
+        if (count != that.getItemCount()) {
             return false;
         }
 
         for (int i = 0; i < count; i++) {
             Comparable k1 = getKey(i);
-            Comparable k2 = kos.getKey(i);
+            Comparable k2 = that.getKey(i);
             if (!k1.equals(k2)) {
                 return false;
             }
             Object o1 = getObject(i);
-            Object o2 = kos.getObject(i);
+            Object o2 = that.getObject(i);
             if (o1 == null) {
                 if (o2 != null) {
                     return false;

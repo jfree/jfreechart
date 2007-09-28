@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * ------------------
  * KeyedObject2D.java
  * ------------------
- * (C) Copyright 2003-2005, by Object Refinery Limited.
+ * (C) Copyright 2003-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: KeyedObjects2D.java,v 1.6.2.1 2005/10/25 21:29:13 mungady Exp $
  *
  * Changes
  * -------
@@ -81,6 +79,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Returns the row count.
      *
      * @return The row count.
+     * 
+     * @see #getColumnCount()
      */
     public int getRowCount() {
         return this.rowKeys.size();
@@ -90,6 +90,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Returns the column count.
      *
      * @return The column count.
+     * 
+     * @see #getRowCount()
      */
     public int getColumnCount() {
         return this.columnKeys.size();
@@ -123,6 +125,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param row  the row index (zero based).
      *
      * @return The row index.
+     * 
+     * @see #getRowIndex(Comparable)
      */
     public Comparable getRowKey(int row) {
         return (Comparable) this.rowKeys.get(row);
@@ -134,6 +138,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param key  the key.
      *
      * @return The row index.
+     * 
+     * @see #getRowKey(int)
      */
     public int getRowIndex(Comparable key) {
         return this.rowKeys.indexOf(key);
@@ -143,6 +149,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Returns the row keys.
      *
      * @return The row keys (never <code>null</code>).
+     * 
+     * @see #getRowKeys()
      */
     public List getRowKeys() {
         return Collections.unmodifiableList(this.rowKeys);
@@ -154,6 +162,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param column  the column.
      *
      * @return The key.
+     * 
+     * @see #getColumnIndex(Comparable)
      */
     public Comparable getColumnKey(int column) {
         return (Comparable) this.columnKeys.get(column);
@@ -165,6 +175,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param key  the key.
      *
      * @return The column index.
+     * 
+     * @see #getColumnKey(int)
      */
     public int getColumnIndex(Comparable key) {
         return this.columnKeys.indexOf(key);
@@ -174,6 +186,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Returns the column keys.
      *
      * @return The column keys (never <code>null</code>).
+     * 
+     * @see #getRowKeys()
      */
     public List getColumnKeys() {
         return Collections.unmodifiableList(this.columnKeys);
@@ -304,40 +318,32 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @return A boolean.
      */
     public boolean equals(Object obj) {
-
-        if (obj == null) {
-            return false;
-        }
-        
         if (obj == this) {
             return true;
         }
-
         if (!(obj instanceof KeyedObjects2D)) {
             return false;
         }
         
-        KeyedObjects2D ko2D = (KeyedObjects2D) obj;
-        if (!getRowKeys().equals(ko2D.getRowKeys())) {
+        KeyedObjects2D that = (KeyedObjects2D) obj;
+        if (!getRowKeys().equals(that.getRowKeys())) {
             return false;
         }
-        if (!getColumnKeys().equals(ko2D.getColumnKeys())) {
+        if (!getColumnKeys().equals(that.getColumnKeys())) {
             return false;
         }
         int rowCount = getRowCount();
-        if (rowCount != ko2D.getRowCount()) {
+        if (rowCount != that.getRowCount()) {
             return false;
         }
-
         int colCount = getColumnCount();
-        if (colCount != ko2D.getColumnCount()) {
+        if (colCount != that.getColumnCount()) {
             return false;
         }
-
         for (int r = 0; r < rowCount; r++) {
             for (int c = 0; c < colCount; c++) {
                 Object v1 = getObject(r, c);
-                Object v2 = ko2D.getObject(r, c);
+                Object v2 = that.getObject(r, c);
                 if (v1 == null) {
                     if (v2 != null) {
                         return false;
@@ -375,7 +381,16 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *         exception, but subclasses (if any) might.
      */
     public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+        KeyedObjects2D clone = (KeyedObjects2D) super.clone();
+        clone.columnKeys = new java.util.ArrayList(this.columnKeys);
+        clone.rowKeys = new java.util.ArrayList(this.rowKeys);
+        clone.rows = new java.util.ArrayList(this.rows.size());
+        Iterator iterator = this.rows.iterator();
+        while (iterator.hasNext()) {
+            KeyedObjects row = (KeyedObjects) iterator.next();
+            clone.rows.add(row.clone());
+        }
+        return clone;
     }
 
 }

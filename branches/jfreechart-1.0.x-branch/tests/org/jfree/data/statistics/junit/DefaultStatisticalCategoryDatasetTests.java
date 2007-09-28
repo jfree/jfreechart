@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,16 @@
  * -------------------------------------------
  * DefaultStatisticalCategoryDatasetTests.java
  * -------------------------------------------
- * (C) Copyright 2005, 2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: DefaultStatisticalCategoryDatasetTests.java,v 1.1.2.1 2006/10/03 15:41:42 mungady Exp $
  *
  * Changes
  * -------
  * 05-Feb-2005 : Version 1 (DG);
  * 03-Aug-2006 : Added testGetRangeBounds() method (DG);
+ * 28-Sep-2007 : Enhanced testCloning() method (DG);
  *
  */
 
@@ -85,7 +84,7 @@ public class DefaultStatisticalCategoryDatasetTests extends TestCase {
      */
     public void testGetRangeBounds() {
         DefaultStatisticalCategoryDataset d 
-            = new DefaultStatisticalCategoryDataset();
+                = new DefaultStatisticalCategoryDataset();
         
         // an empty dataset should return null for bounds
         assertNull(d.getRangeBounds(true));
@@ -125,9 +124,9 @@ public class DefaultStatisticalCategoryDatasetTests extends TestCase {
      */
     public void testEquals() {
         DefaultStatisticalCategoryDataset d1 
-            = new DefaultStatisticalCategoryDataset();
+                = new DefaultStatisticalCategoryDataset();
         DefaultStatisticalCategoryDataset d2 
-            = new DefaultStatisticalCategoryDataset();
+                = new DefaultStatisticalCategoryDataset();
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
 
@@ -138,7 +137,7 @@ public class DefaultStatisticalCategoryDatasetTests extends TestCase {
      */
     public void testCloning() {
         DefaultStatisticalCategoryDataset d1 
-            = new DefaultStatisticalCategoryDataset();
+                = new DefaultStatisticalCategoryDataset();
         d1.add(1.1, 2.2, "R1", "C1");
         d1.add(3.3, 4.4, "R1", "C2");
         d1.add(null, new Double(5.5), "R1", "C3");
@@ -153,6 +152,10 @@ public class DefaultStatisticalCategoryDatasetTests extends TestCase {
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
+        
+        // check independence
+        d1.add(1.1, 2.2, "R3", "C1");
+        assertFalse(d1.equals(d2));
     }
 
     /**
