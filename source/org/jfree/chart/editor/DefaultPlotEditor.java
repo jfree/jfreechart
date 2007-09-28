@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,12 @@
  * ----------------------
  * DefaultPlotEditor.java
  * ----------------------
- * (C) Copyright 2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
  *                   Arnaud Lelievre;
  *                   Daniel Gredler;
- *
- * $Id: DefaultPlotEditor.java,v 1.1.2.1 2005/11/24 16:11:48 mungady Exp $
  *
  * Changes:
  * --------
