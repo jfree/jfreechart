@@ -32,8 +32,6 @@
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: PaletteSample.java,v 1.1.2.3 2007/04/04 09:09:52 mungady Exp $
- *
  * Changes
  * -------
  * 21-Jan-2003 : Added standard header (DG);

@@ -33,8 +33,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Arnaud Lelievre;
  *
- * $Id: DefaultColorBarEditor.java,v 1.1.2.2 2007/02/02 14:33:12 mungady Exp $
- *
  * Changes
  * -------
  * 26-Nov-2002 : Version 1 contributed by David M. O'Donnell (DG);
@@ -64,7 +62,6 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.GreyPalette;
 import org.jfree.chart.plot.RainbowPalette;
 import org.jfree.layout.LCBLayout;
-
 
 /**
  * A DefaultColorBarEditor.  Extends DefaultNumberAxisEditor to allow 

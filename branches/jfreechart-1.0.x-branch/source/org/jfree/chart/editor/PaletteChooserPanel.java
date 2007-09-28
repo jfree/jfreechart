@@ -32,8 +32,6 @@
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: PaletteChooserPanel.java,v 1.1.2.2 2007/01/31 15:56:18 mungady Exp $
- *
  * Changes
  * -------
  * 27-Jan-2003 : Added standard header (DG);
