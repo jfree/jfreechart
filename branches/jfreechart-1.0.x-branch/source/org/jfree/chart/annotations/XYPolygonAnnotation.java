@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYPolygonAnnotation.java,v 1.3.2.5 2007/03/06 16:12:18 mungady Exp $
- *
  * Changes:
  * --------
  * 09-Feb-2005 : Version 1 (DG);

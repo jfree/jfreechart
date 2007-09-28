@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: CategoryLineAnnotation.java,v 1.1.2.4 2007/03/06 16:12:18 mungady Exp $
- *
  * Changes:
  * --------
  * 29-Jul-2005 : Version 1, based on CategoryTextAnnotation (DG);

@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYPointerAnnotation.java,v 1.4.2.5 2007/03/06 16:12:18 mungady Exp $
- *
  * Changes:
  * --------
  * 21-May-2003 : Version 1 (DG);

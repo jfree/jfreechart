@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: AbstractXYAnnotation.java,v 1.3.2.3 2007/03/06 16:12:18 mungady Exp $
- *
  * Changes:
  * --------
  * 29-Sep-2004 : Version 1 (DG);

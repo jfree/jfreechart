@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYTextAnnotation.java,v 1.5.2.4 2007/03/06 16:12:19 mungady Exp $
- *
  * Changes:
  * --------
  * 28-Aug-2002 : Version 1 (DG);
