@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: RelativeDateFormat.java,v 1.1.2.3 2007/03/05 13:47:40 mungady Exp $
- *
  * Changes:
  * --------
  * 01-Nov-2006 : Version 1 (DG);
