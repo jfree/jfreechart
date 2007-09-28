@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * ------------------------
  * RectangleConstraint.java
  * ------------------------
- * (C) Copyright 2004, 2005, by Object Refinery Limited.
+ * (C) Copyright 2004-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: RectangleConstraint.java,v 1.5.2.1 2005/10/25 20:39:38 mungady Exp $
  *
  * Changes:
  * --------
@@ -59,9 +57,8 @@ public class RectangleConstraint {
      * An instance representing no constraint. 
      */
     public static final RectangleConstraint NONE = new RectangleConstraint(
-        0.0, null, LengthConstraintType.NONE, 
-        0.0, null, LengthConstraintType.NONE
-    );
+            0.0, null, LengthConstraintType.NONE, 
+            0.0, null, LengthConstraintType.NONE);
     
     /** The width. */
     private double width;
@@ -87,10 +84,8 @@ public class RectangleConstraint {
      * @param h  the fixed height.
      */
     public RectangleConstraint(double w, double h) {
-        this(
-            w, null, LengthConstraintType.FIXED, 
-            h, null, LengthConstraintType.FIXED
-        );  
+        this(w, null, LengthConstraintType.FIXED, 
+                h, null, LengthConstraintType.FIXED);  
     }
     
     /**
@@ -100,10 +95,8 @@ public class RectangleConstraint {
      * @param h  the height range.
      */
     public RectangleConstraint(Range w, Range h) {
-        this(
-            0.0, w, LengthConstraintType.RANGE, 
-            0.0, h, LengthConstraintType.RANGE
-        );   
+        this(0.0, w, LengthConstraintType.RANGE, 
+                0.0, h, LengthConstraintType.RANGE);   
     }
     
     /**
@@ -114,10 +107,8 @@ public class RectangleConstraint {
      * @param h  the fixed height.
      */
     public RectangleConstraint(Range w, double h) {
-        this(
-            0.0, w, LengthConstraintType.RANGE, 
-            h, null, LengthConstraintType.FIXED
-        );   
+        this(0.0, w, LengthConstraintType.RANGE, 
+                h, null, LengthConstraintType.FIXED);   
     }
     
     /**
@@ -128,10 +119,8 @@ public class RectangleConstraint {
      * @param h  the height range.
      */
     public RectangleConstraint(double w, Range h) {
-        this(
-            w, null, LengthConstraintType.FIXED, 
-            0.0, h, LengthConstraintType.RANGE
-        );   
+        this(w, null, LengthConstraintType.FIXED, 
+                0.0, h, LengthConstraintType.RANGE);   
     }
 
     /**
@@ -227,10 +216,9 @@ public class RectangleConstraint {
             return this;   
         }
         else {
-            return new RectangleConstraint(
-                this.width, this.widthRange, LengthConstraintType.NONE,
-                this.height, this.heightRange, this.heightConstraintType
-            );
+            return new RectangleConstraint(this.width, this.widthRange, 
+                    LengthConstraintType.NONE, this.height, this.heightRange, 
+                    this.heightConstraintType);
         }
     }
     
@@ -245,10 +233,9 @@ public class RectangleConstraint {
             return this;   
         }
         else {
-            return new RectangleConstraint(
-                this.width, this.widthRange, this.widthConstraintType,
-                0.0, this.heightRange, LengthConstraintType.NONE
-            );
+            return new RectangleConstraint(this.width, this.widthRange, 
+                    this.widthConstraintType, 0.0, this.heightRange, 
+                    LengthConstraintType.NONE);
         }
     }
     
@@ -261,10 +248,9 @@ public class RectangleConstraint {
      * @return A new constraint.
      */
     public RectangleConstraint toFixedWidth(double width) {
-        return new RectangleConstraint(
-            width, this.widthRange, LengthConstraintType.FIXED,
-            this.height, this.heightRange, this.heightConstraintType
-        );
+        return new RectangleConstraint(width, this.widthRange, 
+                LengthConstraintType.FIXED, this.height, this.heightRange, 
+                this.heightConstraintType);
     }
     
     /**
@@ -276,10 +262,9 @@ public class RectangleConstraint {
      * @return A new constraint.
      */
     public RectangleConstraint toFixedHeight(double height) {
-        return new RectangleConstraint(
-            this.width, this.widthRange, this.widthConstraintType,
-            height, this.heightRange, LengthConstraintType.FIXED
-        );
+        return new RectangleConstraint(this.width, this.widthRange, 
+                this.widthConstraintType, height, this.heightRange, 
+                LengthConstraintType.FIXED);
     }
     
     /**
@@ -294,10 +279,9 @@ public class RectangleConstraint {
         if (range == null) {
             throw new IllegalArgumentException("Null 'range' argument.");   
         }
-        return new RectangleConstraint(
-            range.getUpperBound(), range, LengthConstraintType.RANGE,
-            this.height, this.heightRange, this.heightConstraintType
-        );
+        return new RectangleConstraint(range.getUpperBound(), range, 
+                LengthConstraintType.RANGE, this.height, this.heightRange, 
+                this.heightConstraintType);
     }
     
     /**
@@ -312,10 +296,9 @@ public class RectangleConstraint {
         if (range == null) {
             throw new IllegalArgumentException("Null 'range' argument.");   
         }
-        return new RectangleConstraint(
-            this.width, this.widthRange, this.widthConstraintType,
-            range.getUpperBound(), range, LengthConstraintType.RANGE
-        );
+        return new RectangleConstraint(this.width, this.widthRange, 
+                this.widthConstraintType, range.getUpperBound(), range, 
+                LengthConstraintType.RANGE);
     }
     
     /**
@@ -326,8 +309,8 @@ public class RectangleConstraint {
      */
     public String toString() {
         return "RectangleConstraint[" 
-            + this.widthConstraintType.toString() + ": width=" 
-            + this.width + ", height=" + this.height + "]";   
+                + this.widthConstraintType.toString() + ": width=" 
+                + this.width + ", height=" + this.height + "]";   
     }
     
     /**

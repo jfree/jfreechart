@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,15 @@
  * ----------------------
  * CenterArrangement.java
  * ----------------------
- * (C) Copyright 2005, 2006, by Object Refinery Limited.
+ * (C) Copyright 2005-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: CenterArrangement.java,v 1.3.2.2 2006/07/20 16:21:58 mungady Exp $
- *
  * Changes:
  * --------
  * 08-Mar-2005 : Version 1 (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 20-Jul-2006 : Set bounds of contained block when arranging (DG);
  * 
  */
