@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: SegmentedTimelineTests2.java,v 1.1.2.3 2007/02/02 15:10:21 mungady Exp $
- *
  * Changes
  * -------
  * 02-Aug-2004 : Added standard header (DG);

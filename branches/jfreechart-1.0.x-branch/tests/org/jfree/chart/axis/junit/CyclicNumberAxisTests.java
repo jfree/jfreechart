@@ -32,8 +32,6 @@
  * Original Author:  Nicolas Brodu
  * Contributor(s):   -;
  *
- * $Id: CyclicNumberAxisTests.java,v 1.1.2.3 2007/02/02 14:33:11 mungady Exp $
- *
  * Changes
  * -------
  * 19-Nov-2003 : First version (NB);

@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: NumberAxisTests.java,v 1.1.2.4 2007/02/02 14:16:48 mungady Exp $
- *
  * Changes
  * -------
  * 11-Jul-2007 : Version 1 (DG);

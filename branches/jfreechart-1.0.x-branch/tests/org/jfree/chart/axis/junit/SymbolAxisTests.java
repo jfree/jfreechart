@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: SymbolAxisTests.java,v 1.1.2.2 2007/02/28 13:39:50 mungady Exp $
- *
  * Changes
  * -------
  * 26-Mar-2003 : Version 1 (DG);

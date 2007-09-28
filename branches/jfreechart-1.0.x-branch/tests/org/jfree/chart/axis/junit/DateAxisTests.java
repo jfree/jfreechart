@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DateAxisTests.java,v 1.1.2.3 2007/05/03 14:27:11 mungady Exp $
- *
  * Changes
  * -------
  * 22-Apr-2003 : Version 1 (DG);
