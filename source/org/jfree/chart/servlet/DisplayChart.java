@@ -32,8 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: DisplayChart.java,v 1.2.2.3 2007/02/02 15:03:19 mungady Exp $
- *
  * Changes
  * -------
  * 19-Aug-2002 : Version 1;
