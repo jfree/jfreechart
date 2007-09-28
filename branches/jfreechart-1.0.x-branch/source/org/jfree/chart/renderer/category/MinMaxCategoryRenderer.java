@@ -55,6 +55,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 09-Mar-2007 : Fixed problem with horizontal rendering (DG);
+ * 28-Sep-2007 : Added equals() method override (DG);
  * 
  */
 
@@ -89,6 +90,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
+import org.jfree.util.PaintUtilities;
 
 /**
  * Renderer for drawing min max plot. This renderer draws all the series under 
@@ -215,12 +217,17 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
 
     /**
      * Sets the stroke of the line between the minimum value and the maximum 
-     * value.
+     * value and sends a {@link RendererChangeEvent} to all registered 
+     * listeners.
      *
-     * @param groupStroke The new stroke
+     * @param stroke the new stroke (<code>null</code> not permitted).
      */
-    public void setGroupStroke(Stroke groupStroke) {
-        this.groupStroke = groupStroke;
+    public void setGroupStroke(Stroke stroke) {
+        if (stroke == null) {
+            throw new IllegalArgumentException("Null 'stroke' argument.");
+        }
+        this.groupStroke = stroke;
+        notifyListeners(new RendererChangeEvent(this));        
     }
 
     /**
@@ -426,6 +433,36 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
             }
         }
     }
+    
+    /**
+     * Tests this instance for equality with an arbitrary object.  The icon fields
+     * are NOT included in the test, so this implementation is a little weak.
+     * 
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A boolean.
+     *
+     * @since 1.0.7
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof MinMaxCategoryRenderer)) {
+            return false;
+        }
+        MinMaxCategoryRenderer that = (MinMaxCategoryRenderer) obj;
+        if (this.plotLines != that.plotLines) {
+            return false;
+        }
+        if (!PaintUtilities.equal(this.groupPaint, that.groupPaint)) {
+            return false;
+        }
+        if (!this.groupStroke.equals(that.groupStroke)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 
     /**
      * Returns an icon.
@@ -469,7 +506,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     }
 
     /**
-     * Returns an icon.
+     * Returns an icon from a shape.
      *
      * @param shape  the shape.
      * @param fill  the fill flag.
@@ -478,7 +515,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @return The icon.
      */
     private Icon getIcon(Shape shape, final boolean fill, 
-                         final boolean outline) {
+            final boolean outline) {
         final int width = shape.getBounds().width;
         final int height = shape.getBounds().height;
         final GeneralPath path = new GeneralPath(shape);

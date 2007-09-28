@@ -1,3 +1,11 @@
+2007-09-28  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/renderer/category/MinMaxCategoryRenderer.java
+	(setGroupStroke): Check for null argument, add event notification,
+	(equals): New method override,
+	* tests/org/jfree/chart/renderer/category/junit/MinMaxCategoryRendererTests.java
+	(testEquals): Extended to cover additional fields.
+
 2007-09-27  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/renderer/category/StatisticalLineAndShapeRenderer.java
