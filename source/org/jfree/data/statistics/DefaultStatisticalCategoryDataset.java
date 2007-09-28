@@ -32,8 +32,6 @@
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: DefaultStatisticalCategoryDataset.java,v 1.8.2.4 2007/02/02 15:50:24 mungady Exp $
- *
  * Changes
  * -------
  * 21-Aug-2002 : Version 1, contributed by Pascal Collet (DG);
@@ -50,6 +48,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 08-Aug-2006 : Reworked implementation of RangeInfo methods (DG);
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
+ * 28-Sep-2007 : Fixed cloning bug (DG);
  * 
  */
 
@@ -61,13 +60,14 @@ import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.general.AbstractDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * A convenience class that provides a default implementation of the
  * {@link StatisticalCategoryDataset} interface.
  */
 public class DefaultStatisticalCategoryDataset extends AbstractDataset
-    implements StatisticalCategoryDataset, RangeInfo {
+    implements StatisticalCategoryDataset, RangeInfo, PublicCloneable {
 
     /** Storage for the data. */
     private KeyedObjects2D data;
@@ -409,5 +409,19 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
             return false;   
         }
         return true;
+    }
+    
+    /**
+     * Returns a clone of this dataset.
+     * 
+     * @return A clone of this dataset.
+     * 
+     * @throws CloneNotSupportedException if cloning cannot be completed.
+     */
+    public Object clone() throws CloneNotSupportedException {
+        DefaultStatisticalCategoryDataset clone 
+                = (DefaultStatisticalCategoryDataset) super.clone();
+        clone.data = (KeyedObjects2D) this.data.clone();
+        return clone;
     }
 }

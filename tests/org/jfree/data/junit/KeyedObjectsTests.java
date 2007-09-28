@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,15 @@
  * ----------------------
  * KeyedObjectsTests.java
  * ----------------------
- * (C) Copyright 2004, 2005, by Object Refinery Limited.
+ * (C) Copyright 2004-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: KeyedObjectsTests.java,v 1.1.2.1 2006/10/03 15:41:42 mungady Exp $
- *
  * Changes
  * -------
  * 27-Jan-2004 : Version 1 (DG);
+ * 28-Sep-2007 : Added testCloning2() (DG);
  *
  */
 
@@ -48,12 +47,14 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.data.KeyedObjects;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  * Tests for the {@link KeyedObjects} class.
@@ -103,6 +104,47 @@ public class KeyedObjectsTests extends TestCase {
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
+    }
+    
+    /**
+     * Confirm special features of cloning.
+     */
+    public void testCloning2() {
+        // case 1 - object is mutable but not PublicCloneable
+        Object obj1 = new ArrayList();
+        KeyedObjects ko1 = new KeyedObjects();
+        ko1.addObject("K1", obj1);
+        KeyedObjects ko2 = null;
+        try {
+            ko2 = (KeyedObjects) ko1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(ko1 != ko2);
+        assertTrue(ko1.getClass() == ko2.getClass());
+        assertTrue(ko1.equals(ko2));
+        
+        // the clone contains a reference to the original object
+        assertTrue(ko2.getObject("K1") == obj1); 
+        
+        // CASE 2 - object is mutable AND PublicCloneable
+        obj1 = new DefaultPieDataset();
+        ko1 = new KeyedObjects();
+        ko1.addObject("K1", obj1);
+        ko2 = null;
+        try {
+            ko2 = (KeyedObjects) ko1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(ko1 != ko2);
+        assertTrue(ko1.getClass() == ko2.getClass());
+        assertTrue(ko1.equals(ko2));
+        
+        // the clone contains a reference to a CLONE of the original object
+        assertTrue(ko2.getObject("K1") != obj1); 
     }
     
     /**
@@ -156,13 +198,12 @@ public class KeyedObjectsTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             ko2 = (KeyedObjects) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(ko1, ko2);
 

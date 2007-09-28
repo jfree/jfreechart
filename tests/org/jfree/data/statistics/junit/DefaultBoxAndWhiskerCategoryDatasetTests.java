@@ -32,13 +32,12 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DefaultBoxAndWhiskerCategoryDatasetTests.java,v 1.1.2.2 2007/04/17 13:22:56 mungady Exp $
- *
  * Changes
  * -------
  * 01-Mar-2004 : Version 1 (DG);
  * 17-Apr-2007 : Added a test for bug 1701822 (DG);
- *
+ * 28-Sep-2007 : Enhanced testClone() (DG);
+ * 
  */
 
 package org.jfree.data.statistics.junit;
@@ -152,6 +151,13 @@ public class DefaultBoxAndWhiskerCategoryDatasetTests extends TestCase {
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
+        
+        // test independence
+        d1.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0), 
+                new Double(3.0), new Double(4.0), new Double(5.0), 
+                new Double(6.0), new Double(7.0), new Double(8.0),
+                new ArrayList()), "ROW2", "COLUMN1");
+        assertFalse(d1.equals(d2));
     }
 
     /**
