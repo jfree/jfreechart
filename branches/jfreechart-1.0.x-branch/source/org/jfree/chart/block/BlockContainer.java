@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: BlockContainer.java,v 1.11.2.3 2007/03/16 14:10:12 mungady Exp $
- *
  * Changes:
  * --------
  * 22-Oct-2004 : Version 1 (DG);
@@ -41,7 +39,7 @@
  * 04-Feb-2005 : Added equals(), clone() and implemented Serializable (DG);
  * 08-Feb-2005 : Updated for changes in RectangleConstraint (DG);
  * 20-Apr-2005 : Added new draw() method (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 20-Jul-2006 : Perform translation directly on drawing area, not via 
  *               Graphics2D (DG);
  * 

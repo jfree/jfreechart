@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
  *
- * $Id: LabelBlock.java,v 1.8.2.5 2007/03/16 11:28:16 mungady Exp $
- *
  * Changes:
  * --------
  * 22-Oct-2004 : Version 1 (DG);

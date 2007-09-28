@@ -32,8 +32,6 @@
  * Original Author:  Christo Zietsman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: LineBorder.java,v 1.1.2.2 2007/06/14 09:16:42 mungady Exp $
- *
  * Changes:
  * --------
  * 16-Mar-2007 : Version 1, contributed by Christo Zietsman with

@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: AbstractBlock.java,v 1.12.2.6 2007/04/04 09:14:20 mungady Exp $
- *
  * Changes:
  * --------
  * 22-Oct-2004 : Version 1 (DG);
