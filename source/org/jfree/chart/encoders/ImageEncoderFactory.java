@@ -32,8 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: ImageEncoderFactory.java,v 1.3.2.3 2007/02/02 14:51:22 mungady Exp $
- *
  * Changes
  * -------
  * 01-Aug-2004 : Initial version (RA);

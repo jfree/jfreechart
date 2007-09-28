@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * --------------------------
  * SunJPEGEncoderAdapter.java
  * --------------------------
- * (C) Copyright 2004-2006, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-2007, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * $Id: SunJPEGEncoderAdapter.java,v 1.3.2.3 2006/07/20 14:27:00 mungady Exp $
  *
  * Changes
  * -------
@@ -40,7 +38,7 @@
  * 01-Nov-2005 : To remove the dependency on non-supported APIs, use ImageIO 
  *               instead of com.sun.image.codec.jpeg.JPEGImageEncoder - this 
  *               adapter will only be available on JDK 1.4 or later (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 20-Jul-2006 : Pass quality setting to ImageIO. Also increased default 
  *               value to 0.95 (DG);
  * 

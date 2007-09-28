@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,13 +27,11 @@
  * -----------------
  * XYItemEntity.java
  * -----------------
- * (C) Copyright 2002-2005, by Object Refinery Limited.
+ * (C) Copyright 2002-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
- *
- * $Id: XYItemEntity.java,v 1.5.2.1 2005/10/25 20:41:59 mungady Exp $
  *
  * Changes:
  * --------

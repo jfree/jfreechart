@@ -33,8 +33,6 @@
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
  *
- * $Id: CategoryItemEntity.java,v 1.5.2.2 2007/05/18 10:28:19 mungady Exp $
- *
  * Changes:
  * --------
  * 23-May-2002 : Version 1 (DG);
