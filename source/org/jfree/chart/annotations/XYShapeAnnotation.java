@@ -32,8 +32,6 @@
  * Original Author:  Greg Steckman (for Ondax, Inc.);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: XYShapeAnnotation.java,v 1.8.2.4 2007/03/06 16:12:18 mungady Exp $
- *
  * Changes:
  * --------
  * 15-Aug-2003 : Version 1, adapted from 

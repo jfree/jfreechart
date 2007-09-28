@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: CategoryTextAnnotation.java,v 1.6.2.3 2007/03/06 16:12:18 mungady Exp $
- *
  * Changes:
  * --------
  * 02-Apr-2003 : Version 1 (DG);

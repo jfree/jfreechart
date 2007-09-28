@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: TextAnnotation.java,v 1.6.2.3 2007/01/16 09:43:46 mungady Exp $
- *
  * Changes:
  * --------
  * 28-Aug-2002 : Version 1 (DG);

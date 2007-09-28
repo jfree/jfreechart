@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * --------------------
  * XYBoxAnnotation.java
  * --------------------
- * (C) Copyright 2005, 2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: XYBoxAnnotation.java,v 1.5.2.3 2006/08/02 11:49:10 mungady Exp $
  *
  * Changes:
  * --------
