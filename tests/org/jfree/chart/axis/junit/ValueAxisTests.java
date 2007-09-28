@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: ValueAxisTests.java,v 1.1.2.3 2007/03/22 12:30:30 mungady Exp $
- *
  * Changes
  * -------
  * 13-Aug-2003 : Version 1 (DG);

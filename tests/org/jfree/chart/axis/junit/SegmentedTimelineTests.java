@@ -32,8 +32,6 @@
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: SegmentedTimelineTests.java,v 1.1.2.3 2007/02/02 15:10:21 mungady Exp $
- *
  * Changes
  * -------
  * 24-May-2003 : Version 1 (BK);

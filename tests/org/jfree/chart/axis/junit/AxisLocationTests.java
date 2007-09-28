@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * ----------------------
  * AxisLocationTests.java
  * ----------------------
- * (C) Copyright 2003-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: AxisLocationTests.java,v 1.1.2.1 2006/10/03 15:41:22 mungady Exp $
  *
  * Changes
  * -------
@@ -84,9 +82,8 @@ public class AxisLocationTests extends TestCase {
      */
     public void testEquals() {
         assertEquals(AxisLocation.TOP_OR_RIGHT, AxisLocation.TOP_OR_RIGHT);
-        assertEquals(
-            AxisLocation.BOTTOM_OR_RIGHT, AxisLocation.BOTTOM_OR_RIGHT
-        );    
+        assertEquals(AxisLocation.BOTTOM_OR_RIGHT, 
+                AxisLocation.BOTTOM_OR_RIGHT);    
         assertEquals(AxisLocation.TOP_OR_LEFT, AxisLocation.TOP_OR_LEFT);    
         assertEquals(AxisLocation.BOTTOM_OR_LEFT, AxisLocation.BOTTOM_OR_LEFT);
     }
@@ -116,13 +113,12 @@ public class AxisLocationTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             location2 = (AxisLocation) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(location1, location2);
         boolean same = location1 == location2;
