@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: TimeSeriesURLGeneratorTests.java,v 1.1.2.2 2007/04/17 16:05:27 mungady Exp $
- *
  * Changes
  * -------
  * 17-Apr-2007 : Version 1 (DG);
