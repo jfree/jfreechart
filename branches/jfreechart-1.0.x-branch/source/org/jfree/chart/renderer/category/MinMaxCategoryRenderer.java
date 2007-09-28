@@ -82,10 +82,8 @@ import javax.swing.Icon;
 
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.entity.CategoryItemEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
-import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
@@ -415,21 +413,10 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
                 }
             }
 
-            // collect entity and tool tip information...
-            if (state.getInfo() != null) {
-                EntityCollection entities = state.getEntityCollection();
-                if (entities != null && shape != null) {
-                    String tip = null;
-                    CategoryToolTipGenerator tipster = getToolTipGenerator(row,
-                            column);
-                    if (tipster != null) {
-                        tip = tipster.generateToolTip(dataset, row, column);
-                    }
-                    CategoryItemEntity entity = new CategoryItemEntity(
-                            shape, tip, null, dataset, dataset.getRowKey(row), 
-                            dataset.getColumnKey(column));
-                    entities.add(entity);
-                }
+            // add an item entity, if this information is being collected
+            EntityCollection entities = state.getEntityCollection();
+            if (entities != null && shape != null) {
+                addItemEntity(entities, dataset, row, column, shape);
             }
         }
     }
