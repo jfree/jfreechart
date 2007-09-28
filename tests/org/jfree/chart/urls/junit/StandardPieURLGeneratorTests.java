@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: StandardPieURLGeneratorTests.java,v 1.1.2.3 2007/04/17 16:05:27 mungady Exp $
- *
  * Changes
  * -------
  * 21-Mar-2003 : Version 1 (DG);

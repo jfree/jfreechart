@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: UrlsPackageTests.java,v 1.1.2.2 2007/04/17 14:32:46 mungady Exp $
- *
  * Changes:
  * --------
  * 21-Mar-2003 : Version 1 (DG);
