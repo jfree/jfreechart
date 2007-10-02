@@ -37,6 +37,7 @@
  * 05-Feb-2005 : Version 1 (DG);
  * 03-Aug-2006 : Added testGetRangeBounds() method (DG);
  * 28-Sep-2007 : Enhanced testCloning() method (DG);
+ * 02-Oct-2007 : Added new bounds tests (DG);
  *
  */
 
@@ -113,10 +114,10 @@ public class DefaultStatisticalCategoryDatasetTests extends TestCase {
 
         // try a Double.POSITIVE_INFINITY
         d.add(Double.POSITIVE_INFINITY, 0.0, "R1", "C3");
-        assertEquals(new Range(Double.NEGATIVE_INFINITY, 
-                Double.POSITIVE_INFINITY), d.getRangeBounds(false));
-        assertEquals(new Range(Double.NEGATIVE_INFINITY, 
-                Double.POSITIVE_INFINITY), d.getRangeBounds(true));
+        assertEquals(new Range(0.5, Double.POSITIVE_INFINITY), 
+                d.getRangeBounds(false));
+        assertEquals(new Range(-1.5, Double.POSITIVE_INFINITY), 
+                d.getRangeBounds(true));
     }
     
     /**
@@ -211,4 +212,59 @@ public class DefaultStatisticalCategoryDatasetTests extends TestCase {
         assertEquals(d1, d2);
     }
     
+    private static final double EPSILON = 0.0000000001;
+    
+    /**
+     * Some checks for the add() method.
+     */
+    public void testAdd() {
+        DefaultStatisticalCategoryDataset d1 
+                = new DefaultStatisticalCategoryDataset();
+        d1.add(1.0, 2.0, "R1", "C1");
+        assertEquals(1.0, d1.getValue("R1", "C1").doubleValue(), EPSILON);
+        assertEquals(2.0, d1.getStdDevValue("R1", "C1").doubleValue(), EPSILON);
+        
+        // overwrite the value
+        d1.add(10.0, 20.0, "R1", "C1");
+        assertEquals(10.0, d1.getValue("R1", "C1").doubleValue(), EPSILON);
+        assertEquals(20.0, d1.getStdDevValue("R1", "C1").doubleValue(), EPSILON);
+    }
+    
+    /**
+     * Some checks for the getRangeLowerBound() method.
+     */
+    public void testGetRangeLowerBound() {
+        DefaultStatisticalCategoryDataset d1 
+                = new DefaultStatisticalCategoryDataset();
+        d1.add(1.0, 2.0, "R1", "C1");
+        assertEquals(1.0, d1.getRangeLowerBound(false), EPSILON);
+        assertEquals(-1.0, d1.getRangeLowerBound(true), EPSILON);
+    }
+
+    /**
+     * Some checks for the getRangeUpperBound() method.
+     */
+    public void testGetRangeUpperBound() {
+        DefaultStatisticalCategoryDataset d1 
+                = new DefaultStatisticalCategoryDataset();
+        d1.add(1.0, 2.0, "R1", "C1");
+        assertEquals(1.0, d1.getRangeUpperBound(false), EPSILON);
+        assertEquals(3.0, d1.getRangeUpperBound(true), EPSILON);
+    }
+    
+    /**
+     * Some checks for the getRangeBounds() method.
+     */
+    public void testGetRangeBounds2() {
+        DefaultStatisticalCategoryDataset d1 
+                = new DefaultStatisticalCategoryDataset();
+        d1.add(1.0, 2.0, "R1", "C1");
+        assertEquals(new Range(1.0, 1.0), d1.getRangeBounds(false));
+        assertEquals(new Range(-1.0, 3.0), d1.getRangeBounds(true));
+        
+        d1.add(10.0, 20.0, "R1", "C1");
+        assertEquals(new Range(10.0, 10.0), d1.getRangeBounds(false));
+        assertEquals(new Range(-10.0, 30.0), d1.getRangeBounds(true));
+    }
+
 }

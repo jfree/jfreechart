@@ -1,5 +1,33 @@
 2007-10-02  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/data/statistics/DefaultStatisticalCategoryDataset.java
+	(minimumRangeValueRow): New field,
+	(minimumRangeValueColumn): Likewise,
+	(minimumRangeValueIncStdDevRow): Likewise,
+	(minimumRangeValueIncStdDevColumn): Likewise,
+	(maximumRangeValueRow): Likewise,
+	(maximumRangeValueColumn): Likewise,
+	(maximumRangeValueIncStdDevRow): Likewise,
+	(maximumRangeValueIncStdDevColumn): Likewise,
+	(DefaultStatisticalCategoryDataset()): Initialise new fields,
+	(add(Number, Number, Comparable, Comparable)): Fixed calculation of bounds,
+	(updateBounds): New method,
+	(getRangeLowerBound): Observe includeInterval flag,
+	(getRangeUpperBound): Likewise,
+	* source/org/jfree/data/statistics/MeanAndStandardDeviation.java
+	(getMeanValue): New method,
+	(getStandardDeviationValue): Likewise,
+	(toString): Likewise,
+	* tests/org/jfree/data/statistics/junit/DefaultStatisticalCategoryDatasetTests.java
+	(testGetRangeBounds): Fixed broken test,
+	(EPSILON): New field,
+	(testAdd): New test method,
+	(testGetRangeLowerBound): Likewise,
+	(testGetRangeUpperBound): Likewise,
+	(testGetRangeBounds2): Likewise.	
+
+2007-10-02  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/data/statistics/BoxAndWhiskerItem.java
 	(BoxAndWhiskerItem(double, double, double, double, double, double, 
 	double, double, List)): New constructor,
