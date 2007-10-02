@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DialTextAnnotation.java,v 1.1.2.3 2007/03/08 16:51:07 mungady Exp $
- *
  * Changes
  * -------
  * 03-Nov-2006 : Version 1 (DG);
