@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * ---------------------
  * DialPackageTests.java
  * ---------------------
- * (C) Copyright 2006, by Object Refinery Limited.
+ * (C) Copyright 2006, 2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: DialPackageTests.java,v 1.1.2.4 2007/04/30 21:34:50 mungady Exp $
  *
  * Changes:
  * --------

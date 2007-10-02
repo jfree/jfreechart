@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DialPointerTests.java,v 1.1.2.1 2007/04/30 21:34:50 mungady Exp $
- *
  * Changes
  * -------
  * 30-Apr-2007 : Version 1 (DG);
