@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andreas Schroeder;
  *
- * $Id: DefaultKeyedValues2D.java,v 1.7.2.5 2007/03/30 09:53:10 mungady Exp $
- *
  * Changes
  * -------
  * 28-Oct-2002 : Version 1 (DG);
