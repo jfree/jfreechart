@@ -32,14 +32,13 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: BoxAndWhiskerItem.java,v 1.5.2.4 2007/01/17 15:35:00 mungady Exp $
- *
  * Changes
  * -------
  * 27-Aug-2003 : Version 1 (DG); 
  * 01-Mar-2004 : Added equals() method and implemented Serializable (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 15-Nov-2006 : Added toString() method override (DG);
+ * 02-Oct-2007 : Added new constructor (for convenience) (DG);
  * 
  */
 
@@ -121,6 +120,33 @@ public class BoxAndWhiskerItem implements Serializable {
         this.minOutlier = minOutlier;
         this.maxOutlier = maxOutlier;
         this.outliers = outliers;
+        
+    }
+
+    /**
+     * Creates a new box-and-whisker item.
+     * 
+     * @param mean  the mean.
+     * @param median  the median
+     * @param q1  the first quartile.
+     * @param q3  the third quartile.
+     * @param minRegularValue  the minimum regular value.
+     * @param maxRegularValue  the maximum regular value.
+     * @param minOutlier  the minimum outlier value.
+     * @param maxOutlier  the maximum outlier value.
+     * @param outliers  a list of the outliers.
+     * 
+     * @since 1.0.7
+     */
+    public BoxAndWhiskerItem(double mean, double median, double q1, double q3,
+            double minRegularValue, double maxRegularValue, double minOutlier,
+            double maxOutlier, List outliers) {
+        
+        // pass values to other constructor
+        this(new Double(mean), new Double(median), new Double(q1), 
+                new Double(q3), new Double(minRegularValue), 
+                new Double(maxRegularValue), new Double(minOutlier), 
+                new Double(maxOutlier), outliers);
         
     }
 

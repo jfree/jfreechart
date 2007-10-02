@@ -48,6 +48,7 @@
  * 17-Apr-2007 : Fixed bug 1701822 (DG);
  * 13-Jun-2007 : Fixed error in previous patch (DG);
  * 28-Sep-2007 : Fixed cloning bug (DG);
+ * 02-Oct-2007 : Fixed bug in updating cached bounds (DG);
  *
  */
 
@@ -73,11 +74,27 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
     protected KeyedObjects2D data;
 
     /** The minimum range value. */
-    private Number minimumRangeValue;
+    private double minimumRangeValue;
+    
+    /** The row index for the cell that the minimum range value comes from. */
+    private int minimumRangeValueRow;
+    
+    /** 
+     * The column index for the cell that the minimum range value comes from. 
+     */
+    private int minimumRangeValueColumn;
 
     /** The maximum range value. */
-    private Number maximumRangeValue;
+    private double maximumRangeValue;
 
+    /** The row index for the cell that the maximum range value comes from. */
+    private int maximumRangeValueRow;
+    
+    /** 
+     * The column index for the cell that the maximum range value comes from. 
+     */
+    private int maximumRangeValueColumn;
+    
     /** The range of values. */
     private Range rangeBounds;
 
@@ -86,8 +103,12 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      */
     public DefaultBoxAndWhiskerCategoryDataset() {
         this.data = new KeyedObjects2D();
-        this.minimumRangeValue = null;
-        this.maximumRangeValue = null;
+        this.minimumRangeValue = Double.NaN;
+        this.minimumRangeValueRow = -1;
+        this.minimumRangeValueColumn = -1;
+        this.maximumRangeValue = Double.NaN;
+        this.maximumRangeValueRow = -1;
+        this.maximumRangeValueColumn = -1;
         this.rangeBounds = new Range(0.0, 0.0);
     }
 
@@ -119,6 +140,20 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
                     Comparable columnKey) {
 
         this.data.addObject(item, rowKey, columnKey);
+        
+        // update cached min and max values
+        int r = this.data.getRowIndex(rowKey);
+        int c = this.data.getColumnIndex(columnKey);
+        if (this.maximumRangeValueRow == r 
+                && this.maximumRangeValueColumn == c) {
+            this.maximumRangeValue = Double.NaN;
+        }
+        if (this.minimumRangeValueRow == r 
+                && this.minimumRangeValueColumn == c) {
+            this.minimumRangeValue = Double.NaN;
+        }
+        
+        
         double minval = Double.NaN;
         if (item.getMinOutlier() != null) {
             minval = item.getMinOutlier().doubleValue();
@@ -128,22 +163,30 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
             maxval = item.getMaxOutlier().doubleValue();
         }
         
-        if (this.maximumRangeValue == null) {
-            this.maximumRangeValue = new Double(maxval);
+        if (Double.isNaN(this.maximumRangeValue)) {
+            this.maximumRangeValue = maxval;
+            this.maximumRangeValueRow = r;
+            this.maximumRangeValueColumn = c;
         }
-        else if (maxval > this.maximumRangeValue.doubleValue()) {
-            this.maximumRangeValue = new Double(maxval);
-        }
-        
-        if (this.minimumRangeValue == null) {
-            this.minimumRangeValue = new Double(minval);
-        }
-        else if (minval < this.minimumRangeValue.doubleValue()) {
-            this.minimumRangeValue = new Double(minval);
+        else if (maxval > this.maximumRangeValue) {
+            this.maximumRangeValue = maxval;
+            this.maximumRangeValueRow = r;
+            this.maximumRangeValueColumn = c;
         }
         
-        this.rangeBounds = new Range(this.minimumRangeValue.doubleValue(),
-              this.maximumRangeValue.doubleValue());
+        if (Double.isNaN(this.minimumRangeValue)) {
+            this.minimumRangeValue = minval;
+            this.minimumRangeValueRow = r;
+            this.minimumRangeValueColumn = c;
+        }
+        else if (minval < this.minimumRangeValue) {
+            this.minimumRangeValue = minval;
+            this.minimumRangeValueRow = r;
+            this.minimumRangeValueColumn = c;
+        }
+        
+        this.rangeBounds = new Range(this.minimumRangeValue,
+              this.maximumRangeValue);
 
         fireDatasetChanged();
 
@@ -168,6 +211,9 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @param column  the column index.
      *
      * @return The value.
+     * 
+     * @see #getMedianValue(int, int)
+     * @see #getValue(Comparable, Comparable)
      */
     public Number getValue(int row, int column) {
         return getMedianValue(row, column);
@@ -180,6 +226,9 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @param columnKey  the columnKey.
      *
      * @return The value.
+     * 
+     * @see #getMedianValue(Comparable, Comparable)
+     * @see #getValue(int, int)
      */
     public Number getValue(Comparable rowKey, Comparable columnKey) {
         return getMedianValue(rowKey, columnKey);
@@ -420,11 +469,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @return The minimum value.
      */
     public double getRangeLowerBound(boolean includeInterval) {
-        double result = Double.NaN;
-        if (this.minimumRangeValue != null) {
-            result = this.minimumRangeValue.doubleValue();
-        }
-        return result;
+        return this.minimumRangeValue;
     }
 
     /**
@@ -436,11 +481,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @return The maximum value.
      */
     public double getRangeUpperBound(boolean includeInterval) {
-        double result = Double.NaN;
-        if (this.maximumRangeValue != null) {
-            result = this.maximumRangeValue.doubleValue();
-        }
-        return result;
+        return this.maximumRangeValue;
     }
 
     /**
