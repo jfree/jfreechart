@@ -32,8 +32,6 @@
  * Original Author:  Jeremy Bowman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: DefaultIntervalCategoryDataset.java,v 1.9.2.5 2007/03/09 15:50:23 mungady Exp $
- *
  * Changes
  * -------
  * 29-Apr-2002 : Version 1, contributed by Jeremy Bowman (DG);

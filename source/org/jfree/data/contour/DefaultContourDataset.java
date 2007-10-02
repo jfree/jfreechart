@@ -27,12 +27,10 @@
  * --------------------------
  * DefaultContourDataset.java
  * --------------------------
- * (C) Copyright 2002-2005, by David M. O'Donnell and Contributors.
+ * (C) Copyright 2002-2007, by David M. O'Donnell and Contributors.
  *
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * $Id: DefaultContourDataset.java,v 1.6.2.4 2007/04/04 09:08:21 mungady Exp $
  *
  * Changes (from 23-Jan-2003)
  * --------------------------

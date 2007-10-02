@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DefaultCategoryDataset.java,v 1.5.2.4 2007/03/08 11:12:08 mungady Exp $
- *
  * Changes
  * -------
  * 21-Jan-2003 : Added standard header, and renamed DefaultCategoryDataset (DG);
