@@ -32,8 +32,6 @@
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: NonGridContourDataset.java,v 1.3.2.3 2007/04/04 09:09:24 mungady Exp $
- *
  * Changes (from 24-Jul-2003)
  * --------------------------
  * 24-Jul-2003 : Added standard header (DG);

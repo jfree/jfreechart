@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * ---------------------------------
  * NormalDistributionFunction2D.java
  * ---------------------------------
- * (C)opyright 2004, 2005, by Object Refinery Limited.
+ * (C)opyright 2004-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: NormalDistributionFunction2D.java,v 1.3.2.2 2005/11/21 10:58:33 mungady Exp $
  *
  * Changes
  * -------

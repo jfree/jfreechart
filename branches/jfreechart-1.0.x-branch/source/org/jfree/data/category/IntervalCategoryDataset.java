@@ -32,8 +32,6 @@
  * Original Author:  Eduard Martinescu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: IntervalCategoryDataset.java,v 1.2.2.2 2007/01/17 15:51:15 mungady Exp $
- *
  * Changes
  * -------
  * 19-Mar-2002 : Version 1 contributed by Eduard Martinescu.  The interface 
