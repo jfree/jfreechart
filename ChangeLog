@@ -1,3 +1,24 @@
+2007-10-02  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/data/statistics/BoxAndWhiskerItem.java
+	(BoxAndWhiskerItem(double, double, double, double, double, double, 
+	double, double, List)): New constructor,
+	* source/org/jfree/data/statistics/DefaultBoxAndWhiskerCategoryDataset.java
+	(minimumRangeValue): Changed from Number to double,
+	(minimumRangeValueRow): New field,
+	(minimumRangeValueColumn): Likewise,
+	(maximumRangeValue): Changed from Number to double,
+	(maximumRangeValueRow): New field,
+	(maximumRangeValueColumn): Likewise,
+	(DefaultBoxAndWhiskerCategoryDataset): Updated for changed field types,
+	(add): Fix updating of cached range values,
+	(getRangeLowerBound): Update for changed field type,
+	(getRangeUpperBound): Likewise,
+	* tests/org/jfree/data/statistics/junit/DefaultBoxAndWhiskerCategoryDataset.java
+	(testAdd): New test method,
+	(testAddUpdatesCachedRange): Likewise,
+	(testConstructor): Likewise.
+
 2007-09-28  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/data/KeyedObjects.java
