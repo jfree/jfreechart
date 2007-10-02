@@ -49,6 +49,7 @@
  * 08-Aug-2006 : Reworked implementation of RangeInfo methods (DG);
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  * 28-Sep-2007 : Fixed cloning bug (DG);
+ * 02-Oct-2007 : Fixed bug updating cached range values (DG);
  * 
  */
 
@@ -67,7 +68,7 @@ import org.jfree.util.PublicCloneable;
  * {@link StatisticalCategoryDataset} interface.
  */
 public class DefaultStatisticalCategoryDataset extends AbstractDataset
-    implements StatisticalCategoryDataset, RangeInfo, PublicCloneable {
+        implements StatisticalCategoryDataset, RangeInfo, PublicCloneable {
 
     /** Storage for the data. */
     private KeyedObjects2D data;
@@ -75,24 +76,68 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /** The minimum range value. */
     private double minimumRangeValue;
 
+    /** The row index for the minimum range value. */
+    private int minimumRangeValueRow;
+    
+    /** The column index for the minimum range value. */
+    private int minimumRangeValueColumn;
+    
     /** The minimum range value including the standard deviation. */
     private double minimumRangeValueIncStdDev;
     
+    /** 
+     * The row index for the minimum range value (including the standard 
+     * deviation). 
+     */
+    private int minimumRangeValueIncStdDevRow;
+    
+    /** 
+     * The column index for the minimum range value (including the standard 
+     * deviation). 
+     */
+    private int minimumRangeValueIncStdDevColumn;
+    
     /** The maximum range value. */
     private double maximumRangeValue;
+    
+    /** The row index for the maximum range value. */
+    private int maximumRangeValueRow;
+    
+    /** The column index for the maximum range value. */
+    private int maximumRangeValueColumn;
 
     /** The maximum range value including the standard deviation. */
     private double maximumRangeValueIncStdDev;
 
+    /** 
+     * The row index for the maximum range value (including the standard 
+     * deviation). 
+     */
+    private int maximumRangeValueIncStdDevRow;
+    
+    /** 
+     * The column index for the maximum range value (including the standard 
+     * deviation). 
+     */
+    private int maximumRangeValueIncStdDevColumn;
+    
     /**
      * Creates a new dataset.
      */
     public DefaultStatisticalCategoryDataset() {
         this.data = new KeyedObjects2D();
         this.minimumRangeValue = Double.NaN;
+        this.minimumRangeValueRow = -1;
+        this.minimumRangeValueColumn = -1;
         this.maximumRangeValue = Double.NaN;
+        this.maximumRangeValueRow = -1;
+        this.maximumRangeValueColumn = -1;
         this.minimumRangeValueIncStdDev = Double.NaN;
+        this.minimumRangeValueIncStdDevRow = -1;
+        this.minimumRangeValueIncStdDevColumn = -1;
         this.maximumRangeValueIncStdDev = Double.NaN;
+        this.maximumRangeValueIncStdDevRow = -1;
+        this.maximumRangeValueIncStdDevColumn = -1;
     }
 
     /**
@@ -101,12 +146,12 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The mean value.
+     * @return The mean value (possibly <code>null</code>).
      */
     public Number getMeanValue(int row, int column) {
         Number result = null;
-        MeanAndStandardDeviation masd 
-            = (MeanAndStandardDeviation) this.data.getObject(row, column);
+        MeanAndStandardDeviation masd = (MeanAndStandardDeviation) 
+                this.data.getObject(row, column);
         if (masd != null) {
             result = masd.getMean();
         }
@@ -120,7 +165,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param row  the row index.
      * @param column  the column index.
      *
-     * @return The value.
+     * @return The value (possibly <code>null</code>).
      */
     public Number getValue(int row, int column) {
         return getMeanValue(row, column);
@@ -133,7 +178,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.
      *
-     * @return The value.
+     * @return The value (possibly <code>null</code>).
      */
     public Number getValue(Comparable rowKey, Comparable columnKey) {
         return getMeanValue(rowKey, columnKey);
@@ -145,12 +190,12 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.
      *
-     * @return The mean value.
+     * @return The mean value (possibly <code>null</code>).
      */
     public Number getMeanValue(Comparable rowKey, Comparable columnKey) {
         Number result = null;
-        MeanAndStandardDeviation masd
-            = (MeanAndStandardDeviation) this.data.getObject(rowKey, columnKey);
+        MeanAndStandardDeviation masd = (MeanAndStandardDeviation) 
+                this.data.getObject(rowKey, columnKey);
         if (masd != null) {
             result = masd.getMean();
         }
@@ -163,12 +208,12 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The standard deviation.
+     * @return The standard deviation (possibly <code>null</code>).
      */
     public Number getStdDevValue(int row, int column) {
         Number result = null;
-        MeanAndStandardDeviation masd 
-            = (MeanAndStandardDeviation) this.data.getObject(row, column);
+        MeanAndStandardDeviation masd = (MeanAndStandardDeviation) 
+                this.data.getObject(row, column);
         if (masd != null) {
             result = masd.getStandardDeviation();
         }
@@ -181,12 +226,12 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.
      *
-     * @return The standard deviation.
+     * @return The standard deviation (possibly <code>null</code>).
      */
     public Number getStdDevValue(Comparable rowKey, Comparable columnKey) {
         Number result = null;
-        MeanAndStandardDeviation masd
-            = (MeanAndStandardDeviation) this.data.getObject(rowKey, columnKey);
+        MeanAndStandardDeviation masd = (MeanAndStandardDeviation) 
+                this.data.getObject(rowKey, columnKey);
         if (masd != null) {
             result = masd.getStandardDeviation();
         }
@@ -299,8 +344,9 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
         MeanAndStandardDeviation item = new MeanAndStandardDeviation(
                 mean, standardDeviation);
         this.data.addObject(item, rowKey, columnKey);
-        double m = 0.0;
-        double sd = 0.0;
+        
+        double m = Double.NaN;
+        double sd = Double.NaN;
         if (mean != null) {
             m = mean.doubleValue();
         }
@@ -308,61 +354,188 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
             sd = standardDeviation.doubleValue();   
         }
         
-        if (!Double.isNaN(m)) {
-            if (Double.isNaN(this.maximumRangeValue) 
-                    || m > this.maximumRangeValue) {
-                this.maximumRangeValue = m;
+        // update cached range values
+        int r = this.data.getColumnIndex(columnKey);
+        int c = this.data.getRowIndex(rowKey);
+        if ((r == this.maximumRangeValueRow && c 
+                == this.maximumRangeValueColumn) || (r 
+                == this.maximumRangeValueIncStdDevRow && c 
+                == this.maximumRangeValueIncStdDevColumn) || (r 
+                == this.minimumRangeValueRow && c 
+                == this.minimumRangeValueColumn) || (r 
+                == this.minimumRangeValueIncStdDevRow && c 
+                == this.minimumRangeValueIncStdDevColumn)) {
+            
+            // iterate over all data items and update mins and maxes
+            updateBounds();
+        } 
+        else {
+            if (!Double.isNaN(m)) {
+                if (Double.isNaN(this.maximumRangeValue) 
+                        || m > this.maximumRangeValue) {
+                    this.maximumRangeValue = m;
+                    this.maximumRangeValueRow = r;
+                    this.maximumRangeValueColumn = c;
+                }
             }
-        }
         
-        if (!Double.isNaN(m + sd)) {
-            if (Double.isNaN(this.maximumRangeValueIncStdDev) 
-                    || (m + sd) > this.maximumRangeValueIncStdDev) {
-                this.maximumRangeValueIncStdDev = m + sd;
+            if (!Double.isNaN(m + sd)) {
+                if (Double.isNaN(this.maximumRangeValueIncStdDev) 
+                        || (m + sd) > this.maximumRangeValueIncStdDev) {
+                    this.maximumRangeValueIncStdDev = m + sd;
+                    this.maximumRangeValueIncStdDevRow = r;
+                    this.maximumRangeValueIncStdDevColumn = c;
+                }
+            }
+
+            if (!Double.isNaN(m)) {
+                if (Double.isNaN(this.minimumRangeValue) 
+                        || m < this.minimumRangeValue) {
+                    this.minimumRangeValue = m;
+                    this.minimumRangeValueRow = r;
+                    this.minimumRangeValueColumn = c;
+                }
+            }
+
+            if (!Double.isNaN(m - sd)) {
+                if (Double.isNaN(this.minimumRangeValueIncStdDev) 
+                        || (m - sd) < this.minimumRangeValueIncStdDev) {
+                    this.minimumRangeValueIncStdDev = m - sd;
+                    this.minimumRangeValueIncStdDevRow = r;
+                    this.minimumRangeValueIncStdDevColumn = c;
+                }
             }
         }
-
-        if (!Double.isNaN(m)) {
-            if (Double.isNaN(this.minimumRangeValue) 
-                    || m < this.minimumRangeValue) {
-                this.minimumRangeValue = m;
-            }
-        }
-
-        if (!Double.isNaN(m - sd)) {
-            if (Double.isNaN(this.minimumRangeValueIncStdDev) 
-                    || (m - sd) < this.minimumRangeValueIncStdDev) {
-                this.minimumRangeValueIncStdDev = m - sd;
-            }
-        }
-
         fireDatasetChanged();
     }
 
     /**
+     * Iterate over all the data items and update the cached bound values.
+     */
+    private void updateBounds() {
+        this.maximumRangeValue = Double.NaN;
+        this.maximumRangeValueRow = -1;
+        this.maximumRangeValueColumn = -1;
+        this.minimumRangeValue = Double.NaN;
+        this.minimumRangeValueRow = -1;
+        this.minimumRangeValueColumn = -1;
+        this.maximumRangeValueIncStdDev = Double.NaN;
+        this.maximumRangeValueIncStdDevRow = -1;
+        this.maximumRangeValueIncStdDevColumn = -1;
+        this.minimumRangeValueIncStdDev = Double.NaN;
+        this.minimumRangeValueIncStdDevRow = -1;
+        this.minimumRangeValueIncStdDevColumn = -1;
+        
+        int rowCount = this.data.getRowCount();
+        int columnCount = this.data.getColumnCount();
+        for (int r = 0; r < rowCount; r++) {
+            for (int c = 0; c < columnCount; c++) {
+                double m = Double.NaN;
+                double sd = Double.NaN;
+                MeanAndStandardDeviation masd = (MeanAndStandardDeviation) 
+                        this.data.getObject(r, c);
+                if (masd == null) {
+                    continue;
+                }
+                m = masd.getMeanValue();
+                sd = masd.getStandardDeviationValue();
+                
+                if (!Double.isNaN(m)) {
+                    
+                    // update the max value
+                    if (Double.isNaN(this.maximumRangeValue)) {
+                        this.maximumRangeValue = m;
+                        this.maximumRangeValueRow = r;
+                        this.maximumRangeValueColumn = c;
+                    }
+                    else {
+                        if (m > this.maximumRangeValue) {
+                            this.maximumRangeValue = m;
+                            this.maximumRangeValueRow = r;
+                            this.maximumRangeValueColumn = c;
+                        }
+                    }
+                    
+                    // update the min value
+                    if (Double.isNaN(this.minimumRangeValue)) {
+                        this.minimumRangeValue = m;
+                        this.minimumRangeValueRow = r;
+                        this.minimumRangeValueColumn = c;
+                    }
+                    else {
+                        if (m < this.minimumRangeValue) {
+                            this.minimumRangeValue = m;
+                            this.minimumRangeValueRow = r;
+                            this.minimumRangeValueColumn = c;
+                        }
+                    }
+                    
+                    if (!Double.isNaN(sd)) {
+                        // update the max value
+                        if (Double.isNaN(this.maximumRangeValueIncStdDev)) {
+                            this.maximumRangeValueIncStdDev = m + sd;
+                            this.maximumRangeValueIncStdDevRow = r;
+                            this.maximumRangeValueIncStdDevColumn = c;
+                        }
+                        else {
+                            if (m + sd > this.maximumRangeValueIncStdDev) {
+                                this.maximumRangeValueIncStdDev = m + sd;
+                                this.maximumRangeValueIncStdDevRow = r;
+                                this.maximumRangeValueIncStdDevColumn = c;
+                            }
+                        }
+                        
+                        // update the min value
+                        if (Double.isNaN(this.minimumRangeValueIncStdDev)) {
+                            this.minimumRangeValueIncStdDev = m - sd;
+                            this.minimumRangeValueIncStdDevRow = r;
+                            this.minimumRangeValueIncStdDevColumn = c;
+                        }
+                        else {
+                            if (m - sd < this.minimumRangeValueIncStdDev) {
+                                this.minimumRangeValueIncStdDev = m - sd;
+                                this.minimumRangeValueIncStdDevRow = r;
+                                this.minimumRangeValueIncStdDevColumn = c;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
      * Returns the minimum y-value in the dataset.
      *
      * @param includeInterval  a flag that determines whether or not the
-     *                         y-interval is taken into account (ignored for
-     *                         this dataset).
+     *                         y-interval is taken into account.
      * 
      * @return The minimum value.
      */
     public double getRangeLowerBound(boolean includeInterval) {
-        return this.minimumRangeValue;        
+        if (includeInterval) {
+            return this.minimumRangeValueIncStdDev;
+        }
+        else {
+            return this.minimumRangeValue;     
+        }  
     }
 
     /**
      * Returns the maximum y-value in the dataset.
      *
      * @param includeInterval  a flag that determines whether or not the
-     *                         y-interval is taken into account (ignored for
-     *                         this dataset).
+     *                         y-interval is taken into account.
      * 
      * @return The maximum value.
      */
     public double getRangeUpperBound(boolean includeInterval) {
-        return this.maximumRangeValue;        
+        if (includeInterval) {
+            return this.maximumRangeValueIncStdDev;
+        }
+        else {
+            return this.maximumRangeValue;     
+        }  
     }
 
     /**
@@ -404,7 +577,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
             return false;   
         }
         DefaultStatisticalCategoryDataset that 
-            = (DefaultStatisticalCategoryDataset) obj;
+                = (DefaultStatisticalCategoryDataset) obj;
         if (!this.data.equals(that.data)) {
             return false;   
         }
