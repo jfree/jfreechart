@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,16 @@
  * -----------
  * Values.java
  * -----------
- * (C) Copyright 2001-2006, by Object Refinery Limited.
+ * (C) Copyright 2001-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: Values.java,v 1.2.2.2 2006/07/26 12:15:52 mungady Exp $
  *
  * Changes:
  * --------
  * 08-Nov-2001 : Version 1 (DG);
  * 23-Oct-2002 : Renamed getValueCount --> getItemCount (DG);#
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-May-2006 : Updated API docs (DG);
  *
  */

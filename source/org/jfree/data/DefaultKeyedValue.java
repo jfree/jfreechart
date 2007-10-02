@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DefaultKeyedValue.java,v 1.6.2.2 2007/06/11 13:33:06 mungady Exp $
- *
  * Changes:
  * --------
  * 31-Oct-2002 : Version 1 (DG);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,12 @@
  * ----------
  * Range.java
  * ----------
- * (C) Copyright 2002-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chuanhao Chiu;
  *                   Bill Kelemen; 
  *                   Nicolas Brodu;
- *
- * $Id: Range.java,v 1.6.2.2 2006/01/11 11:27:34 mungady Exp $
  *
  * Changes (from 23-Jun-2001)
  * --------------------------
@@ -53,7 +51,7 @@
  * 25-Sep-2003 : Oops, Range immutable, clone not necessary (NB);
  * 05-May-2004 : Added constrain() and intersects() methods (DG);
  * 18-May-2004 : Added expand() method (DG);
- * ------------- JFreeChart 1.0.0 ---------------------------------------------
+ * ------------- JFreeChart 1.0.x ---------------------------------------------
  * 11-Jan-2006 : Added new method expandToInclude(Range, double) (DG);
  * 
  */
