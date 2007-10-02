@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * ----------------------
  * StandardDialScale.java
  * ----------------------
- * (C) Copyright 2006, by Object Refinery Limited.
+ * (C) Copyright 2006-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: StandardDialScale.java,v 1.1.2.3 2006/11/17 11:06:44 mungady Exp $
  *
  * Changes
  * -------

@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYTitleAnnotationTests.java,v 1.1.2.1 2007/04/30 20:49:05 mungady Exp $
- *
  * Changes
  * -------
  * 30-Apr-2007 : Version 1 (DG);
