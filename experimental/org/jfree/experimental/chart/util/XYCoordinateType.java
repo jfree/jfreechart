@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYCoordinateType.java,v 1.1.2.1 2007/02/02 13:26:35 mungady Exp $
- *
  * Changes
  * -------
  * 02-Feb-2007 : Version 1 (DG);
