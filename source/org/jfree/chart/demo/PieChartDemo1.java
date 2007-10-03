@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   ;
  *
- * $Id: PieChartDemo1.java,v 1.2.2.4 2006/10/25 10:38:47 mungady Exp $
- *
  * Changes
  * -------
  * 09-Mar-2005 : Version 1, copied from the demo collection that ships with

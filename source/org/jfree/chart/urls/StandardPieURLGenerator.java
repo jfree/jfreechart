@@ -27,12 +27,10 @@
  * ----------------------------
  * StandardPieURLGenerator.java
  * ----------------------------
- * (C) Copyright 2002-2006, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2007, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
- *
- * $Id: StandardPieURLGenerator.java,v 1.4.2.3 2007/04/17 16:05:27 mungady Exp $
  *
  * Changes:
  * --------

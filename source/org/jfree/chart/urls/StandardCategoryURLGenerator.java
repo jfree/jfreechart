@@ -33,8 +33,6 @@
  * Contributors:     David Gilbert (for Object Refinery Limited);
  *                   Cleland Early;
  *
- * $Id: StandardCategoryURLGenerator.java,v 1.6.2.3 2007/04/17 16:05:27 mungady Exp $
- *
  * Changes:
  * --------
  * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;

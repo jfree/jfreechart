@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   ;
  *
- * $Id: TimeSeriesChartDemo1.java,v 1.2.2.6 2007/01/17 15:16:43 mungady Exp $
- *
  * Changes
  * -------
  * 09-Mar-2005 : Version 1, copied from the demo collection that ships with

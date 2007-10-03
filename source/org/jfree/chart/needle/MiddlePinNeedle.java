@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,16 +24,14 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
  * in the United States and other countries.]
  *
- * --------------
- * PinNeedle.java
- * --------------
- * (C) Copyright 2002-2006, by the Australian Antarctic Division and 
+ * --------------------
+ * MiddlePinNeedle.java
+ * --------------------
+ * (C) Copyright 2002-2007, by the Australian Antarctic Division and 
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * $Id: MiddlePinNeedle.java,v 1.4.2.3 2006/08/02 10:40:57 mungady Exp $
  *
  * Changes:
  * --------
