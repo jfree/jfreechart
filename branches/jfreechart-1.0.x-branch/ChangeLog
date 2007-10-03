@@ -1,5 +1,36 @@
 2007-10-03  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/data/KeyedObjects2D.java
+	(getRowIndex): Check for null argument,
+	(getColumnIndex): Likewise,
+	(removeObject): Check for unknown keys,
+	(clear): New method,
+	* source/org/jfree/data/statistics/DefaultBoxAndWhiskerCategoryDataset.java
+	(rangeBounds): Removed,
+	(DefaultBoxAndWhiskerCategoryDataset()): Updated for removed field,
+	(add(BoxAndWhiskerItem, Comparable, Comparable)): Likewise,
+	(remove(Comparable, Comparable)): New method,
+	(removeRow(int)): Likewise,
+	(removeRow(Comparable)): Likewise,
+	(removeColumn(int)): Likewise,
+	(removeColumn(Comparable)): Likewise,
+	(clear): Likewise,
+	(getRangeBounds): Return new instance every time,
+	* source/org/jfree/data/statistics/DefaultStatisticalCategoryDataset.java
+	(remove(Comparable, Comparable)): New method,
+	(removeRow(int)): Likewise,
+	(removeRow(Comparable)): Likewise,
+	(removeColumn(int)): Likewise,
+	(removeColumn(Comparable)): Likewise,
+	(clear): Likewise,
+	(getRangeBounds): Return new instance every time,
+	* tests/org/jfree/data/statistics/junit/DefaultBoxAndWhiskerCategoryDatasetTests.java
+	(testRemove): New method,
+	* tests/org/jfree/data/statistics/junit/DefaultStatisticalCategoryDatasetTests.java
+	(testRemove): New method.
+
+2007-10-03  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/data/statistics/DefaultBoxAndWhiskerCategoryDataset.java
 	(add(BoxAndWhiskerItem, Comparable, Comparable)): Update cached bounds by
 	iteration if necessary,

@@ -38,7 +38,7 @@
  * 17-Apr-2007 : Added a test for bug 1701822 (DG);
  * 28-Sep-2007 : Enhanced testClone() (DG);
  * 02-Oct-2007 : Added new tests (DG);
- * 03-Oct-2007 : Added getTestRangeBounds() (DG);
+ * 03-Oct-2007 : Added getTestRangeBounds() and testRemove() (DG);
  * 
  */
 
@@ -57,6 +57,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.data.Range;
+import org.jfree.data.UnknownKeyException;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
 
@@ -291,6 +292,36 @@ public class DefaultBoxAndWhiskerCategoryDatasetTests extends TestCase {
                 new ArrayList()), "R1", "C1");
         assertEquals(new Range(8.5, 9.6), d1.getRangeBounds(false));
         assertEquals(new Range(8.5, 9.6), d1.getRangeBounds(true));
+    }
+    
+    /**
+     * Some checks for the remove method.
+     */
+    public void testRemove() {
+        DefaultBoxAndWhiskerCategoryDataset data
+                = new DefaultBoxAndWhiskerCategoryDataset();
+        
+        boolean pass = false;
+        try {
+            data.remove("R1", "R2");
+        }
+        catch (UnknownKeyException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        data.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 
+                new ArrayList()), "R1", "C1");
+        assertEquals(new Range(7.0, 8.0), data.getRangeBounds(false));
+        assertEquals(new Range(7.0, 8.0), data.getRangeBounds(true));
+        
+        data.add(new BoxAndWhiskerItem(2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 
+                new ArrayList()), "R2", "C1");
+        assertEquals(new Range(7.0, 9.5), data.getRangeBounds(false));
+        assertEquals(new Range(7.0, 9.5), data.getRangeBounds(true));
+        
+        data.remove("R1", "C1");
+        assertEquals(new Range(8.5, 9.5), data.getRangeBounds(false));
+        assertEquals(new Range(8.5, 9.5), data.getRangeBounds(true));
     }
 
 }

@@ -38,7 +38,7 @@
  * 01-Mar-2004 : Added equals() and clone() methods and implemented 
  *               Serializable (DG);
  * 03-Oct-2007 : Updated getObject() to handle modified behaviour in 
- *               KeyedObjects class (DG);
+ *               KeyedObjects class, added clear() method (DG);
  *
  */
 
@@ -48,7 +48,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
 
 /**
  * A data structure that stores zero, one or many objects, where each object is
@@ -138,15 +137,19 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the row index for a given key.
+     * Returns the row index for a given key, or <code>-1</code> if the key
+     * is not recognised.
      *
-     * @param key  the key.
+     * @param key  the key (<code>null</code> not permitted).
      *
      * @return The row index.
      * 
      * @see #getRowKey(int)
      */
     public int getRowIndex(Comparable key) {
+        if (key == null) {
+            throw new IllegalArgumentException("Null 'key' argument.");
+        }
         return this.rowKeys.indexOf(key);
     }
 
@@ -175,15 +178,19 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the column index for a given key.
+     * Returns the column index for a given key, or <code>-1</code> if the key
+     * is not recognised.
      *
-     * @param key  the key.
+     * @param key  the key (<code>null</code> not permitted).
      *
      * @return The column index.
      * 
      * @see #getColumnKey(int)
      */
     public int getColumnIndex(Comparable key) {
+        if (key == null) {
+            throw new IllegalArgumentException("Null 'key' argument.");
+        }
         return this.columnKeys.indexOf(key);
     }
 
@@ -295,11 +302,20 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @see #addObject(Object, Comparable, Comparable)
      */
     public void removeObject(Comparable rowKey, Comparable columnKey) {
+        int rowIndex = getRowIndex(rowKey);
+        if (rowIndex < 0) {
+            throw new UnknownKeyException("Row key (" + rowKey 
+                    + ") not recognised.");
+        }
+        int columnIndex = getColumnIndex(columnKey);
+        if (columnIndex < 0) {
+            throw new UnknownKeyException("Column key (" + columnKey 
+                    + ") not recognised.");
+        }
         setObject(null, rowKey, columnKey);
         
         // 1. check whether the row is now empty.
         boolean allNull = true;
-        int rowIndex = getRowIndex(rowKey);
         KeyedObjects row = (KeyedObjects) this.rows.get(rowIndex);
 
         for (int item = 0, itemCount = row.getItemCount(); item < itemCount; 
@@ -321,8 +337,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
         for (int item = 0, itemCount = this.rows.size(); item < itemCount; 
              item++) {
             row = (KeyedObjects) this.rows.get(item);
-            int columnIndex = row.getIndex(columnKey);
-            if (columnIndex >= 0 && row.getObject(columnIndex) != null) {
+            int colIndex = row.getIndex(columnKey);
+            if (colIndex >= 0 && row.getObject(colIndex) != null) {
                 allNull = false;
                 break;
             }
@@ -332,9 +348,9 @@ public class KeyedObjects2D implements Cloneable, Serializable {
             for (int item = 0, itemCount = this.rows.size(); item < itemCount; 
                  item++) {
                 row = (KeyedObjects) this.rows.get(item);
-                int columnIndex = row.getIndex(columnKey);
-                if (columnIndex >= 0) {
-                    row.removeValue(columnIndex);
+                int colIndex = row.getIndex(columnKey);
+                if (colIndex >= 0) {
+                    row.removeValue(colIndex);
                 }
             }
             this.columnKeys.remove(columnKey);
@@ -409,6 +425,17 @@ public class KeyedObjects2D implements Cloneable, Serializable {
         this.columnKeys.remove(columnKey);
     }
 
+    /**
+     * Clears all the data and associated keys.
+     * 
+     * @since 1.0.7
+     */
+    public void clear() {
+        this.rowKeys.clear();
+        this.columnKeys.clear();
+        this.rows.clear();
+    }
+    
     /**
      * Tests this object for equality with an arbitrary object.
      *
