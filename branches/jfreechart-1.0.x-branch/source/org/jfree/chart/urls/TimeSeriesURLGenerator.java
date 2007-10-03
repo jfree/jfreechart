@@ -27,12 +27,10 @@
  * ---------------------------
  * TimeSeriesURLGenerator.java
  * ---------------------------
- * (C) Copyright 2002-2006, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2007, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
- *
- * $Id: TimeSeriesURLGenerator.java,v 1.5.2.4 2007/04/17 16:05:27 mungady Exp $
  *
  * Changes:
  * --------

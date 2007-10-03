@@ -32,8 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
  *
- * $Id: StandardXYURLGenerator.java,v 1.6.2.3 2007/02/20 15:36:23 mungady Exp $
- *
  * Changes:
  * --------
  * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;

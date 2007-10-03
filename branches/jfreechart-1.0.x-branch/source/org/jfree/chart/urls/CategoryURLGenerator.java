@@ -32,8 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
  *
- * $Id: CategoryURLGenerator.java,v 1.3.2.2 2007/02/02 15:51:05 mungady Exp $
- *
  * Changes:
  * --------
  * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;
