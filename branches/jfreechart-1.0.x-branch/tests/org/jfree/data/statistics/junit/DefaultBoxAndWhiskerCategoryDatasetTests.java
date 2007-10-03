@@ -38,6 +38,7 @@
  * 17-Apr-2007 : Added a test for bug 1701822 (DG);
  * 28-Sep-2007 : Enhanced testClone() (DG);
  * 02-Oct-2007 : Added new tests (DG);
+ * 03-Oct-2007 : Added getTestRangeBounds() (DG);
  * 
  */
 
@@ -261,6 +262,35 @@ public class DefaultBoxAndWhiskerCategoryDatasetTests extends TestCase {
         assertEquals(0, dataset.getRowCount());
         assertTrue(Double.isNaN(dataset.getRangeLowerBound(false)));
         assertTrue(Double.isNaN(dataset.getRangeUpperBound(false)));
+    }
+    
+    /**
+     * Some checks for the getRangeBounds() method.
+     */
+    public void testGetRangeBounds() {
+        DefaultBoxAndWhiskerCategoryDataset d1 
+                = new DefaultBoxAndWhiskerCategoryDataset();
+        d1.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 
+                new ArrayList()), "R1", "C1");
+        assertEquals(new Range(7.0, 8.0), d1.getRangeBounds(false));
+        assertEquals(new Range(7.0, 8.0), d1.getRangeBounds(true));
+        
+        d1.add(new BoxAndWhiskerItem(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 
+                new ArrayList()), "R1", "C1");
+        assertEquals(new Range(7.5, 8.5), d1.getRangeBounds(false));
+        assertEquals(new Range(7.5, 8.5), d1.getRangeBounds(true));
+        
+        d1.add(new BoxAndWhiskerItem(2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 
+                new ArrayList()), "R2", "C1");
+        assertEquals(new Range(7.5, 9.5), d1.getRangeBounds(false));
+        assertEquals(new Range(7.5, 9.5), d1.getRangeBounds(true));
+        
+        // this replaces the entry with the current minimum value, but the new
+        // minimum value is now in a different item
+        d1.add(new BoxAndWhiskerItem(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 8.6, 9.6, 
+                new ArrayList()), "R1", "C1");
+        assertEquals(new Range(8.5, 9.6), d1.getRangeBounds(false));
+        assertEquals(new Range(8.5, 9.6), d1.getRangeBounds(true));
     }
 
 }
