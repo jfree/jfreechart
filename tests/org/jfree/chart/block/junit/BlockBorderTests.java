@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: BlockBorderTests.java,v 1.1.2.2 2007/03/16 15:26:16 mungady Exp $
- *
  * Changes
  * -------
  * 04-Feb-2005 : Version 1 (DG);

@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: RendererPackageTests.java,v 1.1.2.2 2007/01/31 14:49:37 mungady Exp $
- *
  * Changes:
  * --------
  * 21-Mar-2003 : Version 1 (DG);
