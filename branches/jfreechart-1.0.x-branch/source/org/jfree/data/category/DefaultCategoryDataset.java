@@ -127,13 +127,14 @@ public class DefaultCategoryDataset extends AbstractDataset
     /**
      * Returns the row index for a given key.
      *
-     * @param key  the row key.
+     * @param key  the row key (<code>null</code> not permitted).
      *
      * @return The row index.
      * 
      * @see #getRowKey(int)
      */
     public int getRowIndex(Comparable key) {
+        // defer null argument check
         return this.data.getRowIndex(key);
     }
 
@@ -164,13 +165,14 @@ public class DefaultCategoryDataset extends AbstractDataset
     /**
      * Returns the column index for a given key.
      *
-     * @param key  the column key.
+     * @param key  the column key (<code>null</code> not permitted).
      *
      * @return The column index.
      * 
      * @see #getColumnKey(int)
      */
     public int getColumnIndex(Comparable key) {
+        // defer null argument check
         return this.data.getColumnIndex(key);
     }
 
