@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LabelBlockTests.java,v 1.1.2.2 2007/03/16 11:28:16 mungady Exp $
- *
  * Changes
  * -------
  * 01-Sep-2005 : Version 1 (DG);

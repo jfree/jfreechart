@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: BlockPackageTests.java,v 1.1.2.2 2007/03/16 15:26:16 mungady Exp $
- *
  * Changes:
  * --------
  * 22-Oct-2004 : Version 1 (DG);

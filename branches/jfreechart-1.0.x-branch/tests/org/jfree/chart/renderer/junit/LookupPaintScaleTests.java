@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LookupPaintScaleTests.java,v 1.1.2.3 2007/03/09 15:59:21 mungady Exp $
- *
  * Changes
  * -------
  * 05-Jul-2006 : Version 1 (DG);

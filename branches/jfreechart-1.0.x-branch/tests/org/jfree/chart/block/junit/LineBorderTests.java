@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LineBorderTests.java,v 1.1.2.1 2007/03/16 15:26:16 mungady Exp $
- *
  * Changes
  * -------
  * 16-Mar-2007 : Version 1 (DG);

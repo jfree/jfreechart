@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DefaultPolarItemRendererTests.java,v 1.1.2.2 2007/03/15 12:05:08 mungady Exp $
- *
  * Changes
  * -------
  * 04-Aug-2006 : Version 1 (DG);
