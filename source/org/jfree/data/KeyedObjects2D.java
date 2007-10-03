@@ -102,10 +102,12 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     /**
      * Returns the object for a given row and column.
      *
-     * @param row  the row index.
-     * @param column  the column index.
+     * @param row  the row index (in the range 0 to getRowCount() - 1).
+     * @param column  the column index (in the range 0 to getColumnCount() - 1).
      *
-     * @return The object.
+     * @return The object (possibly <code>null</code>).
+     * 
+     * @see #getObject(Comparable, Comparable)
      */
     public Object getObject(int row, int column) {
         Object result = null;
@@ -199,33 +201,52 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     /**
      * Returns the object for the given row and column keys.
      *
-     * @param rowKey  the row key.
-     * @param columnKey  the column key.
+     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param columnKey  the column key (<code>null</code> not permitted).
      *
-     * @return The object.
+     * @return The object (possibly <code>null</code>).
+     * 
+     * @throws IllegalArgumentException if <code>rowKey<code> or 
+     *         <code>columnKey</code> is <code>null</code>.
+     * @throws UnknownKeyException if <code>rowKey</code> or 
+     *         <code>columnKey</code> is not recognised.
      */
     public Object getObject(Comparable rowKey, Comparable columnKey) {
-
-        Object result = null;
-        int row = this.rowKeys.indexOf(rowKey);
-        if (row >= 0) {
-            KeyedObjects rowData = (KeyedObjects) this.rows.get(row);
-            result = rowData.getObject(columnKey);
+        if (rowKey == null) {
+            throw new IllegalArgumentException("Null 'rowKey' argument.");
         }
-        return result;
-
+        if (columnKey == null) {
+            throw new IllegalArgumentException("Null 'columnKey' argument.");
+        }
+        int row = this.rowKeys.indexOf(rowKey);
+        if (row < 0) {
+            throw new UnknownKeyException("Row key (" + rowKey 
+                    + ") not recognised.");
+        }
+        int column = this.columnKeys.indexOf(columnKey);
+        if (column < 0) {
+            throw new UnknownKeyException("Column key (" + columnKey 
+                    + ") not recognised.");
+        }
+        KeyedObjects rowData = (KeyedObjects) this.rows.get(row);
+        int index = rowData.getIndex(columnKey);
+        if (index >= 0) {
+            return rowData.getObject(index);
+        }
+        else {
+            return null;
+        }
     }
 
     /**
      * Adds an object to the table.  Performs the same function as setObject().
      *
      * @param object  the object.
-     * @param rowKey  the row key.
-     * @param columnKey  the column key.
+     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param columnKey  the column key (<code>null</code> not permitted).
      */
-    public void addObject(Object object, 
-                          Comparable rowKey, 
-                          Comparable columnKey) {
+    public void addObject(Object object, Comparable rowKey, 
+            Comparable columnKey) {
         setObject(object, rowKey, columnKey);
     }
 
@@ -233,13 +254,18 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Adds or updates an object.
      *
      * @param object  the object.
-     * @param rowKey  the row key.
-     * @param columnKey  the column key.
+     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param columnKey  the column key (<code>null</code> not permitted).
      */
-    public void setObject(Object object, 
-                          Comparable rowKey, 
-                          Comparable columnKey) {
+    public void setObject(Object object, Comparable rowKey, 
+            Comparable columnKey) {
 
+        if (rowKey == null) {
+            throw new IllegalArgumentException("Null 'rowKey' argument.");
+        }
+        if (columnKey == null) {
+            throw new IllegalArgumentException("Null 'columnKey' argument.");
+        }
         KeyedObjects row;
         int rowIndex = this.rowKeys.indexOf(rowKey);
         if (rowIndex >= 0) {
@@ -259,21 +285,68 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     }
 
     /**
-     * Removes an object.
+     * Removes an object from the table by setting it to <code>null</code>.  If
+     * all the objects in the specified row and/or column are now 
+     * <code>null</code>, the row and/or column is removed from the table.
      *
-     * @param rowKey  the row key.
-     * @param columnKey  the column key.
+     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param columnKey  the column key (<code>null</code> not permitted).
+     * 
+     * @see #addObject(Object, Comparable, Comparable)
      */
     public void removeObject(Comparable rowKey, Comparable columnKey) {
         setObject(null, rowKey, columnKey);
-        // actually, a null value is different to a value that doesn't exist 
-        // at all, need to fix this code.
+        
+        // 1. check whether the row is now empty.
+        boolean allNull = true;
+        int rowIndex = getRowIndex(rowKey);
+        KeyedObjects row = (KeyedObjects) this.rows.get(rowIndex);
+
+        for (int item = 0, itemCount = row.getItemCount(); item < itemCount; 
+             item++) {
+            if (row.getObject(item) != null) {
+                allNull = false;
+                break;
+            }
+        }
+        
+        if (allNull) {
+            this.rowKeys.remove(rowIndex);
+            this.rows.remove(rowIndex);
+        }
+        
+        // 2. check whether the column is now empty.
+        allNull = true;
+        
+        for (int item = 0, itemCount = this.rows.size(); item < itemCount; 
+             item++) {
+            row = (KeyedObjects) this.rows.get(item);
+            int columnIndex = row.getIndex(columnKey);
+            if (columnIndex >= 0 && row.getObject(columnIndex) != null) {
+                allNull = false;
+                break;
+            }
+        }
+        
+        if (allNull) {
+            for (int item = 0, itemCount = this.rows.size(); item < itemCount; 
+                 item++) {
+                row = (KeyedObjects) this.rows.get(item);
+                int columnIndex = row.getIndex(columnKey);
+                if (columnIndex >= 0) {
+                    row.removeValue(columnIndex);
+                }
+            }
+            this.columnKeys.remove(columnKey);
+        }
     }
 
     /**
-     * Removes a row.
+     * Removes an entire row from the table.
      *
      * @param rowIndex  the row index.
+     * 
+     * @see #removeColumn(int)
      */
     public void removeRow(int rowIndex) {
         this.rowKeys.remove(rowIndex);
@@ -281,18 +354,29 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     }
 
     /**
-     * Removes a row.
+     * Removes an entire row from the table.
      *
-     * @param rowKey  the row key.
+     * @param rowKey  the row key (<code>null</code> not permitted).
+     * 
+     * @throws UnknownKeyException if <code>rowKey</code> is not recognised.
+     * 
+     * @see #removeColumn(Comparable)
      */
     public void removeRow(Comparable rowKey) {
-        removeRow(getRowIndex(rowKey));
+        int index = getRowIndex(rowKey);
+        if (index < 0) {
+            throw new UnknownKeyException("Row key (" + rowKey 
+                    + ") not recognised.");
+        }
+        removeRow(index);
     }
 
     /**
-     * Removes a column.
+     * Removes an entire column from the table.
      *
      * @param columnIndex  the column index.
+     * 
+     * @see #removeRow(int)
      */
     public void removeColumn(int columnIndex) {
         Comparable columnKey = getColumnKey(columnIndex);
@@ -300,15 +384,27 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     }
 
     /**
-     * Removes a column.
+     * Removes an entire column from the table.
      *
-     * @param columnKey  the column key.
+     * @param columnKey  the column key (<code>null</code> not permitted).
+     * 
+     * @throws UnknownKeyException if <code>rowKey</code> is not recognised.
+     * 
+     * @see #removeRow(Comparable)
      */
     public void removeColumn(Comparable columnKey) {
+        int index = getColumnIndex(columnKey);
+        if (index < 0) {
+            throw new UnknownKeyException("Column key (" + columnKey 
+                    + ") not recognised.");
+        }
         Iterator iterator = this.rows.iterator();
         while (iterator.hasNext()) {
             KeyedObjects rowData = (KeyedObjects) iterator.next();
-            rowData.removeValue(columnKey);
+            int i = rowData.getIndex(columnKey);
+            if (i >= 0) {
+                rowData.removeValue(i);
+            }
         }
         this.columnKeys.remove(columnKey);
     }

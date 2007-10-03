@@ -1,5 +1,24 @@
 2007-10-03  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/data/KeyedObjects2D.java
+	(getObject(Comparable, Comparable)): Check arguments for null or 
+	unrecognised keys,
+	(setObject(Object, Comparable, Comparable): Check for null arguments,
+	(removeObject): Check if row or column needs removing, 
+	(removeRow(Comparable)): Check for unrecognised key,
+	(removeColumn(Comparable)): Likewise,
+	* tests/org/jfree/data/junit/KeyedObjects2DTests.java
+	(testGetValueByIndex): New test method,
+	(testGetValueByKey): Likewise,
+	(testSetObject): Likewise,
+	(testRemoveRowByIndex): Likewise,
+	(testRemoveColumnByIndex): Likewise,
+	(testRemoveRowByKey): Likewise,
+	(testRemoveColumnByKey): Likewise,
+	(testRemoveValue): Likewise.
+
+2007-10-03  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/data/DefaultKeyedValues.java
 	(removeValue(Comparable)): Throw UnknownKeyException for unrecognised key,
 	* source/org/jfree/data/KeyedObjects.java
