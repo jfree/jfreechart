@@ -61,6 +61,7 @@ import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.general.AbstractDataset;
+import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -241,11 +242,12 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Returns the column index for a given key.
      *
-     * @param key  the column key.
+     * @param key  the column key (<code>null</code> not permitted).
      *
      * @return The column index.
      */
     public int getColumnIndex(Comparable key) {
+        // defer null argument check
         return this.data.getColumnIndex(key);
     }
 
@@ -272,11 +274,12 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Returns the row index for a given key.
      *
-     * @param key  the row key.
+     * @param key  the row key (<code>null</code> not permitted).
      *
      * @return The row index.
      */
     public int getRowIndex(Comparable key) {
+        // defer null argument check
         return this.data.getRowIndex(key);
     }
 
@@ -408,7 +411,119 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
         }
         fireDatasetChanged();
     }
+    
+    /**
+     * Removes an item from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param columnKey  the column key (<code>null</code> not permitted).
+     * 
+     * @see #add(double, double, Comparable, Comparable)
+     * 
+     * @since 1.0.7
+     */
+    public void remove(Comparable rowKey, Comparable columnKey) {
+        // defer null argument checks
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        this.data.removeObject(rowKey, columnKey);
+        
+        // if this cell held a maximum and/or minimum value, we'll need to
+        // update the cached bounds...
+        if ((r == this.maximumRangeValueRow && c 
+                == this.maximumRangeValueColumn) || (r 
+                == this.maximumRangeValueIncStdDevRow && c 
+                == this.maximumRangeValueIncStdDevColumn) || (r 
+                == this.minimumRangeValueRow && c 
+                == this.minimumRangeValueColumn) || (r 
+                == this.minimumRangeValueIncStdDevRow && c 
+                == this.minimumRangeValueIncStdDevColumn)) {
+            
+            // iterate over all data items and update mins and maxes
+            updateBounds();
+        } 
+        
+        fireDatasetChanged();
+    }    
 
+
+    /**
+     * Removes a row from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param rowIndex  the row index.
+     * 
+     * @see #removeColumn(int)
+     * 
+     * @since 1.0.7
+     */
+    public void removeRow(int rowIndex) {
+        this.data.removeRow(rowIndex);
+        updateBounds();
+        fireDatasetChanged();
+    }
+
+    /**
+     * Removes a row from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param rowKey  the row key.
+     * 
+     * @see #removeColumn(Comparable)
+     * 
+     * @since 1.0.7
+     */
+    public void removeRow(Comparable rowKey) {
+        this.data.removeRow(rowKey);
+        updateBounds();
+        fireDatasetChanged();
+    }
+
+    /**
+     * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param columnIndex  the column index.
+     * 
+     * @see #removeRow(int)
+     * 
+     * @since 1.0.7
+     */
+    public void removeColumn(int columnIndex) {
+        this.data.removeColumn(columnIndex);
+        updateBounds();
+        fireDatasetChanged();
+    }
+
+    /**
+     * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param columnKey  the column key.
+     * 
+     * @see #removeRow(Comparable)
+     * 
+     * @since 1.0.7
+     */
+    public void removeColumn(Comparable columnKey) {
+        this.data.removeColumn(columnKey);
+        updateBounds();
+        fireDatasetChanged();
+    }
+
+    /**
+     * Clears all data from the dataset and sends a {@link DatasetChangeEvent} 
+     * to all registered listeners.
+     * 
+     * @since 1.0.7
+     */
+    public void clear() {
+        this.data.clear();
+        updateBounds();
+        fireDatasetChanged();
+    }
+    
     /**
      * Iterate over all the data items and update the cached bound values.
      */

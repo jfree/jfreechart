@@ -49,7 +49,8 @@
  * 13-Jun-2007 : Fixed error in previous patch (DG);
  * 28-Sep-2007 : Fixed cloning bug (DG);
  * 02-Oct-2007 : Fixed bug in updating cached bounds (DG);
- * 03-Oct-2007 : Fixed another bug in updating cached bounds (DG);
+ * 03-Oct-2007 : Fixed another bug in updating cached bounds, added removal
+ *               methods (DG);
  *
  */
 
@@ -61,6 +62,7 @@ import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.general.AbstractDataset;
+import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 
@@ -96,9 +98,6 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      */
     private int maximumRangeValueColumn;
     
-    /** The range of values. */
-    private Range rangeBounds;
-
     /**
      * Creates a new dataset.
      */
@@ -110,7 +109,6 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
         this.maximumRangeValue = Double.NaN;
         this.maximumRangeValueRow = -1;
         this.maximumRangeValueColumn = -1;
-        this.rangeBounds = new Range(0.0, 0.0);
     }
 
     /**
@@ -187,10 +185,112 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
             }
         }
         
-        this.rangeBounds = new Range(this.minimumRangeValue,
-              this.maximumRangeValue);
         fireDatasetChanged();
 
+    }
+    
+    /**
+     * Removes an item from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param columnKey  the column key (<code>null</code> not permitted).
+     * 
+     * @see #add(BoxAndWhiskerItem, Comparable, Comparable)
+     * 
+     * @since 1.0.7
+     */
+    public void remove(Comparable rowKey, Comparable columnKey) {
+        // defer null argument checks
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        this.data.removeObject(rowKey, columnKey);
+        
+        // if this cell held a maximum and/or minimum value, we'll need to
+        // update the cached bounds...
+        if ((this.maximumRangeValueRow == r && this.maximumRangeValueColumn 
+                == c) || (this.minimumRangeValueRow == r 
+                && this.minimumRangeValueColumn == c))  {
+            updateBounds();
+        }
+        
+        fireDatasetChanged();
+    }
+
+    /**
+     * Removes a row from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param rowIndex  the row index.
+     * 
+     * @see #removeColumn(int)
+     * 
+     * @since 1.0.7
+     */
+    public void removeRow(int rowIndex) {
+        this.data.removeRow(rowIndex);
+        updateBounds();
+        fireDatasetChanged();
+    }
+
+    /**
+     * Removes a row from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param rowKey  the row key.
+     * 
+     * @see #removeColumn(Comparable)
+     * 
+     * @since 1.0.7
+     */
+    public void removeRow(Comparable rowKey) {
+        this.data.removeRow(rowKey);
+        updateBounds();
+        fireDatasetChanged();
+    }
+
+    /**
+     * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param columnIndex  the column index.
+     * 
+     * @see #removeRow(int)
+     * 
+     * @since 1.0.7
+     */
+    public void removeColumn(int columnIndex) {
+        this.data.removeColumn(columnIndex);
+        updateBounds();
+        fireDatasetChanged();
+    }
+
+    /**
+     * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param columnKey  the column key.
+     * 
+     * @see #removeRow(Comparable)
+     * 
+     * @since 1.0.7
+     */
+    public void removeColumn(Comparable columnKey) {
+        this.data.removeColumn(columnKey);
+        updateBounds();
+        fireDatasetChanged();
+    }
+
+    /**
+     * Clears all data from the dataset and sends a {@link DatasetChangeEvent} 
+     * to all registered listeners.
+     * 
+     * @since 1.0.7
+     */
+    public void clear() {
+        this.data.clear();
+        updateBounds();
+        fireDatasetChanged();
     }
 
     /**
@@ -400,7 +500,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
     /**
      * Returns the column index for a given key.
      *
-     * @param key  the column key.
+     * @param key  the column key (<code>null</code> not permitted).
      *
      * @return The column index.
      * 
@@ -437,13 +537,14 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
     /**
      * Returns the row index for a given key.
      *
-     * @param key  the row key.
+     * @param key  the row key (<code>null</code> not permitted).
      *
      * @return The row index.
      * 
      * @see #getRowKey(int)
      */
     public int getRowIndex(Comparable key) {
+        // defer null argument check
         return this.data.getRowIndex(key);
     }
 
@@ -530,7 +631,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @return The range.
      */
     public Range getRangeBounds(boolean includeInterval) {
-        return this.rangeBounds;
+        return new Range(this.minimumRangeValue, this.maximumRangeValue);
     }
     
     /**
