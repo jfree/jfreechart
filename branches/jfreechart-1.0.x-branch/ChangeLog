@@ -1,3 +1,29 @@
+2007-10-03  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/data/DefaultKeyedValues.java
+	(removeValue(Comparable)): Throw UnknownKeyException for unrecognised key,
+	* source/org/jfree/data/KeyedObjects.java
+	(getObject(int)): Allow IndexOutOfBoundsException to be thrown,
+	(getKey(int)): Likewise,
+	(getIndex): Check for null argument,
+	(getObject): Throw UnknownKeyException for unrecognised key,
+	(insertValue): New method,
+	(removeValue): Throw UnknownKeyException for unrecognised key,
+	(clear): New method,
+	(hashCode): Likewise,
+	* source/org/jfree/data/KeyedObjects2D.java
+	(getObject): Check for missing key in underlying data structure,
+	* tests/org/jfree/data/junit/DefaultKeyedValuesTests.java
+	(testRemoveValue): Updated checks for consistency with KeyedObjects,
+	* tests/org/jfree/data/junit/KeyedObjectsTests.java
+	(testInsertAndRetrieve): Updated checks,
+	(testGetObject): New test method,
+	(testGetKey): Likewise,
+	(testGetIndex): Likewise,
+	(testSetObject): Likewise,
+	(testRemoveValue): Likewise,
+	(testRemoveValueInt): Likewise.
+
 2007-10-02  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/data/statistics/DefaultStatisticalCategoryDataset.java

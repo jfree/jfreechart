@@ -37,6 +37,8 @@
  * 05-Feb-2003 : Version 1 (DG);
  * 01-Mar-2004 : Added equals() and clone() methods and implemented 
  *               Serializable (DG);
+ * 03-Oct-2007 : Updated getObject() to handle modified behaviour in 
+ *               KeyedObjects class (DG);
  *
  */
 
@@ -106,17 +108,18 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @return The object.
      */
     public Object getObject(int row, int column) {
-
         Object result = null;
         KeyedObjects rowData = (KeyedObjects) this.rows.get(row);
         if (rowData != null) {
             Comparable columnKey = (Comparable) this.columnKeys.get(column);
             if (columnKey != null) {
-                result = rowData.getObject(columnKey);
+                int index = rowData.getIndex(columnKey);
+                if (index >= 0) {
+                    result = rowData.getObject(columnKey);
+                }
             }
         }
         return result;
-
     }
 
     /**
