@@ -37,6 +37,7 @@
  * 31-Oct-2002 : Version 1 (DG);
  * 11-Jan-2005 : Minor tidy up (DG);
  * 28-Sep-2007 : Clean up equals() method (DG);
+ * 03-Oct-2007 : Make method behaviour consistent with DefaultKeyedValues (DG);
  *
  */
 
@@ -76,19 +77,19 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns an object.
+     * Returns an object from the list.
      *
      * @param item  the item index (zero-based).
      *
-     * @return The object (<code>null</code> if the index is out of range).
+     * @return The object (possibly <code>null</code>).
+     * 
+     * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
      */
     public Object getObject(int item) {
         Object result = null;
-        if (item >= 0 && item < this.data.size()) {
-            KeyedObject kobj = (KeyedObject) this.data.get(item);
-            if (kobj != null) {
-                result = kobj.getObject();
-            }
+        KeyedObject kobj = (KeyedObject) this.data.get(item);
+        if (kobj != null) {
+            result = kobj.getObject();
         }
         return result;
     }
@@ -98,42 +99,44 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @param index  the item index (zero-based).
      *
-     * @return The row key (or <code>null</code>).
+     * @return The row key.
+     *
+     * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
      * 
      * @see #getIndex(Comparable)
      */
     public Comparable getKey(int index) {
         Comparable result = null;
-        if (index >= 0 && index < this.data.size()) {
-            KeyedObject item = (KeyedObject) this.data.get(index);
-            if (item != null) {
-                result = item.getKey();
-            }
+        KeyedObject item = (KeyedObject) this.data.get(index);
+        if (item != null) {
+            result = item.getKey();
         }
         return result;
     }
 
     /**
-     * Returns the index for a given key.
+     * Returns the index for a given key, or <code>-1</code>.
      *
-     * @param key  the key.
+     * @param key  the key (<code>null</code> not permitted).
      *
      * @return The index, or <code>-1</code> if the key is unrecognised.
      * 
      * @see #getKey(int)
      */
     public int getIndex(Comparable key) {
-        int result = -1;
+        if (key == null) {
+            throw new IllegalArgumentException("Null 'key' argument.");
+        }
         int i = 0;
         Iterator iterator = this.data.iterator();
         while (iterator.hasNext()) {
             KeyedObject ko = (KeyedObject) iterator.next();
             if (ko.getKey().equals(key)) {
-                result = i;
+                return i;
             }
             i++;
         }
-        return result;
+        return -1;
     }
 
     /**
@@ -162,7 +165,12 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * @see #addObject(Comparable, Object)
      */
     public Object getObject(Comparable key) {
-        return getObject(getIndex(key));
+        int index = getIndex(key);
+        if (index < 0) {
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+        }
+        return getObject(index);
     }
 
     /**
@@ -183,7 +191,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * This is the same as the {@link #addObject(Comparable, Object)} 
      * method.
      *
-     * @param key  the key.
+     * @param key  the key (<code>null</code> not permitted).
      * @param object  the object.
      * 
      * @see #getObject(Comparable)
@@ -201,9 +209,43 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
+     * Inserts a new value at the specified position in the dataset or, if
+     * there is an existing item with the specified key, updates the value 
+     * for that item and moves it to the specified position.
+     * 
+     * @param position  the position (in the range <code>0</code> to 
+     *                  <code>getItemCount()</code>).
+     * @param key  the key (<code>null</code> not permitted).
+     * @param value  the value (<code>null</code> permitted).
+     * 
+     * @since 1.0.7
+     */
+    public void insertValue(int position, Comparable key, Object value) {
+        if (position < 0 || position > this.data.size()) {
+            throw new IllegalArgumentException("'position' out of bounds.");
+        }
+        if (key == null) {
+            throw new IllegalArgumentException("Null 'key' argument.");
+        }
+        int pos = getIndex(key);
+        if (pos >= 0) {
+            this.data.remove(pos);
+        }
+        KeyedObject item = new KeyedObject(key, value);
+        if (position <= this.data.size()) {
+            this.data.add(position, item);
+        }
+        else {
+            this.data.add(item);
+        }
+    }
+
+    /**
      * Removes a value from the collection.
      *
      * @param index  the index of the item to remove.
+     * 
+     * @see #removeValue(Comparable)
      */
     public void removeValue(int index) {
         this.data.remove(index);
@@ -212,12 +254,31 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
     /**
      * Removes a value from the collection.
      *
-     * @param key  the key of the item to remove.
+     * @param key  the key (<code>null</code> not permitted).
+     * 
+     * @see #removeValue(int)
+     * 
+     * @throws UnknownKeyException if the key is not recognised.
      */
     public void removeValue(Comparable key) {
-        removeValue(getIndex(key));
+        // defer argument checking 
+        int index = getIndex(key);
+        if (index < 0) {
+            throw new UnknownKeyException("The key (" + key.toString() 
+                    + ") is not recognised.");
+        }
+        removeValue(index);
     }
     
+    /**
+     * Clears all values from the collection.
+     * 
+     * @since 1.0.7
+     */
+    public void clear() {
+        this.data.clear();
+    }
+
     /**
      * Returns a clone of this object.  Keys in the list should be immutable
      * and are not cloned.  Objects in the list are cloned only if they
@@ -282,4 +343,13 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
 
     }
     
+    /**
+     * Returns a hash code.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        return (this.data != null ? this.data.hashCode() : 0);
+    }
+  
 }

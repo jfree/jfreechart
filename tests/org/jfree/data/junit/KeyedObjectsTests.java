@@ -36,6 +36,7 @@
  * -------
  * 27-Jan-2004 : Version 1 (DG);
  * 28-Sep-2007 : Added testCloning2() (DG);
+ * 03-Oct-2007 : New tests (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.data.KeyedObjects;
+import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.DefaultPieDataset;
 
 /**
@@ -169,8 +171,16 @@ public class KeyedObjectsTests extends TestCase {
         assertEquals(data.getObject("B"), new Double(2.0));
         assertEquals(data.getObject("C"), new Double(3.0));
         assertEquals(data.getObject("D"), null);
-        assertEquals(data.getObject("Not a key"), null);
-
+        
+        boolean pass = false;
+        try {
+            data.getObject("Not a key");
+        }
+        catch (UnknownKeyException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        
         // check retrieve value by index
         assertEquals(data.getObject(0), new Double(1.0));
         assertEquals(data.getObject(1), new Double(2.0));
@@ -207,6 +217,200 @@ public class KeyedObjectsTests extends TestCase {
         }
         assertEquals(ko1, ko2);
 
+    }
+    
+    /**
+     * Simple checks for the getObject(int) method.
+     */
+    public void testGetObject() {
+        // retrieve an item
+        KeyedObjects ko1 = new KeyedObjects();
+        ko1.addObject("Key 1", "Object 1");
+        ko1.addObject("Key 2", null);
+        ko1.addObject("Key 3", "Object 2");
+        assertEquals("Object 1", ko1.getObject(0));
+        assertNull(ko1.getObject(1));
+        assertEquals("Object 2", ko1.getObject(2));
+        
+        // request with a negative index
+        boolean pass = false;
+        try {
+            ko1.getObject(-1);
+        }
+        catch (IndexOutOfBoundsException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        
+        // request width index == itemCount
+        pass = false;
+        try {
+            ko1.getObject(3);
+        }
+        catch (IndexOutOfBoundsException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+    }
+    
+    /**
+     * Simple checks for the getKey(int) method.
+     */
+    public void testGetKey() {
+        // retrieve an item
+        KeyedObjects ko1 = new KeyedObjects();
+        ko1.addObject("Key 1", "Object 1");
+        ko1.addObject("Key 2", null);
+        ko1.addObject("Key 3", "Object 2");
+        assertEquals("Key 1", ko1.getKey(0));
+        assertEquals("Key 2", ko1.getKey(1));
+        assertEquals("Key 3", ko1.getKey(2));
+        
+        // request with a negative index
+        boolean pass = false;
+        try {
+            ko1.getKey(-1);
+        }
+        catch (IndexOutOfBoundsException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        
+        // request width index == itemCount
+        pass = false;
+        try {
+            ko1.getKey(3);
+        }
+        catch (IndexOutOfBoundsException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+    }
+    
+    /**
+     * Simple checks for the getIndex(Comparable) method.
+     */
+    public void testGetIndex() {
+        KeyedObjects ko1 = new KeyedObjects();
+        ko1.addObject("Key 1", "Object 1");
+        ko1.addObject("Key 2", null);
+        ko1.addObject("Key 3", "Object 2");
+        assertEquals(0, ko1.getIndex("Key 1"));
+        assertEquals(1, ko1.getIndex("Key 2"));
+        assertEquals(2, ko1.getIndex("Key 3"));
+        
+        // check null argument
+        boolean pass = false;
+        try {
+            ko1.getIndex(null);   
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+    }
+    
+    /**
+     * Some checks for the setObject(Comparable, Object) method.
+     */
+    public void testSetObject() {
+        KeyedObjects ko1 = new KeyedObjects();
+        ko1.setObject("Key 1", "Object 1");
+        ko1.setObject("Key 2", null);
+        ko1.setObject("Key 3", "Object 2");
+        
+        assertEquals("Object 1", ko1.getObject("Key 1"));
+        assertEquals(null, ko1.getObject("Key 2"));
+        assertEquals("Object 2", ko1.getObject("Key 3"));
+        
+        // replace an existing value
+        ko1.setObject("Key 2", "AAA");
+        ko1.setObject("Key 3", "BBB");
+        assertEquals("AAA", ko1.getObject("Key 2"));
+        assertEquals("BBB", ko1.getObject("Key 3"));
+        
+        // try a null key - should throw an exception
+        boolean pass = false;
+        try {
+            ko1.setObject(null, "XX");
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+    }
+    
+    /**
+     * Some checks for the removeValue() methods.
+     */
+    public void testRemoveValue() {
+        KeyedObjects ko1 = new KeyedObjects();
+        ko1.setObject("Key 1", "Object 1");
+        ko1.setObject("Key 2", null);
+        ko1.setObject("Key 3", "Object 2");
+        
+        ko1.removeValue(1);
+        assertEquals(2, ko1.getItemCount());
+        assertEquals(1, ko1.getIndex("Key 3"));
+        
+        ko1.removeValue("Key 1");
+        assertEquals(1, ko1.getItemCount());
+        assertEquals(0, ko1.getIndex("Key 3"));
+        
+        // try unknown key
+        boolean pass = false;
+        try {
+            ko1.removeValue("UNKNOWN");
+        }
+        catch (UnknownKeyException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        
+        // try null argument
+        pass = false;
+        try {
+            ko1.removeValue(null);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+    }
+    
+    /**
+     * Some checks for the removeValue(int) method.
+     */
+    public void testRemoveValueInt() {
+        KeyedObjects ko1 = new KeyedObjects();
+        ko1.setObject("Key 1", "Object 1");
+        ko1.setObject("Key 2", null);
+        ko1.setObject("Key 3", "Object 2");
+        
+        ko1.removeValue(1);
+        assertEquals(2, ko1.getItemCount());
+        assertEquals(1, ko1.getIndex("Key 3"));
+        
+        
+        // try negative key index
+        boolean pass = false;
+        try {
+            ko1.removeValue(-1);
+        }
+        catch (IndexOutOfBoundsException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        
+        // try key index == itemCount
+        pass = false;
+        try {
+            ko1.removeValue(2);
+        }
+        catch (IndexOutOfBoundsException e) {
+            pass = true;
+        }
+        assertTrue(pass);
     }
 
 }

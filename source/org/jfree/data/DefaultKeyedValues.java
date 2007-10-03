@@ -51,6 +51,7 @@
  * 31-Jul-2006 : Added a clear() method (DG);
  * 01-Aug-2006 : Added argument check to getIndex() method (DG);
  * 30-Apr-2007 : Added insertValue() methods (DG);
+ * 03-Oct-2007 : Make removeValue() throw UnknownKeyException (DG);
  *
  */
 
@@ -101,7 +102,7 @@ public class DefaultKeyedValues implements KeyedValues,
      *
      * @param item  the item of interest (zero-based index).
      *
-     * @return The value.
+     * @return The value (possibly <code>null</code>).
      * 
      * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
      */
@@ -280,7 +281,7 @@ public class DefaultKeyedValues implements KeyedValues,
         if (key == null) {
             throw new IllegalArgumentException("Null 'key' argument.");
         }
-        int pos = this.getIndex(key);
+        int pos = getIndex(key);
         if (pos >= 0) {
             this.data.remove(pos);
         }
@@ -314,12 +315,15 @@ public class DefaultKeyedValues implements KeyedValues,
      * 
      * @throws IllegalArgumentException if <code>key</code> is 
      *     <code>null</code>.
+     * @throws UnknownKeyException if <code>key</code> is not recognised.
      */
     public void removeValue(Comparable key) {
         int index = getIndex(key);
-        if (index >= 0) {
-            removeValue(index);
+        if (index < 0) {
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
         }
+        removeValue(index);
     }
     
     /**

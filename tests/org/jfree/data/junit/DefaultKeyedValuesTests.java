@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DefaultKeyedValuesTests.java,v 1.1.2.2 2007/04/30 15:28:04 mungady Exp $
- *
  * Changes
  * -------
  * 05-Mar-2003 : Version 1 (DG);
@@ -41,6 +39,7 @@
  * 31-Jul-2006 : Added test for new clear() method (DG);
  * 01-Aug-2006 : Extended testGetIndex() method (DG);
  * 30-Apr-2007 : Added some new tests (DG);
+ * 03-Oct-2007 : Updated testRemoveValue() (DG);
  *
  */
 
@@ -350,12 +349,12 @@ public class DefaultKeyedValuesTests extends TestCase {
         data.removeValue("B");
         assertEquals(-1, data.getIndex("B"));
         
-        boolean pass = true;
+        boolean pass = false;
         try {
             data.removeValue("XXX");
         }
-        catch (Exception e) {
-            pass = false;   
+        catch (UnknownKeyException e) {
+            pass = true;   
         }
         assertTrue(pass);
     }
