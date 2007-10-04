@@ -31,10 +31,8 @@
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: XisSymbolic.java,v 1.2.2.2 2007/02/02 15:14:53 mungady Exp $
- *
- * Changes (from 21-Aug-2001)
- * --------------------------
+ * Changes
+ * -------
  * 29-Mar-2002 : First version (AB);
  * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);

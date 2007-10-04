@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DefaultXYDataset.java,v 1.1.2.5 2007/01/25 14:02:04 mungady Exp $
- *
  * Changes
  * -------
  * 06-Jul-2006 : Version 1 (DG);

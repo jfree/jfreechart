@@ -31,8 +31,6 @@
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: YisSymbolic.java,v 1.2.2.2 2007/02/02 15:14:53 mungady Exp $
- *
  * Changes (from 21-Aug-2001)
  * --------------------------
  * 29-Mar-2002 : First version (AB);

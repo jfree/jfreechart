@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: YIntervalSeriesCollection.java,v 1.1.2.5 2007/02/20 16:22:01 mungady Exp $
- *
  * Changes
  * -------
  * 20-Oct-2006 : Version 1 (DG);

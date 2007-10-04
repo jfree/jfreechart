@@ -32,8 +32,6 @@
  * Original Author:  Barak Naveh;;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: MatrixSeriesCollection.java,v 1.7.2.3 2007/02/02 15:14:53 mungady Exp $
- *
  * Changes
  * -------
  * 10-Jul-2003 : Version 1 contributed by Barak Naveh (DG);

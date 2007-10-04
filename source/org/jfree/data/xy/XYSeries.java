@@ -35,8 +35,6 @@
  *                   Richard Atkinson;
  *                   Michel Santos;
  *
- * $Id: XYSeries.java,v 1.13.2.5 2007/04/04 10:24:07 mungady Exp $
- *
  * Changes
  * -------
  * 15-Nov-2001 : Version 1 (DG);

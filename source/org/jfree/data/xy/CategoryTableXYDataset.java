@@ -32,8 +32,6 @@
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: CategoryTableXYDataset.java,v 1.7.2.3 2007/02/02 15:14:53 mungady Exp $
- *
  * Changes
  * -------
  * 31-Mar-2004 : Version 1 (AS);

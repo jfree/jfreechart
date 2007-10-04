@@ -32,10 +32,8 @@
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: IntervalXYDelegate.java,v 1.10.2.4 2007/03/09 16:14:13 mungady Exp $
- *
- * Changes (from 31-Mar-2004)
- * --------------------------
+ * Changes
+ * -------
  * 31-Mar-2004 : Version 1 (AS);
  * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
  *               getYValue() (DG);

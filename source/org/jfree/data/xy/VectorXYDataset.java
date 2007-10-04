@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: VectorXYDataset.java,v 1.1.2.1 2007/05/25 14:44:38 mungady Exp $
- *
  * Changes
  * -------
  * 30-Jan-2007 : Version 1 (DG);
