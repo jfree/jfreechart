@@ -33,8 +33,6 @@
  *                   Science);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: DefaultBoxAndWhiskerXYDataset.java,v 1.10.2.2 2007/02/02 15:50:24 mungady Exp $
- *
  * Changes
  * -------
  * 05-Aug-2003 : Version 1, contributed by David Browning (DG);

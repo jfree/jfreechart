@@ -32,8 +32,6 @@
  * Original Author:  Jelai Wang (jelaiw AT mindspring.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: HistogramBin.java,v 1.4.2.3 2007/02/02 15:50:24 mungady Exp $
- *
  * Changes
  * -------
  * 06-Jul-2003 : Version 1, contributed by Jelai Wang (DG);
