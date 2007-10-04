@@ -33,8 +33,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Nicolas Brodu;
  *
- * $Id: TextTitle.java,v 1.16.2.7 2007/04/04 10:44:11 mungady Exp $
- *
  * Changes (from 18-Sep-2001)
  * --------------------------
  * 18-Sep-2001 : Added standard header (DG);

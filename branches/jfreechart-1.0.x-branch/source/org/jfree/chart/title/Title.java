@@ -33,8 +33,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Nicolas Brodu;
  *
- * $Id: Title.java,v 1.10.2.2 2007/01/24 11:07:07 mungady Exp $
- *
  * Changes (from 21-Aug-2001)
  * --------------------------
  * 21-Aug-2001 : Added standard header (DG);
