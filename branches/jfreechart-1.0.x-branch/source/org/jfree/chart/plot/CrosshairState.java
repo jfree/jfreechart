@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: CrosshairState.java,v 1.3.2.4 2007/02/06 16:29:10 mungady Exp $
- *
  * Changes
  * -------
  * 24-Jan-2002 : Version 1 (DG);

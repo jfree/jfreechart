@@ -36,8 +36,6 @@
  *                   Nicolas Brodu;
  *                   David Bastend;
  *
- * $Id: MeterPlot.java,v 1.13.2.10 2007/05/18 10:28:21 mungady Exp $
- *
  * Changes
  * -------
  * 01-Apr-2002 : Version 1, contributed by Hari (DG);

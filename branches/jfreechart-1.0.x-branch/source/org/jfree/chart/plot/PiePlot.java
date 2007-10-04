@@ -37,10 +37,8 @@
  *                   Arnaud Lelievre;
  *                   Andreas Schroeder (very minor);
  *
- * $Id: PiePlot.java,v 1.17.2.25 2007/06/14 15:04:21 mungady Exp $
- *
- * Changes (from 21-Jun-2001)
- * --------------------------
+ * Changes
+ * -------
  * 21-Jun-2001 : Removed redundant JFreeChart parameter from constructors (DG);
  * 18-Sep-2001 : Updated header (DG);
  * 15-Oct-2001 : Data source classes moved to com.jrefinery.data.* (DG);

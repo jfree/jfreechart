@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,13 @@
  * -------------------
  * IntervalMarker.java
  * -------------------
- * (C) Copyright 2002-2006, by Object Refinery Limited.
+ * (C) Copyright 2002-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: IntervalMarker.java,v 1.6.2.4 2006/10/25 15:47:16 mungady Exp $
- *
- * Changes (since 20-Aug-2002)
- * --------------------------
+ * Changes
+ * -------
  * 20-Aug-2002 : Added stroke to constructor in Marker class (DG);
  * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 26-Mar-2003 : Implemented Serializable (DG);

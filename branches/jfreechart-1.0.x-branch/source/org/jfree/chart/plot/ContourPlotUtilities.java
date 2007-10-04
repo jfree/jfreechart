@@ -32,8 +32,6 @@
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: ContourPlotUtilities.java,v 1.2.2.4 2007/04/04 09:07:24 mungady Exp $
- *
  * Changes
  * -------
  * 26-Nov-2002 : Version 1 contributed by David M. O'Donnell (DG);

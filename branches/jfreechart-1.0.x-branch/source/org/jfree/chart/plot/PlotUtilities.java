@@ -32,8 +32,6 @@
  * Original Author:  Sergei Ivanov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: ChartUtilities.java,v 1.4.2.4 2007/03/19 14:07:53 mungady Exp $
- *
  * Changes
  * -------
  * 26-Sep-2007 : Version 1, contributed by Sergei Ivanov (see patch 

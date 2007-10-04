@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: MultiplePiePlot.java,v 1.12.2.10 2007/05/18 10:28:22 mungady Exp $
- *
  * Changes
  * -------
  * 29-Jan-2004 : Version 1 (DG);

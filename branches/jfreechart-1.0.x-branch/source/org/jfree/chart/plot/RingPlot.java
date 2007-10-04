@@ -30,9 +30,7 @@
  * (C) Copyright 2004-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limtied);
- * Contributor(s):   -
- *
- * $Id: RingPlot.java,v 1.4.2.12 2007/02/14 14:10:25 mungady Exp $
+ * Contributor(s):   -;
  *
  * Changes
  * -------

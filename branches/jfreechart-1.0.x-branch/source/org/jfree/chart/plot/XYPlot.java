@@ -42,8 +42,6 @@
  *                   Eduardo Ramalho;
  *                   Sergei Ivanov;
  *
- * $Id: XYPlot.java,v 1.44.2.29 2007/06/07 12:49:36 mungady Exp $
- *
  * Changes (from 21-Jun-2001)
  * --------------------------
  * 21-Jun-2001 : Removed redundant JFreeChart parameter from constructors (DG);

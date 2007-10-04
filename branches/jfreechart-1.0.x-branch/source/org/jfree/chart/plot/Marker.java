@@ -32,10 +32,8 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
  *
- * $Id: Marker.java,v 1.10.2.5 2006/09/05 14:34:23 mungady Exp $
- *
- * Changes (since 2-Jul-2002)
- * --------------------------
+ * Changes
+ * -------
  * 02-Jul-2002 : Added extra constructor, standard header and Javadoc 
  *               comments (DG);
  * 20-Aug-2002 : Added the outline stroke attribute (DG);

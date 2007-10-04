@@ -32,8 +32,6 @@
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: PolarPlot.java,v 1.13.2.8 2007/03/21 10:37:20 mungady Exp $
- *
  * Changes
  * -------
  * 19-Jan-2004 : Version 1, contributed by DB with minor changes by DG (DG);

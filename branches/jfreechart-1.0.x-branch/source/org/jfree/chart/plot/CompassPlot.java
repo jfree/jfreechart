@@ -34,8 +34,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Arnaud Lelievre;
  *
- * $Id: CompassPlot.java,v 1.11.2.6 2007/03/20 21:52:16 mungady Exp $
- *
  * Changes:
  * --------
  * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
