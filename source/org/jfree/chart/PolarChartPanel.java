@@ -32,8 +32,6 @@
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: PolarChartPanel.java,v 1.2.2.2 2007/02/02 15:53:36 mungady Exp $
- *
  * Changes
  * -------
  * 19-Jan-2004 : Version 1, contributed by DB with minor changes by DG (DG);

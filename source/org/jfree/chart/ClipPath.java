@@ -33,8 +33,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Nicolas Brodu;
  *
- * $Id: ClipPath.java,v 1.2.2.3 2007/04/04 09:04:35 mungady Exp $
- *
  * Changes
  * -------
  * 22-Apr-2003 : Added standard header (DG);

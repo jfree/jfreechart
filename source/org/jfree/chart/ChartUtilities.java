@@ -34,8 +34,6 @@
  *                   Richard Atkinson;
  *                   Xavier Poinsard;
  *
- * $Id: ChartUtilities.java,v 1.4.2.4 2007/03/19 14:07:53 mungady Exp $
- *
  * Changes
  * -------
  * 11-Dec-2001 : Version 1.  The JPEG method comes from Wolfgang Irler's 

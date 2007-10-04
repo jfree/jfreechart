@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Alex Weber;
  *
- * $Id: ChartMouseListener.java,v 1.2.2.3 2007/05/24 09:30:37 mungady Exp $
- *
  * Changes
  * -------
  * 27-May-2002 : Version 1, incorporating code and ideas by Alex Weber (DG);

@@ -32,8 +32,6 @@
  * Original Author:  Cameron Riley;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: ChartColor.java,v 1.3.2.3 2007/02/02 15:53:36 mungady Exp $
- *
  * Changes
  * -------
  * 23-Jan-2003 : Version 1, contributed by Cameron Riley (DG);

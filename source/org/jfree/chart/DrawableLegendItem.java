@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,13 +27,11 @@
  * -----------------------
  * DrawableLegendItem.java
  * -----------------------
- * (C) Copyright 2002-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Luke Quinane;
  *                   Barak Naveh;
- *
- * $Id: DrawableLegendItem.java,v 1.3.2.2 2006/08/01 16:10:44 mungady Exp $
  *
  * Changes
  * -------

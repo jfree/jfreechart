@@ -42,8 +42,6 @@
  *                   Onno vd Akker;
  *                   Sergei Ivanov;
  *
- * $Id: ChartPanel.java,v 1.20.2.15 2007/06/06 15:08:23 mungady Exp $
- *
  * Changes (from 28-Jun-2001)
  * --------------------------
  * 28-Jun-2001 : Integrated buffering code contributed by S???ren 

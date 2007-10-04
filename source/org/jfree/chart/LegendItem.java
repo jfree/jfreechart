@@ -35,8 +35,6 @@
  *                   Wolfgang Irler;
  *                   Luke Quinane;
  *
- * $Id: LegendItem.java,v 1.9.2.7 2007/05/18 10:28:17 mungady Exp $
- *
  * Changes (from 2-Oct-2002)
  * -------------------------
  * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * ---------------
  * ChartFrame.java
  * ---------------
- * (C) Copyright 2001-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: ChartFrame.java,v 1.3.2.1 2005/10/25 16:50:20 mungady Exp $
  *
  * Changes
  * -------
