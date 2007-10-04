@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * ----------------------
  * PolarItemRenderer.java
  * ----------------------
- * (C) Copyright 2004, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004, 2007, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * $Id: PolarItemRenderer.java,v 1.3.2.2 2005/10/25 20:53:40 mungady Exp $
  *
  * Changes
  * -------
