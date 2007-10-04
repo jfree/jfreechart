@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
  *
- * $Id: CombinedDomainCategoryPlot.java,v 1.9.2.4 2007/04/17 11:13:25 mungady Exp $
- *
  * Changes:
  * --------
  * 16-May-2003 : Version 1 (DG);

@@ -38,8 +38,6 @@
  *                   Nicolas Brodu;
  *                   Petr Kubanek (bug 1606205);
  *
- * $Id: CombinedRangeXYPlot.java,v 1.10.2.5 2007/04/17 11:13:25 mungady Exp $
- *
  * Changes:
  * --------
  * 06-Dec-2001 : Version 1 (BK);

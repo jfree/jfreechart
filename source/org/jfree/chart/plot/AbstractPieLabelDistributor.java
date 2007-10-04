@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: AbstractPieLabelDistributor.java,v 1.1.2.1 2007/06/14 15:04:21 mungady Exp $
- *
  * Changes
  * -------
  * 14-Jun-2007 : Version 1 (DG);

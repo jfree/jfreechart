@@ -33,10 +33,8 @@
  * Contributor(s):   Jeremy Bowman;
  *                   Arnaud Lelievre;
  *
- * $Id: CategoryPlot.java,v 1.23.2.17 2007/06/07 12:49:36 mungady Exp $
- *
- * Changes (from 21-Jun-2001)
- * --------------------------
+ * Changes
+ * -------
  * 21-Jun-2001 : Removed redundant JFreeChart parameter from constructors (DG);
  * 21-Aug-2001 : Added standard header. Fixed DOS encoding problem (DG);
  * 18-Sep-2001 : Updated header (DG);

@@ -34,8 +34,6 @@
  *                   Arnaud Lelievre;
  *                   Nicolas Brodu;
  *
- * $Id: ContourPlot.java,v 1.16.2.5 2007/01/31 15:56:18 mungady Exp $
- *
  * Changes
  * -------
  * 26-Nov-2002 : Version 1 contributed by David M. O'Donnell (DG);

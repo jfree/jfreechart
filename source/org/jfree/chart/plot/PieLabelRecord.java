@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: PieLabelRecord.java,v 1.2.2.2 2007/06/14 15:04:21 mungady Exp $
- *
  * Changes
  * -------
  * 08-Mar-2004 : Version 1 (DG);

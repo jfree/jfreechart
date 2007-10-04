@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: PlotRenderingInfo.java,v 1.5.2.4 2007/04/17 11:13:25 mungady Exp $
- *
  * Changes
  * -------
  * 16-Sep-2003 : Version 1 (DG);

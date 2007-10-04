@@ -35,10 +35,8 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Nina Jeliazkova;
  *
- * $Id: SpiderWebPlot.java,v 1.11.2.16 2007/06/01 14:25:05 mungady Exp $
- *
- * Changes (from 28-Jan-2005)
- * --------------------------
+ * Changes
+ * -------
  * 28-Jan-2005 : First cut - missing a few features - still to do:
  *                           - needs tooltips/URL/label generator functions
  *                           - ticks on axes / background grid?

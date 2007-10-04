@@ -37,8 +37,6 @@
  *                   Arnaud Lelievre;
  *                   Dave Crane;
  *
- * $Id: PiePlot3D.java,v 1.10.2.6 2007/03/22 14:08:24 mungady Exp $
- *
  * Changes
  * -------
  * 21-Jun-2002 : Version 1;

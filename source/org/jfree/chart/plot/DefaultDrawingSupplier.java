@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jeremy Bowman;
  *
- * $Id: DefaultDrawingSupplier.java,v 1.6.2.4 2007/06/13 11:13:37 mungady Exp $
- *
  * Changes
  * -------
  * 16-Jan-2003 : Version 1 (DG);

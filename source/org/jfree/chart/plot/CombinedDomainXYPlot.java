@@ -37,8 +37,6 @@
  *                   Nicolas Brodu;
  *                   Petr Kubanek (bug 1606205);
  *
- * $Id: CombinedDomainXYPlot.java,v 1.9.2.6 2007/04/17 11:13:25 mungady Exp $
- *
  * Changes:
  * --------
  * 06-Dec-2001 : Version 1 (BK);
