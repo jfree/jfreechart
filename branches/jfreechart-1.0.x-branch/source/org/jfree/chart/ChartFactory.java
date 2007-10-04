@@ -40,8 +40,6 @@
  *                       Science);
  *                   Benoit Xhenseval;
  *
- * $Id: ChartFactory.java,v 1.22.2.11 2007/06/11 13:36:54 mungady Exp $
- *
  * Changes
  * -------
  * 19-Oct-2001 : Version 1, most methods transferred from JFreeChart.java (DG);

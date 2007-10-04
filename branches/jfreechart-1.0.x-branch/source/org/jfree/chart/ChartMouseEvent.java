@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Alex Weber;
  *
- * $Id: ChartMouseEvent.java,v 1.3.2.2 2007/05/24 09:30:37 mungady Exp $
- *
  * Changes
  * -------
  * 27-May-2002 : Version 1, incorporating code and ideas by Alex Weber (DG);

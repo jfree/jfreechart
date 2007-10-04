@@ -41,8 +41,6 @@
  * contributed to this source file (JFreeChart.java) - for a list of ALL
  * contributors to the project, please see the README.txt file.
  *
- * $Id: JFreeChart.java,v 1.34.2.21 2007/06/05 15:41:38 mungady Exp $
- *
  * Changes (from 20-Jun-2001)
  * --------------------------
  * 20-Jun-2001 : Modifications submitted by Andrzej Porebski for legend 
