@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * -------------------
  * TableXYDataset.java
  * -------------------
- * (C) Copyright 2000-2004, by Richard Atkinson and Contributors.
+ * (C) Copyright 2000-2007, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * $Id: TableXYDataset.java,v 1.2.2.1 2005/10/25 21:36:51 mungady Exp $
  *
  * Changes
  * -------

@@ -33,8 +33,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Zhitao Wang;
  *
- * $Id: MatrixSeries.java,v 1.5.2.3 2007/02/02 15:14:53 mungady Exp $
- *
  * Changes
  * -------
  * 10-Jul-2003 : Version 1 contributed by Barak Naveh (DG);

@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XIntervalDataItem.java,v 1.1.2.2 2007/02/02 11:01:09 mungady Exp $
- *
  * Changes
  * -------
  * 20-Oct-2006 : Version 1 (DG);

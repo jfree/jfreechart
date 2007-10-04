@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
  *
- * $Id: XYSeriesCollection.java,v 1.12.2.6 2007/05/08 10:58:50 mungady Exp $
- *
  * Changes
  * -------
  * 15-Nov-2001 : Version 1 (DG);

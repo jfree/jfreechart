@@ -34,8 +34,6 @@
  *                   David Gilbert (for Object Refinery Limited);
  *                   Andreas Schroeder;
  *
- * $Id: DefaultTableXYDataset.java,v 1.12.2.4 2007/03/08 13:57:09 mungady Exp $
- *
  * Changes:
  * --------
  * 27-Jul-2003 : XYDataset that forces each series to have a value for every 

@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYIntervalSeries.java,v 1.1.2.3 2007/02/13 14:23:52 mungady Exp $
- *
  * Changes
  * -------
  * 20-Oct-2006 : Version 1 (DG);

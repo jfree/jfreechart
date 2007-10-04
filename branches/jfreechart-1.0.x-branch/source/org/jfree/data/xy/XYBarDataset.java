@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYBarDataset.java,v 1.4.2.4 2007/01/30 15:02:33 mungady Exp $
- *
  * Changes
  * -------
  * 02-Mar-2004 : Version 1 (DG);

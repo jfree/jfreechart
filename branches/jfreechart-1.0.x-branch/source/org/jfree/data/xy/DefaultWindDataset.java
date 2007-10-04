@@ -32,8 +32,6 @@
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: DefaultWindDataset.java,v 1.5.2.4 2007/02/02 15:14:53 mungady Exp $
- *
  * Changes
  * -------
  * 06-Feb-2002 : Version 1, based on code contributed by Achilleus 
