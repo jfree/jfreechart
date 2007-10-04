@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert;
  * Contributor(s):   Adriaan Joubert;
  *
- * $Id: SubCategoryAxis.java,v 1.6.2.3 2007/05/30 14:50:24 mungady Exp $
- *
  * Changes
  * -------
  * 12-May-2004 : Version 1 (DG);

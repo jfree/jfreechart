@@ -32,10 +32,8 @@
  * Original Author:  David Gilbert;
  * Contributor(s):   Pady Srinivasan (patch 1217634);
  *
- * $Id: CategoryAxis.java,v 1.18.2.12 2007/03/07 11:14:11 mungady Exp $
- *
- * Changes (from 21-Aug-2001)
- * --------------------------
+ * Changes
+ * -------
  * 21-Aug-2001 : Added standard header. Fixed DOS encoding problem (DG);
  * 18-Sep-2001 : Updated header (DG);
  * 04-Dec-2001 : Changed constructors to protected, and tidied up default 

@@ -32,10 +32,8 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: NumberTickUnit.java,v 1.3.2.4 2007/06/11 13:41:07 mungady Exp $
- *
- * Changes (from 19-Dec-2001)
- * --------------------------
+ * Changes
+ * -------
  * 19-Dec-2001 : Added standard header (DG);
  * 01-May-2002 : Updated for changed to TickUnit class (DG);
  * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);

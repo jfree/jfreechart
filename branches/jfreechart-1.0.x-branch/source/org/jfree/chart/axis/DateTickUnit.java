@@ -32,10 +32,8 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chris Boek;
  *
- * $Id: DateTickUnit.java,v 1.7.2.3 2007/04/04 10:58:19 mungady Exp $
- *
- * Changes (from 8-Nov-2002)
- * --------------------------
+ * Changes
+ * -------
  * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
  * 27-Nov-2002 : Added IllegalArgumentException to getMillisecondCount() 
  *               method (DG);

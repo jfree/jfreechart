@@ -34,10 +34,8 @@
  *                   Nicolas Brodu (for Astrium and EADS Corporate Research 
  *                   Center);
  *
- * $Id: ValueAxis.java,v 1.10.2.5 2007/03/22 12:13:27 mungady Exp $
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
+ * Changes
+ * -------
  * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);
  * 23-Nov-2001 : Overhauled standard tick unit code (DG);
  * 04-Dec-2001 : Changed constructors to protected, and tidied up default 

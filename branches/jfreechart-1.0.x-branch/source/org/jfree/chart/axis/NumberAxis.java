@@ -32,10 +32,8 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Laurence Vanhelsuwe;
  *
- * $Id: NumberAxis.java,v 1.16.2.7 2007/03/22 12:13:27 mungady Exp $
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
+ * Changes
+ * -------
  * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);
  * 22-Sep-2001 : Changed setMinimumAxisValue() and setMaximumAxisValue() so 
  *               that they clear the autoRange flag (DG);
