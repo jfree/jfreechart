@@ -37,8 +37,6 @@
  *                   Rich Unger;
  *                   Christian W. Zuckschwerdt;
  *
- * $Id: BarRenderer3D.java,v 1.10.2.8 2007/05/18 09:30:30 mungady Exp $
- *
  * Changes
  * -------
  * 31-Oct-2001 : First version, contributed by Serge V. Grachov (DG);

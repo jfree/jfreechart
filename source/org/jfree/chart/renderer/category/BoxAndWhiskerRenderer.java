@@ -34,8 +34,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Tim Bardzil;
  *
- * $Id: BoxAndWhiskerRenderer.java,v 1.8.2.15 2007/06/01 15:12:14 mungady Exp $
- *
  * Changes
  * -------
  * 21-Aug-2003 : Version 1, contributed by David Browning (for the Australian 

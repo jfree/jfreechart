@@ -33,8 +33,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
  *
- * $Id: AreaRenderer.java,v 1.6.2.9 2007/05/18 10:28:27 mungady Exp $
- *
  * Changes:
  * --------
  * 21-May-2002 : Version 1, contributed by John Iles (DG);

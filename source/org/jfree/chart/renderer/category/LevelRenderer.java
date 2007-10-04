@@ -32,15 +32,13 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LevelRenderer.java,v 1.7.2.4 2007/06/01 15:12:15 mungady Exp $
- *
  * Changes
  * -------
  * 09-Jan-2004 : Version 1 (DG);
  * 05-Nov-2004 : Modified drawItem() signature (DG);
  * 20-Apr-2005 : Renamed CategoryLabelGenerator 
  *               --> CategoryItemLabelGenerator (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 23-Jan-2006 : Renamed getMaxItemWidth() --> getMaximumItemWidth() (DG);
  * 
  */

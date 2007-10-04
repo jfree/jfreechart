@@ -33,8 +33,6 @@
  * Original Author:  Brian Cole;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: CategoryStepRenderer.java,v 1.5.2.5 2007/05/18 10:28:27 mungady Exp $
- *
  * Changes
  * -------
  * 21-Apr-2004 : Version 1, contributed by Brian Cole (DG);

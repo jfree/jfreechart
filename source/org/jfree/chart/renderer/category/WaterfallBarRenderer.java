@@ -32,8 +32,6 @@
  * Original Author:  Darshan Shah;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: WaterfallBarRenderer.java,v 1.9.2.3 2007/06/08 13:57:38 mungady Exp $
- *
  * Changes
  * -------
  * 20-Oct-2003 : Version 1, contributed by Darshan Shah (DG);

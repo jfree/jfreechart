@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: GanttRenderer.java,v 1.6.2.6 2007/06/01 15:12:14 mungady Exp $
- *
  * Changes
  * -------
  * 16-Sep-2003 : Version 1 (DG);

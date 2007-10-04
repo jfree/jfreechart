@@ -33,8 +33,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
  *
- * $Id: IntervalBarRenderer.java,v 1.6.2.4 2007/06/01 15:12:15 mungady Exp $
- *
  * Changes
  * -------
  * 29-Apr-2002 : Version 1, contributed by Jeremy Bowman (DG);

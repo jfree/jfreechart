@@ -32,8 +32,6 @@
  * Original Author:  Mofeed Shahin;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: StatisticalLineAndShapeRenderer.java,v 1.4.2.9 2007/06/14 10:16:12 mungady Exp $
- *
  * Changes
  * -------
  * 01-Feb-2005 : Version 1, contributed by Mofeed Shahin (DG);

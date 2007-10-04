@@ -35,8 +35,6 @@
  *                   Nicolas Brodu (for Astrium and EADS Corporate Research 
  *                   Center);
  *
- * $Id: MinMaxCategoryRenderer.java,v 1.6.2.8 2007/06/01 15:12:15 mungady Exp $
- *
  * Changes:
  * --------
  * 29-May-2002 : Version 1 (TP);
