@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,12 @@
  * ---------------------
  * HistogramDataset.java
  * ---------------------
- * (C) Copyright 2003-2006, by Jelai Wang and Contributors.
+ * (C) Copyright 2003-2007, by Jelai Wang and Contributors.
  *
  * Original Author:  Jelai Wang (jelaiw AT mindspring.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Cameron Hayne;
  *                   Rikard Bj?rklind;
- *
- * $Id: HistogramDataset.java,v 1.9.2.7 2006/09/07 15:26:49 mungady Exp $
  *
  * Changes
  * -------

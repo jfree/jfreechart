@@ -32,8 +32,6 @@
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: StatisticalCategoryDataset.java,v 1.2.2.2 2007/02/02 15:50:24 mungady Exp $
- *
  * Changes
  * -------
  * 21-Aug-2002 : Version 1, contributed by Pascal Collet (DG);
