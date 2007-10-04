@@ -32,8 +32,6 @@
  * Original Author:  Tobias Selb (http://www.uepselon.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: LineRenderer3D.java,v 1.10.2.8 2007/04/03 15:59:18 mungady Exp $
- *
  * Changes
  * -------
  * 15-Oct-2004 : Version 1 (TS);

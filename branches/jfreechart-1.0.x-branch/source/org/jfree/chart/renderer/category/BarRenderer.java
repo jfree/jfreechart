@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
  *
- * $Id: BarRenderer.java,v 1.13.2.18 2007/05/18 10:28:27 mungady Exp $
- *
  * Changes
  * -------
  * 14-Mar-2002 : Version 1 (DG);

@@ -34,8 +34,6 @@
  *                   Thierry Saura;
  *                   Christian W. Zuckschwerdt;
  *
- * $Id: StackedBarRenderer.java,v 1.10.2.9 2007/03/15 16:55:06 mungady Exp $
- *
  * Changes
  * -------
  * 19-Oct-2001 : Version 1 (DG);

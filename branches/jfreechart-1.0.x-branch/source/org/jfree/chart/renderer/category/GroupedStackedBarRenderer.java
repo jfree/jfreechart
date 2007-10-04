@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: GroupedStackedBarRenderer.java,v 1.7.2.4 2007/06/01 15:12:15 mungady Exp $
- *
  * Changes
  * -------
  * 29-Apr-2004 : Version 1 (DG);

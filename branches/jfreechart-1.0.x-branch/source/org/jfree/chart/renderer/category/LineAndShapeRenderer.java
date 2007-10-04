@@ -35,8 +35,6 @@
  *                   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
  *
- * $Id: LineAndShapeRenderer.java,v 1.18.2.10 2007/05/18 10:28:27 mungady Exp $
- *
  * Changes
  * -------
  * 23-Oct-2001 : Version 1 (DG);

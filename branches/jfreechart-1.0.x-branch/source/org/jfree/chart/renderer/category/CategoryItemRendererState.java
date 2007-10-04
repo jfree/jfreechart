@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: CategoryItemRendererState.java,v 1.2.2.2 2006/12/01 16:30:22 mungady Exp $
- *
  * Changes (since 20-Oct-2003):
  * ----------------------------
  * 20-Oct-2003 : Added series running total (DG);

@@ -35,8 +35,6 @@
  *                   Christian W. Zuckschwerdt;
  *                   Max Herfort (patch 1459313);
  *
- * $Id: StackedBarRenderer3D.java,v 1.8.2.9 2007/05/08 15:04:55 mungady Exp $
- *
  * Changes
  * -------
  * 31-Oct-2001 : Version 1, contributed by Serge V. Grachov (DG);

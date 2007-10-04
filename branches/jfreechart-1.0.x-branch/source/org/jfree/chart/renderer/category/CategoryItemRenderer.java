@@ -33,8 +33,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
  *
- * $Id: CategoryItemRenderer.java,v 1.10.2.9 2007/06/14 13:13:43 mungady Exp $
- *
  * Changes
  * -------
  * 23-Oct-2001 : Version 1 (DG);

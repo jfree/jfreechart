@@ -33,8 +33,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
  *
- * $Id: StatisticalBarRenderer.java,v 1.4.2.6 2007/02/02 15:52:07 mungady Exp $
- *
  * Changes
  * -------
  * 21-Aug-2002 : Version 1, contributed by Pascal Collet (DG);
