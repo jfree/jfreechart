@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LegendItemBlockContainer.java,v 1.1.2.3 2007/05/18 10:28:33 mungady Exp $
- *
  * Changes
  * -------
  * 20-Jul-2006 : Version 1 (DG);

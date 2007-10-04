@@ -32,8 +32,6 @@
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: DateTitle.java,v 1.3.2.2 2007/02/02 15:03:19 mungady Exp $
- *
  * Changes (from 18-Sep-2001)
  * --------------------------
  * 18-Sep-2001 : Added standard header (DG);

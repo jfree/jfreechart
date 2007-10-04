@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LegendGraphic.java,v 1.9.2.4 2006/12/13 11:23:38 mungady Exp $
- *
  * Changes
  * -------
  * 26-Oct-2004 : Version 1 (DG);

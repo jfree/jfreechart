@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
  *
- * $Id: LegendTitle.java,v 1.20.2.11 2007/05/18 10:28:33 mungady Exp $
- *
  * Changes
  * -------
  * 25-Nov-2004 : First working version (DG);

@@ -32,8 +32,6 @@
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: ImageTitle.java,v 1.8.2.3 2007/02/02 15:03:19 mungady Exp $
- *
  * Changes (from 18-Sep-2001)
  * --------------------------
  * 18-Sep-2001 : Added standard header (DG);
