@@ -33,8 +33,6 @@
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: DefaultPolarItemRenderer.java,v 1.7.2.9 2007/05/18 10:28:24 mungady Exp $
- *
  * Changes
  * -------
  * 19-Jan-2004 : Version 1, contributed by DB with minor changes by DG (DG);

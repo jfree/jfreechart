@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: PaintScale.java,v 1.1.2.2 2007/01/31 14:31:24 mungady Exp $
- *
  * Changes
  * -------
  * 05-Jul-2006 : Version 1 (DG);

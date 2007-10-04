@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
  *
- * $Id: AbstractRenderer.java,v 1.22.2.15 2007/06/13 10:57:40 mungady Exp $
- *
  * Changes:
  * --------
  * 22-Aug-2002 : Version 1, draws code out of AbstractXYItemRenderer to share 
