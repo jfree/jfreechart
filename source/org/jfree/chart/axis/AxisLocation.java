@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nick Guenther;
  *
- * $Id: AxisLocation.java,v 1.4.2.3 2007/03/22 10:59:34 mungady Exp $
- *
  * Changes:
  * --------
  * 02-May-2003 : Version 1 (DG);

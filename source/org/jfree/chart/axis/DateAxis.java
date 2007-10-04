@@ -37,8 +37,6 @@
  *                   Pawel Pabis;
  *                   Chris Boek;
  *
- * $Id: DateAxis.java,v 1.17.2.11 2007/05/03 14:27:11 mungady Exp $
- *
  * Changes (from 23-Jun-2001)
  * --------------------------
  * 23-Jun-2001 : Modified to work with null data source (DG);

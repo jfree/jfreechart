@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: QuarterDateFormat.java,v 1.3.2.3 2007/06/08 15:20:15 mungady Exp $
- *
  * Changes:
  * --------
  * 01-Mar-2005 : Version 1 (DG);

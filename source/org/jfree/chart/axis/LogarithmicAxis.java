@@ -35,8 +35,6 @@
  *                   Scott Sams;
  *                   Sergei Ivanov;
  *
- * $Id: LogarithmicAxis.java,v 1.11.2.5 2007/03/22 12:13:27 mungady Exp $
- *
  * Changes
  * -------
  * 14-Mar-2002 : Version 1 contributed by Michael Duffy (DG);

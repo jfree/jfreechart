@@ -32,8 +32,6 @@
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: Timeline.java,v 1.2.2.2 2007/02/02 14:32:42 mungady Exp $
- *
  * Changes
  * -------
  * 23-May-2003 : Version 1 (BK);

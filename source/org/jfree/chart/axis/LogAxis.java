@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LogAxis.java,v 1.1.2.2 2007/03/22 16:39:18 mungady Exp $
- *
  * Changes
  * -------
  * 24-Aug-2006 : Version 1 (DG);

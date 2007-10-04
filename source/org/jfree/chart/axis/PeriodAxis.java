@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: PeriodAxis.java,v 1.16.2.7 2007/03/22 12:13:27 mungady Exp $
- *
  * Changes
  * -------
  * 01-Jun-2004 : Version 1 (DG);

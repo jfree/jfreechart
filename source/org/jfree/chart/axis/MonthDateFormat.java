@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: MonthDateFormat.java,v 1.1.2.5 2007/06/08 15:05:13 mungady Exp $
- *
  * Changes:
  * --------
  * 10-May-2005 : Version 1 (DG);

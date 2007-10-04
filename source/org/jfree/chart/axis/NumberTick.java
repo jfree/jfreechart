@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: NumberTick.java,v 1.2.2.1 2005/10/25 20:37:34 mungady Exp $
- *
  * Changes
  * -------
  * 07-Nov-2003 : Version 1 (DG);

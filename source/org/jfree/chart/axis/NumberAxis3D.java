@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,13 @@
  * -----------------
  * NumberAxis3D.java
  * -----------------
- * (C) Copyright 2001-2006, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2001-2007, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Jonathan Nash;
  *                   Richard Atkinson;
  *                   Tin Luu;
- *
- * $Id: NumberAxis3D.java,v 1.5.2.3 2006/12/07 15:34:16 mungady Exp $
  *
  * Changes
  * -------

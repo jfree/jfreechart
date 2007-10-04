@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: ExtendedCategoryAxis.java,v 1.4.2.2 2007/03/21 11:16:59 mungady Exp $
- *
  * Changes
  * -------
  * 07-Nov-2003 : Version 1 (DG);

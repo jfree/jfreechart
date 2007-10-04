@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,13 @@
  * -------------------
  * MarkerAxisBand.java
  * -------------------
- * (C) Copyright 2000-2005, by Object Refinery Limited.
+ * (C) Copyright 2000-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: MarkerAxisBand.java,v 1.6.2.1 2005/10/25 20:37:34 mungady Exp $
- *
- * Changes (from 03-Sep-2002)
- * --------------------------
+ * Changes
+ * -------
  * 03-Sep-2002 : Updated Javadoc comments (DG);
  * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);

@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: TickUnits.java,v 1.4.2.2 2005/10/25 20:37:34 mungady Exp $
- *
  * Changes
  * -------
  * 23-Nov-2001 : Version 1 (DG);
