@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: StackedXYAreaRendererTests.java,v 1.1.2.3 2007/03/22 16:58:37 mungady Exp $
- *
  * Changes
  * -------
  * 25-Mar-2003 : Version 1 (DG);

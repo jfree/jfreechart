@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: ClusteredXYBarRendererTests.java,v 1.1.2.2 2007/06/12 11:36:24 mungady Exp $
- *
  * Changes
  * -------
  * 25-Mar-2003 : Version 1 (DG);

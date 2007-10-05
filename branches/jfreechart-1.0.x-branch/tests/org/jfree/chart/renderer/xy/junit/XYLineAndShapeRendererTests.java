@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYLineAndShapeRendererTests.java,v 1.1.2.4 2007/05/17 16:23:31 mungady Exp $
- *
  * Changes
  * -------
  * 27-Jan-2004 : Version 1 (DG);

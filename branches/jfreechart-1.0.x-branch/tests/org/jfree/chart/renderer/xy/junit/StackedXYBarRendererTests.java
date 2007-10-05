@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: StackedXYBarRendererTests.java,v 1.1.2.3 2007/03/15 17:04:35 mungady Exp $
- *
  * Changes
  * -------
  * 10-Sep-2004 : Version 1 (DG);

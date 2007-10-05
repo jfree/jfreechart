@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYAreaRenderer2Tests.java,v 1.1.2.3 2007/05/17 16:23:31 mungady Exp $
- *
  * Changes
  * -------
  * 24-May-2005 : Version 1 (DG);

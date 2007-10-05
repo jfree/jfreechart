@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * --------------------------
  * WindItemRendererTests.java
  * --------------------------
- * (C) Copyright 2003-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: WindItemRendererTests.java,v 1.1.2.1 2006/10/03 15:41:46 mungady Exp $
  *
  * Changes
  * -------

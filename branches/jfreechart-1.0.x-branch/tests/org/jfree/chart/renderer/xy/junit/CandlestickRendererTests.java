@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: CandlestickRendererTests.java,v 1.1.2.2 2007/03/05 14:40:33 mungady Exp $
- *
  * Changes
  * -------
  * 25-Mar-2003 : Version 1 (DG);
