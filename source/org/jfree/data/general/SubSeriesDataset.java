@@ -33,8 +33,6 @@
  * Contributor(s):   Sylvain Vieujot;
  *                   David Gilbert (for Object Refinery Limited);
  *
- * $Id: SubSeriesDataset.java,v 1.5.2.3 2007/02/02 15:50:44 mungady Exp $
- *
  * Changes
  * -------
  * 06-Dec-2001 : Version 1 (BK);

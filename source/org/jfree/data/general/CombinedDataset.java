@@ -32,8 +32,6 @@
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: CombinedDataset.java,v 1.6.2.3 2007/04/17 11:02:29 mungady Exp $
- *
  * Changes
  * -------
  * 06-Dec-2001 : Version 1 (BK);

@@ -32,8 +32,6 @@
  * Original Author:  Robert Redburn;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: WaferMapDataset.java,v 1.3.2.2 2007/02/02 15:50:44 mungady Exp $
- *
  * Changes
  * -------
  * 25-Nov-2003 : Version 1 contributed by Robert Redburn (with some 
