@@ -31,8 +31,6 @@
  * Original Author: Anthony Boulestreau;
  * Contributor(s): -;
  *
- * $Id: DataPackageResources_fr.java,v 1.2.2.2 2007/02/02 15:03:19 mungady Exp $
- *
  * Changes
  * -------
  * 26-Mar-2002 : Version 1 (AB);
