@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aimin Han;
  *
- * $Id: Week.java,v 1.7.2.5 2007/01/10 11:43:46 mungady Exp $
- *
  * Changes
  * -------
  * 11-Oct-2001 : Version 1 (DG);

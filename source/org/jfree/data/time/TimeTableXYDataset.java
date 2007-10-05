@@ -33,8 +33,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Rob Eden;
  *
- * $Id: TimeTableXYDataset.java,v 1.10.2.3 2007/03/09 15:43:09 mungady Exp $
- *
  * Changes
  * -------
  * 01-Apr-2004 : Version 1 (AS);
