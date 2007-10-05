@@ -1,3 +1,15 @@
+2007-10-05  David Gilbert  <david.gilbert@object-refinery.com>
+
+	Based on patch 1805262 by Alex Moots:
+	* source/org/jfree/chart/plot/PiePlot3D.java
+	(darkerSides): New field,
+	(getDarkerSides): New method,
+	(setDarkerSides): Likewise,
+	(drawSide): Make side colour darker if necessary,
+	(equals): Updated for new field,
+	* tests/org/jfree/chart/plot/junit/PiePlot3DTests.java
+	(testEquals): Updated for new field.
+
 2007-10-03  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/data/KeyedObjects2D.java
