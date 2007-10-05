@@ -27,12 +27,10 @@
  * ---------------
  * MonthTests.java
  * ---------------
- * (C) Copyright 2001-2006, by Object Refinery Limited.
+ * (C) Copyright 2001-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: MonthTests.java,v 1.1.2.2 2006/10/05 10:15:18 mungady Exp $
  *
  * Changes
  * -------

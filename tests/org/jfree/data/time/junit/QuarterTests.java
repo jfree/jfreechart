@@ -27,12 +27,10 @@
  * -----------------
  * QuarterTests.java
  * -----------------
- * (C) Copyright 2001-2006, by Object Refinery Limited.
+ * (C) Copyright 2001-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: QuarterTests.java,v 1.1.2.3 2006/10/06 13:12:46 mungady Exp $
  *
  * Changes
  * -------

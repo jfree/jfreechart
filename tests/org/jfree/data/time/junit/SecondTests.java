@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: SecondTests.java,v 1.1.2.2 2006/10/05 15:08:27 mungady Exp $
- *
  * Changes
  * -------
  * 29-Jan-2002 : Version 1 (DG);

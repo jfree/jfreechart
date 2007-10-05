@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: YearTests.java,v 1.1.2.3 2006/10/06 13:13:10 mungady Exp $
- *
  * Changes
  * -------
  * 16-Nov-2001 : Version 1 (DG);
