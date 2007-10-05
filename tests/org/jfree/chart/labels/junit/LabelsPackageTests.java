@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LabelsPackageTests.java,v 1.1.2.3 2007/02/20 15:32:06 mungady Exp $
- *
  * Changes:
  * --------
  * 21-Mar-2003 : Version 1 (DG);
