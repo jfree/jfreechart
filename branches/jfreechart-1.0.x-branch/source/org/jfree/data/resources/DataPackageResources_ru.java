@@ -31,8 +31,6 @@
  * Original Author: Sergey Bondarenko;
  * Contributor(s): -;
  *
- * $Id: DataPackageResources_ru.java,v 1.2.2.2 2007/02/02 15:03:19 mungady Exp $
- *
  * Changes
  * -------
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);

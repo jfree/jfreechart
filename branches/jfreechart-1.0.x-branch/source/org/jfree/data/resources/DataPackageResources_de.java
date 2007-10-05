@@ -32,8 +32,6 @@
  * Original Author:  Thomas Meier;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: DataPackageResources_de.java,v 1.2.2.2 2007/02/02 15:03:19 mungady Exp $
- *
  * Changes
  * -------
  * 04-Apr-2002 : Version 1, translation by Thomas Meier (DG);
