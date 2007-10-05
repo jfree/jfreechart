@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DatasetUtilitiesTests.java,v 1.1.2.2 2007/05/08 14:47:07 mungady Exp $
- *
  * Changes
  * -------
  * 18-Sep-2003 : Version 1 (DG);
