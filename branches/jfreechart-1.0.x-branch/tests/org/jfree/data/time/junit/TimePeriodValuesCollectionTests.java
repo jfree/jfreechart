@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: TimePeriodValuesCollectionTests.java,v 1.1.2.3 2007/06/11 10:19:04 mungady Exp $
- *
  * Changes
  * -------
  * 11-Mar-2005 : Version 1 (DG);

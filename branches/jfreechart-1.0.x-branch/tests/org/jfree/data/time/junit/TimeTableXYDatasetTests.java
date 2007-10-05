@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Rob Eden;
  *
- * $Id: TimeTableXYDatasetTests.java,v 1.1.2.1 2006/10/03 15:41:39 mungady Exp $
- *
  * Changes
  * -------
  * 15-Sep-2004 : Version 1 (DG);

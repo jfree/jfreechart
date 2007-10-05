@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: WeekTests.java,v 1.1.2.2 2006/10/05 10:49:29 mungady Exp $
- *
  * Changes
  * -------
  * 05-Apr-2002 : Version 1 (DG);

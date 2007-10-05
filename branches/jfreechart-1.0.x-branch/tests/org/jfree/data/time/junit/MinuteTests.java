@@ -27,12 +27,10 @@
  * ----------------
  * MinuteTests.java
  * ----------------
- * (C) Copyright 2002-2007 by Object Refinery Limited.
+ * (C) Copyright 2002-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: MinuteTests.java,v 1.1.2.3 2006/12/11 10:03:22 mungady Exp $
  *
  * Changes
  * -------
