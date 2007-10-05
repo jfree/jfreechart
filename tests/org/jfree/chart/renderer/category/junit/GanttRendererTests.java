@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: GanttRendererTests.java,v 1.1.2.2 2007/03/20 21:21:05 mungady Exp $
- *
  * Changes
  * -------
  * 22-Oct-2003 : Version 1 (DG);

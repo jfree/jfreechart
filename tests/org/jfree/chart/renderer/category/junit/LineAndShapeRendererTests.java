@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LineAndShapeRendererTests.java,v 1.1.2.2 2007/05/17 11:02:48 mungady Exp $
- *
  * Changes
  * -------
  * 22-Sep-2003 : Version 1 (DG);

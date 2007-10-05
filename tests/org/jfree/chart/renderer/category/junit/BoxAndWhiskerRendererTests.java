@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: BoxAndWhiskerRendererTests.java,v 1.1.2.5 2007/05/17 15:00:25 mungady Exp $
- *
  * Changes
  * -------
  * 22-Oct-2003 : Version 1 (DG);

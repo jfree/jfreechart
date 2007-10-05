@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LevelRendererTests.java,v 1.1.2.2 2007/05/17 15:00:25 mungady Exp $
- *
  * Changes
  * -------
  * 29-Mar-2005 : Version 1 (DG);
