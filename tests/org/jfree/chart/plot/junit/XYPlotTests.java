@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYPlotTests.java,v 1.1.2.7 2007/05/24 13:49:12 mungady Exp $
- *
  * Changes
  * -------
  * 26-Mar-2003 : Version 1 (DG);

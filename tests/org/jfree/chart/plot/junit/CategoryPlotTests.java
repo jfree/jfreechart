@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: CategoryPlotTests.java,v 1.1.2.4 2007/03/23 14:48:12 mungady Exp $
- *
  * Changes
  * -------
  * 26-Mar-2003 : Version 1 (DG);

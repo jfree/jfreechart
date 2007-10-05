@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: SpiderWebPlotTests.java,v 1.1.2.2 2007/02/05 14:50:45 mungady Exp $
- *
  * Changes
  * -------
  * 10-Jun-2005 : Version 1 (DG);

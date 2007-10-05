@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: MeterPlotTests.java,v 1.1.2.2 2007/03/21 10:25:00 mungady Exp $
- *
  * Changes
  * -------
  * 27-Mar-2003 : Version 1 (DG);

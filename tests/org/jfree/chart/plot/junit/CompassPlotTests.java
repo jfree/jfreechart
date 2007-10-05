@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: CompassPlotTests.java,v 1.1.2.2 2007/03/20 21:52:16 mungady Exp $
- *
  * Changes
  * -------
  * 27-Mar-2003 : Version 1 (DG);

@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: PolarPlotTests.java,v 1.1.2.3 2007/03/21 10:37:20 mungady Exp $
- *
  * Changes
  * -------
  * 23-Feb-2005 : Version 1 (DG);
