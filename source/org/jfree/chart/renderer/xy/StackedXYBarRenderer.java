@@ -30,9 +30,7 @@
  * (C) Copyright 2004-2007, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);          
- *
- * $Id: StackedXYBarRenderer.java,v 1.10.2.5 2007/03/21 10:04:20 mungady Exp $
+ * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  * Changes
  * -------

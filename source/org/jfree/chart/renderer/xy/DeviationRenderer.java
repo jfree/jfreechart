@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DeviationRenderer.java,v 1.1.2.3 2007/05/04 11:12:16 mungady Exp $
- *
  * Changes
  * -------
  * 21-Feb-2007 : Version 1 (DG);

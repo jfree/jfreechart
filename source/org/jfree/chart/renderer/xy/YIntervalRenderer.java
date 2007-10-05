@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: YIntervalRenderer.java,v 1.7.2.2 2007/02/20 15:35:54 mungady Exp $
- *
  * Changes
  * -------
  * 05-Nov-2002 : Version 1 (DG);

@@ -32,8 +32,6 @@
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: WindItemRenderer.java,v 1.3.2.2 2007/02/02 15:51:30 mungady Exp $
- *
  * Changes
  * -------
  * 06-Feb-2002 : Version 1, based on code contributed by Achilleus 

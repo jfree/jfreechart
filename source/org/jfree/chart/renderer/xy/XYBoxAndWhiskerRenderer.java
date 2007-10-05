@@ -33,8 +33,6 @@
  *                   Science);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: XYBoxAndWhiskerRenderer.java,v 1.6.2.7 2007/06/14 11:00:21 mungady Exp $
- *
  * Changes
  * -------
  * 05-Aug-2003 : Version 1, contributed by David Browning.  Based on code in the

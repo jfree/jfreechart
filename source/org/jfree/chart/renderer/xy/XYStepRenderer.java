@@ -34,8 +34,6 @@
  *                   Matthias Rose;
  *                   Gerald Struck (fix for bug 1569094);
  *
- * $Id: XYStepRenderer.java,v 1.7.2.6 2007/02/06 16:29:11 mungady Exp $
- *
  * Changes
  * -------
  * 13-May-2002 : Version 1, contributed by Roger Studner (DG);

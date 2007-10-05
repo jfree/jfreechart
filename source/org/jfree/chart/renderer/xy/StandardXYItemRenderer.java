@@ -39,8 +39,6 @@
  *                   Nicolas Brodu (for Astrium and EADS Corporate Research 
  *                   Center);
  *
- * $Id: StandardXYItemRenderer.java,v 1.18.2.14 2007/06/08 13:29:38 mungady Exp $
- *
  * Changes:
  * --------
  * 19-Oct-2001 : Version 1, based on code by Mark Watson (DG);

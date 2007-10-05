@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
  *
- * $Id: XYBubbleRenderer.java,v 1.8.2.13 2007/06/13 09:57:14 mungady Exp $
- *
  * Changes
  * -------
  * 28-Jan-2003 : Version 1 (DG);

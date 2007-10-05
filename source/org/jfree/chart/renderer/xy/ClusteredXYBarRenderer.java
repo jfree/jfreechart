@@ -34,8 +34,6 @@
  *                   Christian W. Zuckschwerdt;
  *                   Matthias Rose;
  *
- * $Id: ClusteredXYBarRenderer.java,v 1.8.2.5 2007/06/12 11:36:24 mungady Exp $
- *
  * Changes
  * -------
  * 24-Jan-2003 : Version 1, contributed by Paolo Cova (DG);

@@ -35,8 +35,6 @@
  *                    Christian W. Zuckschwerdt;
  *                    Jerome Fisher;
  *
- * $Id: CandlestickRenderer.java,v 1.7.2.6 2007/06/11 11:07:18 mungady Exp $
- *
  * Changes
  * -------
  * 13-Dec-2001 : Version 1.  Based on code in the (now redundant) 
