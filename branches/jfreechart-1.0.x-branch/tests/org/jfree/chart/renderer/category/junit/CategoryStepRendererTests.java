@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: CategoryStepRendererTests.java,v 1.1.2.3 2007/05/18 08:18:29 mungady Exp $
- *
  * Changes
  * -------
  * 08-Mar-2005 : Version 1 (DG);
