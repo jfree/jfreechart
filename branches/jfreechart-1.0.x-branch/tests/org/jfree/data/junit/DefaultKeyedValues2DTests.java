@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DefaultKeyedValues2DTests.java,v 1.1.2.4 2007/03/30 09:53:10 mungady Exp $
- *
  * Changes
  * -------
  * 13-Mar-2003 : Version 1 (DG);
