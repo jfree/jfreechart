@@ -94,6 +94,7 @@ public class RendererXYPackageTests extends TestCase {
         suite.addTestSuite(XYErrorRendererTests.class);
         suite.addTestSuite(XYLineAndShapeRendererTests.class);
         suite.addTestSuite(XYLine3DRendererTests.class);
+        suite.addTestSuite(XYSplineAndShapeRendererTests.class);
         suite.addTestSuite(XYStepRendererTests.class);
         suite.addTestSuite(XYStepAreaRendererTests.class);
         suite.addTestSuite(YIntervalRendererTests.class);
