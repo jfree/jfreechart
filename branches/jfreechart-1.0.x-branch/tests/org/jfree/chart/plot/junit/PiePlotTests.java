@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: PiePlotTests.java,v 1.1.2.4 2007/04/17 09:09:22 mungady Exp $
- *
  * Changes
  * -------
  * 18-Mar-2003 : Version 1 (DG);

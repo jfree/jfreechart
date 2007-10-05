@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: ThermometerPlotTests.java,v 1.1.2.3 2007/05/03 12:58:48 mungady Exp $
- *
  * Changes
  * -------
  * 26-Mar-2003 : Version 1 (DG);

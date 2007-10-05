@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: ValueMarkerTests.java,v 1.1.2.1 2006/10/03 15:41:25 mungady Exp $
- *
  * Changes
  * -------
  * 18-Aug-2003 : Version 1 (DG);
