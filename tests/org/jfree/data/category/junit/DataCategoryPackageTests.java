@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *
- * $Id: DataCategoryPackageTests.java,v 1.1.2.2 2007/03/08 13:32:20 mungady Exp $
- *
  * Changes
  * -------
  * 23-Aug-2004 : Restructured org.jfree.data package (DG);
