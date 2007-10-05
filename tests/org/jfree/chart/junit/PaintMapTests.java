@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: PaintMapTests.java,v 1.1.2.2 2007/01/17 10:08:19 mungady Exp $
- *
  * Changes:
  * --------
  * 27-Sep-2006 : Version 1 (DG);

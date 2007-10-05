@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: LegendItemCollectionTests.java,v 1.1.2.2 2007/03/02 11:16:20 mungady Exp $
- *
  * Changes
  * -------
  * 18-Apr-2005 : Version 1 (DG);

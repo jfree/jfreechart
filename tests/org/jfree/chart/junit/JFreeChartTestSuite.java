@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: JFreeChartTestSuite.java,v 1.1.2.2 2007/01/26 12:23:06 mungady Exp $
- *
  * Changes:
  * --------
  * 11-Jun-2002 : Version 1 (DG);
