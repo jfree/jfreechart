@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: TestUtilities.java,v 1.1.2.1 2007/06/08 13:29:38 mungady Exp $
- *
  * Changes:
  * --------
  * 08-Jun-2007 : Version 1 (DG);
