@@ -32,8 +32,6 @@
  * Original Author:  Bryan Scott; Andy
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Thomas Morgner;
- * 
- * $Id: JDBCPieDataset.java,v 1.3.2.3 2007/04/17 11:02:54 mungady Exp $
  *
  * Changes
  * -------
