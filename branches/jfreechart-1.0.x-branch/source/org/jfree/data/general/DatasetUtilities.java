@@ -35,8 +35,6 @@
  *                   Richard Atkinson;
  *                   Andreas Schroeder;
  *
- * $Id: DatasetUtilities.java,v 1.18.2.8 2007/06/12 14:54:30 mungady Exp $
- *
  * Changes (from 18-Sep-2001)
  * --------------------------
  * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);

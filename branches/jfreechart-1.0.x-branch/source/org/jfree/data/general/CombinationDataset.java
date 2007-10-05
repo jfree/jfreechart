@@ -32,8 +32,6 @@
  * Original Author:  Bill Kelemen;
  * Contributor(s):   -;
  *
- * $Id: CombinationDataset.java,v 1.2.2.2 2007/02/02 15:50:44 mungady Exp $
- *
  * Changes
  * -------
  * 06-Dec-2001 : Version 1 (BK);

@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sam (oldman);
  *
- * $Id: DefaultPieDataset.java,v 1.6.2.6 2007/04/30 16:16:50 mungady Exp $
- *
  * Changes
  * -------
  * 17-Nov-2001 : Version 1 (DG);

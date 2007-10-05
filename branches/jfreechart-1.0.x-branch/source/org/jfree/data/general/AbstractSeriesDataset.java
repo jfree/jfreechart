@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * --------------------------
  * AbstractSeriesDataset.java
  * --------------------------
- * (C) Copyright 2001-2006, by Object Refinery Limited.
+ * (C) Copyright 2001-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: AbstractSeriesDataset.java,v 1.4.2.3 2006/08/03 16:07:03 mungady Exp $
  *
  * Changes
  * -------

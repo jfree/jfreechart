@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: Series.java,v 1.9.2.3 2006/07/25 15:55:48 mungady Exp $
- *
  * Changes
  * -------
  * 15-Nov-2001 : Version 1 (DG);
