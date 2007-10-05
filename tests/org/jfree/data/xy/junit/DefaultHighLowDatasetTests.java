@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DefaultHighLowDatasetTests.java,v 1.1.2.2 2007/02/02 13:54:18 mungady Exp $
- *
  * Changes
  * -------
  * 28-Nov-2006 : Version 1 (DG);

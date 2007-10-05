@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: VectorDataItemTests.java,v 1.1.2.1 2007/06/13 10:28:05 mungady Exp $
- *
  * Changes
  * -------
  * 30-Jan-2007 : Version 1 (DG);

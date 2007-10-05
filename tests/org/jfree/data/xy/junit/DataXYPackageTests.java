@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DataXYPackageTests.java,v 1.1.2.8 2007/06/13 10:28:05 mungady Exp $
- *
  * Changes
  * -------
  * 23-Aug-2004 : Restructured org.jfree.data package (DG);
