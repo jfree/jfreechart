@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: PieChart3DTests.java,v 1.1.2.2 2007/03/02 11:16:21 mungady Exp $
- *
  * Changes:
  * --------
  * 21-May-2004 : Version 1 (DG);

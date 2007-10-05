@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: ChartRenderingInfoTests.java,v 1.1.2.3 2007/03/02 11:16:21 mungady Exp $
- *
  * Changes
  * -------
  * 19-Mar-2004 : Version 1 (DG);

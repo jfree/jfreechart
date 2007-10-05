@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: HashUtilitiesTests.java,v 1.1.2.1 2007/03/06 16:00:44 mungady Exp $
- *
  * Changes
  * -------
  * 06-Mar-2007 : Version 1 (DG);
