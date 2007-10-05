@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYIntervalSeriesTests.java,v 1.1.2.2 2007/02/13 16:12:46 mungady Exp $
- *
  * Changes
  * -------
  * 20-Oct-2006 : Version 1, based on XYSeriesTests (DG);

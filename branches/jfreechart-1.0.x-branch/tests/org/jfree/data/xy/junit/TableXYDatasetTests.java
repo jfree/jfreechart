@@ -32,8 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: TableXYDatasetTests.java,v 1.1.2.3 2007/02/02 15:10:21 mungady Exp $
- *
  * Changes
  * -------
  * 11-Aug-2003 : Version 1 (RA);

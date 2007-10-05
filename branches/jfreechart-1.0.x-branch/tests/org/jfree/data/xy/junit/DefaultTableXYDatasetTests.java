@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DefaultTableXYDatasetTests.java,v 1.1.2.2 2007/03/08 13:57:09 mungady Exp $
- *
  * Changes
  * -------
  * 23-Dec-2003 : Version 1 (DG);
