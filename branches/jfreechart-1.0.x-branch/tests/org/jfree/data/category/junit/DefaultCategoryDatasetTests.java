@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: DefaultCategoryDatasetTests.java,v 1.1.2.3 2007/03/08 11:12:08 mungady Exp $
- *
  * Changes
  * -------
  * 23-Mar-2004 : Version 1 (DG);
