@@ -32,8 +32,6 @@
  * Original Author:  Thomas Morgner;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: XYLine3DRenderer.java,v 1.4.2.2 2007/05/01 16:08:40 mungady Exp $
- *
  * Changes
  * -------
  * 14-Jan-2005 : Added standard header (DG);

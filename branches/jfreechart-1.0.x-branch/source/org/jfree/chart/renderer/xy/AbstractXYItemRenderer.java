@@ -35,8 +35,6 @@
  *                   Tim Bardzil;
  *                   Sergei Ivanov;
  *
- * $Id: AbstractXYItemRenderer.java,v 1.26.2.19 2007/06/12 08:39:30 mungady Exp $
- *
  * Changes:
  * --------
  * 15-Mar-2002 : Version 1 (DG);

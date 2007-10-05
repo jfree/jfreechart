@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
  *
- * $Id: XYDotRenderer.java,v 1.5.2.4 2007/02/06 16:29:11 mungady Exp $
- *
  * Changes (from 29-Oct-2002)
  * --------------------------
  * 29-Oct-2002 : Added standard header (DG);

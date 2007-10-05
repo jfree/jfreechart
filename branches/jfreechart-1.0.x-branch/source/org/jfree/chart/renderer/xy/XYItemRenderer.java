@@ -35,8 +35,6 @@
  *                   Focus Computer Services Limited;
  *                   Richard Atkinson;
  *
- * $Id: XYItemRenderer.java,v 1.16.2.8 2007/04/20 14:23:27 mungady Exp $
- *
  * Changes
  * -------
  * 19-Oct-2001 : Version 1, based on code by Mark Watson (DG);

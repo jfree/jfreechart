@@ -34,8 +34,6 @@
  *                   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
  *
- * $Id: XYAreaRenderer2.java,v 1.12.2.10 2007/05/18 10:28:31 mungady Exp $
- *
  * Changes:
  * --------
  * 03-Apr-2002 : Version 1, contributed by Hari.  This class is based on the 

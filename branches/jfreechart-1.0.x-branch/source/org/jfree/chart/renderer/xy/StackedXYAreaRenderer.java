@@ -33,8 +33,6 @@
  * Contributor(s):   Christian W. Zuckschwerdt;
  *                   David Gilbert (for Object Refinery Limited);
  *
- * $Id: StackedXYAreaRenderer.java,v 1.12.2.13 2007/05/24 13:49:12 mungady Exp $
- *
  * Changes:
  * --------
  * 27-Jul-2003 : Initial version (RA);

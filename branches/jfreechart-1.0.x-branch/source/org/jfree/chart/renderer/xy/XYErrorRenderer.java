@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYErrorRenderer.java,v 1.1.2.4 2007/03/23 14:01:12 mungady Exp $
- *
  * Changes
  * -------
  * 25-Oct-2006 : Version 1 (DG);

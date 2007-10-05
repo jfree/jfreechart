@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: XYItemRendererState.java,v 1.2.2.2 2007/05/04 11:12:16 mungady Exp $
- *
  * Changes:
  * --------
  * 07-Oct-2003 : Version 1 (DG);

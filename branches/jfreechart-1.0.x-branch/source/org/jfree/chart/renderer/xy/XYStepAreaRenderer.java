@@ -32,8 +32,6 @@
  * Original Author:  Matthias Rose (based on XYAreaRenderer.java);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: XYStepAreaRenderer.java,v 1.7.2.7 2007/05/04 11:12:16 mungady Exp $
- *
  * Changes:
  * --------
  * 07-Oct-2003 : Version 1, contributed by Matthias Rose (DG);

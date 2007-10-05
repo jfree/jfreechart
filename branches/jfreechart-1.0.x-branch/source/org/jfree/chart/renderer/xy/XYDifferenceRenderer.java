@@ -33,8 +33,6 @@
  * Contributor(s):   Richard West, Advanced Micro Devices, Inc. (major rewrite 
  *                   of difference drawing algorithm);
  *
- * $Id: XYDifferenceRenderer.java,v 1.12.2.15 2007/05/18 10:28:31 mungady Exp $
- *
  * Changes:
  * --------
  * 30-Apr-2003 : Version 1 (DG);
