@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: StandardXYItemRendererTests.java,v 1.1.2.4 2007/06/08 13:29:38 mungady Exp $
- *
  * Changes
  * -------
  * 25-Mar-2003 : Version 1 (DG);

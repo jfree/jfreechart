@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: RendererXYPackageTests.java,v 1.1.2.6 2007/06/13 10:26:46 mungady Exp $
- *
  * Changes:
  * --------
  * 23-Aug-2004 : Restructured org.jfree.chart.renderer package (DG);
