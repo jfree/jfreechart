@@ -44,10 +44,10 @@
 package org.jfree.chart.needle;
 
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.Shape;
 import java.io.Serializable;
 
 /**
