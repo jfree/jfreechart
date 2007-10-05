@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: Quarter.java,v 1.6.2.5 2007/03/09 16:13:29 mungady Exp $
- *
  * Changes
  * -------
  * 11-Oct-2001 : Version 1 (DG);

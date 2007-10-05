@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: TimeSeriesCollection.java,v 1.10.2.5 2007/05/08 10:58:50 mungady Exp $
- *
  * Changes
  * -------
  * 11-Oct-2001 : Version 1 (DG);

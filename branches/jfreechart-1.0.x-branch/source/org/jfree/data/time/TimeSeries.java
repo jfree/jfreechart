@@ -33,8 +33,6 @@
  * Contributor(s):   Bryan Scott;
  *                   Nick Guenther;
  *
- * $Id: TimeSeries.java,v 1.10.2.11 2007/03/22 08:11:46 mungady Exp $
- *
  * Changes
  * -------
  * 11-Oct-2001 : Version 1 (DG);

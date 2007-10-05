@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,10 @@
  * ---------------------
  * TimePeriodValues.java
  * ---------------------
- * (C) Copyright 2003-2006, by Object Refinery Limited.
+ * (C) Copyright 2003-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * $Id: TimePeriodValues.java,v 1.8.2.2 2006/10/03 15:16:33 mungady Exp $
  *
  * Changes
  * -------
@@ -40,7 +38,7 @@
  * 30-Jul-2003 : Added clone and equals methods while testing (DG);
  * 11-Mar-2005 : Fixed bug in bounds recalculation - see bug report 
  *               1161329 (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 03-Oct-2006 : Fixed NullPointerException in equals(), fire change event in 
  *               add() method, updated API docs (DG);
  *

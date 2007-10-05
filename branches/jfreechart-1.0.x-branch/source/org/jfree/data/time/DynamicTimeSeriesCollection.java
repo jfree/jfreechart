@@ -32,8 +32,6 @@
  * Original Author:  I. H. Thomae (ithomae@ists.dartmouth.edu);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * $Id: DynamicTimeSeriesCollection.java,v 1.11.2.2 2007/02/02 15:15:09 mungady Exp $
- *
  * Changes
  * -------
  * 22-Nov-2002 : Initial version completed
