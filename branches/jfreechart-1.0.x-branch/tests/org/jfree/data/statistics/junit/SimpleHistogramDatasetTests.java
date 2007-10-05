@@ -32,8 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * $Id: SimpleHistogramDatasetTests.java,v 1.1.2.2 2007/05/21 15:32:11 mungady Exp $
- *
  * Changes
  * -------
  * 10-Jan-2005 : Version 1 (DG);
