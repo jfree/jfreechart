@@ -1,3 +1,20 @@
+2007-10-08  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/renderer/category/MultiShapeRenderer.java: 
+	New file,
+	* source/org/jfree/data/statistics/DefaultMultiValueCategoryDataset.java:
+	Likewise,
+	* source/org/jfree/data/statistics/MultiValueCategoryDataset.java: 
+	Likewise,
+	* tests/org/jfree/chart/renderer/category/junit/MultiShapeRendererTests.java:
+	Likewise,
+	* tests/org/jfree/chart/renderer/category/junit/RendererCategoryPackageTests.java
+	(suite): Added MultiShapeRendererTests,
+	* tests/org/jfree/data/statistics/junit/DataStatisticsPackageTests.java
+	(suite): Added DefaultMultiValueCategoryDatasetTests,
+	* tests/org/jfree/data/statistics/junit/DefaultMultiValueCategoryDatasetTests.java:
+	New file.
+	
 2007-10-08	David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/plot/ValueMarker.java
