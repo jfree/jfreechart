@@ -82,6 +82,8 @@
  *               getMinimum/MaximumVerticalDataValue(), and fixed serialization 
  *               bug (DG);
  * 24-Sep-2007 : Implemented new methods in Zoomable interface (DG);
+ * 08-Oct-2007 : Added attributes for thermometer dimensions - see patch 1769088
+ *               by Julien Henry (DG);
  * 
  */
 
@@ -181,22 +183,46 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /** A constant for the 'critical' range. */
     public static final int CRITICAL = 2;
 
-    /** The bulb radius. */
+    /** 
+     * The bulb radius. 
+     * 
+     * @deprecated As of 1.0.7, use {@link #getBulbRadius()}.
+     */
     protected static final int BULB_RADIUS = 40;
 
-    /** The bulb diameter. */
+    /** 
+     * The bulb diameter. 
+     * 
+     * @deprecated As of 1.0.7, use {@link #getBulbDiameter()}.
+     */
     protected static final int BULB_DIAMETER = BULB_RADIUS * 2;
 
-    /** The column radius. */
+    /** 
+     * The column radius. 
+     * 
+     * @deprecated As of 1.0.7, use {@link #getColumnRadius()}.
+     */
     protected static final int COLUMN_RADIUS = 20;
 
-    /** The column diameter.*/
+    /** 
+     * The column diameter.
+     * 
+     * @deprecated As of 1.0.7, use {@link #getColumnDiameter()}.
+     */
     protected static final int COLUMN_DIAMETER = COLUMN_RADIUS * 2;
 
-    /** The gap radius. */
+    /** 
+     * The gap radius. 
+     *
+     * @deprecated As of 1.0.7, use {@link #getGapRadius()}.
+     */
     protected static final int GAP_RADIUS = 5;
 
-    /** The gap diameter. */
+    /** 
+     * The gap diameter. 
+     *
+     * @deprecated As of 1.0.7, use {@link #getGapDiameter()}.
+     */
     protected static final int GAP_DIAMETER = GAP_RADIUS * 2;
 
     /** The axis gap. */
@@ -224,6 +250,27 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /** The default upper bound. */
     protected static final double DEFAULT_UPPER_BOUND = 100.0;
 
+    /** 
+     * The default bulb radius.
+     *
+     * @since 1.0.7
+     */
+    protected static final int DEFAULT_BULB_RADIUS = 40;
+
+    /** 
+     * The default column radius.
+     *
+     * @since 1.0.7
+     */
+    protected static final int DEFAULT_COLUMN_RADIUS = 20;
+
+    /** 
+     * The default gap radius.
+     *
+     * @since 1.0.7
+     */
+    protected static final int DEFAULT_GAP_RADIUS = 5;
+
     /** The dataset for the plot. */
     private ValueDataset dataset;
 
@@ -235,6 +282,27 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
 
     /** The upper bound for the thermometer. */
     private double upperBound = DEFAULT_UPPER_BOUND;
+
+    /** 
+     * The value label position.
+     *
+     * @since 1.0.7
+     */
+    private int bulbRadius = DEFAULT_BULB_RADIUS;
+
+    /** 
+     * The column radius.
+     *
+     * @since 1.0.7
+     */
+    private int columnRadius = DEFAULT_COLUMN_RADIUS;
+
+    /** 
+     * The gap radius.
+     *
+     * @since 1.0.7
+     */
+    private int gapRadius = DEFAULT_GAP_RADIUS;
 
     /** 
      * Blank space inside the plot area around the outside of the thermometer. 
@@ -963,6 +1031,124 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
+     * Returns the bulb radius, in Java2D units.
+
+     * @return The bulb radius.
+     * 
+     * @since 1.0.7
+     */
+    public int getBulbRadius() {
+        return this.bulbRadius;
+    }
+
+    /**
+     * Sets the bulb radius (in Java2D units) and sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @param r  the new radius (in Java2D units).
+     * 
+     * @see #getBulbRadius()
+     * 
+     * @since 1.0.7
+     */
+    public void setBulbRadius(int r) {
+        this.bulbRadius = r;
+        notifyListeners(new PlotChangeEvent(this));
+    }
+
+    /**
+     * Returns the bulb diameter, which is always twice the value returned
+     * by {@link #getBulbRadius()}.
+     * 
+     * @return The bulb diameter.
+     * 
+     * @since 1.0.7
+     */
+    public int getBulbDiameter() {
+        return getBulbRadius() * 2;
+    }
+
+    /**
+     * Returns the column radius, in Java2D units.
+     * 
+     * @return The column radius.
+     * 
+     * @see #setColumnRadius(int)
+     * 
+     * @since 1.0.7
+     */
+    public int getColumnRadius() {
+        return this.columnRadius;
+    }
+
+    /**
+     * Sets the column radius (in Java2D units) and sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @param r  the new radius.
+     * 
+     * @see #getColumnRadius()
+     * 
+     * @since 1.0.7
+     */
+    public void setColumnRadius(int r) {
+        this.columnRadius = r;
+        notifyListeners(new PlotChangeEvent(this));
+    }
+
+    /**
+     * Returns the column diameter, which is always twice the value returned
+     * by {@link #getColumnRadius()}.
+     * 
+     * @return The column diameter.
+     * 
+     * @since 1.0.7
+     */
+    public int getColumnDiameter() {
+        return getColumnRadius() * 2;
+    }
+
+    /**
+     * Returns the gap radius in Java2D units.
+     * 
+     * @return The gap radius.
+     * 
+     * @see #setGapRadius(int)
+     * 
+     * @since 1.0.7
+     */
+    public int getGapRadius() {
+        return this.gapRadius;
+    }
+
+    /**
+     * Sets the gap radius (in Java2D units) and sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @param r  the new radius.
+     * 
+     * @see #getGapRadius()
+     * 
+     * @since 1.0.7
+     */
+    public void setGapRadius(int r) {
+        this.gapRadius = r;
+        notifyListeners(new PlotChangeEvent(this));
+    }
+
+    /**
+     * Returns the gap diameter, which is always twice the value returned by
+     * {@link #getGapRadius()}.
+     * 
+     * @return The gap diameter, in Java2D units.
+     * 
+     * @since 1.0.7
+     */
+    public int getGapDiameter() {
+        return getGapRadius() * 2;
+    }
+
+    /**
      * Draws the plot on a Java 2D graphics device (such as the screen or a 
      * printer).
      *
@@ -997,30 +1183,31 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         this.padding.trim(interior);
         int midX = (int) (interior.getX() + (interior.getWidth() / 2));
         int midY = (int) (interior.getY() + (interior.getHeight() / 2));
-        int stemTop = (int) (interior.getMinY() + BULB_RADIUS);
-        int stemBottom = (int) (interior.getMaxY() - BULB_DIAMETER);
-        Rectangle2D dataArea = new Rectangle2D.Double(midX - COLUMN_RADIUS, 
-                stemTop, COLUMN_RADIUS, stemBottom - stemTop);
+        int stemTop = (int) (interior.getMinY() + getBulbRadius());
+        int stemBottom = (int) (interior.getMaxY() - getBulbDiameter());
+        Rectangle2D dataArea = new Rectangle2D.Double(midX - getColumnRadius(), 
+                stemTop, getColumnRadius(), stemBottom - stemTop);
 
-        outerBulb.setFrame(midX - BULB_RADIUS, stemBottom, BULB_DIAMETER, 
-                BULB_DIAMETER);
+        outerBulb.setFrame(midX - getBulbRadius(), stemBottom, 
+                getBulbDiameter(), getBulbDiameter());
 
-        outerStem.setRoundRect(midX - COLUMN_RADIUS, interior.getMinY(), 
-                COLUMN_DIAMETER, stemBottom + BULB_DIAMETER - stemTop, 
-                COLUMN_DIAMETER, COLUMN_DIAMETER);
+        outerStem.setRoundRect(midX - getColumnRadius(), interior.getMinY(), 
+                getColumnDiameter(), stemBottom + getBulbDiameter() - stemTop,
+                getColumnDiameter(), getColumnDiameter());
 
         Area outerThermometer = new Area(outerBulb);
         Area tempArea = new Area(outerStem);
         outerThermometer.add(tempArea);
 
-        innerBulb.setFrame(midX - BULB_RADIUS + GAP_RADIUS, 
-                stemBottom + GAP_RADIUS, BULB_DIAMETER - GAP_DIAMETER, 
-                BULB_DIAMETER - GAP_DIAMETER);
+        innerBulb.setFrame(midX - getBulbRadius() + getGapRadius(), 
+                stemBottom + getGapRadius(), getBulbDiameter() 
+                - getGapDiameter(), getBulbDiameter() - getGapDiameter());
 
-        innerStem.setRoundRect(midX - COLUMN_RADIUS + GAP_RADIUS, 
-                interior.getMinY() + GAP_RADIUS, COLUMN_DIAMETER - GAP_DIAMETER, 
-                stemBottom + BULB_DIAMETER - GAP_DIAMETER - stemTop,
-                COLUMN_DIAMETER - GAP_DIAMETER, COLUMN_DIAMETER - GAP_DIAMETER);
+        innerStem.setRoundRect(midX - getColumnRadius() + getGapRadius(), 
+                interior.getMinY() + getGapRadius(), getColumnDiameter() 
+                - getGapDiameter(), stemBottom + getBulbDiameter() 
+                - getGapDiameter() - stemTop, getColumnDiameter() 
+                - getGapDiameter(), getColumnDiameter() - getGapDiameter());
 
         Area innerThermometer = new Area(innerBulb);
         tempArea = new Area(innerStem);
@@ -1031,20 +1218,20 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
             double ds = this.rangeAxis.valueToJava2D(current, dataArea, 
                     RectangleEdge.LEFT);
 
-            int i = COLUMN_DIAMETER - GAP_DIAMETER; // already calculated
-            int j = COLUMN_RADIUS - GAP_RADIUS; // already calculated
+            int i = getColumnDiameter() - getGapDiameter(); // already calculated
+            int j = getColumnRadius() - getGapRadius(); // already calculated
             int l = (i / 2);
             int k = (int) Math.round(ds);
-            if (k < (GAP_RADIUS + interior.getMinY())) {
-                k = (int) (GAP_RADIUS + interior.getMinY());
-                l = BULB_RADIUS;
+            if (k < (getGapRadius() + interior.getMinY())) {
+                k = (int) (getGapRadius() + interior.getMinY());
+                l = getBulbRadius();
             }
 
             Area mercury = new Area(innerBulb);
 
-            if (k < (stemBottom + BULB_RADIUS)) {
+            if (k < (stemBottom + getBulbRadius())) {
                 mercuryStem.setRoundRect(midX - j, k, i, 
-                        (stemBottom + BULB_RADIUS) - k, l, l);
+                        (stemBottom + getBulbRadius()) - k, l, l);
                 tempArea = new Area(mercuryStem);
                 mercury.add(tempArea);
             }
@@ -1060,7 +1247,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
                 // draw start of normal range
                 double value = this.subrangeInfo[NORMAL][RANGE_LOW];
                 if (range.contains(value)) {
-                    double x = midX + COLUMN_RADIUS + 2;
+                    double x = midX + getColumnRadius() + 2;
                     double y = this.rangeAxis.valueToJava2D(value, dataArea, 
                             RectangleEdge.LEFT);
                     Line2D line = new Line2D.Double(x, y, x + 10, y);
@@ -1071,7 +1258,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
                 // draw start of warning range
                 value = this.subrangeInfo[WARNING][RANGE_LOW];
                 if (range.contains(value)) {
-                    double x = midX + COLUMN_RADIUS + 2;
+                    double x = midX + getColumnRadius() + 2;
                     double y = this.rangeAxis.valueToJava2D(value, dataArea, 
                             RectangleEdge.LEFT);
                     Line2D line = new Line2D.Double(x, y, x + 10, y);
@@ -1082,7 +1269,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
                 // draw start of critical range
                 value = this.subrangeInfo[CRITICAL][RANGE_LOW];
                 if (range.contains(value)) {
-                    double x = midX + COLUMN_RADIUS + 2;
+                    double x = midX + getColumnRadius() + 2;
                     double y = this.rangeAxis.valueToJava2D(value, dataArea, 
                             RectangleEdge.LEFT);
                     Line2D line = new Line2D.Double(x, y, x + 10, y);
@@ -1095,14 +1282,14 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
             if ((this.rangeAxis != null) && (this.axisLocation != NONE)) {
                 int drawWidth = AXIS_GAP;
                 if (this.showValueLines) {
-                    drawWidth += COLUMN_DIAMETER;
+                    drawWidth += getColumnDiameter();
                 }
                 Rectangle2D drawArea;
                 double cursor = 0;
 
                 switch (this.axisLocation) {
                     case RIGHT:
-                        cursor = midX + COLUMN_RADIUS;
+                        cursor = midX + getColumnRadius();
                         drawArea = new Rectangle2D.Double(cursor,
                                 stemTop, drawWidth, (stemBottom - stemTop + 1));
                         this.rangeAxis.draw(g2, cursor, area, drawArea, 
@@ -1112,7 +1299,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
                     case LEFT:
                     default:
                         //cursor = midX - COLUMN_RADIUS - AXIS_GAP;
-                        cursor = midX - COLUMN_RADIUS;
+                        cursor = midX - getColumnRadius();
                         drawArea = new Rectangle2D.Double(cursor, stemTop,
                                 drawWidth, (stemBottom - stemTop + 1));
                         this.rangeAxis.draw(g2, cursor, area, drawArea, 
@@ -1129,19 +1316,19 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
             switch (this.valueLocation) {
                 case RIGHT:
                     g2.drawString(this.valueFormat.format(current), 
-                            midX + COLUMN_RADIUS + GAP_RADIUS, midY);
+                            midX + getColumnRadius() + getGapRadius(), midY);
                     break;
                 case LEFT:
                     String valueString = this.valueFormat.format(current);
                     int stringWidth = metrics.stringWidth(valueString);
-                    g2.drawString(valueString, midX - COLUMN_RADIUS 
-                            - GAP_RADIUS - stringWidth, midY);
+                    g2.drawString(valueString, midX - getColumnRadius() 
+                            - getGapRadius() - stringWidth, midY);
                     break;
                 case BULB:
                     temp = this.valueFormat.format(current);
                     i = metrics.stringWidth(temp) / 2;
                     g2.drawString(temp, midX - i, 
-                            stemBottom + BULB_RADIUS + GAP_RADIUS);
+                            stemBottom + getBulbRadius() + getGapRadius());
                     break;
                 default:
             }
@@ -1153,7 +1340,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
 
         //  draw units indicator
         metrics = g2.getFontMetrics();
-        int tickX1 = midX - COLUMN_RADIUS - GAP_DIAMETER 
+        int tickX1 = midX - getColumnRadius() - getGapDiameter() 
                      - metrics.stringWidth(UNITS[this.units]);
         if (tickX1 > area.getMinX()) {
             g2.drawString(UNITS[this.units], tickX1, 
@@ -1409,6 +1596,15 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
             return false;   
         }
         if (this.useSubrangePaint != that.useSubrangePaint) {
+            return false;
+        }
+        if (this.bulbRadius != that.bulbRadius) {
+            return false;
+        }
+        if (this.columnRadius != that.columnRadius) {
+            return false;
+        }
+        if (this.gapRadius != that.gapRadius) {
             return false;
         }
         for (int i = 0; i < this.subrangePaint.length; i++) {

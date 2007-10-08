@@ -37,6 +37,7 @@
  * 26-Mar-2003 : Version 1 (DG);
  * 30-Apr-2007 : Added new serialization test (DG);
  * 03-May-2007 : Added cloning test (DG);
+ * 08-Oct-2007 : Updated testEquals() for new fields (DG);
  *
  */
 
@@ -178,6 +179,20 @@ public class ThermometerPlotTests extends TestCase {
                 3.0f, 4.0f, Color.yellow));
         assertTrue(p2.equals(p1));
         
+        p1.setBulbRadius(9);
+        assertFalse(p1.equals(p2));
+        p2.setBulbRadius(9);
+        assertTrue(p2.equals(p1));
+        
+        p1.setColumnRadius(8);
+        assertFalse(p1.equals(p2));
+        p2.setColumnRadius(8);
+        assertTrue(p2.equals(p1));
+        
+        p1.setGapRadius(7);
+        assertFalse(p1.equals(p2));
+        p2.setGapRadius(7);
+        assertTrue(p2.equals(p1));
     }
     
     /**
