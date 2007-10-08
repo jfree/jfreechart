@@ -33,6 +33,7 @@
  * Original Author:  Bryan Scott (based on MeterPlot by Hari).
  * Contributor(s):   David Gilbert (for Object Refinery Limited).
  *                   Arnaud Lelievre;
+ *                   Julien Henry (see patch 1769088) (DG);
  *
  * Changes
  * -------
