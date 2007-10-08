@@ -39,6 +39,7 @@
  * 12-Oct-2006 : Added new checks for bug 1572478 (DG);
  * 11-May-2007 : Added testGetLegendItem() (DG);
  * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
+ * 08-Oct-2007 : Added tests for null items in dataset (DG);
  *
  */
 
@@ -335,6 +336,222 @@ public class BoxAndWhiskerRendererTests extends TestCase {
         assertEquals("R5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());
         assertEquals(2, li.getSeriesIndex());
+    }
+    
+    /**
+     * Draws a chart where the dataset contains a null mean value.
+     */
+    public void testDrawWithNullMean() {
+        boolean success = false;
+        try {
+            DefaultBoxAndWhiskerCategoryDataset dataset 
+                    = new DefaultBoxAndWhiskerCategoryDataset();
+            dataset.add(new BoxAndWhiskerItem(null, new Double(2.0),
+                    new Double(0.0), new Double(4.0), new Double(0.5), 
+                    new Double(4.5), new Double(-0.5), new Double(5.5), 
+                    null), "S1", "C1");
+            CategoryPlot plot = new CategoryPlot(dataset, 
+                    new CategoryAxis("Category"), new NumberAxis("Value"), 
+                    new BoxAndWhiskerRenderer());
+            ChartRenderingInfo info = new ChartRenderingInfo();
+            JFreeChart chart = new JFreeChart(plot);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+                    info);
+            success = true;
+        }
+        catch (Exception e) {
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    /**
+     * Draws a chart where the dataset contains a null median value.
+     */
+    public void testDrawWithNullMedian() {
+        boolean success = false;
+        try {
+            DefaultBoxAndWhiskerCategoryDataset dataset 
+                    = new DefaultBoxAndWhiskerCategoryDataset();
+            dataset.add(new BoxAndWhiskerItem(new Double(1.0), null,
+                    new Double(0.0), new Double(4.0), new Double(0.5), 
+                    new Double(4.5), new Double(-0.5), new Double(5.5), 
+                    null), "S1", "C1");
+            CategoryPlot plot = new CategoryPlot(dataset, 
+                    new CategoryAxis("Category"), new NumberAxis("Value"), 
+                    new BoxAndWhiskerRenderer());
+            ChartRenderingInfo info = new ChartRenderingInfo();
+            JFreeChart chart = new JFreeChart(plot);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+                    info);
+            success = true;
+        }
+        catch (Exception e) {
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    /**
+     * Draws a chart where the dataset contains a null Q1 value.
+     */
+    public void testDrawWithNullQ1() {
+        boolean success = false;
+        try {
+            DefaultBoxAndWhiskerCategoryDataset dataset 
+                    = new DefaultBoxAndWhiskerCategoryDataset();
+            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
+                    null, new Double(4.0), new Double(0.5), 
+                    new Double(4.5), new Double(-0.5), new Double(5.5), 
+                    null), "S1", "C1");
+            CategoryPlot plot = new CategoryPlot(dataset, 
+                    new CategoryAxis("Category"), new NumberAxis("Value"), 
+                    new BoxAndWhiskerRenderer());
+            ChartRenderingInfo info = new ChartRenderingInfo();
+            JFreeChart chart = new JFreeChart(plot);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+                    info);
+            success = true;
+        }
+        catch (Exception e) {
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    /**
+     * Draws a chart where the dataset contains a null Q3 value.
+     */
+    public void testDrawWithNullQ3() {
+        boolean success = false;
+        try {
+            DefaultBoxAndWhiskerCategoryDataset dataset 
+                    = new DefaultBoxAndWhiskerCategoryDataset();
+            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
+                    new Double(3.0), null, new Double(0.5), 
+                    new Double(4.5), new Double(-0.5), new Double(5.5), 
+                    null), "S1", "C1");
+            CategoryPlot plot = new CategoryPlot(dataset, 
+                    new CategoryAxis("Category"), new NumberAxis("Value"), 
+                    new BoxAndWhiskerRenderer());
+            ChartRenderingInfo info = new ChartRenderingInfo();
+            JFreeChart chart = new JFreeChart(plot);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+                    info);
+            success = true;
+        }
+        catch (Exception e) {
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    /**
+     * Draws a chart where the dataset contains a null min regular value.
+     */
+    public void testDrawWithNullMinRegular() {
+        boolean success = false;
+        try {
+            DefaultBoxAndWhiskerCategoryDataset dataset 
+                    = new DefaultBoxAndWhiskerCategoryDataset();
+            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
+                    new Double(3.0), new Double(4.0), null, 
+                    new Double(4.5), new Double(-0.5), new Double(5.5), 
+                    null), "S1", "C1");
+            CategoryPlot plot = new CategoryPlot(dataset, 
+                    new CategoryAxis("Category"), new NumberAxis("Value"), 
+                    new BoxAndWhiskerRenderer());
+            ChartRenderingInfo info = new ChartRenderingInfo();
+            JFreeChart chart = new JFreeChart(plot);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+                    info);
+            success = true;
+        }
+        catch (Exception e) {
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    /**
+     * Draws a chart where the dataset contains a null max regular value.
+     */
+    public void testDrawWithNullMaxRegular() {
+        boolean success = false;
+        try {
+            DefaultBoxAndWhiskerCategoryDataset dataset 
+                    = new DefaultBoxAndWhiskerCategoryDataset();
+            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
+                    new Double(3.0), new Double(4.0), new Double(0.5), 
+                    null, new Double(-0.5), new Double(5.5), 
+                    null), "S1", "C1");
+            CategoryPlot plot = new CategoryPlot(dataset, 
+                    new CategoryAxis("Category"), new NumberAxis("Value"), 
+                    new BoxAndWhiskerRenderer());
+            ChartRenderingInfo info = new ChartRenderingInfo();
+            JFreeChart chart = new JFreeChart(plot);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+                    info);
+            success = true;
+        }
+        catch (Exception e) {
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    /**
+     * Draws a chart where the dataset contains a null min outlier value.
+     */
+    public void testDrawWithNullMinOutlier() {
+        boolean success = false;
+        try {
+            DefaultBoxAndWhiskerCategoryDataset dataset 
+                    = new DefaultBoxAndWhiskerCategoryDataset();
+            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
+                    new Double(3.0), new Double(4.0), new Double(0.5), 
+                    new Double(4.5), null, new Double(5.5), 
+                    null), "S1", "C1");
+            CategoryPlot plot = new CategoryPlot(dataset, 
+                    new CategoryAxis("Category"), new NumberAxis("Value"), 
+                    new BoxAndWhiskerRenderer());
+            ChartRenderingInfo info = new ChartRenderingInfo();
+            JFreeChart chart = new JFreeChart(plot);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+                    info);
+            success = true;
+        }
+        catch (Exception e) {
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    /**
+     * Draws a chart where the dataset contains a null max outlier value.
+     */
+    public void testDrawWithNullMaxOutlier() {
+        boolean success = false;
+        try {
+            DefaultBoxAndWhiskerCategoryDataset dataset 
+                    = new DefaultBoxAndWhiskerCategoryDataset();
+            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
+                    new Double(3.0), new Double(4.0), new Double(0.5), 
+                    new Double(4.5), new Double(-0.5), null, 
+                    new java.util.ArrayList()), "S1", "C1");
+            CategoryPlot plot = new CategoryPlot(dataset, 
+                    new CategoryAxis("Category"), new NumberAxis("Value"), 
+                    new BoxAndWhiskerRenderer());
+            ChartRenderingInfo info = new ChartRenderingInfo();
+            JFreeChart chart = new JFreeChart(plot);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+                    info);
+            success = true;
+        }
+        catch (Exception e) {
+            success = false;
+        }
+        assertTrue(success);
     }
     
 }
