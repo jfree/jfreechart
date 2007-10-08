@@ -1,5 +1,32 @@
 2007-10-08  David Gilbert  <david.gilbert@object-refinery.com>
 
+	Based on Patch 1769088:
+	* source/org/jfree/chart/plot/ThermometerPlot.java
+	(BULB_RADIUS): Deprecated,
+	(BULB_DIAMETER): Likewise,
+	(COLUMN_RADIUS): Likewise,
+	(COLUMN_DIAMETER): Likewise,
+	(GAP_RADIUS): Likewise,
+	(GAP_DIAMETER): Likewise,
+	(bulbRadius): New field,
+	(columnRadius): Likewise,
+	(gapRadius): Likewise,
+	(getBulbRadius): New method,
+	(setBulbRadius): Likewise,
+	(getBulbDiameter): Likewise,
+	(getColumnRadius): Likewise,
+	(setColumnRadius): Likewise,
+	(getColumnDiameter): Likewise,
+	(getGapRadius): Likewise,
+	(setGapRadius): Likewise,
+	(getGapDiameter): Likewise,
+	(draw): Use attributes rather than constants,
+	(equals): Updated for new fields,
+	* tests/org/jfree/chart/plot/junit/ThermometerPlotTests.java
+	(testEquals): Updated for new fields.
+
+2007-10-08  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/renderer/category/MultiShapeRenderer.java: 
 	New file,
 	* source/org/jfree/data/statistics/DefaultMultiValueCategoryDataset.java:
