@@ -1,3 +1,20 @@
+2007-10-08  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/renderer/xy/CandlestickRenderer.java
+	(volumePaint): New field,
+	(CandlestickRenderer(double, boolean, XYToolTipGenerator)): Initialise new 
+	field,
+	(getVolumePaint): New method,
+	(setVolumePaint): Likewise,
+	(drawItem): Use new paint attribute,
+	(equals): Add check for new field,
+	(writeObject): Handle serialization for new field,
+	(readObject): Likewise,
+	* tests/org/jfree/chart/renderer/xy/junit/CandlestickRendererTests.java
+	(EPSILON): New field,
+	(testConstructor): New method,
+	(testEquals): Added check for new field.
+
 2007-10-05  David Gilbert  <david.gilbert@object-refinery.com>
 
 	Based on patch 1805262 by Alex Moots:
