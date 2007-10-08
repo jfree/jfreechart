@@ -1760,6 +1760,7 @@ class JFreeChartInfo extends ProjectInfo {
                 new Contributor("Paolo Cova", "-"),
                 new Contributor("Mike Duffy", "-"),
                 new Contributor("Don Elliott", "-"),
+                new Contributor("David Forslund", "-"),
                 new Contributor("Jonathan Gabbai", "-"),
                 new Contributor("David Gilbert", 
                         "david.gilbert@object-refinery.com"),
