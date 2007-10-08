@@ -39,6 +39,7 @@
  * 01-Jun-2005 : Strengthened equals() test (DG);
  * 05-Sep-2006 : Added checks for MarkerChangeEvent generation (DG);
  * 26-Sep-2007 : Added test1802195() method (DG);
+ * 08-Oct-2007 : Added test1808376() method (DG);
  *
  */
 
@@ -48,6 +49,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
+import java.awt.Stroke;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -278,6 +280,22 @@ public class ValueMarkerTests
         }
         assertTrue(pass);
 
+    }
+
+    /**
+     * A test for bug report 1808376.
+     */
+    public void test1808376() {
+        Stroke stroke = new BasicStroke(1.0f);
+        Stroke outlineStroke = new BasicStroke(2.0f);
+        ValueMarker m = new ValueMarker(1.0, Color.red, stroke, Color.blue, 
+                outlineStroke, 0.5f);
+        assertEquals(1.0, m.getValue(), EPSILON);
+        assertEquals(Color.red, m.getPaint());
+        assertEquals(stroke, m.getStroke());
+        assertEquals(Color.blue, m.getOutlinePaint());
+        assertEquals(outlineStroke, m.getOutlineStroke());
+        assertEquals(0.5f, m.getAlpha(), EPSILON);
     }
 
 }
