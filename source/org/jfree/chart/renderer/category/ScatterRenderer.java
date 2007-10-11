@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
  * in the United States and other countries.]
  *
- * -----------------------
- * MultiShapeRenderer.java
- * -----------------------
+ * --------------------
+ * ScatterRenderer.java
+ * --------------------
  * (C) Copyright 2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 08-Oct-2007 : Version 1, based on patch 1780779 by David Forslund (DG);
+ * 11-Oct-2007 : Renamed ScatterRenderer (DG);
  *
  */
 
@@ -73,7 +74,7 @@ import org.jfree.util.ShapeUtilities;
  * 
  * @since 1.0.7
  */
-public class MultiShapeRenderer extends AbstractCategoryItemRenderer
+public class ScatterRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {
 
     /**
@@ -119,7 +120,7 @@ public class MultiShapeRenderer extends AbstractCategoryItemRenderer
     /**
      * Constructs a new renderer.
      */
-    public MultiShapeRenderer() {
+    public ScatterRenderer() {
         this.seriesShapesFilled = new BooleanList();
         this.baseShapesFilled = true;
         this.useFillPaint = false;
@@ -483,10 +484,10 @@ public class MultiShapeRenderer extends AbstractCategoryItemRenderer
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof MultiShapeRenderer)) {
+        if (!(obj instanceof ScatterRenderer)) {
             return false;
         }
-        MultiShapeRenderer that = (MultiShapeRenderer) obj;
+        ScatterRenderer that = (ScatterRenderer) obj;
         if (!ObjectUtilities.equal(this.seriesShapesFilled,
                 that.seriesShapesFilled)) {
             return false;
@@ -520,7 +521,7 @@ public class MultiShapeRenderer extends AbstractCategoryItemRenderer
      * @throws CloneNotSupportedException  should not happen.
      */
     public Object clone() throws CloneNotSupportedException {
-        MultiShapeRenderer clone = (MultiShapeRenderer) super.clone();
+        ScatterRenderer clone = (ScatterRenderer) super.clone();
         clone.seriesShapesFilled 
                 = (BooleanList) this.seriesShapesFilled.clone();
         return clone;
