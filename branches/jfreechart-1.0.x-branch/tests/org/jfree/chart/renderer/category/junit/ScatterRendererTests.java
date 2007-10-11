@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
  * in the United States and other countries.]
  *
- * ----------------------------
- * MultiShapeRendererTests.java
- * ----------------------------
+ * -------------------------
+ * ScatterRendererTests.java
+ * -------------------------
  * (C) Copyright 2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 08-Oct-2007 : Version 1 (DG);
+ * 11-Oct-2007 : Renamed ScatterRenderer (DG);
  *
  */
 
@@ -51,12 +52,12 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.jfree.chart.renderer.category.MultiShapeRenderer;
+import org.jfree.chart.renderer.category.ScatterRenderer;
 
 /**
- * Tests for the {@link MultiShapeRenderer} class.
+ * Tests for the {@link ScatterRenderer} class.
  */
-public class MultiShapeRendererTests extends TestCase {
+public class ScatterRendererTests extends TestCase {
 
     /**
      * Returns the tests as a test suite.
@@ -64,7 +65,7 @@ public class MultiShapeRendererTests extends TestCase {
      * @return The test suite.
      */
     public static Test suite() {
-        return new TestSuite(MultiShapeRendererTests.class);
+        return new TestSuite(ScatterRendererTests.class);
     }
 
     /**
@@ -72,7 +73,7 @@ public class MultiShapeRendererTests extends TestCase {
      *
      * @param name  the name of the tests.
      */
-    public MultiShapeRendererTests(String name) {
+    public ScatterRendererTests(String name) {
         super(name);
     }
 
@@ -81,8 +82,8 @@ public class MultiShapeRendererTests extends TestCase {
      */
     public void testEquals() {
         
-        MultiShapeRenderer r1 = new MultiShapeRenderer();
-        MultiShapeRenderer r2 = new MultiShapeRenderer();
+        ScatterRenderer r1 = new ScatterRenderer();
+        ScatterRenderer r2 = new ScatterRenderer();
         assertEquals(r1, r2);
         
         r1.setSeriesShapesFilled(1, true);
@@ -121,8 +122,8 @@ public class MultiShapeRendererTests extends TestCase {
      * Two objects that are equal are required to return the same hashCode. 
      */
     public void testHashcode() {
-        MultiShapeRenderer r1 = new MultiShapeRenderer();
-        MultiShapeRenderer r2 = new MultiShapeRenderer();
+        ScatterRenderer r1 = new ScatterRenderer();
+        ScatterRenderer r2 = new ScatterRenderer();
         assertTrue(r1.equals(r2));
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
@@ -133,10 +134,10 @@ public class MultiShapeRendererTests extends TestCase {
      * Confirm that cloning works.
      */
     public void testCloning() {
-        MultiShapeRenderer r1 = new MultiShapeRenderer();
-        MultiShapeRenderer r2 = null;
+        ScatterRenderer r1 = new ScatterRenderer();
+        ScatterRenderer r2 = null;
         try {
-            r2 = (MultiShapeRenderer) r1.clone();
+            r2 = (ScatterRenderer) r1.clone();
         }
         catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -157,8 +158,8 @@ public class MultiShapeRendererTests extends TestCase {
      * 
      * @return A boolean.
      */
-    private boolean checkIndependence(MultiShapeRenderer r1, 
-            MultiShapeRenderer r2) {
+    private boolean checkIndependence(ScatterRenderer r1, 
+            ScatterRenderer r2) {
 
         // should be equal...
         if (!r1.equals(r2)) {
@@ -193,8 +194,8 @@ public class MultiShapeRendererTests extends TestCase {
      */
     public void testSerialization() {
 
-        MultiShapeRenderer r1 = new MultiShapeRenderer();
-        MultiShapeRenderer r2 = null;
+        ScatterRenderer r1 = new ScatterRenderer();
+        ScatterRenderer r2 = null;
 
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -204,7 +205,7 @@ public class MultiShapeRendererTests extends TestCase {
 
             ObjectInput in = new ObjectInputStream(
                     new ByteArrayInputStream(buffer.toByteArray()));
-            r2 = (MultiShapeRenderer) in.readObject();
+            r2 = (ScatterRenderer) in.readObject();
             in.close();
         }
         catch (Exception e) {

@@ -1,5 +1,12 @@
 2007-10-11  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/renderer/category/MultiValueRenderer.java:
+	Renamed ScatterRenderer.java;
+	* tests/org/jfree/chart/renderer/category/junit/MultiValueRendererTests.java:
+	Renamed ScatterRendererTests.java.
+
+2007-10-11  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/plot/ThermometerPlot.java
 	(DEFAULT_GAP_RADIUS): Renamed DEFAULT_GAP,
 	(gapRadius): Renamed gap,
