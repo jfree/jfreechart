@@ -1,3 +1,14 @@
+2007-10-11  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/plot/ThermometerPlot.java
+	(DEFAULT_GAP_RADIUS): Renamed DEFAULT_GAP,
+	(gapRadius): Renamed gap,
+	(getGapRadius): Renamed getGap(),
+	(setGapRadius): Renamed setGap(),
+	(getGapDiameter): Removed,
+	(draw): Updated for method name changes,
+	(equals): Likewise.
+
 2007-10-08  David Gilbert  <david.gilbert@object-refinery.com>
 
 	Based on Patch 1769088:
