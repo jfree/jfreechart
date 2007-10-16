@@ -21,13 +21,13 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.0.6" />
+        <property name="jfreechart.version" value="1.0.7" />
         <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.10" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="itext.name" value="itext" />
-        <property name="itext.version" value="2.0.2" />
+        <property name="itext.version" value="2.0.6" />
         <property name="itext.jar" value="${basedir}/lib/${itext.name}-${itext.version}.jar"/>
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
