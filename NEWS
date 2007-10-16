@@ -1,3 +1,61 @@
+JFreeChart 1.0.7
+----------------
+?? October 2007
+
+This release features a new LogAxis class, initial support for minor tick 
+units, a new anchored zooming option for the ChartPanel class, optional simple
+labelling on pie charts, improvements to the "statistical" datasets and 
+underlying data structures, and numerous bug fixes.
+
+API Adjustments:
+
+- CategoryAxis - added getCategorySeriesMiddle() method;
+- LogAxis - new class, an alternative to LogarithmicAxis;
+- NumberTick - new constructor that allows specification of the tick type;
+- NumberTickUnit - new constructor to specify the minor tick count;
+- SymbolAxis - new methods get/setGridBandAlternatePaint();
+- TickType - new class;
+- TickUnit - added minorTickCount attribute;
+- ValueTick - added tickType attribute;
+- StandardPieSectionLabelGenerator - new constructors accepting a Locale;
+- StandardPieToolTipGenerator - likewise;
+- CategoryPlot - added getRangeAxisIndex(), zoomDomainAxes() and zoomRangeAxes()
+                 methods;
+- FastScatterPlot - added new zooming methods;
+- PiePlot - new attributes to support simple labelling;
+- PlotUtilities - new class;
+- PolarPlot - added new zooming methods;
+- ThermometerPlot - likewise;
+- XYPlot - likewise;
+- Zoomable - added new zooming methods to this interface;
+- LineAndShapeRenderer - added useSeriesOffset and itemMargin attributes;
+- MinMaxCategoryRenderer - implemented equals();
+- XYSplineAndShapeRenderer - new class;
+- LogFormat - new class;
+- ChartFactory - new pie and ring chart creation methods that accept a Locale;
+- ChartPanel - added zoomAroundAnchor attribute;
+- Series - added isEmpty() method;
+- BoxAndWhiskerItem - new convenience constructor;
+- DefaultBoxAndWhiskerCategoryDataset - new remove methods;
+- DefaultStatisticalCategoryDataset - likewise;
+- MeanAndStandardDeviation - added new value accessor methods;
+- TimeTableXYDataset - added clear() method;
+- Week - added new constructor;
+- KeyedObjects - added insertValue() and clear() methods;
+- KeyedObjects2D - added clear() method.
+
+Bug Fixes:
+
+1767315 - GrayPaintScale.getPaint() uses wrong value;
+1775452 - Inverted XYBarRenderer does not render margins correctly;
+1802195 - Marker.listenerList serializable;
+1779941 - StatisticalBarRenderer NPE;
+1766646 - XYBlockRenderer can't handle empty datasets;
+1763413 - PeriodAxis labels fail to display with setInverted
+1737953 - Zoom doesn't work on LogAxis(Demo1)
+1749124 - JFreeChart not added as TitleChangeListener 
+
+
 JFreeChart 1.0.6
 ----------------
 15 June 2007
