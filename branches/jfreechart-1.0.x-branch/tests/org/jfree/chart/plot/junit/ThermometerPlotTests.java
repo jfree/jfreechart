@@ -189,9 +189,9 @@ public class ThermometerPlotTests extends TestCase {
         p2.setColumnRadius(8);
         assertTrue(p2.equals(p1));
         
-        p1.setGapRadius(7);
+        p1.setGap(7);
         assertFalse(p1.equals(p2));
-        p2.setGapRadius(7);
+        p2.setGap(7);
         assertTrue(p2.equals(p1));
     }
     
