@@ -46,6 +46,7 @@
  * 17-Jan-2007 : Fixed bug in drawDomainGridline() method and added
  *               argument check to setWallPaint() (DG);
  * 03-Apr-2007 : Fixed bugs in drawBackground() method (DG);
+ * 16-Oct-2007 : Fixed bug in range marker drawing (DG);
  * 
  */
 
@@ -435,6 +436,11 @@ public class LineRenderer3D extends LineAndShapeRenderer
                                 Marker marker,
                                 Rectangle2D dataArea) {
 
+        Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(), 
+                dataArea.getY() + getYOffset(), 
+                dataArea.getWidth() - getXOffset(), 
+                dataArea.getHeight() - getYOffset());
+
         if (marker instanceof ValueMarker) {
             ValueMarker vm = (ValueMarker) marker;
             double value = vm.getValue();
@@ -442,11 +448,6 @@ public class LineRenderer3D extends LineAndShapeRenderer
             if (!range.contains(value)) {
                 return;
             }
-
-            Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(), 
-                    dataArea.getY() + getYOffset(), 
-                    dataArea.getWidth() - getXOffset(), 
-                    dataArea.getHeight() - getYOffset());
 
             GeneralPath path = null;
             PlotOrientation orientation = plot.getOrientation();
@@ -479,6 +480,10 @@ public class LineRenderer3D extends LineAndShapeRenderer
             g2.fill(path);
             g2.setPaint(marker.getOutlinePaint());
             g2.draw(path);
+        }
+        else {
+            super.drawRangeMarker(g2, plot, axis, marker, adjusted);
+            // TODO: draw the interval marker with a 3D effect
         }
     }
    

@@ -90,6 +90,7 @@
  * 07-Dec-2006 : Implemented equals() override (DG);
  * 17-Jan-2007 : Fixed bug in drawDomainGridline() method (DG);
  * 03-Apr-2007 : Fixed bugs in drawBackground() method (DG);
+ * 16-Oct-2007 : Fixed bug in range marker drawing (DG);
  * 
  */
 
@@ -513,6 +514,10 @@ public class BarRenderer3D extends BarRenderer
                                 Marker marker,
                                 Rectangle2D dataArea) {
 
+
+        Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(), 
+                dataArea.getY() + getYOffset(), dataArea.getWidth() 
+                - getXOffset(), dataArea.getHeight() - getYOffset());
         if (marker instanceof ValueMarker) {
             ValueMarker vm = (ValueMarker) marker;
             double value = vm.getValue();
@@ -520,10 +525,6 @@ public class BarRenderer3D extends BarRenderer
             if (!range.contains(value)) {
                 return;
             }
-
-            Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(), 
-                    dataArea.getY() + getYOffset(), dataArea.getWidth() 
-                    - getXOffset(), dataArea.getHeight() - getYOffset());
 
             GeneralPath path = null;
             PlotOrientation orientation = plot.getOrientation();
@@ -574,7 +575,7 @@ public class BarRenderer3D extends BarRenderer
         
         }
         else {
-            super.drawRangeMarker(g2, plot, axis, marker, dataArea);
+            super.drawRangeMarker(g2, plot, axis, marker, adjusted);
             // TODO: draw the interval marker with a 3D effect
         }
     }
