@@ -171,7 +171,6 @@
         <!-- copy across README and CHANGELOG -->
         <copy file="${basedir}/README.txt" tofile="${basedir}/distribution/README.txt" />
         <copy file="${basedir}/NEWS" tofile="${basedir}/distribution/NEWS" />
-        <copy file="${basedir}/CHANGELOG.txt" tofile="${basedir}/distribution/CHANGELOG.txt" />
         <copy file="${basedir}/ChangeLog" tofile="${basedir}/distribution/ChangeLog" />
         <copy file="${basedir}/maven-jfreechart-project.xml" tofile="${basedir}/distribution/maven-jfreechart-project.xml" />
 
