@@ -103,6 +103,13 @@ public class DialBackgroundTests extends TestCase {
         b2.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
         assertTrue(b1.equals(b2));
+        
+        // check an inherited attribute
+        b1.setVisible(false);
+        assertFalse(b1.equals(b2));
+        b2.setVisible(false);
+        assertTrue(b1.equals(b2));
+        
     }
 
     /**
@@ -150,6 +157,12 @@ public class DialBackgroundTests extends TestCase {
         assertTrue(b1 != b2);
         assertTrue(b1.getClass() == b2.getClass());
         assertTrue(b1.equals(b2));
+        
+        // check that the listener lists are independent
+        MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
+        b1.addChangeListener(l1);
+        assertTrue(b1.hasListener(l1));
+        assertFalse(b2.hasListener(l1));
     }
 
 

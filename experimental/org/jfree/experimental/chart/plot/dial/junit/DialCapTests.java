@@ -114,6 +114,12 @@ public class DialCapTests extends TestCase {
         assertFalse(c1.equals(c2));
         c2.setOutlineStroke(new BasicStroke(1.1f));
         assertTrue(c1.equals(c2));
+        
+        // check an inherited attribute
+        c1.setVisible(false);
+        assertFalse(c1.equals(c2));
+        c2.setVisible(false);
+        assertTrue(c1.equals(c2));
     }
 
     /**
@@ -162,6 +168,12 @@ public class DialCapTests extends TestCase {
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
+        
+        // check that the listener lists are independent
+        MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
+        c1.addChangeListener(l1);
+        assertTrue(c1.hasListener(l1));
+        assertFalse(c2.hasListener(l1));
     }
 
 

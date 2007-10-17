@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 03-Nov-2006 : Version 1 (DG);
+ * 17-Oct-2007 : Added equals() overrides (DG);
  * 
  */
 
@@ -50,8 +51,13 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.jfree.io.SerialUtilities;
+import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -138,6 +144,30 @@ public abstract class DialPointer extends AbstractDialLayer
     }
     
     /**
+     * Checks this instance for equality with an arbitrary object.
+     * 
+     * @param obj  the object (<code>null</code> not permitted).
+     * 
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof DialPointer)) {
+            return false;
+        }
+        DialPointer that = (DialPointer) obj;
+        if (this.datasetIndex != that.datasetIndex) {
+            return false;
+        }
+        if (this.radius != that.radius) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+    
+    /**
      * Returns a clone of the pointer.
      * 
      * @return a clone.
@@ -182,16 +212,21 @@ public abstract class DialPointer extends AbstractDialLayer
         /**
          * Returns the paint.
          * 
-         * @return The paint.
+         * @return The paint (never <code>null</code>).
+         * 
+         * @see #setPaint(Paint)
          */
         public Paint getPaint() {
             return this.paint;
         }
         
         /**
-         * Sets the paint.
+         * Sets the paint and sends a {@link DialLayerChangeEvent} to all 
+         * registered listeners.
          * 
          * @param paint  the paint (<code>null</code> not permitted).
+         * 
+         * @see #getPaint()
          */
         public void setPaint(Paint paint) {
             this.paint = paint;
@@ -201,16 +236,21 @@ public abstract class DialPointer extends AbstractDialLayer
         /**
          * Returns the stroke.
          * 
-         * @return The stroke.
+         * @return The stroke (neverA <code>null</code>).
+         * 
+         * @see #setStroke(Stroke)
          */
         public Stroke getStroke() {
             return this.stroke;
         }
         
         /**
-         * Sets the stroke.
+         * Sets the stroke and sends a {@link DialLayerChangeEvent} to all 
+         * registered listeners.
          * 
          * @param stroke  the stroke (<code>null</code> not permitted).
+         * 
+         * @see #getStroke()
          */
         public void setStroke(Stroke stroke) {
             this.stroke = stroke;
@@ -243,6 +283,58 @@ public abstract class DialPointer extends AbstractDialLayer
             Line2D line = new Line2D.Double(frame.getCenterX(), 
                     frame.getCenterY(), pt.getX(), pt.getY());
             g2.draw(line);
+        }
+        
+        /**
+         * Tests this pointer for equality with an arbitrary object.
+         * 
+         * @param obj  the object (<code>null</code> permitted).
+         * 
+         * @return A boolean.
+         */
+        public boolean equals(Object obj) {
+            if (obj == this) {
+                return true;
+            }
+            if (!(obj instanceof DialPointer.Pin)) {
+                return false;
+            }
+            DialPointer.Pin that = (DialPointer.Pin) obj;
+            if (!PaintUtilities.equal(this.paint, that.paint)) {
+                return false;
+            }
+            if (!this.stroke.equals(that.stroke)) {
+                return false;
+            }
+            return super.equals(obj);
+        }
+        
+        /**
+         * Provides serialization support.
+         *
+         * @param stream  the output stream.
+         *
+         * @throws IOException  if there is an I/O error.
+         */
+        private void writeObject(ObjectOutputStream stream) throws IOException {
+            stream.defaultWriteObject();
+            SerialUtilities.writePaint(this.paint, stream);
+            SerialUtilities.writeStroke(this.stroke, stream);
+        }
+
+        /**
+         * Provides serialization support.
+         *
+         * @param stream  the input stream.
+         *
+         * @throws IOException  if there is an I/O error.
+         * @throws ClassNotFoundException  if there is a classpath problem.
+         */
+        private void readObject(ObjectInputStream stream) 
+                throws IOException, ClassNotFoundException {
+            stream.defaultReadObject();
+            this.paint = SerialUtilities.readPaint(stream);
+            this.stroke = SerialUtilities.readStroke(stream);
         }
         
     }
@@ -279,15 +371,20 @@ public abstract class DialPointer extends AbstractDialLayer
          * Returns the width radius.
          * 
          * @return The width radius.
+         * 
+         * @see #setWidthRadius(double)
          */
         public double getWidthRadius() {
             return this.widthRadius;
         }
         
         /**
-         * Sets the width radius.
+         * Sets the width radius and sends a {@link DialLayerChangeEvent} to 
+         * all registered listeners.
          * 
-         * @param radius  the radius.
+         * @param radius  the radius
+         * 
+         * @see #getWidthRadius()
          */
         public void setWidthRadius(double radius) {
             this.widthRadius = radius;
@@ -354,6 +451,29 @@ public abstract class DialPointer extends AbstractDialLayer
             line.setLine(pt3, pt4);
             g2.draw(line);
         }
+        
+        /**
+         * Tests this pointer for equality with an arbitrary object.
+         * 
+         * @param obj  the object (<code>null</code> permitted).
+         * 
+         * @return A boolean.
+         */
+        public boolean equals(Object obj) {
+            if (obj == this) {
+                return true;
+            }
+            if (!(obj instanceof DialPointer.Pointer)) {
+                return false;
+            }
+            DialPointer.Pointer that = (DialPointer.Pointer) obj;
+            
+            if (this.widthRadius != that.widthRadius) {
+                return false;
+            }
+            return super.equals(obj);
+        }
+        
         
     }
 

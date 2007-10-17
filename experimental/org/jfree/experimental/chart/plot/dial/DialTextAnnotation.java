@@ -36,6 +36,7 @@
  * -------
  * 03-Nov-2006 : Version 1 (DG);
  * 08-Mar-2007 : Fix in hashCode() (DG);
+ * 17-Oct-2007 : Updated equals() (DG);
  *
  */
 
@@ -301,7 +302,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
         if (!this.anchor.equals(that.anchor)) {
             return false;
         }
-        return true;
+        return super.equals(obj);
     }
     
     /**

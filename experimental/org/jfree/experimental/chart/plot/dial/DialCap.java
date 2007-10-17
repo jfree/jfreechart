@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 03-Nov-2006 : Version 1 (DG);
+ * 17-Oct-2007 : Updated equals() method (DG);
  * 
  */
 
@@ -114,14 +115,17 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
     
     /**
      * Sets the radius of the cap, as a percentage of the dial's framing
-     * rectangle.
+     * rectangle, and sends a {@link DialLayerChangeEvent} to all registered
+     * listeners.
      *
-     * @param radius  the radius.
+     * @param radius  the radius (must be greater than zero).
      *
      * @see #getRadius()
      */
     public void setRadius(double radius) {
-        // TODO: validation
+        if (radius <= 0.0) {
+            throw new IllegalArgumentException("Requires radius > 0.0.");
+        }
         this.radius = radius;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -138,7 +142,8 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
     }
     
     /**
-     * Sets the paint for the cap background.
+     * Sets the paint for the cap background and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
      *
@@ -164,7 +169,8 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
     }
     
     /**
-     * Sets the paint used to draw the outline of the cap.
+     * Sets the paint used to draw the outline of the cap and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
      *
@@ -268,7 +274,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
         if (!this.outlineStroke.equals(that.outlineStroke)) {
             return false;
         }
-        return true;
+        return super.equals(obj);
     }
     
     /**

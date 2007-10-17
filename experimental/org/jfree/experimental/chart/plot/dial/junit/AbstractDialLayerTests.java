@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
  * in the United States and other countries.]
  *
- * ---------------------
- * DialPointerTests.java
- * ---------------------
+ * ---------------------------
+ * AbstractDialLayerTests.java
+ * ---------------------------
  * (C) Copyright 2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -34,14 +34,12 @@
  *
  * Changes
  * -------
- * 30-Apr-2007 : Version 1 (DG);
+ * 16-Oct-2007 : Version 1 (DG);
  *
  */
 
 package org.jfree.experimental.chart.plot.dial.junit;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -53,12 +51,13 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.jfree.experimental.chart.plot.dial.DialPointer;
+import org.jfree.experimental.chart.plot.dial.AbstractDialLayer;
+import org.jfree.experimental.chart.plot.dial.DialCap;
 
 /**
- * Tests for the {@link DialPointer} class.
+ * Tests for the {@link AbstractDialLayer} class.
  */
-public class DialPointerTests extends TestCase {
+public class AbstractDialLayerTests extends TestCase {
 
     /**
      * Returns the tests as a test suite.
@@ -66,7 +65,7 @@ public class DialPointerTests extends TestCase {
      * @return The test suite.
      */
     public static Test suite() {
-        return new TestSuite(DialPointerTests.class);
+        return new TestSuite(AbstractDialLayerTests.class);
     }
 
     /**
@@ -74,7 +73,7 @@ public class DialPointerTests extends TestCase {
      *
      * @param name  the name of the tests.
      */
-    public DialPointerTests(String name) {
+    public AbstractDialLayerTests(String name) {
         super(name);
     }
 
@@ -82,104 +81,70 @@ public class DialPointerTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        DialPointer i1 = new DialPointer.Pin(1);
-        DialPointer i2 = new DialPointer.Pin(1);
-        assertTrue(i1.equals(i2));
+        DialCap c1 = new DialCap();
+        DialCap c2 = new DialCap();
+        assertTrue(c1.equals(c2));
         
-        // dataset index
-        i1 = new DialPointer.Pin(2);
-        assertFalse(i1.equals(i2));
-        i2 = new DialPointer.Pin(2);
-        assertTrue(i1.equals(i2));  
-        
-        // check an inherited attribute
-        i1.setVisible(false);
-        assertFalse(i1.equals(i2));
-        i2.setVisible(false);
-        assertTrue(i1.equals(i2));
-    }
-
-    /**
-     * Check the equals() method for the DialPointer.Pin class.
-     */
-    public void testEqualsPin() {
-        DialPointer.Pin p1 = new DialPointer.Pin();
-        DialPointer.Pin p2 = new DialPointer.Pin();
-        assertEquals(p1, p2);
-        
-        p1.setPaint(Color.green);
-        assertFalse(p1.equals(p2));
-        p2.setPaint(Color.green);
-        assertTrue(p1.equals(p2));
-        
-        BasicStroke s = new BasicStroke(4.4f);
-        p1.setStroke(s);
-        assertFalse(p1.equals(p2));
-        p2.setStroke(s);
-        assertTrue(p1.equals(p2));
-    }
-
-    /**
-     * Two objects that are equal are required to return the same hashCode. 
-     */
-    public void testHashCode() {
-        DialPointer i1 = new DialPointer.Pin(1);
-        DialPointer i2 = new DialPointer.Pin(1);
-        assertTrue(i1.equals(i2));
-        int h1 = i1.hashCode();
-        int h2 = i2.hashCode();
-        assertEquals(h1, h2);
+        // visible
+        c1.setVisible(false);
+        assertFalse(c1.equals(c2));
+        c2.setVisible(false);
+        assertTrue(c1.equals(c2));
     }
 
     /**
      * Confirm that cloning works.
      */
     public void testCloning() {
-        DialPointer i1 = new DialPointer.Pin(1);
-        DialPointer i2 = null;
+        // test a default instance
+        DialCap c1 = new DialCap();
+        DialCap c2 = null;
         try {
-            i2 = (DialPointer) i1.clone();
+            c2 = (DialCap) c1.clone();
         }
         catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        assertTrue(i1 != i2);
-        assertTrue(i1.getClass() == i2.getClass());
-        assertTrue(i1.equals(i2));
+        assertTrue(c1 != c2);
+        assertTrue(c1.getClass() == c2.getClass());
+        assertTrue(c1.equals(c2));
         
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
-        i1.addChangeListener(l1);
-        assertTrue(i1.hasListener(l1));
-        assertFalse(i2.hasListener(l1));
+        c1.addChangeListener(l1);
+        assertTrue(c1.hasListener(l1));
+        assertFalse(c2.hasListener(l1));
     }
-
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
         // test a default instance
-        DialPointer i1 = new DialPointer.Pin(1);
-        DialPointer i2 = null;
+        DialCap c1 = new DialCap();
+        DialCap c2 = null;
 
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(i1);
+            out.writeObject(c1);
             out.close();
 
             ObjectInput in = new ObjectInputStream(
                     new ByteArrayInputStream(buffer.toByteArray()));
-            i2 = (DialPointer) in.readObject();
+            c2 = (DialCap) in.readObject();
             in.close();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(i1, i2);
-        
-        // test a custom instance
+        assertEquals(c1, c2);
+
+        // check that the listener lists are independent
+        MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
+        c1.addChangeListener(l1);
+        assertTrue(c1.hasListener(l1));
+        assertFalse(c2.hasListener(l1));
     }
 
 }

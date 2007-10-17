@@ -1,3 +1,50 @@
+2007-10-17  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* experimental/org/jfree/experimental/chart/plot/dial/AbstractDialLayer.java
+	(equals): New method override,
+	(clone): Likewise,
+	* experimental/org/jfree/experimental/chart/plot/dial/DialBackground.java
+	(equals): Added call to super.equals();
+	* experimental/org/jfree/experimental/chart/plot/dial/DialCap.java
+	(equals): Added call to super.equals();
+	* experimental/org/jfree/experimental/chart/plot/dial/DialPlot.java
+	(setBackground): Fix listener registration,
+	(setCap): Likewise,
+	(setDialFrame): Likewise,
+	(addLayer): Likewise,
+	(getLayerIndex(DialLayer)): New method,
+	(removeLayer(int)): Likewise,
+	(removeLayer(DialLayer)): Likewise,
+	(addScale): Fix listener registration,
+	* experimental/org/jfree/experimental/chart/plot/dial/DialPointer.java
+	(equals): New method override,
+	(Pin.equals): Likewise,
+	(Pin.readObject): New method,
+	(Pin.writeObject): Likewise,
+	(Pointer.equals): New method override,
+	* experimental/org/jfree/experimental/chart/plot/dial/DialScale.java:
+	Now extends DialLayer,
+	* experimental/org/jfree/experimental/chart/plot/dial/DialTextAnnotation.java
+	(equals): Added call to super.equals();
+	* experimental/org/jfree/experimental/chart/plot/dial/DialValueIndicator.java
+	(equals): Added call to super.equals();
+	* experimental/org/jfree/experimental/chart/plot/dial/SimpleDialFrame.java
+	(equals): Added call to super.equals();
+	* experimental/org/jfree/experimental/chart/plot/dial/StandardDialFrame.java
+	(equals): Added call to super.equals();
+	* experimental/org/jfree/experimental/chart/plot/dial/StandardDialRange.java
+	(increment): Removed field,
+	(setLowerBound): Added argument check,
+	(setUpperBound): Likewise,
+	(setBounds): New method,
+	(equals): Updated,
+	(hashCode): Likewise,
+	* experimental/org/jfree/experimental/chart/plot/dial/StandardDialScale.java
+	(setTickRadius): Added argument check,
+	(setMajorTickIncrement): Likewise,
+	(setTickLabelPaint): Likewise,
+	(equals): Updated.
+	
 2007-10-16  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/labels/AbstractXYItemLabelGenerator.java:

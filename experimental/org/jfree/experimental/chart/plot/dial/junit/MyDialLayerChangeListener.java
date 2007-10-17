@@ -24,50 +24,42 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
  * in the United States and other countries.]
  *
- * --------------
- * DialScale.java
- * --------------
- * (C) Copyright 2006-2007, by Object Refinery Limited.
+ * ------------------------------
+ * MyDialLayerChangeListener.java
+ * ------------------------------
+ * (C) Copyright 2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  * Changes
  * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 17-Oct-2007 : Made this an extension of the DialLayer interface (DG);
- * 
+ * 16-Oct-2007 : Version 1 (DG);
+ *
  */
 
-package org.jfree.experimental.chart.plot.dial;
+package org.jfree.experimental.chart.plot.dial.junit;
+
+import org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent;
+import org.jfree.experimental.chart.plot.dial.DialLayerChangeListener;
 
 /**
- * A dial scale is a specialised layer that has the ability to convert data 
- * values into angles.
+ * A dial layer change listener.
  */
-public interface DialScale extends DialLayer {
+public class MyDialLayerChangeListener implements DialLayerChangeListener {
+
+    /**
+     * Creates a new instance.
+     */
+    public MyDialLayerChangeListener() {        
+    }
     
     /**
-     * Converts a data value to an angle (in degrees, using the same 
-     * specification as Java's Arc2D class).
-     *
-     * @param value  the data value.
-     *
-     * @return The angle in degrees.
+     * Receives a change event.
      * 
-     * @see #angleToValue(double)
+     * @param event  the event.
      */
-    public double valueToAngle(double value);
-    
-    /**
-     * Converts an angle (in degrees) to a data value.
-     *
-     * @param angle  the angle (in degrees).
-     *
-     * @return The data value.
-     * 
-     * @see #valueToAngle(double)
-     */
-    public double angleToValue(double angle);
+    public void dialLayerChanged(DialLayerChangeEvent event) { 
+    }
     
 }

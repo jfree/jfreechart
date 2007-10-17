@@ -98,12 +98,6 @@ public class StandardDialRangeTests extends TestCase {
         r2.setUpperBound(11.1);
         assertTrue(r1.equals(r2));
         
-        // increment
-        r1.setIncrement(1.5);
-        assertFalse(r1.equals(r2));
-        r2.setIncrement(1.5);
-        assertTrue(r1.equals(r2));
-        
         // paint
         r1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, 
                 Color.blue));
@@ -112,6 +106,11 @@ public class StandardDialRangeTests extends TestCase {
                 Color.blue));
         assertTrue(r1.equals(r2));
         
+        // check an inherited attribute
+        r1.setVisible(false);
+        assertFalse(r1.equals(r2));
+        r2.setVisible(false);
+        assertTrue(r1.equals(r2));
     }
     
     /**
@@ -141,8 +140,13 @@ public class StandardDialRangeTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        
+        // check that the listener lists are independent
+        MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
+        r1.addChangeListener(l1);
+        assertTrue(r1.hasListener(l1));
+        assertFalse(r2.hasListener(l1));
     }
-
 
     /**
      * Serialize an instance, restore it, and check for equality.
