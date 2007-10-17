@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 03-Nov-2006 : Version 1 (DG);
+ * 17-Oct-2007 : Updated equals() (DG);
  * 
  */
 
@@ -561,7 +562,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
             return false;
         }
         
-        return true;
+        return super.equals(obj);
     }
     
     /**

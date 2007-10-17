@@ -36,6 +36,7 @@
  * -------
  * 03-Nov-2006 : Version 1 (DG);
  * 08-Mar-2007 : Fix in hashCode() (DG);
+ * 17-Oct-2007 : Fixed listener registration/deregistration bugs (DG);
  * 
  */
 
@@ -148,14 +149,21 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
     
     /**
-     * Sets the background layer.
+     * Sets the background layer and sends a {@link PlotChangeEvent} to all
+     * registered listeners.
      *
      * @param background  the background layer (<code>null</code> permitted).
      *
      * @see #getBackground()
      */
     public void setBackground(DialLayer background) {
+        if (this.background != null) {
+            this.background.removeChangeListener(this);
+        }
         this.background = background;
+        if (background != null) {
+            background.addChangeListener(this);
+        }
         notifyListeners(new PlotChangeEvent(this));
     }
     
@@ -171,14 +179,21 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
     
     /**
-     * Sets the cap.
+     * Sets the cap and sends a {@link PlotChangeEvent} to all registered 
+     * listeners.
      *
      * @param cap  the cap (<code>null</code> permitted).
      *
      * @see #getCap()
      */
     public void setCap(DialLayer cap) {
+        if (this.cap != null) {
+            this.cap.removeChangeListener(this);
+        }
         this.cap = cap;
+        if (cap != null) {
+            cap.addChangeListener(this);
+        }
         notifyListeners(new PlotChangeEvent(this));
     }
 
@@ -194,7 +209,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
     
     /**
-     * Sets the dial's frame.
+     * Sets the dial's frame and sends a {@link PlotChangeEvent} to all 
+     * registered listeners.
      *
      * @param frame  the frame (<code>null</code> not permitted).
      *
@@ -204,7 +220,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         if (frame == null) {
             throw new IllegalArgumentException("Null 'frame' argument.");
         }
+        this.dialFrame.removeChangeListener(this);
         this.dialFrame = frame;
+        frame.addChangeListener(this);
         notifyListeners(new PlotChangeEvent(this));
     }
 
@@ -257,7 +275,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
     
     /**
-     * Sets the viewing rectangle, relative to the dial's framing rectangle.
+     * Sets the viewing rectangle, relative to the dial's framing rectangle,
+     * and sends a {@link PlotChangeEvent} to all registered listeners.
      * 
      * @param x  the x-coordinate (in the range 0.0 to 1.0).
      * @param y  the y-coordinate (in the range 0.0 to 1.0).
@@ -278,7 +297,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Adds a layer to the plot.
+     * Adds a layer to the plot and sends a {@link PlotChangeEvent} to all 
+     * registered listeners.
      * 
      * @param layer  the layer (<code>null</code> not permitted).
      */
@@ -286,8 +306,49 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         if (layer == null) {
             throw new IllegalArgumentException("Null 'layer' argument.");
         }
-        this.layers.add(layer);    
+        this.layers.add(layer);
+        layer.addChangeListener(this);
         notifyListeners(new PlotChangeEvent(this));
+    }
+    
+    /**
+     * Returns the index for the specified layer.
+     * 
+     * @param layer  the layer (<code>null</code> not permitted).
+     * 
+     * @return The layer index.
+     */
+    public int getLayerIndex(DialLayer layer) {
+        if (layer == null) {
+            throw new IllegalArgumentException("Null 'layer' argument.");
+        }
+        return this.layers.indexOf(layer);
+    }
+    
+    /**
+     * Removes the layer at the specified index and sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @param index  the index.
+     */
+    public void removeLayer(int index) {
+        DialLayer layer = (DialLayer) this.layers.get(index);
+        if (layer != null) {
+            layer.removeChangeListener(this);
+        }
+        this.layers.remove(index);
+        notifyListeners(new PlotChangeEvent(this));
+    }
+    
+    /**
+     * Removes the specified layer and sends a {@link PlotChangeEvent} to all
+     * registered listeners.
+     * 
+     * @param layer  the layer (<code>null</code> not permitted).
+     */
+    public void removeLayer(DialLayer layer) {
+        // defer argument checking
+        removeLayer(getLayerIndex(layer));
     }
     
     /**
@@ -456,14 +517,24 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
     
     /**
-     * Adds a dial scale to the plot.
+     * Adds a dial scale to the plot and sends a {@link PlotChangeEvent} to 
+     * all registered listeners.
      * 
      * @param index  the scale index.
-     * @param scale  the scale.
+     * @param scale  the scale (<code>null</code> not permitted).
      */
     public void addScale(int index, DialScale scale) {
+        if (scale == null) {
+            throw new IllegalArgumentException("Null 'scale' argument.");
+        }
+        DialScale existing = (DialScale) this.scales.get(index);
+        if (existing != null) {
+            removeLayer(existing);
+        }
         this.layers.add(scale);
         this.scales.set(index, scale);
+        scale.addChangeListener(this);
+        notifyListeners(new PlotChangeEvent(this));         
     }
     
     /**
@@ -511,7 +582,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * A utility method that computes a rectangle using relative radius values.
      * 
-     * @param rect  the reference rectangle.
+     * @param rect  the reference rectangle (<code>null</code> not permitted).
      * @param radiusW  the width radius (must be > 0.0)
      * @param radiusH  the height radius.
      * 
@@ -519,6 +590,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      */
     public static Rectangle2D rectangleByRadius(Rectangle2D rect, 
             double radiusW, double radiusH) {
+        if (rect == null) {
+            throw new IllegalArgumentException("Null 'rect' argument.");
+        }
         double x = rect.getCenterX();
         double y = rect.getCenterY();
         double w = rect.getWidth() * radiusW;
@@ -527,7 +601,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
     
     /**
-     * Receives notification when a layer has changed.
+     * Receives notification when a layer has changed, and responds by 
+     * forwarding a {@link PlotChangeEvent} to all registered listeners.
      * 
      * @param event  the event.
      */

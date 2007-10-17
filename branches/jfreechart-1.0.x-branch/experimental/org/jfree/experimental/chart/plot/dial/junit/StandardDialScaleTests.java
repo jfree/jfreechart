@@ -176,6 +176,11 @@ public class StandardDialScaleTests extends TestCase {
                 3.0f, 4.0f, Color.green));
         assertTrue(s1.equals(s2));  
         
+        // check an inherited attribute
+        s1.setVisible(false);
+        assertFalse(s1.equals(s2));
+        s2.setVisible(false);
+        assertTrue(s1.equals(s2));
     }
 
     /**
@@ -223,8 +228,13 @@ public class StandardDialScaleTests extends TestCase {
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
+        
+        // check that the listener lists are independent
+        MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
+        s1.addChangeListener(l1);
+        assertTrue(s1.hasListener(l1));
+        assertFalse(s2.hasListener(l1));
     }
-
 
     /**
      * Serialize an instance, restore it, and check for equality.

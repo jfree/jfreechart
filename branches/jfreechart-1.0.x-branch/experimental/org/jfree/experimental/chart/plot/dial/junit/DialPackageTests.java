@@ -57,8 +57,9 @@ public class DialPackageTests extends TestCase {
      * @return The test suite.
      */
     public static Test suite() {
-        TestSuite suite 
-                = new TestSuite("org.jfree.experimental.chart.plot.dial");
+        TestSuite suite = new TestSuite(
+                "org.jfree.experimental.chart.plot.dial");
+        suite.addTestSuite(AbstractDialLayerTests.class);
         suite.addTestSuite(DialBackgroundTests.class);
         suite.addTestSuite(DialCapTests.class);
         suite.addTestSuite(DialPlotTests.class);

@@ -53,17 +53,33 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.experimental.chart.plot.dial.DialBackground;
 import org.jfree.experimental.chart.plot.dial.DialCap;
 import org.jfree.experimental.chart.plot.dial.DialPlot;
 import org.jfree.experimental.chart.plot.dial.SimpleDialFrame;
+import org.jfree.experimental.chart.plot.dial.StandardDialFrame;
 import org.jfree.experimental.chart.plot.dial.StandardDialScale;
 
 /**
  * Tests for the {@link DialPlot} class.
  */
-public class DialPlotTests extends TestCase {
+public class DialPlotTests extends TestCase implements PlotChangeListener {
 
+    /** The last plot change event received. */
+    private PlotChangeEvent lastEvent;
+
+    /**
+     * Records the last plot change event received.
+     * 
+     * @param event  the event.
+     */
+    public void plotChanged(PlotChangeEvent event) {
+        this.lastEvent = event;    
+    }
+
+    
     /**
      * Returns the tests as a test suite.
      *
@@ -193,6 +209,116 @@ public class DialPlotTests extends TestCase {
             e.printStackTrace();
         }
         assertEquals(p1, p2);
+    }
+    
+    /**
+     * Check the notification event mechanism for the dial background.
+     */
+    public void testBackgroundListener() {
+        DialPlot p = new DialPlot();
+        DialBackground b1 = new DialBackground(Color.red);
+        p.setBackground(b1);
+        p.addChangeListener(this);
+        this.lastEvent = null;
+        b1.setPaint(Color.blue);
+        assertNotNull(this.lastEvent);
+        
+        DialBackground b2 = new DialBackground(Color.green);
+        p.setBackground(b2);
+        this.lastEvent = null;
+        b1.setPaint(Color.red);
+        assertNull(this.lastEvent);
+        b2.setPaint(Color.red);
+        assertNotNull(this.lastEvent);
+    }
+
+    /**
+     * Check the notification event mechanism for the dial cap.
+     */
+    public void testCapListener() {
+        DialPlot p = new DialPlot();
+        DialCap c1 = new DialCap();
+        p.setCap(c1);
+        p.addChangeListener(this);
+        this.lastEvent = null;
+        c1.setFillPaint(Color.red);
+        assertNotNull(this.lastEvent);
+        
+        DialCap c2 = new DialCap();
+        p.setCap(c2);
+        this.lastEvent = null;
+        c1.setFillPaint(Color.blue);
+        assertNull(this.lastEvent);
+        c2.setFillPaint(Color.green);
+        assertNotNull(this.lastEvent);
+    }
+
+    /**
+     * Check the notification event mechanism for the dial frame.
+     */
+    public void testFrameListener() {
+        DialPlot p = new DialPlot();
+        StandardDialFrame f1 = new StandardDialFrame();
+        p.setDialFrame(f1);
+        p.addChangeListener(this);
+        this.lastEvent = null;
+        f1.setBackgroundPaint(Color.gray);
+        assertNotNull(this.lastEvent);
+        
+        StandardDialFrame f2 = new StandardDialFrame();
+        p.setDialFrame(f2);
+        this.lastEvent = null;
+        f1.setBackgroundPaint(Color.blue);
+        assertNull(this.lastEvent);
+        f2.setBackgroundPaint(Color.green);
+        assertNotNull(this.lastEvent);
+    }
+
+    /**
+     * Check the notification event mechanism for the dial scales.
+     */
+    public void testScaleListener() {
+        DialPlot p = new DialPlot();
+        StandardDialScale s1 = new StandardDialScale();
+        p.addScale(0, s1);
+        p.addChangeListener(this);
+        this.lastEvent = null;
+        s1.setStartAngle(22.0);
+        assertNotNull(this.lastEvent);
+        
+        StandardDialScale s2 = new StandardDialScale();
+        p.addScale(0, s2);
+        this.lastEvent = null;
+        s1.setStartAngle(33.0);
+        assertNull(this.lastEvent);
+        s2.setStartAngle(33.0);
+        assertNotNull(this.lastEvent);
+    }
+    
+    /**
+     * Check the notification event mechanism for a layer.
+     */
+    public void testLayerListener() {
+        DialPlot p = new DialPlot();
+        DialBackground b1 = new DialBackground(Color.red);
+        p.addLayer(b1);
+        p.addChangeListener(this);
+        this.lastEvent = null;
+        b1.setPaint(Color.blue);
+        assertNotNull(this.lastEvent);
+        
+        DialBackground b2 = new DialBackground(Color.green);
+        p.addLayer(b2);
+        this.lastEvent = null;
+        b1.setPaint(Color.red);
+        assertNotNull(this.lastEvent);
+        b2.setPaint(Color.green);
+        assertNotNull(this.lastEvent);
+        
+        p.removeLayer(b2);
+        this.lastEvent = null;
+        b2.setPaint(Color.red);
+        assertNull(this.lastEvent);   
     }
 
 }

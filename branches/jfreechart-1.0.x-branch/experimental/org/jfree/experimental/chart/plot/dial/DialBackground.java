@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 03-Nov-2006 : Version 1 (DG);
+ * 16-Oct-2007 : The equals() method needs to call super.equals() (DG);
  * 
  */
 
@@ -111,7 +112,8 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
     }
     
     /**
-     * Sets the paint for the dial background.
+     * Sets the paint for the dial background and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
      *
@@ -139,7 +141,8 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
     
     /**
      * Sets the transformer used to adjust the coordinates of any
-     * <code>GradientPaint</code> instance used for the background paint.
+     * <code>GradientPaint</code> instance used for the background paint, and
+     * sends a {@link DialLayerChangeEvent} to all registered listeners.
      *
      * @param t  the transformer (<code>null</code> not permitted).
      *
@@ -206,7 +209,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
                 that.gradientPaintTransformer)) {
             return false;
         }
-        return true;
+        return super.equals(obj);
     }
     
     /**

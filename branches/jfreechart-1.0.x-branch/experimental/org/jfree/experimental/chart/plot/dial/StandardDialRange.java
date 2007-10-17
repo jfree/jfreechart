@@ -36,6 +36,7 @@
  * -------
  * 03-Nov-2006 : Version 1 (DG);
  * 08-Mar-2007 : Fix in hashCode() (DG);
+ * 17-Oct-2007 : Removed increment attribute (DG);
  * 
  */
 
@@ -68,11 +69,6 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
     
     /** The maximum data value for the scale. */
     private double upperBound;
-    
-    /**
-     * The increment (in data units) for each section. 
-     */
-    private double increment;
 
     /**
      * The paint used to draw the range highlight.  This field is transient
@@ -127,14 +123,18 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
     }
     
     /**
-     * Sets the lower bound of the dial range.
+     * Sets the lower bound of the dial range and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      * 
      * @param bound  the lower bound.
      * 
      * @see #getLowerBound()
      */
     public void setLowerBound(double bound) {
-        // FIXME: check
+        if (bound >= this.upperBound) {
+            throw new IllegalArgumentException(
+                    "Lower bound must be less than upper bound.");
+        }
         this.lowerBound = bound;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -151,42 +151,39 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
     }
     
     /**
-     * Sets the upper bound of the dial range.
+     * Sets the upper bound of the dial range and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      * 
      * @param bound  the upper bound.
      * 
      * @see #getUpperBound()
      */
     public void setUpperBound(double bound) {
-        // FIXME: check
+        if (bound <= this.lowerBound) {
+            throw new IllegalArgumentException(
+                    "Lower bound must be less than upper bound.");
+        }
         this.upperBound = bound;
         notifyListeners(new DialLayerChangeEvent(this));
     }
     
     /**
-     * Returns the increment between tick marks.
+     * Sets the bounds for the range and sends a {@link DialLayerChangeEvent} 
+     * to all registered listeners.
      * 
-     * @return The increment.
-     * 
-     * @see #setIncrement(double)
+     * @param lower  the lower bound.
+     * @param upper  the upper bound.
      */
-    public double getIncrement() {
-        return this.increment;
-    }
-    
-    /**
-     * Sets the increment.
-     * 
-     * @param increment  the increment.
-     * 
-     * @see #getIncrement()
-     */
-    public void setIncrement(double increment) {
-        // FIXME: check
-        this.increment = increment;
+    public void setBounds(double lower, double upper) {
+        if (lower >= upper) {
+            throw new IllegalArgumentException(
+                    "Lower must be less than upper.");
+        }
+        this.lowerBound = lower;
+        this.upperBound = upper;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+        
     /**
      * Returns the paint used to highlight the range.
      * 
@@ -199,7 +196,8 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
     }
     
     /**
-     * Sets the paint used to highlight the range.
+     * Sets the paint used to highlight the range and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      * 
      * @param paint  the paint (<code>null</code> not permitted).
      * 
@@ -225,7 +223,8 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
     }
     
     /**
-     * Sets the inner radius.
+     * Sets the inner radius and sends a {@link DialLayerChangeEvent} to all 
+     * registered listeners.
      * 
      * @param radius  the radius.
      * 
@@ -248,7 +247,8 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
     }
     
     /**
-     * Sets the outer radius.
+     * Sets the outer radius and sends a {@link DialLayerChangeEvent} to all 
+     * registered listeners.
      * 
      * @param radius  the radius.
      * 
@@ -284,7 +284,6 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
                 this.innerRadius, this.innerRadius);
         Rectangle2D arcRectOuter = DialPlot.rectangleByRadius(frame, 
                 this.outerRadius, this.outerRadius);
-        //double range = this.upperBound - this.lowerBound;
         
         DialScale scale = plot.getScaleForDataset(0);
         double angleMin = scale.valueToAngle(this.lowerBound);
@@ -322,9 +321,6 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
         if (this.upperBound != that.upperBound) {
             return false;
         }
-        if (this.increment != that.increment) {
-            return false;
-        }
         if (!PaintUtilities.equal(this.paint, that.paint)) {
             return false;
         }
@@ -334,7 +330,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
         if (this.outerRadius != that.outerRadius) {
             return false;
         }
-        return true; 
+        return super.equals(obj); 
     }
 
     /**
@@ -343,10 +339,8 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      * @return The hash code.
      */
     public int hashCode() {
-        int result = 193;
-        long temp = Double.doubleToLongBits(this.increment);
-        result = 37 * result + (int) (temp ^ (temp >>> 32));        
-        temp = Double.doubleToLongBits(this.lowerBound);
+        int result = 193;     
+        long temp = Double.doubleToLongBits(this.lowerBound);
         result = 37 * result + (int) (temp ^ (temp >>> 32));        
         temp = Double.doubleToLongBits(this.upperBound);
         result = 37 * result + (int) (temp ^ (temp >>> 32));        
