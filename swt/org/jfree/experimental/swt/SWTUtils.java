@@ -31,18 +31,24 @@
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT insa-lyon.fr);
  * Contributor(s):   Rainer Blessing;
- *                   David Gilbert (david.gilbert@object-refinery.com)
+ *                   David Gilbert (david.gilbert@object-refinery.com);
+ *                   Christoph Beck.
  *
  * Changes
  * -------
  * 01-Aug-2006 : New class (HP);
  * 16-Jan-2007 : Use FontData.getHeight() instead of direct field access (RB); 
- * 31-Jan-2007 : moved the dummy JPanel from SWTGraphics2D.java, 
+ * 31-Jan-2007 : Moved the dummy JPanel from SWTGraphics2D.java, 
  *               added a new convert method for mouse events (HP);
+ * 12-Jul-2007 : Improved the mouse event conversion with buttons 
+ *               and modifiers handling, patch sent by Christoph Beck (HP);
+ * 27-Aug-2007 : Modified toAwtMouseEvent signature (HP).
+ * 
  */
 
 package org.jfree.experimental.swt;
 
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -76,12 +82,12 @@ public class SWTUtils {
      * from the provided awt Font.
      * <p>Generally speaking, given a font size, the returned swt font 
      * will display differently on the screen than the awt one.
-     * Because the SWT toolkit use native graphical ressources whenever 
-     * it is possible, this fact is plateform dependent. To address 
+     * Because the SWT toolkit use native graphical resources whenever 
+     * it is possible, this fact is platform dependent. To address 
      * this issue, it is possible to enforce the method to return 
      * a font with the same size (or at least as close as possible) 
      * as the awt one.
-     * <p>When the object is no more used, the user must explicitely 
+     * <p>When the object is no more used, the user must explicitly 
      * call the dispose method on the returned font to free the 
      * operating system resources (the garbage collector won't do it).
      * 
@@ -155,7 +161,7 @@ public class SWTUtils {
      * <p>Generally speaking, given a font size, an swt font will 
      * display differently on the screen than the corresponding awt 
      * one. Because the SWT toolkit use native graphical ressources whenever 
-     * it is possible, this fact is plateform dependent. To address 
+     * it is possible, this fact is platform dependent. To address 
      * this issue, it is possible to enforce the method to return 
      * an awt font with the same height as the swt one.
      * 
@@ -362,9 +368,26 @@ public class SWTUtils {
      * @param event The swt event.
      * @return A AWT mouse event based on the given SWT event.
      */
-    public static MouseEvent toAwtMouseEvent(org.eclipse.swt.widgets.Event event) {
+    public static MouseEvent toAwtMouseEvent(org.eclipse.swt.events.MouseEvent event) {
+    	int button = MouseEvent.NOBUTTON;
+    	switch (event.button) {
+    	case 1: button = MouseEvent.BUTTON1; break;
+    	case 2: button = MouseEvent.BUTTON2; break;
+    	case 3: button = MouseEvent.BUTTON3; break;
+    	}
+    	int modifiers = 0;
+    	if ((event.stateMask & SWT.CTRL) != 0) {
+            modifiers |= InputEvent.CTRL_DOWN_MASK;
+    	}
+    	if ((event.stateMask & SWT.SHIFT) != 0) {
+            modifiers |= InputEvent.SHIFT_DOWN_MASK;
+    	}
+    	if ((event.stateMask & SWT.ALT) != 0) {
+            modifiers |= InputEvent.ALT_DOWN_MASK;
+    	}
         MouseEvent awtMouseEvent = new MouseEvent(DUMMY_PANEL, event.hashCode(), 
-                (long) event.time, SWT.NONE, event.x, event.y, 1, false);
+                event.time, modifiers, event.x, event.y, 1, false, button);
         return awtMouseEvent;
     }
+
 }
