@@ -130,21 +130,21 @@ public class SWTGraphics2D extends Graphics2D {
      * @return the swt <code>Resource</code> just added.
      */
     private Resource addToResourcePool(Resource resource) {
-    	resourcePool.add(resource);
-    	return resource;
+        resourcePool.add(resource);
+        return resource;
     }
     
     /**
      * Dispose the resource pool.
      */
     private void disposeResourcePool() {
-    	for (Iterator it = resourcePool.iterator();it.hasNext();) {
-    		Resource resource = (Resource)it.next();
-    		resource.dispose();
-    	}
-    	resourcePool.clear();
-    	colorsPool.clear();
-    	resourcePool.clear();
+        for (Iterator it = resourcePool.iterator();it.hasNext();) {
+            Resource resource = (Resource)it.next();
+            resource.dispose();
+        }
+        resourcePool.clear();
+        colorsPool.clear();
+        resourcePool.clear();
     }
 
     /**
@@ -158,16 +158,16 @@ public class SWTGraphics2D extends Graphics2D {
      * @return The SWT font instance.
      */
     private org.eclipse.swt.graphics.Font getSwtFontFromPool(Font font) {
-    	org.eclipse.swt.graphics.Font swtFont = (org.eclipse.swt.graphics.Font)
-    	fontsPool.get(font);
-    	if (swtFont == null) {
-    	    swtFont = new org.eclipse.swt.graphics.Font( 
-    		    gc.getDevice(), 
-    		    SWTUtils.toSwtFontData(gc.getDevice(), font, true));
-    	    addToResourcePool(swtFont);
-    	    fontsPool.put(font, swtFont);
-    	}
-    	return swtFont;
+        org.eclipse.swt.graphics.Font swtFont = (org.eclipse.swt.graphics.Font)
+        fontsPool.get(font);
+        if (swtFont == null) {
+            swtFont = new org.eclipse.swt.graphics.Font( 
+                gc.getDevice(), 
+                SWTUtils.toSwtFontData(gc.getDevice(), font, true));
+            addToResourcePool(swtFont);
+            fontsPool.put(font, swtFont);
+        }
+        return swtFont;
     }
     
     /**
@@ -181,19 +181,19 @@ public class SWTGraphics2D extends Graphics2D {
      * @return A SWT color instance.
      */
     private org.eclipse.swt.graphics.Color getSwtColorFromPool(Color awtColor) {
-	org.eclipse.swt.graphics.Color swtColor = (org.eclipse.swt.graphics.Color)
+    org.eclipse.swt.graphics.Color swtColor = (org.eclipse.swt.graphics.Color)
         // we can't use the following valueOf() method, because it won't 
         // compile with JDK1.4
-	//this.colorsPool.get(Integer.valueOf(awtColor.getRGB()));
-	this.colorsPool.get(new Integer(awtColor.getRGB()));
+    //this.colorsPool.get(Integer.valueOf(awtColor.getRGB()));
+    this.colorsPool.get(new Integer(awtColor.getRGB()));
         if (swtColor == null) {
-	    swtColor = SWTUtils.toSwtColor(gc.getDevice(), awtColor);
-	    addToResourcePool(swtColor);
-	    // see comment above
+        swtColor = SWTUtils.toSwtColor(gc.getDevice(), awtColor);
+        addToResourcePool(swtColor);
+        // see comment above
             //this.colorsPool.put(Integer.valueOf(awtColor.getRGB()), swtColor);
             this.colorsPool.put(new Integer(awtColor.getRGB()), swtColor);
-	}
-	return swtColor;
+    }
+    return swtColor;
     }
 
     /**
@@ -693,7 +693,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics#setColor(java.awt.Color)
      */
     public void setColor(Color color) {
-    	org.eclipse.swt.graphics.Color swtColor = getSwtColorFromPool(color);
+        org.eclipse.swt.graphics.Color swtColor = getSwtColorFromPool(color);
         gc.setForeground(swtColor);
     }
 
