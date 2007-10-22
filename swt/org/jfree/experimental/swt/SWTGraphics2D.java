@@ -133,7 +133,7 @@ public class SWTGraphics2D extends Graphics2D {
         resourcePool.add(resource);
         return resource;
     }
-    
+
     /**
      * Dispose the resource pool.
      */
@@ -162,14 +162,14 @@ public class SWTGraphics2D extends Graphics2D {
         fontsPool.get(font);
         if (swtFont == null) {
             swtFont = new org.eclipse.swt.graphics.Font( 
-                gc.getDevice(), 
-                SWTUtils.toSwtFontData(gc.getDevice(), font, true));
+                    gc.getDevice(), 
+                    SWTUtils.toSwtFontData(gc.getDevice(), font, true));
             addToResourcePool(swtFont);
             fontsPool.put(font, swtFont);
         }
         return swtFont;
     }
-    
+
     /**
      * Internal method to convert a AWT color object into 
      * a SWT color resource. If a corresponding SWT color
@@ -181,19 +181,20 @@ public class SWTGraphics2D extends Graphics2D {
      * @return A SWT color instance.
      */
     private org.eclipse.swt.graphics.Color getSwtColorFromPool(Color awtColor) {
-    org.eclipse.swt.graphics.Color swtColor = (org.eclipse.swt.graphics.Color)
-        // we can't use the following valueOf() method, because it won't 
-        // compile with JDK1.4
-    //this.colorsPool.get(Integer.valueOf(awtColor.getRGB()));
-    this.colorsPool.get(new Integer(awtColor.getRGB()));
+        org.eclipse.swt.graphics.Color swtColor = 
+                (org.eclipse.swt.graphics.Color)
+                // we can't use the following valueOf() method, because it 
+                // won't compile with JDK1.4
+                // this.colorsPool.get(Integer.valueOf(awtColor.getRGB()));
+                this.colorsPool.get(new Integer(awtColor.getRGB()));
         if (swtColor == null) {
-        swtColor = SWTUtils.toSwtColor(gc.getDevice(), awtColor);
-        addToResourcePool(swtColor);
-        // see comment above
+            swtColor = SWTUtils.toSwtColor(gc.getDevice(), awtColor);
+            addToResourcePool(swtColor);
+            // see comment above
             //this.colorsPool.put(Integer.valueOf(awtColor.getRGB()), swtColor);
             this.colorsPool.put(new Integer(awtColor.getRGB()), swtColor);
-    }
-    return swtColor;
+        }
+        return swtColor;
     }
 
     /**
@@ -988,17 +989,17 @@ public class SWTGraphics2D extends Graphics2D {
             int[] pixelArray = new int[3];
             for (int y = 0; y < data.height; y++) {
                 for (int x = 0; x < data.width; x++) {
-                  raster.getPixel(x, y, pixelArray);
-                  int pixel = palette.getPixel(new RGB(pixelArray[0], 
-                          pixelArray[1], pixelArray[2]));
-                  data.setPixel(x, y, pixel);
+                    raster.getPixel(x, y, pixelArray);
+                    int pixel = palette.getPixel(new RGB(pixelArray[0], 
+                            pixelArray[1], pixelArray[2]));
+                    data.setPixel(x, y, pixel);
                 }
             }
             return data;
         } 
         else if (bufferedImage.getColorModel() instanceof IndexColorModel) {
-            IndexColorModel colorModel 
-                    = (IndexColorModel) bufferedImage.getColorModel();
+            IndexColorModel colorModel = (IndexColorModel) 
+                    bufferedImage.getColorModel();
             int size = colorModel.getMapSize();
             byte[] reds = new byte[size];
             byte[] greens = new byte[size];
