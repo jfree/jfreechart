@@ -36,13 +36,14 @@
  * Changes
  * -------
  * 14-Jun-2006 : New class (HP);
- * 29-Jan-2007 : fixed the fillRect method (HP);
- * 31-Jan-2007 : moved the dummy JPanel to SWTUtils.java,
+ * 29-Jan-2007 : Fixed the fillRect method (HP);
+ * 31-Jan-2007 : Moved the dummy JPanel to SWTUtils.java,
  *               implemented the drawLine method (HP);
- * 07-Apr-2007 : dispose some of the swt ressources, 
+ * 07-Apr-2007 : Dispose some of the swt ressources, 
  *               thanks to silent for pointing this out (HP);
- * 23-May-2007 : removed resource leaks by adding a resource pool (CC);
+ * 23-May-2007 : Removed resource leaks by adding a resource pool (CC);
  * 15-Jun-2007 : Fixed compile error for JDK 1.4 (DG);
+ * 22-Oct-2007 : Implemented clipping (HP);
  * 
  */
 
@@ -98,7 +99,7 @@ import org.eclipse.swt.graphics.Transform;
  * Widget Toolkit but may be of a wider use later.
  */
 public class SWTGraphics2D extends Graphics2D {
-    
+
     /** The swt graphic composite */
     private GC gc;
     
@@ -207,7 +208,7 @@ public class SWTGraphics2D extends Graphics2D {
         gc.setBackground(fg);
         gc.setForeground(bg);
     }
-    
+
     /**
      * Converts an AWT <code>Shape</code> into a SWT <code>Path</code>.
      * 
@@ -246,7 +247,7 @@ public class SWTGraphics2D extends Graphics2D {
         }
         return path;
     }
-    
+
     /**
      * Converts an AWT transform into the equivalent SWT transform.
      * 
@@ -263,7 +264,7 @@ public class SWTGraphics2D extends Graphics2D {
                 (float) matrix[4], (float) matrix[5]); 
         return t;
     }
-    
+
     /**
      * Converts an SWT transform into the equivalent AWT transform.
      * 
@@ -277,7 +278,7 @@ public class SWTGraphics2D extends Graphics2D {
         AffineTransform awtTransform = new AffineTransform(elements);
         return awtTransform;
     }
-    
+
     /* (non-Javadoc)
      * @see java.awt.Graphics2D#draw(java.awt.Shape)
      */
@@ -656,15 +657,6 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /* (non-Javadoc)
-     * @see java.awt.Graphics2D#clip(java.awt.Shape)
-     */
-    public void clip(Shape s) {
-        Path path = toSwtPath(s);
-        gc.setClipping(path);
-        path.dispose();
-    }
-
-    /* (non-Javadoc)
      * @see java.awt.Graphics2D#getFontRenderContext()
      */
     public FontRenderContext getFontRenderContext() {
@@ -752,6 +744,15 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /* (non-Javadoc)
+     * @see java.awt.Graphics2D#clip(java.awt.Shape)
+     */
+    public void clip(Shape s) {
+        Path path = toSwtPath(s);
+        gc.setClipping(path);
+        path.dispose();
+    }
+
+    /* (non-Javadoc)
      * @see java.awt.Graphics#getClipBounds()
      */
     public Rectangle getClipBounds() {
@@ -779,8 +780,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics#getClip()
      */
     public Shape getClip() {
-        // TODO Auto-generated method stub
-        return null;
+        return SWTUtils.toAwtRectangle(gc.getClipping());
     }
 
     /* (non-Javadoc)
@@ -971,7 +971,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics#dispose()
      */
     public void dispose() {
-    	// we dispose resources we own but user must dispose gc
+        // we dispose resources we own but user must dispose gc
         disposeResourcePool();
     }
 
