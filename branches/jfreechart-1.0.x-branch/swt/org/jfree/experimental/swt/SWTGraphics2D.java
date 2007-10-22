@@ -44,11 +44,13 @@
  * 23-May-2007 : Removed resource leaks by adding a resource pool (CC);
  * 15-Jun-2007 : Fixed compile error for JDK 1.4 (DG);
  * 22-Oct-2007 : Implemented clipping (HP);
- * 
+ * 22-Oct-2007 : Implemented some AlphaComposite support (HP);
+ *
  */
 
 package org.jfree.experimental.swt;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Composite;
@@ -102,6 +104,10 @@ public class SWTGraphics2D extends Graphics2D {
 
     /** The swt graphic composite */
     private GC gc;
+
+    /** A reference to the compositing rule to apply. This is necessary 
+     * due to the poor compositing interface of the SWT toolkit. */
+    private java.awt.Composite composite;
     
     /** A HashMap to store the Swt color resources. */
     private Map colorsPool = new HashMap();
@@ -120,6 +126,7 @@ public class SWTGraphics2D extends Graphics2D {
     public SWTGraphics2D(GC gc) {
         super();
         this.gc = gc;
+        this.composite = AlphaComposite.getInstance(AlphaComposite.SRC, 1.0f);
     }
 
     /**
@@ -414,7 +421,15 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#setComposite(java.awt.Composite)
      */
     public void setComposite(Composite comp) {
-        // TODO Auto-generated method stub
+        this.composite = comp;
+        if (comp instanceof AlphaComposite) {
+            AlphaComposite acomp = (AlphaComposite) comp; 
+            int alpha = (int) (acomp.getAlpha()*0xFF);
+            this.gc.setAlpha(alpha);
+        } 
+        else {
+            System.out.println("warning, can only handle alpha composite at the moment.");
+        }
     }
 
     /**
@@ -628,8 +643,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#getComposite()
      */
     public Composite getComposite() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.composite;
     }
 
     /* (non-Javadoc)
@@ -696,6 +710,18 @@ public class SWTGraphics2D extends Graphics2D {
     public void setColor(Color color) {
         org.eclipse.swt.graphics.Color swtColor = getSwtColorFromPool(color);
         gc.setForeground(swtColor);
+        // handle transparency and compositing.
+        if (this.composite instanceof AlphaComposite) {
+            AlphaComposite acomp = (AlphaComposite) this.composite;
+            switch (acomp.getRule()) {
+            case AlphaComposite.SRC_OVER:
+                this.gc.setAlpha((int) (color.getAlpha()*acomp.getAlpha()));
+                break;
+            default:
+                this.gc.setAlpha(color.getAlpha());
+                break;
+            }
+        }
     }
 
     /* (non-Javadoc)
