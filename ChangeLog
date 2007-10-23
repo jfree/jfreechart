@@ -1,6 +1,11 @@
 2007-10-23  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* swt/org/jfree/experimental/swt/SWTGraphics2D.java
+	(drawPolyline): Implemented.
+
+2007-10-23  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* swt/org/jfree/experimental/swt/SWTGraphics2D.java
 	(drawPolygon): Implemented.
 
 2007-10-23  David Gilbert  <david.gilbert@object-refinery.com>
