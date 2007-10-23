@@ -47,7 +47,7 @@
  * 22-Oct-2007 : Implemented some AlphaComposite support (HP);
  * 23-Oct-2007 : Added mechanism for storing RenderingHints (which are 
  *               still ignored at this point) (DG);
- * 23-Oct-2007 : Implemented drawPolygon(int[], int[], int) (DG);
+ * 23-Oct-2007 : Implemented drawPolygon() and drawPolyline() (DG);
  *
  */
 
@@ -137,6 +137,22 @@ public class SWTGraphics2D extends Graphics2D {
         this.gc = gc;
         this.hints = new RenderingHints(null);
         this.composite = AlphaComposite.getInstance(AlphaComposite.SRC, 1.0f);
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#create()
+     */
+    public Graphics create() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#getDeviceConfiguration()
+     */
+    public GraphicsConfiguration getDeviceConfiguration() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     /**
@@ -276,6 +292,24 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /* (non-Javadoc)
+     * @see java.awt.Graphics2D#setBackground(java.awt.Color)
+     */
+    public void setBackground(Color color) {
+        this.gc.getBackground().dispose();
+        org.eclipse.swt.graphics.Color swtColor = SWTUtils.toSwtColor(
+                this.gc.getDevice(), color);
+        this.gc.setBackground(swtColor);
+        swtColor.dispose(); 
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#getBackground()
+     */
+    public Color getBackground() {
+        return SWTUtils.toAwtColor(this.gc.getBackground());
+    }
+
+    /* (non-Javadoc)
      * @see java.awt.Graphics#setPaintMode()
      */
     public void setPaintMode() {
@@ -288,6 +322,35 @@ public class SWTGraphics2D extends Graphics2D {
     public void setXORMode(Color color) {
         // TODO Auto-generated method stub
 
+    }
+
+    /**
+     * Returns the current composite.
+     * 
+     * @return The current composite.
+     * 
+     * @see #setComposite(Composite)
+     */
+    public Composite getComposite() {
+        return this.composite;
+    }
+
+    /**
+     * Sets the current composite.  This implementation currently supports
+     * only the {@link AlphaComposite} class.
+     * 
+     * @param comp  the composite.
+     */
+    public void setComposite(Composite comp) {
+        this.composite = comp;
+        if (comp instanceof AlphaComposite) {
+            AlphaComposite acomp = (AlphaComposite) comp; 
+            int alpha = (int) (acomp.getAlpha()*0xFF);
+            this.gc.setAlpha(alpha);
+        } 
+        else {
+            System.out.println("warning, can only handle alpha composite at the moment.");
+        }
     }
 
     /**
@@ -361,6 +424,149 @@ public class SWTGraphics2D extends Graphics2D {
         }
     }
 
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#clip(java.awt.Shape)
+     */
+    public void clip(Shape s) {
+        Path path = toSwtPath(s);
+        this.gc.setClipping(path);
+        path.dispose();
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#getClipBounds()
+     */
+    public Rectangle getClipBounds() {
+        org.eclipse.swt.graphics.Rectangle clip = this.gc.getClipping();
+        return new Rectangle(clip.x, clip.y, clip.width, clip.height);
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#clipRect(int, int, int, int)
+     */
+    public void clipRect(int x, int y, int width, int height) {
+        org.eclipse.swt.graphics.Rectangle clip = this.gc.getClipping();
+        clip.intersects(x, y, width, height);
+        this.gc.setClipping(clip);
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#getClip()
+     */
+    public Shape getClip() {
+        return SWTUtils.toAwtRectangle(this.gc.getClipping());
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#setClip(java.awt.Shape)
+     */
+    public void setClip(Shape clip) {
+        if (clip == null) 
+            return;
+        Path clipPath = toSwtPath(clip);
+        this.gc.setClipping(clipPath);
+        clipPath.dispose();
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#setClip(int, int, int, int)
+     */
+    public void setClip(int x, int y, int width, int height) {
+        this.gc.setClipping(x, y, width, height);
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#getTransform()
+     */
+    public AffineTransform getTransform() {
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
+        AffineTransform awtTransform = toAwtTransform(swtTransform);
+        swtTransform.dispose();
+        return awtTransform; 
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#setTransform(java.awt.geom.AffineTransform)
+     */
+    public void setTransform(AffineTransform Tx) {
+        this.gc.setTransform(toSwtTransform(Tx));
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#transform(java.awt.geom.AffineTransform)
+     */
+    public void transform(AffineTransform Tx) {
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
+        Transform swtMatrix = toSwtTransform(Tx);
+        swtTransform.multiply(swtMatrix);
+        this.gc.setTransform(swtTransform);
+        swtMatrix.dispose();
+        swtTransform.dispose();
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#translate(int, int)
+     */
+    public void translate(int x, int y) {
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
+        swtTransform.translate(x, y);
+        this.gc.setTransform(swtTransform);
+        swtTransform.dispose();
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#translate(double, double)
+     */
+    public void translate(double tx, double ty) {
+        translate((int) tx, (int) ty);
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#rotate(double)
+     */
+    public void rotate(double theta) {
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
+        swtTransform.rotate( (float) (theta * 180 / Math.PI));
+        this.gc.setTransform(swtTransform);
+        swtTransform.dispose();
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#rotate(double, double, double)
+     */
+    public void rotate(double theta, double x, double y) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#scale(double, double)
+     */
+    public void scale(double scaleX, double scaleY) {
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
+        swtTransform.scale((float) scaleX, (float) scaleY);
+        this.gc.setTransform(swtTransform);
+        swtTransform.dispose();
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#shear(double, double)
+     */
+    public void shear(double shearX, double shearY) {
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
+        Transform shear = new Transform(this.gc.getDevice(), 1f, (float) shearX, 
+                (float) shearY, 1f, 0, 0);
+        swtTransform.multiply(shear);
+        this.gc.setTransform(swtTransform);
+        swtTransform.dispose();
+    }
+
     /**
      * Draws the outline of the specified shape using the current stroke and
      * paint settings.
@@ -403,7 +609,25 @@ public class SWTGraphics2D extends Graphics2D {
      * @see #draw(Shape)
      */
     public void drawPolygon(int [] xPoints, int [] yPoints, int npoints) {
-        if (npoints > 0) {
+        drawPolyline(xPoints, yPoints, npoints);
+        if (npoints > 1) {
+            this.gc.drawLine(xPoints[npoints-1], yPoints[npoints-1], 
+                    xPoints[0], yPoints[0]);            
+        }
+    }
+
+    /**
+     * Draws a sequence of connected lines specified by the given points, using
+     * the current paint and stroke settings.
+     * 
+     * @param xPoints  the x-coordinates.
+     * @param yPoints  the y-coordinates.
+     * @param npoints  the number of points in the polygon.
+     * 
+     * @see #draw(Shape)
+     */
+    public void drawPolyline(int [] xPoints, int [] yPoints, int npoints) {
+        if (npoints > 1) {
             int x0 = xPoints[0];
             int y0 = yPoints[0];
             int x1 = 0, y1 = 0;
@@ -414,15 +638,7 @@ public class SWTGraphics2D extends Graphics2D {
                 x0 = x1;
                 y0 = y1;
             }
-            this.gc.drawLine(x1, y1, xPoints[0], yPoints[0]);
-        }
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawPolyline(int[], int[], int)
-     */
-    public void drawPolyline(int [] xPoints, int [] yPoints, int npoints) {
-        // TODO Auto-generated method stub
+        }    
     }
 
     /* (non-Javadoc)
@@ -521,6 +737,55 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /**
+     * Returns the font in form of an awt font created 
+     * with the parameters of the font of the swt graphic 
+     * composite.
+     * @see java.awt.Graphics#getFont()
+     */
+    public Font getFont() {
+        // retrieve the swt font description in an os indept way
+        FontData[] fontData = this.gc.getFont().getFontData();
+        // create a new awt font with the appropiate data
+        return SWTUtils.toAwtFont(this.gc.getDevice(), fontData[0], true);
+    }
+
+    /**
+     * Set the font swt graphic composite from the specified 
+     * awt font. Be careful that the newly created swt font 
+     * must be disposed separately.
+     * @see java.awt.Graphics#setFont(java.awt.Font)
+     */
+    public void setFont(Font font) {
+        org.eclipse.swt.graphics.Font swtFont = getSwtFontFromPool(font);
+        this.gc.setFont(swtFont);
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#getFontMetrics(java.awt.Font)
+     */
+    public FontMetrics getFontMetrics(Font font) {
+        return SWTUtils.DUMMY_PANEL.getFontMetrics(font);
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#getFontRenderContext()
+     */
+    public FontRenderContext getFontRenderContext() {
+        FontRenderContext fontRenderContext = new FontRenderContext(
+                new AffineTransform(), true, true);
+        return fontRenderContext;
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#drawGlyphVector(java.awt.font.GlyphVector, 
+     * float, float)
+     */
+    public void drawGlyphVector(GlyphVector g, float x, float y) {
+        // TODO Auto-generated method stub
+    
+    }
+
+    /**
      * Draws a string on the receiver. note that 
      * to be consistent with the awt method, 
      * the y has to be modified with the ascent of the font. 
@@ -564,261 +829,6 @@ public class SWTGraphics2D extends Graphics2D {
     public boolean hit(Rectangle rect, Shape text, boolean onStroke) {
         // TODO Auto-generated method stub
         return false;
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#getDeviceConfiguration()
-     */
-    public GraphicsConfiguration getDeviceConfiguration() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * Returns the current composite.
-     * 
-     * @return The current composite.
-     * 
-     * @see #setComposite(Composite)
-     */
-    public Composite getComposite() {
-        return this.composite;
-    }
-
-    /**
-     * Sets the current composite.  This implementation currently supports
-     * only the {@link AlphaComposite} class.
-     * 
-     * @param comp  the composite.
-     */
-    public void setComposite(Composite comp) {
-        this.composite = comp;
-        if (comp instanceof AlphaComposite) {
-            AlphaComposite acomp = (AlphaComposite) comp; 
-            int alpha = (int) (acomp.getAlpha()*0xFF);
-            this.gc.setAlpha(alpha);
-        } 
-        else {
-            System.out.println("warning, can only handle alpha composite at the moment.");
-        }
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#translate(int, int)
-     */
-    public void translate(int x, int y) {
-        Transform swtTransform = new Transform(this.gc.getDevice()); 
-        this.gc.getTransform(swtTransform);
-        swtTransform.translate(x, y);
-        this.gc.setTransform(swtTransform);
-        swtTransform.dispose();
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#translate(double, double)
-     */
-    public void translate(double tx, double ty) {
-        translate((int) tx, (int) ty);
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#rotate(double)
-     */
-    public void rotate(double theta) {
-        Transform swtTransform = new Transform(this.gc.getDevice()); 
-        this.gc.getTransform(swtTransform);
-        swtTransform.rotate( (float) (theta * 180 / Math.PI));
-        this.gc.setTransform(swtTransform);
-        swtTransform.dispose();
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#rotate(double, double, double)
-     */
-    public void rotate(double theta, double x, double y) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#scale(double, double)
-     */
-    public void scale(double scaleX, double scaleY) {
-        Transform swtTransform = new Transform(this.gc.getDevice()); 
-        this.gc.getTransform(swtTransform);
-        swtTransform.scale((float) scaleX, (float) scaleY);
-        this.gc.setTransform(swtTransform);
-        swtTransform.dispose();
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#shear(double, double)
-     */
-    public void shear(double shearX, double shearY) {
-        Transform swtTransform = new Transform(this.gc.getDevice()); 
-        this.gc.getTransform(swtTransform);
-        Transform shear = new Transform(this.gc.getDevice(), 1f, (float) shearX, 
-                (float) shearY, 1f, 0, 0);
-        swtTransform.multiply(shear);
-        this.gc.setTransform(swtTransform);
-        swtTransform.dispose();
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#transform(java.awt.geom.AffineTransform)
-     */
-    public void transform(AffineTransform Tx) {
-        Transform swtTransform = new Transform(this.gc.getDevice()); 
-        this.gc.getTransform(swtTransform);
-        Transform swtMatrix = toSwtTransform(Tx);
-        swtTransform.multiply(swtMatrix);
-        this.gc.setTransform(swtTransform);
-        swtMatrix.dispose();
-        swtTransform.dispose();
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#setTransform(java.awt.geom.AffineTransform)
-     */
-    public void setTransform(AffineTransform Tx) {
-        this.gc.setTransform(toSwtTransform(Tx));
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#getTransform()
-     */
-    public AffineTransform getTransform() {
-        Transform swtTransform = new Transform(this.gc.getDevice()); 
-        this.gc.getTransform(swtTransform);
-        AffineTransform awtTransform = toAwtTransform(swtTransform);
-        swtTransform.dispose();
-        return awtTransform; 
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#setBackground(java.awt.Color)
-     */
-    public void setBackground(Color color) {
-        this.gc.getBackground().dispose();
-        org.eclipse.swt.graphics.Color swtColor = SWTUtils.toSwtColor(
-                this.gc.getDevice(), color);
-        this.gc.setBackground(swtColor);
-        swtColor.dispose(); 
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#getBackground()
-     */
-    public Color getBackground() {
-        return SWTUtils.toAwtColor(this.gc.getBackground());
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#getFontRenderContext()
-     */
-    public FontRenderContext getFontRenderContext() {
-        FontRenderContext fontRenderContext = new FontRenderContext(
-                new AffineTransform(), true, true);
-        return fontRenderContext;
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#drawGlyphVector(java.awt.font.GlyphVector, 
-     * float, float)
-     */
-    public void drawGlyphVector(GlyphVector g, float x, float y) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#create()
-     */
-    public Graphics create() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * Returns the font in form of an awt font created 
-     * with the parameters of the font of the swt graphic 
-     * composite.
-     * @see java.awt.Graphics#getFont()
-     */
-    public Font getFont() {
-        // retrieve the swt font description in an os indept way
-        FontData[] fontData = this.gc.getFont().getFontData();
-        // create a new awt font with the appropiate data
-        return SWTUtils.toAwtFont(this.gc.getDevice(), fontData[0], true);
-    }
-
-    /**
-     * Set the font swt graphic composite from the specified 
-     * awt font. Be careful that the newly created swt font 
-     * must be disposed separately.
-     * @see java.awt.Graphics#setFont(java.awt.Font)
-     */
-    public void setFont(Font font) {
-        org.eclipse.swt.graphics.Font swtFont = getSwtFontFromPool(font);
-        this.gc.setFont(swtFont);
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#getFontMetrics(java.awt.Font)
-     */
-    public FontMetrics getFontMetrics(Font font) {
-        return SWTUtils.DUMMY_PANEL.getFontMetrics(font);
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#clip(java.awt.Shape)
-     */
-    public void clip(Shape s) {
-        Path path = toSwtPath(s);
-        this.gc.setClipping(path);
-        path.dispose();
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#getClipBounds()
-     */
-    public Rectangle getClipBounds() {
-        org.eclipse.swt.graphics.Rectangle clip = this.gc.getClipping();
-        return new Rectangle(clip.x, clip.y, clip.width, clip.height);
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#clipRect(int, int, int, int)
-     */
-    public void clipRect(int x, int y, int width, int height) {
-        org.eclipse.swt.graphics.Rectangle clip = this.gc.getClipping();
-        clip.intersects(x, y, width, height);
-        this.gc.setClipping(clip);
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#setClip(int, int, int, int)
-     */
-    public void setClip(int x, int y, int width, int height) {
-        this.gc.setClipping(x, y, width, height);
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#getClip()
-     */
-    public Shape getClip() {
-        return SWTUtils.toAwtRectangle(this.gc.getClipping());
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#setClip(java.awt.Shape)
-     */
-    public void setClip(Shape clip) {
-        if (clip == null) 
-            return;
-        Path clipPath = toSwtPath(clip);
-        this.gc.setClipping(clipPath);
-        clipPath.dispose();
     }
 
     /* (non-Javadoc)
