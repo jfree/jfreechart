@@ -45,6 +45,8 @@
  * 15-Jun-2007 : Fixed compile error for JDK 1.4 (DG);
  * 22-Oct-2007 : Implemented clipping (HP);
  * 22-Oct-2007 : Implemented some AlphaComposite support (HP);
+ * 23-Oct-2007 : Added mechanism for storing RenderingHints (which are 
+ *               still ignored at this point) (DG);
  *
  */
 
@@ -105,6 +107,12 @@ public class SWTGraphics2D extends Graphics2D {
     /** The swt graphic composite */
     private GC gc;
 
+    /** 
+     * The rendering hints.  For now, these are not used, but at least the
+     * basic mechanism is present.
+     */
+    private RenderingHints hints;
+    
     /** A reference to the compositing rule to apply. This is necessary 
      * due to the poor compositing interface of the SWT toolkit. */
     private java.awt.Composite composite;
@@ -126,6 +134,7 @@ public class SWTGraphics2D extends Graphics2D {
     public SWTGraphics2D(GC gc) {
         super();
         this.gc = gc;
+        this.hints = new RenderingHints(null);
         this.composite = AlphaComposite.getInstance(AlphaComposite.SRC, 1.0f);
     }
 
@@ -521,45 +530,70 @@ public class SWTGraphics2D extends Graphics2D {
         }
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#setRenderingHint(java.awt.RenderingHints.Key, 
-     * java.lang.Object)
-     */
-    public void setRenderingHint(Key hintKey, Object hintValue) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#getRenderingHint(java.awt.RenderingHints.Key)
+    /**
+     * Returns the current value for the specified hint key, or 
+     * <code>null</code> if no value is set.
+     * 
+     * @param hintKey  the hint key (<code>null</code> permitted).
+     * 
+     * @return The hint value, or <code>null</code>.
+     * 
+     * @see #setRenderingHint(Key, Object)
      */
     public Object getRenderingHint(Key hintKey) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.hints.get(hintKey);
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#setRenderingHints(java.util.Map)
+    /**
+     * Sets the value for a rendering hint.  For now, this graphics context
+     * ignores all hints.
+     * 
+     * @param hintKey  the key (<code>null</code> not permitted).
+     * @param hintValue  the value (must be compatible with the specified key).
+     * 
+     * @throws IllegalArgumentException if <code>hintValue</code> is not
+     *         compatible with the <code>hintKey</code>.
+     *         
+     * @see #getRenderingHint(Key)
      */
-    public void setRenderingHints(Map hints) {
-        // TODO Auto-generated method stub
-
+    public void setRenderingHint(Key hintKey, Object hintValue) {
+        this.hints.put(hintKey, hintValue);
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#addRenderingHints(java.util.Map)
-     */
-    public void addRenderingHints(Map hints) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#getRenderingHints()
+    /**
+     * Returns a copy of the hints collection for this graphics context.
+     * 
+     * @return A copy of the hints collection.
      */
     public RenderingHints getRenderingHints() {
-        // TODO Auto-generated method stub
-        return null;
+        return (RenderingHints) this.hints.clone();
+    }
+
+    /**
+     * Adds the hints in the specified map to the graphics context, replacing
+     * any existing hints.  For now, this graphics context ignores all hints.
+     * 
+     * @param hints  the hints (<code>null</code> not permitted).
+     * 
+     * @see #setRenderingHints(Map)
+     */
+    public void addRenderingHints(Map hints) {
+        this.hints.putAll(hints);
+    }
+
+    /**
+     * Replaces the existing hints with those contained in the specified
+     * map.  Note that, for now, this graphics context ignores all hints.
+     * 
+     * @param hints  the hints (<code>null</code> not permitted).
+     * 
+     * @see #addRenderingHints(Map)
+     */
+    public void setRenderingHints(Map hints) {
+        if (hints == null) {
+            throw new NullPointerException("Null 'hints' argument.");
+        }
+        this.hints = new RenderingHints(hints);
     }
 
     /* (non-Javadoc)
