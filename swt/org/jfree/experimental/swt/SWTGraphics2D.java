@@ -47,8 +47,8 @@
  * 22-Oct-2007 : Implemented some AlphaComposite support (HP);
  * 23-Oct-2007 : Added mechanism for storing RenderingHints (which are 
  *               still ignored at this point) (DG);
- * 23-Oct-2007 : Implemented drawPolygon(), drawPolyline(), drawOval() and
- *               fillOval() (DG);
+ * 23-Oct-2007 : Implemented drawPolygon(), drawPolyline(), drawOval(),
+ *               fillOval(), drawArc() and fillArc() (DG);
  *
  */
 
@@ -657,13 +657,22 @@ public class SWTGraphics2D extends Graphics2D {
         this.gc.drawOval(x, y, width - 1, height - 1);
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawArc(int, int, int, int, int, int)
+    /**
+     * Draws an arc that is part of an ellipse that fits within the specified
+     * framing rectangle.
+     * 
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     * @param width  the frame width.
+     * @param height  the frame height.
+     * @param arcStart  the arc starting point, in degrees.
+     * @param arcAngle  the extent of the arc.
+     * 
+     * @see #fillArc(int, int, int, int, int, int)
      */
     public void drawArc(int x, int y, int width, int height, int arcStart,
             int arcAngle) {
-        // TODO Auto-generated method stub
-
+        this.gc.drawArc(x, y, width - 1, height - 1, arcStart, arcAngle);
     }
 
     /* (non-Javadoc)
@@ -746,12 +755,24 @@ public class SWTGraphics2D extends Graphics2D {
         switchColors();
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#fillArc(int, int, int, int, int, int)
+    /**
+     * Fills an arc that is part of an ellipse that fits within the specified
+     * framing rectangle.
+     * 
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     * @param width  the frame width.
+     * @param height  the frame height.
+     * @param arcStart  the arc starting point, in degrees.
+     * @param arcAngle  the extent of the arc.
+     * 
+     * @see #drawArc(int, int, int, int, int, int)
      */
     public void fillArc(int x, int y, int width, int height, int arcStart,
             int arcAngle) {
-        // TODO Auto-generated method stub
+        switchColors();
+        this.gc.fillArc(x, y, width - 1, height - 1, arcStart, arcAngle);
+        switchColors();
     }
 
     /**
