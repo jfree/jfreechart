@@ -47,6 +47,7 @@
  * 22-Oct-2007 : Implemented some AlphaComposite support (HP);
  * 23-Oct-2007 : Added mechanism for storing RenderingHints (which are 
  *               still ignored at this point) (DG);
+ * 23-Oct-2007 : Implemented drawPolygon(int[], int[], int) (DG);
  *
  */
 
@@ -136,6 +137,72 @@ public class SWTGraphics2D extends Graphics2D {
         this.gc = gc;
         this.hints = new RenderingHints(null);
         this.composite = AlphaComposite.getInstance(AlphaComposite.SRC, 1.0f);
+    }
+
+    /**
+     * Returns the current value for the specified hint key, or 
+     * <code>null</code> if no value is set.
+     * 
+     * @param hintKey  the hint key (<code>null</code> permitted).
+     * 
+     * @return The hint value, or <code>null</code>.
+     * 
+     * @see #setRenderingHint(Key, Object)
+     */
+    public Object getRenderingHint(Key hintKey) {
+        return this.hints.get(hintKey);
+    }
+
+    /**
+     * Sets the value for a rendering hint.  For now, this graphics context
+     * ignores all hints.
+     * 
+     * @param hintKey  the key (<code>null</code> not permitted).
+     * @param hintValue  the value (must be compatible with the specified key).
+     * 
+     * @throws IllegalArgumentException if <code>hintValue</code> is not
+     *         compatible with the <code>hintKey</code>.
+     *         
+     * @see #getRenderingHint(Key)
+     */
+    public void setRenderingHint(Key hintKey, Object hintValue) {
+        this.hints.put(hintKey, hintValue);
+    }
+
+    /**
+     * Returns a copy of the hints collection for this graphics context.
+     * 
+     * @return A copy of the hints collection.
+     */
+    public RenderingHints getRenderingHints() {
+        return (RenderingHints) this.hints.clone();
+    }
+
+    /**
+     * Adds the hints in the specified map to the graphics context, replacing
+     * any existing hints.  For now, this graphics context ignores all hints.
+     * 
+     * @param hints  the hints (<code>null</code> not permitted).
+     * 
+     * @see #setRenderingHints(Map)
+     */
+    public void addRenderingHints(Map hints) {
+        this.hints.putAll(hints);
+    }
+
+    /**
+     * Replaces the existing hints with those contained in the specified
+     * map.  Note that, for now, this graphics context ignores all hints.
+     * 
+     * @param hints  the hints (<code>null</code> not permitted).
+     * 
+     * @see #addRenderingHints(Map)
+     */
+    public void setRenderingHints(Map hints) {
+        if (hints == null) {
+            throw new NullPointerException("Null 'hints' argument.");
+        }
+        this.hints = new RenderingHints(hints);
     }
 
     /**
@@ -325,12 +392,30 @@ public class SWTGraphics2D extends Graphics2D {
         this.gc.drawLine(x1, y1, x2, y2);
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawPolygon(int[], int[], int)
+    /**
+     * Draws the outline of the polygon specified by the given points, using
+     * the current paint and stroke settings.
+     * 
+     * @param xPoints  the x-coordinates.
+     * @param yPoints  the y-coordinates.
+     * @param npoints  the number of points in the polygon.
+     * 
+     * @see #draw(Shape)
      */
     public void drawPolygon(int [] xPoints, int [] yPoints, int npoints) {
-        // TODO Auto-generated method stub
-
+        if (npoints > 0) {
+            int x0 = xPoints[0];
+            int y0 = yPoints[0];
+            int x1 = 0, y1 = 0;
+            for (int i = 1; i < npoints; i++) {
+                x1 = xPoints[i];
+                y1 = yPoints[i];
+                this.gc.drawLine(x0, y0, x1, y1);
+                x0 = x1;
+                y0 = y1;
+            }
+            this.gc.drawLine(x1, y1, xPoints[0], yPoints[0]);
+        }
     }
 
     /* (non-Javadoc)
@@ -385,12 +470,31 @@ public class SWTGraphics2D extends Graphics2D {
         path.dispose();
     }
 
+    /**
+     * Fill a rectangle area on the swt graphic composite.
+     * The <code>fillRectangle</code> method of the <code>GC</code> 
+     * class uses the background color so we must switch colors.
+     * @see java.awt.Graphics#fillRect(int, int, int, int)
+     */
+    public void fillRect(int x, int y, int width, int height) {
+        this.switchColors();
+        this.gc.fillRectangle(x, y, width, height);
+        this.switchColors();
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#clearRect(int, int, int, int)
+     */
+    public void clearRect(int x, int y, int width, int height) {
+        // TODO Auto-generated method stub
+
+    }
+
     /* (non-Javadoc)
      * @see java.awt.Graphics#fillPolygon(int[], int[], int)
      */
     public void fillPolygon(int [] xPoints, int [] yPoints, int npoints) {
         // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
@@ -399,7 +503,6 @@ public class SWTGraphics2D extends Graphics2D {
     public void fillRoundRect(int x, int y, int width, int height,
             int arcWidth, int arcHeight) {
         // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
@@ -407,7 +510,6 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void fillOval(int x, int y, int width, int height) {
         // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
@@ -416,7 +518,6 @@ public class SWTGraphics2D extends Graphics2D {
     public void fillArc(int x, int y, int width, int height, int arcStart,
             int arcAngle) {
         // TODO Auto-generated method stub
-
     }
 
     /**
@@ -455,7 +556,6 @@ public class SWTGraphics2D extends Graphics2D {
     public void drawString(AttributedCharacterIterator iterator, float x, 
             float y) {
         // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
@@ -501,72 +601,6 @@ public class SWTGraphics2D extends Graphics2D {
         else {
             System.out.println("warning, can only handle alpha composite at the moment.");
         }
-    }
-
-    /**
-     * Returns the current value for the specified hint key, or 
-     * <code>null</code> if no value is set.
-     * 
-     * @param hintKey  the hint key (<code>null</code> permitted).
-     * 
-     * @return The hint value, or <code>null</code>.
-     * 
-     * @see #setRenderingHint(Key, Object)
-     */
-    public Object getRenderingHint(Key hintKey) {
-        return this.hints.get(hintKey);
-    }
-
-    /**
-     * Sets the value for a rendering hint.  For now, this graphics context
-     * ignores all hints.
-     * 
-     * @param hintKey  the key (<code>null</code> not permitted).
-     * @param hintValue  the value (must be compatible with the specified key).
-     * 
-     * @throws IllegalArgumentException if <code>hintValue</code> is not
-     *         compatible with the <code>hintKey</code>.
-     *         
-     * @see #getRenderingHint(Key)
-     */
-    public void setRenderingHint(Key hintKey, Object hintValue) {
-        this.hints.put(hintKey, hintValue);
-    }
-
-    /**
-     * Returns a copy of the hints collection for this graphics context.
-     * 
-     * @return A copy of the hints collection.
-     */
-    public RenderingHints getRenderingHints() {
-        return (RenderingHints) this.hints.clone();
-    }
-
-    /**
-     * Adds the hints in the specified map to the graphics context, replacing
-     * any existing hints.  For now, this graphics context ignores all hints.
-     * 
-     * @param hints  the hints (<code>null</code> not permitted).
-     * 
-     * @see #setRenderingHints(Map)
-     */
-    public void addRenderingHints(Map hints) {
-        this.hints.putAll(hints);
-    }
-
-    /**
-     * Replaces the existing hints with those contained in the specified
-     * map.  Note that, for now, this graphics context ignores all hints.
-     * 
-     * @param hints  the hints (<code>null</code> not permitted).
-     * 
-     * @see #addRenderingHints(Map)
-     */
-    public void setRenderingHints(Map hints) {
-        if (hints == null) {
-            throw new NullPointerException("Null 'hints' argument.");
-        }
-        this.hints = new RenderingHints(hints);
     }
 
     /* (non-Javadoc)
@@ -794,27 +828,6 @@ public class SWTGraphics2D extends Graphics2D {
         // TODO Auto-generated method stub
 
     }
-
-    /**
-     * Fill a rectangle area on the swt graphic composite.
-     * The <code>fillRectangle</code> method of the <code>GC</code> 
-     * class uses the background color so we must switch colors.
-     * @see java.awt.Graphics#fillRect(int, int, int, int)
-     */
-    public void fillRect(int x, int y, int width, int height) {
-        this.switchColors();
-        this.gc.fillRectangle(x, y, width, height);
-        this.switchColors();
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#clearRect(int, int, int, int)
-     */
-    public void clearRect(int x, int y, int width, int height) {
-        // TODO Auto-generated method stub
-
-    }
-
 
     /* (non-Javadoc)
      * @see java.awt.Graphics2D#drawImage(java.awt.Image, 
