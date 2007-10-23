@@ -219,7 +219,7 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Converts an AWT <code>Shape</code> into a SWT <code>Path</code>.
      * 
-     * @param shape  the shape.
+     * @param shape  the shape (<code>null</code> not permitted).
      * 
      * @return The path.
      */
@@ -286,12 +286,36 @@ public class SWTGraphics2D extends Graphics2D {
         return awtTransform;
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#draw(java.awt.Shape)
+    /**
+     * Draws the outline of the specified shape using the current stroke and
+     * paint settings.
+     * 
+     * @param shape  the shape (<code>null</code> not permitted).
+     * 
+     * @see #getPaint()
+     * @see #getStroke()
      */
     public void draw(Shape shape) {
         Path path = toSwtPath(shape);
         this.gc.drawPath(path);
+        path.dispose();
+    }
+
+    /** 
+     * Fills the specified shape using the current paint.
+     * 
+     * @param shape  the shape (<code>null</code> not permitted).
+     * 
+     * @see #getPaint()
+     */
+    public void fill(Shape shape) {
+        Path path = toSwtPath(shape);
+        // Note that for consistency with the AWT implementation, it is 
+        // necessary to switch temporarily the foreground and background 
+        // colours
+        switchColors();
+        this.gc.fillPath(path);
+        switchColors();
         path.dispose();
     }
 
@@ -385,20 +409,6 @@ public class SWTGraphics2D extends Graphics2D {
 
     }
 
-    /** fill an arbitrary shape on the swt graphic composite 
-     * with the current stroke and paint.
-     * note that for consistency with the awt method, it is needed 
-     * to switch temporarily the foreground and background colors.
-     * @see java.awt.Graphics2D#fill(java.awt.Shape)
-     */
-    public void fill(Shape shape) {
-        Path path = toSwtPath(shape);
-        switchColors();
-        this.gc.fillPath(path);
-        switchColors();
-        path.dispose();
-    }
-
     /* (non-Javadoc)
      * @see java.awt.Graphics2D#hit(java.awt.Rectangle, java.awt.Shape, boolean)
      */
@@ -415,8 +425,22 @@ public class SWTGraphics2D extends Graphics2D {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#setComposite(java.awt.Composite)
+    /**
+     * Returns the current composite.
+     * 
+     * @return The current composite.
+     * 
+     * @see #setComposite(Composite)
+     */
+    public Composite getComposite() {
+        return this.composite;
+    }
+
+    /**
+     * Sets the current composite.  This implementation currently supports
+     * only the {@link AlphaComposite} class.
+     * 
+     * @param comp  the composite.
      */
     public void setComposite(Composite comp) {
         this.composite = comp;
@@ -635,13 +659,6 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public Paint getPaint() {
         return SWTUtils.toAwtColor(this.gc.getForeground());
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#getComposite()
-     */
-    public Composite getComposite() {
-        return this.composite;
     }
 
     /* (non-Javadoc)
