@@ -310,6 +310,62 @@ public class SWTGraphics2D extends Graphics2D {
         path.dispose();
     }
 
+    /**
+     * Draws a line from (x1, y1) to (x2, y2) using the current stroke
+     * and paint settings.
+     * 
+     * @param x1  the x-coordinate for the starting point.
+     * @param y1  the y-coordinate for the starting point.
+     * @param x2  the x-coordinate for the ending point.
+     * @param y2  the y-coordinate for the ending point.
+     * 
+     * @see #draw(Shape)
+     */
+    public void drawLine(int x1, int y1, int x2, int y2) {
+        this.gc.drawLine(x1, y1, x2, y2);
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#drawPolygon(int[], int[], int)
+     */
+    public void drawPolygon(int [] xPoints, int [] yPoints, int npoints) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#drawPolyline(int[], int[], int)
+     */
+    public void drawPolyline(int [] xPoints, int [] yPoints, int npoints) {
+        // TODO Auto-generated method stub
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#drawOval(int, int, int, int)
+     */
+    public void drawOval(int x, int y, int width, int height) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#drawArc(int, int, int, int, int, int)
+     */
+    public void drawArc(int x, int y, int width, int height, int arcStart,
+            int arcAngle) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#drawRoundRect(int, int, int, int, int, int)
+     */
+    public void drawRoundRect(int x, int y, int width, int height,
+            int arcWidth, int arcHeight) {
+        // TODO Auto-generated method stub
+
+    }
+
     /** 
      * Fills the specified shape using the current paint.
      * 
@@ -330,52 +386,35 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /* (non-Javadoc)
-     * @see java.awt.Graphics2D#drawImage(java.awt.Image, 
-     * java.awt.geom.AffineTransform, java.awt.image.ImageObserver)
+     * @see java.awt.Graphics#fillPolygon(int[], int[], int)
      */
-    public boolean drawImage(Image image, AffineTransform xform,
-            ImageObserver obs) {
+    public void fillPolygon(int [] xPoints, int [] yPoints, int npoints) {
         // TODO Auto-generated method stub
-        return false;
+
     }
 
     /* (non-Javadoc)
-     * @see java.awt.Graphics2D#drawImage(java.awt.image.BufferedImage, 
-     * java.awt.image.BufferedImageOp, int, int)
+     * @see java.awt.Graphics#fillRoundRect(int, int, int, int, int, int)
      */
-    public void drawImage(BufferedImage image, BufferedImageOp op, int x, 
-            int y) {
-        org.eclipse.swt.graphics.Image im = new org.eclipse.swt.graphics.Image(
-                this.gc.getDevice(), convertToSWT(image));
-        this.gc.drawImage(im, x, y);
-        im.dispose();
-    }
-
-    /**
-     * Draws an image at (x, y).
-     * 
-     * @param image  the image.
-     * @param x  the x-coordinate.
-     * @param y  the y-coordinate.
-     */
-    public void drawImage(org.eclipse.swt.graphics.Image image, int x, int y) {
-        this.gc.drawImage(image, x, y);
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#drawRenderedImage(java.awt.image.RenderedImage,
-     * java.awt.geom.AffineTransform)
-     */
-    public void drawRenderedImage(RenderedImage image, AffineTransform xform) {
+    public void fillRoundRect(int x, int y, int width, int height,
+            int arcWidth, int arcHeight) {
         // TODO Auto-generated method stub
+
     }
 
     /* (non-Javadoc)
-     * @see java.awt.Graphics2D#drawRenderableImage(
-     * java.awt.image.renderable.RenderableImage, java.awt.geom.AffineTransform)
+     * @see java.awt.Graphics#fillOval(int, int, int, int)
      */
-    public void drawRenderableImage(RenderableImage image, 
-            AffineTransform xform) {
+    public void fillOval(int x, int y, int width, int height) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#fillArc(int, int, int, int, int, int)
+     */
+    public void fillArc(int x, int y, int width, int height, int arcStart,
+            int arcAngle) {
         // TODO Auto-generated method stub
 
     }
@@ -757,14 +796,6 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /**
-     * Draws a line on the swt graphic composite.
-     * @see java.awt.Graphics#drawLine(int, int, int, int)
-     */
-    public void drawLine(int x1, int y1, int x2, int y2) {
-        this.gc.drawLine(x1, y1, x2, y2);
-    }
-
-    /**
      * Fill a rectangle area on the swt graphic composite.
      * The <code>fillRectangle</code> method of the <code>GC</code> 
      * class uses the background color so we must switch colors.
@@ -784,78 +815,54 @@ public class SWTGraphics2D extends Graphics2D {
 
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawRoundRect(int, int, int, int, int, int)
-     */
-    public void drawRoundRect(int x, int y, int width, int height,
-            int arcWidth, int arcHeight) {
-        // TODO Auto-generated method stub
 
+    /* (non-Javadoc)
+     * @see java.awt.Graphics2D#drawImage(java.awt.Image, 
+     * java.awt.geom.AffineTransform, java.awt.image.ImageObserver)
+     */
+    public boolean drawImage(Image image, AffineTransform xform,
+            ImageObserver obs) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
     /* (non-Javadoc)
-     * @see java.awt.Graphics#fillRoundRect(int, int, int, int, int, int)
+     * @see java.awt.Graphics2D#drawImage(java.awt.image.BufferedImage, 
+     * java.awt.image.BufferedImageOp, int, int)
      */
-    public void fillRoundRect(int x, int y, int width, int height,
-            int arcWidth, int arcHeight) {
-        // TODO Auto-generated method stub
+    public void drawImage(BufferedImage image, BufferedImageOp op, int x, 
+            int y) {
+        org.eclipse.swt.graphics.Image im = new org.eclipse.swt.graphics.Image(
+                this.gc.getDevice(), convertToSWT(image));
+        this.gc.drawImage(im, x, y);
+        im.dispose();
+    }
 
+    /**
+     * Draws an image at (x, y).
+     * 
+     * @param image  the image.
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     */
+    public void drawImage(org.eclipse.swt.graphics.Image image, int x, int y) {
+        this.gc.drawImage(image, x, y);
     }
 
     /* (non-Javadoc)
-     * @see java.awt.Graphics#drawOval(int, int, int, int)
+     * @see java.awt.Graphics2D#drawRenderedImage(java.awt.image.RenderedImage,
+     * java.awt.geom.AffineTransform)
      */
-    public void drawOval(int x, int y, int width, int height) {
+    public void drawRenderedImage(RenderedImage image, AffineTransform xform) {
         // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
-     * @see java.awt.Graphics#fillOval(int, int, int, int)
+     * @see java.awt.Graphics2D#drawRenderableImage(
+     * java.awt.image.renderable.RenderableImage, java.awt.geom.AffineTransform)
      */
-    public void fillOval(int x, int y, int width, int height) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawArc(int, int, int, int, int, int)
-     */
-    public void drawArc(int x, int y, int width, int height, int arcStart,
-            int arcAngle) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#fillArc(int, int, int, int, int, int)
-     */
-    public void fillArc(int x, int y, int width, int height, int arcStart,
-            int arcAngle) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawPolyline(int[], int[], int)
-     */
-    public void drawPolyline(int [] xPoints, int [] yPoints, int npoints) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawPolygon(int[], int[], int)
-     */
-    public void drawPolygon(int [] xPoints, int [] yPoints, int npoints) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#fillPolygon(int[], int[], int)
-     */
-    public void fillPolygon(int [] xPoints, int [] yPoints, int npoints) {
+    public void drawRenderableImage(RenderableImage image, 
+            AffineTransform xform) {
         // TODO Auto-generated method stub
 
     }
