@@ -131,13 +131,13 @@ public class SWTGraphics2D extends Graphics2D {
 
     /**
      * Add given swt resource to the resource pool. All resources added
-     * to the resource pool will be dispose when {@link #dispose()} is called
+     * to the resource pool will be disposed when {@link #dispose()} is called.
      *  
      * @param resource the resource to add to the pool.
      * @return the swt <code>Resource</code> just added.
      */
     private Resource addToResourcePool(Resource resource) {
-        resourcePool.add(resource);
+        this.resourcePool.add(resource);
         return resource;
     }
 
@@ -145,13 +145,13 @@ public class SWTGraphics2D extends Graphics2D {
      * Dispose the resource pool.
      */
     private void disposeResourcePool() {
-        for (Iterator it = resourcePool.iterator();it.hasNext();) {
-            Resource resource = (Resource)it.next();
+        for (Iterator it = this.resourcePool.iterator(); it.hasNext();) {
+            Resource resource = (Resource) it.next();
             resource.dispose();
         }
-        resourcePool.clear();
-        colorsPool.clear();
-        resourcePool.clear();
+        this.resourcePool.clear();
+        this.colorsPool.clear();
+        this.resourcePool.clear();
     }
 
     /**
@@ -166,13 +166,12 @@ public class SWTGraphics2D extends Graphics2D {
      */
     private org.eclipse.swt.graphics.Font getSwtFontFromPool(Font font) {
         org.eclipse.swt.graphics.Font swtFont = (org.eclipse.swt.graphics.Font)
-        fontsPool.get(font);
+        this.fontsPool.get(font);
         if (swtFont == null) {
-            swtFont = new org.eclipse.swt.graphics.Font( 
-                    gc.getDevice(), 
-                    SWTUtils.toSwtFontData(gc.getDevice(), font, true));
+            swtFont = new org.eclipse.swt.graphics.Font(this.gc.getDevice(), 
+                    SWTUtils.toSwtFontData(this.gc.getDevice(), font, true));
             addToResourcePool(swtFont);
-            fontsPool.put(font, swtFont);
+            this.fontsPool.put(font, swtFont);
         }
         return swtFont;
     }
@@ -195,7 +194,7 @@ public class SWTGraphics2D extends Graphics2D {
                 // this.colorsPool.get(Integer.valueOf(awtColor.getRGB()));
                 this.colorsPool.get(new Integer(awtColor.getRGB()));
         if (swtColor == null) {
-            swtColor = SWTUtils.toSwtColor(gc.getDevice(), awtColor);
+            swtColor = SWTUtils.toSwtColor(this.gc.getDevice(), awtColor);
             addToResourcePool(swtColor);
             // see comment above
             //this.colorsPool.put(Integer.valueOf(awtColor.getRGB()), swtColor);
@@ -211,10 +210,10 @@ public class SWTGraphics2D extends Graphics2D {
      * filling methods.
      */
     private void switchColors() {
-        org.eclipse.swt.graphics.Color bg = gc.getBackground();
-        org.eclipse.swt.graphics.Color fg = gc.getForeground();
-        gc.setBackground(fg);
-        gc.setForeground(bg);
+        org.eclipse.swt.graphics.Color bg = this.gc.getBackground();
+        org.eclipse.swt.graphics.Color fg = this.gc.getForeground();
+        this.gc.setBackground(fg);
+        this.gc.setForeground(bg);
     }
 
     /**
@@ -264,7 +263,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @return The SWT transform.
      */
     private Transform toSwtTransform(AffineTransform awtTransform) {
-        Transform t = new Transform(gc.getDevice());
+        Transform t = new Transform(this.gc.getDevice());
         double[] matrix = new double[6];
         awtTransform.getMatrix(matrix);
         t.setElements((float) matrix[0], (float) matrix[1],
@@ -292,7 +291,7 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void draw(Shape shape) {
         Path path = toSwtPath(shape);
-        gc.drawPath(path);
+        this.gc.drawPath(path);
         path.dispose();
     }
 
@@ -312,10 +311,9 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void drawImage(BufferedImage image, BufferedImageOp op, int x, 
             int y) {
-        org.eclipse.swt.graphics.Image im 
-            = new org.eclipse.swt.graphics.Image(gc.getDevice(), 
-                    convertToSWT(image));
-        gc.drawImage(im, x, y);
+        org.eclipse.swt.graphics.Image im = new org.eclipse.swt.graphics.Image(
+                this.gc.getDevice(), convertToSWT(image));
+        this.gc.drawImage(im, x, y);
         im.dispose();
     }
 
@@ -327,7 +325,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @param y  the y-coordinate.
      */
     public void drawImage(org.eclipse.swt.graphics.Image image, int x, int y) {
-        gc.drawImage(image, x, y);
+        this.gc.drawImage(image, x, y);
     }
 
     /* (non-Javadoc)
@@ -356,16 +354,16 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics#drawString(java.lang.String, int, int)
      */
     public void drawString(String text, int x, int y) {
-        float fm = gc.getFontMetrics().getAscent();
-        gc.drawString(text, x, (int) (y - fm), true);
+        float fm = this.gc.getFontMetrics().getAscent();
+        this.gc.drawString(text, x, (int) (y - fm), true);
     }
 
     /* (non-Javadoc)
      * @see java.awt.Graphics2D#drawString(java.lang.String, float, float)
      */
     public void drawString(String text, float x, float y) {
-        float fm = gc.getFontMetrics().getAscent();
-        gc.drawString(text, (int) x, (int) ( y - fm ), true);
+        float fm = this.gc.getFontMetrics().getAscent();
+        this.gc.drawString(text, (int) x, (int) ( y - fm ), true);
     }
 
     /* (non-Javadoc)
@@ -452,36 +450,36 @@ public class SWTGraphics2D extends Graphics2D {
         if (stroke instanceof BasicStroke) {
             BasicStroke bs = (BasicStroke) stroke;
             // linewidth
-            gc.setLineWidth((int) bs.getLineWidth());
+            this.gc.setLineWidth((int) bs.getLineWidth());
 
             // line join
             switch (bs.getLineJoin()) {
                 case BasicStroke.JOIN_BEVEL :
-                    gc.setLineJoin(SWT.JOIN_BEVEL);
+                    this.gc.setLineJoin(SWT.JOIN_BEVEL);
                     break;
                 case BasicStroke.JOIN_MITER :
-                    gc.setLineJoin(SWT.JOIN_MITER);
+                    this.gc.setLineJoin(SWT.JOIN_MITER);
                     break;
                 case BasicStroke.JOIN_ROUND :
-                    gc.setLineJoin(SWT.JOIN_ROUND);
+                    this.gc.setLineJoin(SWT.JOIN_ROUND);
                     break;
             }
 
             // line cap
             switch (bs.getEndCap()) {
                 case BasicStroke.CAP_BUTT :
-                    gc.setLineCap(SWT.CAP_FLAT);
+                    this.gc.setLineCap(SWT.CAP_FLAT);
                     break;
                 case BasicStroke.CAP_ROUND :
-                    gc.setLineCap(SWT.CAP_ROUND);
+                    this.gc.setLineCap(SWT.CAP_ROUND);
                     break;
                 case BasicStroke.CAP_SQUARE :
-                    gc.setLineCap(SWT.CAP_SQUARE);
+                    this.gc.setLineCap(SWT.CAP_SQUARE);
                     break;
             }
 
             // set the line style to solid by default
-            gc.setLineStyle(SWT.LINE_SOLID);
+            this.gc.setLineStyle(SWT.LINE_SOLID);
 
             // apply dash style if any
             float[] dashes = bs.getDashArray();
@@ -490,7 +488,7 @@ public class SWTGraphics2D extends Graphics2D {
                 for (int i = 0; i < swtDashes.length; i++) {
                     swtDashes[i] = (int) dashes[i];
                 }
-                gc.setLineDash(swtDashes);
+                this.gc.setLineDash(swtDashes);
             }
         }
         else {
@@ -544,10 +542,10 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#translate(int, int)
      */
     public void translate(int x, int y) {
-        Transform swtTransform = new Transform(gc.getDevice()); 
-        gc.getTransform(swtTransform);
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
         swtTransform.translate(x, y);
-        gc.setTransform(swtTransform);
+        this.gc.setTransform(swtTransform);
         swtTransform.dispose();
     }
 
@@ -562,10 +560,10 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#rotate(double)
      */
     public void rotate(double theta) {
-        Transform swtTransform = new Transform(gc.getDevice()); 
-        gc.getTransform(swtTransform);
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
         swtTransform.rotate( (float) (theta * 180 / Math.PI));
-        gc.setTransform(swtTransform);
+        this.gc.setTransform(swtTransform);
         swtTransform.dispose();
     }
 
@@ -581,10 +579,10 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#scale(double, double)
      */
     public void scale(double scaleX, double scaleY) {
-        Transform swtTransform = new Transform(gc.getDevice()); 
-        gc.getTransform(swtTransform);
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
         swtTransform.scale((float) scaleX, (float) scaleY);
-        gc.setTransform(swtTransform);
+        this.gc.setTransform(swtTransform);
         swtTransform.dispose();
     }
 
@@ -592,12 +590,12 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#shear(double, double)
      */
     public void shear(double shearX, double shearY) {
-        Transform swtTransform = new Transform(gc.getDevice()); 
-        gc.getTransform(swtTransform);
-        Transform shear = new Transform(gc.getDevice(), 1f, (float) shearX, 
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
+        Transform shear = new Transform(this.gc.getDevice(), 1f, (float) shearX, 
                 (float) shearY, 1f, 0, 0);
         swtTransform.multiply(shear);
-        gc.setTransform(swtTransform);
+        this.gc.setTransform(swtTransform);
         swtTransform.dispose();
     }
 
@@ -605,11 +603,11 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#transform(java.awt.geom.AffineTransform)
      */
     public void transform(AffineTransform Tx) {
-        Transform swtTransform = new Transform(gc.getDevice()); 
-        gc.getTransform(swtTransform);
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
         Transform swtMatrix = toSwtTransform(Tx);
         swtTransform.multiply(swtMatrix);
-        gc.setTransform(swtTransform);
+        this.gc.setTransform(swtTransform);
         swtMatrix.dispose();
         swtTransform.dispose();
     }
@@ -618,15 +616,15 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#setTransform(java.awt.geom.AffineTransform)
      */
     public void setTransform(AffineTransform Tx) {
-        gc.setTransform(toSwtTransform(Tx));
+        this.gc.setTransform(toSwtTransform(Tx));
     }
 
     /* (non-Javadoc)
      * @see java.awt.Graphics2D#getTransform()
      */
     public AffineTransform getTransform() {
-        Transform swtTransform = new Transform(gc.getDevice()); 
-        gc.getTransform(swtTransform);
+        Transform swtTransform = new Transform(this.gc.getDevice()); 
+        this.gc.getTransform(swtTransform);
         AffineTransform awtTransform = toAwtTransform(swtTransform);
         swtTransform.dispose();
         return awtTransform; 
@@ -636,7 +634,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#getPaint()
      */
     public Paint getPaint() {
-        return SWTUtils.toAwtColor(gc.getForeground());
+        return SWTUtils.toAwtColor(this.gc.getForeground());
     }
 
     /* (non-Javadoc)
@@ -650,9 +648,10 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#setBackground(java.awt.Color)
      */
     public void setBackground(Color color) {
-        gc.getBackground().dispose();
-        org.eclipse.swt.graphics.Color swtColor = SWTUtils.toSwtColor(gc.getDevice(), color);
-        gc.setBackground(swtColor);
+        this.gc.getBackground().dispose();
+        org.eclipse.swt.graphics.Color swtColor = SWTUtils.toSwtColor(
+                this.gc.getDevice(), color);
+        this.gc.setBackground(swtColor);
         swtColor.dispose(); 
     }
 
@@ -660,23 +659,23 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#getBackground()
      */
     public Color getBackground() {
-        return SWTUtils.toAwtColor(gc.getBackground());
+        return SWTUtils.toAwtColor(this.gc.getBackground());
     }
 
     /* (non-Javadoc)
      * @see java.awt.Graphics2D#getStroke()
      */
     public Stroke getStroke() {
-        return new BasicStroke(gc.getLineWidth(), gc.getLineCap(), 
-                gc.getLineJoin());
+        return new BasicStroke(this.gc.getLineWidth(), this.gc.getLineCap(), 
+                this.gc.getLineJoin());
     }
 
     /* (non-Javadoc)
      * @see java.awt.Graphics2D#getFontRenderContext()
      */
     public FontRenderContext getFontRenderContext() {
-        FontRenderContext fontRenderContext 
-            = new FontRenderContext(new AffineTransform(), true, true);
+        FontRenderContext fontRenderContext = new FontRenderContext(
+                new AffineTransform(), true, true);
         return fontRenderContext;
     }
 
@@ -701,7 +700,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics#getColor()
      */
     public Color getColor() {
-        return SWTUtils.toAwtColor(gc.getForeground());
+        return SWTUtils.toAwtColor(this.gc.getForeground());
     }
 
     /* (non-Javadoc)
@@ -709,7 +708,7 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void setColor(Color color) {
         org.eclipse.swt.graphics.Color swtColor = getSwtColorFromPool(color);
-        gc.setForeground(swtColor);
+        this.gc.setForeground(swtColor);
         // handle transparency and compositing.
         if (this.composite instanceof AlphaComposite) {
             AlphaComposite acomp = (AlphaComposite) this.composite;
@@ -747,9 +746,9 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public Font getFont() {
         // retrieve the swt font description in an os indept way
-        FontData[] fontData = gc.getFont().getFontData();
+        FontData[] fontData = this.gc.getFont().getFontData();
         // create a new awt font with the appropiate data
-        return SWTUtils.toAwtFont(gc.getDevice(), fontData[0], true);
+        return SWTUtils.toAwtFont(this.gc.getDevice(), fontData[0], true);
     }
 
     /**
@@ -760,7 +759,7 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void setFont(Font font) {
         org.eclipse.swt.graphics.Font swtFont = getSwtFontFromPool(font);
-        gc.setFont(swtFont);
+        this.gc.setFont(swtFont);
     }
 
     /* (non-Javadoc)
@@ -775,7 +774,7 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void clip(Shape s) {
         Path path = toSwtPath(s);
-        gc.setClipping(path);
+        this.gc.setClipping(path);
         path.dispose();
     }
 
@@ -783,7 +782,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics#getClipBounds()
      */
     public Rectangle getClipBounds() {
-        org.eclipse.swt.graphics.Rectangle clip = gc.getClipping();
+        org.eclipse.swt.graphics.Rectangle clip = this.gc.getClipping();
         return new Rectangle(clip.x, clip.y, clip.width, clip.height);
     }
 
@@ -791,23 +790,23 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics#clipRect(int, int, int, int)
      */
     public void clipRect(int x, int y, int width, int height) {
-        org.eclipse.swt.graphics.Rectangle clip = gc.getClipping();
+        org.eclipse.swt.graphics.Rectangle clip = this.gc.getClipping();
         clip.intersects(x, y, width, height);
-        gc.setClipping(clip);
+        this.gc.setClipping(clip);
     }
 
     /* (non-Javadoc)
      * @see java.awt.Graphics#setClip(int, int, int, int)
      */
     public void setClip(int x, int y, int width, int height) {
-        gc.setClipping(x, y, width, height);
+        this.gc.setClipping(x, y, width, height);
     }
 
     /* (non-Javadoc)
      * @see java.awt.Graphics#getClip()
      */
     public Shape getClip() {
-        return SWTUtils.toAwtRectangle(gc.getClipping());
+        return SWTUtils.toAwtRectangle(this.gc.getClipping());
     }
 
     /* (non-Javadoc)
@@ -817,7 +816,7 @@ public class SWTGraphics2D extends Graphics2D {
         if (clip == null) 
             return;
         Path clipPath = toSwtPath(clip);
-        gc.setClipping(clipPath);
+        this.gc.setClipping(clipPath);
         clipPath.dispose();
     }
 
@@ -834,7 +833,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics#drawLine(int, int, int, int)
      */
     public void drawLine(int x1, int y1, int x2, int y2) {
-        gc.drawLine(x1, y1, x2, y2);
+        this.gc.drawLine(x1, y1, x2, y2);
     }
 
     /**
@@ -845,7 +844,7 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void fillRect(int x, int y, int width, int height) {
         this.switchColors();
-        gc.fillRectangle(x, y, width, height);
+        this.gc.fillRectangle(x, y, width, height);
         this.switchColors();
     }
 
