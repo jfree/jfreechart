@@ -1,3 +1,13 @@
+2007-10-23  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/renderer/AbstractRenderer.java
+	(lookupSeriesPaint): Call accessor methods for per-series paint,
+	(lookupSeriesFillPaint): Likewise,
+	(lookupSeriesOutlinePaint): Likewise,
+	(lookupSeriesStroke): Likewise,
+	(lookupSeriesOutlineStroke): Likewise,
+	(lookupSeriesStroke): Likewise.
+
 2007-10-22  Henry Proudhon  <henry.proudhon@insa-lyon.fr>
 
 	* source/swt/org/jfree/experimental/chart/swt/ChartComposite.java: 
