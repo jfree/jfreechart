@@ -139,160 +139,88 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /**
-     * Add given swt resource to the resource pool. All resources added
-     * to the resource pool will be disposed when {@link #dispose()} is called.
-     *  
-     * @param resource the resource to add to the pool.
-     * @return the swt <code>Resource</code> just added.
+     * Returns the current paint for this graphics context.
+     * 
+     * @return The current paint.
+     * 
+     * @see #setPaint(Paint)
      */
-    private Resource addToResourcePool(Resource resource) {
-        this.resourcePool.add(resource);
-        return resource;
+    public Paint getPaint() {
+        // TODO: it might be a good idea to keep a reference to the color
+        // specified in setPaint() or setColor(), rather than creating a 
+        // new object every time getPaint() is called.
+        return SWTUtils.toAwtColor(this.gc.getForeground());
     }
 
     /**
-     * Dispose the resource pool.
+     * Sets the paint for this graphics context.  For now, this graphics
+     * context only supports instances of {@link Color}.
+     * 
+     * @param paint  the paint (<code>null</code> not permitted).
+     * 
+     * @see #getPaint()
+     * @see #setColor(Color)
      */
-    private void disposeResourcePool() {
-        for (Iterator it = this.resourcePool.iterator(); it.hasNext();) {
-            Resource resource = (Resource) it.next();
-            resource.dispose();
+    public void setPaint(Paint paint) {
+        if (paint instanceof Color) {
+            setColor((Color) paint);
         }
-        this.resourcePool.clear();
-        this.colorsPool.clear();
-        this.resourcePool.clear();
-    }
-
-    /**
-     * Internal method to convert a AWT font object into 
-     * a SWT font resource. If a corresponding SWT font
-     * instance is already in the pool, it will be used 
-     * instead of creating a new one. This is used in 
-     * {@link #setFont()} for instance. 
-     * 
-     * @param font The AWT font to convert.
-     * @return The SWT font instance.
-     */
-    private org.eclipse.swt.graphics.Font getSwtFontFromPool(Font font) {
-        org.eclipse.swt.graphics.Font swtFont = (org.eclipse.swt.graphics.Font)
-        this.fontsPool.get(font);
-        if (swtFont == null) {
-            swtFont = new org.eclipse.swt.graphics.Font(this.gc.getDevice(), 
-                    SWTUtils.toSwtFontData(this.gc.getDevice(), font, true));
-            addToResourcePool(swtFont);
-            this.fontsPool.put(font, swtFont);
+        else {
+            throw new RuntimeException("Can only handle 'Color' at present.");
         }
-        return swtFont;
     }
 
     /**
-     * Internal method to convert a AWT color object into 
-     * a SWT color resource. If a corresponding SWT color
-     * instance is already in the pool, it will be used 
-     * instead of creating a new one. This is used in 
-     * {@link #setColor()} for instance. 
+     * Returns the current color for this graphics context.
      * 
-     * @param awtColor The AWT color to convert.
-     * @return A SWT color instance.
+     * @return The current color.
+     * 
+     * @see #setColor(Color)
      */
-    private org.eclipse.swt.graphics.Color getSwtColorFromPool(Color awtColor) {
-        org.eclipse.swt.graphics.Color swtColor = 
-                (org.eclipse.swt.graphics.Color)
-                // we can't use the following valueOf() method, because it 
-                // won't compile with JDK1.4
-                // this.colorsPool.get(Integer.valueOf(awtColor.getRGB()));
-                this.colorsPool.get(new Integer(awtColor.getRGB()));
-        if (swtColor == null) {
-            swtColor = SWTUtils.toSwtColor(this.gc.getDevice(), awtColor);
-            addToResourcePool(swtColor);
-            // see comment above
-            //this.colorsPool.put(Integer.valueOf(awtColor.getRGB()), swtColor);
-            this.colorsPool.put(new Integer(awtColor.getRGB()), swtColor);
-        }
-        return swtColor;
+    public Color getColor() {
+        // TODO: it might be a good idea to keep a reference to the color
+        // specified in setPaint() or setColor(), rather than creating a 
+        // new object every time getPaint() is called.
+        return SWTUtils.toAwtColor(this.gc.getForeground());
     }
 
     /**
-     * Perform a switch between foreground and background 
-     * color of gc. This is needed for consistency with 
-     * the awt behaviour, and is required notably for the 
-     * filling methods.
-     */
-    private void switchColors() {
-        org.eclipse.swt.graphics.Color bg = this.gc.getBackground();
-        org.eclipse.swt.graphics.Color fg = this.gc.getForeground();
-        this.gc.setBackground(fg);
-        this.gc.setForeground(bg);
-    }
-
-    /**
-     * Converts an AWT <code>Shape</code> into a SWT <code>Path</code>.
+     * Sets the current color for this graphics context.
      * 
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param color  the color.
      * 
-     * @return The path.
+     * @see #getColor()
      */
-    private Path toSwtPath(Shape shape) {
-        int type;
-        float[] coords = new float[6];
-        Path path = new Path(this.gc.getDevice());
-        PathIterator pit = shape.getPathIterator(null);
-        while (!pit.isDone()) {
-            type = pit.currentSegment(coords);
-            switch (type) {
-                case (PathIterator.SEG_MOVETO):
-                    path.moveTo(coords[0], coords[1]);
-                    break;
-                case (PathIterator.SEG_LINETO):
-                    path.lineTo(coords[0], coords[1]);
-                    break;
-                case (PathIterator.SEG_QUADTO):
-                    path.quadTo(coords[0], coords[1], coords[2], coords[3]);
-                    break;
-                case (PathIterator.SEG_CUBICTO):
-                    path.cubicTo(coords[0], coords[1], coords[2], 
-                            coords[3], coords[4], coords[5]);
-                    break;
-                case (PathIterator.SEG_CLOSE):
-                    path.close();
-                    break;
-                default:
-                    break;
+    public void setColor(Color color) {
+        org.eclipse.swt.graphics.Color swtColor = getSwtColorFromPool(color);
+        this.gc.setForeground(swtColor);
+        // handle transparency and compositing.
+        if (this.composite instanceof AlphaComposite) {
+            AlphaComposite acomp = (AlphaComposite) this.composite;
+            switch (acomp.getRule()) {
+            case AlphaComposite.SRC_OVER:
+                this.gc.setAlpha((int) (color.getAlpha()*acomp.getAlpha()));
+                break;
+            default:
+                this.gc.setAlpha(color.getAlpha());
+                break;
             }
-            pit.next();
         }
-        return path;
     }
 
-    /**
-     * Converts an AWT transform into the equivalent SWT transform.
-     * 
-     * @param awtTransform  the AWT transform.
-     * 
-     * @return The SWT transform.
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#setPaintMode()
      */
-    private Transform toSwtTransform(AffineTransform awtTransform) {
-        Transform t = new Transform(this.gc.getDevice());
-        double[] matrix = new double[6];
-        awtTransform.getMatrix(matrix);
-        t.setElements((float) matrix[0], (float) matrix[1],
-                (float) matrix[2], (float) matrix[3],
-                (float) matrix[4], (float) matrix[5]); 
-        return t;
+    public void setPaintMode() {
+        // TODO Auto-generated method stub
     }
 
-    /**
-     * Converts an SWT transform into the equivalent AWT transform.
-     * 
-     * @param swtTransform  the SWT transform.
-     * 
-     * @return The AWT transform.
+    /* (non-Javadoc)
+     * @see java.awt.Graphics#setXORMode(java.awt.Color)
      */
-    private AffineTransform toAwtTransform(Transform swtTransform) {
-        float[] elements = new float[6];
-        swtTransform.getElements(elements);
-        AffineTransform awtTransform = new AffineTransform(elements);
-        return awtTransform;
+    public void setXORMode(Color color) {
+        // TODO Auto-generated method stub
+
     }
 
     /**
@@ -460,19 +388,6 @@ public class SWTGraphics2D extends Graphics2D {
         } 
         else {
             System.out.println("warning, can only handle alpha composite at the moment.");
-        }
-    }
-
-    /**
-     * Set the paint associated with the swt graphic composite.
-     * @see java.awt.Graphics2D#setPaint(java.awt.Paint)
-     */
-    public void setPaint(Paint paint) {
-        if (paint instanceof Color) {
-            setColor((Color) paint);
-        }
-        else {
-            throw new RuntimeException("Can only handle 'Color' at present.");
         }
     }
 
@@ -689,13 +604,6 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /* (non-Javadoc)
-     * @see java.awt.Graphics2D#getPaint()
-     */
-    public Paint getPaint() {
-        return SWTUtils.toAwtColor(this.gc.getForeground());
-    }
-
-    /* (non-Javadoc)
      * @see java.awt.Graphics2D#setBackground(java.awt.Color)
      */
     public void setBackground(Color color) {
@@ -745,48 +653,6 @@ public class SWTGraphics2D extends Graphics2D {
     public Graphics create() {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#getColor()
-     */
-    public Color getColor() {
-        return SWTUtils.toAwtColor(this.gc.getForeground());
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#setColor(java.awt.Color)
-     */
-    public void setColor(Color color) {
-        org.eclipse.swt.graphics.Color swtColor = getSwtColorFromPool(color);
-        this.gc.setForeground(swtColor);
-        // handle transparency and compositing.
-        if (this.composite instanceof AlphaComposite) {
-            AlphaComposite acomp = (AlphaComposite) this.composite;
-            switch (acomp.getRule()) {
-            case AlphaComposite.SRC_OVER:
-                this.gc.setAlpha((int) (color.getAlpha()*acomp.getAlpha()));
-                break;
-            default:
-                this.gc.setAlpha(color.getAlpha());
-                break;
-            }
-        }
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#setPaintMode()
-     */
-    public void setPaintMode() {
-        // TODO Auto-generated method stub
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#setXORMode(java.awt.Color)
-     */
-    public void setXORMode(Color color) {
-        // TODO Auto-generated method stub
-
     }
 
     /**
@@ -1050,6 +916,163 @@ public class SWTGraphics2D extends Graphics2D {
     public void dispose() {
         // we dispose resources we own but user must dispose gc
         disposeResourcePool();
+    }
+
+    /**
+     * Add given swt resource to the resource pool. All resources added
+     * to the resource pool will be disposed when {@link #dispose()} is called.
+     *  
+     * @param resource the resource to add to the pool.
+     * @return the swt <code>Resource</code> just added.
+     */
+    private Resource addToResourcePool(Resource resource) {
+        this.resourcePool.add(resource);
+        return resource;
+    }
+
+    /**
+     * Dispose the resource pool.
+     */
+    private void disposeResourcePool() {
+        for (Iterator it = this.resourcePool.iterator(); it.hasNext();) {
+            Resource resource = (Resource) it.next();
+            resource.dispose();
+        }
+        this.resourcePool.clear();
+        this.colorsPool.clear();
+        this.resourcePool.clear();
+    }
+
+    /**
+     * Internal method to convert a AWT font object into 
+     * a SWT font resource. If a corresponding SWT font
+     * instance is already in the pool, it will be used 
+     * instead of creating a new one. This is used in 
+     * {@link #setFont()} for instance. 
+     * 
+     * @param font The AWT font to convert.
+     * @return The SWT font instance.
+     */
+    private org.eclipse.swt.graphics.Font getSwtFontFromPool(Font font) {
+        org.eclipse.swt.graphics.Font swtFont = (org.eclipse.swt.graphics.Font)
+        this.fontsPool.get(font);
+        if (swtFont == null) {
+            swtFont = new org.eclipse.swt.graphics.Font(this.gc.getDevice(), 
+                    SWTUtils.toSwtFontData(this.gc.getDevice(), font, true));
+            addToResourcePool(swtFont);
+            this.fontsPool.put(font, swtFont);
+        }
+        return swtFont;
+    }
+
+    /**
+     * Internal method to convert a AWT color object into 
+     * a SWT color resource. If a corresponding SWT color
+     * instance is already in the pool, it will be used 
+     * instead of creating a new one. This is used in 
+     * {@link #setColor()} for instance. 
+     * 
+     * @param awtColor The AWT color to convert.
+     * @return A SWT color instance.
+     */
+    private org.eclipse.swt.graphics.Color getSwtColorFromPool(Color awtColor) {
+        org.eclipse.swt.graphics.Color swtColor = 
+                (org.eclipse.swt.graphics.Color)
+                // we can't use the following valueOf() method, because it 
+                // won't compile with JDK1.4
+                // this.colorsPool.get(Integer.valueOf(awtColor.getRGB()));
+                this.colorsPool.get(new Integer(awtColor.getRGB()));
+        if (swtColor == null) {
+            swtColor = SWTUtils.toSwtColor(this.gc.getDevice(), awtColor);
+            addToResourcePool(swtColor);
+            // see comment above
+            //this.colorsPool.put(Integer.valueOf(awtColor.getRGB()), swtColor);
+            this.colorsPool.put(new Integer(awtColor.getRGB()), swtColor);
+        }
+        return swtColor;
+    }
+
+    /**
+     * Perform a switch between foreground and background 
+     * color of gc. This is needed for consistency with 
+     * the awt behaviour, and is required notably for the 
+     * filling methods.
+     */
+    private void switchColors() {
+        org.eclipse.swt.graphics.Color bg = this.gc.getBackground();
+        org.eclipse.swt.graphics.Color fg = this.gc.getForeground();
+        this.gc.setBackground(fg);
+        this.gc.setForeground(bg);
+    }
+
+    /**
+     * Converts an AWT <code>Shape</code> into a SWT <code>Path</code>.
+     * 
+     * @param shape  the shape (<code>null</code> not permitted).
+     * 
+     * @return The path.
+     */
+    private Path toSwtPath(Shape shape) {
+        int type;
+        float[] coords = new float[6];
+        Path path = new Path(this.gc.getDevice());
+        PathIterator pit = shape.getPathIterator(null);
+        while (!pit.isDone()) {
+            type = pit.currentSegment(coords);
+            switch (type) {
+                case (PathIterator.SEG_MOVETO):
+                    path.moveTo(coords[0], coords[1]);
+                    break;
+                case (PathIterator.SEG_LINETO):
+                    path.lineTo(coords[0], coords[1]);
+                    break;
+                case (PathIterator.SEG_QUADTO):
+                    path.quadTo(coords[0], coords[1], coords[2], coords[3]);
+                    break;
+                case (PathIterator.SEG_CUBICTO):
+                    path.cubicTo(coords[0], coords[1], coords[2], 
+                            coords[3], coords[4], coords[5]);
+                    break;
+                case (PathIterator.SEG_CLOSE):
+                    path.close();
+                    break;
+                default:
+                    break;
+            }
+            pit.next();
+        }
+        return path;
+    }
+
+    /**
+     * Converts an AWT transform into the equivalent SWT transform.
+     * 
+     * @param awtTransform  the AWT transform.
+     * 
+     * @return The SWT transform.
+     */
+    private Transform toSwtTransform(AffineTransform awtTransform) {
+        Transform t = new Transform(this.gc.getDevice());
+        double[] matrix = new double[6];
+        awtTransform.getMatrix(matrix);
+        t.setElements((float) matrix[0], (float) matrix[1],
+                (float) matrix[2], (float) matrix[3],
+                (float) matrix[4], (float) matrix[5]); 
+        return t;
+    }
+
+    /**
+     * Converts an SWT transform into the equivalent AWT transform.
+     * 
+     * @param swtTransform  the SWT transform.
+     * 
+     * @return The AWT transform.
+     */
+    private AffineTransform toAwtTransform(Transform swtTransform) {
+        float[] elements = new float[6];
+        swtTransform.getElements(elements);
+        AffineTransform awtTransform = new AffineTransform(elements);
+        return awtTransform;
     }
 
     static ImageData convertToSWT(BufferedImage bufferedImage) {
