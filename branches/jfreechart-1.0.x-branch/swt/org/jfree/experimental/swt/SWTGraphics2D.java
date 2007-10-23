@@ -224,6 +224,77 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /**
+     * Returns the current stroke for this graphics context.
+     * 
+     * @return The current stroke.
+     * 
+     * @see #setStroke(Stroke)
+     */
+    public Stroke getStroke() {
+        return new BasicStroke(this.gc.getLineWidth(), this.gc.getLineCap(), 
+                this.gc.getLineJoin());
+    }
+
+    /**
+     * Sets the stroke for this graphics context.  For now, this implementation
+     * only recognises the {@link BasicStroke} class.
+     * 
+     * @param stroke  the stroke (<code>null</code> not permitted).
+     * 
+     * @see #getStroke()
+     */
+    public void setStroke(Stroke stroke) {
+        if (stroke instanceof BasicStroke) {
+            BasicStroke bs = (BasicStroke) stroke;
+            // linewidth
+            this.gc.setLineWidth((int) bs.getLineWidth());
+
+            // line join
+            switch (bs.getLineJoin()) {
+                case BasicStroke.JOIN_BEVEL :
+                    this.gc.setLineJoin(SWT.JOIN_BEVEL);
+                    break;
+                case BasicStroke.JOIN_MITER :
+                    this.gc.setLineJoin(SWT.JOIN_MITER);
+                    break;
+                case BasicStroke.JOIN_ROUND :
+                    this.gc.setLineJoin(SWT.JOIN_ROUND);
+                    break;
+            }
+
+            // line cap
+            switch (bs.getEndCap()) {
+                case BasicStroke.CAP_BUTT :
+                    this.gc.setLineCap(SWT.CAP_FLAT);
+                    break;
+                case BasicStroke.CAP_ROUND :
+                    this.gc.setLineCap(SWT.CAP_ROUND);
+                    break;
+                case BasicStroke.CAP_SQUARE :
+                    this.gc.setLineCap(SWT.CAP_SQUARE);
+                    break;
+            }
+
+            // set the line style to solid by default
+            this.gc.setLineStyle(SWT.LINE_SOLID);
+
+            // apply dash style if any
+            float[] dashes = bs.getDashArray();
+            if (dashes != null) {
+                int[] swtDashes = new int[dashes.length];
+                for (int i = 0; i < swtDashes.length; i++) {
+                    swtDashes[i] = (int) dashes[i];
+                }
+                this.gc.setLineDash(swtDashes);
+            }
+        }
+        else {
+            throw new RuntimeException(
+                    "Can only handle 'Basic Stroke' at present.");
+        }
+    }
+
+    /**
      * Draws the outline of the specified shape using the current stroke and
      * paint settings.
      * 
@@ -231,6 +302,7 @@ public class SWTGraphics2D extends Graphics2D {
      * 
      * @see #getPaint()
      * @see #getStroke()
+     * @see #fill(Shape)
      */
     public void draw(Shape shape) {
         Path path = toSwtPath(shape);
@@ -244,6 +316,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @param shape  the shape (<code>null</code> not permitted).
      * 
      * @see #getPaint()
+     * @see #draw(Shape)
      */
     public void fill(Shape shape) {
         Path path = toSwtPath(shape);
@@ -388,60 +461,6 @@ public class SWTGraphics2D extends Graphics2D {
         } 
         else {
             System.out.println("warning, can only handle alpha composite at the moment.");
-        }
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#setStroke(java.awt.Stroke)
-     */
-    public void setStroke(Stroke stroke) {
-        if (stroke instanceof BasicStroke) {
-            BasicStroke bs = (BasicStroke) stroke;
-            // linewidth
-            this.gc.setLineWidth((int) bs.getLineWidth());
-
-            // line join
-            switch (bs.getLineJoin()) {
-                case BasicStroke.JOIN_BEVEL :
-                    this.gc.setLineJoin(SWT.JOIN_BEVEL);
-                    break;
-                case BasicStroke.JOIN_MITER :
-                    this.gc.setLineJoin(SWT.JOIN_MITER);
-                    break;
-                case BasicStroke.JOIN_ROUND :
-                    this.gc.setLineJoin(SWT.JOIN_ROUND);
-                    break;
-            }
-
-            // line cap
-            switch (bs.getEndCap()) {
-                case BasicStroke.CAP_BUTT :
-                    this.gc.setLineCap(SWT.CAP_FLAT);
-                    break;
-                case BasicStroke.CAP_ROUND :
-                    this.gc.setLineCap(SWT.CAP_ROUND);
-                    break;
-                case BasicStroke.CAP_SQUARE :
-                    this.gc.setLineCap(SWT.CAP_SQUARE);
-                    break;
-            }
-
-            // set the line style to solid by default
-            this.gc.setLineStyle(SWT.LINE_SOLID);
-
-            // apply dash style if any
-            float[] dashes = bs.getDashArray();
-            if (dashes != null) {
-                int[] swtDashes = new int[dashes.length];
-                for (int i = 0; i < swtDashes.length; i++) {
-                    swtDashes[i] = (int) dashes[i];
-                }
-                this.gc.setLineDash(swtDashes);
-            }
-        }
-        else {
-            throw new RuntimeException(
-                    "Can only handle 'Basic Stroke' at present.");
         }
     }
 
@@ -619,14 +638,6 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public Color getBackground() {
         return SWTUtils.toAwtColor(this.gc.getBackground());
-    }
-
-    /* (non-Javadoc)
-     * @see java.awt.Graphics2D#getStroke()
-     */
-    public Stroke getStroke() {
-        return new BasicStroke(this.gc.getLineWidth(), this.gc.getLineCap(), 
-                this.gc.getLineJoin());
     }
 
     /* (non-Javadoc)
