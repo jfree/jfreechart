@@ -47,7 +47,8 @@
  * 22-Oct-2007 : Implemented some AlphaComposite support (HP);
  * 23-Oct-2007 : Added mechanism for storing RenderingHints (which are 
  *               still ignored at this point) (DG);
- * 23-Oct-2007 : Implemented drawPolygon() and drawPolyline() (DG);
+ * 23-Oct-2007 : Implemented drawPolygon(), drawPolyline(), drawOval() and
+ *               fillOval() (DG);
  *
  */
 
@@ -641,12 +642,19 @@ public class SWTGraphics2D extends Graphics2D {
         }    
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawOval(int, int, int, int)
+    /**
+     * Draws an oval that fits within the specified rectangular region.
+     * 
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     * @param width  the frame width.
+     * @param height  the frame height.
+     * 
+     * @see #fillOval(int, int, int, int)
+     * @see #draw(Shape)
      */
     public void drawOval(int x, int y, int width, int height) {
-        // TODO Auto-generated method stub
-
+        this.gc.drawOval(x, y, width - 1, height - 1);
     }
 
     /* (non-Javadoc)
@@ -721,11 +729,21 @@ public class SWTGraphics2D extends Graphics2D {
         // TODO Auto-generated method stub
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#fillOval(int, int, int, int)
+    /**
+     * Fills an oval that fits within the specified rectangular region.
+     * 
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     * @param width  the frame width.
+     * @param height  the frame height.
+     * 
+     * @see #drawOval(int, int, int, int)
+     * @see #fill(Shape)
      */
     public void fillOval(int x, int y, int width, int height) {
-        // TODO Auto-generated method stub
+        switchColors();
+        this.gc.fillOval(x, y, width - 1, height - 1);
+        switchColors();
     }
 
     /* (non-Javadoc)
@@ -811,7 +829,6 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void drawString(AttributedCharacterIterator iterator, int x, int y) {
         // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
