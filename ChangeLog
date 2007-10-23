@@ -1,6 +1,13 @@
 2007-10-23  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* swt/org/jfree/experimental/swt/SWTGraphics2D.java
+	(drawRoundRect): Implemented,
+	(fillRoundRect): Likewise,
+	(clearRect): Implemented.
+
+2007-10-23  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* swt/org/jfree/experimental/swt/SWTGraphics2D.java
 	(drawArc): Implemented,
 	(fillArc): Likewise.
 

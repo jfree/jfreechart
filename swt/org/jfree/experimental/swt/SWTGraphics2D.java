@@ -322,7 +322,6 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void setXORMode(Color color) {
         // TODO Auto-generated method stub
-
     }
 
     /**
@@ -541,7 +540,6 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void rotate(double theta, double x, double y) {
         // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
@@ -675,13 +673,25 @@ public class SWTGraphics2D extends Graphics2D {
         this.gc.drawArc(x, y, width - 1, height - 1, arcStart, arcAngle);
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawRoundRect(int, int, int, int, int, int)
+    /**
+     * Draws a rectangle with rounded corners that fits within the specified
+     * framing rectangle.
+     * 
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     * @param width  the frame width.
+     * @param height  the frame height.
+     * @param arcWidth  the width of the arc defining the roundedness of the
+     *         rectangle's corners.
+     * @param arcHeight the height of the arc defining the roundedness of the
+     *         rectangle's corners.
+     *         
+     * @see #fillRoundRect(int, int, int, int, int, int)
      */
     public void drawRoundRect(int x, int y, int width, int height,
             int arcWidth, int arcHeight) {
-        // TODO Auto-generated method stub
-
+        this.gc.drawRoundRectangle(x, y, width - 1, height - 1, arcWidth, 
+                arcHeight);
     }
 
     /** 
@@ -715,12 +725,21 @@ public class SWTGraphics2D extends Graphics2D {
         this.switchColors();
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#clearRect(int, int, int, int)
+    /**
+     * Fills the specified rectangle with the current background colour.
+     * 
+     * @param x  the x-coordinate for the rectangle.
+     * @param y  the y-coordinate for the rectangle.
+     * @param width  the width.
+     * @param height  the height.
+     * 
+     * @see #fillRect(int, int, int, int)
      */
     public void clearRect(int x, int y, int width, int height) {
-        // TODO Auto-generated method stub
-
+        Paint saved = getPaint();
+        setPaint(getBackground());
+        fillRect(x, y, width, height);
+        setPaint(saved);
     }
 
     /* (non-Javadoc)
@@ -730,12 +749,27 @@ public class SWTGraphics2D extends Graphics2D {
         // TODO Auto-generated method stub
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#fillRoundRect(int, int, int, int, int, int)
+    /**
+     * Draws a rectangle with rounded corners that fits within the specified
+     * framing rectangle.
+     * 
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     * @param width  the frame width.
+     * @param height  the frame height.
+     * @param arcWidth  the width of the arc defining the roundedness of the
+     *         rectangle's corners.
+     * @param arcHeight the height of the arc defining the roundedness of the
+     *         rectangle's corners.
+     *         
+     * @see #drawRoundRect(int, int, int, int, int, int)
      */
     public void fillRoundRect(int x, int y, int width, int height,
             int arcWidth, int arcHeight) {
-        // TODO Auto-generated method stub
+        switchColors();
+        this.gc.fillRoundRectangle(x, y, width - 1, height - 1, arcWidth, 
+                arcHeight);
+        switchColors();
     }
 
     /**
