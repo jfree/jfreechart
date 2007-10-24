@@ -75,7 +75,8 @@
  *               negativeItemLabelPosition and createEntities override 
  *               fields (DG);
  * 13-Jun-2007 : Added new autoPopulate flags for core series attributes (DG);
- * 23-Oct-2007 : Updated lookup methods to better handle overridden methods (DG);
+ * 23-Oct-2007 : Updated lookup methods to better handle overridden 
+ *               methods (DG);
  * 
  */
 
@@ -828,7 +829,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param visible  the flag.
      * 
-     * @see #getSeriesVisibleInLegend()
+     * @see #getBaseSeriesVisibleInLegend()
      */
     public void setBaseSeriesVisibleInLegend(boolean visible) {
         // defer argument checking...
@@ -842,7 +843,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param visible  the visibility.
      * @param notify  notify listeners?
      * 
-     * @see #getSeriesVisibleInLegend()
+     * @see #getBaseSeriesVisibleInLegend()
      */
     public void setBaseSeriesVisibleInLegend(boolean visible, boolean notify) {
         this.baseSeriesVisibleInLegend = visible;
