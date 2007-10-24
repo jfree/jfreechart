@@ -1,5 +1,12 @@
 2007-10-24  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* experimental/org/jfree/experimental/chart/plot/dial/StandardDialFrame.java:
+	Removed and renamed ArcDialFrame.java,
+	* experimental/org/jfree/experimental/chart/plot/dial/ArcDialFrame.java:
+	New file.
+
+2007-10-24  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* experimental/org/jfree/experimental/chart/plot/dial/DialPlot.java
 	(pointers): New field,
 	(DialPlot): Delegate to new constructor,

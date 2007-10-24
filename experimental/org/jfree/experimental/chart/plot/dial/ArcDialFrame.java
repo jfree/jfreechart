@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
  * in the United States and other countries.]
  *
- * ----------------------
- * StandardDialFrame.java
- * ----------------------
+ * -----------------
+ * ArcDialFrame.java
+ * -----------------
  * (C) Copyright 2006, 2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -37,7 +37,8 @@
  * 03-Nov-2006 : Version 1 (DG);
  * 08-Mar-2007 : Fix in hashCode() (DG);
  * 17-Oct-2007 : Updated equals() (DG);
- * 24-Oct-2007 : Added argument checks and API docs (DG);
+ * 24-Oct-2007 : Added argument checks and API docs, and renamed 
+ *               StandardDialFrame --> ArcDialFrame (DG);
  * 
  */
 
@@ -67,7 +68,7 @@ import org.jfree.util.PublicCloneable;
 /**
  * A standard frame for the {@link DialPlot} class.
  */
-public class StandardDialFrame extends AbstractDialLayer implements DialFrame, 
+public class ArcDialFrame extends AbstractDialLayer implements DialFrame, 
         Cloneable, PublicCloneable, Serializable {
     
     /**
@@ -105,21 +106,21 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     private double outerRadius;
    
     /** 
-     * Creates a new instance of <code>StandardDialFrame</code> that spans
+     * Creates a new instance of <code>ArcDialFrame</code> that spans
      * 180 degrees. 
      */
-    public StandardDialFrame() {
+    public ArcDialFrame() {
         this(0, 180);
     }
     
     /**
-     * Creates a new instance of <code>StandardDialFrame</code> that spans
+     * Creates a new instance of <code>ArcDialFrame</code> that spans
      * the arc specified.
      *
      * @param startAngle  the startAngle (in degrees).
      * @param extent  the extent of the arc (in degrees, counter-clockwise).
      */
-    public StandardDialFrame(double startAngle, double extent) {
+    public ArcDialFrame(double startAngle, double extent) {
         this.backgroundPaint = Color.gray;
         this.foregroundPaint = new Color(100, 100, 150);
         this.stroke = new BasicStroke(2.0f);
@@ -419,10 +420,10 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof StandardDialFrame)) {
+        if (!(obj instanceof ArcDialFrame)) {
             return false;
         }
-        StandardDialFrame that = (StandardDialFrame) obj;
+        ArcDialFrame that = (ArcDialFrame) obj;
         if (!PaintUtilities.equal(this.backgroundPaint, that.backgroundPaint)) {
             return false;
         }

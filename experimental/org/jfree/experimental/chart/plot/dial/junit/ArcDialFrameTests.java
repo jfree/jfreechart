@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
  * in the United States and other countries.]
  *
- * ---------------------------
- * StandardDialFrameTests.java
- * ---------------------------
+ * ----------------------
+ * ArcDialFrameTests.java
+ * ----------------------
  * (C) Copyright 2006-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 03-Nov-2006 : Version 1 (DG);
+ * 24-Oct-2007 : Renamed (DG);
  *
  */
 
@@ -54,12 +55,12 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.jfree.experimental.chart.plot.dial.StandardDialFrame;
+import org.jfree.experimental.chart.plot.dial.ArcDialFrame;
 
 /**
- * Tests for the {@link StandardDialFrame} class.
+ * Tests for the {@link ArcDialFrame} class.
  */
-public class StandardDialFrameTests extends TestCase {
+public class ArcDialFrameTests extends TestCase {
 
     /**
      * Returns the tests as a test suite.
@@ -67,7 +68,7 @@ public class StandardDialFrameTests extends TestCase {
      * @return The test suite.
      */
     public static Test suite() {
-        return new TestSuite(StandardDialFrameTests.class);
+        return new TestSuite(ArcDialFrameTests.class);
     }
 
     /**
@@ -75,7 +76,7 @@ public class StandardDialFrameTests extends TestCase {
      *
      * @param name  the name of the tests.
      */
-    public StandardDialFrameTests(String name) {
+    public ArcDialFrameTests(String name) {
         super(name);
     }
 
@@ -83,8 +84,8 @@ public class StandardDialFrameTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = new StandardDialFrame();
+        ArcDialFrame f1 = new ArcDialFrame();
+        ArcDialFrame f2 = new ArcDialFrame();
         assertTrue(f1.equals(f2));
         
         // background paint
@@ -144,8 +145,8 @@ public class StandardDialFrameTests extends TestCase {
      * Two objects that are equal are required to return the same hashCode. 
      */
     public void testHashCode() {
-        StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = new StandardDialFrame();
+        ArcDialFrame f1 = new ArcDialFrame();
+        ArcDialFrame f2 = new ArcDialFrame();
         assertTrue(f1.equals(f2));
         int h1 = f1.hashCode();
         int h2 = f2.hashCode();
@@ -156,10 +157,10 @@ public class StandardDialFrameTests extends TestCase {
      * Confirm that cloning works.
      */
     public void testCloning() {
-        StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = null;
+        ArcDialFrame f1 = new ArcDialFrame();
+        ArcDialFrame f2 = null;
         try {
-            f2 = (StandardDialFrame) f1.clone();
+            f2 = (ArcDialFrame) f1.clone();
         }
         catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -179,8 +180,8 @@ public class StandardDialFrameTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-        StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = null;
+        ArcDialFrame f1 = new ArcDialFrame();
+        ArcDialFrame f2 = null;
 
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -190,7 +191,7 @@ public class StandardDialFrameTests extends TestCase {
 
             ObjectInput in = new ObjectInputStream(
                     new ByteArrayInputStream(buffer.toByteArray()));
-            f2 = (StandardDialFrame) in.readObject();
+            f2 = (ArcDialFrame) in.readObject();
             in.close();
         }
         catch (Exception e) {
