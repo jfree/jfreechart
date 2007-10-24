@@ -1,3 +1,61 @@
+2007-10-24  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* experimental/org/jfree/experimental/chart/plot/dial/DialPlot.java
+	(pointers): New field,
+	(DialPlot): Delegate to new constructor,
+	(DialPlot(ValueDataset)): New constructor,
+	(addPointer): New method,
+	(getPointerIndex): Likewise,
+	(removePointer(int)): Likewise,
+	(removePointer(DialPointer)): Likewise,
+	(getPointerForDataset): Likewise,
+	(draw): Draw pointers in their own layer,
+	(equals): Check new pointers field,
+	* experimental/org/jfree/experimental/chart/plot/dial/DialPointer.java:
+	Implemented PublicCloneable,
+	(DialPointer): Changed to protected,
+	(DialPointer(int)): Likewise, and changed default radius,
+	(Pin.setPaint): Added argument check,
+	(Pin.setStroke): Likewise,
+	(Pointer(int)): Removed radius setting,
+	* experimental/org/jfree/experimental/chart/plot/dial/DialTextAnnotation.java
+	(getAnchor): New method,
+	(setAnchor): Likewise,
+	* experimental/org/jfree/experimental/chart/plot/dial/DialValueIndicator.java
+	(DialValueIndicator): New constructor,
+	(DialValueIndicator(int, String)): Removed string argument,
+	(setDatasetIndex): Fire change event,
+	(setTemplateValue): Check for null argument,
+	* experimental/org/jfree/experimental/chart/plot/dial/StandardDialFrame.java
+	(setInnerRadius): Added argument check,
+	(setOuterRadius): Likewise,
+	* experimental/org/jfree/experimental/chart/plot/dial/StandardDialRange.java
+	(scaleIndex): New field,
+	(StandardDialRange(double, double)): Added field initialisations,
+	(getScaleIndex): New method,
+	(setScaleIndex): Likewise,
+	(draw): Get the correct scale,
+	(equals): Updated for new field,
+	* experimental/org/jfree/experimental/chart/plot/dial/StandardDialScale.java
+	(minorTickPaint): New field,
+	(minorTickStroke): Likewise,
+	(tickLabelFormatter): Likewise,
+	(StandardDialScale): Updated for modified constructor signature,
+	(StandardDialScale(double, double, double, double)): Added two new 
+	arguments to signature,
+	(setMajorTickLength): Added argument check,
+	(setMinorTickCount): Likewise,
+	(setMinorTickLength): Likewise,
+	(getMinorTickPaint): New method,
+	(setMinorTickPaint): Likewise,
+	(getTickLabelFormatter): Likewise,
+	(setTickLabelFormatter): Likewise,
+	(draw): Fix major tick length, format labels with new formatter,
+	(equals): Updated for new fields,
+	(hashCode): Implemented,
+	(writeObject): Handle new fields,
+	(readObject): Likewise.
+	
 2007-10-23  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* swt/org/jfree/experimental/swt/SWTGraphics2D.java

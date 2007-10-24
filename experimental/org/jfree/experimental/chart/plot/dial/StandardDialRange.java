@@ -37,6 +37,7 @@
  * 03-Nov-2006 : Version 1 (DG);
  * 08-Mar-2007 : Fix in hashCode() (DG);
  * 17-Oct-2007 : Removed increment attribute (DG);
+ * 24-Oct-2007 : Added scaleIndex (DG);
  * 
  */
 
@@ -63,6 +64,9 @@ import org.jfree.util.PublicCloneable;
  */
 public class StandardDialRange extends AbstractDialLayer implements DialLayer, 
         Cloneable, PublicCloneable, Serializable {
+    
+    /** The scale index. */
+    private int scaleIndex;
     
     /** The minimum data value for the scale. */
     private double lowerBound;
@@ -106,9 +110,36 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
         if (paint == null) {
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
+        this.scaleIndex = 0;
         this.lowerBound = lower;
         this.upperBound = upper;
+        this.innerRadius = 0.48;
+        this.outerRadius = 0.52;
         this.paint = paint;
+    }
+    
+    /**
+     * Returns the scale index.
+     * 
+     * @return The scale index.
+     * 
+     * @see #setScaleIndex(int)
+     */
+    public int getScaleIndex() {
+        return this.scaleIndex;
+    }
+    
+    /**
+     * Sets the scale index and sends a {@link DialLayerChangeEvent} to all
+     * registered listeners.
+     * 
+     * @param index  the scale index.
+     * 
+     * @see #getScaleIndex()
+     */
+    public void setScaleIndex(int index) {
+        this.scaleIndex = index;
+        notifyListeners(new DialLayerChangeEvent(this));
     }
     
     /**
@@ -285,7 +316,11 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
         Rectangle2D arcRectOuter = DialPlot.rectangleByRadius(frame, 
                 this.outerRadius, this.outerRadius);
         
-        DialScale scale = plot.getScaleForDataset(0);
+        DialScale scale = plot.getScale(this.scaleIndex);
+        if (scale == null) {
+            throw new RuntimeException("No scale for scaleIndex = " 
+                    + this.scaleIndex);
+        }
         double angleMin = scale.valueToAngle(this.lowerBound);
         double angleMax = scale.valueToAngle(this.upperBound);
 
@@ -315,6 +350,9 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
             return false;
         }
         StandardDialRange that = (StandardDialRange) obj;
+        if (this.scaleIndex != that.scaleIndex) {
+            return false;
+        }
         if (this.lowerBound != that.lowerBound) {
             return false;
         }
