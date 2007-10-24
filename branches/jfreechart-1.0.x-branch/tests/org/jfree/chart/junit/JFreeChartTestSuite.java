@@ -45,6 +45,7 @@
  * 18-Jan-2005 : Added main() method (DG);
  * 08-Jun-2005 : Added tests for org.jfree.chart.needle package (DG);
  * 26-Jan-2007 : Added tests for org.jfree.data.time.ohlc package (DG);
+ * 24-Oct-2007 : Added tests for org.jfree.chart.plot.dial package (DG);
  *
  */
 
@@ -60,6 +61,7 @@ import org.jfree.chart.block.junit.BlockPackageTests;
 import org.jfree.chart.entity.junit.EntityPackageTests;
 import org.jfree.chart.labels.junit.LabelsPackageTests;
 import org.jfree.chart.needle.junit.NeedlePackageTests;
+import org.jfree.chart.plot.dial.junit.DialPackageTests;
 import org.jfree.chart.plot.junit.PlotPackageTests;
 import org.jfree.chart.renderer.category.junit.RendererCategoryPackageTests;
 import org.jfree.chart.renderer.junit.RendererPackageTests;
@@ -95,6 +97,7 @@ public class JFreeChartTestSuite extends TestCase {
         suite.addTest(LabelsPackageTests.suite());
         suite.addTest(NeedlePackageTests.suite());
         suite.addTest(PlotPackageTests.suite());
+        suite.addTest(DialPackageTests.suite());
         suite.addTest(RendererPackageTests.suite());
         suite.addTest(RendererCategoryPackageTests.suite());
         suite.addTest(RendererXYPackageTests.suite());
