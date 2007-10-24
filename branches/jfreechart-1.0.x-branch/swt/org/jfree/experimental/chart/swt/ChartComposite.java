@@ -29,7 +29,7 @@
  * -------------------
  * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
  *
- * Original Author:  Henry Proudhon (henry.proudhon AT insa-lyon.fr);
+ * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Cedric Chabanois (cchabanois AT no-log.org);
  *                   Christoph Beck;
@@ -55,6 +55,14 @@
  *               Cédric Chabanois (CC);
  * 06-Jun-2007 : Fixed minor issues with tooltips. bug reported and fix proposed 
  *               by Christoph Beck, bug 1726404 (HP);
+ * 22-Oct-2007 : Added addChartMouseListener and removeChartMouseListener methods
+ *               as suggested by Christoph Beck, bug 1742002 (HP);
+ * 22-Oct-2007 : Fixed bug in zooming with multiple plots (HP);
+ * 22-Oct-2007 : Check for null zoom point when restoring auto range and domain bounds (HP);
+ * 22-Oct-2007 : Pass mouse moved events to listening ChartMouseListeners (HP);
+ * 22-Oct-2007 : Refactored class, now implements PaintListener, MouseListener, 
+ *               MouseMoveListener. Made the chart field be private again and added 
+ *               new method addSWTListener to allow custom behavior. 
  */
 
 package org.jfree.experimental.chart.swt;
@@ -1194,14 +1202,12 @@ public class ChartComposite extends Composite implements ChartChangeListener,
                 );
             }
             if (this.zoomOutBothMenuItem != null) {
-                this.zoomOutBothMenuItem.setEnabled(
-                    isDomainZoomable & isRangeZoomable
-                );
+                this.zoomOutBothMenuItem.setEnabled(isDomainZoomable 
+                        & isRangeZoomable);
             }
             if (this.zoomResetBothMenuItem != null) {
-                this.zoomResetBothMenuItem.setEnabled(
-                    isDomainZoomable & isRangeZoomable
-                );
+                this.zoomResetBothMenuItem.setEnabled(isDomainZoomable 
+                        & isRangeZoomable);
             }
 
             this.popup.setLocation(x, y);
