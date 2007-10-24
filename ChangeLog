@@ -1,5 +1,12 @@
 2007-10-24  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* experimenta/org/jfree/experimental/chart/plot/dial/*.java:
+	Moved this package to org.jfree.chart.plot.dial.*,
+	* experimenta/org/jfree/experimental/chart/plot/dial/junit/*.java:
+	Moved this package to org.jfree.chart.plot.dial.junit.*.
+
+2007-10-24  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* experimental/org/jfree/experimental/chart/plot/dial/StandardDialFrame.java:
 	Removed and renamed ArcDialFrame.java,
 	* experimental/org/jfree/experimental/chart/plot/dial/ArcDialFrame.java:
