@@ -142,7 +142,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     public DialPlot(ValueDataset dataset) {
         this.background = null;
         this.cap = null;
-        this.dialFrame = new StandardDialFrame();
+        this.dialFrame = new ArcDialFrame();
         this.datasets = new ObjectList();
         if (dataset != null) {
             this.setDataset(dataset);  
