@@ -29,7 +29,7 @@
  * -------------------
  * (C) Copyright 2000-2005, by Object Refinery Limited.
  *
- * Original Author:  Henry Proudhon (henry.proudhon AT insa-lyon.fr);
+ * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):
  *
  * Changes
