@@ -37,6 +37,7 @@
  * 03-Nov-2006 : Version 1 (DG);
  * 08-Mar-2007 : Fix in hashCode() (DG);
  * 17-Oct-2007 : Updated equals() (DG);
+ * 24-Oct-2007 : Added getAnchor() and setAnchor() methods (DG);
  *
  */
 
@@ -67,11 +68,8 @@ import org.jfree.util.PublicCloneable;
 public class DialTextAnnotation extends AbstractDialLayer implements DialLayer, 
         Cloneable, PublicCloneable, Serializable {
     
-    /** The angle that defines the anchor point for the annotation. */
-    private double angle;
-    
-    /** The radius that defines the anchor point for the annotation. */
-    private double radius;
+    /** The label text. */
+    private String label;
     
     /** The font. */
     private Font font;
@@ -81,10 +79,13 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * special handling for serialization.
      */
     private transient Paint paint;
+
+    /** The angle that defines the anchor point for the annotation. */
+    private double angle;
     
-    /** The label text. */
-    private String label;
-    
+    /** The radius that defines the anchor point for the annotation. */
+    private double radius;
+        
     /** The text anchor to be aligned to the annotation's anchor point. */
     private TextAnchor anchor;
     
@@ -106,53 +107,29 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     }
     
     /**
-     * Returns the angle used to calculate the anchor point.
+     * Returns the label text.
      * 
-     * @return The angle used to calculate the anchor point.
+     * @return The label text (never <code>null</code).
      * 
-     * @see #setAngle(double)
-     * @see #getRadius()
+     * @see #setLabel(String)
      */
-    public double getAngle() {
-        return this.angle;
+    public String getLabel() {
+        return this.label;
     }
     
     /**
-     * Sets the angle used to calculate the anchor point.
+     * Sets the label and sends a {@link DialLayerChangeEvent} to all 
+     * registered listeners.
      * 
-     * @param angle  the angle.
+     * @param label  the label (<code>null</code> not permitted).
      * 
-     * @see #getAngle()
-     * @see #setRadius(double)
+     * @see #getLabel()
      */
-    public void setAngle(double angle) {
-        this.angle = angle;
-        notifyListeners(new DialLayerChangeEvent(this));
-    }
-    
-    /**
-     * Returns the radius used to calculate the anchor point.
-     * 
-     * @return The radius.
-     * 
-     * @see #setRadius(double)
-     * @see #getAngle()
-     */
-    public double getRadius() {
-        return this.radius;
-    }
-    
-    /**
-     * Sets the radius used to calculate the anchor point.
-     * 
-     * @param radius  the radius.
-     * 
-     * @see #getRadius()
-     * @see #setAngle(double)
-     */
-    public void setRadius(double radius) {
-        // TODO: validation
-        this.radius = radius;
+    public void setLabel(String label) {
+        if (label == null) {
+            throw new IllegalArgumentException("Null 'label' argument.");
+        }
+        this.label = label;
         notifyListeners(new DialLayerChangeEvent(this));
     }
     
@@ -168,7 +145,8 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     }
     
     /**
-     * Sets the font used to display the label.
+     * Sets the font used to display the label and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      * 
      * @param font  the font (<code>null</code> not permitted).
      * 
@@ -194,7 +172,8 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     }
     
     /**
-     * Sets the paint used to display the label.
+     * Sets the paint used to display the label and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      * 
      * @param paint  the paint (<code>null</code> not permitted).
      * 
@@ -209,29 +188,89 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     }
     
     /**
-     * Returns the label text.
+     * Returns the angle used to calculate the anchor point.
      * 
-     * @return The label text (never <code>null</code).
+     * @return The angle (in degrees).
      * 
-     * @see #setLabel(String)
+     * @see #setAngle(double)
+     * @see #getRadius()
      */
-    public String getLabel() {
-        return this.label;
+    public double getAngle() {
+        return this.angle;
     }
     
     /**
-     * Sets the label.
+     * Sets the angle used to calculate the anchor point and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      * 
-     * @param label  the label (<code>null</code> not permitted).
+     * @param angle  the angle (in degrees).
      * 
-     * @see #getLabel()
+     * @see #getAngle()
+     * @see #setRadius(double)
      */
-    public void setLabel(String label) {
-        if (label == null) {
-            throw new IllegalArgumentException("Null 'label' argument.");
-        }
-        this.label = label;
+    public void setAngle(double angle) {
+        this.angle = angle;
         notifyListeners(new DialLayerChangeEvent(this));
+    }
+    
+    /**
+     * Returns the radius used to calculate the anchor point.  This is 
+     * specified as a percentage relative to the dial's framing rectangle.
+     * 
+     * @return The radius.
+     * 
+     * @see #setRadius(double)
+     * @see #getAngle()
+     */
+    public double getRadius() {
+        return this.radius;
+    }
+    
+    /**
+     * Sets the radius used to calculate the anchor point and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
+     * 
+     * @param radius  the radius (as a percentage of the dial's framing 
+     *                rectangle).
+     * 
+     * @see #getRadius()
+     * @see #setAngle(double)
+     */
+    public void setRadius(double radius) {
+        if (radius < 0.0) {
+            throw new IllegalArgumentException(
+                    "The 'radius' cannot be negative.");
+        }
+        this.radius = radius;
+        notifyListeners(new DialLayerChangeEvent(this));
+    }
+    
+    /**
+     * Returns the text anchor point that will be aligned to the position
+     * specified by {@link #getAngle()} and {@link #getRadius()}.
+     * 
+     * @return The anchor point.
+     * 
+     * @see #setAnchor(TextAnchor)
+     */
+    public TextAnchor getAnchor() {
+        return this.anchor;
+    }
+    
+    /**
+     * Sets the text anchor point and sends a {@link DialLayerChangeEvent} to 
+     * all registered listeners.
+     * 
+     * @param anchor  the anchor point (<code>null</code> not permitted).
+     * 
+     * @see #getAnchor()
+     */
+    public void setAnchor(TextAnchor anchor) {
+        if (anchor == null) {
+            throw new IllegalArgumentException("Null 'anchor' argument.");
+        }
+        this.anchor = anchor;
+        notifyListeners(new DialLayerChangeEvent(this));        
     }
     
     /**

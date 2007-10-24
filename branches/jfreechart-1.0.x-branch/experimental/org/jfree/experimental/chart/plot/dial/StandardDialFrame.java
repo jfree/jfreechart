@@ -37,6 +37,7 @@
  * 03-Nov-2006 : Version 1 (DG);
  * 08-Mar-2007 : Fix in hashCode() (DG);
  * 17-Oct-2007 : Updated equals() (DG);
+ * 24-Oct-2007 : Added argument checks and API docs (DG);
  * 
  */
 
@@ -140,7 +141,8 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     }
     
     /**
-     * Sets the background paint.
+     * Sets the background paint and sends a {@link DialLayerChangeEvent} to 
+     * all registered listeners.
      * 
      * @param paint  the paint (<code>null</code> not permitted).
      * 
@@ -166,7 +168,8 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     }
     
     /**
-     * Sets the foreground paint.
+     * Sets the foreground paint and sends a {@link DialLayerChangeEvent} to 
+     * all registered listeners.
      * 
      * @param paint  the paint (<code>null</code> not permitted).
      * 
@@ -192,7 +195,8 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     }
     
     /**
-     * Sets the stroke.
+     * Sets the stroke and sends a {@link DialLayerChangeEvent} to 
+     * all registered listeners.
      * 
      * @param stroke  the stroke (<code>null</code> not permitted).
      * 
@@ -218,14 +222,17 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     }
     
     /**
-     * Sets the inner radius.
+     * Sets the inner radius and sends a {@link DialLayerChangeEvent} to 
+     * all registered listeners.
      *
      * @param radius  the inner radius.
      * 
      * @see #getInnerRadius()
      */
     public void setInnerRadius(double radius) {
-        // TODO: validation
+        if (radius < 0.0) {
+            throw new IllegalArgumentException("Negative 'radius' argument.");
+        }
         this.innerRadius = radius;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -242,14 +249,17 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     }
     
     /**
-     * Sets the outer radius.
+     * Sets the outer radius and sends a {@link DialLayerChangeEvent} to 
+     * all registered listeners.
      *
      * @param radius  the outer radius.
      * 
      * @see #getOuterRadius()
      */
     public void setOuterRadius(double radius) {
-        // TODO: validation
+        if (radius < 0.0) {
+            throw new IllegalArgumentException("Negative 'radius' argument.");
+        }
         this.outerRadius = radius;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -266,7 +276,8 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     }
     
     /**
-     * Sets the start angle.
+     * Sets the start angle and sends a {@link DialLayerChangeEvent} to 
+     * all registered listeners.
      * 
      * @param angle  the angle.
      * 
@@ -289,7 +300,8 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     }
     
     /**
-     * Sets the extent.
+     * Sets the extent and sends a {@link DialLayerChangeEvent} to 
+     * all registered listeners.
      * 
      * @param extent  the extent.
      * 
@@ -356,7 +368,6 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
         p.append(outer, true);
         p.closePath();
         return p;
-        
     }
     
     /**

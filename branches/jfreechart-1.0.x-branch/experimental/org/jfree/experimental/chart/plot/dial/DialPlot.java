@@ -37,6 +37,8 @@
  * 03-Nov-2006 : Version 1 (DG);
  * 08-Mar-2007 : Fix in hashCode() (DG);
  * 17-Oct-2007 : Fixed listener registration/deregistration bugs (DG);
+ * 24-Oct-2007 : Maintain pointers in their own list, so they can be
+ *               drawn after other layers (DG);
  * 
  */
 
@@ -100,6 +102,11 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      */
     private List layers;
     
+    /** 
+     * The pointer(s) for the dial.
+     */
+    private List pointers;
+    
     /**
      * The x-coordinate for the view window.
      */
@@ -124,13 +131,26 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * Creates a new instance of <code>DialPlot</code>.
      */
     public DialPlot() {
+        this(null);    
+    }
+    
+    /** 
+     * Creates a new instance of <code>DialPlot</code>.
+     * 
+     * @param dataset  the dataset (<code>null</code> permitted).
+     */
+    public DialPlot(ValueDataset dataset) {
         this.background = null;
         this.cap = null;
         this.dialFrame = new StandardDialFrame();
         this.datasets = new ObjectList();
+        if (dataset != null) {
+            this.setDataset(dataset);  
+        }
         this.scales = new ObjectList();
         this.datasetToScaleMap = new ObjectList();
         this.layers = new java.util.ArrayList();
+        this.pointers = new java.util.ArrayList();
         this.viewX = 0.0;
         this.viewY = 0.0;
         this.viewW = 1.0;
@@ -352,6 +372,81 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
     
     /**
+     * Adds a pointer to the plot and sends a {@link PlotChangeEvent} to all 
+     * registered listeners.
+     * 
+     * @param pointer  the pointer (<code>null</code> not permitted).
+     */
+    public void addPointer(DialPointer pointer) {
+        if (pointer == null) {
+            throw new IllegalArgumentException("Null 'pointer' argument.");
+        }
+        this.pointers.add(pointer);
+        pointer.addChangeListener(this);
+        notifyListeners(new PlotChangeEvent(this));
+    }
+    
+    /**
+     * Returns the index for the specified pointer.
+     * 
+     * @param pointer  the pointer (<code>null</code> not permitted).
+     * 
+     * @return The pointer index.
+     */
+    public int getPointerIndex(DialPointer pointer) {
+        if (pointer == null) {
+            throw new IllegalArgumentException("Null 'pointer' argument.");
+        }
+        return this.pointers.indexOf(pointer);
+    }
+    
+    /**
+     * Removes the pointer at the specified index and sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @param index  the index.
+     */
+    public void removePointer(int index) {
+        DialPointer pointer = (DialPointer) this.pointers.get(index);
+        if (pointer != null) {
+            pointer.removeChangeListener(this);
+        }
+        this.pointers.remove(index);
+        notifyListeners(new PlotChangeEvent(this));
+    }
+    
+    /**
+     * Removes the specified pointer and sends a {@link PlotChangeEvent} to all
+     * registered listeners.
+     * 
+     * @param pointer  the pointer (<code>null</code> not permitted).
+     */
+    public void removePointer(DialPointer pointer) {
+        // defer argument checking
+        removeLayer(getPointerIndex(pointer));
+    }
+
+    /**
+     * Returns the dial pointer that is associated with the specified
+     * dataset, or <code>null</code>.
+     * 
+     * @param datasetIndex  the dataset index.
+     * 
+     * @return The pointer.
+     */
+    public DialPointer getPointerForDataset(int datasetIndex) {
+        DialPointer result = null;
+        Iterator iterator = this.pointers.iterator();
+        while (iterator.hasNext()) {
+            DialPointer p = (DialPointer) iterator.next();
+            if (p.getDatasetIndex() == datasetIndex) {
+                return p;
+            }
+        }
+        return result;
+    }
+    
+    /**
      * Returns the primary dataset for the plot.
      *
      * @return The primary dataset (possibly <code>null</code>).
@@ -452,6 +547,23 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         Iterator iterator = this.layers.iterator();
         while (iterator.hasNext()) {
             DialLayer current = (DialLayer) iterator.next();
+            if (current.isVisible()) {
+                if (current.isClippedToWindow()) {
+                    Shape savedClip = g2.getClip();
+                    g2.setClip(this.dialFrame.getWindow(frame));
+                    current.draw(g2, this, frame, area);
+                    g2.setClip(savedClip);
+                }
+                else {
+                    current.draw(g2, this, frame, area);
+                }
+            }
+        }
+        
+        // draw the pointers
+        iterator = this.pointers.iterator();
+        while (iterator.hasNext()) {
+            DialPointer current = (DialPointer) iterator.next();
             if (current.isVisible()) {
                 if (current.isClippedToWindow()) {
                     Shape savedClip = g2.getClip();
@@ -649,6 +761,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
             return false;
         }
         if (!this.layers.equals(that.layers)) {
+            return false;
+        }
+        if (!this.pointers.equals(that.pointers)) {
             return false;
         }
         return super.equals(obj);

@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 03-Nov-2006 : Version 1 (DG);
+ * 24-Oct-2007 : Updated for API changes (DG);
  *
  */
 
@@ -89,27 +90,27 @@ public class StandardDialScaleTests extends TestCase {
         assertTrue(s1.equals(s2));
         
         // lowerBound
-        s1 = new StandardDialScale(10.0, 100.0, 0.0, 270.0);
+        s1 = new StandardDialScale(10.0, 100.0, 0.0, 270.0, 10.0, 4);
         assertFalse(s1.equals(s2));
-        s2 = new StandardDialScale(10.0, 100.0, 0.0, 270.0);
+        s2 = new StandardDialScale(10.0, 100.0, 0.0, 270.0, 10.0, 4);
         assertTrue(s1.equals(s2));
         
         // upperBound
-        s1 = new StandardDialScale(10.0, 200.0, 0.0, 270.0);
+        s1 = new StandardDialScale(10.0, 200.0, 0.0, 270.0, 10.0, 4);
         assertFalse(s1.equals(s2));
-        s2 = new StandardDialScale(10.0, 200.0, 0.0, 270.0);
+        s2 = new StandardDialScale(10.0, 200.0, 0.0, 270.0, 10.0, 4);
         assertTrue(s1.equals(s2));
         
         // startAngle
-        s1 = new StandardDialScale(10.0, 200.0, 20.0, 270.0);
+        s1 = new StandardDialScale(10.0, 200.0, 20.0, 270.0, 10.0, 4);
         assertFalse(s1.equals(s2));
-        s2 = new StandardDialScale(10.0, 200.0, 20.0, 270.0);
+        s2 = new StandardDialScale(10.0, 200.0, 20.0, 270.0, 10.0, 4);
         assertTrue(s1.equals(s2));
 
         // extent
-        s1 = new StandardDialScale(10.0, 200.0, 20.0, 99.0);
+        s1 = new StandardDialScale(10.0, 200.0, 20.0, 99.0, 10.0, 4);
         assertFalse(s1.equals(s2));
-        s2 = new StandardDialScale(10.0, 200.0, 20.0, 99.0);
+        s2 = new StandardDialScale(10.0, 200.0, 20.0, 99.0, 10.0, 4);
         assertTrue(s1.equals(s2));
     
         // tickRadius
@@ -174,6 +175,11 @@ public class StandardDialScaleTests extends TestCase {
         assertFalse(s1.equals(s2));
         s2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.white, 
                 3.0f, 4.0f, Color.green));
+        assertTrue(s1.equals(s2));  
+        
+        s1.setTickLabelsVisible(false);
+        assertFalse(s1.equals(s2));
+        s2.setTickLabelsVisible(false);
         assertTrue(s1.equals(s2));  
         
         // check an inherited attribute

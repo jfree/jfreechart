@@ -36,6 +36,8 @@
  * -------
  * 03-Nov-2006 : Version 1 (DG);
  * 17-Oct-2007 : Added equals() overrides (DG);
+ * 24-Oct-2007 : Implemented PublicCloneable, changed default radius,
+ *               and added argument checks (DG);
  * 
  */
 
@@ -64,7 +66,7 @@ import org.jfree.util.PublicCloneable;
  * A base class for the pointer in a {@link DialPlot}.
  */
 public abstract class DialPointer extends AbstractDialLayer 
-        implements DialLayer, Cloneable, Serializable {
+        implements DialLayer, Cloneable, PublicCloneable, Serializable {
     
     /** The needle radius. */
     double radius;
@@ -77,7 +79,7 @@ public abstract class DialPointer extends AbstractDialLayer
     /** 
      * Creates a new <code>DialPointer</code> instance.
      */
-    public DialPointer() {
+    protected DialPointer() {
         this(0);
     }
     
@@ -86,8 +88,8 @@ public abstract class DialPointer extends AbstractDialLayer
      * 
      * @param datasetIndex  the dataset index.
      */
-    public DialPointer(int datasetIndex) {
-        this.radius = 0.675;
+    protected DialPointer(int datasetIndex) {
+        this.radius = 0.9;
         this.datasetIndex = datasetIndex;
     }
     
@@ -95,15 +97,20 @@ public abstract class DialPointer extends AbstractDialLayer
      * Returns the dataset index that the pointer maps to.
      * 
      * @return The dataset index.
+     * 
+     * @see #getDatasetIndex()
      */
     public int getDatasetIndex() {
         return this.datasetIndex;
     }
     
     /**
-     * Sets the dataset index for the pointer.
+     * Sets the dataset index for the pointer and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      * 
      * @param index  the index.
+     * 
+     * @see #getDatasetIndex()
      */
     public void setDatasetIndex(int index) {
         this.datasetIndex = index;
@@ -111,7 +118,8 @@ public abstract class DialPointer extends AbstractDialLayer
     }
     
     /**
-     * Returns the radius of the pointer.
+     * Returns the radius of the pointer, as a percentage of the dial's
+     * framing rectangle.
      * 
      * @return The radius.
      * 
@@ -122,7 +130,8 @@ public abstract class DialPointer extends AbstractDialLayer
     }
     
     /**
-     * Sets the radius of the pointer.
+     * Sets the radius of the pointer and sends a 
+     * {@link DialLayerChangeEvent} to all registered listeners.
      * 
      * @param radius  the radius.
      * 
@@ -182,7 +191,7 @@ public abstract class DialPointer extends AbstractDialLayer
     /**
      * A dial pointer that draws a thin line (like a pin).
      */
-    public static class Pin extends DialPointer implements PublicCloneable {
+    public static class Pin extends DialPointer {
     
         /** The paint. */
         private transient Paint paint;
@@ -229,6 +238,9 @@ public abstract class DialPointer extends AbstractDialLayer
          * @see #getPaint()
          */
         public void setPaint(Paint paint) {
+            if (paint == null) {
+                throw new IllegalArgumentException("Null 'paint' argument.");
+            }
             this.paint = paint;
             notifyListeners(new DialLayerChangeEvent(this));
         }
@@ -236,7 +248,7 @@ public abstract class DialPointer extends AbstractDialLayer
         /**
          * Returns the stroke.
          * 
-         * @return The stroke (neverA <code>null</code>).
+         * @return The stroke (never <code>null</code>).
          * 
          * @see #setStroke(Stroke)
          */
@@ -253,6 +265,9 @@ public abstract class DialPointer extends AbstractDialLayer
          * @see #getStroke()
          */
         public void setStroke(Stroke stroke) {
+            if (stroke == null) {
+                throw new IllegalArgumentException("Null 'stroke' argument.");
+            }
             this.stroke = stroke;
             notifyListeners(new DialLayerChangeEvent(this));
         }
@@ -342,7 +357,7 @@ public abstract class DialPointer extends AbstractDialLayer
     /**
      * A dial pointer.
      */
-    public static class Pointer extends DialPointer implements PublicCloneable {
+    public static class Pointer extends DialPointer {
         
         /**
          * The radius that defines the width of the pointer at the base.
@@ -363,7 +378,6 @@ public abstract class DialPointer extends AbstractDialLayer
          */
         public Pointer(int datasetIndex) {
             super(datasetIndex);
-            this.radius = 0.9;
             this.widthRadius = 0.05;
         }
         
