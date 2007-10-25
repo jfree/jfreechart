@@ -1,5 +1,13 @@
 2007-10-25  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/axis/StandardTickUnitSource.java:
+	Implemented Serializable,
+	(StandardTickUnitSource): Added explicit constructor,
+	(equals): New method override,
+	(hashCode): Likewise.
+
+2007-10-25  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/ChartPanel.java
 	(defaultDirectoryForSaveAs): New field,
 	(ChartPanel(JFreeChart, int, int, int, int, int, int, boolean, boolean,
