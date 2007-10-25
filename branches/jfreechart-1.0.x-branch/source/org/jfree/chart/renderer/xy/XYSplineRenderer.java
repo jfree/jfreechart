@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
  * in the United States and other countries.]
  *
- * -----------------------------
- * XYSplineAndShapeRenderer.java
- * -----------------------------
+ * ---------------------
+ * XYSplineRenderer.java
+ * ---------------------
  * (C) Copyright 2007, by Klaus Rheinwald and Contributors.
  *
  * Original Author:  Klaus Rheinwald;
@@ -65,7 +65,7 @@ import org.jfree.ui.RectangleEdge;
  * 
  * @since 1.0.7
  */
-public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
+public class XYSplineRenderer extends XYLineAndShapeRenderer {
 
     /**
      * To collect data points for later splining.
@@ -81,7 +81,7 @@ public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
      * Creates a new instance with the 'precision' attribute defaulting to 
      * 5.
      */
-    public XYSplineAndShapeRenderer() {
+    public XYSplineRenderer() {
         this(5);
     }
     
@@ -90,7 +90,7 @@ public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
      * 
      * @param precision  the number of points between data items.
      */
-    public XYSplineAndShapeRenderer(int precision) {
+    public XYSplineRenderer(int precision) {
         super();
         if (precision <= 0) {
             throw new IllegalArgumentException("Requires precision > 0.");
@@ -306,10 +306,10 @@ public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof XYSplineAndShapeRenderer)) {
+        if (!(obj instanceof XYSplineRenderer)) {
             return false;
         }
-        XYSplineAndShapeRenderer that = (XYSplineAndShapeRenderer) obj;
+        XYSplineRenderer that = (XYSplineRenderer) obj;
         if (this.precision != that.precision) {
             return false;
         }

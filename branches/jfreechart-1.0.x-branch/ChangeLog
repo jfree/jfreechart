@@ -1,5 +1,10 @@
 2007-10-25  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/renderer/xy/XYSplineAndShapeRenderer.java:
+	Renamed XYSplineRenderer.
+
+2007-10-25  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/renderer/xy/XYSplineAndShapeRenderer.java
 	(drawPrimaryLineAsPath): Check for duplicated control points,
 	(ControlPoint.equals): New method override.
