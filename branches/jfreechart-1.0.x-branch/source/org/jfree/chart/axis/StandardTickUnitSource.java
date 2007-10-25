@@ -35,21 +35,32 @@
  * Changes
  * -------
  * 23-Sep-2003 : Version 1 (DG);
+ * 25-Oct-2007 : Implemented Serializable and equals() method (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 /**
  * A source that can used by the {@link NumberAxis} class to obtain a
- * suitable {@link TickUnit}.
+ * suitable {@link TickUnit}.  Instances of this class are {@link Serializable}
+ * from version 1.0.7 onwards.  Cloning is not supported, because instances
+ * are immutable.
  */
-public class StandardTickUnitSource implements TickUnitSource {
+public class StandardTickUnitSource implements TickUnitSource, Serializable {
 
     /** Constant for log(10.0). */
     private static final double LOG_10_VALUE = Math.log(10.0);
+    
+    /**
+     * Default constructor.
+     */
+    public StandardTickUnitSource() {
+        super();
+    }
     
     /**
      * Returns a tick unit that is larger than the supplied unit.
@@ -93,4 +104,27 @@ public class StandardTickUnitSource implements TickUnitSource {
                 new DecimalFormat("0.0E0"));
     }
     
+    /**
+     * Tests this instance for equality with an arbitrary object.
+     * 
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        return (obj instanceof StandardTickUnitSource);
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        return 0;
+    }
+
 }
