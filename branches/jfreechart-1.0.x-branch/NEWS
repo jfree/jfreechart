@@ -2,14 +2,17 @@ JFreeChart 1.0.7
 ----------------
 ?? October 2007
 
-This release features a new LogAxis class, initial support for minor tick 
-units, a new anchored zooming option for the ChartPanel class, optional simple
-labelling on pie charts, improvements to the "statistical" datasets and 
-underlying data structures, and numerous bug fixes.
+This release features new classes DialPlot and LogAxis (previously in 
+experimental), initial support for minor tick units, a new anchored zooming 
+option for the ChartPanel class, optional simple labelling on pie charts, 
+improvements to the "statistical" datasets and underlying data structures, and 
+numerous bug fixes.
 
 API Adjustments:
 
 - CategoryAxis - added getCategorySeriesMiddle() method;
+- ChartPanel - added defaultDirectorForSaveAs attribute;
+- DialPlot - new class, an alternative to MeterPlot;
 - LogAxis - new class, an alternative to LogarithmicAxis;
 - NumberTick - new constructor that allows specification of the tick type;
 - NumberTickUnit - new constructor to specify the minor tick count;
