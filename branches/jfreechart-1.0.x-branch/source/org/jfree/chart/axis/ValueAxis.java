@@ -1033,6 +1033,7 @@ public abstract class ValueAxis extends Axis
      * @return The default auto range (never <code>null</code>).
      * 
      * @see #setDefaultAutoRange(Range)
+     *
      * @since 1.0.5
      */
     public Range getDefaultAutoRange() {
