@@ -1,5 +1,11 @@
 2007-10-25  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/plot/CategoryPlot.java
+	(getDomainAxisIndex): Added argument check,
+	(getRangeAxisIndex): Likewise.
+	
+2007-10-25  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/axis/StandardTickUnitSource.java:
 	Implemented Serializable,
 	(StandardTickUnitSource): Added explicit constructor,
