@@ -134,6 +134,7 @@
  * 06-Jun-2007 : Fixed coordinates for drawing buffer image (DG);
  * 24-Sep-2007 : Added zoomAroundAnchor flag, and handle clearing of chart
  *               buffer (DG);
+ * 25-Oct-2007 : Added default directory attribute (DG);
  *               
  */
 
@@ -197,14 +198,9 @@ import org.jfree.ui.ExtensionFileFilter;
  * component of the chart.  The chart is redrawn automatically whenever this 
  * notification is received.
  */
-public class ChartPanel extends JPanel 
-                        implements ChartChangeListener,
-                                   ChartProgressListener,
-                                   ActionListener,
-                                   MouseListener,
-                                   MouseMotionListener,
-                                   Printable,
-                                   Serializable {
+public class ChartPanel extends JPanel implements ChartChangeListener,
+        ChartProgressListener, ActionListener, MouseListener, 
+        MouseMotionListener, Printable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 6046366297214274674L;
@@ -392,6 +388,13 @@ public class ChartPanel extends JPanel
     /** Menu item for resetting the zoom (range axis only). */
     private JMenuItem zoomResetRangeMenuItem;
 
+    /**
+     * The default directory for saving charts to file.
+     * 
+     * @since 1.0.7
+     */
+    private File defaultDirectoryForSaveAs;
+    
     /** A flag that controls whether or not file extensions are enforced. */
     private boolean enforceFileExtensions;
 
@@ -432,7 +435,7 @@ public class ChartPanel extends JPanel
     
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources 
-        = ResourceBundle.getBundle("org.jfree.chart.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.LocalizationBundle");
 
     /**
      * Constructs a panel that displays the specified chart.
@@ -586,6 +589,7 @@ public class ChartPanel extends JPanel
         addMouseListener(this);
         addMouseMotionListener(this);
 
+        this.defaultDirectoryForSaveAs = null;
         this.enforceFileExtensions = true;
 
         // initialize ChartPanel-specific tool tip delays with
@@ -1008,12 +1012,43 @@ public class ChartPanel extends JPanel
     protected void setVerticalTraceLine(Line2D line) {
         this.verticalTraceLine = line;   
     }
+    
+    /**
+     * Returns the default directory for the "save as" option.
+     * 
+     * @return The default directory (possibly <code>null</code>).
+     * 
+     * @since 1.0.7
+     */
+    public File getDefaultDirectoryForSaveAs() {
+        return this.defaultDirectoryForSaveAs;
+    }
 
+    /**
+     * Sets the default directory for the "save as" option.  If you set this
+     * to <code>null</code>, the user's default directory will be used.
+     * 
+     * @param directory  the directory (<code>null</code> permitted).
+     * 
+     * @since 1.0.7
+     */
+    public void setDefaultDirectoryForSaveAs(File directory) {
+        if (directory != null) {
+            if (!directory.isDirectory()) {
+                throw new IllegalArgumentException(
+                        "The 'directory' argument is not a directory.");
+            }
+        }
+        this.defaultDirectoryForSaveAs = directory;
+    }
+    
     /**
      * Returns <code>true</code> if file extensions should be enforced, and 
      * <code>false</code> otherwise.
      *
      * @return The flag.
+     * 
+     * @see #setEnforceFileExtensions(boolean)
      */
     public boolean isEnforceFileExtensions() {
         return this.enforceFileExtensions;
@@ -1023,6 +1058,8 @@ public class ChartPanel extends JPanel
      * Sets a flag that controls whether or not file extensions are enforced.
      *
      * @param enforce  the new flag value.
+     * 
+     * @see #isEnforceFileExtensions()
      */
     public void setEnforceFileExtensions(boolean enforce) {
         this.enforceFileExtensions = enforce;
@@ -2174,6 +2211,7 @@ public class ChartPanel extends JPanel
     public void doSaveAs() throws IOException {
 
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(this.defaultDirectoryForSaveAs);
         ExtensionFileFilter filter = new ExtensionFileFilter(
                 localizationResources.getString("PNG_Image_Files"), ".png");
         fileChooser.addChoosableFileFilter(filter);
