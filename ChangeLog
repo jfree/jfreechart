@@ -1,3 +1,13 @@
+2007-10-25  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/ChartPanel.java
+	(defaultDirectoryForSaveAs): New field,
+	(ChartPanel(JFreeChart, int, int, int, int, int, int, boolean, boolean,
+	boolean, boolean, boolean, boolean)): Initialise new field,
+	(getDefaultDirectoryForSaveAs): New method,
+	(setDefaultDirectoryForSaveAs): Likewise,
+	(doSaveAs): Apply default directory.
+
 2007-10-24  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* experimenta/org/jfree/experimental/chart/plot/dial/*.java:
