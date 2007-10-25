@@ -38,6 +38,7 @@
  * --------
  * 25-Jul-2007 : Version 1, contributed by Klaus Rheinwald (DG);
  * 03-Aug-2007 : Added new constructor (KR);
+ * 25-Oct-2007 : Prevent duplicate control points (KR);
  *
  */
 
@@ -83,7 +84,7 @@ public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
     public XYSplineAndShapeRenderer() {
         this(5);
     }
-	
+    
     /**
      * Creates a new renderer with the specified precision.
      * 
@@ -112,7 +113,7 @@ public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
      * Set the resolution of splines and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
-     * @param p	 number of line segments between points (must be > 0).
+     * @param p  number of line segments between points (must be > 0).
      * 
      * @see #getPrecision()
      */
@@ -184,11 +185,13 @@ public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
 
         // collect points
         if (!Double.isNaN(transX1) && !Double.isNaN(transY1)) {
-            this.points.add(new ControlPoint(plot.getOrientation() 
-                    == PlotOrientation.HORIZONTAL ? (float) transY1 
-                    : (float) transX1, plot.getOrientation() 
-                    == PlotOrientation.HORIZONTAL ? (float) transX1 
-                            : (float) transY1));
+            ControlPoint p = new ControlPoint(plot.getOrientation() 
+                                == PlotOrientation.HORIZONTAL ? (float) transY1 
+                                : (float) transX1, plot.getOrientation() 
+                                == PlotOrientation.HORIZONTAL ? (float) transX1 
+                                        : (float) transY1);
+            if( !this.points. contains(p))
+                this.points.add(p);
         }
         if (item == dataset.getItemCount(series) - 1) {
             State s = (State) state;
@@ -334,5 +337,28 @@ public class XYSplineAndShapeRenderer extends XYLineAndShapeRenderer {
             this.x = x;
             this.y = y;
         }
+
+        /**
+         * Tests this point for equality with an arbitrary object.
+         * 
+         * @param obj  the object (<code>null</code> permitted.
+         * 
+         * @return A boolean.
+         */
+        public boolean equals(Object obj) {
+            if (obj == this) {
+                return true;
+            }
+            if (!(obj instanceof ControlPoint)) {
+                return false;
+            }
+            ControlPoint that = (ControlPoint) obj;
+            if (this.x != that.x) {
+                return false;
+            }
+            /*&& y == ((ControlPoint) obj).y*/;
+            return true;
+        }
+
     }
 }
