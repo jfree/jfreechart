@@ -40,6 +40,7 @@
  * 19-Jan-2005 : Added main() method to run JUnit in text mode (DG);
  * 21-Mar-2007 : Added ExtendedCategoryAxisTests (DG);
  * 02-Aug-2007 : Added LogAxisTests and TickUnitsTests (DG);
+ * 25-Oct-2007 : Added StandardTickUnitSourceTests (DG);
  * 
  */
 
@@ -92,6 +93,7 @@ public class AxisPackageTests extends TestCase {
         suite.addTestSuite(QuarterDateFormatTests.class);
         suite.addTestSuite(SegmentedTimelineTests.class);
         suite.addTestSuite(SegmentedTimelineTests2.class);
+        suite.addTestSuite(StandardTickUnitSourceTests.class);
         suite.addTestSuite(SubCategoryAxisTests.class);
         suite.addTestSuite(SymbolAxisTests.class);
         suite.addTestSuite(TickUnitsTests.class);
