@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2005, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,16 @@
  * -------------------
  * SwtPaintCanvas.java
  * -------------------
- * (C) Copyright 2000-2005, by Object Refinery Limited.
+ * (C) Copyright 2000-2007, by Object Refinery Limited.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
- * Contributor(s):
+ * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  * Changes
  * -------
- * 4 Aug 2006 : New class (HP);
+ * 04-Aug-2006 : New class (HP);
+ * 25-Oct-2007 : Fixed Eclipse warnings (DG);
+ * 
  */
 
 package org.jfree.experimental.swt;
@@ -49,8 +51,7 @@ import org.eclipse.swt.widgets.Composite;
 /**
  * A paint canvas.
  */
-public class SWTPaintCanvas extends Canvas
-{
+public class SWTPaintCanvas extends Canvas {
     private Color myColor;
     
     /**
@@ -77,7 +78,7 @@ public class SWTPaintCanvas extends Canvas
             public void paintControl(PaintEvent e) {
                 e.gc.setForeground(e.gc.getDevice().getSystemColor(
                         SWT.COLOR_BLACK));
-                e.gc.setBackground(myColor);
+                e.gc.setBackground(SWTPaintCanvas.this.myColor);
                 e.gc.fillRectangle(getClientArea());
                 e.gc.drawRectangle(getClientArea().x, getClientArea().y, 
                         getClientArea().width - 1, getClientArea().height - 1);
@@ -92,7 +93,7 @@ public class SWTPaintCanvas extends Canvas
      */
     public void setColor(Color color) {
         if (this.myColor != null) {
-            myColor.dispose();
+            this.myColor.dispose();
         }
         //this.myColor = new Color( getDisplay(), color.getRGB() );
         this.myColor = color;
@@ -104,7 +105,7 @@ public class SWTPaintCanvas extends Canvas
      * @return The color.
      */
     public Color getColor() {
-        return myColor;
+        return this.myColor;
     }
     
     /**
@@ -129,6 +130,6 @@ public class SWTPaintCanvas extends Canvas
      * Frees resources.
      */
     public void dispose() {
-        myColor.dispose();
+        this.myColor.dispose();
     }
 }
