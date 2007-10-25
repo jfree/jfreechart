@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
  * in the United States and other countries.]
  *
- * ----------------------------------
- * XYSplineAndShapeRendererTests.java
- * ----------------------------------
+ * --------------------------
+ * XYSplineRendererTests.java
+ * --------------------------
  * (C) Copyright 2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -57,7 +57,7 @@ import org.jfree.chart.renderer.xy.XYSplineRenderer;
 /**
  * Tests for the {@link XYSplineRenderer} class.
  */
-public class XYSplineAndShapeRendererTests extends TestCase {
+public class XYSplineRendererTests extends TestCase {
 
     /**
      * Returns the tests as a test suite.
@@ -65,7 +65,7 @@ public class XYSplineAndShapeRendererTests extends TestCase {
      * @return The test suite.
      */
     public static Test suite() {
-        return new TestSuite(XYSplineAndShapeRendererTests.class);
+        return new TestSuite(XYSplineRendererTests.class);
     }
 
     /**
@@ -73,7 +73,7 @@ public class XYSplineAndShapeRendererTests extends TestCase {
      *
      * @param name  the name of the tests.
      */
-    public XYSplineAndShapeRendererTests(String name) {
+    public XYSplineRendererTests(String name) {
         super(name);
     }
 
