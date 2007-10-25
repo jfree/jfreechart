@@ -192,7 +192,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         this.base = 0.0;
         this.includeBaseInRange = true;
         this.itemMargin = DEFAULT_ITEM_MARGIN;
-        this.drawBarOutline = true;
+        this.drawBarOutline = false;
         this.maximumBarWidth = 1.0;  
             // 100 percent, so it will not apply unless changed
         this.positiveItemLabelPositionFallback = null;
