@@ -148,7 +148,8 @@
  * 07-Jun-2007 : Override drawBackground() for new GradientPaint handling (DG);
  * 10-Jul-2007 : Added getRangeAxisIndex(ValueAxis) method (DG);
  * 24-Sep-2007 : Implemented new zoom methods (DG);
- * 
+ * 25-Oct-2007 : Added some argument checks (DG);
+ *
  */
 
 package org.jfree.chart.plot;
@@ -682,13 +683,19 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * Returns the index of the specified axis, or <code>-1</code> if the axis
      * is not assigned to the plot.
      * 
-     * @param axis  the axis.
+     * @param axis  the axis (<code>null</code> not permitted).
      * 
      * @return The axis index.
+     * 
+     * @see #getDomainAxis(int)
+     * @see #getRangeAxisIndex(ValueAxis)
      * 
      * @since 1.0.3
      */
     public int getDomainAxisIndex(CategoryAxis axis) {
+        if (axis == null) {
+            throw new IllegalArgumentException("Null 'axis' argument.");
+        }
         return this.domainAxes.indexOf(axis);
     }
 
@@ -696,15 +703,19 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * Returns the index of the specified axis, or <code>-1</code> if the axis
      * is not assigned to the plot.
      *
-     * @param axis  the axis.
+     * @param axis  the axis (<code>null</code> not permitted).
      *
      * @return The axis index.
      * 
+     * @see #getRangeAxis(int)
      * @see #getDomainAxisIndex(CategoryAxis)
      * 
      * @since 1.0.7
      */
     public int getRangeAxisIndex(ValueAxis axis) {
+        if (axis == null) {
+            throw new IllegalArgumentException("Null 'axis' argument.");
+        }
         int result = this.rangeAxes.indexOf(axis);
         if (result < 0) { // try the parent plot
             Plot parent = getParent();
