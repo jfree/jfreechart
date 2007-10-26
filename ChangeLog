@@ -1,3 +1,15 @@
+2007-10-26  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/renderer/xy/XYLineAndShapeRenderer.java
+	(linesVisible): Deprecated,
+	(shapesVisible): Likewise,
+	(shapesFilled): Likewise,
+	(getLinesVisible): Likewise,
+	(setLinesVisible): Likewise,
+	(getShapesVisible): Likewise,
+	(setShapesVisible): Likewise,
+	(setShapesFilled): Likewise.
+
 2007-10-25  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/renderer/xy/XYSplineAndShapeRenderer.java:

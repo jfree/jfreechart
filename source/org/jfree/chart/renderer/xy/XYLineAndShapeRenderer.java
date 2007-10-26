@@ -60,6 +60,7 @@
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 08-Jun-2007 : Fix for bug 1731912 where entities are created even for data
  *               items that are not displayed (DG);
+ * 26-Oct-2007 : Deprecated override attributes (DG);
  *
  */
 
@@ -108,7 +109,11 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     /** For serialization. */
     private static final long serialVersionUID = -7435246895986425885L;
     
-    /** A flag that controls whether or not lines are visible for ALL series. */
+    /** 
+     * A flag that controls whether or not lines are visible for ALL series. 
+     * 
+     * @deprecated As of 1.0.7.
+     */
     private Boolean linesVisible;
 
     /** 
@@ -124,7 +129,9 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private transient Shape legendLine;
     
     /** 
-     * A flag that controls whether or not shapes are visible for ALL series. 
+     * A flag that controls whether or not shapes are visible for ALL series.
+     * 
+     * @deprecated As of 1.0.7.
      */
     private Boolean shapesVisible;
 
@@ -137,7 +144,11 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     /** The default value returned by the getShapeVisible() method. */
     private boolean baseShapesVisible;
 
-    /** A flag that controls whether or not shapes are filled for ALL series. */
+    /** 
+     * A flag that controls whether or not shapes are filled for ALL series. 
+     * 
+     * @deprecated As of 1.0.7.
+     */
     private Boolean shapesFilled;
 
     /** 
@@ -274,7 +285,9 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * 
      * @return A flag (possibly <code>null</code>).
      * 
-     * @see #setLinesVisible(Boolean) 
+     * @see #setLinesVisible(Boolean)
+     * 
+     * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public Boolean getLinesVisible() {
         return this.linesVisible;   
@@ -289,6 +302,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @param visible  the flag (<code>null</code> permitted).
      * 
      * @see #getLinesVisible()
+     * 
+     * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public void setLinesVisible(Boolean visible) {
         this.linesVisible = visible;
@@ -303,6 +318,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @param visible  the flag.
      * 
      * @see #getLinesVisible()
+     * 
+     * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public void setLinesVisible(boolean visible) {
         // we use BooleanUtilities here to preserve JRE 1.3.1 compatibility
@@ -436,6 +453,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @return The flag (possibly <code>null</code>).
      * 
      * @see #setShapesVisible(Boolean)
+     * 
+     * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public Boolean getShapesVisible() {
         return this.shapesVisible;    
@@ -448,6 +467,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @param visible  the flag (<code>null</code> permitted).
      * 
      * @see #getShapesVisible()
+     * 
+     * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public void setShapesVisible(Boolean visible) {
         this.shapesVisible = visible;
@@ -461,6 +482,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @param visible  the flag.
      * 
      * @see #getShapesVisible()
+     * 
+     * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public void setShapesVisible(boolean visible) {
         setShapesVisible(BooleanUtilities.valueOf(visible));
@@ -558,14 +581,14 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             return this.baseShapesFilled;   
         }
     }
-
-    // FIXME: Why no getShapesFilled()?  An oversight probably
     
     /**
      * Sets the 'shapes filled' for ALL series and sends a 
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param filled  the flag.
+     * 
+     * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public void setShapesFilled(boolean filled) {
         setShapesFilled(BooleanUtilities.valueOf(filled));
@@ -576,6 +599,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param filled  the flag (<code>null</code> permitted).
+     * 
+     * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public void setShapesFilled(Boolean filled) {
         this.shapesFilled = filled;
@@ -680,6 +705,9 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * Returns <code>true</code> if the renderer should use the fill paint 
      * setting to fill shapes, and <code>false</code> if it should just
      * use the regular paint.
+     * <p>
+     * Refer to <code>XYLineAndShapeRendererDemo2.java</code> to see the
+     * effect of this flag.
      * 
      * @return A boolean.
      * 
@@ -722,6 +750,9 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * Sets the flag that controls whether the outline paint is used to draw 
      * shape outlines, and sends a {@link RendererChangeEvent} to all 
      * registered listeners.
+     * <p>
+     * Refer to <code>XYLineAndShapeRendererDemo2.java</code> to see the
+     * effect of this flag.
      * 
      * @param flag  the flag.
      * 
