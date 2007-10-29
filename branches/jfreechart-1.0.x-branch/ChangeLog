@@ -1,3 +1,8 @@
+2007-10-29  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/plot/dial/SimpleDialFrame.java: 
+	Renamed StandardDialFrame.java.
+
 2007-10-26  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/renderer/xy/XYLineAndShapeRenderer.java
