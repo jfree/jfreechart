@@ -59,7 +59,7 @@ import org.jfree.chart.plot.dial.ArcDialFrame;
 import org.jfree.chart.plot.dial.DialBackground;
 import org.jfree.chart.plot.dial.DialCap;
 import org.jfree.chart.plot.dial.DialPlot;
-import org.jfree.chart.plot.dial.SimpleDialFrame;
+import org.jfree.chart.plot.dial.StandardDialFrame;
 import org.jfree.chart.plot.dial.StandardDialScale;
 
 /**
@@ -133,12 +133,12 @@ public class DialPlotTests extends TestCase implements PlotChangeListener {
         assertTrue(p1.equals(p2));
         
         // frame
-        SimpleDialFrame f1 = new SimpleDialFrame();
+        StandardDialFrame f1 = new StandardDialFrame();
         f1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 
                 4.0f, Color.white));
         p1.setDialFrame(f1);
         assertFalse(p1.equals(p2));
-        SimpleDialFrame f2 = new SimpleDialFrame();
+        StandardDialFrame f2 = new StandardDialFrame();
         f2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 
                 4.0f, Color.white));
         p2.setDialFrame(f2);

@@ -47,7 +47,7 @@ import java.io.Serializable;
 /**
  * A dial frame is the face plate for a dial plot - it is always drawn last.
  * JFreeChart includes a couple of implementations of this interface 
- * ({@link SimpleDialFrame} and {@link ArcDialFrame}).
+ * ({@link StandardDialFrame} and {@link ArcDialFrame}).
  * <br><br>
  * Classes that implement this interface should be {@link Serializable}, 
  * otherwise chart serialization may fail.

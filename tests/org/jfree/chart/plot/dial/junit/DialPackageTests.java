@@ -66,7 +66,7 @@ public class DialPackageTests extends TestCase {
         suite.addTestSuite(DialPointerTests.class);
         suite.addTestSuite(DialTextAnnotationTests.class);
         suite.addTestSuite(DialValueIndicatorTests.class);
-        suite.addTestSuite(SimpleDialFrameTests.class);
+        suite.addTestSuite(StandardDialFrameTests.class);
         suite.addTestSuite(ArcDialFrameTests.class);
         suite.addTestSuite(StandardDialRangeTests.class);
         suite.addTestSuite(StandardDialScaleTests.class);
