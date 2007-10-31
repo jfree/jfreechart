@@ -30,7 +30,7 @@
  * (C) Copyright 2002-2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Thomas Morgner;
  *
  * Changes:
  * --------
@@ -47,23 +47,24 @@
  * 25-Nov-2004 : Small update to the clone() implementation (DG);
  * 24-Feb-2005 : Added methods addValue(Comparable, double) and 
  *               setValue(Comparable, double) for convenience (DG);
- * ------------- JFREECHART 1.0.x -----------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 31-Jul-2006 : Added a clear() method (DG);
  * 01-Aug-2006 : Added argument check to getIndex() method (DG);
  * 30-Apr-2007 : Added insertValue() methods (DG);
- * 03-Oct-2007 : Make removeValue() throw UnknownKeyException (DG);
- *
+ * 31-Oct-2007 : Performance improvements by using separate lists for keys and 
+ *               values (TM);
+ *               
  */
 
 package org.jfree.data;
 
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 
-import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.SortOrder;
 
@@ -79,13 +80,22 @@ public class DefaultKeyedValues implements KeyedValues,
     private static final long serialVersionUID = 8468154364608194797L;
     
     /** Storage for the data. */
-    private List data;
+    private ArrayList keys;
+    private ArrayList values;
+    
+    /** 
+     * Contains (key, Integer) mappings, where the Integer is the index for
+     * the key in the list. 
+     */
+    private HashMap indexMap; 
 
-    /**
+  /**
      * Creates a new collection (initially empty).
      */
     public DefaultKeyedValues() {
-        this.data = new java.util.ArrayList();
+        this.keys = new ArrayList();
+        this.values = new ArrayList();
+        this.indexMap = new HashMap();
     }
 
     /**
@@ -94,7 +104,7 @@ public class DefaultKeyedValues implements KeyedValues,
      * @return The item count.
      */
     public int getItemCount() {
-        return this.data.size();
+        return this.indexMap.size();
     }
 
     /**
@@ -107,12 +117,7 @@ public class DefaultKeyedValues implements KeyedValues,
      * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
      */
     public Number getValue(int item) {
-        Number result = null;
-        KeyedValue kval = (KeyedValue) this.data.get(item);
-        if (kval != null) {
-            result = kval.getValue();
-        }
-        return result;
+        return (Number) this.values.get(item);
     }
 
     /**
@@ -125,12 +130,7 @@ public class DefaultKeyedValues implements KeyedValues,
      * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
      */
     public Comparable getKey(int index) {
-        Comparable result = null;
-        KeyedValue item = (KeyedValue) this.data.get(index);
-        if (item != null) {
-            result = item.getKey();
-        }
-        return result;
+        return (Comparable) this.keys.get(index);
     }
 
     /**
@@ -147,16 +147,11 @@ public class DefaultKeyedValues implements KeyedValues,
         if (key == null) {
             throw new IllegalArgumentException("Null 'key' argument.");
         }
-        int i = 0;
-        Iterator iterator = this.data.iterator();
-        while (iterator.hasNext()) {
-            KeyedValue kv = (KeyedValue) iterator.next();
-            if (kv.getKey().equals(key)) {
-                return i;
-            }
-            i++;
+        final Integer i = (Integer) this.indexMap.get(key);
+        if (i == null) {
+            return -1;  // key not found
         }
-        return -1;  // key not found
+        return i.intValue();
     }
 
     /**
@@ -165,13 +160,7 @@ public class DefaultKeyedValues implements KeyedValues,
      * @return The keys (never <code>null</code>).
      */
     public List getKeys() {
-        List result = new java.util.ArrayList();
-        Iterator iterator = this.data.iterator();
-        while (iterator.hasNext()) {
-            KeyedValue kv = (KeyedValue) iterator.next();
-            result.add(kv.getKey());
-        }
-        return result;
+        return (List) this.keys.clone();
     }
 
     /**
@@ -239,12 +228,13 @@ public class DefaultKeyedValues implements KeyedValues,
         }
         int keyIndex = getIndex(key);
         if (keyIndex >= 0) {
-            DefaultKeyedValue kv = (DefaultKeyedValue) this.data.get(keyIndex);
-            kv.setValue(value);
+            this.keys.set(keyIndex, key);
+            this.values.set(keyIndex, value);
         }
         else {
-            KeyedValue kv = new DefaultKeyedValue(key, value);
-            this.data.add(kv);
+            this.keys.add(key);
+            this.values.add(value);
+            this.indexMap.put(key, new Integer(this.keys.size() - 1));
         }
     }
     
@@ -275,22 +265,38 @@ public class DefaultKeyedValues implements KeyedValues,
      * @since 1.0.6
      */
     public void insertValue(int position, Comparable key, Number value) {
-        if (position < 0 || position > this.data.size()) {
+        if (position < 0 || position > getItemCount()) {
             throw new IllegalArgumentException("'position' out of bounds.");
         }
         if (key == null) {
             throw new IllegalArgumentException("Null 'key' argument.");
         }
         int pos = getIndex(key);
-        if (pos >= 0) {
-            this.data.remove(pos);
-        }
-        KeyedValue kv = new DefaultKeyedValue(key, value);
-        if (position <= this.data.size()) {
-            this.data.add(position, kv);
+        if (pos == position) {
+            this.keys.set(pos, key);
+            this.values.set(pos, value);
         }
         else {
-            this.data.add(kv);
+            if (pos >= 0) {
+                this.keys.remove(pos);
+                this.values.remove(pos);
+            }
+          
+            this.keys.add(position, key);
+            this.values.add(position, value);
+            rebuildIndex();
+        }
+    }
+
+    /**
+     * Rebuilds the key to indexed-position mapping after an positioned insert
+     * or a remove operation.
+     */
+    private void rebuildIndex () {
+        this.indexMap.clear();
+        for (int i = 0; i < this.keys.size(); i++) {
+            final Object key = this.keys.get(i);
+            this.indexMap.put(key, new Integer(i));
         }
     }
 
@@ -304,12 +310,17 @@ public class DefaultKeyedValues implements KeyedValues,
      *     the specified range.
      */
     public void removeValue(int index) {
-        this.data.remove(index);
+        this.keys.remove(index);
+        this.values.remove(index);
+
+        // did we remove the last item? If not, then rebuild the index ..
+        if (index < this.keys.size()) {
+            rebuildIndex();
+        }
     }
 
     /**
-     * Removes a value from the collection.  If there is no item with the 
-     * specified key, this method does nothing.
+     * Removes a value from the collection.
      *
      * @param key  the item key (<code>null</code> not permitted).
      * 
@@ -332,7 +343,9 @@ public class DefaultKeyedValues implements KeyedValues,
      * @since 1.0.2
      */
     public void clear() {
-        this.data.clear();
+        this.keys.clear();
+        this.values.clear();
+        this.indexMap.clear();
     }
 
     /**
@@ -341,9 +354,23 @@ public class DefaultKeyedValues implements KeyedValues,
      * @param order  the sort order (<code>null</code> not permitted).
      */
     public void sortByKeys(SortOrder order) {
+        final int size = this.keys.size();
+        final DefaultKeyedValue[] data = new DefaultKeyedValue[size];
+
+        for (int i = 0; i < size; i++) {
+            data[i] = new DefaultKeyedValue((Comparable) this.keys.get(i), 
+                    (Number) this.values.get(i));
+        }
+
         Comparator comparator = new KeyedValueComparator(
                 KeyedValueComparatorType.BY_KEY, order);
-        Collections.sort(this.data, comparator);
+        Arrays.sort(data, comparator);
+        clear();
+
+        for (int i = 0; i < data.length; i++) {
+            final DefaultKeyedValue value = data[i];
+            addValue(value.getKey(), value.getValue());
+        }
     }
 
     /**
@@ -354,9 +381,22 @@ public class DefaultKeyedValues implements KeyedValues,
      * @param order  the sort order (<code>null</code> not permitted).
      */
     public void sortByValues(SortOrder order) {
+        final int size = this.keys.size();
+        final DefaultKeyedValue[] data = new DefaultKeyedValue[size];
+        for (int i = 0; i < size; i++) {
+            data[i] = new DefaultKeyedValue((Comparable) this.keys.get(i), 
+                    (Number) this.values.get(i));
+        }
+
         Comparator comparator = new KeyedValueComparator(
                 KeyedValueComparatorType.BY_VALUE, order);
-        Collections.sort(this.data, comparator);
+        Arrays.sort(data, comparator);
+
+        clear();
+        for (int i = 0; i < data.length; i++) {
+            final DefaultKeyedValue value = data[i];
+            addValue(value.getKey(), value.getValue());
+        }
     }
 
     /**
@@ -409,7 +449,7 @@ public class DefaultKeyedValues implements KeyedValues,
      * @return A hash code.
      */
     public int hashCode() {
-        return (this.data != null ? this.data.hashCode() : 0);
+        return (this.keys != null ? this.keys.hashCode() : 0);
     }
 
     /**
@@ -422,8 +462,10 @@ public class DefaultKeyedValues implements KeyedValues,
      */
     public Object clone() throws CloneNotSupportedException {
         DefaultKeyedValues clone = (DefaultKeyedValues) super.clone();
-        clone.data = (List) ObjectUtilities.deepClone(this.data);
-        return clone;    
+        clone.keys = (ArrayList) this.keys.clone();
+        clone.values = (ArrayList) this.values.clone();
+        clone.indexMap = (HashMap) this.indexMap.clone();
+        return clone;
     }
     
 }
