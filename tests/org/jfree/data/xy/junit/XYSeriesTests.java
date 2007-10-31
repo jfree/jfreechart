@@ -37,6 +37,7 @@
  * 23-Dec-2003 : Version 1 (DG);
  * 15-Jan-2007 : Added tests for new toArray() method (DG);
  * 30-Jan-2007 : Fixed some code that won't compile with Java 1.4 (DG);
+ * 31-Oct-2007 : New hashCode() test (DG);
  *
  */
 
@@ -99,6 +100,36 @@ public class XYSeriesTests extends TestCase {
         s2.setKey("Series X");
         assertTrue(s1.equals(s2));
 
+    }
+
+    /**
+     * Some simple checks for the hashCode() method.
+     */
+    public void testHashCode() {
+        XYSeries s1 = new XYSeries("Test");
+        XYSeries s2 = new XYSeries("Test");
+        assertEquals(s1, s2);
+        assertEquals(s1.hashCode(), s2.hashCode());
+        
+        s1.add(1.0, 500.0);
+        s2.add(1.0, 500.0);
+        assertEquals(s1, s2);
+        assertEquals(s1.hashCode(), s2.hashCode());
+        
+        s1.add(2.0, null);
+        s2.add(2.0, null);
+        assertEquals(s1, s2);
+        assertEquals(s1.hashCode(), s2.hashCode());
+        
+        s1.add(5.0, 111.0);
+        s2.add(5.0, 111.0);
+        assertEquals(s1, s2);
+        assertEquals(s1.hashCode(), s2.hashCode());
+
+        s1.add(9.0, 1.0);
+        s2.add(9.0, 1.0);
+        assertEquals(s1, s2);
+        assertEquals(s1.hashCode(), s2.hashCode());
     }
 
     /**

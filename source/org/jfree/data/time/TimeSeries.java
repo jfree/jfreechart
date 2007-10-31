@@ -70,6 +70,7 @@
  *               1550045 (DG);
  * 22-Mar-2007 : Simplified getDataItem(RegularTimePeriod) - see patch 1685500 
  *               by Nick Guenther (DG);
+ * 31-Oct-2007 : Implemented faster hashCode() (DG);
  * 
  */
 
@@ -1002,12 +1003,27 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @return The hashcode
      */
     public int hashCode() {
-        int result;
-        result = (this.domain != null ? this.domain.hashCode() : 0);
+        int result = super.hashCode();
+        result = 29 * result + (this.domain != null ? this.domain.hashCode() 
+                : 0);
         result = 29 * result + (this.range != null ? this.range.hashCode() : 0);
         result = 29 * result + (this.timePeriodClass != null 
-                    ? this.timePeriodClass.hashCode() : 0);
-        result = 29 * result + this.data.hashCode();
+                ? this.timePeriodClass.hashCode() : 0);
+        // it is too slow to look at every data item, so let's just look at
+        // the first, middle and last items...
+        int count = getItemCount();
+        if (count > 0) {
+            TimeSeriesDataItem item = getDataItem(0);
+            result = 29 * result + item.hashCode();
+        }
+        if (count > 1) {
+            TimeSeriesDataItem item = getDataItem(count - 1);
+            result = 29 * result + item.hashCode();
+        }
+        if (count > 2) {
+            TimeSeriesDataItem item = getDataItem(count / 2);
+            result = 29 * result + item.hashCode();
+        }
         result = 29 * result + this.maximumItemCount;
         result = 29 * result + (int) this.maximumItemAge;
         return result;
