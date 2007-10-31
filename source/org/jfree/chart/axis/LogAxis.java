@@ -628,14 +628,16 @@ public class LogAxis extends ValueAxis {
         // start with the current tick unit...
         TickUnitSource tickUnits = getStandardTickUnits();
         TickUnit unit1 = tickUnits.getCeilingTickUnit(getTickUnit());
-        double unit1Width = exponentLengthToJava2D(unit1.getSize(), dataArea, edge);
+        double unit1Width = exponentLengthToJava2D(unit1.getSize(), dataArea, 
+                edge);
 
         // then extrapolate...
         double guess = (tickLabelWidth / unit1Width) * unit1.getSize();
 
         NumberTickUnit unit2 = (NumberTickUnit) 
                 tickUnits.getCeilingTickUnit(guess);
-        double unit2Width = exponentLengthToJava2D(unit2.getSize(), dataArea, edge);
+        double unit2Width = exponentLengthToJava2D(unit2.getSize(), dataArea, 
+                edge);
 
         tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit2);
         if (tickLabelWidth > unit2Width) {
