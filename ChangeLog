@@ -1,5 +1,28 @@
 2007-10-31  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/data/DefaultKeyedValues.java
+	(data): Removed,
+	(keys): New field,
+	(values): Likewise,
+	(indexMap): New field,
+	(DefaultKeyedValues): Initialise new fields,
+	(getItemCount): Use new data fields,
+	(getValue(int)): Likewise,
+	(getKey(int)): Likewise,
+	(getIndex(Comparable)): Likewise,
+	(getKeys): Likewise,
+	(setValue(Comparable, Number)): Likewise,
+	(insertValue): Likewise,
+	(rebuildIndex): Likewise,
+	(removeValue): Likewise,
+	(clear): Likewise,
+	(sortByKeys): Likewise,
+	(sortByValue): Likewise,
+	(hashCode): Likewise,
+	(clone): Likewise.
+	
+2007-10-31  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/data/ComparableObjectSeries.java
 	(hashCode): Faster implementation,
 	* source/org/jfree/data/time/TimeSeries.java
