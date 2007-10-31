@@ -34,7 +34,8 @@
  *
  * Changes
  * -------
- * 19-Oct-2006 : New class, based on XYDataItem (DG);
+ * 19-Oct-2006 : New class (DG);
+ * 31-Oct-2007 : Implemented faster hashCode() (DG);
  *
  */
 
@@ -419,7 +420,21 @@ public class ComparableObjectSeries extends Series
      */
     public int hashCode() {
         int result = super.hashCode();
-        result = 29 * result + (this.data != null ? this.data.hashCode() : 0);
+        // it is too slow to look at every data item, so let's just look at
+        // the first, middle and last items...
+        int count = getItemCount();
+        if (count > 0) {
+            ComparableObjectItem item = getDataItem(0);
+            result = 29 * result + item.hashCode();
+        }
+        if (count > 1) {
+            ComparableObjectItem item = getDataItem(count - 1);
+            result = 29 * result + item.hashCode();
+        }
+        if (count > 2) {
+            ComparableObjectItem item = getDataItem(count / 2);
+            result = 29 * result + item.hashCode();
+        }
         result = 29 * result + this.maximumItemCount;
         result = 29 * result + (this.autoSort ? 1 : 0);
         result = 29 * result + (this.allowDuplicateXValues ? 1 : 0);
