@@ -41,6 +41,7 @@
  *                   Nicolas Brodu;
  *                   Eduardo Ramalho;
  *                   Sergei Ivanov;
+ *                   Richard West;
  *
  * Changes (from 21-Jun-2001)
  * --------------------------
@@ -187,6 +188,8 @@
  *               fillBackground() for handling GradientPaint (DG);
  * 24-Sep-2007 : Added new zoom methods (DG);
  * 26-Sep-2007 : Include index value in IllegalArgumentExceptions (DG);
+ * 05-Nov-2007 : Applied patch 1823697, by Richard West, for removal of domain
+ *               and range markers (DG);
  *
  */
 
@@ -2076,6 +2079,51 @@ public class XYPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
+     * Adds a marker for a specific dataset/renderer and sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     * <P>
+     * Typically a marker will be drawn by the renderer as a line perpendicular
+     * to the domain axis (that the renderer is mapped to), however this is
+     * entirely up to the renderer.
+     *
+     * @param index  the dataset/renderer index.
+     * @param marker  the marker.
+     * @param layer  the layer (foreground or background).
+     * 
+     * @see #clearDomainMarkers(int)
+     * @see #addRangeMarker(int, Marker, Layer)
+     */
+    public void addDomainMarker(int index, Marker marker, Layer layer) {
+        if (marker == null) {
+            throw new IllegalArgumentException("Null 'marker' not permitted.");
+        }
+        if (layer == null) {
+            throw new IllegalArgumentException("Null 'layer' not permitted.");
+        }
+        Collection markers;
+        if (layer == Layer.FOREGROUND) {
+            markers = (Collection) this.foregroundDomainMarkers.get(
+                    new Integer(index));
+            if (markers == null) {
+                markers = new java.util.ArrayList();
+                this.foregroundDomainMarkers.put(new Integer(index), markers);
+            }
+            markers.add(marker);
+        }
+        else if (layer == Layer.BACKGROUND) {
+            markers = (Collection) this.backgroundDomainMarkers.get(
+                    new Integer(index));
+            if (markers == null) {
+                markers = new java.util.ArrayList();
+                this.backgroundDomainMarkers.put(new Integer(index), markers);
+            }
+            markers.add(marker);
+        }
+        marker.addChangeListener(this);
+        notifyListeners(new PlotChangeEvent(this));
+    }
+
+    /**
      * Clears all the (foreground and background) domain markers and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      * 
@@ -2141,50 +2189,66 @@ public class XYPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Adds a marker for a specific dataset/renderer and sends a 
-     * {@link PlotChangeEvent} to all registered listeners.
-     * <P>
-     * Typically a marker will be drawn by the renderer as a line perpendicular
-     * to the domain axis (that the renderer is mapped to), however this is
-     * entirely up to the renderer.
+     * Removes a marker for the domain axis and sends a {@link PlotChangeEvent} 
+     * to all registered listeners.
      *
-     * @param index  the dataset/renderer index.
      * @param marker  the marker.
-     * @param layer  the layer (foreground or background).
-     * 
-     * @see #clearDomainMarkers(int)
-     * @see #addRangeMarker(int, Marker, Layer)
+     *
+     * @return A boolean indicating whether or not the marker was actually 
+     *         removed.
+     *
+     * @since 1.0.7
      */
-    public void addDomainMarker(int index, Marker marker, Layer layer) {
-        if (marker == null) {
-            throw new IllegalArgumentException("Null 'marker' not permitted.");
-        }
-        if (layer == null) {
-            throw new IllegalArgumentException("Null 'layer' not permitted.");
-        }
-        Collection markers;
-        if (layer == Layer.FOREGROUND) {
-            markers = (Collection) this.foregroundDomainMarkers.get(
-                    new Integer(index));
-            if (markers == null) {
-                markers = new java.util.ArrayList();
-                this.foregroundDomainMarkers.put(new Integer(index), markers);
-            }
-            markers.add(marker);
-        }
-        else if (layer == Layer.BACKGROUND) {
-            markers = (Collection) this.backgroundDomainMarkers.get(
-                    new Integer(index));
-            if (markers == null) {
-                markers = new java.util.ArrayList();
-                this.backgroundDomainMarkers.put(new Integer(index), markers);
-            }
-            markers.add(marker);
-        }
-        marker.addChangeListener(this);
-        notifyListeners(new PlotChangeEvent(this));
+    public boolean removeDomainMarker(Marker marker) {
+        return removeDomainMarker(marker, Layer.FOREGROUND);
     }
 
+    /**
+     * Removes a marker for the domain axis in the specified layer and sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param marker the marker (<code>null</code> not permitted).
+     * @param layer the layer (foreground or background).
+     *
+     * @return A boolean indicating whether or not the marker was actually 
+     *         removed.
+     *
+     * @since 1.0.7
+     */
+    public boolean removeDomainMarker(Marker marker, Layer layer) {
+        return removeDomainMarker(0, marker, layer);
+    }
+
+    /**
+     * Removes a marker for a specific dataset/renderer and sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param index the dataset/renderer index.
+     * @param marker the marker.
+     * @param layer the layer (foreground or background).
+     *
+     * @return A boolean indicating whether or not the marker was actually 
+     *         removed.
+     *
+     * @since 1.0.7
+     */
+    public boolean removeDomainMarker(int index, Marker marker, Layer layer) {
+        ArrayList markers;
+        if (layer == Layer.FOREGROUND) {
+            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
+                    index));
+        }
+        else {
+            markers = (ArrayList)this.backgroundDomainMarkers.get(new Integer(
+                    index));
+        }
+        boolean removed = markers.remove(marker);
+        if (removed) {
+            notifyListeners(new PlotChangeEvent(this));
+        }
+        return removed;
+    }
+    
     /**
      * Adds a marker for the range axis and sends a {@link PlotChangeEvent} to
      * all registered listeners.
@@ -2315,6 +2379,71 @@ public class XYPlot extends Plot implements ValueAxisPlot,
             }
         }
         notifyListeners(new PlotChangeEvent(this));
+    }
+
+    /**
+     * Removes a marker for the range axis and sends a {@link PlotChangeEvent} 
+     * to all registered listeners.
+     *
+     * @param marker the marker.
+     *
+     * @return A boolean indicating whether or not the marker was actually 
+     *         removed.
+     *
+     * @since 1.0.7
+     */
+    public boolean removeRangeMarker(Marker marker) {
+        return removeRangeMarker(marker, Layer.FOREGROUND);
+    }
+
+    /**
+     * Removes a marker for the range axis in the specified layer and sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param marker the marker (<code>null</code> not permitted).
+     * @param layer the layer (foreground or background).
+     *
+     * @return A boolean indicating whether or not the marker was actually 
+     *         removed.
+     *
+     * @since 1.0.7
+     */
+    public boolean removeRangeMarker(Marker marker, Layer layer) {
+        return removeRangeMarker(0, marker, layer);
+    }
+
+    /**
+     * Removes a marker for a specific dataset/renderer and sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param index the dataset/renderer index.
+     * @param marker the marker.
+     * @param layer the layer (foreground or background).
+     *
+     * @return A boolean indicating whether or not the marker was actually 
+     *         removed.
+     *
+     * @since 1.0.7
+     */
+    public boolean removeRangeMarker(int index, Marker marker, Layer layer) {
+        if (marker == null) {
+            throw new IllegalArgumentException("Null 'marker' argument.");
+        }
+        ArrayList markers;
+        if (layer == Layer.FOREGROUND) {
+            markers = (ArrayList)this.foregroundRangeMarkers.get(new Integer(
+                    index));
+        }
+        else {
+            markers = (ArrayList)this.backgroundRangeMarkers.get(new Integer(
+                    index));
+        }
+
+        boolean removed = markers.remove(marker);
+        if (removed) {
+            notifyListeners(new PlotChangeEvent(this));
+        }
+        return removed;
     }
 
     /**
