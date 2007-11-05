@@ -11,6 +11,7 @@ numerous bug fixes.
 API Adjustments:
 
 - CategoryAxis - added getCategorySeriesMiddle() method;
+- CategoryPlot - added methods to remove markers;
 - ChartPanel - added defaultDirectorForSaveAs attribute;
 - DialPlot - new class, an alternative to MeterPlot;
 - LogAxis - new class, an alternative to LogarithmicAxis;

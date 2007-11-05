@@ -1,3 +1,13 @@
+2007-11-05  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/plot/CategoryPlot.java
+	(removeDomainMarker(Marker)): New method,
+	(removeDomainMarker(Marker, Layer)): Likewise,
+	(removeDomainMarker(int, Marker, Layer)): Likewise,
+	(removeRangeMarker(Marker)): New method,
+	(removeRangeMarker(Marker, Layer)): Likewise,
+	(removeRangeMarker(int, Marker, Layer)): Likewise.
+
 2007-10-31  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/data/DefaultKeyedValues.java
