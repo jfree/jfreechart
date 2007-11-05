@@ -132,7 +132,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @param name  the series name (<code>null</code> not permitted).
      */
-    public TimeSeries(String name) {
+    public TimeSeries(Comparable name) {
         this(name, DEFAULT_DOMAIN_DESCRIPTION, DEFAULT_RANGE_DESCRIPTION, 
                 Day.class);
     }
@@ -145,7 +145,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @param timePeriodClass  the type of time period (<code>null</code> not 
      *                         permitted).
      */
-    public TimeSeries(String name, Class timePeriodClass) {
+    public TimeSeries(Comparable name, Class timePeriodClass) {
         this(name, DEFAULT_DOMAIN_DESCRIPTION, DEFAULT_RANGE_DESCRIPTION, 
                 timePeriodClass);
     }
@@ -163,7 +163,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @param timePeriodClass  the type of time period (<code>null</code> not 
      *                         permitted).
      */
-    public TimeSeries(String name, String domain, String range, 
+    public TimeSeries(Comparable name, String domain, String range, 
                       Class timePeriodClass) {
         super(name);
         this.domain = domain;
