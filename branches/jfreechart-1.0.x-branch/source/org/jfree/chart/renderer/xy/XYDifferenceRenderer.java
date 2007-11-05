@@ -69,6 +69,7 @@
  * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
  * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
+ * 05-Nov-2007 : Draw item labels if visible (RW);
  * 
  */
 
@@ -923,6 +924,12 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
             XYItemEntity l_entity = new XYItemEntity(l_entityArea, x_dataset, 
                     x_series, x_item, l_tip, l_url);
             l_entities.add(l_entity);
+        }
+
+        // draw the item label if there is one...
+        if (isItemLabelVisible(x_series, x_item)) {
+            drawItemLabel(x_graphics, l_orientation, x_dataset, x_series,
+                          x_item, l_x1, l_y1, (l_y1 < 0.0));
         }
 
         int l_domainAxisIndex = x_plot.getDomainAxisIndex(x_domainAxis);
