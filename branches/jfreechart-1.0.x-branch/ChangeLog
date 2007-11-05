@@ -1,4 +1,11 @@
 2007-11-05  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/data/time/TimeSeries.java
+	(TimeSeries(String)): Changed first argument to Comparable,
+	(TimeSeries(String, Class)): Likewise,
+	(TimeSeries(String, String, String, Class)): Likewise.
+
+2007-11-05  David Gilbert  <david.gilbert@object-refinery.com>
 	
 	* source/org/jfree/chart/plot/XYPlot.java
 	(setFixedDomainAxisSpace): Fire change event,
