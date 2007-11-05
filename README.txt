@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.7  *
 *******************************
 
-?? October 2007
+?? November 2007
 
 (C)opyright 2000-2007, by Object Refinery Limited and Contributors.
 
