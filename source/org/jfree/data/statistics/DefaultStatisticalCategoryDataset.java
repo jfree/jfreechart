@@ -307,6 +307,8 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * Returns the number of rows in the table.
      *
      * @return The row count.
+     * 
+     * @see #getColumnCount()
      */
     public int getRowCount() {
         return this.data.getRowCount();
@@ -316,6 +318,8 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * Returns the number of columns in the table.
      *
      * @return The column count.
+     * 
+     * @see #getRowCount()
      */
     public int getColumnCount() {
         return this.data.getColumnCount();
@@ -468,7 +472,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * Removes a row from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param rowKey  the row key.
+     * @param rowKey  the row key (<code>null</code> not permitted).
      * 
      * @see #removeColumn(Comparable)
      * 
@@ -500,7 +504,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param columnKey  the column key.
+     * @param columnKey  the column key (<code>null</code> not permitted).
      * 
      * @see #removeRow(Comparable)
      * 
@@ -626,6 +630,8 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      *                         y-interval is taken into account.
      * 
      * @return The minimum value.
+     * 
+     * @see #getRangeUpperBound(boolean)
      */
     public double getRangeLowerBound(boolean includeInterval) {
         if (includeInterval) {
@@ -643,6 +649,8 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      *                         y-interval is taken into account.
      * 
      * @return The maximum value.
+     * 
+     * @see #getRangeLowerBound(boolean)
      */
     public double getRangeUpperBound(boolean includeInterval) {
         if (includeInterval) {
