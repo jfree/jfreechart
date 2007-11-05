@@ -2079,51 +2079,6 @@ public class XYPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Adds a marker for a specific dataset/renderer and sends a 
-     * {@link PlotChangeEvent} to all registered listeners.
-     * <P>
-     * Typically a marker will be drawn by the renderer as a line perpendicular
-     * to the domain axis (that the renderer is mapped to), however this is
-     * entirely up to the renderer.
-     *
-     * @param index  the dataset/renderer index.
-     * @param marker  the marker.
-     * @param layer  the layer (foreground or background).
-     * 
-     * @see #clearDomainMarkers(int)
-     * @see #addRangeMarker(int, Marker, Layer)
-     */
-    public void addDomainMarker(int index, Marker marker, Layer layer) {
-        if (marker == null) {
-            throw new IllegalArgumentException("Null 'marker' not permitted.");
-        }
-        if (layer == null) {
-            throw new IllegalArgumentException("Null 'layer' not permitted.");
-        }
-        Collection markers;
-        if (layer == Layer.FOREGROUND) {
-            markers = (Collection) this.foregroundDomainMarkers.get(
-                    new Integer(index));
-            if (markers == null) {
-                markers = new java.util.ArrayList();
-                this.foregroundDomainMarkers.put(new Integer(index), markers);
-            }
-            markers.add(marker);
-        }
-        else if (layer == Layer.BACKGROUND) {
-            markers = (Collection) this.backgroundDomainMarkers.get(
-                    new Integer(index));
-            if (markers == null) {
-                markers = new java.util.ArrayList();
-                this.backgroundDomainMarkers.put(new Integer(index), markers);
-            }
-            markers.add(marker);
-        }
-        marker.addChangeListener(this);
-        notifyListeners(new PlotChangeEvent(this));
-    }
-
-    /**
      * Clears all the (foreground and background) domain markers and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      * 
@@ -2185,6 +2140,51 @@ public class XYPlot extends Plot implements ValueAxisPlot,
                 markers.clear();
             }
         }
+        notifyListeners(new PlotChangeEvent(this));
+    }
+
+    /**
+     * Adds a marker for a specific dataset/renderer and sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     * <P>
+     * Typically a marker will be drawn by the renderer as a line perpendicular
+     * to the domain axis (that the renderer is mapped to), however this is
+     * entirely up to the renderer.
+     *
+     * @param index  the dataset/renderer index.
+     * @param marker  the marker.
+     * @param layer  the layer (foreground or background).
+     * 
+     * @see #clearDomainMarkers(int)
+     * @see #addRangeMarker(int, Marker, Layer)
+     */
+    public void addDomainMarker(int index, Marker marker, Layer layer) {
+        if (marker == null) {
+            throw new IllegalArgumentException("Null 'marker' not permitted.");
+        }
+        if (layer == null) {
+            throw new IllegalArgumentException("Null 'layer' not permitted.");
+        }
+        Collection markers;
+        if (layer == Layer.FOREGROUND) {
+            markers = (Collection) this.foregroundDomainMarkers.get(
+                    new Integer(index));
+            if (markers == null) {
+                markers = new java.util.ArrayList();
+                this.foregroundDomainMarkers.put(new Integer(index), markers);
+            }
+            markers.add(marker);
+        }
+        else if (layer == Layer.BACKGROUND) {
+            markers = (Collection) this.backgroundDomainMarkers.get(
+                    new Integer(index));
+            if (markers == null) {
+                markers = new java.util.ArrayList();
+                this.backgroundDomainMarkers.put(new Integer(index), markers);
+            }
+            markers.add(marker);
+        }
+        marker.addChangeListener(this);
         notifyListeners(new PlotChangeEvent(this));
     }
 
@@ -3323,6 +3323,8 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      * @param g2  the graphics device.
      * @param dataArea  the data area.
      * @param ticks  the ticks.
+     * 
+     * @see #drawRangeGridlines(Graphics2D, Rectangle2D, List)
      */
     protected void drawDomainGridlines(Graphics2D g2, Rectangle2D dataArea,
                                        List ticks) {
@@ -3354,6 +3356,8 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      * @param g2  the graphics device.
      * @param area  the data area.
      * @param ticks  the ticks.
+     * 
+     * @see #drawDomainGridlines(Graphics2D, Rectangle2D, List)
      */
     protected void drawRangeGridlines(Graphics2D g2, Rectangle2D area,
                                       List ticks) {
@@ -4264,7 +4268,8 @@ public class XYPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the fixed domain axis space.
+     * Sets the fixed domain axis space and sends a {@link PlotChangeEvent} to
+     * all registered listeners.
      *
      * @param space  the space (<code>null</code> permitted).
      * 
@@ -4272,7 +4277,7 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      */
     public void setFixedDomainAxisSpace(AxisSpace space) {
         this.fixedDomainAxisSpace = space;
-        // TODO: notify listeners?
+        notifyListeners(new PlotChangeEvent(this));
     }
 
     /**
@@ -4287,7 +4292,8 @@ public class XYPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the fixed range axis space.
+     * Sets the fixed range axis space and sends a {@link PlotChangeEvent} to
+     * all registered listeners.
      *
      * @param space  the space (<code>null</code> permitted).
      * 
@@ -4295,7 +4301,7 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      */
     public void setFixedRangeAxisSpace(AxisSpace space) {
         this.fixedRangeAxisSpace = space;
-        // TODO: notify listeners?
+        notifyListeners(new PlotChangeEvent(this));
     }
 
     /**

@@ -1,4 +1,10 @@
 2007-11-05  David Gilbert  <david.gilbert@object-refinery.com>
+	
+	* source/org/jfree/chart/plot/XYPlot.java
+	(setFixedDomainAxisSpace): Fire change event,
+	(setFixedRangeAxisSpace): Likewise.
+
+2007-11-05  David Gilbert  <david.gilbert@object-refinery.com>
 
 	Patch 1823724 by Richard West:
 	* source/org/jfree/chart/renderer/xy/XYDifferenceRenderer.java
