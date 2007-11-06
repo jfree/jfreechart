@@ -344,7 +344,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if cloning is not supported.
      */
     public Object clone() throws CloneNotSupportedException {
-        Object clone = (PeriodAxisLabelInfo) super.clone();
+        PeriodAxisLabelInfo clone = (PeriodAxisLabelInfo) super.clone();
         return clone;
     }
     
