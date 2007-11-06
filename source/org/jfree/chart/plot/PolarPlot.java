@@ -1146,7 +1146,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             this.axis.resizeRange(factor, anchorX);
         }
         else {
-            axis.resizeRange(factor);
+            this.axis.resizeRange(factor);
         }
         
     }
