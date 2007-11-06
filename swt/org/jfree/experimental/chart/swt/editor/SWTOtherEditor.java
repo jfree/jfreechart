@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * SWTOtherEditor.java
  * -------------------
- * (C) Copyright 2006, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -82,8 +82,7 @@ class SWTOtherEditor extends Composite {
      * @param style  the style.
      * @param chart  the chart.
      */
-    public SWTOtherEditor(Composite parent, int style, JFreeChart chart)
-    {
+    public SWTOtherEditor(Composite parent, int style, JFreeChart chart) {
         super(parent, style);
         FillLayout layout = new FillLayout();
         layout.marginHeight = layout.marginWidth = 4;
@@ -94,20 +93,21 @@ class SWTOtherEditor extends Composite {
         general.setText(localizationResources.getString("General"));
         
         // row 1: antialiasing
-        antialias = new Button(general, SWT.CHECK);
-        antialias.setText(localizationResources.getString("Draw_anti-aliased"));
-        antialias.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false,
-                3, 1));
-        antialias.setSelection(chart.getAntiAlias());
+        this.antialias = new Button(general, SWT.CHECK);
+        this.antialias.setText(localizationResources.getString(
+                "Draw_anti-aliased"));
+        this.antialias.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, 
+                false, 3, 1));
+        this.antialias.setSelection(chart.getAntiAlias());
         
         //row 2: background paint for the chart
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Background_paint"));
-        backgroundPaintCanvas = new SWTPaintCanvas(general, SWT.NONE, 
+        this.backgroundPaintCanvas = new SWTPaintCanvas(general, SWT.NONE, 
                 SWTUtils.toSwtColor(getDisplay(), chart.getBackgroundPaint()));
         GridData bgGridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
         bgGridData.heightHint = 20;
-        backgroundPaintCanvas.setLayoutData(bgGridData);
+        this.backgroundPaintCanvas.setLayoutData(bgGridData);
         Button selectBgPaint = new Button(general, SWT.PUSH);
         selectBgPaint.setText(localizationResources.getString("Select..."));
         selectBgPaint.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false,
@@ -118,10 +118,11 @@ class SWTOtherEditor extends Composite {
                         ColorDialog dlg = new ColorDialog(getShell());
                         dlg.setText(localizationResources.getString(
                                 "Background_paint"));
-                        dlg.setRGB(backgroundPaintCanvas.getColor().getRGB());
+                        dlg.setRGB(SWTOtherEditor.this.backgroundPaintCanvas
+                                .getColor().getRGB());
                         RGB rgb = dlg.open();
                         if (rgb != null) {
-                            backgroundPaintCanvas.setColor(
+                            SWTOtherEditor.this.backgroundPaintCanvas.setColor(
                                     new Color(getDisplay(), rgb));
                         }
                     }
