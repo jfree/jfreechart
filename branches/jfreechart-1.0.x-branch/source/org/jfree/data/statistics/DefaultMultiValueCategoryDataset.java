@@ -35,7 +35,7 @@
  * Changes
  * -------
  * 08-Oct-2007 : Version 1, see patch 1780779 (DG);
- * 
+ * 06-Nov-2007 : Return EMPTY_LIST not null from getValues() (DG);
  */
 
 package org.jfree.data.statistics;
@@ -172,7 +172,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
             return Collections.unmodifiableList(values);
         }
         else {
-            return null;
+            return Collections.EMPTY_LIST;
         }
     }
 
