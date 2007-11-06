@@ -153,10 +153,8 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
                 this.maximumRangeValue = item.getMaxRegularValue();
             }
         }
-        this.rangeBounds = new Range(
-            this.minimumRangeValue.doubleValue(), 
-            this.maximumRangeValue.doubleValue()
-        );
+        this.rangeBounds = new Range(this.minimumRangeValue.doubleValue(), 
+                this.maximumRangeValue.doubleValue());
     }
     
     /**
