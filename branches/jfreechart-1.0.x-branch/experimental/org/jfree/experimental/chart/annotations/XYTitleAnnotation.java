@@ -290,7 +290,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
         Size2D size = this.title.arrange(g2, rc);
         Rectangle2D titleRect = new Rectangle2D.Double(0, 0, size.width, 
                 size.height);
-        Point2D anchorPoint = (Point2D) RectangleAnchor.coordinates(titleRect, 
+        Point2D anchorPoint = RectangleAnchor.coordinates(titleRect, 
                 this.anchor);
         xx = xx - (float) anchorPoint.getX();
         yy = yy - (float) anchorPoint.getY();
