@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * SWTChartEditor.java
  * -------------------
- * (C) Copyright 2006, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -88,17 +88,17 @@ public class SWTChartEditor implements ChartEditor {
      * @param chart2edit  the chart to edit.
      */
     public SWTChartEditor(Display display, JFreeChart chart2edit) {
-        shell = new Shell(display, SWT.DIALOG_TRIM);
-        shell.setSize(400, 500);
+        this.shell = new Shell(display, SWT.DIALOG_TRIM);
+        this.shell.setSize(400, 500);
         this.chart = chart2edit;
-        shell.setText(ResourceBundle.getBundle(
+        this.shell.setText(ResourceBundle.getBundle(
                 "org.jfree.chart.LocalizationBundle").getString(
                         "Chart_Properties"));
         GridLayout layout = new GridLayout(2, true);
         layout.marginLeft = layout.marginTop = layout.marginRight 
                 = layout.marginBottom = 5;
-        shell.setLayout(layout);
-        Composite main = new Composite(shell, SWT.NONE);
+        this.shell.setLayout(layout);
+        Composite main = new Composite(this.shell, SWT.NONE);
         main.setLayout(new FillLayout());
         main.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
         
@@ -106,35 +106,37 @@ public class SWTChartEditor implements ChartEditor {
         // build first tab
         TabItem item1 = new TabItem(tab, SWT.NONE);
         item1.setText(" " + localizationResources.getString("Title") + " ");
-        titleEditor = new SWTTitleEditor(tab, SWT.NONE, chart.getTitle());
-        item1.setControl(titleEditor);
+        this.titleEditor = new SWTTitleEditor(tab, SWT.NONE, 
+                this.chart.getTitle());
+        item1.setControl(this.titleEditor);
         // build second tab
         TabItem item2 = new TabItem(tab, SWT.NONE);
         item2.setText(" " + localizationResources.getString( "Plot" ) + " ");
-        plotEditor = new SWTPlotEditor(tab, SWT.NONE, chart.getPlot());
-        item2.setControl(plotEditor);
+        this.plotEditor = new SWTPlotEditor(tab, SWT.NONE, 
+                this.chart.getPlot());
+        item2.setControl(this.plotEditor);
         // build the third tab
         TabItem item3 = new TabItem(tab, SWT.NONE);
         item3.setText(" " + localizationResources.getString("Other") + " ");
-        otherEditor = new SWTOtherEditor(tab, SWT.NONE, chart);
-        item3.setControl(otherEditor);
+        this.otherEditor = new SWTOtherEditor(tab, SWT.NONE, this.chart);
+        item3.setControl(this.otherEditor);
         
         // ok and cancel buttons
-        Button ok = new Button(shell, SWT.PUSH | SWT.OK);
+        Button ok = new Button(this.shell, SWT.PUSH | SWT.OK);
         ok.setText(" Ok ");
         ok.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
         ok.addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent e) {            
-                updateChart(chart);
-                shell.dispose();
+                updateChart(SWTChartEditor.this.chart);
+                SWTChartEditor.this.shell.dispose();
             }
         });
-        Button cancel = new Button(shell, SWT.PUSH);
+        Button cancel = new Button(this.shell, SWT.PUSH);
         cancel.setText(" Cancel ");
         cancel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
         cancel.addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent e) {            
-                shell.dispose();
+                SWTChartEditor.this.shell.dispose();
             }
         } );
     }
@@ -143,11 +145,11 @@ public class SWTChartEditor implements ChartEditor {
      * Opens the editor.
      */
     public void open() {
-        shell.open();
-        shell.layout();
-        while (!shell.isDisposed()) {
-            if (!shell.getDisplay().readAndDispatch()) {
-                shell.getDisplay().sleep();
+        this.shell.open();
+        this.shell.layout();
+        while (!this.shell.isDisposed()) {
+            if (!this.shell.getDisplay().readAndDispatch()) {
+                this.shell.getDisplay().sleep();
             }
         }
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * SWTNumberAxisEditor.java
  * ------------------------
- * (C) Copyright 2006, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -101,13 +101,13 @@ class SWTNumberAxisEditor extends SWTAxisEditor implements FocusListener {
         range.setLayout(new GridLayout(2, true));
         item2.setControl(range);
         
-        autoRangeCheckBox = new Button(range, SWT.CHECK);
-        autoRangeCheckBox.setText(localizationResources.getString(
+        this.autoRangeCheckBox = new Button(range, SWT.CHECK);
+        this.autoRangeCheckBox.setText(localizationResources.getString(
                 "Auto-adjust_range"));
-        autoRangeCheckBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, 
+        this.autoRangeCheckBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, 
                 true, false, 2, 1));
-        autoRangeCheckBox.setSelection(this.autoRange);
-        autoRangeCheckBox.addSelectionListener( 
+        this.autoRangeCheckBox.setSelection(this.autoRange);
+        this.autoRangeCheckBox.addSelectionListener( 
                 new SelectionAdapter() {
                     public void widgetSelected(SelectionEvent e) { 
                         toggleAutoRange();

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * SWTPlotAppearanceEditor.java
  * ----------------------------
- * (C) Copyright 2006, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -69,8 +69,7 @@ import org.jfree.experimental.swt.SWTUtils;
 /**
  * An editor for plot properties.
  */
-class SWTPlotAppearanceEditor extends Composite
-{
+class SWTPlotAppearanceEditor extends Composite {
     
     private Spinner selectStroke;
     
@@ -98,8 +97,7 @@ class SWTPlotAppearanceEditor extends Composite
     protected static ResourceBundle localizationResources 
         = ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
 
-    SWTPlotAppearanceEditor(Composite parent, int style, Plot plot)
-    {
+    SWTPlotAppearanceEditor(Composite parent, int style, Plot plot) {
         super(parent, style);
         FillLayout layout = new FillLayout();
         layout.marginHeight = layout.marginWidth = 4;
@@ -114,24 +112,26 @@ class SWTPlotAppearanceEditor extends Composite
         // row 1: stroke
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Outline_stroke"));
-        strokeCanvas = new SWTStrokeCanvas(general, SWT.NONE);
-        strokeCanvas.setStroke(plot.getOutlineStroke());
+        this.strokeCanvas = new SWTStrokeCanvas(general, SWT.NONE);
+        this.strokeCanvas.setStroke(plot.getOutlineStroke());
         GridData strokeGridData = new GridData(SWT.FILL, SWT.CENTER, true, 
                 false);
         strokeGridData.heightHint = 20;
-        strokeCanvas.setLayoutData(strokeGridData);
-        selectStroke = new Spinner(general, SWT.BORDER);
-        selectStroke.setMinimum(1);
-        selectStroke.setMaximum(3);
-        selectStroke.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, 
-                false));
-        selectStroke.addSelectionListener(
+        this.strokeCanvas.setLayoutData(strokeGridData);
+        this.selectStroke = new Spinner(general, SWT.BORDER);
+        this.selectStroke.setMinimum(1);
+        this.selectStroke.setMaximum(3);
+        this.selectStroke.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, 
+                false, false));
+        this.selectStroke.addSelectionListener(
                 new SelectionAdapter() {
                     public void widgetSelected(SelectionEvent event) {
-                        int w = selectStroke.getSelection();
+                        int w = SWTPlotAppearanceEditor.this.selectStroke
+                                .getSelection();
                         if (w > 0) {
-                            strokeCanvas.setStroke(new BasicStroke(w));
-                            strokeCanvas.redraw();
+                            SWTPlotAppearanceEditor.this.strokeCanvas.setStroke(
+                                    new BasicStroke(w));
+                            SWTPlotAppearanceEditor.this.strokeCanvas.redraw();
                         }
                     }
                 }
@@ -139,12 +139,12 @@ class SWTPlotAppearanceEditor extends Composite
         // row 2: outline color
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Outline_Paint"));
-        outlinePaintCanvas = new SWTPaintCanvas(general, SWT.NONE, 
+        this.outlinePaintCanvas = new SWTPaintCanvas(general, SWT.NONE, 
                 SWTUtils.toSwtColor(getDisplay(), plot.getOutlinePaint()));
         GridData outlineGridData = new GridData(SWT.FILL, SWT.CENTER, true, 
                 false);
         outlineGridData.heightHint = 20;
-        outlinePaintCanvas.setLayoutData(outlineGridData);
+        this.outlinePaintCanvas.setLayoutData(outlineGridData);
         Button selectOutlineColor = new Button(general, SWT.PUSH);
         selectOutlineColor.setText(localizationResources.getString(
                 "Select..."));
@@ -156,11 +156,12 @@ class SWTPlotAppearanceEditor extends Composite
                         ColorDialog dlg = new ColorDialog(getShell());
                         dlg.setText(localizationResources.getString(
                                 "Outline_Paint"));
-                        dlg.setRGB(outlinePaintCanvas.getColor().getRGB());
+                        dlg.setRGB(SWTPlotAppearanceEditor.this
+                                .outlinePaintCanvas.getColor().getRGB());
                         RGB rgb = dlg.open();
                         if (rgb != null) {
-                            outlinePaintCanvas.setColor(new Color(getDisplay(),
-                                    rgb));
+                            SWTPlotAppearanceEditor.this.outlinePaintCanvas
+                                    .setColor(new Color(getDisplay(), rgb));
                         }
                     }
                 }
@@ -168,11 +169,11 @@ class SWTPlotAppearanceEditor extends Composite
         // row 3: background paint
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Background_paint"));
-        backgroundPaintCanvas = new SWTPaintCanvas(general, SWT.NONE, 
+        this.backgroundPaintCanvas = new SWTPaintCanvas(general, SWT.NONE, 
                 SWTUtils.toSwtColor(getDisplay(), plot.getBackgroundPaint()));
         GridData bgGridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
         bgGridData.heightHint = 20;
-        backgroundPaintCanvas.setLayoutData(bgGridData);
+        this.backgroundPaintCanvas.setLayoutData(bgGridData);
         Button selectBgPaint = new Button(general, SWT.PUSH);
         selectBgPaint.setText(localizationResources.getString("Select..."));
         selectBgPaint.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false,
@@ -183,11 +184,12 @@ class SWTPlotAppearanceEditor extends Composite
                         ColorDialog dlg = new ColorDialog(getShell());
                         dlg.setText(localizationResources.getString(
                                 "Background_paint"));
-                        dlg.setRGB(backgroundPaintCanvas.getColor().getRGB());
+                        dlg.setRGB(SWTPlotAppearanceEditor.this
+                                .backgroundPaintCanvas.getColor().getRGB());
                         RGB rgb = dlg.open();
                         if (rgb != null) {
-                            backgroundPaintCanvas.setColor(
-                                    new Color(getDisplay(), rgb));
+                            SWTPlotAppearanceEditor.this.backgroundPaintCanvas
+                                    .setColor(new Color(getDisplay(), rgb));
                         }
                     }
                 }
@@ -206,24 +208,27 @@ class SWTPlotAppearanceEditor extends Composite
                     : ORIENTATION_HORIZONTAL;
             new Label(general, SWT.NONE).setText(
                     localizationResources.getString("Orientation"));
-            orientation = new Combo(general, SWT.DROP_DOWN);
-            orientation.setItems(orientationNames);
-            orientation.select(index);
-            orientation.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true,
-                    false, 2, 1));
-            orientation.addSelectionListener( 
+            this.orientation = new Combo(general, SWT.DROP_DOWN);
+            this.orientation.setItems(orientationNames);
+            this.orientation.select(index);
+            this.orientation.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, 
+                    true, false, 2, 1));
+            this.orientation.addSelectionListener( 
                     new SelectionAdapter() {
                         public void widgetSelected(SelectionEvent event) {
-                            switch (orientation.getSelectionIndex()) {
+                            switch (SWTPlotAppearanceEditor.this.orientation
+                                    .getSelectionIndex()) {
                                 case ORIENTATION_VERTICAL:
-                                    plotOrientation = PlotOrientation.VERTICAL;
+                                    SWTPlotAppearanceEditor.this.plotOrientation
+                                            = PlotOrientation.VERTICAL;
                                     break;
                                 case ORIENTATION_HORIZONTAL:
-                                    plotOrientation 
-                                        = PlotOrientation.HORIZONTAL;
+                                    SWTPlotAppearanceEditor.this.plotOrientation 
+                                            = PlotOrientation.HORIZONTAL;
                                     break;
                                 default:
-                                    plotOrientation = PlotOrientation.VERTICAL;
+                                    SWTPlotAppearanceEditor.this.plotOrientation
+                                            = PlotOrientation.VERTICAL;
                             }
                         }
                     }
@@ -246,7 +251,7 @@ class SWTPlotAppearanceEditor extends Composite
      * @return The background paint.
      */
     public Color getBackGroundPaint() {
-        return backgroundPaintCanvas.getColor();
+        return this.backgroundPaintCanvas.getColor();
     }
 
     /**
@@ -255,7 +260,7 @@ class SWTPlotAppearanceEditor extends Composite
      * @return The outline paint.
      */
     public Color getOutlinePaint() {
-        return outlinePaintCanvas.getColor();
+        return this.outlinePaintCanvas.getColor();
     }
 
     /**
@@ -264,6 +269,6 @@ class SWTPlotAppearanceEditor extends Composite
      * @return The stroke.
      */
     public Stroke getStroke() {
-        return strokeCanvas.getStroke();
+        return this.strokeCanvas.getStroke();
     }
 }
