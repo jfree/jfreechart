@@ -142,19 +142,20 @@ class SWTAxisEditor extends Composite {
         // row 1
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Label"));
-        label = new Text(general, SWT.BORDER);
+        this.label = new Text(general, SWT.BORDER);
         if (axis.getLabel() != null) {
-            label.setText(axis.getLabel());
+            this.label.setText(axis.getLabel());
         }
-        label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+        this.label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, 
+                false));
         new Label(general, SWT.NONE).setText(""); //empty cell
         // row 2
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Font"));
-        labelFontField = new Text(general, SWT.BORDER);
-        labelFontField.setText(this.labelFont.toString());
-        labelFontField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, 
-                false));
+        this.labelFontField = new Text(general, SWT.BORDER);
+        this.labelFontField.setText(this.labelFont.toString());
+        this.labelFontField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, 
+                true, false));
         Button selectFontButton = new Button(general, SWT.PUSH);
         selectFontButton.setText(localizationResources.getString("Select..."));
         selectFontButton.addSelectionListener(
@@ -164,20 +165,23 @@ class SWTAxisEditor extends Composite {
                         FontDialog dlg = new FontDialog(getShell());
                         dlg.setText(localizationResources.getString(
                                 "Font_Selection"));
-                        dlg.setFontList(new FontData[] { labelFont });
+                        dlg.setFontList(new FontData[] { 
+                                SWTAxisEditor.this.labelFont });
                         if (dlg.open() != null) {
                             // Dispose of any fonts we have created
-                            if (font != null) {
-                                font.dispose();
+                            if (SWTAxisEditor.this.font != null) {
+                                SWTAxisEditor.this.font.dispose();
                             }
                             // Create the new font and set it into the title 
                             // label
-                            font = new Font(getShell().getDisplay(), 
-                                    dlg.getFontList());
+                            SWTAxisEditor.this.font = new Font(
+                                    getShell().getDisplay(), dlg.getFontList());
                             //label.setFont( font );
-                            labelFontField.setText(
-                                    font.getFontData()[0].toString());
-                            labelFont = font.getFontData()[0];
+                            SWTAxisEditor.this.labelFontField.setText(
+                                    SWTAxisEditor.this.font.getFontData()[0]
+                                    .toString());
+                            SWTAxisEditor.this.labelFont 
+                                    = SWTAxisEditor.this.font.getFontData()[0];
                         }
                     }
                 }
@@ -201,13 +205,15 @@ class SWTAxisEditor extends Composite {
                         ColorDialog dlg = new ColorDialog(getShell());
                         dlg.setText(localizationResources.getString(
                                 "Title_Color"));
-                        dlg.setRGB(labelPaintColor.getRGB());
+                        dlg.setRGB(SWTAxisEditor.this.labelPaintColor.getRGB());
                         RGB rgb = dlg.open();
                         if (rgb != null) {
                           // create the new color and set it to the 
                           // SwtPaintCanvas
-                          labelPaintColor = new Color(getDisplay(), rgb);
-                          colorCanvas.setColor(labelPaintColor);
+                            SWTAxisEditor.this.labelPaintColor = new Color(
+                                    getDisplay(), rgb);
+                            colorCanvas.setColor(
+                                    SWTAxisEditor.this.labelPaintColor);
                         }
                     }
                 }
@@ -218,24 +224,24 @@ class SWTAxisEditor extends Composite {
         other.setLayout(tabLayout);
         other.setText(localizationResources.getString("Other"));
         
-        otherTabs = new TabFolder(other, SWT.NONE);
-        TabItem item1 = new TabItem(otherTabs, SWT.NONE);
+        this.otherTabs = new TabFolder(other, SWT.NONE);
+        TabItem item1 = new TabItem(this.otherTabs, SWT.NONE);
         item1.setText(" " + localizationResources.getString("Ticks") + " ");
-        Composite ticks = new Composite(otherTabs, SWT.NONE);
+        Composite ticks = new Composite(this.otherTabs, SWT.NONE);
         ticks.setLayout(new GridLayout(3, false));
-        showTickLabelsCheckBox = new Button(ticks, SWT.CHECK);
-        showTickLabelsCheckBox.setText(localizationResources.getString(
+        this.showTickLabelsCheckBox = new Button(ticks, SWT.CHECK);
+        this.showTickLabelsCheckBox.setText(localizationResources.getString(
                 "Show_tick_labels"));
-        showTickLabelsCheckBox.setSelection(axis.isTickLabelsVisible());
-        showTickLabelsCheckBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
-                true, false, 3, 1));
+        this.showTickLabelsCheckBox.setSelection(axis.isTickLabelsVisible());
+        this.showTickLabelsCheckBox.setLayoutData(new GridData(SWT.FILL, 
+                SWT.CENTER, true, false, 3, 1));
         new Label(ticks, SWT.NONE).setText(localizationResources.getString(
                 "Tick_label_font"));
-        tickLabelFontField = new Text(ticks, SWT.BORDER);
-        tickLabelFontField.setText(this.tickLabelFont.toString());
+        this.tickLabelFontField = new Text(ticks, SWT.BORDER);
+        this.tickLabelFontField.setText(this.tickLabelFont.toString());
         //tickLabelFontField.setFont(SwtUtils.toSwtFontData(getDisplay(), 
         // axis.getTickLabelFont()));
-        tickLabelFontField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, 
+        this.tickLabelFontField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, 
                 true, false));
         Button selectTickLabelFontButton = new Button(ticks, SWT.PUSH);
         selectTickLabelFontButton.setText(localizationResources.getString(
@@ -247,27 +253,33 @@ class SWTAxisEditor extends Composite {
                         FontDialog dlg = new FontDialog(getShell());
                         dlg.setText( localizationResources.getString(
                                 "Font_Selection"));
-                        dlg.setFontList(new FontData[] {tickLabelFont});
+                        dlg.setFontList(new FontData[] {
+                                SWTAxisEditor.this.tickLabelFont});
                         if (dlg.open() != null) {
                             // Dispose of any fonts we have created
-                            if (font != null) font.dispose();
-                            // Create the new font and set it into the title label
-                            font = new Font(getShell().getDisplay(), 
-                                    dlg.getFontList());
+                            if (SWTAxisEditor.this.font != null) {
+                                SWTAxisEditor.this.font.dispose();
+                            }
+                            // Create the new font and set it into the title 
+                            // label
+                            SWTAxisEditor.this.font = new Font(
+                                    getShell().getDisplay(), dlg.getFontList());
                             //tickLabelFontField.setFont(font);
-                            tickLabelFontField.setText(
-                                    font.getFontData()[0].toString());
-                            tickLabelFont = font.getFontData()[0];
+                            SWTAxisEditor.this.tickLabelFontField.setText(
+                                    SWTAxisEditor.this.font.getFontData()[0]
+                                    .toString());
+                            SWTAxisEditor.this.tickLabelFont 
+                                    = SWTAxisEditor.this.font.getFontData()[0];
                         }
                     }
                 }
         );
-        showTickMarksCheckBox = new Button(ticks, SWT.CHECK);
-        showTickMarksCheckBox.setText(localizationResources.getString(
+        this.showTickMarksCheckBox = new Button(ticks, SWT.CHECK);
+        this.showTickMarksCheckBox.setText(localizationResources.getString(
                 "Show_tick_marks"));
-        showTickMarksCheckBox.setSelection(axis.isTickMarksVisible());
-        showTickMarksCheckBox.setLayoutData(new GridData( SWT.FILL, SWT.CENTER,
-                true, false, 3, 1));
+        this.showTickMarksCheckBox.setSelection(axis.isTickMarksVisible());
+        this.showTickMarksCheckBox.setLayoutData(new GridData( SWT.FILL, 
+                SWT.CENTER, true, false, 3, 1));
         item1.setControl(ticks);
     }
 
@@ -336,7 +348,7 @@ class SWTAxisEditor extends Composite {
      * @return The current label font.
      */
     public java.awt.Font getTickLabelFont() {
-        return SWTUtils.toAwtFont(getDisplay(), tickLabelFont, true);
+        return SWTUtils.toAwtFont(getDisplay(), this.tickLabelFont, true);
     }
 
     /**
@@ -358,8 +370,8 @@ class SWTAxisEditor extends Composite {
         axis.setLabel(getLabel());
         axis.setLabelFont(getLabelFont());
         axis.setLabelPaint(getLabelPaint());
-        axis.setTickMarksVisible(showTickMarksCheckBox.getSelection());
-        axis.setTickLabelsVisible(showTickLabelsCheckBox.getSelection());
+        axis.setTickMarksVisible(this.showTickMarksCheckBox.getSelection());
+        axis.setTickLabelsVisible(this.showTickLabelsCheckBox.getSelection());
         axis.setTickLabelFont(getTickLabelFont());
         axis.setTickLabelPaint(getTickLabelPaint());
     }

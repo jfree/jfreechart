@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * SWTTitleEditor.java
  * -------------------
- * (C) Copyright 2006, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -129,51 +129,59 @@ class SWTTitleEditor extends Composite {
         GridData gridData = new GridData();
         gridData.horizontalSpan = 2;
         label.setLayoutData(gridData);
-        showTitleCheckBox = new Button(general, SWT.CHECK);
-        showTitleCheckBox.setSelection(this.showTitle);
-        showTitleCheckBox.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, 
-                false, false));
-        showTitleCheckBox.addSelectionListener(
+        this.showTitleCheckBox = new Button(general, SWT.CHECK);
+        this.showTitleCheckBox.setSelection(this.showTitle);
+        this.showTitleCheckBox.setLayoutData(new GridData(SWT.CENTER, 
+                SWT.CENTER, false, false));
+        this.showTitleCheckBox.addSelectionListener(
                 new SelectionAdapter() {
                     public void widgetSelected(SelectionEvent event) {
-                        showTitle = showTitleCheckBox.getSelection();
+                        SWTTitleEditor.this.showTitle = SWTTitleEditor.this
+                                .showTitleCheckBox.getSelection();
                     }
                 });
         // row 2
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Text"));
-        titleField = new Text(general, SWT.BORDER);
-        titleField.setText(t.getText());
-        titleField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, 
+        this.titleField = new Text(general, SWT.BORDER);
+        this.titleField.setText(t.getText());
+        this.titleField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, 
                 false));
         new Label(general, SWT.NONE).setText("");
         // row 3
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Font"));
-        fontField = new Text(general, SWT.BORDER);
-        fontField.setText(titleFont.toString());
-        fontField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, 
+        this.fontField = new Text(general, SWT.BORDER);
+        this.fontField.setText(this.titleFont.toString());
+        this.fontField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, 
                 false));
-        selectFontButton = new Button(general, SWT.PUSH);
-        selectFontButton.setText(localizationResources.getString("Select..."));
-        selectFontButton.addSelectionListener(
+        this.selectFontButton = new Button(general, SWT.PUSH);
+        this.selectFontButton.setText(localizationResources.getString(
+                "Select..."));
+        this.selectFontButton.addSelectionListener(
                 new SelectionAdapter() {
                     public void widgetSelected(SelectionEvent event) {
                         // Create the font-change dialog
                         FontDialog dlg = new FontDialog(getShell());
                         dlg.setText(localizationResources.getString(
                                 "Font_Selection"));
-                        dlg.setFontList(new FontData[] { titleFont });
+                        dlg.setFontList(new FontData[] { 
+                                SWTTitleEditor.this.titleFont });
                         if (dlg.open() != null) {
                             // Dispose of any fonts we have created
-                            if (font != null) font.dispose();
+                            if (SWTTitleEditor.this.font != null) {
+                                SWTTitleEditor.this.font.dispose();
+                            }
                             // Create the new font and set it into the title 
                             // label
-                            font = new Font(getShell().getDisplay(), 
-                                    dlg.getFontList());
+                            SWTTitleEditor.this.font = new Font(
+                                    getShell().getDisplay(), dlg.getFontList());
                             //titleField.setFont(font);
-                            fontField.setText(font.getFontData()[0].toString());
-                            titleFont = font.getFontData()[0];
+                            SWTTitleEditor.this.fontField.setText(
+                                    SWTTitleEditor.this.font.getFontData()[0]
+                                    .toString());
+                            SWTTitleEditor.this.titleFont 
+                                    = SWTTitleEditor.this.font.getFontData()[0];
                         }
                     }
                 }
@@ -189,22 +197,25 @@ class SWTTitleEditor extends Composite {
                 false);
         canvasGridData.heightHint = 20;
         colorCanvas.setLayoutData(canvasGridData);
-        selectColorButton = new Button(general, SWT.PUSH);
-        selectColorButton.setText(localizationResources.getString("Select..."));
-        selectColorButton.addSelectionListener(
+        this.selectColorButton = new Button(general, SWT.PUSH);
+        this.selectColorButton.setText(localizationResources.getString(
+                "Select..."));
+        this.selectColorButton.addSelectionListener(
                 new SelectionAdapter() {
                     public void widgetSelected(SelectionEvent event) {
                         // Create the color-change dialog
                         ColorDialog dlg = new ColorDialog(getShell());
                         dlg.setText(localizationResources.getString(
                                 "Title_Color"));
-                        dlg.setRGB(titleColor.getRGB());
+                        dlg.setRGB(SWTTitleEditor.this.titleColor.getRGB());
                         RGB rgb = dlg.open();
                         if (rgb != null) {
                             // create the new color and set it to the 
                             // SwtPaintCanvas
-                            titleColor = new Color(getDisplay(), rgb);
-                            colorCanvas.setColor( titleColor );
+                            SWTTitleEditor.this.titleColor = new Color(
+                                    getDisplay(), rgb);
+                            colorCanvas.setColor(
+                                    SWTTitleEditor.this.titleColor);
                         }
                     }
                 }
