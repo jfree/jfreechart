@@ -220,7 +220,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
         int h = this.image.getHeight(null);
         
         Rectangle2D imageRect = new Rectangle2D.Double(0, 0, w, h);
-        Point2D anchorPoint = (Point2D) RectangleAnchor.coordinates(imageRect, 
+        Point2D anchorPoint = RectangleAnchor.coordinates(imageRect, 
                 this.anchor);
         xx = xx - (float) anchorPoint.getX();
         yy = yy - (float) anchorPoint.getY();
