@@ -135,6 +135,7 @@
  * 24-Sep-2007 : Added zoomAroundAnchor flag, and handle clearing of chart
  *               buffer (DG);
  * 25-Oct-2007 : Added default directory attribute (DG);
+ * 07-Nov-2007 : Fixed (rare) bug in refreshing off-screen image (DG);
  *               
  */
 
@@ -1308,6 +1309,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             // do we need to redraw the buffer?
             if (this.refreshBuffer) {
 
+                this.refreshBuffer = false; // clear the flag
+
                 Rectangle2D bufferArea = new Rectangle2D.Double(
                         0, 0, this.chartBufferWidth, this.chartBufferHeight);
 
@@ -1330,8 +1333,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     this.chart.draw(bufferG2, bufferArea, this.anchor, 
                             this.info);
                 }
-
-                this.refreshBuffer = false;
 
             }
 
