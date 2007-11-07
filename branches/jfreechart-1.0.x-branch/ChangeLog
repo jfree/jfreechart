@@ -1,3 +1,8 @@
+2007-11-07  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/ChartPanel.java
+	(paintComponent): Clear refreshBuffer flag before drawing chart.
+
 2007-11-06  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/data/statistics/DefaultMultiValueCategoryDataset.java
