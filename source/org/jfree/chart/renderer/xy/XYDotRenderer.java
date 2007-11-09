@@ -45,15 +45,23 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 10-Jul-2006 : Added dotWidth and dotHeight attributes (DG);
  * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
+ * 09-Nov-2007 : Added legend shape attribute, plus override for 
+ *               getLegendItem() (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
 import java.awt.Graphics2D;
+import java.awt.Paint;
+import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CrosshairState;
@@ -61,8 +69,10 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.util.PublicCloneable;
+import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that draws a small dot at each data point for an {@link XYPlot}.
@@ -82,6 +92,13 @@ public class XYDotRenderer extends AbstractXYItemRenderer
     /** The dot height. */
     private int dotHeight;
     
+    /** 
+     * The shape that is used to represent an item in the legend. 
+     * 
+     * @since 1.0.7
+     */
+    private transient Shape legendShape;
+
     /**
      * Constructs a new renderer.
      */
@@ -89,6 +106,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
         super();
         this.dotWidth = 1;
         this.dotHeight = 1;
+        this.legendShape = new Rectangle2D.Double(-3.0, -3.0, 6.0, 6.0);
     }
 
     /**
@@ -154,6 +172,37 @@ public class XYDotRenderer extends AbstractXYItemRenderer
     }
     
     /**
+     * Returns the shape used to represent an item in the legend.
+     * 
+     * @return The legend shape (never <code>null</code>).
+     * 
+     * @see #setLegendShape(Shape)
+     * 
+     * @since 1.0.7
+     */
+    public Shape getLegendShape() {
+        return this.legendShape;   
+    }
+    
+    /**
+     * Sets the shape used as a line in each legend item and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
+     * 
+     * @param shape  the shape (<code>null</code> not permitted).
+     * 
+     * @see #getLegendShape()
+     * 
+     * @since 1.0.7
+     */
+    public void setLegendShape(Shape shape) {
+        if (shape == null) {
+            throw new IllegalArgumentException("Null 'shape' argument.");   
+        }
+        this.legendShape = shape;
+        notifyListeners(new RendererChangeEvent(this));
+    }
+
+    /**
      * Draws the visual representation of a single data item.
      *
      * @param g2  the graphics device.
@@ -217,6 +266,56 @@ public class XYDotRenderer extends AbstractXYItemRenderer
     }
 
     /**
+     * Returns a legend item for the specified series.
+     *
+     * @param datasetIndex  the dataset index (zero-based).
+     * @param series  the series index (zero-based).
+     *
+     * @return A legend item for the series (possibly <code>null</code>).
+     */
+    public LegendItem getLegendItem(int datasetIndex, int series) {
+
+        // if the renderer isn't assigned to a plot, then we don't have a
+        // dataset...
+        XYPlot plot = getPlot();
+        if (plot == null) {
+            return null;
+        }
+
+        XYDataset dataset = plot.getDataset(datasetIndex);
+        if (dataset == null) {
+            return null;
+        }
+
+        LegendItem result = null;
+        if (getItemVisible(series, 0)) {
+            String label = getLegendItemLabelGenerator().generateLabel(dataset,
+                    series);
+            String description = label;
+            String toolTipText = null;
+            if (getLegendItemToolTipGenerator() != null) {
+                toolTipText = getLegendItemToolTipGenerator().generateLabel(
+                        dataset, series);
+            }
+            String urlText = null;
+            if (getLegendItemURLGenerator() != null) {
+                urlText = getLegendItemURLGenerator().generateLabel(
+                        dataset, series);
+            }
+            Paint fillPaint = lookupSeriesPaint(series);
+            result = new LegendItem(label, description, toolTipText, urlText, 
+                    getLegendShape(), fillPaint);
+            result.setSeriesKey(dataset.getSeriesKey(series));
+            result.setSeriesIndex(series);
+            result.setDataset(dataset);
+            result.setDatasetIndex(datasetIndex);
+        }
+
+        return result;
+
+    }
+    
+    /**
      * Tests this renderer for equality with an arbitrary object.  This method
      * returns <code>true</code> if and only if:
      * 
@@ -244,6 +343,9 @@ public class XYDotRenderer extends AbstractXYItemRenderer
         if (this.dotHeight != that.dotHeight) {
             return false;
         }
+        if (!ShapeUtilities.equal(this.legendShape, that.legendShape)) {
+            return false;
+        }
         return super.equals(obj);    
     }
     
@@ -256,6 +358,32 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      */
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+    
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream) 
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        this.legendShape = SerialUtilities.readShape(stream);
+    }
+    
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+        SerialUtilities.writeShape(this.legendShape, stream);
     }
 
 }

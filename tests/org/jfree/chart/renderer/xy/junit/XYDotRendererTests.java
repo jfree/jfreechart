@@ -36,11 +36,13 @@
  * -------
  * 25-Mar-2003 : Version 1 (DG);
  * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
+ * 09-Nov-2007 : Updated testEquals() (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy.junit;
 
+import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -99,6 +101,11 @@ public class XYDotRendererTests extends TestCase {
         r1.setDotHeight(12);
         assertFalse(r1.equals(r2));
         r2.setDotHeight(12);
+        assertTrue(r1.equals(r2));
+        
+        r1.setLegendShape(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
+        assertFalse(r1.equals(r2));
+        r2.setLegendShape(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         assertTrue(r1.equals(r2));
     }
 
