@@ -373,6 +373,17 @@ public class XYPlotTests extends TestCase {
         plot2.setQuadrantPaint(3, new GradientPaint(4.0f, 5.0f, Color.red,
                 6.0f, 7.0f, Color.blue));
         assertTrue(plot1.equals(plot2));  
+        
+        plot1.setDomainTickBandPaint(Color.red);
+        assertFalse(plot1.equals(plot2));
+        plot2.setDomainTickBandPaint(Color.red);
+        assertTrue(plot1.equals(plot2));
+        
+        plot1.setRangeTickBandPaint(Color.blue);
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeTickBandPaint(Color.blue);
+        assertTrue(plot1.equals(plot2));
+        
     }
 
     /**

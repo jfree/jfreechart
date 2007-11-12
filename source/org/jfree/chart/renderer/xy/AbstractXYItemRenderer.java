@@ -99,6 +99,7 @@
  * 20-Apr-2007 : Updated getLegendItem() for renderer change, and deprecated
  *               itemLabelGenerator and toolTipGenerator override fields (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
+ * 12-Nov-2007 : Fixed domain and range band drawing methods (DG);
  *
  */
 
@@ -813,20 +814,22 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param start  the start value.
      * @param end  the end value.
      */
-    public void fillDomainGridBand(Graphics2D g2,
-                                   XYPlot plot,
-                                   ValueAxis axis,
-                                   Rectangle2D dataArea,
-                                   double start, double end) {
+    public void fillDomainGridBand(Graphics2D g2, XYPlot plot, ValueAxis axis,
+            Rectangle2D dataArea, double start, double end) {
 
         double x1 = axis.valueToJava2D(start, dataArea,
                 plot.getDomainAxisEdge());
         double x2 = axis.valueToJava2D(end, dataArea,
                 plot.getDomainAxisEdge());
-        // TODO: need to change the next line to take account of plot
-        //       orientation...
-        Rectangle2D band = new Rectangle2D.Double(x1, dataArea.getMinY(),
-                x2 - x1, dataArea.getMaxY() - dataArea.getMinY());
+        Rectangle2D band;
+        if (plot.getOrientation() == PlotOrientation.VERTICAL) {
+            band = new Rectangle2D.Double(Math.min(x1, x2), dataArea.getMinY(), 
+                    Math.abs(x2 - x1), dataArea.getWidth());
+        }
+        else {
+            band = new Rectangle2D.Double(dataArea.getMinX(), Math.min(x1, x2), 
+                    dataArea.getWidth(), Math.abs(x2 - x1));
+        }
         Paint paint = plot.getDomainTickBandPaint();
 
         if (paint != null) {
@@ -847,19 +850,21 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param start  the start value.
      * @param end  the end value.
      */
-    public void fillRangeGridBand(Graphics2D g2,
-                                  XYPlot plot,
-                                  ValueAxis axis,
-                                  Rectangle2D dataArea,
-                                  double start, double end) {
+    public void fillRangeGridBand(Graphics2D g2, XYPlot plot, ValueAxis axis,
+            Rectangle2D dataArea, double start, double end) {
 
-        double y1 = axis.valueToJava2D(start, dataArea,
+        double y1 = axis.valueToJava2D(start, dataArea, 
                 plot.getRangeAxisEdge());
         double y2 = axis.valueToJava2D(end, dataArea, plot.getRangeAxisEdge());
-        // TODO: need to change the next line to take account of the plot
-        //       orientation
-        Rectangle2D band = new Rectangle2D.Double(dataArea.getMinX(), y2,
-                dataArea.getWidth(), y1 - y2);
+        Rectangle2D band;
+        if (plot.getOrientation() == PlotOrientation.VERTICAL) {
+            band = new Rectangle2D.Double(dataArea.getMinX(), Math.min(y1, y2),
+                dataArea.getWidth(), Math.abs(y2 - y1));
+        }
+        else {
+            band = new Rectangle2D.Double(Math.min(y1, y2), dataArea.getMinY(),
+                    Math.abs(y2 - y1), dataArea.getHeight());
+        }
         Paint paint = plot.getRangeTickBandPaint();
 
         if (paint != null) {
