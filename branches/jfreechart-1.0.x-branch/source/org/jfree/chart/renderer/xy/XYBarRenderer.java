@@ -34,6 +34,7 @@
  *                   Christian W. Zuckschwerdt;
  *                   Bill Kelemen;
  *                   Marc van Glabbeek (bug 1775452);
+ *                   Richard West, Advanced Micro Devices, Inc.;
  *
  * Changes
  * -------
@@ -87,6 +88,8 @@
  * 15-Jun-2007 : Changed default for drawBarOutline to false (DG);
  * 26-Sep-2007 : Fixed bug 1775452, problem with bar margins for inverted
  *               axes, thanks to Marc van Glabbeek (DG);
+ * 12-Nov-2007 : Fixed NPE in drawItemLabel() method, thanks to Richard West
+ *               (see patch 1827829) (DG);
  *
  */
 
@@ -696,15 +699,18 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Draws an item label.  This method is overridden so that the bar can be 
-     * used to calculate the label anchor point.
+     * Draws an item label.  This method is provided as an alternative to
+     * {@link #drawItemLabel(Graphics2D, PlotOrientation, XYDataset, int, int, 
+     * double, double, boolean)} so that the bar can be used to calculate the 
+     * label anchor point. 
      * 
      * @param g2  the graphics device.
      * @param dataset  the dataset.
      * @param series  the series index.
      * @param item  the item index.
      * @param plot  the plot.
-     * @param generator  the label generator.
+     * @param generator  the label generator (<code>null</code> permitted, in 
+     *         which case the method does nothing, just returns).
      * @param bar  the bar.
      * @param negative  a flag indicating a negative value.
      */
@@ -712,6 +718,9 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             int series, int item, XYPlot plot, XYItemLabelGenerator generator, 
             Rectangle2D bar, boolean negative) {
                                      
+        if (generator == null) {
+            return;  // nothing to do
+        }
         String label = generator.generateLabel(dataset, series, item);
         if (label == null) {
             return;  // nothing to do   
