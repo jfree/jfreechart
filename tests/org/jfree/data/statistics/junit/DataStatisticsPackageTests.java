@@ -40,6 +40,7 @@
  * 10-Jan-2005 : Added tests for new SimpleHistogramDataset and 
  *               SimpleHistogramBin classes (DG);
  * 18-Jan-2005 : Added main() method (DG);
+ * 12-Nov-2007 : Added DefaultBoxAndWhiskerXYDatasetTests (DG);
  *
  */
 
@@ -66,6 +67,7 @@ public class DataStatisticsPackageTests extends TestCase {
         suite.addTestSuite(BoxAndWhiskerCalculatorTests.class);
         suite.addTestSuite(BoxAndWhiskerItemTests.class);
         suite.addTestSuite(DefaultBoxAndWhiskerCategoryDatasetTests.class);
+        suite.addTestSuite(DefaultBoxAndWhiskerXYDatasetTests.class);
         suite.addTestSuite(DefaultStatisticalCategoryDatasetTests.class);
         suite.addTestSuite(HistogramBinTests.class);
         suite.addTestSuite(HistogramDatasetTests.class);

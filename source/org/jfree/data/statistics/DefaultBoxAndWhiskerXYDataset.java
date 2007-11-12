@@ -54,6 +54,7 @@
  *               release (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
+ * 12-Nov-2007 : Implemented equals() and clone() (DG);
  *
  */
 
@@ -65,15 +66,16 @@ import java.util.List;
 
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
+import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.xy.AbstractXYDataset;
+import org.jfree.util.ObjectUtilities;
 
 /**
- * A simple implementation of the {@link BoxAndWhiskerXYDataset}.  The dataset
- * can hold only one series.
+ * A simple implementation of the {@link BoxAndWhiskerXYDataset} interface.  
+ * This dataset implementation can hold only one series.
  */
 public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset 
-                                           implements BoxAndWhiskerXYDataset,
-                                                      RangeInfo {
+            implements BoxAndWhiskerXYDataset, RangeInfo {
 
     /** The series key. */
     private Comparable seriesKey;
@@ -127,10 +129,95 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Adds an item to the dataset.
+     * Returns the value used as the outlier coefficient. The outlier 
+     * coefficient gives an indication of the degree of certainty in an 
+     * unskewed distribution.  Increasing the coefficient increases the number 
+     * of values included. Currently only used to ensure farout coefficient is 
+     * greater than the outlier coefficient
+     *
+     * @return A <code>double</code> representing the value used to calculate 
+     *         outliers.
+     *         
+     * @see #setOutlierCoefficient(double)
+     */
+    public double getOutlierCoefficient() {
+        return this.outlierCoefficient;
+    }
+
+    /**
+     * Sets the value used as the outlier coefficient
+     *
+     * @param outlierCoefficient  being a <code>double</code> representing the 
+     *                            value used to calculate outliers.
+     *                            
+     * @see #getOutlierCoefficient()
+     */
+    public void setOutlierCoefficient(double outlierCoefficient) {
+        this.outlierCoefficient = outlierCoefficient;
+    }
+
+    /**
+     * Returns the value used as the farout coefficient. The farout coefficient
+     * allows the calculation of which values will be off the graph.
+     *
+     * @return A <code>double</code> representing the value used to calculate 
+     *         farouts.
+     *         
+     * @see #setFaroutCoefficient(double)
+     */
+    public double getFaroutCoefficient() {
+        return this.faroutCoefficient;
+    }
+
+    /**
+     * Sets the value used as the farouts coefficient. The farout coefficient 
+     * must b greater than the outlier coefficient.
      * 
-     * @param date  the date.
-     * @param item  the item.
+     * @param faroutCoefficient being a <code>double</code> representing the 
+     *                          value used to calculate farouts.
+     *                          
+     * @see #getFaroutCoefficient()
+     */
+    public void setFaroutCoefficient(double faroutCoefficient) {
+
+        if (faroutCoefficient > getOutlierCoefficient()) {
+            this.faroutCoefficient = faroutCoefficient;
+        } 
+        else {
+            throw new IllegalArgumentException("Farout value must be greater " 
+                + "than the outlier value, which is currently set at: (" 
+                + getOutlierCoefficient() + ")");
+        }
+    }
+
+    /**
+     * Returns the number of series in the dataset.
+     * <p>
+     * This implementation only allows one series.
+     *
+     * @return The number of series.
+     */
+    public int getSeriesCount() {
+        return 1;
+    }
+
+    /**
+     * Returns the number of items in the specified series.
+     *
+     * @param series  the index (zero-based) of the series.
+     *
+     * @return The number of items in the specified series.
+     */
+    public int getItemCount(int series) {
+        return this.dates.size();
+    }
+
+    /**
+     * Adds an item to the dataset and sends a {@link DatasetChangeEvent} to 
+     * all registered listeners.
+     * 
+     * @param date  the date (<code>null</code> not permitted).
+     * @param item  the item (<code>null</code> not permitted).
      */
     public void add(Date date, BoxAndWhiskerItem item) {
         this.dates.add(date);
@@ -155,6 +242,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
         }
         this.rangeBounds = new Range(this.minimumRangeValue.doubleValue(), 
                 this.maximumRangeValue.doubleValue());
+        fireDatasetChanged();
     }
     
     /**
@@ -214,7 +302,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      * Returns the y-value for one item in a series.
      * <p>
      * This method (from the XYDataset interface) is mapped to the 
-     * getMaxNonOutlierValue() method.
+     * getMeanValue() method.
      *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
@@ -222,7 +310,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      * @return The y-value.
      */
     public Number getY(int series, int item) {
-        return new Double(getMeanValue(series, item).doubleValue());  
+        return getMeanValue(series, item);  
     }
 
     /**
@@ -379,82 +467,6 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns the value used as the outlier coefficient. The outlier 
-     * coefficient gives an indication of the degree of certainty in an 
-     * unskewed distribution.  Increasing the coefficient increases the number 
-     * of values included. Currently only used to ensure farout coefficient is 
-     * greater than the outlier coefficient
-     *
-     * @return A <code>double</code> representing the value used to calculate 
-     *         outliers.
-     */
-    public double getOutlierCoefficient() {
-        return this.outlierCoefficient;
-    }
-
-    /**
-     * Returns the value used as the farout coefficient. The farout coefficient
-     * allows the calculation of which values will be off the graph.
-     *
-     * @return A <code>double</code> representing the value used to calculate 
-     *         farouts.
-     */
-    public double getFaroutCoefficient() {
-        return this.faroutCoefficient;
-    }
-
-    /**
-     * Returns the number of series in the dataset.
-     * <p>
-     * This implementation only allows one series.
-     *
-     * @return The number of series.
-     */
-    public int getSeriesCount() {
-        return 1;
-    }
-
-    /**
-     * Returns the number of items in the specified series.
-     *
-     * @param series  the index (zero-based) of the series.
-     *
-     * @return The number of items in the specified series.
-     */
-    public int getItemCount(int series) {
-        return this.dates.size();
-    }
-
-    /**
-     * Sets the value used as the outlier coefficient
-     *
-     * @param outlierCoefficient  being a <code>double</code> representing the 
-     *                            value used to calculate outliers.
-     */
-    public void setOutlierCoefficient(double outlierCoefficient) {
-        this.outlierCoefficient = outlierCoefficient;
-    }
-
-    /**
-     * Sets the value used as the farouts coefficient. The farout coefficient 
-     * must b greater than the outlier coefficient.
-     * 
-     * @param faroutCoefficient being a <code>double</code> representing the 
-     *                          value used to calculate farouts.
-     */
-    public void setFaroutCoefficient(double faroutCoefficient) {
-
-        if (faroutCoefficient > getOutlierCoefficient()) {
-            this.faroutCoefficient = faroutCoefficient;
-        } 
-        else {
-            throw new IllegalArgumentException("Farout value must be greater " 
-                + "than the outlier value, which is currently set at: (" 
-                + getOutlierCoefficient() + ")");
-        }
-    }
-
-    /**
      * Returns the minimum y-value in the dataset.
      *
      * @param includeInterval  a flag that determines whether or not the
@@ -496,6 +508,49 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      */
     public Range getRangeBounds(boolean includeInterval) {
         return this.rangeBounds;
+    }
+    
+    /**
+     * Tests this dataset for equality with an arbitrary object.
+     * 
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof DefaultBoxAndWhiskerXYDataset)) {
+            return false;
+        }
+        DefaultBoxAndWhiskerXYDataset that 
+                = (DefaultBoxAndWhiskerXYDataset) obj;
+        if (!ObjectUtilities.equal(this.seriesKey, that.seriesKey)) {
+            return false;
+        }
+        if (!this.dates.equals(that.dates)) {
+            return false;
+        }
+        if (!this.items.equals(that.items)) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Returns a clone of the plot.
+     * 
+     * @return A clone.
+     * 
+     * @throws CloneNotSupportedException  if the cloning is not supported.
+     */
+    public Object clone() throws CloneNotSupportedException {
+        DefaultBoxAndWhiskerXYDataset clone 
+                = (DefaultBoxAndWhiskerXYDataset) super.clone();
+        clone.dates = new java.util.ArrayList(this.dates);
+        clone.items = new java.util.ArrayList(this.items);
+        return clone;
     }
 
 }
