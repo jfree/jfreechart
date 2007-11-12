@@ -190,6 +190,8 @@
  * 26-Sep-2007 : Include index value in IllegalArgumentExceptions (DG);
  * 05-Nov-2007 : Applied patch 1823697, by Richard West, for removal of domain
  *               and range markers (DG);
+ * 12-Nov-2007 : Fixed bug in equals() method for domain and range tick
+ *               band paint attributes (DG);
  *
  */
 
@@ -4714,6 +4716,14 @@ public class XYPlot extends Plot implements ValueAxisPlot,
             return false;
         }
         if (!ObjectUtilities.equal(this.annotations, that.annotations)) {
+            return false;
+        }
+        if (!PaintUtilities.equal(this.domainTickBandPaint, 
+                that.domainTickBandPaint)) {
+            return false;
+        }
+        if (!PaintUtilities.equal(this.rangeTickBandPaint, 
+                that.rangeTickBandPaint)) {
             return false;
         }
         if (!this.quadrantOrigin.equals(that.quadrantOrigin)) {
