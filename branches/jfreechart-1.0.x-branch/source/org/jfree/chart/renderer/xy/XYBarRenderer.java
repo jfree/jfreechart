@@ -35,8 +35,6 @@
  *                   Bill Kelemen;
  *                   Marc van Glabbeek (bug 1775452);
  *
- * $Id: XYBarRenderer.java,v 1.14.2.17 2007/06/15 12:43:24 mungady Exp $
- *
  * Changes
  * -------
  * 13-Dec-2001 : Version 1, makes VerticalXYBarPlot class redundant (DG);
@@ -110,13 +108,11 @@ import java.io.Serializable;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.XYItemLabelGenerator;
 import org.jfree.chart.labels.XYSeriesLabelGenerator;
-import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -692,24 +688,9 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex, 
                 rangeAxisIndex, transX1, transY1, plot.getOrientation());
 
-        // add an entity for the item...
-        if (info != null) {
-            EntityCollection entities = info.getOwner().getEntityCollection();
-            if (entities != null) {
-                String tip = null;
-                XYToolTipGenerator generator = getToolTipGenerator(series, 
-                        item);
-                if (generator != null) {
-                    tip = generator.generateToolTip(dataset, series, item);
-                }
-                String url = null;
-                if (getURLGenerator() != null) {
-                    url = getURLGenerator().generateURL(dataset, series, item);
-                }
-                XYItemEntity entity = new XYItemEntity(bar, dataset, series, 
-                        item, tip, url);
-                entities.add(entity);
-            }
+        EntityCollection entities = state.getEntityCollection();
+        if (entities != null) {
+            addEntity(entities, bar, dataset, series, item, 0.0, 0.0);
         }
 
     }

@@ -34,8 +34,6 @@
  *                   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
  *
- * $Id: XYAreaRenderer.java,v 1.12.2.11 2007/05/18 10:28:31 mungady Exp $
- *
  * Changes:
  * --------
  * 03-Apr-2002 : Version 1, contributed by Hari.  This class is based on the 
@@ -560,23 +558,9 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
                 rangeAxisIndex, transX1, transY1, orientation);
         
         // collect entity and tool tip information...
-        if (state.getInfo() != null) {
-            EntityCollection entities = state.getEntityCollection();
-            if (entities != null && hotspot != null) {
-                String tip = null;
-                XYToolTipGenerator generator 
-                    = getToolTipGenerator(series, item);
-                if (generator != null) {
-                    tip = generator.generateToolTip(dataset, series, item);
-                }
-                String url = null;
-                if (getURLGenerator() != null) {
-                    url = getURLGenerator().generateURL(dataset, series, item);
-                }
-                XYItemEntity entity = new XYItemEntity(hotspot, dataset, 
-                        series, item, tip, url);
-                entities.add(entity);
-            }
+        EntityCollection entities = state.getEntityCollection();
+        if (entities != null && hotspot != null) {
+            addEntity(entities, hotspot, dataset, series, item, 0.0, 0.0);
         }
 
     }
