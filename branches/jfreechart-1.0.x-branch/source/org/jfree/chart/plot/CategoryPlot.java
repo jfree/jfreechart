@@ -32,7 +32,7 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jeremy Bowman;
  *                   Arnaud Lelievre;
- *                   Richard West;
+ *                   Richard West, Advanced Micro Devices, Inc.;
  *
  * Changes
  * -------
