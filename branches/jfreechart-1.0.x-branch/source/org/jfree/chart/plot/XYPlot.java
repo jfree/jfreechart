@@ -3022,7 +3022,6 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      */
     public void drawDomainTickBands(Graphics2D g2, Rectangle2D dataArea,
                                     List ticks) {
-        // draw the domain tick bands, if any...
         Paint bandPaint = getDomainTickBandPaint();
         if (bandPaint != null) {
             boolean fillBand = false;
@@ -3058,8 +3057,6 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      */
     public void drawRangeTickBands(Graphics2D g2, Rectangle2D dataArea,
                                    List ticks) {
-
-        // draw the range tick bands, if any...
         Paint bandPaint = getRangeTickBandPaint();
         if (bandPaint != null) {
             boolean fillBand = false;
