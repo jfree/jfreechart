@@ -177,6 +177,18 @@ public abstract class DialPointer extends AbstractDialLayer
     }
     
     /**
+     * Returns a hash code.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = 23;
+        long l = Double.doubleToLongBits(this.radius);
+        result = 37 * result + (int) (l ^ (l >>> 32));
+        return result;
+    }
+    
+    /**
      * Returns a clone of the pointer.
      * 
      * @return a clone.
