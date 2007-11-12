@@ -41,7 +41,7 @@
  *                   Nicolas Brodu;
  *                   Eduardo Ramalho;
  *                   Sergei Ivanov;
- *                   Richard West;
+ *                   Richard West, Advanced Micro Devices, Inc.;
  *
  * Changes (from 21-Jun-2001)
  * --------------------------

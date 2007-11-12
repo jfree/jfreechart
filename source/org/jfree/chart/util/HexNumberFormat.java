@@ -29,7 +29,7 @@
  * --------------------
  * (C) Copyright 2007, by Richard West and Contributors.
  *
- * Original Author:  Richard West;
+ * Original Author:  Richard West, Advanced Micro Devices, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  * Changes:
