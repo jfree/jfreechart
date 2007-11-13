@@ -1197,8 +1197,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     //// SECTION OUTLINE STROKE ///////////////////////////////////////////////
 
     /**
-     * Returns the outline stroke for the specified section.  This is equivalent 
-     * to <code>lookupSectionOutlineStroke(section, false)</code>.
+     * Returns the outline stroke for the specified section.  This is 
+     * equivalent to <code>lookupSectionOutlineStroke(section, false)</code>.
      * 
      * @param key  the section key.
      * 
@@ -2436,8 +2436,9 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      *
      * @since 1.0.7
      */
-    protected void drawSimpleLabels(Graphics2D g2, List keys, double totalValue, 
-            Rectangle2D plotArea, Rectangle2D pieArea, PiePlotState state) {
+    protected void drawSimpleLabels(Graphics2D g2, List keys, 
+            double totalValue, Rectangle2D plotArea, Rectangle2D pieArea, 
+            PiePlotState state) {
         
         Composite originalComposite = g2.getComposite();
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 
@@ -2485,7 +2486,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 g2.setFont(this.labelFont);
                 FontMetrics fm = g2.getFontMetrics();
                 Rectangle2D bounds = TextUtilities.getTextBounds(label, g2, fm);
-                Rectangle2D out = this.labelPadding.createOutsetRectangle(bounds);
+                Rectangle2D out = this.labelPadding.createOutsetRectangle(
+                        bounds);
                 Shape bg = ShapeUtilities.createTranslatedShape(out, 
                         x - bounds.getCenterX(), y - bounds.getCenterY());
                 if (this.labelShadowPaint != null) {
