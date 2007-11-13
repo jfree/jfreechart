@@ -389,6 +389,8 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     
     /**
      * Recalculate the minimum width "from scratch".
+     * 
+     * @return The minimum width.
      */
     private double recalculateInterval() {
         double result = Double.POSITIVE_INFINITY;
@@ -403,6 +405,8 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      * Calculates the interval width for a given series.
      *  
      * @param series  the series index.
+     * 
+     * @return The interval width.
      */
     private double calculateIntervalForSeries(int series) {
         double result = Double.POSITIVE_INFINITY;
