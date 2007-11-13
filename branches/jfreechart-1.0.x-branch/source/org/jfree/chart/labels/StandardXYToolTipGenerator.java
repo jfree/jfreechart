@@ -94,8 +94,8 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
      * @param yFormat  the format object for the y values (<code>null</code> 
      *                 not permitted).
      */
-    public StandardXYToolTipGenerator(String formatString, NumberFormat xFormat, 
-            NumberFormat yFormat) {
+    public StandardXYToolTipGenerator(String formatString, 
+            NumberFormat xFormat, NumberFormat yFormat) {
         
         super(formatString, xFormat, yFormat);
     
