@@ -194,7 +194,7 @@ public class LineBorder implements BlockFrame, Serializable {
         if (!PaintUtilities.equal(this.paint, that.paint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.stroke, that.stroke)){
+        if (!ObjectUtilities.equal(this.stroke, that.stroke)) {
             return false;
         }
         if (!this.insets.equals(that.insets)) {
