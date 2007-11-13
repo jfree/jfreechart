@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * JDBCCategoryDataset.java
  * ------------------------
- * (C) Copyright 2002-2006, by Bryan Scott and Contributors.
+ * (C) Copyright 2002-2007, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott; Andy;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -92,6 +92,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class JDBCCategoryDataset extends DefaultCategoryDataset {
 
+    /** For serialization. */
+    static final long serialVersionUID = -3080395327918844965L;
+    
     /** The database connection. */
     private transient Connection connection;
 
