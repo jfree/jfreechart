@@ -1050,35 +1050,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
                     (Double) l_yValues[0]).doubleValue(), x_dataArea, 
                     l_rangeAxisLocation);
 
-            l_path.moveTo((float)l_x, (float)l_y);
-            for (int i = 1; i < l_xValues.length; i++) {
-                l_x = x_domainAxis.valueToJava2D((
-                        (Double) l_xValues[i]).doubleValue(), x_dataArea, 
-                        l_domainAxisLocation);
-                if (this.roundXCoordinates) {
-                    l_x = Math.rint(l_x);
-                }
-
-                l_y = x_rangeAxis.valueToJava2D((
-                        (Double)l_yValues[i]).doubleValue(), x_dataArea, 
-                        l_rangeAxisLocation);
-                l_path.lineTo((float)l_x, (float)l_y);
-            }
-            l_path.closePath();
-        }
-        else {
-            double l_x = x_domainAxis.valueToJava2D((
-                    (Double)l_xValues[0]).doubleValue(), x_dataArea, 
-                    l_domainAxisLocation);
-            if (this.roundXCoordinates) {
-                l_x = Math.rint(l_x);
-            }
-
-            double l_y = x_rangeAxis.valueToJava2D((
-                    (Double)l_yValues[0]).doubleValue(), x_dataArea, 
-                    l_rangeAxisLocation);
-
-            l_path.moveTo((float)l_y, (float)l_x);
+            l_path.moveTo((float) l_x, (float) l_y);
             for (int i = 1; i < l_xValues.length; i++) {
                 l_x = x_domainAxis.valueToJava2D((
                         (Double) l_xValues[i]).doubleValue(), x_dataArea, 
@@ -1090,7 +1062,35 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
                 l_y = x_rangeAxis.valueToJava2D((
                         (Double) l_yValues[i]).doubleValue(), x_dataArea, 
                         l_rangeAxisLocation);
-                l_path.lineTo((float)l_y, (float)l_x);
+                l_path.lineTo((float) l_x, (float) l_y);
+            }
+            l_path.closePath();
+        }
+        else {
+            double l_x = x_domainAxis.valueToJava2D((
+                    (Double) l_xValues[0]).doubleValue(), x_dataArea, 
+                    l_domainAxisLocation);
+            if (this.roundXCoordinates) {
+                l_x = Math.rint(l_x);
+            }
+
+            double l_y = x_rangeAxis.valueToJava2D((
+                    (Double) l_yValues[0]).doubleValue(), x_dataArea, 
+                    l_rangeAxisLocation);
+
+            l_path.moveTo((float) l_y, (float) l_x);
+            for (int i = 1; i < l_xValues.length; i++) {
+                l_x = x_domainAxis.valueToJava2D((
+                        (Double) l_xValues[i]).doubleValue(), x_dataArea, 
+                        l_domainAxisLocation);
+                if (this.roundXCoordinates) {
+                    l_x = Math.rint(l_x);
+                }
+
+                l_y = x_rangeAxis.valueToJava2D((
+                        (Double) l_yValues[i]).doubleValue(), x_dataArea, 
+                        l_rangeAxisLocation);
+                l_path.lineTo((float) l_y, (float) l_x);
             }
             l_path.closePath();
         }
