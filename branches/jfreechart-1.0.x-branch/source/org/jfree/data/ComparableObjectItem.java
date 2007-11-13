@@ -53,6 +53,7 @@ import org.jfree.util.ObjectUtilities;
 public class ComparableObjectItem implements Cloneable, Comparable, 
         Serializable {
 
+    /** For serialization. */
     private static final long serialVersionUID = 2751513470325494890L;
     
     /** The x-value. */
