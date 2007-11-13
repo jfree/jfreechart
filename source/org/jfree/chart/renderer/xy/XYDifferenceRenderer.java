@@ -800,7 +800,8 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
                     + (l_y1 - (l_slope * l_x1)));
         }
 
-        // consider last point of minuend and subtrahend for determining positivity
+        // consider last point of minuend and subtrahend for determining 
+        // positivity
         l_minuendMaxY    = Math.max(l_minuendMaxY, 
                 l_minuendNextY.doubleValue());
         l_subtrahendMaxY = Math.max(l_subtrahendMaxY, 
