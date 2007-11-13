@@ -377,7 +377,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
                 throw new RuntimeException("Not yet implemented."); 
             }
             else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");                 
+                throw new RuntimeException("Not yet implemented.");
             }            
         }
         else if (w == LengthConstraintType.RANGE) {
@@ -389,7 +389,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
                         cc.getHeightRange()); 
             }
             else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");                 
+                throw new RuntimeException("Not yet implemented.");
             }
         }
         else if (w == LengthConstraintType.FIXED) {
@@ -400,7 +400,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
                 throw new RuntimeException("Not yet implemented."); 
             }
             else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");                 
+                throw new RuntimeException("Not yet implemented.");
             }
         }
         return new Size2D(calculateTotalWidth(contentSize.getWidth()),
