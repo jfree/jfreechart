@@ -67,6 +67,9 @@ import org.jfree.util.PublicCloneable;
 public class StandardDialFrame extends AbstractDialLayer implements DialFrame, 
         Cloneable, PublicCloneable, Serializable {
     
+    /** For serialization. */
+    static final long serialVersionUID = 1016585407507121596L;
+    
     /** The outer radius, relative to the framing rectangle. */
     private double radius;
     
