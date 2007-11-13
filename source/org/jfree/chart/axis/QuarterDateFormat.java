@@ -164,7 +164,7 @@ public class QuarterDateFormat extends DateFormat
             toAppendTo.append(year);
             toAppendTo.append(" ");
             toAppendTo.append(this.quarters[quarter]);
-        }	
+        }
         return toAppendTo;   
     }
 
