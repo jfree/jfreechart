@@ -71,6 +71,9 @@ import org.jfree.util.PublicCloneable;
 public class ArcDialFrame extends AbstractDialLayer implements DialFrame, 
         Cloneable, PublicCloneable, Serializable {
     
+    /** For serialization. */
+    static final long serialVersionUID = -4089176959553523499L;
+
     /**
      * The color used for the front of the panel.  This field is transient
      * because it requires special handling for serialization.
