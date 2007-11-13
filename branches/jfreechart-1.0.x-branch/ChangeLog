@@ -1,6 +1,14 @@
-2007-11-13  David Gilbert  <david.gilbert@pobject-refinery.com>
+2007-11-13  David Gilbert  <david.gilbert@object-refinery.com>
 
-	* source/oprg/jfree/chart/HashUtilities.java
+	* source/org/jfree/chart/entity/ChartEntity.java
+	(hashCode): Implemented,
+	* source/org/jfree/chart/entity/PieSectionEntity.java
+	(equals): Implemented,
+	(hashCode): Likewise.
+
+2007-11-13  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/HashUtilities.java
 	(hashCode(int, boolean)): New method,
 	(hashCode(int, double)): Likewise,
 	(hashCode(int, Paint)): Likewise,
