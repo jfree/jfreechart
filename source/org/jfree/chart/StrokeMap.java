@@ -65,6 +65,9 @@ import org.jfree.util.ObjectUtilities;
  */
 public class StrokeMap implements Cloneable, Serializable {
 
+    /** For serialization. */
+    static final long serialVersionUID = -8148916785963525169L;
+
     /** Storage for the keys and values. */
     private transient Map store;
     
