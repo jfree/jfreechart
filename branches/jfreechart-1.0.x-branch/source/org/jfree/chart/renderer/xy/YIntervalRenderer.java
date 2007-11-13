@@ -79,6 +79,7 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
                                           PublicCloneable,
                                           Serializable {
 
+    /** For serialization. */
     private static final long serialVersionUID = -2951586537224143260L;
     
     /**
