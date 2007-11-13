@@ -600,6 +600,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * Returns the frame surrounding the specified view rectangle.
      * 
      * @param view  the view rectangle (<code>null</code> not permitted).
+     * 
+     * @return The frame rectangle.
      */
     private Rectangle2D viewToFrame(Rectangle2D view) {
         double width = view.getWidth() / this.viewW;
