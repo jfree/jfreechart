@@ -64,6 +64,9 @@ import org.jfree.util.PublicCloneable;
 public class DialBackground extends AbstractDialLayer implements DialLayer, 
         Cloneable, PublicCloneable, Serializable {
     
+    /** For serialization. */
+    static final long serialVersionUID = -9019069533317612375L;
+
     /** 
      * The background paint.  This field is transient because serialization
      * requires special handling.
