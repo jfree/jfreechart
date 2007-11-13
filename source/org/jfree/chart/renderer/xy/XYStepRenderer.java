@@ -51,7 +51,7 @@
  * 19-Jan-2005 : Now accesses only primitives from dataset (DG);
  * 15-Mar-2005 : Fix silly bug in drawItem() method (DG);
  * 19-Sep-2005 : Extend XYLineAndShapeRenderer (fixes legend shapes), added 
- *               support for series visibility, and use getDefaultEntityRadius() 
+ *               support for series visibility, and use getDefaultEntityRadius()
  *               for entity hotspot size (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 15-Jun-2006 : Added basic support for item labels (DG);
