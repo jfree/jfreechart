@@ -234,8 +234,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /** 
      * The outline paint for ALL series (optional). 
      *
-     * @deprecated This field is redundant, you can rely on outlinePaintList and 
-     *     baseOutlinePaint.  Deprecated from version 1.0.6 onwards.
+     * @deprecated This field is redundant, you can rely on outlinePaintList 
+     *         and baseOutlinePaint.  Deprecated from version 1.0.6 onwards.
      */
     private transient Paint outlinePaint;
 
@@ -243,8 +243,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private PaintList outlinePaintList;
 
     /**
-     * A flag that controls whether or not the outlinePaintList is auto-populated
-     * in the {@link #lookupSeriesOutlinePaint(int)} method.
+     * A flag that controls whether or not the outlinePaintList is 
+     * auto-populated in the {@link #lookupSeriesOutlinePaint(int)} method.
      * 
      * @since 1.0.6
      */
@@ -1229,7 +1229,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     
     /**
      * Sets the flag that controls whether or not the series fill paint list is
-     * automatically populated when {@link #lookupSeriesFillPaint(int)} is called.
+     * automatically populated when {@link #lookupSeriesFillPaint(int)} is 
+     * called.
      * 
      * @param auto  the new flag value.
      * 
@@ -1356,8 +1357,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param notify  notify listeners?
      * 
      * @deprecated This method should no longer be used (as of version 1.0.6). 
-     *     It is sufficient to rely on {@link #setSeriesOutlinePaint(int, Paint, 
-     *     boolean)} and {@link #setBaseOutlinePaint(Paint, boolean)}.
+     *     It is sufficient to rely on {@link #setSeriesOutlinePaint(int, 
+     *     Paint, boolean)} and {@link #setBaseOutlinePaint(Paint, boolean)}.
      */
     public void setOutlinePaint(Paint paint, boolean notify) {
         this.outlinePaint = paint;
