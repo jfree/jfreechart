@@ -699,8 +699,7 @@ public class LogarithmicAxis extends NumberAxis {
      */
     public void zoomRange(double lowerPercent, double upperPercent) {
         double startLog = switchedLog10(getRange().getLowerBound());
-        double lengthLog = switchedLog10(getRange().getUpperBound()) -
-                           startLog;
+        double lengthLog = switchedLog10(getRange().getUpperBound()) - startLog;
         Range adjusted;
 
         if (isInverted()) {
