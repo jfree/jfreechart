@@ -373,7 +373,7 @@ public abstract class ChartFactory {
                     plot.setSectionPaint(key, new Color((int) shade, 0, 0));
                 }
                 if (showDifference) {
-                    series.setValue(key + " (" + (percentChange >= 0 ? "+" : "") 
+                    series.setValue(key + " (" + (percentChange >= 0 ? "+" : "")
                             + NumberFormat.getPercentInstance().format(
                             percentChange / 100.0) + ")", newValue);
                 }
@@ -499,7 +499,7 @@ public abstract class ChartFactory {
                     plot.setSectionPaint(key, new Color((int) shade, 0, 0));
                 }
                 if (showDifference) {
-                    series.setValue(key + " (" + (percentChange >= 0 ? "+" : "") 
+                    series.setValue(key + " (" + (percentChange >= 0 ? "+" : "")
                             + NumberFormat.getPercentInstance().format(
                             percentChange / 100.0) + ")", newValue);
                 }
