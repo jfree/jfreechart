@@ -1225,7 +1225,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
                 Shape shape = lookupSeriesShape(series);
                 boolean shapeIsFilled = getItemShapeFilled(series, 0);
                 Paint fillPaint = (this.useFillPaint 
-                    ? lookupSeriesFillPaint(series) : lookupSeriesPaint(series));
+                    ? lookupSeriesFillPaint(series) 
+                    : lookupSeriesPaint(series));
                 boolean shapeOutlineVisible = this.drawOutlines;  
                 Paint outlinePaint = (this.useOutlinePaint 
                     ? lookupSeriesOutlinePaint(series) 
