@@ -271,11 +271,13 @@ public class ComparableObjectSeries extends Series
      */
     public int indexOf(Comparable x) {
         if (this.autoSort) {
-            return Collections.binarySearch(this.data, new ComparableObjectItem(x, null));   
+            return Collections.binarySearch(this.data, new ComparableObjectItem(
+                    x, null));   
         }
         else {
             for (int i = 0; i < this.data.size(); i++) {
-                ComparableObjectItem item = (ComparableObjectItem) this.data.get(i);
+                ComparableObjectItem item = (ComparableObjectItem) 
+                        this.data.get(i);
                 if (item.getComparable().equals(x)) {
                     return i;   
                 }
@@ -362,7 +364,8 @@ public class ComparableObjectSeries extends Series
      * @return The item removed.
      */
     protected ComparableObjectItem remove(int index) {
-        ComparableObjectItem result = (ComparableObjectItem) this.data.remove(index);
+        ComparableObjectItem result = (ComparableObjectItem) this.data.remove(
+                index);
         fireSeriesChanged();
         return result;
     }
