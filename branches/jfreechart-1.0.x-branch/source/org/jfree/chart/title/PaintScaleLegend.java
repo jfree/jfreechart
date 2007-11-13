@@ -74,6 +74,9 @@ import org.jfree.util.PublicCloneable;
  */
 public class PaintScaleLegend extends Title implements PublicCloneable {
 
+    /** For serialization. */
+    static final long serialVersionUID = -1365146490993227503L;
+    
     /** The paint scale (never <code>null</code>). */
     private PaintScale scale;
     
