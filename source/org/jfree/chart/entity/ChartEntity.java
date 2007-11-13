@@ -61,6 +61,7 @@
  * 20-Apr-2005 : Added toString() implementation (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 06-Feb-2007 : API doc update (DG);
+ * 13-Nov-2007 : Reorganised equals(), implemented hashCode (DG);
  *
  */
 
@@ -74,6 +75,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
 import org.jfree.io.SerialUtilities;
@@ -354,20 +356,32 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
         if (obj == this) {
             return true;   
         }
-        if (obj instanceof ChartEntity) {
-            ChartEntity that = (ChartEntity) obj;
-            if (!this.area.equals(that.area)) {
-                return false;   
-            }
-            if (!ObjectUtilities.equal(this.toolTipText, that.toolTipText)) {
-                return false;   
-            }
-            if (!ObjectUtilities.equal(this.urlText, that.urlText)) {
-                return false;   
-            }
-            return true;
+        if (!(obj instanceof ChartEntity)) {
+            return false;   
         }
-        return false;
+        ChartEntity that = (ChartEntity) obj;
+        if (!this.area.equals(that.area)) {
+            return false;   
+        }
+        if (!ObjectUtilities.equal(this.toolTipText, that.toolTipText)) {
+            return false;   
+        }
+        if (!ObjectUtilities.equal(this.urlText, that.urlText)) {
+            return false;   
+        }
+        return true;
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = 37;
+        result = HashUtilities.hashCode(result, this.toolTipText);
+        result = HashUtilities.hashCode(result, this.urlText);
+        return result;
     }
     
     /**

@@ -48,6 +48,7 @@
  *               Comparable (DG);
  * 30-Jul-2003 : Added PieDataset reference (CZ);
  * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
+ * 13-Nov-2007 : Implemented equals() and hashCode() (DG);
  *
  */
 
@@ -56,7 +57,9 @@ package org.jfree.chart.entity;
 import java.awt.Shape;
 import java.io.Serializable;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.data.general.PieDataset;
+import org.jfree.util.ObjectUtilities;
 
 /**
  * A chart entity that represents one section within a pie plot.
@@ -108,6 +111,8 @@ public class PieSectionEntity extends ChartEntity
      * Returns the dataset this entity refers to.
      *
      * @return The dataset.
+     * 
+     * @see #setDataset(PieDataset)
      */
     public PieDataset getDataset() {
         return this.dataset;
@@ -117,6 +122,8 @@ public class PieSectionEntity extends ChartEntity
      * Sets the dataset this entity refers to.
      *
      * @param dataset  the dataset.
+     * 
+     * @see #getDataset()
      */
     public void setDataset(PieDataset dataset) {
         this.dataset = dataset;
@@ -128,6 +135,8 @@ public class PieSectionEntity extends ChartEntity
      * or column index from which the pie data is extracted.
      *
      * @return The pie index.
+     * 
+     * @see #setPieIndex(int)
      */
     public int getPieIndex() {
         return this.pieIndex;
@@ -137,6 +146,8 @@ public class PieSectionEntity extends ChartEntity
      * Sets the pie index.
      *
      * @param index  the new index value.
+     * 
+     * @see #getPieIndex()
      */
     public void setPieIndex(int index) {
         this.pieIndex = index;
@@ -146,6 +157,8 @@ public class PieSectionEntity extends ChartEntity
      * Returns the section index.
      *
      * @return The section index.
+     * 
+     * @see #setSectionIndex(int)
      */
     public int getSectionIndex() {
         return this.sectionIndex;
@@ -155,6 +168,8 @@ public class PieSectionEntity extends ChartEntity
      * Sets the section index.
      *
      * @param index  the section index.
+     * 
+     * @see #getSectionIndex()
      */
     public void setSectionIndex(int index) {
         this.sectionIndex = index;
@@ -164,6 +179,8 @@ public class PieSectionEntity extends ChartEntity
      * Returns the section key.
      *
      * @return The section key.
+     * 
+     * @see #setSectionKey(Comparable)
      */
     public Comparable getSectionKey() {
         return this.sectionKey;
@@ -173,11 +190,55 @@ public class PieSectionEntity extends ChartEntity
      * Sets the section key.
      *
      * @param key  the section key.
+     * 
+     * @see #getSectionKey()
      */
     public void setSectionKey(Comparable key) {
         this.sectionKey = key;
     }
 
+    /**
+     * Tests this entity for equality with an arbitrary object.
+     * 
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof PieSectionEntity)) {
+            return false;
+        }
+        PieSectionEntity that = (PieSectionEntity) obj;
+        if (!ObjectUtilities.equal(this.dataset, that.dataset)) {
+            return false;
+        }
+        if (this.pieIndex != that.pieIndex) {
+            return false;
+        }
+        if (this.sectionIndex != that.sectionIndex) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.sectionKey, that.sectionKey)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = super.hashCode();
+        result = HashUtilities.hashCode(result, this.pieIndex);
+        result = HashUtilities.hashCode(result, this.sectionIndex);
+        return result;
+    }
+    
     /**
      * Returns a string representing the entity.
      *
