@@ -175,7 +175,6 @@ public class CategoryItemEntityTests extends TestCase {
         catch (Exception e) {
             e.printStackTrace();
         }
-        boolean b = e1.equals(e2);
         assertEquals(e1, e2);
     }
 
