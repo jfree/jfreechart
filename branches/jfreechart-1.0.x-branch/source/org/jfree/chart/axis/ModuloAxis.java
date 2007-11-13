@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 13-Aug-2004 : Version 1 (DG);
+ * 13-Nov-2007 : Implemented equals() (DG);
  * 
  */
 
@@ -114,11 +115,8 @@ public class ModuloAxis extends NumberAxis {
             setRange(this.displayStart, this.displayEnd);
         }
         else {
-            setRange(
-                this.displayStart, 
-                this.fixedRange.getUpperBound() 
-                  + (this.displayEnd - this.fixedRange.getLowerBound())
-            );
+            setRange(this.displayStart, this.fixedRange.getUpperBound() 
+                  + (this.displayEnd - this.fixedRange.getLowerBound()));
         }
         notifyListeners(new AxisChangeEvent(this));        
     }
@@ -401,6 +399,33 @@ public class ModuloAxis extends NumberAxis {
             areaLength = area.getWidth();
         }
         return (length / axisLength) * areaLength;
+    }
+    
+    /**
+     * Tests this axis for equality with an arbitrary object.
+     * 
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof ModuloAxis)) {
+            return false;
+        }
+        ModuloAxis that = (ModuloAxis) obj;
+        if (this.displayStart != that.displayStart) {
+            return false;
+        }
+        if (this.displayEnd != that.displayEnd) {
+            return false;
+        }
+        if (!this.fixedRange.equals(that.fixedRange)) {
+            return false;
+        }
+        return super.equals(obj);
     }
     
 }
