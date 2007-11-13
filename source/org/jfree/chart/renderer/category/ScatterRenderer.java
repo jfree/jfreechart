@@ -380,7 +380,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
             if (this.useSeriesOffset) {
                 x1 = domainAxis.getCategorySeriesMiddle(dataset.getColumnKey(
                         column), dataset.getRowKey(row), dataset, 
-                        this.itemMargin, dataArea, plot.getDomainAxisEdge());            
+                        this.itemMargin, dataArea, plot.getDomainAxisEdge());
             }
             else {
                 x1 = domainAxis.getCategoryMiddle(column, getColumnCount(), 
