@@ -327,8 +327,8 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
                 this.innerRadius, this.innerRadius);
         Rectangle2D outerFrame = DialPlot.rectangleByRadius(frame, 
                 this.outerRadius, this.outerRadius);
-        Arc2D inner = new Arc2D.Double(innerFrame, this.startAngle, this.extent, 
-                Arc2D.OPEN);
+        Arc2D inner = new Arc2D.Double(innerFrame, this.startAngle, 
+                this.extent, Arc2D.OPEN);
         Arc2D outer = new Arc2D.Double(outerFrame, this.startAngle 
                 + this.extent, -this.extent, Arc2D.OPEN);
         GeneralPath p = new GeneralPath();
