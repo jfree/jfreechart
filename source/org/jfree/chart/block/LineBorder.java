@@ -66,6 +66,9 @@ import org.jfree.util.PaintUtilities;
  */
 public class LineBorder implements BlockFrame, Serializable {
 
+    /** For serialization. */
+    static final long serialVersionUID = 4630356736707233924L;
+
     /** The line color. */
     private transient Paint paint;
     

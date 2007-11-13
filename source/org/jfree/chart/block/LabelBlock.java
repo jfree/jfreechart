@@ -76,6 +76,9 @@ import org.jfree.util.PublicCloneable;
 public class LabelBlock extends AbstractBlock 
                                 implements Block, PublicCloneable {
     
+    /** For serialization. */
+    static final long serialVersionUID = 249626098864178017L;
+
     /** 
      * The text for the label - retained in case the label needs 
      * regenerating (for example, to change the font). 
