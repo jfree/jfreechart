@@ -51,6 +51,7 @@ import org.jfree.util.ObjectUtilities;
  */
 public class XYDataItem implements Cloneable, Comparable, Serializable {
 
+    /** For serialization. */
     private static final long serialVersionUID = 2751513470325494890L;
     
     /** The x-value. */
