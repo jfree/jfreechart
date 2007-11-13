@@ -155,6 +155,9 @@ public class LookupPaintScale
         
     }
     
+    /** For serialization. */
+    static final long serialVersionUID = -5239384246251042006L;
+    
     /** The lower bound. */
     private double lowerBound;
     
