@@ -70,6 +70,9 @@ public class LookupPaintScale
      */
     class PaintItem implements Comparable, Serializable {
         
+        /** For serialization. */
+        static final long serialVersionUID = 698920578512361570L;
+        
         /** The value. */
         double value;
         
