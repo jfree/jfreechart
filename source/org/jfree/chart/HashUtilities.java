@@ -36,6 +36,7 @@
  * -------
  * 03-Oct-2006 : Version 1 (DG);
  * 06-Mar-2007 : Fix for hashCodeForDoubleArray() method (DG);
+ * 13-Nov-2007 : Added new utility methods (DG);
  *
  */
 
@@ -43,6 +44,7 @@ package org.jfree.chart;
 
 import java.awt.GradientPaint;
 import java.awt.Paint;
+import java.awt.Stroke;
 
 /**
  * Some utility methods for calculating hash codes.  
@@ -60,8 +62,9 @@ public class HashUtilities {
      * @return The hash code.
      */
     public static int hashCodeForPaint(Paint p) {
-        if (p == null) 
+        if (p == null) {
             return 0;
+        }
         int result = 0;
         // handle GradientPaint as a special case
         if (p instanceof GradientPaint) {
@@ -100,6 +103,81 @@ public class HashUtilities {
             result = 29 * result + (int) (temp ^ (temp >>> 32));
         }
         return result;
+    }
+    
+    /**
+     * Returns a hash value based on a seed value and the value of a boolean
+     * primitive.
+     * 
+     * @param pre  the seed value.
+     * @param b  the boolean value.
+     * 
+     * @return A hash value.
+     * 
+     * @since 1.0.7
+     */
+    public static int hashCode(int pre, boolean b) {
+        return 37 * pre + (b ? 0 : 1);
+    }
+    
+    /**
+     * Returns a hash value based on a seed value and the value of a double
+     * primitive.
+     * 
+     * @param pre  the seed value.
+     * @param d  the double value.
+     * 
+     * @return A hash value.
+     * 
+     * @since 1.0.7
+     */
+    public static int hashCode(int pre, double d) {
+        long l = Double.doubleToLongBits(d);
+        return 37 * pre + (int) (l ^ (l >>> 32));
+    }
+    
+    /**
+     * Returns a hash value based on a seed value and a paint instance.
+     * 
+     * @param pre  the seed value.
+     * @param p  the paint (<code>null</code> permitted).
+     * 
+     * @return A hash value.
+     * 
+     * @since 1.0.7
+     */
+    public static int hashCode(int pre, Paint p) {
+        return 37 * pre + hashCodeForPaint(p);
+    }
+
+    /**
+     * Returns a hash value based on a seed value and a stroke instance.
+     * 
+     * @param pre  the seed value.
+     * @param s  the stroke (<code>null</code> permitted).
+     * 
+     * @return A hash value.
+     * 
+     * @since 1.0.7
+     */
+    public static int hashCode(int pre, Stroke s) {
+        int h = (s != null ? s.hashCode() : 0);
+        return 37 * pre + h;
+    }
+
+    /**
+     * Returns a hash value based on a seed value and a string instance.
+     * 
+     * @param pre  the seed value.
+     * @param s  the string (<code>null</code> permitted).
+     * 
+     * @return A hash value.
+     * 
+     * @since 1.0.7
+     */
+    public static int hashCode(int pre, String s) {
+        int h = (s != null ? s.hashCode() : 0);
+        return 37 * pre + h;
     }
 
 }
