@@ -70,7 +70,7 @@ public class HexNumberFormat extends NumberFormat {
     /**
      * Creates a new instance with 8 digits.
      */
-    public HexNumberFormat(){
+    public HexNumberFormat() {
         this(DWORD);
     }
 
