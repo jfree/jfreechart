@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -195,8 +195,8 @@ public class LayeredBarRenderer extends BarRenderer
 
         PlotOrientation orientation = plot.getOrientation();
         if (orientation == PlotOrientation.HORIZONTAL) {
-            drawHorizontalItem(g2, state, dataArea, plot, domainAxis, rangeAxis, 
-                    data, row, column);
+            drawHorizontalItem(g2, state, dataArea, plot, domainAxis, 
+                    rangeAxis, data, row, column);
         }
         else if (orientation == PlotOrientation.VERTICAL) {
             drawVerticalItem(g2, state, dataArea, plot, domainAxis, rangeAxis, 
