@@ -2104,7 +2104,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
                     index));
         }
         else {
-            markers = (ArrayList)this.backgroundDomainMarkers.get(new Integer(
+            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
                     index));
         }
         boolean removed = markers.remove(marker);
@@ -2325,11 +2325,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         }
         ArrayList markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (ArrayList)this.foregroundRangeMarkers.get(new Integer(
+            markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
                     index));
         }
         else {
-            markers = (ArrayList)this.backgroundRangeMarkers.get(new Integer(
+            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
                     index));
         }
 
