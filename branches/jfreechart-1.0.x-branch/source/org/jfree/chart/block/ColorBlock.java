@@ -58,6 +58,9 @@ import org.jfree.util.PaintUtilities;
  */
 public class ColorBlock extends AbstractBlock implements Block {
 
+    /** For serialization. */
+    static final long serialVersionUID = 3383866145634010865L;
+
     /** The paint. */
     private transient Paint paint;
     
