@@ -142,8 +142,16 @@ public class LegendTitle extends Title
      */
     private BlockContainer items;
     
+    /** 
+     * The layout for the legend when it is positioned at the top or bottom
+     * of the chart.
+     */
     private Arrangement hLayout;
     
+    /** 
+     * The layout for the legend when it is positioned at the left or right
+     * of the chart.
+     */
     private Arrangement vLayout;
     
     /** 
