@@ -1054,8 +1054,8 @@ public abstract class Plot implements AxisChangeListener,
                     this.noDataMessage, this.noDataMessageFont, 
                     this.noDataMessagePaint, 0.9f * (float) area.getWidth(), 
                     new G2TextMeasurer(g2));
-            block.draw(g2, (float) area.getCenterX(), (float) area.getCenterY(), 
-                    TextBlockAnchor.CENTER);
+            block.draw(g2, (float) area.getCenterX(), 
+                    (float) area.getCenterY(), TextBlockAnchor.CENTER);
         }
         g2.setClip(savedClip);
     }
