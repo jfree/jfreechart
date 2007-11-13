@@ -629,7 +629,7 @@ public class StackedAreaRenderer extends AreaRenderer
         if (obj == this) {
             return true;
         }
-        if (! (obj instanceof StackedAreaRenderer)) {
+        if (!(obj instanceof StackedAreaRenderer)) {
             return false;
         }
         StackedAreaRenderer that = (StackedAreaRenderer) obj;
