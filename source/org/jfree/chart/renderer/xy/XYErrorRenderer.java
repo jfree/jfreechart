@@ -74,6 +74,9 @@ import org.jfree.util.PaintUtilities;
  */
 public class XYErrorRenderer extends XYLineAndShapeRenderer {
 
+    /** For serialization. */
+    static final long serialVersionUID = 5162283570955172424L;
+    
     /** A flag that controls whether or not the x-error bars are drawn. */
     private boolean drawXError;
     
