@@ -363,7 +363,8 @@ public class StackedXYBarRenderer extends XYBarRenderer {
 
             // add an entity for the item...
             if (info != null) {
-                EntityCollection entities = info.getOwner().getEntityCollection();
+                EntityCollection entities = info.getOwner()
+                        .getEntityCollection();
                 if (entities != null) {
                     addEntity(entities, bar, dataset, series, item, 
                             bar.getCenterX(), bar.getCenterY());
