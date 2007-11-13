@@ -65,6 +65,9 @@ import org.jfree.util.PublicCloneable;
 public class StandardDialRange extends AbstractDialLayer implements DialLayer, 
         Cloneable, PublicCloneable, Serializable {
     
+    /** For serialization. */
+    static final long serialVersionUID = 1016585407507121596L;
+    
     /** The scale index. */
     private int scaleIndex;
     
