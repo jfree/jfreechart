@@ -194,7 +194,8 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             if (renderer instanceof StandardXYItemRenderer) {
                 StandardXYItemRenderer r = (StandardXYItemRenderer) renderer;
                 this.drawLines = BooleanUtilities.valueOf(r.getPlotLines());
-                this.drawShapes = BooleanUtilities.valueOf(r.getBaseShapesVisible());
+                this.drawShapes = BooleanUtilities.valueOf(
+                        r.getBaseShapesVisible());
             }
         }
 
@@ -242,7 +243,8 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         interior.add(
             new JLabel(localizationResources.getString("Outline_stroke"))
         );
-        JButton button = new JButton(localizationResources.getString("Select..."));
+        JButton button = new JButton(localizationResources.getString(
+                "Select..."));
         button.setActionCommand("OutlineStroke");
         button.addActionListener(this);
         interior.add(this.outlineStrokeSample);
