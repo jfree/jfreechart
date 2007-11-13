@@ -36,6 +36,7 @@
  * --------
  * 19-May-2004 : Version 1 (DG);
  * 19-Jan-2005 : Added main() method to run JUnit in text mode (DG);
+ * 13-Nov-2007 : Added CategoryLabelEntityTests (DG);
  *
  */
 
@@ -60,6 +61,7 @@ public class EntityPackageTests extends TestCase {
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.chart.entity");
         suite.addTestSuite(CategoryItemEntityTests.class);
+        suite.addTestSuite(CategoryLabelEntityTests.class);
         suite.addTestSuite(ContourEntityTests.class);
         suite.addTestSuite(LegendItemEntityTests.class);
         suite.addTestSuite(PieSectionEntityTests.class);

@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 02-Oct-2006 : Version 1 (DG);
+ * 13-Nov-2007 : Added equals() and hashCode() methods (DG);
  *
  */
 
@@ -42,7 +43,9 @@ package org.jfree.chart.entity;
 
 import java.awt.Shape;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.util.ObjectUtilities;
 
 /**
  * An entity to represent the labels on a {@link CategoryAxis}.
@@ -75,6 +78,38 @@ public class CategoryLabelEntity extends TickLabelEntity {
      */
     public Comparable getKey() {
         return this.key;
+    }
+    
+    /**
+     * Tests this instance for equality with an arbitrary object.
+     * 
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof CategoryLabelEntity)) {
+            return false;
+        }
+        CategoryLabelEntity that = (CategoryLabelEntity) obj;
+        if (!ObjectUtilities.equal(this.key, that.key)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = super.hashCode();
+        result = HashUtilities.hashCode(result, this.key);
+        return result;
     }
     
     /**
