@@ -124,6 +124,9 @@ A Cyclic item renderer is provided to do exactly this.
  */
 public class CyclicNumberAxis extends NumberAxis {
 
+    /** For serialization. */
+    static final long serialVersionUID = -7514160997164582554L;
+
     /** The default axis line stroke. */
     public static Stroke DEFAULT_ADVANCE_LINE_STROKE = new BasicStroke(1.0f);
     
