@@ -347,7 +347,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
                 this.objectIcon.paintIcon(null, g2, (int) x1, (int) y1);
             }
             else {
-                this.objectIcon.paintIcon(null, g2, (int) y1, (int) x1);                
+                this.objectIcon.paintIcon(null, g2, (int) y1, (int) x1);
             }
             
             if (this.lastCategory == column) {
@@ -375,7 +375,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
                     else {
                         g2.draw(new Line2D.Double(minY, x1, maxY, x1));
                         this.minIcon.paintIcon(null, g2, (int) minY, (int) x1);
-                        this.maxIcon.paintIcon(null, g2, (int) maxY, (int) x1);                        
+                        this.maxIcon.paintIcon(null, g2, (int) maxY, (int) x1);
                     }
                 }
             }
@@ -404,7 +404,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
                             line = new Line2D.Double(x0, y0, x1, y1);
                         }
                         else {
-                            line = new Line2D.Double(y0, x0, y1, x1);                            
+                            line = new Line2D.Double(y0, x0, y1, x1);
                         }
                         g2.draw(line);
                     }
@@ -420,8 +420,9 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     }
     
     /**
-     * Tests this instance for equality with an arbitrary object.  The icon fields
-     * are NOT included in the test, so this implementation is a little weak.
+     * Tests this instance for equality with an arbitrary object.  The icon 
+     * fields are NOT included in the test, so this implementation is a little 
+     * weak.
      * 
      * @param obj  the object (<code>null</code> permitted).
      * 
