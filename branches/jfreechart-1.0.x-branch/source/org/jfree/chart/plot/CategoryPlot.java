@@ -1610,7 +1610,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      */
     public void setDomainGridlineStroke(Stroke stroke) {
         if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' not permitted.");   
+            throw new IllegalArgumentException("Null 'stroke' not permitted.");
         }
         this.domainGridlineStroke = stroke;
         notifyListeners(new PlotChangeEvent(this));
@@ -1903,8 +1903,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     /**
      * Adds a marker for display against the domain axis and sends a 
      * {@link PlotChangeEvent} to all registered listeners.  Typically a marker 
-     * will be drawn by the renderer as a line perpendicular to the domain axis, 
-     * however this is entirely up to the renderer.
+     * will be drawn by the renderer as a line perpendicular to the domain 
+     * axis, however this is entirely up to the renderer.
      *
      * @param marker  the marker (<code>null</code> not permitted).
      * @param layer  the layer (foreground or background) (<code>null</code> 
@@ -2517,7 +2517,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      */
     public void addAnnotation(CategoryAnnotation annotation) {
         if (annotation == null) {
-            throw new IllegalArgumentException("Null 'annotation' argument.");   
+            throw new IllegalArgumentException("Null 'annotation' argument.");
         }
         this.annotations.add(annotation);
         notifyListeners(new PlotChangeEvent(this));
