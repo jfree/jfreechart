@@ -78,6 +78,9 @@ import org.jfree.data.general.PieDataset;
  */
 public class JDBCPieDataset extends DefaultPieDataset {
 
+    /** For serialization. */
+    static final long serialVersionUID = -8753216855496746108L;
+
     /** The database connection. */
     private transient Connection connection;
 
