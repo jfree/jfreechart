@@ -41,7 +41,7 @@
  * 04-Dec-2003 : Crosshair anchor point now stored outside chart since it is
  *               dependent on the display target (DG);
  * 25-Feb-2004 : Replaced CrosshairInfo --> CrosshairState (DG);
- * ------------- JFREECHART 1.0.x ------------------------------------------           
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 13-Oct-2006 : Fixed initialisation of CrosshairState - see bug report 
  *               1565168 (DG);
  * 06-Feb-2007 : Added new fields and methods to fix bug 1086307 (DG);
@@ -97,7 +97,8 @@ public class CrosshairState {
     private int rangeAxisIndex;
     
     /** 
-     * The smallest distance (so far) between the anchor point and a data point. 
+     * The smallest distance (so far) between the anchor point and a data 
+     * point. 
      */
     private double distance;
 
