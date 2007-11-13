@@ -411,7 +411,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      */
     public int hashCode() {
         int result = super.hashCode();
-        result = result * 37 + (this.renderAsPercentages ? 1 : 0 );
+        result = result * 37 + (this.renderAsPercentages ? 1 : 0);
         return result;
     }
     
