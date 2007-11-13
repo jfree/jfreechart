@@ -112,8 +112,8 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * Constructs a new XY clustered bar renderer.
      *
      * @param margin  the percentage amount to trim from the width of each bar.
-     * @param centerBarAtStartValue  if true, bars will be centered on the start 
-     *                               of the time period.
+     * @param centerBarAtStartValue  if true, bars will be centered on the 
+     *         start of the time period.
      */
     public ClusteredXYBarRenderer(double margin, 
                                   boolean centerBarAtStartValue) {
