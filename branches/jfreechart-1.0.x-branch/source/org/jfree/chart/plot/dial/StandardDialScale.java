@@ -71,6 +71,9 @@ import org.jfree.util.PublicCloneable;
 public class StandardDialScale extends AbstractDialLayer implements DialScale, 
         Cloneable, PublicCloneable, Serializable {
     
+    /** For serialization. */
+    static final long serialVersionUID = 3715644629665918516L;
+    
     /** The minimum data value for the scale. */
     private double lowerBound;
     

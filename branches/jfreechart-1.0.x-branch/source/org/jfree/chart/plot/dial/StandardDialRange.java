@@ -66,8 +66,8 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
         Cloneable, PublicCloneable, Serializable {
     
     /** For serialization. */
-    static final long serialVersionUID = 1016585407507121596L;
-    
+    static final long serialVersionUID = 345515648249364904L;
+
     /** The scale index. */
     private int scaleIndex;
     
