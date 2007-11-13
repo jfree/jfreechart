@@ -27,7 +27,7 @@
  * ------------
  * DialCap.java
  * ------------
- * (C) Copyright 2006, by Object Refinery Limited.
+ * (C) Copyright 2006, 2007, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -65,6 +65,9 @@ import org.jfree.util.PublicCloneable;
 public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable, 
         PublicCloneable, Serializable {
     
+    /** For serialization. */
+    static final long serialVersionUID = -2929484264982524463L;
+
     /**
      * The radius of the cap, as a percentage of the framing rectangle.
      */
