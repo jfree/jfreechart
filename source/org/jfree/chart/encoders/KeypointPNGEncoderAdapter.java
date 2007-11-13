@@ -53,7 +53,11 @@ import com.keypoint.PngEncoder;
  * compiled under a JDK < 1.4 or is being run using a JDK < 1.4.
  */
 public class KeypointPNGEncoderAdapter implements ImageEncoder {
+    
+    /** The quality setting. */
     private int quality = 9;
+    
+    /** Encode alpha? */
     private boolean encodingAlpha = false;
 
     /**
