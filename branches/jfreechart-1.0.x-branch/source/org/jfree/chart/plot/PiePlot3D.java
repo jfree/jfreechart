@@ -194,7 +194,8 @@ public class PiePlot3D extends PiePlot implements Serializable {
      * to all registered listeners.  This is only applied if the
      * section colour is an instance of {@link java.awt.Color}.
      *
-     * @param darker true to darken the sides, false to use the default behaviour.
+     * @param darker true to darken the sides, false to use the default 
+     *         behaviour.
      * 
      * @see #getDarkerSides()
      * 
