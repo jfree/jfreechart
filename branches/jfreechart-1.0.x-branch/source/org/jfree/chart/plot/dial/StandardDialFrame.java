@@ -119,8 +119,8 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      */
     public void setRadius(double radius) {
         if (radius <= 0) { 
-            throw new IllegalArgumentException("" +
-                        "The 'radius' must be positive.");
+            throw new IllegalArgumentException(
+                    "The 'radius' must be positive.");
         }
         this.radius = radius;
         notifyListeners(new DialLayerChangeEvent(this));

@@ -330,7 +330,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
         Arc2D inner = new Arc2D.Double(innerFrame, this.startAngle, this.extent, 
                 Arc2D.OPEN);
         Arc2D outer = new Arc2D.Double(outerFrame, this.startAngle 
-                + this.extent, - this.extent, Arc2D.OPEN);
+                + this.extent, -this.extent, Arc2D.OPEN);
         GeneralPath p = new GeneralPath();
         Point2D point1 = inner.getStartPoint();
         p.moveTo((float) point1.getX(), (float) point1.getY());
@@ -360,7 +360,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
         Arc2D inner = new Arc2D.Double(innerFrame, this.startAngle 
                 - angleMargin, this.extent + 2 * angleMargin, Arc2D.OPEN);
         Arc2D outer = new Arc2D.Double(outerFrame, this.startAngle 
-                + angleMargin + this.extent, - this.extent - 2 * angleMargin, 
+                + angleMargin + this.extent, -this.extent - 2 * angleMargin, 
                 Arc2D.OPEN);
         GeneralPath p = new GeneralPath();
         Point2D point1 = inner.getStartPoint();
