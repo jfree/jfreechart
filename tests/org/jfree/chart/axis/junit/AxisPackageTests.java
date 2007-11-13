@@ -41,6 +41,7 @@
  * 21-Mar-2007 : Added ExtendedCategoryAxisTests (DG);
  * 02-Aug-2007 : Added LogAxisTests and TickUnitsTests (DG);
  * 25-Oct-2007 : Added StandardTickUnitSourceTests (DG);
+ * 13-Nov-2007 : Added ModuloAxisTests (DG);
  * 
  */
 
@@ -84,6 +85,7 @@ public class AxisPackageTests extends TestCase {
         suite.addTestSuite(LogAxisTests.class);
         suite.addTestSuite(LogarithmicAxisTests.class);
         suite.addTestSuite(MarkerAxisBandTests.class);
+        suite.addTestSuite(ModuloAxisTests.class);
         suite.addTestSuite(MonthDateFormatTests.class);
         suite.addTestSuite(NumberAxisTests.class);
         suite.addTestSuite(NumberAxis3DTests.class);
