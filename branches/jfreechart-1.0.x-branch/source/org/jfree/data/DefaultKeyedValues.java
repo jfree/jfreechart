@@ -79,8 +79,10 @@ public class DefaultKeyedValues implements KeyedValues,
     /** For serialization. */
     private static final long serialVersionUID = 8468154364608194797L;
     
-    /** Storage for the data. */
+    /** Storage for the keys. */
     private ArrayList keys;
+    
+    /** Storage for the values. */
     private ArrayList values;
     
     /** 
