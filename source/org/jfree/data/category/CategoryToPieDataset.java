@@ -64,6 +64,7 @@ import org.jfree.util.TableOrder;
 public class CategoryToPieDataset extends AbstractDataset 
                                   implements PieDataset, DatasetChangeListener {
 
+    /** For serialization. */
     static final long serialVersionUID = 5516396319762189617L;
 
     /** The source. */
