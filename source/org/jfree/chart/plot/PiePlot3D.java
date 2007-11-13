@@ -591,7 +591,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
                 paint = c;
             }
         }
-    	
+
         double start = arc.getAngleStart();
         double extent = arc.getAngleExtent();
         double end = start + extent;
