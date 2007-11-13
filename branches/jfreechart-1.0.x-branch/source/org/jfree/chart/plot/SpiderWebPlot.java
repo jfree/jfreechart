@@ -1338,7 +1338,8 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                                    series, cat);
                         } 
                    
-                        Shape area = new Rectangle((int) (point.getX() - headW), 
+                        Shape area = new Rectangle(
+                                (int) (point.getX() - headW),
                                 (int) (point.getY() - headH), 
                                 (int) (headW * 2), (int) (headH * 2));
                         CategoryItemEntity entity = new CategoryItemEntity(
