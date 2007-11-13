@@ -940,7 +940,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
 
         PlotOrientation orientation = plot.getOrientation();
         Line2D line = null;
-        double v = axis.valueToJava2D(value, dataArea, plot.getDomainAxisEdge());
+        double v = axis.valueToJava2D(value, dataArea, 
+                plot.getDomainAxisEdge());
         if (orientation == PlotOrientation.HORIZONTAL) {
             line = new Line2D.Double(dataArea.getMinX(), v, dataArea.getMaxX(), 
                     v);
