@@ -154,25 +154,26 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
                                boolean drawDividers, Stroke dividerStroke, 
                                Paint dividerPaint) {
         if (periodClass == null) {
-            throw new IllegalArgumentException("Null 'periodClass' argument.");   
+            throw new IllegalArgumentException("Null 'periodClass' argument.");
         }
         if (dateFormat == null) {
-            throw new IllegalArgumentException("Null 'dateFormat' argument.");   
+            throw new IllegalArgumentException("Null 'dateFormat' argument.");
         }
         if (padding == null) {
-            throw new IllegalArgumentException("Null 'padding' argument.");   
+            throw new IllegalArgumentException("Null 'padding' argument.");
         }
         if (labelFont == null) {
-            throw new IllegalArgumentException("Null 'labelFont' argument.");   
+            throw new IllegalArgumentException("Null 'labelFont' argument.");
         }
         if (labelPaint == null) {
-            throw new IllegalArgumentException("Null 'labelPaint' argument.");   
+            throw new IllegalArgumentException("Null 'labelPaint' argument.");
         }
         if (dividerStroke == null) {
-            throw new IllegalArgumentException("Null 'dividerStroke' argument.");   
+            throw new IllegalArgumentException(
+                    "Null 'dividerStroke' argument.");   
         }
         if (dividerPaint == null) {
-            throw new IllegalArgumentException("Null 'dividerPaint' argument.");   
+            throw new IllegalArgumentException("Null 'dividerPaint' argument.");
         }
         this.periodClass = periodClass;
         this.dateFormat = dateFormat;
