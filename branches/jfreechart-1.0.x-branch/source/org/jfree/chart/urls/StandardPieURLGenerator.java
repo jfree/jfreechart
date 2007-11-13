@@ -133,7 +133,8 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
      *
      * @return A string containing the generated URL.
      */
-    public String generateURL(PieDataset dataset, Comparable key, int pieIndex) {
+    public String generateURL(PieDataset dataset, Comparable key, 
+            int pieIndex) {
         String url = this.prefix;
         if (url.indexOf("?") > -1) {
             url += "&amp;" + this.categoryParameterName + "=" 
