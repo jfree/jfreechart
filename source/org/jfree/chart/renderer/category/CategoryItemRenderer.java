@@ -1706,7 +1706,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
     public void setSeriesItemURLGenerator(int series, 
                                           CategoryURLGenerator generator);
 
-    // FIXME: add setSeriesItemURLGenerator(int, CategoryURLGenerator, boolean) ?
+    // FIXME: add setSeriesItemURLGenerator(int, CategoryURLGenerator, boolean)?
     
     /**
      * Returns the base item URL generator.
