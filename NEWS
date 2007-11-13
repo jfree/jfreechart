@@ -1,6 +1,6 @@
 JFreeChart 1.0.7
 ----------------
-?? October 2007
+13 November 2007
 
 This release features new classes DialPlot and LogAxis (previously in 
 experimental), initial support for minor tick units, a new anchored zooming 

@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.7  *
 *******************************
 
-?? November 2007
+13 November 2007
 
 (C)opyright 2000-2007, by Object Refinery Limited and Contributors.
 
@@ -67,7 +67,7 @@ Microsoft's Internet Explorer - your users will need to have the Java 2
 plug-in installed.  Most other browsers (e.g. Firefox, Mozilla, Netscape, 
 Konqueror) support JRE 1.4, 1.5 or 1.6.
 
-(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.10) 
+(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.12) 
 is included in the JFreeChart distribution.  You can obtain the complete
 source code for JCommon from:
 
@@ -193,7 +193,7 @@ developers that have made this possible.
 ---------------
 A list of changes in recent versions:
 
-1.0.7 : (??-Oct-2007)
+1.0.7 : (12-Nov-2007)
         - See the NEWS and ChangeLog files for a more detailed description of 
           the changes in this release.
 
