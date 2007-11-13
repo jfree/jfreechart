@@ -180,4 +180,19 @@ public class HashUtilities {
         return 37 * pre + h;
     }
 
+    /**
+     * Returns a hash value based on a seed value and a <code>Comparable</code>
+     * instance.
+     * 
+     * @param pre  the seed value.
+     * @param c  the comparable (<code>null</code> permitted).
+     * 
+     * @return A hash value.
+     * 
+     * @since 1.0.7
+     */
+    public static int hashCode(int pre, Comparable c) {
+        int h = (c != null ? c.hashCode() : 0);
+        return 37 * pre + h;
+    }
 }
