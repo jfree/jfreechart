@@ -81,6 +81,9 @@ import org.jfree.util.ShapeUtilities;
 public class LegendGraphic extends AbstractBlock 
                            implements Block, PublicCloneable {
     
+    /** For serialization. */
+    static final long serialVersionUID = -1338791523854985009L;
+
     /** 
      * A flag that controls whether or not the shape is visible - see also 
      * lineVisible. 
