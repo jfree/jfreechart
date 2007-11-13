@@ -67,7 +67,10 @@ import org.jfree.util.PublicCloneable;
  */
 public class DialTextAnnotation extends AbstractDialLayer implements DialLayer, 
         Cloneable, PublicCloneable, Serializable {
-    
+
+    /** For serialization. */
+    static final long serialVersionUID = 3065267524054428071L;
+
     /** The label text. */
     private String label;
     
