@@ -58,6 +58,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.io.SerialUtilities;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
@@ -183,8 +184,7 @@ public abstract class DialPointer extends AbstractDialLayer
      */
     public int hashCode() {
         int result = 23;
-        long l = Double.doubleToLongBits(this.radius);
-        result = 37 * result + (int) (l ^ (l >>> 32));
+        result = HashUtilities.hashCode(result, this.radius);
         return result;
     }
     
@@ -205,6 +205,9 @@ public abstract class DialPointer extends AbstractDialLayer
      */
     public static class Pin extends DialPointer {
     
+        /** For serialization. */
+        static final long serialVersionUID = -8445860485367689750L;
+
         /** The paint. */
         private transient Paint paint;
     
@@ -337,6 +340,18 @@ public abstract class DialPointer extends AbstractDialLayer
         }
         
         /**
+         * Returns a hash code for this instance.
+         * 
+         * @return A hash code.
+         */
+        public int hashCode() {
+            int result = super.hashCode();
+            result = HashUtilities.hashCode(result, this.paint);
+            result = HashUtilities.hashCode(result, this.stroke);
+            return result;
+        }
+        
+        /**
          * Provides serialization support.
          *
          * @param stream  the output stream.
@@ -370,6 +385,9 @@ public abstract class DialPointer extends AbstractDialLayer
      * A dial pointer.
      */
     public static class Pointer extends DialPointer {
+        
+        /** For serialization. */
+        static final long serialVersionUID = -4180500011963176960L;
         
         /**
          * The radius that defines the width of the pointer at the base.
@@ -500,7 +518,17 @@ public abstract class DialPointer extends AbstractDialLayer
             return super.equals(obj);
         }
         
-        
+        /**
+         * Returns a hash code for this instance.
+         * 
+         * @return A hash code.
+         */
+        public int hashCode() {
+            int result = super.hashCode();
+            result = HashUtilities.hashCode(result, this.widthRadius);
+            return result;
+        }
+       
     }
 
 }
