@@ -51,6 +51,8 @@ import java.util.Hashtable;
  * {@link ImageFormat}s.
  */
 public class ImageEncoderFactory {
+    
+    /** Storage for the encoders. */
     private static Hashtable encoders = null;
 
     static {
