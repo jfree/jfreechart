@@ -1076,8 +1076,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                             position, g2));
                 }
                 Tick tick = new CategoryTick(category, label, 
-                        position.getLabelAnchor(), position.getRotationAnchor(), 
-                        position.getAngle());
+                        position.getLabelAnchor(),
+                        position.getRotationAnchor(), position.getAngle());
                 ticks.add(tick);
                 categoryIndex = categoryIndex + 1;
             }
