@@ -50,6 +50,8 @@ import java.util.List;
 
 import javax.swing.event.EventListenerList;
 
+import org.jfree.chart.HashUtilities;
+
 /**
  * A base class that can be used to implement a {@link DialLayer}.  It includes
  * an event notification mechanism.
@@ -112,6 +114,17 @@ public abstract class AbstractDialLayer implements DialLayer {
         }
         AbstractDialLayer that = (AbstractDialLayer) obj;
         return this.visible == that.visible;
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = 23;
+        result = HashUtilities.hashCode(result, this.visible);
+        return result;
     }
     
     /**
