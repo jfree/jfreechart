@@ -72,6 +72,9 @@ import org.jfree.util.PaintUtilities;
 public class CategoryLineAnnotation implements CategoryAnnotation, 
                                                Cloneable, Serializable {
     
+    /** For serialization. */
+    static final long serialVersionUID = 3477740483341587984L;
+
     /** The category for the start of the line. */
     private Comparable category1;
 
