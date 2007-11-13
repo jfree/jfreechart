@@ -463,8 +463,8 @@ public interface XYItemRenderer extends LegendItemSource {
 //    public Paint getSeriesFillPaint(int series);
 //    
 //    /**
-//     * Sets the paint used for a series and sends a {@link RendererChangeEvent}
-//     * to all registered listeners.
+//     * Sets the paint used for a series and sends a 
+//     * {@link RendererChangeEvent} to all registered listeners.
 //     *
 //     * @param series  the series index (zero-based).
 //     * @param paint  the paint (<code>null</code> permitted).
