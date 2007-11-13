@@ -447,7 +447,7 @@ public class TextTitle extends Title
                 throw new RuntimeException("Not yet implemented."); 
             }
             else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");                 
+                throw new RuntimeException("Not yet implemented.");
             }            
         }
         else if (w == LengthConstraintType.RANGE) {
@@ -459,7 +459,7 @@ public class TextTitle extends Title
                         cc.getHeightRange()); 
             }
             else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");                 
+                throw new RuntimeException("Not yet implemented.");
             }
         }
         else if (w == LengthConstraintType.FIXED) {
@@ -470,7 +470,7 @@ public class TextTitle extends Title
                 throw new RuntimeException("Not yet implemented."); 
             }
             else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");                 
+                throw new RuntimeException("Not yet implemented.");
             }
         }
         return new Size2D(calculateTotalWidth(contentSize.getWidth()),
@@ -563,7 +563,7 @@ public class TextTitle extends Title
         if (params instanceof EntityBlockParams) {
             EntityBlockParams p = (EntityBlockParams) params;
             if (p.getGenerateEntities()) {
-                entity = new ChartEntity(area, this.toolTipText, this.urlText);    
+                entity = new ChartEntity(area, this.toolTipText, this.urlText);
             }
         }
         area = trimBorder(area);
