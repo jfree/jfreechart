@@ -97,7 +97,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.paint = paint;
-        this.gradientPaintTransformer = new StandardGradientPaintTransformer();        
+        this.gradientPaintTransformer = new StandardGradientPaintTransformer();
     }
     
     /**
@@ -181,7 +181,8 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
 
         Paint p = this.paint;
         if (p instanceof GradientPaint) {
-            p = this.gradientPaintTransformer.transform((GradientPaint) p, view);
+            p = this.gradientPaintTransformer.transform((GradientPaint) p, 
+                    view);
         }
         g2.setPaint(p);
         g2.fill(view);
