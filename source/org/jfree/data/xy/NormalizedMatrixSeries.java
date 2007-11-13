@@ -126,7 +126,13 @@ public class NormalizedMatrixSeries extends MatrixSeries {
 
 
     /**
-     * @see org.jfree.data.xy.MatrixSeries#update(int, int, double)
+     * Updates the value of the specified item in this matrix series.
+     *
+     * @param i the row of the item.
+     * @param j the column of the item.
+     * @param mij the new value for the item.
+     * 
+     * @see #get(int, int)
      */
     public void update(int i, int j, double mij) {
         this.m_totalSum -= get(i, j);
