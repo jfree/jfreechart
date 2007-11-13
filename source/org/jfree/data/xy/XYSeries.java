@@ -575,7 +575,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      */
     public int indexOf(Number x) {
         if (this.autoSort) {
-            return Collections.binarySearch(this.data, new XYDataItem(x, null));   
+            return Collections.binarySearch(this.data, new XYDataItem(x, null));
         }
         else {
             for (int i = 0; i < this.data.size(); i++) {
