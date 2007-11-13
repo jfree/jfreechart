@@ -305,6 +305,5 @@ public class MonthDateFormat extends DateFormat {
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
         sdf.setNumberFormat(null);
-        System.out.println(sdf.equals("X"));
     }
 }
