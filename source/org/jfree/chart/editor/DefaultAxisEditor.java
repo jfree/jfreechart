@@ -459,11 +459,12 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
 
 //    /**
 //     * Presents insets chooser panel allowing user to modify tick label's
-//     * individual insets values. Updates the current insets text field if edit
-//     * is accepted.
+//     * individual insets values. Updates the current insets text field if 
+//     * edit is accepted.
 //     */
 //    private void editTickLabelInsets() {
-//        InsetsChooserPanel panel = new InsetsChooserPanel(this.tickLabelInsets);
+//        InsetsChooserPanel panel = new InsetsChooserPanel(
+//            this.tickLabelInsets);
 //        int result =  JOptionPane.showConfirmDialog(
 //            this, panel, localizationResources.getString("Edit_Insets"),
 //            JOptionPane.PLAIN_MESSAGE
