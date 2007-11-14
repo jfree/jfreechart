@@ -36,11 +36,13 @@
  * -------
  * 25-Mar-2003 : Version 1 (DG);
  * 28-Aug-2007 : Added tests for bug 1779941 (DG);
- *
+ * 14-Nov-2007 : Updated testEquals() (DG);
+ * 
  */
 
 package org.jfree.chart.renderer.category.junit;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -95,6 +97,11 @@ public class StatisticalBarRendererTests extends TestCase {
         r1.setErrorIndicatorPaint(Color.red);
         assertFalse(r1.equals(r2));
         r2.setErrorIndicatorPaint(Color.red);
+        assertTrue(r2.equals(r1));
+        
+        r1.setErrorIndicatorStroke(new BasicStroke(1.5f));
+        assertFalse(r1.equals(r2));
+        r2.setErrorIndicatorStroke(new BasicStroke(1.5f));
         assertTrue(r2.equals(r1));
     }
 
