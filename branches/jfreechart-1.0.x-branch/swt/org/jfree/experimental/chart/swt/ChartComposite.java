@@ -53,16 +53,20 @@
  *               than maximum draw width/height (HP);
  * 23-May-2007 : Added some dispose call to free SWT resources, patch sent by 
  *               Cédric Chabanois (CC);
- * 06-Jun-2007 : Fixed minor issues with tooltips. bug reported and fix proposed 
- *               by Christoph Beck, bug 1726404 (HP);
- * 22-Oct-2007 : Added addChartMouseListener and removeChartMouseListener methods
- *               as suggested by Christoph Beck, bug 1742002 (HP);
+ * 06-Jun-2007 : Fixed minor issues with tooltips. bug reported and fix 
+ *               proposed by Christoph Beck, bug 1726404 (HP);
+ * 22-Oct-2007 : Added addChartMouseListener and removeChartMouseListener 
+ *               methods as suggested by Christoph Beck, bug 1742002 (HP);
  * 22-Oct-2007 : Fixed bug in zooming with multiple plots (HP);
- * 22-Oct-2007 : Check for null zoom point when restoring auto range and domain bounds (HP);
+ * 22-Oct-2007 : Check for null zoom point when restoring auto range and domain
+ *               bounds (HP);
  * 22-Oct-2007 : Pass mouse moved events to listening ChartMouseListeners (HP);
  * 22-Oct-2007 : Refactored class, now implements PaintListener, MouseListener, 
- *               MouseMoveListener. Made the chart field be private again and added 
- *               new method addSWTListener to allow custom behavior. 
+ *               MouseMoveListener. Made the chart field be private again and 
+ *               added new method addSWTListener to allow custom behavior.
+ * 14-Nov-2007 : Create canvas with SWT.DOUBLE_BUFFER, added 
+ *               getChartRenderingInfo(), is/setDomainZoomable() and 
+ *               is/setRangeZoomable() as per feature request (DG);
  */
 
 package org.jfree.experimental.chart.swt;
@@ -525,7 +529,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         this.zoomTriggerDistance = DEFAULT_ZOOM_TRIGGER_DISTANCE;
         this.setDisplayToolTips(tooltips);
         // create the canvas and add the required listeners
-        this.canvas = new Canvas(this, SWT.NO_BACKGROUND);
+        this.canvas = new Canvas(this, SWT.DOUBLE_BUFFERED | SWT.NO_BACKGROUND);
         this.canvas.addPaintListener(this);
         this.canvas.addMouseListener(this);
         this.canvas.addMouseMoveListener(this);
@@ -632,6 +636,73 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         }
         if (this.useBuffer) {
             this.refreshBuffer = true;
+        }
+    }
+
+    /**
+     * Returns the chart rendering info from the most recent chart redraw.
+     *
+     * @return The chart rendering info (possibly <code>null</code>).
+     */
+    public ChartRenderingInfo getChartRenderingInfo() {
+        return this.info;
+    }
+    
+    /**
+     * Returns the flag that determines whether or not zooming is enabled for 
+     * the domain axis.
+     * 
+     * @return A boolean.
+     */
+    public boolean isDomainZoomable() {
+        return this.domainZoomable;
+    }
+    
+    /**
+     * Sets the flag that controls whether or not zooming is enable for the 
+     * domain axis.  A check is made to ensure that the current plot supports
+     * zooming for the domain values.
+     *
+     * @param flag  <code>true</code> enables zooming if possible.
+     */
+    public void setDomainZoomable(boolean flag) {
+        if (flag) {
+            Plot plot = this.chart.getPlot();
+            if (plot instanceof Zoomable) {
+                Zoomable z = (Zoomable) plot;
+                this.domainZoomable = flag && (z.isDomainZoomable());  
+            }
+        }
+        else {
+            this.domainZoomable = false;
+        }
+    }
+
+    /**
+     * Returns the flag that determines whether or not zooming is enabled for 
+     * the range axis.
+     * 
+     * @return A boolean.
+     */
+    public boolean isRangeZoomable() {
+        return this.rangeZoomable;
+    }
+    
+    /**
+     * A flag that controls mouse-based zooming on the vertical axis.
+     *
+     * @param flag  <code>true</code> enables zooming.
+     */
+    public void setRangeZoomable(boolean flag) {
+        if (flag) {
+            Plot plot = this.chart.getPlot();
+            if (plot instanceof Zoomable) {
+                Zoomable z = (Zoomable) plot;
+                this.rangeZoomable = flag && (z.isRangeZoomable());  
+            }
+        }
+        else {
+            this.rangeZoomable = false;
         }
     }
 
