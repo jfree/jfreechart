@@ -1,5 +1,15 @@
 2007-11-14  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* swt/org/jfree/experimental/chart/swt/ChartComposite.java
+	(ChartComposite): Create canvas with SWT.DOUBLE_BUFFERED,
+	(getChartRenderingInfo): New method,
+	(isDomainZoomable): Likewise,
+	(setDomainZoomable): Likewise,
+	(isRangeZoomable): Likewise,
+	(setRangeZoomable): Likewise.
+
+2007-11-14  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/plot/CategoryPlot.java
 	(setWeight): Fire change event,
 	(setFixedDomainAxisSpace(AxisSpace)): Delegate to new method,
