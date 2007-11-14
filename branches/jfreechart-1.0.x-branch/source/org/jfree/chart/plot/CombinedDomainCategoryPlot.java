@@ -52,7 +52,7 @@
  * 13-Sep-2006 : Updated API docs (DG);
  * 30-Oct-2006 : Added new getCategoriesForAxis() override (DG);
  * 17-Apr-2007 : Added null argument checks to findSubplot() (DG);
- *
+ * 14-Nov-2007 : Updated setFixedRangeAxisSpaceForSubplots() method (DG);
  */
 
 package org.jfree.chart.plot;
@@ -463,13 +463,11 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * @param space  the space (<code>null</code> permitted).
      */
     protected void setFixedRangeAxisSpaceForSubplots(AxisSpace space) {
-
         Iterator iterator = this.subplots.iterator();
         while (iterator.hasNext()) {
             CategoryPlot plot = (CategoryPlot) iterator.next();
-            plot.setFixedRangeAxisSpace(space);
+            plot.setFixedRangeAxisSpace(space, false);
         }
-
     }
 
     /**

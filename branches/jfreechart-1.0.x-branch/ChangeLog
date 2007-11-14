@@ -1,3 +1,16 @@
+2007-11-14  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/plot/CategoryPlot.java
+	(setWeight): Fire change event,
+	(setFixedDomainAxisSpace(AxisSpace)): Delegate to new method,
+	(setFixedDomainAxisSpace(AxisSpace, boolean)): New method,
+	(setFixedRangeAxisSpace(AxisSpace)): Delegate to new method,
+	(setFixedRangeAxisSpace(AxisSpace, boolean)): New method,
+	* source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java
+	(setFixedRangeAxisSpaceForSubplots): Updated,
+	* source/org/jfree/chart/plot/CombinedRangeCategoryPlot.java
+	(setFixedDomainAxisSpaceForSubplots): Updated.
+
 2007-11-13  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfere/chart/HashUtilities.java

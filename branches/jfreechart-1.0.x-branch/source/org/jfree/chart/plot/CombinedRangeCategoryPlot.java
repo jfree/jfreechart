@@ -49,7 +49,7 @@
  * 21-Feb-2005 : The getLegendItems() method now returns the fixed legend
  *               items if set (DG);
  * 05-May-2005 : Updated draw() method parameters (DG);
- * 
+ * 14-Nov-2007 : Updated setFixedDomainAxisSpaceForSubplots() method (DG);
  */
  
 package org.jfree.chart.plot;
@@ -442,13 +442,11 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * @param space  the space.
      */
     protected void setFixedDomainAxisSpaceForSubplots(AxisSpace space) {
-
         Iterator iterator = this.subplots.iterator();
         while (iterator.hasNext()) {
             CategoryPlot plot = (CategoryPlot) iterator.next();
-            plot.setFixedDomainAxisSpace(space);
+            plot.setFixedDomainAxisSpace(space, false);
         }
-
     }
 
     /**

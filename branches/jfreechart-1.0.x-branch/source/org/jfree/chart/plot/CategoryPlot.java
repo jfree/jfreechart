@@ -152,6 +152,7 @@
  * 25-Oct-2007 : Added some argument checks (DG);
  * 05-Nov-2007 : Applied patch 1823697, by Richard West, for removal of domain
  *               and range markers (DG);
+ * 14-Nov-2007 : Added missing event notifications (DG);
  *
  */
 
@@ -3326,7 +3327,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the weight for the plot.
+     * Sets the weight for the plot and sends a {@link PlotChangeEvent} to all
+     * registered listeners.
      *
      * @param weight  the weight.
      * 
@@ -3334,7 +3336,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      */
     public void setWeight(int weight) {
         this.weight = weight;
-        // TODO: notify?
+        notifyListeners(new PlotChangeEvent(this));
     }
     
     /**
@@ -3349,15 +3351,33 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the fixed domain axis space.
+     * Sets the fixed domain axis space and sends a {@link PlotChangeEvent} to
+     * all registered listeners.
      *
      * @param space  the space (<code>null</code> permitted).
      * 
      * @see #getFixedDomainAxisSpace()
      */
     public void setFixedDomainAxisSpace(AxisSpace space) {
+        setFixedDomainAxisSpace(space, true);
+    }
+
+    /**
+     * Sets the fixed domain axis space and sends a {@link PlotChangeEvent} to
+     * all registered listeners.
+     *
+     * @param space  the space (<code>null</code> permitted).
+     * @param notify  notify listeners?
+     * 
+     * @see #getFixedDomainAxisSpace()
+     * 
+     * @since 1.0.7
+     */
+    public void setFixedDomainAxisSpace(AxisSpace space, boolean notify) {
         this.fixedDomainAxisSpace = space;
-        // TODO: notify?
+        if (notify) {
+            notifyListeners(new PlotChangeEvent(this));
+        }
     }
 
     /**
@@ -3372,15 +3392,33 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the fixed range axis space.
+     * Sets the fixed range axis space and sends a {@link PlotChangeEvent} to 
+     * all registered listeners.
      *
      * @param space  the space (<code>null</code> permitted).
      * 
      * @see #getFixedRangeAxisSpace()
      */
     public void setFixedRangeAxisSpace(AxisSpace space) {
+        setFixedRangeAxisSpace(space, true);
+    }
+
+    /**
+     * Sets the fixed range axis space and sends a {@link PlotChangeEvent} to 
+     * all registered listeners.
+     *
+     * @param space  the space (<code>null</code> permitted).
+     * @param notify  notify listeners?
+     * 
+     * @see #getFixedRangeAxisSpace()
+     *
+     * @since 1.0.7
+     */
+    public void setFixedRangeAxisSpace(AxisSpace space, boolean notify) {
         this.fixedRangeAxisSpace = space;
-        // TODO: fire event?
+        if (notify) {
+            notifyListeners(new PlotChangeEvent(this));
+        }
     }
 
     /**
