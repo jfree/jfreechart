@@ -1,3 +1,13 @@
+2007-11-19  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/plot/dial/StandardDialScale.java
+	(getLowerBound): New method,
+	(setLowerBound): Likewise,
+	(getUpperBound): Likewise,
+	(setUpperBound): Likewise,
+	(getMinorTickStroke): Likewise,
+	(setMinorTickStroke): Likewise.
+
 2007-11-14  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/renderer/category/StatisticalBarRenderer.java
