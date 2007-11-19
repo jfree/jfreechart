@@ -30,7 +30,8 @@ API Adjustments:
 - PlotUtilities - new class;
 - PolarPlot - added new zooming methods;
 - ThermometerPlot - likewise;
-- XYPlot - likewise;
+- XYPlot - added methods to remove markers (patch 1823697--same as for 
+           CategoryPlot), and added new zooming methods; 
 - Zoomable - added new zooming methods to this interface;
 - LineAndShapeRenderer - added useSeriesOffset and itemMargin attributes;
 - MinMaxCategoryRenderer - implemented equals();
@@ -47,6 +48,10 @@ API Adjustments:
 - Week - added new constructor;
 - KeyedObjects - added insertValue() and clear() methods;
 - KeyedObjects2D - added clear() method.
+
+Patches:
+1823724 - updated XYDifferenceRenderer to support item labels;
+1827829 - fixed possible NullPointerException in XYBarRenderer;
 
 Bug Fixes:
 
