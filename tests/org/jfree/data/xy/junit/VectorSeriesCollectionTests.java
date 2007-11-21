@@ -169,6 +169,7 @@ public class VectorSeriesCollectionTests extends TestCase {
         assertFalse(b);
         assertEquals(1, vsc.getSeriesCount());
         b = vsc.removeSeries(s2);
+        assertTrue(b);
         assertEquals(0, vsc.getSeriesCount());
     }
     
