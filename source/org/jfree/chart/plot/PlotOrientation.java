@@ -36,6 +36,7 @@
  * --------
  * 02-May-2003 : Version 1 (DG);
  * 17-Jul-2003 : Added readResolve() method (DG);
+ * 21-Nov-2007 : Implemented hashCode() (DG);
  *
  */
 
@@ -54,11 +55,11 @@ public final class PlotOrientation implements Serializable {
     
     /** For a plot where the range axis is horizontal. */
     public static final PlotOrientation HORIZONTAL
-        = new PlotOrientation("PlotOrientation.HORIZONTAL");
+            = new PlotOrientation("PlotOrientation.HORIZONTAL");
 
     /** For a plot where the range axis is vertical. */
     public static final PlotOrientation VERTICAL
-        = new PlotOrientation("PlotOrientation.VERTICAL");
+            = new PlotOrientation("PlotOrientation.VERTICAL");
 
     /** The name. */
     private String name;
@@ -85,26 +86,31 @@ public final class PlotOrientation implements Serializable {
      * Returns <code>true</code> if this object is equal to the specified 
      * object, and <code>false</code> otherwise.
      *
-     * @param o  the other object.
+     * @param obj  the object (<code>null</code> permitted).
      *
      * @return A boolean.
      */
-    public boolean equals(Object o) {
-
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (!(o instanceof PlotOrientation)) {
+        if (!(obj instanceof PlotOrientation)) {
             return false;
         }
-
-        PlotOrientation orientation = (PlotOrientation) o;
+        PlotOrientation orientation = (PlotOrientation) obj;
         if (!this.name.equals(orientation.toString())) {
             return false;
         }
-
         return true;
-
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        return this.name.hashCode();
     }
     
     /**

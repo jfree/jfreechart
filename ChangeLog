@@ -1,5 +1,16 @@
 2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/plot/DatasetRenderingOrder.java
+	(hashCode): Implemented,
+	* source/org/jfree/chart/plot/DialShape.java
+	(hashCode): Likewise,
+	* source/org/jfree/chart/plot/PlotOrientation.java
+	(hashCode): Likewise,
+	* source/org/jfree/chart/plot/SeriesRenderingOrder.java
+	(hashCode): Likewise.
+
+2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/axis/DateAxis.java
 	(previousStandardDate): Return dates already fetched.
 

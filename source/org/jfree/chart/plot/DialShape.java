@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 20-Aug-2003 : Version 1 (DG);
+ * 12-Nov-2007 : Implemented hashCode() (DG);
  *
  */
 
@@ -102,6 +103,15 @@ public final class DialShape implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        return this.name.hashCode();
     }
     
     /**
