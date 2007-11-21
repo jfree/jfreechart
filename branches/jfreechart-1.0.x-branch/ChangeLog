@@ -1,5 +1,10 @@
 2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/axis/DateAxis.java
+	(previousStandardDate): Return dates already fetched.
+
+2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/renderer/CategoryAxis.java
 	(equalPaintMaps): Use entrySet rather than keySet.
 
