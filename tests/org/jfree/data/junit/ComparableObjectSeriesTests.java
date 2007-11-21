@@ -122,7 +122,7 @@ public class ComparableObjectSeriesTests extends TestCase {
         // try null key
         boolean pass = false;
         try {
-            s1 = new ComparableObjectSeries(null);
+            /*s1 = */new ComparableObjectSeries(null);
         }
         catch (IllegalArgumentException e) {
             pass = true;
