@@ -40,6 +40,7 @@
  * 01-Aug-2006 : Extended testGetIndex() method (DG);
  * 30-Apr-2007 : Added some new tests (DG);
  * 03-Oct-2007 : Updated testRemoveValue() (DG);
+ * 21-Nov-2007 : Added testGetIndex2() method (DG);
  *
  */
 
@@ -231,6 +232,17 @@ public class DefaultKeyedValuesTests extends TestCase {
         assertTrue(pass);
     }
     
+    /**
+     * Another check for the getIndex(Comparable) method.
+     */
+    public void testGetIndex2() {
+    	DefaultKeyedValues v = new DefaultKeyedValues();
+    	assertEquals(-1, v.getIndex("K1"));
+    	v.addValue("K1", 1.0);
+    	assertEquals(0, v.getIndex("K1"));
+    	v.removeValue("K1");
+    	assertEquals(-1, v.getIndex("K1"));
+    }
     /**
      * Some checks for the addValue() method.
      */

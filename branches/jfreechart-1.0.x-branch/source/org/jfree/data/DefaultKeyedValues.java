@@ -53,6 +53,7 @@
  * 30-Apr-2007 : Added insertValue() methods (DG);
  * 31-Oct-2007 : Performance improvements by using separate lists for keys and 
  *               values (TM);
+ * 21-Nov-2007 : Fixed bug in removeValue() method from previous patch (DG);
  *               
  */
 
@@ -314,11 +315,7 @@ public class DefaultKeyedValues implements KeyedValues,
     public void removeValue(int index) {
         this.keys.remove(index);
         this.values.remove(index);
-
-        // did we remove the last item? If not, then rebuild the index ..
-        if (index < this.keys.size()) {
-            rebuildIndex();
-        }
+        rebuildIndex();
     }
 
     /**

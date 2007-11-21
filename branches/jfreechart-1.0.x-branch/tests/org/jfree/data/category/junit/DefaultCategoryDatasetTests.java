@@ -36,6 +36,7 @@
  * -------
  * 23-Mar-2004 : Version 1 (DG);
  * 08-Mar-2007 : Added testCloning() (DG);
+ * 21-Nov-2007 : Added testBug1835955() method (DG);
  *
  */
 
@@ -336,4 +337,17 @@ public class DefaultCategoryDatasetTests extends TestCase {
         assertTrue(d1.equals(d2));
     }
 
+    private static final double EPSILON = 0.0000000001;
+    
+    /**
+     * A test for bug 1835955.
+     */
+    public void testBug1835955() {
+    	DefaultCategoryDataset d = new DefaultCategoryDataset();
+    	d.addValue(1.0, "R1", "C1");
+    	d.addValue(2.0, "R2", "C2");
+    	d.removeColumn("C2");
+    	d.addValue(3.0, "R2", "C2");
+    	assertEquals(3.0, d.getValue("R2", "C2").doubleValue(), EPSILON);
+    }
 }

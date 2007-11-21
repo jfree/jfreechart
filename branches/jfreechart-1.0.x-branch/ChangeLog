@@ -1,5 +1,19 @@
 2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/DefaultKeyedValues.java
+    (removeValue): Always rebuild index,
+    * source/org/jfree/data/DefaultKeyedValues2D.java
+    (removeColumn(Comparable)): Added argument checks, and protect against
+    rows not containing the specified key,
+    * tests/org/jfree/data/category/junit/DefaultCategoryDatasetTests.java
+    (testBug1835955): New method,
+    * tests/org/jfree/data/junit/DefaultKeyedValues2DTests.java
+    (testRemoveColumnByKey): New method,
+    * tests/org/jfree/data/junit/DefaultKeyedValuesTests.java
+    (testGetIndex2): New method.
+
+2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
     Fix for bug 1832432:
     * source/org/jfree/data/time/TimeSeries.java
     (clone): Reimplemented.
