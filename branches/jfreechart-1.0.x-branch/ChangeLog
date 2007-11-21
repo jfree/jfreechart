@@ -1,5 +1,11 @@
 2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Fix for bug 1832432:
+    * source/org/jfree/data/time/TimeSeries.java
+    (clone): Reimplemented.
+
+2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/plot/DatasetRenderingOrder.java
 	(hashCode): Implemented,
 	* source/org/jfree/chart/plot/DialShape.java
