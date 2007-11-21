@@ -41,6 +41,7 @@
  * 16-Jun-2005 : Added MultiplePiePlotTests (DG);
  * 19-Aug-2005 : Added CategoryMarkerTests (DG);
  * 05-Sep-2006 : Added MarkerTests (DG);
+ * 21-Nov-2007 : Added PieLabelRecordTests (DG);
  *
  */
 
@@ -80,6 +81,7 @@ public class PlotPackageTests extends TestCase {
         suite.addTestSuite(MeterIntervalTests.class);
         suite.addTestSuite(MeterPlotTests.class);
         suite.addTestSuite(MultiplePiePlotTests.class);
+        suite.addTestSuite(PieLabelRecordTests.class);
         suite.addTestSuite(PiePlotTests.class);
         suite.addTestSuite(PiePlot3DTests.class);
         suite.addTestSuite(PlotOrientationTests.class);

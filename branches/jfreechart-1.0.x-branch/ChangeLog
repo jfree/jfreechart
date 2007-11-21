@@ -1,5 +1,10 @@
 2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/renderer/PieLabelRecord.java
+	(equals): Implemented.
+
+2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/renderer/Outlier.java
 	(equals): Implemented.
 

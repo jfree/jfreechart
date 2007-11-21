@@ -36,6 +36,7 @@
  * -------
  * 08-Mar-2004 : Version 1 (DG);
  * 14-Jun-2007 : Implemented Serializable, updated API docs (DG);
+ * 21-Nov-2007 : Implemented equals() to shut up FindBugs (DG);
  *
  */
 
@@ -228,6 +229,48 @@ public class PieLabelRecord implements Comparable, Serializable {
             }
         }
         return result;
+    }
+    
+    /**
+     * Tests this record for equality with an arbitrary object.
+     * 
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof PieLabelRecord)) {
+            return false;
+        }
+        PieLabelRecord that = (PieLabelRecord) obj;
+        if (!this.key.equals(that.key)) {
+            return false;
+        }
+        if (this.angle != that.angle) {
+            return false;
+        }
+        if (this.gap != that.gap) {
+            return false;
+        }
+        if (this.allocatedY != that.allocatedY) {
+            return false;
+        }
+        if (this.baseY != that.baseY) {
+            return false;
+        }
+        if (this.labelHeight != that.labelHeight) {
+            return false;
+        }
+        if (this.linkPercent != that.linkPercent) {
+            return false;
+        }
+        if (!this.label.equals(that.label)) {
+            return false;
+        }
+        return true;
     }
     
     /**
