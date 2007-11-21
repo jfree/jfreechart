@@ -39,6 +39,7 @@
  * 28-Aug-2003 : Minor tidy-up (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
+ * 21-Nov-2007 : Implemented equals() to shut up FindBugs (DG);
  *
  */
 
@@ -173,6 +174,30 @@ public class Outlier implements Comparable {
                 && (other.getY() <= getY() + (this.radius * 1.1)));
     }
 
+    /**
+     * Tests this outlier for equality with an arbitrary object.
+     * 
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Outlier)) {
+            return false;
+        }
+        Outlier that = (Outlier) obj;
+        if (!this.point.equals(that.point)) {
+            return false;
+        }
+        if (this.radius != that.radius) {
+            return false;
+        }
+        return true;
+    }
+    
     /**
      * Returns a textual representation of the outlier.
      *

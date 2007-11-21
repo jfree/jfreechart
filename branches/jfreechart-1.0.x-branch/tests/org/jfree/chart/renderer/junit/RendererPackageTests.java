@@ -38,6 +38,7 @@
  * 22-Oct-2003 : Added BoxAndWhiskerRendererTests (DG);
  * 04-Aug-2006 : Added DefaultPolarItemRendererTests (DG);
  * 31-Jan-2007 : Added GrayPaintScaleTests and LookupPaintScaleTests (DG);
+ * 21-Nov-2007 : Added OutlierTests and missing RendererUtilitiesTests (DG);
  *
  */
 
@@ -66,6 +67,8 @@ public class RendererPackageTests extends TestCase {
         suite.addTestSuite(DefaultPolarItemRendererTests.class);
         suite.addTestSuite(GrayPaintScaleTests.class);
         suite.addTestSuite(LookupPaintScaleTests.class);
+        suite.addTestSuite(OutlierTests.class);
+        suite.addTestSuite(RendererUtilitiesTests.class);
         return suite;
     }
 
