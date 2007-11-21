@@ -49,6 +49,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 18-Jan-2007 : Fixed bug in getValue() method (DG);
  * 30-Mar-2007 : Fixed bug 1690654, problem with removeValue() (DG);
+ * 21-Nov-2007 : Fixed bug (1835955) in removeColumn(Comparable) method (DG);
  *
  */
 
@@ -437,18 +438,32 @@ public class DefaultKeyedValues2D implements KeyedValues2D,
     }
 
     /**
-     * Removes a column.
+     * Removes a column from the table.
      *
      * @param columnKey  the column key (<code>null</code> not permitted).
+     * 
+     * @throws UnknownKeyException if the table does not contain a column with
+     *     the specified key.
+     * @throws IllegalArgumentException if <code>columnKey</code> is 
+     *     <code>null</code>.
      * 
      * @see #removeColumn(int)
      * @see #removeRow(Comparable)
      */
     public void removeColumn(Comparable columnKey) {
+    	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
         Iterator iterator = this.rows.iterator();
         while (iterator.hasNext()) {
             DefaultKeyedValues rowData = (DefaultKeyedValues) iterator.next();
-            rowData.removeValue(columnKey);
+            int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+                rowData.removeValue(columnKey);
+            }
         }
         this.columnKeys.remove(columnKey);
     }
