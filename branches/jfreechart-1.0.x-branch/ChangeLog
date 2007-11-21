@@ -1,5 +1,10 @@
 2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/renderer/CategoryAxis.java
+	(equalPaintMaps): Use entrySet rather than keySet.
+
+2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/renderer/PieLabelRecord.java
 	(equals): Implemented.
 
