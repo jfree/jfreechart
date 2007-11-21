@@ -36,6 +36,7 @@
  * --------
  * 02-May-2003 : Version 1 (DG);
  * 02-Jun-2004 : Changed 'STANDARD' --> 'FORWARD' (DG);
+ * 21-Nov-2007 : Implemented hashCode() (DG);
  *
  */
 
@@ -59,14 +60,14 @@ public final class DatasetRenderingOrder implements Serializable {
      * of datasets. 
      */
     public static final DatasetRenderingOrder FORWARD
-        = new DatasetRenderingOrder("DatasetRenderingOrder.FORWARD");
+            = new DatasetRenderingOrder("DatasetRenderingOrder.FORWARD");
 
     /** 
      * Render datasets in the order N-1, N-2, ..., 2, 1, 0, where N is the 
      * number of datasets. 
      */
     public static final DatasetRenderingOrder REVERSE
-        = new DatasetRenderingOrder("DatasetRenderingOrder.REVERSE");
+            = new DatasetRenderingOrder("DatasetRenderingOrder.REVERSE");
 
     /** The name. */
     private String name;
@@ -93,26 +94,31 @@ public final class DatasetRenderingOrder implements Serializable {
      * Returns <code>true</code> if this object is equal to the specified 
      * object, and <code>false</code> otherwise.
      *
-     * @param o  the other object.
+     * @param obj  the object (<code>null</code> permitted).
      *
      * @return A boolean.
      */
-    public boolean equals(Object o) {
-
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (!(o instanceof DatasetRenderingOrder)) {
+        if (!(obj instanceof DatasetRenderingOrder)) {
             return false;
         }
-
-        DatasetRenderingOrder order = (DatasetRenderingOrder) o;
+        DatasetRenderingOrder order = (DatasetRenderingOrder) obj;
         if (!this.name.equals(order.toString())) {
             return false;
         }
-
         return true;
-
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        return this.name.hashCode();
     }
     
     /**
