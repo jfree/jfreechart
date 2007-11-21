@@ -114,6 +114,7 @@
  * 19-Apr-2007 : Fix exceptions in setMinimum/MaximumDate() (DG);
  * 03-May-2007 : Fixed minor bugs in previousStandardDate(), with new JUnit
  *               tests (DG);
+ * 21-Nov-2007 : Fixed warnings from FindBugs (DG);
  * 
  */
 
@@ -853,7 +854,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                     calendar.set(Calendar.MILLISECOND, value - 1);
                     mm = calendar.getTime();
                 }
-                return calendar.getTime();
+                return mm;
 
             case (DateTickUnit.SECOND) :
                 years = calendar.get(Calendar.YEAR);
@@ -877,7 +878,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                     calendar.set(Calendar.SECOND, value - 1);
                     dd = calendar.getTime();
                 }
-                return calendar.getTime();
+                return dd;
 
             case (DateTickUnit.MINUTE) :
                 years = calendar.get(Calendar.YEAR);
