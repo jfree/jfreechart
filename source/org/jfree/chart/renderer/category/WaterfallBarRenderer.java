@@ -193,7 +193,7 @@ public class WaterfallBarRenderer extends BarRenderer
             throw new IllegalArgumentException("Null 'paint' argument");   
         }
         this.firstBarPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -206,7 +206,8 @@ public class WaterfallBarRenderer extends BarRenderer
     }
     
     /**
-     * Sets the paint that will be used to draw the last bar.
+     * Sets the paint that will be used to draw the last bar and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
      */
@@ -215,7 +216,7 @@ public class WaterfallBarRenderer extends BarRenderer
             throw new IllegalArgumentException("Null 'paint' argument");   
         }
         this.lastBarPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -237,7 +238,7 @@ public class WaterfallBarRenderer extends BarRenderer
             throw new IllegalArgumentException("Null 'paint' argument");   
         }
         this.positiveBarPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -250,7 +251,8 @@ public class WaterfallBarRenderer extends BarRenderer
     }
     
     /**
-     * Sets the paint that will be used to draw bars having negative values.
+     * Sets the paint that will be used to draw bars having negative values,
+     * and sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
      */
@@ -259,7 +261,7 @@ public class WaterfallBarRenderer extends BarRenderer
             throw new IllegalArgumentException("Null 'paint' argument");   
         }
         this.negativeBarPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
