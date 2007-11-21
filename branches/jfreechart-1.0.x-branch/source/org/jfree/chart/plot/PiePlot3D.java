@@ -74,6 +74,8 @@
  * 18-Jun-2007 : Added handling for simple label option (DG);
  * 04-Oct-2007 : Added option to darken sides of plot - thanks to Alex Moots 
  *               (see patch 1805262) (DG);
+ * 21-Nov-2007 : Changed default depth factor, fixed labelling bugs and added
+ *               debug code - see debug flags in PiePlot class (DG);
  *
  */
 
@@ -120,7 +122,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
     private static final long serialVersionUID = 3408984188945161432L;
     
     /** The factor of the depth of the pie from the plot height */
-    private double depthFactor = 0.2;
+    private double depthFactor = 0.12;
 
     /** 
      * A flag that controls whether or not the sides of the pie chart
@@ -233,6 +235,8 @@ public class PiePlot3D extends PiePlot implements Serializable {
             info.setDataArea(plotArea);
         }
 
+        drawBackground(g2, plotArea);
+
         Shape savedClip = g2.getClip();
         g2.clip(plotArea);
 
@@ -240,12 +244,23 @@ public class PiePlot3D extends PiePlot implements Serializable {
         double gapPercent = getInteriorGap();
         double labelPercent = 0.0;
         if (getLabelGenerator() != null) {
-            labelPercent = getLabelGap() + getMaximumLabelWidth() 
-                           + getLabelLinkMargin();   
+            labelPercent = getLabelGap() + getMaximumLabelWidth();   
         }
-        double gapHorizontal = plotArea.getWidth() 
-                               * (gapPercent + labelPercent);
-        double gapVertical = plotArea.getHeight() * gapPercent;
+        double gapHorizontal = plotArea.getWidth() * (gapPercent 
+                + labelPercent) * 2.0;
+        double gapVertical = plotArea.getHeight() * gapPercent * 2.0;
+
+        if (DEBUG_DRAW_INTERIOR) {
+            double hGap = plotArea.getWidth() * getInteriorGap();
+            double vGap = plotArea.getHeight() * getInteriorGap();
+            double igx1 = plotArea.getX() + hGap;
+            double igx2 = plotArea.getMaxX() - hGap;
+            double igy1 = plotArea.getY() + vGap;
+            double igy2 = plotArea.getMaxY() - vGap;
+            g2.setPaint(Color.lightGray);
+            g2.draw(new Rectangle2D.Double(igx1, igy1, igx2 - igx1, 
+                    igy2 - igy1));
+        }
 
         double linkX = plotArea.getX() + gapHorizontal / 2;
         double linkY = plotArea.getY() + gapVertical / 2;
@@ -262,6 +277,21 @@ public class PiePlot3D extends PiePlot implements Serializable {
         }
         
         PiePlotState state = initialise(g2, plotArea, this, null, info);
+
+        // the link area defines the dog leg points for the linking lines to 
+        // the labels
+        Rectangle2D linkAreaXX = new Rectangle2D.Double(linkX, linkY, linkW, 
+                linkH * (1 - this.depthFactor));
+        state.setLinkArea(linkAreaXX);
+
+        if (DEBUG_DRAW_LINK_AREA) {
+            g2.setPaint(Color.blue);
+            g2.draw(linkAreaXX);
+            g2.setPaint(Color.yellow);
+            g2.draw(new Ellipse2D.Double(linkAreaXX.getX(), linkAreaXX.getY(), 
+                    linkAreaXX.getWidth(), linkAreaXX.getHeight()));
+        }
+        
         // the explode area defines the max circle/ellipse for the exploded pie 
         // sections.
         // it is defined by shrinking the linkArea by the linkMargin factor.
@@ -284,9 +314,9 @@ public class PiePlot3D extends PiePlot implements Serializable {
                 + h1 / 2.0, explodeArea.getY() + v1 / 2.0,
                 explodeArea.getWidth() - h1, explodeArea.getHeight() - v1);
 
-        int depth = (int) (pieArea.getHeight() * this.depthFactor);
         // the link area defines the dog-leg point for the linking lines to 
         // the labels
+        int depth = (int) (pieArea.getHeight() * this.depthFactor);
         Rectangle2D linkArea = new Rectangle2D.Double(linkX, linkY, linkW, 
                 linkH - depth);
         state.setLinkArea(linkArea);   
@@ -297,7 +327,6 @@ public class PiePlot3D extends PiePlot implements Serializable {
         state.setPieWRadius(pieArea.getWidth() / 2.0);
         state.setPieHRadius((pieArea.getHeight() - depth) / 2.0);
 
-        drawBackground(g2, plotArea);
         // get the data source - return if null;
         PieDataset dataset = getDataset();
         if (DatasetUtilities.isEmptyOrNull(getDataset())) {
