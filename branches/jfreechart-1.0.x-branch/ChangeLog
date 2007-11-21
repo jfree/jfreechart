@@ -1,5 +1,18 @@
 2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/renderer/xy/StandardXYItemRenderer.java
+	(shapesFilled): Deprecated,
+	(getShapesFilled): Likewise,
+	(setShapesFilled): Likewise,
+	(setBaseShapesVisible): Call fireChangeEvent() instead of notifyListeners(),
+	(setPlotLines): Likewise,
+	(setGapThresholdType): Likewise,
+	(setGapThreshold): Likewise,
+	(setPlotImages): Likewise,
+	(setLegendLine): Likewise.
+	
+2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/plot/PiePlot.java
 	(DEFAULT_INTERIOR_GAP): Modified default value,
 	(maximumLabelWidth): Likewise,

@@ -101,6 +101,7 @@
  *               method (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 08-Jun-2007 : Fixed bug in entity creation (DG);
+ * 21-Nov-2007 : Deprecated override flag methods (DG);
  *
  */
 
@@ -192,7 +193,11 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     /** Threshold for deciding when to discontinue a line. */
     private double gapThreshold = 1.0;
 
-    /** A flag that controls whether or not shapes are filled for ALL series. */
+    /** 
+     * A flag that controls whether or not shapes are filled for ALL series. 
+     *
+     * @deprecated As of 1.0.8, this override should not be used.
+     */
     private Boolean shapesFilled;
 
     /** 
@@ -307,7 +312,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     public void setBaseShapesVisible(boolean flag) {
         if (this.baseShapesVisible != flag) {
             this.baseShapesVisible = flag;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -351,17 +356,28 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * @return The flag (possibly <code>null</code>).
      * 
      * @since 1.0.5
+     * 
+     * @deprecated As of 1.0.8, you should avoid using this method and rely
+     *             on just the per-series ({@link #getSeriesShapesFilled(int)}) 
+     *             and base-level ({@link #getBaseShapesFilled()}) settings.
      */
     public Boolean getShapesFilled() {
         return this.shapesFilled;
     }
     
     /**
-     * Sets the 'shapes filled' for ALL series.
+     * Sets the override flag that controls whether or not shapes are filled
+     * for ALL series and sends a {@link RendererChangeEvent} to all registered
+     * listeners. 
      *
      * @param filled  the flag.
      * 
      * @see #setShapesFilled(Boolean)
+     * 
+     * @deprecated As of 1.0.8, you should avoid using this method and rely
+     *             on just the per-series ({@link #setSeriesShapesFilled(int, 
+     *             Boolean)}) and base-level ({@link #setBaseShapesVisible(
+     *             boolean)}) settings.
      */
     public void setShapesFilled(boolean filled) {
         // here we use BooleanUtilities to remain compatible with JDKs < 1.4 
@@ -376,6 +392,11 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * @param filled  the flag (<code>null</code> permitted).
      * 
      * @see #setShapesFilled(boolean)
+     * 
+     * @deprecated As of 1.0.8, you should avoid using this method and rely
+     *             on just the per-series ({@link #setSeriesShapesFilled(int, 
+     *             Boolean)}) and base-level ({@link #setBaseShapesVisible(
+     *             boolean)}) settings.
      */
     public void setShapesFilled(Boolean filled) {
         this.shapesFilled = filled;
@@ -395,7 +416,8 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the 'shapes filled' flag for a series.
+     * Sets the 'shapes filled' flag for a series and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
      * @param flag  the flag.
@@ -419,7 +441,8 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the base 'shapes filled' flag.
+     * Sets the base 'shapes filled' flag and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param flag  the flag.
      * 
@@ -442,7 +465,8 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether or not a line is plotted between 
-     * each data point.
+     * each data point and sends a {@link RendererChangeEvent} to all 
+     * registered listeners.
      *
      * @param flag  the flag.
      * 
@@ -451,7 +475,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     public void setPlotLines(boolean flag) {
         if (this.plotLines != flag) {
             this.plotLines = flag;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -467,7 +491,8 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
     
     /**
-     * Sets the gap threshold type.
+     * Sets the gap threshold type and sends a {@link RendererChangeEvent} to 
+     * all registered listeners.
      * 
      * @param thresholdType  the type (<code>null</code> not permitted).
      * 
@@ -479,7 +504,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
                     "Null 'thresholdType' argument.");
         }
         this.gapThresholdType = thresholdType;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -494,7 +519,8 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the gap threshold for discontinuous lines.
+     * Sets the gap threshold for discontinuous lines and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param t  the threshold.
      * 
@@ -502,7 +528,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      */
     public void setGapThreshold(double t) {
         this.gapThreshold = t;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -518,7 +544,8 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the flag that controls whether or not an image is drawn at each 
-     * data point.
+     * data point and sends a {@link RendererChangeEvent} to all registered 
+     * listeners.
      *
      * @param flag  the flag.
      * 
@@ -527,7 +554,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     public void setPlotImages(boolean flag) {
         if (this.plotImages != flag) {
             this.plotImages = flag;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -605,7 +632,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
             throw new IllegalArgumentException("Null 'line' argument.");   
         }
         this.legendLine = line;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
