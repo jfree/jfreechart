@@ -624,7 +624,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertEquals(new Year(2006), item.getPeriod());
         pass = false;
         try {
-            item = series.getDataItem(-1);
+            /*item = */series.getDataItem(-1);
         }
         catch (IndexOutOfBoundsException e) {
             pass = true;
@@ -633,7 +633,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         
         pass = false;
         try {
-            item = series.getDataItem(1);
+            /*item = */series.getDataItem(1);
         }
         catch (IndexOutOfBoundsException e) {
             pass = true;
