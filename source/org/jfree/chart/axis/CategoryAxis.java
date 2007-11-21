@@ -82,6 +82,8 @@
  *               multiple domain axes (DG);
  * 07-Mar-2007 : Fixed bug in axis label positioning (DG);
  * 27-Sep-2007 : Added getCategorySeriesMiddle() method (DG);
+ * 21-Nov-2007 : Fixed performance bug noted by FindBugs in the 
+ *               equalPaintMaps() method (DG);
  *
  */
 
@@ -1336,12 +1338,12 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         if (map1.size() != map2.size()) {
             return false;
         }
-        Set keys = map1.keySet();
-        Iterator iterator = keys.iterator();
+        Set entries = map1.entrySet();
+        Iterator iterator = entries.iterator();
         while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
-            Paint p1 = (Paint) map1.get(key);
-            Paint p2 = (Paint) map2.get(key);
+            Map.Entry entry = (Map.Entry) iterator.next();
+            Paint p1 = (Paint) entry.getValue();
+            Paint p2 = (Paint) map2.get(entry.getKey());
             if (!PaintUtilities.equal(p1, p2)) {
                 return false;  
             }
