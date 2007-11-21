@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
  * in the United States and other countries.]
  *
- * -------------------------
- * CatetgoryMarkerTests.java
- * -------------------------
+ * ------------------------
+ * CategoryMarkerTests.java
+ * ------------------------
  * (C) Copyright 2005-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -61,9 +61,8 @@ import org.jfree.chart.plot.CategoryMarker;
 /**
  * Some tests for the {@link CategoryMarker} class.
  */
-public class CategoryMarkerTests 
-    extends TestCase 
-    implements MarkerChangeListener {
+public class CategoryMarkerTests extends TestCase 
+        implements MarkerChangeListener {
 
     MarkerChangeEvent lastEvent;
     
