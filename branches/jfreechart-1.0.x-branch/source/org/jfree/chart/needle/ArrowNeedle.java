@@ -39,6 +39,8 @@
  * 27-Mar-2003 : Implemented Serializable (DG);
  * 09-Sep-2003 : Added equals() method (DG);
  * 08-Jun-2005 : Implemented Cloneable (DG);
+ * 22-Nov-2007 : Added hashCode() implementation (DG);
+ * 
  */
 
 package org.jfree.chart.needle;
@@ -50,6 +52,8 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+
+import org.jfree.chart.HashUtilities;
 
 /**
  * A needle in the shape of an arrow.
@@ -151,6 +155,17 @@ public class ArrowNeedle extends MeterNeedle
         return true;
     }
     
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = super.hashCode();
+        result = HashUtilities.hashCode(result, this.isArrowAtTop);
+        return result; 
+    }
+
     /**
      * Returns a clone of this needle.
      * 

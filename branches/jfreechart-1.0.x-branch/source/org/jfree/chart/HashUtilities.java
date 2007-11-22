@@ -37,6 +37,7 @@
  * 03-Oct-2006 : Version 1 (DG);
  * 06-Mar-2007 : Fix for hashCodeForDoubleArray() method (DG);
  * 13-Nov-2007 : Added new utility methods (DG);
+ * 22-Nov-2007 : Added hashCode() method for 'int' (DG);
  *
  */
 
@@ -120,6 +121,21 @@ public class HashUtilities {
         return 37 * pre + (b ? 0 : 1);
     }
     
+    /**
+     * Returns a hash value based on a seed value and the value of an int
+     * primitive.
+     * 
+     * @param pre  the seed value.
+     * @param i  the int value.
+     * 
+     * @return A hash value.
+     * 
+     * @since 1.0.8
+     */
+    public static int hashCode(int pre, int i) {
+        return 37 * pre + i;
+    }
+
     /**
      * Returns a hash value based on a seed value and the value of a double
      * primitive.
