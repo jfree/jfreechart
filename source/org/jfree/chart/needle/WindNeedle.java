@@ -37,6 +37,7 @@
  * --------
  * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
  * 09-Sep-2003 : Added equals() method (DG);
+ * 22-Nov-2007 : Implemented hashCode() (DG)
  *
  */
 
@@ -112,6 +113,15 @@ public class WindNeedle extends ArrowNeedle
             return true;
         }
         return false;
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        return super.hashCode();
     }
 
 }

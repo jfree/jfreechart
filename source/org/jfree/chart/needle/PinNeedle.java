@@ -39,6 +39,7 @@
  * 27-Mar-2003 : Implemented Serializable (DG);
  * 09-Sep-2003 : Added equals() method (DG);
  * 08-Jun-2005 : Implemented Cloneable (DG);
+ * 22-Nov-2007 : Implemented hashCode() (DG);
  *
  */
 
@@ -126,6 +127,15 @@ public class PinNeedle extends MeterNeedle
         return true;
     }
     
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        return super.hashCode();
+    }
+
     /**
      * Returns a clone of this needle.
      * 

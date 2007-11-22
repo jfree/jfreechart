@@ -38,7 +38,9 @@
  * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
  * 27-Mar-2003 : Implemented Serializable (DG);
  * 09-Sep-2003 : Added equals() method (DG);
- * 16-Mar-2004 : Implemented Rotation
+ * 16-Mar-2004 : Implemented Rotation;
+ * 22-Nov-2007 : Implemented hashCode() (DG);
+ * 
  */
 
 package org.jfree.chart.needle;
@@ -158,10 +160,16 @@ public class LongNeedle extends MeterNeedle
         if (!(obj instanceof LongNeedle)) {
             return false;   
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        return true;
+        return super.equals(obj);
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        return super.hashCode();
     }
 
     /**

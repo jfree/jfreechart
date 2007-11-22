@@ -1,5 +1,21 @@
 2007-11-22  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/HashUtilities.java
+	(hashCode(int, int)): New method,
+	* source/org/jfree/chart/needle/ArrowNeedle.java
+	* source/org/jfree/chart/needle/LineNeedle.java
+	* source/org/jfree/chart/needle/LongNeedle.java
+	* source/org/jfree/chart/needle/MeterNeedle.java
+	* source/org/jfree/chart/needle/MiddlePinNeedle.java
+	* source/org/jfree/chart/needle/PinNeedle.java
+	* source/org/jfree/chart/needle/PlumNeedle.java
+	* source/org/jfree/chart/needle/PointerNeedle.java
+	* source/org/jfree/chart/needle/ShipNeedle.java
+	* source/org/jfree/chart/needle/WindNeedle.java:
+	Implemented hashCode() method.	
+
+2007-11-22  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
 	* source/org/jfree/chart/renderer/xy/CandlestickRenderer.java
 	* source/org/jfree/chart/renderer/xy/DeviationRenderer.java
