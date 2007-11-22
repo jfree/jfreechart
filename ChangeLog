@@ -1,3 +1,11 @@
+2007-11-22  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/data/xy/XYSeries.java
+	(clone): Reimplemented,
+	* tests/org/jfree/data/xy/junit/XYSeriesTests.java
+	(testCloning2): New method,
+	(testCloning3): Likewise.
+
 2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/DefaultKeyedValues.java
