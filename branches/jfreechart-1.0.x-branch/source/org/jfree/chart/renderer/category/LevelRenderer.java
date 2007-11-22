@@ -105,7 +105,8 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the item margin.  The value is expressed as a percentage of the 
+     * Sets the item margin and sends a {@link RendererChangeEvent} to all
+     * registered listeners.  The value is expressed as a percentage of the 
      * available width for plotting all the bars, with the resulting amount to 
      * be distributed between all the bars evenly.
      *
@@ -113,7 +114,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      */
     public void setItemMargin(double percent) {
         this.itemMargin = percent;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -139,7 +140,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      */
     public void setMaxItemWidth(double percent) {
         this.maxItemWidth = percent;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

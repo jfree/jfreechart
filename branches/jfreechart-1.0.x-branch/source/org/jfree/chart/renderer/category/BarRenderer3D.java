@@ -242,7 +242,7 @@ public class BarRenderer3D extends BarRenderer
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.wallPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
 

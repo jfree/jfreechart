@@ -1521,7 +1521,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             throw new IllegalArgumentException("Null 'generator' argument.");
         }
         this.legendItemLabelGenerator = generator;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1571,7 +1571,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     public void setLegendItemURLGenerator(
             CategorySeriesLabelGenerator generator) {
         this.legendItemURLGenerator = generator;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

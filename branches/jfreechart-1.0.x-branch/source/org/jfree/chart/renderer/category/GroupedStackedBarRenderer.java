@@ -91,7 +91,8 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
     }
     
     /**
-     * Updates the map used to assign each series to a group.
+     * Updates the map used to assign each series to a group, and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      * 
      * @param map  the map (<code>null</code> not permitted).
      */
@@ -100,7 +101,7 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
             throw new IllegalArgumentException("Null 'map' argument.");   
         }
         this.seriesToGroupMap = map;   
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**

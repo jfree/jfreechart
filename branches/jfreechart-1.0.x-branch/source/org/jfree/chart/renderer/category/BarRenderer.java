@@ -223,7 +223,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      */
     public void setBase(double base) {
         this.base = base;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -250,7 +250,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      */
     public void setItemMargin(double percent) {
         this.itemMargin = percent;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -274,7 +274,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      */
     public void setDrawBarOutline(boolean draw) {
         this.drawBarOutline = draw;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -300,7 +300,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      */
     public void setMaximumBarWidth(double percent) {
         this.maximumBarWidth = percent;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -326,7 +326,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      */
     public void setMinimumBarLength(double min) {
         this.minimumBarLength = min;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -352,7 +352,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     public void setGradientPaintTransformer(
             GradientPaintTransformer transformer) {
         this.gradientPaintTransformer = transformer;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -379,7 +379,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     public void setPositiveItemLabelPositionFallback(
             ItemLabelPosition position) {
         this.positiveItemLabelPositionFallback = position;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -406,7 +406,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     public void setNegativeItemLabelPositionFallback(
             ItemLabelPosition position) {
         this.negativeItemLabelPositionFallback = position;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -440,7 +440,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     public void setIncludeBaseInRange(boolean include) {
         if (this.includeBaseInRange != include) {
             this.includeBaseInRange = include;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
     
