@@ -187,7 +187,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     public void setBoxWidth(double width) {
         if (width != this.boxWidth) {
             this.boxWidth = width;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -212,7 +212,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      */
     public void setBoxPaint(Paint paint) {
         this.boxPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -236,7 +236,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      */
     public void setFillBox(boolean flag) {
         this.fillBox = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -253,7 +253,8 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the paint used to paint the various artifacts such as outliers, 
-     * farout symbol, median line and the averages ellipse.
+     * farout symbol, median line and the averages ellipse, and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      * 
      * @param paint  the paint (<code>null</code> not permitted).
      * 
@@ -264,7 +265,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.artifactPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

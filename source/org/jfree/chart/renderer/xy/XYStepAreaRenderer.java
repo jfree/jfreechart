@@ -190,7 +190,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      */
     public void setOutline(boolean show) {
         this.showOutline = show;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -215,7 +215,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      */
     public void setShapesVisible(boolean flag) {
         this.shapesVisible = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -230,7 +230,8 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     }
     
     /**
-     * Sets the 'shapes filled' for ALL series.
+     * Sets the 'shapes filled' for ALL series and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param filled  the flag.
      * 
@@ -238,7 +239,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      */
     public void setShapesFilled(boolean filled) {
         this.shapesFilled = filled;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -254,7 +255,8 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets a flag that controls whether or not areas are drawn for each data 
-     * item.
+     * item and sends a {@link RendererChangeEvent} to all registered 
+     * listeners.
      * 
      * @param flag  the flag.
      * 
@@ -262,7 +264,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      */
     public void setPlotArea(boolean flag) {
         this.plotArea = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -280,7 +282,8 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the value on the range axis which defines the default border of the 
-     * area.  E.g. setRangeBase(Double.NEGATIVE_INFINITY) lets areas always 
+     * area, and sends a {@link RendererChangeEvent} to all registered 
+     * listeners.  E.g. setRangeBase(Double.NEGATIVE_INFINITY) lets areas always
      * reach the lower border of the plotArea. 
      * 
      * @param val  the value on the range axis which defines the default border
@@ -290,7 +293,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      */
     public void setRangeBase(double val) {
         this.rangeBase = val;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

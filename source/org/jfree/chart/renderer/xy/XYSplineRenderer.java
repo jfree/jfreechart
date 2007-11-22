@@ -122,7 +122,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
             throw new IllegalArgumentException("Requires p > 0.");
         }
         this.precision = p;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

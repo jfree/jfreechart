@@ -253,7 +253,8 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the candle width.
+     * Sets the candle width and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
      * <P>
      * If you set the width to a negative value, the renderer will calculate
      * the candle width automatically based on the space available on the chart.
@@ -267,7 +268,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     public void setCandleWidth(double width) {
         if (width != this.candleWidth) {
             this.candleWidth = width;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -283,7 +284,8 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the maximum candle width (in milliseconds).  
+     * Sets the maximum candle width (in milliseconds) and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.  
      *
      * @param millis  The maximum width.
      * 
@@ -295,7 +297,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      */
     public void setMaxCandleWidthInMilliseconds(double millis) {
         this.maxCandleWidthInMilliseconds = millis;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -310,7 +312,8 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the method of automatically calculating the candle width.
+     * Sets the method of automatically calculating the candle width and 
+     * sends a {@link RendererChangeEvent} to all registered listeners.
      * <p>
      * <code>WIDTHMETHOD_AVERAGE</code>: Divides the entire display (ignoring 
      * scale factor) by the number of items, and uses this as the available 
@@ -337,7 +340,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     public void setAutoWidthMethod(int autoWidthMethod) {
         if (this.autoWidthMethod != autoWidthMethod) {
             this.autoWidthMethod = autoWidthMethod;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -369,7 +372,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     public void setAutoWidthFactor(double autoWidthFactor) {
         if (this.autoWidthFactor != autoWidthFactor) {
             this.autoWidthFactor = autoWidthFactor;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -387,7 +390,8 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets the amount of space to leave on the left and right of each candle 
-     * when automatically calculating widths.
+     * when automatically calculating widths and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param autoWidthGap The gap.
      * 
@@ -400,7 +404,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     public void setAutoWidthGap(double autoWidthGap) {
         if (this.autoWidthGap != autoWidthGap) {
             this.autoWidthGap = autoWidthGap;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -427,7 +431,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      */
     public void setUpPaint(Paint paint) {
         this.upPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -451,7 +455,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      */
     public void setDownPaint(Paint paint) {
         this.downPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -480,7 +484,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     public void setDrawVolume(boolean flag) {
         if (this.drawVolume != flag) {
             this.drawVolume = flag;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
     
@@ -514,7 +518,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.volumePaint = paint;
-        notifyListeners(new RendererChangeEvent(this));        
+        fireChangeEvent();
     }
 
     /**

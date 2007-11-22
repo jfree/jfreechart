@@ -1,5 +1,27 @@
 2007-11-22  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
+	* source/org/jfree/chart/renderer/xy/CandlestickRenderer.java
+	* source/org/jfree/chart/renderer/xy/DeviationRenderer.java
+	* source/org/jfree/chart/renderer/xy/HighLowRenderer.java
+	* source/org/jfree/chart/renderer/xy/StackedXYAreaRenderer2.java
+	* source/org/jfree/chart/renderer/xy/StackedXYBarRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYAreaRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYAreaRenderer2.java
+	* source/org/jfree/chart/renderer/xy/XYBarRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYBlockRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYBoxAndWhiskerRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYDifferenceRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYDotRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYErrormRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYLine3DRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYLineAndShapeRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYSplineRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYStepAreaRenderer.java:
+	Replaced calls to notifyListeners() with fireChangeEvent().
+
+2007-11-22  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
 	* source/org/jfree/chart/renderer/category/AreaRenderer.java
 	* source/org/jfree/chart/renderer/category/BarRenderer.java
