@@ -66,6 +66,7 @@
  * 11-Jan-2005 : Renamed update(int, Number) --> updateByIndex() (DG);
  * 15-Jan-2007 : Added toArray() method (DG);
  * 31-Oct-2007 : Implemented faster hashCode() (DG);
+ * 22-Nov-2007 : Reimplemented clone() (DG);
  * 
  */
 
@@ -614,12 +615,13 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     /**
      * Returns a clone of the series.
      *
-     * @return A clone of the time series.
+     * @return A clone of the series.
      * 
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
     public Object clone() throws CloneNotSupportedException {
-        Object clone = createCopy(0, getItemCount() - 1);
+        XYSeries clone = (XYSeries) super.clone();
+        clone.data = (List) ObjectUtilities.deepClone(this.data);
         return clone;
     }
 
