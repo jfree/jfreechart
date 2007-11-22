@@ -294,7 +294,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      */
     public void setOutline(boolean show) {
         this.showOutline = show;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -317,7 +317,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
             throw new IllegalArgumentException("Null 'area' argument.");   
         }
         this.legendArea = area;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

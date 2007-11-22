@@ -263,7 +263,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      */
     public void setBase(double base) {
         this.base = base;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -290,7 +290,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     public void setUseYInterval(boolean use) {
         if (this.useYInterval != use) {
             this.useYInterval = use;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -316,7 +316,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      */
     public void setMargin(double margin) {
         this.margin = margin;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -340,7 +340,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      */
     public void setDrawBarOutline(boolean draw) {
         this.drawBarOutline = draw;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -366,7 +366,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     public void setGradientPaintTransformer(
             GradientPaintTransformer transformer) {
         this.gradientPaintTransformer = transformer;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
      
     /**
@@ -394,7 +394,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             throw new IllegalArgumentException("Null 'bar' argument.");
         }
         this.legendBar = bar;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -423,7 +423,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     public void setPositiveItemLabelPositionFallback(
             ItemLabelPosition position) {
         this.positiveItemLabelPositionFallback = position;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -452,7 +452,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     public void setNegativeItemLabelPositionFallback(
             ItemLabelPosition position) {
         this.negativeItemLabelPositionFallback = position;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

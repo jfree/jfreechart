@@ -146,7 +146,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
                     "Requires 'alpha' in the range 0.0 to 1.0.");
         }
         this.alpha = alpha;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

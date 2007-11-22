@@ -189,7 +189,8 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the paint used to highlight positive differences.
+     * Sets the paint used to highlight positive differences and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
      * 
      * @param paint  the paint (<code>null</code> not permitted).
      * 
@@ -200,7 +201,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.positivePaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -243,7 +244,8 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
 
     /**
      * Sets a flag that controls whether or not shapes are drawn for each 
-     * data value.
+     * data value, and sends a {@link RendererChangeEvent} to all registered
+     * listeners.
      * 
      * @param flag  the flag.
      * 
@@ -251,7 +253,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      */
     public void setShapesVisible(boolean flag) {
         this.shapesVisible = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -278,7 +280,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
             throw new IllegalArgumentException("Null 'line' argument.");   
         }
         this.legendLine = line;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -308,7 +310,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      */
     public void setRoundXCoordinates(boolean round) {
         this.roundXCoordinates = round;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

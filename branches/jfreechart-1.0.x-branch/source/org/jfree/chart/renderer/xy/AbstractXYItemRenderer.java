@@ -372,7 +372,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     public void setItemLabelGenerator(XYItemLabelGenerator generator) {
         this.itemLabelGenerator = generator;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -385,7 +385,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public void setSeriesItemLabelGenerator(int series,
                                             XYItemLabelGenerator generator) {
         this.itemLabelGeneratorList.set(series, generator);
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -405,7 +405,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     public void setBaseItemLabelGenerator(XYItemLabelGenerator generator) {
         this.baseItemLabelGenerator = generator;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     // TOOL TIP GENERATOR
@@ -466,7 +466,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     public void setToolTipGenerator(XYToolTipGenerator generator) {
         this.toolTipGenerator = generator;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -490,7 +490,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public void setSeriesToolTipGenerator(int series,
                                           XYToolTipGenerator generator) {
         this.toolTipGeneratorList.set(series, generator);
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -514,7 +514,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     public void setBaseToolTipGenerator(XYToolTipGenerator generator) {
         this.baseToolTipGenerator = generator;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     // URL GENERATOR
@@ -529,13 +529,14 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the URL generator for HTML image maps.
+     * Sets the URL generator for HTML image maps and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param urlGenerator  the URL generator (<code>null</code> permitted).
      */
     public void setURLGenerator(XYURLGenerator urlGenerator) {
         this.urlGenerator = urlGenerator;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -551,7 +552,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Adds an annotation to the specified layer.
+     * Adds an annotation to the specified layer and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param annotation  the annotation (<code>null</code> not permitted).
      * @param layer  the layer (<code>null</code> not permitted).
@@ -562,11 +564,11 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         }
         if (layer.equals(Layer.FOREGROUND)) {
             this.foregroundAnnotations.add(annotation);
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
         else if (layer.equals(Layer.BACKGROUND)) {
             this.backgroundAnnotations.add(annotation);
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
         else {
             // should never get here
@@ -586,7 +588,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public boolean removeAnnotation(XYAnnotation annotation) {
         boolean removed = this.foregroundAnnotations.remove(annotation);
         removed = removed & this.backgroundAnnotations.remove(annotation);
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
         return removed;
     }
 
@@ -597,7 +599,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public void removeAnnotations() {
         this.foregroundAnnotations.clear();
         this.backgroundAnnotations.clear();
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -644,7 +646,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             throw new IllegalArgumentException("Null 'generator' argument.");
         }
         this.legendItemLabelGenerator = generator;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -669,7 +671,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public void setLegendItemToolTipGenerator(
             XYSeriesLabelGenerator generator) {
         this.legendItemToolTipGenerator = generator;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -693,7 +695,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     public void setLegendItemURLGenerator(XYSeriesLabelGenerator generator) {
         this.legendItemURLGenerator = generator;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

@@ -230,7 +230,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     
     /**
      * Sets the flag that controls whether or not each series is drawn as a 
-     * single path.
+     * single path and sends a {@link RendererChangeEvent} to all registered
+     * listeners.
      * 
      * @param flag  the flag.
      * 
@@ -239,7 +240,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     public void setDrawSeriesLineAsPath(boolean flag) {
         if (this.drawSeriesLineAsPath != flag) {
             this.drawSeriesLineAsPath = flag;
-            notifyListeners(new RendererChangeEvent(this));
+            fireChangeEvent();
         }
     }
     
@@ -307,7 +308,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setLinesVisible(Boolean visible) {
         this.linesVisible = visible;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -351,7 +352,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setSeriesLinesVisible(int series, Boolean flag) {
         this.seriesLinesVisible.setBoolean(series, flag);
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -388,7 +389,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setBaseLinesVisible(boolean flag) {
         this.baseLinesVisible = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -415,7 +416,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             throw new IllegalArgumentException("Null 'line' argument.");   
         }
         this.legendLine = line;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     // SHAPES VISIBLE
@@ -472,7 +473,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setShapesVisible(Boolean visible) {
         this.shapesVisible = visible;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -527,7 +528,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setSeriesShapesVisible(int series, Boolean flag) {
         this.seriesShapesVisible.setBoolean(series, flag);
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -551,7 +552,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setBaseShapesVisible(boolean flag) {
         this.baseShapesVisible = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     // SHAPES FILLED
@@ -604,7 +605,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setShapesFilled(Boolean filled) {
         this.shapesFilled = filled;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -645,7 +646,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setSeriesShapesFilled(int series, Boolean flag) {
         this.seriesShapesFilled.setBoolean(series, flag);
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -669,7 +670,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setBaseShapesFilled(boolean flag) {
         this.baseShapesFilled = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -698,7 +699,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setDrawOutlines(boolean flag) {
         this.drawOutlines = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -729,7 +730,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setUseFillPaint(boolean flag) {
         this.useFillPaint = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -760,7 +761,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public void setUseOutlinePaint(boolean flag) {
         this.useOutlinePaint = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**

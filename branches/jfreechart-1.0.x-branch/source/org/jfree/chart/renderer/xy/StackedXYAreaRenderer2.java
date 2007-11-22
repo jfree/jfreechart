@@ -145,7 +145,7 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
      */
     public void setRoundXCoordinates(boolean round) {
         this.roundXCoordinates = round;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

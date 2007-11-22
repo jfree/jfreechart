@@ -145,7 +145,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      */
     public void setRenderAsPercentages(boolean asPercentages) {
         this.renderAsPercentages = asPercentages; 
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
