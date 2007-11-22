@@ -148,7 +148,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
      */
     public void setStagger(boolean shouldStagger) {
         this.stagger = shouldStagger;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

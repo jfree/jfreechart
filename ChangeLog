@@ -1,5 +1,27 @@
 2007-11-22  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+	* source/org/jfree/chart/renderer/category/AreaRenderer.java
+	* source/org/jfree/chart/renderer/category/BarRenderer.java
+	* source/org/jfree/chart/renderer/category/BarRenderer3D.java
+	* source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
+	* source/org/jfree/chart/renderer/category/CategoryStepRenderer.java
+	* source/org/jfree/chart/renderer/category/GanttRenderer.java
+	* source/org/jfree/chart/renderer/category/GroupedStackedBarRenderer.java
+	* source/org/jfree/chart/renderer/category/LevelRenderer.java
+	* source/org/jfree/chart/renderer/category/LineAndShapeRenderer.java
+	* source/org/jfree/chart/renderer/category/LineRenderer3D.java
+	* source/org/jfree/chart/renderer/category/MinMaxCategoryRenderer.java
+	* source/org/jfree/chart/renderer/category/ScatterRenderer.java
+	* source/org/jfree/chart/renderer/category/StackedAreaRenderer.java
+	* source/org/jfree/chart/renderer/category/StackedBarRenderer.java
+	* source/org/jfree/chart/renderer/category/StackedBarRenderer3D.java
+	* source/org/jfree/chart/renderer/category/StatisticalBarRenderer.java
+	* source/org/jfree/chart/renderer/category/StatisticalLineAndShapeRenderer.java:
+	Replaced calls to notifyListeners() with fireChangeEvent().
+	
+2007-11-22  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/data/xy/XYSeries.java
 	(clone): Reimplemented,
 	* tests/org/jfree/data/xy/junit/XYSeriesTests.java

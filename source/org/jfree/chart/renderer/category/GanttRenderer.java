@@ -139,7 +139,7 @@ public class GanttRenderer extends IntervalBarRenderer
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.completePaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -166,7 +166,7 @@ public class GanttRenderer extends IntervalBarRenderer
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.incompletePaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -183,7 +183,8 @@ public class GanttRenderer extends IntervalBarRenderer
     
     /**
      * Sets the position of the start of the progress indicator, as a 
-     * percentage of the bar width.
+     * percentage of the bar width, and sends a {@link RendererChangeEvent} to
+     * all registered listeners.
      * 
      * @param percent  the percent.
      * 
@@ -191,7 +192,7 @@ public class GanttRenderer extends IntervalBarRenderer
      */
     public void setStartPercent(double percent) {
         this.startPercent = percent;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -208,7 +209,8 @@ public class GanttRenderer extends IntervalBarRenderer
     
     /**
      * Sets the position of the end of the progress indicator, as a percentage 
-     * of the bar width.
+     * of the bar width, and sends a {@link RendererChangeEvent} to all 
+     * registered listeners.
      * 
      * @param percent  the percent.
      * 
@@ -216,7 +218,7 @@ public class GanttRenderer extends IntervalBarRenderer
      */
     public void setEndPercent(double percent) {
         this.endPercent = percent;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**

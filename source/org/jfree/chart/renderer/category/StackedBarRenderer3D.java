@@ -199,7 +199,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
      */
     public void setRenderAsPercentages(boolean asPercentages) {
         this.renderAsPercentages = asPercentages; 
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

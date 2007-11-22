@@ -291,7 +291,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setLinesVisible(Boolean visible) {
         this.linesVisible = visible;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -335,7 +335,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setSeriesLinesVisible(int series, Boolean flag) {
         this.seriesLinesVisible.setBoolean(series, flag);
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -372,7 +372,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setBaseLinesVisible(boolean flag) {
         this.baseLinesVisible = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     // SHAPES VISIBLE
@@ -427,7 +427,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setShapesVisible(Boolean visible) {
         this.shapesVisible = visible;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -483,7 +483,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setSeriesShapesVisible(int series, Boolean flag) {
         this.seriesShapesVisible.setBoolean(series, flag);
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -507,7 +507,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setBaseShapesVisible(boolean flag) {
         this.baseShapesVisible = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -536,7 +536,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setDrawOutlines(boolean flag) {
         this.drawOutlines = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -562,7 +562,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setUseOutlinePaint(boolean use) {
         this.useOutlinePaint = use;   
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     // SHAPES FILLED
@@ -656,7 +656,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setShapesFilled(Boolean filled) {
         this.shapesFilled = filled;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -670,7 +670,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setSeriesShapesFilled(int series, Boolean filled) {
         this.seriesShapesFilled.setBoolean(series, filled);
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -708,7 +708,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setBaseShapesFilled(boolean flag) {
         this.baseShapesFilled = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -735,7 +735,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setUseFillPaint(boolean flag) {
         this.useFillPaint = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -765,7 +765,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setUseSeriesOffset(boolean offset) {
         this.useSeriesOffset = offset;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -802,7 +802,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
             throw new IllegalArgumentException("Requires 0.0 <= margin < 1.0.");
         }
         this.itemMargin = margin;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**

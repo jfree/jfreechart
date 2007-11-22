@@ -135,7 +135,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
             throw new IllegalArgumentException("Null 'type' argument.");   
         }
         this.endType = type;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**

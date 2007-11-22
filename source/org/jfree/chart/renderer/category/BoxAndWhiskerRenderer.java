@@ -161,7 +161,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.artifactPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -185,7 +185,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      */
     public void setFillBox(boolean flag) {
         this.fillBox = flag;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -210,7 +210,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      */
     public void setItemMargin(double margin) {
         this.itemMargin = margin;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

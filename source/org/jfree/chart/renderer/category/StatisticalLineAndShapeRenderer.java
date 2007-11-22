@@ -132,7 +132,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      */
     public void setErrorIndicatorPaint(Paint paint) {
         this.errorIndicatorPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

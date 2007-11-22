@@ -131,7 +131,8 @@ public class StatisticalBarRenderer extends BarRenderer
 
     /**
      * Sets the paint used for the error indicators (if <code>null</code>, 
-     * the item outline paint is used instead)
+     * the item outline paint is used instead) and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      * 
      * @param paint  the paint (<code>null</code> permitted).
      * 
@@ -139,7 +140,7 @@ public class StatisticalBarRenderer extends BarRenderer
      */
     public void setErrorIndicatorPaint(Paint paint) {
         this.errorIndicatorPaint = paint;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -168,7 +169,7 @@ public class StatisticalBarRenderer extends BarRenderer
      */
     public void setErrorIndicatorStroke(Stroke stroke) {
         this.errorIndicatorStroke = stroke;
-        notifyListeners(new RendererChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
