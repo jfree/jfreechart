@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 30-Apr-2007 : Version 1 (DG);
+ * 23-Nov-2007 : Added testEqualsPointer() and testSerialization2() (DG);
  *
  */
 
@@ -120,6 +121,25 @@ public class DialPointerTests extends TestCase {
     }
 
     /**
+     * Check the equals() method for the DialPointer.Pointer class.
+     */
+    public void testEqualsPointer() {
+        DialPointer.Pointer p1 = new DialPointer.Pointer();
+        DialPointer.Pointer p2 = new DialPointer.Pointer();
+        assertEquals(p1, p2);
+        
+        p1.setFillPaint(Color.green);
+        assertFalse(p1.equals(p2));
+        p2.setFillPaint(Color.green);
+        assertTrue(p1.equals(p2));
+        
+        p1.setOutlinePaint(Color.green);
+        assertFalse(p1.equals(p2));
+        p2.setOutlinePaint(Color.green);
+        assertTrue(p1.equals(p2));
+    }
+
+    /**
      * Two objects that are equal are required to return the same hashCode. 
      */
     public void testHashCode() {
@@ -154,7 +174,6 @@ public class DialPointerTests extends TestCase {
         assertFalse(i2.hasListener(l1));
     }
 
-
     /**
      * Serialize an instance, restore it, and check for equality.
      */
@@ -182,4 +201,30 @@ public class DialPointerTests extends TestCase {
         // test a custom instance
     }
 
+    /**
+     * Serialize an instance, restore it, and check for equality.
+     */
+    public void testSerialization2() {
+        // test a default instance
+        DialPointer i1 = new DialPointer.Pointer(1);
+        DialPointer i2 = null;
+
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            ObjectOutput out = new ObjectOutputStream(buffer);
+            out.writeObject(i1);
+            out.close();
+
+            ObjectInput in = new ObjectInputStream(
+                    new ByteArrayInputStream(buffer.toByteArray()));
+            i2 = (DialPointer) in.readObject();
+            in.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals(i1, i2);
+        
+        // test a custom instance
+    }
 }
