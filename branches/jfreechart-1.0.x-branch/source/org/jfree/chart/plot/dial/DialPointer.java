@@ -38,6 +38,8 @@
  * 17-Oct-2007 : Added equals() overrides (DG);
  * 24-Oct-2007 : Implemented PublicCloneable, changed default radius,
  *               and added argument checks (DG);
+ * 23-Nov-2007 : Added fillPaint and outlinePaint attributes to 
+ *               DialPointer.Pointer (DG);
  * 
  */
 
@@ -396,6 +398,20 @@ public abstract class DialPointer extends AbstractDialLayer
          */
         private double widthRadius;
     
+        /** 
+         * The fill paint.
+         * 
+         * @since 1.0.8
+         */
+        private transient Paint fillPaint;
+        
+        /** 
+         * The outline paint.
+         * 
+         * @since 1.0.8
+         */
+        private transient Paint outlinePaint;
+
         /**
          * Creates a new instance.
          */
@@ -411,6 +427,8 @@ public abstract class DialPointer extends AbstractDialLayer
         public Pointer(int datasetIndex) {
             super(datasetIndex);
             this.widthRadius = 0.05;
+            this.fillPaint = Color.gray;
+            this.outlinePaint = Color.black;
         }
         
         /**
@@ -434,6 +452,68 @@ public abstract class DialPointer extends AbstractDialLayer
          */
         public void setWidthRadius(double radius) {
             this.widthRadius = radius;
+            notifyListeners(new DialLayerChangeEvent(this));
+        }
+        
+        /**
+         * Returns the fill paint.
+         * 
+         * @return The paint (never <code>null</code>).
+         * 
+         * @see #setFillPaint(Paint)
+         * 
+         * @since 1.0.8
+         */
+        public Paint getFillPaint() {
+            return this.fillPaint;
+        }
+        
+        /**
+         * Sets the fill paint and sends a {@link DialLayerChangeEvent} to all 
+         * registered listeners.
+         * 
+         * @param paint  the paint (<code>null</code> not permitted).
+         * 
+         * @see #getFillPaint()
+         * 
+         * @since 1.0.8
+         */
+        public void setFillPaint(Paint paint) {
+            if (paint == null) {
+                throw new IllegalArgumentException("Null 'paint' argument.");
+            }
+            this.fillPaint = paint;
+            notifyListeners(new DialLayerChangeEvent(this));
+        }
+        
+        /**
+         * Returns the outline paint.
+         * 
+         * @return The paint (never <code>null</code>).
+         * 
+         * @see #setOutlinePaint(Paint)
+         * 
+         * @since 1.0.8
+         */
+        public Paint getOutlinePaint() {
+            return this.outlinePaint;
+        }
+        
+        /**
+         * Sets the outline paint and sends a {@link DialLayerChangeEvent} to 
+         * all registered listeners.
+         * 
+         * @param paint  the paint (<code>null</code> not permitted).
+         * 
+         * @see #getOutlinePaint()
+         * 
+         * @since 1.0.8
+         */
+        public void setOutlinePaint(Paint paint) {
+            if (paint == null) {
+                throw new IllegalArgumentException("Null 'paint' argument.");
+            }
+            this.outlinePaint = paint;
             notifyListeners(new DialLayerChangeEvent(this));
         }
         
@@ -474,10 +554,10 @@ public abstract class DialPointer extends AbstractDialLayer
             gp.lineTo((float) pt4.getX(), (float) pt4.getY());
             gp.lineTo((float) pt3.getX(), (float) pt3.getY());
             gp.closePath();
-            g2.setPaint(Color.gray);
+            g2.setPaint(this.fillPaint);
             g2.fill(gp);
         
-            g2.setPaint(Color.black);
+            g2.setPaint(this.outlinePaint);
             Line2D line = new Line2D.Double(frame.getCenterX(), 
                     frame.getCenterY(), pt1.getX(), pt1.getY());
             g2.draw(line);
@@ -517,6 +597,12 @@ public abstract class DialPointer extends AbstractDialLayer
             if (this.widthRadius != that.widthRadius) {
                 return false;
             }
+            if (!PaintUtilities.equal(this.fillPaint, that.fillPaint)) {
+                return false;
+            }
+            if (!PaintUtilities.equal(this.outlinePaint, that.outlinePaint)) {
+                return false;
+            }
             return super.equals(obj);
         }
         
@@ -528,7 +614,37 @@ public abstract class DialPointer extends AbstractDialLayer
         public int hashCode() {
             int result = super.hashCode();
             result = HashUtilities.hashCode(result, this.widthRadius);
+            result = HashUtilities.hashCode(result, this.fillPaint);
+            result = HashUtilities.hashCode(result, this.outlinePaint);
             return result;
+        }
+        
+        /**
+         * Provides serialization support.
+         *
+         * @param stream  the output stream.
+         *
+         * @throws IOException  if there is an I/O error.
+         */
+        private void writeObject(ObjectOutputStream stream) throws IOException {
+            stream.defaultWriteObject();
+            SerialUtilities.writePaint(this.fillPaint, stream);
+            SerialUtilities.writePaint(this.outlinePaint, stream);
+        }
+
+        /**
+         * Provides serialization support.
+         *
+         * @param stream  the input stream.
+         *
+         * @throws IOException  if there is an I/O error.
+         * @throws ClassNotFoundException  if there is a classpath problem.
+         */
+        private void readObject(ObjectInputStream stream) 
+                throws IOException, ClassNotFoundException {
+            stream.defaultReadObject();
+            this.fillPaint = SerialUtilities.readPaint(stream);
+            this.outlinePaint = SerialUtilities.readPaint(stream);
         }
        
     }

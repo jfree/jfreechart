@@ -1,3 +1,22 @@
+2007-11-23  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/plot/dial/DialPointer.java
+	(Pointer.fillPaint): New attribute,
+	(Pointer.outlinePaint): Likewise,
+	(Pointer(int)): Initialize new fields,
+	(getFillPaint): New method,
+	(setFillPaint): Likewise,
+	(getOutlinePaint): Likewise,
+	(setOutlinePaint): Likewise,
+	(draw): Use new attributes,
+	(equals): Check new fields,
+	(hashCode): Likewise,
+	(writeObject): Handle serialization for new fields,
+	(readObject): Likewise,
+	* tests/org/jfree/chart/plot/dial/junit/DialPointerTests.java
+	(testEqualsPointer): New test method,
+	(testSerialization2): Likewise.
+
 2007-11-22  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/HashUtilities.java
