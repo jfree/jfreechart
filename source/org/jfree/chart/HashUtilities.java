@@ -211,4 +211,21 @@ public class HashUtilities {
         int h = (c != null ? c.hashCode() : 0);
         return 37 * pre + h;
     }
+
+    /**
+     * Returns a hash value based on a seed value and an <code>Object</code>
+     * instance.
+     * 
+     * @param pre  the seed value.
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A hash value.
+     * 
+     * @since 1.0.8
+     */
+    public static int hashCode(int pre, Object obj) {
+        int h = (obj != null ? obj.hashCode() : 0);
+        return 37 * pre + h;
+    }
+
 }
