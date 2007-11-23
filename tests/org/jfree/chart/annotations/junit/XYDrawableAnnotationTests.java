@@ -92,6 +92,16 @@ public class XYDrawableAnnotationTests extends TestCase {
             }
             return true;
         }
+        /**
+         * Returns a clone.
+         * 
+         * @return A clone.
+         * 
+         * @throws CloneNotSupportedException if there is a problem cloning.
+         */
+        public Object clone() throws CloneNotSupportedException {
+            return super.clone();
+        }
     }
     
     /**
