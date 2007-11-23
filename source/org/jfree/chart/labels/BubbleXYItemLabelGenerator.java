@@ -37,6 +37,7 @@
  * 13-Dec-2005 : Version 1, based on StandardXYZToolTipGenerator (DG);
  * 26-Jan-2006 : Renamed StandardXYZItemLabelGenerator 
  *               --> BubbleXYItemLabelGenerator (DG);
+ * 23-Nov-2007 : Implemented hashCode() (DG);
  *
  */
 
@@ -47,6 +48,7 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.chart.renderer.xy.XYBubbleRenderer;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
@@ -59,8 +61,9 @@ import org.jfree.util.ObjectUtilities;
  * @since 1.0.1
  */
 public class BubbleXYItemLabelGenerator extends AbstractXYItemLabelGenerator
-    implements XYItemLabelGenerator, Serializable {
+        implements XYItemLabelGenerator, Serializable {
     
+    /** For serialization. */
     static final long serialVersionUID = -8458568928021240922L;
 
     /** The default item label format. */
@@ -254,6 +257,18 @@ public class BubbleXYItemLabelGenerator extends AbstractXYItemLabelGenerator
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int h = super.hashCode();
+        h = HashUtilities.hashCode(h, this.zFormat);
+        h = HashUtilities.hashCode(h, this.zDateFormat);
+        return h;
     }
 
 }

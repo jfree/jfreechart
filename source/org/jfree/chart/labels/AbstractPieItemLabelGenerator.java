@@ -38,6 +38,7 @@
  *               and StandardPieToolTipGenerator (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 03-May-2006 : Fixed bug 1480978, a problem in the clone() method (DG);
+ * 23-Nov-2007 : Implemented hashCode() (DG);
  * 
  */
 
@@ -47,6 +48,7 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.PieDataset;
 
@@ -208,6 +210,19 @@ public class AbstractPieItemLabelGenerator implements Serializable {
         }
         return true;
 
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = 127;
+        result = HashUtilities.hashCode(result, this.labelFormat);
+        result = HashUtilities.hashCode(result, this.numberFormat);
+        result = HashUtilities.hashCode(result, this.percentFormat);
+        return result;
     }
     
     /**
