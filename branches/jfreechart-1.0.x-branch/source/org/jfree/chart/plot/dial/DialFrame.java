@@ -51,6 +51,8 @@ import java.io.Serializable;
  * <br><br>
  * Classes that implement this interface should be {@link Serializable}, 
  * otherwise chart serialization may fail.
+ * 
+ * @since 1.0.7
  */
 public interface DialFrame extends DialLayer {
     

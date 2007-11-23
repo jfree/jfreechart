@@ -55,6 +55,8 @@ import org.jfree.chart.HashUtilities;
 /**
  * A base class that can be used to implement a {@link DialLayer}.  It includes
  * an event notification mechanism.
+ * 
+ * @since 1.0.7
  */
 public abstract class AbstractDialLayer implements DialLayer {
 

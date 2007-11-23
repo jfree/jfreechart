@@ -61,6 +61,8 @@ import org.jfree.util.PublicCloneable;
 /**
  * A regular dial layer that can be used to draw a cap over the center of 
  * the dial (the base of the dial pointer(s)).
+ * 
+ * @since 1.0.7
  */
 public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable, 
         PublicCloneable, Serializable {

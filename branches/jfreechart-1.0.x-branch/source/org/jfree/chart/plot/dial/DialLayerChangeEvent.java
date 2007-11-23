@@ -45,6 +45,8 @@ import org.jfree.chart.event.ChartChangeEvent;
 /**
  * An event that can be forwarded to any {@link DialLayerChangeListener} to 
  * signal a change to a {@link DialLayer}.
+ * 
+ * @since 1.0.7
  */
 public class DialLayerChangeEvent extends ChartChangeEvent {
 

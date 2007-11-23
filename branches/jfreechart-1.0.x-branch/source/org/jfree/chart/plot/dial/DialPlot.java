@@ -66,6 +66,8 @@ import org.jfree.util.ObjectUtilities;
 
 /**
  * A dial plot.
+ * 
+ * @since 1.0.7
  */
 public class DialPlot extends Plot implements DialLayerChangeListener {
 

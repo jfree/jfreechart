@@ -52,6 +52,8 @@ import java.util.EventListener;
  * <br><br>
  * Classes that implement this interface should be {@link Serializable}, 
  * otherwise chart serialization may fail.
+ * 
+ * @since 1.0.7
  */
 public interface DialLayer {
    
