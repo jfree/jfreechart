@@ -54,10 +54,8 @@ import org.jfree.util.PublicCloneable;
  * {@link org.jfree.chart.renderer.xy.XYItemRenderer}.
  */
 public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator  
-                                        implements XYToolTipGenerator,
-                                                   Cloneable, 
-                                                   PublicCloneable,
-                                                   Serializable {
+        implements XYToolTipGenerator, Cloneable, PublicCloneable,
+                   Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -3564164459039540784L;    
