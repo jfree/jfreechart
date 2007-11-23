@@ -149,7 +149,7 @@ public class StatisticalBarRenderer extends BarRenderer
      * 
      * @return The stroke (possibly <code>null</code>).
      * 
-     * @see #setErrorIndicatorPaint(Paint)
+     * @see #setErrorIndicatorStroke(Stroke)
      *
      * @since 1.0.8
      */
@@ -164,6 +164,8 @@ public class StatisticalBarRenderer extends BarRenderer
      * stroke.
      * 
      * @param stroke  the stroke (<code>null</code> permitted).
+     * 
+     * @see #getErrorIndicatorStroke()
      * 
      * @since 1.0.8
      */
@@ -313,6 +315,7 @@ public class StatisticalBarRenderer extends BarRenderer
         }
         g2.setPaint(itemPaint);
         g2.fill(bar);
+        
         // draw the outline...
         if (isDrawBarOutline() 
                 && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
@@ -399,9 +402,8 @@ public class StatisticalBarRenderer extends BarRenderer
         RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
         
         // BAR X
-        double rectX = domainAxis.getCategoryStart(
-            column, getColumnCount(), dataArea, xAxisLocation
-        );
+        double rectX = domainAxis.getCategoryStart(column, getColumnCount(), 
+                dataArea, xAxisLocation);
 
         int seriesCount = getRowCount();
         int categoryCount = getColumnCount();
@@ -546,9 +548,6 @@ public class StatisticalBarRenderer extends BarRenderer
         if (!(obj instanceof StatisticalBarRenderer)) {
             return false;   
         }
-        if (!super.equals(obj)) {
-            return false;   
-        }
         StatisticalBarRenderer that = (StatisticalBarRenderer) obj;
         if (!PaintUtilities.equal(this.errorIndicatorPaint, 
                 that.errorIndicatorPaint)) {
@@ -558,7 +557,7 @@ public class StatisticalBarRenderer extends BarRenderer
                 that.errorIndicatorStroke)) {
             return false;
         }
-        return true;
+        return super.equals(obj);
     }
     
     /**
