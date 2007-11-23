@@ -77,25 +77,21 @@ import org.jfree.data.xy.XYDataset;
  * </table>
  */
 public class BoxAndWhiskerXYToolTipGenerator extends StandardXYToolTipGenerator
-                                             implements XYToolTipGenerator,
-                                                        Cloneable,
-                                                        Serializable {
+        implements XYToolTipGenerator, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -2648775791161459710L;
     
     /** The default tooltip format string. */
     public static final String DEFAULT_TOOL_TIP_FORMAT 
-        = "X: {1} Mean: {2} Median: {3} Min: {4} Max: {5} Q1: {6} Q3: {7} ";
+            = "X: {1} Mean: {2} Median: {3} Min: {4} Max: {5} Q1: {6} Q3: {7} ";
     
     /**
      * Creates a default item label generator.
      */
     public BoxAndWhiskerXYToolTipGenerator() {
-        super(
-            DEFAULT_TOOL_TIP_FORMAT,
-            NumberFormat.getInstance(), NumberFormat.getInstance()
-        );
+        super(DEFAULT_TOOL_TIP_FORMAT, NumberFormat.getInstance(), 
+                NumberFormat.getInstance());
     }
 
     /**
