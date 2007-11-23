@@ -50,6 +50,8 @@
  * 18-Jan-2007 : Fixed bug in getValue() method (DG);
  * 30-Mar-2007 : Fixed bug 1690654, problem with removeValue() (DG);
  * 21-Nov-2007 : Fixed bug (1835955) in removeColumn(Comparable) method (DG);
+ * 23-Nov-2007 : Added argument checks to removeRow(Comparable) to make it
+ *               consistent with the removeRow(Comparable) method (DG);
  *
  */
 
@@ -413,15 +415,27 @@ public class DefaultKeyedValues2D implements KeyedValues2D,
     }
 
     /**
-     * Removes a row.
+     * Removes a row from the table.
      *
      * @param rowKey  the row key (<code>null</code> not permitted).
      * 
      * @see #removeRow(int)
      * @see #removeColumn(Comparable)
+     *
+     * @throws UnknownKeyException if <code>rowKey</code> is not defined in the
+     *         table.
      */
     public void removeRow(Comparable rowKey) {
-        removeRow(getRowIndex(rowKey));
+        if (rowKey == null) {
+            throw new IllegalArgumentException("Null 'rowKey' argument.");
+        }
+        int index = getRowIndex(rowKey);
+        if (index >= 0) {
+            removeRow(index);
+        }
+        else {
+            throw new UnknownKeyException("Unknown key: " + rowKey);
+        }
     }
 
     /**
