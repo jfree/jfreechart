@@ -71,6 +71,8 @@ import org.jfree.util.PublicCloneable;
 
 /**
  * A value indicator for a {@link DialPlot}.
+ * 
+ * @since 1.0.7
  */
 public class DialValueIndicator extends AbstractDialLayer implements DialLayer, 
         Cloneable, PublicCloneable, Serializable {

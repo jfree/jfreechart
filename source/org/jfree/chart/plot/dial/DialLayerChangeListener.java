@@ -46,6 +46,8 @@ import java.util.EventListener;
  * The interface via which an object is notified of changes to a 
  * {@link DialLayer}.  The {@link DialPlot} class listens for changes to its
  * layers in this way.
+ * 
+ * @since 1.0.7
  */
 public interface DialLayerChangeListener extends EventListener {
     
