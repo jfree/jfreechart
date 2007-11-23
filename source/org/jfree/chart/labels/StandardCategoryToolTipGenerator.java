@@ -53,15 +53,15 @@ import org.jfree.data.category.CategoryDataset;
  * {@link org.jfree.chart.renderer.category.CategoryItemRenderer}.
  */
 public class StandardCategoryToolTipGenerator 
-    extends AbstractCategoryItemLabelGenerator 
-    implements CategoryToolTipGenerator, Serializable {
+        extends AbstractCategoryItemLabelGenerator 
+        implements CategoryToolTipGenerator, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6768806592218710764L;
     
     /** The default format string. */
     public static final String DEFAULT_TOOL_TIP_FORMAT_STRING 
-        = "({0}, {1}) = {2}";
+            = "({0}, {1}) = {2}";
     
     /**
      * Creates a new generator with a default number formatter.
