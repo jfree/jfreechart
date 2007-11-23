@@ -105,13 +105,14 @@ public class DefaultCategoryDataset extends AbstractDataset
      * @return The value (possibly <code>null</code>).
      * 
      * @see #addValue(Number, Comparable, Comparable)
+     * @see #removeValue(Comparable, Comparable)
      */
     public Number getValue(int row, int column) {
         return this.data.getValue(row, column);
     }
 
     /**
-     * Returns a row key.
+     * Returns the key for the specified row.
      *
      * @param row  the row index (zero-based).
      *
@@ -119,6 +120,7 @@ public class DefaultCategoryDataset extends AbstractDataset
      * 
      * @see #getRowIndex(Comparable)
      * @see #getRowKeys()
+     * @see #getColumnKey(int)
      */
     public Comparable getRowKey(int row) {
         return this.data.getRowKey(row);
@@ -342,9 +344,12 @@ public class DefaultCategoryDataset extends AbstractDataset
      * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param columnKey  the column key.
+     * @param columnKey  the column key (<code>null</code> not permitted).
      * 
      * @see #removeRow(Comparable)
+     * 
+     * @throws UnknownKeyException if <code>columnKey</code> is not defined
+     *         in the dataset.
      */
     public void removeColumn(Comparable columnKey) {
         this.data.removeColumn(columnKey);
@@ -368,24 +373,19 @@ public class DefaultCategoryDataset extends AbstractDataset
      * @return A boolean.
      */
     public boolean equals(Object obj) {
-
         if (obj == this) {
             return true;
         }
-
         if (!(obj instanceof CategoryDataset)) {
             return false;
         }
-
         CategoryDataset that = (CategoryDataset) obj;
         if (!getRowKeys().equals(that.getRowKeys())) {
             return false;
         }
-
         if (!getColumnKeys().equals(that.getColumnKeys())) {
             return false;
         }
-
         int rowCount = getRowCount();
         int colCount = getColumnCount();
         for (int r = 0; r < rowCount; r++) {
