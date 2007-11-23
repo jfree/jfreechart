@@ -68,16 +68,16 @@ import org.jfree.util.PublicCloneable;
  * </table>
  */
 public class BoxAndWhiskerToolTipGenerator 
-    extends StandardCategoryToolTipGenerator
-    implements CategoryToolTipGenerator, Cloneable, PublicCloneable,
-               Serializable {
+        extends StandardCategoryToolTipGenerator
+        implements CategoryToolTipGenerator, Cloneable, PublicCloneable,
+                   Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6076837753823076334L;
     
     /** The default tooltip format string. */
     public static final String DEFAULT_TOOL_TIP_FORMAT 
-        = "X: {1} Mean: {2} Median: {3} Min: {4} Max: {5} Q1: {6} Q3: {7} ";
+            = "X: {1} Mean: {2} Median: {3} Min: {4} Max: {5} Q1: {6} Q3: {7} ";
     
     /**
      * Creates a default tool tip generator.
