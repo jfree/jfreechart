@@ -12,7 +12,7 @@
 	(convertAWTImageToSWT): New method,
 	(convertToSWT(BufferedImage)): Moved from SWTGraphics2D.java.
 	
-----------  JFREECHART 1.0.7 RELEASED ------------------------
+----------  JFREECHART 1.0.8 RELEASED ------------------------
 
 2007-11-23  David Gilbert  <david.gilbert@object-refinery.com>
 
