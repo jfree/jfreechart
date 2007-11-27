@@ -192,6 +192,7 @@
  *               and range markers (DG);
  * 12-Nov-2007 : Fixed bug in equals() method for domain and range tick
  *               band paint attributes (DG);
+ * 27-Nov-2007 : Added new setFixedDomain/RangeAxisSpace() methods (DG);
  *
  */
 
@@ -4275,8 +4276,25 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      * @see #getFixedDomainAxisSpace()
      */
     public void setFixedDomainAxisSpace(AxisSpace space) {
+        setFixedDomainAxisSpace(space, true);
+    }
+
+    /**
+     * Sets the fixed domain axis space and, if requested, sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param space  the space (<code>null</code> permitted).
+     * @param notify  notify listeners?
+     * 
+     * @see #getFixedDomainAxisSpace()
+     * 
+     * @since 1.0.9
+     */
+    public void setFixedDomainAxisSpace(AxisSpace space, boolean notify) {
         this.fixedDomainAxisSpace = space;
-        notifyListeners(new PlotChangeEvent(this));
+        if (notify) {
+            notifyListeners(new PlotChangeEvent(this));
+        }
     }
 
     /**
@@ -4299,8 +4317,25 @@ public class XYPlot extends Plot implements ValueAxisPlot,
      * @see #getFixedRangeAxisSpace()
      */
     public void setFixedRangeAxisSpace(AxisSpace space) {
+        setFixedRangeAxisSpace(space, true);
+    }
+
+    /**
+     * Sets the fixed range axis space and, if requested, sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param space  the space (<code>null</code> permitted).
+     * @param notify  notify listeners?
+     * 
+     * @see #getFixedRangeAxisSpace()
+     * 
+     * @since 1.0.9
+     */
+    public void setFixedRangeAxisSpace(AxisSpace space, boolean notify) {
         this.fixedRangeAxisSpace = space;
-        notifyListeners(new PlotChangeEvent(this));
+        if (notify) {
+            notifyListeners(new PlotChangeEvent(this));
+        }
     }
 
     /**

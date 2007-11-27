@@ -81,6 +81,8 @@
  * 06-Feb-2007 : Fixed bug 1606205, draw shared axis after subplots (DG);
  * 23-Mar-2007 : Reverted previous patch (bug fix 1606205) (DG);
  * 17-Apr-2007 : Added null argument checks to findSubplot() (DG);
+ * 27-Nov-2007 : Modified setFixedRangeAxisSpaceForSubplots() so as not to
+ *               trigger change event in subplots (DG);
  *
  */
 
@@ -599,13 +601,11 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param space  the space.
      */
     protected void setFixedRangeAxisSpaceForSubplots(AxisSpace space) {
-
         Iterator iterator = this.subplots.iterator();
         while (iterator.hasNext()) {
             XYPlot plot = (XYPlot) iterator.next();
-            plot.setFixedRangeAxisSpace(space);
+            plot.setFixedRangeAxisSpace(space, false);
         }
-
     }
 
     /**

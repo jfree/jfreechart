@@ -85,6 +85,8 @@
  * 23-Mar-2007 : Reverted previous patch (DG);
  * 17-Apr-2007 : Added null argument checks to findSubplot() (DG);
  * 18-Jul-2007 : Fixed bug in removeSubplot (DG);
+ * 27-Nov-2007 : Modified setFixedDomainAxisSpaceForSubplots() so as not to
+ *               trigger change events in subplots (DG);
  * 
  */
 
@@ -580,13 +582,11 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param space  the space.
      */
     protected void setFixedDomainAxisSpaceForSubplots(AxisSpace space) {
-
         Iterator iterator = this.subplots.iterator();
         while (iterator.hasNext()) {
             XYPlot plot = (XYPlot) iterator.next();
-            plot.setFixedDomainAxisSpace(space);
+            plot.setFixedDomainAxisSpace(space, false);
         }
-
     }
 
     /**
