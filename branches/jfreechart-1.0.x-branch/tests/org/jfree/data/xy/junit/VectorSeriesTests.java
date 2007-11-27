@@ -36,6 +36,7 @@
  * -------
  * 30-Jan-2007 : Version 1, based on XYSeriesTests (DG);
  * 24-May-2007 : Updated for modified method names (DG);
+ * 27-Nov-2007 : Added testClear() method (DG);
  *
  */
 
@@ -52,15 +53,24 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.data.general.SeriesChangeEvent;
+import org.jfree.data.general.SeriesChangeListener;
 import org.jfree.data.xy.VectorSeries;
 import org.jfree.data.xy.XYCoordinate;
 
 /**
  * Tests for the {@link VectorSeries} class.
  */
-public class VectorSeriesTests extends TestCase {
+public class VectorSeriesTests extends TestCase 
+        implements SeriesChangeListener {
 
-    /**
+	SeriesChangeEvent lastEvent;
+	
+    public void seriesChanged(SeriesChangeEvent event) {
+        this.lastEvent = event;
+	}
+
+	/**
      * Returns the tests as a test suite.
      *
      * @return The test suite.
@@ -276,6 +286,22 @@ public class VectorSeriesTests extends TestCase {
         s1.setMaximumItemCount(2);
         assertEquals(2.0, s1.getXValue(0), EPSILON);
         assertEquals(3.0, s1.getXValue(1), EPSILON);
+    }
+    
+    /**
+     * Some checks for the clear() method.
+     */
+    public void testClear() {
+        VectorSeries s1 = new VectorSeries("S1");
+        s1.addChangeListener(this);
+        s1.clear();
+        assertNull(this.lastEvent);
+        assertTrue(s1.isEmpty());
+        s1.add(1.0, 2.0, 3.0, 4.0);
+        assertFalse(s1.isEmpty());
+        s1.clear();
+        assertNotNull(this.lastEvent);
+        assertTrue(s1.isEmpty());
     }
     
 }

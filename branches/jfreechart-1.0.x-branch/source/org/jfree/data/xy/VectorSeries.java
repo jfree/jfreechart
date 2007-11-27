@@ -39,6 +39,7 @@
  *               for getDeltaYValue() (DG);
  * 25-May-2007 : Added remove(int) and clear() methods, and moved from the
  *               experimental to the main source tree (DG);
+ * 27-Nov-2007 : Removed redundant clear() method (DG);
  *               
  */
 
@@ -105,17 +106,6 @@ public class VectorSeries extends ComparableObjectSeries {
         VectorDataItem result = (VectorDataItem) this.data.remove(index);
         fireSeriesChanged();
         return result;
-    }
-    
-    /**
-     * Removes all data items from the series and sends a 
-     * {@link SeriesChangeEvent} to all registered listeners.
-     */
-    public void clear() {
-        if (this.data.size() > 0) {
-            this.data.clear();
-            fireSeriesChanged();
-        }
     }
 
     /**

@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 04-Dec-2006 : Version 1, based on XYSeriesTests (DG);
+ * 27-Nov-2007 : Added testClear() method (DG);
  *
  */
 
@@ -51,6 +52,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.data.general.SeriesChangeEvent;
+import org.jfree.data.general.SeriesChangeListener;
 import org.jfree.data.general.SeriesException;
 import org.jfree.data.time.Year;
 import org.jfree.data.time.ohlc.OHLCSeries;
@@ -58,7 +61,14 @@ import org.jfree.data.time.ohlc.OHLCSeries;
 /**
  * Tests for the {@link OHLCSeries} class.
  */
-public class OHLCSeriesTests extends TestCase {
+public class OHLCSeriesTests extends TestCase    
+        implements SeriesChangeListener {
+
+	SeriesChangeEvent lastEvent;
+	
+    public void seriesChanged(SeriesChangeEvent event) {
+        this.lastEvent = event;
+	}
 
     /**
      * Returns the tests as a test suite.
@@ -229,5 +239,21 @@ public class OHLCSeriesTests extends TestCase {
         assertEquals(new Year(2007), s1.getPeriod(0));
         assertEquals(new Year(2008), s1.getPeriod(1));
     }
+    
+    /**
+     * Some checks for the clear() method.
+     */
+    public void testClear() {
+    	OHLCSeries s1 = new OHLCSeries("S1");
+        s1.addChangeListener(this);
+        s1.clear();
+        assertNull(this.lastEvent);
+        assertTrue(s1.isEmpty());
+        s1.add(new Year(2006), 1.0, 1.1, 1.1, 1.1);
+        assertFalse(s1.isEmpty());
+        s1.clear();
+        assertNotNull(this.lastEvent);
+        assertTrue(s1.isEmpty());
+    } 
     
 }
