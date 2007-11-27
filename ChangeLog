@@ -1,5 +1,17 @@
 2007-11-27  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/plot/CombinedDomainXYPlot.java
+	(setFixedRangeAxisSpaceForSubplots): Call new method in XYPlot,
+	* source/org/jfree/chart/plot/CombinedRangeXYPlot.java
+	(setFixedDomainAxisSpaceForSubplots): Likewise,
+	* source/org/jfree/chart/plot/XYPlot.java
+	(setFixedDomainAxisSpace(AxisSpace)): Delegate to new method,
+	(setFixedDomainAxisSpace(AxisSpace, boolean)): New method,
+	(setFixedRangeAxisSpace(AxisSpace)): Delegate to new method,
+	(setFixedRangeAxisSpace(AxisSpace, boolean)): New method.
+
+2007-11-27  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* swt/org/jfree/experimental/swt/SWTGraphics2D.java:
 	(drawImage(BufferedImage, BufferedImageOp, int, int)): Updated for method 
 	moved to SWTUtils,
