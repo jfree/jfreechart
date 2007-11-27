@@ -49,6 +49,7 @@
  *               still ignored at this point) (DG);
  * 23-Oct-2007 : Implemented drawPolygon(), drawPolyline(), drawOval(),
  *               fillOval(), drawArc() and fillArc() (DG);
+ * 27-Nov-2007 : Implemented a couple of drawImage() methods (DG);
  *
  */
 
@@ -74,13 +75,11 @@ import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.PathIterator;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
-import java.awt.image.DirectColorModel;
 import java.awt.image.ImageObserver;
-import java.awt.image.IndexColorModel;
 import java.awt.image.RenderedImage;
-import java.awt.image.WritableRaster;
 import java.awt.image.renderable.RenderableImage;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
@@ -93,9 +92,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.Path;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Resource;
 import org.eclipse.swt.graphics.Transform;
 
@@ -928,13 +925,14 @@ public class SWTGraphics2D extends Graphics2D {
     public void drawImage(BufferedImage image, BufferedImageOp op, int x, 
             int y) {
         org.eclipse.swt.graphics.Image im = new org.eclipse.swt.graphics.Image(
-                this.gc.getDevice(), convertToSWT(image));
+                this.gc.getDevice(), SWTUtils.convertToSWT(image));
         this.gc.drawImage(im, x, y);
         im.dispose();
     }
 
     /**
-     * Draws an image at (x, y).
+     * Draws an SWT image with the top left corner of the image aligned to the
+     * point (x, y).
      * 
      * @param image  the image.
      * @param x  the x-coordinate.
@@ -962,24 +960,55 @@ public class SWTGraphics2D extends Graphics2D {
 
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawImage(java.awt.Image, int, int, 
-     * java.awt.image.ImageObserver)
+    /**
+     * Draws an image with the top left corner aligned to the point (x, y).
+     * 
+     * @param image  the image.
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     * @param observer  ignored here.
+     * 
+     * @return <code>true</code> if the image has been drawn.
      */
     public boolean drawImage(Image image, int x, int y, 
             ImageObserver observer) {
-        // TODO Auto-generated method stub
-        return false;
+        ImageData data = SWTUtils.convertAWTImageToSWT(image);
+        if (data == null) {
+            return false;
+        }
+        org.eclipse.swt.graphics.Image im = new org.eclipse.swt.graphics.Image(
+                this.gc.getDevice(), data);
+        this.gc.drawImage(im, x, y);
+        im.dispose();
+        return true;
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.Graphics#drawImage(java.awt.Image, int, int, int, int, 
-     * java.awt.image.ImageObserver)
+    /**
+     * Draws an image with the top left corner aligned to the point (x, y), 
+     * and scaled to the specified width and height.
+     * 
+     * @param image  the image.
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     * @param width  the width for the rendered image.
+     * @param height  the height for the rendered image.
+     * @param observer  ignored here.
+     * 
+     * @return <code>true</code> if the image has been drawn.
      */
     public boolean drawImage(Image image, int x, int y, int width, int height,
             ImageObserver observer) {
-        // TODO Auto-generated method stub
-        return false;
+        ImageData data = SWTUtils.convertAWTImageToSWT(image);
+        if (data == null) {
+            return false;
+        }
+        org.eclipse.swt.graphics.Image im = new org.eclipse.swt.graphics.Image(
+                this.gc.getDevice(), data);
+        org.eclipse.swt.graphics.Rectangle bounds = im.getBounds();
+        this.gc.drawImage(im, 0, 0, bounds.width, bounds.height, x, y, width, 
+                height);
+        im.dispose();
+        return true;
     }
 
     /* (non-Javadoc)
@@ -988,8 +1017,18 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public boolean drawImage(Image image, int x, int y, Color bgcolor,
             ImageObserver observer) {
-        // TODO Auto-generated method stub
-        return false;
+        if (image == null) {
+            throw new IllegalArgumentException("Null 'image' argument.");
+        }
+        int w = image.getWidth(null);
+        int h = image.getHeight(null);
+        if (w == -1 || h == -1) {
+            return false;
+        }
+        Paint savedPaint = getPaint();
+        fill(new Rectangle2D.Double(x, y, w, h));
+        setPaint(savedPaint);
+        return drawImage(image, x, y, observer);
     }
 
     /* (non-Javadoc)
@@ -998,8 +1037,18 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public boolean drawImage(Image image, int x, int y, int width, int height,
             Color bgcolor, ImageObserver observer) {
-        // TODO Auto-generated method stub
-        return false;
+        if (image == null) {
+            throw new IllegalArgumentException("Null 'image' argument.");
+        }
+        int w = image.getWidth(null);
+        int h = image.getHeight(null);
+        if (w == -1 || h == -1) {
+            return false;
+        }
+        Paint savedPaint = getPaint();
+        fill(new Rectangle2D.Double(x, y, w, h));
+        setPaint(savedPaint);
+        return drawImage(image, x, y, width, height, observer);
     }
 
     /* (non-Javadoc)
@@ -1187,58 +1236,5 @@ public class SWTGraphics2D extends Graphics2D {
         AffineTransform awtTransform = new AffineTransform(elements);
         return awtTransform;
     }
-
-    static ImageData convertToSWT(BufferedImage bufferedImage) {
-        if (bufferedImage.getColorModel() instanceof DirectColorModel) {
-            DirectColorModel colorModel 
-                    = (DirectColorModel) bufferedImage.getColorModel();
-            PaletteData palette = new PaletteData(colorModel.getRedMask(),
-                    colorModel.getGreenMask(), colorModel.getBlueMask());
-            ImageData data = new ImageData(bufferedImage.getWidth(), 
-                    bufferedImage.getHeight(), colorModel.getPixelSize(),
-                    palette);
-            WritableRaster raster = bufferedImage.getRaster();
-            int[] pixelArray = new int[3];
-            for (int y = 0; y < data.height; y++) {
-                for (int x = 0; x < data.width; x++) {
-                    raster.getPixel(x, y, pixelArray);
-                    int pixel = palette.getPixel(new RGB(pixelArray[0], 
-                            pixelArray[1], pixelArray[2]));
-                    data.setPixel(x, y, pixel);
-                }
-            }
-            return data;
-        } 
-        else if (bufferedImage.getColorModel() instanceof IndexColorModel) {
-            IndexColorModel colorModel = (IndexColorModel) 
-                    bufferedImage.getColorModel();
-            int size = colorModel.getMapSize();
-            byte[] reds = new byte[size];
-            byte[] greens = new byte[size];
-            byte[] blues = new byte[size];
-            colorModel.getReds(reds);
-            colorModel.getGreens(greens);
-            colorModel.getBlues(blues);
-            RGB[] rgbs = new RGB[size];
-            for (int i = 0; i < rgbs.length; i++) {
-                rgbs[i] = new RGB(reds[i] & 0xFF, greens[i] & 0xFF, 
-                        blues[i] & 0xFF);
-            }
-            PaletteData palette = new PaletteData(rgbs);
-            ImageData data = new ImageData(bufferedImage.getWidth(),
-                    bufferedImage.getHeight(), colorModel.getPixelSize(),
-                    palette);
-            data.transparentPixel = colorModel.getTransparentPixel();
-            WritableRaster raster = bufferedImage.getRaster();
-            int[] pixelArray = new int[1];
-            for (int y = 0; y < data.height; y++) {
-                for (int x = 0; x < data.width; x++) {
-                    raster.getPixel(x, y, pixelArray);
-                    data.setPixel(x, y, pixelArray[0]);
-                }
-            }
-            return data;
-        }
-        return null;
-    }
+    
 }
