@@ -1,5 +1,22 @@
 2007-11-27  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/ComparableObjectSeries.java
+    (clear): Changed from protected to public,
+    * source/org/jfree/data/xy/VectorSeries.java
+    (clear): Removed,
+    * tests/org/jfree/data/time/ohlc/junit/OHLCSeriesTests.java
+    (testClear): New test method,
+    * tests/org/jfree/data/xy/junit/VectorSeriesTests.java
+    (testClear): Likewise,
+    * tests/org/jfree/data/xy/junit/XIntervalSeriesTests.java
+    (testClear): Likewise,
+    * tests/org/jfree/data/xy/junit/XYIntervalSeriesTests.java
+    (testClear): Likewise,
+    * tests/org/jfree/data/xy/junit/YIntervalSeriesTests.java
+    (testClear): Likewise.
+ 
+2007-11-27  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/plot/CombinedDomainXYPlot.java
 	(setFixedRangeAxisSpaceForSubplots): Call new method in XYPlot,
 	* source/org/jfree/chart/plot/CombinedRangeXYPlot.java

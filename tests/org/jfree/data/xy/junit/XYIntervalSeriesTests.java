@@ -36,6 +36,7 @@
  * -------
  * 20-Oct-2006 : Version 1, based on XYSeriesTests (DG);
  * 13-Feb-2007 : Added testValues() (DG);
+ * 27-Nov-2007 : Added testClear() method (DG);
  *
  */
 
@@ -51,12 +52,22 @@ import java.io.ObjectOutputStream;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.jfree.data.general.SeriesChangeEvent;
+import org.jfree.data.general.SeriesChangeListener;
 import org.jfree.data.xy.XYIntervalSeries;
 
 /**
  * Tests for the {@link XYIntervalSeries} class.
  */
-public class XYIntervalSeriesTests extends TestCase {
+public class XYIntervalSeriesTests extends TestCase  
+        implements SeriesChangeListener {
+
+	SeriesChangeEvent lastEvent;
+	
+    public void seriesChanged(SeriesChangeEvent event) {
+        this.lastEvent = event;
+	}
 
     /**
      * Returns the tests as a test suite.
@@ -292,4 +303,20 @@ public class XYIntervalSeriesTests extends TestCase {
         assertEquals(6.0, s1.getYHighValue(0), EPSILON);
     }
     
+    /**
+     * Some checks for the clear() method.
+     */
+    public void testClear() {
+    	XYIntervalSeries s1 = new XYIntervalSeries("S1");
+        s1.addChangeListener(this);
+        s1.clear();
+        assertNull(this.lastEvent);
+        assertTrue(s1.isEmpty());
+        s1.add(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
+        assertFalse(s1.isEmpty());
+        s1.clear();
+        assertNotNull(this.lastEvent);
+        assertTrue(s1.isEmpty());
+    } 
+   
 }

@@ -36,6 +36,7 @@
  * -------
  * 19-Oct-2006 : New class (DG);
  * 31-Oct-2007 : Implemented faster hashCode() (DG);
+ * 27-Nov-2007 : Changed clear() from protected to public (DG);
  *
  */
 
@@ -346,9 +347,11 @@ public class ComparableObjectSeries extends Series
     }
     
     /**
-     * Removes all data items from the series.
+     * Removes all data items from the series and, unless the series is 
+     * already empty, sends a {@link SeriesChangeEvent} to all registered 
+     * listeners.
      */
-    protected void clear() {
+    public void clear() {
         if (this.data.size() > 0) {
             this.data.clear();
             fireSeriesChanged();
