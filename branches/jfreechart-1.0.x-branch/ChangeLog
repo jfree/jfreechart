@@ -1,3 +1,19 @@
+2007-11-27  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* swt/org/jfree/experimental/swt/SWTGraphics2D.java:
+	(drawImage(BufferedImage, BufferedImageOp, int, int)): Updated for method 
+	moved to SWTUtils,
+	(drawImage(Image, int, int, ImageObserver)): Implemented,
+	(drawImage(Image, int, int, int, int, ImageObserver)): Likewise,
+	(drawImage(Image, int, int, Color, ImageObserver)): Likewise,
+	(drawImage(Image, int, int, int, int, Color, ImageObserver)): Likewise,
+	(convertToSWT(BufferedImage)): Moved to SWTUtils.java,
+	* swt/org/jfree/experimental/swt/SWTUtils.java:
+	(convertAWTImageToSWT): New method,
+	(convertToSWT(BufferedImage)): Moved from SWTGraphics2D.java.
+	
+----------  JFREECHART 1.0.7 RELEASED ------------------------
+
 2007-11-23  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/plot/dial/DialPointer.java
