@@ -1,3 +1,12 @@
+2007-11-29  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/plot/MeterPlot.java
+	(writeObject): Handle dialOutlinePaint,
+	(readObject): Likewise,
+	* tests/org/jfree/chart/plot/junit/MeterPlotTests.java
+	(testEquals): Updated to test dialOutlinePaint,
+	(testSerialization1): Likewise.
+
 2007-11-27  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/ComparableObjectSeries.java

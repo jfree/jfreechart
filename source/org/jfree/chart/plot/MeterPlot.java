@@ -78,6 +78,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 05-Mar-2007 : Restore clip region correctly (see bug 1667750) (DG);
  * 18-May-2007 : Set dataset for LegendItem (DG);
+ * 29-Nov-2007 : Fixed serialization bug with dialOutlinePaint (DG);
  * 
  */
 
@@ -1279,6 +1280,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         SerialUtilities.writePaint(this.dialBackgroundPaint, stream);
+        SerialUtilities.writePaint(this.dialOutlinePaint, stream);
         SerialUtilities.writePaint(this.needlePaint, stream);
         SerialUtilities.writePaint(this.valuePaint, stream);
         SerialUtilities.writePaint(this.tickPaint, stream);
@@ -1297,6 +1299,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.dialBackgroundPaint = SerialUtilities.readPaint(stream);
+        this.dialOutlinePaint = SerialUtilities.readPaint(stream);
         this.needlePaint = SerialUtilities.readPaint(stream);
         this.valuePaint = SerialUtilities.readPaint(stream);
         this.tickPaint = SerialUtilities.readPaint(stream);
