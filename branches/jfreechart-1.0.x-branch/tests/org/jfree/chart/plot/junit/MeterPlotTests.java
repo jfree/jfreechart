@@ -35,7 +35,9 @@
  * Changes
  * -------
  * 27-Mar-2003 : Version 1 (DG);
- * 12-May-2004 : Updated testEquals();
+ * 12-May-2004 : Updated testEquals() (DG);
+ * 29-Nov-2007 : Updated testEquals() and testSerialization1() for 
+ *               dialOutlinePaint (DG)
  *
  */
 
@@ -133,7 +135,15 @@ public class MeterPlotTests extends TestCase {
         plot2.setDialBackgroundPaint(new GradientPaint(9.0f, 8.0f, Color.red, 
                 7.0f, 6.0f, Color.blue));
         assertTrue(plot1.equals(plot2));
-             
+         
+        // dial outline paint
+        plot1.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
+                3.0f, 4.0f, Color.red));
+        assertFalse(plot1.equals(plot2));
+        plot2.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
+                3.0f, 4.0f, Color.red));
+        assertTrue(plot1.equals(plot2));
+        
         // needle paint
         plot1.setNeedlePaint(new GradientPaint(9.0f, 8.0f, Color.red, 
                 7.0f, 6.0f, Color.blue));
@@ -246,8 +256,8 @@ public class MeterPlotTests extends TestCase {
         MeterPlot p1 = new MeterPlot(null);
         p1.setDialBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
-        p1.setDialBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        p1.setDialOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.red,
+                2.0f, 1.0f, Color.blue));
         p1.setNeedlePaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
         p1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red,
