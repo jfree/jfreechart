@@ -1,3 +1,8 @@
+2007-11-30  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/LocalizationBundle_it.properties:
+	Fixed errors.
+
 2007-11-29  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/plot/MeterPlot.java
