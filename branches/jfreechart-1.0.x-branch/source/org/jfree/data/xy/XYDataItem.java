@@ -37,7 +37,10 @@
  * 05-Aug-2003 : Renamed XYDataPair --> XYDataItem (DG);
  * 03-Feb-2004 : Fixed bug in equals() method (DG);
  * 21-Feb-2005 : Added setY(double) method (DG);
- *
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
+ * 30-Nov-2007 : Implemented getXValue() and getYValue(), plus toString() for 
+ *               debugging use (DG);
+ * 
  */
 
 package org.jfree.data.xy;
@@ -54,7 +57,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
     /** For serialization. */
     private static final long serialVersionUID = 2751513470325494890L;
     
-    /** The x-value. */
+    /** The x-value (<code>null</code> not permitted). */
     private Number x;
 
     /** The y-value. */
@@ -92,6 +95,21 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
     public Number getX() {
         return this.x;
     }
+    
+    /**
+     * Returns the x-value as a double primitive.
+     * 
+     * @return The x-value.
+     * 
+     * @see #getX()
+     * @see #getYValue()
+     * 
+     * @since 1.0.9
+     */
+    public double getXValue() {
+        // this.x is not allowed to be null...
+        return this.x.doubleValue();
+    }
 
     /**
      * Returns the y-value.
@@ -100,6 +118,24 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      */
     public Number getY() {
         return this.y;
+    }
+    
+    /**
+     * Returns the y-value as a double primitive.
+     * 
+     * @return The y-value.
+     * 
+     * @see #getY()
+     * @see #getXValue()
+     * 
+     * @since 1.0.9
+     */
+    public double getYValue() {
+        double result = Double.NaN;
+        if (this.y != null) {
+            result = this.y.doubleValue();
+        }
+        return result;
     }
 
     /**
@@ -215,6 +251,16 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
         result = this.x.hashCode();
         result = 29 * result + (this.y != null ? this.y.hashCode() : 0);
         return result;
+    }
+    
+    /**
+     * Returns a string representing this instance, primarily for debugging
+     * use.
+     * 
+     * @return A string.
+     */
+    public String toString() {
+        return "[" + getXValue() + ", " + getYValue() + "]";
     }
     
 }
