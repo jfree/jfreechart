@@ -38,6 +38,7 @@
  * 27-Nov-2006 : Updated testCloning() (DG);
  * 08-Mar-2007 : Added testGetSeries() and testRemoveSeries() (DG);
  * 08-May-2007 : Added testIndexOf() (DG);
+ * 03-Dec-2007 : Added testGetSeriesByKey() (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.data.UnknownKeyException;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -197,6 +199,34 @@ public class XYSeriesCollectionTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
+    }
+    
+    /**
+     * Some checks for the getSeries(Comparable) method.
+     */
+    public void testGetSeriesByKey() {
+        XYSeriesCollection c = new XYSeriesCollection();
+        XYSeries s1 = new XYSeries("s1");
+        c.addSeries(s1);
+        assertEquals("s1", c.getSeries("s1").getKey());
+        
+        boolean pass = false;
+        try {
+            c.getSeries("s2");
+        }
+        catch (UnknownKeyException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        
+        pass = false;
+        try {
+            c.getSeries(null);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass); 
     }
     
     /**
