@@ -135,6 +135,8 @@
  *               get/setSubtitles(), and added new addSubtitle(int, Title) 
  *               method (DG);
  * 05-Jun-2007 : Add change listener to default legend (DG);
+ * 04-Dec-2007 : In createBufferedImage() methods, make the default image type
+ *               BufferedImage.TYPE_INT_ARGB (thanks to Klaus Rheinwald) (DG);
  * 
  */
 
@@ -1363,7 +1365,7 @@ public class JFreeChart implements Drawable,
      */
     public BufferedImage createBufferedImage(int width, int height, 
                                              ChartRenderingInfo info) {
-        return createBufferedImage(width, height, BufferedImage.TYPE_INT_RGB, 
+        return createBufferedImage(width, height, BufferedImage.TYPE_INT_ARGB,
                 info);
     }
 
@@ -1409,7 +1411,7 @@ public class JFreeChart implements Drawable,
                                              ChartRenderingInfo info) {
 
         BufferedImage image = new BufferedImage(imageWidth, imageHeight, 
-                BufferedImage.TYPE_INT_RGB);
+                BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = image.createGraphics();
         double scaleX = imageWidth / drawWidth;
         double scaleY = imageHeight / drawHeight;
