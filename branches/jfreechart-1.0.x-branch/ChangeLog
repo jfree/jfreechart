@@ -1,5 +1,10 @@
 2007-12-04  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/renderer/AbstractRenderer.java
+	(hashCode): Compute using more fields.
+
+2007-12-04  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/JFreeChart.java
 	(createBufferedImage(int, int, ChartRenderingInfo)): Change image type,
 	(createBufferedImage(int, int, double, double, ChartRenderingInfo)): 
