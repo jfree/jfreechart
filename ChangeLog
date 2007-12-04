@@ -1,5 +1,14 @@
 2007-12-04  David Gilbert  <david.gilbert@object-refinery.com>
 
+	Bugs 1363043 and 1840139:
+	* source/org/jfree/chart/entity/ChartEntity.java
+	(getImageMapAreaTag): Escape toolTipText and urlText,
+	* source/org/jfree/chart/imagemap/ImageMapUtilities.java
+	(getImageMap): Escape name,
+	(htmlEscape): New method.
+
+2007-12-04  David Gilbert  <david.gilbert@object-refinery.com>
+
 	Bug 1460195:
 	* source/org/jfree/chart/entity/ChartEntity.java
 	(getImageMapAreaTag): Add 'nohref' attribute when there is no URL.

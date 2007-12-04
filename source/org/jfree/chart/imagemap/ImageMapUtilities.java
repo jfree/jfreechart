@@ -40,6 +40,8 @@
  *               layering (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 06-Feb-2006 : API doc updates (DG);
+ * 04-Dec-2007 : Added htmlEscape() method, and escape 'name' in 
+ *               getImageMap() (DG);
  * 
  */
 
@@ -171,7 +173,8 @@ public class ImageMapUtilities {
             URLTagFragmentGenerator urlTagFragmentGenerator) {
 
         StringBuffer sb = new StringBuffer();
-        sb.append("<map id=\"" + name + "\" name=\"" + name + "\">");
+        sb.append("<map id=\"" + htmlEscape(name) + "\" name=\"" 
+                + htmlEscape(name) + "\">");
         sb.append(StringUtils.getLineSeparator());
         EntityCollection entities = info.getEntityCollection();
         if (entities != null) {
@@ -195,4 +198,46 @@ public class ImageMapUtilities {
         
     }
 
+    /**
+     * Returns a string that is equivalent to the input string, but with 
+     * special characters converted to HTML escape sequences.
+     * 
+     * @param input  the string to escape (<code>null</code> not permitted).
+     *
+     * @return A string with characters escaped.
+     * 
+     * @since 1.0.9
+     */
+    public static String htmlEscape(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Null 'input' argument.");
+        }
+        StringBuffer result = new StringBuffer();
+        int length = input.length();
+        for (int i = 0; i < length; i++) {
+            char c = input.charAt(i);
+            if (c == '&') {
+                result.append("&amp;");
+            }
+            else if (c == '\"') {
+                result.append("&quot;");
+            }
+            else if (c == '<') {
+                result.append("&lt;");
+            }
+            else if (c == '>') {
+                result.append("&gt;");
+            }
+            else if (c == '\'') {
+                result.append("&#39;");
+            }
+            else if (c == '\\') {
+                result.append("&#092;");
+            }            
+            else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
 }
