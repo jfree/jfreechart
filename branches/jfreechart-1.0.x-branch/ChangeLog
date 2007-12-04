@@ -1,3 +1,9 @@
+2007-12-04  David Gilbert  <david.gilbert@object-refinery.com>
+
+	Bug 1460195:
+	* source/org/jfree/chart/entity/ChartEntity.java
+	(getImageMapAreaTag): Add 'nohref' attribute when there is no URL.
+
 2007-12-03  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/data/xy/XYSeriesCollection.java
