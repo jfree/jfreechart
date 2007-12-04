@@ -1,5 +1,12 @@
 2007-12-04  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/JFreeChart.java
+	(createBufferedImage(int, int, ChartRenderingInfo)): Change image type,
+	(createBufferedImage(int, int, double, double, ChartRenderingInfo)): 
+	Likewise. 
+
+2007-12-04  David Gilbert  <david.gilbert@object-refinery.com>
+
 	Bugs 1363043 and 1840139:
 	* source/org/jfree/chart/entity/ChartEntity.java
 	(getImageMapAreaTag): Escape toolTipText and urlText,
