@@ -30,10 +30,12 @@
  * (C) Copyright 2003-2007, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
+ * Contributors:     David Gilbert (for Object Refinery Limited);
  *
  * Changes
  * -------
  * 12-Aug-2003 : Version 1 (RA);
+ * 04-Dec-2007 : Escape tool tip text to fix bug 1400917 (DG);
  * 
  */
  
@@ -44,7 +46,7 @@ package org.jfree.chart.imagemap;
  * library (http://www.dynamicdrive.com).
  */
 public class DynamicDriveToolTipTagFragmentGenerator 
-    implements ToolTipTagFragmentGenerator {
+        implements ToolTipTagFragmentGenerator {
 
     /** The title, empty string not to display */
     protected String title = "";
@@ -80,9 +82,10 @@ public class DynamicDriveToolTipTagFragmentGenerator
      * @return The formatted HTML area tag attribute(s).
      */
     public String generateToolTipFragment(String toolTipText) {
-        return " onMouseOver=\"return stm(['" + this.title + "','" 
-            + toolTipText + "'],Style[" + this.style + "]);\"" 
-            + " onMouseOut=\"return htm();\"";
+        return " onMouseOver=\"return stm(['" 
+            + ImageMapUtilities.htmlEscape(this.title) + "','" 
+            + ImageMapUtilities.htmlEscape(toolTipText) + "'],Style[" 
+            + this.style + "]);\"" + " onMouseOut=\"return htm();\"";
     }
 
 }
