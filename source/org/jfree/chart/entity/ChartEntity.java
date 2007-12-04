@@ -62,6 +62,8 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 06-Feb-2007 : API doc update (DG);
  * 13-Nov-2007 : Reorganised equals(), implemented hashCode (DG);
+ * 04-Dec-2007 : Added 'nohref' attribute in getImageMapAreaTag() method, to 
+ *               fix bug 1460195 (DG);
  *
  */
 
@@ -321,6 +323,9 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
             if (hasURL) {
                 tag.append(urlTagFragmentGenerator.generateURLFragment(
                         this.urlText));
+            }
+            else {
+                tag.append(" nohref=\"nohref\"");
             }
             // if there is a tool tip, we expect it to generate the title and
             // alt values, so we only add an empty alt if there is no tooltip
