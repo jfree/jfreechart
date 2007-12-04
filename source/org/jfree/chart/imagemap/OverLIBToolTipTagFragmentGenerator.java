@@ -30,10 +30,12 @@
  * (C) Copyright 2003-2007, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
+ * Contributors:     David Gilbert (for Object Refinery Limited);
  *
  * Changes
  * -------
  * 12-Aug-2003 : Version 1 (RA);
+ * 04-Dec-2007 : Escape tool tip text to fix bug 1400917 (DG);
  * 
  */
  
@@ -44,17 +46,25 @@ package org.jfree.chart.imagemap;
  * (http://www.bosrup.com/web/overlib/).
  */
 public class OverLIBToolTipTagFragmentGenerator 
-    implements ToolTipTagFragmentGenerator {
+        implements ToolTipTagFragmentGenerator {
 
+	/**
+	 * Creates a new instance.
+	 */
+	public OverLIBToolTipTagFragmentGenerator() {
+	    super();
+	}
+	
     /**
      * Generates a tooltip string to go in an HTML image map.
      *
-     * @param toolTipText  the tooltip.
+     * @param toolTipText  the tooltip text.
      * 
      * @return The formatted HTML area tag attribute(s).
      */
     public String generateToolTipFragment(String toolTipText) {
-        return " onMouseOver=\"return overlib('" + toolTipText 
+        return " onMouseOver=\"return overlib('" 
+                + ImageMapUtilities.htmlEscape(toolTipText) 
                 + "');\" onMouseOut=\"return nd();\"";
     }
 
