@@ -137,6 +137,8 @@
  * 05-Jun-2007 : Add change listener to default legend (DG);
  * 04-Dec-2007 : In createBufferedImage() methods, make the default image type
  *               BufferedImage.TYPE_INT_ARGB (thanks to Klaus Rheinwald) (DG);
+ * 05-Dec-2007 : Fixed bug 1749124 (not registering as listener with
+ *               TextTitle) (DG);
  * 
  */
 
@@ -569,7 +571,13 @@ public class JFreeChart implements Drawable,
      * @see #getTitle()
      */
     public void setTitle(TextTitle title) {
+        if (this.title != null) {
+            this.title.removeChangeListener(this);
+        }
         this.title = title;
+        if (title != null) {
+            title.addChangeListener(this);
+        }
         fireChartChanged();
     }
 
