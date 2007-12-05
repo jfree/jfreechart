@@ -47,12 +47,12 @@ package org.jfree.chart.imagemap;
 public class StandardToolTipTagFragmentGenerator 
         implements ToolTipTagFragmentGenerator {
 
-	/**
-	 * Creates a new instance.
-	 */
-	public StandardToolTipTagFragmentGenerator() {
-		super();
-	}
+    /**
+     * Creates a new instance.
+     */
+    public StandardToolTipTagFragmentGenerator() {
+        super();
+    }
 	
     /**
      * Generates a tooltip string to go in an HTML image map.
