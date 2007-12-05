@@ -48,12 +48,12 @@ package org.jfree.chart.imagemap;
 public class OverLIBToolTipTagFragmentGenerator 
         implements ToolTipTagFragmentGenerator {
 
-	/**
-	 * Creates a new instance.
-	 */
-	public OverLIBToolTipTagFragmentGenerator() {
-	    super();
-	}
+    /**
+     * Creates a new instance.
+     */
+    public OverLIBToolTipTagFragmentGenerator() {
+        super();
+    }
 	
     /**
      * Generates a tooltip string to go in an HTML image map.
