@@ -1,5 +1,18 @@
 2007-12-05  David Gilbert  <david.gilbert@object-refinery.com>
 
+	* source/org/jfree/chart/entity/ChartEntity.java
+	(getImageMapAreaTag): Don't escape tooltips and urls, delegate that to 
+	the tag generators,
+	* source/org/jfree/chart/imagemap/StandardURLTagFragmentGenerator.java
+	(generateURLFragment): Encode the url text,
+	* tests/org/jfree/chart/imagemap/junit/ImageMapPackageTests.java: New file,
+	* tests/org/jfree/chart/imagemap/junit/StandardToolTipTagFragmentGeneratorTests.java: 
+	Likewise,
+	* tests/org/jfree/chart/imagemap/junit/StandardURLTagFragmentGeneratorTests.java: 
+	Likewise.
+
+2007-12-05  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/JFreeChart.java
 	(setTitle): Handle listener registration,
 	* tests/org/jfree/chart/junit/JFreeChartTests.java

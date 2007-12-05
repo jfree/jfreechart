@@ -34,6 +34,7 @@
  * Changes
  * -------
  * 12-Aug-2003 : Version 1 (RA);
+ * 05-Dec-2007 : Updated API docs (DG);
  * 
  */
  
@@ -50,6 +51,10 @@ public interface ToolTipTagFragmentGenerator {
      * varying standards compliance among browsers, this method is expected
      * to return an 'alt' attribute IN ADDITION TO whatever it does to create
      * the tooltip (often a 'title' attribute). 
+     * <br><br>
+     * Note that the <code>toolTipText</code> may have been generated from
+     * user-defined data, so care should be taken to filter/escape any 
+     * characters that may corrupt the HTML tag.
      *
      * @param toolTipText  the tooltip.
      * 

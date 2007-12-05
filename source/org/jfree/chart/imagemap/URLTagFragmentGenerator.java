@@ -34,6 +34,7 @@
  * Changes
  * -------
  * 12-Aug-2003 : Version 1 (RA);
+ * 05-Dec-2007 : Updated API docs (DG);
  * 
  */
  
@@ -46,6 +47,10 @@ public interface URLTagFragmentGenerator {
 
     /**
      * Generates a URL string to go in an HTML image map.
+     * <br><br>
+     * Note that the <code>urlText</code> may have been generated from
+     * user-defined data, so care should be taken to filter and/or encode 
+     * the string (for example, using {@link java.net.URLEncoder}).
      *
      * @param urlText the URL.
      * 
