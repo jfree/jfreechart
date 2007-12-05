@@ -1,3 +1,10 @@
+2007-12-05  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/JFreeChart.java
+	(setTitle): Handle listener registration,
+	* tests/org/jfree/chart/junit/JFreeChartTests.java
+	(testTitleChangeEvents): New test method.
+
 2007-12-04  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/imagemap/DynamicDriveToolTipFragmentGenerator.java
