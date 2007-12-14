@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 03-Feb-2003 : Version 1 (DG);
+ * 13-Dec-2007 : Updated API docs (DG);
  *
  */
 
@@ -44,7 +45,9 @@ import org.jfree.data.xy.XYZDataset;
 
 /**
  * Interface for a URL generator for plots that uses data from an 
- * {@link XYZDataset}.
+ * {@link XYZDataset}.  Classes that implement this interface are responsible 
+ * for correctly escaping any text that is derived from the dataset, as this 
+ * may be user-specified and could pose a security risk.
  */
 public interface XYZURLGenerator extends XYURLGenerator {
 

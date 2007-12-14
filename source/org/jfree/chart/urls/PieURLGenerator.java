@@ -41,20 +41,26 @@
  * 24-Apr-2003 : Switched around PieDataset and KeyedValuesDataset (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 24-Nov-2006 : Updated API docs (DG);
+ * 13-Dec-2007 : Updated API docs (DG);
  *
  */
+
 package org.jfree.chart.urls;
 
 import org.jfree.data.general.PieDataset;
 
 /**
  * Interface for a URL generator for plots that use data from a 
- * {@link PieDataset}.
- * <P>
- * Classes that implement this interface should be either (a) immutable, or
- * (b) cloneable via the <code>PublicCloneable</code> interface (defined in 
- * the JCommon class library).  This provides a mechanism for the referring
- * plot to clone the generator if necessary.
+ * {@link PieDataset}.  Classes that implement this interface:
+ * <ul>
+ * <li>are responsible for correctly escaping any text that is derived from the
+ *     dataset, as this may be user-specified and could pose a security
+ *     risk;</li>
+ * <li>should be either (a) immutable, or (b) cloneable via the 
+ *     <code>PublicCloneable</code> interface (defined in the JCommon class 
+ *     library).  This provides a mechanism for the referring plot to clone 
+ *     the generator if necessary.</li>
+ * </ul>
  */
 public interface PieURLGenerator {
 

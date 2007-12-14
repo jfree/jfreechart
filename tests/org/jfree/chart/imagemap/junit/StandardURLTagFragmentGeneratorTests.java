@@ -76,9 +76,9 @@ public class StandardURLTagFragmentGeneratorTests extends TestCase {
         StandardURLTagFragmentGenerator g 
                 = new StandardURLTagFragmentGenerator();
         assertEquals(" href=\"abc\"", g.generateURLFragment("abc"));
-        assertEquals(" href=\"images%2Fabc.png\"", 
+        assertEquals(" href=\"images/abc.png\"", 
                 g.generateURLFragment("images/abc.png"));
-        assertEquals(" href=\"http%3A%2F%2Fwww.jfree.org%2Fimages%2Fabc.png\"", 
+        assertEquals(" href=\"http://www.jfree.org/images/abc.png\"", 
                 g.generateURLFragment("http://www.jfree.org/images/abc.png"));
     }
 
