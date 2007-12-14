@@ -46,6 +46,7 @@
  *               wherever possible (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
+ * 13-Dec-2007 : Updated API docs (DG);
  *
  */
 
@@ -60,14 +61,18 @@ public interface CategoryURLGenerator {
 
     /**
      * Returns a URL for one item in a dataset. As a guideline, the URL 
-     * should be valid within the context of an XHTML 1.0 document.
+     * should be valid within the context of an XHTML 1.0 document.  Classes
+     * that implement this interface are responsible for correctly escaping
+     * any text that is derived from the dataset, as this may be user-specified
+     * and could pose a security risk.
      *
-     * @param data  the dataset.
+     * @param dataset  the dataset.
      * @param series  the series (zero-based index).
      * @param category  the category.
      *
      * @return A string containing the URL.
      */
-    public String generateURL(CategoryDataset data, int series, int category);
+    public String generateURL(CategoryDataset dataset, int series, 
+            int category);
 
 }

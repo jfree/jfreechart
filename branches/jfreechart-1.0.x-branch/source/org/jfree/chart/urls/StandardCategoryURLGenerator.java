@@ -115,13 +115,11 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
         }
         if (seriesParameterName == null) {
             throw new IllegalArgumentException(
-                "Null 'seriesParameterName' argument."
-            );   
+                    "Null 'seriesParameterName' argument.");   
         }
         if (categoryParameterName == null) {
             throw new IllegalArgumentException(
-                "Null 'categoryParameterName' argument."
-            );   
+                    "Null 'categoryParameterName' argument.");   
         }
         this.prefix = prefix;
         this.seriesParameterName = seriesParameterName;

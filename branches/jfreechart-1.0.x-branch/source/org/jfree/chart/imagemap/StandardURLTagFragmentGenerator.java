@@ -36,12 +36,12 @@
  * -------
  * 12-Aug-2003 : Version 1 (RA);
  * 04-Dec-2007 : Encode URL text to fix bug 1400917 (DG);
+ * 13-Dec-2007 : Revert change from 04-Dec-2007 (DG);
  * 
  */
  
 package org.jfree.chart.imagemap;
 
-import org.jfree.chart.urls.URLUtilities;
 
 /**
  * Generates URLs using the HTML href attribute for image map area tags.
@@ -59,12 +59,13 @@ public class StandardURLTagFragmentGenerator
     /**
      * Generates a URL string to go in an HTML image map.
      *
-     * @param urlText  the URL.
+     * @param urlText  the URL text (fully escaped).
      * 
      * @return The formatted text
      */
     public String generateURLFragment(String urlText) {
-        return " href=\"" + URLUtilities.encode(urlText, "UTF-8") + "\"";
+        // the URL text should already have been escaped by the URL generator
+        return " href=\"" + urlText + "\"";
     }
 
 }

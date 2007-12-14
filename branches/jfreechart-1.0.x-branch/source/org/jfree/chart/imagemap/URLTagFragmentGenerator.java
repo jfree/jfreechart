@@ -34,11 +34,16 @@
  * Changes
  * -------
  * 12-Aug-2003 : Version 1 (RA);
- * 05-Dec-2007 : Updated API docs (DG);
+ * 13-Dec-2007 : Updated API docs (DG);
  * 
  */
  
 package org.jfree.chart.imagemap;
+
+import org.jfree.chart.urls.CategoryURLGenerator;
+import org.jfree.chart.urls.PieURLGenerator;
+import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.urls.XYZURLGenerator;
 
 /**
  * Interface for generating the URL fragment of an HTML image map area tag.
@@ -48,11 +53,12 @@ public interface URLTagFragmentGenerator {
     /**
      * Generates a URL string to go in an HTML image map.
      * <br><br>
-     * Note that the <code>urlText</code> may have been generated from
-     * user-defined data, so care should be taken to filter and/or encode 
-     * the string (for example, using {@link java.net.URLEncoder}).
+     * Note that the <code>urlText</code> will be created by a URL generator 
+     * (such as {@link CategoryURLGenerator}, {@link PieURLGenerator}, 
+     * {@link XYURLGenerator} or {@link XYZURLGenerator}) and that generator is 
+     * responsible for ensuring that the URL text is correctly escaped.
      *
-     * @param urlText the URL.
+     * @param urlText  the URL text (fully escaped).
      * 
      * @return The formatted HTML area tag attribute(s).
      */

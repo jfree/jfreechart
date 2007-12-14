@@ -39,7 +39,8 @@
  * 20-Jan-2005 : Minor Javadoc update (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 
+ * 13-Dec-2007 : Updated API docs (DG);
+ *
  */
 
 package org.jfree.chart.urls;
@@ -48,7 +49,9 @@ import org.jfree.data.xy.XYDataset;
 
 /**
  * Interface for a URL generator for plots that uses data from an 
- * {@link XYDataset}.
+ * {@link XYDataset}.  Classes that implement this interface are responsible 
+ * for correctly escaping any text that is derived from the dataset, as this 
+ * may be user-specified and could pose a security risk.
  */
 public interface XYURLGenerator {
 
