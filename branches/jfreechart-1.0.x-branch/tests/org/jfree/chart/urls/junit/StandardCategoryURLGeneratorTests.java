@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 13-Aug-2003 : Version 1 (DG);
+ * 13-Dec-2007 : Added testGenerateURL() and testEquals() (DG);
  *
  */
 
@@ -52,6 +53,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  * Tests for the {@link StandardCategoryURLGenerator} class.
@@ -75,15 +77,56 @@ public class StandardCategoryURLGeneratorTests extends TestCase {
     public StandardCategoryURLGeneratorTests(String name) {
         super(name);
     }
+    
+    /**
+     * Some tests for the generateURL() method.
+     */
+    public void testGenerateURL() {
+        StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator();
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(1.0, "R1", "C1");
+        dataset.addValue(2.0, "R2", "C2");
+        dataset.addValue(3.0, "R&", "C&");
+        assertEquals("index.html?series=R1&amp;category=C1", 
+                g1.generateURL(dataset, 0, 0));
+        assertEquals("index.html?series=R1&amp;category=C2", 
+                g1.generateURL(dataset, 0, 1));
+        assertEquals("index.html?series=R2&amp;category=C2", 
+                g1.generateURL(dataset, 1, 1));
+        assertEquals("index.html?series=R%26&amp;category=C%26", 
+                g1.generateURL(dataset, 2, 2));
+    }
+    
+    /**
+     * Some tests for the equals() method.
+     */
+    public void testEquals() {
+        StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator();
+        StandardCategoryURLGenerator g2 = new StandardCategoryURLGenerator();
+        assertTrue(g1.equals(g2));
+        
+        g1 = new StandardCategoryURLGenerator("index2.html?");
+        assertFalse(g1.equals(g2));
+        g2 = new StandardCategoryURLGenerator("index2.html?");
+        assertTrue(g1.equals(g2));
+        
+        g1 = new StandardCategoryURLGenerator("index2.html?", "A", "B");
+        assertFalse(g1.equals(g2));
+        g2 = new StandardCategoryURLGenerator("index2.html?", "A", "B");
+        assertTrue(g1.equals(g2));
 
+        g1 = new StandardCategoryURLGenerator("index2.html?", "A", "C");
+        assertFalse(g1.equals(g2));
+        g2 = new StandardCategoryURLGenerator("index2.html?", "A", "C");
+        assertTrue(g1.equals(g2));
+    }
+    
     /**
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator(
-            "index.html?"
-        );
+                "index.html?");
         StandardCategoryURLGenerator g2 = null;
 
         try {
@@ -93,16 +136,14 @@ public class StandardCategoryURLGeneratorTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray())
-            );
+                    buffer.toByteArray()));
             g2 = (StandardCategoryURLGenerator) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(g1, g2);
-
     }
 
 }
