@@ -95,10 +95,10 @@ public abstract class Marker implements Cloneable, Serializable {
     /** For serialization. */
     private static final long serialVersionUID = -734389651405327166L;
 
-    /** The paint. */
+    /** The paint (null is not allowed). */
     private transient Paint paint;
 
-    /** The stroke. */
+    /** The stroke (null is not allowed). */
     private transient Stroke stroke;
     
     /** The outline paint. */
