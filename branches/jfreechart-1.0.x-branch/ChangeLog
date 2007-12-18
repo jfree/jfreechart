@@ -1,5 +1,20 @@
 2007-12-18  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Committing for Sergei Ivanov:
+    * source/org/jfree/data/Range.java
+    (intersects(Range)): New method,
+    (expand): Handle special case for negative margins,
+    (shift): Added argument check,
+    (scale): New method,
+    * tests/org/jfree/data/junit/RangeTests.java
+    (testConstructor): New test,
+    (testHashCode): Likewise,
+    (testExpand): Additional checks,
+    (testShift): New test,
+    (testScale): Likewise.    
+
+2007-12-18  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/plot/IntervalMarker.java
     (IntervalMarker(double, double, Paint)): New constructor.
 
