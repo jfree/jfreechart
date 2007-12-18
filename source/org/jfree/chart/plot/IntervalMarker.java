@@ -39,6 +39,7 @@
  * 26-Mar-2003 : Implemented Serializable (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 05-Sep-2006 : Added MarkerChangeEvent notification (DG);
+ * 18-Dec-2007 : Added new constructor (DG);
  *
  */
 
@@ -84,12 +85,26 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
     }
 
     /**
+     * Creates a new interval marker with the specified range and fill paint.
+     * The outline paint and stroke default to <code>null</code>.
+     * 
+     * @param start  the lower bound of the interval.
+     * @param end  the upper bound of the interval.
+     * @param paint  the fill paint (<code>null</code> not permitted).
+     * 
+     * @since 1.0.9
+     */
+    public IntervalMarker(double start, double end, Paint paint) {
+        this(start, end, paint, new BasicStroke(0.5f), null, null, 0.8f);
+    }
+    
+    /**
      * Constructs an interval marker.
      *
      * @param start  the start of the interval.
      * @param end  the end of the interval.
-     * @param paint  the paint.
-     * @param stroke  the stroke.
+     * @param paint  the paint (<code>null</code> not permitted).
+     * @param stroke  the stroke (<code>null</code> not permitted).
      * @param outlinePaint  the outline paint.
      * @param outlineStroke  the outline stroke.
      * @param alpha  the alpha transparency.
