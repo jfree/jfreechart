@@ -30,11 +30,12 @@
  * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Sergei Ivanov;
  *
  * Changes
  * -------
  * 14-Aug-2003 : Version 1 (DG);
+ * 18-Dec-2007 : Additional tests from Sergei Ivanov (DG);
  *
  */
 
@@ -77,6 +78,23 @@ public class RangeTests extends TestCase {
     }
 
     /**
+     * Confirm that the constructor initializes all the required fields.
+     */
+    public void testConstructor() {
+        Range r1 = new Range(0.1, 1000.0);
+        assertEquals(r1.getLowerBound(), 0.1, 0.0d);
+        assertEquals(r1.getUpperBound(), 1000.0, 0.0d);
+
+        try {
+            /*Range r2 =*/ new Range(10.0, 0.0);
+            fail("Lower bound cannot be greater than the upper");
+        }
+        catch (Exception e) {
+        	// ignore
+        }
+    }
+
+    /**
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
@@ -94,8 +112,22 @@ public class RangeTests extends TestCase {
         r2 = new Range(0.0, 2.0);
         assertFalse(r1.equals(r2));
         
+        assertFalse(r1.equals(new Double(0.0)));        
     }
-    
+
+    /**
+     * Two objects that are equal are required to return the same hashCode.
+     */
+    public void testHashCode() {
+        Range a1 = new Range(1.0, 100.0);
+        Range a2 = new Range(1.0, 100.0);
+        assertEquals(a1.hashCode(), a2.hashCode());
+
+        a1 = new Range(-100.0, 2.0);
+        a2 = new Range(-100.0, 2.0);
+        assertEquals(a1.hashCode(), a2.hashCode());
+    }
+
     /**
      * Simple tests for the contains() method.
      */
@@ -170,6 +202,101 @@ public class RangeTests extends TestCase {
         Range r2 = Range.expand(r1, 0.10, 0.10);
         assertEquals(-10.0, r2.getLowerBound(), 0.001);
         assertEquals(110.0, r2.getUpperBound(), 0.001);
+
+        // Expand by 0% does not change the range
+        r2 = Range.expand(r1, 0.0, 0.0);
+        assertEquals(r1, r2);
+
+        try {
+            Range.expand(null, 0.1, 0.1);
+            fail("Null value is accepted");
+        }
+        catch (Exception e) {
+        }
+        
+        // Lower > upper: mid point is used
+        r2 = Range.expand(r1, -0.8, -0.5);
+        assertEquals(65.0, r2.getLowerBound(), 0.001);
+        assertEquals(65.0, r2.getUpperBound(), 0.001);
+    }
+    
+    /**
+     * A simple test for the scale() method.
+     */
+    public void testShift() {
+        Range r1 = new Range(10.0, 20.0);
+        Range r2 = Range.shift(r1, 20.0);
+        assertEquals(30.0, r2.getLowerBound(), 0.001);
+        assertEquals(40.0, r2.getUpperBound(), 0.001);
+
+        r1 = new Range(0.0, 100.0);
+        r2 = Range.shift(r1, -50.0, true);
+        assertEquals(-50.0, r2.getLowerBound(), 0.001);
+        assertEquals(50.0, r2.getUpperBound(), 0.001);
+
+        r1 = new Range(-10.0, 20.0);
+        r2 = Range.shift(r1, 20.0, true);
+        assertEquals(10.0, r2.getLowerBound(), 0.001);
+        assertEquals(40.0, r2.getUpperBound(), 0.001);
+
+        r1 = new Range(-10.0, 20.0);
+        r2 = Range.shift(r1, -30.0, true);
+        assertEquals(-40.0, r2.getLowerBound(), 0.001);
+        assertEquals(-10.0, r2.getUpperBound(), 0.001);
+
+        r1 = new Range(-10.0, 20.0);
+        r2 = Range.shift(r1, 20.0, false);
+        assertEquals(0.0, r2.getLowerBound(), 0.001);
+        assertEquals(40.0, r2.getUpperBound(), 0.001);
+
+        r1 = new Range(-10.0, 20.0);
+        r2 = Range.shift(r1, -30.0, false);
+        assertEquals(-40.0, r2.getLowerBound(), 0.001);
+        assertEquals(0.0, r2.getUpperBound(), 0.001);
+
+        // Shifting with a delta of 0 does not change the range
+        r2 = Range.shift(r1, 0.0);
+        assertEquals(r1, r2);
+
+        try {
+            Range.shift(null, 0.1);
+            fail("Null value is accepted");
+        }
+        catch (Exception e) {
+        }
+    }
+    
+    /**
+     * A simple test for the scale() method.
+     */
+    public void testScale() {
+        Range r1 = new Range(0.0, 100.0);
+        Range r2 = Range.scale(r1, 0.10);
+        assertEquals(0.0, r2.getLowerBound(), 0.001);
+        assertEquals(10.0, r2.getUpperBound(), 0.001);
+
+        r1 = new Range(-10.0, 100.0);
+        r2 = Range.scale(r1, 2.0);
+        assertEquals(-20.0, r2.getLowerBound(), 0.001);
+        assertEquals(200.0, r2.getUpperBound(), 0.001);
+
+        // Scaling with a factor of 1 does not change the range
+        r2 = Range.scale(r1, 1.0);
+        assertEquals(r1, r2);
+
+        try {
+            Range.scale(null, 0.1);
+            fail("Null value is accepted");
+        }
+        catch (Exception e) {
+        }
+
+        try {
+            Range.scale(r1, -0.5);
+            fail("Negative factor accepted");
+        }
+        catch (Exception e) {
+        }
     }
     
     /**
@@ -194,6 +321,7 @@ public class RangeTests extends TestCase {
         }
         catch (Exception e) {
             System.out.println(e.toString());
+            fail("Serialization is not supported");
         }
         assertEquals(r1, r2);
 

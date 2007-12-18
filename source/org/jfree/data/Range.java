@@ -33,6 +33,7 @@
  * Contributor(s):   Chuanhao Chiu;
  *                   Bill Kelemen; 
  *                   Nicolas Brodu;
+ *                   Sergei Ivanov;
  *
  * Changes (from 23-Jun-2001)
  * --------------------------
@@ -53,7 +54,9 @@
  * 18-May-2004 : Added expand() method (DG);
  * ------------- JFreeChart 1.0.x ---------------------------------------------
  * 11-Jan-2006 : Added new method expandToInclude(Range, double) (DG);
- * 
+ * 18-Dec-2007 : New methods intersects(Range) and scale(...) thanks to Sergei
+ *               Ivanov (DG);
+ *
  */
 
 package org.jfree.data;
@@ -157,6 +160,20 @@ public strictfp class Range implements Serializable {
     }
 
     /**
+     * Returns <code>true</code> if the range intersects with the specified 
+     * range, and <code>false</code> otherwise.
+     * 
+     * @param range  another range (<code>null</code> not permitted).
+     * 
+     * @return A boolean.
+     *
+     * @since 1.0.9
+     */
+    public boolean intersects(Range range) {
+        return intersects(range.getLowerBound(), range.getUpperBound());
+    }
+
+    /**
      * Returns the value within the range that is closest to the specified 
      * value.
      * 
@@ -254,16 +271,19 @@ public strictfp class Range implements Serializable {
             throw new IllegalArgumentException("Null 'range' argument.");   
         }
         double length = range.getLength();
-        double lower = length * lowerMargin;
-        double upper = length * upperMargin;
-        return new Range(range.getLowerBound() - lower, 
-                range.getUpperBound() + upper);
+        double lower = range.getLowerBound() - length * lowerMargin;
+        double upper = range.getUpperBound() + length * upperMargin;
+        if (lower > upper) {
+            lower = lower / 2.0 + upper / 2.0;
+            upper = lower;
+        }
+        return new Range(lower, upper);
     }
 
     /**
      * Shifts the range by the specified amount.
      * 
-     * @param base  the base range.
+     * @param base  the base range (<code>null</code> not permitted).
      * @param delta  the shift amount.
      * 
      * @return A new range.
@@ -275,7 +295,7 @@ public strictfp class Range implements Serializable {
     /**
      * Shifts the range by the specified amount.
      * 
-     * @param base  the base range.
+     * @param base  the base range (<code>null</code> not permitted).
      * @param delta  the shift amount.
      * @param allowZeroCrossing  a flag that determines whether or not the 
      *                           bounds of the range are allowed to cross
@@ -285,6 +305,9 @@ public strictfp class Range implements Serializable {
      */
     public static Range shift(Range base, double delta, 
                               boolean allowZeroCrossing) {
+        if (base == null) {
+            throw new IllegalArgumentException("Null 'base' argument.");
+        }
         if (allowZeroCrossing) {
             return new Range(base.getLowerBound() + delta, 
                     base.getUpperBound() + delta);
@@ -316,7 +339,28 @@ public strictfp class Range implements Serializable {
             return value + delta;   
         }
     }
-    
+
+    /**
+     * Scales the range by the specified factor.
+     *
+     * @param base the base range (<code>null</code> not permitted).
+     * @param factor the scaling factor (must be non-negative).
+     *
+     * @return A new range.
+     *
+     * @since 1.0.9
+     */
+    public static Range scale(Range base, double factor) {
+        if (base == null) {
+            throw new IllegalArgumentException("Null 'base' argument.");
+        }
+        if (factor < 0) {
+            throw new IllegalArgumentException("Negative 'factor' argument.");
+        }
+        return new Range(base.getLowerBound() * factor,
+                base.getUpperBound() * factor);
+    }
+
     /**
      * Tests this object for equality with an arbitrary object.
      *
