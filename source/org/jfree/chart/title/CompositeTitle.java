@@ -116,10 +116,8 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         RectangleConstraint contentConstraint = toContentConstraint(constraint);
         Size2D contentSize = this.container.arrange(g2, contentConstraint);
-        return new Size2D(
-            calculateTotalWidth(contentSize.getWidth()), 
-            calculateTotalHeight(contentSize.getHeight())
-        );
+        return new Size2D(calculateTotalWidth(contentSize.getWidth()), 
+                calculateTotalHeight(contentSize.getHeight()));
     }
     
     /**
