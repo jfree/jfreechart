@@ -1,5 +1,16 @@
 2007-12-19  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/time/Week.java
+    (Week(Date, TimeZone)): Hand on the zone,
+    * tests/org/jfree/data/time/junit/WeekTests.java
+    (testBug1448828): Control the default locale,
+    (testBug1498805): Likewise,
+    (testGetFirstMillisecondWithTimeZone): Control the default locale, and
+    modify expected result accordingly,
+    (testGetLastMillisecondWithTimeZone): Likewise.
+    
+2007-12-19  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/title/TextTitle.java
     (arrange): Implement additional options,
     (arrangeNN): New method,

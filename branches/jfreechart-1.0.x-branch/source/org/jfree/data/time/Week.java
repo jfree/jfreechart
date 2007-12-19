@@ -65,6 +65,7 @@
  * 09-Jan-2007 : Fixed bug in next() (DG);
  * 28-Aug-2007 : Added new constructor to avoid problem in creating new 
  *               instances (DG);
+ * 19-Dec-2007 : Fixed bug in deprecated constructor (DG);
  *
  */
 
@@ -171,7 +172,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      */
     public Week(Date time, TimeZone zone) {
         // defer argument checking...
-        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, Locale.getDefault());
+        this(time, zone, Locale.getDefault());
     }
     
     /**
