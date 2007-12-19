@@ -1,3 +1,11 @@
+2007-12-19  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/title/TextTitle.java
+    (arrange): Implement additional options,
+    (arrangeNN): New method,
+    (arrangeFN): Likewise,
+    (arrangeRN): Likewise.
+
 2007-12-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     Committing for Sergei Ivanov:
