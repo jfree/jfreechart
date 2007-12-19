@@ -146,7 +146,7 @@ public class TextTitleTests extends TestCase {
             t2 = (TextTitle) t1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("TextTitleTests.testCloning: failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
@@ -168,13 +168,12 @@ public class TextTitleTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             t2 = (TextTitle) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(t1, t2);
 
