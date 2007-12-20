@@ -323,8 +323,8 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
             g2.draw(bar);
         }
 
-        CategoryItemLabelGenerator generator 
-            = getItemLabelGenerator(row, column);
+        CategoryItemLabelGenerator generator = getItemLabelGenerator(row, 
+                column);
         if (generator != null && isItemLabelVisible(row, column)) {
             drawItemLabel(g2, dataset, row, column, plot, generator, bar, 
                     (value < 0.0));
