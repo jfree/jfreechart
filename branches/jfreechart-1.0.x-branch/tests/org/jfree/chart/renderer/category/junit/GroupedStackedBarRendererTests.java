@@ -112,7 +112,7 @@ public class GroupedStackedBarRendererTests extends TestCase {
             r2 = (GroupedStackedBarRenderer) r1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
@@ -132,14 +132,13 @@ public class GroupedStackedBarRendererTests extends TestCase {
             out.writeObject(r1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+            		buffer.toByteArray()));
             r2 = (GroupedStackedBarRenderer) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(r1, r2);
 
@@ -158,7 +157,7 @@ public class GroupedStackedBarRendererTests extends TestCase {
             dataset.addValue(3.0, "S2", "C1");
             dataset.addValue(4.0, "S2", "C2");
             GroupedStackedBarRenderer renderer 
-                = new GroupedStackedBarRenderer();
+                    = new GroupedStackedBarRenderer();
             CategoryPlot plot = new CategoryPlot(dataset, 
                     new CategoryAxis("Category"), new NumberAxis("Value"), 
                     renderer);
