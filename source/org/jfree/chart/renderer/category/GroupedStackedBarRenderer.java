@@ -74,8 +74,7 @@ import org.jfree.util.PublicCloneable;
  * merged with the {@link StackedBarRenderer} class at some point.
  */
 public class GroupedStackedBarRenderer extends StackedBarRenderer 
-                                       implements Cloneable, PublicCloneable, 
-                                                  Serializable {
+        implements Cloneable, PublicCloneable, Serializable {
             
     /** For serialization. */
     private static final long serialVersionUID = -2725921399005922939L;
@@ -203,9 +202,8 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
         else {
             space = dataArea.getWidth();
         }
-        double barW0 = domainAxis.getCategoryStart(
-            column, getColumnCount(), dataArea, plot.getDomainAxisEdge()
-        );
+        double barW0 = domainAxis.getCategoryStart(column, getColumnCount(), 
+        		dataArea, plot.getDomainAxisEdge());
         int groupCount = this.seriesToGroupMap.getGroupCount();
         int groupIndex = this.seriesToGroupMap.getGroupIndex(
         		this.seriesToGroupMap.getGroup(plot.getDataset(
@@ -214,16 +212,15 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
         if (groupCount > 1) {
             double groupGap = space * getItemMargin() 
                               / (categoryCount * (groupCount - 1));
-            double groupW = calculateSeriesWidth(
-                space, domainAxis, categoryCount, groupCount
-            );
+            double groupW = calculateSeriesWidth(space, domainAxis, 
+            		categoryCount, groupCount);
             barW0 = barW0 + groupIndex * (groupW + groupGap) 
                           + (groupW / 2.0) - (state.getBarWidth() / 2.0);
         }
         else {
-            barW0 = domainAxis.getCategoryMiddle(
-                column, getColumnCount(), dataArea, plot.getDomainAxisEdge()
-            ) - state.getBarWidth() / 2.0;
+            barW0 = domainAxis.getCategoryMiddle(column, getColumnCount(), 
+            		dataArea, plot.getDomainAxisEdge()) 
+            		- state.getBarWidth() / 2.0;
         }
         return barW0;
     }
@@ -260,13 +257,11 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
         }
         
         double value = dataValue.doubleValue();
-        Comparable group 
-            = this.seriesToGroupMap.getGroup(dataset.getRowKey(row));
+        Comparable group = this.seriesToGroupMap.getGroup(
+        		dataset.getRowKey(row));
         PlotOrientation orientation = plot.getOrientation();
-        double barW0 = calculateBarW0(
-            plot, orientation, dataArea, domainAxis, 
-            state, row, column
-        );
+        double barW0 = calculateBarW0(plot, orientation, dataArea, domainAxis, 
+                state, row, column);
 
         double positiveBase = 0.0;
         double negativeBase = 0.0;
@@ -333,31 +328,15 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
         CategoryItemLabelGenerator generator 
             = getItemLabelGenerator(row, column);
         if (generator != null && isItemLabelVisible(row, column)) {
-            drawItemLabel(
-                g2, dataset, row, column, plot, generator, bar, 
-                (value < 0.0)
-            );
+            drawItemLabel(g2, dataset, row, column, plot, generator, bar, 
+                    (value < 0.0));
         }        
                 
         // collect entity and tool tip information...
         if (state.getInfo() != null) {
             EntityCollection entities = state.getEntityCollection();
             if (entities != null) {
-                String tip = null;
-                CategoryToolTipGenerator tipster = getToolTipGenerator(row, 
-                        column);
-                if (tipster != null) {
-                    tip = tipster.generateToolTip(dataset, row, column);
-                }
-                String url = null;
-                if (getItemURLGenerator(row, column) != null) {
-                    url = getItemURLGenerator(row, column).generateURL(
-                            dataset, row, column);
-                }
-                CategoryItemEntity entity = new CategoryItemEntity(
-                        bar, tip, url, dataset, dataset.getRowKey(row), 
-                        dataset.getColumnKey(column));
-                entities.add(entity);
+            	addItemEntity(entities, dataset, row, column, bar);
             }
         }
         
@@ -374,14 +353,14 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
         if (obj == this) {
             return true;   
         }
-        if (obj instanceof GroupedStackedBarRenderer && super.equals(obj)) {
-            GroupedStackedBarRenderer r = (GroupedStackedBarRenderer) obj;
-            if (!r.seriesToGroupMap.equals(this.seriesToGroupMap)) {
-                return false;   
-            }
-            return true;
+        if (!(obj instanceof GroupedStackedBarRenderer)) {
+        	return false;
         }
-        return false;
+        GroupedStackedBarRenderer that = (GroupedStackedBarRenderer) obj;
+        if (!this.seriesToGroupMap.equals(that.seriesToGroupMap)) {
+            return false;   
+        }
+        return super.equals(obj);
     }
     
 }
