@@ -1,3 +1,9 @@
+2007-12-20  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Fixes bug 1848961:
+    * source/org/jfree/chart/renderer/category/GroupedStackedBarRenderer.java
+    (calculateBarW0): Use correct dataset index.
+
 2007-12-19  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/Week.java

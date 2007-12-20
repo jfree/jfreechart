@@ -41,6 +41,7 @@
  * 20-Apr-2005 : Renamed CategoryLabelGenerator 
  *               --> CategoryItemLabelGenerator (DG);
  * 22-Sep-2005 : Renamed getMaxBarWidth() --> getMaximumBarWidth() (DG);
+ * 20-Dec-2007 : Fix for bug 1848961 (DG);
  * 
  */
  
@@ -207,8 +208,8 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
         );
         int groupCount = this.seriesToGroupMap.getGroupCount();
         int groupIndex = this.seriesToGroupMap.getGroupIndex(
-            this.seriesToGroupMap.getGroup(plot.getDataset().getRowKey(row))
-        );
+        		this.seriesToGroupMap.getGroup(plot.getDataset(
+        				plot.getIndexOf(this)).getRowKey(row)));
         int categoryCount = getColumnCount();
         if (groupCount > 1) {
             double groupGap = space * getItemMargin() 
