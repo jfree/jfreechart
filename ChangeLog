@@ -2,6 +2,9 @@
 
 	* source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
 	(drawHorizontalItem): Check visibility of average marker,
+	(drawVerticalItem): Likewise,
+	* source/org/jfree/chart/renderer/xy/XYBoxAndWhiskerRenderer.java
+	(drawHorizontalItem): Check visibility of average marker,
 	(drawVerticalItem): Likewise.
 
 2007-12-20  David Gilbert  <david.gilbert@object-refinery.com>

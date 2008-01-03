@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * XYBoxAndWhiskerRenderer.java
  * ----------------------------
- * (C) Copyright 2003, 2004, 2007, by David Browning and Contributors.
+ * (C) Copyright 2003-2008, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine 
  *                   Science);
@@ -68,6 +68,7 @@
  * 05-Feb-2007 : Added event notifications and fixed drawing for horizontal 
  *               plot orientation (DG);
  * 13-Jun-2007 : Replaced deprecated method call (DG);
+ * 03-Jan-2008 : Check visibility of average marker before drawing it (DG);
  *
  */
 
@@ -440,11 +441,16 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
         // draw average - SPECIAL AIMS REQUIREMENT
         if (yAverage != null) {
             double aRadius = width / 4;
-            Ellipse2D.Double avgEllipse = new Ellipse2D.Double(
-                    yyAverage - aRadius, xx - aRadius, aRadius * 2, 
-                    aRadius * 2);
-            g2.fill(avgEllipse);
-            g2.draw(avgEllipse);
+            // here we check that the average marker will in fact be visible
+            // before drawing it...
+            if ((yyAverage > (dataArea.getMinX() - aRadius)) 
+                    && (yyAverage < (dataArea.getMaxX() + aRadius))) {
+                Ellipse2D.Double avgEllipse = new Ellipse2D.Double(
+                        yyAverage - aRadius, xx - aRadius, aRadius * 2, 
+                        aRadius * 2);
+                g2.fill(avgEllipse);
+                g2.draw(avgEllipse);
+            }
         }
         
         // FIXME: draw outliers
@@ -588,10 +594,15 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
         // draw average - SPECIAL AIMS REQUIREMENT
         if (yAverage != null) {
             aRadius = width / 4;
-            Ellipse2D.Double avgEllipse = new Ellipse2D.Double(xx - aRadius, 
-                    yyAverage - aRadius, aRadius * 2, aRadius * 2);
-            g2.fill(avgEllipse);
-            g2.draw(avgEllipse);
+            // here we check that the average marker will in fact be visible
+            // before drawing it...
+            if ((yyAverage > (dataArea.getMinY() - aRadius)) 
+                    && (yyAverage < (dataArea.getMaxY() + aRadius))) {
+                Ellipse2D.Double avgEllipse = new Ellipse2D.Double(xx - aRadius, 
+                        yyAverage - aRadius, aRadius * 2, aRadius * 2);
+                g2.fill(avgEllipse);
+                g2.draw(avgEllipse);
+            }
         }
 
         List outliers = new ArrayList();
