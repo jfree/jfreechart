@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * BoxAndWhiskerRenderer.java
  * --------------------------
- * (C) Copyright 2003-2007, by David Browning and Contributors.
+ * (C) Copyright 2003-2008, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for the Australian Institute of Marine 
  *                   Science);
@@ -63,6 +63,7 @@
  * 11-May-2007 : Added check for visibility in getLegendItem() (DG);
  * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
+ * 03-Jan-2008 : Check visibility of average marker before drawing it (DG);
  *
  */
 
@@ -475,10 +476,15 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             double xxMean = rangeAxis.valueToJava2D(xMean.doubleValue(), 
                     dataArea, location);
             aRadius = state.getBarWidth() / 4;
-            Ellipse2D.Double avgEllipse = new Ellipse2D.Double(xxMean 
-                    - aRadius, yy + aRadius, aRadius * 2, aRadius * 2);
-            g2.fill(avgEllipse);
-            g2.draw(avgEllipse);
+            // here we check that the average marker will in fact be visible
+            // before drawing it...
+            if ((xxMean > (dataArea.getMinX() - aRadius)) 
+                    && (xxMean < (dataArea.getMaxX() + aRadius))) {
+                Ellipse2D.Double avgEllipse = new Ellipse2D.Double(xxMean 
+                        - aRadius, yy + aRadius, aRadius * 2, aRadius * 2);
+                g2.fill(avgEllipse);
+                g2.draw(avgEllipse);
+            }
         }
 
         // draw median...
@@ -628,10 +634,15 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             yyAverage = rangeAxis.valueToJava2D(yMean.doubleValue(), 
                     dataArea, location);
             aRadius = state.getBarWidth() / 4;
-            Ellipse2D.Double avgEllipse = new Ellipse2D.Double(xx + aRadius, 
-                    yyAverage - aRadius, aRadius * 2, aRadius * 2);
-            g2.fill(avgEllipse);
-            g2.draw(avgEllipse);
+            // here we check that the average marker will in fact be visible
+            // before drawing it...
+            if ((yyAverage > (dataArea.getMinY() - aRadius)) 
+                    && (yyAverage < (dataArea.getMaxY() + aRadius))) {
+                Ellipse2D.Double avgEllipse = new Ellipse2D.Double(xx + aRadius, 
+                        yyAverage - aRadius, aRadius * 2, aRadius * 2);
+                g2.fill(avgEllipse);
+                g2.draw(avgEllipse);
+            }
         }
 
         // draw median...
