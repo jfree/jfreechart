@@ -996,7 +996,10 @@ public interface CategoryItemRenderer extends LegendItemSource {
                                            boolean notify);
     
     /**
-     * Returns the base setting for item label visibility.
+     * Returns the base setting for item label visibility.  A <code>null</code>
+     * result should be interpreted as equivalent to <code>Boolean.FALSE</code> 
+     * (this is an error in the API design, the return value should have been
+     * a boolean primitive).
      * 
      * @return A flag (possibly <code>null</code>).
      * 
@@ -1005,7 +1008,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
     public Boolean getBaseItemLabelsVisible();
     
     /**
-     * Sets the base flag that controls whether or not item labels are visible.
+     * Sets the base flag that controls whether or not item labels are visible
+     * and sends a {@link RendererChangeEvent} to all registered listeners.
      * 
      * @param visible  the flag.
      * 
@@ -1014,7 +1018,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
     public void setBaseItemLabelsVisible(boolean visible);
     
     /**
-     * Sets the base setting for item label visibility.
+     * Sets the base setting for item label visibility and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      * 
      * @param visible  the flag (<code>null</code> permitted).
      * 
