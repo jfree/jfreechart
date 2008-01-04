@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * XYPlot.java
  * -----------
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Craig MacFarlane;
@@ -193,7 +193,8 @@
  * 12-Nov-2007 : Fixed bug in equals() method for domain and range tick
  *               band paint attributes (DG);
  * 27-Nov-2007 : Added new setFixedDomain/RangeAxisSpace() methods (DG);
- *
+ * 04-Jan-2008 : Fix for quadrant painting error - see patch 1849564 (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -267,11 +268,8 @@ import org.jfree.util.PublicCloneable;
  * The {@link org.jfree.chart.ChartFactory} class contains static methods for
  * creating pre-configured charts.
  */
-public class XYPlot extends Plot implements ValueAxisPlot,
-                                            Zoomable,
-                                            RendererChangeListener,
-                                            Cloneable, PublicCloneable,
-                                            Serializable {
+public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
+        RendererChangeListener, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7044148245716569264L;
@@ -2919,11 +2917,11 @@ public class XYPlot extends Plot implements ValueAxisPlot,
         boolean somethingToDraw = false;
 
         ValueAxis xAxis = getDomainAxis();
-        double x = this.quadrantOrigin.getX();
+        double x = xAxis.getRange().constrain(this.quadrantOrigin.getX());
         double xx = xAxis.valueToJava2D(x, area, getDomainAxisEdge());
 
         ValueAxis yAxis = getRangeAxis();
-        double y = this.quadrantOrigin.getY();
+        double y = yAxis.getRange().constrain(this.quadrantOrigin.getY());
         double yy = yAxis.valueToJava2D(y, area, getRangeAxisEdge());
 
         double xmin = xAxis.getLowerBound();

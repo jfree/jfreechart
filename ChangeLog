@@ -1,3 +1,9 @@
+2008-01-04  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/plot/XYPlot.java
+	(drawQuadrants): Fix painting error when quadrant origin is outside plot
+	area.
+
 2008-01-03  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
