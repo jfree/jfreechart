@@ -1,5 +1,13 @@
 2008-01-10  David Gilbert  <david.gilbert@object-refinery.com>
 
+	Bug 1864222:
+	* source/org/jfree/data/time/TimeSeries.java
+	(createCopy(RegularTimePeriod, RegularTimePeriod)): Handle empty range,
+	* tests/org/jfree/data/time/junit/TimeSeriesTests.java
+	(testBug1864222): New test method.
+
+2008-01-10  David Gilbert  <david.gilbert@object-refinery.com>
+
 	Bug 1868521:
 	* source/org/jfree/chart/ChartUtilities.java
 	(writeChartAsJPEG): Create RGB image rather than ARGB.
