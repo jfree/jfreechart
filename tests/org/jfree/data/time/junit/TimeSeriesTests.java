@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * TimeSeriesTests.java
  * --------------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,6 +44,7 @@
  * 24-May-2006 : Added new tests (DG);
  * 31-Oct-2007 : New hashCode() test (DG);
  * 21-Nov-2007 : Added testBug1832432() and testClone2() (DG);
+ * 10-Jan-2008 : Added testBug1864222() (DG);
  *
  */
 
@@ -815,4 +816,21 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertEquals(s1.hashCode(), s2.hashCode());
     }
     
+    /**
+     * Test for bug report 1864222.
+     */
+    public void testBug1864222() {
+        TimeSeries s = new TimeSeries("S");
+        s.add(new Day(19, 8, 2005), 1);
+        s.add(new Day(31, 1, 2006), 1);
+        boolean pass = true;
+        try {
+            s.createCopy(new Day(1, 12, 2005), new Day(18, 1, 2006));
+        }
+        catch (CloneNotSupportedException e) {
+            pass = false;
+        }
+        assertTrue(pass);
+    }
+
 }
