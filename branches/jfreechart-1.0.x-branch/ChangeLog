@@ -1,3 +1,11 @@
+2008-01-10  David Gilbert  <david.gilbert@object-refinery.com>
+
+	Bug 1868521:
+	* source/org/jfree/chart/ChartUtilities.java
+	(writeChartAsJPEG): Create RGB image rather than ARGB.
+
+----------  JFREECHART 1.0.9 RELEASED ------------------------
+
 2008-01-04  David Gilbert  <david.gilbert@object-refinery.com>
 
 	* source/org/jfree/chart/plot/XYPlot.java
