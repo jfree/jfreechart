@@ -33,6 +33,7 @@
  *                   Science);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Tim Bardzil;
+ *                   Rob Van der Sanden (patch 1866446);
  *
  * Changes
  * -------
@@ -64,6 +65,8 @@
  * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 03-Jan-2008 : Check visibility of average marker before drawing it (DG);
+ * 15-Jan-2008 : Add getMaximumBarWidth() and setMaximumBarWidth() 
+ *               methods (RVdS);
  *
  */
 
@@ -127,6 +130,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     
     /** The margin between items (boxes) within a category. */
     private double itemMargin;
+    
+    /** 
+     * The maximum bar width as percentage of the available space in the plot,
+     * where 0.05 is five percent.
+     */
+    private double maximumBarWidth;
 
     /**
      * Default constructor.
@@ -135,6 +144,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         this.artifactPaint = Color.black;
         this.fillBox = true;
         this.itemMargin = 0.20;
+        this.maximumBarWidth = 1.0;
     }
 
     /**
@@ -211,6 +221,36 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      */
     public void setItemMargin(double margin) {
         this.itemMargin = margin;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the maximum bar width as a percentage of the available drawing 
+     * space.
+     * 
+     * @return The maximum bar width.
+     *
+     * @see #setMaximumBarWidth(double)
+     * 
+     * @since 1.0.10
+     */
+    public double getMaximumBarWidth() {
+        return this.maximumBarWidth;
+    }
+
+    /**
+     * Sets the maximum bar width, which is specified as a percentage of the 
+     * available space for all bars, and sends a {@link RendererChangeEvent}
+     * to all registered listeners.
+     * 
+     * @param percent  the maximum Bar Width (a percentage).
+     *
+     * @see #getMaximumBarWidth()
+     * 
+     * @since 1.0.10
+     */
+    public void setMaximumBarWidth(double percent) {
+        this.maximumBarWidth = percent;
         fireChangeEvent();
     }
 
@@ -297,6 +337,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             else if (orientation == PlotOrientation.VERTICAL) {
                 space = dataArea.getWidth();
             }
+            double maxWidth = space * getMaximumBarWidth();
             double categoryMargin = 0.0;
             double currentItemMargin = 0.0;
             if (columns > 1) {
@@ -309,11 +350,11 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
                                      - domainAxis.getUpperMargin()
                                      - categoryMargin - currentItemMargin);
             if ((rows * columns) > 0) {
-                state.setBarWidth(used / (dataset.getColumnCount() 
-                        * dataset.getRowCount()));
+                state.setBarWidth(Math.min(used / (dataset.getColumnCount() 
+                        * dataset.getRowCount()), maxWidth));
             }
             else {
-                state.setBarWidth(used);
+                state.setBarWidth(Math.min(used, maxWidth));
             }
         }
         
@@ -842,11 +883,14 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         if (!PaintUtilities.equal(this.artifactPaint, that.artifactPaint)) {
             return false;
         }
-        if (!(this.fillBox == that.fillBox)) {
+        if (this.fillBox != that.fillBox) {
             return false;   
         }
-        if (!(this.itemMargin == that.itemMargin)) {
+        if (this.itemMargin != that.itemMargin) {
             return false;   
+        }
+        if (this.maximumBarWidth != that.maximumBarWidth) {
+            return false;
         }
         return true;
     }

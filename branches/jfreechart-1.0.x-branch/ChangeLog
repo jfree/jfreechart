@@ -1,3 +1,15 @@
+2008-01-15  David Gilbert  <david.gilbert@object-refinery.com>
+
+	Patch 1866446 (Rob Van der Sanden):
+	* source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
+	(maximumBarWidth): New field,
+	(BoxAndWhiskerRenderer): Initialise new field,
+	(getMaximumBarWidth): New method,
+	(setMaximumBarWidth): Likewise,
+	(equals): Updated for new field,
+	* tests/org/jfree/chart/renderer/category/junit/BoxAndWhiskerRendererTests.java
+	(testEquals): Updated to check new field.
+
 2008-01-10  David Gilbert  <david.gilbert@object-refinery.com>
 
 	Bug 1864222:
