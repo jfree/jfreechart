@@ -1,3 +1,8 @@
+2008-01-18  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/data/time/TimeSeriesCollection.java
+	(getSeries): Changed argument from String to Comparable.
+
 2008-01-15  David Gilbert  <david.gilbert@object-refinery.com>
 
 	Patch 1866446 (Rob Van der Sanden):
