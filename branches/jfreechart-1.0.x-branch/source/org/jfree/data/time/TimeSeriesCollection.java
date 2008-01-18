@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * TimeSeriesCollection.java
  * -------------------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -76,6 +76,7 @@
  * 04-May-2007 : Override getDomainOrder() to indicate that items are sorted
  *               by x-value (ascending) (DG);
  * 08-May-2007 : Added indexOf(TimeSeries) method (DG);
+ * 18-Jan-2008 : Changed getSeries(String) to getSeries(Comparable) (DG);
  *
  */
 
@@ -310,7 +311,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * 
      * @return The series with the given key.
      */
-    public TimeSeries getSeries(String key) {
+    public TimeSeries getSeries(Comparable key) {
         TimeSeries result = null;
         Iterator iterator = this.data.iterator();
         while (iterator.hasNext()) {
