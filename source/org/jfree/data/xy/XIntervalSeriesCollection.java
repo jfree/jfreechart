@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * XIntervalSeriesCollection.java
  * ------------------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 20-Oct-2006 : Version 1 (DG);
  * 27-Nov-2006 : Added clone() override (DG);
+ * 18-Jan-2008 : Added removeSeries() and removeAllSeries() methods (DG);
  *
  */
 
@@ -221,6 +222,60 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
         return getY(series, item);
     }
     
+    /**
+     * Removes a series from the collection and sends a 
+     * {@link DatasetChangeEvent} to all registered listeners.
+     *
+     * @param series  the series index (zero-based).
+     * 
+     * @since 1.0.10
+     */
+    public void removeSeries(int series) {
+        if ((series < 0) || (series >= getSeriesCount())) {
+            throw new IllegalArgumentException("Series index out of bounds.");
+        }
+        XIntervalSeries ts = (XIntervalSeries) this.data.get(series);
+        ts.removeChangeListener(this);
+        this.data.remove(series);
+        fireDatasetChanged();
+    }
+
+    /**
+     * Removes a series from the collection and sends a 
+     * {@link DatasetChangeEvent} to all registered listeners.
+     *
+     * @param series  the series (<code>null</code> not permitted).
+     * 
+     * @since 1.0.10
+     */
+    public void removeSeries(XIntervalSeries series) {
+        if (series == null) {
+            throw new IllegalArgumentException("Null 'series' argument.");
+        }
+        if (this.data.contains(series)) {
+            series.removeChangeListener(this);
+            this.data.remove(series);
+            fireDatasetChanged();
+        }
+    }
+    
+    /**
+     * Removes all the series from the collection and sends a 
+     * {@link DatasetChangeEvent} to all registered listeners.
+     * 
+     * @since 1.0.10
+     */
+    public void removeAllSeries() {
+        // Unregister the collection as a change listener to each series in 
+        // the collection.
+        for (int i = 0; i < this.data.size(); i++) {
+          XIntervalSeries series = (XIntervalSeries) this.data.get(i);
+          series.removeChangeListener(this);
+        }
+        this.data.clear();
+        fireDatasetChanged();
+    }
+
     /**
      * Tests this instance for equality with an arbitrary object.
      *

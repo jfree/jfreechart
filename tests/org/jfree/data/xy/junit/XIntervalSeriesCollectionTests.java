@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------
  * XIntervalSeriesCollectionTests.java
  * -----------------------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 20-Oct-2006 : Version 1 (DG);
+ * 18-Jan-2008 : Added testRemoveSeries() (DG);
  *
  */
 
@@ -150,6 +151,36 @@ public class XIntervalSeriesCollectionTests extends TestCase {
             e.printStackTrace();
         }
         assertEquals(c1, c2);
+    }
+    
+    /**
+     * Some basic checks for the removeSeries() method.
+     */
+    public void testRemoveSeries() {
+        XIntervalSeriesCollection c = new XIntervalSeriesCollection();
+        XIntervalSeries s1 = new XIntervalSeries("s1");
+        c.addSeries(s1);
+        c.removeSeries(0);
+        assertEquals(0, c.getSeriesCount());
+        c.addSeries(s1);
+        
+        boolean pass = false;
+        try {
+            c.removeSeries(-1);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        
+        pass = false;
+        try {
+            c.removeSeries(1);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
     }
     
     /**
