@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * CombinedDomainXYPlot.java
  * -------------------------
- * (C) Copyright 2001-2007, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-2008, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -83,6 +83,8 @@
  * 17-Apr-2007 : Added null argument checks to findSubplot() (DG);
  * 27-Nov-2007 : Modified setFixedRangeAxisSpaceForSubplots() so as not to
  *               trigger change event in subplots (DG);
+ * 28-Jan-2008 : Reset fixed range axis space in subplots for each call to
+ *               draw() (DG);
  *
  */
 
@@ -430,6 +432,7 @@ public class CombinedDomainXYPlot extends XYPlot
         RectangleInsets insets = getInsets();
         insets.trim(area);
 
+        setFixedRangeAxisSpaceForSubplots(null);
         AxisSpace space = calculateAxisSpace(g2, area);
         Rectangle2D dataArea = space.shrink(area, null);
 
@@ -584,14 +587,15 @@ public class CombinedDomainXYPlot extends XYPlot
     }
 
     /**
-     * Sets the fixed range axis space.
+     * Sets the fixed range axis space and sends a {@link PlotChangeEvent} to
+     * all registered listeners.
      *
      * @param space  the space (<code>null</code> permitted).
      */
     public void setFixedRangeAxisSpace(AxisSpace space) {
         super.setFixedRangeAxisSpace(space);
         setFixedRangeAxisSpaceForSubplots(space);
-        this.notifyListeners(new PlotChangeEvent(this));
+        notifyListeners(new PlotChangeEvent(this));
     }
     
     /**
