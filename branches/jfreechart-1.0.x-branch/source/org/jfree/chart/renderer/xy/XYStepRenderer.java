@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,14 @@
  * -------------------
  * XYStepRenderer.java
  * -------------------
- * (C) Copyright 2002-2007, by Roger Studner and Contributors.
+ * (C) Copyright 2002-2008, by Roger Studner and Contributors.
  *
  * Original Author:  Roger Studner;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Matthias Rose;
  *                   Gerald Struck (fix for bug 1569094);
+ *                   Ulrich Voigt (patch 1874890);
+ *                   Martin Hoeller (contribution to patch 1874890);
  *
  * Changes
  * -------
@@ -58,6 +60,8 @@
  * 11-Oct-2006 : Fixed rendering with horizontal orientation (see bug 1569094),
  *               thanks to Gerald Struck (DG);
  * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
+ * 14-Feb-2008 : Applied patch 1874890 by Ulrich Voigt (with contribution from
+ *               Martin Hoeller) (DG);
  *
  */
 
@@ -71,9 +75,11 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYItemEntity;
+import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
@@ -89,14 +95,19 @@ import org.jfree.util.PublicCloneable;
  * between data points, only allowing horizontal or vertical lines (steps).
  */
 public class XYStepRenderer extends XYLineAndShapeRenderer 
-                            implements XYItemRenderer, 
-                                       Cloneable,
-                                       PublicCloneable,
-                                       Serializable {
+        implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -8918141928884796108L;
-    
+
+    /** 
+     * The factor (from 0.0 to 1.0) that determines the position of the 
+     * step.  
+     *
+     * @since 1.0.10. 
+     */
+    private double stepPoint = 1.0d;
+
     /**
      * Constructs a new renderer with no tooltip or URL generation.
      */
@@ -118,6 +129,42 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
         setBaseToolTipGenerator(toolTipGenerator);
         setURLGenerator(urlGenerator);
         setShapesVisible(false);
+    }
+
+    /**
+     * Returns the fraction of the domain position between two points on which
+     * the step is drawn.  The default is 1.0d, which means the step is drawn 
+     * at the domain position of the second`point. If the stepPoint is 0.5d the
+     * step is drawn at half between the two points.
+     * 
+     * @return The fraction of the domain position between two points where the
+     *         step is drawn.
+     *         
+     * @see #setStepPoint(double)
+     * 
+     * @since 1.0.10
+     */
+    public double getStepPoint() {
+        return this.stepPoint;
+    }
+    
+    /**
+     * Sets the step point and sends a {@link RendererChangeEvent} to all 
+     * registered listeners.
+     * 
+     * @param stepPoint  the step point (in the range 0.0 to 1.0)
+     * 
+     * @see #getStepPoint()
+     * 
+     * @since 1.0.10
+     */
+    public void setStepPoint(double stepPoint) {
+        if (stepPoint < 0.0d || stepPoint > 1.0d) {
+            throw new IllegalArgumentException(
+            		"Requires stepPoint in [0.0;1.0]");
+        }
+        this.stepPoint = stepPoint;
+        fireChangeEvent();
     }
 
     /**
@@ -166,54 +213,61 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
         // get the data point...
         double x1 = dataset.getXValue(series, item);
         double y1 = dataset.getYValue(series, item);
-        if (Double.isNaN(y1)) {
-            return;
-        }
 
         RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
         RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
         double transX1 = domainAxis.valueToJava2D(x1, dataArea, xAxisLocation);
-        double transY1 = rangeAxis.valueToJava2D(y1, dataArea, yAxisLocation);
+        double transY1 = (Double.isNaN(y1) ? Double.NaN 
+        		: rangeAxis.valueToJava2D(y1, dataArea, yAxisLocation));
 
         if (item > 0) {
             // get the previous data point...
             double x0 = dataset.getXValue(series, item - 1);
             double y0 = dataset.getYValue(series, item - 1);
-            if (!Double.isNaN(y0)) {
-                double transX0 = domainAxis.valueToJava2D(x0, dataArea, 
-                        xAxisLocation);
-                double transY0 = rangeAxis.valueToJava2D(y0, dataArea, 
-                        yAxisLocation);
+            double transX0 = domainAxis.valueToJava2D(x0, dataArea, 
+            		xAxisLocation);
+            double transY0 = (Double.isNaN(y0) ? Double.NaN 
+            		: rangeAxis.valueToJava2D(y0, dataArea, yAxisLocation));
 
-                Line2D line = state.workingLine;
-                if (orientation == PlotOrientation.HORIZONTAL) {
-                    if (transY0 == transY1) { //this represents the situation 
-                                              // for drawing a horizontal bar.
-                        line.setLine(transY0, transX0, transY1, transX1);
-                        g2.draw(line);
-                    }
-                    else {  //this handles the need to perform a 'step'.
-                        line.setLine(transY0, transX0, transY0, transX1);
-                        g2.draw(line);
-                        line.setLine(transY0, transX1, transY1, transX1);
-                        g2.draw(line);
-                    }
+            if (orientation == PlotOrientation.HORIZONTAL) {
+                if (transY0 == transY1) { 
+                	// this represents the situation
+                    // for drawing a horizontal bar.
+                    drawLine(g2, state.workingLine, transY0, transX0, transY1, 
+                    		transX1);
                 }
-                else if (orientation == PlotOrientation.VERTICAL) {
-                    if (transY0 == transY1) { // this represents the situation 
-                                              // for drawing a horizontal bar.
-                        line.setLine(transX0, transY0, transX1, transY1);
-                        g2.draw(line);
-                    }
-                    else {  //this handles the need to perform a 'step'.
-                        line.setLine(transX0, transY0, transX1, transY0);
-                        g2.draw(line);
-                        line.setLine(transX1, transY0, transX1, transY1);
-                        g2.draw(line);
-                    }
-                }
+                else {  //this handles the need to perform a 'step'.
 
+                    // calculate the step point
+                    double transXs = transX0 + (getStepPoint() 
+                    		* (transX1 - transX0));
+                    drawLine(g2, state.workingLine, transY0, transX0, transY0, 
+                    		transXs);
+                    drawLine(g2, state.workingLine, transY0, transXs, transY1, 
+                    		transXs);
+                    drawLine(g2, state.workingLine, transY1, transXs, transY1, 
+                    		transX1);
+                }
             }
+            else if (orientation == PlotOrientation.VERTICAL) {
+                if (transY0 == transY1) { // this represents the situation 
+                                          // for drawing a horizontal bar.
+                    drawLine(g2, state.workingLine, transX0, transY0, transX1, 
+                    		transY1);
+                }
+                else {  //this handles the need to perform a 'step'.
+                    // calculate the step point
+                    double transXs = transX0 + (getStepPoint() 
+                    		* (transX1 - transX0));
+                    drawLine(g2, state.workingLine, transX0, transY0, transXs, 
+                    		transY0);
+                    drawLine(g2, state.workingLine, transXs, transY0, transXs, 
+                    		transY1);
+                    drawLine(g2, state.workingLine, transXs, transY1, transX1, 
+                    		transY1);
+                }
+            }
+
         }
 
         // draw the item label if there is one...
@@ -261,6 +315,57 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
                 }
             }
         }
+    }
+
+    /**
+     * A utility method that draws a line but only if none of the coordinates
+     * are NaN values.
+     * 
+     * @param g2  the graphics target.
+     * @param line  the line object.
+     * @param x0  the x-coordinate for the starting point of the line.
+     * @param y0  the y-coordinate for the starting point of the line.
+     * @param x1  the x-coordinate for the ending point of the line.
+     * @param y1  the y-coordinate for the ending point of the line.
+     */
+    private void drawLine(Graphics2D g2, Line2D line, double x0, double y0, 
+    		double x1, double y1) {
+        if (Double.isNaN(x0) || Double.isNaN(x1) || Double.isNaN(y0) 
+        		|| Double.isNaN(y1)) {
+            return;
+        }
+        line.setLine(x0, y0, x1, y1);
+        g2.draw(line);
+    }    
+    
+    /**
+     * Tests this renderer for equality with an arbitrary object.
+     * 
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof XYLineAndShapeRenderer)) {
+            return false;
+        }		
+        XYStepRenderer that = (XYStepRenderer) obj;
+        if (this.stepPoint != that.stepPoint) {
+        	return false;
+        }
+		return super.equals(obj);
+	}
+  
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        return HashUtilities.hashCode(super.hashCode(), this.stepPoint);
     }
 
     /**

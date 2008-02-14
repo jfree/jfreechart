@@ -1,5 +1,17 @@
 2008-02-14  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 1874890 (Ulrich Voigt with contributions from Martin Hoeller):
+    * source/org/jfree/chart/renderer/xy/XYStepRenderer.java
+    (stepPoint): New field,
+    (getStepPoint): New method,
+    (setStepPoint): Likewise,
+    (drawItem): Calculate step point using new field,
+    (drawLine): New private method,
+    (equals): New method override,
+    (hashCode): Likewise.
+
+2008-02-14  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
     (drawHorizontalItem): Call addEntity() to handle entity generation,
     (drawVerticalItem): Likewise.
