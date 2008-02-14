@@ -1,5 +1,11 @@
 2008-02-14  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
+    (drawHorizontalItem): Call addEntity() to handle entity generation,
+    (drawVerticalItem): Likewise.
+
+2008-02-14  David Gilbert  <david.gilbert@object-refinery.com>
+
     Patch 1888422 (Rob Van der Sanden):
     * source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
     (drawHorizontalItem): Use correct data area dimension for series gap 
