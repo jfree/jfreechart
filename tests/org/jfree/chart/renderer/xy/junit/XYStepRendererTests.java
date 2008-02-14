@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XYStepRendererTests.java
  * ------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 25-Mar-2003 : Version 1 (DG);
+ * 14-Feb-2008 : Added checks for new code (DG);
  *
  */
 
@@ -88,6 +89,17 @@ public class XYStepRendererTests extends TestCase {
         XYStepRenderer r1 = new XYStepRenderer();
         XYStepRenderer r2 = new XYStepRenderer();
         assertEquals(r1, r2);
+        
+        r1.setStepPoint(0.44);
+        assertFalse(r1.equals(r2));
+        r2.setStepPoint(0.44);
+        assertTrue(r1.equals(r2));
+        
+        // try something from the base class
+        r1.setBaseCreateEntities(false);
+        assertFalse(r1.equals(r2));
+        r2.setBaseCreateEntities(false);
+        assertTrue(r1.equals(r2));
     }
 
     /**
@@ -95,7 +107,9 @@ public class XYStepRendererTests extends TestCase {
      */
     public void testHashcode() {
         XYStepRenderer r1 = new XYStepRenderer();
+        r1.setStepPoint(0.123);
         XYStepRenderer r2 = new XYStepRenderer();
+        r2.setStepPoint(0.123);
         assertTrue(r1.equals(r2));
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
@@ -123,10 +137,9 @@ public class XYStepRendererTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         XYStepRenderer r1 = new XYStepRenderer();
+        r1.setStepPoint(0.123);
         XYStepRenderer r2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -134,16 +147,14 @@ public class XYStepRendererTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             r2 = (XYStepRenderer) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(r1, r2);
-
     }
 
     /**
@@ -167,6 +178,43 @@ public class XYStepRendererTests extends TestCase {
             s2.add(10.0, 15.5);
             s2.add(15.0, 9.5);
             s2.add(20.0, 3.5);
+            dataset.addSeries(s2);
+            XYPlot plot = new XYPlot(dataset, 
+                    new NumberAxis("X"), new NumberAxis("Y"), 
+                    new XYStepRenderer());
+            JFreeChart chart = new JFreeChart(plot);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+                    null);
+            success = true;
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    /**
+     * Draws the chart with a <code>null</code> value in the dataset to make 
+     * sure that no exceptions are thrown.
+     */
+    public void testDrawWithNullValue() {
+        boolean success = false;
+        try {
+            DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+        
+            XYSeries s1 = new XYSeries("Series 1", true, false);
+            s1.add(5.0, 5.0);
+            s1.add(10.0, null);
+            s1.add(15.0, 9.5);
+            s1.add(20.0, 7.5);
+            dataset.addSeries(s1);
+        
+            XYSeries s2 = new XYSeries("Series 2", true, false);
+            s2.add(5.0, 5.0);
+            s2.add(10.0, 15.5);
+            s2.add(15.0, null);
+            s2.add(20.0, null);
             dataset.addSeries(s2);
             XYPlot plot = new XYPlot(dataset, 
                     new NumberAxis("X"), new NumberAxis("Y"), 
