@@ -1,3 +1,10 @@
+2008-02-14  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch 1888422 (Rob Van der Sanden):
+    * source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
+    (drawHorizontalItem): Use correct data area dimension for series gap 
+    calculation.
+
 2008-01-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/CombinedDomainXYPlot.java

@@ -33,7 +33,7 @@
  *                   Science);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Tim Bardzil;
- *                   Rob Van der Sanden (patch 1866446);
+ *                   Rob Van der Sanden (patches 1866446 and 1888422);
  *
  * Changes
  * -------
@@ -67,7 +67,8 @@
  * 03-Jan-2008 : Check visibility of average marker before drawing it (DG);
  * 15-Jan-2008 : Add getMaximumBarWidth() and setMaximumBarWidth() 
  *               methods (RVdS);
- *
+ * 14-Feb-2008 : Fix bar position for horizontal chart, see patch 
+ *               1888422 (RVdS);
  */
 
 package org.jfree.chart.renderer.category;
@@ -445,7 +446,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         int categoryCount = getColumnCount();
 
         if (seriesCount > 1) {
-            double seriesGap = dataArea.getWidth() * getItemMargin()
+            double seriesGap = dataArea.getHeight() * getItemMargin()
                                / (categoryCount * (seriesCount - 1));
             double usedWidth = (state.getBarWidth() * seriesCount) 
                                + (seriesGap * (seriesCount - 1));
