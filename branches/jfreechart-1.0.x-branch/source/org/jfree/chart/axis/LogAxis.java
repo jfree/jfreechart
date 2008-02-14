@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * LogAxis.java
  * ------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,8 @@
  * 24-Aug-2006 : Version 1 (DG);
  * 22-Mar-2007 : Use defaultAutoArrange attribute (DG);
  * 02-Aug-2007 : Fixed zooming bug, added support for margins (DG);
+ * 14-Feb-2008 : Changed default minorTickCount to 9 - see bug report 
+ *               1892419 (DG);
  * 
  */
 
@@ -105,7 +107,7 @@ public class LogAxis extends ValueAxis {
         super(label,  createLogTickUnits(Locale.getDefault()));
         setDefaultAutoRange(new Range(0.01, 1.0));
         this.tickUnit = new NumberTickUnit(1.0, new DecimalFormat("0.#"));
-        this.minorTickCount = 10;
+        this.minorTickCount = 9;
     }
     
     /**
