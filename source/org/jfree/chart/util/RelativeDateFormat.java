@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * RelativeDateFormat.java
  * -----------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,8 +37,11 @@
  * 01-Nov-2006 : Version 1 (DG);
  * 23-Nov-2006 : Added argument checks, updated equals(), added clone() and 
  *               hashCode() (DG);
+ * 15-Feb-2008 : Applied patch 1873328 by elcaro01, with minor 
+ *               modifications (DG);
  *
  */
+
 package org.jfree.chart.util;
 
 import java.text.DateFormat;
@@ -66,11 +69,26 @@ public class RelativeDateFormat extends DateFormat {
      */
     private boolean showZeroDays;
     
+    /**
+     * A flag that controls whether or not a zero hour count is displayed.
+     * 
+     * @since 1.0.10
+     */
+    private boolean showZeroHours;
+
     /** 
      * A formatter for the day count (most likely not critical until the
      * day count exceeds 999). 
      */
     private NumberFormat dayFormatter;
+
+    /**
+     * A prefix prepended to the start of the format if the relative date is 
+     * positive.
+     *
+     * @since 1.0.10
+     */
+    private String positivePrefix;
     
     /**
      * A string appended after the day count.
@@ -132,6 +150,8 @@ public class RelativeDateFormat extends DateFormat {
         super();        
         this.baseMillis = baseMillis;
         this.showZeroDays = false;
+        this.showZeroHours = true;
+        this.positivePrefix = "";
         this.dayFormatter = NumberFormat.getInstance();
         this.daySuffix = "d";
         this.hourSuffix = "h";
@@ -194,6 +214,65 @@ public class RelativeDateFormat extends DateFormat {
      */
     public void setShowZeroDays(boolean show) {
         this.showZeroDays = show;
+    }
+    
+    /**
+     * Returns the flag that controls whether or not zero hour counts are 
+     * shown in the formatted output.
+     * 
+     * @return The flag.
+     * 
+     * @see #setShowZeroHours(boolean)
+     *
+     * @since 1.0.10
+     */
+    public boolean getShowZeroHours() {
+        return this.showZeroHours;
+    }
+    
+    /**
+     * Sets the flag that controls whether or not zero hour counts are shown
+     * in the formatted output.
+     * 
+     * @param show  the flag.
+     * 
+     * @see #getShowZeroHours()
+     *
+     * @since 1.0.10
+     */
+    public void setShowZeroHours(boolean show) {
+        this.showZeroHours = show;
+    }
+    
+    /**
+     * Returns the string that is prepended to the format if the relative time
+     * is positive.
+     * 
+     * @return The string (never <code>null</code>).
+     * 
+     * @see #setPositivePrefix(String)
+     *
+     * @since 1.0.10
+     */
+    public String getPositivePrefix() {
+        return this.positivePrefix;
+    }
+    
+    /**
+     * Sets the string that is prepended to the format if the relative time is 
+     * positive.
+     * 
+     * @param prefix  the prefix (<code>null</code> not permitted).
+     * 
+     * @see #getPositivePrefix()
+     *
+     * @since 1.0.10
+     */
+    public void setPositivePrefix(String prefix) {
+        if (prefix == null) {
+            throw new IllegalArgumentException("Null 'prefix' argument.");
+        }
+        this.positivePrefix = prefix;
     }
     
     /**
@@ -322,6 +401,14 @@ public class RelativeDateFormat extends DateFormat {
                                FieldPosition fieldPosition) {
         long currentMillis = date.getTime();
         long elapsed = currentMillis - this.baseMillis;
+        String signPrefix;
+        if (elapsed < 0) {
+            elapsed *= -1L;
+            signPrefix = "-";
+        } 
+        else {
+            signPrefix = this.positivePrefix;
+        }
         
         long days = elapsed / MILLISECONDS_IN_ONE_DAY;
         elapsed = elapsed - (days * MILLISECONDS_IN_ONE_DAY);
@@ -330,10 +417,14 @@ public class RelativeDateFormat extends DateFormat {
         long minutes = elapsed / 60000L;
         elapsed = elapsed - (minutes * 60000L);
         double seconds = elapsed / 1000.0;
+
+        toAppendTo.append(signPrefix);
         if (days != 0 || this.showZeroDays) {
             toAppendTo.append(this.dayFormatter.format(days) + getDaySuffix());
         }
-        toAppendTo.append(String.valueOf(hours) + getHourSuffix());
+        if (hours != 0 || this.showZeroHours) {
+            toAppendTo.append(String.valueOf(hours) + getHourSuffix());
+        }
         toAppendTo.append(String.valueOf(minutes) + getMinuteSuffix());
         toAppendTo.append(this.secondFormatter.format(seconds) 
                 + getSecondSuffix());
@@ -376,6 +467,12 @@ public class RelativeDateFormat extends DateFormat {
         if (this.showZeroDays != that.showZeroDays) {
             return false;
         }
+        if (this.showZeroHours != that.showZeroHours) {
+            return false;
+        }
+        if (!this.positivePrefix.equals(that.positivePrefix)) {
+            return false;
+        }
         if (!this.daySuffix.equals(that.daySuffix)) {
             return false;
         }
@@ -403,6 +500,7 @@ public class RelativeDateFormat extends DateFormat {
         int result = 193;
         result = 37 * result 
                 + (int) (this.baseMillis ^ (this.baseMillis >>> 32));
+        result = 37 * result + this.positivePrefix.hashCode();
         result = 37 * result + this.daySuffix.hashCode();
         result = 37 * result + this.hourSuffix.hashCode();
         result = 37 * result + this.minuteSuffix.hashCode();

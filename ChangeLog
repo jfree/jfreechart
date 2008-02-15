@@ -1,5 +1,20 @@
 2008-02-15  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 1873328:
+    * source/org/jfree/chart/util/RelativeDateFormat.java
+    (showZeroHours): New field,
+    (positivePrefix): Likewise,
+    (RelativeDateFormat(long)): Initialise new fields,
+    (getShowZeroHours): New method,
+    (setShowZeroHours): Likewise,
+    (getPositivePrefix): Likewise,
+    (setPositivePrefix): Likewise,
+    (format): Apply positive prefix, and fix formatting for negative values,
+    (equals): Handle new fields,
+    (hashCode): Use positivePrefix.
+    
+2008-02-15  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 1873160:
     * source/org/jfree/chart/plot/DialPlot.java
     (draw): Fix clipping issues.

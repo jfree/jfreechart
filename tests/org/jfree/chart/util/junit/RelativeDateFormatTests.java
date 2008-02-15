@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * RelativeDateFormatTests.java
  * ----------------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 23-Nov-2006 : Version 1 (DG);
+ * 15-Feb-2008 : Added tests for negative dates (DG);
  *
  */
 
@@ -42,13 +43,13 @@ package org.jfree.chart.util.junit;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Date;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.util.RelativeDateFormat;
-
 
 /**
  * Tests for the {@link RelativeDateFormat} class.
@@ -147,6 +148,14 @@ public class RelativeDateFormatTests extends TestCase {
         assertFalse(df1.equals(df2));
     }
     
-    
+    /**
+     * Some tests for negative dates.
+     */
+    public void testNegative() {
+        NumberFormat nf = new DecimalFormat("0");
+        RelativeDateFormat df1 = new RelativeDateFormat();
+        df1.setSecondFormatter(nf);
+        assertEquals("-0h0m1s", df1.format(new Date(-1000L)));
+    }
 }
 
