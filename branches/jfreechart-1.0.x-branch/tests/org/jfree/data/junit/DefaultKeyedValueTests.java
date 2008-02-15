@@ -77,6 +77,29 @@ public class DefaultKeyedValueTests extends TestCase {
     }
 
     /**
+     * Simple checks for the constructor.
+     */
+    public void testConstructor() {
+    	DefaultKeyedValue v = new DefaultKeyedValue("A", new Integer(1));
+    	assertEquals("A", v.getKey());
+    	assertEquals(new Integer(1), v.getValue());
+
+    	// try null key
+    	boolean pass = false;
+    	try {
+            /*v =*/ new DefaultKeyedValue(null, new Integer(1));
+    	}
+    	catch (IllegalArgumentException e) {
+    		pass = true;
+    	}
+    	assertTrue(pass);
+    	
+    	// try a null value
+    	v = new DefaultKeyedValue("A", null);
+    	assertNull(v.getValue());
+    }
+    
+    /**
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
@@ -132,13 +155,12 @@ public class DefaultKeyedValueTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             v2 = (DefaultKeyedValue) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(v1, v2);
 
