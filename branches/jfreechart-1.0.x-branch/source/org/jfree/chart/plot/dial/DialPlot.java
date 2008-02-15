@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * DialPlot.java
  * -------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  * 17-Oct-2007 : Fixed listener registration/deregistration bugs (DG);
  * 24-Oct-2007 : Maintain pointers in their own list, so they can be
  *               drawn after other layers (DG);
+ * 15-Feb-2007 : Fixed clipping bug (1873160) (DG);
  * 
  */
 
@@ -530,6 +531,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor, 
             PlotState parentState, PlotRenderingInfo info) {
         
+    	Shape origClip = g2.getClip();
+    	g2.setClip(area);
+    	
         // first, expand the viewing area into a drawing frame
         Rectangle2D frame = viewToFrame(area);
         
@@ -537,7 +541,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         if (this.background != null && this.background.isVisible()) {
             if (this.background.isClippedToWindow()) {
                 Shape savedClip = g2.getClip();
-                g2.setClip(this.dialFrame.getWindow(frame));
+                g2.clip(this.dialFrame.getWindow(frame));
                 this.background.draw(g2, this, frame, area);
                 g2.setClip(savedClip);
             }
@@ -552,7 +556,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
             if (current.isVisible()) {
                 if (current.isClippedToWindow()) {
                     Shape savedClip = g2.getClip();
-                    g2.setClip(this.dialFrame.getWindow(frame));
+                    g2.clip(this.dialFrame.getWindow(frame));
                     current.draw(g2, this, frame, area);
                     g2.setClip(savedClip);
                 }
@@ -569,7 +573,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
             if (current.isVisible()) {
                 if (current.isClippedToWindow()) {
                     Shape savedClip = g2.getClip();
-                    g2.setClip(this.dialFrame.getWindow(frame));
+                    g2.clip(this.dialFrame.getWindow(frame));
                     current.draw(g2, this, frame, area);
                     g2.setClip(savedClip);
                 }
@@ -583,7 +587,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         if (this.cap != null && this.cap.isVisible()) {
             if (this.cap.isClippedToWindow()) {
                 Shape savedClip = g2.getClip();
-                g2.setClip(this.dialFrame.getWindow(frame));
+                g2.clip(this.dialFrame.getWindow(frame));
                 this.cap.draw(g2, this, frame, area);
                 g2.setClip(savedClip);
             }
@@ -595,6 +599,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         if (this.dialFrame.isVisible()) {
             this.dialFrame.draw(g2, this, frame, area);
         }
+        
+        g2.setClip(origClip);
         
     }
     

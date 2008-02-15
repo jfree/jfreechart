@@ -1,3 +1,9 @@
+2008-02-15  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 1873160:
+    * source/org/jfree/chart/plot/DialPlot.java
+    (draw): Fix clipping issues.
+
 2008-02-14  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 1892419:
