@@ -1,5 +1,10 @@
 2008-02-15  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * org/jfree/data/DefaultKeyedValue.java
+    (DefaultKeyedValue(Comparable, Number)): Check for null key.
+
+2008-02-15  David Gilbert  <david.gilbert@object-refinery.com>
+
     Patch 1868745:
     * source/org/jfree/chart/axis/LogAxis.java
     (refreshTicksHorizontal): Adjust label anchor according to axis position,
