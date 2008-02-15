@@ -30,14 +30,14 @@
  * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Michael Siemer;
  *
  * Changes:
  * --------
  * 01-Nov-2006 : Version 1 (DG);
  * 23-Nov-2006 : Added argument checks, updated equals(), added clone() and 
  *               hashCode() (DG);
- * 15-Feb-2008 : Applied patch 1873328 by elcaro01, with minor 
+ * 15-Feb-2008 : Applied patch 1873328 by Michael Siemer, with minor 
  *               modifications (DG);
  *
  */
