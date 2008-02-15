@@ -399,9 +399,8 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
         g2.setStroke(this.stroke);
         g2.setPaint(this.foregroundPaint);
         g2.draw(window);
-        g2.draw(outerWindow);
-        
-        
+        g2.draw(outerWindow);    
+
     }
 
     /**
