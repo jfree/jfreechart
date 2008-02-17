@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * PolarPlotTests.java
  * -------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 23-Feb-2005 : Version 1 (DG);
  * 08-Jun-2005 : Extended testEquals() (DG);
  * 07-Feb-2007 : Extended testEquals() and testCloning() (DG);
+ * 17-Feb-2008 : Tests for new angleTickUnit field (DG);
  *
  */
 
@@ -59,6 +60,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.renderer.DefaultPolarItemRenderer;
 import org.jfree.data.xy.DefaultXYDataset;
@@ -106,6 +108,11 @@ public class PolarPlotTests extends TestCase {
         plot1.setAngleGridlineStroke(s);
         assertFalse(plot1.equals(plot2));
         plot2.setAngleGridlineStroke(s);
+        assertTrue(plot1.equals(plot2));
+        
+        plot1.setAngleTickUnit(new NumberTickUnit(11.0));
+        assertFalse(plot1.equals(plot2));
+        plot2.setAngleTickUnit(new NumberTickUnit(11.0));
         assertTrue(plot1.equals(plot2));
         
         plot1.setAngleGridlinesVisible(false);

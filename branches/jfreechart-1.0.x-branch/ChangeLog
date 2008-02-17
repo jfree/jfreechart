@@ -1,3 +1,16 @@
+2008-02-18  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch 1871902 by Martin Hoeller:
+    * org/jfree/chart/plot/PolarPlot.java
+    (DEFAULT_ANGLE_TICK_UNIT_SIZE): New field,
+    (angleTickUnit): Likewise,
+    (PolarPlot(XYDataset, ValueAxis, PolarItemRenderer)): Initialise 
+    angleTickUnit,
+    (getAngleTickUnit): New method,
+    (setAngleTickUnit): Likewise,
+    (refreshAngleTicks): Likewise,
+    (draw): Refresh angle tick list before drawing.
+
 2008-02-15  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/data/DefaultKeyedValue.java

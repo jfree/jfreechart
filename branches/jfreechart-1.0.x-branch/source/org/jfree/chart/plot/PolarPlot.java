@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * --------------
  * PolarPlot.java
  * --------------
- * (C) Copyright 2004-2007, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2008, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *                   Martin Hoeller (patch 1871902);
  *
  * Changes
  * -------
@@ -43,11 +44,12 @@
  * 07-Feb-2007 : Fixed bug 1599761, data value less than axis minimum (DG);
  * 21-Mar-2007 : Fixed serialization bug (DG);
  * 24-Sep-2007 : Implemented new zooming methods (DG);
+ * 17-Feb-2007 : Added angle tick unit attribute (see patch 1871902 by 
+ *               Martin Hoeller) (DG);
  *
  */
 
 package org.jfree.chart.plot;
-
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
@@ -75,6 +77,8 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.NumberTick;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.axis.TickUnit;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -92,7 +96,6 @@ import org.jfree.ui.TextAnchor;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 
-
 /**
  * Plots data that is in (theta, radius) pairs where
  * theta equal to zero is due north and increases clockwise.
@@ -109,6 +112,13 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /** The annotation margin. */
     private static final double ANNOTATION_MARGIN = 7.0;
    
+    /** 
+     * The default angle tick unit size.
+     * 
+     * @since 1.0.10
+     */
+    public static final double DEFAULT_ANGLE_TICK_UNIT_SIZE = 45.0;
+
     /** The default grid line stroke. */
     public static final Stroke DEFAULT_GRIDLINE_STROKE = new BasicStroke(
             0.5f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 
@@ -136,6 +146,13 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     private PolarItemRenderer renderer;
    
+    /** 
+     * The tick unit that controls the spacing between the angular grid lines.
+     * 
+     * @since 1.0.10
+     */
+    private TickUnit angleTickUnit;
+
     /** A flag that controls whether or not the angle labels are visible. */
     private boolean angleLabelsVisible = true;
     
@@ -190,24 +207,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (this.dataset != null) {
             this.dataset.addChangeListener(this);
         }
-      
-        this.angleTicks = new java.util.ArrayList();
-        this.angleTicks.add(new NumberTick(new Double(0.0), "0", 
-                TextAnchor.CENTER, TextAnchor.CENTER, 0.0));
-        this.angleTicks.add(new NumberTick(new Double(45.0), "45", 
-                TextAnchor.CENTER, TextAnchor.CENTER, 0.0));
-        this.angleTicks.add(new NumberTick(new Double(90.0), "90", 
-                TextAnchor.CENTER, TextAnchor.CENTER, 0.0));
-        this.angleTicks.add(new NumberTick(new Double(135.0), "135", 
-                TextAnchor.CENTER, TextAnchor.CENTER, 0.0));
-        this.angleTicks.add(new NumberTick(new Double(180.0), "180", 
-                TextAnchor.CENTER, TextAnchor.CENTER, 0.0));
-        this.angleTicks.add(new NumberTick(new Double(225.0), "225", 
-                TextAnchor.CENTER, TextAnchor.CENTER, 0.0));
-        this.angleTicks.add(new NumberTick(new Double(270.0), "270", 
-                TextAnchor.CENTER, TextAnchor.CENTER, 0.0));
-        this.angleTicks.add(new NumberTick(new Double(315.0), "315", 
-                TextAnchor.CENTER, TextAnchor.CENTER, 0.0));
+        this.angleTickUnit = new NumberTickUnit(DEFAULT_ANGLE_TICK_UNIT_SIZE);
         
         this.axis = radiusAxis;
         if (this.axis != null) {
@@ -392,6 +392,34 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         notifyListeners(new PlotChangeEvent(this));
     }
    
+    /**
+     * Returns the tick unit that controls the spacing of the angular grid 
+     * lines.
+     * 
+     * @return The tick unit (never <code>null</code>).
+     * 
+     * @since 1.0.10
+     */
+    public TickUnit getAngleTickUnit() {
+        return this.angleTickUnit;
+    }
+
+    /**
+     * Sets the tick unit that controls the spacing of the angular grid 
+     * lines, and sends a {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @param unit  the tick unit (<code>null</code> not permitted).
+     * 
+     * @since 1.0.10
+     */
+    public void setAngleTickUnit(TickUnit unit) {
+    	if (unit == null) {
+    		throw new IllegalArgumentException("Null 'unit' argument.");
+    	}
+        this.angleTickUnit = unit;
+        notifyListeners(new PlotChangeEvent(this));
+    }
+    
     /**
      * Returns a flag that controls whether or not the angle labels are visible.
      * 
@@ -638,6 +666,25 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
     
     /**
+     * Generates a list of tick values for the angular tick marks.
+     * 
+     * @return A list of {@link NumberTick} instances.
+     * 
+     * @since 1.0.10
+     */
+    protected List refreshAngleTicks() {
+        List ticks = new ArrayList();
+        for (double currentTickVal = 0.0; currentTickVal < 360.0; 
+                currentTickVal += this.angleTickUnit.getSize()) {
+            NumberTick tick = new NumberTick(Double.valueOf(currentTickVal),
+                this.angleTickUnit.valueToString(currentTickVal),
+                TextAnchor.CENTER, TextAnchor.CENTER, 0.0);
+            ticks.add(tick);
+        }
+        return ticks;
+    }
+
+    /**
      * Draws the plot on a Java 2D graphics device (such as the screen or a 
      * printer).
      * <P>
@@ -698,7 +745,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             g2.clip(dataArea);
             g2.setComposite(AlphaComposite.getInstance(
                     AlphaComposite.SRC_OVER, getForegroundAlpha()));
-          
+
+            this.angleTicks = refreshAngleTicks();
             drawGridlines(g2, dataArea, this.angleTicks, state.getTicks());
           
             // draw...
@@ -953,6 +1001,9 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         if (!ObjectUtilities.equal(this.renderer, that.renderer)) {
             return false;
+        }
+        if (!this.angleTickUnit.equals(that.angleTickUnit)) {
+        	return false;
         }
         if (this.angleGridlinesVisible != that.angleGridlinesVisible) {
             return false;
