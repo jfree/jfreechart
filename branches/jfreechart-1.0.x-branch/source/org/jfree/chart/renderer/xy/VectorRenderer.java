@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * VectorRenderer.java
  * -------------------
- * (C) Copyright 2007, by Object Refinery Limited.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,8 @@
  * 30-Jan-2007 : Version 1 (DG);
  * 24-May-2007 : Updated for method name changes (DG);
  * 25-May-2007 : Moved from experimental to the main source tree (DG);
+ * 18-Feb-2008 : Fixed bug 1880114, arrows for horizontal plot
+ *               orientation (DG);
  * 
  */
 
@@ -71,8 +73,7 @@ public class VectorRenderer extends AbstractXYItemRenderer
     
     /** The length of the head. */
     private double headLength = 0.14;
-    
-    
+
     /**
      * Creates a new <code>XYBlockRenderer</code> instance with default 
      * attributes.
@@ -263,10 +264,18 @@ public class VectorRenderer extends AbstractXYItemRenderer
         double righty = cy + deltaY;
         
         GeneralPath p = new GeneralPath();
-        p.moveTo((float) xx1, (float) yy1);
-        p.lineTo((float) rightx, (float) righty);
-        p.lineTo((float) bx, (float) by);
-        p.lineTo((float) leftx, (float) lefty);
+        if (orientation == PlotOrientation.VERTICAL) {
+            p.moveTo((float) xx1, (float) yy1);
+            p.lineTo((float) rightx, (float) righty);
+            p.lineTo((float) bx, (float) by);
+            p.lineTo((float) leftx, (float) lefty);
+        }
+        else {  // orientation is HORIZONTAL
+        	p.moveTo((float) yy1, (float) xx1);
+        	p.lineTo((float) righty, (float) rightx);
+            p.lineTo((float) by, (float) bx);
+            p.lineTo((float) lefty, (float) leftx);
+        }
         p.closePath();
         g2.draw(p);
         

@@ -1,5 +1,11 @@
 2008-02-18  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 1880114:
+    * org/jfree/chart/renderer/xy/VectorRenderer.java
+    (drawItem): Modify arrow-head for plot orientation.
+
+2008-02-18  David Gilbert  <david.gilbert@object-refinery.com>
+
     Patch 1871902 by Martin Hoeller:
     * org/jfree/chart/plot/PolarPlot.java
     (DEFAULT_ANGLE_TICK_UNIT_SIZE): New field,
