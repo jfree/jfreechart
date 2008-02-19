@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * LogFormat.java
  * --------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,8 @@
  * Changes
  * -------
  * 02-Aug-2007 : Version 1 (DG);
+ * 19-Feb-2008 : Implemented equals() and clone(), and added new powerLabel
+ *               attribute as per Feature Request 1886036 (DG);
  * 
  */
 
@@ -62,6 +64,13 @@ public class LogFormat extends NumberFormat {
     /** The label for the log base (for example, "e"). */
     private String baseLabel;
     
+    /** 
+     * The label for the power symbol.
+     * 
+     * @since 1.0.10
+     */
+    private String powerLabel;
+    
     /** A flag that controls whether or not the base is shown. */
     private boolean showBase;
     
@@ -72,17 +81,40 @@ public class LogFormat extends NumberFormat {
      * Creates a new instance.
      * 
      * @param base  the base.
-     * @param baseLabel  the base label.
+     * @param baseLabel  the base label (<code>null</code> not permitted).
      * @param showBase  a flag that controls whether or not the base value is
      *                  shown.
      */
     public LogFormat(double base, String baseLabel, boolean showBase) {
+        this(base, baseLabel, "^", showBase);
+    }
+    
+    /**
+     * Creates a new instance.
+     * 
+     * @param base  the base.
+     * @param baseLabel  the base label (<code>null</code> not permitted).
+     * @param powerLabel  the power label (<code>null</code> not permitted).
+     * @param showBase  a flag that controls whether or not the base value is
+     *                  shown.
+     *                  
+     * @since 1.0.10
+     */
+    public LogFormat(double base, String baseLabel, String powerLabel, 
+    		boolean showBase) {
+    	if (baseLabel == null) {
+    		throw new IllegalArgumentException("Null 'baseLabel' argument.");
+    	}
+    	if (powerLabel == null) {
+    		throw new IllegalArgumentException("Null 'powerLabel' argument.");
+    	}
         this.base = base;
         this.baseLog = Math.log(this.base);
         this.baseLabel = baseLabel;
         this.showBase = showBase;
+        this.powerLabel = powerLabel;
     }
-    
+
     /**
      * Calculates the log of a given value.
      * 
@@ -108,7 +140,7 @@ public class LogFormat extends NumberFormat {
         StringBuffer result = new StringBuffer();
         if (this.showBase) {
             result.append(this.baseLabel);
-            result.append("^");
+            result.append(this.powerLabel);
         }
         result.append(this.formatter.format(calculateLog(number)));
         return result;
@@ -146,6 +178,47 @@ public class LogFormat extends NumberFormat {
      */
     public Number parse (String source, ParsePosition parsePosition) {
         return null; // don't bother with parsing
+    }
+
+    /**
+     * Tests this formatter for equality with an arbitrary object.
+     * 
+     * @param obj  the object (<code>null</code> permitted).
+     * 
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+    	if (obj == this) {
+    		return true;
+    	}
+    	if (!(obj instanceof LogFormat)) {
+    		return false;
+    	}
+    	LogFormat that = (LogFormat) obj;
+    	if (this.base != that.base) {
+    		return false;
+    	}
+    	if (!this.baseLabel.equals(that.baseLabel)) {
+    		return false;
+    	}
+    	if (this.baseLog != that.baseLog) {
+    		return false;
+    	}
+    	if (this.showBase != that.showBase) {
+    		return false;
+    	}
+    	return super.equals(obj);
+    }
+    
+    /**
+     * Returns a clone of this instance.
+     * 
+     * @return A clone.
+     */
+    public Object clone() {
+        LogFormat clone = (LogFormat) super.clone();
+        clone.formatter = (NumberFormat) this.formatter.clone();
+        return clone;
     }
 
 }
