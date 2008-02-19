@@ -1,3 +1,13 @@
+2008-02-19  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/util/LogFormat.java
+    (powerLabel): New field,
+    (LogFormat(double, String, boolean)): Delegate to new constructor,
+    (LogFormat(double, String, String, boolean)): New constructor,
+    (format): Use new powerLabel,
+    (equals): New method override,
+    (clone): Likewise.
+
 2008-02-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 1880114:
