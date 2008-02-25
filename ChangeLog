@@ -1,3 +1,12 @@
+2008-02-26  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 1897580:
+    * source/org/jfree/data/DefaultIntervalCategoryDataset.java
+    (DefaultIntervalCategoryDataset(Comparable[], Comparable[], Number[][], 
+    Number[][]): Initialise seriesKeys and categoryKeys to empty arrays instead
+    of null for empty dataset,
+    (setCategoryKeys): Fixed argument check to handle empty dataset.
+
 2008-02-19  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/util/LogFormat.java
