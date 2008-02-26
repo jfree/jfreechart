@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,17 @@
  * ----------------------
  * XYTitleAnnotation.java
  * ----------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Andrew Mickish;
  *
  * Changes:
  * --------
  * 02-Feb-2007 : Version 1 (DG);
  * 30-Apr-2007 : Fixed equals() method (DG);
+ * 26-Feb-2008 : Fixed NullPointerException when drawing chart with a null
+ *               ChartRenderingInfo - see patch 1901599 by Andrew Mickish (DG);
  * 
  */
 
@@ -46,6 +48,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.chart.annotations.AbstractXYAnnotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.ValueAxis;
@@ -70,8 +73,7 @@ import org.jfree.util.PublicCloneable;
  * an {@link XYPlot}.
  */
 public class XYTitleAnnotation extends AbstractXYAnnotation
-                               implements Cloneable, PublicCloneable, 
-                                          Serializable {
+        implements Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -4364694501921559958L;
@@ -85,8 +87,10 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     /** The y-coordinate (in data space). */
     private double y;
     
+    /** The maximum width. */
     private double maxWidth;
     
+    /** The maximum height. */
     private double maxHeight;
 
     /** The title. */
@@ -302,16 +306,19 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
             }
         }
         Object result = this.title.draw(g2, titleRect, p);
-        if (result instanceof EntityBlockResult) {
-            EntityBlockResult ebr = (EntityBlockResult) result;
-            info.getOwner().getEntityCollection().addAll(
-                    ebr.getEntityCollection());
-        }
-        String toolTip = getToolTipText();
-        String url = getURL();
-        if (toolTip != null || url != null) {
-            addEntity(info, new Rectangle2D.Float(xx, yy, (float) size.width, 
-                    (float) size.height), rendererIndex, toolTip, url);
+        if (info != null) {
+            if (result instanceof EntityBlockResult) {
+                EntityBlockResult ebr = (EntityBlockResult) result;
+                info.getOwner().getEntityCollection().addAll(
+                        ebr.getEntityCollection());
+            }
+            String toolTip = getToolTipText();
+            String url = getURL();
+            if (toolTip != null || url != null) {
+                addEntity(info, new Rectangle2D.Float(xx, yy, 
+                		(float) size.width, (float) size.height), 
+                		rendererIndex, toolTip, url);
+            }
         }
     }
 
@@ -360,8 +367,15 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
      * @return A hash code.
      */
     public int hashCode() {
-        // FIXME: do better than this
-        return this.title.hashCode();
+        int result = 193;
+        result = HashUtilities.hashCode(result, this.anchor);
+        result = HashUtilities.hashCode(result, this.coordinateType);
+        result = HashUtilities.hashCode(result, this.x);
+        result = HashUtilities.hashCode(result, this.y);
+        result = HashUtilities.hashCode(result, this.maxWidth);
+        result = HashUtilities.hashCode(result, this.maxHeight);
+        result = HashUtilities.hashCode(result, this.title);
+        return result;
     }
     
     /**
