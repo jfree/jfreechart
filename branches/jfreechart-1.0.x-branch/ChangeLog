@@ -1,5 +1,14 @@
 2008-02-26  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 1901599:
+    * experimental/org/jfree/chart/annotations/XYTitleAnnotation.java
+    (draw): Check for null 'info' argument before adding entities,
+    (hashCode): Reimplemented,
+    * experimental/org/jfree/chart/annotations/junit/XYTitleAnnotationTests.java
+    (testDrawWithNullInfo): New test.
+
+2008-02-26  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 1897580:
     * source/org/jfree/data/DefaultIntervalCategoryDataset.java
     (DefaultIntervalCategoryDataset(Comparable[], Comparable[], Number[][], 
