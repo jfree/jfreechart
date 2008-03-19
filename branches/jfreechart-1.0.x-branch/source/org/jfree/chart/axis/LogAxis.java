@@ -42,6 +42,8 @@
  * 15-Feb-2008 : Applied a variation of patch 1868745 by Andrew Mickish to
  *               fix a labelling bug when the axis appears at the top or
  *               right of the chart (DG);
+ * 19-Mar-2008 : Applied patch 1902418 by Andrew Mickish to fix bug in tick
+ *               labels for vertical axis (DG);
  * 
  */
 
@@ -586,7 +588,7 @@ public class LogAxis extends ValueAxis {
         while (current <= end) {
             double v = calculateValue(current);
             if (range.contains(v)) {
-                ticks.add(new NumberTick(TickType.MINOR, v, createTickLabel(v), 
+                ticks.add(new NumberTick(TickType.MAJOR, v, createTickLabel(v), 
                         textAnchor, TextAnchor.CENTER, 0.0));
             }
             // add minor ticks (for gridlines)

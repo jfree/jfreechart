@@ -1,5 +1,11 @@
 2008-03-19  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 1902418:
+    * source/org/jfree/chart/axis/LogAxis.java
+    (refreshTicksVertical): Change tick type for major tick labels.
+
+2008-03-19  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/plot/PiePlot3D.java
     (getMaximumExplodePercent): Check for null dataset,
     (initialise): Likewise,
