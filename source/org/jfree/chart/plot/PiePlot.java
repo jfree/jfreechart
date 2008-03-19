@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * PiePlot.java
  * ------------
- * (C) Copyright 2000-2007, by Andrzej Porebski and Contributors.
+ * (C) Copyright 2000-2008, by Andrzej Porebski and Contributors.
  *
  * Original Author:  Andrzej Porebski;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -147,6 +147,8 @@
  * 18-Jul-2007 : Added simple label option (DG);
  * 21-Nov-2007 : Fixed labelling bugs, added debug code, restored default
  *               white background (DG); 
+ * 19-Mar-2008 : Fixed IllegalArgumentException when drawing with null 
+ *               dataset (DG);
  *    
  */
 
@@ -1517,6 +1519,9 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @return The percent.
      */
     public double getMaximumExplodePercent() {
+        if (this.dataset == null) {
+            return 0.0;
+        }
         double result = 0.0;
         Iterator iterator = this.dataset.getKeys().iterator();
         while (iterator.hasNext()) {
@@ -2190,8 +2195,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      
         PiePlotState state = new PiePlotState(info);
         state.setPassesRequired(2);
-        state.setTotal(DatasetUtilities.calculatePieDatasetTotal(
-                plot.getDataset()));
+        if (this.dataset != null) {
+            state.setTotal(DatasetUtilities.calculatePieDatasetTotal(
+                    plot.getDataset()));
+        }
         state.setLatestAngle(plot.getStartAngle());
         return state;
         
