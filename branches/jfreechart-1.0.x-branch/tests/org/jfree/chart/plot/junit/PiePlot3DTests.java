@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * Pie3DPlotTests.java
  * -------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,11 +37,15 @@
  * 18-Mar-2003 : Version 1 (DG);
  * 22-Mar-2007 : Added testEquals() (DG);
  * 05-Oct-2007 : Modified testEquals() for new field (DG);
+ * 19-Mar-2008 : Added test for null dataset (DG);
  *
  */
 
 package org.jfree.chart.plot.junit;
 
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -53,6 +57,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
 
 /**
@@ -122,6 +128,27 @@ public class PiePlot3DTests extends TestCase {
         }
         assertEquals(p1, p2);
 
+    }
+
+    /**
+     * Draws a pie chart where the label generator returns null.
+     */
+    public void testDrawWithNullDataset() {
+        JFreeChart chart = ChartFactory.createPieChart3D("Test", null, true, 
+                false, false);
+        boolean success = false;
+        try {
+            BufferedImage image = new BufferedImage(200 , 100, 
+                    BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2 = image.createGraphics();
+            chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
+            g2.dispose();
+            success = true;
+        }
+        catch (Exception e) {
+            success = false;
+        }
+        assertTrue(success);
     }
 
 }
