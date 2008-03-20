@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PiePlot3D.java
  * --------------
- * (C) Copyright 2000-2007, by Object Refinery and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery and Contributors.
  *
  * Original Author:  Tomer Peretz;
  * Contributor(s):   Richard Atkinson;
@@ -76,6 +76,8 @@
  *               (see patch 1805262) (DG);
  * 21-Nov-2007 : Changed default depth factor, fixed labelling bugs and added
  *               debug code - see debug flags in PiePlot class (DG);
+ * 20-Mar-2008 : Fixed bug 1920854 - multiple redraws of the section 
+ *               labels (DG);
  *
  */
 
@@ -568,19 +570,20 @@ public class PiePlot3D extends PiePlot implements Serializable {
                     entities.add(entity);
                 }
             }
-            List keys = dataset.getKeys();
-            Rectangle2D adjustedPlotArea = new Rectangle2D.Double(
-                    originalPlotArea.getX(), originalPlotArea.getY(), 
-                    originalPlotArea.getWidth(), originalPlotArea.getHeight() 
-                    - depth);
-            if (getSimpleLabels()) {
-                drawSimpleLabels(g2, keys, totalValue, adjustedPlotArea, 
-                        linkArea, state);
-            }
-            else {
-                drawLabels(g2, keys, totalValue, adjustedPlotArea, linkArea, 
-                        state);
-            }
+        }
+
+        List keys = dataset.getKeys();
+        Rectangle2D adjustedPlotArea = new Rectangle2D.Double(
+                originalPlotArea.getX(), originalPlotArea.getY(), 
+                originalPlotArea.getWidth(), originalPlotArea.getHeight() 
+                - depth);
+        if (getSimpleLabels()) {
+            drawSimpleLabels(g2, keys, totalValue, adjustedPlotArea, 
+                    linkArea, state);
+        }
+        else {
+            drawLabels(g2, keys, totalValue, adjustedPlotArea, linkArea, 
+                    state);
         }
 
         g2.setClip(savedClip);
