@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sylvain Vieujot;
@@ -36,6 +36,7 @@
  *                   Gideon Krause;
  *                   Nicolas Brodu;
  *                   Michal Krause;
+ *                   Richard West, Advanced Micro Devices, Inc.;
  *
  * Changes
  * -------
@@ -119,6 +120,7 @@
  * 03-Apr-2007 : Made drawBackgroundImage() public (DG);
  * 07-Jun-2007 : Added new fillBackground() method to handle GradientPaint 
  *               taking into account orientation (DG);
+ * 25-Mar-2008 : Added fireChangeEvent() method - see patch 1914411 (DG);
  *
  */
 
@@ -176,13 +178,9 @@ import org.jfree.util.PublicCloneable;
  * data to the plot.  This base class provides facilities common to most plot 
  * types.
  */
-public abstract class Plot implements AxisChangeListener,
-                                      DatasetChangeListener,
-                                      MarkerChangeListener,
-                                      LegendItemSource,
-                                      PublicCloneable,
-                                      Cloneable,
-                                      Serializable {
+public abstract class Plot implements AxisChangeListener, 
+        DatasetChangeListener, MarkerChangeListener, LegendItemSource,
+        PublicCloneable, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -8831571430103671324L;
@@ -217,11 +215,11 @@ public abstract class Plot implements AxisChangeListener,
     
     /** A default box shape for legend items. */
     public static final Shape DEFAULT_LEGEND_ITEM_BOX 
-        = new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0);
+            = new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0);
     
     /** A default circle shape for legend items. */
     public static final Shape DEFAULT_LEGEND_ITEM_CIRCLE 
-        = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
+            = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
 
     /** The parent plot (<code>null</code> if this is the root plot). */
     private Plot parent;
@@ -350,7 +348,7 @@ public abstract class Plot implements AxisChangeListener,
      */
     public void setNoDataMessage(String message) {
         this.noDataMessage = message;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -378,7 +376,7 @@ public abstract class Plot implements AxisChangeListener,
             throw new IllegalArgumentException("Null 'font' argument.");
         }
         this.noDataMessageFont = font;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -406,7 +404,7 @@ public abstract class Plot implements AxisChangeListener,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.noDataMessagePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -520,7 +518,7 @@ public abstract class Plot implements AxisChangeListener,
         if (!this.insets.equals(insets)) {
             this.insets = insets;
             if (notify) {
-                notifyListeners(new PlotChangeEvent(this));
+                fireChangeEvent();
             }
         }
 
@@ -550,7 +548,7 @@ public abstract class Plot implements AxisChangeListener,
         if (paint == null) {
             if (this.backgroundPaint != null) {
                 this.backgroundPaint = null;
-                notifyListeners(new PlotChangeEvent(this));
+                fireChangeEvent();
             }
         }
         else {
@@ -560,7 +558,7 @@ public abstract class Plot implements AxisChangeListener,
                 }
             }
             this.backgroundPaint = paint;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
 
     }
@@ -587,7 +585,7 @@ public abstract class Plot implements AxisChangeListener,
     public void setBackgroundAlpha(float alpha) {
         if (this.backgroundAlpha != alpha) {
             this.backgroundAlpha = alpha;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -622,7 +620,7 @@ public abstract class Plot implements AxisChangeListener,
      */
     public void setDrawingSupplier(DrawingSupplier supplier) {
         this.drawingSupplier = supplier;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -647,7 +645,7 @@ public abstract class Plot implements AxisChangeListener,
      */
     public void setBackgroundImage(Image image) {
         this.backgroundImage = image;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -676,7 +674,7 @@ public abstract class Plot implements AxisChangeListener,
     public void setBackgroundImageAlignment(int alignment) {
         if (this.backgroundImageAlignment != alignment) {
             this.backgroundImageAlignment = alignment;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -710,7 +708,7 @@ public abstract class Plot implements AxisChangeListener,
                     "The 'alpha' value must be in the range 0.0f to 1.0f.");
         if (this.backgroundImageAlpha != alpha) {
             this.backgroundImageAlpha = alpha;
-            this.notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
     
@@ -743,7 +741,7 @@ public abstract class Plot implements AxisChangeListener,
      */
     public void setOutlineVisible(boolean visible) {
         this.outlineVisible = visible;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -770,7 +768,7 @@ public abstract class Plot implements AxisChangeListener,
         if (stroke == null) {
             if (this.outlineStroke != null) {
                 this.outlineStroke = null;
-                notifyListeners(new PlotChangeEvent(this));
+                fireChangeEvent();
             }
         }
         else {
@@ -780,7 +778,7 @@ public abstract class Plot implements AxisChangeListener,
                 }
             }
             this.outlineStroke = stroke;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -808,7 +806,7 @@ public abstract class Plot implements AxisChangeListener,
         if (paint == null) {
             if (this.outlinePaint != null) {
                 this.outlinePaint = null;
-                notifyListeners(new PlotChangeEvent(this));
+                fireChangeEvent();
             }
         }
         else {
@@ -818,7 +816,7 @@ public abstract class Plot implements AxisChangeListener,
                 }
             }
             this.outlinePaint = paint;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -844,7 +842,7 @@ public abstract class Plot implements AxisChangeListener,
     public void setForegroundAlpha(float alpha) {
         if (this.foregroundAlpha != alpha) {
             this.foregroundAlpha = alpha;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -893,6 +891,15 @@ public abstract class Plot implements AxisChangeListener,
                 ((PlotChangeListener) listeners[i + 1]).plotChanged(event);
             }
         }
+    }
+    
+    /**
+     * Sends a {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @since 1.0.10
+     */
+    protected void fireChangeEvent() {
+        notifyListeners(new PlotChangeEvent(this));
     }
 
     /**
@@ -1090,7 +1097,7 @@ public abstract class Plot implements AxisChangeListener,
      * @param event  information about the event (not used here).
      */
     public void axisChanged(AxisChangeEvent event) {
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1116,7 +1123,7 @@ public abstract class Plot implements AxisChangeListener,
      * @since 1.0.3
      */
     public void markerChanged(MarkerChangeEvent event) {
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

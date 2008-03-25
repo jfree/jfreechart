@@ -630,7 +630,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         if (orientation != this.orientation) {
             this.orientation = orientation;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -658,7 +658,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'offset' argument.");
         }
         this.axisOffset = offset;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -750,7 +750,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             axis.addChangeListener(this);
         }
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -766,7 +766,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         for (int i = 0; i < axes.length; i++) {
             setDomainAxis(i, axes[i], false);   
         }
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -846,7 +846,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             }
         }
         this.domainAxes.clear();
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -921,7 +921,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         this.domainAxisLocations.set(index, location);
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }        
     }
 
@@ -984,7 +984,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             axis.configure();
             axis.addChangeListener(this);
         }
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
 
     }
 
@@ -1100,7 +1100,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             axis.addChangeListener(this);
         }
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1116,7 +1116,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         for (int i = 0; i < axes.length; i++) {
             setRangeAxis(i, axes[i], false);   
         }
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1144,7 +1144,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             }
         }
         this.rangeAxes.clear();
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1220,7 +1220,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         this.rangeAxisLocations.set(index, location);
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }   
     }
 
@@ -1448,7 +1448,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         configureDomainAxes();
         configureRangeAxes();
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1462,7 +1462,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         for (int i = 0; i < renderers.length; i++) {
             setRenderer(i, renderers[i], false);   
         }
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1491,7 +1491,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'order' argument.");
         }
         this.datasetRenderingOrder = order;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1520,7 +1520,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'order' argument.");
         }
         this.seriesRenderingOrder = order;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1580,7 +1580,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setWeight(int weight) {
         this.weight = weight;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1609,7 +1609,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setDomainGridlinesVisible(boolean visible) {
         if (this.domainGridlinesVisible != visible) {
             this.domainGridlinesVisible = visible;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1643,7 +1643,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.domainGridlineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1674,7 +1674,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.domainGridlinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1703,7 +1703,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setRangeGridlinesVisible(boolean visible) {
         if (this.rangeGridlinesVisible != visible) {
             this.rangeGridlinesVisible = visible;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1732,7 +1732,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.rangeGridlineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1760,7 +1760,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.rangeGridlinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1790,7 +1790,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setDomainZeroBaselineVisible(boolean visible) {
         this.domainZeroBaselineVisible = visible;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1821,7 +1821,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.domainZeroBaselineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1853,7 +1853,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.domainZeroBaselinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1879,7 +1879,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setRangeZeroBaselineVisible(boolean visible) {
         this.rangeZeroBaselineVisible = visible;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1906,7 +1906,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.rangeZeroBaselineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1934,7 +1934,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.rangeZeroBaselinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1958,7 +1958,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setDomainTickBandPaint(Paint paint) {
         this.domainTickBandPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1982,7 +1982,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setRangeTickBandPaint(Paint paint) {
         this.rangeTickBandPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -2010,7 +2010,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'origin' argument.");
         }
         this.quadrantOrigin = origin;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -2045,7 +2045,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                     + ") should be in the range 0 to 3.");
         }
         this.quadrantPaint[index] = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -2106,7 +2106,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             }
             this.foregroundDomainMarkers.clear();
         }
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -2143,7 +2143,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                 markers.clear();
             }
         }
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -2209,7 +2209,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         marker.addChangeListener(this);
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -2288,7 +2288,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
         return removed;
     }
@@ -2349,7 +2349,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             }
             this.foregroundRangeMarkers.clear();
         }
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -2407,7 +2407,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         marker.addChangeListener(this);
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -2443,7 +2443,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                 markers.clear();
             }
         }
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -2525,7 +2525,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
 
         boolean removed = markers.remove(marker);
         if (removed && notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
         return removed;
     }
@@ -2558,7 +2558,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         this.annotations.add(annotation);
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -2594,7 +2594,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         boolean removed = this.annotations.remove(annotation);
         if (removed && notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
         return removed;
     }
@@ -2620,7 +2620,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void clearAnnotations() {
         this.annotations.clear();
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -4053,7 +4053,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @param event  the event.
      */
     public void rendererChanged(RendererChangeEvent event) {
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -4079,7 +4079,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setDomainCrosshairVisible(boolean flag) {
         if (this.domainCrosshairVisible != flag) {
             this.domainCrosshairVisible = flag;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -4107,7 +4107,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setDomainCrosshairLockedOnData(boolean flag) {
         if (this.domainCrosshairLockedOnData != flag) {
             this.domainCrosshairLockedOnData = flag;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -4147,7 +4147,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setDomainCrosshairValue(double value, boolean notify) {
         this.domainCrosshairValue = value;
         if (isDomainCrosshairVisible() && notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -4178,7 +4178,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.domainCrosshairStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -4207,7 +4207,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.domainCrosshairPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -4234,7 +4234,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setRangeCrosshairVisible(boolean flag) {
         if (this.rangeCrosshairVisible != flag) {
             this.rangeCrosshairVisible = flag;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -4262,7 +4262,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setRangeCrosshairLockedOnData(boolean flag) {
         if (this.rangeCrosshairLockedOnData != flag) {
             this.rangeCrosshairLockedOnData = flag;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -4304,7 +4304,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setRangeCrosshairValue(double value, boolean notify) {
         this.rangeCrosshairValue = value;
         if (isRangeCrosshairVisible() && notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -4335,7 +4335,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.rangeCrosshairStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -4364,7 +4364,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.rangeCrosshairPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -4404,7 +4404,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setFixedDomainAxisSpace(AxisSpace space, boolean notify) {
         this.fixedDomainAxisSpace = space;
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -4445,7 +4445,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setFixedRangeAxisSpace(AxisSpace space, boolean notify) {
         this.fixedRangeAxisSpace = space;
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -4659,7 +4659,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setFixedLegendItems(LegendItemCollection items) {
         this.fixedLegendItems = items;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

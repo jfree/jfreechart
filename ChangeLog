@@ -1,5 +1,15 @@
 2008-03-25  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 1914411:
+    * source/org/jfree/chart/plot/Plot.java
+    (fireChangeEvent): New method,
+    * source/org/jfree/chart/plot/CategoryPlot.java
+    * source/org/jfree/chart/plot/FastScatterPlot.java
+    * source/org/jfree/chart/plot/XYPlot.java:
+    Use fireChangeEvent() method all over.
+
+2008-03-25  David Gilbert  <david.gilbert@object-refinery.com>
+
     Patch 1913751:
     * source/org/jfree/chart/plot/CategoryPlot.java
     (addDomainMarker(int, CategoryMarker, Layer, boolean)): New method,
