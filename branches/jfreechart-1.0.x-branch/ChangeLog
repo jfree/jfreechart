@@ -1,3 +1,14 @@
+2008-03-25  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch 1913751:
+    * source/org/jfree/chart/plot/XYPlot.java
+    (addDomainMarker(int, Marker, Layer, boolean)): New method,
+    (removeDomainMarker(int, Marker, Layer, boolean)): Likewise,
+    (addRangeMarker(int, Marker, Layer, boolean)): Likewise,
+    (removeRangeMarker(int, Marker, Layer, boolean)): Likewise,
+    (addAnnotation(XYAnnotation, boolean)): Likewise,
+    (removeAnnotation(XYAnnotation, boolean)): Likewise.
+
 2008-03-20  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 1920854:

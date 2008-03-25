@@ -194,6 +194,8 @@
  *               band paint attributes (DG);
  * 27-Nov-2007 : Added new setFixedDomain/RangeAxisSpace() methods (DG);
  * 04-Jan-2008 : Fix for quadrant painting error - see patch 1849564 (DG);
+ * 25-Mar-2008 : Added new methods with optional notification - see patch
+ *               1913751 (DG);
  * 
  */
 
@@ -2160,6 +2162,26 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #addRangeMarker(int, Marker, Layer)
      */
     public void addDomainMarker(int index, Marker marker, Layer layer) {
+    	addDomainMarker(index, marker, layer, true);
+    }
+
+    /**
+     * Adds a marker for a specific dataset/renderer and, if requested, sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     * <P>
+     * Typically a marker will be drawn by the renderer as a line perpendicular
+     * to the domain axis (that the renderer is mapped to), however this is
+     * entirely up to the renderer.
+     *
+     * @param index  the dataset/renderer index.
+     * @param marker  the marker.
+     * @param layer  the layer (foreground or background).
+     * @param notify  notify listeners?
+     * 
+     * @since 1.0.10
+     */
+    public void addDomainMarker(int index, Marker marker, Layer layer, 
+    		boolean notify) {
         if (marker == null) {
             throw new IllegalArgumentException("Null 'marker' not permitted.");
         }
@@ -2186,7 +2208,9 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             markers.add(marker);
         }
         marker.addChangeListener(this);
-        notifyListeners(new PlotChangeEvent(this));
+        if (notify) {
+            notifyListeners(new PlotChangeEvent(this));
+        }
     }
 
     /**
@@ -2234,6 +2258,25 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.7
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer) {
+    	return removeDomainMarker(index, marker, layer, true);
+    }
+
+    /**
+     * Removes a marker for a specific dataset/renderer and, if requested, 
+     * sends a {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param index  the dataset/renderer index.
+     * @param marker  the marker.
+     * @param layer  the layer (foreground or background).
+     * @param notify  notify listeners?
+     *
+     * @return A boolean indicating whether or not the marker was actually 
+     *         removed.
+     *
+     * @since 1.0.10
+     */
+    public boolean removeDomainMarker(int index, Marker marker, Layer layer,
+    		boolean notify) {
         ArrayList markers;
         if (layer == Layer.FOREGROUND) {
             markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
@@ -2244,7 +2287,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                     index));
         }
         boolean removed = markers.remove(marker);
-        if (removed) {
+        if (removed && notify) {
             notifyListeners(new PlotChangeEvent(this));
         }
         return removed;
@@ -2324,6 +2367,25 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #addDomainMarker(int, Marker, Layer)
      */
     public void addRangeMarker(int index, Marker marker, Layer layer) {
+    	addRangeMarker(index, marker, layer, true);
+    }
+    
+    /**
+     * Adds a marker for a specific dataset/renderer and, if requested, sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     * <P>
+     * Typically a marker will be drawn by the renderer as a line perpendicular
+     * to the range axis, however this is entirely up to the renderer.
+     *
+     * @param index  the dataset/renderer index.
+     * @param marker  the marker.
+     * @param layer  the layer (foreground or background).
+     * @param notify  notify listeners?
+     * 
+     * @since 1.0.10
+     */
+    public void addRangeMarker(int index, Marker marker, Layer layer, 
+    		boolean notify) {
         Collection markers;
         if (layer == Layer.FOREGROUND) {
             markers = (Collection) this.foregroundRangeMarkers.get(
@@ -2344,7 +2406,9 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             markers.add(marker);
         }
         marker.addChangeListener(this);
-        notifyListeners(new PlotChangeEvent(this));
+        if (notify) {
+            notifyListeners(new PlotChangeEvent(this));
+        }
     }
 
     /**
@@ -2427,6 +2491,25 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.7
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer) {
+    	return removeRangeMarker(index, marker, layer, true);
+    }
+    
+    /**
+     * Removes a marker for a specific dataset/renderer and sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param index  the dataset/renderer index.
+     * @param marker  the marker.
+     * @param layer  the layer (foreground or background).
+     * @param notify  notify listeners?
+     *
+     * @return A boolean indicating whether or not the marker was actually 
+     *         removed.
+     *
+     * @since 1.0.10
+     */
+    public boolean removeRangeMarker(int index, Marker marker, Layer layer,
+    		boolean notify) {
         if (marker == null) {
             throw new IllegalArgumentException("Null 'marker' argument.");
         }
@@ -2441,7 +2524,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
 
         boolean removed = markers.remove(marker);
-        if (removed) {
+        if (removed && notify) {
             notifyListeners(new PlotChangeEvent(this));
         }
         return removed;
@@ -2457,11 +2540,26 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #removeAnnotation(XYAnnotation)
      */
     public void addAnnotation(XYAnnotation annotation) {
+        addAnnotation(annotation, true);	
+    }
+    
+    /**
+     * Adds an annotation to the plot and, if requested, sends a 
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param annotation  the annotation (<code>null</code> not permitted).
+     * @param notify  notify listeners?
+     * 
+     * @since 1.0.10
+     */
+    public void addAnnotation(XYAnnotation annotation, boolean notify) {
         if (annotation == null) {
             throw new IllegalArgumentException("Null 'annotation' argument.");
         }
         this.annotations.add(annotation);
-        notifyListeners(new PlotChangeEvent(this));
+        if (notify) {
+            notifyListeners(new PlotChangeEvent(this));
+        }
     }
 
     /**
@@ -2476,11 +2574,26 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #getAnnotations()
      */
     public boolean removeAnnotation(XYAnnotation annotation) {
+    	return removeAnnotation(annotation, true);
+    }
+
+    /**
+     * Removes an annotation from the plot and sends a {@link PlotChangeEvent}
+     * to all registered listeners.
+     *
+     * @param annotation  the annotation (<code>null</code> not permitted).
+     * @param notify  notify listeners?
+     * 
+     * @return A boolean (indicates whether or not the annotation was removed).
+     * 
+     * @since 1.0.10
+     */
+    public boolean removeAnnotation(XYAnnotation annotation, boolean notify) {
         if (annotation == null) {
             throw new IllegalArgumentException("Null 'annotation' argument.");
         }
         boolean removed = this.annotations.remove(annotation);
-        if (removed) {
+        if (removed && notify) {
             notifyListeners(new PlotChangeEvent(this));
         }
         return removed;
