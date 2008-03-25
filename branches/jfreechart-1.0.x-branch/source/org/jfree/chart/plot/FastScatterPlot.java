@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * FastScatterPlot.java
  * --------------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Arnaud Lelievre;
@@ -55,6 +55,7 @@
  * 10-Nov-2006 : Fixed bug 1593150, by not allowing null axes, and added
  *               setDomainAxis() and setRangeAxis() methods (DG);
  * 24-Sep-2007 : Implemented new zooming methods (DG);
+ * 25-Mar-2008 : Make use of new fireChangeEvent() method (DG);
  *
  */
 
@@ -231,7 +232,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      */
     public void setData(float[][] data) {
         this.data = data;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -269,7 +270,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'axis' argument.");
         }
         this.domainAxis = axis;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -298,7 +299,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'axis' argument.");
         }
         this.rangeAxis = axis;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -326,7 +327,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.paint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -354,7 +355,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     public void setDomainGridlinesVisible(boolean visible) {
         if (this.domainGridlinesVisible != visible) {
             this.domainGridlinesVisible = visible;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -383,7 +384,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.domainGridlineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -411,7 +412,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.domainGridlinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -438,7 +439,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     public void setRangeGridlinesVisible(boolean visible) {
         if (this.rangeGridlinesVisible != visible) {
             this.rangeGridlinesVisible = visible;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -467,7 +468,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.rangeGridlineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -495,7 +496,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.rangeGridlinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
