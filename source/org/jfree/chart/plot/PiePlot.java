@@ -654,7 +654,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setStartAngle(double angle) {
         this.startAngle = angle;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -682,7 +682,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'direction' argument.");
         }
         this.direction = direction;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
 
     }
 
@@ -717,7 +717,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
         if (this.interiorGap != percent) {
             this.interiorGap = percent;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
 
     }
@@ -758,7 +758,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     public void setCircular(boolean circular, boolean notify) {
         this.circular = circular;
         if (notify) {
-            notifyListeners(new PlotChangeEvent(this));   
+            fireChangeEvent();   
         }
     }
 
@@ -787,7 +787,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setIgnoreNullValues(boolean flag) {
         this.ignoreNullValues = flag;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -815,7 +815,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setIgnoreZeroValues(boolean flag) {
         this.ignoreZeroValues = flag;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     //// SECTION PAINT ////////////////////////////////////////////////////////
@@ -918,7 +918,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setSectionPaint(Paint paint) {
         this.sectionPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -986,7 +986,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     public void setSectionPaint(Comparable key, Paint paint) {
         // null argument check delegated...
         this.sectionPaintMap.put(key, paint);
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1014,7 +1014,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'paint' argument.");   
         }
         this.baseSectionPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     //// SECTION OUTLINE PAINT ////////////////////////////////////////////////
@@ -1043,7 +1043,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setSectionOutlinesVisible(boolean visible) {
         this.sectionOutlinesVisible = visible;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1147,7 +1147,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setSectionOutlinePaint(Paint paint) {
         this.sectionOutlinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1188,7 +1188,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     public void setSectionOutlinePaint(Comparable key, Paint paint) {
         // null argument check delegated...
         this.sectionOutlinePaintMap.put(key, paint);
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1215,7 +1215,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'paint' argument.");   
         }
         this.baseSectionOutlinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     //// SECTION OUTLINE STROKE ///////////////////////////////////////////////
@@ -1321,7 +1321,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setSectionOutlineStroke(Stroke stroke) {
         this.sectionOutlineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1362,7 +1362,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     public void setSectionOutlineStroke(Comparable key, Stroke stroke) {
         // null argument check delegated...
         this.sectionOutlineStrokeMap.put(key, stroke);
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1389,7 +1389,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'stroke' argument.");   
         }
         this.baseSectionOutlineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1413,7 +1413,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setShadowPaint(Paint paint) {
         this.shadowPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1437,7 +1437,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setShadowXOffset(double offset) {
         this.shadowXOffset = offset;   
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1461,7 +1461,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setShadowYOffset(double offset) {
         this.shadowYOffset = offset;   
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1510,7 +1510,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             this.explodePercentages = new TreeMap();
         }
         this.explodePercentages.put(key, new Double(percent));
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1555,7 +1555,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelGenerator(PieSectionLabelGenerator generator) {
         this.labelGenerator = generator;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1581,7 +1581,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelGap(double gap) {
         this.labelGap = gap;   
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1605,7 +1605,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setMaximumLabelWidth(double width) {
         this.maximumLabelWidth = width;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1633,7 +1633,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelLinksVisible(boolean visible) {
         this.labelLinksVisible = visible;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1658,7 +1658,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelLinkMargin(double margin) {
         this.labelLinkMargin = margin;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1687,7 +1687,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.labelLinkPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1714,7 +1714,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.labelLinkStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1741,7 +1741,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'font' argument.");
         }
         this.labelFont = font;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1768,7 +1768,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.labelPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1792,7 +1792,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelBackgroundPaint(Paint paint) {
         this.labelBackgroundPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1816,7 +1816,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelOutlinePaint(Paint paint) {
         this.labelOutlinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1840,7 +1840,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelOutlineStroke(Stroke stroke) {
         this.labelOutlineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1864,7 +1864,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelShadowPaint(Paint paint) {
         this.labelShadowPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1895,7 +1895,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'padding' argument.");
         }
         this.labelPadding = padding;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1921,7 +1921,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setSimpleLabels(boolean simple) {
         this.simpleLabels = simple;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -1952,7 +1952,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'offset' argument.");
         }
         this.simpleLabelOffset = offset;
-        notifyListeners(new PlotChangeEvent(this));        
+        fireChangeEvent();        
     }
     
     /**
@@ -1980,7 +1980,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'distributor' argument.");
         }
         this.labelDistributor = distributor;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -2007,7 +2007,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setToolTipGenerator(PieToolTipGenerator generator) {
         this.toolTipGenerator = generator;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -2031,7 +2031,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setURLGenerator(PieURLGenerator generator) {
         this.urlGenerator = generator;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -2092,7 +2092,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'shape' argument.");
         }
         this.legendItemShape = shape;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -2119,7 +2119,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'generator' argument.");
         }
         this.legendLabelGenerator = generator;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -2144,7 +2144,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     public void setLegendLabelToolTipGenerator(
             PieSectionLabelGenerator generator) {
         this.legendLabelToolTipGenerator = generator;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -2172,7 +2172,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setLegendLabelURLGenerator(PieURLGenerator generator) {
         this.legendLabelURLGenerator = generator;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**

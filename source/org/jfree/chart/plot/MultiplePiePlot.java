@@ -215,7 +215,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
                     + "be a chart based on a PiePlot.");
         }
         this.pieChart = pieChart;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -238,7 +238,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'order' argument");
         }
         this.dataExtractOrder = order;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -259,7 +259,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      */
     public void setLimit(double limit) {
         this.limit = limit;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -287,7 +287,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'key' argument.");
         }
         this.aggregatedItemsKey = key;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -315,7 +315,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.aggregatedItemsPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**

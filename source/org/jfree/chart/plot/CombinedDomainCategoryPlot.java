@@ -138,7 +138,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      */
     public void setGap(double gap) {
         this.gap = gap;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -183,7 +183,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         if (axis != null) {
             axis.configure();
         }
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -217,7 +217,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
             if (domain != null) {
                 domain.configure();
             }
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 

@@ -295,7 +295,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      */
     public void setColorBarLocation(RectangleEdge edge) {
         this.colorBarLocation = edge;
-        notifyListeners(new PlotChangeEvent(this));    
+        fireChangeEvent();   
     }
     
     /**
@@ -369,7 +369,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
             }
 
             this.domainAxis = axis;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
 
         }
 
@@ -409,7 +409,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
         }
 
         this.rangeAxis = axis;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
 
     }
 
@@ -421,7 +421,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     public void setColorBarAxis(ColorBar axis) {
 
         this.colorBar = axis;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
 
     }
 
@@ -457,7 +457,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
             this.domainMarkers = new java.util.ArrayList();
         }
         this.domainMarkers.add(marker);
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
 
     }
 
@@ -467,7 +467,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     public void clearDomainMarkers() {
         if (this.domainMarkers != null) {
             this.domainMarkers.clear();
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -485,7 +485,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
             this.rangeMarkers = new java.util.ArrayList();
         }
         this.rangeMarkers.add(marker);
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
 
     }
 
@@ -495,7 +495,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     public void clearRangeMarkers() {
         if (this.rangeMarkers != null) {
             this.rangeMarkers.clear();
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -510,7 +510,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
             this.annotations = new java.util.ArrayList();
         }
         this.annotations.add(annotation);
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
 
     }
 
@@ -520,7 +520,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     public void clearAnnotations() {
         if (this.annotations != null) {
             this.annotations.clear();
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1265,7 +1265,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * @param event  Information about the property change.
      */
     public void propertyChange(PropertyChangeEvent event) {
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1316,7 +1316,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
 
         if (this.domainCrosshairVisible != flag) {
             this.domainCrosshairVisible = flag;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
 
     }
@@ -1340,7 +1340,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     public void setDomainCrosshairLockedOnData(boolean flag) {
         if (this.domainCrosshairLockedOnData != flag) {
             this.domainCrosshairLockedOnData = flag;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1378,7 +1378,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     public void setDomainCrosshairValue(double value, boolean notify) {
         this.domainCrosshairValue = value;
         if (isDomainCrosshairVisible() && notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1399,7 +1399,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      */
     public void setDomainCrosshairStroke(Stroke stroke) {
         this.domainCrosshairStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1419,7 +1419,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      */
     public void setDomainCrosshairPaint(Paint paint) {
         this.domainCrosshairPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1439,7 +1439,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     public void setRangeCrosshairVisible(boolean flag) {
         if (this.rangeCrosshairVisible != flag) {
             this.rangeCrosshairVisible = flag;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1462,7 +1462,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     public void setRangeCrosshairLockedOnData(boolean flag) {
         if (this.rangeCrosshairLockedOnData != flag) {
             this.rangeCrosshairLockedOnData = flag;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1500,7 +1500,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     public void setRangeCrosshairValue(double value, boolean notify) {
         this.rangeCrosshairValue = value;
         if (isRangeCrosshairVisible() && notify) {
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1521,7 +1521,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      */
     public void setRangeCrosshairStroke(Stroke stroke) {
         this.rangeCrosshairStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1541,7 +1541,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      */
     public void setRangeCrosshairPaint(Paint paint) {
         this.rangeCrosshairPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

@@ -480,8 +480,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         axis.setPlot(this);
         axis.addChangeListener(this);
         this.rangeAxis = axis;
-        notifyListeners(new PlotChangeEvent(this));
-
+        fireChangeEvent();
     }
 
     /**
@@ -569,7 +568,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'padding' argument.");
         }
         this.padding = padding;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -595,7 +594,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     public void setThermometerStroke(Stroke s) {
         if (s != null) {
             this.thermometerStroke = s;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -622,7 +621,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     public void setThermometerPaint(Paint paint) {
         if (paint != null) {
             this.thermometerPaint = paint;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -658,7 +657,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if ((u >= 0) && (u < UNITS.length)) {
             if (this.units != u) {
                 this.units = u;
-                notifyListeners(new PlotChangeEvent(this));
+                fireChangeEvent();
             }
         }
     }
@@ -711,7 +710,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     public void setValueLocation(int location) {
         if ((location >= 0) && (location < 4)) {
             this.valueLocation = location;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
         else {
             throw new IllegalArgumentException("Location not recognised.");
@@ -743,7 +742,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     public void setAxisLocation(int location) {
         if ((location >= 0) && (location < 3)) {
             this.axisLocation = location;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
         else {
             throw new IllegalArgumentException("Location not recognised.");
@@ -774,7 +773,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         }
         if (!this.valueFont.equals(f)) {
             this.valueFont = f;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -803,7 +802,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         }
         if (!this.valuePaint.equals(paint)) {
             this.valuePaint = paint;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -820,7 +819,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'formatter' argument.");
         }
         this.valueFormat = formatter;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -847,7 +846,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.mercuryPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -876,7 +875,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      */
     public void setShowValueLines(boolean b) {
         this.showValueLines = b;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -907,7 +906,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
             setSubrange(range, rangeLow, rangeHigh);
             setDisplayRange(range, displayLow, displayHigh);
             setAxisRange();
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
 
     }
@@ -982,7 +981,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if ((range >= 0) 
                 && (range < this.subrangePaint.length) && (paint != null)) {
             this.subrangePaint[range] = paint;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1004,7 +1003,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      */
     public void setFollowDataInSubranges(boolean flag) {
         this.followDataInSubranges = flag;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1028,7 +1027,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      */
     public void setUseSubrangePaint(boolean flag) {
         this.useSubrangePaint = flag;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1054,7 +1053,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      */
     public void setBulbRadius(int r) {
         this.bulbRadius = r;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1094,7 +1093,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      */
     public void setColumnRadius(int r) {
         this.columnRadius = r;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1136,7 +1135,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      */
     public void setGap(int gap) {
         this.gap = gap;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
