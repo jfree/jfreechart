@@ -276,7 +276,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
             double barX1 = barX0 + seriesBarWidth;
             double rx = Math.min(barX0, barX1);
             double rw = Math.abs(barX1 - barX0);
-            double ry = Math.min(yy0, yy1);;
+            double ry = Math.min(yy0, yy1);
             double rh = intervalH;
             bar = new Rectangle2D.Double(rx, ry, rw, rh);
         }
