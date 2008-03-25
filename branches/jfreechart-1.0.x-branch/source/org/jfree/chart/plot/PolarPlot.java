@@ -243,7 +243,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'text' argument.");
         }
         this.cornerTextItems.add(text);
-        this.notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
    
     /**
@@ -257,7 +257,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void removeCornerTextItem(String text) {
         boolean removed = this.cornerTextItems.remove(text);
         if (removed) {
-            this.notifyListeners(new PlotChangeEvent(this));        
+            fireChangeEvent();        
         }
     }
    
@@ -271,7 +271,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void clearCornerTextItems() {
         if (this.cornerTextItems.size() > 0) {
             this.cornerTextItems.clear();
-            this.notifyListeners(new PlotChangeEvent(this));        
+            fireChangeEvent();        
         }
     }
    
@@ -316,7 +316,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             this.axis.configure();
             this.axis.addChangeListener(this);
         }
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
    
     /**
@@ -388,8 +388,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (this.renderer != null) {
             this.renderer.setPlot(this);
         }
-       
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
    
     /**
@@ -417,7 +416,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     		throw new IllegalArgumentException("Null 'unit' argument.");
     	}
         this.angleTickUnit = unit;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -442,7 +441,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setAngleLabelsVisible(boolean visible) {
         if (this.angleLabelsVisible != visible) {
             this.angleLabelsVisible = visible;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
     
@@ -470,7 +469,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'font' argument.");   
         }
         this.angleLabelFont = font;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -495,7 +494,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.angleLabelPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -524,7 +523,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setAngleGridlinesVisible(boolean visible) {
         if (this.angleGridlinesVisible != visible) {
             this.angleGridlinesVisible = visible;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
    
@@ -552,7 +551,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setAngleGridlineStroke(Stroke stroke) {
         this.angleGridlineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -578,7 +577,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setAngleGridlinePaint(Paint paint) {
         this.angleGridlinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -607,7 +606,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     public void setRadiusGridlinesVisible(boolean visible) {
         if (this.radiusGridlinesVisible != visible) {
             this.radiusGridlinesVisible = visible;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
    
@@ -635,7 +634,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setRadiusGridlineStroke(Stroke stroke) {
         this.radiusGridlineStroke = stroke;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -662,7 +661,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setRadiusGridlinePaint(Paint paint) {
         this.radiusGridlinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -940,7 +939,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @param event  information about the property change.
      */
     public void rendererChanged(RendererChangeEvent event) {
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
    
     /**

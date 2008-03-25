@@ -276,7 +276,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             throw new IllegalArgumentException("Null 'shape' argument.");
         }
         this.shape = shape;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -305,7 +305,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
                     + ")");
         }
         this.meterAngle = angle;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -337,7 +337,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
                     "Range length must be positive.");
         }
         this.range = range;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -364,7 +364,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             throw new IllegalArgumentException("Requires 'size' > 0.");
         }
         this.tickSize = size;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -392,7 +392,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.tickPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -416,7 +416,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      */
     public void setUnits(String units) {
         this.units = units;    
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
         
     /**
@@ -443,7 +443,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.needlePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -468,7 +468,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     public void setTickLabelsVisible(boolean visible) {
         if (this.tickLabelsVisible != visible) {
             this.tickLabelsVisible = visible;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -497,7 +497,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         }
         if (!this.tickLabelFont.equals(font)) {
             this.tickLabelFont = font;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -526,7 +526,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         }
         if (!this.tickLabelPaint.equals(paint)) {
             this.tickLabelPaint = paint;
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -554,7 +554,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             throw new IllegalArgumentException("Null 'format' argument.");   
         }
         this.tickLabelFormat = format;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -581,7 +581,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             throw new IllegalArgumentException("Null 'font' argument.");
         }
         this.valueFont = font;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -608,7 +608,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.valuePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -632,7 +632,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      */
     public void setDialBackgroundPaint(Paint paint) {
         this.dialBackgroundPaint = paint;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -659,7 +659,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     public void setDrawBorder(boolean draw) {
         // TODO: fix output when this flag is set to true
         this.drawBorder = draw;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -683,7 +683,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      */
     public void setDialOutlinePaint(Paint paint) {
         this.dialOutlinePaint = paint;
-        notifyListeners(new PlotChangeEvent(this));        
+        fireChangeEvent();        
     }
 
     /**
@@ -752,7 +752,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             throw new IllegalArgumentException("Null 'interval' argument.");
         }
         this.intervals.add(interval);
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
@@ -763,7 +763,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      */
     public void clearIntervals() {
         this.intervals.clear();
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**

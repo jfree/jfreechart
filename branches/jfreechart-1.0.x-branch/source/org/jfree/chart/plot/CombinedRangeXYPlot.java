@@ -231,7 +231,7 @@ public class CombinedRangeXYPlot extends XYPlot
         // keep track of total weights
         this.totalWeight += weight;
         configureRangeAxes();
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
 
     }
 
@@ -259,7 +259,7 @@ public class CombinedRangeXYPlot extends XYPlot
             subplot.removeChangeListener(this);
             this.totalWeight -= subplot.getWeight();
             configureRangeAxes();
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 

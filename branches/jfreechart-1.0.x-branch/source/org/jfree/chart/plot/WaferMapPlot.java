@@ -208,18 +208,14 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      * @param renderer  the new renderer (<code>null</code> permitted).
      */
     public void setRenderer(WaferMapRenderer renderer) {
-
         if (this.renderer != null) {
             this.renderer.removeChangeListener(this);
         }
-
         this.renderer = renderer;
         if (renderer != null) {
             renderer.setPlot(this);
         }
-
-        notifyListeners(new PlotChangeEvent(this));
-
+        fireChangeEvent();
     }
     
     /**
@@ -427,7 +423,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      * @param event  the event.
      */
     public void rendererChanged(RendererChangeEvent event) {
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
 }

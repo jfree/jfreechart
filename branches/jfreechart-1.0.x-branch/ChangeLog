@@ -1,5 +1,24 @@
 2008-03-25  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java
+    * source/org/jfree/chart/plot/CombinedDomainXYPlot.java
+    * source/org/jfree/chart/plot/CombinedRangeCategoryPlot.java
+    * source/org/jfree/chart/plot/CombinedRangeXYPlot.java
+    * source/org/jfree/chart/plot/CompassPlot.java
+    * source/org/jfree/chart/plot/ContourPlot.java
+    * source/org/jfree/chart/plot/MeterPlot.java
+    * source/org/jfree/chart/plot/MultiplePiePlot.java
+    * source/org/jfree/chart/plot/PiePlot.java
+    * source/org/jfree/chart/plot/PiePlot3D.java
+    * source/org/jfree/chart/plot/PolarPlot.java
+    * source/org/jfree/chart/plot/RingPlot.java
+    * source/org/jfree/chart/plot/SpiderWebPlot.java
+    * source/org/jfree/chart/plot/ThermometerPlot.java
+    * source/org/jfree/chart/plot/WaferMapPlot.java
+    Use fireChangeEvent() method all over.
+
+2008-03-25  David Gilbert  <david.gilbert@object-refinery.com>
+
     Patch 1914411:
     * source/org/jfree/chart/plot/Plot.java
     (fireChangeEvent): New method,

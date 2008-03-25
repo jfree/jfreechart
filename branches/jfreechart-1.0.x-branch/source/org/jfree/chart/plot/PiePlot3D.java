@@ -174,7 +174,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
      */
     public void setDepthFactor(double factor) {
         this.depthFactor = factor;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -207,7 +207,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
      */
     public void setDarkerSides(boolean darker) {
         this.darkerSides = darker;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**

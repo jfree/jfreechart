@@ -229,7 +229,7 @@ public class CombinedDomainXYPlot extends XYPlot
      */
     public void setGap(double gap) {
         this.gap = gap;
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -282,9 +282,7 @@ public class CombinedDomainXYPlot extends XYPlot
         if (axis != null) {
             axis.configure();
         }
-        
-        notifyListeners(new PlotChangeEvent(this));
-
+        fireChangeEvent();
     }
 
     /**
@@ -316,7 +314,7 @@ public class CombinedDomainXYPlot extends XYPlot
             if (domain != null) {
                 domain.configure();
             }
-            notifyListeners(new PlotChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -595,7 +593,7 @@ public class CombinedDomainXYPlot extends XYPlot
     public void setFixedRangeAxisSpace(AxisSpace space) {
         super.setFixedRangeAxisSpace(space);
         setFixedRangeAxisSpaceForSubplots(space);
-        notifyListeners(new PlotChangeEvent(this));
+        fireChangeEvent();
     }
     
     /**
