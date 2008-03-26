@@ -88,7 +88,7 @@ public class CustomXYItemLabelGeneratorTests extends TestCase {
             g2 = (CustomXYToolTipGenerator) g1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -122,13 +122,12 @@ public class CustomXYItemLabelGeneratorTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             g2 = (CustomXYToolTipGenerator) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(g1, g2);
 

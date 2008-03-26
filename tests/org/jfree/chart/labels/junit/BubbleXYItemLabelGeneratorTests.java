@@ -154,6 +154,18 @@ public class BubbleXYItemLabelGeneratorTests extends TestCase {
     }
     
     /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+    	BubbleXYItemLabelGenerator g1 
+    	        = new BubbleXYItemLabelGenerator();
+    	BubbleXYItemLabelGenerator g2 
+    	        = new BubbleXYItemLabelGenerator();
+        assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
+    }
+
+    /**
      * Confirm that cloning works.
      */
     public void testCloning() {
@@ -163,7 +175,7 @@ public class BubbleXYItemLabelGeneratorTests extends TestCase {
             g2 = (BubbleXYItemLabelGenerator) g1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Clone failed.");
+            e.printStackTrace();
         }
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -190,7 +202,7 @@ public class BubbleXYItemLabelGeneratorTests extends TestCase {
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(g1, g2);
 
