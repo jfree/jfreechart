@@ -87,6 +87,18 @@ public class SymbolicXYItemLabelGeneratorTests extends TestCase {
     }
     
     /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+    	SymbolicXYItemLabelGenerator g1 
+    	        = new SymbolicXYItemLabelGenerator();
+    	SymbolicXYItemLabelGenerator g2 
+    	        = new SymbolicXYItemLabelGenerator();
+        assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
+    }
+
+    /**
      * Confirm that cloning works.
      */
     public void testCloning() {
@@ -96,7 +108,7 @@ public class SymbolicXYItemLabelGeneratorTests extends TestCase {
             g2 = (SymbolicXYItemLabelGenerator) g1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -117,13 +129,12 @@ public class SymbolicXYItemLabelGeneratorTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             g2 = (SymbolicXYItemLabelGenerator) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(g1, g2);
     }
