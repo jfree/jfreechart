@@ -935,7 +935,7 @@ public class JFreeChart implements Drawable,
      */
     public void setTextAntiAlias(Object val) {
         this.renderingHints.put(RenderingHints.KEY_TEXT_ANTIALIASING, val);
-        this.notifyListeners(new ChartChangeEvent(this));
+        notifyListeners(new ChartChangeEvent(this));
     }
     
     /**
