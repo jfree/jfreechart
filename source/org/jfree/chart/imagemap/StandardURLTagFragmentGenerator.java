@@ -42,7 +42,6 @@
  
 package org.jfree.chart.imagemap;
 
-
 /**
  * Generates URLs using the HTML href attribute for image map area tags.
  */
