@@ -30,7 +30,7 @@
  * (C) Copyright 2007, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);;
+ * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  * Changes
  * -------
@@ -39,7 +39,6 @@
  */
 
 package org.jfree.data.statistics;
-
 
 import java.util.ArrayList;
 import java.util.Collections;

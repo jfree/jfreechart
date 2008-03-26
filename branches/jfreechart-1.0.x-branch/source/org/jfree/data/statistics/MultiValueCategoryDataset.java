@@ -30,7 +30,7 @@
  * (C) Copyright 2007, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);;
+ * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  * Changes
  * -------
@@ -40,9 +40,9 @@
 
 package org.jfree.data.statistics;
 
-import org.jfree.data.category.CategoryDataset;
-
 import java.util.List;
+
+import org.jfree.data.category.CategoryDataset;
 
 /**
  * A category dataset that defines multiple values for each item.
