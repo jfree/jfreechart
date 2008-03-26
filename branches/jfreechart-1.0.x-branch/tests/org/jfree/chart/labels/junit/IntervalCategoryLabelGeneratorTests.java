@@ -86,30 +86,38 @@ public class IntervalCategoryLabelGeneratorTests extends TestCase {
     public void testEquals() {
         
         IntervalCategoryItemLabelGenerator g1 
-            = new IntervalCategoryItemLabelGenerator();
+                = new IntervalCategoryItemLabelGenerator();
         IntervalCategoryItemLabelGenerator g2 
-            = new IntervalCategoryItemLabelGenerator();
+                = new IntervalCategoryItemLabelGenerator();
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
         
-        g1 = new IntervalCategoryItemLabelGenerator(
-            "{3} - {4}", new DecimalFormat("0.000")
-        );
+        g1 = new IntervalCategoryItemLabelGenerator("{3} - {4}", 
+        		new DecimalFormat("0.000"));
         assertFalse(g1.equals(g2));
-        g2 = new IntervalCategoryItemLabelGenerator(
-            "{3} - {4}", new DecimalFormat("0.000")
-        );
+        g2 = new IntervalCategoryItemLabelGenerator("{3} - {4}", 
+        		new DecimalFormat("0.000"));
         assertTrue(g1.equals(g2));
         
-        g1 = new IntervalCategoryItemLabelGenerator(
-            "{3} - {4}", new SimpleDateFormat("d-MMM")
-        );
+        g1 = new IntervalCategoryItemLabelGenerator("{3} - {4}", 
+        		new SimpleDateFormat("d-MMM"));
         assertFalse(g1.equals(g2));
-        g2 = new IntervalCategoryItemLabelGenerator(
-            "{3} - {4}", new SimpleDateFormat("d-MMM")
-        );
+        g2 = new IntervalCategoryItemLabelGenerator("{3} - {4}", 
+        		new SimpleDateFormat("d-MMM"));
         assertTrue(g1.equals(g2));
         
+    }
+
+    /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+    	IntervalCategoryItemLabelGenerator g1 
+    	        = new IntervalCategoryItemLabelGenerator();
+    	IntervalCategoryItemLabelGenerator g2 
+    	        = new IntervalCategoryItemLabelGenerator();
+        assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
     }
 
     /**
@@ -117,13 +125,13 @@ public class IntervalCategoryLabelGeneratorTests extends TestCase {
      */
     public void testCloning() {
         IntervalCategoryItemLabelGenerator g1 
-            = new IntervalCategoryItemLabelGenerator();
+                = new IntervalCategoryItemLabelGenerator();
         IntervalCategoryItemLabelGenerator g2 = null;
         try {
             g2 = (IntervalCategoryItemLabelGenerator) g1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -136,9 +144,8 @@ public class IntervalCategoryLabelGeneratorTests extends TestCase {
     public void testSerialization() {
 
         IntervalCategoryItemLabelGenerator g1 
-            = new IntervalCategoryItemLabelGenerator(
-                "{3} - {4}", DateFormat.getInstance()
-            );
+                = new IntervalCategoryItemLabelGenerator("{3} - {4}", 
+                DateFormat.getInstance());
         IntervalCategoryItemLabelGenerator g2 = null;
 
         try {
@@ -148,13 +155,12 @@ public class IntervalCategoryLabelGeneratorTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             g2 = (IntervalCategoryItemLabelGenerator) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(g1, g2);
 
