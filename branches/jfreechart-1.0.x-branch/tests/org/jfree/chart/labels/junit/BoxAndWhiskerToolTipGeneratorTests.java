@@ -89,30 +89,31 @@ public class BoxAndWhiskerToolTipGeneratorTests extends TestCase {
         assertTrue(g2.equals(g1));
         
         // tooltip format
-        g1 = new BoxAndWhiskerToolTipGenerator(
-            "{0} --> {1} {2}", new DecimalFormat("0.0")
-        );
-        g2 = new BoxAndWhiskerToolTipGenerator(
-            "{1} {2}", new DecimalFormat("0.0")
-        );
+        g1 = new BoxAndWhiskerToolTipGenerator("{0} --> {1} {2}", 
+        		new DecimalFormat("0.0"));
+        g2 = new BoxAndWhiskerToolTipGenerator("{1} {2}", 
+        		new DecimalFormat("0.0"));
         assertFalse(g1.equals(g2));
-        g2 = new BoxAndWhiskerToolTipGenerator(
-            "{0} --> {1} {2}", new DecimalFormat("0.0")
-        );
+        g2 = new BoxAndWhiskerToolTipGenerator("{0} --> {1} {2}", 
+        		new DecimalFormat("0.0"));
         assertTrue(g1.equals(g2));
 
         // Y format
-        g1 = new BoxAndWhiskerToolTipGenerator(
-            "{0} --> {1} {2}", new DecimalFormat("0.0")
-        );
-        g2 = new BoxAndWhiskerToolTipGenerator(
-            "{0} --> {1} {2}", new DecimalFormat("0.00")
-        );
+        g1 = new BoxAndWhiskerToolTipGenerator("{0} --> {1} {2}", 
+        		new DecimalFormat("0.0"));
+        g2 = new BoxAndWhiskerToolTipGenerator("{0} --> {1} {2}", 
+        		new DecimalFormat("0.00"));
         assertFalse(g1.equals(g2));
-        g2 = new BoxAndWhiskerToolTipGenerator(
-            "{0} --> {1} {2}", new DecimalFormat("0.0")
-        );
+    }
+
+    /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+        BoxAndWhiskerToolTipGenerator g1 = new BoxAndWhiskerToolTipGenerator();
+        BoxAndWhiskerToolTipGenerator g2 = new BoxAndWhiskerToolTipGenerator();
         assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
     }
 
     /**
@@ -125,7 +126,7 @@ public class BoxAndWhiskerToolTipGeneratorTests extends TestCase {
             g2 = (BoxAndWhiskerToolTipGenerator) g1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -147,13 +148,12 @@ public class BoxAndWhiskerToolTipGeneratorTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             g2 = (BoxAndWhiskerToolTipGenerator) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(g1, g2);
 
