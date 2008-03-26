@@ -1,3 +1,9 @@
+2008-03-26  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch 1918209:
+    * source/org/jfree/chart/axis/LogAxis.java
+    (createTickLabel): Changed from private to protected.
+
 2008-03-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java

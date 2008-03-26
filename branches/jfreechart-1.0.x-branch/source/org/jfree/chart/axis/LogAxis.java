@@ -44,6 +44,8 @@
  *               right of the chart (DG);
  * 19-Mar-2008 : Applied patch 1902418 by Andrew Mickish to fix bug in tick
  *               labels for vertical axis (DG);
+ * 26-Mar-2008 : Changed createTickLabel() method from private to protected -
+ *               see patch 1918209 by Andrew Mickish (DG);
  * 
  */
 
@@ -831,13 +833,16 @@ public class LogAxis extends ValueAxis {
     }
 
     /**
-     * Creates a tick label for the specified value.
+     * Creates a tick label for the specified value.  Note that this method
+     * was 'private' prior to version 1.0.10.
      * 
      * @param value  the value.
      * 
      * @return The label.
+     *
+     * @since 1.0.10
      */
-    private String createTickLabel(double value) {
+    protected String createTickLabel(double value) {
         if (this.numberFormatOverride != null) {
             return this.numberFormatOverride.format(value);
         }
