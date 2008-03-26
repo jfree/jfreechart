@@ -83,7 +83,7 @@ public class StandardXYSeriesLabelGeneratorTests extends TestCase {
      */
     public void testGenerateLabel() {
         StandardXYSeriesLabelGenerator g 
-            = new StandardXYSeriesLabelGenerator("Series {0}");
+                = new StandardXYSeriesLabelGenerator("Series {0}");
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(new XYSeries("1"));
         dataset.addSeries(new XYSeries("2"));
@@ -106,6 +106,18 @@ public class StandardXYSeriesLabelGeneratorTests extends TestCase {
         assertFalse(g1.equals(g2));
         g2 = new StandardXYSeriesLabelGenerator("{1}");
         assertTrue(g1.equals(g2));        
+    }
+
+    /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+    	StandardXYSeriesLabelGenerator g1 
+    	        = new StandardXYSeriesLabelGenerator();
+    	StandardXYSeriesLabelGenerator g2 
+    	        = new StandardXYSeriesLabelGenerator();
+        assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
     }
 
     /**

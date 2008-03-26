@@ -158,6 +158,18 @@ public class StandardXYZToolTipGeneratorTests extends TestCase {
     }
     
     /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+    	StandardXYZToolTipGenerator g1 
+    	        = new StandardXYZToolTipGenerator();
+    	StandardXYZToolTipGenerator g2 
+    	        = new StandardXYZToolTipGenerator();
+        assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
+    }
+
+    /**
      * Confirm that cloning works.
      */
     public void testCloning() {
@@ -167,7 +179,7 @@ public class StandardXYZToolTipGeneratorTests extends TestCase {
             g2 = (StandardXYZToolTipGenerator) g1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -189,13 +201,12 @@ public class StandardXYZToolTipGeneratorTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             g2 = (StandardXYZToolTipGenerator) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(g1, g2);
 
