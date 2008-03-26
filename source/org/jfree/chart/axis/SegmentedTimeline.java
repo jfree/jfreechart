@@ -631,7 +631,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
                     result = this.segmentsIncludedSize * y 
                              + x - wholeExceptionsBeforeDomainValue 
                              * this.segmentSize;
-                             // - partialTimeInException;; 
+                             // - partialTimeInException;
                 }
                 else {
                     result = this.segmentsIncludedSize * (y + 1) 
