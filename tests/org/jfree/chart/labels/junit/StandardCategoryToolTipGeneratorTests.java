@@ -88,9 +88,9 @@ public class StandardCategoryToolTipGeneratorTests extends TestCase {
     public void testEquals() {
         
         StandardCategoryToolTipGenerator g1 
-            = new StandardCategoryToolTipGenerator();
+                = new StandardCategoryToolTipGenerator();
         StandardCategoryToolTipGenerator g2 
-            = new StandardCategoryToolTipGenerator();
+                = new StandardCategoryToolTipGenerator();
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
         
@@ -118,17 +118,29 @@ public class StandardCategoryToolTipGeneratorTests extends TestCase {
     }
 
     /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+    	StandardCategoryToolTipGenerator g1 
+    	        = new StandardCategoryToolTipGenerator();
+    	StandardCategoryToolTipGenerator g2 
+    	        = new StandardCategoryToolTipGenerator();
+        assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
+    }
+
+    /**
      * Confirm that cloning works.
      */
     public void testCloning() {
         StandardCategoryToolTipGenerator g1 
-            = new StandardCategoryToolTipGenerator();
+                = new StandardCategoryToolTipGenerator();
         StandardCategoryToolTipGenerator g2 = null;
         try {
             g2 = (StandardCategoryToolTipGenerator) g1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -141,8 +153,8 @@ public class StandardCategoryToolTipGeneratorTests extends TestCase {
     public void testSerialization() {
 
         StandardCategoryToolTipGenerator g1 
-            = new StandardCategoryToolTipGenerator("{2}", 
-                    DateFormat.getInstance());
+                = new StandardCategoryToolTipGenerator("{2}", 
+                DateFormat.getInstance());
         StandardCategoryToolTipGenerator g2 = null;
 
         try {
@@ -157,7 +169,7 @@ public class StandardCategoryToolTipGeneratorTests extends TestCase {
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(g1, g2);
 
@@ -168,11 +180,11 @@ public class StandardCategoryToolTipGeneratorTests extends TestCase {
      */
     public void testEquals1481087() {
         StandardCategoryToolTipGenerator g1 
-            = new StandardCategoryToolTipGenerator("{0}", 
-                    new DecimalFormat("0.00"));
+                = new StandardCategoryToolTipGenerator("{0}", 
+                new DecimalFormat("0.00"));
         StandardCategoryItemLabelGenerator g2 
-            = new StandardCategoryItemLabelGenerator("{0}", 
-                    new DecimalFormat("0.00"));
+                = new StandardCategoryItemLabelGenerator("{0}", 
+                new DecimalFormat("0.00"));
         assertFalse(g1.equals(g2));
     }
 

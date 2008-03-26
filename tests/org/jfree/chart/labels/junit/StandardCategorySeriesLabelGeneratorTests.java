@@ -82,7 +82,7 @@ public class StandardCategorySeriesLabelGeneratorTests extends TestCase {
      */
     public void testGenerateLabel() {
         StandardCategorySeriesLabelGenerator g 
-            = new StandardCategorySeriesLabelGenerator("{0}");
+                = new StandardCategorySeriesLabelGenerator("{0}");
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(1.0, "R0", "C0");
         dataset.addValue(2.0, "R0", "C1");
@@ -97,9 +97,9 @@ public class StandardCategorySeriesLabelGeneratorTests extends TestCase {
      */
     public void testEquals() {
         StandardCategorySeriesLabelGenerator g1 
-            = new StandardCategorySeriesLabelGenerator();
+                = new StandardCategorySeriesLabelGenerator();
         StandardCategorySeriesLabelGenerator g2 
-            = new StandardCategorySeriesLabelGenerator();
+                = new StandardCategorySeriesLabelGenerator();
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
         
@@ -110,17 +110,29 @@ public class StandardCategorySeriesLabelGeneratorTests extends TestCase {
     }
 
     /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+    	StandardCategorySeriesLabelGenerator g1 
+    	        = new StandardCategorySeriesLabelGenerator();
+    	StandardCategorySeriesLabelGenerator g2 
+    	        = new StandardCategorySeriesLabelGenerator();
+        assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
+    }
+
+    /**
      * Confirm that cloning works.
      */
     public void testCloning() {
         StandardCategorySeriesLabelGenerator g1 
-            = new StandardCategorySeriesLabelGenerator("{1}");
+                = new StandardCategorySeriesLabelGenerator("{1}");
         StandardCategorySeriesLabelGenerator g2 = null;
         try {
             g2 = (StandardCategorySeriesLabelGenerator) g1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -133,9 +145,8 @@ public class StandardCategorySeriesLabelGeneratorTests extends TestCase {
     public void testSerialization() {
 
         StandardCategorySeriesLabelGenerator g1
-            = new StandardCategorySeriesLabelGenerator("{2}");
+                = new StandardCategorySeriesLabelGenerator("{2}");
         StandardCategorySeriesLabelGenerator g2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -148,10 +159,9 @@ public class StandardCategorySeriesLabelGeneratorTests extends TestCase {
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(g1, g2);
-
     }
 
 }

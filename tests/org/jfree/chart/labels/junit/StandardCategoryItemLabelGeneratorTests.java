@@ -88,8 +88,8 @@ public class StandardCategoryItemLabelGeneratorTests extends TestCase {
      */
     public void testGenerateLabel() {
         StandardCategoryItemLabelGenerator g 
-            = new StandardCategoryItemLabelGenerator("{2}", 
-                    new DecimalFormat("0.000"));
+                = new StandardCategoryItemLabelGenerator("{2}", 
+                new DecimalFormat("0.000"));
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(1.0, "R0", "C0");
         dataset.addValue(2.0, "R0", "C1");
@@ -109,9 +109,9 @@ public class StandardCategoryItemLabelGeneratorTests extends TestCase {
     public void testEquals() {
         
         StandardCategoryItemLabelGenerator g1 
-            = new StandardCategoryItemLabelGenerator();
+                = new StandardCategoryItemLabelGenerator();
         StandardCategoryItemLabelGenerator g2 
-            = new StandardCategoryItemLabelGenerator();
+                = new StandardCategoryItemLabelGenerator();
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
         
@@ -139,17 +139,29 @@ public class StandardCategoryItemLabelGeneratorTests extends TestCase {
     }
 
     /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+    	StandardCategoryItemLabelGenerator g1 
+    	        = new StandardCategoryItemLabelGenerator();
+    	StandardCategoryItemLabelGenerator g2 
+    	        = new StandardCategoryItemLabelGenerator();
+        assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
+    }
+
+    /**
      * Confirm that cloning works.
      */
     public void testCloning() {
         StandardCategoryItemLabelGenerator g1 
-            = new StandardCategoryItemLabelGenerator();
+                = new StandardCategoryItemLabelGenerator();
         StandardCategoryItemLabelGenerator g2 = null;
         try {
             g2 = (StandardCategoryItemLabelGenerator) g1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -162,8 +174,8 @@ public class StandardCategoryItemLabelGeneratorTests extends TestCase {
     public void testSerialization() {
 
         StandardCategoryItemLabelGenerator g1
-            = new StandardCategoryItemLabelGenerator("{2}", 
-                    DateFormat.getInstance());
+                = new StandardCategoryItemLabelGenerator("{2}", 
+                DateFormat.getInstance());
         StandardCategoryItemLabelGenerator g2 = null;
 
         try {
@@ -178,7 +190,7 @@ public class StandardCategoryItemLabelGeneratorTests extends TestCase {
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(g1, g2);
 
@@ -189,11 +201,11 @@ public class StandardCategoryItemLabelGeneratorTests extends TestCase {
      */
     public void testEquals1481087() {
         StandardCategoryItemLabelGenerator g1 
-            = new StandardCategoryItemLabelGenerator("{0}", 
-                    new DecimalFormat("0.00"));
+                = new StandardCategoryItemLabelGenerator("{0}", 
+                new DecimalFormat("0.00"));
         StandardCategoryToolTipGenerator g2 
-            = new StandardCategoryToolTipGenerator("{0}", 
-                    new DecimalFormat("0.00"));
+                = new StandardCategoryToolTipGenerator("{0}", 
+                new DecimalFormat("0.00"));
         assertFalse(g1.equals(g2));
     }
 

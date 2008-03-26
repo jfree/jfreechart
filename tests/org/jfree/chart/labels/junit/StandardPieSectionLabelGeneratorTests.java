@@ -87,9 +87,9 @@ public class StandardPieSectionLabelGeneratorTests extends TestCase {
      */
     public void testEquals() {
         StandardPieSectionLabelGenerator g1 
-            = new StandardPieSectionLabelGenerator();
+                = new StandardPieSectionLabelGenerator();
         StandardPieSectionLabelGenerator g2 
-            = new StandardPieSectionLabelGenerator();
+                = new StandardPieSectionLabelGenerator();
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
         
@@ -132,6 +132,18 @@ public class StandardPieSectionLabelGeneratorTests extends TestCase {
         assertTrue(g1.equals(g2)); 
     }
     
+    /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+    	StandardPieSectionLabelGenerator g1 
+    	        = new StandardPieSectionLabelGenerator();
+    	StandardPieSectionLabelGenerator g2 
+    	        = new StandardPieSectionLabelGenerator();
+        assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
+    }
+
     /**
      * Confirm that cloning works.
      */

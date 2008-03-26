@@ -127,6 +127,18 @@ public class StandardPieToolTipGeneratorTests extends TestCase {
     }
     
     /**
+     * Simple check that hashCode is implemented.
+     */
+    public void testHashCode() {
+    	StandardPieToolTipGenerator g1 
+    	        = new StandardPieToolTipGenerator();
+    	StandardPieToolTipGenerator g2 
+    	        = new StandardPieToolTipGenerator();
+        assertTrue(g1.equals(g2));
+        assertTrue(g1.hashCode() == g2.hashCode());
+    }
+
+    /**
      * Some checks for cloning.
      */
     public void testCloning() {
@@ -136,7 +148,7 @@ public class StandardPieToolTipGeneratorTests extends TestCase {
             g2 = (StandardPieToolTipGenerator) g1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
