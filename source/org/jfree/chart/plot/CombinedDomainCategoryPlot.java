@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * CombinedDomainCategoryPlot.java
  * -------------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -53,6 +53,8 @@
  * 30-Oct-2006 : Added new getCategoriesForAxis() override (DG);
  * 17-Apr-2007 : Added null argument checks to findSubplot() (DG);
  * 14-Nov-2007 : Updated setFixedRangeAxisSpaceForSubplots() method (DG);
+ * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -60,7 +62,6 @@ package org.jfree.chart.plot;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -69,21 +70,19 @@ import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.AxisSpace;
 import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
+import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A combined category plot where the domain axis is shared.
  */
 public class CombinedDomainCategoryPlot extends CategoryPlot
-                                        implements Zoomable,
-                                                   Cloneable, PublicCloneable, 
-                                                   Serializable,
-                                                   PlotChangeListener {
+        implements PlotChangeListener {
 
     /** For serialization. */
     private static final long serialVersionUID = 8207194522653701572L;
@@ -488,6 +487,25 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     }
     
     /**
+     * Returns a range representing the extent of the data values in this plot
+     * (obtained from the subplots) that will be rendered against the specified 
+     * axis.  NOTE: This method is intended for internal JFreeChart use, and 
+     * is public only so that code in the axis classes can call it.  Since,
+     * for this class, the domain axis is a {@link CategoryAxis} 
+     * (not a <code>ValueAxis</code}) and subplots have independent range axes,
+     * the JFreeChart code will never call this method (although this is not 
+     * checked/enforced).
+      *
+      * @param axis  the axis.
+      *
+      * @return The range.
+      */
+     public Range getDataRange(ValueAxis axis) {
+    	 // override is only for documentation purposes
+         return super.getDataRange(axis);
+     }
+
+     /**
      * Returns a collection of legend items for the plot.
      *
      * @return The legend items.
