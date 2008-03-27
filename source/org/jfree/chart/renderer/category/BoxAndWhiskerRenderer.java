@@ -69,6 +69,7 @@
  *               methods (RVdS);
  * 14-Feb-2008 : Fix bar position for horizontal chart, see patch 
  *               1888422 (RVdS);
+ * 27-Mar-2008 : Boxes should use outlinePaint/Stroke settings (DG);
  *
  */
 
@@ -371,7 +372,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @param plot  the plot.
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param dataset  the data.
+     * @param dataset  the data (must be an instance of 
+     *                 {@link BoxAndWhiskerCategoryDataset}).
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
@@ -417,7 +419,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *              information etc).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param dataset  the dataset.
+     * @param dataset  the dataset (must be an instance of 
+     *                 {@link BoxAndWhiskerCategoryDataset}).
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      */
@@ -461,10 +464,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             yy = yy + offset;
         }
 
-        Paint p = getItemPaint(row, column);
-        if (p != null) {
-            g2.setPaint(p);
-        }
+        g2.setPaint(getItemPaint(row, column));
         Stroke s = getItemStroke(row, column);
         g2.setStroke(s);
 
@@ -504,8 +504,9 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             if (this.fillBox) {
                 g2.fill(box);
             } 
+            g2.setStroke(getItemOutlineStroke(row, column));
+            g2.setPaint(getItemOutlinePaint(row, column));
             g2.draw(box);
-
         }
 
         g2.setPaint(this.artifactPaint);
@@ -558,7 +559,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *              etc).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param dataset  the dataset.
+     * @param dataset  the dataset (must be an instance of 
+     *                 {@link BoxAndWhiskerCategoryDataset}).
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      */
@@ -605,10 +607,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         double yyAverage = 0.0;
         double yyOutlier;
 
-        Paint p = getItemPaint(row, column);
-        if (p != null) {
-            g2.setPaint(p);
-        }
+        Paint itemPaint = getItemPaint(row, column);
+        g2.setPaint(itemPaint);
         Stroke s = getItemStroke(row, column);
         g2.setStroke(s);
 
@@ -649,8 +649,9 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             if (this.fillBox) {
                 g2.fill(box);
             }
+            g2.setStroke(getItemOutlineStroke(row, column));
+            g2.setPaint(getItemOutlinePaint(row, column));
             g2.draw(box);
-  
         }
         
         g2.setPaint(this.artifactPaint);
@@ -687,7 +688,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         double minAxisValue = rangeAxis.valueToJava2D(
                 rangeAxis.getLowerBound(), dataArea, location) - aRadius;
 
-        g2.setPaint(p);
+        g2.setPaint(itemPaint);
 
         // draw outliers
         double oRadius = state.getBarWidth() / 3;    // outlier radius
