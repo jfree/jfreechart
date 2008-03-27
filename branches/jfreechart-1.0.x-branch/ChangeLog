@@ -1,3 +1,13 @@
+2008-03-27  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
+    (drawHorizontalItem): Draw box outline using itemOutlinePaint/Stroke,
+    (drawVerticalItem): Likewise,
+    * source/org/jfree/chart/renderer/xy/XYBoxAndWhiskerRenderer.java
+    (lookupBoxPaint): New method,
+    (drawHorizontalItem): Do lookup for box fill paint,
+    (drawVerticalItem): Likewise.
+
 2008-03-26  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 1918209:

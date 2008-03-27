@@ -69,6 +69,7 @@
  *               plot orientation (DG);
  * 13-Jun-2007 : Replaced deprecated method call (DG);
  * 03-Jan-2008 : Check visibility of average marker before drawing it (DG);
+ * 27-Mar-2008 : If boxPaint is null, revert to itemPaint (DG);
  *
  */
 
@@ -268,6 +269,28 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
         this.artifactPaint = paint;
         fireChangeEvent();
     }
+    
+    /**
+     * Returns the box paint or, if this is <code>null</code>, the item
+     * paint.
+     * 
+     * @param series  the series index.
+     * @param item  the item index.
+     * 
+     * @return The paint used to fill the box for the specified item (never 
+     *         <code>null</code>).
+     */
+    protected Paint lookupBoxPaint(int series, int item) {
+    	Paint p = getBoxPaint();
+    	if (p != null) {
+    		return p;
+    	}
+    	else {
+    		// TODO: could change this to itemFillPaint().  For backwards
+    		// compatibility, it might require a useFillPaint flag.
+    		return getItemPaint(series, item);
+    	}
+    }
 
     /**
      * Draws the visual representation of a single data item.
@@ -280,7 +303,8 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      *              information etc).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param dataset  the dataset.
+     * @param dataset  the dataset (must be an instance of 
+     *                 {@link BoxAndWhiskerXYDataset}).
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot 
@@ -323,7 +347,8 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      *              information etc).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param dataset  the dataset.
+     * @param dataset  the dataset (must be an instance of 
+     *                 {@link BoxAndWhiskerXYDataset}).
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot 
@@ -398,10 +423,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
             }
         }
 
-        Paint p = getBoxPaint();
-        if (p != null) {
-            g2.setPaint(p);
-        }
+        g2.setPaint(getItemPaint(series, item));
         Stroke s = getItemStroke(series, item);
         g2.setStroke(s);
 
@@ -425,12 +447,12 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
             box = new Rectangle2D.Double(yyQ3Median, xx - width / 2, 
                     yyQ1Median - yyQ3Median, width);
         }
-        if (getBoxPaint() != null) {
-            g2.setPaint(getBoxPaint());
-        }
         if (this.fillBox) {
+            g2.setPaint(lookupBoxPaint(series, item));
             g2.fill(box);   
         }
+        g2.setStroke(getItemOutlineStroke(series, item));
+        g2.setPaint(getItemOutlinePaint(series, item));
         g2.draw(box);
 
         // draw median
@@ -472,7 +494,8 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      *              information etc).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param dataset  the dataset.
+     * @param dataset  the dataset (must be an instance of 
+     *                 {@link BoxAndWhiskerXYDataset}).
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot 
@@ -550,12 +573,8 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
             }
         }
 
-        Paint p = getBoxPaint();
-        if (p != null) {
-            g2.setPaint(p);
-        }
+        g2.setPaint(getItemPaint(series, item));
         Stroke s = getItemStroke(series, item);
-
         g2.setStroke(s);
 
         // draw the upper shadow
@@ -579,8 +598,11 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
                     yyQ3Median - yyQ1Median);
         }
         if (this.fillBox) {
+            g2.setPaint(lookupBoxPaint(series, item));
             g2.fill(box);   
         }
+        g2.setStroke(getItemOutlineStroke(series, item));
+        g2.setPaint(getItemOutlinePaint(series, item));
         g2.draw(box);
 
         // draw median
