@@ -190,7 +190,7 @@ public abstract class Plot implements AxisChangeListener,
 
     /** The default insets. */
     public static final RectangleInsets DEFAULT_INSETS 
-        = new RectangleInsets(4.0, 8.0, 4.0, 8.0);
+            = new RectangleInsets(4.0, 8.0, 4.0, 8.0);
 
     /** The default outline stroke. */
     public static final Stroke DEFAULT_OUTLINE_STROKE = new BasicStroke(0.5f);
