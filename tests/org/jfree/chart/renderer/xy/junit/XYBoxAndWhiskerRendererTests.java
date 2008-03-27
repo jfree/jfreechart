@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * XYBoxAndWhiskerRendererTests.java
  * ---------------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 22-Oct-2003 : Version 1 (DG);
  * 23-Apr-2004 : Extended testEquals() method (DG);
+ * 27-Mar-2008 : Extended testEquals() some more (DG);
  *
  */
 
@@ -110,6 +111,17 @@ public class XYBoxAndWhiskerRendererTests extends TestCase {
         r1.setFillBox(!r1.getFillBox());
         assertFalse(r1.equals(r2));
         r2.setFillBox(!r2.getFillBox());
+        assertEquals(r1, r2);
+        
+        r1.setBoxPaint(Color.yellow);
+        assertFalse(r1.equals(r2));
+        r2.setBoxPaint(Color.yellow);
+        assertEquals(r1, r2);
+
+        // check boxPaint null also
+        r1.setBoxPaint(null);
+        assertFalse(r1.equals(r2));
+        r2.setBoxPaint(null);
         assertEquals(r1, r2);
         
     }
