@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * DatasetUtilities.java
  * ---------------------
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski (bug fix);
@@ -100,6 +100,7 @@
  *               argument (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 15-Mar-2007 : Added calculateStackTotal() method (DG);
+ * 27-Mar-2008 : Fixed bug in findCumulativeRangeBounds() method (DG);
  * 
  */
 
@@ -1521,7 +1522,7 @@ public final class DatasetUtilities {
         double maximum = 0.0;
         for (int row = 0; row < dataset.getRowCount(); row++) {
             double runningTotal = 0.0;
-            for (int column = 0; column < dataset.getColumnCount() - 1; 
+            for (int column = 0; column <= dataset.getColumnCount() - 1; 
                  column++) {
                 Number n = dataset.getValue(row, column);
                 if (n != null) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * WaterfallBarRenderer.java
  * -------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Darshan Shah;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -48,6 +48,7 @@
  * 20-Apr-2005 : Renamed CategoryLabelGenerator 
  *               --> CategoryItemLabelGenerator (DG);
  * 09-Jun-2005 : Use addItemEntity() from superclass (DG);
+ * 27-Mar-2008 : Fixed error in findRangeBounds() method (DG);
  * 
  */
 
@@ -62,7 +63,6 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
@@ -74,23 +74,25 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.DatasetUtilities;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.StandardGradientPaintTransformer;
 import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A renderer that handles the drawing of waterfall bar charts, for use with 
- * the {@link CategoryPlot} class.  Note that the bar colors are defined 
- * using special methods in this class - the inherited methods (for example,
- * {@link AbstractRenderer#setSeriesPaint(int, Paint)}) are ignored.
+ * the {@link CategoryPlot} class.  Some quirks to note:
+ * <ul>
+ * <li>the value in the last category of the dataset should be (redundantly) 
+ *   specified as the sum of the items in the preceding categories - otherwise
+ *   the final bar in the plot will be incorrectly plotted;</li>
+ * <li>the bar colors are defined using special methods in this class - the 
+ *   inherited methods (for example, 
+ *   {@link AbstractRenderer#setSeriesPaint(int, Paint)}) are ignored;</li>
+ * </ul>
  */
-public class WaterfallBarRenderer extends BarRenderer 
-                                  implements Cloneable, PublicCloneable, 
-                                             Serializable {
+public class WaterfallBarRenderer extends BarRenderer {
 
     /** For serialization. */
     private static final long serialVersionUID = -2482910643727230911L;
@@ -170,7 +172,43 @@ public class WaterfallBarRenderer extends BarRenderer
      * @return The range (or <code>null</code> if the dataset is empty).
      */
     public Range findRangeBounds(CategoryDataset dataset) {
-        return DatasetUtilities.findCumulativeRangeBounds(dataset);   
+          
+        if (dataset == null) {
+            throw new IllegalArgumentException("Null 'dataset' argument.");
+        }
+            
+        boolean allItemsNull = true; // we'll set this to false if there is at 
+                                     // least one non-null data item... 
+        double minimum = 0.0;
+        double maximum = 0.0;
+        int columnCount = dataset.getColumnCount();
+        for (int row = 0; row < dataset.getRowCount(); row++) {
+            double runningTotal = 0.0;
+            for (int column = 0; column <= columnCount - 1; column++) {
+                Number n = dataset.getValue(row, column);
+                if (n != null) {
+                    allItemsNull = false;
+                    double value = n.doubleValue();
+                    if (column == columnCount - 1) {
+                    	// treat the last column value as an absolute
+                    	runningTotal = value;
+                    }
+                    else {
+                        runningTotal = runningTotal + value;
+                    }
+                    minimum = Math.min(minimum, runningTotal);
+                    maximum = Math.max(maximum, runningTotal);
+                }
+            } 
+            
+        }
+        if (!allItemsNull) {
+            return new Range(minimum, maximum);
+        }
+        else {
+            return null;
+        }
+            
     }
 
     /**
