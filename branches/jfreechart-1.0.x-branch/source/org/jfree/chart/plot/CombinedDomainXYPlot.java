@@ -85,6 +85,7 @@
  *               trigger change event in subplots (DG);
  * 28-Jan-2008 : Reset fixed range axis space in subplots for each call to
  *               draw() (DG);
+ * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
  *
  */
 
@@ -93,7 +94,6 @@ package org.jfree.chart.plot;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -110,16 +110,13 @@ import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * An extension of {@link XYPlot} that contains multiple subplots that share a 
  * common domain axis.
  */
 public class CombinedDomainXYPlot extends XYPlot 
-                                  implements Cloneable, PublicCloneable, 
-                                             Serializable,
-                                             PlotChangeListener {
+        implements PlotChangeListener {
 
     /** For serialization. */
     private static final long serialVersionUID = -7765545541261907383L;
@@ -191,15 +188,19 @@ public class CombinedDomainXYPlot extends XYPlot
     }
 
     /**
-     * Returns the range for the specified axis.  This is the combined range 
-     * of all the subplots.
+     * Returns a range representing the extent of the data values in this plot
+     * (obtained from the subplots) that will be rendered against the specified 
+     * axis.  NOTE: This method is intended for internal JFreeChart use, and 
+     * is public only so that code in the axis classes can call it.  Since 
+     * only the domain axis is shared between subplots, the JFreeChart code 
+     * will only call this method for the domain values (although this is not 
+     * checked/enforced).
      *
      * @param axis  the axis.
      *
      * @return The range (possibly <code>null</code>).
      */
     public Range getDataRange(ValueAxis axis) {
-
         Range result = null;
         if (this.subplots != null) {
             Iterator iterator = this.subplots.iterator();
@@ -209,7 +210,6 @@ public class CombinedDomainXYPlot extends XYPlot
             }
         }
         return result;
-
     }
 
     /**

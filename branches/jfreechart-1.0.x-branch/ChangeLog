@@ -1,5 +1,17 @@
 2008-03-27  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 1926517:
+    * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java:
+    (getDataRange): Override just to document,
+    * source/org/jfree/chart/plot/CombinedDomainXYPlot.java
+    (getDataRange): Added javadoc comment,
+    * source/org/jfree/chart/plot/CombinedRangeCategoryPlot.java
+    (getDataRange): Likewise,
+    * source/org/jfree/chart/plot/CombinedRangeXYPlot.java
+    (getDataRange): Likewise.
+
+2008-03-27  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
     (drawHorizontalItem): Draw box outline using itemOutlinePaint/Stroke,
     (drawVerticalItem): Likewise,

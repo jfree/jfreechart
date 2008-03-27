@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * CombinedRangeCategoryPlot.java
  * ------------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -50,6 +50,8 @@
  *               items if set (DG);
  * 05-May-2005 : Updated draw() method parameters (DG);
  * 14-Nov-2007 : Updated setFixedDomainAxisSpaceForSubplots() method (DG);
+ * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
+ * 
  */
  
 package org.jfree.chart.plot;
@@ -59,7 +61,6 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -75,16 +76,12 @@ import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A combined category plot where the range axis is shared.
  */
 public class CombinedRangeCategoryPlot extends CategoryPlot 
-                                       implements Zoomable,
-                                                  Cloneable, PublicCloneable, 
-                                                  Serializable,
-                                                  PlotChangeListener {
+        implements PlotChangeListener {
 
     /** For serialization. */
     private static final long serialVersionUID = 7260210007554504515L;
@@ -393,15 +390,19 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     }
     
     /**
-      * Returns the range for the axis.  This is the combined range of all the
-      * subplots.
+     * Returns a range representing the extent of the data values in this plot
+     * (obtained from the subplots) that will be rendered against the specified 
+     * axis.  NOTE: This method is intended for internal JFreeChart use, and 
+     * is public only so that code in the axis classes can call it.  Since 
+     * only the range axis is shared between subplots, the JFreeChart code 
+     * will only call this method for the range values (although this is not 
+     * checked/enforced).
       *
       * @param axis  the axis.
       *
       * @return The range.
       */
      public Range getDataRange(ValueAxis axis) {
-
          Range result = null;
          if (this.subplots != null) {
              Iterator iterator = this.subplots.iterator();
@@ -411,7 +412,6 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
              }
          }
          return result;
-
      }
 
     /**

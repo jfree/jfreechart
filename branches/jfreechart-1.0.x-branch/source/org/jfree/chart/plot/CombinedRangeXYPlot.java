@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * CombinedRangeXYPlot.java
  * ------------------------
- * (C) Copyright 2001-2007, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-2008, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -87,6 +87,7 @@
  * 18-Jul-2007 : Fixed bug in removeSubplot (DG);
  * 27-Nov-2007 : Modified setFixedDomainAxisSpaceForSubplots() so as not to
  *               trigger change events in subplots (DG);
+ * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
  * 
  */
 
@@ -95,7 +96,6 @@ package org.jfree.chart.plot;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -112,17 +112,13 @@ import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * An extension of {@link XYPlot} that contains multiple subplots that share a 
  * common range axis.
  */
 public class CombinedRangeXYPlot extends XYPlot 
-                                 implements Zoomable,
-                                            Cloneable, PublicCloneable, 
-                                            Serializable,
-                                            PlotChangeListener {
+        implements PlotChangeListener {
 
     /** For serialization. */
     private static final long serialVersionUID = -5177814085082031168L;
@@ -554,15 +550,19 @@ public class CombinedRangeXYPlot extends XYPlot
     }
 
     /**
-     * Returns the range for the axis.  This is the combined range of all the 
-     * subplots.
+     * Returns a range representing the extent of the data values in this plot
+     * (obtained from the subplots) that will be rendered against the specified 
+     * axis.  NOTE: This method is intended for internal JFreeChart use, and 
+     * is public only so that code in the axis classes can call it.  Since 
+     * only the range axis is shared between subplots, the JFreeChart code 
+     * will only call this method for the range values (although this is not 
+     * checked/enforced).
      *
      * @param axis  the axis.
      *
      * @return The range.
      */
     public Range getDataRange(ValueAxis axis) {
-
         Range result = null;
         if (this.subplots != null) {
             Iterator iterator = this.subplots.iterator();
@@ -572,7 +572,6 @@ public class CombinedRangeXYPlot extends XYPlot
             }
         }
         return result;
-
     }
 
     /**
