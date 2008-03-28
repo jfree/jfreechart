@@ -34,6 +34,7 @@
  *                   Jonathan Nash (bug fix);
  *                   Richard Atkinson;
  *                   Andreas Schroeder;
+ *                   Rafal Skalny (patch 1925366);
  *
  * Changes (from 18-Sep-2001)
  * --------------------------
@@ -104,6 +105,8 @@
  * 28-Mar-2008 : Fixed sample count in sampleFunction2D() method, renamed
  *               iterateXYRangeBounds() --> iterateRangeBounds(XYDataset), and
  *               fixed a bug in findRangeBounds(XYDataset, false) (DG); 
+ * 28-Mar-2008 : Applied a variation of patch 1925366 (from Rafal Skalny) for 
+ *               slightly more efficient iterateRangeBounds() methods (DG);
  * 
  */
 
@@ -829,31 +832,39 @@ public final class DatasetUtilities {
             boolean includeInterval) {
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
-        boolean interval = includeInterval 
-                           && dataset instanceof IntervalCategoryDataset;
         int rowCount = dataset.getRowCount();
         int columnCount = dataset.getColumnCount();
-        for (int row = 0; row < rowCount; row++) {
-            for (int column = 0; column < columnCount; column++) {
-                Number lvalue;
-                Number uvalue;
-                if (interval) {
-                    IntervalCategoryDataset icd 
-                        = (IntervalCategoryDataset) dataset;
+        if (includeInterval && dataset instanceof IntervalCategoryDataset) {
+        	// handle the special case where the dataset has y-intervals that
+        	// we want to measure
+            IntervalCategoryDataset icd = (IntervalCategoryDataset) dataset;
+            Number lvalue, uvalue;
+            for (int row = 0; row < rowCount; row++) {
+                for (int column = 0; column < columnCount; column++) {
                     lvalue = icd.getStartValue(row, column);
                     uvalue = icd.getEndValue(row, column);
+                    if (lvalue != null) {
+                        minimum = Math.min(minimum, lvalue.doubleValue());
+                    }
+                    if (uvalue != null) {
+                        maximum = Math.max(maximum, uvalue.doubleValue());
+                    }
                 }
-                else {
-                    lvalue = dataset.getValue(row, column);
-                    uvalue = lvalue;
-                }
-                if (lvalue != null) {
-                    minimum = Math.min(minimum, lvalue.doubleValue());
-                }
-                if (uvalue != null) {
-                    maximum = Math.max(maximum, uvalue.doubleValue());
+            }	
+        }
+        else {
+        	// handle the standard case (plain CategoryDataset)
+            for (int row = 0; row < rowCount; row++) {
+                for (int column = 0; column < columnCount; column++) {
+                    Number value = dataset.getValue(row, column);
+                    if (value != null) {
+                    	double v = value.doubleValue();
+                        minimum = Math.min(minimum, v);
+                        maximum = Math.max(maximum, v);
+                    }
                 }
             }
+        	
         }
         if (minimum == Double.POSITIVE_INFINITY) {
             return null;
@@ -892,7 +903,7 @@ public final class DatasetUtilities {
     }
     
     /**
-     * Iterates over the data item of the xy dataset to find
+     * Iterates over the data items of the xy dataset to find
      * the range bounds.
      * 
      * @param dataset  the dataset (<code>null</code> not permitted).
@@ -909,31 +920,52 @@ public final class DatasetUtilities {
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
         int seriesCount = dataset.getSeriesCount();
-        for (int series = 0; series < seriesCount; series++) {
-            int itemCount = dataset.getItemCount(series);
-            for (int item = 0; item < itemCount; item++) {
-                double lvalue;
-                double uvalue;
-                if (includeInterval && dataset instanceof IntervalXYDataset) {
-                    IntervalXYDataset intervalXYData 
-                        = (IntervalXYDataset) dataset;
-                    lvalue = intervalXYData.getStartYValue(series, item);
-                    uvalue = intervalXYData.getEndYValue(series, item);
+        
+        // handle three cases by dataset type
+        if (includeInterval && dataset instanceof IntervalXYDataset) {
+        	// handle special case of IntervalXYDataset
+        	IntervalXYDataset ixyd = (IntervalXYDataset) dataset;
+            for (int series = 0; series < seriesCount; series++) {
+                int itemCount = dataset.getItemCount(series);
+                for (int item = 0; item < itemCount; item++) {
+                    double lvalue = ixyd.getStartYValue(series, item);
+                    double uvalue = ixyd.getEndYValue(series, item);
+                    if (!Double.isNaN(lvalue)) {
+                        minimum = Math.min(minimum, lvalue);
+                    }
+                    if (!Double.isNaN(uvalue)) {     
+                        maximum = Math.max(maximum, uvalue);
+                    }
                 }
-                else if (includeInterval && dataset instanceof OHLCDataset) {
-                    OHLCDataset highLowData = (OHLCDataset) dataset;
-                    lvalue = highLowData.getLowValue(series, item);
-                    uvalue = highLowData.getHighValue(series, item);
+            }
+        }
+        else if (includeInterval && dataset instanceof OHLCDataset) {
+        	// handle special case of OHLCDataset
+        	OHLCDataset ohlc = (OHLCDataset) dataset;
+            for (int series = 0; series < seriesCount; series++) {
+                int itemCount = dataset.getItemCount(series);
+                for (int item = 0; item < itemCount; item++) {
+                    double lvalue = ohlc.getLowValue(series, item);
+                    double uvalue = ohlc.getLowValue(series, item);
+                    if (!Double.isNaN(lvalue)) {
+                        minimum = Math.min(minimum, lvalue);
+                    }
+                    if (!Double.isNaN(uvalue)) {     
+                        maximum = Math.max(maximum, uvalue);
+                    }
                 }
-                else {
-                    lvalue = dataset.getYValue(series, item);
-                    uvalue = lvalue;
-                }
-                if (!Double.isNaN(lvalue)) {
-                    minimum = Math.min(minimum, lvalue);
-                }
-                if (!Double.isNaN(uvalue)) {     
-                    maximum = Math.max(maximum, uvalue);
+            }
+        }
+        else {
+        	// standard case - plain XYDataset
+            for (int series = 0; series < seriesCount; series++) {
+                int itemCount = dataset.getItemCount(series);
+                for (int item = 0; item < itemCount; item++) {
+                    double value = dataset.getYValue(series, item);
+                    if (!Double.isNaN(value)) {
+                        minimum = Math.min(minimum, value);
+                        maximum = Math.max(maximum, value);
+                    }
                 }
             }
         }
