@@ -101,6 +101,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 15-Mar-2007 : Added calculateStackTotal() method (DG);
  * 27-Mar-2008 : Fixed bug in findCumulativeRangeBounds() method (DG);
+ * 28-Mar-2008 : Fixed sample count in sampleFunction2D() method (DG); 
  * 
  */
 
@@ -486,11 +487,8 @@ public final class DatasetUtilities {
      *
      * @return A dataset.
      */
-    public static XYDataset sampleFunction2D(Function2D f, 
-                                             double start, 
-                                             double end, 
-                                             int samples,
-                                             Comparable seriesKey) {
+    public static XYDataset sampleFunction2D(Function2D f, double start, 
+            double end, int samples, Comparable seriesKey) {
 
         if (f == null) {
             throw new IllegalArgumentException("Null 'f' argument.");   
@@ -506,14 +504,13 @@ public final class DatasetUtilities {
         }
 
         XYSeries series = new XYSeries(seriesKey);
-        double step = (end - start) / samples;
-        for (int i = 0; i <= samples; i++) {
+        double step = (end - start) / (samples - 1);
+        for (int i = 0; i < samples; i++) {
             double x = start + (step * i);
             series.add(x, f.getValue(x));
         }
         XYSeriesCollection collection = new XYSeriesCollection(series);
         return collection;
-
     }
 
     /**
