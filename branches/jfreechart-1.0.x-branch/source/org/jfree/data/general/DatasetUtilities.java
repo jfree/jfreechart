@@ -835,8 +835,8 @@ public final class DatasetUtilities {
         int rowCount = dataset.getRowCount();
         int columnCount = dataset.getColumnCount();
         if (includeInterval && dataset instanceof IntervalCategoryDataset) {
-        	// handle the special case where the dataset has y-intervals that
-        	// we want to measure
+            // handle the special case where the dataset has y-intervals that
+            // we want to measure
             IntervalCategoryDataset icd = (IntervalCategoryDataset) dataset;
             Number lvalue, uvalue;
             for (int row = 0; row < rowCount; row++) {
@@ -853,7 +853,7 @@ public final class DatasetUtilities {
             }	
         }
         else {
-        	// handle the standard case (plain CategoryDataset)
+            // handle the standard case (plain CategoryDataset)
             for (int row = 0; row < rowCount; row++) {
                 for (int column = 0; column < columnCount; column++) {
                     Number value = dataset.getValue(row, column);
@@ -864,7 +864,6 @@ public final class DatasetUtilities {
                     }
                 }
             }
-        	
         }
         if (minimum == Double.POSITIVE_INFINITY) {
             return null;
@@ -923,8 +922,8 @@ public final class DatasetUtilities {
         
         // handle three cases by dataset type
         if (includeInterval && dataset instanceof IntervalXYDataset) {
-        	// handle special case of IntervalXYDataset
-        	IntervalXYDataset ixyd = (IntervalXYDataset) dataset;
+            // handle special case of IntervalXYDataset
+            IntervalXYDataset ixyd = (IntervalXYDataset) dataset;
             for (int series = 0; series < seriesCount; series++) {
                 int itemCount = dataset.getItemCount(series);
                 for (int item = 0; item < itemCount; item++) {
@@ -940,8 +939,8 @@ public final class DatasetUtilities {
             }
         }
         else if (includeInterval && dataset instanceof OHLCDataset) {
-        	// handle special case of OHLCDataset
-        	OHLCDataset ohlc = (OHLCDataset) dataset;
+            // handle special case of OHLCDataset
+            OHLCDataset ohlc = (OHLCDataset) dataset;
             for (int series = 0; series < seriesCount; series++) {
                 int itemCount = dataset.getItemCount(series);
                 for (int item = 0; item < itemCount; item++) {
@@ -957,7 +956,7 @@ public final class DatasetUtilities {
             }
         }
         else {
-        	// standard case - plain XYDataset
+            // standard case - plain XYDataset
             for (int series = 0; series < seriesCount; series++) {
                 int itemCount = dataset.getItemCount(series);
                 for (int item = 0; item < itemCount; item++) {
