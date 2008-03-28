@@ -327,7 +327,7 @@ public class XYBarDataset extends AbstractIntervalXYDataset
      * @param event  information about the event.
      */
     public void datasetChanged(DatasetChangeEvent event) {
-        this.notifyListeners(event);
+        notifyListeners(event);
     }
     
     /**
