@@ -1,6 +1,24 @@
 2008-03-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/general/DatasetUtilities.java
+    (iterateRangeBounds(CategoryDataset, boolean)): Modified implementation,
+    (iterateRangeBounds(XYDataset, boolean)): Likewise,
+    * tests/org/jfree/data/general/junit/DatasetUtilitiesTests.java
+    (testFindRangeBounds3): New test,
+    (testIterateCategoryRangeBounds): Renamed 
+    testIterateRangeBounds_CategoryDataset(),
+    (testIterateRangeBounds2_CategoryDataset): New method,
+    (testIterateRangeBounds3_CategoryDataset): Likewise,
+    (testIterateXYRangeBounds): Renamed testIterateRangeBounds(),
+    (testIterateXYRangeBounds2): Renamed testIterateRangeBounds2(),
+    (testIterateRangeBounds3): New method,
+    (testIterateRangeBounds4): Likewise,
+    (testCumulativeRange3): Likewise,
+    (testSampleFunction2D): Likewise.
+
+2008-03-28  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/general/DatasetUtilities.java
     (iterateCategoryRangeBounds): Deprecated,
     (iterateRangeBounds(CategoryDataset)): New method,
     (iterateRangeBounds(CategoryDataset, boolean)): Likewise.
