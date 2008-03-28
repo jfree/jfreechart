@@ -738,7 +738,7 @@ public final class DatasetUtilities {
             result = info.getRangeBounds(includeInterval);
         }
         else {
-            result = iterateCategoryRangeBounds(dataset, includeInterval);
+            result = iterateRangeBounds(dataset, includeInterval);
         }
         return result;
     }
@@ -790,8 +790,42 @@ public final class DatasetUtilities {
      *                         y-interval is taken into account.
      * 
      * @return The range (possibly <code>null</code>).
+     * 
+     * @deprecated As of 1.0.10, use 
+     *         {@link #iterateRangeBounds(CategoryDataset, boolean)}.
      */
     public static Range iterateCategoryRangeBounds(CategoryDataset dataset, 
+            boolean includeInterval) {
+        return iterateRangeBounds(dataset, includeInterval);
+    }
+
+    /**
+     * Iterates over the data item of the category dataset to find
+     * the range bounds.
+     * 
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * 
+     * @return The range (possibly <code>null</code>).
+     * 
+     * @since 1.0.10
+     */
+    public static Range iterateRangeBounds(CategoryDataset dataset) {
+        return iterateRangeBounds(dataset, true);
+    }
+
+    /**
+     * Iterates over the data item of the category dataset to find
+     * the range bounds.
+     * 
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param includeInterval  a flag that determines whether or not the
+     *                         y-interval is taken into account.
+     * 
+     * @return The range (possibly <code>null</code>).
+     * 
+     * @since 1.0.10
+     */
+    public static Range iterateRangeBounds(CategoryDataset dataset, 
             boolean includeInterval) {
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
