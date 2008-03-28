@@ -1,6 +1,15 @@
 2008-03-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/general/DatasetUtilities.java
+    (findRangeBounds(XYDataset, boolean)): Use boolean argument for call to
+    iterateRangeBounds(),
+    (iterateXYRangeBounds): Deprecated,
+    (iterateRangeBounds(XYDataset)): New method,
+    (iterateRangeBounds(XYDataset, boolean)): Likewise. 
+
+2008-03-28  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/general/DatasetUtilities.java
     (sampleFunction2D): Fixed sample count bug.
 
 2008-03-27  David Gilbert  <david.gilbert@object-refinery.com>
