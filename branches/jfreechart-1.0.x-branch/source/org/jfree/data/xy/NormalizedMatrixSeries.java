@@ -29,7 +29,7 @@
  * ---------------------------
  * (C) Copyright 2003-2007, by Barak Naveh and Contributors.
  *
- * Original Author:  Barak Naveh;;
+ * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  * Changes
