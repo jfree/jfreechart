@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------------
  * StandardCategorySeriesLabelGenerator.java
  * -----------------------------------------
- * (C) Copyright 2005-2007, by Object Refinery Limited.
+ * (C) Copyright 2005-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 20-Apr-2005 : Version 1 (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 03-May-2006 : Fixed equals() method (bug 1481102) (DG);
+ * 31-Mar-2008 : Added hashCode() method to appease FindBugs (DG);
  *
  */
 
@@ -45,6 +46,7 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.MessageFormat;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.util.PublicCloneable;
 
@@ -147,6 +149,17 @@ public class StandardCategorySeriesLabelGenerator implements
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = 127;
+        result = HashUtilities.hashCode(result, this.formatPattern);
+        return result;
     }
 
 }
