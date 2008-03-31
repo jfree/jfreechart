@@ -3154,6 +3154,9 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (this.labelLinksVisible != that.labelLinksVisible) {
             return false;
         }
+        if (!this.labelLinkStyle.equals(that.labelLinkStyle)) {
+        	return false;
+        }
         if (!PaintUtilities.equal(this.labelLinkPaint, that.labelLinkPaint)) {
             return false;
         }
