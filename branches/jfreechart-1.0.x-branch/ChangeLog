@@ -1,5 +1,13 @@
 2008-03-31  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/plot/PieLabelDistributor.java
+    (distributeLabels): Comment out adjustInwards() until it is working,
+    (adjustDownwards): Fix check for lower bound,
+    (adjustUpwards): Fix check for upper bound,
+    (distributeEvenly): Allow overlapping rather than exceeding bounds.
+
+2008-03-31  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/plot/PiePlot.java
     (drawLeftLabels): Adjust label area for interiorGap,
     (drawRightLabels): Likewise.
