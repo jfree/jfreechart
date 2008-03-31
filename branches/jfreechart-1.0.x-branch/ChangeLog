@@ -1,5 +1,16 @@
 2008-03-31  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 1891849 by Martin Hilpert:
+    * source/org/jfree/chart/plot/PieLabelLinkStyle.java: New file,
+    * source/org/jfree/chart/plot/PiePlot.java
+    (labelLinkStyle): New field,
+    (getLabelLinkStyle): New method,
+    (setLabelLinkStyle): Likewise,
+    (drawLeftLabel): Added support for labelLinkStyle field,
+    (drawRightLabel): Likewise.
+
+2008-03-31  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/plot/PieLabelDistributor.java
     (distributeLabels): Comment out adjustInwards() until it is working,
     (adjustDownwards): Fix check for lower bound,

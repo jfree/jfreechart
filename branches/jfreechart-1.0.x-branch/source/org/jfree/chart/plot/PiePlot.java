@@ -35,6 +35,7 @@
  *                   Richard Atkinson (URL support for image maps);
  *                   Christian W. Zuckschwerdt;
  *                   Arnaud Lelievre;
+ *                   Martin Hilpert (patch 1891849);
  *                   Andreas Schroeder (very minor);
  *
  * Changes
@@ -150,6 +151,8 @@
  * 19-Mar-2008 : Fixed IllegalArgumentException when drawing with null 
  *               dataset (DG);
  * 31-Mar-2008 : Adjust the label area for the interiorGap (DG);
+ * 31-Mar-2008 : Added quad and cubic curve label link lines - see patch
+ *               1891849 by Martin Hilpert (DG);
  *    
  */
 
@@ -166,9 +169,11 @@ import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Arc2D;
+import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.QuadCurve2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -416,6 +421,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /** A flag that controls whether or not the label links are drawn. */
     private boolean labelLinksVisible;
+    
+    /** 
+     * The label link style.
+     * 
+     * @since 1.0.10
+     */
+    private PieLabelLinkStyle labelLinkStyle = PieLabelLinkStyle.STANDARD;
     
     /** The link margin. */
     private double labelLinkMargin = 0.025;
@@ -1635,6 +1647,37 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     public void setLabelLinksVisible(boolean visible) {
         this.labelLinksVisible = visible;
         fireChangeEvent();
+    }
+    
+    /**
+     * Returns the label link style.
+     * 
+     * @return The label link style (never <code>null</code>).
+     * 
+     * @see #setLabelLinkStyle(PieLabelLinkStyle)
+     * 
+     * @since 1.0.10
+     */
+    public PieLabelLinkStyle getLabelLinkStyle() {
+    	return this.labelLinkStyle;
+    }
+    
+    /**
+     * Sets the label link style and sends a {@link PlotChangeEvent} to all 
+     * registered listeners.
+     * 
+     * @param style  the new style (<code>null</code> not permitted).
+     * 
+     * @see #getLabelLinkStyle()
+     * 
+     * @since 1.0.10
+     */
+    public void setLabelLinkStyle(PieLabelLinkStyle style) {
+    	if (style == null) {
+    		throw new IllegalArgumentException("Null 'style' argument.");
+    	}
+    	this.labelLinkStyle = style;
+    	fireChangeEvent();
     }
     
     /**
@@ -2895,9 +2938,24 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             double anchorY = elbowY;
             g2.setPaint(this.labelLinkPaint);
             g2.setStroke(this.labelLinkStroke);
-            g2.draw(new Line2D.Double(linkX, linkY, elbowX, elbowY));
-            g2.draw(new Line2D.Double(anchorX, anchorY, elbowX, elbowY));
-            g2.draw(new Line2D.Double(anchorX, anchorY, targetX, targetY));
+            PieLabelLinkStyle style = getLabelLinkStyle();
+            if (style.equals(PieLabelLinkStyle.STANDARD)) {
+                g2.draw(new Line2D.Double(linkX, linkY, elbowX, elbowY));
+                g2.draw(new Line2D.Double(anchorX, anchorY, elbowX, elbowY));
+                g2.draw(new Line2D.Double(anchorX, anchorY, targetX, targetY));
+            }
+            else if (style.equals(PieLabelLinkStyle.QUAD_CURVE)) {
+            	QuadCurve2D q = new QuadCurve2D.Float();
+                q.setCurve(targetX, targetY, anchorX, anchorY, elbowX, elbowY);
+                g2.draw(q);
+                g2.draw(new Line2D.Double(elbowX, elbowY, linkX, linkY));            	
+            }
+            else if (style.equals(PieLabelLinkStyle.CUBIC_CURVE)) {
+            	CubicCurve2D c = new CubicCurve2D .Float();
+                c.setCurve(targetX, targetY, anchorX, anchorY, elbowX, elbowY, 
+                		linkX, linkY);
+                g2.draw(c);
+            }
         }
         TextBox tb = record.getLabel();
         tb.draw(g2, (float) targetX, (float) targetY, RectangleAnchor.RIGHT);
@@ -2931,9 +2989,24 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             double anchorY = elbowY;
             g2.setPaint(this.labelLinkPaint);
             g2.setStroke(this.labelLinkStroke);
-            g2.draw(new Line2D.Double(linkX, linkY, elbowX, elbowY));
-            g2.draw(new Line2D.Double(anchorX, anchorY, elbowX, elbowY));
-            g2.draw(new Line2D.Double(anchorX, anchorY, targetX, targetY));
+            PieLabelLinkStyle style = getLabelLinkStyle();
+            if (style.equals(PieLabelLinkStyle.STANDARD)) {
+                g2.draw(new Line2D.Double(linkX, linkY, elbowX, elbowY));
+                g2.draw(new Line2D.Double(anchorX, anchorY, elbowX, elbowY));
+                g2.draw(new Line2D.Double(anchorX, anchorY, targetX, targetY));
+            }
+            else if (style.equals(PieLabelLinkStyle.QUAD_CURVE)) {
+            	QuadCurve2D q = new QuadCurve2D.Float();
+                q.setCurve(targetX, targetY, anchorX, anchorY, elbowX, elbowY);
+                g2.draw(q);
+                g2.draw(new Line2D.Double(elbowX, elbowY, linkX, linkY));            	
+            }
+            else if (style.equals(PieLabelLinkStyle.CUBIC_CURVE)) {
+            	CubicCurve2D c = new CubicCurve2D .Float();
+                c.setCurve(targetX, targetY, anchorX, anchorY, elbowX, elbowY, 
+                		linkX, linkY);
+                g2.draw(c);
+            }
         }
         
         TextBox tb = record.getLabel();
