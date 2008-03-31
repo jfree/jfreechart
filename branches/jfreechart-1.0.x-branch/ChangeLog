@@ -1,3 +1,11 @@
+2008-03-31  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java
+    (getSubplots): Return null if this.subplots is null,
+    * source/org/jfree/chart/plot/CombinedDomainXYPlot.java: Likewise,
+    * source/org/jfree/chart/plot/CombinedRangeCategoryPlot.java: Likewise,
+    * source/org/jfree/chart/plot/CombinedRangeXYPlot.java: Likewise.
+
 2008-03-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/general/DatasetUtilities.java

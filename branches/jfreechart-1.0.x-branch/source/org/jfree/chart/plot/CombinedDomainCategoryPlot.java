@@ -54,6 +54,8 @@
  * 17-Apr-2007 : Added null argument checks to findSubplot() (DG);
  * 14-Nov-2007 : Updated setFixedRangeAxisSpaceForSubplots() method (DG);
  * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
+ * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null 
+ *               subplots, as suggested by Richard West (DG);
  * 
  */
 
@@ -221,12 +223,18 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     }
 
     /**
-     * Returns the list of subplots.
+     * Returns the list of subplots.  The returned list may be empty, but is
+     * never <code>null</code>.
      *
-     * @return An unmodifiable list of subplots .
+     * @return An unmodifiable list of subplots.
      */
     public List getSubplots() {
-        return Collections.unmodifiableList(this.subplots);
+    	if (this.subplots != null) {
+            return Collections.unmodifiableList(this.subplots);
+    	}
+    	else {
+    		return Collections.EMPTY_LIST;
+    	}
     }
 
     /**
