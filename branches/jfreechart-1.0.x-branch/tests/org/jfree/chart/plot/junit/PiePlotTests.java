@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * PiePlotTests.java
  * -----------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  * 27-Sep-2006 : Added tests for the getBaseSectionPaint() method (DG);
  * 23-Nov-2006 : Additional equals() and clone() tests (DG);
  * 17-Apr-2007 : Added check for label generator that returns a null label (DG);
+ * 31-Mar-2008 : Updated testEquals();
  * 
  */
 
@@ -71,6 +72,7 @@ import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieToolTipGenerator;
+import org.jfree.chart.plot.PieLabelLinkStyle;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.urls.CustomPieURLGenerator;
 import org.jfree.chart.urls.StandardPieURLGenerator;
@@ -337,6 +339,11 @@ public class PiePlotTests extends TestCase {
         plot1.setLabelLinksVisible(false);
         assertFalse(plot1.equals(plot2));
         plot2.setLabelLinksVisible(false);
+        assertTrue(plot1.equals(plot2));
+        
+        plot1.setLabelLinkStyle(PieLabelLinkStyle.QUAD_CURVE);
+        assertFalse(plot1.equals(plot2));
+        plot2.setLabelLinkStyle(PieLabelLinkStyle.QUAD_CURVE);
         assertTrue(plot1.equals(plot2));
         
         // linkMargin
