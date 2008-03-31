@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------
  * MultipleXYSeriesLabelGenerator.java
  * -----------------------------------
- * (C) Copyright 2004, 2005, 2007, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 19-Nov-2004 : Version 1 (DG);
  * 18-Apr-2005 : Use StringBuffer (DG);
  * 20-Feb-2007 : Fixed for equals() and cloning() (DG);
+ * 31-Mar-2008 : Added hashCode() method to appease FindBugs (DG);
  *
  */
 
@@ -50,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.PublicCloneable;
 
@@ -220,6 +222,19 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = 127;
+        result = HashUtilities.hashCode(result, this.formatPattern);
+        result = HashUtilities.hashCode(result, this.additionalFormatPattern);
+        result = HashUtilities.hashCode(result, this.seriesLabelLists);
+        return result;
     }
 
 }
