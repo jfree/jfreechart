@@ -46,6 +46,8 @@ import java.io.Serializable;
 /**
  * Used to indicate the style for the lines linking pie sections to their 
  * corresponding labels.
+ * 
+ * @since 1.0.10
  */
 public final class PieLabelLinkStyle implements Serializable {
     
