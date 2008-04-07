@@ -42,6 +42,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 11-Jun-2007 : Added toString() method to help with debugging (DG);
  * 15-Feb-2008 : Prevent null key (DG);
+ * 07-Apr-2008 : Removed to-do item (DG);
  * 
  */
 
@@ -86,7 +87,7 @@ public class DefaultKeyedValue implements KeyedValue,
     /**
      * Returns the key.
      *
-     * @return The key (never <code>null</code>.
+     * @return The key (never <code>null</code>).
      */
     public Comparable getKey() {
         return this.key;
@@ -126,9 +127,7 @@ public class DefaultKeyedValue implements KeyedValue,
         }
         DefaultKeyedValue that = (DefaultKeyedValue) obj;
         
-        // TODO: the following checks for null should be handled in a utility 
-        // method
-        if (this.key != null ? !this.key.equals(that.key) : that.key != null) {
+        if (!this.key.equals(that.key)) {
             return false;
         }
         if (this.value != null 
