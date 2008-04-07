@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * XYPlotTests.java
  * ----------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,8 @@
  * 05-Feb-2007 : Added testAddDomainMarker() and testAddRangeMarker() (DG);
  * 07-Feb-2007 : Added test1654215() (DG);
  * 24-May-2007 : Added testDrawSeriesWithZeroItems() (DG);
+ * 07-Apr-2008 : Added testRemoveDomainMarker() and 
+ *               testRemoveRangeMarker() (DG);
  * 
  */
 
@@ -1016,6 +1018,24 @@ public class XYPlotTests extends TestCase {
             success = false;
         }
         assertTrue(success);
+    }
+    
+    /**
+     * Check that removing a marker that isn't assigned to the plot returns 
+     * false.
+     */
+    public void testRemoveDomainMarker() {
+    	XYPlot plot = new XYPlot();
+    	assertFalse(plot.removeDomainMarker(new ValueMarker(0.5)));
+    }
+
+    /**
+     * Check that removing a marker that isn't assigned to the plot returns 
+     * false.
+     */
+    public void testRemoveRangeMarker() {
+    	XYPlot plot = new XYPlot();
+    	assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
     }
 
 }
