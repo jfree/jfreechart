@@ -155,6 +155,8 @@
  * 14-Nov-2007 : Added missing event notifications (DG);
  * 25-Mar-2008 : Added new methods with optional notification - see patch
  *               1913751 (DG);
+ * 07-Apr-2008 : Fixed NPE in removeDomainMarker() and 
+ *               removeRangeMarker() (DG);
  * 
  *
  */
@@ -2159,6 +2161,9 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
                     index));
         }
+        if (markers == null) {
+        	return false;
+        }
         boolean removed = markers.remove(marker);
         if (removed && notify) {
             fireChangeEvent();
@@ -2435,13 +2440,15 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         ArrayList markers;
         if (layer == Layer.FOREGROUND) {
             markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
-                    index));
+            		index));
         }
         else {
             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
                     index));
         }
-
+        if (markers == null) {
+        	return false;
+        }
         boolean removed = markers.remove(marker);
         if (removed && notify) {
             fireChangeEvent();

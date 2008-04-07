@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * CategoryPlotTests.java
  * ----------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,8 @@
  *               fixed) (DG);
  * 05-Feb-2007 : Added testAddDomainMarker() and testAddRangeMarker() (DG);
  * 07-Feb-2007 : Added test1654215() (DG);
+ * 07-Apr-2008 : Added testRemoveDomainMarker() and 
+ *               testRemoveRangeMarker() (DG);
  *
  */
 
@@ -757,4 +759,23 @@ public class CategoryPlotTests extends TestCase {
         }
         assertTrue(pass);
     }
+    
+    /**
+     * Check that removing a marker that isn't assigned to the plot returns 
+     * false.
+     */
+    public void testRemoveDomainMarker() {
+    	CategoryPlot plot = new CategoryPlot();
+    	assertFalse(plot.removeDomainMarker(new CategoryMarker("Category 1")));
+    }
+
+    /**
+     * Check that removing a marker that isn't assigned to the plot returns 
+     * false.
+     */
+    public void testRemoveRangeMarker() {
+    	CategoryPlot plot = new CategoryPlot();
+    	assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
+    }
+
 }
