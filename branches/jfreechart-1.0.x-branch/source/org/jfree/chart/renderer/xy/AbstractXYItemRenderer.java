@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -100,6 +100,7 @@
  *               itemLabelGenerator and toolTipGenerator override fields (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 12-Nov-2007 : Fixed domain and range band drawing methods (DG);
+ * 07-Apr-2008 : Minor API doc update (DG);
  *
  */
 
@@ -1713,8 +1714,10 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param dataset  the dataset.
      * @param series  the series.
      * @param item  the item.
-     * @param entityX  the entity's center x-coordinate in user space.
-     * @param entityY  the entity's center y-coordinate in user space.
+     * @param entityX  the entity's center x-coordinate in user space (only 
+     *                 used if <code>area</code> is <code>null</code>).
+     * @param entityY  the entity's center y-coordinate in user space (only 
+     *                 used if <code>area</code> is <code>null</code>).
      */
     protected void addEntity(EntityCollection entities, Shape area,
                              XYDataset dataset, int series, int item,
