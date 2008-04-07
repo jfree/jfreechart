@@ -1,3 +1,8 @@
+2008-04-07  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/xy/XYBlockRenderer.java
+    (drawItem): Inserted code to add entities.
+
 2008-03-31  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/PiePlot.java

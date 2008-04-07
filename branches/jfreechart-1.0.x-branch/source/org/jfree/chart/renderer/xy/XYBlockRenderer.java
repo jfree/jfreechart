@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYBlockRenderer.java
  * --------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 02-Feb-2007 : Added getPaintScale() method (DG);
  * 09-Mar-2007 : Fixed cloning (DG);
  * 03-Aug-2007 : Fix for bug 1766646 (DG);
+ * 07-Apr-2008 : Added entity collection code (DG);
  * 
  */
 
@@ -50,6 +51,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
@@ -376,6 +378,12 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
         g2.fill(block);
         g2.setStroke(new BasicStroke(1.0f));
         g2.draw(block);
+        
+        EntityCollection entities = state.getEntityCollection();
+        if (entities != null) {
+            addEntity(entities, block, dataset, series, item, 0.0, 0.0);
+        }
+
     }
     
     /**
