@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * TimePeriodValueTests.java
  * -------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,8 @@
  * Changes
  * -------
  * 30-Jul-2003 : Version 1 (DG);
+ * 07-Apr-2008 : Added new tests for min/max-start/middle/end
+ *               index updates (DG);
  *
  */
 
@@ -316,6 +318,92 @@ public class TimePeriodValuesTests extends TestCase {
         assertTrue(pass);
     }
     
+    /**
+     * Some tests for the getMinStartIndex() method.
+     */
+    public void testGetMinStartIndex() {
+    	TimePeriodValues s = new TimePeriodValues("Test");
+    	assertEquals(-1, s.getMinStartIndex());
+    	s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+    	assertEquals(0, s.getMinStartIndex());
+    	s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+    	assertEquals(0, s.getMinStartIndex());
+    	s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+    	assertEquals(2, s.getMinStartIndex());
+    }
+    
+    /**
+     * Some tests for the getMaxStartIndex() method.
+     */
+    public void testGetMaxStartIndex() {
+    	TimePeriodValues s = new TimePeriodValues("Test");
+    	assertEquals(-1, s.getMaxStartIndex());
+    	s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+    	assertEquals(0, s.getMaxStartIndex());
+    	s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+    	assertEquals(1, s.getMaxStartIndex());
+    	s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+    	assertEquals(1, s.getMaxStartIndex());
+    }
+
+    /**
+     * Some tests for the getMinMiddleIndex() method.
+     */
+    public void testGetMinMiddleIndex() {
+    	TimePeriodValues s = new TimePeriodValues("Test");
+    	assertEquals(-1, s.getMinMiddleIndex());
+    	s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+    	assertEquals(0, s.getMinMiddleIndex());
+    	s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+    	assertEquals(0, s.getMinMiddleIndex());
+    	s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+    	assertEquals(2, s.getMinMiddleIndex());
+    }
+    
+    /**
+     * Some tests for the getMaxMiddleIndex() method.
+     */
+    public void testGetMaxMiddleIndex() {
+    	TimePeriodValues s = new TimePeriodValues("Test");
+    	assertEquals(-1, s.getMaxMiddleIndex());
+    	s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+    	assertEquals(0, s.getMaxMiddleIndex());
+    	s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+    	assertEquals(1, s.getMaxMiddleIndex());
+    	s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+    	assertEquals(1, s.getMaxMiddleIndex());
+    	s.add(new SimpleTimePeriod(150L, 200L), 4.0);
+    	assertEquals(1, s.getMaxMiddleIndex());
+    }
+
+    /**
+     * Some tests for the getMinEndIndex() method.
+     */
+    public void getMinEndIndex() {
+    	TimePeriodValues s = new TimePeriodValues("Test");
+    	assertEquals(-1, s.getMinEndIndex());
+    	s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+    	assertEquals(0, s.getMinEndIndex());
+    	s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+    	assertEquals(0, s.getMinEndIndex());
+    	s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+    	assertEquals(2, s.getMinEndIndex());
+    }
+    
+    /**
+     * Some tests for the getMaxEndIndex() method.
+     */
+    public void getMaxEndIndex() {
+    	TimePeriodValues s = new TimePeriodValues("Test");
+    	assertEquals(-1, s.getMaxEndIndex());
+    	s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+    	assertEquals(0, s.getMaxEndIndex());
+    	s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+    	assertEquals(1, s.getMaxEndIndex());
+    	s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+    	assertEquals(1, s.getMaxEndIndex());
+    }
+
     /**
      * A listener used for detecting series change events.
      */

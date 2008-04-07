@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------------
  * TimePeriodValuesCollectionTests.java
  * ------------------------------------
- * (C) Copyright 2005-2007, by Object Refinery Limited.
+ * (C) Copyright 2005-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,8 @@
  * 08-Mar-2007 : Added testGetSeries() (DG);
  * 11-Jun-2007 : Added tests for getDomainBounds() (DG);
  * 10-Jul-2007 : Fixed compile errors (DG);
+ * 07-Apr-2008 : Added more checks to 
+ *               testGetDomainBoundsWithInterval() (DG);
  *
  */
 
@@ -241,6 +243,18 @@ public class TimePeriodValuesCollectionTests extends TestCase {
         s1.add(new SimpleTimePeriod(1500L, 3000L), 2.0);
         r = dataset.getDomainBounds(true);
         assertEquals(1000.0, r.getLowerBound(), EPSILON);
-        assertEquals(3000.0, r.getUpperBound(), EPSILON);  
+        assertEquals(3000.0, r.getUpperBound(), EPSILON);
+        
+        // add a third time period
+        s1.add(new SimpleTimePeriod(6000L, 7000L), 1.5);
+        r = dataset.getDomainBounds(true);
+        assertEquals(1000.0, r.getLowerBound(), EPSILON);
+        assertEquals(7000.0, r.getUpperBound(), EPSILON);
+
+        // add a fourth time period
+        s1.add(new SimpleTimePeriod(4000L, 5000L), 1.4);
+        r = dataset.getDomainBounds(true);
+        assertEquals(1000.0, r.getLowerBound(), EPSILON);
+        assertEquals(7000.0, r.getUpperBound(), EPSILON);    
     }
 }
