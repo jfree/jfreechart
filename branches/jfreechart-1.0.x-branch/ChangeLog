@@ -1,5 +1,12 @@
 2008-04-08  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/xy/CandlestickRenderer.java
+    (findRangeBounds): New method override,
+    * source/org/jfree/data/general/DatasetUtilities.java
+    (iterateRangeBounds(XYDataset)): Fixed typo for OHLCDataset.
+
+2008-04-08  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/block/BorderArrangement.java
     (arrangeFF): Check for negative width remaining.
 
