@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ColorBlock.java
  * ---------------
- * (C) Copyright 2004, 2007, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,7 +38,9 @@
  * 20-Apr-2005 : Added new draw() method (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 16-Mar-2007 : Implemented equals() and fixed serialization (DG);
- * 
+ * 08-Apr-2008 : Added code for margin, border and padding in draw() 
+ *               method (DG);
+ *
  */
 
 package org.jfree.chart.block;
@@ -51,6 +53,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import org.jfree.io.SerialUtilities;
+import org.jfree.ui.Size2D;
 import org.jfree.util.PaintUtilities;
 
 /**
@@ -92,15 +95,32 @@ public class ColorBlock extends AbstractBlock implements Block {
     }
     
     /**
+     * Arranges the contents of the block, within the given constraints, and 
+     * returns the block size.
+     * 
+     * @param g2  the graphics device.
+     * @param constraint  the constraint (<code>null</code> not permitted).
+     * 
+     * @return The block size (in Java2D units, never <code>null</code>).
+     */
+    public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
+        return new Size2D(calculateTotalWidth(getWidth()), 
+                calculateTotalHeight(getHeight()));
+    }
+
+    /**
      * Draws the block.
      * 
      * @param g2  the graphics device.
      * @param area  the area.
      */
     public void draw(Graphics2D g2, Rectangle2D area) {
-        Rectangle2D bounds = getBounds();
+        area = trimMargin(area);
+        drawBorder(g2, area);
+        area = trimBorder(area);
+        area = trimPadding(area);
         g2.setPaint(this.paint);
-        g2.fill(bounds);
+        g2.fill(area);
     }
     
     /**

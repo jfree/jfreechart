@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * EmptyBlock.java
  * ---------------
- * (C) Copyright 2004-2007, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 22-Oct-2004 : Version 1 (DG);
  * 04-Feb-2005 : Now cloneable and serializable (DG);
  * 20-Apr-2005 : Added new draw() method (DG);
+ * 08-Apr-2008 : Added support for margin and border (DG);
  * 
  */
 
@@ -46,6 +47,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import org.jfree.ui.Size2D;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -70,18 +72,33 @@ public class EmptyBlock extends AbstractBlock
     }
 
     /**
-     * Draws the block.  Since the block is empty, this method does nothing.
+     * Arranges the contents of the block, within the given constraints, and 
+     * returns the block size.
+     * 
+     * @param g2  the graphics device.
+     * @param constraint  the constraint (<code>null</code> not permitted).
+     * 
+     * @return The block size (in Java2D units, never <code>null</code>).
+     */
+    public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
+        return new Size2D(calculateTotalWidth(getWidth()), 
+                calculateTotalHeight(getHeight()));
+    }
+
+    /**
+     * Draws the block.  Since the block is empty, there is nothing to draw
+     * except the optional border.
      * 
      * @param g2  the graphics device.
      * @param area  the area.
      */
     public void draw(Graphics2D g2, Rectangle2D area) {
-        // do nothing, we're empty
+        draw(g2, area, null);
     }
     
     /**
      * Draws the block within the specified area.  Since the block is empty, 
-     * this method does nothing.
+     * there is nothing to draw except the optional border.
      * 
      * @param g2  the graphics device.
      * @param area  the area.
@@ -90,6 +107,8 @@ public class EmptyBlock extends AbstractBlock
      * @return Always <code>null</code>.
      */
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
+        area = trimMargin(area);
+        drawBorder(g2, area);
         return null;
     }
 
