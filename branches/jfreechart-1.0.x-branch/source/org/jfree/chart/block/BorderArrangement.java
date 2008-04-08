@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * BorderArrangement.java
  * ----------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,8 @@
  * 24-Feb-2005 : Improved arrangeRR() method (DG);
  * 03-May-2005 : Implemented Serializable and added equals() method (DG);
  * 13-May-2005 : Fixed bugs in the arrange() method (DG);
+ * 08-Apr-2008 : Fixed bug in arrangeFF() method where width is too small for
+ *               left and right blocks (DG);
  * 
  */
 
@@ -449,7 +451,7 @@ public class BorderArrangement implements Arrangement, Serializable {
         h[3] = h[2];
         if (this.rightBlock != null) {
             RectangleConstraint c4 = new RectangleConstraint(0.0, 
-            		new Range(0.0, constraint.getWidth() - w[2]), 
+            		new Range(0.0, Math.max(constraint.getWidth() - w[2], 0.0)), 
             		LengthConstraintType.RANGE, h[2], null, 
             		LengthConstraintType.FIXED);
             Size2D size = this.rightBlock.arrange(g2, c4);
