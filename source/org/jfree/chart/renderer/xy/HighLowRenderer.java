@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * HighLowRenderer.java
  * --------------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -60,6 +60,7 @@
  * 01-Nov-2005 : Added optional openTickPaint and closeTickPaint settings (DG);
  * ------------- JFREECHART 1.0.0 ---------------------------------------------
  * 06-Jul-2006 : Replace dataset methods getX() --> getXValue() (DG);
+ * 08-Apr-2008 : Added findRangeBounds() override (DG);
  *
  */
 
@@ -85,6 +86,8 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.Range;
+import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
@@ -214,6 +217,24 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     public void setCloseTickPaint(Paint paint) {
         this.closeTickPaint = paint;
         fireChangeEvent();
+    }
+
+    /**
+     * Returns the range of values the renderer requires to display all the
+     * items from the specified dataset.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     *         or empty).
+     */
+    public Range findRangeBounds(XYDataset dataset) {
+        if (dataset != null) {
+            return DatasetUtilities.findRangeBounds(dataset, true);
+        }
+        else {
+            return null;
+        }
     }
 
     /**
