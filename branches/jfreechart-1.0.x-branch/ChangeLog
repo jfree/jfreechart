@@ -1,5 +1,15 @@
 2008-04-08  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 1932146:
+    * source/org/jfree/chart/axis/PeriodAxis.java
+    (setRange): Notify listeners,
+    * tests/org/jfree/chart/axis/junit/PeriodAxisTests.java
+    (lastEvent): New field,
+    (axisChanged): New method,
+    (test1932146): New test method.
+
+2008-04-08  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/xy/HighLowRenderer.java
     (findRangeBounds): New method override.
 
