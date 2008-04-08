@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------
  * CandlestickRenderer.java
  * ------------------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Authors:  David Gilbert (for Object Refinery Limited);
  *                    Sylvain Vieujot;
@@ -37,40 +37,40 @@
  *
  * Changes
  * -------
- * 13-Dec-2001 : Version 1.  Based on code in the (now redundant) 
+ * 13-Dec-2001 : Version 1.  Based on code in the (now redundant)
  *               CandlestickPlot class, written by Sylvain Vieujot (DG);
  * 23-Jan-2002 : Added DrawInfo parameter to drawItem() method (DG);
- * 28-Mar-2002 : Added a property change listener mechanism so that renderers 
- *               no longer need to be immutable.  Added properties for up and 
+ * 28-Mar-2002 : Added a property change listener mechanism so that renderers
+ *               no longer need to be immutable.  Added properties for up and
  *               down colors (DG);
- * 04-Apr-2002 : Updated with new automatic width calculation and optional 
+ * 04-Apr-2002 : Updated with new automatic width calculation and optional
  *               volume display, contributed by Sylvain Vieujot (DG);
- * 09-Apr-2002 : Removed translatedRangeZero from the drawItem() method, and 
- *               changed the return type of the drawItem method to void, 
- *               reflecting a change in the XYItemRenderer interface.  Added 
+ * 09-Apr-2002 : Removed translatedRangeZero from the drawItem() method, and
+ *               changed the return type of the drawItem method to void,
+ *               reflecting a change in the XYItemRenderer interface.  Added
  *               tooltip code to drawItem() method (DG);
  * 25-Jun-2002 : Removed redundant code (DG);
- * 05-Aug-2002 : Small modification to drawItem method to support URLs for HTML 
+ * 05-Aug-2002 : Small modification to drawItem method to support URLs for HTML
  *               image maps (RA);
  * 19-Sep-2002 : Fixed errors reported by Checkstyle (DG);
  * 25-Mar-2003 : Implemented Serializable (DG);
  * 01-May-2003 : Modified drawItem() method signature (DG);
- * 30-Jun-2003 : Added support for PlotOrientation (for completeness, this 
- *               renderer is unlikely to be used with a HORIZONTAL 
+ * 30-Jun-2003 : Added support for PlotOrientation (for completeness, this
+ *               renderer is unlikely to be used with a HORIZONTAL
  *               orientation) (DG);
  * 30-Jul-2003 : Modified entity constructor (CZ);
  * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 29-Aug-2003 : Moved maxVolume calculation to initialise method (see bug 
+ * 29-Aug-2003 : Moved maxVolume calculation to initialise method (see bug
  *               report 796619) (DG);
- * 02-Sep-2003 : Added maxCandleWidthInMilliseconds as workaround for bug 
+ * 02-Sep-2003 : Added maxCandleWidthInMilliseconds as workaround for bug
  *               796621 (DG);
  * 08-Sep-2003 : Changed ValueAxis API (DG);
  * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 13-Oct-2003 : Applied patch from Jerome Fisher to improve auto width 
+ * 13-Oct-2003 : Applied patch from Jerome Fisher to improve auto width
  *               calculations (DG);
  * 23-Dec-2003 : Fixed bug where up and down paint are used incorrectly (DG);
  * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 06-Jul-2006 : Swapped calls to getX() --> getXValue(), and the same for the
@@ -78,7 +78,8 @@
  * 17-Aug-2006 : Corrections to the equals() method (DG);
  * 05-Mar-2007 : Added flag to allow optional use of outline paint (DG);
  * 08-Oct-2007 : Added new volumePaint field (DG);
- * 
+ * 08-Apr-2008 : Added findRangeBounds() method override (DG);
+ *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -107,6 +108,8 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.Range;
+import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.data.xy.XYDataset;
@@ -116,37 +119,37 @@ import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
- * A renderer that draws candlesticks on an {@link XYPlot} (requires a 
+ * A renderer that draws candlesticks on an {@link XYPlot} (requires a
  * {@link OHLCDataset}).
  * <P>
- * This renderer does not include code to calculate the crosshair point for the 
+ * This renderer does not include code to calculate the crosshair point for the
  * plot.
  */
-public class CandlestickRenderer extends AbstractXYItemRenderer 
-                                 implements XYItemRenderer, 
+public class CandlestickRenderer extends AbstractXYItemRenderer
+                                 implements XYItemRenderer,
                                             Cloneable,
                                             PublicCloneable,
                                             Serializable {
-            
+
     /** For serialization. */
     private static final long serialVersionUID = 50390395841817121L;
-    
-    /** The average width method. */                                          
+
+    /** The average width method. */
     public static final int WIDTHMETHOD_AVERAGE = 0;
-    
+
     /** The smallest width method. */
     public static final int WIDTHMETHOD_SMALLEST = 1;
-    
+
     /** The interval data method. */
     public static final int WIDTHMETHOD_INTERVALDATA = 2;
 
     /** The method of automatically calculating the candle width. */
     private int autoWidthMethod = WIDTHMETHOD_AVERAGE;
 
-    /** 
-     * The number (generally between 0.0 and 1.0) by which the available space 
+    /**
+     * The number (generally between 0.0 and 1.0) by which the available space
      * automatically calculated for the candles will be multiplied to determine
-     * the actual width to use. 
+     * the actual width to use.
      */
     private double autoWidthFactor = 4.5 / 7;
 
@@ -155,44 +158,44 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
     /** The candle width. */
     private double candleWidth;
-    
+
     /** The maximum candlewidth in milliseconds. */
     private double maxCandleWidthInMilliseconds = 1000.0 * 60.0 * 60.0 * 20.0;
-    
+
     /** Temporary storage for the maximum candle width. */
     private double maxCandleWidth;
 
-    /** 
-     * The paint used to fill the candle when the price moved up from open to 
-     * close. 
+    /**
+     * The paint used to fill the candle when the price moved up from open to
+     * close.
      */
     private transient Paint upPaint;
 
-    /** 
-     * The paint used to fill the candle when the price moved down from open 
-     * to close. 
+    /**
+     * The paint used to fill the candle when the price moved down from open
+     * to close.
      */
     private transient Paint downPaint;
 
     /** A flag controlling whether or not volume bars are drawn on the chart. */
     private boolean drawVolume;
-    
-    /** 
-     * The paint used to fill the volume bars (if they are visible).  Once 
+
+    /**
+     * The paint used to fill the volume bars (if they are visible).  Once
      * initialised, this field should never be set to <code>null</code>.
      *
      * @since 1.0.7
      */
     private transient Paint volumePaint;
-    
+
     /** Temporary storage for the maximum volume. */
     private transient double maxVolume;
-    
-    /** 
+
+    /**
      * A flag that controls whether or not the renderer's outline paint is
      * used to draw the outline of the candlestick.  The default value is
      * <code>false</code> to avoid a change of behaviour for existing code.
-     * 
+     *
      * @since 1.0.5
      */
     private boolean useOutlinePaint;
@@ -207,7 +210,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     /**
      * Creates a new renderer for candlestick charts.
      * <P>
-     * Use -1 for the candle width if you prefer the width to be calculated 
+     * Use -1 for the candle width if you prefer the width to be calculated
      * automatically.
      *
      * @param candleWidth  The candle width.
@@ -219,13 +222,13 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     /**
      * Creates a new renderer for candlestick charts.
      * <P>
-     * Use -1 for the candle width if you prefer the width to be calculated 
+     * Use -1 for the candle width if you prefer the width to be calculated
      * automatically.
      *
      * @param candleWidth  the candle width.
-     * @param drawVolume  a flag indicating whether or not volume bars should 
+     * @param drawVolume  a flag indicating whether or not volume bars should
      *                    be drawn.
-     * @param toolTipGenerator  the tool tip generator. <code>null</code> is 
+     * @param toolTipGenerator  the tool tip generator. <code>null</code> is
      *                          none.
      */
     public CandlestickRenderer(double candleWidth, boolean drawVolume,
@@ -245,7 +248,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Returns the width of each candle.
      *
      * @return The candle width.
-     * 
+     *
      * @see #setCandleWidth(double)
      */
     public double getCandleWidth() {
@@ -276,7 +279,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Returns the maximum width (in milliseconds) of each candle.
      *
      * @return The maximum candle width in milliseconds.
-     * 
+     *
      * @see #setMaxCandleWidthInMilliseconds(double)
      */
     public double getMaxCandleWidthInMilliseconds() {
@@ -284,11 +287,11 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the maximum candle width (in milliseconds) and sends a 
-     * {@link RendererChangeEvent} to all registered listeners.  
+     * Sets the maximum candle width (in milliseconds) and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param millis  The maximum width.
-     * 
+     *
      * @see #getMaxCandleWidthInMilliseconds()
      * @see #setCandleWidth(double)
      * @see #setAutoWidthMethod(int)
@@ -304,7 +307,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Returns the method of automatically calculating the candle width.
      *
      * @return The method of automatically calculating the candle width.
-     * 
+     *
      * @see #setAutoWidthMethod(int)
      */
     public int getAutoWidthMethod() {
@@ -312,20 +315,20 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the method of automatically calculating the candle width and 
+     * Sets the method of automatically calculating the candle width and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      * <p>
-     * <code>WIDTHMETHOD_AVERAGE</code>: Divides the entire display (ignoring 
-     * scale factor) by the number of items, and uses this as the available 
+     * <code>WIDTHMETHOD_AVERAGE</code>: Divides the entire display (ignoring
+     * scale factor) by the number of items, and uses this as the available
      * width.<br>
-     * <code>WIDTHMETHOD_SMALLEST</code>: Checks the interval between each 
+     * <code>WIDTHMETHOD_SMALLEST</code>: Checks the interval between each
      * item, and uses the smallest as the available width.<br>
      * <code>WIDTHMETHOD_INTERVALDATA</code>: Assumes that the dataset supports
-     * the IntervalXYDataset interface, and uses the startXValue - endXValue as 
+     * the IntervalXYDataset interface, and uses the startXValue - endXValue as
      * the available width.
      * <br>
      *
-     * @param autoWidthMethod  The method of automatically calculating the 
+     * @param autoWidthMethod  The method of automatically calculating the
      * candle width.
      *
      * @see #WIDTHMETHOD_AVERAGE
@@ -345,12 +348,12 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the factor by which the available space automatically 
-     * calculated for the candles will be multiplied to determine the actual 
+     * Returns the factor by which the available space automatically
+     * calculated for the candles will be multiplied to determine the actual
      * width to use.
      *
      * @return The width factor (generally between 0.0 and 1.0).
-     * 
+     *
      * @see #setAutoWidthFactor(double)
      */
     public double getAutoWidthFactor() {
@@ -358,11 +361,11 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the factor by which the available space automatically calculated 
+     * Sets the factor by which the available space automatically calculated
      * for the candles will be multiplied to determine the actual width to use.
      *
      * @param autoWidthFactor The width factor (generally between 0.0 and 1.0).
-     * 
+     *
      * @see #getAutoWidthFactor()
      * @see #setCandleWidth(double)
      * @see #setAutoWidthMethod(int)
@@ -377,11 +380,11 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the amount of space to leave on the left and right of each 
+     * Returns the amount of space to leave on the left and right of each
      * candle when automatically calculating widths.
      *
      * @return The gap.
-     * 
+     *
      * @see #setAutoWidthGap(double)
      */
     public double getAutoWidthGap() {
@@ -389,12 +392,12 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the amount of space to leave on the left and right of each candle 
-     * when automatically calculating widths and sends a 
+     * Sets the amount of space to leave on the left and right of each candle
+     * when automatically calculating widths and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param autoWidthGap The gap.
-     * 
+     *
      * @see #getAutoWidthGap()
      * @see #setCandleWidth(double)
      * @see #setAutoWidthMethod(int)
@@ -413,7 +416,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * to close.
      *
      * @return The paint (possibly <code>null</code>).
-     * 
+     *
      * @see #setUpPaint(Paint)
      */
     public Paint getUpPaint() {
@@ -426,7 +429,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * listeners.
      *
      * @param paint  the paint (<code>null</code> permitted).
-     * 
+     *
      * @see #getUpPaint()
      */
     public void setUpPaint(Paint paint) {
@@ -439,7 +442,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * open to close.
      *
      * @return The paint (possibly <code>null</code>).
-     * 
+     *
      * @see #setDownPaint(Paint)
      */
     public Paint getDownPaint() {
@@ -461,11 +464,11 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     /**
      * Returns a flag indicating whether or not volume bars are drawn on the
      * chart.
-     * 
+     *
      * @return A boolean.
-     * 
+     *
      * @since 1.0.5
-     * 
+     *
      * @see #setDrawVolume(boolean)
      */
     public boolean getDrawVolume() {
@@ -478,7 +481,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * listeners.
      *
      * @param flag  the flag.
-     * 
+     *
      * @see #getDrawVolume()
      */
     public void setDrawVolume(boolean flag) {
@@ -487,34 +490,34 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
             fireChangeEvent();
         }
     }
-    
+
     /**
      * Returns the paint that is used to fill the volume bars if they are
      * visible.
-     * 
+     *
      * @return The paint (never <code>null</code>).
-     * 
+     *
      * @see #setVolumePaint(Paint)
-     * 
+     *
      * @since 1.0.7
      */
     public Paint getVolumePaint() {
-        return this.volumePaint;    
+        return this.volumePaint;
     }
-    
+
     /**
-     * Sets the paint used to fill the volume bars, and sends a 
+     * Sets the paint used to fill the volume bars, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getVolumePaint()
      * @see #getDrawVolume()
-     * 
+     *
      * @since 1.0.7
      */
     public void setVolumePaint(Paint paint) {
-        if (paint == null) { 
+        if (paint == null) {
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.volumePaint = paint;
@@ -525,26 +528,26 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Returns the flag that controls whether or not the renderer's outline
      * paint is used to draw the candlestick outline.  The default value is
      * <code>false</code>.
-     * 
+     *
      * @return A boolean.
-     * 
+     *
      * @since 1.0.5
-     * 
+     *
      * @see #setUseOutlinePaint(boolean)
      */
     public boolean getUseOutlinePaint() {
         return this.useOutlinePaint;
     }
-    
+
     /**
      * Sets the flag that controls whether or not the renderer's outline
-     * paint is used to draw the candlestick outline, and sends a 
+     * paint is used to draw the candlestick outline, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param use  the new flag value.
-     * 
+     *
      * @since 1.0.5
-     * 
+     *
      * @see #getUseOutlinePaint()
      */
     public void setUseOutlinePaint(boolean use) {
@@ -553,11 +556,29 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
             fireChangeEvent();
         }
     }
-    
+
+    /**
+     * Returns the range of values the renderer requires to display all the
+     * items from the specified dataset.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     *         or empty).
+     */
+    public Range findRangeBounds(XYDataset dataset) {
+        if (dataset != null) {
+            return DatasetUtilities.findRangeBounds(dataset, true);
+        }
+        else {
+            return null;
+        }
+    }
+
     /**
      * Initialises the renderer then returns the number of 'passes' through the
-     * data that the renderer will require (usually just one).  This method 
-     * will be called before the first item is rendered, giving the renderer 
+     * data that the renderer will require (usually just one).  This method
+     * will be called before the first item is rendered, giving the renderer
      * an opportunity to initialise any state information it wants to maintain.
      * The renderer can do nothing if it chooses.
      *
@@ -565,7 +586,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * @param dataArea  the area inside the axes.
      * @param plot  the plot.
      * @param dataset  the data.
-     * @param info  an optional info collection object to return data back to 
+     * @param info  an optional info collection object to return data back to
      *              the caller.
      *
      * @return The number of passes the renderer requires.
@@ -575,7 +596,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
                                           XYPlot plot,
                                           XYDataset dataset,
                                           PlotRenderingInfo info) {
-          
+
         // calculate the maximum allowed candle width from the axis...
         ValueAxis axis = plot.getDomainAxis();
         double x1 = axis.getLowerBound();
@@ -583,27 +604,27 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         RectangleEdge edge = plot.getDomainAxisEdge();
         double xx1 = axis.valueToJava2D(x1, dataArea, edge);
         double xx2 = axis.valueToJava2D(x2, dataArea, edge);
-        this.maxCandleWidth = Math.abs(xx2 - xx1); 
-            // Absolute value, since the relative x 
+        this.maxCandleWidth = Math.abs(xx2 - xx1);
+            // Absolute value, since the relative x
             // positions are reversed for horizontal orientation
-        
-        // calculate the highest volume in the dataset... 
+
+        // calculate the highest volume in the dataset...
         if (this.drawVolume) {
             OHLCDataset highLowDataset = (OHLCDataset) dataset;
             this.maxVolume = 0.0;
-            for (int series = 0; series < highLowDataset.getSeriesCount(); 
+            for (int series = 0; series < highLowDataset.getSeriesCount();
                  series++) {
-                for (int item = 0; item < highLowDataset.getItemCount(series); 
+                for (int item = 0; item < highLowDataset.getItemCount(series);
                      item++) {
                     double volume = highLowDataset.getVolumeValue(series, item);
                     if (volume > this.maxVolume) {
                         this.maxVolume = volume;
                     }
-                    
-                }    
+
+                }
             }
         }
-        
+
         return new XYItemRendererState(info);
     }
 
@@ -614,26 +635,26 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * @param state  the renderer state.
      * @param dataArea  the area within which the plot is being drawn.
      * @param info  collects info about the drawing.
-     * @param plot  the plot (can be used to obtain standard color 
+     * @param plot  the plot (can be used to obtain standard color
      *              information etc).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
      * @param dataset  the dataset.
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
-     * @param crosshairState  crosshair information for the plot 
+     * @param crosshairState  crosshair information for the plot
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2, 
+    public void drawItem(Graphics2D g2,
                          XYItemRendererState state,
                          Rectangle2D dataArea,
                          PlotRenderingInfo info,
-                         XYPlot plot, 
-                         ValueAxis domainAxis, 
+                         XYPlot plot,
+                         ValueAxis domainAxis,
                          ValueAxis rangeAxis,
-                         XYDataset dataset, 
-                         int series, 
+                         XYDataset dataset,
+                         int series,
                          int item,
                          CrosshairState crosshairState,
                          int pass) {
@@ -649,7 +670,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         else {
             return;
         }
-        
+
         // setup for collecting optional entity info...
         EntityCollection entities = null;
         if (info != null) {
@@ -685,7 +706,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
             double xxWidth = 0;
             int itemCount;
             switch (this.autoWidthMethod) {
-            
+
                 case WIDTHMETHOD_AVERAGE:
                     itemCount = highLowData.getItemCount(series);
                     if (horiz) {
@@ -695,7 +716,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
                         xxWidth = dataArea.getWidth() / itemCount;
                     }
                     break;
-            
+
                 case WIDTHMETHOD_SMALLEST:
                     // Note: It would be nice to pre-calculate this per series
                     itemCount = highLowData.getItemCount(series);
@@ -703,28 +724,28 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
                     xxWidth = dataArea.getWidth();
                     for (int i = 0; i < itemCount; i++) {
                         double pos = domainAxis.valueToJava2D(
-                                highLowData.getXValue(series, i), dataArea, 
+                                highLowData.getXValue(series, i), dataArea,
                                 domainEdge);
                         if (lastPos != -1) {
-                            xxWidth = Math.min(xxWidth, 
+                            xxWidth = Math.min(xxWidth,
                                     Math.abs(pos - lastPos));
                         }
                         lastPos = pos;
                     }
                     break;
-            
+
                 case WIDTHMETHOD_INTERVALDATA:
-                    IntervalXYDataset intervalXYData 
+                    IntervalXYDataset intervalXYData
                             = (IntervalXYDataset) dataset;
                     double startPos = domainAxis.valueToJava2D(
-                            intervalXYData.getStartXValue(series, item), 
+                            intervalXYData.getStartXValue(series, item),
                             dataArea, plot.getDomainAxisEdge());
                     double endPos = domainAxis.valueToJava2D(
-                            intervalXYData.getEndXValue(series, item), 
+                            intervalXYData.getEndXValue(series, item),
                             dataArea, plot.getDomainAxisEdge());
                     xxWidth = Math.abs(endPos - startPos);
                     break;
-                
+
             }
             xxWidth -= 2 * this.autoWidthGap;
             xxWidth *= this.autoWidthFactor;
@@ -811,9 +832,9 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         // draw the body
         Shape body = null;
         if (horiz) {
-            body = new Rectangle2D.Double(yyMinOpenClose, xx - stickWidth / 2, 
+            body = new Rectangle2D.Double(yyMinOpenClose, xx - stickWidth / 2,
                     yyMaxOpenClose - yyMinOpenClose, stickWidth);
-        } 
+        }
         else {
             body = new Rectangle2D.Double(xx - stickWidth / 2, yyMinOpenClose,
                     stickWidth, yyMaxOpenClose - yyMinOpenClose);
@@ -855,7 +876,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
             if (getURLGenerator() != null) {
                 url = getURLGenerator().generateURL(dataset, series, item);
             }
-            XYItemEntity entity = new XYItemEntity(body, dataset, series, item, 
+            XYItemEntity entity = new XYItemEntity(body, dataset, series, item,
                     tip, url);
             entities.add(entity);
         }
@@ -889,7 +910,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         if (this.drawVolume != that.drawVolume) {
             return false;
         }
-        if (this.maxCandleWidthInMilliseconds 
+        if (this.maxCandleWidthInMilliseconds
                 != that.maxCandleWidthInMilliseconds) {
             return false;
         }
@@ -913,9 +934,9 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
     /**
      * Returns a clone of the renderer.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
@@ -944,7 +965,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.upPaint = SerialUtilities.readPaint(stream);
@@ -953,14 +974,14 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     }
 
     // --- DEPRECATED CODE ----------------------------------------------------
-    
+
     /**
      * Returns a flag indicating whether or not volume bars are drawn on the
      * chart.
      *
      * @return <code>true</code> if volume bars are drawn on the chart.
-     * 
-     * @deprecated As of 1.0.5, you should use the {@link #getDrawVolume()} 
+     *
+     * @deprecated As of 1.0.5, you should use the {@link #getDrawVolume()}
      *         method.
      */
     public boolean drawVolume() {
