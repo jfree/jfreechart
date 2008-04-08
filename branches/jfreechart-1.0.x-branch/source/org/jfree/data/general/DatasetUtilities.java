@@ -761,7 +761,8 @@ public final class DatasetUtilities {
 
     /**
      * Returns the range of values in the range for the dataset.  This method
-     * is the partner for the {@link #findDomainBounds(XYDataset)} method.
+     * is the partner for the {@link #findDomainBounds(XYDataset, boolean)}
+     * method.
      *
      * @param dataset  the dataset (<code>null</code> not permitted).
      * @param includeInterval  a flag that determines whether or not the
