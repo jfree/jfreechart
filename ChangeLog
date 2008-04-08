@@ -1,5 +1,10 @@
 2008-04-08  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/block/BorderArrangement.java
+    (arrangeFF): Check for negative width remaining.
+
+2008-04-08  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/block/ColorBlock.java
     (arrange): New method override,
     (draw): Add code for margin, border and padding,
