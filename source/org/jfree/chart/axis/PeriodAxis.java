@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PeriodAxis.java
  * ---------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,6 +49,8 @@
  *               subclasses (DG);
  * 22-Mar-2007 : Use new defaultAutoRange attribute (DG);
  * 31-Jul-2007 : Fix for inverted axis labelling (see bug 1763413) (DG);
+ * 08-Apr-2008 : Notify listeners in setRange(Range, boolean, boolean) - fixes
+ *               bug 1932146 (DG);
  *
  */
 
@@ -201,6 +203,7 @@ public class PeriodAxis extends ValueAxis
         this.first = first;
         this.last = last;
         this.timeZone = timeZone;
+        // FIXME: this calendar may need a locale as well
         this.calendar = Calendar.getInstance(timeZone);
         this.autoRangeTimePeriodClass = first.getClass();
         this.majorTickTimePeriodClass = first.getClass();
@@ -283,6 +286,7 @@ public class PeriodAxis extends ValueAxis
             throw new IllegalArgumentException("Null 'zone' argument.");   
         }
         this.timeZone = zone;
+        // FIXME: this calendar may need a locale as well
         this.calendar = Calendar.getInstance(zone);
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -521,7 +525,10 @@ public class PeriodAxis extends ValueAxis
         this.first = createInstance(this.autoRangeTimePeriodClass, 
                 new Date(lower), this.timeZone);
         this.last = createInstance(this.autoRangeTimePeriodClass, 
-                new Date(upper), this.timeZone);        
+                new Date(upper), this.timeZone);
+        if (notify) {
+        	notifyListeners(new AxisChangeEvent(this));
+        }
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * PeriodAxisTests.java
  * --------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 10-Jun-2003 : Version 1 (DG);
  * 07-Jan-2005 : Added test for hashCode() method (DG);
+ * 08-Apr-2008 : Added test1932146() (DG);
  *
  */
 
@@ -60,6 +61,9 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.axis.PeriodAxis;
 import org.jfree.chart.axis.PeriodAxisLabelInfo;
+import org.jfree.chart.event.AxisChangeEvent;
+import org.jfree.chart.event.AxisChangeListener;
+import org.jfree.data.time.DateRange;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Minute;
 import org.jfree.data.time.Month;
@@ -70,9 +74,21 @@ import org.jfree.data.time.Year;
 /**
  * Tests for the {@link PeriodAxis} class.
  */
-public class PeriodAxisTests extends TestCase {
+public class PeriodAxisTests extends TestCase implements AxisChangeListener {
 
-    /**
+	/** The last event received. */
+	private AxisChangeEvent lastEvent;
+	
+	/**
+	 * Receives and records an {@link AxisChangeEvent}.
+	 * 
+	 * @param event  the event.
+	 */
+    public void axisChanged(AxisChangeEvent event) {
+        this.lastEvent = event;	
+	}
+
+	/**
      * Returns the tests as a test suite.
      *
      * @return The test suite.
@@ -121,9 +137,8 @@ public class PeriodAxisTests extends TestCase {
         assertTrue(a1.equals(a2));
         
         PeriodAxisLabelInfo info[] = new PeriodAxisLabelInfo[1];
-        info[0] = new PeriodAxisLabelInfo(
-            Month.class, new SimpleDateFormat("MMM")
-        );
+        info[0] = new PeriodAxisLabelInfo(Month.class, 
+        		new SimpleDateFormat("MMM"));
         
         a1.setLabelInfo(info);
         assertFalse(a1.equals(a2));
@@ -180,7 +195,7 @@ public class PeriodAxisTests extends TestCase {
             a2 = (PeriodAxis) a1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
@@ -204,9 +219,8 @@ public class PeriodAxisTests extends TestCase {
 
         PeriodAxisLabelInfo[] info = new PeriodAxisLabelInfo[2];
         info[0] = new PeriodAxisLabelInfo(Day.class, new SimpleDateFormat("d"));
-        info[1] = new PeriodAxisLabelInfo(
-            Year.class, new SimpleDateFormat("yyyy")
-        );
+        info[1] = new PeriodAxisLabelInfo(Year.class, 
+        		new SimpleDateFormat("yyyy"));
         a1.setLabelInfo(info);
         assertFalse(a1.equals(a2));
         a2.setLabelInfo(info);
@@ -237,16 +251,26 @@ public class PeriodAxisTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             a2 = (PeriodAxis) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         boolean b = a1.equals(a2);
         assertTrue(b);
+    }
+    
+    /**
+     * A test for bug 1932146.
+     */
+    public void test1932146() {
+    	PeriodAxis axis = new PeriodAxis("TestAxis");
+    	axis.addChangeListener(this);
+    	this.lastEvent = null;
+    	axis.setRange(new DateRange(0L, 1000L));
+    	assertTrue(this.lastEvent != null);
     }
 
 }
