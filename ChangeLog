@@ -1,3 +1,13 @@
+2008-04-08  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/block/ColorBlock.java
+    (arrange): New method override,
+    (draw): Add code for margin, border and padding,
+    * source/org/jfree/chart/block/EmptyBlock.java
+    (arrange): New method override,
+    (draw(Graphics2D, Rectangle2D)): Delegate,
+    (draw(Graphics2D, Rectangle2D, Object)): New method override.
+
 2008-04-07  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/TimePeriodValue.java
