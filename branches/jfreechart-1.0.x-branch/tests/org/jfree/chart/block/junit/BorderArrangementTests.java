@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * BorderArrangementTests.java
  * ---------------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -144,8 +144,7 @@ public class BorderArrangementTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             b2 = (BorderArrangement) in.readObject();
             in.close();
         }
@@ -160,9 +159,8 @@ public class BorderArrangementTests extends TestCase {
      */
     public void testSizing() {
         BlockContainer container = new BlockContainer(new BorderArrangement());
-        BufferedImage image = new BufferedImage(
-            200, 100, BufferedImage.TYPE_INT_RGB
-        );
+        BufferedImage image = new BufferedImage(200, 100, 
+        		BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
         
         // TBLRC
@@ -494,14 +492,12 @@ public class BorderArrangementTests extends TestCase {
      */
     public void testSizingWithWidthConstraint() {
         RectangleConstraint constraint = new RectangleConstraint(
-            10.0, new Range(10.0, 10.0), LengthConstraintType.FIXED,
-            0.0, new Range(0.0, 0.0), LengthConstraintType.NONE
-        );
+                10.0, new Range(10.0, 10.0), LengthConstraintType.FIXED,
+                0.0, new Range(0.0, 0.0), LengthConstraintType.NONE);
                 
         BlockContainer container = new BlockContainer(new BorderArrangement());
-        BufferedImage image = new BufferedImage(
-            200, 100, BufferedImage.TYPE_INT_RGB
-        );
+        BufferedImage image = new BufferedImage(200, 100, 
+        		BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
         
         // TBLRC
