@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------------
@@ -82,7 +82,7 @@ public class DefaultOHLCDatasetTests extends TestCase {
     }
 
     private static final double EPSILON = 0.0000000001;
-    
+
     /**
      * A small test for the data range calculated on this dataset.
      */
@@ -92,42 +92,41 @@ public class DefaultOHLCDatasetTests extends TestCase {
         data[1] = new OHLCDataItem(new Date(22L), 4.0, 9.0, 2.0, 5.0, 120.0);
         data[2] = new OHLCDataItem(new Date(33L), 3.0, 7.0, 3.0, 6.0, 140.0);
         DefaultOHLCDataset d = new DefaultOHLCDataset("S1", data);
-        Range r = DatasetUtilities.findRangeBounds(d, false);
+        Range r = DatasetUtilities.findRangeBounds(d, true);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(9.0, r.getUpperBound(), EPSILON);
     }
-    
+
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1", 
+        DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
-        DefaultOHLCDataset d2 = new DefaultOHLCDataset("Series 1", 
+        DefaultOHLCDataset d2 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
-        
+
         d1 = new DefaultOHLCDataset("Series 2", new OHLCDataItem[0]);
         assertFalse(d1.equals(d2));
         d2 = new DefaultOHLCDataset("Series 2", new OHLCDataItem[0]);
         assertTrue(d1.equals(d2));
-        
+
         d1 = new DefaultOHLCDataset("Series 2", new OHLCDataItem[] {
                 new OHLCDataItem(new Date(123L), 1.2, 3.4, 5.6, 7.8, 99.9)});
         assertFalse(d1.equals(d2));
         d2 = new DefaultOHLCDataset("Series 2", new OHLCDataItem[] {
                 new OHLCDataItem(new Date(123L), 1.2, 3.4, 5.6, 7.8, 99.9)});
         assertTrue(d1.equals(d2));
-        
-        
+
     }
 
     /**
      * Confirm that cloning works.
      */
     public void testCloning() {
-        DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1", 
+        DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
         DefaultOHLCDataset d2 = null;
         try {
@@ -145,7 +144,7 @@ public class DefaultOHLCDatasetTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-        DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1", 
+        DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
         DefaultOHLCDataset d2 = null;
 
