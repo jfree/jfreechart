@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------------
@@ -60,16 +60,16 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
 
     /** Storage for the data series. */
     private List data;
-    
-    /** 
-     * Creates a new instance of <code>XIntervalSeriesCollection</code>. 
+
+    /**
+     * Creates a new instance of <code>XIntervalSeriesCollection</code>.
      */
     public XIntervalSeriesCollection() {
         this.data = new java.util.ArrayList();
     }
 
     /**
-     * Adds a series to the collection and sends a {@link DatasetChangeEvent} 
+     * Adds a series to the collection and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
@@ -98,7 +98,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series index (zero-based).
      *
      * @return The series.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
@@ -112,11 +112,11 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the key for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to 
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The key for a series.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     specified range.
      */
@@ -131,7 +131,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series (zero-based index).
      *
      * @return The item count.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
@@ -155,6 +155,48 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
+     * Returns the start x-value (as a double primitive) for an item within a
+     * series.
+     *
+     * @param series  the series index (zero-based).
+     * @param item  the item index (zero-based).
+     *
+     * @return The value.
+     */
+    public double getStartXValue(int series, int item) {
+        XIntervalSeries s = (XIntervalSeries) this.data.get(series);
+        return s.getXLowValue(item);
+    }
+
+    /**
+     * Returns the end x-value (as a double primitive) for an item within a
+     * series.
+     *
+     * @param series  the series (zero-based index).
+     * @param item  the item (zero-based index).
+     *
+     * @return The value.
+     */
+    public double getEndXValue(int series, int item) {
+        XIntervalSeries s = (XIntervalSeries) this.data.get(series);
+        return s.getXHighValue(item);
+    }
+
+    /**
+     * Returns the y-value (as a double primitive) for an item within a
+     * series.
+     *
+     * @param series  the series index (zero-based).
+     * @param item  the item index (zero-based).
+     *
+     * @return The value.
+     */
+    public double getYValue(int series, int item) {
+        XIntervalSeries s = (XIntervalSeries) this.data.get(series);
+        return s.getYValue(item);
+    }
+
+    /**
      * Returns the y-value for an item within a series.
      *
      * @param series  the series index.
@@ -169,7 +211,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the start x-value for an item within a series.  
+     * Returns the start x-value for an item within a series.
      *
      * @param series  the series index.
      * @param item  the item index.
@@ -183,7 +225,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the end x-value for an item within a series.  
+     * Returns the end x-value for an item within a series.
      *
      * @param series  the series index.
      * @param item  the item index.
@@ -221,13 +263,13 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     public Number getEndY(int series, int item) {
         return getY(series, item);
     }
-    
+
     /**
-     * Removes a series from the collection and sends a 
+     * Removes a series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * 
+     *
      * @since 1.0.10
      */
     public void removeSeries(int series) {
@@ -241,11 +283,11 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes a series from the collection and sends a 
+     * Removes a series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.10
      */
     public void removeSeries(XIntervalSeries series) {
@@ -258,15 +300,15 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
             fireDatasetChanged();
         }
     }
-    
+
     /**
-     * Removes all the series from the collection and sends a 
+     * Removes all the series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
-     * 
+     *
      * @since 1.0.10
      */
     public void removeAllSeries() {
-        // Unregister the collection as a change listener to each series in 
+        // Unregister the collection as a change listener to each series in
         // the collection.
         for (int i = 0; i < this.data.size(); i++) {
           XIntervalSeries series = (XIntervalSeries) this.data.get(i);
@@ -281,7 +323,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      *
      * @param obj  the object (<code>null</code> permitted).
      *
-     * @return A boolean. 
+     * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -293,19 +335,19 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
         XIntervalSeriesCollection that = (XIntervalSeriesCollection) obj;
         return ObjectUtilities.equal(this.data, that.data);
     }
-    
+
     /**
      * Returns a clone of this instance.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException if there is a problem.
      */
     public Object clone() throws CloneNotSupportedException {
-        XIntervalSeriesCollection clone 
+        XIntervalSeriesCollection clone
                 = (XIntervalSeriesCollection) super.clone();
         clone.data = (List) ObjectUtilities.deepClone(this.data);
         return clone;
     }
-  
+
 }
