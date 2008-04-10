@@ -1,3 +1,9 @@
+2008-04-11  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/xy/XIntervalSeries.java
+    (getXLowValue): New method,
+    (getXHighValue): Likewise.
+
 2008-04-08  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 1932146:
