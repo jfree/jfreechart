@@ -2282,14 +2282,14 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         ArrayList markers;
         if (layer == Layer.FOREGROUND) {
             markers = (ArrayList) this.foregroundDomainMarkers.get(
-            		new Integer(index));
+                    new Integer(index));
         }
         else {
             markers = (ArrayList) this.backgroundDomainMarkers.get(
-            		new Integer(index));
+                    new Integer(index));
         }
         if (markers == null) {
-        	return false;
+            return false;
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {
@@ -2521,14 +2521,14 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         ArrayList markers;
         if (layer == Layer.FOREGROUND) {
             markers = (ArrayList) this.foregroundRangeMarkers.get(
-            		new Integer(index));
+                    new Integer(index));
         }
         else {
             markers = (ArrayList) this.backgroundRangeMarkers.get(
                     new Integer(index));
         }
         if (markers == null) {
-        	return false;
+            return false;
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {
