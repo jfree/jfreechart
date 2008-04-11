@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * DeviationRenderer.java
  * ----------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,7 +36,8 @@
  * -------
  * 21-Feb-2007 : Version 1 (DG);
  * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
- * 
+ * 11-Apr-2008 : New override for findRangeBounds() (DG);
+ *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -55,15 +56,17 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.Range;
+import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.RectangleEdge;
 
 /**
  * A specialised subclass of the {@link XYLineAndShapeRenderer} that requires
- * an {@link IntervalXYDataset} and represents the y-interval by shading an 
+ * an {@link IntervalXYDataset} and represents the y-interval by shading an
  * area behind the y-values on the chart.
- * 
+ *
  * @since 1.0.5
  */
 public class DeviationRenderer extends XYLineAndShapeRenderer {
@@ -72,22 +75,22 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      * A state object that is passed to each call to <code>drawItem</code>.
      */
     public static class State extends XYLineAndShapeRenderer.State {
-        
-        /** 
-         * A list of coordinates for the upper y-values in the current series 
+
+        /**
+         * A list of coordinates for the upper y-values in the current series
          * (after translation into Java2D space).
          */
         public List upperCoordinates;
-        
-        /** 
-         * A list of coordinates for the lower y-values in the current series 
+
+        /**
+         * A list of coordinates for the lower y-values in the current series
          * (after translation into Java2D space).
          */
         public List lowerCoordinates;
-        
+
         /**
          * Creates a new state instance.
-         * 
+         *
          * @param info  the plot rendering info.
          */
         public State(PlotRenderingInfo info) {
@@ -95,23 +98,23 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
             this.lowerCoordinates = new java.util.ArrayList();
             this.upperCoordinates = new java.util.ArrayList();
         }
-        
+
     }
-    
+
     /** The alpha transparency for the interval shading. */
     private float alpha;
 
     /**
-     * Creates a new renderer that displays lines and shapes for the data 
+     * Creates a new renderer that displays lines and shapes for the data
      * items, as well as the shaded area for the y-interval.
      */
     public DeviationRenderer() {
         this(true, true);
     }
-    
+
     /**
      * Creates a new renderer.
-     * 
+     *
      * @param lines  show lines between data items?
      * @param shapes  show a shape for each data item?
      */
@@ -120,12 +123,12 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
         super.setDrawSeriesLineAsPath(true);
         this.alpha = 0.5f;
     }
-    
+
     /**
      * Returns the alpha transparency for the background shading.
-     * 
+     *
      * @return The alpha transparency.
-     * 
+     *
      * @see #setAlpha(float)
      */
     public float getAlpha() {
@@ -133,11 +136,11 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Sets the alpha transparency for the background shading, and sends a 
+     * Sets the alpha transparency for the background shading, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param alpha   the alpha (in the range 0.0f to 1.0f).
-     * 
+     *
      * @see #getAlpha()
      */
     public void setAlpha(float alpha) {
@@ -152,7 +155,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
     /**
      * This method is overridden so that this flag cannot be changed---it is
      * set to <code>true</code> for this renderer.
-     * 
+     *
      * @param flag  ignored.
      */
     public void setDrawSeriesLineAsPath(boolean flag) {
@@ -160,18 +163,36 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
+     * Returns the range of values the renderer requires to display all the
+     * items from the specified dataset.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     *         or empty).
+     */
+    public Range findRangeBounds(XYDataset dataset) {
+        if (dataset != null) {
+            return DatasetUtilities.findRangeBounds(dataset, true);
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
      * Initialises and returns a state object that can be passed to each
      * invocation of the {@link #drawItem} method.
-     * 
+     *
      * @param g2  the graphics target.
      * @param dataArea  the data area.
      * @param plot  the plot.
      * @param dataset  the dataset.
      * @param info  the plot rendering info.
-     * 
+     *
      * @return A newly initialised state object.
      */
-    public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea, 
+    public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
             XYPlot plot, XYDataset dataset, PlotRenderingInfo info) {
         State state = new State(info);
         state.seriesPath = new GeneralPath();
@@ -180,9 +201,9 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Returns the number of passes (through the dataset) used by this 
+     * Returns the number of passes (through the dataset) used by this
      * renderer.
-     * 
+     *
      * @return <code>3</code>.
      */
     public int getPassCount() {
@@ -192,11 +213,11 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
     /**
      * Returns <code>true</code> if this is the pass where the shapes are
      * drawn.
-     * 
+     *
      * @param pass  the pass index.
-     * 
+     *
      * @return A boolean.
-     * 
+     *
      * @see #isLinePass(int)
      */
     protected boolean isItemPass(int pass) {
@@ -206,11 +227,11 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
     /**
      * Returns <code>true</code> if this is the pass where the lines are
      * drawn.
-     * 
+     *
      * @param pass  the pass index.
-     * 
+     *
      * @return A boolean.
-     * 
+     *
      * @see #isItemPass(int)
      */
     protected boolean isLinePass(int pass) {
@@ -224,14 +245,14 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      * @param state  the renderer state.
      * @param dataArea  the area within which the data is being drawn.
      * @param info  collects information about the drawing.
-     * @param plot  the plot (can be used to obtain standard color 
+     * @param plot  the plot (can be used to obtain standard color
      *              information etc).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
      * @param dataset  the dataset.
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
-     * @param crosshairState  crosshair information for the plot 
+     * @param crosshairState  crosshair information for the plot
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
@@ -250,7 +271,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
 
         // do nothing if item is not visible
         if (!getItemVisible(series, item)) {
-            return;   
+            return;
         }
 
         // first pass draws the shading
@@ -264,11 +285,11 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
 
             RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
             RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
-            
+
             double xx = domainAxis.valueToJava2D(x, dataArea, xAxisLocation);
-            double yyLow = rangeAxis.valueToJava2D(yLow, dataArea, 
+            double yyLow = rangeAxis.valueToJava2D(yLow, dataArea,
                     yAxisLocation);
-            double yyHigh = rangeAxis.valueToJava2D(yHigh, dataArea, 
+            double yyHigh = rangeAxis.valueToJava2D(yHigh, dataArea,
                     yAxisLocation);
 
             PlotOrientation orientation = plot.getOrientation();
@@ -305,27 +326,27 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
                 area.closePath();
                 g2.fill(area);
                 g2.setComposite(originalComposite);
-                
+
                 drState.lowerCoordinates.clear();
                 drState.upperCoordinates.clear();
-            }            
+            }
         }
         if (isLinePass(pass)) {
-            
+
             // the following code handles the line for the y-values...it's
             // all done by code in the super class
             if (item == 0) {
                 State s = (State) state;
                 s.seriesPath.reset();
-                s.setLastPointGood(false);     
+                s.setLastPointGood(false);
             }
 
             if (getItemLineVisible(series, item)) {
-                drawPrimaryLineAsPath(state, g2, plot, dataset, pass, 
+                drawPrimaryLineAsPath(state, g2, plot, dataset, pass,
                         series, item, domainAxis, rangeAxis, dataArea);
             }
         }
-        
+
         // second pass adds shapes where the items are ..
         else if (isItemPass(pass)) {
 
@@ -335,16 +356,16 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
                 entities = info.getOwner().getEntityCollection();
             }
 
-            drawSecondaryPass(g2, plot, dataset, pass, series, item, 
+            drawSecondaryPass(g2, plot, dataset, pass, series, item,
                     domainAxis, dataArea, rangeAxis, crosshairState, entities);
         }
     }
-    
+
     /**
      * Tests this renderer for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
