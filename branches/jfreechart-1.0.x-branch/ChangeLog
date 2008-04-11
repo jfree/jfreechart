@@ -1,5 +1,12 @@
 2008-04-11  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/title/ImageTitle.java
+    (arrange): New method override to handle margin, border and padding,
+    * test/org/jfree/chart/title/junit/ImageTitleTests.java
+    (testArrangeNN): New test method.
+
+2008-04-11  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/urls/CustomXYURLGenerator.java
     (clone): Implemented,
     * tests/org/jfree/chart/urls/junit/CustomPieURLGeneratorTests.java: 
