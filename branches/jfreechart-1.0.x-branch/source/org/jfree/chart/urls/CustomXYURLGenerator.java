@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * CustomXYURLGenerator.java
  * -------------------------
- * (C) Copyright 2002-2007, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -40,6 +40,8 @@
  * 20-Jan-2005 : Minor Javadoc update (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
+ * 11-Apr-2008 : Implemented Cloneable, otherwise charts using this URL
+ *               generator will fail to clone (DG);
  *
  */
 
@@ -50,15 +52,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jfree.data.xy.XYDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * A custom URL generator.
  */
-public class CustomXYURLGenerator implements XYURLGenerator, Serializable {
+public class CustomXYURLGenerator implements XYURLGenerator, Cloneable,
+        PublicCloneable, Serializable {
 
-    /** For serialization. */
+	/** For serialization. */
     private static final long serialVersionUID = -8565933356596551832L;
-    
+
     /** Storage for the URLs. */
     private ArrayList urlSeries = new ArrayList();
 
@@ -138,39 +142,34 @@ public class CustomXYURLGenerator implements XYURLGenerator, Serializable {
     }
 
     /**
-     * Tests if this object is equal to another.
+     * Tests this generator for equality with an arbitrary object.
      *
-     * @param o  the other object.
+     * @param obj  the object (<code>null</code> permitted).
      *
      * @return A boolean.
      */
-    public boolean equals(Object o) {
-
-        if (o == null) {
-            return false;
-        }
-        if (o == this) {
+    public boolean equals(Object obj) {
+        if (obj == this) {
             return true;
         }
-
-        if (!(o instanceof CustomXYURLGenerator)) {
+        if (!(obj instanceof CustomXYURLGenerator)) {
             return false;
         }
-        CustomXYURLGenerator generator = (CustomXYURLGenerator) o;
+        CustomXYURLGenerator that = (CustomXYURLGenerator) obj;
         int listCount = getListCount();
-        if (listCount != generator.getListCount()) {
+        if (listCount != that.getListCount()) {
             return false;
         }
 
         for (int series = 0; series < listCount; series++) {
             int urlCount = getURLCount(series);
-            if (urlCount != generator.getURLCount(series)) {
+            if (urlCount != that.getURLCount(series)) {
                 return false;
             }
 
             for (int item = 0; item < urlCount; item++) {
                 String u1 = getURL(series, item);
-                String u2 = generator.getURL(series, item);
+                String u2 = that.getURL(series, item);
                 if (u1 != null) {
                     if (!u1.equals(u2)) {
                         return false;
@@ -186,5 +185,17 @@ public class CustomXYURLGenerator implements XYURLGenerator, Serializable {
         return true;
 
     }
+
+    /**
+     * Returns a new generator that is a copy of, and independent from, this
+     * generator.
+     *
+     * @return A clone.
+     */
+    public Object clone() throws CloneNotSupportedException {
+		CustomXYURLGenerator clone = (CustomXYURLGenerator) super.clone();
+		clone.urlSeries = new java.util.ArrayList(this.urlSeries);
+		return clone;
+	}
 
 }

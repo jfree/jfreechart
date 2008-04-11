@@ -1,5 +1,17 @@
 2008-04-11  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/urls/CustomXYURLGenerator.java
+    (clone): Implemented,
+    * tests/org/jfree/chart/urls/junit/CustomPieURLGeneratorTests.java: 
+    New file,
+    * tests/org/jfree/chart/urls/junit/CustomXYURLGeneratorTests.java
+    (testEquals): New test method,
+    (testCloning): Likewise,
+    * tests/org/jfree/chart/urls/junit/UrlsPackageTests.java
+    (suite): Added CustomPieURLGeneratorTests.
+
+2008-04-11  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/xy/DeviationRenderer.java
     (findRangeBounds): New method override,
     * source/org/jfree/chart/renderer/xy/YIntervalRenderer.java
