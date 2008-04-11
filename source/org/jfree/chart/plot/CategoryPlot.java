@@ -2162,7 +2162,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
                     index));
         }
         if (markers == null) {
-        	return false;
+            return false;
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {
@@ -2440,14 +2440,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         ArrayList markers;
         if (layer == Layer.FOREGROUND) {
             markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
-            		index));
+                    index));
         }
         else {
             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
                     index));
         }
         if (markers == null) {
-        	return false;
+            return false;
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {
@@ -2615,7 +2615,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     /**
      * Returns the list of annotations.
      *
-     * @return The list of annotations.
+     * @return The list of annotations (never <code>null</code>).
      */
     public List getAnnotations() {
         return this.annotations;
