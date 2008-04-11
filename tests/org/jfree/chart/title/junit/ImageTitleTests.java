@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * ImageTitleTests.java
  * --------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,10 +35,14 @@
  * Changes
  * -------
  * 17-Feb-2004 : Version 1 (DG);
+ * 21-Mar-2008 : Added tests for arrange method (DG);
  *
  */
 
 package org.jfree.chart.title.junit;
+
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -46,6 +50,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.title.ImageTitle;
+import org.jfree.ui.Size2D;
 
 /**
  * Tests for the {@link ImageTitle} class.
@@ -101,7 +106,7 @@ public class ImageTitleTests extends TestCase {
             t2 = (ImageTitle) t1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("ImageTitleTests.testCloning: failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
@@ -127,5 +132,28 @@ public class ImageTitleTests extends TestCase {
         assertEquals(100, t1.getWidth(), EPSILON);
         assertEquals(100, t1.getHeight(), EPSILON);
     }
-
+    
+    /**
+     * Some checks for the arrange method.
+     */
+    public void testArrangeNN() {
+        BufferedImage image = new BufferedImage(100, 100, 
+        		BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        ImageTitle t = new ImageTitle(JFreeChart.INFO.getLogo());
+        Size2D s = t.arrange(g2);
+        assertEquals(102.0, s.getWidth(), EPSILON);
+        assertEquals(102.0, s.getHeight(), EPSILON);
+        
+        t.setPadding(1.0, 2.0, 3.0, 4.0);
+        s = t.arrange(g2);
+        assertEquals(106.0, s.getWidth(), EPSILON);
+        assertEquals(104.0, s.getHeight(), EPSILON);
+        
+        t.setMargin(5.0, 6.0, 7.0, 8.0);
+        s = t.arrange(g2);
+        assertEquals(120.0, s.getWidth(), EPSILON);
+        assertEquals(116.0, s.getHeight(), EPSILON);
+    }
+    
 }

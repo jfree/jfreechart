@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ImageTitle.java
  * ---------------
- * (C) Copyright 2000-2007, by David Berry and Contributors;
+ * (C) Copyright 2000-2008, by David Berry and Contributors;
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -50,6 +50,8 @@
  * 20-Apr-2005 : Added new draw() method (DG);   
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 11-Apr-2008 : Added arrange() method override to account for margin, border
+ *               and padding (DG);
  * 
  */
 
@@ -59,6 +61,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.Rectangle2D;
 
+import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.RectangleEdge;
@@ -73,7 +76,7 @@ import org.jfree.ui.VerticalAlignment;
  * <P>
  * ImageTitle needs an image passed to it in the constructor.  For ImageTitle
  * to work, you must have already loaded this image from its source (disk or
- * URL).  It is recomended you use something like
+ * URL).  It is recommended you use something like
  * Toolkit.getDefaultToolkit().getImage() to get the image.  Then, use
  * MediaTracker or some other message to make sure the image is fully loaded
  * from disk.
@@ -164,22 +167,36 @@ public class ImageTitle extends Title {
     }
 
     /**
+     * Arranges the contents of the block, within the given constraints, and 
+     * returns the block size.
+     * 
+     * @param g2  the graphics device.
+     * @param constraint  the constraint (<code>null</code> not permitted).
+     * 
+     * @return The block size (in Java2D units, never <code>null</code>).
+     */
+    public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
+        Size2D s = new Size2D(this.image.getWidth(null), 
+        		this.image.getHeight(null));
+        return new Size2D(calculateTotalWidth(s.getWidth()), 
+                calculateTotalHeight(s.getHeight()));
+    }
+
+    /**
      * Draws the title on a Java 2D graphics device (such as the screen or a 
      * printer).
      *
      * @param g2  the graphics device.
-     * @param titleArea  the area within which the title (and plot) should be 
-     *                   drawn.
+     * @param area  the area allocated for the title.
      */
-    public void draw(Graphics2D g2, Rectangle2D titleArea) {
-
+    public void draw(Graphics2D g2, Rectangle2D area) {
         RectangleEdge position = getPosition();
         if (position == RectangleEdge.TOP || position == RectangleEdge.BOTTOM) {
-            drawHorizontal(g2, titleArea);
+            drawHorizontal(g2, area);
         }
         else if (position == RectangleEdge.LEFT 
                      || position == RectangleEdge.RIGHT) {
-            drawVertical(g2, titleArea);
+            drawVertical(g2, area);
         }
         else {
             throw new RuntimeException("Invalid title position.");
