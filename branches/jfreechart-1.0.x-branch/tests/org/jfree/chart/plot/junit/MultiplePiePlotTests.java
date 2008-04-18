@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * MultiplePiePlotTests.java
  * -------------------------
- * (C) Copyright 2005-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 16-Jun-2005 : Version 1 (DG);
  * 06-Apr-2006 : Added tests for new fields (DG);
+ * 18-Apr-2008 : Added testConstructor() (DG);
  *
  */
 
@@ -55,13 +56,20 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.plot.MultiplePiePlot;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.TableOrder;
 
 /**
  * Some tests for the {@link MultiplePiePlot} class.
  */
-public class MultiplePiePlotTests extends TestCase {
+public class MultiplePiePlotTests extends TestCase
+        implements PlotChangeListener {
+
+	/** The last event received. */
+	PlotChangeEvent lastEvent;
 
     /**
      * Returns the tests as a test suite.
@@ -73,12 +81,34 @@ public class MultiplePiePlotTests extends TestCase {
     }
 
     /**
+     * Receives a plot change event and records it.  Some tests will use this
+     * to check that events have been generated (or not) when required.
+     */
+	public void plotChanged(PlotChangeEvent event) {
+		this.lastEvent = event;
+	}
+
+    /**
      * Constructs a new set of tests.
      *
      * @param name  the name of the tests.
      */
     public MultiplePiePlotTests(String name) {
         super(name);
+    }
+
+    /**
+     * Some checks for the constructors.
+     */
+    public void testConstructor() {
+    	MultiplePiePlot plot = new MultiplePiePlot();
+    	assertNull(plot.getDataset());
+
+    	// the following checks that the plot registers itself as a listener
+    	// with the dataset passed to the constructor - see patch 1943021
+    	DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    	plot = new MultiplePiePlot(dataset);
+    	assertTrue(dataset.hasListener(plot));
     }
 
     /**
@@ -89,33 +119,33 @@ public class MultiplePiePlotTests extends TestCase {
         MultiplePiePlot p2 = new MultiplePiePlot();
         assertTrue(p1.equals(p2));
         assertTrue(p2.equals(p1));
-        
+
         p1.setDataExtractOrder(TableOrder.BY_ROW);
         assertFalse(p1.equals(p2));
         p2.setDataExtractOrder(TableOrder.BY_ROW);
         assertTrue(p1.equals(p2));
-        
+
         p1.setLimit(1.23);
         assertFalse(p1.equals(p2));
         p2.setLimit(1.23);
         assertTrue(p1.equals(p2));
-        
+
         p1.setAggregatedItemsKey("Aggregated Items");
         assertFalse(p1.equals(p2));
         p2.setAggregatedItemsKey("Aggregated Items");
-        assertTrue(p1.equals(p2));   
-        
-        p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.red, 
+        assertTrue(p1.equals(p2));
+
+        p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.yellow));
         assertFalse(p1.equals(p2));
-        p2.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.red, 
+        p2.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.yellow));
-        assertTrue(p1.equals(p2));   
-        
-        p1.setPieChart(ChartFactory.createPieChart("Title", null, true, true, 
+        assertTrue(p1.equals(p2));
+
+        p1.setPieChart(ChartFactory.createPieChart("Title", null, true, true,
                 true));
         assertFalse(p1.equals(p2));
-        p2.setPieChart(ChartFactory.createPieChart("Title", null, true, true, 
+        p2.setPieChart(ChartFactory.createPieChart("Title", null, true, true,
                 true));
         assertTrue(p1.equals(p2));
     }
@@ -143,7 +173,7 @@ public class MultiplePiePlotTests extends TestCase {
      */
     public void testSerialization() {
         MultiplePiePlot p1 = new MultiplePiePlot(null);
-        p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.yellow, 
+        p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
                 3.0f, 4.0f, Color.red));
         MultiplePiePlot p2 = null;
         try {
@@ -163,5 +193,5 @@ public class MultiplePiePlotTests extends TestCase {
         }
         assertEquals(p1, p2);
     }
-    
+
 }

@@ -1,3 +1,12 @@
+2008-04-18  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch 1943021 (Brian Cabana):
+    * source/org/jfree/chart/plot/MultiplePiePlot.java
+    (MultiplePiePlot(CategoryDataset)): Call setDataset() to ensure that
+    plot registers as a dataset listener,
+    * tests/org/jfree/chart/plot/junit/MultiplePiePlotTests.java
+    (testConstructors): New test method.
+
 2008-04-11  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/title/ImageTitle.java
