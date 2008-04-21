@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------
@@ -35,24 +35,25 @@
  * Changes (from 18-Sep-2001)
  * --------------------------
  * 18-Sep-2001 : Added standard header (DG);
- * 07-Nov-2001 : Separated the JCommon Class Library classes, JFreeChart now 
+ * 07-Nov-2001 : Separated the JCommon Class Library classes, JFreeChart now
  *               requires jcommon.jar (DG);
  * 09-Jan-2002 : Updated Javadoc comments (DG);
- * 07-Feb-2002 : Changed blank space around title from Insets --> Spacer, to 
+ * 07-Feb-2002 : Changed blank space around title from Insets --> Spacer, to
  *               allow for relative or absolute spacing (DG);
  * 25-Jun-2002 : Updated import statements (DG);
  * 23-Sep-2002 : Fixed errors reported by Checkstyle (DG);
  * 26-Nov-2002 : Added method for drawing images at left or right (DG);
  * 22-Sep-2003 : Added checks that the Image can never be null (TM).
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0 
- *               release (DG);    
+ * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
+ *               release (DG);
  * 02-Feb-2005 : Changed padding mechanism for all titles (DG);
- * 20-Apr-2005 : Added new draw() method (DG);   
+ * 20-Apr-2005 : Added new draw() method (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 11-Apr-2008 : Added arrange() method override to account for margin, border
  *               and padding (DG);
- * 
+ * 21-Apr-2008 : Added equals() method override (DG);
+ *
  */
 
 package org.jfree.chart.title;
@@ -68,6 +69,7 @@ import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.Size2D;
 import org.jfree.ui.VerticalAlignment;
+import org.jfree.util.ObjectUtilities;
 
 /**
  * A chart title that displays an image.  This is useful, for example, if you
@@ -80,6 +82,9 @@ import org.jfree.ui.VerticalAlignment;
  * Toolkit.getDefaultToolkit().getImage() to get the image.  Then, use
  * MediaTracker or some other message to make sure the image is fully loaded
  * from disk.
+ * <P>
+ * SPECIAL NOTE:  this class fails to serialize, so if you are
+ * relying on your charts to be serializable, please avoid using this class.
  */
 public class ImageTitle extends Title {
 
@@ -92,7 +97,7 @@ public class ImageTitle extends Title {
      * @param image  the image (<code>null</code> not permitted).
      */
     public ImageTitle(Image image) {
-        this(image, image.getHeight(null), image.getWidth(null), 
+        this(image, image.getHeight(null), image.getWidth(null),
                 Title.DEFAULT_POSITION, Title.DEFAULT_HORIZONTAL_ALIGNMENT,
                 Title.DEFAULT_VERTICAL_ALIGNMENT, Title.DEFAULT_PADDING);
     }
@@ -105,12 +110,12 @@ public class ImageTitle extends Title {
      * @param horizontalAlignment  the horizontal alignment.
      * @param verticalAlignment  the vertical alignment.
      */
-    public ImageTitle(Image image, RectangleEdge position, 
-                      HorizontalAlignment horizontalAlignment, 
+    public ImageTitle(Image image, RectangleEdge position,
+                      HorizontalAlignment horizontalAlignment,
                       VerticalAlignment verticalAlignment) {
 
         this(image, image.getHeight(null), image.getWidth(null),
-                position, horizontalAlignment, verticalAlignment, 
+                position, horizontalAlignment, verticalAlignment,
                 Title.DEFAULT_PADDING);
     }
 
@@ -124,12 +129,12 @@ public class ImageTitle extends Title {
      * @param position  the title position.
      * @param horizontalAlignment  the horizontal alignment.
      * @param verticalAlignment  the vertical alignment.
-     * @param padding  the amount of space to leave around the outside of the 
+     * @param padding  the amount of space to leave around the outside of the
      *                 title.
      */
-    public ImageTitle(Image image, int height, int width, 
+    public ImageTitle(Image image, int height, int width,
                       RectangleEdge position,
-                      HorizontalAlignment horizontalAlignment, 
+                      HorizontalAlignment horizontalAlignment,
                       VerticalAlignment verticalAlignment,
                       RectangleInsets padding) {
 
@@ -167,23 +172,23 @@ public class ImageTitle extends Title {
     }
 
     /**
-     * Arranges the contents of the block, within the given constraints, and 
+     * Arranges the contents of the block, within the given constraints, and
      * returns the block size.
-     * 
+     *
      * @param g2  the graphics device.
      * @param constraint  the constraint (<code>null</code> not permitted).
-     * 
+     *
      * @return The block size (in Java2D units, never <code>null</code>).
      */
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
-        Size2D s = new Size2D(this.image.getWidth(null), 
+        Size2D s = new Size2D(this.image.getWidth(null),
         		this.image.getHeight(null));
-        return new Size2D(calculateTotalWidth(s.getWidth()), 
+        return new Size2D(calculateTotalWidth(s.getWidth()),
                 calculateTotalHeight(s.getHeight()));
     }
 
     /**
-     * Draws the title on a Java 2D graphics device (such as the screen or a 
+     * Draws the title on a Java 2D graphics device (such as the screen or a
      * printer).
      *
      * @param g2  the graphics device.
@@ -194,7 +199,7 @@ public class ImageTitle extends Title {
         if (position == RectangleEdge.TOP || position == RectangleEdge.BOTTOM) {
             drawHorizontal(g2, area);
         }
-        else if (position == RectangleEdge.LEFT 
+        else if (position == RectangleEdge.LEFT
                      || position == RectangleEdge.RIGHT) {
             drawVertical(g2, area);
         }
@@ -204,11 +209,11 @@ public class ImageTitle extends Title {
     }
 
     /**
-     * Draws the title on a Java 2D graphics device (such as the screen or a 
+     * Draws the title on a Java 2D graphics device (such as the screen or a
      * printer).
      *
      * @param g2  the graphics device.
-     * @param chartArea  the area within which the title (and plot) should be 
+     * @param chartArea  the area within which the title (and plot) should be
      *                   drawn.
      *
      * @return The size of the area used by the title.
@@ -240,7 +245,7 @@ public class ImageTitle extends Title {
         HorizontalAlignment horizontalAlignment = getHorizontalAlignment();
         double startX = 0.0;
         if (horizontalAlignment == HorizontalAlignment.CENTER) {
-            startX = chartArea.getX() + leftSpace + chartArea.getWidth() / 2.0 
+            startX = chartArea.getX() + leftSpace + chartArea.getWidth() / 2.0
                      - w / 2.0;
         }
         else if (horizontalAlignment == HorizontalAlignment.LEFT) {
@@ -249,7 +254,7 @@ public class ImageTitle extends Title {
         else if (horizontalAlignment == HorizontalAlignment.RIGHT) {
             startX = chartArea.getX() + chartArea.getWidth() - rightSpace - w;
         }
-        g2.drawImage(this.image, (int) startX, (int) startY, (int) w, (int) h, 
+        g2.drawImage(this.image, (int) startX, (int) startY, (int) w, (int) h,
                 null);
 
         return new Size2D(chartArea.getWidth() + leftSpace + rightSpace,
@@ -258,11 +263,11 @@ public class ImageTitle extends Title {
     }
 
     /**
-     * Draws the title on a Java 2D graphics device (such as the screen or a 
+     * Draws the title on a Java 2D graphics device (such as the screen or a
      * printer).
      *
      * @param g2  the graphics device.
-     * @param chartArea  the area within which the title (and plot) should be 
+     * @param chartArea  the area within which the title (and plot) should be
      *                   drawn.
      *
      * @return The size of the area used by the title.
@@ -277,7 +282,7 @@ public class ImageTitle extends Title {
 
         double w = getWidth();
         double h = getHeight();
-        
+
         RectangleInsets padding = getPadding();
         if (padding != null) {
             topSpace = padding.calculateTopOutset(h);
@@ -297,7 +302,7 @@ public class ImageTitle extends Title {
         VerticalAlignment alignment = getVerticalAlignment();
         double startY = 0.0;
         if (alignment == VerticalAlignment.CENTER) {
-            startY = chartArea.getMinY() + topSpace 
+            startY = chartArea.getMinY() + topSpace
                      + chartArea.getHeight() / 2.0 - h / 2.0;
         }
         else if (alignment == VerticalAlignment.TOP) {
@@ -307,26 +312,54 @@ public class ImageTitle extends Title {
             startY = chartArea.getMaxY() - bottomSpace - h;
         }
 
-        g2.drawImage(this.image, (int) startX, (int) startY, (int) w, (int) h, 
+        g2.drawImage(this.image, (int) startX, (int) startY, (int) w, (int) h,
                 null);
 
         return new Size2D(chartArea.getWidth() + leftSpace + rightSpace,
             h + topSpace + bottomSpace);
 
     }
-    
+
     /**
      * Draws the block within the specified area.
-     * 
+     *
      * @param g2  the graphics device.
      * @param area  the area.
      * @param params  ignored (<code>null</code> permitted).
-     * 
+     *
      * @return Always <code>null</code>.
      */
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         draw(g2, area);
         return null;
+    }
+
+    /**
+     * Tests this <code>ImageTitle</code> for equality with an arbitrary
+     * object.  Returns <code>true</code> if:
+     * <ul>
+     * <li><code>obj</code> is an instance of <code>ImageTitle</code>;
+     * <li><code>obj</code> references the same image as this
+     *     <code>ImageTitle</code>;
+     * <li><code>super.equals(obj)<code> returns <code>true</code>;
+     * </ul>
+     *
+     * @param obj  the object (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+    	if (obj == this) {
+    		return true;
+    	}
+    	if (!(obj instanceof ImageTitle)) {
+    		return false;
+    	}
+    	ImageTitle that = (ImageTitle) obj;
+    	if (!ObjectUtilities.equal(this.image, that.image)) {
+    		return false;
+    	}
+    	return super.equals(obj);
     }
 
 }

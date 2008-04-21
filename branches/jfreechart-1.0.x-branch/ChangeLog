@@ -1,3 +1,8 @@
+2008-04-21  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/title/ImageTitle.java
+    (equals): New method override.
+
 2008-04-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 1943021 (Brian Cabana):
