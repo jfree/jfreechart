@@ -1,3 +1,9 @@
+2008-04-22  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/xy/CategoryTableXYDataset.java: 
+    Implemented PublicCloneable, plus
+    (clone): New method override.
+
 2008-04-21  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/title/ImageTitle.java

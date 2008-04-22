@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------------
  * CategoryTableXYDatasetTests.java
  * --------------------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 06-Oct-2005 : Version 1 (DG);
+ * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -52,6 +53,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.data.xy.CategoryTableXYDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link CategoryTableXYDataset} class.
@@ -80,15 +82,15 @@ public class CategoryTableXYDatasetTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         CategoryTableXYDataset d1 = new CategoryTableXYDataset();
         d1.add(1.0, 1.1, "Series 1");
         d1.add(2.0, 2.2, "Series 1");
-        
+
         CategoryTableXYDataset d2 = new CategoryTableXYDataset();
         d2.add(1.0, 1.1, "Series 1");
         d2.add(2.0, 2.2, "Series 1");
-        
+
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
 
@@ -104,11 +106,10 @@ public class CategoryTableXYDatasetTests extends TestCase {
      * Confirm that cloning works.
      */
     public void testCloning() {
-        
         CategoryTableXYDataset d1 = new CategoryTableXYDataset();
         d1.add(1.0, 1.1, "Series 1");
         d1.add(2.0, 2.2, "Series 1");
-        
+
         CategoryTableXYDataset d2 = null;
         try {
             d2 = (CategoryTableXYDataset) d1.clone();
@@ -119,6 +120,56 @@ public class CategoryTableXYDatasetTests extends TestCase {
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
+
+        d1.add(3.0, 3.3, "Series 1");
+        assertFalse(d1.equals(d2));
+        d2.add(3.0, 3.3, "Series 1");
+        assertTrue(d1.equals(d2));
+
+        d1.setIntervalPositionFactor(0.33);
+        assertFalse(d1.equals(d2));
+        d2.setIntervalPositionFactor(0.33);
+        assertTrue(d1.equals(d2));
+    }
+
+    /**
+     * Another check for cloning - making sure it works for a customised
+     * interval delegate.
+     */
+    public void testCloning2() {
+        CategoryTableXYDataset d1 = new CategoryTableXYDataset();
+        d1.add(1.0, 1.1, "Series 1");
+        d1.add(2.0, 2.2, "Series 1");
+        d1.setIntervalWidth(1.23);
+
+        CategoryTableXYDataset d2 = null;
+        try {
+            d2 = (CategoryTableXYDataset) d1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(d1 != d2);
+        assertTrue(d1.getClass() == d2.getClass());
+        assertTrue(d1.equals(d2));
+
+        d1.add(3.0, 3.3, "Series 1");
+        assertFalse(d1.equals(d2));
+        d2.add(3.0, 3.3, "Series 1");
+        assertTrue(d1.equals(d2));
+
+        d1.setIntervalPositionFactor(0.33);
+        assertFalse(d1.equals(d2));
+        d2.setIntervalPositionFactor(0.33);
+        assertTrue(d1.equals(d2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        CategoryTableXYDataset d1 = new CategoryTableXYDataset();
+        assertTrue(d1 instanceof PublicCloneable);
     }
 
     /**
@@ -129,7 +180,7 @@ public class CategoryTableXYDatasetTests extends TestCase {
         CategoryTableXYDataset d1 = new CategoryTableXYDataset();
         d1.add(1.0, 1.1, "Series 1");
         d1.add(2.0, 2.2, "Series 1");
-        
+
         CategoryTableXYDataset d2 = null;
 
         try {
@@ -150,9 +201,9 @@ public class CategoryTableXYDatasetTests extends TestCase {
         assertEquals(d1, d2);
 
     }
-    
+
     private static final double EPSILON = 0.0000000001;
-    
+
     /**
      * This is a test for bug 1312066 - adding a new series should trigger a
      * recalculation of the interval width, if it is being automatically
@@ -173,12 +224,12 @@ public class CategoryTableXYDatasetTests extends TestCase {
         // now add some more data
         d1.add(7.5, 1.1, "Series 2");
         d1.add(9.0, 2.2, "Series 2");
- 
+
         assertEquals(3.0, d1.getXValue(1, 0), EPSILON);
         assertEquals(7.0, d1.getXValue(1, 1), EPSILON);
         assertEquals(7.5, d1.getXValue(1, 2), EPSILON);
         assertEquals(9.0, d1.getXValue(1, 3), EPSILON);
-        
+
         assertEquals(7.25, d1.getStartXValue(1, 2), EPSILON);
         assertEquals(8.75, d1.getStartXValue(1, 3), EPSILON);
         assertEquals(7.75, d1.getEndXValue(1, 2), EPSILON);
