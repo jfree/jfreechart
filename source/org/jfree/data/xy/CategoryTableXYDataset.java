@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * CategoryTableXYDataset.java
  * ---------------------------
- * (C) Copyright 2004, 2005, 2007, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2008, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -42,6 +42,7 @@
  * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
  * 05-Oct-2005 : Made the interval delegate a dataset change listener (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 22-Apr-2008 : Implemented PublicCloneable, and fixed clone() method (DG);
  *
  */
 
@@ -52,30 +53,30 @@ import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtilities;
+import org.jfree.util.PublicCloneable;
 
 /**
- * An implementation variant of the {@link TableXYDataset} where every series 
- * shares the same x-values (required for generating stacked area charts). 
- * This implementation uses a {@link DefaultKeyedValues2D} Object as backend 
- * implementation and is hence more "category oriented" than the {@link 
+ * An implementation variant of the {@link TableXYDataset} where every series
+ * shares the same x-values (required for generating stacked area charts).
+ * This implementation uses a {@link DefaultKeyedValues2D} Object as backend
+ * implementation and is hence more "category oriented" than the {@link
  * DefaultTableXYDataset} implementation.
  * <p>
  * This implementation provides no means to remove data items yet.
  * This is due to the lack of such facility in the DefaultKeyedValues2D class.
  * <p>
  * This class also implements the {@link IntervalXYDataset} interface, but this
- * implementation is provisional. 
+ * implementation is provisional.
  */
 public class CategoryTableXYDataset extends AbstractIntervalXYDataset
-                                    implements TableXYDataset, 
-                                               IntervalXYDataset, 
-                                               DomainInfo {
-    
+        implements TableXYDataset, IntervalXYDataset, DomainInfo,
+                   PublicCloneable{
+
     /**
      * The backing data structure.
      */
     private DefaultKeyedValues2D values;
-    
+
     /** A delegate for controlling the interval width. */
     private IntervalXYDelegate intervalDelegate;
 
@@ -89,9 +90,9 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Adds a data item to this dataset and sends a {@link DatasetChangeEvent} 
+     * Adds a data item to this dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
-     * 
+     *
      * @param x  the x value.
      * @param y  the y value.
      * @param seriesName  the name of the series to add the data item.
@@ -99,11 +100,11 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
     public void add(double x, double y, String seriesName) {
         add(new Double(x), new Double(y), seriesName, true);
     }
-    
+
     /**
-     * Adds a data item to this dataset and, if requested, sends a 
+     * Adds a data item to this dataset and, if requested, sends a
      * {@link DatasetChangeEvent} to all registered listeners.
-     * 
+     *
      * @param x  the x value.
      * @param y  the y value.
      * @param seriesName  the name of the series to add the data item.
@@ -118,17 +119,17 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
 
     /**
      * Removes a value from the dataset.
-     * 
+     *
      * @param x  the x-value.
      * @param seriesName  the series name.
      */
     public void remove(double x, String seriesName) {
         remove(new Double(x), seriesName, true);
     }
-    
+
     /**
      * Removes an item from the dataset.
-     * 
+     *
      * @param x  the x-value.
      * @param seriesName  the series name.
      * @param notify  notify listeners?
@@ -179,7 +180,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * @return The item count.
      */
     public int getItemCount(int series) {
-        return getItemCount();  // all series have the same number of items in 
+        return getItemCount();  // all series have the same number of items in
                                 // this dataset
     }
 
@@ -254,13 +255,13 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
     public Number getEndY(int series, int item) {
         return getY(series, item);
     }
-    
+
     /**
      * Returns the minimum x-value in the dataset.
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
-     * 
+     *
      * @return The minimum value.
      */
     public double getDomainLowerBound(boolean includeInterval) {
@@ -272,7 +273,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
-     * 
+     *
      * @return The maximum value.
      */
     public double getDomainUpperBound(boolean includeInterval) {
@@ -284,7 +285,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
-     * 
+     *
      * @return The range.
      */
     public Range getDomainBounds(boolean includeInterval) {
@@ -295,10 +296,10 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
             return DatasetUtilities.iterateDomainBounds(this, includeInterval);
         }
     }
-    
+
     /**
-     * Returns the interval position factor. 
-     * 
+     * Returns the interval position factor.
+     *
      * @return The interval position factor.
      */
     public double getIntervalPositionFactor() {
@@ -310,7 +311,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * If the factor is 0.5, the gap is in the middle of the x values. If it
      * is lesser than 0.5, the gap is farther to the left and if greater than
      * 0.5 it gets farther to the right.
-     *  
+     *
      * @param d  the new interval position factor.
      */
     public void setIntervalPositionFactor(double d) {
@@ -319,8 +320,8 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the full interval width. 
-     * 
+     * Returns the full interval width.
+     *
      * @return The interval width to use.
      */
     public double getIntervalWidth() {
@@ -328,9 +329,9 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Sets the interval width to a fixed value, and sends a 
-     * {@link DatasetChangeEvent} to all registered listeners. 
-     * 
+     * Sets the interval width to a fixed value, and sends a
+     * {@link DatasetChangeEvent} to all registered listeners.
+     *
      * @param d  the new interval width (must be > 0).
      */
     public void setIntervalWidth(double d) {
@@ -340,7 +341,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
 
     /**
      * Returns whether the interval width is automatically calculated or not.
-     * 
+     *
      * @return whether the width is automatically calculated or not.
      */
     public boolean isAutoWidth() {
@@ -349,20 +350,20 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
 
     /**
      * Sets the flag that indicates whether the interval width is automatically
-     * calculated or not. 
-     * 
+     * calculated or not.
+     *
      * @param b  the flag.
      */
     public void setAutoWidth(boolean b) {
         this.intervalDelegate.setAutoWidth(b);
         fireDatasetChanged();
     }
-    
+
     /**
      * Tests this dataset for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -378,5 +379,25 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
         }
         return true;
     }
-    
+
+    /**
+     * Returns an independent copy of this dataset.
+     *
+     * @return A clone.
+     *
+     * @throws CloneNotSupportedException if there is some reason that cloning
+     *     cannot be performed.
+     */
+    public Object clone() throws CloneNotSupportedException {
+        CategoryTableXYDataset clone = (CategoryTableXYDataset) super.clone();
+        clone.values = (DefaultKeyedValues2D) this.values.clone();
+        clone.intervalDelegate = new IntervalXYDelegate(clone);
+        // need to configure the intervalDelegate to match the original
+        clone.intervalDelegate.setFixedIntervalWidth(getIntervalWidth());
+        clone.intervalDelegate.setAutoWidth(isAutoWidth());
+        clone.intervalDelegate.setIntervalPositionFactor(
+                getIntervalPositionFactor());
+        return clone;
+    }
+
 }
