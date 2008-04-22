@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------------
  * DefaultTableXYDatasetTests.java
  * -------------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 23-Dec-2003 : Version 1 (DG);
  * 06-Oct-2005 : Added test for new data updating interval width (DG);
  * 08-Mar-2007 : Added testGetSeries() (DG);
+ * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -55,6 +56,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link DefaultTableXYDataset} class.
@@ -83,19 +85,19 @@ public class DefaultTableXYDatasetTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         XYSeries s1 = new XYSeries("Series 1", true, false);
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         d1.addSeries(s1);
-        
+
         DefaultTableXYDataset d2 = new DefaultTableXYDataset();
         XYSeries s2 = new XYSeries("Series 1", true, false);
         s2.add(1.0, 1.1);
         s2.add(2.0, 2.2);
         d2.addSeries(s2);
-        
+
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
 
@@ -110,13 +112,13 @@ public class DefaultTableXYDatasetTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {        
+    public void testCloning() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         XYSeries s1 = new XYSeries("Series 1", true, false);
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         d1.addSeries(s1);
-        
+
         DefaultTableXYDataset d2 = null;
         try {
             d2 = (DefaultTableXYDataset) d1.clone();
@@ -127,6 +129,17 @@ public class DefaultTableXYDatasetTests extends TestCase {
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
+
+        s1.add(3.0, 3.3);
+        assertFalse(d1.equals(d2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        assertTrue(d1 instanceof PublicCloneable);
     }
 
     /**
@@ -139,7 +152,7 @@ public class DefaultTableXYDatasetTests extends TestCase {
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         d1.addSeries(s1);
-        
+
         DefaultTableXYDataset d2 = null;
 
         try {
@@ -159,9 +172,9 @@ public class DefaultTableXYDatasetTests extends TestCase {
         assertEquals(d1, d2);
 
     }
-    
+
     private static final double EPSILON = 0.0000000001;
-    
+
     /**
      * This is a test for bug 1312066 - adding a new series should trigger a
      * recalculation of the interval width, if it is being automatically
@@ -184,14 +197,14 @@ public class DefaultTableXYDatasetTests extends TestCase {
         // now add another series
         XYSeries s2 = new XYSeries("Series 2", true, false);
         s2.add(7.5, 1.1);
-        s2.add(9.0, 2.2);       
+        s2.add(9.0, 2.2);
         d1.addSeries(s2);
- 
+
         assertEquals(3.0, d1.getXValue(1, 0), EPSILON);
         assertEquals(7.0, d1.getXValue(1, 1), EPSILON);
         assertEquals(7.5, d1.getXValue(1, 2), EPSILON);
         assertEquals(9.0, d1.getXValue(1, 3), EPSILON);
-        
+
         assertEquals(7.25, d1.getStartXValue(1, 2), EPSILON);
         assertEquals(8.75, d1.getStartXValue(1, 3), EPSILON);
         assertEquals(7.75, d1.getEndXValue(1, 2), EPSILON);
@@ -203,7 +216,7 @@ public class DefaultTableXYDatasetTests extends TestCase {
         assertEquals(3.25, d1.getEndXValue(0, 0), EPSILON);
         assertEquals(7.25, d1.getEndXValue(0, 1), EPSILON);
     }
-    
+
     /**
      * Some basic checks for the getSeries() method.
      */
@@ -212,7 +225,7 @@ public class DefaultTableXYDatasetTests extends TestCase {
         XYSeries s1 = new XYSeries("Series 1", true, false);
         d1.addSeries(s1);
         assertEquals("Series 1", d1.getSeries(0).getKey());
-        
+
         boolean pass = false;
         try {
             d1.getSeries(-1);
@@ -221,7 +234,7 @@ public class DefaultTableXYDatasetTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             d1.getSeries(1);
