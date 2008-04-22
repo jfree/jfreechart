@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------------
  * StackedXYAreaRenderer2Tests.java
  * -------------------------------
- * (C) Copyright 2005-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 06-Jan-2005 : Version 1 (DG);
  * 22-Aug-2006 : Added testDrawWithEmptyDataset() method (DG);
  * 30-Nov-2006 : Extended testEquals() (DG);
+ * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -65,6 +66,7 @@ import org.jfree.chart.renderer.xy.StackedXYAreaRenderer2;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.TableXYDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link StackedXYAreaRenderer2} class.
@@ -101,7 +103,7 @@ public class StackedXYAreaRenderer2Tests extends TestCase {
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StackedXYAreaRenderer2());
         try {
-            BufferedImage image = new BufferedImage(200 , 100, 
+            BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
@@ -113,7 +115,7 @@ public class StackedXYAreaRenderer2Tests extends TestCase {
         }
         assertTrue(success);
     }
-    
+
     /**
      * Test that the equals() method distinguishes all fields.
      */
@@ -122,7 +124,7 @@ public class StackedXYAreaRenderer2Tests extends TestCase {
         StackedXYAreaRenderer2 r2 = new StackedXYAreaRenderer2();
         assertEquals(r1, r2);
         assertEquals(r2, r1);
-        
+
         r1.setRoundXCoordinates(!r1.getRoundXCoordinates());
         assertFalse(r1.equals(r2));
         r2.setRoundXCoordinates(r1.getRoundXCoordinates());
@@ -130,7 +132,7 @@ public class StackedXYAreaRenderer2Tests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
@@ -140,7 +142,7 @@ public class StackedXYAreaRenderer2Tests extends TestCase {
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -156,6 +158,14 @@ public class StackedXYAreaRenderer2Tests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
+        assertTrue(r1 instanceof PublicCloneable);
     }
 
     /**
@@ -180,15 +190,15 @@ public class StackedXYAreaRenderer2Tests extends TestCase {
         }
         assertEquals(r1, r2);
     }
-    
+
     /**
      * Check that the renderer is calculating the range bounds correctly.
      */
     public void testFindRangeBounds() {
-        TableXYDataset dataset 
+        TableXYDataset dataset
                 = RendererXYPackageTests.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
-                "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL, 
+                "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
                 false, false, false);
         XYPlot plot = (XYPlot) chart.getPlot();
         StackedXYAreaRenderer2 renderer = new StackedXYAreaRenderer2();
@@ -197,10 +207,10 @@ public class StackedXYAreaRenderer2Tests extends TestCase {
         Range bounds = rangeAxis.getRange();
         assertTrue(bounds.contains(6.0));
         assertTrue(bounds.contains(8.0));
-        
+
         // try null argument
         assertNull(renderer.findRangeBounds(null));
-        
+
         // try empty dataset
         assertNull(renderer.findRangeBounds(new DefaultTableXYDataset()));
     }

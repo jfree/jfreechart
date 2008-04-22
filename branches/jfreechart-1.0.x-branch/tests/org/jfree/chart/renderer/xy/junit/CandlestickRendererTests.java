@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * CandlestickRendererTests.java
  * -----------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  *               method (DG);
  * 05-Mar-2007 : Added new field to testEquals() (DG);
  * 08-Oct-2007 : Added tests for new volumePaint field (DG);
+ * 22-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -64,6 +65,7 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultOHLCDataset;
 import org.jfree.data.xy.OHLCDataItem;
 import org.jfree.data.xy.OHLCDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link CandlestickRenderer} class.
@@ -203,6 +205,14 @@ public class CandlestickRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        CandlestickRenderer r1 = new CandlestickRenderer();
+        assertTrue(r1 instanceof PublicCloneable);
     }
 
     /**
