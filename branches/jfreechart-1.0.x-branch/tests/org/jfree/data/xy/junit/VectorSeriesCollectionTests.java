@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------------
  * VectorSeriesCollectionTests.java
  * --------------------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 30-Jan-2007 : Version 1 (DG);
  * 24-May-2007 : Added testRemoveSeries() (DG);
+ * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.data.xy.VectorSeries;
 import org.jfree.data.xy.VectorSeriesCollection;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link VectorSeriesCollection} class.
@@ -118,10 +120,18 @@ public class VectorSeriesCollectionTests extends TestCase {
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
-        
+
         // check independence
         s1.setDescription("XYZ");
         assertFalse(c1.equals(c2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        VectorSeriesCollection d1 = new VectorSeriesCollection();
+        assertTrue(d1 instanceof PublicCloneable);
     }
 
     /**
@@ -133,7 +143,7 @@ public class VectorSeriesCollectionTests extends TestCase {
         VectorSeriesCollection c1 = new VectorSeriesCollection();
         c1.addSeries(s1);
         VectorSeriesCollection c2 = null;
-        
+
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -150,7 +160,7 @@ public class VectorSeriesCollectionTests extends TestCase {
         }
         assertEquals(c1, c2);
     }
-    
+
     /**
      * Some checks for the removeSeries() method.
      */
@@ -172,5 +182,5 @@ public class VectorSeriesCollectionTests extends TestCase {
         assertTrue(b);
         assertEquals(0, vsc.getSeriesCount());
     }
-    
+
 }

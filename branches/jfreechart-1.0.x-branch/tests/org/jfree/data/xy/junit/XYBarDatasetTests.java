@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * XYBarDatasetTests.java
  * ----------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,7 +35,8 @@
  * Changes
  * -------
  * 25-Jan-2007 : Version 1 (DG);
- * 
+ * 22-Apr-2008 : Added testPublicCloneable (DG);
+ *
  */
 
 package org.jfree.data.xy.junit;
@@ -53,6 +54,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.XYBarDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Some tests for the {@link XYBarDataset} class.
@@ -91,7 +93,7 @@ public class XYBarDatasetTests extends TestCase {
         double[] y2 = new double[] {4.0, 5.0, 6.0};
         double[][] data2 = new double[][] {x2, y2};
         d2.addSeries("S1", data2);
-  
+
         XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
         XYBarDataset bd2 = new XYBarDataset(d2, 5.0);
         assertTrue(bd1.equals(bd2));
@@ -118,7 +120,7 @@ public class XYBarDatasetTests extends TestCase {
         assertTrue(bd1 != bd2);
         assertTrue(bd1.getClass() == bd2.getClass());
         assertTrue(bd1.equals(bd2));
-        
+
         // check independence
         d1 = (DefaultXYDataset) bd1.getUnderlyingDataset();
         d1.addSeries("S2", new double[][] { {1.0}, {2.0} });
@@ -126,6 +128,19 @@ public class XYBarDatasetTests extends TestCase {
         DefaultXYDataset d2 = (DefaultXYDataset) bd2.getUnderlyingDataset();
         d2.addSeries("S2", new double[][] { {1.0}, {2.0} });
         assertTrue(bd1.equals(bd2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        DefaultXYDataset d1 = new DefaultXYDataset();
+        double[] x1 = new double[] {1.0, 2.0, 3.0};
+        double[] y1 = new double[] {4.0, 5.0, 6.0};
+        double[][] data1 = new double[][] {x1, y1};
+        d1.addSeries("S1", data1);
+        XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
+        assertTrue(bd1 instanceof PublicCloneable);
     }
 
     /**
@@ -153,7 +168,7 @@ public class XYBarDatasetTests extends TestCase {
         catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(bd1, bd2);        
+        assertEquals(bd1, bd2);
     }
-    
+
 }

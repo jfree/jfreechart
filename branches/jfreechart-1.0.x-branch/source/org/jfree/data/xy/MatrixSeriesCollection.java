@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * MatrixSeriesCollection.java
  * ---------------------------
- * (C) Copyright 2003-2007, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-2008, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -40,28 +40,29 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 27-Nov-2006 : Added clone() override (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- *
+ * 22-Apr-2008 : Implemented PublicCloneable (DG);
  */
- 
+
 package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.List;
 
 import org.jfree.util.ObjectUtilities;
+import org.jfree.util.PublicCloneable;
 
 /**
- * Represents a collection of {@link MatrixSeries} that can be used as a 
+ * Represents a collection of {@link MatrixSeries} that can be used as a
  * dataset.
  *
  * @see org.jfree.data.xy.MatrixSeries
  */
 public class MatrixSeriesCollection extends AbstractXYZDataset
-                                    implements XYZDataset, Serializable {
-    
+        implements XYZDataset, PublicCloneable, Serializable {
+
     /** For serialization. */
     private static final long serialVersionUID = -3197705779242543945L;
-    
+
     /** The series that are included in the collection. */
     private List seriesList;
 
@@ -213,7 +214,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
             throw new IllegalArgumentException("Cannot add null series.");
         }
         // FIXME: Check that there isn't already a series with the same key
-        
+
         // add the series...
         this.seriesList.add(series);
         series.addChangeListener(this);
@@ -248,18 +249,18 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
 
     /**
      * Returns a hash code.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
         return (this.seriesList != null ? this.seriesList.hashCode() : 0);
     }
-    
+
     /**
      * Returns a clone of this instance.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException if there is a problem.
      */
     public Object clone() throws CloneNotSupportedException {
@@ -275,7 +276,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * </p>
      */
     public void removeAllSeries() {
-        // Unregister the collection as a change listener to each series in 
+        // Unregister the collection as a change listener to each series in
         // the collection.
         for (int i = 0; i < this.seriesList.size(); i++) {
             MatrixSeries series = (MatrixSeries) this.seriesList.get(i);
@@ -334,5 +335,5 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
         this.seriesList.remove(seriesIndex);
         fireDatasetChanged();
     }
-    
+
 }

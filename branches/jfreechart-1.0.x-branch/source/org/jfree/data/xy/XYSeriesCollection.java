@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------
  * XYSeriesCollection.java
  * -----------------------
- * (C) Copyright 2001-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
@@ -51,6 +51,7 @@
  * 27-Nov-2006 : Added clone() override (DG);
  * 08-May-2007 : Added indexOf(XYSeries) method (DG);
  * 03-Dec-2007 : Added getSeries(Comparable) method (DG);
+ * 22-Apr-2008 : Implemented PublicCloneable (DG);
  *
  */
 
@@ -67,24 +68,25 @@ import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.util.ObjectUtilities;
+import org.jfree.util.PublicCloneable;
 
 /**
- * Represents a collection of {@link XYSeries} objects that can be used as a 
+ * Represents a collection of {@link XYSeries} objects that can be used as a
  * dataset.
  */
 public class XYSeriesCollection extends AbstractIntervalXYDataset
-                                implements IntervalXYDataset, DomainInfo, 
-                                           Serializable {
+        implements IntervalXYDataset, DomainInfo, PublicCloneable,
+                   Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -7590013825931496766L;
-    
+
     /** The series that are included in the collection. */
     private List data;
-    
+
     /** The interval delegate (used to calculate the start and end x-values). */
     private IntervalXYDelegate intervalDelegate;
-    
+
     /**
      * Constructs an empty dataset.
      */
@@ -106,9 +108,9 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
             series.addChangeListener(this);
         }
     }
-    
+
     /**
-     * Adds a series to the collection and sends a {@link DatasetChangeEvent} 
+     * Adds a series to the collection and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
@@ -125,7 +127,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes a series from the collection and sends a 
+     * Removes a series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
@@ -145,7 +147,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes a series from the collection and sends a 
+     * Removes a series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
@@ -162,13 +164,13 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         }
 
     }
-    
+
     /**
-     * Removes all the series from the collection and sends a 
+     * Removes all the series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      */
     public void removeAllSeries() {
-        // Unregister the collection as a change listener to each series in 
+        // Unregister the collection as a change listener to each series in
         // the collection.
         for (int i = 0; i < this.data.size(); i++) {
           XYSeries series = (XYSeries) this.data.get(i);
@@ -190,22 +192,22 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns a list of all the series in the collection.  
-     * 
+     * Returns a list of all the series in the collection.
+     *
      * @return The list (which is unmodifiable).
      */
     public List getSeries() {
         return Collections.unmodifiableList(this.data);
     }
-    
+
     /**
      * Returns the index of the specified series, or -1 if that series is not
      * present in the dataset.
-     * 
+     *
      * @param series  the series (<code>null</code> not permitted).
-     * 
+     *
      * @return The series index.
-     * 
+     *
      * @since 1.0.6
      */
     public int indexOf(XYSeries series) {
@@ -221,7 +223,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series index (zero-based).
      *
      * @return The series.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
@@ -231,17 +233,17 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         }
         return (XYSeries) this.data.get(series);
     }
-    
+
     /**
      * Returns a series from the collection.
-     * 
+     *
      * @param key  the key (<code>null</code> not permitted).
-     * 
+     *
      * @return The series with the specified key.
-     * 
+     *
      * @throws UnknownKeyException if <code>key</code> is not found in the
      *         collection.
-     * 
+     *
      * @since 1.0.9
      */
     public XYSeries getSeries(Comparable key) {
@@ -261,11 +263,11 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the key for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to 
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The key for a series.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     specified range.
      */
@@ -280,7 +282,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series (zero-based index).
      *
      * @return The item count.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
@@ -375,13 +377,13 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @return A boolean.
      */
     public boolean equals(Object obj) {
-        /* 
+        /*
          * XXX
-         *  
+         *
          * what about  the interval delegate...?
          * The interval width etc wasn't considered
          * before, hence i did not add it here (AS)
-         * 
+         *
          */
 
         if (obj == this) {
@@ -393,38 +395,38 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         XYSeriesCollection that = (XYSeriesCollection) obj;
         return ObjectUtilities.equal(this.data, that.data);
     }
-    
+
     /**
      * Returns a clone of this instance.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException if there is a problem.
      */
     public Object clone() throws CloneNotSupportedException {
         XYSeriesCollection clone = (XYSeriesCollection) super.clone();
         clone.data = (List) ObjectUtilities.deepClone(this.data);
-        clone.intervalDelegate 
+        clone.intervalDelegate
                 = (IntervalXYDelegate) this.intervalDelegate.clone();
         return clone;
     }
 
     /**
      * Returns a hash code.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
         // Same question as for equals (AS)
         return (this.data != null ? this.data.hashCode() : 0);
     }
-       
+
     /**
      * Returns the minimum x-value in the dataset.
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
-     * 
+     *
      * @return The minimum value.
      */
     public double getDomainLowerBound(boolean includeInterval) {
@@ -436,7 +438,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
-     * 
+     *
      * @return The maximum value.
      */
     public double getDomainUpperBound(boolean includeInterval) {
@@ -448,7 +450,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
-     * 
+     *
      * @return The range.
      */
     public Range getDomainBounds(boolean includeInterval) {
@@ -458,23 +460,23 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         else {
             return DatasetUtilities.iterateDomainBounds(this, includeInterval);
         }
-            
+
     }
-    
+
     /**
-     * Returns the interval width. This is used to calculate the start and end 
-     * x-values, if/when the dataset is used as an {@link IntervalXYDataset}.  
-     * 
+     * Returns the interval width. This is used to calculate the start and end
+     * x-values, if/when the dataset is used as an {@link IntervalXYDataset}.
+     *
      * @return The interval width.
      */
     public double getIntervalWidth() {
         return this.intervalDelegate.getIntervalWidth();
     }
-    
+
     /**
-     * Sets the interval width and sends a {@link DatasetChangeEvent} to all 
+     * Sets the interval width and sends a {@link DatasetChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param width  the width (negative values not permitted).
      */
     public void setIntervalWidth(double width) {
@@ -486,29 +488,29 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the interval position factor.  
-     * 
+     * Returns the interval position factor.
+     *
      * @return The interval position factor.
      */
     public double getIntervalPositionFactor() {
         return this.intervalDelegate.getIntervalPositionFactor();
     }
-    
+
     /**
      * Sets the interval position factor. This controls where the x-value is in
-     * relation to the interval surrounding the x-value (0.0 means the x-value 
+     * relation to the interval surrounding the x-value (0.0 means the x-value
      * will be positioned at the start, 0.5 in the middle, and 1.0 at the end).
-     * 
+     *
      * @param factor  the factor.
      */
     public void setIntervalPositionFactor(double factor) {
         this.intervalDelegate.setIntervalPositionFactor(factor);
         fireDatasetChanged();
     }
-    
+
     /**
      * Returns whether the interval width is automatically calculated or not.
-     * 
+     *
      * @return Whether the width is automatically calculated or not.
      */
     public boolean isAutoWidth() {
@@ -517,13 +519,13 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
 
     /**
      * Sets the flag that indicates wether the interval width is automatically
-     * calculated or not. 
-     * 
+     * calculated or not.
+     *
      * @param b  a boolean.
      */
     public void setAutoWidth(boolean b) {
         this.intervalDelegate.setAutoWidth(b);
         fireDatasetChanged();
     }
-    
+
 }

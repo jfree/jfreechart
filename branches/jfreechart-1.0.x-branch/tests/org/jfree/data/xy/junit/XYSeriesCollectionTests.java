@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------------
  * XYSeriesCollectionTests.java
  * ----------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  * 08-Mar-2007 : Added testGetSeries() and testRemoveSeries() (DG);
  * 08-May-2007 : Added testIndexOf() (DG);
  * 03-Dec-2007 : Added testGetSeriesByKey() (DG);
+ * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -58,6 +59,7 @@ import junit.framework.TestSuite;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link XYSeriesCollection} class.
@@ -122,10 +124,18 @@ public class XYSeriesCollectionTests extends TestCase {
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
-        
+
         // check independence
         s1.setDescription("XYZ");
         assertFalse(c1.equals(c2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        XYSeriesCollection c1 = new XYSeriesCollection();
+        assertTrue(c1 instanceof PublicCloneable);
     }
 
     /**
@@ -137,7 +147,7 @@ public class XYSeriesCollectionTests extends TestCase {
         XYSeriesCollection c1 = new XYSeriesCollection();
         c1.addSeries(s1);
         XYSeriesCollection c2 = null;
-        
+
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -154,7 +164,7 @@ public class XYSeriesCollectionTests extends TestCase {
         }
         assertEquals(c1, c2);
     }
-    
+
     /**
      * A test for bug report 1170825.
      */
@@ -172,7 +182,7 @@ public class XYSeriesCollectionTests extends TestCase {
             assertTrue(false);  // wrong outcome
         }
     }
-    
+
     /**
      * Some basic checks for the getSeries() method.
      */
@@ -181,7 +191,7 @@ public class XYSeriesCollectionTests extends TestCase {
         XYSeries s1 = new XYSeries("s1");
         c.addSeries(s1);
         assertEquals("s1", c.getSeries(0).getKey());
-        
+
         boolean pass = false;
         try {
             c.getSeries(-1);
@@ -190,7 +200,7 @@ public class XYSeriesCollectionTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             c.getSeries(1);
@@ -200,7 +210,7 @@ public class XYSeriesCollectionTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the getSeries(Comparable) method.
      */
@@ -209,7 +219,7 @@ public class XYSeriesCollectionTests extends TestCase {
         XYSeries s1 = new XYSeries("s1");
         c.addSeries(s1);
         assertEquals("s1", c.getSeries("s1").getKey());
-        
+
         boolean pass = false;
         try {
             c.getSeries("s2");
@@ -218,7 +228,7 @@ public class XYSeriesCollectionTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             c.getSeries(null);
@@ -226,9 +236,9 @@ public class XYSeriesCollectionTests extends TestCase {
         catch (IllegalArgumentException e) {
             pass = true;
         }
-        assertTrue(pass); 
+        assertTrue(pass);
     }
-    
+
     /**
      * Some basic checks for the removeSeries() method.
      */
@@ -239,7 +249,7 @@ public class XYSeriesCollectionTests extends TestCase {
         c.removeSeries(0);
         assertEquals(0, c.getSeriesCount());
         c.addSeries(s1);
-        
+
         boolean pass = false;
         try {
             c.removeSeries(-1);
@@ -248,7 +258,7 @@ public class XYSeriesCollectionTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             c.removeSeries(1);
@@ -258,7 +268,7 @@ public class XYSeriesCollectionTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some tests for the indexOf() method.
      */
@@ -268,19 +278,19 @@ public class XYSeriesCollectionTests extends TestCase {
         XYSeriesCollection dataset = new XYSeriesCollection();
         assertEquals(-1, dataset.indexOf(s1));
         assertEquals(-1, dataset.indexOf(s2));
-        
+
         dataset.addSeries(s1);
         assertEquals(0, dataset.indexOf(s1));
         assertEquals(-1, dataset.indexOf(s2));
-        
+
         dataset.addSeries(s2);
         assertEquals(0, dataset.indexOf(s1));
         assertEquals(1, dataset.indexOf(s2));
-        
+
         dataset.removeSeries(s1);
         assertEquals(-1, dataset.indexOf(s1));
         assertEquals(0, dataset.indexOf(s2));
-        
+
         XYSeries s2b = new XYSeries("S2");
         assertEquals(0, dataset.indexOf(s2b));
     }

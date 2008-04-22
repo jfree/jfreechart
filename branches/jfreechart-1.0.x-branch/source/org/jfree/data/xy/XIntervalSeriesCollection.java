@@ -37,6 +37,7 @@
  * 20-Oct-2006 : Version 1 (DG);
  * 27-Nov-2006 : Added clone() override (DG);
  * 18-Jan-2008 : Added removeSeries() and removeAllSeries() methods (DG);
+ * 22-Apr-2008 : Implemented PublicCloneable (DG);
  *
  */
 
@@ -47,6 +48,7 @@ import java.util.List;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.ObjectUtilities;
+import org.jfree.util.PublicCloneable;
 
 /**
  * A collection of {@link XIntervalSeries} objects.
@@ -56,7 +58,7 @@ import org.jfree.util.ObjectUtilities;
  * @see XIntervalSeries
  */
 public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
-                                implements IntervalXYDataset, Serializable {
+        implements IntervalXYDataset, PublicCloneable, Serializable {
 
     /** Storage for the data series. */
     private List data;

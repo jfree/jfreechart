@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------------------
@@ -37,6 +37,7 @@
  * 20-Oct-2006 : Version 1 (DG);
  * 13-Feb-2007 : Check for independence in testCloning() (DG);
  * 18-Jan-2008 : Added testRemoveSeries() (DG);
+ * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -55,6 +56,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.data.xy.XYIntervalSeries;
 import org.jfree.data.xy.XYIntervalSeriesCollection;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link XYIntervalSeriesCollection} class.
@@ -86,7 +88,7 @@ public class XYIntervalSeriesCollectionTests extends TestCase {
         XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
         XYIntervalSeriesCollection c2 = new XYIntervalSeriesCollection();
         assertEquals(c1, c2);
-        
+
         // add a series
         XYIntervalSeries s1 = new XYIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
@@ -96,7 +98,7 @@ public class XYIntervalSeriesCollectionTests extends TestCase {
         s2.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
         c2.addSeries(s2);
         assertTrue(c1.equals(c2));
-        
+
         // add an empty series
         c1.addSeries(new XYIntervalSeries("Empty Series"));
         assertFalse(c1.equals(c2));
@@ -121,12 +123,20 @@ public class XYIntervalSeriesCollectionTests extends TestCase {
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
-        
+
         // check independence
         c1.addSeries(new XYIntervalSeries("Empty"));
         assertFalse(c1.equals(c2));
         c2.addSeries(new XYIntervalSeries("Empty"));
         assertTrue(c1.equals(c2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
+        assertTrue(c1 instanceof PublicCloneable);
     }
 
     /**
@@ -137,7 +147,7 @@ public class XYIntervalSeriesCollectionTests extends TestCase {
         XYIntervalSeries s1 = new XYIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
         XYIntervalSeriesCollection c2 = null;
-        
+
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -153,15 +163,15 @@ public class XYIntervalSeriesCollectionTests extends TestCase {
             e.printStackTrace();
         }
         assertEquals(c1, c2);
-        
+
         // check independence
         c1.addSeries(new XYIntervalSeries("Empty"));
         assertFalse(c1.equals(c2));
         c2.addSeries(new XYIntervalSeries("Empty"));
         assertTrue(c1.equals(c2));
     }
-    
-    
+
+
     /**
      * Some basic checks for the removeSeries() method.
      */
@@ -172,7 +182,7 @@ public class XYIntervalSeriesCollectionTests extends TestCase {
         c.removeSeries(0);
         assertEquals(0, c.getSeriesCount());
         c.addSeries(s1);
-        
+
         boolean pass = false;
         try {
             c.removeSeries(-1);
@@ -181,7 +191,7 @@ public class XYIntervalSeriesCollectionTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             c.removeSeries(1);
@@ -191,9 +201,9 @@ public class XYIntervalSeriesCollectionTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
-     * A test for bug report 1170825 (originally affected XYSeriesCollection, 
+     * A test for bug report 1170825 (originally affected XYSeriesCollection,
      * this test is just copied over).
      */
     public void test1170825() {
@@ -210,5 +220,5 @@ public class XYIntervalSeriesCollectionTests extends TestCase {
             assertTrue(false);  // wrong outcome
         }
     }
-    
+
 }

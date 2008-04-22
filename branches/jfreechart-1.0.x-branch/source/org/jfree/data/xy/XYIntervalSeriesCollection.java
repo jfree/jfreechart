@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------------
@@ -35,10 +35,11 @@
  * Changes
  * -------
  * 20-Oct-2006 : Version 1 (DG);
- * 13-Feb-2007 : Provided a number of method overrides that enhance 
- *               performance, and added a proper clone() 
+ * 13-Feb-2007 : Provided a number of method overrides that enhance
+ *               performance, and added a proper clone()
  *               implementation (DG);
  * 18-Jan-2008 : Added removeSeries() and removeAllSeries() methods (DG);
+ * 22-Apr-2008 : Implemented PublicCloneable (DG);
  *
  */
 
@@ -49,6 +50,7 @@ import java.util.List;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.ObjectUtilities;
+import org.jfree.util.PublicCloneable;
 
 /**
  * A collection of {@link XYIntervalSeries} objects.
@@ -58,20 +60,20 @@ import org.jfree.util.ObjectUtilities;
  * @see XYIntervalSeries
  */
 public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
-                                implements IntervalXYDataset, Serializable {
+        implements IntervalXYDataset, PublicCloneable, Serializable {
 
     /** Storage for the data series. */
     private List data;
-    
-    /** 
-     * Creates a new instance of <code>XIntervalSeriesCollection</code>. 
+
+    /**
+     * Creates a new instance of <code>XIntervalSeriesCollection</code>.
      */
     public XYIntervalSeriesCollection() {
         this.data = new java.util.ArrayList();
     }
 
     /**
-     * Adds a series to the collection and sends a {@link DatasetChangeEvent} 
+     * Adds a series to the collection and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
@@ -100,7 +102,7 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series index (zero-based).
      *
      * @return The series.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
@@ -114,11 +116,11 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the key for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to 
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The key for a series.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     specified range.
      */
@@ -133,7 +135,7 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series (zero-based index).
      *
      * @return The item count.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
@@ -156,12 +158,12 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the start x-value (as a double primitive) for an item within a 
+     * Returns the start x-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
-     * 
+     *
      * @return The value.
      */
     public double getStartXValue(int series, int item) {
@@ -170,12 +172,12 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the end x-value (as a double primitive) for an item within a 
+     * Returns the end x-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
-     * 
+     *
      * @return The value.
      */
     public double getEndXValue(int series, int item) {
@@ -184,12 +186,12 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the y-value (as a double primitive) for an item within a 
+     * Returns the y-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
-     * 
+     *
      * @return The value.
      */
     public double getYValue(int series, int item) {
@@ -198,12 +200,12 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the start y-value (as a double primitive) for an item within a 
+     * Returns the start y-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
-     * 
+     *
      * @return The value.
      */
     public double getStartYValue(int series, int item) {
@@ -212,12 +214,12 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the end y-value (as a double primitive) for an item within a 
+     * Returns the end y-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The value.
      */
     public double getEndYValue(int series, int item) {
@@ -238,7 +240,7 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the start x-value for an item within a series.  
+     * Returns the start x-value for an item within a series.
      *
      * @param series  the series index.
      * @param item  the item index.
@@ -250,7 +252,7 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the end x-value for an item within a series.  
+     * Returns the end x-value for an item within a series.
      *
      * @param series  the series index.
      * @param item  the item index.
@@ -286,13 +288,13 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
     public Number getEndY(int series, int item) {
         return new Double(getEndYValue(series, item));
     }
-    
+
     /**
-     * Removes a series from the collection and sends a 
+     * Removes a series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * 
+     *
      * @since 1.0.10
      */
     public void removeSeries(int series) {
@@ -306,11 +308,11 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes a series from the collection and sends a 
+     * Removes a series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.10
      */
     public void removeSeries(XYIntervalSeries series) {
@@ -323,15 +325,15 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
             fireDatasetChanged();
         }
     }
-    
+
     /**
-     * Removes all the series from the collection and sends a 
+     * Removes all the series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
-     * 
+     *
      * @since 1.0.10
      */
     public void removeAllSeries() {
-        // Unregister the collection as a change listener to each series in 
+        // Unregister the collection as a change listener to each series in
         // the collection.
         for (int i = 0; i < this.data.size(); i++) {
           XYIntervalSeries series = (XYIntervalSeries) this.data.get(i);
@@ -346,7 +348,7 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
      *
      * @param obj  the object (<code>null</code> permitted).
      *
-     * @return A boolean. 
+     * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -358,16 +360,16 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
         XYIntervalSeriesCollection that = (XYIntervalSeriesCollection) obj;
         return ObjectUtilities.equal(this.data, that.data);
     }
-    
+
     /**
      * Returns a clone of this dataset.
-     * 
+     *
      * @return A clone of this dataset.
-     * 
+     *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */
     public Object clone() throws CloneNotSupportedException {
-        XYIntervalSeriesCollection clone 
+        XYIntervalSeriesCollection clone
                 = (XYIntervalSeriesCollection) super.clone();
         int seriesCount = getSeriesCount();
         clone.data = new java.util.ArrayList(seriesCount);
@@ -376,5 +378,5 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
         }
         return clone;
     }
-    
+
 }
