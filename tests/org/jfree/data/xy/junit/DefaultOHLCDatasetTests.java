@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * DefaultOHLCDatasetTests.java
  * ----------------------------
- * (C) Copyright 2005-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 29-Apr-2005 : Version 1 (DG);
  * 28-Nov-2006 : Extended equals() test (DG);
+ * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -57,6 +58,7 @@ import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.DefaultOHLCDataset;
 import org.jfree.data.xy.OHLCDataItem;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link DefaultOHLCDataset} class.
@@ -138,6 +140,41 @@ public class DefaultOHLCDatasetTests extends TestCase {
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
+    }
+
+    /**
+     * Confirm that cloning works.
+     */
+    public void testCloning2() {
+    	OHLCDataItem item1 = new OHLCDataItem(new Date(1L), 1.0, 2.0, 3.0, 4.0,
+    			5.0);
+    	OHLCDataItem item2 = new OHLCDataItem(new Date(2L), 6.0, 7.0, 8.0, 9.0,
+    			10.0);
+    	// create an array of items in reverse order
+    	OHLCDataItem[] items = new OHLCDataItem[] {item2, item1};
+        DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1", items);
+        DefaultOHLCDataset d2 = null;
+        try {
+            d2 = (DefaultOHLCDataset) d1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(d1 != d2);
+        assertTrue(d1.getClass() == d2.getClass());
+        assertTrue(d1.equals(d2));
+
+        d1.sortDataByDate();
+        assertFalse(d1.equals(d2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
+                new OHLCDataItem[0]);
+        assertTrue(d1 instanceof PublicCloneable);
     }
 
     /**
