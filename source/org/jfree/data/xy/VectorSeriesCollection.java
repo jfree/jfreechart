@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * VectorSeriesCollection.java
  * ---------------------------
- * (C) Copyright 2007, by Object Refinery Limited.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,9 +35,10 @@
  * Changes
  * -------
  * 30-Jan-2007 : Version 1 (DG);
- * 24-May-2007 : Added indexOf(), removeSeries() and removeAllSeries() 
+ * 24-May-2007 : Added indexOf(), removeSeries() and removeAllSeries()
  *               methods (DG);
  * 25-May-2007 : Moved from experimental to the main source tree (DG);
+ * 22-Apr-2008 : Implemented PublicCloneable (DG);
  *
  */
 
@@ -48,27 +49,28 @@ import java.util.List;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.ObjectUtilities;
+import org.jfree.util.PublicCloneable;
 
 /**
  * A collection of {@link VectorSeries} objects.
- * 
+ *
  * @since 1.0.6
  */
 public class VectorSeriesCollection extends AbstractXYDataset
-                                implements VectorXYDataset, Serializable {
+        implements VectorXYDataset, PublicCloneable, Serializable {
 
     /** Storage for the data series. */
     private List data;
-    
-    /** 
-     * Creates a new instance of <code>VectorSeriesCollection</code>. 
+
+    /**
+     * Creates a new instance of <code>VectorSeriesCollection</code>.
      */
     public VectorSeriesCollection() {
         this.data = new java.util.ArrayList();
     }
 
     /**
-     * Adds a series to the collection and sends a {@link DatasetChangeEvent} 
+     * Adds a series to the collection and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
@@ -81,14 +83,14 @@ public class VectorSeriesCollection extends AbstractXYDataset
         series.addChangeListener(this);
         fireDatasetChanged();
     }
-    
+
     /**
-     * Removes the specified series from the collection and sends a 
+     * Removes the specified series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
-     * 
-     * @return A boolean indicating whether the series has actually been 
+     *
+     * @return A boolean indicating whether the series has actually been
      *         removed.
      */
     public boolean removeSeries(VectorSeries series) {
@@ -98,13 +100,13 @@ public class VectorSeriesCollection extends AbstractXYDataset
         boolean removed = this.data.remove(series);
         if (removed) {
             series.removeChangeListener(this);
-            fireDatasetChanged();            
+            fireDatasetChanged();
         }
         return removed;
     }
-    
+
     /**
-     * Removes all the series from the collection and sends a 
+     * Removes all the series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      */
     public void removeAllSeries() {
@@ -137,7 +139,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      * @param series  the series index (zero-based).
      *
      * @return The series.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
@@ -151,11 +153,11 @@ public class VectorSeriesCollection extends AbstractXYDataset
     /**
      * Returns the key for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to 
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The key for a series.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     specified range.
      */
@@ -167,9 +169,9 @@ public class VectorSeriesCollection extends AbstractXYDataset
     /**
      * Returns the index of the specified series, or -1 if that series is not
      * present in the dataset.
-     * 
+     *
      * @param series  the series (<code>null</code> not permitted).
-     * 
+     *
      * @return The series index.
      */
     public int indexOf(VectorSeries series) {
@@ -185,7 +187,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      * @param series  the series (zero-based index).
      *
      * @return The item count.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
@@ -251,11 +253,11 @@ public class VectorSeriesCollection extends AbstractXYDataset
     }
 
     /**
-     * Returns the vector for an item in a series.  
-     * 
+     * Returns the vector for an item in a series.
+     *
      * @param series  the series index.
      * @param item  the item index.
-     * 
+     *
      * @return The vector (possibly <code>null</code>).
      */
     public Vector getVector(int series, int item) {
@@ -263,13 +265,13 @@ public class VectorSeriesCollection extends AbstractXYDataset
         VectorDataItem di = (VectorDataItem) s.getDataItem(item);
         return di.getVector();
     }
-    
+
     /**
      * Returns the x-component of the vector for an item in a series.
-     * 
+     *
      * @param series  the series index.
      * @param item  the item index.
-     * 
+     *
      * @return The x-component of the vector.
      */
     public double getVectorXValue(int series, int item) {
@@ -280,10 +282,10 @@ public class VectorSeriesCollection extends AbstractXYDataset
 
     /**
      * Returns the y-component of the vector for an item in a series.
-     * 
+     *
      * @param series  the series index.
      * @param item  the item index.
-     * 
+     *
      * @return The y-component of the vector.
      */
     public double getVectorYValue(int series, int item) {
@@ -297,7 +299,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      *
      * @param obj  the object (<code>null</code> permitted).
      *
-     * @return A boolean. 
+     * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -309,19 +311,19 @@ public class VectorSeriesCollection extends AbstractXYDataset
         VectorSeriesCollection that = (VectorSeriesCollection) obj;
         return ObjectUtilities.equal(this.data, that.data);
     }
-    
+
     /**
      * Returns a clone of this instance.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException if there is a problem.
      */
     public Object clone() throws CloneNotSupportedException {
-        VectorSeriesCollection clone 
+        VectorSeriesCollection clone
                 = (VectorSeriesCollection) super.clone();
         clone.data = (List) ObjectUtilities.deepClone(this.data);
         return clone;
     }
-  
+
 }

@@ -1,5 +1,20 @@
 2008-04-22  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/xy/DefaultHighLowDataset.java,
+    * source/org/jfree/data/xy/DefaultIntervalXYDataset.java,
+    * source/org/jfree/data/xy/DefaultWindDataset.java,
+    * source/org/jfree/data/xy/DefaultXYZDataset.java,
+    * source/org/jfree/data/xy/MatrixSeriesCollection.java,
+    * source/org/jfree/data/xy/VectorSeriesCollection.java,
+    * source/org/jfree/data/xy/XIntervalSeriesCollection.java,
+    * source/org/jfree/data/xy/XYBarDataset.java,
+    * source/org/jfree/data/xy/XYIntervalSeriesCollection.java,
+    * source/org/jfree/data/xy/XYSeriesCollection.java,
+    * source/org/jfree/data/xy/YIntervalSeriesCollection.java:
+    Implemented PublicCloneable.
+
+2008-04-22  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/xy/DefaultTableXYDataset.java:
     Implemented PublicCloneable, plus
     (clone): New method override.

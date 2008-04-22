@@ -2,44 +2,45 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------
  * DefaultWindDataset.java
  * -----------------------
- * (C) Copyright 2001-2007, by Achilleus Mantzios and Contributors.
+ * (C) Copyright 2001-2008, by Achilleus Mantzios and Contributors.
  *
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  * Changes
  * -------
- * 06-Feb-2002 : Version 1, based on code contributed by Achilleus 
+ * 06-Feb-2002 : Version 1, based on code contributed by Achilleus
  *               Mantzios (DG);
  * 05-May-2004 : Now extends AbstractXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 22-Apr-2008 : Implemented PublicCloneable (DG);
  *
  */
 
@@ -51,11 +52,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.jfree.util.PublicCloneable;
+
 /**
  * A default implementation of the {@link WindDataset} interface.
  */
-public class DefaultWindDataset extends AbstractXYDataset 
-                                implements WindDataset {
+public class DefaultWindDataset extends AbstractXYDataset
+        implements WindDataset, PublicCloneable {
 
     /** The keys for the series. */
     private List seriesKeys;
@@ -77,7 +80,7 @@ public class DefaultWindDataset extends AbstractXYDataset
      * Constructs a dataset based on the specified data array.
      *
      * @param data  the data (<code>null</code> not permitted).
-     * 
+     *
      * @throws NullPointerException if <code>data</code> is <code>null</code>.
      */
     public DefaultWindDataset(Object[][][] data) {
@@ -87,11 +90,11 @@ public class DefaultWindDataset extends AbstractXYDataset
     /**
      * Constructs a dataset based on the specified data array.
      *
-     * @param seriesNames  the names of the series (<code>null</code> not 
+     * @param seriesNames  the names of the series (<code>null</code> not
      *     permitted).
      * @param data  the wind data.
-     * 
-     * @throws NullPointerException if <code>seriesNames</code> is 
+     *
+     * @throws NullPointerException if <code>seriesNames</code> is
      *     <code>null</code>.
      */
     public DefaultWindDataset(String[] seriesNames, Object[][][] data) {
@@ -103,20 +106,20 @@ public class DefaultWindDataset extends AbstractXYDataset
      * can contain multiple series, each series can contain multiple items,
      * and each item is as follows:
      * <ul>
-     * <li><code>data[series][item][0]</code> - the date (either a 
-     *   <code>Date</code> or a <code>Number</code> that is the milliseconds 
+     * <li><code>data[series][item][0]</code> - the date (either a
+     *   <code>Date</code> or a <code>Number</code> that is the milliseconds
      *   since 1-Jan-1970);</li>
-     * <li><code>data[series][item][1]</code> - the wind direction (1 - 12, 
+     * <li><code>data[series][item][1]</code> - the wind direction (1 - 12,
      *   like the numbers on a clock face);</li>
      * <li><code>data[series][item][2]</code> - the wind force (1 - 12 on the
      *   Beaufort scale)</li>
      * </ul>
-     * 
-     * @param seriesKeys  the names of the series (<code>null</code> not 
+     *
+     * @param seriesKeys  the names of the series (<code>null</code> not
      *     permitted).
      * @param data  the wind dataset (<code>null</code> not permitted).
-     * 
-     * @throws IllegalArgumentException if <code>seriesKeys</code> is 
+     *
+     * @throws IllegalArgumentException if <code>seriesKeys</code> is
      *     <code>null</code>.
      * @throws IllegalArgumentException if the number of series keys does not
      *     match the number of series in the array.
@@ -155,7 +158,7 @@ public class DefaultWindDataset extends AbstractXYDataset
                     }
                     Number windDir = (Number) data[seriesIndex][itemIndex][1];
                     Number windForce = (Number) data[seriesIndex][itemIndex][2];
-                    oneSeriesData.add(new WindDataItem(xNumber, windDir, 
+                    oneSeriesData.add(new WindDataItem(xNumber, windDir,
                             windForce));
                 }
             }
@@ -167,7 +170,7 @@ public class DefaultWindDataset extends AbstractXYDataset
 
     /**
      * Returns the number of series in the dataset.
-     * 
+     *
      * @return The series count.
      */
     public int getSeriesCount() {
@@ -176,14 +179,14 @@ public class DefaultWindDataset extends AbstractXYDataset
 
     /**
      * Returns the number of items in a series.
-     * 
+     *
      * @param series  the series (zero-based index).
-     * 
+     *
      * @return The item count.
      */
     public int getItemCount(int series) {
         if (series < 0 || series >= getSeriesCount()) {
-            throw new IllegalArgumentException("Invalid series index: " 
+            throw new IllegalArgumentException("Invalid series index: "
                     + series);
         }
         List oneSeriesData = (List) this.allSeriesData.get(series);
@@ -192,14 +195,14 @@ public class DefaultWindDataset extends AbstractXYDataset
 
     /**
      * Returns the key for a series.
-     * 
+     *
      * @param series  the series (zero-based index).
-     * 
+     *
      * @return The series key.
      */
     public Comparable getSeriesKey(int series) {
         if (series < 0 || series >= getSeriesCount()) {
-            throw new IllegalArgumentException("Invalid series index: " 
+            throw new IllegalArgumentException("Invalid series index: "
                     + series);
         }
         return (Comparable) this.seriesKeys.get(series);
@@ -212,7 +215,7 @@ public class DefaultWindDataset extends AbstractXYDataset
      *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The x-value for the item within the series.
      */
     public Number getX(int series, int item) {
@@ -223,12 +226,12 @@ public class DefaultWindDataset extends AbstractXYDataset
 
     /**
      * Returns the y-value for one item within a series.  This maps to the
-     * {@link #getWindForce(int, int)} method and is implemented because 
+     * {@link #getWindForce(int, int)} method and is implemented because
      * <code>WindDataset</code> is an extension of {@link XYDataset}.
      *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The y-value for the item within the series.
      */
     public Number getY(int series, int item) {
@@ -238,10 +241,10 @@ public class DefaultWindDataset extends AbstractXYDataset
     /**
      * Returns the wind direction for one item within a series.  This is a
      * number between 0 and 12, like the numbers on an upside-down clock face.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The wind direction for the item within the series.
      */
     public Number getWindDirection(int series, int item) {
@@ -253,10 +256,10 @@ public class DefaultWindDataset extends AbstractXYDataset
     /**
      * Returns the wind force for one item within a series.  This is a number
      * between 0 and 12, as defined by the Beaufort scale.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The wind force for the item within the series.
      */
     public Number getWindForce(int series, int item) {
@@ -267,11 +270,11 @@ public class DefaultWindDataset extends AbstractXYDataset
 
     /**
      * Utility method for automatically generating series names.
-     * 
+     *
      * @param data  the wind data (<code>null</code> not permitted).
      *
      * @return An array of <i>Series N</i> with N = { 1 .. data.length }.
-     * 
+     *
      * @throws NullPointerException if <code>data</code> is <code>null</code>.
      */
     public static List seriesNameListFromDataArray(Object[][] data) {
@@ -284,20 +287,20 @@ public class DefaultWindDataset extends AbstractXYDataset
         return seriesNameList;
 
     }
-    
+
     /**
      * Checks this <code>WindDataset</code> for equality with an arbitrary
      * object.  This method returns <code>true</code> if and only if:
      * <ul>
      *   <li><code>obj</code> is not <code>null</code>;</li>
-     *   <li><code>obj</code> is an instance of 
+     *   <li><code>obj</code> is an instance of
      *       <code>DefaultWindDataset</code>;</li>
      *   <li>both datasets have the same number of series containing identical
      *       values.</li>
      * <ul>
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -397,13 +400,13 @@ class WindDataItem implements Comparable, Serializable {
             throw new ClassCastException("WindDataItem.compareTo(error)");
         }
     }
-    
+
     /**
      * Tests this <code>WindDataItem</code> for equality with an arbitrary
      * object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {

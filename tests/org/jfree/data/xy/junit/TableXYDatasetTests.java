@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------
  * TableXYDatasetTests.java
  * ------------------------
- * (C) Copyright 2003-2007, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -35,14 +35,15 @@
  * Changes
  * -------
  * 11-Aug-2003 : Version 1 (RA);
- * 18-Aug-2003 : Added tests for event notification when removing and updating 
+ * 18-Aug-2003 : Added tests for event notification when removing and updating
  *               series (RA);
- * 22-Sep-2003 : Changed to recognise that empty values are now null rather 
+ * 22-Sep-2003 : Changed to recognise that empty values are now null rather
  *               than zero (RA);
  * 16-Feb-2004 : Added some additional tests (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -61,6 +62,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for {@link DefaultTableXYDataset}.
@@ -89,7 +91,7 @@ public class TableXYDatasetTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         DefaultTableXYDataset d2 = new DefaultTableXYDataset();
         assertTrue(d1.equals(d2));
@@ -122,6 +124,14 @@ public class TableXYDatasetTests extends TestCase {
     }
 
     /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        assertTrue(d1 instanceof PublicCloneable);
+    }
+
+    /**
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
@@ -129,7 +139,7 @@ public class TableXYDatasetTests extends TestCase {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         d1.addSeries(createSeries2());
         DefaultTableXYDataset d2 = null;
-        
+
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -153,10 +163,10 @@ public class TableXYDatasetTests extends TestCase {
      * Assorted tests.
      */
     public void testTableXYDataset() {
-        
+
         XYSeries series1 = createSeries1();
         XYSeries series2 = createSeries2();
-        
+
         DefaultTableXYDataset dataset = new DefaultTableXYDataset();
         dataset.addSeries(series1);
         dataset.addSeries(series2);
@@ -168,7 +178,7 @@ public class TableXYDatasetTests extends TestCase {
         assertEquals(6, dataset.getX(1, 5).intValue());
         assertEquals(2, dataset.getY(1, 5).intValue());
 
-        // after adding a point to a series, check that there are now 7 
+        // after adding a point to a series, check that there are now 7
         // items in each series
         series2.add(7, 2);
         assertEquals(7, dataset.getItemCount());
@@ -189,7 +199,7 @@ public class TableXYDatasetTests extends TestCase {
         assertEquals(4, dataset.getItemCount());
 
     }
-    
+
     /**
      * A test for bug report 788597.
      */
@@ -198,9 +208,9 @@ public class TableXYDatasetTests extends TestCase {
         dataset.addSeries(createSeries1());
         assertEquals(4, dataset.getItemCount());
         dataset.removeAllSeries();
-        assertEquals(0, dataset.getItemCount());      
+        assertEquals(0, dataset.getItemCount());
     }
-    
+
     /**
      * Test that removing all values for a given x works.
      */
@@ -216,7 +226,7 @@ public class TableXYDatasetTests extends TestCase {
         assertEquals(new Double(5.0), dataset.getX(0, 3));
         assertEquals(new Double(6.0), dataset.getX(0, 4));
     }
-    
+
     /**
      * Tests to see that pruning removes unwanted x values.
      */
@@ -228,12 +238,12 @@ public class TableXYDatasetTests extends TestCase {
         dataset.prune();
         assertEquals(4, dataset.getItemCount());
     }
-    
+
     /**
      * Tests the auto-pruning feature.
      */
     public void testAutoPrune() {
-        
+
         // WITH AUTOPRUNING
         DefaultTableXYDataset dataset = new DefaultTableXYDataset(true);
         dataset.addSeries(createSeriesA());
@@ -251,12 +261,12 @@ public class TableXYDatasetTests extends TestCase {
         assertEquals(2, dataset2.getItemCount());  // still 2
         dataset2.removeSeries(1);
         assertEquals(1, dataset2.getItemCount());  // still 2.
-        
+
     }
-    
+
     /**
      * Creates a series for testing.
-     * 
+     *
      * @return A series.
      */
     private XYSeries createSeriesA() {
@@ -265,10 +275,10 @@ public class TableXYDatasetTests extends TestCase {
         s.add(2.0, null);
         return s;
     }
-    
+
     /**
      * Creates a series for testing.
-     * 
+     *
      * @return A series.
      */
     private XYSeries createSeriesB() {
@@ -277,10 +287,10 @@ public class TableXYDatasetTests extends TestCase {
         s.add(2.0, 2.2);
         return s;
     }
-    
+
     /**
      * Creates a series for testing.
-     * 
+     *
      * @return A series.
      */
     private XYSeries createSeries1() {
@@ -291,10 +301,10 @@ public class TableXYDatasetTests extends TestCase {
         series1.add(5.0, 1.0);
         return series1;
     }
-    
+
     /**
      * Creates a series for testing.
-     * 
+     *
      * @return A series.
      */
     private XYSeries createSeries2() {
@@ -306,5 +316,5 @@ public class TableXYDatasetTests extends TestCase {
         series2.add(6.0, 2.0);
         return series2;
     }
-    
+
 }

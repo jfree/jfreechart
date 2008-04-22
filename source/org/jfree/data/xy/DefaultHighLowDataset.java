@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------
  * DefaultHighLowDataset.java
  * --------------------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,12 +36,13 @@
  * -------
  * 21-Mar-2002 : Version 1 (DG);
  * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 06-May-2004 : Now extends AbstractXYDataset and added new methods from 
+ * 06-May-2004 : Now extends AbstractXYDataset and added new methods from
  *               HighLowDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 28-Nov-2006 : Added equals() method override (DG);
+ * 22-Apr-2008 : Implemented PublicCloneable (DG);
  *
  */
 
@@ -50,13 +51,15 @@ package org.jfree.data.xy;
 import java.util.Arrays;
 import java.util.Date;
 
+import org.jfree.util.PublicCloneable;
+
 /**
  * A simple implementation of the {@link OHLCDataset} interface.  See also
  * the {@link DefaultOHLCDataset} class, which provides another implementation
  * that is very similar.
  */
-public class DefaultHighLowDataset extends AbstractXYDataset 
-                                   implements OHLCDataset {
+public class DefaultHighLowDataset extends AbstractXYDataset
+        implements OHLCDataset, PublicCloneable {
 
     /** The series key. */
     private Comparable seriesKey;
@@ -85,7 +88,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * The current implementation allows only one series in the dataset.
      * This may be extended in a future version.
      *
-     * @param seriesKey  the key for the series (<code>null</code> not 
+     * @param seriesKey  the key for the series (<code>null</code> not
      *     permitted).
      * @param date  the dates (<code>null</code> not permitted).
      * @param high  the high values (<code>null</code> not permitted).
@@ -94,7 +97,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * @param close  the close values (<code>null</code> not permitted).
      * @param volume  the volume values (<code>null</code> not permitted).
      */
-    public DefaultHighLowDataset(Comparable seriesKey, Date[] date, 
+    public DefaultHighLowDataset(Comparable seriesKey, Date[] date,
             double[] high, double[] low, double[] open, double[] close,
             double[] volume) {
 
@@ -117,18 +120,18 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     /**
      * Returns the key for the series stored in this dataset.
      *
-     * @param series  the index of the series (ignored, this dataset supports 
+     * @param series  the index of the series (ignored, this dataset supports
      *     only one series and this method always returns the key for series 0).
-     * 
+     *
      * @return The series key (never <code>null</code>).
      */
     public Comparable getSeriesKey(int series) {
         return this.seriesKey;
     }
-    
+
     /**
-     * Returns the x-value for one item in a series.  The value returned is a 
-     * <code>Long</code> instance generated from the underlying 
+     * Returns the x-value for one item in a series.  The value returned is a
+     * <code>Long</code> instance generated from the underlying
      * <code>Date</code> object.  To avoid generating a new object instance,
      * you might prefer to call {@link #getXValue(int, int)}.
      *
@@ -136,7 +139,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * @param item  the item (zero-based index).
      *
      * @return The x-value.
-     * 
+     *
      * @see #getXValue(int, int)
      * @see #getXDate(int, int)
      */
@@ -153,7 +156,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * @param item  the item (zero-based index).
      *
      * @return The x-value as a Date.
-     * 
+     *
      * @see #getX(int, int)
      */
     public Date getXDate(int series, int item) {
@@ -163,14 +166,14 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     /**
      * Returns the y-value for one item in a series.
      * <p>
-     * This method (from the {@link XYDataset} interface) is mapped to the 
+     * This method (from the {@link XYDataset} interface) is mapped to the
      * {@link #getCloseValue(int, int)} method.
      *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
      * @return The y-value.
-     * 
+     *
      * @see #getYValue(int, int)
      */
     public Number getY(int series, int item) {
@@ -184,7 +187,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * @param item  the item (zero-based index).
      *
      * @return The high-value.
-     * 
+     *
      * @see #getHighValue(int, int)
      */
     public Number getHigh(int series, int item) {
@@ -192,23 +195,23 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns the high-value (as a double primitive) for an item within a 
+     * Returns the high-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The high-value.
-     * 
+     *
      * @see #getHigh(int, int)
      */
     public double getHighValue(int series, int item) {
         double result = Double.NaN;
         Number high = getHigh(series, item);
         if (high != null) {
-            result = high.doubleValue();   
+            result = high.doubleValue();
         }
-        return result;   
+        return result;
     }
 
     /**
@@ -218,7 +221,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * @param item  the item (zero-based index).
      *
      * @return The low-value.
-     * 
+     *
      * @see #getLowValue(int, int)
      */
     public Number getLow(int series, int item) {
@@ -226,23 +229,23 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns the low-value (as a double primitive) for an item within a 
+     * Returns the low-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The low-value.
-     * 
+     *
      * @see #getLow(int, int)
      */
     public double getLowValue(int series, int item) {
         double result = Double.NaN;
         Number low = getLow(series, item);
         if (low != null) {
-            result = low.doubleValue();   
+            result = low.doubleValue();
         }
-        return result;   
+        return result;
     }
 
     /**
@@ -252,7 +255,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * @param item  the item (zero-based index).
      *
      * @return The open-value.
-     * 
+     *
      * @see #getOpenValue(int, int)
      */
     public Number getOpen(int series, int item) {
@@ -260,23 +263,23 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns the open-value (as a double primitive) for an item within a 
+     * Returns the open-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The open-value.
-     * 
+     *
      * @see #getOpen(int, int)
      */
     public double getOpenValue(int series, int item) {
         double result = Double.NaN;
         Number open = getOpen(series, item);
         if (open != null) {
-            result = open.doubleValue();   
+            result = open.doubleValue();
         }
-        return result;   
+        return result;
     }
 
     /**
@@ -286,7 +289,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * @param item  the item (zero-based index).
      *
      * @return The close-value.
-     * 
+     *
      * @see #getCloseValue(int, int)
      */
     public Number getClose(int series, int item) {
@@ -294,23 +297,23 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns the close-value (as a double primitive) for an item within a 
+     * Returns the close-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The close-value.
-     * 
+     *
      * @see #getClose(int, int)
      */
     public double getCloseValue(int series, int item) {
         double result = Double.NaN;
         Number close = getClose(series, item);
         if (close != null) {
-            result = close.doubleValue();   
+            result = close.doubleValue();
         }
-        return result;   
+        return result;
     }
 
     /**
@@ -320,7 +323,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * @param item  the item (zero-based index).
      *
      * @return The volume-value.
-     * 
+     *
      * @see #getVolumeValue(int, int)
      */
     public Number getVolume(int series, int item) {
@@ -328,23 +331,23 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns the volume-value (as a double primitive) for an item within a 
+     * Returns the volume-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The volume-value.
-     * 
+     *
      * @see #getVolume(int, int)
      */
     public double getVolumeValue(int series, int item) {
         double result = Double.NaN;
         Number volume = getVolume(series, item);
         if (volume != null) {
-            result = volume.doubleValue();   
+            result = volume.doubleValue();
         }
-        return result;   
+        return result;
     }
 
     /**
@@ -371,9 +374,9 @@ public class DefaultHighLowDataset extends AbstractXYDataset
 
     /**
      * Tests this dataset for equality with an arbitrary instance.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -405,13 +408,13 @@ public class DefaultHighLowDataset extends AbstractXYDataset
         if (!Arrays.equals(this.volume, that.volume)) {
             return false;
         }
-        return true;    
+        return true;
     }
-    
+
     /**
      * Constructs an array of Number objects from an array of doubles.
      *
-     * @param data  the double values to convert (<code>null</code> not 
+     * @param data  the double values to convert (<code>null</code> not
      *     permitted).
      *
      * @return The data as an array of Number objects.
