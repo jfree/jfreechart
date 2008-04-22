@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------
@@ -36,6 +36,7 @@
  * -------
  * 25-Mar-2003 : Version 1 (DG);
  * 14-Feb-2008 : Added checks for new code (DG);
+ * 22-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -58,6 +59,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYStepRenderer;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link XYStepRenderer} class.
@@ -89,12 +91,12 @@ public class XYStepRendererTests extends TestCase {
         XYStepRenderer r1 = new XYStepRenderer();
         XYStepRenderer r2 = new XYStepRenderer();
         assertEquals(r1, r2);
-        
+
         r1.setStepPoint(0.44);
         assertFalse(r1.equals(r2));
         r2.setStepPoint(0.44);
         assertTrue(r1.equals(r2));
-        
+
         // try something from the base class
         r1.setBaseCreateEntities(false);
         assertFalse(r1.equals(r2));
@@ -103,7 +105,7 @@ public class XYStepRendererTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         XYStepRenderer r1 = new XYStepRenderer();
@@ -115,7 +117,7 @@ public class XYStepRendererTests extends TestCase {
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -131,6 +133,14 @@ public class XYStepRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        XYStepRenderer r1 = new XYStepRenderer();
+        assertTrue(r1 instanceof PublicCloneable);
     }
 
     /**
@@ -158,32 +168,32 @@ public class XYStepRendererTests extends TestCase {
     }
 
     /**
-     * Draws the chart with a <code>null</code> info object to make sure that 
+     * Draws the chart with a <code>null</code> info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
     public void testDrawWithNullInfo() {
         boolean success = false;
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();
-        
+
             XYSeries s1 = new XYSeries("Series 1", true, false);
             s1.add(5.0, 5.0);
             s1.add(10.0, 15.5);
             s1.add(15.0, 9.5);
             s1.add(20.0, 7.5);
             dataset.addSeries(s1);
-        
+
             XYSeries s2 = new XYSeries("Series 2", true, false);
             s2.add(5.0, 5.0);
             s2.add(10.0, 15.5);
             s2.add(15.0, 9.5);
             s2.add(20.0, 3.5);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset, 
-                    new NumberAxis("X"), new NumberAxis("Y"), 
+            XYPlot plot = new XYPlot(dataset,
+                    new NumberAxis("X"), new NumberAxis("Y"),
                     new XYStepRenderer());
             JFreeChart chart = new JFreeChart(plot);
-            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
             success = true;
         }
@@ -195,32 +205,32 @@ public class XYStepRendererTests extends TestCase {
     }
 
     /**
-     * Draws the chart with a <code>null</code> value in the dataset to make 
+     * Draws the chart with a <code>null</code> value in the dataset to make
      * sure that no exceptions are thrown.
      */
     public void testDrawWithNullValue() {
         boolean success = false;
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();
-        
+
             XYSeries s1 = new XYSeries("Series 1", true, false);
             s1.add(5.0, 5.0);
             s1.add(10.0, null);
             s1.add(15.0, 9.5);
             s1.add(20.0, 7.5);
             dataset.addSeries(s1);
-        
+
             XYSeries s2 = new XYSeries("Series 2", true, false);
             s2.add(5.0, 5.0);
             s2.add(10.0, 15.5);
             s2.add(15.0, null);
             s2.add(20.0, null);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset, 
-                    new NumberAxis("X"), new NumberAxis("Y"), 
+            XYPlot plot = new XYPlot(dataset,
+                    new NumberAxis("X"), new NumberAxis("Y"),
                     new XYStepRenderer());
             JFreeChart chart = new JFreeChart(plot);
-            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
             success = true;
         }

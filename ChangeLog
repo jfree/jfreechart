@@ -1,5 +1,11 @@
 2008-04-22  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/xy/VectorRenderer.java,
+    * source/org/jfree/chart/renderer/xy/XYBlockRenderer.java:
+    Implemented PublicCloneable.
+
+2008-04-22  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/xy/DefaultHighLowDataset.java,
     * source/org/jfree/data/xy/DefaultIntervalXYDataset.java,
     * source/org/jfree/data/xy/DefaultWindDataset.java,

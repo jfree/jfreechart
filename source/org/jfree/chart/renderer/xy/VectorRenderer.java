@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------
@@ -39,7 +39,8 @@
  * 25-May-2007 : Moved from experimental to the main source tree (DG);
  * 18-Feb-2008 : Fixed bug 1880114, arrows for horizontal plot
  *               orientation (DG);
- * 
+ * 22-Apr-2008 : Implemented PublicCloneable (DG);
+ *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -58,41 +59,42 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.Range;
 import org.jfree.data.xy.VectorXYDataset;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * A renderer that represents data from an {@link VectorXYDataset} by drawing a
  * line with an arrow at each (x, y) point.
- * 
+ *
  * @since 1.0.6
  */
-public class VectorRenderer extends AbstractXYItemRenderer 
-        implements XYItemRenderer, Cloneable, Serializable {
-    
+public class VectorRenderer extends AbstractXYItemRenderer
+        implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
+
     /** The length of the base. */
     private double baseLength = 0.10;
-    
+
     /** The length of the head. */
     private double headLength = 0.14;
 
     /**
-     * Creates a new <code>XYBlockRenderer</code> instance with default 
+     * Creates a new <code>XYBlockRenderer</code> instance with default
      * attributes.
      */
     public VectorRenderer() {
     }
-    
+
     /**
-     * Returns the lower and upper bounds (range) of the x-values in the 
+     * Returns the lower and upper bounds (range) of the x-values in the
      * specified dataset.
-     * 
+     *
      * @param dataset  the dataset (<code>null</code> permitted).
-     * 
+     *
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
      */
     public Range findDomainBounds(XYDataset dataset) {
         if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");   
+            throw new IllegalArgumentException("Null 'dataset' argument.");
         }
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
@@ -136,19 +138,19 @@ public class VectorRenderer extends AbstractXYItemRenderer
             return new Range(minimum, maximum);
         }
     }
-    
+
     /**
-     * Returns the range of values the renderer requires to display all the 
+     * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
-     * 
+     *
      * @param dataset  the dataset (<code>null</code> permitted).
-     * 
-     * @return The range (<code>null</code> if the dataset is <code>null</code> 
+     *
+     * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
      */
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");   
+            throw new IllegalArgumentException("Null 'dataset' argument.");
         }
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
@@ -192,10 +194,10 @@ public class VectorRenderer extends AbstractXYItemRenderer
             return new Range(minimum, maximum);
         }
     }
-    
+
     /**
      * Draws the block representing the specified item.
-     * 
+     *
      * @param g2  the graphics device.
      * @param state  the state.
      * @param dataArea  the data area.
@@ -209,11 +211,11 @@ public class VectorRenderer extends AbstractXYItemRenderer
      * @param crosshairState  the crosshair state.
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2, XYItemRendererState state, 
-            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot, 
-            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset, 
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
             int series, int item, CrosshairState crosshairState, int pass) {
-        
+
         double x = dataset.getXValue(series, item);
         double y = dataset.getYValue(series, item);
         double dx = 0.0;
@@ -222,13 +224,13 @@ public class VectorRenderer extends AbstractXYItemRenderer
             dx = ((VectorXYDataset) dataset).getVectorXValue(series, item);
             dy = ((VectorXYDataset) dataset).getVectorYValue(series, item);
         }
-        double xx0 = domainAxis.valueToJava2D(x, dataArea, 
+        double xx0 = domainAxis.valueToJava2D(x, dataArea,
                 plot.getDomainAxisEdge());
-        double yy0 = rangeAxis.valueToJava2D(y, dataArea, 
+        double yy0 = rangeAxis.valueToJava2D(y, dataArea,
                 plot.getRangeAxisEdge());
-        double xx1 = domainAxis.valueToJava2D(x + dx, dataArea, 
+        double xx1 = domainAxis.valueToJava2D(x + dx, dataArea,
                 plot.getDomainAxisEdge());
-        double yy1 = rangeAxis.valueToJava2D(y + dy, dataArea, 
+        double yy1 = rangeAxis.valueToJava2D(y + dy, dataArea,
                 plot.getRangeAxisEdge());
         Line2D line;
         PlotOrientation orientation = plot.getOrientation();
@@ -241,28 +243,28 @@ public class VectorRenderer extends AbstractXYItemRenderer
         g2.setPaint(getItemPaint(series, item));
         g2.setStroke(getItemStroke(series, item));
         g2.draw(line);
-        
+
         // calculate the arrow head and draw it...
         double dxx = (xx1 - xx0);
         double dyy = (yy1 - yy0);
         double bx = xx0 + (1.0 - this.baseLength) * dxx;
         double by = yy0 + (1.0 - this.baseLength) * dyy;
-        
+
         double cx = xx0 + (1.0 - this.headLength) * dxx;
         double cy = yy0 + (1.0 - this.headLength) * dyy;
- 
+
         double angle = 0.0;
         if (dxx != 0.0) {
             angle = Math.PI / 2.0 - Math.atan(dyy / dxx);
         }
         double deltaX = 2.0 * Math.cos(angle);
         double deltaY = 2.0 * Math.sin(angle);
-        
+
         double leftx = cx + deltaX;
         double lefty = cy - deltaY;
         double rightx = cx - deltaX;
         double righty = cy + deltaY;
-        
+
         GeneralPath p = new GeneralPath();
         if (orientation == PlotOrientation.VERTICAL) {
             p.moveTo((float) xx1, (float) yy1);
@@ -278,22 +280,22 @@ public class VectorRenderer extends AbstractXYItemRenderer
         }
         p.closePath();
         g2.draw(p);
-        
-        
+
+
     }
-    
+
     /**
      * Tests this <code>VectorRenderer</code> for equality with an arbitrary
      * object.  This method returns <code>true</code> if and only if:
      * <ul>
      * <li><code>obj</code> is an instance of <code>VectorRenderer</code> (not
      *     <code>null</code>);</li>
-     * <li><code>obj</code> has the same field values as this 
+     * <li><code>obj</code> has the same field values as this
      *     <code>VectorRenderer</code>;</li>
      * </ul>
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -312,13 +314,13 @@ public class VectorRenderer extends AbstractXYItemRenderer
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Returns a clone of this renderer.
-     * 
+     *
      * @return A clone of this renderer.
-     * 
-     * @throws CloneNotSupportedException if there is a problem creating the 
+     *
+     * @throws CloneNotSupportedException if there is a problem creating the
      *     clone.
      */
     public Object clone() throws CloneNotSupportedException {

@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * YIntervalRendererTests.java
  * ---------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 25-Mar-2003 : Version 1 (DG);
  * 20-Feb-2007 : Extended the testEquals() checks (DG);
  * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
+ * 22-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -66,6 +67,7 @@ import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.data.xy.YIntervalSeries;
 import org.jfree.data.xy.YIntervalSeriesCollection;
 import org.jfree.ui.Layer;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link YIntervalRenderer} class.
@@ -97,70 +99,70 @@ public class YIntervalRendererTests extends TestCase {
         YIntervalRenderer r1 = new YIntervalRenderer();
         YIntervalRenderer r2 = new YIntervalRenderer();
         assertEquals(r1, r2);
-        
+
         // the following fields are inherited from the AbstractXYItemRenderer
         r1.setItemLabelGenerator(new StandardXYItemLabelGenerator());
         assertFalse(r1.equals(r2));
         r2.setItemLabelGenerator(new StandardXYItemLabelGenerator());
         assertTrue(r1.equals(r2));
-        
+
         r1.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
         assertFalse(r1.equals(r2));
         r2.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
         assertTrue(r1.equals(r2));
-        
+
         r1.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator());
         assertFalse(r1.equals(r2));
         r2.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator());
         assertTrue(r1.equals(r2));
-        
+
         r1.setToolTipGenerator(new StandardXYToolTipGenerator());
         assertFalse(r1.equals(r2));
         r2.setToolTipGenerator(new StandardXYToolTipGenerator());
         assertTrue(r1.equals(r2));
-        
+
         r1.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
         assertFalse(r1.equals(r2));
         r2.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
         assertTrue(r1.equals(r2));
-        
+
         r1.setBaseToolTipGenerator(new StandardXYToolTipGenerator());
         assertFalse(r1.equals(r2));
         r2.setBaseToolTipGenerator(new StandardXYToolTipGenerator());
         assertTrue(r1.equals(r2));
-        
+
         r1.setURLGenerator(new StandardXYURLGenerator());
         assertFalse(r1.equals(r2));
         r2.setURLGenerator(new StandardXYURLGenerator());
         assertTrue(r1.equals(r2));
-        
+
         r1.addAnnotation(new XYTextAnnotation("X", 1.0, 2.0), Layer.FOREGROUND);
         assertFalse(r1.equals(r2));
         r2.addAnnotation(new XYTextAnnotation("X", 1.0, 2.0), Layer.FOREGROUND);
         assertTrue(r1.equals(r2));
-        
+
         r1.addAnnotation(new XYTextAnnotation("X", 1.0, 2.0), Layer.BACKGROUND);
         assertFalse(r1.equals(r2));
         r2.addAnnotation(new XYTextAnnotation("X", 1.0, 2.0), Layer.BACKGROUND);
         assertTrue(r1.equals(r2));
-        
+
         r1.setDefaultEntityRadius(99);
         assertFalse(r1.equals(r2));
         r2.setDefaultEntityRadius(99);
         assertTrue(r1.equals(r2));
-        
+
         r1.setLegendItemLabelGenerator(new StandardXYSeriesLabelGenerator(
                 "{0} {1}"));
         assertFalse(r1.equals(r2));
         r2.setLegendItemLabelGenerator(new StandardXYSeriesLabelGenerator(
                 "{0} {1}"));
         assertTrue(r1.equals(r2));
-        
+
         r1.setLegendItemToolTipGenerator(new StandardXYSeriesLabelGenerator());
         assertFalse(r1.equals(r2));
         r2.setLegendItemToolTipGenerator(new StandardXYSeriesLabelGenerator());
         assertTrue(r1.equals(r2));
-        
+
         r1.setLegendItemURLGenerator(new StandardXYSeriesLabelGenerator());
         assertFalse(r1.equals(r2));
         r2.setLegendItemURLGenerator(new StandardXYSeriesLabelGenerator());
@@ -168,7 +170,7 @@ public class YIntervalRendererTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         YIntervalRenderer r1 = new YIntervalRenderer();
@@ -178,7 +180,7 @@ public class YIntervalRendererTests extends TestCase {
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -194,32 +196,40 @@ public class YIntervalRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         // check independence
         r1.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
         assertFalse(r1.equals(r2));
         r2.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
         assertTrue(r1.equals(r2));
-        
+
         r1.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
         assertFalse(r1.equals(r2));
         r2.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
         assertTrue(r1.equals(r2));
-        
-        r1.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0), 
+
+        r1.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0),
                 Layer.FOREGROUND);
         assertFalse(r1.equals(r2));
-        r2.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0), 
+        r2.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0),
                 Layer.FOREGROUND);
         assertTrue(r1.equals(r2));
-        
-        r1.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0), 
+
+        r1.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0),
                 Layer.BACKGROUND);
         assertFalse(r1.equals(r2));
-        r2.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0), 
+        r2.addAnnotation(new XYTextAnnotation("ABC", 1.0, 2.0),
                 Layer.BACKGROUND);
         assertTrue(r1.equals(r2));
 
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        YIntervalRenderer r1 = new YIntervalRenderer();
+        assertTrue(r1 instanceof PublicCloneable);
     }
 
     /**
@@ -247,7 +257,7 @@ public class YIntervalRendererTests extends TestCase {
         assertEquals(r1, r2);
 
     }
-    
+
     /**
      * A check for the datasetIndex and seriesIndex fields in the LegendItem
      * returned by the getLegendItem() method.
@@ -260,7 +270,7 @@ public class YIntervalRendererTests extends TestCase {
         s2.add(1.0, 1.1, 1.2, 1.3);
         d1.addSeries(s1);
         d1.addSeries(s2);
-        
+
         YIntervalSeriesCollection d2 = new YIntervalSeriesCollection();
         YIntervalSeries s3 = new YIntervalSeries("S3");
         s3.add(1.0, 1.1, 1.2, 1.3);

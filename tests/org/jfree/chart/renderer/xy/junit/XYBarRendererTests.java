@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------
  * XYBarRendererTests.java
  * -----------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 22-Oct-2003 : Added hashCode test (DG);
  * 09-Feb-2007 : Added to testCloning() (DG);
  * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
+ * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -69,6 +70,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.StandardGradientPaintTransformer;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link XYBarRenderer} class.
@@ -97,37 +99,37 @@ public class XYBarRendererTests extends TestCase {
      * Test that the equals() method distinguishes all fields.
      */
     public void testEquals() {
-        
+
         // default instances
         XYBarRenderer r1 = new XYBarRenderer();
         XYBarRenderer r2 = new XYBarRenderer();
         assertTrue(r1.equals(r2));
         assertTrue(r2.equals(r1));
-        
+
         // setBase()
         r1.setBase(1.0);
         assertFalse(r1.equals(r2));
         r2.setBase(1.0);
         assertTrue(r1.equals(r2));
-        
+
         // setUseYInterval
         r1.setUseYInterval(!r1.getUseYInterval());
         assertFalse(r1.equals(r2));
         r2.setUseYInterval(!r2.getUseYInterval());
         assertTrue(r1.equals(r2));
-        
+
         // setMargin()
         r1.setMargin(0.10);
         assertFalse(r1.equals(r2));
         r2.setMargin(0.10);
         assertTrue(r1.equals(r2));
-        
+
         // setDrawBarOutline()
         r1.setDrawBarOutline(!r1.isDrawBarOutline());
         assertFalse(r1.equals(r2));
         r2.setDrawBarOutline(!r2.isDrawBarOutline());
         assertTrue(r1.equals(r2));
-        
+
         // setGradientPaintTransformer()
         r1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_HORIZONTAL));
@@ -135,13 +137,13 @@ public class XYBarRendererTests extends TestCase {
         r2.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_HORIZONTAL));
         assertTrue(r1.equals(r2));
-        
+
         // legendBar
         r1.setLegendBar(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         assertFalse(r1.equals(r2));
         r2.setLegendBar(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         assertTrue(r1.equals(r2));
-        
+
         // positiveItemLabelFallbackPosition
         r1.setPositiveItemLabelPositionFallback(new ItemLabelPosition());
         assertFalse(r1.equals(r2));
@@ -156,7 +158,7 @@ public class XYBarRendererTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         XYBarRenderer r1 = new XYBarRenderer();
@@ -166,7 +168,7 @@ public class XYBarRendererTests extends TestCase {
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -184,12 +186,20 @@ public class XYBarRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         // check independence
         rect.setRect(4.0, 3.0, 2.0, 1.0);
         assertFalse(r1.equals(r2));
         r2.setLegendBar(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
         assertTrue(r1.equals(r2));
+    }
+
+    /**
+     * Verify that this class implements {@link PublicCloneable}.
+     */
+    public void testPublicCloneable() {
+        XYBarRenderer r1 = new XYBarRenderer();
+        assertTrue(r1 instanceof PublicCloneable);
     }
 
     /**
@@ -250,10 +260,10 @@ public class XYBarRendererTests extends TestCase {
      * Check that the renderer is calculating the domain bounds correctly.
      */
     public void testFindDomainBounds() {
-        XYSeriesCollection dataset 
+        XYSeriesCollection dataset
                 = RendererXYPackageTests.createTestXYSeriesCollection();
-        JFreeChart chart = ChartFactory.createXYBarChart("Test Chart", "X", 
-                false, "Y", dataset, PlotOrientation.VERTICAL, false, false, 
+        JFreeChart chart = ChartFactory.createXYBarChart("Test Chart", "X",
+                false, "Y", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
         XYPlot plot = (XYPlot) chart.getPlot();
         NumberAxis domainAxis = (NumberAxis) plot.getDomainAxis();
@@ -264,7 +274,7 @@ public class XYBarRendererTests extends TestCase {
         assertTrue(bounds.contains(2.5));
         assertFalse(bounds.contains(2.8));
     }
-    
+
     /**
      * A check for the datasetIndex and seriesIndex fields in the LegendItem
      * returned by the getLegendItem() method.
@@ -277,7 +287,7 @@ public class XYBarRendererTests extends TestCase {
         s2.add(1.0, 1.1);
         d1.addSeries(s1);
         d1.addSeries(s2);
-        
+
         XYSeriesCollection d2 = new XYSeriesCollection();
         XYSeries s3 = new XYSeries("S3");
         s3.add(1.0, 1.1);
