@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------------
  * LegendItemCollectionTests.java
  * ------------------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 18-Apr-2005 : Version 1 (DG);
+ * 23-Apr-2008 : Extended testCloning() (DG);
  *
  */
 
@@ -85,38 +86,38 @@ public class LegendItemCollectionTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         LegendItemCollection c1 = new LegendItemCollection();
         LegendItemCollection c2 = new LegendItemCollection();
         assertTrue(c1.equals(c2));
         assertTrue(c2.equals(c1));
 
-        LegendItem item1 = new LegendItem("Label", "Description", 
-                "ToolTip", "URL", true,  
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.red, 
-                true, Color.blue, new BasicStroke(1.2f), true, 
-                new Line2D.Double(1.0, 2.0, 3.0, 4.0), 
+        LegendItem item1 = new LegendItem("Label", "Description",
+                "ToolTip", "URL", true,
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.red,
+                true, Color.blue, new BasicStroke(1.2f), true,
+                new Line2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(2.1f), Color.green);
-        LegendItem item2 = new LegendItem("Label", "Description", 
-                "ToolTip", "URL", true, 
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
-                true, Color.red, true, Color.blue, new BasicStroke(1.2f), true, 
-                new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f), 
+        LegendItem item2 = new LegendItem("Label", "Description",
+                "ToolTip", "URL", true,
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
+                true, Color.red, true, Color.blue, new BasicStroke(1.2f), true,
+                new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
         c1.add(item1);
         c2.add(item2);
         assertTrue(c1.equals(c2));
-        
+
     }
-   
+
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
         LegendItemCollection c1 = new LegendItemCollection();
-        c1.add(new LegendItem("Item", "Description", "ToolTip", "URL", 
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.red)); 
+        c1.add(new LegendItem("Item", "Description", "ToolTip", "URL",
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.red));
         LegendItemCollection c2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -134,15 +135,14 @@ public class LegendItemCollectionTests extends TestCase {
         }
         assertEquals(c1, c2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
     public void testCloning() {
-
         LegendItemCollection c1 = new LegendItemCollection();
-        c1.add(new LegendItem("Item", "Description", "ToolTip", "URL", 
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.red)); 
+        LegendItem item1 = new LegendItem("Item 1");
+        c1.add(item1);
         LegendItemCollection c2 = null;
         try {
             c2 = (LegendItemCollection) c1.clone();
@@ -153,7 +153,10 @@ public class LegendItemCollectionTests extends TestCase {
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
-        
+
+        Rectangle2D item1Shape = (Rectangle2D) item1.getShape();
+        item1Shape.setRect(1.0, 2.0, 3.0, 4.0);
+        assertFalse(c1.equals(c2));
     }
 
 }
