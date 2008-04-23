@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------------
  * CategoryLineAnnotationTests.java
  * --------------------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 29-Jul-2005 : Version 1 (DG);
+ * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.annotations.CategoryLineAnnotation;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link CategoryLineAnnotationTests} class.
@@ -82,7 +84,7 @@ public class CategoryLineAnnotationTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         BasicStroke s1 = new BasicStroke(1.0f);
         BasicStroke s2 = new BasicStroke(2.0f);
         CategoryLineAnnotation a1 = new CategoryLineAnnotation(
@@ -91,8 +93,8 @@ public class CategoryLineAnnotationTests extends TestCase {
             "Category 1", 1.0, "Category 2", 2.0, Color.red, s1);
         assertTrue(a1.equals(a2));
         assertTrue(a2.equals(a1));
-        
-        // category 1 
+
+        // category 1
         a1.setCategory1("Category A");
         assertFalse(a1.equals(a2));
         a2.setCategory1("Category A");
@@ -103,8 +105,8 @@ public class CategoryLineAnnotationTests extends TestCase {
         assertFalse(a1.equals(a2));
         a2.setValue1(0.15);
         assertTrue(a1.equals(a2));
-      
-        // category 2 
+
+        // category 2
         a1.setCategory2("Category B");
         assertFalse(a1.equals(a2));
         a2.setCategory2("Category B");
@@ -115,13 +117,13 @@ public class CategoryLineAnnotationTests extends TestCase {
         assertFalse(a1.equals(a2));
         a2.setValue2(0.25);
         assertTrue(a1.equals(a2));
-        
+
         // paint
         a1.setPaint(Color.yellow);
         assertFalse(a1.equals(a2));
         a2.setPaint(Color.yellow);
         assertTrue(a1.equals(a2));
-        
+
         // stroke
         a1.setStroke(s2);
         assertFalse(a1.equals(a2));
@@ -130,14 +132,14 @@ public class CategoryLineAnnotationTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         CategoryLineAnnotation a1 = new CategoryLineAnnotation(
-            "Category 1", 1.0, "Category 2", 2.0, Color.red, 
+            "Category 1", 1.0, "Category 2", 2.0, Color.red,
             new BasicStroke(1.0f));
         CategoryLineAnnotation a2 = new CategoryLineAnnotation(
-            "Category 1", 1.0, "Category 2", 2.0, Color.red, 
+            "Category 1", 1.0, "Category 2", 2.0, Color.red,
             new BasicStroke(1.0f));
         assertTrue(a1.equals(a2));
         int h1 = a1.hashCode();
@@ -150,7 +152,7 @@ public class CategoryLineAnnotationTests extends TestCase {
      */
     public void testCloning() {
         CategoryLineAnnotation a1 = new CategoryLineAnnotation(
-            "Category 1", 1.0, "Category 2", 2.0, Color.red, 
+            "Category 1", 1.0, "Category 2", 2.0, Color.red,
             new BasicStroke(1.0f));
         CategoryLineAnnotation a2 = null;
         try {
@@ -165,12 +167,22 @@ public class CategoryLineAnnotationTests extends TestCase {
     }
 
     /**
+     * Checks that this class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+        CategoryLineAnnotation a1 = new CategoryLineAnnotation(
+                "Category 1", 1.0, "Category 2", 2.0, Color.red,
+                new BasicStroke(1.0f));
+    	assertTrue(a1 instanceof PublicCloneable);
+    }
+
+    /**
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
 
         CategoryLineAnnotation a1 = new CategoryLineAnnotation(
-            "Category 1", 1.0, "Category 2", 2.0, Color.red, 
+            "Category 1", 1.0, "Category 2", 2.0, Color.red,
             new BasicStroke(1.0f));
         CategoryLineAnnotation a2 = null;
 

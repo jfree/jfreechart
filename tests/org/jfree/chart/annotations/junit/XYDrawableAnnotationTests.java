@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------------
  * XYDrawableAnnotationTests.java
  * ------------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 19-Aug-2003 : Version 1 (DG);
  * 01-Oct-2004 : Fixed bugs in tests (DG);
  * 07-Jan-2005 : Added hashCode() test (DG);
+ * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -58,6 +59,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.annotations.XYDrawableAnnotation;
 import org.jfree.ui.Drawable;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link XYDrawableAnnotation} class.
@@ -94,16 +96,16 @@ public class XYDrawableAnnotationTests extends TestCase {
         }
         /**
          * Returns a clone.
-         * 
+         *
          * @return A clone.
-         * 
+         *
          * @throws CloneNotSupportedException if there is a problem cloning.
          */
         public Object clone() throws CloneNotSupportedException {
             return super.clone();
         }
     }
-    
+
     /**
      * Returns the tests as a test suite.
      *
@@ -125,26 +127,50 @@ public class XYDrawableAnnotationTests extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
-    public void testEquals() {    
-        XYDrawableAnnotation a1 = new XYDrawableAnnotation(
-            10.0, 20.0, 100.0, 200.0, new TestDrawable()
-        );
-        XYDrawableAnnotation a2 = new XYDrawableAnnotation(
-            10.0, 20.0, 100.0, 200.0, new TestDrawable()
-        );
+    public void testEquals() {
+        XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+        		200.0, new TestDrawable());
+        XYDrawableAnnotation a2 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+        		200.0, new TestDrawable());
+        assertTrue(a1.equals(a2));
+
+        a1 = new XYDrawableAnnotation(11.0, 20.0, 100.0, 200.0,
+        		new TestDrawable());
+        assertFalse(a1.equals(a2));
+        a2 = new XYDrawableAnnotation(11.0, 20.0, 100.0, 200.0,
+        		new TestDrawable());
+        assertTrue(a1.equals(a2));
+
+        a1 = new XYDrawableAnnotation(11.0, 22.0, 100.0, 200.0,
+        		new TestDrawable());
+        assertFalse(a1.equals(a2));
+        a2 = new XYDrawableAnnotation(11.0, 22.0, 100.0, 200.0,
+        		new TestDrawable());
+        assertTrue(a1.equals(a2));
+
+        a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 200.0,
+        		new TestDrawable());
+        assertFalse(a1.equals(a2));
+        a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 200.0,
+        		new TestDrawable());
+        assertTrue(a1.equals(a2));
+
+        a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0,
+        		new TestDrawable());
+        assertFalse(a1.equals(a2));
+        a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0,
+        		new TestDrawable());
         assertTrue(a1.equals(a2));
     }
-    
+
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashCode() {
-        XYDrawableAnnotation a1 = new XYDrawableAnnotation(
-            10.0, 20.0, 100.0, 200.0, new TestDrawable()
-        );
-        XYDrawableAnnotation a2 = new XYDrawableAnnotation(
-            10.0, 20.0, 100.0, 200.0, new TestDrawable()
-        );
+        XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+        		200.0, new TestDrawable());
+        XYDrawableAnnotation a2 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+        		200.0, new TestDrawable());
         assertTrue(a1.equals(a2));
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
@@ -155,9 +181,8 @@ public class XYDrawableAnnotationTests extends TestCase {
      * Confirm that cloning works.
      */
     public void testCloning() {
-        XYDrawableAnnotation a1 = new XYDrawableAnnotation(
-            10.0, 20.0, 100.0, 200.0, new TestDrawable()
-        );
+        XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+        		200.0, new TestDrawable());
         XYDrawableAnnotation a2 = null;
         try {
             a2 = (XYDrawableAnnotation) a1.clone();
@@ -171,13 +196,21 @@ public class XYDrawableAnnotationTests extends TestCase {
     }
 
     /**
+     * Checks that this class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+        XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+        		200.0, new TestDrawable());
+    	assertTrue(a1 instanceof PublicCloneable);
+    }
+
+    /**
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
 
-        XYDrawableAnnotation a1 = new XYDrawableAnnotation(
-            10.0, 20.0, 100.0, 200.0, new TestDrawable()
-        );
+        XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+        		200.0, new TestDrawable());
         XYDrawableAnnotation a2 = null;
 
         try {
@@ -187,13 +220,12 @@ public class XYDrawableAnnotationTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             a2 = (XYDrawableAnnotation) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(a1, a2);
 
