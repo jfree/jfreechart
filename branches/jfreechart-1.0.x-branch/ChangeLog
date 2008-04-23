@@ -1,5 +1,11 @@
 2008-04-23  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/labels/BubbleXYItemLabelGenerator.java,
+    * source/org/jfree/chart/labels/StandardPieSectionLabelGenerator.java:
+    Implemented PublicCloneable.
+
+2008-04-23  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/LegendItemCollection.java
     (clone): Reimplemented,
     * source/org/jfree/chart/plot/CategoryPlot.java
