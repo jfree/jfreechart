@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * ScatterRendererTests.java
  * -------------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 08-Oct-2007 : Version 1 (DG);
  * 11-Oct-2007 : Renamed ScatterRenderer (DG);
+ * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -53,6 +54,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.renderer.category.ScatterRenderer;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link ScatterRenderer} class.
@@ -81,45 +83,45 @@ public class ScatterRendererTests extends TestCase {
      * Test that the equals() method distinguishes all fields.
      */
     public void testEquals() {
-        
+
         ScatterRenderer r1 = new ScatterRenderer();
         ScatterRenderer r2 = new ScatterRenderer();
         assertEquals(r1, r2);
-        
+
         r1.setSeriesShapesFilled(1, true);
         assertFalse(r1.equals(r2));
         r2.setSeriesShapesFilled(1, true);
         assertTrue(r1.equals(r2));
-        
+
         r1.setBaseShapesFilled(false);
         assertFalse(r1.equals(r2));
         r2.setBaseShapesFilled(false);
         assertTrue(r1.equals(r2));
-        
+
         r1.setUseFillPaint(true);
         assertFalse(r1.equals(r2));
         r2.setUseFillPaint(true);
         assertTrue(r1.equals(r2));
-        
+
         r1.setDrawOutlines(true);
         assertFalse(r1.equals(r2));
         r2.setDrawOutlines(true);
         assertTrue(r1.equals(r2));
-        
+
         r1.setUseOutlinePaint(true);
         assertFalse(r1.equals(r2));
         r2.setUseOutlinePaint(true);
         assertTrue(r1.equals(r2));
-        
+
         r1.setUseSeriesOffset(false);
         assertFalse(r1.equals(r2));
         r2.setUseSeriesOffset(false);
         assertTrue(r1.equals(r2));
-        
+
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         ScatterRenderer r1 = new ScatterRenderer();
@@ -129,7 +131,7 @@ public class ScatterRendererTests extends TestCase {
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -145,27 +147,34 @@ public class ScatterRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         assertTrue(checkIndependence(r1, r2));
-        
+    }
+
+    /**
+     * Check that this class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+        ScatterRenderer r1 = new ScatterRenderer();
+        assertTrue(r1 instanceof PublicCloneable);
     }
 
     /**
      * Checks that the two renderers are equal but independent of one another.
-     * 
+     *
      * @param r1  renderer 1.
      * @param r2  renderer 2.
-     * 
+     *
      * @return A boolean.
      */
-    private boolean checkIndependence(ScatterRenderer r1, 
+    private boolean checkIndependence(ScatterRenderer r1,
             ScatterRenderer r2) {
 
         // should be equal...
         if (!r1.equals(r2)) {
             return false;
         }
-        
+
         // and independent...
         r1.setSeriesShapesFilled(1, true);
         if (r1.equals(r2)) {
@@ -175,7 +184,7 @@ public class ScatterRendererTests extends TestCase {
         if (!r1.equals(r2)) {
             return false;
         }
-        
+
         r1.setBaseShapesFilled(false);
         r2.setBaseShapesFilled(true);
         if (r1.equals(r2)) {
@@ -186,7 +195,7 @@ public class ScatterRendererTests extends TestCase {
             return false;
         }
         return true;
-    
+
     }
 
     /**
@@ -214,5 +223,5 @@ public class ScatterRendererTests extends TestCase {
         assertEquals(r1, r2);
 
     }
-    
+
 }

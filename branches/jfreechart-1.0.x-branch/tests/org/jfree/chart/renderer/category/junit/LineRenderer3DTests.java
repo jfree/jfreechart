@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------
  * LineRenderer3DTests.java
  * ------------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 15-Oct-2004 : Version 1 (DG);
+ * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.renderer.category.LineRenderer3D;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link LineRenderer3D} class.
@@ -85,27 +87,27 @@ public class LineRenderer3DTests extends TestCase {
         LineRenderer3D r1 = new LineRenderer3D();
         LineRenderer3D r2 = new LineRenderer3D();
         assertEquals(r1, r2);
-        
+
         r1.setXOffset(99.9);
         assertFalse(r1.equals(r2));
         r2.setXOffset(99.9);
         assertTrue(r1.equals(r2));
-        
+
         r1.setYOffset(111.1);
         assertFalse(r1.equals(r2));
         r2.setYOffset(111.1);
         assertTrue(r1.equals(r2));
-        
-        r1.setWallPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, 
+
+        r1.setWallPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.blue));
         assertFalse(r1.equals(r2));
-        r2.setWallPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, 
+        r2.setWallPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.blue));
         assertTrue(r1.equals(r2));
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         LineRenderer3D r1 = new LineRenderer3D();
@@ -115,7 +117,7 @@ public class LineRenderer3DTests extends TestCase {
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -131,24 +133,32 @@ public class LineRenderer3DTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         assertTrue(checkIndependence(r1, r2));
-        
+
+    }
+
+    /**
+     * Check that this class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+        LineRenderer3D r1 = new LineRenderer3D();
+        assertTrue(r1 instanceof PublicCloneable);
     }
 
     /**
      * Checks that the two renderers are equal but independent of one another.
-     * 
+     *
      * @param r1  renderer 1.
      * @param r2  renderer 2.
-     * 
+     *
      * @return A boolean.
      */
     private boolean checkIndependence(LineRenderer3D r1, LineRenderer3D r2) {
 
         // should be equal...
         boolean b0 = r1.equals(r2);
-        
+
         // and independent...
         r1.setBaseLinesVisible(!r1.getBaseLinesVisible());
         if (r1.equals(r2)) {
@@ -167,7 +177,7 @@ public class LineRenderer3DTests extends TestCase {
         if (!r1.equals(r2)) {
             return false;
         }
-            
+
         r1.setLinesVisible(false);
         if (r1.equals(r2)) {
             return false;
@@ -176,7 +186,7 @@ public class LineRenderer3DTests extends TestCase {
         if (!r1.equals(r2)) {
             return false;
         }
-                
+
         r1.setBaseShapesVisible(!r1.getBaseShapesVisible());
         if (r1.equals(r2)) {
             return false;
@@ -194,7 +204,7 @@ public class LineRenderer3DTests extends TestCase {
         if (!r1.equals(r2)) {
             return false;
         }
-            
+
         r1.setShapesVisible(false);
         if (r1.equals(r2)) {
             return false;
@@ -221,15 +231,15 @@ public class LineRenderer3DTests extends TestCase {
         boolean b7 = !r1.equals(r2);
         r2.setSeriesShapesFilled(0, false);
         boolean b8 = (r1.equals(r2));
-        
+
         r1.setBaseShapesFilled(false);
         r2.setBaseShapesFilled(true);
         boolean b9 = !r1.equals(r2);
         r2.setBaseShapesFilled(false);
         boolean b10 = (r1.equals(r2));
-        
+
         return b0 && b5 && b6 && b7 && b8 && b9 && b10;
-    
+
     }
 
     /**

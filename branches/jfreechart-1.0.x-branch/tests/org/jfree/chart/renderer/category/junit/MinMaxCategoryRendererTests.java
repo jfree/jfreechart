@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------------
  * MinMaxCategoryRendererTests.java
  * --------------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 22-Oct-2003 : Version 1 (DG);
  * 28-Sep-2007 : Added testEquals() method (DG);
+ * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -61,6 +62,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link MinMaxCategoryRenderer} class.
@@ -92,19 +94,19 @@ public class MinMaxCategoryRendererTests extends TestCase {
         MinMaxCategoryRenderer r1 = new MinMaxCategoryRenderer();
         MinMaxCategoryRenderer r2 = new MinMaxCategoryRenderer();
         assertEquals(r1, r2);
-        
+
         r1.setDrawLines(true);
         assertFalse(r1.equals(r2));
         r2.setDrawLines(true);
         assertTrue(r1.equals(r2));
-        
-        r1.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, 
+
+        r1.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.yellow));
         assertFalse(r1.equals(r2));
-        r2.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, 
+        r2.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.yellow));
         assertTrue(r1.equals(r2));
-        
+
         r1.setGroupStroke(new BasicStroke(1.2f));
         assertFalse(r1.equals(r2));
         r2.setGroupStroke(new BasicStroke(1.2f));
@@ -112,7 +114,7 @@ public class MinMaxCategoryRendererTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         MinMaxCategoryRenderer r1 = new MinMaxCategoryRenderer();
@@ -122,7 +124,7 @@ public class MinMaxCategoryRendererTests extends TestCase {
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -138,6 +140,14 @@ public class MinMaxCategoryRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+    }
+
+    /**
+     * Check that this class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+        MinMaxCategoryRenderer r1 = new MinMaxCategoryRenderer();
+        assertTrue(r1 instanceof PublicCloneable);
     }
 
     /**
@@ -165,9 +175,9 @@ public class MinMaxCategoryRendererTests extends TestCase {
         assertEquals(r1, r2);
 
     }
-    
+
     /**
-     * Draws the chart with a <code>null</code> info object to make sure that 
+     * Draws the chart with a <code>null</code> info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
     public void testDrawWithNullInfo() {
@@ -175,11 +185,11 @@ public class MinMaxCategoryRendererTests extends TestCase {
         try {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             dataset.addValue(1.0, "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset, 
-                    new CategoryAxis("Category"), new NumberAxis("Value"), 
+            CategoryPlot plot = new CategoryPlot(dataset,
+                    new CategoryAxis("Category"), new NumberAxis("Value"),
                     new MinMaxCategoryRenderer());
             JFreeChart chart = new JFreeChart(plot);
-            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
             success = true;
         }

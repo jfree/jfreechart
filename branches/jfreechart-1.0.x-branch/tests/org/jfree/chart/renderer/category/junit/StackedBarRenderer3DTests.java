@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------------
  * StackedBarRenderer3DTests.java
  * ------------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 25-Mar-2003 : Version 1 (DG);
  * 18-Jan-2007 : Added many new tests (DG);
+ * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -56,6 +57,7 @@ import junit.framework.TestSuite;
 import org.jfree.chart.renderer.category.StackedBarRenderer3D;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link StackedBarRenderer3D} class.
@@ -66,9 +68,9 @@ public class StackedBarRenderer3DTests extends TestCase {
      * Provide access to protected method.
      */
     static class MyRenderer extends StackedBarRenderer3D {
-        public static List createStackedValueList(CategoryDataset dataset, 
+        public static List createStackedValueList(CategoryDataset dataset,
             Comparable category, double base, boolean asPercentages) {
-            return StackedBarRenderer3D.createStackedValueList(dataset, 
+            return StackedBarRenderer3D.createStackedValueList(dataset,
                     category, base, asPercentages);
         }
     }
@@ -101,7 +103,7 @@ public class StackedBarRenderer3DTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         StackedBarRenderer3D r1 = new StackedBarRenderer3D();
@@ -111,7 +113,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -127,6 +129,14 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+    }
+
+    /**
+     * Check that this class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+        StackedBarRenderer3D r1 = new StackedBarRenderer3D();
+        assertTrue(r1 instanceof PublicCloneable);
     }
 
     /**
@@ -154,7 +164,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(r1, r2);
 
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -166,7 +176,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(0.0), ((Object[]) l.get(0))[1]);
         assertEquals(new Double(1.0), ((Object[]) l.get(1))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -200,7 +210,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         List l = MyRenderer.createStackedValueList(d, "c0", 0.0, false);
         assertEquals(0, l.size());
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -214,7 +224,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(1.0), ((Object[]) l.get(1))[1]);
         assertEquals(new Double(2.1), ((Object[]) l.get(2))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -228,7 +238,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(0.0), ((Object[]) l.get(1))[1]);
         assertEquals(new Double(1.0), ((Object[]) l.get(2))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -242,7 +252,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(1.0), ((Object[]) l.get(1))[1]);
         assertEquals(new Double(1.0), ((Object[]) l.get(2))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -269,7 +279,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(0.0), ((Object[]) l.get(1))[1]);
         assertEquals(new Double(1.1), ((Object[]) l.get(2))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -283,7 +293,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(-1.0), ((Object[]) l.get(1))[1]);
         assertEquals(new Double(0.0), ((Object[]) l.get(2))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -297,7 +307,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(0.0), ((Object[]) l.get(1))[1]);
         assertEquals(new Double(0.0), ((Object[]) l.get(2))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -324,7 +334,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(0.0), ((Object[]) l.get(1))[1]);
         assertEquals(new Double(1.1), ((Object[]) l.get(2))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -338,7 +348,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(0.0), ((Object[]) l.get(1))[1]);
         assertEquals(new Double(0.0), ((Object[]) l.get(2))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -352,7 +362,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(0.0), ((Object[]) l.get(1))[1]);
         assertEquals(new Double(0.0), ((Object[]) l.get(2))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
@@ -365,7 +375,7 @@ public class StackedBarRenderer3DTests extends TestCase {
         assertEquals(new Double(0.0), ((Object[]) l.get(0))[1]);
         assertEquals(new Double(0.0), ((Object[]) l.get(1))[1]);
     }
-    
+
     /**
      * A test for the createStackedValueList() method.
      */
