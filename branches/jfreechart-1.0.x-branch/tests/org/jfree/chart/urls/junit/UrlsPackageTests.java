@@ -40,6 +40,7 @@
  * 19-Jan-2005 : Added main() method to run JUnit in text mode (DG);
  * 17-Apr-2007 : Added TimeSeriesURLGeneratorTests (DG);
  * 11-Apr-2008 : Added new tests (DG);
+ * 23-Apr-2008 : Added CustomCategoryURLGeneratorTests (DG);
  *
  */
 
@@ -63,6 +64,7 @@ public class UrlsPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.chart.urls");
+        suite.addTestSuite(CustomCategoryURLGeneratorTests.class);
         suite.addTestSuite(CustomPieURLGeneratorTests.class);
         suite.addTestSuite(CustomXYURLGeneratorTests.class);
         suite.addTestSuite(StandardCategoryURLGeneratorTests.class);

@@ -135,10 +135,15 @@ public class CustomXYURLGenerator implements XYURLGenerator, Cloneable,
     /**
      * Adds a list of URLs.
      *
-     * @param urls  the list of URLs.
+     * @param urls  the list of URLs (<code>null</code> permitted, the list
+     *     is copied).
      */
     public void addURLSeries(List urls) {
-        this.urlSeries.add(urls);
+    	List listToAdd = null;
+    	if (urls != null) {
+            listToAdd = new java.util.ArrayList(urls);
+    	}
+        this.urlSeries.add(listToAdd);
     }
 
     /**
@@ -193,9 +198,9 @@ public class CustomXYURLGenerator implements XYURLGenerator, Cloneable,
      * @return A clone.
      */
     public Object clone() throws CloneNotSupportedException {
-		CustomXYURLGenerator clone = (CustomXYURLGenerator) super.clone();
-		clone.urlSeries = new java.util.ArrayList(this.urlSeries);
-		return clone;
-	}
+        CustomXYURLGenerator clone = (CustomXYURLGenerator) super.clone();
+        clone.urlSeries = new java.util.ArrayList(this.urlSeries);
+        return clone;
+    }
 
 }

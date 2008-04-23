@@ -1,3 +1,12 @@
+2008-04-23  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/JFreeChart.java:
+    Added new contributor Diego Pierangeli,
+    * source/org/jfree/chart/urls/CustomCategoryURLGenerator.java:
+    New class,
+    * source/org/jfree/chart/urls/CustomXYURLGenerator.java
+    (addURLSeries): Copy the incoming list.
+
 2008-04-22  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/VectorRenderer.java,
