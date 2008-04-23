@@ -1,5 +1,11 @@
 2008-04-23  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/LegendItem.java
+    (LegendItem(String)): New constructor,
+    (clone): Implemented.
+
+2008-04-23  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/annotations/CategoryLineAnnotation.java,
     * source/org/jfree/chart/annotations/CategoryTextAnnotation.java:
     Implemented PublicCloneable.
