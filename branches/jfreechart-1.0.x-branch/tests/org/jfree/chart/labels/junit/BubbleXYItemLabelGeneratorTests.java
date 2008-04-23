@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------------------
  * BubbleXYItemLabelGeneratorTests.java
  * ------------------------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 20-Jan-2006 : Version 1 (DG);
+ * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -58,6 +59,7 @@ import junit.framework.TestSuite;
 import org.jfree.chart.labels.BubbleXYItemLabelGenerator;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link BubbleXYItemLabelGenerator} class.
@@ -86,8 +88,8 @@ public class BubbleXYItemLabelGeneratorTests extends TestCase {
      * A series of tests for the equals() method.
      */
     public void testEquals() {
-        
-        // some setup...        
+
+        // some setup...
         String f1 = "{1}";
         String f2 = "{2}";
         NumberFormat xnf1 = new DecimalFormat("0.00");
@@ -99,17 +101,17 @@ public class BubbleXYItemLabelGeneratorTests extends TestCase {
 
         BubbleXYItemLabelGenerator g1 = null;
         BubbleXYItemLabelGenerator g2 = null;
-        
+
         g1 = new BubbleXYItemLabelGenerator(f1, xnf1, ynf1, znf1);
         g2 = new BubbleXYItemLabelGenerator(f1, xnf1, ynf1, znf1);
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
-        
+
         g1 = new BubbleXYItemLabelGenerator(f2, xnf1, ynf1, znf1);
         assertFalse(g1.equals(g2));
         g2 = new BubbleXYItemLabelGenerator(f2, xnf1, ynf1, znf1);
         assertTrue(g1.equals(g2));
-                
+
         g1 = new BubbleXYItemLabelGenerator(f2, xnf2, ynf1, znf1);
         assertFalse(g1.equals(g2));
         g2 = new BubbleXYItemLabelGenerator(f2, xnf2, ynf1, znf1);
@@ -119,7 +121,7 @@ public class BubbleXYItemLabelGeneratorTests extends TestCase {
         assertFalse(g1.equals(g2));
         g2 = new BubbleXYItemLabelGenerator(f2, xnf2, ynf2, znf1);
         assertTrue(g1.equals(g2));
-                
+
         g1 = new BubbleXYItemLabelGenerator(f2, xnf2, ynf2, znf2);
         assertFalse(g1.equals(g2));
         g2 = new BubbleXYItemLabelGenerator(f2, xnf2, ynf2, znf2);
@@ -136,12 +138,12 @@ public class BubbleXYItemLabelGeneratorTests extends TestCase {
         g2 = new BubbleXYItemLabelGenerator(f1, xdf1, ydf1, zdf1);
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
-        
+
         g1 = new BubbleXYItemLabelGenerator(f1, xdf2, ydf1, zdf1);
         assertFalse(g1.equals(g2));
         g2 = new BubbleXYItemLabelGenerator(f1, xdf2, ydf1, zdf1);
         assertTrue(g1.equals(g2));
-                
+
         g1 = new BubbleXYItemLabelGenerator(f1, xdf2, ydf2, zdf1);
         assertFalse(g1.equals(g2));
         g2 = new BubbleXYItemLabelGenerator(f1, xdf2, ydf2, zdf1);
@@ -152,14 +154,14 @@ public class BubbleXYItemLabelGeneratorTests extends TestCase {
         g2 = new BubbleXYItemLabelGenerator(f1, xdf2, ydf2, zdf2);
         assertTrue(g1.equals(g2));
     }
-    
+
     /**
      * Simple check that hashCode is implemented.
      */
     public void testHashCode() {
-    	BubbleXYItemLabelGenerator g1 
+    	BubbleXYItemLabelGenerator g1
     	        = new BubbleXYItemLabelGenerator();
-    	BubbleXYItemLabelGenerator g2 
+    	BubbleXYItemLabelGenerator g2
     	        = new BubbleXYItemLabelGenerator();
         assertTrue(g1.equals(g2));
         assertTrue(g1.hashCode() == g2.hashCode());
@@ -180,6 +182,14 @@ public class BubbleXYItemLabelGeneratorTests extends TestCase {
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
+    }
+
+    /**
+     * Check to ensure that this class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+        BubbleXYItemLabelGenerator g1 = new BubbleXYItemLabelGenerator();
+        assertTrue(g1 instanceof PublicCloneable);
     }
 
     /**
@@ -207,7 +217,7 @@ public class BubbleXYItemLabelGeneratorTests extends TestCase {
         assertEquals(g1, g2);
 
     }
-    
+
     /**
      * Some checks for the testGenerateLabel() method.
      */
