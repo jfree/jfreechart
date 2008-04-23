@@ -53,6 +53,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.urls.CustomCategoryURLGenerator;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link CustomCategoryURLGenerator} class.
@@ -126,6 +127,14 @@ public class CustomCategoryURLGeneratorTests extends TestCase {
         assertFalse(g1.equals(g2));
         g2.addURLSeries(new java.util.ArrayList(u2));
         assertTrue(g1.equals(g2));
+    }
+
+    /**
+     * Checks that the class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+    	CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
+    	assertTrue(g1 instanceof PublicCloneable);
     }
 
     /**

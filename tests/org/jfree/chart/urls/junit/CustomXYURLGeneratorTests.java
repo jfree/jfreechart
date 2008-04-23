@@ -37,6 +37,7 @@
  * 21-Mar-2003 : Version 1 (DG);
  * 11-Apr-2008 : Added testCloning() and testEquals() (DG);
  * 21-Apr-2008 : Enhanced testCloning() (DG);
+ * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -55,6 +56,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.urls.CustomXYURLGenerator;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link CustomXYURLGenerator} class.
@@ -128,6 +130,14 @@ public class CustomXYURLGeneratorTests extends TestCase {
         assertFalse(g1.equals(g2));
         g2.addURLSeries(new java.util.ArrayList(u2));
         assertTrue(g1.equals(g2));
+    }
+
+    /**
+     * Checks that the class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+        CustomXYURLGenerator g1 = new CustomXYURLGenerator();
+    	assertTrue(g1 instanceof PublicCloneable);
     }
 
     /**

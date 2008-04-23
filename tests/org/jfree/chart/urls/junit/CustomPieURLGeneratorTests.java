@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 11-Apr-2008 : Version 1 (DG);
+ * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.urls.CustomPieURLGenerator;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link CustomPieURLGenerator} class.
@@ -118,6 +120,14 @@ public class CustomPieURLGeneratorTests extends TestCase {
         m2.put("B", "XYZ");
         g1.addURLs(m2);
         assertFalse(g1.equals(g2));
+    }
+
+    /**
+     * Checks that the class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+        CustomPieURLGenerator g1 = new CustomPieURLGenerator();
+    	assertTrue(g1 instanceof PublicCloneable);
     }
 
     /**

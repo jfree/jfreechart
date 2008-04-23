@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------------
  * StandardPieURLGeneratorTests.java
  * ---------------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 06-Jan-2003 : Added a test for URL generation (DG);
  * 24-Nov-2006 : New equals() test (DG);
  * 17-Apr-2007 : Added additional check to testURL() (DG);
+ * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -56,6 +57,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.urls.StandardPieURLGenerator;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link StandardPieURLGenerator} class.
@@ -79,7 +81,7 @@ public class StandardPieURLGeneratorTests extends TestCase {
     public StandardPieURLGeneratorTests(String name) {
         super(name);
     }
-    
+
     /**
      * Some checks for the equals() method.
      */
@@ -87,17 +89,17 @@ public class StandardPieURLGeneratorTests extends TestCase {
         StandardPieURLGenerator g1 = new StandardPieURLGenerator();
         StandardPieURLGenerator g2 = new StandardPieURLGenerator();
         assertTrue(g1.equals(g2));
-        
+
         g1 = new StandardPieURLGenerator("prefix", "category", "index");
         assertFalse(g1.equals(g2));
         g2 = new StandardPieURLGenerator("prefix", "category", "index");
         assertTrue(g1.equals(g2));
-        
+
         g1 = new StandardPieURLGenerator("prefix2", "category", "index");
         assertFalse(g1.equals(g2));
         g2 = new StandardPieURLGenerator("prefix2", "category", "index");
         assertTrue(g1.equals(g2));
-        
+
         g1 = new StandardPieURLGenerator("prefix2", "category2", "index");
         assertFalse(g1.equals(g2));
         g2 = new StandardPieURLGenerator("prefix2", "category2", "index");
@@ -112,6 +114,16 @@ public class StandardPieURLGeneratorTests extends TestCase {
         assertFalse(g1.equals(g2));
         g2 = new StandardPieURLGenerator("prefix2", "category2", null);
         assertTrue(g1.equals(g2));
+    }
+
+    /**
+     * Checks that the class does not implement PublicCloneable (the generator
+     * is immutable).
+     */
+    public void testPublicCloneable() {
+        StandardPieURLGenerator g1 = new StandardPieURLGenerator(
+                "index.html?", "cat");
+    	assertFalse(g1 instanceof PublicCloneable);
     }
 
     /**
@@ -155,5 +167,5 @@ public class StandardPieURLGeneratorTests extends TestCase {
         url = g1.generateURL(dataset, "Alpha '1'", 0);
         assertEquals("chart.jsp?category=Alpha+%271%27&amp;pieIndex=0", url);
     }
-    
+
 }
