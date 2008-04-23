@@ -157,6 +157,7 @@
  *               1913751 (DG);
  * 07-Apr-2008 : Fixed NPE in removeDomainMarker() and
  *               removeRangeMarker() (DG);
+ * 23-Apr-2008 : Fixed equals() and clone() methods (DG);
  *
  *
  */
@@ -3824,12 +3825,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         if (!(obj instanceof CategoryPlot)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
-
         CategoryPlot that = (CategoryPlot) obj;
-
         if (this.orientation != that.orientation) {
             return false;
         }
@@ -3917,6 +3913,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
                 != that.rangeCrosshairLockedOnData) {
             return false;
         }
+        if (!ObjectUtilities.equal(this.foregroundDomainMarkers,
+                that.foregroundDomainMarkers)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.backgroundDomainMarkers,
+                that.backgroundDomainMarkers)) {
+            return false;
+        }
         if (!ObjectUtilities.equal(this.foregroundRangeMarkers,
                 that.foregroundRangeMarkers)) {
             return false;
@@ -3939,8 +3943,12 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
                 that.fixedRangeAxisSpace)) {
             return false;
         }
+        if (!ObjectUtilities.equal(this.fixedLegendItems,
+        		that.fixedLegendItems)) {
+        	return false;
+        }
 
-        return true;
+        return super.equals(obj);
 
     }
 
@@ -3997,9 +4005,45 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
                     this.fixedRangeAxisSpace);
         }
 
+        clone.annotations = (List) ObjectUtilities.deepClone(this.annotations);
+        clone.foregroundDomainMarkers = cloneMarkerMap(
+        		this.foregroundDomainMarkers);
+        clone.backgroundDomainMarkers = cloneMarkerMap(
+        		this.backgroundDomainMarkers);
+        clone.foregroundRangeMarkers = cloneMarkerMap(
+        		this.foregroundRangeMarkers);
+        clone.backgroundRangeMarkers = cloneMarkerMap(
+        		this.backgroundRangeMarkers);
+        if (this.fixedLegendItems != null) {
+            clone.fixedLegendItems
+                    = (LegendItemCollection) this.fixedLegendItems.clone();
+        }
         return clone;
 
     }
+
+	/**
+	 * A utility method to clone the marker maps.
+	 *
+	 * @param map  the map to clone.
+	 *
+	 * @return A clone of the map.
+	 *
+	 * @throws CloneNotSupportedException if there is some problem cloning the
+	 *                                    map.
+	 */
+	private Map cloneMarkerMap(Map map) throws CloneNotSupportedException {
+		Map clone = new HashMap();
+        Set keys = map.keySet();
+        Iterator iterator = keys.iterator();
+        while (iterator.hasNext()) {
+            Object key = iterator.next();
+            List entry = (List) map.get(key);
+            Object toAdd = ObjectUtilities.deepClone(entry);
+            clone.put(key, toAdd);
+        }
+		return clone;
+	}
 
     /**
      * Provides serialization support.
