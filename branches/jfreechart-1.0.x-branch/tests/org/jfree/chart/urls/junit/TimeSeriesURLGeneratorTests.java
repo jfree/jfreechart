@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------------
  * TimeSeriesURLGeneratorTests.java
  * --------------------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 17-Apr-2007 : Version 1 (DG);
+ * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.urls.TimeSeriesURLGenerator;
 import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link TimeSeriesURLGenerator} class.
@@ -84,12 +86,12 @@ public class TimeSeriesURLGeneratorTests extends TestCase {
     public void testGenerateURL() {
         TimeSeriesURLGenerator g = new TimeSeriesURLGenerator();
         DefaultXYDataset dataset = new DefaultXYDataset();
-        dataset.addSeries("Series '1'", new double[][] { {1.0, 2.0}, 
+        dataset.addSeries("Series '1'", new double[][] { {1.0, 2.0},
                 {3.0, 4.0}});
         String s = g.generateURL(dataset, 0, 0);
         assertTrue(s.startsWith("index.html?series=Series+%271%27&amp;item="));
     }
-    
+
     /**
      * Check that the equals() method can distinguish all fields.
      */
@@ -97,43 +99,43 @@ public class TimeSeriesURLGeneratorTests extends TestCase {
         TimeSeriesURLGenerator g1 = new TimeSeriesURLGenerator();
         TimeSeriesURLGenerator g2 = new TimeSeriesURLGenerator();
         assertTrue(g1.equals(g2));
-        
-        g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yyyy"), "prefix", 
+
+        g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yyyy"), "prefix",
                 "series", "item");
         assertFalse(g1.equals(g2));
-        g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yyyy"), "prefix", 
+        g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yyyy"), "prefix",
                 "series", "item");
         assertTrue(g1.equals(g2));
 
-        g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix", 
+        g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix",
                 "series", "item");
         assertFalse(g1.equals(g2));
-        g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix", 
-                "series", "item");
-        assertTrue(g1.equals(g2));
-    
-        g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1", 
-                "series", "item");
-        assertFalse(g1.equals(g2));
-        g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1", 
+        g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix",
                 "series", "item");
         assertTrue(g1.equals(g2));
 
-        g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1", 
+        g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
+                "series", "item");
+        assertFalse(g1.equals(g2));
+        g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
+                "series", "item");
+        assertTrue(g1.equals(g2));
+
+        g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
                 "series1", "item");
         assertFalse(g1.equals(g2));
-        g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1", 
+        g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
                 "series1", "item");
         assertTrue(g1.equals(g2));
-    
-        g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1", 
+
+        g1 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
                 "series1", "item1");
         assertFalse(g1.equals(g2));
-        g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1", 
+        g2 = new TimeSeriesURLGenerator(new SimpleDateFormat("yy"), "prefix1",
                 "series1", "item1");
         assertTrue(g1.equals(g2));
     }
-    
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
@@ -158,6 +160,15 @@ public class TimeSeriesURLGeneratorTests extends TestCase {
         }
         assertEquals(g1, g2);
 
+    }
+
+    /**
+     * Checks that the class does not implement PublicCloneable (the generator
+     * is immutable).
+     */
+    public void testPublicCloneable() {
+        TimeSeriesURLGenerator g1 = new TimeSeriesURLGenerator();
+    	assertFalse(g1 instanceof PublicCloneable);
     }
 
 }
