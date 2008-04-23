@@ -36,6 +36,7 @@
  * -------
  * 21-Mar-2003 : Version 1 (DG);
  * 11-Apr-2008 : Added testCloning() and testEquals() (DG);
+ * 21-Apr-2008 : Enhanced testCloning() (DG);
  *
  */
 
@@ -125,6 +126,8 @@ public class CustomXYURLGeneratorTests extends TestCase {
         u2.add("URL XXX");
         g1.addURLSeries(u2);
         assertFalse(g1.equals(g2));
+        g2.addURLSeries(new java.util.ArrayList(u2));
+        assertTrue(g1.equals(g2));
     }
 
     /**
@@ -164,6 +167,28 @@ public class CustomXYURLGeneratorTests extends TestCase {
         }
         assertEquals(g1, g2);
 
+    }
+
+    public void testAddURLSeries() {
+    	CustomXYURLGenerator g1 = new CustomXYURLGenerator();
+    	// you can add a null list - it would have been better if this
+    	// required EMPTY_LIST
+    	g1.addURLSeries(null);
+    	assertEquals(1, g1.getListCount());
+    	assertEquals(0, g1.getURLCount(0));
+
+    	List list1 = new java.util.ArrayList();
+    	list1.add("URL1");
+    	g1.addURLSeries(list1);
+    	assertEquals(2, g1.getListCount());
+    	assertEquals(0, g1.getURLCount(0));
+    	assertEquals(1, g1.getURLCount(1));
+    	assertEquals("URL1", g1.getURL(1, 0));
+
+    	// if we modify the original list, it's best if the URL generator is
+    	// not affected
+    	list1.clear();
+    	assertEquals("URL1", g1.getURL(1, 0));
     }
 
 }
