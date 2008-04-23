@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------------------
  * GroupedStackedBarRendererTests.java
  * -----------------------------------
- * (C) Copyright 2004, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,7 +35,8 @@
  * Changes
  * -------
  * 08-Jul-2004 : Version 1 (DG);
- * 
+ * 23-Apr-2008 : Added testPublicCloneable() (DG);
+ *
  */
 
 package org.jfree.chart.renderer.category.junit;
@@ -58,6 +59,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
 import org.jfree.data.KeyToGroupMap;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link GroupedStackedBarRenderer} class.
@@ -90,7 +92,7 @@ public class GroupedStackedBarRendererTests extends TestCase {
         GroupedStackedBarRenderer r2 = new GroupedStackedBarRenderer();
         assertTrue(r1.equals(r2));
         assertTrue(r2.equals(r1));
-        
+
         // map
         KeyToGroupMap m1 = new KeyToGroupMap("G1");
         m1.mapKeyToGroup("S1", "G2");
@@ -101,7 +103,7 @@ public class GroupedStackedBarRendererTests extends TestCase {
         r2.setSeriesToGroupMap(m2);
         assertTrue(r1.equals(r2));
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -117,6 +119,14 @@ public class GroupedStackedBarRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+    }
+
+    /**
+     * Check that this class implements PublicCloneable.
+     */
+    public void testPublicCloneable() {
+        GroupedStackedBarRenderer r1 = new GroupedStackedBarRenderer();
+        assertTrue(r1 instanceof PublicCloneable);
     }
 
     /**
@@ -143,9 +153,9 @@ public class GroupedStackedBarRendererTests extends TestCase {
         assertEquals(r1, r2);
 
     }
-    
+
     /**
-     * Draws the chart with a <code>null</code> info object to make sure that 
+     * Draws the chart with a <code>null</code> info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
     public void testDrawWithNullInfo() {
@@ -156,13 +166,13 @@ public class GroupedStackedBarRendererTests extends TestCase {
             dataset.addValue(2.0, "S1", "C2");
             dataset.addValue(3.0, "S2", "C1");
             dataset.addValue(4.0, "S2", "C2");
-            GroupedStackedBarRenderer renderer 
+            GroupedStackedBarRenderer renderer
                     = new GroupedStackedBarRenderer();
-            CategoryPlot plot = new CategoryPlot(dataset, 
-                    new CategoryAxis("Category"), new NumberAxis("Value"), 
+            CategoryPlot plot = new CategoryPlot(dataset,
+                    new CategoryAxis("Category"), new NumberAxis("Value"),
                     renderer);
             JFreeChart chart = new JFreeChart(plot);
-            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
             success = true;
         }
