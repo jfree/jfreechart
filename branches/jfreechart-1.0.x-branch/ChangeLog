@@ -1,5 +1,11 @@
 2008-04-23  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 1942059:
+    * source/org/jfree/chart/axis/CategoryAxis.java
+    (calculateTextBlockWidth): Use correct insets.
+
+2008-04-23  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/labels/BubbleXYItemLabelGenerator.java,
     * source/org/jfree/chart/labels/StandardPieSectionLabelGenerator.java:
     Implemented PublicCloneable.

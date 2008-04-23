@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------
  * CategoryAxis.java
  * -----------------
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Pady Srinivasan (patch 1217634);
@@ -36,7 +36,7 @@
  * -------
  * 21-Aug-2001 : Added standard header. Fixed DOS encoding problem (DG);
  * 18-Sep-2001 : Updated header (DG);
- * 04-Dec-2001 : Changed constructors to protected, and tidied up default 
+ * 04-Dec-2001 : Changed constructors to protected, and tidied up default
  *               values (DG);
  * 19-Apr-2002 : Updated import statements (DG);
  * 05-Sep-2002 : Updated constructor for changes in Axis class (DG);
@@ -44,33 +44,33 @@
  * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
  * 22-Jan-2002 : Removed monolithic constructor (DG);
  * 26-Mar-2003 : Implemented Serializable (DG);
- * 09-May-2003 : Merged HorizontalCategoryAxis and VerticalCategoryAxis into 
+ * 09-May-2003 : Merged HorizontalCategoryAxis and VerticalCategoryAxis into
  *               this class (DG);
  * 13-Aug-2003 : Implemented Cloneable (DG);
  * 29-Oct-2003 : Added workaround for font alignment in PDF output (DG);
  * 05-Nov-2003 : Fixed serialization bug (DG);
  * 26-Nov-2003 : Added category label offset (DG);
- * 06-Jan-2004 : Moved axis line attributes to Axis class, rationalised 
+ * 06-Jan-2004 : Moved axis line attributes to Axis class, rationalised
  *               category label position attributes (DG);
- * 07-Jan-2004 : Added new implementation for linewrapping of category 
+ * 07-Jan-2004 : Added new implementation for linewrapping of category
  *               labels (DG);
  * 17-Feb-2004 : Moved deprecated code to bottom of source file (DG);
  * 10-Mar-2004 : Changed Dimension --> Dimension2D in text classes (DG);
  * 16-Mar-2004 : Added support for tooltips on category labels (DG);
- * 01-Apr-2004 : Changed java.awt.geom.Dimension2D to org.jfree.ui.Size2D 
+ * 01-Apr-2004 : Changed java.awt.geom.Dimension2D to org.jfree.ui.Size2D
  *               because of JDK bug 4976448 which persists on JDK 1.3.1 (DG);
  * 03-Sep-2004 : Added 'maxCategoryLabelLines' attribute (DG);
  * 04-Oct-2004 : Renamed ShapeUtils --> ShapeUtilities (DG);
- * 11-Jan-2005 : Removed deprecated methods in preparation for 1.0.0 
+ * 11-Jan-2005 : Removed deprecated methods in preparation for 1.0.0
  *               release (DG);
- * 21-Jan-2005 : Modified return type for RectangleAnchor.coordinates() 
+ * 21-Jan-2005 : Modified return type for RectangleAnchor.coordinates()
  *               method (DG);
  * 21-Apr-2005 : Replaced Insets with RectangleInsets (DG);
  * 26-Apr-2005 : Removed LOGGER (DG);
  * 08-Jun-2005 : Fixed bug in axis layout (DG);
  * 22-Nov-2005 : Added a method to access the tool tip text for a category
  *               label (DG);
- * 23-Nov-2005 : Added per-category font and paint options - see patch 
+ * 23-Nov-2005 : Added per-category font and paint options - see patch
  *               1217634 (DG);
  * ------------- JFreeChart 1.0.x ---------------------------------------------
  * 11-Jan-2006 : Fixed null pointer exception in drawCategoryLabels - see bug
@@ -82,8 +82,10 @@
  *               multiple domain axes (DG);
  * 07-Mar-2007 : Fixed bug in axis label positioning (DG);
  * 27-Sep-2007 : Added getCategorySeriesMiddle() method (DG);
- * 21-Nov-2007 : Fixed performance bug noted by FindBugs in the 
+ * 21-Nov-2007 : Fixed performance bug noted by FindBugs in the
  *               equalPaintMaps() method (DG);
+ * 23-Apr-2008 : Fixed bug 1942059, bad use of insets in
+ *               calculateTextBlockWidth() (DG);
  *
  */
 
@@ -131,15 +133,15 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 5886554608114265863L;
-    
-    /** 
+
+    /**
      * The default margin for the axis (used for both lower and upper margins).
      */
     public static final double DEFAULT_AXIS_MARGIN = 0.05;
 
-    /** 
+    /**
      * The default margin between categories (a percentage of the overall axis
-     * length). 
+     * length).
      */
     public static final double DEFAULT_CATEGORY_MARGIN = 0.20;
 
@@ -151,31 +153,31 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
     /** The amount of space reserved between categories. */
     private double categoryMargin;
-    
+
     /** The maximum number of lines for category labels. */
     private int maximumCategoryLabelLines;
 
-    /** 
-     * A ratio that is multiplied by the width of one category to determine the 
-     * maximum label width. 
+    /**
+     * A ratio that is multiplied by the width of one category to determine the
+     * maximum label width.
      */
     private float maximumCategoryLabelWidthRatio;
-    
+
     /** The category label offset. */
-    private int categoryLabelPositionOffset; 
-    
-    /** 
-     * A structure defining the category label positions for each axis 
-     * location. 
+    private int categoryLabelPositionOffset;
+
+    /**
+     * A structure defining the category label positions for each axis
+     * location.
      */
     private CategoryLabelPositions categoryLabelPositions;
-    
+
     /** Storage for tick label font overrides (if any). */
     private Map tickLabelFontMap;
-    
+
     /** Storage for tick label paint overrides (if any). */
     private transient Map tickLabelPaintMap;
-    
+
     /** Storage for the category label tooltips (if any). */
     private Map categoryLabelToolTips;
 
@@ -183,9 +185,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Creates a new category axis with no label.
      */
     public CategoryAxis() {
-        this(null);    
+        this(null);
     }
-    
+
     /**
      * Constructs a category axis, using default values where necessary.
      *
@@ -200,22 +202,22 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         this.categoryMargin = DEFAULT_CATEGORY_MARGIN;
         this.maximumCategoryLabelLines = 1;
         this.maximumCategoryLabelWidthRatio = 0.0f;
-        
+
         setTickMarksVisible(false);  // not supported by this axis type yet
-        
+
         this.categoryLabelPositionOffset = 4;
         this.categoryLabelPositions = CategoryLabelPositions.STANDARD;
         this.tickLabelFontMap = new HashMap();
         this.tickLabelPaintMap = new HashMap();
         this.categoryLabelToolTips = new HashMap();
-        
+
     }
 
     /**
      * Returns the lower margin for the axis.
      *
      * @return The margin.
-     * 
+     *
      * @see #getUpperMargin()
      * @see #setLowerMargin(double)
      */
@@ -224,12 +226,12 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the lower margin for the axis and sends an {@link AxisChangeEvent} 
+     * Sets the lower margin for the axis and sends an {@link AxisChangeEvent}
      * to all registered listeners.
      *
-     * @param margin  the margin as a percentage of the axis length (for 
+     * @param margin  the margin as a percentage of the axis length (for
      *                example, 0.05 is five percent).
-     *                
+     *
      * @see #getLowerMargin()
      */
     public void setLowerMargin(double margin) {
@@ -241,7 +243,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Returns the upper margin for the axis.
      *
      * @return The margin.
-     * 
+     *
      * @see #getLowerMargin()
      * @see #setUpperMargin(double)
      */
@@ -253,9 +255,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Sets the upper margin for the axis and sends an {@link AxisChangeEvent}
      * to all registered listeners.
      *
-     * @param margin  the margin as a percentage of the axis length (for 
+     * @param margin  the margin as a percentage of the axis length (for
      *                example, 0.05 is five percent).
-     *                
+     *
      * @see #getUpperMargin()
      */
     public void setUpperMargin(double margin) {
@@ -267,7 +269,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Returns the category margin.
      *
      * @return The margin.
-     * 
+     *
      * @see #setCategoryMargin(double)
      */
     public double getCategoryMargin() {
@@ -275,13 +277,13 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the category margin and sends an {@link AxisChangeEvent} to all 
-     * registered listeners.  The overall category margin is distributed over 
+     * Sets the category margin and sends an {@link AxisChangeEvent} to all
+     * registered listeners.  The overall category margin is distributed over
      * N-1 gaps, where N is the number of categories on the axis.
      *
-     * @param margin  the margin as a percentage of the axis length (for 
+     * @param margin  the margin as a percentage of the axis length (for
      *                example, 0.05 is five percent).
-     *                
+     *
      * @see #getCategoryMargin()
      */
     public void setCategoryMargin(double margin) {
@@ -291,112 +293,112 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
     /**
      * Returns the maximum number of lines to use for each category label.
-     * 
+     *
      * @return The maximum number of lines.
-     * 
+     *
      * @see #setMaximumCategoryLabelLines(int)
      */
     public int getMaximumCategoryLabelLines() {
         return this.maximumCategoryLabelLines;
     }
-    
+
     /**
      * Sets the maximum number of lines to use for each category label and
      * sends an {@link AxisChangeEvent} to all registered listeners.
-     * 
+     *
      * @param lines  the maximum number of lines.
-     * 
+     *
      * @see #getMaximumCategoryLabelLines()
      */
     public void setMaximumCategoryLabelLines(int lines) {
         this.maximumCategoryLabelLines = lines;
         notifyListeners(new AxisChangeEvent(this));
     }
-    
+
     /**
      * Returns the category label width ratio.
-     * 
+     *
      * @return The ratio.
-     * 
+     *
      * @see #setMaximumCategoryLabelWidthRatio(float)
      */
     public float getMaximumCategoryLabelWidthRatio() {
         return this.maximumCategoryLabelWidthRatio;
     }
-    
+
     /**
-     * Sets the maximum category label width ratio and sends an 
+     * Sets the maximum category label width ratio and sends an
      * {@link AxisChangeEvent} to all registered listeners.
-     * 
+     *
      * @param ratio  the ratio.
-     * 
+     *
      * @see #getMaximumCategoryLabelWidthRatio()
      */
     public void setMaximumCategoryLabelWidthRatio(float ratio) {
         this.maximumCategoryLabelWidthRatio = ratio;
         notifyListeners(new AxisChangeEvent(this));
     }
-    
+
     /**
-     * Returns the offset between the axis and the category labels (before 
+     * Returns the offset between the axis and the category labels (before
      * label positioning is taken into account).
-     * 
+     *
      * @return The offset (in Java2D units).
-     * 
+     *
      * @see #setCategoryLabelPositionOffset(int)
      */
     public int getCategoryLabelPositionOffset() {
         return this.categoryLabelPositionOffset;
     }
-    
+
     /**
-     * Sets the offset between the axis and the category labels (before label 
+     * Sets the offset between the axis and the category labels (before label
      * positioning is taken into account).
-     * 
+     *
      * @param offset  the offset (in Java2D units).
-     * 
+     *
      * @see #getCategoryLabelPositionOffset()
      */
     public void setCategoryLabelPositionOffset(int offset) {
         this.categoryLabelPositionOffset = offset;
         notifyListeners(new AxisChangeEvent(this));
     }
-    
+
     /**
-     * Returns the category label position specification (this contains label 
+     * Returns the category label position specification (this contains label
      * positioning info for all four possible axis locations).
-     * 
+     *
      * @return The positions (never <code>null</code>).
-     * 
+     *
      * @see #setCategoryLabelPositions(CategoryLabelPositions)
      */
     public CategoryLabelPositions getCategoryLabelPositions() {
         return this.categoryLabelPositions;
     }
-    
+
     /**
-     * Sets the category label position specification for the axis and sends an 
+     * Sets the category label position specification for the axis and sends an
      * {@link AxisChangeEvent} to all registered listeners.
-     * 
+     *
      * @param positions  the positions (<code>null</code> not permitted).
-     * 
+     *
      * @see #getCategoryLabelPositions()
      */
     public void setCategoryLabelPositions(CategoryLabelPositions positions) {
         if (positions == null) {
-            throw new IllegalArgumentException("Null 'positions' argument.");   
+            throw new IllegalArgumentException("Null 'positions' argument.");
         }
         this.categoryLabelPositions = positions;
         notifyListeners(new AxisChangeEvent(this));
     }
-    
+
     /**
      * Returns the font for the tick label for the given category.
-     * 
+     *
      * @param category  the category (<code>null</code> not permitted).
-     * 
+     *
      * @return The font (never <code>null</code>).
-     * 
+     *
      * @see #setTickLabelFont(Comparable, Font)
      */
     public Font getTickLabelFont(Comparable category) {
@@ -410,14 +412,14 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         }
         return result;
     }
-    
+
     /**
      * Sets the font for the tick label for the specified category and sends
      * an {@link AxisChangeEvent} to all registered listeners.
-     * 
+     *
      * @param category  the category (<code>null</code> not permitted).
      * @param font  the font (<code>null</code> permitted).
-     * 
+     *
      * @see #getTickLabelFont(Comparable)
      */
     public void setTickLabelFont(Comparable category, Font font) {
@@ -432,14 +434,14 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         }
         notifyListeners(new AxisChangeEvent(this));
     }
-    
+
     /**
      * Returns the paint for the tick label for the given category.
-     * 
+     *
      * @param category  the category (<code>null</code> not permitted).
-     * 
+     *
      * @return The paint (never <code>null</code>).
-     * 
+     *
      * @see #setTickLabelPaint(Paint)
      */
     public Paint getTickLabelPaint(Comparable category) {
@@ -453,14 +455,14 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         }
         return result;
     }
-    
+
     /**
      * Sets the paint for the tick label for the specified category and sends
      * an {@link AxisChangeEvent} to all registered listeners.
-     * 
+     *
      * @param category  the category (<code>null</code> not permitted).
      * @param paint  the paint (<code>null</code> permitted).
-     * 
+     *
      * @see #getTickLabelPaint(Comparable)
      */
     public void setTickLabelPaint(Comparable category, Paint paint) {
@@ -475,32 +477,32 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         }
         notifyListeners(new AxisChangeEvent(this));
     }
-    
+
     /**
-     * Adds a tooltip to the specified category and sends an 
+     * Adds a tooltip to the specified category and sends an
      * {@link AxisChangeEvent} to all registered listeners.
-     * 
+     *
      * @param category  the category (<code>null<code> not permitted).
      * @param tooltip  the tooltip text (<code>null</code> permitted).
-     * 
+     *
      * @see #removeCategoryLabelToolTip(Comparable)
      */
     public void addCategoryLabelToolTip(Comparable category, String tooltip) {
         if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");   
+            throw new IllegalArgumentException("Null 'category' argument.");
         }
         this.categoryLabelToolTips.put(category, tooltip);
         notifyListeners(new AxisChangeEvent(this));
     }
-    
+
     /**
-     * Returns the tool tip text for the label belonging to the specified 
+     * Returns the tool tip text for the label belonging to the specified
      * category.
-     * 
+     *
      * @param category  the category (<code>null</code> not permitted).
-     * 
+     *
      * @return The tool tip text (possibly <code>null</code>).
-     * 
+     *
      * @see #addCategoryLabelToolTip(Comparable, String)
      * @see #removeCategoryLabelToolTip(Comparable)
      */
@@ -510,28 +512,28 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         }
         return (String) this.categoryLabelToolTips.get(category);
     }
-    
+
     /**
-     * Removes the tooltip for the specified category and sends an 
+     * Removes the tooltip for the specified category and sends an
      * {@link AxisChangeEvent} to all registered listeners.
-     * 
+     *
      * @param category  the category (<code>null<code> not permitted).
-     * 
+     *
      * @see #addCategoryLabelToolTip(Comparable, String)
      * @see #clearCategoryLabelToolTips()
      */
     public void removeCategoryLabelToolTip(Comparable category) {
         if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");   
+            throw new IllegalArgumentException("Null 'category' argument.");
         }
-        this.categoryLabelToolTips.remove(category);   
+        this.categoryLabelToolTips.remove(category);
         notifyListeners(new AxisChangeEvent(this));
     }
-    
+
     /**
-     * Clears the category label tooltips and sends an {@link AxisChangeEvent} 
+     * Clears the category label tooltips and sends an {@link AxisChangeEvent}
      * to all registered listeners.
-     * 
+     *
      * @see #addCategoryLabelToolTip(Comparable, String)
      * @see #removeCategoryLabelToolTip(Comparable)
      */
@@ -539,24 +541,24 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         this.categoryLabelToolTips.clear();
         notifyListeners(new AxisChangeEvent(this));
     }
-    
+
     /**
      * Returns the Java 2D coordinate for a category.
-     * 
+     *
      * @param anchor  the anchor point.
      * @param category  the category index.
      * @param categoryCount  the category count.
      * @param area  the data area.
      * @param edge  the location of the axis.
-     * 
+     *
      * @return The coordinate.
      */
-    public double getCategoryJava2DCoordinate(CategoryAnchor anchor, 
-                                              int category, 
-                                              int categoryCount, 
+    public double getCategoryJava2DCoordinate(CategoryAnchor anchor,
+                                              int category,
+                                              int categoryCount,
                                               Rectangle2D area,
                                               RectangleEdge edge) {
-    
+
         double result = 0.0;
         if (anchor == CategoryAnchor.START) {
             result = getCategoryStart(category, categoryCount, area, edge);
@@ -568,9 +570,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             result = getCategoryEnd(category, categoryCount, area, edge);
         }
         return result;
-                                                      
+
     }
-                                              
+
     /**
      * Returns the starting coordinate for the specified category.
      *
@@ -580,11 +582,11 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param edge  the axis location.
      *
      * @return The coordinate.
-     * 
+     *
      * @see #getCategoryMiddle(int, int, Rectangle2D, RectangleEdge)
      * @see #getCategoryEnd(int, int, Rectangle2D, RectangleEdge)
      */
-    public double getCategoryStart(int category, int categoryCount, 
+    public double getCategoryStart(int category, int categoryCount,
                                    Rectangle2D area,
                                    RectangleEdge edge) {
 
@@ -592,7 +594,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         if ((edge == RectangleEdge.TOP) || (edge == RectangleEdge.BOTTOM)) {
             result = area.getX() + area.getWidth() * getLowerMargin();
         }
-        else if ((edge == RectangleEdge.LEFT) 
+        else if ((edge == RectangleEdge.LEFT)
                 || (edge == RectangleEdge.RIGHT)) {
             result = area.getMinY() + area.getHeight() * getLowerMargin();
         }
@@ -603,7 +605,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
         result = result + category * (categorySize + categoryGapWidth);
         return result;
-        
+
     }
 
     /**
@@ -615,11 +617,11 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param edge  the axis location.
      *
      * @return The coordinate.
-     * 
+     *
      * @see #getCategoryStart(int, int, Rectangle2D, RectangleEdge)
      * @see #getCategoryEnd(int, int, Rectangle2D, RectangleEdge)
      */
-    public double getCategoryMiddle(int category, int categoryCount, 
+    public double getCategoryMiddle(int category, int categoryCount,
                                     Rectangle2D area, RectangleEdge edge) {
 
         return getCategoryStart(category, categoryCount, area, edge)
@@ -636,42 +638,42 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param edge  the axis location.
      *
      * @return The coordinate.
-     * 
+     *
      * @see #getCategoryStart(int, int, Rectangle2D, RectangleEdge)
      * @see #getCategoryMiddle(int, int, Rectangle2D, RectangleEdge)
      */
-    public double getCategoryEnd(int category, int categoryCount, 
+    public double getCategoryEnd(int category, int categoryCount,
                                  Rectangle2D area, RectangleEdge edge) {
 
         return getCategoryStart(category, categoryCount, area, edge)
                + calculateCategorySize(categoryCount, area, edge);
 
     }
-    
+
     /**
-     * Returns the middle coordinate (in Java2D space) for a series within a 
+     * Returns the middle coordinate (in Java2D space) for a series within a
      * category.
-     * 
+     *
      * @param category  the category (<code>null</code> not permitted).
      * @param seriesKey  the series key (<code>null</code> not permitted).
      * @param dataset  the dataset (<code>null</code> not permitted).
      * @param itemMargin  the item margin (0.0 <= itemMargin < 1.0);
      * @param area  the area (<code>null</code> not permitted).
      * @param edge  the edge (<code>null</code> not permitted).
-     * 
+     *
      * @return The coordinate in Java2D space.
-     * 
+     *
      * @since 1.0.7
      */
-    public double getCategorySeriesMiddle(Comparable category, 
+    public double getCategorySeriesMiddle(Comparable category,
             Comparable seriesKey, CategoryDataset dataset, double itemMargin,
             Rectangle2D area, RectangleEdge edge) {
-        
+
         int categoryIndex = dataset.getColumnIndex(category);
         int categoryCount = dataset.getColumnCount();
         int seriesIndex = dataset.getRowIndex(seriesKey);
         int seriesCount = dataset.getRowCount();
-        double start = getCategoryStart(categoryIndex, categoryCount, area, 
+        double start = getCategoryStart(categoryIndex, categoryCount, area,
                 edge);
         double end = getCategoryEnd(categoryIndex, categoryCount, area, edge);
         double width = end - start;
@@ -686,7 +688,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Calculates the size (width or height, depending on the location of the 
+     * Calculates the size (width or height, depending on the location of the
      * axis) of a category.
      *
      * @param categoryCount  the number of categories.
@@ -704,12 +706,12 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         if ((edge == RectangleEdge.TOP) || (edge == RectangleEdge.BOTTOM)) {
             available = area.getWidth();
         }
-        else if ((edge == RectangleEdge.LEFT) 
+        else if ((edge == RectangleEdge.LEFT)
                 || (edge == RectangleEdge.RIGHT)) {
             available = area.getHeight();
         }
         if (categoryCount > 1) {
-            result = available * (1 - getLowerMargin() - getUpperMargin() 
+            result = available * (1 - getLowerMargin() - getUpperMargin()
                      - getCategoryMargin());
             result = result / categoryCount;
         }
@@ -721,7 +723,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Calculates the size (width or height, depending on the location of the 
+     * Calculates the size (width or height, depending on the location of the
      * axis) of a category gap.
      *
      * @param categoryCount  the number of categories.
@@ -730,7 +732,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return The category gap width.
      */
-    protected double calculateCategoryGapSize(int categoryCount, 
+    protected double calculateCategoryGapSize(int categoryCount,
                                               Rectangle2D area,
                                               RectangleEdge edge) {
 
@@ -740,7 +742,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         if ((edge == RectangleEdge.TOP) || (edge == RectangleEdge.BOTTOM)) {
             available = area.getWidth();
         }
-        else if ((edge == RectangleEdge.LEFT) 
+        else if ((edge == RectangleEdge.LEFT)
                 || (edge == RectangleEdge.RIGHT)) {
             available = area.getHeight();
         }
@@ -764,15 +766,15 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return The space required to draw the axis.
      */
-    public AxisSpace reserveSpace(Graphics2D g2, Plot plot, 
-                                  Rectangle2D plotArea, 
+    public AxisSpace reserveSpace(Graphics2D g2, Plot plot,
+                                  Rectangle2D plotArea,
                                   RectangleEdge edge, AxisSpace space) {
 
         // create a new space object if one wasn't supplied...
         if (space == null) {
             space = new AxisSpace();
         }
-        
+
         // if the axis is not visible, no additional space is required...
         if (!isVisible()) {
             return space;
@@ -793,25 +795,25 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 tickLabelHeight = state.getMax();
             }
             else if (edge == RectangleEdge.LEFT) {
-                tickLabelWidth = state.getMax(); 
+                tickLabelWidth = state.getMax();
             }
             else if (edge == RectangleEdge.RIGHT) {
-                tickLabelWidth = state.getMax(); 
+                tickLabelWidth = state.getMax();
             }
         }
-        
+
         // get the axis label size and update the space object...
         Rectangle2D labelEnclosure = getLabelEnclosure(g2, edge);
         double labelHeight = 0.0;
         double labelWidth = 0.0;
         if (RectangleEdge.isTopOrBottom(edge)) {
             labelHeight = labelEnclosure.getHeight();
-            space.add(labelHeight + tickLabelHeight 
+            space.add(labelHeight + tickLabelHeight
                     + this.categoryLabelPositionOffset, edge);
         }
         else if (RectangleEdge.isLeftOrRight(edge)) {
             labelWidth = labelEnclosure.getWidth();
-            space.add(labelWidth + tickLabelWidth 
+            space.add(labelWidth + tickLabelWidth
                     + this.categoryLabelPositionOffset, edge);
         }
         return space;
@@ -826,43 +828,43 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Draws the axis on a Java 2D graphics device (such as the screen or a 
+     * Draws the axis on a Java 2D graphics device (such as the screen or a
      * printer).
      *
      * @param g2  the graphics device (<code>null</code> not permitted).
      * @param cursor  the cursor location.
-     * @param plotArea  the area within which the axis should be drawn 
+     * @param plotArea  the area within which the axis should be drawn
      *                  (<code>null</code> not permitted).
-     * @param dataArea  the area within which the plot is being drawn 
+     * @param dataArea  the area within which the plot is being drawn
      *                  (<code>null</code> not permitted).
      * @param edge  the location of the axis (<code>null</code> not permitted).
-     * @param plotState  collects information about the plot 
+     * @param plotState  collects information about the plot
      *                   (<code>null</code> permitted).
-     * 
+     *
      * @return The axis state (never <code>null</code>).
      */
-    public AxisState draw(Graphics2D g2, 
-                          double cursor, 
-                          Rectangle2D plotArea, 
+    public AxisState draw(Graphics2D g2,
+                          double cursor,
+                          Rectangle2D plotArea,
                           Rectangle2D dataArea,
                           RectangleEdge edge,
                           PlotRenderingInfo plotState) {
-        
+
         // if the axis is not visible, don't draw it...
         if (!isVisible()) {
             return new AxisState(cursor);
         }
-        
+
         if (isAxisLineVisible()) {
             drawAxisLine(g2, cursor, dataArea, edge);
         }
 
         // draw the category labels and axis label
         AxisState state = new AxisState(cursor);
-        state = drawCategoryLabels(g2, plotArea, dataArea, edge, state, 
+        state = drawCategoryLabels(g2, plotArea, dataArea, edge, state,
                 plotState);
         state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
-    
+
         return state;
 
     }
@@ -871,16 +873,16 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Draws the category labels and returns the updated axis state.
      *
      * @param g2  the graphics device (<code>null</code> not permitted).
-     * @param dataArea  the area inside the axes (<code>null</code> not 
+     * @param dataArea  the area inside the axes (<code>null</code> not
      *                  permitted).
      * @param edge  the axis location (<code>null</code> not permitted).
      * @param state  the axis state (<code>null</code> not permitted).
      * @param plotState  collects information about the plot (<code>null</code>
      *                   permitted).
-     * 
+     *
      * @return The updated axis state (never <code>null</code>).
-     * 
-     * @deprecated Use {@link #drawCategoryLabels(Graphics2D, Rectangle2D, 
+     *
+     * @deprecated Use {@link #drawCategoryLabels(Graphics2D, Rectangle2D,
      *     Rectangle2D, RectangleEdge, AxisState, PlotRenderingInfo)}.
      */
     protected AxisState drawCategoryLabels(Graphics2D g2,
@@ -888,25 +890,25 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                                            RectangleEdge edge,
                                            AxisState state,
                                            PlotRenderingInfo plotState) {
-        
+
         // this method is deprecated because we really need the plotArea
         // when drawing the labels - see bug 1277726
-        return drawCategoryLabels(g2, dataArea, dataArea, edge, state, 
+        return drawCategoryLabels(g2, dataArea, dataArea, edge, state,
                 plotState);
     }
-    
+
     /**
      * Draws the category labels and returns the updated axis state.
      *
      * @param g2  the graphics device (<code>null</code> not permitted).
      * @param plotArea  the plot area (<code>null</code> not permitted).
-     * @param dataArea  the area inside the axes (<code>null</code> not 
+     * @param dataArea  the area inside the axes (<code>null</code> not
      *                  permitted).
      * @param edge  the axis location (<code>null</code> not permitted).
      * @param state  the axis state (<code>null</code> not permitted).
      * @param plotState  collects information about the plot (<code>null</code>
      *                   permitted).
-     * 
+     *
      * @return The updated axis state (never <code>null</code>).
      */
     protected AxisState drawCategoryLabels(Graphics2D g2,
@@ -920,71 +922,71 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'state' argument.");
         }
 
-        if (isTickLabelsVisible()) {       
-            List ticks = refreshTicks(g2, state, plotArea, edge);       
-            state.setTicks(ticks);        
-          
+        if (isTickLabelsVisible()) {
+            List ticks = refreshTicks(g2, state, plotArea, edge);
+            state.setTicks(ticks);
+
             int categoryIndex = 0;
             Iterator iterator = ticks.iterator();
             while (iterator.hasNext()) {
-                
+
                 CategoryTick tick = (CategoryTick) iterator.next();
                 g2.setFont(getTickLabelFont(tick.getCategory()));
                 g2.setPaint(getTickLabelPaint(tick.getCategory()));
 
-                CategoryLabelPosition position 
+                CategoryLabelPosition position
                         = this.categoryLabelPositions.getLabelPosition(edge);
                 double x0 = 0.0;
                 double x1 = 0.0;
                 double y0 = 0.0;
                 double y1 = 0.0;
                 if (edge == RectangleEdge.TOP) {
-                    x0 = getCategoryStart(categoryIndex, ticks.size(), 
+                    x0 = getCategoryStart(categoryIndex, ticks.size(),
                             dataArea, edge);
-                    x1 = getCategoryEnd(categoryIndex, ticks.size(), dataArea, 
+                    x1 = getCategoryEnd(categoryIndex, ticks.size(), dataArea,
                             edge);
                     y1 = state.getCursor() - this.categoryLabelPositionOffset;
                     y0 = y1 - state.getMax();
                 }
                 else if (edge == RectangleEdge.BOTTOM) {
-                    x0 = getCategoryStart(categoryIndex, ticks.size(), 
+                    x0 = getCategoryStart(categoryIndex, ticks.size(),
                             dataArea, edge);
-                    x1 = getCategoryEnd(categoryIndex, ticks.size(), dataArea, 
-                            edge); 
+                    x1 = getCategoryEnd(categoryIndex, ticks.size(), dataArea,
+                            edge);
                     y0 = state.getCursor() + this.categoryLabelPositionOffset;
                     y1 = y0 + state.getMax();
                 }
                 else if (edge == RectangleEdge.LEFT) {
-                    y0 = getCategoryStart(categoryIndex, ticks.size(), 
+                    y0 = getCategoryStart(categoryIndex, ticks.size(),
                             dataArea, edge);
-                    y1 = getCategoryEnd(categoryIndex, ticks.size(), dataArea, 
+                    y1 = getCategoryEnd(categoryIndex, ticks.size(), dataArea,
                             edge);
                     x1 = state.getCursor() - this.categoryLabelPositionOffset;
                     x0 = x1 - state.getMax();
                 }
                 else if (edge == RectangleEdge.RIGHT) {
-                    y0 = getCategoryStart(categoryIndex, ticks.size(), 
+                    y0 = getCategoryStart(categoryIndex, ticks.size(),
                             dataArea, edge);
-                    y1 = getCategoryEnd(categoryIndex, ticks.size(), dataArea, 
+                    y1 = getCategoryEnd(categoryIndex, ticks.size(), dataArea,
                             edge);
                     x0 = state.getCursor() + this.categoryLabelPositionOffset;
                     x1 = x0 - state.getMax();
                 }
-                Rectangle2D area = new Rectangle2D.Double(x0, y0, (x1 - x0), 
+                Rectangle2D area = new Rectangle2D.Double(x0, y0, (x1 - x0),
                         (y1 - y0));
-                Point2D anchorPoint = RectangleAnchor.coordinates(area, 
+                Point2D anchorPoint = RectangleAnchor.coordinates(area,
                         position.getCategoryAnchor());
                 TextBlock block = tick.getLabel();
-                block.draw(g2, (float) anchorPoint.getX(), 
-                        (float) anchorPoint.getY(), position.getLabelAnchor(), 
-                        (float) anchorPoint.getX(), (float) anchorPoint.getY(), 
+                block.draw(g2, (float) anchorPoint.getX(),
+                        (float) anchorPoint.getY(), position.getLabelAnchor(),
+                        (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                         position.getAngle());
-                Shape bounds = block.calculateBounds(g2, 
-                        (float) anchorPoint.getX(), (float) anchorPoint.getY(), 
-                        position.getLabelAnchor(), (float) anchorPoint.getX(), 
+                Shape bounds = block.calculateBounds(g2,
+                        (float) anchorPoint.getX(), (float) anchorPoint.getY(),
+                        position.getLabelAnchor(), (float) anchorPoint.getX(),
                         (float) anchorPoint.getY(), position.getAngle());
                 if (plotState != null && plotState.getOwner() != null) {
-                    EntityCollection entities 
+                    EntityCollection entities
                             = plotState.getOwner().getEntityCollection();
                     if (entities != null) {
                         String tooltip = getCategoryLabelToolTip(
@@ -1023,16 +1025,16 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param state  the axis state.
      * @param dataArea  the area inside the axes.
      * @param edge  the location of the axis.
-     * 
+     *
      * @return A list of ticks.
      */
-    public List refreshTicks(Graphics2D g2, 
+    public List refreshTicks(Graphics2D g2,
                              AxisState state,
                              Rectangle2D dataArea,
                              RectangleEdge edge) {
 
         List ticks = new java.util.ArrayList();
-        
+
         // sanity check for data area...
         if (dataArea.getHeight() <= 0.0 || dataArea.getWidth() < 0.0) {
             return ticks;
@@ -1041,26 +1043,26 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         CategoryPlot plot = (CategoryPlot) getPlot();
         List categories = plot.getCategoriesForAxis(this);
         double max = 0.0;
-                
+
         if (categories != null) {
-            CategoryLabelPosition position 
+            CategoryLabelPosition position
                     = this.categoryLabelPositions.getLabelPosition(edge);
             float r = this.maximumCategoryLabelWidthRatio;
             if (r <= 0.0) {
-                r = position.getWidthRatio();   
+                r = position.getWidthRatio();
             }
-                  
+
             float l = 0.0f;
             if (position.getWidthType() == CategoryLabelWidthType.CATEGORY) {
-                l = (float) calculateCategorySize(categories.size(), dataArea, 
-                        edge);  
+                l = (float) calculateCategorySize(categories.size(), dataArea,
+                        edge);
             }
             else {
                 if (RectangleEdge.isLeftOrRight(edge)) {
-                    l = (float) dataArea.getWidth();   
+                    l = (float) dataArea.getWidth();
                 }
                 else {
-                    l = (float) dataArea.getHeight();   
+                    l = (float) dataArea.getHeight();
                 }
             }
             int categoryIndex = 0;
@@ -1069,15 +1071,15 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 Comparable category = (Comparable) iterator.next();
                 TextBlock label = createLabel(category, l * r, edge, g2);
                 if (edge == RectangleEdge.TOP || edge == RectangleEdge.BOTTOM) {
-                    max = Math.max(max, calculateTextBlockHeight(label, 
+                    max = Math.max(max, calculateTextBlockHeight(label,
                             position, g2));
                 }
-                else if (edge == RectangleEdge.LEFT 
+                else if (edge == RectangleEdge.LEFT
                         || edge == RectangleEdge.RIGHT) {
-                    max = Math.max(max, calculateTextBlockWidth(label, 
+                    max = Math.max(max, calculateTextBlockWidth(label,
                             position, g2));
                 }
-                Tick tick = new CategoryTick(category, label, 
+                Tick tick = new CategoryTick(category, label,
                         position.getLabelAnchor(),
                         position.getRotationAnchor(), position.getAngle());
                 ticks.add(tick);
@@ -1086,27 +1088,27 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         }
         state.setMax(max);
         return ticks;
-        
+
     }
 
     /**
      * Creates a label.
      *
      * @param category  the category.
-     * @param width  the available width. 
+     * @param width  the available width.
      * @param edge  the edge on which the axis appears.
      * @param g2  the graphics device.
      *
      * @return A label.
      */
-    protected TextBlock createLabel(Comparable category, float width, 
+    protected TextBlock createLabel(Comparable category, float width,
                                     RectangleEdge edge, Graphics2D g2) {
-        TextBlock label = TextUtilities.createTextBlock(category.toString(), 
+        TextBlock label = TextUtilities.createTextBlock(category.toString(),
                 getTickLabelFont(category), getTickLabelPaint(category), width,
-                this.maximumCategoryLabelLines, new G2TextMeasurer(g2));  
-        return label; 
+                this.maximumCategoryLabelLines, new G2TextMeasurer(g2));
+        return label;
     }
-    
+
     /**
      * A utility method for determining the width of a text block.
      *
@@ -1116,20 +1118,19 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return The width.
      */
-    protected double calculateTextBlockWidth(TextBlock block, 
-                                             CategoryLabelPosition position, 
-                                             Graphics2D g2) {
-                                                    
+    protected double calculateTextBlockWidth(TextBlock block,
+            CategoryLabelPosition position, Graphics2D g2) {
+
         RectangleInsets insets = getTickLabelInsets();
         Size2D size = block.calculateDimensions(g2);
-        Rectangle2D box = new Rectangle2D.Double(0.0, 0.0, size.getWidth(), 
+        Rectangle2D box = new Rectangle2D.Double(0.0, 0.0, size.getWidth(),
                 size.getHeight());
         Shape rotatedBox = ShapeUtilities.rotateShape(box, position.getAngle(),
                 0.0f, 0.0f);
-        double w = rotatedBox.getBounds2D().getWidth() + insets.getTop() 
-                + insets.getBottom();
+        double w = rotatedBox.getBounds2D().getWidth() + insets.getLeft()
+                + insets.getRight();
         return w;
-        
+
     }
 
     /**
@@ -1141,28 +1142,28 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return The height.
      */
-    protected double calculateTextBlockHeight(TextBlock block, 
-                                              CategoryLabelPosition position, 
+    protected double calculateTextBlockHeight(TextBlock block,
+                                              CategoryLabelPosition position,
                                               Graphics2D g2) {
-                                                    
+
         RectangleInsets insets = getTickLabelInsets();
         Size2D size = block.calculateDimensions(g2);
-        Rectangle2D box = new Rectangle2D.Double(0.0, 0.0, size.getWidth(), 
+        Rectangle2D box = new Rectangle2D.Double(0.0, 0.0, size.getWidth(),
                 size.getHeight());
         Shape rotatedBox = ShapeUtilities.rotateShape(box, position.getAngle(),
                 0.0f, 0.0f);
-        double h = rotatedBox.getBounds2D().getHeight() 
+        double h = rotatedBox.getBounds2D().getHeight()
                    + insets.getTop() + insets.getBottom();
         return h;
-        
+
     }
 
     /**
      * Creates a clone of the axis.
-     * 
+     *
      * @return A clone.
-     * 
-     * @throws CloneNotSupportedException if some component of the axis does 
+     *
+     * @throws CloneNotSupportedException if some component of the axis does
      *         not support cloning.
      */
     public Object clone() throws CloneNotSupportedException {
@@ -1170,9 +1171,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         clone.tickLabelFontMap = new HashMap(this.tickLabelFontMap);
         clone.tickLabelPaintMap = new HashMap(this.tickLabelPaintMap);
         clone.categoryLabelToolTips = new HashMap(this.categoryLabelToolTips);
-        return clone;  
+        return clone;
     }
-    
+
     /**
      * Tests this axis for equality with an arbitrary object.
      *
@@ -1200,23 +1201,23 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         if (that.categoryMargin != this.categoryMargin) {
             return false;
         }
-        if (that.maximumCategoryLabelWidthRatio 
+        if (that.maximumCategoryLabelWidthRatio
                 != this.maximumCategoryLabelWidthRatio) {
             return false;
         }
-        if (that.categoryLabelPositionOffset 
+        if (that.categoryLabelPositionOffset
                 != this.categoryLabelPositionOffset) {
             return false;
         }
-        if (!ObjectUtilities.equal(that.categoryLabelPositions, 
+        if (!ObjectUtilities.equal(that.categoryLabelPositions,
                 this.categoryLabelPositions)) {
             return false;
         }
-        if (!ObjectUtilities.equal(that.categoryLabelToolTips, 
+        if (!ObjectUtilities.equal(that.categoryLabelToolTips,
                 this.categoryLabelToolTips)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.tickLabelFontMap, 
+        if (!ObjectUtilities.equal(this.tickLabelFontMap,
                 that.tickLabelFontMap)) {
             return false;
         }
@@ -1228,7 +1229,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
     /**
      * Returns a hash code for this object.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -1239,7 +1240,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             return 0;
         }
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -1260,26 +1261,26 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.tickLabelPaintMap = readPaintMap(stream);
     }
- 
+
     /**
      * Reads a <code>Map</code> of (<code>Comparable</code>, <code>Paint</code>)
      * elements from a stream.
-     * 
+     *
      * @param in  the input stream.
-     * 
+     *
      * @return The map.
-     * 
+     *
      * @throws IOException
      * @throws ClassNotFoundException
-     * 
+     *
      * @see #writePaintMap(Map, ObjectOutputStream)
      */
-    private Map readPaintMap(ObjectInputStream in) 
+    private Map readPaintMap(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
         boolean isNull = in.readBoolean();
         if (isNull) {
@@ -1294,19 +1295,19 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         }
         return result;
     }
-    
+
     /**
      * Writes a map of (<code>Comparable</code>, <code>Paint</code>)
      * elements to a stream.
-     * 
+     *
      * @param map  the map (<code>null</code> permitted).
-     * 
+     *
      * @param out
      * @throws IOException
-     * 
+     *
      * @see #readPaintMap(ObjectInputStream)
      */
-    private void writePaintMap(Map map, ObjectOutputStream out) 
+    private void writePaintMap(Map map, ObjectOutputStream out)
             throws IOException {
         if (map == null) {
             out.writeBoolean(true);
@@ -1324,14 +1325,14 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             }
         }
     }
-    
+
     /**
      * Tests two maps containing (<code>Comparable</code>, <code>Paint</code>)
      * elements for equality.
-     * 
+     *
      * @param map1  the first map (<code>null</code> not permitted).
      * @param map2  the second map (<code>null</code> not permitted).
-     * 
+     *
      * @return A boolean.
      */
     private boolean equalPaintMaps(Map map1, Map map2) {
@@ -1345,7 +1346,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             Paint p1 = (Paint) entry.getValue();
             Paint p2 = (Paint) map2.get(entry.getKey());
             if (!PaintUtilities.equal(p1, p2)) {
-                return false;  
+                return false;
             }
         }
         return true;
