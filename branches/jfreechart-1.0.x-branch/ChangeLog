@@ -1,5 +1,15 @@
 2008-04-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/title/TextTitle.java
+    (maximumLinesToDisplay): New field,
+    (getMaximumLinesToDisplay): New method,
+    (setMaximumLinesToDisplay): Likewise,
+    (arrangeFN): Pass maximumLinesToDisplay,
+    (arrangeRR): Likewise,
+    (equals): Added tests for additional fields.
+
+2008-04-28  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 1950037:
     * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java
     (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): 
