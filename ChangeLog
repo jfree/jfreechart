@@ -1,3 +1,16 @@
+2008-04-28  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 1950037:
+    * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java
+    (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): 
+    New method override,
+    * source/org/jfree/chart/plot/CombinedDomainXYPlot.java
+    (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): 
+    New method override,
+    * source/org/jfree/chart/plot/CombinedRangeXYPlot.java
+    (zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): 
+    New method override.
+
 2008-04-23  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 1942059:
