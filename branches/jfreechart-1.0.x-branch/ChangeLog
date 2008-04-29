@@ -1,3 +1,12 @@
+2008-04-29  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/xy/HighLowRenderer.java
+    (tickLength): New field,
+    (HighLowRenderer): Initialise new field,
+    (getTickLength): New method,
+    (setTickLength): Likewise,
+    (equals): Added check for new field.
+
 2008-04-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/title/TextTitle.java

@@ -39,6 +39,7 @@
  * 01-Nov-2005 : Added tests for new fields (DG);
  * 17-Aug-2006 : Added testFindRangeBounds() method (DG);
  * 22-Apr-2008 : Added testPublicCloneable (DG);
+ * 29-Apr-2008 : Extended textEquals() for new field (DG);
  *
  */
 
@@ -117,6 +118,12 @@ public class HighLowRendererTests extends TestCase {
         r1.setCloseTickPaint(Color.blue);
         assertFalse(r1.equals(r2));
         r2.setCloseTickPaint(Color.blue);
+        assertTrue(r1.equals(r2));
+
+        // tickLength
+        r1.setTickLength(99.9);
+        assertFalse(r1.equals(r2));
+        r2.setTickLength(99.9);
         assertTrue(r1.equals(r2));
     }
 

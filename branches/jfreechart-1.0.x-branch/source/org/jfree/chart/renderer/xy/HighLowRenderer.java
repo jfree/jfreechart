@@ -61,6 +61,7 @@
  * ------------- JFREECHART 1.0.0 ---------------------------------------------
  * 06-Jul-2006 : Replace dataset methods getX() --> getXValue() (DG);
  * 08-Apr-2008 : Added findRangeBounds() override (DG);
+ * 29-Apr-2008 : Added tickLength field (DG);
  *
  */
 
@@ -125,18 +126,29 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     private transient Paint closeTickPaint;
 
     /**
+     * The tick length (in Java2D units).
+     *
+     * @since 1.0.10
+     */
+    private double tickLength;
+
+    /**
      * The default constructor.
      */
     public HighLowRenderer() {
         super();
         this.drawOpenTicks = true;
         this.drawCloseTicks = true;
+        this.tickLength = 2.0;
     }
 
     /**
      * Returns the flag that controls whether open ticks are drawn.
      *
      * @return A boolean.
+     *
+     * @see #getDrawCloseTicks()
+     * @see #setDrawOpenTicks(boolean)
      */
     public boolean getDrawOpenTicks() {
         return this.drawOpenTicks;
@@ -147,6 +159,8 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param draw  the flag.
+     *
+     * @see #getDrawOpenTicks()
      */
     public void setDrawOpenTicks(boolean draw) {
         this.drawOpenTicks = draw;
@@ -157,6 +171,9 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * Returns the flag that controls whether close ticks are drawn.
      *
      * @return A boolean.
+     *
+     * @see #getDrawOpenTicks()
+     * @see #setDrawCloseTicks(boolean)
      */
     public boolean getDrawCloseTicks() {
         return this.drawCloseTicks;
@@ -167,6 +184,8 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param draw  the flag.
+     *
+     * @see #getDrawCloseTicks()
      */
     public void setDrawCloseTicks(boolean draw) {
         this.drawCloseTicks = draw;
@@ -178,6 +197,8 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      *
      * @return The paint used to draw the ticks for the open values (possibly
      *         <code>null</code>).
+     *
+     * @see #setOpenTickPaint(Paint)
      */
     public Paint getOpenTickPaint() {
         return this.openTickPaint;
@@ -190,6 +211,8 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * instead.
      *
      * @param paint  the paint (<code>null</code> permitted).
+     *
+     * @see #getOpenTickPaint()
      */
     public void setOpenTickPaint(Paint paint) {
         this.openTickPaint = paint;
@@ -201,6 +224,8 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      *
      * @return The paint used to draw the ticks for the close values (possibly
      *         <code>null</code>).
+     *
+     * @see #setCloseTickPaint(Paint)
      */
     public Paint getCloseTickPaint() {
         return this.closeTickPaint;
@@ -213,10 +238,40 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * instead.
      *
      * @param paint  the paint (<code>null</code> permitted).
+     *
+     * @see #getCloseTickPaint()
      */
     public void setCloseTickPaint(Paint paint) {
         this.closeTickPaint = paint;
         fireChangeEvent();
+    }
+
+    /**
+     * Returns the tick length (in Java2D units).
+     *
+     * @return The tick length.
+     *
+     * @since 1.0.10
+     *
+     * @see #setTickLength(double)
+     */
+    public double getTickLength() {
+    	return this.tickLength;
+    }
+
+    /**
+     * Sets the tick length (in Java2D units) and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param length  the length.
+     *
+     * @since 1.0.10
+     *
+     * @see #getTickLength()
+     */
+    public void setTickLength(double length) {
+    	this.tickLength = length;
+    	fireChangeEvent();
     }
 
     /**
@@ -313,7 +368,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
                 }
             }
 
-            double delta = 2.0;
+            double delta = getTickLength();
             if (domainAxis.isInverted()) {
                 delta = -delta;
             }
@@ -440,6 +495,9 @@ public class HighLowRenderer extends AbstractXYItemRenderer
         }
         if (!PaintUtilities.equal(this.closeTickPaint, that.closeTickPaint)) {
             return false;
+        }
+        if (this.tickLength != that.tickLength) {
+        	return false;
         }
         if (!super.equals(obj)) {
             return false;
