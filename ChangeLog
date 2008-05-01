@@ -1,3 +1,10 @@
+2008-05-01  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 1955483:
+    * source/org/jfree/data/xy/XYSeries.java
+    (addOrUpdate(Number, Number)): Add a new item if duplicates are allows,
+    (addOrUpdate(double, double)): New method.
+
 2008-04-29  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/HighLowRenderer.java
