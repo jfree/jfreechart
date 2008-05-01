@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * XYSeriesTests.java
  * ------------------
- * (C) Copyright 2003-2007 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 15-Jan-2007 : Added tests for new toArray() method (DG);
  * 30-Jan-2007 : Fixed some code that won't compile with Java 1.4 (DG);
  * 31-Oct-2007 : New hashCode() test (DG);
+ * 01-May-2008 : Added testAddOrUpdate3() (DG);
  *
  */
 
@@ -86,7 +87,7 @@ public class XYSeriesTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
         XYSeries s2 = new XYSeries("Series");
@@ -110,17 +111,17 @@ public class XYSeriesTests extends TestCase {
         XYSeries s2 = new XYSeries("Test");
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
-        
+
         s1.add(1.0, 500.0);
         s2.add(1.0, 500.0);
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
-        
+
         s1.add(2.0, null);
         s2.add(2.0, null);
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
-        
+
         s1.add(5.0, 111.0);
         s2.add(5.0, 111.0);
         assertEquals(s1, s2);
@@ -166,7 +167,7 @@ public class XYSeriesTests extends TestCase {
             e.printStackTrace();
         }
         assertTrue(s1.equals(s2));
-        
+
         // check independence
         s2.add(4.0, 300.0);
         assertFalse(s1.equals(s2));
@@ -187,7 +188,7 @@ public class XYSeriesTests extends TestCase {
             e.printStackTrace();
         }
         assertTrue(s1.equals(s2));
-        
+
         // check independence
         s2.add(4.0, 300.0);
         assertFalse(s1.equals(s2));
@@ -203,7 +204,7 @@ public class XYSeriesTests extends TestCase {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
         XYSeries s2 = null;
-        
+
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -221,7 +222,7 @@ public class XYSeriesTests extends TestCase {
         assertEquals(s1, s2);
 
     }
-    
+
     /**
      * Simple test for the indexOf() method.
      */
@@ -232,7 +233,7 @@ public class XYSeriesTests extends TestCase {
         s1.add(3.0, 3.0);
         assertEquals(0, s1.indexOf(new Double(1.0)));
     }
-    
+
     /**
      * A check for the indexOf() method for an unsorted series.
      */
@@ -241,34 +242,34 @@ public class XYSeriesTests extends TestCase {
         s1.add(1.0, 1.0);
         s1.add(3.0, 3.0);
         s1.add(2.0, 2.0);
-        assertEquals(0, s1.indexOf(new Double(1.0)));        
-        assertEquals(1, s1.indexOf(new Double(3.0)));        
-        assertEquals(2, s1.indexOf(new Double(2.0)));        
+        assertEquals(0, s1.indexOf(new Double(1.0)));
+        assertEquals(1, s1.indexOf(new Double(3.0)));
+        assertEquals(2, s1.indexOf(new Double(2.0)));
     }
 
     /**
      * Simple test for the remove() method.
      */
     public void testRemove() {
-        
+
         XYSeries s1 = new XYSeries("Series 1");
         s1.add(1.0, 1.0);
         s1.add(2.0, 2.0);
         s1.add(3.0, 3.0);
-        
+
         assertEquals(3, s1.getItemCount());
         s1.remove(new Double(2.0));
         assertEquals(new Double(3.0), s1.getX(1));
-        
+
         s1.remove(0);
         assertEquals(new Double(3.0), s1.getX(0));
-        
+
     }
 
     private static final double EPSILON = 0.0000000001;
-    
+
     /**
-     * When items are added with duplicate x-values, we expect them to remain 
+     * When items are added with duplicate x-values, we expect them to remain
      * in the order they were added.
      */
     public void testAdditionOfDuplicateXValues() {
@@ -284,7 +285,7 @@ public class XYSeriesTests extends TestCase {
         assertEquals(4.0, s1.getY(3).doubleValue(), EPSILON);
         assertEquals(5.0, s1.getY(4).doubleValue(), EPSILON);
     }
-    
+
     /**
      * Some checks for the update(Number, Number) method.
      */
@@ -299,10 +300,10 @@ public class XYSeriesTests extends TestCase {
             assertTrue(false);
         }
         catch (SeriesException e) {
-            // got the required exception   
+            // got the required exception
         }
     }
-    
+
     /**
      * Some checks for the update() method for an unsorted series.
      */
@@ -314,17 +315,17 @@ public class XYSeriesTests extends TestCase {
        series.update(new Double(4.0), new Double(99.0));
        assertEquals(new Double(99.0), series.getY(1));
     }
-    
+
     /**
      * Some checks for the addOrUpdate() method.
      */
     public void testAddOrUpdate() {
-        XYSeries series = new XYSeries("S1");
+        XYSeries series = new XYSeries("S1", true, false);
         XYDataItem old = series.addOrUpdate(new Long(1), new Long(2));
         assertTrue(old == null);
         assertEquals(1, series.getItemCount());
         assertEquals(new Long(2), series.getY(0));
-        
+
         old = series.addOrUpdate(new Long(2), new Long(3));
         assertTrue(old == null);
         assertEquals(2, series.getItemCount());
@@ -336,12 +337,12 @@ public class XYSeriesTests extends TestCase {
         assertEquals(new Long(99), series.getY(0));
         assertEquals(new Long(3), series.getY(1));
     }
-    
+
     /**
      * Some checks for the addOrUpdate() method for an UNSORTED series.
      */
     public void testAddOrUpdate2() {
-        XYSeries series = new XYSeries("Series", false, true);
+        XYSeries series = new XYSeries("Series", false, false);
         series.add(5.0, 5.5);
         series.add(6.0, 6.6);
         series.add(3.0, 3.3);
@@ -353,7 +354,21 @@ public class XYSeriesTests extends TestCase {
         assertEquals(33.3, series.getY(2).doubleValue(), EPSILON);
         assertEquals(22.2, series.getY(4).doubleValue(), EPSILON);
     }
-    
+
+    /**
+     * Another test for the addOrUpdate() method.
+     */
+    public void testAddOrUpdate3() {
+    	XYSeries series = new XYSeries("Series", false, true);
+    	series.addOrUpdate(1.0, 1.0);
+    	series.addOrUpdate(1.0, 2.0);
+    	series.addOrUpdate(1.0, 3.0);
+    	assertEquals(new Double(1.0), series.getY(0));
+    	assertEquals(new Double(2.0), series.getY(1));
+    	assertEquals(new Double(3.0), series.getY(2));
+    	assertEquals(3, series.getItemCount());
+    }
+
     /**
      * Some checks for the add() method for an UNSORTED series.
      */
@@ -374,7 +389,7 @@ public class XYSeriesTests extends TestCase {
         assertEquals(2.2, series.getY(5).doubleValue(), EPSILON);
         assertEquals(1.1, series.getY(6).doubleValue(), EPSILON);
     }
-    
+
     /**
      * A simple check that the maximumItemCount attribute is working.
      */
@@ -389,7 +404,7 @@ public class XYSeriesTests extends TestCase {
         assertEquals(2.0, s1.getX(0).doubleValue(), EPSILON);
         assertEquals(3.0, s1.getX(1).doubleValue(), EPSILON);
     }
-    
+
     /**
      * Check that the maximum item count can be applied retrospectively.
      */
@@ -402,7 +417,7 @@ public class XYSeriesTests extends TestCase {
         assertEquals(2.0, s1.getX(0).doubleValue(), EPSILON);
         assertEquals(3.0, s1.getX(1).doubleValue(), EPSILON);
     }
-    
+
     /**
      * Some checks for the toArray() method.
      */
@@ -412,7 +427,7 @@ public class XYSeriesTests extends TestCase {
         assertEquals(2, array.length);
         assertEquals(0, array[0].length);
         assertEquals(0, array[1].length);
-        
+
         s.add(1.0, 2.0);
         array = s.toArray();
         assertEquals(1, array[0].length);
@@ -420,7 +435,7 @@ public class XYSeriesTests extends TestCase {
         assertEquals(2, array.length);
         assertEquals(1.0, array[0][0], EPSILON);
         assertEquals(2.0, array[1][0], EPSILON);
-        
+
         s.add(2.0, null);
         array = s.toArray();
         assertEquals(2, array.length);
@@ -429,7 +444,7 @@ public class XYSeriesTests extends TestCase {
         assertEquals(2.0, array[0][1], EPSILON);
         assertTrue(Double.isNaN(array[1][1]));
     }
-    
+
     /**
      * Some checks for an example using the toArray() method.
      */
@@ -453,5 +468,5 @@ public class XYSeriesTests extends TestCase {
         assertEquals(35.0, dataset.getYValue(0, 2), EPSILON);
         assertTrue(Double.isNaN(dataset.getYValue(0, 3)));
     }
-    
+
 }
