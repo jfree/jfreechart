@@ -26,8 +26,8 @@
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.13" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
-        <property name="itext.name" value="itext" />
-        <property name="itext.version" value="2.0.6" />
+        <property name="itext.name" value="iText" />
+        <property name="itext.version" value="2.1.1" />
         <property name="itext.jar" value="${basedir}/lib/${itext.name}-${itext.version}.jar"/>
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
