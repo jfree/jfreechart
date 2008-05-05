@@ -1,5 +1,17 @@
 2008-05-05  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 1924543 by Richard West:
+    * experimental/org/jfree/experimental/chart/demo/CombinedCategoryPlotDemo1.java:
+    New file,
+    * experimental/org/jfree/experimental/chart/demo/CombinedXYPlotDemo1.java:
+    Likewise,
+    * experimental/org/jfree/experimental/chart/plot/CombinedCategoryPlot.java:
+    Likewise,
+    * experimental/org/jfree/experimental/chart/plot/CombinedXYPlot.java:
+    Likewise.    
+
+2008-05-05  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/title/ShortTextTitle.java: New file,
     * tests/org/jfree/chart/title/junit/ShortTextTitleTests.java: Likewise.
 
