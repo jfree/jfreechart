@@ -532,7 +532,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public XYDataItem addOrUpdate(double x, double y) {
-    	return addOrUpdate(new Double(x), new Double(y));
+        return addOrUpdate(new Double(x), new Double(y));
     }
 
     /**
