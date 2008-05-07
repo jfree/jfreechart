@@ -359,14 +359,14 @@ public class XYSeriesTests extends TestCase {
      * Another test for the addOrUpdate() method.
      */
     public void testAddOrUpdate3() {
-    	XYSeries series = new XYSeries("Series", false, true);
-    	series.addOrUpdate(1.0, 1.0);
-    	series.addOrUpdate(1.0, 2.0);
-    	series.addOrUpdate(1.0, 3.0);
-    	assertEquals(new Double(1.0), series.getY(0));
-    	assertEquals(new Double(2.0), series.getY(1));
-    	assertEquals(new Double(3.0), series.getY(2));
-    	assertEquals(3, series.getItemCount());
+        XYSeries series = new XYSeries("Series", false, true);
+        series.addOrUpdate(1.0, 1.0);
+        series.addOrUpdate(1.0, 2.0);
+        series.addOrUpdate(1.0, 3.0);
+        assertEquals(new Double(1.0), series.getY(0));
+        assertEquals(new Double(2.0), series.getY(1));
+        assertEquals(new Double(3.0), series.getY(2));
+        assertEquals(3, series.getItemCount());
     }
 
     /**
