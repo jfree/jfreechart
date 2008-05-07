@@ -160,8 +160,8 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
      */
     public Object clone() throws CloneNotSupportedException {
         // all attributes are immutable, so we can just return the super.clone()
-    	// FIXME: in fact, the generator itself is immutable, so cloning is
-    	// not necessary
+        // FIXME: in fact, the generator itself is immutable, so cloning is
+        // not necessary
         return super.clone();
     }
 
