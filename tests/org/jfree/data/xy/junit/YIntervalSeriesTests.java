@@ -62,11 +62,11 @@ import org.jfree.data.xy.YIntervalSeries;
 public class YIntervalSeriesTests extends TestCase   
         implements SeriesChangeListener {
 
-	SeriesChangeEvent lastEvent;
-	
+    SeriesChangeEvent lastEvent;
+    
     public void seriesChanged(SeriesChangeEvent event) {
         this.lastEvent = event;
-	}
+    }
 
     /**
      * Returns the tests as a test suite.
@@ -292,7 +292,7 @@ public class YIntervalSeriesTests extends TestCase
      * Some checks for the clear() method.
      */
     public void testClear() {
-    	YIntervalSeries s1 = new YIntervalSeries("S1");
+        YIntervalSeries s1 = new YIntervalSeries("S1");
         s1.addChangeListener(this);
         s1.clear();
         assertNull(this.lastEvent);
