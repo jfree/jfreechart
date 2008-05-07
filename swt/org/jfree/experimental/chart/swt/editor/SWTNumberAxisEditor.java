@@ -219,7 +219,7 @@ class SWTNumberAxisEditor extends SWTAxisEditor implements FocusListener {
         }
         else if (e.getSource() == this.maximumRangeValue) {
             // verify max value
-            if (! validateMaximum(this.maximumRangeValue.getText()))
+            if (!validateMaximum(this.maximumRangeValue.getText()))
                 this.maximumRangeValue.setText(String.valueOf(
                         this.maximumValue));
             else
@@ -238,7 +238,8 @@ class SWTNumberAxisEditor extends SWTAxisEditor implements FocusListener {
         super.setAxisProperties(axis);
         NumberAxis numberAxis = (NumberAxis) axis;
         numberAxis.setAutoRange(this.autoRange);
-        if (! this.autoRange)
+        if (!this.autoRange) {
             numberAxis.setRange(this.minimumValue, this.maximumValue);
+        }
     }
 }

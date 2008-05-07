@@ -204,7 +204,7 @@ class SWTPlotEditor extends Composite {
         if (this.plotAppearance.getPlotOrientation() != null) {
             if (plot instanceof CategoryPlot) {
                 CategoryPlot p = (CategoryPlot) plot;
-                p.setOrientation(this.plotAppearance.getPlotOrientation() );
+                p.setOrientation(this.plotAppearance.getPlotOrientation());
             }
             else if (plot instanceof XYPlot) {
                 XYPlot p = (XYPlot) plot;

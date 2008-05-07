@@ -300,7 +300,7 @@ class SWTAxisEditor extends Composite {
             // return the appropriate axis editor
             if (axis instanceof NumberAxis)
                 return new SWTNumberAxisEditor(parent, style, 
-                        (NumberAxis) axis );
+                        (NumberAxis) axis);
             else return new SWTAxisEditor(parent, style, axis);
         }
         else return null;

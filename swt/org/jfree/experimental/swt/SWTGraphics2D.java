@@ -280,7 +280,7 @@ public class SWTGraphics2D extends Graphics2D {
             AlphaComposite acomp = (AlphaComposite) this.composite;
             switch (acomp.getRule()) {
             case AlphaComposite.SRC_OVER:
-                this.gc.setAlpha((int) (color.getAlpha()*acomp.getAlpha()));
+                this.gc.setAlpha((int) (color.getAlpha() * acomp.getAlpha()));
                 break;
             default:
                 this.gc.setAlpha(color.getAlpha());
@@ -342,7 +342,7 @@ public class SWTGraphics2D extends Graphics2D {
         this.composite = comp;
         if (comp instanceof AlphaComposite) {
             AlphaComposite acomp = (AlphaComposite) comp; 
-            int alpha = (int) (acomp.getAlpha()*0xFF);
+            int alpha = (int) (acomp.getAlpha() * 0xFF);
             this.gc.setAlpha(alpha);
         } 
         else {
@@ -607,7 +607,7 @@ public class SWTGraphics2D extends Graphics2D {
     public void drawPolygon(int [] xPoints, int [] yPoints, int npoints) {
         drawPolyline(xPoints, yPoints, npoints);
         if (npoints > 1) {
-            this.gc.drawLine(xPoints[npoints-1], yPoints[npoints-1], 
+            this.gc.drawLine(xPoints[npoints - 1], yPoints[npoints - 1], 
                     xPoints[0], yPoints[0]);            
         }
     }

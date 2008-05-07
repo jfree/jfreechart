@@ -88,8 +88,7 @@ class SWTPlotAppearanceEditor extends Composite {
     private Combo orientation;
     
     /** Orientation constants. */
-    private final static String[] orientationNames = { "Vertical", 
-        "Horizontal" };
+    private final static String[] orientationNames = {"Vertical", "Horizontal"};
     private final static int ORIENTATION_VERTICAL = 0;
     private final static int ORIENTATION_HORIZONTAL = 1;
 
