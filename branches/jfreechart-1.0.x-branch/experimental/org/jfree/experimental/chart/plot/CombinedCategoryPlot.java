@@ -55,23 +55,23 @@ import org.jfree.data.Range;
  */
 public class CombinedCategoryPlot extends CombinedDomainCategoryPlot {
 
-	/**
-	 * Creates a new instance with the specified axes.
-	 *
-	 * @param domainAxis  the x-axis.
-	 * @param rangeAxis  the y-axis.
-	 */
-	public CombinedCategoryPlot (CategoryAxis domainAxis, ValueAxis rangeAxis) {
+    /**
+     * Creates a new instance with the specified axes.
+     *
+     * @param domainAxis  the x-axis.
+     * @param rangeAxis  the y-axis.
+     */
+    public CombinedCategoryPlot (CategoryAxis domainAxis, ValueAxis rangeAxis) {
         super(domainAxis);
         super.setGap(10.0);
         super.setRangeAxis(rangeAxis);
     }
 
-	/**
-	 * Adds a new subplot with weight <code>1</code>.
-	 *
-	 * @param subplot  the subplot.
-	 */
+    /**
+     * Adds a new subplot with weight <code>1</code>.
+     *
+     * @param subplot  the subplot.
+     */
     public void add(CategoryPlot subplot) {
         this.add(subplot, 1);
     }
