@@ -446,7 +446,7 @@ public class TextTitle extends Title
      * @see #setMaximumLinesToDisplay(int)
      */
     public int getMaximumLinesToDisplay() {
-    	return this.maximumLinesToDisplay;
+        return this.maximumLinesToDisplay;
     }
 
     /**
@@ -460,8 +460,8 @@ public class TextTitle extends Title
      * @see #getMaximumLinesToDisplay()
      */
     public void setMaximumLinesToDisplay(int max) {
-    	this.maximumLinesToDisplay = max;
-    	notifyListeners(new TitleChangeEvent(this));
+        this.maximumLinesToDisplay = max;
+        notifyListeners(new TitleChangeEvent(this));
     }
 
     /**
@@ -600,12 +600,12 @@ public class TextTitle extends Title
      * @since 1.0.9
      */
     protected Size2D arrangeRN(Graphics2D g2, Range widthRange) {
-    	Size2D s = arrangeNN(g2);
-    	if (widthRange.contains(s.getWidth())) {
-    		return s;
-    	}
-    	double ww = widthRange.constrain(s.getWidth());
-    	return arrangeFN(g2, ww);
+        Size2D s = arrangeNN(g2);
+        if (widthRange.contains(s.getWidth())) {
+            return s;
+        }
+        double ww = widthRange.constrain(s.getWidth());
+        return arrangeFN(g2, ww);
     }
 
     /**
@@ -847,16 +847,16 @@ public class TextTitle extends Title
             return false;
         }
         if (this.maximumLinesToDisplay != that.maximumLinesToDisplay) {
-        	return false;
+            return false;
         }
         if (this.expandToFitSpace != that.expandToFitSpace) {
-        	return false;
+            return false;
         }
         if (!ObjectUtilities.equal(this.toolTipText, that.toolTipText)) {
-        	return false;
+            return false;
         }
         if (!ObjectUtilities.equal(this.urlText, that.urlText)) {
-        	return false;
+            return false;
         }
         return super.equals(obj);
     }
