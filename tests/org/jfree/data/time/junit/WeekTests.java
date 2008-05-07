@@ -290,36 +290,36 @@ public class WeekTests extends TestCase {
      * A test case for bug 1448828.
      */
     public void testBug1448828() {
-    	Locale saved = Locale.getDefault();
-    	Locale.setDefault(Locale.UK);
-    	try {
+        Locale saved = Locale.getDefault();
+        Locale.setDefault(Locale.UK);
+        try {
             Week w = new Week(new Date(1136109830000l), 
                     TimeZone.getTimeZone("GMT"));
             assertEquals(2005, w.getYearValue());
             assertEquals(52, w.getWeek());
-    	}
-    	finally {
-    		Locale.setDefault(saved);
-    	}
+        }
+        finally {
+            Locale.setDefault(saved);
+        }
     }
     
     /**
      * A test case for bug 1498805.
      */
     public void testBug1498805() {
-    	Locale saved = Locale.getDefault();
-    	Locale.setDefault(Locale.UK);
-    	try {
+        Locale saved = Locale.getDefault();
+        Locale.setDefault(Locale.UK);
+        try {
             TimeZone zone = TimeZone.getTimeZone("GMT");
             GregorianCalendar gc = new GregorianCalendar(zone);
             gc.set(2005, Calendar.JANUARY, 1, 12, 0, 0);
             Week w = new Week(gc.getTime(), zone);
             assertEquals(53, w.getWeek());
             assertEquals(new Year(2004), w.getYear());
-    	}
-    	finally {
-    		Locale.setDefault(saved);
-    	}
+        }
+        finally {
+            Locale.setDefault(saved);
+        }
     }
     
     /**
@@ -344,7 +344,7 @@ public class WeekTests extends TestCase {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.US);
         try {
-        	TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
+            TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
             assertEquals(-603302400000L, w.getFirstMillisecond(zone));
         }
         finally {
@@ -408,7 +408,7 @@ public class WeekTests extends TestCase {
             assertEquals(-629913600001L, w.getLastMillisecond(zone));
         }
         finally {
-        	Locale.setDefault(saved);
+            Locale.setDefault(saved);
         }
 
         // try null zone
