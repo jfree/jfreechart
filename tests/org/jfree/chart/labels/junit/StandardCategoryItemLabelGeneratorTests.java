@@ -144,10 +144,10 @@ public class StandardCategoryItemLabelGeneratorTests extends TestCase {
      * Simple check that hashCode is implemented.
      */
     public void testHashCode() {
-    	StandardCategoryItemLabelGenerator g1
-    	        = new StandardCategoryItemLabelGenerator();
-    	StandardCategoryItemLabelGenerator g2
-    	        = new StandardCategoryItemLabelGenerator();
+        StandardCategoryItemLabelGenerator g1
+                = new StandardCategoryItemLabelGenerator();
+        StandardCategoryItemLabelGenerator g2
+                = new StandardCategoryItemLabelGenerator();
         assertTrue(g1.equals(g2));
         assertTrue(g1.hashCode() == g2.hashCode());
     }
