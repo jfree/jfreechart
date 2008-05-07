@@ -1,3 +1,9 @@
+2008-05-07  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/BarRenderer.java
+    (drawItem): Ensure that minimumBarLength, if used, extends the non-base
+    end of the bar.
+
 2008-05-05  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 1924543 by Richard West:
