@@ -860,7 +860,7 @@ public final class DatasetUtilities {
                 for (int column = 0; column < columnCount; column++) {
                     Number value = dataset.getValue(row, column);
                     if (value != null) {
-                    	double v = value.doubleValue();
+                        double v = value.doubleValue();
                         minimum = Math.min(minimum, v);
                         maximum = Math.max(maximum, v);
                     }
@@ -917,7 +917,7 @@ public final class DatasetUtilities {
      * @since 1.0.10
      */
     public static Range iterateRangeBounds(XYDataset dataset,
-    		boolean includeInterval) {
+            boolean includeInterval) {
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
         int seriesCount = dataset.getSeriesCount();
