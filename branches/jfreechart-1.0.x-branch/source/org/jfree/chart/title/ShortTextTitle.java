@@ -62,27 +62,27 @@ import org.jfree.ui.TextAnchor;
  */
 public class ShortTextTitle extends TextTitle {
 
-	/**
-	 * Creates a new title.
-	 *
-	 * @param text  the text (<code>null</code> not permitted).
-	 */
-	public ShortTextTitle(String text) {
-		setText(text);
-	}
+    /**
+     * Creates a new title.
+     *
+     * @param text  the text (<code>null</code> not permitted).
+     */
+    public ShortTextTitle(String text) {
+        setText(text);
+    }
 
-	/**
-	 * Performs a layout for this title, subject to the supplied constraint,
-	 * and returns the dimensions required for the title (if the title
-	 * cannot be displayed in the available space, this method will return
-	 * zero width and height for the dimensions).
-	 *
-	 * @param g2  the graphics target.
-	 * @param constraint  the layout constraints.
-	 *
-	 * @return The dimensions for the title.
-	 */
-	public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
+    /**
+     * Performs a layout for this title, subject to the supplied constraint,
+     * and returns the dimensions required for the title (if the title
+     * cannot be displayed in the available space, this method will return
+     * zero width and height for the dimensions).
+     *
+     * @param g2  the graphics target.
+     * @param constraint  the layout constraints.
+     *
+     * @return The dimensions for the title.
+     */
+    public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         RectangleConstraint cc = toContentConstraint(constraint);
         LengthConstraintType w = cc.getWidthConstraintType();
         LengthConstraintType h = cc.getHeightConstraintType();
@@ -122,13 +122,13 @@ public class ShortTextTitle extends TextTitle {
             }
         }
         if (contentSize.width <= 0.0 || contentSize.height <= 0.0) {
-        	return new Size2D(0.0, 0.0);
+            return new Size2D(0.0, 0.0);
         }
         else {
             return new Size2D(calculateTotalWidth(contentSize.getWidth()),
                     calculateTotalHeight(contentSize.getHeight()));
         }
-	}
+    }
 
     /**
      * Arranges the content for this title assuming no bounds on the width
@@ -153,12 +153,12 @@ public class ShortTextTitle extends TextTitle {
      * @return The content size.
      */
     protected Size2D arrangeRN(Graphics2D g2, Range widthRange) {
-    	Size2D s = arrangeNN(g2);
-    	if (widthRange.contains(s.getWidth())) {
-    		return s;
-    	}
-    	double ww = widthRange.constrain(s.getWidth());
-    	return arrangeFN(g2, ww);
+        Size2D s = arrangeNN(g2);
+        if (widthRange.contains(s.getWidth())) {
+            return s;
+        }
+        double ww = widthRange.constrain(s.getWidth());
+        return arrangeFN(g2, ww);
     }
 
     /**
@@ -177,10 +177,10 @@ public class ShortTextTitle extends TextTitle {
         FontMetrics fm = g2.getFontMetrics(getFont());
         Rectangle2D bounds = TextUtilities.getTextBounds(getText(), g2, fm);
         if (bounds.getWidth() <= w) {
-        	return new Size2D(w, bounds.getHeight());
+            return new Size2D(w, bounds.getHeight());
         }
         else {
-        	return new Size2D(0.0, 0.0);
+            return new Size2D(0.0, 0.0);
         }
     }
 
@@ -200,11 +200,11 @@ public class ShortTextTitle extends TextTitle {
         FontMetrics fm = g2.getFontMetrics(getFont());
         Rectangle2D bounds = TextUtilities.getTextBounds(getText(), g2, fm);
         if (bounds.getWidth() <= widthRange.getUpperBound()
-        		&& bounds.getHeight() <= heightRange.getUpperBound()) {
-        	return new Size2D(bounds.getWidth(), bounds.getHeight());
+                && bounds.getHeight() <= heightRange.getUpperBound()) {
+            return new Size2D(bounds.getWidth(), bounds.getHeight());
         }
         else {
-        	return new Size2D(0.0, 0.0);
+            return new Size2D(0.0, 0.0);
         }
     }
 
@@ -215,10 +215,10 @@ public class ShortTextTitle extends TextTitle {
      * @param area  the title area.
      * @param params  optional parameters (ignored here).
      */
-	public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
-		if (area.isEmpty()) {
-			return null;
-		}
+    public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
+        if (area.isEmpty()) {
+            return null;
+        }
         area = trimMargin(area);
         drawBorder(g2, area);
         area = trimBorder(area);
@@ -226,9 +226,9 @@ public class ShortTextTitle extends TextTitle {
         g2.setFont(getFont());
         g2.setPaint(getPaint());
         TextUtilities.drawAlignedString(getText(), g2, (float) area.getMinX(),
-        		(float) area.getMinY(), TextAnchor.TOP_LEFT);
+                (float) area.getMinY(), TextAnchor.TOP_LEFT);
 
-		return null;
-	}
+        return null;
+    }
 
 }
