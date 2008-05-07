@@ -527,7 +527,7 @@ public class PeriodAxis extends ValueAxis
         this.last = createInstance(this.autoRangeTimePeriodClass, 
                 new Date(upper), this.timeZone);
         if (notify) {
-        	notifyListeners(new AxisChangeEvent(this));
+            notifyListeners(new AxisChangeEvent(this));
         }
     }
 
