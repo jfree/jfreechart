@@ -123,10 +123,10 @@ public class XYBarDatasetTests extends TestCase {
 
         // check independence
         d1 = (DefaultXYDataset) bd1.getUnderlyingDataset();
-        d1.addSeries("S2", new double[][] { {1.0}, {2.0} });
+        d1.addSeries("S2", new double[][] {{1.0}, {2.0}});
         assertFalse(bd1.equals(bd2));
         DefaultXYDataset d2 = (DefaultXYDataset) bd2.getUnderlyingDataset();
-        d2.addSeries("S2", new double[][] { {1.0}, {2.0} });
+        d2.addSeries("S2", new double[][] {{1.0}, {2.0}});
         assertTrue(bd1.equals(bd2));
     }
 
