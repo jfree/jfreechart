@@ -91,11 +91,11 @@ public class SWTMultipleAxisDemo1
             false
         );
 
-        chart.setBackgroundPaint( Color.white );
-        chart.setBorderVisible( true );
-        chart.setBorderPaint( Color.BLACK );
+        chart.setBackgroundPaint(Color.white);
+        chart.setBorderVisible(true);
+        chart.setBorderPaint(Color.BLACK);
         TextTitle subtitle = new TextTitle("Four datasets and four range axes.");  
-        chart.addSubtitle( subtitle );
+        chart.addSubtitle(subtitle);
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.setOrientation(PlotOrientation.VERTICAL);
         plot.setBackgroundPaint(Color.lightGray);
@@ -128,7 +128,7 @@ public class SWTMultipleAxisDemo1
         NumberAxis axis3 = new NumberAxis("Range Axis 3");
         axis3.setLabelPaint(Color.blue);
         axis3.setTickLabelPaint(Color.blue);
-        //axis3.setPositiveArrowVisible( true );
+        //axis3.setPositiveArrowVisible(true);
         plot.setRangeAxis(2, axis3);
 
         XYDataset dataset3 = createDataset("Series 3", 10000.0, new Minute(), 
@@ -200,7 +200,7 @@ public class SWTMultipleAxisDemo1
      *
      * @param args  ignored.
      */
-    public static void main( String[] args ) 
+    public static void main(String[] args) 
     {
         final JFreeChart chart = createChart();
         final Display display = new Display();

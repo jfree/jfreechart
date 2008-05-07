@@ -382,22 +382,21 @@ public class ChartComposite extends Composite implements ChartChangeListener,
      * @param chart  the chart.
      */
     public ChartComposite(Composite comp, int style, JFreeChart chart) {
-        this( 
-                comp, 
-                style,
-                chart,
-                DEFAULT_WIDTH,
-                DEFAULT_HEIGHT,
-                DEFAULT_MINIMUM_DRAW_WIDTH,
-                DEFAULT_MINIMUM_DRAW_HEIGHT,
-                DEFAULT_MAXIMUM_DRAW_WIDTH,
-                DEFAULT_MAXIMUM_DRAW_HEIGHT,
-                DEFAULT_BUFFER_USED,
-                true,  // properties
-                true,  // save
-                true,  // print
-                true,  // zoom
-                true   // tooltips
+        this(comp, 
+             style,
+             chart,
+             DEFAULT_WIDTH,
+             DEFAULT_HEIGHT,
+             DEFAULT_MINIMUM_DRAW_WIDTH,
+             DEFAULT_MINIMUM_DRAW_HEIGHT,
+             DEFAULT_MAXIMUM_DRAW_WIDTH,
+             DEFAULT_MAXIMUM_DRAW_HEIGHT,
+             DEFAULT_BUFFER_USED,
+             true,  // properties
+             true,  // save
+             true,  // print
+             true,  // zoom
+             true   // tooltips
         );
     }
 
@@ -789,7 +788,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     public void doSaveAs() throws IOException {
         FileDialog fileDialog = new FileDialog(this.canvas.getShell(), 
                 SWT.SAVE);
-        String[] extensions = { "*.png" };
+        String[] extensions = {"*.png"};
         fileDialog.setFilterExtensions(extensions);
         String filename = fileDialog.open();
         if (filename != null) {
@@ -926,7 +925,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         PlotRenderingInfo plotInfo = this.info.getPlotInfo();
         Rectangle scaledDataArea = getScreenDataArea(
                 (selection.x + selection.width / 2), 
-                (selection.y + selection.height/2));
+                (selection.y + selection.height / 2));
         if ((selection.height > 0) && (selection.width > 0)) {
 
             double hLower = (selection.x - scaledDataArea.x) 
@@ -1030,8 +1029,8 @@ public class ChartComposite extends Composite implements ChartChangeListener,
             Zoomable z = (Zoomable) p;
             // we need to guard against this.zoomPoint being null
             org.eclipse.swt.graphics.Point zp = 
-                (this.zoomPoint != null ? this.zoomPoint : 
-                    new org.eclipse.swt.graphics.Point(0,0));
+                    (this.zoomPoint != null ? this.zoomPoint 
+                    : new org.eclipse.swt.graphics.Point(0, 0));
             z.zoomDomainAxes(0.0, this.info.getPlotInfo(), 
                     SWTUtils.toAwtPoint(zp));
         }
@@ -1046,8 +1045,8 @@ public class ChartComposite extends Composite implements ChartChangeListener,
             Zoomable z = (Zoomable) p;
             // we need to guard against this.zoomPoint being null
             org.eclipse.swt.graphics.Point zp = 
-                (this.zoomPoint != null ? this.zoomPoint : 
-                    new org.eclipse.swt.graphics.Point(0,0));
+                    (this.zoomPoint != null ? this.zoomPoint 
+                    : new org.eclipse.swt.graphics.Point(0, 0));
             z.zoomRangeAxes(0.0, this.info.getPlotInfo(), 
                     SWTUtils.toAwtPoint(zp)); 
         }
@@ -1198,7 +1197,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     /**
      * @param displayToolTips the displayToolTips to set
      */
-    public void setDisplayToolTips( boolean displayToolTips ) {
+    public void setDisplayToolTips(boolean displayToolTips) {
         this.displayToolTips = displayToolTips;
     }
 
@@ -1302,9 +1301,9 @@ public class ChartComposite extends Composite implements ChartChangeListener,
                     job.print();
                 }
                 catch (PrinterException e) {
-                    MessageBox messageBox = new MessageBox( 
-                            this.canvas.getShell(), SWT.OK | SWT.ICON_ERROR );
-                    messageBox.setMessage( e.getMessage() );
+                    MessageBox messageBox = new MessageBox(
+                    		this.canvas.getShell(), SWT.OK | SWT.ICON_ERROR);
+                    messageBox.setMessage(e.getMessage());
                     messageBox.open();
                 }
             }
@@ -1481,22 +1480,22 @@ public class ChartComposite extends Composite implements ChartChangeListener,
          * this helps to handle the mouse events and besides, 
          * those values are unused AFAIK. */
         else if (command.equals(ZOOM_IN_BOTH_COMMAND)) {
-            zoomInBoth( e.x, e.y );
+            zoomInBoth(e.x, e.y);
         }
         else if (command.equals(ZOOM_IN_DOMAIN_COMMAND)) {
-            zoomInDomain( e.x, e.y );
+            zoomInDomain(e.x, e.y);
         }
         else if (command.equals(ZOOM_IN_RANGE_COMMAND)) {
-            zoomInRange( e.x, e.y );
+            zoomInRange(e.x, e.y);
         }
         else if (command.equals(ZOOM_OUT_BOTH_COMMAND)) {
-            zoomOutBoth( e.x, e.y );
+            zoomOutBoth(e.x, e.y);
         }
         else if (command.equals(ZOOM_OUT_DOMAIN_COMMAND)) {
-            zoomOutDomain( e.x, e.y );
+            zoomOutDomain(e.x, e.y);
         }
         else if (command.equals(ZOOM_OUT_RANGE_COMMAND)) {
-            zoomOutRange( e.x, e.y );
+            zoomOutRange(e.x, e.y);
         }
         else if (command.equals(ZOOM_RESET_BOTH_COMMAND)) {
             restoreAutoBounds();
@@ -1767,7 +1766,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         boolean scale = false;
         int drawWidth = available.width;
         int drawHeight = available.height;
-        if ( drawWidth == 0.0 || drawHeight == 0.0 ) return;
+        if (drawWidth == 0.0 || drawHeight == 0.0) return;
         this.scaleX = 1.0;
         this.scaleY = 1.0;
         if (drawWidth < this.minimumDrawWidth) {
@@ -1792,7 +1791,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         }
         // are we using the chart buffer?
         if (this.useBuffer) {
-            //SwtGraphics2D sg2 = new SwtGraphics2D( e.gc );
+            //SwtGraphics2D sg2 = new SwtGraphics2D(e.gc);
             this.chartBuffer = (org.eclipse.swt.graphics.Image) 
                     this.canvas.getData("double-buffer-image");
             // do we need to fill the buffer?
@@ -1804,7 +1803,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
                 if (this.chartBuffer != null) {
                     this.chartBuffer.dispose();
                 }
-                this.chartBuffer = new org.eclipse.swt.graphics.Image( 
+                this.chartBuffer = new org.eclipse.swt.graphics.Image(
                         getDisplay(), this.chartBufferWidth, 
                         this.chartBufferHeight);
                 this.refreshBuffer = true;

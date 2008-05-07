@@ -176,7 +176,7 @@ class SWTAxisEditor extends Composite {
                             // label
                             SWTAxisEditor.this.font = new Font(
                                     getShell().getDisplay(), dlg.getFontList());
-                            //label.setFont( font );
+                            //label.setFont(font);
                             SWTAxisEditor.this.labelFontField.setText(
                                     SWTAxisEditor.this.font.getFontData()[0]
                                     .toString());
@@ -251,7 +251,7 @@ class SWTAxisEditor extends Composite {
                     public void widgetSelected(SelectionEvent event) {
                         // Create the font-change dialog
                         FontDialog dlg = new FontDialog(getShell());
-                        dlg.setText( localizationResources.getString(
+                        dlg.setText(localizationResources.getString(
                                 "Font_Selection"));
                         dlg.setFontList(new FontData[] {
                                 SWTAxisEditor.this.tickLabelFont});
@@ -278,7 +278,7 @@ class SWTAxisEditor extends Composite {
         this.showTickMarksCheckBox.setText(localizationResources.getString(
                 "Show_tick_marks"));
         this.showTickMarksCheckBox.setSelection(axis.isTickMarksVisible());
-        this.showTickMarksCheckBox.setLayoutData(new GridData( SWT.FILL, 
+        this.showTickMarksCheckBox.setLayoutData(new GridData(SWT.FILL, 
                 SWT.CENTER, true, false, 3, 1));
         item1.setControl(ticks);
     }

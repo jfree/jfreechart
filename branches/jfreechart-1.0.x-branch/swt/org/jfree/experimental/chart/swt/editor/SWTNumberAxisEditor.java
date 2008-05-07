@@ -107,12 +107,11 @@ class SWTNumberAxisEditor extends SWTAxisEditor implements FocusListener {
         this.autoRangeCheckBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, 
                 true, false, 2, 1));
         this.autoRangeCheckBox.setSelection(this.autoRange);
-        this.autoRangeCheckBox.addSelectionListener( 
-                new SelectionAdapter() {
-                    public void widgetSelected(SelectionEvent e) { 
-                        toggleAutoRange();
-                    }
-                });
+        this.autoRangeCheckBox.addSelectionListener(new SelectionAdapter() {
+                public void widgetSelected(SelectionEvent e) { 
+                    toggleAutoRange();
+                }
+            });
         new Label(range, SWT.NONE).setText(localizationResources.getString(
                 "Minimum_range_value"));
         this.minimumRangeValue = new Text(range, SWT.BORDER);
@@ -211,7 +210,7 @@ class SWTNumberAxisEditor extends SWTAxisEditor implements FocusListener {
     public void focusLost(FocusEvent e) {
         if (e.getSource() == this.minimumRangeValue) {
             // verify min value
-            if (! validateMinimum( this.minimumRangeValue.getText()))
+            if (!validateMinimum(this.minimumRangeValue.getText()))
                 this.minimumRangeValue.setText(String.valueOf(
                         this.minimumValue));
             else

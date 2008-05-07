@@ -111,7 +111,7 @@ class SWTTitleEditor extends Composite {
         super(parent, style);
         FillLayout layout = new FillLayout();
         layout.marginHeight = layout.marginWidth = 4;
-        setLayout( layout );
+        setLayout(layout);
         
         TextTitle t = (title != null ? (TextTitle) title 
                 : new TextTitle(localizationResources.getString("Title")));

@@ -107,7 +107,7 @@ class SWTPlotAppearanceEditor extends Composite {
         GridLayout groupLayout = new GridLayout(3, false);
         groupLayout.marginHeight = groupLayout.marginWidth = 4;
         general.setLayout(groupLayout);
-        general.setText( localizationResources.getString("General"));
+        general.setText(localizationResources.getString("General"));
         
         // row 1: stroke
         new Label(general, SWT.NONE).setText(localizationResources.getString(
@@ -213,7 +213,7 @@ class SWTPlotAppearanceEditor extends Composite {
             this.orientation.select(index);
             this.orientation.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, 
                     true, false, 2, 1));
-            this.orientation.addSelectionListener( 
+            this.orientation.addSelectionListener(
                     new SelectionAdapter() {
                         public void widgetSelected(SelectionEvent event) {
                             switch (SWTPlotAppearanceEditor.this.orientation
