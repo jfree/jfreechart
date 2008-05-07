@@ -123,7 +123,7 @@ public class StandardPieURLGeneratorTests extends TestCase {
     public void testPublicCloneable() {
         StandardPieURLGenerator g1 = new StandardPieURLGenerator(
                 "index.html?", "cat");
-    	assertFalse(g1 instanceof PublicCloneable);
+        assertFalse(g1 instanceof PublicCloneable);
     }
 
     /**

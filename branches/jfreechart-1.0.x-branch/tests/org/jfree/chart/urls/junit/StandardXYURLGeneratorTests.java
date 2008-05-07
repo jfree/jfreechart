@@ -110,7 +110,7 @@ public class StandardXYURLGeneratorTests extends TestCase {
      */
     public void testPublicCloneable() {
         StandardXYURLGenerator g1 = new StandardXYURLGenerator("index.html?");
-    	assertFalse(g1 instanceof PublicCloneable);
+        assertFalse(g1 instanceof PublicCloneable);
     }
 
 
