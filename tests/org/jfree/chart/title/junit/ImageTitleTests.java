@@ -143,7 +143,7 @@ public class ImageTitleTests extends TestCase {
      */
     public void testArrangeNN() {
         BufferedImage image = new BufferedImage(100, 100,
-        		BufferedImage.TYPE_INT_RGB);
+                BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
         ImageTitle t = new ImageTitle(JFreeChart.INFO.getLogo());
         Size2D s = t.arrange(g2);

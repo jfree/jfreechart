@@ -105,7 +105,7 @@ public class StandardCategoryURLGeneratorTests extends TestCase {
      */
     public void testPublicCloneable() {
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator();
-    	assertFalse(g1 instanceof PublicCloneable);
+        assertFalse(g1 instanceof PublicCloneable);
     }
 
     /**
