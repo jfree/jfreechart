@@ -99,7 +99,7 @@ public class BoxAndWhiskerXYToolTipGeneratorTests extends TestCase {
         g1 = new BoxAndWhiskerXYToolTipGenerator("{0} --> {1} {2}",
                 new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
         g2 = new BoxAndWhiskerXYToolTipGenerator("{1} {2}",
-        		new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
+                new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
         assertFalse(g1.equals(g2));
         g2 = new BoxAndWhiskerXYToolTipGenerator("{0} --> {1} {2}",
                 new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
@@ -130,10 +130,10 @@ public class BoxAndWhiskerXYToolTipGeneratorTests extends TestCase {
      * Simple check that hashCode is implemented.
      */
     public void testHashCode() {
-    	BoxAndWhiskerXYToolTipGenerator g1
-    	        = new BoxAndWhiskerXYToolTipGenerator();
-    	BoxAndWhiskerXYToolTipGenerator g2
-    	        = new BoxAndWhiskerXYToolTipGenerator();
+        BoxAndWhiskerXYToolTipGenerator g1
+                = new BoxAndWhiskerXYToolTipGenerator();
+        BoxAndWhiskerXYToolTipGenerator g2
+                = new BoxAndWhiskerXYToolTipGenerator();
         assertTrue(g1.equals(g2));
         assertTrue(g1.hashCode() == g2.hashCode());
     }
