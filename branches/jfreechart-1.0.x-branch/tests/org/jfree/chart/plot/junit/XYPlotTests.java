@@ -1025,8 +1025,8 @@ public class XYPlotTests extends TestCase {
      * false.
      */
     public void testRemoveDomainMarker() {
-    	XYPlot plot = new XYPlot();
-    	assertFalse(plot.removeDomainMarker(new ValueMarker(0.5)));
+        XYPlot plot = new XYPlot();
+        assertFalse(plot.removeDomainMarker(new ValueMarker(0.5)));
     }
 
     /**
@@ -1034,8 +1034,8 @@ public class XYPlotTests extends TestCase {
      * false.
      */
     public void testRemoveRangeMarker() {
-    	XYPlot plot = new XYPlot();
-    	assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
+        XYPlot plot = new XYPlot();
+        assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
     }
 
 }
