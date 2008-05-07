@@ -160,7 +160,7 @@ public class BorderArrangementTests extends TestCase {
     public void testSizing() {
         BlockContainer container = new BlockContainer(new BorderArrangement());
         BufferedImage image = new BufferedImage(200, 100, 
-        		BufferedImage.TYPE_INT_RGB);
+                BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
         
         // TBLRC
@@ -497,7 +497,7 @@ public class BorderArrangementTests extends TestCase {
                 
         BlockContainer container = new BlockContainer(new BorderArrangement());
         BufferedImage image = new BufferedImage(200, 100, 
-        		BufferedImage.TYPE_INT_RGB);
+                BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
         
         // TBLRC
