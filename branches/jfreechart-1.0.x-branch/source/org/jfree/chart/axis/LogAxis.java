@@ -522,12 +522,12 @@ public class LogAxis extends ValueAxis {
         List ticks = new ArrayList();
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
-    	TextAnchor textAnchor;
+        TextAnchor textAnchor;
         if (edge == RectangleEdge.TOP) {
-        	textAnchor = TextAnchor.BOTTOM_CENTER;
+            textAnchor = TextAnchor.BOTTOM_CENTER;
         }
         else {
-        	textAnchor = TextAnchor.TOP_CENTER;
+            textAnchor = TextAnchor.TOP_CENTER;
         }
         
         if (isAutoTickUnitSelection()) {
@@ -549,7 +549,7 @@ public class LogAxis extends ValueAxis {
                 double minorV = v + i * ((next - v) / this.minorTickCount);
                 if (range.contains(minorV)) {
                     ticks.add(new NumberTick(TickType.MINOR, minorV, "", 
-                    		textAnchor, TextAnchor.CENTER, 0.0));
+                            textAnchor, TextAnchor.CENTER, 0.0));
                 }
             }
             current = current + this.tickUnit.getSize();
@@ -573,12 +573,12 @@ public class LogAxis extends ValueAxis {
         List ticks = new ArrayList();
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
-    	TextAnchor textAnchor;
+        TextAnchor textAnchor;
         if (edge == RectangleEdge.RIGHT) {
-        	textAnchor = TextAnchor.CENTER_LEFT;
+            textAnchor = TextAnchor.CENTER_LEFT;
         }
         else {
-        	textAnchor = TextAnchor.CENTER_RIGHT;
+            textAnchor = TextAnchor.CENTER_RIGHT;
         }
         
         if (isAutoTickUnitSelection()) {
@@ -929,21 +929,21 @@ public class LogAxis extends ValueAxis {
         units.add(new NumberTickUnit(20000, numberFormat));
         units.add(new NumberTickUnit(50000, numberFormat));
         units.add(new NumberTickUnit(100000, numberFormat));
-        units.add(new NumberTickUnit(200000,         numberFormat));
-        units.add(new NumberTickUnit(500000,         numberFormat));
-        units.add(new NumberTickUnit(1000000,        numberFormat));
-        units.add(new NumberTickUnit(2000000,        numberFormat));
-        units.add(new NumberTickUnit(5000000,        numberFormat));
-        units.add(new NumberTickUnit(10000000,       numberFormat));
-        units.add(new NumberTickUnit(20000000,       numberFormat));
-        units.add(new NumberTickUnit(50000000,       numberFormat));
-        units.add(new NumberTickUnit(100000000,      numberFormat));
-        units.add(new NumberTickUnit(200000000,      numberFormat));
-        units.add(new NumberTickUnit(500000000,      numberFormat));
-        units.add(new NumberTickUnit(1000000000,     numberFormat));
-        units.add(new NumberTickUnit(2000000000,     numberFormat));
-        units.add(new NumberTickUnit(5000000000.0,   numberFormat));
-        units.add(new NumberTickUnit(10000000000.0,  numberFormat));
+        units.add(new NumberTickUnit(200000, numberFormat));
+        units.add(new NumberTickUnit(500000, numberFormat));
+        units.add(new NumberTickUnit(1000000, numberFormat));
+        units.add(new NumberTickUnit(2000000, numberFormat));
+        units.add(new NumberTickUnit(5000000, numberFormat));
+        units.add(new NumberTickUnit(10000000, numberFormat));
+        units.add(new NumberTickUnit(20000000, numberFormat));
+        units.add(new NumberTickUnit(50000000, numberFormat));
+        units.add(new NumberTickUnit(100000000, numberFormat));
+        units.add(new NumberTickUnit(200000000, numberFormat));
+        units.add(new NumberTickUnit(500000000, numberFormat));
+        units.add(new NumberTickUnit(1000000000, numberFormat));
+        units.add(new NumberTickUnit(2000000000, numberFormat));
+        units.add(new NumberTickUnit(5000000000.0, numberFormat));
+        units.add(new NumberTickUnit(10000000000.0, numberFormat));
 
         return units;
 
