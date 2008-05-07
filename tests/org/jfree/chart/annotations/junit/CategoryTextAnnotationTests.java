@@ -153,7 +153,7 @@ public class CategoryTextAnnotationTests extends TestCase {
     public void testPublicCloneable() {
         CategoryTextAnnotation a1 = new CategoryTextAnnotation(
                 "Test", "Category", 1.0);
-    	assertTrue(a1 instanceof PublicCloneable);
+        assertTrue(a1 instanceof PublicCloneable);
     }
 
     /**
