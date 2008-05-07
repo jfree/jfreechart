@@ -465,12 +465,12 @@ public class DefaultKeyedValues2D implements KeyedValues2D,
      * @see #removeRow(Comparable)
      */
     public void removeColumn(Comparable columnKey) {
-    	if (columnKey == null) {
-    		throw new IllegalArgumentException("Null 'columnKey' argument.");
-    	}
-    	if (!this.columnKeys.contains(columnKey)) {
-    		throw new UnknownKeyException("Unknown key: " + columnKey);
-    	}
+        if (columnKey == null) {
+            throw new IllegalArgumentException("Null 'columnKey' argument.");
+        }
+        if (!this.columnKeys.contains(columnKey)) {
+            throw new UnknownKeyException("Unknown key: " + columnKey);
+        }
         Iterator iterator = this.rows.iterator();
         while (iterator.hasNext()) {
             DefaultKeyedValues rowData = (DefaultKeyedValues) iterator.next();
