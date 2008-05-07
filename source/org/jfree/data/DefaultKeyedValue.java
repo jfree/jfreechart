@@ -77,9 +77,9 @@ public class DefaultKeyedValue implements KeyedValue,
      * @param value  the value (<code>null</code> permitted).
      */
     public DefaultKeyedValue(Comparable key, Number value) {
-    	if (key == null) {
-    		throw new IllegalArgumentException("Null 'key' argument.");
-    	}
+        if (key == null) {
+            throw new IllegalArgumentException("Null 'key' argument.");
+        }
         this.key = key;
         this.value = value;
     }
