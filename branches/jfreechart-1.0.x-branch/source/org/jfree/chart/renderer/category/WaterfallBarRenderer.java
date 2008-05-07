@@ -190,8 +190,8 @@ public class WaterfallBarRenderer extends BarRenderer {
                     allItemsNull = false;
                     double value = n.doubleValue();
                     if (column == columnCount - 1) {
-                    	// treat the last column value as an absolute
-                    	runningTotal = value;
+                        // treat the last column value as an absolute
+                        runningTotal = value;
                     }
                     else {
                         runningTotal = runningTotal + value;
