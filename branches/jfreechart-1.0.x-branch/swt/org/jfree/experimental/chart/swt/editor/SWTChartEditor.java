@@ -138,7 +138,7 @@ public class SWTChartEditor implements ChartEditor {
             public void widgetSelected(SelectionEvent e) {            
                 SWTChartEditor.this.shell.dispose();
             }
-        } );
+        });
     }
     
     /**
@@ -163,7 +163,7 @@ public class SWTChartEditor implements ChartEditor {
     {
         this.titleEditor.setTitleProperties(chart);
         this.plotEditor.updatePlotProperties(chart.getPlot());
-        this.otherEditor.updateChartProperties(chart );
+        this.otherEditor.updateChartProperties(chart);
     }
 
 }

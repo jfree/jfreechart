@@ -277,7 +277,7 @@ public class SWTUtils {
         else {
             try {
                 throw new Exception("only color is supported at present... " 
-                        + "setting paint to uniform black color" );
+                        + "setting paint to uniform black color");
             } 
             catch (Exception e) {
                 e.printStackTrace();
@@ -314,8 +314,7 @@ public class SWTUtils {
                 (int) Math.round(rect2d.getMinX()),
                 (int) Math.round(rect2d.getMinY()),
                 (int) Math.round(rect2d.getWidth()),
-                (int) Math.round(rect2d.getHeight())
-                );
+                (int) Math.round(rect2d.getHeight()));
     }
 
     /**

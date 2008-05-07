@@ -1267,9 +1267,8 @@ public class ChartComposite extends Composite implements ChartChangeListener,
             }
 
             if (this.zoomInBothMenuItem != null) {
-                this.zoomInBothMenuItem.setEnabled(
-                    isDomainZoomable & isRangeZoomable
-                );
+                this.zoomInBothMenuItem.setEnabled(isDomainZoomable 
+                        & isRangeZoomable);
             }
             if (this.zoomOutBothMenuItem != null) {
                 this.zoomOutBothMenuItem.setEnabled(isDomainZoomable 
@@ -1302,7 +1301,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
                 }
                 catch (PrinterException e) {
                     MessageBox messageBox = new MessageBox(
-                    		this.canvas.getShell(), SWT.OK | SWT.ICON_ERROR);
+                            this.canvas.getShell(), SWT.OK | SWT.ICON_ERROR);
                     messageBox.setMessage(e.getMessage());
                     messageBox.open();
                 }
@@ -1516,7 +1515,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         }
         /*
         CairoImage image = new CairoImage( 
-                this.getBounds().width, this.getBounds().height );
+                this.getBounds().width, this.getBounds().height);
         Graphics2D g2 = image.createGraphics2D();
         double x = pageFormat.getImageableX();
         double y = pageFormat.getImageableY();
@@ -1680,7 +1679,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         if (this.displayToolTips) {                            
             String s = getToolTipText(event);
             if (s == null && this.canvas.getToolTipText() != null
-                    || s!=null && !s.equals(this.canvas.getToolTipText()))
+                    || s != null && !s.equals(this.canvas.getToolTipText()))
                 this.canvas.setToolTipText(s);
         }
 
@@ -1797,7 +1796,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
             // do we need to fill the buffer?
             if (this.chartBuffer == null
                     || this.chartBufferWidth != available.width
-                    || this.chartBufferHeight != available.height ) {
+                    || this.chartBufferHeight != available.height) {
                 this.chartBufferWidth = available.width;
                 this.chartBufferHeight = available.height;
                 if (this.chartBuffer != null) {
