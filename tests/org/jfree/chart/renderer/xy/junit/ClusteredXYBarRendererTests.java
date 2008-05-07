@@ -137,7 +137,7 @@ public class ClusteredXYBarRendererTests extends TestCase {
      * Verify that this class implements {@link PublicCloneable}.
      */
     public void testPublicCloneable() {
-    	ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
+        ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
         assertTrue(r1 instanceof PublicCloneable);
     }
 
