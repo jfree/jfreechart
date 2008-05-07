@@ -1659,7 +1659,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public PieLabelLinkStyle getLabelLinkStyle() {
-    	return this.labelLinkStyle;
+        return this.labelLinkStyle;
     }
     
     /**
@@ -1673,11 +1673,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public void setLabelLinkStyle(PieLabelLinkStyle style) {
-    	if (style == null) {
-    		throw new IllegalArgumentException("Null 'style' argument.");
-    	}
-    	this.labelLinkStyle = style;
-    	fireChangeEvent();
+        if (style == null) {
+            throw new IllegalArgumentException("Null 'style' argument.");
+        }
+        this.labelLinkStyle = style;
+        fireChangeEvent();
     }
     
     /**
@@ -2945,15 +2945,15 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 g2.draw(new Line2D.Double(anchorX, anchorY, targetX, targetY));
             }
             else if (style.equals(PieLabelLinkStyle.QUAD_CURVE)) {
-            	QuadCurve2D q = new QuadCurve2D.Float();
+                QuadCurve2D q = new QuadCurve2D.Float();
                 q.setCurve(targetX, targetY, anchorX, anchorY, elbowX, elbowY);
                 g2.draw(q);
-                g2.draw(new Line2D.Double(elbowX, elbowY, linkX, linkY));            	
+                g2.draw(new Line2D.Double(elbowX, elbowY, linkX, linkY));               
             }
             else if (style.equals(PieLabelLinkStyle.CUBIC_CURVE)) {
-            	CubicCurve2D c = new CubicCurve2D .Float();
+                CubicCurve2D c = new CubicCurve2D .Float();
                 c.setCurve(targetX, targetY, anchorX, anchorY, elbowX, elbowY, 
-                		linkX, linkY);
+                        linkX, linkY);
                 g2.draw(c);
             }
         }
@@ -2996,15 +2996,15 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 g2.draw(new Line2D.Double(anchorX, anchorY, targetX, targetY));
             }
             else if (style.equals(PieLabelLinkStyle.QUAD_CURVE)) {
-            	QuadCurve2D q = new QuadCurve2D.Float();
+                QuadCurve2D q = new QuadCurve2D.Float();
                 q.setCurve(targetX, targetY, anchorX, anchorY, elbowX, elbowY);
                 g2.draw(q);
-                g2.draw(new Line2D.Double(elbowX, elbowY, linkX, linkY));            	
+                g2.draw(new Line2D.Double(elbowX, elbowY, linkX, linkY));               
             }
             else if (style.equals(PieLabelLinkStyle.CUBIC_CURVE)) {
-            	CubicCurve2D c = new CubicCurve2D .Float();
+                CubicCurve2D c = new CubicCurve2D .Float();
                 c.setCurve(targetX, targetY, anchorX, anchorY, elbowX, elbowY, 
-                		linkX, linkY);
+                        linkX, linkY);
                 g2.draw(c);
             }
         }
@@ -3155,7 +3155,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             return false;
         }
         if (!this.labelLinkStyle.equals(that.labelLinkStyle)) {
-        	return false;
+            return false;
         }
         if (!PaintUtilities.equal(this.labelLinkPaint, that.labelLinkPaint)) {
             return false;
