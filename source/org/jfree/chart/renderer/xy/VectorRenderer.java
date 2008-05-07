@@ -273,8 +273,8 @@ public class VectorRenderer extends AbstractXYItemRenderer
             p.lineTo((float) leftx, (float) lefty);
         }
         else {  // orientation is HORIZONTAL
-        	p.moveTo((float) yy1, (float) xx1);
-        	p.lineTo((float) righty, (float) rightx);
+            p.moveTo((float) yy1, (float) xx1);
+            p.lineTo((float) righty, (float) rightx);
             p.lineTo((float) by, (float) bx);
             p.lineTo((float) lefty, (float) leftx);
         }

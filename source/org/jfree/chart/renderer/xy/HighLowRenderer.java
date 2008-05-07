@@ -256,7 +256,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * @see #setTickLength(double)
      */
     public double getTickLength() {
-    	return this.tickLength;
+        return this.tickLength;
     }
 
     /**
@@ -270,8 +270,8 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * @see #getTickLength()
      */
     public void setTickLength(double length) {
-    	this.tickLength = length;
-    	fireChangeEvent();
+        this.tickLength = length;
+        fireChangeEvent();
     }
 
     /**
@@ -497,7 +497,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
             return false;
         }
         if (this.tickLength != that.tickLength) {
-        	return false;
+            return false;
         }
         if (!super.equals(obj)) {
             return false;
