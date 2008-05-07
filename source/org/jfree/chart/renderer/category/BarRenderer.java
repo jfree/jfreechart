@@ -332,9 +332,9 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @see #getMinimumBarLength()
      */
     public void setMinimumBarLength(double min) {
-    	if (min < 0.0) {
-    		throw new IllegalArgumentException("Requires 'min' >= 0.0");
-    	}
+        if (min < 0.0) {
+            throw new IllegalArgumentException("Requires 'min' >= 0.0");
+        }
         this.minimumBarLength = min;
         fireChangeEvent();
     }
@@ -762,29 +762,29 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         double barLength = Math.abs(transL1 - transL0);
         double barLengthAdj = 0.0;
         if (barLength > 0.0 && barLength < getMinimumBarLength()) {
-        	barLengthAdj = getMinimumBarLength() - barLength;
+            barLengthAdj = getMinimumBarLength() - barLength;
         }
         double barL0Adj = 0.0;
         if (orientation == PlotOrientation.HORIZONTAL) {
-        	if (positive && inverted || !positive && !inverted) {
-        		barL0Adj = barLengthAdj;
-        	}
+            if (positive && inverted || !positive && !inverted) {
+                barL0Adj = barLengthAdj;
+            }
         }
         else {
-        	if (positive && !inverted || !positive && inverted) {
-        		barL0Adj = barLengthAdj;
-        	}
+            if (positive && !inverted || !positive && inverted) {
+                barL0Adj = barLengthAdj;
+            }
         }
 
         // draw the bar...
         Rectangle2D bar = null;
         if (orientation == PlotOrientation.HORIZONTAL) {
             bar = new Rectangle2D.Double(barL0 - barL0Adj, barW0,
-            		barLength + barLengthAdj, state.getBarWidth());
+                    barLength + barLengthAdj, state.getBarWidth());
         }
         else {
             bar = new Rectangle2D.Double(barW0, barL0 - barL0Adj,
-            		state.getBarWidth(), barLength + barLengthAdj);
+                    state.getBarWidth(), barLength + barLengthAdj);
         }
         Paint itemPaint = getItemPaint(row, column);
         GradientPaintTransformer t = getGradientPaintTransformer();
