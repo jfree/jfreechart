@@ -1959,7 +1959,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #removeDomainMarker(int, Marker, Layer, boolean)
      */
     public void addDomainMarker(int index, CategoryMarker marker, Layer layer,
-    		boolean notify) {
+            boolean notify) {
         if (marker == null) {
             throw new IllegalArgumentException("Null 'marker' not permitted.");
         }
@@ -2135,7 +2135,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.7
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer) {
-    	return removeDomainMarker(index, marker, layer, true);
+        return removeDomainMarker(index, marker, layer, true);
     }
 
     /**
@@ -2152,7 +2152,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.10
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer,
-    		boolean notify) {
+            boolean notify) {
         ArrayList markers;
         if (layer == Layer.FOREGROUND) {
             markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
@@ -2216,7 +2216,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #removeRangeMarker(int, Marker, Layer)
      */
     public void addRangeMarker(int index, Marker marker, Layer layer) {
-    	addRangeMarker(index, marker, layer, true);
+        addRangeMarker(index, marker, layer, true);
     }
 
     /**
@@ -2236,7 +2236,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #removeRangeMarker(int, Marker, Layer, boolean)
      */
     public void addRangeMarker(int index, Marker marker, Layer layer,
-    		boolean notify) {
+            boolean notify) {
         Collection markers;
         if (layer == Layer.FOREGROUND) {
             markers = (Collection) this.foregroundRangeMarkers.get(
@@ -2414,7 +2414,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #addRangeMarker(int, Marker, Layer)
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer) {
-    	return removeRangeMarker(index, marker, layer, true);
+        return removeRangeMarker(index, marker, layer, true);
     }
 
     /**
@@ -2434,7 +2434,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #addRangeMarker(int, Marker, Layer, boolean)
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer,
-    		boolean notify) {
+            boolean notify) {
         if (marker == null) {
             throw new IllegalArgumentException("Null 'marker' argument.");
         }
@@ -2631,7 +2631,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #removeAnnotation(CategoryAnnotation)
      */
     public void addAnnotation(CategoryAnnotation annotation) {
-    	addAnnotation(annotation, true);
+        addAnnotation(annotation, true);
     }
 
     /**
@@ -2664,7 +2664,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #addAnnotation(CategoryAnnotation)
      */
     public boolean removeAnnotation(CategoryAnnotation annotation) {
-    	return removeAnnotation(annotation, true);
+        return removeAnnotation(annotation, true);
     }
 
     /**
@@ -2679,7 +2679,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.10
      */
     public boolean removeAnnotation(CategoryAnnotation annotation,
-    		boolean notify) {
+            boolean notify) {
         if (annotation == null) {
             throw new IllegalArgumentException("Null 'annotation' argument.");
         }
@@ -3944,8 +3944,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             return false;
         }
         if (!ObjectUtilities.equal(this.fixedLegendItems,
-        		that.fixedLegendItems)) {
-        	return false;
+                that.fixedLegendItems)) {
+            return false;
         }
 
         return super.equals(obj);
@@ -4007,13 +4007,13 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
 
         clone.annotations = (List) ObjectUtilities.deepClone(this.annotations);
         clone.foregroundDomainMarkers = cloneMarkerMap(
-        		this.foregroundDomainMarkers);
+                this.foregroundDomainMarkers);
         clone.backgroundDomainMarkers = cloneMarkerMap(
-        		this.backgroundDomainMarkers);
+                this.backgroundDomainMarkers);
         clone.foregroundRangeMarkers = cloneMarkerMap(
-        		this.foregroundRangeMarkers);
+                this.foregroundRangeMarkers);
         clone.backgroundRangeMarkers = cloneMarkerMap(
-        		this.backgroundRangeMarkers);
+                this.backgroundRangeMarkers);
         if (this.fixedLegendItems != null) {
             clone.fixedLegendItems
                     = (LegendItemCollection) this.fixedLegendItems.clone();
@@ -4022,18 +4022,18 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
 
     }
 
-	/**
-	 * A utility method to clone the marker maps.
-	 *
-	 * @param map  the map to clone.
-	 *
-	 * @return A clone of the map.
-	 *
-	 * @throws CloneNotSupportedException if there is some problem cloning the
-	 *                                    map.
-	 */
-	private Map cloneMarkerMap(Map map) throws CloneNotSupportedException {
-		Map clone = new HashMap();
+    /**
+     * A utility method to clone the marker maps.
+     *
+     * @param map  the map to clone.
+     *
+     * @return A clone of the map.
+     *
+     * @throws CloneNotSupportedException if there is some problem cloning the
+     *                                    map.
+     */
+    private Map cloneMarkerMap(Map map) throws CloneNotSupportedException {
+        Map clone = new HashMap();
         Set keys = map.keySet();
         Iterator iterator = keys.iterator();
         while (iterator.hasNext()) {
@@ -4042,8 +4042,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             Object toAdd = ObjectUtilities.deepClone(entry);
             clone.put(key, toAdd);
         }
-		return clone;
-	}
+        return clone;
+    }
 
     /**
      * Provides serialization support.
