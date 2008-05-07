@@ -80,23 +80,23 @@ public class DefaultKeyedValueTests extends TestCase {
      * Simple checks for the constructor.
      */
     public void testConstructor() {
-    	DefaultKeyedValue v = new DefaultKeyedValue("A", new Integer(1));
-    	assertEquals("A", v.getKey());
-    	assertEquals(new Integer(1), v.getValue());
+        DefaultKeyedValue v = new DefaultKeyedValue("A", new Integer(1));
+        assertEquals("A", v.getKey());
+        assertEquals(new Integer(1), v.getValue());
 
-    	// try null key
-    	boolean pass = false;
-    	try {
+        // try null key
+        boolean pass = false;
+        try {
             /*v =*/ new DefaultKeyedValue(null, new Integer(1));
-    	}
-    	catch (IllegalArgumentException e) {
-    		pass = true;
-    	}
-    	assertTrue(pass);
-    	
-    	// try a null value
-    	v = new DefaultKeyedValue("A", null);
-    	assertNull(v.getValue());
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        
+        // try a null value
+        v = new DefaultKeyedValue("A", null);
+        assertNull(v.getValue());
     }
     
     /**

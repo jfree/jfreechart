@@ -347,22 +347,22 @@ public class DefaultKeyedValues2DTests extends TestCase {
      * Some basic checks for the removeColumn(Comparable) method.
      */
     public void testRemoveColumnByKey() {
-    	DefaultKeyedValues2D d = new DefaultKeyedValues2D();
-    	d.addValue(new Double(1.0), "R1", "C1");
-    	d.addValue(new Double(2.0), "R2", "C2");
-    	d.removeColumn("C2");
-    	d.addValue(new Double(3.0), "R2", "C2");
-    	assertEquals(3.0, d.getValue("R2", "C2").doubleValue(), EPSILON);
-    	
-    	// check for unknown column
-    	boolean pass = false;
-    	try {
-    		d.removeColumn("XXX");
-    	}
-    	catch (UnknownKeyException e) {
-    		pass = true;
-    	}
-    	assertTrue(pass);
+        DefaultKeyedValues2D d = new DefaultKeyedValues2D();
+        d.addValue(new Double(1.0), "R1", "C1");
+        d.addValue(new Double(2.0), "R2", "C2");
+        d.removeColumn("C2");
+        d.addValue(new Double(3.0), "R2", "C2");
+        assertEquals(3.0, d.getValue("R2", "C2").doubleValue(), EPSILON);
+        
+        // check for unknown column
+        boolean pass = false;
+        try {
+            d.removeColumn("XXX");
+        }
+        catch (UnknownKeyException e) {
+            pass = true;
+        }
+        assertTrue(pass);
     }
 
 }
