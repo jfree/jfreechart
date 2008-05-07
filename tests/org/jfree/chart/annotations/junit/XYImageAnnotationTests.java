@@ -129,7 +129,7 @@ public class XYImageAnnotationTests extends TestCase {
     public void testPublicCloneable() {
         XYImageAnnotation a1 = new XYImageAnnotation(10.0, 20.0,
                 JFreeChart.INFO.getLogo());
-    	assertTrue(a1 instanceof PublicCloneable);
+        assertTrue(a1 instanceof PublicCloneable);
     }
 
 // FIXME: Make this test pass
