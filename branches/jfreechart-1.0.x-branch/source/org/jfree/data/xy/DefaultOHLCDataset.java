@@ -328,10 +328,10 @@ public class DefaultOHLCDataset extends AbstractXYDataset
      * @return A clone.
      */
     public Object clone() throws CloneNotSupportedException {
-    	DefaultOHLCDataset clone = (DefaultOHLCDataset) super.clone();
-    	clone.data = new OHLCDataItem[this.data.length];
-    	System.arraycopy(this.data, 0, clone.data, 0, this.data.length);
-    	return clone;
+        DefaultOHLCDataset clone = (DefaultOHLCDataset) super.clone();
+        clone.data = new OHLCDataItem[this.data.length];
+        System.arraycopy(this.data, 0, clone.data, 0, this.data.length);
+        return clone;
     }
 
 }
