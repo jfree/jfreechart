@@ -191,7 +191,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         int seriesValue = series.getValue(jan1st2002).intValue();
         int cloneValue = Integer.MAX_VALUE;
         if (clone != null) {
-        	cloneValue = clone.getValue(jan1st2002).intValue();
+            cloneValue = clone.getValue(jan1st2002).intValue();
         }
 
         assertEquals(42, seriesValue);
@@ -201,7 +201,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             assertEquals("Clone Series", clone.getKey());
         }
         else {
-        	assertTrue(false);
+            assertTrue(false);
         }
 
     }
@@ -210,24 +210,24 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
      * Another test of the clone() method.
      */
     public void testClone2() {
-    	TimeSeries s1 = new TimeSeries("S1", Year.class);
-    	s1.add(new Year(2007), 100.0);
-    	s1.add(new Year(2008), null);
-    	s1.add(new Year(2009), 200.0);
-    	TimeSeries s2 = null;
-    	try {
-    		s2 = (TimeSeries) s1.clone();
-    	}
-    	catch (CloneNotSupportedException e) {
-    		e.printStackTrace();
-    	}
-    	assertTrue(s1.equals(s2));
-    	
-    	// check independence
-    	s2.addOrUpdate(new Year(2009), 300.0);
-    	assertFalse(s1.equals(s2));
-    	s1.addOrUpdate(new Year(2009), 300.0);
-    	assertTrue(s1.equals(s2));
+        TimeSeries s1 = new TimeSeries("S1", Year.class);
+        s1.add(new Year(2007), 100.0);
+        s1.add(new Year(2008), null);
+        s1.add(new Year(2009), 200.0);
+        TimeSeries s2 = null;
+        try {
+            s2 = (TimeSeries) s1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(s1.equals(s2));
+        
+        // check independence
+        s2.addOrUpdate(new Year(2009), 300.0);
+        assertFalse(s1.equals(s2));
+        s1.addOrUpdate(new Year(2009), 300.0);
+        assertTrue(s1.equals(s2));
     }
 
     /**
@@ -627,7 +627,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
 
         // test independence
         s1.add(new Day(1, 1, 2007), 100.0);
-        assertFalse(s1.equals(s2));    	
+        assertFalse(s1.equals(s2));     
     }
     
     /**
@@ -710,37 +710,37 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
      * Some checks for the removeAgedItems() method.
      */
     public void testRemoveAgedItems() {
-    	TimeSeries series = new TimeSeries("Test Series", Year.class);
-    	series.addChangeListener(this);
-    	assertEquals(Long.MAX_VALUE, series.getMaximumItemAge());
-    	assertEquals(Integer.MAX_VALUE, series.getMaximumItemCount());
-    	this.gotSeriesChangeEvent = false;
-    	
-    	// test empty series
-    	series.removeAgedItems(true);
-    	assertEquals(0, series.getItemCount());
-    	assertFalse(this.gotSeriesChangeEvent);
-    	
-    	// test series with one item
-    	series.add(new Year(1999), 1.0);
-    	series.setMaximumItemAge(0);
-    	this.gotSeriesChangeEvent = false;
-    	series.removeAgedItems(true);
-    	assertEquals(1, series.getItemCount());
-    	assertFalse(this.gotSeriesChangeEvent);
+        TimeSeries series = new TimeSeries("Test Series", Year.class);
+        series.addChangeListener(this);
+        assertEquals(Long.MAX_VALUE, series.getMaximumItemAge());
+        assertEquals(Integer.MAX_VALUE, series.getMaximumItemCount());
+        this.gotSeriesChangeEvent = false;
+        
+        // test empty series
+        series.removeAgedItems(true);
+        assertEquals(0, series.getItemCount());
+        assertFalse(this.gotSeriesChangeEvent);
+        
+        // test series with one item
+        series.add(new Year(1999), 1.0);
+        series.setMaximumItemAge(0);
+        this.gotSeriesChangeEvent = false;
+        series.removeAgedItems(true);
+        assertEquals(1, series.getItemCount());
+        assertFalse(this.gotSeriesChangeEvent);
 
-    	// test series with two items
-    	series.setMaximumItemAge(10);
-    	series.add(new Year(2001), 2.0);
-    	this.gotSeriesChangeEvent = false;
-    	series.setMaximumItemAge(2);
-    	assertEquals(2, series.getItemCount());
-    	assertEquals(0, series.getIndex(new Year(1999)));
-    	assertFalse(this.gotSeriesChangeEvent);
-    	series.setMaximumItemAge(1);
-    	assertEquals(1, series.getItemCount());
-    	assertEquals(0, series.getIndex(new Year(2001)));
-    	assertTrue(this.gotSeriesChangeEvent);
+        // test series with two items
+        series.setMaximumItemAge(10);
+        series.add(new Year(2001), 2.0);
+        this.gotSeriesChangeEvent = false;
+        series.setMaximumItemAge(2);
+        assertEquals(2, series.getItemCount());
+        assertEquals(0, series.getIndex(new Year(1999)));
+        assertFalse(this.gotSeriesChangeEvent);
+        series.setMaximumItemAge(1);
+        assertEquals(1, series.getItemCount());
+        assertEquals(0, series.getIndex(new Year(2001)));
+        assertTrue(this.gotSeriesChangeEvent);
     }
     
     /**
@@ -748,16 +748,16 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
      */
     public void testRemoveAgedItems2() {
         long y2006 = 1157087372534L;  // milliseconds somewhere in 2006
-    	TimeSeries series = new TimeSeries("Test Series", Year.class);
-    	series.addChangeListener(this);
-    	assertEquals(Long.MAX_VALUE, series.getMaximumItemAge());
-    	assertEquals(Integer.MAX_VALUE, series.getMaximumItemCount());
-    	this.gotSeriesChangeEvent = false;
-    	
-    	// test empty series
-    	series.removeAgedItems(y2006, true);
-    	assertEquals(0, series.getItemCount());
-    	assertFalse(this.gotSeriesChangeEvent);
+        TimeSeries series = new TimeSeries("Test Series", Year.class);
+        series.addChangeListener(this);
+        assertEquals(Long.MAX_VALUE, series.getMaximumItemAge());
+        assertEquals(Integer.MAX_VALUE, series.getMaximumItemCount());
+        this.gotSeriesChangeEvent = false;
+        
+        // test empty series
+        series.removeAgedItems(y2006, true);
+        assertEquals(0, series.getItemCount());
+        assertFalse(this.gotSeriesChangeEvent);
         
         // test a series with 1 item
         series.add(new Year(2004), 1.0);
@@ -769,7 +769,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         series.removeAgedItems(y2006, true);
         assertEquals(0, series.getItemCount());
         assertTrue(this.gotSeriesChangeEvent);
-   	
+    
         // test a series with two items
         series.setMaximumItemAge(2);
         series.add(new Year(2003), 1.0);
