@@ -137,7 +137,7 @@ public class CustomXYURLGeneratorTests extends TestCase {
      */
     public void testPublicCloneable() {
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
-    	assertTrue(g1 instanceof PublicCloneable);
+        assertTrue(g1 instanceof PublicCloneable);
     }
 
     /**
@@ -180,25 +180,25 @@ public class CustomXYURLGeneratorTests extends TestCase {
     }
 
     public void testAddURLSeries() {
-    	CustomXYURLGenerator g1 = new CustomXYURLGenerator();
-    	// you can add a null list - it would have been better if this
-    	// required EMPTY_LIST
-    	g1.addURLSeries(null);
-    	assertEquals(1, g1.getListCount());
-    	assertEquals(0, g1.getURLCount(0));
+        CustomXYURLGenerator g1 = new CustomXYURLGenerator();
+        // you can add a null list - it would have been better if this
+        // required EMPTY_LIST
+        g1.addURLSeries(null);
+        assertEquals(1, g1.getListCount());
+        assertEquals(0, g1.getURLCount(0));
 
-    	List list1 = new java.util.ArrayList();
-    	list1.add("URL1");
-    	g1.addURLSeries(list1);
-    	assertEquals(2, g1.getListCount());
-    	assertEquals(0, g1.getURLCount(0));
-    	assertEquals(1, g1.getURLCount(1));
-    	assertEquals("URL1", g1.getURL(1, 0));
+        List list1 = new java.util.ArrayList();
+        list1.add("URL1");
+        g1.addURLSeries(list1);
+        assertEquals(2, g1.getListCount());
+        assertEquals(0, g1.getURLCount(0));
+        assertEquals(1, g1.getURLCount(1));
+        assertEquals("URL1", g1.getURL(1, 0));
 
-    	// if we modify the original list, it's best if the URL generator is
-    	// not affected
-    	list1.clear();
-    	assertEquals("URL1", g1.getURL(1, 0));
+        // if we modify the original list, it's best if the URL generator is
+        // not affected
+        list1.clear();
+        assertEquals("URL1", g1.getURL(1, 0));
     }
 
 }
