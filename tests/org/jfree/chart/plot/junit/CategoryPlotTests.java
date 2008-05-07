@@ -385,7 +385,7 @@ public class CategoryPlotTests extends TestCase {
 
         // annotations
         plot1.addAnnotation(new CategoryTextAnnotation("Text", "Category",
-        		43.0));
+                43.0));
         assertFalse(plot1.equals(plot2));
         plot2.addAnnotation(new CategoryTextAnnotation("Text", "Category",
                 43.0));
@@ -437,10 +437,10 @@ public class CategoryPlotTests extends TestCase {
 
         // check independence
         p1.addAnnotation(new CategoryLineAnnotation("C1", 1.0, "C2", 2.0,
-        		Color.red, new BasicStroke(1.0f)));
+                Color.red, new BasicStroke(1.0f)));
         assertFalse(p1.equals(p2));
         p2.addAnnotation(new CategoryLineAnnotation("C1", 1.0, "C2", 2.0,
-        		Color.red, new BasicStroke(1.0f)));
+                Color.red, new BasicStroke(1.0f)));
         assertTrue(p1.equals(p2));
 
         p1.addDomainMarker(new CategoryMarker("C1"), Layer.FOREGROUND);
@@ -468,8 +468,8 @@ public class CategoryPlotTests extends TestCase {
      * Some more cloning checks.
      */
     public void testCloning2() {
-    	AxisSpace da1 = new AxisSpace();
-    	AxisSpace ra1 = new AxisSpace();
+        AxisSpace da1 = new AxisSpace();
+        AxisSpace ra1 = new AxisSpace();
         CategoryPlot p1 = new CategoryPlot();
         p1.setFixedDomainAxisSpace(da1);
         p1.setFixedRangeAxisSpace(ra1);
@@ -499,7 +499,7 @@ public class CategoryPlotTests extends TestCase {
      * Some more cloning checks.
      */
     public void testCloning3() {
-    	LegendItemCollection c1 = new LegendItemCollection();
+        LegendItemCollection c1 = new LegendItemCollection();
         CategoryPlot p1 = new CategoryPlot();
         p1.setFixedLegendItems(c1);
         CategoryPlot p2 = null;
@@ -514,16 +514,16 @@ public class CategoryPlotTests extends TestCase {
         assertTrue(p1.equals(p2));
 
         c1.add(new LegendItem("X", "XX", "tt", "url", true,
-        		new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.red,
-        		true, Color.yellow, new BasicStroke(1.0f), true,
-        		new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(1.0f),
-        		Color.green));
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.red,
+                true, Color.yellow, new BasicStroke(1.0f), true,
+                new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(1.0f),
+                Color.green));
         assertFalse(p1.equals(p2));
         p2.getFixedLegendItems().add(new LegendItem("X", "XX", "tt", "url",
-        		true, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true,
-        		Color.red, true, Color.yellow, new BasicStroke(1.0f), true,
-        		new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(1.0f),
-        		Color.green));
+                true, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true,
+                Color.red, true, Color.yellow, new BasicStroke(1.0f), true,
+                new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(1.0f),
+                Color.green));
         assertTrue(p1.equals(p2));
     }
 
@@ -878,8 +878,8 @@ public class CategoryPlotTests extends TestCase {
      * false.
      */
     public void testRemoveDomainMarker() {
-    	CategoryPlot plot = new CategoryPlot();
-    	assertFalse(plot.removeDomainMarker(new CategoryMarker("Category 1")));
+        CategoryPlot plot = new CategoryPlot();
+        assertFalse(plot.removeDomainMarker(new CategoryMarker("Category 1")));
     }
 
     /**
@@ -887,8 +887,8 @@ public class CategoryPlotTests extends TestCase {
      * false.
      */
     public void testRemoveRangeMarker() {
-    	CategoryPlot plot = new CategoryPlot();
-    	assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
+        CategoryPlot plot = new CategoryPlot();
+        assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
     }
 
 }
