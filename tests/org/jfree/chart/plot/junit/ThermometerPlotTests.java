@@ -89,10 +89,10 @@ public class ThermometerPlotTests extends TestCase {
      * Some checks for the equals() method.
      */
     public void testEquals() {
-    	ThermometerPlot p1 = new ThermometerPlot();
-    	ThermometerPlot p2 = new ThermometerPlot();
-    	assertTrue(p1.equals(p2));
-    	assertTrue(p2.equals(p1));
+        ThermometerPlot p1 = new ThermometerPlot();
+        ThermometerPlot p2 = new ThermometerPlot();
+        assertTrue(p1.equals(p2));
+        assertTrue(p2.equals(p1));
         
         // padding
         p1.setPadding(new RectangleInsets(1.0, 2.0, 3.0, 4.0));
