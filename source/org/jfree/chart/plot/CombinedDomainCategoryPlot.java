@@ -230,12 +230,12 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * @return An unmodifiable list of subplots.
      */
     public List getSubplots() {
-    	if (this.subplots != null) {
+        if (this.subplots != null) {
             return Collections.unmodifiableList(this.subplots);
-    	}
-    	else {
-    		return Collections.EMPTY_LIST;
-    	}
+        }
+        else {
+            return Collections.EMPTY_LIST;
+        }
     }
 
     /**
@@ -271,7 +271,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      */
     public void zoomRangeAxes(double factor, PlotRenderingInfo info,
                               Point2D source) {
-    	zoomRangeAxes(factor, info, source, false);
+        zoomRangeAxes(factor, info, source, false);
     }
 
     /**
@@ -523,7 +523,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
       * @return The range.
       */
      public Range getDataRange(ValueAxis axis) {
-    	 // override is only for documentation purposes
+         // override is only for documentation purposes
          return super.getDataRange(axis);
      }
 
