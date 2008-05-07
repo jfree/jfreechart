@@ -531,9 +531,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor, 
             PlotState parentState, PlotRenderingInfo info) {
         
-    	Shape origClip = g2.getClip();
-    	g2.setClip(area);
-    	
+        Shape origClip = g2.getClip();
+        g2.setClip(area);
+        
         // first, expand the viewing area into a drawing frame
         Rectangle2D frame = viewToFrame(area);
         
