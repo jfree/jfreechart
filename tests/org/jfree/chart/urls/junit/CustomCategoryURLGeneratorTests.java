@@ -103,7 +103,7 @@ public class CustomCategoryURLGeneratorTests extends TestCase {
      * Confirm that cloning works.
      */
     public void testCloning() {
-    	CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
+        CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
         List u1 = new java.util.ArrayList();
         u1.add("URL A1");
         u1.add("URL A2");
@@ -133,8 +133,8 @@ public class CustomCategoryURLGeneratorTests extends TestCase {
      * Checks that the class implements PublicCloneable.
      */
     public void testPublicCloneable() {
-    	CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
-    	assertTrue(g1 instanceof PublicCloneable);
+        CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
+        assertTrue(g1 instanceof PublicCloneable);
     }
 
     /**
@@ -177,25 +177,25 @@ public class CustomCategoryURLGeneratorTests extends TestCase {
     }
 
     public void testAddURLSeries() {
-    	CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
-    	// you can add a null list - it would have been better if this
-    	// required EMPTY_LIST
-    	g1.addURLSeries(null);
-    	assertEquals(1, g1.getListCount());
-    	assertEquals(0, g1.getURLCount(0));
+        CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
+        // you can add a null list - it would have been better if this
+        // required EMPTY_LIST
+        g1.addURLSeries(null);
+        assertEquals(1, g1.getListCount());
+        assertEquals(0, g1.getURLCount(0));
 
-    	List list1 = new java.util.ArrayList();
-    	list1.add("URL1");
-    	g1.addURLSeries(list1);
-    	assertEquals(2, g1.getListCount());
-    	assertEquals(0, g1.getURLCount(0));
-    	assertEquals(1, g1.getURLCount(1));
-    	assertEquals("URL1", g1.getURL(1, 0));
+        List list1 = new java.util.ArrayList();
+        list1.add("URL1");
+        g1.addURLSeries(list1);
+        assertEquals(2, g1.getListCount());
+        assertEquals(0, g1.getURLCount(0));
+        assertEquals(1, g1.getURLCount(1));
+        assertEquals("URL1", g1.getURL(1, 0));
 
-    	// if we modify the original list, it's best if the URL generator is
-    	// not affected
-    	list1.clear();
-    	assertEquals("URL1", g1.getURL(1, 0));
+        // if we modify the original list, it's best if the URL generator is
+        // not affected
+        list1.clear();
+        assertEquals("URL1", g1.getURL(1, 0));
     }
 
 }
