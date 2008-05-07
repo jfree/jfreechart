@@ -243,7 +243,7 @@ public class DefaultWindDatasetTests extends TestCase {
      * @return An array containing the specified items.
      */
     private Object[] createItem(RegularTimePeriod t, int dir, int force) {
-        return new Object[] { new Long(t.getMiddleMillisecond()),
-                new Integer(dir), new Integer(force) };
+        return new Object[] {new Long(t.getMiddleMillisecond()),
+                new Integer(dir), new Integer(force)};
     }
 }

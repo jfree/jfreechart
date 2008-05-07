@@ -64,13 +64,13 @@ import org.jfree.data.xy.XYCoordinate;
 public class VectorSeriesTests extends TestCase 
         implements SeriesChangeListener {
 
-	SeriesChangeEvent lastEvent;
-	
+    SeriesChangeEvent lastEvent;
+    
     public void seriesChanged(SeriesChangeEvent event) {
         this.lastEvent = event;
-	}
+    }
 
-	/**
+    /**
      * Returns the tests as a test suite.
      *
      * @return The test suite.

@@ -146,12 +146,12 @@ public class DefaultOHLCDatasetTests extends TestCase {
      * Confirm that cloning works.
      */
     public void testCloning2() {
-    	OHLCDataItem item1 = new OHLCDataItem(new Date(1L), 1.0, 2.0, 3.0, 4.0,
-    			5.0);
-    	OHLCDataItem item2 = new OHLCDataItem(new Date(2L), 6.0, 7.0, 8.0, 9.0,
-    			10.0);
-    	// create an array of items in reverse order
-    	OHLCDataItem[] items = new OHLCDataItem[] {item2, item1};
+        OHLCDataItem item1 = new OHLCDataItem(new Date(1L), 1.0, 2.0, 3.0, 4.0,
+                5.0);
+        OHLCDataItem item2 = new OHLCDataItem(new Date(2L), 6.0, 7.0, 8.0, 9.0,
+                10.0);
+        // create an array of items in reverse order
+        OHLCDataItem[] items = new OHLCDataItem[] {item2, item1};
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1", items);
         DefaultOHLCDataset d2 = null;
         try {

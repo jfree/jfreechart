@@ -63,11 +63,11 @@ import org.jfree.data.xy.XIntervalSeries;
 public class XIntervalSeriesTests extends TestCase
         implements SeriesChangeListener {
 
-	SeriesChangeEvent lastEvent;
+    SeriesChangeEvent lastEvent;
 
     public void seriesChanged(SeriesChangeEvent event) {
         this.lastEvent = event;
-	}
+    }
 
     /**
      * Returns the tests as a test suite.
@@ -293,7 +293,7 @@ public class XIntervalSeriesTests extends TestCase
      * Some checks for the clear() method.
      */
     public void testClear() {
-    	XIntervalSeries s1 = new XIntervalSeries("S1");
+        XIntervalSeries s1 = new XIntervalSeries("S1");
         s1.addChangeListener(this);
         s1.clear();
         assertNull(this.lastEvent);
@@ -309,7 +309,7 @@ public class XIntervalSeriesTests extends TestCase
      * A simple check for getXLowValue().
      */
     public void testGetXLowValue() {
-    	XIntervalSeries s1 = new XIntervalSeries("S1");
+        XIntervalSeries s1 = new XIntervalSeries("S1");
         s1.add(1.0, 2.0, 3.0, 4.0);
         assertEquals(2.0, s1.getXLowValue(0), EPSILON);
         s1.add(2.0, 1.0, 4.0, 2.5);
@@ -320,7 +320,7 @@ public class XIntervalSeriesTests extends TestCase
      * A simple check for getXHighValue().
      */
     public void testGetXHighValue() {
-    	XIntervalSeries s1 = new XIntervalSeries("S1");
+        XIntervalSeries s1 = new XIntervalSeries("S1");
         s1.add(1.0, 2.0, 3.0, 4.0);
         assertEquals(3.0, s1.getXHighValue(0), EPSILON);
         s1.add(2.0, 1.0, 4.0, 2.5);
