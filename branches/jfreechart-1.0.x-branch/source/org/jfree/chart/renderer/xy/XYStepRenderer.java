@@ -161,7 +161,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
     public void setStepPoint(double stepPoint) {
         if (stepPoint < 0.0d || stepPoint > 1.0d) {
             throw new IllegalArgumentException(
-            		"Requires stepPoint in [0.0;1.0]");
+                    "Requires stepPoint in [0.0;1.0]");
         }
         this.stepPoint = stepPoint;
         fireChangeEvent();
@@ -218,53 +218,53 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
         RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
         double transX1 = domainAxis.valueToJava2D(x1, dataArea, xAxisLocation);
         double transY1 = (Double.isNaN(y1) ? Double.NaN 
-        		: rangeAxis.valueToJava2D(y1, dataArea, yAxisLocation));
+                : rangeAxis.valueToJava2D(y1, dataArea, yAxisLocation));
 
         if (item > 0) {
             // get the previous data point...
             double x0 = dataset.getXValue(series, item - 1);
             double y0 = dataset.getYValue(series, item - 1);
             double transX0 = domainAxis.valueToJava2D(x0, dataArea, 
-            		xAxisLocation);
+                    xAxisLocation);
             double transY0 = (Double.isNaN(y0) ? Double.NaN 
-            		: rangeAxis.valueToJava2D(y0, dataArea, yAxisLocation));
+                    : rangeAxis.valueToJava2D(y0, dataArea, yAxisLocation));
 
             if (orientation == PlotOrientation.HORIZONTAL) {
                 if (transY0 == transY1) { 
-                	// this represents the situation
+                    // this represents the situation
                     // for drawing a horizontal bar.
                     drawLine(g2, state.workingLine, transY0, transX0, transY1, 
-                    		transX1);
+                            transX1);
                 }
                 else {  //this handles the need to perform a 'step'.
 
                     // calculate the step point
                     double transXs = transX0 + (getStepPoint() 
-                    		* (transX1 - transX0));
+                            * (transX1 - transX0));
                     drawLine(g2, state.workingLine, transY0, transX0, transY0, 
-                    		transXs);
+                            transXs);
                     drawLine(g2, state.workingLine, transY0, transXs, transY1, 
-                    		transXs);
+                            transXs);
                     drawLine(g2, state.workingLine, transY1, transXs, transY1, 
-                    		transX1);
+                            transX1);
                 }
             }
             else if (orientation == PlotOrientation.VERTICAL) {
                 if (transY0 == transY1) { // this represents the situation 
                                           // for drawing a horizontal bar.
                     drawLine(g2, state.workingLine, transX0, transY0, transX1, 
-                    		transY1);
+                            transY1);
                 }
                 else {  //this handles the need to perform a 'step'.
                     // calculate the step point
                     double transXs = transX0 + (getStepPoint() 
-                    		* (transX1 - transX0));
+                            * (transX1 - transX0));
                     drawLine(g2, state.workingLine, transX0, transY0, transXs, 
-                    		transY0);
+                            transY0);
                     drawLine(g2, state.workingLine, transXs, transY0, transXs, 
-                    		transY1);
+                            transY1);
                     drawLine(g2, state.workingLine, transXs, transY1, transX1, 
-                    		transY1);
+                            transY1);
                 }
             }
 
@@ -329,9 +329,9 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
      * @param y1  the y-coordinate for the ending point of the line.
      */
     private void drawLine(Graphics2D g2, Line2D line, double x0, double y0, 
-    		double x1, double y1) {
+            double x1, double y1) {
         if (Double.isNaN(x0) || Double.isNaN(x1) || Double.isNaN(y0) 
-        		|| Double.isNaN(y1)) {
+                || Double.isNaN(y1)) {
             return;
         }
         line.setLine(x0, y0, x1, y1);
@@ -351,13 +351,13 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
         }
         if (!(obj instanceof XYLineAndShapeRenderer)) {
             return false;
-        }		
+        }       
         XYStepRenderer that = (XYStepRenderer) obj;
         if (this.stepPoint != that.stepPoint) {
-        	return false;
+            return false;
         }
-		return super.equals(obj);
-	}
+        return super.equals(obj);
+    }
   
     /**
      * Returns a hash code for this instance.
