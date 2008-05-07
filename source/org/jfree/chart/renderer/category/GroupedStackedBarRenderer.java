@@ -201,24 +201,24 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
             space = dataArea.getWidth();
         }
         double barW0 = domainAxis.getCategoryStart(column, getColumnCount(),
-        		dataArea, plot.getDomainAxisEdge());
+                dataArea, plot.getDomainAxisEdge());
         int groupCount = this.seriesToGroupMap.getGroupCount();
         int groupIndex = this.seriesToGroupMap.getGroupIndex(
-        		this.seriesToGroupMap.getGroup(plot.getDataset(
-        				plot.getIndexOf(this)).getRowKey(row)));
+                this.seriesToGroupMap.getGroup(plot.getDataset(
+                        plot.getIndexOf(this)).getRowKey(row)));
         int categoryCount = getColumnCount();
         if (groupCount > 1) {
             double groupGap = space * getItemMargin()
                               / (categoryCount * (groupCount - 1));
             double groupW = calculateSeriesWidth(space, domainAxis,
-            		categoryCount, groupCount);
+                    categoryCount, groupCount);
             barW0 = barW0 + groupIndex * (groupW + groupGap)
                           + (groupW / 2.0) - (state.getBarWidth() / 2.0);
         }
         else {
             barW0 = domainAxis.getCategoryMiddle(column, getColumnCount(),
-            		dataArea, plot.getDomainAxisEdge())
-            		- state.getBarWidth() / 2.0;
+                    dataArea, plot.getDomainAxisEdge())
+                    - state.getBarWidth() / 2.0;
         }
         return barW0;
     }
@@ -256,7 +256,7 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
 
         double value = dataValue.doubleValue();
         Comparable group = this.seriesToGroupMap.getGroup(
-        		dataset.getRowKey(row));
+                dataset.getRowKey(row));
         PlotOrientation orientation = plot.getOrientation();
         double barW0 = calculateBarW0(plot, orientation, dataArea, domainAxis,
                 state, row, column);
@@ -334,7 +334,7 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
         if (state.getInfo() != null) {
             EntityCollection entities = state.getEntityCollection();
             if (entities != null) {
-            	addItemEntity(entities, dataset, row, column, bar);
+                addItemEntity(entities, dataset, row, column, bar);
             }
         }
 
@@ -352,7 +352,7 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
             return true;
         }
         if (!(obj instanceof GroupedStackedBarRenderer)) {
-        	return false;
+            return false;
         }
         GroupedStackedBarRenderer that = (GroupedStackedBarRenderer) obj;
         if (!this.seriesToGroupMap.equals(that.seriesToGroupMap)) {
