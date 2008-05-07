@@ -269,12 +269,12 @@ public class CombinedRangeXYPlot extends XYPlot
      * @return An unmodifiable list of subplots.
      */
     public List getSubplots() {
-    	if (this.subplots != null) {
+        if (this.subplots != null) {
             return Collections.unmodifiableList(this.subplots);
-    	}
-    	else {
-    		return Collections.EMPTY_LIST;
-    	}
+        }
+        else {
+            return Collections.EMPTY_LIST;
+        }
     }
 
     /**
@@ -451,7 +451,7 @@ public class CombinedRangeXYPlot extends XYPlot
      */
     public void zoomDomainAxes(double factor, PlotRenderingInfo info,
                                Point2D source) {
-    	zoomDomainAxes(factor, info, source, false);
+        zoomDomainAxes(factor, info, source, false);
     }
 
     /**

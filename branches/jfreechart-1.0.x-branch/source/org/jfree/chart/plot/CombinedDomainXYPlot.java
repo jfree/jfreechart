@@ -328,12 +328,12 @@ public class CombinedDomainXYPlot extends XYPlot
      * @return An unmodifiable list of subplots.
      */
     public List getSubplots() {
-    	if (this.subplots != null) {
+        if (this.subplots != null) {
             return Collections.unmodifiableList(this.subplots);
-    	}
-    	else {
-    		return Collections.EMPTY_LIST;
-    	}
+        }
+        else {
+            return Collections.EMPTY_LIST;
+        }
     }
 
     /**
