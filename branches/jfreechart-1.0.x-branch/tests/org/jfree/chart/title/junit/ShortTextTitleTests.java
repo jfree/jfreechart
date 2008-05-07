@@ -94,8 +94,8 @@ public class ShortTextTitleTests extends TestCase {
      * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
-    	ShortTextTitle t1 = new ShortTextTitle("ABC");
-    	ShortTextTitle t2 = new ShortTextTitle("ABC");
+        ShortTextTitle t1 = new ShortTextTitle("ABC");
+        ShortTextTitle t2 = new ShortTextTitle("ABC");
         assertTrue(t1.equals(t2));
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
@@ -106,7 +106,7 @@ public class ShortTextTitleTests extends TestCase {
      * Confirm that cloning works.
      */
     public void testCloning() {
-    	ShortTextTitle t1 = new ShortTextTitle("ABC");
+        ShortTextTitle t1 = new ShortTextTitle("ABC");
         ShortTextTitle t2 = null;
         try {
             t2 = (ShortTextTitle) t1.clone();
@@ -124,7 +124,7 @@ public class ShortTextTitleTests extends TestCase {
      */
     public void testSerialization() {
 
-    	ShortTextTitle t1 = new ShortTextTitle("ABC");
+        ShortTextTitle t1 = new ShortTextTitle("ABC");
         ShortTextTitle t2 = null;
 
         try {
