@@ -129,37 +129,37 @@ public class XYDrawableAnnotationTests extends TestCase {
      */
     public void testEquals() {
         XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-        		200.0, new TestDrawable());
+                200.0, new TestDrawable());
         XYDrawableAnnotation a2 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-        		200.0, new TestDrawable());
+                200.0, new TestDrawable());
         assertTrue(a1.equals(a2));
 
         a1 = new XYDrawableAnnotation(11.0, 20.0, 100.0, 200.0,
-        		new TestDrawable());
+                new TestDrawable());
         assertFalse(a1.equals(a2));
         a2 = new XYDrawableAnnotation(11.0, 20.0, 100.0, 200.0,
-        		new TestDrawable());
+                new TestDrawable());
         assertTrue(a1.equals(a2));
 
         a1 = new XYDrawableAnnotation(11.0, 22.0, 100.0, 200.0,
-        		new TestDrawable());
+                new TestDrawable());
         assertFalse(a1.equals(a2));
         a2 = new XYDrawableAnnotation(11.0, 22.0, 100.0, 200.0,
-        		new TestDrawable());
+                new TestDrawable());
         assertTrue(a1.equals(a2));
 
         a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 200.0,
-        		new TestDrawable());
+                new TestDrawable());
         assertFalse(a1.equals(a2));
         a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 200.0,
-        		new TestDrawable());
+                new TestDrawable());
         assertTrue(a1.equals(a2));
 
         a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0,
-        		new TestDrawable());
+                new TestDrawable());
         assertFalse(a1.equals(a2));
         a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0,
-        		new TestDrawable());
+                new TestDrawable());
         assertTrue(a1.equals(a2));
     }
 
@@ -168,9 +168,9 @@ public class XYDrawableAnnotationTests extends TestCase {
      */
     public void testHashCode() {
         XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-        		200.0, new TestDrawable());
+                200.0, new TestDrawable());
         XYDrawableAnnotation a2 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-        		200.0, new TestDrawable());
+                200.0, new TestDrawable());
         assertTrue(a1.equals(a2));
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
@@ -182,7 +182,7 @@ public class XYDrawableAnnotationTests extends TestCase {
      */
     public void testCloning() {
         XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-        		200.0, new TestDrawable());
+                200.0, new TestDrawable());
         XYDrawableAnnotation a2 = null;
         try {
             a2 = (XYDrawableAnnotation) a1.clone();
@@ -200,8 +200,8 @@ public class XYDrawableAnnotationTests extends TestCase {
      */
     public void testPublicCloneable() {
         XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-        		200.0, new TestDrawable());
-    	assertTrue(a1 instanceof PublicCloneable);
+                200.0, new TestDrawable());
+        assertTrue(a1 instanceof PublicCloneable);
     }
 
     /**
@@ -210,7 +210,7 @@ public class XYDrawableAnnotationTests extends TestCase {
     public void testSerialization() {
 
         XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-        		200.0, new TestDrawable());
+                200.0, new TestDrawable());
         XYDrawableAnnotation a2 = null;
 
         try {
