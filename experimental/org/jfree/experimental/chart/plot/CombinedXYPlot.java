@@ -106,7 +106,7 @@ public class CombinedXYPlot extends CombinedDomainXYPlot {
         Range l_result = null;
         Iterator l_itr = getSubplots().iterator();
         while (l_itr.hasNext()) {
-            XYPlot l_subplot = (XYPlot)l_itr.next();
+            XYPlot l_subplot = (XYPlot) l_itr.next();
 
             l_result = Range.combine(l_result, l_subplot.getDataRange(axis));
         }
@@ -121,7 +121,7 @@ public class CombinedXYPlot extends CombinedDomainXYPlot {
     public void setRangeAxis(ValueAxis axis) {
         Iterator l_itr = getSubplots().iterator();
         while (l_itr.hasNext()) {
-            XYPlot l_subplot = (XYPlot)l_itr.next();
+            XYPlot l_subplot = (XYPlot) l_itr.next();
             l_subplot.setRangeAxis(0, axis, false);
         }
 
