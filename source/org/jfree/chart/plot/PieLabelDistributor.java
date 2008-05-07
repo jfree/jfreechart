@@ -147,7 +147,7 @@ public class PieLabelDistributor extends AbstractPieLabelDistributor {
             PieLabelRecord record1 = getPieLabelRecord(i + 1);
             if (record1.getLowerY() < record0.getUpperY()) {
                 record1.setAllocatedY(Math.min(minY + height 
-                		- record1.getLabelHeight() / 2.0, 
+                        - record1.getLabelHeight() / 2.0, 
                         record0.getUpperY() + this.minGap 
                         + record1.getLabelHeight() / 2.0));   
             }
