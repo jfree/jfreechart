@@ -190,8 +190,8 @@ public class LegendItem implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public LegendItem(String label) {
-    	this(label, null, null, null, new Rectangle2D.Double(-4.0, -4.0, 8.0,
-    			8.0), Color.black);
+        this(label, null, null, null, new Rectangle2D.Double(-4.0, -4.0, 8.0,
+                8.0), Color.black);
     }
 
     /**
@@ -459,10 +459,10 @@ public class LegendItem implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'lineStroke' argument.");
         }
         if (line == null) {
-        	throw new IllegalArgumentException("Null 'line' argument.");
+            throw new IllegalArgumentException("Null 'line' argument.");
         }
         if (linePaint == null) {
-        	throw new IllegalArgumentException("Null 'linePaint' argument.");
+            throw new IllegalArgumentException("Null 'linePaint' argument.");
         }
         if (outlinePaint == null) {
             throw new IllegalArgumentException("Null 'outlinePaint' argument.");
@@ -870,20 +870,20 @@ public class LegendItem implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public Object clone() throws CloneNotSupportedException {
-    	LegendItem clone = (LegendItem) super.clone();
-    	if (this.seriesKey instanceof PublicCloneable) {
-    		PublicCloneable pc = (PublicCloneable) this.seriesKey;
-    		clone.seriesKey = (Comparable) pc.clone();
-    	}
-    	// FIXME: Clone the attributed string if it is not null
-    	clone.shape = ShapeUtilities.clone(this.shape);
-    	if (this.fillPaintTransformer instanceof PublicCloneable) {
-    		PublicCloneable pc = (PublicCloneable) this.fillPaintTransformer;
-    		clone.fillPaintTransformer = (GradientPaintTransformer) pc.clone();
+        LegendItem clone = (LegendItem) super.clone();
+        if (this.seriesKey instanceof PublicCloneable) {
+            PublicCloneable pc = (PublicCloneable) this.seriesKey;
+            clone.seriesKey = (Comparable) pc.clone();
+        }
+        // FIXME: Clone the attributed string if it is not null
+        clone.shape = ShapeUtilities.clone(this.shape);
+        if (this.fillPaintTransformer instanceof PublicCloneable) {
+            PublicCloneable pc = (PublicCloneable) this.fillPaintTransformer;
+            clone.fillPaintTransformer = (GradientPaintTransformer) pc.clone();
 
-    	}
-    	clone.line = ShapeUtilities.clone(this.line);
-    	return clone;
+        }
+        clone.line = ShapeUtilities.clone(this.line);
+        return clone;
     }
 
     /**
