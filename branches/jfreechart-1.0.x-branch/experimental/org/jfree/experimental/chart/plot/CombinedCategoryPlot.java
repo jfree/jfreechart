@@ -121,7 +121,7 @@ public class CombinedCategoryPlot extends CombinedDomainCategoryPlot {
     public void setRangeAxis(ValueAxis axis) {
         Iterator l_itr = getSubplots().iterator();
         while (l_itr.hasNext()) {
-            CategoryPlot l_subplot = (CategoryPlot)l_itr.next();
+            CategoryPlot l_subplot = (CategoryPlot) l_itr.next();
             l_subplot.setRangeAxis(0, axis, false);
         }
 
