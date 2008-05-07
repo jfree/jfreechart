@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
@@ -55,7 +55,7 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 /**
- * A simple demonstration application showing how to create a pie chart using 
+ * A simple demonstration application showing how to create a pie chart using
  * data from a {@link DefaultPieDataset}.
  */
 public class PieChartDemo1 extends ApplicationFrame {
@@ -72,7 +72,7 @@ public class PieChartDemo1 extends ApplicationFrame {
 
     /**
      * Creates a sample dataset.
-     * 
+     *
      * @return A sample dataset.
      */
     private static PieDataset createDataset() {
@@ -83,18 +83,18 @@ public class PieChartDemo1 extends ApplicationFrame {
         dataset.setValue("Four", new Double(17.5));
         dataset.setValue("Five", new Double(11.0));
         dataset.setValue("Six", new Double(19.4));
-        return dataset;        
+        return dataset;
     }
-    
+
     /**
      * Creates a chart.
-     * 
+     *
      * @param dataset  the dataset.
-     * 
+     *
      * @return A chart.
      */
     private static JFreeChart createChart(PieDataset dataset) {
-        
+
         JFreeChart chart = ChartFactory.createPieChart(
             "Pie Chart Demo 1",  // chart title
             dataset,             // data
@@ -108,20 +108,21 @@ public class PieChartDemo1 extends ApplicationFrame {
         plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 10));
         plot.setNoDataMessage("No data available");
         plot.setSimpleLabels(true);
+
         return chart;
-        
+
     }
-    
+
     /**
      * Creates a panel for the demo (used by SuperDemo.java).
-     * 
+     *
      * @return A panel.
      */
     public static JPanel createDemoPanel() {
         JFreeChart chart = createChart(createDataset());
         return new ChartPanel(chart);
     }
-    
+
     /**
      * Starting point for the demonstration application.
      *
@@ -136,7 +137,7 @@ public class PieChartDemo1 extends ApplicationFrame {
         //  >   http://www.object-refinery.com/jfreechart/guide.html
         //
         // ******************************************************************
-        
+
         PieChartDemo1 demo = new PieChartDemo1("Pie Chart Demo 1");
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
