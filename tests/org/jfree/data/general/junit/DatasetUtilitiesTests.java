@@ -162,44 +162,44 @@ public class DatasetUtilitiesTests extends TestCase {
      * an IntervalXYDataset.
      */
     public void testFindRangeBounds3() {
-    	YIntervalSeriesCollection dataset = new YIntervalSeriesCollection();
-    	Range r = DatasetUtilities.findRangeBounds(dataset);
-    	assertNull(r);
+        YIntervalSeriesCollection dataset = new YIntervalSeriesCollection();
+        Range r = DatasetUtilities.findRangeBounds(dataset);
+        assertNull(r);
         YIntervalSeries s1 = new YIntervalSeries("S1");
         dataset.addSeries(s1);
         r = DatasetUtilities.findRangeBounds(dataset);
-    	assertNull(r);
-    	
-    	// try a single item
-    	s1.add(1.0, 2.0, 1.5, 2.5);
-    	r = DatasetUtilities.findRangeBounds(dataset);
-    	assertEquals(1.5, r.getLowerBound(), EPSILON);
-    	assertEquals(2.5, r.getUpperBound(), EPSILON);
-    	
-    	// another item
-    	s1.add(2.0, 2.0, 1.4, 2.1);
-    	r = DatasetUtilities.findRangeBounds(dataset);
-    	assertEquals(1.4, r.getLowerBound(), EPSILON);
-    	assertEquals(2.5, r.getUpperBound(), EPSILON);
-    	
-    	// another empty series
-    	YIntervalSeries s2 = new YIntervalSeries("S2");
-    	dataset.addSeries(s2);
-    	r = DatasetUtilities.findRangeBounds(dataset);
-    	assertEquals(1.4, r.getLowerBound(), EPSILON);
-    	assertEquals(2.5, r.getUpperBound(), EPSILON);
-    	
-    	// an item in series 2
-    	s2.add(1.0, 2.0, 1.9, 2.6);
-    	r = DatasetUtilities.findRangeBounds(dataset);
-    	assertEquals(1.4, r.getLowerBound(), EPSILON);
-    	assertEquals(2.6, r.getUpperBound(), EPSILON);
-    	
-    	// what if we don't want the interval?
-    	r = DatasetUtilities.findRangeBounds(dataset, false);
-    	assertEquals(2.0, r.getLowerBound(), EPSILON);
-    	assertEquals(2.0, r.getUpperBound(), EPSILON);
-    	
+        assertNull(r);
+        
+        // try a single item
+        s1.add(1.0, 2.0, 1.5, 2.5);
+        r = DatasetUtilities.findRangeBounds(dataset);
+        assertEquals(1.5, r.getLowerBound(), EPSILON);
+        assertEquals(2.5, r.getUpperBound(), EPSILON);
+        
+        // another item
+        s1.add(2.0, 2.0, 1.4, 2.1);
+        r = DatasetUtilities.findRangeBounds(dataset);
+        assertEquals(1.4, r.getLowerBound(), EPSILON);
+        assertEquals(2.5, r.getUpperBound(), EPSILON);
+        
+        // another empty series
+        YIntervalSeries s2 = new YIntervalSeries("S2");
+        dataset.addSeries(s2);
+        r = DatasetUtilities.findRangeBounds(dataset);
+        assertEquals(1.4, r.getLowerBound(), EPSILON);
+        assertEquals(2.5, r.getUpperBound(), EPSILON);
+        
+        // an item in series 2
+        s2.add(1.0, 2.0, 1.9, 2.6);
+        r = DatasetUtilities.findRangeBounds(dataset);
+        assertEquals(1.4, r.getLowerBound(), EPSILON);
+        assertEquals(2.6, r.getUpperBound(), EPSILON);
+        
+        // what if we don't want the interval?
+        r = DatasetUtilities.findRangeBounds(dataset, false);
+        assertEquals(2.0, r.getLowerBound(), EPSILON);
+        assertEquals(2.0, r.getUpperBound(), EPSILON);
+        
     }
     
     /**
@@ -216,28 +216,28 @@ public class DatasetUtilitiesTests extends TestCase {
      * Some checks for the iterateRangeBounds() method.
      */
     public void testIterateRangeBounds2_CategoryDataset() {
-    	// an empty dataset should return a null range
-    	DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-    	Range r = DatasetUtilities.iterateRangeBounds(dataset, false);
-    	assertNull(r);
-    	
-    	// a dataset with a single value
-    	dataset.addValue(1.23, "R1", "C1");
-    	r = DatasetUtilities.iterateRangeBounds(dataset, false);
-    	assertEquals(1.23, r.getLowerBound(), EPSILON);
-    	assertEquals(1.23, r.getUpperBound(), EPSILON);
-    	
-    	// null is ignored
-    	dataset.addValue(null, "R2", "C1");
-    	r = DatasetUtilities.iterateRangeBounds(dataset, false);
-    	assertEquals(1.23, r.getLowerBound(), EPSILON);
-    	assertEquals(1.23, r.getUpperBound(), EPSILON);
-    	
-    	// a Double.NaN messes things up
-    	dataset.addValue(Double.NaN, "R2", "C1");
-    	r = DatasetUtilities.iterateRangeBounds(dataset, false);
-    	assertTrue(Double.isNaN(r.getLowerBound()));
-    	assertTrue(Double.isNaN(r.getUpperBound()));
+        // an empty dataset should return a null range
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        Range r = DatasetUtilities.iterateRangeBounds(dataset, false);
+        assertNull(r);
+        
+        // a dataset with a single value
+        dataset.addValue(1.23, "R1", "C1");
+        r = DatasetUtilities.iterateRangeBounds(dataset, false);
+        assertEquals(1.23, r.getLowerBound(), EPSILON);
+        assertEquals(1.23, r.getUpperBound(), EPSILON);
+        
+        // null is ignored
+        dataset.addValue(null, "R2", "C1");
+        r = DatasetUtilities.iterateRangeBounds(dataset, false);
+        assertEquals(1.23, r.getLowerBound(), EPSILON);
+        assertEquals(1.23, r.getUpperBound(), EPSILON);
+        
+        // a Double.NaN messes things up
+        dataset.addValue(Double.NaN, "R2", "C1");
+        r = DatasetUtilities.iterateRangeBounds(dataset, false);
+        assertTrue(Double.isNaN(r.getLowerBound()));
+        assertTrue(Double.isNaN(r.getUpperBound()));
     }
     
     /**
@@ -245,29 +245,29 @@ public class DatasetUtilitiesTests extends TestCase {
      * IntervalCategoryDataset.
      */
     public void testIterateRangeBounds3_CategoryDataset() {
-    	Number[][] starts = new Double[2][3];
-    	Number[][] ends = new Double[2][3];
-    	starts[0][0] = new Double(1.0);
-    	starts[0][1] = new Double(2.0);
-    	starts[0][2] = new Double(3.0);
-    	starts[1][0] = new Double(11.0);
-    	starts[1][1] = new Double(12.0);
-    	starts[1][2] = new Double(13.0);
-    	ends[0][0] = new Double(4.0);
-    	ends[0][1] = new Double(5.0);
-    	ends[0][2] = new Double(6.0);
-    	ends[1][0] = new Double(16.0);
-    	ends[1][1] = new Double(15.0);
-    	ends[1][2] = new Double(14.0);
-    	
-    	DefaultIntervalCategoryDataset d = new DefaultIntervalCategoryDataset(
-    			starts, ends);
-    	Range r = DatasetUtilities.iterateRangeBounds(d, false);
-    	assertEquals(4.0, r.getLowerBound(), EPSILON);
-    	assertEquals(16.0, r.getUpperBound(), EPSILON);
-    	r = DatasetUtilities.iterateRangeBounds(d, true);
-    	assertEquals(1.0, r.getLowerBound(), EPSILON);
-    	assertEquals(16.0, r.getUpperBound(), EPSILON);
+        Number[][] starts = new Double[2][3];
+        Number[][] ends = new Double[2][3];
+        starts[0][0] = new Double(1.0);
+        starts[0][1] = new Double(2.0);
+        starts[0][2] = new Double(3.0);
+        starts[1][0] = new Double(11.0);
+        starts[1][1] = new Double(12.0);
+        starts[1][2] = new Double(13.0);
+        ends[0][0] = new Double(4.0);
+        ends[0][1] = new Double(5.0);
+        ends[0][2] = new Double(6.0);
+        ends[1][0] = new Double(16.0);
+        ends[1][1] = new Double(15.0);
+        ends[1][2] = new Double(14.0);
+        
+        DefaultIntervalCategoryDataset d = new DefaultIntervalCategoryDataset(
+                starts, ends);
+        Range r = DatasetUtilities.iterateRangeBounds(d, false);
+        assertEquals(4.0, r.getLowerBound(), EPSILON);
+        assertEquals(16.0, r.getUpperBound(), EPSILON);
+        r = DatasetUtilities.iterateRangeBounds(d, true);
+        assertEquals(1.0, r.getLowerBound(), EPSILON);
+        assertEquals(16.0, r.getUpperBound(), EPSILON);
 
     }
 
@@ -299,32 +299,32 @@ public class DatasetUtilitiesTests extends TestCase {
      * Some checks for the iterateRangeBounds() method.
      */
     public void testIterateRangeBounds3() {
-    	// an empty dataset should return a null range
+        // an empty dataset should return a null range
         XYSeriesCollection dataset = new XYSeriesCollection();
-    	Range r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertNull(r);
+        Range r = DatasetUtilities.iterateRangeBounds(dataset);
+        assertNull(r);
         XYSeries s1 = new XYSeries("S1");
         dataset.addSeries(s1);
         r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertNull(r);
-    	
-    	// a dataset with a single value
-    	s1.add(1.0, 1.23);
-    	r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertEquals(1.23, r.getLowerBound(), EPSILON);
-    	assertEquals(1.23, r.getUpperBound(), EPSILON);
-    	
-    	// null is ignored
-    	s1.add(2.0, null);
-    	r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertEquals(1.23, r.getLowerBound(), EPSILON);
-    	assertEquals(1.23, r.getUpperBound(), EPSILON);
-    	
-    	// Double.NaN DOESN'T mess things up
-    	s1.add(3.0, Double.NaN);
-    	r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertEquals(1.23, r.getLowerBound(), EPSILON);
-    	assertEquals(1.23, r.getUpperBound(), EPSILON);
+        assertNull(r);
+        
+        // a dataset with a single value
+        s1.add(1.0, 1.23);
+        r = DatasetUtilities.iterateRangeBounds(dataset);
+        assertEquals(1.23, r.getLowerBound(), EPSILON);
+        assertEquals(1.23, r.getUpperBound(), EPSILON);
+        
+        // null is ignored
+        s1.add(2.0, null);
+        r = DatasetUtilities.iterateRangeBounds(dataset);
+        assertEquals(1.23, r.getLowerBound(), EPSILON);
+        assertEquals(1.23, r.getUpperBound(), EPSILON);
+        
+        // Double.NaN DOESN'T mess things up
+        s1.add(3.0, Double.NaN);
+        r = DatasetUtilities.iterateRangeBounds(dataset);
+        assertEquals(1.23, r.getLowerBound(), EPSILON);
+        assertEquals(1.23, r.getUpperBound(), EPSILON);
     }
     
     /**
@@ -332,38 +332,38 @@ public class DatasetUtilitiesTests extends TestCase {
      * {@link IntervalXYDataset} interface.
      */
     public void testIterateRangeBounds4() {
-    	YIntervalSeriesCollection dataset = new YIntervalSeriesCollection();
-    	Range r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertNull(r);
+        YIntervalSeriesCollection dataset = new YIntervalSeriesCollection();
+        Range r = DatasetUtilities.iterateRangeBounds(dataset);
+        assertNull(r);
         YIntervalSeries s1 = new YIntervalSeries("S1");
         dataset.addSeries(s1);
         r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertNull(r);
-    	
-    	// try a single item
-    	s1.add(1.0, 2.0, 1.5, 2.5);
-    	r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertEquals(1.5, r.getLowerBound(), EPSILON);
-    	assertEquals(2.5, r.getUpperBound(), EPSILON);
-    	
-    	// another item
-    	s1.add(2.0, 2.0, 1.4, 2.1);
-    	r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertEquals(1.4, r.getLowerBound(), EPSILON);
-    	assertEquals(2.5, r.getUpperBound(), EPSILON);
-    	
-    	// another empty series
-    	YIntervalSeries s2 = new YIntervalSeries("S2");
-    	dataset.addSeries(s2);
-    	r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertEquals(1.4, r.getLowerBound(), EPSILON);
-    	assertEquals(2.5, r.getUpperBound(), EPSILON);
-    	
-    	// an item in series 2
-    	s2.add(1.0, 2.0, 1.9, 2.6);
-    	r = DatasetUtilities.iterateRangeBounds(dataset);
-    	assertEquals(1.4, r.getLowerBound(), EPSILON);
-    	assertEquals(2.6, r.getUpperBound(), EPSILON);
+        assertNull(r);
+        
+        // try a single item
+        s1.add(1.0, 2.0, 1.5, 2.5);
+        r = DatasetUtilities.iterateRangeBounds(dataset);
+        assertEquals(1.5, r.getLowerBound(), EPSILON);
+        assertEquals(2.5, r.getUpperBound(), EPSILON);
+        
+        // another item
+        s1.add(2.0, 2.0, 1.4, 2.1);
+        r = DatasetUtilities.iterateRangeBounds(dataset);
+        assertEquals(1.4, r.getLowerBound(), EPSILON);
+        assertEquals(2.5, r.getUpperBound(), EPSILON);
+        
+        // another empty series
+        YIntervalSeries s2 = new YIntervalSeries("S2");
+        dataset.addSeries(s2);
+        r = DatasetUtilities.iterateRangeBounds(dataset);
+        assertEquals(1.4, r.getLowerBound(), EPSILON);
+        assertEquals(2.5, r.getUpperBound(), EPSILON);
+        
+        // an item in series 2
+        s2.add(1.0, 2.0, 1.9, 2.6);
+        r = DatasetUtilities.iterateRangeBounds(dataset);
+        assertEquals(1.4, r.getLowerBound(), EPSILON);
+        assertEquals(2.6, r.getUpperBound(), EPSILON);
     }
 
     /**
@@ -658,16 +658,16 @@ public class DatasetUtilitiesTests extends TestCase {
      * Some checks for the sampleFunction2D() method.
      */
     public void testSampleFunction2D() {
-    	Function2D f = new LineFunction2D(0, 1);
-    	XYDataset dataset = DatasetUtilities.sampleFunction2D(f, 0.0, 1.0, 2, 
-    			"S1");
-    	assertEquals(1, dataset.getSeriesCount());
-    	assertEquals("S1", dataset.getSeriesKey(0));
-    	assertEquals(2, dataset.getItemCount(0));
-    	assertEquals(0.0, dataset.getXValue(0, 0), EPSILON);
-    	assertEquals(0.0, dataset.getYValue(0, 0), EPSILON);
-    	assertEquals(1.0, dataset.getXValue(0, 1), EPSILON);
-    	assertEquals(1.0, dataset.getYValue(0, 1), EPSILON);
+        Function2D f = new LineFunction2D(0, 1);
+        XYDataset dataset = DatasetUtilities.sampleFunction2D(f, 0.0, 1.0, 2, 
+                "S1");
+        assertEquals(1, dataset.getSeriesCount());
+        assertEquals("S1", dataset.getSeriesKey(0));
+        assertEquals(2, dataset.getItemCount(0));
+        assertEquals(0.0, dataset.getXValue(0, 0), EPSILON);
+        assertEquals(0.0, dataset.getYValue(0, 0), EPSILON);
+        assertEquals(1.0, dataset.getXValue(0, 1), EPSILON);
+        assertEquals(1.0, dataset.getYValue(0, 1), EPSILON);
     }
     
     /**
