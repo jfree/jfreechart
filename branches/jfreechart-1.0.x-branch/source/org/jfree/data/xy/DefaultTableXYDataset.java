@@ -539,8 +539,8 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
         int seriesCount = this.data.size();
         clone.data = new java.util.ArrayList(seriesCount);
         for (int i = 0; i < seriesCount; i++) {
-        	XYSeries series = (XYSeries) this.data.get(i);
-        	clone.data.add(series.clone());
+            XYSeries series = (XYSeries) this.data.get(i);
+            clone.data.add(series.clone());
         }
 
         clone.intervalDelegate = new IntervalXYDelegate(clone);
