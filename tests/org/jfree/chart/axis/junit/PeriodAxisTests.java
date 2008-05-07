@@ -76,19 +76,19 @@ import org.jfree.data.time.Year;
  */
 public class PeriodAxisTests extends TestCase implements AxisChangeListener {
 
-	/** The last event received. */
-	private AxisChangeEvent lastEvent;
-	
-	/**
-	 * Receives and records an {@link AxisChangeEvent}.
-	 * 
-	 * @param event  the event.
-	 */
+    /** The last event received. */
+    private AxisChangeEvent lastEvent;
+    
+    /**
+     * Receives and records an {@link AxisChangeEvent}.
+     * 
+     * @param event  the event.
+     */
     public void axisChanged(AxisChangeEvent event) {
-        this.lastEvent = event;	
-	}
+        this.lastEvent = event; 
+    }
 
-	/**
+    /**
      * Returns the tests as a test suite.
      *
      * @return The test suite.
@@ -138,7 +138,7 @@ public class PeriodAxisTests extends TestCase implements AxisChangeListener {
         
         PeriodAxisLabelInfo info[] = new PeriodAxisLabelInfo[1];
         info[0] = new PeriodAxisLabelInfo(Month.class, 
-        		new SimpleDateFormat("MMM"));
+                new SimpleDateFormat("MMM"));
         
         a1.setLabelInfo(info);
         assertFalse(a1.equals(a2));
@@ -220,7 +220,7 @@ public class PeriodAxisTests extends TestCase implements AxisChangeListener {
         PeriodAxisLabelInfo[] info = new PeriodAxisLabelInfo[2];
         info[0] = new PeriodAxisLabelInfo(Day.class, new SimpleDateFormat("d"));
         info[1] = new PeriodAxisLabelInfo(Year.class, 
-        		new SimpleDateFormat("yyyy"));
+                new SimpleDateFormat("yyyy"));
         a1.setLabelInfo(info);
         assertFalse(a1.equals(a2));
         a2.setLabelInfo(info);
@@ -266,11 +266,11 @@ public class PeriodAxisTests extends TestCase implements AxisChangeListener {
      * A test for bug 1932146.
      */
     public void test1932146() {
-    	PeriodAxis axis = new PeriodAxis("TestAxis");
-    	axis.addChangeListener(this);
-    	this.lastEvent = null;
-    	axis.setRange(new DateRange(0L, 1000L));
-    	assertTrue(this.lastEvent != null);
+        PeriodAxis axis = new PeriodAxis("TestAxis");
+        axis.addChangeListener(this);
+        this.lastEvent = null;
+        axis.setRange(new DateRange(0L, 1000L));
+        assertTrue(this.lastEvent != null);
     }
 
 }
