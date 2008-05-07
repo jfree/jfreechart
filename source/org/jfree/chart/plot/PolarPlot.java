@@ -412,9 +412,9 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.10
      */
     public void setAngleTickUnit(TickUnit unit) {
-    	if (unit == null) {
-    		throw new IllegalArgumentException("Null 'unit' argument.");
-    	}
+        if (unit == null) {
+            throw new IllegalArgumentException("Null 'unit' argument.");
+        }
         this.angleTickUnit = unit;
         fireChangeEvent();
     }
@@ -1002,7 +1002,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             return false;
         }
         if (!this.angleTickUnit.equals(that.angleTickUnit)) {
-        	return false;
+            return false;
         }
         if (this.angleGridlinesVisible != that.angleGridlinesVisible) {
             return false;

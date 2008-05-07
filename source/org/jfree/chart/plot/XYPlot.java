@@ -2164,7 +2164,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #addRangeMarker(int, Marker, Layer)
      */
     public void addDomainMarker(int index, Marker marker, Layer layer) {
-    	addDomainMarker(index, marker, layer, true);
+        addDomainMarker(index, marker, layer, true);
     }
 
     /**
@@ -2183,7 +2183,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.10
      */
     public void addDomainMarker(int index, Marker marker, Layer layer, 
-    		boolean notify) {
+            boolean notify) {
         if (marker == null) {
             throw new IllegalArgumentException("Null 'marker' not permitted.");
         }
@@ -2260,7 +2260,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.7
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer) {
-    	return removeDomainMarker(index, marker, layer, true);
+        return removeDomainMarker(index, marker, layer, true);
     }
 
     /**
@@ -2278,7 +2278,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.10
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer,
-    		boolean notify) {
+            boolean notify) {
         ArrayList markers;
         if (layer == Layer.FOREGROUND) {
             markers = (ArrayList) this.foregroundDomainMarkers.get(
@@ -2372,7 +2372,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #addDomainMarker(int, Marker, Layer)
      */
     public void addRangeMarker(int index, Marker marker, Layer layer) {
-    	addRangeMarker(index, marker, layer, true);
+        addRangeMarker(index, marker, layer, true);
     }
     
     /**
@@ -2390,7 +2390,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.10
      */
     public void addRangeMarker(int index, Marker marker, Layer layer, 
-    		boolean notify) {
+            boolean notify) {
         Collection markers;
         if (layer == Layer.FOREGROUND) {
             markers = (Collection) this.foregroundRangeMarkers.get(
@@ -2496,7 +2496,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.7
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer) {
-    	return removeRangeMarker(index, marker, layer, true);
+        return removeRangeMarker(index, marker, layer, true);
     }
     
     /**
@@ -2514,7 +2514,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.10
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer,
-    		boolean notify) {
+            boolean notify) {
         if (marker == null) {
             throw new IllegalArgumentException("Null 'marker' argument.");
         }
@@ -2547,7 +2547,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #removeAnnotation(XYAnnotation)
      */
     public void addAnnotation(XYAnnotation annotation) {
-        addAnnotation(annotation, true);	
+        addAnnotation(annotation, true);    
     }
     
     /**
@@ -2581,7 +2581,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #getAnnotations()
      */
     public boolean removeAnnotation(XYAnnotation annotation) {
-    	return removeAnnotation(annotation, true);
+        return removeAnnotation(annotation, true);
     }
 
     /**
