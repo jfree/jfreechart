@@ -316,8 +316,8 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
             String url = getURL();
             if (toolTip != null || url != null) {
                 addEntity(info, new Rectangle2D.Float(xx, yy, 
-                		(float) size.width, (float) size.height), 
-                		rendererIndex, toolTip, url);
+                        (float) size.width, (float) size.height), 
+                        rendererIndex, toolTip, url);
             }
         }
     }
