@@ -101,13 +101,13 @@ public class LogFormat extends NumberFormat {
      * @since 1.0.10
      */
     public LogFormat(double base, String baseLabel, String powerLabel, 
-    		boolean showBase) {
-    	if (baseLabel == null) {
-    		throw new IllegalArgumentException("Null 'baseLabel' argument.");
-    	}
-    	if (powerLabel == null) {
-    		throw new IllegalArgumentException("Null 'powerLabel' argument.");
-    	}
+            boolean showBase) {
+        if (baseLabel == null) {
+            throw new IllegalArgumentException("Null 'baseLabel' argument.");
+        }
+        if (powerLabel == null) {
+            throw new IllegalArgumentException("Null 'powerLabel' argument.");
+        }
         this.base = base;
         this.baseLog = Math.log(this.base);
         this.baseLabel = baseLabel;
@@ -188,26 +188,26 @@ public class LogFormat extends NumberFormat {
      * @return A boolean.
      */
     public boolean equals(Object obj) {
-    	if (obj == this) {
-    		return true;
-    	}
-    	if (!(obj instanceof LogFormat)) {
-    		return false;
-    	}
-    	LogFormat that = (LogFormat) obj;
-    	if (this.base != that.base) {
-    		return false;
-    	}
-    	if (!this.baseLabel.equals(that.baseLabel)) {
-    		return false;
-    	}
-    	if (this.baseLog != that.baseLog) {
-    		return false;
-    	}
-    	if (this.showBase != that.showBase) {
-    		return false;
-    	}
-    	return super.equals(obj);
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof LogFormat)) {
+            return false;
+        }
+        LogFormat that = (LogFormat) obj;
+        if (this.base != that.base) {
+            return false;
+        }
+        if (!this.baseLabel.equals(that.baseLabel)) {
+            return false;
+        }
+        if (this.baseLog != that.baseLog) {
+            return false;
+        }
+        if (this.showBase != that.showBase) {
+            return false;
+        }
+        return super.equals(obj);
     }
     
     /**
