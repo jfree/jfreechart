@@ -189,7 +189,7 @@ public class XYShapeAnnotationTests extends TestCase {
         XYShapeAnnotation a1 = new XYShapeAnnotation(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(1.2f), Color.red, Color.blue);
-    	assertTrue(a1 instanceof PublicCloneable);
+        assertTrue(a1 instanceof PublicCloneable);
     }
 
     /**
