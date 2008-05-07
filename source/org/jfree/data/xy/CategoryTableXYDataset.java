@@ -70,7 +70,7 @@ import org.jfree.util.PublicCloneable;
  */
 public class CategoryTableXYDataset extends AbstractIntervalXYDataset
         implements TableXYDataset, IntervalXYDataset, DomainInfo,
-                   PublicCloneable{
+                   PublicCloneable {
 
     /**
      * The backing data structure.
