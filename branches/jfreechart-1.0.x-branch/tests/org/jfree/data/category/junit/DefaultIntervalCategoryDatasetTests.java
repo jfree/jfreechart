@@ -181,13 +181,13 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
         assertTrue(dB.equals(dA));
         
         // check that two empty datasets are equal
-    	DefaultIntervalCategoryDataset empty1 
+        DefaultIntervalCategoryDataset empty1 
                 = new DefaultIntervalCategoryDataset(new double[0][0], 
-        		        new double[0][0]);
-    	DefaultIntervalCategoryDataset empty2 
+                        new double[0][0]);
+        DefaultIntervalCategoryDataset empty2 
                 = new DefaultIntervalCategoryDataset(new double[0][0], 
-		                new double[0][0]);
-    	assertTrue(empty1.equals(empty2));
+                        new double[0][0]);
+        assertTrue(empty1.equals(empty2));
     }
 
     /**
@@ -257,9 +257,9 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
      * A check to ensure that an empty dataset can be cloned.
      */
     public void testCloning2() {
-    	DefaultIntervalCategoryDataset d1 
+        DefaultIntervalCategoryDataset d1 
                 = new DefaultIntervalCategoryDataset(new double[0][0], 
-        		    new double[0][0]);
+                    new double[0][0]);
         DefaultIntervalCategoryDataset d2 = null;
         try {
             d2 = (DefaultIntervalCategoryDataset) d1.clone();
@@ -269,7 +269,7 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
         }
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));	
+        assertTrue(d1.equals(d2));  
     }
 
     /**
@@ -346,112 +346,112 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
      * Some checks for the getSeriesCount() method.
      */
     public void testGetSeriesCount() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
-    	assertEquals(0, empty.getSeriesCount());
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
+        assertEquals(0, empty.getSeriesCount());
     }
 
     /**
      * Some checks for the getCategoryCount() method.
      */
     public void testGetCategoryCount() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
-    	assertEquals(0, empty.getCategoryCount());
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
+        assertEquals(0, empty.getCategoryCount());
     }
     
     /**
      * Some checks for the getSeriesIndex() method.
      */
     public void testGetSeriesIndex() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
-    	assertEquals(-1, empty.getSeriesIndex("ABC"));
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
+        assertEquals(-1, empty.getSeriesIndex("ABC"));
     }
     
     /**
      * Some checks for the getRowIndex() method.
      */
     public void testGetRowIndex() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
-    	assertEquals(-1, empty.getRowIndex("ABC"));
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
+        assertEquals(-1, empty.getRowIndex("ABC"));
     }
 
     /**
      * Some checks for the setSeriesKeys() method.
      */
     public void testSetSeriesKeys() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
-    	boolean pass = true;
-    	try {
-    		empty.setSeriesKeys(new String[0]);
-    	}
-    	catch (RuntimeException e) {
-    		pass = false;
-    	}
-    	assertTrue(pass);
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
+        boolean pass = true;
+        try {
+            empty.setSeriesKeys(new String[0]);
+        }
+        catch (RuntimeException e) {
+            pass = false;
+        }
+        assertTrue(pass);
     }
     
     /**
      * Some checks for the getCategoryIndex() method.
      */
     public void testGetCategoryIndex() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
-    	assertEquals(-1, empty.getCategoryIndex("ABC"));
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
+        assertEquals(-1, empty.getCategoryIndex("ABC"));
     }
     
     /**
      * Some checks for the getColumnIndex() method.
      */
     public void testGetColumnIndex() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
-    	assertEquals(-1, empty.getColumnIndex("ABC"));
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
+        assertEquals(-1, empty.getColumnIndex("ABC"));
     }
 
     /**
      * Some checks for the setCategoryKeys() method.
      */
     public void testSetCategoryKeys() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
-    	boolean pass = true;
-    	try {
-    		empty.setCategoryKeys(new String[0]);
-    	}
-    	catch (RuntimeException e) {
-    		pass = false;
-    	}
-    	assertTrue(pass);
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
+        boolean pass = true;
+        try {
+            empty.setCategoryKeys(new String[0]);
+        }
+        catch (RuntimeException e) {
+            pass = false;
+        }
+        assertTrue(pass);
     }
 
     /**
      * Some checks for the getColumnKeys() method.
      */
     public void testGetColumnKeys() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
         List keys = empty.getColumnKeys();
         assertEquals(0, keys.size());
     }
@@ -460,10 +460,10 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
      * Some checks for the getRowKeys() method.
      */
     public void testGetRowKeys() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
         List keys = empty.getRowKeys();
         assertEquals(0, keys.size());
     }
@@ -472,10 +472,10 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
      * Some checks for the getColumnCount() method.
      */
     public void testGetColumnCount() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
         assertEquals(0, empty.getColumnCount());
     }
     
@@ -483,10 +483,10 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
      * Some checks for the getRowCount() method.
      */
     public void testGetRowCount() {
-    	// check an empty dataset
-    	DefaultIntervalCategoryDataset empty 
-    	        = new DefaultIntervalCategoryDataset(new double[0][0], 
-    	        		new double[0][0]);
+        // check an empty dataset
+        DefaultIntervalCategoryDataset empty 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+                        new double[0][0]);
         assertEquals(0, empty.getColumnCount());
     }
     
