@@ -191,7 +191,7 @@ public class XYTitleAnnotationTests extends TestCase {
                     new NumberAxis("X"), new NumberAxis("Y"), 
                     new XYLineAndShapeRenderer());
             plot.addAnnotation(new XYTitleAnnotation(5.0, 6.0, 
-            		new TextTitle("Hello World!")));
+                    new TextTitle("Hello World!")));
             JFreeChart chart = new JFreeChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
                     null);
