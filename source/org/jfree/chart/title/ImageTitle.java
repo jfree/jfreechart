@@ -182,7 +182,7 @@ public class ImageTitle extends Title {
      */
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         Size2D s = new Size2D(this.image.getWidth(null),
-        		this.image.getHeight(null));
+                this.image.getHeight(null));
         return new Size2D(calculateTotalWidth(s.getWidth()),
                 calculateTotalHeight(s.getHeight()));
     }
@@ -349,17 +349,17 @@ public class ImageTitle extends Title {
      * @return A boolean.
      */
     public boolean equals(Object obj) {
-    	if (obj == this) {
-    		return true;
-    	}
-    	if (!(obj instanceof ImageTitle)) {
-    		return false;
-    	}
-    	ImageTitle that = (ImageTitle) obj;
-    	if (!ObjectUtilities.equal(this.image, that.image)) {
-    		return false;
-    	}
-    	return super.equals(obj);
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof ImageTitle)) {
+            return false;
+        }
+        ImageTitle that = (ImageTitle) obj;
+        if (!ObjectUtilities.equal(this.image, that.image)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
 }
