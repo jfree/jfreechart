@@ -95,7 +95,7 @@ public class SWTPaintCanvas extends Canvas {
         if (this.myColor != null) {
             this.myColor.dispose();
         }
-        //this.myColor = new Color( getDisplay(), color.getRGB() );
+        //this.myColor = new Color(getDisplay(), color.getRGB());
         this.myColor = color;
     }
 

@@ -195,7 +195,7 @@ class SWTPlotEditor extends Composite {
                 rangeAxis = p.getRangeAxis();
             }
             else if (plot instanceof XYPlot) {
-                XYPlot p = ( XYPlot ) plot;
+                XYPlot p = (XYPlot) plot;
                 rangeAxis = p.getRangeAxis();
             }
             if (rangeAxis != null)

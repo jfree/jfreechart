@@ -111,7 +111,7 @@ public class SWTChartEditor implements ChartEditor {
         item1.setControl(this.titleEditor);
         // build second tab
         TabItem item2 = new TabItem(tab, SWT.NONE);
-        item2.setText(" " + localizationResources.getString( "Plot" ) + " ");
+        item2.setText(" " + localizationResources.getString("Plot") + " ");
         this.plotEditor = new SWTPlotEditor(tab, SWT.NONE, 
                 this.chart.getPlot());
         item2.setControl(this.plotEditor);

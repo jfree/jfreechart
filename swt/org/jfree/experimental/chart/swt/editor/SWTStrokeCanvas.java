@@ -105,7 +105,7 @@ class SWTStrokeCanvas extends Canvas {
      */
     public void setStroke(Stroke stroke) {
         if (stroke instanceof BasicStroke) {
-            this.setData( stroke );
+            setData(stroke);
         }
         else { 
             throw new RuntimeException(

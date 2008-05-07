@@ -527,7 +527,7 @@ public class SWTGraphics2D extends Graphics2D {
     public void rotate(double theta) {
         Transform swtTransform = new Transform(this.gc.getDevice()); 
         this.gc.getTransform(swtTransform);
-        swtTransform.rotate( (float) (theta * 180 / Math.PI));
+        swtTransform.rotate((float) (theta * 180 / Math.PI));
         this.gc.setTransform(swtTransform);
         swtTransform.dispose();
     }
@@ -872,7 +872,7 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void drawString(String text, float x, float y) {
         float fm = this.gc.getFontMetrics().getAscent();
-        this.gc.drawString(text, (int) x, (int) ( y - fm ), true);
+        this.gc.drawString(text, (int) x, (int) (y - fm), true);
     }
 
     /* (non-Javadoc)
