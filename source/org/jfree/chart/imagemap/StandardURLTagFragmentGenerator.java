@@ -54,7 +54,7 @@ public class StandardURLTagFragmentGenerator
     public StandardURLTagFragmentGenerator() {
         super();
     }
-	
+    
     /**
      * Generates a URL string to go in an HTML image map.
      *

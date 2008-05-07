@@ -53,7 +53,7 @@ public class StandardToolTipTagFragmentGenerator
     public StandardToolTipTagFragmentGenerator() {
         super();
     }
-	
+    
     /**
      * Generates a tooltip string to go in an HTML image map.
      *
