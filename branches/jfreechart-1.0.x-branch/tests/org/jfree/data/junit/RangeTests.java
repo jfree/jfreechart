@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------
@@ -90,7 +90,7 @@ public class RangeTests extends TestCase {
             fail("Lower bound cannot be greater than the upper");
         }
         catch (Exception e) {
-        	// ignore
+            // ignore
         }
     }
 
@@ -98,7 +98,7 @@ public class RangeTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         Range r1 = new Range(0.0, 1.0);
         Range r2 = new Range(0.0, 1.0);
         assertEquals(r1, r2);
@@ -111,8 +111,8 @@ public class RangeTests extends TestCase {
         r1 = new Range(0.0, 1.0);
         r2 = new Range(0.0, 2.0);
         assertFalse(r1.equals(r2));
-        
-        assertFalse(r1.equals(new Double(0.0)));        
+
+        assertFalse(r1.equals(new Double(0.0)));
     }
 
     /**
@@ -142,25 +142,25 @@ public class RangeTests extends TestCase {
         assertFalse(r1.contains(2.0));
         assertFalse(r1.contains(Double.POSITIVE_INFINITY));
     }
-    
+
     /**
      * Tests the constrain() method for various values.
      */
     public void testConstrain() {
         Range r1 = new Range(0.0, 1.0);
-        
+
         double d = r1.constrain(0.5);
         assertEquals(0.5, d, 0.0000001);
-        
+
         d = r1.constrain(0.0);
         assertEquals(0.0, d, 0.0000001);
 
         d = r1.constrain(1.0);
         assertEquals(1.0, d, 0.0000001);
-        
+
         d = r1.constrain(-1.0);
         assertEquals(0.0, d, 0.0000001);
-        
+
         d = r1.constrain(2.0);
         assertEquals(1.0, d, 0.0000001);
 
@@ -173,7 +173,7 @@ public class RangeTests extends TestCase {
         d = r1.constrain(Double.NaN);
         assertTrue(Double.isNaN(d));
     }
-    
+
     /**
      * Simple tests for the intersects() method.
      */
@@ -193,7 +193,7 @@ public class RangeTests extends TestCase {
         assertFalse(r1.intersects(1.0, 1.1));
         assertFalse(r1.intersects(1.5, 2.0));
     }
-    
+
     /**
      * A simple test for the expand() method.
      */
@@ -213,13 +213,13 @@ public class RangeTests extends TestCase {
         }
         catch (Exception e) {
         }
-        
+
         // Lower > upper: mid point is used
         r2 = Range.expand(r1, -0.8, -0.5);
         assertEquals(65.0, r2.getLowerBound(), 0.001);
         assertEquals(65.0, r2.getUpperBound(), 0.001);
     }
-    
+
     /**
      * A simple test for the scale() method.
      */
@@ -265,7 +265,7 @@ public class RangeTests extends TestCase {
         catch (Exception e) {
         }
     }
-    
+
     /**
      * A simple test for the scale() method.
      */
@@ -298,7 +298,7 @@ public class RangeTests extends TestCase {
         catch (Exception e) {
         }
     }
-    
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
