@@ -186,7 +186,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      * @return A string.
      */
     public String toString() {
-    	return "TimePeriodValue[" + getPeriod() + "," + getValue() + "]";
+        return "TimePeriodValue[" + getPeriod() + "," + getValue() + "]";
     }
 
 }
