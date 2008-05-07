@@ -143,7 +143,7 @@ public class GroupedStackedBarRendererTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-            		buffer.toByteArray()));
+                    buffer.toByteArray()));
             r2 = (GroupedStackedBarRenderer) in.readObject();
             in.close();
         }
