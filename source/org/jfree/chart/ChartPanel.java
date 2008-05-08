@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -136,6 +136,8 @@
  *               buffer (DG);
  * 25-Oct-2007 : Added default directory attribute (DG);
  * 07-Nov-2007 : Fixed (rare) bug in refreshing off-screen image (DG);
+ * 07-May-2008 : Fixed bug in zooming that triggered zoom for a rectangle
+ *               outside of the data area (DG);
  *
  */
 
@@ -339,7 +341,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * click).  This is a point on the screen, not the chart (which may have
      * been scaled up or down to fit the panel).
      */
-    private Point zoomPoint = null;
+    private Point2D zoomPoint = null;
 
     /** The zoom rectangle (selected by the user with the mouse). */
     private transient Rectangle2D zoomRectangle = null;
@@ -1170,16 +1172,16 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Applies any scaling that is in effect for the chart drawing to the
      * given rectangle.
      *
-     * @param rect  the rectangle.
+     * @param rect  the rectangle (<code>null</code> not permitted).
      *
      * @return A new scaled rectangle.
      */
     public Rectangle2D scale(Rectangle2D rect) {
         Insets insets = getInsets();
         double x = rect.getX() * getScaleX() + insets.left;
-        double y = rect.getY() * this.getScaleY() + insets.top;
-        double w = rect.getWidth() * this.getScaleX();
-        double h = rect.getHeight() * this.getScaleY();
+        double y = rect.getY() * getScaleY() + insets.top;
+        double w = rect.getWidth() * getScaleX();
+        double h = rect.getHeight() * getScaleY();
         return new Rectangle2D.Double(x, y, w, h);
     }
 
@@ -1532,12 +1534,10 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @return A point within the rectangle.
      */
-    private Point getPointInRectangle(int x, int y, Rectangle2D area) {
-        x = (int) Math.max(Math.ceil(area.getMinX()), Math.min(x,
-                Math.floor(area.getMaxX())));
-        y = (int) Math.max(Math.ceil(area.getMinY()), Math.min(y,
-                Math.floor(area.getMaxY())));
-        return new Point(x, y);
+    private Point2D getPointInRectangle(int x, int y, Rectangle2D area) {
+        double xx = Math.max(area.getMinX(), Math.min(x, area.getMaxX()));
+        double yy = Math.max(area.getMinY(), Math.min(y, area.getMaxY()));
+        return new Point2D.Double(xx, yy);
     }
 
     /**
@@ -1635,6 +1635,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     Rectangle2D screenDataArea = getScreenDataArea(
                             (int) this.zoomPoint.getX(),
                             (int) this.zoomPoint.getY());
+                    double maxX = screenDataArea.getMaxX();
+                    double maxY = screenDataArea.getMaxY();
                     // for mouseReleased event, (horizontalZoom || verticalZoom)
                     // will be true, so we can just test for either being false;
                     // otherwise both are true
@@ -1642,8 +1644,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                         x = this.zoomPoint.getX();
                         y = screenDataArea.getMinY();
                         w = Math.min(this.zoomRectangle.getWidth(),
-                                screenDataArea.getMaxX()
-                                - this.zoomPoint.getX());
+                                maxX - this.zoomPoint.getX());
                         h = screenDataArea.getHeight();
                     }
                     else if (!hZoom) {
@@ -1651,18 +1652,15 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                         y = this.zoomPoint.getY();
                         w = screenDataArea.getWidth();
                         h = Math.min(this.zoomRectangle.getHeight(),
-                                screenDataArea.getMaxY()
-                                - this.zoomPoint.getY());
+                                maxY - this.zoomPoint.getY());
                     }
                     else {
                         x = this.zoomPoint.getX();
                         y = this.zoomPoint.getY();
                         w = Math.min(this.zoomRectangle.getWidth(),
-                                screenDataArea.getMaxX()
-                                - this.zoomPoint.getX());
+                                maxX - this.zoomPoint.getX());
                         h = Math.min(this.zoomRectangle.getHeight(),
-                                screenDataArea.getMaxY()
-                                - this.zoomPoint.getY());
+                                maxY - this.zoomPoint.getY());
                     }
                     Rectangle2D zoomArea = new Rectangle2D.Double(x, y, w, h);
                     zoom(zoomArea);
@@ -1924,7 +1922,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (p instanceof Zoomable) {
             Zoomable z = (Zoomable) p;
             // we need to guard against this.zoomPoint being null
-            Point zp = (this.zoomPoint != null ? this.zoomPoint : new Point());
+            Point2D zp = (this.zoomPoint != null
+            		? this.zoomPoint : new Point());
             z.zoomDomainAxes(0.0, this.info.getPlotInfo(), zp);
         }
     }
@@ -1937,7 +1936,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (p instanceof Zoomable) {
             Zoomable z = (Zoomable) p;
             // we need to guard against this.zoomPoint being null
-            Point zp = (this.zoomPoint != null ? this.zoomPoint : new Point());
+            Point2D zp = (this.zoomPoint != null
+            		? this.zoomPoint : new Point());
             z.zoomRangeAxes(0.0, this.info.getPlotInfo(), zp);
         }
     }
