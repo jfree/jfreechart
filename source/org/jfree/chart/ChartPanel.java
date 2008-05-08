@@ -138,6 +138,7 @@
  * 07-Nov-2007 : Fixed (rare) bug in refreshing off-screen image (DG);
  * 07-May-2008 : Fixed bug in zooming that triggered zoom for a rectangle
  *               outside of the data area (DG);
+ * 08-May-2008 : Fixed serialization bug (DG);
  *
  */
 
@@ -166,6 +167,8 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.EventListener;
 import java.util.ResourceBundle;
@@ -272,7 +275,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private JFreeChart chart;
 
     /** Storage for registered (chart) mouse listeners. */
-    private EventListenerList chartMouseListeners;
+    private transient EventListenerList chartMouseListeners;
 
     /** A flag that controls whether or not the off-screen buffer is used. */
     private boolean useBuffer;
@@ -281,7 +284,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private boolean refreshBuffer;
 
     /** A buffer for the rendered chart. */
-    private Image chartBuffer;
+    private transient Image chartBuffer;
 
     /** The height of the chart buffer. */
     private int chartBufferHeight;
@@ -2535,5 +2538,39 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         }
         super.updateUI();
     }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+        throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+
+        // we create a new but empty chartMouseListeners list
+        this.chartMouseListeners = new EventListenerList();
+
+        // register as a listener with sub-components...
+        if (this.chart != null) {
+            this.chart.addChangeListener(this);
+        }
+
+    }
+
 
 }

@@ -1,6 +1,14 @@
 2008-05-08  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartPanel.java
+    (chartMouseListeners): Marked this field transient,
+    (chartBuffer): Likewise,
+    (writeObject): New method, 
+    (readObject): Likewise.    
+
+2008-05-08  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/ChartPanel.java
     (zoomPoint): Changed from Point to Point2D,
     (getPointInRectangle): Changed return type to Point2D, and no longer round
     the coordinates in the returned point,
