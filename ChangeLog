@@ -1,3 +1,8 @@
+2008-05-09  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/category/DefaultCategoryDataset.java:
+    Implemented PublicCloneable.
+
 2008-05-08  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartPanel.java
