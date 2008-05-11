@@ -1,3 +1,8 @@
+2008-05-11  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/block/EmptyBlock.java
+    (arrange): Use constraint.
+
 2008-05-09  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/category/DefaultCategoryDataset.java:
