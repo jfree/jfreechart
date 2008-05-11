@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
@@ -69,7 +69,7 @@ import org.jfree.ui.Size2D;
 public class BorderArrangementTests extends TestCase {
 
     private static final double EPSILON = 0.0000000001;
-    
+
     /**
      * Returns the tests as a test suite.
      *
@@ -87,7 +87,7 @@ public class BorderArrangementTests extends TestCase {
     public BorderArrangementTests(String name) {
         super(name);
     }
-    
+
     /**
      * Confirm that the equals() method can distinguish all the required fields.
      */
@@ -153,22 +153,22 @@ public class BorderArrangementTests extends TestCase {
         }
         assertEquals(b1, b2);
     }
-    
+
     /**
      * Run some checks on sizing.
      */
     public void testSizing() {
         BlockContainer container = new BlockContainer(new BorderArrangement());
-        BufferedImage image = new BufferedImage(200, 100, 
+        BufferedImage image = new BufferedImage(200, 100,
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
-        
+
         // TBLRC
         // 00000 - no items
         Size2D size = container.arrange(g2);
         assertEquals(0.0, size.width, EPSILON);
         assertEquals(0.0, size.height, EPSILON);
-        
+
         // TBLRC
         // 00001 - center item only
         container.add(new EmptyBlock(123.4, 567.8));
@@ -183,7 +183,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 00011 - right and center items
         container.clear();
@@ -192,7 +192,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(22.3, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // try case where right item is shorter than center item
         container.clear();
         Block rb = new EmptyBlock(12.3, 15.6);
@@ -210,7 +210,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 00101 - left and center items
         container.clear();
@@ -219,7 +219,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(22.3, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // try case where left item is shorter than center item
         container.clear();
         Block lb = new EmptyBlock(12.3, 15.6);
@@ -229,7 +229,7 @@ public class BorderArrangementTests extends TestCase {
         assertEquals(22.3, size.width, EPSILON);
         assertEquals(20.0, size.height, EPSILON);
         assertEquals(20.0, lb.getBounds().getHeight(), EPSILON);
-        
+
         // TBLRC
         // 00110 - left and right items
         container.clear();
@@ -238,7 +238,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(22.3, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 00111 - left, right and center items
         container.clear();
@@ -248,7 +248,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(27.7, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01000 - bottom item only
         container.clear();
@@ -256,7 +256,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01001 - bottom and center only
         container.clear();
@@ -265,7 +265,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01010 - bottom and right only
         container.clear();
@@ -274,7 +274,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01011 - bottom, right and center
         container.clear();
@@ -284,7 +284,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(31.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01100
         container.clear();
@@ -293,7 +293,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01101 - bottom, left and center
         container.clear();
@@ -303,7 +303,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(31.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01110 - bottom. left and right
         container.clear();
@@ -313,7 +313,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(31.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01111
         container.clear();
@@ -324,7 +324,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(21.0, size.width, EPSILON);
         assertEquals(14.0, size.height, EPSILON);
-        
+
         // TBLRC
         // 10000 - top item only
         container.clear();
@@ -332,7 +332,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 10001 - top and center only
         container.clear();
@@ -341,7 +341,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-                
+
         // TBLRC
         // 10010 - right and top only
         container.clear();
@@ -350,7 +350,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 10011 - top, right and center
         container.clear();
@@ -369,7 +369,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 10101 - top, left and center
         container.clear();
@@ -379,7 +379,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(33.3, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 10110 - top, left and right
         container.clear();
@@ -389,7 +389,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(33.3, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 10111
         container.clear();
@@ -409,7 +409,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.3, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 11001
         container.clear();
@@ -419,7 +419,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(21.0, size.width, EPSILON);
         assertEquals(77.9, size.height, EPSILON);
-        
+
         // TBLRC
         // 11010 - top, bottom and right
         container.clear();
@@ -429,7 +429,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(21.0, size.width, EPSILON);
         assertEquals(77.9, size.height, EPSILON);
-                
+
         // TBLRC
         // 11011
         container.clear();
@@ -440,7 +440,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(16.0, size.width, EPSILON);
         assertEquals(16.0, size.height, EPSILON);
-        
+
         // TBLRC
         // 11100
         container.clear();
@@ -461,7 +461,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(14.0, size.width, EPSILON);
         assertEquals(16.0, size.height, EPSILON);
-        
+
         // TBLRC
         // 11110
         container.clear();
@@ -472,7 +472,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2);
         assertEquals(12.0, size.width, EPSILON);
         assertEquals(14.0, size.height, EPSILON);
-        
+
         // TBLRC
         // 11111 - all
         container.clear();
@@ -486,7 +486,7 @@ public class BorderArrangementTests extends TestCase {
         assertEquals(16.0, size.height, EPSILON);
 
     }
-    
+
     /**
      * Run some checks on sizing when there is a fixed width constraint.
      */
@@ -494,19 +494,19 @@ public class BorderArrangementTests extends TestCase {
         RectangleConstraint constraint = new RectangleConstraint(
                 10.0, new Range(10.0, 10.0), LengthConstraintType.FIXED,
                 0.0, new Range(0.0, 0.0), LengthConstraintType.NONE);
-                
+
         BlockContainer container = new BlockContainer(new BorderArrangement());
-        BufferedImage image = new BufferedImage(200, 100, 
+        BufferedImage image = new BufferedImage(200, 100,
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
-        
+
         // TBLRC
         // 00001 - center item only
         container.add(new EmptyBlock(5.0, 6.0));
         Size2D size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(6.0, size.height, EPSILON);
-        
+
         container.clear();
         container.add(new EmptyBlock(15.0, 16.0));
         size = container.arrange(g2, constraint);
@@ -520,7 +520,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 00011 - right and center items
         container.clear();
@@ -529,7 +529,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 00100 - left item only
         container.clear();
@@ -537,7 +537,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 00101 - left and center items
         container.clear();
@@ -546,7 +546,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 00110 - left and right items
         container.clear();
@@ -555,7 +555,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 00111 - left, right and center items
         container.clear();
@@ -565,7 +565,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01000 - bottom item only
         container.clear();
@@ -573,7 +573,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01001 - bottom and center only
         container.clear();
@@ -582,7 +582,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01010 - bottom and right only
         container.clear();
@@ -591,7 +591,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01011 - bottom, right and center
         container.clear();
@@ -601,7 +601,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01100
         container.clear();
@@ -610,7 +610,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01101 - bottom, left and center
         container.clear();
@@ -620,7 +620,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01110 - bottom. left and right
         container.clear();
@@ -630,7 +630,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 01111
         container.clear();
@@ -641,7 +641,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(14.0, size.height, EPSILON);
-        
+
         // TBLRC
         // 10000 - top item only
         container.clear();
@@ -649,7 +649,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(45.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 10001 - top and center only
         container.clear();
@@ -658,7 +658,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-                
+
         // TBLRC
         // 10010 - right and top only
         container.clear();
@@ -667,7 +667,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 10011 - top, right and center
         container.clear();
@@ -686,7 +686,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 10101 - top, left and center
         container.clear();
@@ -696,7 +696,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 10110 - top, left and right
         container.clear();
@@ -706,7 +706,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 10111
         container.clear();
@@ -726,7 +726,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(65.6, size.height, EPSILON);
-        
+
         // TBLRC
         // 11001
         container.clear();
@@ -736,7 +736,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(77.9, size.height, EPSILON);
-        
+
         // TBLRC
         // 11010 - top, bottom and right
         container.clear();
@@ -746,7 +746,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(77.9, size.height, EPSILON);
-                
+
         // TBLRC
         // 11011
         container.clear();
@@ -757,7 +757,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(16.0, size.height, EPSILON);
-        
+
         // TBLRC
         // 11100
         container.clear();
@@ -778,7 +778,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(16.0, size.height, EPSILON);
-        
+
         // TBLRC
         // 11110
         container.clear();
@@ -789,7 +789,7 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(14.0, size.height, EPSILON);
-        
+
         // TBLRC
         // 11111 - all
         container.clear();
@@ -808,7 +808,39 @@ public class BorderArrangementTests extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(10.0, size.width, EPSILON);
         assertEquals(0.0, size.height, EPSILON);
-        
+
+    }
+
+    /**
+     * This test is for a particular bug that arose just prior to the release
+     * of JFreeChart 1.0.10.  A BorderArrangement with LEFT, CENTRE and RIGHT
+     * blocks that is too wide, by default, for the available space, wasn't
+     * shrinking the centre block as expected.
+     */
+    public void testBugX() {
+        RectangleConstraint constraint = new RectangleConstraint(
+        		new Range(0.0, 200.0), new Range(0.0, 100.0));
+        BlockContainer container = new BlockContainer(new BorderArrangement());
+        BufferedImage image = new BufferedImage(200, 100,
+                BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+
+        container.add(new EmptyBlock(10.0, 6.0), RectangleEdge.LEFT);
+        container.add(new EmptyBlock(20.0, 6.0), RectangleEdge.RIGHT);
+        container.add(new EmptyBlock(30.0, 6.0));
+        Size2D size = container.arrange(g2, constraint);
+        assertEquals(60.0, size.width, EPSILON);
+        assertEquals(6.0, size.height, EPSILON);
+
+        container.clear();
+        container.add(new EmptyBlock(10.0, 6.0), RectangleEdge.LEFT);
+        container.add(new EmptyBlock(20.0, 6.0), RectangleEdge.RIGHT);
+        container.add(new EmptyBlock(300.0, 6.0));
+        size = container.arrange(g2, constraint);
+        assertEquals(200.0, size.width, EPSILON);
+        assertEquals(6.0, size.height, EPSILON);
+
+
     }
 }
 
