@@ -376,9 +376,6 @@ public class BorderArrangement implements Arrangement, Serializable {
         if (this.centerBlock != null) {
             RectangleConstraint c5 = new RectangleConstraint(widthRange3,
                     heightRange3);
-            // TODO:  the width and height ranges should be reduced by the
-            // height required for the top and bottom, and the width required
-            // by the left and right
             Size2D size = this.centerBlock.arrange(g2, c5);
             w[4] = size.width;
             h[4] = size.height;
