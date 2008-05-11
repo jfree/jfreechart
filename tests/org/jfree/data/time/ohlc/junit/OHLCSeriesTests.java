@@ -64,11 +64,11 @@ import org.jfree.data.time.ohlc.OHLCSeries;
 public class OHLCSeriesTests extends TestCase    
         implements SeriesChangeListener {
 
-	SeriesChangeEvent lastEvent;
-	
+    SeriesChangeEvent lastEvent;
+    
     public void seriesChanged(SeriesChangeEvent event) {
         this.lastEvent = event;
-	}
+    }
 
     /**
      * Returns the tests as a test suite.
@@ -244,7 +244,7 @@ public class OHLCSeriesTests extends TestCase
      * Some checks for the clear() method.
      */
     public void testClear() {
-    	OHLCSeries s1 = new OHLCSeries("S1");
+        OHLCSeries s1 = new OHLCSeries("S1");
         s1.addChangeListener(this);
         s1.clear();
         assertNull(this.lastEvent);
