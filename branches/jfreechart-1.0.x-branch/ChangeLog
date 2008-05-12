@@ -1,5 +1,14 @@
 2008-05-12  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/category/SlidingCategoryDataset.java: New class,
+    * source/org/jfree/data/gantt/SlidingGanttCategoryDatsaet.java: Likewise,
+    * tests/org/jfree/data/category/SlidingCategoryDatasetTests.java: 
+    New tests,
+    * tests/org/jfree/data/gantt/SlidingGanttCategoryDatasetTests.java: 
+    Likewise.
+
+2008-05-12  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/gantt/TaskSeries.java
     (clone): New method override,
     * source/org/jfree/data/gantt/TaskSeriesCollection.java
