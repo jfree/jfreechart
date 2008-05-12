@@ -2496,7 +2496,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
 
     /**
      * Sets the flag indicating whether or not the range crosshair should
-     * "lock-on" to actual data values.
+     * "lock-on" to actual data values, and sends a {@link PlotChangeEvent}
+     * to all registered listeners.
      *
      * @param flag  the flag.
      *
@@ -2521,10 +2522,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the domain crosshair value.
-     * <P>
-     * Registered listeners are notified that the plot has been modified, but
-     * only if the crosshair is visible.
+     * Sets the range crosshair value and, if the crosshair is visible, sends
+     * a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param value  the new value.
      *
@@ -2617,6 +2616,9 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * Returns the list of annotations.
      *
      * @return The list of annotations (never <code>null</code>).
+     *
+     * @see #addAnnotation(CategoryAnnotation)
+     * @see #clearAnnotations()
      */
     public List getAnnotations() {
         return this.annotations;
