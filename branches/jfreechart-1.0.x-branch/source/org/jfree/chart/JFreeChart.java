@@ -1434,16 +1434,16 @@ public class JFreeChart implements Drawable,
     }
 
     /**
-     * Handles a 'click' on the chart.
-     * <P>
-     * JFreeChart is not a UI component, so some other object (e.g. ChartPanel)
-     * needs to capture the click event and pass it onto the JFreeChart object.
+     * Handles a 'click' on the chart.  JFreeChart is not a UI component, so
+     * some other object (for example, {@link ChartPanel}) needs to capture
+     * the click event and pass it onto the JFreeChart object.
      * If you are not using JFreeChart in a client application, then this
-     * method is not required (and hopefully it doesn't get in the way).
+     * method is not required.
      *
      * @param x  x-coordinate of the click (in Java2D space).
      * @param y  y-coordinate of the click (in Java2D space).
-     * @param info  contains chart dimension and entity information.
+     * @param info  contains chart dimension and entity information
+     *              (<code>null</code> not permitted).
      */
     public void handleClick(int x, int y, ChartRenderingInfo info) {
 
