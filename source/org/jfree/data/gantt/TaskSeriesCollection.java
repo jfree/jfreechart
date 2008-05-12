@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * TaskSeriesCollection.java
  * -------------------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Thomas Schuster;
@@ -36,14 +36,15 @@
  * -------
  * 06-Jun-2002 : Version 1 (DG);
  * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and 
+ * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and
  *               CategoryToolTipGenerator interface (DG);
  * 10-Jan-2003 : Renamed GanttSeriesCollection --> TaskSeriesCollection (DG);
  * 04-Sep-2003 : Fixed bug 800324 (DG);
  * 16-Sep-2003 : Implemented GanttCategoryDataset (DG);
  * 12-Jan-2005 : Fixed bug 1099331 (DG);
- * 18-Jan-2006 : Added new methods getSeries(int) and 
+ * 18-Jan-2006 : Added new methods getSeries(int) and
  *               getSeries(Comparable) (DG);
+ * 09-May-2008 : Fixed cloning bug (DG);
  *
  */
 
@@ -60,20 +61,19 @@ import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
- * A collection of {@link TaskSeries} objects.  This class provides one 
+ * A collection of {@link TaskSeries} objects.  This class provides one
  * implementation of the {@link GanttCategoryDataset} interface.
  */
 public class TaskSeriesCollection extends AbstractSeriesDataset
-                                  implements GanttCategoryDataset,
-                                             Cloneable, PublicCloneable, 
-                                             Serializable {
+        implements GanttCategoryDataset, Cloneable, PublicCloneable,
+                   Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -2065799050738449903L;
 
-    /** 
-     * Storage for aggregate task keys (the task description is used as the 
-     * key). 
+    /**
+     * Storage for aggregate task keys (the task description is used as the
+     * key).
      */
     private List keys;
 
@@ -87,14 +87,14 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
         this.keys = new java.util.ArrayList();
         this.data = new java.util.ArrayList();
     }
-    
+
     /**
      * Returns a series from the collection.
      *
      * @param key  the series key (<code>null</code> not permitted).
      *
      * @return The series.
-     * 
+     *
      * @since 1.0.1
      */
     public TaskSeries getSeries(Comparable key) {
@@ -115,7 +115,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param series  the series index (zero-based).
      *
      * @return The series.
-     * 
+     *
      * @since 1.0.1
      */
     public TaskSeries getSeries(int series) {
@@ -124,7 +124,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
         }
         return (TaskSeries) this.data.get(series);
     }
-    
+
     /**
      * Returns the number of series in the collection.
      *
@@ -240,8 +240,8 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
     }
 
     /**
-     * Adds a series to the dataset and sends a 
-     * {@link org.jfree.data.general.DatasetChangeEvent} to all registered 
+     * Adds a series to the dataset and sends a
+     * {@link org.jfree.data.general.DatasetChangeEvent} to all registered
      * listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
@@ -267,7 +267,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
     }
 
     /**
-     * Removes a series from the collection and sends 
+     * Removes a series from the collection and sends
      * a {@link org.jfree.data.general.DatasetChangeEvent}
      * to all registered listeners.
      *
@@ -285,7 +285,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
     }
 
     /**
-     * Removes a series from the collection and sends 
+     * Removes a series from the collection and sends
      * a {@link org.jfree.data.general.DatasetChangeEvent}
      * to all registered listeners.
      *
@@ -306,13 +306,13 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
     }
 
     /**
-     * Removes all the series from the collection and sends 
+     * Removes all the series from the collection and sends
      * a {@link org.jfree.data.general.DatasetChangeEvent}
      * to all registered listeners.
      */
     public void removeAll() {
 
-        // deregister the collection as a change listener to each series in 
+        // deregister the collection as a change listener to each series in
         // the collection.
         Iterator iterator = this.data.iterator();
         while (iterator.hasNext()) {
@@ -514,7 +514,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      *
      * @return The start value (possibly <code>null</code>).
      */
-    public Number getStartValue(Comparable rowKey, Comparable columnKey, 
+    public Number getStartValue(Comparable rowKey, Comparable columnKey,
                                 int subinterval) {
         Number result = null;
         int row = getRowIndex(rowKey);
@@ -554,7 +554,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      *
      * @return The end value (possibly <code>null</code>).
      */
-    public Number getEndValue(Comparable rowKey, Comparable columnKey, 
+    public Number getEndValue(Comparable rowKey, Comparable columnKey,
                               int subinterval) {
         Number result = null;
         int row = getRowIndex(rowKey);
@@ -592,9 +592,9 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param columnKey  the column key.
      * @param subinterval  the sub-interval.
      *
-     * @return The precent complete value (possibly <code>null</code>).
+     * @return The percent complete value (possibly <code>null</code>).
      */
-    public Number getPercentComplete(Comparable rowKey, Comparable columnKey, 
+    public Number getPercentComplete(Comparable rowKey, Comparable columnKey,
                                      int subinterval) {
         Number result = null;
         int row = getRowIndex(rowKey);
@@ -640,12 +640,12 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
         }
 
     }
-    
+
     /**
      * Tests this instance for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -660,6 +660,21 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns an independent copy of this dataset.
+     *
+     * @return A clone of the dataset.
+     *
+     * @throws CloneNotSupportedException if there is some problem cloning
+     *     the dataset.
+     */
+    public Object clone() throws CloneNotSupportedException {
+    	TaskSeriesCollection clone = (TaskSeriesCollection) super.clone();
+    	clone.data = (List) ObjectUtilities.deepClone(this.data);
+    	clone.keys = new java.util.ArrayList(this.keys);
+    	return clone;
     }
 
 }
