@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------
  * TaskSeries.java
  * ---------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  * 24-Oct-2002 : Added methods to get TimeAllocation by task index (DG);
  * 10-Jan-2003 : Renamed GanttSeries --> TaskSeries (DG);
  * 30-Jul-2004 : Added equals() method (DG);
+ * 09-May-2008 : Fixed cloning bug (DG);
  *
  */
 
@@ -48,6 +49,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jfree.data.general.Series;
+import org.jfree.util.ObjectUtilities;
 
 /**
  * A series that contains zero, one or many {@link Task} objects.
@@ -71,8 +73,8 @@ public class TaskSeries extends Series {
     }
 
     /**
-     * Adds a task to the series and sends a 
-     * {@link org.jfree.data.general.SeriesChangeEvent} to all registered 
+     * Adds a task to the series and sends a
+     * {@link org.jfree.data.general.SeriesChangeEvent} to all registered
      * listeners.
      *
      * @param task  the task (<code>null</code> not permitted).
@@ -86,8 +88,8 @@ public class TaskSeries extends Series {
     }
 
     /**
-     * Removes a task from the series and sends 
-     * a {@link org.jfree.data.general.SeriesChangeEvent} 
+     * Removes a task from the series and sends
+     * a {@link org.jfree.data.general.SeriesChangeEvent}
      * to all registered listeners.
      *
      * @param task  the task.
@@ -98,8 +100,8 @@ public class TaskSeries extends Series {
     }
 
     /**
-     * Removes all tasks from the series and sends 
-     * a {@link org.jfree.data.general.SeriesChangeEvent} 
+     * Removes all tasks from the series and sends
+     * a {@link org.jfree.data.general.SeriesChangeEvent}
      * to all registered listeners.
      */
     public void removeAll() {
@@ -126,12 +128,12 @@ public class TaskSeries extends Series {
     public Task get(int index) {
         return (Task) this.tasks.get(index);
     }
-    
+
     /**
      * Returns the task in the series that has the specified description.
-     * 
+     *
      * @param description  the name (<code>null</code> not permitted).
-     * 
+     *
      * @return The task (possibly <code>null</code>).
      */
     public Task get(String description) {
@@ -158,9 +160,9 @@ public class TaskSeries extends Series {
 
     /**
      * Tests this object for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object to test against (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -179,5 +181,19 @@ public class TaskSeries extends Series {
         }
         return true;
     }
-    
+
+    /**
+     * Returns an independent copy of this series.
+     *
+     * @return A clone of the series.
+     *
+     * @throws CloneNotSupportedException if there is some problem cloning
+     *     the dataset.
+     */
+    public Object clone() throws CloneNotSupportedException {
+    	TaskSeries clone = (TaskSeries) super.clone();
+    	clone.tasks = (List) ObjectUtilities.deepClone(this.tasks);
+    	return clone;
+    }
+
 }
