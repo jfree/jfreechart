@@ -1692,7 +1692,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /**
      * Receives notification of mouse clicks on the panel. These are
-     * translated and passed on to any registered chart mouse click listeners.
+     * translated and passed on to any registered {@link ChartMouseListener}s.
      *
      * @param event  Information about the mouse event.
      */
