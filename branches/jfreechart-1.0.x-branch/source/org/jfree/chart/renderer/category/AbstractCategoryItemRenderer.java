@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * AbstractCategoryItemRenderer.java
  * ---------------------------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -87,7 +87,7 @@
  *               method (DG);
  * 07-Dec-2006 : Fix for equals() method (DG);
  * 22-Feb-2007 : Added createState() method (DG);
- * 01-Mar-2007 : Fixed interval marker drawing (patch 1670686 thanks to 
+ * 01-Mar-2007 : Fixed interval marker drawing (patch 1670686 thanks to
  *               Sergei Ivanov) (DG);
  * 20-Apr-2007 : Updated getLegendItem() for renderer change, and deprecated
  *               itemLabelGenerator, toolTipGenerator and itemURLGenerator
@@ -152,7 +152,8 @@ import org.jfree.util.PublicCloneable;
  * but it makes the job easier.
  */
 public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
-    implements CategoryItemRenderer, Cloneable, PublicCloneable, Serializable {
+        implements CategoryItemRenderer, Cloneable, PublicCloneable,
+        Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 1247553218442497391L;
@@ -160,9 +161,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     /** The plot that the renderer is assigned to. */
     private CategoryPlot plot;
 
-    /** 
-     * The item label generator for ALL series. 
-     * 
+    /**
+     * The item label generator for ALL series.
+     *
      * @deprecated This field is redundant and deprecated as of version 1.0.6.
      */
     private CategoryItemLabelGenerator itemLabelGenerator;
@@ -173,9 +174,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     /** The base item label generator. */
     private CategoryItemLabelGenerator baseItemLabelGenerator;
 
-    /** 
-     * The tool tip generator for ALL series. 
-     * 
+    /**
+     * The tool tip generator for ALL series.
+     *
      * @deprecated This field is redundant and deprecated as of version 1.0.6.
      */
     private CategoryToolTipGenerator toolTipGenerator;
@@ -186,9 +187,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     /** The base tool tip generator. */
     private CategoryToolTipGenerator baseToolTipGenerator;
 
-    /** 
-     * The URL generator. 
-     * 
+    /**
+     * The URL generator.
+     *
      * @deprecated This field is redundant and deprecated as of version 1.0.6.
      */
     private CategoryURLGenerator itemURLGenerator;
@@ -321,10 +322,10 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param generator  the generator (<code>null</code> permitted).
-     * 
-     * @deprecated This method should no longer be used (as of version 1.0.6). 
-     *     It is sufficient to rely on {@link #setSeriesItemLabelGenerator(int, 
-     *     CategoryItemLabelGenerator)} and 
+     *
+     * @deprecated This method should no longer be used (as of version 1.0.6).
+     *     It is sufficient to rely on {@link #setSeriesItemLabelGenerator(int,
+     *     CategoryItemLabelGenerator)} and
      *     {@link #setBaseItemLabelGenerator(CategoryItemLabelGenerator)}.
      */
     public void setItemLabelGenerator(CategoryItemLabelGenerator generator) {
@@ -408,9 +409,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @return A tool tip generator (possibly <code>null</code>).
      *
      * @see #setToolTipGenerator(CategoryToolTipGenerator)
-     * 
-     * @deprecated This method should no longer be used (as of version 1.0.6). 
-     *     It is sufficient to rely on {@link #getSeriesToolTipGenerator(int)} 
+     *
+     * @deprecated This method should no longer be used (as of version 1.0.6).
+     *     It is sufficient to rely on {@link #getSeriesToolTipGenerator(int)}
      *     and {@link #getBaseToolTipGenerator()}.
      */
     public CategoryToolTipGenerator getToolTipGenerator() {
@@ -425,10 +426,10 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param generator  the generator (<code>null</code> permitted).
      *
      * @see #getToolTipGenerator()
-     * 
-     * @deprecated This method should no longer be used (as of version 1.0.6). 
-     *     It is sufficient to rely on {@link #setSeriesToolTipGenerator(int, 
-     *     CategoryToolTipGenerator)} and 
+     *
+     * @deprecated This method should no longer be used (as of version 1.0.6).
+     *     It is sufficient to rely on {@link #setSeriesToolTipGenerator(int,
+     *     CategoryToolTipGenerator)} and
      *     {@link #setBaseToolTipGenerator(CategoryToolTipGenerator)}.
      */
     public void setToolTipGenerator(CategoryToolTipGenerator generator) {
@@ -451,7 +452,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the tool tip generator for a series and sends a 
+     * Sets the tool tip generator for a series and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
@@ -536,10 +537,10 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param generator  the generator.
-     * 
-     * @deprecated This method should no longer be used (as of version 1.0.6). 
-     *     It is sufficient to rely on {@link #setSeriesItemURLGenerator(int, 
-     *     CategoryURLGenerator)} and 
+     *
+     * @deprecated This method should no longer be used (as of version 1.0.6).
+     *     It is sufficient to rely on {@link #setSeriesItemURLGenerator(int,
+     *     CategoryURLGenerator)} and
      *     {@link #setBaseItemURLGenerator(CategoryURLGenerator)}.
      */
     public void setItemURLGenerator(CategoryURLGenerator generator) {
@@ -672,7 +673,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
 
     /**
      * Draws a background for the data area.  The default implementation just
-     * gets the plot to draw the background, but some renderers will override 
+     * gets the plot to draw the background, but some renderers will override
      * this behaviour.
      *
      * @param g2  the graphics device.
@@ -1130,7 +1131,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
 
     /**
      * Returns a legend item for a series.  This default implementation will
-     * return <code>null</code> if {@link #isSeriesVisible(int)} or 
+     * return <code>null</code> if {@link #isSeriesVisible(int)} or
      * {@link #isSeriesVisibleInLegend(int)} returns <code>false</code>.
      *
      * @param datasetIndex  the dataset index (zero-based).
