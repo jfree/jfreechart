@@ -3305,11 +3305,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      *
      * @return A flag that indicates whether any data was actually rendered.
      */
-    public boolean render(Graphics2D g2,
-                          Rectangle2D dataArea,
-                          int index,
-                          PlotRenderingInfo info,
-                          CrosshairState crosshairState) {
+    public boolean render(Graphics2D g2, Rectangle2D dataArea, int index,
+            PlotRenderingInfo info, CrosshairState crosshairState) {
 
         boolean foundData = false;
         XYDataset dataset = getDataset(index);
