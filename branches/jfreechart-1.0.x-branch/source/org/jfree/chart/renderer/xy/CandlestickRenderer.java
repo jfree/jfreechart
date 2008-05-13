@@ -79,6 +79,7 @@
  * 05-Mar-2007 : Added flag to allow optional use of outline paint (DG);
  * 08-Oct-2007 : Added new volumePaint field (DG);
  * 08-Apr-2008 : Added findRangeBounds() method override (DG);
+ * 13-May-2008 : Fixed chart entity bugs (1962467 and 1962472) (DG);
  *
  */
 
@@ -89,7 +90,6 @@ import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.Paint;
-import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -100,7 +100,6 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.HighLowItemLabelGenerator;
 import org.jfree.chart.labels.XYToolTipGenerator;
@@ -126,10 +125,7 @@ import org.jfree.util.PublicCloneable;
  * plot.
  */
 public class CandlestickRenderer extends AbstractXYItemRenderer
-                                 implements XYItemRenderer,
-                                            Cloneable,
-                                            PublicCloneable,
-                                            Serializable {
+        implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 50390395841817121L;
@@ -781,9 +777,8 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
             g2.setPaint(getVolumePaint());
             Composite originalComposite = g2.getComposite();
-            g2.setComposite(
-                AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f)
-            );
+            g2.setComposite(AlphaComposite.getInstance(
+            		AlphaComposite.SRC_OVER, 0.3f));
 
             if (horiz) {
                 g2.fill(new Rectangle2D.Double(min, xx - volumeWidth / 2,
@@ -830,14 +825,21 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         }
 
         // draw the body
-        Shape body = null;
+        Rectangle2D body = null;
+        Rectangle2D hotspot = null;
+        double length = Math.abs(yyHigh - yyLow);
+        double base = Math.min(yyHigh, yyLow);
         if (horiz) {
             body = new Rectangle2D.Double(yyMinOpenClose, xx - stickWidth / 2,
                     yyMaxOpenClose - yyMinOpenClose, stickWidth);
+            hotspot = new Rectangle2D.Double(base, xx - stickWidth / 2,
+            		length, stickWidth);
         }
         else {
             body = new Rectangle2D.Double(xx - stickWidth / 2, yyMinOpenClose,
                     stickWidth, yyMaxOpenClose - yyMinOpenClose);
+            hotspot = new Rectangle2D.Double(xx - stickWidth / 2,
+            		base, stickWidth, length);
         }
         if (yClose > yOpen) {
             if (this.upPaint != null) {
@@ -867,18 +869,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item...
         if (entities != null) {
-            String tip = null;
-            XYToolTipGenerator generator = getToolTipGenerator(series, item);
-            if (generator != null) {
-                tip = generator.generateToolTip(dataset, series, item);
-            }
-            String url = null;
-            if (getURLGenerator() != null) {
-                url = getURLGenerator().generateURL(dataset, series, item);
-            }
-            XYItemEntity entity = new XYItemEntity(body, dataset, series, item,
-                    tip, url);
-            entities.add(entity);
+            addEntity(entities, hotspot, dataset, series, item, 0.0, 0.0);
         }
 
     }
