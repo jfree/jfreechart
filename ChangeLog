@@ -1,3 +1,10 @@
+2008-05-13  David Gilbert  <david.gilbert@object-refinery.com>
+    
+    Bugs 1962467 and 1962472:
+    * source/org/jfree/chart/renderer/xy/CandlestickRenderer.java
+    (drawItem): Use hotspot that includes high and low values, and use
+    addEntity() to add the chart entity.
+
 2008-05-12  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/category/SlidingCategoryDataset.java: New class,
