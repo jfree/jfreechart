@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * StatisticalBarRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2007, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2008, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -52,7 +52,7 @@
  * 28-Aug-2007 : Fixed NullPointerException - see bug 1779941 (DG);
  * 14-Nov-2007 : Added errorIndicatorStroke, and fixed bugs with drawBarOutline
  *               and gradientPaintTransformer attributes being ignored (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer.category;
@@ -91,23 +91,22 @@ import org.jfree.util.PublicCloneable;
  * each bar has a mean value and a standard deviation line.
  */
 public class StatisticalBarRenderer extends BarRenderer
-                                    implements CategoryItemRenderer, 
-                                               Cloneable, PublicCloneable, 
-                                               Serializable {
+        implements CategoryItemRenderer, Cloneable, PublicCloneable,
+                   Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -4986038395414039117L;
-    
+
     /** The paint used to show the error indicator. */
     private transient Paint errorIndicatorPaint;
-    
+
     /**
-     * The stroke used to draw the error indicators. 
-     * 
+     * The stroke used to draw the error indicators.
+     *
      * @since 1.0.8
      */
     private transient Stroke errorIndicatorStroke;
-    
+
     /**
      * Default constructor.
      */
@@ -119,36 +118,36 @@ public class StatisticalBarRenderer extends BarRenderer
 
     /**
      * Returns the paint used for the error indicators.
-     * 
-     * @return The paint used for the error indicators (possibly 
+     *
+     * @return The paint used for the error indicators (possibly
      *         <code>null</code>).
-     *         
+     *
      * @see #setErrorIndicatorPaint(Paint)
      */
     public Paint getErrorIndicatorPaint() {
-        return this.errorIndicatorPaint;   
+        return this.errorIndicatorPaint;
     }
 
     /**
-     * Sets the paint used for the error indicators (if <code>null</code>, 
-     * the item outline paint is used instead) and sends a 
+     * Sets the paint used for the error indicators (if <code>null</code>,
+     * the item outline paint is used instead) and sends a
      * {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param paint  the paint (<code>null</code> permitted).
-     * 
+     *
      * @see #getErrorIndicatorPaint()
      */
     public void setErrorIndicatorPaint(Paint paint) {
         this.errorIndicatorPaint = paint;
         fireChangeEvent();
     }
-    
+
     /**
-     * Returns the stroke used to draw the error indicators.  If this is 
+     * Returns the stroke used to draw the error indicators.  If this is
      * <code>null</code>, the renderer will use the item outline stroke).
-     * 
+     *
      * @return The stroke (possibly <code>null</code>).
-     * 
+     *
      * @see #setErrorIndicatorStroke(Stroke)
      *
      * @since 1.0.8
@@ -156,26 +155,26 @@ public class StatisticalBarRenderer extends BarRenderer
     public Stroke getErrorIndicatorStroke() {
         return this.errorIndicatorStroke;
     }
-    
+
     /**
-     * Sets the stroke used to draw the error indicators, and sends a 
+     * Sets the stroke used to draw the error indicators, and sends a
      * {@link RendererChangeEvent} to all registered listeners.  If you set
      * this to <code>null</code>, the renderer will use the item outline
      * stroke.
-     * 
+     *
      * @param stroke  the stroke (<code>null</code> permitted).
-     * 
+     *
      * @see #getErrorIndicatorStroke()
-     * 
+     *
      * @since 1.0.8
      */
     public void setErrorIndicatorStroke(Stroke stroke) {
         this.errorIndicatorStroke = stroke;
         fireChangeEvent();
     }
-    
+
     /**
-     * Draws the bar with its standard deviation line range for a single 
+     * Draws the bar with its standard deviation line range for a single
      * (series, category) data item.
      *
      * @param g2  the graphics device.
@@ -209,18 +208,18 @@ public class StatisticalBarRenderer extends BarRenderer
 
         PlotOrientation orientation = plot.getOrientation();
         if (orientation == PlotOrientation.HORIZONTAL) {
-            drawHorizontalItem(g2, state, dataArea, plot, domainAxis, 
+            drawHorizontalItem(g2, state, dataArea, plot, domainAxis,
                     rangeAxis, statData, row, column);
         }
         else if (orientation == PlotOrientation.VERTICAL) {
-            drawVerticalItem(g2, state, dataArea, plot, domainAxis, rangeAxis, 
+            drawVerticalItem(g2, state, dataArea, plot, domainAxis, rangeAxis,
                     statData, row, column);
         }
     }
-                
+
     /**
      * Draws an item for a plot with a horizontal orientation.
-     * 
+     *
      * @param g2  the graphics device.
      * @param state  the renderer state.
      * @param dataArea  the data area.
@@ -240,11 +239,11 @@ public class StatisticalBarRenderer extends BarRenderer
                                       StatisticalCategoryDataset dataset,
                                       int row,
                                       int column) {
-                                     
+
         RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
-        
+
         // BAR Y
-        double rectY = domainAxis.getCategoryStart(column, getColumnCount(), 
+        double rectY = domainAxis.getCategoryStart(column, getColumnCount(),
                 dataArea, xAxisLocation);
 
         int seriesCount = getRowCount();
@@ -299,14 +298,14 @@ public class StatisticalBarRenderer extends BarRenderer
 
         RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
         double transY1 = rangeAxis.valueToJava2D(base, dataArea, yAxisLocation);
-        double transY2 = rangeAxis.valueToJava2D(value, dataArea, 
+        double transY2 = rangeAxis.valueToJava2D(value, dataArea,
                 yAxisLocation);
         double rectX = Math.min(transY2, transY1);
 
         double rectHeight = state.getBarWidth();
         double rectWidth = Math.abs(transY2 - transY1);
 
-        Rectangle2D bar = new Rectangle2D.Double(rectX, rectY, rectWidth, 
+        Rectangle2D bar = new Rectangle2D.Double(rectX, rectY, rectWidth,
                 rectHeight);
         Paint itemPaint = getItemPaint(row, column);
         GradientPaintTransformer t = getGradientPaintTransformer();
@@ -315,9 +314,9 @@ public class StatisticalBarRenderer extends BarRenderer
         }
         g2.setPaint(itemPaint);
         g2.fill(bar);
-        
+
         // draw the outline...
-        if (isDrawBarOutline() 
+        if (isDrawBarOutline()
                 && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
             Stroke stroke = getItemOutlineStroke(row, column);
             Paint paint = getItemOutlinePaint(row, column);
@@ -332,16 +331,16 @@ public class StatisticalBarRenderer extends BarRenderer
         Number n = dataset.getStdDevValue(row, column);
         if (n != null) {
             double valueDelta = n.doubleValue();
-            double highVal = rangeAxis.valueToJava2D(meanValue.doubleValue() 
+            double highVal = rangeAxis.valueToJava2D(meanValue.doubleValue()
                     + valueDelta, dataArea, yAxisLocation);
-            double lowVal = rangeAxis.valueToJava2D(meanValue.doubleValue() 
+            double lowVal = rangeAxis.valueToJava2D(meanValue.doubleValue()
                     - valueDelta, dataArea, yAxisLocation);
 
             if (this.errorIndicatorPaint != null) {
-                g2.setPaint(this.errorIndicatorPaint);  
+                g2.setPaint(this.errorIndicatorPaint);
             }
             else {
-                g2.setPaint(getItemOutlinePaint(row, column));   
+                g2.setPaint(getItemOutlinePaint(row, column));
             }
             if (this.errorIndicatorStroke != null) {
                 g2.setStroke(this.errorIndicatorStroke);
@@ -350,23 +349,23 @@ public class StatisticalBarRenderer extends BarRenderer
                 g2.setStroke(getItemOutlineStroke(row, column));
             }
             Line2D line = null;
-            line = new Line2D.Double(lowVal, rectY + rectHeight / 2.0d, 
+            line = new Line2D.Double(lowVal, rectY + rectHeight / 2.0d,
                                      highVal, rectY + rectHeight / 2.0d);
             g2.draw(line);
-            line = new Line2D.Double(highVal, rectY + rectHeight * 0.25, 
+            line = new Line2D.Double(highVal, rectY + rectHeight * 0.25,
                                      highVal, rectY + rectHeight * 0.75);
             g2.draw(line);
-            line = new Line2D.Double(lowVal, rectY + rectHeight * 0.25, 
+            line = new Line2D.Double(lowVal, rectY + rectHeight * 0.25,
                                      lowVal, rectY + rectHeight * 0.75);
             g2.draw(line);
         }
-        
-        CategoryItemLabelGenerator generator = getItemLabelGenerator(row, 
+
+        CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
                 column);
         if (generator != null && isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, dataset, row, column, plot, generator, bar, 
+            drawItemLabel(g2, dataset, row, column, plot, generator, bar,
                     (value < 0.0));
-        }        
+        }
 
         // add an item entity, if this information is being collected
         EntityCollection entities = state.getEntityCollection();
@@ -378,7 +377,7 @@ public class StatisticalBarRenderer extends BarRenderer
 
     /**
      * Draws an item for a plot with a vertical orientation.
-     * 
+     *
      * @param g2  the graphics device.
      * @param state  the renderer state.
      * @param dataArea  the data area.
@@ -398,11 +397,11 @@ public class StatisticalBarRenderer extends BarRenderer
                                     StatisticalCategoryDataset dataset,
                                     int row,
                                     int column) {
-                                     
+
         RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
-        
+
         // BAR X
-        double rectX = domainAxis.getCategoryStart(column, getColumnCount(), 
+        double rectX = domainAxis.getCategoryStart(column, getColumnCount(),
                 dataArea, xAxisLocation);
 
         int seriesCount = getRowCount();
@@ -458,14 +457,14 @@ public class StatisticalBarRenderer extends BarRenderer
 
         RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
         double transY1 = rangeAxis.valueToJava2D(base, dataArea, yAxisLocation);
-        double transY2 = rangeAxis.valueToJava2D(value, dataArea, 
+        double transY2 = rangeAxis.valueToJava2D(value, dataArea,
                 yAxisLocation);
         double rectY = Math.min(transY2, transY1);
 
         double rectWidth = state.getBarWidth();
         double rectHeight = Math.abs(transY2 - transY1);
 
-        Rectangle2D bar = new Rectangle2D.Double(rectX, rectY, rectWidth, 
+        Rectangle2D bar = new Rectangle2D.Double(rectX, rectY, rectWidth,
                 rectHeight);
         Paint itemPaint = getItemPaint(row, column);
         GradientPaintTransformer t = getGradientPaintTransformer();
@@ -475,7 +474,7 @@ public class StatisticalBarRenderer extends BarRenderer
         g2.setPaint(itemPaint);
         g2.fill(bar);
         // draw the outline...
-        if (isDrawBarOutline() 
+        if (isDrawBarOutline()
                 && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
             Stroke stroke = getItemOutlineStroke(row, column);
             Paint paint = getItemOutlinePaint(row, column);
@@ -490,16 +489,16 @@ public class StatisticalBarRenderer extends BarRenderer
         Number n = dataset.getStdDevValue(row, column);
         if (n != null) {
             double valueDelta = n.doubleValue();
-            double highVal = rangeAxis.valueToJava2D(meanValue.doubleValue() 
+            double highVal = rangeAxis.valueToJava2D(meanValue.doubleValue()
                     + valueDelta, dataArea, yAxisLocation);
-            double lowVal = rangeAxis.valueToJava2D(meanValue.doubleValue() 
+            double lowVal = rangeAxis.valueToJava2D(meanValue.doubleValue()
                     - valueDelta, dataArea, yAxisLocation);
 
             if (this.errorIndicatorPaint != null) {
-                g2.setPaint(this.errorIndicatorPaint);  
+                g2.setPaint(this.errorIndicatorPaint);
             }
             else {
-                g2.setPaint(getItemOutlinePaint(row, column));   
+                g2.setPaint(getItemOutlinePaint(row, column));
             }
             if (this.errorIndicatorStroke != null) {
                 g2.setStroke(this.errorIndicatorStroke);
@@ -507,7 +506,7 @@ public class StatisticalBarRenderer extends BarRenderer
             else {
                 g2.setStroke(getItemOutlineStroke(row, column));
             }
-            
+
             Line2D line = null;
             line = new Line2D.Double(rectX + rectWidth / 2.0d, lowVal,
                                      rectX + rectWidth / 2.0d, highVal);
@@ -519,13 +518,13 @@ public class StatisticalBarRenderer extends BarRenderer
                                      rectX + rectWidth / 2.0d + 5.0d, lowVal);
             g2.draw(line);
         }
-        
-        CategoryItemLabelGenerator generator = getItemLabelGenerator(row, 
+
+        CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
                 column);
         if (generator != null && isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, dataset, row, column, plot, generator, bar, 
+            drawItemLabel(g2, dataset, row, column, plot, generator, bar,
                     (value < 0.0));
-        }        
+        }
 
         // add an item entity, if this information is being collected
         EntityCollection entities = state.getEntityCollection();
@@ -533,33 +532,33 @@ public class StatisticalBarRenderer extends BarRenderer
             addItemEntity(entities, dataset, row, column, bar);
         }
     }
-    
+
     /**
      * Tests this renderer for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
-            return true;   
+            return true;
         }
         if (!(obj instanceof StatisticalBarRenderer)) {
-            return false;   
+            return false;
         }
         StatisticalBarRenderer that = (StatisticalBarRenderer) obj;
-        if (!PaintUtilities.equal(this.errorIndicatorPaint, 
+        if (!PaintUtilities.equal(this.errorIndicatorPaint,
                 that.errorIndicatorPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.errorIndicatorStroke, 
+        if (!ObjectUtilities.equal(this.errorIndicatorStroke,
                 that.errorIndicatorStroke)) {
             return false;
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -581,7 +580,7 @@ public class StatisticalBarRenderer extends BarRenderer
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.errorIndicatorPaint = SerialUtilities.readPaint(stream);
