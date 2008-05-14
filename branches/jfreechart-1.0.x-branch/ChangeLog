@@ -1,3 +1,11 @@
+2008-05-14  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
+    (addEntity): If area is null, take into account the plot orientation for 
+    the generated hotspot,
+    * source/org/jfree/chart/renderer/xy/XYStepRenderer.java
+    (drawItem): Use addEntity().
+
 2008-05-13  David Gilbert  <david.gilbert@object-refinery.com>
     
     Bugs 1962467 and 1962472:
