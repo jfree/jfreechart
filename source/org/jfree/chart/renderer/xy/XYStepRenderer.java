@@ -70,7 +70,6 @@ package org.jfree.chart.renderer.xy;
 
 import java.awt.Graphics2D;
 import java.awt.Paint;
-import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -79,7 +78,6 @@ import java.io.Serializable;
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
