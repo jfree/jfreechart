@@ -92,7 +92,7 @@
  * 06-Feb-2007 : Added new updateCrosshairValues() method that takes into
  *               account multiple axis plots (see bug 1086307) (DG);
  * 20-Feb-2007 : Fixed equals() method implementation (DG);
- * 01-Mar-2007 : Fixed interval marker drawing (patch 1670686 thanks to 
+ * 01-Mar-2007 : Fixed interval marker drawing (patch 1670686 thanks to
  *               Sergei Ivanov) (DG);
  * 22-Mar-2007 : Modified the tool tip generator look up (DG);
  * 23-Mar-2007 : Added drawDomainLine() method (DG);
@@ -101,6 +101,8 @@
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 12-Nov-2007 : Fixed domain and range band drawing methods (DG);
  * 07-Apr-2008 : Minor API doc update (DG);
+ * 14-May-2008 : Updated addEntity() method to take plot orientation into
+ *               account when the incoming area is null (DG);
  *
  */
 
@@ -163,9 +165,7 @@ import org.jfree.util.PublicCloneable;
  * implementations.
  */
 public abstract class AbstractXYItemRenderer extends AbstractRenderer
-                                             implements XYItemRenderer,
-                                                        Cloneable,
-                                                        Serializable {
+        implements XYItemRenderer, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 8019124836026607990L;
@@ -173,9 +173,9 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     /** The plot. */
     private XYPlot plot;
 
-    /** 
+    /**
      * The item label generator for ALL series.
-     * 
+     *
      * @deprecated This field is redundant, use itemLabelGeneratorList and
      *     baseItemLabelGenerator instead.  Deprecated as of version 1.0.6.
      */
@@ -187,9 +187,9 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     /** The base item label generator. */
     private XYItemLabelGenerator baseItemLabelGenerator;
 
-    /** 
-     * The tool tip generator for ALL series. 
-     * 
+    /**
+     * The tool tip generator for ALL series.
+     *
      * @deprecated This field is redundant, use tooltipGeneratorList and
      *     baseToolTipGenerator instead.  Deprecated as of version 1.0.6.
      */
@@ -344,31 +344,31 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
 
     /**
      * Returns the item label generator override.
-     * 
+     *
      * @return The generator (possibly <code>null</code>).
-     * 
+     *
      * @since 1.0.5
-     * 
+     *
      * @see #setItemLabelGenerator(XYItemLabelGenerator)
-     * 
+     *
      * @deprecated As of version 1.0.6, this override setting should not be
-     *     used.  You can use the base setting instead 
+     *     used.  You can use the base setting instead
      *     ({@link #getBaseItemLabelGenerator()}).
      */
     public XYItemLabelGenerator getItemLabelGenerator() {
-        return this.itemLabelGenerator;    
+        return this.itemLabelGenerator;
     }
-    
+
     /**
      * Sets the item label generator for ALL series and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param generator  the generator (<code>null</code> permitted).
-     * 
+     *
      * @see #getItemLabelGenerator()
-     * 
+     *
      * @deprecated As of version 1.0.6, this override setting should not be
-     *     used.  You can use the base setting instead 
+     *     used.  You can use the base setting instead
      *     ({@link #setBaseItemLabelGenerator(XYItemLabelGenerator)}).
      */
     public void setItemLabelGenerator(XYItemLabelGenerator generator) {
@@ -412,8 +412,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     // TOOL TIP GENERATOR
 
     /**
-     * Returns the tool tip generator for a data item.  If, for some reason, 
-     * you want a different generator for individual items, you can override 
+     * Returns the tool tip generator for a data item.  If, for some reason,
+     * you want a different generator for individual items, you can override
      * this method.
      *
      * @param series  the series index (zero based).
@@ -438,31 +438,31 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
 
     /**
      * Returns the override tool tip generator.
-     * 
+     *
      * @return The tool tip generator (possible <code>null</code>).
-     * 
+     *
      * @since 1.0.5
-     * 
+     *
      * @see #setToolTipGenerator(XYToolTipGenerator)
-     * 
+     *
      * @deprecated As of version 1.0.6, this override setting should not be
-     *     used.  You can use the base setting instead 
+     *     used.  You can use the base setting instead
      *     ({@link #getBaseToolTipGenerator()}).
      */
     public XYToolTipGenerator getToolTipGenerator() {
         return this.toolTipGenerator;
     }
-    
+
     /**
      * Sets the tool tip generator for ALL series and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param generator  the generator (<code>null</code> permitted).
-     * 
+     *
      * @see #getToolTipGenerator()
-     * 
+     *
      * @deprecated As of version 1.0.6, this override setting should not be
-     *     used.  You can use the base setting instead 
+     *     used.  You can use the base setting instead
      *     ({@link #setBaseToolTipGenerator(XYToolTipGenerator)}).
      */
     public void setToolTipGenerator(XYToolTipGenerator generator) {
@@ -498,7 +498,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * Returns the base tool tip generator.
      *
      * @return The generator (possibly <code>null</code>).
-     * 
+     *
      * @see #setBaseToolTipGenerator(XYToolTipGenerator)
      */
     public XYToolTipGenerator getBaseToolTipGenerator() {
@@ -510,7 +510,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * to all registered listeners.
      *
      * @param generator  the generator (<code>null</code> permitted).
-     * 
+     *
      * @see #getBaseToolTipGenerator()
      */
     public void setBaseToolTipGenerator(XYToolTipGenerator generator) {
@@ -530,7 +530,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the URL generator for HTML image maps and sends a 
+     * Sets the URL generator for HTML image maps and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param urlGenerator  the URL generator (<code>null</code> permitted).
@@ -553,7 +553,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Adds an annotation to the specified layer and sends a 
+     * Adds an annotation to the specified layer and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param annotation  the annotation (<code>null</code> not permitted).
@@ -826,11 +826,11 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 plot.getDomainAxisEdge());
         Rectangle2D band;
         if (plot.getOrientation() == PlotOrientation.VERTICAL) {
-            band = new Rectangle2D.Double(Math.min(x1, x2), dataArea.getMinY(), 
+            band = new Rectangle2D.Double(Math.min(x1, x2), dataArea.getMinY(),
                     Math.abs(x2 - x1), dataArea.getWidth());
         }
         else {
-            band = new Rectangle2D.Double(dataArea.getMinX(), Math.min(x1, x2), 
+            band = new Rectangle2D.Double(dataArea.getMinX(), Math.min(x1, x2),
                     dataArea.getWidth(), Math.abs(x2 - x1));
         }
         Paint paint = plot.getDomainTickBandPaint();
@@ -856,7 +856,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public void fillRangeGridBand(Graphics2D g2, XYPlot plot, ValueAxis axis,
             Rectangle2D dataArea, double start, double end) {
 
-        double y1 = axis.valueToJava2D(start, dataArea, 
+        double y1 = axis.valueToJava2D(start, dataArea,
                 plot.getRangeAxisEdge());
         double y2 = axis.valueToJava2D(end, dataArea, plot.getRangeAxisEdge());
         Rectangle2D band;
@@ -930,7 +930,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param value  the value at which the grid line should be drawn.
      * @param paint  the paint.
      * @param stroke  the stroke.
-     * 
+     *
      * @since 1.0.5
      */
     public void drawDomainLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
@@ -943,14 +943,14 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
 
         PlotOrientation orientation = plot.getOrientation();
         Line2D line = null;
-        double v = axis.valueToJava2D(value, dataArea, 
+        double v = axis.valueToJava2D(value, dataArea,
                 plot.getDomainAxisEdge());
         if (orientation == PlotOrientation.HORIZONTAL) {
-            line = new Line2D.Double(dataArea.getMinX(), v, dataArea.getMaxX(), 
+            line = new Line2D.Double(dataArea.getMinX(), v, dataArea.getMaxX(),
                     v);
         }
         else if (orientation == PlotOrientation.VERTICAL) {
-            line = new Line2D.Double(v, dataArea.getMinY(), v, 
+            line = new Line2D.Double(v, dataArea.getMinY(), v,
                     dataArea.getMaxY());
         }
 
@@ -1714,9 +1714,9 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param dataset  the dataset.
      * @param series  the series.
      * @param item  the item.
-     * @param entityX  the entity's center x-coordinate in user space (only 
+     * @param entityX  the entity's center x-coordinate in user space (only
      *                 used if <code>area</code> is <code>null</code>).
-     * @param entityY  the entity's center y-coordinate in user space (only 
+     * @param entityY  the entity's center y-coordinate in user space (only
      *                 used if <code>area</code> is <code>null</code>).
      */
     protected void addEntity(EntityCollection entities, Shape area,
@@ -1725,10 +1725,19 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         if (!getItemCreateEntity(series, item)) {
             return;
         }
-        if (area == null) {
-            area = new Ellipse2D.Double(entityX - this.defaultEntityRadius,
-                    entityY - this.defaultEntityRadius,
-                    this.defaultEntityRadius * 2, this.defaultEntityRadius * 2);
+        Shape hotspot = area;
+        if (hotspot == null) {
+        	double w = this.defaultEntityRadius * 2;
+        	if (getPlot().getOrientation() == PlotOrientation.VERTICAL) {
+        		hotspot = new Ellipse2D.Double(
+        				entityX - this.defaultEntityRadius,
+        				entityY - this.defaultEntityRadius, w, w);
+        	}
+        	else {
+        		hotspot = new Ellipse2D.Double(
+        				entityY - this.defaultEntityRadius,
+        	            entityX - this.defaultEntityRadius, w, w);
+        	}
         }
         String tip = null;
         XYToolTipGenerator generator = getToolTipGenerator(series, item);
@@ -1739,7 +1748,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         if (getURLGenerator() != null) {
             url = getURLGenerator().generateURL(dataset, series, item);
         }
-        XYItemEntity entity = new XYItemEntity(area, dataset, series, item,
+        XYItemEntity entity = new XYItemEntity(hotspot, dataset, series, item,
                 tip, url);
         entities.add(entity);
     }
