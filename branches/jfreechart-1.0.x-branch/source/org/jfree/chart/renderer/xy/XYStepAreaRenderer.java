@@ -48,6 +48,7 @@
  * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
  * 14-Feb-2007 : Added equals() method override (DG);
  * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
+ * 14-May-2008 : Call addEntity() from within drawItem() (DG);
  *
  */
 
@@ -63,7 +64,6 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
@@ -520,23 +520,9 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
         }
 
         // collect entity and tool tip information...
-        if (state.getInfo() != null) {
-            EntityCollection entities = state.getEntityCollection();
-            if (entities != null && shape != null) {
-                String tip = null;
-                XYToolTipGenerator generator
-                    = getToolTipGenerator(series, item);
-                if (generator != null) {
-                    tip = generator.generateToolTip(dataset, series, item);
-                }
-                String url = null;
-                if (getURLGenerator() != null) {
-                    url = getURLGenerator().generateURL(dataset, series, item);
-                }
-                XYItemEntity entity = new XYItemEntity(shape, dataset, series,
-                        item, tip, url);
-                entities.add(entity);
-            }
+        EntityCollection entities = state.getEntityCollection();
+        if (entities != null) {
+            addEntity(entities, shape, dataset, series, item, transX1, transY1);
         }
     }
 
