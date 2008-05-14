@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------
  * IntervalBarRenderer.java
  * ------------------------
- * (C) Copyright 2002-2007, by Jeremy Bowman.
+ * (C) Copyright 2002-2008, by Jeremy Bowman.
  *
  * Original Author:  Jeremy Bowman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -40,7 +40,7 @@
  * 29-May-2002 : Added constructors (DG);
  * 26-Jun-2002 : Added axis to initialise method (DG);
  * 20-Sep-2002 : Added basic support for chart entities (DG);
- * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and 
+ * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and
  *               CategoryToolTipGenerator interface (DG);
  * 05-Nov-2002 : Base dataset is now TableDataset not CategoryDataset (DG);
  * 25-Mar-2003 : Implemented Serializable (DG);
@@ -49,13 +49,13 @@
  * 08-Sep-2003 : Added checks for null values (DG);
  * 07-Oct-2003 : Added renderer state (DG);
  * 21-Oct-2003 : Bar width moved into renderer state (DG);
- * 23-Dec-2003 : Removed the deprecated MultiIntervalCategoryDataset 
+ * 23-Dec-2003 : Removed the deprecated MultiIntervalCategoryDataset
  *               interface (DG);
  * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 20-Apr-2005 : Renamed CategoryLabelGenerator 
+ * 20-Apr-2005 : Renamed CategoryLabelGenerator
  *               --> CategoryItemLabelGenerator (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer.category;
@@ -86,14 +86,12 @@ import org.jfree.util.PublicCloneable;
  * For use with the {@link CategoryPlot} class.
  */
 public class IntervalBarRenderer extends BarRenderer
-                                 implements CategoryItemRenderer, 
-                                            Cloneable, 
-                                            PublicCloneable, 
-                                            Serializable {
+        implements CategoryItemRenderer, Cloneable, PublicCloneable,
+                   Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -5068857361615528725L;
-    
+
     /**
      * Constructs a new renderer.
      */
@@ -128,16 +126,16 @@ public class IntervalBarRenderer extends BarRenderer
 
          if (dataset instanceof IntervalCategoryDataset) {
              IntervalCategoryDataset d = (IntervalCategoryDataset) dataset;
-             drawInterval(g2, state, dataArea, plot, domainAxis, rangeAxis, 
+             drawInterval(g2, state, dataArea, plot, domainAxis, rangeAxis,
                      d, row, column);
          }
          else {
-             super.drawItem(g2, state, dataArea, plot, domainAxis, rangeAxis, 
+             super.drawItem(g2, state, dataArea, plot, domainAxis, rangeAxis,
                      dataset, row, column, pass);
-         } 
-         
+         }
+
      }
-                          
+
      /**
       * Draws a single interval.
       *
@@ -165,13 +163,13 @@ public class IntervalBarRenderer extends BarRenderer
         int categoryCount = getColumnCount();
 
         PlotOrientation orientation = plot.getOrientation();
-        
+
         double rectX = 0.0;
         double rectY = 0.0;
 
         RectangleEdge domainAxisLocation = plot.getDomainAxisEdge();
         RectangleEdge rangeAxisLocation = plot.getRangeAxisEdge();
-        
+
         // Y0
         Number value0 = dataset.getEndValue(row, column);
         if (value0 == null) {
@@ -217,7 +215,7 @@ public class IntervalBarRenderer extends BarRenderer
             else {
                 rectY = rectY + row * state.getBarWidth();
             }
-            
+
             rectX = java2dValue0;
 
             rectHeight = state.getBarWidth();
@@ -226,7 +224,7 @@ public class IntervalBarRenderer extends BarRenderer
         }
         else if (orientation == PlotOrientation.VERTICAL) {
             // BAR X
-            rectX = domainAxis.getCategoryStart(column, getColumnCount(), 
+            rectX = domainAxis.getCategoryStart(column, getColumnCount(),
                     dataArea, domainAxisLocation);
 
             if (seriesCount > 1) {
@@ -241,12 +239,12 @@ public class IntervalBarRenderer extends BarRenderer
             rectY = java2dValue0;
 
         }
-        Rectangle2D bar = new Rectangle2D.Double(rectX, rectY, rectWidth, 
+        Rectangle2D bar = new Rectangle2D.Double(rectX, rectY, rectWidth,
                 rectHeight);
         Paint seriesPaint = getItemPaint(row, column);
         g2.setPaint(seriesPaint);
         g2.fill(bar);
-        
+
         // draw the outline...
         if (state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
             Stroke stroke = getItemOutlineStroke(row, column);
@@ -257,20 +255,20 @@ public class IntervalBarRenderer extends BarRenderer
                 g2.draw(bar);
             }
         }
-        
+
         CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
                 column);
         if (generator != null && isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, dataset, row, column, plot, generator, bar, 
+            drawItemLabel(g2, dataset, row, column, plot, generator, bar,
                     false);
-        }        
+        }
 
         // collect entity and tool tip information...
         if (state.getInfo() != null) {
             EntityCollection entities = state.getEntityCollection();
             if (entities != null) {
                 String tip = null;
-                CategoryToolTipGenerator tipster 
+                CategoryToolTipGenerator tipster
                         = getToolTipGenerator(row, column);
                 if (tipster != null) {
                     tip = tipster.generateToolTip(dataset, row, column);
@@ -280,8 +278,8 @@ public class IntervalBarRenderer extends BarRenderer
                     url = getItemURLGenerator(row, column).generateURL(
                             dataset, row, column);
                 }
-                CategoryItemEntity entity = new CategoryItemEntity(bar, tip, 
-                        url, dataset, dataset.getRowKey(row), 
+                CategoryItemEntity entity = new CategoryItemEntity(bar, tip,
+                        url, dataset, dataset.getRowKey(row),
                         dataset.getColumnKey(column));
                 entities.add(entity);
             }
