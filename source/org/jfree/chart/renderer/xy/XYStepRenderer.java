@@ -127,7 +127,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
         super();
         setBaseToolTipGenerator(toolTipGenerator);
         setURLGenerator(urlGenerator);
-        setShapesVisible(false);
+        setBaseShapesVisible(false);
     }
 
     /**
@@ -281,6 +281,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
                     (y1 < 0.0));
         }
 
+        // submit this data item as a candidate for the crosshair point
         int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
         int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
         updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex,
