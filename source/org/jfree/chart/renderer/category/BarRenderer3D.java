@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
@@ -42,25 +42,25 @@
  * 31-Oct-2001 : First version, contributed by Serge V. Grachov (DG);
  * 15-Nov-2001 : Modified to allow for null data values (DG);
  * 13-Dec-2001 : Added tooltips (DG);
- * 16-Jan-2002 : Added fix for single category or single series datasets, 
+ * 16-Jan-2002 : Added fix for single category or single series datasets,
  *               pointed out by Taoufik Romdhane (DG);
  * 24-May-2002 : Incorporated tooltips into chart entities (DG);
- * 11-Jun-2002 : Added check for (permitted) null info object, bug and fix 
+ * 11-Jun-2002 : Added check for (permitted) null info object, bug and fix
  *               reported by David Basten.  Also updated Javadocs. (DG);
  * 19-Jun-2002 : Added code to draw labels on bars (TL);
  * 26-Jun-2002 : Added bar clipping to avoid PRExceptions (DG);
- * 05-Aug-2002 : Small modification to drawCategoryItem method to support URLs 
+ * 05-Aug-2002 : Small modification to drawCategoryItem method to support URLs
  *               for HTML image maps (RA);
- * 06-Aug-2002 : Value labels now use number formatter, thanks to Milo 
+ * 06-Aug-2002 : Value labels now use number formatter, thanks to Milo
  *               Simpson (DG);
  * 08-Aug-2002 : Applied fixed in bug id 592218 (DG);
- * 20-Sep-2002 : Added fix for categoryPaint by Rich Unger, and fixed errors 
+ * 20-Sep-2002 : Added fix for categoryPaint by Rich Unger, and fixed errors
  *               reported by Checkstyle (DG);
- * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and 
+ * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and
  *               CategoryToolTipGenerator interface (DG);
  * 05-Nov-2002 : Replaced references to CategoryDataset with TableDataset (DG);
  * 06-Nov-2002 : Moved to the com.jrefinery.chart.renderer package (DG);
- * 28-Jan-2003 : Added an attribute to control the shading of the left and 
+ * 28-Jan-2003 : Added an attribute to control the shading of the left and
  *               bottom walls in the plot background (DG);
  * 25-Mar-2003 : Implemented Serializable (DG);
  * 10-Apr-2003 : Removed category paint usage (DG);
@@ -69,20 +69,20 @@
  * 30-Jul-2003 : Modified entity constructor (CZ);
  * 19-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
  * 07-Oct-2003 : Added renderer state (DG);
- * 08-Oct-2003 : Removed clipping (replaced with flag in CategoryPlot to 
+ * 08-Oct-2003 : Removed clipping (replaced with flag in CategoryPlot to
  *               control order in which the data items are processed) (DG);
- * 20-Oct-2003 : Fixed bug (outline stroke not being used for bar 
+ * 20-Oct-2003 : Fixed bug (outline stroke not being used for bar
  *               outlines) (DG);
  * 21-Oct-2003 : Bar width moved into CategoryItemRendererState (DG);
  * 24-Nov-2003 : Fixed bug 846324 (item labels not showing) (DG);
  * 27-Nov-2003 : Added code to respect maxBarWidth setting (DG);
  * 02-Feb-2004 : Fixed bug where 'drawBarOutline' flag is not respected (DG);
- * 10-Feb-2004 : Small change to drawItem() method to make cut-and-paste 
+ * 10-Feb-2004 : Small change to drawItem() method to make cut-and-paste
  *               overriding easier (DG);
- * 04-Oct-2004 : Fixed bug with item label positioning when plot alignment is 
+ * 04-Oct-2004 : Fixed bug with item label positioning when plot alignment is
  *               horizontal (DG);
  * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 20-Apr-2005 : Renamed CategoryLabelGenerator 
+ * 20-Apr-2005 : Renamed CategoryLabelGenerator
  *               --> CategoryItemLabelGenerator (DG);
  * 25-Apr-2005 : Override initialise() method to fix bug 1189642 (DG);
  * 09-Jun-2005 : Use addEntityItem from super class (DG);
@@ -91,7 +91,7 @@
  * 17-Jan-2007 : Fixed bug in drawDomainGridline() method (DG);
  * 03-Apr-2007 : Fixed bugs in drawBackground() method (DG);
  * 16-Oct-2007 : Fixed bug in range marker drawing (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer.category;
@@ -139,16 +139,15 @@ import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
- * A renderer for bars with a 3D effect, for use with the 
+ * A renderer for bars with a 3D effect, for use with the
  * {@link org.jfree.chart.plot.CategoryPlot} class.
  */
-public class BarRenderer3D extends BarRenderer 
-                           implements Effect3D, Cloneable, PublicCloneable, 
-                                      Serializable {
+public class BarRenderer3D extends BarRenderer
+        implements Effect3D, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7686976503536003636L;
-    
+
     /** The default x-offset for the 3D effect. */
     public static final double DEFAULT_X_OFFSET = 12.0;
 
@@ -187,10 +186,10 @@ public class BarRenderer3D extends BarRenderer
         this.yOffset = yOffset;
         this.wallPaint = DEFAULT_WALL_PAINT;
         // set the default item label positions
-        ItemLabelPosition p1 = new ItemLabelPosition(ItemLabelAnchor.INSIDE12, 
+        ItemLabelPosition p1 = new ItemLabelPosition(ItemLabelAnchor.INSIDE12,
                 TextAnchor.TOP_CENTER);
         setBasePositiveItemLabelPosition(p1);
-        ItemLabelPosition p2 = new ItemLabelPosition(ItemLabelAnchor.INSIDE12, 
+        ItemLabelPosition p2 = new ItemLabelPosition(ItemLabelAnchor.INSIDE12,
                 TextAnchor.TOP_CENTER);
         setBaseNegativeItemLabelPosition(p2);
 
@@ -200,7 +199,7 @@ public class BarRenderer3D extends BarRenderer
      * Returns the x-offset for the 3D effect.
      *
      * @return The 3D effect.
-     * 
+     *
      * @see #getYOffset()
      */
     public double getXOffset() {
@@ -221,7 +220,7 @@ public class BarRenderer3D extends BarRenderer
      * background.
      *
      * @return The paint.
-     * 
+     *
      * @see #setWallPaint(Paint)
      */
     public Paint getWallPaint() {
@@ -234,7 +233,7 @@ public class BarRenderer3D extends BarRenderer
      * listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getWallPaint()
      */
     public void setWallPaint(Paint paint) {
@@ -247,8 +246,8 @@ public class BarRenderer3D extends BarRenderer
 
 
     /**
-     * Initialises the renderer and returns a state object that will be passed 
-     * to subsequent calls to the drawItem method.  This method gets called 
+     * Initialises the renderer and returns a state object that will be passed
+     * to subsequent calls to the drawItem method.  This method gets called
      * once at the start of the process of drawing a chart.
      *
      * @param g2  the graphics device.
@@ -256,7 +255,7 @@ public class BarRenderer3D extends BarRenderer
      * @param plot  the plot.
      * @param rendererIndex  the renderer index.
      * @param info  collects chart rendering information for return to caller.
-     * 
+     *
      * @return The renderer state.
      */
     public CategoryItemRendererState initialise(Graphics2D g2,
@@ -265,15 +264,15 @@ public class BarRenderer3D extends BarRenderer
                                                 int rendererIndex,
                                                 PlotRenderingInfo info) {
 
-        Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(), 
-                dataArea.getY() + getYOffset(), dataArea.getWidth() 
+        Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(),
+                dataArea.getY() + getYOffset(), dataArea.getWidth()
                 - getXOffset(), dataArea.getHeight() - getYOffset());
-        CategoryItemRendererState state = super.initialise(g2, adjusted, plot, 
+        CategoryItemRendererState state = super.initialise(g2, adjusted, plot,
                 rendererIndex, info);
         return state;
-        
+
     }
-    
+
     /**
      * Draws the background for the plot.
      *
@@ -281,7 +280,7 @@ public class BarRenderer3D extends BarRenderer
      * @param plot  the plot.
      * @param dataArea  the area inside the axes.
      */
-    public void drawBackground(Graphics2D g2, CategoryPlot plot, 
+    public void drawBackground(Graphics2D g2, CategoryPlot plot,
                                Rectangle2D dataArea) {
 
         float x0 = (float) dataArea.getX();
@@ -306,7 +305,7 @@ public class BarRenderer3D extends BarRenderer
         Composite originalComposite = g2.getComposite();
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
                 plot.getBackgroundAlpha()));
-        
+
         // fill background...
         Paint backgroundPaint = plot.getBackgroundPaint();
         if (backgroundPaint != null) {
@@ -340,17 +339,17 @@ public class BarRenderer3D extends BarRenderer
         g2.draw(corner);
         corner.setLine(x1, y1, x3, y1);
         g2.draw(corner);
-                
+
         // draw background image, if there is one...
         Image backgroundImage = plot.getBackgroundImage();
         if (backgroundImage != null) {
-            Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX() 
-                    + getXOffset(), dataArea.getY(), 
-                    dataArea.getWidth() - getXOffset(), 
+            Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX()
+                    + getXOffset(), dataArea.getY(),
+                    dataArea.getWidth() - getXOffset(),
                     dataArea.getHeight() - getYOffset());
             plot.drawBackgroundImage(g2, adjusted);
         }
-        
+
         g2.setComposite(originalComposite);
 
     }
@@ -362,7 +361,7 @@ public class BarRenderer3D extends BarRenderer
      * @param plot  the plot.
      * @param dataArea  the area inside the axes.
      */
-    public void drawOutline(Graphics2D g2, CategoryPlot plot, 
+    public void drawOutline(Graphics2D g2, CategoryPlot plot,
                             Rectangle2D dataArea) {
 
         float x0 = (float) dataArea.getX();
@@ -400,7 +399,7 @@ public class BarRenderer3D extends BarRenderer
      *
      * @param g2  the graphics device.
      * @param plot  the plot.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 
+     * @param dataArea  the area for plotting data (not yet adjusted for any
      *                  3D effect).
      * @param value  the Java2D value at which the grid line should be drawn.
      *
@@ -446,7 +445,7 @@ public class BarRenderer3D extends BarRenderer
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 
+     * @param dataArea  the area for plotting data (not yet adjusted for any
      *                  3D effect).
      * @param value  the value at which the grid line should be drawn.
      *
@@ -464,14 +463,14 @@ public class BarRenderer3D extends BarRenderer
         }
 
         Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(),
-                dataArea.getY() + getYOffset(), dataArea.getWidth() 
+                dataArea.getY() + getYOffset(), dataArea.getWidth()
                 - getXOffset(), dataArea.getHeight() - getYOffset());
 
         Line2D line1 = null;
         Line2D line2 = null;
         PlotOrientation orientation = plot.getOrientation();
         if (orientation == PlotOrientation.HORIZONTAL) {
-            double x0 = axis.valueToJava2D(value, adjusted, 
+            double x0 = axis.valueToJava2D(value, adjusted,
                     plot.getRangeAxisEdge());
             double x1 = x0 + getXOffset();
             double y0 = dataArea.getMaxY();
@@ -481,7 +480,7 @@ public class BarRenderer3D extends BarRenderer
             line2 = new Line2D.Double(x1, y1, x1, y2);
         }
         else if (orientation == PlotOrientation.VERTICAL) {
-            double y0 = axis.valueToJava2D(value, adjusted, 
+            double y0 = axis.valueToJava2D(value, adjusted,
                     plot.getRangeAxisEdge());
             double y1 = y0 - getYOffset();
             double x0 = dataArea.getMinX();
@@ -515,8 +514,8 @@ public class BarRenderer3D extends BarRenderer
                                 Rectangle2D dataArea) {
 
 
-        Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(), 
-                dataArea.getY() + getYOffset(), dataArea.getWidth() 
+        Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(),
+                dataArea.getY() + getYOffset(), dataArea.getWidth()
                 - getXOffset(), dataArea.getHeight() - getYOffset());
         if (marker instanceof ValueMarker) {
             ValueMarker vm = (ValueMarker) marker;
@@ -529,26 +528,26 @@ public class BarRenderer3D extends BarRenderer
             GeneralPath path = null;
             PlotOrientation orientation = plot.getOrientation();
             if (orientation == PlotOrientation.HORIZONTAL) {
-                float x = (float) axis.valueToJava2D(value, adjusted, 
+                float x = (float) axis.valueToJava2D(value, adjusted,
                         plot.getRangeAxisEdge());
                 float y = (float) adjusted.getMaxY();
                 path = new GeneralPath();
                 path.moveTo(x, y);
-                path.lineTo((float) (x + getXOffset()), 
+                path.lineTo((float) (x + getXOffset()),
                         y - (float) getYOffset());
-                path.lineTo((float) (x + getXOffset()), 
+                path.lineTo((float) (x + getXOffset()),
                         (float) (adjusted.getMinY() - getYOffset()));
                 path.lineTo(x, (float) adjusted.getMinY());
                 path.closePath();
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                float y = (float) axis.valueToJava2D(value, adjusted, 
+                float y = (float) axis.valueToJava2D(value, adjusted,
                         plot.getRangeAxisEdge());
                 float x = (float) dataArea.getX();
                 path = new GeneralPath();
                 path.moveTo(x, y);
                 path.lineTo(x + (float) this.xOffset, y - (float) this.yOffset);
-                path.lineTo((float) (adjusted.getMaxX() + this.xOffset), 
+                path.lineTo((float) (adjusted.getMaxX() + this.xOffset),
                         y - (float) this.yOffset);
                 path.lineTo((float) (adjusted.getMaxX()), y);
                 path.closePath();
@@ -557,7 +556,7 @@ public class BarRenderer3D extends BarRenderer
             g2.fill(path);
             g2.setPaint(marker.getOutlinePaint());
             g2.draw(path);
-        
+
             String label = marker.getLabel();
             RectangleAnchor anchor = marker.getLabelAnchor();
             if (label != null) {
@@ -565,14 +564,14 @@ public class BarRenderer3D extends BarRenderer
                 g2.setFont(labelFont);
                 g2.setPaint(marker.getLabelPaint());
                 Point2D coordinates = calculateRangeMarkerTextAnchorPoint(
-                        g2, orientation, dataArea, path.getBounds2D(), 
-                        marker.getLabelOffset(), LengthAdjustmentType.EXPAND, 
+                        g2, orientation, dataArea, path.getBounds2D(),
+                        marker.getLabelOffset(), LengthAdjustmentType.EXPAND,
                         anchor);
-                TextUtilities.drawAlignedString(label, g2, 
-                        (float) coordinates.getX(), (float) coordinates.getY(), 
+                TextUtilities.drawAlignedString(label, g2,
+                        (float) coordinates.getX(), (float) coordinates.getY(),
                         marker.getLabelTextAnchor());
             }
-        
+
         }
         else {
             super.drawRangeMarker(g2, plot, axis, marker, adjusted);
@@ -604,23 +603,23 @@ public class BarRenderer3D extends BarRenderer
                          int row,
                          int column,
                          int pass) {
-    
+
         // check the value we are plotting...
         Number dataValue = dataset.getValue(row, column);
         if (dataValue == null) {
             return;
         }
-        
+
         double value = dataValue.doubleValue();
-        
+
         Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(),
-                dataArea.getY() + getYOffset(), 
-                dataArea.getWidth() - getXOffset(), 
+                dataArea.getY() + getYOffset(),
+                dataArea.getWidth() - getXOffset(),
                 dataArea.getHeight() - getYOffset());
 
         PlotOrientation orientation = plot.getOrientation();
-        
-        double barW0 = calculateBarW0(plot, orientation, adjusted, domainAxis, 
+
+        double barW0 = calculateBarW0(plot, orientation, adjusted, domainAxis,
                 state, row, column);
         double[] barL0L1 = calculateBarL0L1(value);
         if (barL0L1 == null) {
@@ -632,15 +631,15 @@ public class BarRenderer3D extends BarRenderer
         double transL1 = rangeAxis.valueToJava2D(barL0L1[1], adjusted, edge);
         double barL0 = Math.min(transL0, transL1);
         double barLength = Math.abs(transL1 - transL0);
-        
+
         // draw the bar...
         Rectangle2D bar = null;
         if (orientation == PlotOrientation.HORIZONTAL) {
-            bar = new Rectangle2D.Double(barL0, barW0, barLength, 
+            bar = new Rectangle2D.Double(barL0, barW0, barLength,
                     state.getBarWidth());
         }
         else {
-            bar = new Rectangle2D.Double(barW0, barL0, state.getBarWidth(), 
+            bar = new Rectangle2D.Double(barW0, barL0, state.getBarWidth(),
                     barLength);
         }
         Paint itemPaint = getItemPaint(row, column);
@@ -651,12 +650,12 @@ public class BarRenderer3D extends BarRenderer
         double x1 = x0 + getXOffset();
         double x2 = bar.getMaxX();
         double x3 = x2 + getXOffset();
-        
+
         double y0 = bar.getMinY() - getYOffset();
         double y1 = bar.getMinY();
         double y2 = bar.getMaxY() - getYOffset();
         double y3 = bar.getMaxY();
-        
+
         GeneralPath bar3dRight = null;
         GeneralPath bar3dTop = null;
         if (barLength > 0.0) {
@@ -681,7 +680,7 @@ public class BarRenderer3D extends BarRenderer
         bar3dTop.closePath();
         g2.fill(bar3dTop);
 
-        if (isDrawBarOutline() 
+        if (isDrawBarOutline()
                 && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
             g2.setStroke(getItemOutlineStroke(row, column));
             g2.setPaint(getItemOutlinePaint(row, column));
@@ -694,12 +693,12 @@ public class BarRenderer3D extends BarRenderer
             }
         }
 
-        CategoryItemLabelGenerator generator 
+        CategoryItemLabelGenerator generator
             = getItemLabelGenerator(row, column);
         if (generator != null && isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, dataset, row, column, plot, generator, bar, 
+            drawItemLabel(g2, dataset, row, column, plot, generator, bar,
                     (value < 0.0));
-        }        
+        }
 
         // add an item entity, if this information is being collected
         EntityCollection entities = state.getEntityCollection();
@@ -716,12 +715,12 @@ public class BarRenderer3D extends BarRenderer
         }
 
     }
-    
+
     /**
      * Tests this renderer for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -764,7 +763,7 @@ public class BarRenderer3D extends BarRenderer
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.wallPaint = SerialUtilities.readPaint(stream);
