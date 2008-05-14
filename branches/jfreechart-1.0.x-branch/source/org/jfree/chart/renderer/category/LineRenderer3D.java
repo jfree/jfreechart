@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------
  * LineRenderer3D.java
  * -------------------
- * (C) Copyright 2004-2007, by Tobias Selb and Contributors.
+ * (C) Copyright 2004-2008, by Tobias Selb and Contributors.
  *
  * Original Author:  Tobias Selb (http://www.uepselon.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -47,7 +47,7 @@
  *               argument check to setWallPaint() (DG);
  * 03-Apr-2007 : Fixed bugs in drawBackground() method (DG);
  * 16-Oct-2007 : Fixed bug in range marker drawing (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer.category;
@@ -86,30 +86,30 @@ import org.jfree.util.ShapeUtilities;
 /**
  * A line renderer with a 3D effect.
  */
-public class LineRenderer3D extends LineAndShapeRenderer 
+public class LineRenderer3D extends LineAndShapeRenderer
                             implements Effect3D, Serializable {
-   
+
     /** For serialization. */
     private static final long serialVersionUID = 5467931468380928736L;
-    
+
     /** The default x-offset for the 3D effect. */
     public static final double DEFAULT_X_OFFSET = 12.0;
 
     /** The default y-offset for the 3D effect. */
     public static final double DEFAULT_Y_OFFSET = 8.0;
-   
+
     /** The default wall paint. */
     public static final Paint DEFAULT_WALL_PAINT = new Color(0xDD, 0xDD, 0xDD);
-   
+
     /** The size of x-offset for the 3D effect. */
     private double xOffset;
 
     /** The size of y-offset for the 3D effect. */
     private double yOffset;
-   
+
     /** The paint used to shade the left and lower 3D wall. */
     private transient Paint wallPaint;
-   
+
     /**
      * Creates a new renderer.
      */
@@ -119,12 +119,12 @@ public class LineRenderer3D extends LineAndShapeRenderer
         this.yOffset = DEFAULT_Y_OFFSET;
         this.wallPaint = DEFAULT_WALL_PAINT;
     }
-   
+
     /**
      * Returns the x-offset for the 3D effect.
      *
      * @return The x-offset.
-     * 
+     *
      * @see #setXOffset(double)
      * @see #getYOffset()
      */
@@ -136,20 +136,20 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * Returns the y-offset for the 3D effect.
      *
      * @return The y-offset.
-     * 
+     *
      * @see #setYOffset(double)
      * @see #getXOffset()
      */
     public double getYOffset() {
         return this.yOffset;
     }
-   
+
     /**
-     * Sets the x-offset and sends a {@link RendererChangeEvent} to all 
+     * Sets the x-offset and sends a {@link RendererChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param xOffset  the x-offset.
-     * 
+     *
      * @see #getXOffset()
      */
     public void setXOffset(double xOffset) {
@@ -158,11 +158,11 @@ public class LineRenderer3D extends LineAndShapeRenderer
     }
 
     /**
-     * Sets the y-offset and sends a {@link RendererChangeEvent} to all 
+     * Sets the y-offset and sends a {@link RendererChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param yOffset  the y-offset.
-     * 
+     *
      * @see #getYOffset()
      */
     public void setYOffset(double yOffset) {
@@ -175,7 +175,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * background.
      *
      * @return The paint.
-     * 
+     *
      * @see #setWallPaint(Paint)
      */
     public Paint getWallPaint() {
@@ -184,11 +184,11 @@ public class LineRenderer3D extends LineAndShapeRenderer
 
     /**
      * Sets the paint used to hightlight the left and bottom walls in the plot
-     * background, and sends a {@link RendererChangeEvent} to all 
+     * background, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getWallPaint()
      */
     public void setWallPaint(Paint paint) {
@@ -198,7 +198,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
         this.wallPaint = paint;
         fireChangeEvent();
     }
-   
+
     /**
      * Draws the background for the plot.
      *
@@ -206,7 +206,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @param plot  the plot.
      * @param dataArea  the area inside the axes.
      */
-    public void drawBackground(Graphics2D g2, CategoryPlot plot, 
+    public void drawBackground(Graphics2D g2, CategoryPlot plot,
                                Rectangle2D dataArea) {
 
         float x0 = (float) dataArea.getX();
@@ -269,13 +269,13 @@ public class LineRenderer3D extends LineAndShapeRenderer
         // draw background image, if there is one...
         Image backgroundImage = plot.getBackgroundImage();
         if (backgroundImage != null) {
-            Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX() 
-                    + getXOffset(), dataArea.getY(), 
-                    dataArea.getWidth() - getXOffset(), 
+            Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX()
+                    + getXOffset(), dataArea.getY(),
+                    dataArea.getWidth() - getXOffset(),
                     dataArea.getHeight() - getYOffset());
             plot.drawBackgroundImage(g2, adjusted);
         }
-        
+
         g2.setComposite(originalComposite);
 
     }
@@ -287,7 +287,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @param plot  the plot.
      * @param dataArea  the area inside the axes.
      */
-    public void drawOutline(Graphics2D g2, CategoryPlot plot, 
+    public void drawOutline(Graphics2D g2, CategoryPlot plot,
                             Rectangle2D dataArea) {
 
         float x0 = (float) dataArea.getX();
@@ -325,7 +325,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      *
      * @param g2  the graphics device.
      * @param plot  the plot.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 
+     * @param dataArea  the area for plotting data (not yet adjusted for any
      *                  3D effect).
      * @param value  the Java2D value at which the grid line should be drawn.
      *
@@ -369,7 +369,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 
+     * @param dataArea  the area for plotting data (not yet adjusted for any
      *                  3D effect).
      * @param value  the value at which the grid line should be drawn.
      *
@@ -395,7 +395,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
         Line2D line2 = null;
         PlotOrientation orientation = plot.getOrientation();
         if (orientation == PlotOrientation.HORIZONTAL) {
-            double x0 = axis.valueToJava2D(value, adjusted, 
+            double x0 = axis.valueToJava2D(value, adjusted,
                     plot.getRangeAxisEdge());
             double x1 = x0 + getXOffset();
             double y0 = dataArea.getMaxY();
@@ -436,9 +436,9 @@ public class LineRenderer3D extends LineAndShapeRenderer
                                 Marker marker,
                                 Rectangle2D dataArea) {
 
-        Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(), 
-                dataArea.getY() + getYOffset(), 
-                dataArea.getWidth() - getXOffset(), 
+        Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(),
+                dataArea.getY() + getYOffset(),
+                dataArea.getWidth() - getXOffset(),
                 dataArea.getHeight() - getYOffset());
 
         if (marker instanceof ValueMarker) {
@@ -452,26 +452,26 @@ public class LineRenderer3D extends LineAndShapeRenderer
             GeneralPath path = null;
             PlotOrientation orientation = plot.getOrientation();
             if (orientation == PlotOrientation.HORIZONTAL) {
-                float x = (float) axis.valueToJava2D(value, adjusted, 
+                float x = (float) axis.valueToJava2D(value, adjusted,
                         plot.getRangeAxisEdge());
                 float y = (float) adjusted.getMaxY();
                 path = new GeneralPath();
                 path.moveTo(x, y);
-                path.lineTo((float) (x + getXOffset()), 
+                path.lineTo((float) (x + getXOffset()),
                         y - (float) getYOffset());
-                path.lineTo((float) (x + getXOffset()), 
+                path.lineTo((float) (x + getXOffset()),
                         (float) (adjusted.getMinY() - getYOffset()));
                 path.lineTo(x, (float) adjusted.getMinY());
                 path.closePath();
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                float y = (float) axis.valueToJava2D(value, adjusted, 
+                float y = (float) axis.valueToJava2D(value, adjusted,
                         plot.getRangeAxisEdge());
                 float x = (float) dataArea.getX();
                 path = new GeneralPath();
                 path.moveTo(x, y);
                 path.lineTo(x + (float) this.xOffset, y - (float) this.yOffset);
-                path.lineTo((float) (adjusted.getMaxX() + this.xOffset), 
+                path.lineTo((float) (adjusted.getMaxX() + this.xOffset),
                         y - (float) this.yOffset);
                 path.lineTo((float) (adjusted.getMaxX()), y);
                 path.closePath();
@@ -486,7 +486,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
             // TODO: draw the interval marker with a 3D effect
         }
     }
-   
+
    /**
      * Draw a single data item.
      *
@@ -513,27 +513,27 @@ public class LineRenderer3D extends LineAndShapeRenderer
                          int pass) {
 
         if (!getItemVisible(row, column)) {
-            return;   
+            return;
         }
-        
+
         // nothing is drawn for null...
         Number v = dataset.getValue(row, column);
         if (v == null) {
             return;
         }
-       
+
         Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(),
-                dataArea.getY() + getYOffset(), 
+                dataArea.getY() + getYOffset(),
                 dataArea.getWidth() - getXOffset(),
                 dataArea.getHeight() - getYOffset());
-       
+
         PlotOrientation orientation = plot.getOrientation();
 
         // current data point...
-        double x1 = domainAxis.getCategoryMiddle(column, getColumnCount(), 
+        double x1 = domainAxis.getCategoryMiddle(column, getColumnCount(),
                 adjusted, plot.getDomainAxisEdge());
         double value = v.doubleValue();
-        double y1 = rangeAxis.valueToJava2D(value, adjusted, 
+        double y1 = rangeAxis.valueToJava2D(value, adjusted,
                 plot.getRangeAxisEdge());
 
         Shape shape = getItemShape(row, column);
@@ -543,7 +543,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
         else if (orientation == PlotOrientation.VERTICAL) {
             shape = ShapeUtilities.createTranslatedShape(shape, x1, y1);
         }
-       
+
         if (getItemLineVisible(row, column)) {
             if (column != 0) {
 
@@ -552,19 +552,19 @@ public class LineRenderer3D extends LineAndShapeRenderer
 
                     // previous data point...
                     double previous = previousValue.doubleValue();
-                    double x0 = domainAxis.getCategoryMiddle(column - 1, 
-                            getColumnCount(), adjusted, 
+                    double x0 = domainAxis.getCategoryMiddle(column - 1,
+                            getColumnCount(), adjusted,
                             plot.getDomainAxisEdge());
-                    double y0 = rangeAxis.valueToJava2D(previous, adjusted, 
+                    double y0 = rangeAxis.valueToJava2D(previous, adjusted,
                             plot.getRangeAxisEdge());
 
                     double x2 = x0 + getXOffset();
                     double y2 = y0 - getYOffset();
                     double x3 = x1 + getXOffset();
                     double y3 = y1 - getYOffset();
-                   
+
                     GeneralPath clip = new GeneralPath();
-                   
+
                     if (orientation == PlotOrientation.HORIZONTAL) {
                         clip.moveTo((float) y0, (float) x0);
                         clip.lineTo((float) y1, (float) x1);
@@ -581,7 +581,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
                         clip.lineTo((float) x0, (float) y0);
                         clip.closePath();
                     }
-                   
+
                     g2.setPaint(getItemPaint(row, column));
                     g2.fill(clip);
                     g2.setStroke(getItemOutlineStroke(row, column));
@@ -593,7 +593,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
 
         // draw the item label if there is one...
         if (isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, orientation, dataset, row, column, x1, y1, 
+            drawItemLabel(g2, orientation, dataset, row, column, x1, y1,
                     (value < 0.0));
         }
 
@@ -604,12 +604,12 @@ public class LineRenderer3D extends LineAndShapeRenderer
         }
 
     }
-    
+
     /**
      * Checks this renderer for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -631,7 +631,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Provides serialization support.
      *
