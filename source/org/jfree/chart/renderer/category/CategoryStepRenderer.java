@@ -2,33 +2,33 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * CategoryStepRenderer.java
  * -------------------------
  *
- * (C) Copyright 2004-2007, by Brian Cole and Contributors.
+ * (C) Copyright 2004-2008, by Brian Cole and Contributors.
  *
  * Original Author:  Brian Cole;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -41,11 +41,11 @@
  * 08-Mar-2005 : Added equals() method (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 30-Nov-2006 : Added checks for series visibility (DG);
- * 22-Feb-2007 : Use new state object for reusable line, enable chart entities 
+ * 22-Feb-2007 : Use new state object for reusable line, enable chart entities
  *               (for tooltips, URLs), added new getLegendItem() override (DG);
  * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer.category;
@@ -74,76 +74,75 @@ import org.jfree.util.PublicCloneable;
  * that can be used with the {@link CategoryPlot} class.
  */
 public class CategoryStepRenderer extends AbstractCategoryItemRenderer
-                                  implements Cloneable, PublicCloneable, 
-                                             Serializable {
+        implements Cloneable, PublicCloneable, Serializable {
 
     /**
      * State information for the renderer.
      */
     protected static class State extends CategoryItemRendererState {
 
-        /** 
+        /**
          * A working line for re-use to avoid creating large numbers of
          * objects.
          */
         public Line2D line;
-        
+
         /**
          * Creates a new state instance.
-         * 
-         * @param info  collects plot rendering information (<code>null</code> 
+         *
+         * @param info  collects plot rendering information (<code>null</code>
          *              permitted).
          */
         public State(PlotRenderingInfo info) {
             super(info);
             this.line = new Line2D.Double();
         }
-        
+
     }
-    
+
     /** For serialization. */
     private static final long serialVersionUID = -5121079703118261470L;
-    
+
     /** The stagger width. */
     public static final int STAGGER_WIDTH = 5; // could make this configurable
-  
-    /** 
-     * A flag that controls whether or not the steps for multiple series are 
-     * staggered. 
+
+    /**
+     * A flag that controls whether or not the steps for multiple series are
+     * staggered.
      */
     private boolean stagger = false;
 
-    /** 
+    /**
      * Creates a new renderer (stagger defaults to <code>false</code>).
      */
     public CategoryStepRenderer() {
         this(false);
     }
-    
+
     /**
      * Creates a new renderer.
-     *  
-     * @param stagger  should the horizontal part of the step be staggered by 
-     *                 series? 
+     *
+     * @param stagger  should the horizontal part of the step be staggered by
+     *                 series?
      */
     public CategoryStepRenderer(boolean stagger) {
         this.stagger = stagger;
     }
-  
+
     /**
      * Returns the flag that controls whether the series steps are staggered.
-     * 
+     *
      * @return A boolean.
      */
     public boolean getStagger() {
         return this.stagger;
     }
-    
+
     /**
-     * Sets the flag that controls whether or not the series steps are 
+     * Sets the flag that controls whether or not the series steps are
      * staggered and sends a {@link RendererChangeEvent} to all registered
      * listeners.
-     * 
+     *
      * @param shouldStagger  a boolean.
      */
     public void setStagger(boolean shouldStagger) {
@@ -172,23 +171,23 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
         }
 
         CategoryDataset dataset = p.getDataset(datasetIndex);
-        String label = getLegendItemLabelGenerator().generateLabel(dataset, 
+        String label = getLegendItemLabelGenerator().generateLabel(dataset,
                 series);
         String description = label;
-        String toolTipText = null; 
+        String toolTipText = null;
         if (getLegendItemToolTipGenerator() != null) {
             toolTipText = getLegendItemToolTipGenerator().generateLabel(
-                    dataset, series);   
+                    dataset, series);
         }
         String urlText = null;
         if (getLegendItemURLGenerator() != null) {
-            urlText = getLegendItemURLGenerator().generateLabel(dataset, 
-                    series);   
+            urlText = getLegendItemURLGenerator().generateLabel(dataset,
+                    series);
         }
         Shape shape = new Rectangle2D.Double(-4.0, -3.0, 8.0, 6.0);
         Paint paint = lookupSeriesPaint(series);
-     
-        LegendItem item = new LegendItem(label, description, toolTipText, 
+
+        LegendItem item = new LegendItem(label, description, toolTipText,
                 urlText, shape, paint);
         item.setSeriesKey(dataset.getRowKey(series));
         item.setSeriesIndex(series);
@@ -198,13 +197,13 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Creates a new state instance.  This method is called from 
-     * {@link #initialise(Graphics2D, Rectangle2D, CategoryPlot, int, 
+     * Creates a new state instance.  This method is called from
+     * {@link #initialise(Graphics2D, Rectangle2D, CategoryPlot, int,
      * PlotRenderingInfo)}, and we override it to ensure that the state
      * contains a working Line2D instance.
-     * 
+     *
      * @param info  the plot rendering info (<code>null</code> is permitted).
-     * 
+     *
      * @return A new state instance.
      */
     protected CategoryItemRendererState createState(PlotRenderingInfo info) {
@@ -214,12 +213,12 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
     /**
      * Draws a line taking into account the specified orientation.
      * <p>
-     * In version 1.0.5, the signature of this method was changed by the 
+     * In version 1.0.5, the signature of this method was changed by the
      * addition of the 'state' parameter.  This is an incompatible change, but
-     * is considered a low risk because it is unlikely that anyone has 
+     * is considered a low risk because it is unlikely that anyone has
      * subclassed this renderer.  If this *does* cause trouble for you, please
      * report it as a bug.
-     * 
+     *
      * @param g2  the graphics device.
      * @param state  the renderer state.
      * @param orientation  the plot orientation.
@@ -228,10 +227,10 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
      * @param x1  the x-coordinate for the end of the line.
      * @param y1  the y-coordinate for the end of the line.
      */
-    protected void drawLine(Graphics2D g2, State state, 
-            PlotOrientation orientation, double x0, double y0, double x1, 
+    protected void drawLine(Graphics2D g2, State state,
+            PlotOrientation orientation, double x0, double y0, double x1,
             double y1) {
-     
+
         if (orientation == PlotOrientation.VERTICAL) {
             state.line.setLine(x0, y0, x1, y1);
             g2.draw(state.line);
@@ -270,9 +269,9 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
 
         // do nothing if item is not visible
         if (!getItemVisible(row, column)) {
-            return;   
+            return;
         }
-        
+
         Number value = dataset.getValue(row, column);
         if (value == null) {
             return;
@@ -280,12 +279,12 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
         PlotOrientation orientation = plot.getOrientation();
 
         // current data point...
-        double x1s = domainAxis.getCategoryStart(column, getColumnCount(), 
+        double x1s = domainAxis.getCategoryStart(column, getColumnCount(),
                 dataArea, plot.getDomainAxisEdge());
-        double x1 = domainAxis.getCategoryMiddle(column, getColumnCount(), 
+        double x1 = domainAxis.getCategoryMiddle(column, getColumnCount(),
                 dataArea, plot.getDomainAxisEdge());
         double x1e = 2 * x1 - x1s; // or: x1s + 2*(x1-x1s)
-        double y1 = rangeAxis.valueToJava2D(value.doubleValue(), dataArea, 
+        double y1 = rangeAxis.valueToJava2D(value.doubleValue(), dataArea,
                 plot.getRangeAxisEdge());
         g2.setPaint(getItemPaint(row, column));
         g2.setStroke(getItemStroke(row, column));
@@ -295,12 +294,12 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
             if (previousValue != null) {
                 // previous data point...
                 double previous = previousValue.doubleValue();
-                double x0s = domainAxis.getCategoryStart(column - 1, 
+                double x0s = domainAxis.getCategoryStart(column - 1,
                         getColumnCount(), dataArea, plot.getDomainAxisEdge());
-                double x0 = domainAxis.getCategoryMiddle(column - 1, 
+                double x0 = domainAxis.getCategoryMiddle(column - 1,
                         getColumnCount(), dataArea, plot.getDomainAxisEdge());
                 double x0e = 2 * x0 - x0s; // or: x0s + 2*(x0-x0s)
-                double y0 = rangeAxis.valueToJava2D(previous, dataArea, 
+                double y0 = rangeAxis.valueToJava2D(previous, dataArea,
                         plot.getRangeAxisEdge());
                 if (getStagger()) {
                     int xStagger = row * STAGGER_WIDTH;
@@ -309,19 +308,19 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
                     }
                     x1s = x0e + xStagger;
                 }
-                drawLine(g2, (State) state, orientation, x0e, y0, x1s, y0); 
+                drawLine(g2, (State) state, orientation, x0e, y0, x1s, y0);
                 // extend x0's flat bar
 
-                drawLine(g2, (State) state, orientation, x1s, y0, x1s, y1); 
+                drawLine(g2, (State) state, orientation, x1s, y0, x1s, y1);
                 // upright bar
            }
        }
-       drawLine(g2, (State) state, orientation, x1s, y1, x1e, y1); 
+       drawLine(g2, (State) state, orientation, x1s, y1, x1e, y1);
        // x1's flat bar
 
        // draw the item labels if there are any...
        if (isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, orientation, dataset, row, column, x1, y1, 
+            drawItemLabel(g2, orientation, dataset, row, column, x1, y1,
                     (value.doubleValue() < 0.0));
        }
 
@@ -339,24 +338,24 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
        }
 
     }
-    
+
     /**
      * Tests this renderer for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
-            return true;   
+            return true;
         }
         if (!(obj instanceof CategoryStepRenderer)) {
-            return false;   
+            return false;
         }
         CategoryStepRenderer that = (CategoryStepRenderer) obj;
         if (this.stagger != that.stagger) {
-            return false;   
+            return false;
         }
         return super.equals(obj);
     }
