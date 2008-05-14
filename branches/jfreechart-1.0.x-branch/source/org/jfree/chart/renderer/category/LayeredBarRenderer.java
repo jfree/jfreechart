@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------
  * LayeredBarRenderer.java
  * -----------------------
- * (C) Copyright 2003-2007, by Arnaud Lelievre and Contributors.
+ * (C) Copyright 2003-2008, by Arnaud Lelievre and Contributors.
  *
  * Original Author:  Arnaud Lelievre (for Garden);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -40,11 +40,11 @@
  * 07-Oct-2003 : Added renderer state (DG);
  * 21-Oct-2003 : Bar width moved to renderer state (DG);
  * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 20-Apr-2005 : Renamed CategoryLabelGenerator 
+ * 20-Apr-2005 : Renamed CategoryLabelGenerator
  *               --> CategoryItemLabelGenerator (DG);
  * 17-Nov-2005 : Added support for gradient paint (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 18-Aug-2006 : Fixed the bar width calculation to respect the maximum bar 
+ * 18-Aug-2006 : Fixed the bar width calculation to respect the maximum bar
  *               width setting (thanks to Zoheb Borbora) (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
@@ -73,12 +73,11 @@ import org.jfree.ui.RectangleEdge;
 import org.jfree.util.ObjectList;
 
 /**
- * A {@link CategoryItemRenderer} that represents data using bars which are 
+ * A {@link CategoryItemRenderer} that represents data using bars which are
  * superimposed.
  */
-public class LayeredBarRenderer extends BarRenderer 
-                                implements Serializable {
-    
+public class LayeredBarRenderer extends BarRenderer implements Serializable {
+
     /** For serialization. */
     private static final long serialVersionUID = -8716572894780469487L;
 
@@ -114,23 +113,23 @@ public class LayeredBarRenderer extends BarRenderer
      * Sets the width of the bars of a series.
      *
      * @param series  the series index (zero based).
-     * @param width  the width of the series bar in percentage (1.0=100%, it is 
+     * @param width  the width of the series bar in percentage (1.0=100%, it is
      *               the maximum).
-     */ 
+     */
     public void setSeriesBarWidth(int series, double width) {
         this.seriesBarWidthList.set(series, new Double(width));
     }
 
     /**
      * Calculates the bar width and stores it in the renderer state.
-     * 
+     *
      * @param plot  the plot.
      * @param dataArea  the data area.
      * @param rendererIndex  the renderer index.
      * @param state  the renderer state.
      */
-    protected void calculateBarWidth(CategoryPlot plot, 
-                                     Rectangle2D dataArea, 
+    protected void calculateBarWidth(CategoryPlot plot,
+                                     Rectangle2D dataArea,
                                      int rendererIndex,
                                      CategoryItemRendererState state) {
 
@@ -156,12 +155,12 @@ public class LayeredBarRenderer extends BarRenderer
             if (columns > 1) {
                 categoryMargin = domainAxis.getCategoryMargin();
             }
-            double used = space * (1 - domainAxis.getLowerMargin() 
+            double used = space * (1 - domainAxis.getLowerMargin()
                 - domainAxis.getUpperMargin() - categoryMargin);
             if ((rows * columns) > 0) {
-                state.setBarWidth(Math.min(used / (dataset.getColumnCount()), 
+                state.setBarWidth(Math.min(used / (dataset.getColumnCount()),
                         maxWidth));
-            } 
+            }
             else {
                 state.setBarWidth(Math.min(used, maxWidth));
             }
@@ -195,11 +194,11 @@ public class LayeredBarRenderer extends BarRenderer
 
         PlotOrientation orientation = plot.getOrientation();
         if (orientation == PlotOrientation.HORIZONTAL) {
-            drawHorizontalItem(g2, state, dataArea, plot, domainAxis, 
+            drawHorizontalItem(g2, state, dataArea, plot, domainAxis,
                     rangeAxis, data, row, column);
         }
         else if (orientation == PlotOrientation.VERTICAL) {
-            drawVerticalItem(g2, state, dataArea, plot, domainAxis, rangeAxis, 
+            drawVerticalItem(g2, state, dataArea, plot, domainAxis, rangeAxis,
                     data, row, column);
         }
 
@@ -275,7 +274,7 @@ public class LayeredBarRenderer extends BarRenderer
         double rectWidth = Math.abs(transX2 - transX1);
 
         // Y
-        double rectY = domainAxis.getCategoryMiddle(column, getColumnCount(), 
+        double rectY = domainAxis.getCategoryMiddle(column, getColumnCount(),
                 dataArea, plot.getDomainAxisEdge()) - state.getBarWidth() / 2.0;
 
         int seriesCount = getRowCount();
@@ -287,15 +286,15 @@ public class LayeredBarRenderer extends BarRenderer
         double seriesBarWidth = getSeriesBarWidth(row);
         if (!Double.isNaN(seriesBarWidth)) {
             widthFactor = seriesBarWidth;
-        } 
+        }
         rectHeight = widthFactor * state.getBarWidth();
         rectY = rectY + (1 - widthFactor) * state.getBarWidth() / 2.0;
         if (seriesCount > 1) {
             shift = rectHeight * 0.20 / (seriesCount - 1);
         }
 
-        Rectangle2D bar = new Rectangle2D.Double(rectX, 
-                (rectY + ((seriesCount - 1 - row) * shift)), rectWidth, 
+        Rectangle2D bar = new Rectangle2D.Double(rectX,
+                (rectY + ((seriesCount - 1 - row) * shift)), rectWidth,
                 (rectHeight - (seriesCount - 1 - row) * shift * 2));
 
         Paint itemPaint = getItemPaint(row, column);
@@ -307,7 +306,7 @@ public class LayeredBarRenderer extends BarRenderer
         g2.fill(bar);
 
         // draw the outline...
-        if (isDrawBarOutline() 
+        if (isDrawBarOutline()
                 && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
             Stroke stroke = getItemOutlineStroke(row, column);
             Paint paint = getItemOutlinePaint(row, column);
@@ -318,30 +317,30 @@ public class LayeredBarRenderer extends BarRenderer
             }
         }
 
-        CategoryItemLabelGenerator generator 
+        CategoryItemLabelGenerator generator
             = getItemLabelGenerator(row, column);
         if (generator != null && isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, data, row, column, plot, generator, bar, 
+            drawItemLabel(g2, data, row, column, plot, generator, bar,
                     (transX1 > transX2));
-        }        
+        }
 
         // collect entity and tool tip information...
         if (state.getInfo() != null) {
             EntityCollection entities = state.getEntityCollection();
             if (entities != null) {
                 String tip = null;
-                CategoryToolTipGenerator tipster 
+                CategoryToolTipGenerator tipster
                     = getToolTipGenerator(row, column);
                 if (tipster != null) {
                     tip = tipster.generateToolTip(data, row, column);
                 }
                 String url = null;
                 if (getItemURLGenerator(row, column) != null) {
-                    url = getItemURLGenerator(row, column).generateURL(data, 
+                    url = getItemURLGenerator(row, column).generateURL(data,
                             row, column);
                 }
-                CategoryItemEntity entity = new CategoryItemEntity(bar, tip, 
-                        url, data, data.getRowKey(row), 
+                CategoryItemEntity entity = new CategoryItemEntity(bar, tip,
+                        url, data, data.getRowKey(row),
                         data.getColumnKey(column));
                 entities.add(entity);
             }
@@ -378,7 +377,7 @@ public class LayeredBarRenderer extends BarRenderer
         }
 
         // BAR X
-        double rectX = domainAxis.getCategoryMiddle(column, getColumnCount(), 
+        double rectX = domainAxis.getCategoryMiddle(column, getColumnCount(),
                 dataArea, plot.getDomainAxisEdge()) - state.getBarWidth() / 2.0;
 
         int seriesCount = getRowCount();
@@ -433,7 +432,7 @@ public class LayeredBarRenderer extends BarRenderer
         double seriesBarWidth = getSeriesBarWidth(row);
         if (!Double.isNaN(seriesBarWidth)) {
             widthFactor = seriesBarWidth;
-        } 
+        }
         rectWidth = widthFactor * state.getBarWidth();
         rectX = rectX + (1 - widthFactor) * state.getBarWidth() / 2.0;
         if (seriesCount > 1) {
@@ -453,7 +452,7 @@ public class LayeredBarRenderer extends BarRenderer
         g2.fill(bar);
 
         // draw the outline...
-        if (isDrawBarOutline() 
+        if (isDrawBarOutline()
                 && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
             Stroke stroke = getItemOutlineStroke(row, column);
             Paint paint = getItemOutlinePaint(row, column);
@@ -468,19 +467,19 @@ public class LayeredBarRenderer extends BarRenderer
         double transX1 = rangeAxis.valueToJava2D(base, dataArea, edge);
         double transX2 = rangeAxis.valueToJava2D(value, dataArea, edge);
 
-        CategoryItemLabelGenerator generator 
+        CategoryItemLabelGenerator generator
             = getItemLabelGenerator(row, column);
         if (generator != null && isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, data, row, column, plot, generator, bar, 
+            drawItemLabel(g2, data, row, column, plot, generator, bar,
                     (transX1 > transX2));
-        }        
+        }
 
         // collect entity and tool tip information...
         if (state.getInfo() != null) {
             EntityCollection entities = state.getEntityCollection();
             if (entities != null) {
                 String tip = null;
-                CategoryToolTipGenerator tipster 
+                CategoryToolTipGenerator tipster
                     = getToolTipGenerator(row, column);
                 if (tipster != null) {
                     tip = tipster.generateToolTip(data, row, column);
@@ -490,8 +489,8 @@ public class LayeredBarRenderer extends BarRenderer
                     url = getItemURLGenerator(row, column).generateURL(
                         data, row, column);
                 }
-                CategoryItemEntity entity = new CategoryItemEntity(bar, tip, 
-                        url, data, data.getRowKey(row), 
+                CategoryItemEntity entity = new CategoryItemEntity(bar, tip,
+                        url, data, data.getRowKey(row),
                         data.getColumnKey(column));
                 entities.add(entity);
             }
