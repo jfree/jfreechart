@@ -164,54 +164,6 @@ public class WaterfallBarRenderer extends BarRenderer {
     }
 
     /**
-     * Returns the range of values the renderer requires to display all the
-     * items from the specified dataset.
-     *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     *
-     * @return The range (or <code>null</code> if the dataset is empty).
-     */
-    public Range findRangeBounds(CategoryDataset dataset) {
-
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
-
-        boolean allItemsNull = true; // we'll set this to false if there is at
-                                     // least one non-null data item...
-        double minimum = 0.0;
-        double maximum = 0.0;
-        int columnCount = dataset.getColumnCount();
-        for (int row = 0; row < dataset.getRowCount(); row++) {
-            double runningTotal = 0.0;
-            for (int column = 0; column <= columnCount - 1; column++) {
-                Number n = dataset.getValue(row, column);
-                if (n != null) {
-                    allItemsNull = false;
-                    double value = n.doubleValue();
-                    if (column == columnCount - 1) {
-                        // treat the last column value as an absolute
-                        runningTotal = value;
-                    }
-                    else {
-                        runningTotal = runningTotal + value;
-                    }
-                    minimum = Math.min(minimum, runningTotal);
-                    maximum = Math.max(maximum, runningTotal);
-                }
-            }
-
-        }
-        if (!allItemsNull) {
-            return new Range(minimum, maximum);
-        }
-        else {
-            return null;
-        }
-
-    }
-
-    /**
      * Returns the paint used to draw the first bar.
      *
      * @return The paint (never <code>null</code>).
@@ -300,6 +252,54 @@ public class WaterfallBarRenderer extends BarRenderer {
         }
         this.negativeBarPaint = paint;
         fireChangeEvent();
+    }
+
+    /**
+     * Returns the range of values the renderer requires to display all the
+     * items from the specified dataset.
+     *
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     *
+     * @return The range (or <code>null</code> if the dataset is empty).
+     */
+    public Range findRangeBounds(CategoryDataset dataset) {
+
+        if (dataset == null) {
+            throw new IllegalArgumentException("Null 'dataset' argument.");
+        }
+
+        boolean allItemsNull = true; // we'll set this to false if there is at
+                                     // least one non-null data item...
+        double minimum = 0.0;
+        double maximum = 0.0;
+        int columnCount = dataset.getColumnCount();
+        for (int row = 0; row < dataset.getRowCount(); row++) {
+            double runningTotal = 0.0;
+            for (int column = 0; column <= columnCount - 1; column++) {
+                Number n = dataset.getValue(row, column);
+                if (n != null) {
+                    allItemsNull = false;
+                    double value = n.doubleValue();
+                    if (column == columnCount - 1) {
+                        // treat the last column value as an absolute
+                        runningTotal = value;
+                    }
+                    else {
+                        runningTotal = runningTotal + value;
+                    }
+                    minimum = Math.min(minimum, runningTotal);
+                    maximum = Math.max(maximum, runningTotal);
+                }
+            }
+
+        }
+        if (!allItemsNull) {
+            return new Range(minimum, maximum);
+        }
+        else {
+            return null;
+        }
+
     }
 
     /**
