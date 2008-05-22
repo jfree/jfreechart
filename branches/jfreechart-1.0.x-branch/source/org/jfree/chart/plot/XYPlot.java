@@ -198,6 +198,9 @@
  *               1913751 (DG);
  * 07-Apr-2008 : Fixed NPE in removeDomainMarker() and
  *               removeRangeMarker() (DG);
+ * 22-May-2008 : Modified calculateAxisSpace() to process range axes first,
+ *               then adjust the plot area before calculating the space
+ *               for the domain axes (DG);
  *
  */
 
@@ -2641,8 +2644,9 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     protected AxisSpace calculateAxisSpace(Graphics2D g2,
                                            Rectangle2D plotArea) {
         AxisSpace space = new AxisSpace();
-        space = calculateDomainAxisSpace(g2, plotArea, space);
         space = calculateRangeAxisSpace(g2, plotArea, space);
+        Rectangle2D revPlotArea = space.shrink(plotArea, null);
+        space = calculateDomainAxisSpace(g2, revPlotArea, space);
         return space;
     }
 
