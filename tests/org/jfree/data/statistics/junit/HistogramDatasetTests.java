@@ -37,6 +37,7 @@
  * 01-Mar-2004 : Version 1 (DG);
  * 08-Jun-2005 : Added test for getSeriesKey(int) bug (DG);
  * 03-Aug-2006 : Added testAddSeries() and testBinBoundaries() method (DG);
+ * 22-May-2008 : Added testAddSeries2() and enhanced testCloning() (DG);
  *
  */
 
@@ -106,6 +107,11 @@ public class HistogramDatasetTests extends TestCase {
 
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
+
+        d1.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
+        assertFalse(d1.equals(d2));
+        d2.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
+        assertTrue(d1.equals(d2));
     }
 
     /**
@@ -120,10 +126,16 @@ public class HistogramDatasetTests extends TestCase {
             d2 = (HistogramDataset) d1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
+        assertTrue(d1.equals(d2));
+
+        // simple check for independence
+        d1.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
+        assertFalse(d1.equals(d2));
+        d2.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
         assertTrue(d1.equals(d2));
     }
 
@@ -151,6 +163,12 @@ public class HistogramDatasetTests extends TestCase {
             e.printStackTrace();
         }
         assertEquals(d1, d2);
+
+        // simple check for independence
+        d1.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
+        assertFalse(d1.equals(d2));
+        d2.addSeries("Series 2", new double[] {1.0, 2.0, 3.0}, 2);
+        assertTrue(d1.equals(d2));
     }
 
     /**
@@ -178,6 +196,30 @@ public class HistogramDatasetTests extends TestCase {
         assertEquals(1.0, d.getStartXValue(0, 1), EPSILON);
         assertEquals(2.0, d.getEndXValue(0, 1), EPSILON);
         assertEquals(5.0, d.getYValue(0, 1), EPSILON);
+    }
+
+    /**
+     * Another check for the addSeries() method.
+     */
+    public void testAddSeries2() {
+        double[] values = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
+        HistogramDataset hd = new HistogramDataset();
+        hd.addSeries("S1", values, 5);
+        assertEquals(0.0, hd.getStartXValue(0, 0), EPSILON);
+        assertEquals(1.0, hd.getEndXValue(0, 0), EPSILON);
+        assertEquals(1.0, hd.getYValue(0, 0), EPSILON);
+        assertEquals(1.0, hd.getStartXValue(0, 1), EPSILON);
+        assertEquals(2.0, hd.getEndXValue(0, 1), EPSILON);
+        assertEquals(1.0, hd.getYValue(0, 1), EPSILON);
+        assertEquals(2.0, hd.getStartXValue(0, 2), EPSILON);
+        assertEquals(3.0, hd.getEndXValue(0, 2), EPSILON);
+        assertEquals(1.0, hd.getYValue(0, 2), EPSILON);
+        assertEquals(3.0, hd.getStartXValue(0, 3), EPSILON);
+        assertEquals(4.0, hd.getEndXValue(0, 3), EPSILON);
+        assertEquals(1.0, hd.getYValue(0, 3), EPSILON);
+        assertEquals(4.0, hd.getStartXValue(0, 4), EPSILON);
+        assertEquals(5.0, hd.getEndXValue(0, 4), EPSILON);
+        assertEquals(2.0, hd.getYValue(0, 4), EPSILON);
     }
 
     /**

@@ -52,6 +52,7 @@
  * ------------- JFREECHART 1.0.0 ---------------------------------------------
  * 03-Aug-2006 : Improved precision of bin boundary calculation (DG);
  * 07-Sep-2006 : Fixed bug 1553088 (DG);
+ * 22-May-2008 : Implemented clone() method override (DG);
  *
  */
 
@@ -492,7 +493,13 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    	HistogramDataset clone = (HistogramDataset) super.clone();
+        int seriesCount = getSeriesCount();
+    	clone.list = new java.util.ArrayList(seriesCount);
+        for (int i = 0; i < seriesCount; i++) {
+        	clone.list.add(new HashMap((Map) this.list.get(i)));
+        }
+    	return clone;
     }
 
 }
