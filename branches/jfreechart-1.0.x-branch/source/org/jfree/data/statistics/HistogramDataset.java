@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
  * HistogramDataset.java
  * ---------------------
- * (C) Copyright 2003-2007, by Jelai Wang and Contributors.
+ * (C) Copyright 2003-2008, by Jelai Wang and Contributors.
  *
  * Original Author:  Jelai Wang (jelaiw AT mindspring.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -40,10 +40,10 @@
  * 07-Jul-2003 : Changed package and added Javadocs (DG);
  * 15-Oct-2003 : Updated Javadocs and removed array sorting (JW);
  * 09-Jan-2004 : Added fix by "Z." posted in the JFreeChart forum (DG);
- * 01-Mar-2004 : Added equals() and clone() methods and implemented 
+ * 01-Mar-2004 : Added equals() and clone() methods and implemented
  *               Serializable.  Also added new addSeries() method (DG);
  * 06-May-2004 : Now extends AbstractIntervalXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * 20-May-2005 : Speed up binning - see patch 1026151 contributed by Cameron
  *               Hayne (DG);
@@ -52,7 +52,7 @@
  * ------------- JFREECHART 1.0.0 ---------------------------------------------
  * 03-Aug-2006 : Improved precision of bin boundary calculation (DG);
  * 07-Sep-2006 : Fixed bug 1553088 (DG);
- * 
+ *
  */
 
 package org.jfree.data.statistics;
@@ -71,58 +71,57 @@ import org.jfree.util.PublicCloneable;
 
 /**
  * A dataset that can be used for creating histograms.
- * 
+ *
  * @see SimpleHistogramDataset
  */
-public class HistogramDataset extends AbstractIntervalXYDataset 
-                              implements IntervalXYDataset, 
-                                         Cloneable, PublicCloneable, 
-                                         Serializable {
+public class HistogramDataset extends AbstractIntervalXYDataset
+        implements IntervalXYDataset, Cloneable, PublicCloneable,
+                   Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6341668077370231153L;
-    
+
     /** A list of maps. */
     private List list;
-    
+
     /** The histogram type. */
     private HistogramType type;
 
     /**
-     * Creates a new (empty) dataset with a default type of 
+     * Creates a new (empty) dataset with a default type of
      * {@link HistogramType}.FREQUENCY.
      */
     public HistogramDataset() {
         this.list = new ArrayList();
         this.type = HistogramType.FREQUENCY;
     }
-    
+
     /**
-     * Returns the histogram type. 
-     * 
+     * Returns the histogram type.
+     *
      * @return The type (never <code>null</code>).
      */
-    public HistogramType getType() { 
-        return this.type; 
+    public HistogramType getType() {
+        return this.type;
     }
 
     /**
-     * Sets the histogram type and sends a {@link DatasetChangeEvent} to all 
+     * Sets the histogram type and sends a {@link DatasetChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param type  the type (<code>null</code> not permitted).
      */
     public void setType(HistogramType type) {
         if (type == null) {
             throw new IllegalArgumentException("Null 'type' argument");
         }
-        this.type = type;   
+        this.type = type;
         notifyListeners(new DatasetChangeEvent(this, this));
     }
 
     /**
      * Adds a series to the dataset, using the specified number of bins.
-     * 
+     *
      * @param key  the series key (<code>null</code> not permitted).
      * @param values the values (<code>null</code> not permitted).
      * @param bins  the number of bins (must be at least 1).
@@ -137,23 +136,23 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     /**
      * Adds a series to the dataset. Any data value less than minimum will be
      * assigned to the first bin, and any data value greater than maximum will
-     * be assigned to the last bin.  Values falling on the boundary of 
+     * be assigned to the last bin.  Values falling on the boundary of
      * adjacent bins will be assigned to the higher indexed bin.
-     * 
+     *
      * @param key  the series key (<code>null</code> not permitted).
      * @param values  the raw observations.
      * @param bins  the number of bins (must be at least 1).
      * @param minimum  the lower bound of the bin range.
      * @param maximum  the upper bound of the bin range.
      */
-    public void addSeries(Comparable key, 
-                          double[] values, 
-                          int bins, 
-                          double minimum, 
+    public void addSeries(Comparable key,
+                          double[] values,
+                          int bins,
+                          double minimum,
                           double maximum) {
-        
+
         if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");   
+            throw new IllegalArgumentException("Null 'key' argument.");
         }
         if (values == null) {
             throw new IllegalArgumentException("Null 'values' argument.");
@@ -181,7 +180,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
                 lower = upper;
             }
             binList.add(bin);
-        }        
+        }
         // fill the bins
         for (int i = 0; i < values.length; i++) {
             int binIndex = bins - 1;
@@ -209,13 +208,13 @@ public class HistogramDataset extends AbstractIntervalXYDataset
         map.put("bin width", new Double(binWidth));
         this.list.add(map);
     }
-    
+
     /**
      * Returns the minimum value in an array of values.
-     * 
-     * @param values  the values (<code>null</code> not permitted and 
+     *
+     * @param values  the values (<code>null</code> not permitted and
      *                zero-length array not permitted).
-     * 
+     *
      * @return The minimum value.
      */
     private double getMinimum(double[] values) {
@@ -234,10 +233,10 @@ public class HistogramDataset extends AbstractIntervalXYDataset
 
     /**
      * Returns the maximum value in an array of values.
-     * 
-     * @param values  the values (<code>null</code> not permitted and 
+     *
+     * @param values  the values (<code>null</code> not permitted and
      *                zero-length array not permitted).
-     * 
+     *
      * @return The maximum value.
      */
     private double getMaximum(double[] values) {
@@ -256,96 +255,96 @@ public class HistogramDataset extends AbstractIntervalXYDataset
 
     /**
      * Returns the bins for a series.
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
-     * 
+     *
      * @return A list of bins.
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
     List getBins(int series) {
         Map map = (Map) this.list.get(series);
-        return (List) map.get("bins"); 
+        return (List) map.get("bins");
     }
 
     /**
      * Returns the total number of observations for a series.
-     * 
+     *
      * @param series  the series index.
-     * 
+     *
      * @return The total.
      */
     private int getTotal(int series) {
         Map map = (Map) this.list.get(series);
-        return ((Integer) map.get("values.length")).intValue(); 
+        return ((Integer) map.get("values.length")).intValue();
     }
 
     /**
      * Returns the bin width for a series.
-     * 
+     *
      * @param series  the series index (zero based).
-     * 
+     *
      * @return The bin width.
      */
     private double getBinWidth(int series) {
         Map map = (Map) this.list.get(series);
-        return ((Double) map.get("bin width")).doubleValue(); 
+        return ((Double) map.get("bin width")).doubleValue();
     }
 
     /**
      * Returns the number of series in the dataset.
-     * 
+     *
      * @return The series count.
      */
-    public int getSeriesCount() { 
-        return this.list.size(); 
+    public int getSeriesCount() {
+        return this.list.size();
     }
-    
+
     /**
      * Returns the key for a series.
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
-     * 
+     *
      * @return The series key.
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
     public Comparable getSeriesKey(int series) {
         Map map = (Map) this.list.get(series);
-        return (Comparable) map.get("key"); 
+        return (Comparable) map.get("key");
     }
 
     /**
      * Returns the number of data items for a series.
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
-     * 
+     *
      * @return The item count.
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
     public int getItemCount(int series) {
-        return getBins(series).size(); 
+        return getBins(series).size();
     }
 
     /**
-     * Returns the X value for a bin.  This value won't be used for plotting 
-     * histograms, since the renderer will ignore it.  But other renderers can 
+     * Returns the X value for a bin.  This value won't be used for plotting
+     * histograms, since the renderer will ignore it.  But other renderers can
      * use it (for example, you could use the dataset to create a line
      * chart).
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
-     * 
+     *
      * @return The start value.
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
@@ -357,15 +356,15 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the y-value for a bin (calculated to take into account the 
+     * Returns the y-value for a bin (calculated to take into account the
      * histogram type).
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
-     * 
+     *
      * @return The y-value.
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
@@ -391,13 +390,13 @@ public class HistogramDataset extends AbstractIntervalXYDataset
 
     /**
      * Returns the start value for a bin.
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
-     * 
+     *
      * @return The start value.
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
@@ -409,13 +408,13 @@ public class HistogramDataset extends AbstractIntervalXYDataset
 
     /**
      * Returns the end value for a bin.
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
-     * 
+     *
      * @return The end value.
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
@@ -426,16 +425,16 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the start y-value for a bin (which is the same as the y-value, 
-     * this method exists only to support the general form of the 
+     * Returns the start y-value for a bin (which is the same as the y-value,
+     * this method exists only to support the general form of the
      * {@link IntervalXYDataset} interface).
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
-     * 
+     *
      * @return The y-value.
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
@@ -444,33 +443,33 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the end y-value for a bin (which is the same as the y-value, 
-     * this method exists only to support the general form of the 
+     * Returns the end y-value for a bin (which is the same as the y-value,
+     * this method exists only to support the general form of the
      * {@link IntervalXYDataset} interface).
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
-     * 
+     *
      * @return The Y value.
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
-     */    
+     */
     public Number getEndY(int series, int item) {
         return getY(series, item);
     }
 
     /**
      * Tests this dataset for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object to test against (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
-            return true;   
+            return true;
         }
         if (!(obj instanceof HistogramDataset)) {
             return false;
@@ -482,18 +481,18 @@ public class HistogramDataset extends AbstractIntervalXYDataset
         if (!ObjectUtilities.equal(this.list, that.list)) {
             return false;
         }
-        return true;   
+        return true;
     }
 
     /**
      * Returns a clone of the dataset.
-     * 
+     *
      * @return A clone of the dataset.
-     * 
+     *
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
-        return super.clone();   
+        return super.clone();
     }
 
 }
