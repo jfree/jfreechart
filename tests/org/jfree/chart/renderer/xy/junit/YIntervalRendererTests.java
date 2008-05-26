@@ -38,6 +38,7 @@
  * 20-Feb-2007 : Extended the testEquals() checks (DG);
  * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
  * 22-Apr-2008 : Added testPublicCloneable() (DG);
+ * 26-May-2008 : Extended testEquals() (DG);
  *
  */
 
@@ -58,6 +59,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.IntervalXYItemLabelGenerator;
 import org.jfree.chart.labels.StandardXYItemLabelGenerator;
 import org.jfree.chart.labels.StandardXYSeriesLabelGenerator;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
@@ -167,6 +169,12 @@ public class YIntervalRendererTests extends TestCase {
         assertFalse(r1.equals(r2));
         r2.setLegendItemURLGenerator(new StandardXYSeriesLabelGenerator());
         assertTrue(r1.equals(r2));
+
+        r1.setAdditionalItemLabelGenerator(new IntervalXYItemLabelGenerator());
+        assertFalse(r1.equals(r2));
+        r2.setAdditionalItemLabelGenerator(new IntervalXYItemLabelGenerator());
+        assertTrue(r1.equals(r2));
+
     }
 
     /**
