@@ -43,22 +43,28 @@
  * 27-Sep-2004 : Access double values from dataset (DG);
  * 11-Nov-2004 : Now uses ShapeUtilities to translate shapes (DG);
  * 11-Apr-2008 : New override for findRangeBounds() (DG);
+ * 26-May-2008 : Added item label support (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYItemEntity;
+import org.jfree.chart.event.RendererChangeEvent;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.XYItemLabelGenerator;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
@@ -68,7 +74,9 @@ import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.text.TextUtilities;
 import org.jfree.ui.RectangleEdge;
+import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.ShapeUtilities;
 
@@ -77,19 +85,58 @@ import org.jfree.util.ShapeUtilities;
  * {@link XYPlot}.
  */
 public class YIntervalRenderer extends AbstractXYItemRenderer
-                               implements XYItemRenderer,
-                                          Cloneable,
-                                          PublicCloneable,
-                                          Serializable {
+        implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
 
-    /** For serialization. */
+	/** For serialization. */
     private static final long serialVersionUID = -2951586537224143260L;
+
+    /**
+     * An additional item label generator.  If this is non-null, the item
+     * label generated will be displayed near the lower y-value at the
+     * position given by getNegativeItemLabelPosition().
+     *
+     * @since 1.0.10
+     */
+    private XYItemLabelGenerator additionalItemLabelGenerator;
 
     /**
      * The default constructor.
      */
     public YIntervalRenderer() {
         super();
+        this.additionalItemLabelGenerator = null;
+    }
+
+    /**
+     * Returns the generator for the item labels that appear near the lower
+     * y-value.
+     *
+     * @return The generator (possibly <code>null</code>).
+     *
+     * @see #setAdditionalItemLabelGenerator(XYItemLabelGenerator)
+     *
+     * @since 1.0.10
+     */
+    public XYItemLabelGenerator getAdditionalItemLabelGenerator() {
+    	return this.additionalItemLabelGenerator;
+    }
+
+    /**
+     * Sets the generator for the item labels that appear near the lower
+     * y-value and sends a {@link RendererChangeEvent} to all registered
+     * listeners.  If this is set to <code>null</code>, no item labels will be
+     * drawn.
+     *
+     * @param generator  the generator (<code>null</code> permitted).
+     *
+     * @see #getAdditionalItemLabelGenerator()
+     *
+     * @since 1.0.10
+     */
+    public void setAdditionalItemLabelGenerator(
+    		XYItemLabelGenerator generator) {
+    	this.additionalItemLabelGenerator = generator;
+    	fireChangeEvent();
     }
 
     /**
@@ -186,6 +233,17 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
         g2.fill(top);
         g2.fill(bottom);
 
+        // for item labels, we have a special case because there is the
+        // possibility to draw (a) the regular item label near to just the
+        // upper y-value, or (b) the regular item label near the upper y-value
+        // PLUS an additional item label near the lower y-value.
+        if (isItemLabelVisible(series, item)) {
+            drawItemLabel(g2, orientation, dataset, series, item, xx, yyHigh,
+                    false);
+            drawAdditionalItemLabel(g2, orientation, dataset, series, item,
+            		xx, yyLow);
+        }
+
         // add an entity for the item...
         if (entities != null) {
             if (entityArea == null) {
@@ -205,6 +263,65 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
             entities.add(entity);
         }
 
+    }
+
+    /**
+     * Draws an item label.
+     *
+     * @param g2  the graphics device.
+     * @param orientation  the orientation.
+     * @param dataset  the dataset.
+     * @param series  the series index (zero-based).
+     * @param item  the item index (zero-based).
+     * @param x  the x coordinate (in Java2D space).
+     * @param y  the y coordinate (in Java2D space).
+     * @param negative  indicates a negative value (which affects the item
+     *                  label position).
+     */
+    private void drawAdditionalItemLabel(Graphics2D g2,
+    		PlotOrientation orientation, XYDataset dataset, int series,
+    		int item, double x, double y) {
+
+    	if (this.additionalItemLabelGenerator == null) {
+    		return;
+    	}
+
+        Font labelFont = getItemLabelFont(series, item);
+        Paint paint = getItemLabelPaint(series, item);
+        g2.setFont(labelFont);
+        g2.setPaint(paint);
+        String label = this.additionalItemLabelGenerator.generateLabel(dataset,
+        		series, item);
+
+        ItemLabelPosition position = getNegativeItemLabelPosition(series, item);
+        Point2D anchorPoint = calculateLabelAnchorPoint(
+                position.getItemLabelAnchor(), x, y, orientation);
+        TextUtilities.drawRotatedString(label, g2,
+                (float) anchorPoint.getX(), (float) anchorPoint.getY(),
+                position.getTextAnchor(), position.getAngle(),
+                position.getRotationAnchor());
+    }
+
+    /**
+     * Tests this renderer for equality with an arbitrary object.
+     *
+     * @param obj  the object (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+    	if (obj == this) {
+    		return true;
+    	}
+    	if (!(obj instanceof YIntervalRenderer)) {
+    		return false;
+    	}
+    	YIntervalRenderer that = (YIntervalRenderer) obj;
+    	if (!ObjectUtilities.equal(this.additionalItemLabelGenerator,
+    			that.additionalItemLabelGenerator)) {
+    		return false;
+    	}
+    	return super.equals(obj);
     }
 
     /**
