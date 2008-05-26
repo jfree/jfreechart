@@ -140,6 +140,7 @@
  * 05-Dec-2007 : Fixed bug 1749124 (not registering as listener with
  *               TextTitle) (DG);
  * 23-Apr-2008 : Added new contributor (Diego Pierangeli) (DG);
+ * 16-May-2008 : Added new contributor (Michael Siemer) (DG);
  *
  */
 
@@ -1823,6 +1824,7 @@ class JFreeChartInfo extends ProjectInfo {
                 new Contributor("Bryan Scott", "-"),
                 new Contributor("Tobias Selb", "-"),
                 new Contributor("Mofeed Shahin", "-"),
+                new Contributor("Michael Siemer", "-"),
                 new Contributor("Pady Srinivasan", "-"),
                 new Contributor("Greg Steckman", "-"),
                 new Contributor("Gerald Struck", "-"),
