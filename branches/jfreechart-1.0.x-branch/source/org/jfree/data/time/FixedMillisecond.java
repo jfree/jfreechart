@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
@@ -38,7 +38,7 @@
  * 24-Jun-2002 : Removed unnecessary imports (DG);
  * 10-Sep-2002 : Added getSerialIndex() method (DG);
  * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented 
+ * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented
  *               Serializable (DG);
  * 21-Oct-2003 : Added hashCode() method (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
@@ -53,16 +53,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Wrapper for a <code>java.util.Date</code> object that allows it to be used 
- * as a {@link RegularTimePeriod}.  This class is immutable, which is a 
+ * Wrapper for a <code>java.util.Date</code> object that allows it to be used
+ * as a {@link RegularTimePeriod}.  This class is immutable, which is a
  * requirement for all {@link RegularTimePeriod} subclasses.
  */
-public class FixedMillisecond extends RegularTimePeriod 
-                              implements Serializable {
+public class FixedMillisecond extends RegularTimePeriod
+        implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7867521484545646931L;
-    
+
     /** The millisecond. */
     private Date time;
 
@@ -102,13 +102,13 @@ public class FixedMillisecond extends RegularTimePeriod
 
     /**
      * This method is overridden to do nothing.
-     * 
+     *
      * @param calendar  ignored
-     * 
+     *
      * @since 1.0.3
      */
     public void peg(Calendar calendar) {
-        // nothing to do        
+        // nothing to do
     }
 
     /**
@@ -159,7 +159,7 @@ public class FixedMillisecond extends RegularTimePeriod
 
     /**
      * Returns a hash code for this object instance.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
