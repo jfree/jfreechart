@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------
@@ -59,7 +59,7 @@ import org.jfree.data.time.DateRange;
  * Some tests for the {@link DateRange} class.
  */
 public class DateRangeTests extends TestCase {
-    
+
     /**
      * Returns the tests as a test suite.
      *
@@ -112,24 +112,36 @@ public class DateRangeTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             r2 = (DateRange) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(r1, r2);
     }
-    
+
     /**
-     * The {@link DateRange} class is immutable, so it doesn't need to 
+     * The {@link DateRange} class is immutable, so it doesn't need to
      * be cloneable.
      */
     public void testClone() {
         DateRange r1 = new DateRange(new Date(1000L), new Date(2000L));
         assertFalse(r1 instanceof Cloneable);
     }
-    
+
+    /**
+     * Confirm that a DateRange is immutable.
+     */
+    public void testImmutable() {
+    	Date d1 = new Date(10L);
+    	Date d2 = new Date(20L);
+    	DateRange r = new DateRange(d1, d2);
+    	d1.setTime(11L);
+    	assertEquals(new Date(10L), r.getLowerDate());
+    	r.getUpperDate().setTime(22L);
+    	assertEquals(new Date(20L), r.getUpperDate());
+    }
+
 }

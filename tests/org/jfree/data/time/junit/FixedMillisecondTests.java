@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------
  * FixedMillisecondTests.java
  * --------------------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 29-Jan-2002 : Version 1 (DG);
  * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 21-Oct-2003 : Added hashCode test (DG);
+ * 28-May-2008 : Added test for immutability (DG);
  *
  */
 
@@ -48,6 +49,7 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -93,20 +95,19 @@ public class FixedMillisecondTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             m2 = (FixedMillisecond) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(m1, m2);
 
     }
-    
+
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         FixedMillisecond m1 = new FixedMillisecond(500000L);
@@ -116,9 +117,9 @@ public class FixedMillisecondTests extends TestCase {
         int h2 = m2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
-     * The {@link FixedMillisecond} class is immutable, so should not be 
+     * The {@link FixedMillisecond} class is immutable, so should not be
      * {@link Cloneable}.
      */
     public void testNotCloneable() {
@@ -126,4 +127,13 @@ public class FixedMillisecondTests extends TestCase {
         assertFalse(m instanceof Cloneable);
     }
 
+    /**
+     * A check for immutability.
+     */
+    public void testImmutability() {
+    	Date d = new Date(20L);
+    	FixedMillisecond fm = new FixedMillisecond(d);
+    	d.setTime(22L);
+    	assertEquals(20L, fm.getFirstMillisecond());
+    }
 }
