@@ -1,6 +1,11 @@
 2008-06-02  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/SpiderWebPlot.java
+    (getLegendItems): Return early if dataset is null.
+
+2008-06-02  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/plot/SpiderWebPlot.java
     (drawRadarPoly): Check dataExtractOrder when generating chart entities.
 
 2008-06-02  David Gilbert  <david.gilbert@object-refinery.com>
