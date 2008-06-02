@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * ChartComposite.java
  * -------------------
- * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006-2008, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -145,8 +145,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
                                                          SelectionListener,
                                                          MouseListener,
                                                          MouseMoveListener,
-                                                         Printable
-{
+                                                         Printable {
     /** Default setting for buffer usage. */
     public static final boolean DEFAULT_BUFFER_USED = false;
 
@@ -515,9 +514,9 @@ public class ChartComposite extends Composite implements ChartChangeListener,
             boolean zoom,
             boolean tooltips) {
         super(comp, style);
-        this.setChart(jfreechart);
+        setChart(jfreechart);
         this.chartMouseListeners = new EventListenerList();
-        this.setLayout(new FillLayout());
+        setLayout(new FillLayout());
         this.info = new ChartRenderingInfo();
         this.useBuffer = usingBuffer;
         this.refreshBuffer = false;
@@ -526,25 +525,12 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         this.maximumDrawWidth = maximumDrawW;
         this.maximumDrawHeight = maximumDrawH;
         this.zoomTriggerDistance = DEFAULT_ZOOM_TRIGGER_DISTANCE;
-        this.setDisplayToolTips(tooltips);
+        setDisplayToolTips(tooltips);
         // create the canvas and add the required listeners
         this.canvas = new Canvas(this, SWT.DOUBLE_BUFFERED | SWT.NO_BACKGROUND);
         this.canvas.addPaintListener(this);
         this.canvas.addMouseListener(this);
         this.canvas.addMouseMoveListener(this);
-            
-        if (this.chart != null) {
-            this.chart.addChangeListener(this);
-            Plot plot = this.chart.getPlot();
-            this.domainZoomable = false;
-            this.rangeZoomable = false;
-            if (plot instanceof Zoomable) {
-                Zoomable z = (Zoomable) plot;
-                this.domainZoomable = z.isDomainZoomable();
-                this.rangeZoomable = z.isRangeZoomable();
-                this.orientation = z.getOrientation();
-            }
-        }
 
         // set up popup menu...
         this.popup = null;
@@ -1536,29 +1522,40 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     public void addSWTListener(SWTEventListener listener) {
         if (listener instanceof ControlListener) {
             this.canvas.addControlListener((ControlListener) listener);
-        } else if (listener instanceof DisposeListener) {
+        } 
+        else if (listener instanceof DisposeListener) {
             this.canvas.addDisposeListener((DisposeListener) listener);
-//      } else if (listener instanceof DragDetectListener) {
+//      } 
+//      else if (listener instanceof DragDetectListener) {
 //          this.canvas.addDragDetectListener((DragDetectListener) listener);
-        } else if (listener instanceof FocusListener) {
+        } 
+        else if (listener instanceof FocusListener) {
             this.canvas.addFocusListener((FocusListener) listener);
-        } else if (listener instanceof HelpListener) {
+        } 
+        else if (listener instanceof HelpListener) {
             this.canvas.addHelpListener((HelpListener) listener);
-        } else if (listener instanceof KeyListener) {
+        } 
+        else if (listener instanceof KeyListener) {
             this.canvas.addKeyListener((KeyListener) listener);
-//      } else if (listener instanceof MenuDetectListener) {
+//      } 
+//      else if (listener instanceof MenuDetectListener) {
 //          this.canvas.addMenuDetectListener((MenuDetectListener) listener);
-        } else if (listener instanceof MouseListener) {
+        } 
+        else if (listener instanceof MouseListener) {
             this.canvas.addMouseListener((MouseListener) listener);
-        } else if (listener instanceof MouseMoveListener) {
+        } 
+        else if (listener instanceof MouseMoveListener) {
             this.canvas.addMouseMoveListener((MouseMoveListener) listener);
-        } else if (listener instanceof MouseTrackListener) {
+        } 
+        else if (listener instanceof MouseTrackListener) {
             this.canvas.addMouseTrackListener((MouseTrackListener) listener);
 //      } else if (listener instanceof MouseWheelListener) {
 //          this.canvas.addMouseWheelListener((MouseWheelListener) listener);
-        } else if (listener instanceof PaintListener) {
+        } 
+        else if (listener instanceof PaintListener) {
             this.canvas.addPaintListener((PaintListener) listener);
-        } else if (listener instanceof TraverseListener) {
+        } 
+        else if (listener instanceof TraverseListener) {
             this.canvas.addTraverseListener((TraverseListener) listener);
         } 
     }
@@ -1855,12 +1852,12 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         Rectangle area = getScreenDataArea();
         // TODO see if we need to apply some line color and style to the 
         // axis traces
-        if (this.verticalAxisTrace && area.x < this.verticalTraceLineX 
+        if (this.horizontalAxisTrace && area.x < this.verticalTraceLineX 
                 && area.x + area.width > this.verticalTraceLineX) {
             e.gc.drawLine(this.verticalTraceLineX, area.y, 
                     this.verticalTraceLineX, area.y + area.height);
         }
-        if (this.horizontalAxisTrace && area.y < this.horizontalTraceLineY 
+        if (this.verticalAxisTrace && area.y < this.horizontalTraceLineY 
                 && area.y + area.height > this.horizontalTraceLineY) {
             e.gc.drawLine(area.x, this.horizontalTraceLineY, 
                     area.x + area.width, this.horizontalTraceLineY);
@@ -1872,5 +1869,18 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         }
         sg2.dispose();
     }
+
+    /* (non-Javadoc)
+	 * @see org.eclipse.swt.widgets.Widget#dispose()
+	 */
+	public void dispose() {
+		if (this.chartBuffer != null) this.chartBuffer.dispose();
+		// de-register the composite as a listener for the chart.
+        if (this.chart != null) {
+            this.chart.removeChangeListener(this);
+            this.chart.removeProgressListener(this);
+        }
+		super.dispose();
+	}
 
 }

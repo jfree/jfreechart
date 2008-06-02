@@ -1,5 +1,21 @@
 2008-06-02  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patches by Henry Proudhon:
+    * swt/org/jfree/experimental/chart/swt/ChartComposite.java
+    (ChartComposite): Removed duplicate listener registration,
+    (paintControl): Switched horizontalAxisTrace and verticalAxisTrace,
+    (dispose): New method,
+    * swt/org/jfree/experimental/swt/SWTGraphics2D.java
+    (transformsPool): New field,
+    (setBackground): Use color pool,
+    (setTransform): Use transform pool,
+    (transform): Likewise,
+    (disposeResourcePool): Clear the fontsPool and transformsPool,
+    (getSwtTransformFromPool): New method,
+    (toSwtTransform): Removed.
+
+2008-06-02  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
     (isPointInRect): New utility method,
     * source/org/jfree/chart/renderer/xy/StandardXYItemRenderer.java
