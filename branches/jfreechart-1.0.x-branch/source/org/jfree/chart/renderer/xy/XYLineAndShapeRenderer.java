@@ -61,6 +61,7 @@
  * 08-Jun-2007 : Fix for bug 1731912 where entities are created even for data
  *               items that are not displayed (DG);
  * 26-Oct-2007 : Deprecated override attributes (DG);
+ * 02-Jun-2008 : Fixed tooltips at lower edges of data area (DG);
  *
  */
 
@@ -101,10 +102,7 @@ import org.jfree.util.ShapeUtilities;
  * class.
  */
 public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
-                                    implements XYItemRenderer,
-                                               Cloneable,
-                                               PublicCloneable,
-                                               Serializable {
+        implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -7435246895986425885L;
@@ -1184,7 +1182,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item, but only if it falls within the data
         // area...
-        if (entities != null && dataArea.contains(xx, yy)) {
+        if (entities != null && isPointInRect(dataArea, xx, yy)) {
             addEntity(entities, entityArea, dataset, series, item, xx, yy);
         }
     }

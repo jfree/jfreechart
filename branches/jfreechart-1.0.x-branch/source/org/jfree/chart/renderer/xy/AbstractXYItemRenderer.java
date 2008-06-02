@@ -103,6 +103,7 @@
  * 07-Apr-2008 : Minor API doc update (DG);
  * 14-May-2008 : Updated addEntity() method to take plot orientation into
  *               account when the incoming area is null (DG);
+ * 02-Jun-2008 : Added isPointInRect() method (DG);
  *
  */
 
@@ -1751,6 +1752,25 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         XYItemEntity entity = new XYItemEntity(hotspot, dataset, series, item,
                 tip, url);
         entities.add(entity);
+    }
+
+    /**
+     * Returns <code>true</code> if the specified point (x, y) falls within or
+     * on the boundary of the specified rectangle.
+     *
+     * @param rect  the rectangle (<code>null</code> not permitted).
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.10
+     */
+    public static boolean isPointInRect(Rectangle2D rect, double x, double y) {
+        // TODO: For JFreeChart 1.2.0, this method should go in the
+    	//       ShapeUtilities class
+    	return (x >= rect.getMinX() && x <= rect.getMaxX()
+        		&& y >= rect.getMinY() && y <= rect.getMaxY());
     }
 
 }
