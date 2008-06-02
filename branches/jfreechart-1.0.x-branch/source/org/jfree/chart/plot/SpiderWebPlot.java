@@ -62,6 +62,7 @@
  *               1605202 (DG);
  * 05-Mar-2007 : Restore clip region correctly (see bug 1667750) (DG);
  * 18-May-2007 : Set dataset for LegendItem (DG);
+ * 02-Jun-2008 : Fixed bug with chart entities using TableOrder.BY_COLUMN (DG);
  *
  */
 
@@ -1326,16 +1327,25 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                     g2.draw(head);
 
                     if (entities != null) {
+                    	int row = 0; int col = 0;
+                    	if (this.dataExtractOrder == TableOrder.BY_ROW) {
+                    		row = series;
+                    		col = cat;
+                    	}
+                    	else {
+                    		row = cat;
+                    		col = series;
+                    	}
                         String tip = null;
                         if (this.toolTipGenerator != null) {
                             tip = this.toolTipGenerator.generateToolTip(
-                                    this.dataset, series, cat);
+                                    this.dataset, row, col);
                         }
 
                         String url = null;
                         if (this.urlGenerator != null) {
                             url = this.urlGenerator.generateURL(this.dataset,
-                                   series, cat);
+                                   row, col);
                         }
 
                         Shape area = new Rectangle(
@@ -1344,8 +1354,8 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                                 (int) (headW * 2), (int) (headH * 2));
                         CategoryItemEntity entity = new CategoryItemEntity(
                                 area, tip, url, this.dataset,
-                                this.dataset.getRowKey(series),
-                                this.dataset.getColumnKey(cat));
+                                this.dataset.getRowKey(row),
+                                this.dataset.getColumnKey(col));
                         entities.add(entity);
                     }
 
