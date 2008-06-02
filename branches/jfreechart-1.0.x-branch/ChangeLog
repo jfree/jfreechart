@@ -1,5 +1,10 @@
 2008-06-02  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/xy/StackedXYAreaRenderer2.java
+    (drawItem): Handle PlotOrientation.HORIZONTAL.
+
+2008-06-02  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/plot/SpiderWebPlot.java
     (getLegendItems): Return early if dataset is null.
 

@@ -50,6 +50,7 @@
  *               that can result from anti-aliasing (thanks to Doug
  *               Clayton) (DG);
  * 30-Nov-2006 : Added accessor methods for the roundXCoordinates flag (DG);
+ * 02-Jun-2008 : Fixed bug with PlotOrientation.HORIZONTAL (DG);
  *
  */
 
@@ -67,6 +68,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
@@ -222,6 +224,7 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
         }
 
         TableXYDataset tdataset = (TableXYDataset) dataset;
+        PlotOrientation orientation = plot.getOrientation();
 
         // get the data point...
         double x1 = dataset.getXValue(series, item);
@@ -291,16 +294,31 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                 double yleft = (y0 + y1) / 2.0 + stackLeft[1];
                 float transYLeft
                     = (float) rangeAxis.valueToJava2D(yleft, dataArea, edge1);
-                left.moveTo(transX1, transY1);
-                left.lineTo(transX1, transStack1);
-                left.lineTo(transXLeft, transStackLeft);
-                left.lineTo(transXLeft, transYLeft);
+                if (orientation == PlotOrientation.VERTICAL) {
+                    left.moveTo(transX1, transY1);
+                    left.lineTo(transX1, transStack1);
+                    left.lineTo(transXLeft, transStackLeft);
+                    left.lineTo(transXLeft, transYLeft);
+                }
+                else {
+                	left.moveTo(transY1, transX1);
+                	left.lineTo(transStack1, transX1);
+                	left.lineTo(transStackLeft, transXLeft);
+                	left.lineTo(transYLeft, transXLeft);
+                }
                 left.closePath();
             }
             else {
-                left.moveTo(transX1, transStack1);
-                left.lineTo(transX1, transY1);
-                left.lineTo(transXLeft, transStackLeft);
+            	if (orientation == PlotOrientation.VERTICAL) {
+                    left.moveTo(transX1, transStack1);
+                    left.lineTo(transX1, transY1);
+                    left.lineTo(transXLeft, transStackLeft);
+            	}
+            	else {
+                    left.moveTo(transStack1, transX1);
+                    left.lineTo(transY1, transX1);
+                    left.lineTo(transStackLeft, transXLeft);
+            	}
                 left.closePath();
             }
 
@@ -311,16 +329,31 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                 double yright = (y1 + y2) / 2.0 + stackRight[1];
                 float transYRight
                     = (float) rangeAxis.valueToJava2D(yright, dataArea, edge1);
-                right.moveTo(transX1, transStack1);
-                right.lineTo(transX1, transY1);
-                right.lineTo(transXRight, transYRight);
-                right.lineTo(transXRight, transStackRight);
+                if (orientation == PlotOrientation.VERTICAL) {
+                    right.moveTo(transX1, transStack1);
+                    right.lineTo(transX1, transY1);
+                    right.lineTo(transXRight, transYRight);
+                    right.lineTo(transXRight, transStackRight);
+                }
+                else {
+                    right.moveTo(transStack1, transX1);
+                    right.lineTo(transY1, transX1);
+                    right.lineTo(transYRight, transXRight);
+                    right.lineTo(transStackRight, transXRight);
+                }
                 right.closePath();
             }
             else {
-                right.moveTo(transX1, transStack1);
-                right.lineTo(transX1, transY1);
-                right.lineTo(transXRight, transStackRight);
+            	if (orientation == PlotOrientation.VERTICAL) {
+                    right.moveTo(transX1, transStack1);
+                    right.lineTo(transX1, transY1);
+                    right.lineTo(transXRight, transStackRight);
+            	}
+            	else {
+                    right.moveTo(transStack1, transX1);
+                    right.lineTo(transY1, transX1);
+                    right.lineTo(transStackRight, transXRight);
+            	}
                 right.closePath();
             }
         }
@@ -334,19 +367,34 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
 
             // LEFT POLYGON
             if (y0 >= 0.0) {
-                left.moveTo(transX1, transStack1);
-                left.lineTo(transX1, transY1);
-                left.lineTo(transXLeft, transStackLeft);
+            	if (orientation == PlotOrientation.VERTICAL) {
+                    left.moveTo(transX1, transStack1);
+                    left.lineTo(transX1, transY1);
+                    left.lineTo(transXLeft, transStackLeft);
+            	}
+            	else {
+                    left.moveTo(transStack1, transX1);
+                    left.lineTo(transY1, transX1);
+                    left.lineTo(transStackLeft, transXLeft);
+            	}
                 left.clone();
             }
             else {
                 double yleft = (y0 + y1) / 2.0 + stackLeft[0];
                 float transYLeft = (float) rangeAxis.valueToJava2D(yleft,
                         dataArea, edge1);
-                left.moveTo(transX1, transY1);
-                left.lineTo(transX1, transStack1);
-                left.lineTo(transXLeft, transStackLeft);
-                left.lineTo(transXLeft, transYLeft);
+                if (orientation == PlotOrientation.VERTICAL) {
+                    left.moveTo(transX1, transY1);
+                    left.lineTo(transX1, transStack1);
+                    left.lineTo(transXLeft, transStackLeft);
+                    left.lineTo(transXLeft, transYLeft);
+                }
+                else {
+                    left.moveTo(transY1, transX1);
+                    left.lineTo(transStack1, transX1);
+                    left.lineTo(transStackLeft, transXLeft);
+                    left.lineTo(transYLeft, transXLeft);
+                }
                 left.closePath();
             }
             float transStackRight = (float) rangeAxis.valueToJava2D(
@@ -354,19 +402,34 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
 
             // RIGHT POLYGON
             if (y2 >= 0.0) {
-                right.moveTo(transX1, transStack1);
-                right.lineTo(transX1, transY1);
-                right.lineTo(transXRight, transStackRight);
+            	if (orientation == PlotOrientation.VERTICAL) {
+                    right.moveTo(transX1, transStack1);
+                    right.lineTo(transX1, transY1);
+                    right.lineTo(transXRight, transStackRight);
+            	}
+            	else {
+                    right.moveTo(transStack1, transX1);
+                    right.lineTo(transY1, transX1);
+                    right.lineTo(transStackRight, transXRight);
+            	}
                 right.closePath();
             }
             else {
                 double yright = (y1 + y2) / 2.0 + stackRight[0];
                 float transYRight = (float) rangeAxis.valueToJava2D(yright,
                         dataArea, edge1);
-                right.moveTo(transX1, transStack1);
-                right.lineTo(transX1, transY1);
-                right.lineTo(transXRight, transYRight);
-                right.lineTo(transXRight, transStackRight);
+                if (orientation == PlotOrientation.VERTICAL) {
+                    right.moveTo(transX1, transStack1);
+                    right.lineTo(transX1, transY1);
+                    right.lineTo(transXRight, transYRight);
+                    right.lineTo(transXRight, transStackRight);
+                }
+                else {
+                    right.moveTo(transStack1, transX1);
+                    right.lineTo(transY1, transX1);
+                    right.lineTo(transYRight, transXRight);
+                    right.lineTo(transStackRight, transXRight);
+                }
                 right.closePath();
             }
         }
