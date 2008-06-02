@@ -63,6 +63,7 @@
  * 05-Mar-2007 : Restore clip region correctly (see bug 1667750) (DG);
  * 18-May-2007 : Set dataset for LegendItem (DG);
  * 02-Jun-2008 : Fixed bug with chart entities using TableOrder.BY_COLUMN (DG);
+ * 02-jun-2008 : Fixed bug with null dataset (DG);
  *
  */
 
@@ -1075,10 +1076,13 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @return The legend items.
      */
     public LegendItemCollection getLegendItems() {
+
         LegendItemCollection result = new LegendItemCollection();
+        if (getDataset() == null) {
+        	return result;
+        }
 
         List keys = null;
-
         if (this.dataExtractOrder == TableOrder.BY_ROW) {
             keys = this.dataset.getRowKeys();
         }
@@ -1140,9 +1144,8 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param info  collects info about the drawing.
      */
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info)
-    {
+            PlotState parentState, PlotRenderingInfo info) {
+
         // adjust for insets...
         RectangleInsets insets = getInsets();
         insets.trim(area);
