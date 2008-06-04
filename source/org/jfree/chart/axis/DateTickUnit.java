@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------
  * DateTickUnit.java
  * -----------------
- * (C) Copyright 2000-2007, by Object Refinery Limited.
+ * (C) Copyright 2000-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chris Boek;
@@ -35,17 +35,17 @@
  * Changes
  * -------
  * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 27-Nov-2002 : Added IllegalArgumentException to getMillisecondCount() 
+ * 27-Nov-2002 : Added IllegalArgumentException to getMillisecondCount()
  *               method (DG);
  * 26-Mar-2003 : Implemented Serializable (DG);
- * 12-Nov-2003 : Added roll fields that can improve the labelling on segmented 
+ * 12-Nov-2003 : Added roll fields that can improve the labelling on segmented
  *               date axes (DG);
- * 03-Dec-2003 : DateFormat constructor argument is now filled with an default 
+ * 03-Dec-2003 : DateFormat constructor argument is now filled with an default
  *               if null (TM);
  * 07-Dec-2003 : Fixed bug (null pointer exception) in constructor (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 21-Mar-2007 : Added toString() for debugging (DG);
- * 04-Apr-2007 : Added new methods addToDate(Date, TimeZone) and rollDate(Date, 
+ * 04-Apr-2007 : Added new methods addToDate(Date, TimeZone) and rollDate(Date,
  *               TimeZone) (CB);
  *
  */
@@ -61,14 +61,14 @@ import java.util.TimeZone;
 import org.jfree.util.ObjectUtilities;
 
 /**
- * A tick unit for use by subclasses of {@link DateAxis}. Instances of this 
+ * A tick unit for use by subclasses of {@link DateAxis}. Instances of this
  * class are immutable.
  */
 public class DateTickUnit extends TickUnit implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -7289292157229621901L;
-    
+
     /** A constant for years. */
     public static final int YEAR = 0;
 
@@ -106,7 +106,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
     private DateFormat formatter;
 
     /**
-     * Creates a new date tick unit.  The dates will be formatted using a 
+     * Creates a new date tick unit.  The dates will be formatted using a
      * SHORT format for the default locale.
      *
      * @param unit  the unit.
@@ -117,8 +117,8 @@ public class DateTickUnit extends TickUnit implements Serializable {
     }
 
     /**
-     * Creates a new date tick unit.  You can specify the units using one of 
-     * the constants YEAR, MONTH, DAY, HOUR, MINUTE, SECOND or MILLISECOND.  
+     * Creates a new date tick unit.  You can specify the units using one of
+     * the constants YEAR, MONTH, DAY, HOUR, MINUTE, SECOND or MILLISECOND.
      * In addition, you can specify a unit count, and a date format.
      *
      * @param unit  the unit.
@@ -140,7 +140,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param rollCount  the roll count.
      * @param formatter  the date formatter (defaults to DateFormat.SHORT).
      */
-    public DateTickUnit(int unit, int count, int rollUnit, int rollCount, 
+    public DateTickUnit(int unit, int count, int rollUnit, int rollCount,
                         DateFormat formatter) {
         super(DateTickUnit.getMillisecondCount(unit, count));
         this.unit = unit;
@@ -154,11 +154,11 @@ public class DateTickUnit extends TickUnit implements Serializable {
     }
 
     /**
-     * Returns the date unit.  This will be one of the constants 
-     * <code>YEAR</code>, <code>MONTH</code>, <code>DAY</code>, 
-     * <code>HOUR</code>, <code>MINUTE</code>, <code>SECOND</code> or 
-     * <code>MILLISECOND</code>, defined by this class.  Note that these 
-     * constants do NOT correspond to those defined in Java's 
+     * Returns the date unit.  This will be one of the constants
+     * <code>YEAR</code>, <code>MONTH</code>, <code>DAY</code>,
+     * <code>HOUR</code>, <code>MINUTE</code>, <code>SECOND</code> or
+     * <code>MILLISECOND</code>, defined by this class.  Note that these
+     * constants do NOT correspond to those defined in Java's
      * <code>Calendar</code> class.
      *
      * @return The date unit.
@@ -178,8 +178,8 @@ public class DateTickUnit extends TickUnit implements Serializable {
 
     /**
      * Returns the roll unit.  This is the amount by which the tick advances if
-     * it is "hidden" when displayed on a segmented date axis.  Typically the 
-     * roll will be smaller than the regular tick unit (for example, a 7 day 
+     * it is "hidden" when displayed on a segmented date axis.  Typically the
+     * roll will be smaller than the regular tick unit (for example, a 7 day
      * tick unit might use a 1 day roll).
      *
      * @return The roll unit.
@@ -225,10 +225,11 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param base  the base date.
      *
      * @return A new date one unit after the base date.
-     * 
+     *
      * @see #addToDate(Date, TimeZone)
      */
     public Date addToDate(Date base) {
+    	// FIXME:  do we want this to happen in the default timezone/locale?
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(base);
         calendar.add(getCalendarField(this.unit), this.count);
@@ -242,28 +243,30 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param zone  the time zone for the date calculation.
      *
      * @return A new date one unit after the base date.
-     * 
+     *
      * @since 1.0.6
      * @see #addToDate(Date)
      */
     public Date addToDate(Date base, TimeZone zone) {
-        Calendar calendar = Calendar.getInstance(zone);
+        // FIXME:  the calendar may need a locale
+    	Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(base);
         calendar.add(getCalendarField(this.unit), this.count);
         return calendar.getTime();
     }
 
     /**
-     * Rolls the date forward by the amount specified by the roll unit and 
+     * Rolls the date forward by the amount specified by the roll unit and
      * count.
      *
      * @param base  the base date.
 
      * @return The rolled date.
-     * 
+     *
      * @see #rollDate(Date, TimeZone)
      */
     public Date rollDate(Date base) {
+    	// FIXME:  do we want this to happen in the default locale/timezone?
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(base);
         calendar.add(getCalendarField(this.rollUnit), this.rollCount);
@@ -271,18 +274,19 @@ public class DateTickUnit extends TickUnit implements Serializable {
     }
 
     /**
-     * Rolls the date forward by the amount specified by the roll unit and 
+     * Rolls the date forward by the amount specified by the roll unit and
      * count.
      *
      * @param base  the base date.
      * @param zone  the time zone.
-     * 
+     *
      * @return The rolled date.
-     * 
+     *
      * @since 1.0.6
      * @see #rollDate(Date)
      */
     public Date rollDate(Date base, TimeZone zone) {
+    	// FIXME:  the following calendar needs a locale
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(base);
         calendar.add(getCalendarField(this.rollUnit), this.rollCount);
@@ -290,7 +294,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
     }
 
     /**
-     * Returns a field code that can be used with the <code>Calendar</code> 
+     * Returns a field code that can be used with the <code>Calendar</code>
      * class.
      *
      * @return The field code.
@@ -300,9 +304,9 @@ public class DateTickUnit extends TickUnit implements Serializable {
     }
 
     /**
-     * Returns a field code (that can be used with the Calendar class) for a 
+     * Returns a field code (that can be used with the Calendar class) for a
      * given 'unit' code.  The 'unit' is one of:  {@link #YEAR}, {@link #MONTH},
-     * {@link #DAY}, {@link #HOUR}, {@link #MINUTE}, {@link #SECOND} and 
+     * {@link #DAY}, {@link #HOUR}, {@link #MINUTE}, {@link #SECOND} and
      * {@link #MILLISECOND}.
      *
      * @param tickUnit  the unit.
@@ -333,10 +337,10 @@ public class DateTickUnit extends TickUnit implements Serializable {
     }
 
     /**
-     * Returns the (approximate) number of milliseconds for the given unit and 
+     * Returns the (approximate) number of milliseconds for the given unit and
      * unit count.
      * <P>
-     * This value is an approximation some of the time (e.g. months are 
+     * This value is an approximation some of the time (e.g. months are
      * assumed to have 31 days) but this shouldn't matter.
      *
      * @param unit  the unit.
@@ -402,10 +406,10 @@ public class DateTickUnit extends TickUnit implements Serializable {
         }
         return true;
     }
-    
+
     /**
      * Returns a hash code for this object.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -415,13 +419,13 @@ public class DateTickUnit extends TickUnit implements Serializable {
         result = 37 * result + this.formatter.hashCode();
         return result;
     }
-    
+
     /**
      * Strings for use by the toString() method.
      */
-    private static final String[] units = {"YEAR", "MONTH", "DAY", "HOUR", 
+    private static final String[] units = {"YEAR", "MONTH", "DAY", "HOUR",
             "MINUTE", "SECOND", "MILLISECOND"};
-    
+
     /**
      * Returns a string representation of this instance, primarily used for
      * debugging purposes.
@@ -429,7 +433,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @return A string representation of this instance.
      */
     public String toString() {
-        return "DateTickUnit[" + DateTickUnit.units[this.unit] + ", " 
+        return "DateTickUnit[" + DateTickUnit.units[this.unit] + ", "
                 + this.count + "]";
     }
 
