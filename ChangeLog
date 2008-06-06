@@ -1,3 +1,9 @@
+2008-06-06  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/axis/Axis.java
+    (setTickLabelInsets(RectangleInsets)): Delegate to new method,
+    (setTickLabelInsets(RectangleInsets, boolean)): New method.
+
 2008-06-02  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/SimpleTimePeriod.java
