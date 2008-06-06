@@ -98,7 +98,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
 	 *
 	 * @return The index.
 	 *
-	 * @see #setFirstCategoryIndex()
+	 * @see #setFirstCategoryIndex(int)
 	 */
 	public int getFirstCategoryIndex() {
 		return this.firstCategoryIndex;
@@ -108,6 +108,8 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
 	 * Sets the index of the first category that should be used from the
 	 * underlying dataset, and sends a {@link DatasetChangeEvent} to all
 	 * registered listeners.
+	 *
+	 * @param first  the index.
 	 *
 	 * @see #getFirstCategoryIndex()
 	 */
@@ -245,8 +247,6 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @return The value (possibly <code>null</code>).
      *
      * @throws UnknownKeyException if either key is not defined in the dataset.
-     *
-     * @see #addValue(Number, Comparable, Comparable)
      */
 	public Number getValue(Comparable rowKey, Comparable columnKey) {
 		int r = getRowIndex(rowKey);
@@ -382,8 +382,8 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     /**
      * Returns the percent complete for a given item.
      *
-     * @param row  the row index (zero-based).
-     * @param column  the column index (zero-based).
+     * @param series  the row index (zero-based).
+     * @param category  the column index (zero-based).
      *
      * @return The percent complete.
      */
@@ -488,8 +488,8 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     /**
      * Returns the start value for the interval for a given series and category.
      *
-     * @param series  the series key.
-     * @param category  the category key.
+     * @param rowKey  the series key.
+     * @param columnKey  the category key.
      *
      * @return The start value (possibly <code>null</code>).
      *
@@ -509,8 +509,8 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     /**
      * Returns the start value for the interval for a given series and category.
      *
-     * @param series  the series (zero-based index).
-     * @param category  the category (zero-based index).
+     * @param row  the series (zero-based index).
+     * @param column  the category (zero-based index).
      *
      * @return The start value (possibly <code>null</code>).
      *
@@ -524,8 +524,8 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     /**
      * Returns the end value for the interval for a given series and category.
      *
-     * @param series  the series key.
-     * @param category  the category key.
+     * @param rowKey  the series key.
+     * @param columnKey  the category key.
      *
      * @return The end value (possibly <code>null</code>).
      *
