@@ -1,5 +1,10 @@
 2008-06-06  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/time/Millisecond.java
+    (compareTo): Added handling for general RegularTimePeriod.
+
+2008-06-06  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/axis/Axis.java
     (setTickLabelInsets(RectangleInsets)): Delegate to new method,
     (setTickLabelInsets(RectangleInsets, boolean)): New method.
