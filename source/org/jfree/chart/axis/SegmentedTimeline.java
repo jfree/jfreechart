@@ -44,6 +44,7 @@
  * 14-Nov-2006 : Fix in toTimelineValue(long) to avoid stack overflow (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 11-Jul-2007 : Fixed time zone bugs (DG);
+ * 06-Jun-2008 : Performance enhancement posted in forum (DG);
  *
  */
 
@@ -602,10 +603,11 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         else {
             Segment segment = getSegment(millisecond);
             if (segment.inExceptionSegments()) {
-                do {
-                    segment = getSegment(millisecond = segment.getSegmentEnd()
-                            + 1);
-                } while (segment.inExceptionSegments());
+            	int p;
+                while ((p = binarySearchExceptionSegments(segment)) >= 0) {
+                    segment = getSegment(millisecond = ((Segment)
+                    		this.exceptionSegments.get(p)).getSegmentEnd() + 1);
+                }
                 result = toTimelineValue(millisecond);
             }
             else {
