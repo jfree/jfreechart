@@ -75,6 +75,7 @@
  * 08-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 22-Aug-2006 : API doc updates (DG);
+ * 06-Jun-2008 : Added setTickLabelInsets(RectangleInsets, boolean) (DG);
  *
  */
 
@@ -424,12 +425,27 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #getLabelInsets()
      */
     public void setLabelInsets(RectangleInsets insets) {
+        setLabelInsets(insets, true);
+    }
+
+    /**
+     * Sets the insets for the axis label, and sends an {@link AxisChangeEvent}
+     * to all registered listeners.
+     *
+     * @param insets  the insets (<code>null</code> not permitted).
+     * @param notify  notify listeners?
+     *
+     * @since 1.0.10
+     */
+    public void setLabelInsets(RectangleInsets insets, boolean notify) {
         if (insets == null) {
             throw new IllegalArgumentException("Null 'insets' argument.");
         }
         if (!insets.equals(this.labelInsets)) {
             this.labelInsets = insets;
-            notifyListeners(new AxisChangeEvent(this));
+            if (notify) {
+                notifyListeners(new AxisChangeEvent(this));
+            }
         }
     }
 
