@@ -98,7 +98,7 @@ public class SlidingCategoryDataset extends AbstractDataset
 	 *
 	 * @return The index.
 	 *
-	 * @see #setFirstCategoryIndex()
+	 * @see #setFirstCategoryIndex(int)
 	 */
 	public int getFirstCategoryIndex() {
 		return this.firstCategoryIndex;
@@ -108,6 +108,8 @@ public class SlidingCategoryDataset extends AbstractDataset
 	 * Sets the index of the first category that should be used from the
 	 * underlying dataset, and sends a {@link DatasetChangeEvent} to all
 	 * registered listeners.
+	 *
+	 * @param first  the index.
 	 *
 	 * @see #getFirstCategoryIndex()
 	 */
@@ -245,8 +247,6 @@ public class SlidingCategoryDataset extends AbstractDataset
      * @return The value (possibly <code>null</code>).
      *
      * @throws UnknownKeyException if either key is not defined in the dataset.
-     *
-     * @see #addValue(Number, Comparable, Comparable)
      */
 	public Number getValue(Comparable rowKey, Comparable columnKey) {
 		int r = getRowIndex(rowKey);
