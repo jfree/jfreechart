@@ -49,6 +49,9 @@
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
  * 04-Apr-2007 : In Millisecond(Date, TimeZone), peg milliseconds to the
  *               specified zone (DG);
+ * 06-Jun-2008 : Added handling for general RegularTimePeriod in compareTo()
+ *               method:
+ *               see http://www.jfree.org/phpBB2/viewtopic.php?t=24805 (DG);
  *
  */
 
@@ -364,8 +367,11 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
         // CASE 2 : Comparing to another TimePeriod object
         // -----------------------------------------------
         else if (obj instanceof RegularTimePeriod) {
-            // more difficult case - evaluate later...
-            result = 0;
+        	RegularTimePeriod rtp = (RegularTimePeriod) obj;
+        	final long thisVal = this.getFirstMillisecond();
+        	final long anotherVal = rtp.getFirstMillisecond();
+        	result = (thisVal < anotherVal ? -1
+        			: (thisVal == anotherVal ? 0 : 1));
         }
 
         // CASE 3 : Comparing to a non-TimePeriod object
