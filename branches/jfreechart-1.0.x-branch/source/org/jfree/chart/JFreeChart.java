@@ -334,10 +334,10 @@ public class JFreeChart implements Drawable,
 
     /**
      * Creates a new chart with the given title and plot.  A default font
-     * (@link DEFAULT_TITLE_FONT) is used for the title, and the chart will
+     * ({@link #DEFAULT_TITLE_FONT}) is used for the title, and the chart will
      * have a legend added automatically.
      * <br><br>
-     * Note that the  {@link ChartFactory} class contains a range
+     * Note that the {@link ChartFactory} class contains a range
      * of static methods that will return ready-made charts, and often this
      * is a more convenient way to create charts than using this constructor.
      *
