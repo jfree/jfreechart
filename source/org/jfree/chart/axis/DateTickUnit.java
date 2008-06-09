@@ -47,6 +47,7 @@
  * 21-Mar-2007 : Added toString() for debugging (DG);
  * 04-Apr-2007 : Added new methods addToDate(Date, TimeZone) and rollDate(Date,
  *               TimeZone) (CB);
+ * 09-Jun-2008 : Deprecated addToDate(Date) (DG);
  *
  */
 
@@ -220,20 +221,20 @@ public class DateTickUnit extends TickUnit implements Serializable {
     }
 
     /**
-     * Calculates a new date by adding this unit to the base date.
+     * Calculates a new date by adding this unit to the base date, with
+     * calculations performed in the default timezone and locale.
      *
      * @param base  the base date.
      *
      * @return A new date one unit after the base date.
      *
      * @see #addToDate(Date, TimeZone)
+     *
+     * @deprecated As of JFreeChart 1.0.10, this method is deprecated - you
+     *     should use {@link #addToDate(Date, TimeZone)} instead.
      */
     public Date addToDate(Date base) {
-    	// FIXME:  do we want this to happen in the default timezone/locale?
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(base);
-        calendar.add(getCalendarField(this.unit), this.count);
-        return calendar.getTime();
+    	return addToDate(base, TimeZone.getDefault());
     }
 
     /**
@@ -245,10 +246,12 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @return A new date one unit after the base date.
      *
      * @since 1.0.6
-     * @see #addToDate(Date)
      */
     public Date addToDate(Date base, TimeZone zone) {
-        // FIXME:  the calendar may need a locale
+        // as far as I know, the Locale for the calendar only affects week
+    	// number calculations, and since DateTickUnit doesn't do week
+    	// arithmetic, the default locale (whatever it is) should be fine
+    	// here...
     	Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(base);
         calendar.add(getCalendarField(this.unit), this.count);
@@ -266,11 +269,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @see #rollDate(Date, TimeZone)
      */
     public Date rollDate(Date base) {
-    	// FIXME:  do we want this to happen in the default locale/timezone?
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(base);
-        calendar.add(getCalendarField(this.rollUnit), this.rollCount);
-        return calendar.getTime();
+    	return rollDate(base, TimeZone.getDefault());
     }
 
     /**
@@ -283,10 +282,12 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @return The rolled date.
      *
      * @since 1.0.6
-     * @see #rollDate(Date)
      */
     public Date rollDate(Date base, TimeZone zone) {
-    	// FIXME:  the following calendar needs a locale
+        // as far as I know, the Locale for the calendar only affects week
+    	// number calculations, and since DateTickUnit doesn't do week
+    	// arithmetic, the default locale (whatever it is) should be fine
+    	// here...
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(base);
         calendar.add(getCalendarField(this.rollUnit), this.rollCount);
