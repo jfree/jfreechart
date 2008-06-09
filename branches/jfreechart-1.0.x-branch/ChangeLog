@@ -1,3 +1,8 @@
+2008-06-09  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/axis/DateTickUnit.java
+    (addToDate(Date)): Deprecated.
+
 2008-06-06  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/Millisecond.java
