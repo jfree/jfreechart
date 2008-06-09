@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.10  *
 ********************************
 
-5 May 2008
+9 June 2008
 
 (C)opyright 2000-2008, by Object Refinery Limited and Contributors.
 
@@ -35,7 +35,7 @@ message in the JFreeChart forum.
 3.  DOCUMENTATION
 -----------------
 You can download installation instructions
-(jfreechart-1.0.8-install.pdf) from the JFreeChart home
+(jfreechart-1.0.10-install.pdf) from the JFreeChart home
 page or the project page on SourceForge.
 
 Further documentation for JFreeChart (the JFreeChart Developer Guide) is
@@ -141,7 +141,7 @@ A demo application that shows a selection of the charts that can be
 generated is included in the JFreeChart distribution.   To run the
 demo (using JDK 1.3.1 or later), use the following command:
 
-    java -jar jfreechart-1.0.8-demo.jar
+    java -jar jfreechart-1.0.10-demo.jar
 
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
@@ -776,6 +776,7 @@ below:
     - Bryan Scott
     - Tobias Selb
     - Mofeed Shahin
+    - Michael Siemer
     - Pady Srinivasan
     - Greg Steckman
     - Roger Studner
