@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * ImageMapUtilities.java
  * ----------------------
- * (C) Copyright 2004-2007, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-2008, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -40,9 +40,9 @@
  *               layering (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 06-Feb-2006 : API doc updates (DG);
- * 04-Dec-2007 : Added htmlEscape() method, and escape 'name' in 
+ * 04-Dec-2007 : Added htmlEscape() method, and escape 'name' in
  *               getImageMap() (DG);
- * 
+ *
  */
 
 package org.jfree.chart.imagemap;
@@ -56,7 +56,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.util.StringUtils;
 
 /**
- * Collection of utility methods related to producing image maps.  
+ * Collection of utility methods related to producing image maps.
  * Functionality was originally in {@link org.jfree.chart.ChartUtilities}.
  */
 public class ImageMapUtilities {
@@ -70,7 +70,7 @@ public class ImageMapUtilities {
      *
      * @throws java.io.IOException if there are any I/O errors.
      */
-    public static void writeImageMap(PrintWriter writer, String name, 
+    public static void writeImageMap(PrintWriter writer, String name,
                                      ChartRenderingInfo info)
         throws IOException {
 
@@ -95,20 +95,20 @@ public class ImageMapUtilities {
     public static void writeImageMap(PrintWriter writer,
                                      String name,
                                      ChartRenderingInfo info,
-                                     boolean useOverLibForToolTips) 
+                                     boolean useOverLibForToolTips)
         throws IOException {
 
         ToolTipTagFragmentGenerator toolTipTagFragmentGenerator = null;
         if (useOverLibForToolTips) {
-            toolTipTagFragmentGenerator 
+            toolTipTagFragmentGenerator
                     = new OverLIBToolTipTagFragmentGenerator();
         }
         else {
-            toolTipTagFragmentGenerator 
+            toolTipTagFragmentGenerator
                     = new StandardToolTipTagFragmentGenerator();
         }
-        ImageMapUtilities.writeImageMap(writer, name, info, 
-                toolTipTagFragmentGenerator, 
+        ImageMapUtilities.writeImageMap(writer, name, info,
+                toolTipTagFragmentGenerator,
                 new StandardURLTagFragmentGenerator());
 
     }
@@ -120,21 +120,21 @@ public class ImageMapUtilities {
      * @param name  the map name (<code>null</code> not permitted).
      * @param info  the chart rendering info (<code>null</code> not permitted).
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
-     *     that will contain the tooltip text (<code>null</code> not permitted 
+     *     that will contain the tooltip text (<code>null</code> not permitted
      *     if <code>info</code> contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
-     *     will contain the URL reference (<code>null</code> not permitted if 
+     *     will contain the URL reference (<code>null</code> not permitted if
      *     <code>info</code> contains URLs).
      *
      * @throws java.io.IOException if there are any I/O errors.
      */
-    public static void writeImageMap(PrintWriter writer, String name, 
+    public static void writeImageMap(PrintWriter writer, String name,
             ChartRenderingInfo info,
             ToolTipTagFragmentGenerator toolTipTagFragmentGenerator,
-            URLTagFragmentGenerator urlTagFragmentGenerator) 
+            URLTagFragmentGenerator urlTagFragmentGenerator)
         throws IOException {
 
-        writer.println(ImageMapUtilities.getImageMap(name, info, 
+        writer.println(ImageMapUtilities.getImageMap(name, info,
                 toolTipTagFragmentGenerator, urlTagFragmentGenerator));
     }
 
@@ -160,10 +160,10 @@ public class ImageMapUtilities {
      * @param name  the map name (<code>null</code> not permitted).
      * @param info  the chart rendering info (<code>null</code> not permitted).
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
-     *     that will contain the tooltip text (<code>null</code> not permitted 
+     *     that will contain the tooltip text (<code>null</code> not permitted
      *     if <code>info</code> contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
-     *     will contain the URL reference (<code>null</code> not permitted if 
+     *     will contain the URL reference (<code>null</code> not permitted if
      *     <code>info</code> contains URLs).
      *
      * @return The map tag.
@@ -173,7 +173,7 @@ public class ImageMapUtilities {
             URLTagFragmentGenerator urlTagFragmentGenerator) {
 
         StringBuffer sb = new StringBuffer();
-        sb.append("<map id=\"" + htmlEscape(name) + "\" name=\"" 
+        sb.append("<map id=\"" + htmlEscape(name) + "\" name=\""
                 + htmlEscape(name) + "\">");
         sb.append(StringUtils.getLineSeparator());
         EntityCollection entities = info.getEntityCollection();
@@ -181,10 +181,10 @@ public class ImageMapUtilities {
             int count = entities.getEntityCount();
             for (int i = count - 1; i >= 0; i--) {
                 ChartEntity entity = entities.getEntity(i);
-                if (entity.getToolTipText() != null 
+                if (entity.getToolTipText() != null
                         || entity.getURLText() != null) {
                     String area = entity.getImageMapAreaTag(
-                            toolTipTagFragmentGenerator, 
+                            toolTipTagFragmentGenerator,
                             urlTagFragmentGenerator);
                     if (area.length() > 0) {
                         sb.append(area);
@@ -195,17 +195,17 @@ public class ImageMapUtilities {
         }
         sb.append("</map>");
         return sb.toString();
-        
+
     }
 
     /**
-     * Returns a string that is equivalent to the input string, but with 
+     * Returns a string that is equivalent to the input string, but with
      * special characters converted to HTML escape sequences.
-     * 
+     *
      * @param input  the string to escape (<code>null</code> not permitted).
      *
      * @return A string with characters escaped.
-     * 
+     *
      * @since 1.0.9
      */
     public static String htmlEscape(String input) {
@@ -233,7 +233,7 @@ public class ImageMapUtilities {
             }
             else if (c == '\\') {
                 result.append("&#092;");
-            }            
+            }
             else {
                 result.append(c);
             }
