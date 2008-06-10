@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------
  * AxisTests.java
  * --------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -99,17 +99,17 @@ public class AxisTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         Axis a1 = new CategoryAxis("Test");
         Axis a2 = new CategoryAxis("Test");
         assertTrue(a1.equals(a2));
-        
+
         // visible flag...
         a1.setVisible(false);
         assertFalse(a1.equals(a2));
         a2.setVisible(false);
         assertTrue(a1.equals(a2));
-                
+
         // label...
         a1.setLabel("New Label");
         assertFalse(a1.equals(a2));
@@ -123,13 +123,13 @@ public class AxisTests extends TestCase {
         assertTrue(a1.equals(a2));
 
         // label paint...
-        a1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.white, 
+        a1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.white,
                 3.0f, 4.0f, Color.black));
         assertFalse(a1.equals(a2));
-        a2.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.white, 
+        a2.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.white,
                 3.0f, 4.0f, Color.black));
         assertTrue(a1.equals(a2));
-       
+
         // label insets...
         a1.setLabelInsets(new RectangleInsets(10.0, 10.0, 10.0, 10.0));
         assertFalse(a1.equals(a2));
@@ -147,28 +147,28 @@ public class AxisTests extends TestCase {
         assertFalse(a1.equals(a2));
         a2.setAxisLineVisible(false);
         assertTrue(a1.equals(a2));
-        
+
         // axis line stroke...
         BasicStroke s = new BasicStroke(1.1f);
         a1.setAxisLineStroke(s);
         assertFalse(a1.equals(a2));
         a2.setAxisLineStroke(s);
         assertTrue(a1.equals(a2));
-        
+
         // axis line paint...
-        a1.setAxisLinePaint(new GradientPaint(1.0f, 2.0f, Color.red, 
+        a1.setAxisLinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.black));
         assertFalse(a1.equals(a2));
-        a2.setAxisLinePaint(new GradientPaint(1.0f, 2.0f, Color.red, 
+        a2.setAxisLinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.black));
         assertTrue(a1.equals(a2));
-        
+
         // tick labels visible flag...
         a1.setTickLabelsVisible(false);
         assertFalse(a1.equals(a2));
         a2.setTickLabelsVisible(false);
         assertTrue(a1.equals(a2));
-                
+
         // tick label font...
         a1.setTickLabelFont(new Font("Dialog", Font.PLAIN, 12));
         assertFalse(a1.equals(a2));
@@ -176,10 +176,10 @@ public class AxisTests extends TestCase {
         assertTrue(a1.equals(a2));
 
         // tick label paint...
-        a1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.yellow, 
+        a1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
                 3.0f, 4.0f, Color.black));
         assertFalse(a1.equals(a2));
-        a2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.yellow, 
+        a2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
                 3.0f, 4.0f, Color.black));
         assertTrue(a1.equals(a2));
 
@@ -194,7 +194,7 @@ public class AxisTests extends TestCase {
         assertFalse(a1.equals(a2));
         a2.setTickMarksVisible(true);
         assertTrue(a1.equals(a2));
-                
+
         // tick mark inside length...
         a1.setTickMarkInsideLength(1.23f);
         assertFalse(a1.equals(a2));
@@ -214,10 +214,10 @@ public class AxisTests extends TestCase {
         assertTrue(a1.equals(a2));
 
         // tick mark paint...
-        a1.setTickMarkPaint(new GradientPaint(1.0f, 2.0f, Color.cyan, 
+        a1.setTickMarkPaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
                 3.0f, 4.0f, Color.black));
         assertFalse(a1.equals(a2));
-        a2.setTickMarkPaint(new GradientPaint(1.0f, 2.0f, Color.cyan, 
+        a2.setTickMarkPaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
                 3.0f, 4.0f, Color.black));
         assertTrue(a1.equals(a2));
 
@@ -228,9 +228,9 @@ public class AxisTests extends TestCase {
         assertTrue(a1.equals(a2));
 
     }
-    
+
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashCode() {
         Axis a1 = new CategoryAxis("Test");
