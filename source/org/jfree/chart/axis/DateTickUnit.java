@@ -252,7 +252,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
     	// number calculations, and since DateTickUnit doesn't do week
     	// arithmetic, the default locale (whatever it is) should be fine
     	// here...
-    	Calendar calendar = Calendar.getInstance(zone);
+        Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(base);
         calendar.add(getCalendarField(this.unit), this.count);
         return calendar.getTime();
@@ -269,7 +269,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @see #rollDate(Date, TimeZone)
      */
     public Date rollDate(Date base) {
-    	return rollDate(base, TimeZone.getDefault());
+        return rollDate(base, TimeZone.getDefault());
     }
 
     /**
