@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------------
  * ExtendedCategoryAxisTests.java
  * ------------------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -83,21 +83,21 @@ public class ExtendedCategoryAxisTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
         ExtendedCategoryAxis a2 = new ExtendedCategoryAxis("Test");
         assertTrue(a1.equals(a2));
-        
+
         a1.addSubLabel("C1", "C1-sublabel");
         assertFalse(a1.equals(a2));
         a2.addSubLabel("C1", "C1-sublabel");
         assertTrue(a1.equals(a2));
-        
+
         a1.setSubLabelFont(new Font("Dialog", Font.BOLD, 8));
         assertFalse(a1.equals(a2));
         a2.setSubLabelFont(new Font("Dialog", Font.BOLD, 8));
         assertTrue(a1.equals(a2));
-        
+
         a1.setSubLabelPaint(Color.red);
         assertFalse(a1.equals(a2));
         a2.setSubLabelPaint(Color.red);
@@ -105,7 +105,7 @@ public class ExtendedCategoryAxisTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashCode() {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
@@ -131,13 +131,13 @@ public class ExtendedCategoryAxisTests extends TestCase {
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
-        
+
         // check independence
         a1.addSubLabel("C1", "ABC");
         assertFalse(a1.equals(a2));
         a2.addSubLabel("C1", "ABC");
         assertTrue(a1.equals(a2));
-        
+
     }
 
     /**
@@ -147,7 +147,7 @@ public class ExtendedCategoryAxisTests extends TestCase {
     public void testCloning2() {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
         a1.setTickLabelFont("C1", new Font("Dialog", Font.PLAIN, 15));
-        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red, 
+        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.white));
         ExtendedCategoryAxis a2 = null;
         try {
@@ -159,13 +159,13 @@ public class ExtendedCategoryAxisTests extends TestCase {
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
-        
+
         // check that changing a tick label font in a1 doesn't change a2
         a1.setTickLabelFont("C1", null);
         assertFalse(a1.equals(a2));
         a2.setTickLabelFont("C1", null);
         assertTrue(a1.equals(a2));
-        
+
         // check that changing a tick label paint in a1 doesn't change a2
         a1.setTickLabelPaint("C1", Color.yellow);
         assertFalse(a1.equals(a2));
@@ -184,7 +184,7 @@ public class ExtendedCategoryAxisTests extends TestCase {
      */
     public void testSerialization() {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
-        a1.setSubLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 
+        a1.setSubLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.blue));
         ExtendedCategoryAxis a2 = null;
 
