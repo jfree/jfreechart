@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * QuarterDateFormatTests.java
  * ---------------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -88,31 +88,31 @@ public class QuarterDateFormatTests extends TestCase {
                 "GMT"), new String[] {"1", "2", "3", "4"});
         assertTrue(qf1.equals(qf2));
         assertTrue(qf2.equals(qf1));
-        
-        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"), 
+
+        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"1", "2", "3", "4"});
         assertFalse(qf1.equals(qf2));
-        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"), 
+        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"1", "2", "3", "4"});
         assertTrue(qf1.equals(qf2));
-        
-        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"), 
+
+        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"A", "2", "3", "4"});
         assertFalse(qf1.equals(qf2));
-        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"), 
+        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"A", "2", "3", "4"});
         assertTrue(qf1.equals(qf2));
 
-        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"), 
+        qf1 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"A", "2", "3", "4"}, true);
         assertFalse(qf1.equals(qf2));
-        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"), 
+        qf2 = new QuarterDateFormat(TimeZone.getTimeZone("PST"),
                 new String[] {"A", "2", "3", "4"}, true);
         assertTrue(qf1.equals(qf2));
     }
-   
+
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashCode() {
         QuarterDateFormat qf1 = new QuarterDateFormat(TimeZone.getTimeZone(
@@ -123,8 +123,8 @@ public class QuarterDateFormatTests extends TestCase {
         int h1 = qf1.hashCode();
         int h2 = qf2.hashCode();
         assertEquals(h1, h2);
-    }    
-    
+    }
+
     /**
      * Confirm that cloning works.
      */

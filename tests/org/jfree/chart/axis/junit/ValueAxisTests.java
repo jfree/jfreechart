@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------
  * ValueAxisTests.java
  * -------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -65,7 +65,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class ValueAxisTests extends TestCase {
 
     private static final double EPSILON = 0.000000001;
-    
+
     /**
      * Returns the tests as a test suite.
      *
@@ -105,63 +105,63 @@ public class ValueAxisTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         NumberAxis a1 = new NumberAxis("Test");
         NumberAxis a2 = new NumberAxis("Test");
         assertTrue(a1.equals(a2));
-        
+
         // axis line visible flag...
         a1.setAxisLineVisible(false);
         assertFalse(a1.equals(a2));
         a2.setAxisLineVisible(false);
         assertTrue(a1.equals(a2));
-    
+
         // positiveArrowVisible;
         a1.setPositiveArrowVisible(true);
         assertFalse(a1.equals(a2));
         a2.setPositiveArrowVisible(true);
         assertTrue(a1.equals(a2));
-    
+
         // negativeArrowVisible;
         a1.setNegativeArrowVisible(true);
         assertFalse(a1.equals(a2));
         a2.setNegativeArrowVisible(true);
         assertTrue(a1.equals(a2));
-    
+
         //private Shape upArrow;
-    
+
         //private Shape downArrow;
-    
+
         //private Shape leftArrow;
-    
+
         //private Shape rightArrow;
-    
+
         // axisLinePaint
         a1.setAxisLinePaint(Color.blue);
         assertFalse(a1.equals(a2));
         a2.setAxisLinePaint(Color.blue);
         assertTrue(a1.equals(a2));
-        
-        // axisLineStroke 
+
+        // axisLineStroke
         Stroke stroke = new BasicStroke(2.0f);
         a1.setAxisLineStroke(stroke);
         assertFalse(a1.equals(a2));
         a2.setAxisLineStroke(stroke);
         assertTrue(a1.equals(a2));
-    
+
         // inverted
         a1.setInverted(true);
         assertFalse(a1.equals(a2));
         a2.setInverted(true);
         assertTrue(a1.equals(a2));
-        
-        // range 
+
+        // range
         a1.setRange(new Range(50.0, 75.0));
         assertFalse(a1.equals(a2));
         a2.setRange(new Range(50.0, 75.0));
         assertTrue(a1.equals(a2));
 
-        // autoRange 
+        // autoRange
         a1.setAutoRange(true);
         assertFalse(a1.equals(a2));
         a2.setAutoRange(true);
@@ -177,7 +177,7 @@ public class ValueAxisTests extends TestCase {
         assertFalse(a1.equals(a2));
         a2.setDefaultAutoRange(new Range(1.2, 3.4));
         assertTrue(a1.equals(a2));
-        
+
         // upperMargin
         a1.setUpperMargin(0.09);
         assertFalse(a1.equals(a2));
@@ -216,13 +216,13 @@ public class ValueAxisTests extends TestCase {
 
 
         //private int autoTickIndex;
-        //protected double reservedForTickLabels;  
+        //protected double reservedForTickLabels;
         //protected double reservedForAxisLabel;
-    
+
     }
 
     /**
-     * Tests the the lower and upper margin settings produce the expected 
+     * Tests the the lower and upper margin settings produce the expected
      * results.
      */
     public void testAxisMargins() {
@@ -232,7 +232,7 @@ public class ValueAxisTests extends TestCase {
         XYSeriesCollection dataset = new XYSeriesCollection(series);
         dataset.setIntervalWidth(0.0);
         JFreeChart chart = ChartFactory.createScatterPlot(
-            "Title", "X", "Y", dataset, PlotOrientation.VERTICAL, 
+            "Title", "X", "Y", dataset, PlotOrientation.VERTICAL,
             false, false, false
         );
         ValueAxis domainAxis = ((XYPlot) chart.getPlot()).getDomainAxis();
@@ -243,5 +243,5 @@ public class ValueAxisTests extends TestCase {
         r = domainAxis.getRange();
         assertEquals(120.0, r.getLength(), EPSILON);
     }
-    
+
 }

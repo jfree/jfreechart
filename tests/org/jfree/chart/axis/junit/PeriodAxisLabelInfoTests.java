@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------------
  * PeriodAxisLabelInfoTests.java
  * -----------------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -91,15 +91,13 @@ public class PeriodAxisLabelInfoTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(
-            Day.class, new SimpleDateFormat("d")
-        );
-        PeriodAxisLabelInfo info2 = new PeriodAxisLabelInfo(
-            Day.class, new SimpleDateFormat("d")
-        );
+        PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
+        		new SimpleDateFormat("d"));
+        PeriodAxisLabelInfo info2 = new PeriodAxisLabelInfo(Day.class,
+        		new SimpleDateFormat("d"));
         assertTrue(info1.equals(info2));
         assertTrue(info2.equals(info1));
-        
+
         Class c1 = Day.class;
         Class c2 = Month.class;
         DateFormat df1 = new SimpleDateFormat("d");
@@ -116,13 +114,13 @@ public class PeriodAxisLabelInfoTests extends TestCase {
         Stroke s2 = new BasicStroke(0.25f);
         Paint dp1 = Color.red;
         Paint dp2 = Color.green;
-        
+
         info1 = new PeriodAxisLabelInfo(c2, df1, sp1, lf1, lp1, b1, s1, dp1);
         info2 = new PeriodAxisLabelInfo(c1, df1, sp1, lf1, lp1, b1, s1, dp1);
         assertFalse(info1.equals(info2));
         info2 = new PeriodAxisLabelInfo(c2, df1, sp1, lf1, lp1, b1, s1, dp1);
         assertTrue(info1.equals(info2));
-        
+
         info1 = new PeriodAxisLabelInfo(c2, df2, sp1, lf1, lp1, b1, s1, dp1);
         assertFalse(info1.equals(info2));
         info2 = new PeriodAxisLabelInfo(c2, df2, sp1, lf1, lp1, b1, s1, dp1);
@@ -159,36 +157,33 @@ public class PeriodAxisLabelInfoTests extends TestCase {
         assertTrue(info1.equals(info2));
 
     }
-   
+
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashCode() {
-        PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(
-            Day.class, new SimpleDateFormat("d")
-        );
-        PeriodAxisLabelInfo info2 = new PeriodAxisLabelInfo(
-            Day.class, new SimpleDateFormat("d")
-        );
+        PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
+        		new SimpleDateFormat("d"));
+        PeriodAxisLabelInfo info2 = new PeriodAxisLabelInfo(Day.class,
+        		new SimpleDateFormat("d"));
         assertTrue(info1.equals(info2));
         int h1 = info1.hashCode();
         int h2 = info2.hashCode();
         assertEquals(h1, h2);
-    }    
-    
+    }
+
     /**
      * Confirm that cloning works.
      */
     public void testCloning() {
-        PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(
-            Day.class, new SimpleDateFormat("d")
-        );
+        PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
+        		new SimpleDateFormat("d"));
         PeriodAxisLabelInfo info2 = null;
         try {
             info2 = (PeriodAxisLabelInfo) info1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(info1 != info2);
         assertTrue(info1.getClass() == info2.getClass());
@@ -199,9 +194,8 @@ public class PeriodAxisLabelInfoTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-        PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(
-            Day.class, new SimpleDateFormat("d")
-        );
+        PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
+        		new SimpleDateFormat("d"));
         PeriodAxisLabelInfo info2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -210,13 +204,12 @@ public class PeriodAxisLabelInfoTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             info2 = (PeriodAxisLabelInfo) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         boolean b = info1.equals(info2);
         assertTrue(b);

@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * SymbolicAxisTests.java
  * ----------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,7 +36,7 @@
  * -------
  * 26-Mar-2003 : Version 1 (DG);
  * 25-Jul-2007 : Added new field in testEquals() (DG);
- * 
+ *
  */
 
 package org.jfree.chart.axis.junit;
@@ -104,7 +104,7 @@ public class SymbolAxisTests extends TestCase {
         assertEquals(a1, a2);
 
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -130,17 +130,17 @@ public class SymbolAxisTests extends TestCase {
         SymbolAxis a2 = new SymbolAxis("Axis", new String[] {"A", "B"});
         assertTrue(a1.equals(a2));
         assertTrue(a2.equals(a1));
-        
+
         a1 = new SymbolAxis("Axis 2", new String[] {"A", "B"});
         assertFalse(a1.equals(a2));
         a2 = new SymbolAxis("Axis 2", new String[] {"A", "B"});
-        assertTrue(a1.equals(a2));    
+        assertTrue(a1.equals(a2));
 
         a1 = new SymbolAxis("Axis 2", new String[] {"C", "B"});
         assertFalse(a1.equals(a2));
         a2 = new SymbolAxis("Axis 2", new String[] {"C", "B"});
-        assertTrue(a1.equals(a2));    
-        
+        assertTrue(a1.equals(a2));
+
         a1.setGridBandsVisible(false);
         assertFalse(a1.equals(a2));
         a2.setGridBandsVisible(false);
@@ -150,7 +150,7 @@ public class SymbolAxisTests extends TestCase {
         assertFalse(a1.equals(a2));
         a2.setGridBandPaint(Color.black);
         assertTrue(a1.equals(a2));
-        
+
         a1.setGridBandAlternatePaint(Color.red);
         assertFalse(a1.equals(a2));
         a2.setGridBandAlternatePaint(Color.red);
