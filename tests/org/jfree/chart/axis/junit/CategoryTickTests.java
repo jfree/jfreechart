@@ -172,10 +172,8 @@ public class CategoryTickTests extends TestCase {
      */
     public void testSerialization() {
 
-        CategoryTick t1 = new CategoryTick(
-            "C1", new TextBlock(), TextBlockAnchor.CENTER,
-            TextAnchor.CENTER, 1.5f
-        );
+        CategoryTick t1 = new CategoryTick("C1", new TextBlock(),
+        		TextBlockAnchor.CENTER, TextAnchor.CENTER, 1.5f);
         CategoryTick t2 = null;
 
         try {
@@ -185,13 +183,12 @@ public class CategoryTickTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             t2 = (CategoryTick) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(t1, t2);
 

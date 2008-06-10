@@ -86,7 +86,7 @@ public class CategoryAxis3DTests extends TestCase {
             a2 = (CategoryAxis3D) a1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
@@ -108,13 +108,12 @@ public class CategoryAxis3DTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             a2 = (CategoryAxis3D) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(a1, a2);
 

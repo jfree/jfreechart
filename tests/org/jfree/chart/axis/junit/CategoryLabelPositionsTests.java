@@ -88,77 +88,86 @@ public class CategoryLabelPositionsTests extends TestCase {
      */
     public void testEquals() {
         CategoryLabelPositions p1 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER)
-        );
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
         CategoryLabelPositions p2 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER)
-        );
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
         assertEquals(p1, p2);
 
         p1 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER)
-        );
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
         assertTrue(!p1.equals(p2));
         p2 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER)
-        );
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
         assertTrue(p1.equals(p2));
 
         p1 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER)
-        );
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
         assertTrue(!p1.equals(p2));
         p2 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER)
-        );
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
         assertTrue(p1.equals(p2));
 
         p1 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER)
-        );
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
         assertTrue(!p1.equals(p2));
         p2 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER)
-        );
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
         assertTrue(p1.equals(p2));
 
         p1 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER)
-        );
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER));
         assertTrue(!p1.equals(p2));
         p2 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
-            new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER)
-        );
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER),
+                new CategoryLabelPosition(RA_BOTTOM,
+                		TextBlockAnchor.TOP_CENTER));
         assertTrue(p1.equals(p2));
     }
 
@@ -167,17 +176,15 @@ public class CategoryLabelPositionsTests extends TestCase {
      */
     public void testHashCode() {
         CategoryLabelPositions p1 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER)
-        );
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
         CategoryLabelPositions p2 = new CategoryLabelPositions(
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
-            new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER)
-        );
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
+                new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
         assertTrue(p1.equals(p2));
         int h1 = p1.hashCode();
         int h2 = p2.hashCode();
@@ -199,13 +206,12 @@ public class CategoryLabelPositionsTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             p2 = (CategoryLabelPositions) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(p1, p2);
     }
