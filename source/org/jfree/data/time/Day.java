@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------
  * Day.java
  * --------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,7 +39,7 @@
  * 04-Dec-2001 : Added static method to parse a string into a Day object (DG);
  * 19-Dec-2001 : Added new constructor as suggested by Paul English (DG);
  * 29-Jan-2002 : Changed getDay() method to getSerialDate() (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to 
+ * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
  *               evaluate with reference to a particular time zone (DG);
  * 19-Mar-2002 : Changed the API for the TimePeriod classes (DG);
  * 29-May-2002 : Fixed bug in equals method (DG);
@@ -47,16 +47,16 @@
  * 10-Sep-2002 : Added getSerialIndex() method (DG);
  * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 10-Jan-2003 : Changed base class and method names (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package, and implemented 
+ * 13-Mar-2003 : Moved to com.jrefinery.data.time package, and implemented
  *               Serializable (DG);
  * 21-Oct-2003 : Added hashCode() method (DG);
  * 30-Sep-2004 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 04-Nov-2004 : Reverted change of 30-Sep-2004, because it won't work for 
+ * 04-Nov-2004 : Reverted change of 30-Sep-2004, because it won't work for
  *               JDK 1.3 (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 05-Oct-2006 : Updated API docs (DG);
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
- * 
+ *
  */
 
 package org.jfree.data.time;
@@ -72,17 +72,17 @@ import java.util.TimeZone;
 import org.jfree.date.SerialDate;
 
 /**
- * Represents a single day in the range 1-Jan-1900 to 31-Dec-9999.  This class 
- * is immutable, which is a requirement for all {@link RegularTimePeriod} 
+ * Represents a single day in the range 1-Jan-1900 to 31-Dec-9999.  This class
+ * is immutable, which is a requirement for all {@link RegularTimePeriod}
  * subclasses.
  */
 public class Day extends RegularTimePeriod implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -7082667380758962755L;
-    
+
     /** A standard date formatter. */
-    protected static final DateFormat DATE_FORMAT 
+    protected static final DateFormat DATE_FORMAT
         = new SimpleDateFormat("yyyy-MM-dd");
 
     /** A date formatter for the default locale. */
@@ -102,12 +102,12 @@ public class Day extends RegularTimePeriod implements Serializable {
 
     /** The first millisecond. */
     private long firstMillisecond;
-    
+
     /** The last millisecond. */
     private long lastMillisecond;
 
     /**
-     * Creates a new instance, derived from the system date/time (and assuming 
+     * Creates a new instance, derived from the system date/time (and assuming
      * the default timezone).
      */
     public Day() {
@@ -140,7 +140,7 @@ public class Day extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new instance, based on a particular date/time and the 
+     * Constructs a new instance, based on a particular date/time and the
      * default time zone.
      *
      * @param time  the time (<code>null</code> not permitted).
@@ -173,9 +173,9 @@ public class Day extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the day as a {@link SerialDate}.  Note: the reference that is 
-     * returned should be an instance of an immutable {@link SerialDate} 
-     * (otherwise the caller could use the reference to alter the state of 
+     * Returns the day as a {@link SerialDate}.  Note: the reference that is
+     * returned should be an instance of an immutable {@link SerialDate}
+     * (otherwise the caller could use the reference to alter the state of
      * this <code>Day</code> instance, and <code>Day</code> is supposed
      * to be immutable).
      *
@@ -213,13 +213,13 @@ public class Day extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the first millisecond of the day.  This will be determined 
-     * relative to the time zone specified in the constructor, or in the 
-     * calendar instance passed in the most recent call to the 
+     * Returns the first millisecond of the day.  This will be determined
+     * relative to the time zone specified in the constructor, or in the
+     * calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The first millisecond of the day.
-     * 
+     *
      * @see #getLastMillisecond()
      */
     public long getFirstMillisecond() {
@@ -227,25 +227,25 @@ public class Day extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the last millisecond of the day.  This will be 
+     * Returns the last millisecond of the day.  This will be
      * determined relative to the time zone specified in the constructor, or
-     * in the calendar instance passed in the most recent call to the 
+     * in the calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The last millisecond of the day.
-     * 
+     *
      * @see #getFirstMillisecond()
      */
     public long getLastMillisecond() {
         return this.lastMillisecond;
     }
-    
-    /** 
-     * Recalculates the start date/time and end date/time for this time period 
+
+    /**
+     * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
-     * 
+     *
      * @param calendar  the calendar (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.3
      */
     public void peg(Calendar calendar) {
@@ -274,10 +274,10 @@ public class Day extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the day following this one, or <code>null</code> if some limit 
+     * Returns the day following this one, or <code>null</code> if some limit
      * has been reached.
      *
-     * @return The day following this one, or <code>null</code> if some limit 
+     * @return The day following this one, or <code>null</code> if some limit
      *         has been reached.
      */
     public RegularTimePeriod next() {
@@ -312,7 +312,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      *
      * @return The start of the day as milliseconds since 01-01-1970.
      *
-     * @throws NullPointerException if <code>calendar</code> is 
+     * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
     public long getFirstMillisecond(Calendar calendar) {
@@ -334,7 +334,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      *
      * @return The end of the day as milliseconds since 01-01-1970.
      *
-     * @throws NullPointerException if <code>calendar</code> is 
+     * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
     public long getLastMillisecond(Calendar calendar) {
@@ -359,7 +359,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * @return A flag indicating whether or not an object is equal to this day.
      */
     public boolean equals(Object obj) {
-        
+
         if (obj == this) {
             return true;
         }
@@ -371,7 +371,7 @@ public class Day extends RegularTimePeriod implements Serializable {
             return false;
         }
         return true;
-        
+
     }
 
     /**
@@ -380,7 +380,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * <p>
      * <code>http://developer.java.sun.com/developer/Books/effectivejava
      * /Chapter3.pdf</code>
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {

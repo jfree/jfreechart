@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------
  * Quarter.java
  * ------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,14 +39,14 @@
  * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
  * 29-Jan-2002 : Added a new method parseQuarter(String) (DG);
  * 14-Feb-2002 : Fixed bug in Quarter(Date) constructor (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to 
+ * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
  *               evaluate with reference to a particular time zone (DG);
  * 19-Mar-2002 : Changed API for TimePeriod classes (DG);
  * 24-Jun-2002 : Removed main method (just test code) (DG);
  * 10-Sep-2002 : Added getSerialIndex() method (DG);
  * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 10-Jan-2003 : Changed base class and method names (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package, and implemented 
+ * 13-Mar-2003 : Moved to com.jrefinery.data.time package, and implemented
  *               Serializable (DG);
  * 21-Oct-2003 : Added hashCode() method (DG);
  * 10-Dec-2005 : Fixed argument checking bug (1377239) in constructor (DG);
@@ -67,15 +67,15 @@ import org.jfree.date.MonthConstants;
 import org.jfree.date.SerialDate;
 
 /**
- * Defines a quarter (in a given year).  The range supported is Q1 1900 to 
- * Q4 9999.  This class is immutable, which is a requirement for all 
+ * Defines a quarter (in a given year).  The range supported is Q1 1900 to
+ * Q4 9999.  This class is immutable, which is a requirement for all
  * {@link RegularTimePeriod} subclasses.
  */
 public class Quarter extends RegularTimePeriod implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 3810061714380888671L;
-    
+
     /** Constant for quarter 1. */
     public static final int FIRST_QUARTER = 1;
 
@@ -84,13 +84,13 @@ public class Quarter extends RegularTimePeriod implements Serializable {
 
     /** The first month in each quarter. */
     public static final int[] FIRST_MONTH_IN_QUARTER = {
-        0, MonthConstants.JANUARY, MonthConstants.APRIL, MonthConstants.JULY, 
+        0, MonthConstants.JANUARY, MonthConstants.APRIL, MonthConstants.JULY,
         MonthConstants.OCTOBER
     };
 
     /** The last month in each quarter. */
     public static final int[] LAST_MONTH_IN_QUARTER = {
-        0, MonthConstants.MARCH, MonthConstants.JUNE, MonthConstants.SEPTEMBER, 
+        0, MonthConstants.MARCH, MonthConstants.JUNE, MonthConstants.SEPTEMBER,
         MonthConstants.DECEMBER
     };
 
@@ -102,7 +102,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
 
     /** The first millisecond. */
     private long firstMillisecond;
-    
+
     /** The last millisecond. */
     private long lastMillisecond;
 
@@ -184,12 +184,12 @@ public class Quarter extends RegularTimePeriod implements Serializable {
     public Year getYear() {
         return new Year(this.year);
     }
-    
+
     /**
      * Returns the year.
-     * 
+     *
      * @return The year.
-     * 
+     *
      * @since 1.0.3
      */
     public int getYearValue() {
@@ -197,13 +197,13 @@ public class Quarter extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the first millisecond of the quarter.  This will be determined 
-     * relative to the time zone specified in the constructor, or in the 
-     * calendar instance passed in the most recent call to the 
+     * Returns the first millisecond of the quarter.  This will be determined
+     * relative to the time zone specified in the constructor, or in the
+     * calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The first millisecond of the quarter.
-     * 
+     *
      * @see #getLastMillisecond()
      */
     public long getFirstMillisecond() {
@@ -211,25 +211,25 @@ public class Quarter extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the last millisecond of the quarter.  This will be 
+     * Returns the last millisecond of the quarter.  This will be
      * determined relative to the time zone specified in the constructor, or
-     * in the calendar instance passed in the most recent call to the 
+     * in the calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The last millisecond of the quarter.
-     * 
+     *
      * @see #getFirstMillisecond()
      */
     public long getLastMillisecond() {
         return this.lastMillisecond;
     }
-    
-    /** 
-     * Recalculates the start date/time and end date/time for this time period 
+
+    /**
+     * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
-     * 
+     *
      * @param calendar  the calendar (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.3
      */
     public void peg(Calendar calendar) {
@@ -240,7 +240,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
     /**
      * Returns the quarter preceding this one.
      *
-     * @return The quarter preceding this one (or <code>null</code> if this is 
+     * @return The quarter preceding this one (or <code>null</code> if this is
      *     Q1 1900).
      */
     public RegularTimePeriod previous() {
@@ -291,8 +291,8 @@ public class Quarter extends RegularTimePeriod implements Serializable {
 
     /**
      * Tests the equality of this Quarter object to an arbitrary object.
-     * Returns <code>true</code> if the target is a Quarter instance 
-     * representing the same quarter as this object.  In all other cases, 
+     * Returns <code>true</code> if the target is a Quarter instance
+     * representing the same quarter as this object.  In all other cases,
      * returns <code>false</code>.
      *
      * @param obj  the object (<code>null</code> permitted).
@@ -324,7 +324,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * <p>
      * <code>http://developer.java.sun.com/developer/Books/effectivejava
      * /Chapter3.pdf</code>
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -393,7 +393,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      *
      * @return The first millisecond in the Quarter.
      *
-     * @throws NullPointerException if <code>calendar</code> is 
+     * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
     public long getFirstMillisecond(Calendar calendar) {
@@ -413,7 +413,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      *
      * @return The last millisecond of the Quarter.
      *
-     * @throws NullPointerException if <code>calendar</code> is 
+     * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
     public long getLastMillisecond(Calendar calendar) {
