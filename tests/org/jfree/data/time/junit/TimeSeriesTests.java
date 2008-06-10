@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------
@@ -38,8 +38,8 @@
  * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 13-Mar-2003 : Added serialization test (DG);
  * 15-Oct-2003 : Added test for setMaximumItemCount method (DG);
- * 23-Aug-2004 : Added test that highlights a bug where the addOrUpdate() 
- *               method can lead to more than maximumItemCount items in the 
+ * 23-Aug-2004 : Added test that highlights a bug where the addOrUpdate()
+ *               method can lead to more than maximumItemCount items in the
  *               dataset (DG);
  * 24-May-2006 : Added new tests (DG);
  * 31-Oct-2007 : New hashCode() test (DG);
@@ -89,7 +89,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
 
     /** A flag that indicates whether or not a change event was fired. */
     private boolean gotSeriesChangeEvent = false;
-    
+
     /**
      * Returns the tests as a test suite.
      *
@@ -147,15 +147,15 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         }
 
     }
-    
+
     /**
-     * Sets the flag to indicate that a {@link SeriesChangeEvent} has been 
+     * Sets the flag to indicate that a {@link SeriesChangeEvent} has been
      * received.
-     * 
+     *
      * @param event  the event.
      */
     public void seriesChanged(SeriesChangeEvent event) {
-        this.gotSeriesChangeEvent = true;   
+        this.gotSeriesChangeEvent = true;
     }
 
     /**
@@ -185,9 +185,9 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             }
         }
         catch (CloneNotSupportedException e) {
-            assertTrue(false);  
+            assertTrue(false);
         }
-        
+
         int seriesValue = series.getValue(jan1st2002).intValue();
         int cloneValue = Integer.MAX_VALUE;
         if (clone != null) {
@@ -205,7 +205,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         }
 
     }
-    
+
     /**
      * Another test of the clone() method.
      */
@@ -222,7 +222,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             e.printStackTrace();
         }
         assertTrue(s1.equals(s2));
-        
+
         // check independence
         s2.addOrUpdate(new Year(2009), 300.0);
         assertFalse(s1.equals(s2));
@@ -273,7 +273,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
      * Basic tests for the delete() method.
      */
     public void testDelete2() {
-        TimeSeries s1 = new TimeSeries("Series", Year.class);    
+        TimeSeries s1 = new TimeSeries("Series", Year.class);
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
@@ -283,12 +283,12 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertTrue(this.gotSeriesChangeEvent);
         assertEquals(2, s1.getItemCount());
         assertEquals(null, s1.getValue(new Year(2001)));
-        
+
         // try deleting a time period that doesn't exist...
         this.gotSeriesChangeEvent = false;
         s1.delete(new Year(2006));
         assertFalse(this.gotSeriesChangeEvent);
-        
+
         // try deleting null
         try {
             s1.delete(null);
@@ -298,7 +298,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             // expected
         }
     }
-    
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
@@ -372,9 +372,9 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         boolean b8 = s1.equals(s2);
         assertTrue("b8", b8);
     }
-    
+
     /**
-     * Tests a specific bug report where null arguments in the constructor 
+     * Tests a specific bug report where null arguments in the constructor
      * cause the equals() method to fail.  Fixed for 0.9.21.
      */
     public void testEquals2() {
@@ -382,40 +382,40 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         TimeSeries s2 = new TimeSeries("Series", null, null, Day.class);
         assertTrue(s1.equals(s2));
     }
-    
+
     /**
-     * Some tests to ensure that the createCopy(RegularTimePeriod, 
+     * Some tests to ensure that the createCopy(RegularTimePeriod,
      * RegularTimePeriod) method is functioning correctly.
      */
     public void testCreateCopy1() {
-        
+
         TimeSeries series = new TimeSeries("Series", Month.class);
         series.add(new Month(MonthConstants.JANUARY, 2003), 45.0);
         series.add(new Month(MonthConstants.FEBRUARY, 2003), 55.0);
         series.add(new Month(MonthConstants.JUNE, 2003), 35.0);
         series.add(new Month(MonthConstants.NOVEMBER, 2003), 85.0);
         series.add(new Month(MonthConstants.DECEMBER, 2003), 75.0);
-        
+
         try {
             // copy a range before the start of the series data...
             TimeSeries result1 = series.createCopy(
                     new Month(MonthConstants.NOVEMBER, 2002),
                     new Month(MonthConstants.DECEMBER, 2002));
             assertEquals(0, result1.getItemCount());
-        
+
             // copy a range that includes only the first item in the series...
             TimeSeries result2 = series.createCopy(
                     new Month(MonthConstants.NOVEMBER, 2002),
                     new Month(MonthConstants.JANUARY, 2003));
             assertEquals(1, result2.getItemCount());
-        
-            // copy a range that begins before and ends in the middle of the 
+
+            // copy a range that begins before and ends in the middle of the
             // series...
             TimeSeries result3 = series.createCopy(
                     new Month(MonthConstants.NOVEMBER, 2002),
                     new Month(MonthConstants.APRIL, 2003));
             assertEquals(2, result3.getItemCount());
-        
+
             TimeSeries result4 = series.createCopy(
                     new Month(MonthConstants.NOVEMBER, 2002),
                     new Month(MonthConstants.DECEMBER, 2003));
@@ -425,7 +425,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
                     new Month(MonthConstants.NOVEMBER, 2002),
                     new Month(MonthConstants.MARCH, 2004));
             assertEquals(5, result5.getItemCount());
-        
+
             TimeSeries result6 = series.createCopy(
                     new Month(MonthConstants.JANUARY, 2003),
                     new Month(MonthConstants.JANUARY, 2003));
@@ -445,7 +445,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
                     new Month(MonthConstants.JANUARY, 2003),
                     new Month(MonthConstants.MARCH, 2004));
             assertEquals(5, result9.getItemCount());
-        
+
             TimeSeries result10 = series.createCopy(
                     new Month(MonthConstants.MAY, 2003),
                     new Month(MonthConstants.DECEMBER, 2003));
@@ -460,7 +460,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
                     new Month(MonthConstants.DECEMBER, 2003),
                     new Month(MonthConstants.DECEMBER, 2003));
             assertEquals(1, result12.getItemCount());
-    
+
             TimeSeries result13 = series.createCopy(
                     new Month(MonthConstants.DECEMBER, 2003),
                     new Month(MonthConstants.MARCH, 2004));
@@ -476,39 +476,39 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         }
 
     }
-    
+
     /**
-     * Some tests to ensure that the createCopy(int, int) method is 
+     * Some tests to ensure that the createCopy(int, int) method is
      * functioning correctly.
      */
     public void testCreateCopy2() {
-        
+
         TimeSeries series = new TimeSeries("Series", Month.class);
         series.add(new Month(MonthConstants.JANUARY, 2003), 45.0);
         series.add(new Month(MonthConstants.FEBRUARY, 2003), 55.0);
         series.add(new Month(MonthConstants.JUNE, 2003), 35.0);
         series.add(new Month(MonthConstants.NOVEMBER, 2003), 85.0);
         series.add(new Month(MonthConstants.DECEMBER, 2003), 75.0);
-        
+
         try {
             // copy just the first item...
             TimeSeries result1 = series.createCopy(0, 0);
             assertEquals(new Month(1, 2003), result1.getTimePeriod(0));
-            
+
             // copy the first two items...
             result1 = series.createCopy(0, 1);
             assertEquals(new Month(2, 2003), result1.getTimePeriod(1));
-            
+
             // copy the middle three items...
             result1 = series.createCopy(1, 3);
             assertEquals(new Month(2, 2003), result1.getTimePeriod(0));
             assertEquals(new Month(11, 2003), result1.getTimePeriod(2));
-            
+
             // copy the last two items...
             result1 = series.createCopy(3, 4);
             assertEquals(new Month(11, 2003), result1.getTimePeriod(0));
             assertEquals(new Month(12, 2003), result1.getTimePeriod(1));
-            
+
             // copy the last item...
             result1 = series.createCopy(4, 4);
             assertEquals(new Month(12, 2003), result1.getTimePeriod(0));
@@ -529,7 +529,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             pass = false;
         }
         assertTrue(pass);
-        
+
         // check second argument less than first argument
         pass = false;
         try {
@@ -542,7 +542,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             pass = false;
         }
         assertTrue(pass);
-        
+
         TimeSeries series2 = new TimeSeries("Series 2");
         try {
             TimeSeries series3 = series2.createCopy(99, 999);
@@ -553,9 +553,9 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         }
     }
 
-    
+
     /**
-     * Test the setMaximumItemCount() method to ensure that it removes items 
+     * Test the setMaximumItemCount() method to ensure that it removes items
      * from the series if necessary.
      */
     public void testSetMaximumItemCount() {
@@ -608,8 +608,8 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         }
         assertEquals(1, ts.getItemCount());
     }
-    
-    /** 
+
+    /**
      * A test for bug 1832432.
      */
     public void testBug1832432() {
@@ -627,35 +627,35 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
 
         // test independence
         s1.add(new Day(1, 1, 2007), 100.0);
-        assertFalse(s1.equals(s2));     
+        assertFalse(s1.equals(s2));
     }
-    
+
     /**
      * Some checks for the getIndex() method.
      */
     public void testGetIndex() {
         TimeSeries series = new TimeSeries("Series", Month.class);
         assertEquals(-1, series.getIndex(new Month(1, 2003)));
-        
+
         series.add(new Month(1, 2003), 45.0);
         assertEquals(0, series.getIndex(new Month(1, 2003)));
         assertEquals(-1, series.getIndex(new Month(12, 2002)));
         assertEquals(-2, series.getIndex(new Month(2, 2003)));
-        
+
         series.add(new Month(3, 2003), 55.0);
         assertEquals(-1, series.getIndex(new Month(12, 2002)));
         assertEquals(0, series.getIndex(new Month(1, 2003)));
         assertEquals(-2, series.getIndex(new Month(2, 2003)));
         assertEquals(1, series.getIndex(new Month(3, 2003)));
-        assertEquals(-3, series.getIndex(new Month(4, 2003)));   
-    }   
-    
+        assertEquals(-3, series.getIndex(new Month(4, 2003)));
+    }
+
     /**
      * Some checks for the getDataItem(int) method.
      */
     public void testGetDataItem1() {
         TimeSeries series = new TimeSeries("S", Year.class);
-        
+
         // can't get anything yet...just an exception
         boolean pass = false;
         try {
@@ -665,7 +665,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             pass = true;
         }
         assertTrue(pass);
-        
+
         series.add(new Year(2006), 100.0);
         TimeSeriesDataItem item = series.getDataItem(0);
         assertEquals(new Year(2006), item.getPeriod());
@@ -677,7 +677,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             /*item = */series.getDataItem(1);
@@ -694,7 +694,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
     public void testGetDataItem2() {
         TimeSeries series = new TimeSeries("S", Year.class);
         assertNull(series.getDataItem(new Year(2006)));
-        
+
         // try a null argument
         boolean pass = false;
         try {
@@ -705,7 +705,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the removeAgedItems() method.
      */
@@ -715,12 +715,12 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertEquals(Long.MAX_VALUE, series.getMaximumItemAge());
         assertEquals(Integer.MAX_VALUE, series.getMaximumItemCount());
         this.gotSeriesChangeEvent = false;
-        
+
         // test empty series
         series.removeAgedItems(true);
         assertEquals(0, series.getItemCount());
         assertFalse(this.gotSeriesChangeEvent);
-        
+
         // test series with one item
         series.add(new Year(1999), 1.0);
         series.setMaximumItemAge(0);
@@ -742,7 +742,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertEquals(0, series.getIndex(new Year(2001)));
         assertTrue(this.gotSeriesChangeEvent);
     }
-    
+
     /**
      * Some checks for the removeAgedItems(long, boolean) method.
      */
@@ -753,12 +753,12 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertEquals(Long.MAX_VALUE, series.getMaximumItemAge());
         assertEquals(Integer.MAX_VALUE, series.getMaximumItemCount());
         this.gotSeriesChangeEvent = false;
-        
+
         // test empty series
         series.removeAgedItems(y2006, true);
         assertEquals(0, series.getItemCount());
         assertFalse(this.gotSeriesChangeEvent);
-        
+
         // test a series with 1 item
         series.add(new Year(2004), 1.0);
         series.setMaximumItemAge(1);
@@ -769,7 +769,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         series.removeAgedItems(y2006, true);
         assertEquals(0, series.getItemCount());
         assertTrue(this.gotSeriesChangeEvent);
-    
+
         // test a series with two items
         series.setMaximumItemAge(2);
         series.add(new Year(2003), 1.0);
@@ -777,7 +777,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertEquals(2, series.getItemCount());
         this.gotSeriesChangeEvent = false;
         assertEquals(2, series.getItemCount());
-        
+
         series.removeAgedItems(new Year(2005).getMiddleMillisecond(), true);
         assertEquals(2, series.getItemCount());
         assertFalse(this.gotSeriesChangeEvent);
@@ -785,7 +785,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertEquals(1, series.getItemCount());
         assertTrue(this.gotSeriesChangeEvent);
     }
-    
+
     /**
      * Some simple checks for the hashCode() method.
      */
@@ -794,17 +794,17 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         TimeSeries s2 = new TimeSeries("Test");
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
-        
+
         s1.add(new Day(1, 1, 2007), 500.0);
         s2.add(new Day(1, 1, 2007), 500.0);
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
-        
+
         s1.add(new Day(2, 1, 2007), null);
         s2.add(new Day(2, 1, 2007), null);
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
-        
+
         s1.add(new Day(5, 1, 2007), 111.0);
         s2.add(new Day(5, 1, 2007), 111.0);
         assertEquals(s1, s2);
@@ -815,7 +815,7 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
     }
-    
+
     /**
      * Test for bug report 1864222.
      */
