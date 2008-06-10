@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * LogarithmicAxisTests.java
  * -------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -65,25 +65,25 @@ public class LogarithmicAxisTests extends TestCase {
 
         /**
          * Creates a new instance.
-         * 
+         *
          * @param label  the label.
          */
         public MyLogarithmicAxis(String label) {
             super(label);
         }
-        
+
         /* (non-Javadoc)
          * @see org.jfree.chart.axis.LogarithmicAxis#switchedLog10(double)
          */
         protected double switchedLog10(double val) {
             return super.switchedLog10(val);
         }
-        
+
     }
-    
+
     /** Tolerance for floating point comparisons */
     public static double EPSILON = 0.000001;
-    
+
     MyLogarithmicAxis axis = null;
 
     /**
@@ -106,7 +106,7 @@ public class LogarithmicAxisTests extends TestCase {
 
     /**
      * Sets up a new axis.
-     * 
+     *
      * @throws Exception
      */
     protected void setUp() throws Exception {
@@ -145,9 +145,9 @@ public class LogarithmicAxisTests extends TestCase {
         assertEquals(a1, a2);
 
     }
-        
-    /** 
-     * Test if adjustedLog10 and adjustedPow10 are inverses of each other 
+
+    /**
+     * Test if adjustedLog10 and adjustedPow10 are inverses of each other
      */
      public void testAdjustedLog10() {
          checkLogPowRoundTrip(20);
@@ -167,13 +167,13 @@ public class LogarithmicAxisTests extends TestCase {
                  this.axis.adjustedLog10(value)), EPSILON);
      }
 
-     /** 
-      * Test if switchedLog10 and switchedPow10 are inverses of each other 
+     /**
+      * Test if switchedLog10 and switchedPow10 are inverses of each other
       */
       public void testSwitchedLog10() {
           assertFalse("Axis should not allow negative values",
                   this.axis.getAllowNegativesFlag());
-                
+
           assertEquals(Math.log(0.5) / LogarithmicAxis.LOG10_VALUE,
                   this.axis.switchedLog10(0.5), EPSILON);
 
@@ -242,45 +242,45 @@ public class LogarithmicAxisTests extends TestCase {
           checkPointsToJava2D(edge, plotArea);
       }
 
-      private void checkPointsToJava2D(RectangleEdge edge, 
+      private void checkPointsToJava2D(RectangleEdge edge,
               Rectangle2D plotArea) {
           assertEquals("Left most point on the axis should be beginning of "
                   + "range.", plotArea.getX(), this.axis.valueToJava2D(
                   this.axis.getLowerBound(), plotArea, edge), EPSILON);
-          assertEquals("Right most point on the axis should be end of range.", 
-                  plotArea.getX() + plotArea.getWidth(), 
-                  this.axis.valueToJava2D(this.axis.getUpperBound(), 
+          assertEquals("Right most point on the axis should be end of range.",
+                  plotArea.getX() + plotArea.getWidth(),
+                  this.axis.valueToJava2D(this.axis.getUpperBound(),
                   plotArea, edge), EPSILON);
-          assertEquals("Center point on the axis should geometric mean of the bounds.", 
-                  plotArea.getX() + (plotArea.getWidth() / 2), 
-                  this.axis.valueToJava2D(Math.sqrt(this.axis.getLowerBound() 
+          assertEquals("Center point on the axis should geometric mean of the bounds.",
+                  plotArea.getX() + (plotArea.getWidth() / 2),
+                  this.axis.valueToJava2D(Math.sqrt(this.axis.getLowerBound()
                   * this.axis.getUpperBound()), plotArea, edge), EPSILON);
         }
 
-    /** 
+    /**
      * Check the translation java2D to value for left, right, and center point.
      */
      private void checkPointsToValue(RectangleEdge edge, Rectangle2D plotArea) {
          assertEquals("Right most point on the axis should be end of range.",
                  this.axis.getUpperBound(), this.axis.java2DToValue(
-                 plotArea.getX() + plotArea.getWidth(), plotArea, edge), 
+                 plotArea.getX() + plotArea.getWidth(), plotArea, edge),
                  EPSILON);
 
          assertEquals("Left most point on the axis should be beginning of "
-                 + "range.", this.axis.getLowerBound(), 
-                 this.axis.java2DToValue(plotArea.getX(), plotArea, edge), 
+                 + "range.", this.axis.getLowerBound(),
+                 this.axis.java2DToValue(plotArea.getX(), plotArea, edge),
                  EPSILON);
 
          assertEquals("Center point on the axis should geometric mean of the "
-                 + "bounds.", Math.sqrt(this.axis.getUpperBound() 
+                 + "bounds.", Math.sqrt(this.axis.getUpperBound()
                  * this.axis.getLowerBound()), this.axis.java2DToValue(
-                 plotArea.getX() + (plotArea.getWidth() / 2), plotArea, edge), 
+                 plotArea.getX() + (plotArea.getWidth() / 2), plotArea, edge),
                  EPSILON);
     }
 
     /**
      * Runs all tests in this class.
-     * 
+     *
      * @param args  ignored.
      */
     public static void main(String[] args) {
