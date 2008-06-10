@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------
  * MinuteTests.java
  * ----------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -140,8 +140,8 @@ public class MinuteTests extends TestCase {
     }
 
     /**
-     * In Singapore, the 4.55pm on 21 Mar 2002 is 
-     * java.util.Date(1,014,281,700,000L). Use this to check the Minute 
+     * In Singapore, the 4.55pm on 21 Mar 2002 is
+     * java.util.Date(1,014,281,700,000L). Use this to check the Minute
      * constructor.
      */
     public void testDateConstructor2() {
@@ -184,9 +184,9 @@ public class MinuteTests extends TestCase {
         assertEquals(m1, m2);
 
     }
-    
+
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         Minute m1 = new Minute(45, 5, 1, 2, 2003);
@@ -196,9 +196,9 @@ public class MinuteTests extends TestCase {
         int h2 = m2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
-     * The {@link Minute} class is immutable, so should not be 
+     * The {@link Minute} class is immutable, so should not be
      * {@link Cloneable}.
      */
     public void testNotCloneable() {
@@ -219,7 +219,7 @@ public class MinuteTests extends TestCase {
         Locale.setDefault(saved);
         TimeZone.setDefault(savedZone);
     }
-    
+
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
@@ -227,7 +227,7 @@ public class MinuteTests extends TestCase {
         Minute m = new Minute(59, 15, 1, 4, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
         assertEquals(-623289660000L, m.getFirstMillisecond(zone));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -236,18 +236,18 @@ public class MinuteTests extends TestCase {
         catch (NullPointerException e) {
             pass = true;
         }
-        assertTrue(pass);            
+        assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
     public void testGetFirstMillisecondWithCalendar() {
         Minute m = new Minute(40, 2, 15, 4, 2000);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
-        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));        
+        calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(955766400000L, m.getFirstMillisecond(calendar));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -257,7 +257,7 @@ public class MinuteTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-    }    
+    }
 
     /**
      * Some checks for the getLastMillisecond() method.
@@ -272,7 +272,7 @@ public class MinuteTests extends TestCase {
         Locale.setDefault(saved);
         TimeZone.setDefault(savedZone);
     }
-    
+
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
@@ -280,7 +280,7 @@ public class MinuteTests extends TestCase {
         Minute m = new Minute(1, 2, 7, 7, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
         assertEquals(-614962680001L, m.getLastMillisecond(zone));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -289,9 +289,9 @@ public class MinuteTests extends TestCase {
         catch (NullPointerException e) {
             pass = true;
         }
-        assertTrue(pass);            
+        assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
@@ -300,7 +300,7 @@ public class MinuteTests extends TestCase {
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
         calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(987889559999L, m.getLastMillisecond(calendar));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -310,8 +310,8 @@ public class MinuteTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-    } 
-    
+    }
+
     /**
      * Some checks for the getSerialIndex() method.
      */
@@ -321,7 +321,7 @@ public class MinuteTests extends TestCase {
         m = new Minute(1, 1, 1, 1, 1900);
         assertEquals(2941L, m.getSerialIndex());
     }
-    
+
     /**
      * Some checks for the testNext() method.
      */
@@ -336,7 +336,7 @@ public class MinuteTests extends TestCase {
         m = new Minute(59, 23, 31, 12, 9999);
         assertNull(m.next());
     }
-    
+
     /**
      * Some checks for the getStart() method.
      */
@@ -350,10 +350,10 @@ public class MinuteTests extends TestCase {
         cal.set(Calendar.MILLISECOND, 0);
         Minute m = new Minute(47, 3, 16, 1, 2006);
         assertEquals(cal.getTime(), m.getStart());
-        Locale.setDefault(saved);       
+        Locale.setDefault(saved);
         TimeZone.setDefault(savedZone);
     }
-    
+
     /**
      * Some checks for the getEnd() method.
      */
@@ -370,7 +370,7 @@ public class MinuteTests extends TestCase {
         Locale.setDefault(saved);
         TimeZone.setDefault(savedZone);
     }
-    
+
     /**
      * Test for bug 1611872 - previous() fails for first minute in hour.
      */
@@ -379,5 +379,5 @@ public class MinuteTests extends TestCase {
         Minute m2 = (Minute) m1.previous();
         assertEquals(m2, new Minute(59, 9, 15, 4, 2000));
     }
- 
+
 }

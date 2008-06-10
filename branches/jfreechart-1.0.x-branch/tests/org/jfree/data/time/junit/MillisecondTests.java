@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
  * MillisecondTests.java
  * ---------------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -127,8 +127,8 @@ public class MillisecondTests extends TestCase {
     }
 
     /**
-     * In GMT, the 4.55:59.123pm on 21 Mar 2002 is 
-     * java.util.Date(1016729759123L).  Use this to check the Millisecond 
+     * In GMT, the 4.55:59.123pm on 21 Mar 2002 is
+     * java.util.Date(1016729759123L).  Use this to check the Millisecond
      * constructor.
      */
     public void testDateConstructor1() {
@@ -146,8 +146,8 @@ public class MillisecondTests extends TestCase {
     }
 
     /**
-     * In Tallinn, the 4.55:59.123pm on 21 Mar 2002 is 
-     * java.util.Date(1016722559123L).  Use this to check the Millisecond 
+     * In Tallinn, the 4.55:59.123pm on 21 Mar 2002 is
+     * java.util.Date(1016722559123L).  Use this to check the Millisecond
      * constructor.
      */
     public void testDateConstructor2() {
@@ -190,9 +190,9 @@ public class MillisecondTests extends TestCase {
         assertEquals(m1, m2);
 
     }
-    
+
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         Millisecond m1 = new Millisecond(599, 23, 45, 7, 9, 10, 2007);
@@ -204,7 +204,7 @@ public class MillisecondTests extends TestCase {
     }
 
     /**
-     * A test for bug report 943985 - the calculation for the middle 
+     * A test for bug report 943985 - the calculation for the middle
      * millisecond is incorrect for odd milliseconds.
      */
     public void test943985() {
@@ -215,9 +215,9 @@ public class MillisecondTests extends TestCase {
         assertEquals(ms.getFirstMillisecond(), ms.getMiddleMillisecond());
         assertEquals(ms.getMiddleMillisecond(), ms.getLastMillisecond());
     }
-    
+
     /**
-     * The {@link Millisecond} class is immutable, so should not be 
+     * The {@link Millisecond} class is immutable, so should not be
      * {@link Cloneable}.
      */
     public void testNotCloneable() {
@@ -238,7 +238,7 @@ public class MillisecondTests extends TestCase {
         Locale.setDefault(saved);
         TimeZone.setDefault(savedZone);
     }
-    
+
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
@@ -246,7 +246,7 @@ public class MillisecondTests extends TestCase {
         Millisecond m = new Millisecond(500, 50, 59, 15, 1, 4, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
         assertEquals(-623289609500L, m.getFirstMillisecond(zone));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -255,9 +255,9 @@ public class MillisecondTests extends TestCase {
         catch (NullPointerException e) {
             pass = true;
         }
-        assertTrue(pass);            
+        assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
@@ -266,7 +266,7 @@ public class MillisecondTests extends TestCase {
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
         calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(955766455500L, m.getFirstMillisecond(calendar));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -276,7 +276,7 @@ public class MillisecondTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-    }    
+    }
 
     /**
      * Some checks for the getLastMillisecond() method.
@@ -291,7 +291,7 @@ public class MillisecondTests extends TestCase {
         Locale.setDefault(saved);
         TimeZone.setDefault(savedZone);
     }
-    
+
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
@@ -299,7 +299,7 @@ public class MillisecondTests extends TestCase {
         Millisecond m = new Millisecond(750, 55, 1, 2, 7, 7, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
         assertEquals(-614962684250L, m.getLastMillisecond(zone));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -308,9 +308,9 @@ public class MillisecondTests extends TestCase {
         catch (NullPointerException e) {
             pass = true;
         }
-        assertTrue(pass);            
+        assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
@@ -319,7 +319,7 @@ public class MillisecondTests extends TestCase {
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
         calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(987889550250L, m.getLastMillisecond(calendar));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -329,8 +329,8 @@ public class MillisecondTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-    } 
-    
+    }
+
     /**
      * Some checks for the getSerialIndex() method.
      */
@@ -341,7 +341,7 @@ public class MillisecondTests extends TestCase {
         // TODO: this must be wrong...
         assertEquals(176461500L, m.getSerialIndex());
     }
-    
+
     /**
      * Some checks for the testNext() method.
      */
@@ -358,7 +358,7 @@ public class MillisecondTests extends TestCase {
         m = new Millisecond(999, 59, 59, 23, 31, 12, 9999);
         assertNull(m.next());
     }
-    
+
     /**
      * Some checks for the getStart() method.
      */
@@ -370,9 +370,9 @@ public class MillisecondTests extends TestCase {
         cal.set(Calendar.MILLISECOND, 555);
         Millisecond m = new Millisecond(555, 55, 47, 3, 16, 1, 2006);
         assertEquals(cal.getTime(), m.getStart());
-        Locale.setDefault(saved);        
+        Locale.setDefault(saved);
     }
-    
+
     /**
      * Some checks for the getEnd() method.
      */
@@ -384,7 +384,7 @@ public class MillisecondTests extends TestCase {
         cal.set(Calendar.MILLISECOND, 555);
         Millisecond m = new Millisecond(555, 55, 47, 3, 16, 1, 2006);
         assertEquals(cal.getTime(), m.getEnd());
-        Locale.setDefault(saved);                
+        Locale.setDefault(saved);
     }
 
 }
