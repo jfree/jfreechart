@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------
  * Month.java
  * ----------
- * (C) Copyright 2001-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chris Boek;
@@ -41,13 +41,13 @@
  * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
  * 29-Jan-2002 : Worked on the parseMonth() method (DG);
  * 14-Feb-2002 : Fixed bugs in the Month constructors (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to 
+ * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
  *               evaluate with reference to a particular time zone (DG);
  * 19-Mar-2002 : Changed API for TimePeriod classes (DG);
  * 10-Sep-2002 : Added getSerialIndex() method (DG);
  * 04-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 10-Jan-2003 : Changed base class and method names (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package, and implemented 
+ * 13-Mar-2003 : Moved to com.jrefinery.data.time package, and implemented
  *               Serializable (DG);
  * 21-Oct-2003 : Added hashCode() method (DG);
  * 01-Nov-2005 : Fixed bug 1345383 (argument check in constructor) (DG);
@@ -85,7 +85,7 @@ public class Month extends RegularTimePeriod implements Serializable {
 
     /** The first millisecond. */
     private long firstMillisecond;
-    
+
     /** The last millisecond. */
     private long lastMillisecond;
 
@@ -127,7 +127,7 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new <code>Month</code> instance, based on a date/time and 
+     * Constructs a new <code>Month</code> instance, based on a date/time and
      * the default time zone.
      *
      * @param time  the date/time.
@@ -137,7 +137,7 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new <code>Month</code> instance, based on a date/time and 
+     * Constructs a new <code>Month</code> instance, based on a date/time and
      * a time zone.  The first and last millisecond values are initially
      * pegged to the given time zone also.
      *
@@ -180,13 +180,13 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the first millisecond of the month.  This will be determined 
-     * relative to the time zone specified in the constructor, or in the 
-     * calendar instance passed in the most recent call to the 
+     * Returns the first millisecond of the month.  This will be determined
+     * relative to the time zone specified in the constructor, or in the
+     * calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The first millisecond of the month.
-     * 
+     *
      * @see #getLastMillisecond()
      */
     public long getFirstMillisecond() {
@@ -194,25 +194,25 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the last millisecond of the month.  This will be 
+     * Returns the last millisecond of the month.  This will be
      * determined relative to the time zone specified in the constructor, or
-     * in the calendar instance passed in the most recent call to the 
+     * in the calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The last millisecond of the month.
-     * 
+     *
      * @see #getFirstMillisecond()
      */
     public long getLastMillisecond() {
         return this.lastMillisecond;
     }
-    
-    /** 
-     * Recalculates the start date/time and end date/time for this time period 
+
+    /**
+     * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
-     * 
+     *
      * @param calendar  the calendar (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.3
      */
     public void peg(Calendar calendar) {
@@ -289,7 +289,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      *
      * @param obj  the object (<code>null</code> permitted).
      *
-     * @return <code>true</code> if month and year of this and object are the 
+     * @return <code>true</code> if month and year of this and object are the
      *         same.
      */
     public boolean equals(Object obj) {
@@ -297,7 +297,7 @@ public class Month extends RegularTimePeriod implements Serializable {
         if (obj != null) {
             if (obj instanceof Month) {
                 Month target = (Month) obj;
-                return (this.month == target.getMonth() 
+                return (this.month == target.getMonth()
                         && (this.year == target.getYearValue()));
             }
             else {
@@ -316,7 +316,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * <p>
      * <code>http://developer.java.sun.com/developer/Books/effectivejava
      * /Chapter3.pdf</code>
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -375,7 +375,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      *
      * @return The first millisecond of the month.
      *
-     * @throws NullPointerException if <code>calendar</code> is 
+     * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
     public long getFirstMillisecond(Calendar calendar) {
@@ -394,7 +394,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      *
      * @return The last millisecond of the month.
      *
-     * @throws NullPointerException if <code>calendar</code> is 
+     * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
     public long getLastMillisecond(Calendar calendar) {
@@ -414,7 +414,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      *
      * @param s  the string to parse.
      *
-     * @return <code>null</code> if the string is not parseable, the month 
+     * @return <code>null</code> if the string is not parseable, the month
      *         otherwise.
      */
     public static Month parseMonth(String s) {
@@ -475,7 +475,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * Finds the first occurrence of ' ', '-', ',' or '.'
      *
      * @param s  the string to parse.
-     * 
+     *
      * @return <code>-1</code> if none of the characters where found, the
      *      position of the first occurence otherwise.
      */
@@ -495,12 +495,12 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Creates a year from a string, or returns null (format exceptions 
+     * Creates a year from a string, or returns null (format exceptions
      * suppressed).
      *
      * @param s  the string to parse.
      *
-     * @return <code>null</code> if the string is not parseable, the year 
+     * @return <code>null</code> if the string is not parseable, the year
      *         otherwise.
      */
     private static Year evaluateAsYear(String s) {

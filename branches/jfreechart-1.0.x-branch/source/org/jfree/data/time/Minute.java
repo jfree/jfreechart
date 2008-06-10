@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------
  * Minute.java
  * -----------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,22 +37,22 @@
  * 11-Oct-2001 : Version 1 (DG);
  * 18-Dec-2001 : Changed order of parameters in constructor (DG);
  * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
- * 14-Feb-2002 : Fixed bug in Minute(Date) constructor, and changed the range 
+ * 14-Feb-2002 : Fixed bug in Minute(Date) constructor, and changed the range
  *               to start from zero instead of one (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to 
+ * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
  *               evaluate with reference to a particular time zone (DG);
  * 13-Mar-2002 : Added parseMinute() method (DG);
- * 19-Mar-2002 : Changed API, the minute is now defined in relation to an 
+ * 19-Mar-2002 : Changed API, the minute is now defined in relation to an
  *               Hour (DG);
  * 10-Sep-2002 : Added getSerialIndex() method (DG);
  * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 10-Jan-2003 : Changed base class and method names (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented 
+ * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented
  *               Serializable (DG);
- * 21-Oct-2003 : Added hashCode() method, and new constructor for 
+ * 21-Oct-2003 : Added hashCode() method, and new constructor for
  *               convenience (DG);
  * 30-Sep-2004 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 04-Nov-2004 : Reverted change of 30-Sep-2004, because it won't work for 
+ * 04-Nov-2004 : Reverted change of 30-Sep-2004, because it won't work for
  *               JDK 1.3 (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 05-Oct-2006 : Updated API docs (DG);
@@ -69,14 +69,14 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * Represents a minute.  This class is immutable, which is a requirement for 
+ * Represents a minute.  This class is immutable, which is a requirement for
  * all {@link RegularTimePeriod} subclasses.
  */
 public class Minute extends RegularTimePeriod implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2144572840034842871L;
-    
+
     /** Useful constant for the first minute in a day. */
     public static final int FIRST_MINUTE_IN_HOUR = 0;
 
@@ -85,7 +85,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
     /** The day. */
     private Day day;
-    
+
     /** The hour in which the minute falls. */
     private byte hour;
 
@@ -94,7 +94,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
     /** The first millisecond. */
     private long firstMillisecond;
-    
+
     /** The last millisecond. */
     private long lastMillisecond;
 
@@ -152,35 +152,35 @@ public class Minute extends RegularTimePeriod implements Serializable {
         this.day = new Day(time, zone);
         peg(calendar);
     }
-    
+
     /**
      * Creates a new minute.
-     * 
+     *
      * @param minute  the minute (0-59).
      * @param hour  the hour (0-23).
      * @param day  the day (1-31).
      * @param month  the month (1-12).
      * @param year  the year (1900-9999).
      */
-    public Minute(int minute, 
-                  int hour, 
-                  int day, 
-                  int month, 
+    public Minute(int minute,
+                  int hour,
+                  int day,
+                  int month,
                   int year) {
         this(minute, new Hour(hour, new Day(day, month, year)));
     }
 
     /**
      * Returns the day.
-     * 
+     *
      * @return The day.
-     * 
+     *
      * @since 1.0.3
      */
     public Day getDay() {
         return this.day;
     }
-    
+
     /**
      * Returns the hour.
      *
@@ -189,12 +189,12 @@ public class Minute extends RegularTimePeriod implements Serializable {
     public Hour getHour() {
         return new Hour(this.hour, this.day);
     }
-    
+
     /**
      * Returns the hour.
-     * 
+     *
      * @return The hour.
-     * 
+     *
      * @since 1.0.3
      */
     public int getHourValue() {
@@ -211,13 +211,13 @@ public class Minute extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the first millisecond of the minute.  This will be determined 
-     * relative to the time zone specified in the constructor, or in the 
-     * calendar instance passed in the most recent call to the 
+     * Returns the first millisecond of the minute.  This will be determined
+     * relative to the time zone specified in the constructor, or in the
+     * calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The first millisecond of the minute.
-     * 
+     *
      * @see #getLastMillisecond()
      */
     public long getFirstMillisecond() {
@@ -225,25 +225,25 @@ public class Minute extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the last millisecond of the minute.  This will be 
+     * Returns the last millisecond of the minute.  This will be
      * determined relative to the time zone specified in the constructor, or
-     * in the calendar instance passed in the most recent call to the 
+     * in the calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The last millisecond of the minute.
-     * 
+     *
      * @see #getFirstMillisecond()
      */
     public long getLastMillisecond() {
         return this.lastMillisecond;
     }
-    
-    /** 
-     * Recalculates the start date/time and end date/time for this time period 
+
+    /**
+     * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
-     * 
+     *
      * @param calendar  the calendar (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.3
      */
     public void peg(Calendar calendar) {
@@ -310,12 +310,12 @@ public class Minute extends RegularTimePeriod implements Serializable {
     /**
      * Returns the first millisecond of the minute.
      *
-     * @param calendar  the calendar which defines the timezone 
+     * @param calendar  the calendar which defines the timezone
      *     (<code>null</code> not permitted).
      *
      * @return The first millisecond.
      *
-     * @throws NullPointerException if <code>calendar</code> is 
+     * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
     public long getFirstMillisecond(Calendar calendar) {
@@ -336,12 +336,12 @@ public class Minute extends RegularTimePeriod implements Serializable {
     /**
      * Returns the last millisecond of the minute.
      *
-     * @param calendar  the calendar / timezone (<code>null</code> not 
+     * @param calendar  the calendar / timezone (<code>null</code> not
      *     permitted).
      *
      * @return The last millisecond.
      *
-     * @throws NullPointerException if <code>calendar</code> is 
+     * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
     public long getLastMillisecond(Calendar calendar) {
@@ -388,12 +388,12 @@ public class Minute extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns a hash code for this object instance.  The approach described 
+     * Returns a hash code for this object instance.  The approach described
      * by Joshua Bloch in "Effective Java" has been used here:
      * <p>
      * <code>http://developer.java.sun.com/developer/Books/effectivejava
      * /Chapter3.pdf</code>
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -474,7 +474,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
             if ((hour >= 0) && (hour <= 23)) {
                 String minstr = hmstr.substring(
-                    Math.min(hourstr.length() + 1, hmstr.length()), 
+                    Math.min(hourstr.length() + 1, hmstr.length()),
                     hmstr.length()
                 );
                 int minute = Integer.parseInt(minstr);

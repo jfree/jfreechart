@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------
  * Second.java
  * -----------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,17 +37,17 @@
  * 11-Oct-2001 : Version 1 (DG);
  * 18-Dec-2001 : Changed order of parameters in constructor (DG);
  * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
- * 14-Feb-2002 : Fixed bug in Second(Date) constructor, and changed start of 
+ * 14-Feb-2002 : Fixed bug in Second(Date) constructor, and changed start of
  *               range to zero from one (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to 
+ * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
  *               evaluate with reference to a particular time zone (DG);
  * 13-Mar-2002 : Added parseSecond() method (DG);
  * 10-Sep-2002 : Added getSerialIndex() method (DG);
  * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 10-Jan-2003 : Changed base class and method names (DG);
- * 05-Mar-2003 : Fixed bug in getLastMillisecond() picked up in JUnit 
+ * 05-Mar-2003 : Fixed bug in getLastMillisecond() picked up in JUnit
  *               tests (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented 
+ * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented
  *               Serializable (DG);
  * 21-Oct-2003 : Added hashCode() method (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
@@ -64,14 +64,14 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * Represents a second in a particular day.  This class is immutable, which is 
+ * Represents a second in a particular day.  This class is immutable, which is
  * a requirement for all {@link RegularTimePeriod} subclasses.
  */
 public class Second extends RegularTimePeriod implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6536564190712383466L;
-    
+
     /** Useful constant for the first second in a minute. */
     public static final int FIRST_SECOND_IN_MINUTE = 0;
 
@@ -80,22 +80,22 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /** The day. */
     private Day day;
-    
+
     /** The hour of the day. */
     private byte hour;
-    
+
     /** The minute. */
     private byte minute;
 
     /** The second. */
     private byte second;
 
-    /** 
+    /**
      * The first millisecond.  We don't store the last millisecond, because it
      * is always firstMillisecond + 999L.
      */
     private long firstMillisecond;
-  
+
     /**
      * Constructs a new Second, based on the system date/time.
      */
@@ -111,7 +111,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      */
     public Second(int second, Minute minute) {
         if (minute == null) {
-            throw new IllegalArgumentException("Null 'minute' argument.");   
+            throw new IllegalArgumentException("Null 'minute' argument.");
         }
         this.day = minute.getDay();
         this.hour = (byte) minute.getHourValue();
@@ -122,7 +122,7 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /**
      * Creates a new second.
-     * 
+     *
      * @param second  the second (0-59).
      * @param minute  the minute (0-59).
      * @param hour  the hour (0-23).
@@ -130,11 +130,11 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @param month  the month (1-12).
      * @param year  the year (1900-9999).
      */
-    public Second(int second, int minute, int hour, 
+    public Second(int second, int minute, int hour,
                   int day, int month, int year) {
-        this(second, new Minute(minute, hour, day, month, year));    
+        this(second, new Minute(minute, hour, day, month, year));
     }
-    
+
     /**
      * Constructs a second.
      *
@@ -179,13 +179,13 @@ public class Second extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the first millisecond of the second.  This will be determined 
-     * relative to the time zone specified in the constructor, or in the 
-     * calendar instance passed in the most recent call to the 
+     * Returns the first millisecond of the second.  This will be determined
+     * relative to the time zone specified in the constructor, or in the
+     * calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The first millisecond of the second.
-     * 
+     *
      * @see #getLastMillisecond()
      */
     public long getFirstMillisecond() {
@@ -193,25 +193,25 @@ public class Second extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the last millisecond of the second.  This will be 
+     * Returns the last millisecond of the second.  This will be
      * determined relative to the time zone specified in the constructor, or
-     * in the calendar instance passed in the most recent call to the 
+     * in the calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The last millisecond of the second.
-     * 
+     *
      * @see #getFirstMillisecond()
      */
     public long getLastMillisecond() {
         return this.firstMillisecond + 999L;
     }
-    
-    /** 
-     * Recalculates the start date/time and end date/time for this time period 
+
+    /**
+     * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
-     * 
+     *
      * @param calendar  the calendar (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.3
      */
     public void peg(Calendar calendar) {
@@ -224,7 +224,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @return The second preceding this one.
      */
     public RegularTimePeriod previous() {
-        
+
         Second result = null;
         if (this.second != FIRST_SECOND_IN_MINUTE) {
             result = new Second(this.second - 1, getMinute());
@@ -236,7 +236,7 @@ public class Second extends RegularTimePeriod implements Serializable {
             }
         }
         return result;
-        
+
     }
 
     /**
@@ -245,7 +245,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @return The second following this one.
      */
     public RegularTimePeriod next() {
-        
+
         Second result = null;
         if (this.second != LAST_SECOND_IN_MINUTE) {
             result = new Second(this.second + 1, getMinute());
@@ -278,7 +278,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      *
      * @return The first millisecond.
      *
-     * @throws NullPointerException if <code>calendar</code> is 
+     * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
     public long getFirstMillisecond(Calendar calendar) {
@@ -299,7 +299,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      *
      * @return The last millisecond.
      *
-     * @throws NullPointerException if <code>calendar</code> is 
+     * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
     public long getLastMillisecond(Calendar calendar) {
@@ -314,7 +314,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      *
      * @param obj  the object to compare (<code>null</code> permitted).
      *
-     * @return <code>true</code> if second and minute of this and the object 
+     * @return <code>true</code> if second and minute of this and the object
      *         are the same.
      */
     public boolean equals(Object obj) {
@@ -346,7 +346,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      * <p>
      * <code>http://developer.java.sun.com/developer/Books/effectivejava
      * /Chapter3.pdf</code>
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
