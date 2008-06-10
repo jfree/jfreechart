@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * CategoryAxisTests.java
  * ----------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -86,59 +86,59 @@ public class CategoryAxisTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        
+
         CategoryAxis a1 = new CategoryAxis("Test");
         CategoryAxis a2 = new CategoryAxis("Test");
         assertTrue(a1.equals(a2));
-        
-        // lowerMargin 
+
+        // lowerMargin
         a1.setLowerMargin(0.15);
         assertFalse(a1.equals(a2));
         a2.setLowerMargin(0.15);
         assertTrue(a1.equals(a2));
 
-        // upperMargin 
+        // upperMargin
         a1.setUpperMargin(0.15);
         assertFalse(a1.equals(a2));
         a2.setUpperMargin(0.15);
         assertTrue(a1.equals(a2));
-      
-        // categoryMargin 
+
+        // categoryMargin
         a1.setCategoryMargin(0.15);
         assertFalse(a1.equals(a2));
         a2.setCategoryMargin(0.15);
         assertTrue(a1.equals(a2));
-        
+
         // maxCategoryLabelWidthRatio
         a1.setMaximumCategoryLabelWidthRatio(0.98f);
         assertFalse(a1.equals(a2));
         a2.setMaximumCategoryLabelWidthRatio(0.98f);
         assertTrue(a1.equals(a2));
-        
+
         // categoryLabelPositionOffset
         a1.setCategoryLabelPositionOffset(11);
         assertFalse(a1.equals(a2));
         a2.setCategoryLabelPositionOffset(11);
         assertTrue(a1.equals(a2));
-        
+
         // categoryLabelPositions
         a1.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
         assertFalse(a1.equals(a2));
         a2.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
         assertTrue(a1.equals(a2));
-        
+
         // categoryLabelToolTips
         a1.addCategoryLabelToolTip("Test", "Check");
         assertFalse(a1.equals(a2));
         a2.addCategoryLabelToolTip("Test", "Check");
         assertTrue(a1.equals(a2));
-        
+
         // tickLabelFont
         a1.setTickLabelFont("C1", new Font("Dialog", Font.PLAIN, 21));
         assertFalse(a1.equals(a2));
         a2.setTickLabelFont("C1", new Font("Dialog", Font.PLAIN, 21));
         assertTrue(a1.equals(a2));
-        
+
         // tickLabelPaint
         a1.setTickLabelPaint("C1", Color.red);
         assertFalse(a1.equals(a2));
@@ -146,17 +146,17 @@ public class CategoryAxisTests extends TestCase {
         assertTrue(a1.equals(a2));
 
         // tickLabelPaint2
-        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red, 
+        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.yellow));
         assertFalse(a1.equals(a2));
-        a2.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red, 
+        a2.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.yellow));
         assertTrue(a1.equals(a2));
-    
+
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashCode() {
         CategoryAxis a1 = new CategoryAxis("Test");
@@ -191,7 +191,7 @@ public class CategoryAxisTests extends TestCase {
     public void testCloning2() {
         CategoryAxis a1 = new CategoryAxis("Test");
         a1.setTickLabelFont("C1", new Font("Dialog", Font.PLAIN, 15));
-        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red, 
+        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.white));
         CategoryAxis a2 = null;
         try {
@@ -203,13 +203,13 @@ public class CategoryAxisTests extends TestCase {
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
-        
+
         // check that changing a tick label font in a1 doesn't change a2
         a1.setTickLabelFont("C1", null);
         assertFalse(a1.equals(a2));
         a2.setTickLabelFont("C1", null);
         assertTrue(a1.equals(a2));
-        
+
         // check that changing a tick label paint in a1 doesn't change a2
         a1.setTickLabelPaint("C1", Color.yellow);
         assertFalse(a1.equals(a2));
@@ -228,7 +228,7 @@ public class CategoryAxisTests extends TestCase {
      */
     public void testSerialization() {
         CategoryAxis a1 = new CategoryAxis("Test Axis");
-        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red, 
+        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.white));
         CategoryAxis a2 = null;
 
