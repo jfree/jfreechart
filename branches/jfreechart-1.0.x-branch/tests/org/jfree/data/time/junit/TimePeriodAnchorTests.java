@@ -1,6 +1,6 @@
-/* ========================================================================
- * JCommon : a free general purpose class library for the Java(tm) platform
- * ========================================================================
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
  *
  * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
