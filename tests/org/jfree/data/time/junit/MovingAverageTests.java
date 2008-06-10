@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------
  * MovingAverageTests.java
  * -----------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,7 +36,7 @@
  * -------
  * 14-Aug-2003 : Version 1 (DG);
  * 04-Oct-2004 : Eliminated NumberUtils usage (DG);
- * 
+ *
  */
 
 package org.jfree.data.time.junit;
@@ -56,7 +56,7 @@ import org.jfree.date.MonthConstants;
 public class MovingAverageTests extends TestCase {
 
     private static final double EPSILON = 0.0000000001;
-    
+
     /**
      * Returns the tests as a test suite.
      *
@@ -83,8 +83,8 @@ public class MovingAverageTests extends TestCase {
         TimeSeries maverage = MovingAverage.createMovingAverage(
             source, "Moving Average", 3, 3
         );
-        
-        // the moving average series has 7 items, the first three 
+
+        // the moving average series has 7 items, the first three
         // days (11, 12, 13 August are skipped)
         assertEquals(7, maverage.getItemCount());
         double value = maverage.getValue(0).doubleValue();
@@ -102,14 +102,14 @@ public class MovingAverageTests extends TestCase {
         value = maverage.getValue(6).doubleValue();
         assertEquals(12.5, value, EPSILON);
     }
-    
+
     /**
      * Creates a sample series.
-     * 
+     *
      * @return A sample series.
      */
     private TimeSeries createDailyTimeSeries1() {
-        
+
         TimeSeries series = new TimeSeries("Series 1", Day.class);
         series.add(new Day(11, MonthConstants.AUGUST, 2003), 11.2);
         series.add(new Day(13, MonthConstants.AUGUST, 2003), 13.8);
@@ -121,7 +121,7 @@ public class MovingAverageTests extends TestCase {
         series.add(new Day(27, MonthConstants.AUGUST, 2003), 10.7);
         series.add(new Day(28, MonthConstants.AUGUST, 2003), 14.3);
         return series;
-            
+
     }
-    
+
 }

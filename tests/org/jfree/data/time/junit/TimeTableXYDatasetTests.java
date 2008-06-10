@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------------
  * TimeTableXYDatasetTests.java
  * ----------------------------
- * (C) Copyright 2004, 2007, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Rob Eden;
@@ -60,7 +60,7 @@ import org.jfree.data.time.Year;
  * A collection of test cases for the {@link TimeTableXYDataset} class.
  */
 public class TimeTableXYDatasetTests extends TestCase {
-  
+
     /**
      * Returns the tests as a test suite.
      *
@@ -78,9 +78,9 @@ public class TimeTableXYDatasetTests extends TestCase {
     public TimeTableXYDatasetTests(String name) {
         super(name);
     }
-    
+
     private static final double DELTA = 0.0000000001;
-    
+
     /**
      * Some checks for a simple dataset.
      */
@@ -97,7 +97,7 @@ public class TimeTableXYDatasetTests extends TestCase {
         assertTrue(Double.isNaN(d.getYValue(1, 0)));
         assertEquals(d.getYValue(1, 1), 2.0, DELTA);
     }
-    
+
     /**
      * Some checks for the getTimePeriod() method.
      */
@@ -110,7 +110,7 @@ public class TimeTableXYDatasetTests extends TestCase {
         assertEquals(d.getTimePeriod(1), new Year(1998));
         assertEquals(d.getTimePeriod(2), new Year(1999));
     }
-    
+
     /**
      * Some checks for the equals() method.
      */
@@ -124,18 +124,18 @@ public class TimeTableXYDatasetTests extends TestCase {
         assertFalse(d1.equals(d2));
         d2.add(new Year(1999), 123.4, "S1");
         assertTrue(d1.equals(d2));
-        
+
         d1.setDomainIsPointsInTime(!d1.getDomainIsPointsInTime());
         assertFalse(d1.equals(d2));
         d2.setDomainIsPointsInTime(!d2.getDomainIsPointsInTime());
         assertTrue(d1.equals(d2));
-        
+
         d1 = new TimeTableXYDataset(TimeZone.getTimeZone("GMT"));
         d2 = new TimeTableXYDataset(TimeZone.getTimeZone(
                 "America/Los_Angeles"));
         assertFalse(d1.equals(d2));
     }
-    
+
     /**
      * Some checks for cloning.
      */
@@ -149,7 +149,7 @@ public class TimeTableXYDatasetTests extends TestCase {
             clone = (TimeTableXYDataset) d.clone();
         }
         catch (CloneNotSupportedException e) {
-            assertTrue(false);  
+            assertTrue(false);
         }
         assertTrue(clone.equals(d));
 
@@ -184,7 +184,7 @@ public class TimeTableXYDatasetTests extends TestCase {
         assertTrue(d1.equals(d2));
 
     }
-    
+
     /**
      * Test clearing data.
      */
@@ -193,7 +193,7 @@ public class TimeTableXYDatasetTests extends TestCase {
         d.add(new Year(1999), 1.0, "Series 1");
         assertEquals(d.getItemCount(), 1);
         assertEquals(d.getSeriesCount(), 1);
-        d.add(new Year(2000), 2.0, "Series 2"); 
+        d.add(new Year(2000), 2.0, "Series 2");
 
         d.clear();
         // Make sure there's nothing left

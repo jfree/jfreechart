@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------
  * QuarterTests.java
  * -----------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -166,7 +166,7 @@ public class QuarterTests extends TestCase {
     }
 
     /**
-     * Set up a quarter equal to Q1 1900.  Request the previous quarter, it 
+     * Set up a quarter equal to Q1 1900.  Request the previous quarter, it
      * should be null.
      */
     public void testQ1Y1900Previous() {
@@ -184,7 +184,7 @@ public class QuarterTests extends TestCase {
     }
 
     /**
-     * Set up a quarter equal to Q4 9999.  Request the previous quarter, it 
+     * Set up a quarter equal to Q4 9999.  Request the previous quarter, it
      * should be Q3 9999.
      */
     public void testQ4Y9999Previous() {
@@ -193,7 +193,7 @@ public class QuarterTests extends TestCase {
     }
 
     /**
-     * Set up a quarter equal to Q4 9999.  Request the next quarter, it should 
+     * Set up a quarter equal to Q4 9999.  Request the next quarter, it should
      * be null.
      */
     public void testQ4Y9999Next() {
@@ -266,9 +266,9 @@ public class QuarterTests extends TestCase {
         assertEquals(q1, q2);
 
     }
-    
+
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         Quarter q1 = new Quarter(2, 2003);
@@ -278,18 +278,18 @@ public class QuarterTests extends TestCase {
         int h2 = q2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
-     * The {@link Quarter} class is immutable, so should not be 
+     * The {@link Quarter} class is immutable, so should not be
      * {@link Cloneable}.
      */
     public void testNotCloneable() {
         Quarter q = new Quarter(2, 2003);
         assertFalse(q instanceof Cloneable);
     }
-    
+
     /**
-     * Some tests for the constructor with (int, int) arguments.  Covers bug 
+     * Some tests for the constructor with (int, int) arguments.  Covers bug
      * report 1377239.
      */
     public void testConstructor() {
@@ -301,7 +301,7 @@ public class QuarterTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             /*Quarter q =*/ new Quarter(5, 2005);
@@ -325,7 +325,7 @@ public class QuarterTests extends TestCase {
         Locale.setDefault(saved);
         TimeZone.setDefault(savedZone);
     }
-    
+
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
@@ -333,7 +333,7 @@ public class QuarterTests extends TestCase {
         Quarter q = new Quarter(2, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
         assertEquals(-623347200000L, q.getFirstMillisecond(zone));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -342,9 +342,9 @@ public class QuarterTests extends TestCase {
         catch (NullPointerException e) {
             pass = true;
         }
-        assertTrue(pass);            
+        assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
@@ -353,7 +353,7 @@ public class QuarterTests extends TestCase {
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
         calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(978307200000L, q.getFirstMillisecond(calendar));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -363,7 +363,7 @@ public class QuarterTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-    }    
+    }
 
     /**
      * Some checks for the getLastMillisecond() method.
@@ -378,7 +378,7 @@ public class QuarterTests extends TestCase {
         Locale.setDefault(saved);
         TimeZone.setDefault(savedZone);
     }
-    
+
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
@@ -386,7 +386,7 @@ public class QuarterTests extends TestCase {
         Quarter q = new Quarter(2, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
         assertEquals(-615488400001L, q.getLastMillisecond(zone));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -395,9 +395,9 @@ public class QuarterTests extends TestCase {
         catch (NullPointerException e) {
             pass = true;
         }
-        assertTrue(pass);            
+        assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
@@ -406,7 +406,7 @@ public class QuarterTests extends TestCase {
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
         calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(1001894399999L, q.getLastMillisecond(calendar));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -416,8 +416,8 @@ public class QuarterTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-    } 
-    
+    }
+
     /**
      * Some checks for the getSerialIndex() method.
      */
@@ -427,7 +427,7 @@ public class QuarterTests extends TestCase {
         q = new Quarter(1, 1900);
         assertEquals(7601L, q.getSerialIndex());
     }
-    
+
     /**
      * Some checks for the testNext() method.
      */
@@ -439,7 +439,7 @@ public class QuarterTests extends TestCase {
         q = new Quarter(4, 9999);
         assertNull(q.next());
     }
-    
+
     /**
      * Some checks for the getStart() method.
      */
@@ -451,9 +451,9 @@ public class QuarterTests extends TestCase {
         cal.set(Calendar.MILLISECOND, 0);
         Quarter q = new Quarter(3, 2006);
         assertEquals(cal.getTime(), q.getStart());
-        Locale.setDefault(saved);        
+        Locale.setDefault(saved);
     }
-    
+
     /**
      * Some checks for the getEnd() method.
      */
@@ -465,6 +465,6 @@ public class QuarterTests extends TestCase {
         cal.set(Calendar.MILLISECOND, 999);
         Quarter q = new Quarter(1, 2006);
         assertEquals(cal.getTime(), q.getEnd());
-        Locale.setDefault(saved);                
+        Locale.setDefault(saved);
     }
 }

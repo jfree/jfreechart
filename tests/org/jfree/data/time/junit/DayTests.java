@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------
  * DayTests.java
  * -------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,7 +35,7 @@
  * Changes
  * -------
  * 15-Nov-2001 : Version 1 (DG);
- * 20-Mar-2002 : Added new tests for Day constructor and getStart() and 
+ * 20-Mar-2002 : Added new tests for Day constructor and getStart() and
  *               getEnd() in different time zones (DG);
  * 26-Jun-2002 : Removed unnecessary imports (DG);
  * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
@@ -120,7 +120,7 @@ public class DayTests extends TestCase {
     }
 
     /**
-     * In GMT, the end of 29 Feb 2004 is java.util.Date(1,078,099,199,999L).  
+     * In GMT, the end of 29 Feb 2004 is java.util.Date(1,078,099,199,999L).
      * Use this to check the day constructor.
      */
     public void testDateConstructor1() {
@@ -138,8 +138,8 @@ public class DayTests extends TestCase {
     }
 
     /**
-     * In Helsinki, the end of 29 Feb 2004 is 
-     * java.util.Date(1,078,091,999,999L).  Use this to check the Day 
+     * In Helsinki, the end of 29 Feb 2004 is
+     * java.util.Date(1,078,091,999,999L).  Use this to check the Day
      * constructor.
      */
     public void testDateConstructor2() {
@@ -157,7 +157,7 @@ public class DayTests extends TestCase {
     }
 
     /**
-     * Set up a day equal to 1 January 1900.  Request the previous day, it 
+     * Set up a day equal to 1 January 1900.  Request the previous day, it
      * should be null.
      */
     public void test1Jan1900Previous() {
@@ -169,7 +169,7 @@ public class DayTests extends TestCase {
     }
 
     /**
-     * Set up a day equal to 1 January 1900.  Request the next day, it should 
+     * Set up a day equal to 1 January 1900.  Request the next day, it should
      * be 2 January 1900.
      */
     public void test1Jan1900Next() {
@@ -181,7 +181,7 @@ public class DayTests extends TestCase {
     }
 
     /**
-     * Set up a day equal to 31 December 9999.  Request the previous day, it 
+     * Set up a day equal to 31 December 9999.  Request the previous day, it
      * should be 30 December 9999.
      */
     public void test31Dec9999Previous() {
@@ -210,7 +210,7 @@ public class DayTests extends TestCase {
      * This test works only correct if the short pattern of the date
      * format is "dd/MM/yyyy". If not, this test will result in a
      * false negative.
-     * 
+     *
      * @throws ParseException on parsing errors.
      */
     public void testParseDay() throws ParseException {
@@ -256,9 +256,9 @@ public class DayTests extends TestCase {
         assertEquals(d1, d2);
 
     }
-    
+
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         Day d1 = new Day(1, 2, 2003);
@@ -268,7 +268,7 @@ public class DayTests extends TestCase {
         int h2 = d2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * The {@link Day} class is immutable, so should not be {@link Cloneable}.
      */
@@ -276,7 +276,7 @@ public class DayTests extends TestCase {
         Day d = new Day(1, 2, 2003);
         assertFalse(d instanceof Cloneable);
     }
-    
+
     /**
      * Some checks for the getSerialIndex() method.
      */
@@ -286,7 +286,7 @@ public class DayTests extends TestCase {
         d = new Day(15, 4, 2000);
         assertEquals(36631, d.getSerialIndex());
     }
-    
+
     /**
      * Some checks for the getFirstMillisecond() method.
      */
@@ -300,7 +300,7 @@ public class DayTests extends TestCase {
         Locale.setDefault(saved);
         TimeZone.setDefault(savedZone);
     }
-    
+
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
@@ -308,7 +308,7 @@ public class DayTests extends TestCase {
         Day d = new Day(26, 4, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
         assertEquals(-621187200000L, d.getFirstMillisecond(zone));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -317,9 +317,9 @@ public class DayTests extends TestCase {
         catch (NullPointerException e) {
             pass = true;
         }
-        assertTrue(pass);            
+        assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
@@ -328,7 +328,7 @@ public class DayTests extends TestCase {
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
         calendar.setTimeZone(TimeZone.getTimeZone("Europe/Frankfurt"));
         assertEquals(1007164800000L, d.getFirstMillisecond(calendar));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -338,7 +338,7 @@ public class DayTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-    }    
+    }
 
     /**
      * Some checks for the getLastMillisecond() method.
@@ -353,7 +353,7 @@ public class DayTests extends TestCase {
         Locale.setDefault(saved);
         TimeZone.setDefault(savedZone);
     }
-    
+
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
@@ -361,7 +361,7 @@ public class DayTests extends TestCase {
         Day d = new Day(1, 2, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
         assertEquals(-628358400001L, d.getLastMillisecond(zone));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -370,9 +370,9 @@ public class DayTests extends TestCase {
         catch (NullPointerException e) {
             pass = true;
         }
-        assertTrue(pass);            
+        assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
@@ -382,7 +382,7 @@ public class DayTests extends TestCase {
         Calendar calendar = Calendar.getInstance(
                 TimeZone.getTimeZone("Europe/London"), Locale.UK);
         assertEquals(989017199999L, d.getLastMillisecond(calendar));
-        
+
         // try null calendar
         boolean pass = false;
         try {
@@ -392,8 +392,8 @@ public class DayTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-    } 
-    
+    }
+
     /**
      * Some checks for the testNext() method.
      */
@@ -406,7 +406,7 @@ public class DayTests extends TestCase {
         d = new Day(31, 12, 9999);
         assertNull(d.next());
     }
-    
+
     /**
      * Some checks for the getStart() method.
      */
@@ -418,9 +418,9 @@ public class DayTests extends TestCase {
         cal.set(Calendar.MILLISECOND, 0);
         Day d = new Day(3, 11, 2006);
         assertEquals(cal.getTime(), d.getStart());
-        Locale.setDefault(saved);        
+        Locale.setDefault(saved);
     }
-    
+
     /**
      * Some checks for the getEnd() method.
      */
@@ -432,7 +432,7 @@ public class DayTests extends TestCase {
         cal.set(Calendar.MILLISECOND, 999);
         Day d = new Day(1, 1, 1900);
         assertEquals(cal.getTime(), d.getEnd());
-        Locale.setDefault(saved);                
+        Locale.setDefault(saved);
     }
 
 }
