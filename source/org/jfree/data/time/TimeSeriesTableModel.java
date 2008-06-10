@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * TimeSeriesTableModel.java
  * -------------------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,10 +49,10 @@ import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 
 /**
- * Wrapper around a time series to convert it to a table model for use in 
+ * Wrapper around a time series to convert it to a table model for use in
  * a <code>JTable</code>.
  */
-public class TimeSeriesTableModel extends AbstractTableModel 
+public class TimeSeriesTableModel extends AbstractTableModel
                                   implements SeriesChangeListener {
 
     /** The series. */
@@ -109,7 +109,7 @@ public class TimeSeriesTableModel extends AbstractTableModel
      * Returns the column class in the table model.
      *
      * @param column    The column index.
-     * 
+     *
      * @return The column class in the table model.
      */
     public Class getColumnClass(int column) {
@@ -163,7 +163,7 @@ public class TimeSeriesTableModel extends AbstractTableModel
      *
      * @param row  the row number.
      * @param column  the column number.
-     * 
+     *
      * @return The data value for a cell in the table model.
      */
     public Object getValueAt(int row, int column) {

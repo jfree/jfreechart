@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------------
  * TimePeriodValuesCollection.java
  * -------------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,7 +36,7 @@
  * -------
  * 22-Apr-2003 : Version 1 (DG);
  * 05-May-2004 : Now extends AbstractIntervalXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * 06-Oct-2004 : Updated for changes in DomainInfo interface (DG);
  * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
@@ -62,9 +62,9 @@ import org.jfree.util.ObjectUtilities;
 /**
  * A collection of {@link TimePeriodValues} objects.
  * <P>
- * This class implements the {@link org.jfree.data.xy.XYDataset} interface, as 
- * well as the extended {@link IntervalXYDataset} interface.  This makes it a 
- * convenient dataset for use with the {@link org.jfree.chart.plot.XYPlot} 
+ * This class implements the {@link org.jfree.data.xy.XYDataset} interface, as
+ * well as the extended {@link IntervalXYDataset} interface.  This makes it a
+ * convenient dataset for use with the {@link org.jfree.chart.plot.XYPlot}
  * class.
  */
 public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
@@ -72,19 +72,19 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
 
     /** For serialization. */
     private static final long serialVersionUID = -3077934065236454199L;
-    
+
     /** Storage for the time series. */
     private List data;
 
-    /** 
-     * The position within a time period to return as the x-value (START, 
-     * MIDDLE or END). 
+    /**
+     * The position within a time period to return as the x-value (START,
+     * MIDDLE or END).
      */
     private TimePeriodAnchor xPosition;
-    
+
     /**
-     * A flag that indicates that the domain is 'points in time'.  If this 
-     * flag is true, only the x-value is used to determine the range of values 
+     * A flag that indicates that the domain is 'points in time'.  If this
+     * flag is true, only the x-value is used to determine the range of values
      * in the domain, the start and end x-values are ignored.
      */
     private boolean domainIsPointsInTime;
@@ -97,7 +97,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Constructs a dataset containing a single series.  Additional series can 
+     * Constructs a dataset containing a single series.  Additional series can
      * be added.
      *
      * @param series  the series (<code>null</code> ignored).
@@ -114,9 +114,9 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
 
     /**
      * Returns the position of the X value within each time period.
-     * 
+     *
      * @return The position (never <code>null</code>).
-     * 
+     *
      * @see #setXPosition(TimePeriodAnchor)
      */
     public TimePeriodAnchor getXPosition() {
@@ -125,9 +125,9 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
 
     /**
      * Sets the position of the x axis within each time period.
-     * 
+     *
      * @param position  the position (<code>null</code> not permitted).
-     * 
+     *
      * @see #getXPosition()
      */
     public void setXPosition(TimePeriodAnchor position) {
@@ -136,7 +136,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
         }
         this.xPosition = position;
     }
-    
+
     /**
      * Returns the number of series in the collection.
      *
@@ -173,8 +173,8 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Adds a series to the collection.  A 
-     * {@link org.jfree.data.general.DatasetChangeEvent} is sent to all 
+     * Adds a series to the collection.  A
+     * {@link org.jfree.data.general.DatasetChangeEvent} is sent to all
      * registered listeners.
      *
      * @param series  the time series.
@@ -260,7 +260,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
             return period.getStart().getTime();
         }
         else if (this.xPosition == TimePeriodAnchor.MIDDLE) {
-            return period.getStart().getTime() 
+            return period.getStart().getTime()
                 / 2 + period.getEnd().getTime() / 2;
         }
         else if (this.xPosition == TimePeriodAnchor.END) {
@@ -343,7 +343,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
-     * 
+     *
      * @return The minimum value.
      */
     public double getDomainLowerBound(boolean includeInterval) {
@@ -360,7 +360,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
-     * 
+     *
      * @return The maximum value.
      */
     public double getDomainUpperBound(boolean includeInterval) {
@@ -377,7 +377,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
-     * 
+     *
      * @return The range.
      */
     public Range getDomainBounds(boolean includeInterval) {
@@ -396,7 +396,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
                     if (this.xPosition == TimePeriodAnchor.START) {
                         TimePeriod maxStart = series.getTimePeriod(
                                 series.getMaxStartIndex());
-                        temp = new Range(start.getStart().getTime(), 
+                        temp = new Range(start.getStart().getTime(),
                                 maxStart.getStart().getTime());
                     }
                     else if (this.xPosition == TimePeriodAnchor.MIDDLE) {
@@ -408,18 +408,18 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
                                 series.getMaxMiddleIndex());
                         long s2 = maxMiddle.getStart().getTime();
                         long e2 = maxMiddle.getEnd().getTime();
-                        temp = new Range(s1 + (e1 - s1) / 2, 
+                        temp = new Range(s1 + (e1 - s1) / 2,
                                 s2 + (e2 - s2) / 2);
                     }
                     else if (this.xPosition == TimePeriodAnchor.END) {
                         TimePeriod minEnd = series.getTimePeriod(
                                 series.getMinEndIndex());
-                        temp = new Range(minEnd.getEnd().getTime(), 
+                        temp = new Range(minEnd.getEnd().getTime(),
                                 end.getEnd().getTime());
                     }
                 }
                 else {
-                    temp = new Range(start.getStart().getTime(), 
+                    temp = new Range(start.getStart().getTime(),
                             end.getEnd().getTime());
                 }
                 result = Range.combine(result, temp);
@@ -430,9 +430,9 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
 
     /**
      * Tests this instance for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -440,33 +440,33 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
             return true;
         }
         if (!(obj instanceof TimePeriodValuesCollection)) {
-            return false;   
+            return false;
         }
         TimePeriodValuesCollection that = (TimePeriodValuesCollection) obj;
         if (this.domainIsPointsInTime != that.domainIsPointsInTime) {
-            return false;   
+            return false;
         }
         if (this.xPosition != that.xPosition) {
-            return false;   
+            return false;
         }
         if (!ObjectUtilities.equal(this.data, that.data)) {
             return false;
         }
-        return true;   
+        return true;
     }
 
     // --- DEPRECATED METHODS -------------------------------------------------
-    
+
     /**
-     * Returns a flag that controls whether the domain is treated as 'points 
-     * in time'.  This flag is used when determining the max and min values for 
-     * the domain.  If true, then only the x-values are considered for the max 
-     * and min values.  If false, then the start and end x-values will also be 
+     * Returns a flag that controls whether the domain is treated as 'points
+     * in time'.  This flag is used when determining the max and min values for
+     * the domain.  If true, then only the x-values are considered for the max
+     * and min values.  If false, then the start and end x-values will also be
      * taken into consideration
      *
      * @return The flag.
-     * 
-     * @deprecated This flag is no longer used by JFreeChart (as of version 
+     *
+     * @deprecated This flag is no longer used by JFreeChart (as of version
      *     1.0.3).
      */
     public boolean getDomainIsPointsInTime() {
@@ -474,12 +474,12 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Sets a flag that controls whether the domain is treated as 'points in 
+     * Sets a flag that controls whether the domain is treated as 'points in
      * time', or time periods.
      *
      * @param flag  the new value of the flag.
-     * 
-     * @deprecated This flag is no longer used by JFreeChart (as of version 
+     *
+     * @deprecated This flag is no longer used by JFreeChart (as of version
      *     1.0.3).
      */
     public void setDomainIsPointsInTime(boolean flag) {

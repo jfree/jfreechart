@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * RegularTimePeriod.java
  * ----------------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,9 +35,9 @@
  * Changes
  * -------
  * 11-Oct-2001 : Version 1 (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to 
+ * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
  *               evaluate with reference to a particular time zone (DG);
- * 29-May-2002 : Implemented MonthConstants interface, so that these constants 
+ * 29-May-2002 : Implemented MonthConstants interface, so that these constants
  *               are conveniently available (DG);
  * 10-Sep-2002 : Added getSerialIndex() method (DG);
  * 10-Jan-2003 : Renamed TimePeriod --> RegularTimePeriod (DG);
@@ -60,27 +60,27 @@ import java.util.TimeZone;
 import org.jfree.date.MonthConstants;
 
 /**
- * An abstract class representing a unit of time.  Convenient methods are 
- * provided for calculating the next and previous time periods.  Conversion 
- * methods are defined that return the first and last milliseconds of the time 
+ * An abstract class representing a unit of time.  Convenient methods are
+ * provided for calculating the next and previous time periods.  Conversion
+ * methods are defined that return the first and last milliseconds of the time
  * period.  The results from these methods are timezone dependent.
  * <P>
  * This class is immutable, and all subclasses should be immutable also.
  */
-public abstract class RegularTimePeriod implements TimePeriod, Comparable, 
+public abstract class RegularTimePeriod implements TimePeriod, Comparable,
                                                    MonthConstants {
 
     /**
-     * Creates a time period that includes the specified millisecond, assuming 
+     * Creates a time period that includes the specified millisecond, assuming
      * the given time zone.
-     * 
+     *
      * @param c  the time period class.
      * @param millisecond  the time.
      * @param zone  the time zone.
-     * 
+     *
      * @return The time period.
      */
-    public static RegularTimePeriod createInstance(Class c, Date millisecond, 
+    public static RegularTimePeriod createInstance(Class c, Date millisecond,
                                                    TimeZone zone) {
         RegularTimePeriod result = null;
         try {
@@ -90,17 +90,17 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
                     new Object[] {millisecond, zone});
         }
         catch (Exception e) {
-            // do nothing, so null is returned            
+            // do nothing, so null is returned
         }
-        return result;  
+        return result;
     }
-    
+
     /**
      * Returns a subclass of {@link RegularTimePeriod} that is smaller than
      * the specified class.
-     * 
+     *
      * @param c  a subclass of {@link RegularTimePeriod}.
-     * 
+     *
      * @return A class.
      */
     public static Class downsize(Class c) {
@@ -129,7 +129,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
             return Millisecond.class;
         }
     }
-    
+
     /**
      * Returns the time period preceding this one, or <code>null</code> if some
      * lower limit has been reached.
@@ -155,35 +155,35 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
 
     //////////////////////////////////////////////////////////////////////////
 
-    /** 
-     * The default time zone. 
+    /**
+     * The default time zone.
      */
     public static final TimeZone DEFAULT_TIME_ZONE = TimeZone.getDefault();
 
-    /** 
-     * A working calendar (recycle to avoid unnecessary object creation). 
-     * 
+    /**
+     * A working calendar (recycle to avoid unnecessary object creation).
+     *
      * @deprecated This was a bad idea, don't use it!
      */
-    public static final Calendar WORKING_CALENDAR 
+    public static final Calendar WORKING_CALENDAR
         = Calendar.getInstance(DEFAULT_TIME_ZONE);
 
-    /** 
-     * Recalculates the start date/time and end date/time for this time period 
+    /**
+     * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
-     * 
+     *
      * @param calendar  the calendar (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.3
      */
     public abstract void peg(Calendar calendar);
-    
+
     /**
-     * Returns the date/time that marks the start of the time period.  This 
+     * Returns the date/time that marks the start of the time period.  This
      * method returns a new <code>Date</code> instance every time it is called.
      *
      * @return The start date/time.
-     * 
+     *
      * @see #getFirstMillisecond()
      */
     public Date getStart() {
@@ -191,11 +191,11 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
     }
 
     /**
-     * Returns the date/time that marks the end of the time period.  This 
+     * Returns the date/time that marks the end of the time period.  This
      * method returns a new <code>Date</code> instance every time it is called.
      *
      * @return The end date/time.
-     * 
+     *
      * @see #getLastMillisecond()
      */
     public Date getEnd() {
@@ -203,29 +203,29 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
     }
 
     /**
-     * Returns the first millisecond of the time period.  This will be 
+     * Returns the first millisecond of the time period.  This will be
      * determined relative to the time zone specified in the constructor, or
-     * in the calendar instance passed in the most recent call to the 
+     * in the calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The first millisecond of the time period.
-     * 
+     *
      * @see #getLastMillisecond()
      */
     public abstract long getFirstMillisecond();
 
     /**
-     * Returns the first millisecond of the time period, evaluated within a 
+     * Returns the first millisecond of the time period, evaluated within a
      * specific time zone.
      *
      * @param zone  the time zone (<code>null</code> not permitted).
      *
      * @return The first millisecond of the time period.
-     * 
+     *
      * @deprecated As of 1.0.3, you should avoid using this method (it creates
      *     a new Calendar instance every time it is called).  You are advised
      *     to call {@link #getFirstMillisecond(Calendar)} instead.
-     *     
+     *
      * @see #getLastMillisecond(TimeZone)
      */
     public long getFirstMillisecond(TimeZone zone) {
@@ -234,44 +234,44 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
     }
 
     /**
-     * Returns the first millisecond of the time period, evaluated using the 
+     * Returns the first millisecond of the time period, evaluated using the
      * supplied calendar (which incorporates a timezone).
      *
      * @param calendar  the calendar (<code>null</code> not permitted).
      *
      * @return The first millisecond of the time period.
-     * 
-     * @throws NullPointerException if <code>calendar,/code> is 
+     *
+     * @throws NullPointerException if <code>calendar,/code> is
      *     </code>null</code>.
-     *     
+     *
      * @see #getLastMillisecond(Calendar)
      */
     public abstract long getFirstMillisecond(Calendar calendar);
 
     /**
-     * Returns the last millisecond of the time period.  This will be 
+     * Returns the last millisecond of the time period.  This will be
      * determined relative to the time zone specified in the constructor, or
-     * in the calendar instance passed in the most recent call to the 
+     * in the calendar instance passed in the most recent call to the
      * {@link #peg(Calendar)} method.
      *
      * @return The last millisecond of the time period.
-     * 
+     *
      * @see #getFirstMillisecond()
      */
     public abstract long getLastMillisecond();
 
     /**
-     * Returns the last millisecond of the time period, evaluated within a 
+     * Returns the last millisecond of the time period, evaluated within a
      * specific time zone.
      *
      * @param zone  the time zone (<code>null</code> not permitted).
      *
      * @return The last millisecond of the time period.
-     * 
+     *
      * @deprecated As of 1.0.3, you should avoid using this method (it creates
      *     a new Calendar instance every time it is called).  You are advised
      *     to call {@link #getLastMillisecond(Calendar)} instead.
-     *     
+     *
      * @see #getFirstMillisecond(TimeZone)
      */
     public long getLastMillisecond(TimeZone zone) {
@@ -280,13 +280,13 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
     }
 
     /**
-     * Returns the last millisecond of the time period, evaluated using the 
+     * Returns the last millisecond of the time period, evaluated using the
      * supplied calendar (which incorporates a timezone).
      *
      * @param calendar  the calendar (<code>null</code> not permitted).
      *
      * @return The last millisecond of the time period.
-     * 
+     *
      * @see #getFirstMillisecond(Calendar)
      */
     public abstract long getLastMillisecond(Calendar calendar);
@@ -309,7 +309,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * @param zone  the time zone (<code>null</code> not permitted).
      *
      * @return The middle millisecond.
-     * 
+     *
      * @deprecated As of 1.0.3, you should avoid using this method (it creates
      *     a new Calendar instance every time it is called).  You are advised
      *     to call {@link #getMiddleMillisecond(Calendar)} instead.

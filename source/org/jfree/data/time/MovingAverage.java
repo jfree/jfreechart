@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * MovingAverage.java
  * ------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Benoit Xhenseval;
@@ -35,13 +35,13 @@
  * Changes
  * -------
  * 28-Jan-2003 : Version 1 (DG);
- * 10-Mar-2003 : Added createPointMovingAverage() method contributed by Benoit 
+ * 10-Mar-2003 : Added createPointMovingAverage() method contributed by Benoit
  *               Xhenseval (DG);
- * 01-Aug-2003 : Added new method for TimeSeriesCollection, and fixed bug in 
+ * 01-Aug-2003 : Added new method for TimeSeriesCollection, and fixed bug in
  *               XYDataset method (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0 
+ * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
  *               release (DG);
  *
  */
@@ -58,22 +58,22 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class MovingAverage {
 
     /**
-     * Creates a new {@link TimeSeriesCollection} containing a moving average 
+     * Creates a new {@link TimeSeriesCollection} containing a moving average
      * series for each series in the source collection.
-     * 
+     *
      * @param source  the source collection.
      * @param suffix  the suffix added to each source series name to create the
      *                corresponding moving average series name.
-     * @param periodCount  the number of periods in the moving average 
+     * @param periodCount  the number of periods in the moving average
      *                     calculation.
      * @param skip  the number of initial periods to skip.
-     * 
+     *
      * @return A collection of moving average time series.
      */
     public static TimeSeriesCollection createMovingAverage(
         TimeSeriesCollection source, String suffix, int periodCount,
         int skip) {
-    
+
         // check arguments
         if (source == null) {
             throw new IllegalArgumentException(
@@ -88,27 +88,27 @@ public class MovingAverage {
         }
 
         TimeSeriesCollection result = new TimeSeriesCollection();
-        
+
         for (int i = 0; i < source.getSeriesCount(); i++) {
             TimeSeries sourceSeries = source.getSeries(i);
             TimeSeries maSeries = createMovingAverage(
                 sourceSeries, sourceSeries.getKey() + suffix, periodCount, skip
             );
-            result.addSeries(maSeries);       
+            result.addSeries(maSeries);
         }
-        
+
         return result;
-        
+
     }
-    
+
     /**
-     * Creates a new {@link TimeSeries} containing moving average values for 
-     * the given series.  If the series is empty (contains zero items), the 
+     * Creates a new {@link TimeSeries} containing moving average values for
+     * the given series.  If the series is empty (contains zero items), the
      * result is an empty series.
      *
      * @param source  the source series.
      * @param name  the name of the new series.
-     * @param periodCount  the number of periods used in the average 
+     * @param periodCount  the number of periods used in the average
      *                     calculation.
      * @param skip  the number of initial periods to skip.
      *
@@ -135,10 +135,10 @@ public class MovingAverage {
 
         if (source.getItemCount() > 0) {
 
-            // if the initial averaging period is to be excluded, then 
+            // if the initial averaging period is to be excluded, then
             // calculate the index of the
             // first data item to have an average calculated...
-            long firstSerial 
+            long firstSerial
                 = source.getDataItem(0).getPeriod().getSerialIndex() + skip;
 
             for (int i = source.getItemCount() - 1; i >= 0; i--) {
@@ -158,7 +158,7 @@ public class MovingAverage {
 
                     while ((offset < periodCount) && (!finished)) {
                         if ((i - offset) >= 0) {
-                            TimeSeriesDataItem item 
+                            TimeSeriesDataItem item
                                 = source.getDataItem(i - offset);
                             RegularTimePeriod p = item.getPeriod();
                             Number v = item.getValue();
@@ -191,22 +191,22 @@ public class MovingAverage {
     }
 
     /**
-     * Creates a new {@link TimeSeries} containing moving average values for 
-     * the given series, calculated by number of points (irrespective of the 
-     * 'age' of those points).  If the series is empty (contains zero items), 
+     * Creates a new {@link TimeSeries} containing moving average values for
+     * the given series, calculated by number of points (irrespective of the
+     * 'age' of those points).  If the series is empty (contains zero items),
      * the result is an empty series.
      * <p>
      * Developed by Benoit Xhenseval (www.ObjectLab.co.uk).
      *
      * @param source  the source series.
      * @param name  the name of the new series.
-     * @param pointCount  the number of POINTS used in the average calculation 
+     * @param pointCount  the number of POINTS used in the average calculation
      *                    (not periods!)
      *
      * @return The moving average series.
      */
     public static TimeSeries createPointMovingAverage(TimeSeries source,
-                                                      String name, 
+                                                      String name,
                                                       int pointCount) {
 
         // check arguments
@@ -230,9 +230,9 @@ public class MovingAverage {
 
             if (i > pointCount - 1) {
                 // remove the point i-periodCount out of the rolling sum.
-                TimeSeriesDataItem startOfMovingAvg 
+                TimeSeriesDataItem startOfMovingAvg
                     = source.getDataItem(i - pointCount);
-                rollingSumForPeriod 
+                rollingSumForPeriod
                     -= startOfMovingAvg.getValue().doubleValue();
                 result.add(period, rollingSumForPeriod / pointCount);
             }
@@ -244,11 +244,11 @@ public class MovingAverage {
     }
 
     /**
-     * Creates a new {@link XYDataset} containing the moving averages of each 
+     * Creates a new {@link XYDataset} containing the moving averages of each
      * series in the <code>source</code> dataset.
      *
      * @param source  the source dataset.
-     * @param suffix  the string to append to source series names to create 
+     * @param suffix  the string to append to source series names to create
      *                target series names.
      * @param period  the averaging period.
      * @param skip  the length of the initial skip period.
@@ -261,16 +261,16 @@ public class MovingAverage {
         return createMovingAverage(
             source, suffix, (double) period, (double) skip
         );
-        
+
     }
 
 
     /**
-     * Creates a new {@link XYDataset} containing the moving averages of each 
+     * Creates a new {@link XYDataset} containing the moving averages of each
      * series in the <code>source</code> dataset.
      *
      * @param source  the source dataset.
-     * @param suffix  the string to append to source series names to create 
+     * @param suffix  the string to append to source series names to create
      *                target series names.
      * @param period  the averaging period.
      * @param skip  the length of the initial skip period.
@@ -284,7 +284,7 @@ public class MovingAverage {
         if (source == null) {
             throw new IllegalArgumentException("Null source (XYDataset).");
         }
-        
+
         XYSeriesCollection result = new XYSeriesCollection();
 
         for (int i = 0; i < source.getSeriesCount(); i++) {
@@ -299,7 +299,7 @@ public class MovingAverage {
     }
 
     /**
-     * Creates a new {@link XYSeries} containing the moving averages of one 
+     * Creates a new {@link XYSeries} containing the moving averages of one
      * series in the <code>source</code> dataset.
      *
      * @param source  the source dataset.
@@ -310,11 +310,11 @@ public class MovingAverage {
      *
      * @return The dataset.
      */
-    public static XYSeries createMovingAverage(XYDataset source, 
+    public static XYSeries createMovingAverage(XYDataset source,
                                                int series, String name,
                                                double period, double skip) {
 
-                                               
+
         // check arguments
         if (source == null) {
             throw new IllegalArgumentException("Null source (XYDataset).");
@@ -334,7 +334,7 @@ public class MovingAverage {
 
         if (source.getItemCount(series) > 0) {
 
-            // if the initial averaging period is to be excluded, then 
+            // if the initial averaging period is to be excluded, then
             // calculate the lowest x-value to have an average calculated...
             double first = source.getXValue(series, 0) + skip;
 
