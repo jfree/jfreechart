@@ -80,12 +80,10 @@ public class CategoryLabelWidthTypeTests extends TestCase {
      * Confirm that the equals() method distinguishes the known values.
      */
     public void testEquals() {
-        assertEquals(
-            CategoryLabelWidthType.CATEGORY, CategoryLabelWidthType.CATEGORY
-        );
-        assertEquals(
-            CategoryLabelWidthType.RANGE, CategoryLabelWidthType.RANGE
-        );
+        assertEquals(CategoryLabelWidthType.CATEGORY,
+        		CategoryLabelWidthType.CATEGORY);
+        assertEquals(CategoryLabelWidthType.RANGE,
+        		CategoryLabelWidthType.RANGE);
     }
 
     /**
@@ -114,13 +112,12 @@ public class CategoryLabelWidthTypeTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             w2 = (CategoryLabelWidthType) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(w1, w2);
         assertTrue(w1 == w2);
