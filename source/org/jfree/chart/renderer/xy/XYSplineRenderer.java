@@ -2,35 +2,35 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
  * XYSplineRenderer.java
  * ---------------------
- * (C) Copyright 2007, by Klaus Rheinwald and Contributors.
+ * (C) Copyright 2007, 2008, by Klaus Rheinwald and Contributors.
  *
  * Original Author:  Klaus Rheinwald;
- * Contributor(s):   Tobias von Petersdorff (tvp@math.umd.edu, 
+ * Contributor(s):   Tobias von Petersdorff (tvp@math.umd.edu,
  *                       http://www.wam.umd.edu/~petersd/);
  *                   David Gilbert (for Object Refinery Limited);
  *
@@ -41,7 +41,6 @@
  * 25-Oct-2007 : Prevent duplicate control points (KR);
  *
  */
-
 
 package org.jfree.chart.renderer.xy;
 
@@ -59,10 +58,10 @@ import org.jfree.ui.RectangleEdge;
 
 
 /**
- * A renderer that connects data points with natural cubic splines and/or 
- * draws shapes at each data point.  This renderer is designed for use with 
+ * A renderer that connects data points with natural cubic splines and/or
+ * draws shapes at each data point.  This renderer is designed for use with
  * the {@link XYPlot} class.
- * 
+ *
  * @since 1.0.7
  */
 public class XYSplineRenderer extends XYLineAndShapeRenderer {
@@ -78,16 +77,16 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     private int precision;
 
     /**
-     * Creates a new instance with the 'precision' attribute defaulting to 
+     * Creates a new instance with the 'precision' attribute defaulting to
      * 5.
      */
     public XYSplineRenderer() {
         this(5);
     }
-    
+
     /**
      * Creates a new renderer with the specified precision.
-     * 
+     *
      * @param precision  the number of points between data items.
      */
     public XYSplineRenderer(int precision) {
@@ -96,13 +95,13 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
             throw new IllegalArgumentException("Requires precision > 0.");
         }
         this.precision = precision;
-    }    
-    
+    }
+
     /**
      * Get the resolution of splines.
      *
      * @return Number of line segments between points.
-     * 
+     *
      * @see #setPrecision(int)
      */
     public int getPrecision() {
@@ -114,7 +113,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      * to all registered listeners.
      *
      * @param p  number of line segments between points (must be > 0).
-     * 
+     *
      * @see #getPrecision()
      */
     public void setPrecision(int p) {
@@ -141,7 +140,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      *
      * @return The renderer state.
      */
-    public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea, 
+    public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
             XYPlot plot, XYDataset data, PlotRenderingInfo info) {
 
         State state = (State) super.initialise(g2, dataArea, plot, data, info);
@@ -169,9 +168,9 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      * @param rangeAxis  the range axis.
      * @param dataArea  the area within which the data is being drawn.
      */
-    protected void drawPrimaryLineAsPath(XYItemRendererState state, 
-            Graphics2D g2, XYPlot plot, XYDataset dataset, int pass, 
-            int series, int item, ValueAxis domainAxis, ValueAxis rangeAxis, 
+    protected void drawPrimaryLineAsPath(XYItemRendererState state,
+            Graphics2D g2, XYPlot plot, XYDataset dataset, int pass,
+            int series, int item, ValueAxis domainAxis, ValueAxis rangeAxis,
             Rectangle2D dataArea) {
 
         RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
@@ -185,10 +184,10 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
 
         // collect points
         if (!Double.isNaN(transX1) && !Double.isNaN(transY1)) {
-            ControlPoint p = new ControlPoint(plot.getOrientation() 
-                                == PlotOrientation.HORIZONTAL ? (float) transY1 
-                                : (float) transX1, plot.getOrientation() 
-                                == PlotOrientation.HORIZONTAL ? (float) transX1 
+            ControlPoint p = new ControlPoint(plot.getOrientation()
+                                == PlotOrientation.HORIZONTAL ? (float) transY1
+                                : (float) transX1, plot.getOrientation()
+                                == PlotOrientation.HORIZONTAL ? (float) transX1
                                         : (float) transY1);
             if (!this.points.contains(p)) {
                 this.points.add(p);
@@ -202,11 +201,11 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
                 ControlPoint cp0 = (ControlPoint) this.points.get(0);
                 s.seriesPath.moveTo(cp0.x, cp0.y);
                 if (this.points.size() == 2) {
-                    // we need at least 3 points to spline. Draw simple line 
+                    // we need at least 3 points to spline. Draw simple line
                     // for two points
                     ControlPoint cp1 = (ControlPoint) this.points.get(1);
                     s.seriesPath.lineTo(cp1.x, cp1.y);
-                } 
+                }
                 else {
                     // construct spline
                     int np = this.points.size(); // number of points
@@ -239,7 +238,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
                         diag[i] = (h[i] + h[i + 1]) / 3;
                         sup[i] = h[i + 1] / 6;
                         sub[i] = h[i] / 6;
-                        a[i] = (d[i + 1] - d[i]) / h[i + 1] 
+                        a[i] = (d[i + 1] - d[i]) / h[i + 1]
                                    - (d[i] - d[i - 1]) / h[i];
                     }
                     solveTridiag(sub, diag, sup, a, np - 2);
@@ -254,8 +253,8 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
                         for (int j = 1; j <= this.precision; j++) {
                             t1 = (h[i] * j) / this.precision;
                             t2 = h[i] - t1;
-                            y = ((-a[i - 1] / 6 * (t2 + h[i]) * t1 + d[i - 1]) 
-                                    * t2 + (-a[i] / 6 * (t1 + h[i]) * t2 
+                            y = ((-a[i - 1] / 6 * (t2 + h[i]) * t1 + d[i - 1])
+                                    * t2 + (-a[i] / 6 * (t1 + h[i]) * t2
                                     + d[i]) * t1) / h[i];
                             t = x[i - 1] + t1;
                             s.seriesPath.lineTo(t, y);
@@ -275,14 +274,14 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
 
     /**
      * Document me!
-     * 
+     *
      * @param sub
      * @param diag
      * @param sup
      * @param b
      * @param n
      */
-    private void solveTridiag(float[] sub, float[] diag, float[] sup, 
+    private void solveTridiag(float[] sub, float[] diag, float[] sup,
             float[] b, int n) {
 /*      solve linear system with tridiagonal n by n matrix a
         using Gaussian elimination *without* pivoting
@@ -304,12 +303,12 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
             b[i] = (b[i] - sup[i] * b[i + 1]) / diag[i];
         }
     }
-    
+
     /**
      * Tests this renderer for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -330,16 +329,16 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      * Represents a control point.
      */
     class ControlPoint {
-        
+
         /** The x-coordinate. */
         public float x;
-        
+
         /** The y-coordinate. */
         public float y;
 
         /**
          * Creates a new control point.
-         * 
+         *
          * @param x  the x-coordinate.
          * @param y  the y-coordinate.
          */
@@ -350,9 +349,9 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
 
         /**
          * Tests this point for equality with an arbitrary object.
-         * 
+         *
          * @param obj  the object (<code>null</code> permitted.
-         * 
+         *
          * @return A boolean.
          */
         public boolean equals(Object obj) {

@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
  * XYLine3DRenderer.java
  * ---------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited.
+ * (C) Copyright 2005-2008, by Object Refinery Limited.
  *
  * Original Author:  Thomas Morgner;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -36,7 +36,7 @@
  * -------
  * 14-Jan-2005 : Added standard header (DG);
  * 01-May-2007 : Fixed equals() and serialization bugs (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -59,12 +59,12 @@ import org.jfree.util.PaintUtilities;
  * A XYLineAndShapeRenderer that adds a shadow line to the graph
  * to emulate a 3D-effect.
  */
-public class XYLine3DRenderer extends XYLineAndShapeRenderer 
+public class XYLine3DRenderer extends XYLineAndShapeRenderer
                               implements Effect3D, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 588933208243446087L;
-    
+
     /** The default x-offset for the 3D effect. */
     public static final double DEFAULT_X_OFFSET = 12.0;
 
@@ -111,9 +111,9 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
     }
 
     /**
-     * Sets the x-offset and sends a {@link RendererChangeEvent} to all 
+     * Sets the x-offset and sends a {@link RendererChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param xOffset  the x-offset.
      */
     public void setXOffset(double xOffset) {
@@ -122,9 +122,9 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
     }
 
     /**
-     * Sets the y-offset and sends a {@link RendererChangeEvent} to all 
+     * Sets the y-offset and sends a {@link RendererChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param yOffset  the y-offset.
      */
     public void setYOffset(double yOffset) {
@@ -143,7 +143,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
     }
 
     /**
-     * Sets the paint used to hightlight the left and bottom walls in the plot 
+     * Sets the paint used to hightlight the left and bottom walls in the plot
      * background and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
@@ -155,8 +155,8 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
     }
 
     /**
-     * Returns the number of passes through the data that the renderer requires 
-     * in order to draw the chart.  Most charts will require a single pass, 
+     * Returns the number of passes through the data that the renderer requires
+     * in order to draw the chart.  Most charts will require a single pass,
      * but some require two passes.
      *
      * @return The pass count.
@@ -167,9 +167,9 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
 
     /**
      * Returns <code>true</code> if the specified pass involves drawing lines.
-     * 
+     *
      * @param pass  the pass.
-     * 
+     *
      * @return A boolean.
      */
     protected boolean isLinePass(int pass) {
@@ -178,9 +178,9 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
 
     /**
      * Returns <code>true</code> if the specified pass involves drawing items.
-     * 
+     *
      * @param pass  the pass.
-     * 
+     *
      * @return A boolean.
      */
     protected boolean isItemPass(int pass) {
@@ -189,9 +189,9 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
 
     /**
      * Returns <code>true</code> if the specified pass involves drawing shadows.
-     * 
+     *
      * @param pass  the pass.
-     * 
+     *
      * @return A boolean.
      */
     protected boolean isShadowPass (int pass) {
@@ -200,7 +200,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
 
     /**
      * Overrides the method in the subclass to draw a shadow in the first pass.
-     * 
+     *
      * @param g2  the graphics device.
      * @param pass  the pass.
      * @param series  the series index (zero-based).
@@ -229,9 +229,9 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
 
     /**
      * Tests this renderer for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -253,7 +253,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -262,12 +262,12 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.wallPaint = SerialUtilities.readPaint(stream);
     }
-    
+
     /**
      * Provides serialization support.
      *

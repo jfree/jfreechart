@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------
  * XYErrorRenderer.java
  * --------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,7 +37,7 @@
  * 25-Oct-2006 : Version 1 (DG);
  * 23-Mar-2007 : Check item visibility before drawing error bars - see bug
  *               1686178 (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -66,32 +66,32 @@ import org.jfree.ui.RectangleEdge;
 import org.jfree.util.PaintUtilities;
 
 /**
- * A line and shape renderer that can also display x and/or y-error values.  
+ * A line and shape renderer that can also display x and/or y-error values.
  * This renderer expects an {@link IntervalXYDataset}, otherwise it reverts
  * to the behaviour of the super class.
- * 
+ *
  * @since 1.0.3
  */
 public class XYErrorRenderer extends XYLineAndShapeRenderer {
 
     /** For serialization. */
     static final long serialVersionUID = 5162283570955172424L;
-    
+
     /** A flag that controls whether or not the x-error bars are drawn. */
     private boolean drawXError;
-    
+
     /** A flag that controls whether or not the y-error bars are drawn. */
     private boolean drawYError;
-    
+
     /** The length of the cap at the end of the error bars. */
     private double capLength;
-    
-    /** 
+
+    /**
      * The paint used to draw the error bars (if <code>null</code> we use the
      * series paint).
      */
     private transient Paint errorPaint;
-    
+
     /**
      * Creates a new <code>XYErrorRenderer</code> instance.
      */
@@ -102,26 +102,26 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
         this.errorPaint = null;
         this.capLength = 4.0;
     }
-    
+
     /**
      * Returns the flag that controls whether or not the renderer draws error
      * bars for the x-values.
-     * 
+     *
      * @return A boolean.
-     * 
+     *
      * @see #setDrawXError(boolean)
      */
     public boolean getDrawXError() {
         return this.drawXError;
     }
-    
+
     /**
      * Sets the flag that controls whether or not the renderer draws error
-     * bars for the x-values and, if the flag changes, sends a 
+     * bars for the x-values and, if the flag changes, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param draw  the flag value.
-     * 
+     *
      * @see #getDrawXError()
      */
     public void setDrawXError(boolean draw) {
@@ -130,26 +130,26 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
             fireChangeEvent();
         }
     }
-    
+
     /**
      * Returns the flag that controls whether or not the renderer draws error
      * bars for the y-values.
-     * 
+     *
      * @return A boolean.
-     * 
+     *
      * @see #setDrawYError(boolean)
      */
     public boolean getDrawYError() {
         return this.drawYError;
     }
-    
+
     /**
      * Sets the flag that controls whether or not the renderer draws error
-     * bars for the y-values and, if the flag changes, sends a 
+     * bars for the y-values and, if the flag changes, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param draw  the flag value.
-     * 
+     *
      * @see #getDrawYError()
      */
     public void setDrawYError(boolean draw) {
@@ -158,64 +158,64 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
             fireChangeEvent();
         }
     }
-    
+
     /**
-     * Returns the length (in Java2D units) of the cap at the end of the error 
+     * Returns the length (in Java2D units) of the cap at the end of the error
      * bars.
-     * 
+     *
      * @return The cap length.
-     * 
+     *
      * @see #setCapLength(double)
      */
     public double getCapLength() {
         return this.capLength;
     }
-    
+
     /**
      * Sets the length of the cap at the end of the error bars, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param length  the length (in Java2D units).
-     * 
+     *
      * @see #getCapLength()
      */
     public void setCapLength(double length) {
         this.capLength = length;
         fireChangeEvent();
     }
-    
+
     /**
-     * Returns the paint used to draw the error bars.  If this is 
+     * Returns the paint used to draw the error bars.  If this is
      * <code>null</code> (the default), the item paint is used instead.
-     * 
+     *
      * @return The paint (possibly <code>null</code>).
-     * 
+     *
      * @see #setErrorPaint(Paint)
      */
     public Paint getErrorPaint() {
         return this.errorPaint;
     }
-    
+
     /**
-     * Sets the paint used to draw the error bars and sends a 
+     * Sets the paint used to draw the error bars and sends a
      * {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param paint  the paint (<code>null</code> permitted).
-     * 
+     *
      * @see #getErrorPaint()
      */
     public void setErrorPaint(Paint paint) {
         this.errorPaint = paint;
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the range required by this renderer to display all the domain
      * values in the specified dataset.
-     * 
+     *
      * @param dataset  the dataset (<code>null</code> permitted).
-     * 
-     * @return The range, or <code>null</code> if the dataset is 
+     *
+     * @return The range, or <code>null</code> if the dataset is
      *     <code>null</code>.
      */
     public Range findDomainBounds(XYDataset dataset) {
@@ -230,10 +230,10 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     /**
      * Returns the range required by this renderer to display all the range
      * values in the specified dataset.
-     * 
+     *
      * @param dataset  the dataset (<code>null</code> permitted).
-     * 
-     * @return The range, or <code>null</code> if the dataset is 
+     *
+     * @return The range, or <code>null</code> if the dataset is
      *     <code>null</code>.
      */
     public Range findRangeBounds(XYDataset dataset) {
@@ -247,7 +247,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
 
     /**
      * Draws the visual representation for one data item.
-     * 
+     *
      * @param g2  the graphics output target.
      * @param state  the renderer state.
      * @param dataArea  the data area.
@@ -261,12 +261,12 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * @param crosshairState  the crosshair state.
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2, XYItemRendererState state, 
-            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot, 
-            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset, 
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
             int series, int item, CrosshairState crosshairState, int pass) {
 
-        if (pass == 0 && dataset instanceof IntervalXYDataset 
+        if (pass == 0 && dataset instanceof IntervalXYDataset
                 && getItemVisible(series, item)) {
             IntervalXYDataset ixyd = (IntervalXYDataset) dataset;
             PlotOrientation orientation = plot.getOrientation();
@@ -278,7 +278,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
                 RectangleEdge edge = plot.getDomainAxisEdge();
                 double xx0 = domainAxis.valueToJava2D(x0, dataArea, edge);
                 double xx1 = domainAxis.valueToJava2D(x1, dataArea, edge);
-                double yy = rangeAxis.valueToJava2D(y, dataArea, 
+                double yy = rangeAxis.valueToJava2D(y, dataArea,
                         plot.getRangeAxisEdge());
                 Line2D line;
                 Line2D cap1 = null;
@@ -296,7 +296,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
                 }
                 g2.setStroke(new BasicStroke(1.0f));
                 if (this.errorPaint != null) {
-                    g2.setPaint(this.errorPaint);    
+                    g2.setPaint(this.errorPaint);
                 }
                 else {
                     g2.setPaint(getItemPaint(series, item));
@@ -313,7 +313,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
                 RectangleEdge edge = plot.getRangeAxisEdge();
                 double yy0 = rangeAxis.valueToJava2D(y0, dataArea, edge);
                 double yy1 = rangeAxis.valueToJava2D(y1, dataArea, edge);
-                double xx = domainAxis.valueToJava2D(x, dataArea, 
+                double xx = domainAxis.valueToJava2D(x, dataArea,
                         plot.getDomainAxisEdge());
                 Line2D line;
                 Line2D cap1 = null;
@@ -331,25 +331,25 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
                 }
                 g2.setStroke(new BasicStroke(1.0f));
                 if (this.errorPaint != null) {
-                    g2.setPaint(this.errorPaint);    
+                    g2.setPaint(this.errorPaint);
                 }
                 else {
                     g2.setPaint(getItemPaint(series, item));
                 }
-                g2.draw(line);                    
-                g2.draw(cap1);                    
-                g2.draw(cap2);                    
+                g2.draw(line);
+                g2.draw(cap1);
+                g2.draw(cap2);
             }
         }
-        super.drawItem(g2, state, dataArea, info, plot, domainAxis, rangeAxis, 
+        super.drawItem(g2, state, dataArea, info, plot, domainAxis, rangeAxis,
                 dataset, series, item, crosshairState, pass);
     }
-    
+
     /**
      * Tests this instance for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -374,7 +374,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -383,12 +383,12 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.errorPaint = SerialUtilities.readPaint(stream);
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -400,5 +400,5 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
         stream.defaultWriteObject();
         SerialUtilities.writePaint(this.errorPaint, stream);
     }
-    
+
 }

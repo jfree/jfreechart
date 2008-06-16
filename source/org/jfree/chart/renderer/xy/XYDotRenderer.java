@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * XYDotRenderer.java
  * ------------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -45,7 +45,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 10-Jul-2006 : Added dotWidth and dotHeight attributes (DG);
  * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 09-Nov-2007 : Added legend shape attribute, plus override for 
+ * 09-Nov-2007 : Added legend shape attribute, plus override for
  *               getLegendItem() (DG);
  *
  */
@@ -77,24 +77,24 @@ import org.jfree.util.ShapeUtilities;
 /**
  * A renderer that draws a small dot at each data point for an {@link XYPlot}.
  */
-public class XYDotRenderer extends AbstractXYItemRenderer 
-                           implements XYItemRenderer, 
+public class XYDotRenderer extends AbstractXYItemRenderer
+                           implements XYItemRenderer,
                                       Cloneable,
                                       PublicCloneable,
                                       Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -2764344339073566425L;
-    
+
     /** The dot width. */
     private int dotWidth;
-    
+
     /** The dot height. */
     private int dotHeight;
-    
-    /** 
-     * The shape that is used to represent an item in the legend. 
-     * 
+
+    /**
+     * The shape that is used to represent an item in the legend.
+     *
      * @since 1.0.7
      */
     private transient Shape legendShape;
@@ -111,24 +111,24 @@ public class XYDotRenderer extends AbstractXYItemRenderer
 
     /**
      * Returns the dot width (the default value is 1).
-     * 
+     *
      * @return The dot width.
-     * 
+     *
      * @since 1.0.2
      * @see #setDotWidth(int)
      */
     public int getDotWidth() {
         return this.dotWidth;
     }
-    
+
     /**
-     * Sets the dot width and sends a {@link RendererChangeEvent} to all 
+     * Sets the dot width and sends a {@link RendererChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param w  the new width (must be greater than zero).
-     * 
+     *
      * @throws IllegalArgumentException if <code>w</code> is less than one.
-     * 
+     *
      * @since 1.0.2
      * @see #getDotWidth()
      */
@@ -139,27 +139,27 @@ public class XYDotRenderer extends AbstractXYItemRenderer
         this.dotWidth = w;
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the dot height (the default value is 1).
-     * 
+     *
      * @return The dot height.
-     * 
+     *
      * @since 1.0.2
      * @see #setDotHeight(int)
      */
     public int getDotHeight() {
         return this.dotHeight;
     }
-    
+
     /**
-     * Sets the dot height and sends a {@link RendererChangeEvent} to all 
+     * Sets the dot height and sends a {@link RendererChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param h  the new height (must be greater than zero).
-     * 
+     *
      * @throws IllegalArgumentException if <code>h</code> is less than one.
-     * 
+     *
      * @since 1.0.2
      * @see #getDotHeight()
      */
@@ -170,33 +170,33 @@ public class XYDotRenderer extends AbstractXYItemRenderer
         this.dotHeight = h;
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the shape used to represent an item in the legend.
-     * 
+     *
      * @return The legend shape (never <code>null</code>).
-     * 
+     *
      * @see #setLegendShape(Shape)
-     * 
+     *
      * @since 1.0.7
      */
     public Shape getLegendShape() {
-        return this.legendShape;   
+        return this.legendShape;
     }
-    
+
     /**
-     * Sets the shape used as a line in each legend item and sends a 
+     * Sets the shape used as a line in each legend item and sends a
      * {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param shape  the shape (<code>null</code> not permitted).
-     * 
+     *
      * @see #getLegendShape()
-     * 
+     *
      * @since 1.0.7
      */
     public void setLegendShape(Shape shape) {
         if (shape == null) {
-            throw new IllegalArgumentException("Null 'shape' argument.");   
+            throw new IllegalArgumentException("Null 'shape' argument.");
         }
         this.legendShape = shape;
         fireChangeEvent();
@@ -209,14 +209,14 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * @param state  the renderer state.
      * @param dataArea  the area within which the data is being drawn.
      * @param info  collects information about the drawing.
-     * @param plot  the plot (can be used to obtain standard color 
+     * @param plot  the plot (can be used to obtain standard color
      *              information etc).
      * @param domainAxis  the domain (horizontal) axis.
      * @param rangeAxis  the range (vertical) axis.
      * @param dataset  the dataset.
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
-     * @param crosshairState  crosshair information for the plot 
+     * @param crosshairState  crosshair information for the plot
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
@@ -241,25 +241,25 @@ public class XYDotRenderer extends AbstractXYItemRenderer
         if (!Double.isNaN(y)) {
             RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
             RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
-            double transX = domainAxis.valueToJava2D(x, dataArea, 
+            double transX = domainAxis.valueToJava2D(x, dataArea,
                     xAxisLocation) - adjx;
-            double transY = rangeAxis.valueToJava2D(y, dataArea, yAxisLocation) 
+            double transY = rangeAxis.valueToJava2D(y, dataArea, yAxisLocation)
                     - adjy;
 
             g2.setPaint(getItemPaint(series, item));
             PlotOrientation orientation = plot.getOrientation();
             if (orientation == PlotOrientation.HORIZONTAL) {
-                g2.fillRect((int) transY, (int) transX, this.dotHeight, 
+                g2.fillRect((int) transY, (int) transX, this.dotHeight,
                         this.dotWidth);
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                g2.fillRect((int) transX, (int) transY, this.dotWidth, 
+                g2.fillRect((int) transX, (int) transY, this.dotWidth,
                         this.dotHeight);
             }
 
             int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
             int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-            updateCrosshairValues(crosshairState, x, y, domainAxisIndex, 
+            updateCrosshairValues(crosshairState, x, y, domainAxisIndex,
                     rangeAxisIndex, transX, transY, orientation);
         }
 
@@ -303,7 +303,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
                         dataset, series);
             }
             Paint fillPaint = lookupSeriesPaint(series);
-            result = new LegendItem(label, description, toolTipText, urlText, 
+            result = new LegendItem(label, description, toolTipText, urlText,
                     getLegendShape(), fillPaint);
             result.setSeriesKey(dataset.getSeriesKey(series));
             result.setSeriesIndex(series);
@@ -314,19 +314,19 @@ public class XYDotRenderer extends AbstractXYItemRenderer
         return result;
 
     }
-    
+
     /**
      * Tests this renderer for equality with an arbitrary object.  This method
      * returns <code>true</code> if and only if:
-     * 
+     *
      * <ul>
      * <li><code>obj</code> is not <code>null</code>;</li>
      * <li><code>obj</code> is an instance of <code>XYDotRenderer</code>;</li>
      * <li>both renderers have the same attribute values.
      * </ul>
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -346,20 +346,20 @@ public class XYDotRenderer extends AbstractXYItemRenderer
         if (!ShapeUtilities.equal(this.legendShape, that.legendShape)) {
             return false;
         }
-        return super.equals(obj);    
+        return super.equals(obj);
     }
-    
+
     /**
      * Returns a clone of the renderer.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -368,12 +368,12 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.legendShape = SerialUtilities.readShape(stream);
     }
-    
+
     /**
      * Provides serialization support.
      *
