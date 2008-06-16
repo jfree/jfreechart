@@ -2,44 +2,44 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
  * WindItemRenderer.java
  * ---------------------
- * (C) Copyright 2001-2007, by Achilleus Mantzios and Contributors.
+ * (C) Copyright 2001-2008, by Achilleus Mantzios and Contributors.
  *
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  * Changes
  * -------
- * 06-Feb-2002 : Version 1, based on code contributed by Achilleus 
+ * 06-Feb-2002 : Version 1, based on code contributed by Achilleus
  *               Mantzios (DG);
- * 28-Mar-2002 : Added a property change listener mechanism so that renderers 
- *               no longer need to be immutable.  Changed StrictMath --> Math 
+ * 28-Mar-2002 : Added a property change listener mechanism so that renderers
+ *               no longer need to be immutable.  Changed StrictMath --> Math
  *               to retain JDK1.2 compatibility (DG);
- * 09-Apr-2002 : Changed return type of the drawItem method to void, reflecting 
+ * 09-Apr-2002 : Changed return type of the drawItem method to void, reflecting
  *               the change in the XYItemRenderer method (DG);
  * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 21-Jan-2003 : Added new constructor (DG);
@@ -48,7 +48,7 @@
  * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
  * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
  * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
@@ -78,15 +78,12 @@ import org.jfree.util.PublicCloneable;
 /**
  * A specialised renderer for displaying wind intensity/direction data.
  */
-public class WindItemRenderer extends AbstractXYItemRenderer 
-                              implements XYItemRenderer, 
-                                         Cloneable,
-                                         PublicCloneable,
-                                         Serializable {
+public class WindItemRenderer extends AbstractXYItemRenderer
+        implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 8078914101916976844L;
-    
+
     /**
      * Creates a new renderer.
      */
@@ -101,14 +98,14 @@ public class WindItemRenderer extends AbstractXYItemRenderer
      * @param state  the renderer state.
      * @param plotArea  the area within which the plot is being drawn.
      * @param info  optional information collection.
-     * @param plot  the plot (can be used to obtain standard color 
+     * @param plot  the plot (can be used to obtain standard color
      *              information etc).
      * @param domainAxis  the horizontal axis.
      * @param rangeAxis  the vertical axis.
      * @param dataset  the dataset.
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
-     * @param crosshairState  crosshair information for the plot 
+     * @param crosshairState  crosshair information for the plot
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
@@ -145,7 +142,7 @@ public class WindItemRenderer extends AbstractXYItemRenderer
 
         RectangleEdge domainAxisLocation = plot.getDomainAxisEdge();
         RectangleEdge rangeAxisLocation = plot.getRangeAxisEdge();
-        ax1 = domainAxis.valueToJava2D(x.doubleValue(), plotArea, 
+        ax1 = domainAxis.valueToJava2D(x.doubleValue(), plotArea,
                 domainAxisLocation);
         ay1 = rangeAxis.valueToJava2D(0.0, plotArea, rangeAxisLocation);
 
@@ -172,9 +169,9 @@ public class WindItemRenderer extends AbstractXYItemRenderer
         double alx2, aly2, arx2, ary2;
         double ralx2, raly2, rarx2, rary2;
 
-        double aldir = Math.toRadians(windDir.doubleValue() 
+        double aldir = Math.toRadians(windDir.doubleValue()
                 * (-30.0) - 90.0 - 5.0);
-        ralx2 = wforce.doubleValue() * Math.cos(aldir) * 8000000 * 0.8 
+        ralx2 = wforce.doubleValue() * Math.cos(aldir) * 8000000 * 0.8
         + x.doubleValue();
         raly2 = wforce.doubleValue() * Math.sin(aldir) * 0.8;
 
@@ -184,9 +181,9 @@ public class WindItemRenderer extends AbstractXYItemRenderer
         line = new Line2D.Double(alx2, aly2, ax2, ay2);
         g2.draw(line);
 
-        double ardir = Math.toRadians(windDir.doubleValue() 
+        double ardir = Math.toRadians(windDir.doubleValue()
                 * (-30.0) - 90.0 + 5.0);
-        rarx2 = wforce.doubleValue() * Math.cos(ardir) * 8000000 * 0.8 
+        rarx2 = wforce.doubleValue() * Math.cos(ardir) * 8000000 * 0.8
                 + x.doubleValue();
         rary2 = wforce.doubleValue() * Math.sin(ardir) * 0.8;
 
@@ -200,9 +197,9 @@ public class WindItemRenderer extends AbstractXYItemRenderer
 
     /**
      * Returns a clone of the renderer.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
