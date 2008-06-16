@@ -80,9 +80,7 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.chart.event.RendererChangeEvent;
-import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -440,21 +438,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
             }
         }
 
-        // add an entity for the item...
-        if (entities != null) {
-            String tip = null;
-            XYToolTipGenerator generator = getToolTipGenerator(series, item);
-            if (generator != null) {
-                tip = generator.generateToolTip(dataset, series, item);
-            }
-            String url = null;
-            if (getURLGenerator() != null) {
-                url = getURLGenerator().generateURL(dataset, series, item);
-            }
-            XYItemEntity entity = new XYItemEntity(entityArea, dataset,
-                    series, item, tip, url);
-            entities.add(entity);
-        }
+        addEntity(entities, entityArea, dataset, series, item, 0.0, 0.0);
 
     }
 

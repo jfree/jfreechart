@@ -1,3 +1,10 @@
+2008-06-16  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/xy/HighLowRenderer.java
+    (drawItem): Call addEntity() method.
+
+----------  JFREECHART 1.0.10 RELEASED ------------------------
+
 2008-06-09  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/DateTickUnit.java
