@@ -61,11 +61,9 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.XYItemLabelGenerator;
-import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -87,7 +85,7 @@ import org.jfree.util.ShapeUtilities;
 public class YIntervalRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
 
-	/** For serialization. */
+    /** For serialization. */
     private static final long serialVersionUID = -2951586537224143260L;
 
     /**
@@ -189,7 +187,6 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
                          int pass) {
 
         // setup for collecting optional entity info...
-        Shape entityArea = null;
         EntityCollection entities = null;
         if (info != null) {
             entities = info.getOwner().getEntityCollection();
@@ -246,21 +243,8 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item...
         if (entities != null) {
-            if (entityArea == null) {
-                entityArea = line.getBounds();
-            }
-            String tip = null;
-            XYToolTipGenerator generator = getToolTipGenerator(series, item);
-            if (generator != null) {
-                tip = generator.generateToolTip(dataset, series, item);
-            }
-            String url = null;
-            if (getURLGenerator() != null) {
-                url = getURLGenerator().generateURL(dataset, series, item);
-            }
-            XYItemEntity entity = new XYItemEntity(entityArea, dataset, series,
-                    item, tip, url);
-            entities.add(entity);
+            addEntity(entities, line.getBounds(), dataset, series, item, 0.0,
+                    0.0);
         }
 
     }
