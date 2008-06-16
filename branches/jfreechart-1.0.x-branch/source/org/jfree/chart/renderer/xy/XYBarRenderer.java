@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * XYBarRenderer.java
  * ------------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -40,11 +40,11 @@
  * -------
  * 13-Dec-2001 : Version 1, makes VerticalXYBarPlot class redundant (DG);
  * 23-Jan-2002 : Added DrawInfo parameter to drawItem() method (DG);
- * 09-Apr-2002 : Removed the translated zero from the drawItem method. Override 
+ * 09-Apr-2002 : Removed the translated zero from the drawItem method. Override
  *               the initialise() method to calculate it (DG);
  * 24-May-2002 : Incorporated tooltips into chart entities (DG);
  * 25-Jun-2002 : Removed redundant import (DG);
- * 05-Aug-2002 : Small modification to drawItem method to support URLs for HTML 
+ * 05-Aug-2002 : Small modification to drawItem method to support URLs for HTML
  *               image maps (RA);
  * 25-Mar-2003 : Implemented Serializable (DG);
  * 01-May-2003 : Modified drawItem() method signature (DG);
@@ -54,17 +54,17 @@
  * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
  * 07-Oct-2003 : Added renderer state (DG);
  * 05-Dec-2003 : Changed call to obtain outline paint (DG);
- * 10-Feb-2004 : Added state class, updated drawItem() method to make 
- *               cut-and-paste overriding easier, and replaced property change 
+ * 10-Feb-2004 : Added state class, updated drawItem() method to make
+ *               cut-and-paste overriding easier, and replaced property change
  *               with RendererChangeEvent (DG);
  * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
  * 26-Apr-2004 : Added gradient paint transformer (DG);
  * 19-May-2004 : Fixed bug (879709) with bar zero value for secondary axis (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
- * 01-Sep-2004 : Added a flag to control whether or not the bar outlines are 
+ * 01-Sep-2004 : Added a flag to control whether or not the bar outlines are
  *               drawn (DG);
- * 03-Sep-2004 : Added option to use y-interval from dataset to determine the 
+ * 03-Sep-2004 : Added option to use y-interval from dataset to determine the
  *               length of the bars (DG);
  * 08-Sep-2004 : Added equals() method and updated clone() method (DG);
  * 26-Jan-2005 : Added override for getLegendItem() method (DG);
@@ -74,9 +74,9 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 21-Jun-2006 : Improved item label handling - see bug 1501768 (DG);
  * 24-Aug-2006 : Added crosshair support (DG);
- * 13-Dec-2006 : Updated getLegendItems() to return gradient paint 
+ * 13-Dec-2006 : Updated getLegendItems() to return gradient paint
  *               transformer (DG);
- * 02-Feb-2007 : Changed setUseYInterval() to only notify when the flag 
+ * 02-Feb-2007 : Changed setUseYInterval() to only notify when the flag
  *               changes (DG);
  * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
  * 09-Feb-2007 : Updated getLegendItem() to observe drawBarOutline flag (DG);
@@ -134,12 +134,12 @@ import org.jfree.util.PublicCloneable;
 import org.jfree.util.ShapeUtilities;
 
 /**
- * A renderer that draws bars on an {@link XYPlot} (requires an 
+ * A renderer that draws bars on an {@link XYPlot} (requires an
  * {@link IntervalXYDataset}).
  */
-public class XYBarRenderer extends AbstractXYItemRenderer 
+public class XYBarRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
-    
+
     /** For serialization. */
     private static final long serialVersionUID = 770559577251370036L;
 
@@ -147,31 +147,31 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * The state class used by this renderer.
      */
     protected class XYBarRendererState extends XYItemRendererState {
-        
+
         /** Base for bars against the range axis, in Java 2D space. */
         private double g2Base;
-        
+
         /**
          * Creates a new state object.
-         * 
+         *
          * @param info  the plot rendering info.
          */
         public XYBarRendererState(PlotRenderingInfo info) {
             super(info);
         }
-        
+
         /**
          * Returns the base (range) value in Java 2D space.
-         * 
+         *
          * @return The base value.
          */
         public double getG2Base() {
             return this.g2Base;
         }
-        
+
         /**
          * Sets the range axis base in Java2D space.
-         * 
+         *
          * @param value  the value.
          */
         public void setG2Base(double value) {
@@ -181,40 +181,40 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /** The default base value for the bars. */
     private double base;
-    
-    /** 
-     * A flag that controls whether the bars use the y-interval supplied by the 
-     * dataset. 
+
+    /**
+     * A flag that controls whether the bars use the y-interval supplied by the
+     * dataset.
      */
     private boolean useYInterval;
-    
+
     /** Percentage margin (to reduce the width of bars). */
     private double margin;
 
     /** A flag that controls whether or not bar outlines are drawn. */
     private boolean drawBarOutline;
-    
-    /** 
-     * An optional class used to transform gradient paint objects to fit each 
-     * bar. 
+
+    /**
+     * An optional class used to transform gradient paint objects to fit each
+     * bar.
      */
-    private GradientPaintTransformer gradientPaintTransformer; 
-    
-    /** 
+    private GradientPaintTransformer gradientPaintTransformer;
+
+    /**
      * The shape used to represent a bar in each legend item (this should never
-     * be <code>null</code>). 
+     * be <code>null</code>).
      */
     private transient Shape legendBar;
-    
-    /** 
-     * The fallback position if a positive item label doesn't fit inside the 
-     * bar. 
+
+    /**
+     * The fallback position if a positive item label doesn't fit inside the
+     * bar.
      */
     private ItemLabelPosition positiveItemLabelPositionFallback;
-    
-    /** 
-     * The fallback position if a negative item label doesn't fit inside the 
-     * bar. 
+
+    /**
+     * The fallback position if a negative item label doesn't fit inside the
+     * bar.
      */
     private ItemLabelPosition negativeItemLabelPositionFallback;
 
@@ -235,29 +235,29 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         this.margin = margin;
         this.base = 0.0;
         this.useYInterval = false;
-        this.gradientPaintTransformer = new StandardGradientPaintTransformer(); 
+        this.gradientPaintTransformer = new StandardGradientPaintTransformer();
         this.drawBarOutline = false;
         this.legendBar = new Rectangle2D.Double(-3.0, -5.0, 6.0, 10.0);
     }
-    
+
     /**
      * Returns the base value for the bars.
-     * 
+     *
      * @return The base value for the bars.
-     * 
+     *
      * @see #setBase(double)
      */
     public double getBase() {
-        return this.base;    
+        return this.base;
     }
-    
+
     /**
      * Sets the base value for the bars and sends a {@link RendererChangeEvent}
      * to all registered listeners.  The base value is not used if the dataset's
      * y-interval is being used to determine the bar length.
-     * 
+     *
      * @param base  the new base value.
-     * 
+     *
      * @see #getBase()
      * @see #getUseYInterval()
      */
@@ -265,26 +265,26 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         this.base = base;
         fireChangeEvent();
     }
-    
+
     /**
      * Returns a flag that determines whether the y-interval from the dataset is
      * used to calculate the length of each bar.
-     * 
+     *
      * @return A boolean.
-     * 
+     *
      * @see #setUseYInterval(boolean)
      */
     public boolean getUseYInterval() {
         return this.useYInterval;
     }
-    
+
     /**
      * Sets the flag that determines whether the y-interval from the dataset is
-     * used to calculate the length of each bar, and sends a 
+     * used to calculate the length of each bar, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param use  the flag.
-     * 
+     *
      * @see #getUseYInterval()
      */
     public void setUseYInterval(boolean use) {
@@ -295,23 +295,23 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the margin which is a percentage amount by which the bars are 
+     * Returns the margin which is a percentage amount by which the bars are
      * trimmed.
      *
      * @return The margin.
-     * 
+     *
      * @see #setMargin(double)
      */
     public double getMargin() {
         return this.margin;
     }
-    
+
     /**
-     * Sets the percentage amount by which the bars are trimmed and sends a 
+     * Sets the percentage amount by which the bars are trimmed and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param margin  the new margin.
-     * 
+     *
      * @see #getMargin()
      */
     public void setMargin(double margin) {
@@ -321,46 +321,46 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * Returns a flag that controls whether or not bar outlines are drawn.
-     * 
+     *
      * @return A boolean.
-     * 
+     *
      * @see #setDrawBarOutline(boolean)
      */
     public boolean isDrawBarOutline() {
-        return this.drawBarOutline;    
+        return this.drawBarOutline;
     }
-    
+
     /**
-     * Sets the flag that controls whether or not bar outlines are drawn and 
+     * Sets the flag that controls whether or not bar outlines are drawn and
      * sends a {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param draw  the flag.
-     * 
+     *
      * @see #isDrawBarOutline()
      */
     public void setDrawBarOutline(boolean draw) {
         this.drawBarOutline = draw;
         fireChangeEvent();
     }
-    
+
     /**
-     * Returns the gradient paint transformer (an object used to transform 
+     * Returns the gradient paint transformer (an object used to transform
      * gradient paint objects to fit each bar).
-     * 
+     *
      * @return A transformer (<code>null</code> possible).
-     * 
+     *
      * @see #setGradientPaintTransformer(GradientPaintTransformer)
-     */    
+     */
     public GradientPaintTransformer getGradientPaintTransformer() {
-        return this.gradientPaintTransformer;    
+        return this.gradientPaintTransformer;
     }
-    
+
     /**
-     * Sets the gradient paint transformer and sends a 
+     * Sets the gradient paint transformer and sends a
      * {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param transformer  the transformer (<code>null</code> permitted).
-     * 
+     *
      * @see #getGradientPaintTransformer()
      */
     public void setGradientPaintTransformer(
@@ -368,25 +368,25 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         this.gradientPaintTransformer = transformer;
         fireChangeEvent();
     }
-     
+
     /**
      * Returns the shape used to represent bars in each legend item.
-     * 
-     * @return The shape used to represent bars in each legend item (never 
+     *
+     * @return The shape used to represent bars in each legend item (never
      *         <code>null</code>).
-     *         
+     *
      * @see #setLegendBar(Shape)
      */
     public Shape getLegendBar() {
         return this.legendBar;
     }
-    
+
     /**
      * Sets the shape used to represent bars in each legend item and sends a
      * {@link RendererChangeEvent} to all registered listeners.
-     * 
+     *
      * @param bar  the bar shape (<code>null</code> not permitted).
-     * 
+     *
      * @see #getLegendBar()
      */
     public void setLegendBar(Shape bar) {
@@ -396,27 +396,27 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         this.legendBar = bar;
         fireChangeEvent();
     }
-    
+
     /**
-     * Returns the fallback position for positive item labels that don't fit 
+     * Returns the fallback position for positive item labels that don't fit
      * within a bar.
-     * 
+     *
      * @return The fallback position (<code>null</code> possible).
-     * 
+     *
      * @see #setPositiveItemLabelPositionFallback(ItemLabelPosition)
      * @since 1.0.2
      */
     public ItemLabelPosition getPositiveItemLabelPositionFallback() {
         return this.positiveItemLabelPositionFallback;
     }
-    
+
     /**
-     * Sets the fallback position for positive item labels that don't fit 
+     * Sets the fallback position for positive item labels that don't fit
      * within a bar, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
-     * 
+     *
      * @param position  the position (<code>null</code> permitted).
-     * 
+     *
      * @see #getPositiveItemLabelPositionFallback()
      * @since 1.0.2
      */
@@ -425,27 +425,27 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         this.positiveItemLabelPositionFallback = position;
         fireChangeEvent();
     }
-    
+
     /**
-     * Returns the fallback position for negative item labels that don't fit 
+     * Returns the fallback position for negative item labels that don't fit
      * within a bar.
-     * 
+     *
      * @return The fallback position (<code>null</code> possible).
-     * 
+     *
      * @see #setNegativeItemLabelPositionFallback(ItemLabelPosition)
      * @since 1.0.2
      */
     public ItemLabelPosition getNegativeItemLabelPositionFallback() {
         return this.negativeItemLabelPositionFallback;
     }
-    
+
     /**
-     * Sets the fallback position for negative item labels that don't fit 
+     * Sets the fallback position for negative item labels that don't fit
      * within a bar, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
-     * 
+     *
      * @param position  the position (<code>null</code> permitted).
-     * 
+     *
      * @see #getNegativeItemLabelPositionFallback()
      * @since 1.0.2
      */
@@ -456,16 +456,16 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Initialises the renderer and returns a state object that should be 
-     * passed to all subsequent calls to the drawItem() method.  Here we 
-     * calculate the Java2D y-coordinate for zero, since all the bars have 
+     * Initialises the renderer and returns a state object that should be
+     * passed to all subsequent calls to the drawItem() method.  Here we
+     * calculate the Java2D y-coordinate for zero, since all the bars have
      * their bases fixed at zero.
      *
      * @param g2  the graphics device.
      * @param dataArea  the area inside the axes.
      * @param plot  the plot.
      * @param dataset  the data.
-     * @param info  an optional info collection object to return data back to 
+     * @param info  an optional info collection object to return data back to
      *              the caller.
      *
      * @return A state object.
@@ -476,14 +476,14 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         XYBarRendererState state = new XYBarRendererState(info);
         ValueAxis rangeAxis = plot.getRangeAxisForDataset(plot.indexOf(
                 dataset));
-        state.setG2Base(rangeAxis.valueToJava2D(this.base, dataArea, 
+        state.setG2Base(rangeAxis.valueToJava2D(this.base, dataArea,
                 plot.getRangeAxisEdge()));
         return state;
 
     }
 
     /**
-     * Returns a default legend item for the specified series.  Subclasses 
+     * Returns a default legend item for the specified series.  Subclasses
      * should override this method to generate customised items.
      *
      * @param datasetIndex  the dataset index (zero-based).
@@ -515,11 +515,11 @@ public class XYBarRenderer extends AbstractXYItemRenderer
                 Paint outlinePaint = lookupSeriesOutlinePaint(series);
                 Stroke outlineStroke = lookupSeriesOutlineStroke(series);
                 if (this.drawBarOutline) {
-                    result = new LegendItem(label, description, toolTipText, 
+                    result = new LegendItem(label, description, toolTipText,
                             urlText, shape, paint, outlineStroke, outlinePaint);
                 }
                 else {
-                    result = new LegendItem(label, description, toolTipText, 
+                    result = new LegendItem(label, description, toolTipText,
                             urlText, shape, paint);
                 }
                 result.setDataset(dataset);
@@ -534,7 +534,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         }
         return result;
     }
-    
+
     /**
      * Draws the visual representation of a single data item.
      *
@@ -542,14 +542,14 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @param state  the renderer state.
      * @param dataArea  the area within which the plot is being drawn.
      * @param info  collects information about the drawing.
-     * @param plot  the plot (can be used to obtain standard color 
+     * @param plot  the plot (can be used to obtain standard color
      *              information etc).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
      * @param dataset  the dataset.
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
-     * @param crosshairState  crosshair information for the plot 
+     * @param crosshairState  crosshair information for the plot
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
@@ -567,7 +567,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
                          int pass) {
 
         if (!getItemVisible(series, item)) {
-            return;   
+            return;
         }
         IntervalXYDataset intervalDataset = (IntervalXYDataset) dataset;
 
@@ -595,9 +595,9 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             }
         }
 
-        double translatedValue0 = rangeAxis.valueToJava2D(value0, dataArea, 
+        double translatedValue0 = rangeAxis.valueToJava2D(value0, dataArea,
                 plot.getRangeAxisEdge());
-        double translatedValue1 = rangeAxis.valueToJava2D(value1, dataArea, 
+        double translatedValue1 = rangeAxis.valueToJava2D(value1, dataArea,
                 plot.getRangeAxisEdge());
         double bottom = Math.min(translatedValue0, translatedValue1);
         double top = Math.max(translatedValue0, translatedValue1);
@@ -622,14 +622,14 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         }
 
         RectangleEdge location = plot.getDomainAxisEdge();
-        double translatedStartX = domainAxis.valueToJava2D(startX, dataArea, 
+        double translatedStartX = domainAxis.valueToJava2D(startX, dataArea,
                 location);
-        double translatedEndX = domainAxis.valueToJava2D(endX, dataArea, 
+        double translatedEndX = domainAxis.valueToJava2D(endX, dataArea,
                 location);
 
-        double translatedWidth = Math.max(1, Math.abs(translatedEndX 
+        double translatedWidth = Math.max(1, Math.abs(translatedEndX
                 - translatedStartX));
-        
+
         double left = Math.min(translatedStartX, translatedEndX);
         if (getMargin() > 0.0) {
             double cut = translatedWidth * getMargin();
@@ -650,33 +650,33 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             // clip top and bottom bounds to data area
             bottom = Math.max(bottom, dataArea.getMinY());
             top = Math.min(top, dataArea.getMaxY());
-            bar = new Rectangle2D.Double(left, bottom, translatedWidth, 
+            bar = new Rectangle2D.Double(left, bottom, translatedWidth,
                     top - bottom);
         }
 
         Paint itemPaint = getItemPaint(series, item);
-        if (getGradientPaintTransformer() 
+        if (getGradientPaintTransformer()
                 != null && itemPaint instanceof GradientPaint) {
             GradientPaint gp = (GradientPaint) itemPaint;
             itemPaint = getGradientPaintTransformer().transform(gp, bar);
         }
         g2.setPaint(itemPaint);
         g2.fill(bar);
-        if (isDrawBarOutline() 
+        if (isDrawBarOutline()
                 && Math.abs(translatedEndX - translatedStartX) > 3) {
             Stroke stroke = getItemOutlineStroke(series, item);
             Paint paint = getItemOutlinePaint(series, item);
             if (stroke != null && paint != null) {
                 g2.setStroke(stroke);
                 g2.setPaint(paint);
-                g2.draw(bar);                
+                g2.draw(bar);
             }
         }
-        
+
         if (isItemLabelVisible(series, item)) {
-            XYItemLabelGenerator generator = getItemLabelGenerator(series, 
+            XYItemLabelGenerator generator = getItemLabelGenerator(series,
                     item);
-            drawItemLabel(g2, dataset, series, item, plot, generator, bar, 
+            drawItemLabel(g2, dataset, series, item, plot, generator, bar,
                     value1 < 0.0);
         }
 
@@ -684,11 +684,11 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         double x1 = (startX + endX) / 2.0;
         double y1 = dataset.getYValue(series, item);
         double transX1 = domainAxis.valueToJava2D(x1, dataArea, location);
-        double transY1 = rangeAxis.valueToJava2D(y1, dataArea, 
+        double transY1 = rangeAxis.valueToJava2D(y1, dataArea,
                 plot.getRangeAxisEdge());
         int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
         int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-        updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex, 
+        updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex,
                 rangeAxisIndex, transX1, transY1, plot.getOrientation());
 
         EntityCollection entities = state.getEntityCollection();
@@ -700,32 +700,32 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * Draws an item label.  This method is provided as an alternative to
-     * {@link #drawItemLabel(Graphics2D, PlotOrientation, XYDataset, int, int, 
-     * double, double, boolean)} so that the bar can be used to calculate the 
-     * label anchor point. 
-     * 
+     * {@link #drawItemLabel(Graphics2D, PlotOrientation, XYDataset, int, int,
+     * double, double, boolean)} so that the bar can be used to calculate the
+     * label anchor point.
+     *
      * @param g2  the graphics device.
      * @param dataset  the dataset.
      * @param series  the series index.
      * @param item  the item index.
      * @param plot  the plot.
-     * @param generator  the label generator (<code>null</code> permitted, in 
+     * @param generator  the label generator (<code>null</code> permitted, in
      *         which case the method does nothing, just returns).
      * @param bar  the bar.
      * @param negative  a flag indicating a negative value.
      */
     protected void drawItemLabel(Graphics2D g2, XYDataset dataset,
-            int series, int item, XYPlot plot, XYItemLabelGenerator generator, 
+            int series, int item, XYPlot plot, XYItemLabelGenerator generator,
             Rectangle2D bar, boolean negative) {
-                                     
+
         if (generator == null) {
             return;  // nothing to do
         }
         String label = generator.generateLabel(dataset, series, item);
         if (label == null) {
-            return;  // nothing to do   
+            return;  // nothing to do
         }
-        
+
         Font labelFont = getItemLabelFont(series, item);
         g2.setFont(labelFont);
         Paint paint = getItemLabelPaint(series, item);
@@ -743,13 +743,13 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         // work out the label anchor point...
         Point2D anchorPoint = calculateLabelAnchorPoint(
                 position.getItemLabelAnchor(), bar, plot.getOrientation());
-        
+
         if (isInternalAnchor(position.getItemLabelAnchor())) {
-            Shape bounds = TextUtilities.calculateRotatedStringBounds(label, 
+            Shape bounds = TextUtilities.calculateRotatedStringBounds(label,
                     g2, (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
                     position.getRotationAnchor());
-            
+
             if (bounds != null) {
                 if (!bar.contains(bounds.getBounds2D())) {
                     if (!negative) {
@@ -760,20 +760,20 @@ public class XYBarRenderer extends AbstractXYItemRenderer
                     }
                     if (position != null) {
                         anchorPoint = calculateLabelAnchorPoint(
-                                position.getItemLabelAnchor(), bar, 
+                                position.getItemLabelAnchor(), bar,
                                 plot.getOrientation());
                     }
                 }
             }
-        
+
         }
-        
+
         if (position != null) {
-            TextUtilities.drawRotatedString(label, g2, 
+            TextUtilities.drawRotatedString(label, g2,
                     (float) anchorPoint.getX(), (float) anchorPoint.getY(),
-                    position.getTextAnchor(), position.getAngle(), 
+                    position.getTextAnchor(), position.getAngle(),
                     position.getRotationAnchor());
-        }        
+        }
     }
 
     /**
@@ -888,13 +888,13 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * Returns <code>true</code> if the specified anchor point is inside a bar.
-     * 
+     *
      * @param anchor  the anchor point.
-     * 
+     *
      * @return A boolean.
      */
     private boolean isInternalAnchor(ItemLabelAnchor anchor) {
-        return anchor == ItemLabelAnchor.CENTER 
+        return anchor == ItemLabelAnchor.CENTER
                || anchor == ItemLabelAnchor.INSIDE1
                || anchor == ItemLabelAnchor.INSIDE2
                || anchor == ItemLabelAnchor.INSIDE3
@@ -906,17 +906,17 @@ public class XYBarRenderer extends AbstractXYItemRenderer
                || anchor == ItemLabelAnchor.INSIDE9
                || anchor == ItemLabelAnchor.INSIDE10
                || anchor == ItemLabelAnchor.INSIDE11
-               || anchor == ItemLabelAnchor.INSIDE12;  
+               || anchor == ItemLabelAnchor.INSIDE12;
     }
-    
+
     /**
-     * Returns the lower and upper bounds (range) of the x-values in the 
-     * specified dataset.  Since this renderer uses the x-interval in the 
+     * Returns the lower and upper bounds (range) of the x-values in the
+     * specified dataset.  Since this renderer uses the x-interval in the
      * dataset, this is taken into account for the range.
-     * 
+     *
      * @param dataset  the dataset (<code>null</code> permitted).
-     * 
-     * @return The range (<code>null</code> if the dataset is 
+     *
+     * @return The range (<code>null</code> if the dataset is
      *         <code>null</code> or empty).
      */
     public Range findDomainBounds(XYDataset dataset) {
@@ -947,9 +947,9 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * Tests this renderer for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object to test against (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -981,7 +981,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             return false;
         }
         if (!ShapeUtilities.equal(this.legendBar, that.legendBar)) {
-            return false;   
+            return false;
         }
         if (!ObjectUtilities.equal(this.positiveItemLabelPositionFallback,
                 that.positiveItemLabelPositionFallback)) {
@@ -990,10 +990,10 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         if (!ObjectUtilities.equal(this.negativeItemLabelPositionFallback,
                 that.negativeItemLabelPositionFallback)) {
             return false;
-        }        
+        }
         return true;
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -1002,12 +1002,12 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.legendBar = SerialUtilities.readShape(stream);
     }
-    
+
     /**
      * Provides serialization support.
      *

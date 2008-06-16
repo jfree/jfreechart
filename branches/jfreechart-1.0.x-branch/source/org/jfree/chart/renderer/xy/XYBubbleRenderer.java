@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
  * XYBubbleRenderer.java
  * ---------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -40,7 +40,7 @@
  * 30-Jul-2003 : Modified entity constructor (CZ);
  * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
  * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 10-Feb-2004 : Small change to drawItem() method to make cut-and-paste 
+ * 10-Feb-2004 : Small change to drawItem() method to make cut-and-paste
  *               overriding easier (DG);
  * 15-Jul-2004 : Switched getZ() and getZValue() methods (DG);
  * 19-Jan-2005 : Now accesses only primitives from dataset (DG);
@@ -84,33 +84,33 @@ import org.jfree.util.PublicCloneable;
 
 /**
  * A renderer that draws a circle at each data point with a diameter that is
- * determined by the z-value in the dataset (the renderer requires the dataset 
+ * determined by the z-value in the dataset (the renderer requires the dataset
  * to be an instance of {@link XYZDataset}.
  */
-public class XYBubbleRenderer extends AbstractXYItemRenderer 
-                              implements XYItemRenderer, 
+public class XYBubbleRenderer extends AbstractXYItemRenderer
+                              implements XYItemRenderer,
                                          Cloneable,
                                          PublicCloneable,
                                          Serializable {
 
     /** For serialization. */
     public static final long serialVersionUID = -5221991598674249125L;
-    
-    /** 
-     * A constant to specify that the bubbles drawn by this renderer should be 
-     * scaled on both axes (see {@link #XYBubbleRenderer(int)}). 
+
+    /**
+     * A constant to specify that the bubbles drawn by this renderer should be
+     * scaled on both axes (see {@link #XYBubbleRenderer(int)}).
      */
     public static final int SCALE_ON_BOTH_AXES = 0;
 
-    /** 
-     * A constant to specify that the bubbles drawn by this renderer should be 
-     * scaled on the domain axis (see {@link #XYBubbleRenderer(int)}). 
+    /**
+     * A constant to specify that the bubbles drawn by this renderer should be
+     * scaled on the domain axis (see {@link #XYBubbleRenderer(int)}).
      */
     public static final int SCALE_ON_DOMAIN_AXIS = 1;
 
-    /** 
-     * A constant to specify that the bubbles drawn by this renderer should be 
-     * scaled on the range axis (see {@link #XYBubbleRenderer(int)}). 
+    /**
+     * A constant to specify that the bubbles drawn by this renderer should be
+     * scaled on the range axis (see {@link #XYBubbleRenderer(int)}).
      */
     public static final int SCALE_ON_RANGE_AXIS = 2;
 
@@ -121,14 +121,14 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
      * Constructs a new renderer.
      */
     public XYBubbleRenderer() {
-        this(SCALE_ON_BOTH_AXES); 
+        this(SCALE_ON_BOTH_AXES);
     }
 
     /**
-     * Constructs a new renderer with the specified type of scaling. 
+     * Constructs a new renderer with the specified type of scaling.
      *
-     * @param scaleType  the type of scaling (must be one of: 
-     *        {@link #SCALE_ON_BOTH_AXES}, {@link #SCALE_ON_DOMAIN_AXIS}, 
+     * @param scaleType  the type of scaling (must be one of:
+     *        {@link #SCALE_ON_BOTH_AXES}, {@link #SCALE_ON_DOMAIN_AXIS},
      *        {@link #SCALE_ON_RANGE_AXIS}).
      */
     public XYBubbleRenderer(int scaleType) {
@@ -142,7 +142,7 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
     /**
      * Returns the scale type that was set when the renderer was constructed.
      *
-     * @return The scale type (one of: {@link #SCALE_ON_BOTH_AXES}, 
+     * @return The scale type (one of: {@link #SCALE_ON_BOTH_AXES},
      *         {@link #SCALE_ON_DOMAIN_AXIS}, {@link #SCALE_ON_RANGE_AXIS}).
      */
     public int getScaleType() {
@@ -156,29 +156,29 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
      * @param state  the renderer state.
      * @param dataArea  the area within which the data is being drawn.
      * @param info  collects information about the drawing.
-     * @param plot  the plot (can be used to obtain standard color 
+     * @param plot  the plot (can be used to obtain standard color
      *              information etc).
      * @param domainAxis  the domain (horizontal) axis.
      * @param rangeAxis  the range (vertical) axis.
      * @param dataset  the dataset (an {@link XYZDataset} is expected).
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
-     * @param crosshairState  crosshair information for the plot 
+     * @param crosshairState  crosshair information for the plot
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
     public void drawItem(Graphics2D g2, XYItemRendererState state,
             Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
-            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset, 
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
             int series, int item, CrosshairState crosshairState, int pass) {
 
         // return straight away if the item is not visible
         if (!getItemVisible(series, item)) {
-            return;   
+            return;
         }
-        
+
         PlotOrientation orientation = plot.getOrientation();
-        
+
         // get the data point...
         double x = dataset.getXValue(series, item);
         double y = dataset.getYValue(series, item);
@@ -190,9 +190,9 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
         if (!Double.isNaN(z)) {
             RectangleEdge domainAxisLocation = plot.getDomainAxisEdge();
             RectangleEdge rangeAxisLocation = plot.getRangeAxisEdge();
-            double transX = domainAxis.valueToJava2D(x, dataArea, 
+            double transX = domainAxis.valueToJava2D(x, dataArea,
                     domainAxisLocation);
-            double transY = rangeAxis.valueToJava2D(y, dataArea, 
+            double transY = rangeAxis.valueToJava2D(y, dataArea,
                     rangeAxisLocation);
 
             double transDomain = 0.0;
@@ -201,38 +201,38 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
 
             switch(getScaleType()) {
                 case SCALE_ON_DOMAIN_AXIS:
-                    zero = domainAxis.valueToJava2D(0.0, dataArea, 
+                    zero = domainAxis.valueToJava2D(0.0, dataArea,
                             domainAxisLocation);
-                    transDomain = domainAxis.valueToJava2D(z, dataArea, 
+                    transDomain = domainAxis.valueToJava2D(z, dataArea,
                             domainAxisLocation) - zero;
                     transRange = transDomain;
                     break;
                 case SCALE_ON_RANGE_AXIS:
-                    zero = rangeAxis.valueToJava2D(0.0, dataArea, 
+                    zero = rangeAxis.valueToJava2D(0.0, dataArea,
                             rangeAxisLocation);
-                    transRange = zero - rangeAxis.valueToJava2D(z, dataArea, 
+                    transRange = zero - rangeAxis.valueToJava2D(z, dataArea,
                             rangeAxisLocation);
                     transDomain = transRange;
                     break;
                 default:
-                    double zero1 = domainAxis.valueToJava2D(0.0, dataArea, 
+                    double zero1 = domainAxis.valueToJava2D(0.0, dataArea,
                             domainAxisLocation);
-                    double zero2 = rangeAxis.valueToJava2D(0.0, dataArea, 
+                    double zero2 = rangeAxis.valueToJava2D(0.0, dataArea,
                             rangeAxisLocation);
-                    transDomain = domainAxis.valueToJava2D(z, dataArea, 
+                    transDomain = domainAxis.valueToJava2D(z, dataArea,
                             domainAxisLocation) - zero1;
-                    transRange = zero2 - rangeAxis.valueToJava2D(z, dataArea, 
+                    transRange = zero2 - rangeAxis.valueToJava2D(z, dataArea,
                             rangeAxisLocation);
             }
             transDomain = Math.abs(transDomain);
             transRange = Math.abs(transRange);
             Ellipse2D circle = null;
             if (orientation == PlotOrientation.VERTICAL) {
-                circle = new Ellipse2D.Double(transX - transDomain / 2.0, 
+                circle = new Ellipse2D.Double(transX - transDomain / 2.0,
                         transY - transRange / 2.0, transDomain, transRange);
             }
             else if (orientation == PlotOrientation.HORIZONTAL) {
-                circle = new Ellipse2D.Double(transY - transRange / 2.0, 
+                circle = new Ellipse2D.Double(transY - transRange / 2.0,
                         transX - transDomain / 2.0, transRange, transDomain);
             }
             g2.setPaint(getItemPaint(series, item));
@@ -243,28 +243,28 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
 
             if (isItemLabelVisible(series, item)) {
                 if (orientation == PlotOrientation.VERTICAL) {
-                    drawItemLabel(g2, orientation, dataset, series, item, 
+                    drawItemLabel(g2, orientation, dataset, series, item,
                             transX, transY, false);
                 }
                 else if (orientation == PlotOrientation.HORIZONTAL) {
-                    drawItemLabel(g2, orientation, dataset, series, item, 
-                            transY, transX, false);                
+                    drawItemLabel(g2, orientation, dataset, series, item,
+                            transY, transX, false);
                 }
             }
-            
+
             // add an entity if this info is being collected
             EntityCollection entities = null;
             if (info != null) {
                 entities = info.getOwner().getEntityCollection();
                 if (entities != null && circle.intersects(dataArea)) {
-                    addEntity(entities, circle, dataset, series, item, 
+                    addEntity(entities, circle, dataset, series, item,
                             circle.getCenterX(), circle.getCenterY());
                 }
             }
 
             int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
             int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-            updateCrosshairValues(crosshairState, x, y, domainAxisIndex, 
+            updateCrosshairValues(crosshairState, x, y, domainAxisIndex,
                     rangeAxisIndex, transX, transY, orientation);
         }
 
@@ -285,7 +285,7 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
         if (plot == null) {
             return null;
         }
-           
+
         XYDataset dataset = plot.getDataset(datasetIndex);
         if (dataset != null) {
             if (getItemVisible(series, 0)) {
@@ -306,7 +306,7 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
                 Paint paint = lookupSeriesPaint(series);
                 Paint outlinePaint = lookupSeriesOutlinePaint(series);
                 Stroke outlineStroke = lookupSeriesOutlineStroke(series);
-                result = new LegendItem(label, description, toolTipText, 
+                result = new LegendItem(label, description, toolTipText,
                         urlText, shape, paint, outlineStroke, outlinePaint);
                 result.setDataset(dataset);
                 result.setDatasetIndex(datasetIndex);
@@ -316,12 +316,12 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
         }
         return result;
     }
-    
+
     /**
      * Tests this renderer for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -337,12 +337,12 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Returns a clone of the renderer.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
