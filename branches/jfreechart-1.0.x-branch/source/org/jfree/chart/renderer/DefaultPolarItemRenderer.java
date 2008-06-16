@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------------
  * DefaultPolarItemRenderer.java
  * -----------------------------
- * (C) Copyright 2004, 2006, 2007, by Solution Engineering, Inc. and 
+ * (C) Copyright 2004-2008, by Solution Engineering, Inc. and
  *     Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
@@ -36,7 +36,7 @@
  * Changes
  * -------
  * 19-Jan-2004 : Version 1, contributed by DB with minor changes by DG (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * 04-Oct-2004 : Renamed BooleanUtils --> BooleanUtilities (DG);
  * 20-Apr-2005 : Update for change to LegendItem class (DG);
@@ -79,27 +79,27 @@ import org.jfree.util.BooleanUtilities;
 /**
  * A renderer that can be used with the {@link PolarPlot} class.
  */
-public class DefaultPolarItemRenderer extends AbstractRenderer  
-                                      implements PolarItemRenderer {
-       
+public class DefaultPolarItemRenderer extends AbstractRenderer
+        implements PolarItemRenderer {
+
     /** The plot that the renderer is assigned to. */
     private PolarPlot plot;
 
     /** Flags that control whether the renderer fills each series or not. */
     private BooleanList seriesFilled;
-   
+
     /**
      * Creates a new instance of DefaultPolarItemRenderer
      */
     public DefaultPolarItemRenderer() {
         this.seriesFilled = new BooleanList();
     }
-   
+
     /**
      * Set the plot associated with this renderer.
-     * 
+     *
      * @param plot  the plot.
-     * 
+     *
      * @see #getPlot()
      */
     public void setPlot(PolarPlot plot) {
@@ -108,16 +108,16 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
     /**
      * Return the plot associated with this renderer.
-     * 
+     *
      * @return The plot.
-     * 
+     *
      * @see #setPlot(PolarPlot)
      */
     public PolarPlot getPlot() {
         return this.plot;
     }
 
-    /** 
+    /**
      * Returns the drawing supplier from the plot.
      *
      * @return The drawing supplier.
@@ -132,11 +132,11 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns <code>true</code> if the renderer should fill the specified 
+     * Returns <code>true</code> if the renderer should fill the specified
      * series, and <code>false</code> otherwise.
-     * 
+     *
      * @param series  the series index (zero-based).
-     * 
+     *
      * @return A boolean.
      */
     public boolean isSeriesFilled(int series) {
@@ -150,17 +150,17 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
     /**
      * Sets a flag that controls whether or not a series is filled.
-     * 
+     *
      * @param series  the series index.
      * @param filled  the flag.
      */
     public void setSeriesFilled(int series, boolean filled) {
         this.seriesFilled.setBoolean(series, BooleanUtilities.valueOf(filled));
     }
-    
+
     /**
      * Plots the data for a given series.
-     * 
+     *
      * @param g2  the drawing surface.
      * @param dataArea  the data area.
      * @param info  collects plot rendering info.
@@ -168,19 +168,19 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param dataset  the dataset.
      * @param seriesIndex  the series index.
      */
-    public void drawSeries(Graphics2D g2, 
-                           Rectangle2D dataArea, 
+    public void drawSeries(Graphics2D g2,
+                           Rectangle2D dataArea,
                            PlotRenderingInfo info,
                            PolarPlot plot,
                            XYDataset dataset,
                            int seriesIndex) {
-        
+
         Polygon poly = new Polygon();
         int numPoints = dataset.getItemCount(seriesIndex);
         for (int i = 0; i < numPoints; i++) {
             double theta = dataset.getXValue(seriesIndex, i);
             double radius = dataset.getYValue(seriesIndex, i);
-            Point p = plot.translateValueThetaRadiusToJava2D(theta, radius, 
+            Point p = plot.translateValueThetaRadiusToJava2D(theta, radius,
                     dataArea);
             poly.addPoint(p.x, p.y);
         }
@@ -197,24 +197,24 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
             g2.draw(poly);
         }
     }
-    
+
     /**
      * Draw the angular gridlines - the spokes.
-     * 
+     *
      * @param g2  the drawing surface.
      * @param plot  the plot.
      * @param ticks  the ticks.
      * @param dataArea  the data area.
      */
-    public void drawAngularGridLines(Graphics2D g2, 
-                                     PolarPlot plot, 
+    public void drawAngularGridLines(Graphics2D g2,
+                                     PolarPlot plot,
                                      List ticks,
                                      Rectangle2D dataArea) {
-        
+
         g2.setFont(plot.getAngleLabelFont());
         g2.setStroke(plot.getAngleGridlineStroke());
         g2.setPaint(plot.getAngleGridlinePaint());
-      
+
         double axisMin = plot.getAxis().getLowerBound();
         double maxRadius = plot.getMaxRadius();
 
@@ -231,7 +231,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                 int x = p.x;
                 int y = p.y;
                 g2.setPaint(plot.getAngleLabelPaint());
-                TextUtilities.drawAlignedString(tick.getText(), g2, x, y, 
+                TextUtilities.drawAlignedString(tick.getText(), g2, x, y,
                         TextAnchor.CENTER);
             }
         }
@@ -239,19 +239,19 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
     /**
      * Draw the radial gridlines - the rings.
-     * 
+     *
      * @param g2  the drawing surface.
      * @param plot  the plot.
      * @param radialAxis  the radial axis.
      * @param ticks  the ticks.
      * @param dataArea  the data area.
      */
-    public void drawRadialGridLines(Graphics2D g2, 
+    public void drawRadialGridLines(Graphics2D g2,
                                     PolarPlot plot,
                                     ValueAxis radialAxis,
                                     List ticks,
                                     Rectangle2D dataArea) {
-        
+
         g2.setFont(radialAxis.getTickLabelFont());
         g2.setPaint(plot.getRadiusGridlinePaint());
         g2.setStroke(plot.getRadiusGridlineStroke());
@@ -259,11 +259,11 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         double axisMin = radialAxis.getLowerBound();
         Point center = plot.translateValueThetaRadiusToJava2D(axisMin, axisMin,
                 dataArea);
-        
+
         Iterator iterator = ticks.iterator();
         while (iterator.hasNext()) {
             NumberTick tick = (NumberTick) iterator.next();
-            Point p = plot.translateValueThetaRadiusToJava2D(90.0, 
+            Point p = plot.translateValueThetaRadiusToJava2D(90.0,
                     tick.getNumber().doubleValue(), dataArea);
             int r = p.x - center.x;
             int upperLeftX = center.x - r;
@@ -277,9 +277,9 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
     /**
      * Return the legend for the given series.
-     * 
+     *
      * @param series  the series index.
-     * 
+     *
      * @return The legend item.
      */
     public LegendItem getLegendItem(int series) {
@@ -294,7 +294,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                 Paint paint = lookupSeriesPaint(series);
                 Paint outlinePaint = lookupSeriesOutlinePaint(series);
                 Stroke outlineStroke = lookupSeriesOutlineStroke(series);
-                result = new LegendItem(label, description, null, null, 
+                result = new LegendItem(label, description, null, null,
                         shape, paint, outlineStroke, outlinePaint);
                 result.setDataset(dataset);
             }
@@ -304,9 +304,9 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
     /**
      * Tests this renderer for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> not permitted).
-     * 
+     *
      * @return <code>true</code> if this renderer is equal to <code>obj</code>,
      *     and <code>false</code> otherwise.
      */
@@ -323,7 +323,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Returns a clone of the renderer.
      *
@@ -332,7 +332,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @throws CloneNotSupportedException if the renderer cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
-        DefaultPolarItemRenderer clone 
+        DefaultPolarItemRenderer clone
                 = (DefaultPolarItemRenderer) super.clone();
         clone.seriesFilled = (BooleanList) this.seriesFilled.clone();
         return clone;
