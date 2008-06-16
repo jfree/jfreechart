@@ -181,8 +181,7 @@ public class HighLowRendererTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             r2 = (HighLowRenderer) in.readObject();
             in.close();
         }
