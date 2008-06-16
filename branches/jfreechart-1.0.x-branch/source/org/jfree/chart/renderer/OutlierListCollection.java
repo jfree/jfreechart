@@ -2,34 +2,34 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------
  * OutlierListCollection.java
  * --------------------------
- * (C) Copyright 2003, 2004, 2007, by David Browning and Contributors.
+ * (C) Copyright 2003-2008, by David Browning and Contributors.
  *
- * Original Author:  David Browning (for Australian Institute of Marine 
+ * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
  * Contributor(s):   -;
  *
@@ -62,28 +62,28 @@ public class OutlierListCollection {
 
     /** Storage for the outlier lists. */
     private List outlierLists;
-    
-    /** 
+
+    /**
      * Unbelievably, outliers which are more than 2 * interquartile range are
      * called far outs...  See Tukey EDA  (a classic one of a kind...)
      */
     private boolean highFarOut = false;
 
     /**
-     * A flag that indicates whether or not the collection contains low far 
+     * A flag that indicates whether or not the collection contains low far
      * out values.
      */
     private boolean lowFarOut = false;
-    
+
     /**
      * Creates a new empty collection.
      */
     public OutlierListCollection() {
         this.outlierLists = new ArrayList();
     }
-    
+
     /**
-     * A flag to indicate the presence of one or more far out values at the 
+     * A flag to indicate the presence of one or more far out values at the
      * top end of the range.
      *
      * @return A <code>boolean</code>.
@@ -93,7 +93,7 @@ public class OutlierListCollection {
     }
 
     /**
-     * Sets the flag that indicates the presence of one or more far out values 
+     * Sets the flag that indicates the presence of one or more far out values
      * at the top end of the range.
      *
      * @param farOut  the flag.
@@ -103,7 +103,7 @@ public class OutlierListCollection {
     }
 
     /**
-     * A flag to indicate the presence of one or more far out values at the 
+     * A flag to indicate the presence of one or more far out values at the
      * bottom end of the range.
      *
      * @return A <code>boolean</code>.
@@ -113,7 +113,7 @@ public class OutlierListCollection {
     }
 
     /**
-     * Sets the flag that indicates the presence of one or more far out values 
+     * Sets the flag that indicates the presence of one or more far out values
      * at the bottom end of the range.
      *
      * @param farOut  the flag.
@@ -129,17 +129,17 @@ public class OutlierListCollection {
      * and that list is updated.
      *
      * @param outlier  element to be appended to this list.
-     * 
+     *
      * @return <tt>true</tt> (as per the general contract of Collection.add).
      */
     public boolean add(Outlier outlier) {
 
         if (this.outlierLists.isEmpty()) {
             return this.outlierLists.add(new OutlierList(outlier));
-        } 
+        }
         else {
             boolean updated = false;
-            for (Iterator iterator = this.outlierLists.iterator(); 
+            for (Iterator iterator = this.outlierLists.iterator();
                  iterator.hasNext();) {
                 OutlierList list = (OutlierList) iterator.next();
                 if (list.isOverlapped(outlier)) {
@@ -157,17 +157,17 @@ public class OutlierListCollection {
 
     /**
      * Returns an iterator for the outlier lists.
-     * 
+     *
      * @return An iterator.
      */
     public Iterator iterator() {
-        return this.outlierLists.iterator();    
+        return this.outlierLists.iterator();
     }
-    
-    
-    /** 
+
+
+    /**
      * Updates the outlier list by adding the outlier to the end of the list and
-     * setting the averaged outlier to the average x and y coordinnate values 
+     * setting the averaged outlier to the average x and y coordinnate values
      * of the outliers in the list.
      *
      * @param list  the outlier list to be updated.
