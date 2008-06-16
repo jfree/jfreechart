@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * RendererUtilities.java
  * ----------------------
- * (C) Copyright 2007, by Object Refinery Limited.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,7 +35,7 @@
  * Changes
  * -------
  * 19-Apr-2007 : Version 1 (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer;
@@ -45,27 +45,27 @@ import org.jfree.data.xy.XYDataset;
 
 /**
  * Utility methods related to the rendering process.
- * 
+ *
  * @since 1.0.6
  */
 public class RendererUtilities {
-    
+
     /**
      * Finds the lower index of the range of live items in the specified data
-     * series.  
-     * 
+     * series.
+     *
      * @param dataset  the dataset (<code>null</code> not permitted).
      * @param series  the series index.
      * @param xLow  the lowest x-value in the live range.
      * @param xHigh  the highest x-value in the live range.
-     * 
+     *
      * @return The index of the required item.
-     * 
+     *
      * @since 1.0.6
-     * 
+     *
      * @see #findLiveItemsUpperBound(XYDataset, int, double, double)
      */
-    public static int findLiveItemsLowerBound(XYDataset dataset, int series, 
+    public static int findLiveItemsLowerBound(XYDataset dataset, int series,
             double xLow, double xHigh) {
         int itemCount = dataset.getItemCount(series);
         if (itemCount <= 1) {
@@ -131,29 +131,29 @@ public class RendererUtilities {
             // range...
             int index = 0;
             // skip any items that don't need including...
-            while (index < itemCount && dataset.getXValue(series, index) 
+            while (index < itemCount && dataset.getXValue(series, index)
                     < xLow) {
                 index++;
             }
             return Math.max(0, index - 1);
         }
     }
-    
+
     /**
      * Finds the index of the item in the specified series that...
-     * 
+     *
      * @param dataset  the dataset (<code>null</code> not permitted).
      * @param series  the series index.
      * @param xLow  the lowest x-value in the live range.
      * @param xHigh  the highest x-value in the live range.
      *
      * @return The index of the required item.
-     * 
+     *
      * @since 1.0.6
-     * 
+     *
      * @see #findLiveItemsLowerBound(XYDataset, int, double, double)
      */
-    public static int findLiveItemsUpperBound(XYDataset dataset, int series, 
+    public static int findLiveItemsUpperBound(XYDataset dataset, int series,
             double xLow, double xHigh) {
         int itemCount = dataset.getItemCount(series);
         if (itemCount <= 1) {
@@ -215,26 +215,26 @@ public class RendererUtilities {
             // range...
             int index = itemCount - 1;
             // skip any items that don't need including...
-            while (index >= 0 && dataset.getXValue(series, index) 
+            while (index >= 0 && dataset.getXValue(series, index)
                     > xHigh) {
                 index--;
             }
             return Math.min(itemCount - 1, index + 1);
         }
     }
-    
+
     /**
      * Finds a range of item indices that is guaranteed to contain all the
      * x-values from x0 to x1 (inclusive).
-     * 
+     *
      * @param dataset  the dataset (<code>null</code> not permitted).
      * @param series  the series index.
      * @param xLow  the lower bound of the x-value range.
      * @param xHigh  the upper bound of the x-value range.
-     * 
+     *
      * @return The indices of the boundary items.
      */
-    public static int[] findLiveItems(XYDataset dataset, int series, 
+    public static int[] findLiveItems(XYDataset dataset, int series,
             double xLow, double xHigh) {
         // here we could probably be a little faster by searching for both
         // indices simultaneously, but I'll look at that later if it seems
