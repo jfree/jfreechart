@@ -2,34 +2,34 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------
  * OutlierList.java
  * ----------------
- * (C) Copyright 2003, 2004, 2007, by David Browning and Contributors.
+ * (C) Copyright 2003-2008, by David Browning and Contributors.
  *
- * Original Author:  David Browning (for Australian Institute of Marine 
+ * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
@@ -41,6 +41,7 @@
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  *
  */
+
 package org.jfree.chart.renderer;
 
 import java.awt.geom.Point2D;
@@ -66,19 +67,19 @@ public class OutlierList {
 
     /** Storage for the outliers. */
     private List outliers;
-    
+
     /** The averaged outlier. */
     private Outlier averagedOutlier;
-    
-    /** 
-     * A flag that indicates whether or not there are multiple outliers in the 
-     * list. 
+
+    /**
+     * A flag that indicates whether or not there are multiple outliers in the
+     * list.
      */
     private boolean multiple = false;
 
     /**
      * Creates a new list containing a single outlier.
-     * 
+     *
      * @param outlier  the outlier.
      */
     public OutlierList(Outlier outlier) {
@@ -88,27 +89,27 @@ public class OutlierList {
 
     /**
      * Adds an outlier to the list.
-     * 
+     *
      * @param outlier  the outlier.
-     * 
+     *
      * @return A boolean.
      */
     public boolean add(Outlier outlier) {
-        return this.outliers.add(outlier);    
+        return this.outliers.add(outlier);
     }
-    
+
     /**
      * Returns the number of outliers in the list.
-     * 
+     *
      * @return The item count.
      */
     public int getItemCount() {
         return this.outliers.size();
     }
-    
+
     /**
-     * Returns the averaged outlier. 
-     * 
+     * Returns the averaged outlier.
+     *
      * @return The averaged outlier.
      */
     public Outlier getAveragedOutlier() {
@@ -117,7 +118,7 @@ public class OutlierList {
 
     /**
      * Sets the averaged outlier.
-     * 
+     *
      * @param averagedOutlier  the averaged outlier.
      */
     public void setAveragedOutlier(Outlier averagedOutlier) {
@@ -125,9 +126,9 @@ public class OutlierList {
     }
 
     /**
-     * Returns <code>true</code> if the list contains multiple outliers, and 
+     * Returns <code>true</code> if the list contains multiple outliers, and
      * <code>false</code> otherwise.
-     * 
+     *
      * @return A boolean.
      */
     public boolean isMultiple() {
@@ -135,9 +136,9 @@ public class OutlierList {
     }
 
     /**
-     * Sets the flag that indicates whether or not this list represents 
+     * Sets the flag that indicates whether or not this list represents
      * multiple outliers.
-     * 
+     *
      * @param multiple  the flag.
      */
     public void setMultiple(boolean multiple) {
@@ -145,11 +146,11 @@ public class OutlierList {
     }
 
     /**
-     * Returns <code>true</code> if the outlier overlaps, and 
+     * Returns <code>true</code> if the outlier overlaps, and
      * <code>false</code> otherwise.
-     * 
+     *
      * @param other  the outlier.
-     * 
+     *
      * @return A boolean.
      */
     public boolean isOverlapped(Outlier other) {
@@ -157,10 +158,10 @@ public class OutlierList {
         if (other == null) {
             return false;
         }
-        
+
         boolean result = other.overlaps(getAveragedOutlier());
         return result;
-        
+
     }
 
     /**
@@ -171,15 +172,14 @@ public class OutlierList {
         double totalXCoords = 0.0;
         double totalYCoords = 0.0;
         int size = getItemCount();
-        for (Iterator iterator = this.outliers.iterator(); 
-             iterator.hasNext();) {
+        for (Iterator iterator = this.outliers.iterator();
+                iterator.hasNext();) {
             Outlier o = (Outlier) iterator.next();
             totalXCoords += o.getX();
             totalYCoords += o.getY();
         }
         getAveragedOutlier().getPoint().setLocation(
-            new Point2D.Double(totalXCoords / size, totalYCoords / size)
-        );
+                new Point2D.Double(totalXCoords / size, totalYCoords / size));
     }
 
 }
