@@ -70,6 +70,7 @@
  * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 05-Nov-2007 : Draw item labels if visible (RW);
+ * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  *
  */
 
@@ -1137,10 +1138,14 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
                     }
                     Paint paint = lookupSeriesPaint(series);
                     Stroke stroke = lookupSeriesStroke(series);
-                    // TODO:  the following hard-coded line needs generalising
-                    Line2D line = new Line2D.Double(-7.0, 0.0, 7.0, 0.0);
+                    Shape line = getLegendLine();
                     result = new LegendItem(label, description,
                             toolTipText, urlText, line, stroke, paint);
+                    result.setLabelFont(lookupLegendTextFont(series));
+                    Paint labelPaint = lookupLegendTextPaint(series);
+                    if (labelPaint != null) {
+                    	result.setLabelPaint(labelPaint);
+                    }
                     result.setDataset(dataset);
                     result.setDatasetIndex(datasetIndex);
                     result.setSeriesKey(dataset.getSeriesKey(series));

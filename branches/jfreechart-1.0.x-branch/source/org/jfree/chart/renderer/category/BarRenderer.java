@@ -82,6 +82,7 @@
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 07-May-2008 : If minimumBarLength is > 0.0, extend the non-base end of the
  *               bar (DG);
+ * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  *
  */
 
@@ -201,6 +202,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         this.negativeItemLabelPositionFallback = null;
         this.gradientPaintTransformer = new StandardGradientPaintTransformer();
         this.minimumBarLength = 0.0;
+        setBaseLegendShape(new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0));
     }
 
     /**
@@ -686,7 +688,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
             urlText = getLegendItemURLGenerator().generateLabel(dataset,
                     series);
         }
-        Shape shape = new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0);
+        Shape shape = lookupLegendShape(series);
         Paint paint = lookupSeriesPaint(series);
         Paint outlinePaint = lookupSeriesOutlinePaint(series);
         Stroke outlineStroke = lookupSeriesOutlineStroke(series);
@@ -695,6 +697,11 @@ public class BarRenderer extends AbstractCategoryItemRenderer
                 urlText, true, shape, true, paint, isDrawBarOutline(),
                 outlinePaint, outlineStroke, false, new Line2D.Float(),
                 new BasicStroke(1.0f), Color.black);
+        result.setLabelFont(lookupLegendTextFont(series));
+        Paint labelPaint = lookupLegendTextPaint(series);
+        if (labelPaint != null) {
+        	result.setLabelPaint(labelPaint);
+        }
         result.setDataset(dataset);
         result.setDatasetIndex(datasetIndex);
         result.setSeriesKey(dataset.getRowKey(series));

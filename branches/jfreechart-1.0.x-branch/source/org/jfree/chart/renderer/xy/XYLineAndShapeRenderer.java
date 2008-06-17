@@ -62,6 +62,7 @@
  *               items that are not displayed (DG);
  * 26-Oct-2007 : Deprecated override attributes (DG);
  * 02-Jun-2008 : Fixed tooltips at lower edges of data area (DG);
+ * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  *
  */
 
@@ -1221,7 +1222,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
                             dataset, series);
                 }
                 boolean shapeIsVisible = getItemShapeVisible(series, 0);
-                Shape shape = lookupSeriesShape(series);
+                Shape shape = lookupLegendShape(series);
                 boolean shapeIsFilled = getItemShapeFilled(series, 0);
                 Paint fillPaint = (this.useFillPaint
                     ? lookupSeriesFillPaint(series)
@@ -1239,6 +1240,11 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
                         fillPaint, shapeOutlineVisible, outlinePaint,
                         outlineStroke, lineVisible, this.legendLine,
                         lineStroke, linePaint);
+                result.setLabelFont(lookupLegendTextFont(series));
+                Paint labelPaint = lookupLegendTextPaint(series);
+                if (labelPaint != null) {
+                	result.setLabelPaint(labelPaint);
+                }
                 result.setSeriesKey(dataset.getSeriesKey(series));
                 result.setSeriesIndex(series);
                 result.setDataset(dataset);

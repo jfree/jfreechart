@@ -70,6 +70,7 @@
  * 14-Feb-2008 : Fix bar position for horizontal chart, see patch
  *               1888422 (RVdS);
  * 27-Mar-2008 : Boxes should use outlinePaint/Stroke settings (DG);
+ * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  *
  */
 
@@ -145,6 +146,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         this.fillBox = true;
         this.itemMargin = 0.20;
         this.maximumBarWidth = 1.0;
+        setBaseLegendShape(new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0));
     }
 
     /**
@@ -288,12 +290,17 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             urlText = getLegendItemURLGenerator().generateLabel(dataset,
                     series);
         }
-        Shape shape = new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0);
+        Shape shape = lookupLegendShape(series);
         Paint paint = lookupSeriesPaint(series);
         Paint outlinePaint = lookupSeriesOutlinePaint(series);
         Stroke outlineStroke = lookupSeriesOutlineStroke(series);
         LegendItem result = new LegendItem(label, description, toolTipText,
                 urlText, shape, paint, outlineStroke, outlinePaint);
+        result.setLabelFont(lookupLegendTextFont(series));
+        Paint labelPaint = lookupLegendTextPaint(series);
+        if (labelPaint != null) {
+        	result.setLabelPaint(labelPaint);
+        }
         result.setDataset(dataset);
         result.setDatasetIndex(datasetIndex);
         result.setSeriesKey(dataset.getRowKey(series));

@@ -47,6 +47,7 @@
  * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
  * 09-Nov-2007 : Added legend shape attribute, plus override for
  *               getLegendItem() (DG);
+ * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  *
  */
 
@@ -305,6 +306,11 @@ public class XYDotRenderer extends AbstractXYItemRenderer
             Paint fillPaint = lookupSeriesPaint(series);
             result = new LegendItem(label, description, toolTipText, urlText,
                     getLegendShape(), fillPaint);
+            result.setLabelFont(lookupLegendTextFont(series));
+            Paint labelPaint = lookupLegendTextPaint(series);
+            if (labelPaint != null) {
+            	result.setLabelPaint(labelPaint);
+            }
             result.setSeriesKey(dataset.getSeriesKey(series));
             result.setSeriesIndex(series);
             result.setDataset(dataset);
