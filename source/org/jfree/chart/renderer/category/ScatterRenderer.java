@@ -36,6 +36,7 @@
  * -------
  * 08-Oct-2007 : Version 1, based on patch 1780779 by David Forslund (DG);
  * 11-Oct-2007 : Renamed ScatterRenderer (DG);
+ * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  *
  */
 
@@ -455,7 +456,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
                 urlText = getLegendItemURLGenerator().generateLabel(
                         dataset, series);
             }
-            Shape shape = lookupSeriesShape(series);
+            Shape shape = lookupLegendShape(series);
             Paint paint = lookupSeriesPaint(series);
             Paint fillPaint = (this.useFillPaint
                     ? getItemFillPaint(series, 0) : paint);
@@ -468,6 +469,11 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
                     fillPaint, shapeOutlineVisible, outlinePaint, outlineStroke,
                     false, new Line2D.Double(-7.0, 0.0, 7.0, 0.0),
                     getItemStroke(series, 0), getItemPaint(series, 0));
+            result.setLabelFont(lookupLegendTextFont(series));
+            Paint labelPaint = lookupLegendTextPaint(series);
+            if (labelPaint != null) {
+            	result.setLabelPaint(labelPaint);
+            }
             result.setDataset(dataset);
             result.setDatasetIndex(datasetIndex);
             result.setSeriesKey(dataset.getRowKey(series));

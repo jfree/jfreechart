@@ -79,6 +79,8 @@
  *               methods (DG);
  * 04-Dec-2007 : Modified hashCode() implementation (DG);
  * 29-Apr-2008 : Minor API doc update (DG);
+ * 17-Jun-2008 : Added legendShape, legendTextFont and legendTextPaint 
+ *               attributes (DG);
  *
  */
 
@@ -109,6 +111,7 @@ import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.title.LegendTitle;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.BooleanList;
@@ -420,6 +423,51 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     private boolean baseCreateEntities;
 
+    /**
+     * The per-series legend shape settings.
+     *
+     * @since 1.0.11
+     */
+    private ShapeList legendShape;
+
+    /**
+     * The base shape for legend items.  If this is <code>null</code>, the
+     * series shape will be used.
+     *
+     * @since 1.0.11
+     */
+    private transient Shape baseLegendShape;
+
+    /**
+     * The per-series legend text font.
+     *
+     * @since 1.0.11
+     */
+    private ObjectList legendTextFont;
+
+    /**
+     * The base legend font.
+     *
+     * @since 1.0.11
+     */
+    private Font baseLegendTextFont;
+
+    /**
+     * The per series legend text paint settings.
+     *
+     * @since 1.0.11
+     */
+    private PaintList legendTextPaint;
+
+    /**
+     * The default paint for the legend text items (if this is
+     * <code>null</code>, the {@link LegendTitle} class will determine the
+     * text paint to use.
+     *
+     * @since 1.0.11
+     */
+    private transient Paint baseLegendTextPaint;
+
     /** Storage for registered change listeners. */
     private transient EventListenerList listenerList;
 
@@ -494,6 +542,15 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.createEntities = null;
         this.createEntitiesList = new BooleanList();
         this.baseCreateEntities = true;
+
+        this.legendShape = new ShapeList();
+        this.baseLegendShape = null;
+
+        this.legendTextFont = new ObjectList();
+        this.baseLegendTextFont = null;
+
+        this.legendTextPaint = new PaintList();
+        this.baseLegendTextPaint = null;
 
         this.listenerList = new EventListenerList();
 
@@ -3080,6 +3137,222 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         }
     }
 
+    /**
+     * Performs a lookup for the legend shape.
+     *
+     * @param series  the series index.
+     *
+     * @return The shape (possibly <code>null</code>).
+     *
+     * @since 1.0.11
+     */
+    public Shape lookupLegendShape(int series) {
+        Shape result = getLegendShape(series);
+        if (result == null) {
+        	result = this.baseLegendShape;
+        }
+        if (result == null) {
+        	result = lookupSeriesShape(series);
+        }
+        return result;
+    }
+
+    /**
+     * Returns the legend shape defined for the specified series (possibly
+     * <code>null</code>).
+     *
+     * @param series  the series index.
+     *
+     * @return The shape (possibly <code>null</code>).
+     *
+     * @see #lookupLegendShape(int)
+     *
+     * @since 1.0.11
+     */
+    public Shape getLegendShape(int series) {
+    	return this.legendShape.getShape(series);
+    }
+
+    /**
+     * Sets the shape used for the legend item for the specified series, and
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param series  the series index.
+     * @param shape  the shape (<code>null</code> permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setLegendShape(int series, Shape shape) {
+    	this.legendShape.setShape(series, shape);
+    	fireChangeEvent();
+    }
+
+    /**
+     * Returns the default legend shape, which may be <code>null</code>.
+     *
+     * @return The default legend shape.
+     *
+     * @since 1.0.11
+     */
+    public Shape getBaseLegendShape() {
+    	return this.baseLegendShape;
+    }
+
+    /**
+     * Sets the default legend shape and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param shape  the shape (<code>null</code> permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setBaseLegendShape(Shape shape) {
+    	this.baseLegendShape = shape;
+    	fireChangeEvent();
+    }
+
+    /**
+     * Performs a lookup for the legend text font.
+     *
+     * @param series  the series index.
+     *
+     * @return The font (possibly <code>null</code>).
+     *
+     * @since 1.0.11
+     */
+    public Font lookupLegendTextFont(int series) {
+        Font result = getLegendTextFont(series);
+        if (result == null) {
+        	result = this.baseLegendTextFont;
+        }
+        return result;
+    }
+
+    /**
+     * Returns the legend text font defined for the specified series (possibly
+     * <code>null</code>).
+     *
+     * @param series  the series index.
+     *
+     * @return The font (possibly <code>null</code>).
+     *
+     * @see #lookupLegendTextFont(int)
+     *
+     * @since 1.0.11
+     */
+    public Font getLegendTextFont(int series) {
+    	return (Font) this.legendTextFont.get(series);
+    }
+
+    /**
+     * Sets the font used for the legend text for the specified series, and
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param series  the series index.
+     * @param font  the font (<code>null</code> permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setLegendTextFont(int series, Font font) {
+    	this.legendTextFont.set(series, font);
+    	fireChangeEvent();
+    }
+
+    /**
+     * Returns the default legend text font, which may be <code>null</code>.
+     *
+     * @return The default legend text font.
+     *
+     * @since 1.0.11
+     */
+    public Font getBaseLegendTextFont() {
+    	return this.baseLegendTextFont;
+    }
+
+    /**
+     * Sets the default legend text font and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param font  the font (<code>null</code> permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setBaseLegendTextFont(Font font) {
+    	this.baseLegendTextFont = font;
+    	fireChangeEvent();
+    }
+
+    /**
+     * Performs a lookup for the legend text paint.
+     *
+     * @param series  the series index.
+     *
+     * @return The paint (possibly <code>null</code>).
+     *
+     * @since 1.0.11
+     */
+    public Paint lookupLegendTextPaint(int series) {
+        Paint result = getLegendTextPaint(series);
+        if (result == null) {
+        	result = this.baseLegendTextPaint;
+        }
+        return result;
+    }
+
+    /**
+     * Returns the legend text paint defined for the specified series (possibly
+     * <code>null</code>).
+     *
+     * @param series  the series index.
+     *
+     * @return The paint (possibly <code>null</code>).
+     *
+     * @see #lookupLegendTextPaint(int)
+     *
+     * @since 1.0.11
+     */
+    public Paint getLegendTextPaint(int series) {
+    	return this.legendTextPaint.getPaint(series);
+    }
+
+    /**
+     * Sets the paint used for the legend text for the specified series, and
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param series  the series index.
+     * @param paint  the paint (<code>null</code> permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setLegendTextPaint(int series, Paint paint) {
+    	this.legendTextPaint.setPaint(series, paint);
+    	fireChangeEvent();
+    }
+
+    /**
+     * Returns the default legend text paint, which may be <code>null</code>.
+     *
+     * @return The default legend text paint.
+     *
+     * @since 1.0.11
+     */
+    public Paint getBaseLegendTextPaint() {
+    	return this.baseLegendTextPaint;
+    }
+
+    /**
+     * Sets the default legend text paint and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param paint  the paint (<code>null</code> permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setBaseLegendTextPaint(Paint paint) {
+    	this.baseLegendTextPaint = paint;
+    	fireChangeEvent();
+    }
+
     /** The adjacent offset. */
     private static final double ADJ = Math.cos(Math.PI / 6.0);
 
@@ -3449,6 +3722,28 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (this.baseCreateEntities != that.baseCreateEntities) {
             return false;
         }
+        if (!ObjectUtilities.equal(this.legendShape, that.legendShape)) {
+        	return false;
+        }
+        if (!ShapeUtilities.equal(this.baseLegendShape,
+        		that.baseLegendShape)) {
+        	return false;
+        }
+        if (!ObjectUtilities.equal(this.legendTextFont, that.legendTextFont)) {
+        	return false;
+        }
+        if (!ObjectUtilities.equal(this.baseLegendTextFont,
+        		that.baseLegendTextFont)) {
+        	return false;
+        }
+        if (!ObjectUtilities.equal(this.legendTextPaint,
+        		that.legendTextPaint)) {
+            return false;
+        }
+        if (!PaintUtilities.equal(this.baseLegendTextPaint,
+        		that.baseLegendTextPaint)) {
+            return false;
+        }
         return true;
     }
 
@@ -3589,6 +3884,16 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
             clone.createEntitiesList
                     = (BooleanList) this.createEntitiesList.clone();
         }
+
+        if (this.legendShape != null) {
+        	clone.legendShape = (ShapeList) this.legendShape.clone();
+        }
+        if (this.legendTextFont != null) {
+        	clone.legendTextFont = (ObjectList) this.legendTextFont.clone();
+        }
+        if (this.legendTextPaint != null) {
+        	clone.legendTextPaint = (PaintList) this.legendTextPaint.clone();
+        }
         clone.listenerList = new EventListenerList();
         clone.event = null;
         return clone;
@@ -3618,6 +3923,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         SerialUtilities.writeShape(this.baseShape, stream);
         SerialUtilities.writePaint(this.itemLabelPaint, stream);
         SerialUtilities.writePaint(this.baseItemLabelPaint, stream);
+        SerialUtilities.writeShape(this.baseLegendShape, stream);
+        SerialUtilities.writePaint(this.baseLegendTextPaint, stream);
 
     }
 
@@ -3647,6 +3954,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.baseShape = SerialUtilities.readShape(stream);
         this.itemLabelPaint = SerialUtilities.readPaint(stream);
         this.baseItemLabelPaint = SerialUtilities.readPaint(stream);
+        this.baseLegendShape = SerialUtilities.readShape(stream);
+        this.baseLegendTextPaint = SerialUtilities.readPaint(stream);
 
         // listeners are not restored automatically, but storage must be
         // provided...

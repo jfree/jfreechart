@@ -39,6 +39,7 @@
  * 13-Dec-2006 : Extended testEquals() for new fillPaintTransformer
  *               attribute (DG);
  * 23-Apr-2008 : Implemented Cloneable (DG);
+ * 17-Jun-2008 : Included new fields in existing tests (DG);
  *
  */
 
@@ -47,6 +48,7 @@ package org.jfree.chart.junit;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GradientPaint;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -287,6 +289,43 @@ public class LegendItemTests extends TestCase {
         item2.setFillPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
         assertTrue(item1.equals(item2));
+
+        // labelFont
+        item1.setLabelFont(new Font("Dialog", Font.PLAIN, 13));
+        assertFalse(item1.equals(item2));
+        item2.setLabelFont(new Font("Dialog", Font.PLAIN, 13));
+        assertTrue(item1.equals(item2));
+
+        // labelPaint
+        item1.setLabelPaint(Color.red);
+        assertFalse(item1.equals(item2));
+        item2.setLabelPaint(Color.red);
+        assertTrue(item1.equals(item2));
+
+        // fillPaint
+        item1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.green, 3.0f,
+        		4.0f, Color.blue));
+        assertFalse(item1.equals(item2));
+        item2.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.green, 3.0f,
+        		4.0f, Color.blue));
+        assertTrue(item1.equals(item2));
+
+        // outlinePaint
+        item1.setOutlinePaint(new GradientPaint(1.1f, 2.2f, Color.green, 3.3f,
+        		4.4f, Color.blue));
+        assertFalse(item1.equals(item2));
+        item2.setOutlinePaint(new GradientPaint(1.1f, 2.2f, Color.green, 3.3f,
+        		4.4f, Color.blue));
+        assertTrue(item1.equals(item2));
+
+        // linePaint
+        item1.setLinePaint(new GradientPaint(0.1f, 0.2f, Color.green, 0.3f,
+        		0.4f, Color.blue));
+        assertFalse(item1.equals(item2));
+        item2.setLinePaint(new GradientPaint(0.1f, 0.2f, Color.green, 0.3f,
+        		0.4f, Color.blue));
+        assertTrue(item1.equals(item2));
+
     }
 
     /**
@@ -295,7 +334,14 @@ public class LegendItemTests extends TestCase {
     public void testSerialization() {
         LegendItem item1 = new LegendItem("Item", "Description",
                 "ToolTip", "URL",
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.red);
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), new GradientPaint(
+                		5.0f, 6.0f, Color.blue, 7.0f, 8.0f, Color.gray));
+        item1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
+        		4.0f, Color.yellow));
+        item1.setOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.green, 2.0f,
+        		1.0f, Color.red));
+        item1.setLinePaint(new GradientPaint(1.0f, 2.0f, Color.white, 3.0f,
+        		4.0f, Color.red));
         LegendItem item2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -311,7 +357,7 @@ public class LegendItemTests extends TestCase {
         catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(item1, item2);
+        assertTrue(item1.equals(item2));
     }
 
     /**

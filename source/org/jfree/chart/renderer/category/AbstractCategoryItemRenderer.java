@@ -93,6 +93,7 @@
  *               itemLabelGenerator, toolTipGenerator and itemURLGenerator
  *               override fields (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
+ * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  *
  */
 
@@ -1167,13 +1168,18 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             urlText = this.legendItemURLGenerator.generateLabel(dataset,
                     series);
         }
-        Shape shape = lookupSeriesShape(series);
+        Shape shape = lookupLegendShape(series);
         Paint paint = lookupSeriesPaint(series);
         Paint outlinePaint = lookupSeriesOutlinePaint(series);
         Stroke outlineStroke = lookupSeriesOutlineStroke(series);
 
         LegendItem item = new LegendItem(label, description, toolTipText,
                 urlText, shape, paint, outlineStroke, outlinePaint);
+        item.setLabelFont(lookupLegendTextFont(series));
+        Paint labelPaint = lookupLegendTextPaint(series);
+        if (labelPaint != null) {
+        	item.setLabelPaint(labelPaint);
+        }
         item.setSeriesKey(dataset.getRowKey(series));
         item.setSeriesIndex(series);
         item.setDataset(dataset);

@@ -55,6 +55,7 @@
  * 18-May-2007 : Added dataset and seriesKey fields (DG);
  * 03-Aug-2007 : Fixed null pointer exception (DG);
  * 23-Apr-2008 : Added new constructor and implemented Cloneable (DG);
+ * 17-Jun-2008 : Added optional labelFont and labelPaint attributes (DG);
  *
  */
 
@@ -62,6 +63,7 @@ package org.jfree.chart;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
@@ -80,6 +82,7 @@ import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.StandardGradientPaintTransformer;
 import org.jfree.util.AttributedStringUtilities;
 import org.jfree.util.ObjectUtilities;
+import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.ShapeUtilities;
 
@@ -114,6 +117,20 @@ public class LegendItem implements Cloneable, Serializable {
 
     /** The label. */
     private String label;
+
+    /**
+     * The label font (<code>null</code> is permitted).
+     *
+     * @since 1.0.11
+     */
+    private Font labelFont;
+
+    /**
+     * The label paint (<code>null</code> is permitted).
+     *
+     * @since 1.0.11
+     */
+    private transient Paint labelPaint;
 
     /** The attributed label (if null, fall back to the regular label). */
     private transient AttributedString attributedLabel;
@@ -321,6 +338,7 @@ public class LegendItem implements Cloneable, Serializable {
                     "Null 'outlineStroke' argument.");
         }
         this.label = label;
+        this.labelPaint = null;
         this.attributedLabel = null;
         this.description = description;
         this.shapeVisible = shapeVisible;
@@ -411,8 +429,7 @@ public class LegendItem implements Cloneable, Serializable {
                 /* shape visible = */ false, UNUSED_SHAPE,
                 /* shape filled = */ false, Color.black,
                 /* shape outlined = */ false, Color.black, UNUSED_STROKE,
-                /* line visible = */ true, line, lineStroke, linePaint
-        );
+                /* line visible = */ true, line, lineStroke, linePaint);
     }
 
     /**
@@ -622,6 +639,50 @@ public class LegendItem implements Cloneable, Serializable {
     }
 
     /**
+     * Returns the label font.
+     *
+     * @return The label font (possibly <code>null</code>).
+     *
+     * @since 1.0.11
+     */
+    public Font getLabelFont() {
+    	return this.labelFont;
+    }
+
+    /**
+     * Sets the label font.
+     *
+     * @param font  the font (<code>null</code> permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setLabelFont(Font font) {
+    	this.labelFont = font;
+    }
+
+    /**
+     * Returns the paint used to draw the label.
+     *
+     * @return The paint (possibly <code>null</code>).
+     *
+     * @since 1.0.11
+     */
+    public Paint getLabelPaint() {
+    	return this.labelPaint;
+    }
+
+    /**
+     * Sets the paint used to draw the label.
+     *
+     * @param paint  the paint (<code>null</code> permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setLabelPaint(Paint paint) {
+    	this.labelPaint = paint;
+    }
+
+    /**
      * Returns the attributed label.
      *
      * @return The attributed label (possibly <code>null</code>).
@@ -695,6 +756,20 @@ public class LegendItem implements Cloneable, Serializable {
     }
 
     /**
+     * Sets the fill paint.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setFillPaint(Paint paint) {
+    	if (paint == null) {
+    		throw new IllegalArgumentException("Null 'paint' argument.");
+    	}
+    	this.fillPaint = paint;
+    }
+
+    /**
      * Returns the flag that controls whether or not the shape outline
      * is visible.
      *
@@ -716,10 +791,24 @@ public class LegendItem implements Cloneable, Serializable {
     /**
      * Returns the paint used for lines.
      *
-     * @return The paint.
+     * @return The paint (never <code>null</code>).
      */
     public Paint getLinePaint() {
         return this.linePaint;
+    }
+
+    /**
+     * Sets the line paint.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setLinePaint(Paint paint) {
+    	if (paint == null) {
+    		throw new IllegalArgumentException("Null 'paint' argument.");
+    	}
+    	this.linePaint = paint;
     }
 
     /**
@@ -729,6 +818,20 @@ public class LegendItem implements Cloneable, Serializable {
      */
     public Paint getOutlinePaint() {
         return this.outlinePaint;
+    }
+
+    /**
+     * Sets the outline paint.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setOutlinePaint(Paint paint) {
+    	if (paint == null) {
+    		throw new IllegalArgumentException("Null 'paint' argument.");
+    	}
+    	this.outlinePaint = paint;
     }
 
     /**
@@ -829,7 +932,7 @@ public class LegendItem implements Cloneable, Serializable {
         if (this.shapeFilled != that.shapeFilled) {
             return false;
         }
-        if (!this.fillPaint.equals(that.fillPaint)) {
+        if (!PaintUtilities.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.fillPaintTransformer,
@@ -842,7 +945,7 @@ public class LegendItem implements Cloneable, Serializable {
         if (!this.outlineStroke.equals(that.outlineStroke)) {
             return false;
         }
-        if (!this.outlinePaint.equals(that.outlinePaint)) {
+        if (!PaintUtilities.equal(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
         if (!this.lineVisible == that.lineVisible) {
@@ -854,8 +957,14 @@ public class LegendItem implements Cloneable, Serializable {
         if (!this.lineStroke.equals(that.lineStroke)) {
             return false;
         }
-        if (!this.linePaint.equals(that.linePaint)) {
+        if (!PaintUtilities.equal(this.linePaint, that.linePaint)) {
             return false;
+        }
+        if (!ObjectUtilities.equal(this.labelFont, that.labelFont)) {
+        	return false;
+        }
+        if (!PaintUtilities.equal(this.labelPaint, that.labelPaint)) {
+        	return false;
         }
         return true;
     }
@@ -903,6 +1012,7 @@ public class LegendItem implements Cloneable, Serializable {
         SerialUtilities.writeShape(this.line, stream);
         SerialUtilities.writeStroke(this.lineStroke, stream);
         SerialUtilities.writePaint(this.linePaint, stream);
+        SerialUtilities.writePaint(this.labelPaint, stream);
     }
 
     /**
@@ -924,6 +1034,7 @@ public class LegendItem implements Cloneable, Serializable {
         this.line = SerialUtilities.readShape(stream);
         this.lineStroke = SerialUtilities.readStroke(stream);
         this.linePaint = SerialUtilities.readPaint(stream);
+        this.labelPaint = SerialUtilities.readPaint(stream);
     }
 
 }

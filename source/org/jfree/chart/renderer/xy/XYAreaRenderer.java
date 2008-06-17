@@ -73,6 +73,7 @@
  * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
  * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
+ * 17-Jun-2008 : Apply legend font and paint attributes (DG);
  *
  */
 
@@ -374,6 +375,11 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
                 Paint paint = lookupSeriesPaint(series);
                 result = new LegendItem(label, description, toolTipText,
                         urlText, this.legendArea, paint);
+                result.setLabelFont(lookupLegendTextFont(series));
+                Paint labelPaint = lookupLegendTextPaint(series);
+                if (labelPaint != null) {
+                	result.setLabelPaint(labelPaint);
+                }
                 result.setDataset(dataset);
                 result.setDatasetIndex(datasetIndex);
                 result.setSeriesKey(dataset.getSeriesKey(series));

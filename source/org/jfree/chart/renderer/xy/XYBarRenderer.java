@@ -90,6 +90,7 @@
  *               axes, thanks to Marc van Glabbeek (DG);
  * 12-Nov-2007 : Fixed NPE in drawItemLabel() method, thanks to Richard West
  *               (see patch 1827829) (DG);
+ * 17-Jun-2008 : Apply legend font and paint attributes (DG);
  *
  */
 
@@ -521,6 +522,11 @@ public class XYBarRenderer extends AbstractXYItemRenderer
                 else {
                     result = new LegendItem(label, description, toolTipText,
                             urlText, shape, paint);
+                }
+                result.setLabelFont(lookupLegendTextFont(series));
+                Paint labelPaint = lookupLegendTextPaint(series);
+                if (labelPaint != null) {
+                	result.setLabelPaint(labelPaint);
                 }
                 result.setDataset(dataset);
                 result.setDatasetIndex(datasetIndex);

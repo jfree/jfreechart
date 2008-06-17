@@ -57,6 +57,7 @@
  * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 13-Jun-2007 : Fixed seriesVisibility bug (DG);
+ * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  *
  */
 
@@ -137,6 +138,7 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
             throw new IllegalArgumentException("Invalid 'scaleType'.");
         }
         this.scaleType = scaleType;
+        setBaseLegendShape(new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0));
     }
 
     /**
@@ -302,12 +304,17 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
                     urlText = getLegendItemURLGenerator().generateLabel(
                             dataset, series);
                 }
-                Shape shape = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
+                Shape shape = lookupLegendShape(series);
                 Paint paint = lookupSeriesPaint(series);
                 Paint outlinePaint = lookupSeriesOutlinePaint(series);
                 Stroke outlineStroke = lookupSeriesOutlineStroke(series);
                 result = new LegendItem(label, description, toolTipText,
                         urlText, shape, paint, outlineStroke, outlinePaint);
+                result.setLabelFont(lookupLegendTextFont(series));
+                Paint labelPaint = lookupLegendTextPaint(series);
+                if (labelPaint != null) {
+                	result.setLabelPaint(labelPaint);
+                }
                 result.setDataset(dataset);
                 result.setDatasetIndex(datasetIndex);
                 result.setSeriesKey(dataset.getSeriesKey(series));

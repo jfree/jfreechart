@@ -103,6 +103,7 @@
  * 08-Jun-2007 : Fixed bug in entity creation (DG);
  * 21-Nov-2007 : Deprecated override flag methods (DG);
  * 02-Jun-2008 : Fixed tooltips for data items at lower edges of data area (DG);
+ * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  *
  */
 
@@ -665,7 +666,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
                     urlText = getLegendItemURLGenerator().generateLabel(
                             dataset, series);
                 }
-                Shape shape = lookupSeriesShape(series);
+                Shape shape = lookupLegendShape(series);
                 boolean shapeFilled = getItemShapeFilled(series, 0);
                 Paint paint = lookupSeriesPaint(series);
                 Paint linePaint = paint;
@@ -674,6 +675,11 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
                         urlText, this.baseShapesVisible, shape, shapeFilled,
                         paint, !shapeFilled, paint, lineStroke,
                         this.plotLines, this.legendLine, lineStroke, linePaint);
+                result.setLabelFont(lookupLegendTextFont(series));
+                Paint labelPaint = lookupLegendTextPaint(series);
+                if (labelPaint != null) {
+                	result.setLabelPaint(labelPaint);
+                }
                 result.setDataset(dataset);
                 result.setDatasetIndex(datasetIndex);
                 result.setSeriesKey(dataset.getSeriesKey(series));

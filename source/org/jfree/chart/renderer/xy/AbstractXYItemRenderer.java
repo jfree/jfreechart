@@ -104,6 +104,7 @@
  * 14-May-2008 : Updated addEntity() method to take plot orientation into
  *               account when the incoming area is null (DG);
  * 02-Jun-2008 : Added isPointInRect() method (DG);
+ * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  *
  */
 
@@ -792,12 +793,17 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                     urlText = getLegendItemURLGenerator().generateLabel(
                             dataset, series);
                 }
-                Shape shape = lookupSeriesShape(series);
+                Shape shape = lookupLegendShape(series);
                 Paint paint = lookupSeriesPaint(series);
                 Paint outlinePaint = lookupSeriesOutlinePaint(series);
                 Stroke outlineStroke = lookupSeriesOutlineStroke(series);
                 result = new LegendItem(label, description, toolTipText,
                         urlText, shape, paint, outlineStroke, outlinePaint);
+                Paint labelPaint = lookupLegendTextPaint(series);
+                result.setLabelFont(lookupLegendTextFont(series));
+                if (labelPaint != null) {
+                	result.setLabelPaint(labelPaint);
+                }
                 result.setSeriesKey(dataset.getSeriesKey(series));
                 result.setSeriesIndex(series);
                 result.setDataset(dataset);
