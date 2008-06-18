@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------
  * XYPointerAnnotation.java
  * ------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,7 +43,7 @@
  * 29-Sep-2004 : Changes to draw() method signature (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 20-Feb-2006 : Correction for equals() method (fixes bug 1435160) (DG);
- * 12-Jul-2006 : Fix drawing for PlotOrientation.HORIZONTAL, thanks to 
+ * 12-Jul-2006 : Fix drawing for PlotOrientation.HORIZONTAL, thanks to
  *               Skunk (DG);
  *
  */
@@ -76,52 +76,51 @@ import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
- * An arrow and label that can be placed on an 
- * {@link org.jfree.chart.plot.XYPlot}.  The arrow is drawn at a user-definable 
- * angle so that it points towards the (x, y) location for the annotation.  
+ * An arrow and label that can be placed on an
+ * {@link org.jfree.chart.plot.XYPlot}.  The arrow is drawn at a user-definable
+ * angle so that it points towards the (x, y) location for the annotation.
  * <p>
- * The arrow length (and its offset from the (x, y) location) is controlled by 
- * the tip radius and the base radius attributes.  Imagine two circles around 
- * the (x, y) coordinate: the inner circle defined by the tip radius, and the 
- * outer circle defined by the base radius.  Now, draw the arrow starting at 
- * some point on the outer circle (the point is determined by the angle), with 
+ * The arrow length (and its offset from the (x, y) location) is controlled by
+ * the tip radius and the base radius attributes.  Imagine two circles around
+ * the (x, y) coordinate: the inner circle defined by the tip radius, and the
+ * outer circle defined by the base radius.  Now, draw the arrow starting at
+ * some point on the outer circle (the point is determined by the angle), with
  * the arrow tip being drawn at a corresponding point on the inner circle.
  *
  */
-public class XYPointerAnnotation extends XYTextAnnotation 
-                                 implements Cloneable, PublicCloneable, 
-                                            Serializable {
+public class XYPointerAnnotation extends XYTextAnnotation
+        implements Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -4031161445009858551L;
-    
+
     /** The default tip radius (in Java2D units). */
     public static final double DEFAULT_TIP_RADIUS = 10.0;
-    
+
     /** The default base radius (in Java2D units). */
     public static final double DEFAULT_BASE_RADIUS = 30.0;
-    
+
     /** The default label offset (in Java2D units). */
     public static final double DEFAULT_LABEL_OFFSET = 3.0;
-    
+
     /** The default arrow length (in Java2D units). */
     public static final double DEFAULT_ARROW_LENGTH = 5.0;
 
     /** The default arrow width (in Java2D units). */
     public static final double DEFAULT_ARROW_WIDTH = 3.0;
-    
+
     /** The angle of the arrow's line (in radians). */
     private double angle;
 
-    /** 
-     * The radius from the (x, y) point to the tip of the arrow (in Java2D 
-     * units). 
+    /**
+     * The radius from the (x, y) point to the tip of the arrow (in Java2D
+     * units).
      */
     private double tipRadius;
 
-    /** 
-     * The radius from the (x, y) point to the start of the arrow line (in 
-     * Java2D units). 
+    /**
+     * The radius from the (x, y) point to the start of the arrow line (in
+     * Java2D units).
      */
     private double baseRadius;
 
@@ -130,13 +129,13 @@ public class XYPointerAnnotation extends XYTextAnnotation
 
     /** The arrow width (in Java2D units, per side). */
     private double arrowWidth;
-    
+
     /** The arrow stroke. */
     private transient Stroke arrowStroke;
 
     /** The arrow paint. */
     private transient Paint arrowPaint;
-    
+
     /** The radius from the base point to the anchor point for the label. */
     private double labelOffset;
 
@@ -161,67 +160,67 @@ public class XYPointerAnnotation extends XYTextAnnotation
         this.arrowPaint = Color.black;
 
     }
-    
+
     /**
      * Returns the angle of the arrow.
-     * 
+     *
      * @return The angle (in radians).
-     * 
+     *
      * @see #setAngle(double)
      */
     public double getAngle() {
         return this.angle;
     }
-    
+
     /**
      * Sets the angle of the arrow.
-     * 
+     *
      * @param angle  the angle (in radians).
-     * 
+     *
      * @see #getAngle()
      */
     public void setAngle(double angle) {
         this.angle = angle;
     }
-    
+
     /**
      * Returns the tip radius.
-     * 
+     *
      * @return The tip radius (in Java2D units).
-     * 
+     *
      * @see #setTipRadius(double)
      */
     public double getTipRadius() {
         return this.tipRadius;
     }
-    
+
     /**
      * Sets the tip radius.
-     * 
+     *
      * @param radius  the radius (in Java2D units).
-     * 
+     *
      * @see #getTipRadius()
      */
     public void setTipRadius(double radius) {
         this.tipRadius = radius;
     }
-    
+
     /**
      * Returns the base radius.
-     * 
+     *
      * @return The base radius (in Java2D units).
-     * 
+     *
      * @see #setBaseRadius(double)
      */
     public double getBaseRadius() {
         return this.baseRadius;
     }
-    
+
     /**
      * Sets the base radius.
-     * 
+     *
      * @param radius  the radius (in Java2D units).
-     * 
+     *
      * @see #getBaseRadius()
      */
     public void setBaseRadius(double radius) {
@@ -230,43 +229,43 @@ public class XYPointerAnnotation extends XYTextAnnotation
 
     /**
      * Returns the label offset.
-     * 
+     *
      * @return The label offset (in Java2D units).
-     * 
+     *
      * @see #setLabelOffset(double)
      */
     public double getLabelOffset() {
         return this.labelOffset;
     }
-    
+
     /**
-     * Sets the label offset (from the arrow base, continuing in a straight 
+     * Sets the label offset (from the arrow base, continuing in a straight
      * line, in Java2D units).
-     * 
+     *
      * @param offset  the offset (in Java2D units).
-     * 
+     *
      * @see #getLabelOffset()
      */
     public void setLabelOffset(double offset) {
         this.labelOffset = offset;
     }
-    
+
     /**
      * Returns the arrow length.
-     * 
+     *
      * @return The arrow length.
-     * 
+     *
      * @see #setArrowLength(double)
      */
     public double getArrowLength() {
         return this.arrowLength;
     }
-    
+
     /**
      * Sets the arrow length.
-     * 
+     *
      * @param length  the length.
-     * 
+     *
      * @see #getArrowLength()
      */
     public void setArrowLength(double length) {
@@ -275,42 +274,42 @@ public class XYPointerAnnotation extends XYTextAnnotation
 
     /**
      * Returns the arrow width.
-     * 
+     *
      * @return The arrow width (in Java2D units).
-     * 
+     *
      * @see #setArrowWidth(double)
      */
     public double getArrowWidth() {
         return this.arrowWidth;
     }
-    
+
     /**
      * Sets the arrow width.
-     * 
+     *
      * @param width  the width (in Java2D units).
-     * 
+     *
      * @see #getArrowWidth()
      */
     public void setArrowWidth(double width) {
         this.arrowWidth = width;
     }
-    
-    /** 
+
+    /**
      * Returns the stroke used to draw the arrow line.
-     * 
+     *
      * @return The arrow stroke (never <code>null</code>).
-     * 
+     *
      * @see #setArrowStroke(Stroke)
      */
     public Stroke getArrowStroke() {
         return this.arrowStroke;
     }
 
-    /** 
+    /**
      * Sets the stroke used to draw the arrow line.
-     * 
+     *
      * @param stroke  the stroke (<code>null</code> not permitted).
-     * 
+     *
      * @see #getArrowStroke()
      */
     public void setArrowStroke(Stroke stroke) {
@@ -319,23 +318,23 @@ public class XYPointerAnnotation extends XYTextAnnotation
         }
         this.arrowStroke = stroke;
     }
-    
+
     /**
      * Returns the paint used for the arrow.
-     * 
+     *
      * @return The arrow paint (never <code>null</code>).
-     * 
+     *
      * @see #setArrowPaint(Paint)
      */
     public Paint getArrowPaint() {
         return this.arrowPaint;
     }
-    
+
     /**
      * Sets the paint used for the arrow.
-     * 
+     *
      * @param paint  the arrow paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getArrowPaint()
      */
     public void setArrowPaint(Paint paint) {
@@ -344,7 +343,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
         }
         this.arrowPaint = paint;
     }
-    
+
     /**
      * Draws the annotation.
      *
@@ -357,7 +356,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      * @param info  the plot rendering info.
      */
     public void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
-                     ValueAxis domainAxis, ValueAxis rangeAxis, 
+                     ValueAxis domainAxis, ValueAxis rangeAxis,
                      int rendererIndex,
                      PlotRenderingInfo info) {
 
@@ -382,14 +381,14 @@ public class XYPointerAnnotation extends XYTextAnnotation
         double arrowBaseX = endX + Math.cos(this.angle) * this.arrowLength;
         double arrowBaseY = endY + Math.sin(this.angle) * this.arrowLength;
 
-        double arrowLeftX = arrowBaseX 
+        double arrowLeftX = arrowBaseX
             + Math.cos(this.angle + Math.PI / 2.0) * this.arrowWidth;
-        double arrowLeftY = arrowBaseY 
+        double arrowLeftY = arrowBaseY
             + Math.sin(this.angle + Math.PI / 2.0) * this.arrowWidth;
 
-        double arrowRightX = arrowBaseX 
+        double arrowRightX = arrowBaseX
             - Math.cos(this.angle + Math.PI / 2.0) * this.arrowWidth;
-        double arrowRightY = arrowBaseY 
+        double arrowRightY = arrowBaseY
             - Math.sin(this.angle + Math.PI / 2.0) * this.arrowWidth;
 
         GeneralPath arrow = new GeneralPath();
@@ -407,11 +406,11 @@ public class XYPointerAnnotation extends XYTextAnnotation
         // draw the label
         g2.setFont(getFont());
         g2.setPaint(getPaint());
-        double labelX = j2DX 
+        double labelX = j2DX
             + Math.cos(this.angle) * (this.baseRadius + this.labelOffset);
-        double labelY = j2DY 
+        double labelY = j2DY
             + Math.sin(this.angle) * (this.baseRadius + this.labelOffset);
-        Rectangle2D hotspot = TextUtilities.drawAlignedString(getText(), 
+        Rectangle2D hotspot = TextUtilities.drawAlignedString(getText(),
                 g2, (float) labelX, (float) labelY, getTextAnchor());
 
         String toolTip = getToolTipText();
@@ -419,14 +418,14 @@ public class XYPointerAnnotation extends XYTextAnnotation
         if (toolTip != null || url != null) {
             addEntity(info, hotspot, rendererIndex, toolTip, url);
         }
-        
+
     }
-    
+
     /**
      * Tests this annotation for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return <code>true</code> or <code>false</code>.
      */
     public boolean equals(Object obj) {
@@ -466,10 +465,10 @@ public class XYPointerAnnotation extends XYTextAnnotation
         }
         return true;
     }
-    
+
     /**
      * Returns a hash code for this instance.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -490,12 +489,12 @@ public class XYPointerAnnotation extends XYTextAnnotation
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         return super.hashCode();
     }
-    
+
     /**
      * Returns a clone of the annotation.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException  if the annotation can't be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
@@ -523,7 +522,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.arrowPaint = SerialUtilities.readPaint(stream);
