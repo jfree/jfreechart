@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------
  * PaintScaleLegendTests.java
  * --------------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -87,51 +87,51 @@ public class PaintScaleLegendTests extends TestCase {
      * Test that the equals() method distinguishes all fields.
      */
     public void testEquals() {
-        
+
         // default instances
-        PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(), 
+        PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
-        PaintScaleLegend l2 = new PaintScaleLegend(new GrayPaintScale(), 
+        PaintScaleLegend l2 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
         assertTrue(l1.equals(l2));
         assertTrue(l2.equals(l1));
-        
+
         // paintScale
         l1.setScale(new LookupPaintScale());
         assertFalse(l1.equals(l2));
         l2.setScale(new LookupPaintScale());
         assertTrue(l1.equals(l2));
-        
+
         // axis
         l1.setAxis(new NumberAxis("Axis 2"));
         assertFalse(l1.equals(l2));
         l2.setAxis(new NumberAxis("Axis 2"));
         assertTrue(l1.equals(l2));
-        
+
         // axisLocation
         l1.setAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
         assertFalse(l1.equals(l2));
         l2.setAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
         assertTrue(l1.equals(l2));
-        
+
         // axisOffset
         l1.setAxisOffset(99.0);
         assertFalse(l1.equals(l2));
         l2.setAxisOffset(99.0);
         assertTrue(l1.equals(l2));
-        
+
         // stripWidth
         l1.setStripWidth(99.0);
         assertFalse(l1.equals(l2));
         l2.setStripWidth(99.0);
         assertTrue(l1.equals(l2));
-        
+
         // stripOutlineVisible
         l1.setStripOutlineVisible(!l1.isStripOutlineVisible());
         assertFalse(l1.equals(l2));
         l2.setStripOutlineVisible(l1.isStripOutlineVisible());
         assertTrue(l1.equals(l2));
-        
+
         // stripOutlinePaint
         l1.setStripOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
@@ -139,13 +139,13 @@ public class PaintScaleLegendTests extends TestCase {
         l2.setStripOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
         assertTrue(l1.equals(l2));
-        
+
         // stripOutlineStroke
         l1.setStripOutlineStroke(new BasicStroke(1.1f));
         assertFalse(l1.equals(l2));
         l2.setStripOutlineStroke(new BasicStroke(1.1f));
         assertTrue(l1.equals(l2));
-        
+
         // backgroundPaint
         l1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
@@ -153,28 +153,28 @@ public class PaintScaleLegendTests extends TestCase {
         l2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
         assertTrue(l1.equals(l2));
-            
+
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
-        PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(), 
+        PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
-        PaintScaleLegend l2 = new PaintScaleLegend(new GrayPaintScale(), 
+        PaintScaleLegend l2 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
         assertTrue(l1.equals(l2));
         int h1 = l1.hashCode();
         int h2 = l2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
     public void testCloning() {
-        PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(), 
+        PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
         PaintScaleLegend l2 = null;
         try {
@@ -192,7 +192,7 @@ public class PaintScaleLegendTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-        PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(), 
+        PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
         PaintScaleLegend l2 = null;
         try {

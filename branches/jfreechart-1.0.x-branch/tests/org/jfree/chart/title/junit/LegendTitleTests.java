@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
  * LegendTitleTests.java
  * ---------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,7 +36,7 @@
  * -------
  * 25-Feb-2005 : Version 1 (DG);
  * 16-Mar-2005 : Extended testEquals() (DG);
- * 
+ *
  */
 
 package org.jfree.chart.title.junit;
@@ -92,7 +92,7 @@ public class LegendTitleTests extends TestCase {
         LegendTitle t1 = new LegendTitle(plot1);
         LegendTitle t2 = new LegendTitle(plot1);
         assertEquals(t1, t2);
-        
+
         t1.setBackgroundPaint(
             new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, Color.yellow)
         );
@@ -101,22 +101,22 @@ public class LegendTitleTests extends TestCase {
             new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, Color.yellow)
         );
         assertTrue(t1.equals(t2));
-        
+
         t1.setLegendItemGraphicEdge(RectangleEdge.BOTTOM);
         assertFalse(t1.equals(t2));
         t2.setLegendItemGraphicEdge(RectangleEdge.BOTTOM);
         assertTrue(t1.equals(t2));
-        
+
         t1.setLegendItemGraphicAnchor(RectangleAnchor.BOTTOM_LEFT);
         assertFalse(t1.equals(t2));
         t2.setLegendItemGraphicAnchor(RectangleAnchor.BOTTOM_LEFT);
         assertTrue(t1.equals(t2));
-        
+
         t1.setLegendItemGraphicLocation(RectangleAnchor.TOP_LEFT);
         assertFalse(t1.equals(t2));
         t2.setLegendItemGraphicLocation(RectangleAnchor.TOP_LEFT);
         assertTrue(t1.equals(t2));
-        
+
         t1.setItemFont(new Font("Dialog", Font.PLAIN, 19));
         assertFalse(t1.equals(t2));
         t2.setItemFont(new Font("Dialog", Font.PLAIN, 19));
@@ -124,7 +124,7 @@ public class LegendTitleTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         XYPlot plot1 = new XYPlot();
@@ -135,7 +135,7 @@ public class LegendTitleTests extends TestCase {
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -143,7 +143,7 @@ public class LegendTitleTests extends TestCase {
         XYPlot plot = new XYPlot();
         Rectangle2D bounds1 = new Rectangle2D.Double(10.0, 20.0, 30.0, 40.0);
         LegendTitle t1 = new LegendTitle(plot);
-        t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 
+        t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.yellow));
         t1.setBounds(bounds1);
         LegendTitle t2 = null;
@@ -156,7 +156,7 @@ public class LegendTitleTests extends TestCase {
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
         assertTrue(t1.equals(t2));
-        
+
         // check independence
         bounds1.setFrame(40.0, 30.0, 20.0, 10.0);
         assertFalse(t1.equals(t2));
