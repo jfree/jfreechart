@@ -161,6 +161,13 @@ public class XYDrawableAnnotationTests extends TestCase {
         a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0,
                 new TestDrawable());
         assertTrue(a1.equals(a2));
+
+        a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0, 2.0,
+        		new TestDrawable());
+        assertFalse(a1.equals(a2));
+        a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0, 2.0,
+        		new TestDrawable());
+        assertTrue(a1.equals(a2));
     }
 
     /**
