@@ -37,12 +37,14 @@
  * 21-May-2003 : Version 1 (DG);
  * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
  * 30-Sep-2004 : Added support for tool tips and URLs (DG);
+ * 18-Jun-2008 : Added scaling factor (DG);
  *
  */
 
 package org.jfree.chart.annotations;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
@@ -65,6 +67,9 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
     /** For serialization. */
     private static final long serialVersionUID = -6540812859722691020L;
 
+    /** The scaling factor. */
+    private double drawScaleFactor;
+
     /** The x-coordinate. */
     private double x;
 
@@ -72,10 +77,10 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
     private double y;
 
     /** The width. */
-    private double width;
+    private double displayWidth;
 
     /** The height. */
-    private double height;
+    private double displayHeight;
 
     /** The drawable object. */
     private Drawable drawable;
@@ -91,14 +96,35 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      */
     public XYDrawableAnnotation(double x, double y, double width, double height,
                                 Drawable drawable) {
+        this(x, y, width, height, 1.0, drawable);
+    }
+
+    /**
+     * Creates a new annotation to be displayed within the given area.  If you
+     * specify a <code>drawScaleFactor</code> of 2.0, the <code>drawable</code>
+     * will be drawn at twice the requested display size then scaled down to
+     * fit the space.
+     *
+     * @param x  the x-coordinate for the area.
+     * @param y  the y-coordinate for the area.
+     * @param displayWidth  the width of the area.
+     * @param displayHeight  the height of the area.
+     * @param drawScaleFactor  the scaling factor for drawing.
+     * @param drawable  the drawable object (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public XYDrawableAnnotation(double x, double y, double displayWidth,
+    		double displayHeight, double drawScaleFactor, Drawable drawable) {
 
         if (drawable == null) {
             throw new IllegalArgumentException("Null 'drawable' argument.");
         }
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.displayWidth = displayWidth;
+        this.displayHeight = displayHeight;
+        this.drawScaleFactor = drawScaleFactor;
         this.drawable = drawable;
 
     }
@@ -129,13 +155,28 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
                 domainEdge);
         float j2DY = (float) rangeAxis.valueToJava2D(this.y, dataArea,
                 rangeEdge);
-        Rectangle2D area = new Rectangle2D.Double(j2DX - this.width / 2.0,
-                j2DY - this.height / 2.0, this.width, this.height);
-        this.drawable.draw(g2, area);
+        Rectangle2D displayArea = new Rectangle2D.Double(
+        		j2DX - this.displayWidth / 2.0,
+                j2DY - this.displayHeight / 2.0, this.displayWidth,
+                this.displayHeight);
+
+        // here we change the AffineTransform so we can draw the annotation
+        // to a larger area and scale it down into the display area
+        // afterwards, the original transform is restored
+        AffineTransform savedTransform = g2.getTransform();
+        Rectangle2D drawArea = new Rectangle2D.Double(0.0, 0.0,
+        		this.displayWidth * this.drawScaleFactor,
+        		this.displayHeight * this.drawScaleFactor);
+
+        g2.scale(1/this.drawScaleFactor, 1/this.drawScaleFactor);
+        g2.translate((j2DX - this.displayWidth / 2.0) * this.drawScaleFactor,
+        		(j2DY - this.displayHeight / 2.0) * this.drawScaleFactor);
+        this.drawable.draw(g2, drawArea);
+        g2.setTransform(savedTransform);
         String toolTip = getToolTipText();
         String url = getURL();
         if (toolTip != null || url != null) {
-            addEntity(info, area, rendererIndex, toolTip, url);
+            addEntity(info, displayArea, rendererIndex, toolTip, url);
         }
 
     }
@@ -166,11 +207,14 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
         if (this.y != that.y) {
             return false;
         }
-        if (this.width != that.width) {
+        if (this.displayWidth != that.displayWidth) {
             return false;
         }
-        if (this.height != that.height) {
+        if (this.displayHeight != that.displayHeight) {
             return false;
+        }
+        if (this.drawScaleFactor != that.drawScaleFactor) {
+        	return false;
         }
         if (!ObjectUtilities.equal(this.drawable, that.drawable)) {
             return false;
@@ -192,9 +236,9 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
         result = (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.y);
         result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.width);
+        temp = Double.doubleToLongBits(this.displayWidth);
         result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.height);
+        temp = Double.doubleToLongBits(this.displayHeight);
         result = 29 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
