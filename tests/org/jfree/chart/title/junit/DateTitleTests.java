@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------
  * DateTitleTests.java
  * -------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -85,32 +85,32 @@ public class DateTitleTests extends TestCase {
         DateTitle t1 = new DateTitle();
         DateTitle t2 = new DateTitle();
         assertEquals(t1, t2);
-        
+
         t1.setText("Test 1");
         assertFalse(t1.equals(t2));
         t2.setText("Test 1");
         assertTrue(t1.equals(t2));
-        
+
         Font f = new Font("SansSerif", Font.PLAIN, 15);
         t1.setFont(f);
         assertFalse(t1.equals(t2));
         t2.setFont(f);
         assertTrue(t1.equals(t2));
-        
+
         t1.setPaint(Color.blue);
         assertFalse(t1.equals(t2));
         t2.setPaint(Color.blue);
         assertTrue(t1.equals(t2));
-        
+
         t1.setBackgroundPaint(Color.blue);
         assertFalse(t1.equals(t2));
         t2.setBackgroundPaint(Color.blue);
         assertTrue(t1.equals(t2));
-        
+
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         DateTitle t1 = new DateTitle();
@@ -120,7 +120,7 @@ public class DateTitleTests extends TestCase {
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
