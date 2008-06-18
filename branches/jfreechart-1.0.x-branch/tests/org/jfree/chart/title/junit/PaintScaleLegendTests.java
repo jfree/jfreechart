@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 22-Jan-2007 : Version 1 (DG);
+ * 18-Jun-2008 : Extended testEquals() for new field (DG);
  *
  */
 
@@ -152,6 +153,11 @@ public class PaintScaleLegendTests extends TestCase {
         assertFalse(l1.equals(l2));
         l2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
+        assertTrue(l1.equals(l2));
+
+        l1.setSubdivisionCount(99);
+        assertFalse(l1.equals(l2));
+        l2.setSubdivisionCount(99);
         assertTrue(l1.equals(l2));
 
     }

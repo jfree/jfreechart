@@ -1,5 +1,16 @@
 2008-06-18  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/title/PaintScaleLegend.java
+    (subdivisions): New field,
+    (PaintScaleLegend): Initialise new field,
+    (getSubdivisionCount): New method,
+    (setSubdivisionCount): Likewise,
+    (SUBDIVISIONS): Removed private field,
+    (draw): Modified segment calculations,
+    (equals): Updated for new field.
+
+2008-06-18  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/annotations/XYDrawableAnnotation.java
     (drawScaleFactor): New field,
     (width): Renamed displayWidth,
