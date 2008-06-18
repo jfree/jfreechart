@@ -165,8 +165,7 @@ public class XYAreaRenderer2Tests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             r2 = (XYAreaRenderer2) in.readObject();
             in.close();
         }
