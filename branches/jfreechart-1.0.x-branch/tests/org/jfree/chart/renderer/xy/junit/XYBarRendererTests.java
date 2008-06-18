@@ -217,13 +217,12 @@ public class XYBarRendererTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             r2 = (XYBarRenderer) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(r1, r2);
 
