@@ -39,7 +39,7 @@
  * 01-Nov-2005 : Added tests for new fields (DG);
  * 17-Aug-2006 : Added testFindRangeBounds() method (DG);
  * 22-Apr-2008 : Added testPublicCloneable (DG);
- * 29-Apr-2008 : Extended textEquals() for new field (DG);
+ * 29-Apr-2008 : Extended testEquals() for new field (DG);
  *
  */
 
