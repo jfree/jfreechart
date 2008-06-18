@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
- * 
+ *
  * ----------
  * Title.java
  * ----------
- * (C) Copyright 2000-2007, by David Berry and Contributors.
+ * (C) Copyright 2000-2008, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -37,24 +37,24 @@
  * --------------------------
  * 21-Aug-2001 : Added standard header (DG);
  * 18-Sep-2001 : Updated header (DG);
- * 14-Nov-2001 : Package com.jrefinery.common.ui.* changed to 
+ * 14-Nov-2001 : Package com.jrefinery.common.ui.* changed to
  *               com.jrefinery.ui.* (DG);
- * 07-Feb-2002 : Changed blank space around title from Insets --> Spacer, to 
+ * 07-Feb-2002 : Changed blank space around title from Insets --> Spacer, to
  *               allow for relative or absolute spacing (DG);
  * 25-Jun-2002 : Removed unnecessary imports (DG);
  * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 14-Oct-2002 : Changed the event listener storage structure (DG);
  * 11-Sep-2003 : Took care of listeners while cloning (NB);
  * 22-Sep-2003 : Spacer cannot be null. Added nullpointer checks for this (TM);
- * 08-Jan-2003 : Renamed AbstractTitle --> Title and moved to separate 
+ * 08-Jan-2003 : Renamed AbstractTitle --> Title and moved to separate
  *               package (DG);
- * 26-Oct-2004 : Refactored to implement Block interface, and removed redundant 
+ * 26-Oct-2004 : Refactored to implement Block interface, and removed redundant
  *               constants (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0 
+ * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
  *               release (DG);
  * 02-Feb-2005 : Changed Spacer --> RectangleInsets for padding (DG);
  * 03-May-2005 : Fixed problem in equals() method (DG);
- * 
+ *
  */
 
 package org.jfree.chart.title;
@@ -79,27 +79,27 @@ import org.jfree.ui.VerticalAlignment;
 import org.jfree.util.ObjectUtilities;
 
 /**
- * The base class for all chart titles.  A chart can have multiple titles, 
+ * The base class for all chart titles.  A chart can have multiple titles,
  * appearing at the top, bottom, left or right of the chart.
  * <P>
- * Concrete implementations of this class will render text and images, and 
+ * Concrete implementations of this class will render text and images, and
  * hence do the actual work of drawing titles.
  */
-public abstract class Title extends AbstractBlock 
+public abstract class Title extends AbstractBlock
                             implements Block, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6675162505277817221L;
-    
+
     /** The default title position. */
     public static final RectangleEdge DEFAULT_POSITION = RectangleEdge.TOP;
 
     /** The default horizontal alignment. */
-    public static final HorizontalAlignment 
+    public static final HorizontalAlignment
             DEFAULT_HORIZONTAL_ALIGNMENT = HorizontalAlignment.CENTER;
 
     /** The default vertical alignment. */
-    public static final VerticalAlignment 
+    public static final VerticalAlignment
             DEFAULT_VERTICAL_ALIGNMENT = VerticalAlignment.CENTER;
 
     /** Default title padding. */
@@ -118,8 +118,8 @@ public abstract class Title extends AbstractBlock
     /** Storage for registered change listeners. */
     private transient EventListenerList listenerList;
 
-    /** 
-     * A flag that can be used to temporarily disable the listener mechanism. 
+    /**
+     * A flag that can be used to temporarily disable the listener mechanism.
      */
     private boolean notify;
 
@@ -135,15 +135,15 @@ public abstract class Title extends AbstractBlock
     /**
      * Creates a new title, using default attributes where necessary.
      *
-     * @param position  the position of the title (<code>null</code> not 
+     * @param position  the position of the title (<code>null</code> not
      *                  permitted).
-     * @param horizontalAlignment  the horizontal alignment of the title 
+     * @param horizontalAlignment  the horizontal alignment of the title
      *                             (<code>null</code> not permitted).
-     * @param verticalAlignment  the vertical alignment of the title 
+     * @param verticalAlignment  the vertical alignment of the title
      *                           (<code>null</code> not permitted).
      */
-    protected Title(RectangleEdge position, 
-                    HorizontalAlignment horizontalAlignment, 
+    protected Title(RectangleEdge position,
+                    HorizontalAlignment horizontalAlignment,
                     VerticalAlignment verticalAlignment) {
 
         this(position, horizontalAlignment, verticalAlignment,
@@ -154,19 +154,19 @@ public abstract class Title extends AbstractBlock
     /**
      * Creates a new title.
      *
-     * @param position  the position of the title (<code>null</code> not 
+     * @param position  the position of the title (<code>null</code> not
      *                  permitted).
      * @param horizontalAlignment  the horizontal alignment of the title (LEFT,
-     *                             CENTER or RIGHT, <code>null</code> not 
+     *                             CENTER or RIGHT, <code>null</code> not
      *                             permitted).
-     * @param verticalAlignment  the vertical alignment of the title (TOP, 
-     *                           MIDDLE or BOTTOM, <code>null</code> not 
+     * @param verticalAlignment  the vertical alignment of the title (TOP,
+     *                           MIDDLE or BOTTOM, <code>null</code> not
      *                           permitted).
-     * @param padding  the amount of space to leave around the outside of the 
+     * @param padding  the amount of space to leave around the outside of the
      *                 title (<code>null</code> not permitted).
      */
     protected Title(RectangleEdge position,
-                    HorizontalAlignment horizontalAlignment, 
+                    HorizontalAlignment horizontalAlignment,
                     VerticalAlignment verticalAlignment,
                     RectangleInsets padding) {
 
@@ -206,7 +206,7 @@ public abstract class Title extends AbstractBlock
     }
 
     /**
-     * Sets the position for the title and sends a {@link TitleChangeEvent} to 
+     * Sets the position for the title and sends a {@link TitleChangeEvent} to
      * all registered listeners.
      *
      * @param position  the position (<code>null</code> not permitted).
@@ -231,10 +231,10 @@ public abstract class Title extends AbstractBlock
     }
 
     /**
-     * Sets the horizontal alignment for the title and sends a 
+     * Sets the horizontal alignment for the title and sends a
      * {@link TitleChangeEvent} to all registered listeners.
      *
-     * @param alignment  the horizontal alignment (<code>null</code> not 
+     * @param alignment  the horizontal alignment (<code>null</code> not
      *                   permitted).
      */
     public void setHorizontalAlignment(HorizontalAlignment alignment) {
@@ -260,7 +260,7 @@ public abstract class Title extends AbstractBlock
      * Sets the vertical alignment for the title, and notifies any registered
      * listeners of the change.
      *
-     * @param alignment  the new vertical alignment (TOP, MIDDLE or BOTTOM, 
+     * @param alignment  the new vertical alignment (TOP, MIDDLE or BOTTOM,
      *                   <code>null</code> not permitted).
      */
     public void setVerticalAlignment(VerticalAlignment alignment) {
@@ -274,7 +274,7 @@ public abstract class Title extends AbstractBlock
     }
 
     /**
-     * Returns the flag that indicates whether or not the notification 
+     * Returns the flag that indicates whether or not the notification
      * mechanism is enabled.
      *
      * @return The flag.
@@ -293,12 +293,12 @@ public abstract class Title extends AbstractBlock
     public void setNotify(boolean flag) {
         this.notify = flag;
         if (flag) {
-            notifyListeners(new TitleChangeEvent(this));   
+            notifyListeners(new TitleChangeEvent(this));
         }
     }
 
     /**
-     * Draws the title on a Java 2D graphics device (such as the screen or a 
+     * Draws the title on a Java 2D graphics device (such as the screen or a
      * printer).
      *
      * @param g2  the graphics device.
@@ -316,7 +316,7 @@ public abstract class Title extends AbstractBlock
      *
      * @return A clone of the title.
      *
-     * @throws CloneNotSupportedException not thrown by this class, but it may 
+     * @throws CloneNotSupportedException not thrown by this class, but it may
      *         be thrown by subclasses.
      */
     public Object clone() throws CloneNotSupportedException {
@@ -346,10 +346,10 @@ public abstract class Title extends AbstractBlock
     }
 
     /**
-     * Notifies all registered listeners that the chart title has changed in 
+     * Notifies all registered listeners that the chart title has changed in
      * some way.
      *
-     * @param event  an object that contains information about the change to 
+     * @param event  an object that contains information about the change to
      *               the title.
      */
     protected void notifyListeners(TitleChangeEvent event) {
@@ -379,7 +379,7 @@ public abstract class Title extends AbstractBlock
             return false;
         }
         if (!super.equals(obj)) {
-            return false;   
+            return false;
         }
         Title that = (Title) obj;
         if (this.position != that.position) {
@@ -399,18 +399,18 @@ public abstract class Title extends AbstractBlock
 
     /**
      * Returns a hashcode for the title.
-     * 
+     *
      * @return The hashcode.
      */
     public int hashCode() {
         int result = 193;
-        result = 37 * result + ObjectUtilities.hashCode(this.position);    
-        result = 37 * result 
-                + ObjectUtilities.hashCode(this.horizontalAlignment);    
+        result = 37 * result + ObjectUtilities.hashCode(this.position);
+        result = 37 * result
+                + ObjectUtilities.hashCode(this.horizontalAlignment);
         result = 37 * result + ObjectUtilities.hashCode(this.verticalAlignment);
         return result;
     }
-        
+
     /**
      * Provides serialization support.
      *
@@ -430,7 +430,7 @@ public abstract class Title extends AbstractBlock
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.listenerList = new EventListenerList();
