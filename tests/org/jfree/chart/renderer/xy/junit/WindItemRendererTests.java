@@ -139,8 +139,7 @@ public class WindItemRendererTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             r2 = (WindItemRenderer) in.readObject();
             in.close();
         }
