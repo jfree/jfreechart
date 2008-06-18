@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------
  * TextAnnotation.java
  * -------------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,7 +35,7 @@
  * Changes:
  * --------
  * 28-Aug-2002 : Version 1 (DG);
- * 07-Nov-2002 : Fixed errors reported by Checkstyle, added accessor 
+ * 07-Nov-2002 : Fixed errors reported by Checkstyle, added accessor
  *               methods (DG);
  * 13-Jan-2003 : Reviewed Javadocs (DG);
  * 26-Mar-2003 : Implemented Serializable (DG);
@@ -46,7 +46,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 16-Jan-2007 : Added argument checks, fixed hashCode() method and updated
  *               API docs (DG);
- * 
+ *
  */
 
 package org.jfree.chart.annotations;
@@ -66,27 +66,27 @@ import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 
 /**
- * A base class for text annotations.  This class records the content but not 
+ * A base class for text annotations.  This class records the content but not
  * the location of the annotation.
  */
 public class TextAnnotation implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7008912287533127432L;
-    
+
     /** The default font. */
-    public static final Font DEFAULT_FONT 
-        = new Font("SansSerif", Font.PLAIN, 10);
+    public static final Font DEFAULT_FONT
+            = new Font("SansSerif", Font.PLAIN, 10);
 
     /** The default paint. */
     public static final Paint DEFAULT_PAINT = Color.black;
-    
+
     /** The default text anchor. */
     public static final TextAnchor DEFAULT_TEXT_ANCHOR = TextAnchor.CENTER;
 
-    /** The default rotation anchor. */    
+    /** The default rotation anchor. */
     public static final TextAnchor DEFAULT_ROTATION_ANCHOR = TextAnchor.CENTER;
-    
+
     /** The default rotation angle. */
     public static final double DEFAULT_ROTATION_ANGLE = 0.0;
 
@@ -98,13 +98,13 @@ public class TextAnnotation implements Serializable {
 
     /** The paint. */
     private transient Paint paint;
-    
+
     /** The text anchor. */
     private TextAnchor textAnchor;
-    
+
     /** The rotation anchor. */
     private TextAnchor rotationAnchor;
-    
+
     /** The rotation angle. */
     private double rotationAngle;
 
@@ -129,7 +129,7 @@ public class TextAnnotation implements Serializable {
      * Returns the text for the annotation.
      *
      * @return The text (never <code>null</code>).
-     * 
+     *
      * @see #setText(String)
      */
     public String getText() {
@@ -138,9 +138,9 @@ public class TextAnnotation implements Serializable {
 
     /**
      * Sets the text for the annotation.
-     * 
+     *
      * @param text  the text (<code>null</code> not permitted).
-     * 
+     *
      * @see #getText()
      */
     public void setText(String text) {
@@ -149,12 +149,12 @@ public class TextAnnotation implements Serializable {
         }
         this.text = text;
     }
-    
+
     /**
      * Returns the font for the annotation.
      *
      * @return The font (never <code>null</code>).
-     * 
+     *
      * @see #setFont(Font)
      */
     public Font getFont() {
@@ -163,9 +163,9 @@ public class TextAnnotation implements Serializable {
 
     /**
      * Sets the font for the annotation.
-     * 
+     *
      * @param font  the font (<code>null</code> not permitted).
-     * 
+     *
      * @see #getFont()
      */
     public void setFont(Font font) {
@@ -174,23 +174,23 @@ public class TextAnnotation implements Serializable {
         }
         this.font = font;
     }
-    
+
     /**
      * Returns the paint for the annotation.
      *
      * @return The paint (never <code>null</code>).
-     * 
+     *
      * @see #setPaint(Paint)
      */
     public Paint getPaint() {
         return this.paint;
     }
-    
+
     /**
      * Sets the paint for the annotation.
-     * 
+     *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
@@ -202,21 +202,21 @@ public class TextAnnotation implements Serializable {
 
     /**
      * Returns the text anchor.
-     * 
+     *
      * @return The text anchor.
-     * 
+     *
      * @see #setTextAnchor(TextAnchor)
      */
     public TextAnchor getTextAnchor() {
         return this.textAnchor;
     }
-    
+
     /**
-     * Sets the text anchor (the point on the text bounding rectangle that is 
+     * Sets the text anchor (the point on the text bounding rectangle that is
      * aligned to the (x, y) coordinate of the annotation).
-     * 
+     *
      * @param anchor  the anchor point (<code>null</code> not permitted).
-     * 
+     *
      * @see #getTextAnchor()
      */
     public void setTextAnchor(TextAnchor anchor) {
@@ -225,56 +225,56 @@ public class TextAnnotation implements Serializable {
         }
         this.textAnchor = anchor;
     }
-    
+
     /**
      * Returns the rotation anchor.
-     * 
+     *
      * @return The rotation anchor point (never <code>null</code>).
-     * 
+     *
      * @see #setRotationAnchor(TextAnchor)
      */
     public TextAnchor getRotationAnchor() {
         return this.rotationAnchor;
     }
-    
+
     /**
      * Sets the rotation anchor point.
-     * 
+     *
      * @param anchor  the anchor (<code>null</code> not permitted).
-     * 
+     *
      * @see #getRotationAnchor()
      */
     public void setRotationAnchor(TextAnchor anchor) {
-        this.rotationAnchor = anchor;    
+        this.rotationAnchor = anchor;
     }
-    
+
     /**
      * Returns the rotation angle in radians.
-     * 
+     *
      * @return The rotation angle.
-     * 
+     *
      * @see #setRotationAngle(double)
      */
     public double getRotationAngle() {
-        return this.rotationAngle; 
+        return this.rotationAngle;
     }
-    
+
     /**
      * Sets the rotation angle.  The angle is measured clockwise in radians.
-     * 
+     *
      * @param angle  the angle (in radians).
-     * 
+     *
      * @see #getRotationAngle()
      */
     public void setRotationAngle(double angle) {
-        this.rotationAngle = angle;    
+        this.rotationAngle = angle;
     }
-    
+
     /**
      * Tests this object for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return <code>true</code> or <code>false</code>.
      */
     public boolean equals(Object obj) {
@@ -298,22 +298,22 @@ public class TextAnnotation implements Serializable {
         if (!ObjectUtilities.equal(this.textAnchor, that.getTextAnchor())) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.rotationAnchor, 
+        if (!ObjectUtilities.equal(this.rotationAnchor,
                 that.getRotationAnchor())) {
             return false;
         }
         if (this.rotationAngle != that.getRotationAngle()) {
             return false;
         }
-        
+
         // seem to be the same...
         return true;
-            
+
     }
-    
+
     /**
      * Returns a hash code for this instance.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -327,7 +327,7 @@ public class TextAnnotation implements Serializable {
         result = 37 * result + this.textAnchor.hashCode();
         return result;
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -348,7 +348,7 @@ public class TextAnnotation implements Serializable {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.paint = SerialUtilities.readPaint(stream);
