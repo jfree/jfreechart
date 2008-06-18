@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 22-Jan-2007 : Version 1 (DG);
+ * 18-Jun-2008 : Fixed bug drawing scale with log axis (DG);
  *
  */
 
@@ -111,6 +112,13 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
     private transient Paint backgroundPaint;
 
     /**
+     * The number of subdivisions for the scale when rendering.
+     *
+     * @since 1.0.11
+     */
+    private int subdivisions;
+
+    /**
      * Creates a new instance.
      *
      * @param scale  the scale (<code>null</code> not permitted).
@@ -129,6 +137,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
         this.stripOutlinePaint = Color.gray;
         this.stripOutlineStroke = new BasicStroke(0.5f);
         this.backgroundPaint = Color.white;
+        this.subdivisions = 100;
     }
 
     /**
@@ -359,6 +368,33 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
     }
 
     /**
+     * Returns the number of subdivisions used to draw the scale.
+     *
+     * @return The subdivision count.
+     *
+     * @since 1.0.11
+     */
+    public int getSubdivisionCount() {
+    	return this.subdivisions;
+    }
+
+    /**
+     * Sets the subdivision count and sends a {@link TitleChangeEvent} to
+     * all registered listeners.
+     *
+     * @param count  the count.
+     *
+     * @since 1.0.11
+     */
+    public void setSubdivisionCount(int count) {
+    	if (count <= 0) {
+    		throw new IllegalArgumentException("Requires 'count' > 0.");
+    	}
+    	this.subdivisions = count;
+    	notifyListeners(new TitleChangeEvent(this));
+    }
+
+    /**
      * Arranges the contents of the block, within the given constraints, and
      * returns the block size.
      *
@@ -463,12 +499,6 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
     }
 
     /**
-     * The number of subdivisions to use when drawing the paint strip.  Maybe
-     * this need to be user controllable?
-     */
-    private static final int SUBDIVISIONS = 200;
-
-    /**
      * Draws the legend within the specified area.
      *
      * @param g2  the graphics target (<code>null</code> not permitted).
@@ -485,26 +515,28 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
             g2.setPaint(this.backgroundPaint);
             g2.fill(target);
         }
-        getBorder().draw(g2, target);
-        getBorder().getInsets().trim(target);
+        getFrame().draw(g2, target);
+        getFrame().getInsets().trim(target);
         target = trimPadding(target);
         double base = this.axis.getLowerBound();
-        double increment = this.axis.getRange().getLength() / SUBDIVISIONS;
+        double increment = this.axis.getRange().getLength() / this.subdivisions;
         Rectangle2D r = new Rectangle2D.Double();
 
 
         if (RectangleEdge.isTopOrBottom(getPosition())) {
             RectangleEdge axisEdge = Plot.resolveRangeAxisLocation(
                     this.axisLocation, PlotOrientation.HORIZONTAL);
-            double ww = Math.ceil(target.getWidth() / SUBDIVISIONS);
             if (axisEdge == RectangleEdge.TOP) {
-                for (int i = 0; i < SUBDIVISIONS; i++) {
+                for (int i = 0; i < this.subdivisions; i++) {
                     double v = base + (i * increment);
                     Paint p = this.scale.getPaint(v);
-                    double vv = this.axis.valueToJava2D(v, target,
-                            RectangleEdge.BOTTOM);
-                    r.setRect(vv, target.getMaxY() - this.stripWidth, ww,
-                            this.stripWidth);
+                    double vv0 = this.axis.valueToJava2D(v, target,
+                            RectangleEdge.TOP);
+                    double vv1 = this.axis.valueToJava2D(v + increment, target,
+                            RectangleEdge.TOP);
+                    double ww = Math.abs(vv1 - vv0);
+                    r.setRect(Math.min(vv0, vv1), target.getMaxY()
+                    		- this.stripWidth, ww, this.stripWidth);
                     g2.setPaint(p);
                     g2.fill(r);
                 }
@@ -518,12 +550,16 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
                         null);
             }
             else if (axisEdge == RectangleEdge.BOTTOM) {
-                for (int i = 0; i < SUBDIVISIONS; i++) {
+                for (int i = 0; i < this.subdivisions; i++) {
                     double v = base + (i * increment);
                     Paint p = this.scale.getPaint(v);
-                    double vv = this.axis.valueToJava2D(v, target,
+                    double vv0 = this.axis.valueToJava2D(v, target,
                             RectangleEdge.BOTTOM);
-                    r.setRect(vv, target.getMinY(), ww, this.stripWidth);
+                    double vv1 = this.axis.valueToJava2D(v + increment, target,
+                            RectangleEdge.BOTTOM);
+                    double ww = Math.abs(vv1 - vv0);
+                    r.setRect(Math.min(vv0, vv1), target.getMinY(), ww,
+                    		this.stripWidth);
                     g2.setPaint(p);
                     g2.fill(r);
                 }
@@ -539,15 +575,17 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
         else {
             RectangleEdge axisEdge = Plot.resolveRangeAxisLocation(
                     this.axisLocation, PlotOrientation.VERTICAL);
-            double hh = Math.ceil(target.getHeight() / SUBDIVISIONS);
             if (axisEdge == RectangleEdge.LEFT) {
-                for (int i = 0; i < SUBDIVISIONS; i++) {
+                for (int i = 0; i < this.subdivisions; i++) {
                     double v = base + (i * increment);
                     Paint p = this.scale.getPaint(v);
-                    double vv = this.axis.valueToJava2D(v, target,
+                    double vv0 = this.axis.valueToJava2D(v, target,
                             RectangleEdge.LEFT);
-                    r.setRect(target.getMaxX() - this.stripWidth, vv - hh,
-                            this.stripWidth, hh);
+                    double vv1 = this.axis.valueToJava2D(v + increment, target,
+                            RectangleEdge.LEFT);
+                    double hh = Math.abs(vv1 - vv0);
+                    r.setRect(target.getMaxX() - this.stripWidth,
+                    		Math.min(vv0, vv1), this.stripWidth, hh);
                     g2.setPaint(p);
                     g2.fill(r);
                 }
@@ -561,12 +599,16 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
                         null);
             }
             else if (axisEdge == RectangleEdge.RIGHT) {
-                for (int i = 0; i < SUBDIVISIONS; i++) {
+                for (int i = 0; i < this.subdivisions; i++) {
                     double v = base + (i * increment);
                     Paint p = this.scale.getPaint(v);
-                    double vv = this.axis.valueToJava2D(v, target,
+                    double vv0 = this.axis.valueToJava2D(v, target,
                             RectangleEdge.LEFT);
-                    r.setRect(target.getMinX(), vv - hh, this.stripWidth, hh);
+                    double vv1 = this.axis.valueToJava2D(v + increment, target,
+                            RectangleEdge.LEFT);
+                    double hh = Math.abs(vv1 - vv0);
+                    r.setRect(target.getMinX(), Math.min(vv0, vv1),
+                    		this.stripWidth, hh);
                     g2.setPaint(p);
                     g2.fill(r);
                 }
@@ -621,6 +663,9 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
         }
         if (!PaintUtilities.equal(this.backgroundPaint, that.backgroundPaint)) {
             return false;
+        }
+        if (this.subdivisions != that.subdivisions) {
+        	return false;
         }
         return super.equals(obj);
     }
