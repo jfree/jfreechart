@@ -91,6 +91,8 @@
  * 12-Nov-2007 : Fixed NPE in drawItemLabel() method, thanks to Richard West
  *               (see patch 1827829) (DG);
  * 17-Jun-2008 : Apply legend font and paint attributes (DG);
+ * 19-Jun-2008 : Added findRangeBounds() method override to fix bug in default
+ *               axis range (DG);
  *
  */
 
@@ -928,6 +930,26 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     public Range findDomainBounds(XYDataset dataset) {
         if (dataset != null) {
             return DatasetUtilities.findDomainBounds(dataset, true);
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Returns the lower and upper bounds (range) of the y-values in the
+     * specified dataset.  If the renderer is plotting the y-interval from the
+     * dataset, this is taken into account for the range.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (<code>null</code> if the dataset is
+     *         <code>null</code> or empty).
+     */
+    public Range findRangeBounds(XYDataset dataset) {
+        if (dataset != null) {
+            return DatasetUtilities.findRangeBounds(dataset,
+            		this.useYInterval);
         }
         else {
             return null;
