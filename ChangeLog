@@ -1,3 +1,10 @@
+2008-06-19  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/xy/XYBarRenderer.java
+    (findRangeBounds): New method override,
+    * tests/org/jfree/chart/renderer/xy/junit/XYBarRendererTests.java
+    (testFindRangeBounds): New test method.
+
 2008-06-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/title/PaintScaleLegend.java
