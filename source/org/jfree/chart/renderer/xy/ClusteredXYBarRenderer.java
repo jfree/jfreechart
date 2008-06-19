@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * ClusteredXYBarRenderer.java
  * ---------------------------
- * (C) Copyright 2003-2007, by Paolo Cova and Contributors.
+ * (C) Copyright 2003-2008, by Paolo Cova and Contributors.
  *
  * Original Author:  Paolo Cova;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -43,23 +43,23 @@
  * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
  * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
  * 07-Oct-2003 : Added renderer state (DG);
- * 03-Nov-2003 : In draw method added state parameter and y==null value 
+ * 03-Nov-2003 : In draw method added state parameter and y==null value
  *               handling (MR);
  * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * 01-Oct-2004 : Fixed bug where 'drawBarOutline' flag is ignored (DG);
- * 16-May-2005 : Fixed to used outline stroke for bar outlines.  Removed some 
- *               redundant code with the result that the renderer now respects 
- *               the 'base' setting from the super-class. Added an equals() 
+ * 16-May-2005 : Fixed to used outline stroke for bar outlines.  Removed some
+ *               redundant code with the result that the renderer now respects
+ *               the 'base' setting from the super-class. Added an equals()
  *               method (DG);
  * 19-May-2005 : Added minimal item label implementation - needs improving (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 11-Dec-2006 : Added support for GradientPaint (DG);
  * 12-Jun-2007 : Added override to findDomainBounds() to handle cluster offset,
- *               fixed rendering to handle inverted axes, and simplified 
+ *               fixed rendering to handle inverted axes, and simplified
  *               entity generation code (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -92,12 +92,12 @@ import org.jfree.util.PublicCloneable;
  * This renderer does not include code to calculate the crosshair point for the
  * plot.
  */
-public class ClusteredXYBarRenderer extends XYBarRenderer 
+public class ClusteredXYBarRenderer extends XYBarRenderer
         implements Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 5864462149177133147L;
-    
+
     /** Determines whether bar center should be interval start. */
     private boolean centerBarAtStartValue;
 
@@ -112,10 +112,10 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * Constructs a new XY clustered bar renderer.
      *
      * @param margin  the percentage amount to trim from the width of each bar.
-     * @param centerBarAtStartValue  if true, bars will be centered on the 
+     * @param centerBarAtStartValue  if true, bars will be centered on the
      *         start of the time period.
      */
-    public ClusteredXYBarRenderer(double margin, 
+    public ClusteredXYBarRenderer(double margin,
                                   boolean centerBarAtStartValue) {
         super(margin);
         this.centerBarAtStartValue = centerBarAtStartValue;
@@ -123,9 +123,9 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
     /**
      * Returns the x-value bounds for the specified dataset.
-     * 
+     *
      * @param dataset  the dataset (<code>null</code> permitted).
-     * 
+     *
      * @return The bounds (possibly <code>null</code>).
      */
     public Range findDomainBounds(XYDataset dataset) {
@@ -140,19 +140,19 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
             return super.findDomainBounds(dataset);
         }
     }
-    
+
     /**
      * Iterates over the items in an {@link IntervalXYDataset} to find
      * the range of x-values including the interval OFFSET so that it centers
-     * the interval around the start value. 
-     *  
+     * the interval around the start value.
+     *
      * @param dataset  the dataset (<code>null</code> not permitted).
-     *   
+     *
      * @return The range (possibly <code>null</code>).
      */
     protected Range findDomainBoundsWithOffset(IntervalXYDataset dataset) {
         if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");   
+            throw new IllegalArgumentException("Null 'dataset' argument.");
         }
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
@@ -192,14 +192,14 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * @param state  the renderer state.
      * @param dataArea  the area within which the plot is being drawn.
      * @param info  collects information about the drawing.
-     * @param plot  the plot (can be used to obtain standard color 
+     * @param plot  the plot (can be used to obtain standard color
      *              information etc).
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
      * @param dataset  the dataset.
      * @param series  the series index.
      * @param item  the item index.
-     * @param crosshairState  crosshair information for the plot 
+     * @param crosshairState  crosshair information for the plot
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
@@ -207,8 +207,8 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
                          XYItemRendererState state,
                          Rectangle2D dataArea,
                          PlotRenderingInfo info,
-                         XYPlot plot, 
-                         ValueAxis domainAxis, 
+                         XYPlot plot,
+                         ValueAxis domainAxis,
                          ValueAxis rangeAxis,
                          XYDataset dataset, int series, int item,
                          CrosshairState crosshairState,
@@ -230,18 +230,18 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
             return;
         }
 
-        double yy0 = rangeAxis.valueToJava2D(y0, dataArea, 
+        double yy0 = rangeAxis.valueToJava2D(y0, dataArea,
                 plot.getRangeAxisEdge());
-        double yy1 = rangeAxis.valueToJava2D(y1, dataArea, 
+        double yy1 = rangeAxis.valueToJava2D(y1, dataArea,
                 plot.getRangeAxisEdge());
 
         RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
         double x0 = intervalDataset.getStartXValue(series, item);
         double xx0 = domainAxis.valueToJava2D(x0, dataArea, xAxisLocation);
-        
+
         double x1 = intervalDataset.getEndXValue(series, item);
         double xx1 = domainAxis.valueToJava2D(x1, dataArea, xAxisLocation);
-        
+
         double intervalW = xx1 - xx0;  // this may be negative
         double baseX = xx0;
         if (this.centerBarAtStartValue) {
@@ -253,10 +253,10 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
             intervalW = intervalW - cut;
             baseX = baseX + (cut / 2);
         }
-        
+
         double intervalH = Math.abs(yy0 - yy1);  // we don't need the sign
 
-        PlotOrientation orientation = plot.getOrientation();        
+        PlotOrientation orientation = plot.getOrientation();
 
         int numSeries = dataset.getSeriesCount();
         double seriesBarWidth = intervalW / numSeries;  // may be negative
@@ -281,7 +281,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
             bar = new Rectangle2D.Double(rx, ry, rw, rh);
         }
         Paint itemPaint = getItemPaint(series, item);
-        if (getGradientPaintTransformer() 
+        if (getGradientPaintTransformer()
                 != null && itemPaint instanceof GradientPaint) {
             GradientPaint gp = (GradientPaint) itemPaint;
             itemPaint = getGradientPaintTransformer().transform(gp, bar);
@@ -296,9 +296,9 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         }
 
         if (isItemLabelVisible(series, item)) {
-            XYItemLabelGenerator generator = getItemLabelGenerator(series, 
+            XYItemLabelGenerator generator = getItemLabelGenerator(series,
                     item);
-            drawItemLabel(g2, dataset, series, item, plot, generator, bar, 
+            drawItemLabel(g2, dataset, series, item, plot, generator, bar,
                     y1 < 0.0);
         }
 
@@ -306,7 +306,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         if (info != null) {
             EntityCollection entities = info.getOwner().getEntityCollection();
             if (entities != null) {
-                addEntity(entities, bar, dataset, series, item, 
+                addEntity(entities, bar, dataset, series, item,
                         bar.getCenterX(), bar.getCenterY());
             }
         }
@@ -315,12 +315,12 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
     /**
      * Tests this renderer for equality with an arbitrary object, returning
-     * <code>true</code> if <code>obj</code> is a 
+     * <code>true</code> if <code>obj</code> is a
      * <code>ClusteredXYBarRenderer</code> with the same settings as this
      * renderer, and <code>false</code> otherwise.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -336,16 +336,16 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Returns a clone of the renderer.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-    
+
 }
