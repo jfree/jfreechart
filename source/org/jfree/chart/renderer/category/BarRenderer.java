@@ -83,6 +83,7 @@
  * 07-May-2008 : If minimumBarLength is > 0.0, extend the non-base end of the
  *               bar (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
+ * 24-Jun-2008 : Added barPainter mechanism (DG);
  *
  */
 
@@ -91,7 +92,6 @@ package org.jfree.chart.renderer.category;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
@@ -126,7 +126,7 @@ import org.jfree.util.PublicCloneable;
  * A {@link CategoryItemRenderer} that draws individual data items as bars.
  */
 public class BarRenderer extends AbstractCategoryItemRenderer
-                         implements Cloneable, PublicCloneable, Serializable {
+        implements Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 6000649414965887481L;
@@ -139,6 +139,38 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * drawn.
      */
     public static final double BAR_OUTLINE_WIDTH_THRESHOLD = 3.0;
+
+    /**
+     * The default bar painter assigned to each new instance of this renderer.
+     *
+     * @since 1.0.11
+     */
+    private static BarPainter defaultBarPainter = new GradientBarPainter();
+
+    /**
+     * Returns the default bar painter.
+     *
+     * @return The default bar painter.
+     *
+     * @since 1.0.11
+     */
+    public static BarPainter getDefaultBarPainter() {
+        return BarRenderer.defaultBarPainter;
+    }
+
+    /**
+     * Sets the default bar painter.
+     *
+     * @param painter  the painter (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public static void setDefaultBarPainter(BarPainter painter) {
+    	if (painter == null) {
+    		throw new IllegalArgumentException("Null 'painter' argument.");
+    	}
+    	BarRenderer.defaultBarPainter = painter;
+    }
 
     /** The margin between items (bars) within a category. */
     private double itemMargin;
@@ -188,6 +220,34 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     private boolean includeBaseInRange;
 
     /**
+     * The bar painter (never <code>null</code>).
+     *
+     * @since 1.0.11
+     */
+    private BarPainter barPainter;
+
+    /**
+     * The flag that controls whether or not shadows are drawn for the bars.
+     *
+     * @since 1.0.11
+     */
+    private boolean shadowsVisible;
+
+    /**
+     * The x-offset for the shadow effect.
+     *
+     * @since 1.0.11
+     */
+    private double shadowXOffset;
+
+    /**
+     * The y-offset for the shadow effect.
+     *
+     * @since 1.0.11
+     */
+    private double shadowYOffset;
+
+    /**
      * Creates a new bar renderer with default settings.
      */
     public BarRenderer() {
@@ -203,6 +263,10 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         this.gradientPaintTransformer = new StandardGradientPaintTransformer();
         this.minimumBarLength = 0.0;
         setBaseLegendShape(new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0));
+        this.barPainter = getDefaultBarPainter();
+        this.shadowsVisible = true;
+        this.shadowXOffset = 4.0;
+        this.shadowYOffset = 4.0;
     }
 
     /**
@@ -454,6 +518,110 @@ public class BarRenderer extends AbstractCategoryItemRenderer
             this.includeBaseInRange = include;
             fireChangeEvent();
         }
+    }
+
+    /**
+     * Returns the bar painter.
+     *
+     * @return The bar painter (never <code>null</code>).
+     *
+     * @see #setBarPainter(BarPainter)
+     *
+     * @since 1.0.11
+     */
+    public BarPainter getBarPainter() {
+    	return this.barPainter;
+    }
+
+    /**
+     * Sets the bar painter for this renderer and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param painter  the painter (<code>null</code> not permitted).
+     *
+     * @see #getBarPainter()
+     *
+     * @since 1.0.11
+     */
+    public void setBarPainter(BarPainter painter) {
+    	if (painter == null) {
+    		throw new IllegalArgumentException("Null 'painter' argument.");
+    	}
+    	this.barPainter = painter;
+    	fireChangeEvent();
+    }
+
+    /**
+     * Returns the flag that controls whether or not shadows are drawn for
+     * the bars.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.11
+     */
+    public boolean getShadowsVisible() {
+    	return this.shadowsVisible;
+    }
+
+    /**
+     * Sets the flag that controls whether or not shadows are
+     * drawn by the renderer.
+     *
+     * @param visible  the new flag value.
+     *
+     * @since 1.0.11
+     */
+    public void setShadowVisible(boolean visible) {
+        this.shadowsVisible = visible;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the shadow x-offset.
+     *
+     * @return The shadow x-offset.
+     *
+     * @since 1.0.11
+     */
+    public double getShadowXOffset() {
+    	return this.shadowXOffset;
+    }
+
+    /**
+     * Sets the x-offset for the bar shadow and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param offset  the offset.
+     *
+     * @since 1.0.11
+     */
+    public void setShadowXOffset(double offset) {
+    	this.shadowXOffset = offset;
+    	fireChangeEvent();
+    }
+
+    /**
+     * Returns the shadow y-offset.
+     *
+     * @return The shadow y-offset.
+     *
+     * @since 1.0.11
+     */
+    public double getShadowYOffset() {
+    	return this.shadowYOffset;
+    }
+
+    /**
+     * Sets the y-offset for the bar shadow and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param offset  the offset.
+     *
+     * @since 1.0.11
+     */
+    public void setShadowYOffset(double offset) {
+    	this.shadowYOffset = offset;
+    	fireChangeEvent();
     }
 
     /**
@@ -772,14 +940,23 @@ public class BarRenderer extends AbstractCategoryItemRenderer
             barLengthAdj = getMinimumBarLength() - barLength;
         }
         double barL0Adj = 0.0;
+        RectangleEdge barBase;
         if (orientation == PlotOrientation.HORIZONTAL) {
             if (positive && inverted || !positive && !inverted) {
                 barL0Adj = barLengthAdj;
+                barBase = RectangleEdge.RIGHT;
+            }
+            else {
+            	barBase = RectangleEdge.LEFT;
             }
         }
         else {
             if (positive && !inverted || !positive && inverted) {
                 barL0Adj = barLengthAdj;
+                barBase = RectangleEdge.BOTTOM;
+            }
+            else {
+            	barBase = RectangleEdge.TOP;
             }
         }
 
@@ -793,25 +970,11 @@ public class BarRenderer extends AbstractCategoryItemRenderer
             bar = new Rectangle2D.Double(barW0, barL0 - barL0Adj,
                     state.getBarWidth(), barLength + barLengthAdj);
         }
-        Paint itemPaint = getItemPaint(row, column);
-        GradientPaintTransformer t = getGradientPaintTransformer();
-        if (t != null && itemPaint instanceof GradientPaint) {
-            itemPaint = t.transform((GradientPaint) itemPaint, bar);
+        if (getShadowsVisible()) {
+            this.barPainter.paintBarShadow(g2, this, row, column, bar, barBase,
+        		true);
         }
-        g2.setPaint(itemPaint);
-        g2.fill(bar);
-
-        // draw the outline...
-        if (isDrawBarOutline()
-                && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
-            Stroke stroke = getItemOutlineStroke(row, column);
-            Paint paint = getItemOutlinePaint(row, column);
-            if (stroke != null && paint != null) {
-                g2.setStroke(stroke);
-                g2.setPaint(paint);
-                g2.draw(bar);
-            }
-        }
+        this.barPainter.paintBar(g2, this, row, column, bar, barBase);
 
         CategoryItemLabelGenerator generator
             = getItemLabelGenerator(row, column);
@@ -1067,14 +1230,10 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @return A boolean.
      */
     public boolean equals(Object obj) {
-
         if (obj == this) {
             return true;
         }
         if (!(obj instanceof BarRenderer)) {
-            return false;
-        }
-        if (!super.equals(obj)) {
             return false;
         }
         BarRenderer that = (BarRenderer) obj;
@@ -1105,8 +1264,19 @@ public class BarRenderer extends AbstractCategoryItemRenderer
             that.negativeItemLabelPositionFallback)) {
             return false;
         }
-        return true;
-
+        if (!this.barPainter.equals(that.barPainter)) {
+        	return false;
+        }
+        if (this.shadowsVisible != that.shadowsVisible) {
+        	return false;
+        }
+        if (this.shadowXOffset != that.shadowXOffset) {
+        	return false;
+        }
+        if (this.shadowYOffset != that.shadowYOffset) {
+        	return false;
+        }
+        return super.equals(obj);
     }
 
 }

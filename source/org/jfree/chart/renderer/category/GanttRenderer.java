@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * GanttRenderer.java
  * ------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,6 +46,7 @@
  * ------------- JFREECHART 1.0.x --------------------------------------------
  * 17-Jan-2006 : Set includeBaseInRange flag to false (DG);
  * 20-Mar-2007 : Implemented equals() and fixed serialization (DG);
+ * 24-Jun-2008 : Added new barPainter mechanism (DG);
  *
  */
 
@@ -320,14 +321,16 @@ public class GanttRenderer extends IntervalBarRenderer
 
             // DRAW THE BARS...
             Rectangle2D bar = null;
-
+            RectangleEdge barBase = null;
             if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
                 bar = new Rectangle2D.Double(translatedValue0, rectStart,
                         rectLength, rectBreadth);
+                barBase = RectangleEdge.LEFT;
             }
             else if (plot.getOrientation() == PlotOrientation.VERTICAL) {
                 bar = new Rectangle2D.Double(rectStart, translatedValue0,
                         rectBreadth, rectLength);
+                barBase = RectangleEdge.BOTTOM;
             }
 
             Rectangle2D completeBar = null;
@@ -358,9 +361,12 @@ public class GanttRenderer extends IntervalBarRenderer
 
             }
 
-            Paint seriesPaint = getItemPaint(row, column);
-            g2.setPaint(seriesPaint);
-            g2.fill(bar);
+            if (getShadowsVisible()) {
+                getBarPainter().paintBarShadow(g2, this, row, column, bar,
+                		barBase, true);
+            }
+            getBarPainter().paintBar(g2, this, row, column, bar, barBase);
+
             if (completeBar != null) {
                 g2.setPaint(getCompletePaint());
                 g2.fill(completeBar);
@@ -457,13 +463,16 @@ public class GanttRenderer extends IntervalBarRenderer
         double rectLength = Math.abs(java2dValue1 - java2dValue0);
 
         Rectangle2D bar = null;
+        RectangleEdge barBase = null;
         if (orientation == PlotOrientation.HORIZONTAL) {
             bar = new Rectangle2D.Double(java2dValue0, rectStart, rectLength,
                     rectBreadth);
+            barBase = RectangleEdge.LEFT;
         }
         else if (orientation == PlotOrientation.VERTICAL) {
             bar = new Rectangle2D.Double(rectStart, java2dValue1, rectBreadth,
                     rectLength);
+            barBase = RectangleEdge.BOTTOM;
         }
 
         Rectangle2D completeBar = null;
@@ -492,9 +501,11 @@ public class GanttRenderer extends IntervalBarRenderer
 
         }
 
-        Paint seriesPaint = getItemPaint(row, column);
-        g2.setPaint(seriesPaint);
-        g2.fill(bar);
+        if (getShadowsVisible()) {
+            getBarPainter().paintBarShadow(g2, this, row, column, bar,
+            		barBase, true);
+        }
+        getBarPainter().paintBar(g2, this, row, column, bar, barBase);
 
         if (completeBar != null) {
             g2.setPaint(getCompletePaint());

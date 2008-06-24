@@ -59,14 +59,13 @@
  * 12-Jun-2007 : Added override to findDomainBounds() to handle cluster offset,
  *               fixed rendering to handle inverted axes, and simplified
  *               entity generation code (DG);
+ * 24-Jun-2008 : Added new barPainter mechanism (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
@@ -120,6 +119,17 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         super(margin);
         this.centerBarAtStartValue = centerBarAtStartValue;
     }
+
+	/**
+	 * Returns the number of passes through the dataset that this renderer
+	 * requires.  In this case, two passes are required, the first for drawing
+	 * the shadows (if visible), and the second for drawing the bars.
+	 *
+	 * @return <code>2</code>.
+	 */
+    public int getPassCount() {
+		return 2;
+	}
 
     /**
      * Returns the x-value bounds for the specified dataset.
@@ -280,34 +290,47 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
             double rh = intervalH;
             bar = new Rectangle2D.Double(rx, ry, rw, rh);
         }
-        Paint itemPaint = getItemPaint(series, item);
-        if (getGradientPaintTransformer()
-                != null && itemPaint instanceof GradientPaint) {
-            GradientPaint gp = (GradientPaint) itemPaint;
-            itemPaint = getGradientPaintTransformer().transform(gp, bar);
+        boolean positive = (y1 > 0.0);
+        boolean inverted = rangeAxis.isInverted();
+        RectangleEdge barBase;
+        if (orientation == PlotOrientation.HORIZONTAL) {
+            if (positive && inverted || !positive && !inverted) {
+                barBase = RectangleEdge.RIGHT;
+            }
+            else {
+            	barBase = RectangleEdge.LEFT;
+            }
         }
-        g2.setPaint(itemPaint);
-
-        g2.fill(bar);
-        if (isDrawBarOutline() && Math.abs(seriesBarWidth) > 3) {
-            g2.setStroke(getItemOutlineStroke(series, item));
-            g2.setPaint(getItemOutlinePaint(series, item));
-            g2.draw(bar);
+        else {
+            if (positive && !inverted || !positive && inverted) {
+                barBase = RectangleEdge.BOTTOM;
+            }
+            else {
+            	barBase = RectangleEdge.TOP;
+            }
         }
-
-        if (isItemLabelVisible(series, item)) {
-            XYItemLabelGenerator generator = getItemLabelGenerator(series,
-                    item);
-            drawItemLabel(g2, dataset, series, item, plot, generator, bar,
-                    y1 < 0.0);
+        if (pass == 0 && getShadowsVisible()) {
+            getBarPainter().paintBarShadow(g2, this, series, item, bar, barBase,
+        		!getUseYInterval());
         }
+        if (pass == 1) {
+            getBarPainter().paintBar(g2, this, series, item, bar, barBase);
 
-        // add an entity for the item...
-        if (info != null) {
-            EntityCollection entities = info.getOwner().getEntityCollection();
-            if (entities != null) {
-                addEntity(entities, bar, dataset, series, item,
-                        bar.getCenterX(), bar.getCenterY());
+            if (isItemLabelVisible(series, item)) {
+                XYItemLabelGenerator generator = getItemLabelGenerator(series,
+                        item);
+                drawItemLabel(g2, dataset, series, item, plot, generator, bar,
+                        y1 < 0.0);
+            }
+
+            // add an entity for the item...
+            if (info != null) {
+                EntityCollection entities
+                        = info.getOwner().getEntityCollection();
+                if (entities != null) {
+                    addEntity(entities, bar, dataset, series, item,
+                            bar.getCenterX(), bar.getCenterY());
+                }
             }
         }
 

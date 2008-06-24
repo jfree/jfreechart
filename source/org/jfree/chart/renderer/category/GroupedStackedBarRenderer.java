@@ -42,6 +42,7 @@
  *               --> CategoryItemLabelGenerator (DG);
  * 22-Sep-2005 : Renamed getMaxBarWidth() --> getMaximumBarWidth() (DG);
  * 20-Dec-2007 : Fix for bug 1848961 (DG);
+ * 24-Jun-2008 : Added new barPainter mechanism (DG);
  *
  */
 
@@ -282,6 +283,25 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
 
         double translatedBase;
         double translatedValue;
+        boolean positive = (value > 0.0);
+        boolean inverted = rangeAxis.isInverted();
+        RectangleEdge barBase;
+        if (orientation == PlotOrientation.HORIZONTAL) {
+            if (positive && inverted || !positive && !inverted) {
+                barBase = RectangleEdge.RIGHT;
+            }
+            else {
+            	barBase = RectangleEdge.LEFT;
+            }
+        }
+        else {
+            if (positive && !inverted || !positive && inverted) {
+                barBase = RectangleEdge.BOTTOM;
+            }
+            else {
+            	barBase = RectangleEdge.TOP;
+            }
+        }
         RectangleEdge location = plot.getRangeAxisEdge();
         if (value > 0.0) {
             translatedBase = rangeAxis.valueToJava2D(positiveBase, dataArea,
@@ -308,20 +328,7 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
             bar = new Rectangle2D.Double(barW0, barL0, state.getBarWidth(),
                     barLength);
         }
-        Paint itemPaint = getItemPaint(row, column);
-        if (getGradientPaintTransformer() != null
-                && itemPaint instanceof GradientPaint) {
-            GradientPaint gp = (GradientPaint) itemPaint;
-            itemPaint = getGradientPaintTransformer().transform(gp, bar);
-        }
-        g2.setPaint(itemPaint);
-        g2.fill(bar);
-        if (isDrawBarOutline()
-                && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
-            g2.setStroke(getItemStroke(row, column));
-            g2.setPaint(getItemOutlinePaint(row, column));
-            g2.draw(bar);
-        }
+        getBarPainter().paintBar(g2, this, row, column, bar, barBase);
 
         CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
                 column);

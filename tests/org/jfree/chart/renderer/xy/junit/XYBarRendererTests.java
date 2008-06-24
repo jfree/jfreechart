@@ -64,6 +64,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.GradientXYBarPainter;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultIntervalXYDataset;
@@ -157,6 +158,31 @@ public class XYBarRendererTests extends TestCase {
         assertFalse(r1.equals(r2));
         r2.setNegativeItemLabelPositionFallback(new ItemLabelPosition());
         assertTrue(r1.equals(r2));
+
+        // barPainter
+        r1.setBarPainter(new GradientXYBarPainter(0.11, 0.22, 0.33));
+        assertFalse(r1.equals(r2));
+        r2.setBarPainter(new GradientXYBarPainter(0.11, 0.22, 0.33));
+        assertTrue(r1.equals(r2));
+
+        // shadowsVisible
+        r1.setShadowVisible(false);
+        assertFalse(r1.equals(r2));
+        r2.setShadowVisible(false);
+        assertTrue(r1.equals(r2));
+
+        // shadowXOffset
+        r1.setShadowXOffset(3.3);
+        assertFalse(r1.equals(r2));
+        r2.setShadowXOffset(3.3);
+        assertTrue(r1.equals(r2));
+
+        // shadowYOffset
+        r1.setShadowYOffset(3.3);
+        assertFalse(r1.equals(r2));
+        r2.setShadowYOffset(3.3);
+        assertTrue(r1.equals(r2));
+
     }
 
     /**

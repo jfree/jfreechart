@@ -76,10 +76,12 @@ public class RendererXYPackageTests extends TestCase {
         suite.addTestSuite(CandlestickRendererTests.class);
         suite.addTestSuite(ClusteredXYBarRendererTests.class);
         suite.addTestSuite(DeviationRendererTests.class);
+        suite.addTestSuite(GradientXYBarPainterTests.class);
         suite.addTestSuite(HighLowRendererTests.class);
         suite.addTestSuite(StackedXYAreaRendererTests.class);
         suite.addTestSuite(StackedXYAreaRenderer2Tests.class);
         suite.addTestSuite(StackedXYBarRendererTests.class);
+        suite.addTestSuite(StandardXYBarPainterTests.class);
         suite.addTestSuite(StandardXYItemRendererTests.class);
         suite.addTestSuite(VectorRendererTests.class);
         suite.addTestSuite(WindItemRendererTests.class);

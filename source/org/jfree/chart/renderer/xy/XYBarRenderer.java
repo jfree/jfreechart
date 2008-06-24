@@ -93,13 +93,13 @@
  * 17-Jun-2008 : Apply legend font and paint attributes (DG);
  * 19-Jun-2008 : Added findRangeBounds() method override to fix bug in default
  *               axis range (DG);
+ * 24-Jun-2008 : Added new barPainter mechanism (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
@@ -145,6 +145,38 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /** For serialization. */
     private static final long serialVersionUID = 770559577251370036L;
+
+    /**
+     * The default bar painter assigned to each new instance of this renderer.
+     *
+     * @since 1.0.11
+     */
+    private static XYBarPainter defaultBarPainter = new GradientXYBarPainter();
+
+    /**
+     * Returns the default bar painter.
+     *
+     * @return The default bar painter.
+     *
+     * @since 1.0.11
+     */
+    public static XYBarPainter getDefaultBarPainter() {
+        return XYBarRenderer.defaultBarPainter;
+    }
+
+    /**
+     * Sets the default bar painter.
+     *
+     * @param painter  the painter (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public static void setDefaultBarPainter(XYBarPainter painter) {
+    	if (painter == null) {
+    		throw new IllegalArgumentException("Null 'painter' argument.");
+    	}
+    	XYBarRenderer.defaultBarPainter = painter;
+    }
 
     /**
      * The state class used by this renderer.
@@ -222,6 +254,34 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     private ItemLabelPosition negativeItemLabelPositionFallback;
 
     /**
+     * The bar painter (never <code>null</code>).
+     *
+     * @since 1.0.11
+     */
+    private XYBarPainter barPainter;
+
+    /**
+     * The flag that controls whether or not shadows are drawn for the bars.
+     *
+     * @since 1.0.11
+     */
+    private boolean shadowsVisible;
+
+    /**
+     * The x-offset for the shadow effect.
+     *
+     * @since 1.0.11
+     */
+    private double shadowXOffset;
+
+    /**
+     * The y-offset for the shadow effect.
+     *
+     * @since 1.0.11
+     */
+    private double shadowYOffset;
+
+    /**
      * The default constructor.
      */
     public XYBarRenderer() {
@@ -241,6 +301,10 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         this.gradientPaintTransformer = new StandardGradientPaintTransformer();
         this.drawBarOutline = false;
         this.legendBar = new Rectangle2D.Double(-3.0, -5.0, 6.0, 10.0);
+        this.barPainter = getDefaultBarPainter();
+        this.shadowsVisible = true;
+        this.shadowXOffset = 4.0;
+        this.shadowYOffset = 4.0;
     }
 
     /**
@@ -459,6 +523,107 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
+     * Returns the bar painter.
+     *
+     * @return The bar painter (never <code>null</code>).
+     *
+     * @since 1.0.11
+     */
+    public XYBarPainter getBarPainter() {
+    	return this.barPainter;
+    }
+
+    /**
+     * Sets the bar painter and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param painter  the painter (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setBarPainter(XYBarPainter painter) {
+    	if (painter == null) {
+    		throw new IllegalArgumentException("Null 'painter' argument.");
+    	}
+    	this.barPainter = painter;
+    	fireChangeEvent();
+    }
+
+    /**
+     * Returns the flag that controls whether or not shadows are drawn for
+     * the bars.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.11
+     */
+    public boolean getShadowsVisible() {
+    	return this.shadowsVisible;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the renderer
+     * draws shadows for the bars, and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param visible  the new flag value.
+     *
+     * @since 1.0.11
+     */
+    public void setShadowVisible(boolean visible) {
+        this.shadowsVisible = visible;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the shadow x-offset.
+     *
+     * @return The shadow x-offset.
+     *
+     * @since 1.0.11
+     */
+    public double getShadowXOffset() {
+    	return this.shadowXOffset;
+    }
+
+    /**
+     * Sets the x-offset for the bar shadow and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param offset  the offset.
+     *
+     * @since 1.0.11
+     */
+    public void setShadowXOffset(double offset) {
+    	this.shadowXOffset = offset;
+    	fireChangeEvent();
+    }
+
+    /**
+     * Returns the shadow y-offset.
+     *
+     * @return The shadow y-offset.
+     *
+     * @since 1.0.11
+     */
+    public double getShadowYOffset() {
+    	return this.shadowYOffset;
+    }
+
+    /**
+     * Sets the y-offset for the bar shadow and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param offset  the offset.
+     *
+     * @since 1.0.11
+     */
+    public void setShadowYOffset(double offset) {
+    	this.shadowYOffset = offset;
+    	fireChangeEvent();
+    }
+
+    /**
      * Initialises the renderer and returns a state object that should be
      * passed to all subsequent calls to the drawItem() method.  Here we
      * calculate the Java2D y-coordinate for zero, since all the bars have
@@ -662,24 +827,30 @@ public class XYBarRenderer extends AbstractXYItemRenderer
                     top - bottom);
         }
 
-        Paint itemPaint = getItemPaint(series, item);
-        if (getGradientPaintTransformer()
-                != null && itemPaint instanceof GradientPaint) {
-            GradientPaint gp = (GradientPaint) itemPaint;
-            itemPaint = getGradientPaintTransformer().transform(gp, bar);
-        }
-        g2.setPaint(itemPaint);
-        g2.fill(bar);
-        if (isDrawBarOutline()
-                && Math.abs(translatedEndX - translatedStartX) > 3) {
-            Stroke stroke = getItemOutlineStroke(series, item);
-            Paint paint = getItemOutlinePaint(series, item);
-            if (stroke != null && paint != null) {
-                g2.setStroke(stroke);
-                g2.setPaint(paint);
-                g2.draw(bar);
+        boolean positive = (value1 > 0.0);
+        boolean inverted = rangeAxis.isInverted();
+        RectangleEdge barBase;
+        if (orientation == PlotOrientation.HORIZONTAL) {
+            if (positive && inverted || !positive && !inverted) {
+                barBase = RectangleEdge.RIGHT;
+            }
+            else {
+            	barBase = RectangleEdge.LEFT;
             }
         }
+        else {
+            if (positive && !inverted || !positive && inverted) {
+                barBase = RectangleEdge.BOTTOM;
+            }
+            else {
+            	barBase = RectangleEdge.TOP;
+            }
+        }
+        if (getShadowsVisible()) {
+            this.barPainter.paintBarShadow(g2, this, series, item, bar, barBase,
+        		!this.useYInterval);
+        }
+        this.barPainter.paintBar(g2, this, series, item, bar, barBase);
 
         if (isItemLabelVisible(series, item)) {
             XYItemLabelGenerator generator = getItemLabelGenerator(series,
@@ -987,9 +1158,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         if (!(obj instanceof XYBarRenderer)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         XYBarRenderer that = (XYBarRenderer) obj;
         if (this.base != that.base) {
             return false;
@@ -1019,7 +1187,19 @@ public class XYBarRenderer extends AbstractXYItemRenderer
                 that.negativeItemLabelPositionFallback)) {
             return false;
         }
-        return true;
+        if (!this.barPainter.equals(that.barPainter)) {
+        	return false;
+        }
+        if (this.shadowsVisible != that.shadowsVisible) {
+        	return false;
+        }
+        if (this.shadowXOffset != that.shadowXOffset) {
+        	return false;
+        }
+        if (this.shadowYOffset != that.shadowYOffset) {
+        	return false;
+        }
+        return super.equals(obj);
     }
 
     /**
