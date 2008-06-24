@@ -63,7 +63,7 @@ public class SWTPaintCanvas extends Canvas {
      */
     public SWTPaintCanvas(Composite parent, int style, Color color) {
         this(parent, style);
-        this.setColor(color);
+        setColor(color);
     }
     
     /**
