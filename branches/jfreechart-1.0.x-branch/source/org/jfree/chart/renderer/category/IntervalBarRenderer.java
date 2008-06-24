@@ -55,6 +55,7 @@
  * 20-Apr-2005 : Renamed CategoryLabelGenerator
  *               --> CategoryItemLabelGenerator (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 24-Jun-2008 : Added new barPainter mechanism (DG);
  *
  */
 
@@ -199,6 +200,7 @@ public class IntervalBarRenderer extends BarRenderer
         // BAR HEIGHT
         double rectHeight = Math.abs(java2dValue1 - java2dValue0);
 
+        RectangleEdge barBase = RectangleEdge.LEFT;
         if (orientation == PlotOrientation.HORIZONTAL) {
             // BAR Y
             rectY = domainAxis.getCategoryStart(column, getColumnCount(),
@@ -216,7 +218,7 @@ public class IntervalBarRenderer extends BarRenderer
 
             rectHeight = state.getBarWidth();
             rectWidth = Math.abs(java2dValue1 - java2dValue0);
-
+            barBase = RectangleEdge.LEFT;
         }
         else if (orientation == PlotOrientation.VERTICAL) {
             // BAR X
@@ -233,24 +235,15 @@ public class IntervalBarRenderer extends BarRenderer
             }
 
             rectY = java2dValue0;
-
+            barBase = RectangleEdge.BOTTOM;
         }
         Rectangle2D bar = new Rectangle2D.Double(rectX, rectY, rectWidth,
                 rectHeight);
-        Paint seriesPaint = getItemPaint(row, column);
-        g2.setPaint(seriesPaint);
-        g2.fill(bar);
-
-        // draw the outline...
-        if (state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
-            Stroke stroke = getItemOutlineStroke(row, column);
-            Paint paint = getItemOutlinePaint(row, column);
-            if (stroke != null && paint != null) {
-                g2.setStroke(stroke);
-                g2.setPaint(paint);
-                g2.draw(bar);
-            }
+        BarPainter painter = getBarPainter();
+        if (getShadowsVisible()) {
+        	painter.paintBarShadow(g2, this, row, column, bar, barBase, false);
         }
+        getBarPainter().paintBar(g2, this, row, column, bar, barBase);
 
         CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
                 column);

@@ -1,3 +1,84 @@
+2008-06-24  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/BarPainter.java: New file,
+    * source/org/jfree/chart/renderer/category/BarRenderer.java:
+    (defaultBarPainter): New field,
+    (getDefaultBarPainter): New method,
+    (setDefaultBarPainter): Likewise,
+    (barPainter): New field,
+    (shadowsVisible): Likewise,
+    (shadowXOffset): Likewise,
+    (shadowYOffset): Likewise,
+    (BarRenderer): Initialise new fields,
+    (getBarPainter): New method,
+    (setBarPainter): Likewise,
+    (getShadowsVisible): Likewise,
+    (setShadowsVisible): Likewise,
+    (getShadowXOffset): Likewise,
+    (setShadowXOffset): Likewise,
+    (getShadowYOffset): Likewise,
+    (setShadowYOffset): Likewise,
+    (drawItem): Use new barPainter,
+    (equals): Check new fields,
+    * source/org/jfree/chart/renderer/category/GanttRenderer.java
+    (drawTask): Use new barPainter,
+    (drawTasks): Likewise,
+    * source/org/jfree/chart/renderer/category/GradientBarPainter.java: 
+    New file,
+    * source/org/jfree/chart/renderer/category/GroupedStackedBarRenderer.java
+    (drawItem): Use new barPainter,
+    * source/org/jfree/chart/renderer/category/IntervalBarRenderer.java
+    (drawItem): Use new barPainter,
+    * source/org/jfree/chart/renderer/category/StackedBarRenderer.java
+    (getPassCount): Now returns 3,
+    (drawItem): Use new barPainter,
+    * source/org/jfree/chart/renderer/category/StandardBarPainter.java: 
+    New file,
+    * source/org/jfree/chart/renderer/xy/ClusteredXYBarRenderer.java
+    (getPassCount): Now returns 2,
+    (drawItem): Use new barPainter,
+    * source/org/jfree/chart/renderer/xy/GradientXYBarPainter.java: New file,
+    * source/org/jfree/chart/renderer/xy/StackedXYBarRenderer.java
+    (getPassCount): Now returns 3,
+    (drawItem): Use new barPainter,
+    * source/org/jfree/chart/renderer/xy/StandardXYBarPainter.java: New file,
+    * source/org/jfree/chart/renderer/xy/XYBarPainter.java: New file,
+    * source/org/jfree/chart/renderer/xy/XYBarRenderer.java
+    (defaultBarPainter): New field,
+    (getDefaultBarPainter): New method,
+    (setDefaultBarPainter): Likewise,
+    (barPainter): New field,
+    (shadowsVisible): Likewise,
+    (shadowXOffset): Likewise,
+    (shadowYOffset): Likewise,
+    (XYBarRenderer(double)): Initialise new fields,
+    (getBarPainter): New method,
+    (setBarPainter): Likewise,
+    (getShadowsVisible): Likewise,
+    (setShadowsVisible): Likewise,
+    (getShadowXOffset): Likewise,
+    (setShadowXOffset): Likewise,
+    (getShadowYOffset): Likewise,
+    (setShadowYOffset): Likewise,
+    (drawItem): Use new barPainter,
+    (equals): Check new fields,
+    * tests/org/jfree/chart/renderer/category/junit/BarRendererTests.java
+    (testEquals): Updated for new fields,
+    * tests/org/jfree/chart/renderer/category/junit/GradientBarPainterTests.java:
+    New file,
+    * tests/org/jfree/chart/renderer/category/junit/RendererCategoryPackageTests.java
+    (suite): Included new test classes,
+    * tests/org/jfree/chart/renderer/category/junit/StandardBarPainterTests.java: 
+    New file,
+    * tests/org/jfree/chart/renderer/xy/junit/GradientXYBarPainterTests.java:
+    New file,
+    * tests/org/jfree/chart/renderer/xy/junit/RendererXYPackageTests.java
+    (suite): Included new test classes,
+    * tests/org/jfree/chart/renderer/xy/junit/StandardXYBarPainterTests.java:
+    New file,
+    * tests/org/jfree/chart/renderer/xy/junit/XYBarRendererTests.java
+    (testEquals): Updated for new fields.
+    
 2008-06-19  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYBarRenderer.java

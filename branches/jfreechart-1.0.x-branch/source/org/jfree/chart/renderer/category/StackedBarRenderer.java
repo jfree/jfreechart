@@ -86,6 +86,7 @@
  *               1304139 (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 11-Oct-2006 : Source reformatting (DG);
+ * 24-Jun-2008 : Added new barPainter mechanism (DG);
  *
  */
 
@@ -187,14 +188,15 @@ public class StackedBarRenderer extends BarRenderer
     }
 
     /**
-     * Returns the number of passes (<code>2</code>) required by this renderer.
-     * The first pass is used to draw the bars, the second pass is used to
-     * draw the item labels (if visible).
+     * Returns the number of passes (<code>3</code>) required by this renderer.
+     * The first pass is used to draw the bar shadows, the second pass is used
+     * to draw the bars, and the third pass is used to draw the item labels
+     * (if visible).
      *
      * @return The number of passes required by the renderer.
      */
     public int getPassCount() {
-        return 2;
+        return 3;
     }
 
     /**
@@ -323,8 +325,28 @@ public class StackedBarRenderer extends BarRenderer
 
         double translatedBase;
         double translatedValue;
+        boolean positive = (value > 0.0);
+        boolean inverted = rangeAxis.isInverted();
+        RectangleEdge barBase;
+        if (orientation == PlotOrientation.HORIZONTAL) {
+            if (positive && inverted || !positive && !inverted) {
+                barBase = RectangleEdge.RIGHT;
+            }
+            else {
+            	barBase = RectangleEdge.LEFT;
+            }
+        }
+        else {
+            if (positive && !inverted || !positive && inverted) {
+                barBase = RectangleEdge.BOTTOM;
+            }
+            else {
+            	barBase = RectangleEdge.TOP;
+            }
+        }
+
         RectangleEdge location = plot.getRangeAxisEdge();
-        if (value >= 0.0) {
+        if (positive) {
             translatedBase = rangeAxis.valueToJava2D(positiveBase, dataArea,
                     location);
             translatedValue = rangeAxis.valueToJava2D(positiveBase + value,
@@ -350,19 +372,15 @@ public class StackedBarRenderer extends BarRenderer
                     barLength);
         }
         if (pass == 0) {
-            Paint itemPaint = getItemPaint(row, column);
-            GradientPaintTransformer t = getGradientPaintTransformer();
-            if (t != null && itemPaint instanceof GradientPaint) {
-                itemPaint = t.transform((GradientPaint) itemPaint, bar);
-            }
-            g2.setPaint(itemPaint);
-            g2.fill(bar);
-            if (isDrawBarOutline()
-                    && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD) {
-                g2.setStroke(getItemOutlineStroke(row, column));
-                g2.setPaint(getItemOutlinePaint(row, column));
-                g2.draw(bar);
-            }
+        	if (getShadowsVisible()) {
+                boolean pegToBase = (positive && (positiveBase == getBase()))
+                        || (!positive && (negativeBase == getBase()));
+                getBarPainter().paintBarShadow(g2, this, row, column, bar,
+                		barBase, pegToBase);
+        	}
+        }
+        else if (pass == 1) {
+        	getBarPainter().paintBar(g2, this, row, column, bar, barBase);
 
             // add an item entity, if this information is being collected
             EntityCollection entities = state.getEntityCollection();
@@ -370,7 +388,7 @@ public class StackedBarRenderer extends BarRenderer
                 addItemEntity(entities, dataset, row, column, bar);
             }
         }
-        else if (pass == 1) {
+        else if (pass == 2) {
             CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
                     column);
             if (generator != null && isItemLabelVisible(row, column)) {
