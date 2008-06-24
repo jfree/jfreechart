@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------------------
  * AbstractCategoryItemRendererTests.java
  * --------------------------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,7 +37,7 @@
  * 12-Feb-2004 : Version 1 (DG);
  * 24-Nov-2006 : New cloning tests (DG);
  * 07-Dec-2006 : Added testEquals() method (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer.category.junit;
@@ -69,7 +69,7 @@ public class AbstractCategoryItemRendererTests extends TestCase {
     public static Test suite() {
         return new TestSuite(AbstractCategoryItemRendererTests.class);
     }
-    
+
     /**
      * Checks that all fields are distinguished.
      */
@@ -77,26 +77,26 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         BarRenderer r1 = new BarRenderer();
         BarRenderer r2 = new BarRenderer();
         assertEquals(r1, r2);
-        
+
         // the plot field is NOT tested
-        
+
         // toolTipGenerator
         r1.setToolTipGenerator(new StandardCategoryToolTipGenerator());
         assertFalse(r1.equals(r2));
         r2.setToolTipGenerator(new StandardCategoryToolTipGenerator());
         assertTrue(r1.equals(r2));
-        
+
         // toolTipGeneratorList
         r1.setSeriesToolTipGenerator(1, new StandardCategoryToolTipGenerator());
         assertFalse(r1.equals(r2));
         r2.setSeriesToolTipGenerator(1, new StandardCategoryToolTipGenerator());
         assertTrue(r1.equals(r2));
-        
+
         // baseToolTipGenerator
-        r1.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator("{2}", 
+        r1.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator("{2}",
                 NumberFormat.getInstance()));
         assertFalse(r1.equals(r2));
-        r2.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator("{2}", 
+        r2.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator("{2}",
                 NumberFormat.getInstance()));
         assertTrue(r1.equals(r2));
 
@@ -105,15 +105,15 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         assertFalse(r1.equals(r2));
         r2.setItemLabelGenerator(new StandardCategoryItemLabelGenerator());
         assertTrue(r1.equals(r2));
-        
+
         // itemLabelGeneratorList
-        r1.setSeriesItemLabelGenerator(1, 
+        r1.setSeriesItemLabelGenerator(1,
                 new StandardCategoryItemLabelGenerator());
         assertFalse(r1.equals(r2));
-        r2.setSeriesItemLabelGenerator(1, 
+        r2.setSeriesItemLabelGenerator(1,
                 new StandardCategoryItemLabelGenerator());
         assertTrue(r1.equals(r2));
-        
+
         // baseItemLabelGenerator
         r1.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator(
                 "{2}", NumberFormat.getInstance()));
@@ -121,19 +121,19 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         r2.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator(
                 "{2}", NumberFormat.getInstance()));
         assertTrue(r1.equals(r2));
-    
+
         // urlGenerator
         r1.setItemURLGenerator(new StandardCategoryURLGenerator());
         assertFalse(r1.equals(r2));
         r2.setItemURLGenerator(new StandardCategoryURLGenerator());
         assertTrue(r1.equals(r2));
-        
+
         // urlGeneratorList
         r1.setSeriesItemURLGenerator(1, new StandardCategoryURLGenerator());
         assertFalse(r1.equals(r2));
         r2.setSeriesItemURLGenerator(1, new StandardCategoryURLGenerator());
         assertTrue(r1.equals(r2));
-        
+
         // baseItemURLGenerator
         r1.setBaseItemURLGenerator(new StandardCategoryURLGenerator(
                 "abc.html"));
@@ -141,7 +141,7 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         r2.setBaseItemURLGenerator(new StandardCategoryURLGenerator(
                 "abc.html"));
         assertTrue(r1.equals(r2));
-        
+
         // legendItemLabelGenerator
         r1.setLegendItemLabelGenerator(new StandardCategorySeriesLabelGenerator(
                 "XYZ"));
@@ -149,7 +149,7 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         r2.setLegendItemLabelGenerator(new StandardCategorySeriesLabelGenerator(
                 "XYZ"));
         assertTrue(r1.equals(r2));
-        
+
         // legendItemToolTipGenerator
         r1.setLegendItemToolTipGenerator(
                 new StandardCategorySeriesLabelGenerator("ToolTip"));
@@ -183,9 +183,9 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         r1 = new BarRenderer();
-        r1.setSeriesItemLabelGenerator(0, 
+        r1.setSeriesItemLabelGenerator(0,
                 new StandardCategoryItemLabelGenerator());
         r2 = null;
         try {
@@ -197,7 +197,7 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         r1 = new BarRenderer();
         r1.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
         r2 = null;
@@ -211,7 +211,7 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -228,9 +228,9 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         r1 = new BarRenderer();
-        r1.setSeriesItemLabelGenerator(0, 
+        r1.setSeriesItemLabelGenerator(0,
                 new IntervalCategoryItemLabelGenerator());
         r2 = null;
         try {
@@ -242,7 +242,7 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         r1 = new BarRenderer();
         r1.setBaseItemLabelGenerator(new IntervalCategoryItemLabelGenerator());
         r2 = null;
@@ -256,12 +256,12 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
     }
-    
+
     /**
      * Check that the legendItemLabelGenerator is cloned.
      */
     public void testCloning_LegendItemLabelGenerator() {
-        StandardCategorySeriesLabelGenerator generator 
+        StandardCategorySeriesLabelGenerator generator
                 = new StandardCategorySeriesLabelGenerator("Series {0}");
         BarRenderer r1 = new BarRenderer();
         r1.setLegendItemLabelGenerator(generator);
@@ -275,9 +275,9 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         // check that the generator has been cloned
-        assertTrue(r1.getLegendItemLabelGenerator() 
+        assertTrue(r1.getLegendItemLabelGenerator()
                 != r2.getLegendItemLabelGenerator());
     }
 
@@ -285,7 +285,7 @@ public class AbstractCategoryItemRendererTests extends TestCase {
      * Check that the legendItemToolTipGenerator is cloned.
      */
     public void testCloning_LegendItemToolTipGenerator() {
-        StandardCategorySeriesLabelGenerator generator 
+        StandardCategorySeriesLabelGenerator generator
                 = new StandardCategorySeriesLabelGenerator("Series {0}");
         BarRenderer r1 = new BarRenderer();
         r1.setLegendItemToolTipGenerator(generator);
@@ -299,9 +299,9 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         // check that the generator has been cloned
-        assertTrue(r1.getLegendItemToolTipGenerator() 
+        assertTrue(r1.getLegendItemToolTipGenerator()
                 != r2.getLegendItemToolTipGenerator());
     }
 
@@ -309,7 +309,7 @@ public class AbstractCategoryItemRendererTests extends TestCase {
      * Check that the legendItemURLGenerator is cloned.
      */
     public void testCloning_LegendItemURLGenerator() {
-        StandardCategorySeriesLabelGenerator generator 
+        StandardCategorySeriesLabelGenerator generator
                 = new StandardCategorySeriesLabelGenerator("Series {0}");
         BarRenderer r1 = new BarRenderer();
         r1.setLegendItemURLGenerator(generator);
@@ -323,11 +323,11 @@ public class AbstractCategoryItemRendererTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         // check that the generator has been cloned
-        assertTrue(r1.getLegendItemURLGenerator() 
+        assertTrue(r1.getLegendItemURLGenerator()
                 != r2.getLegendItemURLGenerator());
     }
 
 }
-    
+
