@@ -135,7 +135,7 @@ class SWTAxisEditor extends Composite {
         
         FillLayout layout = new FillLayout(SWT.VERTICAL);
         layout.marginHeight = layout.marginWidth = 4;
-        this.setLayout(layout);
+        setLayout(layout);
         Group general = new Group(this, SWT.NONE);
         general.setLayout(new GridLayout(3, false));
         general.setText(localizationResources.getString("General"));
