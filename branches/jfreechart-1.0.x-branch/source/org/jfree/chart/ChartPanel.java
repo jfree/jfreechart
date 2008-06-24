@@ -571,7 +571,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                       boolean zoom,
                       boolean tooltips) {
 
-        this.setChart(chart);
+        setChart(chart);
         this.chartMouseListeners = new EventListenerList();
         this.info = new ChartRenderingInfo();
         setPreferredSize(new Dimension(width, height));
