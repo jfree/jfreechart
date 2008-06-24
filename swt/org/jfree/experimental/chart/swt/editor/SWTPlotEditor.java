@@ -88,7 +88,7 @@ class SWTPlotEditor extends Composite {
         super(parent, style);
         FillLayout layout = new FillLayout();
         layout.marginHeight = layout.marginWidth = 4;
-        this.setLayout(layout);
+        setLayout(layout);
 
         Group plotType = new Group(this, SWT.NONE);
         FillLayout plotTypeLayout = new FillLayout();

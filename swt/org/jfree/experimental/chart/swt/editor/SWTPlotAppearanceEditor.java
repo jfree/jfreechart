@@ -100,7 +100,7 @@ class SWTPlotAppearanceEditor extends Composite {
         super(parent, style);
         FillLayout layout = new FillLayout();
         layout.marginHeight = layout.marginWidth = 4;
-        this.setLayout(layout);
+        setLayout(layout);
 
         Group general = new Group(this, SWT.NONE);
         GridLayout groupLayout = new GridLayout(3, false);
