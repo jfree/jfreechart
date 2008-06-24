@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------
@@ -40,7 +40,7 @@
  * 24-Oct-2007 : Maintain pointers in their own list, so they can be
  *               drawn after other layers (DG);
  * 15-Feb-2007 : Fixed clipping bug (1873160) (DG);
- * 
+ *
  */
 
 package org.jfree.chart.plot.dial;
@@ -67,7 +67,7 @@ import org.jfree.util.ObjectUtilities;
 
 /**
  * A dial plot composed of user-definable layers.
- * 
+ *
  * @since 1.0.7
  */
 public class DialPlot extends Plot implements DialLayerChangeListener {
@@ -76,27 +76,27 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * The background layer (optional).
      */
     private DialLayer background;
-    
+
     /**
      * The needle cap (optional).
      */
     private DialLayer cap;
-    
+
     /**
      * The dial frame.
      */
     private DialFrame dialFrame;
-    
+
     /**
      * The dataset(s) for the dial plot.
      */
     private ObjectList datasets;
-    
+
     /**
-     * The scale(s) for the dial plot. 
+     * The scale(s) for the dial plot.
      */
     private ObjectList scales;
-    
+
     /** Storage for keys that map datasets to scales. */
     private ObjectList datasetToScaleMap;
 
@@ -104,42 +104,42 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * The drawing layers for the dial plot.
      */
     private List layers;
-    
-    /** 
+
+    /**
      * The pointer(s) for the dial.
      */
     private List pointers;
-    
+
     /**
      * The x-coordinate for the view window.
      */
     private double viewX;
-    
+
     /**
      * The y-coordinate for the view window.
      */
     private double viewY;
-    
+
     /**
      * The width of the view window, expressed as a percentage.
      */
     private double viewW;
-    
+
     /**
      * The height of the view window, expressed as a percentage.
      */
     private double viewH;
-    
-    /** 
+
+    /**
      * Creates a new instance of <code>DialPlot</code>.
      */
     public DialPlot() {
-        this(null);    
+        this(null);
     }
-    
-    /** 
+
+    /**
      * Creates a new instance of <code>DialPlot</code>.
-     * 
+     *
      * @param dataset  the dataset (<code>null</code> permitted).
      */
     public DialPlot(ValueDataset dataset) {
@@ -148,7 +148,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         this.dialFrame = new ArcDialFrame();
         this.datasets = new ObjectList();
         if (dataset != null) {
-            this.setDataset(dataset);  
+            setDataset(dataset);
         }
         this.scales = new ObjectList();
         this.datasetToScaleMap = new ObjectList();
@@ -170,7 +170,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     public DialLayer getBackground() {
         return this.background;
     }
-    
+
     /**
      * Sets the background layer and sends a {@link PlotChangeEvent} to all
      * registered listeners.
@@ -189,7 +189,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         }
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the cap.
      *
@@ -200,9 +200,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     public DialLayer getCap() {
         return this.cap;
     }
-    
+
     /**
-     * Sets the cap and sends a {@link PlotChangeEvent} to all registered 
+     * Sets the cap and sends a {@link PlotChangeEvent} to all registered
      * listeners.
      *
      * @param cap  the cap (<code>null</code> permitted).
@@ -230,9 +230,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     public DialFrame getDialFrame() {
         return this.dialFrame;
     }
-    
+
     /**
-     * Sets the dial's frame and sends a {@link PlotChangeEvent} to all 
+     * Sets the dial's frame and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
      * @param frame  the frame (<code>null</code> not permitted).
@@ -252,60 +252,60 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * Returns the x-coordinate of the viewing rectangle.  This is specified
      * in the range 0.0 to 1.0, relative to the dial's framing rectangle.
-     * 
+     *
      * @return The x-coordinate of the viewing rectangle.
-     * 
+     *
      * @see #setView(double, double, double, double)
      */
     public double getViewX() {
         return this.viewX;
     }
-    
+
     /**
      * Returns the y-coordinate of the viewing rectangle.  This is specified
      * in the range 0.0 to 1.0, relative to the dial's framing rectangle.
-     * 
+     *
      * @return The y-coordinate of the viewing rectangle.
-     * 
+     *
      * @see #setView(double, double, double, double)
      */
     public double getViewY() {
         return this.viewY;
     }
-    
+
     /**
      * Returns the width of the viewing rectangle.  This is specified
      * in the range 0.0 to 1.0, relative to the dial's framing rectangle.
-     * 
+     *
      * @return The width of the viewing rectangle.
-     * 
+     *
      * @see #setView(double, double, double, double)
      */
     public double getViewWidth() {
         return this.viewW;
     }
-    
+
     /**
      * Returns the height of the viewing rectangle.  This is specified
      * in the range 0.0 to 1.0, relative to the dial's framing rectangle.
-     * 
+     *
      * @return The height of the viewing rectangle.
-     * 
+     *
      * @see #setView(double, double, double, double)
      */
     public double getViewHeight() {
         return this.viewH;
     }
-    
+
     /**
      * Sets the viewing rectangle, relative to the dial's framing rectangle,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
-     * 
+     *
      * @param x  the x-coordinate (in the range 0.0 to 1.0).
      * @param y  the y-coordinate (in the range 0.0 to 1.0).
      * @param w  the width (in the range 0.0 to 1.0).
      * @param h  the height (in the range 0.0 to 1.0).
-     * 
+     *
      * @see #getViewX()
      * @see #getViewY()
      * @see #getViewWidth()
@@ -320,9 +320,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Adds a layer to the plot and sends a {@link PlotChangeEvent} to all 
+     * Adds a layer to the plot and sends a {@link PlotChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param layer  the layer (<code>null</code> not permitted).
      */
     public void addLayer(DialLayer layer) {
@@ -333,12 +333,12 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         layer.addChangeListener(this);
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the index for the specified layer.
-     * 
+     *
      * @param layer  the layer (<code>null</code> not permitted).
-     * 
+     *
      * @return The layer index.
      */
     public int getLayerIndex(DialLayer layer) {
@@ -347,11 +347,11 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         }
         return this.layers.indexOf(layer);
     }
-    
+
     /**
-     * Removes the layer at the specified index and sends a 
+     * Removes the layer at the specified index and sends a
      * {@link PlotChangeEvent} to all registered listeners.
-     * 
+     *
      * @param index  the index.
      */
     public void removeLayer(int index) {
@@ -362,22 +362,22 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         this.layers.remove(index);
         fireChangeEvent();
     }
-    
+
     /**
      * Removes the specified layer and sends a {@link PlotChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param layer  the layer (<code>null</code> not permitted).
      */
     public void removeLayer(DialLayer layer) {
         // defer argument checking
         removeLayer(getLayerIndex(layer));
     }
-    
+
     /**
-     * Adds a pointer to the plot and sends a {@link PlotChangeEvent} to all 
+     * Adds a pointer to the plot and sends a {@link PlotChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param pointer  the pointer (<code>null</code> not permitted).
      */
     public void addPointer(DialPointer pointer) {
@@ -388,12 +388,12 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         pointer.addChangeListener(this);
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the index for the specified pointer.
-     * 
+     *
      * @param pointer  the pointer (<code>null</code> not permitted).
-     * 
+     *
      * @return The pointer index.
      */
     public int getPointerIndex(DialPointer pointer) {
@@ -402,11 +402,11 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         }
         return this.pointers.indexOf(pointer);
     }
-    
+
     /**
-     * Removes the pointer at the specified index and sends a 
+     * Removes the pointer at the specified index and sends a
      * {@link PlotChangeEvent} to all registered listeners.
-     * 
+     *
      * @param index  the index.
      */
     public void removePointer(int index) {
@@ -417,11 +417,11 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         this.pointers.remove(index);
         fireChangeEvent();
     }
-    
+
     /**
      * Removes the specified pointer and sends a {@link PlotChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param pointer  the pointer (<code>null</code> not permitted).
      */
     public void removePointer(DialPointer pointer) {
@@ -432,9 +432,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * Returns the dial pointer that is associated with the specified
      * dataset, or <code>null</code>.
-     * 
+     *
      * @param datasetIndex  the dataset index.
-     * 
+     *
      * @return The pointer.
      */
     public DialPointer getPointerForDataset(int datasetIndex) {
@@ -448,7 +448,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         }
         return result;
     }
-    
+
     /**
      * Returns the primary dataset for the plot.
      *
@@ -474,8 +474,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Sets the dataset for the plot, replacing the existing dataset, if there 
-     * is one, and sends a {@link PlotChangeEvent} to all registered 
+     * Sets the dataset for the plot, replacing the existing dataset, if there
+     * is one, and sends a {@link PlotChangeEvent} to all registered
      * listeners.
      *
      * @param dataset  the dataset (<code>null</code> permitted).
@@ -491,7 +491,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * @param dataset  the dataset (<code>null</code> permitted).
      */
     public void setDataset(int index, ValueDataset dataset) {
-        
+
         ValueDataset existing = (ValueDataset) this.datasets.get(index);
         if (existing != null) {
             existing.removeChangeListener(this);
@@ -500,11 +500,11 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         if (dataset != null) {
             dataset.addChangeListener(this);
         }
-        
+
         // send a dataset change event to self...
         DatasetChangeEvent event = new DatasetChangeEvent(this, dataset);
         datasetChanged(event);
-        
+
     }
 
     /**
@@ -514,29 +514,29 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      */
     public int getDatasetCount() {
         return this.datasets.size();
-    }    
-    
+    }
+
     /**
      * Draws the plot.  This method is usually called by the {@link JFreeChart}
      * instance that manages the plot.
-     * 
+     *
      * @param g2  the graphics target.
      * @param area  the area in which the plot should be drawn.
-     * @param anchor  the anchor point (typically the last point that the 
+     * @param anchor  the anchor point (typically the last point that the
      *     mouse clicked on, <code>null</code> is permitted).
      * @param parentState  the state for the parent plot (if any).
-     * @param info  used to collect plot rendering info (<code>null</code> 
+     * @param info  used to collect plot rendering info (<code>null</code>
      *     permitted).
      */
-    public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor, 
+    public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
             PlotState parentState, PlotRenderingInfo info) {
-        
+
         Shape origClip = g2.getClip();
         g2.setClip(area);
-        
+
         // first, expand the viewing area into a drawing frame
         Rectangle2D frame = viewToFrame(area);
-        
+
         // draw the background if there is one...
         if (this.background != null && this.background.isVisible()) {
             if (this.background.isClippedToWindow()) {
@@ -549,7 +549,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
                 this.background.draw(g2, this, frame, area);
             }
         }
-        
+
         Iterator iterator = this.layers.iterator();
         while (iterator.hasNext()) {
             DialLayer current = (DialLayer) iterator.next();
@@ -565,7 +565,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
                 }
             }
         }
-        
+
         // draw the pointers
         iterator = this.pointers.iterator();
         while (iterator.hasNext()) {
@@ -595,20 +595,20 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
                 this.cap.draw(g2, this, frame, area);
             }
         }
-        
+
         if (this.dialFrame.isVisible()) {
             this.dialFrame.draw(g2, this, frame, area);
         }
-        
+
         g2.setClip(origClip);
-        
+
     }
-    
+
     /**
      * Returns the frame surrounding the specified view rectangle.
-     * 
+     *
      * @param view  the view rectangle (<code>null</code> not permitted).
-     * 
+     *
      * @return The frame rectangle.
      */
     private Rectangle2D viewToFrame(Rectangle2D view) {
@@ -618,12 +618,12 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         double y = view.getY() - (height * this.viewY);
         return new Rectangle2D.Double(x, y, width, height);
     }
-    
+
     /**
      * Returns the value from the specified dataset.
-     * 
+     *
      * @param datasetIndex  the dataset index.
-     * 
+     *
      * @return The data value.
      */
     public double getValue(int datasetIndex) {
@@ -637,11 +637,11 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         }
         return result;
     }
-    
+
     /**
-     * Adds a dial scale to the plot and sends a {@link PlotChangeEvent} to 
+     * Adds a dial scale to the plot and sends a {@link PlotChangeEvent} to
      * all registered listeners.
-     * 
+     *
      * @param index  the scale index.
      * @param scale  the scale (<code>null</code> not permitted).
      */
@@ -656,9 +656,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         this.layers.add(scale);
         this.scales.set(index, scale);
         scale.addChangeListener(this);
-        fireChangeEvent();         
+        fireChangeEvent();
     }
-    
+
     /**
      * Returns the scale at the given index.
      *
@@ -676,41 +676,41 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
 
     /**
      * Maps a dataset to a particular scale.
-     * 
+     *
      * @param index  the dataset index (zero-based).
      * @param scaleIndex  the scale index (zero-based).
      */
     public void mapDatasetToScale(int index, int scaleIndex) {
-        this.datasetToScaleMap.set(index, new Integer(scaleIndex));  
-        fireChangeEvent(); 
+        this.datasetToScaleMap.set(index, new Integer(scaleIndex));
+        fireChangeEvent();
     }
-    
+
     /**
      * Returns the dial scale for a specific dataset.
-     * 
+     *
      * @param datasetIndex  the dataset index.
-     * 
+     *
      * @return The dial scale.
      */
     public DialScale getScaleForDataset(int datasetIndex) {
-        DialScale result = (DialScale) this.scales.get(0);    
+        DialScale result = (DialScale) this.scales.get(0);
         Integer scaleIndex = (Integer) this.datasetToScaleMap.get(datasetIndex);
         if (scaleIndex != null) {
             result = getScale(scaleIndex.intValue());
         }
-        return result;    
+        return result;
     }
-    
+
     /**
      * A utility method that computes a rectangle using relative radius values.
-     * 
+     *
      * @param rect  the reference rectangle (<code>null</code> not permitted).
      * @param radiusW  the width radius (must be > 0.0)
      * @param radiusH  the height radius.
-     * 
+     *
      * @return A new rectangle.
      */
-    public static Rectangle2D rectangleByRadius(Rectangle2D rect, 
+    public static Rectangle2D rectangleByRadius(Rectangle2D rect,
             double radiusW, double radiusH) {
         if (rect == null) {
             throw new IllegalArgumentException("Null 'rect' argument.");
@@ -721,11 +721,11 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         double h = rect.getHeight() * radiusH;
         return new Rectangle2D.Double(x - w / 2.0, y - h / 2.0, w, h);
     }
-    
+
     /**
-     * Receives notification when a layer has changed, and responds by 
+     * Receives notification when a layer has changed, and responds by
      * forwarding a {@link PlotChangeEvent} to all registered listeners.
-     * 
+     *
      * @param event  the event.
      */
     public void dialLayerChanged(DialLayerChangeEvent event) {
@@ -733,8 +733,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     }
 
     /**
-     * Tests this <code>DialPlot</code> instance for equality with an 
-     * arbitrary object.  The plot's dataset(s) is (are) not included in 
+     * Tests this <code>DialPlot</code> instance for equality with an
+     * arbitrary object.  The plot's dataset(s) is (are) not included in
      * the test.
      *
      * @param obj  the object (<code>null</code> permitted).
@@ -781,7 +781,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
 
     /**
      * Returns a hash code for this instance.
-     * 
+     *
      * @return The hash code.
      */
     public int hashCode() {
@@ -799,16 +799,16 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
-    
+
     /**
      * Returns the plot type.
-     * 
+     *
      * @return <code>"DialPlot"</code>
      */
     public String getPlotType() {
         return "DialPlot";
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -828,10 +828,10 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
     }
 
-    
+
 }
