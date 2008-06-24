@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------
  * DialValueIndicator.java
  * -----------------------
- * (C) Copyright 2006-2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,7 +37,7 @@
  * 03-Nov-2006 : Version 1 (DG);
  * 17-Oct-2007 : Updated equals() (DG);
  * 24-Oct-2007 : Added default constructor and missing event notification (DG);
- * 
+ *
  */
 
 package org.jfree.chart.plot.dial;
@@ -71,67 +71,67 @@ import org.jfree.util.PublicCloneable;
 
 /**
  * A value indicator for a {@link DialPlot}.
- * 
+ *
  * @since 1.0.7
  */
-public class DialValueIndicator extends AbstractDialLayer implements DialLayer, 
+public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         Cloneable, PublicCloneable, Serializable {
-    
+
     /** For serialization. */
     static final long serialVersionUID = 803094354130942585L;
 
     /** The dataset index. */
     private int datasetIndex;
-    
+
     /** The angle that defines the anchor point. */
     private double angle;
-    
+
     /** The radius that defines the anchor point. */
     private double radius;
-    
+
     /** The frame anchor. */
     private RectangleAnchor frameAnchor;
-    
+
     /** The template value. */
     private Number templateValue;
-    
+
     /** The formatter. */
     private NumberFormat formatter;
 
     /** The font. */
     private Font font;
-    
+
     /** The paint. */
     private transient Paint paint;
-    
+
     /** The background paint. */
     private transient Paint backgroundPaint;
-    
+
     /** The outline stroke. */
     private transient Stroke outlineStroke;
-    
+
     /** The outline paint. */
     private transient Paint outlinePaint;
-    
+
     /** The insets. */
     private RectangleInsets insets;
-    
+
     /** The value anchor. */
     private RectangleAnchor valueAnchor;
-    
+
     /** The text anchor for displaying the value. */
     private TextAnchor textAnchor;
-    
+
     /**
      * Creates a new instance of <code>DialValueIndicator</code>.
      */
     public DialValueIndicator() {
         this(0);
     }
-    
-    /** 
+
+    /**
      * Creates a new instance of <code>DialValueIndicator</code>.
-     * 
+     *
      * @param datasetIndex  the dataset index.
      */
     public DialValueIndicator(int datasetIndex) {
@@ -150,98 +150,98 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.valueAnchor = RectangleAnchor.RIGHT;
         this.textAnchor = TextAnchor.CENTER_RIGHT;
     }
-    
+
     /**
-     * Returns the index of the dataset from which this indicator fetches its 
+     * Returns the index of the dataset from which this indicator fetches its
      * current value.
-     * 
+     *
      * @return The dataset index.
-     * 
+     *
      * @see #setDatasetIndex(int)
      */
     public int getDatasetIndex() {
         return this.datasetIndex;
     }
-    
+
     /**
-     * Sets the dataset index and sends a {@link DialLayerChangeEvent} to all 
+     * Sets the dataset index and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param index  the index.
-     * 
+     *
      * @see #getDatasetIndex()
      */
     public void setDatasetIndex(int index) {
         this.datasetIndex = index;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
-     * Returns the angle for the anchor point.  The angle is specified in 
+     * Returns the angle for the anchor point.  The angle is specified in
      * degrees using the same orientation as Java's <code>Arc2D</code> class.
-     * 
+     *
      * @return The angle (in degrees).
-     * 
+     *
      * @see #setAngle(double)
      */
     public double getAngle() {
         return this.angle;
     }
-    
+
     /**
-     * Sets the angle for the anchor point and sends a 
+     * Sets the angle for the anchor point and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
-     * 
+     *
      * @param angle  the angle (in degrees).
-     * 
+     *
      * @see #getAngle()
      */
     public void setAngle(double angle) {
         this.angle = angle;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the radius.
-     * 
+     *
      * @return The radius.
-     * 
+     *
      * @see #setRadius(double)
      */
     public double getRadius() {
         return this.radius;
     }
-    
+
     /**
-     * Sets the radius and sends a {@link DialLayerChangeEvent} to all 
+     * Sets the radius and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param radius  the radius.
-     * 
+     *
      * @see #getRadius()
      */
     public void setRadius(double radius) {
         this.radius = radius;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the frame anchor.
-     * 
+     *
      * @return The frame anchor.
-     * 
+     *
      * @see #setFrameAnchor(RectangleAnchor)
      */
     public RectangleAnchor getFrameAnchor() {
         return this.frameAnchor;
     }
-    
+
     /**
      * Sets the frame anchor and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param anchor  the anchor (<code>null</code> not permitted).
-     * 
+     *
      * @see #getFrameAnchor()
      */
     public void setFrameAnchor(RectangleAnchor anchor) {
@@ -251,24 +251,24 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.frameAnchor = anchor;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the template value.
-     * 
+     *
      * @return The template value (never <code>null</code>).
-     * 
+     *
      * @see #setTemplateValue(Number)
      */
     public Number getTemplateValue() {
         return this.templateValue;
     }
-    
+
     /**
      * Sets the template value and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
-     * 
+     *
      * @param value  the value (<code>null</code> not permitted).
-     * 
+     *
      * @see #setTemplateValue(Number)
      */
     public void setTemplateValue(Number value) {
@@ -278,24 +278,24 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.templateValue = value;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the formatter used to format the value.
-     * 
+     *
      * @return The formatter (never <code>null</code>).
-     * 
+     *
      * @see #setNumberFormat(NumberFormat)
      */
     public NumberFormat getNumberFormat() {
         return this.formatter;
     }
-    
+
     /**
-     * Sets the formatter used to format the value and sends a 
+     * Sets the formatter used to format the value and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
-     * 
+     *
      * @param formatter  the formatter (<code>null</code> not permitted).
-     * 
+     *
      * @see #getNumberFormat()
      */
     public void setNumberFormat(NumberFormat formatter) {
@@ -305,22 +305,22 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.formatter = formatter;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the font.
-     * 
+     *
      * @return The font (never <code>null</code>).
-     * 
+     *
      * @see #getFont()
      */
     public Font getFont() {
         return this.font;
     }
-    
+
     /**
      * Sets the font and sends a {@link DialLayerChangeEvent} to all registered
      * listeners.
-     * 
+     *
      * @param font  the font (<code>null</code> not permitted).
      */
     public void setFont(Font font) {
@@ -330,24 +330,24 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.font = font;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the paint.
-     * 
+     *
      * @return The paint (never <code>null</code>).
-     * 
+     *
      * @see #setPaint(Paint)
      */
     public Paint getPaint() {
         return this.paint;
     }
-    
+
     /**
-     * Sets the paint and sends a {@link DialLayerChangeEvent} to all 
+     * Sets the paint and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
@@ -357,24 +357,24 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.paint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the background paint.
-     * 
+     *
      * @return The background paint.
-     * 
+     *
      * @see #setBackgroundPaint(Paint)
      */
     public Paint getBackgroundPaint() {
         return this.backgroundPaint;
     }
-    
+
     /**
      * Sets the background paint and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
-     * 
+     *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getBackgroundPaint()
      */
     public void setBackgroundPaint(Paint paint) {
@@ -382,26 +382,26 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.backgroundPaint = paint;
-        notifyListeners(new DialLayerChangeEvent(this));      
+        notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the outline stroke.
-     * 
+     *
      * @return The outline stroke (never <code>null</code>).
-     * 
+     *
      * @see #setOutlineStroke(Stroke)
      */
     public Stroke getOutlineStroke() {
         return this.outlineStroke;
     }
-     
+
     /**
      * Sets the outline stroke and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
-     * 
+     *
      * @param stroke  the stroke (<code>null</code> not permitted).
-     * 
+     *
      * @see #getOutlineStroke()
      */
     public void setOutlineStroke(Stroke stroke) {
@@ -411,10 +411,10 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.outlineStroke = stroke;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the outline paint.
-     * 
+     *
      * @return The outline paint (never <code>null</code>).
      *
      * @see #setOutlinePaint(Paint)
@@ -422,13 +422,13 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     public Paint getOutlinePaint() {
         return this.outlinePaint;
     }
-    
+
     /**
      * Sets the outline paint and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getOutlinePaint()
      */
     public void setOutlinePaint(Paint paint) {
@@ -438,24 +438,24 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.outlinePaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the insets.
-     * 
+     *
      * @return The insets (never <code>null</code>).
-     * 
+     *
      * @see #setInsets(RectangleInsets)
      */
     public RectangleInsets getInsets() {
         return this.insets;
     }
-    
+
     /**
-     * Sets the insets and sends a {@link DialLayerChangeEvent} to all 
+     * Sets the insets and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param insets  the insets (<code>null</code> not permitted).
-     * 
+     *
      * @see #getInsets()
      */
     public void setInsets(RectangleInsets insets) {
@@ -463,26 +463,26 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
             throw new IllegalArgumentException("Null 'insets' argument.");
         }
         this.insets = insets;
-        notifyListeners(new DialLayerChangeEvent(this));        
+        notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the value anchor.
-     * 
+     *
      * @return The value anchor (never <code>null</code>).
-     * 
+     *
      * @see #setValueAnchor(RectangleAnchor)
      */
     public RectangleAnchor getValueAnchor() {
         return this.valueAnchor;
     }
-    
+
     /**
      * Sets the value anchor and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param anchor  the anchor (<code>null</code> not permitted).
-     * 
+     *
      * @see #getValueAnchor()
      */
     public void setValueAnchor(RectangleAnchor anchor) {
@@ -490,26 +490,26 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
             throw new IllegalArgumentException("Null 'anchor' argument.");
         }
         this.valueAnchor = anchor;
-        notifyListeners(new DialLayerChangeEvent(this));                
+        notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
      * Returns the text anchor.
-     * 
+     *
      * @return The text anchor (never <code>null</code>).
-     * 
+     *
      * @see #setTextAnchor(TextAnchor)
      */
     public TextAnchor getTextAnchor() {
         return this.textAnchor;
     }
-    
+
     /**
-     * Sets the text anchor and sends a {@link DialLayerChangeEvent} to all 
+     * Sets the text anchor and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param anchor  the anchor (<code>null</code> not permitted).
-     * 
+     *
      * @see #getTextAnchor()
      */
     public void setTextAnchor(TextAnchor anchor) {
@@ -517,38 +517,38 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
             throw new IllegalArgumentException("Null 'anchor' argument.");
         }
         this.textAnchor = anchor;
-        notifyListeners(new DialLayerChangeEvent(this));                        
+        notifyListeners(new DialLayerChangeEvent(this));
     }
-    
+
     /**
-     * Returns <code>true</code> to indicate that this layer should be 
-     * clipped within the dial window. 
+     * Returns <code>true</code> to indicate that this layer should be
+     * clipped within the dial window.
      *
      * @return <code>true</code>.
      */
     public boolean isClippedToWindow() {
         return true;
     }
-    
+
     /**
      * Draws the background to the specified graphics device.  If the dial
-     * frame specifies a window, the clipping region will already have been 
+     * frame specifies a window, the clipping region will already have been
      * set to this window before this method is called.
      *
      * @param g2  the graphics device (<code>null</code> not permitted).
      * @param plot  the plot (ignored here).
      * @param frame  the dial frame (ignored here).
-     * @param view  the view rectangle (<code>null</code> not permitted). 
+     * @param view  the view rectangle (<code>null</code> not permitted).
      */
-    public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame, 
+    public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
             Rectangle2D view) {
 
         // work out the anchor point
-        Rectangle2D f = DialPlot.rectangleByRadius(frame, this.radius, 
+        Rectangle2D f = DialPlot.rectangleByRadius(frame, this.radius,
                 this.radius);
         Arc2D arc = new Arc2D.Double(f, this.angle, 0.0, Arc2D.OPEN);
         Point2D pt = arc.getStartPoint();
-        
+
         // calculate the bounds of the template value
         FontMetrics fm = g2.getFontMetrics(this.font);
         String s = this.formatter.format(this.templateValue);
@@ -556,9 +556,9 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
 
         // align this rectangle to the frameAnchor
         Rectangle2D bounds = RectangleAnchor.createRectangle(new Size2D(
-                tb.getWidth(), tb.getHeight()), pt.getX(), pt.getY(), 
+                tb.getWidth(), tb.getHeight()), pt.getX(), pt.getY(),
                 this.frameAnchor);
-        
+
         // add the insets
         Rectangle2D fb = this.insets.createOutsetRectangle(bounds);
 
@@ -570,19 +570,19 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         g2.setStroke(this.outlineStroke);
         g2.setPaint(this.outlinePaint);
         g2.draw(fb);
-        
-        
+
+
         // now find the text anchor point
         double value = plot.getValue(this.datasetIndex);
         String valueStr = this.formatter.format(value);
         Point2D pt2 = RectangleAnchor.coordinates(bounds, this.valueAnchor);
         g2.setPaint(this.paint);
         g2.setFont(this.font);
-        TextUtilities.drawAlignedString(valueStr, g2, (float) pt2.getX(), 
+        TextUtilities.drawAlignedString(valueStr, g2, (float) pt2.getX(),
                 (float) pt2.getY(), this.textAnchor);
-        
+
     }
-    
+
     /**
      * Tests this instance for equality with an arbitrary object.
      *
@@ -637,13 +637,13 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         if (!this.textAnchor.equals(that.textAnchor)) {
             return false;
         }
-        
+
         return super.equals(obj);
     }
-    
+
     /**
      * Returns a hash code for this instance.
-     * 
+     *
      * @return The hash code.
      */
     public int hashCode() {
@@ -656,7 +656,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         result = 37 * result + this.outlineStroke.hashCode();
         return result;
     }
-    
+
     /**
      * Returns a clone of this instance.
      *
@@ -692,7 +692,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.paint = SerialUtilities.readPaint(stream);
