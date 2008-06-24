@@ -64,11 +64,9 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.entity.CategoryItemEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
-import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
@@ -386,20 +384,7 @@ public class GanttRenderer extends IntervalBarRenderer
             if (state.getInfo() != null) {
                 EntityCollection entities = state.getEntityCollection();
                 if (entities != null) {
-                    String tip = null;
-                    if (getToolTipGenerator(row, column) != null) {
-                        tip = getToolTipGenerator(row, column).generateToolTip(
-                                dataset, row, column);
-                    }
-                    String url = null;
-                    if (getItemURLGenerator(row, column) != null) {
-                        url = getItemURLGenerator(row, column).generateURL(
-                                dataset, row, column);
-                    }
-                    CategoryItemEntity entity = new CategoryItemEntity(
-                            bar, tip, url, dataset, dataset.getRowKey(row),
-                            dataset.getColumnKey(column));
-                    entities.add(entity);
+                    addItemEntity(entities, dataset, row, column, bar);
                 }
             }
         }
@@ -536,27 +521,10 @@ public class GanttRenderer extends IntervalBarRenderer
         }
 
         // collect entity and tool tip information...
-        if (state.getInfo() != null) {
-            EntityCollection entities = state.getEntityCollection();
-            if (entities != null) {
-                String tip = null;
-                CategoryToolTipGenerator tipster = getToolTipGenerator(row,
-                        column);
-                if (tipster != null) {
-                    tip = tipster.generateToolTip(dataset, row, column);
-                }
-                String url = null;
-                if (getItemURLGenerator(row, column) != null) {
-                    url = getItemURLGenerator(row, column).generateURL(
-                            dataset, row, column);
-                }
-                CategoryItemEntity entity = new CategoryItemEntity(bar, tip,
-                        url, dataset, dataset.getRowKey(row),
-                        dataset.getColumnKey(column));
-                entities.add(entity);
-            }
+        EntityCollection entities = state.getEntityCollection();
+        if (entities != null) {
+            addItemEntity(entities, dataset, row, column, bar);
         }
-
     }
 
     /**
