@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------------
@@ -38,7 +38,7 @@
  * 08-Aug-2003 : Adjusted totalWeight in remove() method (DG);
  * 19-Aug-2003 : Implemented Cloneable (DG);
  * 11-Sep-2003 : Fix cloning support (subplots) (NB);
- * 15-Sep-2003 : Implemented PublicCloneable.  Fixed errors in cloning and 
+ * 15-Sep-2003 : Implemented PublicCloneable.  Fixed errors in cloning and
  *               serialization (DG);
  * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
  * 17-Sep-2003 : Updated handling of 'clicks' (DG);
@@ -51,11 +51,11 @@
  * 05-May-2005 : Updated draw() method parameters (DG);
  * 14-Nov-2007 : Updated setFixedDomainAxisSpaceForSubplots() method (DG);
  * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
- * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null 
+ * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null
  *               subplots, as suggested by Richard West (DG);
- * 
+ *
  */
- 
+
 package org.jfree.chart.plot;
 
 import java.awt.Graphics2D;
@@ -82,12 +82,12 @@ import org.jfree.util.ObjectUtilities;
 /**
  * A combined category plot where the range axis is shared.
  */
-public class CombinedRangeCategoryPlot extends CategoryPlot 
+public class CombinedRangeCategoryPlot extends CategoryPlot
         implements PlotChangeListener {
 
     /** For serialization. */
     private static final long serialVersionUID = 7260210007554504515L;
-    
+
     /** Storage for the subplot references. */
     private List subplots;
 
@@ -106,7 +106,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     public CombinedRangeCategoryPlot() {
         this(new NumberAxis());
     }
-    
+
     /**
      * Creates a new plot.
      *
@@ -129,7 +129,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     }
 
     /**
-     * Sets the amount of space between subplots and sends a 
+     * Sets the amount of space between subplots and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param gap  the gap between subplots (in Java2D units).
@@ -140,11 +140,11 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     }
 
     /**
-     * Adds a subplot (with a default 'weight' of 1) and sends a 
+     * Adds a subplot (with a default 'weight' of 1) and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      * <br><br>
      * You must ensure that the subplot has a non-null domain axis.  The range
-     * axis for the subplot will be set to <code>null</code>.  
+     * axis for the subplot will be set to <code>null</code>.
      *
      * @param subplot  the subplot (<code>null</code> not permitted).
      */
@@ -154,11 +154,11 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     }
 
     /**
-     * Adds a subplot and sends a {@link PlotChangeEvent} to all registered 
+     * Adds a subplot and sends a {@link PlotChangeEvent} to all registered
      * listeners.
      * <br><br>
      * You must ensure that the subplot has a non-null domain axis.  The range
-     * axis for the subplot will be set to <code>null</code>.  
+     * axis for the subplot will be set to <code>null</code>.
      *
      * @param subplot  the subplot (<code>null</code> not permitted).
      * @param weight  the weight (must be >= 1).
@@ -179,7 +179,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         subplot.addChangeListener(this);
         this.subplots.add(subplot);
         this.totalWeight += weight;
-        
+
         // configure the range axis...
         ValueAxis axis = getRangeAxis();
         if (axis != null) {
@@ -195,7 +195,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      */
     public void remove(CategoryPlot subplot) {
         if (subplot == null) {
-            throw new IllegalArgumentException(" Null 'subplot' argument.");   
+            throw new IllegalArgumentException(" Null 'subplot' argument.");
         }
         int position = -1;
         int size = this.subplots.size();
@@ -211,7 +211,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
             subplot.setParent(null);
             subplot.removeChangeListener(this);
             this.totalWeight -= subplot.getWeight();
-        
+
             ValueAxis range = getRangeAxis();
             if (range != null) {
                 range.configure();
@@ -242,18 +242,18 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
 
     /**
      * Calculates the space required for the axes.
-     * 
+     *
      * @param g2  the graphics device.
      * @param plotArea  the plot area.
-     * 
+     *
      * @return The space required for the axes.
      */
-    protected AxisSpace calculateAxisSpace(Graphics2D g2, 
+    protected AxisSpace calculateAxisSpace(Graphics2D g2,
                                            Rectangle2D plotArea) {
-        
-        AxisSpace space = new AxisSpace();  
+
+        AxisSpace space = new AxisSpace();
         PlotOrientation orientation = getOrientation();
-        
+
         // work out the space required by the domain axis...
         AxisSpace fixed = getFixedRangeAxisSpace();
         if (fixed != null) {
@@ -263,7 +263,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
             }
             else if (orientation == PlotOrientation.HORIZONTAL) {
                 space.setTop(fixed.getTop());
-                space.setBottom(fixed.getBottom());                
+                space.setBottom(fixed.getBottom());
             }
         }
         else {
@@ -271,16 +271,16 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
             RectangleEdge valueEdge = Plot.resolveRangeAxisLocation(
                     getRangeAxisLocation(), orientation);
             if (valueAxis != null) {
-                space = valueAxis.reserveSpace(g2, this, plotArea, valueEdge, 
+                space = valueAxis.reserveSpace(g2, this, plotArea, valueEdge,
                         space);
             }
         }
-        
+
         Rectangle2D adjustedPlotArea = space.shrink(plotArea, null);
         // work out the maximum height or width of the non-shared axes...
         int n = this.subplots.size();
 
-        // calculate plotAreas of all sub-plots, maximum vertical/horizontal 
+        // calculate plotAreas of all sub-plots, maximum vertical/horizontal
         // axis width/height
         this.subplotArea = new Rectangle2D[n];
         double x = adjustedPlotArea.getX();
@@ -299,18 +299,18 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
             // calculate sub-plot area
             if (orientation == PlotOrientation.VERTICAL) {
                 double w = usableSize * plot.getWeight() / this.totalWeight;
-                this.subplotArea[i] = new Rectangle2D.Double(x, y, w, 
+                this.subplotArea[i] = new Rectangle2D.Double(x, y, w,
                         adjustedPlotArea.getHeight());
                 x = x + w + this.gap;
             }
             else if (orientation == PlotOrientation.HORIZONTAL) {
                 double h = usableSize * plot.getWeight() / this.totalWeight;
-                this.subplotArea[i] = new Rectangle2D.Double(x, y, 
+                this.subplotArea[i] = new Rectangle2D.Double(x, y,
                         adjustedPlotArea.getWidth(), h);
                 y = y + h + this.gap;
             }
 
-            AxisSpace subSpace = plot.calculateDomainAxisSpace(g2, 
+            AxisSpace subSpace = plot.calculateDomainAxisSpace(g2,
                     this.subplotArea[i], null);
             space.ensureAtLeast(subSpace);
 
@@ -320,8 +320,8 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     }
 
     /**
-     * Draws the plot on a Java 2D graphics device (such as the screen or a 
-     * printer).  Will perform all the placement calculations for each 
+     * Draws the plot on a Java 2D graphics device (such as the screen or a
+     * printer).  Will perform all the placement calculations for each
      * sub-plots and then tell these to draw themselves.
      *
      * @param g2  the graphics device.
@@ -329,7 +329,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      *              should be drawn.
      * @param anchor  the anchor point (<code>null</code> permitted).
      * @param parentState  the parent state.
-     * @param info  collects information about the drawing (<code>null</code> 
+     * @param info  collects information about the drawing (<code>null</code>
      *              permitted).
      */
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
@@ -356,13 +356,13 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         ValueAxis axis = getRangeAxis();
         RectangleEdge rangeEdge = getRangeAxisEdge();
         double cursor = RectangleEdge.coordinate(dataArea, rangeEdge);
-        AxisState state = axis.draw(g2, cursor, area, dataArea, rangeEdge, 
+        AxisState state = axis.draw(g2, cursor, area, dataArea, rangeEdge,
                 info);
         if (parentState == null) {
             parentState = new PlotState();
         }
         parentState.getSharedAxisStates().put(axis, state);
-        
+
         // draw all the charts
         for (int i = 0; i < this.subplots.size(); i++) {
             CategoryPlot plot = (CategoryPlot) this.subplots.get(i);
@@ -382,7 +382,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
 
     /**
      * Sets the orientation for the plot (and all the subplots).
-     * 
+     *
      * @param orientation  the orientation.
      */
     public void setOrientation(PlotOrientation orientation) {
@@ -396,14 +396,14 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         }
 
     }
-    
+
     /**
      * Returns a range representing the extent of the data values in this plot
-     * (obtained from the subplots) that will be rendered against the specified 
-     * axis.  NOTE: This method is intended for internal JFreeChart use, and 
-     * is public only so that code in the axis classes can call it.  Since 
-     * only the range axis is shared between subplots, the JFreeChart code 
-     * will only call this method for the range values (although this is not 
+     * (obtained from the subplots) that will be rendered against the specified
+     * axis.  NOTE: This method is intended for internal JFreeChart use, and
+     * is public only so that code in the axis classes can call it.  Since
+     * only the range axis is shared between subplots, the JFreeChart code
+     * will only call this method for the range values (although this is not
      * checked/enforced).
       *
       * @param axis  the axis.
@@ -442,9 +442,9 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         }
         return result;
     }
-    
+
     /**
-     * Sets the size (width or height, depending on the orientation of the 
+     * Sets the size (width or height, depending on the orientation of the
      * plot) for the domain axis of each subplot.
      *
      * @param space  the space.
@@ -479,20 +479,20 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     }
 
     /**
-     * Receives a {@link PlotChangeEvent} and responds by notifying all 
+     * Receives a {@link PlotChangeEvent} and responds by notifying all
      * listeners.
-     * 
+     *
      * @param event  the event.
      */
     public void plotChanged(PlotChangeEvent event) {
         notifyListeners(event);
     }
 
-    /** 
+    /**
      * Tests the plot for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return <code>true</code> or <code>false</code>.
      */
     public boolean equals(Object obj) {
@@ -515,33 +515,33 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         if (this.gap != that.gap) {
             return false;
         }
-        return true;       
+        return true;
     }
 
     /**
      * Returns a clone of the plot.
-     * 
+     *
      * @return A clone.
-     * 
-     * @throws CloneNotSupportedException  this class will not throw this 
+     *
+     * @throws CloneNotSupportedException  this class will not throw this
      *         exception, but subclasses (if any) might.
      */
     public Object clone() throws CloneNotSupportedException {
-        CombinedRangeCategoryPlot result 
-            = (CombinedRangeCategoryPlot) super.clone(); 
+        CombinedRangeCategoryPlot result
+            = (CombinedRangeCategoryPlot) super.clone();
         result.subplots = (List) ObjectUtilities.deepClone(this.subplots);
         for (Iterator it = result.subplots.iterator(); it.hasNext();) {
             Plot child = (Plot) it.next();
             child.setParent(result);
         }
-        
-        // after setting up all the subplots, the shared range axis may need 
+
+        // after setting up all the subplots, the shared range axis may need
         // reconfiguring
         ValueAxis rangeAxis = result.getRangeAxis();
         if (rangeAxis != null) {
             rangeAxis.configure();
         }
-        
+
         return result;
     }
 
@@ -553,18 +553,18 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
 
         stream.defaultReadObject();
-        
-        // the range axis is deserialized before the subplots, so its value 
+
+        // the range axis is deserialized before the subplots, so its value
         // range is likely to be incorrect...
         ValueAxis rangeAxis = getRangeAxis();
         if (rangeAxis != null) {
             rangeAxis.configure();
         }
-        
+
     }
 
 }
