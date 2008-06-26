@@ -57,6 +57,7 @@
  * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null
  *               subplots, as suggested by Richard West (DG);
  * 28-Apr-2008 : Fixed zooming problem (see bug 1950037) (DG);
+ * 26-Jun-2008 : Fixed crosshair support (DG);
  *
  */
 
@@ -468,7 +469,12 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
                 subplotInfo = new PlotRenderingInfo(info.getOwner());
                 info.addSubplotInfo(subplotInfo);
             }
-            plot.draw(g2, this.subplotAreas[i], null, parentState, subplotInfo);
+            Point2D subAnchor = null;
+            if (anchor != null && this.subplotAreas[i].contains(anchor)) {
+            	subAnchor = anchor;
+            }
+            plot.draw(g2, this.subplotAreas[i], subAnchor, parentState,
+            		subplotInfo);
         }
 
         if (info != null) {

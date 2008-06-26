@@ -94,6 +94,7 @@
  *               override fields (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
+ * 26-Jun-2008 : Added crosshair support (DG);
  *
  */
 
@@ -124,6 +125,7 @@ import org.jfree.chart.labels.CategorySeriesLabelGenerator;
 import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardCategorySeriesLabelGenerator;
+import org.jfree.chart.plot.CategoryCrosshairState;
 import org.jfree.chart.plot.CategoryMarker;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.DrawingSupplier;
@@ -141,6 +143,7 @@ import org.jfree.text.TextUtilities;
 import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.LengthAdjustmentType;
 import org.jfree.ui.RectangleAnchor;
+import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.ObjectList;
 import org.jfree.util.ObjectUtilities;
@@ -670,6 +673,27 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     public Range findRangeBounds(CategoryDataset dataset) {
         return DatasetUtilities.findRangeBounds(dataset);
+    }
+
+    /**
+     * Returns the Java2D coordinate for the middle of the specified data item.
+     *
+     * @param rowKey  the row key.
+     * @param columnKey  the column key.
+     * @param dataset  the dataset.
+     * @param axis  the axis.
+     * @param area  the data area.
+     * @param edge  the edge along which the axis lies.
+     *
+     * @return The Java2D coordinate for the middle of the item.
+     *
+     * @since 1.0.11
+     */
+    public double getItemMiddle(Comparable rowKey, Comparable columnKey,
+    		CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
+    		RectangleEdge edge) {
+        return axis.getCategoryMiddle(columnKey, dataset.getColumnKeys(), area,
+        		edge);
     }
 
     /**
@@ -1280,6 +1304,46 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     }
 
     /**
+     * Considers the current (x, y) coordinate and updates the crosshair point
+     * if it meets the criteria (usually means the (x, y) coordinate is the
+     * closest to the anchor point so far).
+     *
+     * @param crosshairState  the crosshair state (<code>null</code> permitted,
+     *                        but the method does nothing in that case).
+     * @param x  the category key, or <code>null</code>.
+     * @param y  the y-value (in data space).
+     * @param domainAxisIndex  the index of the domain axis for the point.
+     * @param rangeAxisIndex  the index of the range axis for the point.
+     * @param transX  the x-value translated to Java2D space.
+     * @param transY  the y-value translated to Java2D space.
+     * @param orientation  the plot orientation (<code>null</code> not
+     *                     permitted).
+     *
+     * @since 1.0.11
+     */
+    protected void updateCrosshairValues(CategoryCrosshairState crosshairState,
+            Comparable rowKey, Comparable columnKey, double value,
+            int datasetIndex,
+            double transX, double transY, PlotOrientation orientation) {
+
+        if (orientation == null) {
+            throw new IllegalArgumentException("Null 'orientation' argument.");
+        }
+
+        if (crosshairState != null) {
+            if (this.plot.isRangeCrosshairLockedOnData()) {
+                // both axes
+                crosshairState.updateCrosshairPoint(rowKey, columnKey, value,
+                		datasetIndex, transX, transY, orientation);
+            }
+            else {
+                crosshairState.updateCrosshairX(rowKey, columnKey,
+                		datasetIndex, transX, orientation);
+            }
+        }
+    }
+
+    /**
      * Draws an item label.
      *
      * @param g2  the graphics device.
@@ -1609,6 +1673,5 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         entities.add(entity);
 
     }
-
 
 }

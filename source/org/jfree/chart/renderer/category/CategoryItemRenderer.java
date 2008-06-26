@@ -90,6 +90,8 @@
  *               itemLabelPaint, positiveItemLabelPosition,
  *               negativeItemLabelPosition and createEntities override
  *               fields (DG);
+ * 26-Jun-2008 : Added new method required for crosshair support - THIS CHANGES
+ *               THE API as of version 1.0.11 (DG);
  *
  */
 
@@ -118,6 +120,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.ui.RectangleEdge;
 
 /**
  * A plug-in object that is used by the {@link CategoryPlot} class to display
@@ -139,7 +142,6 @@ import org.jfree.data.category.CategoryDataset;
  * the base setting to be <code>null</code>, while other attributes enforce
  * non-<code>null</code> values.
  */
-
 public interface CategoryItemRenderer extends LegendItemSource {
 
     /**
@@ -1865,5 +1867,24 @@ public interface CategoryItemRenderer extends LegendItemSource {
                                 ValueAxis axis,
                                 Marker marker,
                                 Rectangle2D dataArea);
+
+
+    /**
+     * Returns the Java2D coordinate for the middle of the specified data item.
+     *
+     * @param rowKey  the row key.
+     * @param columnKey  the column key.
+     * @param dataset  the dataset.
+     * @param axis  the axis.
+     * @param area  the data area.
+     * @param edge  the edge along which the axis lies.
+     *
+     * @return The Java2D coordinate for the middle of the item.
+     *
+     * @since 1.0.11
+     */
+    public double getItemMiddle(Comparable rowKey, Comparable columnKey,
+    		CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
+    		RectangleEdge edge);
 
 }

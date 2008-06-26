@@ -41,6 +41,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 23-Jan-2006 : Renamed getMaxItemWidth() --> getMaximumItemWidth() (DG);
  * 13-May-2008 : Code clean-up (DG);
+ * 26-Jun-2008 : Added crosshair support (DG);
  *
  */
 
@@ -329,6 +330,12 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
                     (value < 0.0));
         }
 
+        // submit the current data point as a crosshair candidate
+        int datasetIndex = plot.indexOf(dataset);
+        updateCrosshairValues(state.getCrosshairState(),
+        		dataset.getRowKey(row), dataset.getColumnKey(column), value,
+        		datasetIndex, barW0, barL, orientation);
+
         // add an item entity, if this information is being collected
         EntityCollection entities = state.getEntityCollection();
         if (entities != null) {
@@ -355,6 +362,27 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
             factor = factor - axis.getCategoryMargin();
         }
         return (space * factor) / (categories * series);
+    }
+
+    /**
+     * Returns the Java2D coordinate for the middle of the specified data item.
+     *
+     * @param rowKey  the row key.
+     * @param columnKey  the column key.
+     * @param dataset  the dataset.
+     * @param axis  the axis.
+     * @param area  the drawing area.
+     * @param edge  the edge along which the axis lies.
+     *
+     * @return The Java2D coordinate.
+     *
+     * @since 1.0.11
+     */
+    public double getItemMiddle(Comparable rowKey, Comparable columnKey,
+    		CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
+    		RectangleEdge edge) {
+        return axis.getCategorySeriesMiddle(columnKey, rowKey, dataset,
+        		this.itemMargin, area, edge);
     }
 
     /**

@@ -47,6 +47,7 @@
  * 17-Jan-2006 : Set includeBaseInRange flag to false (DG);
  * 20-Mar-2007 : Implemented equals() and fixed serialization (DG);
  * 24-Jun-2008 : Added new barPainter mechanism (DG);
+ * 26-Jun-2008 : Added crosshair support (DG);
  *
  */
 
@@ -286,6 +287,7 @@ public class GanttRenderer extends IntervalBarRenderer
                     dataset, row, column);
         }
 
+        PlotOrientation orientation = plot.getOrientation();
         for (int subinterval = 0; subinterval < count; subinterval++) {
 
             RectangleEdge rangeAxisLocation = plot.getRangeAxisEdge();
@@ -339,7 +341,7 @@ public class GanttRenderer extends IntervalBarRenderer
             double end = getEndPercent();
             if (percent != null) {
                 double p = percent.doubleValue();
-                if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
+                if (orientation == PlotOrientation.HORIZONTAL) {
                     completeBar = new Rectangle2D.Double(translatedValue0,
                             rectStart + start * rectBreadth, rectLength * p,
                             rectBreadth * (end - start));
@@ -347,7 +349,7 @@ public class GanttRenderer extends IntervalBarRenderer
                             + rectLength * p, rectStart + start * rectBreadth,
                             rectLength * (1 - p), rectBreadth * (end - start));
                 }
-                else if (plot.getOrientation() == PlotOrientation.VERTICAL) {
+                else if (orientation == PlotOrientation.VERTICAL) {
                     completeBar = new Rectangle2D.Double(rectStart + start
                             * rectBreadth, translatedValue0 + rectLength
                             * (1 - p), rectBreadth * (end - start),
@@ -380,6 +382,20 @@ public class GanttRenderer extends IntervalBarRenderer
                 g2.draw(bar);
             }
 
+            if (subinterval == count - 1) {
+                // submit the current data point as a crosshair candidate
+                int datasetIndex = plot.indexOf(dataset);
+                Comparable columnKey = dataset.getColumnKey(column);
+                Comparable rowKey = dataset.getRowKey(row);
+                double xx = domainAxis.getCategorySeriesMiddle(columnKey,
+                		rowKey, dataset, getItemMargin(), dataArea,
+                		plot.getDomainAxisEdge());
+                updateCrosshairValues(state.getCrosshairState(),
+                		dataset.getRowKey(row), dataset.getColumnKey(column),
+                		value1.doubleValue(), datasetIndex, xx,
+                		translatedValue1, orientation);
+
+            }
             // collect entity and tool tip information...
             if (state.getInfo() != null) {
                 EntityCollection entities = state.getEntityCollection();
@@ -414,7 +430,6 @@ public class GanttRenderer extends IntervalBarRenderer
                             int column) {
 
         PlotOrientation orientation = plot.getOrientation();
-
         RectangleEdge rangeAxisLocation = plot.getRangeAxisEdge();
 
         // Y0
@@ -520,11 +535,43 @@ public class GanttRenderer extends IntervalBarRenderer
                     false);
         }
 
+        // submit the current data point as a crosshair candidate
+        int datasetIndex = plot.indexOf(dataset);
+        Comparable columnKey = dataset.getColumnKey(column);
+        Comparable rowKey = dataset.getRowKey(row);
+        double xx = domainAxis.getCategorySeriesMiddle(columnKey, rowKey,
+        		dataset, getItemMargin(), dataArea, plot.getDomainAxisEdge());
+        updateCrosshairValues(state.getCrosshairState(),
+        		dataset.getRowKey(row), dataset.getColumnKey(column),
+        		value1.doubleValue(), datasetIndex, xx, java2dValue1,
+        		orientation);
+
         // collect entity and tool tip information...
         EntityCollection entities = state.getEntityCollection();
         if (entities != null) {
             addItemEntity(entities, dataset, row, column, bar);
         }
+    }
+
+    /**
+     * Returns the Java2D coordinate for the middle of the specified data item.
+     *
+     * @param rowKey  the row key.
+     * @param columnKey  the column key.
+     * @param dataset  the dataset.
+     * @param axis  the axis.
+     * @param area  the drawing area.
+     * @param edge  the edge along which the axis lies.
+     *
+     * @return The Java2D coordinate.
+     *
+     * @since 1.0.11
+     */
+    public double getItemMiddle(Comparable rowKey, Comparable columnKey,
+    		CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
+    		RectangleEdge edge) {
+        return axis.getCategorySeriesMiddle(columnKey, rowKey, dataset,
+        		getItemMargin(), area, edge);
     }
 
     /**

@@ -45,6 +45,7 @@
  * 13-Oct-2006 : Fixed initialisation of CrosshairState - see bug report
  *               1565168 (DG);
  * 06-Feb-2007 : Added new fields and methods to fix bug 1086307 (DG);
+ * 26-Jun-2008 : Now tracks dataset index (DG);
  *
  */
 
@@ -79,6 +80,14 @@ public class CrosshairState {
 
     /** The y-value for the current crosshair point. */
     private double crosshairY;
+
+    /**
+     * The dataset index that the crosshair point relates to (this determines
+     * the axes that the crosshairs will be plotted against).
+     *
+     * @since 1.0.11
+     */
+    private int datasetIndex;
 
     /**
      * The index of the domain axis that the crosshair x-value is measured
@@ -309,6 +318,7 @@ public class CrosshairState {
      * @return The anchor point.
      *
      * @see #setAnchor(Point2D)
+     *
      * @since 1.0.3
      */
     public Point2D getAnchor() {
@@ -433,11 +443,42 @@ public class CrosshairState {
     }
 
     /**
+     * Returns the dataset index that the crosshair values relate to.  The
+     * dataset is mapped to specific axes, and this is how the crosshairs are
+     * mapped also.
+     *
+     * @return The dataset index.
+     *
+     * @see #setDatasetIndex(int)
+     *
+     * @since 1.0.11
+     */
+    public int getDatasetIndex() {
+    	return this.datasetIndex;
+    }
+
+    /**
+     * Sets the dataset index that the current crosshair values relate to.
+     *
+     * @param index  the dataset index.
+     *
+     * @see #getDatasetIndex()
+     *
+     * @since 1.0.11
+     */
+    public void setDatasetIndex(int index) {
+    	this.datasetIndex = index;
+    }
+
+    /**
      * Returns the domain axis index for the crosshair x-value.
      *
      * @return The domain axis index.
      *
      * @since 1.0.4
+     *
+     * @deprecated As of version 1.0.11, the domain axis should be determined
+     *     using the dataset index.
      */
     public int getDomainAxisIndex() {
         return this.domainAxisIndex;
@@ -449,8 +490,12 @@ public class CrosshairState {
      * @return The range axis index.
      *
      * @since 1.0.4
+     *
+     * @deprecated As of version 1.0.11, the domain axis should be determined
+     *     using the dataset index.
      */
     public int getRangeAxisIndex() {
         return this.rangeAxisIndex;
     }
+
 }

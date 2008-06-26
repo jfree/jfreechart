@@ -84,6 +84,7 @@
  *               bar (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  * 24-Jun-2008 : Added barPainter mechanism (DG);
+ * 26-Jun-2008 : Added crosshair support (DG);
  *
  */
 
@@ -911,7 +912,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
             return;
         }
 
-        double value = dataValue.doubleValue();
+        final double value = dataValue.doubleValue();
         PlotOrientation orientation = plot.getOrientation();
         double barW0 = calculateBarW0(plot, orientation, dataArea, domainAxis,
                 state, row, column);
@@ -976,12 +977,18 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         }
         this.barPainter.paintBar(g2, this, row, column, bar, barBase);
 
-        CategoryItemLabelGenerator generator
-            = getItemLabelGenerator(row, column);
+        CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
+                column);
         if (generator != null && isItemLabelVisible(row, column)) {
             drawItemLabel(g2, dataset, row, column, plot, generator, bar,
                     (value < 0.0));
         }
+
+        // submit the current data point as a crosshair candidate
+        int datasetIndex = plot.indexOf(dataset);
+        updateCrosshairValues(state.getCrosshairState(),
+        		dataset.getRowKey(row), dataset.getColumnKey(column), value,
+        		datasetIndex, barW0, barL0, orientation);
 
         // add an item entity, if this information is being collected
         EntityCollection entities = state.getEntityCollection();
