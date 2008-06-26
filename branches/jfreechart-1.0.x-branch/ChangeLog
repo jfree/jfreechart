@@ -1,3 +1,72 @@
+2008-06-26  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/axis/CategoryAxis.java
+    (getCategoryMiddle(Comparable, List, Rectangle2D, RectangleEdge)): 
+    New method,
+    * source/org/jfree/chart/plot/CategoryCrosshairState.java: New file,
+    * source/org/jfree/chart/plot/CategoryPlot.java
+    (crosshairDatasetIndex): New field,
+    (domainCrosshairVisible): Likewise,
+    (domainCrosshairRowKey): Likewise,
+    (domainCrosshairColumnKey): Likewise,
+    (domainCrosshairStroke): Likewise,
+    (domainCrosshairPaint): Likewise,
+    (CategoryPlot): Initialise new fields,
+    (indexOf): New method,
+    (isDomainCrosshairVisible): Likewise,
+    (setDomainCrosshairVisible): Likewise,
+    (getDomainCrosshairRowKey): Likewise,
+    (setDomainCrosshairRowKey): Likewise,
+    (getDomainCrosshairColumnKey): Likewise,
+    (setDomainCrosshairColumnKey): Likewise,
+    (getCrosshairDatasetIndex): Likewise,
+    (setCrosshairDatasetIndex): Likewise,
+    (getDomainCrosshairPaint): Likewise,
+    (setDomainCrosshairPaint): Likewise,
+    (getDomainCrosshairStroke): Likewise,
+    (setDomainCrosshairStroke): Likewise,
+    (draw): Handle crosshairs,
+    (render): Modified method signature to incorporate crosshair state,
+    (drawDomainCrosshair): New method,
+    (equals): Updated for new fields,
+    (writeObject): Likewise,
+    (readObject): Likewise,
+    * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java
+    (draw): Fixed crosshair support,
+    * source/org/jfree/chart/plot/CombinedRangeCategoryPlot.java
+    (draw): Likewise,
+    * source/org/jfree/chart/plot/CrosshairState.java
+    (datasetIndex): New field,
+    (getDatasetIndex): New method,
+    (setDatasetIndex): New method,
+    (getDomainAxisIndex): Deprecated,
+    (getRangeAxisIndex): Deprecated,
+    * source/org/jfree/chart/plot/XYCrosshairState.java: New subclass,
+    * source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+    (getItemMiddle): New method,
+    (updateCrosshairValues): Likewise,
+    * source/org/jfree/chart/renderer/category/AreaRenderer.java
+    (drawItem): Update crosshair state,
+    * source/org/jfree/chart/renderer/category/BarRenderer.java
+    (drawItem): Likewise,
+    * source/org/jfree/chart/renderer/category/CategoryItemRenderer.java
+    (getItemMiddle): New method,
+    * source/org/jfree/chart/renderer/category/CategoryItemRendererState.java
+    (crosshairState): New field,
+    (getCrosshairState): New method,
+    (setCrosshairState): Likewise,
+    * source/org/jfree/chart/renderer/category/GanttRenderer.java
+    (drawTasks): Update crosshair state,
+    (drawTask): Likewise,
+    (getItemMiddle): New method override,
+    * source/org/jfree/chart/renderer/category/LevelRenderer.java
+    (drawItem): Update crosshair state,
+    (getItemMiddle): New method override,
+    * source/org/jfree/chart/renderer/category/LineAndShapeRenderer.java
+    (drawItem): Update crosshair state,
+    * tests/org/jfree/chart/plot/junit/CategoryPlotTests.java
+    (testEquals): Updated for new fields.
+    
 2008-06-24  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/category/BarPainter.java: New file,
