@@ -53,6 +53,7 @@
  * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
  * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null
  *               subplots, as suggested by Richard West (DG);
+ * 26-Jun-2008 : Fixed crosshair support (DG);
  *
  */
 
@@ -371,7 +372,12 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
                 subplotInfo = new PlotRenderingInfo(info.getOwner());
                 info.addSubplotInfo(subplotInfo);
             }
-            plot.draw(g2, this.subplotArea[i], null, parentState, subplotInfo);
+            Point2D subAnchor = null;
+            if (anchor != null && this.subplotArea[i].contains(anchor)) {
+            	subAnchor = anchor;
+            }
+            plot.draw(g2, this.subplotArea[i], subAnchor, parentState,
+            		subplotInfo);
         }
 
         if (info != null) {

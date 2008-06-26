@@ -43,6 +43,7 @@
  *               testRemoveRangeMarker() (DG);
  * 23-Apr-2008 : Extended testEquals() and testCloning(), and added
  *               testCloning2() and testCloning3() (DG);
+ * 26-Jun-2008 : Updated testEquals() (DG);
  *
  */
 
@@ -413,6 +414,44 @@ public class CategoryPlotTests extends TestCase {
         plot1.setFixedLegendItems(new LegendItemCollection());
         assertFalse(plot1.equals(plot2));
         plot2.setFixedLegendItems(new LegendItemCollection());
+        assertTrue(plot1.equals(plot2));
+
+        // crosshairDatasetIndex
+        plot1.setCrosshairDatasetIndex(99);
+        assertFalse(plot1.equals(plot2));
+        plot2.setCrosshairDatasetIndex(99);
+        assertTrue(plot1.equals(plot2));
+
+        // domainCrosshairColumnKey
+        plot1.setDomainCrosshairColumnKey("A");
+        assertFalse(plot1.equals(plot2));
+        plot2.setDomainCrosshairColumnKey("A");
+        assertTrue(plot1.equals(plot2));
+
+        // domainCrosshairRowKey
+        plot1.setDomainCrosshairRowKey("B");
+        assertFalse(plot1.equals(plot2));
+        plot2.setDomainCrosshairRowKey("B");
+        assertTrue(plot1.equals(plot2));
+
+        // domainCrosshairVisible
+        plot1.setDomainCrosshairVisible(true);
+        assertFalse(plot1.equals(plot2));
+        plot2.setDomainCrosshairVisible(true);
+        assertTrue(plot1.equals(plot2));
+
+        // domainCrosshairPaint
+        plot1.setDomainCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.red,
+        		3.0f, 4.0f, Color.blue));
+        assertFalse(plot1.equals(plot2));
+        plot2.setDomainCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.red,
+        		3.0f, 4.0f, Color.blue));
+        assertTrue(plot1.equals(plot2));
+
+        // domainCrosshairStroke
+        plot1.setDomainCrosshairStroke(new BasicStroke(1.23f));
+        assertFalse(plot1.equals(plot2));
+        plot2.setDomainCrosshairStroke(new BasicStroke(1.23f));
         assertTrue(plot1.equals(plot2));
     }
 

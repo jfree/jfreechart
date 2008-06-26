@@ -37,11 +37,13 @@
  * 20-Oct-2003 : Added series running total (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 01-Dec-2006 : Updated API docs (DG);
+ * 26-Jun-2008 : Added CrosshairState (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
+import org.jfree.chart.plot.CategoryCrosshairState;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.renderer.RendererState;
 
@@ -56,6 +58,14 @@ public class CategoryItemRendererState extends RendererState {
 
     /** The series running total. */
     private double seriesRunningTotal;
+
+    /**
+     * State information for crosshairs in the plot (this is updated by the
+     * renderer, but may be passed to several renderers in one chart).
+     *
+     * @since 1.0.11
+     */
+    private CategoryCrosshairState crosshairState;
 
     /**
      * Creates a new object for recording temporary state information for a
@@ -113,6 +123,32 @@ public class CategoryItemRendererState extends RendererState {
      */
     void setSeriesRunningTotal(double total) {
         this.seriesRunningTotal = total;
+    }
+
+    /**
+     * Returns the crosshair state, if any.
+     *
+     * @return The crosshair state (possibly <code>null</code>).
+     *
+     * @since 1.0.11
+     *
+     * @see #setCrosshairState(CategoryCrosshairState)
+     */
+    public CategoryCrosshairState getCrosshairState() {
+    	return this.crosshairState;
+    }
+
+    /**
+     * Sets the crosshair state.
+     *
+     * @param state  the new state (<code>null</code> permitted).
+     *
+     * @since 1.0.11
+     *
+     * @see #getCrosshairState()
+     */
+    public void setCrosshairState(CategoryCrosshairState state) {
+    	this.crosshairState = state;
     }
 
 }

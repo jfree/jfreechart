@@ -158,7 +158,7 @@
  * 07-Apr-2008 : Fixed NPE in removeDomainMarker() and
  *               removeRangeMarker() (DG);
  * 23-Apr-2008 : Fixed equals() and clone() methods (DG);
- *
+ * 26-Jun-2008 : Fixed crosshair support (DG);
  *
  */
 
@@ -221,6 +221,7 @@ import org.jfree.util.ObjectList;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
+import org.jfree.util.ShapeUtilities;
 import org.jfree.util.SortOrder;
 
 /**
@@ -366,6 +367,49 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
 
     /** The anchor value. */
     private double anchorValue;
+
+    /**
+     * The index for the dataset that the crosshairs are linked to (this
+     * determines which axes the crosshairs are plotted against).
+     *
+     * @since 1.0.11
+     */
+    private int crosshairDatasetIndex;
+
+    /**
+     * A flag that controls the visibility of the domain crosshair.
+     *
+     * @since 1.0.11
+     */
+    private boolean domainCrosshairVisible;
+
+    /**
+     * The row key for the crosshair point.
+     *
+     * @since 1.0.11
+     */
+    private Comparable domainCrosshairRowKey;
+
+    /**
+     * The column key for the crosshair point.
+     *
+     * @since 1.0.11
+     */
+    private Comparable domainCrosshairColumnKey;
+
+    /**
+     * The stroke used to draw the domain crosshair if it is visible.
+     *
+     * @since 1.0.11
+     */
+    private transient Stroke domainCrosshairStroke;
+
+    /**
+     * The paint used to draw the domain crosshair if it is visible.
+     *
+     * @since 1.0.11
+     */
+    private transient Paint domainCrosshairPaint;
 
     /** A flag that controls whether or not a range crosshair is drawn. */
     private boolean rangeCrosshairVisible;
@@ -513,6 +557,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         addRangeMarker(baseline, Layer.BACKGROUND);
 
         this.anchorValue = 0.0;
+
+        this.domainCrosshairVisible = false;
+        this.domainCrosshairStroke = DEFAULT_CROSSHAIR_STROKE;
+        this.domainCrosshairPaint = DEFAULT_CROSSHAIR_PAINT;
 
         this.rangeCrosshairVisible = DEFAULT_CROSSHAIR_VISIBLE;
         this.rangeCrosshairValue = 0.0;
@@ -1226,6 +1274,27 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      */
     public int getDatasetCount() {
         return this.datasets.size();
+    }
+
+    /**
+     * Returns the index of the specified dataset, or <code>-1</code> if the
+     * dataset does not belong to the plot.
+     *
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     *
+     * @return The index.
+     *
+     * @since 1.0.11
+     */
+    public int indexOf(CategoryDataset dataset) {
+        int result = -1;
+        for (int i = 0; i < this.datasets.size(); i++) {
+            if (dataset == this.datasets.get(i)) {
+                result = i;
+                break;
+            }
+        }
+        return result;
     }
 
     /**
@@ -2145,6 +2214,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @param index the dataset/renderer index.
      * @param marker the marker.
      * @param layer the layer (foreground or background).
+     * @param notify  notify listeners?
      *
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
@@ -2455,6 +2525,218 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             fireChangeEvent();
         }
         return removed;
+    }
+
+    /**
+     * Returns the flag that controls whether or not the domain crosshair is
+     * displayed by the plot.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.11
+     *
+     * @see #setDomainCrosshairVisible(boolean)
+     */
+    public boolean isDomainCrosshairVisible() {
+    	return this.domainCrosshairVisible;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the domain crosshair is
+     * displayed by the plot, and sends a {@link PlotChangeEvent} to all
+     * registered listeners.
+     *
+     * @param flag  the new flag value.
+     *
+     * @since 1.0.11
+     *
+     * @see #isDomainCrosshairVisible()
+     * @see #setRangeCrosshairVisible(boolean)
+     */
+    public void setDomainCrosshairVisible(boolean flag) {
+    	if (this.domainCrosshairVisible != flag) {
+    		this.domainCrosshairVisible = flag;
+    		fireChangeEvent();
+    	}
+    }
+
+    /**
+     * Returns the row key for the domain crosshair.
+     *
+     * @return The row key.
+     *
+     * @since 1.0.11
+     */
+    public Comparable getDomainCrosshairRowKey() {
+    	return this.domainCrosshairRowKey;
+    }
+
+    /**
+     * Sets the row key for the domain crosshair and sends a
+     * {PlotChangeEvent} to all registered listeners.
+     *
+     * @param key  the key.
+     *
+     * @since 1.0.11
+     */
+    public void setDomainCrosshairRowKey(Comparable key) {
+    	setDomainCrosshairRowKey(key, true);
+    }
+
+    /**
+     * Sets the row key for the domain crosshair and, if requested, sends a
+     * {PlotChangeEvent} to all registered listeners.
+     *
+     * @param key  the key.
+     * @param notify  notify listeners?
+     *
+     * @since 1.0.11
+     */
+    public void setDomainCrosshairRowKey(Comparable key, boolean notify) {
+    	this.domainCrosshairRowKey = key;
+    	if (notify) {
+    		fireChangeEvent();
+    	}
+    }
+
+    /**
+     * Returns the column key for the domain crosshair.
+     *
+     * @return The column key.
+     *
+     * @since 1.0.11
+     */
+    public Comparable getDomainCrosshairColumnKey() {
+    	return this.domainCrosshairColumnKey;
+    }
+
+    /**
+     * Sets the column key for the domain crosshair and sends
+     * a {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param key  the key.
+     *
+     * @since 1.0.11
+     */
+    public void setDomainCrosshairColumnKey(Comparable key) {
+    	setDomainCrosshairColumnKey(key, true);
+    }
+
+    /**
+     * Sets the column key for the domain crosshair and, if requested, sends
+     * a {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param key  the key.
+     * @param notify  notify listeners?
+     *
+     * @since 1.0.11
+     */
+    public void setDomainCrosshairColumnKey(Comparable key, boolean notify) {
+    	this.domainCrosshairColumnKey = key;
+    	if (notify) {
+    		fireChangeEvent();
+    	}
+    }
+
+    /**
+     * Returns the dataset index for the crosshair.
+     *
+     * @return The dataset index.
+     *
+     * @since 1.0.11
+     */
+    public int getCrosshairDatasetIndex() {
+    	return this.crosshairDatasetIndex;
+    }
+
+    /**
+     * Sets the dataset index for the crosshair and sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param index  the index.
+     *
+     * @since 1.0.11
+     */
+    public void setCrosshairDatasetIndex(int index) {
+	    setCrosshairDatasetIndex(index, true);
+    }
+
+    /**
+     * Sets the dataset index for the crosshair and, if requested, sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param index  the index.
+     * @param notify  notify listeners?
+     *
+     * @since 1.0.11
+     */
+    public void setCrosshairDatasetIndex(int index, boolean notify) {
+    	this.crosshairDatasetIndex = index;
+    	if (notify) {
+            fireChangeEvent();
+    	}
+    }
+
+    /**
+     * Returns the paint used to draw the domain crosshair.
+     *
+     * @return The paint (never <code>null</code>).
+     *
+     * @since 1.0.11
+     *
+     * @see #setDomainCrosshairPaint(Paint)
+     * @see #getDomainCrosshairStroke()
+     */
+    public Paint getDomainCrosshairPaint() {
+    	return this.domainCrosshairPaint;
+    }
+
+    /**
+     * Sets the paint used to draw the domain crosshair.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     *
+     * @see #getDomainCrosshairPaint()
+     */
+    public void setDomainCrosshairPaint(Paint paint) {
+    	if (paint == null) {
+    		throw new IllegalArgumentException("Null 'paint' argument.");
+    	}
+    	this.domainCrosshairPaint = paint;
+    	fireChangeEvent();
+    }
+
+    /**
+     * Returns the stroke used to draw the domain crosshair.
+     *
+     * @return The stroke (never <code>null</code>).
+     *
+     * @since 1.0.11
+     *
+     * @see #setDomainCrosshairStroke(Stroke)
+     * @see #getDomainCrosshairPaint()
+     */
+    public Stroke getDomainCrosshairStroke() {
+    	return this.domainCrosshairStroke;
+    }
+
+    /**
+     * Sets the stroke used to draw the domain crosshair, and sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param stroke  the stroke (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     *
+     * @see #getDomainCrosshairStroke()
+     */
+    public void setDomainCrosshairStroke(Stroke stroke) {
+    	if (stroke == null) {
+    		throw new IllegalArgumentException("Null 'stroke' argument.");
+    	}
+    	this.domainCrosshairStroke = stroke;
     }
 
     /**
@@ -2877,6 +3159,40 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
 
         Map axisStateMap = drawAxes(g2, area, dataArea, state);
 
+        // the anchor point is typically the point where the mouse last
+        // clicked - the crosshairs will be driven off this point...
+        if (anchor != null && !dataArea.contains(anchor)) {
+            anchor = ShapeUtilities.getPointInRectangle(anchor.getX(),
+            		anchor.getY(), dataArea);
+        }
+        CategoryCrosshairState crosshairState = new CategoryCrosshairState();
+        crosshairState.setCrosshairDistance(Double.POSITIVE_INFINITY);
+        crosshairState.setAnchor(anchor);
+
+        // specify the anchor X and Y coordinates in Java2D space, for the
+        // cases where these are not updated during rendering (i.e. no lock
+        // on data)
+        crosshairState.setAnchorX(Double.NaN);
+        crosshairState.setAnchorY(Double.NaN);
+        if (anchor != null) {
+            ValueAxis rangeAxis = getRangeAxis();
+            if (rangeAxis != null) {
+                double y;
+                if (getOrientation() == PlotOrientation.VERTICAL) {
+                    y = rangeAxis.java2DToValue(anchor.getY(), dataArea,
+                            getRangeAxisEdge());
+                }
+                else {
+                    y = rangeAxis.java2DToValue(anchor.getX(), dataArea,
+                            getRangeAxisEdge());
+                }
+                crosshairState.setAnchorY(y);
+            }
+        }
+        crosshairState.setRowKey(getDomainCrosshairRowKey());
+        crosshairState.setColumnKey(getDomainCrosshairColumnKey());
+        crosshairState.setCrosshairY(getRangeCrosshairValue());
+
         // don't let anyone draw outside the data area
         Shape savedClip = g2.getClip();
         g2.clip(dataArea);
@@ -2913,12 +3229,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         DatasetRenderingOrder order = getDatasetRenderingOrder();
         if (order == DatasetRenderingOrder.FORWARD) {
             for (int i = 0; i < this.datasets.size(); i++) {
-                foundData = render(g2, dataArea, i, state) || foundData;
+                foundData = render(g2, dataArea, i, state, crosshairState)
+                    || foundData;
             }
         }
         else {  // DatasetRenderingOrder.REVERSE
             for (int i = this.datasets.size() - 1; i >= 0; i--) {
-                foundData = render(g2, dataArea, i, state) || foundData;
+                foundData = render(g2, dataArea, i, state, crosshairState)
+                    || foundData;
             }
         }
         // draw the foreground markers...
@@ -2939,12 +3257,40 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             drawNoDataMessage(g2, dataArea);
         }
 
+        int datasetIndex = crosshairState.getDatasetIndex();
+        setCrosshairDatasetIndex(datasetIndex, false);
+
+        // draw domain crosshair if required...
+        Comparable rowKey = crosshairState.getRowKey();
+        Comparable columnKey = crosshairState.getColumnKey();
+        setDomainCrosshairRowKey(rowKey, false);
+        setDomainCrosshairColumnKey(columnKey, false);
+        if (isDomainCrosshairVisible() && columnKey != null) {
+            Paint paint = getDomainCrosshairPaint();
+            Stroke stroke = getDomainCrosshairStroke();
+            drawDomainCrosshair(g2, dataArea, this.orientation,
+            		datasetIndex, rowKey, columnKey, stroke, paint);
+        }
+
         // draw range crosshair if required...
+        ValueAxis yAxis = getRangeAxisForDataset(datasetIndex);
+        RectangleEdge yAxisEdge = getRangeAxisEdge();
+        if (!this.rangeCrosshairLockedOnData && anchor != null) {
+            double yy;
+            if (getOrientation() == PlotOrientation.VERTICAL) {
+                yy = yAxis.java2DToValue(anchor.getY(), dataArea, yAxisEdge);
+            }
+            else {
+                yy = yAxis.java2DToValue(anchor.getX(), dataArea, yAxisEdge);
+            }
+            crosshairState.setCrosshairY(yy);
+        }
+        setRangeCrosshairValue(crosshairState.getCrosshairY(), false);
         if (isRangeCrosshairVisible()) {
-            // FIXME: this doesn't handle multiple range axes
-            drawRangeCrosshair(g2, dataArea, getOrientation(),
-                    getRangeCrosshairValue(), getRangeAxis(),
-                    getRangeCrosshairStroke(), getRangeCrosshairPaint());
+            double y = getRangeCrosshairValue();
+            Paint paint = getRangeCrosshairPaint();
+            Stroke stroke = getRangeCrosshairStroke();
+            drawRangeCrosshair(g2, dataArea, getOrientation(), y, yAxis, stroke, paint);
         }
 
         // draw an outline around the plot area...
@@ -3076,11 +3422,15 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @param dataArea  the region in which the data is to be drawn.
      * @param index  the dataset and renderer index.
      * @param info  an optional object for collection dimension information.
+     * @param crosshairState  a state object for tracking crosshair info
+     *        (<code>null</code> permitted).
      *
      * @return A boolean that indicates whether or not real data was found.
+     *
+     * @since 1.0.11
      */
     public boolean render(Graphics2D g2, Rectangle2D dataArea, int index,
-                          PlotRenderingInfo info) {
+            PlotRenderingInfo info, CategoryCrosshairState crosshairState) {
 
         boolean foundData = false;
         CategoryDataset currentDataset = getDataset(index);
@@ -3093,6 +3443,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             foundData = true;
             CategoryItemRendererState state = renderer.initialise(g2, dataArea,
                     this, index, info);
+            state.setCrosshairState(crosshairState);
             int columnCount = currentDataset.getColumnCount();
             int rowCount = currentDataset.getRowCount();
             int passCount = renderer.getPassCount();
@@ -3323,6 +3674,50 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
+     * Draws a domain crosshair.
+     *
+     * @param g2  the graphics target.
+     * @param dataArea  the data area.
+     * @param orientation  the plot orientation.
+     * @param datasetIndex  the dataset index.
+     * @param rowKey  the row key.
+     * @param columnKey  the column key.
+     * @param stroke  the stroke used to draw the crosshair line.
+     * @param paint  the paint used to draw the crosshair line.
+     *
+     * @see #drawRangeCrosshair(Graphics2D, Rectangle2D, PlotOrientation,
+     *     double, ValueAxis, Stroke, Paint)
+     *
+     * @since 1.0.11
+     */
+    protected void drawDomainCrosshair(Graphics2D g2, Rectangle2D dataArea,
+            PlotOrientation orientation, int datasetIndex,
+            Comparable rowKey, Comparable columnKey, Stroke stroke,
+            Paint paint) {
+
+    	CategoryDataset dataset = getDataset(datasetIndex);
+    	CategoryAxis axis = getDomainAxisForDataset(datasetIndex);
+    	CategoryItemRenderer renderer = getRenderer(datasetIndex);
+        Line2D line = null;
+        if (orientation == PlotOrientation.VERTICAL) {
+            double xx = renderer.getItemMiddle(rowKey, columnKey, dataset, axis,
+            		dataArea, RectangleEdge.BOTTOM);
+            line = new Line2D.Double(xx, dataArea.getMinY(), xx,
+                    dataArea.getMaxY());
+        }
+        else {
+            double yy = renderer.getItemMiddle(rowKey, columnKey, dataset, axis,
+            		dataArea, RectangleEdge.LEFT);
+            line = new Line2D.Double(dataArea.getMinX(), yy,
+                    dataArea.getMaxX(), yy);
+        }
+        g2.setStroke(stroke);
+        g2.setPaint(paint);
+        g2.draw(line);
+
+    }
+
+    /**
      * Draws a range crosshair.
      *
      * @param g2  the graphics target.
@@ -3332,6 +3727,9 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @param axis  the axis against which the value is measured.
      * @param stroke  the stroke used to draw the crosshair line.
      * @param paint  the paint used to draw the crosshair line.
+     *
+     * @see #drawDomainCrosshair(Graphics2D, Rectangle2D, PlotOrientation, int,
+     *      Comparable, Comparable, Stroke, Paint)
      *
      * @since 1.0.5
      */
@@ -3949,7 +4347,28 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
                 that.fixedLegendItems)) {
             return false;
         }
-
+        if (this.domainCrosshairVisible != that.domainCrosshairVisible) {
+        	return false;
+        }
+        if (this.crosshairDatasetIndex != that.crosshairDatasetIndex) {
+        	return false;
+        }
+        if (!ObjectUtilities.equal(this.domainCrosshairColumnKey,
+        		that.domainCrosshairColumnKey)) {
+        	return false;
+        }
+        if (!ObjectUtilities.equal(this.domainCrosshairRowKey,
+        		that.domainCrosshairRowKey)) {
+        	return false;
+        }
+        if (!PaintUtilities.equal(this.domainCrosshairPaint,
+        		that.domainCrosshairPaint)) {
+        	return false;
+        }
+        if (!ObjectUtilities.equal(this.domainCrosshairStroke,
+        		that.domainCrosshairStroke)) {
+        	return false;
+        }
         return super.equals(obj);
 
     }
@@ -4062,6 +4481,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         SerialUtilities.writePaint(this.rangeGridlinePaint, stream);
         SerialUtilities.writeStroke(this.rangeCrosshairStroke, stream);
         SerialUtilities.writePaint(this.rangeCrosshairPaint, stream);
+        SerialUtilities.writeStroke(this.domainCrosshairStroke, stream);
+        SerialUtilities.writePaint(this.domainCrosshairPaint, stream);
     }
 
     /**
@@ -4082,6 +4503,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         this.rangeGridlinePaint = SerialUtilities.readPaint(stream);
         this.rangeCrosshairStroke = SerialUtilities.readStroke(stream);
         this.rangeCrosshairPaint = SerialUtilities.readPaint(stream);
+        this.domainCrosshairStroke = SerialUtilities.readStroke(stream);
+        this.domainCrosshairPaint = SerialUtilities.readPaint(stream);
 
         for (int i = 0; i < this.domainAxes.size(); i++) {
             CategoryAxis xAxis = (CategoryAxis) this.domainAxes.get(i);

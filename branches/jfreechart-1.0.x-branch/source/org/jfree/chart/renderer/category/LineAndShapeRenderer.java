@@ -86,6 +86,7 @@
  * 24-Sep-2007 : Deprecated redundant fields/methods (DG);
  * 27-Sep-2007 : Added option to offset series x-position within category (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
+ * 26-Jun-2008 : Added crosshair support (DG);
  *
  */
 
@@ -1005,6 +1006,12 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
                             y1, (value < 0.0));
                 }
             }
+
+            // submit the current data point as a crosshair candidate
+            int datasetIndex = plot.indexOf(dataset);
+            updateCrosshairValues(state.getCrosshairState(),
+            		dataset.getRowKey(row), dataset.getColumnKey(column),
+            		value, datasetIndex, x1, y1, orientation);
 
             // add an item entity, if this information is being collected
             EntityCollection entities = state.getEntityCollection();

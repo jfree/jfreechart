@@ -86,6 +86,7 @@
  *               equalPaintMaps() method (DG);
  * 23-Apr-2008 : Fixed bug 1942059, bad use of insets in
  *               calculateTextBlockWidth() (DG);
+ * 26-Jun-2008 : Added new getCategoryMiddle() method (DG);
  *
  */
 
@@ -624,6 +625,10 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     public double getCategoryMiddle(int category, int categoryCount,
                                     Rectangle2D area, RectangleEdge edge) {
 
+    	if (category < 0 || category >= categoryCount) {
+    		throw new IllegalArgumentException("Invalid category index: "
+    				+ category);
+    	}
         return getCategoryStart(category, categoryCount, area, edge)
                + calculateCategorySize(categoryCount, area, edge) / 2;
 
@@ -648,6 +653,33 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         return getCategoryStart(category, categoryCount, area, edge)
                + calculateCategorySize(categoryCount, area, edge);
 
+    }
+
+    /**
+     * A convenience method that returns the axis coordinate for the centre of
+     * a category.
+     *
+     * @param category  the category key (<code>null</code> not permitted).
+     * @param categories  the categories (<code>null</code> not permitted).
+     * @param area  the data area (<code>null</code> not permitted).
+     * @param edge  the edge along which the axis lies (<code>null</code> not
+     *     permitted).
+     *
+     * @return The centre coordinate.
+     *
+     * @since 1.0.11
+     *
+     * @see #getCategorySeriesMiddle(Comparable, Comparable, CategoryDataset,
+     *     double, Rectangle2D, RectangleEdge)
+     */
+    public double getCategoryMiddle(Comparable category,
+    		List categories, Rectangle2D area, RectangleEdge edge) {
+    	if (categories == null) {
+    		throw new IllegalArgumentException("Null 'categories' argument.");
+    	}
+        int categoryIndex = categories.indexOf(category);
+        int categoryCount = categories.size();
+        return getCategoryMiddle(categoryIndex, categoryCount, area, edge);
     }
 
     /**
