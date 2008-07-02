@@ -1,5 +1,13 @@
 2008-07-02  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 2006826:
+    * source/org/jfree/chart/title/CompositeTitle.java
+    (draw(Graphics2D, Rectangle2D)): Delegate to other draw method,
+    (draw(Graphics2D, Rectangle2D, Parameters)): Modified implementation to 
+    return result from BlockContainer.
+
+2008-07-02  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/plot/PiePlot.java
     (autoPopulateSectionPaint): New field,
     (autoPopulateSectionOutlinePaint): Likewise,
