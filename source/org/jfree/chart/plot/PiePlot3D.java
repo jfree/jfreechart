@@ -461,7 +461,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
                 continue;
             }
             Comparable key = getSectionKey(categoryIndex);
-            paint = lookupSectionPaint(key, true);
+            paint = lookupSectionPaint(key);
             outlinePaint = lookupSectionOutlinePaint(key);
             outlineStroke = lookupSectionOutlineStroke(key);
             g2.setPaint(paint);
@@ -499,7 +499,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
             Arc2D segment = (Arc2D) iterator.next();
             if (segment != null) {
                 Comparable key = getSectionKey(cat);
-                paint = lookupSectionPaint(key, true);
+                paint = lookupSectionPaint(key);
                 outlinePaint = lookupSectionOutlinePaint(key);
                 outlineStroke = lookupSectionOutlineStroke(key);
                 drawSide(g2, pieArea, segment, front, back, paint,
