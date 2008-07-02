@@ -153,6 +153,7 @@
  * 31-Mar-2008 : Adjust the label area for the interiorGap (DG);
  * 31-Mar-2008 : Added quad and cubic curve label link lines - see patch
  *               1891849 by Martin Hilpert (DG);
+ * 02-Jul-2008 : Added autoPopulate flags (DG);
  *
  */
 
@@ -292,15 +293,6 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /** The direction for the pie segments. */
     private Rotation direction;
 
-    /**
-     * The paint for ALL sections (overrides list).
-     *
-     * @deprecated This field is redundant, it is sufficient to use
-     *     sectionPaintMap and baseSectionPaint.  Deprecated as of version
-     *     1.0.6.
-     */
-    private transient Paint sectionPaint;
-
     /** The section paint map. */
     private PaintMap sectionPaintMap;
 
@@ -308,19 +300,18 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     private transient Paint baseSectionPaint;
 
     /**
+     * A flag that controls whether or not the section paint is auto-populated
+     * from the drawing supplier.
+     *
+     * @since 1.0.11
+     */
+    private boolean autoPopulateSectionPaint;
+
+    /**
      * A flag that controls whether or not an outline is drawn for each
      * section in the plot.
      */
     private boolean sectionOutlinesVisible;
-
-    /**
-     * The outline paint for ALL sections (overrides list).
-     *
-     * @deprecated This field is redundant, it is sufficient to use
-     *     sectionOutlinePaintMap and baseSectionOutlinePaint.  Deprecated as
-     *     of version 1.0.6.
-     */
-    private transient Paint sectionOutlinePaint;
 
     /** The section outline paint map. */
     private PaintMap sectionOutlinePaintMap;
@@ -329,19 +320,26 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     private transient Paint baseSectionOutlinePaint;
 
     /**
-     * The outline stroke for ALL sections (overrides list).
+     * A flag that controls whether or not the section outline paint is
+     * auto-populated from the drawing supplier.
      *
-     * @deprecated This field is redundant, it is sufficient to use
-     *     sectionOutlineStrokeMap and baseSectionOutlineStroke.  Deprecated as
-     *     of version 1.0.6.
+     * @since 1.0.11
      */
-    private transient Stroke sectionOutlineStroke;
+    private boolean autoPopulateSectionOutlinePaint;
 
     /** The section outline stroke map. */
     private StrokeMap sectionOutlineStrokeMap;
 
     /** The base section outline stroke (fallback). */
     private transient Stroke baseSectionOutlineStroke;
+
+    /**
+     * A flag that controls whether or not the section outline stroke is
+     * auto-populated from the drawing supplier.
+     *
+     * @since 1.0.11
+     */
+    private boolean autoPopulateSectionOutlineStroke;
 
     /** The shadow paint. */
     private transient Paint shadowPaint = Color.gray;
@@ -543,15 +541,18 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         this.sectionPaint = null;
         this.sectionPaintMap = new PaintMap();
         this.baseSectionPaint = Color.gray;
+        this.autoPopulateSectionPaint = true;
 
         this.sectionOutlinesVisible = true;
         this.sectionOutlinePaint = null;
         this.sectionOutlinePaintMap = new PaintMap();
         this.baseSectionOutlinePaint = DEFAULT_OUTLINE_PAINT;
+        this.autoPopulateSectionOutlinePaint = false;
 
         this.sectionOutlineStroke = null;
         this.sectionOutlineStrokeMap = new StrokeMap();
         this.baseSectionOutlineStroke = DEFAULT_OUTLINE_STROKE;
+        this.autoPopulateSectionOutlineStroke = false;
 
         this.explodePercentages = new TreeMap();
 
@@ -835,7 +836,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Returns the paint for the specified section.  This is equivalent to
-     * <code>lookupSectionPaint(section, false)</code>.
+     * <code>lookupSectionPaint(section, getAutoPopulateSectionPaint())</code>.
      *
      * @param key  the section key.
      *
@@ -846,7 +847,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #lookupSectionPaint(Comparable, boolean)
      */
     protected Paint lookupSectionPaint(Comparable key) {
-        return lookupSectionPaint(key, false);
+        return lookupSectionPaint(key, getAutoPopulateSectionPaint());
     }
 
     /**
@@ -1030,6 +1031,32 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         fireChangeEvent();
     }
 
+    /**
+     * Returns the flag that controls whether or not the section paint is
+     * auto-populated by the {@link #lookupSectionPaint(Comparable)} method.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.11
+     */
+    public boolean getAutoPopulateSectionPaint() {
+    	return this.autoPopulateSectionPaint;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the section paint is
+     * auto-populated by the {@link #lookupSectionPaint(Comparable)} method,
+     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param auto  auto-populate?
+     *
+     * @since 1.0.11
+     */
+    public void setAutoPopulateSectionPaint(boolean auto) {
+        this.autoPopulateSectionPaint = auto;
+        fireChangeEvent();
+    }
+
     //// SECTION OUTLINE PAINT ////////////////////////////////////////////////
 
     /**
@@ -1061,7 +1088,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Returns the outline paint for the specified section.  This is equivalent
-     * to <code>lookupSectionPaint(section, false)</code>.
+     * to <code>lookupSectionPaint(section,
+     * getAutoPopulateSectionOutlinePaint())</code>.
      *
      * @param key  the section key.
      *
@@ -1072,7 +1100,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #lookupSectionOutlinePaint(Comparable, boolean)
      */
     protected Paint lookupSectionOutlinePaint(Comparable key) {
-        return lookupSectionOutlinePaint(key, false);
+        return lookupSectionOutlinePaint(key,
+        		getAutoPopulateSectionOutlinePaint());
     }
 
     /**
@@ -1128,39 +1157,6 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             result = this.baseSectionOutlinePaint;
         }
         return result;
-    }
-
-    /**
-     * Returns the outline paint for ALL sections in the plot.
-     *
-     * @return The paint (possibly <code>null</code>).
-     *
-     * @see #setSectionOutlinePaint(Paint)
-     *
-     * @deprecated Use {@link #getSectionOutlinePaint(Comparable)} and
-     *     {@link #getBaseSectionOutlinePaint()}.  Deprecated as of version
-     *     1.0.6.
-     */
-    public Paint getSectionOutlinePaint() {
-        return this.sectionOutlinePaint;
-    }
-
-    /**
-     * Sets the outline paint for ALL sections in the plot.  If this is set to
-     * </code>null</code>, then a list of paints is used instead (to allow
-     * different colors to be used for each section).
-     *
-     * @param paint  the paint (<code>null</code> permitted).
-     *
-     * @see #getSectionOutlinePaint()
-     *
-     * @deprecated Use {@link #setSectionOutlinePaint(Comparable, Paint)} and
-     *     {@link #setBaseSectionOutlinePaint(Paint)}.  Deprecated as of
-     *     version 1.0.6.
-     */
-    public void setSectionOutlinePaint(Paint paint) {
-        this.sectionOutlinePaint = paint;
-        fireChangeEvent();
     }
 
     /**
@@ -1231,11 +1227,39 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         fireChangeEvent();
     }
 
+    /**
+     * Returns the flag that controls whether or not the section outline paint
+     * is auto-populated by the {@link #lookupSectionOutlinePaint(Comparable)}
+     * method.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.11
+     */
+    public boolean getAutoPopulateSectionOutlinePaint() {
+    	return this.autoPopulateSectionOutlinePaint;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the section outline paint is
+     * auto-populated by the {@link #lookupSectionOutlinePaint(Comparable)}
+     * method, and sends a {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param auto  auto-populate?
+     *
+     * @since 1.0.11
+     */
+    public void setAutoPopulateSectionOutlinePaint(boolean auto) {
+        this.autoPopulateSectionOutlinePaint = auto;
+        fireChangeEvent();
+    }
+
     //// SECTION OUTLINE STROKE ///////////////////////////////////////////////
 
     /**
      * Returns the outline stroke for the specified section.  This is
-     * equivalent to <code>lookupSectionOutlineStroke(section, false)</code>.
+     * equivalent to <code>lookupSectionOutlineStroke(section,
+     * getAutoPopulateSectionOutlineStroke())</code>.
      *
      * @param key  the section key.
      *
@@ -1246,7 +1270,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #lookupSectionOutlineStroke(Comparable, boolean)
      */
     protected Stroke lookupSectionOutlineStroke(Comparable key) {
-        return lookupSectionOutlineStroke(key, false);
+        return lookupSectionOutlineStroke(key,
+        		getAutoPopulateSectionOutlineStroke());
     }
 
     /**
@@ -1302,39 +1327,6 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             result = this.baseSectionOutlineStroke;
         }
         return result;
-    }
-
-    /**
-     * Returns the outline stroke for ALL sections in the plot.
-     *
-     * @return The stroke (possibly <code>null</code>).
-     *
-     * @see #setSectionOutlineStroke(Stroke)
-     *
-     * @deprecated Use {@link #getSectionOutlineStroke(Comparable)} and
-     *     {@link #getBaseSectionOutlineStroke()}.  Deprecated as of version
-     *     1.0.6.
-     */
-    public Stroke getSectionOutlineStroke() {
-        return this.sectionOutlineStroke;
-    }
-
-    /**
-     * Sets the outline stroke for ALL sections in the plot.  If this is set to
-     * </code>null</code>, then a list of paints is used instead (to allow
-     * different colors to be used for each section).
-     *
-     * @param stroke  the stroke (<code>null</code> permitted).
-     *
-     * @see #getSectionOutlineStroke()
-     *
-     * @deprecated Use {@link #setSectionOutlineStroke(Comparable, Stroke)} and
-     *     {@link #setBaseSectionOutlineStroke(Stroke)}.  Deprecated as of
-     *     version 1.0.6.
-     */
-    public void setSectionOutlineStroke(Stroke stroke) {
-        this.sectionOutlineStroke = stroke;
-        fireChangeEvent();
     }
 
     /**
@@ -1402,6 +1394,33 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.baseSectionOutlineStroke = stroke;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the flag that controls whether or not the section outline stroke
+     * is auto-populated by the {@link #lookupSectionOutlinePaint(Comparable)}
+     * method.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.11
+     */
+    public boolean getAutoPopulateSectionOutlineStroke() {
+    	return this.autoPopulateSectionOutlineStroke;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the section outline stroke is
+     * auto-populated by the {@link #lookupSectionOutlineStroke(Comparable)}
+     * method, and sends a {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param auto  auto-populate?
+     *
+     * @since 1.0.11
+     */
+    public void setAutoPopulateSectionOutlineStroke(boolean auto) {
+        this.autoPopulateSectionOutlineStroke = auto;
         fireChangeEvent();
     }
 
@@ -2484,7 +2503,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             }
             else if (currentPass == 1) {
                 Comparable key = getSectionKey(section);
-                Paint paint = lookupSectionPaint(key, true);
+                Paint paint = lookupSectionPaint(key);
                 g2.setPaint(paint);
                 g2.fill(arc);
 
@@ -2845,7 +2864,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                         urlText = this.legendLabelURLGenerator.generateURL(
                                 this.dataset, key, this.pieIndex);
                     }
-                    Paint paint = lookupSectionPaint(key, true);
+                    Paint paint = lookupSectionPaint(key);
                     Paint outlinePaint = lookupSectionOutlinePaint(key);
                     Stroke outlineStroke = lookupSectionOutlineStroke(key);
                     LegendItem item = new LegendItem(label, description,
@@ -3189,6 +3208,17 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 that.legendLabelURLGenerator)) {
             return false;
         }
+        if (this.autoPopulateSectionPaint != that.autoPopulateSectionPaint) {
+        	return false;
+        }
+        if (this.autoPopulateSectionOutlinePaint
+        		!= that.autoPopulateSectionOutlinePaint) {
+        	return false;
+        }
+        if (this.autoPopulateSectionOutlineStroke
+        		!= that.autoPopulateSectionOutlineStroke) {
+        	return false;
+        }
         // can't find any difference...
         return true;
     }
@@ -3280,7 +3310,34 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         this.legendItemShape = SerialUtilities.readShape(stream);
     }
 
-    // DEPRECATED METHODS...
+    // DEPRECATED FIELDS AND METHODS...
+
+    /**
+     * The paint for ALL sections (overrides list).
+     *
+     * @deprecated This field is redundant, it is sufficient to use
+     *     sectionPaintMap and baseSectionPaint.  Deprecated as of version
+     *     1.0.6.
+     */
+    private transient Paint sectionPaint;
+
+    /**
+     * The outline paint for ALL sections (overrides list).
+     *
+     * @deprecated This field is redundant, it is sufficient to use
+     *     sectionOutlinePaintMap and baseSectionOutlinePaint.  Deprecated as
+     *     of version 1.0.6.
+     */
+    private transient Paint sectionOutlinePaint;
+
+    /**
+     * The outline stroke for ALL sections (overrides list).
+     *
+     * @deprecated This field is redundant, it is sufficient to use
+     *     sectionOutlineStrokeMap and baseSectionOutlineStroke.  Deprecated as
+     *     of version 1.0.6.
+     */
+    private transient Stroke sectionOutlineStroke;
 
     /**
      * Returns the paint for the specified section.
@@ -3311,6 +3368,39 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
+     * Returns the outline paint for ALL sections in the plot.
+     *
+     * @return The paint (possibly <code>null</code>).
+     *
+     * @see #setSectionOutlinePaint(Paint)
+     *
+     * @deprecated Use {@link #getSectionOutlinePaint(Comparable)} and
+     *     {@link #getBaseSectionOutlinePaint()}.  Deprecated as of version
+     *     1.0.6.
+     */
+    public Paint getSectionOutlinePaint() {
+        return this.sectionOutlinePaint;
+    }
+
+    /**
+     * Sets the outline paint for ALL sections in the plot.  If this is set to
+     * </code>null</code>, then a list of paints is used instead (to allow
+     * different colors to be used for each section).
+     *
+     * @param paint  the paint (<code>null</code> permitted).
+     *
+     * @see #getSectionOutlinePaint()
+     *
+     * @deprecated Use {@link #setSectionOutlinePaint(Comparable, Paint)} and
+     *     {@link #setBaseSectionOutlinePaint(Paint)}.  Deprecated as of
+     *     version 1.0.6.
+     */
+    public void setSectionOutlinePaint(Paint paint) {
+        this.sectionOutlinePaint = paint;
+        fireChangeEvent();
+    }
+
+    /**
      * Returns the paint for the specified section.
      *
      * @param section  the section index (zero-based).
@@ -3337,6 +3427,39 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     public void setSectionOutlinePaint(int section, Paint paint) {
         Comparable key = getSectionKey(section);
         setSectionOutlinePaint(key, paint);
+    }
+
+    /**
+     * Returns the outline stroke for ALL sections in the plot.
+     *
+     * @return The stroke (possibly <code>null</code>).
+     *
+     * @see #setSectionOutlineStroke(Stroke)
+     *
+     * @deprecated Use {@link #getSectionOutlineStroke(Comparable)} and
+     *     {@link #getBaseSectionOutlineStroke()}.  Deprecated as of version
+     *     1.0.6.
+     */
+    public Stroke getSectionOutlineStroke() {
+        return this.sectionOutlineStroke;
+    }
+
+    /**
+     * Sets the outline stroke for ALL sections in the plot.  If this is set to
+     * </code>null</code>, then a list of paints is used instead (to allow
+     * different colors to be used for each section).
+     *
+     * @param stroke  the stroke (<code>null</code> permitted).
+     *
+     * @see #getSectionOutlineStroke()
+     *
+     * @deprecated Use {@link #setSectionOutlineStroke(Comparable, Stroke)} and
+     *     {@link #setBaseSectionOutlineStroke(Stroke)}.  Deprecated as of
+     *     version 1.0.6.
+     */
+    public void setSectionOutlineStroke(Stroke stroke) {
+        this.sectionOutlineStroke = stroke;
+        fireChangeEvent();
     }
 
     /**
