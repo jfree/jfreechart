@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------
  * RingPlot.java
  * -------------
- * (C) Copyright 2004-2007, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limtied);
  * Contributor(s):   -;
@@ -81,36 +81,36 @@ import org.jfree.util.UnitType;
  * A customised pie plot that leaves a hole in the middle.
  */
 public class RingPlot extends PiePlot implements Cloneable, Serializable {
-    
+
     /** For serialization. */
     private static final long serialVersionUID = 1556064784129676620L;
-    
-    /** 
+
+    /**
      * A flag that controls whether or not separators are drawn between the
      * sections of the chart.
      */
     private boolean separatorsVisible;
-    
+
     /** The stroke used to draw separators. */
     private transient Stroke separatorStroke;
-    
+
     /** The paint used to draw separators. */
     private transient Paint separatorPaint;
-    
-    /** 
+
+    /**
      * The length of the inner separator extension (as a percentage of the
-     * depth of the sections). 
+     * depth of the sections).
      */
     private double innerSeparatorExtension;
-    
-    /** 
+
+    /**
      * The length of the outer separator extension (as a percentage of the
-     * depth of the sections). 
+     * depth of the sections).
      */
     private double outerSeparatorExtension;
 
-    /** 
-     * The depth of the section as a percentage of the diameter.  
+    /**
+     * The depth of the section as a percentage of the diameter.
      */
     private double sectionDepth;
 
@@ -118,12 +118,12 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * Creates a new plot with a <code>null</code> dataset.
      */
     public RingPlot() {
-        this(null);   
+        this(null);
     }
-    
+
     /**
      * Creates a new plot for the specified dataset.
-     * 
+     *
      * @param dataset  the dataset (<code>null</code> permitted).
      */
     public RingPlot(PieDataset dataset) {
@@ -135,11 +135,11 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         this.outerSeparatorExtension = 0.20;  // twenty percent
         this.sectionDepth = 0.20; // 20%
     }
-    
+
     /**
      * Returns a flag that indicates whether or not separators are drawn between
      * the sections in the chart.
-     * 
+     *
      * @return A boolean.
      *
      * @see #setSeparatorsVisible(boolean)
@@ -147,38 +147,38 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     public boolean getSeparatorsVisible() {
         return this.separatorsVisible;
     }
-    
+
     /**
-     * Sets the flag that controls whether or not separators are drawn between 
+     * Sets the flag that controls whether or not separators are drawn between
      * the sections in the chart, and sends a {@link PlotChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param visible  the flag.
-     * 
+     *
      * @see #getSeparatorsVisible()
      */
     public void setSeparatorsVisible(boolean visible) {
         this.separatorsVisible = visible;
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the separator stroke.
-     * 
+     *
      * @return The stroke (never <code>null</code>).
-     * 
+     *
      * @see #setSeparatorStroke(Stroke)
      */
     public Stroke getSeparatorStroke() {
         return this.separatorStroke;
     }
-    
+
     /**
-     * Sets the stroke used to draw the separator between sections and sends 
+     * Sets the stroke used to draw the separator between sections and sends
      * a {@link PlotChangeEvent} to all registered listeners.
-     * 
+     *
      * @param stroke  the stroke (<code>null</code> not permitted).
-     * 
+     *
      * @see #getSeparatorStroke()
      */
     public void setSeparatorStroke(Stroke stroke) {
@@ -188,24 +188,24 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         this.separatorStroke = stroke;
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the separator paint.
-     * 
+     *
      * @return The paint (never <code>null</code>).
-     * 
+     *
      * @see #setSeparatorPaint(Paint)
      */
     public Paint getSeparatorPaint() {
         return this.separatorPaint;
     }
-    
+
     /**
-     * Sets the paint used to draw the separator between sections and sends a 
+     * Sets the paint used to draw the separator between sections and sends a
      * {@link PlotChangeEvent} to all registered listeners.
-     * 
+     *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getSeparatorPaint()
      */
     public void setSeparatorPaint(Paint paint) {
@@ -215,28 +215,28 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         this.separatorPaint = paint;
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the length of the inner extension of the separator line that
      * is drawn between sections, expressed as a percentage of the depth of
      * the section.
-     * 
+     *
      * @return The inner separator extension (as a percentage).
-     * 
+     *
      * @see #setInnerSeparatorExtension(double)
      */
     public double getInnerSeparatorExtension() {
         return this.innerSeparatorExtension;
     }
-    
+
     /**
      * Sets the length of the inner extension of the separator line that is
-     * drawn between sections, as a percentage of the depth of the 
-     * sections, and sends a {@link PlotChangeEvent} to all registered 
+     * drawn between sections, as a percentage of the depth of the
+     * sections, and sends a {@link PlotChangeEvent} to all registered
      * listeners.
-     * 
+     *
      * @param percent  the percentage.
-     * 
+     *
      * @see #getInnerSeparatorExtension()
      * @see #setOuterSeparatorExtension(double)
      */
@@ -244,52 +244,52 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         this.innerSeparatorExtension = percent;
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the length of the outer extension of the separator line that
      * is drawn between sections, expressed as a percentage of the depth of
      * the section.
-     * 
+     *
      * @return The outer separator extension (as a percentage).
-     * 
+     *
      * @see #setOuterSeparatorExtension(double)
      */
     public double getOuterSeparatorExtension() {
         return this.outerSeparatorExtension;
     }
-    
+
     /**
      * Sets the length of the outer extension of the separator line that is
-     * drawn between sections, as a percentage of the depth of the 
-     * sections, and sends a {@link PlotChangeEvent} to all registered 
+     * drawn between sections, as a percentage of the depth of the
+     * sections, and sends a {@link PlotChangeEvent} to all registered
      * listeners.
-     * 
+     *
      * @param percent  the percentage.
-     * 
+     *
      * @see #getOuterSeparatorExtension()
      */
     public void setOuterSeparatorExtension(double percent) {
         this.outerSeparatorExtension = percent;
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the depth of each section, expressed as a percentage of the
      * plot radius.
-     * 
+     *
      * @return The depth of each section.
-     * 
+     *
      * @see #setSectionDepth(double)
      * @since 1.0.3
      */
     public double getSectionDepth() {
         return this.sectionDepth;
     }
-    
+
     /**
      * The section depth is given as percentage of the plot radius.
      * Specifying 1.0 results in a straightforward pie chart.
-     * 
+     *
      * @param sectionDepth  the section depth.
      *
      * @see #getSectionDepth()
@@ -302,17 +302,17 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
 
     /**
      * Initialises the plot state (which will store the total of all dataset
-     * values, among other things).  This method is called once at the 
+     * values, among other things).  This method is called once at the
      * beginning of each drawing.
      *
      * @param g2  the graphics device.
      * @param plotArea  the plot area (<code>null</code> not permitted).
      * @param plot  the plot.
-     * @param index  the secondary index (<code>null</code> for primary 
+     * @param index  the secondary index (<code>null</code> for primary
      *               renderer).
      * @param info  collects chart rendering information for return to caller.
-     * 
-     * @return A state object (maintains state information relevant to one 
+     *
+     * @return A state object (maintains state information relevant to one
      *         chart drawing).
      */
     public PiePlotState initialise(Graphics2D g2, Rectangle2D plotArea,
@@ -320,7 +320,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
 
         PiePlotState state = super.initialise(g2, plotArea, plot, index, info);
         state.setPassesRequired(3);
-        return state;   
+        return state;
 
     }
 
@@ -338,16 +338,16 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
                             Rectangle2D dataArea,
                             PiePlotState state,
                             int currentPass) {
-    
+
         PieDataset dataset = getDataset();
         Number n = dataset.getValue(section);
         if (n == null) {
-            return;   
+            return;
         }
         double value = n.doubleValue();
         double angle1 = 0.0;
         double angle2 = 0.0;
-        
+
         Rotation direction = getDirection();
         if (direction == Rotation.CLOCKWISE) {
             angle1 = state.getLatestAngle();
@@ -355,46 +355,46 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         }
         else if (direction == Rotation.ANTICLOCKWISE) {
             angle1 = state.getLatestAngle();
-            angle2 = angle1 + value / state.getTotal() * 360.0;         
+            angle2 = angle1 + value / state.getTotal() * 360.0;
         }
         else {
-            throw new IllegalStateException("Rotation type not recognised.");   
+            throw new IllegalStateException("Rotation type not recognised.");
         }
-        
+
         double angle = (angle2 - angle1);
         if (Math.abs(angle) > getMinimumArcAngleToDraw()) {
             Comparable key = getSectionKey(section);
             double ep = 0.0;
             double mep = getMaximumExplodePercent();
             if (mep > 0.0) {
-                ep = getExplodePercent(key) / mep;                
+                ep = getExplodePercent(key) / mep;
             }
-            Rectangle2D arcBounds = getArcBounds(state.getPieArea(), 
-                    state.getExplodedPieArea(), angle1, angle, ep);            
-            Arc2D.Double arc = new Arc2D.Double(arcBounds, angle1, angle, 
+            Rectangle2D arcBounds = getArcBounds(state.getPieArea(),
+                    state.getExplodedPieArea(), angle1, angle, ep);
+            Arc2D.Double arc = new Arc2D.Double(arcBounds, angle1, angle,
                     Arc2D.OPEN);
 
             // create the bounds for the inner arc
             double depth = this.sectionDepth / 2.0;
-            RectangleInsets s = new RectangleInsets(UnitType.RELATIVE, 
+            RectangleInsets s = new RectangleInsets(UnitType.RELATIVE,
                 depth, depth, depth, depth);
             Rectangle2D innerArcBounds = new Rectangle2D.Double();
             innerArcBounds.setRect(arcBounds);
             s.trim(innerArcBounds);
-            // calculate inner arc in reverse direction, for later 
+            // calculate inner arc in reverse direction, for later
             // GeneralPath construction
-            Arc2D.Double arc2 = new Arc2D.Double(innerArcBounds, angle1 
+            Arc2D.Double arc2 = new Arc2D.Double(innerArcBounds, angle1
                     + angle, -angle, Arc2D.OPEN);
             GeneralPath path = new GeneralPath();
-            path.moveTo((float) arc.getStartPoint().getX(), 
+            path.moveTo((float) arc.getStartPoint().getX(),
                     (float) arc.getStartPoint().getY());
             path.append(arc.getPathIterator(null), false);
             path.append(arc2.getPathIterator(null), true);
             path.closePath();
-            
-            Line2D separator = new Line2D.Double(arc2.getEndPoint(), 
+
+            Line2D separator = new Line2D.Double(arc2.getEndPoint(),
                     arc.getStartPoint());
-            
+
             if (currentPass == 0) {
                 Paint shadowPaint = getShadowPaint();
                 double shadowXOffset = getShadowXOffset();
@@ -417,26 +417,26 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
                     g2.setStroke(outlineStroke);
                     g2.draw(path);
                 }
-                
+
                 // add an entity for the pie section
                 if (state.getInfo() != null) {
                     EntityCollection entities = state.getEntityCollection();
                     if (entities != null) {
                         String tip = null;
-                        PieToolTipGenerator toolTipGenerator 
+                        PieToolTipGenerator toolTipGenerator
                                 = getToolTipGenerator();
                         if (toolTipGenerator != null) {
-                            tip = toolTipGenerator.generateToolTip(dataset, 
+                            tip = toolTipGenerator.generateToolTip(dataset,
                                     key);
                         }
                         String url = null;
                         PieURLGenerator urlGenerator = getURLGenerator();
                         if (urlGenerator != null) {
-                            url = urlGenerator.generateURL(dataset, key, 
+                            url = urlGenerator.generateURL(dataset, key,
                                     getPieIndex());
                         }
-                        PieSectionEntity entity = new PieSectionEntity(path, 
-                                dataset, getPieIndex(), section, key, tip, 
+                        PieSectionEntity entity = new PieSectionEntity(path,
+                                dataset, getPieIndex(), section, key, tip,
                                 url);
                         entities.add(entity);
                     }
@@ -445,22 +445,22 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
             else if (currentPass == 2) {
                 if (this.separatorsVisible) {
                     Line2D extendedSeparator = extendLine(separator,
-                        this.innerSeparatorExtension, 
+                        this.innerSeparatorExtension,
                         this.outerSeparatorExtension);
                     g2.setStroke(this.separatorStroke);
                     g2.setPaint(this.separatorPaint);
                     g2.draw(extendedSeparator);
                 }
             }
-        }    
+        }
         state.setLatestAngle(angle2);
     }
 
     /**
      * Tests this plot for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object to test against (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -474,7 +474,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         if (this.separatorsVisible != that.separatorsVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.separatorStroke, 
+        if (!ObjectUtilities.equal(this.separatorStroke,
                 that.separatorStroke)) {
             return false;
         }
@@ -492,18 +492,18 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Creates a new line by extending an existing line.
-     * 
+     *
      * @param line  the line (<code>null</code> not permitted).
-     * @param startPercent  the amount to extend the line at the start point 
+     * @param startPercent  the amount to extend the line at the start point
      *                      end.
      * @param endPercent  the amount to extend the line at the end point end.
-     * 
+     *
      * @return A new line.
      */
-    private Line2D extendLine(Line2D line, double startPercent, 
+    private Line2D extendLine(Line2D line, double startPercent,
                               double endPercent) {
         if (line == null) {
             throw new IllegalArgumentException("Null 'line' argument.");
@@ -520,7 +520,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         y2 = y2 + (endPercent * deltaY);
         return new Line2D.Double(x1, y1, x2, y2);
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -542,11 +542,11 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.separatorStroke = SerialUtilities.readStroke(stream);
         this.separatorPaint = SerialUtilities.readPaint(stream);
     }
-    
+
 }
