@@ -41,19 +41,27 @@
  * 03-May-2005 : Implemented equals() method (DG);
  * 02-Jul-2008 : Applied patch 2006826 by Eric Penfold, to enable chart
  *               entities to be generated (DG);
+ * 09-Jul-2008 : Added backgroundPaint field (DG);
  *
  */
 
 package org.jfree.chart.title;
 
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.block.BorderArrangement;
 import org.jfree.chart.block.RectangleConstraint;
+import org.jfree.chart.event.TitleChangeEvent;
+import org.jfree.io.SerialUtilities;
 import org.jfree.ui.Size2D;
+import org.jfree.util.PaintUtilities;
 
 /**
  * A title that contains multiple titles within a {@link BlockContainer}.
@@ -62,6 +70,13 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6770854036232562290L;
+
+    /**
+     * The background paint.
+     *
+     * @since 1.0.11
+     */
+    private transient Paint backgroundPaint;
 
     /** A container for the individual titles. */
     private BlockContainer container;
@@ -83,6 +98,32 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'container' argument.");
         }
         this.container = container;
+        this.backgroundPaint = null;
+    }
+
+    /**
+     * Returns the background paint.
+     *
+     * @return The paint (possibly <code>null</code>).
+     *
+     * @since 1.0.11
+     */
+    public Paint getBackgroundPaint() {
+        return this.backgroundPaint;
+    }
+
+    /**
+     * Sets the background paint and sends a {@link TitleChangeEvent} to all
+     * registered listeners.  If you set this attribute to <code>null</code>,
+     * no background is painted (which makes the title background transparent).
+     *
+     * @param paint  the background paint (<code>null</code> permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setBackgroundPaint(Paint paint) {
+        this.backgroundPaint = paint;
+        notifyListeners(new TitleChangeEvent(this));
     }
 
     /**
@@ -146,6 +187,10 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
         area = trimMargin(area);
         drawBorder(g2, area);
         area = trimBorder(area);
+        if (this.backgroundPaint != null) {
+            g2.setPaint(this.backgroundPaint);
+            g2.fill(area);
+        }
         area = trimPadding(area);
         return this.container.draw(g2, area, params);
     }
@@ -164,14 +209,41 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
         if (!(obj instanceof CompositeTitle)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         CompositeTitle that = (CompositeTitle) obj;
         if (!this.container.equals(that.container)) {
             return false;
         }
-        return true;
+        if (!PaintUtilities.equal(this.backgroundPaint, that.backgroundPaint)) {
+            return false;
+        }
+        return super.equals(obj);
     }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+        SerialUtilities.writePaint(this.backgroundPaint, stream);
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        this.backgroundPaint = SerialUtilities.readPaint(stream);
+    }
+
 
 }
