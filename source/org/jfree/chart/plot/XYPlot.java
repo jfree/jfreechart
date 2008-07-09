@@ -42,6 +42,7 @@
  *                   Eduardo Ramalho;
  *                   Sergei Ivanov;
  *                   Richard West, Advanced Micro Devices, Inc.;
+ *                   Ulrich Voigt - patch 1997549;
  *
  * Changes (from 21-Jun-2001)
  * --------------------------
@@ -201,6 +202,8 @@
  * 22-May-2008 : Modified calculateAxisSpace() to process range axes first,
  *               then adjust the plot area before calculating the space
  *               for the domain axes (DG);
+ * 09-Jul-2008 : Added renderer state notification when series pass begins
+ *               and ends - see patch 1997549 by Ulrich Voigt (DG);
  *
  */
 
@@ -3348,11 +3351,15 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                             firstItem = itemBounds[0];
                             lastItem = itemBounds[1];
                         }
+                        state.startSeriesPass(dataset, series, firstItem,
+                        		lastItem, pass, passCount);
                         for (int item = firstItem; item <= lastItem; item++) {
                             renderer.drawItem(g2, state, dataArea, info,
                                     this, xAxis, yAxis, dataset, series, item,
                                     crosshairState, pass);
                         }
+                        state.endSeriesPass(dataset, series, firstItem,
+                        		lastItem, pass, passCount);
                     }
                 }
             }
@@ -3370,11 +3377,15 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                             firstItem = itemBounds[0];
                             lastItem = itemBounds[1];
                         }
+                        state.startSeriesPass(dataset, series, firstItem,
+                        		lastItem, pass, passCount);
                         for (int item = firstItem; item <= lastItem; item++) {
                             renderer.drawItem(g2, state, dataArea, info,
                                     this, xAxis, yAxis, dataset, series, item,
                                     crosshairState, pass);
                         }
+                        state.endSeriesPass(dataset, series, firstItem,
+                        		lastItem, pass, passCount);
                     }
                 }
             }

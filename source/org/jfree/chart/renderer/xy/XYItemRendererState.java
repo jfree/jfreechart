@@ -27,10 +27,10 @@
  * ------------------------
  * XYItemRendererState.java
  * ------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Ulrich Voigt;
  *
  * Changes:
  * --------
@@ -38,6 +38,8 @@
  * 27-Jan-2004 : Added workingLine attribute (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 04-May-2007 : Added processVisibleItemsOnly flag (DG);
+ * 09-Jul-2008 : Added start/endSeriesPass() methods - see patch 1997549 by
+ *               Ulrich Voigt (DG);
  *
  */
 
@@ -46,7 +48,9 @@ package org.jfree.chart.renderer.xy;
 import java.awt.geom.Line2D;
 
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.RendererState;
+import org.jfree.data.xy.XYDataset;
 
 /**
  * The state for an {@link XYItemRenderer}.
@@ -103,6 +107,50 @@ public class XYItemRendererState extends RendererState {
      */
     public void setProcessVisibleItemsOnly(boolean flag) {
         this.processVisibleItemsOnly = flag;
+    }
+
+    /**
+     * This method is called by the {@link XYPlot} when it starts a pass
+     * through the (visible) items in a series.  The default implementation
+     * does nothing, but you can override this method to implement specialised
+     * behaviour.
+     *
+     * @param dataset  the dataset.
+     * @param series  the series index.
+     * @param firstItem  the index of the first item in the series.
+     * @param lastItem  the index of the last item in the series.
+     * @param pass  the pass index.
+     * @param passCount  the number of passes.
+     *
+     * @see #endSeriesPass(XYDataset, int, int, int, int, int)
+     *
+     * @since 1.0.11
+     */
+    public void startSeriesPass(XYDataset dataset, int series, int firstItem,
+    		int lastItem, int pass, int passCount) {
+    	// do nothing...this is just a hook for subclasses
+    }
+
+    /**
+     * This method is called by the {@link XYPlot} when it ends a pass
+     * through the (visible) items in a series.  The default implementation
+     * does nothing, but you can override this method to implement specialised
+     * behaviour.
+     *
+     * @param dataset  the dataset.
+     * @param series  the series index.
+     * @param firstItem  the index of the first item in the series.
+     * @param lastItem  the index of the last item in the series.
+     * @param pass  the pass index.
+     * @param passCount  the number of passes.
+     *
+     * @see #startSeriesPass(XYDataset, int, int, int, int, int)
+     *
+     * @since 1.0.11
+     */
+    public void endSeriesPass(XYDataset dataset, int series, int firstItem,
+    		int lastItem, int pass, int passCount) {
+    	// do nothing...this is just a hook for subclasses
     }
 
 }
