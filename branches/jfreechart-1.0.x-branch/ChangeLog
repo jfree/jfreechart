@@ -1,5 +1,13 @@
 2008-07-09  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/plot/XYPlot.java
+    (render): Call new methods in XYItemRendererState,
+    * source/org/jfree/chart/renderer/xy/XYItemRendererState.java
+    (startSeriesPass): New method,
+    (endSeriesPass): Likewise.
+
+2008-07-09  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/title/CompositeTitle.java
     (backgroundPaint): New field,
     (CompositeTitle): Initialise new field,
