@@ -2,26 +2,26 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
@@ -62,18 +62,18 @@ public class OHLCSeriesCollection extends AbstractXYDataset
 
     /** Storage for the data series. */
     private List data;
-    
+
     private TimePeriodAnchor xPosition = TimePeriodAnchor.MIDDLE;
-    
-    /** 
-     * Creates a new instance of <code>OHLCSeriesCollection</code>. 
+
+    /**
+     * Creates a new instance of <code>OHLCSeriesCollection</code>.
      */
     public OHLCSeriesCollection() {
         this.data = new java.util.ArrayList();
     }
 
     /**
-     * Adds a series to the collection and sends a {@link DatasetChangeEvent} 
+     * Adds a series to the collection and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
@@ -102,7 +102,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * @param series  the series index (zero-based).
      *
      * @return The series.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
@@ -116,11 +116,11 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     /**
      * Returns the key for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to 
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The key for a series.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     specified range.
      */
@@ -135,7 +135,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * @param series  the series (zero-based index).
      *
      * @return The item count.
-     * 
+     *
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
@@ -160,7 +160,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
             result = period.getMiddleMillisecond();
         }
         else if (this.xPosition == TimePeriodAnchor.END) {
-            result = period.getLastMillisecond(); 
+            result = period.getLastMillisecond();
         }
         return result;
     }
@@ -219,7 +219,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
         OHLCItem di = (OHLCItem) s.getDataItem(item);
         return di.getOpenValue();
     }
-    
+
     /**
      * Returns the open-value for an item within a series.
      *
@@ -231,7 +231,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     public Number getOpen(int series, int item) {
         return new Double(getOpenValue(series, item));
     }
-    
+
     /**
      * Returns the close-value for an item within a series.
      *
@@ -245,7 +245,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
         OHLCItem di = (OHLCItem) s.getDataItem(item);
         return di.getCloseValue();
     }
-    
+
     /**
      * Returns the close-value for an item within a series.
      *
@@ -257,7 +257,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     public Number getClose(int series, int item) {
         return new Double(getCloseValue(series, item));
     }
-    
+
     /**
      * Returns the high-value for an item within a series.
      *
@@ -271,7 +271,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
         OHLCItem di = (OHLCItem) s.getDataItem(item);
         return di.getHighValue();
     }
-    
+
     /**
      * Returns the high-value for an item within a series.
      *
@@ -283,7 +283,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     public Number getHigh(int series, int item) {
         return new Double(getHighValue(series, item));
     }
-    
+
     /**
      * Returns the low-value for an item within a series.
      *
@@ -297,7 +297,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
         OHLCItem di = (OHLCItem) s.getDataItem(item);
         return di.getLowValue();
     }
-    
+
     /**
      * Returns the low-value for an item within a series.
      *
@@ -309,21 +309,39 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     public Number getLow(int series, int item) {
         return new Double(getLowValue(series, item));
     }
-    
+
+    /**
+     * Returns <code>null</code> always, because this dataset doesn't record
+     * any volume data.
+     *
+     * @param series  the series index (ignored).
+     * @param item  the item index (ignored).
+     *
+     * @return <code>null</code>.
+     */
     public Number getVolume(int series, int item) {
         return null;
     }
-    
+
+    /**
+     * Returns <code>Double.NaN</code> always, because this dataset doesn't
+     * record any volume data.
+     *
+     * @param series  the series index (ignored).
+     * @param item  the item index (ignored).
+     *
+     * @return <code>Double.NaN</code>.
+     */
     public double getVolumeValue(int series, int item) {
         return Double.NaN;
     }
-    
+
     /**
      * Tests this instance for equality with an arbitrary object.
      *
      * @param obj  the object (<code>null</code> permitted).
      *
-     * @return A boolean. 
+     * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -335,19 +353,19 @@ public class OHLCSeriesCollection extends AbstractXYDataset
         OHLCSeriesCollection that = (OHLCSeriesCollection) obj;
         return ObjectUtilities.equal(this.data, that.data);
     }
-    
+
     /**
      * Returns a clone of this instance.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException if there is a problem.
      */
     public Object clone() throws CloneNotSupportedException {
-        OHLCSeriesCollection clone 
+        OHLCSeriesCollection clone
                 = (OHLCSeriesCollection) super.clone();
         clone.data = (List) ObjectUtilities.deepClone(this.data);
         return clone;
     }
-    
+
 }
