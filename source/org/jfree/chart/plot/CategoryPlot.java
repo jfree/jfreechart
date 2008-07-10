@@ -159,6 +159,7 @@
  *               removeRangeMarker() (DG);
  * 23-Apr-2008 : Fixed equals() and clone() methods (DG);
  * 26-Jun-2008 : Fixed crosshair support (DG);
+ * 10-Jul-2008 : Fixed outline visibility for 3D renderers (DG);
  *
  */
 
@@ -3294,11 +3295,13 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         }
 
         // draw an outline around the plot area...
-        if (getRenderer() != null) {
-            getRenderer().drawOutline(g2, this, dataArea);
-        }
-        else {
-            drawOutline(g2, dataArea);
+        if (isOutlineVisible()) {
+            if (getRenderer() != null) {
+                getRenderer().drawOutline(g2, this, dataArea);
+            }
+            else {
+                drawOutline(g2, dataArea);
+            }
         }
 
     }
