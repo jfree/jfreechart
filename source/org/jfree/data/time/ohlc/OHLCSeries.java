@@ -2,26 +2,26 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------
@@ -52,10 +52,10 @@ import org.jfree.data.time.RegularTimePeriod;
  * @see OHLCSeriesCollection
  */
 public class OHLCSeries extends ComparableObjectSeries {
-    
+
     /**
-     * Creates a new empty series.  By default, items added to the series will 
-     * be sorted into ascending order by period, and duplicate periods will 
+     * Creates a new empty series.  By default, items added to the series will
+     * be sorted into ascending order by period, and duplicate periods will
      * not be allowed.
      *
      * @param key  the series key (<code>null</code> not permitted).
@@ -63,24 +63,24 @@ public class OHLCSeries extends ComparableObjectSeries {
     public OHLCSeries(Comparable key) {
         super(key, true, false);
     }
-    
+
     /**
      * Returns the time period for the specified item.
-     * 
+     *
      * @param index  the item index.
-     * 
+     *
      * @return The time period.
      */
     public RegularTimePeriod getPeriod(int index) {
         final OHLCItem item = (OHLCItem) getDataItem(index);
         return item.getPeriod();
     }
-    
+
     /**
      * Returns the data item at the specified index.
-     * 
+     *
      * @param index  the item index.
-     * 
+     *
      * @return The data item.
      */
     public ComparableObjectItem getDataItem(int index) {
@@ -96,7 +96,7 @@ public class OHLCSeries extends ComparableObjectSeries {
      * @param low  the low-value.
      * @param close  the close-value.
      */
-    public void add(RegularTimePeriod period, double open, double high, 
+    public void add(RegularTimePeriod period, double open, double high,
             double low, double close) {
         if (getItemCount() > 0) {
             OHLCItem item0 = (OHLCItem) this.getDataItem(0);

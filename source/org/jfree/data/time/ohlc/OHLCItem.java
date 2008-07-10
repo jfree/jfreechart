@@ -2,26 +2,26 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------
@@ -50,7 +50,7 @@ import org.jfree.data.time.RegularTimePeriod;
  */
 public class OHLCItem extends ComparableObjectItem {
 
-    /** 
+    /**
      * Creates a new instance of <code>OHLCItem</code>.
      *
      * @param period  the time period.
@@ -59,11 +59,11 @@ public class OHLCItem extends ComparableObjectItem {
      * @param low  the low-value.
      * @param close  the close-value.
      */
-    public OHLCItem(RegularTimePeriod period, double open, double high, 
+    public OHLCItem(RegularTimePeriod period, double open, double high,
             double low, double close) {
         super(period, new OHLC(open, high, low, close));
     }
-    
+
     /**
      * Returns the period.
      *
@@ -72,7 +72,7 @@ public class OHLCItem extends ComparableObjectItem {
     public RegularTimePeriod getPeriod() {
         return (RegularTimePeriod) getComparable();
     }
-    
+
     /**
      * Returns the y-value.
      *
@@ -81,7 +81,7 @@ public class OHLCItem extends ComparableObjectItem {
     public double getYValue() {
         return getCloseValue();
     }
-    
+
     /**
      * Returns the open value.
      *
@@ -96,7 +96,7 @@ public class OHLCItem extends ComparableObjectItem {
             return Double.NaN;
         }
     }
-    
+
     /**
      * Returns the high value.
      *
@@ -141,5 +141,5 @@ public class OHLCItem extends ComparableObjectItem {
             return Double.NaN;
         }
     }
-    
+
 }
