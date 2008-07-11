@@ -45,6 +45,7 @@
  * 27-Aug-2007 : Modified toAwtMouseEvent signature (HP);
  * 27-Nov-2007 : Moved convertToSWT() method from SWTGraphics2D and added
  *               convertAWTImageToSWT() (DG);
+ * 01-Jul-2008 : Simplify AWT/SWT font style conversions (HP);
  * 
  */
 
@@ -112,22 +113,8 @@ public class SWTUtils {
             boolean ensureSameSize) {
         FontData fontData = new FontData();
         fontData.setName(font.getFamily());
-        int style = SWT.NORMAL;
-        switch (font.getStyle()) {
-            case java.awt.Font.PLAIN:
-                style |= SWT.NORMAL;
-                break;
-            case java.awt.Font.BOLD:
-                style |= SWT.BOLD;
-                break;
-            case java.awt.Font.ITALIC:
-                style |= SWT.ITALIC;
-                break;
-            case (java.awt.Font.ITALIC + java.awt.Font.BOLD):
-                style |= SWT.ITALIC | SWT.BOLD;
-                break;
-        }
-        fontData.setStyle(style);
+        // SWT and AWT share the same style constants.
+        fontData.setStyle(font.getStyle());
         // convert the font size (in pt for awt) to height in pixels for swt
         int height = (int) Math.round(font.getSize() * 72.0 
                 / device.getDPI().y);
@@ -184,21 +171,6 @@ public class SWTUtils {
      */
     public static java.awt.Font toAwtFont(Device device, FontData fontData, 
             boolean ensureSameSize) {
-        int style;
-        switch (fontData.getStyle()) {
-            case SWT.NORMAL:
-                style = java.awt.Font.PLAIN;
-                break;
-            case SWT.ITALIC:
-                style = java.awt.Font.ITALIC;
-                break;
-            case SWT.BOLD:
-                style = java.awt.Font.BOLD;
-                break;
-            default:
-                style = java.awt.Font.PLAIN;
-                break;
-        }
         int height = (int) Math.round(fontData.getHeight() * device.getDPI().y 
                 / 72.0);
         // hack to ensure the newly created awt fonts will be rendered with the
@@ -209,14 +181,14 @@ public class SWTUtils {
             tmpGC.setFont(tmpFont);
             JPanel DUMMY_PANEL = new JPanel();
             java.awt.Font tmpAwtFont = new java.awt.Font(fontData.getName(), 
-                    style, height);
+            		fontData.getStyle(), height);
             if (DUMMY_PANEL.getFontMetrics(tmpAwtFont).stringWidth(Az) 
                     > tmpGC.textExtent(Az).x) {
                 while (DUMMY_PANEL.getFontMetrics(tmpAwtFont).stringWidth(Az) 
                         > tmpGC.textExtent(Az).x) {
                     height--;                
-                    tmpAwtFont = new java.awt.Font(fontData.getName(), style, 
-                            height);
+                    tmpAwtFont = new java.awt.Font(fontData.getName(), 
+                    		fontData.getStyle(), height);
                 }
             }
             else if (DUMMY_PANEL.getFontMetrics(tmpAwtFont).stringWidth(Az) 
@@ -224,14 +196,15 @@ public class SWTUtils {
                 while (DUMMY_PANEL.getFontMetrics(tmpAwtFont).stringWidth(Az) 
                         < tmpGC.textExtent(Az).x) {
                     height++;
-                    tmpAwtFont = new java.awt.Font(fontData.getName(), style, 
-                            height);
+                    tmpAwtFont = new java.awt.Font(fontData.getName(), 
+                    		fontData.getStyle(), height);
                 }
             }
             tmpFont.dispose();
             tmpGC.dispose();
         }
-        return new java.awt.Font(fontData.getName(), style, height);
+        return new java.awt.Font(fontData.getName(), fontData.getStyle(), 
+                height);
     }
 
     /**

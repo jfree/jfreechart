@@ -1,3 +1,10 @@
+2008-07-11  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Synced from trunk change by Henry Proudhon:
+    * swt/org/jfree/experimental/swt/SWTUtils.java
+    (toSwtFontData): Simplified font style,
+    (toAwtFont): Likewise.
+
 2008-07-10  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/CategoryPlot.java
