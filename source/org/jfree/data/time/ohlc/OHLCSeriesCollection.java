@@ -35,7 +35,7 @@
  * Changes
  * -------
  * 04-Dec-2006 : Version 1 (DG);
- *
+ * 10-Jul-2008 : Added accessor methods for xPosition attribute (DG);
  */
 
 package org.jfree.data.time.ohlc;
@@ -48,6 +48,7 @@ import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimePeriodAnchor;
 import org.jfree.data.xy.AbstractXYDataset;
 import org.jfree.data.xy.OHLCDataset;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.util.ObjectUtilities;
 
 /**
@@ -70,6 +71,35 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     public OHLCSeriesCollection() {
         this.data = new java.util.ArrayList();
+    }
+
+    /**
+     * Returns the position within each time period that is used for the X
+     * value when the collection is used as an {@link XYDataset}.
+     *
+     * @return The anchor position (never <code>null</code>).
+     *
+     * @since 1.0.11
+     */
+    public TimePeriodAnchor getXPosition() {
+        return this.xPosition;
+    }
+
+    /**
+     * Sets the position within each time period that is used for the X values
+     * when the collection is used as an {@link XYDataset}, then sends a
+     * {@link DatasetChangeEvent} is sent to all registered listeners.
+     *
+     * @param anchor  the anchor position (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setXPosition(TimePeriodAnchor anchor) {
+        if (anchor == null) {
+            throw new IllegalArgumentException("Null 'anchor' argument.");
+        }
+        this.xPosition = anchor;
+        notifyListeners(new DatasetChangeEvent(this, this));
     }
 
     /**
@@ -351,6 +381,9 @@ public class OHLCSeriesCollection extends AbstractXYDataset
             return false;
         }
         OHLCSeriesCollection that = (OHLCSeriesCollection) obj;
+        if (!this.xPosition.equals(that.xPosition)) {
+        	return false;
+        }
         return ObjectUtilities.equal(this.data, that.data);
     }
 
