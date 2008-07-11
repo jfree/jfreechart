@@ -1,5 +1,11 @@
 2008-07-11  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 1994355:
+    * swt/org/jfree/experimental/swt/ChartComposite.java
+    (addSWTListener): Changed argument type.
+
+2008-07-11  David Gilbert  <david.gilbert@object-refinery.com>
+
     Synced from trunk change by Henry Proudhon:
     * swt/org/jfree/experimental/swt/SWTUtils.java
     (toSwtFontData): Simplified font style,
