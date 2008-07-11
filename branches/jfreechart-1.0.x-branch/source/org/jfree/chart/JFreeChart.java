@@ -1806,6 +1806,7 @@ class JFreeChartInfo extends ProjectInfo {
                 new Contributor("Barak Naveh", "-"),
                 new Contributor("David M. O'Donnell", "-"),
                 new Contributor("Krzysztof Paz", "-"),
+                new Contributor("Eric Penfold", "-"),
                 new Contributor("Tomer Peretz", "-"),
                 new Contributor("Diego Pierangeli", "-"),
                 new Contributor("Xavier Poinsard", "-"),
