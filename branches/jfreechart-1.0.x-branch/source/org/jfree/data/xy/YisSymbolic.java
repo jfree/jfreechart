@@ -27,6 +27,7 @@
  * ----------------
  * YisSymbolic.java
  * ----------------
+ * (C) Copyright 2006-2008, by Anthony Boulestreau and Contributors.
  *
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
