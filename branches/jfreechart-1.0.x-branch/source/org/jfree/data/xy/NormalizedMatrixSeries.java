@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * NormalizedMatrixSeries.java
  * ---------------------------
- * (C) Copyright 2003-2007, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-2008, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -38,9 +38,8 @@
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
- 
-package org.jfree.data.xy;
 
+package org.jfree.data.xy;
 
 /**
  * Represents a dense normalized matrix M[i,j] where each Mij item of the
@@ -49,12 +48,12 @@ package org.jfree.data.xy;
  * total sum of all items. It can be also be scaled by setting a scale factor.
  */
 public class NormalizedMatrixSeries extends MatrixSeries {
-    
+
     /** The default scale factor. */
     public static final double DEFAULT_SCALE_FACTOR = 1.0;
 
     /**
-     * A factor that multiplies each item in this series when observed using 
+     * A factor that multiplies each item in this series when observed using
      * getItem method.
      */
     private double m_scaleFactor = DEFAULT_SCALE_FACTOR;
@@ -83,11 +82,11 @@ public class NormalizedMatrixSeries extends MatrixSeries {
 
     /**
      * Returns an item.
-     * 
+     *
      * @param itemIndex  the index.
-     * 
+     *
      * @return The value.
-     * 
+     *
      * @see org.jfree.data.xy.MatrixSeries#getItem(int)
      */
     public Number getItem(int itemIndex) {
@@ -131,7 +130,7 @@ public class NormalizedMatrixSeries extends MatrixSeries {
      * @param i the row of the item.
      * @param j the column of the item.
      * @param mij the new value for the item.
-     * 
+     *
      * @see #get(int, int)
      */
     public void update(int i, int j, double mij) {
