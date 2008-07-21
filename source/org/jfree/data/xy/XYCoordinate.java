@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------
  * XYCoordinate.java
  * -----------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,27 +45,27 @@ import java.io.Serializable;
 
 /**
  * Represents an (x, y) coordinate.
- * 
+ *
  * @since 1.0.6
  */
 public class XYCoordinate implements Comparable, Serializable {
 
     /** The x-coordinate. */
     private double x;
-    
+
     /** The y-coordinate. */
     private double y;
-    
+
     /**
      * Creates a new coordinate for the point (0.0, 0.0).
      */
     public XYCoordinate() {
         this(0.0, 0.0);
     }
-    
+
     /**
      * Creates a new coordinate for the point (x, y).
-     * 
+     *
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
      */
@@ -73,19 +73,19 @@ public class XYCoordinate implements Comparable, Serializable {
         this.x = x;
         this.y = y;
     }
-    
+
     /**
      * Returns the x-coordinate.
-     * 
+     *
      * @return The x-coordinate.
      */
     public double getX() {
         return this.x;
     }
-    
+
     /**
      * Returns the y-coordinate.
-     * 
+     *
      * @return The y-coordinate.
      */
     public double getY() {
@@ -94,9 +94,9 @@ public class XYCoordinate implements Comparable, Serializable {
 
     /**
      * Tests this coordinate for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -118,7 +118,7 @@ public class XYCoordinate implements Comparable, Serializable {
 
     /**
      * Returns a hash code for this instance.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -131,9 +131,9 @@ public class XYCoordinate implements Comparable, Serializable {
     }
 
     /**
-     * Returns a string representation of this instance, primarily for 
+     * Returns a string representation of this instance, primarily for
      * debugging purposes.
-     * 
+     *
      * @return A string.
      */
     public String toString() {
@@ -141,10 +141,10 @@ public class XYCoordinate implements Comparable, Serializable {
     }
 
     /**
-     * Compares this instance against an arbitrary object. 
-     * 
+     * Compares this instance against an arbitrary object.
+     *
      * @param obj  the object (<code>null</code> not permitted).
-     * 
+     *
      * @return An integer indicating the relative order of the items.
      */
     public int compareTo(Object obj) {
@@ -168,5 +168,5 @@ public class XYCoordinate implements Comparable, Serializable {
         }
         return 0;
     }
-    
+
 }

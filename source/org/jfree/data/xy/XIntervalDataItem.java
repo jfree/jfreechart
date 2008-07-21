@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * XIntervalDataItem.java
  * ----------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,7 +49,7 @@ import org.jfree.data.ComparableObjectItem;
  */
 public class XIntervalDataItem extends ComparableObjectItem {
 
-    /** 
+    /**
      * Creates a new instance of <code>XIntervalDataItem</code>.
      *
      * @param x  the x-value.
@@ -60,7 +60,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
     public XIntervalDataItem(double x, double xLow, double xHigh, double y) {
         super(new Double(x), new YWithXInterval(y, xLow, xHigh));
     }
-    
+
     /**
      * Returns the x-value.
      *
@@ -69,7 +69,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
     public Number getX() {
         return (Number) getComparable();
     }
-    
+
     /**
      * Returns the y-value.
      *
@@ -84,7 +84,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
             return Double.NaN;
         }
     }
-    
+
     /**
      * Returns the lower bound of the x-interval.
      *
@@ -99,7 +99,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
             return Double.NaN;
         }
     }
-    
+
     /**
      * Returns the upper bound of the x-interval.
      *
@@ -114,5 +114,5 @@ public class XIntervalDataItem extends ComparableObjectItem {
             return Double.NaN;
         }
     }
-    
+
 }
