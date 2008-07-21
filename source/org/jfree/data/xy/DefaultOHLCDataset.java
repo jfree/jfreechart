@@ -326,6 +326,8 @@ public class DefaultOHLCDataset extends AbstractXYDataset
      * Returns an independent copy of this dataset.
      *
      * @return A clone.
+     *
+     * @throws CloneNotSupportedException
      */
     public Object clone() throws CloneNotSupportedException {
         DefaultOHLCDataset clone = (DefaultOHLCDataset) super.clone();
