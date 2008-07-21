@@ -79,8 +79,7 @@ import org.jfree.util.PublicCloneable;
  * is itself defaulted to 1.0).
  */
 public class IntervalXYDelegate implements DatasetChangeListener,
-                                           DomainInfo, Serializable,
-                                           Cloneable, PublicCloneable {
+        DomainInfo, Serializable, Cloneable, PublicCloneable {
 
     /** For serialization. */
     private static final long serialVersionUID = -685166711639592857L;
