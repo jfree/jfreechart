@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------
  * XYDatasetTableModel.java
  * ------------------------
- * (C)opyright 2003-2007, by Bryan Scott and Contributors.
+ * (C)opyright 2003-2008, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott ;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -39,7 +39,7 @@
  *               assumes all series share the same x-values, and this is not
  *               enforced by XYDataset.  Also fixed bug 1191046, a problem
  *               in the getValueAt() method (DG);
- * 
+ *
  */
 
 package org.jfree.data.xy;
@@ -63,7 +63,7 @@ import org.jfree.data.general.DatasetChangeListener;
  * </ul>
  */
 public class XYDatasetTableModel extends AbstractTableModel
-                                 implements TableModel, DatasetChangeListener  {
+        implements TableModel, DatasetChangeListener  {
 
     /** The dataset. */
     TableXYDataset model = null;
@@ -211,11 +211,11 @@ public class XYDatasetTableModel extends AbstractTableModel
 //
 //        XYSeries s1 = new XYSeries("Series 1", true, false);
 //        for (int i = 0; i < 10; i++) {
-//            s1.add(i, Math.random());   
+//            s1.add(i, Math.random());
 //        }
 //        XYSeries s2 = new XYSeries("Series 2", true, false);
 //        for (int i = 0; i < 15; i++) {
-//            s2.add(i, Math.random());   
+//            s2.add(i, Math.random());
 //        }
 //        DefaultTableXYDataset dataset = new DefaultTableXYDataset();
 //        dataset.addSeries(s1);
