@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * DatasetReader.java
  * ------------------
- * (C) Copyright 2002-2007, by Object Refinery Limited.
+ * (C) Copyright 2002-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -67,7 +67,7 @@ public class DatasetReader {
      *
      * @throws IOException if there is a problem reading the file.
      */
-    public static PieDataset readPieDatasetFromXML(File file) 
+    public static PieDataset readPieDatasetFromXML(File file)
         throws IOException {
         InputStream in = new FileInputStream(file);
         return readPieDatasetFromXML(in);
@@ -82,7 +82,7 @@ public class DatasetReader {
      *
      * @throws IOException if there is an I/O error.
      */
-    public static PieDataset readPieDatasetFromXML(InputStream in) 
+    public static PieDataset readPieDatasetFromXML(InputStream in)
         throws IOException {
 
         PieDataset result = null;
@@ -112,7 +112,7 @@ public class DatasetReader {
      *
      * @throws IOException if there is a problem reading the file.
      */
-    public static CategoryDataset readCategoryDatasetFromXML(File file) 
+    public static CategoryDataset readCategoryDatasetFromXML(File file)
         throws IOException {
         InputStream in = new FileInputStream(file);
         return readCategoryDatasetFromXML(in);
@@ -127,7 +127,7 @@ public class DatasetReader {
      *
      * @throws IOException if there is a problem reading the file.
      */
-    public static CategoryDataset readCategoryDatasetFromXML(InputStream in) 
+    public static CategoryDataset readCategoryDatasetFromXML(InputStream in)
         throws IOException {
 
         CategoryDataset result = null;
