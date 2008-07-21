@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
  * DefaultXYDataset.java
  * ---------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -54,10 +54,10 @@ import org.jfree.util.PublicCloneable;
 /**
  * A default implementation of the {@link XYDataset} interface that stores
  * data values in arrays of double primitives.
- * 
+ *
  * @since 1.0.2
  */
-public class DefaultXYDataset extends AbstractXYDataset 
+public class DefaultXYDataset extends AbstractXYDataset
         implements XYDataset, PublicCloneable {
 
     /**
@@ -65,23 +65,23 @@ public class DefaultXYDataset extends AbstractXYDataset
      * seriesList.
      */
     private List seriesKeys;
-    
-    /** 
-     * Storage for the series in the dataset.  We use a list because the
-     * order of the series is significant.  This list must be kept in sync 
-     * with the seriesKeys list.
-     */ 
-    private List seriesList;
-    
+
     /**
-     * Creates a new <code>DefaultXYDataset</code> instance, initially 
+     * Storage for the series in the dataset.  We use a list because the
+     * order of the series is significant.  This list must be kept in sync
+     * with the seriesKeys list.
+     */
+    private List seriesList;
+
+    /**
+     * Creates a new <code>DefaultXYDataset</code> instance, initially
      * containing no data.
      */
     public DefaultXYDataset() {
         this.seriesKeys = new java.util.ArrayList();
-        this.seriesList = new java.util.ArrayList();    
+        this.seriesList = new java.util.ArrayList();
     }
-    
+
     /**
      * Returns the number of series in the dataset.
      *
@@ -92,14 +92,14 @@ public class DefaultXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns the key for a series.  
+     * Returns the key for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to 
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The key for the series.
-     * 
-     * @throws IllegalArgumentException if <code>series</code> is not in the 
+     *
+     * @throws IllegalArgumentException if <code>series</code> is not in the
      *     specified range.
      */
     public Comparable getSeriesKey(int series) {
@@ -110,11 +110,11 @@ public class DefaultXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns the index of the series with the specified key, or -1 if there 
+     * Returns the index of the series with the specified key, or -1 if there
      * is no such series in the dataset.
-     * 
+     *
      * @param seriesKey  the series key (<code>null</code> permitted).
-     * 
+     *
      * @return The index, or -1.
      */
     public int indexOf(Comparable seriesKey) {
@@ -123,9 +123,9 @@ public class DefaultXYDataset extends AbstractXYDataset
 
     /**
      * Returns the order of the domain (x-) values in the dataset.  In this
-     * implementation, we cannot guarantee that the x-values are ordered, so 
+     * implementation, we cannot guarantee that the x-values are ordered, so
      * this method returns <code>DomainOrder.NONE</code>.
-     * 
+     *
      * @return <code>DomainOrder.NONE</code>.
      */
     public DomainOrder getDomainOrder() {
@@ -134,13 +134,13 @@ public class DefaultXYDataset extends AbstractXYDataset
 
     /**
      * Returns the number of items in the specified series.
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
-     * 
+     *
      * @return The item count.
-     * 
-     * @throws IllegalArgumentException if <code>series</code> is not in the 
+     *
+     * @throws IllegalArgumentException if <code>series</code> is not in the
      *     specified range.
      */
     public int getItemCount(int series) {
@@ -153,19 +153,19 @@ public class DefaultXYDataset extends AbstractXYDataset
 
     /**
      * Returns the x-value for an item within a series.
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
-     * @param item  the item index (in the range <code>0</code> to 
+     * @param item  the item index (in the range <code>0</code> to
      *     <code>getItemCount(series)</code>).
-     *     
+     *
      * @return The x-value.
-     * 
-     * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not 
+     *
+     * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not
      *     within the specified range.
-     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not 
+     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not
      *     within the specified range.
-     * 
+     *
      * @see #getX(int, int)
      */
     public double getXValue(int series, int item) {
@@ -175,19 +175,19 @@ public class DefaultXYDataset extends AbstractXYDataset
 
     /**
      * Returns the x-value for an item within a series.
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
-     * @param item  the item index (in the range <code>0</code> to 
+     * @param item  the item index (in the range <code>0</code> to
      *     <code>getItemCount(series)</code>).
-     *     
+     *
      * @return The x-value.
-     * 
-     * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not 
+     *
+     * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not
      *     within the specified range.
-     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not 
+     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not
      *     within the specified range.
-     * 
+     *
      * @see #getXValue(int, int)
      */
     public Number getX(int series, int item) {
@@ -196,19 +196,19 @@ public class DefaultXYDataset extends AbstractXYDataset
 
     /**
      * Returns the y-value for an item within a series.
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
-     * @param item  the item index (in the range <code>0</code> to 
+     * @param item  the item index (in the range <code>0</code> to
      *     <code>getItemCount(series)</code>).
-     *     
+     *
      * @return The y-value.
-     * 
-     * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not 
+     *
+     * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not
      *     within the specified range.
-     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not 
+     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not
      *     within the specified range.
-     * 
+     *
      * @see #getY(int, int)
      */
     public double getYValue(int series, int item) {
@@ -218,19 +218,19 @@ public class DefaultXYDataset extends AbstractXYDataset
 
     /**
      * Returns the y-value for an item within a series.
-     * 
-     * @param series  the series index (in the range <code>0</code> to 
+     *
+     * @param series  the series index (in the range <code>0</code> to
      *     <code>getSeriesCount() - 1</code>).
-     * @param item  the item index (in the range <code>0</code> to 
+     * @param item  the item index (in the range <code>0</code> to
      *     <code>getItemCount(series)</code>).
-     *     
+     *
      * @return The y-value.
-     * 
-     * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not 
+     *
+     * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not
      *     within the specified range.
-     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not 
+     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not
      *     within the specified range.
-     *     
+     *
      * @see #getX(int, int)
      */
     public Number getY(int series, int item) {
@@ -239,13 +239,13 @@ public class DefaultXYDataset extends AbstractXYDataset
 
     /**
      * Adds a series or if a series with the same key already exists replaces
-     * the data for that series, then sends a {@link DatasetChangeEvent} to 
+     * the data for that series, then sends a {@link DatasetChangeEvent} to
      * all registered listeners.
-     * 
+     *
      * @param seriesKey  the series key (<code>null</code> not permitted).
-     * @param data  the data (must be an array with length 2, containing two 
+     * @param data  the data (must be an array with length 2, containing two
      *     arrays of equal length, the first containing the x-values and the
-     *     second containing the y-values). 
+     *     second containing the y-values).
      */
     public void addSeries(Comparable seriesKey, double[][] data) {
         if (seriesKey == null) {
@@ -276,11 +276,11 @@ public class DefaultXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Removes a series from the dataset, then sends a 
+     * Removes a series from the dataset, then sends a
      * {@link DatasetChangeEvent} to all registered listeners.
-     * 
+     *
      * @param seriesKey  the series key (<code>null</code> not permitted).
-     * 
+     *
      */
     public void removeSeries(Comparable seriesKey) {
         int seriesIndex = indexOf(seriesKey);
@@ -290,20 +290,20 @@ public class DefaultXYDataset extends AbstractXYDataset
             notifyListeners(new DatasetChangeEvent(this, this));
         }
     }
-    
+
     /**
      * Tests this <code>DefaultXYDataset</code> instance for equality with an
      * arbitrary object.  This method returns <code>true</code> if and only if:
      * <ul>
      * <li><code>obj</code> is not <code>null</code>;</li>
-     * <li><code>obj</code> is an instance of 
+     * <li><code>obj</code> is an instance of
      *         <code>DefaultXYDataset</code>;</li>
-     * <li>both datasets have the same number of series, each containing 
+     * <li>both datasets have the same number of series, each containing
      *         exactly the same values.</li>
      * </ul>
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -326,17 +326,17 @@ public class DefaultXYDataset extends AbstractXYDataset
                 return false;
             }
             double[] d1y = d1[1];
-            double[] d2y = d2[1];            
+            double[] d2y = d2[1];
             if (!Arrays.equals(d1y, d2y)) {
                 return false;
             }
         }
         return true;
     }
-    
+
     /**
      * Returns a hash code for this instance.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -345,12 +345,12 @@ public class DefaultXYDataset extends AbstractXYDataset
         result = 29 * result + this.seriesList.hashCode();
         return result;
     }
-    
+
     /**
      * Creates an independent copy of this dataset.
-     * 
+     *
      * @return The cloned dataset.
-     * 
+     *
      * @throws CloneNotSupportedException if there is a problem cloning the
      *     dataset (for instance, if a non-cloneable object is used for a
      *     series key).
