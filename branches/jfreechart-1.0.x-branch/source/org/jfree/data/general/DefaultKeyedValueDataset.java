@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------------
  * DefaultKeyedValueDataset.java
  * -----------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -51,12 +51,11 @@ import org.jfree.util.ObjectUtilities;
  * A default implementation of the {@link KeyedValueDataset} interface.
  */
 public class DefaultKeyedValueDataset extends AbstractDataset
-                                      implements KeyedValueDataset, 
-                                                 Serializable {
+        implements KeyedValueDataset, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -8149484339560406750L;
-    
+
     /** Storage for the data. */
     private KeyedValue data;
 
@@ -78,7 +77,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
     }
 
     /**
-     * Creates a new dataset that uses the data from a {@link KeyedValue} 
+     * Creates a new dataset that uses the data from a {@link KeyedValue}
      * instance.
      *
      * @param data  the data (<code>null</code> permitted).
@@ -88,7 +87,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
     }
 
     /**
-     * Returns the key associated with the value, or <code>null</code> if the 
+     * Returns the key associated with the value, or <code>null</code> if the
      * dataset has no data item.
      *
      * @return The key.
@@ -127,7 +126,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
     }
 
     /**
-     * Sets the value for the dataset and sends a {@link DatasetChangeEvent} to 
+     * Sets the value for the dataset and sends a {@link DatasetChangeEvent} to
      * all registered listeners.
      *
      * @param key  the key.
@@ -171,7 +170,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
 
     /**
      * Returns a hash code.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -180,16 +179,16 @@ public class DefaultKeyedValueDataset extends AbstractDataset
 
     /**
      * Creates a clone of the dataset.
-     * 
+     *
      * @return A clone.
-     * 
-     * @throws CloneNotSupportedException This class will not throw this 
+     *
+     * @throws CloneNotSupportedException This class will not throw this
      *         exception, but subclasses (if any) might.
      */
     public Object clone() throws CloneNotSupportedException {
-        DefaultKeyedValueDataset clone 
+        DefaultKeyedValueDataset clone
             = (DefaultKeyedValueDataset) super.clone();
-        return clone;    
+        return clone;
     }
-    
+
 }
