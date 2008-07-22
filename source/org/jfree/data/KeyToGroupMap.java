@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * KeyToGroupMap.java
  * ------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,11 +35,11 @@
  * Changes
  * -------
  * 29-Apr-2004 : Version 1 (DG);
- * 07-Jul-2004 : Added a group list to ensure group index is consistent, fixed 
+ * 07-Jul-2004 : Added a group list to ensure group index is consistent, fixed
  *               cloning problem (DG);
- * 18-Aug-2005 : Added casts in clone() method to suppress 1.5 compiler 
+ * 18-Aug-2005 : Added casts in clone() method to suppress 1.5 compiler
  *               warnings - see patch 1260587 (DG);
- * 
+ *
  */
 
 package org.jfree.data;
@@ -61,29 +61,29 @@ import org.jfree.util.PublicCloneable;
  * A class that maps keys (instances of <code>Comparable</code>) to groups.
  */
 public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
-    
+
     /** For serialization. */
     private static final long serialVersionUID = -2228169345475318082L;
-    
+
     /** The default group. */
     private Comparable defaultGroup;
-    
+
     /** The groups. */
     private List groups;
-    
+
     /** A mapping between keys and groups. */
     private Map keyToGroupMap;
-    
+
     /**
      * Creates a new map with a default group named 'Default Group'.
      */
     public KeyToGroupMap() {
         this("Default Group");
     }
-    
+
     /**
      * Creates a new map with the specified default group.
-     * 
+     *
      * @param defaultGroup  the default group (<code>null</code> not permitted).
      */
     public KeyToGroupMap(Comparable defaultGroup) {
@@ -94,21 +94,21 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
         this.groups = new ArrayList();
         this.keyToGroupMap = new HashMap();
     }
-    
+
     /**
      * Returns the number of groups in the map.
-     * 
+     *
      * @return The number of groups in the map.
      */
     public int getGroupCount() {
         return this.groups.size() + 1;
     }
-    
+
     /**
-     * Returns a list of the groups (always including the default group) in the 
-     * map.  The returned list is independent of the map, so altering the list 
+     * Returns a list of the groups (always including the default group) in the
+     * map.  The returned list is independent of the map, so altering the list
      * will have no effect.
-     * 
+     *
      * @return The groups (never <code>null</code>).
      */
     public List getGroups() {
@@ -118,18 +118,18 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
         while (iterator.hasNext()) {
             Comparable group = (Comparable) iterator.next();
             if (!result.contains(group)) {
-                result.add(group);   
+                result.add(group);
             }
-        } 
+        }
         return result;
     }
-    
+
     /**
      * Returns the index for the group.
-     * 
+     *
      * @param group  the group.
-     * 
-     * @return The group index (or -1 if the group is not represented within 
+     *
+     * @return The group index (or -1 if the group is not represented within
      *         the map).
      */
     public int getGroupIndex(Comparable group) {
@@ -140,53 +140,53 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
             }
         }
         else {
-            result = result + 1;   
+            result = result + 1;
         }
-        return result;   
+        return result;
     }
-    
+
     /**
      * Returns the group that a key is mapped to.
-     * 
+     *
      * @param key  the key (<code>null</code> not permitted).
-     * 
+     *
      * @return The group (never <code>null</code>, returns the default group if
      *         there is no mapping for the specified key).
      */
     public Comparable getGroup(Comparable key) {
         if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");   
+            throw new IllegalArgumentException("Null 'key' argument.");
         }
         Comparable result = this.defaultGroup;
         Comparable group = (Comparable) this.keyToGroupMap.get(key);
         if (group != null) {
-            result = group;   
+            result = group;
         }
         return result;
     }
-    
+
     /**
      * Maps a key to a group.
-     * 
+     *
      * @param key  the key (<code>null</code> not permitted).
-     * @param group  the group (<code>null</code> permitted, clears any 
+     * @param group  the group (<code>null</code> permitted, clears any
      *               existing mapping).
      */
     public void mapKeyToGroup(Comparable key, Comparable group) {
         if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");   
+            throw new IllegalArgumentException("Null 'key' argument.");
         }
         Comparable currentGroup = getGroup(key);
         if (!currentGroup.equals(this.defaultGroup)) {
             if (!currentGroup.equals(group)) {
                 int count = getKeyCount(currentGroup);
                 if (count == 1) {
-                    this.groups.remove(currentGroup);   
+                    this.groups.remove(currentGroup);
                 }
             }
         }
         if (group == null) {
-            this.keyToGroupMap.remove(key); 
+            this.keyToGroupMap.remove(key);
         }
         else {
             if (!this.groups.contains(group)) {
@@ -197,19 +197,19 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
             this.keyToGroupMap.put(key, group);
         }
     }
-    
+
     /**
-     * Returns the number of keys mapped to the specified group.  This method 
-     * won't always return an accurate result for the default group, since 
+     * Returns the number of keys mapped to the specified group.  This method
+     * won't always return an accurate result for the default group, since
      * explicit mappings are not required for this group.
-     * 
+     *
      * @param group  the group (<code>null</code> not permitted).
-     * 
+     *
      * @return The key count.
      */
     public int getKeyCount(Comparable group) {
         if (group == null) {
-            throw new IllegalArgumentException("Null 'group' argument.");   
+            throw new IllegalArgumentException("Null 'group' argument.");
         }
         int result = 0;
         Iterator iterator = this.keyToGroupMap.values().iterator();
@@ -221,17 +221,17 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
         }
         return result;
     }
-    
+
     /**
      * Tests the map for equality against an arbitrary object.
-     * 
+     *
      * @param obj  the object to test against (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
-            return true;      
+            return true;
         }
         if (!(obj instanceof KeyToGroupMap)) {
             return false;
@@ -245,34 +245,34 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
         }
         return true;
     }
-    
+
     /**
      * Returns a clone of the map.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException  if there is a problem cloning the
      *                                     map.
      */
     public Object clone() throws CloneNotSupportedException {
         KeyToGroupMap result = (KeyToGroupMap) super.clone();
-        result.defaultGroup 
+        result.defaultGroup
             = (Comparable) KeyToGroupMap.clone(this.defaultGroup);
         result.groups = (List) KeyToGroupMap.clone(this.groups);
         result.keyToGroupMap = (Map) KeyToGroupMap.clone(this.keyToGroupMap);
         return result;
     }
-    
+
     /**
      * Attempts to clone the specified object using reflection.
-     * 
+     *
      * @param object  the object (<code>null</code> permitted).
-     * 
+     *
      * @return The cloned object, or the original object if cloning failed.
      */
     private static Object clone(Object object) {
         if (object == null) {
-            return null;   
+            return null;
         }
         Class c = object.getClass();
         Object result = null;
@@ -283,7 +283,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
                     result = m.invoke(object, (Object[]) null);
                 }
                 catch (Exception e) {
-                    e.printStackTrace();  
+                    e.printStackTrace();
                 }
             }
         }
@@ -292,17 +292,17 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
         }
         return result;
     }
-    
+
     /**
      * Returns a clone of the list.
-     * 
+     *
      * @param list  the list.
-     * 
+     *
      * @return A clone of the list.
-     * 
+     *
      * @throws CloneNotSupportedException if the list could not be cloned.
      */
-    private static Collection clone(Collection list) 
+    private static Collection clone(Collection list)
         throws CloneNotSupportedException {
         Collection result = null;
         if (list != null) {

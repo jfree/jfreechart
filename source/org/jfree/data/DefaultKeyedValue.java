@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
@@ -43,7 +43,7 @@
  * 11-Jun-2007 : Added toString() method to help with debugging (DG);
  * 15-Feb-2008 : Prevent null key (DG);
  * 07-Apr-2008 : Removed to-do item (DG);
- * 
+ *
  */
 
 package org.jfree.data;
@@ -53,16 +53,15 @@ import java.io.Serializable;
 import org.jfree.util.PublicCloneable;
 
 /**
- * A (key, value) pair.  This class provides a default implementation 
+ * A (key, value) pair.  This class provides a default implementation
  * of the {@link KeyedValue} interface.
  */
-public class DefaultKeyedValue implements KeyedValue, 
-                                          Cloneable, PublicCloneable, 
-                                          Serializable {
+public class DefaultKeyedValue implements KeyedValue, Cloneable,
+        PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -7388924517460437712L;
-    
+
     /** The key. */
     private Comparable key;
 
@@ -72,7 +71,7 @@ public class DefaultKeyedValue implements KeyedValue,
     /**
      * Creates a new (key, value) item.
      *
-     * @param key  the key (should be immutable, <code>null</code> not 
+     * @param key  the key (should be immutable, <code>null</code> not
      *         permitted).
      * @param value  the value (<code>null</code> permitted).
      */
@@ -126,11 +125,11 @@ public class DefaultKeyedValue implements KeyedValue,
             return false;
         }
         DefaultKeyedValue that = (DefaultKeyedValue) obj;
-        
+
         if (!this.key.equals(that.key)) {
             return false;
         }
-        if (this.value != null 
+        if (this.value != null
                 ? !this.value.equals(that.value) : that.value != null) {
             return false;
         }
@@ -139,7 +138,7 @@ public class DefaultKeyedValue implements KeyedValue,
 
     /**
      * Returns a hash code.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -150,24 +149,24 @@ public class DefaultKeyedValue implements KeyedValue,
     }
 
     /**
-     * Returns a clone.  It is assumed that both the key and value are 
-     * immutable objects, so only the references are cloned, not the objects 
+     * Returns a clone.  It is assumed that both the key and value are
+     * immutable objects, so only the references are cloned, not the objects
      * themselves.
-     * 
+     *
      * @return A clone.
-     * 
-     * @throws CloneNotSupportedException Not thrown by this class, but 
+     *
+     * @throws CloneNotSupportedException Not thrown by this class, but
      *         subclasses (if any) might.
      */
     public Object clone() throws CloneNotSupportedException {
         DefaultKeyedValue clone = (DefaultKeyedValue) super.clone();
         return clone;
     }
-    
-    /** 
-     * Returns a string representing this instance, primarily useful for 
+
+    /**
+     * Returns a string representing this instance, primarily useful for
      * debugging.
-     * 
+     *
      * @return A string.
      */
     public String toString() {

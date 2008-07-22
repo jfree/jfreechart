@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------
  * KeyedObjects.java
  * -----------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -56,7 +56,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 1321582394193530984L;
-    
+
     /** Storage for the data. */
     private List data;
 
@@ -82,7 +82,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * @param item  the item index (zero-based).
      *
      * @return The object (possibly <code>null</code>).
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
      */
     public Object getObject(int item) {
@@ -102,7 +102,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * @return The row key.
      *
      * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
-     * 
+     *
      * @see #getIndex(Comparable)
      */
     public Comparable getKey(int index) {
@@ -120,7 +120,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * @param key  the key (<code>null</code> not permitted).
      *
      * @return The index, or <code>-1</code> if the key is unrecognised.
-     * 
+     *
      * @see #getKey(int)
      */
     public int getIndex(Comparable key) {
@@ -155,31 +155,31 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the object for a given key. If the key is not recognised, the 
+     * Returns the object for a given key. If the key is not recognised, the
      * method should return <code>null</code>.
      *
      * @param key  the key.
      *
      * @return The object (possibly <code>null</code>).
-     * 
+     *
      * @see #addObject(Comparable, Object)
      */
     public Object getObject(Comparable key) {
         int index = getIndex(key);
         if (index < 0) {
-            throw new UnknownKeyException("The key (" + key 
+            throw new UnknownKeyException("The key (" + key
                     + ") is not recognised.");
         }
         return getObject(index);
     }
 
     /**
-     * Adds a new object to the collection, or overwrites an existing object.  
+     * Adds a new object to the collection, or overwrites an existing object.
      * This is the same as the {@link #setObject(Comparable, Object)} method.
      *
      * @param key  the key.
      * @param object  the object.
-     * 
+     *
      * @see #getObject(Comparable)
      */
     public void addObject(Comparable key, Object object) {
@@ -188,12 +188,12 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
 
     /**
      * Replaces an existing object, or adds a new object to the collection.
-     * This is the same as the {@link #addObject(Comparable, Object)} 
+     * This is the same as the {@link #addObject(Comparable, Object)}
      * method.
      *
      * @param key  the key (<code>null</code> not permitted).
      * @param object  the object.
-     * 
+     *
      * @see #getObject(Comparable)
      */
     public void setObject(Comparable key, Object object) {
@@ -210,14 +210,14 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
 
     /**
      * Inserts a new value at the specified position in the dataset or, if
-     * there is an existing item with the specified key, updates the value 
+     * there is an existing item with the specified key, updates the value
      * for that item and moves it to the specified position.
-     * 
-     * @param position  the position (in the range <code>0</code> to 
+     *
+     * @param position  the position (in the range <code>0</code> to
      *                  <code>getItemCount()</code>).
      * @param key  the key (<code>null</code> not permitted).
      * @param value  the value (<code>null</code> permitted).
-     * 
+     *
      * @since 1.0.7
      */
     public void insertValue(int position, Comparable key, Object value) {
@@ -244,7 +244,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * Removes a value from the collection.
      *
      * @param index  the index of the item to remove.
-     * 
+     *
      * @see #removeValue(Comparable)
      */
     public void removeValue(int index) {
@@ -255,24 +255,24 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * Removes a value from the collection.
      *
      * @param key  the key (<code>null</code> not permitted).
-     * 
+     *
      * @see #removeValue(int)
-     * 
+     *
      * @throws UnknownKeyException if the key is not recognised.
      */
     public void removeValue(Comparable key) {
-        // defer argument checking 
+        // defer argument checking
         int index = getIndex(key);
         if (index < 0) {
-            throw new UnknownKeyException("The key (" + key.toString() 
+            throw new UnknownKeyException("The key (" + key.toString()
                     + ") is not recognised.");
         }
         removeValue(index);
     }
-    
+
     /**
      * Clears all values from the collection.
-     * 
+     *
      * @since 1.0.7
      */
     public void clear() {
@@ -283,9 +283,9 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * Returns a clone of this object.  Keys in the list should be immutable
      * and are not cloned.  Objects in the list are cloned only if they
      * implement {@link PublicCloneable}.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */
     public Object clone() throws CloneNotSupportedException {
@@ -296,9 +296,9 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
             KeyedObject ko = (KeyedObject) iterator.next();
             clone.data.add(ko.clone());
         }
-        return clone;      
+        return clone;
     }
-    
+
     /**
      * Tests this object for equality with an arbitrary object.
      *
@@ -342,14 +342,14 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
         return true;
 
     }
-    
+
     /**
      * Returns a hash code.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
         return (this.data != null ? this.data.hashCode() : 0);
     }
-  
+
 }
