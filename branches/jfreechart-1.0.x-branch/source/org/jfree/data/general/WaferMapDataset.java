@@ -27,7 +27,7 @@
  * --------------------
  * WaferMapDataset.java
  * --------------------
- * (C)opyright 2003-2007, by Robert Redburn and Contributors.
+ * (C)opyright 2003-2008, by Robert Redburn and Contributors.
  *
  * Original Author:  Robert Redburn;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
