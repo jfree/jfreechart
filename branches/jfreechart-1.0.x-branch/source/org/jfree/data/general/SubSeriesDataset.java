@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
@@ -36,13 +36,13 @@
  * Changes
  * -------
  * 06-Dec-2001 : Version 1 (BK);
- * 05-Feb-2002 : Added SignalsDataset (and small change to HighLowDataset 
+ * 05-Feb-2002 : Added SignalsDataset (and small change to HighLowDataset
  *               interface) as requested by Sylvain Vieujot (DG);
- * 28-Feb-2002 : Fixed bug: missing map[series] in IntervalXYDataset and 
+ * 28-Feb-2002 : Fixed bug: missing map[series] in IntervalXYDataset and
  *               SignalsDataset methods (BK);
  * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 06-May-2004 : Now extends AbstractIntervalXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * 29-Nov-2005 : Removed SignalsDataset (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
@@ -59,12 +59,10 @@ import org.jfree.data.xy.XYDataset;
 
 /**
  * This class will create a dataset with one or more series from another
- * {@link SeriesDataset}. 
+ * {@link SeriesDataset}.
  */
 public class SubSeriesDataset extends AbstractIntervalXYDataset
-                              implements OHLCDataset,
-                                         IntervalXYDataset,
-                                         CombinationDataset {
+        implements OHLCDataset, IntervalXYDataset, CombinationDataset {
 
     /** The parent dataset. */
     private SeriesDataset parent = null;
@@ -73,7 +71,7 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     private int[] map;  // maps our series into our parent's
 
     /**
-     * Creates a SubSeriesDataset using one or more series from 
+     * Creates a SubSeriesDataset using one or more series from
      * <code>parent</code>.  The series to use are passed as an array of int.
      *
      * @param parent  underlying dataset
@@ -102,7 +100,7 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     /**
      * Returns the high-value for the specified series and item.
      * <p>
-     * Note: throws <code>ClassCastException</code> if the series if not from a 
+     * Note: throws <code>ClassCastException</code> if the series if not from a
      * {@link OHLCDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -115,27 +113,27 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the high-value (as a double primitive) for an item within a 
+     * Returns the high-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The high-value.
      */
     public double getHighValue(int series, int item) {
         double result = Double.NaN;
         Number high = getHigh(series, item);
         if (high != null) {
-            result = high.doubleValue();   
+            result = high.doubleValue();
         }
-        return result;   
+        return result;
     }
 
     /**
      * Returns the low-value for the specified series and item.
      * <p>
-     * Note: throws <code>ClassCastException</code> if the series if not from a 
+     * Note: throws <code>ClassCastException</code> if the series if not from a
      * {@link OHLCDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -148,27 +146,27 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the low-value (as a double primitive) for an item within a 
+     * Returns the low-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The low-value.
      */
     public double getLowValue(int series, int item) {
         double result = Double.NaN;
         Number low = getLow(series, item);
         if (low != null) {
-            result = low.doubleValue();   
+            result = low.doubleValue();
         }
-        return result;   
+        return result;
     }
 
     /**
      * Returns the open-value for the specified series and item.
      * <p>
-     * Note: throws <code>ClassCastException</code> if the series if not from a 
+     * Note: throws <code>ClassCastException</code> if the series if not from a
      * {@link OHLCDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -181,27 +179,27 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the open-value (as a double primitive) for an item within a 
+     * Returns the open-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The open-value.
      */
     public double getOpenValue(int series, int item) {
         double result = Double.NaN;
         Number open = getOpen(series, item);
         if (open != null) {
-            result = open.doubleValue();   
+            result = open.doubleValue();
         }
-        return result;   
+        return result;
     }
 
     /**
      * Returns the close-value for the specified series and item.
      * <p>
-     * Note: throws <code>ClassCastException</code> if the series if not from a 
+     * Note: throws <code>ClassCastException</code> if the series if not from a
      * {@link OHLCDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -214,27 +212,27 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the close-value (as a double primitive) for an item within a 
+     * Returns the close-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The close-value.
      */
     public double getCloseValue(int series, int item) {
         double result = Double.NaN;
         Number close = getClose(series, item);
         if (close != null) {
-            result = close.doubleValue();   
+            result = close.doubleValue();
         }
-        return result;   
+        return result;
     }
 
     /**
      * Returns the volume.
      * <p>
-     * Note: throws <code>ClassCastException</code> if the series if not from a 
+     * Note: throws <code>ClassCastException</code> if the series if not from a
      * {@link OHLCDataset}.
      *
      * @param series  the series (zero based index).
@@ -247,21 +245,21 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the volume-value (as a double primitive) for an item within a 
+     * Returns the volume-value (as a double primitive) for an item within a
      * series.
-     * 
+     *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
-     * 
+     *
      * @return The volume-value.
      */
     public double getVolumeValue(int series, int item) {
         double result = Double.NaN;
         Number volume = getVolume(series, item);
         if (volume != null) {
-            result = volume.doubleValue();   
+            result = volume.doubleValue();
         }
-        return result;   
+        return result;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -271,7 +269,7 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     /**
      * Returns the X-value for the specified series and item.
      * <p>
-     * Note: throws <code>ClassCastException</code> if the series if not from a 
+     * Note: throws <code>ClassCastException</code> if the series if not from a
      * {@link XYDataset}.
      *
      * @param series  the index of the series of interest (zero-based);
@@ -286,7 +284,7 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     /**
      * Returns the Y-value for the specified series and item.
      * <p>
-     * Note: throws <code>ClassCastException</code> if the series if not from a 
+     * Note: throws <code>ClassCastException</code> if the series if not from a
      * {@link XYDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -301,7 +299,7 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     /**
      * Returns the number of items in a series.
      * <p>
-     * Note: throws <code>ClassCastException</code> if the series if not from a 
+     * Note: throws <code>ClassCastException</code> if the series if not from a
      * {@link XYDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
