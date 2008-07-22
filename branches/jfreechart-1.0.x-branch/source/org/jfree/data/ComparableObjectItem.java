@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * ComparableObjectItem.java
  * -------------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,17 +45,17 @@ import java.io.Serializable;
 import org.jfree.util.ObjectUtilities;
 
 /**
- * Represents one (Comparable, Object) data item for use in a 
+ * Represents one (Comparable, Object) data item for use in a
  * {@link ComparableObjectSeries}.
  *
  * @since 1.0.3
  */
-public class ComparableObjectItem implements Cloneable, Comparable, 
+public class ComparableObjectItem implements Cloneable, Comparable,
         Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2751513470325494890L;
-    
+
     /** The x-value. */
     private Comparable x;
 
@@ -95,7 +95,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
     }
 
     /**
-     * Sets the y-value for this data item.  Note that there is no 
+     * Sets the y-value for this data item.  Note that there is no
      * corresponding method to change the x-value.
      *
      * @param y  the new y-value (<code>null</code> permitted).
@@ -105,7 +105,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
     }
 
     /**
-     * Returns an integer indicating the order of this object relative to 
+     * Returns an integer indicating the order of this object relative to
      * another object.
      * <P>
      * For the order we consider only the x-value:
@@ -142,14 +142,14 @@ public class ComparableObjectItem implements Cloneable, Comparable,
      * Returns a clone of this object.
      *
      * @return A clone.
-     * 
-     * @throws CloneNotSupportedException not thrown by this class, but 
+     *
+     * @throws CloneNotSupportedException not thrown by this class, but
      *         subclasses may differ.
      */
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-    
+
     /**
      * Tests if this object is equal to another.
      *
@@ -172,12 +172,12 @@ public class ComparableObjectItem implements Cloneable, Comparable,
         if (!ObjectUtilities.equal(this.obj, that.obj)) {
             return false;
         }
-        return true;        
+        return true;
     }
 
     /**
      * Returns a hash code.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -186,5 +186,5 @@ public class ComparableObjectItem implements Cloneable, Comparable,
         result = 29 * result + (this.obj != null ? this.obj.hashCode() : 0);
         return result;
     }
-    
+
 }

@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * KeyedValueComparator.java
  * -------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,7 +47,7 @@ import java.util.Comparator;
 import org.jfree.util.SortOrder;
 
 /**
- * A utility class that can compare and order two {@link KeyedValue} instances 
+ * A utility class that can compare and order two {@link KeyedValue} instances
  * and sort them into ascending or descending order by key or by value.
  */
 public class KeyedValueComparator implements Comparator {
@@ -61,11 +61,11 @@ public class KeyedValueComparator implements Comparator {
     /**
      * Creates a new comparator.
      *
-     * @param type  the type (<code>BY_KEY</code> or <code>BY_VALUE</code>, 
+     * @param type  the type (<code>BY_KEY</code> or <code>BY_VALUE</code>,
      *              <code>null</code> not permitted).
      * @param order  the order (<code>null</code> not permitted).
      */
-    public KeyedValueComparator(KeyedValueComparatorType type, 
+    public KeyedValueComparator(KeyedValueComparatorType type,
                                 SortOrder order) {
         if (order == null) {
             throw new IllegalArgumentException("Null 'order' argument.");
@@ -76,24 +76,24 @@ public class KeyedValueComparator implements Comparator {
 
     /**
      * Returns the type.
-     * 
+     *
      * @return The type (never <code>null</code>).
      */
     public KeyedValueComparatorType getType() {
         return this.type;
     }
-    
+
     /**
      * Returns the sort order.
-     * 
+     *
      * @return The sort order (never <code>null</code>).
      */
     public SortOrder getOrder() {
         return this.order;
     }
-    
+
     /**
-     * Compares two {@link KeyedValue} instances and returns an 
+     * Compares two {@link KeyedValue} instances and returns an
      * <code>int</code> that indicates the relative order of the two objects.
      *
      * @param o1  object 1.

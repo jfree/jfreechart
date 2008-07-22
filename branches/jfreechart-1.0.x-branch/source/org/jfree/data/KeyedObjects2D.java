@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * KeyedObject2D.java
  * ------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,9 +35,9 @@
  * Changes
  * -------
  * 05-Feb-2003 : Version 1 (DG);
- * 01-Mar-2004 : Added equals() and clone() methods and implemented 
+ * 01-Mar-2004 : Added equals() and clone() methods and implemented
  *               Serializable (DG);
- * 03-Oct-2007 : Updated getObject() to handle modified behaviour in 
+ * 03-Oct-2007 : Updated getObject() to handle modified behaviour in
  *               KeyedObjects class, added clear() method (DG);
  *
  */
@@ -57,7 +57,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -1015873563138522374L;
-    
+
     /** The row keys. */
     private List rowKeys;
 
@@ -80,7 +80,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Returns the row count.
      *
      * @return The row count.
-     * 
+     *
      * @see #getColumnCount()
      */
     public int getRowCount() {
@@ -91,7 +91,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Returns the column count.
      *
      * @return The column count.
-     * 
+     *
      * @see #getRowCount()
      */
     public int getColumnCount() {
@@ -105,7 +105,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param column  the column index (in the range 0 to getColumnCount() - 1).
      *
      * @return The object (possibly <code>null</code>).
-     * 
+     *
      * @see #getObject(Comparable, Comparable)
      */
     public Object getObject(int row, int column) {
@@ -129,7 +129,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param row  the row index (zero based).
      *
      * @return The row index.
-     * 
+     *
      * @see #getRowIndex(Comparable)
      */
     public Comparable getRowKey(int row) {
@@ -143,7 +143,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param key  the key (<code>null</code> not permitted).
      *
      * @return The row index.
-     * 
+     *
      * @see #getRowKey(int)
      */
     public int getRowIndex(Comparable key) {
@@ -157,7 +157,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Returns the row keys.
      *
      * @return The row keys (never <code>null</code>).
-     * 
+     *
      * @see #getRowKeys()
      */
     public List getRowKeys() {
@@ -170,7 +170,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param column  the column.
      *
      * @return The key.
-     * 
+     *
      * @see #getColumnIndex(Comparable)
      */
     public Comparable getColumnKey(int column) {
@@ -184,7 +184,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param key  the key (<code>null</code> not permitted).
      *
      * @return The column index.
-     * 
+     *
      * @see #getColumnKey(int)
      */
     public int getColumnIndex(Comparable key) {
@@ -198,7 +198,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Returns the column keys.
      *
      * @return The column keys (never <code>null</code>).
-     * 
+     *
      * @see #getRowKeys()
      */
     public List getColumnKeys() {
@@ -212,10 +212,10 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param columnKey  the column key (<code>null</code> not permitted).
      *
      * @return The object (possibly <code>null</code>).
-     * 
-     * @throws IllegalArgumentException if <code>rowKey<code> or 
+     *
+     * @throws IllegalArgumentException if <code>rowKey<code> or
      *         <code>columnKey</code> is <code>null</code>.
-     * @throws UnknownKeyException if <code>rowKey</code> or 
+     * @throws UnknownKeyException if <code>rowKey</code> or
      *         <code>columnKey</code> is not recognised.
      */
     public Object getObject(Comparable rowKey, Comparable columnKey) {
@@ -227,12 +227,12 @@ public class KeyedObjects2D implements Cloneable, Serializable {
         }
         int row = this.rowKeys.indexOf(rowKey);
         if (row < 0) {
-            throw new UnknownKeyException("Row key (" + rowKey 
+            throw new UnknownKeyException("Row key (" + rowKey
                     + ") not recognised.");
         }
         int column = this.columnKeys.indexOf(columnKey);
         if (column < 0) {
-            throw new UnknownKeyException("Column key (" + columnKey 
+            throw new UnknownKeyException("Column key (" + columnKey
                     + ") not recognised.");
         }
         KeyedObjects rowData = (KeyedObjects) this.rows.get(row);
@@ -252,7 +252,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param rowKey  the row key (<code>null</code> not permitted).
      * @param columnKey  the column key (<code>null</code> not permitted).
      */
-    public void addObject(Object object, Comparable rowKey, 
+    public void addObject(Object object, Comparable rowKey,
             Comparable columnKey) {
         setObject(object, rowKey, columnKey);
     }
@@ -264,7 +264,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param rowKey  the row key (<code>null</code> not permitted).
      * @param columnKey  the column key (<code>null</code> not permitted).
      */
-    public void setObject(Object object, Comparable rowKey, 
+    public void setObject(Object object, Comparable rowKey,
             Comparable columnKey) {
 
         if (rowKey == null) {
@@ -293,48 +293,48 @@ public class KeyedObjects2D implements Cloneable, Serializable {
 
     /**
      * Removes an object from the table by setting it to <code>null</code>.  If
-     * all the objects in the specified row and/or column are now 
+     * all the objects in the specified row and/or column are now
      * <code>null</code>, the row and/or column is removed from the table.
      *
      * @param rowKey  the row key (<code>null</code> not permitted).
      * @param columnKey  the column key (<code>null</code> not permitted).
-     * 
+     *
      * @see #addObject(Object, Comparable, Comparable)
      */
     public void removeObject(Comparable rowKey, Comparable columnKey) {
         int rowIndex = getRowIndex(rowKey);
         if (rowIndex < 0) {
-            throw new UnknownKeyException("Row key (" + rowKey 
+            throw new UnknownKeyException("Row key (" + rowKey
                     + ") not recognised.");
         }
         int columnIndex = getColumnIndex(columnKey);
         if (columnIndex < 0) {
-            throw new UnknownKeyException("Column key (" + columnKey 
+            throw new UnknownKeyException("Column key (" + columnKey
                     + ") not recognised.");
         }
         setObject(null, rowKey, columnKey);
-        
+
         // 1. check whether the row is now empty.
         boolean allNull = true;
         KeyedObjects row = (KeyedObjects) this.rows.get(rowIndex);
 
-        for (int item = 0, itemCount = row.getItemCount(); item < itemCount; 
+        for (int item = 0, itemCount = row.getItemCount(); item < itemCount;
              item++) {
             if (row.getObject(item) != null) {
                 allNull = false;
                 break;
             }
         }
-        
+
         if (allNull) {
             this.rowKeys.remove(rowIndex);
             this.rows.remove(rowIndex);
         }
-        
+
         // 2. check whether the column is now empty.
         allNull = true;
-        
-        for (int item = 0, itemCount = this.rows.size(); item < itemCount; 
+
+        for (int item = 0, itemCount = this.rows.size(); item < itemCount;
              item++) {
             row = (KeyedObjects) this.rows.get(item);
             int colIndex = row.getIndex(columnKey);
@@ -343,9 +343,9 @@ public class KeyedObjects2D implements Cloneable, Serializable {
                 break;
             }
         }
-        
+
         if (allNull) {
-            for (int item = 0, itemCount = this.rows.size(); item < itemCount; 
+            for (int item = 0, itemCount = this.rows.size(); item < itemCount;
                  item++) {
                 row = (KeyedObjects) this.rows.get(item);
                 int colIndex = row.getIndex(columnKey);
@@ -361,7 +361,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Removes an entire row from the table.
      *
      * @param rowIndex  the row index.
-     * 
+     *
      * @see #removeColumn(int)
      */
     public void removeRow(int rowIndex) {
@@ -373,15 +373,15 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Removes an entire row from the table.
      *
      * @param rowKey  the row key (<code>null</code> not permitted).
-     * 
+     *
      * @throws UnknownKeyException if <code>rowKey</code> is not recognised.
-     * 
+     *
      * @see #removeColumn(Comparable)
      */
     public void removeRow(Comparable rowKey) {
         int index = getRowIndex(rowKey);
         if (index < 0) {
-            throw new UnknownKeyException("Row key (" + rowKey 
+            throw new UnknownKeyException("Row key (" + rowKey
                     + ") not recognised.");
         }
         removeRow(index);
@@ -391,7 +391,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Removes an entire column from the table.
      *
      * @param columnIndex  the column index.
-     * 
+     *
      * @see #removeRow(int)
      */
     public void removeColumn(int columnIndex) {
@@ -403,15 +403,15 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Removes an entire column from the table.
      *
      * @param columnKey  the column key (<code>null</code> not permitted).
-     * 
+     *
      * @throws UnknownKeyException if <code>rowKey</code> is not recognised.
-     * 
+     *
      * @see #removeRow(Comparable)
      */
     public void removeColumn(Comparable columnKey) {
         int index = getColumnIndex(columnKey);
         if (index < 0) {
-            throw new UnknownKeyException("Column key (" + columnKey 
+            throw new UnknownKeyException("Column key (" + columnKey
                     + ") not recognised.");
         }
         Iterator iterator = this.rows.iterator();
@@ -427,7 +427,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
 
     /**
      * Clears all the data and associated keys.
-     * 
+     *
      * @since 1.0.7
      */
     public void clear() {
@@ -435,7 +435,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
         this.columnKeys.clear();
         this.rows.clear();
     }
-    
+
     /**
      * Tests this object for equality with an arbitrary object.
      *
@@ -450,7 +450,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
         if (!(obj instanceof KeyedObjects2D)) {
             return false;
         }
-        
+
         KeyedObjects2D that = (KeyedObjects2D) obj;
         if (!getRowKeys().equals(that.getRowKeys())) {
             return false;
@@ -487,7 +487,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
 
     /**
      * Returns a hashcode for this object.
-     * 
+     *
      * @return A hashcode.
      */
     public int hashCode() {
@@ -500,10 +500,10 @@ public class KeyedObjects2D implements Cloneable, Serializable {
 
     /**
      * Returns a clone.
-     * 
+     *
      * @return A clone.
-     * 
-     * @throws CloneNotSupportedException  this class will not throw this 
+     *
+     * @throws CloneNotSupportedException  this class will not throw this
      *         exception, but subclasses (if any) might.
      */
     public Object clone() throws CloneNotSupportedException {
