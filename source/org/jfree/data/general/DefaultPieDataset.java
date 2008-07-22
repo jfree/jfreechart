@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
@@ -36,9 +36,9 @@
  * -------
  * 17-Nov-2001 : Version 1 (DG);
  * 22-Jan-2002 : Removed legend methods from dataset implementations (DG);
- * 07-Apr-2002 : Modified implementation to guarantee data sequence to remain 
+ * 07-Apr-2002 : Modified implementation to guarantee data sequence to remain
  *               in the order categories are added (oldman);
- * 23-Oct-2002 : Added getCategory(int) method and getItemCount() method, in 
+ * 23-Oct-2002 : Added getCategory(int) method and getItemCount() method, in
  *               line with changes to the PieDataset interface (DG);
  * 04-Feb-2003 : Changed underlying data storage to DefaultKeyedValues (DG);
  * 04-Mar-2003 : Inserted DefaultKeyedValuesDataset class into hierarchy (DG);
@@ -47,11 +47,11 @@
  * 03-Mar-2005 : Implemented PublicCloneable (DG);
  * 29-Jun-2005 : Added remove() method (DG);
  * ------------- JFREECHART 1.0.0 ---------------------------------------------
- * 31-Jul-2006 : Added a clear() method to clear all values from the 
+ * 31-Jul-2006 : Added a clear() method to clear all values from the
  *               dataset (DG);
  * 28-Sep-2006 : Added sortByKeys() and sortByValues() methods (DG);
  * 30-Apr-2007 : Added new insertValues() methods (DG);
- * 
+ *
  */
 
 package org.jfree.data.general;
@@ -70,13 +70,11 @@ import org.jfree.util.SortOrder;
  * A default implementation of the {@link PieDataset} interface.
  */
 public class DefaultPieDataset extends AbstractDataset
-                               implements PieDataset, 
-                                          Cloneable, PublicCloneable, 
-                                          Serializable {
+        implements PieDataset, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2904745139106540618L;
-    
+
     /** Storage for the data. */
     private DefaultKeyedValues data;
 
@@ -88,14 +86,14 @@ public class DefaultPieDataset extends AbstractDataset
     }
 
     /**
-     * Creates a new dataset by copying data from a {@link KeyedValues} 
+     * Creates a new dataset by copying data from a {@link KeyedValues}
      * instance.
      *
      * @param data  the data (<code>null</code> not permitted).
      */
     public DefaultPieDataset(KeyedValues data) {
         if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");   
+            throw new IllegalArgumentException("Null 'data' argument.");
         }
         this.data = new DefaultKeyedValues();
         for (int i = 0; i < data.getItemCount(); i++) {
@@ -113,7 +111,7 @@ public class DefaultPieDataset extends AbstractDataset
     }
 
     /**
-     * Returns the categories in the dataset.  The returned list is 
+     * Returns the categories in the dataset.  The returned list is
      * unmodifiable.
      *
      * @return The categories in the dataset.
@@ -123,13 +121,13 @@ public class DefaultPieDataset extends AbstractDataset
     }
 
     /**
-     * Returns the key for the specified item, or <code>null</code>. 
+     * Returns the key for the specified item, or <code>null</code>.
      *
-     * @param item  the item index (in the range <code>0</code> to 
+     * @param item  the item index (in the range <code>0</code> to
      *     <code>getItemCount() - 1</code>).
      *
      * @return The key, or <code>null</code>.
-     * 
+     *
      * @throws IndexOutOfBoundsException if <code>item</code> is not in the
      *     specified range.
      */
@@ -143,8 +141,8 @@ public class DefaultPieDataset extends AbstractDataset
      * @param key  the key (<code>null</code> not permitted).
      *
      * @return The index, or <code>-1</code> if the key is unrecognised.
-     * 
-     * @throws IllegalArgumentException if <code>key</code> is 
+     *
+     * @throws IllegalArgumentException if <code>key</code> is
      *     <code>null</code>.
      */
     public int getIndex(Comparable key) {
@@ -174,7 +172,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @param key  the key (<code>null</code> not permitted).
      *
      * @return The value (possibly <code>null</code>).
-     * 
+     *
      * @throws UnknownKeyException if the key is not recognised.
      */
     public Number getValue(Comparable key) {
@@ -190,8 +188,8 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @param key  the key (<code>null</code> not permitted).
      * @param value  the value.
-     * 
-     * @throws IllegalArgumentException if <code>key</code> is 
+     *
+     * @throws IllegalArgumentException if <code>key</code> is
      *     <code>null</code>.
      */
     public void setValue(Comparable key, Number value) {
@@ -205,25 +203,25 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @param key  the key (<code>null</code> not permitted).
      * @param value  the value.
-     * 
-     * @throws IllegalArgumentException if <code>key</code> is 
+     *
+     * @throws IllegalArgumentException if <code>key</code> is
      *     <code>null</code>.
      */
     public void setValue(Comparable key, double value) {
         setValue(key, new Double(value));
     }
-    
+
     /**
      * Inserts a new value at the specified position in the dataset or, if
-     * there is an existing item with the specified key, updates the value 
+     * there is an existing item with the specified key, updates the value
      * for that item and moves it to the specified position.  After the change
-     * is made, this methods sends a {@link DatasetChangeEvent} to all 
+     * is made, this methods sends a {@link DatasetChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param position  the position (in the range 0 to getItemCount()).
      * @param key  the key (<code>null</code> not permitted).
      * @param value  the value (<code>null</code> permitted).
-     * 
+     *
      * @since 1.0.6
      */
     public void insertValue(int position, Comparable key, double value) {
@@ -232,15 +230,15 @@ public class DefaultPieDataset extends AbstractDataset
 
     /**
      * Inserts a new value at the specified position in the dataset or, if
-     * there is an existing item with the specified key, updates the value 
+     * there is an existing item with the specified key, updates the value
      * for that item and moves it to the specified position.  After the change
-     * is made, this methods sends a {@link DatasetChangeEvent} to all 
+     * is made, this methods sends a {@link DatasetChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param position  the position (in the range 0 to getItemCount()).
      * @param key  the key (<code>null</code> not permitted).
      * @param value  the value (<code>null</code> permitted).
-     * 
+     *
      * @since 1.0.6
      */
     public void insertValue(int position, Comparable key, Number value) {
@@ -251,21 +249,21 @@ public class DefaultPieDataset extends AbstractDataset
     /**
      * Removes an item from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
-     * 
+     *
      * @param key  the key (<code>null</code> not permitted).
-     * 
-     * @throws IllegalArgumentException if <code>key</code> is 
+     *
+     * @throws IllegalArgumentException if <code>key</code> is
      *     <code>null</code>.
      */
     public void remove(Comparable key) {
-        this.data.removeValue(key);   
+        this.data.removeValue(key);
         fireDatasetChanged();
     }
-    
+
     /**
      * Clears all data from this dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners (unless the dataset was already empty).
-     * 
+     *
      * @since 1.0.2
      */
     public void clear() {
@@ -278,22 +276,22 @@ public class DefaultPieDataset extends AbstractDataset
     /**
      * Sorts the dataset's items by key and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
-     * 
+     *
      * @param order  the sort order (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.3
      */
     public void sortByKeys(SortOrder order) {
         this.data.sortByKeys(order);
         fireDatasetChanged();
     }
-    
+
     /**
      * Sorts the dataset's items by value and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
-     * 
+     *
      * @param order  the sort order (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.3
      */
     public void sortByValues(SortOrder order) {
@@ -348,7 +346,7 @@ public class DefaultPieDataset extends AbstractDataset
 
     /**
      * Returns a hash code.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -357,16 +355,16 @@ public class DefaultPieDataset extends AbstractDataset
 
     /**
      * Returns a clone of the dataset.
-     * 
+     *
      * @return A clone.
-     * 
-     * @throws CloneNotSupportedException This class will not throw this 
+     *
+     * @throws CloneNotSupportedException This class will not throw this
      *         exception, but subclasses (if any) might.
      */
     public Object clone() throws CloneNotSupportedException {
         DefaultPieDataset clone = (DefaultPieDataset) super.clone();
         clone.data = (DefaultKeyedValues) this.data.clone();
-        return clone;    
+        return clone;
     }
-    
+
 }
