@@ -46,7 +46,7 @@ package org.jfree.data.general;
  * This is an alias for {@link DefaultPieDataset}.
  */
 public class DefaultKeyedValuesDataset extends DefaultPieDataset
-                                       implements KeyedValuesDataset {
+        implements KeyedValuesDataset {
 
     /** For serialization. */
     private static final long serialVersionUID = 306264413152815781L;
