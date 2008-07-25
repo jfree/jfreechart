@@ -204,6 +204,7 @@
  *               for the domain axes (DG);
  * 09-Jul-2008 : Added renderer state notification when series pass begins
  *               and ends - see patch 1997549 by Ulrich Voigt (DG);
+ * 25-Jul-2008 : Fixed NullPointerException for plots with no axes (DG);
  *
  */
 
@@ -3044,10 +3045,16 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         boolean somethingToDraw = false;
 
         ValueAxis xAxis = getDomainAxis();
+        if (xAxis == null) {  // we can't draw quadrants without a valid x-axis
+        	return;
+        }
         double x = xAxis.getRange().constrain(this.quadrantOrigin.getX());
         double xx = xAxis.valueToJava2D(x, area, getDomainAxisEdge());
 
         ValueAxis yAxis = getRangeAxis();
+        if (yAxis == null) {  // we can't draw quadrants without a valid y-axis
+        	return;
+        }
         double y = yAxis.getRange().constrain(this.quadrantOrigin.getY());
         double yy = yAxis.valueToJava2D(y, area, getRangeAxisEdge());
 
@@ -3069,8 +3076,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                 if (this.orientation == PlotOrientation.HORIZONTAL) {
                     r[0] = new Rectangle2D.Double(Math.min(yymax, yy),
                             Math.min(xxmin, xx), Math.abs(yy - yymax),
-                            Math.abs(xx - xxmin)
-                    );
+                            Math.abs(xx - xxmin));
                 }
                 else {  // PlotOrientation.VERTICAL
                     r[0] = new Rectangle2D.Double(Math.min(xxmin, xx),
@@ -3321,6 +3327,9 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             foundData = true;
             ValueAxis xAxis = getDomainAxisForDataset(index);
             ValueAxis yAxis = getRangeAxisForDataset(index);
+            if (xAxis == null || yAxis == null) {
+            	return foundData;  // can't render anything without axes
+            }
             XYItemRenderer renderer = getRenderer(index);
             if (renderer == null) {
                 renderer = getRenderer();

@@ -1,3 +1,9 @@
+2008-07-25  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/plot/XYPlot.java
+    (drawQuadrants): Check for null axes,
+    (render): Likewise.
+
 2008-07-11  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 1994355:
