@@ -89,6 +89,8 @@
  * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null
  *               subplots, as suggested by Richard West (DG);
  * 28-Apr-2008 : Fixed zooming problem (see bug 1950037) (DG);
+ * 11-Aug-2008 : Don't store totalWeight of subplots, calculate it as
+ *               required (DG);
  *
  */
 
@@ -126,9 +128,6 @@ public class CombinedDomainXYPlot extends XYPlot
 
     /** Storage for the subplot references. */
     private List subplots;
-
-    /** Total weight of all charts. */
-    private int totalWeight = 0;
 
     /** The gap between subplots. */
     private double gap = 5.0;
@@ -278,9 +277,6 @@ public class CombinedDomainXYPlot extends XYPlot
         subplot.addChangeListener(this);
         this.subplots.add(subplot);
 
-        // keep track of total weights
-        this.totalWeight += weight;
-
         ValueAxis axis = getDomainAxis();
         if (axis != null) {
             axis.configure();
@@ -311,8 +307,6 @@ public class CombinedDomainXYPlot extends XYPlot
             this.subplots.remove(position);
             subplot.setParent(null);
             subplot.removeChangeListener(this);
-            this.totalWeight -= subplot.getWeight();
-
             ValueAxis domain = getDomainAxis();
             if (domain != null) {
                 domain.configure();
@@ -375,6 +369,11 @@ public class CombinedDomainXYPlot extends XYPlot
 
         // work out the maximum height or width of the non-shared axes...
         int n = this.subplots.size();
+        int totalWeight = 0;
+        for (int i = 0; i < n; i++) {
+        	XYPlot sub = (XYPlot) this.subplots.get(i);
+        	totalWeight += sub.getWeight();
+        }
         this.subplotAreas = new Rectangle2D[n];
         double x = adjustedPlotArea.getX();
         double y = adjustedPlotArea.getY();
@@ -391,13 +390,13 @@ public class CombinedDomainXYPlot extends XYPlot
 
             // calculate sub-plot area
             if (orientation == PlotOrientation.HORIZONTAL) {
-                double w = usableSize * plot.getWeight() / this.totalWeight;
+                double w = usableSize * plot.getWeight() / totalWeight;
                 this.subplotAreas[i] = new Rectangle2D.Double(x, y, w,
                         adjustedPlotArea.getHeight());
                 x = x + w + this.gap;
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                double h = usableSize * plot.getWeight() / this.totalWeight;
+                double h = usableSize * plot.getWeight() / totalWeight;
                 this.subplotAreas[i] = new Rectangle2D.Double(x, y,
                         adjustedPlotArea.getWidth(), h);
                 y = y + h + this.gap;
@@ -668,34 +667,20 @@ public class CombinedDomainXYPlot extends XYPlot
      * @return <code>true</code> or <code>false</code>.
      */
     public boolean equals(Object obj) {
-
-        if (obj == null) {
-            return false;
-        }
-
         if (obj == this) {
             return true;
         }
-
         if (!(obj instanceof CombinedDomainXYPlot)) {
             return false;
         }
-        if (!super.equals(obj)) {
+        CombinedDomainXYPlot that = (CombinedDomainXYPlot) obj;
+        if (this.gap != that.gap) {
             return false;
         }
-
-        CombinedDomainXYPlot p = (CombinedDomainXYPlot) obj;
-        if (this.totalWeight != p.totalWeight) {
+        if (!ObjectUtilities.equal(this.subplots, that.subplots)) {
             return false;
         }
-        if (this.gap != p.gap) {
-            return false;
-        }
-        if (!ObjectUtilities.equal(this.subplots, p.subplots)) {
-            return false;
-        }
-
-        return true;
+        return super.equals(obj);
     }
 
     /**

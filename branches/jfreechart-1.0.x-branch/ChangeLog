@@ -1,3 +1,27 @@
+2008-08-11  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java
+    (totalWeight): Removed,
+    (CombinedDomainCategoryPlot(CategoryAxis)): Updated for removed field,
+    (add(CategoryPlot, int)): No longer need to track totalWeight,
+    (remove): Likewise,
+    (calculateAxisSpace): Compute totalWeight on-the-fly,
+    * source/org/jfree/chart/plot/CombinedDomainXYPlot.java
+    (totalWeight): Removed,
+    (add(XYPlot, int)): No longer need to track totalWeight,
+    (remove): Likewise,
+    (calculateAxisSpace): Compute totalWeight on-the-fly,
+    * source/org/jfree/chart/plot/CombinedRangeCategoryPlot.java
+    (totalWeight): Removed,
+    (add(CategoryPlot, int)): No longer need to track totalWeight,
+    (remove): Likewise,
+    (calculateAxisSpace): Compute totalWeight on-the-fly,
+    * source/org/jfree/chart/plot/CombinedRangeXYPlot.java
+    (totalWeight): Removed,
+    (add(XYPlot, int)): No longer need to track totalWeight,
+    (remove): Likewise,
+    (calculateAxisSpace): Compute totalWeight on-the-fly.
+
 2008-07-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/XYPlot.java
