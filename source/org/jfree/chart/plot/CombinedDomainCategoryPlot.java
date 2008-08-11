@@ -58,6 +58,8 @@
  *               subplots, as suggested by Richard West (DG);
  * 28-Apr-2008 : Fixed zooming problem (see bug 1950037) (DG);
  * 26-Jun-2008 : Fixed crosshair support (DG);
+ * 11-Aug-2008 : Don't store totalWeight of subplots, calculate it as
+ *               required (DG);
  *
  */
 
@@ -94,9 +96,6 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     /** Storage for the subplot references. */
     private List subplots;
 
-    /** Total weight of all charts. */
-    private int totalWeight;
-
     /** The gap between subplots. */
     private double gap;
 
@@ -120,7 +119,6 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     public CombinedDomainCategoryPlot(CategoryAxis domainAxis) {
         super(null, domainAxis, null, null);
         this.subplots = new java.util.ArrayList();
-        this.totalWeight = 0;
         this.gap = 5.0;
     }
 
@@ -181,7 +179,6 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         subplot.setOrientation(getOrientation());
         subplot.addChangeListener(this);
         this.subplots.add(subplot);
-        this.totalWeight += weight;
         CategoryAxis axis = getDomainAxis();
         if (axis != null) {
             axis.configure();
@@ -214,8 +211,6 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
             this.subplots.remove(position);
             subplot.setParent(null);
             subplot.removeChangeListener(this);
-            this.totalWeight -= subplot.getWeight();
-
             CategoryAxis domain = getDomainAxis();
             if (domain != null) {
                 domain.configure();
@@ -373,6 +368,11 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
 
         // work out the maximum height or width of the non-shared axes...
         int n = this.subplots.size();
+        int totalWeight = 0;
+        for (int i = 0; i < n; i++) {
+        	CategoryPlot sub = (CategoryPlot) this.subplots.get(i);
+        	totalWeight += sub.getWeight();
+        }
         this.subplotAreas = new Rectangle2D[n];
         double x = adjustedPlotArea.getX();
         double y = adjustedPlotArea.getY();
@@ -389,13 +389,13 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
 
             // calculate sub-plot area
             if (orientation == PlotOrientation.HORIZONTAL) {
-                double w = usableSize * plot.getWeight() / this.totalWeight;
+                double w = usableSize * plot.getWeight() / totalWeight;
                 this.subplotAreas[i] = new Rectangle2D.Double(x, y, w,
                         adjustedPlotArea.getHeight());
                 x = x + w + this.gap;
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                double h = usableSize * plot.getWeight() / this.totalWeight;
+                double h = usableSize * plot.getWeight() / totalWeight;
                 this.subplotAreas[i] = new Rectangle2D.Double(x, y,
                         adjustedPlotArea.getWidth(), h);
                 y = y + h + this.gap;
@@ -639,20 +639,14 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         if (!(obj instanceof CombinedDomainCategoryPlot)) {
             return false;
         }
-        if (!super.equals(obj)) {
+        CombinedDomainCategoryPlot that = (CombinedDomainCategoryPlot) obj;
+        if (this.gap != that.gap) {
             return false;
         }
-        CombinedDomainCategoryPlot plot = (CombinedDomainCategoryPlot) obj;
-        if (!ObjectUtilities.equal(this.subplots, plot.subplots)) {
+        if (!ObjectUtilities.equal(this.subplots, that.subplots)) {
             return false;
         }
-        if (this.totalWeight != plot.totalWeight) {
-            return false;
-        }
-        if (this.gap != plot.gap) {
-            return false;
-        }
-        return true;
+        return super.equals(obj);
     }
 
     /**

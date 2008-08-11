@@ -54,6 +54,8 @@
  * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null
  *               subplots, as suggested by Richard West (DG);
  * 26-Jun-2008 : Fixed crosshair support (DG);
+ * 11-Aug-2008 : Don't store totalWeight of subplots, calculate it as
+ *               required (DG);
  *
  */
 
@@ -92,9 +94,6 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     /** Storage for the subplot references. */
     private List subplots;
 
-    /** Total weight of all charts. */
-    private int totalWeight;
-
     /** The gap between subplots. */
     private double gap;
 
@@ -116,7 +115,6 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     public CombinedRangeCategoryPlot(ValueAxis rangeAxis) {
         super(null, null, rangeAxis, null);
         this.subplots = new java.util.ArrayList();
-        this.totalWeight = 0;
         this.gap = 5.0;
     }
 
@@ -179,8 +177,6 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         subplot.setOrientation(getOrientation());
         subplot.addChangeListener(this);
         this.subplots.add(subplot);
-        this.totalWeight += weight;
-
         // configure the range axis...
         ValueAxis axis = getRangeAxis();
         if (axis != null) {
@@ -211,7 +207,6 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
             this.subplots.remove(position);
             subplot.setParent(null);
             subplot.removeChangeListener(this);
-            this.totalWeight -= subplot.getWeight();
 
             ValueAxis range = getRangeAxis();
             if (range != null) {
@@ -280,7 +275,11 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         Rectangle2D adjustedPlotArea = space.shrink(plotArea, null);
         // work out the maximum height or width of the non-shared axes...
         int n = this.subplots.size();
-
+        int totalWeight = 0;
+        for (int i = 0; i < n; i++) {
+        	CategoryPlot sub = (CategoryPlot) this.subplots.get(i);
+        	totalWeight += sub.getWeight();
+        }
         // calculate plotAreas of all sub-plots, maximum vertical/horizontal
         // axis width/height
         this.subplotArea = new Rectangle2D[n];
@@ -299,13 +298,13 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
 
             // calculate sub-plot area
             if (orientation == PlotOrientation.VERTICAL) {
-                double w = usableSize * plot.getWeight() / this.totalWeight;
+                double w = usableSize * plot.getWeight() / totalWeight;
                 this.subplotArea[i] = new Rectangle2D.Double(x, y, w,
                         adjustedPlotArea.getHeight());
                 x = x + w + this.gap;
             }
             else if (orientation == PlotOrientation.HORIZONTAL) {
-                double h = usableSize * plot.getWeight() / this.totalWeight;
+                double h = usableSize * plot.getWeight() / totalWeight;
                 this.subplotArea[i] = new Rectangle2D.Double(x, y,
                         adjustedPlotArea.getWidth(), h);
                 y = y + h + this.gap;
@@ -508,20 +507,14 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         if (!(obj instanceof CombinedRangeCategoryPlot)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         CombinedRangeCategoryPlot that = (CombinedRangeCategoryPlot) obj;
-        if (!ObjectUtilities.equal(this.subplots, that.subplots)) {
-            return false;
-        }
-        if (this.totalWeight != that.totalWeight) {
-            return false;
-        }
         if (this.gap != that.gap) {
             return false;
         }
-        return true;
+        if (!ObjectUtilities.equal(this.subplots, that.subplots)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
     /**
