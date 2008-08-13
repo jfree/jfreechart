@@ -173,6 +173,11 @@ public class BarRendererTests extends TestCase {
         r2.setShadowVisible(false);
         assertTrue(r1.equals(r2));
 
+        r1.setShadowPaint(Color.red);
+        assertFalse(r1.equals(r2));
+        r2.setShadowPaint(Color.red);
+        assertTrue(r1.equals(r2));
+
         // shadowXOffset
         r1.setShadowXOffset(3.3);
         assertFalse(r1.equals(r2));

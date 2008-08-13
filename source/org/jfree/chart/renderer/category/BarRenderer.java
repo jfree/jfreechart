@@ -85,6 +85,7 @@
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  * 24-Jun-2008 : Added barPainter mechanism (DG);
  * 26-Jun-2008 : Added crosshair support (DG);
+ * 13-Aug-2008 : Added shadowPaint attribute (DG);
  *
  */
 
@@ -100,6 +101,9 @@ import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import org.jfree.chart.LegendItem;
@@ -116,11 +120,13 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
+import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextUtilities;
 import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.StandardGradientPaintTransformer;
 import org.jfree.util.ObjectUtilities;
+import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -235,6 +241,13 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     private boolean shadowsVisible;
 
     /**
+     * The shadow paint.
+     *
+     * @since 1.0.11
+     */
+    private transient Paint shadowPaint;
+
+    /**
      * The x-offset for the shadow effect.
      *
      * @since 1.0.11
@@ -266,6 +279,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         setBaseLegendShape(new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0));
         this.barPainter = getDefaultBarPainter();
         this.shadowsVisible = true;
+        this.shadowPaint = Color.gray;
         this.shadowXOffset = 4.0;
         this.shadowYOffset = 4.0;
     }
@@ -577,6 +591,36 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         fireChangeEvent();
     }
 
+    /**
+     * Returns the shadow paint.
+     *
+     * @return The shadow paint.
+     *
+     * @see #setShadowPaint(Paint)
+     *
+     * @since 1.0.11
+     */
+    public Paint getShadowPaint() {
+    	return this.shadowPaint;
+    }
+
+    /**
+     * Sets the shadow paint and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @see #getShadowPaint()
+     *
+     * @since 1.0.11
+     */
+    public void setShadowPaint(Paint paint) {
+    	if (paint == null) {
+    		throw new IllegalArgumentException("Null 'paint' argument.");
+    	}
+    	this.shadowPaint = paint;
+    	fireChangeEvent();
+    }
     /**
      * Returns the shadow x-offset.
      *
@@ -1277,6 +1321,9 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         if (this.shadowsVisible != that.shadowsVisible) {
         	return false;
         }
+        if (!PaintUtilities.equal(this.shadowPaint, that.shadowPaint)) {
+        	return false;
+        }
         if (this.shadowXOffset != that.shadowXOffset) {
         	return false;
         }
@@ -1284,6 +1331,32 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         	return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+        SerialUtilities.writePaint(this.shadowPaint, stream);
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        this.shadowPaint = SerialUtilities.readPaint(stream);
     }
 
 }
