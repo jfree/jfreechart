@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------
  * ChartFactory.java
  * -----------------
- * (C) Copyright 2001-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Serge V. Grachov;
@@ -36,7 +36,7 @@
  *                   Jon Iles;
  *                   Jelai Wang;
  *                   Richard Atkinson;
- *                   David Browning (for Australian Institute of Marine 
+ *                   David Browning (for Australian Institute of Marine
  *                       Science);
  *                   Benoit Xhenseval;
  *
@@ -45,19 +45,19 @@
  * 19-Oct-2001 : Version 1, most methods transferred from JFreeChart.java (DG);
  * 22-Oct-2001 : Added methods to create stacked bar charts (DG);
  *               Renamed DataSource.java --> Dataset.java etc. (DG);
- * 31-Oct-2001 : Added 3D-effect vertical bar and stacked-bar charts, 
+ * 31-Oct-2001 : Added 3D-effect vertical bar and stacked-bar charts,
  *               contributed by Serge V. Grachov (DG);
- * 07-Nov-2001 : Added a flag to control whether or not a legend is added to 
+ * 07-Nov-2001 : Added a flag to control whether or not a legend is added to
  *               the chart (DG);
- * 17-Nov-2001 : For pie chart, changed dataset from CategoryDataset to 
+ * 17-Nov-2001 : For pie chart, changed dataset from CategoryDataset to
  *               PieDataset (DG);
- * 30-Nov-2001 : Removed try/catch handlers from chart creation, as the 
- *               exception are now RuntimeExceptions, as suggested by Joao 
+ * 30-Nov-2001 : Removed try/catch handlers from chart creation, as the
+ *               exception are now RuntimeExceptions, as suggested by Joao
  *               Guilherme Del Valle (DG);
  * 06-Dec-2001 : Added createCombinableXXXXXCharts methods (BK);
  * 12-Dec-2001 : Added createCandlestickChart() method (DG);
  * 13-Dec-2001 : Updated methods for charts with new renderers (DG);
- * 08-Jan-2002 : Added import for 
+ * 08-Jan-2002 : Added import for
  *               com.jrefinery.chart.combination.CombinedChart (DG);
  * 31-Jan-2002 : Changed the createCombinableVerticalXYBarChart() method to use
  *               renderer (DG);
@@ -65,7 +65,7 @@
  * 23-Apr-2002 : Updates to the chart and plot constructor API (DG);
  * 21-May-2002 : Added new method createAreaChart() (JI);
  * 06-Jun-2002 : Added new method createGanttChart() (DG);
- * 11-Jun-2002 : Renamed createHorizontalStackedBarChart() 
+ * 11-Jun-2002 : Renamed createHorizontalStackedBarChart()
  *               --> createStackedHorizontalBarChart() for consistency (DG);
  * 06-Aug-2002 : Updated Javadoc comments (DG);
  * 21-Aug-2002 : Added createPieChart(CategoryDataset) method (DG);
@@ -82,19 +82,19 @@
  * 08-Sep-2003 : Changed ValueAxis API (DG);
  * 07-Oct-2003 : Added stepped area XY chart contributed by Matthias Rose (DG);
  * 06-Nov-2003 : Added createWaterfallChart() method (DG);
- * 20-Nov-2003 : Set rendering order for 3D bar charts to fix overlapping 
+ * 20-Nov-2003 : Set rendering order for 3D bar charts to fix overlapping
  *               problems (DG);
  * 25-Nov-2003 : Added createWaferMapChart() method (DG);
- * 23-Dec-2003 : Renamed createPie3DChart() --> createPieChart3D for 
+ * 23-Dec-2003 : Renamed createPie3DChart() --> createPieChart3D for
  *               consistency (DG);
  * 20-Jan-2004 : Added createPolarChart() method (DG);
- * 28-Jan-2004 : Fixed bug (882890) with axis range in 
+ * 28-Jan-2004 : Fixed bug (882890) with axis range in
  *               createStackedXYAreaChart() method (DG);
  * 25-Feb-2004 : Renamed XYToolTipGenerator --> XYItemLabelGenerator (DG);
  * 11-Mar-2004 : Updated for pie chart changes (DG);
- * 27-Apr-2004 : Added new createPieChart() method contributed by Benoit 
+ * 27-Apr-2004 : Added new createPieChart() method contributed by Benoit
  *               Xhenseval (see RFE 942195) (DG);
- * 11-May-2004 : Split StandardCategoryItemLabelGenerator 
+ * 11-May-2004 : Split StandardCategoryItemLabelGenerator
  *               --> StandardCategoryToolTipGenerator and
  *               StandardCategoryLabelGenerator (DG);
  * 06-Jan-2005 : Removed deprecated methods (DG);
@@ -105,11 +105,11 @@
  * 29-Nov-2005 : Removed signal chart (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 26-Jan-2006 : Corrected API docs for createScatterPlot() (DG);
- * 23-Aug-2006 : Modified createStackedXYAreaChart() to use 
+ * 23-Aug-2006 : Modified createStackedXYAreaChart() to use
  *               StackedXYAreaRenderer2, because StackedXYAreaRenderer doesn't
  *               handle negative values (DG);
  * 27-Sep-2006 : Update createPieChart() method for deprecated code (DG);
- * 29-Nov-2006 : Update createXYBarChart() to use a time based tool tip 
+ * 29-Nov-2006 : Update createXYBarChart() to use a time based tool tip
  *               generator is a DateAxis is requested (DG);
  * 17-Jan-2007 : Added createBoxAndWhiskerChart() method from patch 1603937
  *               submitted by Darren Jung (DG);
@@ -212,7 +212,7 @@ import org.jfree.util.SortOrder;
 import org.jfree.util.TableOrder;
 
 /**
- * A collection of utility methods for creating some standard charts with 
+ * A collection of utility methods for creating some standard charts with
  * JFreeChart.
  */
 public abstract class ChartFactory {
@@ -220,7 +220,7 @@ public abstract class ChartFactory {
     /**
      * Creates a pie chart with default settings.
      * <P>
-     * The chart object returned by this method uses a {@link PiePlot} instance 
+     * The chart object returned by this method uses a {@link PiePlot} instance
      * as the plot.
      *
      * @param title  the chart title (<code>null</code> permitted).
@@ -230,7 +230,7 @@ public abstract class ChartFactory {
      * @param locale  the locale (<code>null</code> not permitted).
      *
      * @return A pie chart.
-     * 
+     *
      * @since 1.0.7
      */
     public static JFreeChart createPieChart(String title, PieDataset dataset,
@@ -242,7 +242,7 @@ public abstract class ChartFactory {
         if (tooltips) {
             plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
                 legend);
 
     }
@@ -250,7 +250,7 @@ public abstract class ChartFactory {
     /**
      * Creates a pie chart with default settings.
      * <P>
-     * The chart object returned by this method uses a {@link PiePlot} instance 
+     * The chart object returned by this method uses a {@link PiePlot} instance
      * as the plot.
      *
      * @param title  the chart title (<code>null</code> permitted).
@@ -276,49 +276,49 @@ public abstract class ChartFactory {
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
                 legend);
 
     }
 
     /**
-     * Creates a pie chart with default settings that compares 2 datasets.  
+     * Creates a pie chart with default settings that compares 2 datasets.
      * The colour of each section will be determined by the move from the value
-     * for the same key in <code>previousDataset</code>. ie if value1 > value2 
-     * then the section will be in green (unless <code>greenForIncrease</code> 
-     * is <code>false</code>, in which case it would be <code>red</code>).  
-     * Each section can have a shade of red or green as the difference can be 
-     * tailored between 0% (black) and percentDiffForMaxScale% (bright 
+     * for the same key in <code>previousDataset</code>. ie if value1 > value2
+     * then the section will be in green (unless <code>greenForIncrease</code>
+     * is <code>false</code>, in which case it would be <code>red</code>).
+     * Each section can have a shade of red or green as the difference can be
+     * tailored between 0% (black) and percentDiffForMaxScale% (bright
      * red/green).
      * <p>
-     * For instance if <code>percentDiffForMaxScale</code> is 10 (10%), a 
-     * difference of 5% will have a half shade of red/green, a difference of 
+     * For instance if <code>percentDiffForMaxScale</code> is 10 (10%), a
+     * difference of 5% will have a half shade of red/green, a difference of
      * 10% or more will have a maximum shade/brightness of red/green.
      * <P>
      * The chart object returned by this method uses a {@link PiePlot} instance
      * as the plot.
      * <p>
-     * Written by <a href="mailto:opensource@objectlab.co.uk">Benoit 
+     * Written by <a href="mailto:opensource@objectlab.co.uk">Benoit
      * Xhenseval</a>.
      *
      * @param title  the chart title (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param previousDataset  the dataset for the last run, this will be used 
+     * @param previousDataset  the dataset for the last run, this will be used
      *                         to compare each key in the dataset
      * @param percentDiffForMaxScale scale goes from bright red/green to black,
-     *                               percentDiffForMaxScale indicate the change 
+     *                               percentDiffForMaxScale indicate the change
      *                               required to reach top scale.
-     * @param greenForIncrease  an increase since previousDataset will be 
+     * @param greenForIncrease  an increase since previousDataset will be
      *                          displayed in green (decrease red) if true.
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param locale  the locale (<code>null</code> not permitted).
      * @param subTitle displays a subtitle with colour scheme if true
-     * @param showDifference  create a new dataset that will show the % 
-     *                        difference between the two datasets. 
+     * @param showDifference  create a new dataset that will show the %
+     *                        difference between the two datasets.
      *
      * @return A pie chart.
-     * 
+     *
      * @since 1.0.7
      */
     public static JFreeChart createPieChart(String title, PieDataset dataset,
@@ -349,7 +349,7 @@ public abstract class ChartFactory {
             if (oldValue == null) {
                 if (greenForIncrease) {
                     plot.setSectionPaint(key, Color.green);
-                } 
+                }
                 else {
                     plot.setSectionPaint(key, Color.red);
                 }
@@ -358,14 +358,14 @@ public abstract class ChartFactory {
                 }
             }
             else {
-                double percentChange = (newValue.doubleValue() 
+                double percentChange = (newValue.doubleValue()
                         / oldValue.doubleValue() - 1.0) * 100.0;
                 double shade
                     = (Math.abs(percentChange) >= percentDiffForMaxScale ? 255
                     : Math.abs(percentChange) * colorPerPercent);
-                if (greenForIncrease 
+                if (greenForIncrease
                         && newValue.doubleValue() > oldValue.doubleValue()
-                        || !greenForIncrease && newValue.doubleValue() 
+                        || !greenForIncrease && newValue.doubleValue()
                         < oldValue.doubleValue()) {
                     plot.setSectionPaint(key, new Color(0, (int) shade, 0));
                 }
@@ -384,15 +384,15 @@ public abstract class ChartFactory {
             plot.setDataset(series);
         }
 
-        JFreeChart chart =  new JFreeChart(title, 
+        JFreeChart chart =  new JFreeChart(title,
                 JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
 
         if (subTitle) {
             TextTitle subtitle = null;
-            subtitle = new TextTitle("Bright " + (greenForIncrease ? "red" 
-                    : "green") + "=change >=-" + percentDiffForMaxScale 
-                    + "%, Bright " + (!greenForIncrease ? "red" : "green") 
-                    + "=change >=+" + percentDiffForMaxScale + "%", 
+            subtitle = new TextTitle("Bright " + (greenForIncrease ? "red"
+                    : "green") + "=change >=-" + percentDiffForMaxScale
+                    + "%, Bright " + (!greenForIncrease ? "red" : "green")
+                    + "=change >=+" + percentDiffForMaxScale + "%",
                     new Font("SansSerif", Font.PLAIN, 10));
             chart.addSubtitle(subtitle);
         }
@@ -401,40 +401,40 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a pie chart with default settings that compares 2 datasets.  
+     * Creates a pie chart with default settings that compares 2 datasets.
      * The colour of each section will be determined by the move from the value
-     * for the same key in <code>previousDataset</code>. ie if value1 > value2 
-     * then the section will be in green (unless <code>greenForIncrease</code> 
-     * is <code>false</code>, in which case it would be <code>red</code>).  
-     * Each section can have a shade of red or green as the difference can be 
-     * tailored between 0% (black) and percentDiffForMaxScale% (bright 
+     * for the same key in <code>previousDataset</code>. ie if value1 > value2
+     * then the section will be in green (unless <code>greenForIncrease</code>
+     * is <code>false</code>, in which case it would be <code>red</code>).
+     * Each section can have a shade of red or green as the difference can be
+     * tailored between 0% (black) and percentDiffForMaxScale% (bright
      * red/green).
      * <p>
-     * For instance if <code>percentDiffForMaxScale</code> is 10 (10%), a 
-     * difference of 5% will have a half shade of red/green, a difference of 
+     * For instance if <code>percentDiffForMaxScale</code> is 10 (10%), a
+     * difference of 5% will have a half shade of red/green, a difference of
      * 10% or more will have a maximum shade/brightness of red/green.
      * <P>
      * The chart object returned by this method uses a {@link PiePlot} instance
      * as the plot.
      * <p>
-     * Written by <a href="mailto:opensource@objectlab.co.uk">Benoit 
+     * Written by <a href="mailto:opensource@objectlab.co.uk">Benoit
      * Xhenseval</a>.
      *
      * @param title  the chart title (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param previousDataset  the dataset for the last run, this will be used 
+     * @param previousDataset  the dataset for the last run, this will be used
      *                         to compare each key in the dataset
      * @param percentDiffForMaxScale scale goes from bright red/green to black,
-     *                               percentDiffForMaxScale indicate the change 
+     *                               percentDiffForMaxScale indicate the change
      *                               required to reach top scale.
-     * @param greenForIncrease  an increase since previousDataset will be 
+     * @param greenForIncrease  an increase since previousDataset will be
      *                          displayed in green (decrease red) if true.
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      * @param subTitle displays a subtitle with colour scheme if true
-     * @param showDifference  create a new dataset that will show the % 
-     *                        difference between the two datasets. 
+     * @param showDifference  create a new dataset that will show the %
+     *                        difference between the two datasets.
      *
      * @return A pie chart.
      */
@@ -475,7 +475,7 @@ public abstract class ChartFactory {
             if (oldValue == null) {
                 if (greenForIncrease) {
                     plot.setSectionPaint(key, Color.green);
-                } 
+                }
                 else {
                     plot.setSectionPaint(key, Color.red);
                 }
@@ -484,14 +484,14 @@ public abstract class ChartFactory {
                 }
             }
             else {
-                double percentChange = (newValue.doubleValue() 
+                double percentChange = (newValue.doubleValue()
                         / oldValue.doubleValue() - 1.0) * 100.0;
                 double shade
                     = (Math.abs(percentChange) >= percentDiffForMaxScale ? 255
                     : Math.abs(percentChange) * colorPerPercent);
-                if (greenForIncrease 
+                if (greenForIncrease
                         && newValue.doubleValue() > oldValue.doubleValue()
-                        || !greenForIncrease && newValue.doubleValue() 
+                        || !greenForIncrease && newValue.doubleValue()
                         < oldValue.doubleValue()) {
                     plot.setSectionPaint(key, new Color(0, (int) shade, 0));
                 }
@@ -510,15 +510,15 @@ public abstract class ChartFactory {
             plot.setDataset(series);
         }
 
-        JFreeChart chart =  new JFreeChart(title, 
+        JFreeChart chart =  new JFreeChart(title,
                 JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
 
         if (subTitle) {
             TextTitle subtitle = null;
-            subtitle = new TextTitle("Bright " + (greenForIncrease ? "red" 
-                    : "green") + "=change >=-" + percentDiffForMaxScale 
-                    + "%, Bright " + (!greenForIncrease ? "red" : "green") 
-                    + "=change >=+" + percentDiffForMaxScale + "%", 
+            subtitle = new TextTitle("Bright " + (greenForIncrease ? "red"
+                    : "green") + "=change >=-" + percentDiffForMaxScale
+                    + "%, Bright " + (!greenForIncrease ? "red" : "green")
+                    + "=change >=+" + percentDiffForMaxScale + "%",
                     new Font("SansSerif", Font.PLAIN, 10));
             chart.addSubtitle(subtitle);
         }
@@ -529,7 +529,7 @@ public abstract class ChartFactory {
     /**
      * Creates a ring chart with default settings.
      * <P>
-     * The chart object returned by this method uses a {@link RingPlot} 
+     * The chart object returned by this method uses a {@link RingPlot}
      * instance as the plot.
      *
      * @param title  the chart title (<code>null</code> permitted).
@@ -539,7 +539,7 @@ public abstract class ChartFactory {
      * @param locale  the locale (<code>null</code> not permitted).
      *
      * @return A ring chart.
-     * 
+     *
      * @since 1.0.7
      */
     public static JFreeChart createRingChart(String title, PieDataset dataset,
@@ -551,7 +551,7 @@ public abstract class ChartFactory {
         if (tooltips) {
             plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
                 legend);
 
     }
@@ -559,7 +559,7 @@ public abstract class ChartFactory {
     /**
      * Creates a ring chart with default settings.
      * <P>
-     * The chart object returned by this method uses a {@link RingPlot} 
+     * The chart object returned by this method uses a {@link RingPlot}
      * instance as the plot.
      *
      * @param title  the chart title (<code>null</code> permitted).
@@ -585,13 +585,13 @@ public abstract class ChartFactory {
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
                 legend);
 
     }
 
     /**
-     * Creates a chart that displays multiple pie plots.  The chart object 
+     * Creates a chart that displays multiple pie plots.  The chart object
      * returned by this method uses a {@link MultiplePiePlot} instance as the
      * plot.
      *
@@ -621,7 +621,7 @@ public abstract class ChartFactory {
         plot.setOutlineStroke(null);
 
         if (tooltips) {
-            PieToolTipGenerator tooltipGenerator 
+            PieToolTipGenerator tooltipGenerator
                 = new StandardPieToolTipGenerator();
             PiePlot pp = (PiePlot) plot.getPieChart().getPlot();
             pp.setToolTipGenerator(tooltipGenerator);
@@ -641,7 +641,7 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a 3D pie chart using the specified dataset.  The chart object 
+     * Creates a 3D pie chart using the specified dataset.  The chart object
      * returned by this method uses a {@link PiePlot3D} instance as the
      * plot.
      *
@@ -652,7 +652,7 @@ public abstract class ChartFactory {
      * @param locale  the locale (<code>null</code> not permitted).
      *
      * @return A pie chart.
-     * 
+     *
      * @since 1.0.7
      */
     public static JFreeChart createPieChart3D(String title, PieDataset dataset,
@@ -663,13 +663,13 @@ public abstract class ChartFactory {
         if (tooltips) {
             plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
                 legend);
 
     }
 
     /**
-     * Creates a 3D pie chart using the specified dataset.  The chart object 
+     * Creates a 3D pie chart using the specified dataset.  The chart object
      * returned by this method uses a {@link PiePlot3D} instance as the
      * plot.
      *
@@ -695,19 +695,19 @@ public abstract class ChartFactory {
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
                 legend);
 
     }
 
     /**
-     * Creates a chart that displays multiple pie plots.  The chart object 
+     * Creates a chart that displays multiple pie plots.  The chart object
      * returned by this method uses a {@link MultiplePiePlot} instance as the
      * plot.
      *
      * @param title  the chart title (<code>null</code> permitted).
      * @param dataset  the dataset (<code>null</code> permitted).
-     * @param order  the order that the data is extracted (by row or by column) 
+     * @param order  the order that the data is extracted (by row or by column)
      *               (<code>null</code> not permitted).
      * @param legend  include a legend?
      * @param tooltips  generate tooltips?
@@ -731,7 +731,7 @@ public abstract class ChartFactory {
         plot.setOutlineStroke(null);
 
         JFreeChart pieChart = new JFreeChart(new PiePlot3D(null));
-        TextTitle seriesTitle = new TextTitle("Series Title", 
+        TextTitle seriesTitle = new TextTitle("Series Title",
                 new Font("SansSerif", Font.BOLD, 12));
         seriesTitle.setPosition(RectangleEdge.BOTTOM);
         pieChart.setTitle(seriesTitle);
@@ -740,7 +740,7 @@ public abstract class ChartFactory {
         plot.setPieChart(pieChart);
 
         if (tooltips) {
-            PieToolTipGenerator tooltipGenerator 
+            PieToolTipGenerator tooltipGenerator
                 = new StandardPieToolTipGenerator();
             PiePlot pp = (PiePlot) plot.getPieChart().getPlot();
             pp.setToolTipGenerator(tooltipGenerator);
@@ -760,18 +760,18 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a bar chart.  The chart object returned by this method uses a 
-     * {@link CategoryPlot} instance as the plot, with a {@link CategoryAxis} 
-     * for the domain axis, a {@link NumberAxis} as the range axis, and a 
+     * Creates a bar chart.  The chart object returned by this method uses a
+     * {@link CategoryPlot} instance as the plot, with a {@link CategoryAxis}
+     * for the domain axis, a {@link NumberAxis} as the range axis, and a
      * {@link BarRenderer} as the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param categoryAxisLabel  the label for the category axis 
+     * @param categoryAxisLabel  the label for the category axis
      *                           (<code>null</code> permitted).
-     * @param valueAxisLabel  the label for the value axis 
+     * @param valueAxisLabel  the label for the value axis
      *                        (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> not permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -820,7 +820,7 @@ public abstract class ChartFactory {
                     new StandardCategoryURLGenerator());
         }
 
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, 
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
@@ -831,19 +831,19 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a stacked bar chart with default settings.  The chart object 
+     * Creates a stacked bar chart with default settings.  The chart object
      * returned by this method uses a {@link CategoryPlot} instance as the
-     * plot, with a {@link CategoryAxis} for the domain axis, a 
-     * {@link NumberAxis} as the range axis, and a {@link StackedBarRenderer} 
+     * plot, with a {@link CategoryAxis} for the domain axis, a
+     * {@link NumberAxis} as the range axis, and a {@link StackedBarRenderer}
      * as the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param domainAxisLabel  the label for the category axis 
+     * @param domainAxisLabel  the label for the category axis
      *                         (<code>null</code> permitted).
-     * @param rangeAxisLabel  the label for the value axis 
+     * @param rangeAxisLabel  the label for the value axis
      *                        (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the orientation of the chart (horizontal or 
+     * @param orientation  the orientation of the chart (horizontal or
      *                     vertical) (<code>null</code> not permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -877,7 +877,7 @@ public abstract class ChartFactory {
                     new StandardCategoryURLGenerator());
         }
 
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, 
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
@@ -888,18 +888,18 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a bar chart with a 3D effect. The chart object returned by this 
-     * method uses a {@link CategoryPlot} instance as the plot, with a 
-     * {@link CategoryAxis3D} for the domain axis, a {@link NumberAxis3D} as 
+     * Creates a bar chart with a 3D effect. The chart object returned by this
+     * method uses a {@link CategoryPlot} instance as the plot, with a
+     * {@link CategoryAxis3D} for the domain axis, a {@link NumberAxis3D} as
      * the range axis, and a {@link BarRenderer3D} as the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param categoryAxisLabel  the label for the category axis 
+     * @param categoryAxisLabel  the label for the category axis
      *                           (<code>null</code> permitted).
-     * @param valueAxisLabel  the label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> not permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -932,11 +932,11 @@ public abstract class ChartFactory {
                     new StandardCategoryURLGenerator());
         }
 
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, 
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
         plot.setOrientation(orientation);
         if (orientation == PlotOrientation.HORIZONTAL) {
-            // change rendering order to ensure that bar overlapping is the 
+            // change rendering order to ensure that bar overlapping is the
             // right way around
             plot.setRowRenderingOrder(SortOrder.DESCENDING);
             plot.setColumnRenderingOrder(SortOrder.DESCENDING);
@@ -951,19 +951,19 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a stacked bar chart with a 3D effect and default settings. The 
-     * chart object returned by this method uses a {@link CategoryPlot} 
-     * instance as the plot, with a {@link CategoryAxis3D} for the domain axis, 
-     * a {@link NumberAxis3D} as the range axis, and a 
+     * Creates a stacked bar chart with a 3D effect and default settings. The
+     * chart object returned by this method uses a {@link CategoryPlot}
+     * instance as the plot, with a {@link CategoryAxis3D} for the domain axis,
+     * a {@link NumberAxis3D} as the range axis, and a
      * {@link StackedBarRenderer3D} as the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param categoryAxisLabel  the label for the category axis 
+     * @param categoryAxisLabel  the label for the category axis
      *                           (<code>null</code> permitted).
-     * @param valueAxisLabel  the label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the orientation (horizontal or vertical) 
+     * @param orientation  the orientation (horizontal or vertical)
      *                     (<code>null</code> not permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -998,17 +998,17 @@ public abstract class ChartFactory {
         }
 
         // create the plot...
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, 
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
         plot.setOrientation(orientation);
         if (orientation == PlotOrientation.HORIZONTAL) {
-            // change rendering order to ensure that bar overlapping is the 
+            // change rendering order to ensure that bar overlapping is the
             // right way around
             plot.setColumnRenderingOrder(SortOrder.DESCENDING);
         }
 
         // create the chart...
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, 
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
 
         return chart;
@@ -1017,17 +1017,17 @@ public abstract class ChartFactory {
 
     /**
      * Creates an area chart with default settings.  The chart object returned
-     * by this method uses a {@link CategoryPlot} instance as the plot, with a 
+     * by this method uses a {@link CategoryPlot} instance as the plot, with a
      * {@link CategoryAxis} for the domain axis, a {@link NumberAxis} as the
      * range axis, and an {@link AreaRenderer} as the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param categoryAxisLabel  the label for the category axis 
+     * @param categoryAxisLabel  the label for the category axis
      *                           (<code>null</code> permitted).
-     * @param valueAxisLabel  the label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (<code>null</code> not 
+     * @param orientation  the plot orientation (<code>null</code> not
      *                     permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1062,7 +1062,7 @@ public abstract class ChartFactory {
                     new StandardCategoryURLGenerator());
         }
 
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, 
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
@@ -1073,19 +1073,19 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a stacked area chart with default settings.  The chart object 
+     * Creates a stacked area chart with default settings.  The chart object
      * returned by this method uses a {@link CategoryPlot} instance as the
-     * plot, with a {@link CategoryAxis} for the domain axis, a 
-     * {@link NumberAxis} as the range axis, and a {@link StackedAreaRenderer} 
+     * plot, with a {@link CategoryAxis} for the domain axis, a
+     * {@link NumberAxis} as the range axis, and a {@link StackedAreaRenderer}
      * as the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param categoryAxisLabel  the label for the category axis 
+     * @param categoryAxisLabel  the label for the category axis
      *                           (<code>null</code> permitted).
-     * @param valueAxisLabel  the label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> not permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1118,10 +1118,10 @@ public abstract class ChartFactory {
                     new StandardCategoryURLGenerator());
         }
 
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, 
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
         plot.setOrientation(orientation);
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, 
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
 
         return chart;
@@ -1129,18 +1129,18 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a line chart with default settings.  The chart object returned 
-     * by this method uses a {@link CategoryPlot} instance as the plot, with a 
-     * {@link CategoryAxis} for the domain axis, a {@link NumberAxis} as the 
+     * Creates a line chart with default settings.  The chart object returned
+     * by this method uses a {@link CategoryPlot} instance as the plot, with a
+     * {@link CategoryAxis} for the domain axis, a {@link NumberAxis} as the
      * range axis, and a {@link LineAndShapeRenderer} as the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param categoryAxisLabel  the label for the category axis 
+     * @param categoryAxisLabel  the label for the category axis
      *                           (<code>null</code> permitted).
-     * @param valueAxisLabel  the label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the chart orientation (horizontal or vertical) 
+     * @param orientation  the chart orientation (horizontal or vertical)
      *                     (<code>null</code> not permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1172,7 +1172,7 @@ public abstract class ChartFactory {
             renderer.setBaseItemURLGenerator(
                     new StandardCategoryURLGenerator());
         }
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, 
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
@@ -1183,18 +1183,18 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a line chart with default settings. The chart object returned by 
-     * this method uses a {@link CategoryPlot} instance as the plot, with a 
-     * {@link CategoryAxis3D} for the domain axis, a {@link NumberAxis3D} as 
+     * Creates a line chart with default settings. The chart object returned by
+     * this method uses a {@link CategoryPlot} instance as the plot, with a
+     * {@link CategoryAxis3D} for the domain axis, a {@link NumberAxis3D} as
      * the range axis, and a {@link LineRenderer3D} as the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param categoryAxisLabel  the label for the category axis 
+     * @param categoryAxisLabel  the label for the category axis
      *                           (<code>null</code> permitted).
-     * @param valueAxisLabel  the label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the chart orientation (horizontal or vertical) 
+     * @param orientation  the chart orientation (horizontal or vertical)
      *                     (<code>null</code> not permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1226,7 +1226,7 @@ public abstract class ChartFactory {
             renderer.setBaseItemURLGenerator(
                     new StandardCategoryURLGenerator());
         }
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, 
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
@@ -1237,16 +1237,16 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a Gantt chart using the supplied attributes plus default values 
-     * where required.  The chart object returned by this method uses a 
-     * {@link CategoryPlot} instance as the plot, with a {@link CategoryAxis} 
-     * for the domain axis, a {@link DateAxis} as the range axis, and a 
+     * Creates a Gantt chart using the supplied attributes plus default values
+     * where required.  The chart object returned by this method uses a
+     * {@link CategoryPlot} instance as the plot, with a {@link CategoryAxis}
+     * for the domain axis, a {@link DateAxis} as the range axis, and a
      * {@link GanttRenderer} as the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param categoryAxisLabel  the label for the category axis 
+     * @param categoryAxisLabel  the label for the category axis
      *                           (<code>null</code> permitted).
-     * @param dateAxisLabel  the label for the date axis 
+     * @param dateAxisLabel  the label for the date axis
      *                       (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -1277,7 +1277,7 @@ public abstract class ChartFactory {
                     new StandardCategoryURLGenerator());
         }
 
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, dateAxis, 
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, dateAxis,
                 renderer);
         plot.setOrientation(PlotOrientation.HORIZONTAL);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
@@ -1288,18 +1288,18 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a waterfall chart.  The chart object returned by this method 
-     * uses a {@link CategoryPlot} instance as the plot, with a 
+     * Creates a waterfall chart.  The chart object returned by this method
+     * uses a {@link CategoryPlot} instance as the plot, with a
      * {@link CategoryAxis} for the domain axis, a {@link NumberAxis} as the
      * range axis, and a {@link WaterfallBarRenderer} as the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param categoryAxisLabel  the label for the category axis 
+     * @param categoryAxisLabel  the label for the category axis
      *                           (<code>null</code> permitted).
-     * @param valueAxisLabel  the label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1327,20 +1327,20 @@ public abstract class ChartFactory {
         WaterfallBarRenderer renderer = new WaterfallBarRenderer();
         if (orientation == PlotOrientation.HORIZONTAL) {
             ItemLabelPosition position = new ItemLabelPosition(
-                    ItemLabelAnchor.CENTER, TextAnchor.CENTER, 
+                    ItemLabelAnchor.CENTER, TextAnchor.CENTER,
                     TextAnchor.CENTER, Math.PI / 2.0);
             renderer.setBasePositiveItemLabelPosition(position);
             renderer.setBaseNegativeItemLabelPosition(position);
          }
         else if (orientation == PlotOrientation.VERTICAL) {
             ItemLabelPosition position = new ItemLabelPosition(
-                    ItemLabelAnchor.CENTER, TextAnchor.CENTER, 
+                    ItemLabelAnchor.CENTER, TextAnchor.CENTER,
                     TextAnchor.CENTER, 0.0);
             renderer.setBasePositiveItemLabelPosition(position);
             renderer.setBaseNegativeItemLabelPosition(position);
         }
         if (tooltips) {
-            StandardCategoryToolTipGenerator generator 
+            StandardCategoryToolTipGenerator generator
                 = new StandardCategoryToolTipGenerator();
             renderer.setBaseToolTipGenerator(generator);
         }
@@ -1349,14 +1349,14 @@ public abstract class ChartFactory {
                     new StandardCategoryURLGenerator());
         }
 
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, 
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
         plot.clearRangeMarkers();
         Marker baseline = new ValueMarker(0.0);
         baseline.setPaint(Color.black);
         plot.addRangeMarker(baseline, Layer.FOREGROUND);
         plot.setOrientation(orientation);
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, 
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
 
         return chart;
@@ -1364,9 +1364,9 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a polar plot for the specified dataset (x-values interpreted as 
-     * angles in degrees).  The chart object returned by this method uses a 
-     * {@link PolarPlot} instance as the plot, with a {@link NumberAxis} for 
+     * Creates a polar plot for the specified dataset (x-values interpreted as
+     * angles in degrees).  The chart object returned by this method uses a
+     * {@link PolarPlot} instance as the plot, with a {@link NumberAxis} for
      * the radial axis.
      *
      * @param title  the chart title (<code>null</code> permitted).
@@ -1398,17 +1398,17 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a scatter plot with default settings.  The chart object 
-     * returned by this method uses an {@link XYPlot} instance as the plot, 
-     * with a {@link NumberAxis} for the domain axis, a  {@link NumberAxis} 
-     * as the range axis, and an {@link XYLineAndShapeRenderer} as the 
+     * Creates a scatter plot with default settings.  The chart object
+     * returned by this method uses an {@link XYPlot} instance as the plot,
+     * with a {@link NumberAxis} for the domain axis, a  {@link NumberAxis}
+     * as the range axis, and an {@link XYLineAndShapeRenderer} as the
      * renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
      * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1455,8 +1455,8 @@ public abstract class ChartFactory {
      * Creates and returns a default instance of an XY bar chart.
      * <P>
      * The chart object returned by this method uses an {@link XYPlot} instance
-     * as the plot, with a {@link DateAxis} for the domain axis, a 
-     * {@link NumberAxis} as the range axis, and a {@link XYBarRenderer} as the 
+     * as the plot, with a {@link DateAxis} for the domain axis, a
+     * {@link NumberAxis} as the range axis, and a {@link XYBarRenderer} as the
      * renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
@@ -1464,7 +1464,7 @@ public abstract class ChartFactory {
      * @param dateAxis  make the domain axis display dates?
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the orientation (horizontal or vertical) 
+     * @param orientation  the orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1524,16 +1524,16 @@ public abstract class ChartFactory {
     /**
      * Creates an area chart using an {@link XYDataset}.
      * <P>
-     * The chart object returned by this method uses an {@link XYPlot} instance 
-     * as the plot, with a {@link NumberAxis} for the domain axis, a 
-     * {@link NumberAxis} as the range axis, and a {@link XYAreaRenderer} as 
+     * The chart object returned by this method uses an {@link XYPlot} instance
+     * as the plot, with a {@link NumberAxis} for the domain axis, a
+     * {@link NumberAxis} as the range axis, and a {@link XYAreaRenderer} as
      * the renderer.
      *
      * @param title  the chart title (<code>null</code> permitted).
      * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1581,8 +1581,8 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a stacked XY area plot.  The chart object returned by this 
-     * method uses an {@link XYPlot} instance as the plot, with a 
+     * Creates a stacked XY area plot.  The chart object returned by this
+     * method uses an {@link XYPlot} instance as the plot, with a
      * {@link NumberAxis} for the domain axis, a {@link NumberAxis} as the
      * range axis, and a {@link StackedXYAreaRenderer2} as the renderer.
      *
@@ -1590,7 +1590,7 @@ public abstract class ChartFactory {
      * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1639,14 +1639,14 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a line chart (based on an {@link XYDataset}) with default 
+     * Creates a line chart (based on an {@link XYDataset}) with default
      * settings.
      *
      * @param title  the chart title (<code>null</code> permitted).
      * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1693,7 +1693,7 @@ public abstract class ChartFactory {
      * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1726,7 +1726,7 @@ public abstract class ChartFactory {
         if (urls) {
             urlGenerator = new StandardXYURLGenerator();
         }
-        XYItemRenderer renderer 
+        XYItemRenderer renderer
             = new XYStepRenderer(toolTipGenerator, urlGenerator);
 
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, null);
@@ -1747,7 +1747,7 @@ public abstract class ChartFactory {
      * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -1781,7 +1781,7 @@ public abstract class ChartFactory {
             urlGenerator = new StandardXYURLGenerator();
         }
         XYItemRenderer renderer = new XYStepAreaRenderer(
-                XYStepAreaRenderer.AREA_AND_SHAPES, toolTipGenerator, 
+                XYStepAreaRenderer.AREA_AND_SHAPES, toolTipGenerator,
                 urlGenerator);
 
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, null);
@@ -1795,18 +1795,18 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates and returns a time series chart.  A time series chart is an 
-     * {@link XYPlot} with a {@link DateAxis} for the x-axis and a 
+     * Creates and returns a time series chart.  A time series chart is an
+     * {@link XYPlot} with a {@link DateAxis} for the x-axis and a
      * {@link NumberAxis} for the y-axis.  The default renderer is an
      * {@link XYLineAndShapeRenderer}.
      * <P>
-     * A convenient dataset to use with this chart is a 
+     * A convenient dataset to use with this chart is a
      * {@link org.jfree.data.time.TimeSeriesCollection}.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param timeAxisLabel  a label for the time axis (<code>null</code> 
+     * @param timeAxisLabel  a label for the time axis (<code>null</code>
      *                       permitted).
-     * @param valueAxisLabel  a label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  a label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -1824,7 +1824,7 @@ public abstract class ChartFactory {
                                                    boolean urls) {
 
         ValueAxis timeAxis = new DateAxis(timeAxisLabel);
-        timeAxis.setLowerMargin(0.02);  // reduce the default margins 
+        timeAxis.setLowerMargin(0.02);  // reduce the default margins
         timeAxis.setUpperMargin(0.02);
         NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
         valueAxis.setAutoRangeIncludesZero(false);  // override default
@@ -1832,7 +1832,7 @@ public abstract class ChartFactory {
 
         XYToolTipGenerator toolTipGenerator = null;
         if (tooltips) {
-            toolTipGenerator 
+            toolTipGenerator
                 = StandardXYToolTipGenerator.getTimeSeriesInstance();
         }
 
@@ -1841,12 +1841,12 @@ public abstract class ChartFactory {
             urlGenerator = new StandardXYURLGenerator();
         }
 
-        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true, 
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true,
                 false);
         renderer.setBaseToolTipGenerator(toolTipGenerator);
         renderer.setURLGenerator(urlGenerator);
         plot.setRenderer(renderer);
-        
+
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
         return chart;
@@ -1857,9 +1857,9 @@ public abstract class ChartFactory {
      * Creates and returns a default instance of a candlesticks chart.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param timeAxisLabel  a label for the time axis (<code>null</code> 
+     * @param timeAxisLabel  a label for the time axis (<code>null</code>
      *                       permitted).
-     * @param valueAxisLabel  a label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  a label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -1886,9 +1886,9 @@ public abstract class ChartFactory {
      * Creates and returns a default instance of a high-low-open-close chart.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param timeAxisLabel  a label for the time axis (<code>null</code> 
+     * @param timeAxisLabel  a label for the time axis (<code>null</code>
      *                       permitted).
-     * @param valueAxisLabel  a label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  a label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -1913,16 +1913,16 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates and returns a default instance of a high-low-open-close chart 
-     * with a special timeline. This timeline can be a 
-     * {@link org.jfree.chart.axis.SegmentedTimeline} such as the Monday 
+     * Creates and returns a default instance of a high-low-open-close chart
+     * with a special timeline. This timeline can be a
+     * {@link org.jfree.chart.axis.SegmentedTimeline} such as the Monday
      * through Friday timeline that will remove Saturdays and Sundays from
      * the axis.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param timeAxisLabel  a label for the time axis (<code>null</code> 
+     * @param timeAxisLabel  a label for the time axis (<code>null</code>
      *                       permitted).
-     * @param valueAxisLabel  a label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  a label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param timeline  the timeline.
@@ -1959,7 +1959,7 @@ public abstract class ChartFactory {
      * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
-     * @param orientation  the orientation (horizontal or vertical) 
+     * @param orientation  the orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
@@ -2005,15 +2005,15 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a histogram chart.  This chart is constructed with an 
-     * {@link XYPlot} using an {@link XYBarRenderer}.  The domain and range 
+     * Creates a histogram chart.  This chart is constructed with an
+     * {@link XYPlot} using an {@link XYBarRenderer}.  The domain and range
      * axes are {@link NumberAxis} instances.
      *
      * @param title  the chart title (<code>null</code> permitted).
      * @param xAxisLabel  the x axis label (<code>null</code> permitted).
      * @param yAxisLabel  the y axis label (<code>null</code> permitted).
      * @param dataset  the dataset (<code>null</code> permitted).
-     * @param orientation  the orientation (horizontal or vertical) 
+     * @param orientation  the orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  create a legend?
      * @param tooltips  display tooltips?
@@ -2058,41 +2058,41 @@ public abstract class ChartFactory {
      * based on data from a {@link BoxAndWhiskerCategoryDataset}.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param categoryAxisLabel  a label for the category axis 
+     * @param categoryAxisLabel  a label for the category axis
      *     (<code>null</code> permitted).
-     * @param valueAxisLabel  a label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  a label for the value axis (<code>null</code>
      *     permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      *
      * @return A box and whisker chart.
-     * 
+     *
      * @since 1.0.4
      */
     public static JFreeChart createBoxAndWhiskerChart(String title,
             String categoryAxisLabel, String valueAxisLabel,
             BoxAndWhiskerCategoryDataset dataset, boolean legend) {
-        
+
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
         valueAxis.setAutoRangeIncludesZero(false);
-        
+
         BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
         renderer.setBaseToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
-           
-        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, 
+
+        CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
                 legend);
-    } 
+    }
 
     /**
      * Creates and returns a default instance of a box and whisker chart.
      *
      * @param title  the chart title (<code>null</code> permitted).
-     * @param timeAxisLabel  a label for the time axis (<code>null</code> 
+     * @param timeAxisLabel  a label for the time axis (<code>null</code>
      *                       permitted).
-     * @param valueAxisLabel  a label for the value axis (<code>null</code> 
+     * @param valueAxisLabel  a label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -2110,7 +2110,7 @@ public abstract class ChartFactory {
         valueAxis.setAutoRangeIncludesZero(false);
         XYBoxAndWhiskerRenderer renderer = new XYBoxAndWhiskerRenderer(10.0);
         XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, renderer);
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, 
+        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
                 legend);
 
     }
@@ -2161,7 +2161,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title (<code>null</code> permitted).
      * @param dataset  the dataset (<code>null</code> permitted).
-     * @param orientation  the plot orientation (horizontal or vertical) 
+     * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted.
      * @param legend  display a legend?
      * @param tooltips  generate tooltips?
