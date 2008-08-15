@@ -1,5 +1,12 @@
 2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/plot/PiePlot.java
+    (clearSectionPaints): New method,
+    (clearSectionOutlinePaints): Likewise,
+    (clearSectionOutlineStrokes): Likewise.
+
+2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/axis/SymbolAxis.java
     (drawGridBandsHorizontal): Use gridBandAlternatePaint,
     (drawGridBandsVertical): Likewise.

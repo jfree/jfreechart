@@ -154,6 +154,7 @@
  * 31-Mar-2008 : Added quad and cubic curve label link lines - see patch
  *               1891849 by Martin Hilpert (DG);
  * 02-Jul-2008 : Added autoPopulate flags (DG);
+ * 15-Aug-2008 : Added methods to clear section attributes (DG);
  *
  */
 
@@ -1004,6 +1005,25 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
+     * Clears the section paint settings for this plot and, if requested, sends
+     * a {@link PlotChangeEvent} to all registered listeners.  Be aware that
+     * if the <code>autoPopulateSectionPaint</code> flag is set, the section
+     * paints may be repopulated using the same colours as before.
+     *
+     * @param notify  notify listeners?
+     *
+     * @since 1.0.11
+     *
+     * @see #autoPopulateSectionPaint
+     */
+    public void clearSectionPaints(boolean notify) {
+    	this.sectionPaintMap.clear();
+    	if (notify) {
+            fireChangeEvent();
+    	}
+    }
+
+    /**
      * Returns the base section paint.  This is used when no other paint is
      * defined, which is rare.  The default value is <code>Color.gray</code>.
      *
@@ -1201,6 +1221,25 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
+     * Clears the section outline paint settings for this plot and, if
+     * requested, sends a {@link PlotChangeEvent} to all registered listeners.
+     * Be aware that if the <code>autoPopulateSectionPaint</code> flag is set,
+     * the section paints may be repopulated using the same colours as before.
+     *
+     * @param notify  notify listeners?
+     *
+     * @since 1.0.11
+     *
+     * @see #autoPopulateSectionOutlinePaint
+     */
+    public void clearSectionOutlinePaints(boolean notify) {
+    	this.sectionOutlinePaintMap.clear();
+    	if (notify) {
+            fireChangeEvent();
+    	}
+    }
+
+    /**
      * Returns the base section paint.  This is used when no other paint is
      * available.
      *
@@ -1368,6 +1407,25 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         // null argument check delegated...
         this.sectionOutlineStrokeMap.put(key, stroke);
         fireChangeEvent();
+    }
+
+    /**
+     * Clears the section outline stroke settings for this plot and, if
+     * requested, sends a {@link PlotChangeEvent} to all registered listeners.
+     * Be aware that if the <code>autoPopulateSectionPaint</code> flag is set,
+     * the section paints may be repopulated using the same colours as before.
+     *
+     * @param notify  notify listeners?
+     *
+     * @since 1.0.11
+     *
+     * @see #autoPopulateSectionOutlineStroke
+     */
+    public void clearSectionOutlineStrokes(boolean notify) {
+    	this.sectionOutlineStrokeMap.clear();
+    	if (notify) {
+            fireChangeEvent();
+    	}
     }
 
     /**
