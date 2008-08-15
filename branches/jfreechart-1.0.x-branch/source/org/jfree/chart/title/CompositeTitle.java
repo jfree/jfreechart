@@ -245,5 +245,4 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
         this.backgroundPaint = SerialUtilities.readPaint(stream);
     }
 
-
 }
