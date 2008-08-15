@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------
@@ -36,27 +36,27 @@
  *
  * Changes
  * -------
- * 11-Dec-2001 : Version 1.  The JPEG method comes from Wolfgang Irler's 
+ * 11-Dec-2001 : Version 1.  The JPEG method comes from Wolfgang Irler's
  *               JFreeChartServletDemo class (DG);
- * 23-Jan-2002 : Changed saveChartAsXXX() methods to pass IOExceptions back to 
+ * 23-Jan-2002 : Changed saveChartAsXXX() methods to pass IOExceptions back to
  *               caller (DG);
  * 26-Jun-2002 : Added image map methods (DG);
  * 05-Aug-2002 : Added writeBufferedImage methods
- *               Modified writeImageMap method to support flexible image 
+ *               Modified writeImageMap method to support flexible image
  *               maps (RA);
- * 26-Aug-2002 : Added saveChartAsJPEG and writeChartAsJPEG methods with info 
+ * 26-Aug-2002 : Added saveChartAsJPEG and writeChartAsJPEG methods with info
  *               objects (RA);
  * 05-Sep-2002 : Added writeImageMap() method to support OverLIB
  *               - http://www.bosrup.com/web/overlib (RA);
  * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 17-Oct-2002 : Exposed JPEG quality setting and PNG compression level as 
+ * 17-Oct-2002 : Exposed JPEG quality setting and PNG compression level as
  *               parameters (DG);
  * 25-Oct-2002 : Fixed writeChartAsJPEG() empty method bug (DG);
- * 13-Mar-2003 : Updated writeImageMap method as suggested by Xavier Poinsard 
+ * 13-Mar-2003 : Updated writeImageMap method as suggested by Xavier Poinsard
  *               (see Feature Request 688079) (DG);
- * 12-Aug-2003 : Added support for custom image maps using 
+ * 12-Aug-2003 : Added support for custom image maps using
  *               ToolTipTagFragmentGenerator and URLTagFragmentGenerator (RA);
- * 02-Sep-2003 : Separated PNG encoding from writing chart to an 
+ * 02-Sep-2003 : Separated PNG encoding from writing chart to an
  *               OutputStream (RA);
  * 04-Dec-2003 : Chart draw() method modified to include anchor point (DG);
  * 20-Feb-2004 : Edited Javadocs and added argument checking (DG);
@@ -64,11 +64,11 @@
  * 01-Aug-2004 : Modified to use EncoderUtil for all image encoding (RA);
  * 02-Aug-2004 : Delegated image map related functionality to ImageMapUtil (RA);
  * 13-Jan-2005 : Renamed ImageMapUtil --> ImageMapUtilities, removed method
- *               writeImageMap(PrintWriter, String, ChartRenderingInfo) which 
+ *               writeImageMap(PrintWriter, String, ChartRenderingInfo) which
  *               exists in ImageMapUtilities (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 06-Feb-2006 : API doc update (DG);
- * 19-Mar-2007 : Use try-finally to close output stream in saveChartAsXXX() 
+ * 19-Mar-2007 : Use try-finally to close output stream in saveChartAsXXX()
  *               methods (DG);
  * 10-Jan-2008 : Fix bug 1868251 - don't create image with transparency when
  *               saving to JPEG format (DG);
@@ -98,10 +98,10 @@ import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
 
 /**
- * A collection of utility methods for JFreeChart.  Includes methods for 
- * converting charts to image formats (PNG and JPEG) plus creating simple HTML 
+ * A collection of utility methods for JFreeChart.  Includes methods for
+ * converting charts to image formats (PNG and JPEG) plus creating simple HTML
  * image maps.
- * 
+ *
  * @see ImageMapUtilities
  */
 public abstract class ChartUtilities {
@@ -137,19 +137,19 @@ public abstract class ChartUtilities {
      * @throws IOException if there are any I/O errors.
      */
     public static void writeChartAsPNG(OutputStream out, JFreeChart chart,
-            int width, int height, boolean encodeAlpha, int compression) 
+            int width, int height, boolean encodeAlpha, int compression)
             throws IOException {
 
         // defer argument checking...
-        ChartUtilities.writeChartAsPNG(out, chart, width, height, null, 
+        ChartUtilities.writeChartAsPNG(out, chart, width, height, null,
                 encodeAlpha, compression);
 
     }
 
     /**
-     * Writes a chart to an output stream in PNG format.  This method allows 
-     * you to pass in a {@link ChartRenderingInfo} object, to collect 
-     * information about the chart dimensions/entities.  You will need this 
+     * Writes a chart to an output stream in PNG format.  This method allows
+     * you to pass in a {@link ChartRenderingInfo} object, to collect
+     * information about the chart dimensions/entities.  You will need this
      * info if you want to create an HTML image map.
      *
      * @param out  the output stream (<code>null</code> not permitted).
@@ -161,28 +161,28 @@ public abstract class ChartUtilities {
      * @throws IOException if there are any I/O errors.
      */
     public static void writeChartAsPNG(OutputStream out, JFreeChart chart,
-            int width, int height,  ChartRenderingInfo info) 
+            int width, int height,  ChartRenderingInfo info)
             throws IOException {
 
         if (chart == null) {
             throw new IllegalArgumentException("Null 'chart' argument.");
         }
-        BufferedImage bufferedImage 
+        BufferedImage bufferedImage
                 = chart.createBufferedImage(width, height, info);
         EncoderUtil.writeBufferedImage(bufferedImage, ImageFormat.PNG, out);
     }
 
     /**
-     * Writes a chart to an output stream in PNG format.  This method allows 
-     * you to pass in a {@link ChartRenderingInfo} object, to collect 
-     * information about the chart dimensions/entities.  You will need this 
+     * Writes a chart to an output stream in PNG format.  This method allows
+     * you to pass in a {@link ChartRenderingInfo} object, to collect
+     * information about the chart dimensions/entities.  You will need this
      * info if you want to create an HTML image map.
      *
      * @param out  the output stream (<code>null</code> not permitted).
      * @param chart  the chart (<code>null</code> not permitted).
      * @param width  the image width.
      * @param height  the image height.
-     * @param info  carries back chart rendering info (<code>null</code> 
+     * @param info  carries back chart rendering info (<code>null</code>
      *              permitted).
      * @param encodeAlpha  encode alpha?
      * @param compression  the PNG compression level (0-9).
@@ -199,9 +199,9 @@ public abstract class ChartUtilities {
         if (chart == null) {
             throw new IllegalArgumentException("Null 'chart' argument.");
         }
-        BufferedImage chartImage = chart.createBufferedImage(width, height, 
+        BufferedImage chartImage = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_ARGB, info);
-        ChartUtilities.writeBufferedImageAsPNG(out, chartImage, encodeAlpha, 
+        ChartUtilities.writeBufferedImageAsPNG(out, chartImage, encodeAlpha,
                 compression);
 
     }
@@ -243,20 +243,20 @@ public abstract class ChartUtilities {
         double scaleX = desiredWidth / defaultWidth;
         double scaleY = desiredHeight / defaultHeight;
 
-        BufferedImage image = new BufferedImage((int) desiredWidth, 
+        BufferedImage image = new BufferedImage((int) desiredWidth,
                 (int) desiredHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = image.createGraphics();
 
         if (scale) {
             AffineTransform saved = g2.getTransform();
             g2.transform(AffineTransform.getScaleInstance(scaleX, scaleY));
-            chart.draw(g2, new Rectangle2D.Double(0, 0, defaultWidth, 
+            chart.draw(g2, new Rectangle2D.Double(0, 0, defaultWidth,
                     defaultHeight), null, null);
             g2.setTransform(saved);
             g2.dispose();
         }
         else {
-            chart.draw(g2, new Rectangle2D.Double(0, 0, defaultWidth, 
+            chart.draw(g2, new Rectangle2D.Double(0, 0, defaultWidth,
                     defaultHeight), null, null);
         }
         out.write(encodeAsPNG(image));
@@ -282,9 +282,9 @@ public abstract class ChartUtilities {
     }
 
     /**
-     * Saves a chart to a file in PNG format.  This method allows you to pass 
-     * in a {@link ChartRenderingInfo} object, to collect information about the 
-     * chart dimensions/entities.  You will need this info if you want to 
+     * Saves a chart to a file in PNG format.  This method allows you to pass
+     * in a {@link ChartRenderingInfo} object, to collect information about the
+     * chart dimensions/entities.  You will need this info if you want to
      * create an HTML image map.
      *
      * @param file  the file (<code>null</code> not permitted).
@@ -296,7 +296,7 @@ public abstract class ChartUtilities {
      * @throws IOException if there are any I/O errors.
      */
     public static void saveChartAsPNG(File file, JFreeChart chart,
-            int width, int height, ChartRenderingInfo info) 
+            int width, int height, ChartRenderingInfo info)
         throws IOException {
 
         if (file == null) {
@@ -312,9 +312,9 @@ public abstract class ChartUtilities {
     }
 
     /**
-     * Saves a chart to a file in PNG format.  This method allows you to pass 
-     * in a {@link ChartRenderingInfo} object, to collect information about the 
-     * chart dimensions/entities.  You will need this info if you want to 
+     * Saves a chart to a file in PNG format.  This method allows you to pass
+     * in a {@link ChartRenderingInfo} object, to collect information about the
+     * chart dimensions/entities.  You will need this info if you want to
      * create an HTML image map.
      *
      * @param file  the file (<code>null</code> not permitted).
@@ -340,7 +340,7 @@ public abstract class ChartUtilities {
 
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
-            writeChartAsPNG(out, chart, width, height, info, encodeAlpha, 
+            writeChartAsPNG(out, chart, width, height, info, encodeAlpha,
                     compression);
         }
         finally {
@@ -352,7 +352,7 @@ public abstract class ChartUtilities {
     /**
      * Writes a chart to an output stream in JPEG format.  Please note that
      * JPEG is a poor format for chart images, use PNG if possible.
-     * 
+     *
      * @param out  the output stream (<code>null</code> not permitted).
      * @param chart  the chart (<code>null</code> not permitted).
      * @param width  the image width.
@@ -384,15 +384,15 @@ public abstract class ChartUtilities {
             JFreeChart chart, int width, int height) throws IOException {
 
         // defer argument checking...
-        ChartUtilities.writeChartAsJPEG(out, quality, chart, width, height, 
+        ChartUtilities.writeChartAsJPEG(out, quality, chart, width, height,
                 null);
 
     }
 
     /**
-     * Writes a chart to an output stream in JPEG format. This method allows 
-     * you to pass in a {@link ChartRenderingInfo} object, to collect 
-     * information about the chart dimensions/entities.  You will need this 
+     * Writes a chart to an output stream in JPEG format. This method allows
+     * you to pass in a {@link ChartRenderingInfo} object, to collect
+     * information about the chart dimensions/entities.  You will need this
      * info if you want to create an HTML image map.
      *
      * @param out  the output stream (<code>null</code> not permitted).
@@ -404,22 +404,22 @@ public abstract class ChartUtilities {
      * @throws IOException if there are any I/O errors.
      */
     public static void writeChartAsJPEG(OutputStream out, JFreeChart chart,
-            int width, int height, ChartRenderingInfo info) 
+            int width, int height, ChartRenderingInfo info)
             throws IOException {
 
         if (chart == null) {
             throw new IllegalArgumentException("Null 'chart' argument.");
         }
-        BufferedImage image = chart.createBufferedImage(width, height, 
+        BufferedImage image = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB, info);
         EncoderUtil.writeBufferedImage(image, ImageFormat.JPEG, out);
 
     }
 
     /**
-     * Writes a chart to an output stream in JPEG format.  This method allows 
-     * you to pass in a {@link ChartRenderingInfo} object, to collect 
-     * information about the chart dimensions/entities.  You will need this 
+     * Writes a chart to an output stream in JPEG format.  This method allows
+     * you to pass in a {@link ChartRenderingInfo} object, to collect
+     * information about the chart dimensions/entities.  You will need this
      * info if you want to create an HTML image map.
      *
      * @param out  the output stream (<code>null</code> not permitted).
@@ -432,13 +432,13 @@ public abstract class ChartUtilities {
      * @throws IOException if there are any I/O errors.
      */
     public static void writeChartAsJPEG(OutputStream out, float quality,
-            JFreeChart chart, int width, int height, ChartRenderingInfo info) 
+            JFreeChart chart, int width, int height, ChartRenderingInfo info)
             throws IOException {
 
         if (chart == null) {
             throw new IllegalArgumentException("Null 'chart' argument.");
         }
-        BufferedImage image = chart.createBufferedImage(width, height, 
+        BufferedImage image = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB, info);
         EncoderUtil.writeBufferedImage(image, ImageFormat.JPEG, out, quality);
 
@@ -482,9 +482,9 @@ public abstract class ChartUtilities {
     }
 
     /**
-     * Saves a chart to a file in JPEG format.  This method allows you to pass 
-     * in a {@link ChartRenderingInfo} object, to collect information about the 
-     * chart dimensions/entities.  You will need this info if you want to 
+     * Saves a chart to a file in JPEG format.  This method allows you to pass
+     * in a {@link ChartRenderingInfo} object, to collect information about the
+     * chart dimensions/entities.  You will need this info if you want to
      * create an HTML image map.
      *
      * @param file  the file name (<code>null</code> not permitted).
@@ -515,9 +515,9 @@ public abstract class ChartUtilities {
     }
 
     /**
-     * Saves a chart to a file in JPEG format.  This method allows you to pass 
-     * in a {@link ChartRenderingInfo} object, to collect information about the 
-     * chart dimensions/entities.  You will need this info if you want to 
+     * Saves a chart to a file in JPEG format.  This method allows you to pass
+     * in a {@link ChartRenderingInfo} object, to collect information about the
+     * chart dimensions/entities.  You will need this info if you want to
      * create an HTML image map.
      *
      * @param file  the file name (<code>null</code> not permitted).
@@ -539,7 +539,7 @@ public abstract class ChartUtilities {
         if (chart == null) {
             throw new IllegalArgumentException("Null 'chart' argument.");
         }
-        
+
         OutputStream out = new BufferedOutputStream(new FileOutputStream(
                 file));
         try {
@@ -559,7 +559,7 @@ public abstract class ChartUtilities {
      *
      * @throws IOException if there are any I/O errors.
      */
-    public static void writeBufferedImageAsJPEG(OutputStream out, 
+    public static void writeBufferedImageAsJPEG(OutputStream out,
             BufferedImage image) throws IOException {
 
         // defer argument checking...
@@ -591,7 +591,7 @@ public abstract class ChartUtilities {
      *
      * @throws IOException if there are any I/O errors.
      */
-    public static void writeBufferedImageAsPNG(OutputStream out, 
+    public static void writeBufferedImageAsPNG(OutputStream out,
             BufferedImage image) throws IOException {
 
         EncoderUtil.writeBufferedImage(image, ImageFormat.PNG, out);
@@ -609,10 +609,10 @@ public abstract class ChartUtilities {
      * @throws IOException if there are any I/O errors.
      */
     public static void writeBufferedImageAsPNG(OutputStream out,
-            BufferedImage image, boolean encodeAlpha, int compression) 
+            BufferedImage image, boolean encodeAlpha, int compression)
             throws IOException {
 
-        EncoderUtil.writeBufferedImage(image, ImageFormat.PNG, out, 
+        EncoderUtil.writeBufferedImage(image, ImageFormat.PNG, out,
                 compression, encodeAlpha);
     }
 
@@ -622,7 +622,7 @@ public abstract class ChartUtilities {
      * @param image  the image (<code>null</code> not permitted).
      *
      * @return A byte array in PNG format.
-     * 
+     *
      * @throws IOException if there is an I/O problem.
      */
     public static byte[] encodeAsPNG(BufferedImage image) throws IOException {
@@ -637,13 +637,13 @@ public abstract class ChartUtilities {
      * @param compression  the PNG compression level (0-9).
      *
      * @return The byte array in PNG format.
-     * 
+     *
      * @throws IOException if there is an I/O problem.
      */
-    public static byte[] encodeAsPNG(BufferedImage image, boolean encodeAlpha, 
-                                     int compression) 
+    public static byte[] encodeAsPNG(BufferedImage image, boolean encodeAlpha,
+                                     int compression)
             throws IOException {
-        return EncoderUtil.encode(image, ImageFormat.PNG, compression, 
+        return EncoderUtil.encode(image, ImageFormat.PNG, compression,
                 encodeAlpha);
     }
 
@@ -661,20 +661,20 @@ public abstract class ChartUtilities {
     public static void writeImageMap(PrintWriter writer,
                                      String name,
                                      ChartRenderingInfo info,
-                                     boolean useOverLibForToolTips) 
+                                     boolean useOverLibForToolTips)
         throws IOException {
 
         ToolTipTagFragmentGenerator toolTipTagFragmentGenerator = null;
         if (useOverLibForToolTips) {
-            toolTipTagFragmentGenerator 
+            toolTipTagFragmentGenerator
                     = new OverLIBToolTipTagFragmentGenerator();
         }
         else {
-            toolTipTagFragmentGenerator 
+            toolTipTagFragmentGenerator
                     = new StandardToolTipTagFragmentGenerator();
         }
-        ImageMapUtilities.writeImageMap(writer, name, info, 
-                toolTipTagFragmentGenerator, 
+        ImageMapUtilities.writeImageMap(writer, name, info,
+                toolTipTagFragmentGenerator,
                 new StandardURLTagFragmentGenerator());
 
     }
@@ -686,28 +686,28 @@ public abstract class ChartUtilities {
      * @param name  the map name (<code>null</code> not permitted).
      * @param info  the chart rendering info (<code>null</code> not permitted).
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
-     *     that will contain the tooltip text (<code>null</code> not permitted 
+     *     that will contain the tooltip text (<code>null</code> not permitted
      *     if <code>info</code> contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
-     *     will contain the URL reference (<code>null</code> not permitted if 
+     *     will contain the URL reference (<code>null</code> not permitted if
      *     <code>info</code> contains URLs).
      *
      * @throws IOException if there are any I/O errors.
      */
-    public static void writeImageMap(PrintWriter writer, String name, 
-            ChartRenderingInfo info, 
+    public static void writeImageMap(PrintWriter writer, String name,
+            ChartRenderingInfo info,
             ToolTipTagFragmentGenerator toolTipTagFragmentGenerator,
-            URLTagFragmentGenerator urlTagFragmentGenerator) 
+            URLTagFragmentGenerator urlTagFragmentGenerator)
             throws IOException {
 
-        writer.println(ImageMapUtilities.getImageMap(name, info, 
+        writer.println(ImageMapUtilities.getImageMap(name, info,
                 toolTipTagFragmentGenerator, urlTagFragmentGenerator));
     }
 
     /**
-     * Creates an HTML image map.  This method maps to 
-     * {@link ImageMapUtilities#getImageMap(String, ChartRenderingInfo, 
-     * ToolTipTagFragmentGenerator, URLTagFragmentGenerator)}, using default 
+     * Creates an HTML image map.  This method maps to
+     * {@link ImageMapUtilities#getImageMap(String, ChartRenderingInfo,
+     * ToolTipTagFragmentGenerator, URLTagFragmentGenerator)}, using default
      * generators.
      *
      * @param name  the map name (<code>null</code> not permitted).
@@ -723,16 +723,16 @@ public abstract class ChartUtilities {
 
     /**
      * Creates an HTML image map.  This method maps directly to
-     * {@link ImageMapUtilities#getImageMap(String, ChartRenderingInfo, 
+     * {@link ImageMapUtilities#getImageMap(String, ChartRenderingInfo,
      * ToolTipTagFragmentGenerator, URLTagFragmentGenerator)}.
      *
      * @param name  the map name (<code>null</code> not permitted).
      * @param info  the chart rendering info (<code>null</code> not permitted).
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
-     *     that will contain the tooltip text (<code>null</code> not permitted 
+     *     that will contain the tooltip text (<code>null</code> not permitted
      *     if <code>info</code> contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
-     *     will contain the URL reference (<code>null</code> not permitted if 
+     *     will contain the URL reference (<code>null</code> not permitted if
      *     <code>info</code> contains URLs).
      *
      * @return The map tag.
@@ -741,9 +741,9 @@ public abstract class ChartUtilities {
             ToolTipTagFragmentGenerator toolTipTagFragmentGenerator,
             URLTagFragmentGenerator urlTagFragmentGenerator) {
 
-        return ImageMapUtilities.getImageMap(name, info, 
+        return ImageMapUtilities.getImageMap(name, info,
                 toolTipTagFragmentGenerator, urlTagFragmentGenerator);
-        
+
     }
 
 }
