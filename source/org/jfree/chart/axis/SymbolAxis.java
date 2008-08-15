@@ -74,6 +74,7 @@
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 28-Feb-2007 : Fixed bug 1669302 (tick label overlap) (DG);
  * 25-Jul-2007 : Added new field for alternate grid band paint (DG);
+ * 15-Aug-2008 : Use alternate grid band paint when drawing (DG);
  *
  */
 
@@ -385,7 +386,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                 g2.setPaint(this.gridBandPaint);
             }
             else {
-                g2.setPaint(Color.white);
+                g2.setPaint(this.gridBandAlternatePaint);
             }
             band = new Rectangle2D.Double(xx1, yy + outlineStrokeWidth,
                 xx2 - xx1, dataArea.getMaxY() - yy - outlineStrokeWidth);
@@ -442,7 +443,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                 g2.setPaint(this.gridBandPaint);
             }
             else {
-                g2.setPaint(Color.white);
+                g2.setPaint(this.gridBandAlternatePaint);
             }
             band = new Rectangle2D.Double(xx + outlineStrokeWidth, yy1,
                     plotArea.getMaxX() - xx - outlineStrokeWidth, yy2 - yy1);
