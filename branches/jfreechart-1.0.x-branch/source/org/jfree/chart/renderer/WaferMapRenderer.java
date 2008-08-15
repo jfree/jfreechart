@@ -300,9 +300,8 @@ public class WaferMapRenderer extends AbstractRenderer {
                     String label = entry.getKey().toString();
                     String description = label;
                     Shape shape = new Rectangle2D.Double(1d, 1d, 1d, 1d);
-                    Paint paint = getSeriesPaint(
-                        ((Integer) entry.getValue()).intValue()
-                    );
+                    Paint paint = lookupSeriesPaint(
+                            ((Integer) entry.getValue()).intValue());
                     Paint outlinePaint = Color.black;
                     Stroke outlineStroke = DEFAULT_STROKE;
 
