@@ -121,6 +121,7 @@
  * 07-Jun-2007 : Added new fillBackground() method to handle GradientPaint
  *               taking into account orientation (DG);
  * 25-Mar-2008 : Added fireChangeEvent() method - see patch 1914411 (DG);
+ * 15-Aug-2008 : Added setDrawingSupplier() method with notify flag (DG);
  *
  */
 
@@ -609,10 +610,12 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Sets the drawing supplier for the plot.  The drawing supplier is
-     * responsible for supplying a limitless (possibly repeating) sequence of
-     * <code>Paint</code>, <code>Stroke</code> and <code>Shape</code> objects
-     * that the plot's renderer(s) can use to populate its (their) tables.
+     * Sets the drawing supplier for the plot and sends a
+     * {@link PlotChangeEvent} to all registered listeners.  The drawing
+     * supplier is responsible for supplying a limitless (possibly repeating)
+     * sequence of <code>Paint</code>, <code>Stroke</code> and
+     * <code>Shape</code> objects that the plot's renderer(s) can use to
+     * populate its (their) tables.
      *
      * @param supplier  the new supplier.
      *
@@ -621,6 +624,28 @@ public abstract class Plot implements AxisChangeListener,
     public void setDrawingSupplier(DrawingSupplier supplier) {
         this.drawingSupplier = supplier;
         fireChangeEvent();
+    }
+
+    /**
+     * Sets the drawing supplier for the plot and, if requested, sends a
+     * {@link PlotChangeEvent} to all registered listeners.  The drawing
+     * supplier is responsible for supplying a limitless (possibly repeating)
+     * sequence of <code>Paint</code>, <code>Stroke</code> and
+     * <code>Shape</code> objects that the plot's renderer(s) can use to
+     * populate its (their) tables.
+     *
+     * @param supplier  the new supplier.
+     * @param notify  notify listeners?
+     *
+     * @see #getDrawingSupplier()
+     *
+     * @since 1.0.11
+     */
+    public void setDrawingSupplier(DrawingSupplier supplier, boolean notify) {
+        this.drawingSupplier = supplier;
+        if (notify) {
+            fireChangeEvent();
+        }
     }
 
     /**
