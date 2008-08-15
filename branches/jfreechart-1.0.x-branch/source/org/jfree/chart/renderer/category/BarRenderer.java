@@ -621,6 +621,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     	this.shadowPaint = paint;
     	fireChangeEvent();
     }
+
     /**
      * Returns the shadow x-offset.
      *
