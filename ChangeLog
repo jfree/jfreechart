@@ -1,5 +1,10 @@
 2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/title/LegendTitle.java
+    (getWrapper): New method.
+
+2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
+
 	* source/org/jfree/chart/plot/Plot.java
 	(setDrawingSupplier(DrawingSupplier, boolean)): New method.
 
