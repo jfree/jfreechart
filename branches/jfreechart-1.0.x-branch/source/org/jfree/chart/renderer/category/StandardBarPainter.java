@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 19-Jun-2008 : Version 1 (DG);
+ * 15-Aug-2008 : Use renderer's shadow paint (DG);
  *
  */
 
@@ -133,7 +134,7 @@ public class StandardBarPainter implements BarPainter, Serializable {
 
         RectangularShape shadow = createShadow(bar, renderer.getShadowXOffset(),
         		renderer.getShadowYOffset(), base, pegShadow);
-        g2.setPaint(Color.gray);
+        g2.setPaint(renderer.getShadowPaint());
         g2.fill(shadow);
 
 	}

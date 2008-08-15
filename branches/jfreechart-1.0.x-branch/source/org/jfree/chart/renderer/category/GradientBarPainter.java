@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 19-Jun-2008 : Version 1 (DG);
+ * 15-Aug-2008 : Use outline paint and shadow paint (DG);
  *
  */
 
@@ -179,8 +180,7 @@ public class GradientBarPainter implements BarPainter, Serializable {
         if (renderer.isDrawBarOutline()
             /*&& state.getBarWidth() > renderer.BAR_OUTLINE_WIDTH_THRESHOLD*/) {
             Stroke stroke = renderer.getItemOutlineStroke(row, column);
-
-            Paint paint = renderer.getItemPaint(row, column);
+            Paint paint = renderer.getItemOutlinePaint(row, column);
             if (stroke != null && paint != null) {
                 g2.setStroke(stroke);
                 g2.setPaint(paint);
@@ -218,7 +218,7 @@ public class GradientBarPainter implements BarPainter, Serializable {
 
         RectangularShape shadow = createShadow(bar, renderer.getShadowXOffset(),
         		renderer.getShadowYOffset(), base, pegShadow);
-        g2.setPaint(Color.gray);
+        g2.setPaint(renderer.getShadowPaint());
         g2.fill(shadow);
 
 	}
