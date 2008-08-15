@@ -139,6 +139,7 @@
  * 07-May-2008 : Fixed bug in zooming that triggered zoom for a rectangle
  *               outside of the data area (DG);
  * 08-May-2008 : Fixed serialization bug (DG);
+ * 15-Aug-2008 : Increased default maxDrawWidth/Height (DG);
  *
  */
 
@@ -227,10 +228,10 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     public static final int DEFAULT_MINIMUM_DRAW_HEIGHT = 200;
 
     /** The default limit below which chart scaling kicks in. */
-    public static final int DEFAULT_MAXIMUM_DRAW_WIDTH = 800;
+    public static final int DEFAULT_MAXIMUM_DRAW_WIDTH = 1024;
 
     /** The default limit below which chart scaling kicks in. */
-    public static final int DEFAULT_MAXIMUM_DRAW_HEIGHT = 600;
+    public static final int DEFAULT_MAXIMUM_DRAW_HEIGHT = 768;
 
     /** The minimum size required to perform a zoom on a rectangle */
     public static final int DEFAULT_ZOOM_TRIGGER_DISTANCE = 10;
@@ -2527,8 +2528,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     }
 
-    /* (non-Javadoc)
-     * @see javax.swing.JPanel#updateUI()
+    /**
+     * Updates the UI for a LookAndFeel change.
      */
     public void updateUI() {
         // here we need to update the UI for the popup menu, if the panel

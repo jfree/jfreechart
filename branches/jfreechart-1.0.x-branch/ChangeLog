@@ -1,5 +1,11 @@
 2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/ChartPanel.java
+    (DEFAULT_MAXIMUM_DRAW_WIDTH): Increased to 1024,
+    (DEFAULT_MAXIMUM_DRAW_HEIGHT): Increased to 768.
+
+2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/GradientBarPainter.java
     (paintBar): Use outline paint,
     (paintBarShadow): Use shadow paint,
