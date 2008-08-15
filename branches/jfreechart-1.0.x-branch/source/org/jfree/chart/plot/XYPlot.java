@@ -205,6 +205,7 @@
  * 09-Jul-2008 : Added renderer state notification when series pass begins
  *               and ends - see patch 1997549 by Ulrich Voigt (DG);
  * 25-Jul-2008 : Fixed NullPointerException for plots with no axes (DG);
+ * 15-Aug-2008 : Added getRendererCount() method (DG);
  *
  */
 
@@ -1376,6 +1377,17 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                 new Integer(axisIndex));
         // fake a dataset change event to update axes...
         datasetChanged(new DatasetChangeEvent(this, getDataset(index)));
+    }
+
+    /**
+     * Returns the number of renderer slots for this plot.
+     *
+     * @return The number of renderer slots.
+     *
+     * @since 1.0.11
+     */
+    public int getRendererCount() {
+    	return this.renderers.size();
     }
 
     /**
