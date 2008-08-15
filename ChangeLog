@@ -1,5 +1,11 @@
 2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 2051168:
+    * source/org/jfree/chart/plot/PiePlot.java
+    (getLegendItems): Populate with series key and index.
+
+2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/ChartFactory.java:
     (currentTheme): New field,
     (getChartTheme): New method,
