@@ -1,5 +1,11 @@
 2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/AbstractRenderer.java
+    (clearSeriesPaints): New method,
+    (clearSeriesStrokes): Likewise.
+
+2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/plot/PiePlot.java
     (clearSectionPaints): New method,
     (clearSectionOutlinePaints): Likewise,

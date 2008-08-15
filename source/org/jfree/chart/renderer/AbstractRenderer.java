@@ -79,9 +79,9 @@
  *               methods (DG);
  * 04-Dec-2007 : Modified hashCode() implementation (DG);
  * 29-Apr-2008 : Minor API doc update (DG);
- * 17-Jun-2008 : Added legendShape, legendTextFont and legendTextPaint 
+ * 17-Jun-2008 : Added legendShape, legendTextFont and legendTextPaint
  *               attributes (DG);
- *
+ * 18-Aug-2008 : Added clearSeriesPaints() and clearSeriesStrokes() (DG);
  */
 
 package org.jfree.chart.renderer;
@@ -505,7 +505,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.stroke = null;
         this.strokeList = new StrokeList();
         this.baseStroke = DEFAULT_STROKE;
-        this.autoPopulateSeriesStroke = false;
+        this.autoPopulateSeriesStroke = true;
 
         this.outlineStroke = null;
         this.outlineStrokeList = new StrokeList();
@@ -1036,6 +1036,21 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (notify) {
             fireChangeEvent();
         }
+    }
+
+    /**
+     * Clears the series paint settings for this renderer and, if requested,
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify  notify listeners?
+     *
+     * @since 1.0.11
+     */
+    public void clearSeriesPaints(boolean notify) {
+    	this.paintList.clear();
+    	if (notify) {
+    		fireChangeEvent();
+    	}
     }
 
     /**
@@ -1622,6 +1637,21 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (notify) {
             fireChangeEvent();
         }
+    }
+
+    /**
+     * Clears the series stroke settings for this renderer and, if requested,
+     * sends a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param notify  notify listeners?
+     *
+     * @since 1.0.11
+     */
+    public void clearSeriesStrokes(boolean notify) {
+    	this.strokeList.clear();
+    	if (notify) {
+    		fireChangeEvent();
+    	}
     }
 
     /**
