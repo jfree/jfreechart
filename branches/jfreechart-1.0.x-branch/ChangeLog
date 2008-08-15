@@ -1,3 +1,18 @@
+2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
+
+	* source/org/jfree/chart/plot/Plot.java
+	(setDrawingSupplier(DrawingSupplier, boolean)): New method.
+
+2008-08-11  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/BarRenderer.java
+    (shadowPaint): New field,
+    (getShadowPaint): New method,
+    (setShadowPaint): Likewise,
+    (equals): Updated for new field,
+    (writeObject): For serialization,
+    (readObject): Likewise.
+
 2008-08-11  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java
