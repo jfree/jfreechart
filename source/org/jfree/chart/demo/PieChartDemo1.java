@@ -41,8 +41,6 @@
 
 package org.jfree.chart.demo;
 
-import java.awt.Font;
-
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
@@ -105,9 +103,7 @@ public class PieChartDemo1 extends ApplicationFrame {
 
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setSectionOutlinesVisible(false);
-        plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 10));
         plot.setNoDataMessage("No data available");
-        plot.setSimpleLabels(true);
 
         return chart;
 

@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * BarChartDemo1.java
  * ------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   ;
@@ -79,11 +79,11 @@ public class BarChartDemo1 extends ApplicationFrame {
 
     /**
      * Returns a sample dataset.
-     * 
+     *
      * @return The dataset.
      */
     private static CategoryDataset createDataset() {
-        
+
         // row keys...
         String series1 = "First";
         String series2 = "Second";
@@ -116,20 +116,20 @@ public class BarChartDemo1 extends ApplicationFrame {
         dataset.addValue(2.0, series3, category3);
         dataset.addValue(3.0, series3, category4);
         dataset.addValue(6.0, series3, category5);
-        
+
         return dataset;
-        
+
     }
-    
+
     /**
      * Creates a sample chart.
-     * 
+     *
      * @param dataset  the dataset.
-     * 
+     *
      * @return The chart.
      */
     private static JFreeChart createChart(CategoryDataset dataset) {
-        
+
         // create the chart...
         JFreeChart chart = ChartFactory.createBarChart(
             "Bar Chart Demo 1",       // chart title
@@ -161,7 +161,7 @@ public class BarChartDemo1 extends ApplicationFrame {
         //  >   http://www.object-refinery.com/jfreechart/guide.html
         //
         // ******************************************************************
-        
+
         // set the range axis to display integers only...
         final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
@@ -169,13 +169,13 @@ public class BarChartDemo1 extends ApplicationFrame {
         // disable bar outlines...
         BarRenderer renderer = (BarRenderer) plot.getRenderer();
         renderer.setDrawBarOutline(false);
-        
+
         // set up gradient paints for series...
-        GradientPaint gp0 = new GradientPaint(0.0f, 0.0f, Color.blue, 
+        GradientPaint gp0 = new GradientPaint(0.0f, 0.0f, Color.blue,
                 0.0f, 0.0f, new Color(0, 0, 64));
-        GradientPaint gp1 = new GradientPaint(0.0f, 0.0f, Color.green, 
+        GradientPaint gp1 = new GradientPaint(0.0f, 0.0f, Color.green,
                 0.0f, 0.0f, new Color(0, 64, 0));
-        GradientPaint gp2 = new GradientPaint(0.0f, 0.0f, Color.red, 
+        GradientPaint gp2 = new GradientPaint(0.0f, 0.0f, Color.red,
                 0.0f, 0.0f, new Color(64, 0, 0));
         renderer.setSeriesPaint(0, gp0);
         renderer.setSeriesPaint(1, gp1);
@@ -186,11 +186,11 @@ public class BarChartDemo1 extends ApplicationFrame {
                 CategoryLabelPositions.createUpRotationLabelPositions(
                         Math.PI / 6.0));
         // OPTIONAL CUSTOMISATION COMPLETED.
-        
+
         return chart;
-        
+
     }
-    
+
     /**
      * Starting point for the demonstration application.
      *
