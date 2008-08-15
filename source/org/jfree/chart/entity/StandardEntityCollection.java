@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------------
  * StandardEntityCollection.java
  * -----------------------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,7 +38,7 @@
  * 26-Jun-2002 : Added iterator() method (DG);
  * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 19-May-2004 : Implemented Serializable (DG);
- * 29-Sep-2004 : Renamed addEntity() --> add() and addEntities() 
+ * 29-Sep-2004 : Renamed addEntity() --> add() and addEntities()
  *               --> addAll() (DG);
  * 19-Jan-2005 : Changed storage from Collection --> List (DG);
  * 20-May-2005 : Fixed bug 1113521 - inefficiency in getEntity() method (DG);
@@ -61,12 +61,12 @@ import org.jfree.util.PublicCloneable;
 /**
  * A standard implementation of the {@link EntityCollection} interface.
  */
-public class StandardEntityCollection implements EntityCollection, 
+public class StandardEntityCollection implements EntityCollection,
         Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 5384773031184897047L;
-    
+
     /** Storage for the entities. */
     private List entities;
 
@@ -79,26 +79,26 @@ public class StandardEntityCollection implements EntityCollection,
 
     /**
      * Returns the number of entities in the collection.
-     * 
+     *
      * @return The entity count.
      */
     public int getEntityCount() {
         return this.entities.size();
     }
-    
+
     /**
      * Returns a chart entity from the collection.
-     * 
+     *
      * @param index  the entity index.
-     * 
+     *
      * @return The entity.
-     * 
+     *
      * @see #add(ChartEntity)
      */
     public ChartEntity getEntity(int index) {
         return (ChartEntity) this.entities.get(index);
     }
-    
+
     /**
      * Clears all the entities from the collection.
      */
@@ -117,10 +117,10 @@ public class StandardEntityCollection implements EntityCollection,
         }
         this.entities.add(entity);
     }
-    
+
     /**
      * Adds all the entities from the specified collection.
-     * 
+     *
      * @param collection  the collection of entities (<code>null</code> not
      *     permitted).
      */
@@ -129,7 +129,7 @@ public class StandardEntityCollection implements EntityCollection,
     }
 
     /**
-     * Returns the last entity in the list with an area that encloses the 
+     * Returns the last entity in the list with an area that encloses the
      * specified coordinates, or <code>null</code> if there is no such entity.
      *
      * @param x  the x coordinate.
@@ -150,13 +150,13 @@ public class StandardEntityCollection implements EntityCollection,
 
     /**
      * Returns the entities in an unmodifiable collection.
-     * 
+     *
      * @return The entities.
      */
     public Collection getEntities() {
         return Collections.unmodifiableCollection(this.entities);
     }
-    
+
     /**
      * Returns an iterator for the entities in the collection.
      *
@@ -165,17 +165,17 @@ public class StandardEntityCollection implements EntityCollection,
     public Iterator iterator() {
         return this.entities.iterator();
     }
-    
+
     /**
      * Tests this object for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object to test against (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
-            return true;   
+            return true;
         }
         if (obj instanceof StandardEntityCollection) {
             StandardEntityCollection that = (StandardEntityCollection) obj;
@@ -186,20 +186,20 @@ public class StandardEntityCollection implements EntityCollection,
 
     /**
      * Returns a clone of this entity collection.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
-        StandardEntityCollection clone 
+        StandardEntityCollection clone
                 = (StandardEntityCollection) super.clone();
         clone.entities = new java.util.ArrayList(this.entities.size());
         for (int i = 0; i < this.entities.size(); i++) {
             ChartEntity entity = (ChartEntity) this.entities.get(i);
             clone.entities.add(entity.clone());
         }
-        return clone;   
+        return clone;
     }
 
 }
