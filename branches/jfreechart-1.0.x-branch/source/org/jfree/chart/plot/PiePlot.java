@@ -155,6 +155,8 @@
  *               1891849 by Martin Hilpert (DG);
  * 02-Jul-2008 : Added autoPopulate flags (DG);
  * 15-Aug-2008 : Added methods to clear section attributes (DG);
+ * 15-Aug-2008 : Fixed bug 2051168 - problem with LegendItemEntity
+ *               generation (DG);
  *
  */
 
@@ -2931,6 +2933,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                             false,          // line not visible
                             new Line2D.Float(), new BasicStroke(), Color.black);
                     item.setDataset(getDataset());
+                    item.setSeriesIndex(this.dataset.getIndex(key));
+                    item.setSeriesKey(key);
                     result.add(item);
                 }
                 section++;
