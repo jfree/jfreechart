@@ -106,6 +106,19 @@ import org.jfree.chart.imagemap.URLTagFragmentGenerator;
  */
 public abstract class ChartUtilities {
 
+	/**
+	 * Applies the current theme to the specified chart.  This method is
+	 * provided for convenience, the theme itself is stored in the
+	 * {@link ChartFactory} class.
+	 *
+	 * @param chart  the chart (<code>null</code> not permitted).
+	 *
+	 * @since 1.0.11
+	 */
+	public static void applyCurrentTheme(JFreeChart chart) {
+		ChartFactory.getChartTheme().apply(chart);
+	}
+
     /**
      * Writes a chart to an output stream in PNG format.
      *
