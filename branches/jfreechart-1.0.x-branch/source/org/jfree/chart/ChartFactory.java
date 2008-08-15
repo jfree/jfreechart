@@ -115,6 +115,7 @@
  *               submitted by Darren Jung (DG);
  * 10-Jul-2007 : Added new methods to create pie charts with locale for
  *               section label and tool tip formatting (DG);
+ * 14-Aug-2008 : Added ChartTheme facility (DG);
  *
  */
 
@@ -217,6 +218,40 @@ import org.jfree.util.TableOrder;
  */
 public abstract class ChartFactory {
 
+    /** The chart theme. */
+	private static ChartTheme currentTheme = new StandardChartTheme("JFree");
+
+	/**
+	 * Returns the current chart theme used by the factory.
+	 *
+	 * @return The chart theme.
+	 *
+	 * @see #setChartTheme(ChartTheme)
+	 * @see ChartUtilities#applyCurrentTheme(JFreeChart)
+	 *
+	 * @since 1.0.11
+	 */
+	public static ChartTheme getChartTheme() {
+		return currentTheme;
+	}
+
+	/**
+	 * Sets the current chart theme.  This will be applied to all new charts
+	 * as they are created.
+	 *
+	 * @param theme  the theme (<code>null</code> not permitted).
+	 *
+	 * @see #getChartTheme()
+	 *
+	 * @since 1.0.11
+	 */
+	public static void setChartTheme(ChartTheme theme) {
+		if (theme == null) {
+		    throw new IllegalArgumentException("Null 'theme' argument.");
+		}
+		currentTheme = theme;
+	}
+
     /**
      * Creates a pie chart with default settings.
      * <P>
@@ -242,8 +277,10 @@ public abstract class ChartFactory {
         if (tooltips) {
             plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
-                legend);
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        		plot, legend);
+        currentTheme.apply(chart);
+        return chart;
 
     }
 
@@ -276,9 +313,10 @@ public abstract class ChartFactory {
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
-                legend);
-
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        		plot, legend);
+        currentTheme.apply(chart);
+        return chart;
     }
 
     /**
@@ -396,7 +434,7 @@ public abstract class ChartFactory {
                     new Font("SansSerif", Font.PLAIN, 10));
             chart.addSubtitle(subtitle);
         }
-
+        currentTheme.apply(chart);
         return chart;
     }
 
@@ -522,7 +560,7 @@ public abstract class ChartFactory {
                     new Font("SansSerif", Font.PLAIN, 10));
             chart.addSubtitle(subtitle);
         }
-
+        currentTheme.apply(chart);
         return chart;
     }
 
@@ -551,9 +589,10 @@ public abstract class ChartFactory {
         if (tooltips) {
             plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
-                legend);
-
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        		plot, legend);
+        currentTheme.apply(chart);
+        return chart;
     }
 
     /**
@@ -585,8 +624,10 @@ public abstract class ChartFactory {
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
-                legend);
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        		plot, legend);
+        currentTheme.apply(chart);
+        return chart;
 
     }
 
@@ -635,7 +676,7 @@ public abstract class ChartFactory {
 
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -663,8 +704,10 @@ public abstract class ChartFactory {
         if (tooltips) {
             plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
-                legend);
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        		plot, legend);
+        currentTheme.apply(chart);
+        return chart;
 
     }
 
@@ -695,8 +738,10 @@ public abstract class ChartFactory {
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
         }
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
-                legend);
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        		plot, legend);
+        currentTheme.apply(chart);
+        return chart;
 
     }
 
@@ -754,7 +799,7 @@ public abstract class ChartFactory {
 
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -825,7 +870,7 @@ public abstract class ChartFactory {
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -882,7 +927,7 @@ public abstract class ChartFactory {
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -945,7 +990,7 @@ public abstract class ChartFactory {
 
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1010,7 +1055,7 @@ public abstract class ChartFactory {
         // create the chart...
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1067,7 +1112,7 @@ public abstract class ChartFactory {
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1123,7 +1168,7 @@ public abstract class ChartFactory {
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1177,7 +1222,7 @@ public abstract class ChartFactory {
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1231,7 +1276,7 @@ public abstract class ChartFactory {
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1282,7 +1327,7 @@ public abstract class ChartFactory {
         plot.setOrientation(PlotOrientation.HORIZONTAL);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1358,7 +1403,7 @@ public abstract class ChartFactory {
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1393,6 +1438,7 @@ public abstract class ChartFactory {
         plot.setRenderer(new DefaultPolarItemRenderer());
         JFreeChart chart = new JFreeChart(
                 title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1447,6 +1493,7 @@ public abstract class ChartFactory {
 
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1516,7 +1563,7 @@ public abstract class ChartFactory {
 
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1570,12 +1617,11 @@ public abstract class ChartFactory {
             urlGenerator = new StandardXYURLGenerator();
         }
 
-        plot.setRenderer(
-            new XYAreaRenderer(XYAreaRenderer.AREA, tipGenerator, urlGenerator)
-        );
+        plot.setRenderer(new XYAreaRenderer(XYAreaRenderer.AREA, tipGenerator,
+        		urlGenerator));
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1634,6 +1680,7 @@ public abstract class ChartFactory {
 
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1681,7 +1728,7 @@ public abstract class ChartFactory {
 
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1736,6 +1783,7 @@ public abstract class ChartFactory {
         plot.setRangeCrosshairVisible(false);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1791,6 +1839,7 @@ public abstract class ChartFactory {
         plot.setRangeCrosshairVisible(false);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
+        currentTheme.apply(chart);
         return chart;
     }
 
@@ -1849,6 +1898,7 @@ public abstract class ChartFactory {
 
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1878,6 +1928,7 @@ public abstract class ChartFactory {
         plot.setRenderer(new CandlestickRenderer());
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1908,6 +1959,7 @@ public abstract class ChartFactory {
         XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, renderer);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1945,6 +1997,7 @@ public abstract class ChartFactory {
         XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, renderer);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -1999,7 +2052,7 @@ public abstract class ChartFactory {
 
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -2049,6 +2102,7 @@ public abstract class ChartFactory {
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -2082,8 +2136,10 @@ public abstract class ChartFactory {
 
         CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
-                legend);
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        		plot, legend);
+        currentTheme.apply(chart);
+        return chart;
     }
 
     /**
@@ -2110,8 +2166,10 @@ public abstract class ChartFactory {
         valueAxis.setAutoRangeIncludesZero(false);
         XYBoxAndWhiskerRenderer renderer = new XYBoxAndWhiskerRenderer(10.0);
         XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, renderer);
-        return new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot,
-                legend);
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        		plot, legend);
+        currentTheme.apply(chart);
+        return chart;
 
     }
 
@@ -2151,7 +2209,7 @@ public abstract class ChartFactory {
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
 
     }
@@ -2185,7 +2243,7 @@ public abstract class ChartFactory {
 
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
-
+        currentTheme.apply(chart);
         return chart;
     }
 
