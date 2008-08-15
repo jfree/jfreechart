@@ -160,6 +160,7 @@
  * 23-Apr-2008 : Fixed equals() and clone() methods (DG);
  * 26-Jun-2008 : Fixed crosshair support (DG);
  * 10-Jul-2008 : Fixed outline visibility for 3D renderers (DG);
+ * 12-Aug-2008 : Added rendererCount() method (DG);
  *
  */
 
@@ -1362,6 +1363,17 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             result = getRangeAxis(axisIndex.intValue());
         }
         return result;
+    }
+
+    /**
+     * Returns the number of renderer slots for this plot.
+     *
+     * @return The number of renderer slots.
+     *
+     * @since 1.0.11
+     */
+    public int getRendererCount() {
+    	return this.renderers.size();
     }
 
     /**

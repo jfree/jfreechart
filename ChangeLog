@@ -1,5 +1,12 @@
 2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/plot/CategoryPlot.java
+    (getRendererCount): New method,
+    * source/org/jfree/chart/plot/XYPlot.java
+    (getRendererCount): Likewise.
+
+2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/title/LegendTitle.java
     (getWrapper): New method.
 
