@@ -1,5 +1,14 @@
 2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 2031407:
+    * source/org/jfree/chart/renderer/category/StackedBarRenderer3D.java
+    (createStackedValueList): Encode series with negative values using -1 
+    offset,
+    (drawStackHorizontal): Account for -1 offset,
+    (drawStackVertical): Likewise.
+
+2008-08-15  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 2033721:
     * source/org/jfree/chart/renderer/WaferMapRenderer.java
     (getLegendCollection): Use lookupSeriesPaint.
