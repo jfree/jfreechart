@@ -62,32 +62,32 @@ import org.jfree.ui.RectangleEdge;
  */
 public interface BarPainter {
 
-	/**
-	 * Paints a single bar on behalf of a renderer.
-	 *
-	 * @param g2  the graphics target.
-	 * @param renderer  the renderer.
-	 * @param row  the row index for the item.
-	 * @param column  the column index for the item.
-	 * @param bar  the bounds for the bar.
-	 * @param base  the base of the bar.
-	 */
-	public void paintBar(Graphics2D g2, BarRenderer renderer,
-			int row, int column, RectangularShape bar, RectangleEdge base);
+    /**
+     * Paints a single bar on behalf of a renderer.
+     *
+     * @param g2  the graphics target.
+     * @param renderer  the renderer.
+     * @param row  the row index for the item.
+     * @param column  the column index for the item.
+     * @param bar  the bounds for the bar.
+     * @param base  the base of the bar.
+     */
+    public void paintBar(Graphics2D g2, BarRenderer renderer,
+            int row, int column, RectangularShape bar, RectangleEdge base);
 
-	/**
-	 * Paints the shadow for a single bar on behalf of a renderer.
-	 *
-	 * @param g2  the graphics target.
-	 * @param renderer  the renderer.
-	 * @param row  the row index for the item.
-	 * @param column  the column index for the item.
-	 * @param bar  the bounds for the bar.
-	 * @param base  the base of the bar.
-	 * @param pegShadow  peg the shadow to the base of the bar?
-	 */
-	public void paintBarShadow(Graphics2D g2, BarRenderer renderer,
-			int row, int column, RectangularShape bar, RectangleEdge base,
-			boolean pegShadow);
+    /**
+     * Paints the shadow for a single bar on behalf of a renderer.
+     *
+     * @param g2  the graphics target.
+     * @param renderer  the renderer.
+     * @param row  the row index for the item.
+     * @param column  the column index for the item.
+     * @param bar  the bounds for the bar.
+     * @param base  the base of the bar.
+     * @param pegShadow  peg the shadow to the base of the bar?
+     */
+    public void paintBarShadow(Graphics2D g2, BarRenderer renderer,
+            int row, int column, RectangularShape bar, RectangleEdge base,
+            boolean pegShadow);
 
 }
