@@ -372,7 +372,7 @@ public class XYBarDataset extends AbstractIntervalXYDataset
     public Object clone() throws CloneNotSupportedException {
         XYBarDataset clone = (XYBarDataset) super.clone();
         if (this.underlying instanceof PublicCloneable) {
-        	PublicCloneable pc = (PublicCloneable) this.underlying;
+            PublicCloneable pc = (PublicCloneable) this.underlying;
             clone.underlying = (XYDataset) pc.clone();
         }
         return clone;
