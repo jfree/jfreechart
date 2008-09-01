@@ -38,6 +38,7 @@
  * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 23-Sep-2003 : Minor Javadoc update (DG);
  * 28-May-2008 : Fixed problem with immutability (DG);
+ * 01-Sep-2008 : Added getLowerMillis() and getUpperMillis() (DG);
  *
  */
 
@@ -112,18 +113,48 @@ public class DateRange extends Range implements Serializable {
      * Returns the lower (earlier) date for the range.
      *
      * @return The lower date for the range.
+     *
+     * @see #getLowerMillis()
      */
     public Date getLowerDate() {
         return new Date(this.lowerDate);
     }
 
     /**
+     * Returns the lower bound of the range in milliseconds.
+     *
+     * @return The lower bound.
+     *
+     * @see #getLowerDate()
+     *
+     * @since 1.0.11
+     */
+    public long getLowerMillis() {
+        return this.lowerDate;
+    }
+
+    /**
      * Returns the upper (later) date for the range.
      *
      * @return The upper date for the range.
+     *
+     * @see #getUpperMillis()
      */
     public Date getUpperDate() {
         return new Date(this.upperDate);
+    }
+
+    /**
+     * Returns the upper bound of the range in milliseconds.
+     *
+     * @return The upper bound.
+     *
+     * @see #getUpperDate()
+     *
+     * @since 1.0.11
+     */
+    public long getUpperMillis() {
+        return this.upperDate;
     }
 
     /**
@@ -134,7 +165,7 @@ public class DateRange extends Range implements Serializable {
     public String toString() {
         DateFormat df = DateFormat.getDateTimeInstance();
         return "[" + df.format(getLowerDate()) + " --> "
-            + df.format(getUpperDate()) + "]";
+                + df.format(getUpperDate()) + "]";
     }
 
 }

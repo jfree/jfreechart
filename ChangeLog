@@ -1,5 +1,14 @@
 2008-09-01  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/axis/DateAxis.java
+    (valueToJava2D): Use DateRange methods that return millis,
+    (java2DToValue): Likewise,
+    * source/org/jfree/data/time/DateRange.java
+    (getLowerMillis): New method,
+    (getUpperMillis): Likewise.
+
+2008-09-01  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/util/RelativeDateFormat.java
     (hourFormatter): New field,
     (minuteFormatter): New field,

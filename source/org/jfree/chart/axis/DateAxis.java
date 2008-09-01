@@ -115,6 +115,7 @@
  * 03-May-2007 : Fixed minor bugs in previousStandardDate(), with new JUnit
  *               tests (DG);
  * 21-Nov-2007 : Fixed warnings from FindBugs (DG);
+ * 01-Sep-2008 : Use new methods from DateRange (DG);
  *
  */
 
@@ -701,8 +702,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         value = this.timeline.toTimelineValue((long) value);
 
         DateRange range = (DateRange) getRange();
-        double axisMin = this.timeline.toTimelineValue(range.getLowerDate());
-        double axisMax = this.timeline.toTimelineValue(range.getUpperDate());
+        double axisMin = this.timeline.toTimelineValue(range.getLowerMillis());
+        double axisMax = this.timeline.toTimelineValue(range.getUpperMillis());
         double result = 0.0;
         if (RectangleEdge.isTopOrBottom(edge)) {
             double minX = area.getX();
@@ -765,8 +766,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                                 RectangleEdge edge) {
 
         DateRange range = (DateRange) getRange();
-        double axisMin = this.timeline.toTimelineValue(range.getLowerDate());
-        double axisMax = this.timeline.toTimelineValue(range.getUpperDate());
+        double axisMin = this.timeline.toTimelineValue(range.getLowerMillis());
+        double axisMax = this.timeline.toTimelineValue(range.getUpperMillis());
 
         double min = 0.0;
         double max = 0.0;
@@ -1279,16 +1280,15 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @param edge  the axis location.
      */
     protected void selectHorizontalAutoTickUnit(Graphics2D g2,
-                                                Rectangle2D dataArea,
-                                                RectangleEdge edge) {
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         long shift = 0;
         if (this.timeline instanceof SegmentedTimeline) {
             shift = ((SegmentedTimeline) this.timeline).getStartTime();
         }
         double zero = valueToJava2D(shift + 0.0, dataArea, edge);
-        double tickLabelWidth
-            = estimateMaximumTickLabelWidth(g2, getTickUnit());
+        double tickLabelWidth = estimateMaximumTickLabelWidth(g2,
+                getTickUnit());
 
         // start with the current tick unit...
         TickUnitSource tickUnits = getStandardTickUnits();
