@@ -63,25 +63,25 @@ import org.jfree.ui.RectangleEdge;
  */
 public class StandardXYBarPainter implements XYBarPainter, Serializable {
 
-	/**
-	 * Creates a new instance.
-	 */
-	public StandardXYBarPainter() {
-	}
+    /**
+     * Creates a new instance.
+     */
+    public StandardXYBarPainter() {
+    }
 
-	/**
-	 * Paints a single bar instance.
-	 *
-	 * @param g2  the graphics target.
-	 * @param renderer  the renderer.
-	 * @param row  the row index.
-	 * @param column  the column index.
-	 * @param bar  the bar
-	 * @param base  indicates which side of the rectangle is the base of the
-	 *              bar.
-	 */
-	public void paintBar(Graphics2D g2, XYBarRenderer renderer, int row,
-			int column, RectangularShape bar, RectangleEdge base) {
+    /**
+     * Paints a single bar instance.
+     *
+     * @param g2  the graphics target.
+     * @param renderer  the renderer.
+     * @param row  the row index.
+     * @param column  the column index.
+     * @param bar  the bar
+     * @param base  indicates which side of the rectangle is the base of the
+     *              bar.
+     */
+    public void paintBar(Graphics2D g2, XYBarRenderer renderer, int row,
+            int column, RectangularShape bar, RectangleEdge base) {
 
         Paint itemPaint = renderer.getItemPaint(row, column);
         GradientPaintTransformer t = renderer.getGradientPaintTransformer();
@@ -103,119 +103,119 @@ public class StandardXYBarPainter implements XYBarPainter, Serializable {
             }
         }
 
-	}
+    }
 
-	/**
-	 * Paints a single bar instance.
-	 *
-	 * @param g2  the graphics target.
-	 * @param renderer  the renderer.
-	 * @param row  the row index.
-	 * @param column  the column index.
-	 * @param bar  the bar
-	 * @param base  indicates which side of the rectangle is the base of the
-	 *              bar.
-	 * @param pegShadow  peg the shadow to the base of the bar?
-	 */
-	public void paintBarShadow(Graphics2D g2, XYBarRenderer renderer, int row,
-			int column, RectangularShape bar, RectangleEdge base,
-			boolean pegShadow) {
+    /**
+     * Paints a single bar instance.
+     *
+     * @param g2  the graphics target.
+     * @param renderer  the renderer.
+     * @param row  the row index.
+     * @param column  the column index.
+     * @param bar  the bar
+     * @param base  indicates which side of the rectangle is the base of the
+     *              bar.
+     * @param pegShadow  peg the shadow to the base of the bar?
+     */
+    public void paintBarShadow(Graphics2D g2, XYBarRenderer renderer, int row,
+            int column, RectangularShape bar, RectangleEdge base,
+            boolean pegShadow) {
 
-		// handle a special case - if the bar colour has alpha == 0, it is
-		// invisible so we shouldn't draw any shadow
+        // handle a special case - if the bar colour has alpha == 0, it is
+        // invisible so we shouldn't draw any shadow
         Paint itemPaint = renderer.getItemPaint(row, column);
         if (itemPaint instanceof Color) {
-        	Color c = (Color) itemPaint;
-        	if (c.getAlpha() == 0) {
-        		return;
-        	}
+            Color c = (Color) itemPaint;
+            if (c.getAlpha() == 0) {
+                return;
+            }
         }
 
         RectangularShape shadow = createShadow(bar, renderer.getShadowXOffset(),
-        		renderer.getShadowYOffset(), base, pegShadow);
+                renderer.getShadowYOffset(), base, pegShadow);
         g2.setPaint(Color.gray);
         g2.fill(shadow);
 
-	}
+    }
 
-	/**
-	 * Creates a shadow for the bar.
-	 *
-	 * @param bar  the bar shape.
-	 * @param xOffset  the x-offset for the shadow.
-	 * @param yOffset  the y-offset for the shadow.
-	 * @param base  the edge that is the base of the bar.
-	 * @param pegShadow  peg the shadow to the base?
-	 *
-	 * @return A rectangle for the shadow.
-	 */
-	private Rectangle2D createShadow(RectangularShape bar, double xOffset,
-			double yOffset, RectangleEdge base, boolean pegShadow) {
-		double x0 = bar.getMinX();
-		double x1 = bar.getMaxX();
-		double y0 = bar.getMinY();
-		double y1 = bar.getMaxY();
-		if (base == RectangleEdge.TOP) {
-		    x0 += xOffset;
-		    x1 += xOffset;
-		    if (!pegShadow) {
-		    	y0 += yOffset;
-		    }
-		    y1 += yOffset;
-		}
-		else if (base == RectangleEdge.BOTTOM) {
-		    x0 += xOffset;
-		    x1 += xOffset;
-		    y0 += yOffset;
-		    if (!pegShadow) {
-		    	y1 += yOffset;
-		    }
-		}
-		else if (base == RectangleEdge.LEFT) {
-			if (!pegShadow) {
-				x0 += xOffset;
-			}
-			x1 += xOffset;
-			y0 += yOffset;
-			y1 += yOffset;
-		}
-		else if (base == RectangleEdge.RIGHT) {
-			x0 += xOffset;
-			if (!pegShadow) {
-				x1 += xOffset;
-			}
-			y0 += yOffset;
-			y1 += yOffset;
-		}
-		return new Rectangle2D.Double(x0, y0, (x1 - x0), (y1 - y0));
-	}
+    /**
+     * Creates a shadow for the bar.
+     *
+     * @param bar  the bar shape.
+     * @param xOffset  the x-offset for the shadow.
+     * @param yOffset  the y-offset for the shadow.
+     * @param base  the edge that is the base of the bar.
+     * @param pegShadow  peg the shadow to the base?
+     *
+     * @return A rectangle for the shadow.
+     */
+    private Rectangle2D createShadow(RectangularShape bar, double xOffset,
+            double yOffset, RectangleEdge base, boolean pegShadow) {
+        double x0 = bar.getMinX();
+        double x1 = bar.getMaxX();
+        double y0 = bar.getMinY();
+        double y1 = bar.getMaxY();
+        if (base == RectangleEdge.TOP) {
+            x0 += xOffset;
+            x1 += xOffset;
+            if (!pegShadow) {
+                y0 += yOffset;
+            }
+            y1 += yOffset;
+        }
+        else if (base == RectangleEdge.BOTTOM) {
+            x0 += xOffset;
+            x1 += xOffset;
+            y0 += yOffset;
+            if (!pegShadow) {
+                y1 += yOffset;
+            }
+        }
+        else if (base == RectangleEdge.LEFT) {
+            if (!pegShadow) {
+                x0 += xOffset;
+            }
+            x1 += xOffset;
+            y0 += yOffset;
+            y1 += yOffset;
+        }
+        else if (base == RectangleEdge.RIGHT) {
+            x0 += xOffset;
+            if (!pegShadow) {
+                x1 += xOffset;
+            }
+            y0 += yOffset;
+            y1 += yOffset;
+        }
+        return new Rectangle2D.Double(x0, y0, (x1 - x0), (y1 - y0));
+    }
 
-	/**
-	 * Tests this instance for equality with an arbitrary object.
-	 *
-	 * @param obj  the obj (<code>null</code> permitted).
-	 *
-	 * @return A boolean.
-	 */
-	public boolean equals(Object obj) {
-		if (obj == this) {
-			return true;
-		}
-		if (!(obj instanceof StandardXYBarPainter)) {
-			return false;
-		}
-		return true;
-	}
+    /**
+     * Tests this instance for equality with an arbitrary object.
+     *
+     * @param obj  the obj (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof StandardXYBarPainter)) {
+            return false;
+        }
+        return true;
+    }
 
-	/**
-	 * Returns a hash code for this instance.
-	 *
-	 * @return A hash code.
-	 */
-	public int hashCode() {
+    /**
+     * Returns a hash code for this instance.
+     *
+     * @return A hash code.
+     */
+    public int hashCode() {
         int hash = 37;
-		// no fields to compute...
-		return hash;
-	}
+        // no fields to compute...
+        return hash;
+    }
 
 }
