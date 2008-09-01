@@ -179,6 +179,9 @@ public class CustomXYURLGeneratorTests extends TestCase {
 
     }
 
+    /**
+     * Some checks for the addURLSeries() method.
+     */
     public void testAddURLSeries() {
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
         // you can add a null list - it would have been better if this

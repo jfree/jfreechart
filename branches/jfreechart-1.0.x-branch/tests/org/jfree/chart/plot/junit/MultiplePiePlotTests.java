@@ -83,6 +83,8 @@ public class MultiplePiePlotTests extends TestCase
     /**
      * Receives a plot change event and records it.  Some tests will use this
      * to check that events have been generated (or not) when required.
+     *
+     * @param event  the event.
      */
     public void plotChanged(PlotChangeEvent event) {
         this.lastEvent = event;
