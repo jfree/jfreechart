@@ -343,8 +343,8 @@ public class DefaultCategoryDatasetTests extends TestCase {
      * Check that this class implements PublicCloneable.
      */
     public void testPublicCloneable() {
-    	DefaultCategoryDataset d = new DefaultCategoryDataset();
-    	assertTrue(d instanceof PublicCloneable);
+        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        assertTrue(d instanceof PublicCloneable);
     }
 
     private static final double EPSILON = 0.0000000001;

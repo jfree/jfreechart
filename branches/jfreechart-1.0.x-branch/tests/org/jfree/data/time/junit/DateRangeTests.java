@@ -135,13 +135,13 @@ public class DateRangeTests extends TestCase {
      * Confirm that a DateRange is immutable.
      */
     public void testImmutable() {
-    	Date d1 = new Date(10L);
-    	Date d2 = new Date(20L);
-    	DateRange r = new DateRange(d1, d2);
-    	d1.setTime(11L);
-    	assertEquals(new Date(10L), r.getLowerDate());
-    	r.getUpperDate().setTime(22L);
-    	assertEquals(new Date(20L), r.getUpperDate());
+        Date d1 = new Date(10L);
+        Date d2 = new Date(20L);
+        DateRange r = new DateRange(d1, d2);
+        d1.setTime(11L);
+        assertEquals(new Date(10L), r.getLowerDate());
+        r.getUpperDate().setTime(22L);
+        assertEquals(new Date(20L), r.getUpperDate());
     }
 
 }
