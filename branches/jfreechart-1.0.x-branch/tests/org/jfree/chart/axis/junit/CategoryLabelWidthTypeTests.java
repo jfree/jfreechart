@@ -81,9 +81,9 @@ public class CategoryLabelWidthTypeTests extends TestCase {
      */
     public void testEquals() {
         assertEquals(CategoryLabelWidthType.CATEGORY,
-        		CategoryLabelWidthType.CATEGORY);
+                CategoryLabelWidthType.CATEGORY);
         assertEquals(CategoryLabelWidthType.RANGE,
-        		CategoryLabelWidthType.RANGE);
+                CategoryLabelWidthType.RANGE);
     }
 
     /**

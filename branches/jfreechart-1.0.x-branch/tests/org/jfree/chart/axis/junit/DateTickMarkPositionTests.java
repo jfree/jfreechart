@@ -85,9 +85,9 @@ public class DateTickMarkPositionTests extends TestCase {
         assertEquals(DateTickMarkPosition.END, DateTickMarkPosition.END);
         assertFalse(DateTickMarkPosition.START.equals(null));
         assertFalse(DateTickMarkPosition.START.equals(
-        		DateTickMarkPosition.END));
+                DateTickMarkPosition.END));
         assertFalse(DateTickMarkPosition.MIDDLE.equals(
-        		DateTickMarkPosition.END));
+                DateTickMarkPosition.END));
     }
 
     /**
