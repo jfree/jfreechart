@@ -191,9 +191,9 @@ public class TaskSeries extends Series {
      *     the dataset.
      */
     public Object clone() throws CloneNotSupportedException {
-    	TaskSeries clone = (TaskSeries) super.clone();
-    	clone.tasks = (List) ObjectUtilities.deepClone(this.tasks);
-    	return clone;
+        TaskSeries clone = (TaskSeries) super.clone();
+        clone.tasks = (List) ObjectUtilities.deepClone(this.tasks);
+        return clone;
     }
 
 }

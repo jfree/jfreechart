@@ -59,122 +59,122 @@ import org.jfree.util.PublicCloneable;
 public class SlidingGanttCategoryDataset extends AbstractDataset
         implements GanttCategoryDataset {
 
-	/** The underlying dataset. */
-	private GanttCategoryDataset underlying;
+    /** The underlying dataset. */
+    private GanttCategoryDataset underlying;
 
-	/** The index of the first category to present. */
-	private int firstCategoryIndex;
+    /** The index of the first category to present. */
+    private int firstCategoryIndex;
 
-	/** The maximum number of categories to present. */
-	private int maximumCategoryCount;
+    /** The maximum number of categories to present. */
+    private int maximumCategoryCount;
 
-	/**
-	 * Creates a new instance.
-	 *
-	 * @param underlying  the underlying dataset (<code>null</code> not
-	 *     permitted).
-	 * @param firstColumn  the index of the first visible column from the
-	 *     underlying dataset.
-	 * @param maxColumns  the maximumColumnCount.
-	 */
-	public SlidingGanttCategoryDataset(GanttCategoryDataset underlying,
-			int firstColumn, int maxColumns) {
+    /**
+     * Creates a new instance.
+     *
+     * @param underlying  the underlying dataset (<code>null</code> not
+     *     permitted).
+     * @param firstColumn  the index of the first visible column from the
+     *     underlying dataset.
+     * @param maxColumns  the maximumColumnCount.
+     */
+    public SlidingGanttCategoryDataset(GanttCategoryDataset underlying,
+            int firstColumn, int maxColumns) {
         this.underlying = underlying;
         this.firstCategoryIndex = firstColumn;
         this.maximumCategoryCount = maxColumns;
-	}
+    }
 
-	/**
-	 * Returns the underlying dataset that was supplied to the constructor.
-	 *
-	 * @return The underlying dataset (never <code>null</code>).
-	 */
-	public GanttCategoryDataset getUnderlyingDataset() {
-		return this.underlying;
-	}
+    /**
+     * Returns the underlying dataset that was supplied to the constructor.
+     *
+     * @return The underlying dataset (never <code>null</code>).
+     */
+    public GanttCategoryDataset getUnderlyingDataset() {
+        return this.underlying;
+    }
 
-	/**
-	 * Returns the index of the first visible category.
-	 *
-	 * @return The index.
-	 *
-	 * @see #setFirstCategoryIndex(int)
-	 */
-	public int getFirstCategoryIndex() {
-		return this.firstCategoryIndex;
-	}
+    /**
+     * Returns the index of the first visible category.
+     *
+     * @return The index.
+     *
+     * @see #setFirstCategoryIndex(int)
+     */
+    public int getFirstCategoryIndex() {
+        return this.firstCategoryIndex;
+    }
 
-	/**
-	 * Sets the index of the first category that should be used from the
-	 * underlying dataset, and sends a {@link DatasetChangeEvent} to all
-	 * registered listeners.
-	 *
-	 * @param first  the index.
-	 *
-	 * @see #getFirstCategoryIndex()
-	 */
-	public void setFirstCategoryIndex(int first) {
-		if (first < 0 || first >= this.underlying.getColumnCount()) {
-			throw new IllegalArgumentException("Invalid index.");
-		}
-		this.firstCategoryIndex = first;
-		fireDatasetChanged();
-	}
+    /**
+     * Sets the index of the first category that should be used from the
+     * underlying dataset, and sends a {@link DatasetChangeEvent} to all
+     * registered listeners.
+     *
+     * @param first  the index.
+     *
+     * @see #getFirstCategoryIndex()
+     */
+    public void setFirstCategoryIndex(int first) {
+        if (first < 0 || first >= this.underlying.getColumnCount()) {
+            throw new IllegalArgumentException("Invalid index.");
+        }
+        this.firstCategoryIndex = first;
+        fireDatasetChanged();
+    }
 
-	/**
-	 * Returns the maximum category count.
-	 *
-	 * @return The maximum category count.
-	 *
-	 * @see #setMaximumCategoryCount(int)
-	 */
-	public int getMaximumCategoryCount() {
-		return this.maximumCategoryCount;
-	}
+    /**
+     * Returns the maximum category count.
+     *
+     * @return The maximum category count.
+     *
+     * @see #setMaximumCategoryCount(int)
+     */
+    public int getMaximumCategoryCount() {
+        return this.maximumCategoryCount;
+    }
 
-	/**
-	 * Sets the maximum category count and sends a {@link DatasetChangeEvent}
-	 * to all registered listeners.
-	 *
-	 * @param max  the maximum.
-	 *
-	 * @see #getMaximumCategoryCount()
-	 */
-	public void setMaximumCategoryCount(int max) {
-		if (max < 0) {
-			throw new IllegalArgumentException("Requires 'max' >= 0.");
-		}
-		this.maximumCategoryCount = max;
-		fireDatasetChanged();
-	}
+    /**
+     * Sets the maximum category count and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param max  the maximum.
+     *
+     * @see #getMaximumCategoryCount()
+     */
+    public void setMaximumCategoryCount(int max) {
+        if (max < 0) {
+            throw new IllegalArgumentException("Requires 'max' >= 0.");
+        }
+        this.maximumCategoryCount = max;
+        fireDatasetChanged();
+    }
 
-	/**
-	 * Returns the index of the last column for this dataset, or -1.
-	 *
-	 * @return The index.
-	 */
-	private int lastCategoryIndex() {
-		if (this.maximumCategoryCount == 0) {
-			return -1;
-		}
-		return Math.min(this.firstCategoryIndex + this.maximumCategoryCount,
-				this.underlying.getColumnCount()) - 1;
-	}
+    /**
+     * Returns the index of the last column for this dataset, or -1.
+     *
+     * @return The index.
+     */
+    private int lastCategoryIndex() {
+        if (this.maximumCategoryCount == 0) {
+            return -1;
+        }
+        return Math.min(this.firstCategoryIndex + this.maximumCategoryCount,
+                this.underlying.getColumnCount()) - 1;
+    }
 
-	/**
-	 * Returns the index for the specified column key.
-	 *
-	 * @param key  the key.
-	 *
-	 * @return The column index, or -1 if the key is not recognised.
-	 */
-	public int getColumnIndex(Comparable key) {
-		int index = this.underlying.getColumnIndex(key);
-		if (index >= this.firstCategoryIndex && index <= lastCategoryIndex()) {
-			return index - this.firstCategoryIndex;
-		}
-		return -1;  // we didn't find the key
-	}
+    /**
+     * Returns the index for the specified column key.
+     *
+     * @param key  the key.
+     *
+     * @return The column index, or -1 if the key is not recognised.
+     */
+    public int getColumnIndex(Comparable key) {
+        int index = this.underlying.getColumnIndex(key);
+        if (index >= this.firstCategoryIndex && index <= lastCategoryIndex()) {
+            return index - this.firstCategoryIndex;
+        }
+        return -1;  // we didn't find the key
+    }
 
     /**
      * Returns the column key for a given index.
@@ -185,9 +185,9 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @throws IndexOutOfBoundsException if <code>row</code> is out of bounds.
      */
-	public Comparable getColumnKey(int column) {
-		return this.underlying.getColumnKey(column + this.firstCategoryIndex);
-	}
+    public Comparable getColumnKey(int column) {
+        return this.underlying.getColumnKey(column + this.firstCategoryIndex);
+    }
 
     /**
      * Returns the column keys.
@@ -196,14 +196,14 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getColumnKey(int)
      */
-	public List getColumnKeys() {
-		List result = new java.util.ArrayList();
-		int last = lastCategoryIndex();
-		for (int i = this.firstCategoryIndex; i < last; i++) {
-			result.add(this.underlying.getColumnKey(i));
-		}
-		return Collections.unmodifiableList(result);
-	}
+    public List getColumnKeys() {
+        List result = new java.util.ArrayList();
+        int last = lastCategoryIndex();
+        for (int i = this.firstCategoryIndex; i < last; i++) {
+            result.add(this.underlying.getColumnKey(i));
+        }
+        return Collections.unmodifiableList(result);
+    }
 
     /**
      * Returns the row index for a given key.
@@ -212,9 +212,9 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @return The row index, or <code>-1</code> if the key is unrecognised.
      */
-	public int getRowIndex(Comparable key) {
-		return this.underlying.getRowIndex(key);
-	}
+    public int getRowIndex(Comparable key) {
+        return this.underlying.getRowIndex(key);
+    }
 
     /**
      * Returns the row key for a given index.
@@ -225,18 +225,18 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @throws IndexOutOfBoundsException if <code>row</code> is out of bounds.
      */
-	public Comparable getRowKey(int row) {
-		return this.underlying.getRowKey(row);
-	}
+    public Comparable getRowKey(int row) {
+        return this.underlying.getRowKey(row);
+    }
 
     /**
      * Returns the row keys.
      *
      * @return The keys.
      */
-	public List getRowKeys() {
-		return this.underlying.getRowKeys();
-	}
+    public List getRowKeys() {
+        return this.underlying.getRowKeys();
+    }
 
     /**
      * Returns the value for a pair of keys.
@@ -248,40 +248,40 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @throws UnknownKeyException if either key is not defined in the dataset.
      */
-	public Number getValue(Comparable rowKey, Comparable columnKey) {
-		int r = getRowIndex(rowKey);
-		int c = getColumnIndex(columnKey);
-		if (c != -1) {
+    public Number getValue(Comparable rowKey, Comparable columnKey) {
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        if (c != -1) {
             return this.underlying.getValue(r, c + this.firstCategoryIndex);
-		}
-		else {
-			throw new UnknownKeyException("Unknown columnKey: " + columnKey);
-		}
-	}
+        }
+        else {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+    }
 
     /**
      * Returns the number of columns in the table.
      *
      * @return The column count.
      */
-	public int getColumnCount() {
-		int last = lastCategoryIndex();
-		if (last == -1) {
-			return 0;
-		}
-		else {
+    public int getColumnCount() {
+        int last = lastCategoryIndex();
+        if (last == -1) {
+            return 0;
+        }
+        else {
             return Math.max(last - this.firstCategoryIndex + 1, 0);
-		}
-	}
+        }
+    }
 
     /**
      * Returns the number of rows in the table.
      *
      * @return The row count.
      */
-	public int getRowCount() {
-		return this.underlying.getRowCount();
-	}
+    public int getRowCount() {
+        return this.underlying.getRowCount();
+    }
 
     /**
      * Returns a value from the table.
@@ -291,9 +291,9 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @return The value (possibly <code>null</code>).
      */
-	public Number getValue(int row, int column) {
-		return this.underlying.getValue(row, column + this.firstCategoryIndex);
-	}
+    public Number getValue(int row, int column) {
+        return this.underlying.getValue(row, column + this.firstCategoryIndex);
+    }
 
     /**
      * Returns the percent complete for a given item.
@@ -303,17 +303,17 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @return The percent complete.
      */
-	public Number getPercentComplete(Comparable rowKey, Comparable columnKey) {
-		int r = getRowIndex(rowKey);
-		int c = getColumnIndex(columnKey);
-		if (c != -1) {
+    public Number getPercentComplete(Comparable rowKey, Comparable columnKey) {
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        if (c != -1) {
             return this.underlying.getPercentComplete(r,
-            		c + this.firstCategoryIndex);
-		}
-		else {
-			throw new UnknownKeyException("Unknown columnKey: " + columnKey);
-		}
-	}
+                    c + this.firstCategoryIndex);
+        }
+        else {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+    }
 
     /**
      * Returns the percentage complete value of a sub-interval for a given item.
@@ -326,18 +326,18 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getPercentComplete(int, int, int)
      */
-	public Number getPercentComplete(Comparable rowKey, Comparable columnKey,
-			int subinterval) {
-		int r = getRowIndex(rowKey);
-		int c = getColumnIndex(columnKey);
-		if (c != -1) {
+    public Number getPercentComplete(Comparable rowKey, Comparable columnKey,
+            int subinterval) {
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        if (c != -1) {
             return this.underlying.getPercentComplete(r,
-            		c + this.firstCategoryIndex, subinterval);
-		}
-		else {
-			throw new UnknownKeyException("Unknown columnKey: " + columnKey);
-		}
-	}
+                    c + this.firstCategoryIndex, subinterval);
+        }
+        else {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+    }
 
     /**
      * Returns the end value of a sub-interval for a given item.
@@ -350,18 +350,18 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getStartValue(Comparable, Comparable, int)
      */
-	public Number getEndValue(Comparable rowKey, Comparable columnKey,
-			int subinterval) {
-		int r = getRowIndex(rowKey);
-		int c = getColumnIndex(columnKey);
-		if (c != -1) {
+    public Number getEndValue(Comparable rowKey, Comparable columnKey,
+            int subinterval) {
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        if (c != -1) {
             return this.underlying.getEndValue(r,
-            		c + this.firstCategoryIndex, subinterval);
-		}
-		else {
-			throw new UnknownKeyException("Unknown columnKey: " + columnKey);
-		}
-	}
+                    c + this.firstCategoryIndex, subinterval);
+        }
+        else {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+    }
 
     /**
      * Returns the end value of a sub-interval for a given item.
@@ -374,10 +374,10 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getStartValue(int, int, int)
      */
-	public Number getEndValue(int row, int column, int subinterval) {
-		return this.underlying.getEndValue(row,
-				column + this.firstCategoryIndex, subinterval);
-	}
+    public Number getEndValue(int row, int column, int subinterval) {
+        return this.underlying.getEndValue(row,
+                column + this.firstCategoryIndex, subinterval);
+    }
 
     /**
      * Returns the percent complete for a given item.
@@ -387,10 +387,10 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @return The percent complete.
      */
-	public Number getPercentComplete(int series, int category) {
-		return this.underlying.getPercentComplete(series,
-				category + this.firstCategoryIndex);
-	}
+    public Number getPercentComplete(int series, int category) {
+        return this.underlying.getPercentComplete(series,
+                category + this.firstCategoryIndex);
+    }
 
     /**
      * Returns the percentage complete value of a sub-interval for a given item.
@@ -403,10 +403,10 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getPercentComplete(Comparable, Comparable, int)
      */
-	public Number getPercentComplete(int row, int column, int subinterval) {
-		return this.underlying.getPercentComplete(row,
-				column + this.firstCategoryIndex, subinterval);
-	}
+    public Number getPercentComplete(int row, int column, int subinterval) {
+        return this.underlying.getPercentComplete(row,
+                column + this.firstCategoryIndex, subinterval);
+    }
 
     /**
      * Returns the start value of a sub-interval for a given item.
@@ -419,18 +419,18 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getEndValue(Comparable, Comparable, int)
      */
-	public Number getStartValue(Comparable rowKey, Comparable columnKey,
-			int subinterval) {
-		int r = getRowIndex(rowKey);
-		int c = getColumnIndex(columnKey);
-		if (c != -1) {
+    public Number getStartValue(Comparable rowKey, Comparable columnKey,
+            int subinterval) {
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        if (c != -1) {
             return this.underlying.getStartValue(r,
-            		c + this.firstCategoryIndex, subinterval);
-		}
-		else {
-			throw new UnknownKeyException("Unknown columnKey: " + columnKey);
-		}
-	}
+                    c + this.firstCategoryIndex, subinterval);
+        }
+        else {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+    }
 
     /**
      * Returns the start value of a sub-interval for a given item.
@@ -443,10 +443,10 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getEndValue(int, int, int)
      */
-	public Number getStartValue(int row, int column, int subinterval) {
-		return this.underlying.getStartValue(row,
-				column + this.firstCategoryIndex, subinterval);
-	}
+    public Number getStartValue(int row, int column, int subinterval) {
+        return this.underlying.getStartValue(row,
+                column + this.firstCategoryIndex, subinterval);
+    }
 
     /**
      * Returns the number of sub-intervals for a given item.
@@ -458,17 +458,17 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getSubIntervalCount(int, int)
      */
-	public int getSubIntervalCount(Comparable rowKey, Comparable columnKey) {
-		int r = getRowIndex(rowKey);
-		int c = getColumnIndex(columnKey);
-		if (c != -1) {
+    public int getSubIntervalCount(Comparable rowKey, Comparable columnKey) {
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        if (c != -1) {
             return this.underlying.getSubIntervalCount(r,
-            		c + this.firstCategoryIndex);
-		}
-		else {
-			throw new UnknownKeyException("Unknown columnKey: " + columnKey);
-		}
-	}
+                    c + this.firstCategoryIndex);
+        }
+        else {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+    }
 
     /**
      * Returns the number of sub-intervals for a given item.
@@ -480,10 +480,10 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getSubIntervalCount(Comparable, Comparable)
      */
-	public int getSubIntervalCount(int row, int column) {
-		return this.underlying.getSubIntervalCount(row,
-				column + this.firstCategoryIndex);
-	}
+    public int getSubIntervalCount(int row, int column) {
+        return this.underlying.getSubIntervalCount(row,
+                column + this.firstCategoryIndex);
+    }
 
     /**
      * Returns the start value for the interval for a given series and category.
@@ -495,16 +495,16 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getEndValue(Comparable, Comparable)
      */
-	public Number getStartValue(Comparable rowKey, Comparable columnKey) {
-		int r = getRowIndex(rowKey);
-		int c = getColumnIndex(columnKey);
-		if (c != -1) {
+    public Number getStartValue(Comparable rowKey, Comparable columnKey) {
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        if (c != -1) {
             return this.underlying.getStartValue(r, c + this.firstCategoryIndex);
-		}
-		else {
-			throw new UnknownKeyException("Unknown columnKey: " + columnKey);
-		}
-	}
+        }
+        else {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+    }
 
     /**
      * Returns the start value for the interval for a given series and category.
@@ -516,10 +516,10 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getEndValue(int, int)
      */
-	public Number getStartValue(int row, int column) {
-		return this.underlying.getStartValue(row,
-				column + this.firstCategoryIndex);
-	}
+    public Number getStartValue(int row, int column) {
+        return this.underlying.getStartValue(row,
+                column + this.firstCategoryIndex);
+    }
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -531,16 +531,16 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @see #getStartValue(Comparable, Comparable)
      */
-	public Number getEndValue(Comparable rowKey, Comparable columnKey) {
-		int r = getRowIndex(rowKey);
-		int c = getColumnIndex(columnKey);
-		if (c != -1) {
+    public Number getEndValue(Comparable rowKey, Comparable columnKey) {
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        if (c != -1) {
             return this.underlying.getEndValue(r, c + this.firstCategoryIndex);
-		}
-		else {
-			throw new UnknownKeyException("Unknown columnKey: " + columnKey);
-		}
-	}
+        }
+        else {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+    }
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -550,38 +550,38 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @return The end value (possibly <code>null</code>).
      */
-	public Number getEndValue(int series, int category) {
-		return this.underlying.getEndValue(series,
-				category + this.firstCategoryIndex);
-	}
+    public Number getEndValue(int series, int category) {
+        return this.underlying.getEndValue(series,
+                category + this.firstCategoryIndex);
+    }
 
-	/**
-	 * Tests this <code>SlidingCategoryDataset</code> for equality with an
-	 * arbitrary object.
-	 *
-	 * @param obj  the object (<code>null</code> permitted).
-	 *
-	 * @return A boolean.
-	 */
-	public boolean equals(Object obj) {
-		if (obj == this) {
-			return true;
-		}
-		if (!(obj instanceof SlidingGanttCategoryDataset)) {
-			return false;
-		}
-		SlidingGanttCategoryDataset that = (SlidingGanttCategoryDataset) obj;
-		if (this.firstCategoryIndex != that.firstCategoryIndex) {
-			return false;
-		}
-		if (this.maximumCategoryCount != that.maximumCategoryCount) {
-			return false;
-		}
-		if (!this.underlying.equals(that.underlying)) {
-			return false;
-		}
-		return true;
-	}
+    /**
+     * Tests this <code>SlidingCategoryDataset</code> for equality with an
+     * arbitrary object.
+     *
+     * @param obj  the object (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof SlidingGanttCategoryDataset)) {
+            return false;
+        }
+        SlidingGanttCategoryDataset that = (SlidingGanttCategoryDataset) obj;
+        if (this.firstCategoryIndex != that.firstCategoryIndex) {
+            return false;
+        }
+        if (this.maximumCategoryCount != that.maximumCategoryCount) {
+            return false;
+        }
+        if (!this.underlying.equals(that.underlying)) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Returns an independent copy of the dataset.  Note that:
@@ -601,7 +601,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
         SlidingGanttCategoryDataset clone
                 = (SlidingGanttCategoryDataset) super.clone();
         if (this.underlying instanceof PublicCloneable) {
-        	PublicCloneable pc = (PublicCloneable) this.underlying;
+            PublicCloneable pc = (PublicCloneable) this.underlying;
             clone.underlying = (GanttCategoryDataset) pc.clone();
         }
         return clone;
