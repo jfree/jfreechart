@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------
@@ -37,7 +37,7 @@
  * 18-Aug-2003 : Version 1 (DG);
  * 31-Jul-2006 : Added test for new clear() method (DG);
  * 01-Aug-2006 : Added testGetKey() and testGetIndex() methods (DG);
- * 
+ *
  */
 
 package org.jfree.data.general.junit;
@@ -60,11 +60,16 @@ import org.jfree.data.general.DefaultPieDataset;
 /**
  * Tests for the {@link org.jfree.data.general.PieDataset} class.
  */
-public class DefaultPieDatasetTests extends TestCase 
+public class DefaultPieDatasetTests extends TestCase
     implements DatasetChangeListener {
 
     private DatasetChangeEvent lastEvent;
-    
+
+    /**
+     * Records the last event.
+     *
+     * @param event  the last event.
+     */
     public void datasetChanged(DatasetChangeEvent event) {
         this.lastEvent = event;
     }
@@ -103,7 +108,7 @@ public class DefaultPieDatasetTests extends TestCase
         assertNotNull(this.lastEvent);
         assertEquals(0, d.getItemCount());
     }
-    
+
     /**
      * Some checks for the getKey(int) method.
      */
@@ -113,7 +118,7 @@ public class DefaultPieDatasetTests extends TestCase
         d.setValue("B", 2.0);
         assertEquals("A", d.getKey(0));
         assertEquals("B", d.getKey(1));
-        
+
         boolean pass = false;
         try {
             d.getKey(-1);
@@ -122,7 +127,7 @@ public class DefaultPieDatasetTests extends TestCase
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             d.getKey(2);
@@ -132,7 +137,7 @@ public class DefaultPieDatasetTests extends TestCase
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the getIndex() method.
      */
@@ -143,7 +148,7 @@ public class DefaultPieDatasetTests extends TestCase
         assertEquals(0, d.getIndex("A"));
         assertEquals(1, d.getIndex("B"));
         assertEquals(-1, d.getIndex("XX"));
-        
+
         boolean pass = false;
         try {
             d.getIndex(null);
@@ -153,7 +158,7 @@ public class DefaultPieDatasetTests extends TestCase
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Confirm that cloning works.
      */
