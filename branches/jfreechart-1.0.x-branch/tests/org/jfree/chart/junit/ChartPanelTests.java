@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------
@@ -81,10 +81,10 @@ public class ChartPanelTests extends TestCase implements ChartMouseListener {
      * Test that the constructor will accept a null chart.
      */
     public void testConstructor1() {
-        ChartPanel panel = new ChartPanel(null); 
+        ChartPanel panel = new ChartPanel(null);
         assertEquals(null, panel.getChart());
     }
-    
+
     /**
      * Test that it is possible to set the panel's chart to null.
      */
@@ -94,7 +94,7 @@ public class ChartPanelTests extends TestCase implements ChartMouseListener {
         panel.setChart(null);
         assertEquals(null, panel.getChart());
     }
-    
+
     /**
      * Check the behaviour of the getListeners() method.
      */
@@ -111,17 +111,17 @@ public class ChartPanelTests extends TestCase implements ChartMouseListener {
         p.removeChartMouseListener(this);
         listeners = p.getListeners((Class) ChartMouseListener.class);
         assertEquals(0, listeners.length);
-    
+
         // try a null argument
         boolean pass = false;
         try {
             listeners = p.getListeners((Class) null);
         }
         catch (NullPointerException e) {
-            pass = true;    
+            pass = true;
         }
         assertTrue(pass);
-    
+
         // try a class that isn't a listener
         pass = false;
         try {
@@ -133,10 +133,20 @@ public class ChartPanelTests extends TestCase implements ChartMouseListener {
         assertTrue(pass);
     }
 
+    /**
+     * Ignores a mouse click event.
+     *
+     * @param event  the event.
+     */
     public void chartMouseClicked(ChartMouseEvent event) {
         // ignore
     }
 
+    /**
+     * Ignores a mouse move event.
+     *
+     * @param event  the event.
+     */
     public void chartMouseMoved(ChartMouseEvent event) {
         // ignore
     }
