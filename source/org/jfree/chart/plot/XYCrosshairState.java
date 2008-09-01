@@ -48,11 +48,11 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
  */
 public class XYCrosshairState extends CrosshairState {
 
-	/**
-	 * Creates a new instance.
-	 */
-	public XYCrosshairState() {
+    /**
+     * Creates a new instance.
+     */
+    public XYCrosshairState() {
 
-	}
+    }
 
 }

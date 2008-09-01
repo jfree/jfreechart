@@ -371,8 +371,8 @@ public class CombinedDomainXYPlot extends XYPlot
         int n = this.subplots.size();
         int totalWeight = 0;
         for (int i = 0; i < n; i++) {
-        	XYPlot sub = (XYPlot) this.subplots.get(i);
-        	totalWeight += sub.getWeight();
+            XYPlot sub = (XYPlot) this.subplots.get(i);
+            totalWeight += sub.getWeight();
         }
         this.subplotAreas = new Rectangle2D[n];
         double x = adjustedPlotArea.getX();

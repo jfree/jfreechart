@@ -277,8 +277,8 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         int n = this.subplots.size();
         int totalWeight = 0;
         for (int i = 0; i < n; i++) {
-        	CategoryPlot sub = (CategoryPlot) this.subplots.get(i);
-        	totalWeight += sub.getWeight();
+            CategoryPlot sub = (CategoryPlot) this.subplots.get(i);
+            totalWeight += sub.getWeight();
         }
         // calculate plotAreas of all sub-plots, maximum vertical/horizontal
         // axis width/height
@@ -373,10 +373,10 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
             }
             Point2D subAnchor = null;
             if (anchor != null && this.subplotArea[i].contains(anchor)) {
-            	subAnchor = anchor;
+                subAnchor = anchor;
             }
             plot.draw(g2, this.subplotArea[i], subAnchor, parentState,
-            		subplotInfo);
+                    subplotInfo);
         }
 
         if (info != null) {
