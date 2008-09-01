@@ -48,9 +48,7 @@
 
 package org.jfree.chart.renderer.category;
 
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
@@ -291,7 +289,7 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
                 barBase = RectangleEdge.RIGHT;
             }
             else {
-            	barBase = RectangleEdge.LEFT;
+                barBase = RectangleEdge.LEFT;
             }
         }
         else {
@@ -299,7 +297,7 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
                 barBase = RectangleEdge.BOTTOM;
             }
             else {
-            	barBase = RectangleEdge.TOP;
+                barBase = RectangleEdge.TOP;
             }
         }
         RectangleEdge location = plot.getRangeAxisEdge();

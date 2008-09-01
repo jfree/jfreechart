@@ -92,9 +92,7 @@
 
 package org.jfree.chart.renderer.category;
 
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
@@ -111,7 +109,6 @@ import org.jfree.data.DataUtilities;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
-import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.PublicCloneable;
@@ -333,7 +330,7 @@ public class StackedBarRenderer extends BarRenderer
                 barBase = RectangleEdge.RIGHT;
             }
             else {
-            	barBase = RectangleEdge.LEFT;
+                barBase = RectangleEdge.LEFT;
             }
         }
         else {
@@ -341,7 +338,7 @@ public class StackedBarRenderer extends BarRenderer
                 barBase = RectangleEdge.BOTTOM;
             }
             else {
-            	barBase = RectangleEdge.TOP;
+                barBase = RectangleEdge.TOP;
             }
         }
 
@@ -372,15 +369,15 @@ public class StackedBarRenderer extends BarRenderer
                     barLength);
         }
         if (pass == 0) {
-        	if (getShadowsVisible()) {
+            if (getShadowsVisible()) {
                 boolean pegToBase = (positive && (positiveBase == getBase()))
                         || (!positive && (negativeBase == getBase()));
                 getBarPainter().paintBarShadow(g2, this, row, column, bar,
-                		barBase, pegToBase);
-        	}
+                        barBase, pegToBase);
+            }
         }
         else if (pass == 1) {
-        	getBarPainter().paintBar(g2, this, row, column, bar, barBase);
+            getBarPainter().paintBar(g2, this, row, column, bar, barBase);
 
             // add an item entity, if this information is being collected
             EntityCollection entities = state.getEntityCollection();

@@ -1884,7 +1884,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @since 1.0.11
      */
     public double getItemMiddle(Comparable rowKey, Comparable columnKey,
-    		CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
-    		RectangleEdge edge);
+            CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
+            RectangleEdge edge);
 
 }
