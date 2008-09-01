@@ -108,7 +108,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      * @since 1.0.10.
      */
     public long getStartMillis() {
-    	return this.start;
+        return this.start;
     }
 
     /**
@@ -128,7 +128,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      * @since 1.0.10.
      */
     public long getEndMillis() {
-    	return this.end;
+        return this.end;
     }
 
     /**

@@ -493,13 +493,13 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
-    	HistogramDataset clone = (HistogramDataset) super.clone();
+        HistogramDataset clone = (HistogramDataset) super.clone();
         int seriesCount = getSeriesCount();
-    	clone.list = new java.util.ArrayList(seriesCount);
+        clone.list = new java.util.ArrayList(seriesCount);
         for (int i = 0; i < seriesCount; i++) {
-        	clone.list.add(new HashMap((Map) this.list.get(i)));
+            clone.list.add(new HashMap((Map) this.list.get(i)));
         }
-    	return clone;
+        return clone;
     }
 
 }
