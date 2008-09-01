@@ -79,10 +79,7 @@ import org.jfree.util.ShapeUtilities;
  * A renderer that draws a small dot at each data point for an {@link XYPlot}.
  */
 public class XYDotRenderer extends AbstractXYItemRenderer
-                           implements XYItemRenderer,
-                                      Cloneable,
-                                      PublicCloneable,
-                                      Serializable {
+        implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -2764344339073566425L;
@@ -233,6 +230,11 @@ public class XYDotRenderer extends AbstractXYItemRenderer
                          int item,
                          CrosshairState crosshairState,
                          int pass) {
+
+        // do nothing if item is not visible
+        if (!getItemVisible(series, item)) {
+            return;
+        }
 
         // get the data point...
         double x = dataset.getXValue(series, item);
