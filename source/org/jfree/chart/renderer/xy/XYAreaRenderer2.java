@@ -261,7 +261,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
                 result.setLabelFont(lookupLegendTextFont(series));
                 Paint labelPaint = lookupLegendTextPaint(series);
                 if (labelPaint != null) {
-                	result.setLabelPaint(labelPaint);
+                    result.setLabelPaint(labelPaint);
                 }
                 result.setDataset(dataset);
                 result.setDatasetIndex(datasetIndex);
