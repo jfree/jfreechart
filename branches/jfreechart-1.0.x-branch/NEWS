@@ -1,3 +1,50 @@
+JFreeChart 1.0.11
+-----------------
+? September 2008
+
+This release features a new chart theming mechanism to allow charts to be
+restyled easily, a new BarPainter mechanism to enhance the appearance of bar
+charts, a scaling facility for the XYDrawableAnnotation, and various bug fixes 
+and API improvements.
+
+API Adjustments:
+- AbstractRenderer - added clearSeriesPaints() and clearSeriesStrokes() 
+    methods;
+- BarRenderer - added shadowPaint attribute;
+- CategoryAxis - added getCategoryMiddle() method;
+- CategoryPlot - added getRendererCount() method;
+- ChartFactory - added get/setChartTheme() methods;
+- ChartPanel - increased default maximum drawing width and height;
+- ChartTheme - new interface;
+- ChartUtilities - added applyCurrentTheme() method;
+- CompositeTitle - added backgroundPaint attribute;
+- GradientBarPainter - new class;
+- LegendTitle - added getWrapper() method;
+- OHLCSeriesCollection - added xPosition attribute;
+- PaintScaleLegend - new subdivisions field;
+- PiePlot - added autoPopulate flags, and methods to clear section attributes;
+- Plot - added setDrawingSupplier() method;
+- RelativeDateFormat - added methods to control formatting of hours and 
+    minutes - see patch 2033092;
+- StandardChartTheme - new class;
+- XYItemRendererState - new methods;
+- XYPlot - added getRendererCount() method.
+
+Patches:
+1997549 : Status calls to XYItemRendererState [Ulrich Voigt];
+2006826 : CompositeTitle drawing fix;
+2033092 : Additional formatters for RelativeDateFormat [Cole Markham];
+
+Bug Fixes:
+1994355 : ChartComposite listener type;
+2051168 : No key in LegendItemEntity for pie charts;
+
+Also fixed drawing of alternate grid bands in SymbolAxis, the totalWeight 
+calculation in the CombinedXXXPlot classes, a NullPointerException in the
+XYPlot class when drawing quadrants, outline visibility in the 
+CategoryPlot class, auto-range calculations with XYBarRenderer.
+
+
 JFreeChart 1.0.10
 -----------------
 9 June 2008
