@@ -1215,7 +1215,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                 }
 
                 Tick tick = new NumberTick(new Double(currentTickValue),
-                		tickLabel, anchor, rotationAnchor, angle);
+                        tickLabel, anchor, rotationAnchor, angle);
                 result.add(tick);
             }
         }
@@ -1289,7 +1289,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                 }
 
                 Tick tick = new NumberTick(new Double(currentTickValue),
-                		tickLabel, anchor, rotationAnchor, angle);
+                        tickLabel, anchor, rotationAnchor, angle);
                 result.add(tick);
             }
         }
