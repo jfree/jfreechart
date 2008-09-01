@@ -53,11 +53,11 @@ import org.jfree.chart.JFreeChart;
  */
 public interface ChartTheme {
 
-	/**
-	 * Applies this theme to the supplied chart.
-	 *
-	 * @param chart  the chart (<code>null</code> not permitted).
-	 */
+    /**
+     * Applies this theme to the supplied chart.
+     *
+     * @param chart  the chart (<code>null</code> not permitted).
+     */
     public void apply(JFreeChart chart);
 
 }

@@ -1927,7 +1927,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             Zoomable z = (Zoomable) p;
             // we need to guard against this.zoomPoint being null
             Point2D zp = (this.zoomPoint != null
-            		? this.zoomPoint : new Point());
+                    ? this.zoomPoint : new Point());
             z.zoomDomainAxes(0.0, this.info.getPlotInfo(), zp);
         }
     }
@@ -1941,7 +1941,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             Zoomable z = (Zoomable) p;
             // we need to guard against this.zoomPoint being null
             Point2D zp = (this.zoomPoint != null
-            		? this.zoomPoint : new Point());
+                    ? this.zoomPoint : new Point());
             z.zoomRangeAxes(0.0, this.info.getPlotInfo(), zp);
         }
     }
