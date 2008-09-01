@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------
@@ -55,7 +55,7 @@ import junit.framework.TestSuite;
 import org.jfree.chart.entity.ContourEntity;
 
 /**
- * Tests for the {@link ContourEntity} class.
+ * Tests for the <code>ContourEntity</code> class.
  */
 public class ContourEntityTests extends TestCase {
 
@@ -83,31 +83,31 @@ public class ContourEntityTests extends TestCase {
     public void testEquals() {
         ContourEntity e1 = new ContourEntity(
             new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL"
-        ); 
+        );
         ContourEntity e2 = new ContourEntity(
             new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL"
         );
-        assertTrue(e1.equals(e2));  
-        
+        assertTrue(e1.equals(e2));
+
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
         assertFalse(e1.equals(e2));
         e2.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(e1.equals(e2));  
+        assertTrue(e1.equals(e2));
 
         e1.setToolTipText("New ToolTip");
         assertFalse(e1.equals(e2));
         e2.setToolTipText("New ToolTip");
-        assertTrue(e1.equals(e2));  
+        assertTrue(e1.equals(e2));
 
         e1.setURLText("New URL");
         assertFalse(e1.equals(e2));
         e2.setURLText("New URL");
-        assertTrue(e1.equals(e2));  
+        assertTrue(e1.equals(e2));
 
         e1.setIndex(99);
         assertFalse(e1.equals(e2));
         e2.setIndex(99);
-        assertTrue(e1.equals(e2));  
+        assertTrue(e1.equals(e2));
     }
 
     /**
@@ -116,9 +116,9 @@ public class ContourEntityTests extends TestCase {
     public void testCloning() {
         ContourEntity e1 = new ContourEntity(
             new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL"
-        ); 
+        );
         ContourEntity e2 = null;
-        
+
         try {
             e2 = (ContourEntity) e1.clone();
         }
@@ -136,7 +136,7 @@ public class ContourEntityTests extends TestCase {
     public void testSerialization() {
         ContourEntity e1 = new ContourEntity(
             new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL"
-        ); 
+        );
         ContourEntity e2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();

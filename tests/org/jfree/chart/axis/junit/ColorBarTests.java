@@ -57,7 +57,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.GreyPalette;
 
 /**
- * Tests for the {@link ColorBar} class.
+ * Tests for the <code>ColorBar</code> class.
  */
 public class ColorBarTests extends TestCase {
 
