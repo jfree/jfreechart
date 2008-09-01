@@ -258,7 +258,7 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public String getNullYString() {
-    	return this.nullYString;
+        return this.nullYString;
     }
 
     /**
@@ -331,7 +331,7 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
             return false;
         }
         if (!this.nullYString.equals(that.nullYString)) {
-        	return false;
+            return false;
         }
         return true;
     }
