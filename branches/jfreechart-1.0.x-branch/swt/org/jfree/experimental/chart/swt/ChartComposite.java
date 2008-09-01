@@ -1874,16 +1874,16 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     }
 
     /* (non-Javadoc)
-	 * @see org.eclipse.swt.widgets.Widget#dispose()
-	 */
-	public void dispose() {
-		if (this.chartBuffer != null) this.chartBuffer.dispose();
-		// de-register the composite as a listener for the chart.
+     * @see org.eclipse.swt.widgets.Widget#dispose()
+     */
+    public void dispose() {
+        if (this.chartBuffer != null) this.chartBuffer.dispose();
+        // de-register the composite as a listener for the chart.
         if (this.chart != null) {
             this.chart.removeChangeListener(this);
             this.chart.removeProgressListener(this);
         }
-		super.dispose();
-	}
+        super.dispose();
+    }
 
 }
