@@ -1047,10 +1047,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void clearSeriesPaints(boolean notify) {
-    	this.paintList.clear();
-    	if (notify) {
-    		fireChangeEvent();
-    	}
+        this.paintList.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
     }
 
     /**
@@ -1648,10 +1648,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void clearSeriesStrokes(boolean notify) {
-    	this.strokeList.clear();
-    	if (notify) {
-    		fireChangeEvent();
-    	}
+        this.strokeList.clear();
+        if (notify) {
+            fireChangeEvent();
+        }
     }
 
     /**
@@ -3179,10 +3179,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     public Shape lookupLegendShape(int series) {
         Shape result = getLegendShape(series);
         if (result == null) {
-        	result = this.baseLegendShape;
+            result = this.baseLegendShape;
         }
         if (result == null) {
-        	result = lookupSeriesShape(series);
+            result = lookupSeriesShape(series);
         }
         return result;
     }
@@ -3200,7 +3200,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public Shape getLegendShape(int series) {
-    	return this.legendShape.getShape(series);
+        return this.legendShape.getShape(series);
     }
 
     /**
@@ -3213,8 +3213,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setLegendShape(int series, Shape shape) {
-    	this.legendShape.setShape(series, shape);
-    	fireChangeEvent();
+        this.legendShape.setShape(series, shape);
+        fireChangeEvent();
     }
 
     /**
@@ -3225,7 +3225,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public Shape getBaseLegendShape() {
-    	return this.baseLegendShape;
+        return this.baseLegendShape;
     }
 
     /**
@@ -3237,8 +3237,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setBaseLegendShape(Shape shape) {
-    	this.baseLegendShape = shape;
-    	fireChangeEvent();
+        this.baseLegendShape = shape;
+        fireChangeEvent();
     }
 
     /**
@@ -3253,7 +3253,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     public Font lookupLegendTextFont(int series) {
         Font result = getLegendTextFont(series);
         if (result == null) {
-        	result = this.baseLegendTextFont;
+            result = this.baseLegendTextFont;
         }
         return result;
     }
@@ -3271,7 +3271,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public Font getLegendTextFont(int series) {
-    	return (Font) this.legendTextFont.get(series);
+        return (Font) this.legendTextFont.get(series);
     }
 
     /**
@@ -3284,8 +3284,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setLegendTextFont(int series, Font font) {
-    	this.legendTextFont.set(series, font);
-    	fireChangeEvent();
+        this.legendTextFont.set(series, font);
+        fireChangeEvent();
     }
 
     /**
@@ -3296,7 +3296,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public Font getBaseLegendTextFont() {
-    	return this.baseLegendTextFont;
+        return this.baseLegendTextFont;
     }
 
     /**
@@ -3308,8 +3308,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setBaseLegendTextFont(Font font) {
-    	this.baseLegendTextFont = font;
-    	fireChangeEvent();
+        this.baseLegendTextFont = font;
+        fireChangeEvent();
     }
 
     /**
@@ -3324,7 +3324,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     public Paint lookupLegendTextPaint(int series) {
         Paint result = getLegendTextPaint(series);
         if (result == null) {
-        	result = this.baseLegendTextPaint;
+            result = this.baseLegendTextPaint;
         }
         return result;
     }
@@ -3342,7 +3342,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public Paint getLegendTextPaint(int series) {
-    	return this.legendTextPaint.getPaint(series);
+        return this.legendTextPaint.getPaint(series);
     }
 
     /**
@@ -3355,8 +3355,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setLegendTextPaint(int series, Paint paint) {
-    	this.legendTextPaint.setPaint(series, paint);
-    	fireChangeEvent();
+        this.legendTextPaint.setPaint(series, paint);
+        fireChangeEvent();
     }
 
     /**
@@ -3367,7 +3367,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public Paint getBaseLegendTextPaint() {
-    	return this.baseLegendTextPaint;
+        return this.baseLegendTextPaint;
     }
 
     /**
@@ -3379,8 +3379,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setBaseLegendTextPaint(Paint paint) {
-    	this.baseLegendTextPaint = paint;
-    	fireChangeEvent();
+        this.baseLegendTextPaint = paint;
+        fireChangeEvent();
     }
 
     /** The adjacent offset. */
@@ -3753,25 +3753,25 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
             return false;
         }
         if (!ObjectUtilities.equal(this.legendShape, that.legendShape)) {
-        	return false;
+            return false;
         }
         if (!ShapeUtilities.equal(this.baseLegendShape,
-        		that.baseLegendShape)) {
-        	return false;
+                that.baseLegendShape)) {
+            return false;
         }
         if (!ObjectUtilities.equal(this.legendTextFont, that.legendTextFont)) {
-        	return false;
+            return false;
         }
         if (!ObjectUtilities.equal(this.baseLegendTextFont,
-        		that.baseLegendTextFont)) {
-        	return false;
+                that.baseLegendTextFont)) {
+            return false;
         }
         if (!ObjectUtilities.equal(this.legendTextPaint,
-        		that.legendTextPaint)) {
+                that.legendTextPaint)) {
             return false;
         }
         if (!PaintUtilities.equal(this.baseLegendTextPaint,
-        		that.baseLegendTextPaint)) {
+                that.baseLegendTextPaint)) {
             return false;
         }
         return true;
@@ -3916,13 +3916,13 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         }
 
         if (this.legendShape != null) {
-        	clone.legendShape = (ShapeList) this.legendShape.clone();
+            clone.legendShape = (ShapeList) this.legendShape.clone();
         }
         if (this.legendTextFont != null) {
-        	clone.legendTextFont = (ObjectList) this.legendTextFont.clone();
+            clone.legendTextFont = (ObjectList) this.legendTextFont.clone();
         }
         if (this.legendTextPaint != null) {
-        	clone.legendTextPaint = (PaintList) this.legendTextPaint.clone();
+            clone.legendTextPaint = (PaintList) this.legendTextPaint.clone();
         }
         clone.listenerList = new EventListenerList();
         clone.event = null;
