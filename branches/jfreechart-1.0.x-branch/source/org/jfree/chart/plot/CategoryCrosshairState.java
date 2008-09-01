@@ -69,7 +69,7 @@ public class CategoryCrosshairState extends CrosshairState {
      * Creates a new instance.
      */
     public CategoryCrosshairState() {
-    	this.rowKey = null;
+        this.rowKey = null;
         this.columnKey = null;
     }
 
@@ -79,7 +79,7 @@ public class CategoryCrosshairState extends CrosshairState {
      * @return The row key.
      */
     public Comparable getRowKey() {
-    	return this.rowKey;
+        return this.rowKey;
     }
 
     /**
@@ -88,7 +88,7 @@ public class CategoryCrosshairState extends CrosshairState {
      * @param key  the row key.
      */
     public void setRowKey(Comparable key) {
-    	this.rowKey = key;
+        this.rowKey = key;
     }
 
     /**
@@ -97,7 +97,7 @@ public class CategoryCrosshairState extends CrosshairState {
      * @return The column key.
      */
     public Comparable getColumnKey() {
-    	return this.columnKey;
+        return this.columnKey;
     }
 
     /**
@@ -106,7 +106,7 @@ public class CategoryCrosshairState extends CrosshairState {
      * @param key  the key.
      */
     public void setColumnKey(Comparable key) {
-    	this.columnKey = key;
+        this.columnKey = key;
     }
 
     /**
@@ -122,10 +122,10 @@ public class CategoryCrosshairState extends CrosshairState {
      * @param orientation  the plot orientation.
      */
     public void updateCrosshairPoint(Comparable rowKey, Comparable columnKey,
-    		double value, int datasetIndex, double transX, double transY,
-    		PlotOrientation orientation) {
+            double value, int datasetIndex, double transX, double transY,
+            PlotOrientation orientation) {
 
-    	Point2D anchor = getAnchor();
+        Point2D anchor = getAnchor();
         if (anchor != null) {
             double xx = anchor.getX();
             double yy = anchor.getY();
@@ -161,12 +161,12 @@ public class CategoryCrosshairState extends CrosshairState {
     public void updateCrosshairX(Comparable rowKey, Comparable columnKey,
             int datasetIndex, double transX, PlotOrientation orientation) {
 
-    	Point2D anchor = getAnchor();
-    	if (anchor != null) {
-    		double anchorX = anchor.getX();
-    		if (orientation == PlotOrientation.HORIZONTAL) {
-    			anchorX = anchor.getY();
-    		}
+        Point2D anchor = getAnchor();
+        if (anchor != null) {
+            double anchorX = anchor.getX();
+            if (orientation == PlotOrientation.HORIZONTAL) {
+                anchorX = anchor.getY();
+            }
             double d = Math.abs(transX - anchorX);
             if (d < getCrosshairDistance()) {
                 this.rowKey = rowKey;
@@ -174,7 +174,7 @@ public class CategoryCrosshairState extends CrosshairState {
                 setDatasetIndex(datasetIndex);
                 setCrosshairDistance(d);
             }
-    	}
+        }
 
     }
 

@@ -314,8 +314,8 @@ public class CombinedRangeXYPlot extends XYPlot
         int n = this.subplots.size();
         int totalWeight = 0;
         for (int i = 0; i < n; i++) {
-        	XYPlot sub = (XYPlot) this.subplots.get(i);
-        	totalWeight += sub.getWeight();
+            XYPlot sub = (XYPlot) this.subplots.get(i);
+            totalWeight += sub.getWeight();
         }
 
         // calculate plotAreas of all sub-plots, maximum vertical/horizontal

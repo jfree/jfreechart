@@ -1079,7 +1079,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
         LegendItemCollection result = new LegendItemCollection();
         if (getDataset() == null) {
-        	return result;
+            return result;
         }
 
         List keys = null;
@@ -1330,15 +1330,15 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                     g2.draw(head);
 
                     if (entities != null) {
-                    	int row = 0; int col = 0;
-                    	if (this.dataExtractOrder == TableOrder.BY_ROW) {
-                    		row = series;
-                    		col = cat;
-                    	}
-                    	else {
-                    		row = cat;
-                    		col = series;
-                    	}
+                        int row = 0; int col = 0;
+                        if (this.dataExtractOrder == TableOrder.BY_ROW) {
+                            row = series;
+                            col = cat;
+                        }
+                        else {
+                            row = cat;
+                            col = series;
+                        }
                         String tip = null;
                         if (this.toolTipGenerator != null) {
                             tip = this.toolTipGenerator.generateToolTip(

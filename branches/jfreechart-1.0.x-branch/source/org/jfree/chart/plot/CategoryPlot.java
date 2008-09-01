@@ -1373,7 +1373,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.11
      */
     public int getRendererCount() {
-    	return this.renderers.size();
+        return this.renderers.size();
     }
 
     /**
@@ -2551,7 +2551,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #setDomainCrosshairVisible(boolean)
      */
     public boolean isDomainCrosshairVisible() {
-    	return this.domainCrosshairVisible;
+        return this.domainCrosshairVisible;
     }
 
     /**
@@ -2567,10 +2567,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #setRangeCrosshairVisible(boolean)
      */
     public void setDomainCrosshairVisible(boolean flag) {
-    	if (this.domainCrosshairVisible != flag) {
-    		this.domainCrosshairVisible = flag;
-    		fireChangeEvent();
-    	}
+        if (this.domainCrosshairVisible != flag) {
+            this.domainCrosshairVisible = flag;
+            fireChangeEvent();
+        }
     }
 
     /**
@@ -2581,7 +2581,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.11
      */
     public Comparable getDomainCrosshairRowKey() {
-    	return this.domainCrosshairRowKey;
+        return this.domainCrosshairRowKey;
     }
 
     /**
@@ -2593,7 +2593,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.11
      */
     public void setDomainCrosshairRowKey(Comparable key) {
-    	setDomainCrosshairRowKey(key, true);
+        setDomainCrosshairRowKey(key, true);
     }
 
     /**
@@ -2606,10 +2606,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.11
      */
     public void setDomainCrosshairRowKey(Comparable key, boolean notify) {
-    	this.domainCrosshairRowKey = key;
-    	if (notify) {
-    		fireChangeEvent();
-    	}
+        this.domainCrosshairRowKey = key;
+        if (notify) {
+            fireChangeEvent();
+        }
     }
 
     /**
@@ -2620,7 +2620,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.11
      */
     public Comparable getDomainCrosshairColumnKey() {
-    	return this.domainCrosshairColumnKey;
+        return this.domainCrosshairColumnKey;
     }
 
     /**
@@ -2632,7 +2632,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.11
      */
     public void setDomainCrosshairColumnKey(Comparable key) {
-    	setDomainCrosshairColumnKey(key, true);
+        setDomainCrosshairColumnKey(key, true);
     }
 
     /**
@@ -2645,10 +2645,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.11
      */
     public void setDomainCrosshairColumnKey(Comparable key, boolean notify) {
-    	this.domainCrosshairColumnKey = key;
-    	if (notify) {
-    		fireChangeEvent();
-    	}
+        this.domainCrosshairColumnKey = key;
+        if (notify) {
+            fireChangeEvent();
+        }
     }
 
     /**
@@ -2659,7 +2659,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.11
      */
     public int getCrosshairDatasetIndex() {
-    	return this.crosshairDatasetIndex;
+        return this.crosshairDatasetIndex;
     }
 
     /**
@@ -2671,7 +2671,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.11
      */
     public void setCrosshairDatasetIndex(int index) {
-	    setCrosshairDatasetIndex(index, true);
+        setCrosshairDatasetIndex(index, true);
     }
 
     /**
@@ -2684,10 +2684,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @since 1.0.11
      */
     public void setCrosshairDatasetIndex(int index, boolean notify) {
-    	this.crosshairDatasetIndex = index;
-    	if (notify) {
+        this.crosshairDatasetIndex = index;
+        if (notify) {
             fireChangeEvent();
-    	}
+        }
     }
 
     /**
@@ -2701,7 +2701,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #getDomainCrosshairStroke()
      */
     public Paint getDomainCrosshairPaint() {
-    	return this.domainCrosshairPaint;
+        return this.domainCrosshairPaint;
     }
 
     /**
@@ -2714,11 +2714,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #getDomainCrosshairPaint()
      */
     public void setDomainCrosshairPaint(Paint paint) {
-    	if (paint == null) {
-    		throw new IllegalArgumentException("Null 'paint' argument.");
-    	}
-    	this.domainCrosshairPaint = paint;
-    	fireChangeEvent();
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
+        this.domainCrosshairPaint = paint;
+        fireChangeEvent();
     }
 
     /**
@@ -2732,7 +2732,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #getDomainCrosshairPaint()
      */
     public Stroke getDomainCrosshairStroke() {
-    	return this.domainCrosshairStroke;
+        return this.domainCrosshairStroke;
     }
 
     /**
@@ -2746,10 +2746,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      * @see #getDomainCrosshairStroke()
      */
     public void setDomainCrosshairStroke(Stroke stroke) {
-    	if (stroke == null) {
-    		throw new IllegalArgumentException("Null 'stroke' argument.");
-    	}
-    	this.domainCrosshairStroke = stroke;
+        if (stroke == null) {
+            throw new IllegalArgumentException("Null 'stroke' argument.");
+        }
+        this.domainCrosshairStroke = stroke;
     }
 
     /**
@@ -3176,7 +3176,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         // clicked - the crosshairs will be driven off this point...
         if (anchor != null && !dataArea.contains(anchor)) {
             anchor = ShapeUtilities.getPointInRectangle(anchor.getX(),
-            		anchor.getY(), dataArea);
+                    anchor.getY(), dataArea);
         }
         CategoryCrosshairState crosshairState = new CategoryCrosshairState();
         crosshairState.setCrosshairDistance(Double.POSITIVE_INFINITY);
@@ -3282,7 +3282,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             Paint paint = getDomainCrosshairPaint();
             Stroke stroke = getDomainCrosshairStroke();
             drawDomainCrosshair(g2, dataArea, this.orientation,
-            		datasetIndex, rowKey, columnKey, stroke, paint);
+                    datasetIndex, rowKey, columnKey, stroke, paint);
         }
 
         // draw range crosshair if required...
@@ -3710,19 +3710,19 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             Comparable rowKey, Comparable columnKey, Stroke stroke,
             Paint paint) {
 
-    	CategoryDataset dataset = getDataset(datasetIndex);
-    	CategoryAxis axis = getDomainAxisForDataset(datasetIndex);
-    	CategoryItemRenderer renderer = getRenderer(datasetIndex);
+        CategoryDataset dataset = getDataset(datasetIndex);
+        CategoryAxis axis = getDomainAxisForDataset(datasetIndex);
+        CategoryItemRenderer renderer = getRenderer(datasetIndex);
         Line2D line = null;
         if (orientation == PlotOrientation.VERTICAL) {
             double xx = renderer.getItemMiddle(rowKey, columnKey, dataset, axis,
-            		dataArea, RectangleEdge.BOTTOM);
+                    dataArea, RectangleEdge.BOTTOM);
             line = new Line2D.Double(xx, dataArea.getMinY(), xx,
                     dataArea.getMaxY());
         }
         else {
             double yy = renderer.getItemMiddle(rowKey, columnKey, dataset, axis,
-            		dataArea, RectangleEdge.LEFT);
+                    dataArea, RectangleEdge.LEFT);
             line = new Line2D.Double(dataArea.getMinX(), yy,
                     dataArea.getMaxX(), yy);
         }
@@ -4363,26 +4363,26 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             return false;
         }
         if (this.domainCrosshairVisible != that.domainCrosshairVisible) {
-        	return false;
+            return false;
         }
         if (this.crosshairDatasetIndex != that.crosshairDatasetIndex) {
-        	return false;
+            return false;
         }
         if (!ObjectUtilities.equal(this.domainCrosshairColumnKey,
-        		that.domainCrosshairColumnKey)) {
-        	return false;
+                that.domainCrosshairColumnKey)) {
+            return false;
         }
         if (!ObjectUtilities.equal(this.domainCrosshairRowKey,
-        		that.domainCrosshairRowKey)) {
-        	return false;
+                that.domainCrosshairRowKey)) {
+            return false;
         }
         if (!PaintUtilities.equal(this.domainCrosshairPaint,
-        		that.domainCrosshairPaint)) {
-        	return false;
+                that.domainCrosshairPaint)) {
+            return false;
         }
         if (!ObjectUtilities.equal(this.domainCrosshairStroke,
-        		that.domainCrosshairStroke)) {
-        	return false;
+                that.domainCrosshairStroke)) {
+            return false;
         }
         return super.equals(obj);
 

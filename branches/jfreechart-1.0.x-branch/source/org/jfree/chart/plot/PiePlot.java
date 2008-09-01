@@ -1019,10 +1019,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #autoPopulateSectionPaint
      */
     public void clearSectionPaints(boolean notify) {
-    	this.sectionPaintMap.clear();
-    	if (notify) {
+        this.sectionPaintMap.clear();
+        if (notify) {
             fireChangeEvent();
-    	}
+        }
     }
 
     /**
@@ -1062,7 +1062,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public boolean getAutoPopulateSectionPaint() {
-    	return this.autoPopulateSectionPaint;
+        return this.autoPopulateSectionPaint;
     }
 
     /**
@@ -1123,7 +1123,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     protected Paint lookupSectionOutlinePaint(Comparable key) {
         return lookupSectionOutlinePaint(key,
-        		getAutoPopulateSectionOutlinePaint());
+                getAutoPopulateSectionOutlinePaint());
     }
 
     /**
@@ -1235,10 +1235,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #autoPopulateSectionOutlinePaint
      */
     public void clearSectionOutlinePaints(boolean notify) {
-    	this.sectionOutlinePaintMap.clear();
-    	if (notify) {
+        this.sectionOutlinePaintMap.clear();
+        if (notify) {
             fireChangeEvent();
-    	}
+        }
     }
 
     /**
@@ -1278,7 +1278,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public boolean getAutoPopulateSectionOutlinePaint() {
-    	return this.autoPopulateSectionOutlinePaint;
+        return this.autoPopulateSectionOutlinePaint;
     }
 
     /**
@@ -1312,7 +1312,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     protected Stroke lookupSectionOutlineStroke(Comparable key) {
         return lookupSectionOutlineStroke(key,
-        		getAutoPopulateSectionOutlineStroke());
+                getAutoPopulateSectionOutlineStroke());
     }
 
     /**
@@ -1424,10 +1424,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #autoPopulateSectionOutlineStroke
      */
     public void clearSectionOutlineStrokes(boolean notify) {
-    	this.sectionOutlineStrokeMap.clear();
-    	if (notify) {
+        this.sectionOutlineStrokeMap.clear();
+        if (notify) {
             fireChangeEvent();
-    	}
+        }
     }
 
     /**
@@ -1467,7 +1467,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public boolean getAutoPopulateSectionOutlineStroke() {
-    	return this.autoPopulateSectionOutlineStroke;
+        return this.autoPopulateSectionOutlineStroke;
     }
 
     /**
@@ -3271,15 +3271,15 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             return false;
         }
         if (this.autoPopulateSectionPaint != that.autoPopulateSectionPaint) {
-        	return false;
+            return false;
         }
         if (this.autoPopulateSectionOutlinePaint
-        		!= that.autoPopulateSectionOutlinePaint) {
-        	return false;
+                != that.autoPopulateSectionOutlinePaint) {
+            return false;
         }
         if (this.autoPopulateSectionOutlineStroke
-        		!= that.autoPopulateSectionOutlineStroke) {
-        	return false;
+                != that.autoPopulateSectionOutlineStroke) {
+            return false;
         }
         // can't find any difference...
         return true;
