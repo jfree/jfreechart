@@ -778,7 +778,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
             g2.setPaint(getVolumePaint());
             Composite originalComposite = g2.getComposite();
             g2.setComposite(AlphaComposite.getInstance(
-            		AlphaComposite.SRC_OVER, 0.3f));
+                    AlphaComposite.SRC_OVER, 0.3f));
 
             if (horiz) {
                 g2.fill(new Rectangle2D.Double(min, xx - volumeWidth / 2,
@@ -833,13 +833,13 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
             body = new Rectangle2D.Double(yyMinOpenClose, xx - stickWidth / 2,
                     yyMaxOpenClose - yyMinOpenClose, stickWidth);
             hotspot = new Rectangle2D.Double(base, xx - stickWidth / 2,
-            		length, stickWidth);
+                    length, stickWidth);
         }
         else {
             body = new Rectangle2D.Double(xx - stickWidth / 2, yyMinOpenClose,
                     stickWidth, yyMaxOpenClose - yyMinOpenClose);
             hotspot = new Rectangle2D.Double(xx - stickWidth / 2,
-            		base, stickWidth, length);
+                    base, stickWidth, length);
         }
         if (yClose > yOpen) {
             if (this.upPaint != null) {

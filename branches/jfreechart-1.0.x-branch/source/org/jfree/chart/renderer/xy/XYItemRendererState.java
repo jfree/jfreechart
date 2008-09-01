@@ -127,8 +127,8 @@ public class XYItemRendererState extends RendererState {
      * @since 1.0.11
      */
     public void startSeriesPass(XYDataset dataset, int series, int firstItem,
-    		int lastItem, int pass, int passCount) {
-    	// do nothing...this is just a hook for subclasses
+            int lastItem, int pass, int passCount) {
+        // do nothing...this is just a hook for subclasses
     }
 
     /**
@@ -149,8 +149,8 @@ public class XYItemRendererState extends RendererState {
      * @since 1.0.11
      */
     public void endSeriesPass(XYDataset dataset, int series, int firstItem,
-    		int lastItem, int pass, int passCount) {
-    	// do nothing...this is just a hook for subclasses
+            int lastItem, int pass, int passCount) {
+        // do nothing...this is just a hook for subclasses
     }
 
 }

@@ -301,24 +301,24 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                     left.lineTo(transXLeft, transYLeft);
                 }
                 else {
-                	left.moveTo(transY1, transX1);
-                	left.lineTo(transStack1, transX1);
-                	left.lineTo(transStackLeft, transXLeft);
-                	left.lineTo(transYLeft, transXLeft);
+                    left.moveTo(transY1, transX1);
+                    left.lineTo(transStack1, transX1);
+                    left.lineTo(transStackLeft, transXLeft);
+                    left.lineTo(transYLeft, transXLeft);
                 }
                 left.closePath();
             }
             else {
-            	if (orientation == PlotOrientation.VERTICAL) {
+                if (orientation == PlotOrientation.VERTICAL) {
                     left.moveTo(transX1, transStack1);
                     left.lineTo(transX1, transY1);
                     left.lineTo(transXLeft, transStackLeft);
-            	}
-            	else {
+                }
+                else {
                     left.moveTo(transStack1, transX1);
                     left.lineTo(transY1, transX1);
                     left.lineTo(transStackLeft, transXLeft);
-            	}
+                }
                 left.closePath();
             }
 
@@ -344,16 +344,16 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                 right.closePath();
             }
             else {
-            	if (orientation == PlotOrientation.VERTICAL) {
+                if (orientation == PlotOrientation.VERTICAL) {
                     right.moveTo(transX1, transStack1);
                     right.lineTo(transX1, transY1);
                     right.lineTo(transXRight, transStackRight);
-            	}
-            	else {
+                }
+                else {
                     right.moveTo(transStack1, transX1);
                     right.lineTo(transY1, transX1);
                     right.lineTo(transStackRight, transXRight);
-            	}
+                }
                 right.closePath();
             }
         }
@@ -367,16 +367,16 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
 
             // LEFT POLYGON
             if (y0 >= 0.0) {
-            	if (orientation == PlotOrientation.VERTICAL) {
+                if (orientation == PlotOrientation.VERTICAL) {
                     left.moveTo(transX1, transStack1);
                     left.lineTo(transX1, transY1);
                     left.lineTo(transXLeft, transStackLeft);
-            	}
-            	else {
+                }
+                else {
                     left.moveTo(transStack1, transX1);
                     left.lineTo(transY1, transX1);
                     left.lineTo(transStackLeft, transXLeft);
-            	}
+                }
                 left.clone();
             }
             else {
@@ -402,16 +402,16 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
 
             // RIGHT POLYGON
             if (y2 >= 0.0) {
-            	if (orientation == PlotOrientation.VERTICAL) {
+                if (orientation == PlotOrientation.VERTICAL) {
                     right.moveTo(transX1, transStack1);
                     right.lineTo(transX1, transY1);
                     right.lineTo(transXRight, transStackRight);
-            	}
-            	else {
+                }
+                else {
                     right.moveTo(transStack1, transX1);
                     right.lineTo(transY1, transX1);
                     right.lineTo(transStackRight, transXRight);
-            	}
+                }
                 right.closePath();
             }
             else {
