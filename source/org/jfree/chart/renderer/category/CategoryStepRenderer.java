@@ -194,7 +194,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
         item.setLabelFont(lookupLegendTextFont(series));
         Paint labelPaint = lookupLegendTextPaint(series);
         if (labelPaint != null) {
-        	item.setLabelPaint(labelPaint);
+            item.setLabelPaint(labelPaint);
         }
         item.setSeriesKey(dataset.getRowKey(series));
         item.setSeriesIndex(series);

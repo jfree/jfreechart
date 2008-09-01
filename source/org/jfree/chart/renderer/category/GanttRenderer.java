@@ -363,7 +363,7 @@ public class GanttRenderer extends IntervalBarRenderer
 
             if (getShadowsVisible()) {
                 getBarPainter().paintBarShadow(g2, this, row, column, bar,
-                		barBase, true);
+                        barBase, true);
             }
             getBarPainter().paintBar(g2, this, row, column, bar, barBase);
 
@@ -388,12 +388,12 @@ public class GanttRenderer extends IntervalBarRenderer
                 Comparable columnKey = dataset.getColumnKey(column);
                 Comparable rowKey = dataset.getRowKey(row);
                 double xx = domainAxis.getCategorySeriesMiddle(columnKey,
-                		rowKey, dataset, getItemMargin(), dataArea,
-                		plot.getDomainAxisEdge());
+                        rowKey, dataset, getItemMargin(), dataArea,
+                        plot.getDomainAxisEdge());
                 updateCrosshairValues(state.getCrosshairState(),
-                		dataset.getRowKey(row), dataset.getColumnKey(column),
-                		value1.doubleValue(), datasetIndex, xx,
-                		translatedValue1, orientation);
+                        dataset.getRowKey(row), dataset.getColumnKey(column),
+                        value1.doubleValue(), datasetIndex, xx,
+                        translatedValue1, orientation);
 
             }
             // collect entity and tool tip information...
@@ -503,7 +503,7 @@ public class GanttRenderer extends IntervalBarRenderer
 
         if (getShadowsVisible()) {
             getBarPainter().paintBarShadow(g2, this, row, column, bar,
-            		barBase, true);
+                    barBase, true);
         }
         getBarPainter().paintBar(g2, this, row, column, bar, barBase);
 
@@ -540,11 +540,11 @@ public class GanttRenderer extends IntervalBarRenderer
         Comparable columnKey = dataset.getColumnKey(column);
         Comparable rowKey = dataset.getRowKey(row);
         double xx = domainAxis.getCategorySeriesMiddle(columnKey, rowKey,
-        		dataset, getItemMargin(), dataArea, plot.getDomainAxisEdge());
+                dataset, getItemMargin(), dataArea, plot.getDomainAxisEdge());
         updateCrosshairValues(state.getCrosshairState(),
-        		dataset.getRowKey(row), dataset.getColumnKey(column),
-        		value1.doubleValue(), datasetIndex, xx, java2dValue1,
-        		orientation);
+                dataset.getRowKey(row), dataset.getColumnKey(column),
+                value1.doubleValue(), datasetIndex, xx, java2dValue1,
+                orientation);
 
         // collect entity and tool tip information...
         EntityCollection entities = state.getEntityCollection();
@@ -568,10 +568,10 @@ public class GanttRenderer extends IntervalBarRenderer
      * @since 1.0.11
      */
     public double getItemMiddle(Comparable rowKey, Comparable columnKey,
-    		CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
-    		RectangleEdge edge) {
+            CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
+            RectangleEdge edge) {
         return axis.getCategorySeriesMiddle(columnKey, rowKey, dataset,
-        		getItemMargin(), area, edge);
+                getItemMargin(), area, edge);
     }
 
     /**

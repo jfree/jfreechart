@@ -135,7 +135,7 @@ public class CategoryItemRendererState extends RendererState {
      * @see #setCrosshairState(CategoryCrosshairState)
      */
     public CategoryCrosshairState getCrosshairState() {
-    	return this.crosshairState;
+        return this.crosshairState;
     }
 
     /**
@@ -148,7 +148,7 @@ public class CategoryItemRendererState extends RendererState {
      * @see #getCrosshairState()
      */
     public void setCrosshairState(CategoryCrosshairState state) {
-    	this.crosshairState = state;
+        this.crosshairState = state;
     }
 
 }

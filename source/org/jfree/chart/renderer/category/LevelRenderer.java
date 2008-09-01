@@ -333,8 +333,8 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
         // submit the current data point as a crosshair candidate
         int datasetIndex = plot.indexOf(dataset);
         updateCrosshairValues(state.getCrosshairState(),
-        		dataset.getRowKey(row), dataset.getColumnKey(column), value,
-        		datasetIndex, barW0, barL, orientation);
+                dataset.getRowKey(row), dataset.getColumnKey(column), value,
+                datasetIndex, barW0, barL, orientation);
 
         // add an item entity, if this information is being collected
         EntityCollection entities = state.getEntityCollection();
@@ -379,10 +379,10 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      * @since 1.0.11
      */
     public double getItemMiddle(Comparable rowKey, Comparable columnKey,
-    		CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
-    		RectangleEdge edge) {
+            CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
+            RectangleEdge edge) {
         return axis.getCategorySeriesMiddle(columnKey, rowKey, dataset,
-        		this.itemMargin, area, edge);
+                this.itemMargin, area, edge);
     }
 
     /**

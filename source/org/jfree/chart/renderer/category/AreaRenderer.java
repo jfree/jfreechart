@@ -186,7 +186,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
         result.setLabelFont(lookupLegendTextFont(series));
         Paint labelPaint = lookupLegendTextPaint(series);
         if (labelPaint != null) {
-        	result.setLabelPaint(labelPaint);
+            result.setLabelPaint(labelPaint);
         }
         result.setDataset(dataset);
         result.setDatasetIndex(datasetIndex);
@@ -309,8 +309,8 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
             // submit the current data point as a crosshair candidate
             int datasetIndex = plot.indexOf(dataset);
             updateCrosshairValues(state.getCrosshairState(),
-            		dataset.getRowKey(row), dataset.getColumnKey(column),
-            		yy1, datasetIndex, x1, y1, orientation);
+                    dataset.getRowKey(row), dataset.getColumnKey(column),
+                    yy1, datasetIndex, x1, y1, orientation);
 
             // add an item entity, if this information is being collected
             EntityCollection entities = state.getEntityCollection();
