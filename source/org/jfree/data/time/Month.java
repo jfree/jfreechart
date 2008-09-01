@@ -55,6 +55,7 @@
  * 05-Oct-2006 : Updated API docs (DG);
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
  * 04-Apr-2007 : Fixed bug in Month(Date, TimeZone) constructor (CB);
+ * 01-Sep-2008 : Added clarification for previous() and next() methods (DG);
  *
  */
 
@@ -221,7 +222,10 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the month preceding this one.
+     * Returns the month preceding this one.  Note that the returned
+     * {@link Month} is "pegged" using the default time-zone, irrespective of
+     * the time-zone used to peg of the current month (which is not recorded
+     * anywhere).  See the {@link #peg(Calendar)} method.
      *
      * @return The month preceding this one.
      */
@@ -242,7 +246,10 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the month following this one.
+     * Returns the month following this one.  Note that the returned
+     * {@link Month} is "pegged" using the default time-zone, irrespective of
+     * the time-zone used to peg of the current month (which is not recorded
+     * anywhere).  See the {@link #peg(Calendar)} method.
      *
      * @return The month following this one.
      */

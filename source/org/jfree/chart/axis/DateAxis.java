@@ -115,7 +115,8 @@
  * 03-May-2007 : Fixed minor bugs in previousStandardDate(), with new JUnit
  *               tests (DG);
  * 21-Nov-2007 : Fixed warnings from FindBugs (DG);
- * 01-Sep-2008 : Use new methods from DateRange (DG);
+ * 01-Sep-2008 : Use new methods from DateRange, added fix for bug
+ *               2078057 (DG);
  *
  */
 
@@ -968,6 +969,9 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 long millis = standardDate.getTime();
                 if (millis >= date.getTime()) {
                     month = (Month) month.previous();
+                    // need to peg the month in case the time zone isn't the
+                    // default - see bug 2078057 
+                    month.peg(Calendar.getInstance(this.timeZone));
                     standardDate = calculateDateForPosition(
                             month, this.tickMarkPosition);
                 }
