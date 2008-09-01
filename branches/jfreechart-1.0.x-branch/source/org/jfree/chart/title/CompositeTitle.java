@@ -171,7 +171,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      * @param area  the area allocated for the title.
      */
     public void draw(Graphics2D g2, Rectangle2D area) {
-    	draw(g2, area, null);
+        draw(g2, area, null);
     }
 
     /**
