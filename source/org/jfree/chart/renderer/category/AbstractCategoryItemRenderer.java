@@ -1310,10 +1310,10 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @param crosshairState  the crosshair state (<code>null</code> permitted,
      *                        but the method does nothing in that case).
-     * @param x  the category key, or <code>null</code>.
-     * @param y  the y-value (in data space).
-     * @param domainAxisIndex  the index of the domain axis for the point.
-     * @param rangeAxisIndex  the index of the range axis for the point.
+     * @param rowKey  the row key.
+     * @param columnKey  the column key.
+     * @param value  the data value.
+     * @param datasetIndex  the dataset index.
      * @param transX  the x-value translated to Java2D space.
      * @param transY  the y-value translated to Java2D space.
      * @param orientation  the plot orientation (<code>null</code> not
