@@ -39,6 +39,8 @@
  *               hashCode() (DG);
  * 15-Feb-2008 : Applied patch 1873328 by Michael Siemer, with minor
  *               modifications (DG);
+ * 01-Sep-2008 : Added new fields for hour and minute formatting, based on
+ *               patch 2033092 (DG);
  *
  */
 
@@ -96,9 +98,23 @@ public class RelativeDateFormat extends DateFormat {
     private String daySuffix;
 
     /**
+     * A formatter for the hours.
+     *
+     * @since 1.0.11
+     */
+    private NumberFormat hourFormatter;
+
+    /**
      * A string appended after the hours.
      */
     private String hourSuffix;
+
+    /**
+     * A formatter for the minutes.
+     *
+     * @since 1.0.11
+     */
+    private NumberFormat minuteFormatter;
 
     /**
      * A string appended after the minutes.
@@ -126,7 +142,7 @@ public class RelativeDateFormat extends DateFormat {
     private static long MILLISECONDS_IN_ONE_DAY = 24 * MILLISECONDS_IN_ONE_HOUR;
 
     /**
-     * Creates a new instance.
+     * Creates a new instance with base milliseconds set to zero.
      */
     public RelativeDateFormat() {
         this(0L);
@@ -152,9 +168,11 @@ public class RelativeDateFormat extends DateFormat {
         this.showZeroDays = false;
         this.showZeroHours = true;
         this.positivePrefix = "";
-        this.dayFormatter = NumberFormat.getInstance();
+        this.dayFormatter = NumberFormat.getNumberInstance();
         this.daySuffix = "d";
+        this.hourFormatter = NumberFormat.getNumberInstance();
         this.hourSuffix = "h";
+        this.minuteFormatter = NumberFormat.getNumberInstance();
         this.minuteSuffix = "m";
         this.secondFormatter = NumberFormat.getNumberInstance();
         this.secondFormatter.setMaximumFractionDigits(3);
@@ -276,6 +294,20 @@ public class RelativeDateFormat extends DateFormat {
     }
 
     /**
+     * Sets the formatter for the days.
+     *
+     * @param formatter  the formatter (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setDayFormatter(NumberFormat formatter) {
+        if (formatter == null) {
+            throw new IllegalArgumentException("Null 'formatter' argument.");
+        }
+        this.dayFormatter = formatter;
+    }
+
+    /**
      * Returns the string that is appended to the day count.
      *
      * @return The string.
@@ -301,6 +333,20 @@ public class RelativeDateFormat extends DateFormat {
     }
 
     /**
+     * Sets the formatter for the hours.
+     *
+     * @param formatter  the formatter (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setHourFormatter(NumberFormat formatter) {
+        if (formatter == null) {
+            throw new IllegalArgumentException("Null 'formatter' argument.");
+        }
+        this.hourFormatter = formatter;
+    }
+
+    /**
      * Returns the string that is appended to the hour count.
      *
      * @return The string.
@@ -323,6 +369,20 @@ public class RelativeDateFormat extends DateFormat {
             throw new IllegalArgumentException("Null 'suffix' argument.");
         }
         this.hourSuffix = suffix;
+    }
+
+    /**
+     * Sets the formatter for the minutes.
+     *
+     * @param formatter  the formatter (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public void setMinuteFormatter(NumberFormat formatter) {
+        if (formatter == null) {
+            throw new IllegalArgumentException("Null 'formatter' argument.");
+        }
+        this.minuteFormatter = formatter;
     }
 
     /**
@@ -423,9 +483,11 @@ public class RelativeDateFormat extends DateFormat {
             toAppendTo.append(this.dayFormatter.format(days) + getDaySuffix());
         }
         if (hours != 0 || this.showZeroHours) {
-            toAppendTo.append(String.valueOf(hours) + getHourSuffix());
+            toAppendTo.append(this.hourFormatter.format(hours)
+                    + getHourSuffix());
         }
-        toAppendTo.append(String.valueOf(minutes) + getMinuteSuffix());
+        toAppendTo.append(this.minuteFormatter.format(minutes)
+                + getMinuteSuffix());
         toAppendTo.append(this.secondFormatter.format(seconds)
                 + getSecondSuffix());
         return toAppendTo;
@@ -483,6 +545,15 @@ public class RelativeDateFormat extends DateFormat {
             return false;
         }
         if (!this.secondSuffix.equals(that.secondSuffix)) {
+            return false;
+        }
+        if (!this.dayFormatter.equals(that.dayFormatter)) {
+            return false;
+        }
+        if (!this.hourFormatter.equals(that.hourFormatter)) {
+            return false;
+        }
+        if (!this.minuteFormatter.equals(that.minuteFormatter)) {
             return false;
         }
         if (!this.secondFormatter.equals(that.secondFormatter)) {

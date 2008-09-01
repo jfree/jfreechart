@@ -1,5 +1,17 @@
 2008-09-01  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/util/RelativeDateFormat.java
+    (hourFormatter): New field,
+    (minuteFormatter): New field,
+    (RelativeDateFormat(long)): Initialise new fields,
+    (setDayFormatter): New method,
+    (setHourFormatter): Likewise,
+    (setMinuteFormatter): Likewise,
+    (format): Use new fields for formatting,
+    (equals): Updated for new fields.
+
+2008-09-01  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/xy/XYDotRenderer.java
     (drawItem): Check for item visibility.
 
