@@ -176,6 +176,9 @@ public class CustomCategoryURLGeneratorTests extends TestCase {
 
     }
 
+    /**
+     * Some checks for the addURLSeries() method.
+     */
     public void testAddURLSeries() {
         CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
         // you can add a null list - it would have been better if this
