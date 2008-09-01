@@ -382,7 +382,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
         }
         OHLCSeriesCollection that = (OHLCSeriesCollection) obj;
         if (!this.xPosition.equals(that.xPosition)) {
-        	return false;
+            return false;
         }
         return ObjectUtilities.equal(this.data, that.data);
     }
