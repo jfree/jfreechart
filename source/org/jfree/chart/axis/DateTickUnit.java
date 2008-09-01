@@ -234,7 +234,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
      *     should use {@link #addToDate(Date, TimeZone)} instead.
      */
     public Date addToDate(Date base) {
-    	return addToDate(base, TimeZone.getDefault());
+        return addToDate(base, TimeZone.getDefault());
     }
 
     /**
@@ -249,9 +249,9 @@ public class DateTickUnit extends TickUnit implements Serializable {
      */
     public Date addToDate(Date base, TimeZone zone) {
         // as far as I know, the Locale for the calendar only affects week
-    	// number calculations, and since DateTickUnit doesn't do week
-    	// arithmetic, the default locale (whatever it is) should be fine
-    	// here...
+        // number calculations, and since DateTickUnit doesn't do week
+        // arithmetic, the default locale (whatever it is) should be fine
+        // here...
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(base);
         calendar.add(getCalendarField(this.unit), this.count);
@@ -285,9 +285,9 @@ public class DateTickUnit extends TickUnit implements Serializable {
      */
     public Date rollDate(Date base, TimeZone zone) {
         // as far as I know, the Locale for the calendar only affects week
-    	// number calculations, and since DateTickUnit doesn't do week
-    	// arithmetic, the default locale (whatever it is) should be fine
-    	// here...
+        // number calculations, and since DateTickUnit doesn't do week
+        // arithmetic, the default locale (whatever it is) should be fine
+        // here...
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(base);
         calendar.add(getCalendarField(this.rollUnit), this.rollCount);

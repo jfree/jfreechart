@@ -558,8 +558,8 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         if (baseTimeline != null) {
             if (baseTimeline.getSegmentSize() < this.segmentSize) {
                 throw new IllegalArgumentException(
-                		"baseTimeline.getSegmentSize() "
-                		+ "is smaller than segmentSize");
+                        "baseTimeline.getSegmentSize() "
+                        + "is smaller than segmentSize");
             }
             else if (baseTimeline.getStartTime() > this.startTime) {
                 throw new IllegalArgumentException(
@@ -573,7 +573,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
             else if (((this.startTime
                     - baseTimeline.getStartTime()) % this.segmentSize) != 0) {
                 throw new IllegalArgumentException(
-                		"baseTimeline is not aligned");
+                        "baseTimeline is not aligned");
             }
         }
 
@@ -598,15 +598,15 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
 
         if (groupMilliseconds >= this.segmentsIncludedSize) {
             result = toTimelineValue(this.startTime + this.segmentsGroupSize
-            		* (groupIndex + 1));
+                    * (groupIndex + 1));
         }
         else {
             Segment segment = getSegment(millisecond);
             if (segment.inExceptionSegments()) {
-            	int p;
+                int p;
                 while ((p = binarySearchExceptionSegments(segment)) >= 0) {
                     segment = getSegment(millisecond = ((Segment)
-                    		this.exceptionSegments.get(p)).getSegmentEnd() + 1);
+                            this.exceptionSegments.get(p)).getSegmentEnd() + 1);
                 }
                 result = toTimelineValue(millisecond);
             }
@@ -802,7 +802,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
     public boolean containsDomainRange(Date dateDomainValueStart,
                                        Date dateDomainValueEnd) {
         return containsDomainRange(getTime(dateDomainValueStart),
-        		getTime(dateDomainValueEnd));
+                getTime(dateDomainValueEnd));
     }
 
     /**
@@ -1033,7 +1033,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
              iter.hasNext();) {
             Segment segment = (Segment) iter.next();
             Segment intersection = segment.intersect(fromMillisecond,
-            		toMillisecond);
+                    toMillisecond);
             if (intersection != null) {
                 n += intersection.getSegmentCount();
             }
@@ -1105,7 +1105,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
             boolean b2 = (this.segmentsExcluded == other.getSegmentsExcluded());
             boolean b3 = (this.startTime == other.getStartTime());
             boolean b4 = equals(this.exceptionSegments,
-            		other.getExceptionSegments());
+                    other.getExceptionSegments());
             return b0 && b1 && b2 && b3 && b4;
         }
         else {

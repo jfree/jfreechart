@@ -625,10 +625,10 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     public double getCategoryMiddle(int category, int categoryCount,
                                     Rectangle2D area, RectangleEdge edge) {
 
-    	if (category < 0 || category >= categoryCount) {
-    		throw new IllegalArgumentException("Invalid category index: "
-    				+ category);
-    	}
+        if (category < 0 || category >= categoryCount) {
+            throw new IllegalArgumentException("Invalid category index: "
+                    + category);
+        }
         return getCategoryStart(category, categoryCount, area, edge)
                + calculateCategorySize(categoryCount, area, edge) / 2;
 
@@ -673,10 +673,10 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *     double, Rectangle2D, RectangleEdge)
      */
     public double getCategoryMiddle(Comparable category,
-    		List categories, Rectangle2D area, RectangleEdge edge) {
-    	if (categories == null) {
-    		throw new IllegalArgumentException("Null 'categories' argument.");
-    	}
+            List categories, Rectangle2D area, RectangleEdge edge) {
+        if (categories == null) {
+            throw new IllegalArgumentException("Null 'categories' argument.");
+        }
         int categoryIndex = categories.indexOf(category);
         int categoryCount = categories.size();
         return getCategoryMiddle(categoryIndex, categoryCount, area, edge);

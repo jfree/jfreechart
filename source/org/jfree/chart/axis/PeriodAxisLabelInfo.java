@@ -273,7 +273,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
             Constructor c = this.periodClass.getDeclaredConstructor(
                     new Class[] {Date.class, TimeZone.class});
             result = (RegularTimePeriod) c.newInstance(new Object[] {
-            		millisecond, zone});
+                    millisecond, zone});
         }
         catch (Exception e) {
             // do nothing
