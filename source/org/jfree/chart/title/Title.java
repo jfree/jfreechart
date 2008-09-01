@@ -86,7 +86,7 @@ import org.jfree.util.ObjectUtilities;
  * hence do the actual work of drawing titles.
  */
 public abstract class Title extends AbstractBlock
-                            implements Block, Cloneable, Serializable {
+            implements Block, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6675162505277817221L;
@@ -320,7 +320,6 @@ public abstract class Title extends AbstractBlock
      *         be thrown by subclasses.
      */
     public Object clone() throws CloneNotSupportedException {
-
         Title duplicate = (Title) super.clone();
         duplicate.listenerList = new EventListenerList();
         // RectangleInsets is immutable => same reference in clone OK
