@@ -1243,7 +1243,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
                 result.setLabelFont(lookupLegendTextFont(series));
                 Paint labelPaint = lookupLegendTextPaint(series);
                 if (labelPaint != null) {
-                	result.setLabelPaint(labelPaint);
+                    result.setLabelPaint(labelPaint);
                 }
                 result.setSeriesKey(dataset.getSeriesKey(series));
                 result.setSeriesIndex(series);

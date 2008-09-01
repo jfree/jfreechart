@@ -802,7 +802,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 Paint labelPaint = lookupLegendTextPaint(series);
                 result.setLabelFont(lookupLegendTextFont(series));
                 if (labelPaint != null) {
-                	result.setLabelPaint(labelPaint);
+                    result.setLabelPaint(labelPaint);
                 }
                 result.setSeriesKey(dataset.getSeriesKey(series));
                 result.setSeriesIndex(series);
@@ -1734,17 +1734,17 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         }
         Shape hotspot = area;
         if (hotspot == null) {
-        	double w = this.defaultEntityRadius * 2;
-        	if (getPlot().getOrientation() == PlotOrientation.VERTICAL) {
-        		hotspot = new Ellipse2D.Double(
-        				entityX - this.defaultEntityRadius,
-        				entityY - this.defaultEntityRadius, w, w);
-        	}
-        	else {
-        		hotspot = new Ellipse2D.Double(
-        				entityY - this.defaultEntityRadius,
-        	            entityX - this.defaultEntityRadius, w, w);
-        	}
+            double w = this.defaultEntityRadius * 2;
+            if (getPlot().getOrientation() == PlotOrientation.VERTICAL) {
+                hotspot = new Ellipse2D.Double(
+                        entityX - this.defaultEntityRadius,
+                        entityY - this.defaultEntityRadius, w, w);
+            }
+            else {
+                hotspot = new Ellipse2D.Double(
+                        entityY - this.defaultEntityRadius,
+                        entityX - this.defaultEntityRadius, w, w);
+            }
         }
         String tip = null;
         XYToolTipGenerator generator = getToolTipGenerator(series, item);
@@ -1774,9 +1774,9 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     public static boolean isPointInRect(Rectangle2D rect, double x, double y) {
         // TODO: For JFreeChart 1.2.0, this method should go in the
-    	//       ShapeUtilities class
-    	return (x >= rect.getMinX() && x <= rect.getMaxX()
-        		&& y >= rect.getMinY() && y <= rect.getMaxY());
+        //       ShapeUtilities class
+        return (x >= rect.getMinX() && x <= rect.getMaxX()
+                && y >= rect.getMinY() && y <= rect.getMaxY());
     }
 
 }

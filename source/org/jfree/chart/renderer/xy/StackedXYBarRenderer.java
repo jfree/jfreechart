@@ -352,7 +352,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
                 barBase = RectangleEdge.RIGHT;
             }
             else {
-            	barBase = RectangleEdge.LEFT;
+                barBase = RectangleEdge.LEFT;
             }
         }
         else {
@@ -360,16 +360,16 @@ public class StackedXYBarRenderer extends XYBarRenderer {
                 barBase = RectangleEdge.BOTTOM;
             }
             else {
-            	barBase = RectangleEdge.TOP;
+                barBase = RectangleEdge.TOP;
             }
         }
 
         if (pass == 0) {
-        	getBarPainter().paintBarShadow(g2, this, series, item, bar, barBase,
-        			false);
+            getBarPainter().paintBarShadow(g2, this, series, item, bar, barBase,
+                    false);
         }
         else if (pass == 1) {
-        	getBarPainter().paintBar(g2, this, series, item, bar, barBase);
+            getBarPainter().paintBar(g2, this, series, item, bar, barBase);
 
             // add an entity for the item...
             if (info != null) {
