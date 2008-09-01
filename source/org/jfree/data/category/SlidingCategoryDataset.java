@@ -59,122 +59,122 @@ import org.jfree.util.PublicCloneable;
 public class SlidingCategoryDataset extends AbstractDataset
         implements CategoryDataset {
 
-	/** The underlying dataset. */
-	private CategoryDataset underlying;
+    /** The underlying dataset. */
+    private CategoryDataset underlying;
 
-	/** The index of the first category to present. */
-	private int firstCategoryIndex;
+    /** The index of the first category to present. */
+    private int firstCategoryIndex;
 
-	/** The maximum number of categories to present. */
-	private int maximumCategoryCount;
+    /** The maximum number of categories to present. */
+    private int maximumCategoryCount;
 
-	/**
-	 * Creates a new instance.
-	 *
-	 * @param underlying  the underlying dataset (<code>null</code> not
-	 *     permitted).
-	 * @param firstColumn  the index of the first visible column from the
-	 *     underlying dataset.
-	 * @param maxColumns  the maximumColumnCount.
-	 */
-	public SlidingCategoryDataset(CategoryDataset underlying, int firstColumn,
-			int maxColumns) {
+    /**
+     * Creates a new instance.
+     *
+     * @param underlying  the underlying dataset (<code>null</code> not
+     *     permitted).
+     * @param firstColumn  the index of the first visible column from the
+     *     underlying dataset.
+     * @param maxColumns  the maximumColumnCount.
+     */
+    public SlidingCategoryDataset(CategoryDataset underlying, int firstColumn,
+            int maxColumns) {
         this.underlying = underlying;
         this.firstCategoryIndex = firstColumn;
         this.maximumCategoryCount = maxColumns;
-	}
+    }
 
-	/**
-	 * Returns the underlying dataset that was supplied to the constructor.
-	 *
-	 * @return The underlying dataset (never <code>null</code>).
-	 */
-	public CategoryDataset getUnderlyingDataset() {
-		return this.underlying;
-	}
+    /**
+     * Returns the underlying dataset that was supplied to the constructor.
+     *
+     * @return The underlying dataset (never <code>null</code>).
+     */
+    public CategoryDataset getUnderlyingDataset() {
+        return this.underlying;
+    }
 
-	/**
-	 * Returns the index of the first visible category.
-	 *
-	 * @return The index.
-	 *
-	 * @see #setFirstCategoryIndex(int)
-	 */
-	public int getFirstCategoryIndex() {
-		return this.firstCategoryIndex;
-	}
+    /**
+     * Returns the index of the first visible category.
+     *
+     * @return The index.
+     *
+     * @see #setFirstCategoryIndex(int)
+     */
+    public int getFirstCategoryIndex() {
+        return this.firstCategoryIndex;
+    }
 
-	/**
-	 * Sets the index of the first category that should be used from the
-	 * underlying dataset, and sends a {@link DatasetChangeEvent} to all
-	 * registered listeners.
-	 *
-	 * @param first  the index.
-	 *
-	 * @see #getFirstCategoryIndex()
-	 */
-	public void setFirstCategoryIndex(int first) {
-		if (first < 0 || first >= this.underlying.getColumnCount()) {
-			throw new IllegalArgumentException("Invalid index.");
-		}
-		this.firstCategoryIndex = first;
-		fireDatasetChanged();
-	}
+    /**
+     * Sets the index of the first category that should be used from the
+     * underlying dataset, and sends a {@link DatasetChangeEvent} to all
+     * registered listeners.
+     *
+     * @param first  the index.
+     *
+     * @see #getFirstCategoryIndex()
+     */
+    public void setFirstCategoryIndex(int first) {
+        if (first < 0 || first >= this.underlying.getColumnCount()) {
+            throw new IllegalArgumentException("Invalid index.");
+        }
+        this.firstCategoryIndex = first;
+        fireDatasetChanged();
+    }
 
-	/**
-	 * Returns the maximum category count.
-	 *
-	 * @return The maximum category count.
-	 *
-	 * @see #setMaximumCategoryCount(int)
-	 */
-	public int getMaximumCategoryCount() {
-		return this.maximumCategoryCount;
-	}
+    /**
+     * Returns the maximum category count.
+     *
+     * @return The maximum category count.
+     *
+     * @see #setMaximumCategoryCount(int)
+     */
+    public int getMaximumCategoryCount() {
+        return this.maximumCategoryCount;
+    }
 
-	/**
-	 * Sets the maximum category count and sends a {@link DatasetChangeEvent}
-	 * to all registered listeners.
-	 *
-	 * @param max  the maximum.
-	 *
-	 * @see #getMaximumCategoryCount()
-	 */
-	public void setMaximumCategoryCount(int max) {
-		if (max < 0) {
-			throw new IllegalArgumentException("Requires 'max' >= 0.");
-		}
-		this.maximumCategoryCount = max;
-		fireDatasetChanged();
-	}
+    /**
+     * Sets the maximum category count and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     *
+     * @param max  the maximum.
+     *
+     * @see #getMaximumCategoryCount()
+     */
+    public void setMaximumCategoryCount(int max) {
+        if (max < 0) {
+            throw new IllegalArgumentException("Requires 'max' >= 0.");
+        }
+        this.maximumCategoryCount = max;
+        fireDatasetChanged();
+    }
 
-	/**
-	 * Returns the index of the last column for this dataset, or -1.
-	 *
-	 * @return The index.
-	 */
-	private int lastCategoryIndex() {
-		if (this.maximumCategoryCount == 0) {
-			return -1;
-		}
-		return Math.min(this.firstCategoryIndex + this.maximumCategoryCount,
-				this.underlying.getColumnCount()) - 1;
-	}
+    /**
+     * Returns the index of the last column for this dataset, or -1.
+     *
+     * @return The index.
+     */
+    private int lastCategoryIndex() {
+        if (this.maximumCategoryCount == 0) {
+            return -1;
+        }
+        return Math.min(this.firstCategoryIndex + this.maximumCategoryCount,
+                this.underlying.getColumnCount()) - 1;
+    }
 
-	/**
-	 * Returns the index for the specified column key.
-	 *
-	 * @param key  the key.
-	 *
-	 * @return The column index, or -1 if the key is not recognised.
-	 */
-	public int getColumnIndex(Comparable key) {
-		int index = this.underlying.getColumnIndex(key);
-		if (index >= this.firstCategoryIndex && index <= lastCategoryIndex()) {
-			return index - this.firstCategoryIndex;
-		}
-		return -1;  // we didn't find the key
-	}
+    /**
+     * Returns the index for the specified column key.
+     *
+     * @param key  the key.
+     *
+     * @return The column index, or -1 if the key is not recognised.
+     */
+    public int getColumnIndex(Comparable key) {
+        int index = this.underlying.getColumnIndex(key);
+        if (index >= this.firstCategoryIndex && index <= lastCategoryIndex()) {
+            return index - this.firstCategoryIndex;
+        }
+        return -1;  // we didn't find the key
+    }
 
     /**
      * Returns the column key for a given index.
@@ -185,9 +185,9 @@ public class SlidingCategoryDataset extends AbstractDataset
      *
      * @throws IndexOutOfBoundsException if <code>row</code> is out of bounds.
      */
-	public Comparable getColumnKey(int column) {
-		return this.underlying.getColumnKey(column + this.firstCategoryIndex);
-	}
+    public Comparable getColumnKey(int column) {
+        return this.underlying.getColumnKey(column + this.firstCategoryIndex);
+    }
 
     /**
      * Returns the column keys.
@@ -196,14 +196,14 @@ public class SlidingCategoryDataset extends AbstractDataset
      *
      * @see #getColumnKey(int)
      */
-	public List getColumnKeys() {
-		List result = new java.util.ArrayList();
-		int last = lastCategoryIndex();
-		for (int i = this.firstCategoryIndex; i < last; i++) {
-			result.add(this.underlying.getColumnKey(i));
-		}
-		return Collections.unmodifiableList(result);
-	}
+    public List getColumnKeys() {
+        List result = new java.util.ArrayList();
+        int last = lastCategoryIndex();
+        for (int i = this.firstCategoryIndex; i < last; i++) {
+            result.add(this.underlying.getColumnKey(i));
+        }
+        return Collections.unmodifiableList(result);
+    }
 
     /**
      * Returns the row index for a given key.
@@ -212,9 +212,9 @@ public class SlidingCategoryDataset extends AbstractDataset
      *
      * @return The row index, or <code>-1</code> if the key is unrecognised.
      */
-	public int getRowIndex(Comparable key) {
-		return this.underlying.getRowIndex(key);
-	}
+    public int getRowIndex(Comparable key) {
+        return this.underlying.getRowIndex(key);
+    }
 
     /**
      * Returns the row key for a given index.
@@ -225,18 +225,18 @@ public class SlidingCategoryDataset extends AbstractDataset
      *
      * @throws IndexOutOfBoundsException if <code>row</code> is out of bounds.
      */
-	public Comparable getRowKey(int row) {
-		return this.underlying.getRowKey(row);
-	}
+    public Comparable getRowKey(int row) {
+        return this.underlying.getRowKey(row);
+    }
 
     /**
      * Returns the row keys.
      *
      * @return The keys.
      */
-	public List getRowKeys() {
-		return this.underlying.getRowKeys();
-	}
+    public List getRowKeys() {
+        return this.underlying.getRowKeys();
+    }
 
     /**
      * Returns the value for a pair of keys.
@@ -248,40 +248,40 @@ public class SlidingCategoryDataset extends AbstractDataset
      *
      * @throws UnknownKeyException if either key is not defined in the dataset.
      */
-	public Number getValue(Comparable rowKey, Comparable columnKey) {
-		int r = getRowIndex(rowKey);
-		int c = getColumnIndex(columnKey);
-		if (c != -1) {
+    public Number getValue(Comparable rowKey, Comparable columnKey) {
+        int r = getRowIndex(rowKey);
+        int c = getColumnIndex(columnKey);
+        if (c != -1) {
             return this.underlying.getValue(r, c + this.firstCategoryIndex);
-		}
-		else {
-			throw new UnknownKeyException("Unknown columnKey: " + columnKey);
-		}
-	}
+        }
+        else {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+    }
 
     /**
      * Returns the number of columns in the table.
      *
      * @return The column count.
      */
-	public int getColumnCount() {
-		int last = lastCategoryIndex();
-		if (last == -1) {
-			return 0;
-		}
-		else {
+    public int getColumnCount() {
+        int last = lastCategoryIndex();
+        if (last == -1) {
+            return 0;
+        }
+        else {
             return Math.max(last - this.firstCategoryIndex + 1, 0);
-		}
-	}
+        }
+    }
 
     /**
      * Returns the number of rows in the table.
      *
      * @return The row count.
      */
-	public int getRowCount() {
-		return this.underlying.getRowCount();
-	}
+    public int getRowCount() {
+        return this.underlying.getRowCount();
+    }
 
     /**
      * Returns a value from the table.
@@ -291,37 +291,37 @@ public class SlidingCategoryDataset extends AbstractDataset
      *
      * @return The value (possibly <code>null</code>).
      */
-	public Number getValue(int row, int column) {
-		return this.underlying.getValue(row, column + this.firstCategoryIndex);
-	}
+    public Number getValue(int row, int column) {
+        return this.underlying.getValue(row, column + this.firstCategoryIndex);
+    }
 
-	/**
-	 * Tests this <code>SlidingCategoryDataset</code> for equality with an
-	 * arbitrary object.
-	 *
-	 * @param obj  the object (<code>null</code> permitted).
-	 *
-	 * @return A boolean.
-	 */
-	public boolean equals(Object obj) {
-		if (obj == this) {
-			return true;
-		}
-		if (!(obj instanceof SlidingCategoryDataset)) {
-			return false;
-		}
-		SlidingCategoryDataset that = (SlidingCategoryDataset) obj;
-		if (this.firstCategoryIndex != that.firstCategoryIndex) {
-			return false;
-		}
-		if (this.maximumCategoryCount != that.maximumCategoryCount) {
-			return false;
-		}
-		if (!this.underlying.equals(that.underlying)) {
-			return false;
-		}
-		return true;
-	}
+    /**
+     * Tests this <code>SlidingCategoryDataset</code> for equality with an
+     * arbitrary object.
+     *
+     * @param obj  the object (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof SlidingCategoryDataset)) {
+            return false;
+        }
+        SlidingCategoryDataset that = (SlidingCategoryDataset) obj;
+        if (this.firstCategoryIndex != that.firstCategoryIndex) {
+            return false;
+        }
+        if (this.maximumCategoryCount != that.maximumCategoryCount) {
+            return false;
+        }
+        if (!this.underlying.equals(that.underlying)) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Returns an independent copy of the dataset.  Note that:
@@ -340,7 +340,7 @@ public class SlidingCategoryDataset extends AbstractDataset
     public Object clone() throws CloneNotSupportedException {
         SlidingCategoryDataset clone = (SlidingCategoryDataset) super.clone();
         if (this.underlying instanceof PublicCloneable) {
-        	PublicCloneable pc = (PublicCloneable) this.underlying;
+            PublicCloneable pc = (PublicCloneable) this.underlying;
             clone.underlying = (CategoryDataset) pc.clone();
         }
         return clone;
