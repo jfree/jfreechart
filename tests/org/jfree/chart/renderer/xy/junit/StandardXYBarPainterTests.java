@@ -90,8 +90,8 @@ public class StandardXYBarPainterTests extends TestCase {
      * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
-    	StandardXYBarPainter p1 = new StandardXYBarPainter();
-    	StandardXYBarPainter p2 = new StandardXYBarPainter();
+        StandardXYBarPainter p1 = new StandardXYBarPainter();
+        StandardXYBarPainter p2 = new StandardXYBarPainter();
         assertTrue(p1.equals(p2));
         int h1 = p1.hashCode();
         int h2 = p2.hashCode();
@@ -103,7 +103,7 @@ public class StandardXYBarPainterTests extends TestCase {
      * instances of the class are immutable).
      */
     public void testCloning() {
-    	StandardXYBarPainter p1 = new StandardXYBarPainter();
+        StandardXYBarPainter p1 = new StandardXYBarPainter();
         assertFalse(p1 instanceof Cloneable);
         assertFalse(p1 instanceof PublicCloneable);
     }
@@ -112,8 +112,8 @@ public class StandardXYBarPainterTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-    	StandardXYBarPainter p1 = new StandardXYBarPainter();
-    	StandardXYBarPainter p2 = null;
+        StandardXYBarPainter p1 = new StandardXYBarPainter();
+        StandardXYBarPainter p2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);

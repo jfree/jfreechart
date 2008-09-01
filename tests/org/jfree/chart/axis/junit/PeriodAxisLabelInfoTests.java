@@ -92,9 +92,9 @@ public class PeriodAxisLabelInfoTests extends TestCase {
      */
     public void testEquals() {
         PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
-        		new SimpleDateFormat("d"));
+                new SimpleDateFormat("d"));
         PeriodAxisLabelInfo info2 = new PeriodAxisLabelInfo(Day.class,
-        		new SimpleDateFormat("d"));
+                new SimpleDateFormat("d"));
         assertTrue(info1.equals(info2));
         assertTrue(info2.equals(info1));
 
@@ -163,9 +163,9 @@ public class PeriodAxisLabelInfoTests extends TestCase {
      */
     public void testHashCode() {
         PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
-        		new SimpleDateFormat("d"));
+                new SimpleDateFormat("d"));
         PeriodAxisLabelInfo info2 = new PeriodAxisLabelInfo(Day.class,
-        		new SimpleDateFormat("d"));
+                new SimpleDateFormat("d"));
         assertTrue(info1.equals(info2));
         int h1 = info1.hashCode();
         int h2 = info2.hashCode();
@@ -177,7 +177,7 @@ public class PeriodAxisLabelInfoTests extends TestCase {
      */
     public void testCloning() {
         PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
-        		new SimpleDateFormat("d"));
+                new SimpleDateFormat("d"));
         PeriodAxisLabelInfo info2 = null;
         try {
             info2 = (PeriodAxisLabelInfo) info1.clone();
@@ -195,7 +195,7 @@ public class PeriodAxisLabelInfoTests extends TestCase {
      */
     public void testSerialization() {
         PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
-        		new SimpleDateFormat("d"));
+                new SimpleDateFormat("d"));
         PeriodAxisLabelInfo info2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();

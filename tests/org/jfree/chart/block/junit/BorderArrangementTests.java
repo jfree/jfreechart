@@ -819,7 +819,7 @@ public class BorderArrangementTests extends TestCase {
      */
     public void testBugX() {
         RectangleConstraint constraint = new RectangleConstraint(
-        		new Range(0.0, 200.0), new Range(0.0, 100.0));
+                new Range(0.0, 200.0), new Range(0.0, 100.0));
         BlockContainer container = new BlockContainer(new BorderArrangement());
         BufferedImage image = new BufferedImage(200, 100,
                 BufferedImage.TYPE_INT_RGB);

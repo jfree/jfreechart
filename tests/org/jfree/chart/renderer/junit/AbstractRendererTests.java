@@ -599,7 +599,7 @@ public class AbstractRendererTests extends TestCase {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
         r1.setBasePaint(Color.blue);
         r1.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-        		3.0f, 4.0f, Color.blue));
+                3.0f, 4.0f, Color.blue));
         LineAndShapeRenderer r2 = null;
         try {
             r2 = (LineAndShapeRenderer) r1.clone();
@@ -891,7 +891,7 @@ public class AbstractRendererTests extends TestCase {
         BarRenderer r1 = new BarRenderer();
         r1.setBaseLegendTextFont(new Font("Dialog", Font.PLAIN, 4));
         r1.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-        		3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.green));
         r1.setBaseLegendShape(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
         BarRenderer r2 = null;
 

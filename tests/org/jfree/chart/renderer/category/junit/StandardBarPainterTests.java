@@ -90,8 +90,8 @@ public class StandardBarPainterTests extends TestCase {
      * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
-    	StandardBarPainter p1 = new StandardBarPainter();
-    	StandardBarPainter p2 = new StandardBarPainter();
+        StandardBarPainter p1 = new StandardBarPainter();
+        StandardBarPainter p2 = new StandardBarPainter();
         assertTrue(p1.equals(p2));
         int h1 = p1.hashCode();
         int h2 = p2.hashCode();
@@ -103,7 +103,7 @@ public class StandardBarPainterTests extends TestCase {
      * instances of the class are immutable).
      */
     public void testCloning() {
-    	StandardBarPainter p1 = new StandardBarPainter();
+        StandardBarPainter p1 = new StandardBarPainter();
         assertFalse(p1 instanceof Cloneable);
         assertFalse(p1 instanceof PublicCloneable);
     }
@@ -112,8 +112,8 @@ public class StandardBarPainterTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-    	StandardBarPainter p1 = new StandardBarPainter();
-    	StandardBarPainter p2 = null;
+        StandardBarPainter p1 = new StandardBarPainter();
+        StandardBarPainter p2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);

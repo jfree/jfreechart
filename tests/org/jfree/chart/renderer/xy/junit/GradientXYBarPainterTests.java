@@ -105,8 +105,8 @@ public class GradientXYBarPainterTests extends TestCase {
      * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
-    	GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
-    	GradientXYBarPainter p2 = new GradientXYBarPainter(0.1, 0.2, 0.3);
+        GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
+        GradientXYBarPainter p2 = new GradientXYBarPainter(0.1, 0.2, 0.3);
         assertTrue(p1.equals(p2));
         int h1 = p1.hashCode();
         int h2 = p2.hashCode();
@@ -118,7 +118,7 @@ public class GradientXYBarPainterTests extends TestCase {
      * instances of the class are immutable).
      */
     public void testCloning() {
-    	GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
+        GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
         assertFalse(p1 instanceof Cloneable);
         assertFalse(p1 instanceof PublicCloneable);
     }
@@ -127,8 +127,8 @@ public class GradientXYBarPainterTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-    	GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
-    	GradientXYBarPainter p2 = null;
+        GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
+        GradientXYBarPainter p2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);

@@ -304,26 +304,26 @@ public class LegendItemTests extends TestCase {
 
         // fillPaint
         item1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.green, 3.0f,
-        		4.0f, Color.blue));
+                4.0f, Color.blue));
         assertFalse(item1.equals(item2));
         item2.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.green, 3.0f,
-        		4.0f, Color.blue));
+                4.0f, Color.blue));
         assertTrue(item1.equals(item2));
 
         // outlinePaint
         item1.setOutlinePaint(new GradientPaint(1.1f, 2.2f, Color.green, 3.3f,
-        		4.4f, Color.blue));
+                4.4f, Color.blue));
         assertFalse(item1.equals(item2));
         item2.setOutlinePaint(new GradientPaint(1.1f, 2.2f, Color.green, 3.3f,
-        		4.4f, Color.blue));
+                4.4f, Color.blue));
         assertTrue(item1.equals(item2));
 
         // linePaint
         item1.setLinePaint(new GradientPaint(0.1f, 0.2f, Color.green, 0.3f,
-        		0.4f, Color.blue));
+                0.4f, Color.blue));
         assertFalse(item1.equals(item2));
         item2.setLinePaint(new GradientPaint(0.1f, 0.2f, Color.green, 0.3f,
-        		0.4f, Color.blue));
+                0.4f, Color.blue));
         assertTrue(item1.equals(item2));
 
     }
@@ -335,13 +335,13 @@ public class LegendItemTests extends TestCase {
         LegendItem item1 = new LegendItem("Item", "Description",
                 "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), new GradientPaint(
-                		5.0f, 6.0f, Color.blue, 7.0f, 8.0f, Color.gray));
+                        5.0f, 6.0f, Color.blue, 7.0f, 8.0f, Color.gray));
         item1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
-        		4.0f, Color.yellow));
+                4.0f, Color.yellow));
         item1.setOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.green, 2.0f,
-        		1.0f, Color.red));
+                1.0f, Color.red));
         item1.setLinePaint(new GradientPaint(1.0f, 2.0f, Color.white, 3.0f,
-        		4.0f, Color.red));
+                4.0f, Color.red));
         LegendItem item2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
