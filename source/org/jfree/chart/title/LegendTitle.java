@@ -448,7 +448,7 @@ public class LegendTitle extends Title
         }
         Paint textPaint = item.getLabelPaint();
         if (textPaint == null) {
-        	textPaint = this.itemPaint;
+            textPaint = this.itemPaint;
         }
         LabelBlock labelBlock = new LabelBlock(item.getLabel(), textFont,
                 textPaint);
@@ -545,7 +545,7 @@ public class LegendTitle extends Title
      * @since 1.0.11
      */
     public BlockContainer getWrapper() {
-    	return this.wrapper;
+        return this.wrapper;
     }
 
     /**

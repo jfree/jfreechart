@@ -375,7 +375,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
      * @since 1.0.11
      */
     public int getSubdivisionCount() {
-    	return this.subdivisions;
+        return this.subdivisions;
     }
 
     /**
@@ -387,11 +387,11 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
      * @since 1.0.11
      */
     public void setSubdivisionCount(int count) {
-    	if (count <= 0) {
-    		throw new IllegalArgumentException("Requires 'count' > 0.");
-    	}
-    	this.subdivisions = count;
-    	notifyListeners(new TitleChangeEvent(this));
+        if (count <= 0) {
+            throw new IllegalArgumentException("Requires 'count' > 0.");
+        }
+        this.subdivisions = count;
+        notifyListeners(new TitleChangeEvent(this));
     }
 
     /**
@@ -536,7 +536,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
                             RectangleEdge.TOP);
                     double ww = Math.abs(vv1 - vv0);
                     r.setRect(Math.min(vv0, vv1), target.getMaxY()
-                    		- this.stripWidth, ww, this.stripWidth);
+                            - this.stripWidth, ww, this.stripWidth);
                     g2.setPaint(p);
                     g2.fill(r);
                 }
@@ -559,7 +559,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
                             RectangleEdge.BOTTOM);
                     double ww = Math.abs(vv1 - vv0);
                     r.setRect(Math.min(vv0, vv1), target.getMinY(), ww,
-                    		this.stripWidth);
+                            this.stripWidth);
                     g2.setPaint(p);
                     g2.fill(r);
                 }
@@ -585,7 +585,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
                             RectangleEdge.LEFT);
                     double hh = Math.abs(vv1 - vv0);
                     r.setRect(target.getMaxX() - this.stripWidth,
-                    		Math.min(vv0, vv1), this.stripWidth, hh);
+                            Math.min(vv0, vv1), this.stripWidth, hh);
                     g2.setPaint(p);
                     g2.fill(r);
                 }
@@ -608,7 +608,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
                             RectangleEdge.LEFT);
                     double hh = Math.abs(vv1 - vv0);
                     r.setRect(target.getMinX(), Math.min(vv0, vv1),
-                    		this.stripWidth, hh);
+                            this.stripWidth, hh);
                     g2.setPaint(p);
                     g2.fill(r);
                 }
@@ -665,7 +665,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
             return false;
         }
         if (this.subdivisions != that.subdivisions) {
-        	return false;
+            return false;
         }
         return super.equals(obj);
     }
