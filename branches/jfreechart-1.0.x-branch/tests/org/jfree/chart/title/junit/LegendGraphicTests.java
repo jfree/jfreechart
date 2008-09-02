@@ -262,8 +262,7 @@ public class LegendGraphicTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             g2 = (LegendGraphic) in.readObject();
             in.close();
         }
