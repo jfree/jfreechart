@@ -200,6 +200,9 @@ public abstract class AbstractDialLayer implements DialLayer {
      * Provides serialization support.
      *
      * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
      */
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
