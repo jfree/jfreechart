@@ -259,6 +259,9 @@ public class LogarithmicAxisTests extends TestCase {
 
     /**
      * Check the translation java2D to value for left, right, and center point.
+     *
+     * @param edge  the edge.
+     * @param plotArea  the plot area.
      */
      private void checkPointsToValue(RectangleEdge edge, Rectangle2D plotArea) {
          assertEquals("Right most point on the axis should be end of range.",
