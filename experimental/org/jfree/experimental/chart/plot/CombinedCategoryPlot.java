@@ -101,6 +101,8 @@ public class CombinedCategoryPlot extends CombinedDomainCategoryPlot {
      * the specified axis.
      *
      * @param axis  the axis.
+     *
+     * @return The bounds.
      */
     public Range getDataRange(ValueAxis axis) {
         Range l_result = null;
