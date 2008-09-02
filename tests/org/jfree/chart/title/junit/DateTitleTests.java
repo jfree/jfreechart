@@ -153,13 +153,12 @@ public class DateTitleTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             t2 = (DateTitle) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(t1, t2);
 
