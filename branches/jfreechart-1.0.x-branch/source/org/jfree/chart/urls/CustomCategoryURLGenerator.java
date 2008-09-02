@@ -184,6 +184,8 @@ public class CustomCategoryURLGenerator implements CategoryURLGenerator,
      * generator.
      *
      * @return A clone.
+     *
+     * @throws CloneNotSupportedException if there is a problem with cloning.
      */
     public Object clone() throws CloneNotSupportedException {
         CustomCategoryURLGenerator clone
