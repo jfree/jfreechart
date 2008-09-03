@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------
  * LineBorder.java
  * ---------------
- * (C) Copyright 2007, by Christo Zietsman and Contributors.
+ * (C) Copyright 2007, 2008, by Christo Zietsman and Contributors.
  *
  * Original Author:  Christo Zietsman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -37,7 +37,7 @@
  * 16-Mar-2007 : Version 1, contributed by Christo Zietsman with
  *               modifications by DG (DG);
  * 13-Jun-2007 : Don't draw if area doesn't have positive dimensions (DG);
- * 
+ *
  */
 
 package org.jfree.chart.block;
@@ -60,8 +60,8 @@ import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 
 /**
- * A line border for any {@link AbstractBlock}. 
- * 
+ * A line border for any {@link AbstractBlock}.
+ *
  * @since 1.0.5
  */
 public class LineBorder implements BlockFrame, Serializable {
@@ -71,28 +71,28 @@ public class LineBorder implements BlockFrame, Serializable {
 
     /** The line color. */
     private transient Paint paint;
-    
+
     /** The line stroke. */
     private transient Stroke stroke;
-    
+
     /** The insets. */
     private RectangleInsets insets;
-    
+
     /**
      * Creates a default border.
      */
     public LineBorder() {
-        this(Color.black, new BasicStroke(1.0f), new RectangleInsets(1.0, 1.0, 
+        this(Color.black, new BasicStroke(1.0f), new RectangleInsets(1.0, 1.0,
                 1.0, 1.0));
     }
-    
+
     /**
      * Creates a new border with the specified color.
-     * 
+     *
      * @param paint  the color (<code>null</code> not permitted).
      * @param stroke  the border stroke (<code>null</code> not permitted).
      * @param insets  the insets (<code>null</code> not permitted).
-     */    
+     */
     public LineBorder(Paint paint, Stroke stroke, RectangleInsets insets) {
         if (paint == null) {
             throw new IllegalArgumentException("Null 'paint' argument.");
@@ -106,20 +106,20 @@ public class LineBorder implements BlockFrame, Serializable {
         this.paint = paint;
         this.stroke = stroke;
         this.insets = insets;
-    }  
-    
+    }
+
     /**
      * Returns the paint.
-     * 
+     *
      * @return The paint (never <code>null</code>).
      */
     public Paint getPaint() {
         return this.paint;
     }
-    
+
     /**
      * Returns the insets.
-     * 
+     *
      * @return The insets (never <code>null</code>).
      */
     public RectangleInsets getInsets() {
@@ -128,16 +128,16 @@ public class LineBorder implements BlockFrame, Serializable {
 
     /**
      * Returns the stroke.
-     * 
+     *
      * @return The stroke (never <code>null</code>).
      */
     public Stroke getStroke() {
         return this.stroke;
     }
-    
+
     /**
      * Draws the border by filling in the reserved space (in black).
-     * 
+     *
      * @param g2  the graphics device.
      * @param area  the area.
      */
@@ -176,22 +176,22 @@ public class LineBorder implements BlockFrame, Serializable {
         if (r > 0.0) {
             line.setLine(x1, y0, x1, y1);
             g2.draw(line);
-        }        
-    }    
+        }
+    }
 
     /**
      * Tests this border for equality with an arbitrary instance.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
-            return true;   
+            return true;
         }
         if (!(obj instanceof LineBorder)) {
-            return false;   
+            return false;
         }
         LineBorder that = (LineBorder) obj;
         if (!PaintUtilities.equal(this.paint, that.paint)) {
@@ -204,7 +204,7 @@ public class LineBorder implements BlockFrame, Serializable {
             return false;
         }
         return true;
-    }    
+    }
 
     /**
      * Provides serialization support.
@@ -227,12 +227,12 @@ public class LineBorder implements BlockFrame, Serializable {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.paint = SerialUtilities.readPaint(stream);
         this.stroke = SerialUtilities.readStroke(stream);
-    }    
+    }
 }
 
-                 
+
