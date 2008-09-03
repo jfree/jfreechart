@@ -30,7 +30,8 @@
  * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   Bill Kelemen; Nicolas Brodu
+ * Contributor(s):   Bill Kelemen;
+ *                   Nicolas Brodu;
  *
  * Changes
  * -------
