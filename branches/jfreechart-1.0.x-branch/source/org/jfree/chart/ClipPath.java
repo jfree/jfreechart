@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------
  * ClipPath.java
  * -------------
- * (C) Copyright 2003, 2004, 2007, by David M. O'Donnell and Contributors.
+ * (C) Copyright 2003-2008, by David M. O'Donnell and Contributors.
  *
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -60,21 +60,21 @@ import org.jfree.chart.renderer.xy.XYBlockRenderer;
 import org.jfree.ui.RectangleEdge;
 
 /**
- * This class would typically be used with a 
- * {@link org.jfree.chart.plot.ContourPlot}.  It allows the user to define a 
- * <code>GeneralPath</code> curve in plot coordinates.  This curve can then be 
- * used mask off or define regions within the contour plot.  The data must be 
+ * This class would typically be used with a
+ * {@link org.jfree.chart.plot.ContourPlot}.  It allows the user to define a
+ * <code>GeneralPath</code> curve in plot coordinates.  This curve can then be
+ * used mask off or define regions within the contour plot.  The data must be
  * sorted.
- * 
- * @deprecated This class is no longer supported (as of version 1.0.4).  If 
- *     you are creating contour plots, please try to use {@link XYPlot} and 
+ *
+ * @deprecated This class is no longer supported (as of version 1.0.4).  If
+ *     you are creating contour plots, please try to use {@link XYPlot} and
  *     {@link XYBlockRenderer}.
  */
 public class ClipPath implements Cloneable {
 
     /** The x values. */
     private double[] xValue = null;
-    
+
     /** The y values. */
     private double[] yValue = null;
 
@@ -90,13 +90,13 @@ public class ClipPath implements Cloneable {
 
     /** The fill paint. */
     private Paint fillPaint = null;
-    
+
     /** The draw paint. */
     private Paint drawPaint = null;
-    
+
     /** The draw stroke. */
     private Stroke drawStroke = null;
-    
+
     /** The composite. */
     private Composite composite = null;
 
@@ -109,8 +109,8 @@ public class ClipPath implements Cloneable {
 
     /**
      * Constructor for ClipPath.
-     * Default values are assumed for the fillPath and drawPath options as 
-     * false and true respectively.  The fillPaint is set to Color.GRAY, the 
+     * Default values are assumed for the fillPath and drawPath options as
+     * false and true respectively.  The fillPaint is set to Color.GRAY, the
      * drawColor is Color.BLUE, the stroke is BasicStroke(1)
      * and the composite is AlphaComposite.Src.
      *
@@ -124,7 +124,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Constructor for ClipPath.
-     * The fillPaint is set to Color.GRAY, the drawColor is Color.BLUE, the 
+     * The fillPaint is set to Color.GRAY, the drawColor is Color.BLUE, the
      * stroke is BasicStroke(1) and the composite is AlphaComposite.Src.
      *
      * @param xValue  x coordinates of curved to be created
@@ -160,8 +160,8 @@ public class ClipPath implements Cloneable {
      * @param drawStroke  the stroke style
      * @param composite  the composite rule
      */
-    public ClipPath(double[] xValue, double[] yValue, boolean fillPath, 
-                    boolean drawPath, Paint fillPaint, Paint drawPaint, 
+    public ClipPath(double[] xValue, double[] yValue, boolean fillPath,
+                    boolean drawPath, Paint fillPaint, Paint drawPaint,
                     Stroke drawStroke, Composite composite) {
 
         this.xValue = xValue;
@@ -233,7 +233,7 @@ public class ClipPath implements Cloneable {
      * @return The GeneralPath defining the outline
      */
     public GeneralPath generateClipPath(Rectangle2D dataArea,
-                                        ValueAxis horizontalAxis, 
+                                        ValueAxis horizontalAxis,
                                         ValueAxis verticalAxis) {
 
         GeneralPath generalPath = new GeneralPath();
@@ -261,7 +261,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Returns the composite.
-     * 
+     *
      * @return Composite
      */
     public Composite getComposite() {
@@ -270,7 +270,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Returns the drawPaint.
-     * 
+     *
      * @return Paint
      */
     public Paint getDrawPaint() {
@@ -279,7 +279,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Returns the drawPath.
-     * 
+     *
      * @return boolean
      */
     public boolean isDrawPath() {
@@ -288,7 +288,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Returns the drawStroke.
-     * 
+     *
      * @return Stroke
      */
     public Stroke getDrawStroke() {
@@ -297,7 +297,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Returns the fillPaint.
-     * 
+     *
      * @return Paint
      */
     public Paint getFillPaint() {
@@ -306,7 +306,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Returns the fillPath.
-     * 
+     *
      * @return boolean
      */
     public boolean isFillPath() {
@@ -315,7 +315,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Returns the xValue.
-     * 
+     *
      * @return double[]
      */
     public double[] getXValue() {
@@ -324,7 +324,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Returns the yValue.
-     * 
+     *
      * @return double[]
      */
     public double[] getYValue() {
@@ -333,7 +333,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Sets the composite.
-     * 
+     *
      * @param composite The composite to set
      */
     public void setComposite(Composite composite) {
@@ -342,7 +342,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Sets the drawPaint.
-     * 
+     *
      * @param drawPaint The drawPaint to set
      */
     public void setDrawPaint(Paint drawPaint) {
@@ -351,7 +351,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Sets the drawPath.
-     * 
+     *
      * @param drawPath The drawPath to set
      */
     public void setDrawPath(boolean drawPath) {
@@ -360,7 +360,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Sets the drawStroke.
-     * 
+     *
      * @param drawStroke The drawStroke to set
      */
     public void setDrawStroke(Stroke drawStroke) {
@@ -369,7 +369,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Sets the fillPaint.
-     * 
+     *
      * @param fillPaint The fillPaint to set
      */
     public void setFillPaint(Paint fillPaint) {
@@ -378,7 +378,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Sets the fillPath.
-     * 
+     *
      * @param fillPath The fillPath to set
      */
     public void setFillPath(boolean fillPath) {
@@ -387,7 +387,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Sets the xValue.
-     * 
+     *
      * @param xValue The xValue to set
      */
     public void setXValue(double[] xValue) {
@@ -396,7 +396,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Sets the yValue.
-     * 
+     *
      * @param yValue The yValue to set
      */
     public void setYValue(double[] yValue) {
@@ -405,7 +405,7 @@ public class ClipPath implements Cloneable {
 
     /**
      * Returns the clip.
-     * 
+     *
      * @return boolean
      */
     public boolean isClip() {
@@ -414,19 +414,19 @@ public class ClipPath implements Cloneable {
 
     /**
      * Sets the clip.
-     * 
+     *
      * @param clip The clip to set
      */
     public void setClip(boolean clip) {
         this.clip = clip;
     }
 
-    /** 
-     * Returns a clone of the object (a deeper clone than default to avoid bugs 
+    /**
+     * Returns a clone of the object (a deeper clone than default to avoid bugs
      * when setting values in cloned object).
-     * 
+     *
      * @return The clone.
-     * 
+     *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
     public Object clone() throws CloneNotSupportedException {
