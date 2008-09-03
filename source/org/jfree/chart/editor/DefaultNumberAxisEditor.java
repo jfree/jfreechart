@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------------
  * DefaultNumberAxisEditor.java
  * ----------------------------
- * (C) Copyright 2005, 2007, Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Arnaud Lelievre;
@@ -35,7 +35,7 @@
  * Changes:
  * --------
  * 24-Nov-2005 : Version 1, based on NumberAxisPropertyEditor (DG);
- * 
+ *
  */
 
 package org.jfree.chart.editor;
@@ -66,8 +66,8 @@ import org.jfree.ui.StrokeSample;
 /**
  * A panel for editing the properties of a value axis.
  */
-class DefaultNumberAxisEditor extends DefaultAxisEditor 
-                              implements FocusListener {
+class DefaultNumberAxisEditor extends DefaultAxisEditor
+        implements FocusListener {
 
     /** A flag that indicates whether or not the axis range is determined
      *  automatically.
@@ -101,9 +101,9 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
      *  decent StrokeChooser component yet).
      */
     private StrokeSample[] availableStrokeSamples;
-    
+
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources = 
+    protected static ResourceBundle localizationResources =
         ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
 
     /**
@@ -123,11 +123,11 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
         this.gridStrokeSample = new StrokeSample(new BasicStroke(1.0f));
 
         this.availableStrokeSamples = new StrokeSample[3];
-        this.availableStrokeSamples[0] 
+        this.availableStrokeSamples[0]
             = new StrokeSample(new BasicStroke(1.0f));
-        this.availableStrokeSamples[1] 
+        this.availableStrokeSamples[1]
             = new StrokeSample(new BasicStroke(2.0f));
-        this.availableStrokeSamples[2] 
+        this.availableStrokeSamples[2]
             = new StrokeSample(new BasicStroke(3.0f));
 
         JTabbedPane other = getOtherTabs();
