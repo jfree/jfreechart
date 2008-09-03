@@ -101,7 +101,7 @@ import org.jfree.util.PublicCloneable;
  * the left or right of charts.
  */
 public class PeriodAxis extends ValueAxis
-                        implements Cloneable, PublicCloneable, Serializable {
+        implements Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 8353295532075872069L;

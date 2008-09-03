@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -18,8 +18,8 @@
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
@@ -27,7 +27,7 @@
  * --------------------
  * LogarithmicAxis.java
  * --------------------
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Michael Duffy / Eric Thomas;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -113,7 +113,7 @@ public class LogarithmicAxis extends NumberAxis {
 
     /** For serialization. */
     private static final long serialVersionUID = 2502918599004103054L;
-    
+
     /** Useful constant for log(10). */
     public static final double LOG10_VALUE = Math.log(10.0);
 
@@ -123,9 +123,9 @@ public class LogarithmicAxis extends NumberAxis {
     /** Flag set true to allow negative values in data. */
     protected boolean allowNegativesFlag = false;
 
-    /** 
+    /**
      * Flag set true make axis throw exception if any values are
-     * <= 0 and 'allowNegativesFlag' is false. 
+     * <= 0 and 'allowNegativesFlag' is false.
      */
     protected boolean strictValuesFlag = true;
 
@@ -287,7 +287,7 @@ public class LogarithmicAxis extends NumberAxis {
         // set flag true if negative values not allowed and the
         // lower bound is between 0 and 10:
         double lowerVal = getRange().getLowerBound();
-        this.smallLogFlag = (!this.allowNegativesFlag && lowerVal < 10.0 
+        this.smallLogFlag = (!this.allowNegativesFlag && lowerVal < 10.0
                 && lowerVal > 0.0);
     }
 
@@ -314,27 +314,27 @@ public class LogarithmicAxis extends NumberAxis {
      * @param val the value.
      *
      * @return log<sub>10</sub>(val).
-     * 
-     * @see #switchedPow10(double) 
+     *
+     * @see #switchedPow10(double)
      */
     protected double switchedLog10(double val) {
         return this.smallLogFlag ? Math.log(val)
                 / LOG10_VALUE : adjustedLog10(val);
     }
 
-    /** 
+    /**
      * Returns a power of 10, depending on if values between 0 and
      * 1 are being plotted.  If negative values are not allowed and
      * the lower bound is between 0 and 10 then a normal power is
      * returned; otherwise the returned value is adjusted if the
      * given value is less than 1.
-     * 
+     *
      * @param val the value.
-     * 
+     *
      * @return 10<sup>val</sup>.
-     * 
+     *
      * @since 1.0.5
-     * @see #switchedLog10(double) 
+     * @see #switchedLog10(double)
      */
     public double switchedPow10(double val) {
         return this.smallLogFlag ? Math.pow(10.0, val) : adjustedPow10(val);
@@ -351,8 +351,8 @@ public class LogarithmicAxis extends NumberAxis {
      * @param val  value for which log10 should be calculated.
      *
      * @return An adjusted log<sub>10</sub>(val).
-     * 
-     * @see #adjustedPow10(double) 
+     *
+     * @see #adjustedPow10(double)
      */
     public double adjustedLog10(double val) {
         boolean negFlag = (val < 0.0);
@@ -377,7 +377,7 @@ public class LogarithmicAxis extends NumberAxis {
      * @param val  value for which power of 10 should be calculated.
      *
      * @return An adjusted 10<sup>val</sup>.
-     * 
+     *
      * @since 1.0.5
      * @see #adjustedLog10(double)
      */
@@ -391,7 +391,7 @@ public class LogarithmicAxis extends NumberAxis {
             res = (Math.pow(10, val + 1.0) - 10.0) / 9.0; //invert adjustLog10
         }
         else {
-            res = Math.pow(10, val);            
+            res = Math.pow(10, val);
         }
         return negFlag ? (-res) : res;
     }
@@ -642,11 +642,11 @@ public class LogarithmicAxis extends NumberAxis {
         value = switchedLog10(value);
 
         if (isInverted()) {
-            return max - (((value - axisMin) / (axisMax - axisMin)) 
+            return max - (((value - axisMin) / (axisMax - axisMin))
                     * (max - min));
         }
         else {
-            return min + (((value - axisMin) / (axisMax - axisMin)) 
+            return min + (((value - axisMin) / (axisMax - axisMin))
                     * (max - min));
         }
 
@@ -682,18 +682,18 @@ public class LogarithmicAxis extends NumberAxis {
         }
 
         if (isInverted()) {
-            return switchedPow10(axisMax - ((java2DValue - plotMin) 
+            return switchedPow10(axisMax - ((java2DValue - plotMin)
                     / (plotMax - plotMin)) * (axisMax - axisMin));
         }
         else {
-            return switchedPow10(axisMin + ((java2DValue - plotMin) 
+            return switchedPow10(axisMin + ((java2DValue - plotMin)
                     / (plotMax - plotMin)) * (axisMax - axisMin));
         }
     }
 
     /**
      * Zooms in on the current range.
-     * 
+     *
      * @param lowerPercent  the new lower bound.
      * @param upperPercent  the new upper bound.
      */
@@ -708,7 +708,7 @@ public class LogarithmicAxis extends NumberAxis {
                             startLog + (lengthLog * (1 - upperPercent))),
                     switchedPow10(
                             startLog + (lengthLog * (1 - lowerPercent))));
-        } 
+        }
         else {
             adjusted = new Range(
                     switchedPow10(startLog + (lengthLog * lowerPercent)),
@@ -857,7 +857,7 @@ public class LogarithmicAxis extends NumberAxis {
                         }
                     }
 
-                    Tick tick = new NumberTick(new Double(currentTickValue), 
+                    Tick tick = new NumberTick(new Double(currentTickValue),
                             tickLabel, anchor, rotationAnchor, angle);
                     ticks.add(tick);
                 }
@@ -877,7 +877,7 @@ public class LogarithmicAxis extends NumberAxis {
      *
      * @return A list of ticks.
      */
-    protected List refreshTicksVertical(Graphics2D g2, 
+    protected List refreshTicksVertical(Graphics2D g2,
                                         Rectangle2D dataArea,
                                         RectangleEdge edge) {
 
@@ -1049,7 +1049,7 @@ public class LogarithmicAxis extends NumberAxis {
                         }
                     }
                     //create tick object and add to list:
-                    ticks.add(new NumberTick(new Double(tickVal), tickLabel, 
+                    ticks.add(new NumberTick(new Double(tickVal), tickLabel,
                             anchor, rotationAnchor, angle));
                 }
             }
