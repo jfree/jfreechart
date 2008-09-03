@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * StandardTickUnitSource.java
  * ---------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -54,14 +54,14 @@ public class StandardTickUnitSource implements TickUnitSource, Serializable {
 
     /** Constant for log(10.0). */
     private static final double LOG_10_VALUE = Math.log(10.0);
-    
+
     /**
      * Default constructor.
      */
     public StandardTickUnitSource() {
         super();
     }
-    
+
     /**
      * Returns a tick unit that is larger than the supplied unit.
      *
@@ -73,7 +73,7 @@ public class StandardTickUnitSource implements TickUnitSource, Serializable {
         double x = unit.getSize();
         double log = Math.log(x) / LOG_10_VALUE;
         double higher = Math.ceil(log);
-        return new NumberTickUnit(Math.pow(10, higher), 
+        return new NumberTickUnit(Math.pow(10, higher),
                 new DecimalFormat("0.0E0"));
     }
 
@@ -100,15 +100,15 @@ public class StandardTickUnitSource implements TickUnitSource, Serializable {
     public TickUnit getCeilingTickUnit(double size) {
         double log = Math.log(size) / LOG_10_VALUE;
         double higher = Math.ceil(log);
-        return new NumberTickUnit(Math.pow(10, higher), 
+        return new NumberTickUnit(Math.pow(10, higher),
                 new DecimalFormat("0.0E0"));
     }
-    
+
     /**
      * Tests this instance for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -120,7 +120,7 @@ public class StandardTickUnitSource implements TickUnitSource, Serializable {
 
     /**
      * Returns a hash code for this instance.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {

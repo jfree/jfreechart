@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------
  * TickUnit.java
  * -------------
- * (C) Copyright 2001-2007, by Object Refinery Limited.
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -64,17 +64,17 @@ public abstract class TickUnit implements Comparable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 510179855057013974L;
-    
+
     /** The size of the tick unit. */
     private double size;
 
     /**
      * The number of minor ticks.
-     * 
+     *
      * @since 1.0.7
      */
     private int minorTickCount;
-    
+
     /**
      * Constructs a new tick unit.
      *
@@ -83,19 +83,19 @@ public abstract class TickUnit implements Comparable, Serializable {
     public TickUnit(double size) {
         this.size = size;
     }
-    
+
     /**
      * Constructs a new tick unit.
      *
      * @param size  the tick unit size.
      * @param minorTickCount  the minor tick count.
-     * 
+     *
      * @since 1.0.7
      */
     public TickUnit(double size, int minorTickCount) {
         this.size = size;
         this.minorTickCount = minorTickCount;
-    }    
+    }
 
     /**
      * Returns the size of the tick unit.
@@ -105,12 +105,12 @@ public abstract class TickUnit implements Comparable, Serializable {
     public double getSize() {
         return this.size;
     }
-    
+
     /**
      * Returns the minor tick count.
-     * 
+     *
      * @return The minor tick count.
-     * 
+     *
      * @since 1.0.7
      */
     public int getMinorTickCount() {
@@ -185,11 +185,11 @@ public abstract class TickUnit implements Comparable, Serializable {
 
     /**
      * Returns a hash code for this instance.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
-        long temp = this.size != +0.0d ? Double.doubleToLongBits(this.size) 
+        long temp = this.size != +0.0d ? Double.doubleToLongBits(this.size)
                 : 0L;
         return (int) (temp ^ (temp >>> 32));
     }
