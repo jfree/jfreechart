@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------
  * ChartColor.java
  * ---------------
- * (C) Copyright 2003-2007, by Cameron Riley and Contributors.
+ * (C) Copyright 2003-2008, by Cameron Riley and Contributors.
  *
  * Original Author:  Cameron Riley;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -128,7 +128,7 @@ public class ChartColor extends Color {
     public static final Color VERY_LIGHT_MAGENTA = new Color(0xFF, 0x80, 0xFF);
 
     /**
-     * Creates a Color with an opaque sRGB with red, green and blue values in 
+     * Creates a Color with an opaque sRGB with red, green and blue values in
      * range 0-255.
      *
      * @param r  the red component in range 0x00-0xFF.
@@ -141,7 +141,7 @@ public class ChartColor extends Color {
 
     /**
      * Convenience method to return an array of <code>Paint</code> objects that
-     * represent the pre-defined colors in the <code>Color<code> and 
+     * represent the pre-defined colors in the <code>Color<code> and
      * <code>ChartColor</code> objects.
      *
      * @return An array of objects with the <code>Paint</code> interface.
