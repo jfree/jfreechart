@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
@@ -38,10 +38,11 @@
  * 30-Apr-2007 : Fixed equals() method (DG);
  * 26-Feb-2008 : Fixed NullPointerException when drawing chart with a null
  *               ChartRenderingInfo - see patch 1901599 by Andrew Mickish (DG);
- * 
+ * 03-Sep-2008 : Moved from experimental to main (DG);
+ *
  */
 
-package org.jfree.experimental.chart.annotations;
+package org.jfree.chart.annotations;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
@@ -49,7 +50,6 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
-import org.jfree.chart.annotations.AbstractXYAnnotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.block.BlockParams;
@@ -60,8 +60,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.Title;
+import org.jfree.chart.util.XYCoordinateType;
 import org.jfree.data.Range;
-import org.jfree.experimental.chart.util.XYCoordinateType;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.Size2D;
@@ -69,40 +69,42 @@ import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
- * An annotation that allows any {@link Title} to be placed at a location on 
+ * An annotation that allows any {@link Title} to be placed at a location on
  * an {@link XYPlot}.
+ *
+ * @since 1.0.11
  */
 public class XYTitleAnnotation extends AbstractXYAnnotation
         implements Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -4364694501921559958L;
-    
+
     /** The coordinate type. */
     private XYCoordinateType coordinateType;
-    
+
     /** The x-coordinate (in data space). */
     private double x;
 
     /** The y-coordinate (in data space). */
     private double y;
-    
+
     /** The maximum width. */
     private double maxWidth;
-    
+
     /** The maximum height. */
     private double maxHeight;
 
     /** The title. */
     private Title title;
 
-    /** 
-     * The title anchor point. 
+    /**
+     * The title anchor point.
      */
     private RectangleAnchor anchor;
-    
+
     /**
-     * Creates a new annotation to be displayed at the specified (x, y) 
+     * Creates a new annotation to be displayed at the specified (x, y)
      * location.
      *
      * @param x  the x-coordinate (in data space).
@@ -112,9 +114,9 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     public XYTitleAnnotation(double x, double y, Title title) {
         this(x, y, title, RectangleAnchor.CENTER);
     }
-    
+
     /**
-     * Creates a new annotation to be displayed at the specified (x, y) 
+     * Creates a new annotation to be displayed at the specified (x, y)
      * location.
      *
      * @param x  the x-coordinate (in data space).
@@ -122,10 +124,10 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
      * @param title  the title (<code>null</code> not permitted).
      * @param anchor  the title anchor (<code>null</code> not permitted).
      */
-    public XYTitleAnnotation(double x, double y, Title title, 
+    public XYTitleAnnotation(double x, double y, Title title,
             RectangleAnchor anchor) {
         if (title == null) {
-            throw new IllegalArgumentException("Null 'title' argument.");      
+            throw new IllegalArgumentException("Null 'title' argument.");
         }
         if (anchor == null) {
             throw new IllegalArgumentException("Null 'anchor' argument.");
@@ -137,83 +139,83 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
         this.maxHeight = 0.0;
         this.title = title;
         this.anchor = anchor;
-    }    
-    
+    }
+
     /**
      * Returns the coordinate type (set in the constructor).
-     * 
+     *
      * @return The coordinate type (never <code>null</code>).
      */
     public XYCoordinateType getCoordinateType() {
         return this.coordinateType;
     }
-    
+
     /**
      * Returns the x-coordinate for the annotation.
-     * 
+     *
      * @return The x-coordinate.
      */
     public double getX() {
         return this.x;
     }
-    
+
     /**
      * Returns the y-coordinate for the annotation.
-     * 
+     *
      * @return The y-coordinate.
      */
     public double getY() {
         return this.y;
     }
-    
+
     /**
      * Returns the title for the annotation.
-     * 
+     *
      * @return The title.
      */
     public Title getTitle() {
         return this.title;
     }
-    
+
     /**
      * Returns the title anchor for the annotation.
-     * 
+     *
      * @return The title anchor.
      */
     public RectangleAnchor getTitleAnchor() {
         return this.anchor;
     }
-    
+
     /**
      * Returns the maximum width.
-     * 
+     *
      * @return The maximum width.
      */
     public double getMaxWidth() {
         return this.maxWidth;
     }
-    
+
     /**
      * Sets the maximum width.
-     * 
+     *
      * @param max  the maximum width (0.0 or less means no maximum).
      */
     public void setMaxWidth(double max) {
         this.maxWidth = max;
     }
-    
+
     /**
      * Returns the maximum height.
-     * 
+     *
      * @return The maximum height.
      */
     public double getMaxHeight() {
         return this.maxHeight;
     }
-    
+
     /**
      * Sets the maximum height.
-     * 
+     *
      * @param max  the maximum height.
      */
     public void setMaxHeight(double max) {
@@ -221,8 +223,8 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Draws the annotation.  This method is called by the drawing code in the 
-     * {@link XYPlot} class, you don't normally need to call this method 
+     * Draws the annotation.  This method is called by the drawing code in the
+     * {@link XYPlot} class, you don't normally need to call this method
      * directly.
      *
      * @param g2  the graphics device.
@@ -235,7 +237,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
      *              entity information.
      */
     public void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
-                     ValueAxis domainAxis, ValueAxis rangeAxis, 
+                     ValueAxis domainAxis, ValueAxis rangeAxis,
                      int rendererIndex,
                      PlotRenderingInfo info) {
 
@@ -258,10 +260,10 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
             anchorX = domainAxis.valueToJava2D(this.x, dataArea, domainEdge);
             anchorY = rangeAxis.valueToJava2D(this.y, dataArea, rangeEdge);
         }
-        
-        float j2DX = (float) domainAxis.valueToJava2D(anchorX, dataArea, 
+
+        float j2DX = (float) domainAxis.valueToJava2D(anchorX, dataArea,
                 domainEdge);
-        float j2DY = (float) rangeAxis.valueToJava2D(anchorY, dataArea, 
+        float j2DY = (float) rangeAxis.valueToJava2D(anchorY, dataArea,
                 rangeEdge);
         float xx = 0.0f;
         float yy = 0.0f;
@@ -273,7 +275,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
             xx = j2DX;
             yy = j2DY;
         }
-        
+
         double maxW = dataArea.getWidth();
         double maxH = dataArea.getHeight();
         if (this.coordinateType == XYCoordinateType.RELATIVE) {
@@ -290,11 +292,11 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
         }
         RectangleConstraint rc = new RectangleConstraint(
                 new Range(0, maxW), new Range(0, maxH));
-        
+
         Size2D size = this.title.arrange(g2, rc);
-        Rectangle2D titleRect = new Rectangle2D.Double(0, 0, size.width, 
+        Rectangle2D titleRect = new Rectangle2D.Double(0, 0, size.width,
                 size.height);
-        Point2D anchorPoint = RectangleAnchor.coordinates(titleRect, 
+        Point2D anchorPoint = RectangleAnchor.coordinates(titleRect,
                 this.anchor);
         xx = xx - (float) anchorPoint.getX();
         yy = yy - (float) anchorPoint.getY();
@@ -315,8 +317,8 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
             String toolTip = getToolTipText();
             String url = getURL();
             if (toolTip != null || url != null) {
-                addEntity(info, new Rectangle2D.Float(xx, yy, 
-                        (float) size.width, (float) size.height), 
+                addEntity(info, new Rectangle2D.Float(xx, yy,
+                        (float) size.width, (float) size.height),
                         rendererIndex, toolTip, url);
             }
         }
@@ -324,9 +326,9 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
 
     /**
      * Tests this object for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -360,10 +362,10 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Returns a hash code for this object.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -377,12 +379,12 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
         result = HashUtilities.hashCode(result, this.title);
         return result;
     }
-    
+
     /**
      * Returns a clone of the annotation.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException  if the annotation can't be cloned.
      */
     public Object clone() throws CloneNotSupportedException {

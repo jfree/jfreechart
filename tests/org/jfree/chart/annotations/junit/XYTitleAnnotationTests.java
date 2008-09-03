@@ -39,7 +39,7 @@
  *
  */
 
-package org.jfree.experimental.chart.annotations.junit;
+package org.jfree.chart.annotations.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -53,13 +53,13 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.annotations.XYTitleAnnotation;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
-import org.jfree.experimental.chart.annotations.XYTitleAnnotation;
 
 /**
  * Tests for the {@link XYTitleAnnotation} class.

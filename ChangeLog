@@ -1,3 +1,19 @@
+2008-09-03  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * experimental/org/jfree/experimental/chart/annotations/XYTitleAnnotation.java:
+    Moved to main,
+    * experimental/org/jfree/experimental/chart/annotations/junit/XYTitleAnnotationTests.java
+    Likewise,
+    * experimental/org/jfree/experimental/chart/util/XYCoordinateType.java
+    Likewise,
+    * source/org/jfree/chart/annotation/XYTitleAnnotation.java:
+    Transferred from experimental,
+    * source/org/jfree/chart/util/XYCoordinateType.java: Likewise,
+    * tests/org/jfree/chart/annotations/junit/AnnotationsPackageTests.java
+    (suite): Added tests for XYTitleAnnotation,
+    * tests/org/jfree/chart/annotations/junit/XYTitleAnnotationTests.java:
+    New file.
+
 2008-09-01  David Gilbert  <david.gilbert@object-refinery.com>
 
 	Bug 2078057:

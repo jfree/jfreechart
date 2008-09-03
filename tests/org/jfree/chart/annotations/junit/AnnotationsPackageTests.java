@@ -74,6 +74,7 @@ public class AnnotationsPackageTests extends TestCase {
         suite.addTestSuite(XYPolygonAnnotationTests.class);
         suite.addTestSuite(XYShapeAnnotationTests.class);
         suite.addTestSuite(XYTextAnnotationTests.class);
+        suite.addTestSuite(XYTitleAnnotationTests.class);
         return suite;
     }
 
