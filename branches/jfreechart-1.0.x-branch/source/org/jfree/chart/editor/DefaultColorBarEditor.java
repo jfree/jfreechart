@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------
  * DefaultColorBarEditor.java
  * --------------------------
- * (C) Copyright 2002-2007, by David M. O'Donnell and Contributors.
+ * (C) Copyright 2002-2008, by David M. O'Donnell and Contributors.
  *
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -36,8 +36,8 @@
  * Changes
  * -------
  * 26-Nov-2002 : Version 1 contributed by David M. O'Donnell (DG);
- * 08-Sep-2003 : Added internationalization via use of properties 
- *               resourceBundle (RFE 690236) (AL); 
+ * 08-Sep-2003 : Added internationalization via use of properties
+ *               resourceBundle (RFE 690236) (AL);
  * 24-Nov-2005 : Moved and renamed: org.jfree.chart.ui.ColorBarPropertyEditPanel
  *               --> DefaultColorBarEditor (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
@@ -64,14 +64,14 @@ import org.jfree.chart.plot.RainbowPalette;
 import org.jfree.layout.LCBLayout;
 
 /**
- * A DefaultColorBarEditor.  Extends DefaultNumberAxisEditor to allow 
+ * A DefaultColorBarEditor.  Extends DefaultNumberAxisEditor to allow
  * change general axis type parameters.
  */
 class DefaultColorBarEditor extends DefaultNumberAxisEditor {
 
-    /** 
-     * A checkbox that indicates whether or not the color indices should run 
-     * high to low. 
+    /**
+     * A checkbox that indicates whether or not the color indices should run
+     * high to low.
      */
     private JCheckBox invertPaletteCheckBox;
 
@@ -91,23 +91,23 @@ class DefaultColorBarEditor extends DefaultNumberAxisEditor {
     private PaletteSample[] availablePaletteSamples;
 
     /** The resourceBundle for the localization. */
-   protected  static ResourceBundle localizationResources = 
+   protected  static ResourceBundle localizationResources =
        ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * Creates a new edit panel for a color bar.
-     * 
+     *
      * @param colorBar  the color bar.
      */
     public DefaultColorBarEditor(ColorBar colorBar) {
         super((NumberAxis) colorBar.getAxis());
-        this.invertPalette = colorBar.getColorPalette().isInverse(); 
-        this.stepPalette = colorBar.getColorPalette().isStepped(); 
+        this.invertPalette = colorBar.getColorPalette().isInverse();
+        this.stepPalette = colorBar.getColorPalette().isStepped();
         this.currentPalette = new PaletteSample(colorBar.getColorPalette());
         this.availablePaletteSamples = new PaletteSample[2];
-        this.availablePaletteSamples[0] 
+        this.availablePaletteSamples[0]
             = new PaletteSample(new RainbowPalette());
-        this.availablePaletteSamples[1] 
+        this.availablePaletteSamples[1]
             = new PaletteSample(new GreyPalette());
 
         JTabbedPane other = getOtherTabs();
@@ -117,7 +117,7 @@ class DefaultColorBarEditor extends DefaultNumberAxisEditor {
 
         palettePanel.add(new JPanel());
         this.invertPaletteCheckBox = new JCheckBox(
-            localizationResources.getString("Invert_Palette"), 
+            localizationResources.getString("Invert_Palette"),
             this.invertPalette
         );
         this.invertPaletteCheckBox.setActionCommand("invertPalette");
@@ -138,7 +138,7 @@ class DefaultColorBarEditor extends DefaultNumberAxisEditor {
         palettePanel.add(
             new JLabel(localizationResources.getString("Palette"))
         );
-        JButton button 
+        JButton button
             = new JButton(localizationResources.getString("Set_palette..."));
         button.setActionCommand("PaletteChoice");
         button.addActionListener(this);
@@ -174,7 +174,7 @@ class DefaultColorBarEditor extends DefaultNumberAxisEditor {
      * Handle a palette selection.
      */
     private void attemptPaletteSelection() {
-        PaletteChooserPanel panel 
+        PaletteChooserPanel panel
             = new PaletteChooserPanel(null, this.availablePaletteSamples);
         int result = JOptionPane.showConfirmDialog(
             this, panel, localizationResources.getString("Palette_Selection"),
@@ -191,9 +191,9 @@ class DefaultColorBarEditor extends DefaultNumberAxisEditor {
     }
 
     /**
-     * Sets the properties of the specified axis to match the properties 
+     * Sets the properties of the specified axis to match the properties
      * defined on this panel.
-     * 
+     *
      * @param colorBar  the color bar.
      */
     public void setAxisProperties(ColorBar colorBar) {

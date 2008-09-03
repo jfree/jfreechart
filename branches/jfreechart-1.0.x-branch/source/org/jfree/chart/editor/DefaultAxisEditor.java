@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * DefaultAxisEditor.java
  * ----------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Andrzej Porebski;
@@ -35,7 +35,7 @@
  *
  * Changes
  * -------
- * 24-Nov-2005 : Version 1, based on AxisPropertyEditPanel.java (DG); 
+ * 24-Nov-2005 : Version 1, based on AxisPropertyEditPanel.java (DG);
  *
  */
 
@@ -87,9 +87,9 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     /** The font for displaying tick labels on the axis. */
     private Font tickLabelFont;
 
-    /** 
-     * A field containing a description of the font for displaying tick labels 
-     * on the axis. 
+    /**
+     * A field containing a description of the font for displaying tick labels
+     * on the axis.
      */
     private JTextField tickLabelFontField;
 
@@ -97,14 +97,14 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     private PaintSample tickLabelPaintSample;
 
     /**
-     * An empty sub-panel for extending the user interface to handle more 
-     * complex axes. 
+     * An empty sub-panel for extending the user interface to handle more
+     * complex axes.
      */
     private JPanel slot1;
 
-    /** 
-     * An empty sub-panel for extending the user interface to handle more 
-     * complex axes. 
+    /**
+     * An empty sub-panel for extending the user interface to handle more
+     * complex axes.
      */
     private JPanel slot2;
 
@@ -130,14 +130,14 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     private JTabbedPane otherTabs;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources = 
+    protected static ResourceBundle localizationResources =
         ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * A static method that returns a panel that is appropriate for the axis
      * type.
      *
-     * @param axis  the axis whose properties are to be displayed/edited in 
+     * @param axis  the axis whose properties are to be displayed/edited in
      *              the panel.
      *
      * @return A panel or <code>null</code< if axis is <code>null</code>.
@@ -164,7 +164,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
      * Standard constructor: builds a panel for displaying/editing the
      * properties of the specified axis.
      *
-     * @param axis  the axis whose properties are to be displayed/edited in 
+     * @param axis  the axis whose properties are to be displayed/edited in
      *              the panel.
      */
     public DefaultAxisEditor(Axis axis) {
@@ -183,7 +183,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
         JPanel general = new JPanel(new BorderLayout());
         general.setBorder(
             BorderFactory.createTitledBorder(
-                BorderFactory.createEtchedBorder(), 
+                BorderFactory.createEtchedBorder(),
                 localizationResources.getString("General")
             )
         );
@@ -226,7 +226,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
 //        b = new JButton(localizationResources.getString("Edit..."));
 //        b.setActionCommand("TickLabelInsets");
 //        b.addActionListener(this);
-//        this.tickLabelInsetsTextField 
+//        this.tickLabelInsetsTextField
 //            = new InsetsTextField(this.tickLabelInsets);
 //        interior.add(this.tickLabelInsetsTextField);
 //        interior.add(b);
@@ -239,7 +239,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
 
         JPanel other = new JPanel(new BorderLayout());
         other.setBorder(BorderFactory.createTitledBorder(
-                             BorderFactory.createEtchedBorder(), 
+                             BorderFactory.createEtchedBorder(),
                              localizationResources.getString("Other")));
 
         this.otherTabs = new JTabbedPane();
@@ -249,7 +249,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
         ticks.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 
         this.showTickLabelsCheckBox = new JCheckBox(
-            localizationResources.getString("Show_tick_labels"), 
+            localizationResources.getString("Show_tick_labels"),
             axis.isTickLabelsVisible()
         );
         ticks.add(this.showTickLabelsCheckBox);
@@ -267,7 +267,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
         ticks.add(b);
 
         this.showTickMarksCheckBox = new JCheckBox(
-            localizationResources.getString("Show_tick_marks"), 
+            localizationResources.getString("Show_tick_marks"),
             axis.isTickMarksVisible()
         );
         ticks.add(this.showTickMarksCheckBox);
@@ -367,7 +367,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
      * @return The current label insets value.
      */
     public RectangleInsets getLabelInsets() {
-        return (this.labelInsets == null) 
+        return (this.labelInsets == null)
             ? new RectangleInsets(0, 0, 0, 0) : this.labelInsets;
     }
 
@@ -382,7 +382,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
 
     /**
      * Handles user interaction with the property panel.
-     * 
+     *
      * @param event  information about the event that triggered the call to
      *      this method.
      */
@@ -459,7 +459,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
 
 //    /**
 //     * Presents insets chooser panel allowing user to modify tick label's
-//     * individual insets values. Updates the current insets text field if 
+//     * individual insets values. Updates the current insets text field if
 //     * edit is accepted.
 //     */
 //    private void editTickLabelInsets() {
