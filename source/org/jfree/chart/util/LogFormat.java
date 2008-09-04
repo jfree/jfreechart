@@ -18,8 +18,8 @@
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
@@ -37,7 +37,7 @@
  * 02-Aug-2007 : Version 1 (DG);
  * 19-Feb-2008 : Implemented equals() and clone(), and added new powerLabel
  *               attribute as per Feature Request 1886036 (DG);
- * 
+ *
  */
 
 package org.jfree.chart.util;
@@ -50,36 +50,36 @@ import java.text.ParsePosition;
 /**
  * A number formatter for logarithmic values.  This formatter does not support
  * parsing.
- * 
+ *
  * @since 1.0.7
  */
 public class LogFormat extends NumberFormat {
-    
+
     /** The log base value. */
     private double base;
-    
+
     /** The natural logarithm of the base value. */
     private double baseLog;
-    
+
     /** The label for the log base (for example, "e"). */
     private String baseLabel;
-    
-    /** 
+
+    /**
      * The label for the power symbol.
-     * 
+     *
      * @since 1.0.10
      */
     private String powerLabel;
-    
+
     /** A flag that controls whether or not the base is shown. */
     private boolean showBase;
-    
+
     /** The number formatter for the exponent. */
     private NumberFormat formatter = new DecimalFormat("0.0");
-    
+
     /**
      * Creates a new instance.
-     * 
+     *
      * @param base  the base.
      * @param baseLabel  the base label (<code>null</code> not permitted).
      * @param showBase  a flag that controls whether or not the base value is
@@ -88,19 +88,19 @@ public class LogFormat extends NumberFormat {
     public LogFormat(double base, String baseLabel, boolean showBase) {
         this(base, baseLabel, "^", showBase);
     }
-    
+
     /**
      * Creates a new instance.
-     * 
+     *
      * @param base  the base.
      * @param baseLabel  the base label (<code>null</code> not permitted).
      * @param powerLabel  the power label (<code>null</code> not permitted).
      * @param showBase  a flag that controls whether or not the base value is
      *                  shown.
-     *                  
+     *
      * @since 1.0.10
      */
-    public LogFormat(double base, String baseLabel, String powerLabel, 
+    public LogFormat(double base, String baseLabel, String powerLabel,
             boolean showBase) {
         if (baseLabel == null) {
             throw new IllegalArgumentException("Null 'baseLabel' argument.");
@@ -117,22 +117,22 @@ public class LogFormat extends NumberFormat {
 
     /**
      * Calculates the log of a given value.
-     * 
+     *
      * @param value  the value.
-     * 
+     *
      * @return The log of the value.
      */
     private double calculateLog(double value) {
         return Math.log(value) / this.baseLog;
     }
-    
+
     /**
      * Returns a formatted representation of the specified number.
-     * 
+     *
      * @param number  the number.
      * @param toAppendTo  the string buffer to append to.
      * @param pos  the position.
-     * 
+     *
      * @return A string buffer containing the formatted value.
      */
     public StringBuffer format(double number, StringBuffer toAppendTo,
@@ -147,16 +147,16 @@ public class LogFormat extends NumberFormat {
     }
 
     /**
-     * Formats the specified number as a hexadecimal string.  The decimal 
+     * Formats the specified number as a hexadecimal string.  The decimal
      * fraction is ignored.
-     * 
+     *
      * @param number  the number to format.
      * @param toAppendTo  the buffer to append to (ignored here).
      * @param pos  the field position (ignored here).
-     * 
+     *
      * @return The string buffer.
      */
-    public StringBuffer format(long number, StringBuffer toAppendTo, 
+    public StringBuffer format(long number, StringBuffer toAppendTo,
             FieldPosition pos) {
         StringBuffer result = new StringBuffer();
         if (this.showBase) {
@@ -168,12 +168,12 @@ public class LogFormat extends NumberFormat {
     }
 
     /**
-     * Parsing is not implemented, so this method always returns 
+     * Parsing is not implemented, so this method always returns
      * <code>null</code>.
-     * 
+     *
      * @param source  ignored.
      * @param parsePosition  ignored.
-     * 
+     *
      * @return Always <code>null</code>.
      */
     public Number parse (String source, ParsePosition parsePosition) {
@@ -182,9 +182,9 @@ public class LogFormat extends NumberFormat {
 
     /**
      * Tests this formatter for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -209,10 +209,10 @@ public class LogFormat extends NumberFormat {
         }
         return super.equals(obj);
     }
-    
+
     /**
      * Returns a clone of this instance.
-     * 
+     *
      * @return A clone.
      */
     public Object clone() {
