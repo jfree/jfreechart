@@ -85,7 +85,7 @@ public class EmptyBlock extends AbstractBlock
         Size2D base = new Size2D(calculateTotalWidth(getWidth()),
                 calculateTotalHeight(getHeight()));
         return constraint.calculateConstrainedSize(base);
-}
+    }
 
     /**
      * Draws the block.  Since the block is empty, there is nothing to draw
