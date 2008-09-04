@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------------
  * StandardPieURLGenerator.java
  * ----------------------------
- * (C) Copyright 2002-2007, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -36,7 +36,7 @@
  * --------
  * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;
  * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 07-Mar-2003 : Modified to use KeyedValuesDataset and added pieIndex 
+ * 07-Mar-2003 : Modified to use KeyedValuesDataset and added pieIndex
  *               parameter (DG);
  * 21-Mar-2003 : Implemented Serializable (DG);
  * 24-Apr-2003 : Switched around PieDataset and KeyedValuesDataset (DG);
@@ -47,7 +47,7 @@
  * 17-Apr-2007 : Encode section key in generateURL() (DG);
  *
  */
- 
+
 package org.jfree.chart.urls;
 
 import java.io.Serializable;
@@ -62,13 +62,13 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 1626966402065883419L;
-    
+
     /** The prefix. */
     private String prefix = "index.html";
 
     /** The category parameter name. */
     private String categoryParameterName = "category";
-    
+
     /** The pie index parameter name. */
     private String indexParameterName = "pieIndex";
 
@@ -92,10 +92,10 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
      * Creates a new generator.
      *
      * @param prefix  the prefix (<code>null</code> not permitted).
-     * @param categoryParameterName  the category parameter name 
+     * @param categoryParameterName  the category parameter name
      *     (<code>null</code> not permitted).
      */
-    public StandardPieURLGenerator(String prefix, 
+    public StandardPieURLGenerator(String prefix,
                                    String categoryParameterName) {
         this(prefix, categoryParameterName, "pieIndex");
     }
@@ -104,13 +104,13 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
      * Creates a new generator.
      *
      * @param prefix  the prefix (<code>null</code> not permitted).
-     * @param categoryParameterName  the category parameter name 
+     * @param categoryParameterName  the category parameter name
      *     (<code>null</code> not permitted).
-     * @param indexParameterName  the index parameter name (<code>null</code> 
+     * @param indexParameterName  the index parameter name (<code>null</code>
      *     permitted).
      */
-    public StandardPieURLGenerator(String prefix, 
-                                   String categoryParameterName, 
+    public StandardPieURLGenerator(String prefix,
+                                   String categoryParameterName,
                                    String indexParameterName) {
         if (prefix == null) {
             throw new IllegalArgumentException("Null 'prefix' argument.");
@@ -133,19 +133,19 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
      *
      * @return A string containing the generated URL.
      */
-    public String generateURL(PieDataset dataset, Comparable key, 
+    public String generateURL(PieDataset dataset, Comparable key,
             int pieIndex) {
         String url = this.prefix;
         if (url.indexOf("?") > -1) {
-            url += "&amp;" + this.categoryParameterName + "=" 
+            url += "&amp;" + this.categoryParameterName + "="
                     + URLUtilities.encode(key.toString(), "UTF-8");
         }
         else {
-            url += "?" + this.categoryParameterName + "=" 
+            url += "?" + this.categoryParameterName + "="
                     + URLUtilities.encode(key.toString(), "UTF-8");
         }
         if (this.indexParameterName != null) {
-            url += "&amp;" + this.indexParameterName + "=" 
+            url += "&amp;" + this.indexParameterName + "="
                    + String.valueOf(pieIndex);
         }
         return url;
@@ -172,7 +172,7 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
         if (!this.categoryParameterName.equals(that.categoryParameterName)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.indexParameterName, 
+        if (!ObjectUtilities.equal(this.indexParameterName,
                 that.indexParameterName)) {
             return false;
         }

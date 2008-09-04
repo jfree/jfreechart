@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * StandardXYURLGenerator.java
  * ---------------------------
- * (C) Copyright 2002-2007, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -35,7 +35,7 @@
  * Changes:
  * --------
  * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;
- * 29-Aug-2002 : New constructor and member variables to customise series and 
+ * 29-Aug-2002 : New constructor and member variables to customise series and
  *               item parameter names (RA);
  * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  * 23-Mar-2003 : Implemented Serializable (DG);
@@ -57,19 +57,19 @@ import org.jfree.util.ObjectUtilities;
  * A URL generator.
  */
 public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
-    
+
     /** For serialization. */
     private static final long serialVersionUID = -1771624523496595382L;
-    
+
     /** The default prefix. */
     public static final String DEFAULT_PREFIX = "index.html";
-    
+
     /** The default series parameter. */
     public static final String DEFAULT_SERIES_PARAMETER = "series";
-    
+
     /** The default item parameter. */
     public static final String DEFAULT_ITEM_PARAMETER = "item";
-    
+
     /** Prefix to the URL */
     private String prefix;
 
@@ -89,8 +89,8 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
     }
 
     /**
-     * Creates a new generator with the specified prefix.  This constructor 
-     * is equivalent to calling 
+     * Creates a new generator with the specified prefix.  This constructor
+     * is equivalent to calling
      * <code>StandardXYURLGenerator(prefix, "series", "item");</code>.
      *
      * @param prefix  the prefix to the URL (<code>null</code> not permitted).
@@ -103,7 +103,7 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
      * Constructor that overrides all the defaults
      *
      * @param prefix  the prefix to the URL (<code>null</code> not permitted).
-     * @param seriesParameterName  the name of the series parameter to go in 
+     * @param seriesParameterName  the name of the series parameter to go in
      *                             each URL (<code>null</code> not permitted).
      * @param itemParameterName  the name of the item parameter to go in each
      *                           URL (<code>null</code> not permitted).
@@ -137,6 +137,7 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
      * @return The generated URL.
      */
     public String generateURL(XYDataset dataset, int series, int item) {
+        // TODO: URLEncode?
         String url = this.prefix;
         boolean firstParameter = url.indexOf("?") == -1;
         url += firstParameter ? "?" : "&amp;";
@@ -147,14 +148,14 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
 
     /**
      * Tests this generator for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
-            return true;   
+            return true;
         }
         if (!(obj instanceof StandardXYURLGenerator)) {
             return false;
@@ -163,15 +164,15 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
         if (!ObjectUtilities.equal(that.prefix, this.prefix)) {
             return false;
         }
-        if (!ObjectUtilities.equal(that.seriesParameterName, 
+        if (!ObjectUtilities.equal(that.seriesParameterName,
                 this.seriesParameterName)) {
             return false;
         }
-        if (!ObjectUtilities.equal(that.itemParameterName, 
+        if (!ObjectUtilities.equal(that.itemParameterName,
                 this.itemParameterName)) {
             return false;
         }
         return true;
     }
-    
+
 }
