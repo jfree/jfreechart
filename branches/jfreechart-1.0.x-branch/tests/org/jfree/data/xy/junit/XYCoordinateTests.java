@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * XYCoordinateTests.java
  * ----------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -79,7 +79,7 @@ public class XYCoordinateTests extends TestCase {
     /**
      * Test that the equals() method distinguishes all fields.
      */
-    public void testEquals() {        
+    public void testEquals() {
         // default instances
         XYCoordinate v1 = new XYCoordinate(1.0, 2.0);
         XYCoordinate v2 = new XYCoordinate(1.0, 2.0);
@@ -90,7 +90,7 @@ public class XYCoordinateTests extends TestCase {
         assertFalse(v1.equals(v2));
         v2 = new XYCoordinate(1.1, 2.0);
         assertTrue(v1.equals(v2));
-        
+
         v1 = new XYCoordinate(1.1, 2.2);
         assertFalse(v1.equals(v2));
         v2 = new XYCoordinate(1.1, 2.2);
@@ -98,7 +98,7 @@ public class XYCoordinateTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
         XYCoordinate v1 = new XYCoordinate(1.0, 2.0);
@@ -108,7 +108,7 @@ public class XYCoordinateTests extends TestCase {
         int h2 = v2.hashCode();
         assertEquals(h1, h2);
     }
-    
+
     /**
      * Immutable class is not cloneable.
      */

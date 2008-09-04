@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------------
  * IntervalXYDelegateTests.java
  * ----------------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -94,20 +94,20 @@ public class IntervalXYDelegateTests extends TestCase {
        s2.add(1.2, 3.4);
        c2.addSeries(s2);
        IntervalXYDelegate d2 = new IntervalXYDelegate(c2);
-       
+
        assertTrue(d1.equals(d2));
        assertTrue(d2.equals(d1));
-       
+
        d1.setAutoWidth(false);
        assertFalse(d1.equals(d2));
        d2.setAutoWidth(false);
        assertTrue(d1.equals(d2));
-       
+
        d1.setIntervalPositionFactor(0.123);
        assertFalse(d1.equals(d2));
        d2.setIntervalPositionFactor(0.123);
        assertTrue(d1.equals(d2));
-      
+
        d1.setFixedIntervalWidth(1.23);
        assertFalse(d1.equals(d2));
        d2.setFixedIntervalWidth(1.23);
@@ -117,13 +117,13 @@ public class IntervalXYDelegateTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {        
+    public void testCloning() {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.2, 3.4);
         XYSeriesCollection c1 = new XYSeriesCollection();
         c1.addSeries(s1);
         IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
-        
+
         IntervalXYDelegate d2 = null;
         try {
             d2 = (IntervalXYDelegate) d1.clone();
