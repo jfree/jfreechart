@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------
  * DisplayChart.java
  * -----------------
- * (C) Copyright 2002-2007, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -35,7 +35,7 @@
  * Changes
  * -------
  * 19-Aug-2002 : Version 1;
- * 09-Mar-2005 : Added facility to serve up "one time" charts - see 
+ * 09-Mar-2005 : Added facility to serve up "one time" charts - see
  *               ServletUtilities.java (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
@@ -55,7 +55,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet used for streaming charts to the client browser from the temporary
- * directory.  You need to add this servlet and mapping to your deployment 
+ * directory.  You need to add this servlet and mapping to your deployment
  * descriptor (web.xml) in order to get it to work.  The syntax is as follows:
  * <xmp>
  * <servlet>
@@ -95,7 +95,7 @@ public class DisplayChart extends HttpServlet {
      * @throws ServletException ??.
      * @throws IOException ??.
      */
-    public void service(HttpServletRequest request, 
+    public void service(HttpServletRequest request,
                         HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -113,7 +113,7 @@ public class DisplayChart extends HttpServlet {
         //  Check the file exists
         File file = new File(System.getProperty("java.io.tmpdir"), filename);
         if (!file.exists()) {
-            throw new ServletException("File '" + file.getAbsolutePath() 
+            throw new ServletException("File '" + file.getAbsolutePath()
                     + "' does not exist");
         }
 
@@ -132,17 +132,17 @@ public class DisplayChart extends HttpServlet {
                 isChartPublic = true;
             }
         }
-        
+
         boolean isOneTimeChart = false;
         if (filename.startsWith(ServletUtilities.getTempOneTimeFilePrefix())) {
-            isOneTimeChart = true;   
+            isOneTimeChart = true;
         }
 
         if (isChartInUserList || isChartPublic || isOneTimeChart) {
             //  Serve it up
             ServletUtilities.sendTempFile(file, response);
             if (isOneTimeChart) {
-                file.delete();   
+                file.delete();
             }
         }
         else {
