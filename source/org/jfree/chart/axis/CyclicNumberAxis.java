@@ -982,13 +982,10 @@ public class CyclicNumberAxis extends NumberAxis {
      * @return The axis state.
      */
     protected AxisState drawTickMarksAndLabels(Graphics2D g2, double cursor,
-                                               Rectangle2D plotArea,
-                                               Rectangle2D dataArea,
-                                               RectangleEdge edge) {
+            Rectangle2D plotArea, Rectangle2D dataArea, RectangleEdge edge) {
         this.internalMarkerWhenTicksOverlap = false;
-        AxisState ret = super.drawTickMarksAndLabels(
-            g2, cursor, plotArea, dataArea, edge
-        );
+        AxisState ret = super.drawTickMarksAndLabels(g2, cursor, plotArea,
+                dataArea, edge);
 
         // continue and separate the labels only if necessary
         if (!this.internalMarkerWhenTicksOverlap) {
@@ -1007,9 +1004,8 @@ public class CyclicNumberAxis extends NumberAxis {
 
         double il = 0;
         if (isTickMarksVisible()) {
-            float xx = (float) valueToJava2D(
-                getRange().getUpperBound(), dataArea, edge
-            );
+            float xx = (float) valueToJava2D(getRange().getUpperBound(),
+                    dataArea, edge);
             Line2D mark = null;
             g2.setStroke(getTickMarkStroke());
             g2.setPaint(getTickMarkPaint());

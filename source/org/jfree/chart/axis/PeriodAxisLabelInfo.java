@@ -78,11 +78,11 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
 
     /** The default insets. */
     public static final RectangleInsets DEFAULT_INSETS
-        = new RectangleInsets(2, 2, 2, 2);
+            = new RectangleInsets(2, 2, 2, 2);
 
     /** The default font. */
     public static final Font DEFAULT_FONT
-        = new Font("SansSerif", Font.PLAIN, 10);
+            = new Font("SansSerif", Font.PLAIN, 10);
 
     /** The default label paint. */
     public static final Paint DEFAULT_LABEL_PAINT = Color.black;
