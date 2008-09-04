@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------
  * StrokeMap.java
  * --------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -55,12 +55,12 @@ import org.jfree.util.ObjectUtilities;
 
 /**
  * A storage structure that maps <code>Comparable</code> instances with
- * <code>Stroke</code> instances.  
+ * <code>Stroke</code> instances.
  * <br><br>
- * To support cloning and serialization, you should only use keys that are 
+ * To support cloning and serialization, you should only use keys that are
  * cloneable and serializable.  Special handling for the <code>Stroke</code>
  * instances is included in this class.
- * 
+ *
  * @since 1.0.3
  */
 public class StrokeMap implements Cloneable, Serializable {
@@ -70,23 +70,23 @@ public class StrokeMap implements Cloneable, Serializable {
 
     /** Storage for the keys and values. */
     private transient Map store;
-    
+
     /**
      * Creates a new (empty) map.
      */
     public StrokeMap() {
-        this.store = new TreeMap();    
+        this.store = new TreeMap();
     }
-    
+
     /**
-     * Returns the stroke associated with the specified key, or 
+     * Returns the stroke associated with the specified key, or
      * <code>null</code>.
-     * 
+     *
      * @param key  the key (<code>null</code> not permitted).
-     * 
+     *
      * @return The stroke, or <code>null</code>.
-     * 
-     * @throws IllegalArgumentException if <code>key</code> is 
+     *
+     * @throws IllegalArgumentException if <code>key</code> is
      *     <code>null</code>.
      */
     public Stroke getStroke(Comparable key) {
@@ -95,46 +95,46 @@ public class StrokeMap implements Cloneable, Serializable {
         }
         return (Stroke) this.store.get(key);
     }
-    
+
     /**
      * Returns <code>true</code> if the map contains the specified key, and
      * <code>false</code> otherwise.
-     * 
+     *
      * @param key  the key.
-     * 
+     *
      * @return <code>true</code> if the map contains the specified key, and
      * <code>false</code> otherwise.
      */
     public boolean containsKey(Comparable key) {
         return this.store.containsKey(key);
     }
-    
+
     /**
-     * Adds a mapping between the specified <code>key</code> and 
+     * Adds a mapping between the specified <code>key</code> and
      * <code>stroke</code> values.
-     * 
+     *
      * @param key  the key (<code>null</code> not permitted).
      * @param stroke  the stroke.
      */
     public void put(Comparable key, Stroke stroke) {
-        if (key == null) { 
+        if (key == null) {
             throw new IllegalArgumentException("Null 'key' argument.");
         }
         this.store.put(key, stroke);
     }
-    
+
     /**
      * Resets the map to empty.
      */
     public void clear() {
         this.store.clear();
     }
-    
+
     /**
      * Tests this map for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -160,12 +160,12 @@ public class StrokeMap implements Cloneable, Serializable {
         }
         return true;
     }
-    
+
     /**
      * Returns a clone of this <code>StrokeMap</code>.
-     * 
+     *
      * @return A clone of this instance.
-     * 
+     *
      * @throws CloneNotSupportedException if any key is not cloneable.
      */
     public Object clone() throws CloneNotSupportedException {
@@ -173,7 +173,7 @@ public class StrokeMap implements Cloneable, Serializable {
         // whereas the stroke instances are always immutable so they're OK
         return super.clone();
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -202,7 +202,7 @@ public class StrokeMap implements Cloneable, Serializable {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.store = new TreeMap();
@@ -213,5 +213,5 @@ public class StrokeMap implements Cloneable, Serializable {
             this.store.put(key, stroke);
         }
     }
-    
+
 }
