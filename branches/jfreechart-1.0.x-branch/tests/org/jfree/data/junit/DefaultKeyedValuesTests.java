@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------------
  * DefaultKeyedValuesTests.java
  * ----------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -91,7 +91,7 @@ public class DefaultKeyedValuesTests extends TestCase {
     protected void setUp() {
         // no setup required
     }
-    
+
     /**
      * Checks that a new instance is empty.
      */
@@ -99,7 +99,7 @@ public class DefaultKeyedValuesTests extends TestCase {
         DefaultKeyedValues d = new DefaultKeyedValues();
         assertEquals(0, d.getItemCount());
     }
-    
+
     /**
      * Some checks for the getItemCount() method.
      */
@@ -111,9 +111,9 @@ public class DefaultKeyedValuesTests extends TestCase {
         d.addValue("B", 2.0);
         assertEquals(2, d.getItemCount());
         d.clear();
-        assertEquals(0, d.getItemCount());        
+        assertEquals(0, d.getItemCount());
     }
-    
+
     /**
      * Some checks for the getKeys() method.
      */
@@ -132,9 +132,9 @@ public class DefaultKeyedValuesTests extends TestCase {
         assertTrue(keys.contains("B"));
         d.clear();
         keys = d.getKeys();
-        assertEquals(0, keys.size());        
+        assertEquals(0, keys.size());
     }
-    
+
     /**
      * A simple test for the clear() method.
      */
@@ -146,7 +146,7 @@ public class DefaultKeyedValuesTests extends TestCase {
         v1.clear();
         assertEquals(0, v1.getItemCount());
     }
-    
+
     /**
      * Some checks for the getValue() methods.
      */
@@ -171,7 +171,7 @@ public class DefaultKeyedValuesTests extends TestCase {
         v2.addValue("K2", new Integer(2));
         v2.addValue("K3", new Integer(3));
         assertEquals(new Integer(3), v2.getValue(2));
-        
+
         boolean pass = false;
         try {
             /* Number n = */ v2.getValue("KK");
@@ -220,7 +220,7 @@ public class DefaultKeyedValuesTests extends TestCase {
         v2.addValue("K2", new Integer(2));
         v2.addValue("K3", new Integer(3));
         assertEquals(2, v2.getIndex("K3"));
-        
+
         // try null
         boolean pass = false;
         try {
@@ -231,7 +231,7 @@ public class DefaultKeyedValuesTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Another check for the getIndex(Comparable) method.
      */
@@ -258,7 +258,7 @@ public class DefaultKeyedValuesTests extends TestCase {
         v1.addValue("A", null);
         assertNull(v1.getValue("A"));
         assertEquals(2, v1.getItemCount());
-        
+
         boolean pass = false;
         try {
             v1.addValue(null, 99.9);
@@ -268,7 +268,7 @@ public class DefaultKeyedValuesTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the insertValue() method.
      */
@@ -279,20 +279,20 @@ public class DefaultKeyedValuesTests extends TestCase {
         v1.insertValue(0, "B", 2.0);
         assertEquals(new Double(2.0), v1.getValue(0));
         assertEquals(new Double(1.0), v1.getValue(1));
-        
+
         // it's OK to use an index equal to the size of the list
         v1.insertValue(2, "C", 3.0);
         assertEquals(new Double(2.0), v1.getValue(0));
         assertEquals(new Double(1.0), v1.getValue(1));
         assertEquals(new Double(3.0), v1.getValue(2));
-        
+
         // try replacing an existing value
         v1.insertValue(2, "B", 4.0);
         assertEquals(new Double(1.0), v1.getValue(0));
         assertEquals(new Double(3.0), v1.getValue(1));
         assertEquals(new Double(4.0), v1.getValue(2));
     }
-    
+
     /**
      * Some checks for the clone() method.
      */
@@ -311,12 +311,12 @@ public class DefaultKeyedValuesTests extends TestCase {
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
-        
+
         // confirm that the clone is independent of the original
         v2.setValue("V1", new Integer(44));
         assertFalse(v1.equals(v2));
     }
-    
+
     /**
      * Check that inserting and retrieving values works as expected.
      */
@@ -360,17 +360,17 @@ public class DefaultKeyedValuesTests extends TestCase {
         assertEquals(1, data.getIndex("B"));
         data.removeValue("B");
         assertEquals(-1, data.getIndex("B"));
-        
+
         boolean pass = false;
         try {
             data.removeValue("XXX");
         }
         catch (UnknownKeyException e) {
-            pass = true;   
+            pass = true;
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Tests sorting of data by key (ascending).
      */

@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------------
  * ComparableObjectSeriesTests.java
  * --------------------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -63,7 +63,7 @@ public class ComparableObjectSeriesTests extends TestCase {
     static class MyComparableObjectSeries extends ComparableObjectSeries {
         /**
          * Creates a new instance.
-         * 
+         *
          * @param key  the series key.
          */
         public MyComparableObjectSeries(Comparable key) {
@@ -71,12 +71,12 @@ public class ComparableObjectSeriesTests extends TestCase {
         }
         /**
          * Creates a new instance.
-         * 
+         *
          * @param key  the series key.
          * @param autoSort  automatically sort by x-value?
          * @param allowDuplicateXValues  allow duplicate values?
          */
-        public MyComparableObjectSeries(Comparable key, boolean autoSort, 
+        public MyComparableObjectSeries(Comparable key, boolean autoSort,
                 boolean allowDuplicateXValues) {
             super(key, autoSort, allowDuplicateXValues);
         }
@@ -88,7 +88,7 @@ public class ComparableObjectSeriesTests extends TestCase {
             return super.remove(x);
         }
     }
-    
+
     /**
      * Returns the tests as a test suite.
      *
@@ -118,7 +118,7 @@ public class ComparableObjectSeriesTests extends TestCase {
         assertTrue(s1.getAutoSort());
         assertEquals(0, s1.getItemCount());
         assertEquals(Integer.MAX_VALUE, s1.getMaximumItemCount());
-        
+
         // try null key
         boolean pass = false;
         try {
@@ -129,7 +129,7 @@ public class ComparableObjectSeriesTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
@@ -144,7 +144,7 @@ public class ComparableObjectSeriesTests extends TestCase {
         assertFalse(s1.equals(s2));
         s2 = new MyComparableObjectSeries("B");
         assertTrue(s1.equals(s2));
-        
+
         // autoSort
         s1 = new MyComparableObjectSeries("B", false, true);
         assertFalse(s1.equals(s2));
@@ -162,13 +162,13 @@ public class ComparableObjectSeriesTests extends TestCase {
         assertFalse(s1.equals(s2));
         s2.add(new Integer(1), "ABC");
         assertTrue(s1.equals(s2));
-        
+
         // add another value
         s1.add(new Integer(0), "DEF");
         assertFalse(s1.equals(s2));
         s2.add(new Integer(0), "DEF");
         assertTrue(s1.equals(s2));
-        
+
         // remove an item
         s1.remove(new Integer(1));
         assertFalse(s1.equals(s2));
@@ -217,7 +217,7 @@ public class ComparableObjectSeriesTests extends TestCase {
         }
         assertEquals(s1, s2);
     }
-    
+
     /**
      * Some simple checks for the hashCode() method.
      */
@@ -226,17 +226,17 @@ public class ComparableObjectSeriesTests extends TestCase {
         MyComparableObjectSeries s2 = new MyComparableObjectSeries("Test");
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
-        
+
         s1.add("A", "1");
         s2.add("A", "1");
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
-        
+
         s1.add("B", null);
         s2.add("B", null);
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
-        
+
         s1.add("C", "3");
         s2.add("C", "3");
         assertEquals(s1, s2);

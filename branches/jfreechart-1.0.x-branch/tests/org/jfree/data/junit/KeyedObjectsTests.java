@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------
  * KeyedObjectsTests.java
  * ----------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -107,7 +107,7 @@ public class KeyedObjectsTests extends TestCase {
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
     }
-    
+
     /**
      * Confirm special features of cloning.
      */
@@ -126,10 +126,10 @@ public class KeyedObjectsTests extends TestCase {
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
-        
+
         // the clone contains a reference to the original object
-        assertTrue(ko2.getObject("K1") == obj1); 
-        
+        assertTrue(ko2.getObject("K1") == obj1);
+
         // CASE 2 - object is mutable AND PublicCloneable
         obj1 = new DefaultPieDataset();
         ko1 = new KeyedObjects();
@@ -144,11 +144,11 @@ public class KeyedObjectsTests extends TestCase {
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
-        
+
         // the clone contains a reference to a CLONE of the original object
-        assertTrue(ko2.getObject("K1") != obj1); 
+        assertTrue(ko2.getObject("K1") != obj1);
     }
-    
+
     /**
      * Check that inserting and retrieving values works as expected.
      */
@@ -171,7 +171,7 @@ public class KeyedObjectsTests extends TestCase {
         assertEquals(data.getObject("B"), new Double(2.0));
         assertEquals(data.getObject("C"), new Double(3.0));
         assertEquals(data.getObject("D"), null);
-        
+
         boolean pass = false;
         try {
             data.getObject("Not a key");
@@ -180,7 +180,7 @@ public class KeyedObjectsTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         // check retrieve value by index
         assertEquals(data.getObject(0), new Double(1.0));
         assertEquals(data.getObject(1), new Double(2.0));
@@ -218,7 +218,7 @@ public class KeyedObjectsTests extends TestCase {
         assertEquals(ko1, ko2);
 
     }
-    
+
     /**
      * Simple checks for the getObject(int) method.
      */
@@ -231,7 +231,7 @@ public class KeyedObjectsTests extends TestCase {
         assertEquals("Object 1", ko1.getObject(0));
         assertNull(ko1.getObject(1));
         assertEquals("Object 2", ko1.getObject(2));
-        
+
         // request with a negative index
         boolean pass = false;
         try {
@@ -241,7 +241,7 @@ public class KeyedObjectsTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         // request width index == itemCount
         pass = false;
         try {
@@ -252,7 +252,7 @@ public class KeyedObjectsTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Simple checks for the getKey(int) method.
      */
@@ -265,7 +265,7 @@ public class KeyedObjectsTests extends TestCase {
         assertEquals("Key 1", ko1.getKey(0));
         assertEquals("Key 2", ko1.getKey(1));
         assertEquals("Key 3", ko1.getKey(2));
-        
+
         // request with a negative index
         boolean pass = false;
         try {
@@ -275,7 +275,7 @@ public class KeyedObjectsTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         // request width index == itemCount
         pass = false;
         try {
@@ -286,7 +286,7 @@ public class KeyedObjectsTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Simple checks for the getIndex(Comparable) method.
      */
@@ -298,18 +298,18 @@ public class KeyedObjectsTests extends TestCase {
         assertEquals(0, ko1.getIndex("Key 1"));
         assertEquals(1, ko1.getIndex("Key 2"));
         assertEquals(2, ko1.getIndex("Key 3"));
-        
+
         // check null argument
         boolean pass = false;
         try {
-            ko1.getIndex(null);   
+            ko1.getIndex(null);
         }
         catch (IllegalArgumentException e) {
             pass = true;
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the setObject(Comparable, Object) method.
      */
@@ -318,17 +318,17 @@ public class KeyedObjectsTests extends TestCase {
         ko1.setObject("Key 1", "Object 1");
         ko1.setObject("Key 2", null);
         ko1.setObject("Key 3", "Object 2");
-        
+
         assertEquals("Object 1", ko1.getObject("Key 1"));
         assertEquals(null, ko1.getObject("Key 2"));
         assertEquals("Object 2", ko1.getObject("Key 3"));
-        
+
         // replace an existing value
         ko1.setObject("Key 2", "AAA");
         ko1.setObject("Key 3", "BBB");
         assertEquals("AAA", ko1.getObject("Key 2"));
         assertEquals("BBB", ko1.getObject("Key 3"));
-        
+
         // try a null key - should throw an exception
         boolean pass = false;
         try {
@@ -339,7 +339,7 @@ public class KeyedObjectsTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the removeValue() methods.
      */
@@ -348,15 +348,15 @@ public class KeyedObjectsTests extends TestCase {
         ko1.setObject("Key 1", "Object 1");
         ko1.setObject("Key 2", null);
         ko1.setObject("Key 3", "Object 2");
-        
+
         ko1.removeValue(1);
         assertEquals(2, ko1.getItemCount());
         assertEquals(1, ko1.getIndex("Key 3"));
-        
+
         ko1.removeValue("Key 1");
         assertEquals(1, ko1.getItemCount());
         assertEquals(0, ko1.getIndex("Key 3"));
-        
+
         // try unknown key
         boolean pass = false;
         try {
@@ -366,7 +366,7 @@ public class KeyedObjectsTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         // try null argument
         pass = false;
         try {
@@ -377,7 +377,7 @@ public class KeyedObjectsTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the removeValue(int) method.
      */
@@ -386,12 +386,12 @@ public class KeyedObjectsTests extends TestCase {
         ko1.setObject("Key 1", "Object 1");
         ko1.setObject("Key 2", null);
         ko1.setObject("Key 3", "Object 2");
-        
+
         ko1.removeValue(1);
         assertEquals(2, ko1.getItemCount());
         assertEquals(1, ko1.getIndex("Key 3"));
-        
-        
+
+
         // try negative key index
         boolean pass = false;
         try {
@@ -401,7 +401,7 @@ public class KeyedObjectsTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         // try key index == itemCount
         pass = false;
         try {
