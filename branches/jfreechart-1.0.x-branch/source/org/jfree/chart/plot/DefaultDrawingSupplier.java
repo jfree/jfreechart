@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * DefaultDrawingSupplier.java
  * ---------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited.
+ * (C) Copyright 2003-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jeremy Bowman;
@@ -35,9 +35,9 @@
  * Changes
  * -------
  * 16-Jan-2003 : Version 1 (DG);
- * 17-Jan-2003 : Added stroke method, renamed DefaultPaintSupplier 
+ * 17-Jan-2003 : Added stroke method, renamed DefaultPaintSupplier
  *               --> DefaultDrawingSupplier (DG)
- * 27-Jan-2003 : Incorporated code from SeriesShapeFactory, originally 
+ * 27-Jan-2003 : Incorporated code from SeriesShapeFactory, originally
  *               contributed by Jeremy Bowman (DG);
  * 25-Mar-2003 : Implemented Serializable (DG);
  * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
@@ -69,17 +69,17 @@ import org.jfree.util.ShapeUtilities;
 
 /**
  * A default implementation of the {@link DrawingSupplier} interface.  All
- * {@link Plot} instances have a new instance of this class installed by 
+ * {@link Plot} instances have a new instance of this class installed by
  * default.
  */
-public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable, 
+public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
         PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -7339847061039422538L;
-    
+
     /** The default fill paint sequence. */
-    public static final Paint[] DEFAULT_PAINT_SEQUENCE 
+    public static final Paint[] DEFAULT_PAINT_SEQUENCE
             = ChartColor.createDefaultPaintArray();
 
     /** The default outline paint sequence. */
@@ -92,16 +92,16 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
 
     /** The default stroke sequence. */
     public static final Stroke[] DEFAULT_STROKE_SEQUENCE = new Stroke[] {
-            new BasicStroke(1.0f, BasicStroke.CAP_SQUARE, 
+            new BasicStroke(1.0f, BasicStroke.CAP_SQUARE,
                     BasicStroke.JOIN_BEVEL)};
 
     /** The default outline stroke sequence. */
-    public static final Stroke[] DEFAULT_OUTLINE_STROKE_SEQUENCE 
-            = new Stroke[] {new BasicStroke(1.0f, BasicStroke.CAP_SQUARE, 
+    public static final Stroke[] DEFAULT_OUTLINE_STROKE_SEQUENCE
+            = new Stroke[] {new BasicStroke(1.0f, BasicStroke.CAP_SQUARE,
                     BasicStroke.JOIN_BEVEL)};
 
     /** The default shape sequence. */
-    public static final Shape[] DEFAULT_SHAPE_SEQUENCE 
+    public static final Shape[] DEFAULT_SHAPE_SEQUENCE
             = createStandardSeriesShapes();
 
     /** The paint sequence. */
@@ -141,7 +141,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
     private int shapeIndex;
 
     /**
-     * Creates a new supplier, with default sequences for fill paint, outline 
+     * Creates a new supplier, with default sequences for fill paint, outline
      * paint, stroke and shapes.
      */
     public DefaultDrawingSupplier() {
@@ -187,10 +187,10 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      * @param strokeSequence  the stroke sequence.
      * @param outlineStrokeSequence  the outline stroke sequence.
      * @param shapeSequence  the shape sequence.
-     * 
+     *
      * @since 1.0.6
      */
-    public DefaultDrawingSupplier(Paint[] paintSequence, 
+    public DefaultDrawingSupplier(Paint[] paintSequence,
             Paint[] fillPaintSequence, Paint[] outlinePaintSequence,
             Stroke[] strokeSequence, Stroke[] outlineStrokeSequence,
             Shape[] shapeSequence) {
@@ -209,7 +209,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      * @return The paint.
      */
     public Paint getNextPaint() {
-        Paint result 
+        Paint result
             = this.paintSequence[this.paintIndex % this.paintSequence.length];
         this.paintIndex++;
         return result;
@@ -231,11 +231,11 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      * Returns the next fill paint in the sequence.
      *
      * @return The paint.
-     * 
+     *
      * @since 1.0.6
      */
     public Paint getNextFillPaint() {
-        Paint result = this.fillPaintSequence[this.fillPaintIndex 
+        Paint result = this.fillPaintSequence[this.fillPaintIndex
                 % this.fillPaintSequence.length];
         this.fillPaintIndex++;
         return result;
@@ -278,7 +278,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
     }
 
     /**
-     * Creates an array of standard shapes to display for the items in series 
+     * Creates an array of standard shapes to display for the items in series
      * on charts.
      *
      * @return The array of shapes.
@@ -358,9 +358,9 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
             return false;
         }
         if (this.paintIndex != that.paintIndex) {
-            return false;   
+            return false;
         }
-        if (!Arrays.equals(this.outlinePaintSequence, 
+        if (!Arrays.equals(this.outlinePaintSequence,
                 that.outlinePaintSequence)) {
             return false;
         }
@@ -371,14 +371,14 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
             return false;
         }
         if (this.strokeIndex != that.strokeIndex) {
-            return false;   
+            return false;
         }
-        if (!Arrays.equals(this.outlineStrokeSequence, 
+        if (!Arrays.equals(this.outlineStrokeSequence,
                 that.outlineStrokeSequence)) {
             return false;
         }
         if (this.outlineStrokeIndex != that.outlineStrokeIndex) {
-            return false;   
+            return false;
         }
         if (!equalShapes(this.shapeSequence, that.shapeSequence)) {
             return false;
@@ -389,28 +389,28 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
         return true;
 
     }
-    
+
     /**
      * A utility method for testing the equality of two arrays of shapes.
-     * 
+     *
      * @param s1  the first array (<code>null</code> permitted).
      * @param s2  the second array (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     private boolean equalShapes(Shape[] s1, Shape[] s2) {
         if (s1 == null) {
-            return s2 == null;   
+            return s2 == null;
         }
         if (s2 == null) {
-            return false;   
+            return false;
         }
         if (s1.length != s2.length) {
-            return false;   
+            return false;
         }
         for (int i = 0; i < s1.length; i++) {
             if (!ShapeUtilities.equal(s1[i], s2[i])) {
-                return false;   
+                return false;
             }
         }
         return true;
@@ -466,7 +466,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      * @throws IOException if there is an I/O problem.
      * @throws ClassNotFoundException if there is a problem loading a class.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
 
@@ -533,14 +533,14 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
 
     /**
      * Returns a clone.
-     * 
+     *
      * @return A clone.
-     * 
-     * @throws CloneNotSupportedException if a component of the supplier does 
+     *
+     * @throws CloneNotSupportedException if a component of the supplier does
      *                                    not support cloning.
      */
     public Object clone() throws CloneNotSupportedException {
-        DefaultDrawingSupplier clone = (DefaultDrawingSupplier) super.clone(); 
+        DefaultDrawingSupplier clone = (DefaultDrawingSupplier) super.clone();
         return clone;
     }
 }
