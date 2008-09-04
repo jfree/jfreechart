@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
  * DialPointerTests.java
  * ---------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -86,13 +86,13 @@ public class DialPointerTests extends TestCase {
         DialPointer i1 = new DialPointer.Pin(1);
         DialPointer i2 = new DialPointer.Pin(1);
         assertTrue(i1.equals(i2));
-        
+
         // dataset index
         i1 = new DialPointer.Pin(2);
         assertFalse(i1.equals(i2));
         i2 = new DialPointer.Pin(2);
-        assertTrue(i1.equals(i2));  
-        
+        assertTrue(i1.equals(i2));
+
         // check an inherited attribute
         i1.setVisible(false);
         assertFalse(i1.equals(i2));
@@ -107,12 +107,12 @@ public class DialPointerTests extends TestCase {
         DialPointer.Pin p1 = new DialPointer.Pin();
         DialPointer.Pin p2 = new DialPointer.Pin();
         assertEquals(p1, p2);
-        
+
         p1.setPaint(Color.green);
         assertFalse(p1.equals(p2));
         p2.setPaint(Color.green);
         assertTrue(p1.equals(p2));
-        
+
         BasicStroke s = new BasicStroke(4.4f);
         p1.setStroke(s);
         assertFalse(p1.equals(p2));
@@ -127,12 +127,12 @@ public class DialPointerTests extends TestCase {
         DialPointer.Pointer p1 = new DialPointer.Pointer();
         DialPointer.Pointer p2 = new DialPointer.Pointer();
         assertEquals(p1, p2);
-        
+
         p1.setFillPaint(Color.green);
         assertFalse(p1.equals(p2));
         p2.setFillPaint(Color.green);
         assertTrue(p1.equals(p2));
-        
+
         p1.setOutlinePaint(Color.green);
         assertFalse(p1.equals(p2));
         p2.setOutlinePaint(Color.green);
@@ -140,7 +140,7 @@ public class DialPointerTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashCode() {
         DialPointer i1 = new DialPointer.Pin(1);
@@ -166,7 +166,7 @@ public class DialPointerTests extends TestCase {
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
-        
+
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
         i1.addChangeListener(l1);
@@ -197,7 +197,7 @@ public class DialPointerTests extends TestCase {
             e.printStackTrace();
         }
         assertEquals(i1, i2);
-        
+
         // test a custom instance
     }
 
@@ -224,7 +224,7 @@ public class DialPointerTests extends TestCase {
             e.printStackTrace();
         }
         assertEquals(i1, i2);
-        
+
         // test a custom instance
     }
 }

@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * SimpleDialRangeTests.java
  * -------------------------
- * (C) Copyright 2006-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -85,36 +85,36 @@ public class StandardDialRangeTests extends TestCase {
         StandardDialRange r1 = new StandardDialRange();
         StandardDialRange r2 = new StandardDialRange();
         assertTrue(r1.equals(r2));
-        
+
         // lowerBound
         r1.setLowerBound(1.1);
         assertFalse(r1.equals(r2));
         r2.setLowerBound(1.1);
         assertTrue(r1.equals(r2));
-        
+
         // upperBound
         r1.setUpperBound(11.1);
         assertFalse(r1.equals(r2));
         r2.setUpperBound(11.1);
         assertTrue(r1.equals(r2));
-        
+
         // paint
-        r1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, 
+        r1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.blue));
         assertFalse(r1.equals(r2));
-        r2.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, 
+        r2.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.blue));
         assertTrue(r1.equals(r2));
-        
+
         // check an inherited attribute
         r1.setVisible(false);
         assertFalse(r1.equals(r2));
         r2.setVisible(false);
         assertTrue(r1.equals(r2));
     }
-    
+
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashCode() {
         StandardDialRange r1 = new StandardDialRange();
@@ -140,7 +140,7 @@ public class StandardDialRangeTests extends TestCase {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
-        
+
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
         r1.addChangeListener(l1);
