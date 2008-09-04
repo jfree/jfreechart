@@ -183,10 +183,10 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             CategoryItemRenderer renderer = ((CategoryPlot) plot).getRenderer();
             if (renderer instanceof LineAndShapeRenderer) {
                 LineAndShapeRenderer r = (LineAndShapeRenderer) renderer;
-                this.drawLines
-                    = BooleanUtilities.valueOf(r.getBaseLinesVisible());
-                this.drawShapes
-                    = BooleanUtilities.valueOf(r.getBaseShapesVisible());
+                this.drawLines = BooleanUtilities.valueOf(
+                        r.getBaseLinesVisible());
+                this.drawShapes = BooleanUtilities.valueOf(
+                        r.getBaseShapesVisible());
             }
         }
         else if (plot instanceof XYPlot) {
@@ -203,11 +203,11 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
 
         this.availableStrokeSamples = new StrokeSample[3];
         this.availableStrokeSamples[0]
-            = new StrokeSample(new BasicStroke(1.0f));
+                = new StrokeSample(new BasicStroke(1.0f));
         this.availableStrokeSamples[1]
-            = new StrokeSample(new BasicStroke(2.0f));
+                = new StrokeSample(new BasicStroke(2.0f));
         this.availableStrokeSamples[2]
-            = new StrokeSample(new BasicStroke(3.0f));
+                = new StrokeSample(new BasicStroke(3.0f));
 
         // create a panel for the settings...
         JPanel panel = new JPanel(new BorderLayout());
@@ -552,8 +552,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      */
     private void attemptDrawLinesSelection() {
         this.drawLines = BooleanUtilities.valueOf(
-            this.drawLinesCheckBox.isSelected()
-        );
+                this.drawLinesCheckBox.isSelected());
     }
 
     /**
@@ -562,8 +561,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      */
     private void attemptDrawShapesSelection() {
         this.drawShapes = BooleanUtilities.valueOf(
-            this.drawShapesCheckBox.isSelected()
-        );
+                this.drawShapesCheckBox.isSelected());
     }
 
     /**
@@ -627,8 +625,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
                 CategoryItemRenderer r = p.getRenderer();
                 if (r instanceof LineAndShapeRenderer) {
                     ((LineAndShapeRenderer) r).setLinesVisible(
-                        this.drawLines.booleanValue()
-                    );
+                            this.drawLines.booleanValue());
                 }
             }
             else if (plot instanceof XYPlot) {
@@ -648,8 +645,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
                 CategoryItemRenderer r = p.getRenderer();
                 if (r instanceof LineAndShapeRenderer) {
                     ((LineAndShapeRenderer) r).setShapesVisible(
-                        this.drawShapes.booleanValue()
-                    );
+                            this.drawShapes.booleanValue());
                 }
             }
             else if (plot instanceof XYPlot) {
