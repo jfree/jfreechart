@@ -31,7 +31,7 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bill Kelemen;
- *                   Nicolas Brodu;
+ *                   Nicolas Brodu.
  *
  * Changes
  * -------
@@ -129,8 +129,8 @@ public abstract class Axis implements Cloneable, Serializable {
     public static final boolean DEFAULT_AXIS_VISIBLE = true;
 
     /** The default axis label font. */
-    public static final Font DEFAULT_AXIS_LABEL_FONT
-            = new Font("SansSerif", Font.PLAIN, 12);
+    public static final Font DEFAULT_AXIS_LABEL_FONT = new Font(
+            "SansSerif", Font.PLAIN, 12);
 
     /** The default axis label paint. */
     public static final Paint DEFAULT_AXIS_LABEL_PAINT = Color.black;
@@ -149,8 +149,8 @@ public abstract class Axis implements Cloneable, Serializable {
     public static final boolean DEFAULT_TICK_LABELS_VISIBLE = true;
 
     /** The default tick label font. */
-    public static final Font DEFAULT_TICK_LABEL_FONT
-            = new Font("SansSerif", Font.PLAIN, 10);
+    public static final Font DEFAULT_TICK_LABEL_FONT = new Font("SansSerif",
+            Font.PLAIN, 10);
 
     /** The default tick label paint. */
     public static final Paint DEFAULT_TICK_LABEL_PAINT = Color.black;
@@ -1026,12 +1026,9 @@ public abstract class Axis implements Cloneable, Serializable {
      *
      * @return Information about the axis.
      */
-    protected AxisState drawLabel(String label,
-                                  Graphics2D g2,
-                                  Rectangle2D plotArea,
-                                  Rectangle2D dataArea,
-                                  RectangleEdge edge,
-                                  AxisState state) {
+    protected AxisState drawLabel(String label, Graphics2D g2,
+            Rectangle2D plotArea, Rectangle2D dataArea, RectangleEdge edge,
+            AxisState state) {
 
         // it is unlikely that 'state' will be null, but check anyway...
         if (state == null) {

@@ -980,8 +980,8 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         while (baseSegment.getSegmentStart() <= toBaseDomainValue) {
 
             long baseExclusionRangeEnd = baseSegment.getSegmentStart()
-                     + this.baseTimeline.getSegmentsExcluded()
-                     * this.baseTimeline.getSegmentSize() - 1;
+                 + this.baseTimeline.getSegmentsExcluded()
+                 * this.baseTimeline.getSegmentSize() - 1;
 
             // cycle through all the segments contained in the base exclusion
             // area
