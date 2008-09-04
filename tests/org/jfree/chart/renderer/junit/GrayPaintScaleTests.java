@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------
  * GrayPaintScaleTests.java
  * ------------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -78,10 +78,10 @@ public class GrayPaintScaleTests extends TestCase {
     public GrayPaintScaleTests(String name) {
         super(name);
     }
-    
+
     private static final double EPSILON = 0.000000001;
-    
-    /** 
+
+    /**
      * Simple check for the default constructor.
      */
     public void testConstructor() {
@@ -89,7 +89,7 @@ public class GrayPaintScaleTests extends TestCase {
         assertEquals(0.0, gps.getLowerBound(), EPSILON);
         assertEquals(1.0, gps.getUpperBound(), EPSILON);
     }
-    
+
     /**
      * Some checks for the getPaint() method.
      */
@@ -99,7 +99,7 @@ public class GrayPaintScaleTests extends TestCase {
         assertTrue(c.equals(Color.black));
         c = (Color) gps.getPaint(1.0);
         assertTrue(c.equals(Color.white));
-        
+
         // check lookup values that are outside the bounds - see bug report
         // 1767315
         c = (Color) gps.getPaint(-0.5);
@@ -107,7 +107,7 @@ public class GrayPaintScaleTests extends TestCase {
         c = (Color) gps.getPaint(1.5);
         assertTrue(c.equals(Color.white));
     }
-    
+
     /**
      * A test for the equals() method.
      */
@@ -116,7 +116,7 @@ public class GrayPaintScaleTests extends TestCase {
         GrayPaintScale g2 = new GrayPaintScale();
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
-        
+
         g1 = new GrayPaintScale(0.0, 1.0);
         g2 = new GrayPaintScale(0.0, 1.0);
         assertTrue(g1.equals(g2));
@@ -124,13 +124,13 @@ public class GrayPaintScaleTests extends TestCase {
         assertFalse(g1.equals(g2));
         g2 = new GrayPaintScale(0.1, 1.0);
         assertTrue(g1.equals(g2));
-        
+
         g1 = new GrayPaintScale(0.1, 0.9);
         assertFalse(g1.equals(g2));
         g2 = new GrayPaintScale(0.1, 0.9);
         assertTrue(g1.equals(g2));
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -147,7 +147,7 @@ public class GrayPaintScaleTests extends TestCase {
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
     }
-    
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
@@ -168,7 +168,7 @@ public class GrayPaintScaleTests extends TestCase {
         catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(g1, g2);       
+        assertEquals(g1, g2);
     }
 
 }
