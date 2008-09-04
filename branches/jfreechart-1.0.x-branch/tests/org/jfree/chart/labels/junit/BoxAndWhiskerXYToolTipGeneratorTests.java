@@ -143,7 +143,7 @@ public class BoxAndWhiskerXYToolTipGeneratorTests extends TestCase {
      */
     public void testCloning() {
         BoxAndWhiskerXYToolTipGenerator g1
-               = new BoxAndWhiskerXYToolTipGenerator();
+                = new BoxAndWhiskerXYToolTipGenerator();
         BoxAndWhiskerXYToolTipGenerator g2 = null;
         try {
             g2 = (BoxAndWhiskerXYToolTipGenerator) g1.clone();
