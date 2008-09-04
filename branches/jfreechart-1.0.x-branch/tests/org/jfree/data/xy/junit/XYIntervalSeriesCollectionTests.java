@@ -171,7 +171,6 @@ public class XYIntervalSeriesCollectionTests extends TestCase {
         assertTrue(c1.equals(c2));
     }
 
-
     /**
      * Some basic checks for the removeSeries() method.
      */

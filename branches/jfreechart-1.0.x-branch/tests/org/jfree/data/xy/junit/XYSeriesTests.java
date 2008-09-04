@@ -27,7 +27,7 @@
  * ------------------
  * XYSeriesTests.java
  * ------------------
- * (C) Copyright 2003-2008 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
