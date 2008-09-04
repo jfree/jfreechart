@@ -610,6 +610,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * when no area is specified.
      *
      * @return A radius.
+     *
+     * @see #setDefaultEntityRadius(int)
      */
     public int getDefaultEntityRadius() {
         return this.defaultEntityRadius;
@@ -620,6 +622,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * when no area is specified.
      *
      * @param radius  the radius.
+     *
+     * @see #getDefaultEntityRadius()
      */
     public void setDefaultEntityRadius(int radius) {
         this.defaultEntityRadius = radius;
@@ -709,6 +713,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
+     *
+     * @see #findRangeBounds(XYDataset)
      */
     public Range findDomainBounds(XYDataset dataset) {
         if (dataset != null) {
@@ -727,6 +733,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
+     *
+     * @see #findDomainBounds(XYDataset)
      */
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset != null) {
@@ -935,8 +943,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param dataArea  the area for plotting data (not yet adjusted for any 3D
      *                  effect).
      * @param value  the value at which the grid line should be drawn.
-     * @param paint  the paint.
-     * @param stroke  the stroke.
+     * @param paint  the paint (<code>null</code> not permitted).
+     * @param stroke  the stroke (<code>null</code> not permitted).
      *
      * @since 1.0.5
      */
