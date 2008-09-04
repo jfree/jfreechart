@@ -2,37 +2,37 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------
  * MeterNeedle.java
  * ----------------
- * (C) Copyright 2002-2007, by the Australian Antarctic Division and 
+ * (C) Copyright 2002-2008, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *                   Nicolas Brodu (for Astrium and EADS Corporate Research 
+ *                   Nicolas Brodu (for Astrium and EADS Corporate Research
  *                   Center);
  *
  * Changes:
@@ -43,7 +43,7 @@
  * 16-Mar-2004 : Changed transform from private to protected (BRS);
  * 08-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
  * 22-Nov-2007 : Implemented hashCode() (DG);
- * 
+ *
  */
 
 package org.jfree.chart.needle;
@@ -68,14 +68,14 @@ import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 
 /**
- * The base class used to represent the needle on a 
+ * The base class used to represent the needle on a
  * {@link org.jfree.chart.plot.CompassPlot}.
  */
 public abstract class MeterNeedle implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 5203064851510951052L;
-    
+
     /** The outline paint. */
     private transient Paint outlinePaint = Color.black;
 
@@ -272,7 +272,7 @@ public abstract class MeterNeedle implements Serializable {
      * @param rotate  the rotation point.
      * @param angle  the angle.
      */
-    public void draw(Graphics2D g2, Rectangle2D plotArea, Point2D rotate, 
+    public void draw(Graphics2D g2, Rectangle2D plotArea, Point2D rotate,
                      double angle) {
 
         Paint savePaint = g2.getColor();
@@ -294,7 +294,7 @@ public abstract class MeterNeedle implements Serializable {
      * @param angle  the angle.
      */
     protected abstract void drawNeedle(Graphics2D g2,
-                                       Rectangle2D plotArea, Point2D rotate, 
+                                       Rectangle2D plotArea, Point2D rotate,
                                        double angle);
 
     /**
@@ -386,7 +386,7 @@ public abstract class MeterNeedle implements Serializable {
 
     /**
      * Returns a hash code for this instance.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -397,7 +397,7 @@ public abstract class MeterNeedle implements Serializable {
         result = HashUtilities.hashCode(result, this.rotateX);
         result = HashUtilities.hashCode(result, this.rotateY);
         result = HashUtilities.hashCode(result, this.size);
-        return result; 
+        return result;
     }
 
     /**
@@ -423,7 +423,7 @@ public abstract class MeterNeedle implements Serializable {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.outlineStroke = SerialUtilities.readStroke(stream);
