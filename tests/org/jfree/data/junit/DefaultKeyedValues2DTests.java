@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------------
  * DefaultKeyedValues2DTests.java
  * ------------------------------
- * (C) Copyright 2003-2007 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -73,7 +73,7 @@ public class DefaultKeyedValues2DTests extends TestCase {
     public static Test suite() {
         return new TestSuite(DefaultKeyedValues2DTests.class);
     }
-    
+
     /**
      * Constructs a new set of tests.
      *
@@ -95,20 +95,20 @@ public class DefaultKeyedValues2DTests extends TestCase {
             d.getValue("XX", "C1");
         }
         catch (UnknownKeyException e) {
-            pass = true;   
+            pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             d.getValue("R1", "XX");
         }
         catch (UnknownKeyException e) {
-            pass = true;   
+            pass = true;
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the clone() method.
      */
@@ -127,12 +127,12 @@ public class DefaultKeyedValues2DTests extends TestCase {
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
-        
+
         // check that clone is independent of the original
         v2.setValue(new Integer(2), "V2", "C1");
         assertFalse(v1.equals(v2));
     }
-    
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
@@ -163,7 +163,7 @@ public class DefaultKeyedValues2DTests extends TestCase {
         assertEquals(kv2D1, kv2D2);
 
     }
-    
+
     /**
      * Some checks for the equals() method.
      */
@@ -172,13 +172,13 @@ public class DefaultKeyedValues2DTests extends TestCase {
         DefaultKeyedValues2D d2 = new DefaultKeyedValues2D();
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
-        
+
         d1.addValue(new Double(1.0), new Double(2.0), "S1");
         assertFalse(d1.equals(d2));
         d2.addValue(new Double(1.0), new Double(2.0), "S1");
         assertTrue(d1.equals(d2));
     }
-    
+
     /**
      * Populates a data structure with sparse entries, then checks that
      * the unspecified entries return null.
@@ -187,13 +187,13 @@ public class DefaultKeyedValues2DTests extends TestCase {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         d.addValue(new Integer(11), "R1", "C1");
         d.addValue(new Integer(22), "R2", "C2");
-        
+
         assertEquals(new Integer(11), d.getValue("R1", "C1"));
         assertNull(d.getValue("R1", "C2"));
         assertEquals(new Integer(22), d.getValue("R2", "C2"));
         assertNull(d.getValue("R2", "C1"));
     }
-    
+
     /**
      * Some basic checks for the getRowCount() method.
      */
@@ -217,9 +217,9 @@ public class DefaultKeyedValues2DTests extends TestCase {
         d.addValue(new Double(2.0), "R1", "C2");
         assertEquals(2, d.getColumnCount());
     }
-    
+
     private static final double EPSILON = 0.0000000001;
-    
+
     /**
      * Some basic checks for the getValue(int, int) method.
      */
@@ -239,7 +239,7 @@ public class DefaultKeyedValues2DTests extends TestCase {
         assertEquals(2.0, d.getValue(1, 1).doubleValue(), EPSILON);
         assertNull(d.getValue(1, 0));
         assertNull(d.getValue(0, 1));
-        
+
         pass = false;
         try {
             d.getValue(2, 0);
@@ -249,7 +249,7 @@ public class DefaultKeyedValues2DTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some basic checks for the getRowKey() method.
      */
@@ -267,7 +267,7 @@ public class DefaultKeyedValues2DTests extends TestCase {
         d.addValue(new Double(1.0), "R2", "C1");
         assertEquals("R1", d.getRowKey(0));
         assertEquals("R2", d.getRowKey(1));
-        
+
         // check sorted rows
         d = new DefaultKeyedValues2D(true);
         d.addValue(new Double(1.0), "R1", "C1");
@@ -276,7 +276,7 @@ public class DefaultKeyedValues2DTests extends TestCase {
         assertEquals("R0", d.getRowKey(0));
         assertEquals("R1", d.getRowKey(1));
     }
-    
+
     /**
      * Some basic checks for the getColumnKey() method.
      */
@@ -295,7 +295,7 @@ public class DefaultKeyedValues2DTests extends TestCase {
         assertEquals("C1", d.getColumnKey(0));
         assertEquals("C2", d.getColumnKey(1));
     }
-    
+
     /**
      * Some basic checks for the removeValue() method.
      */
@@ -306,13 +306,13 @@ public class DefaultKeyedValues2DTests extends TestCase {
         d.removeValue("R1", "C1");
         assertEquals(0, d.getRowCount());
         assertEquals(0, d.getColumnCount());
-        
+
         d.addValue(new Double(1.0), "R1", "C1");
         d.addValue(new Double(2.0), "R2", "C1");
         d.removeValue("R1", "C1");
         assertEquals(new Double(2.0), d.getValue(0, 0));
     }
-    
+
     /**
      * A test for bug 1690654.
      */
@@ -327,7 +327,7 @@ public class DefaultKeyedValues2DTests extends TestCase {
         assertEquals(1, d.getRowCount());
         assertEquals(new Double(1.0), d.getValue(0, 0));
     }
-    
+
     /**
      * Some basic checks for the removeRow() method.
      */
@@ -340,9 +340,9 @@ public class DefaultKeyedValues2DTests extends TestCase {
         catch (IndexOutOfBoundsException e) {
             pass = true;
         }
-        assertTrue(pass);        
+        assertTrue(pass);
     }
-    
+
     /**
      * Some basic checks for the removeColumn(Comparable) method.
      */
@@ -353,7 +353,7 @@ public class DefaultKeyedValues2DTests extends TestCase {
         d.removeColumn("C2");
         d.addValue(new Double(3.0), "R2", "C2");
         assertEquals(3.0, d.getValue("R2", "C2").doubleValue(), EPSILON);
-        
+
         // check for unknown column
         boolean pass = false;
         try {

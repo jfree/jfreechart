@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------------
  * ComparableObjectItemTests.java
  * ------------------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -83,7 +83,7 @@ public class ComparableObjectItemTests extends TestCase {
         // check null argument 1
         boolean pass = false;
         try {
-            /* ComparableObjectItem item1 = */ new ComparableObjectItem(null, 
+            /* ComparableObjectItem item1 = */ new ComparableObjectItem(null,
                     "XYZ");
         }
         catch (IllegalArgumentException e) {
@@ -91,14 +91,14 @@ public class ComparableObjectItemTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1), 
+        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
-        ComparableObjectItem item2 = new ComparableObjectItem(new Integer(1), 
+        ComparableObjectItem item2 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
         assertTrue(item1.equals(item2));
         assertTrue(item2.equals(item1));
@@ -107,18 +107,18 @@ public class ComparableObjectItemTests extends TestCase {
         assertFalse(item1.equals(item2));
         item2 = new ComparableObjectItem(new Integer(2), "XYZ");
         assertTrue(item1.equals(item2));
-        
+
         item1 = new ComparableObjectItem(new Integer(2), null);
         assertFalse(item1.equals(item2));
         item2 = new ComparableObjectItem(new Integer(2), null);
-        assertTrue(item1.equals(item2));        
+        assertTrue(item1.equals(item2));
     }
 
     /**
      * Some checks for the clone() method.
      */
     public void testCloning() {
-        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1), 
+        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
         ComparableObjectItem item2 = null;
         try {
@@ -136,7 +136,7 @@ public class ComparableObjectItemTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1), 
+        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
         ComparableObjectItem item2 = null;
         try {
@@ -155,18 +155,18 @@ public class ComparableObjectItemTests extends TestCase {
         }
         assertEquals(item1, item2);
     }
-    
-    /** 
+
+    /**
      * Some checks for the compareTo() method.
      */
     public void testCompareTo() {
-        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1), 
+        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
-        ComparableObjectItem item2 = new ComparableObjectItem(new Integer(2), 
+        ComparableObjectItem item2 = new ComparableObjectItem(new Integer(2),
                 "XYZ");
-        ComparableObjectItem item3 = new ComparableObjectItem(new Integer(3), 
+        ComparableObjectItem item3 = new ComparableObjectItem(new Integer(3),
                 "XYZ");
-        ComparableObjectItem item4 = new ComparableObjectItem(new Integer(1), 
+        ComparableObjectItem item4 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
         assertTrue(item2.compareTo(item1) > 0);
         assertTrue(item3.compareTo(item1) > 0);

@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------------
  * KeyedObjects2DTests.java
  * ------------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -78,7 +78,7 @@ public class KeyedObjects2DTests extends TestCase {
     public KeyedObjects2DTests(String name) {
         super(name);
     }
-    
+
     /**
      * Some checks for the equals() method.
      */
@@ -87,11 +87,11 @@ public class KeyedObjects2DTests extends TestCase {
         KeyedObjects2D k2 = new KeyedObjects2D();
         assertTrue(k1.equals(k2));
         assertTrue(k2.equals(k1));
-        
+
         k1.addObject(new Integer(99), "R1", "C1");
         assertFalse(k1.equals(k2));
         k2.addObject(new Integer(99), "R1", "C1");
-        assertTrue(k1.equals(k2)); 
+        assertTrue(k1.equals(k2));
     }
 
     /**
@@ -112,12 +112,12 @@ public class KeyedObjects2DTests extends TestCase {
         assertTrue(o1 != o2);
         assertTrue(o1.getClass() == o2.getClass());
         assertTrue(o1.equals(o2));
-        
+
         // check independence
         o1.addObject("XX", "R1", "C1");
         assertFalse(o1.equals(o2));
     }
-    
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
@@ -148,7 +148,7 @@ public class KeyedObjects2DTests extends TestCase {
         assertEquals(ko2D1, ko2D2);
 
     }
-    
+
     /**
      * Some checks for the getValue(int, int) method.
      */
@@ -160,7 +160,7 @@ public class KeyedObjects2DTests extends TestCase {
         assertEquals("Obj2", data.getObject(1, 1));
         assertNull(data.getObject(0, 1));
         assertNull(data.getObject(1, 0));
-        
+
         // check invalid indices
         boolean pass = false;
         try {
@@ -170,7 +170,7 @@ public class KeyedObjects2DTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             data.getObject(0, -1);
@@ -210,7 +210,7 @@ public class KeyedObjects2DTests extends TestCase {
         assertEquals("Obj2", data.getObject("R2", "C2"));
         assertNull(data.getObject("R1", "C2"));
         assertNull(data.getObject("R2", "C1"));
-        
+
         // check invalid indices
         boolean pass = false;
         try {
@@ -220,7 +220,7 @@ public class KeyedObjects2DTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             data.getObject("R1", "XX");
@@ -248,7 +248,7 @@ public class KeyedObjects2DTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the setObject(Object, Comparable, Comparable) method.
      */
@@ -260,11 +260,11 @@ public class KeyedObjects2DTests extends TestCase {
         assertEquals("Obj2", data.getObject("R2", "C2"));
         assertNull(data.getObject("R1", "C2"));
         assertNull(data.getObject("R2", "C1"));
-        
+
         // confirm overwriting an existing value
         data.setObject("ABC", "R2", "C2");
         assertEquals("ABC", data.getObject("R2", "C2"));
-        
+
         // try null keys
         boolean pass = false;
         try {
@@ -274,7 +274,7 @@ public class KeyedObjects2DTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         pass = false;
         try {
             data.setObject("X", "R1", null);
@@ -284,7 +284,7 @@ public class KeyedObjects2DTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the removeRow(int) method.
      */
@@ -295,7 +295,7 @@ public class KeyedObjects2DTests extends TestCase {
         data.removeRow(0);
         assertEquals(1, data.getRowCount());
         assertEquals("Obj2", data.getObject(0, 1));
-        
+
         // try negative row index
         boolean pass = false;
         try {
@@ -305,7 +305,7 @@ public class KeyedObjects2DTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         // try row index too high
         pass = false;
         try {
@@ -327,7 +327,7 @@ public class KeyedObjects2DTests extends TestCase {
         data.removeColumn(0);
         assertEquals(1, data.getColumnCount());
         assertEquals("Obj2", data.getObject(1, 0));
-        
+
         // try negative column index
         boolean pass = false;
         try {
@@ -337,7 +337,7 @@ public class KeyedObjects2DTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         // try column index too high
         pass = false;
         try {
@@ -359,7 +359,7 @@ public class KeyedObjects2DTests extends TestCase {
         data.removeRow("R2");
         assertEquals(1, data.getRowCount());
         assertEquals("Obj1", data.getObject(0, 0));
-        
+
         // try unknown row key
         boolean pass = false;
         try {
@@ -369,7 +369,7 @@ public class KeyedObjects2DTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         // try null row key
         pass = false;
         try {
@@ -391,7 +391,7 @@ public class KeyedObjects2DTests extends TestCase {
         data.removeColumn("C2");
         assertEquals(1, data.getColumnCount());
         assertEquals("Obj1", data.getObject(0, 0));
-        
+
         // try unknown column key
         boolean pass = false;
         try {
@@ -401,7 +401,7 @@ public class KeyedObjects2DTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
-        
+
         // try null column key
         pass = false;
         try {
@@ -412,7 +412,7 @@ public class KeyedObjects2DTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * A simple check for the removeValue() method.
      */
