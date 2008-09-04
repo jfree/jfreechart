@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------
  * PieChart3DTests.java
  * --------------------
- * (C) Copyright 2004, 2007, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -95,8 +95,8 @@ public class PieChart3DTests extends TestCase {
     }
 
     /**
-     * Using a regular pie chart, we replace the dataset with null.  Expect to 
-     * receive notification of a chart change event, and (of course) the 
+     * Using a regular pie chart, we replace the dataset with null.  Expect to
+     * receive notification of a chart change event, and (of course) the
      * dataset should be null.
      */
     public void testReplaceDatasetOnPieChart() {
@@ -109,7 +109,7 @@ public class PieChart3DTests extends TestCase {
     }
 
     /**
-     * Tests that no exceptions are thrown when there is a <code>null</code> 
+     * Tests that no exceptions are thrown when there is a <code>null</code>
      * value in the dataset.
      */
     public void testNullValueInDataset() {
@@ -120,7 +120,7 @@ public class PieChart3DTests extends TestCase {
         JFreeChart chart = createPieChart3D(dataset);
         boolean success = false;
         try {
-            BufferedImage image = new BufferedImage(200 , 100, 
+            BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
@@ -132,12 +132,12 @@ public class PieChart3DTests extends TestCase {
         }
         assertTrue(success);
     }
-    
+
     /**
      * Creates a pie chart.
      *
      * @param dataset  the dataset.
-     * 
+     *
      * @return The pie chart.
      */
     private static JFreeChart createPieChart3D(PieDataset dataset) {

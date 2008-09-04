@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * TimeSeriesChartTests.java
  * -------------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited.
+ * (C) Copyright 2005-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -96,17 +96,17 @@ public class TimeSeriesChartTests extends TestCase {
     }
 
     /**
-     * Draws the chart with a null info object to make sure that no exceptions 
+     * Draws the chart with a null info object to make sure that no exceptions
      * are thrown (a problem that was occurring at one point).
      */
     public void testDrawWithNullInfo() {
 
         boolean success = false;
         try {
-            BufferedImage image = new BufferedImage(200 , 100, 
+            BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
-            this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, 
+            this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
                     null);
             g2.dispose();
             success = true;
@@ -157,7 +157,7 @@ public class TimeSeriesChartTests extends TestCase {
         XYToolTipGenerator tt2 = renderer.getToolTipGenerator(0, 0);
         assertTrue(tt2 == tt);
     }
-    
+
     /**
      * Create a horizontal bar chart with sample data in the range -3 to +3.
      *
