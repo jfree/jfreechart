@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------
  * DefaultContourDataset.java
  * --------------------------
- * (C) Copyright 2002-2007, by David M. O'Donnell and Contributors.
+ * (C) Copyright 2002-2008, by David M. O'Donnell and Contributors.
  *
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -37,11 +37,11 @@
  * 23-Jan-2003 : Added standard header (DG);
  * 20-May-2003 : removed member vars numX and numY, which were never used (TM);
  * 06-May-2004 : Now extends AbstractXYZDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue(), getY() with getYValue() and 
+ * 15-Jul-2004 : Switched getX() with getXValue(), getY() with getYValue() and
  *               getZ() with getZValue() methods (DG);
  * ------------- JFREECHART 1.0.x --------------------------------------------
  * 31-Jan-2007 : Deprecated (DG);
- * 
+ *
  */
 
 package org.jfree.data.contour;
@@ -57,14 +57,14 @@ import org.jfree.data.xy.AbstractXYZDataset;
 import org.jfree.data.xy.XYDataset;
 
 /**
- * A convenience class that provides a default implementation of the 
+ * A convenience class that provides a default implementation of the
  * {@link ContourDataset} interface.
- * 
- * @deprecated This class is no longer supported (as of version 1.0.4).  If 
- *     you are creating contour plots, please try to use {@link XYPlot} and 
+ *
+ * @deprecated This class is no longer supported (as of version 1.0.4).  If
+ *     you are creating contour plots, please try to use {@link XYPlot} and
  *     {@link XYBlockRenderer}.
  */
-public class DefaultContourDataset extends AbstractXYZDataset 
+public class DefaultContourDataset extends AbstractXYZDataset
                                    implements ContourDataset {
 
     /** The series name (this dataset supports only one series). */
@@ -111,7 +111,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
 
     /**
      * Initialises the dataset.
-     * 
+     *
      * @param xData  the x values.
      * @param yData  the y values.
      * @param zData  the z values.
@@ -128,8 +128,8 @@ public class DefaultContourDataset extends AbstractXYZDataset
         // 1) the data are sorted by x then y
         // 2) that the data will be represented by a rectangle formed by
         //    using x[i+1], x, y[j+1], and y.
-        // 3) we march along the y-axis at the same value of x until a new 
-        //    value x is found at which point we will flag the index 
+        // 3) we march along the y-axis at the same value of x until a new
+        //    value x is found at which point we will flag the index
         //    where x[i+1]<>x[i]
 
         Vector tmpVector = new Vector(); //create a temporary vector
@@ -148,27 +148,27 @@ public class DefaultContourDataset extends AbstractXYZDataset
                 else {
                     xNumber = new Integer(0);
                 }
-                this.xValues[k] = new Double(xNumber.doubleValue()); 
+                this.xValues[k] = new Double(xNumber.doubleValue());
                     // store Number as Double
 
                 // check if starting new column
                 if (x != this.xValues[k].doubleValue()) {
-                    tmpVector.add(new Integer(k)); //store index where new 
+                    tmpVector.add(new Integer(k)); //store index where new
                                                    //column starts
-                    x = this.xValues[k].doubleValue(); 
+                    x = this.xValues[k].doubleValue();
                                              // set x to most recent value
                 }
             }
         }
 
         Object[] inttmp = tmpVector.toArray();
-        this.xIndex = new int[inttmp.length];  // create array xIndex to hold 
+        this.xIndex = new int[inttmp.length];  // create array xIndex to hold
                                                // new column indices
 
         for (int i = 0; i < inttmp.length; i++) {
             this.xIndex[i] = ((Integer) inttmp[i]).intValue();
         }
-        for (int k = 0; k < this.yValues.length; k++) { // store y and z axes 
+        for (int k = 0; k < this.yValues.length; k++) { // store y and z axes
                                                         // as Doubles
             this.yValues[k] = (Double) yData[k];
             if (zData[k] != null) {
@@ -211,7 +211,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
     }
 
     /**
-     * Returns the number of items in the specified series.  This method 
+     * Returns the number of items in the specified series.  This method
      * is provided to satisfy the {@link XYDataset} interface implementation.
      *
      * @param series  must be zero, as this dataset only supports one series.
@@ -297,9 +297,9 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The minimum z-value.
      */
-    public double getMinZValue(double minX, 
-                               double minY, 
-                               double maxX, 
+    public double getMinZValue(double minX,
+                               double minY,
+                               double maxX,
                                double maxY) {
 
         double zMin = 1.e20;
@@ -358,7 +358,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
     }
 
     /**
-     * Returns the x value for the specified series and index (zero-based 
+     * Returns the x value for the specified series and index (zero-based
      * indices).  Required by the {@link XYDataset}.
      *
      * @param series  must be zero;
@@ -394,7 +394,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
     }
 
     /**
-     * Returns the y value for the specified series and index (zero-based 
+     * Returns the y value for the specified series and index (zero-based
      * indices).  Required by the {@link XYDataset}.
      *
      * @param series  the series index (must be zero for this dataset).
@@ -419,7 +419,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
     }
 
     /**
-     * Returns the z value for the specified series and index (zero-based 
+     * Returns the z value for the specified series and index (zero-based
      * indices).  Required by the {@link XYDataset}
      *
      * @param series  the series index (must be zero for this dataset).
@@ -458,7 +458,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
         int i = Arrays.binarySearch(this.xIndex, k);
         if (i >= 0) {
             return i;
-        } 
+        }
         else {
             return -1 * i - 2;
         }
@@ -490,9 +490,9 @@ public class DefaultContourDataset extends AbstractXYZDataset
 
     /**
      * Returns true if axis are dates.
-     * 
+     *
      * @param axisNumber The axis where 0-x, 1-y, and 2-z.
-     * 
+     *
      * @return A boolean.
      */
     public boolean isDateAxis(int axisNumber) {
