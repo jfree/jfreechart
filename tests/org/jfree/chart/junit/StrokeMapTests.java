@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------
  * StrokeMapTests.java
  * -------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -87,7 +87,7 @@ public class StrokeMapTests extends TestCase {
         assertEquals(new BasicStroke(1.1f), m1.getStroke("A"));
         m1.put("A", null);
         assertEquals(null, m1.getStroke("A"));
-        
+
         // a null key should throw an IllegalArgumentException
         boolean pass = false;
         try {
@@ -106,7 +106,7 @@ public class StrokeMapTests extends TestCase {
         StrokeMap m1 = new StrokeMap();
         m1.put("A", new BasicStroke(1.1f));
         assertEquals(new BasicStroke(1.1f), m1.getStroke("A"));
-        
+
         // a null key should throw an IllegalArgumentException
         boolean pass = false;
         try {
@@ -117,7 +117,7 @@ public class StrokeMapTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the equals() method.
      */
@@ -128,23 +128,23 @@ public class StrokeMapTests extends TestCase {
         assertTrue(m1.equals(m2));
         assertFalse(m1.equals(null));
         assertFalse(m1.equals("ABC"));
-        
+
         m1.put("K1", new BasicStroke(1.1f));
         assertFalse(m1.equals(m2));
         m2.put("K1", new BasicStroke(1.1f));
         assertTrue(m1.equals(m2));
-        
+
         m1.put("K2", new BasicStroke(2.2f));
         assertFalse(m1.equals(m2));
         m2.put("K2", new BasicStroke(2.2f));
         assertTrue(m1.equals(m2));
-        
+
         m1.put("K2", null);
         assertFalse(m1.equals(m2));
         m2.put("K2", null);
         assertTrue(m1.equals(m2));
     }
-    
+
     /**
      * Some checks for cloning.
      */
@@ -158,7 +158,7 @@ public class StrokeMapTests extends TestCase {
             e.printStackTrace();
         }
         assertTrue(m1.equals(m2));
-        
+
         m1.put("K1", new BasicStroke(1.1f));
         m1.put("K2", new BasicStroke(2.2f));
         try {
@@ -169,7 +169,7 @@ public class StrokeMapTests extends TestCase {
         }
         assertTrue(m1.equals(m2));
     }
-    
+
     /**
      * A check for serialization.
      */
