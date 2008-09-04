@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------
  * EncoderUtil.java
  * ----------------
- * (C) Copyright 2004-2007, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-2008, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
@@ -46,7 +46,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * A collection of utility methods for encoding images and returning them as a 
+ * A collection of utility methods for encoding images and returning them as a
  * byte[] or writing them directly to an OutputStream.
  */
 public class EncoderUtil {
@@ -56,11 +56,11 @@ public class EncoderUtil {
      *
      * @param image  The image to be encoded.
      * @param format  The {@link ImageFormat} to use.
-     * 
+     *
      * @return The byte[] that is the encoded image.
      * @throws IOException
      */
-    public static byte[] encode(BufferedImage image, String format) 
+    public static byte[] encode(BufferedImage image, String format)
         throws IOException {
         ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format);
         return imageEncoder.encode(image);
@@ -71,14 +71,14 @@ public class EncoderUtil {
      *
      * @param image  The image to be encoded.
      * @param format  The {@link ImageFormat} to use.
-     * @param encodeAlpha  Whether to encode alpha transparency (not supported 
+     * @param encodeAlpha  Whether to encode alpha transparency (not supported
      *                     by all ImageEncoders).
      * @return The byte[] that is the encoded image.
      * @throws IOException
      */
     public static byte[] encode(BufferedImage image, String format,
                                 boolean encodeAlpha) throws IOException {
-        ImageEncoder imageEncoder 
+        ImageEncoder imageEncoder
             = ImageEncoderFactory.newInstance(format, encodeAlpha);
         return imageEncoder.encode(image);
     }
@@ -95,7 +95,7 @@ public class EncoderUtil {
      */
     public static byte[] encode(BufferedImage image, String format,
                                 float quality) throws IOException {
-        ImageEncoder imageEncoder 
+        ImageEncoder imageEncoder
             = ImageEncoderFactory.newInstance(format, quality);
         return imageEncoder.encode(image);
     }
@@ -105,17 +105,17 @@ public class EncoderUtil {
      *
      * @param image  The image to be encoded.
      * @param format  The {@link ImageFormat} to use.
-     * @param quality  The quality to use for the image encoding (not supported 
+     * @param quality  The quality to use for the image encoding (not supported
      *                 by all ImageEncoders).
-     * @param encodeAlpha  Whether to encode alpha transparency (not supported 
+     * @param encodeAlpha  Whether to encode alpha transparency (not supported
      *                     by all ImageEncoders).
      * @return The byte[] that is the encoded image.
      * @throws IOException
      */
     public static byte[] encode(BufferedImage image, String format,
-                                float quality, boolean encodeAlpha) 
+                                float quality, boolean encodeAlpha)
         throws IOException {
-        ImageEncoder imageEncoder 
+        ImageEncoder imageEncoder
             = ImageEncoderFactory.newInstance(format, quality, encodeAlpha);
         return imageEncoder.encode(image);
     }
@@ -128,7 +128,7 @@ public class EncoderUtil {
      * @param outputStream  The OutputStream to write the encoded image to.
      * @throws IOException
      */
-    public static void writeBufferedImage(BufferedImage image, String format, 
+    public static void writeBufferedImage(BufferedImage image, String format,
         OutputStream outputStream) throws IOException {
         ImageEncoder imageEncoder = ImageEncoderFactory.newInstance(format);
         imageEncoder.encode(image, outputStream);
@@ -140,13 +140,13 @@ public class EncoderUtil {
      * @param image  The image to be encoded.
      * @param format  The {@link ImageFormat} to use.
      * @param outputStream  The OutputStream to write the encoded image to.
-     * @param quality  The quality to use for the image encoding (not 
+     * @param quality  The quality to use for the image encoding (not
      *                 supported by all ImageEncoders).
      * @throws IOException
      */
-    public static void writeBufferedImage(BufferedImage image, String format, 
+    public static void writeBufferedImage(BufferedImage image, String format,
         OutputStream outputStream, float quality) throws IOException {
-        ImageEncoder imageEncoder 
+        ImageEncoder imageEncoder
             = ImageEncoderFactory.newInstance(format, quality);
         imageEncoder.encode(image, outputStream);
     }
@@ -157,13 +157,13 @@ public class EncoderUtil {
      * @param image  The image to be encoded.
      * @param format  The {@link ImageFormat} to use.
      * @param outputStream  The OutputStream to write the encoded image to.
-     * @param encodeAlpha  Whether to encode alpha transparency (not 
+     * @param encodeAlpha  Whether to encode alpha transparency (not
      *                     supported by all ImageEncoders).
      * @throws IOException
      */
-    public static void writeBufferedImage(BufferedImage image, String format, 
+    public static void writeBufferedImage(BufferedImage image, String format,
         OutputStream outputStream, boolean encodeAlpha) throws IOException {
-        ImageEncoder imageEncoder 
+        ImageEncoder imageEncoder
             = ImageEncoderFactory.newInstance(format, encodeAlpha);
         imageEncoder.encode(image, outputStream);
     }
@@ -174,16 +174,16 @@ public class EncoderUtil {
      * @param image  The image to be encoded.
      * @param format  The {@link ImageFormat} to use.
      * @param outputStream  The OutputStream to write the encoded image to.
-     * @param quality  The quality to use for the image encoding (not 
+     * @param quality  The quality to use for the image encoding (not
      *                 supported by all ImageEncoders).
-     * @param encodeAlpha  Whether to encode alpha transparency (not supported 
+     * @param encodeAlpha  Whether to encode alpha transparency (not supported
      *                     by all ImageEncoders).
      * @throws IOException
      */
-    public static void writeBufferedImage(BufferedImage image, String format, 
-        OutputStream outputStream, float quality, boolean encodeAlpha) 
+    public static void writeBufferedImage(BufferedImage image, String format,
+        OutputStream outputStream, float quality, boolean encodeAlpha)
         throws IOException {
-        ImageEncoder imageEncoder 
+        ImageEncoder imageEncoder
             = ImageEncoderFactory.newInstance(format, quality, encodeAlpha);
         imageEncoder.encode(image, outputStream);
     }
