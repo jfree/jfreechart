@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -18,8 +18,8 @@
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
@@ -27,7 +27,7 @@
  * --------------------------
  * SeriesRenderingOrder.java
  * --------------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited.
+ * (C) Copyright 2005-2008, by Object Refinery Limited.
  *
  * Original Author:  Eric Thomas (www.isti.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -52,7 +52,7 @@ public final class SeriesRenderingOrder implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 209336477448807735L;
-    
+
     /**
      * Render series in the order 0, 1, 2, ..., N-1, where N is the number
      * of series.
@@ -112,13 +112,13 @@ public final class SeriesRenderingOrder implements Serializable {
 
     /**
      * Returns a hash code for this instance.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
         return this.name.hashCode();
     }
-    
+
     /**
      * Ensures that serialization returns the unique instances.
      *
