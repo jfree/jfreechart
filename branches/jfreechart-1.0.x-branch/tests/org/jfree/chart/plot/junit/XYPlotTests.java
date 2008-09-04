@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------
@@ -42,9 +42,9 @@
  * 05-Feb-2007 : Added testAddDomainMarker() and testAddRangeMarker() (DG);
  * 07-Feb-2007 : Added test1654215() (DG);
  * 24-May-2007 : Added testDrawSeriesWithZeroItems() (DG);
- * 07-Apr-2008 : Added testRemoveDomainMarker() and 
+ * 07-Apr-2008 : Added testRemoveDomainMarker() and
  *               testRemoveRangeMarker() (DG);
- * 
+ *
  */
 
 package org.jfree.chart.plot.junit;
@@ -123,9 +123,9 @@ public class XYPlotTests extends TestCase {
     public XYPlotTests(String name) {
         super(name);
     }
-   
-// FIXME: the getDatasetCount() method is returning a count of the slots 
-// available for datasets, rather than the number of datasets actually 
+
+// FIXME: the getDatasetCount() method is returning a count of the slots
+// available for datasets, rather than the number of datasets actually
 // specified...see if there is some way to clean this up.
 //    /**
 //     * Added this test in response to a bug report.
@@ -139,17 +139,17 @@ public class XYPlotTests extends TestCase {
      * Some checks for the equals() method.
      */
     public void testEquals() {
-        
+
         XYPlot plot1 = new XYPlot();
         XYPlot plot2 = new XYPlot();
-        assertTrue(plot1.equals(plot2));    
-        
+        assertTrue(plot1.equals(plot2));
+
         // orientation...
         plot1.setOrientation(PlotOrientation.HORIZONTAL);
         assertFalse(plot1.equals(plot2));
         plot2.setOrientation(PlotOrientation.HORIZONTAL);
         assertTrue(plot1.equals(plot2));
-        
+
         // axisOffset...
         plot1.setAxisOffset(new RectangleInsets(0.05, 0.05, 0.05, 0.05));
         assertFalse(plot1.equals(plot2));
@@ -203,7 +203,7 @@ public class XYPlotTests extends TestCase {
         assertFalse(plot1.equals(plot2));
         plot2.setRangeAxisLocation(11, AxisLocation.TOP_OR_RIGHT);
         assertTrue(plot1.equals(plot2));
-        
+
         // secondary DatasetDomainAxisMap...
         plot1.mapDatasetToDomainAxis(11, 11);
         assertFalse(plot1.equals(plot2));
@@ -215,19 +215,19 @@ public class XYPlotTests extends TestCase {
         assertFalse(plot1.equals(plot2));
         plot2.mapDatasetToRangeAxis(11, 11);
         assertTrue(plot1.equals(plot2));
-        
+
         // renderer
         plot1.setRenderer(new DefaultXYItemRenderer());
         assertFalse(plot1.equals(plot2));
         plot2.setRenderer(new DefaultXYItemRenderer());
         assertTrue(plot1.equals(plot2));
-        
+
         // secondary renderers
         plot1.setRenderer(11, new DefaultXYItemRenderer());
         assertFalse(plot1.equals(plot2));
         plot2.setRenderer(11, new DefaultXYItemRenderer());
         assertTrue(plot1.equals(plot2));
-        
+
         // domainGridlinesVisible
         plot1.setDomainGridlinesVisible(false);
         assertFalse(plot1.equals(plot2));
@@ -240,15 +240,15 @@ public class XYPlotTests extends TestCase {
         assertFalse(plot1.equals(plot2));
         plot2.setDomainGridlineStroke(stroke);
         assertTrue(plot1.equals(plot2));
-        
+
         // domainGridlinePaint
-        plot1.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue, 
+        plot1.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
                 3.0f, 4.0f, Color.red));
         assertFalse(plot1.equals(plot2));
-        plot2.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue, 
+        plot2.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
                 3.0f, 4.0f, Color.red));
         assertTrue(plot1.equals(plot2));
-        
+
         // rangeGridlinesVisible
         plot1.setRangeGridlinesVisible(false);
         assertFalse(plot1.equals(plot2));
@@ -260,15 +260,15 @@ public class XYPlotTests extends TestCase {
         assertFalse(plot1.equals(plot2));
         plot2.setRangeGridlineStroke(stroke);
         assertTrue(plot1.equals(plot2));
-        
+
         // rangeGridlinePaint
-        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green, 
+        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
                 3.0f, 4.0f, Color.red));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green, 
+        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
                 3.0f, 4.0f, Color.red));
         assertTrue(plot1.equals(plot2));
-                
+
         // rangeZeroBaselineVisible
         plot1.setRangeZeroBaselineVisible(true);
         assertFalse(plot1.equals(plot2));
@@ -280,12 +280,12 @@ public class XYPlotTests extends TestCase {
         assertFalse(plot1.equals(plot2));
         plot2.setRangeZeroBaselineStroke(stroke);
         assertTrue(plot1.equals(plot2));
-        
+
         // rangeZeroBaselinePaint
-        plot1.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.white, 
+        plot1.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.white,
                 3.0f, 4.0f, Color.red));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.white, 
+        plot2.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.white,
                 3.0f, 4.0f, Color.red));
         assertTrue(plot1.equals(plot2));
 
@@ -294,62 +294,62 @@ public class XYPlotTests extends TestCase {
         assertFalse(plot1.equals(plot2));
         plot2.setRangeCrosshairVisible(true);
         assertTrue(plot1.equals(plot2));
-        
+
         // rangeCrosshairValue
         plot1.setRangeCrosshairValue(100.0);
         assertFalse(plot1.equals(plot2));
         plot2.setRangeCrosshairValue(100.0);
         assertTrue(plot1.equals(plot2));
-        
+
         // rangeCrosshairStroke
         plot1.setRangeCrosshairStroke(stroke);
         assertFalse(plot1.equals(plot2));
         plot2.setRangeCrosshairStroke(stroke);
         assertTrue(plot1.equals(plot2));
-        
+
         // rangeCrosshairPaint
-        plot1.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.pink, 
+        plot1.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.pink,
                 3.0f, 4.0f, Color.red));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.pink, 
+        plot2.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.pink,
                 3.0f, 4.0f, Color.red));
         assertTrue(plot1.equals(plot2));
-        
+
         // rangeCrosshairLockedOnData
         plot1.setRangeCrosshairLockedOnData(false);
         assertFalse(plot1.equals(plot2));
         plot2.setRangeCrosshairLockedOnData(false);
         assertTrue(plot1.equals(plot2));
-        
+
         // range markers
         plot1.addRangeMarker(new ValueMarker(4.0));
         assertFalse(plot1.equals(plot2));
         plot2.addRangeMarker(new ValueMarker(4.0));
         assertTrue(plot1.equals(plot2));
-        
+
         // secondary range markers
         plot1.addRangeMarker(1, new ValueMarker(4.0), Layer.FOREGROUND);
         assertFalse(plot1.equals(plot2));
         plot2.addRangeMarker(1, new ValueMarker(4.0), Layer.FOREGROUND);
         assertTrue(plot1.equals(plot2));
-        
+
         plot1.addRangeMarker(1, new ValueMarker(99.0), Layer.BACKGROUND);
         assertFalse(plot1.equals(plot2));
         plot2.addRangeMarker(1, new ValueMarker(99.0), Layer.BACKGROUND);
         assertTrue(plot1.equals(plot2));
-                
+
         // weight
         plot1.setWeight(3);
         assertFalse(plot1.equals(plot2));
         plot2.setWeight(3);
         assertTrue(plot1.equals(plot2));
-        
+
         // quadrant origin
         plot1.setQuadrantOrigin(new Point2D.Double(12.3, 45.6));
         assertFalse(plot1.equals(plot2));
         plot2.setQuadrantOrigin(new Point2D.Double(12.3, 45.6));
         assertTrue(plot1.equals(plot2));
-        
+
         // quadrant paint
         plot1.setQuadrantPaint(0, new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
@@ -374,18 +374,18 @@ public class XYPlotTests extends TestCase {
         assertFalse(plot1.equals(plot2));
         plot2.setQuadrantPaint(3, new GradientPaint(4.0f, 5.0f, Color.red,
                 6.0f, 7.0f, Color.blue));
-        assertTrue(plot1.equals(plot2));  
-        
+        assertTrue(plot1.equals(plot2));
+
         plot1.setDomainTickBandPaint(Color.red);
         assertFalse(plot1.equals(plot2));
         plot2.setDomainTickBandPaint(Color.red);
         assertTrue(plot1.equals(plot2));
-        
+
         plot1.setRangeTickBandPaint(Color.blue);
         assertFalse(plot1.equals(plot2));
         plot2.setRangeTickBandPaint(Color.blue);
         assertTrue(plot1.equals(plot2));
-        
+
     }
 
     /**
@@ -404,12 +404,12 @@ public class XYPlotTests extends TestCase {
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
     }
-    
+
     /**
      * Tests cloning for a more complex plot.
      */
     public void testCloning2() {
-        XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"), 
+        XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         p1.setRangeAxis(1, new NumberAxis("Range Axis 2"));
         p1.setRenderer(1, new XYBarRenderer());
@@ -424,7 +424,7 @@ public class XYPlotTests extends TestCase {
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
     }
-    
+
     /**
      * Confirm that cloning captures the quadrantOrigin field.
      */
@@ -444,13 +444,13 @@ public class XYPlotTests extends TestCase {
         assertTrue(p1.equals(p2));
         assertTrue(p2.getQuadrantOrigin() != p);
     }
-    
+
     /**
      * Confirm that cloning captures the quadrantOrigin field.
      */
     public void testCloning_QuadrantPaint() {
         XYPlot p1 = new XYPlot();
-        p1.setQuadrantPaint(3, new GradientPaint(1.0f, 2.0f, Color.red, 
+        p1.setQuadrantPaint(3, new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
         XYPlot p2 = null;
         try {
@@ -462,26 +462,26 @@ public class XYPlotTests extends TestCase {
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
-        
+
         // check for independence
         p1.setQuadrantPaint(1, Color.red);
         assertFalse(p1.equals(p2));
         p2.setQuadrantPaint(1, Color.red);
         assertTrue(p1.equals(p2));
     }
-    
+
     /**
      * Tests the independence of the clones.
      */
     public void testCloneIndependence() {
-        XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"), 
+        XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         p1.setDomainAxis(1, new NumberAxis("Domain Axis 2"));
         p1.setDomainAxisLocation(1, AxisLocation.BOTTOM_OR_LEFT);
         p1.setRangeAxis(1, new NumberAxis("Range Axis 2"));
         p1.setRangeAxisLocation(1, AxisLocation.TOP_OR_RIGHT);
         p1.setRenderer(1, new XYBarRenderer());
-        XYPlot p2 = null;        
+        XYPlot p2 = null;
         try {
             p2 = (XYPlot) p1.clone();
         }
@@ -490,22 +490,22 @@ public class XYPlotTests extends TestCase {
             System.err.println("Failed to clone.");
         }
         assertTrue(p1.equals(p2));
-        
+
         p1.getDomainAxis().setLabel("Label");
         assertFalse(p1.equals(p2));
         p2.getDomainAxis().setLabel("Label");
         assertTrue(p1.equals(p2));
-        
+
         p1.getDomainAxis(1).setLabel("S1");
         assertFalse(p1.equals(p2));
         p2.getDomainAxis(1).setLabel("S1");
         assertTrue(p1.equals(p2));
-        
+
         p1.setDomainAxisLocation(1, AxisLocation.TOP_OR_RIGHT);
         assertFalse(p1.equals(p2));
         p2.setDomainAxisLocation(1, AxisLocation.TOP_OR_RIGHT);
         assertTrue(p1.equals(p2));
-        
+
         p1.mapDatasetToDomainAxis(2, 1);
         assertFalse(p1.equals(p2));
         p2.mapDatasetToDomainAxis(2, 1);
@@ -515,17 +515,17 @@ public class XYPlotTests extends TestCase {
         assertFalse(p1.equals(p2));
         p2.getRangeAxis().setLabel("Label");
         assertTrue(p1.equals(p2));
-        
+
         p1.getRangeAxis(1).setLabel("S1");
         assertFalse(p1.equals(p2));
         p2.getRangeAxis(1).setLabel("S1");
         assertTrue(p1.equals(p2));
-        
+
         p1.setRangeAxisLocation(1, AxisLocation.TOP_OR_LEFT);
         assertFalse(p1.equals(p2));
         p2.setRangeAxisLocation(1, AxisLocation.TOP_OR_LEFT);
         assertTrue(p1.equals(p2));
-        
+
         p1.mapDatasetToRangeAxis(2, 1);
         assertFalse(p1.equals(p2));
         p2.mapDatasetToRangeAxis(2, 1);
@@ -535,22 +535,22 @@ public class XYPlotTests extends TestCase {
         assertFalse(p1.equals(p2));
         p2.getRenderer().setOutlinePaint(Color.cyan);
         assertTrue(p1.equals(p2));
-        
+
         p1.getRenderer(1).setOutlinePaint(Color.red);
         assertFalse(p1.equals(p2));
         p2.getRenderer(1).setOutlinePaint(Color.red);
         assertTrue(p1.equals(p2));
-        
+
     }
-    
+
     /**
-     * Setting a null renderer should be allowed, but is generating a null 
+     * Setting a null renderer should be allowed, but is generating a null
      * pointer exception in 0.9.7.
      */
     public void testSetNullRenderer() {
         boolean failed = false;
         try {
-            XYPlot plot = new XYPlot(null, new NumberAxis("X"), 
+            XYPlot plot = new XYPlot(null, new NumberAxis("X"),
                     new NumberAxis("Y"), null);
             plot.setRenderer(null);
         }
@@ -592,7 +592,7 @@ public class XYPlotTests extends TestCase {
     }
 
     /**
-     * Serialize an instance, restore it, and check for equality.  This test 
+     * Serialize an instance, restore it, and check for equality.  This test
      * uses a {@link DateAxis} and a {@link StandardXYToolTipGenerator}.
      */
     public void testSerialization2() {
@@ -625,17 +625,17 @@ public class XYPlotTests extends TestCase {
     }
 
     /**
-     * Problem to reproduce a bug in serialization.  The bug (first reported 
-     * against the {@link org.jfree.chart.plot.CategoryPlot} class) is a null 
+     * Problem to reproduce a bug in serialization.  The bug (first reported
+     * against the {@link org.jfree.chart.plot.CategoryPlot} class) is a null
      * pointer exception that occurs when drawing a plot after deserialization.
-     * It is caused by four temporary storage structures (axesAtTop, 
-     * axesAtBottom, axesAtLeft and axesAtRight - all initialized as empty 
-     * lists in the constructor) not being initialized by the readObject() 
-     * method following deserialization.  This test has been written to 
+     * It is caused by four temporary storage structures (axesAtTop,
+     * axesAtBottom, axesAtLeft and axesAtRight - all initialized as empty
+     * lists in the constructor) not being initialized by the readObject()
+     * method following deserialization.  This test has been written to
      * reproduce the bug (now fixed).
      */
     public void testSerialization3() {
-        
+
         XYSeriesCollection dataset = new XYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYLineChart(
             "Test Chart",
@@ -648,7 +648,7 @@ public class XYPlotTests extends TestCase {
             false
         );
         JFreeChart chart2 = null;
-        
+
         // serialize and deserialize the chart....
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -672,18 +672,18 @@ public class XYPlotTests extends TestCase {
             chart2.createBufferedImage(300, 200);
         }
         catch (Exception e) {
-            passed = false;  
-            e.printStackTrace();            
+            passed = false;
+            e.printStackTrace();
         }
         assertTrue(passed);
     }
-    
+
     /**
      * A test to reproduce a bug in serialization: the domain and/or range
      * markers for a plot are not being serialized.
      */
     public void testSerialization4() {
-        
+
         XYSeriesCollection dataset = new XYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYLineChart(
             "Test Chart",
@@ -701,7 +701,7 @@ public class XYPlotTests extends TestCase {
         plot.addRangeMarker(new ValueMarker(4.0), Layer.FOREGROUND);
         plot.addRangeMarker(new IntervalMarker(5.0, 6.0), Layer.BACKGROUND);
         JFreeChart chart2 = null;
-        
+
         // serialize and deserialize the chart....
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -725,12 +725,12 @@ public class XYPlotTests extends TestCase {
             chart2.createBufferedImage(300, 200);
         }
         catch (Exception e) {
-            passed = false;  
-            e.printStackTrace();            
+            passed = false;
+            e.printStackTrace();
         }
         assertTrue(passed);
     }
-    
+
     /**
      * Tests a bug where the plot is no longer registered as a listener
      * with the dataset(s) and axes after deserialization.  See patch 1209475
@@ -766,18 +766,18 @@ public class XYPlotTests extends TestCase {
             fail(e.toString());
         }
         assertEquals(p1, p2);
-        
-        // now check that all datasets, renderers and axes are being listened 
+
+        // now check that all datasets, renderers and axes are being listened
         // too...
         NumberAxis domainAxisA = (NumberAxis) p2.getDomainAxis(0);
         NumberAxis rangeAxisA = (NumberAxis) p2.getRangeAxis(0);
         XYSeriesCollection datasetA = (XYSeriesCollection) p2.getDataset(0);
-        StandardXYItemRenderer rendererA 
+        StandardXYItemRenderer rendererA
             = (StandardXYItemRenderer) p2.getRenderer(0);
         NumberAxis domainAxisB = (NumberAxis) p2.getDomainAxis(1);
         NumberAxis rangeAxisB = (NumberAxis) p2.getRangeAxis(1);
         XYSeriesCollection datasetB = (XYSeriesCollection) p2.getDataset(1);
-        StandardXYItemRenderer rendererB 
+        StandardXYItemRenderer rendererB
             = (StandardXYItemRenderer) p2.getRenderer(1);
         assertTrue(datasetA.hasListener(p2));
         assertTrue(domainAxisA.hasListener(p2));
@@ -817,7 +817,7 @@ public class XYPlotTests extends TestCase {
      * Some checks for the getLegendItems() method.
      */
     public void testGetLegendItems() {
-        // check the case where there is a secondary dataset that doesn't 
+        // check the case where there is a secondary dataset that doesn't
         // have a renderer (i.e. falls back to renderer 0)
         XYDataset d0 = createDataset1();
         XYDataset d1 = createDataset2();
@@ -829,7 +829,7 @@ public class XYPlotTests extends TestCase {
         LegendItemCollection items = plot.getLegendItems();
         assertEquals(2, items.getItemCount());
     }
-    
+
     /**
      * Creates a sample dataset.
      *
@@ -872,7 +872,7 @@ public class XYPlotTests extends TestCase {
         return collection;
 
     }
-    
+
     /**
      * A test for a bug where setting the renderer doesn't register the plot
      * as a RendererChangeListener.
@@ -888,7 +888,7 @@ public class XYPlotTests extends TestCase {
         renderer.setSeriesPaint(0, Color.black);
         assertTrue(listener.getEvent() != null);
     }
-    
+
     /**
      * Some checks for the removeAnnotation() method.
      */
@@ -903,15 +903,15 @@ public class XYPlotTests extends TestCase {
         plot.removeAnnotation(a2);
         XYTextAnnotation x = (XYTextAnnotation) plot.getAnnotations().get(0);
         assertEquals(x, a1);
-        
-        // now remove a3, but since a3.equals(a1), this will in fact remove 
+
+        // now remove a3, but since a3.equals(a1), this will in fact remove
         // a1...
         assertTrue(a1.equals(a3));
         plot.removeAnnotation(a3);  // actually removes a1
         x = (XYTextAnnotation) plot.getAnnotations().get(0);
-        assertEquals(x, a3); 
+        assertEquals(x, a3);
     }
-    
+
     /**
      * Some tests for the addDomainMarker() method(s).
      */
@@ -925,8 +925,8 @@ public class XYPlotTests extends TestCase {
         plot.clearDomainMarkers();
         listeners = Arrays.asList(m.getListeners(MarkerChangeListener.class));
         assertFalse(listeners.contains(plot));
-    }    
-    
+    }
+
     /**
      * Some tests for the addRangeMarker() method(s).
      */
@@ -941,7 +941,7 @@ public class XYPlotTests extends TestCase {
         listeners = Arrays.asList(m.getListeners(MarkerChangeListener.class));
         assertFalse(listeners.contains(plot));
     }
-    
+
     /**
      * A test for bug 1654215 (where a renderer is added to the plot without
      * a corresponding dataset and it throws an exception at drawing time).
@@ -954,7 +954,7 @@ public class XYPlotTests extends TestCase {
         plot.setRenderer(1, new XYLineAndShapeRenderer());
         boolean success = false;
         try {
-            BufferedImage image = new BufferedImage(200 , 100, 
+            BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
@@ -980,7 +980,7 @@ public class XYPlotTests extends TestCase {
         plot.setRenderer(null);
         boolean success = false;
         try {
-            BufferedImage image = new BufferedImage(200 , 100, 
+            BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
@@ -1006,7 +1006,7 @@ public class XYPlotTests extends TestCase {
                 dataset, PlotOrientation.VERTICAL, true, false, false);
         boolean success = false;
         try {
-            BufferedImage image = new BufferedImage(200 , 100, 
+            BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
@@ -1019,9 +1019,9 @@ public class XYPlotTests extends TestCase {
         }
         assertTrue(success);
     }
-    
+
     /**
-     * Check that removing a marker that isn't assigned to the plot returns 
+     * Check that removing a marker that isn't assigned to the plot returns
      * false.
      */
     public void testRemoveDomainMarker() {
@@ -1030,7 +1030,7 @@ public class XYPlotTests extends TestCase {
     }
 
     /**
-     * Check that removing a marker that isn't assigned to the plot returns 
+     * Check that removing a marker that isn't assigned to the plot returns
      * false.
      */
     public void testRemoveRangeMarker() {

@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * FastScatterPlotTests.java
  * -------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -87,55 +87,55 @@ public class FastScatterPlotTests extends TestCase {
      * Some checks for the equals() method.
      */
     public void testEquals() {
-        
+
         FastScatterPlot plot1 = new FastScatterPlot();
         FastScatterPlot plot2 = new FastScatterPlot();
-        assertTrue(plot1.equals(plot2));    
+        assertTrue(plot1.equals(plot2));
         assertTrue(plot2.equals(plot1));
-        
-        plot1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 
+
+        plot1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.yellow));
         assertFalse(plot1.equals(plot2));
-        plot2.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 
+        plot2.setPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.yellow));
         assertTrue(plot1.equals(plot2));
-        
+
         plot1.setDomainGridlinesVisible(false);
         assertFalse(plot1.equals(plot2));
         plot2.setDomainGridlinesVisible(false);
         assertTrue(plot1.equals(plot2));
-        
-        plot1.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue, 
+
+        plot1.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
                 3.0f, 4.0f, Color.yellow));
         assertFalse(plot1.equals(plot2));
-        plot2.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue, 
+        plot2.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
                 3.0f, 4.0f, Color.yellow));
         assertTrue(plot1.equals(plot2));
-        
+
         Stroke s = new BasicStroke(1.5f);
         plot1.setDomainGridlineStroke(s);
         assertFalse(plot1.equals(plot2));
         plot2.setDomainGridlineStroke(s);
         assertTrue(plot1.equals(plot2));
-        
+
         plot1.setRangeGridlinesVisible(false);
         assertFalse(plot1.equals(plot2));
         plot2.setRangeGridlinesVisible(false);
         assertTrue(plot1.equals(plot2));
-        
-        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green, 
+
+        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
                 3.0f, 4.0f, Color.yellow));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green, 
+        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
                 3.0f, 4.0f, Color.yellow));
         assertTrue(plot1.equals(plot2));
-        
+
         Stroke s2 = new BasicStroke(1.5f);
         plot1.setRangeGridlineStroke(s2);
         assertFalse(plot1.equals(plot2));
         plot2.setRangeGridlineStroke(s2);
         assertTrue(plot1.equals(plot2));
-        
+
     }
 
     /**
@@ -188,7 +188,7 @@ public class FastScatterPlotTests extends TestCase {
     }
 
     /**
-     * Draws the chart with a <code>null</code> info object to make sure that 
+     * Draws the chart with a <code>null</code> info object to make sure that
      * no exceptions are thrown.
      */
     public void testDrawWithNullInfo() {
@@ -198,10 +198,10 @@ public class FastScatterPlotTests extends TestCase {
 
             ValueAxis domainAxis = new NumberAxis("X");
             ValueAxis rangeAxis = new NumberAxis("Y");
-            FastScatterPlot plot = new FastScatterPlot(data, domainAxis, 
+            FastScatterPlot plot = new FastScatterPlot(data, domainAxis,
                     rangeAxis);
             JFreeChart chart = new JFreeChart(plot);
-            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
             success = true;
         }
