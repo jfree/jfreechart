@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------------------
  * DefaultMultiValueCategoryDataset.java
  * -------------------------------------
- * (C) Copyright 2007, by David Forslund and Contributors.
+ * (C) Copyright 2007, 2008, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -54,17 +54,17 @@ import org.jfree.util.PublicCloneable;
 
 /**
  * A category dataset that defines multiple values for each item.
- * 
+ *
  * @since 1.0.7
  */
-public class DefaultMultiValueCategoryDataset extends AbstractDataset 
+public class DefaultMultiValueCategoryDataset extends AbstractDataset
         implements MultiValueCategoryDataset, RangeInfo, PublicCloneable {
 
     /**
      * Storage for the data.
      */
     protected KeyedObjects2D data;
-    
+
     /**
      * The minimum range value.
      */
@@ -91,7 +91,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Adds a list of values to the dataset (<code>null</code> and Double.NaN 
+     * Adds a list of values to the dataset (<code>null</code> and Double.NaN
      * items are automatically removed) and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
@@ -100,7 +100,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * @param columnKey  the column key (<code>null</code> not permitted).
      */
     public void add(List values, Comparable rowKey, Comparable columnKey) {
-        
+
         if (values == null) {
             throw new IllegalArgumentException("Null 'values' argument.");
         }
@@ -124,28 +124,28 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
         }
         Collections.sort(vlist);
         this.data.addObject(vlist, rowKey, columnKey);
-        
+
         if (vlist.size() > 0) {
             double maxval = Double.NEGATIVE_INFINITY;
             double minval = Double.POSITIVE_INFINITY;
             for (int i = 0; i < vlist.size(); i++) {
                 Number n = (Number) vlist.get(i);
-                double v = n.doubleValue();   
+                double v = n.doubleValue();
                 minval = Math.min(minval, v);
                 maxval = Math.max(maxval, v);
             }
-        
+
             // update the cached range values...
             if (this.maximumRangeValue == null) {
                 this.maximumRangeValue = new Double(maxval);
-            } 
+            }
             else if (maxval > this.maximumRangeValue.doubleValue()) {
                 this.maximumRangeValue = new Double(maxval);
             }
 
             if (this.minimumRangeValue == null) {
                 this.minimumRangeValue = new Double(minval);
-            } 
+            }
             else if (minval < this.minimumRangeValue.doubleValue()) {
                 this.minimumRangeValue = new Double(minval);
             }
@@ -159,10 +159,10 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
     /**
      * Returns a list (possibly empty) of the values for the specified item.
      * The returned list should be unmodifiable.
-     * 
+     *
      * @param row  the row index (zero-based).
      * @param column   the column index (zero-based).
-     * 
+     *
      * @return The list of values.
      */
     public List getValues(int row, int column) {
@@ -178,14 +178,14 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
     /**
      * Returns a list (possibly empty) of the values for the specified item.
      * The returned list should be unmodifiable.
-     * 
+     *
      * @param rowKey  the row key (<code>null</code> not permitted).
      * @param columnKey  the column key (<code>null</code> not permitted).
      *
      * @return The list of values.
      */
     public List getValues(Comparable rowKey, Comparable columnKey) {
-        return Collections.unmodifiableList((List) this.data.getObject(rowKey, 
+        return Collections.unmodifiableList((List) this.data.getObject(rowKey,
                 columnKey));
     }
 
@@ -194,7 +194,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      *
      * @param row  the row key.
      * @param column  the column key.
-     * 
+     *
      * @return The average value.
      */
     public Number getValue(Comparable row, Comparable column) {
@@ -222,7 +222,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      *
      * @param row  the row index.
      * @param column  the column index.
-     * 
+     *
      * @return The average value.
      */
     public Number getValue(int row, int column) {
@@ -249,7 +249,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * Returns the column index for a given key.
      *
      * @param key  the column key.
-     * 
+     *
      * @return The column index.
      */
     public int getColumnIndex(Comparable key) {
@@ -260,7 +260,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * Returns a column key.
      *
      * @param column the column index (zero-based).
-     * 
+     *
      * @return The column key.
      */
     public Comparable getColumnKey(int column) {
@@ -280,7 +280,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * Returns the row index for a given key.
      *
      * @param key the row key.
-     * 
+     *
      * @return The row index.
      */
     public int getRowIndex(Comparable key) {
@@ -291,7 +291,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * Returns a row key.
      *
      * @param row the row index (zero-based).
-     * 
+     *
      * @return The row key.
      */
     public Comparable getRowKey(int row) {
@@ -330,7 +330,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      *
      * @param includeInterval a flag that determines whether or not the
      *                        y-interval is taken into account.
-     *                        
+     *
      * @return The minimum value.
      */
     public double getRangeLowerBound(boolean includeInterval) {
@@ -346,7 +346,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      *
      * @param includeInterval a flag that determines whether or not the
      *                        y-interval is taken into account.
-     *                        
+     *
      * @return The maximum value.
      */
     public double getRangeUpperBound(boolean includeInterval) {
@@ -367,12 +367,12 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
     public Range getRangeBounds(boolean includeInterval) {
         return this.rangeBounds;
     }
-    
+
     /**
      * Tests this dataset for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -382,20 +382,20 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
         if (!(obj instanceof DefaultMultiValueCategoryDataset)) {
             return false;
         }
-        DefaultMultiValueCategoryDataset that 
+        DefaultMultiValueCategoryDataset that
                 = (DefaultMultiValueCategoryDataset) obj;
         return this.data.equals(that.data);
     }
-    
+
     /**
      * Returns a clone of this instance.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException if the dataset cannot be cloned.
      */
     public Object clone() throws CloneNotSupportedException {
-        DefaultMultiValueCategoryDataset clone 
+        DefaultMultiValueCategoryDataset clone
                 = (DefaultMultiValueCategoryDataset) super.clone();
         clone.data = (KeyedObjects2D) this.data.clone();
         return clone;

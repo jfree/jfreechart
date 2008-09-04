@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------------------
  * DefaultStatisticalCategoryDataset.java
  * --------------------------------------
- * (C) Copyright 2002-2007, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2008, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -40,7 +40,7 @@
  * 28-Aug-2003 : Moved from org.jfree.data --> org.jfree.data.statistics (DG);
  * 06-Oct-2003 : Removed incorrect Javadoc text (DG);
  * 18-Nov-2004 : Updated for changes in RangeInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0 
+ * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
  *               release (DG);
  * 01-Feb-2005 : Changed minimumRangeValue and maximumRangeValue from Double
  *               to double (DG);
@@ -50,7 +50,7 @@
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  * 28-Sep-2007 : Fixed cloning bug (DG);
  * 02-Oct-2007 : Fixed bug updating cached range values (DG);
- * 
+ *
  */
 
 package org.jfree.data.statistics;
@@ -79,49 +79,49 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
 
     /** The row index for the minimum range value. */
     private int minimumRangeValueRow;
-    
+
     /** The column index for the minimum range value. */
     private int minimumRangeValueColumn;
-    
+
     /** The minimum range value including the standard deviation. */
     private double minimumRangeValueIncStdDev;
-    
-    /** 
-     * The row index for the minimum range value (including the standard 
-     * deviation). 
+
+    /**
+     * The row index for the minimum range value (including the standard
+     * deviation).
      */
     private int minimumRangeValueIncStdDevRow;
-    
-    /** 
-     * The column index for the minimum range value (including the standard 
-     * deviation). 
+
+    /**
+     * The column index for the minimum range value (including the standard
+     * deviation).
      */
     private int minimumRangeValueIncStdDevColumn;
-    
+
     /** The maximum range value. */
     private double maximumRangeValue;
-    
+
     /** The row index for the maximum range value. */
     private int maximumRangeValueRow;
-    
+
     /** The column index for the maximum range value. */
     private int maximumRangeValueColumn;
 
     /** The maximum range value including the standard deviation. */
     private double maximumRangeValueIncStdDev;
 
-    /** 
-     * The row index for the maximum range value (including the standard 
-     * deviation). 
+    /**
+     * The row index for the maximum range value (including the standard
+     * deviation).
      */
     private int maximumRangeValueIncStdDevRow;
-    
-    /** 
-     * The column index for the maximum range value (including the standard 
-     * deviation). 
+
+    /**
+     * The column index for the maximum range value (including the standard
+     * deviation).
      */
     private int maximumRangeValueIncStdDevColumn;
-    
+
     /**
      * Creates a new dataset.
      */
@@ -151,7 +151,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      */
     public Number getMeanValue(int row, int column) {
         Number result = null;
-        MeanAndStandardDeviation masd = (MeanAndStandardDeviation) 
+        MeanAndStandardDeviation masd = (MeanAndStandardDeviation)
                 this.data.getObject(row, column);
         if (masd != null) {
             result = masd.getMean();
@@ -195,7 +195,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      */
     public Number getMeanValue(Comparable rowKey, Comparable columnKey) {
         Number result = null;
-        MeanAndStandardDeviation masd = (MeanAndStandardDeviation) 
+        MeanAndStandardDeviation masd = (MeanAndStandardDeviation)
                 this.data.getObject(rowKey, columnKey);
         if (masd != null) {
             result = masd.getMean();
@@ -213,7 +213,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      */
     public Number getStdDevValue(int row, int column) {
         Number result = null;
-        MeanAndStandardDeviation masd = (MeanAndStandardDeviation) 
+        MeanAndStandardDeviation masd = (MeanAndStandardDeviation)
                 this.data.getObject(row, column);
         if (masd != null) {
             result = masd.getStandardDeviation();
@@ -231,7 +231,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      */
     public Number getStdDevValue(Comparable rowKey, Comparable columnKey) {
         Number result = null;
-        MeanAndStandardDeviation masd = (MeanAndStandardDeviation) 
+        MeanAndStandardDeviation masd = (MeanAndStandardDeviation)
                 this.data.getObject(rowKey, columnKey);
         if (masd != null) {
             result = masd.getStandardDeviation();
@@ -307,7 +307,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * Returns the number of rows in the table.
      *
      * @return The row count.
-     * 
+     *
      * @see #getColumnCount()
      */
     public int getRowCount() {
@@ -318,7 +318,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * Returns the number of columns in the table.
      *
      * @return The column count.
-     * 
+     *
      * @see #getRowCount()
      */
     public int getColumnCount() {
@@ -351,43 +351,43 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
         MeanAndStandardDeviation item = new MeanAndStandardDeviation(
                 mean, standardDeviation);
         this.data.addObject(item, rowKey, columnKey);
-        
+
         double m = Double.NaN;
         double sd = Double.NaN;
         if (mean != null) {
             m = mean.doubleValue();
         }
         if (standardDeviation != null) {
-            sd = standardDeviation.doubleValue();   
+            sd = standardDeviation.doubleValue();
         }
-        
+
         // update cached range values
         int r = this.data.getColumnIndex(columnKey);
         int c = this.data.getRowIndex(rowKey);
-        if ((r == this.maximumRangeValueRow && c 
-                == this.maximumRangeValueColumn) || (r 
-                == this.maximumRangeValueIncStdDevRow && c 
-                == this.maximumRangeValueIncStdDevColumn) || (r 
-                == this.minimumRangeValueRow && c 
-                == this.minimumRangeValueColumn) || (r 
-                == this.minimumRangeValueIncStdDevRow && c 
+        if ((r == this.maximumRangeValueRow && c
+                == this.maximumRangeValueColumn) || (r
+                == this.maximumRangeValueIncStdDevRow && c
+                == this.maximumRangeValueIncStdDevColumn) || (r
+                == this.minimumRangeValueRow && c
+                == this.minimumRangeValueColumn) || (r
+                == this.minimumRangeValueIncStdDevRow && c
                 == this.minimumRangeValueIncStdDevColumn)) {
-            
+
             // iterate over all data items and update mins and maxes
             updateBounds();
-        } 
+        }
         else {
             if (!Double.isNaN(m)) {
-                if (Double.isNaN(this.maximumRangeValue) 
+                if (Double.isNaN(this.maximumRangeValue)
                         || m > this.maximumRangeValue) {
                     this.maximumRangeValue = m;
                     this.maximumRangeValueRow = r;
                     this.maximumRangeValueColumn = c;
                 }
             }
-        
+
             if (!Double.isNaN(m + sd)) {
-                if (Double.isNaN(this.maximumRangeValueIncStdDev) 
+                if (Double.isNaN(this.maximumRangeValueIncStdDev)
                         || (m + sd) > this.maximumRangeValueIncStdDev) {
                     this.maximumRangeValueIncStdDev = m + sd;
                     this.maximumRangeValueIncStdDevRow = r;
@@ -396,7 +396,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
             }
 
             if (!Double.isNaN(m)) {
-                if (Double.isNaN(this.minimumRangeValue) 
+                if (Double.isNaN(this.minimumRangeValue)
                         || m < this.minimumRangeValue) {
                     this.minimumRangeValue = m;
                     this.minimumRangeValueRow = r;
@@ -405,7 +405,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
             }
 
             if (!Double.isNaN(m - sd)) {
-                if (Double.isNaN(this.minimumRangeValueIncStdDev) 
+                if (Double.isNaN(this.minimumRangeValueIncStdDev)
                         || (m - sd) < this.minimumRangeValueIncStdDev) {
                     this.minimumRangeValueIncStdDev = m - sd;
                     this.minimumRangeValueIncStdDevRow = r;
@@ -415,16 +415,16 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
         }
         fireDatasetChanged();
     }
-    
+
     /**
      * Removes an item from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
      * @param rowKey  the row key (<code>null</code> not permitted).
      * @param columnKey  the column key (<code>null</code> not permitted).
-     * 
+     *
      * @see #add(double, double, Comparable, Comparable)
-     * 
+     *
      * @since 1.0.7
      */
     public void remove(Comparable rowKey, Comparable columnKey) {
@@ -432,24 +432,24 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
         this.data.removeObject(rowKey, columnKey);
-        
+
         // if this cell held a maximum and/or minimum value, we'll need to
         // update the cached bounds...
-        if ((r == this.maximumRangeValueRow && c 
-                == this.maximumRangeValueColumn) || (r 
-                == this.maximumRangeValueIncStdDevRow && c 
-                == this.maximumRangeValueIncStdDevColumn) || (r 
-                == this.minimumRangeValueRow && c 
-                == this.minimumRangeValueColumn) || (r 
-                == this.minimumRangeValueIncStdDevRow && c 
+        if ((r == this.maximumRangeValueRow && c
+                == this.maximumRangeValueColumn) || (r
+                == this.maximumRangeValueIncStdDevRow && c
+                == this.maximumRangeValueIncStdDevColumn) || (r
+                == this.minimumRangeValueRow && c
+                == this.minimumRangeValueColumn) || (r
+                == this.minimumRangeValueIncStdDevRow && c
                 == this.minimumRangeValueIncStdDevColumn)) {
-            
+
             // iterate over all data items and update mins and maxes
             updateBounds();
-        } 
-        
+        }
+
         fireDatasetChanged();
-    }    
+    }
 
 
     /**
@@ -457,9 +457,9 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * to all registered listeners.
      *
      * @param rowIndex  the row index.
-     * 
+     *
      * @see #removeColumn(int)
-     * 
+     *
      * @since 1.0.7
      */
     public void removeRow(int rowIndex) {
@@ -473,9 +473,9 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * to all registered listeners.
      *
      * @param rowKey  the row key (<code>null</code> not permitted).
-     * 
+     *
      * @see #removeColumn(Comparable)
-     * 
+     *
      * @since 1.0.7
      */
     public void removeRow(Comparable rowKey) {
@@ -489,9 +489,9 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * to all registered listeners.
      *
      * @param columnIndex  the column index.
-     * 
+     *
      * @see #removeRow(int)
-     * 
+     *
      * @since 1.0.7
      */
     public void removeColumn(int columnIndex) {
@@ -505,9 +505,9 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * to all registered listeners.
      *
      * @param columnKey  the column key (<code>null</code> not permitted).
-     * 
+     *
      * @see #removeRow(Comparable)
-     * 
+     *
      * @since 1.0.7
      */
     public void removeColumn(Comparable columnKey) {
@@ -517,9 +517,9 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Clears all data from the dataset and sends a {@link DatasetChangeEvent} 
+     * Clears all data from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
-     * 
+     *
      * @since 1.0.7
      */
     public void clear() {
@@ -527,7 +527,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
         updateBounds();
         fireDatasetChanged();
     }
-    
+
     /**
      * Iterate over all the data items and update the cached bound values.
      */
@@ -544,23 +544,23 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
         this.minimumRangeValueIncStdDev = Double.NaN;
         this.minimumRangeValueIncStdDevRow = -1;
         this.minimumRangeValueIncStdDevColumn = -1;
-        
+
         int rowCount = this.data.getRowCount();
         int columnCount = this.data.getColumnCount();
         for (int r = 0; r < rowCount; r++) {
             for (int c = 0; c < columnCount; c++) {
                 double m = Double.NaN;
                 double sd = Double.NaN;
-                MeanAndStandardDeviation masd = (MeanAndStandardDeviation) 
+                MeanAndStandardDeviation masd = (MeanAndStandardDeviation)
                         this.data.getObject(r, c);
                 if (masd == null) {
                     continue;
                 }
                 m = masd.getMeanValue();
                 sd = masd.getStandardDeviationValue();
-                
+
                 if (!Double.isNaN(m)) {
-                    
+
                     // update the max value
                     if (Double.isNaN(this.maximumRangeValue)) {
                         this.maximumRangeValue = m;
@@ -574,7 +574,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
                             this.maximumRangeValueColumn = c;
                         }
                     }
-                    
+
                     // update the min value
                     if (Double.isNaN(this.minimumRangeValue)) {
                         this.minimumRangeValue = m;
@@ -588,7 +588,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
                             this.minimumRangeValueColumn = c;
                         }
                     }
-                    
+
                     if (!Double.isNaN(sd)) {
                         // update the max value
                         if (Double.isNaN(this.maximumRangeValueIncStdDev)) {
@@ -603,7 +603,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
                                 this.maximumRangeValueIncStdDevColumn = c;
                             }
                         }
-                        
+
                         // update the min value
                         if (Double.isNaN(this.minimumRangeValueIncStdDev)) {
                             this.minimumRangeValueIncStdDev = m - sd;
@@ -622,15 +622,15 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
             }
         }
     }
-    
+
     /**
      * Returns the minimum y-value in the dataset.
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
-     * 
+     *
      * @return The minimum value.
-     * 
+     *
      * @see #getRangeUpperBound(boolean)
      */
     public double getRangeLowerBound(boolean includeInterval) {
@@ -638,8 +638,8 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
             return this.minimumRangeValueIncStdDev;
         }
         else {
-            return this.minimumRangeValue;     
-        }  
+            return this.minimumRangeValue;
+        }
     }
 
     /**
@@ -647,9 +647,9 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
-     * 
+     *
      * @return The maximum value.
-     * 
+     *
      * @see #getRangeLowerBound(boolean)
      */
     public double getRangeUpperBound(boolean includeInterval) {
@@ -657,8 +657,8 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
             return this.maximumRangeValueIncStdDev;
         }
         else {
-            return this.maximumRangeValue;     
-        }  
+            return this.maximumRangeValue;
+        }
     }
 
     /**
@@ -666,22 +666,22 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
-     * 
+     *
      * @return The range.
      */
     public Range getRangeBounds(boolean includeInterval) {
         Range result = null;
         if (includeInterval) {
-            if (!Double.isNaN(this.minimumRangeValueIncStdDev) 
+            if (!Double.isNaN(this.minimumRangeValueIncStdDev)
                     && !Double.isNaN(this.maximumRangeValueIncStdDev)) {
-                result = new Range(this.minimumRangeValueIncStdDev, 
+                result = new Range(this.minimumRangeValueIncStdDev,
                         this.maximumRangeValueIncStdDev);
             }
         }
         else {
-            if (!Double.isNaN(this.minimumRangeValue) 
+            if (!Double.isNaN(this.minimumRangeValue)
                     && !Double.isNaN(this.maximumRangeValue)) {
-                result = new Range(this.minimumRangeValue, 
+                result = new Range(this.minimumRangeValue,
                         this.maximumRangeValue);
             }
         }
@@ -690,35 +690,35 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
 
     /**
      * Tests this instance for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
         if (obj == this) {
-            return true;   
+            return true;
         }
         if (!(obj instanceof DefaultStatisticalCategoryDataset)) {
-            return false;   
+            return false;
         }
-        DefaultStatisticalCategoryDataset that 
+        DefaultStatisticalCategoryDataset that
                 = (DefaultStatisticalCategoryDataset) obj;
         if (!this.data.equals(that.data)) {
-            return false;   
+            return false;
         }
         return true;
     }
-    
+
     /**
      * Returns a clone of this dataset.
-     * 
+     *
      * @return A clone of this dataset.
-     * 
+     *
      * @throws CloneNotSupportedException if cloning cannot be completed.
      */
     public Object clone() throws CloneNotSupportedException {
-        DefaultStatisticalCategoryDataset clone 
+        DefaultStatisticalCategoryDataset clone
                 = (DefaultStatisticalCategoryDataset) super.clone();
         clone.data = (KeyedObjects2D) this.data.clone();
         return clone;
