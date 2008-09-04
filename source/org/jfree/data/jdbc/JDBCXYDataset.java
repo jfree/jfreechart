@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * JDBCXYDataset.java
  * ------------------
- * (C) Copyright 2002-2006, by Bryan Scott and Contributors.
+ * (C) Copyright 2002-2008, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -37,36 +37,36 @@
  * Changes
  * -------
  * 14-Mar-2002 : Version 1 contributed by Bryan Scott (DG);
- * 19-Apr-2002 : Updated executeQuery, to close cursors and to improve support 
+ * 19-Apr-2002 : Updated executeQuery, to close cursors and to improve support
  *               for types.
- * 26-Apr-2002 : Renamed JdbcXYDataset to better fit in with the existing data 
+ * 26-Apr-2002 : Renamed JdbcXYDataset to better fit in with the existing data
  *               source conventions.
  * 26-Apr-2002 : Changed to extend AbstractDataset.
  * 13-Aug-2002 : Updated Javadoc comments and imports (DG);
  * 18-Sep-2002 : Updated to support BIGINT (BS);
  * 21-Jan-2003 : Renamed JdbcXYDataset --> JDBCXYDataset (DG);
  * 01-Jul-2003 : Added support to query whether a timeseries (BS);
- * 30-Jul-2003 : Added empty contructor and executeQuery(connection,string) 
+ * 30-Jul-2003 : Added empty contructor and executeQuery(connection,string)
  *               method (BS);
- * 24-Sep-2003 : Added a check to ensure at least two valid columns are 
- *               returned by the query in executeQuery as suggest in online 
+ * 24-Sep-2003 : Added a check to ensure at least two valid columns are
+ *               returned by the query in executeQuery as suggest in online
  *               forum by anonymous (BS);
- * 02-Dec-2003 : Throwing exceptions allows to handle errors, removed default 
- *               constructor, as without a connection, a query can never be 
+ * 02-Dec-2003 : Throwing exceptions allows to handle errors, removed default
+ *               constructor, as without a connection, a query can never be
  *               executed.
  * 16-Mar-2004 : Added check for null values (EA);
  * 05-May-2004 : Now extends AbstractXYDataset (DG);
- * 21-May-2004 : Implemented TableXYDataset, added support for SMALLINT and 
- *               fixed bug in code that determines the min and max values (see 
+ * 21-May-2004 : Implemented TableXYDataset, added support for SMALLINT and
+ *               fixed bug in code that determines the min and max values (see
  *               bug id 938138) (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
+ * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
  *               getYValue() (DG);
  * 18-Nov-2004 : Updated for changes in RangeInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0 
+ * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
  *               release (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 17-Oct-2006 : Deprecated unused methods - see bug 1578293 (DG);
- * 
+ *
  */
 
 package org.jfree.data.jdbc;
@@ -90,18 +90,16 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.util.Log;
 
 /**
- * This class provides an {@link XYDataset} implementation over a database 
- * JDBC result set.  The dataset is populated via a call to executeQuery with 
- * the string sql query.  The sql query must return at least two columns.  
+ * This class provides an {@link XYDataset} implementation over a database
+ * JDBC result set.  The dataset is populated via a call to executeQuery with
+ * the string sql query.  The sql query must return at least two columns.
  * The first column will be the x-axis and remaining columns y-axis values.
  * executeQuery can be called a number of times.
  *
  * The database connection is read-only and no write back facility exists.
  */
-public class JDBCXYDataset extends AbstractXYDataset 
-                           implements XYDataset, 
-                                      TableXYDataset, 
-                                      RangeInfo {
+public class JDBCXYDataset extends AbstractXYDataset
+        implements XYDataset, TableXYDataset, RangeInfo {
 
     /** The database connection. */
     private transient Connection connection;
@@ -122,7 +120,7 @@ public class JDBCXYDataset extends AbstractXYDataset
     private boolean isTimeSeries = false;
 
     /**
-     * Creates a new JDBCXYDataset (initially empty) with no database 
+     * Creates a new JDBCXYDataset (initially empty) with no database
      * connection.
      */
     private JDBCXYDataset() {
@@ -130,14 +128,14 @@ public class JDBCXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Creates a new dataset (initially empty) and establishes a new database 
+     * Creates a new dataset (initially empty) and establishes a new database
      * connection.
      *
      * @param  url  URL of the database connection.
      * @param  driverName  the database driver class name.
      * @param  user  the database user.
      * @param  password  the database user's password.
-     * 
+     *
      * @throws ClassNotFoundException if the driver cannot be found.
      * @throws SQLException if there is a problem connecting to the database.
      */
@@ -146,18 +144,18 @@ public class JDBCXYDataset extends AbstractXYDataset
                          String user,
                          String password)
         throws SQLException, ClassNotFoundException {
-        
+
         this();
         Class.forName(driverName);
         this.connection = DriverManager.getConnection(url, user, password);
     }
 
     /**
-     * Creates a new dataset (initially empty) using the specified database 
+     * Creates a new dataset (initially empty) using the specified database
      * connection.
      *
      * @param  con  the database connection.
-     * 
+     *
      * @throws SQLException if there is a problem connecting to the database.
      */
     public JDBCXYDataset(Connection con) throws SQLException {
@@ -166,12 +164,12 @@ public class JDBCXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Creates a new dataset using the specified database connection, and 
+     * Creates a new dataset using the specified database connection, and
      * populates it using data obtained with the supplied query.
      *
      * @param con  the connection.
      * @param query  the SQL query.
-     * 
+     *
      * @throws SQLException if there is a problem executing the query.
      */
     public JDBCXYDataset(Connection con, String query) throws SQLException {
@@ -180,9 +178,9 @@ public class JDBCXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns <code>true</code> if the dataset represents time series data, 
+     * Returns <code>true</code> if the dataset represents time series data,
      * and <code>false</code> otherwise.
-     * 
+     *
      * @return A boolean.
      */
     public boolean isTimeSeries() {
@@ -190,9 +188,9 @@ public class JDBCXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Sets a flag that indicates whether or not the data represents a time 
+     * Sets a flag that indicates whether or not the data represents a time
      * series.
-     * 
+     *
      * @param timeSeries  the new value of the flag.
      */
     public void setTimeSeries(boolean timeSeries) {
@@ -208,7 +206,7 @@ public class JDBCXYDataset extends AbstractXYDataset
      * applying an upper limit on how many rows can be retrieved successfully.
      *
      * @param  query  the query to be executed.
-     * 
+     *
      * @throws SQLException if there is a problem executing the query.
      */
     public void executeQuery(String query) throws SQLException {
@@ -217,7 +215,7 @@ public class JDBCXYDataset extends AbstractXYDataset
 
     /**
      * ExecuteQuery will attempt execute the query passed to it against the
-     * provided database connection.  If connection is null then no action is 
+     * provided database connection.  If connection is null then no action is
      * taken.
      *
      * The results from the query are extracted and cached locally, thus
@@ -225,10 +223,10 @@ public class JDBCXYDataset extends AbstractXYDataset
      *
      * @param  query  the query to be executed.
      * @param  con  the connection the query is to be executed against.
-     * 
+     *
      * @throws SQLException if there is a problem executing the query.
      */
-    public void executeQuery(Connection con, String query) 
+    public void executeQuery(Connection con, String query)
         throws SQLException {
 
         if (con == null) {
@@ -271,7 +269,7 @@ public class JDBCXYDataset extends AbstractXYDataset
                             Log.warn(
                                 "Unable to load column "
                                 + column + " (" + type + ","
-                                + metaData.getColumnClassName(column + 1) 
+                                + metaData.getColumnClassName(column + 1)
                                 + ")"
                             );
                             columnTypes[column] = Types.NULL;
@@ -297,7 +295,7 @@ public class JDBCXYDataset extends AbstractXYDataset
             int currentColumn = 0;
             for (int column = 1; column < numberOfColumns; column++) {
                 if (columnTypes[column] != Types.NULL) {
-                    this.columnNames[currentColumn] 
+                    this.columnNames[currentColumn]
                         = metaData.getColumnLabel(column + 1);
                     ++currentColumn;
                 }
@@ -384,7 +382,7 @@ public class JDBCXYDataset extends AbstractXYDataset
                         Object testValue = row.get(column);
                         if (testValue != null) {
                             double test = ((Number) testValue).doubleValue();
-                        
+
                             if (test < this.minValue) {
                                 this.minValue = test;
                             }
@@ -465,15 +463,15 @@ public class JDBCXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns the number of items in all series.  This method is defined by 
+     * Returns the number of items in all series.  This method is defined by
      * the {@link TableXYDataset} interface.
-     * 
+     *
      * @return The item count.
      */
     public int getItemCount() {
         return getItemCount(0);
     }
-    
+
     /**
      * Returns the number of series in the dataset.
      *
@@ -498,7 +496,7 @@ public class JDBCXYDataset extends AbstractXYDataset
      */
     public Comparable getSeriesKey(int seriesIndex) {
 
-        if ((seriesIndex < this.columnNames.length) 
+        if ((seriesIndex < this.columnNames.length)
                 && (this.columnNames[seriesIndex] != null)) {
             return this.columnNames[seriesIndex];
         }
@@ -553,19 +551,19 @@ public class JDBCXYDataset extends AbstractXYDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
-     * 
+     *
      * @return The minimum value.
      */
     public double getRangeLowerBound(boolean includeInterval) {
         return this.minValue;
     }
-    
+
     /**
      * Returns the maximum y-value in the dataset.
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
-     * 
+     *
      * @return The maximum value.
      */
     public double getRangeUpperBound(boolean includeInterval) {
@@ -577,7 +575,7 @@ public class JDBCXYDataset extends AbstractXYDataset
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
-     * 
+     *
      * @return The range.
      */
     public Range getRangeBounds(boolean includeInterval) {
