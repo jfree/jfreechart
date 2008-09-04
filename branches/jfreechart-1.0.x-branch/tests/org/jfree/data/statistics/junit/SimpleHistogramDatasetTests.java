@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------------
  * SimpleHistogramDatasetTests.java
  * --------------------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -85,13 +85,13 @@ public class SimpleHistogramDatasetTests extends TestCase {
         SimpleHistogramDataset d1 = new SimpleHistogramDataset("Dataset 1");
         SimpleHistogramDataset d2 = new SimpleHistogramDataset("Dataset 1");
         assertTrue(d1.equals(d2));
-        
+
         d1.addBin(new SimpleHistogramBin(1.0, 2.0));
         assertFalse(d1.equals(d2));
         d2.addBin(new SimpleHistogramBin(1.0, 2.0));
         assertTrue(d1.equals(d2));
     }
-    
+
     /**
      * Some checks for the clone() method.
      */
@@ -107,19 +107,19 @@ public class SimpleHistogramDatasetTests extends TestCase {
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
-        
+
         // check that clone is independent of the original
         d2.addBin(new SimpleHistogramBin(2.0, 3.0));
         d2.addObservation(2.3);
         assertFalse(d1.equals(d2));
     }
-    
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
         SimpleHistogramDataset d1 = new SimpleHistogramDataset("D1");
-        SimpleHistogramDataset d2 = null;        
+        SimpleHistogramDataset d2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -135,9 +135,9 @@ public class SimpleHistogramDatasetTests extends TestCase {
         }
         assertEquals(d1, d2);
     }
-    
+
     private static final double EPSILON = 0.0000000001;
-    
+
     /**
      * Some checks for the clearObservations() method.
      */
@@ -149,7 +149,7 @@ public class SimpleHistogramDatasetTests extends TestCase {
         d1.addObservation(0.5);
         assertEquals(1.0, d1.getYValue(0, 0), EPSILON);
     }
-    
+
     /**
      * Some checks for the removeAllBins() method.
      */
