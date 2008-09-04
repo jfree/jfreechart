@@ -27,7 +27,7 @@
  * -----------------------
  * ChartEditorManager.java
  * -----------------------
- * (C) Copyright 2005-2008,by Object Refinery Limited.
+ * (C) Copyright 2005-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   ;

@@ -123,12 +123,12 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
         this.gridStrokeSample = new StrokeSample(new BasicStroke(1.0f));
 
         this.availableStrokeSamples = new StrokeSample[3];
-        this.availableStrokeSamples[0]
-            = new StrokeSample(new BasicStroke(1.0f));
-        this.availableStrokeSamples[1]
-            = new StrokeSample(new BasicStroke(2.0f));
-        this.availableStrokeSamples[2]
-            = new StrokeSample(new BasicStroke(3.0f));
+        this.availableStrokeSamples[0] = new StrokeSample(
+                new BasicStroke(1.0f));
+        this.availableStrokeSamples[1] = new StrokeSample(
+                new BasicStroke(2.0f));
+        this.availableStrokeSamples[2] = new StrokeSample(
+                new BasicStroke(3.0f));
 
         JTabbedPane other = getOtherTabs();
 
