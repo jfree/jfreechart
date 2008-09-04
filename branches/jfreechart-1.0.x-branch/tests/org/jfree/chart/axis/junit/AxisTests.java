@@ -88,7 +88,7 @@ public class AxisTests extends TestCase {
             a2 = (CategoryAxis) a1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
