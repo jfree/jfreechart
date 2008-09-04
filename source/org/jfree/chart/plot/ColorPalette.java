@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------
  * ColorPalette.java
  * -----------------
- * (C) Copyright 2002-2007, by David M. O'Donnell and Contributors.
+ * (C) Copyright 2002-2008, by David M. O'Donnell and Contributors.
  *
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -54,16 +54,16 @@ import org.jfree.chart.renderer.xy.XYBlockRenderer;
 
 /**
  * Defines palette used by {@link ContourPlot}.
- * 
- * @deprecated This class is no longer supported (as of version 1.0.4).  If 
- *     you are creating contour plots, please try to use {@link XYPlot} and 
+ *
+ * @deprecated This class is no longer supported (as of version 1.0.4).  If
+ *     you are creating contour plots, please try to use {@link XYPlot} and
  *     {@link XYBlockRenderer}.
  */
 public abstract class ColorPalette implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -9029901853079622051L;
-    
+
     /** The min z-axis value. */
     protected double minZ = -1;
 
@@ -96,7 +96,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
 
     /** Constant for converting loge to log10. */
     protected static final double log10 = Math.log(10);
-    
+
     /**
      * Default contructor.
      */
@@ -112,7 +112,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
      * @return The color.
      */
     public Paint getColor(double value) {
-        int izV = (int) (253 * (value - this.minZ) 
+        int izV = (int) (253 * (value - this.minZ)
                     / (this.maxZ - this.minZ)) + 2;
         return new Color(this.r[izV], this.g[izV], this.b[izV]);
     }
@@ -143,7 +143,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
                 index = -1 * index - 2;
             }
 
-            if (index < 0) { // For the case were the first tick is greater 
+            if (index < 0) { // For the case were the first tick is greater
                              // than minZ
                 value = this.minZ;
             }
@@ -181,7 +181,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
         if (this.stepped) {
             int numSteps = this.tickValues.length;
             int steps = 256 / (numSteps - 1);
-            izV = steps * (int) (numSteps * (value - minZlog) 
+            izV = steps * (int) (numSteps * (value - minZlog)
                     / (maxZlog - minZlog)) + 2;
             //  izV = steps*numSteps*(int)((value/minZ)/(maxZlog-minZlog)) + 2;
         }
@@ -216,7 +216,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
     }
 
     /**
-     * Returns Paint by mapping a given value to a either a linear or common 
+     * Returns Paint by mapping a given value to a either a linear or common
      * log palette as controlled by the value logscale.
      *
      * @param value  the value.
@@ -388,11 +388,11 @@ public abstract class ColorPalette implements Cloneable, Serializable {
 
     /**
      * Tests an object for equality with this instance.
-     * 
+     *
      * @param o  the object to test.
-     * 
+     *
      * @return A boolean.
-     */    
+     */
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -424,8 +424,8 @@ public abstract class ColorPalette implements Cloneable, Serializable {
         if (!Arrays.equals(this.g, colorPalette.g)) {
             return false;
         }
-        if (this.paletteName != null 
-                ? !this.paletteName.equals(colorPalette.paletteName) 
+        if (this.paletteName != null
+                ? !this.paletteName.equals(colorPalette.paletteName)
                 : colorPalette.paletteName != null) {
             return false;
         }
@@ -441,7 +441,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
 
     /**
      * Returns a hash code.
-     * 
+     *
      * @return A hash code.
      */
     public int hashCode() {
@@ -453,7 +453,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
         result = 29 * result + (int) (temp ^ (temp >>> 32));
         result = 29 * result + (this.logscale ? 1 : 0);
         result = 29 * result + (this.inverse ? 1 : 0);
-        result = 29 * result 
+        result = 29 * result
                  + (this.paletteName != null ? this.paletteName.hashCode() : 0);
         result = 29 * result + (this.stepped ? 1 : 0);
         return result;
@@ -461,16 +461,16 @@ public abstract class ColorPalette implements Cloneable, Serializable {
 
     /**
      * Returns a clone of the palette.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException never.
      */
     public Object clone() throws CloneNotSupportedException {
-        
+
         ColorPalette clone = (ColorPalette) super.clone();
         return clone;
-        
+
     }
 
 }
