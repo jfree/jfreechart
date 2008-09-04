@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------
@@ -38,15 +38,15 @@
  * 07-Nov-2002 : Fixed errors reported by Checkstyle (DG);
  * 26-Mar-2003 : Implemented Serializable (DG);
  * 19-Aug-2003 : Implemented Cloneable (DG);
- * 08-Sep-2003 : Added internationalization via use of properties 
- *               resourceBundle (RFE 690236) (AL); 
+ * 08-Sep-2003 : Added internationalization via use of properties
+ *               resourceBundle (RFE 690236) (AL);
  * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
  * 12-Nov-2003 : Implemented zooming (DG);
  * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
  * 26-Jan-2004 : Added domain and range grid lines (DG);
  * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
  * 29-Sep-2004 : Removed hard-coded color (DG);
- * 04-Oct-2004 : Reworked equals() method and renamed ArrayUtils 
+ * 04-Oct-2004 : Reworked equals() method and renamed ArrayUtils
  *               --> ArrayUtilities (DG);
  * 12-Nov-2004 : Implemented the new Zoomable interface (DG);
  * 05-May-2005 : Updated draw() method parameters (DG);
@@ -97,15 +97,15 @@ import org.jfree.util.PaintUtilities;
 /**
  * A fast scatter plot.
  */
-public class FastScatterPlot extends Plot implements ValueAxisPlot, 
+public class FastScatterPlot extends Plot implements ValueAxisPlot,
         Zoomable, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7871545897358563521L;
-    
+
     /** The default grid line stroke. */
     public static final Stroke DEFAULT_GRIDLINE_STROKE = new BasicStroke(0.5f,
-            BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0.0f, new float[] 
+            BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0.0f, new float[]
             {2.0f, 2.0f}, 0.0f);
 
     /** The default grid line paint. */
@@ -148,28 +148,28 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     private transient Paint rangeGridlinePaint;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources = 
+    protected static ResourceBundle localizationResources =
             ResourceBundle.getBundle(
             "org.jfree.chart.plot.LocalizationBundle");
 
     /**
-     * Creates a new instance of <code>FastScatterPlot</code> with default 
+     * Creates a new instance of <code>FastScatterPlot</code> with default
      * axes.
      */
     public FastScatterPlot() {
-        this(null, new NumberAxis("X"), new NumberAxis("Y"));    
+        this(null, new NumberAxis("X"), new NumberAxis("Y"));
     }
-    
+
     /**
      * Creates a new fast scatter plot.
      * <p>
      * The data is an array of x, y values:  data[0][i] = x, data[1][i] = y.
-     * 
+     *
      * @param data  the data (<code>null</code> permitted).
      * @param domainAxis  the domain (x) axis (<code>null</code> not permitted).
      * @param rangeAxis  the range (y) axis (<code>null</code> not permitted).
      */
-    public FastScatterPlot(float[][] data, 
+    public FastScatterPlot(float[][] data,
                            ValueAxis domainAxis, ValueAxis rangeAxis) {
 
         super();
@@ -179,7 +179,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
         if (rangeAxis == null) {
             throw new IllegalArgumentException("Null 'rangeAxis' argument.");
         }
-        
+
         this.data = data;
         this.xDataRange = calculateXDataRange(data);
         this.yDataRange = calculateYDataRange(data);
@@ -191,7 +191,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
         this.rangeAxis.addChangeListener(this);
 
         this.paint = Color.red;
-        
+
         this.domainGridlinesVisible = true;
         this.domainGridlinePaint = FastScatterPlot.DEFAULT_GRIDLINE_PAINT;
         this.domainGridlineStroke = FastScatterPlot.DEFAULT_GRIDLINE_STROKE;
@@ -199,7 +199,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
         this.rangeGridlinesVisible = true;
         this.rangeGridlinePaint = FastScatterPlot.DEFAULT_GRIDLINE_PAINT;
         this.rangeGridlineStroke = FastScatterPlot.DEFAULT_GRIDLINE_STROKE;
-    
+
     }
 
     /**
@@ -213,56 +213,56 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
 
     /**
      * Returns the data array used by the plot.
-     * 
+     *
      * @return The data array (possibly <code>null</code>).
-     * 
+     *
      * @see #setData(float[][])
      */
     public float[][] getData() {
-        return this.data;   
+        return this.data;
     }
-    
+
     /**
      * Sets the data array used by the plot and sends a {@link PlotChangeEvent}
      * to all registered listeners.
-     * 
+     *
      * @param data  the data array (<code>null</code> permitted).
-     * 
+     *
      * @see #getData()
      */
     public void setData(float[][] data) {
         this.data = data;
         fireChangeEvent();
     }
-    
+
     /**
      * Returns the orientation of the plot.
-     * 
+     *
      * @return The orientation (always {@link PlotOrientation#VERTICAL}).
      */
     public PlotOrientation getOrientation() {
-        return PlotOrientation.VERTICAL;    
+        return PlotOrientation.VERTICAL;
     }
-    
+
     /**
      * Returns the domain axis for the plot.
      *
      * @return The domain axis (never <code>null</code>).
-     * 
+     *
      * @see #setDomainAxis(ValueAxis)
      */
     public ValueAxis getDomainAxis() {
         return this.domainAxis;
     }
-    
+
     /**
-     * Sets the domain axis and sends a {@link PlotChangeEvent} to all 
+     * Sets the domain axis and sends a {@link PlotChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param axis  the axis (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.3
-     * 
+     *
      * @see #getDomainAxis()
      */
     public void setDomainAxis(ValueAxis axis) {
@@ -277,7 +277,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * Returns the range axis for the plot.
      *
      * @return The range axis (never <code>null</code>).
-     * 
+     *
      * @see #setRangeAxis(ValueAxis)
      */
     public ValueAxis getRangeAxis() {
@@ -285,13 +285,13 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the range axis and sends a {@link PlotChangeEvent} to all 
+     * Sets the range axis and sends a {@link PlotChangeEvent} to all
      * registered listeners.
-     * 
+     *
      * @param axis  the axis (<code>null</code> not permitted).
-     * 
+     *
      * @since 1.0.3
-     * 
+     *
      * @see #getRangeAxis()
      */
     public void setRangeAxis(ValueAxis axis) {
@@ -303,11 +303,11 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns the paint used to plot data points.  The default is 
+     * Returns the paint used to plot data points.  The default is
      * <code>Color.red</code>.
      *
      * @return The paint.
-     * 
+     *
      * @see #setPaint(Paint)
      */
     public Paint getPaint() {
@@ -315,11 +315,11 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the color for the data points and sends a {@link PlotChangeEvent} 
+     * Sets the color for the data points and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
@@ -331,11 +331,11 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns <code>true</code> if the domain gridlines are visible, and 
+     * Returns <code>true</code> if the domain gridlines are visible, and
      * <code>false<code> otherwise.
      *
      * @return <code>true</code> or <code>false</code>.
-     * 
+     *
      * @see #setDomainGridlinesVisible(boolean)
      * @see #setDomainGridlinePaint(Paint)
      */
@@ -344,12 +344,12 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the flag that controls whether or not the domain grid-lines are 
-     * visible.  If the flag value is changed, a {@link PlotChangeEvent} is 
+     * Sets the flag that controls whether or not the domain grid-lines are
+     * visible.  If the flag value is changed, a {@link PlotChangeEvent} is
      * sent to all registered listeners.
      *
      * @param visible  the new value of the flag.
-     * 
+     *
      * @see #getDomainGridlinePaint()
      */
     public void setDomainGridlinesVisible(boolean visible) {
@@ -360,11 +360,11 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns the stroke for the grid-lines (if any) plotted against the 
+     * Returns the stroke for the grid-lines (if any) plotted against the
      * domain axis.
      *
      * @return The stroke (never <code>null</code>).
-     * 
+     *
      * @see #setDomainGridlineStroke(Stroke)
      */
     public Stroke getDomainGridlineStroke() {
@@ -376,7 +376,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param stroke  the stroke (<code>null</code> not permitted).
-     * 
+     *
      * @see #getDomainGridlineStroke()
      */
     public void setDomainGridlineStroke(Stroke stroke) {
@@ -392,7 +392,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * axis.
      *
      * @return The paint (never <code>null</code>).
-     * 
+     *
      * @see #setDomainGridlinePaint(Paint)
      */
     public Paint getDomainGridlinePaint() {
@@ -404,7 +404,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getDomainGridlinePaint()
      */
     public void setDomainGridlinePaint(Paint paint) {
@@ -416,11 +416,11 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns <code>true</code> if the range axis grid is visible, and 
+     * Returns <code>true</code> if the range axis grid is visible, and
      * <code>false<code> otherwise.
      *
      * @return <code>true</code> or <code>false</code>.
-     * 
+     *
      * @see #setRangeGridlinesVisible(boolean)
      */
     public boolean isRangeGridlinesVisible() {
@@ -429,11 +429,11 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
 
     /**
      * Sets the flag that controls whether or not the range axis grid lines are
-     * visible.  If the flag value is changed, a {@link PlotChangeEvent} is 
+     * visible.  If the flag value is changed, a {@link PlotChangeEvent} is
      * sent to all registered listeners.
      *
      * @param visible  the new value of the flag.
-     * 
+     *
      * @see #isRangeGridlinesVisible()
      */
     public void setRangeGridlinesVisible(boolean visible) {
@@ -448,7 +448,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * axis.
      *
      * @return The stroke (never <code>null</code>).
-     * 
+     *
      * @see #setRangeGridlineStroke(Stroke)
      */
     public Stroke getRangeGridlineStroke() {
@@ -456,11 +456,11 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the stroke for the grid lines plotted against the range axis and 
+     * Sets the stroke for the grid lines plotted against the range axis and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param stroke  the stroke (<code>null</code> permitted).
-     * 
+     *
      * @see #getRangeGridlineStroke()
      */
     public void setRangeGridlineStroke(Stroke stroke) {
@@ -472,11 +472,11 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns the paint for the grid lines (if any) plotted against the range 
+     * Returns the paint for the grid lines (if any) plotted against the range
      * axis.
      *
      * @return The paint (never <code>null</code>).
-     * 
+     *
      * @see #setRangeGridlinePaint(Paint)
      */
     public Paint getRangeGridlinePaint() {
@@ -484,11 +484,11 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the paint for the grid lines plotted against the range axis and 
+     * Sets the paint for the grid lines plotted against the range axis and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
-     * 
+     *
      * @see #getRangeGridlinePaint()
      */
     public void setRangeGridlinePaint(Paint paint) {
@@ -500,7 +500,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Draws the fast scatter plot on a Java 2D graphics device (such as the 
+     * Draws the fast scatter plot on a Java 2D graphics device (such as the
      * screen or a printer).
      *
      * @param g2  the graphics device.
@@ -508,7 +508,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      *                   should be drawn.
      * @param anchor  the anchor point (<code>null</code> permitted).
      * @param parentState  the state from the parent plot (ignored).
-     * @param info  collects chart drawing information (<code>null</code> 
+     * @param info  collects chart drawing information (<code>null</code>
      *              permitted).
      */
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
@@ -525,9 +525,9 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
         insets.trim(area);
 
         AxisSpace space = new AxisSpace();
-        space = this.domainAxis.reserveSpace(g2, this, area, 
+        space = this.domainAxis.reserveSpace(g2, this, area,
                 RectangleEdge.BOTTOM, space);
-        space = this.rangeAxis.reserveSpace(g2, this, area, RectangleEdge.LEFT, 
+        space = this.rangeAxis.reserveSpace(g2, this, area, RectangleEdge.LEFT,
                 space);
         Rectangle2D dataArea = space.shrink(area, null);
 
@@ -538,18 +538,18 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
         // draw the plot background and axes...
         drawBackground(g2, dataArea);
 
-        AxisState domainAxisState = this.domainAxis.draw(g2, 
+        AxisState domainAxisState = this.domainAxis.draw(g2,
                 dataArea.getMaxY(), area, dataArea, RectangleEdge.BOTTOM, info);
-        AxisState rangeAxisState = this.rangeAxis.draw(g2, dataArea.getMinX(), 
+        AxisState rangeAxisState = this.rangeAxis.draw(g2, dataArea.getMinX(),
                 area, dataArea, RectangleEdge.LEFT, info);
         drawDomainGridlines(g2, dataArea, domainAxisState.getTicks());
         drawRangeGridlines(g2, dataArea, rangeAxisState.getTicks());
-        
+
         Shape originalClip = g2.getClip();
         Composite originalComposite = g2.getComposite();
 
         g2.clip(dataArea);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
                 getForegroundAlpha()));
 
         render(g2, dataArea, info, null);
@@ -561,8 +561,8 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Draws a representation of the data within the dataArea region.  The 
-     * <code>info</code> and <code>crosshairState</code> arguments may be 
+     * Draws a representation of the data within the dataArea region.  The
+     * <code>info</code> and <code>crosshairState</code> arguments may be
      * <code>null</code>.
      *
      * @param g2  the graphics device.
@@ -573,16 +573,16 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      */
     public void render(Graphics2D g2, Rectangle2D dataArea,
                        PlotRenderingInfo info, CrosshairState crosshairState) {
-    
- 
+
+
         //long start = System.currentTimeMillis();
         //System.out.println("Start: " + start);
         g2.setPaint(this.paint);
 
         // if the axes use a linear scale, you can uncomment the code below and
-        // switch to the alternative transX/transY calculation inside the loop 
+        // switch to the alternative transX/transY calculation inside the loop
         // that follows - it is a little bit faster then.
-        // 
+        //
         // int xx = (int) dataArea.getMinX();
         // int ww = (int) dataArea.getWidth();
         // int yy = (int) dataArea.getMaxY();
@@ -596,12 +596,12 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             for (int i = 0; i < this.data[0].length; i++) {
                 float x = this.data[0][i];
                 float y = this.data[1][i];
-                
+
                 //int transX = (int) (xx + ww * (x - domainMin) / domainLength);
-                //int transY = (int) (yy - hh * (y - rangeMin) / rangeLength); 
-                int transX = (int) this.domainAxis.valueToJava2D(x, dataArea, 
+                //int transY = (int) (yy - hh * (y - rangeMin) / rangeLength);
+                int transX = (int) this.domainAxis.valueToJava2D(x, dataArea,
                         RectangleEdge.BOTTOM);
-                int transY = (int) this.rangeAxis.valueToJava2D(y, dataArea, 
+                int transY = (int) this.rangeAxis.valueToJava2D(y, dataArea,
                         RectangleEdge.LEFT);
                 g2.fillRect(transX, transY, 1, 1);
             }
@@ -619,7 +619,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * @param dataArea  the data area.
      * @param ticks  the ticks.
      */
-    protected void drawDomainGridlines(Graphics2D g2, Rectangle2D dataArea, 
+    protected void drawDomainGridlines(Graphics2D g2, Rectangle2D dataArea,
                                        List ticks) {
 
         // draw the domain grid lines, if the flag says they're visible...
@@ -627,17 +627,17 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             Iterator iterator = ticks.iterator();
             while (iterator.hasNext()) {
                 ValueTick tick = (ValueTick) iterator.next();
-                double v = this.domainAxis.valueToJava2D(tick.getValue(), 
+                double v = this.domainAxis.valueToJava2D(tick.getValue(),
                         dataArea, RectangleEdge.BOTTOM);
-                Line2D line = new Line2D.Double(v, dataArea.getMinY(), v, 
+                Line2D line = new Line2D.Double(v, dataArea.getMinY(), v,
                         dataArea.getMaxY());
                 g2.setPaint(getDomainGridlinePaint());
                 g2.setStroke(getDomainGridlineStroke());
-                g2.draw(line);                
+                g2.draw(line);
             }
         }
     }
-    
+
     /**
      * Draws the gridlines for the plot, if they are visible.
      *
@@ -645,7 +645,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * @param dataArea  the data area.
      * @param ticks  the ticks.
      */
-    protected void drawRangeGridlines(Graphics2D g2, Rectangle2D dataArea, 
+    protected void drawRangeGridlines(Graphics2D g2, Rectangle2D dataArea,
                                       List ticks) {
 
         // draw the range grid lines, if the flag says they're visible...
@@ -653,13 +653,13 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             Iterator iterator = ticks.iterator();
             while (iterator.hasNext()) {
                 ValueTick tick = (ValueTick) iterator.next();
-                double v = this.rangeAxis.valueToJava2D(tick.getValue(), 
+                double v = this.rangeAxis.valueToJava2D(tick.getValue(),
                         dataArea, RectangleEdge.LEFT);
-                Line2D line = new Line2D.Double(dataArea.getMinX(), v, 
+                Line2D line = new Line2D.Double(dataArea.getMinX(), v,
                         dataArea.getMaxX(), v);
                 g2.setPaint(getRangeGridlinePaint());
                 g2.setStroke(getRangeGridlineStroke());
-                g2.draw(line);                
+                g2.draw(line);
             }
         }
 
@@ -693,9 +693,9 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * @return The range.
      */
     private Range calculateXDataRange(float[][] data) {
-        
+
         Range result = null;
-        
+
         if (data != null) {
             float lowest = Float.POSITIVE_INFINITY;
             float highest = Float.NEGATIVE_INFINITY;
@@ -712,9 +712,9 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
                 result = new Range(lowest, highest);
             }
         }
-        
+
         return result;
-        
+
     }
 
     /**
@@ -725,9 +725,9 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * @return The range.
      */
     private Range calculateYDataRange(float[][] data) {
-        
+
         Range result = null;
-        
+
         if (data != null) {
             float lowest = Float.POSITIVE_INFINITY;
             float highest = Float.NEGATIVE_INFINITY;
@@ -745,7 +745,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             }
         }
         return result;
-        
+
     }
 
     /**
@@ -755,11 +755,11 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * @param info  the plot rendering info.
      * @param source  the source point.
      */
-    public void zoomDomainAxes(double factor, PlotRenderingInfo info, 
+    public void zoomDomainAxes(double factor, PlotRenderingInfo info,
                                Point2D source) {
         this.domainAxis.resizeRange(factor);
     }
-    
+
     /**
      * Multiplies the range on the domain axis by the specified factor.
      *
@@ -767,39 +767,39 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * @param info  the plot rendering info.
      * @param source  the source point (in Java2D space).
      * @param useAnchor  use source point as zoom anchor?
-     * 
+     *
      * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)
-     * 
+     *
      * @since 1.0.7
      */
     public void zoomDomainAxes(double factor, PlotRenderingInfo info,
                                Point2D source, boolean useAnchor) {
-                
+
         if (useAnchor) {
             // get the source coordinate - this plot has always a VERTICAL
             // orientation
             double sourceX = source.getX();
-            double anchorX = this.domainAxis.java2DToValue(sourceX, 
+            double anchorX = this.domainAxis.java2DToValue(sourceX,
                     info.getDataArea(), RectangleEdge.BOTTOM);
             this.domainAxis.resizeRange(factor, anchorX);
         }
         else {
             this.domainAxis.resizeRange(factor);
         }
-        
+
     }
 
     /**
      * Zooms in on the domain axes.
-     * 
-     * @param lowerPercent  the new lower bound as a percentage of the current 
+     *
+     * @param lowerPercent  the new lower bound as a percentage of the current
      *                      range.
      * @param upperPercent  the new upper bound as a percentage of the current
      *                      range.
      * @param info  the plot rendering info.
      * @param source  the source point.
      */
-    public void zoomDomainAxes(double lowerPercent, double upperPercent, 
+    public void zoomDomainAxes(double lowerPercent, double upperPercent,
                                PlotRenderingInfo info, Point2D source) {
         this.domainAxis.zoomRange(lowerPercent, upperPercent);
     }
@@ -823,34 +823,34 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * @param info  the plot rendering info.
      * @param source  the source point (in Java2D space).
      * @param useAnchor  use source point as zoom anchor?
-     * 
+     *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)
-     * 
+     *
      * @since 1.0.7
      */
     public void zoomRangeAxes(double factor, PlotRenderingInfo info,
                               Point2D source, boolean useAnchor) {
-                
+
         if (useAnchor) {
             // get the source coordinate - this plot has always a VERTICAL
             // orientation
             double sourceX = source.getX();
-            double anchorX = this.rangeAxis.java2DToValue(sourceX, 
+            double anchorX = this.rangeAxis.java2DToValue(sourceX,
                     info.getDataArea(), RectangleEdge.LEFT);
             this.rangeAxis.resizeRange(factor, anchorX);
         }
         else {
             this.rangeAxis.resizeRange(factor);
         }
-        
+
     }
-    
+
     /**
      * Zooms in on the range axes.
-     * 
-     * @param lowerPercent  the new lower bound as a percentage of the current 
+     *
+     * @param lowerPercent  the new lower bound as a percentage of the current
      *                      range.
-     * @param upperPercent  the new upper bound as a percentage of the current 
+     * @param upperPercent  the new upper bound as a percentage of the current
      *                      range.
      * @param info  the plot rendering info.
      * @param source  the source point.
@@ -862,16 +862,16 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
 
     /**
      * Returns <code>true</code>.
-     * 
+     *
      * @return A boolean.
      */
     public boolean isDomainZoomable() {
         return true;
     }
-    
+
     /**
      * Returns <code>true</code>.
-     * 
+     *
      * @return A boolean.
      */
     public boolean isRangeZoomable() {
@@ -880,9 +880,9 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
 
     /**
      * Tests an object for equality with this instance.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -911,58 +911,58 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
         if (this.domainGridlinesVisible != that.domainGridlinesVisible) {
             return false;
         }
-        if (!PaintUtilities.equal(this.domainGridlinePaint, 
+        if (!PaintUtilities.equal(this.domainGridlinePaint,
                 that.domainGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.domainGridlineStroke, 
+        if (!ObjectUtilities.equal(this.domainGridlineStroke,
                 that.domainGridlineStroke)) {
             return false;
-        }  
+        }
         if (!this.rangeGridlinesVisible == that.rangeGridlinesVisible) {
             return false;
         }
-        if (!PaintUtilities.equal(this.rangeGridlinePaint, 
+        if (!PaintUtilities.equal(this.rangeGridlinePaint,
                 that.rangeGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.rangeGridlineStroke, 
+        if (!ObjectUtilities.equal(this.rangeGridlineStroke,
                 that.rangeGridlineStroke)) {
             return false;
-        }              
+        }
         return true;
     }
-    
+
     /**
      * Returns a clone of the plot.
-     * 
+     *
      * @return A clone.
-     * 
-     * @throws CloneNotSupportedException if some component of the plot does 
+     *
+     * @throws CloneNotSupportedException if some component of the plot does
      *                                    not support cloning.
      */
     public Object clone() throws CloneNotSupportedException {
-    
-        FastScatterPlot clone = (FastScatterPlot) super.clone();    
-        
+
+        FastScatterPlot clone = (FastScatterPlot) super.clone();
+
         if (this.data != null) {
-            clone.data = ArrayUtilities.clone(this.data);    
+            clone.data = ArrayUtilities.clone(this.data);
         }
-        
+
         if (this.domainAxis != null) {
             clone.domainAxis = (ValueAxis) this.domainAxis.clone();
             clone.domainAxis.setPlot(clone);
             clone.domainAxis.addChangeListener(clone);
         }
-        
+
         if (this.rangeAxis != null) {
             clone.rangeAxis = (ValueAxis) this.rangeAxis.clone();
             clone.rangeAxis.setPlot(clone);
             clone.rangeAxis.addChangeListener(clone);
         }
-            
+
         return clone;
-        
+
     }
 
     /**
@@ -989,7 +989,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
 
@@ -1008,5 +1008,5 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             this.rangeAxis.addChangeListener(this);
         }
     }
-    
+
 }

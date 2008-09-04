@@ -2,26 +2,26 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------
@@ -29,7 +29,7 @@
  * -----------------
  * A plot that displays a single value in a thermometer type display.
  *
- * (C) Copyright 2000-2007, Australian Antarctic Division and Contributors.
+ * (C) Copyright 2000-2008, Australian Antarctic Division and Contributors.
  *
  * Original Author:  Bryan Scott.
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -71,7 +71,7 @@ public class JThermometer extends JPanel implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 1079905665515589820L;
-    
+
     /** The dataset. */
     private DefaultValueDataset data;
 
@@ -92,7 +92,7 @@ public class JThermometer extends JPanel implements Serializable {
         this.plot.setInsets(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
         this.data = new DefaultValueDataset();
         this.plot.setDataset(this.data);
-        this.chart = new JFreeChart(null, JFreeChart.DEFAULT_TITLE_FONT, 
+        this.chart = new JFreeChart(null, JFreeChart.DEFAULT_TITLE_FONT,
                 this.plot, false);
         this.panel = new ChartPanel(this.chart);
         add(this.panel, "Panel");
@@ -153,7 +153,7 @@ public class JThermometer extends JPanel implements Serializable {
      * @param displayLow  the low value.
      * @param displayHigh  the high value.
      */
-    public void setSubrangeInfo(int range, double displayLow, 
+    public void setSubrangeInfo(int range, double displayLow,
                                 double displayHigh) {
         this.plot.setSubrangeInfo(range, displayLow, displayHigh);
     }
@@ -171,7 +171,7 @@ public class JThermometer extends JPanel implements Serializable {
                              double rangeLow, double rangeHigh,
                              double displayLow, double displayHigh) {
 
-        this.plot.setSubrangeInfo(range, rangeLow, rangeHigh, displayLow, 
+        this.plot.setSubrangeInfo(range, rangeLow, rangeHigh, displayLow,
                 displayHigh);
 
     }
@@ -357,7 +357,7 @@ public class JThermometer extends JPanel implements Serializable {
 
     /**
      * Sets the location for the axis.
-     * 
+     *
      * @param location  the location.
      */
     public void setShowAxisLocation(int location) {
@@ -366,7 +366,7 @@ public class JThermometer extends JPanel implements Serializable {
 
     /**
      * Returns the location for the axis.
-     * 
+     *
      * @return The location.
      */
     public int getShowAxisLocation() {
