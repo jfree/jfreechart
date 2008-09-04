@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * BarRenderer3D.java
  * ------------------
- * (C) Copyright 2001-2007, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2001-2008, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
