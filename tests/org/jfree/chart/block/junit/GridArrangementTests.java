@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------
  * GridArrangementTests.java
  * -------------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -63,7 +63,7 @@ import org.jfree.ui.Size2D;
  * Tests for the {@link GridArrangement} class.
  */
 public class GridArrangementTests extends TestCase {
-    
+
     /**
      * Returns the tests as a test suite.
      *
@@ -81,7 +81,7 @@ public class GridArrangementTests extends TestCase {
     public GridArrangementTests(String name) {
         super(name);
     }
-    
+
     /**
      * Confirm that the equals() method can distinguish all the required fields.
      */
@@ -99,7 +99,7 @@ public class GridArrangementTests extends TestCase {
         f1 = new GridArrangement(33, 44);
         assertFalse(f1.equals(f2));
         f2 = new GridArrangement(33, 44);
-        assertTrue(f1.equals(f2));   
+        assertTrue(f1.equals(f2));
     }
 
     /**
@@ -133,9 +133,9 @@ public class GridArrangementTests extends TestCase {
         }
         assertEquals(f1, f2);
     }
-    
+
     private static final double EPSILON = 0.000000001;
-    
+
     /**
      * Test arrangement with no constraints.
      */
@@ -145,14 +145,14 @@ public class GridArrangementTests extends TestCase {
         assertEquals(90.0, s.width, EPSILON);
         assertEquals(33.0, s.height, EPSILON);
     }
-   
+
     /**
      * Test arrangement with no constraints.
      */
     public void testFN() {
         BlockContainer c = createTestContainer1();
         RectangleConstraint constraint = new RectangleConstraint(
-            100.0, null, LengthConstraintType.FIXED, 
+            100.0, null, LengthConstraintType.FIXED,
             0.0, null, LengthConstraintType.NONE
         );
         Size2D s = c.arrange(null, constraint);
@@ -170,5 +170,5 @@ public class GridArrangementTests extends TestCase {
         result.add(b3);
         return result;
     }
-    
+
 }

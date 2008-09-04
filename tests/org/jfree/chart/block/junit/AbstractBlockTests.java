@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -----------------------
  * AbstractBlockTests.java
  * -----------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -62,7 +62,7 @@ import org.jfree.ui.RectangleInsets;
  * Tests for the {@link AbstractBlock} class.
  */
 public class AbstractBlockTests extends TestCase {
-    
+
     /**
      * Returns the tests as a test suite.
      *
@@ -80,7 +80,7 @@ public class AbstractBlockTests extends TestCase {
     public AbstractBlockTests(String name) {
         super(name);
     }
-    
+
     /**
      * Confirm that the equals() method can distinguish all the required fields.
      */
@@ -89,42 +89,42 @@ public class AbstractBlockTests extends TestCase {
         EmptyBlock b2 = new EmptyBlock(1.0, 2.0);
         assertTrue(b1.equals(b2));
         assertTrue(b2.equals(b2));
-        
+
         b1.setID("Test");
         assertFalse(b1.equals(b2));
         b2.setID("Test");
         assertTrue(b1.equals(b2));
-        
+
         b1.setMargin(new RectangleInsets(1.0, 2.0, 3.0, 4.0));
         assertFalse(b1.equals(b2));
         b2.setMargin(new RectangleInsets(1.0, 2.0, 3.0, 4.0));
         assertTrue(b1.equals(b2));
-        
+
         b1.setFrame(new BlockBorder(Color.red));
         assertFalse(b1.equals(b2));
         b2.setFrame(new BlockBorder(Color.red));
         assertTrue(b1.equals(b2));
-        
+
         b1.setPadding(new RectangleInsets(2.0, 4.0, 6.0, 8.0));
         assertFalse(b1.equals(b2));
         b2.setPadding(new RectangleInsets(2.0, 4.0, 6.0, 8.0));
         assertTrue(b1.equals(b2));
-        
+
         b1.setWidth(1.23);
         assertFalse(b1.equals(b2));
         b2.setWidth(1.23);
         assertTrue(b1.equals(b2));
-        
+
         b1.setHeight(4.56);
         assertFalse(b1.equals(b2));
         b2.setHeight(4.56);
         assertTrue(b1.equals(b2));
-        
+
         b1.setBounds(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         assertFalse(b1.equals(b2));
         b2.setBounds(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         assertTrue(b1.equals(b2));
-        
+
         b1 = new EmptyBlock(1.1, 2.0);
         assertFalse(b1.equals(b2));
         b2 = new EmptyBlock(1.1, 2.0);
@@ -133,7 +133,7 @@ public class AbstractBlockTests extends TestCase {
         b1 = new EmptyBlock(1.1, 2.2);
         assertFalse(b1.equals(b2));
         b2 = new EmptyBlock(1.1, 2.2);
-        assertTrue(b1.equals(b2));    
+        assertTrue(b1.equals(b2));
     }
 
     /**
@@ -144,7 +144,7 @@ public class AbstractBlockTests extends TestCase {
         Rectangle2D bounds1 = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         b1.setBounds(bounds1);
         EmptyBlock b2 = null;
-        
+
         try {
             b2 = (EmptyBlock) b1.clone();
         }
@@ -154,7 +154,7 @@ public class AbstractBlockTests extends TestCase {
         assertTrue(b1 != b2);
         assertTrue(b1.getClass() == b2.getClass());
         assertTrue(b1.equals(b2));
-        
+
         bounds1.setFrame(2.0, 4.0, 6.0, 8.0);
         assertFalse(b1.equals(b2));
         b2.setBounds(new Rectangle2D.Double(2.0, 4.0, 6.0, 8.0));
@@ -183,5 +183,5 @@ public class AbstractBlockTests extends TestCase {
         }
         assertEquals(b1, b2);
     }
-   
+
 }
