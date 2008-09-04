@@ -2,26 +2,26 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
@@ -89,7 +89,7 @@ public class PaintMapTests extends TestCase {
         assertEquals(Color.red, m1.getPaint("A"));
         m1.put("A", null);
         assertEquals(null, m1.getPaint("A"));
-        
+
         // a null key should throw an IllegalArgumentException
         boolean pass = false;
         try {
@@ -108,7 +108,7 @@ public class PaintMapTests extends TestCase {
         PaintMap m1 = new PaintMap();
         m1.put("A", Color.red);
         assertEquals(Color.red, m1.getPaint("A"));
-        
+
         // a null key should throw an IllegalArgumentException
         boolean pass = false;
         try {
@@ -119,7 +119,7 @@ public class PaintMapTests extends TestCase {
         }
         assertTrue(pass);
     }
-    
+
     /**
      * Some checks for the equals() method.
      */
@@ -130,25 +130,25 @@ public class PaintMapTests extends TestCase {
         assertTrue(m1.equals(m2));
         assertFalse(m1.equals(null));
         assertFalse(m1.equals("ABC"));
-        
+
         m1.put("K1", Color.red);
         assertFalse(m1.equals(m2));
         m2.put("K1", Color.red);
         assertTrue(m1.equals(m2));
-        
-        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f, 
+
+        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
                 Color.yellow));
         assertFalse(m1.equals(m2));
-        m2.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f, 
+        m2.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
                 Color.yellow));
         assertTrue(m1.equals(m2));
-        
+
         m1.put("K2", null);
         assertFalse(m1.equals(m2));
         m2.put("K2", null);
         assertTrue(m1.equals(m2));
     }
-    
+
     /**
      * Some checks for cloning.
      */
@@ -162,9 +162,9 @@ public class PaintMapTests extends TestCase {
             e.printStackTrace();
         }
         assertTrue(m1.equals(m2));
-        
+
         m1.put("K1", Color.red);
-        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f, 
+        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
                 Color.yellow));
         try {
             m2 = (PaintMap) m1.clone();
@@ -174,7 +174,7 @@ public class PaintMapTests extends TestCase {
         }
         assertTrue(m1.equals(m2));
     }
-    
+
     /**
      * A check for serialization.
      */
@@ -204,7 +204,7 @@ public class PaintMapTests extends TestCase {
     public void testSerialization2() {
         PaintMap m1 = new PaintMap();
         m1.put("K1", Color.red);
-        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f, 
+        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
                 Color.yellow));
         PaintMap m2 = null;
         try {
@@ -223,10 +223,10 @@ public class PaintMapTests extends TestCase {
         }
         assertEquals(m1, m2);
     }
-    
+
     /**
      * This test covers a bug reported in the forum:
-     * 
+     *
      * http://www.jfree.org/phpBB2/viewtopic.php?t=19980
      */
     public void testKeysOfDifferentClasses() {
