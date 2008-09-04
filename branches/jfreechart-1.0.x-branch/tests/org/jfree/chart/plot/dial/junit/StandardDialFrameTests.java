@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------------
  * StandardDialFrameTests.java
  * ---------------------------
- * (C) Copyright 2006-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -93,7 +93,7 @@ public class StandardDialFrameTests extends TestCase {
         assertFalse(f1.equals(f2));
         f2.setRadius(0.2);
         assertTrue(f1.equals(f2));
-        
+
         // backgroundPaint
         f1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.white, 3.0f,
                 4.0f, Color.yellow));
@@ -101,7 +101,7 @@ public class StandardDialFrameTests extends TestCase {
         f2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.white, 3.0f,
                 4.0f, Color.yellow));
         assertTrue(f1.equals(f2));
-        
+
         // foregroundPaint
         f1.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.blue, 3.0f,
                 4.0f, Color.green));
@@ -109,13 +109,13 @@ public class StandardDialFrameTests extends TestCase {
         f2.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.blue, 3.0f,
                 4.0f, Color.green));
         assertTrue(f1.equals(f2));
-        
+
         // stroke
         f1.setStroke(new BasicStroke(2.4f));
         assertFalse(f1.equals(f2));
         f2.setStroke(new BasicStroke(2.4f));
         assertTrue(f1.equals(f2));
-        
+
         // check an inherited attribute
         f1.setVisible(false);
         assertFalse(f1.equals(f2));
@@ -124,7 +124,7 @@ public class StandardDialFrameTests extends TestCase {
     }
 
     /**
-     * Two objects that are equal are required to return the same hashCode. 
+     * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashCode() {
         StandardDialFrame f1 = new StandardDialFrame();
@@ -150,7 +150,7 @@ public class StandardDialFrameTests extends TestCase {
         assertTrue(f1 != f2);
         assertTrue(f1.getClass() == f2.getClass());
         assertTrue(f1.equals(f2));
-        
+
         // check that the listener lists are independent
         MyDialLayerChangeListener l1 = new MyDialLayerChangeListener();
         f1.addChangeListener(l1);
