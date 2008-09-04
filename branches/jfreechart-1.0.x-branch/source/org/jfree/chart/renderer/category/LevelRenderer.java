@@ -336,7 +336,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
                 dataset.getRowKey(row), dataset.getColumnKey(column), value,
                 datasetIndex, barW0, barL, orientation);
 
-        // add an item entity, if this information is being collected
+        // collect entity and tool tip information...
         EntityCollection entities = state.getEntityCollection();
         if (entities != null) {
             addItemEntity(entities, dataset, row, column, line.getBounds());

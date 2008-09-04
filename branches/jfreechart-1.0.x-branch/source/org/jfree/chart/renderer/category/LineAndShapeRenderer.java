@@ -1091,11 +1091,11 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     public Object clone() throws CloneNotSupportedException {
         LineAndShapeRenderer clone = (LineAndShapeRenderer) super.clone();
         clone.seriesLinesVisible
-            = (BooleanList) this.seriesLinesVisible.clone();
+                = (BooleanList) this.seriesLinesVisible.clone();
         clone.seriesShapesVisible
-            = (BooleanList) this.seriesShapesVisible.clone();
+                = (BooleanList) this.seriesShapesVisible.clone();
         clone.seriesShapesFilled
-            = (BooleanList) this.seriesShapesFilled.clone();
+                = (BooleanList) this.seriesShapesFilled.clone();
         return clone;
     }
 

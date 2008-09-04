@@ -1755,9 +1755,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param plot  the plot.
      * @param dataArea  the data area.
      */
-    public void drawBackground(Graphics2D g2,
-                               CategoryPlot plot,
-                               Rectangle2D dataArea);
+    public void drawBackground(Graphics2D g2, CategoryPlot plot,
+            Rectangle2D dataArea);
 
     /**
      * Draws an outline for the data area.
@@ -1766,9 +1765,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param plot  the plot.
      * @param dataArea  the data area.
      */
-    public void drawOutline(Graphics2D g2,
-                            CategoryPlot plot,
-                            Rectangle2D dataArea);
+    public void drawOutline(Graphics2D g2, CategoryPlot plot,
+            Rectangle2D dataArea);
 
     /**
      * Draws a single data item.
@@ -1784,16 +1782,10 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         CategoryItemRendererState state,
-                         Rectangle2D dataArea,
-                         CategoryPlot plot,
-                         CategoryAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         CategoryDataset dataset,
-                         int row,
-                         int column,
-                         int pass);
+    public void drawItem(Graphics2D g2, CategoryItemRendererState state,
+            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+            ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
+            int pass);
 
     /**
      * Draws a grid line against the domain axis.
@@ -1807,10 +1799,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @see #drawRangeGridline(Graphics2D, CategoryPlot, ValueAxis,
      *     Rectangle2D, double)
      */
-    public void drawDomainGridline(Graphics2D g2,
-                                   CategoryPlot plot,
-                                   Rectangle2D dataArea,
-                                   double value);
+    public void drawDomainGridline(Graphics2D g2, CategoryPlot plot,
+            Rectangle2D dataArea, double value);
 
     /**
      * Draws a grid line against the range axis.
@@ -1824,11 +1814,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
      *
      * @see #drawDomainGridline(Graphics2D, CategoryPlot, Rectangle2D, double)
      */
-    public void drawRangeGridline(Graphics2D g2,
-                                  CategoryPlot plot,
-                                  ValueAxis axis,
-                                  Rectangle2D dataArea,
-                                  double value);
+    public void drawRangeGridline(Graphics2D g2, CategoryPlot plot,
+            ValueAxis axis, Rectangle2D dataArea, double value);
 
     /**
      * Draws a line (or some other marker) to indicate a particular category on
@@ -1843,11 +1830,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @see #drawRangeMarker(Graphics2D, CategoryPlot, ValueAxis, Marker,
      *     Rectangle2D)
      */
-    public void drawDomainMarker(Graphics2D g2,
-                                 CategoryPlot plot,
-                                 CategoryAxis axis,
-                                 CategoryMarker marker,
-                                 Rectangle2D dataArea);
+    public void drawDomainMarker(Graphics2D g2, CategoryPlot plot,
+            CategoryAxis axis, CategoryMarker marker, Rectangle2D dataArea);
 
     /**
      * Draws a line (or some other marker) to indicate a particular value on
@@ -1862,12 +1846,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @see #drawDomainMarker(Graphics2D, CategoryPlot, CategoryAxis,
      *     CategoryMarker, Rectangle2D)
      */
-    public void drawRangeMarker(Graphics2D g2,
-                                CategoryPlot plot,
-                                ValueAxis axis,
-                                Marker marker,
-                                Rectangle2D dataArea);
-
+    public void drawRangeMarker(Graphics2D g2, CategoryPlot plot,
+            ValueAxis axis, Marker marker, Rectangle2D dataArea);
 
     /**
      * Returns the Java2D coordinate for the middle of the specified data item.
