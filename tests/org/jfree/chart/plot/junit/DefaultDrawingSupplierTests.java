@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------------
  * DefaultDrawingSupplierTests.java
  * --------------------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -81,7 +81,7 @@ public class DefaultDrawingSupplierTests extends TestCase {
     public DefaultDrawingSupplierTests(String name) {
         super(name);
     }
-    
+
     /**
      * Check that the equals() method can distinguish all required fields.
      */
@@ -90,17 +90,17 @@ public class DefaultDrawingSupplierTests extends TestCase {
         DefaultDrawingSupplier r2 = new DefaultDrawingSupplier();
         assertTrue(r1.equals(r2));
         assertTrue(r2.equals(r1));
-        
+
         // set up some objects...
         Paint[] ps1A = new Paint[] {Color.red, Color.blue};
         Paint[] ps2A = new Paint[] {Color.green, Color.yellow, Color.white};
         Paint[] ops1A = new Paint[] {Color.lightGray, Color.blue};
         Paint[] ops2A = new Paint[] {Color.black, Color.yellow, Color.cyan};
         Stroke[] ss1A = new Stroke[] {new BasicStroke(1.1f)};
-        Stroke[] ss2A 
+        Stroke[] ss2A
             = new Stroke[] {new BasicStroke(2.2f), new BasicStroke(3.3f)};
         Stroke[] oss1A = new Stroke[] {new BasicStroke(4.4f)};
-        Stroke[] oss2A 
+        Stroke[] oss2A
             = new Stroke[] {new BasicStroke(5.5f), new BasicStroke(6.6f)};
         Shape[] shapes1A = new Shape[] {
             new Rectangle2D.Double(1.0, 1.0, 1.0, 1.0)
@@ -114,10 +114,10 @@ public class DefaultDrawingSupplierTests extends TestCase {
         Paint[] ops1B = new Paint[] {Color.lightGray, Color.blue};
         Paint[] ops2B = new Paint[] {Color.black, Color.yellow, Color.cyan};
         Stroke[] ss1B = new Stroke[] {new BasicStroke(1.1f)};
-        Stroke[] ss2B 
+        Stroke[] ss2B
             = new Stroke[] {new BasicStroke(2.2f), new BasicStroke(3.3f)};
         Stroke[] oss1B = new Stroke[] {new BasicStroke(4.4f)};
-        Stroke[] oss2B 
+        Stroke[] oss2B
             = new Stroke[] {new BasicStroke(5.5f), new BasicStroke(6.6f)};
         Shape[] shapes1B = new Shape[] {
             new Rectangle2D.Double(1.0, 1.0, 1.0, 1.0)
@@ -126,11 +126,11 @@ public class DefaultDrawingSupplierTests extends TestCase {
             new Rectangle2D.Double(2.0, 2.0, 2.0, 2.0),
             new Rectangle2D.Double(2.0, 2.0, 2.0, 2.0)
         };
-        
+
         r1 = new DefaultDrawingSupplier(ps1A, ops1A, ss1A, oss1A, shapes1A);
         r2 = new DefaultDrawingSupplier(ps1B, ops1B, ss1B, oss1B, shapes1B);
         assertTrue(r1.equals(r2));
-        
+
         // paint sequence
         r1 = new DefaultDrawingSupplier(ps2A, ops1A, ss1A, oss1A, shapes1A);
         assertFalse(r1.equals(r2));
@@ -156,31 +156,31 @@ public class DefaultDrawingSupplierTests extends TestCase {
         assertFalse(r1.equals(r2));
         r2 = new DefaultDrawingSupplier(ps2B, ops2B, ss2B, oss2B, shapes2B);
         assertTrue(r1.equals(r2));
-        
+
         // paint index
         r1.getNextPaint();
         assertFalse(r1.equals(r2));
         r2.getNextPaint();
         assertTrue(r1.equals(r2));
-        
+
         // outline paint index
         r1.getNextOutlinePaint();
         assertFalse(r1.equals(r2));
         r2.getNextOutlinePaint();
         assertTrue(r1.equals(r2));
-        
+
         // stroke index
         r1.getNextStroke();
         assertFalse(r1.equals(r2));
         r2.getNextStroke();
         assertTrue(r1.equals(r2));
-        
+
         // outline stroke index
         r1.getNextOutlineStroke();
         assertFalse(r1.equals(r2));
         r2.getNextOutlineStroke();
         assertTrue(r1.equals(r2));
-        
+
         // shape index
         r1.getNextShape();
         assertFalse(r1.equals(r2));

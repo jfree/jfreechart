@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * RingPlotTests.java
  * ------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -85,18 +85,18 @@ public class RingPlotTests extends TestCase {
      * Some checks for the equals() method.
      */
     public void testEquals() {
-        
+
         RingPlot plot1 = new RingPlot(null);
         RingPlot plot2 = new RingPlot(null);
         assertTrue(plot1.equals(plot2));
         assertTrue(plot2.equals(plot1));
-                
+
         // separatorsVisible
         plot1.setSeparatorsVisible(false);
         assertFalse(plot1.equals(plot2));
         plot2.setSeparatorsVisible(false);
         assertTrue(plot1.equals(plot2));
-        
+
         // separatorStroke
         Stroke s = new BasicStroke(1.1f);
         plot1.setSeparatorStroke(s);
@@ -105,19 +105,19 @@ public class RingPlotTests extends TestCase {
         assertTrue(plot1.equals(plot2));
 
         // separatorPaint
-        plot1.setSeparatorPaint(new GradientPaint(1.0f, 2.0f, Color.red, 
+        plot1.setSeparatorPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 2.0f, 1.0f, Color.blue));
         assertFalse(plot1.equals(plot2));
-        plot2.setSeparatorPaint(new GradientPaint(1.0f, 2.0f, Color.red, 
+        plot2.setSeparatorPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 2.0f, 1.0f, Color.blue));
         assertTrue(plot1.equals(plot2));
-        
+
         // innerSeparatorExtension
         plot1.setInnerSeparatorExtension(0.01);
         assertFalse(plot1.equals(plot2));
         plot2.setInnerSeparatorExtension(0.01);
         assertTrue(plot1.equals(plot2));
-        
+
         // outerSeparatorExtension
         plot1.setOuterSeparatorExtension(0.02);
         assertFalse(plot1.equals(plot2));
@@ -129,7 +129,7 @@ public class RingPlotTests extends TestCase {
         assertFalse(plot1.equals(plot2));
         plot2.setSectionDepth(0.12);
         assertTrue(plot1.equals(plot2));
-        
+
     }
 
     /**

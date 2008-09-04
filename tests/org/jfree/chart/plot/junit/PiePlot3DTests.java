@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------
@@ -92,18 +92,18 @@ public class PiePlot3DTests extends TestCase {
         PiePlot3D p2 = new PiePlot3D();
         assertTrue(p1.equals(p2));
         assertTrue(p2.equals(p1));
-        
+
         p1.setDepthFactor(1.23);
         assertFalse(p1.equals(p2));
         p2.setDepthFactor(1.23);
         assertTrue(p1.equals(p2));
-        
+
         p1.setDarkerSides(true);
         assertFalse(p1.equals(p2));
         p2.setDarkerSides(true);
         assertTrue(p1.equals(p2));
     }
-    
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
@@ -134,11 +134,11 @@ public class PiePlot3DTests extends TestCase {
      * Draws a pie chart where the label generator returns null.
      */
     public void testDrawWithNullDataset() {
-        JFreeChart chart = ChartFactory.createPieChart3D("Test", null, true, 
+        JFreeChart chart = ChartFactory.createPieChart3D("Test", null, true,
                 false, false);
         boolean success = false;
         try {
-            BufferedImage image = new BufferedImage(200 , 100, 
+            BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
