@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------------
  * LookupPaintScaleTests.java
  * --------------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -80,7 +80,7 @@ public class LookupPaintScaleTests extends TestCase {
     public LookupPaintScaleTests(String name) {
         super(name);
     }
-    
+
     /**
      * A test for the equals() method.
      */
@@ -89,20 +89,20 @@ public class LookupPaintScaleTests extends TestCase {
         LookupPaintScale g2 = new LookupPaintScale();
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
-        
+
         g1 = new LookupPaintScale(1.0, 2.0, Color.red);
         assertFalse(g1.equals(g2));
         g2 = new LookupPaintScale(1.0, 2.0, Color.red);
         assertTrue(g1.equals(g2));
-        
-        g1.add(new Double(1.5), new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 
+
+        g1.add(new Double(1.5), new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.blue));
         assertFalse(g1.equals(g2));
-        g2.add(new Double(1.5), new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 
+        g2.add(new Double(1.5), new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.blue));
         assertTrue(g1.equals(g2));
     }
-    
+
     /**
      * Confirm that cloning works.
      */
@@ -118,17 +118,17 @@ public class LookupPaintScaleTests extends TestCase {
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
-        
+
         // check independence
         g1.add(new Double(0.5), Color.red);
         assertFalse(g1.equals(g2));
         g2.add(new Double(0.5), Color.red);
         assertTrue(g1.equals(g2));
-        
+
         // try with gradient paint
-        g1 = new LookupPaintScale(1.0, 2.0, new GradientPaint(1.0f, 2.0f, 
+        g1 = new LookupPaintScale(1.0, 2.0, new GradientPaint(1.0f, 2.0f,
                 Color.red, 3.0f, 4.0f, Color.green));
-        g1.add(new Double(1.5), new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 
+        g1.add(new Double(1.5), new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.blue));
         g2 = null;
         try {
@@ -141,7 +141,7 @@ public class LookupPaintScaleTests extends TestCase {
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
     }
-    
+
     /**
      * Serialize an instance, restore it, and check for equality.
      */
@@ -162,11 +162,11 @@ public class LookupPaintScaleTests extends TestCase {
         catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(g1, g2);       
-        
-        g1 = new LookupPaintScale(1.0, 2.0, new GradientPaint(1.0f, 2.0f, 
+        assertEquals(g1, g2);
+
+        g1 = new LookupPaintScale(1.0, 2.0, new GradientPaint(1.0f, 2.0f,
                 Color.red, 3.0f, 4.0f, Color.yellow));
-        g1.add(new Double(1.5), new GradientPaint(1.1f, 2.2f, Color.red, 3.3f, 
+        g1.add(new Double(1.5), new GradientPaint(1.1f, 2.2f, Color.red, 3.3f,
                 4.4f, Color.blue));
         g2 = null;
         try {
@@ -183,11 +183,11 @@ public class LookupPaintScaleTests extends TestCase {
         catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(g1, g2);   
+        assertEquals(g1, g2);
     }
-    
+
     private static final double EPSILON = 0.0000000001;
-    
+
     /**
      * Some checks for the default constructor.
      */
@@ -196,7 +196,7 @@ public class LookupPaintScaleTests extends TestCase {
         assertEquals(0.0, s.getLowerBound(), EPSILON);
         assertEquals(1.0, s.getUpperBound(), EPSILON);
     }
-    
+
     /**
      * Some checks for the other constructor.
      */
@@ -206,33 +206,33 @@ public class LookupPaintScaleTests extends TestCase {
         assertEquals(2.0, s.getUpperBound(), EPSILON);
         assertEquals(Color.red, s.getDefaultPaint());
     }
-    
+
     /**
      * Some general checks for the lookup table.
      */
     public void testGeneral() {
-        
+
         LookupPaintScale s = new LookupPaintScale(0.0, 100.0, Color.black);
         assertEquals(Color.black, s.getPaint(-1.0));
         assertEquals(Color.black, s.getPaint(0.0));
         assertEquals(Color.black, s.getPaint(50.0));
         assertEquals(Color.black, s.getPaint(100.0));
         assertEquals(Color.black, s.getPaint(101.0));
-        
+
         s.add(new Double(50.0), Color.blue);
         assertEquals(Color.black, s.getPaint(-1.0));
         assertEquals(Color.black, s.getPaint(0.0));
         assertEquals(Color.blue, s.getPaint(50.0));
         assertEquals(Color.blue, s.getPaint(100.0));
         assertEquals(Color.black, s.getPaint(101.0));
-        
+
         s.add(new Double(50.0), Color.red);
         assertEquals(Color.black, s.getPaint(-1.0));
         assertEquals(Color.black, s.getPaint(0.0));
         assertEquals(Color.red, s.getPaint(50.0));
         assertEquals(Color.red, s.getPaint(100.0));
         assertEquals(Color.black, s.getPaint(101.0));
-        
+
         s.add(new Double(25.0), Color.green);
         assertEquals(Color.black, s.getPaint(-1.0));
         assertEquals(Color.black, s.getPaint(0.0));
@@ -240,7 +240,7 @@ public class LookupPaintScaleTests extends TestCase {
         assertEquals(Color.red, s.getPaint(50.0));
         assertEquals(Color.red, s.getPaint(100.0));
         assertEquals(Color.black, s.getPaint(101.0));
-        
+
         s.add(new Double(75.0), Color.yellow);
         assertEquals(Color.black, s.getPaint(-1.0));
         assertEquals(Color.black, s.getPaint(0.0));
