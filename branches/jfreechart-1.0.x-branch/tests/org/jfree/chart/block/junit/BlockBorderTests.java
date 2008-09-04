@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ---------------------
  * BlockBorderTests.java
  * ---------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -62,7 +62,7 @@ import org.jfree.util.UnitType;
  * Tests for the {@link BlockBorder} class.
  */
 public class BlockBorderTests extends TestCase {
-    
+
     /**
      * Returns the tests as a test suite.
      *
@@ -80,31 +80,31 @@ public class BlockBorderTests extends TestCase {
     public BlockBorderTests(String name) {
         super(name);
     }
-    
+
     /**
      * Confirm that the equals() method can distinguish all the required fields.
      */
     public void testEquals() {
-        BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 
+        BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
                 4.0), Color.red);
-        BlockBorder b2 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 
+        BlockBorder b2 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
                 4.0), Color.red);
         assertTrue(b1.equals(b2));
         assertTrue(b2.equals(b2));
-        
+
         // insets
         b1 = new BlockBorder(new RectangleInsets(UnitType.RELATIVE, 1.0, 2.0,
                 3.0, 4.0), Color.red);
         assertFalse(b1.equals(b2));
-        b2 = new BlockBorder(new RectangleInsets(UnitType.RELATIVE, 1.0, 2.0, 
+        b2 = new BlockBorder(new RectangleInsets(UnitType.RELATIVE, 1.0, 2.0,
                 3.0, 4.0), Color.red);
         assertTrue(b1.equals(b2));
-        
+
         // paint
-        b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 4.0), 
+        b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 4.0),
                 Color.blue);
         assertFalse(b1.equals(b2));
-        b2 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 4.0), 
+        b2 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 4.0),
                 Color.blue);
         assertTrue(b1.equals(b2));
     }
@@ -121,8 +121,8 @@ public class BlockBorderTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-        BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 
-                4.0), new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f, 
+        BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
+                4.0), new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.yellow));
         BlockBorder b2 = null;
         try {
@@ -141,5 +141,5 @@ public class BlockBorderTests extends TestCase {
         }
         assertTrue(b1.equals(b2));
     }
-   
+
 }
