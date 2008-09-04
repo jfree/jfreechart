@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------------------
  * IntervalCategoryToolTipGenerator.java
  * -------------------------------------
- * (C) Copyright 2004, 2007, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,21 +49,21 @@ import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.util.PublicCloneable;
 
 /**
- * A tooltip generator for plots that use data from an 
+ * A tooltip generator for plots that use data from an
  * {@link IntervalCategoryDataset}.
  */
-public class IntervalCategoryToolTipGenerator 
+public class IntervalCategoryToolTipGenerator
     extends StandardCategoryToolTipGenerator
     implements CategoryToolTipGenerator, PublicCloneable, Cloneable,
                Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -3853824986520333437L;
-    
+
     /** The default format string. */
-    public static final String DEFAULT_TOOL_TIP_FORMAT_STRING 
+    public static final String DEFAULT_TOOL_TIP_FORMAT_STRING
         = "({0}, {1}) = {3} - {4}";
-    
+
     /**
      * Creates a new generator with a default number formatter.
      */
@@ -74,29 +74,29 @@ public class IntervalCategoryToolTipGenerator
     /**
      * Creates a new generator with the specified number formatter.
      *
-     * @param labelFormat  the label format string (<code>null</code> not 
+     * @param labelFormat  the label format string (<code>null</code> not
      *                     permitted).
      * @param formatter  the number formatter (<code>null</code> not permitted).
      */
-    public IntervalCategoryToolTipGenerator(String labelFormat, 
+    public IntervalCategoryToolTipGenerator(String labelFormat,
                                             NumberFormat formatter) {
         super(labelFormat, formatter);
     }
-    
+
     /**
      * Creates a new generator with the specified date formatter.
      *
-     * @param labelFormat  the label format string (<code>null</code> not 
+     * @param labelFormat  the label format string (<code>null</code> not
      *                     permitted).
      * @param formatter  the date formatter (<code>null</code> not permitted).
      */
-    public IntervalCategoryToolTipGenerator(String labelFormat, 
+    public IntervalCategoryToolTipGenerator(String labelFormat,
                                             DateFormat formatter) {
         super(labelFormat, formatter);
     }
-    
+
     /**
-     * Creates the array of items that can be passed to the 
+     * Creates the array of items that can be passed to the
      * <code>MessageFormat</code> class for creating labels.
      *
      * @param dataset  the dataset (<code>null</code> not permitted).
@@ -105,26 +105,26 @@ public class IntervalCategoryToolTipGenerator
      *
      * @return The items (never <code>null</code>).
      */
-    protected Object[] createItemArray(CategoryDataset dataset, 
+    protected Object[] createItemArray(CategoryDataset dataset,
                                        int row, int column) {
         Object[] result = new Object[5];
         result[0] = dataset.getRowKey(row).toString();
         result[1] = dataset.getColumnKey(column).toString();
         Number value = dataset.getValue(row, column);
         if (getNumberFormat() != null) {
-            result[2] = getNumberFormat().format(value);  
+            result[2] = getNumberFormat().format(value);
         }
         else if (getDateFormat() != null) {
             result[2] = getDateFormat().format(value);
         }
-        
+
         if (dataset instanceof IntervalCategoryDataset) {
             IntervalCategoryDataset icd = (IntervalCategoryDataset) dataset;
             Number start = icd.getStartValue(row, column);
             Number end = icd.getEndValue(row, column);
             if (getNumberFormat() != null) {
-                result[3] = getNumberFormat().format(start);  
-                result[4] = getNumberFormat().format(end);  
+                result[3] = getNumberFormat().format(start);
+                result[4] = getNumberFormat().format(end);
             }
             else if (getDateFormat() != null) {
                 result[3] = getDateFormat().format(start);

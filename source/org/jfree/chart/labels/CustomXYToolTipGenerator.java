@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * -------------------------------
  * CustomXYItemLabelGenerator.java
  * -------------------------------
- * (C) Copyright 2002-2007, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -41,7 +41,7 @@
  * 17-Nov-2003 : Implemented PublicCloneable (DG);
  * 25-Feb-2004 : Renamed XYToolTipGenerator --> XYItemLabelGenerator (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 
+ *
  */
 
 package org.jfree.chart.labels;
@@ -53,17 +53,15 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.util.PublicCloneable;
 
 /**
- * A tool tip generator that stores custom tooltips. The dataset passed into 
+ * A tool tip generator that stores custom tooltips. The dataset passed into
  * the generateToolTip method is ignored.
  */
-public class CustomXYToolTipGenerator implements XYToolTipGenerator, 
-                                                 Cloneable, 
-                                                 PublicCloneable,
-                                                 Serializable {
+public class CustomXYToolTipGenerator implements XYToolTipGenerator,
+        Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
-    private static final long serialVersionUID = 8636030004670141362L; 
-    
+    private static final long serialVersionUID = 8636030004670141362L;
+
     /** Storage for the tooltip lists. */
     private List toolTipSeries = new java.util.ArrayList();
 
@@ -150,20 +148,20 @@ public class CustomXYToolTipGenerator implements XYToolTipGenerator,
 
     /**
      * Returns an independent copy of the generator.
-     * 
+     *
      * @return A clone.
-     * 
+     *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
     public Object clone() throws CloneNotSupportedException {
-        
-        CustomXYToolTipGenerator clone 
+
+        CustomXYToolTipGenerator clone
             = (CustomXYToolTipGenerator) super.clone();
         if (this.toolTipSeries != null) {
             clone.toolTipSeries = new java.util.ArrayList(this.toolTipSeries);
         }
         return clone;
-        
+
     }
     /**
      * Tests if this object is equal to another.
