@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------
  * ValueMarker.java
  * ----------------
- * (C) Copyright 2004-2007, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,7 +40,7 @@
  * 05-Sep-2006 : Added setValue() method (DG);
  * 08-Oct-2007 : Fixed bug 1808376, constructor calling super with incorrect
  *               values (DG);
- * 
+ *
  */
 
 package org.jfree.chart.plot;
@@ -55,23 +55,23 @@ import org.jfree.chart.event.MarkerChangeEvent;
  * highlight specific values.
  */
 public class ValueMarker extends Marker {
-    
+
     /** The value. */
     private double value;
 
     /**
      * Creates a new marker.
-     * 
+     *
      * @param value  the value.
      */
     public ValueMarker(double value) {
         super();
         this.value = value;
     }
-    
+
     /**
      * Creates a new marker.
-     * 
+     *
      * @param value  the value.
      * @param paint  the paint (<code>null</code> not permitted).
      * @param stroke  the stroke (<code>null</code> not permitted).
@@ -79,10 +79,10 @@ public class ValueMarker extends Marker {
     public ValueMarker(double value, Paint paint, Stroke stroke) {
         this(value, paint, stroke, paint, stroke, 1.0f);
     }
-    
+
     /**
      * Creates a new value marker.
-     * 
+     *
      * @param value  the value.
      * @param paint  the paint (<code>null</code> not permitted).
      * @param stroke  the stroke (<code>null</code> not permitted).
@@ -90,34 +90,34 @@ public class ValueMarker extends Marker {
      * @param outlineStroke  the outline stroke (<code>null</code> permitted).
      * @param alpha  the alpha transparency (in the range 0.0f to 1.0f).
      */
-    public ValueMarker(double value, Paint paint, Stroke stroke, 
+    public ValueMarker(double value, Paint paint, Stroke stroke,
                        Paint outlinePaint, Stroke outlineStroke, float alpha) {
         super(paint, stroke, outlinePaint, outlineStroke, alpha);
         this.value = value;
     }
-    
+
     /**
      * Returns the value.
      *
      * @return The value.
-     * 
+     *
      * @see #setValue(double)
      */
     public double getValue() {
         return this.value;
     }
-    
+
     /**
-     * Sets the value for the marker and sends a {@link MarkerChangeEvent} to 
+     * Sets the value for the marker and sends a {@link MarkerChangeEvent} to
      * all registered listeners.
-     * 
+     *
      * @param value  the value.
-     * 
+     *
      * @see #getValue()
-     * 
+     *
      * @since 1.0.3
      */
-    public void setValue(double value) { 
+    public void setValue(double value) {
         this.value = value;
         notifyListeners(new MarkerChangeEvent(this));
     }
@@ -125,16 +125,16 @@ public class ValueMarker extends Marker {
     /**
      * Tests this marker for equality with an arbitrary object.  This method
      * returns <code>true</code> if:
-     * 
+     *
      * <ul>
      * <li><code>obj</code> is not <code>null</code>;</li>
      * <li><code>obj</code> is an instance of <code>ValueMarker</code>;</li>
      * <li><code>obj</code> has the same value as this marker;</li>
      * <li><code>super.equals(obj)</code> returns <code>true</code>.</li>
      * </ul>
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
