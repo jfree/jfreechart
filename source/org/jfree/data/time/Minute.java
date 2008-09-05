@@ -138,6 +138,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone (<code>null</code> not permitted).
      */
     public Minute(Date time, TimeZone zone) {
+    	// FIXME:  need a locale as well as a timezone
         if (time == null) {
             throw new IllegalArgumentException("Null 'time' argument.");
         }

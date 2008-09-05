@@ -151,6 +151,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone.
      */
     public Second(Date time, final TimeZone zone) {
+    	// FIXME:  need a locale as well as a time zone
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         this.second = (byte) calendar.get(Calendar.SECOND);

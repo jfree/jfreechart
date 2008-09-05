@@ -146,6 +146,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone (<code>null</code> not permitted).
      */
     public Hour(Date time, TimeZone zone) {
+    	// FIXME:  need a locale as well as a timezone
         if (time == null) {
             throw new IllegalArgumentException("Null 'time' argument.");
         }
@@ -370,6 +371,17 @@ public class Hour extends RegularTimePeriod implements Serializable {
         return true;
     }
 
+    /**
+     * Returns a string representation of this instance, for debugging
+     * purposes.
+     *
+     * @return A string.
+     */
+    public String toString() {
+    	return "[" + this.hour + "," + getDayOfMonth() + "/" + getMonth() + "/"
+    	        + getYear() + "]";
+    }
+ 
     /**
      * Returns a hash code for this object instance.  The approach described by
      * Joshua Bloch in "Effective Java" has been used here:
