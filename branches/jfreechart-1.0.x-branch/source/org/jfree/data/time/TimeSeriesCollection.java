@@ -147,6 +147,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *              <code>TimeZone.getDefault()</code> in that case).
      */
     public TimeSeriesCollection(TimeZone zone) {
+    	// FIXME: need a locale as well as a timezone
         this(null, zone);
     }
 
@@ -170,7 +171,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *              <code>TimeZone.getDefault()</code> in that case).
      */
     public TimeSeriesCollection(TimeSeries series, TimeZone zone) {
-
+        // FIXME:  need a locale as well as a timezone
         if (zone == null) {
             zone = TimeZone.getDefault();
         }

@@ -157,6 +157,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone.
      */
     public Day(Date time, TimeZone zone) {
+        // FIXME: need a Locale as well as a TimeZone
         if (time == null) {
             throw new IllegalArgumentException("Null 'time' argument.");
         }

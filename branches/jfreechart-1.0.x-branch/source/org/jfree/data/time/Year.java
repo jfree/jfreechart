@@ -123,6 +123,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone.
      */
     public Year(Date time, TimeZone zone) {
+    	// FIXME:  needs a locale as well as a timezone
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         this.year = (short) calendar.get(Calendar.YEAR);

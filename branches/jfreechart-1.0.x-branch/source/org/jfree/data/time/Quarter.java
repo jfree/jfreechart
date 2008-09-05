@@ -159,6 +159,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * @param zone  the zone (<code>null</code> not permitted).
      */
     public Quarter(Date time, TimeZone zone) {
+    	// FIXME:  need a locale as well as a timezone
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         int month = calendar.get(Calendar.MONTH) + 1;
