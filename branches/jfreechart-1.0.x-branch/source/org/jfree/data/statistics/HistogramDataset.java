@@ -49,7 +49,7 @@
  *               Hayne (DG);
  * 08-Jun-2005 : Fixed bug in getSeriesKey() method (DG);
  * 22-Nov-2005 : Fixed cast in getSeriesKey() method - see patch 1329287 (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
+ * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 03-Aug-2006 : Improved precision of bin boundary calculation (DG);
  * 07-Sep-2006 : Fixed bug 1553088 (DG);
  * 22-May-2008 : Implemented clone() method override (DG);
