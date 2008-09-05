@@ -146,6 +146,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone (<code>null</code> not permitted).
      */
     public Month(Date time, TimeZone zone) {
+    	// FIXME:  need a locale as well as a timezone
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         this.month = calendar.get(Calendar.MONTH) + 1;

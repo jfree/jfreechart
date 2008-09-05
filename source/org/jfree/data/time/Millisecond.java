@@ -153,6 +153,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone.
      */
     public Millisecond(Date time, TimeZone zone) {
+    	// FIXME:  need a locale as well as a timezone
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         this.millisecond = calendar.get(Calendar.MILLISECOND);
