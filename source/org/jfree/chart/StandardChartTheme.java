@@ -55,6 +55,7 @@ import java.util.List;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.PeriodAxis;
 import org.jfree.chart.axis.PeriodAxisLabelInfo;
+import org.jfree.chart.axis.SubCategoryAxis;
 import org.jfree.chart.axis.SymbolAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.block.Block;
@@ -1410,6 +1411,11 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         axis.setLabelPaint(this.axisLabelPaint);
         axis.setTickLabelFont(this.regularFont);
         axis.setTickLabelPaint(this.tickLabelPaint);
+        if (axis instanceof SubCategoryAxis) {
+            SubCategoryAxis sca = (SubCategoryAxis) axis;
+            sca.setSubLabelFont(this.regularFont);
+            sca.setSubLabelPaint(this.tickLabelPaint);
+        }
     }
 
     /**
