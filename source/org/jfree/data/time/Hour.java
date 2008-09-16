@@ -57,6 +57,7 @@
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
  * 04-Apr-2007 : In Hour(Date, TimeZone), peg milliseconds using specified
  *               time zone (DG);
+ * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
  *
  */
 
@@ -129,24 +130,27 @@ public class Hour extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new Hour, based on the supplied date/time.
+     * Constructs a new instance, based on the supplied date/time and
+     * the default time zone.
      *
      * @param time  the date-time (<code>null</code> not permitted).
+     *
+     * @see #Hour(Date, TimeZone)
      */
     public Hour(Date time) {
         // defer argument checking...
-        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE);
+        this(time, TimeZone.getDefault());
     }
 
     /**
-     * Constructs a new Hour, based on the supplied date/time evaluated in the
-     * specified time zone.
+     * Constructs a new instance, based on the supplied date/time evaluated
+     * in the specified time zone.
      *
      * @param time  the date-time (<code>null</code> not permitted).
      * @param zone  the time zone (<code>null</code> not permitted).
      */
     public Hour(Date time, TimeZone zone) {
-    	// FIXME:  need a locale as well as a timezone
+        // FIXME:  need a locale as well as a timezone
         if (time == null) {
             throw new IllegalArgumentException("Null 'time' argument.");
         }

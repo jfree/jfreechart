@@ -53,6 +53,8 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 05-Oct-2006 : Updated API docs (DG);
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
+ * 16-Sep-2008 : Extended range of valid years, and deprecated 
+ *               DEFAULT_TIME_ZONE (DG);
  *
  */
 
@@ -63,13 +65,25 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-import org.jfree.date.SerialDate;
-
 /**
- * Represents a year in the range 1900 to 9999.  This class is immutable, which
- * is a requirement for all {@link RegularTimePeriod} subclasses.
+ * Represents a year in the range -9999 to 9999.  This class is immutable,
+ * which is a requirement for all {@link RegularTimePeriod} subclasses.
  */
 public class Year extends RegularTimePeriod implements Serializable {
+
+    /**
+     * The minimum year value.
+     *
+     * @since 1.0.11
+     */
+    public static final int MINIMUM_YEAR = -9999;
+
+    /**
+     * The maximum year value.
+     *
+     * @since 1.0.11
+     */
+    public static final int MAXIMUM_YEAR = 9999;
 
     /** For serialization. */
     private static final long serialVersionUID = -7659990929736074836L;
@@ -96,9 +110,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @param year  the year.
      */
     public Year(int year) {
-        if ((year < SerialDate.MINIMUM_YEAR_SUPPORTED)
-            || (year > SerialDate.MAXIMUM_YEAR_SUPPORTED)) {
-
+        if ((year < Year.MINIMUM_YEAR) || (year > Year.MAXIMUM_YEAR)) {
             throw new IllegalArgumentException(
                 "Year constructor: year (" + year + ") outside valid range.");
         }
@@ -111,9 +123,11 @@ public class Year extends RegularTimePeriod implements Serializable {
      * using the default time zone.
      *
      * @param time  the time (<code>null</code> not permitted).
+     *
+     * @see #Year(Date, TimeZone)
      */
     public Year(Date time) {
-        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE);
+        this(time, TimeZone.getDefault());
     }
 
     /**
@@ -123,7 +137,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone.
      */
     public Year(Date time, TimeZone zone) {
-    	// FIXME:  needs a locale as well as a timezone
+        // FIXME:  needs a locale as well as a timezone
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         this.year = (short) calendar.get(Calendar.YEAR);
@@ -184,10 +198,10 @@ public class Year extends RegularTimePeriod implements Serializable {
      * Returns the year preceding this one.
      *
      * @return The year preceding this one (or <code>null</code> if the
-     *         current year is 1900).
+     *         current year is -9999).
      */
     public RegularTimePeriod previous() {
-        if (this.year > SerialDate.MINIMUM_YEAR_SUPPORTED) {
+        if (this.year > Year.MINIMUM_YEAR) {
             return new Year(this.year - 1);
         }
         else {
@@ -202,7 +216,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *         year is 9999).
      */
     public RegularTimePeriod next() {
-        if (this.year < SerialDate.MAXIMUM_YEAR_SUPPORTED) {
+        if (this.year < Year.MAXIMUM_YEAR) {
             return new Year(this.year + 1);
         }
         else {
@@ -265,24 +279,20 @@ public class Year extends RegularTimePeriod implements Serializable {
      * instance representing the same year as this object.  In all other cases,
      * returns <code>false</code>.
      *
-     * @param object  the object (<code>null</code> permitted).
+     * @param obj  the object (<code>null</code> permitted).
      *
      * @return <code>true</code> if the year of this and the object are the
      *         same.
      */
-    public boolean equals(Object object) {
-        if (object != null) {
-            if (object instanceof Year) {
-                Year target = (Year) object;
-                return (this.year == target.getYear());
-            }
-            else {
-                return false;
-            }
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
         }
-        else {
+        if (!(obj instanceof Year)) {
             return false;
         }
+        Year that = (Year) obj;
+        return (this.year == that.year);
     }
 
     /**

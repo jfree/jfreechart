@@ -1,3 +1,37 @@
+2008-09-16  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/time/Day.java
+    (Day(Date)): Use TimeZone.getDefault(),
+    * source/org/jfree/data/time/Hour.java
+    (Hour(Date)): Likewise,
+    * source/org/jfree/data/time/Millisecond.java
+    (Millisecond(Date)): Likewise,
+    * source/org/jfree/data/time/Minute.java
+    (Minute(Date)): Likewise,
+    * source/org/jfree/data/time/Month.java
+    (Month(Date)): Likewise,
+    (parseMonth): Updated for changes in Year range,
+    * source/org/jfree/data/time/Quarter.java
+    (Quarter(Date)): Use TimeZone.getDefault(),
+    * source/org/jfree/data/time/RegularTimePeriod.java
+    (DEFAULT_TIME_ZONE): Deprecated,
+    * source/org/jfree/data/time/Second.java
+    (Second(Date)): Use TimeZone.getDefault(),
+    * source/org/jfree/data/time/Week.java
+    (Week(Date)): Likewise,
+    * source/org/jfree/data/time/Year.java
+    (MINIMUM_YEAR): New field,
+    (MAXIMUM_YEAR): Likewise,
+    (Year(int)): Updated range check,
+    (Year(Date)): Use TimeZone.getDefault(),
+    (previous): Updated for new range bounds,
+    (next): Likewise,
+    (equals): Cleaned up,
+    * tests/org/jfree/data/time/junit/YearTests.java
+    (testEquals): Extended,
+    (test1900Previous): Modified and enamed testMinus9999Previous,
+    (testParseYear): Updated.
+
 2008-09-10  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/StandardChartTheme.java

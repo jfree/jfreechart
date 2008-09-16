@@ -52,6 +52,7 @@
  * 06-Jun-2008 : Added handling for general RegularTimePeriod in compareTo()
  *               method:
  *               see http://www.jfree.org/phpBB2/viewtopic.php?t=24805 (DG);
+ * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
  *
  */
 
@@ -138,12 +139,14 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a millisecond.
+     * Constructs a new millisecond using the default time zone.
      *
      * @param time  the time.
+     *
+     * @see #Millisecond(Date, TimeZone)
      */
     public Millisecond(Date time) {
-        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE);
+        this(time, TimeZone.getDefault());
     }
 
     /**
@@ -153,7 +156,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone.
      */
     public Millisecond(Date time, TimeZone zone) {
-    	// FIXME:  need a locale as well as a timezone
+        // FIXME:  need a locale as well as a timezone
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         this.millisecond = calendar.get(Calendar.MILLISECOND);

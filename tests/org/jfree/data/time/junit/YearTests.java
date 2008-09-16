@@ -113,6 +113,11 @@ public class YearTests extends TestCase {
         Year year1 = new Year(2002);
         Year year2 = new Year(2002);
         assertTrue(year1.equals(year2));
+
+        year1 = new Year(1999);
+        assertFalse(year1.equals(year2));
+        year2 = new Year(1999);
+        assertTrue(year1.equals(year2));
     }
 
     /**
@@ -157,8 +162,8 @@ public class YearTests extends TestCase {
      * Set up a year equal to 1900.  Request the previous year, it should be
      * null.
      */
-    public void test1900Previous() {
-        Year current = new Year(1900);
+    public void testMinuss9999Previous() {
+        Year current = new Year(-9999);
         Year previous = (Year) current.previous();
         assertNull(previous);
     }
@@ -223,7 +228,7 @@ public class YearTests extends TestCase {
         catch (TimePeriodFormatException e) {
             year = new Year(1900);
         }
-        assertEquals(1900, year.getYear());
+        assertEquals(99, year.getYear());
 
     }
 

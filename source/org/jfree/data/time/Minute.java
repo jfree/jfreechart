@@ -58,6 +58,7 @@
  * 05-Oct-2006 : Updated API docs (DG);
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
  * 11-Dec-2006 : Fix for previous() - bug 1611872 (DG);
+ * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
  *
  */
 
@@ -122,13 +123,16 @@ public class Minute extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new Minute, based on the supplied date/time.
+     * Constructs a new instance, based on the supplied date/time and
+     * the default time zone.
      *
      * @param time  the time (<code>null</code> not permitted).
+     *
+     * @see #Minute(Date, TimeZone)
      */
     public Minute(Date time) {
         // defer argument checking
-        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE);
+        this(time, TimeZone.getDefault());
     }
 
     /**
@@ -138,7 +142,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone (<code>null</code> not permitted).
      */
     public Minute(Date time, TimeZone zone) {
-    	// FIXME:  need a locale as well as a timezone
+        // FIXME:  need a locale as well as a timezone
         if (time == null) {
             throw new IllegalArgumentException("Null 'time' argument.");
         }
