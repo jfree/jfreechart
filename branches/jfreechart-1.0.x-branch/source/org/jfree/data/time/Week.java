@@ -66,6 +66,7 @@
  * 28-Aug-2007 : Added new constructor to avoid problem in creating new
  *               instances (DG);
  * 19-Dec-2007 : Fixed bug in deprecated constructor (DG);
+ * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
  *
  */
 
@@ -152,13 +153,17 @@ public class Week extends RegularTimePeriod implements Serializable {
 
     /**
      * Creates a time period for the week in which the specified date/time
-     * falls.
+     * falls, using the default time zone and locale (the locale can affect the
+     * day-of-the-week that marks the beginning of the week, as well as the
+     * minimal number of days in the first week of the year).
      *
      * @param time  the time (<code>null</code> not permitted).
+     *
+     * @see #Week(Date, TimeZone, Locale)
      */
     public Week(Date time) {
         // defer argument checking...
-        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, Locale.getDefault());
+        this(time, TimeZone.getDefault(), Locale.getDefault());
     }
 
     /**

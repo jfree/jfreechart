@@ -53,6 +53,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 05-Oct-2006 : Updated API docs (DG);
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
+ * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
  *
  */
 
@@ -136,12 +137,15 @@ public class Second extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a second.
+     * Constructs a new instance from the specified date/time and the default
+     * time zone..
      *
-     * @param time  the time.
+     * @param time  the time (<code>null</code> not permitted).
+     *
+     * @see #Second(Date, TimeZone)
      */
     public Second(Date time) {
-        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE);
+        this(time, TimeZone.getDefault());
     }
 
     /**
@@ -150,8 +154,8 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @param time  the instant in time.
      * @param zone  the time zone.
      */
-    public Second(Date time, final TimeZone zone) {
-    	// FIXME:  need a locale as well as a time zone
+    public Second(Date time, TimeZone zone) {
+        // FIXME:  need a locale as well as a time zone
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         this.second = (byte) calendar.get(Calendar.SECOND);

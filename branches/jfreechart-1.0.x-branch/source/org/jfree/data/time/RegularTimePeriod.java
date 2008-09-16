@@ -47,6 +47,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 06-Oct-2006 : Deprecated the WORKING_CALENDAR field and several methods,
  *               added new peg() method (DG);
+ * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
  *
  */
 
@@ -157,6 +158,9 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
 
     /**
      * The default time zone.
+     *
+     * @deprecated As of 1.0.11, we discourage the use of this field - use
+     *     {@link TimeZone#getDefault()} instead.
      */
     public static final TimeZone DEFAULT_TIME_ZONE = TimeZone.getDefault();
 
@@ -165,8 +169,8 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      *
      * @deprecated This was a bad idea, don't use it!
      */
-    public static final Calendar WORKING_CALENDAR
-        = Calendar.getInstance(DEFAULT_TIME_ZONE);
+    public static final Calendar WORKING_CALENDAR = Calendar.getInstance(
+            DEFAULT_TIME_ZONE);
 
     /**
      * Recalculates the start date/time and end date/time for this time period

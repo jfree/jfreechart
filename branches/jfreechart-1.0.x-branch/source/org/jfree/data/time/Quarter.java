@@ -53,6 +53,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 05-Oct-2006 : Updated API docs (DG);
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
+ * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
  *
  */
 
@@ -144,12 +145,15 @@ public class Quarter extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new Quarter, based on a date/time and the default time zone.
+     * Constructs a new instance, based on a date/time and the default time
+     * zone.
      *
-     * @param time  the date/time.
+     * @param time  the date/time (<code>null</code> not permitted).
+     *
+     * @see #Quarter(Date, TimeZone)
      */
     public Quarter(Date time) {
-        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE);
+        this(time, TimeZone.getDefault());
     }
 
     /**
@@ -159,7 +163,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * @param zone  the zone (<code>null</code> not permitted).
      */
     public Quarter(Date time, TimeZone zone) {
-    	// FIXME:  need a locale as well as a timezone
+        // FIXME:  need a locale as well as a timezone
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         int month = calendar.get(Calendar.MONTH) + 1;

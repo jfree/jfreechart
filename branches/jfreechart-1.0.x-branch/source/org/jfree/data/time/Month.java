@@ -56,6 +56,8 @@
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
  * 04-Apr-2007 : Fixed bug in Month(Date, TimeZone) constructor (CB);
  * 01-Sep-2008 : Added clarification for previous() and next() methods (DG);
+ * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE, and updated parsing to handle
+ *               extended range in Year (DG);
  *
  */
 
@@ -131,10 +133,12 @@ public class Month extends RegularTimePeriod implements Serializable {
      * Constructs a new <code>Month</code> instance, based on a date/time and
      * the default time zone.
      *
-     * @param time  the date/time.
+     * @param time  the date/time (<code>null</code> not permitted).
+     *
+     * @see #Month(Date, TimeZone)
      */
     public Month(Date time) {
-        this(time, RegularTimePeriod.DEFAULT_TIME_ZONE);
+        this(time, TimeZone.getDefault());
     }
 
     /**
@@ -146,7 +150,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * @param zone  the time zone (<code>null</code> not permitted).
      */
     public Month(Date time, TimeZone zone) {
-    	// FIXME:  need a locale as well as a timezone
+        // FIXME:  need a locale as well as a timezone
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         this.month = calendar.get(Calendar.MONTH) + 1;
@@ -415,80 +419,80 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Parses the string argument as a month.
-     * <P>
-     * This method is required to accept the format "YYYY-MM".  It will also
-     * accept "MM-YYYY". Anything else, at the moment, is a bonus.
+     * Parses the string argument as a month.  This method is required to
+     * accept the format "YYYY-MM".  It will also accept "MM-YYYY". Anything
+     * else, at the moment, is a bonus.
      *
-     * @param s  the string to parse.
+     * @param s  the string to parse (<code>null</code> permitted).
      *
      * @return <code>null</code> if the string is not parseable, the month
      *         otherwise.
      */
     public static Month parseMonth(String s) {
-
         Month result = null;
-        if (s != null) {
-
-            // trim whitespace from either end of the string
-            s = s.trim();
-
-            int i = Month.findSeparator(s);
-            if (i != -1) {
-                String s1 = s.substring(0, i).trim();
-                String s2 = s.substring(i + 1, s.length()).trim();
-
-                Year year = Month.evaluateAsYear(s1);
-                int month;
-                if (year != null) {
-                    month = SerialDate.stringToMonthCode(s2);
-                    if (month == -1) {
-                        throw new TimePeriodFormatException(
-                            "Can't evaluate the month."
-                        );
-                    }
-                    result = new Month(month, year);
-                }
-                else {
-                    year = Month.evaluateAsYear(s2);
-                    if (year != null) {
-                        month = SerialDate.stringToMonthCode(s1);
-                        if (month == -1) {
-                            throw new TimePeriodFormatException(
-                                "Can't evaluate the month."
-                            );
-                        }
-                        result = new Month(month, year);
-                    }
-                    else {
-                        throw new TimePeriodFormatException(
-                            "Can't evaluate the year."
-                        );
-                    }
-                }
-
+        if (s == null) {
+            return result;
+        }
+        // trim whitespace from either end of the string
+        s = s.trim();
+        int i = Month.findSeparator(s);
+        String s1, s2;
+        boolean yearIsFirst;
+        // if there is no separator, we assume the first four characters
+        // are YYYY
+        if (i == -1) {
+            yearIsFirst = true;
+            s1 = s.substring(0, 5);
+            s2 = s.substring(5);
+        }
+        else {
+            s1 = s.substring(0, i).trim();
+            s2 = s.substring(i + 1, s.length()).trim();
+            // now it is trickier to determine if the month or year is first
+            Year y1 = Month.evaluateAsYear(s1);
+            if (y1 == null) {
+                yearIsFirst = false;
             }
             else {
-                throw new TimePeriodFormatException(
-                    "Could not find separator."
-                );
+                Year y2 = Month.evaluateAsYear(s2);
+                if (y2 == null) {
+                    yearIsFirst = true;
+                }
+                else {
+                    yearIsFirst = (s1.length() > s2.length());
+                }
             }
-
         }
+        Year year;
+        int month;
+        if (yearIsFirst) {
+            year = Month.evaluateAsYear(s1);
+            month = SerialDate.stringToMonthCode(s2);
+        }
+        else {
+            year = Month.evaluateAsYear(s2);
+            month = SerialDate.stringToMonthCode(s1);
+        }
+        if (month == -1) {
+            throw new TimePeriodFormatException("Can't evaluate the month.");
+        }
+        if (year == null) {
+            throw new TimePeriodFormatException("Can't evaluate the year.");
+        }
+        result = new Month(month, year);
         return result;
-
     }
 
     /**
-     * Finds the first occurrence of ' ', '-', ',' or '.'
+     * Finds the first occurrence of '-', or if that character is not found,
+     * the first occurrence of ',', or the first occurrence of ' ', , ',' or '.'
      *
      * @param s  the string to parse.
      *
-     * @return <code>-1</code> if none of the characters where found, the
-     *      position of the first occurence otherwise.
+     * @return The position of the separator character, or <code>-1</code> if
+     *     none of the characters were found.
      */
     private static int findSeparator(String s) {
-
         int result = s.indexOf('-');
         if (result == -1) {
             result = s.indexOf(',');
@@ -503,8 +507,8 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Creates a year from a string, or returns null (format exceptions
-     * suppressed).
+     * Creates a year from a string, or returns <code>null</code> (format
+     * exceptions suppressed).
      *
      * @param s  the string to parse.
      *
@@ -512,7 +516,6 @@ public class Month extends RegularTimePeriod implements Serializable {
      *         otherwise.
      */
     private static Year evaluateAsYear(String s) {
-
         Year result = null;
         try {
             result = Year.parseYear(s);
@@ -521,7 +524,6 @@ public class Month extends RegularTimePeriod implements Serializable {
             // suppress
         }
         return result;
-
     }
 
 }
