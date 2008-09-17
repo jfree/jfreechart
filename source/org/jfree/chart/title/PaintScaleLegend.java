@@ -132,6 +132,7 @@ public class PaintScaleLegend extends Title implements PublicCloneable {
         this.axis = axis;
         this.axisLocation = AxisLocation.BOTTOM_OR_LEFT;
         this.axisOffset = 0.0;
+        this.axis.setRange(scale.getLowerBound(), scale.getUpperBound());
         this.stripWidth = 15.0;
         this.stripOutlineVisible = false;
         this.stripOutlinePaint = Color.gray;

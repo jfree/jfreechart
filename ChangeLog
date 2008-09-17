@@ -1,5 +1,11 @@
 2008-09-17  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/title/PaintScaleLegend.java
+    (PaintScaleLegend(PaintScale, ValueAxis)): Change axis range to reflect
+    scale bounds.
+
+2008-09-17  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/gantt/XYTaskDataset.java: New class,
     * tests/org/jfree/data/gantt/junit/DataGanttPackageTests.java
     (suite): Added XYTaskDatasetTests,
