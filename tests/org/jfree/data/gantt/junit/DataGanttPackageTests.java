@@ -66,6 +66,7 @@ public class DataGanttPackageTests extends TestCase {
         suite.addTestSuite(TaskTests.class);
         suite.addTestSuite(TaskSeriesTests.class);
         suite.addTestSuite(TaskSeriesCollectionTests.class);
+        suite.addTestSuite(XYTaskDatasetTests.class);
         return suite;
     }
 
