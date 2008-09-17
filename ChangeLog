@@ -1,5 +1,10 @@
 2008-09-17  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/annotations/XYDataImageAnnotation.java:
+    New class.
+
+2008-09-17  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/title/PaintScaleLegend.java
     (PaintScaleLegend(PaintScale, ValueAxis)): Change axis range to reflect
     scale bounds.
