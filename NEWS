@@ -1,11 +1,15 @@
 JFreeChart 1.0.11
 -----------------
-? September 2008
+18 September 2008
 
 This release features a new chart theming mechanism to allow charts to be
 restyled easily, a new BarPainter mechanism to enhance the appearance of bar
-charts, a scaling facility for the XYDrawableAnnotation, and various bug fixes 
-and API improvements.
+charts, a new XYShapeRenderer class, a scaling facility for the 
+XYDrawableAnnotation for drawing images within specific data coordinates, some
+new classes (XYTaskDataset, XYDataImageAnnotation and XYTitleAnnotation), a 
+modification to the Year class to support an extended range, and various bug 
+fixes and API improvements.  There is an important bug fix for the 
+StackedBarRenderer3D class (see bug 2031407).
 
 API Adjustments:
 - AbstractRenderer - added clearSeriesPaints() and clearSeriesStrokes() 
@@ -24,11 +28,15 @@ API Adjustments:
 - PaintScaleLegend - new subdivisions field;
 - PiePlot - added autoPopulate flags, and methods to clear section attributes;
 - Plot - added setDrawingSupplier() method;
+- RegularTimePeriod - the DEFAULT_TIME_ZONE field has been deprecated in this
+    release;
 - RelativeDateFormat - added methods to control formatting of hours and 
     minutes - see patch 2033092;
 - StandardChartTheme - new class;
 - XYItemRendererState - new methods;
-- XYPlot - added getRendererCount() method.
+- XYPlot - added getRendererCount() method;
+- XYShapeRenderer - new class;
+- XYTaskDataset - new class.
 
 Patches:
 1997549 : Status calls to XYItemRendererState [Ulrich Voigt];
@@ -37,12 +45,14 @@ Patches:
 
 Bug Fixes:
 1994355 : ChartComposite listener type;
+2031407 : Incorrect rendering in StackedBarRenderer3D;
+2033721 : WaferMapRenderer;
 2051168 : No key in LegendItemEntity for pie charts;
 
 Also fixed drawing of alternate grid bands in SymbolAxis, the totalWeight 
 calculation in the CombinedXXXPlot classes, a NullPointerException in the
 XYPlot class when drawing quadrants, outline visibility in the 
-CategoryPlot class, auto-range calculations with XYBarRenderer.
+CategoryPlot class, and auto-range calculations with XYBarRenderer.
 
 
 JFreeChart 1.0.10
