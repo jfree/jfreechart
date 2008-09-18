@@ -147,6 +147,10 @@ import org.jfree.data.time.DateRange;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.Year;
+import org.jfree.ui.RectangleEdge;
+import org.jfree.ui.RectangleInsets;
+import org.jfree.ui.TextAnchor;
+import org.jfree.util.ObjectUtilities;
 
 /**
  * The base class for axes that display dates.  You will find it easier to
