@@ -117,6 +117,7 @@
  * 21-Nov-2007 : Fixed warnings from FindBugs (DG);
  * 01-Sep-2008 : Use new methods from DateRange, added fix for bug
  *               2078057 (DG);
+ * 18-Sep-2008 : Added locale to go with timezone (DG);
  *
  */
 
@@ -134,6 +135,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.chart.event.AxisChangeEvent;
@@ -145,10 +147,6 @@ import org.jfree.data.time.DateRange;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.Year;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * The base class for axes that display dates.  You will find it easier to
@@ -311,6 +309,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /** The time zone for the axis. */
     private TimeZone timeZone;
 
+    /**
+     * The locale for the axis (<code>null</code> is not permitted).
+     *
+     * @since 1.0.11
+     */
+    private Locale locale;
+
     /** Our underlying timeline. */
     private Timeline timeline;
 
@@ -339,24 +344,46 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @param label  the axis label (<code>null</code> permitted).
      * @param zone  the time zone.
+     *
+     * @deprecated From 1.0.11 onwards, use {@link #DateAxis(String, TimeZone,
+     *         Locale)} instead, to explicitly set the locale.
      */
     public DateAxis(String label, TimeZone zone) {
-        super(label, DateAxis.createStandardDateTickUnits(zone));
+        this(label, zone, Locale.getDefault());
+    }
+
+    /**
+     * Creates a date axis. A timeline is specified for the axis. This allows
+     * special transformations to occur between a domain of values and the
+     * values included in the axis.
+     *
+     * @see org.jfree.chart.axis.SegmentedTimeline
+     *
+     * @param label  the axis label (<code>null</code> permitted).
+     * @param zone  the time zone.
+     * @param locale  the locale (<code>null</code> not permitted).
+     *
+     * @since 1.0.11
+     */
+    public DateAxis(String label, TimeZone zone, Locale locale) {
+        super(label, DateAxis.createStandardDateTickUnits(zone, locale));
         setTickUnit(DateAxis.DEFAULT_DATE_TICK_UNIT, false, false);
         setAutoRangeMinimumSize(
                 DEFAULT_AUTO_RANGE_MINIMUM_SIZE_IN_MILLISECONDS);
         setRange(DEFAULT_DATE_RANGE, false, false);
         this.dateFormatOverride = null;
         this.timeZone = zone;
+        this.locale = locale;
         this.timeline = DEFAULT_TIMELINE;
     }
 
     /**
      * Returns the time zone for the axis.
      *
-     * @return The time zone.
+     * @return The time zone (never <code>null</code>).
      *
      * @since 1.0.4
+     *
      * @see #setTimeZone(TimeZone)
      */
     public TimeZone getTimeZone() {
@@ -370,12 +397,17 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @param zone  the time zone (<code>null</code> not permitted).
      *
      * @since 1.0.4
+     *
      * @see #getTimeZone()
      */
     public void setTimeZone(TimeZone zone) {
+        if (zone == null) {
+            throw new IllegalArgumentException("Null 'zone' argument.");
+        }
         if (!this.timeZone.equals(zone)) {
             this.timeZone = zone;
-            setStandardTickUnits(createStandardDateTickUnits(zone));
+            setStandardTickUnits(createStandardDateTickUnits(zone,
+                    this.locale));
             notifyListeners(new AxisChangeEvent(this));
         }
     }
@@ -834,7 +866,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         int months;
         int years;
 
-        Calendar calendar = Calendar.getInstance(this.timeZone);
+        Calendar calendar = Calendar.getInstance(this.timeZone, this.locale);
         calendar.setTime(date);
         int count = unit.getCount();
         int current = calendar.get(unit.getCalendarField());
@@ -963,6 +995,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 years = calendar.get(Calendar.YEAR);
                 calendar.clear(Calendar.MILLISECOND);
                 calendar.set(years, value, 1, 0, 0, 0);
+                // FIXME:  the following month needs a locale
                 Month month = new Month(calendar.getTime(), this.timeZone);
                 Date standardDate = calculateDateForPosition(
                         month, this.tickMarkPosition);
@@ -970,7 +1003,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 if (millis >= date.getTime()) {
                     month = (Month) month.previous();
                     // need to peg the month in case the time zone isn't the
-                    // default - see bug 2078057 
+                    // default - see bug 2078057
                     month.peg(Calendar.getInstance(this.timeZone));
                     standardDate = calculateDateForPosition(
                             month, this.tickMarkPosition);
@@ -1045,7 +1078,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      */
     protected Date nextStandardDate(Date date, DateTickUnit unit) {
         Date previous = previousStandardDate(date, unit);
-        Calendar calendar = Calendar.getInstance(this.timeZone);
+        Calendar calendar = Calendar.getInstance(this.timeZone, this.locale);
         calendar.setTime(previous);
         calendar.add(unit.getCalendarField(), unit.getCount());
         return calendar.getTime();
@@ -1061,7 +1094,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A collection of standard date tick units.
      */
     public static TickUnitSource createStandardDateTickUnits() {
-        return createStandardDateTickUnits(TimeZone.getDefault());
+        return createStandardDateTickUnits(TimeZone.getDefault(),
+                Locale.getDefault());
     }
 
     /**
@@ -1074,22 +1108,48 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @param zone  the time zone (<code>null</code> not permitted).
      *
      * @return A collection of standard date tick units.
+     *
+     * @deprecated Since 1.0.11, use {@link #createStandardDateTickUnits(
+     *         TimeZone, Locale)} to explicitly set the locale as well as the
+     *         time zone.
      */
     public static TickUnitSource createStandardDateTickUnits(TimeZone zone) {
+    	return createStandardDateTickUnits(zone, Locale.getDefault());
+    }
+
+    /**
+     * Returns a collection of standard date tick units.  This collection will
+     * be used by default, but you are free to create your own collection if
+     * you want to (see the
+     * {@link ValueAxis#setStandardTickUnits(TickUnitSource)} method inherited
+     * from the {@link ValueAxis} class).
+     *
+     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param locale  the locale (<code>null</code> not permitted).
+     *
+     * @return A collection of standard date tick units.
+     *
+     * @since 1.0.11
+     */
+    public static TickUnitSource createStandardDateTickUnits(TimeZone zone,
+    		Locale locale) {
 
         if (zone == null) {
             throw new IllegalArgumentException("Null 'zone' argument.");
         }
+        if (locale == null) {
+        	throw new IllegalArgumentException("Null 'locale' argument.");
+        }
         TickUnits units = new TickUnits();
 
         // date formatters
-        DateFormat f1 = new SimpleDateFormat("HH:mm:ss.SSS");
-        DateFormat f2 = new SimpleDateFormat("HH:mm:ss");
-        DateFormat f3 = new SimpleDateFormat("HH:mm");
-        DateFormat f4 = new SimpleDateFormat("d-MMM, HH:mm");
-        DateFormat f5 = new SimpleDateFormat("d-MMM");
-        DateFormat f6 = new SimpleDateFormat("MMM-yyyy");
-        DateFormat f7 = new SimpleDateFormat("yyyy");
+        DateFormat f1 = new SimpleDateFormat("HH:mm:ss.SSS", locale);
+        DateFormat f2 = new SimpleDateFormat("HH:mm:ss", locale);
+        DateFormat f3 = new SimpleDateFormat("HH:mm", locale);
+        DateFormat f4 = new SimpleDateFormat("d-MMM, HH:mm", locale);
+        DateFormat f5 = new SimpleDateFormat("d-MMM", locale);
+        DateFormat f6 = new SimpleDateFormat("MMM-yyyy", locale);
+        DateFormat f7 = new SimpleDateFormat("yyyy", locale);
 
         f1.setTimeZone(zone);
         f2.setTimeZone(zone);
@@ -1573,10 +1633,12 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 case (DateTickUnit.DAY) :
                     break;
                 case (DateTickUnit.MONTH) :
+                    // FIXME:  the following month needs a locale
                     tickDate = calculateDateForPosition(new Month(tickDate,
                             this.timeZone), this.tickMarkPosition);
                     break;
                 case(DateTickUnit.YEAR) :
+                    // FIXME:  the following year needs a locale
                     tickDate = calculateDateForPosition(new Year(tickDate,
                             this.timeZone), this.tickMarkPosition);
                     break;
