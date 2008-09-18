@@ -1,3 +1,11 @@
+2008-09-18  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/xy/XYShapeRenderer.java: New class,
+    * tests/org/jfree/chart/renderer/xy/junit/XYShapeRendererTests.java:
+    New tests,
+    * tests/org/jfree/chart/renderer/xy/junit/RendererXYPackageTests.java
+    (suite): Added XYShapeRendererTests.
+
 2008-09-17  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/annotations/XYDataImageAnnotation.java:
