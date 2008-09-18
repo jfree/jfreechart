@@ -485,7 +485,7 @@ public class Month extends RegularTimePeriod implements Serializable {
 
     /**
      * Finds the first occurrence of '-', or if that character is not found,
-     * the first occurrence of ',', or the first occurrence of ' ', , ',' or '.'
+     * the first occurrence of ',', or the first occurrence of ' ' or '.'
      *
      * @param s  the string to parse.
      *
