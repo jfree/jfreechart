@@ -140,6 +140,7 @@
  *               outside of the data area (DG);
  * 08-May-2008 : Fixed serialization bug (DG);
  * 15-Aug-2008 : Increased default maxDrawWidth/Height (DG);
+ * 18-Sep-2008 : Modified creation of chart buffer (DG);
  *
  */
 
@@ -150,9 +151,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Point;
+import java.awt.Transparency;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -1302,12 +1305,10 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     || (this.chartBufferHeight != available.getHeight())) {
                 this.chartBufferWidth = (int) available.getWidth();
                 this.chartBufferHeight = (int) available.getHeight();
-                this.chartBuffer = createImage(this.chartBufferWidth,
-                        this.chartBufferHeight);
-//                GraphicsConfiguration gc = g2.getDeviceConfiguration();
-//                this.chartBuffer = gc.createCompatibleImage(
-//                        this.chartBufferWidth, this.chartBufferHeight,
-//                        Transparency.TRANSLUCENT);
+                GraphicsConfiguration gc = g2.getDeviceConfiguration();
+                this.chartBuffer = gc.createCompatibleImage(
+                        this.chartBufferWidth, this.chartBufferHeight,
+                        Transparency.TRANSLUCENT);
                 this.refreshBuffer = true;
                 clearBuffer = false;  // buffer is new, no clearing required
             }
