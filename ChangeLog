@@ -1,3 +1,15 @@
+----------  JFREECHART 1.0.11 RELEASED ------------------------
+
+2008-08-18  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/axis/DateAxis.java
+    (locale): New field,
+    (DateAxis(String, TimeZone, Locale)): New constructor,
+    (setTimeZone): Updated to use new locale field,
+    (previousStandardDate): Likewise,
+    (createStandardDateTickUnits(TimeZone)): Deprecated, 
+    (createStandardDateTickUnits(TimeZone, Locale)): New method.
+    
 2008-09-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartPanel.java
