@@ -1,8 +1,8 @@
 ********************************
-*  JFREECHART: Version 1.0.10  *
+*  JFREECHART: Version 1.0.11  *
 ********************************
 
-9 June 2008
+18 September 2008
 
 (C)opyright 2000-2008, by Object Refinery Limited and Contributors.
 
@@ -35,7 +35,7 @@ message in the JFreeChart forum.
 3.  DOCUMENTATION
 -----------------
 You can download installation instructions
-(jfreechart-1.0.10-install.pdf) from the JFreeChart home
+(jfreechart-1.0.11-install.pdf) from the JFreeChart home
 page or the project page on SourceForge.
 
 Further documentation for JFreeChart (the JFreeChart Developer Guide) is
@@ -67,7 +67,7 @@ Microsoft's Internet Explorer - your users will need to have the Java 2
 plug-in installed.  Most other browsers (e.g. Firefox, Mozilla, Netscape, 
 Konqueror) support JRE 1.4, 1.5 or 1.6.
 
-(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.13) 
+(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.14) 
 is included in the JFreeChart distribution.  You can obtain the complete
 source code for JCommon from:
 
@@ -141,7 +141,7 @@ A demo application that shows a selection of the charts that can be
 generated is included in the JFreeChart distribution.   To run the
 demo (using JDK 1.3.1 or later), use the following command:
 
-    java -jar jfreechart-1.0.10-demo.jar
+    java -jar jfreechart-1.0.11-demo.jar
 
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
@@ -193,7 +193,12 @@ developers that have made this possible.
 ---------------
 A list of changes in recent versions:
 
-1.0.10 : (5-May-2008)
+1.0.11 : (18-Sep-2008)
+        - this release includes a new chart theming mechanism, and numerous 
+          other feature enhancements and bug fixes - see the NEWS and ChangeLog
+          files for details.
+          
+1.0.10 : (8-Jun-2008)
         - another general maintenance release - see the NEWS and ChangeLog 
           files for more details.
 

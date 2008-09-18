@@ -3,13 +3,15 @@ JFreeChart 1.0.11
 18 September 2008
 
 This release features a new chart theming mechanism to allow charts to be
-restyled easily, a new BarPainter mechanism to enhance the appearance of bar
-charts, a new XYShapeRenderer class, a scaling facility for the 
+restyled conveniently, a new BarPainter mechanism to enhance the appearance of 
+bar charts, a new XYShapeRenderer class, a scaling facility for the 
 XYDrawableAnnotation for drawing images within specific data coordinates, some
 new classes (XYTaskDataset, XYDataImageAnnotation and XYTitleAnnotation), a 
 modification to the Year class to support an extended range, and various bug 
 fixes and API improvements.  There is an important bug fix for the 
 StackedBarRenderer3D class (see bug 2031407).
+
+This release passes 1,961 JUnit tests (0 failures) on JRE 1.6.0_07.
 
 API Adjustments:
 - AbstractRenderer - added clearSeriesPaints() and clearSeriesStrokes() 
