@@ -1,5 +1,10 @@
 2008-09-18  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/ChartPanel.java
+    (paintComponent): Modified chart buffer creation.
+
+2008-09-18  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/xy/XYShapeRenderer.java: New class,
     * tests/org/jfree/chart/renderer/xy/junit/XYShapeRendererTests.java:
     New tests,
