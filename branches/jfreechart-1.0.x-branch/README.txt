@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.11  *
 ********************************
 
-18 September 2008
+19 September 2008
 
 (C)opyright 2000-2008, by Object Refinery Limited and Contributors.
 
@@ -730,6 +730,7 @@ below:
     - Pascal Collet
     - Martin Cordova
     - Paolo Cova
+    - Greg Darke
     - Mike Duffy
     - Don Elliott
     - Rune Fauske
