@@ -52,6 +52,8 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
+import org.jfree.chart.annotations.XYAnnotation;
+import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.PeriodAxis;
 import org.jfree.chart.axis.PeriodAxisLabelInfo;
@@ -130,6 +132,11 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      */
     private Font regularFont;
 
+    /**
+     * The small font size.
+     */
+    private Font smallFont;
+
     /** The paint used to display the main chart title. */
     private transient Paint titlePaint;
 
@@ -165,6 +172,9 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
 
     /** The range grid line paint. */
     private transient Paint rangeGridlinePaint;
+
+    /** The crosshair paint. */
+    private transient Paint crosshairPaint;
 
     /** The axis offsets. */
     private RectangleInsets axisOffset;
@@ -236,6 +246,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         theme.chartBackgroundPaint = Color.black;
         theme.plotBackgroundPaint = Color.black;
         theme.plotOutlinePaint = Color.yellow;
+        theme.crosshairPaint = Color.red;
         theme.labelLinkPaint = Color.lightGray;
         theme.tickLabelPaint = Color.white;
         theme.axisLabelPaint = Color.white;
@@ -288,7 +299,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.extraLargeFont = new Font("Tahoma", Font.BOLD, 20);
         this.largeFont = new Font("Tahoma", Font.BOLD, 14);
         this.regularFont = new Font("Tahoma", Font.PLAIN, 12);
-
+        this.smallFont = new Font("Tahoma", Font.PLAIN, 10);
         this.titlePaint = Color.black;
         this.subtitlePaint = Color.black;
         this.legendBackgroundPaint = Color.white;
@@ -302,6 +313,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.axisOffset = new RectangleInsets(4, 4, 4, 4);
         this.domainGridlinePaint = Color.white;
         this.rangeGridlinePaint = Color.white;
+        this.crosshairPaint = Color.blue;
         this.axisLabelPaint = Color.darkGray;
         this.tickLabelPaint = Color.darkGray;
         this.barPainter = new GradientBarPainter();
@@ -656,6 +668,27 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.rangeGridlinePaint = paint;
+    }
+
+    /**
+     * Returns the crosshair paint.
+     *
+     * @return The crosshair paint.
+     */
+    public Paint getCrosshairPaint() {
+        return this.crosshairPaint;
+    }
+
+    /**
+     * Sets the crosshair paint.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     */
+    public void setCrosshairPaint(Paint paint) {
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
+        this.crosshairPaint = paint;
     }
 
     /**
@@ -1276,7 +1309,8 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         plot.setAxisOffset(this.axisOffset);
         plot.setDomainGridlinePaint(this.domainGridlinePaint);
         plot.setRangeGridlinePaint(this.rangeGridlinePaint);
-
+        plot.setDomainCrosshairPaint(this.crosshairPaint);
+        plot.setRangeCrosshairPaint(this.crosshairPaint);
         // process all domain axes
         int domainAxisCount = plot.getDomainAxisCount();
         for (int i = 0; i < domainAxisCount; i++) {
@@ -1303,6 +1337,14 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
                 applyToXYItemRenderer(r);
             }
         }
+
+        // process all annotations
+        Iterator iter = plot.getAnnotations().iterator();
+        while (iter.hasNext()) {
+            XYAnnotation a = (XYAnnotation) iter.next();
+            applyToXYAnnotation(a);
+        }
+
         if (plot instanceof CombinedDomainXYPlot) {
             CombinedDomainXYPlot cp = (CombinedDomainXYPlot) plot;
             Iterator iterator = cp.getSubplots().iterator();
@@ -1552,6 +1594,22 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     }
 
     /**
+     * Applies the settings of this theme to the specified annotation.
+     *
+     * @param annotation  the annotation.
+     */
+    protected void applyToXYAnnotation(XYAnnotation annotation) {
+        if (annotation == null) {
+            throw new IllegalArgumentException("Null 'annotation' argument.");
+        }
+        if (annotation instanceof XYTextAnnotation) {
+            XYTextAnnotation xyta = (XYTextAnnotation) annotation;
+            xyta.setFont(this.smallFont);
+            xyta.setPaint(this.itemLabelPaint);
+        }
+    }
+
+    /**
      * Tests this theme for equality with an arbitrary object.
      *
      * @param obj  the object (<code>null</code> permitted).
@@ -1576,6 +1634,9 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             return false;
         }
         if (!this.regularFont.equals(that.regularFont)) {
+            return false;
+        }
+        if (!this.smallFont.equals(that.smallFont)) {
             return false;
         }
         if (!PaintUtilities.equal(this.titlePaint, that.titlePaint)) {
@@ -1618,6 +1679,9 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         }
         if (!PaintUtilities.equal(this.rangeGridlinePaint,
                 that.rangeGridlinePaint)) {
+            return false;
+        }
+        if (!PaintUtilities.equal(this.crosshairPaint, that.crosshairPaint)) {
             return false;
         }
         if (!this.axisOffset.equals(that.axisOffset)) {
@@ -1695,6 +1759,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         SerialUtilities.writePaint(this.labelLinkPaint, stream);
         SerialUtilities.writePaint(this.domainGridlinePaint, stream);
         SerialUtilities.writePaint(this.rangeGridlinePaint, stream);
+        SerialUtilities.writePaint(this.crosshairPaint, stream);
         SerialUtilities.writePaint(this.axisLabelPaint, stream);
         SerialUtilities.writePaint(this.tickLabelPaint, stream);
         SerialUtilities.writePaint(this.itemLabelPaint, stream);
@@ -1727,6 +1792,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.labelLinkPaint = SerialUtilities.readPaint(stream);
         this.domainGridlinePaint = SerialUtilities.readPaint(stream);
         this.rangeGridlinePaint = SerialUtilities.readPaint(stream);
+        this.crosshairPaint = SerialUtilities.readPaint(stream);
         this.axisLabelPaint = SerialUtilities.readPaint(stream);
         this.tickLabelPaint = SerialUtilities.readPaint(stream);
         this.itemLabelPaint = SerialUtilities.readPaint(stream);
