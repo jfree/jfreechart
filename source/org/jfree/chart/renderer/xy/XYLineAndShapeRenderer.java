@@ -1298,7 +1298,6 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @return <code>true</code> or <code>false</code>.
      */
     public boolean equals(Object obj) {
-
         if (obj == this) {
             return true;
         }
@@ -1358,7 +1357,6 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             return false;
         }
         return true;
-
     }
 
     /**
