@@ -2,6 +2,20 @@
 
 2008-09-19  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch from Greg Darke, slightly modified:
+    * source/org/jfree/chart/renderer/xy/XYItemRendererState.java
+    (firstItemIndex): New field,
+    (lastItemIndex): Likewise,
+    (getFirstItemIndex): New method,
+    (getLastItemIndex): New method,
+    (startSeriesPass): Record first and last item indices,
+    * source/org/jfree/chart/renderer/xy/XYLineAndShapeRenderer.java
+    (State.startSeriesPass): Reset series state,
+    (drawItem): Removed code that is handled in State now,
+    (drawPrimaryLineAsPath): Fix check for last item.
+
+2008-09-19  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/StandardChartTheme.java
     (smallFont): New field,
     (crosshairPaint): New field,

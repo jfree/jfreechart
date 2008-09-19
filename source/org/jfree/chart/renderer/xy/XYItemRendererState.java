@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Ulrich Voigt;
+ *                   Greg Darke;
  *
  * Changes:
  * --------
@@ -40,6 +41,8 @@
  * 04-May-2007 : Added processVisibleItemsOnly flag (DG);
  * 09-Jul-2008 : Added start/endSeriesPass() methods - see patch 1997549 by
  *               Ulrich Voigt (DG);
+ * 19-Sep-2008 : Added first and last item indices, based on patch by Greg
+ *               Darke (DG);
  *
  */
 
@@ -56,6 +59,20 @@ import org.jfree.data.xy.XYDataset;
  * The state for an {@link XYItemRenderer}.
  */
 public class XYItemRendererState extends RendererState {
+
+    /**
+     * The first item in the series that will be displayed.
+     *
+     * @since 1.0.11
+     */
+    private int firstItemIndex;
+
+    /**
+     * The last item in the current series that will be displayed.
+     *
+     * @since 1.0.11
+     */
+    private int lastItemIndex;
 
     /**
      * A line object that the renderer can reuse to save instantiating a lot
@@ -110,10 +127,34 @@ public class XYItemRendererState extends RendererState {
     }
 
     /**
+     * Returns the first item index (this is updated with each call to
+     * {@link #startSeriesPass(XYDataset, int, int, int, int, int)}.
+     *
+     * @return The first item index.
+     *
+     * @since 1.0.11
+     */
+    public int getFirstItemIndex() {
+        return this.firstItemIndex;
+    }
+
+    /**
+     * Returns the last item index (this is updated with each call to
+     * {@link #startSeriesPass(XYDataset, int, int, int, int, int)}.
+     *
+     * @return The last item index.
+     *
+     * @since 1.0.11
+     */
+    public int getLastItemIndex() {
+        return this.lastItemIndex;
+    }
+
+    /**
      * This method is called by the {@link XYPlot} when it starts a pass
      * through the (visible) items in a series.  The default implementation
-     * does nothing, but you can override this method to implement specialised
-     * behaviour.
+     * records the first and last item indices - override this method to
+     * implement additional specialised behaviour.
      *
      * @param dataset  the dataset.
      * @param series  the series index.
@@ -128,7 +169,8 @@ public class XYItemRendererState extends RendererState {
      */
     public void startSeriesPass(XYDataset dataset, int series, int firstItem,
             int lastItem, int pass, int passCount) {
-        // do nothing...this is just a hook for subclasses
+        this.firstItemIndex = firstItem;
+        this.lastItemIndex = lastItem;
     }
 
     /**

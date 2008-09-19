@@ -116,6 +116,7 @@ public class TimeSeriesChartDemo1 extends ApplicationFrame {
             XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) r;
             renderer.setBaseShapesVisible(true);
             renderer.setBaseShapesFilled(true);
+            renderer.setDrawSeriesLineAsPath(true);
         }
 
         DateAxis axis = (DateAxis) plot.getDomainAxis();
