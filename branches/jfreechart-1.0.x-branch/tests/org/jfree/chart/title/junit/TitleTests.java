@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 17-Feb-2004 : Version 1 (DG);
+ * 18-Sep-2008 : Updated testEquals() (DG);
  *
  */
 
@@ -96,6 +97,11 @@ public class TitleTests extends TestCase {
         t1.setVerticalAlignment(VerticalAlignment.BOTTOM);
         assertFalse(t1.equals(t2));
         t2.setVerticalAlignment(VerticalAlignment.BOTTOM);
+        assertTrue(t1.equals(t2));
+
+        t1.setVisible(false);
+        assertFalse(t1.equals(t2));
+        t2.setVisible(false);
         assertTrue(t1.equals(t2));
 
     }
