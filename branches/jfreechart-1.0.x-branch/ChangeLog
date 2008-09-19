@@ -2,6 +2,21 @@
 
 2008-09-19  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/StandardChartTheme.java
+    (smallFont): New field,
+    (crosshairPaint): New field,
+    (createDarknessTheme): Initilise crosshairPaint,
+    (StandardChartTheme): Initialise new fields,
+    (getCrosshairPaint): New method,
+    (setCrosshairPaint): Likewise,
+    (applyToXYPlot): Apply crosshair paint and process annotations,
+    (applyToXYAnnotation): New method,
+    (equals): Check new fields,
+    (writeObject): Handle crosshairPaint,
+    (readObject): Likewise.
+    
+2008-09-19  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/JFreeChart.java
     (draw): Check title visibility,
     * source/org/jfree/chart/title/Title.java
