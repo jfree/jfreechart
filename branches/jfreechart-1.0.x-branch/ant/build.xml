@@ -146,6 +146,12 @@
                 <exclude name="org/jfree/chart/xml/**"/>
             </packageset>
         </javadoc>
+        <!-- copy across .png files -->
+        <copy todir="${basedir}/javadoc/images">
+            <fileset dir="${basedir}/docfiles">
+                <include name="*.png" />
+            </fileset>
+        </copy>
     </target>
 	
 	
@@ -207,6 +213,11 @@
               <exclude name="**/CVS/*"/>
             </fileset>
         </copy>    	
+
+        <copy todir="${basedir}/distribution/docfiles">
+            <fileset dir="${basedir}/docfiles">
+            </fileset>
+        </copy>     
 
         <!-- copy across lib files -->
         <copy file="${jcommon.jar}" tofile="${basedir}/distribution/lib/${jcommon.name}-${jcommon.version}.jar" />
