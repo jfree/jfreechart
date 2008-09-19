@@ -63,6 +63,7 @@
  * 26-Oct-2007 : Deprecated override attributes (DG);
  * 02-Jun-2008 : Fixed tooltips at lower edges of data area (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
+ * 19-Sep-2008 : Fixed bug with drawSeriesLineAsPath - patch by Greg Darke (DG);
  *
  */
 
@@ -807,6 +808,26 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         public void setLastPointGood(boolean good) {
             this.lastPointGood = good;
         }
+
+        /**
+         * This method is called by the {@link XYPlot} at the start of each
+         * series pass.  We reset the state for the current series.
+         *
+         * @param dataset  the dataset.
+         * @param series  the series index.
+         * @param firstItem  the first item index for this pass.
+         * @param lastItem  the last item index for this pass.
+         * @param pass  the current pass index.
+         * @param passCount  the number of passes.
+         */
+        public void startSeriesPass(XYDataset dataset, int series,
+                int firstItem, int lastItem, int pass, int passCount) {
+            this.seriesPath.reset();
+            this.lastPointGood = false;
+            super.startSeriesPass(dataset, series, firstItem, lastItem, pass,
+                    passCount);
+       }
+
     }
 
     /**
@@ -875,14 +896,6 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
         // first pass draws the background (lines, for instance)
         if (isLinePass(pass)) {
-            if (item == 0) {
-                if (this.drawSeriesLineAsPath) {
-                    State s = (State) state;
-                    s.seriesPath.reset();
-                    s.lastPointGood = false;
-                }
-            }
-
             if (getItemLineVisible(series, item)) {
                 if (this.drawSeriesLineAsPath) {
                     drawPrimaryLineAsPath(state, g2, plot, dataset, pass,
@@ -1080,7 +1093,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             s.setLastPointGood(false);
         }
         // if this is the last item, draw the path ...
-        if (item == dataset.getItemCount(series) - 1) {
+        if (item == s.getLastItemIndex()) {
             // draw path
             drawFirstPassShape(g2, pass, series, item, s.seriesPath);
         }
