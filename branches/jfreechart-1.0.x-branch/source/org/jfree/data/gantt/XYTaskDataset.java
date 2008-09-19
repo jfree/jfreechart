@@ -54,7 +54,7 @@ import org.jfree.data.xy.IntervalXYDataset;
  * A dataset implementation that wraps a {@link TaskSeriesCollection} and
  * presents it as an {@link IntervalXYDataset}, allowing a set of tasks to
  * be displayed using an {@link XYBarRenderer} (and usually a
- * {@link SymbolAxis}.  This is a very specialised dataset implementation
+ * {@link SymbolAxis}).  This is a very specialised dataset implementation
  * ---before using it, you should take some time to understand the use-cases
  * that it is designed for.
  *
