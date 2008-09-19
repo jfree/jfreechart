@@ -1,6 +1,6 @@
 JFreeChart 1.0.11
 -----------------
-18 September 2008
+19 September 2008
 
 This release features a new chart theming mechanism to allow charts to be
 restyled conveniently, a new BarPainter mechanism to enhance the appearance of 
