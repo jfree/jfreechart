@@ -141,6 +141,7 @@
  *               TextTitle) (DG);
  * 23-Apr-2008 : Added new contributor (Diego Pierangeli) (DG);
  * 16-May-2008 : Added new contributor (Michael Siemer) (DG);
+ * 19-Sep-2008 : Check for title visibility (DG);
  *
  */
 
@@ -1207,10 +1208,12 @@ public class JFreeChart implements Drawable,
         Iterator iterator = this.subtitles.iterator();
         while (iterator.hasNext()) {
             Title currentTitle = (Title) iterator.next();
-            EntityCollection e = drawTitle(currentTitle, g2, nonTitleArea,
-                    (entities != null));
-            if (e != null) {
-                entities.addAll(e);
+            if (currentTitle.isVisible()) {
+                EntityCollection e = drawTitle(currentTitle, g2, nonTitleArea,
+                        (entities != null));
+                if (e != null) {
+                    entities.addAll(e);
+                }
             }
         }
 
