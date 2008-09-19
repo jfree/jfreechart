@@ -1773,6 +1773,7 @@ class JFreeChartInfo extends ProjectInfo {
                 new Contributor("Pascal Collet", "-"),
                 new Contributor("Martin Cordova", "-"),
                 new Contributor("Paolo Cova", "-"),
+                new Contributor("Greg Darke", "-"),
                 new Contributor("Mike Duffy", "-"),
                 new Contributor("Don Elliott", "-"),
                 new Contributor("David Forslund", "-"),
