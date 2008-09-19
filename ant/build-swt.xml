@@ -40,7 +40,7 @@
         </javac>
 
         <!-- make the jar -->
-        <jar jarfile="${basedir}/swtgraphics2d.jar"
+        <jar jarfile="${basedir}/lib/swtgraphics2d.jar"
              basedir="${basedir}/build" >
         </jar>
 
@@ -68,7 +68,7 @@
         </javac>
 
         <!-- make the jar -->
-        <jar jarfile="${basedir}/${jfreechart.name}-${jfreechart.version}-swt.jar"
+        <jar jarfile="${basedir}/lib/${jfreechart.name}-${jfreechart.version}-swt.jar"
              basedir="${basedir}/build" >
         </jar>
 
