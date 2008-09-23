@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limtied);
- * Contributor(s):   -;
+ * Contributor(s):   Christoph Beck (bug 2121818);
  *
  * Changes
  * -------
@@ -43,6 +43,7 @@
  * 27-Sep-2006 : Updated drawItem() method for new lookup methods (DG);
  * 12-Oct-2006 : Added configurable section depth (DG);
  * 14-Feb-2007 : Added notification in setSectionDepth() method (DG);
+ * 23-Sep-2008 : Fix for bug 2121818 by Christoph Beck (DG);
  *
  */
 
@@ -454,6 +455,16 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
             }
         }
         state.setLatestAngle(angle2);
+    }
+
+    /**
+     * This method overrides the default value for cases where the ring plot
+     * is very thin.  This fixes bug 2121818.
+     *
+     * @return The label link depth, as a percentage of the plot's radius.
+     */
+    protected double getLabelLinkDepth() {
+        return Math.min(super.getLabelLinkDepth(), getSectionDepth() / 2);
     }
 
     /**

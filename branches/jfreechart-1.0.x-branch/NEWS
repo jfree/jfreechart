@@ -2,6 +2,9 @@ JFreeChart 1.0.12
 -----------------
 ?? ??? 2008
 
+Bug Fixes:
+2121818 : Label link lines for very thin RingPlot;
+
 Also fixed StackedXYBarRenderer which was ignoring the shadowsVisible attribute.
 
 
