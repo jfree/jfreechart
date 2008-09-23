@@ -37,6 +37,7 @@
  *                   Arnaud Lelievre;
  *                   Martin Hilpert (patch 1891849);
  *                   Andreas Schroeder (very minor);
+ *                   Christoph Beck (bug 2121818);
  *
  * Changes
  * -------
@@ -157,6 +158,8 @@
  * 15-Aug-2008 : Added methods to clear section attributes (DG);
  * 15-Aug-2008 : Fixed bug 2051168 - problem with LegendItemEntity
  *               generation (DG);
+ * 23-Sep-2008 : Added getLabelLinkDepth() method - see bug 2121818 reported
+ *               by Christoph Beck (DG);
  *
  */
 
@@ -1846,6 +1849,21 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
+     * Returns the distance that the end of the label link is embedded into
+     * the plot, expressed as a percentage of the plot's radius.
+     * <br><br>
+     * This method is overridden in the {@link RingPlot} class to resolve
+     * bug 2121818.
+     *
+     * @return <code>0.10</code>.
+     *
+     * @since 1.0.12
+     */
+    protected double getLabelLinkDepth() {
+        return 0.1;
+    }
+
+    /**
      * Returns the section label font.
      *
      * @return The font (never <code>null</code>).
@@ -2815,7 +2833,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
                 this.labelDistributor.addPieLabelRecord(new PieLabelRecord(
                         leftKeys.getKey(i), theta, baseY, labelBox, hh,
-                        lGap / 2.0 + lGap / 2.0 * -Math.cos(theta), 0.9
+                        lGap / 2.0 + lGap / 2.0 * -Math.cos(theta), 1.0
+                        - getLabelLinkDepth()
                         + getExplodePercent(leftKeys.getKey(i))));
             }
         }
@@ -2869,7 +2888,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 this.labelDistributor.addPieLabelRecord(new PieLabelRecord(
                         keys.getKey(i), theta, baseY, labelBox, hh,
                         lGap / 2.0 + lGap / 2.0 * Math.cos(theta),
-                        0.9 + getExplodePercent(keys.getKey(i))));
+                        1.0 - getLabelLinkDepth()
+                        + getExplodePercent(keys.getKey(i))));
             }
         }
         double hh = plotArea.getHeight();
