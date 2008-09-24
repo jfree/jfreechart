@@ -1,3 +1,10 @@
+2008-09-24  David Gilbert  <david.gilbert@object-refinery.com>
+
+	Bug 2113627 
+	* source/org/jfree/chart/renderer/XYStepRenderer.java
+	(drawItem): Draw item labels in second pass only, add chart
+	entity info in first pass only.
+
 2008-09-23  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 2121818 (fix by Christoph Beck):
@@ -34,7 +41,7 @@
     * source/org/jfree/chart/StandardChartTheme.java
     (smallFont): New field,
     (crosshairPaint): New field,
-    (createDarknessTheme): Initilise crosshairPaint,
+    (createDarknessTheme): Initialise crosshairPaint,
     (StandardChartTheme): Initialise new fields,
     (getCrosshairPaint): New method,
     (setCrosshairPaint): Likewise,
