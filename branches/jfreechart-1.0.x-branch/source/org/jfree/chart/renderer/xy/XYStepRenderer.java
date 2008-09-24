@@ -63,6 +63,8 @@
  * 14-Feb-2008 : Applied patch 1874890 by Ulrich Voigt (with contribution from
  *               Martin Hoeller) (DG);
  * 14-May-2008 : Call addEntity() in drawItem() (DG);
+ * 24-Sep-2008 : Fixed bug 2113627 by utilising second pass to draw item
+ *               labels (DG);
  *
  */
 
@@ -182,7 +184,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
      *                        (<code>null</code> permitted).
-     * @param pass  the pass index (ignored here).
+     * @param pass  the pass index.
      */
     public void drawItem(Graphics2D g2,
                          XYItemRendererState state,
@@ -219,7 +221,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
         double transY1 = (Double.isNaN(y1) ? Double.NaN
                 : rangeAxis.valueToJava2D(y1, dataArea, yAxisLocation));
 
-        if (item > 0) {
+        if (pass== 0 && item > 0) {
             // get the previous data point...
             double x0 = dataset.getXValue(series, item - 1);
             double y0 = dataset.getYValue(series, item - 1);
@@ -267,32 +269,34 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
                 }
             }
 
-        }
+            // submit this data item as a candidate for the crosshair point
+            int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
+            int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
+            updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex,
+                    rangeAxisIndex, transX1, transY1, orientation);
 
-        // draw the item label if there is one...
-        if (isItemLabelVisible(series, item)) {
-            double xx = transX1;
-            double yy = transY1;
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                xx = transY1;
-                yy = transX1;
+            // collect entity and tool tip information...
+            EntityCollection entities = state.getEntityCollection();
+            if (entities != null) {
+                addEntity(entities, null, dataset, series, item, transX1,
+                        transY1);
             }
-            drawItemLabel(g2, orientation, dataset, series, item, xx, yy,
-                    (y1 < 0.0));
+
         }
 
-        // submit this data item as a candidate for the crosshair point
-        int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
-        int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-        updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex,
-                rangeAxisIndex, transX1, transY1, orientation);
-
-        // collect entity and tool tip information...
-        EntityCollection entities = state.getEntityCollection();
-        if (entities != null) {
-            addEntity(entities, null, dataset, series, item, transX1, transY1);
+        if (pass == 1) {
+            // draw the item label if there is one...
+            if (isItemLabelVisible(series, item)) {
+                double xx = transX1;
+                double yy = transY1;
+                if (orientation == PlotOrientation.HORIZONTAL) {
+                    xx = transY1;
+                    yy = transX1;
+                }
+                drawItemLabel(g2, orientation, dataset, series, item, xx, yy,
+                        (y1 < 0.0));
+            }
         }
-
     }
 
     /**
