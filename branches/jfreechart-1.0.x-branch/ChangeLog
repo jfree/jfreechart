@@ -1,7 +1,12 @@
+2008-09-25  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/xy/HighLowRenderer.java
+    (drawItem): Check for non-null entity collection.
+
 2008-09-24  David Gilbert  <david.gilbert@object-refinery.com>
 
 	Bug 2113627 
-	* source/org/jfree/chart/renderer/XYStepRenderer.java
+	* source/org/jfree/chart/renderer/xy/XYStepRenderer.java
 	(drawItem): Draw item labels in second pass only, add chart
 	entity info in first pass only.
 
