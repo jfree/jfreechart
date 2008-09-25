@@ -31,7 +31,9 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bill Kelemen;
- *                   Nicolas Brodu.
+ *                   Nicolas Brodu;
+ *                   Peter Kolb (patch 1934255);
+ *                   Andrew Mickish (patch 1870189);
  *
  * Changes
  * -------
@@ -77,6 +79,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 22-Aug-2006 : API doc updates (DG);
  * 06-Jun-2008 : Added setTickLabelInsets(RectangleInsets, boolean) (DG);
+ * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  *
  */
 
@@ -217,16 +220,44 @@ public abstract class Axis implements Cloneable, Serializable {
     private RectangleInsets tickLabelInsets;
 
     /**
-     * A flag that indicates whether or not tick marks are visible for the
-     * axis.
+     * A flag that indicates whether or not major tick marks are visible for
+     * the axis.
      */
     private boolean tickMarksVisible;
 
-    /** The length of the tick mark inside the data area (zero permitted). */
+    /**
+     * The length of the major tick mark inside the data area (zero
+     * permitted).
+     */
     private float tickMarkInsideLength;
 
-    /** The length of the tick mark outside the data area (zero permitted). */
+    /**
+     * The length of the major tick mark outside the data area (zero
+     * permitted).
+     */
     private float tickMarkOutsideLength;
+
+    /**
+     * A flag that indicates whether or not minor tick marks are visible for the
+     * axis.
+     *
+     * @since 1.0.12
+     */
+    private boolean minorTickMarksVisible;
+
+    /**
+     * The length of the minor tick mark inside the data area (zero permitted).
+     *
+     * @since 1.0.12
+     */
+    private float minorTickMarkInsideLength;
+
+    /**
+     * The length of the minor tick mark outside the data area (zero permitted).
+     *
+     * @since 1.0.12
+     */
+    private float minorTickMarkOutsideLength;
 
     /** The stroke used to draw tick marks. */
     private transient Stroke tickMarkStroke;
@@ -274,6 +305,10 @@ public abstract class Axis implements Cloneable, Serializable {
         this.tickMarkPaint = DEFAULT_TICK_MARK_PAINT;
         this.tickMarkInsideLength = DEFAULT_TICK_MARK_INSIDE_LENGTH;
         this.tickMarkOutsideLength = DEFAULT_TICK_MARK_OUTSIDE_LENGTH;
+
+        this.minorTickMarksVisible = false;
+        this.minorTickMarkInsideLength = 0.0f;
+        this.minorTickMarkOutsideLength = 2.0f;
 
         this.plot = null;
 
@@ -590,6 +625,38 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
+     * Returns the flag that indicates whether or not the minor tick marks are
+     * showing.
+     *
+     * @return The flag that indicates whether or not the minor tick marks are
+     *         showing.
+     *
+     * @see #setMinorTickMarksVisible(boolean)
+     *
+     * @since 1.0.12
+     */
+    public boolean isMinorTickMarksVisible() {
+        return this.minorTickMarksVisible;
+    }
+
+    /**
+     * Sets the flag that indicates whether or not the minor tick marks are showing
+     * and sends an {@link AxisChangeEvent} to all registered listeners.
+     *
+     * @param flag  the flag.
+     *
+     * @see #isMinorTickMarksVisible()
+     *
+     * @since 1.0.12
+     */
+    public void setMinorTickMarksVisible(boolean flag) {
+        if (flag != this.minorTickMarksVisible) {
+            this.minorTickMarksVisible = flag;
+            notifyListeners(new AxisChangeEvent(this));
+        }
+    }
+
+    /**
      * Returns the font used for the tick labels (if showing).
      *
      * @return The font (never <code>null</code>).
@@ -808,6 +875,64 @@ public abstract class Axis implements Cloneable, Serializable {
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.tickMarkPaint = paint;
+        notifyListeners(new AxisChangeEvent(this));
+    }
+
+    /**
+     * Returns the inside length of the minor tick marks.
+     *
+     * @return The length.
+     *
+     * @see #getMinorTickMarkOutsideLength()
+     * @see #setMinorTickMarkInsideLength(float)
+     *
+     * @since 1.0.12
+     */
+    public float getMinorTickMarkInsideLength() {
+        return this.minorTickMarkInsideLength;
+    }
+
+    /**
+     * Sets the inside length of the minor tick marks and sends
+     * an {@link AxisChangeEvent} to all registered listeners.
+     *
+     * @param length  the new length.
+     *
+     * @see #getMinorTickMarkInsideLength()
+     *
+     * @since 1.0.12
+     */
+    public void setMinorTickMarkInsideLength(float length) {
+        this.minorTickMarkInsideLength = length;
+        notifyListeners(new AxisChangeEvent(this));
+    }
+
+    /**
+     * Returns the outside length of the minor tick marks.
+     *
+     * @return The length.
+     *
+     * @see #getMinorTickMarkInsideLength()
+     * @see #setMinorTickMarkOutsideLength(float)
+     *
+     * @since 1.0.12
+     */
+    public float getMinorTickMarkOutsideLength() {
+        return this.minorTickMarkOutsideLength;
+    }
+
+    /**
+     * Sets the outside length of the minor tick marks and sends
+     * an {@link AxisChangeEvent} to all registered listeners.
+     *
+     * @param length  the new length.
+     *
+     * @see #getMinorTickMarkInsideLength()
+     *
+     * @since 1.0.12
+     */
+    public void setMinorTickMarkOutsideLength(float length) {
+        this.minorTickMarkOutsideLength = length;
         notifyListeners(new AxisChangeEvent(this));
     }
 
@@ -1237,6 +1362,15 @@ public abstract class Axis implements Cloneable, Serializable {
             return false;
         }
         if (!ObjectUtilities.equal(this.tickMarkStroke, that.tickMarkStroke)) {
+            return false;
+        }
+        if (this.minorTickMarksVisible != that.minorTickMarksVisible) {
+            return false;
+        }
+        if (this.minorTickMarkInsideLength != that.minorTickMarkInsideLength) {
+            return false;
+        }
+        if (this.minorTickMarkOutsideLength != that.minorTickMarkOutsideLength) {
             return false;
         }
         if (this.fixedDimension != that.fixedDimension) {

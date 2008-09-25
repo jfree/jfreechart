@@ -36,6 +36,8 @@
  *                   Bill Kelemen;
  *                   Pawel Pabis;
  *                   Chris Boek;
+ *                   Peter Kolb (patch 1934255);
+ *                   Andrew Mickish (patch 1870189);
  *
  * Changes (from 23-Jun-2001)
  * --------------------------
@@ -118,6 +120,7 @@
  * 01-Sep-2008 : Use new methods from DateRange, added fix for bug
  *               2078057 (DG);
  * 18-Sep-2008 : Added locale to go with timezone (DG);
+ * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  *
  */
 
@@ -1565,8 +1568,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A list of ticks.
      */
     protected List refreshTicksHorizontal(Graphics2D g2,
-                                          Rectangle2D dataArea,
-                                          RectangleEdge edge) {
+                Rectangle2D dataArea, RectangleEdge edge) {
 
         List result = new java.util.ArrayList();
 
@@ -1582,6 +1584,20 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         Date upperDate = getMaximumDate();
 
         while (tickDate.before(upperDate)) {
+            long lowestTickTime = tickDate.getTime();
+            long distance = unit.addToDate(tickDate, this.timeZone).getTime()
+                    - lowestTickTime;
+            for(int minorTick = 1; minorTick < getMinorTickCount();
+                    minorTick++) {
+                long minorTickTime = lowestTickTime - distance
+                        * minorTick / getMinorTickCount();
+                if (minorTickTime > 0 && getRange().contains(minorTickTime)
+                        && (!isHiddenValue(minorTickTime))) {
+                    result.add(new DateTick(TickType.MINOR,
+                            new Date(minorTickTime), "", TextAnchor.TOP_CENTER,
+                            TextAnchor.CENTER, 0.0));
+                }
+            }
 
             if (!isHiddenValue(tickDate.getTime())) {
                 // work out the value, label and position
@@ -1620,7 +1636,24 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 Tick tick = new DateTick(tickDate, tickLabel, anchor,
                         rotationAnchor, angle);
                 result.add(tick);
+
+                long currentTickTime = tickDate.getTime();
                 tickDate = unit.addToDate(tickDate, this.timeZone);
+                long nextTickTime = tickDate.getTime();
+                for (int minorTick = 1; minorTick < getMinorTickCount();
+                        minorTick++){
+                    long minorTickTime = currentTickTime
+                            + (nextTickTime - currentTickTime)
+                            * minorTick / getMinorTickCount();
+                    if (getRange().contains(minorTickTime)
+                            && (!isHiddenValue(minorTickTime))) {
+                        result.add(new DateTick(TickType.MINOR,
+                                new Date(minorTickTime), "",
+                                TextAnchor.TOP_CENTER, TextAnchor.CENTER,
+                                0.0));
+                    }
+                }
+
             }
             else {
                 tickDate = unit.rollDate(tickDate, this.timeZone);
@@ -1666,8 +1699,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A list of ticks.
      */
     protected List refreshTicksVertical(Graphics2D g2,
-                                        Rectangle2D dataArea,
-                                        RectangleEdge edge) {
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         List result = new java.util.ArrayList();
 
@@ -1683,6 +1715,20 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         Date upperDate = getMaximumDate();
         while (tickDate.before(upperDate)) {
 
+            long lowestTickTime = tickDate.getTime();
+            long distance = unit.addToDate(tickDate, this.timeZone).getTime()
+                    - lowestTickTime;
+            for(int minorTick = 1; minorTick < getMinorTickCount();
+                    minorTick++) {
+                long minorTickTime = lowestTickTime - distance
+                        * minorTick / getMinorTickCount();
+                if (minorTickTime > 0 && getRange().contains(minorTickTime)
+                        && (!isHiddenValue(minorTickTime))) {
+                    result.add(new DateTick(TickType.MINOR,
+                            new Date(minorTickTime), "", TextAnchor.TOP_CENTER,
+                            TextAnchor.CENTER, 0.0));
+                }
+            }
             if (!isHiddenValue(tickDate.getTime())) {
                 // work out the value, label and position
                 String tickLabel;
@@ -1720,7 +1766,22 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 Tick tick = new DateTick(tickDate, tickLabel, anchor,
                         rotationAnchor, angle);
                 result.add(tick);
+                long currentTickTime = tickDate.getTime();
                 tickDate = unit.addToDate(tickDate, this.timeZone);
+                long nextTickTime = tickDate.getTime();
+                for(int minorTick = 1; minorTick < getMinorTickCount();
+                        minorTick++){
+                    long minorTickTime = currentTickTime
+                            + (nextTickTime - currentTickTime)
+                            * minorTick / getMinorTickCount();
+                    if (getRange().contains(minorTickTime)
+                            && (!isHiddenValue(minorTickTime))) {
+                        result.add(new DateTick(TickType.MINOR,
+                                new Date(minorTickTime), "",
+                                TextAnchor.TOP_CENTER, TextAnchor.CENTER,
+                                0.0));
+                    }
+                }
             }
             else {
                 tickDate = unit.rollDate(tickDate, this.timeZone);
@@ -1833,10 +1894,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         if (!ObjectUtilities.equal(this.timeline, that.timeline)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        return true;
+        return super.equals(obj);
     }
 
     /**

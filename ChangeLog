@@ -1,5 +1,75 @@
 2008-09-25  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 1934255 (incorporating 1870189):
+    * source/org/jfree/chart/axis/Axis.java 
+    (minorTickMarksVisible): New field,
+    (minorTickMarkInsideLength): New field,
+    (minorTickMarkOutsideLength): New field,
+    (Axis(String)): Initialise new fields,
+    (isMinorTickMarksVisible): New method,
+    (setMinorTickMarksVisible): Likewise,
+    (getMinorTickMarkInsideLength): Likewise,
+    (setMinorTickMarkInsideLength): Likewise,
+    (getMinorTickMarkOutsideLength): Likewise,
+    (setMinorTickMarkOutsideLength): Likewise,
+    * source/org/jfree/chart/axis/DateAxis.java
+    (refreshTicksHorizontal): Add minor ticks,
+    (refreshTicksVertical): Likewise,
+    * source/org/jfree/chart/axis/DateTick.java
+    (DateTick): New constructor,
+    (equals): Clean up,
+    * source/org/jfree/chart/axis/LogAxis.java
+    (minorTickCount): Removed (now in superclass),
+    (LogAxis(String)): Updated for removed field,
+    (getMinorTickCount): Removed (now in superclass),
+    (setMinorTickCount): Likewise,
+    (refreshTicksHorizontal): Updated for removed field,
+    (refreshTicksVertical): Likewise,
+    (equals): Likewise,
+    (hashCode): Likewise,
+    * source/org/jfree/chart/axis/NumberAxis.java
+    (refreshTicksHorizontal): Add minor ticks,
+    (refreshTicksVertical): Likewise,
+    * source/org/jfree/chart/axis/ValueAxis.java
+    (minorTickCount): New field,
+    (drawTickMarksAndLabels): Draw minor ticks,
+    (getMinorTickCount): New method,
+    (setMinorTickCount): Likewise,
+    (equals): Updated for new field,
+    * source/org/jfree/chart/plot/XYPlot.java
+    (domainMinorGridlinesVisible): New field,
+    (domainMinorGridlineStroke): Likewise,
+    (domainMinorGridlinePaint): Likewise,
+    (rangeMinorGridlinesVisible): Likewise,
+    (rangeMinorGridlineStroke): Likewise,
+    (rangeMinorGridlinePaint): Likewise,
+    (XYPlot): Initialise new fields,
+    (isDomainMinorGridlinesVisible): New method,
+    (setDomainMinorGridlinesVisible): Likewise,
+    (getDomainMinorGridlineStroke): Likewise,
+    (setDomainMinorGridlineStroke): Likewise,
+    (getDomainMinorGridlinePaint): Likewise,
+    (setDomainMinorGridlinePaint): Likewise,
+    (isRangeMinorGridlinesVisible): Likewise,
+    (setRangeMinorGridlinesVisible): Likewise,
+    (getRangeMinorGridlineStroke): Likewise,
+    (setRangeMinorGridlineStroke): Likewise,
+    (getRangeMinorGridlinePaint): Likewise,
+    (setRangeMinorGridlinePaint): Likewise,
+    (drawDomainGridlines): Draw minor gridlines too,
+    (drawRangeGridlines): Likewise,
+    (equals): Updated for new attributes,
+    (writeObject): Likewise,
+    (readObject): Likewise,
+    * tests/org/jfree/chart/axis/junit/AxisTests.java
+    (testEquals): Updated for new field,
+    * tests/org/jfree/chart/axis/junit/DateTickTests.java
+    (testEquals): Updated for new field,
+    * tests/org/jfree/chart/plot/junit/XYPlotTests.java
+    (testEquals): Updated for new fields.
+    
+2008-09-25  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/xy/HighLowRenderer.java
     (drawItem): Check for non-null entity collection.
 
