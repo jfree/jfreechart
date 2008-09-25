@@ -33,6 +33,8 @@
  * Contributor(s):   Jonathan Nash;
  *                   Nicolas Brodu (for Astrium and EADS Corporate Research
  *                   Center);
+ *                   Peter Kolb (patch 1934255);
+ *                   Andrew Mickish (patch 1870189);
  *
  * Changes
  * -------
@@ -96,6 +98,7 @@
  * 10-Oct-2006 : Source reformatting (DG);
  * 22-Mar-2007 : Added new defaultAutoRange attribute (DG);
  * 02-Aug-2007 : Check for major tick when drawing label (DG);
+ * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  *
  */
 
@@ -257,6 +260,9 @@ public abstract class ValueAxis extends Axis
 
     /** An index into an array of standard tick values. */
     private int autoTickIndex;
+    
+    /** The number of minor ticks per major tick unit. */
+    private int minorTickCount; 
 
     /** A flag indicating whether or not tick labels are rotated to vertical. */
     private boolean verticalTickLabels;
@@ -319,6 +325,7 @@ public abstract class ValueAxis extends Axis
         this.leftArrow = p4;
 
         this.verticalTickLabels = false;
+        this.minorTickCount = 1;
 
     }
 
@@ -666,19 +673,14 @@ public abstract class ValueAxis extends Axis
      * @return The width or height used to draw the axis.
      */
     protected AxisState drawTickMarksAndLabels(Graphics2D g2,
-                                               double cursor,
-                                               Rectangle2D plotArea,
-                                               Rectangle2D dataArea,
-                                               RectangleEdge edge) {
+            double cursor, Rectangle2D plotArea, Rectangle2D dataArea,
+            RectangleEdge edge) {
 
         AxisState state = new AxisState(cursor);
 
         if (isAxisLineVisible()) {
             drawAxisLine(g2, cursor, dataArea, edge);
         }
-
-        double ol = getTickMarkOutsideLength();
-        double il = getTickMarkInsideLength();
 
         List ticks = refreshTicks(g2, state, dataArea, edge);
         state.setTicks(ticks);
@@ -695,8 +697,16 @@ public abstract class ValueAxis extends Axis
                         tick.getAngle(), tick.getRotationAnchor());
             }
 
-            if (isTickMarksVisible() && tick.getTickType().equals(
-                    TickType.MAJOR)) {
+            if ((isTickMarksVisible() && tick.getTickType().equals(
+                    TickType.MAJOR)) || (isMinorTickMarksVisible() 
+                    && tick.getTickType().equals(TickType.MINOR))) {
+
+                double ol = (tick.getTickType().equals(TickType.MINOR)) ?
+                    getMinorTickMarkOutsideLength() : getTickMarkOutsideLength();
+
+                double il = (tick.getTickType().equals(TickType.MINOR)) ?
+                    getMinorTickMarkInsideLength() : getTickMarkInsideLength();
+
                 float xx = (float) valueToJava2D(tick.getValue(), dataArea,
                         edge);
                 Line2D mark = null;
@@ -1403,6 +1413,37 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
+     * Returns the number of minor tick marks to display.
+     * 
+     * @return The number of minor tick marks to display.
+     * 
+     * @see #setMinorTickCount(int)
+     *
+     * @since 1.0.12
+     */
+    public int getMinorTickCount() {
+        return this.minorTickCount;
+    }
+    
+    /**
+     * Sets the number of minor tick marks to display, and sends an
+     * {@link AxisChangeEvent} to all registered listeners.
+     * 
+     * @param count  the count.
+     * 
+     * @see #getMinorTickCount()
+     *
+     * @since 1.0.12
+     */
+    public void setMinorTickCount(int count) {
+        if (count <= 0) {
+            throw new IllegalArgumentException("Requires 'count' > 0.");
+        }
+        this.minorTickCount = count;
+        notifyListeners(new AxisChangeEvent(this));
+    }
+
+    /**
      * Converts a data value to a coordinate in Java2D space, assuming that the
      * axis runs along one edge of the specified dataArea.
      * <p>
@@ -1567,16 +1608,13 @@ public abstract class ValueAxis extends Axis
      * @return <code>true</code> or <code>false</code>.
      */
     public boolean equals(Object obj) {
-
         if (obj == this) {
             return true;
         }
         if (!(obj instanceof ValueAxis)) {
             return false;
         }
-
         ValueAxis that = (ValueAxis) obj;
-
         if (this.positiveArrowVisible != that.positiveArrowVisible) {
             return false;
         }
@@ -1617,9 +1655,10 @@ public abstract class ValueAxis extends Axis
         if (this.verticalTickLabels != that.verticalTickLabels) {
             return false;
         }
-
+        if (this.minorTickCount != that.minorTickCount) {
+            return false;
+        }
         return super.equals(obj);
-
     }
 
     /**

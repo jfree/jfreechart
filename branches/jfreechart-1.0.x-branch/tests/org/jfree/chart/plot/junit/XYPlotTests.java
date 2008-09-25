@@ -386,6 +386,36 @@ public class XYPlotTests extends TestCase {
         plot2.setRangeTickBandPaint(Color.blue);
         assertTrue(plot1.equals(plot2));
 
+        plot1.setDomainMinorGridlinesVisible(true);
+        assertFalse(plot1.equals(plot2));
+        plot2.setDomainMinorGridlinesVisible(true);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setDomainMinorGridlinePaint(Color.red);
+        assertFalse(plot1.equals(plot2));
+        plot2.setDomainMinorGridlinePaint(Color.red);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setDomainGridlineStroke(new BasicStroke(1.1f));
+        assertFalse(plot1.equals(plot2));
+        plot2.setDomainGridlineStroke(new BasicStroke(1.1f));
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRangeMinorGridlinesVisible(true);
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeMinorGridlinesVisible(true);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRangeMinorGridlinePaint(Color.blue);
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeMinorGridlinePaint(Color.blue);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRangeMinorGridlineStroke(new BasicStroke(1.23f));
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeMinorGridlineStroke(new BasicStroke(1.23f));
+        assertTrue(plot1.equals(plot2));
+
     }
 
     /**

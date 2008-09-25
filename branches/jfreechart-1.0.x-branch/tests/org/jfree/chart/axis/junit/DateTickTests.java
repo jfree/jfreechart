@@ -35,7 +35,7 @@
  * Changes
  * -------
  * 13-May-2004 : Version 1 (DG);
- *
+ * 25-Sep-2008 : Extended testEquals() to cover new fields (DG);
  */
 
 package org.jfree.chart.axis.junit;
@@ -53,6 +53,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.axis.DateTick;
+import org.jfree.chart.axis.TickType;
 import org.jfree.ui.TextAnchor;
 
 /**
@@ -117,6 +118,12 @@ public class DateTickTests extends TestCase {
         t1 = new DateTick(d1, l1, ta1, ta1, Math.PI / 3.0);
         assertFalse(t1.equals(t2));
         t2 = new DateTick(d1, l1, ta1, ta1, Math.PI / 3.0);
+        assertTrue(t1.equals(t2));
+
+        t1 = new DateTick(TickType.MINOR, d1, l1, ta1, ta1, Math.PI);
+        t2 = new DateTick(TickType.MAJOR, d1, l1, ta1, ta1, Math.PI);
+        assertFalse(t1.equals(t2));
+        t2 = new DateTick(TickType.MINOR, d1, l1, ta1, ta1, Math.PI);
         assertTrue(t1.equals(t2));
 
     }

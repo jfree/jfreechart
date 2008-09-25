@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Laurence Vanhelsuwe;
+ *                   Peter Kolb (patch 1934255);
  *
  * Changes
  * -------
@@ -90,6 +91,7 @@
  * 11-Dec-2006 : Fix bug in auto-tick unit selection with tick format override,
  *               see bug 1608371 (DG);
  * 22-Mar-2007 : Use new defaultAutoRange attribute (DG);
+ * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  *
  */
 
@@ -1163,8 +1165,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A list of ticks.
      */
     protected List refreshTicksHorizontal(Graphics2D g2,
-                                          Rectangle2D dataArea,
-                                          RectangleEdge edge) {
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         List result = new java.util.ArrayList();
 
@@ -1180,6 +1181,17 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         double lowestTickValue = calculateLowestVisibleTickValue();
 
         if (count <= ValueAxis.MAXIMUM_TICK_COUNT) {
+            for(int minorTick = 1; minorTick < getMinorTickCount();
+                    minorTick++) {
+                double minorTickValue = lowestTickValue
+                        - getTickUnit().getSize()
+                        * minorTick / getMinorTickCount();
+                if (getRange().contains(minorTickValue)){
+                    result.add(new NumberTick(TickType.MINOR, minorTickValue,
+                            "", TextAnchor.TOP_CENTER, TextAnchor.CENTER,
+                            0.0));
+                }
+            }
             for (int i = 0; i < count; i++) {
                 double currentTickValue = lowestTickValue + (i * size);
                 String tickLabel;
@@ -1217,6 +1229,18 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                 Tick tick = new NumberTick(new Double(currentTickValue),
                         tickLabel, anchor, rotationAnchor, angle);
                 result.add(tick);
+                double nextTickValue = lowestTickValue + ((i + 1)* size);
+                for (int minorTick = 1; minorTick < getMinorTickCount();
+                        minorTick++){
+                    double minorTickValue = currentTickValue
+                            + (nextTickValue - currentTickValue)
+                            * minorTick / getMinorTickCount();
+                    if (getRange().contains(minorTickValue)){
+                        result.add(new NumberTick(TickType.MINOR,
+                                minorTickValue, "", TextAnchor.TOP_CENTER,
+                                TextAnchor.CENTER, 0.0));
+                    }
+                }
             }
         }
         return result;
@@ -1234,8 +1258,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A list of ticks.
      */
     protected List refreshTicksVertical(Graphics2D g2,
-                                        Rectangle2D dataArea,
-                                        RectangleEdge edge) {
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         List result = new java.util.ArrayList();
         result.clear();
@@ -1251,6 +1274,18 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         double lowestTickValue = calculateLowestVisibleTickValue();
 
         if (count <= ValueAxis.MAXIMUM_TICK_COUNT) {
+            for (int minorTick = 1; minorTick < getMinorTickCount();
+                    minorTick++){
+                double minorTickValue = lowestTickValue
+                        - getTickUnit().getSize()
+                        * minorTick / getMinorTickCount() ;
+                if (getRange().contains(minorTickValue)){
+                    result.add(new NumberTick(TickType.MINOR, minorTickValue,
+                            "", TextAnchor.TOP_CENTER, TextAnchor.CENTER,
+                            0.0));
+                }
+            }
+
             for (int i = 0; i < count; i++) {
                 double currentTickValue = lowestTickValue + (i * size);
                 String tickLabel;
@@ -1291,6 +1326,19 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                 Tick tick = new NumberTick(new Double(currentTickValue),
                         tickLabel, anchor, rotationAnchor, angle);
                 result.add(tick);
+
+                double nextTickValue = lowestTickValue + ((i + 1)* size);
+                for (int minorTick = 1; minorTick < getMinorTickCount();
+                        minorTick++){
+                    double minorTickValue = currentTickValue
+                            + (nextTickValue - currentTickValue)
+                            * minorTick / getMinorTickCount();
+                    if (getRange().contains(minorTickValue)){
+                        result.add(new NumberTick(TickType.MINOR,
+                                minorTickValue, "", TextAnchor.TOP_CENTER,
+                                TextAnchor.CENTER, 0.0));
+                    }
+                }
             }
         }
         return result;
@@ -1328,9 +1376,6 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         if (!(obj instanceof NumberAxis)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         NumberAxis that = (NumberAxis) obj;
         if (this.autoRangeIncludesZero != that.autoRangeIncludesZero) {
             return false;
@@ -1348,7 +1393,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         if (!this.rangeType.equals(that.rangeType)) {
             return false;
         }
-        return true;
+        return super.equals(obj);
     }
 
     /**
