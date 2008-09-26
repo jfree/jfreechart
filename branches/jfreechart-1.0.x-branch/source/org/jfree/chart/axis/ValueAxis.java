@@ -260,7 +260,7 @@ public abstract class ValueAxis extends Axis
 
     /** An index into an array of standard tick values. */
     private int autoTickIndex;
-    
+
     /** The number of minor ticks per major tick unit. */
     private int minorTickCount; 
 
