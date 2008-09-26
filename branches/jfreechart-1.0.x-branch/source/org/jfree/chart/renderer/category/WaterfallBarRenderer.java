@@ -49,6 +49,8 @@
  *               --> CategoryItemLabelGenerator (DG);
  * 09-Jun-2005 : Use addItemEntity() from superclass (DG);
  * 27-Mar-2008 : Fixed error in findRangeBounds() method (DG);
+ * 26-Sep-2008 : Fixed bug with bar alignment when maximumBarWidth is
+ *               applied (DG);
  *
  */
 
@@ -338,14 +340,12 @@ public class WaterfallBarRenderer extends BarRenderer {
         }
         state.setSeriesRunningTotal(current);
 
-        int seriesCount = getRowCount();
         int categoryCount = getColumnCount();
         PlotOrientation orientation = plot.getOrientation();
 
         double rectX = 0.0;
         double rectY = 0.0;
 
-        RectangleEdge domainAxisLocation = plot.getDomainAxisEdge();
         RectangleEdge rangeAxisLocation = plot.getRangeAxisEdge();
 
         // Y0
@@ -370,39 +370,23 @@ public class WaterfallBarRenderer extends BarRenderer {
         double rectHeight = Math.max(getMinimumBarLength(),
                 Math.abs(j2dy1 - j2dy0));
 
+        Comparable seriesKey = dataset.getRowKey(row);
+        Comparable categoryKey = dataset.getColumnKey(column);
         if (orientation == PlotOrientation.HORIZONTAL) {
-            // BAR Y
-            rectY = domainAxis.getCategoryStart(column, getColumnCount(),
-                    dataArea, domainAxisLocation);
-            if (seriesCount > 1) {
-                double seriesGap = dataArea.getHeight() * getItemMargin()
-                                   / (categoryCount * (seriesCount - 1));
-                rectY = rectY + row * (state.getBarWidth() + seriesGap);
-            }
-            else {
-                rectY = rectY + row * state.getBarWidth();
-            }
+            rectY = domainAxis.getCategorySeriesMiddle(categoryKey, seriesKey,
+                    dataset, getItemMargin(), dataArea, RectangleEdge.LEFT);
 
             rectX = j2dy0;
             rectHeight = state.getBarWidth();
+            rectY = rectY - rectHeight / 2.0;
             rectWidth = Math.max(getMinimumBarLength(),
                     Math.abs(j2dy1 - j2dy0));
 
         }
         else if (orientation == PlotOrientation.VERTICAL) {
-            // BAR X
-            rectX = domainAxis.getCategoryStart(column, getColumnCount(),
-                    dataArea, domainAxisLocation);
-
-            if (seriesCount > 1) {
-                double seriesGap = dataArea.getWidth() * getItemMargin()
-                                   / (categoryCount * (seriesCount - 1));
-                rectX = rectX + row * (state.getBarWidth() + seriesGap);
-            }
-            else {
-                rectX = rectX + row * state.getBarWidth();
-            }
-
+            rectX = domainAxis.getCategorySeriesMiddle(categoryKey, seriesKey,
+                    dataset, getItemMargin(), dataArea, RectangleEdge.TOP);
+            rectX = rectX - rectWidth / 2.0;
             rectY = j2dy0;
         }
         Rectangle2D bar = new Rectangle2D.Double(rectX, rectY, rectWidth,
