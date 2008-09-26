@@ -1,5 +1,11 @@
 2008-09-26  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/axis/Axis.java
+    (fireChangeEvent): New method,
+    also updated various other methods to call fireChangeEvent().
+
+2008-09-26  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/WaterfallRenderer.java
     (drawItem): Fixed bar misalignment when maxBarWidth is applied.
 
