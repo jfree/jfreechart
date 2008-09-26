@@ -40,6 +40,7 @@
  * 18-Feb-2008 : Fixed bug 1880114, arrows for horizontal plot
  *               orientation (DG);
  * 22-Apr-2008 : Implemented PublicCloneable (DG);
+ * 26-Sep-2008 : Added chart entity support (tooltips etc) (DG);
  *
  */
 
@@ -52,6 +53,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -281,6 +283,15 @@ public class VectorRenderer extends AbstractXYItemRenderer
         p.closePath();
         g2.draw(p);
 
+        // setup for collecting optional entity info...
+        EntityCollection entities = null;
+        if (info != null) {
+            entities = info.getOwner().getEntityCollection();
+            if (entities != null) {
+                addEntity(entities, line.getBounds(), dataset, series, item,
+                        0.0, 0.0);
+            }
+        }
 
     }
 
