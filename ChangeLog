@@ -1,3 +1,8 @@
+2008-09-26  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/xy/VectorRenderer.java
+    (drawItem): Add chart entity.
+
 2008-09-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 1934255 (incorporating 1870189):
