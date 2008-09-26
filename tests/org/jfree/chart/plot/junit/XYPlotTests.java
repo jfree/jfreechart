@@ -630,8 +630,7 @@ public class XYPlotTests extends TestCase {
         IntervalXYDataset data1 = createDataset1();
         XYItemRenderer renderer1 = new XYBarRenderer(0.20);
         renderer1.setToolTipGenerator(
-            StandardXYToolTipGenerator.getTimeSeriesInstance()
-        );
+                StandardXYToolTipGenerator.getTimeSeriesInstance());
         XYPlot p1 = new XYPlot(data1, new DateAxis("Date"), null, renderer1);
         XYPlot p2 = null;
 
@@ -642,8 +641,7 @@ public class XYPlotTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             p2 = (XYPlot) in.readObject();
             in.close();
         }
