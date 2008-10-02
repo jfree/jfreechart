@@ -71,6 +71,7 @@
  *               1888422 (RVdS);
  * 27-Mar-2008 : Boxes should use outlinePaint/Stroke settings (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
+ * 02-Oct-2008 : Check item visibility in drawItem() method (DG);
  *
  */
 
@@ -394,6 +395,11 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
                          int row,
                          int column,
                          int pass) {
+
+        // do nothing if item is not visible
+        if (!getItemVisible(row, column)) {
+            return;
+        }
 
         if (!(dataset instanceof BoxAndWhiskerCategoryDataset)) {
             throw new IllegalArgumentException(
