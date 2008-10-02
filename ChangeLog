@@ -1,3 +1,8 @@
+2008-10-02  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
+    (drawItem): Check item visibility.
+
 2008-09-26  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/Axis.java
