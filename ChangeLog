@@ -1,5 +1,16 @@
 2008-10-08  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Incorporating patch 2131001:
+    * source/org/jfree/data/general/DatasetUtilities.java
+    (iterateDomainBounds(XYDataset, boolean)): Ignore Double.NaN values,
+    (iterateRangeBounds(CategoryDataset, boolean)): Likewise,
+    (findStackedRangeBounds(CategoryDataset, KeyToGroupMap)): Cleanup,
+    (findMinimumStackedRangeValue(CategoryDataset)): Likewise,
+    (findMaximumStackedRangeValue(CategoryDataset)): Likewise,
+    (findCumulativeRangeBounds(CategoryDataset)): Likewise.
+
+2008-10-08  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/labels/IntervalCategoryToolTipGenerator.java
     (equals): New method override,
     * source/org/jfree/chart/renderer/category/IntervalBarRenderer.java
