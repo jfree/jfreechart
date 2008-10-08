@@ -158,7 +158,7 @@ public interface XYItemRenderer extends LegendItemSource {
      * specified dataset.  The implementation of this method will take
      * into account the presentation used by the renderers (for example,
      * a renderer that "stacks" values will return a bigger range than
-     * a renderer that doesn't.
+     * a renderer that doesn't).
      *
      * @param dataset  the dataset (<code>null</code> permitted).
      *
