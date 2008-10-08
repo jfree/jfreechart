@@ -56,6 +56,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.IntervalBarRenderer;
 import org.jfree.data.category.DefaultIntervalCategoryDataset;
 import org.jfree.util.PublicCloneable;
@@ -90,6 +91,10 @@ public class IntervalBarRendererTests extends TestCase {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
         IntervalBarRenderer r2 = new IntervalBarRenderer();
         assertEquals(r1, r2);
+
+        // the renderer should not be equal to a BarRenderer
+        BarRenderer br = new BarRenderer();
+        assertFalse(r1.equals(br));
     }
 
     /**
@@ -133,27 +138,22 @@ public class IntervalBarRendererTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         IntervalBarRenderer r1 = new IntervalBarRenderer();
         IntervalBarRenderer r2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
             out.writeObject(r1);
             out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             r2 = (IntervalBarRenderer) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(r1, r2);
-
     }
 
     /**
