@@ -35,6 +35,7 @@
  *                   Richard Atkinson;
  *                   Andreas Schroeder;
  *                   Rafal Skalny (patch 1925366);
+ *                   Jerome David (patch 2131001);
  *
  * Changes (from 18-Sep-2001)
  * --------------------------
@@ -108,6 +109,8 @@
  * 28-Mar-2008 : Applied a variation of patch 1925366 (from Rafal Skalny) for
  *               slightly more efficient iterateRangeBounds() methods (DG);
  * 08-Apr-2008 : Fixed typo in iterateRangeBounds() (DG);
+ * 08-Oct-2008 : Applied patch 2131001 by Jerome David, with some modifications
+ *               and additions and some new unit tests (DG);
  *
  */
 
@@ -687,8 +690,12 @@ public final class DatasetUtilities {
                 for (int item = 0; item < itemCount; item++) {
                     lvalue = intervalXYData.getStartXValue(series, item);
                     uvalue = intervalXYData.getEndXValue(series, item);
-                    minimum = Math.min(minimum, lvalue);
-                    maximum = Math.max(maximum, uvalue);
+                    if (!Double.isNaN(lvalue)) {
+                        minimum = Math.min(minimum, lvalue);
+                    }
+                    if (!Double.isNaN(uvalue)) {
+                        maximum = Math.max(maximum, uvalue);
+                    }
                 }
             }
         }
@@ -698,8 +705,10 @@ public final class DatasetUtilities {
                 for (int item = 0; item < itemCount; item++) {
                     lvalue = dataset.getXValue(series, item);
                     uvalue = lvalue;
-                    minimum = Math.min(minimum, lvalue);
-                    maximum = Math.max(maximum, uvalue);
+                    if (!Double.isNaN(lvalue)) {
+                        minimum = Math.min(minimum, lvalue);
+                        maximum = Math.max(maximum, uvalue);
+                    }
                 }
             }
         }
@@ -845,10 +854,10 @@ public final class DatasetUtilities {
                 for (int column = 0; column < columnCount; column++) {
                     lvalue = icd.getStartValue(row, column);
                     uvalue = icd.getEndValue(row, column);
-                    if (lvalue != null) {
+                    if (lvalue != null && !Double.isNaN(lvalue.doubleValue())) {
                         minimum = Math.min(minimum, lvalue.doubleValue());
                     }
-                    if (uvalue != null) {
+                    if (uvalue != null && !Double.isNaN(uvalue.doubleValue())) {
                         maximum = Math.max(maximum, uvalue.doubleValue());
                     }
                 }
@@ -861,8 +870,10 @@ public final class DatasetUtilities {
                     Number value = dataset.getValue(row, column);
                     if (value != null) {
                         double v = value.doubleValue();
-                        minimum = Math.min(minimum, v);
-                        maximum = Math.max(maximum, v);
+                        if (!Double.isNaN(v)) {
+                            minimum = Math.min(minimum, v);
+                            maximum = Math.max(maximum, v);
+                        }
                     }
                 }
             }
@@ -1395,129 +1406,136 @@ public final class DatasetUtilities {
      */
     public static Range findStackedRangeBounds(CategoryDataset dataset,
                                                KeyToGroupMap map) {
-
+        if (dataset == null) {
+            throw new IllegalArgumentException("Null 'dataset' argument.");
+        }
+        boolean hasValidData = false;
         Range result = null;
-        if (dataset != null) {
 
-            // create an array holding the group indices...
-            int[] groupIndex = new int[dataset.getRowCount()];
-            for (int i = 0; i < dataset.getRowCount(); i++) {
-                groupIndex[i] = map.getGroupIndex(
-                    map.getGroup(dataset.getRowKey(i))
-                );
-            }
+        // create an array holding the group indices for each series...
+        int[] groupIndex = new int[dataset.getRowCount()];
+        for (int i = 0; i < dataset.getRowCount(); i++) {
+            groupIndex[i] = map.getGroupIndex(map.getGroup(
+                    dataset.getRowKey(i)));
+        }
 
-            // minimum and maximum for each group...
-            int groupCount = map.getGroupCount();
-            double[] minimum = new double[groupCount];
-            double[] maximum = new double[groupCount];
+        // minimum and maximum for each group...
+        int groupCount = map.getGroupCount();
+        double[] minimum = new double[groupCount];
+        double[] maximum = new double[groupCount];
 
-            int categoryCount = dataset.getColumnCount();
-            for (int item = 0; item < categoryCount; item++) {
-                double[] positive = new double[groupCount];
-                double[] negative = new double[groupCount];
-                int seriesCount = dataset.getRowCount();
-                for (int series = 0; series < seriesCount; series++) {
-                    Number number = dataset.getValue(series, item);
-                    if (number != null) {
-                        double value = number.doubleValue();
-                        if (value > 0.0) {
-                            positive[groupIndex[series]]
+        int categoryCount = dataset.getColumnCount();
+        for (int item = 0; item < categoryCount; item++) {
+            double[] positive = new double[groupCount];
+            double[] negative = new double[groupCount];
+            int seriesCount = dataset.getRowCount();
+            for (int series = 0; series < seriesCount; series++) {
+                Number number = dataset.getValue(series, item);
+                if (number != null) {
+                    hasValidData = true;
+                    double value = number.doubleValue();
+                    if (value > 0.0) {
+                        positive[groupIndex[series]]
                                  = positive[groupIndex[series]] + value;
-                        }
-                        if (value < 0.0) {
-                            negative[groupIndex[series]]
+                    }
+                    if (value < 0.0) {
+                        negative[groupIndex[series]]
                                  = negative[groupIndex[series]] + value;
-                                 // '+', remember value is negative
-                        }
+                             // '+', remember value is negative
                     }
                 }
-                for (int g = 0; g < groupCount; g++) {
-                    minimum[g] = Math.min(minimum[g], negative[g]);
-                    maximum[g] = Math.max(maximum[g], positive[g]);
-                }
             }
+            for (int g = 0; g < groupCount; g++) {
+                minimum[g] = Math.min(minimum[g], negative[g]);
+                maximum[g] = Math.max(maximum[g], positive[g]);
+            }
+        }
+        if (hasValidData) {
             for (int j = 0; j < groupCount; j++) {
-                result = Range.combine(
-                    result, new Range(minimum[j], maximum[j])
-                );
+                result = Range.combine(result, new Range(minimum[j],
+                        maximum[j]));
             }
         }
         return result;
-
     }
 
     /**
      * Returns the minimum value in the dataset range, assuming that values in
      * each category are "stacked".
      *
-     * @param dataset  the dataset.
+     * @param dataset  the dataset (<code>null</code> not permitted).
      *
      * @return The minimum value.
+     *
+     * @see #findMaximumStackedRangeValue(CategoryDataset)
      */
     public static Number findMinimumStackedRangeValue(CategoryDataset dataset) {
-
+        if (dataset == null) {
+            throw new IllegalArgumentException("Null 'dataset' argument.");
+        }
         Number result = null;
-        if (dataset != null) {
-            double minimum = 0.0;
-            int categoryCount = dataset.getRowCount();
-            for (int item = 0; item < categoryCount; item++) {
-                double total = 0.0;
-
-                int seriesCount = dataset.getColumnCount();
-                for (int series = 0; series < seriesCount; series++) {
-                    Number number = dataset.getValue(series, item);
-                    if (number != null) {
-                        double value = number.doubleValue();
-                        if (value < 0.0) {
-                            total = total + value;
-                            // '+', remember value is negative
-                        }
+        boolean hasValidData = false;
+        double minimum = 0.0;
+        int categoryCount = dataset.getColumnCount();
+        for (int item = 0; item < categoryCount; item++) {
+            double total = 0.0;
+            int seriesCount = dataset.getRowCount();
+            for (int series = 0; series < seriesCount; series++) {
+                Number number = dataset.getValue(series, item);
+                if (number != null) {
+                    hasValidData = true;
+                    double value = number.doubleValue();
+                    if (value < 0.0) {
+                        total = total + value;
+                        // '+', remember value is negative
                     }
                 }
-                minimum = Math.min(minimum, total);
-
             }
+            minimum = Math.min(minimum, total);
+        }
+        if (hasValidData) {
             result = new Double(minimum);
         }
         return result;
-
     }
 
     /**
      * Returns the maximum value in the dataset range, assuming that values in
      * each category are "stacked".
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset (<code>null</code> not permitted).
      *
      * @return The maximum value (possibly <code>null</code>).
+     *
+     * @see #findMinimumStackedRangeValue(CategoryDataset)
      */
     public static Number findMaximumStackedRangeValue(CategoryDataset dataset) {
-
+        if (dataset == null) {
+            throw new IllegalArgumentException("Null 'dataset' argument.");
+        }
         Number result = null;
-
-        if (dataset != null) {
-            double maximum = 0.0;
-            int categoryCount = dataset.getColumnCount();
-            for (int item = 0; item < categoryCount; item++) {
-                double total = 0.0;
-                int seriesCount = dataset.getRowCount();
-                for (int series = 0; series < seriesCount; series++) {
-                    Number number = dataset.getValue(series, item);
-                    if (number != null) {
-                        double value = number.doubleValue();
-                        if (value > 0.0) {
-                            total = total + value;
-                        }
+        boolean hasValidData = false;
+        double maximum = 0.0;
+        int categoryCount = dataset.getColumnCount();
+        for (int item = 0; item < categoryCount; item++) {
+            double total = 0.0;
+            int seriesCount = dataset.getRowCount();
+            for (int series = 0; series < seriesCount; series++) {
+                Number number = dataset.getValue(series, item);
+                if (number != null) {
+                    hasValidData = true;
+                    double value = number.doubleValue();
+                    if (value > 0.0) {
+                        total = total + value;
                     }
                 }
-                maximum = Math.max(maximum, total);
             }
+            maximum = Math.max(maximum, total);
+        }
+        if (hasValidData) {
             result = new Double(maximum);
         }
-
         return result;
-
     }
 
     /**
@@ -1612,11 +1630,9 @@ public final class DatasetUtilities {
      * @see #findRangeBounds(CategoryDataset)
      */
     public static Range findCumulativeRangeBounds(CategoryDataset dataset) {
-
         if (dataset == null) {
             throw new IllegalArgumentException("Null 'dataset' argument.");
         }
-
         boolean allItemsNull = true; // we'll set this to false if there is at
                                      // least one non-null data item...
         double minimum = 0.0;
@@ -1629,9 +1645,11 @@ public final class DatasetUtilities {
                 if (n != null) {
                     allItemsNull = false;
                     double value = n.doubleValue();
-                    runningTotal = runningTotal + value;
-                    minimum = Math.min(minimum, runningTotal);
-                    maximum = Math.max(maximum, runningTotal);
+                    if (!Double.isNaN(value)) {
+                        runningTotal = runningTotal + value;
+                        minimum = Math.min(minimum, runningTotal);
+                        maximum = Math.max(maximum, runningTotal);
+                    }
                 }
             }
         }
@@ -1641,7 +1659,6 @@ public final class DatasetUtilities {
         else {
             return null;
         }
-
     }
 
 }

@@ -41,6 +41,8 @@
  * 03-Feb-2005 : Added testFindStackedRangeBounds2() method (DG);
  * 26-Sep-2007 : Added testIsEmptyOrNullXYDataset() method (DG);
  * 28-Mar-2008 : Added and renamed various tests (DG);
+ * 08-Oct-2008 : New tests to support patch 2131001 and related 
+ *               changes (DG);
  *
  */
 
@@ -60,7 +62,9 @@ import org.jfree.data.function.LineFunction2D;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.data.xy.DefaultIntervalXYDataset;
 import org.jfree.data.xy.DefaultTableXYDataset;
+import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -128,6 +132,69 @@ public class DatasetUtilitiesTests extends TestCase {
     }
 
     /**
+     * This test checks that the standard method has 'includeInterval'
+     * defaulting to true.
+     */
+    public void testFindDomainBounds2() {
+        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        double[] x1 = new double[] {1.0, 2.0, 3.0};
+        double[] x1Start = new double[] {0.9, 1.9, 2.9};
+        double[] x1End = new double[] {1.1, 2.1, 3.1};
+        double[] y1 = new double[] {4.0, 5.0, 6.0};
+        double[] y1Start = new double[] {1.09, 2.09, 3.09};
+        double[] y1End = new double[] {1.11, 2.11, 3.11};
+        double[][] data1 = new double[][] {x1, x1Start, x1End, y1, y1Start,
+                y1End};
+        dataset.addSeries("S1", data1);
+        Range r = DatasetUtilities.findDomainBounds(dataset);
+        assertEquals(0.9, r.getLowerBound(), EPSILON);
+        assertEquals(3.1, r.getUpperBound(), EPSILON);
+    }
+
+    /**
+     * This test checks that when the 'includeInterval' flag is false, the
+     * bounds come from the regular x-values.
+     */
+    public void testFindDomainBounds3() {
+        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        double[] x1 = new double[] {1.0, 2.0, 3.0};
+        double[] x1Start = new double[] {0.9, 1.9, 2.9};
+        double[] x1End = new double[] {1.1, 2.1, 3.1};
+        double[] y1 = new double[] {4.0, 5.0, 6.0};
+        double[] y1Start = new double[] {1.09, 2.09, 3.09};
+        double[] y1End = new double[] {1.11, 2.11, 3.11};
+        double[][] data1 = new double[][] {x1, x1Start, x1End, y1, y1Start,
+                y1End};
+        dataset.addSeries("S1", data1);
+        Range r = DatasetUtilities.findDomainBounds(dataset, false);
+        assertEquals(1.0, r.getLowerBound(), EPSILON);
+        assertEquals(3.0, r.getUpperBound(), EPSILON);
+    }
+
+    /**
+     * This test checks that NaN values are ignored.
+     */
+    public void testFindDomainBounds_NaN() {
+        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        double[] x1 = new double[] {1.0, 2.0, Double.NaN};
+        double[] x1Start = new double[] {0.9, 1.9, Double.NaN};
+        double[] x1End = new double[] {1.1, 2.1, Double.NaN};
+        double[] y1 = new double[] {4.0, 5.0, 6.0};
+        double[] y1Start = new double[] {1.09, 2.09, 3.09};
+        double[] y1End = new double[] {1.11, 2.11, 3.11};
+        double[][] data1 = new double[][] {x1, x1Start, x1End, y1, y1Start,
+                y1End};
+        dataset.addSeries("S1", data1);
+        Range r = DatasetUtilities.findDomainBounds(dataset);
+        assertEquals(0.9, r.getLowerBound(), EPSILON);
+        assertEquals(2.1, r.getUpperBound(), EPSILON);
+
+        r = DatasetUtilities.findDomainBounds(dataset, false);
+        assertEquals(1.0, r.getLowerBound(), EPSILON);
+        assertEquals(2.0, r.getUpperBound(), EPSILON);
+    }
+
+    /**
      * Some tests for the iterateDomainBounds() method.
      */
     public void testIterateDomainBounds() {
@@ -138,9 +205,44 @@ public class DatasetUtilitiesTests extends TestCase {
     }
 
     /**
-     * Some tests for the findRangeExtent() method.
+     * Check that NaN values in the dataset are ignored.
      */
-    public void testFindRangeBounds1() {
+    public void testIterateDomainBounds_NaN() {
+        DefaultXYDataset dataset = new DefaultXYDataset();
+        double[] x = new double[] {1.0, 2.0, Double.NaN, 3.0};
+        double[] y = new double[] {9.0, 8.0, 7.0, 6.0};
+        dataset.addSeries("S1", new double[][] {x, y});
+        Range r = DatasetUtilities.iterateDomainBounds(dataset);
+        assertEquals(1.0, r.getLowerBound(), EPSILON);
+        assertEquals(3.0, r.getUpperBound(), EPSILON);
+    }
+
+    /**
+     * Check that NaN values in the IntervalXYDataset are ignored.
+     */
+    public void testIterateDomainBounds_NaN2() {
+        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        double[] x1 = new double[] {Double.NaN, 2.0, 3.0};
+        double[] x1Start = new double[] {0.9, Double.NaN, 2.9};
+        double[] x1End = new double[] {1.1, Double.NaN, 3.1};
+        double[] y1 = new double[] {4.0, 5.0, 6.0};
+        double[] y1Start = new double[] {1.09, 2.09, 3.09};
+        double[] y1End = new double[] {1.11, 2.11, 3.11};
+        double[][] data1 = new double[][] {x1, x1Start, x1End, y1, y1Start,
+                y1End};
+        dataset.addSeries("S1", data1);
+        Range r = DatasetUtilities.iterateDomainBounds(dataset, false);
+        assertEquals(2.0, r.getLowerBound(), EPSILON);
+        assertEquals(3.0, r.getUpperBound(), EPSILON);
+        r = DatasetUtilities.iterateDomainBounds(dataset, true);
+        assertEquals(0.9, r.getLowerBound(), EPSILON);
+        assertEquals(3.1, r.getUpperBound(), EPSILON);
+    }
+
+    /**
+     * Some tests for the findRangeBounds() for a CategoryDataset method.
+     */
+    public void testFindRangeBounds_CategoryDataset() {
         CategoryDataset dataset = createCategoryDataset1();
         Range r = DatasetUtilities.findRangeBounds(dataset);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
@@ -148,9 +250,9 @@ public class DatasetUtilitiesTests extends TestCase {
     }
 
     /**
-     * Some tests for the findRangeBounds() method.
+     * Some tests for the findRangeBounds() method on an XYDataset.
      */
-    public void testFindRangeBounds2() {
+    public void testFindRangeBounds() {
         XYDataset dataset = createXYDataset1();
         Range r = DatasetUtilities.findRangeBounds(dataset);
         assertEquals(100.0, r.getLowerBound(), EPSILON);
@@ -161,7 +263,7 @@ public class DatasetUtilitiesTests extends TestCase {
      * A test for the findRangeBounds(XYDataset) method using
      * an IntervalXYDataset.
      */
-    public void testFindRangeBounds3() {
+    public void testFindRangeBounds2() {
         YIntervalSeriesCollection dataset = new YIntervalSeriesCollection();
         Range r = DatasetUtilities.findRangeBounds(dataset);
         assertNull(r);
@@ -175,6 +277,10 @@ public class DatasetUtilitiesTests extends TestCase {
         r = DatasetUtilities.findRangeBounds(dataset);
         assertEquals(1.5, r.getLowerBound(), EPSILON);
         assertEquals(2.5, r.getUpperBound(), EPSILON);
+
+        r = DatasetUtilities.findRangeBounds(dataset, false);
+        assertEquals(2.0, r.getLowerBound(), EPSILON);
+        assertEquals(2.0, r.getUpperBound(), EPSILON);
 
         // another item
         s1.add(2.0, 2.0, 1.4, 2.1);
@@ -199,7 +305,6 @@ public class DatasetUtilitiesTests extends TestCase {
         r = DatasetUtilities.findRangeBounds(dataset, false);
         assertEquals(2.0, r.getLowerBound(), EPSILON);
         assertEquals(2.0, r.getUpperBound(), EPSILON);
-
     }
 
     /**
@@ -233,11 +338,11 @@ public class DatasetUtilitiesTests extends TestCase {
         assertEquals(1.23, r.getLowerBound(), EPSILON);
         assertEquals(1.23, r.getUpperBound(), EPSILON);
 
-        // a Double.NaN messes things up
+        // a Double.NaN should be ignored
         dataset.addValue(Double.NaN, "R2", "C1");
         r = DatasetUtilities.iterateRangeBounds(dataset, false);
-        assertTrue(Double.isNaN(r.getLowerBound()));
-        assertTrue(Double.isNaN(r.getUpperBound()));
+        assertEquals(1.23, r.getLowerBound(), EPSILON);
+        assertEquals(1.23, r.getUpperBound(), EPSILON);
     }
 
     /**
@@ -268,7 +373,6 @@ public class DatasetUtilitiesTests extends TestCase {
         r = DatasetUtilities.iterateRangeBounds(d, true);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(16.0, r.getUpperBound(), EPSILON);
-
     }
 
     /**
@@ -480,8 +584,22 @@ public class DatasetUtilitiesTests extends TestCase {
         dataset.addValue(3.51, "Product 1", "Distribution");
         dataset.addValue(32.64, "Product 1", "Total Expense");
         Range range = DatasetUtilities.findCumulativeRangeBounds(dataset);
-        assertEquals(0.0, range.getLowerBound(), 0.00000001);
-        assertEquals(65.28, range.getUpperBound(), 0.00000001);
+        assertEquals(0.0, range.getLowerBound(), EPSILON);
+        assertEquals(65.28, range.getUpperBound(), EPSILON);
+    }
+
+    /**
+     * Check that the findCumulativeRangeBounds() method ignores Double.NaN
+     * values.
+     */
+    public void testCumulativeRange_NaN() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(10.0, "Series 1", "Start");
+        dataset.addValue(15.0, "Series 1", "Delta 1");
+        dataset.addValue(Double.NaN, "Series 1", "Delta 2");
+        Range range = DatasetUtilities.findCumulativeRangeBounds(dataset);
+        assertEquals(0.0, range.getLowerBound(), EPSILON);
+        assertEquals(25.0, range.getUpperBound(), EPSILON);
     }
 
     /**
@@ -550,7 +668,7 @@ public class DatasetUtilitiesTests extends TestCase {
     /**
      * Some checks for the findStackedRangeBounds() method.
      */
-    public void testFindStackedRangeBoundsForCategoryDataset1() {
+    public void testFindStackedRangeBounds_CategoryDataset1() {
         CategoryDataset d1 = createCategoryDataset1();
         Range r = DatasetUtilities.findStackedRangeBounds(d1);
         assertEquals(0.0, r.getLowerBound(), EPSILON);
@@ -565,10 +683,65 @@ public class DatasetUtilitiesTests extends TestCase {
     /**
      * Some checks for the findStackedRangeBounds() method.
      */
-    public void testFindStackedRangeBoundsForCategoryDataset2() {
-        CategoryDataset d1 = new DefaultCategoryDataset();
-        Range r = DatasetUtilities.findStackedRangeBounds(d1);
+    public void testFindStackedRangeBounds_CategoryDataset2() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        Range r = DatasetUtilities.findStackedRangeBounds(dataset);
         assertTrue(r == null);
+
+        dataset.addValue(5.0, "R1", "C1");
+        r = DatasetUtilities.findStackedRangeBounds(dataset, 3.0);
+        assertEquals(3.0, r.getLowerBound(), EPSILON);
+        assertEquals(8.0, r.getUpperBound(), EPSILON);
+
+        dataset.addValue(-1.0, "R2", "C1");
+        r = DatasetUtilities.findStackedRangeBounds(dataset, 3.0);
+        assertEquals(2.0, r.getLowerBound(), EPSILON);
+        assertEquals(8.0, r.getUpperBound(), EPSILON);
+
+        dataset.addValue(null, "R3", "C1");
+        r = DatasetUtilities.findStackedRangeBounds(dataset, 3.0);
+        assertEquals(2.0, r.getLowerBound(), EPSILON);
+        assertEquals(8.0, r.getUpperBound(), EPSILON);
+
+        dataset.addValue(Double.NaN, "R4", "C1");
+        r = DatasetUtilities.findStackedRangeBounds(dataset, 3.0);
+        assertEquals(2.0, r.getLowerBound(), EPSILON);
+        assertEquals(8.0, r.getUpperBound(), EPSILON);
+    }
+
+    /**
+     * Some checks for the findStackedRangeBounds(CategoryDataset,
+     * KeyToGroupMap) method.
+     */
+    public void testFindStackedRangeBounds_CategoryDataset3() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        KeyToGroupMap map = new KeyToGroupMap("Group A");
+        Range r = DatasetUtilities.findStackedRangeBounds(dataset, map);
+        assertTrue(r == null);
+
+        dataset.addValue(1.0, "R1", "C1");
+        dataset.addValue(2.0, "R2", "C1");
+        dataset.addValue(3.0, "R3", "C1");
+        dataset.addValue(4.0, "R4", "C1");
+
+        map.mapKeyToGroup("R1", "Group A");
+        map.mapKeyToGroup("R2", "Group A");
+        map.mapKeyToGroup("R3", "Group B");
+        map.mapKeyToGroup("R4", "Group B");
+
+        r = DatasetUtilities.findStackedRangeBounds(dataset, map);
+        assertEquals(0.0, r.getLowerBound(), EPSILON);
+        assertEquals(7.0, r.getUpperBound(), EPSILON);
+
+        dataset.addValue(null, "R5", "C1");
+        r = DatasetUtilities.findStackedRangeBounds(dataset, map);
+        assertEquals(0.0, r.getLowerBound(), EPSILON);
+        assertEquals(7.0, r.getUpperBound(), EPSILON);
+
+        dataset.addValue(Double.NaN, "R6", "C1");
+        r = DatasetUtilities.findStackedRangeBounds(dataset, map);
+        assertEquals(0.0, r.getLowerBound(), EPSILON);
+        assertEquals(7.0, r.getUpperBound(), EPSILON);
     }
 
     /**
@@ -668,6 +841,88 @@ public class DatasetUtilitiesTests extends TestCase {
         assertEquals(0.0, dataset.getYValue(0, 0), EPSILON);
         assertEquals(1.0, dataset.getXValue(0, 1), EPSILON);
         assertEquals(1.0, dataset.getYValue(0, 1), EPSILON);
+    }
+
+    /**
+     * A simple check for the findMinimumStackedRangeValue() method.
+     */
+    public void testFindMinimumStackedRangeValue() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        // an empty dataset should return a null max
+        Number min = DatasetUtilities.findMinimumStackedRangeValue(dataset);
+        assertNull(min);
+
+        dataset.addValue(1.0, "R1", "C1");
+        min = DatasetUtilities.findMinimumStackedRangeValue(dataset);
+        assertEquals(0.0, min.doubleValue(), EPSILON);
+
+        dataset.addValue(2.0, "R2", "C1");
+        min = DatasetUtilities.findMinimumStackedRangeValue(dataset);
+        assertEquals(0.0, min.doubleValue(), EPSILON);
+
+        dataset.addValue(-3.0, "R3", "C1");
+        min = DatasetUtilities.findMinimumStackedRangeValue(dataset);
+        assertEquals(-3.0, min.doubleValue(), EPSILON);
+
+        dataset.addValue(Double.NaN, "R4", "C1");
+        min = DatasetUtilities.findMinimumStackedRangeValue(dataset);
+        assertEquals(-3.0, min.doubleValue(), EPSILON);
+    }
+
+    /**
+     * A simple check for the findMaximumStackedRangeValue() method.
+     */
+    public void testFindMinimumStackedRangeValue2() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(-1.0, "R1", "C1");
+        Number min = DatasetUtilities.findMinimumStackedRangeValue(dataset);
+        assertEquals(-1.0, min.doubleValue(), EPSILON);
+
+        dataset.addValue(-2.0, "R2", "C1");
+        min = DatasetUtilities.findMinimumStackedRangeValue(dataset);
+        assertEquals(-3.0, min.doubleValue(), EPSILON);
+    }
+
+    /**
+     * A simple check for the findMaximumStackedRangeValue() method.
+     */
+    public void testFindMaximumStackedRangeValue() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        // an empty dataset should return a null max
+        Number max = DatasetUtilities.findMaximumStackedRangeValue(dataset);
+        assertNull(max);
+
+        dataset.addValue(1.0, "R1", "C1");
+        max = DatasetUtilities.findMaximumStackedRangeValue(dataset);
+        assertEquals(1.0, max.doubleValue(), EPSILON);
+
+        dataset.addValue(2.0, "R2", "C1");
+        max = DatasetUtilities.findMaximumStackedRangeValue(dataset);
+        assertEquals(3.0, max.doubleValue(), EPSILON);
+
+        dataset.addValue(-3.0, "R3", "C1");
+        max = DatasetUtilities.findMaximumStackedRangeValue(dataset);
+        assertEquals(3.0, max.doubleValue(), EPSILON);
+
+        dataset.addValue(Double.NaN, "R4", "C1");
+        max = DatasetUtilities.findMaximumStackedRangeValue(dataset);
+        assertEquals(3.0, max.doubleValue(), EPSILON);
+    }
+
+    /**
+     * A simple check for the findMaximumStackedRangeValue() method.
+     */
+    public void testFindMaximumStackedRangeValue2() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(-1.0, "R1", "C1");
+        Number max = DatasetUtilities.findMaximumStackedRangeValue(dataset);
+        assertEquals(0.0, max.doubleValue(), EPSILON);
+
+        dataset.addValue(-2.0, "R2", "C1");
+        max = DatasetUtilities.findMaximumStackedRangeValue(dataset);
+        assertEquals(0.0, max.doubleValue(), EPSILON);
     }
 
     /**
