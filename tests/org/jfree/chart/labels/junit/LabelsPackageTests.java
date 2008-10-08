@@ -66,7 +66,8 @@ public class LabelsPackageTests extends TestCase {
         suite.addTestSuite(BubbleXYItemLabelGeneratorTests.class);
         suite.addTestSuite(CustomXYItemLabelGeneratorTests.class);
         suite.addTestSuite(HighLowItemLabelGeneratorTests.class);
-        suite.addTestSuite(IntervalCategoryLabelGeneratorTests.class);
+        suite.addTestSuite(IntervalCategoryItemLabelGeneratorTests.class);
+        suite.addTestSuite(IntervalCategoryToolTipGeneratorTests.class);
         suite.addTestSuite(ItemLabelAnchorTests.class);
         suite.addTestSuite(ItemLabelPositionTests.class);
         suite.addTestSuite(MultipleXYSeriesLabelGeneratorTests.class);

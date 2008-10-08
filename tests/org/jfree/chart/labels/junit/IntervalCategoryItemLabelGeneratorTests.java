@@ -62,7 +62,7 @@ import org.jfree.util.PublicCloneable;
 /**
  * Tests for the {@link IntervalCategoryItemLabelGenerator} class.
  */
-public class IntervalCategoryLabelGeneratorTests extends TestCase {
+public class IntervalCategoryItemLabelGeneratorTests extends TestCase {
 
     /**
      * Returns the tests as a test suite.
@@ -70,7 +70,7 @@ public class IntervalCategoryLabelGeneratorTests extends TestCase {
      * @return The test suite.
      */
     public static Test suite() {
-        return new TestSuite(IntervalCategoryLabelGeneratorTests.class);
+        return new TestSuite(IntervalCategoryItemLabelGeneratorTests.class);
     }
 
     /**
@@ -78,7 +78,7 @@ public class IntervalCategoryLabelGeneratorTests extends TestCase {
      *
      * @param name  the name of the tests.
      */
-    public IntervalCategoryLabelGeneratorTests(String name) {
+    public IntervalCategoryItemLabelGeneratorTests(String name) {
         super(name);
     }
 
@@ -86,7 +86,6 @@ public class IntervalCategoryLabelGeneratorTests extends TestCase {
      * Tests the equals() method.
      */
     public void testEquals() {
-
         IntervalCategoryItemLabelGenerator g1
                 = new IntervalCategoryItemLabelGenerator();
         IntervalCategoryItemLabelGenerator g2
@@ -107,7 +106,6 @@ public class IntervalCategoryLabelGeneratorTests extends TestCase {
         g2 = new IntervalCategoryItemLabelGenerator("{3} - {4}",
                 new SimpleDateFormat("d-MMM"));
         assertTrue(g1.equals(g2));
-
     }
 
     /**
