@@ -35,34 +35,31 @@
  * Changes
  * -------
  * 11-May-2004 : Version 1, split from IntervalCategoryItemLabelGenerator (DG);
+ * 08-Oct-2008 : Override equals() method (DG);
  *
  */
 
 package org.jfree.chart.labels;
 
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A tooltip generator for plots that use data from an
  * {@link IntervalCategoryDataset}.
  */
 public class IntervalCategoryToolTipGenerator
-    extends StandardCategoryToolTipGenerator
-    implements CategoryToolTipGenerator, PublicCloneable, Cloneable,
-               Serializable {
+        extends StandardCategoryToolTipGenerator {
 
     /** For serialization. */
     private static final long serialVersionUID = -3853824986520333437L;
 
     /** The default format string. */
     public static final String DEFAULT_TOOL_TIP_FORMAT_STRING
-        = "({0}, {1}) = {3} - {4}";
+            = "({0}, {1}) = {3} - {4}";
 
     /**
      * Creates a new generator with a default number formatter.
@@ -132,6 +129,25 @@ public class IntervalCategoryToolTipGenerator
             }
         }
         return result;
+    }
+
+    /**
+     * Tests this tool tip generator for equality with an arbitrary
+     * object.
+     *
+     * @param obj  the object (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof IntervalCategoryToolTipGenerator)) {
+            return false;
+        }
+        // no fields to test
+        return super.equals(obj);
     }
 
 }

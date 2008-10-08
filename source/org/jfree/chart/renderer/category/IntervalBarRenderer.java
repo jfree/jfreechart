@@ -56,6 +56,7 @@
  *               --> CategoryItemLabelGenerator (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 24-Jun-2008 : Added new barPainter mechanism (DG);
+ * 07-Oct-2008 : Override equals() method to fix minor bug (DG);
  *
  */
 
@@ -63,7 +64,6 @@ package org.jfree.chart.renderer.category;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
 
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
@@ -74,17 +74,13 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.ui.RectangleEdge;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A renderer that handles the drawing of bars for a bar plot where
- * each bar has a high and low value.
- * <p>
- * For use with the {@link CategoryPlot} class.
+ * each bar has a high and low value.  This renderer is for use with the
+ * {@link CategoryPlot} class.
  */
-public class IntervalBarRenderer extends BarRenderer
-        implements CategoryItemRenderer, Cloneable, PublicCloneable,
-                   Serializable {
+public class IntervalBarRenderer extends BarRenderer {
 
     /** For serialization. */
     private static final long serialVersionUID = -5068857361615528725L;
@@ -256,6 +252,24 @@ public class IntervalBarRenderer extends BarRenderer
             addItemEntity(entities, dataset, row, column, bar);
         }
 
+    }
+
+    /**
+     * Tests this renderer for equality with an arbitrary object.
+     *
+     * @param obj  the object (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof IntervalBarRenderer)) {
+            return false;
+        }
+        // there are no fields to check
+        return super.equals(obj);
     }
 
 }
