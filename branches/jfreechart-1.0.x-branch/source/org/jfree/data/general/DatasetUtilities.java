@@ -1441,7 +1441,7 @@ public final class DatasetUtilities {
                     if (value < 0.0) {
                         negative[groupIndex[series]]
                                  = negative[groupIndex[series]] + value;
-                             // '+', remember value is negative
+                                 // '+', remember value is negative
                     }
                 }
             }
