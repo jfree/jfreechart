@@ -56,6 +56,7 @@
  * 03-Aug-2007 : Fixed null pointer exception (DG);
  * 23-Apr-2008 : Added new constructor and implemented Cloneable (DG);
  * 17-Jun-2008 : Added optional labelFont and labelPaint attributes (DG);
+ * 15-Oct-2008 : Added new constructor (DG);
  *
  */
 
@@ -207,8 +208,21 @@ public class LegendItem implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public LegendItem(String label) {
+        this(label, Color.black);
+    }
+
+    /**
+     * Creates a legend item with the specified label and fill paint.  The
+     * remaining attributes take default values.
+     *
+     * @param label  the label (<code>null</code> not permitted).
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @since 1.0.12
+     */
+    public LegendItem(String label, Paint paint) {
         this(label, null, null, null, new Rectangle2D.Double(-4.0, -4.0, 8.0,
-                8.0), Color.black);
+                8.0), paint);
     }
 
     /**
