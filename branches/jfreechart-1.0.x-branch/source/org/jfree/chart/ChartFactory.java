@@ -116,6 +116,8 @@
  * 10-Jul-2007 : Added new methods to create pie charts with locale for
  *               section label and tool tip formatting (DG);
  * 14-Aug-2008 : Added ChartTheme facility (DG);
+ * 23-Oct-2008 : Check for legacy theme in setChartTheme() and reset default
+ *               bar painters (DG);
  *
  */
 
@@ -167,15 +169,19 @@ import org.jfree.chart.renderer.category.BarRenderer3D;
 import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.GanttRenderer;
+import org.jfree.chart.renderer.category.GradientBarPainter;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.category.LineRenderer3D;
 import org.jfree.chart.renderer.category.StackedAreaRenderer;
 import org.jfree.chart.renderer.category.StackedBarRenderer;
 import org.jfree.chart.renderer.category.StackedBarRenderer3D;
+import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.chart.renderer.category.WaterfallBarRenderer;
 import org.jfree.chart.renderer.xy.CandlestickRenderer;
+import org.jfree.chart.renderer.xy.GradientXYBarPainter;
 import org.jfree.chart.renderer.xy.HighLowRenderer;
 import org.jfree.chart.renderer.xy.StackedXYAreaRenderer2;
+import org.jfree.chart.renderer.xy.StandardXYBarPainter;
 import org.jfree.chart.renderer.xy.WindItemRenderer;
 import org.jfree.chart.renderer.xy.XYAreaRenderer;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
@@ -237,11 +243,12 @@ public abstract class ChartFactory {
 
     /**
      * Sets the current chart theme.  This will be applied to all new charts
-     * as they are created.
+     * created via methods in this class.
      *
      * @param theme  the theme (<code>null</code> not permitted).
      *
      * @see #getChartTheme()
+     * @see ChartUtilities#applyCurrentTheme(JFreeChart)
      *
      * @since 1.0.11
      */
@@ -250,6 +257,20 @@ public abstract class ChartFactory {
             throw new IllegalArgumentException("Null 'theme' argument.");
         }
         currentTheme = theme;
+
+        // here we do a check to see if the user is installing the "Legacy"
+        // theme, and reset the bar painters in that case...
+        if (theme instanceof StandardChartTheme) {
+            StandardChartTheme sct = (StandardChartTheme) theme;
+            if (sct.getName().equals("Legacy")) {
+                BarRenderer.setDefaultBarPainter(new StandardBarPainter());
+                XYBarRenderer.setDefaultBarPainter(new StandardXYBarPainter());
+            }
+            else {
+                BarRenderer.setDefaultBarPainter(new GradientBarPainter());
+                XYBarRenderer.setDefaultBarPainter(new GradientXYBarPainter());
+            }
+        }
     }
 
     /**
