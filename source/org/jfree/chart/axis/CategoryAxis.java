@@ -87,6 +87,7 @@
  * 23-Apr-2008 : Fixed bug 1942059, bad use of insets in
  *               calculateTextBlockWidth() (DG);
  * 26-Jun-2008 : Added new getCategoryMiddle() method (DG);
+ * 27-Oct-2008 : Set font on Graphics2D when creating category labels (DG);
  *
  */
 
@@ -1101,6 +1102,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             Iterator iterator = categories.iterator();
             while (iterator.hasNext()) {
                 Comparable category = (Comparable) iterator.next();
+                g2.setFont(getTickLabelFont(category));
                 TextBlock label = createLabel(category, l * r, edge, g2);
                 if (edge == RectangleEdge.TOP || edge == RectangleEdge.BOTTOM) {
                     max = Math.max(max, calculateTextBlockHeight(label,
