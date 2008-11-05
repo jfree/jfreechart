@@ -43,6 +43,8 @@
  *               AbstractXYAnnotation (DG);
  * 04-Oct-2004 : Renamed ShapeUtils --> ShapeUtilities (DG);
  * 08-Jun-2005 : Fixed equals() method to handle GradientPaint() (DG);
+ * 05-Nov-2008 : Added workaround for JRE bug 6574155, see JFreeChart bug
+ *               2221495 (DG);
  *
  */
 
@@ -65,6 +67,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.LineUtilities;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.util.ObjectUtilities;
@@ -193,7 +196,12 @@ public class XYLineAnnotation extends AbstractXYAnnotation
         g2.setPaint(this.paint);
         g2.setStroke(this.stroke);
         Line2D line = new Line2D.Float(j2DX1, j2DY1, j2DX2, j2DY2);
-        g2.draw(line);
+        // line is clipped to avoid JRE bug 6574155, for more info
+        // see JFreeChart bug 2221495
+        boolean visible = LineUtilities.clipLine(line, dataArea);
+        if (visible) {
+            g2.draw(line);
+        }
 
         String toolTip = getToolTipText();
         String url = getURL();

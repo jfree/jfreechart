@@ -36,6 +36,7 @@
  * --------
  * 23-Nov-2006 : Version 1 (DG);
  * 08-Apr-2008 : Added LogFormatTests (DG);
+ * 05-Nov-2008 : Added LineUtilitiesTests (DG);
  *
  */
 
@@ -59,6 +60,7 @@ public class UtilPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.chart.util");
+        suite.addTestSuite(LineUtilitiesTests.class);
         suite.addTestSuite(LogFormatTests.class);
         suite.addTestSuite(RelativeDateFormatTests.class);
         return suite;
