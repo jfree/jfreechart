@@ -233,6 +233,7 @@ public abstract class Title extends AbstractBlock
         this.visible = visible;
         notifyListeners(new TitleChangeEvent(this));
     }
+
     /**
      * Returns the position of the title.
      *
