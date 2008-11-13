@@ -1065,9 +1065,8 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                                                Rectangle2D dataArea,
                                                RectangleEdge edge) {
 
-        double tickLabelWidth = estimateMaximumTickLabelWidth(
-            g2, getTickUnit()
-        );
+        double tickLabelWidth = estimateMaximumTickLabelWidth(g2,
+                getTickUnit());
 
         // start with the current tick unit...
         TickUnitSource tickUnits = getStandardTickUnits();
@@ -1077,8 +1076,8 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         // then extrapolate...
         double guess = (tickLabelWidth / unit1Width) * unit1.getSize();
 
-        NumberTickUnit unit2
-            = (NumberTickUnit) tickUnits.getCeilingTickUnit(guess);
+        NumberTickUnit unit2 = (NumberTickUnit) tickUnits.getCeilingTickUnit(
+                guess);
         double unit2Width = lengthToJava2D(unit2.getSize(), dataArea, edge);
 
         tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit2);
