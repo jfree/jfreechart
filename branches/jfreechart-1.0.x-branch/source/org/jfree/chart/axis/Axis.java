@@ -1180,7 +1180,6 @@ public abstract class Axis implements Cloneable, Serializable {
         Rectangle2D labelBounds = TextUtilities.getTextBounds(label, g2, fm);
 
         if (edge == RectangleEdge.TOP) {
-
             AffineTransform t = AffineTransform.getRotateInstance(
                     getLabelAngle(), labelBounds.getCenterX(),
                     labelBounds.getCenterY());
@@ -1194,10 +1193,8 @@ public abstract class Axis implements Cloneable, Serializable {
                     TextAnchor.CENTER);
             state.cursorUp(insets.getTop() + labelBounds.getHeight()
                     + insets.getBottom());
-
         }
         else if (edge == RectangleEdge.BOTTOM) {
-
             AffineTransform t = AffineTransform.getRotateInstance(
                     getLabelAngle(), labelBounds.getCenterX(),
                     labelBounds.getCenterY());
@@ -1211,10 +1208,8 @@ public abstract class Axis implements Cloneable, Serializable {
                     TextAnchor.CENTER);
             state.cursorDown(insets.getTop() + labelBounds.getHeight()
                     + insets.getBottom());
-
         }
         else if (edge == RectangleEdge.LEFT) {
-
             AffineTransform t = AffineTransform.getRotateInstance(
                     getLabelAngle() - Math.PI / 2.0, labelBounds.getCenterX(),
                     labelBounds.getCenterY());
