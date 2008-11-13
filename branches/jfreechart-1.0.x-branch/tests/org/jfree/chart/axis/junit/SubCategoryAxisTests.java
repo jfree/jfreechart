@@ -36,6 +36,7 @@
  * -------
  * 12-May-2004 : Version 1 (DG);
  * 07-Jan-2005 : Added test for hashCode() (DG);
+ * 13-Nov-2008 : Added test2275695() (DG);
  *
  */
 
@@ -43,6 +44,9 @@ package org.jfree.chart.axis.junit;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -54,7 +58,11 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.SubCategoryAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
 
 /**
  * Tests for the {@link SubCategoryAxis} class.
@@ -67,7 +75,7 @@ public class SubCategoryAxisTests extends TestCase {
      * @return The test suite.
      */
     public static Test suite() {
-        return new TestSuite(CategoryAxisTests.class);
+        return new TestSuite(SubCategoryAxisTests.class);
     }
 
     /**
@@ -126,12 +134,13 @@ public class SubCategoryAxisTests extends TestCase {
      */
     public void testCloning() {
         SubCategoryAxis a1 = new SubCategoryAxis("Test");
+        a1.addSubCategory("SubCategoryA");
         SubCategoryAxis a2 = null;
         try {
             a2 = (SubCategoryAxis) a1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
@@ -142,10 +151,9 @@ public class SubCategoryAxisTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         SubCategoryAxis a1 = new SubCategoryAxis("Test Axis");
+        a1.addSubCategory("SubCategoryA");
         SubCategoryAxis a2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -161,7 +169,30 @@ public class SubCategoryAxisTests extends TestCase {
             e.printStackTrace();
         }
         assertEquals(a1, a2);
+    }
 
+    /**
+     * A check for the NullPointerException in bug 2275695.
+     */
+    public void test2275695() {
+        JFreeChart chart = ChartFactory.createStackedBarChart("Test",
+                "Category", "Value", null, PlotOrientation.VERTICAL,
+                true, false, false);
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        plot.setDomainAxis(new SubCategoryAxis("SubCategoryAxis"));
+        boolean success = false;
+        try {
+            BufferedImage image = new BufferedImage(200 , 100,
+                    BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2 = image.createGraphics();
+            chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
+            g2.dispose();
+            success = true;
+        }
+        catch (Exception e) {
+            success = false;
+        }
+        assertTrue(success);
     }
 
 }

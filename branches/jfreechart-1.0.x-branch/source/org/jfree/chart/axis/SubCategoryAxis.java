@@ -43,6 +43,8 @@
  *               Joubert (1277726) (DG);
  * 30-May-2007 : Added argument check and event notification to
  *               addSubCategory() (DG);
+ * 13-Nov-2008 : Fix NullPointerException when dataset is null - see bug
+ *               report 2275695 (DG);
  *
  */
 
@@ -306,8 +308,11 @@ public class SubCategoryAxis extends CategoryAxis
         g2.setFont(this.subLabelFont);
         g2.setPaint(this.subLabelPaint);
         CategoryPlot plot = (CategoryPlot) getPlot();
+        int categoryCount = 0;
         CategoryDataset dataset = plot.getDataset();
-        int categoryCount = dataset.getColumnCount();
+        if (dataset != null) {
+            categoryCount = dataset.getColumnCount();
+        }
 
         double maxdim = getMaxDim(g2, edge);
         for (int categoryIndex = 0; categoryIndex < categoryCount;

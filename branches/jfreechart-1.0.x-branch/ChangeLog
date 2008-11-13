@@ -1,3 +1,11 @@
+2008-11-13  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 2275695:
+    * source/org/jfree/chart/axis/SubCategoryAxis.java
+    (drawSubCategoryLabels): Check for null,
+    * tests/org/jfree/chart/axis/junit/SubCategoryAxisTests.java
+    (test2275695): New method.
+
 2008-11-05  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 2221495:
