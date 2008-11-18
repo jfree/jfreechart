@@ -30,7 +30,7 @@
  * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):
+ * Contributor(s):   Henry Proudhon (henry.proudhon AT ensmp.fr).
  *
  * Changes
  * -------
