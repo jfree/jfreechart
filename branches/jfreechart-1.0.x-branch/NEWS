@@ -4,7 +4,10 @@ JFreeChart 1.0.12
 
 Bug Fixes:
 2275695 : NullPointerException for SubCategoryAxis on plot with null dataset;
+2221495 : XYLineAnnotation with dashed stroke;
+2216511 : SWTBarChartDemo1 throws RuntimeException;
 2121818 : Label link lines for very thin RingPlot;
+2113627 : XYStepRenderer item labels.
 
 Also fixed StackedXYBarRenderer which was ignoring the shadowsVisible attribute.
 

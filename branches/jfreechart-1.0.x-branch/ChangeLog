@@ -1,3 +1,11 @@
+2008-11-18  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 2216511:
+    * swt/org/jfree/experimental/chart/demo/SWTBarChartDemo1.java
+    (createChart): Reset the bar painter to avoid using gradients,
+    * swt/org/jfree/experimental/swt/SWTGraphics2D.java
+    (setPaint): Don't fail for GradientPaint.
+
 2008-11-13  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 2275695:
