@@ -269,9 +269,8 @@ public class SubCategoryAxis extends CategoryAxis
 
         // draw the category labels and axis label
         AxisState state = new AxisState(cursor);
-        state = drawSubCategoryLabels(
-            g2, plotArea, dataArea, edge, state, plotState
-        );
+        state = drawSubCategoryLabels(g2, plotArea, dataArea, edge, state, 
+                plotState);
         state = drawCategoryLabels(g2, plotArea, dataArea, edge, state,
                 plotState);
         state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
