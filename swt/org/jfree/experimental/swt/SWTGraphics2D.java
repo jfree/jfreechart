@@ -50,6 +50,7 @@
  * 23-Oct-2007 : Implemented drawPolygon(), drawPolyline(), drawOval(),
  *               fillOval(), drawArc() and fillArc() (DG);
  * 27-Nov-2007 : Implemented a couple of drawImage() methods (DG);
+ * 18-Nov-2008 : Check for GradientPaint in setPaint() method (DG);
  *
  */
 
@@ -61,6 +62,7 @@ import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
@@ -242,7 +244,10 @@ public class SWTGraphics2D extends Graphics2D {
 
     /**
      * Sets the paint for this graphics context.  For now, this graphics
-     * context only supports instances of {@link Color}.
+     * context only supports instances of {@link Color} or
+     * {@link GradientPaint} (in the latter case there is no real gradient
+     * support, the paint used is the <code>Color</code> returned by 
+     * <code>getColor1()</code>).
      *
      * @param paint  the paint (<code>null</code> not permitted).
      *
@@ -252,6 +257,10 @@ public class SWTGraphics2D extends Graphics2D {
     public void setPaint(Paint paint) {
         if (paint instanceof Color) {
             setColor((Color) paint);
+        }
+        else if (paint instanceof GradientPaint) {
+            GradientPaint gp = (GradientPaint) paint;
+            setColor(gp.getColor1());
         }
         else {
             throw new RuntimeException("Can only handle 'Color' at present.");
