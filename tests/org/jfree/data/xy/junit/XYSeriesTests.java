@@ -39,6 +39,7 @@
  * 30-Jan-2007 : Fixed some code that won't compile with Java 1.4 (DG);
  * 31-Oct-2007 : New hashCode() test (DG);
  * 01-May-2008 : Added testAddOrUpdate3() (DG);
+ * 24-Nov-2008 : Added testBug1955483() (DG);
  *
  */
 
@@ -467,6 +468,18 @@ public class XYSeriesTests extends TestCase {
         assertEquals(22.0, dataset.getYValue(0, 1), EPSILON);
         assertEquals(35.0, dataset.getYValue(0, 2), EPSILON);
         assertTrue(Double.isNaN(dataset.getYValue(0, 3)));
+    }
+
+    /**
+     * Another test for the addOrUpdate() method.
+     */
+    public void testBug1955483() {
+        XYSeries series = new XYSeries("Series", true, true);
+        series.addOrUpdate(1.0, 1.0);
+        series.addOrUpdate(1.0, 2.0);
+        assertEquals(new Double(1.0), series.getY(0));
+        assertEquals(new Double(2.0), series.getY(1));
+        assertEquals(2, series.getItemCount());
     }
 
 }

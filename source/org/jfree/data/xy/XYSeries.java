@@ -70,6 +70,7 @@
  * 22-Nov-2007 : Reimplemented clone() (DG);
  * 01-May-2008 : Fixed bug 1955483 in addOrUpdate() method, thanks to
  *               Ted Schwartz (DG);
+ * 24-Nov-2008 : Further fix for 1955483 (DG);
  *
  */
 
@@ -295,14 +296,18 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Adds new data to the series and sends a {@link SeriesChangeEvent} to
-     * all registered listeners.
+     * Adds a new data item to the series (in the correct position if the
+     * <code>autoSort</code> flag is set for the series) and sends a
+     * {@link SeriesChangeEvent} to all registered listeners.
      * <P>
      * Throws an exception if the x-value is a duplicate AND the
      * allowDuplicateXValues flag is false.
      *
      * @param x  the x-value (<code>null</code> not permitted).
      * @param y  the y-value (<code>null</code> permitted).
+     *
+     * @throws SeriesException if the x-value is a duplicate and the
+     *     <code>allowDuplicateXValues</code> flag is not set for this series.
      */
     public void add(Number x, Number y) {
         // argument checking delegated...
@@ -537,8 +542,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
 
     /**
      * Adds or updates an item in the series and sends a
-     * {@link org.jfree.data.general.SeriesChangeEvent} to all registered
-     * listeners.
+     * {@link SeriesChangeEvent} to all registered listeners.
      *
      * @param x  the x-value (<code>null</code> not permitted).
      * @param y  the y-value (<code>null</code> permitted).
@@ -550,9 +554,15 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         if (x == null) {
             throw new IllegalArgumentException("Null 'x' argument.");
         }
+        if (this.allowDuplicateXValues) {
+            add(x, y);
+            return null;
+        }
+
+        // if we get to here, we know that duplicate X values are not permitted
         XYDataItem overwritten = null;
         int index = indexOf(x);
-        if (index >= 0 && !this.allowDuplicateXValues) {
+        if (index >= 0) {
             XYDataItem existing = (XYDataItem) this.data.get(index);
             try {
                 overwritten = (XYDataItem) existing.clone();
