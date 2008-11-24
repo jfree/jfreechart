@@ -1,3 +1,11 @@
+2008-11-24  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 1955483:
+    * source/org/jfree/data/xy/XYSeries.java
+    (addOrUpdate): Check early for duplicates allowed,
+    * tests/org/jfree/data/xy/junit/XYSeriesTests.java
+    (testBug1955483): New test.
+
 2008-11-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 2216511:
