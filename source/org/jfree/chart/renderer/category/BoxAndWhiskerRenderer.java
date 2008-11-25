@@ -116,7 +116,12 @@ import org.jfree.util.PublicCloneable;
 /**
  * A box-and-whisker renderer.  This renderer requires a
  * {@link BoxAndWhiskerCategoryDataset} and is for use with the
- * {@link CategoryPlot} class.
+ * {@link CategoryPlot} class.  The example shown here is generated
+ * by the <code>BoxAndWhiskerChartDemo1.java</code> program included in the
+ * JFreeChart Demo Collection:
+ * <br><br>
+ * <img src="../../../../../images/BoxAndWhiskerRendererSample.png"
+ * alt="BoxAndWhiskerRendererSample.png" />
  */
 public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {
