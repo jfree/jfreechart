@@ -92,8 +92,10 @@ import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.renderer.category.AreaRenderer;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
+import org.jfree.chart.renderer.category.DefaultCategoryItemRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.Range;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.Layer;
 import org.jfree.ui.RectangleInsets;
@@ -929,5 +931,88 @@ public class CategoryPlotTests extends TestCase {
         CategoryPlot plot = new CategoryPlot();
         assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
     }
+
+    /**
+     * Some tests for the getDomainAxisForDataset() method.
+     */
+    public void testGetDomainAxisForDataset() {
+        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryAxis xAxis = new CategoryAxis("X");
+        NumberAxis yAxis = new NumberAxis("Y");
+        CategoryItemRenderer renderer = new BarRenderer();
+        CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
+        assertEquals(xAxis, plot.getDomainAxisForDataset(0));
+
+        // should get IllegalArgumentException for negative index
+        boolean pass = false;
+        try {
+            plot.getDomainAxisForDataset(-1);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+
+        // if multiple axes are mapped, the first in the list should be
+        // returned...
+        CategoryAxis xAxis2 = new CategoryAxis("X2");
+        plot.setDomainAxis(1, xAxis2);
+        assertEquals(xAxis, plot.getDomainAxisForDataset(0));
+
+        plot.mapDatasetToDomainAxis(0, 1);
+        assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
+
+        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
+                new Integer(1)});
+        plot.mapDatasetToDomainAxes(0, axisIndices);
+        assertEquals(xAxis, plot.getDomainAxisForDataset(0));
+
+        axisIndices = Arrays.asList(new Integer[] {new Integer(1),
+                new Integer(2)});
+        plot.mapDatasetToDomainAxes(0, axisIndices);
+        assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
+    }
+
+    /**
+     * Some tests for the getRangeAxisForDataset() method.
+     */
+    public void testGetRangeAxisForDataset() {
+        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryAxis xAxis = new CategoryAxis("X");
+        NumberAxis yAxis = new NumberAxis("Y");
+        CategoryItemRenderer renderer = new DefaultCategoryItemRenderer();
+        CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
+        assertEquals(yAxis, plot.getRangeAxisForDataset(0));
+
+        // should get IllegalArgumentException for negative index
+        boolean pass = false;
+        try {
+            plot.getRangeAxisForDataset(-1);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+
+        // if multiple axes are mapped, the first in the list should be
+        // returned...
+        NumberAxis yAxis2 = new NumberAxis("Y2");
+        plot.setRangeAxis(1, yAxis2);
+        assertEquals(yAxis, plot.getRangeAxisForDataset(0));
+
+        plot.mapDatasetToRangeAxis(0, 1);
+        assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
+
+        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
+                new Integer(1)});
+        plot.mapDatasetToRangeAxes(0, axisIndices);
+        assertEquals(yAxis, plot.getRangeAxisForDataset(0));
+
+        axisIndices = Arrays.asList(new Integer[] {new Integer(1),
+                new Integer(2)});
+        plot.mapDatasetToRangeAxes(0, axisIndices);
+        assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
+    }
+
 
 }

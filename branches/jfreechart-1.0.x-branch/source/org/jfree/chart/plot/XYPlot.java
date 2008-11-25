@@ -44,6 +44,7 @@
  *                   Richard West, Advanced Micro Devices, Inc.;
  *                   Ulrich Voigt - patch 1997549;
  *                   Peter Kolb - patch 1934255;
+ *                   Andrew Mickish - patch 1868749;
  *
  * Changes (from 21-Jun-2001)
  * --------------------------
@@ -208,7 +209,8 @@
  * 25-Jul-2008 : Fixed NullPointerException for plots with no axes (DG);
  * 15-Aug-2008 : Added getRendererCount() method (DG);
  * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
- *
+ * 25-Nov-2008 : Allow datasets to be mapped to multiple axes - based on patch
+ *               1868749 by Andrew Mickish (DG);
  */
 
 package org.jfree.chart.plot;
@@ -232,6 +234,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -247,9 +250,9 @@ import org.jfree.chart.axis.AxisCollection;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.AxisSpace;
 import org.jfree.chart.axis.AxisState;
+import org.jfree.chart.axis.TickType;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.axis.ValueTick;
-import org.jfree.chart.axis.TickType;
 import org.jfree.chart.event.ChartChangeEventType;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -337,18 +340,24 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
     private ObjectList renderers;
 
     /**
-     * Storage for keys that map datasets/renderers to domain axes.  If the
-     * map contains no entry for a dataset, it is assumed to map to the
-     * primary domain axis (index = 0).
+     * Storage for the mapping between datasets/renderers and domain axes.  The
+     * keys in the map are Integer objects, corresponding to the dataset
+     * index.  The values in the map are List objects containing Integer
+     * objects (corresponding to the axis indices).  If the map contains no
+     * entry for a dataset, it is assumed to map to the primary domain axis
+     * (index = 0).
      */
-    private Map datasetToDomainAxisMap;
+    private Map datasetToDomainAxesMap;
 
     /**
-     * Storage for keys that map datasets/renderers to range axes. If the
-     * map contains no entry for a dataset, it is assumed to map to the
-     * primary domain axis (index = 0).
+     * Storage for the mapping between datasets/renderers and range axes.  The
+     * keys in the map are Integer objects, corresponding to the dataset
+     * index.  The values in the map are List objects containing Integer
+     * objects (corresponding to the axis indices).  If the map contains no
+     * entry for a dataset, it is assumed to map to the primary domain axis
+     * (index = 0).
      */
-    private Map datasetToRangeAxisMap;
+    private Map datasetToRangeAxesMap;
 
     /** The origin point for the quadrants (if drawn). */
     private transient Point2D quadrantOrigin = new Point2D.Double(0.0, 0.0);
@@ -588,8 +597,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         this.datasets = new ObjectList();
         this.renderers = new ObjectList();
 
-        this.datasetToDomainAxisMap = new TreeMap();
-        this.datasetToRangeAxisMap = new TreeMap();
+        this.datasetToDomainAxesMap = new TreeMap();
+        this.datasetToRangeAxesMap = new TreeMap();
 
         this.datasets.set(0, dataset);
         if (dataset != null) {
@@ -1410,8 +1419,28 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #mapDatasetToRangeAxis(int, int)
      */
     public void mapDatasetToDomainAxis(int index, int axisIndex) {
-        this.datasetToDomainAxisMap.put(new Integer(index),
-                new Integer(axisIndex));
+        List axisIndices = new java.util.ArrayList(1);
+        axisIndices.add(new Integer(axisIndex));
+        mapDatasetToDomainAxes(index, axisIndices);
+    }
+
+    /**
+     * Maps the specified dataset to the axes in the list.  Note that the
+     * conversion of data values into Java2D space is always performed using
+     * the first axis in the list.
+     *
+     * @param index  the dataset index (zero-based).
+     * @param axisIndices  the axis indices (<code>null</code> permitted).
+     *
+     * @since 1.0.12
+     */
+    public void mapDatasetToDomainAxes(int index, List axisIndices) {
+        if (index < 0) {
+            throw new IllegalArgumentException("Requires 'index' >= 0.");
+        }
+        checkAxisIndices(axisIndices);
+        Integer key = new Integer(index);
+        this.datasetToDomainAxesMap.put(key, new ArrayList(axisIndices));
         // fake a dataset change event to update axes...
         datasetChanged(new DatasetChangeEvent(this, getDataset(index)));
     }
@@ -1426,10 +1455,62 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #mapDatasetToDomainAxis(int, int)
      */
     public void mapDatasetToRangeAxis(int index, int axisIndex) {
-        this.datasetToRangeAxisMap.put(new Integer(index),
-                new Integer(axisIndex));
+        List axisIndices = new java.util.ArrayList(1);
+        axisIndices.add(new Integer(axisIndex));
+        mapDatasetToRangeAxes(index, axisIndices);
+    }
+
+    /**
+     * Maps the specified dataset to the axes in the list.  Note that the
+     * conversion of data values into Java2D space is always performed using
+     * the first axis in the list.
+     *
+     * @param index  the dataset index (zero-based).
+     * @param axisIndices  the axis indices (<code>null</code> permitted).
+     *
+     * @since 1.0.12
+     */
+    public void mapDatasetToRangeAxes(int index, List axisIndices) {
+        if (index < 0) {
+            throw new IllegalArgumentException("Requires 'index' >= 0.");
+        }
+        checkAxisIndices(axisIndices);
+        Integer key = new Integer(index);
+        this.datasetToRangeAxesMap.put(key, new ArrayList(axisIndices));
         // fake a dataset change event to update axes...
         datasetChanged(new DatasetChangeEvent(this, getDataset(index)));
+    }
+
+    /**
+     * This method is used to perform argument checking on the list of
+     * axis indices passed to mapDatasetToDomainAxes() and
+     * mapDatasetToRangeAxes().
+     *
+     * @param indices  the list of indices (<code>null</code> permitted).
+     */
+    private void checkAxisIndices(List indices) {
+        // axisIndices can be:
+        // 1.  null;
+        // 2.  non-empty, containing only Integer objects that are unique.
+        if (indices == null) {
+            return;  // OK
+        }
+        int count = indices.size();
+        if (count == 0) {
+            throw new IllegalArgumentException("Empty list not permitted.");
+        }
+        HashSet set = new HashSet();
+        for (int i = 0; i < count; i++) {
+            Object item = indices.get(i);
+            if (!(item instanceof Integer)) {
+                throw new IllegalArgumentException(
+                        "Indices must be Integer instances.");
+            }
+            if (set.contains(item)) {
+                throw new IllegalArgumentException("Indices must be unique.");
+            }
+            set.add(item);
+        }
     }
 
     /**
@@ -3676,23 +3757,23 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @return The axis.
      */
     public ValueAxis getDomainAxisForDataset(int index) {
-
-        if (index < 0 || index >= getDatasetCount()) {
+        int upper = Math.max(getDatasetCount(), getRendererCount());
+        if (index < 0 || index >= upper) {
             throw new IllegalArgumentException("Index " + index
                     + " out of bounds.");
         }
-
         ValueAxis valueAxis = null;
-        Integer axisIndex = (Integer) this.datasetToDomainAxisMap.get(
+        List axisIndices = (List) this.datasetToDomainAxesMap.get(
                 new Integer(index));
-        if (axisIndex != null) {
+        if (axisIndices != null) {
+            // the first axis in the list is used for data <--> Java2D
+            Integer axisIndex = (Integer) axisIndices.get(0);
             valueAxis = getDomainAxis(axisIndex.intValue());
         }
         else {
             valueAxis = getDomainAxis(0);
         }
         return valueAxis;
-
     }
 
     /**
@@ -3703,23 +3784,23 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @return The axis.
      */
     public ValueAxis getRangeAxisForDataset(int index) {
-
-        if (index < 0 || index >= getDatasetCount()) {
+        int upper = Math.max(getDatasetCount(), getRendererCount());
+        if (index < 0 || index >= upper) {
             throw new IllegalArgumentException("Index " + index
                     + " out of bounds.");
         }
-
         ValueAxis valueAxis = null;
-        Integer axisIndex
-            = (Integer) this.datasetToRangeAxisMap.get(new Integer(index));
-        if (axisIndex != null) {
+        List axisIndices = (List) this.datasetToRangeAxesMap.get(
+                new Integer(index));
+        if (axisIndices != null) {
+            // the first axis in the list is used for data <--> Java2D
+            Integer axisIndex = (Integer) axisIndices.get(0);
             valueAxis = getRangeAxis(axisIndex.intValue());
         }
         else {
             valueAxis = getRangeAxis(0);
         }
         return valueAxis;
-
     }
 
     /**
@@ -3793,7 +3874,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             ValueAxis axis = getRangeAxis();
             if (axis != null) {
                 Iterator iterator = ticks.iterator();
-                   boolean paintLine = false;
+                boolean paintLine = false;
                 while (iterator.hasNext()) {
                     paintLine = false;
                     ValueTick tick = (ValueTick) iterator.next();
@@ -3807,8 +3888,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                         gridPaint = getRangeGridlinePaint();
                         paintLine = true;
                     }
-                    if (tick.getValue() != 0.0
-                            || !isRangeZeroBaselineVisible() && (paintLine)) {
+                    if ((tick.getValue() != 0.0
+                            || !isRangeZeroBaselineVisible()) && paintLine) {
                         getRenderer().drawRangeLine(g2, this, getRangeAxis(),
                                 area, tick.getValue(), gridPaint, gridStroke);
                     }
@@ -4197,15 +4278,15 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         List result = new ArrayList();
         for (int i = 0; i < this.datasets.size(); i++) {
-            Integer mappedAxis = (Integer) this.datasetToDomainAxisMap.get(
+            List mappedAxes = (List) this.datasetToDomainAxesMap.get(
                     new Integer(i));
-            if (mappedAxis == null) {
+            if (mappedAxes == null) {
                 if (axisIndex.equals(ZERO)) {
                     result.add(this.datasets.get(i));
                 }
             }
             else {
-                if (mappedAxis.equals(axisIndex)) {
+                if (mappedAxes.contains(axisIndex)) {
                     result.add(this.datasets.get(i));
                 }
             }
@@ -4227,15 +4308,15 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         List result = new ArrayList();
         for (int i = 0; i < this.datasets.size(); i++) {
-            Integer mappedAxis = (Integer) this.datasetToRangeAxisMap.get(
+            List mappedAxes = (List) this.datasetToRangeAxesMap.get(
                     new Integer(i));
-            if (mappedAxis == null) {
+            if (mappedAxes == null) {
                 if (axisIndex.equals(ZERO)) {
                     result.add(this.datasets.get(i));
                 }
             }
             else {
-                if (mappedAxis.equals(axisIndex)) {
+                if (mappedAxes.contains(axisIndex)) {
                     result.add(this.datasets.get(i));
                 }
             }
@@ -5097,12 +5178,12 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (!this.rangeAxisLocations.equals(that.rangeAxisLocations)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.datasetToDomainAxisMap,
-                that.datasetToDomainAxisMap)) {
+        if (!ObjectUtilities.equal(this.datasetToDomainAxesMap,
+                that.datasetToDomainAxesMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.datasetToRangeAxisMap,
-                that.datasetToRangeAxisMap)) {
+        if (!ObjectUtilities.equal(this.datasetToRangeAxesMap,
+                that.datasetToRangeAxesMap)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.domainGridlineStroke,
@@ -5270,10 +5351,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             }
         }
 
-        clone.datasetToDomainAxisMap = new TreeMap();
-        clone.datasetToDomainAxisMap.putAll(this.datasetToDomainAxisMap);
-        clone.datasetToRangeAxisMap = new TreeMap();
-        clone.datasetToRangeAxisMap.putAll(this.datasetToRangeAxisMap);
+        clone.datasetToDomainAxesMap = new TreeMap();
+        clone.datasetToDomainAxesMap.putAll(this.datasetToDomainAxesMap);
+        clone.datasetToRangeAxesMap = new TreeMap();
+        clone.datasetToRangeAxesMap.putAll(this.datasetToRangeAxesMap);
 
         clone.renderers = (ObjectList) ObjectUtilities.clone(this.renderers);
         for (int i = 0; i < this.renderers.size(); i++) {

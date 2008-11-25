@@ -1,5 +1,39 @@
 2008-11-25  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Based on patch 1868749 by Andrew Mickish:
+    * source/org/jfree/chart/plot/CategoryPlot.java
+    (datasetToDomainAxisMap): Changed from ObjectList to TreeMap,
+    (datasetToRangeAxisMap): Likewise,
+    (CategoryPlot): Updated initialization of modified fields,
+    (mapDatasetToDomainAxis): Delegate to new method,
+    (mapDatasetToDomainAxes): New method,
+    (checkAxisIndices): New private method,
+    (getDomainAxisForDataset): Updated for multiple axis support,
+    (mapDatasetToRangeAxis): Delegate to new method,
+    (mapDatasetToRangeAxes): New method,
+    (getRangeAxisForDataset): Updated for multiple axis support,
+    (datasetsMappedToDomainAxis): Likewise,
+    (datasetsMappedToRangeAxis): Likewise,
+    (equals): Updated for field changes,
+    (clone): Likewise,
+    * source/org/jfree/chart/plot/XYPlot.java
+    (datasetToDomainAxisMap): Renamed,
+    (datasetToRangeAxisMap): Renamed,
+    (XYPlot): Updated for renamed fields,
+    (mapDatasetToDomainAxis): Delegate to new method,
+    (mapDatasetToDomainAxes): New method,
+    (mapDatasetToRangeAxis): Delegate to new method,
+    (mapDatasetToRangeAxes): New method,
+    (checkAxisIndices): New private method,
+    (getDomainAxisForDataset): Updated for multiple axis support,
+    (getRangeAxisForDataset): Likewise,
+    (getDatasetsMappedToDomainAxis): Likewise,
+    (getDatasetsMappedToRangeAxis): Likewise,
+    (equals): Updated for field changes,
+    (clone): Likewise.
+
+2008-11-25  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
     (findRangeBounds): Check for null argument,
     * source/org/jfree/chart/renderer/category/BarRenderer.java
