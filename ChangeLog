@@ -1,5 +1,23 @@
 2008-11-25  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug fix 2201869 by Fawad Halim (with modifications):
+    * source/org/jfree/chart/axis/DateAxis.java
+    (previousStandardDate): Use new Month constructor,
+    (correctTickDateForPosition): New private method,
+    (refreshTicksHorizontal): Moved position correction to top of loop,
+    (refreshTicksVertical): Likewise,
+    * source/org/jfree/data/time/Month.java
+    (Month(Date, TimeZone)): Deprecated,
+    (Month(Date, TimeZone, Locale)): New constructor,
+    * source/org/jfree/data/time/Quarter.java
+    (Quarter(Date, TimeZone)): Deprecated,
+    (Quarter(Date, TimeZone, Locale)): New constructor,
+    * source/org/jfree/data/time/Year.java
+    (Year(Date, TimeZone)): Deprecated,
+    (Year(Date, TimeZone, Locale)): New constructor.
+
+2008-11-25  David Gilbert  <david.gilbert@object-refinery.com>
+
     Based on patch 1868749 by Andrew Mickish:
     * source/org/jfree/chart/plot/CategoryPlot.java
     (datasetToDomainAxisMap): Changed from ObjectList to TreeMap,

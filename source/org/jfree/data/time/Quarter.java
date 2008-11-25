@@ -54,6 +54,7 @@
  * 05-Oct-2006 : Updated API docs (DG);
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
+ * 25-Nov-2008 : Added new constructor with Locale (DG);
  *
  */
 
@@ -62,6 +63,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.date.MonthConstants;
@@ -161,10 +163,26 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      *
      * @param time  the date/time.
      * @param zone  the zone (<code>null</code> not permitted).
+     *
+     * @deprecated Since 1.0.12, use {@link #Quarter(Date, TimeZone, Locale)}
+     *     instead.
      */
     public Quarter(Date time, TimeZone zone) {
-        // FIXME:  need a locale as well as a timezone
-        Calendar calendar = Calendar.getInstance(zone);
+        this(time, zone, Locale.getDefault());
+    }
+
+    /**
+     * Creates a new <code>Quarter</code> instance, using the specified
+     * zone and locale.
+     *
+     * @param time  the current time.
+     * @param zone  the time zone.
+     * @param locale  the locale.
+     *
+     * @since 1.0.12
+     */
+    public Quarter(Date time, TimeZone zone, Locale locale) {
+        Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         int month = calendar.get(Calendar.MONTH) + 1;
         this.quarter = (byte) SerialDate.monthCodeToQuarter(month);

@@ -38,6 +38,7 @@
  *                   Chris Boek;
  *                   Peter Kolb (patch 1934255);
  *                   Andrew Mickish (patch 1870189);
+ *                   Fawad Halim (bug 2201869);
  *
  * Changes (from 23-Jun-2001)
  * --------------------------
@@ -121,6 +122,7 @@
  *               2078057 (DG);
  * 18-Sep-2008 : Added locale to go with timezone (DG);
  * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
+ * 25-Nov-2008 : Added bug fix 2201869 by Fawad Halim (DG);
  *
  */
 
@@ -1002,8 +1004,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 years = calendar.get(Calendar.YEAR);
                 calendar.clear(Calendar.MILLISECOND);
                 calendar.set(years, value, 1, 0, 0, 0);
-                // FIXME:  the following month needs a locale
-                Month month = new Month(calendar.getTime(), this.timeZone);
+                Month month = new Month(calendar.getTime(), this.timeZone,
+                        this.locale);
                 Date standardDate = calculateDateForPosition(
                         month, this.tickMarkPosition);
                 long millis = standardDate.getTime();
@@ -1559,6 +1561,39 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
+     * Corrects the given tick date for the position setting.
+     *
+     * @param time  the tick date/time.
+     * @param unit  the tick unit.
+     * @param position  the tick position.
+     *
+     * @return The adjusted time.
+     */
+    private Date correctTickDateForPosition(Date time, DateTickUnit unit,
+            DateTickMarkPosition position) {
+        Date result = time;
+        switch (unit.getUnit()) {
+            case (DateTickUnit.MILLISECOND) :
+            case (DateTickUnit.SECOND) :
+            case (DateTickUnit.MINUTE) :
+            case (DateTickUnit.HOUR) :
+            case (DateTickUnit.DAY) :
+                break;
+            case (DateTickUnit.MONTH) :
+                result = calculateDateForPosition(new Month(time,
+                        this.timeZone, this.locale), position);
+                break;
+            case(DateTickUnit.YEAR) :
+                result = calculateDateForPosition(new Year(time,
+                        this.timeZone, this.locale), position);
+                break;
+
+            default: break;
+        }
+        return result;
+    }
+
+    /**
      * Recalculates the ticks for the date axis.
      *
      * @param g2  the graphics device.
@@ -1584,6 +1619,10 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         Date upperDate = getMaximumDate();
 
         while (tickDate.before(upperDate)) {
+            // could add a flag to make the following correction optional...
+            tickDate = correctTickDateForPosition(tickDate, unit,
+                    this.tickMarkPosition);
+
             long lowestTickTime = tickDate.getTime();
             long distance = unit.addToDate(tickDate, this.timeZone).getTime()
                     - lowestTickTime;
@@ -1660,30 +1699,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 continue;
             }
 
-            // could add a flag to make the following correction optional...
-            switch (unit.getUnit()) {
-
-                case (DateTickUnit.MILLISECOND) :
-                case (DateTickUnit.SECOND) :
-                case (DateTickUnit.MINUTE) :
-                case (DateTickUnit.HOUR) :
-                case (DateTickUnit.DAY) :
-                    break;
-                case (DateTickUnit.MONTH) :
-                    // FIXME:  the following month needs a locale
-                    tickDate = calculateDateForPosition(new Month(tickDate,
-                            this.timeZone), this.tickMarkPosition);
-                    break;
-                case(DateTickUnit.YEAR) :
-                    // FIXME:  the following year needs a locale
-                    tickDate = calculateDateForPosition(new Year(tickDate,
-                            this.timeZone), this.tickMarkPosition);
-                    break;
-
-                default: break;
-
-            }
-
         }
         return result;
 
@@ -1711,9 +1726,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         }
         DateTickUnit unit = getTickUnit();
         Date tickDate = calculateLowestVisibleTickValue(unit);
-        //Date upperDate = calculateHighestVisibleTickValue(unit);
         Date upperDate = getMaximumDate();
+
         while (tickDate.before(upperDate)) {
+
+            // could add a flag to make the following correction optional...
+            tickDate = correctTickDateForPosition(tickDate, unit,
+                    this.tickMarkPosition);
 
             long lowestTickTime = tickDate.getTime();
             long distance = unit.addToDate(tickDate, this.timeZone).getTime()
