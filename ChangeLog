@@ -1,3 +1,14 @@
+2008-11-25  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+    (findRangeBounds): Check for null argument,
+    * source/org/jfree/chart/renderer/category/BarRenderer.java
+    (findRangeBounds): Likewise,
+    * source/org/jfree/chart/renderer/category/GroupedStackedBarRenderer.java
+    (findRangeBounds): Likewise,
+    * source/org/jfree/chart/renderer/category/StackedBarRenderer.java
+    (findRangeBounds): Likewise.
+
 2008-11-24  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 1955483:

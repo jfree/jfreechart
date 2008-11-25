@@ -864,6 +864,9 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      *         <code>null</code> or empty).
      */
     public Range findRangeBounds(CategoryDataset dataset) {
+        if (dataset == null) {
+            return null;
+        }
         Range result = DatasetUtilities.findRangeBounds(dataset);
         if (result != null) {
             if (this.includeBaseInRange) {
