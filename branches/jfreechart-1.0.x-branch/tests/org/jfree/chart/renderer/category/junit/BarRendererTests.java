@@ -41,6 +41,7 @@
  * 22-Sep-2005 : Renamed getMaxBarWidth() --> getMaximumBarWidth() (DG);
  * 11-May-2007 : Added testGetLegendItem() (DG);
  * 23-Apr-2008 : Added testPublicCloneable() (DG);
+ * 25-Nov-2008 : Added testFindRangeBounds (DG);
  *
  */
 
@@ -69,6 +70,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.GradientBarPainter;
 import org.jfree.chart.renderer.junit.RendererChangeDetector;
+import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.StandardGradientPaintTransformer;
@@ -310,6 +312,30 @@ public class BarRendererTests extends TestCase {
         assertEquals("R5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());
         assertEquals(2, li.getSeriesIndex());
+    }
+
+    /**
+     * Some checks for the findRangeBounds() method.
+     */
+    public void testFindRangeBounds() {
+        BarRenderer r = new BarRenderer();
+        assertNull(r.findRangeBounds(null));
+
+        // an empty dataset should return a null range
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        assertNull(r.findRangeBounds(dataset));
+
+        dataset.addValue(1.0, "R1", "C1");
+        assertEquals(new Range(0.0, 1.0), r.findRangeBounds(dataset));
+        r.setIncludeBaseInRange(false);
+        assertEquals(new Range(1.0, 1.0), r.findRangeBounds(dataset));
+        r.setIncludeBaseInRange(true);
+
+        dataset.addValue(-2.0, "R1", "C2");
+        assertEquals(new Range(-2.0, 1.0), r.findRangeBounds(dataset));
+
+        dataset.addValue(null, "R1", "C3");
+        assertEquals(new Range(-2.0, 1.0), r.findRangeBounds(dataset));
     }
 
 }
