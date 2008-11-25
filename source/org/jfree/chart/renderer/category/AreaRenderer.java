@@ -93,7 +93,12 @@ import org.jfree.util.PublicCloneable;
 
 /**
  * A category item renderer that draws area charts.  You can use this renderer
- * with the {@link org.jfree.chart.plot.CategoryPlot} class.
+ * with the {@link CategoryPlot} class.  The example shown here is generated
+ * by the <code>AreaChartDemo1.java</code> program included in the JFreeChart
+ * Demo Collection:
+ * <br><br>
+ * <img src="../../../../../images/AreaRendererSample.png"
+ * alt="AreaRendererSample.png" />
  */
 public class AreaRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {
