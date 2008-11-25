@@ -416,6 +416,17 @@ public class XYPlotTests extends TestCase {
         plot2.setRangeMinorGridlineStroke(new BasicStroke(1.23f));
         assertTrue(plot1.equals(plot2));
 
+        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
+            new Integer(1)});
+        plot1.mapDatasetToDomainAxes(0, axisIndices);
+        assertFalse(plot1.equals(plot2));
+        plot2.mapDatasetToDomainAxes(0, axisIndices);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.mapDatasetToRangeAxes(0, axisIndices);
+        assertFalse(plot1.equals(plot2));
+        plot2.mapDatasetToRangeAxes(0, axisIndices);
+        assertTrue(plot1.equals(plot2));
     }
 
     /**
@@ -442,6 +453,10 @@ public class XYPlotTests extends TestCase {
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         p1.setRangeAxis(1, new NumberAxis("Range Axis 2"));
+        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
+                new Integer(1)});
+        p1.mapDatasetToDomainAxes(0, axisIndices);
+        p1.mapDatasetToRangeAxes(0, axisIndices);
         p1.setRenderer(1, new XYBarRenderer());
         XYPlot p2 = null;
         try {
@@ -608,9 +623,8 @@ public class XYPlotTests extends TestCase {
             out.writeObject(p1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             p2 = (XYPlot) in.readObject();
             in.close();
         }
@@ -629,7 +643,7 @@ public class XYPlotTests extends TestCase {
 
         IntervalXYDataset data1 = createDataset1();
         XYItemRenderer renderer1 = new XYBarRenderer(0.20);
-        renderer1.setToolTipGenerator(
+        renderer1.setBaseToolTipGenerator(
                 StandardXYToolTipGenerator.getTimeSeriesInstance());
         XYPlot p1 = new XYPlot(data1, new DateAxis("Date"), null, renderer1);
         XYPlot p2 = null;
@@ -1066,4 +1080,105 @@ public class XYPlotTests extends TestCase {
         assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
     }
 
+    /**
+     * Some tests for the getDomainAxisForDataset() method.
+     */
+    public void testGetDomainAxisForDataset() {
+        XYDataset dataset = new XYSeriesCollection();
+        NumberAxis xAxis = new NumberAxis("X");
+        NumberAxis yAxis = new NumberAxis("Y");
+        XYItemRenderer renderer = new DefaultXYItemRenderer();
+        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        assertEquals(xAxis, plot.getDomainAxisForDataset(0));
+
+        // should get IllegalArgumentException for negative index
+        boolean pass = false;
+        try {
+            plot.getDomainAxisForDataset(-1);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+
+        // should get IllegalArgumentException for index too high
+        pass = false;
+        try {
+            plot.getDomainAxisForDataset(1);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+
+        // if multiple axes are mapped, the first in the list should be
+        // returned...
+        NumberAxis xAxis2 = new NumberAxis("X2");
+        plot.setDomainAxis(1, xAxis2);
+        assertEquals(xAxis, plot.getDomainAxisForDataset(0));
+
+        plot.mapDatasetToDomainAxis(0, 1);
+        assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
+
+        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
+                new Integer(1)});
+        plot.mapDatasetToDomainAxes(0, axisIndices);
+        assertEquals(xAxis, plot.getDomainAxisForDataset(0));
+
+        axisIndices = Arrays.asList(new Integer[] {new Integer(1),
+                new Integer(2)});
+        plot.mapDatasetToDomainAxes(0, axisIndices);
+        assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
+    }
+
+    /**
+     * Some tests for the getRangeAxisForDataset() method.
+     */
+    public void testGetRangeAxisForDataset() {
+        XYDataset dataset = new XYSeriesCollection();
+        NumberAxis xAxis = new NumberAxis("X");
+        NumberAxis yAxis = new NumberAxis("Y");
+        XYItemRenderer renderer = new DefaultXYItemRenderer();
+        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        assertEquals(yAxis, plot.getRangeAxisForDataset(0));
+
+        // should get IllegalArgumentException for negative index
+        boolean pass = false;
+        try {
+            plot.getRangeAxisForDataset(-1);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+
+        // should get IllegalArgumentException for index too high
+        pass = false;
+        try {
+            plot.getRangeAxisForDataset(1);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+
+        // if multiple axes are mapped, the first in the list should be
+        // returned...
+        NumberAxis yAxis2 = new NumberAxis("Y2");
+        plot.setRangeAxis(1, yAxis2);
+        assertEquals(yAxis, plot.getRangeAxisForDataset(0));
+
+        plot.mapDatasetToRangeAxis(0, 1);
+        assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
+
+        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
+                new Integer(1)});
+        plot.mapDatasetToRangeAxes(0, axisIndices);
+        assertEquals(yAxis, plot.getRangeAxisForDataset(0));
+
+        axisIndices = Arrays.asList(new Integer[] {new Integer(1),
+                new Integer(2)});
+        plot.mapDatasetToRangeAxes(0, axisIndices);
+        assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
+    }
 }
