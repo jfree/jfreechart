@@ -76,6 +76,7 @@ public class RendererCategoryPackageTests extends TestCase {
         suite.addTestSuite(LineAndShapeRendererTests.class);
         suite.addTestSuite(LineRenderer3DTests.class);
         suite.addTestSuite(MinMaxCategoryRendererTests.class);
+        suite.addTestSuite(ScatterRendererTests.class);
         suite.addTestSuite(StackedAreaRendererTests.class);
         suite.addTestSuite(StackedBarRendererTests.class);
         suite.addTestSuite(StackedBarRenderer3DTests.class);
