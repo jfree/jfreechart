@@ -53,8 +53,9 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 05-Oct-2006 : Updated API docs (DG);
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
- * 16-Sep-2008 : Extended range of valid years, and deprecated 
+ * 16-Sep-2008 : Extended range of valid years, and deprecated
  *               DEFAULT_TIME_ZONE (DG);
+ * 25-Nov-2008 : Added new constructor with Locale (DG);
  *
  */
 
@@ -63,6 +64,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -133,12 +135,28 @@ public class Year extends RegularTimePeriod implements Serializable {
     /**
      * Constructs a year, based on a particular instant in time and a time zone.
      *
-     * @param time  the time.
+     * @param time  the time (<code>null</code> not permitted).
      * @param zone  the time zone.
+     *
+     * @deprecated Since 1.0.12, use {@link #Year(Date, TimeZone, Locale)}
+     *     instead.
      */
     public Year(Date time, TimeZone zone) {
-        // FIXME:  needs a locale as well as a timezone
-        Calendar calendar = Calendar.getInstance(zone);
+        this(time, zone, Locale.getDefault());
+    }
+
+    /**
+     * Creates a new <code>Year</code> instance, for the specified time zone
+     * and locale.
+     *
+     * @param time  the current time (<code>null</code> not permitted).
+     * @param zone  the time zone.
+     * @param locale  the locale.
+     *
+     * @since 1.0.12
+     */
+    public Year(Date time, TimeZone zone, Locale locale) {
+        Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         this.year = (short) calendar.get(Calendar.YEAR);
         peg(calendar);

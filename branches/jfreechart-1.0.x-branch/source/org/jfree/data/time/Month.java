@@ -58,6 +58,7 @@
  * 01-Sep-2008 : Added clarification for previous() and next() methods (DG);
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE, and updated parsing to handle
  *               extended range in Year (DG);
+ * 25-Nov-2008 : Added new constructor with Locale (DG);
  *
  */
 
@@ -66,6 +67,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.date.MonthConstants;
@@ -148,9 +150,25 @@ public class Month extends RegularTimePeriod implements Serializable {
      *
      * @param time  the date/time.
      * @param zone  the time zone (<code>null</code> not permitted).
+     *
+     * @deprecated Since 1.0.12, use {@link #Month(Date, TimeZone, Locale)}
+     *     instead.
      */
     public Month(Date time, TimeZone zone) {
-        // FIXME:  need a locale as well as a timezone
+        this(time, zone, Locale.getDefault());
+    }
+
+    /**
+     * Creates a new <code>Month</code> instance, based on the specified time,
+     * zone and locale.
+     *
+     * @param time  the current time.
+     * @param zone  the time zone.
+     * @param locale  the locale.
+     *
+     * @since 1.0.12
+     */
+    public Month(Date time, TimeZone zone, Locale locale) {
         Calendar calendar = Calendar.getInstance(zone);
         calendar.setTime(time);
         this.month = calendar.get(Calendar.MONTH) + 1;

@@ -42,12 +42,15 @@
  * 03-May-2007 : Replaced the tests for the previousStandardDate() method with
  *               new tests that check that the previousStandardDate and the
  *               next standard date do in fact span the reference date (DG);
+ * 25-Nov-2008 : Added testBug2201869 (DG);
  *
  */
 
 package org.jfree.chart.axis.junit;
 
+import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -55,14 +58,21 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.DateTick;
 import org.jfree.chart.axis.DateTickMarkPosition;
 import org.jfree.chart.axis.DateTickUnit;
 import org.jfree.chart.axis.SegmentedTimeline;
@@ -1133,6 +1143,51 @@ public class DateAxisTests extends TestCase {
         nsd = unit.addToDate(psd);
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
+    }
+
+    /**
+     * A test to reproduce bug 2201869.
+     */
+    public void testBug2201869() {
+        TimeZone tz = TimeZone.getTimeZone("GMT");
+        GregorianCalendar c = new GregorianCalendar(tz, Locale.UK);
+        DateAxis axis = new DateAxis("Date", tz, Locale.UK);
+        SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy", Locale.UK);
+        sdf.setCalendar(c);
+        axis.setTickUnit(new DateTickUnit(DateTickUnit.MONTH, 1, sdf));
+        Day d1 = new Day(1, 3, 2008);
+        d1.peg(c);
+        Day d2 = new Day(30, 6, 2008);
+        d2.peg(c);
+        axis.setRange(d1.getStart(), d2.getEnd());
+        BufferedImage image = new BufferedImage(200, 100,
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = image.createGraphics();
+        Rectangle2D area = new Rectangle2D.Double(0.0, 0.0, 200, 100);
+        axis.setTickMarkPosition(DateTickMarkPosition.END);
+        List ticks = axis.refreshTicks(g2, new AxisState(), area,
+                RectangleEdge.BOTTOM);
+        System.out.println(ticks);
+        assertEquals(3, ticks.size());
+        DateTick t1 = (DateTick) ticks.get(0);
+        assertEquals("31-Mar-2008", t1.getText());
+        DateTick t2 = (DateTick) ticks.get(1);
+        assertEquals("30-Apr-2008", t2.getText());
+        DateTick t3 = (DateTick) ticks.get(2);
+        assertEquals("31-May-2008", t3.getText());
+
+        // now repeat for a vertical axis
+        ticks = axis.refreshTicks(g2, new AxisState(), area,
+                RectangleEdge.LEFT);
+        System.out.println(ticks);
+        assertEquals(3, ticks.size());
+        t1 = (DateTick) ticks.get(0);
+        assertEquals("31-Mar-2008", t1.getText());
+        t2 = (DateTick) ticks.get(1);
+        assertEquals("30-Apr-2008", t2.getText());
+        t3 = (DateTick) ticks.get(2);
+        assertEquals("31-May-2008", t3.getText());
+        System.out.println(Arrays.asList(Calendar.getAvailableLocales()));
     }
 
 }
