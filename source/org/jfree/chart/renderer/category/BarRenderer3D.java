@@ -140,7 +140,12 @@ import org.jfree.util.PublicCloneable;
 
 /**
  * A renderer for bars with a 3D effect, for use with the
- * {@link org.jfree.chart.plot.CategoryPlot} class.
+ * {@link CategoryPlot} class.  The example shown here is generated
+ * by the <code>BarChart3DDemo1.java</code> program included in the JFreeChart
+ * Demo Collection:
+ * <br><br>
+ * <img src="../../../../../images/BarRenderer3DSample.png"
+ * alt="BarRenderer3DSample.png" />
  */
 public class BarRenderer3D extends BarRenderer
         implements Effect3D, Cloneable, PublicCloneable, Serializable {
