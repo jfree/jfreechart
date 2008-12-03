@@ -1,3 +1,18 @@
+2008-12-03  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/block/GridArrangement.java
+    (arrange): Fill in missing constraint combinations,
+    (arrangeNN): Check for null block,
+    (arrangeFF): Likewise,
+    (arrangeRF): New method,
+    (arrangeRN): Likewise,
+    (arrangeNR): Likewise,
+    (arrangeRR): Likewise,
+    (arrangeFN): Check for null block,
+    (arrangeNF): New method,
+    * tests/org/jfree/chart/block/junit/GridArrangementTests.java:
+    Added various new tests.
+
 2008-11-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug fix 2201869 by Fawad Halim (with modifications):
