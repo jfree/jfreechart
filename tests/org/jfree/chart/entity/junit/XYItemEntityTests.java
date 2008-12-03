@@ -82,14 +82,10 @@ public class XYItemEntityTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-        XYItemEntity e1 = new XYItemEntity(
-            new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
-            new TimeSeriesCollection(), 1, 9, "ToolTip", "URL"
-        );
-        XYItemEntity e2 = new XYItemEntity(
-            new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
-            new TimeSeriesCollection(), 1, 9, "ToolTip", "URL"
-        );
+        XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
+                3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
+        XYItemEntity e2 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
+                3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
         assertTrue(e1.equals(e2));
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
@@ -123,17 +119,15 @@ public class XYItemEntityTests extends TestCase {
      * Confirm that cloning works.
      */
     public void testCloning() {
-        XYItemEntity e1 = new XYItemEntity(
-            new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
-            new TimeSeriesCollection(), 1, 9, "ToolTip", "URL"
-        );
+        XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
+                3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
         XYItemEntity e2 = null;
 
         try {
             e2 = (XYItemEntity) e1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
@@ -144,10 +138,8 @@ public class XYItemEntityTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-        XYItemEntity e1 = new XYItemEntity(
-            new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
-            new TimeSeriesCollection(), 1, 9, "ToolTip", "URL"
-        );
+        XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
+                3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
         XYItemEntity e2 = null;
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -155,14 +147,13 @@ public class XYItemEntityTests extends TestCase {
             out.writeObject(e1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             e2 = (XYItemEntity) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(e1, e2);
     }
