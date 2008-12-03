@@ -58,7 +58,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -1167,7 +1166,6 @@ public class DateAxisTests extends TestCase {
         axis.setTickMarkPosition(DateTickMarkPosition.END);
         List ticks = axis.refreshTicks(g2, new AxisState(), area,
                 RectangleEdge.BOTTOM);
-        System.out.println(ticks);
         assertEquals(3, ticks.size());
         DateTick t1 = (DateTick) ticks.get(0);
         assertEquals("31-Mar-2008", t1.getText());
@@ -1179,7 +1177,6 @@ public class DateAxisTests extends TestCase {
         // now repeat for a vertical axis
         ticks = axis.refreshTicks(g2, new AxisState(), area,
                 RectangleEdge.LEFT);
-        System.out.println(ticks);
         assertEquals(3, ticks.size());
         t1 = (DateTick) ticks.get(0);
         assertEquals("31-Mar-2008", t1.getText());
@@ -1187,7 +1184,6 @@ public class DateAxisTests extends TestCase {
         assertEquals("30-Apr-2008", t2.getText());
         t3 = (DateTick) ticks.get(2);
         assertEquals("31-May-2008", t3.getText());
-        System.out.println(Arrays.asList(Calendar.getAvailableLocales()));
     }
 
 }
