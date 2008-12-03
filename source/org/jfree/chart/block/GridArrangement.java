@@ -35,6 +35,8 @@
  * Changes:
  * --------
  * 08-Feb-2005 : Version 1 (DG);
+ * 03-Dec-2008 : Implemented missing methods, and fixed bugs reported in
+ *               patch 2370487 (DG);
  *
  */
 
@@ -90,7 +92,7 @@ public class GridArrangement implements Arrangement, Serializable {
      * Arranges the blocks within the specified container, subject to the given
      * constraint.
      *
-     * @param container  the container.
+     * @param container  the container (<code>null</code> not permitted).
      * @param constraint  the constraint.
      * @param g2  the graphics device.
      *
@@ -105,12 +107,11 @@ public class GridArrangement implements Arrangement, Serializable {
                 return arrangeNN(container, g2);
             }
             else if (h == LengthConstraintType.FIXED) {
-
-                throw new RuntimeException("Not yet implemented.");
+                return arrangeNF(container, g2, constraint);
             }
             else if (h == LengthConstraintType.RANGE) {
                 // find optimum height, then map to range
-                throw new RuntimeException("Not yet implemented.");
+                return arrangeNR(container, g2, constraint);
             }
         }
         else if (w == LengthConstraintType.FIXED) {
@@ -130,23 +131,23 @@ public class GridArrangement implements Arrangement, Serializable {
             // find optimum width and map to range
             if (h == LengthConstraintType.NONE) {
                 // find optimum height
-                throw new RuntimeException("Not yet implemented.");
+                return arrangeRN(container, g2, constraint);
             }
             else if (h == LengthConstraintType.FIXED) {
                 // fixed width
-                throw new RuntimeException("Not yet implemented.");
+                return arrangeRF(container, g2, constraint);
             }
             else if (h == LengthConstraintType.RANGE) {
-                throw new RuntimeException("Not yet implemented.");
+                return arrangeRR(container, g2, constraint);
             }
         }
-        return new Size2D();  // TODO: complete this
+        throw new RuntimeException("Should never get to here!");
     }
 
     /**
      * Arranges the container with no constraint on the width or height.
      *
-     * @param container  the container.
+     * @param container  the container (<code>null</code> not permitted).
      * @param g2  the graphics device.
      *
      * @return The size.
@@ -158,9 +159,11 @@ public class GridArrangement implements Arrangement, Serializable {
         Iterator iterator = blocks.iterator();
         while (iterator.hasNext()) {
             Block b = (Block) iterator.next();
-            Size2D s = b.arrange(g2, RectangleConstraint.NONE);
-            maxW = Math.max(maxW, s.width);
-            maxH = Math.max(maxH, s.height);
+            if (b != null) {
+                Size2D s = b.arrange(g2, RectangleConstraint.NONE);
+                maxW = Math.max(maxW, s.width);
+                maxH = Math.max(maxH, s.height);
+            }
         }
         double width = this.columns * maxW;
         double height = this.rows * maxH;
@@ -171,27 +174,28 @@ public class GridArrangement implements Arrangement, Serializable {
     /**
      * Arranges the container with a fixed overall width and height.
      *
-     * @param container  the container.
+     * @param container  the container (<code>null</code> not permitted).
      * @param g2  the graphics device.
-     * @param constraint  the constraint.
+     * @param constraint  the constraint (<code>null</code> not permitted).
      *
      * @return The size following the arrangement.
      */
     protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,
                                RectangleConstraint constraint) {
-        double width = constraint.getWidth() /  this.columns;
+        double width = constraint.getWidth() / this.columns;
         double height = constraint.getHeight() / this.rows;
         List blocks = container.getBlocks();
         for (int c = 0; c < this.columns; c++) {
             for (int r = 0; r < this.rows; r++) {
                 int index = r * this.columns + c;
-                if (index == blocks.size()) {
+                if (index >= blocks.size()) {
                     break;
                 }
                 Block b = (Block) blocks.get(index);
-                b.setBounds(new Rectangle2D.Double(
-                    c * width, r * height, width, height
-                ));
+                if (b != null) {
+                    b.setBounds(new Rectangle2D.Double(c * width, r * height,
+                            width, height));
+                }
             }
         }
         return new Size2D(this.columns * width, this.rows * height);
@@ -223,6 +227,129 @@ public class GridArrangement implements Arrangement, Serializable {
     }
 
     /**
+     * Arrange with a fixed height and a width within a given range.
+     *
+     * @param container  the container.
+     * @param constraint  the constraint.
+     * @param g2  the graphics device.
+     *
+     * @return The size of the arrangement.
+     */
+    protected Size2D arrangeRF(BlockContainer container, Graphics2D g2,
+                               RectangleConstraint constraint) {
+
+        RectangleConstraint c1 = constraint.toUnconstrainedWidth();
+        Size2D size1 = arrange(container, g2, c1);
+
+        if (constraint.getWidthRange().contains(size1.getWidth())) {
+            return size1;
+        }
+        else {
+            double w = constraint.getWidthRange().constrain(size1.getWidth());
+            RectangleConstraint c2 = constraint.toFixedWidth(w);
+            return arrange(container, g2, c2);
+        }
+    }
+
+    /**
+     * Arrange with a fixed width and no height constraint.
+     *
+     * @param container  the container.
+     * @param constraint  the constraint.
+     * @param g2  the graphics device.
+     *
+     * @return The size of the arrangement.
+     */
+    protected Size2D arrangeRN(BlockContainer container, Graphics2D g2,
+                               RectangleConstraint constraint) {
+
+        RectangleConstraint c1 = constraint.toUnconstrainedWidth();
+        Size2D size1 = arrange(container, g2, c1);
+
+        if (constraint.getWidthRange().contains(size1.getWidth())) {
+            return size1;
+        }
+        else {
+            double w = constraint.getWidthRange().constrain(size1.getWidth());
+            RectangleConstraint c2 = constraint.toFixedWidth(w);
+            return arrange(container, g2, c2);
+        }
+    }
+
+    /**
+     * Arrange with a fixed height and no width constraint.
+     *
+     * @param container  the container.
+     * @param constraint  the constraint.
+     * @param g2  the graphics device.
+     *
+     * @return The size of the arrangement.
+     */
+    protected Size2D arrangeNR(BlockContainer container, Graphics2D g2,
+                               RectangleConstraint constraint) {
+
+        RectangleConstraint c1 = constraint.toUnconstrainedHeight();
+        Size2D size1 = arrange(container, g2, c1);
+
+        if (constraint.getHeightRange().contains(size1.getHeight())) {
+            return size1;
+        }
+        else {
+            double h = constraint.getHeightRange().constrain(size1.getHeight());
+            RectangleConstraint c2 = constraint.toFixedHeight(h);
+            return arrange(container, g2, c2);
+        }
+    }
+
+    /**
+     * Arrange with ranges for both the width and height constraints.
+     *
+     * @param container  the container.
+     * @param constraint  the constraint.
+     * @param g2  the graphics device.
+     *
+     * @return The size of the arrangement.
+     */
+    protected Size2D arrangeRR(BlockContainer container, Graphics2D g2,
+                               RectangleConstraint constraint) {
+
+        Size2D size1 = arrange(container, g2, RectangleConstraint.NONE);
+
+        if (constraint.getWidthRange().contains(size1.getWidth())) {
+            if (constraint.getHeightRange().contains(size1.getHeight())) {
+                return size1;
+            }
+            else {
+                // width is OK, but height must be constrained
+                double h = constraint.getHeightRange().constrain(
+                        size1.getHeight());
+                RectangleConstraint cc = new RectangleConstraint(
+                        size1.getWidth(), h);
+                return arrangeFF(container, g2, cc);
+            }
+        }
+        else {
+            if (constraint.getHeightRange().contains(size1.getHeight())) {
+                // height is OK, but width must be constrained
+                double w = constraint.getWidthRange().constrain(
+                        size1.getWidth());
+                RectangleConstraint cc = new RectangleConstraint(w,
+                        size1.getHeight());
+                return arrangeFF(container, g2, cc);
+
+            }
+            else {
+                double w = constraint.getWidthRange().constrain(
+                        size1.getWidth());
+                double h = constraint.getHeightRange().constrain(
+                        size1.getHeight());
+                RectangleConstraint cc = new RectangleConstraint(w, h);
+                return arrangeFF(container, g2, cc);
+            }
+        }
+    }
+
+    /**
      * Arrange with a fixed width and a height within a given range.
      *
      * @param container  the container.
@@ -234,25 +361,58 @@ public class GridArrangement implements Arrangement, Serializable {
     protected Size2D arrangeFN(BlockContainer container, Graphics2D g2,
                                RectangleConstraint constraint) {
 
-        double width = constraint.getWidth() /  this.columns;
-        RectangleConstraint constraint2 = constraint.toFixedWidth(width);
+        double width = constraint.getWidth() / this.columns;
+        RectangleConstraint bc = constraint.toFixedWidth(width);
         List blocks = container.getBlocks();
         double maxH = 0.0;
         for (int r = 0; r < this.rows; r++) {
             for (int c = 0; c < this.columns; c++) {
                 int index = r * this.columns + c;
-                if (index == blocks.size()) {
+                if (index >= blocks.size()) {
                     break;
                 }
                 Block b = (Block) blocks.get(index);
-                Size2D s = b.arrange(g2, constraint2);
-                maxH = Math.max(maxH, s.getHeight());
+                if (b != null) {
+                    Size2D s = b.arrange(g2, bc);
+                    maxH = Math.max(maxH, s.getHeight());
+                }
             }
         }
-        RectangleConstraint constraint3 = constraint.toFixedHeight(
-            maxH * this.rows
-        );
-        return arrange(container, g2, constraint3);
+        RectangleConstraint cc = constraint.toFixedHeight(maxH * this.rows);
+        return arrange(container, g2, cc);
+    }
+
+    /**
+     * Arrange with a fixed height and no constraint for the width.
+     *
+     * @param container  the container.
+     * @param g2  the graphics device.
+     * @param constraint  the constraint.
+     *
+     * @return The size of the arrangement.
+     */
+    protected Size2D arrangeNF(BlockContainer container, Graphics2D g2,
+                               RectangleConstraint constraint) {
+
+        double height = constraint.getHeight() / this.rows;
+        RectangleConstraint bc = constraint.toFixedHeight(height);
+        List blocks = container.getBlocks();
+        double maxW = 0.0;
+        for (int r = 0; r < this.rows; r++) {
+            for (int c = 0; c < this.columns; c++) {
+                int index = r * this.columns + c;
+                if (index >= blocks.size()) {
+                    break;
+                }
+                Block b = (Block) blocks.get(index);
+                if (b != null) {
+                    Size2D s = b.arrange(g2, bc);
+                    maxW = Math.max(maxW, s.getWidth());
+                }
+            }
+        }
+        RectangleConstraint cc = constraint.toFixedWidth(maxW * this.columns);
+        return arrange(container, g2, cc);
     }
 
     /**
