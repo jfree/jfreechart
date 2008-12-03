@@ -85,12 +85,10 @@ public class CategoryTextAnnotationTests extends TestCase {
      */
     public void testEquals() {
 
-        CategoryTextAnnotation a1 = new CategoryTextAnnotation(
-            "Test", "Category", 1.0
-        );
-        CategoryTextAnnotation a2 = new CategoryTextAnnotation(
-            "Test", "Category", 1.0
-        );
+        CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test", 
+                "Category", 1.0);
+        CategoryTextAnnotation a2 = new CategoryTextAnnotation("Test", 
+                "Category", 1.0);
         assertTrue(a1.equals(a2));
 
         // category
@@ -117,12 +115,10 @@ public class CategoryTextAnnotationTests extends TestCase {
      * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
-        CategoryTextAnnotation a1 = new CategoryTextAnnotation(
-            "Test", "Category", 1.0
-        );
-        CategoryTextAnnotation a2 = new CategoryTextAnnotation(
-            "Test", "Category", 1.0
-        );
+        CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test", 
+                "Category", 1.0);
+        CategoryTextAnnotation a2 = new CategoryTextAnnotation("Test", 
+                "Category", 1.0);
         assertTrue(a1.equals(a2));
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
@@ -140,7 +136,7 @@ public class CategoryTextAnnotationTests extends TestCase {
             a2 = (CategoryTextAnnotation) a1.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
+            e.printStackTrace();
         }
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
@@ -160,10 +156,8 @@ public class CategoryTextAnnotationTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
-        CategoryTextAnnotation a1 = new CategoryTextAnnotation(
-            "Test", "Category", 1.0
-        );
+        CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test", 
+                "Category", 1.0);
         CategoryTextAnnotation a2 = null;
 
         try {
@@ -172,17 +166,15 @@ public class CategoryTextAnnotationTests extends TestCase {
             out.writeObject(a1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             a2 = (CategoryTextAnnotation) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(a1, a2);
-
     }
 
 }

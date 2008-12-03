@@ -181,9 +181,8 @@ public class XYLineAnnotationTests extends TestCase {
     public void testSerialization() {
 
         Stroke stroke = new BasicStroke(2.0f);
-        XYLineAnnotation a1 = new XYLineAnnotation(
-            10.0, 20.0, 100.0, 200.0, stroke, Color.blue
-        );
+        XYLineAnnotation a1 = new XYLineAnnotation(10.0, 20.0, 100.0, 200.0,
+                stroke, Color.blue);
         XYLineAnnotation a2 = null;
 
         try {
@@ -192,14 +191,13 @@ public class XYLineAnnotationTests extends TestCase {
             out.writeObject(a1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             a2 = (XYLineAnnotation) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(a1, a2);
 
