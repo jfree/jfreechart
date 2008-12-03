@@ -67,7 +67,7 @@ public interface Arrangement {
      * Arranges the blocks within the specified container, subject to the given
      * constraint.
      *
-     * @param container  the container.
+     * @param container  the container (<code>null</code> not permitted).
      * @param g2  the graphics device.
      * @param constraint  the constraint.
      *
