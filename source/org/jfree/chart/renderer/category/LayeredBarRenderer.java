@@ -61,10 +61,8 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.entity.CategoryItemEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
-import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
@@ -218,7 +216,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
      * @param plot  the plot.
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param data  the data.
+     * @param dataset  the dataset.
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      */
@@ -228,12 +226,12 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
                                       CategoryPlot plot,
                                       CategoryAxis domainAxis,
                                       ValueAxis rangeAxis,
-                                      CategoryDataset data,
+                                      CategoryDataset dataset,
                                       int row,
                                       int column) {
 
         // nothing is drawn for null values...
-        Number dataValue = data.getValue(row, column);
+        Number dataValue = dataset.getValue(row, column);
         if (dataValue == null) {
             return;
         }
@@ -325,30 +323,14 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
         CategoryItemLabelGenerator generator
             = getItemLabelGenerator(row, column);
         if (generator != null && isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, data, row, column, plot, generator, bar,
+            drawItemLabel(g2, dataset, row, column, plot, generator, bar,
                     (transX1 > transX2));
         }
 
         // collect entity and tool tip information...
-        if (state.getInfo() != null) {
-            EntityCollection entities = state.getEntityCollection();
-            if (entities != null) {
-                String tip = null;
-                CategoryToolTipGenerator tipster
-                    = getToolTipGenerator(row, column);
-                if (tipster != null) {
-                    tip = tipster.generateToolTip(data, row, column);
-                }
-                String url = null;
-                if (getItemURLGenerator(row, column) != null) {
-                    url = getItemURLGenerator(row, column).generateURL(data,
-                            row, column);
-                }
-                CategoryItemEntity entity = new CategoryItemEntity(bar, tip,
-                        url, data, data.getRowKey(row),
-                        data.getColumnKey(column));
-                entities.add(entity);
-            }
+        EntityCollection entities = state.getEntityCollection();
+        if (entities != null) {
+            addItemEntity(entities, dataset, row, column, bar);
         }
     }
 
@@ -361,7 +343,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
      * @param plot  the plot.
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param data  the data.
+     * @param dataset  the dataset.
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      */
@@ -371,12 +353,12 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
                                     CategoryPlot plot,
                                     CategoryAxis domainAxis,
                                     ValueAxis rangeAxis,
-                                    CategoryDataset data,
+                                    CategoryDataset dataset,
                                     int row,
                                     int column) {
 
         // nothing is drawn for null values...
-        Number dataValue = data.getValue(row, column);
+        Number dataValue = dataset.getValue(row, column);
         if (dataValue == null) {
             return;
         }
@@ -475,30 +457,14 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
         CategoryItemLabelGenerator generator
             = getItemLabelGenerator(row, column);
         if (generator != null && isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, data, row, column, plot, generator, bar,
+            drawItemLabel(g2, dataset, row, column, plot, generator, bar,
                     (transX1 > transX2));
         }
 
         // collect entity and tool tip information...
-        if (state.getInfo() != null) {
-            EntityCollection entities = state.getEntityCollection();
-            if (entities != null) {
-                String tip = null;
-                CategoryToolTipGenerator tipster
-                    = getToolTipGenerator(row, column);
-                if (tipster != null) {
-                    tip = tipster.generateToolTip(data, row, column);
-                }
-                String url = null;
-                if (getItemURLGenerator(row, column) != null) {
-                    url = getItemURLGenerator(row, column).generateURL(
-                        data, row, column);
-                }
-                CategoryItemEntity entity = new CategoryItemEntity(bar, tip,
-                        url, data, data.getRowKey(row),
-                        data.getColumnKey(column));
-                entities.add(entity);
-            }
+        EntityCollection entities = state.getEntityCollection();
+        if (entities != null) {
+            addItemEntity(entities, dataset, row, column, bar);
         }
     }
 
