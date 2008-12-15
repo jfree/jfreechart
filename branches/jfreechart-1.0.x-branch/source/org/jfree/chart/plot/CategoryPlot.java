@@ -162,6 +162,7 @@
  * 10-Jul-2008 : Fixed outline visibility for 3D renderers (DG);
  * 12-Aug-2008 : Added rendererCount() method (DG);
  * 25-Nov-2008 : Added facility to map datasets to multiples axes (DG);
+ * 15-Dec-2008 : Cleaned up grid drawing methods (DG);
  *
  */
 
@@ -3601,7 +3602,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Draws the gridlines for the plot.
+     * Draws the domain gridlines for the plot, if they are visible.
      *
      * @param g2  the graphics device.
      * @param dataArea  the area inside the axes.
@@ -3610,37 +3611,33 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      */
     protected void drawDomainGridlines(Graphics2D g2, Rectangle2D dataArea) {
 
-        // draw the domain grid lines, if any...
-        if (isDomainGridlinesVisible()) {
-            CategoryAnchor anchor = getDomainGridlinePosition();
-            RectangleEdge domainAxisEdge = getDomainAxisEdge();
-            Stroke gridStroke = getDomainGridlineStroke();
-            Paint gridPaint = getDomainGridlinePaint();
-            if ((gridStroke != null) && (gridPaint != null)) {
-                // iterate over the categories
-                CategoryDataset data = getDataset();
-                if (data != null) {
-                    CategoryAxis axis = getDomainAxis();
-                    if (axis != null) {
-                        int columnCount = data.getColumnCount();
-                        for (int c = 0; c < columnCount; c++) {
-                            double xx = axis.getCategoryJava2DCoordinate(
-                                    anchor, c, columnCount, dataArea,
-                                    domainAxisEdge);
-                            CategoryItemRenderer renderer1 = getRenderer();
-                            if (renderer1 != null) {
-                                renderer1.drawDomainGridline(g2, this,
-                                        dataArea, xx);
-                            }
-                        }
-                    }
+        if (!isDomainGridlinesVisible()) {
+            return;
+        }
+        CategoryAnchor anchor = getDomainGridlinePosition();
+        RectangleEdge domainAxisEdge = getDomainAxisEdge();
+        CategoryDataset dataset = getDataset();
+        if (dataset == null) {
+            return;
+        }
+        CategoryAxis axis = getDomainAxis();
+        if (axis != null) {
+            int columnCount = dataset.getColumnCount();
+            for (int c = 0; c < columnCount; c++) {
+                double xx = axis.getCategoryJava2DCoordinate(anchor, c,
+                        columnCount, dataArea, domainAxisEdge);
+                CategoryItemRenderer renderer1 = getRenderer();
+                if (renderer1 != null) {
+                    renderer1.drawDomainGridline(g2, this, dataArea, xx);
                 }
             }
         }
+
     }
 
+
     /**
-     * Draws the gridlines for the plot.
+     * Draws the range gridlines for the plot, if they are visible.
      *
      * @param g2  the graphics device.
      * @param dataArea  the area inside the axes.
@@ -3651,22 +3648,20 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     protected void drawRangeGridlines(Graphics2D g2, Rectangle2D dataArea,
                                       List ticks) {
         // draw the range grid lines, if any...
-        if (isRangeGridlinesVisible()) {
-            Stroke gridStroke = getRangeGridlineStroke();
-            Paint gridPaint = getRangeGridlinePaint();
-            if ((gridStroke != null) && (gridPaint != null)) {
-                ValueAxis axis = getRangeAxis();
-                if (axis != null) {
-                    Iterator iterator = ticks.iterator();
-                    while (iterator.hasNext()) {
-                        ValueTick tick = (ValueTick) iterator.next();
-                        CategoryItemRenderer renderer1 = getRenderer();
-                        if (renderer1 != null) {
-                            renderer1.drawRangeGridline(g2, this,
-                                    getRangeAxis(), dataArea, tick.getValue());
-                        }
-                    }
-                }
+        if (!isRangeGridlinesVisible()) {
+            return;
+        }
+        ValueAxis axis = getRangeAxis();
+        if (axis == null) {
+            return;
+        }
+        Iterator iterator = ticks.iterator();
+        while (iterator.hasNext()) {
+            ValueTick tick = (ValueTick) iterator.next();
+            CategoryItemRenderer renderer1 = getRenderer();
+            if (renderer1 != null) {
+                renderer1.drawRangeGridline(g2, this, axis, dataArea,
+                        tick.getValue());
             }
         }
     }
