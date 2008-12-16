@@ -164,7 +164,7 @@ public class WindItemRenderer extends AbstractXYItemRenderer
 
         g2.draw(line);
         g2.setPaint(Color.blue);
-        g2.setFont(new Font("foo", 1, 9));
+        g2.setFont(new Font("Dialog", 1, 9));
 
         g2.drawString(dirforce, (float) ax1, (float) ay1);
 
