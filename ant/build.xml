@@ -21,7 +21,7 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.0.11" />
+        <property name="jfreechart.version" value="1.0.12" />
         <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.14" />
@@ -131,7 +131,9 @@
 
 
     <!-- Generate the JFreeChart API HTML pages -->
-    <target name="javadoc" depends="initialise">
+    <target name="javadoc" 
+    	    description="Generate the Javadoc HTML pages."
+	        depends="initialise">
         <delete dir="${basedir}/javadoc" />
         <mkdir dir="${basedir}/javadoc" />
         <javadoc destdir="${basedir}/javadoc" 
@@ -156,7 +158,9 @@
 	
 	
     <!-- Create zip file containing the API HTML pages. -->
-    <target name="zip-javadocs" depends="javadoc">
+    <target name="zip-javadocs" 
+    	    description="Create ZIP file containing Javadoc HTML pages."
+	        depends="javadoc">
         <!-- make the zip file -->
         <zip zipfile="${basedir}/${jfreechart.name}-${jfreechart.version}-javadocs.zip">
              <zipfileset dir="${basedir}/javadoc"
