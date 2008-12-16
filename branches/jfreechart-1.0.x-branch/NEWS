@@ -1,11 +1,29 @@
 JFreeChart 1.0.12
 -----------------
-?? ??? 2008
+19 December 2008
 
+This release adds support for minor tick marks, mapping datasets to more than
+one axis, an important fix for the XYSeries class (relating to the
+addOrUpdate() method) plus numerous other bug fixes.
+
+This release passes 1996 JUnit test (0 failures) on JRE 1.6.0_10.
+
+API Adjustments:
+- CategoryPlot : added mapDatasetToDomainAxes() and mapDatasetToRangeAxes() 
+    methods;
+- Month : added a new constructor Month(Date, TimeZone, Locale) and deprecated 
+    Month(Date, TimeZone);
+- Quarter : added a new constructor Quarter(Date, TimeZone, Locale) and 
+    deprecated Quarter(Date, TimeZone);
+- XYPlot : added mapDatasetToDomainAxes() and mapDatasetToRangeAxes() methods;
+- Year : added a new constructor Year(Date, TimeZone, Locale) and deprecated
+    Year(Date, TimeZone);
+          
 Bug Fixes:
 2275695 : NullPointerException for SubCategoryAxis on plot with null dataset;
 2221495 : XYLineAnnotation with dashed stroke;
 2216511 : SWTBarChartDemo1 throws RuntimeException;
+2201869 : DateAxis tick label position error;
 2121818 : Label link lines for very thin RingPlot;
 2113627 : XYStepRenderer item labels;
 1955483 : XYSeries.addOrUpdate() problem.
