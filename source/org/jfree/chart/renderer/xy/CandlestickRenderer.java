@@ -119,7 +119,12 @@ import org.jfree.util.PublicCloneable;
 
 /**
  * A renderer that draws candlesticks on an {@link XYPlot} (requires a
- * {@link OHLCDataset}).
+ * {@link OHLCDataset}).  The example shown here is generated
+ * by the <code>CandlestickChartDemo1.java</code> program included in the
+ * JFreeChart demo collection:
+ * <br><br>
+ * <img src="../../../../../images/CandlestickRendererSample.png"
+ * alt="CandlestickRendererSample.png" />
  * <P>
  * This renderer does not include code to calculate the crosshair point for the
  * plot.
