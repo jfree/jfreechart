@@ -1,8 +1,8 @@
 ********************************
-*  JFREECHART: Version 1.0.11  *
+*  JFREECHART: Version 1.0.12  *
 ********************************
 
-19 September 2008
+19 December 2008
 
 (C)opyright 2000-2008, by Object Refinery Limited and Contributors.
 
@@ -21,6 +21,9 @@ Please note that JFreeChart is distributed WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.  Please refer to the licence for details.
 
+We are grateful to the many developers that have contributed to JFreeChart.
+The contributors are listed below in section 10.
+
 -------------------
 2.  LATEST VERSION
 -------------------
@@ -35,7 +38,7 @@ message in the JFreeChart forum.
 3.  DOCUMENTATION
 -----------------
 You can download installation instructions
-(jfreechart-1.0.11-install.pdf) from the JFreeChart home
+(jfreechart-1.0.12-install.pdf) from the JFreeChart home
 page or the project page on SourceForge.
 
 Further documentation for JFreeChart (the JFreeChart Developer Guide) is
@@ -115,11 +118,10 @@ Support questions can be posted in the free support forum at
 We read all questions posted in the forum, and respond to as many as we can
 in the time available.  Unfortunately, there are too many questions to answer
 them all.
-    
-If you need commercial support for JFreeChart, this is offered by
-Object Refinery Limited:
 
-    http://www.object-refinery.com/jfreechart/support.html
+Previously we offered commercial support options, but this has been 
+discontinued as there wasn't sufficient uptake to meet the cost of 
+providing this service.
 
 --------------------
 6.  ANT BUILD SCRIPT
@@ -141,7 +143,7 @@ A demo application that shows a selection of the charts that can be
 generated is included in the JFreeChart distribution.   To run the
 demo (using JDK 1.3.1 or later), use the following command:
 
-    java -jar jfreechart-1.0.11-demo.jar
+    java -jar jfreechart-1.0.12-demo.jar
 
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
@@ -176,22 +178,15 @@ the future:
 If there are other items that you think should be listed here,
 please post a bug report.
 
------------------
-9.  GNU CLASSPATH
------------------
-GNU Classpath is a project to create a free, clean-room implementation of the
-standard Java(tm) class libraries:
-
-http://www.gnu.org/software/classpath/
-
-JFreeChart should work quite well with free runtimes based on 
-GNU Classpath 0.92 or later.  We are grateful to all the GNU Classpath 
-developers that have made this possible.
-
----------------
-10.  WHAT's NEW
----------------
+--------------
+9.  WHAT's NEW
+--------------
 A list of changes in recent versions:
+
+1.0.12 : (19-Dec-2008)
+        - added support for minor tick marks, mapping datasets to more than
+          one axis, and numerous bug fixes - see the NEWS and ChangeLog files
+          for details.
 
 1.0.11 : (18-Sep-2008)
         - this release includes a new chart theming mechanism, and numerous 
