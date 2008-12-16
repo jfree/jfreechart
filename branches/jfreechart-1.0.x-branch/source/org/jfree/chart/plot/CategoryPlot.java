@@ -3632,9 +3632,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
                 }
             }
         }
-
     }
-
 
     /**
      * Draws the range gridlines for the plot, if they are visible.
