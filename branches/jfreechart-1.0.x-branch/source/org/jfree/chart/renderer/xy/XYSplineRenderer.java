@@ -276,15 +276,6 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         }
     }
 
-    /**
-     * Document me!
-     *
-     * @param sub
-     * @param diag
-     * @param sup
-     * @param b
-     * @param n
-     */
     private void solveTridiag(float[] sub, float[] diag, float[] sup,
             float[] b, int n) {
 /*      solve linear system with tridiagonal n by n matrix a
