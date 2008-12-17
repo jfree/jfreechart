@@ -2816,6 +2816,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             String label = this.labelGenerator.generateSectionLabel(
                     this.dataset, leftKeys.getKey(i));
             if (label != null) {
+                String url = null;
+                if (this.urlGenerator != null) {
+                    url = this.urlGenerator.generateURL(this.dataset,
+                            leftKeys.getKey(i), this.pieIndex);
+                }
                 TextBlock block = TextUtilities.createTextBlock(label,
                         this.labelFont, this.labelPaint, maxLabelWidth,
                         new G2TextMeasurer(g2));
@@ -2831,11 +2836,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                                * verticalLinkRadius;
                 double hh = labelBox.getHeight(g2);
 
-                this.labelDistributor.addPieLabelRecord(new PieLabelRecord(
+                PieLabelRecord plr = new PieLabelRecord(
                         leftKeys.getKey(i), theta, baseY, labelBox, hh,
                         lGap / 2.0 + lGap / 2.0 * -Math.cos(theta), 1.0
                         - getLabelLinkDepth()
-                        + getExplodePercent(leftKeys.getKey(i))));
+                        + getExplodePercent(leftKeys.getKey(i)));
+                plr.setURL(url);
+                this.labelDistributor.addPieLabelRecord(plr);
             }
         }
         double hh = plotArea.getHeight();
@@ -3065,7 +3072,14 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         }
         TextBox tb = record.getLabel();
         tb.draw(g2, (float) targetX, (float) targetY, RectangleAnchor.RIGHT);
-
+        if (record.getURL() != null) {
+            EntityCollection entities = state.getEntityCollection();
+            if (entities != null) {
+//                // add an entity for the label
+//                Rectangle2D bounds = tb.g
+//                TickLabelEntity tle = new TickLabelEntity();
+            }
+        }
     }
 
     /**
