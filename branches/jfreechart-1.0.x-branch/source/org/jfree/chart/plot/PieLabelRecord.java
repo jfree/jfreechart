@@ -37,7 +37,6 @@
  * 08-Mar-2004 : Version 1 (DG);
  * 14-Jun-2007 : Implemented Serializable, updated API docs (DG);
  * 21-Nov-2007 : Implemented equals() to shut up FindBugs (DG);
- * 06-Nov-2008 : Added URL field (DG);
  *
  */
 
@@ -46,12 +45,10 @@ package org.jfree.chart.plot;
 import java.io.Serializable;
 
 import org.jfree.text.TextBox;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A structure that retains information about the label for a section in a pie
- * chart.  Instances of this class are created temporarily during chart drawing
- * only.
+ * chart.
  */
 public class PieLabelRecord implements Comparable, Serializable {
 
@@ -80,13 +77,6 @@ public class PieLabelRecord implements Comparable, Serializable {
     private double linkPercent;
 
     /**
-     * The URL (<code>null</code> permitted).
-     *
-     * @since 1.0.12
-     */
-    private String url;
-
-    /**
      * Creates a new record.
      *
      * @param key  the section key.
@@ -108,7 +98,6 @@ public class PieLabelRecord implements Comparable, Serializable {
         this.labelHeight = labelHeight;
         this.gap = gap;
         this.linkPercent = linkPercent;
-        this.url = null;
     }
 
     /**
@@ -222,29 +211,6 @@ public class PieLabelRecord implements Comparable, Serializable {
     }
 
     /**
-     * Returns the URL associated with the section label.  This is only used
-     * in HTML image maps.
-     *
-     * @return The URL (may be <code>null</code>).
-     *
-     * @since 1.0.12
-     */
-    public String getURL() {
-        return this.url;
-    }
-
-    /**
-     * Sets the URL for the section label.
-     *
-     * @param url  the URL (<code>null</code> permitted).
-     *
-     * @since 1.0.12
-     */
-    public void setURL(String url) {
-        this.url = url;
-    }
-
-    /**
      * Compares this object to an arbitrary object.
      *
      * @param obj  the object to compare against.
@@ -302,9 +268,6 @@ public class PieLabelRecord implements Comparable, Serializable {
             return false;
         }
         if (!this.label.equals(that.label)) {
-            return false;
-        }
-        if (!ObjectUtilities.equal(this.url, that.url)) {
             return false;
         }
         return true;

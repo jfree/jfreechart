@@ -1,15 +1,3 @@
-2008-12-17  David Gilbert  <david.gilbert@object-refinery.com>
-
-    * source/org/jfree/chart/plot/PieLabelRecord.java
-    (url): New field,
-    (PieLabelRecord): Initialise new field,
-    (getURL): New method,
-    (setURL): New method,
-    (equals): Updated for new field,
-    * source/org/jfree/chart/plot/PiePlot.java
-    (drawLeftLabels): Added URL to label entity,
-    (drawRightLabels): Likewise.
-
 2008-12-03  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/block/GridArrangement.java
