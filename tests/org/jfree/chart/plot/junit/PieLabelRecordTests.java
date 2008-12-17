@@ -51,11 +51,12 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.chart.plot.CategoryMarker;
 import org.jfree.chart.plot.PieLabelRecord;
 import org.jfree.text.TextBox;
 
 /**
- * Some tests for the {@link PieLabelRecord} class.
+ * Some tests for the {@link CategoryMarker} class.
  */
 public class PieLabelRecordTests extends TestCase {
 
@@ -123,10 +124,6 @@ public class PieLabelRecordTests extends TestCase {
         p2 = new PieLabelRecord("B", 1.1, 2.2, new TextBox("C"), 3.3, 4.4, 5.5);
         assertTrue(p1.equals(p2));
 
-        p1.setURL("ABC");
-        assertFalse(p1.equals(p2));
-        p2.setURL("ABC");
-        assertTrue(p1.equals(p2));
     }
 
     /**
