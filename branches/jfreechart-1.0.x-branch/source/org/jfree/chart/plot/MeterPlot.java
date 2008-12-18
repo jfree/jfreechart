@@ -115,6 +115,7 @@ import java.util.ResourceBundle;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.ValueDataset;

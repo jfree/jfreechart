@@ -264,6 +264,7 @@ import org.jfree.chart.renderer.RendererUtilities;
 import org.jfree.chart.renderer.xy.AbstractXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRendererState;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.data.general.Dataset;
 import org.jfree.data.general.DatasetChangeEvent;
