@@ -201,6 +201,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.ui.ExtensionFileFilter;
 
 /**
