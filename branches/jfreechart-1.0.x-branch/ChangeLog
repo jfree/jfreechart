@@ -1,3 +1,39 @@
+2008-12-18  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch 1607918 by Jess Thrysoee (with modifications):
+    * source/org/jfree/chart/ChartPanel.java
+    (localizationResources): Use ResourceBundleWrapper,
+    * source/org/jfree/chart/JFreeChart.java
+    (JFreeChartInfo()): Likewise,
+    * source/org/jfree/chart/editor/DefaultAxisEditor.java,
+    * source/org/jfree/chart/editor/DefaultChartEditor.java,
+    * source/org/jfree/chart/editor/DefaultColorBarEditor.java,
+    * source/org/jfree/chart/editor/DefaultNumberAxisEditor.java,
+    * source/org/jfree/chart/editor/DefaultPlotEditor.java,
+    * source/org/jfree/chart/editor/DefaultTitleEditor.java
+    (localizationResources): Use ResourceBundleWrapper,
+    * source/org/jfree/chart/plot/CategoryPlot.java,
+    * source/org/jfree/chart/plot/ContourPlot.java,
+    * source/org/jfree/chart/plot/FastScatterPlot.java,
+    * source/org/jfree/chart/plot/MeterPlot.java,
+    * source/org/jfree/chart/plot/PiePlot.java,
+    * source/org/jfree/chart/plot/PolarPlot.java,
+    * source/org/jfree/chart/plot/ThermometerPlot.java,
+    * source/org/jfree/chart/plot/WaferMapPlot.java,
+    * source/org/jfree/chart/plot/XYPlot.java
+    (localizationResources): Use ResourceBundleWrapper,
+    * source/org/jfree/chart/util/ResourceBundleWrapper.java: New class,
+    * source/org/jfree/data/category/DefaultIntervalCategoryDataset.java
+    (DefaultIntervalCategoryDataset): Use ResourceBundleWrapper,
+    * swt/org/jfree/experimental/chart/swt/ChartComposite.java,
+    * swt/org/jfree/experimental/chart/swt/editor/SWTAxisEditor.java,
+    * swt/org/jfree/experimental/chart/swt/editor/SWTChartEditor.java,
+    * swt/org/jfree/experimental/chart/swt/editor/SWTOtherEditor.java,
+    * swt/org/jfree/experimental/chart/swt/editor/SWTPlotAppearanceEditor.java,
+    * swt/org/jfree/experimental/chart/swt/editor/SWTPlotEditor.java,
+    * swt/org/jfree/experimental/chart/swt/editor/SWTTitleEditor.java
+    (localizationResources): Use ResourceBundleWrapper.
+
 2008-12-03  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/block/GridArrangement.java

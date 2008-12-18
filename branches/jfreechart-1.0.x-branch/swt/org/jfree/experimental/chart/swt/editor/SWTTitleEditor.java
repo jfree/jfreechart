@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * SWTTitleEditor.java
  * -------------------
- * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006-2008, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -35,6 +35,8 @@
  * Changes
  * -------
  * 01-Aug-2006 : New class (HP);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -62,6 +64,7 @@ import org.eclipse.swt.widgets.Text;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.experimental.swt.SWTPaintCanvas;
 import org.jfree.experimental.swt.SWTUtils;
 
@@ -96,7 +99,8 @@ class SWTTitleEditor extends Composite {
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-        = ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
+            = ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.editor.LocalizationBundle");
 
     /** Font object used to handle a change of font. */
     private Font font;

@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * SWTAxisEditor.java
  * ------------------
- * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006-2008, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -36,7 +36,9 @@
  * -------
  * 01-Aug-2006 : New class (HP);
  * 07-Feb-2007 : Fixed bug 1647749, handle null axis labels (DG);
- * 
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
+ *
  */
 
 package org.jfree.experimental.chart.swt.editor;
@@ -65,6 +67,7 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.experimental.swt.SWTPaintCanvas;
 import org.jfree.experimental.swt.SWTUtils;
 
@@ -72,10 +75,10 @@ import org.jfree.experimental.swt.SWTUtils;
  * An editor for axis properties.
  */
 class SWTAxisEditor extends Composite {
-    
+
     /** The axis label. */
     private Text label;
-    
+
     /** The font used to draw the axis labels. */
     private FontData labelFont;
 
@@ -90,49 +93,50 @@ class SWTAxisEditor extends Composite {
 
     /** A field showing a description of the label font. */
     private Text labelFontField;
-    
-    /** 
-     * A field containing a description of the font 
-     * for displaying tick labels on the axis. 
+
+    /**
+     * A field containing a description of the font
+     * for displaying tick labels on the axis.
      */
     private Text tickLabelFontField;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources = 
-        ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
+    protected static ResourceBundle localizationResources
+            =  ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.editor.LocalizationBundle");
 
     /** Font object used to handle a change of font. */
     private Font font;
 
     /** A flag that indicates whether or not the tick labels are visible. */
     private Button showTickLabelsCheckBox;
-    
+
     /** A flag that indicates whether or not the tick marks are visible. */
     private Button showTickMarksCheckBox;
-    
+
     /** A tabbed pane for... */
     private TabFolder otherTabs;
-    
+
     /**
-     * Standard constructor: builds a composite for displaying/editing 
+     * Standard constructor: builds a composite for displaying/editing
      * the properties of the specified axis.
      *
      * @param parent The parent composite.
      * @param style The SWT style of the SwtAxisEditor.
-     * @param axis  the axis whose properties are to be displayed/edited  
+     * @param axis  the axis whose properties are to be displayed/edited
      *              in the composite.
      */
     public SWTAxisEditor(Composite parent, int style, Axis axis) {
         super(parent, style);
-        this.labelFont = SWTUtils.toSwtFontData(getDisplay(), 
+        this.labelFont = SWTUtils.toSwtFontData(getDisplay(),
                 axis.getLabelFont(), true);
-        this.labelPaintColor = SWTUtils.toSwtColor(getDisplay(), 
+        this.labelPaintColor = SWTUtils.toSwtColor(getDisplay(),
                 axis.getLabelPaint());
-        this.tickLabelFont = SWTUtils.toSwtFontData(getDisplay(), 
+        this.tickLabelFont = SWTUtils.toSwtFontData(getDisplay(),
                 axis.getTickLabelFont(), true);
-        this.tickLabelPaintColor = SWTUtils.toSwtColor(getDisplay(), 
+        this.tickLabelPaintColor = SWTUtils.toSwtColor(getDisplay(),
                 axis.getTickLabelPaint());
-        
+
         FillLayout layout = new FillLayout(SWT.VERTICAL);
         layout.marginHeight = layout.marginWidth = 4;
         setLayout(layout);
@@ -146,7 +150,7 @@ class SWTAxisEditor extends Composite {
         if (axis.getLabel() != null) {
             this.label.setText(axis.getLabel());
         }
-        this.label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, 
+        this.label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
                 false));
         new Label(general, SWT.NONE).setText(""); //empty cell
         // row 2
@@ -154,7 +158,7 @@ class SWTAxisEditor extends Composite {
                 "Font"));
         this.labelFontField = new Text(general, SWT.BORDER);
         this.labelFontField.setText(this.labelFont.toString());
-        this.labelFontField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, 
+        this.labelFontField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
                 true, false));
         Button selectFontButton = new Button(general, SWT.PUSH);
         selectFontButton.setText(localizationResources.getString("Select..."));
@@ -165,14 +169,14 @@ class SWTAxisEditor extends Composite {
                         FontDialog dlg = new FontDialog(getShell());
                         dlg.setText(localizationResources.getString(
                                 "Font_Selection"));
-                        dlg.setFontList(new FontData[] { 
+                        dlg.setFontList(new FontData[] {
                                 SWTAxisEditor.this.labelFont });
                         if (dlg.open() != null) {
                             // Dispose of any fonts we have created
                             if (SWTAxisEditor.this.font != null) {
                                 SWTAxisEditor.this.font.dispose();
                             }
-                            // Create the new font and set it into the title 
+                            // Create the new font and set it into the title
                             // label
                             SWTAxisEditor.this.font = new Font(
                                     getShell().getDisplay(), dlg.getFontList());
@@ -180,7 +184,7 @@ class SWTAxisEditor extends Composite {
                             SWTAxisEditor.this.labelFontField.setText(
                                     SWTAxisEditor.this.font.getFontData()[0]
                                     .toString());
-                            SWTAxisEditor.this.labelFont 
+                            SWTAxisEditor.this.labelFont
                                     = SWTAxisEditor.this.font.getFontData()[0];
                         }
                     }
@@ -190,9 +194,9 @@ class SWTAxisEditor extends Composite {
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Paint"));
         // Use a colored text field to show the color
-        final SWTPaintCanvas colorCanvas = new SWTPaintCanvas(general, 
+        final SWTPaintCanvas colorCanvas = new SWTPaintCanvas(general,
                 SWT.NONE, this.labelPaintColor);
-        GridData canvasGridData = new GridData(SWT.FILL, SWT.CENTER, true, 
+        GridData canvasGridData = new GridData(SWT.FILL, SWT.CENTER, true,
                 false);
         canvasGridData.heightHint = 20;
         colorCanvas.setLayoutData(canvasGridData);
@@ -208,7 +212,7 @@ class SWTAxisEditor extends Composite {
                         dlg.setRGB(SWTAxisEditor.this.labelPaintColor.getRGB());
                         RGB rgb = dlg.open();
                         if (rgb != null) {
-                          // create the new color and set it to the 
+                          // create the new color and set it to the
                           // SwtPaintCanvas
                             SWTAxisEditor.this.labelPaintColor = new Color(
                                     getDisplay(), rgb);
@@ -223,7 +227,7 @@ class SWTAxisEditor extends Composite {
         tabLayout.marginHeight = tabLayout.marginWidth = 4;
         other.setLayout(tabLayout);
         other.setText(localizationResources.getString("Other"));
-        
+
         this.otherTabs = new TabFolder(other, SWT.NONE);
         TabItem item1 = new TabItem(this.otherTabs, SWT.NONE);
         item1.setText(" " + localizationResources.getString("Ticks") + " ");
@@ -233,15 +237,15 @@ class SWTAxisEditor extends Composite {
         this.showTickLabelsCheckBox.setText(localizationResources.getString(
                 "Show_tick_labels"));
         this.showTickLabelsCheckBox.setSelection(axis.isTickLabelsVisible());
-        this.showTickLabelsCheckBox.setLayoutData(new GridData(SWT.FILL, 
+        this.showTickLabelsCheckBox.setLayoutData(new GridData(SWT.FILL,
                 SWT.CENTER, true, false, 3, 1));
         new Label(ticks, SWT.NONE).setText(localizationResources.getString(
                 "Tick_label_font"));
         this.tickLabelFontField = new Text(ticks, SWT.BORDER);
         this.tickLabelFontField.setText(this.tickLabelFont.toString());
-        //tickLabelFontField.setFont(SwtUtils.toSwtFontData(getDisplay(), 
+        //tickLabelFontField.setFont(SwtUtils.toSwtFontData(getDisplay(),
         // axis.getTickLabelFont()));
-        this.tickLabelFontField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, 
+        this.tickLabelFontField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
                 true, false));
         Button selectTickLabelFontButton = new Button(ticks, SWT.PUSH);
         selectTickLabelFontButton.setText(localizationResources.getString(
@@ -260,7 +264,7 @@ class SWTAxisEditor extends Composite {
                             if (SWTAxisEditor.this.font != null) {
                                 SWTAxisEditor.this.font.dispose();
                             }
-                            // Create the new font and set it into the title 
+                            // Create the new font and set it into the title
                             // label
                             SWTAxisEditor.this.font = new Font(
                                     getShell().getDisplay(), dlg.getFontList());
@@ -268,7 +272,7 @@ class SWTAxisEditor extends Composite {
                             SWTAxisEditor.this.tickLabelFontField.setText(
                                     SWTAxisEditor.this.font.getFontData()[0]
                                     .toString());
-                            SWTAxisEditor.this.tickLabelFont 
+                            SWTAxisEditor.this.tickLabelFont
                                     = SWTAxisEditor.this.font.getFontData()[0];
                         }
                     }
@@ -278,34 +282,34 @@ class SWTAxisEditor extends Composite {
         this.showTickMarksCheckBox.setText(localizationResources.getString(
                 "Show_tick_marks"));
         this.showTickMarksCheckBox.setSelection(axis.isTickMarksVisible());
-        this.showTickMarksCheckBox.setLayoutData(new GridData(SWT.FILL, 
+        this.showTickMarksCheckBox.setLayoutData(new GridData(SWT.FILL,
                 SWT.CENTER, true, false, 3, 1));
         item1.setControl(ticks);
     }
 
     /**
-     * A static method that returns a panel that is appropriate 
+     * A static method that returns a panel that is appropriate
      * for the axis type.
      *
      * @param parent  the parent.
      * @param style  the style.
-     * @param axis  the axis whose properties are to be displayed/edited  
+     * @param axis  the axis whose properties are to be displayed/edited
      *              in the composite.
      * @return A composite or <code>null</code< if axis is <code>null</code>.
      */
-    public static SWTAxisEditor getInstance(Composite parent, int style, 
+    public static SWTAxisEditor getInstance(Composite parent, int style,
             Axis axis) {
-        
+
         if (axis != null) {
             // return the appropriate axis editor
             if (axis instanceof NumberAxis)
-                return new SWTNumberAxisEditor(parent, style, 
+                return new SWTNumberAxisEditor(parent, style,
                         (NumberAxis) axis);
             else return new SWTAxisEditor(parent, style, axis);
         }
         else return null;
     }
-    
+
     /**
      * Returns a reference to the tabbed composite.
      *
@@ -341,7 +345,7 @@ class SWTAxisEditor extends Composite {
     public Paint getTickLabelPaint() {
         return SWTUtils.toAwtColor(this.tickLabelPaintColor);
     }
-    
+
     /**
      * Returns the current label font.
      *
@@ -359,9 +363,9 @@ class SWTAxisEditor extends Composite {
     public Paint getLabelPaint() {
         return SWTUtils.toAwtColor(this.labelPaintColor);
     }
-    
+
     /**
-     * Sets the properties of the specified axis to match 
+     * Sets the properties of the specified axis to match
      * the properties defined on this panel.
      *
      * @param axis  the axis.

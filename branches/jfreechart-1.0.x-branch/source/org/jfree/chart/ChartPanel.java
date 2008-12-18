@@ -141,6 +141,8 @@
  * 08-May-2008 : Fixed serialization bug (DG);
  * 15-Aug-2008 : Increased default maxDrawWidth/Height (DG);
  * 18-Sep-2008 : Modified creation of chart buffer (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -445,7 +447,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundle.getBundle("org.jfree.chart.LocalizationBundle");
+            = ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.LocalizationBundle");
 
     /**
      * Constructs a panel that displays the specified chart.

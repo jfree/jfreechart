@@ -41,6 +41,8 @@
  * 24-Nov-2005 : Moved and renamed: org.jfree.chart.ui.ColorBarPropertyEditPanel
  *               --> DefaultColorBarEditor (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -61,6 +63,7 @@ import org.jfree.chart.axis.ColorBar;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.GreyPalette;
 import org.jfree.chart.plot.RainbowPalette;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.layout.LCBLayout;
 
 /**
@@ -91,8 +94,9 @@ class DefaultColorBarEditor extends DefaultNumberAxisEditor {
     private PaletteSample[] availablePaletteSamples;
 
     /** The resourceBundle for the localization. */
-   protected  static ResourceBundle localizationResources =
-       ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
+   protected  static ResourceBundle localizationResources
+           = ResourceBundleWrapper.getBundle(
+                   "org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * Creates a new edit panel for a color bar.

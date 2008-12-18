@@ -36,6 +36,8 @@
  * Changes
  * -------
  * 24-Nov-2005 : Version 1, based on AxisPropertyEditPanel.java (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -61,6 +63,7 @@ import javax.swing.JTextField;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.layout.LCBLayout;
 import org.jfree.ui.FontChooserPanel;
 import org.jfree.ui.FontDisplayField;
@@ -130,8 +133,9 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     private JTabbedPane otherTabs;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources =
-        ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
+    protected static ResourceBundle localizationResources
+            = ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * A static method that returns a panel that is appropriate for the axis

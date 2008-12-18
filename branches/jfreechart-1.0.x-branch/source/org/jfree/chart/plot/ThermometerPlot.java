@@ -85,6 +85,8 @@
  * 24-Sep-2007 : Implemented new methods in Zoomable interface (DG);
  * 08-Oct-2007 : Added attributes for thermometer dimensions - see patch 1769088
  *               by Julien Henry (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -116,6 +118,7 @@ import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DefaultValueDataset;
@@ -376,8 +379,9 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     private transient Stroke rangeIndicatorStroke = new BasicStroke(3.0f);
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources =
-        ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
+    protected static ResourceBundle localizationResources
+            = ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.plot.LocalizationBundle");
 
     /**
      * Creates a new thermometer plot.

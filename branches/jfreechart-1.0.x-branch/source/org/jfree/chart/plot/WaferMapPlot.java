@@ -40,6 +40,8 @@
  * 10-Jun-2005 : Changed private --> protected for drawChipGrid(),
  *               drawWaferEdge() and getWafterEdge() (DG);
  * 16-Jun-2005 : Added default constructor and setDataset() method (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -63,6 +65,7 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.WaferMapRenderer;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.WaferMapDataset;
 import org.jfree.ui.RectangleInsets;
@@ -92,14 +95,15 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
 
     /** The default crosshair stroke. */
     public static final Stroke DEFAULT_CROSSHAIR_STROKE
-        = DEFAULT_GRIDLINE_STROKE;
+            = DEFAULT_GRIDLINE_STROKE;
 
     /** The default crosshair paint. */
     public static final Paint DEFAULT_CROSSHAIR_PAINT = Color.blue;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources =
-        ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
+    protected static ResourceBundle localizationResources
+            = ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.plot.LocalizationBundle");
 
     /** The plot orientation.
      *  vertical = notch down

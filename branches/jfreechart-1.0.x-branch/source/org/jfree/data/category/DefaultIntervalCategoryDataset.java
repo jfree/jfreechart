@@ -40,6 +40,8 @@
  * 08-Mar-2007 : Added equals() and clone() overrides (DG);
  * 25-Feb-2008 : Fix for the special case where the dataset is empty, see bug
  *               1897580 (DG)
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -149,7 +151,8 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
         if (starts != null && ends != null) {
 
             String baseName = "org.jfree.data.resources.DataPackageResources";
-            ResourceBundle resources = ResourceBundle.getBundle(baseName);
+            ResourceBundle resources = ResourceBundleWrapper.getBundle(
+                    baseName);
 
             int seriesCount = starts.length;
             if (seriesCount != ends.length) {
