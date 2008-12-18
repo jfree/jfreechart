@@ -35,6 +35,8 @@
  * Changes:
  * --------
  * 24-Nov-2005 : Version 1, based on NumberAxisPropertyEditor (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -58,6 +60,7 @@ import javax.swing.JTextField;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.layout.LCBLayout;
 import org.jfree.ui.PaintSample;
 import org.jfree.ui.StrokeChooserPanel;
@@ -103,8 +106,9 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
     private StrokeSample[] availableStrokeSamples;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources =
-        ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
+    protected static ResourceBundle localizationResources
+            = ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * Standard constructor: builds a property panel for the specified axis.

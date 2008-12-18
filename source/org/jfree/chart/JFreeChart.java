@@ -142,6 +142,8 @@
  * 23-Apr-2008 : Added new contributor (Diego Pierangeli) (DG);
  * 16-May-2008 : Added new contributor (Michael Siemer) (DG);
  * 19-Sep-2008 : Check for title visibility (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -199,6 +201,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.Align;
@@ -1743,7 +1746,8 @@ class JFreeChartInfo extends ProjectInfo {
         // get a locale-specific resource bundle...
         String baseResourceClass
                 = "org.jfree.chart.resources.JFreeChartResources";
-        ResourceBundle resources = ResourceBundle.getBundle(baseResourceClass);
+        ResourceBundle resources = ResourceBundleWrapper.getBundle(
+                baseResourceClass);
 
         setName(resources.getString("project.name"));
         setVersion(resources.getString("project.version"));

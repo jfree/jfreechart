@@ -62,6 +62,8 @@
  * 01-Sep-2005 : Moved dataAreaRatio from Plot to here (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 31-Jan-2007 : Deprecated (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -101,6 +103,7 @@ import org.jfree.chart.labels.ContourToolTipGenerator;
 import org.jfree.chart.labels.StandardContourToolTipGenerator;
 import org.jfree.chart.renderer.xy.XYBlockRenderer;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.data.contour.ContourDataset;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -221,8 +224,9 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     private transient Paint missingPaint = null;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources =
-        ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
+    protected static ResourceBundle localizationResources
+            = ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.plot.LocalizationBundle");
 
     /**
      * Creates a new plot with no dataset or axes.

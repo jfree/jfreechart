@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ----------------------------
  * SWTPlotAppearanceEditor.java
  * ----------------------------
- * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006-2008, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -35,7 +35,9 @@
  * Changes
  * -------
  * 01-Aug-2006 : New class (HP);
- * 
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
+ *
  */
 
 package org.jfree.experimental.chart.swt.editor;
@@ -63,6 +65,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.experimental.swt.SWTPaintCanvas;
 import org.jfree.experimental.swt.SWTUtils;
 
@@ -70,12 +73,12 @@ import org.jfree.experimental.swt.SWTUtils;
  * An editor for plot properties.
  */
 class SWTPlotAppearanceEditor extends Composite {
-    
+
     private Spinner selectStroke;
-    
+
     /** The stroke (pen) used to draw the outline of the plot. */
     private SWTStrokeCanvas strokeCanvas;
-    
+
     /** The paint (color) used to fill the background of the plot. */
     private SWTPaintCanvas backgroundPaintCanvas;
 
@@ -86,15 +89,16 @@ class SWTPlotAppearanceEditor extends Composite {
     private PlotOrientation plotOrientation;
 
     private Combo orientation;
-    
+
     /** Orientation constants. */
     private final static String[] orientationNames = {"Vertical", "Horizontal"};
     private final static int ORIENTATION_VERTICAL = 0;
     private final static int ORIENTATION_HORIZONTAL = 1;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources 
-        = ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
+    protected static ResourceBundle localizationResources
+            = ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.editor.LocalizationBundle");
 
     SWTPlotAppearanceEditor(Composite parent, int style, Plot plot) {
         super(parent, style);
@@ -107,20 +111,20 @@ class SWTPlotAppearanceEditor extends Composite {
         groupLayout.marginHeight = groupLayout.marginWidth = 4;
         general.setLayout(groupLayout);
         general.setText(localizationResources.getString("General"));
-        
+
         // row 1: stroke
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Outline_stroke"));
         this.strokeCanvas = new SWTStrokeCanvas(general, SWT.NONE);
         this.strokeCanvas.setStroke(plot.getOutlineStroke());
-        GridData strokeGridData = new GridData(SWT.FILL, SWT.CENTER, true, 
+        GridData strokeGridData = new GridData(SWT.FILL, SWT.CENTER, true,
                 false);
         strokeGridData.heightHint = 20;
         this.strokeCanvas.setLayoutData(strokeGridData);
         this.selectStroke = new Spinner(general, SWT.BORDER);
         this.selectStroke.setMinimum(1);
         this.selectStroke.setMaximum(3);
-        this.selectStroke.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, 
+        this.selectStroke.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
                 false, false));
         this.selectStroke.addSelectionListener(
                 new SelectionAdapter() {
@@ -138,16 +142,16 @@ class SWTPlotAppearanceEditor extends Composite {
         // row 2: outline color
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Outline_Paint"));
-        this.outlinePaintCanvas = new SWTPaintCanvas(general, SWT.NONE, 
+        this.outlinePaintCanvas = new SWTPaintCanvas(general, SWT.NONE,
                 SWTUtils.toSwtColor(getDisplay(), plot.getOutlinePaint()));
-        GridData outlineGridData = new GridData(SWT.FILL, SWT.CENTER, true, 
+        GridData outlineGridData = new GridData(SWT.FILL, SWT.CENTER, true,
                 false);
         outlineGridData.heightHint = 20;
         this.outlinePaintCanvas.setLayoutData(outlineGridData);
         Button selectOutlineColor = new Button(general, SWT.PUSH);
         selectOutlineColor.setText(localizationResources.getString(
                 "Select..."));
-        selectOutlineColor.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, 
+        selectOutlineColor.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER,
                 false, false));
         selectOutlineColor.addSelectionListener(
                 new SelectionAdapter() {
@@ -168,7 +172,7 @@ class SWTPlotAppearanceEditor extends Composite {
         // row 3: background paint
         new Label(general, SWT.NONE).setText(localizationResources.getString(
                 "Background_paint"));
-        this.backgroundPaintCanvas = new SWTPaintCanvas(general, SWT.NONE, 
+        this.backgroundPaintCanvas = new SWTPaintCanvas(general, SWT.NONE,
                 SWTUtils.toSwtColor(getDisplay(), plot.getBackgroundPaint()));
         GridData bgGridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
         bgGridData.heightHint = 20;
@@ -201,16 +205,16 @@ class SWTPlotAppearanceEditor extends Composite {
             this.plotOrientation = ((XYPlot) plot).getOrientation();
         }
         if (this.plotOrientation != null) {
-            boolean isVertical 
+            boolean isVertical
                     = this.plotOrientation.equals(PlotOrientation.VERTICAL);
-            int index = isVertical ? ORIENTATION_VERTICAL 
+            int index = isVertical ? ORIENTATION_VERTICAL
                     : ORIENTATION_HORIZONTAL;
             new Label(general, SWT.NONE).setText(
                     localizationResources.getString("Orientation"));
             this.orientation = new Combo(general, SWT.DROP_DOWN);
             this.orientation.setItems(orientationNames);
             this.orientation.select(index);
-            this.orientation.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, 
+            this.orientation.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
                     true, false, 2, 1));
             this.orientation.addSelectionListener(
                     new SelectionAdapter() {
@@ -222,7 +226,7 @@ class SWTPlotAppearanceEditor extends Composite {
                                             = PlotOrientation.VERTICAL;
                                     break;
                                 case ORIENTATION_HORIZONTAL:
-                                    SWTPlotAppearanceEditor.this.plotOrientation 
+                                    SWTPlotAppearanceEditor.this.plotOrientation
                                             = PlotOrientation.HORIZONTAL;
                                     break;
                                 default:
@@ -237,16 +241,16 @@ class SWTPlotAppearanceEditor extends Composite {
 
     /**
      * Returns the plot orientation.
-     * 
+     *
      * @return The plot orientation.
      */
     public PlotOrientation getPlotOrientation() {
         return this.plotOrientation;
     }
-    
+
     /**
      * Returns the background paint.
-     * 
+     *
      * @return The background paint.
      */
     public Color getBackGroundPaint() {
@@ -255,7 +259,7 @@ class SWTPlotAppearanceEditor extends Composite {
 
     /**
      * Returns the outline paint.
-     * 
+     *
      * @return The outline paint.
      */
     public Color getOutlinePaint() {
@@ -264,7 +268,7 @@ class SWTPlotAppearanceEditor extends Composite {
 
     /**
      * Returns the stroke.
-     * 
+     *
      * @return The stroke.
      */
     public Stroke getStroke() {

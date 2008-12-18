@@ -56,6 +56,8 @@
  *               setDomainAxis() and setRangeAxis() methods (DG);
  * 24-Sep-2007 : Implemented new zooming methods (DG);
  * 25-Mar-2008 : Make use of new fireChangeEvent() method (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -86,6 +88,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.axis.ValueTick;
 import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
@@ -148,8 +151,8 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     private transient Paint rangeGridlinePaint;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources =
-            ResourceBundle.getBundle(
+    protected static ResourceBundle localizationResources
+            = ResourceBundleWrapper.getBundle(
             "org.jfree.chart.plot.LocalizationBundle");
 
     /**

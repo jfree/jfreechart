@@ -2,32 +2,32 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * ------------------
  * SWTPlotEditor.java
  * ------------------
- * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006-2008, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -35,7 +35,9 @@
  * Changes
  * -------
  * 01-Aug-2006 : New class (HP);
- * 
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
+ *
  */
 
 package org.jfree.experimental.chart.swt.editor;
@@ -54,32 +56,34 @@ import org.jfree.chart.axis.Axis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.experimental.swt.SWTUtils;
 
 /**
  * An editor for plot properties.
  */
 class SWTPlotEditor extends Composite {
-    
-    /** 
-     * A panel used to display/edit the properties of the domain axis (if any). 
+
+    /**
+     * A panel used to display/edit the properties of the domain axis (if any).
      */
     private SWTAxisEditor domainAxisPropertyPanel;
 
-    /** 
+    /**
      * A panel used to display/edit the properties of the range axis (if any).
      */
     private SWTAxisEditor rangeAxisPropertyPanel;
 
     private SWTPlotAppearanceEditor plotAppearance;
-    
+
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources 
-        = ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
+    protected static ResourceBundle localizationResources
+            = ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * Creates a new editor for the specified plot.
-     * 
+     *
      * @param parent  the parent.
      * @param style  the style.
      * @param plot  the plot.
@@ -96,9 +100,9 @@ class SWTPlotEditor extends Composite {
         plotType.setLayout(plotTypeLayout);
         plotType.setText(plot.getPlotType() + localizationResources.getString(
                 ":"));
-        
+
         TabFolder tabs = new TabFolder(plotType, SWT.NONE);
-        
+
         //deal with domain axis
         TabItem item1 = new TabItem(tabs, SWT.NONE);
         item1.setText(localizationResources.getString("Domain_Axis"));
@@ -109,10 +113,10 @@ class SWTPlotEditor extends Composite {
         else if (plot instanceof XYPlot) {
             domainAxis = ((XYPlot) plot).getDomainAxis();
         }
-        this.domainAxisPropertyPanel = SWTAxisEditor.getInstance(tabs, 
+        this.domainAxisPropertyPanel = SWTAxisEditor.getInstance(tabs,
                 SWT.NONE, domainAxis);
         item1.setControl(this.domainAxisPropertyPanel);
-        
+
         //deal with range axis
         TabItem item2 = new TabItem(tabs, SWT.NONE);
         item2.setText(localizationResources.getString("Range_Axis"));
@@ -126,7 +130,7 @@ class SWTPlotEditor extends Composite {
         this.rangeAxisPropertyPanel = SWTAxisEditor.getInstance(tabs, SWT.NONE,
                 rangeAxis);
         item2.setControl(this.rangeAxisPropertyPanel);
-        
+
         //deal with plot appearance
         TabItem item3 = new TabItem(tabs, SWT.NONE);
         item3.setText(localizationResources.getString("Appearance"));
@@ -136,7 +140,7 @@ class SWTPlotEditor extends Composite {
 
     /**
      * Returns the current outline stroke.
-     * 
+     *
      * @return The current outline stroke.
      */
     public Color getBackgroundPaint() {
@@ -145,7 +149,7 @@ class SWTPlotEditor extends Composite {
 
     /**
      * Returns the current outline stroke.
-     * 
+     *
      * @return The current outline stroke.
      */
     public Color getOutlinePaint() {
@@ -154,7 +158,7 @@ class SWTPlotEditor extends Composite {
 
     /**
      * Returns the current outline stroke.
-     * 
+     *
      * @return The current outline stroke.
      */
     public Stroke getOutlineStroke() {
@@ -163,7 +167,7 @@ class SWTPlotEditor extends Composite {
 
 
     /**
-     * Updates the plot properties to match the properties 
+     * Updates the plot properties to match the properties
      * defined on the panel.
      *
      * @param plot  The plot.
@@ -173,7 +177,7 @@ class SWTPlotEditor extends Composite {
         plot.setBackgroundPaint(SWTUtils.toAwtColor(getBackgroundPaint()));
         plot.setOutlinePaint(SWTUtils.toAwtColor(getOutlinePaint()));
         plot.setOutlineStroke(getOutlineStroke());
-        
+
         // set the axis properties
         if (this.domainAxisPropertyPanel != null) {
             Axis domainAxis = null;

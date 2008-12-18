@@ -57,6 +57,8 @@
  *               addData() --> addDataset() (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 20-Mar-2007 : Fixed serialization (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -92,6 +94,7 @@ import org.jfree.chart.needle.PlumNeedle;
 import org.jfree.chart.needle.PointerNeedle;
 import org.jfree.chart.needle.ShipNeedle;
 import org.jfree.chart.needle.WindNeedle;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.general.DefaultValueDataset;
 import org.jfree.data.general.ValueDataset;
 import org.jfree.io.SerialUtilities;
@@ -162,7 +165,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundle.getBundle(
+            = ResourceBundleWrapper.getBundle(
                     "org.jfree.chart.plot.LocalizationBundle");
 
     /**

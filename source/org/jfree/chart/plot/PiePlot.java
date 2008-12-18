@@ -160,6 +160,8 @@
  *               generation (DG);
  * 23-Sep-2008 : Added getLabelLinkDepth() method - see bug 2121818 reported
  *               by Christoph Beck (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
  *
  */
 
@@ -203,6 +205,7 @@ import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.urls.PieURLGenerator;
+import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -500,8 +503,9 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     private double minimumArcAngleToDraw;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources =
-            ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
+    protected static ResourceBundle localizationResources
+            = ResourceBundleWrapper.getBundle(
+                    "org.jfree.chart.plot.LocalizationBundle");
 
     /**
      * This debug flag controls whether or not an outline is drawn showing the

@@ -211,6 +211,9 @@
  * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  * 25-Nov-2008 : Allow datasets to be mapped to multiple axes - based on patch
  *               1868749 by Andrew Mickish (DG);
+ * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
+ *               Jess Thrysoee (DG);
+ *
  */
 
 package org.jfree.chart.plot;
@@ -312,7 +315,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundle.getBundle(
+            = ResourceBundleWrapper.getBundle(
                     "org.jfree.chart.plot.LocalizationBundle");
 
     /** The plot orientation. */
