@@ -77,11 +77,11 @@
     </dependency>
 
     <dependency>
-      <groupId>gnujaxp</groupId>
-      <artifactId>gnujaxp</artifactId>
-      <version>1.0.0</version>
-      <jar>gnujaxp.jar</jar>
-      <url>http://www.gnu.org/software/classpathx/jaxp/jaxp.html</url>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <version>1.3.02</version>
+      <jar>xml-apis-1.3.02.jar</jar>
+      <url>http://xml.apache.org/commons/#external</url>
     </dependency>
   </dependencies>
 
