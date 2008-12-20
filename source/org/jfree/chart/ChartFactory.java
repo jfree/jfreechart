@@ -118,6 +118,7 @@
  * 14-Aug-2008 : Added ChartTheme facility (DG);
  * 23-Oct-2008 : Check for legacy theme in setChartTheme() and reset default
  *               bar painters (DG);
+ * 20-Dec-2008 : In createStackedAreaChart(), set category margin to 0.0 (DG);
  *
  */
 
@@ -1160,18 +1161,15 @@ public abstract class ChartFactory {
      * @return A stacked area chart.
      */
     public static JFreeChart createStackedAreaChart(String title,
-                                                    String categoryAxisLabel,
-                                                    String valueAxisLabel,
-                                                    CategoryDataset dataset,
-                                                    PlotOrientation orientation,
-                                                    boolean legend,
-                                                    boolean tooltips,
-                                                    boolean urls) {
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
         if (orientation == null) {
             throw new IllegalArgumentException("Null 'orientation' argument.");
         }
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
+        categoryAxis.setCategoryMargin(0.0);
         ValueAxis valueAxis = new NumberAxis(valueAxisLabel);
 
         StackedAreaRenderer renderer = new StackedAreaRenderer();

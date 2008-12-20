@@ -1,3 +1,9 @@
+2008-12-20  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 2452078:
+    * source/org/jfree/chart/ChartFactory.java
+    (createStackedAreaChart): Set category margin to zero.
+
 2008-12-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 1607918 by Jess Thrysoee (with modifications):
