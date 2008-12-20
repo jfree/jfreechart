@@ -20,6 +20,7 @@ API Adjustments:
     Year(Date, TimeZone);
           
 Bug Fixes:
+2452078 : StackedAreaChart has gaps;
 2275695 : NullPointerException for SubCategoryAxis on plot with null dataset;
 2221495 : XYLineAnnotation with dashed stroke;
 2216511 : SWTBarChartDemo1 throws RuntimeException;
