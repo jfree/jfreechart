@@ -6,7 +6,7 @@
         <property name="jfreechart.name" value="jfreechart" />
         <property name="jfreechart.version" value="1.0.11" />
         <property name="jcommon.name" value="jcommon" />
-        <property name="jcommon.version" value="1.0.14" />
+        <property name="jcommon.version" value="1.0.15" />
         <property name="builddir" value="${basedir}/build" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="jfreechart.jar" value="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
