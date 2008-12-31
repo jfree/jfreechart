@@ -1,3 +1,9 @@
+2008-12-31  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 2471906:
+    * source/org/jfree/chart/renderer/xy/XYAreaRenderer.java
+    (drawItem): Check for dashed stroke and clip area manually for that case.
+
 2008-12-30  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/MultiplePiePlot.java

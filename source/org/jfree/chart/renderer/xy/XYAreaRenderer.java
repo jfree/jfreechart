@@ -74,16 +74,19 @@
  * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 17-Jun-2008 : Apply legend font and paint attributes (DG);
+ * 31-Dec-2008 : Fix for bug 2471906 - dashed outlines performance issue (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -552,9 +555,33 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
             // draw an outline around the Area.
             if (isOutline()) {
-                g2.setStroke(getItemOutlineStroke(series, item));
-                g2.setPaint(getItemOutlinePaint(series, item));
-                g2.draw(areaState.area);
+                Shape area = areaState.area;
+
+                // Java2D has some issues drawing dashed lines around "large"
+                // geometrical shapes - for example, see bug 6620013 in the
+                // Java bug database.  So, we'll check if the outline is
+                // dashed and, if it is, do our own clipping before drawing
+                // the outline...
+                Stroke outlineStroke = lookupSeriesOutlineStroke(series);
+                if (outlineStroke instanceof BasicStroke) {
+                    BasicStroke bs = (BasicStroke) outlineStroke;
+                    if (bs.getDashArray() != null) {
+                        Area poly = new Area(areaState.area);
+                        // we make the clip region slightly larger than the
+                        // dataArea so that the clipped edges don't show lines
+                        // on the chart
+                        Area clip = new Area(new Rectangle2D.Double(
+                                dataArea.getX() - 5.0, dataArea.getY() - 5.0,
+                                dataArea.getWidth() + 10.0,
+                                dataArea.getHeight() + 10.0));
+                        poly.intersect(clip);
+                        area = poly;
+                    }
+                } // end of workaround
+
+                g2.setStroke(outlineStroke);
+                g2.setPaint(lookupSeriesOutlinePaint(series));
+                g2.draw(area);
             }
         }
 

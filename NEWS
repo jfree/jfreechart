@@ -1,6 +1,6 @@
 JFreeChart 1.0.12
 -----------------
-19 December 2008
+31 December 2008
 
 This release adds support for minor tick marks, mapping datasets to more than
 one axis, an important fix for the XYSeries class (relating to the
@@ -20,6 +20,7 @@ API Adjustments:
     Year(Date, TimeZone);
           
 Bug Fixes:
+2471906 : XYAreaRenderer with dashed outline - performance problem;
 2452078 : StackedAreaChart has gaps;
 2275695 : NullPointerException for SubCategoryAxis on plot with null dataset;
 2221495 : XYLineAnnotation with dashed stroke;
