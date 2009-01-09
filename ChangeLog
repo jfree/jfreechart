@@ -1,5 +1,10 @@
 2009-01-09  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/plot/MultiplePiePlot.java
+    (MultiplePiePlot): Set ignoreNullValues to true.
+
+2009-01-09  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/axis/DateTickUnit.java
     (unit): Deprecated,
     (unitType): New field,

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * MultiplePiePlot.java
  * --------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Brian Cabana (patch 1943021);
@@ -50,6 +50,7 @@
  * 18-Apr-2008 : In the constructor, register the plot as a dataset listener -
  *               see patch 1943021 from Brian Cabana (DG);
  * 30-Dec-2008 : Added legendItemShape field, and fixed cloning bug (DG);
+ * 09-Jan-2009 : See ignoreNullValues to true for sub-chart (DG);
  *
  */
 
@@ -115,24 +116,28 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * The key for the aggregated items.
+     *
      * @since 1.0.2
      */
     private Comparable aggregatedItemsKey;
 
     /**
      * The paint for the aggregated items.
+     *
      * @since 1.0.2
      */
     private transient Paint aggregatedItemsPaint;
 
     /**
      * The colors to use for each section.
+     *
      * @since 1.0.2
      */
     private transient Map sectionPaints;
 
     /**
      * The legend item shape (never null).
+     *
      * @since 1.0.12
      */
     private transient Shape legendItemShape;
@@ -153,6 +158,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
         super();
         setDataset(dataset);
         PiePlot piePlot = new PiePlot(null);
+        piePlot.setIgnoreNullValues(true);
         this.pieChart = new JFreeChart(piePlot);
         this.pieChart.removeLegend();
         this.dataExtractOrder = TableOrder.BY_COLUMN;
@@ -676,6 +682,5 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
         this.legendItemShape = SerialUtilities.readShape(stream);
         this.sectionPaints = new HashMap();
     }
-
 
 }
