@@ -466,7 +466,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
                 + this.count + "]";
     }
 
-
     /**
      * A constant for years.
      *
