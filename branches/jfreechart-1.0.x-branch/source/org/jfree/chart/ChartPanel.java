@@ -1810,12 +1810,18 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param y  the y-coordinate (in screen coordinates).
      */
     public void zoomInDomain(double x, double y) {
-        Plot p = this.chart.getPlot();
-        if (p instanceof Zoomable) {
-            Zoomable plot = (Zoomable) p;
-            plot.zoomDomainAxes(this.zoomInFactor, this.info.getPlotInfo(),
+        Plot plot = this.chart.getPlot();
+        if (plot instanceof Zoomable) {
+            // here we tweak the notify flag on the plot so that only
+            // one notification happens even though we update multiple
+            // axes...
+            boolean savedNotify = plot.isNotify();
+            plot.setNotify(false);
+            Zoomable z = (Zoomable) plot;
+            z.zoomDomainAxes(this.zoomInFactor, this.info.getPlotInfo(),
                     translateScreenToJava2D(new Point((int) x, (int) y)),
                     this.zoomAroundAnchor);
+            plot.setNotify(savedNotify);
         }
     }
 
@@ -1828,12 +1834,18 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param y  the y coordinate (in screen coordinates).
      */
     public void zoomInRange(double x, double y) {
-        Plot p = this.chart.getPlot();
-        if (p instanceof Zoomable) {
-            Zoomable z = (Zoomable) p;
+        Plot plot = this.chart.getPlot();
+        if (plot instanceof Zoomable) {
+            // here we tweak the notify flag on the plot so that only
+            // one notification happens even though we update multiple
+            // axes...
+            boolean savedNotify = plot.isNotify();
+            plot.setNotify(false);
+            Zoomable z = (Zoomable) plot;
             z.zoomRangeAxes(this.zoomInFactor, this.info.getPlotInfo(),
                     translateScreenToJava2D(new Point((int) x, (int) y)),
                     this.zoomAroundAnchor);
+            plot.setNotify(savedNotify);
         }
     }
 
@@ -1867,12 +1879,18 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param y  the y-coordinate (in screen coordinates).
      */
     public void zoomOutDomain(double x, double y) {
-        Plot p = this.chart.getPlot();
-        if (p instanceof Zoomable) {
-            Zoomable z = (Zoomable) p;
+        Plot plot = this.chart.getPlot();
+        if (plot instanceof Zoomable) {
+            // here we tweak the notify flag on the plot so that only
+            // one notification happens even though we update multiple
+            // axes...
+            boolean savedNotify = plot.isNotify();
+            plot.setNotify(false);
+            Zoomable z = (Zoomable) plot;
             z.zoomDomainAxes(this.zoomOutFactor, this.info.getPlotInfo(),
                     translateScreenToJava2D(new Point((int) x, (int) y)),
                     this.zoomAroundAnchor);
+            plot.setNotify(savedNotify);
         }
     }
 
@@ -1885,12 +1903,18 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param y  the y-coordinate (in screen coordinates).
      */
     public void zoomOutRange(double x, double y) {
-        Plot p = this.chart.getPlot();
-        if (p instanceof Zoomable) {
-            Zoomable z = (Zoomable) p;
+        Plot plot = this.chart.getPlot();
+        if (plot instanceof Zoomable) {
+            // here we tweak the notify flag on the plot so that only
+            // one notification happens even though we update multiple
+            // axes...
+            boolean savedNotify = plot.isNotify();
+            plot.setNotify(false);
+            Zoomable z = (Zoomable) plot;
             z.zoomRangeAxes(this.zoomOutFactor, this.info.getPlotInfo(),
                     translateScreenToJava2D(new Point((int) x, (int) y)),
                     this.zoomAroundAnchor);
+            plot.setNotify(savedNotify);
         }
     }
 
@@ -1965,13 +1989,19 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Restores the auto-range calculation on the domain axis.
      */
     public void restoreAutoDomainBounds() {
-        Plot p = this.chart.getPlot();
-        if (p instanceof Zoomable) {
-            Zoomable z = (Zoomable) p;
+        Plot plot = this.chart.getPlot();
+        if (plot instanceof Zoomable) {
+            Zoomable z = (Zoomable) plot;
+            // here we tweak the notify flag on the plot so that only
+            // one notification happens even though we update multiple
+            // axes...
+            boolean savedNotify = plot.isNotify();
+            plot.setNotify(false);
             // we need to guard against this.zoomPoint being null
             Point2D zp = (this.zoomPoint != null
                     ? this.zoomPoint : new Point());
             z.zoomDomainAxes(0.0, this.info.getPlotInfo(), zp);
+            plot.setNotify(savedNotify);
         }
     }
 
@@ -1979,13 +2009,19 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Restores the auto-range calculation on the range axis.
      */
     public void restoreAutoRangeBounds() {
-        Plot p = this.chart.getPlot();
-        if (p instanceof Zoomable) {
-            Zoomable z = (Zoomable) p;
+        Plot plot = this.chart.getPlot();
+        if (plot instanceof Zoomable) {
+            Zoomable z = (Zoomable) plot;
+            // here we tweak the notify flag on the plot so that only
+            // one notification happens even though we update multiple
+            // axes...
+            boolean savedNotify = plot.isNotify();
+            plot.setNotify(false);
             // we need to guard against this.zoomPoint being null
             Point2D zp = (this.zoomPoint != null
                     ? this.zoomPoint : new Point());
             z.zoomRangeAxes(0.0, this.info.getPlotInfo(), zp);
+            plot.setNotify(savedNotify);
         }
     }
 

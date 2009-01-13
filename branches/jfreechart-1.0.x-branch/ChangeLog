@@ -1,5 +1,22 @@
 2009-01-13  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/ChartPanel.java
+    (zoomInDomain): Change notify flag to ensure plot sends only one event,
+    (zoomInRange): Likewise,
+    (zoomOutDomain): Likewise,
+    (zoomOutRange): Likewise,
+    (restoreAutoDomainBounds): Likewise,
+    (restoreAutoRangeBounds): Likewise,
+    * test/org/jfree/chart/junit/ChartPanelTests.java
+    (test2502355_zoomInDomain): New test,
+    (test2502355_zoomInRange): Likewise,
+    (test2502355_zoomOutDomain): Likewise,
+    (test2502355_zoomOutRange): Likewise,
+    (test2502355_restoreAutoDomainBounds): Likewise,
+    (test2502355_restoreAutoRangeBounds): Likewise.
+
+2009-01-13  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 2502355:
     * source/org/jfree/chart/ChartPanel.java
     (zoomInBoth): Change notify flag to ensure plot sends only one event,
