@@ -56,6 +56,7 @@ import org.jfree.chart.ChartMouseEvent;
 import org.jfree.chart.ChartMouseListener;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PlotOrientation;
@@ -231,4 +232,107 @@ public class ChartPanelTests extends TestCase
         panel.restoreAutoBounds();
         assertEquals(1, this.chartChangeEvents.size());
     }
+
+    /**
+     * Checks that a call to the zoomInDomain() method, for a plot with more
+     * than one domain axis, generates just one ChartChangeEvent.
+     */
+    public void test2502355_zoomInDomain() {
+        DefaultXYDataset dataset = new DefaultXYDataset();
+        JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
+                "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setDomainAxis(1, new NumberAxis("X2"));
+        ChartPanel panel = new ChartPanel(chart);
+        chart.addChangeListener(this);
+        this.chartChangeEvents.clear();
+        panel.zoomInDomain(1.0, 2.0);
+        assertEquals(1, this.chartChangeEvents.size());
+    }
+
+    /**
+     * Checks that a call to the zoomInRange() method, for a plot with more
+     * than one range axis, generates just one ChartChangeEvent.
+     */
+    public void test2502355_zoomInRange() {
+        DefaultXYDataset dataset = new DefaultXYDataset();
+        JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
+                "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setRangeAxis(1, new NumberAxis("X2"));
+        ChartPanel panel = new ChartPanel(chart);
+        chart.addChangeListener(this);
+        this.chartChangeEvents.clear();
+        panel.zoomInRange(1.0, 2.0);
+        assertEquals(1, this.chartChangeEvents.size());
+    }
+
+    /**
+     * Checks that a call to the zoomOutDomain() method, for a plot with more
+     * than one domain axis, generates just one ChartChangeEvent.
+     */
+    public void test2502355_zoomOutDomain() {
+        DefaultXYDataset dataset = new DefaultXYDataset();
+        JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
+                "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setDomainAxis(1, new NumberAxis("X2"));
+        ChartPanel panel = new ChartPanel(chart);
+        chart.addChangeListener(this);
+        this.chartChangeEvents.clear();
+        panel.zoomOutDomain(1.0, 2.0);
+        assertEquals(1, this.chartChangeEvents.size());
+    }
+
+    /**
+     * Checks that a call to the zoomOutRange() method, for a plot with more
+     * than one range axis, generates just one ChartChangeEvent.
+     */
+    public void test2502355_zoomOutRange() {
+        DefaultXYDataset dataset = new DefaultXYDataset();
+        JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
+                "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setRangeAxis(1, new NumberAxis("X2"));
+        ChartPanel panel = new ChartPanel(chart);
+        chart.addChangeListener(this);
+        this.chartChangeEvents.clear();
+        panel.zoomOutRange(1.0, 2.0);
+        assertEquals(1, this.chartChangeEvents.size());
+    }
+
+    /**
+     * Checks that a call to the restoreAutoDomainBounds() method, for a plot
+     * with more than one range axis, generates just one ChartChangeEvent.
+     */
+    public void test2502355_restoreAutoDomainBounds() {
+        DefaultXYDataset dataset = new DefaultXYDataset();
+        JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
+                "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setDomainAxis(1, new NumberAxis("X2"));
+        ChartPanel panel = new ChartPanel(chart);
+        chart.addChangeListener(this);
+        this.chartChangeEvents.clear();
+        panel.restoreAutoDomainBounds();
+        assertEquals(1, this.chartChangeEvents.size());
+    }
+
+    /**
+     * Checks that a call to the restoreAutoRangeBounds() method, for a plot
+     * with more than one range axis, generates just one ChartChangeEvent.
+     */
+    public void test2502355_restoreAutoRangeBounds() {
+        DefaultXYDataset dataset = new DefaultXYDataset();
+        JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
+                "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setRangeAxis(1, new NumberAxis("X2"));
+        ChartPanel panel = new ChartPanel(chart);
+        chart.addChangeListener(this);
+        this.chartChangeEvents.clear();
+        panel.restoreAutoRangeBounds();
+        assertEquals(1, this.chartChangeEvents.size());
+    }
+
 }
