@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * TimeSeriesTests.java
  * --------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,6 +45,7 @@
  * 31-Oct-2007 : New hashCode() test (DG);
  * 21-Nov-2007 : Added testBug1832432() and testClone2() (DG);
  * 10-Jan-2008 : Added testBug1864222() (DG);
+ * 13-Jan-2009 : Added testEquals3() and testRemoveAgedItems3() (DG);
  *
  */
 
@@ -381,6 +382,15 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         TimeSeries s1 = new TimeSeries("Series", null, null, Day.class);
         TimeSeries s2 = new TimeSeries("Series", null, null, Day.class);
         assertTrue(s1.equals(s2));
+    }
+
+    /**
+     * Two classes with different period classes are NOT the same.
+     */
+    public void testEquals3() {
+        TimeSeries s1 = new TimeSeries("Series", Day.class);
+        TimeSeries s2 = new TimeSeries("Series", Month.class);
+        assertFalse(s1.equals(s2));
     }
 
     /**
@@ -784,6 +794,23 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         series.removeAgedItems(y2006, true);
         assertEquals(1, series.getItemCount());
         assertTrue(this.gotSeriesChangeEvent);
+    }
+
+    /**
+     * Calling removeAgedItems() on an empty series should not throw any
+     * exception.
+     */
+    public void testRemoveAgedItems3() {
+        TimeSeries s = new TimeSeries("Test");
+        boolean pass = true;
+        try {
+            s.removeAgedItems(0L, true);
+        }
+        catch (Exception e) {
+            pass = false;
+        }
+        assertTrue(pass);
+
     }
 
     /**
