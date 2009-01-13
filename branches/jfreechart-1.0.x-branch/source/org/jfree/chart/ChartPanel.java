@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -143,6 +143,8 @@
  * 18-Sep-2008 : Modified creation of chart buffer (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 13-Jan-2008 : Fixed zooming methods to trigger only one plot
+ *               change event (DG);
  *
  */
 
@@ -1785,8 +1787,18 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param y  the y value (in screen coordinates).
      */
     public void zoomInBoth(double x, double y) {
+        Plot plot = this.chart.getPlot();
+        if (plot == null) {
+            return;
+        }
+        // here we tweak the notify flag on the plot so that only
+        // one notification happens even though we update multiple
+        // axes...
+        boolean savedNotify = plot.isNotify();
+        plot.setNotify(false);
         zoomInDomain(x, y);
         zoomInRange(x, y);
+        plot.setNotify(savedNotify);
     }
 
     /**
@@ -1832,8 +1844,18 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param y  the y value (in screen coordinates).
      */
     public void zoomOutBoth(double x, double y) {
+        Plot plot = this.chart.getPlot();
+        if (plot == null) {
+            return;
+        }
+        // here we tweak the notify flag on the plot so that only
+        // one notification happens even though we update multiple
+        // axes...
+        boolean savedNotify = plot.isNotify();
+        plot.setNotify(false);
         zoomOutDomain(x, y);
         zoomOutRange(x, y);
+        plot.setNotify(savedNotify);
     }
 
     /**
@@ -1900,6 +1922,11 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
             Plot p = this.chart.getPlot();
             if (p instanceof Zoomable) {
+                // here we tweak the notify flag on the plot so that only
+                // one notification happens even though we update multiple
+                // axes...
+                boolean savedNotify = p.isNotify();
+                p.setNotify(false);
                 Zoomable z = (Zoomable) p;
                 if (z.getOrientation() == PlotOrientation.HORIZONTAL) {
                     z.zoomDomainAxes(vLower, vUpper, plotInfo, selectOrigin);
@@ -1909,6 +1936,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     z.zoomDomainAxes(hLower, hUpper, plotInfo, selectOrigin);
                     z.zoomRangeAxes(vLower, vUpper, plotInfo, selectOrigin);
                 }
+                p.setNotify(savedNotify);
             }
 
         }
@@ -1919,8 +1947,18 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Restores the auto-range calculation on both axes.
      */
     public void restoreAutoBounds() {
+        Plot plot = this.chart.getPlot();
+        if (plot == null) {
+            return;
+        }
+        // here we tweak the notify flag on the plot so that only
+        // one notification happens even though we update multiple
+        // axes...
+        boolean savedNotify = plot.isNotify();
+        plot.setNotify(false);
         restoreAutoDomainBounds();
         restoreAutoRangeBounds();
+        plot.setNotify(savedNotify);
     }
 
     /**

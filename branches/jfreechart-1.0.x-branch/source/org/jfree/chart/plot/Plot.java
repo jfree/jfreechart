@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sylvain Vieujot;
@@ -122,6 +122,7 @@
  *               taking into account orientation (DG);
  * 25-Mar-2008 : Added fireChangeEvent() method - see patch 1914411 (DG);
  * 15-Aug-2008 : Added setDrawingSupplier() method with notify flag (DG);
+ * 13-Jan-2009 : Added notify flag (DG);
  *
  */
 
@@ -148,11 +149,13 @@ import java.io.Serializable;
 
 import javax.swing.event.EventListenerList;
 
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.LegendItemSource;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.event.AxisChangeListener;
+import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeEventType;
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
@@ -174,10 +177,9 @@ import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
- * The base class for all plots in JFreeChart.  The
- * {@link org.jfree.chart.JFreeChart} class delegates the drawing of axes and
- * data to the plot.  This base class provides facilities common to most plot
- * types.
+ * The base class for all plots in JFreeChart.  The {@link JFreeChart} class
+ * delegates the drawing of axes and data to the plot.  This base class
+ * provides facilities common to most plot types.
  */
 public abstract class Plot implements AxisChangeListener,
         DatasetChangeListener, MarkerChangeListener, LegendItemSource,
@@ -278,6 +280,15 @@ public abstract class Plot implements AxisChangeListener,
     private transient EventListenerList listenerList;
 
     /**
+     * A flag that controls whether or not the plot will notify listeners
+     * of changes (defaults to true, but sometimes it is useful to disable
+     * this).
+     *
+     * @since 1.0.13
+     */
+    private boolean notify;
+
+    /**
      * Creates a new plot.
      */
     protected Plot() {
@@ -298,6 +309,7 @@ public abstract class Plot implements AxisChangeListener,
 
         this.drawingSupplier = new DefaultDrawingSupplier();
 
+        this.notify = true;
         this.listenerList = new EventListenerList();
 
     }
@@ -883,6 +895,38 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
+     * Returns a flag that controls whether or not change events are sent to
+     * registered listeners.
+     *
+     * @return A boolean.
+     *
+     * @see #setNotify(boolean)
+     *
+     * @since 1.0.13
+     */
+    public boolean isNotify() {
+        return this.notify;
+    }
+
+    /**
+     * Sets a flag that controls whether or not listeners receive
+     * {@link PlotChangeEvent} notifications.
+     *
+     * @param notify  a boolean.
+     *
+     * @see #isNotify()
+     *
+     * @since 1.0.13
+     */
+    public void setNotify(boolean notify) {
+        this.notify = notify;
+        // if the flag is being set to true, there may be queued up changes...
+        if (notify) {
+            notifyListeners(new PlotChangeEvent(this));
+        }
+    }
+
+    /**
      * Registers an object for notification of changes to the plot.
      *
      * @param listener  the object to be registered.
@@ -910,6 +954,11 @@ public abstract class Plot implements AxisChangeListener,
      * @param event  information about the change event.
      */
     public void notifyListeners(PlotChangeEvent event) {
+        // if the 'notify' flag has been switched to false, we don't notify
+        // the listeners
+        if (!this.notify) {
+            return;
+        }
         Object[] listeners = this.listenerList.getListenerList();
         for (int i = listeners.length - 2; i >= 0; i -= 2) {
             if (listeners[i] == PlotChangeListener.class) {
@@ -1258,6 +1307,9 @@ public abstract class Plot implements AxisChangeListener,
             return false;
         }
         if (!this.drawingSupplier.equals(that.drawingSupplier)) {
+            return false;
+        }
+        if (this.notify != that.notify) {
             return false;
         }
         return true;

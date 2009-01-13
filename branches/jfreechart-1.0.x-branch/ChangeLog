@@ -1,5 +1,27 @@
 2009-01-13  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 2502355:
+    * source/org/jfree/chart/ChartPanel.java
+    (zoomInBoth): Change notify flag to ensure plot sends only one event,
+    (zoomOutBoth): Likewise,
+    (zoom): Likewise,
+    (restoreAutoBounds): Likewise,
+    * source/org/jfree/chart/plot/Plot.java
+    (notify): New field,
+    (Plot): Initialise new field,
+    (isNotify): New method,
+    (setNotify): Likewise,
+    (notifyListeners): Check notify flag,
+    * tests/org/jfree/chart/junit/ChartPanelTests.java
+    (chartChangeEvents): New field,
+    (chartChanged): New method,
+    (test2502355_zoom): New test,
+    (test2502355_zoomInBoth): Likewise,
+    (test2502355_zoomOutBoth): Likewise,
+    (test2502355_restoreAutoBounds): Likewise.
+
+2009-01-13  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/time/TimeSeries.java
     (TimeSeries(Comparable, Class)): Deprecated,
     (TimeSeries(Comparable, String, String, Class)): Likewise,
