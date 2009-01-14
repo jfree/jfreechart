@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,13 +27,14 @@
  * -------------------------
  * LineAndShapeRenderer.java
  * -------------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
  *                   Jeremy Bowman;
  *                   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
+ *                   Peter Kolb (patch 2497611);
  *
  * Changes
  * -------
@@ -87,6 +88,7 @@
  * 27-Sep-2007 : Added option to offset series x-position within category (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  * 26-Jun-2008 : Added crosshair support (DG);
+ * 14-Jan-2009 : Added support for seriesVisible flags (PK);
  *
  */
 
@@ -916,14 +918,20 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
             return;
         }
 
+        int visibleRow = state.getVisibleSeriesIndex(row);
+        if (visibleRow < 0) {
+            return;
+        }
+		int visibleRowCount = state.getVisibleSeriesCount();
+
         PlotOrientation orientation = plot.getOrientation();
 
         // current data point...
         double x1;
         if (this.useSeriesOffset) {
-            x1 = domainAxis.getCategorySeriesMiddle(dataset.getColumnKey(
-                    column), dataset.getRowKey(row), dataset, this.itemMargin,
-                    dataArea, plot.getDomainAxisEdge());
+            x1 = domainAxis.getCategorySeriesMiddle(column,
+                    dataset.getColumnCount(), visibleRow, visibleRowCount,
+                    this.itemMargin, dataArea, plot.getDomainAxisEdge());
         }
         else {
             x1 = domainAxis.getCategoryMiddle(column, getColumnCount(),
@@ -942,8 +950,8 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
                     double x0;
                     if (this.useSeriesOffset) {
                         x0 = domainAxis.getCategorySeriesMiddle(
-                                dataset.getColumnKey(column - 1),
-                                dataset.getRowKey(row), dataset,
+                                column - 1, dataset.getColumnCount(),
+                                visibleRow, visibleRowCount,
                                 this.itemMargin, dataArea,
                                 plot.getDomainAxisEdge());
                     }

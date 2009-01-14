@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ---------------------------------
  * AbstractCategoryItemRenderer.java
  * ---------------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
+ *                   Peter Kolb (patch 2497611);
  *
  * Changes:
  * --------
@@ -96,6 +97,7 @@
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  * 26-Jun-2008 : Added crosshair support (DG);
  * 25-Nov-2008 : Fixed bug in findRangeBounds() method (DG);
+ * 14-Jan-2009 : Update initialise() to store visible series indices (PK);
  *
  */
 
@@ -659,8 +661,20 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             this.rowCount = 0;
             this.columnCount = 0;
         }
-        return createState(info);
-
+        CategoryItemRendererState state = createState(info);
+        int[] visibleSeriesTemp = new int[this.rowCount];
+        int visibleSeriesCount = 0;
+        for (int row = 0; row < this.rowCount; row++){
+        	if (isSeriesVisible(row)) {
+        		visibleSeriesTemp[visibleSeriesCount] = row;
+        		visibleSeriesCount++;
+        	}
+        }
+        int[] visibleSeries = new int[visibleSeriesCount];
+        System.arraycopy(visibleSeriesTemp, 0, visibleSeries, 0,
+                visibleSeriesCount);
+        state.setVisibleSeriesArray(visibleSeries);
+        return state;
     }
 
     /**

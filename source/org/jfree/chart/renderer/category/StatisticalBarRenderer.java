@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,12 @@
  * ---------------------------
  * StatisticalBarRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2008, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2009, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
+ *                   Peter Kolb (patch 2497611);
  *
  * Changes
  * -------
@@ -52,6 +53,7 @@
  * 28-Aug-2007 : Fixed NullPointerException - see bug 1779941 (DG);
  * 14-Nov-2007 : Added errorIndicatorStroke, and fixed bugs with drawBarOutline
  *               and gradientPaintTransformer attributes being ignored (DG);
+ * 14-Jan-2009 : Added support for seriesVisible flags (PK);
  *
  */
 
@@ -204,6 +206,10 @@ public class StatisticalBarRenderer extends BarRenderer
                          int column,
                          int pass) {
 
+        int visibleRow = state.getVisibleSeriesIndex(row);
+        if (visibleRow < 0) {
+            return;
+        }
         // defensive check
         if (!(data instanceof StatisticalCategoryDataset)) {
             throw new IllegalArgumentException(
@@ -214,11 +220,11 @@ public class StatisticalBarRenderer extends BarRenderer
         PlotOrientation orientation = plot.getOrientation();
         if (orientation == PlotOrientation.HORIZONTAL) {
             drawHorizontalItem(g2, state, dataArea, plot, domainAxis,
-                    rangeAxis, statData, row, column);
+                    rangeAxis, statData, visibleRow, row, column);
         }
         else if (orientation == PlotOrientation.VERTICAL) {
             drawVerticalItem(g2, state, dataArea, plot, domainAxis, rangeAxis,
-                    statData, row, column);
+                    statData, visibleRow, row, column);
         }
     }
 
@@ -232,6 +238,7 @@ public class StatisticalBarRenderer extends BarRenderer
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
      * @param dataset  the data.
+     * @param visibleRow  the visible row index.
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      */
@@ -242,6 +249,7 @@ public class StatisticalBarRenderer extends BarRenderer
                                       CategoryAxis domainAxis,
                                       ValueAxis rangeAxis,
                                       StatisticalCategoryDataset dataset,
+                                      int visibleRow,
                                       int row,
                                       int column) {
 
@@ -251,15 +259,16 @@ public class StatisticalBarRenderer extends BarRenderer
         double rectY = domainAxis.getCategoryStart(column, getColumnCount(),
                 dataArea, xAxisLocation);
 
-        int seriesCount = getRowCount();
+        int seriesCount = state.getVisibleSeriesCount() >= 0
+                ? state.getVisibleSeriesCount() : getRowCount();
         int categoryCount = getColumnCount();
         if (seriesCount > 1) {
             double seriesGap = dataArea.getHeight() * getItemMargin()
                                / (categoryCount * (seriesCount - 1));
-            rectY = rectY + row * (state.getBarWidth() + seriesGap);
+            rectY = rectY + visibleRow * (state.getBarWidth() + seriesGap);
         }
         else {
-            rectY = rectY + row * state.getBarWidth();
+            rectY = rectY + visibleRow * state.getBarWidth();
         }
 
         // BAR X
@@ -390,6 +399,7 @@ public class StatisticalBarRenderer extends BarRenderer
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
      * @param dataset  the data.
+     * @param visibleRow  the visible row index.
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      */
@@ -400,6 +410,7 @@ public class StatisticalBarRenderer extends BarRenderer
                                     CategoryAxis domainAxis,
                                     ValueAxis rangeAxis,
                                     StatisticalCategoryDataset dataset,
+                                    int visibleRow,
                                     int row,
                                     int column) {
 
@@ -409,15 +420,16 @@ public class StatisticalBarRenderer extends BarRenderer
         double rectX = domainAxis.getCategoryStart(column, getColumnCount(),
                 dataArea, xAxisLocation);
 
-        int seriesCount = getRowCount();
+        int seriesCount = state.getVisibleSeriesCount() >= 0
+                ? state.getVisibleSeriesCount() : getRowCount();
         int categoryCount = getColumnCount();
         if (seriesCount > 1) {
             double seriesGap = dataArea.getWidth() * getItemMargin()
                                / (categoryCount * (seriesCount - 1));
-            rectX = rectX + row * (state.getBarWidth() + seriesGap);
+            rectX = rectX + visibleRow * (state.getBarWidth() + seriesGap);
         }
         else {
-            rectX = rectX + row * state.getBarWidth();
+            rectX = rectX + visibleRow * state.getBarWidth();
         }
 
         // BAR Y

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * ------------------------------
  * CategoryItemRendererState.java
  * ------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Peter Kolb (patch 2497611);
  *
  * Changes (since 20-Oct-2003):
  * ----------------------------
@@ -38,6 +38,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 01-Dec-2006 : Updated API docs (DG);
  * 26-Jun-2008 : Added CrosshairState (DG);
+ * 14-Jan-2009 : Added visibleSeries[] array (PK);
  *
  */
 
@@ -58,6 +59,9 @@ public class CategoryItemRendererState extends RendererState {
 
     /** The series running total. */
     private double seriesRunningTotal;
+
+    /** The array with the indices of the visible series.*/
+    private int[] visibleSeries;
 
     /**
      * State information for crosshairs in the plot (this is updated by the
@@ -149,6 +153,58 @@ public class CategoryItemRendererState extends RendererState {
      */
     public void setCrosshairState(CategoryCrosshairState state) {
         this.crosshairState = state;
+    }
+
+    /**
+     * Returns the index of the row relative to the visible rows.  If no
+     * visible rows have been specified, the original row index is returned.
+     * If the row index is not included in the array of visible rows,
+     * -1 is returned.
+     *
+     * @param rowIndex  the row index.
+     *
+     * @return The new row index or -1.
+     *
+     * @since 1.0.13
+     */
+    public int getVisibleSeriesIndex(int rowIndex) {
+    	if (this.visibleSeries == null) {
+    	    return rowIndex;
+    	}
+		int index = -1;
+		for (int vRow = 0; vRow < this.visibleSeries.length ; vRow++){
+			if (this.visibleSeries[vRow] == rowIndex) {
+				index = vRow;
+				break;
+			}
+		}
+		return index;
+    }
+
+    /**
+     * Returns the number of visible series or -1 if no visible series have
+     * been specified.
+     *
+     * @return The number or -1.
+     *
+     * @since 1.0.13
+     */
+    public int getVisibleSeriesCount() {
+    	if (this.visibleSeries == null) {
+    	    return -1;
+    	}
+    	return this.visibleSeries.length;
+    }
+
+    /**
+     * Sets an array with the indices of the visible rows.
+     *
+     * @param visibleSeries the array (<code>null</code> permitted).
+     *
+     * @since 1.0.13
+     */
+    public void setVisibleSeriesArray(int[] visibleSeries) {
+        this.visibleSeries = visibleSeries;
     }
 
 }

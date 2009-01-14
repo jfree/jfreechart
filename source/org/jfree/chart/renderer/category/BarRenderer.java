@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ----------------
  * BarRenderer.java
  * ----------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
+ *                   Peter Kolb (patch 2497611);
  *
  * Changes
  * -------
@@ -86,6 +87,7 @@
  * 24-Jun-2008 : Added barPainter mechanism (DG);
  * 26-Jun-2008 : Added crosshair support (DG);
  * 13-Aug-2008 : Added shadowPaint attribute (DG);
+ * 14-Jan-2009 : Added support for seriesVisible flags (PK);
  *
  */
 
@@ -748,7 +750,8 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         CategoryDataset dataset = plot.getDataset(rendererIndex);
         if (dataset != null) {
             int columns = dataset.getColumnCount();
-            int rows = dataset.getRowCount();
+            int rows = state.getVisibleSeriesCount() >= 0
+                    ? state.getVisibleSeriesCount() : dataset.getRowCount();
             double space = 0.0;
             PlotOrientation orientation = plot.getOrientation();
             if (orientation == PlotOrientation.HORIZONTAL) {
@@ -810,7 +813,8 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         }
         double barW0 = domainAxis.getCategoryStart(column, getColumnCount(),
                 dataArea, plot.getDomainAxisEdge());
-        int seriesCount = getRowCount();
+        int seriesCount = state.getVisibleSeriesCount() >= 0
+                ? state.getVisibleSeriesCount() : getRowCount();
         int categoryCount = getColumnCount();
         if (seriesCount > 1) {
             double seriesGap = space * getItemMargin()
@@ -959,6 +963,12 @@ public class BarRenderer extends AbstractCategoryItemRenderer
                          int column,
                          int pass) {
 
+        // nothing is drawn if the row index is not included in the list with
+        // the indices of the visible rows...
+        int visibleRow = state.getVisibleSeriesIndex(row);
+        if (visibleRow < 0) {
+            return;
+        }
         // nothing is drawn for null values...
         Number dataValue = dataset.getValue(row, column);
         if (dataValue == null) {
@@ -968,7 +978,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         final double value = dataValue.doubleValue();
         PlotOrientation orientation = plot.getOrientation();
         double barW0 = calculateBarW0(plot, orientation, dataArea, domainAxis,
-                state, row, column);
+                state, visibleRow, column);
         double[] barL0L1 = calculateBarL0L1(value);
         if (barL0L1 == null) {
             return;  // the bar is not visible

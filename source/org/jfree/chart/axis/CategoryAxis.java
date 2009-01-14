@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * -----------------
  * CategoryAxis.java
  * -----------------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Pady Srinivasan (patch 1217634);
+ *                   Peter Kolb (patch 2497611);
  *
  * Changes
  * -------
@@ -88,6 +89,8 @@
  *               calculateTextBlockWidth() (DG);
  * 26-Jun-2008 : Added new getCategoryMiddle() method (DG);
  * 27-Oct-2008 : Set font on Graphics2D when creating category labels (DG);
+ * 14-Jan-2009 : Added new variant of getCategorySeriesMiddle() to make it
+ *               simpler for renderers with hidden series (PK);
  *
  */
 
@@ -706,6 +709,40 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         int categoryCount = dataset.getColumnCount();
         int seriesIndex = dataset.getRowIndex(seriesKey);
         int seriesCount = dataset.getRowCount();
+        double start = getCategoryStart(categoryIndex, categoryCount, area,
+                edge);
+        double end = getCategoryEnd(categoryIndex, categoryCount, area, edge);
+        double width = end - start;
+        if (seriesCount == 1) {
+            return start + width / 2.0;
+        }
+        else {
+            double gap = (width * itemMargin) / (seriesCount - 1);
+            double ww = (width * (1 - itemMargin)) / seriesCount;
+            return start + (seriesIndex * (ww + gap)) + ww / 2.0;
+        }
+    }
+
+    /**
+     * Returns the middle coordinate (in Java2D space) for a series within a
+     * category.
+     *
+     * @param categoryIndex  the category index.
+     * @param categoryCount  the category count.
+     * @param seriesIndex the series index.
+     * @param seriesCount the series count.
+     * @param itemMargin  the item margin (0.0 <= itemMargin < 1.0);
+     * @param area  the area (<code>null</code> not permitted).
+     * @param edge  the edge (<code>null</code> not permitted).
+     *
+     * @return The coordinate in Java2D space.
+     *
+     * @since 1.0.13
+     */
+    public double getCategorySeriesMiddle(int categoryIndex, int categoryCount,
+            int seriesIndex, int seriesCount, double itemMargin,
+            Rectangle2D area, RectangleEdge edge) {
+
         double start = getCategoryStart(categoryIndex, categoryCount, area,
                 edge);
         double end = getCategoryEnd(categoryIndex, categoryCount, area, edge);
