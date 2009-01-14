@@ -203,9 +203,6 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         // current data point...
         double x1;
         if (getUseSeriesOffset()) {
-            /*x1 = domainAxis.getCategorySeriesMiddle(dataset.getColumnKey(
-                    column), dataset.getRowKey(row), dataset, getItemMargin(),
-                    dataArea, plot.getDomainAxisEdge());*/
             x1 = domainAxis.getCategorySeriesMiddle(column,dataset.getColumnCount(),
 					visibleRow, visibleRowCount,
                     getItemMargin(), dataArea, plot.getDomainAxisEdge());

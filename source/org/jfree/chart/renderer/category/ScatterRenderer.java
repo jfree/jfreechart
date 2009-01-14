@@ -381,7 +381,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
         if (visibleRow < 0) {
             return;
         }
-		int visibleRowCount = state.getVisibleSeriesCount();
+        int visibleRowCount = state.getVisibleSeriesCount();
 
         PlotOrientation orientation = plot.getOrientation();
 
@@ -395,13 +395,9 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
             // current data point...
             double x1;
             if (this.useSeriesOffset) {
-                /*x1 = domainAxis.getCategorySeriesMiddle(dataset.getColumnKey(
-                        column), dataset.getRowKey(row), dataset,
-                        this.itemMargin, dataArea, plot.getDomainAxisEdge());*/
                 x1 = domainAxis.getCategorySeriesMiddle(column,dataset.getColumnCount(),
 						visibleRow, visibleRowCount,
                         this.itemMargin, dataArea, plot.getDomainAxisEdge());
-
             }
             else {
                 x1 = domainAxis.getCategoryMiddle(column, getColumnCount(),
