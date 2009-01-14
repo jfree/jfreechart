@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * LogFormat.java
  * --------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,8 @@
  * 02-Aug-2007 : Version 1 (DG);
  * 19-Feb-2008 : Implemented equals() and clone(), and added new powerLabel
  *               attribute as per Feature Request 1886036 (DG);
+ * 14-Jan-2009 : Added default constructor, and accessor methods for
+ *               exponent formatter (DG);
  *
  */
 
@@ -75,7 +77,16 @@ public class LogFormat extends NumberFormat {
     private boolean showBase;
 
     /** The number formatter for the exponent. */
-    private NumberFormat formatter = new DecimalFormat("0.0");
+    private NumberFormat formatter = new DecimalFormat("0.0#");
+
+    /**
+     * Creates a new instance using base 10.
+     *
+     * @since 1.0.13
+     */
+    public LogFormat() {
+        this(10.0, "10", true);
+    }
 
     /**
      * Creates a new instance.
@@ -113,6 +124,31 @@ public class LogFormat extends NumberFormat {
         this.baseLabel = baseLabel;
         this.showBase = showBase;
         this.powerLabel = powerLabel;
+    }
+
+    /**
+     * Returns the number format used for the exponent.
+     *
+     * @return The number format (never <code>null</code>).
+     *
+     * @since 1.0.13.
+     */
+    public NumberFormat getExponentFormat() {
+        return (NumberFormat) this.formatter.clone();
+    }
+
+    /**
+     * Sets the number format used for the exponent.
+     *
+     * @param format  the formatter (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    public void setExponentFormat(NumberFormat format) {
+        if (format == null) {
+            throw new IllegalArgumentException("Null 'format' argument.");
+        }
+        this.formatter = format;
     }
 
     /**
@@ -205,6 +241,9 @@ public class LogFormat extends NumberFormat {
             return false;
         }
         if (this.showBase != that.showBase) {
+            return false;
+        }
+        if (!this.formatter.equals(that.formatter)) {
             return false;
         }
         return super.equals(obj);
