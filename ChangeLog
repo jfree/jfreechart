@@ -1,3 +1,18 @@
+2009-01-14  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/axis/LogAxis.java
+    (refreshTicksHorizontal): Read minorTickCount from the tick unit,
+    (refreshTicksVertical): Likewise,
+    (createLogTickUnits): Corrected the tick unit sizes and added
+    minor tick counts,
+    * source/org/jfree/chart/util/LogFormat.java
+    (LogFormat): New constructor,
+    (getExponentFormat): New method,
+    (setExponentFormat): Likewise,
+    (equals): Test formatter field,
+    * tests/org/jfree/chart/util/junit/LogFormatTests.java
+    (testEquals): Check formatter field.    
+
 2009-01-13  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartPanel.java

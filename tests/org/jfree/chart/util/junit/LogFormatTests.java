@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * LogFormatTests.java
  * -------------------
- * (C) Copyright 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008, 2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 08-Feb-2008 : Version 1 (DG);
+ * 14-Jan-2009 : Updated testEquals() for new field (DG);
  *
  */
 
@@ -46,6 +47,7 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.text.DecimalFormat;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -97,6 +99,11 @@ public class LogFormatTests extends TestCase {
         f1 = new LogFormat(11.0, "11", false);
         assertFalse(f1.equals(f2));
         f2 = new LogFormat(11.0, "11", false);
+        assertTrue(f1.equals(f2));
+
+        f1.setExponentFormat(new DecimalFormat("0.000"));
+        assertFalse(f1.equals(f2));
+        f2.setExponentFormat(new DecimalFormat("0.000"));
         assertTrue(f1.equals(f2));
     }
 
