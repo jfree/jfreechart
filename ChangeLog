@@ -1,5 +1,15 @@
 2009-01-16  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 2490803:
+    * source/org/jfree/chart/axis/PeriodAxis.java
+    (getRange): Removed, rely on superclass implementation,
+    (setRange): Update range with end points of whole periods,
+    (drawTickMarksHorizontal): Include first and last ticks,
+    * tests/org/jfree/chart/axis/junit/PeriodAxisTests.java
+    (test2490803): New test method.
+
+2009-01-16  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/ChartPanel.java
     (DEFAULT_BUFFER_USED): Changed default to true,
     (zoomOutlinePaint): New field,

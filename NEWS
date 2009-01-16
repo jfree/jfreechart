@@ -18,6 +18,11 @@ work around a regression in JRE 1.6.0_10.  Regarding this final point:
 For most usage, this should improve performance (but at the cost of using more
 memory for each ChartPanel used in your application).
 
+Bug Fixes:
+
+2490803 : PeriodAxis.setRange() method doesn't take into account that the axis
+          displays whole periods;
+          
 
 JFreeChart 1.0.12
 -----------------
