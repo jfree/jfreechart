@@ -1139,7 +1139,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     public Paint getZoomFillPaint() {
-        return zoomFillPaint;
+        return this.zoomFillPaint;
     }
 
     /**
@@ -1652,7 +1652,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         // this is we are using XOR mode, which we do when we're not using
         // the buffer (if there is a buffer, then at the end of this method we
         // just trigger a repaint)
-        if (!useBuffer) {
+        if (!this.useBuffer) {
             drawZoomRectangle(g2, true);
         }
 
