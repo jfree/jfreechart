@@ -1,3 +1,24 @@
+JFreeChart 1.0.13
+-----------------
+?? ??? 2009
+
+This release contains enhancements to many of the CategoryItemRenderer
+implementations to ensure that they respect the 'seriesVisible' flags, some
+important fixes in the LogAxis class, an improvement to the TimeSeries class
+so that it is no longer necessary to specify the time period type in the
+constructor, plus some changes to the ChartPanel class that help to
+work around a regression in JRE 1.6.0_10.  Regarding this final point:
+
+- the default value for the useBuffer flag has changed to true, which means
+  that all charts will, by default, be rendered into an off-screen image
+  before being displayed in the ChartPanel;
+- the zoom rectangle is drawn using XOR *only* when the useBuffer flag has
+  been set to false.
+
+For most usage, this should improve performance (but at the cost of using more
+memory for each ChartPanel used in your application).
+
+
 JFreeChart 1.0.12
 -----------------
 31 December 2008
