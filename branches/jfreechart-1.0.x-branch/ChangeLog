@@ -1,3 +1,22 @@
+2009-01-16  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/ChartPanel.java
+    (DEFAULT_BUFFER_USED): Changed default to true,
+    (zoomOutlinePaint): New field,
+    (zoomFillPaint): Likewise,
+    (ChartPanel): Initialise new fields,
+    (getZoomFillPaint): New method,
+    (setZoomFillPaint): Likewise,
+    (getZoomOutlinePaint): Likewise,
+    (setZoomOutlinePaint): Likewise,
+    (paintComponent): Update drawing of zoom rectangle,
+    (mouseDragged): If useBuffer is true, repaint chart rather than using XOR
+    for zoom rectangle,
+    (mouseReleased): Likewise,
+    (drawZoomRectangle): Only use XOR if useBuffer is false,
+    (writeObject): Handle new fields,
+    (readObject): Likewise.
+
 2009-01-14  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 2497611 by Peter Kolb:

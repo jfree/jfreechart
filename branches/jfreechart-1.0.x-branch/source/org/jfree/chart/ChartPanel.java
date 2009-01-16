@@ -143,9 +143,10 @@
  * 18-Sep-2008 : Modified creation of chart buffer (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
- * 13-Jan-2008 : Fixed zooming methods to trigger only one plot
+ * 13-Jan-2009 : Fixed zooming methods to trigger only one plot
  *               change event (DG);
- *
+ * 16-Jan-2009 : Use XOR for zoom rectangle only if useBuffer is false (DG);
+ * 
  */
 
 package org.jfree.chart;
@@ -158,6 +159,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Paint;
 import java.awt.Point;
 import java.awt.Transparency;
 import java.awt.event.ActionEvent;
@@ -204,6 +206,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
 import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.io.SerialUtilities;
 import org.jfree.ui.ExtensionFileFilter;
 
 /**
@@ -221,7 +224,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private static final long serialVersionUID = 6046366297214274674L;
 
     /** Default setting for buffer usage. */
-    public static final boolean DEFAULT_BUFFER_USED = false;
+    public static final boolean DEFAULT_BUFFER_USED = true;
 
     /** The default panel width. */
     public static final int DEFAULT_WIDTH = 680;
@@ -448,6 +451,20 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     private boolean zoomAroundAnchor;
 
+    /**
+     * The paint used to draw the zoom rectangle outline.
+     *
+     * @since 1.0.13
+     */
+    private transient Paint zoomOutlinePaint;
+
+    /**
+     * The zoom fill paint (should use transparency).
+     *
+     * @since 1.0.13
+     */
+    private transient Paint zoomFillPaint;
+
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
             = ResourceBundleWrapper.getBundle(
@@ -616,6 +633,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.ownToolTipReshowDelay = ttm.getReshowDelay();
 
         this.zoomAroundAnchor = false;
+        this.zoomOutlinePaint = Color.blue;
+        this.zoomFillPaint = new Color(0, 0, 255, 63);
     }
 
     /**
@@ -1110,6 +1129,65 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
+     * Returns the zoom rectangle fill paint.
+     *
+     * @return The zoom rectangle fill paint (never <code>null</code>).
+     *
+     * @see #setZoomFillPaint(java.awt.Paint)
+     * @see #setFillZoomRectangle(boolean)
+     *
+     * @since 1.0.13
+     */
+    public Paint getZoomFillPaint() {
+        return zoomFillPaint;
+    }
+
+    /**
+     * Sets the zoom rectangle fill paint.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @see #getZoomFillPaint()
+     * @see #getFillZoomRectangle()
+     *
+     * @since 1.0.13
+     */
+    public void setZoomFillPaint(Paint paint) {
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
+        this.zoomFillPaint = paint;
+    }
+
+    /**
+     * Returns the zoom rectangle outline paint.
+     *
+     * @return The zoom rectangle outline paint (never <code>null</code>).
+     *
+     * @see #setZoomOutlinePaint(java.awt.Paint)
+     * @see #setFillZoomRectangle(boolean)
+     *
+     * @since 1.0.13
+     */
+    public Paint getZoomOutlinePaint() {
+        return this.zoomOutlinePaint;
+    }
+
+    /**
+     * Sets the zoom rectangle outline paint.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @see #getZoomOutlinePaint()
+     * @see #getFillZoomRectangle()
+     *
+     * @since 1.0.13
+     */
+    public void setZoomOutlinePaint(Paint paint) {
+        this.zoomOutlinePaint = paint;
+    }
+
+    /**
      * Switches the display of tooltips for the panel on or off.  Note that
      * tooltips can only be displayed if the chart has been configured to
      * generate tooltip items.
@@ -1369,8 +1447,10 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
         }
 
-        // Redraw the zoom rectangle (if present)
-        drawZoomRectangle(g2);
+        // redraw the zoom rectangle (if present) - if useBuffer is false,
+        // we use XOR so we can XOR the rectangle away again without redrawing
+        // the chart
+        drawZoomRectangle(g2, !this.useBuffer);
 
         g2.dispose();
 
@@ -1568,8 +1648,13 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         }
         Graphics2D g2 = (Graphics2D) getGraphics();
 
-        // Erase the previous zoom rectangle (if any)...
-        drawZoomRectangle(g2);
+        // erase the previous zoom rectangle (if any).  We only need to do
+        // this is we are using XOR mode, which we do when we're not using
+        // the buffer (if there is a buffer, then at the end of this method we
+        // just trigger a repaint)
+        if (!useBuffer) {
+            drawZoomRectangle(g2, true);
+        }
 
         boolean hZoom = false;
         boolean vZoom = false;
@@ -1605,8 +1690,14 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         }
 
         // Draw the new zoom rectangle...
-        drawZoomRectangle(g2);
-
+        if (this.useBuffer) {
+            repaint();
+        }
+        else {
+            // with no buffer, we use XOR to draw the rectangle "over" the
+            // chart...
+            drawZoomRectangle(g2, true);
+        }
         g2.dispose();
 
     }
@@ -1680,9 +1771,14 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                 this.zoomRectangle = null;
             }
             else {
-                // Erase the zoom rectangle
+                // erase the zoom rectangle
                 Graphics2D g2 = (Graphics2D) getGraphics();
-                drawZoomRectangle(g2);
+                if (this.useBuffer) {
+                    repaint();
+                }
+                else {
+                    drawZoomRectangle(g2, true);
+                }
                 g2.dispose();
                 this.zoomPoint = null;
                 this.zoomRectangle = null;
@@ -2191,20 +2287,27 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * of the canvas.
      *
      * @param g2 the graphics device.
+     * @param xor  use XOR for drawing?
      */
-    private void drawZoomRectangle(Graphics2D g2) {
-        // Set XOR mode to draw the zoom rectangle
-        g2.setXORMode(Color.gray);
+    private void drawZoomRectangle(Graphics2D g2, boolean xor) {
         if (this.zoomRectangle != null) {
+            if (xor) {
+                 // Set XOR mode to draw the zoom rectangle
+                g2.setXORMode(Color.gray);
+            }
             if (this.fillZoomRectangle) {
+                g2.setPaint(this.zoomFillPaint);
                 g2.fill(this.zoomRectangle);
             }
             else {
+                g2.setPaint(this.zoomOutlinePaint);
                 g2.draw(this.zoomRectangle);
             }
+            if (xor) {
+                // Reset to the default 'overwrite' mode
+                g2.setPaintMode();
+            }
         }
-        // Reset to the default 'overwrite' mode
-        g2.setPaintMode();
     }
 
     /**
@@ -2628,6 +2731,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
+        SerialUtilities.writePaint(this.zoomFillPaint, stream);
+        SerialUtilities.writePaint(this.zoomOutlinePaint, stream);
     }
 
     /**
@@ -2641,6 +2746,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
+        this.zoomFillPaint = SerialUtilities.readPaint(stream);
+        this.zoomOutlinePaint = SerialUtilities.readPaint(stream);
 
         // we create a new but empty chartMouseListeners list
         this.chartMouseListeners = new EventListenerList();
@@ -2651,6 +2758,5 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         }
 
     }
-
 
 }
