@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PeriodAxis.java
  * ---------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -51,6 +51,7 @@
  * 31-Jul-2007 : Fix for inverted axis labelling (see bug 1763413) (DG);
  * 08-Apr-2008 : Notify listeners in setRange(Range, boolean, boolean) - fixes
  *               bug 1932146 (DG);
+ * 16-Jan-2009 : Fixed bug 2490803, a problem in the setRange() method (DG);
  *
  */
 
@@ -497,17 +498,6 @@ public class PeriodAxis extends ValueAxis
     }
 
     /**
-     * Returns the range for the axis.
-     *
-     * @return The axis range (never <code>null</code>).
-     */
-    public Range getRange() {
-        // TODO: find a cleaner way to do this...
-        return new Range(this.first.getFirstMillisecond(this.calendar),
-                this.last.getLastMillisecond(this.calendar));
-    }
-
-    /**
      * Sets the range for the axis, if requested, sends an
      * {@link AxisChangeEvent} to all registered listeners.  As a side-effect,
      * the auto-range flag is set to <code>false</code> (optional).
@@ -520,16 +510,14 @@ public class PeriodAxis extends ValueAxis
      */
     public void setRange(Range range, boolean turnOffAutoRange,
                          boolean notify) {
-        super.setRange(range, turnOffAutoRange, false);
         long upper = Math.round(range.getUpperBound());
         long lower = Math.round(range.getLowerBound());
         this.first = createInstance(this.autoRangeTimePeriodClass,
                 new Date(lower), this.timeZone);
         this.last = createInstance(this.autoRangeTimePeriodClass,
                 new Date(upper), this.timeZone);
-        if (notify) {
-            notifyListeners(new AxisChangeEvent(this));
-        }
+        super.setRange(new Range(this.first.getFirstMillisecond(),
+                this.last.getLastMillisecond() + 1.0), turnOffAutoRange, notify);
     }
 
     /**
@@ -690,7 +678,7 @@ public class PeriodAxis extends ValueAxis
         Line2D inside = null;
         Line2D outside = null;
         long firstOnAxis = getFirst().getFirstMillisecond(this.calendar);
-        long lastOnAxis = getLast().getLastMillisecond(this.calendar);
+        long lastOnAxis = getLast().getLastMillisecond(this.calendar) + 1;
         while (t0 <= lastOnAxis) {
             ticks.add(new NumberTick(new Double(t0), "", TextAnchor.CENTER,
                     TextAnchor.CENTER, 0.0));
@@ -703,7 +691,7 @@ public class PeriodAxis extends ValueAxis
                 inside = new Line2D.Double(x0, y0, x0, y0 - insideLength);
                 outside = new Line2D.Double(x0, y0, x0, y0 + outsideLength);
             }
-            if (t0 > firstOnAxis) {
+            if (t0 >= firstOnAxis) {
                 g2.setPaint(getTickMarkPaint());
                 g2.setStroke(getTickMarkStroke());
                 g2.draw(inside);

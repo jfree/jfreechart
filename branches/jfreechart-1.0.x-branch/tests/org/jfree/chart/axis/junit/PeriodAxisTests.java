@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * PeriodAxisTests.java
  * --------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 10-Jun-2003 : Version 1 (DG);
  * 07-Jan-2005 : Added test for hashCode() method (DG);
  * 08-Apr-2008 : Added test1932146() (DG);
+ * 16-Jan-2009 : Added test2490803() (DG);
  *
  */
 
@@ -52,6 +53,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
@@ -63,6 +66,7 @@ import org.jfree.chart.axis.PeriodAxis;
 import org.jfree.chart.axis.PeriodAxisLabelInfo;
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.event.AxisChangeListener;
+import org.jfree.data.Range;
 import org.jfree.data.time.DateRange;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Minute;
@@ -271,6 +275,42 @@ public class PeriodAxisTests extends TestCase implements AxisChangeListener {
         this.lastEvent = null;
         axis.setRange(new DateRange(0L, 1000L));
         assertTrue(this.lastEvent != null);
+    }
+
+    private static final double EPSILON = 0.0000000001;
+
+    /**
+     * A test for the setRange() method (because the axis shows whole time
+     * periods, the range set for the axis will most likely be wider than the
+     * one specified).
+     */
+    public void test2490803() {
+        Locale savedLocale = Locale.getDefault();
+        TimeZone savedTimeZone = TimeZone.getDefault();
+        try {
+            Locale.setDefault(Locale.FRANCE);
+            TimeZone.setDefault(TimeZone.getTimeZone("Europe/Paris"));
+            GregorianCalendar c0 = new GregorianCalendar();
+            c0.clear();
+            /* c0.set(2009, Calendar.JANUARY, 16, 12, 34, 56);
+            System.out.println(c0.getTime().getTime());
+            c0.clear();
+            c0.set(2009, Calendar.JANUARY, 17, 12, 34, 56);
+            System.out.println(c0.getTime().getTime()); */
+            PeriodAxis axis = new PeriodAxis("TestAxis");
+            axis.setRange(new Range(1232105696000L, 1232192096000L), false,
+                    false);
+            Range r = axis.getRange();
+            Day d0 = new Day(16, 1, 2009);
+            Day d1 = new Day(17, 1, 2009);
+            assertEquals(d0.getFirstMillisecond(), r.getLowerBound(), EPSILON);
+            assertEquals(d1.getLastMillisecond() + 1.0, r.getUpperBound(),
+                    EPSILON);
+        }
+        finally {
+            TimeZone.setDefault(savedTimeZone);
+            Locale.setDefault(savedLocale);
+        }
     }
 
 }
