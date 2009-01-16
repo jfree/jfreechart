@@ -123,15 +123,14 @@ public class ChartPanelTests extends TestCase
     public void testGetListeners() {
         ChartPanel p = new ChartPanel(null);
         p.addChartMouseListener(this);
-        EventListener[] listeners = p.getListeners(
-                (Class) ChartMouseListener.class);
+        EventListener[] listeners = p.getListeners(ChartMouseListener.class);
         assertEquals(1, listeners.length);
         assertEquals(this, listeners[0]);
         // try a listener type that isn't registered
-        listeners = p.getListeners((Class) CaretListener.class);
+        listeners = p.getListeners(CaretListener.class);
         assertEquals(0, listeners.length);
         p.removeChartMouseListener(this);
-        listeners = p.getListeners((Class) ChartMouseListener.class);
+        listeners = p.getListeners(ChartMouseListener.class);
         assertEquals(0, listeners.length);
 
         // try a null argument
