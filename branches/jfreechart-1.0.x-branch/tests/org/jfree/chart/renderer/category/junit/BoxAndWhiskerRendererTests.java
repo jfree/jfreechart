@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * BoxAndWhiskerRendererTests.java
  * -------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@
  * 08-Oct-2007 : Added tests for null items in dataset (DG);
  * 15-Jan-2008 : Updated testEquals() (DG);
  * 23-Apr-2008 : Added testPublicCloneable() (DG);
+ * 21-Jan-2009 : Updated testEquals() for new fields (DG);
  *
  */
 
@@ -129,6 +130,16 @@ public class BoxAndWhiskerRendererTests extends TestCase {
         r1.setMaximumBarWidth(0.99);
         assertFalse(r1.equals(r2));
         r2.setMaximumBarWidth(0.99);
+        assertTrue(r1.equals(r2));
+
+        r1.setMeanVisible(false);
+        assertFalse(r1.equals(r2));
+        r2.setMeanVisible(false);
+        assertTrue(r1.equals(r2));
+
+        r1.setMedianVisible(false);
+        assertFalse(r1.equals(r2));
+        r2.setMedianVisible(false);
         assertTrue(r1.equals(r2));
     }
 
