@@ -1,5 +1,21 @@
 2009-01-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
+    (medianVisible): New field,
+    (meanVisible): Likewise,
+    (BoxAndWhiskerRenderer): Initialise new fields,
+    (isMeanVisible): New method,
+    (setMeanVisible): Likewise,
+    (isMedianVisible): New method,
+    (setMedianVisible): Likewise,
+    (drawHorizontalItem): Updated to check new flags,
+    (drawVerticalItem): Likewise,
+    (equals): Updated to check new fields,
+    * tests/org/jfree/chart/renderer/category/junit/BoxAndWhiskerRendererTests.java
+    (testEquals): Check new fields.
+
+2009-01-21  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
     (drawRangeLine): New method,
     * source/org/jfree/chart/plot/CategoryPlot.java
