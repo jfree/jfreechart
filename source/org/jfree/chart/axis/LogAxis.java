@@ -49,9 +49,10 @@
  *               see patch 1918209 by Andrew Mickish (DG);
  * 25-Sep-2008 : Moved minor tick fields up to superclass, see patch 1934255
  *               by Peter Kolb (DG);
- * 14-Jan-2008 : Fetch minor ticks from TickUnit, and corrected
- *               createLogTickUnits() (DG); 
- *
+ * 14-Jan-2009 : Fetch minor ticks from TickUnit, and corrected
+ *               createLogTickUnits() (DG);
+ * 21-Jan-2009 : No need to call setMinorTickCount() in constructor (DG);
+ * 
  */
 
 package org.jfree.chart.axis;
@@ -116,8 +117,7 @@ public class LogAxis extends ValueAxis {
     public LogAxis(String label) {
         super(label, createLogTickUnits(Locale.getDefault()));
         setDefaultAutoRange(new Range(0.01, 1.0));
-        this.tickUnit = new NumberTickUnit(1.0, new DecimalFormat("0.#"));
-        setMinorTickCount(9);
+        this.tickUnit = new NumberTickUnit(1.0, new DecimalFormat("0.#"), 9);
     }
 
     /**

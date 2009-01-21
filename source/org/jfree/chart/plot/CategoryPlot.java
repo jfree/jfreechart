@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryPlot.java
  * -----------------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jeremy Bowman;
@@ -165,6 +165,7 @@
  * 15-Dec-2008 : Cleaned up grid drawing methods (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 21-Jan-2009 : Added rangeMinorGridlinesVisible flag (DG);
  *
  */
 
@@ -208,12 +209,14 @@ import org.jfree.chart.axis.AxisSpace;
 import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.TickType;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.axis.ValueTick;
 import org.jfree.chart.event.ChartChangeEventType;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
+import org.jfree.chart.renderer.category.AbstractCategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRendererState;
 import org.jfree.chart.util.ResourceBundleWrapper;
@@ -363,6 +366,28 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     private transient Paint domainGridlinePaint;
 
     /**
+     * A flag that controls whether or not the zero baseline against the range
+     * axis is visible.
+     *
+     * @since 1.0.13
+     */
+    private boolean rangeZeroBaselineVisible;
+
+    /**
+     * The stroke used for the zero baseline against the range axis.
+     *
+     * @since 1.0.13
+     */
+    private transient Stroke rangeZeroBaselineStroke;
+
+    /**
+     * The paint used for the zero baseline against the range axis.
+     *
+     * @since 1.0.13
+     */
+    private transient Paint rangeZeroBaselinePaint;
+
+    /**
      * A flag that controls whether the grid-lines for the range axis are
      * visible.
      */
@@ -373,6 +398,28 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
 
     /** The paint used to draw the range axis grid-lines. */
     private transient Paint rangeGridlinePaint;
+
+    /**
+     * A flag that controls whether or not gridlines are shown for the minor
+     * tick values on the primary range axis.
+     * 
+     * @since 1.0.13
+     */
+    private boolean rangeMinorGridlinesVisible;
+
+    /**
+     * The stroke used to draw the range minor grid-lines.
+     *
+     * @since 1.0.13
+     */
+    private transient Stroke rangeMinorGridlineStroke;
+
+    /**
+     * The paint used to draw the range minor grid-lines.
+     *
+     * @since 1.0.13
+     */
+    private transient Paint rangeMinorGridlinePaint;
 
     /** The anchor value. */
     private double anchorValue;
@@ -551,19 +598,23 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         this.domainGridlineStroke = DEFAULT_GRIDLINE_STROKE;
         this.domainGridlinePaint = DEFAULT_GRIDLINE_PAINT;
 
+        this.rangeZeroBaselineVisible = false;
+        this.rangeZeroBaselinePaint = Color.black;
+        this.rangeZeroBaselineStroke = new BasicStroke(0.5f);
+
         this.rangeGridlinesVisible = DEFAULT_RANGE_GRIDLINES_VISIBLE;
         this.rangeGridlineStroke = DEFAULT_GRIDLINE_STROKE;
         this.rangeGridlinePaint = DEFAULT_GRIDLINE_PAINT;
 
+        this.rangeMinorGridlinesVisible = false;
+        this.rangeMinorGridlineStroke = DEFAULT_GRIDLINE_STROKE;
+        this.rangeMinorGridlinePaint = Color.white;
+        
         this.foregroundDomainMarkers = new HashMap();
         this.backgroundDomainMarkers = new HashMap();
         this.foregroundRangeMarkers = new HashMap();
         this.backgroundRangeMarkers = new HashMap();
 
-        Marker baseline = new ValueMarker(0.0, new Color(0.8f, 0.8f, 0.8f,
-                0.5f), new BasicStroke(1.0f), new Color(0.85f, 0.85f, 0.95f,
-                0.5f), new BasicStroke(1.0f), 0.6f);
-        addRangeMarker(baseline, Layer.BACKGROUND);
 
         this.anchorValue = 0.0;
 
@@ -1832,6 +1883,99 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
+     * Returns a flag that controls whether or not a zero baseline is
+     * displayed for the range axis.
+     *
+     * @return A boolean.
+     *
+     * @see #setRangeZeroBaselineVisible(boolean)
+     *
+     * @since 1.0.13
+     */
+    public boolean isRangeZeroBaselineVisible() {
+        return this.rangeZeroBaselineVisible;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the zero baseline is
+     * displayed for the range axis, and sends a {@link PlotChangeEvent} to
+     * all registered listeners.
+     *
+     * @param visible  the flag.
+     *
+     * @see #isRangeZeroBaselineVisible()
+     *
+     * @since 1.0.13
+     */
+    public void setRangeZeroBaselineVisible(boolean visible) {
+        this.rangeZeroBaselineVisible = visible;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the stroke used for the zero baseline against the range axis.
+     *
+     * @return The stroke (never <code>null</code>).
+     *
+     * @see #setRangeZeroBaselineStroke(Stroke)
+     *
+     * @since 1.0.13
+     */
+    public Stroke getRangeZeroBaselineStroke() {
+        return this.rangeZeroBaselineStroke;
+    }
+
+    /**
+     * Sets the stroke for the zero baseline for the range axis,
+     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param stroke  the stroke (<code>null</code> not permitted).
+     *
+     * @see #getRangeZeroBaselineStroke()
+     *
+     * @since 1.0.13
+     */
+    public void setRangeZeroBaselineStroke(Stroke stroke) {
+        if (stroke == null) {
+            throw new IllegalArgumentException("Null 'stroke' argument.");
+        }
+        this.rangeZeroBaselineStroke = stroke;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the paint for the zero baseline (if any) plotted against the
+     * range axis.
+     *
+     * @return The paint (never <code>null</code>).
+     *
+     * @see #setRangeZeroBaselinePaint(Paint)
+     *
+     * @since 1.0.13
+     */
+    public Paint getRangeZeroBaselinePaint() {
+        return this.rangeZeroBaselinePaint;
+    }
+
+    /**
+     * Sets the paint for the zero baseline plotted against the range axis and
+     * sends a {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @see #getRangeZeroBaselinePaint()
+     *
+     * @since 1.0.13
+     */
+    public void setRangeZeroBaselinePaint(Paint paint) {
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
+        this.rangeZeroBaselinePaint = paint;
+        fireChangeEvent();
+    }
+
+    /**
      * Returns the flag that controls whether the range grid-lines are visible.
      *
      * @return The flag.
@@ -1909,6 +2053,104 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.rangeGridlinePaint = paint;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns <code>true</code> if the range axis minor grid is visible, and
+     * <code>false<code> otherwise.
+     *
+     * @return A boolean.
+     *
+     * @see #setRangeMinorGridlinesVisible(boolean)
+     *
+     * @since 1.0.13
+     */
+    public boolean isRangeMinorGridlinesVisible() {
+        return this.rangeMinorGridlinesVisible;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the range axis minor grid
+     * lines are visible.
+     * <p>
+     * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
+     * registered listeners.
+     *
+     * @param visible  the new value of the flag.
+     *
+     * @see #isRangeMinorGridlinesVisible()
+     *
+     * @since 1.0.13
+     */
+    public void setRangeMinorGridlinesVisible(boolean visible) {
+        if (this.rangeMinorGridlinesVisible != visible) {
+            this.rangeMinorGridlinesVisible = visible;
+            fireChangeEvent();
+        }
+    }
+
+    /**
+     * Returns the stroke for the minor grid lines (if any) plotted against the
+     * range axis.
+     *
+     * @return The stroke (never <code>null</code>).
+     *
+     * @see #setRangeMinorGridlineStroke(Stroke)
+     *
+     * @since 1.0.13
+     */
+    public Stroke getRangeMinorGridlineStroke() {
+        return this.rangeMinorGridlineStroke;
+    }
+
+    /**
+     * Sets the stroke for the minor grid lines plotted against the range axis,
+     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param stroke  the stroke (<code>null</code> not permitted).
+     *
+     * @see #getRangeMinorGridlineStroke()
+     *
+     * @since 1.0.13
+     */
+    public void setRangeMinorGridlineStroke(Stroke stroke) {
+        if (stroke == null) {
+            throw new IllegalArgumentException("Null 'stroke' argument.");
+        }
+        this.rangeMinorGridlineStroke = stroke;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the paint for the minor grid lines (if any) plotted against the range
+     * axis.
+     *
+     * @return The paint (never <code>null</code>).
+     *
+     * @see #setRangeMinorGridlinePaint(Paint)
+     *
+     * @since 1.0.13
+     */
+    public Paint getRangeMinorGridlinePaint() {
+        return this.rangeMinorGridlinePaint;
+    }
+
+    /**
+     * Sets the paint for the minor grid lines plotted against the range axis
+     * and sends a {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @see #getRangeMinorGridlinePaint()
+     *
+     * @since 1.0.13
+     */
+    public void setRangeMinorGridlinePaint(Paint paint) {
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
+        this.rangeMinorGridlinePaint = paint;
         fireChangeEvent();
     }
 
@@ -3320,6 +3562,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         }
         if (rangeAxisState != null) {
             drawRangeGridlines(g2, dataArea, rangeAxisState.getTicks());
+            drawZeroRangeBaseline(g2, dataArea);
         }
 
         // draw the markers...
@@ -3649,21 +3892,81 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     protected void drawRangeGridlines(Graphics2D g2, Rectangle2D dataArea,
                                       List ticks) {
         // draw the range grid lines, if any...
-        if (!isRangeGridlinesVisible()) {
+        if (!isRangeGridlinesVisible() && !isRangeMinorGridlinesVisible()) {
             return;
         }
+        // no axis, no gridlines...
         ValueAxis axis = getRangeAxis();
         if (axis == null) {
             return;
         }
+        // no renderer, no gridlines...
+        CategoryItemRenderer r = getRenderer();
+        if (r == null) {
+            return;
+        }
+
+        Stroke gridStroke = null;
+        Paint gridPaint = null;
+        boolean paintLine = false;
         Iterator iterator = ticks.iterator();
         while (iterator.hasNext()) {
+            paintLine = false;
             ValueTick tick = (ValueTick) iterator.next();
-            CategoryItemRenderer renderer1 = getRenderer();
-            if (renderer1 != null) {
-                renderer1.drawRangeGridline(g2, this, axis, dataArea,
-                        tick.getValue());
+            if ((tick.getTickType() == TickType.MINOR)
+                    && isRangeMinorGridlinesVisible()) {
+                gridStroke = getRangeMinorGridlineStroke();
+                gridPaint = getRangeMinorGridlinePaint();
+                paintLine = true;
             }
+            else if ((tick.getTickType() == TickType.MAJOR)
+                    && isRangeGridlinesVisible()) {
+                gridStroke = getRangeGridlineStroke();
+                gridPaint = getRangeGridlinePaint();
+                paintLine = true;
+            }
+            if (((tick.getValue() != 0.0)
+                    || !isRangeZeroBaselineVisible()) && paintLine) {
+                // the method we want isn't in the CategoryItemRenderer
+                // interface...
+                if (r instanceof AbstractCategoryItemRenderer) {
+                    AbstractCategoryItemRenderer aci
+                            = (AbstractCategoryItemRenderer) r;
+                    aci.drawRangeLine(g2, this, axis, dataArea,
+                            tick.getValue(), gridPaint, gridStroke);
+                }
+                else {
+                    // we'll have to use the method in the interface, but
+                    // this doesn't have the paint and stroke settings...
+                    r.drawRangeGridline(g2, this, axis, dataArea, 
+                            tick.getValue());
+                }
+            }
+        }
+    }
+
+    /**
+     * Draws a base line across the chart at value zero on the range axis.
+     *
+     * @param g2  the graphics device.
+     * @param area  the data area.
+     *
+     * @see #setRangeZeroBaselineVisible(boolean)
+     *
+     * @since 1.0.13
+     */
+    protected void drawZeroRangeBaseline(Graphics2D g2, Rectangle2D area) {
+        if (!isRangeZeroBaselineVisible()) {
+            return;
+        }
+        CategoryItemRenderer r = getRenderer();
+        if (r instanceof AbstractCategoryItemRenderer) {
+            AbstractCategoryItemRenderer aci = (AbstractCategoryItemRenderer) r;
+            aci.drawRangeLine(g2, this, getRangeAxis(), area, 0.0,
+                    this.rangeZeroBaselinePaint, this.rangeZeroBaselineStroke);
+        }
+        else {
+            r.drawRangeGridline(g2, this, getRangeAxis(), area, 0.0);
         }
     }
 
@@ -4474,6 +4777,29 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
                 that.domainCrosshairStroke)) {
             return false;
         }
+        if (this.rangeMinorGridlinesVisible
+                != that.rangeMinorGridlinesVisible) {
+            return false;
+        }
+        if (!PaintUtilities.equal(this.rangeMinorGridlinePaint,
+                that.rangeMinorGridlinePaint)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.rangeMinorGridlineStroke,
+                that.rangeMinorGridlineStroke)) {
+            return false;
+        }
+        if (this.rangeZeroBaselineVisible != that.rangeZeroBaselineVisible) {
+            return false;
+        }
+        if (!PaintUtilities.equal(this.rangeZeroBaselinePaint,
+                that.rangeZeroBaselinePaint)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.rangeZeroBaselineStroke,
+                that.rangeZeroBaselineStroke)) {
+            return false;
+        }
         return super.equals(obj);
 
     }
@@ -4589,6 +4915,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         SerialUtilities.writePaint(this.rangeCrosshairPaint, stream);
         SerialUtilities.writeStroke(this.domainCrosshairStroke, stream);
         SerialUtilities.writePaint(this.domainCrosshairPaint, stream);
+        SerialUtilities.writeStroke(this.rangeMinorGridlineStroke, stream);
+        SerialUtilities.writePaint(this.rangeMinorGridlinePaint, stream);
+        SerialUtilities.writeStroke(this.rangeZeroBaselineStroke, stream);
+        SerialUtilities.writePaint(this.rangeZeroBaselinePaint, stream);
     }
 
     /**
@@ -4611,7 +4941,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         this.rangeCrosshairPaint = SerialUtilities.readPaint(stream);
         this.domainCrosshairStroke = SerialUtilities.readStroke(stream);
         this.domainCrosshairPaint = SerialUtilities.readPaint(stream);
-
+        this.rangeMinorGridlineStroke = SerialUtilities.readStroke(stream);
+        this.rangeMinorGridlinePaint = SerialUtilities.readPaint(stream);
+        this.rangeZeroBaselineStroke = SerialUtilities.readStroke(stream);
+        this.rangeZeroBaselinePaint = SerialUtilities.readPaint(stream);
+        
         for (int i = 0; i < this.domainAxes.size(); i++) {
             CategoryAxis xAxis = (CategoryAxis) this.domainAxes.get(i);
             if (xAxis != null) {

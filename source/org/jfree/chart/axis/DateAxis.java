@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * DateAxis.java
  * -------------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Jonathan Nash;
@@ -123,6 +123,7 @@
  * 18-Sep-2008 : Added locale to go with timezone (DG);
  * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  * 25-Nov-2008 : Added bug fix 2201869 by Fawad Halim (DG);
+ * 21-Jan-2009 : Check tickUnit for minor tick count (DG);
  *
  */
 
@@ -1626,10 +1627,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             long lowestTickTime = tickDate.getTime();
             long distance = unit.addToDate(tickDate, this.timeZone).getTime()
                     - lowestTickTime;
-            for(int minorTick = 1; minorTick < getMinorTickCount();
-                    minorTick++) {
+            int minorTickSpaces = getMinorTickCount();
+            if (minorTickSpaces <= 0) {
+                minorTickSpaces = unit.getMinorTickCount();
+            }
+            for (int minorTick = 1; minorTick < minorTickSpaces; minorTick++) {
                 long minorTickTime = lowestTickTime - distance
-                        * minorTick / getMinorTickCount();
+                        * minorTick / minorTickSpaces;
                 if (minorTickTime > 0 && getRange().contains(minorTickTime)
                         && (!isHiddenValue(minorTickTime))) {
                     result.add(new DateTick(TickType.MINOR,
@@ -1679,11 +1683,11 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 long currentTickTime = tickDate.getTime();
                 tickDate = unit.addToDate(tickDate, this.timeZone);
                 long nextTickTime = tickDate.getTime();
-                for (int minorTick = 1; minorTick < getMinorTickCount();
+                for (int minorTick = 1; minorTick < minorTickSpaces;
                         minorTick++){
                     long minorTickTime = currentTickTime
                             + (nextTickTime - currentTickTime)
-                            * minorTick / getMinorTickCount();
+                            * minorTick / minorTickSpaces;
                     if (getRange().contains(minorTickTime)
                             && (!isHiddenValue(minorTickTime))) {
                         result.add(new DateTick(TickType.MINOR,
@@ -1737,10 +1741,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             long lowestTickTime = tickDate.getTime();
             long distance = unit.addToDate(tickDate, this.timeZone).getTime()
                     - lowestTickTime;
-            for(int minorTick = 1; minorTick < getMinorTickCount();
-                    minorTick++) {
+            int minorTickSpaces = getMinorTickCount();
+            if (minorTickSpaces <= 0) {
+                minorTickSpaces = unit.getMinorTickCount();
+            }
+            for (int minorTick = 1; minorTick < minorTickSpaces; minorTick++) {
                 long minorTickTime = lowestTickTime - distance
-                        * minorTick / getMinorTickCount();
+                        * minorTick / minorTickSpaces;
                 if (minorTickTime > 0 && getRange().contains(minorTickTime)
                         && (!isHiddenValue(minorTickTime))) {
                     result.add(new DateTick(TickType.MINOR,
@@ -1788,11 +1795,11 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 long currentTickTime = tickDate.getTime();
                 tickDate = unit.addToDate(tickDate, this.timeZone);
                 long nextTickTime = tickDate.getTime();
-                for(int minorTick = 1; minorTick < getMinorTickCount();
+                for (int minorTick = 1; minorTick < minorTickSpaces;
                         minorTick++){
                     long minorTickTime = currentTickTime
                             + (nextTickTime - currentTickTime)
-                            * minorTick / getMinorTickCount();
+                            * minorTick / minorTickSpaces;
                     if (getRange().contains(minorTickTime)
                             && (!isHiddenValue(minorTickTime))) {
                         result.add(new DateTick(TickType.MINOR,
@@ -1939,18 +1946,14 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *         not support cloning.
      */
     public Object clone() throws CloneNotSupportedException {
-
         DateAxis clone = (DateAxis) super.clone();
-
         // 'dateTickUnit' is immutable : no need to clone
         if (this.dateFormatOverride != null) {
             clone.dateFormatOverride
                 = (DateFormat) this.dateFormatOverride.clone();
         }
         // 'tickMarkPosition' is immutable : no need to clone
-
         return clone;
-
     }
 
 }
