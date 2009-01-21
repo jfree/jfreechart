@@ -98,6 +98,7 @@
  * 26-Jun-2008 : Added crosshair support (DG);
  * 25-Nov-2008 : Fixed bug in findRangeBounds() method (DG);
  * 14-Jan-2009 : Update initialise() to store visible series indices (PK);
+ * 21-Jan-2009 : Added drawRangeLine() method (DG);
  *
  */
 
@@ -237,7 +238,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         this.itemURLGenerator = null;
         this.itemURLGeneratorList = new ObjectList();
         this.legendItemLabelGenerator
-            = new StandardCategorySeriesLabelGenerator();
+                = new StandardCategorySeriesLabelGenerator();
     }
 
     /**
@@ -808,7 +809,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param value  the value at which the grid line should be drawn.
      *
      * @see #drawDomainGridline(Graphics2D, CategoryPlot, Rectangle2D, double)
-     *
      */
     public void drawRangeGridline(Graphics2D g2,
                                   CategoryPlot plot,
@@ -845,6 +845,50 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         }
         g2.setStroke(stroke);
 
+        g2.draw(line);
+
+    }
+
+    /**
+     * Draws a line perpendicular to the range axis.
+     *
+     * @param g2  the graphics device.
+     * @param plot  the plot.
+     * @param axis  the value axis.
+     * @param dataArea  the area for plotting data (not yet adjusted for any 3D
+     *                  effect).
+     * @param value  the value at which the grid line should be drawn.
+     * @param paint  the paint.
+     * @param stroke  the stroke.
+     *
+     * @see #drawRangeGridline
+     *
+     * @since 1.0.13
+     */
+    public void drawRangeLine(Graphics2D g2, CategoryPlot plot, ValueAxis axis,
+            Rectangle2D dataArea, double value, Paint paint, Stroke stroke) {
+
+        // TODO: In JFreeChart 1.2.0, put this method in the
+        // CategoryItemRenderer interface
+        Range range = axis.getRange();
+        if (!range.contains(value)) {
+            return;
+        }
+
+        PlotOrientation orientation = plot.getOrientation();
+        Line2D line = null;
+        double v = axis.valueToJava2D(value, dataArea, plot.getRangeAxisEdge());
+        if (orientation == PlotOrientation.HORIZONTAL) {
+            line = new Line2D.Double(v, dataArea.getMinY(), v,
+                    dataArea.getMaxY());
+        }
+        else if (orientation == PlotOrientation.VERTICAL) {
+            line = new Line2D.Double(dataArea.getMinX(), v,
+                    dataArea.getMaxX(), v);
+        }
+
+        g2.setPaint(paint);
+        g2.setStroke(stroke);
         g2.draw(line);
 
     }

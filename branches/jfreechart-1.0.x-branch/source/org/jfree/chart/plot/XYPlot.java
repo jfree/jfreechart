@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * XYPlot.java
  * -----------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Craig MacFarlane;
@@ -3882,12 +3882,14 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                 while (iterator.hasNext()) {
                     paintLine = false;
                     ValueTick tick = (ValueTick) iterator.next();
-                    if ((tick.getTickType() == TickType.MINOR) && isRangeMinorGridlinesVisible()){
+                    if ((tick.getTickType() == TickType.MINOR) 
+                            && isRangeMinorGridlinesVisible()) {
                         gridStroke = getRangeMinorGridlineStroke();
                         gridPaint = getRangeMinorGridlinePaint();
                         paintLine = true;
                     }
-                    else if ((tick.getTickType() == TickType.MAJOR) && isRangeGridlinesVisible()){
+                    else if ((tick.getTickType() == TickType.MAJOR) 
+                            && isRangeGridlinesVisible()) {
                         gridStroke = getRangeGridlineStroke();
                         gridPaint = getRangeGridlinePaint();
                         paintLine = true;
@@ -5142,10 +5144,12 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (this.rangeGridlinesVisible != that.rangeGridlinesVisible) {
             return false;
         }
-        if (this.domainMinorGridlinesVisible != that.domainMinorGridlinesVisible) {
+        if (this.domainMinorGridlinesVisible
+                != that.domainMinorGridlinesVisible) {
             return false;
         }
-        if (this.rangeMinorGridlinesVisible != that.rangeMinorGridlinesVisible) {
+        if (this.rangeMinorGridlinesVisible
+                != that.rangeMinorGridlinesVisible) {
             return false;
         }
         if (this.domainZeroBaselineVisible != that.domainZeroBaselineVisible) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * NumberAxis.java
  * ---------------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Laurence Vanhelsuwe;
@@ -92,7 +92,9 @@
  *               see bug 1608371 (DG);
  * 22-Mar-2007 : Use new defaultAutoRange attribute (DG);
  * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
- *
+ * 21-Jan-2009 : Default minor tick counts will now come from the tick unit
+ *               collection (DG);
+ * 
  */
 
 package org.jfree.chart.axis;
@@ -710,65 +712,65 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
 
         // we can add the units in any order, the TickUnits collection will
         // sort them...
-        units.add(new NumberTickUnit(0.0000001, df1));
-        units.add(new NumberTickUnit(0.000001, df2));
-        units.add(new NumberTickUnit(0.00001, df3));
-        units.add(new NumberTickUnit(0.0001, df4));
-        units.add(new NumberTickUnit(0.001, df5));
-        units.add(new NumberTickUnit(0.01, df6));
-        units.add(new NumberTickUnit(0.1, df7));
-        units.add(new NumberTickUnit(1, df8));
-        units.add(new NumberTickUnit(10, df8));
-        units.add(new NumberTickUnit(100, df8));
-        units.add(new NumberTickUnit(1000, df8));
-        units.add(new NumberTickUnit(10000, df8));
-        units.add(new NumberTickUnit(100000, df8));
-        units.add(new NumberTickUnit(1000000, df9));
-        units.add(new NumberTickUnit(10000000, df9));
-        units.add(new NumberTickUnit(100000000, df9));
-        units.add(new NumberTickUnit(1000000000, df10));
-        units.add(new NumberTickUnit(10000000000.0, df10));
-        units.add(new NumberTickUnit(100000000000.0, df10));
+        units.add(new NumberTickUnit(0.0000001, df1, 2));
+        units.add(new NumberTickUnit(0.000001, df2, 2));
+        units.add(new NumberTickUnit(0.00001, df3, 2));
+        units.add(new NumberTickUnit(0.0001, df4, 2));
+        units.add(new NumberTickUnit(0.001, df5, 2));
+        units.add(new NumberTickUnit(0.01, df6, 2));
+        units.add(new NumberTickUnit(0.1, df7, 2));
+        units.add(new NumberTickUnit(1, df8, 2));
+        units.add(new NumberTickUnit(10, df8, 2));
+        units.add(new NumberTickUnit(100, df8, 2));
+        units.add(new NumberTickUnit(1000, df8, 2));
+        units.add(new NumberTickUnit(10000, df8, 2));
+        units.add(new NumberTickUnit(100000, df8, 2));
+        units.add(new NumberTickUnit(1000000, df9, 2));
+        units.add(new NumberTickUnit(10000000, df9, 2));
+        units.add(new NumberTickUnit(100000000, df9, 2));
+        units.add(new NumberTickUnit(1000000000, df10, 2));
+        units.add(new NumberTickUnit(10000000000.0, df10, 2));
+        units.add(new NumberTickUnit(100000000000.0, df10, 2));
 
-        units.add(new NumberTickUnit(0.00000025, df0));
-        units.add(new NumberTickUnit(0.0000025, df1));
-        units.add(new NumberTickUnit(0.000025, df2));
-        units.add(new NumberTickUnit(0.00025, df3));
-        units.add(new NumberTickUnit(0.0025, df4));
-        units.add(new NumberTickUnit(0.025, df5));
-        units.add(new NumberTickUnit(0.25, df6));
-        units.add(new NumberTickUnit(2.5, df7));
-        units.add(new NumberTickUnit(25, df8));
-        units.add(new NumberTickUnit(250, df8));
-        units.add(new NumberTickUnit(2500, df8));
-        units.add(new NumberTickUnit(25000, df8));
-        units.add(new NumberTickUnit(250000, df8));
-        units.add(new NumberTickUnit(2500000, df9));
-        units.add(new NumberTickUnit(25000000, df9));
-        units.add(new NumberTickUnit(250000000, df9));
-        units.add(new NumberTickUnit(2500000000.0, df10));
-        units.add(new NumberTickUnit(25000000000.0, df10));
-        units.add(new NumberTickUnit(250000000000.0, df10));
+        units.add(new NumberTickUnit(0.00000025, df0, 5));
+        units.add(new NumberTickUnit(0.0000025, df1, 5));
+        units.add(new NumberTickUnit(0.000025, df2, 5));
+        units.add(new NumberTickUnit(0.00025, df3, 5));
+        units.add(new NumberTickUnit(0.0025, df4, 5));
+        units.add(new NumberTickUnit(0.025, df5, 5));
+        units.add(new NumberTickUnit(0.25, df6, 5));
+        units.add(new NumberTickUnit(2.5, df7, 5));
+        units.add(new NumberTickUnit(25, df8, 5));
+        units.add(new NumberTickUnit(250, df8, 5));
+        units.add(new NumberTickUnit(2500, df8, 5));
+        units.add(new NumberTickUnit(25000, df8, 5));
+        units.add(new NumberTickUnit(250000, df8, 5));
+        units.add(new NumberTickUnit(2500000, df9, 5));
+        units.add(new NumberTickUnit(25000000, df9, 5));
+        units.add(new NumberTickUnit(250000000, df9, 5));
+        units.add(new NumberTickUnit(2500000000.0, df10, 5));
+        units.add(new NumberTickUnit(25000000000.0, df10, 5));
+        units.add(new NumberTickUnit(250000000000.0, df10, 5));
 
-        units.add(new NumberTickUnit(0.0000005, df1));
-        units.add(new NumberTickUnit(0.000005, df2));
-        units.add(new NumberTickUnit(0.00005, df3));
-        units.add(new NumberTickUnit(0.0005, df4));
-        units.add(new NumberTickUnit(0.005, df5));
-        units.add(new NumberTickUnit(0.05, df6));
-        units.add(new NumberTickUnit(0.5, df7));
-        units.add(new NumberTickUnit(5L, df8));
-        units.add(new NumberTickUnit(50L, df8));
-        units.add(new NumberTickUnit(500L, df8));
-        units.add(new NumberTickUnit(5000L, df8));
-        units.add(new NumberTickUnit(50000L, df8));
-        units.add(new NumberTickUnit(500000L, df8));
-        units.add(new NumberTickUnit(5000000L, df9));
-        units.add(new NumberTickUnit(50000000L, df9));
-        units.add(new NumberTickUnit(500000000L, df9));
-        units.add(new NumberTickUnit(5000000000L, df10));
-        units.add(new NumberTickUnit(50000000000L, df10));
-        units.add(new NumberTickUnit(500000000000L, df10));
+        units.add(new NumberTickUnit(0.0000005, df1, 5));
+        units.add(new NumberTickUnit(0.000005, df2, 5));
+        units.add(new NumberTickUnit(0.00005, df3, 5));
+        units.add(new NumberTickUnit(0.0005, df4, 5));
+        units.add(new NumberTickUnit(0.005, df5, 5));
+        units.add(new NumberTickUnit(0.05, df6, 5));
+        units.add(new NumberTickUnit(0.5, df7, 5));
+        units.add(new NumberTickUnit(5L, df8, 5));
+        units.add(new NumberTickUnit(50L, df8, 5));
+        units.add(new NumberTickUnit(500L, df8, 5));
+        units.add(new NumberTickUnit(5000L, df8, 5));
+        units.add(new NumberTickUnit(50000L, df8, 5));
+        units.add(new NumberTickUnit(500000L, df8, 5));
+        units.add(new NumberTickUnit(5000000L, df9, 5));
+        units.add(new NumberTickUnit(50000000L, df9, 5));
+        units.add(new NumberTickUnit(500000000L, df9, 5));
+        units.add(new NumberTickUnit(5000000000L, df10, 5));
+        units.add(new NumberTickUnit(50000000000L, df10, 5));
+        units.add(new NumberTickUnit(500000000000L, df10, 5));
 
         return units;
 
@@ -783,44 +785,41 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #createStandardTickUnits()
      */
     public static TickUnitSource createIntegerTickUnits() {
-
         TickUnits units = new TickUnits();
         DecimalFormat df0 = new DecimalFormat("0");
         DecimalFormat df1 = new DecimalFormat("#,##0");
-        units.add(new NumberTickUnit(1, df0));
-        units.add(new NumberTickUnit(2, df0));
-        units.add(new NumberTickUnit(5, df0));
-        units.add(new NumberTickUnit(10, df0));
-        units.add(new NumberTickUnit(20, df0));
-        units.add(new NumberTickUnit(50, df0));
-        units.add(new NumberTickUnit(100, df0));
-        units.add(new NumberTickUnit(200, df0));
-        units.add(new NumberTickUnit(500, df0));
-        units.add(new NumberTickUnit(1000, df1));
-        units.add(new NumberTickUnit(2000, df1));
-        units.add(new NumberTickUnit(5000, df1));
-        units.add(new NumberTickUnit(10000, df1));
-        units.add(new NumberTickUnit(20000, df1));
-        units.add(new NumberTickUnit(50000, df1));
-        units.add(new NumberTickUnit(100000, df1));
-        units.add(new NumberTickUnit(200000, df1));
-        units.add(new NumberTickUnit(500000, df1));
-        units.add(new NumberTickUnit(1000000, df1));
-        units.add(new NumberTickUnit(2000000, df1));
-        units.add(new NumberTickUnit(5000000, df1));
-        units.add(new NumberTickUnit(10000000, df1));
-        units.add(new NumberTickUnit(20000000, df1));
-        units.add(new NumberTickUnit(50000000, df1));
-        units.add(new NumberTickUnit(100000000, df1));
-        units.add(new NumberTickUnit(200000000, df1));
-        units.add(new NumberTickUnit(500000000, df1));
-        units.add(new NumberTickUnit(1000000000, df1));
-        units.add(new NumberTickUnit(2000000000, df1));
-        units.add(new NumberTickUnit(5000000000.0, df1));
-        units.add(new NumberTickUnit(10000000000.0, df1));
-
+        units.add(new NumberTickUnit(1, df0, 2));
+        units.add(new NumberTickUnit(2, df0, 2));
+        units.add(new NumberTickUnit(5, df0, 5));
+        units.add(new NumberTickUnit(10, df0, 2));
+        units.add(new NumberTickUnit(20, df0, 2));
+        units.add(new NumberTickUnit(50, df0, 5));
+        units.add(new NumberTickUnit(100, df0, 2));
+        units.add(new NumberTickUnit(200, df0, 2));
+        units.add(new NumberTickUnit(500, df0, 5));
+        units.add(new NumberTickUnit(1000, df1, 2));
+        units.add(new NumberTickUnit(2000, df1, 2));
+        units.add(new NumberTickUnit(5000, df1, 5));
+        units.add(new NumberTickUnit(10000, df1, 2));
+        units.add(new NumberTickUnit(20000, df1, 2));
+        units.add(new NumberTickUnit(50000, df1, 5));
+        units.add(new NumberTickUnit(100000, df1, 2));
+        units.add(new NumberTickUnit(200000, df1, 2));
+        units.add(new NumberTickUnit(500000, df1, 5));
+        units.add(new NumberTickUnit(1000000, df1, 2));
+        units.add(new NumberTickUnit(2000000, df1, 2));
+        units.add(new NumberTickUnit(5000000, df1, 5));
+        units.add(new NumberTickUnit(10000000, df1, 2));
+        units.add(new NumberTickUnit(20000000, df1, 2));
+        units.add(new NumberTickUnit(50000000, df1, 5));
+        units.add(new NumberTickUnit(100000000, df1, 2));
+        units.add(new NumberTickUnit(200000000, df1, 2));
+        units.add(new NumberTickUnit(500000000, df1, 5));
+        units.add(new NumberTickUnit(1000000000, df1, 2));
+        units.add(new NumberTickUnit(2000000000, df1, 2));
+        units.add(new NumberTickUnit(5000000000.0, df1, 5));
+        units.add(new NumberTickUnit(10000000000.0, df1, 2));
         return units;
-
     }
 
     /**
@@ -841,67 +840,65 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
     public static TickUnitSource createStandardTickUnits(Locale locale) {
 
         TickUnits units = new TickUnits();
-
         NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
-
         // we can add the units in any order, the TickUnits collection will
         // sort them...
-        units.add(new NumberTickUnit(0.0000001,    numberFormat));
-        units.add(new NumberTickUnit(0.000001,     numberFormat));
-        units.add(new NumberTickUnit(0.00001,      numberFormat));
-        units.add(new NumberTickUnit(0.0001,       numberFormat));
-        units.add(new NumberTickUnit(0.001,        numberFormat));
-        units.add(new NumberTickUnit(0.01,         numberFormat));
-        units.add(new NumberTickUnit(0.1,          numberFormat));
-        units.add(new NumberTickUnit(1,            numberFormat));
-        units.add(new NumberTickUnit(10,           numberFormat));
-        units.add(new NumberTickUnit(100,          numberFormat));
-        units.add(new NumberTickUnit(1000,         numberFormat));
-        units.add(new NumberTickUnit(10000,        numberFormat));
-        units.add(new NumberTickUnit(100000,       numberFormat));
-        units.add(new NumberTickUnit(1000000,      numberFormat));
-        units.add(new NumberTickUnit(10000000,     numberFormat));
-        units.add(new NumberTickUnit(100000000,    numberFormat));
-        units.add(new NumberTickUnit(1000000000,   numberFormat));
-        units.add(new NumberTickUnit(10000000000.0,   numberFormat));
+        units.add(new NumberTickUnit(0.0000001, numberFormat, 2));
+        units.add(new NumberTickUnit(0.000001, numberFormat, 2));
+        units.add(new NumberTickUnit(0.00001, numberFormat, 2));
+        units.add(new NumberTickUnit(0.0001, numberFormat, 2));
+        units.add(new NumberTickUnit(0.001, numberFormat, 2));
+        units.add(new NumberTickUnit(0.01, numberFormat, 2));
+        units.add(new NumberTickUnit(0.1, numberFormat, 2));
+        units.add(new NumberTickUnit(1, numberFormat, 2));
+        units.add(new NumberTickUnit(10, numberFormat, 2));
+        units.add(new NumberTickUnit(100, numberFormat, 2));
+        units.add(new NumberTickUnit(1000, numberFormat, 2));
+        units.add(new NumberTickUnit(10000, numberFormat, 2));
+        units.add(new NumberTickUnit(100000, numberFormat, 2));
+        units.add(new NumberTickUnit(1000000, numberFormat, 2));
+        units.add(new NumberTickUnit(10000000, numberFormat, 2));
+        units.add(new NumberTickUnit(100000000, numberFormat, 2));
+        units.add(new NumberTickUnit(1000000000, numberFormat, 2));
+        units.add(new NumberTickUnit(10000000000.0, numberFormat, 2));
 
-        units.add(new NumberTickUnit(0.00000025,   numberFormat));
-        units.add(new NumberTickUnit(0.0000025,    numberFormat));
-        units.add(new NumberTickUnit(0.000025,     numberFormat));
-        units.add(new NumberTickUnit(0.00025,      numberFormat));
-        units.add(new NumberTickUnit(0.0025,       numberFormat));
-        units.add(new NumberTickUnit(0.025,        numberFormat));
-        units.add(new NumberTickUnit(0.25,         numberFormat));
-        units.add(new NumberTickUnit(2.5,          numberFormat));
-        units.add(new NumberTickUnit(25,           numberFormat));
-        units.add(new NumberTickUnit(250,          numberFormat));
-        units.add(new NumberTickUnit(2500,         numberFormat));
-        units.add(new NumberTickUnit(25000,        numberFormat));
-        units.add(new NumberTickUnit(250000,       numberFormat));
-        units.add(new NumberTickUnit(2500000,      numberFormat));
-        units.add(new NumberTickUnit(25000000,     numberFormat));
-        units.add(new NumberTickUnit(250000000,    numberFormat));
-        units.add(new NumberTickUnit(2500000000.0,   numberFormat));
-        units.add(new NumberTickUnit(25000000000.0,   numberFormat));
+        units.add(new NumberTickUnit(0.00000025, numberFormat, 5));
+        units.add(new NumberTickUnit(0.0000025, numberFormat, 5));
+        units.add(new NumberTickUnit(0.000025, numberFormat, 5));
+        units.add(new NumberTickUnit(0.00025, numberFormat, 5));
+        units.add(new NumberTickUnit(0.0025, numberFormat, 5));
+        units.add(new NumberTickUnit(0.025, numberFormat, 5));
+        units.add(new NumberTickUnit(0.25, numberFormat, 5));
+        units.add(new NumberTickUnit(2.5, numberFormat, 5));
+        units.add(new NumberTickUnit(25, numberFormat, 5));
+        units.add(new NumberTickUnit(250, numberFormat, 5));
+        units.add(new NumberTickUnit(2500, numberFormat, 5));
+        units.add(new NumberTickUnit(25000, numberFormat, 5));
+        units.add(new NumberTickUnit(250000, numberFormat, 5));
+        units.add(new NumberTickUnit(2500000, numberFormat, 5));
+        units.add(new NumberTickUnit(25000000, numberFormat, 5));
+        units.add(new NumberTickUnit(250000000, numberFormat, 5));
+        units.add(new NumberTickUnit(2500000000.0, numberFormat, 5));
+        units.add(new NumberTickUnit(25000000000.0, numberFormat, 5));
 
-        units.add(new NumberTickUnit(0.0000005,    numberFormat));
-        units.add(new NumberTickUnit(0.000005,     numberFormat));
-        units.add(new NumberTickUnit(0.00005,      numberFormat));
-        units.add(new NumberTickUnit(0.0005,       numberFormat));
-        units.add(new NumberTickUnit(0.005,        numberFormat));
-        units.add(new NumberTickUnit(0.05,         numberFormat));
-        units.add(new NumberTickUnit(0.5,          numberFormat));
-        units.add(new NumberTickUnit(5L,           numberFormat));
-        units.add(new NumberTickUnit(50L,          numberFormat));
-        units.add(new NumberTickUnit(500L,         numberFormat));
-        units.add(new NumberTickUnit(5000L,        numberFormat));
-        units.add(new NumberTickUnit(50000L,       numberFormat));
-        units.add(new NumberTickUnit(500000L,      numberFormat));
-        units.add(new NumberTickUnit(5000000L,     numberFormat));
-        units.add(new NumberTickUnit(50000000L,    numberFormat));
-        units.add(new NumberTickUnit(500000000L,   numberFormat));
-        units.add(new NumberTickUnit(5000000000L,  numberFormat));
-        units.add(new NumberTickUnit(50000000000L,  numberFormat));
+        units.add(new NumberTickUnit(0.0000005, numberFormat, 5));
+        units.add(new NumberTickUnit(0.000005, numberFormat, 5));
+        units.add(new NumberTickUnit(0.00005, numberFormat, 5));
+        units.add(new NumberTickUnit(0.0005, numberFormat, 5));
+        units.add(new NumberTickUnit(0.005, numberFormat, 5));
+        units.add(new NumberTickUnit(0.05, numberFormat, 5));
+        units.add(new NumberTickUnit(0.5, numberFormat, 5));
+        units.add(new NumberTickUnit(5L, numberFormat, 5));
+        units.add(new NumberTickUnit(50L, numberFormat, 5));
+        units.add(new NumberTickUnit(500L, numberFormat, 5));
+        units.add(new NumberTickUnit(5000L, numberFormat, 5));
+        units.add(new NumberTickUnit(50000L, numberFormat, 5));
+        units.add(new NumberTickUnit(500000L, numberFormat, 5));
+        units.add(new NumberTickUnit(5000000L, numberFormat, 5));
+        units.add(new NumberTickUnit(50000000L, numberFormat, 5));
+        units.add(new NumberTickUnit(500000000L, numberFormat, 5));
+        units.add(new NumberTickUnit(5000000000L, numberFormat, 5));
+        units.add(new NumberTickUnit(50000000000L, numberFormat, 5));
 
         return units;
 
@@ -918,45 +915,40 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #setStandardTickUnits(TickUnitSource)
      */
     public static TickUnitSource createIntegerTickUnits(Locale locale) {
-
         TickUnits units = new TickUnits();
-
         NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
-
-        units.add(new NumberTickUnit(1,              numberFormat));
-        units.add(new NumberTickUnit(2,              numberFormat));
-        units.add(new NumberTickUnit(5,              numberFormat));
-        units.add(new NumberTickUnit(10,             numberFormat));
-        units.add(new NumberTickUnit(20,             numberFormat));
-        units.add(new NumberTickUnit(50,             numberFormat));
-        units.add(new NumberTickUnit(100,            numberFormat));
-        units.add(new NumberTickUnit(200,            numberFormat));
-        units.add(new NumberTickUnit(500,            numberFormat));
-        units.add(new NumberTickUnit(1000,           numberFormat));
-        units.add(new NumberTickUnit(2000,           numberFormat));
-        units.add(new NumberTickUnit(5000,           numberFormat));
-        units.add(new NumberTickUnit(10000,          numberFormat));
-        units.add(new NumberTickUnit(20000,          numberFormat));
-        units.add(new NumberTickUnit(50000,          numberFormat));
-        units.add(new NumberTickUnit(100000,         numberFormat));
-        units.add(new NumberTickUnit(200000,         numberFormat));
-        units.add(new NumberTickUnit(500000,         numberFormat));
-        units.add(new NumberTickUnit(1000000,        numberFormat));
-        units.add(new NumberTickUnit(2000000,        numberFormat));
-        units.add(new NumberTickUnit(5000000,        numberFormat));
-        units.add(new NumberTickUnit(10000000,       numberFormat));
-        units.add(new NumberTickUnit(20000000,       numberFormat));
-        units.add(new NumberTickUnit(50000000,       numberFormat));
-        units.add(new NumberTickUnit(100000000,      numberFormat));
-        units.add(new NumberTickUnit(200000000,      numberFormat));
-        units.add(new NumberTickUnit(500000000,      numberFormat));
-        units.add(new NumberTickUnit(1000000000,     numberFormat));
-        units.add(new NumberTickUnit(2000000000,     numberFormat));
-        units.add(new NumberTickUnit(5000000000.0,   numberFormat));
-        units.add(new NumberTickUnit(10000000000.0,  numberFormat));
-
+        units.add(new NumberTickUnit(1, numberFormat, 2));
+        units.add(new NumberTickUnit(2, numberFormat, 2));
+        units.add(new NumberTickUnit(5, numberFormat, 5));
+        units.add(new NumberTickUnit(10, numberFormat, 2));
+        units.add(new NumberTickUnit(20, numberFormat, 2));
+        units.add(new NumberTickUnit(50, numberFormat, 5));
+        units.add(new NumberTickUnit(100, numberFormat, 2));
+        units.add(new NumberTickUnit(200, numberFormat, 2));
+        units.add(new NumberTickUnit(500, numberFormat, 5));
+        units.add(new NumberTickUnit(1000, numberFormat, 2));
+        units.add(new NumberTickUnit(2000, numberFormat, 2));
+        units.add(new NumberTickUnit(5000, numberFormat, 5));
+        units.add(new NumberTickUnit(10000, numberFormat, 2));
+        units.add(new NumberTickUnit(20000, numberFormat, 2));
+        units.add(new NumberTickUnit(50000, numberFormat, 5));
+        units.add(new NumberTickUnit(100000, numberFormat, 2));
+        units.add(new NumberTickUnit(200000, numberFormat, 2));
+        units.add(new NumberTickUnit(500000, numberFormat, 5));
+        units.add(new NumberTickUnit(1000000, numberFormat, 2));
+        units.add(new NumberTickUnit(2000000, numberFormat, 2));
+        units.add(new NumberTickUnit(5000000, numberFormat, 5));
+        units.add(new NumberTickUnit(10000000, numberFormat, 2));
+        units.add(new NumberTickUnit(20000000, numberFormat, 2));
+        units.add(new NumberTickUnit(50000000, numberFormat, 5));
+        units.add(new NumberTickUnit(100000000, numberFormat, 2));
+        units.add(new NumberTickUnit(200000000, numberFormat, 2));
+        units.add(new NumberTickUnit(500000000, numberFormat, 5));
+        units.add(new NumberTickUnit(1000000000, numberFormat, 2));
+        units.add(new NumberTickUnit(2000000000, numberFormat, 2));
+        units.add(new NumberTickUnit(5000000000.0, numberFormat, 5));
+        units.add(new NumberTickUnit(10000000000.0, numberFormat, 2));
         return units;
-
     }
 
     /**
@@ -1175,16 +1167,19 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
             selectAutoTickUnit(g2, dataArea, edge);
         }
 
-        double size = getTickUnit().getSize();
+        TickUnit tu = getTickUnit();
+        double size = tu.getSize();
         int count = calculateVisibleTickCount();
         double lowestTickValue = calculateLowestVisibleTickValue();
 
         if (count <= ValueAxis.MAXIMUM_TICK_COUNT) {
-            for(int minorTick = 1; minorTick < getMinorTickCount();
-                    minorTick++) {
-                double minorTickValue = lowestTickValue
-                        - getTickUnit().getSize()
-                        * minorTick / getMinorTickCount();
+            int minorTickSpaces = getMinorTickCount();
+            if (minorTickSpaces <= 0) {
+                minorTickSpaces = tu.getMinorTickCount();
+            }
+            for (int minorTick = 1; minorTick < minorTickSpaces; minorTick++) {
+                double minorTickValue = lowestTickValue 
+                        - size * minorTick / minorTickSpaces;
                 if (getRange().contains(minorTickValue)){
                     result.add(new NumberTick(TickType.MINOR, minorTickValue,
                             "", TextAnchor.TOP_CENTER, TextAnchor.CENTER,
@@ -1229,11 +1224,11 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                         tickLabel, anchor, rotationAnchor, angle);
                 result.add(tick);
                 double nextTickValue = lowestTickValue + ((i + 1)* size);
-                for (int minorTick = 1; minorTick < getMinorTickCount();
-                        minorTick++){
+                for (int minorTick = 1; minorTick < minorTickSpaces;
+                        minorTick++) {
                     double minorTickValue = currentTickValue
                             + (nextTickValue - currentTickValue)
-                            * minorTick / getMinorTickCount();
+                            * minorTick / minorTickSpaces;
                     if (getRange().contains(minorTickValue)){
                         result.add(new NumberTick(TickType.MINOR,
                                 minorTickValue, "", TextAnchor.TOP_CENTER,
@@ -1268,16 +1263,19 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
             selectAutoTickUnit(g2, dataArea, edge);
         }
 
-        double size = getTickUnit().getSize();
+        TickUnit tu = getTickUnit();
+        double size = tu.getSize();
         int count = calculateVisibleTickCount();
         double lowestTickValue = calculateLowestVisibleTickValue();
 
         if (count <= ValueAxis.MAXIMUM_TICK_COUNT) {
-            for (int minorTick = 1; minorTick < getMinorTickCount();
-                    minorTick++){
+            int minorTickSpaces = getMinorTickCount();
+            if (minorTickSpaces <= 0) {
+                minorTickSpaces = tu.getMinorTickCount();
+            }
+            for (int minorTick = 1; minorTick < minorTickSpaces; minorTick++){
                 double minorTickValue = lowestTickValue
-                        - getTickUnit().getSize()
-                        * minorTick / getMinorTickCount() ;
+                        - size * minorTick / minorTickSpaces;
                 if (getRange().contains(minorTickValue)){
                     result.add(new NumberTick(TickType.MINOR, minorTickValue,
                             "", TextAnchor.TOP_CENTER, TextAnchor.CENTER,
@@ -1327,11 +1325,11 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                 result.add(tick);
 
                 double nextTickValue = lowestTickValue + ((i + 1)* size);
-                for (int minorTick = 1; minorTick < getMinorTickCount();
+                for (int minorTick = 1; minorTick < minorTickSpaces;
                         minorTick++){
                     double minorTickValue = currentTickValue
                             + (nextTickValue - currentTickValue)
-                            * minorTick / getMinorTickCount();
+                            * minorTick / minorTickSpaces;
                     if (getRange().contains(minorTickValue)){
                         result.add(new NumberTick(TickType.MINOR,
                                 minorTickValue, "", TextAnchor.TOP_CENTER,

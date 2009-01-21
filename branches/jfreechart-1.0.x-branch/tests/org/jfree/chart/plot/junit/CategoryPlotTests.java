@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * CategoryPlotTests.java
  * ----------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,6 +44,7 @@
  * 23-Apr-2008 : Extended testEquals() and testCloning(), and added
  *               testCloning2() and testCloning3() (DG);
  * 26-Jun-2008 : Updated testEquals() (DG);
+ * 21-Jan-2009 : Updated testEquals() for new fields (DG);
  *
  */
 
@@ -455,6 +456,41 @@ public class CategoryPlotTests extends TestCase {
         assertFalse(plot1.equals(plot2));
         plot2.setDomainCrosshairStroke(new BasicStroke(1.23f));
         assertTrue(plot1.equals(plot2));
+
+        plot1.setRangeMinorGridlinesVisible(true);
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeMinorGridlinesVisible(true);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRangeMinorGridlinePaint(new GradientPaint(1.0f, 2.0f,
+                Color.red, 3.0f, 4.0f, Color.blue));
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeMinorGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
+                3.0f, 4.0f, Color.blue));
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRangeMinorGridlineStroke(new BasicStroke(1.23f));
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeMinorGridlineStroke(new BasicStroke(1.23f));
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRangeZeroBaselineVisible(!plot1.isRangeZeroBaselineVisible());
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeZeroBaselineVisible(!plot2.isRangeZeroBaselineVisible());
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f,
+                Color.red, 3.0f, 4.0f, Color.blue));
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
+                3.0f, 4.0f, Color.blue));
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRangeZeroBaselineStroke(new BasicStroke(1.23f));
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeZeroBaselineStroke(new BasicStroke(1.23f));
+        assertTrue(plot1.equals(plot2));
+
     }
 
     /**
@@ -464,6 +500,10 @@ public class CategoryPlotTests extends TestCase {
         CategoryPlot p1 = new CategoryPlot();
         p1.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.white,
                 3.0f, 4.0f, Color.yellow));
+        p1.setRangeMinorGridlinePaint(new GradientPaint(2.0f, 3.0f, Color.white,
+                4.0f, 5.0f, Color.red));
+        p1.setRangeZeroBaselinePaint(new GradientPaint(3.0f, 4.0f, Color.red,
+                5.0f, 6.0f, Color.white));
         CategoryPlot p2 = null;
         try {
             p2 = (CategoryPlot) p1.clone();
@@ -572,7 +612,6 @@ public class CategoryPlotTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         CategoryAxis domainAxis = new CategoryAxis("Domain");
         NumberAxis rangeAxis = new NumberAxis("Range");
@@ -602,7 +641,6 @@ public class CategoryPlotTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization2() {
-
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         CategoryAxis domainAxis = new CategoryAxis("Domain");
         NumberAxis rangeAxis = new NumberAxis("Range");
@@ -627,7 +665,6 @@ public class CategoryPlotTests extends TestCase {
             fail(e.toString());
         }
         assertEquals(p1, p2);
-
     }
 
     /**

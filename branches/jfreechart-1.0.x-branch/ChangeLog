@@ -1,3 +1,49 @@
+2009-01-21  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+    (drawRangeLine): New method,
+    * source/org/jfree/chart/plot/CategoryPlot.java
+    (rangeZeroBaselineVisible): New field,
+    (rangeZeroBaselineStroke): Likewise,
+    (rangeZeroBaselinePaint): Likewise,
+    (rangeMinorGridlinesVisible): Likewise,
+    (rangeMinorGridlineStroke): Likewise,
+    (rangeMinorGridlinePaint): Likewise,
+    (CategoryPlot): Initialise new fields and removed baseline marker,
+    (isRangeZeroBaselineVisible): New method,
+    (setRangeZeroBaselineVisible): Likewise,
+    (getRangeZeroBaselineStroke): Likewise,
+    (setRangeZeroBaselineStroke): Likewise,
+    (getRangeZeroBaselinePaint): Likewise,
+    (setRangeZeroBaselinePaint): Likewise,
+    (isRangeMinorGridlinesVisible): Likewise,
+    (setRangeMinorGridlinesVisible): Likewise,
+    (getRangeMinorGridlineStroke): Likewise,
+    (setRangeMinorGridlineStroke): Likewise,
+    (getRangeMinorGridlinePaint): Likewise,
+    (setRangeMinorGridlinePaint): Likewise,
+    (draw): Add code to draw new zero range baseline,
+    (drawRangeGridlines): Account for minor gridlines,
+    (drawZeroRangeBaseline): New method,
+    (equals): Updated for new fields,
+    (writeObject): Likewise,
+    (readObject): Likewise,
+    * source/org/jfree/chart/axis/DateAxis.java
+    (refreshTicksHorizontal): Check tick unit for minor tick count,
+    (refreshTicksVertical): Likewise,
+    * source/org/jfree/chart/axis/LogAxis.java
+    (LogAxis): Remove call to setMinorTickCount(),
+    * source/org/jfree/chart/axis/NumberAxis.java
+    (createStandardTickUnits): Initialise minor tick counts,
+    (createIntegerTickUnits): Likewise,
+    (refreshTicksHorizontal): Check tick unit for minor tick count,
+    (refreshTicksVertical): Likewise,
+    * source/org/jfree/chart/axis/ValueAxis.java
+    (ValueAxis): Set default minor tick count to zero,
+    (setMinorTickCount): Remove argument check,
+    * tests/org/jfree/chart/plot/junit/CategoryPlotTests.java
+    (testEquals): Check new fields.
+
 2009-01-16  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 2490803:
