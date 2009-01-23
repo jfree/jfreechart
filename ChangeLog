@@ -1,5 +1,10 @@
 2009-01-23  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/category/StatisticalLineAndShapeRenderer.java
+    (drawItem): Put drawing code in separate passes.
+
+2009-01-23  David Gilbert  <david.gilbert@object-refinery.com>
+
     Patch 2511330 by Peter Kolb, plus hashCode method by DG:
     * source/org/jfree/chart/renderer/category/StatisticalLineAndShapeRenderer.java
     (drawItem): Check useFillPaint and drawOutlines flags separately,
