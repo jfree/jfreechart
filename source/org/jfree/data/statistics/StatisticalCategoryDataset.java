@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * StatisticalCategoryDataset.java
  * -------------------------------
- * (C) Copyright 2002-2008, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2009, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -48,7 +48,7 @@ package org.jfree.data.statistics;
 import org.jfree.data.category.CategoryDataset;
 
 /**
- * A category dataset that defines a median and standard deviation value for
+ * A category dataset that defines a mean and standard deviation value for
  * each item.
  */
 public interface StatisticalCategoryDataset extends CategoryDataset {
@@ -59,7 +59,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The mean value.
+     * @return The mean value (possibly <code>null</code>).
      */
     public Number getMeanValue(int row, int column);
 
@@ -69,7 +69,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.
      *
-     * @return The mean value.
+     * @return The mean value (possibly <code>null</code>).
      */
     public Number getMeanValue(Comparable rowKey, Comparable columnKey);
 
@@ -79,7 +79,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The standard deviation.
+     * @return The standard deviation (possibly <code>null</code>).
      */
     public Number getStdDevValue(int row, int column);
 
@@ -89,7 +89,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.
      *
-     * @return The standard deviation.
+     * @return The standard deviation (possibly <code>null</code>).
      */
     public Number getStdDevValue(Comparable rowKey, Comparable columnKey);
 
