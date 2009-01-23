@@ -1,5 +1,12 @@
 2009-01-23  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 2511330 by Peter Kolb, plus hashCode method by DG:
+    * source/org/jfree/chart/renderer/category/StatisticalLineAndShapeRenderer.java
+    (drawItem): Check useFillPaint and drawOutlines flags separately,
+    (hashCode): New method.
+
+2009-01-23  David Gilbert  <david.gilbert@object-refinery.com>
+
     Patch 2511330 by Peter Kolb:
     * source/org/jfree/chart/renderer/category/LevelRenderer.java
     (calculateItemWidth): Take into account seriesVisible flags,

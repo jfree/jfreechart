@@ -49,6 +49,7 @@
  * 27-Sep-2007 : Added offset option to match new option in
  *               LineAndShapeRenderer (DG);
  * 14-Jan-2009 : Added support for seriesVisible flags (PK);
+ * 23-Jan-2009 : Observe useFillPaint and drawOutlines flags (PK);
  *
  */
 
@@ -64,6 +65,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -193,10 +195,10 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         }
 		int visibleRowCount = state.getVisibleSeriesCount();
 
-        StatisticalCategoryDataset statData
+        StatisticalCategoryDataset statDataset
                 = (StatisticalCategoryDataset) dataset;
 
-        Number meanValue = statData.getMeanValue(row, column);
+        Number meanValue = statDataset.getMeanValue(row, column);
 
         PlotOrientation orientation = plot.getOrientation();
 
@@ -225,10 +227,15 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         if (getItemShapeVisible(row, column)) {
 
             if (getItemShapeFilled(row, column)) {
-                g2.setPaint(getItemPaint(row, column));
+                if (getUseFillPaint()) {
+                    g2.setPaint(getItemFillPaint(row, column));
+                }
+                else {
+                    g2.setPaint(getItemPaint(row, column));
+                }
                 g2.fill(shape);
             }
-            else {
+            if (getDrawOutlines()) {
                 if (getUseOutlinePaint()) {
                     g2.setPaint(getItemOutlinePaint(row, column));
                 }
@@ -243,7 +250,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         if (getItemLineVisible(row, column)) {
             if (column != 0) {
 
-                Number previousValue = statData.getValue(row, column - 1);
+                Number previousValue = statDataset.getValue(row, column - 1);
                 if (previousValue != null) {
 
                     // previous data point...
@@ -278,12 +285,10 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
             }
         }
 
-        RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
-        g2.setPaint(getItemPaint(row, column));
-
         //standard deviation lines
-        double valueDelta = statData.getStdDevValue(row, column).doubleValue();
-
+        RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
+        double valueDelta = statDataset.getStdDevValue(row,
+                column).doubleValue();
         double highVal, lowVal;
         if ((meanValue.doubleValue() + valueDelta)
                 > rangeAxis.getRange().getUpperBound()) {
@@ -372,6 +377,17 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     *
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = HashUtilities.hashCode(hash, this.errorIndicatorPaint);
+        return hash;
     }
 
     /**
