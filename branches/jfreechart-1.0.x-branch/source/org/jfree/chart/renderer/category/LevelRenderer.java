@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Peter Kolb (patch 2511330);
  *
  * Changes
  * -------
@@ -43,6 +43,8 @@
  * 13-May-2008 : Code clean-up (DG);
  * 26-Jun-2008 : Added crosshair support (DG);
  * 23-Jan-2009 : Set more appropriate default shape in legend (DG);
+ * 23-Jan-2009 : Added support for seriesVisible flags - see patch
+ *               2511330 (PK)
  *
  */
 
@@ -201,7 +203,8 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
         CategoryDataset dataset = plot.getDataset(rendererIndex);
         if (dataset != null) {
             int columns = dataset.getColumnCount();
-            int rows = dataset.getRowCount();
+            int rows = state.getVisibleSeriesCount() >= 0
+                    ? state.getVisibleSeriesCount() : dataset.getRowCount();
             double space = 0.0;
             PlotOrientation orientation = plot.getOrientation();
             if (orientation == PlotOrientation.HORIZONTAL) {
@@ -263,7 +266,10 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
         }
         double barW0 = domainAxis.getCategoryStart(column, getColumnCount(),
                 dataArea, plot.getDomainAxisEdge());
-        int seriesCount = getRowCount();
+        int seriesCount = state.getVisibleSeriesCount();
+        if (seriesCount < 0) {
+            seriesCount = getRowCount();
+        }
         int categoryCount = getColumnCount();
         if (seriesCount > 1) {
             double seriesGap = space * getItemMargin()
@@ -300,6 +306,13 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
             ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
             int pass) {
 
+        // nothing is drawn if the row index is not included in the list with
+        // the indices of the visible rows...
+        int visibleRow = state.getVisibleSeriesIndex(row);
+        if (visibleRow < 0) {
+            return;
+        }
+
         // nothing is drawn for null values...
         Number dataValue = dataset.getValue(row, column);
         if (dataValue == null) {
@@ -310,7 +323,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
 
         PlotOrientation orientation = plot.getOrientation();
         double barW0 = calculateBarW0(plot, orientation, dataArea, domainAxis,
-                state, row, column);
+                state, visibleRow, column);
         RectangleEdge edge = plot.getRangeAxisEdge();
         double barL = rangeAxis.valueToJava2D(value, dataArea, edge);
 
