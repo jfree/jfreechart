@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * LevelRenderer.java
  * ------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,11 +42,13 @@
  * 23-Jan-2006 : Renamed getMaxItemWidth() --> getMaximumItemWidth() (DG);
  * 13-May-2008 : Code clean-up (DG);
  * 26-Jun-2008 : Added crosshair support (DG);
+ * 23-Jan-2009 : Set more appropriate default shape in legend (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Stroke;
@@ -54,6 +56,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -99,6 +102,10 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
         this.itemMargin = DEFAULT_ITEM_MARGIN;
         this.maxItemWidth = 1.0;  // 100 percent, so it will not apply unless
                                   // changed
+        setBaseLegendShape(new Rectangle2D.Float(-5.0f, -1.0f, 10.0f, 2.0f));
+        // set the outline paint to fully transparent, then the legend shape
+        // will just have the same colour as the lines drawn by the renderer
+        setBaseOutlinePaint(new Color(0, 0, 0, 0));
     }
 
     /**
@@ -413,6 +420,18 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     *
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = HashUtilities.hashCode(hash, this.itemMargin);
+        hash = HashUtilities.hashCode(hash, this.maxItemWidth);
+        return hash;
     }
 
     /**
