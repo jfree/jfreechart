@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYErrorRenderer.java
  * --------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,14 +37,15 @@
  * 25-Oct-2006 : Version 1 (DG);
  * 23-Mar-2007 : Check item visibility before drawing error bars - see bug
  *               1686178 (DG);
+ * 28-Jan-2009 : Added stroke options for error indicators (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -63,6 +64,7 @@ import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
+import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 
 /**
@@ -98,6 +100,14 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     private transient Paint errorPaint;
 
     /**
+     * The stroke used to draw the error bars (if <code>null</code> we use the
+     * series outline stroke).
+     *
+     * @since 1.0.13
+     */
+    private transient Stroke errorStroke;
+
+    /**
      * Creates a new <code>XYErrorRenderer</code> instance.
      */
     public XYErrorRenderer() {
@@ -105,6 +115,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
         this.drawXError = true;
         this.drawYError = true;
         this.errorPaint = null;
+        this.errorStroke = null;
         this.capLength = 4.0;
     }
 
@@ -215,6 +226,36 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
+     * Returns the stroke used to draw the error bars.  If this is 
+     * <code>null</code> (the default), the item outline stroke is used 
+     * instead.
+     * 
+     * @return The stroke (possibly <code>null</code>).
+     *
+     * @see #setErrorStroke(Stroke)
+     * 
+     * @since 1.0.13
+     */
+    public Stroke getErrorStroke() {
+        return this.errorStroke;
+    }
+
+    /**
+     * Sets the stroke used to draw the error bars and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param stroke   the stroke (<code>null</code> permitted).
+     *
+     * @see #getErrorStroke()
+     *
+     * @since 1.0.13
+     */
+    public void setErrorStroke(Stroke stroke) {
+        this.errorStroke = stroke;
+        fireChangeEvent();
+    }
+
+    /**
      * Returns the range required by this renderer to display all the domain
      * values in the specified dataset.
      *
@@ -299,12 +340,17 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
                     cap1 = new Line2D.Double(yy - adj, xx0, yy + adj, xx0);
                     cap2 = new Line2D.Double(yy - adj, xx1, yy + adj, xx1);
                 }
-                g2.setStroke(new BasicStroke(1.0f));
                 if (this.errorPaint != null) {
                     g2.setPaint(this.errorPaint);
                 }
                 else {
                     g2.setPaint(getItemPaint(series, item));
+                }
+                if (this.errorStroke != null) {
+                    g2.setStroke(this.errorStroke);
+                }
+                else {
+                    g2.setStroke(getItemStroke(series, item));
                 }
                 g2.draw(line);
                 g2.draw(cap1);
@@ -334,12 +380,17 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
                     cap1 = new Line2D.Double(yy0, xx - adj, yy0, xx + adj);
                     cap2 = new Line2D.Double(yy1, xx - adj, yy1, xx + adj);
                 }
-                g2.setStroke(new BasicStroke(1.0f));
                 if (this.errorPaint != null) {
                     g2.setPaint(this.errorPaint);
                 }
                 else {
                     g2.setPaint(getItemPaint(series, item));
+                }
+                if (this.errorStroke != null) {
+                    g2.setStroke(this.errorStroke);
+                }
+                else {
+                    g2.setStroke(getItemStroke(series, item));
                 }
                 g2.draw(line);
                 g2.draw(cap1);
@@ -377,6 +428,9 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
         if (!PaintUtilities.equal(this.errorPaint, that.errorPaint)) {
             return false;
         }
+        if (!ObjectUtilities.equal(this.errorStroke, that.errorStroke)) {
+            return false;
+        }
         return super.equals(obj);
     }
 
@@ -392,6 +446,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.errorPaint = SerialUtilities.readPaint(stream);
+        this.errorStroke = SerialUtilities.readStroke(stream);
     }
 
     /**
@@ -404,6 +459,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         SerialUtilities.writePaint(this.errorPaint, stream);
+        SerialUtilities.writeStroke(this.errorStroke, stream);
     }
 
 }

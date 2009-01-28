@@ -1,5 +1,21 @@
 2009-01-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/xy/XYErrorRenderer.java
+    (errorStroke): New field,
+    (XYErrorRenderer): Initialise new field,
+    (getErrorStroke): New method,
+    (setErrorStroke): Likewise,
+    (drawItem): Updated to use new errorStroke or else item outline stroke,
+    (equals): Check new field,
+    (readObject): Handle new field,
+    (writeObject): Likewise,
+    * tests/org/jfree/chart/renderer/xy/junit/XYErrorRendererTests.java
+    (testEquals): Added check for errorStroke field,
+    (testCloning2): New test,
+    (testSerialization2): Likewise.
+
+2009-01-28  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/DataUtilities.java
     (clone(double[][]): New method,
     * tests/org/jfree/data/junit/DataUtilitiesTests.java
