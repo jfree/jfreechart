@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * DataUtilities.java
  * ------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  *               from the DatasetUtilities class (DG);
  * 17-May-2005 : Added calculateColumnTotal() and calculateRowTotal()
  *               methods (DG);
+ * 28-Jan-2009 : Added equal(double[][], double[][]) method (DG);
  *
  */
 
@@ -51,6 +52,73 @@ import org.jfree.data.general.DatasetUtilities;
  * see {@link DatasetUtilities}).
  */
 public abstract class DataUtilities {
+
+    /**
+     * Tests two arrays for equality.  To be considered equal, the arrays must
+     * have exactly the same dimensions, and the values in each array must also
+     * match (two values that qre both NaN or both INF are considered equal
+     * in this test).
+     *
+     * @param a  the first array (<code>null</code> permitted).
+     * @param b  the second array (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.13
+     */
+    public static boolean equal(double[][] a, double[][] b) {
+        if (a == b) {
+            return true;
+        }
+        if (a == null || b== null) {
+            return false;
+        }
+        if (a.length != b.length) {
+            return false;
+        }
+        for (int i = 0; i < a.length; i++) {
+            boolean ok = true;
+            if (a[i] == null) {
+                ok = (b[i] == null);
+            }
+            else {
+                if (b[i] == null) {
+                    ok = false;
+                }
+                else {
+                    ok = (a.length == b.length);
+                }
+            }
+            if (!ok) {
+                return false;
+            }
+        }
+        // once we get to here, we know the dimensions match
+        // so we check the actual values - we consider both values being NaN 
+        // or INF as being equal
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != null) {
+                for (int j = 0; j < a[i].length; j++) {
+                    double x = a[i][j];
+                    double y = b[i][j];
+                    if (x != y) {
+                        boolean ok = false;
+                        if (Double.isInfinite(x) && Double.isInfinite(y)) {
+                            ok = Math.signum(x) == Math.signum(y);
+                        }
+                        else if (Double.isNaN(x) && Double.isNaN(y)) {
+                            ok = true;
+                        }
+                        if (!ok) {
+                            return false;
+                        }
+                    }
+                }
+
+            }
+        }
+        return true;
+    }
 
     /**
      * Returns the total of the values in one column of the supplied data
