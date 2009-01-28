@@ -1,5 +1,12 @@
 2009-01-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/AbstractRenderer.java
+    (equals): Fix shape test,
+    * tests/org/jfree/chart/renderer/junit/AbstractRendererTests.java
+    (testEquals): Modified to cover Shape.equals() bug.
+
+2009-01-28  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/DataUtilities.java
     (equal(double[][], double[][])): New method,
     * tests/org/jfree/data/junit/DataUtilitiesTests.java

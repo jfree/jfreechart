@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * AbstractRendererTests.java
  * --------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  * 19-Feb-2007 : Added testCloning (DG);
  * 28-Feb-2007 : Added checks for cloning (DG);
  * 17-Jun-2008 : Added new fields to testEquals() and testCloning() (DG);
+ * 28-Jan-2009 : Updated testEquals() (DG);
  *
  */
 
@@ -51,6 +52,7 @@ import java.awt.GradientPaint;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
@@ -256,21 +258,21 @@ public class AbstractRendererTests extends TestCase {
         assertTrue(r1.equals(r2));
 
         // shape
-        r1.setShape(new Rectangle(1, 2, 3, 4));
+        r1.setShape(new Ellipse2D.Double(1, 2, 3, 4));
         assertFalse(r1.equals(r2));
-        r2.setShape(new Rectangle(1, 2, 3, 4));
+        r2.setShape(new Ellipse2D.Double(1, 2, 3, 4));
         assertTrue(r1.equals(r2));
 
         // shapeList
-        r1.setSeriesShape(1, new Rectangle(1, 2, 3, 4));
+        r1.setSeriesShape(1, new Ellipse2D.Double(1, 2, 3, 4));
         assertFalse(r1.equals(r2));
-        r2.setSeriesShape(1, new Rectangle(1, 2, 3, 4));
+        r2.setSeriesShape(1, new Ellipse2D.Double(1, 2, 3, 4));
         assertTrue(r1.equals(r2));
 
         // baseShape
-        r1.setBaseShape(new Rectangle(1, 2, 3, 4));
+        r1.setBaseShape(new Ellipse2D.Double(1, 2, 3, 4));
         assertFalse(r1.equals(r2));
-        r2.setBaseShape(new Rectangle(1, 2, 3, 4));
+        r2.setBaseShape(new Ellipse2D.Double(1, 2, 3, 4));
         assertTrue(r1.equals(r2));
 
         // itemLabelsVisible
@@ -402,15 +404,15 @@ public class AbstractRendererTests extends TestCase {
         assertTrue(r1.equals(r2));
 
         // legendShape
-        r1.setLegendShape(0, new Line2D.Double(1.0, 2.0, 3.0, 4.0));
+        r1.setLegendShape(0, new Ellipse2D.Double(1.0, 2.0, 3.0, 4.0));
         assertFalse(r1.equals(r2));
-        r2.setLegendShape(0, new Line2D.Double(1.0, 2.0, 3.0, 4.0));
+        r2.setLegendShape(0, new Ellipse2D.Double(1.0, 2.0, 3.0, 4.0));
         assertTrue(r1.equals(r2));
 
         // baseLegendShape
-        r1.setBaseLegendShape(new Line2D.Double(5.0, 6.0, 7.0, 8.0));
+        r1.setBaseLegendShape(new Ellipse2D.Double(5.0, 6.0, 7.0, 8.0));
         assertFalse(r1.equals(r2));
-        r2.setBaseLegendShape(new Line2D.Double(5.0, 6.0, 7.0, 8.0));
+        r2.setBaseLegendShape(new Ellipse2D.Double(5.0, 6.0, 7.0, 8.0));
         assertTrue(r1.equals(r2));
 
         // legendTextFont
