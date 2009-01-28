@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * DatasetUtilities.java
  * ---------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski (bug fix);
@@ -265,12 +265,9 @@ public final class DatasetUtilities {
      * @return The pie dataset with (possibly) aggregated items.
      */
     public static PieDataset createConsolidatedPieDataset(PieDataset source,
-                                                          Comparable key,
-                                                          double minimumPercent)
-    {
-        return DatasetUtilities.createConsolidatedPieDataset(
-            source, key, minimumPercent, 2
-        );
+            Comparable key, double minimumPercent) {
+        return DatasetUtilities.createConsolidatedPieDataset(source, key,
+                minimumPercent, 2);
     }
 
     /**
@@ -289,9 +286,7 @@ public final class DatasetUtilities {
      * @return The pie dataset with (possibly) aggregated items.
      */
     public static PieDataset createConsolidatedPieDataset(PieDataset source,
-                                                          Comparable key,
-                                                          double minimumPercent,
-                                                          int minItems) {
+            Comparable key, double minimumPercent, int minItems) {
 
         DefaultPieDataset result = new DefaultPieDataset();
         double total = DatasetUtilities.calculatePieDatasetTotal(source);
@@ -351,8 +346,7 @@ public final class DatasetUtilities {
      * @return The dataset.
      */
     public static CategoryDataset createCategoryDataset(String rowKeyPrefix,
-                                                        String columnKeyPrefix,
-                                                        double[][] data) {
+            String columnKeyPrefix, double[][] data) {
 
         DefaultCategoryDataset result = new DefaultCategoryDataset();
         for (int r = 0; r < data.length; r++) {
@@ -380,8 +374,7 @@ public final class DatasetUtilities {
      * @return The dataset.
      */
     public static CategoryDataset createCategoryDataset(String rowKeyPrefix,
-                                                        String columnKeyPrefix,
-                                                        Number[][] data) {
+            String columnKeyPrefix, Number[][] data) {
 
         DefaultCategoryDataset result = new DefaultCategoryDataset();
         for (int r = 0; r < data.length; r++) {
@@ -409,8 +402,7 @@ public final class DatasetUtilities {
      * @return The dataset.
      */
     public static CategoryDataset createCategoryDataset(Comparable[] rowKeys,
-                                                        Comparable[] columnKeys,
-                                                        double[][] data) {
+            Comparable[] columnKeys, double[][] data) {
 
         // check arguments...
         if (rowKeys == null) {
@@ -424,14 +416,12 @@ public final class DatasetUtilities {
         }
         if (ArrayUtilities.hasDuplicateItems(columnKeys)) {
             throw new IllegalArgumentException(
-                "Duplicate items in 'columnKeys'."
-            );
+                    "Duplicate items in 'columnKeys'.");
         }
         if (rowKeys.length != data.length) {
             throw new IllegalArgumentException(
                 "The number of row keys does not match the number of rows in "
-                + "the data array."
-            );
+                + "the data array.");
         }
         int columnCount = 0;
         for (int r = 0; r < data.length; r++) {
@@ -440,8 +430,7 @@ public final class DatasetUtilities {
         if (columnKeys.length != columnCount) {
             throw new IllegalArgumentException(
                 "The number of column keys does not match the number of "
-                + "columns in the data array."
-            );
+                + "columns in the data array.");
         }
 
         // now do the work...
@@ -1116,12 +1105,10 @@ public final class DatasetUtilities {
      */
     public static Number findMinimumRangeValue(CategoryDataset dataset) {
 
-        // check parameters...
         if (dataset == null) {
             throw new IllegalArgumentException("Null 'dataset' argument.");
         }
 
-        // work out the minimum value...
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
             return new Double(info.getRangeLowerBound(true));
@@ -1137,7 +1124,7 @@ public final class DatasetUtilities {
                     Number value;
                     if (dataset instanceof IntervalCategoryDataset) {
                         IntervalCategoryDataset icd
-                            = (IntervalCategoryDataset) dataset;
+                                = (IntervalCategoryDataset) dataset;
                         value = icd.getStartValue(series, item);
                     }
                     else {
@@ -1194,7 +1181,7 @@ public final class DatasetUtilities {
                     double value;
                     if (dataset instanceof IntervalXYDataset) {
                         IntervalXYDataset intervalXYData
-                            = (IntervalXYDataset) dataset;
+                                = (IntervalXYDataset) dataset;
                         value = intervalXYData.getStartYValue(series, item);
                     }
                     else if (dataset instanceof OHLCDataset) {
@@ -1311,7 +1298,7 @@ public final class DatasetUtilities {
                     double value;
                     if (dataset instanceof IntervalXYDataset) {
                         IntervalXYDataset intervalXYData
-                            = (IntervalXYDataset) dataset;
+                                = (IntervalXYDataset) dataset;
                         value = intervalXYData.getEndYValue(series, item);
                     }
                     else if (dataset instanceof OHLCDataset) {
