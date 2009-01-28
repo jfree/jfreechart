@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DataUtilitiesTests.java
  * -----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,13 +35,16 @@
  * Changes
  * -------
  * 03-Mar-2005 : Version 1 (DG);
+ * 28-Jan-2009 : Added tests for equal(double[][], double[][]) method (DG);
  *
  */
 
 package org.jfree.data.junit;
 
+import junit.framework.Test;
 import junit.framework.TestCase;
 
+import junit.framework.TestSuite;
 import org.jfree.data.DataUtilities;
 import org.jfree.data.DefaultKeyedValues2D;
 
@@ -49,6 +52,15 @@ import org.jfree.data.DefaultKeyedValues2D;
  * Some tests for the {@link DataUtilities} class.
  */
 public class DataUtilitiesTests extends TestCase {
+
+    /**
+     * Returns the tests as a test suite.
+     *
+     * @return The test suite.
+     */
+    public static Test suite() {
+        return new TestSuite(DataUtilitiesTests.class);
+    }
 
     /**
      * Tests the createNumberArray2D() method.
@@ -94,4 +106,63 @@ public class DataUtilitiesTests extends TestCase {
         table.setValue(null, "R1", "C1");
         assertEquals(3.0, DataUtilities.calculateRowTotal(table, 1), EPSILON);
     }
+
+    /**
+     * Some tests for the equal(double[][], double[][]) method.
+     */
+    public void testEqual() {
+        assertTrue(DataUtilities.equal(null, null));
+        
+        double[][] a = new double[5][];
+        double[][] b = new double[5][];
+        assertTrue(DataUtilities.equal(a, b));
+
+        a = new double[4][];
+        assertFalse(DataUtilities.equal(a, b));
+        b = new double[4][];
+        assertTrue(DataUtilities.equal(a, b));
+
+        a[0] = new double[6];
+        assertFalse(DataUtilities.equal(a, b));
+        b[0] = new double[6];
+        assertTrue(DataUtilities.equal(a, b));
+
+        a[0][0] = 1.0;
+        assertFalse(DataUtilities.equal(a, b));
+        b[0][0] = 1.0;
+        assertTrue(DataUtilities.equal(a, b));
+
+        a[0][1] = Double.NaN;
+        assertFalse(DataUtilities.equal(a, b));
+        b[0][1] = Double.NaN;
+        assertTrue(DataUtilities.equal(a, b));
+
+        a[0][2] = Double.NEGATIVE_INFINITY;
+        assertFalse(DataUtilities.equal(a, b));
+        b[0][2] = Double.NEGATIVE_INFINITY;
+        assertTrue(DataUtilities.equal(a, b));
+
+        a[0][3] = Double.POSITIVE_INFINITY;
+        assertFalse(DataUtilities.equal(a, b));
+        b[0][3] = Double.POSITIVE_INFINITY;
+        assertTrue(DataUtilities.equal(a, b));
+
+        a[0][4] = Double.POSITIVE_INFINITY;
+        assertFalse(DataUtilities.equal(a, b));
+        b[0][4] = Double.NEGATIVE_INFINITY;
+        assertFalse(DataUtilities.equal(a, b));
+        b[0][4] = Double.POSITIVE_INFINITY;
+        assertTrue(DataUtilities.equal(a, b));
+
+    }
+
+    /**
+     * Runs the test suite using JUnit's text-based runner.
+     *
+     * @param args  ignored.
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
+
 }
