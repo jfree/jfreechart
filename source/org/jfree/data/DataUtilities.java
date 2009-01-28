@@ -46,6 +46,7 @@
 
 package org.jfree.data;
 
+import java.util.Arrays;
 import org.jfree.data.general.DatasetUtilities;
 
 /**
@@ -68,54 +69,18 @@ public abstract class DataUtilities {
      * @since 1.0.13
      */
     public static boolean equal(double[][] a, double[][] b) {
-        if (a == b) {
-            return true;
+        if (a == null) {
+            return (b == null);
         }
-        if (a == null || b== null) {
-            return false;
+        if (b == null) {
+            return false;  // already know 'a' isn't null
         }
         if (a.length != b.length) {
             return false;
         }
         for (int i = 0; i < a.length; i++) {
-            boolean ok = true;
-            if (a[i] == null) {
-                ok = (b[i] == null);
-            }
-            else {
-                if (b[i] == null) {
-                    ok = false;
-                }
-                else {
-                    ok = (a.length == b.length);
-                }
-            }
-            if (!ok) {
+            if (!Arrays.equals(a[i], b[i])) {
                 return false;
-            }
-        }
-        // once we get to here, we know the dimensions match
-        // so we check the actual values - we consider both values being NaN 
-        // or INF as being equal
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] != null) {
-                for (int j = 0; j < a[i].length; j++) {
-                    double x = a[i][j];
-                    double y = b[i][j];
-                    if (x != y) {
-                        boolean ok = false;
-                        if (Double.isInfinite(x) && Double.isInfinite(y)) {
-                            ok = Math.signum(x) == Math.signum(y);
-                        }
-                        else if (Double.isNaN(x) && Double.isNaN(y)) {
-                            ok = true;
-                        }
-                        if (!ok) {
-                            return false;
-                        }
-                    }
-                }
-
             }
         }
         return true;
