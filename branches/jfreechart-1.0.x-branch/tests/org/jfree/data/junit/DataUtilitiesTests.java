@@ -36,6 +36,7 @@
  * -------
  * 03-Mar-2005 : Version 1 (DG);
  * 28-Jan-2009 : Added tests for equal(double[][], double[][]) method (DG);
+ * 28-Jan-2009 : Added tests for clone(double[][]) (DG);
  *
  */
 
@@ -153,7 +154,30 @@ public class DataUtilitiesTests extends TestCase {
         assertFalse(DataUtilities.equal(a, b));
         b[0][4] = Double.POSITIVE_INFINITY;
         assertTrue(DataUtilities.equal(a, b));
+    }
 
+    /**
+     * Some tests for the clone() method.
+     */
+    public void testClone() {
+        double[][] a = new double[1][];
+        double[][] b = DataUtilities.clone(a);
+        assertTrue(DataUtilities.equal(a, b));
+        a[0] = new double[] { 3.0, 4.0 };
+        assertFalse(DataUtilities.equal(a, b));
+        b[0] = new double[] { 3.0, 4.0 };
+        assertTrue(DataUtilities.equal(a, b));
+
+        a = new double[2][3];
+        a[0][0] = 1.23;
+        a[1][1] = Double.NaN;
+        b = DataUtilities.clone(a);
+        assertTrue(DataUtilities.equal(a, b));
+
+        a[0][0] = 99.9;
+        assertFalse(DataUtilities.equal(a, b));
+        b[0][0] = 99.9;
+        assertTrue(DataUtilities.equal(a, b));
     }
 
     /**

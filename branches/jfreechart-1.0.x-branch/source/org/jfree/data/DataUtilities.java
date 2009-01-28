@@ -40,6 +40,7 @@
  * 17-May-2005 : Added calculateColumnTotal() and calculateRowTotal()
  *               methods (DG);
  * 28-Jan-2009 : Added equal(double[][], double[][]) method (DG);
+ * 28-Jan-2009 : Added clone(double[][]) method (DG);
  *
  */
 
@@ -118,6 +119,30 @@ public abstract class DataUtilities {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns a clone of the specified array.
+     *
+     * @param source  the source array (<code>null</code> not permitted).
+     *
+     * @return A clone of the array.
+     *
+     * @since 1.0.13
+     */
+    public static double[][] clone(double[][] source) {
+        if (source == null) {
+            throw new IllegalArgumentException("Null 'source' argument.");
+        }
+        double[][] clone = new double[source.length][];
+        for (int i = 0; i < source.length; i++) {
+            if (source[i] != null) {
+                double[] row = new double[source[i].length];
+                System.arraycopy(source[i], 0, row, 0, source[i].length);
+                clone[i] = row;
+            }
+        }
+        return clone;
     }
 
     /**
