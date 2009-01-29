@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * FastScatterPlotTests.java
  * -------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 18-Mar-2003 : Version 1 (DG);
+ * 29-Jan-2009 : Updated testEquals() (DG);
  *
  */
 
@@ -139,6 +140,48 @@ public class FastScatterPlotTests extends TestCase {
     }
 
     /**
+     * Some tests for the data array equality in the equals() method.
+     */
+    public void testEquals2() {
+        FastScatterPlot plot1 = new FastScatterPlot();
+        FastScatterPlot plot2 = new FastScatterPlot();
+        assertTrue(plot1.equals(plot2));
+        assertTrue(plot2.equals(plot1));
+
+        float[][] a = new float[2][];
+        float[][] b = new float[2][];
+        plot1.setData(a);
+        assertFalse(plot1.equals(plot2));
+        plot2.setData(b);
+        assertTrue(plot1.equals(plot2));
+
+        a[0] = new float[6];
+        assertFalse(plot1.equals(plot2));
+        b[0] = new float[6];
+        assertTrue(plot1.equals(plot2));
+
+        a[0][0] = 1.0f;
+        assertFalse(plot1.equals(plot2));
+        b[0][0] = 1.0f;
+        assertTrue(plot1.equals(plot2));
+
+        a[0][1] = Float.NaN;
+        assertFalse(plot1.equals(plot2));
+        b[0][1] = Float.NaN;
+        assertTrue(plot1.equals(plot2));
+
+        a[0][2] = Float.POSITIVE_INFINITY;
+        assertFalse(plot1.equals(plot2));
+        b[0][2] = Float.POSITIVE_INFINITY;
+        assertTrue(plot1.equals(plot2));
+
+        a[0][3] = Float.NEGATIVE_INFINITY;
+        assertFalse(plot1.equals(plot2));
+        b[0][3] = Float.NEGATIVE_INFINITY;
+        assertTrue(plot1.equals(plot2));
+    }
+
+    /**
      * Confirm that cloning works.
      */
     public void testCloning() {
@@ -149,7 +192,6 @@ public class FastScatterPlotTests extends TestCase {
         }
         catch (CloneNotSupportedException e) {
             e.printStackTrace();
-            System.err.println("Failed to clone.");
         }
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
@@ -160,9 +202,7 @@ public class FastScatterPlotTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         float[][] data = createData();
-
         ValueAxis domainAxis = new NumberAxis("X");
         ValueAxis rangeAxis = new NumberAxis("Y");
         FastScatterPlot p1 = new FastScatterPlot(data, domainAxis, rangeAxis);
@@ -174,17 +214,15 @@ public class FastScatterPlotTests extends TestCase {
             out.writeObject(p1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             p2 = (FastScatterPlot) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(p1, p2);
-
     }
 
     /**
@@ -218,16 +256,13 @@ public class FastScatterPlotTests extends TestCase {
      * @return Random data.
      */
     private float[][] createData() {
-
         float[][] result = new float[2][1000];
         for (int i = 0; i < result[0].length; i++) {
-
             float x = (float) i + 100;
             result[0][i] = x;
             result[1][i] = 100 + (float) Math.random() * 1000;
         }
         return result;
-
     }
 
 }
