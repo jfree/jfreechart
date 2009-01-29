@@ -882,7 +882,10 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Tests an object for equality with this instance.
+     * Tests an arbitrary object for equality with this plot.  Note that
+     * <code>FastScatterPlot</code> carries its data around with it (rather
+     * than referencing a dataset), and the data is included in the
+     * equality test.
      *
      * @param obj  the object (<code>null</code> permitted).
      *
