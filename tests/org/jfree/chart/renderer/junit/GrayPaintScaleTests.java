@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * GrayPaintScaleTests.java
  * ------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 05-Jul-2006 : Version 1 (DG);
  * 26-Sep-2007 : Added testConstructor() and testGetPaint() (DG);
+ * 29-Jan-2009 : Extended testEquals() for new alpha field (DG);
  *
  */
 
@@ -88,6 +89,7 @@ public class GrayPaintScaleTests extends TestCase {
         GrayPaintScale gps = new GrayPaintScale();
         assertEquals(0.0, gps.getLowerBound(), EPSILON);
         assertEquals(1.0, gps.getUpperBound(), EPSILON);
+        assertEquals(255, gps.getAlpha());
     }
 
     /**
@@ -128,6 +130,11 @@ public class GrayPaintScaleTests extends TestCase {
         g1 = new GrayPaintScale(0.1, 0.9);
         assertFalse(g1.equals(g2));
         g2 = new GrayPaintScale(0.1, 0.9);
+        assertTrue(g1.equals(g2));
+
+        g1 = new GrayPaintScale(0.1, 0.9, 128);
+        assertFalse(g1.equals(g2));
+        g2 = new GrayPaintScale(0.1, 0.9, 128);
         assertTrue(g1.equals(g2));
     }
 
