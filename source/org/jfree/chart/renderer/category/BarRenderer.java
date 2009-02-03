@@ -88,6 +88,7 @@
  * 26-Jun-2008 : Added crosshair support (DG);
  * 13-Aug-2008 : Added shadowPaint attribute (DG);
  * 14-Jan-2009 : Added support for seriesVisible flags (PK);
+ * 03-Feb-2009 : Added defaultShadowsVisible flag - see patch 2511330 (PK);
  *
  */
 
@@ -184,6 +185,37 @@ public class BarRenderer extends AbstractCategoryItemRenderer
             throw new IllegalArgumentException("Null 'painter' argument.");
         }
         BarRenderer.defaultBarPainter = painter;
+    }
+
+    /**
+     * The default value for the initialisation of the shadowsVisible flag.
+     */
+    private static boolean defaultShadowsVisible = true;
+
+    /**
+     * Returns the default value for the <code>shadowsVisible</code> flag.
+     *
+     * @return A boolean.
+     *
+     * @see #setDefaultShadowsVisible(boolean)
+     *
+     * @since 1.0.13
+     */
+    public static boolean getDefaultShadowsVisible() {
+        return BarRenderer.defaultShadowsVisible;
+    }
+
+    /**
+     * Sets the default value for the shadows visible flag.
+     *
+     * @param visible  the new value for the default.
+     *
+     * @see #getDefaultShadowsVisible()
+     *
+     * @since 1.0.13
+     */
+    public static void setDefaultShadowsVisible(boolean visible) {
+        BarRenderer.defaultShadowsVisible = visible;
     }
 
     /** The margin between items (bars) within a category. */
@@ -285,7 +317,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         this.minimumBarLength = 0.0;
         setBaseLegendShape(new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0));
         this.barPainter = getDefaultBarPainter();
-        this.shadowsVisible = true;
+        this.shadowsVisible = getDefaultShadowsVisible();
         this.shadowPaint = Color.gray;
         this.shadowXOffset = 4.0;
         this.shadowYOffset = 4.0;
