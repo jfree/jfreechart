@@ -1,3 +1,10 @@
+2009-02-03  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/renderer/category/StackedBarRenderer3D.java
+    (findRangeBounds): Check for null dataset,
+    * tests/org/jfree/chart/renderer/category/junit/StackedBarRenderer3DTests.java
+    (testFindRangeBounds): New test.
+
 2009-02-02  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/GrayPaintScale.java

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * StackedBarRenderer3DTests.java
  * ------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,7 +37,7 @@
  * 25-Mar-2003 : Version 1 (DG);
  * 18-Jan-2007 : Added many new tests (DG);
  * 23-Apr-2008 : Added testPublicCloneable() (DG);
- *
+ * 03-Feb-2009 : Added testFindRangeBounds() (DG);
  */
 
 package org.jfree.chart.renderer.category.junit;
@@ -55,6 +55,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.renderer.category.StackedBarRenderer3D;
+import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.PublicCloneable;
@@ -91,6 +92,33 @@ public class StackedBarRenderer3DTests extends TestCase {
      */
     public StackedBarRenderer3DTests(String name) {
         super(name);
+    }
+
+    /**
+     * Some checks for the findRangeBounds() method.
+     */
+    public void testFindRangeBounds() {
+        StackedBarRenderer3D r = new StackedBarRenderer3D();
+        assertNull(r.findRangeBounds(null));
+
+        // an empty dataset should return a null range
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        assertNull(r.findRangeBounds(dataset));
+
+        dataset.addValue(1.0, "R1", "C1");
+        assertEquals(new Range(0.0, 1.0), r.findRangeBounds(dataset));
+
+        dataset.addValue(-2.0, "R1", "C2");
+        assertEquals(new Range(-2.0, 1.0), r.findRangeBounds(dataset));
+
+        dataset.addValue(null, "R1", "C3");
+        assertEquals(new Range(-2.0, 1.0), r.findRangeBounds(dataset));
+
+        dataset.addValue(2.0, "R2", "C1");
+        assertEquals(new Range(-2.0, 3.0), r.findRangeBounds(dataset));
+
+        dataset.addValue(null, "R2", "C2");
+        assertEquals(new Range(-2.0, 3.0), r.findRangeBounds(dataset));
     }
 
     /**

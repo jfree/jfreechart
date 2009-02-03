@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * StackedBarRenderer3D.java
  * -------------------------
- * (C) Copyright 2000-2008, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2000-2009, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -81,6 +81,8 @@
  * 08-May-2007 : Fixed bugs 1713401 (drawBarOutlines flag) and  1713474
  *               (shading) (DG);
  * 15-Aug-2008 : Fixed bug 2031407 - no negative zero for stack encoding (DG);
+ * 03-Feb-2009 : Fixed regression in findRangeBounds() method for null
+ *               dataset (DG);
  *
  */
 
@@ -216,6 +218,9 @@ public class StackedBarRenderer3D extends BarRenderer3D
      * @return The range (or <code>null</code> if the dataset is empty).
      */
     public Range findRangeBounds(CategoryDataset dataset) {
+        if (dataset == null) {
+            return null;
+        }
         if (this.renderAsPercentages) {
             return new Range(0.0, 1.0);
         }
