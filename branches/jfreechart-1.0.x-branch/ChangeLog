@@ -1,5 +1,16 @@
 2009-02-03  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/renderer/category/BarRenderer.java
+    (defaultShadowsVisible): New field,
+    (getDefaultShadowsVisible): New method,
+    (setShadowsVisible): Likewise,
+    * source/org/jfree/renderer/xy/XYBarRenderer.java
+    (defaultShadowsVisible): New field,
+    (getDefaultShadowsVisible): New method,
+    (setShadowsVisible): Likewise.
+
+2009-02-03  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/renderer/category/StackedBarRenderer3D.java
     (findRangeBounds): Check for null dataset,
     * tests/org/jfree/chart/renderer/category/junit/StackedBarRenderer3DTests.java
