@@ -50,7 +50,8 @@
  *               getYValue() (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- *
+ * 04-Feb-2009 : Deprecated the class (DG);
+ * 
  */
 
 package org.jfree.data.general;
@@ -66,6 +67,10 @@ import org.jfree.data.xy.XYDataset;
  * This class can combine instances of {@link XYDataset}, {@link OHLCDataset}
  * and {@link IntervalXYDataset} together exposing the union of all the series
  * under one dataset.
+ *
+ * @deprecated As of version 1.0.13.  This class will be removed from
+ *     JFreeChart 1.2.0 onwards.  Anyone needing this facility will need to
+ *     maintain it outside of JFreeChart.
  */
 public class CombinedDataset extends AbstractIntervalXYDataset
         implements XYDataset, OHLCDataset, IntervalXYDataset,
