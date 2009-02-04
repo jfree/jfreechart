@@ -1,5 +1,10 @@
 2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/general/CombinedDataset.java: Deprecated,
+    * source/org/jfree/data/general/SubSeriesDataset.java: Likewise.
+
+2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 2564636:
     * source/org/jfree/data/time/Month.java
     (Month(Date, TimeZone, Locale)): Use locale.
