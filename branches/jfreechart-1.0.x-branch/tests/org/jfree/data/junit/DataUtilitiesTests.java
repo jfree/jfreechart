@@ -37,6 +37,7 @@
  * 03-Mar-2005 : Version 1 (DG);
  * 28-Jan-2009 : Added tests for equal(double[][], double[][]) method (DG);
  * 28-Jan-2009 : Added tests for clone(double[][]) (DG);
+ * 04-Feb-2009 : Added tests for new calculateColumnTotal/RowTotal methods (DG);
  *
  */
 
@@ -94,6 +95,38 @@ public class DataUtilitiesTests extends TestCase {
     }
 
     /**
+     * Some checks for the calculateColumnTotal() method.
+     */
+    public void testCalculateColumnTotal2() {
+        DefaultKeyedValues2D table = new DefaultKeyedValues2D();
+        table.addValue(new Double(1.0), "R0", "C0");
+        table.addValue(new Double(2.0), "R0", "C1");
+        table.addValue(new Double(3.0), "R1", "C0");
+        table.addValue(new Double(4.0), "R1", "C1");
+        assertEquals(4.0, DataUtilities.calculateColumnTotal(table, 0,
+                new int[] {0, 1}), EPSILON);
+        assertEquals(1.0, DataUtilities.calculateColumnTotal(table, 0,
+                new int[] {0}), EPSILON);
+        assertEquals(3.0, DataUtilities.calculateColumnTotal(table, 0,
+                new int[] {1}), EPSILON);
+        assertEquals(0.0, DataUtilities.calculateColumnTotal(table, 0,
+                new int[] {}), EPSILON);
+
+        assertEquals(6.0, DataUtilities.calculateColumnTotal(table, 1,
+                new int[] {0, 1}), EPSILON);
+        assertEquals(2.0, DataUtilities.calculateColumnTotal(table, 1,
+                new int[] {0}), EPSILON);
+        assertEquals(4.0, DataUtilities.calculateColumnTotal(table, 1,
+                new int[] {1}), EPSILON);
+
+        table.setValue(null, "R1", "C1");
+        assertEquals(2.0, DataUtilities.calculateColumnTotal(table, 1,
+                new int[] {0, 1}), EPSILON);
+        assertEquals(0.0, DataUtilities.calculateColumnTotal(table, 1,
+                new int[] {1}), EPSILON);
+    }
+
+    /**
      * Some checks for the calculateRowTotal() method.
      */
     public void testCalculateRowTotal() {
@@ -106,6 +139,39 @@ public class DataUtilitiesTests extends TestCase {
         assertEquals(7.0, DataUtilities.calculateRowTotal(table, 1), EPSILON);
         table.setValue(null, "R1", "C1");
         assertEquals(3.0, DataUtilities.calculateRowTotal(table, 1), EPSILON);
+    }
+
+    /**
+     * Some checks for the calculateRowTotal() method.
+     */
+    public void testCalculateRowTotal2() {
+        DefaultKeyedValues2D table = new DefaultKeyedValues2D();
+        table.addValue(new Double(1.0), "R0", "C0");
+        table.addValue(new Double(2.0), "R0", "C1");
+        table.addValue(new Double(3.0), "R1", "C0");
+        table.addValue(new Double(4.0), "R1", "C1");
+        assertEquals(3.0, DataUtilities.calculateRowTotal(table, 0,
+                new int[] {0, 1}), EPSILON);
+        assertEquals(1.0, DataUtilities.calculateRowTotal(table, 0,
+                new int[] {0}), EPSILON);
+        assertEquals(2.0, DataUtilities.calculateRowTotal(table, 0,
+                new int[] {1}), EPSILON);
+        assertEquals(0.0, DataUtilities.calculateRowTotal(table, 0,
+                new int[] {}), EPSILON);
+
+        assertEquals(7.0, DataUtilities.calculateRowTotal(table, 1,
+                new int[] {0, 1}), EPSILON);
+        assertEquals(3.0, DataUtilities.calculateRowTotal(table, 1,
+                new int[] {0}), EPSILON);
+        assertEquals(4.0, DataUtilities.calculateRowTotal(table, 1,
+                new int[] {1}), EPSILON);
+        assertEquals(0.0, DataUtilities.calculateRowTotal(table, 1,
+                new int[] {}), EPSILON);
+        table.setValue(null, "R1", "C1");
+        assertEquals(3.0, DataUtilities.calculateRowTotal(table, 1,
+                new int[] {0, 1}), EPSILON);
+        assertEquals(0.0, DataUtilities.calculateRowTotal(table, 1,
+                new int[] {1}), EPSILON);
     }
 
     /**
