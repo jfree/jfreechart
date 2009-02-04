@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * DataGeneralPackageTests.java
  * ----------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 23-Aug-2004 : Restructured org.jfree.data package (DG);
  * 18-Jan-2005 : Added main() method (DG);
+ * 04-Feb-2009 : Added DefaultHeatMapDatasetTests (DG);
  *
  */
 
@@ -61,6 +62,7 @@ public class DataGeneralPackageTests extends TestCase {
         TestSuite suite = new TestSuite("org.jfree.data.general");
         suite.addTestSuite(DatasetGroupTests.class);
         suite.addTestSuite(DatasetUtilitiesTests.class);
+        suite.addTestSuite(DefaultHeatMapDatasetTests.class);
         suite.addTestSuite(DefaultKeyedValueDatasetTests.class);
         suite.addTestSuite(DefaultKeyedValuesDatasetTests.class);
         suite.addTestSuite(DefaultKeyedValues2DDatasetTests.class);
