@@ -83,6 +83,7 @@
  * 15-Aug-2008 : Fixed bug 2031407 - no negative zero for stack encoding (DG);
  * 03-Feb-2009 : Fixed regression in findRangeBounds() method for null
  *               dataset (DG);
+ * 04-Feb-2009 : Handle seriesVisible flag (DG);
  *
  */
 
@@ -287,9 +288,37 @@ public class StackedBarRenderer3D extends BarRenderer3D
      * @return The value list.
      *
      * @since 1.0.4
+     *
+     * @deprecated As of 1.0.13, use {@link #createStackedValueList(
+     *     CategoryDataset, Comparable, int[], double, boolean)}.
      */
     protected static List createStackedValueList(CategoryDataset dataset,
             Comparable category, double base, boolean asPercentages) {
+        int[] rows = new int[dataset.getRowCount()];
+        for (int i = 0; i < rows.length; i++) {
+            rows[i] = i;
+        }
+        return createStackedValueList(dataset, category, rows, base,
+                asPercentages);
+    }
+
+    /**
+     * Returns a list containing the stacked values for the specified series
+     * in the given dataset, plus the supplied base value.
+     *
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param category  the category key (<code>null</code> not permitted).
+     * @param base  the base value.
+     * @param asPercentages  a flag that controls whether the values in the
+     *     list are converted to percentages of the total.
+     *
+     * @return The value list.
+     *
+     * @since 1.0.13
+     */
+    protected static List createStackedValueList(CategoryDataset dataset,
+            Comparable category, int[] includedRows, double base,
+            boolean asPercentages) {
 
         List result = new ArrayList();
         double posBase = base;
@@ -297,13 +326,14 @@ public class StackedBarRenderer3D extends BarRenderer3D
         double total = 0.0;
         if (asPercentages) {
             total = DataUtilities.calculateColumnTotal(dataset,
-                    dataset.getColumnIndex(category));
+                    dataset.getColumnIndex(category), includedRows);
         }
 
         int baseIndex = -1;
-        int seriesCount = dataset.getRowCount();
-        for (int s = 0; s < seriesCount; s++) {
-            Number n = dataset.getValue(dataset.getRowKey(s), category);
+        int rowCount = includedRows.length;
+        for (int i = 0; i < rowCount; i++) {
+            int r = includedRows[i];
+            Number n = dataset.getValue(dataset.getRowKey(r), category);
             if (n == null) {
                 continue;
             }
@@ -317,7 +347,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
                     baseIndex = 0;
                 }
                 posBase = posBase + v;
-                result.add(new Object[] {new Integer(s), new Double(posBase)});
+                result.add(new Object[] {new Integer(r), new Double(posBase)});
             }
             else if (v < 0.0) {
                 if (baseIndex < 0) {
@@ -325,7 +355,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
                     baseIndex = 0;
                 }
                 negBase = negBase + v; // '+' because v is negative
-                result.add(0, new Object[] {new Integer(-s - 1),
+                result.add(0, new Object[] {new Integer(-r - 1),
                         new Double(negBase)});
                 baseIndex++;
             }
@@ -369,8 +399,8 @@ public class StackedBarRenderer3D extends BarRenderer3D
         Comparable category = dataset.getColumnKey(column);
 
         List values = createStackedValueList(dataset,
-                dataset.getColumnKey(column), getBase(),
-                this.renderAsPercentages);
+                dataset.getColumnKey(column), state.getVisibleSeriesArray(),
+                getBase(), this.renderAsPercentages);
 
         Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(),
                 dataArea.getY() + getYOffset(),

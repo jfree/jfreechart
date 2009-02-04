@@ -1,5 +1,13 @@
 2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/category/StackedBarRenderer3D.java
+    (createStackedValueList): Deprecated,
+    (createStackedValueList(CategoryDataset, Comparable, int[], double,
+    boolean)): New method,
+    (drawItem): Check for hidden series.
+
+2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/StackedBarRenderer.java
     (drawItem): Check for hidden series.
 
