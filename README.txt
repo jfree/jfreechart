@@ -777,6 +777,7 @@ below:
     - Jean-Luc SCHWAB
     - Bryan Scott
     - Tobias Selb
+    - Darshan Shah
     - Mofeed Shahin
     - Michael Siemer
     - Pady Srinivasan
