@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,13 @@
  * -----------------------
  * StackedBarRenderer.java
  * -----------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *                   Thierry Saura;
  *                   Christian W. Zuckschwerdt;
+ *                   Peter Kolb (patch 2511330);
  *
  * Changes
  * -------
@@ -87,6 +88,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 11-Oct-2006 : Source reformatting (DG);
  * 24-Jun-2008 : Added new barPainter mechanism (DG);
+ * 04-Feb-2009 : Added support for hidden series (PK);
  *
  */
 
@@ -291,6 +293,10 @@ public class StackedBarRenderer extends BarRenderer
                          int column,
                          int pass) {
 
+        if (!isSeriesVisible(row)) {
+            return;
+        }
+
         // nothing is drawn for null values...
         Number dataValue = dataset.getValue(row, column);
         if (dataValue == null) {
@@ -300,7 +306,8 @@ public class StackedBarRenderer extends BarRenderer
         double value = dataValue.doubleValue();
         double total = 0.0;  // only needed if calculating percentages
         if (this.renderAsPercentages) {
-            total = DataUtilities.calculateColumnTotal(dataset, column);
+            total = DataUtilities.calculateColumnTotal(dataset, column,
+                    state.getVisibleSeriesArray());
             value = value / total;
         }
 
@@ -314,7 +321,7 @@ public class StackedBarRenderer extends BarRenderer
 
         for (int i = 0; i < row; i++) {
             Number v = dataset.getValue(i, column);
-            if (v != null) {
+            if (v != null && isSeriesVisible(i)) {
                 double d = v.doubleValue();
                 if (this.renderAsPercentages) {
                     d = d / total;

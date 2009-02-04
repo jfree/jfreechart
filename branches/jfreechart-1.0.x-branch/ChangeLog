@@ -1,5 +1,10 @@
 2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/category/StackedBarRenderer.java
+    (drawItem): Check for hidden series.
+
+2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/CategoryItemRendererState.java
     (getVisibleSeriesArray()): New method,
     * source/org/jfree/chart/renderer/StackedAreaRenderer.java
