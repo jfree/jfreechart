@@ -1,5 +1,13 @@
 2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/general/DefaultHeatMapDataset.java: New file,
+    * source/org/jfree/data/general/HeatMapDataset.java: Likewise,
+    * source/org/jfree/data/general/HeatMapUtilities.java: Likewise,
+    * tests/org/jfree/data/general/junit/DefaultHeatMapDatasetTests.java:
+      Likewise.
+
+2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/general/CombinedDataset.java: Deprecated,
     * source/org/jfree/data/general/SubSeriesDataset.java: Likewise.
 
