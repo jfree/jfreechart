@@ -39,6 +39,7 @@
  * 01-Dec-2006 : Updated API docs (DG);
  * 26-Jun-2008 : Added CrosshairState (DG);
  * 14-Jan-2009 : Added visibleSeries[] array (PK);
+ * 04-Feb-2009 : Added getVisibleSeriesArray() method (DG);
  *
  */
 
@@ -194,6 +195,23 @@ public class CategoryItemRendererState extends RendererState {
     	    return -1;
     	}
     	return this.visibleSeries.length;
+    }
+
+    /**
+     * Returns a copy of the visible series array.
+     * 
+     * @return The visible series array (possibly <code>null</code>).
+     * 
+     * @since 1.0.13
+     */
+    public int[] getVisibleSeriesArray() {
+        if (this.visibleSeries == null) {
+            return null;
+        }
+        int[] result = new int[this.visibleSeries.length];
+        System.arraycopy(this.visibleSeries, 0, result, 0,
+                this.visibleSeries.length);
+        return result;
     }
 
     /**

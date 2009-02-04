@@ -1,5 +1,16 @@
 2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/category/CategoryItemRendererState.java
+    (getVisibleSeriesArray()): New method,
+    * source/org/jfree/chart/renderer/StackedAreaRenderer.java
+    (drawItem): Fix handling of renderAsPercentages,
+    (getStackValues): Likewise,
+    * source/org/jfree/data/DataUtilities.java
+    (calculateColumnTotal): New method,
+    (calculateRowTotal): Likewise.
+
+2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/StackedAreaRenderer.java
     (drawItem): Generate entities only in first pass, and add call for drawing
     item labels in second pass.

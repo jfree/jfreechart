@@ -62,6 +62,7 @@
  *               method for null dataset (PK/DG);
  * 04-Feb-2009 : Added item label support, and generate entities only in first
  *               pass (DG);
+ * 04-Feb-2009 : Fixed bug for renderAsPercentages == true (DG);
  *
  */
 
@@ -217,8 +218,14 @@ public class StackedAreaRenderer extends AreaRenderer
         Number n = dataset.getValue(row, column);
         if (n != null) {
             y1 = n.doubleValue();
+            if (this.renderAsPercentages) {
+                double total = DataUtilities.calculateColumnTotal(dataset,
+                        column, state.getVisibleSeriesArray());
+                y1 = y1 / total;
+            }
         }
-        double[] stack1 = getStackValues(dataset, row, column);
+        double[] stack1 = getStackValues(dataset, row, column,
+                state.getVisibleSeriesArray());
 
 
         // leave the y values (y1, y0) untranslated as it is going to be be
@@ -234,8 +241,14 @@ public class StackedAreaRenderer extends AreaRenderer
         n = dataset.getValue(row, Math.max(column - 1, 0));
         if (n != null) {
             y0 = n.doubleValue();
+            if (this.renderAsPercentages) {
+                double total = DataUtilities.calculateColumnTotal(dataset,
+                        Math.max(column - 1, 0), state.getVisibleSeriesArray());
+                y0 = y0 / total;
+            }
         }
-        double[] stack0 = getStackValues(dataset, row, Math.max(column - 1, 0));
+        double[] stack0 = getStackValues(dataset, row, Math.max(column - 1, 0),
+                state.getVisibleSeriesArray());
 
         // FIXME: calculate xx0
         double xx0 = domainAxis.getCategoryStart(column, getColumnCount(),
@@ -246,9 +259,15 @@ public class StackedAreaRenderer extends AreaRenderer
         n = dataset.getValue(row, Math.min(column + 1, itemCount - 1));
         if (n != null) {
             y2 = n.doubleValue();
+            if (this.renderAsPercentages) {
+                double total = DataUtilities.calculateColumnTotal(dataset,
+                        Math.min(column + 1, itemCount - 1),
+                        state.getVisibleSeriesArray());
+                y2 = y2 / total;
+            }
         }
         double[] stack2 = getStackValues(dataset, row, Math.min(column + 1,
-                itemCount - 1));
+                itemCount - 1), state.getVisibleSeriesArray());
 
         double xx2 = domainAxis.getCategoryEnd(column, getColumnCount(),
                 dataArea, plot.getDomainAxisEdge());
@@ -396,14 +415,22 @@ public class StackedAreaRenderer extends AreaRenderer
      *     for <code>index</code>.
      */
     protected double[] getStackValues(CategoryDataset dataset,
-            int series, int index) {
+            int series, int index, int[] validRows) {
         double[] result = new double[2];
+        double total = 0.0;
+        if (this.renderAsPercentages) {
+            total = DataUtilities.calculateColumnTotal(dataset, index, 
+                    validRows);
+        }
         for (int i = 0; i < series; i++) {
             if (isSeriesVisible(i)) {
                 double v = 0.0;
                 Number n = dataset.getValue(i, index);
                 if (n != null) {
                     v = n.doubleValue();
+                    if (this.renderAsPercentages) {
+                        v = v / total;
+                    }
                 }
                 if (!Double.isNaN(v)) {
                     if (v >= 0.0) {
