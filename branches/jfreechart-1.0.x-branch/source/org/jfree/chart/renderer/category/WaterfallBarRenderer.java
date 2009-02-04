@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * WaterfallBarRenderer.java
  * -------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Darshan Shah;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -51,6 +51,8 @@
  * 27-Mar-2008 : Fixed error in findRangeBounds() method (DG);
  * 26-Sep-2008 : Fixed bug with bar alignment when maximumBarWidth is
  *               applied (DG);
+ * 04-Feb-2009 : Updated findRangeBounds to handle null dataset consistently
+ *               with other renderers (DG);
  *
  */
 
@@ -271,11 +273,9 @@ public class WaterfallBarRenderer extends BarRenderer {
      * @return The range (or <code>null</code> if the dataset is empty).
      */
     public Range findRangeBounds(CategoryDataset dataset) {
-
         if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
+            return null;
         }
-
         boolean allItemsNull = true; // we'll set this to false if there is at
                                      // least one non-null data item...
         double minimum = 0.0;
