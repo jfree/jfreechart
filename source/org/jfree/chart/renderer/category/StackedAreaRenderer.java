@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,13 +27,14 @@
  * ------------------------
  * StackedAreaRenderer.java
  * ------------------------
- * (C) Copyright 2002-2008, by Dan Rivett (d.rivett@ukonline.co.uk) and
+ * (C) Copyright 2002-2009, by Dan Rivett (d.rivett@ukonline.co.uk) and
  *                          Contributors.
  *
- * Original Author:  Dan Rivett (adapted from AreaCategoryItemRenderer);
+ * Original Author:  Dan Rivett (adapted from AreaRenderer);
  * Contributor(s):   Jon Iles;
  *                   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
+ *                   Peter Kolb (patch 2511330);
  *
  * Changes:
  * --------
@@ -57,6 +58,8 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 11-Oct-2006 : Added support for rendering data values as percentages,
  *               and added a second pass for drawing item labels (DG);
+ * 04-Feb-2009 : Fixed support for hidden series, and bug in findRangeBounds()
+ *               method for null dataset (PK/DG);
  *
  */
 
@@ -164,6 +167,9 @@ public class StackedAreaRenderer extends AreaRenderer
      * @return The range (or <code>null</code> if the dataset is empty).
      */
     public Range findRangeBounds(CategoryDataset dataset) {
+        if (dataset == null) {
+            return null;
+        }
         if (this.renderAsPercentages) {
             return new Range(0.0, 1.0);
         }
@@ -197,6 +203,10 @@ public class StackedAreaRenderer extends AreaRenderer
                          int column,
                          int pass) {
 
+        if (!isSeriesVisible(row)) {
+            return;
+        }
+        
         // setup for collecting optional entity info...
         Shape entityArea = null;
         EntityCollection entities = state.getEntityCollection();
@@ -371,42 +381,6 @@ public class StackedAreaRenderer extends AreaRenderer
     }
 
     /**
-     * Calculates the stacked value of the all series up to, but not including
-     * <code>series</code> for the specified category, <code>category</code>.
-     * It returns 0.0 if <code>series</code> is the first series, i.e. 0.
-     *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param series  the series.
-     * @param category  the category.
-     *
-     * @return double returns a cumulative value for all series' values up to
-     *         but excluding <code>series</code> for Object
-     *         <code>category</code>.
-     */
-    protected double getPreviousHeight(CategoryDataset dataset,
-                                       int series, int category) {
-
-        double result = 0.0;
-        Number n;
-        double total = 0.0;
-        if (this.renderAsPercentages) {
-            total = DataUtilities.calculateColumnTotal(dataset, category);
-        }
-        for (int i = 0; i < series; i++) {
-            n = dataset.getValue(i, category);
-            if (n != null) {
-                double v = n.doubleValue();
-                if (this.renderAsPercentages) {
-                    v = v / total;
-                }
-                result += v;
-            }
-        }
-        return result;
-
-    }
-
-    /**
      * Calculates the stacked values (one positive and one negative) of all
      * series up to, but not including, <code>series</code> for the specified
      * item. It returns [0.0, 0.0] if <code>series</code> is the first series.
@@ -505,4 +479,43 @@ public class StackedAreaRenderer extends AreaRenderer
         }
         return super.equals(obj);
     }
+
+    /**
+     * Calculates the stacked value of the all series up to, but not including
+     * <code>series</code> for the specified category, <code>category</code>.
+     * It returns 0.0 if <code>series</code> is the first series, i.e. 0.
+     *
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param series  the series.
+     * @param category  the category.
+     *
+     * @return double returns a cumulative value for all series' values up to
+     *         but excluding <code>series</code> for Object
+     *         <code>category</code>.
+     *
+     * @deprecated As of 1.0.13, as the method is never used internally.
+     */
+    protected double getPreviousHeight(CategoryDataset dataset,
+            int series, int category) {
+
+        double result = 0.0;
+        Number n;
+        double total = 0.0;
+        if (this.renderAsPercentages) {
+            total = DataUtilities.calculateColumnTotal(dataset, category);
+        }
+        for (int i = 0; i < series; i++) {
+            n = dataset.getValue(i, category);
+            if (n != null) {
+                double v = n.doubleValue();
+                if (this.renderAsPercentages) {
+                    v = v / total;
+                }
+                result += v;
+            }
+        }
+        return result;
+
+    }
+
 }

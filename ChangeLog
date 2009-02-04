@@ -1,3 +1,12 @@
+2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/StackedAreaRenderer.java
+    (findRangeBounds): Check for null dataset,
+    (drawItem): Return early if series is not visible,
+    (getPreviousHeight): Deprecated as it is never used,
+    * tests/org/jfree/chart/renderer/category/junit/StackedAreaRendererTests.java
+    (testFindRangeBounds): New tests.
+
 2009-02-03  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/renderer/category/BarRenderer.java
