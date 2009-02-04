@@ -60,6 +60,8 @@
  *               and added a second pass for drawing item labels (DG);
  * 04-Feb-2009 : Fixed support for hidden series, and bug in findRangeBounds()
  *               method for null dataset (PK/DG);
+ * 04-Feb-2009 : Added item label support, and generate entities only in first
+ *               pass (DG);
  *
  */
 
@@ -149,7 +151,7 @@ public class StackedAreaRenderer extends AreaRenderer
 
     /**
      * Returns the number of passes (<code>2</code>) required by this renderer.
-     * The first pass is used to draw the bars, the second pass is used to
+     * The first pass is used to draw the areas, the second pass is used to
      * draw the item labels (if visible).
      *
      * @return The number of passes required by the renderer.
@@ -359,23 +361,23 @@ public class StackedAreaRenderer extends AreaRenderer
             }
         }
 
-        g2.setPaint(getItemPaint(row, column));
-        g2.setStroke(getItemStroke(row, column));
-
-        //  Get series Paint and Stroke
-        Paint itemPaint = getItemPaint(row, column);
         if (pass == 0) {
+            Paint itemPaint = getItemPaint(row, column);
             g2.setPaint(itemPaint);
             g2.fill(left);
             g2.fill(right);
-        }
 
-        // add an entity for the item...
-        if (entities != null) {
-            GeneralPath gp = new GeneralPath(left);
-            gp.append(right, false);
-            entityArea = gp;
-            addItemEntity(entities, dataset, row, column, entityArea);
+            // add an entity for the item...
+            if (entities != null) {
+                GeneralPath gp = new GeneralPath(left);
+                gp.append(right, false);
+                entityArea = gp;
+                addItemEntity(entities, dataset, row, column, entityArea);
+            }
+        }
+        else if (pass == 1) {
+            drawItemLabel(g2, plot.getOrientation(), dataset, row, column,
+                    xx1, transY1, y1 < 0.0);
         }
 
     }
