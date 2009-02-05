@@ -1,3 +1,15 @@
+2009-02-05  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/StatisticalLineAndShapeRenderer.java
+    (errorIndicatorStroke): New field,
+    (StatisticalLineAndShapeREnderer): Initialise new field,
+    (getErrorIndicatorStroke): New method,
+    (setErrorIndicatorStroke): Likewise,
+    (drawItem): Use errorIndicatorStroke,
+    (equals): Check new field,
+    (readObject): Handle new field,
+    (writeObject): Likewise.
+
 2009-02-04  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/general/DefaultHeatMapDataset.java: New file,
