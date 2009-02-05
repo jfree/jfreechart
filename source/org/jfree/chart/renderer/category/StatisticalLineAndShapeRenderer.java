@@ -51,7 +51,8 @@
  * 14-Jan-2009 : Added support for seriesVisible flags (PK);
  * 23-Jan-2009 : Observe useFillPaint and drawOutlines flags (PK);
  * 23-Jan-2009 : In drawItem, divide code into passes (DG);
- * 
+ * 05-Feb-2009 : Added errorIndicatorStroke field (DG);
+ *
  */
 
 package org.jfree.chart.renderer.category;
@@ -59,6 +60,7 @@ package org.jfree.chart.renderer.category;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -77,6 +79,7 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.StatisticalCategoryDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
+import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.ShapeUtilities;
@@ -100,6 +103,14 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
     /** The paint used to show the error indicator. */
     private transient Paint errorIndicatorPaint;
 
+    /** 
+     * The stroke used to draw the error indicators.  If null, the renderer
+     * will use the itemOutlineStroke.
+     * 
+     * @since 1.0.13
+     */
+    private transient Stroke errorIndicatorStroke;
+
     /**
      * Constructs a default renderer (draws shapes and lines).
      */
@@ -117,6 +128,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
                                            boolean shapesVisible) {
         super(linesVisible, shapesVisible);
         this.errorIndicatorPaint = null;
+        this.errorIndicatorStroke = null;
     }
 
     /**
@@ -133,7 +145,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
 
     /**
      * Sets the paint used for the error indicators (if <code>null</code>,
-     * the item outline paint is used instead) and sends a
+     * the item paint is used instead) and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> permitted).
@@ -142,6 +154,36 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      */
     public void setErrorIndicatorPaint(Paint paint) {
         this.errorIndicatorPaint = paint;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the stroke used for the error indicators.
+     *
+     * @return The stroke used for the error indicators (possibly
+     *         <code>null</code>).
+     *
+     * @see #setErrorIndicatorStroke(Stroke)
+     *
+     * @since 1.0.13
+     */
+    public Stroke getErrorIndicatorStroke() {
+        return this.errorIndicatorStroke;
+    }
+
+    /**
+     * Sets the stroke used for the error indicators (if <code>null</code>,
+     * the item outline stroke is used instead) and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param stroke  the stroke (<code>null</code> permitted).
+     *
+     * @see #getErrorIndicatorStroke()
+     *
+     * @since 1.0.13
+     */
+    public void setErrorIndicatorStroke(Stroke stroke) {
+        this.errorIndicatorStroke = stroke;
         fireChangeEvent();
     }
 
@@ -249,6 +291,12 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
             }
             else {
                 g2.setPaint(getItemPaint(row, column));
+            }
+            if (this.errorIndicatorStroke != null) {
+                g2.setStroke(this.errorIndicatorStroke);
+            }
+            else {
+                g2.setStroke(getItemOutlineStroke(row, column));
             }
             Line2D line = new Line2D.Double();
             if (orientation == PlotOrientation.HORIZONTAL) {
@@ -381,6 +429,10 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
                 that.errorIndicatorPaint)) {
             return false;
         }
+        if (!ObjectUtilities.equal(this.errorIndicatorStroke,
+                that.errorIndicatorStroke)) {
+            return false;
+        }
         return super.equals(obj);
     }
 
@@ -405,6 +457,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         SerialUtilities.writePaint(this.errorIndicatorPaint, stream);
+        SerialUtilities.writeStroke(this.errorIndicatorStroke, stream);
     }
 
     /**
@@ -419,6 +472,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.errorIndicatorPaint = SerialUtilities.readPaint(stream);
+        this.errorIndicatorStroke = SerialUtilities.readStroke(stream);
     }
 
 }
