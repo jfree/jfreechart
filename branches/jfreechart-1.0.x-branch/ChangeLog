@@ -1,5 +1,15 @@
 2009-02-05  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/xy/XYBarRenderer.java
+    (barAlignmentFactor): New field,
+    (XYBarRenderer): Initialise new field,
+    (getBarAlignmentFactor): New method,
+    (setBarAlignmentFactor): Likewise,
+    (drawItem): Shift bar if alignment factor is set,
+    (equals): Check new field.
+
+2009-02-05  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/StatisticalLineAndShapeRenderer.java
     (errorIndicatorStroke): New field,
     (StatisticalLineAndShapeREnderer): Initialise new field,
