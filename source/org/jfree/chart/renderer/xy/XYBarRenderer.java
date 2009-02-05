@@ -95,6 +95,7 @@
  *               axis range (DG);
  * 24-Jun-2008 : Added new barPainter mechanism (DG);
  * 03-Feb-2009 : Added defaultShadowsVisible flag (DG);
+ * 05-Feb-2009 : Added barAlignmentFactor (DG);
  *
  */
 
@@ -319,6 +320,13 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     private double shadowYOffset;
 
     /**
+     * A factor used to align the bars about the x-value.
+     * 
+     * @since 1.0.13
+     */
+    private double barAlignmentFactor;
+
+    /**
      * The default constructor.
      */
     public XYBarRenderer() {
@@ -342,6 +350,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         this.shadowsVisible = getDefaultShadowsVisible();
         this.shadowXOffset = 4.0;
         this.shadowYOffset = 4.0;
+        this.barAlignmentFactor = -1.0;
     }
 
     /**
@@ -661,6 +670,31 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
+     * Returns the bar alignment factor. 
+     * 
+     * @return The bar alignment factor.
+     * 
+     * @since 1.0.13
+     */
+    public double getBarAlignmentFactor() {
+        return this.barAlignmentFactor;
+    }
+
+    /**
+     * Sets the bar alignment factor and sends a {@link RendererChangeEvent}
+     * to all registered listeners.  If the alignment factor is outside the
+     * range 0.0 to 1.0, no alignment will be performed by the renderer.
+     *
+     * @param factor  the factor.
+     *
+     * @since 1.0.13
+     */
+    public void setBarAlignmentFactor(double factor) {
+        this.barAlignmentFactor = factor;
+        fireChangeEvent();
+    }
+
+    /**
      * Initialises the renderer and returns a state object that should be
      * passed to all subsequent calls to the drawItem() method.  Here we
      * calculate the Java2D y-coordinate for zero, since all the bars have
@@ -829,6 +863,14 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             if (!domainAxis.getRange().intersects(endX, startX)) {
                 return;
             }
+        }
+
+        // is there an alignment adjustment to be made?
+        if (this.barAlignmentFactor >= 0.0 && this.barAlignmentFactor <= 1.0) {
+            double x = intervalDataset.getXValue(series, item);
+            double interval = endX - startX;
+            startX = x - interval * this.barAlignmentFactor;
+            endX = startX + interval;
         }
 
         RectangleEdge location = plot.getDomainAxisEdge();
@@ -1234,6 +1276,9 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             return false;
         }
         if (this.shadowYOffset != that.shadowYOffset) {
+            return false;
+        }
+        if (this.barAlignmentFactor != that.barAlignmentFactor) {
             return false;
         }
         return super.equals(obj);
