@@ -1,3 +1,15 @@
+2009-02-10  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/block/LabelBlock.java
+    (contentAlignmentPoint): New field,
+    (textAnchor): Likewise,
+    (LabelBlock): Initialise new fields,
+    (getContentAlignmentPoint): New method,
+    (setContentAlignmentPoint): Likewise,
+    (getTextAnchor): Likewise,
+    (setTextAnchor): Likewise,
+    (equals): Check new fields.
+
 2009-02-05  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYBarRenderer.java

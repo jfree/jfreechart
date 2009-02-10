@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * LabelBlockTests.java
  * --------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 01-Sep-2005 : Version 1 (DG);
  * 16-Mar-2007 : Check GradientPaint in testSerialization() (DG);
+ * 10-Feb-2009 : Added new fields to testEquals() (DG);
  *
  */
 
@@ -56,6 +57,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.block.LabelBlock;
+import org.jfree.text.TextBlockAnchor;
+import org.jfree.ui.RectangleAnchor;
 
 /**
  * Some tests for the {@link LabelBlock} class.
@@ -120,6 +123,16 @@ public class LabelBlockTests extends TestCase {
         b1.setURLText("URL");
         assertFalse(b1.equals(b2));
         b2.setURLText("URL");
+        assertTrue(b1.equals(b2));
+
+        b1.setContentAlignmentPoint(TextBlockAnchor.CENTER_RIGHT);
+        assertFalse(b1.equals(b2));
+        b2.setContentAlignmentPoint(TextBlockAnchor.CENTER_RIGHT);
+        assertTrue(b1.equals(b2));
+
+        b1.setTextAnchor(RectangleAnchor.BOTTOM_RIGHT);
+        assertFalse(b1.equals(b2));
+        b2.setTextAnchor(RectangleAnchor.BOTTOM_RIGHT);
         assertTrue(b1.equals(b2));
     }
 

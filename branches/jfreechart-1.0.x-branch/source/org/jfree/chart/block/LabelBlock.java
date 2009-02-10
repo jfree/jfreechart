@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * LabelBlock.java
  * ---------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
@@ -44,6 +44,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 20-Jul-2006 : Fixed entity area in draw() method (DG);
  * 16-Mar-2007 : Fixed serialization when using GradientPaint (DG);
+ * 10-Feb-2009 : Added alignment fields (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -65,6 +67,7 @@ import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextBlock;
 import org.jfree.text.TextBlockAnchor;
 import org.jfree.text.TextUtilities;
+import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.Size2D;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
@@ -104,6 +107,20 @@ public class LabelBlock extends AbstractBlock
     private transient Paint paint;
 
     /**
+     * The content alignment point.
+     *
+     * @since 1.0.13
+     */
+    private TextBlockAnchor contentAlignmentPoint;
+
+    /**
+     * The anchor point for the text.
+     *
+     * @since 1.0.13
+     */
+    private RectangleAnchor textAnchor;
+
+    /**
      * Creates a new label block.
      *
      * @param label  the label (<code>null</code> not permitted).
@@ -136,6 +153,8 @@ public class LabelBlock extends AbstractBlock
         this.font = font;
         this.toolTipText = null;
         this.urlText = null;
+        this.contentAlignmentPoint = TextBlockAnchor.CENTER;
+        this.textAnchor = RectangleAnchor.CENTER;
     }
 
     /**
@@ -236,6 +255,54 @@ public class LabelBlock extends AbstractBlock
     }
 
     /**
+     * Returns the content alignment point.
+     *
+     * @return The content alignment point (never <code>null</code>).
+     *
+     * @since 1.0.13
+     */
+    public TextBlockAnchor getContentAlignmentPoint() {
+        return this.contentAlignmentPoint;
+    }
+
+    /**
+     * Sets the content alignment point.
+     *
+     * @param anchor  the anchor used to determine the alignment point (never
+     *         <code>null</code>).
+     *
+     * @since 1.0.13
+     */
+    public void setContentAlignmentPoint(TextBlockAnchor anchor) {
+        if (anchor == null) {
+            throw new IllegalArgumentException("Null 'anchor' argument.");
+        }
+        this.contentAlignmentPoint = anchor;
+    }
+
+    /**
+     * Returns the text anchor (never <code>null</code>).
+     *
+     * @return The text anchor.
+     *
+     * @since 1.0.13
+     */
+    public RectangleAnchor getTextAnchor() {
+        return this.textAnchor;
+    }
+
+    /**
+     * Sets the text anchor.
+     *
+     * @param anchor  the anchor (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    public void setTextAnchor(RectangleAnchor anchor) {
+        this.textAnchor = anchor;
+    }
+
+    /**
      * Arranges the contents of the block, within the given constraints, and
      * returns the block size.
      *
@@ -289,8 +356,9 @@ public class LabelBlock extends AbstractBlock
         }
         g2.setPaint(this.paint);
         g2.setFont(this.font);
-        this.label.draw(g2, (float) area.getX(), (float) area.getY(),
-                TextBlockAnchor.TOP_LEFT);
+        Point2D pt = RectangleAnchor.coordinates(area, this.textAnchor);
+        this.label.draw(g2, (float) pt.getX(), (float) pt.getY(),
+                this.contentAlignmentPoint);
         BlockResult result = null;
         if (ebp != null && sec != null) {
             if (this.toolTipText != null || this.urlText != null) {
@@ -330,6 +398,12 @@ public class LabelBlock extends AbstractBlock
             return false;
         }
         if (!ObjectUtilities.equal(this.urlText, that.urlText)) {
+            return false;
+        }
+        if (!this.contentAlignmentPoint.equals(that.contentAlignmentPoint)) {
+            return false;
+        }
+        if (!this.textAnchor.equals(that.textAnchor)) {
             return false;
         }
         return super.equals(obj);
