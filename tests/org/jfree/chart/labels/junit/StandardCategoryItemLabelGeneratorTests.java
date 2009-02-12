@@ -98,7 +98,8 @@ public class StandardCategoryItemLabelGeneratorTests extends TestCase {
         dataset.addValue(3.0, "R1", "C0");
         dataset.addValue(null, "R1", "C1");
         String s = g.generateLabel(dataset, 0, 0);
-        assertEquals("1.000", s);
+        assertTrue(s.startsWith("1"));
+        assertTrue(s.endsWith("000"));
 
         // try a null value
         s = g.generateLabel(dataset, 1, 1);
