@@ -1,5 +1,26 @@
 2009-02-12  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/annotations/XYTextAnnotation.java
+    (backgroundPaint): New field,
+    (outlineVisible): Likewise,
+    (outlinePaint): Likewise,
+    (outlineStroke): Likewise,
+    (XYTextAnnotation): Initialise new fields,
+    (getBackgroundPaint): New method,
+    (setBackgroundPaint): Likewise,
+    (getOutlinePaint): Likewise,
+    (setOutlinePaint): Likewise,
+    (getOutlineStroke): Likewise,
+    (setOutlineStroke): Likewise,
+    (isOutlineVisible): Likewuse,
+    (setOutlineVisible): Likewise,
+    (draw): Draw background and outline,
+    (equals): Check new fields,
+    (writeObject): Handle new fields,
+    (readObject): Likewise.
+
+2009-02-12  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/general/DatasetUtilities.java
     (sampleFunction2D): Delegate to new method,
     (sampleFunction2DToSeries): New method,
