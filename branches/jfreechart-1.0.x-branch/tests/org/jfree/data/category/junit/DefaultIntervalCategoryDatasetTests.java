@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------------
  * DefaultIntervalCategoryDatasetTests.java
  * ----------------------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 08-Mar-2007 : Version 1 (DG);
  * 25-Feb-2008 : Added new tests to check behaviour of an empty dataset (DG);
+ * 11-Feb-2009 : Fixed locale-sensitive failures (DG);
  *
  */
 
@@ -53,6 +54,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.data.DataUtilities;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.category.DefaultIntervalCategoryDataset;
 
@@ -89,8 +91,11 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
         double[] ends_S2 = new double[] {0.7, 0.8, 0.9};
         double[][] starts = new double[][] {starts_S1, starts_S2};
         double[][] ends = new double[][] {ends_S1, ends_S2};
-        DefaultIntervalCategoryDataset d
-                = new DefaultIntervalCategoryDataset(starts, ends);
+        DefaultIntervalCategoryDataset d = new DefaultIntervalCategoryDataset(
+                new Comparable[] {"Series 1", "Series 2"},
+                new Comparable[] {"Category 1", "Category 2", "Category 3"},
+                DataUtilities.createNumberArray2D(starts),
+                DataUtilities.createNumberArray2D(ends));
 
         assertEquals(new Double(0.1), d.getStartValue("Series 1",
                 "Category 1"));
@@ -234,7 +239,10 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
         double[][] starts = new double[][] {starts_S1, starts_S2};
         double[][] ends = new double[][] {ends_S1, ends_S2};
         DefaultIntervalCategoryDataset d1 = new DefaultIntervalCategoryDataset(
-                starts, ends);
+                new Comparable[] {"Series 1", "Series 2"},
+                new Comparable[] {"Category 1", "Category 2", "Category 3"},
+                DataUtilities.createNumberArray2D(starts),
+                DataUtilities.createNumberArray2D(ends));
         DefaultIntervalCategoryDataset d2 = null;
         try {
             d2 = (DefaultIntervalCategoryDataset) d1.clone();
@@ -283,7 +291,10 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
         double[][] starts = new double[][] {starts_S1, starts_S2};
         double[][] ends = new double[][] {ends_S1, ends_S2};
         DefaultIntervalCategoryDataset d1 = new DefaultIntervalCategoryDataset(
-                starts, ends);
+                new Comparable[] {"Series 1", "Series 2"},
+                new Comparable[] {"Category 1", "Category 2", "Category 3"},
+                DataUtilities.createNumberArray2D(starts),
+                DataUtilities.createNumberArray2D(ends));
         d1.setStartValue(0, "Category 2", new Double(99.9));
         assertEquals(new Double(99.9), d1.getStartValue("Series 1",
                 "Category 2"));
@@ -318,7 +329,10 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
         double[][] starts = new double[][] {starts_S1, starts_S2};
         double[][] ends = new double[][] {ends_S1, ends_S2};
         DefaultIntervalCategoryDataset d1 = new DefaultIntervalCategoryDataset(
-                starts, ends);
+                new Comparable[] {"Series 1", "Series 2"},
+                new Comparable[] {"Category 1", "Category 2", "Category 3"},
+                DataUtilities.createNumberArray2D(starts),
+                DataUtilities.createNumberArray2D(ends));
         d1.setEndValue(0, "Category 2", new Double(99.9));
         assertEquals(new Double(99.9), d1.getEndValue("Series 1",
                 "Category 2"));
