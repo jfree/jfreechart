@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * NormalDistributionFunction2D.java
  * ---------------------------------
- * (C)opyright 2004-2008, by Object Refinery Limited.
+ * (C)opyright 2004-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,8 @@
  * -------
  * 25-May-2004 : Version 1 (DG);
  * 21-Nov-2005 : Added getters for the mean and standard deviation (DG);
+ * 12-Feb-2009 : Precompute some constants from the function - see bug
+ *               2572016 (DG);
  *
  */
 
@@ -52,15 +54,27 @@ public class NormalDistributionFunction2D implements Function2D {
     /** The standard deviation. */
     private double std;
 
+    /** Precomputed factor for the function value. */
+    private double factor;
+
+    /** Precomputed denominator for the function value. */
+    private double denominator;
+
     /**
      * Constructs a new normal distribution function.
      *
      * @param mean  the mean.
-     * @param std  the standard deviation.
+     * @param std  the standard deviation (> 0).
      */
     public NormalDistributionFunction2D(double mean, double std) {
+        if (std <= 0) {
+            throw new IllegalArgumentException("Requires 'std' > 0.");
+        }
         this.mean = mean;
         this.std = std;
+        // calculate constant values
+        this.factor = 1 / (std * Math.sqrt(2.0 * Math.PI));
+        this.denominator = 2 * std * std;
     }
 
     /**
@@ -71,7 +85,7 @@ public class NormalDistributionFunction2D implements Function2D {
     public double getMean() {
         return this.mean;
     }
-
+    
     /**
      * Returns the standard deviation for the function.
      *
@@ -89,9 +103,8 @@ public class NormalDistributionFunction2D implements Function2D {
      * @return The value.
      */
     public double getValue(double x) {
-        return Math.exp(-1.0 * (x - this.mean) * (x - this.mean)
-                / (2 * this.std * this.std)) / Math.sqrt(2 * Math.PI
-                * this.std * this.std);
+        double z = x - this.mean;
+        return this.factor * Math.exp(-z * z / this.denominator);
     }
 
 }

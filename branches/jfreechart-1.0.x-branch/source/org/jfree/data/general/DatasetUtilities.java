@@ -111,6 +111,7 @@
  * 08-Apr-2008 : Fixed typo in iterateRangeBounds() (DG);
  * 08-Oct-2008 : Applied patch 2131001 by Jerome David, with some modifications
  *               and additions and some new unit tests (DG);
+ * 12-Feb-2009 : Added sampleFunction2DToSeries() method (DG);
  *
  */
 
@@ -488,6 +489,31 @@ public final class DatasetUtilities {
     public static XYDataset sampleFunction2D(Function2D f, double start,
             double end, int samples, Comparable seriesKey) {
 
+        // defer argument checking
+        XYSeries series = sampleFunction2DToSeries(f, start, end, samples,
+                seriesKey);
+        XYSeriesCollection collection = new XYSeriesCollection(series);
+        return collection;
+    }
+
+    /**
+     * Creates an {@link XYSeries} by sampling the specified function over a
+     * fixed range.
+     *
+     * @param f  the function (<code>null</code> not permitted).
+     * @param start  the start value for the range.
+     * @param end  the end value for the range.
+     * @param samples  the number of sample points (must be > 1).
+     * @param seriesKey  the key to give the resulting series
+     *                   (<code>null</code> not permitted).
+     *
+     * @return A series.
+     *
+     * @since 1.0.13
+     */
+    public static XYSeries sampleFunction2DToSeries(Function2D f,
+            double start, double end, int samples, Comparable seriesKey) {
+
         if (f == null) {
             throw new IllegalArgumentException("Null 'f' argument.");
         }
@@ -507,8 +533,7 @@ public final class DatasetUtilities {
             double x = start + (step * i);
             series.add(x, f.getValue(x));
         }
-        XYSeriesCollection collection = new XYSeriesCollection(series);
-        return collection;
+        return series;
     }
 
     /**
