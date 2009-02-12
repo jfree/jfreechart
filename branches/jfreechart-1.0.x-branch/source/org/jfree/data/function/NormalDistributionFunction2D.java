@@ -44,7 +44,8 @@
 package org.jfree.data.function;
 
 /**
- * A normal distribution function.
+ * A normal distribution function.  See
+ * http://en.wikipedia.org/wiki/Normal_distribution.
  */
 public class NormalDistributionFunction2D implements Function2D {
 
