@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYTextAnnotation.java
  * ---------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,16 +47,19 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 26-Jan-2006 : Fixed equals() method (bug 1415480) (DG);
  * 06-Mar-2007 : Added argument checks, re-implemented hashCode() method (DG);
+ * 12-Feb-2009 : Added background paint and outline paint/stroke (DG);
  *
  */
 
 package org.jfree.chart.annotations;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -127,6 +130,34 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     private double rotationAngle;
 
     /**
+     * The background paint (possibly null).
+     *
+     * @since 1.0.13
+     */
+    private transient Paint backgroundPaint;
+
+    /**
+     * The flag that controls the visibility of the outline.
+     *
+     * @since 1.0.13
+     */
+    private boolean outlineVisible;
+
+    /**
+     * The outline paint (never null).
+     *
+     * @since 1.0.13
+     */
+    private transient Paint outlinePaint;
+
+    /**
+     * The outline stroke (never null).
+     *
+     * @since 1.0.13
+     */
+    private transient Stroke outlineStroke;
+
+    /**
      * Creates a new annotation to be displayed at the given coordinates.  The
      * coordinates are specified in data space (they will be converted to
      * Java2D space for display).
@@ -147,6 +178,12 @@ public class XYTextAnnotation extends AbstractXYAnnotation
         this.textAnchor = DEFAULT_TEXT_ANCHOR;
         this.rotationAnchor = DEFAULT_ROTATION_ANCHOR;
         this.rotationAngle = DEFAULT_ROTATION_ANGLE;
+
+        // by default the outline and background won't be visible
+        this.backgroundPaint = null;
+        this.outlineVisible = false;
+        this.outlinePaint = Color.black;
+        this.outlineStroke = new BasicStroke(0.5f);
     }
 
     /**
@@ -346,6 +383,112 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
+     * Returns the background paint for the annotation.
+     *
+     * @return The background paint (possibly <code>null</code>).
+     *
+     * @see #setBackgroundPaint(Paint)
+     *
+     * @since 1.0.13
+     */
+    public Paint getBackgroundPaint() {
+        return this.backgroundPaint;
+    }
+
+    /**
+     * Sets the background paint for the annotation.
+     *
+     * @param paint  the paint (<code>null</code> permitted).
+     *
+     * @see #getBackgroundPaint()
+     *
+     * @since 1.0.13
+     */
+    public void setBackgroundPaint(Paint paint) {
+        this.backgroundPaint = paint;
+    }
+
+    /**
+     * Returns the outline paint for the annotation.
+     *
+     * @return The outline paint (never <code>null</code>).
+     *
+     * @see #setOutlinePaint(Paint)
+     *
+     * @since 1.0.13
+     */
+    public Paint getOutlinePaint() {
+        return this.outlinePaint;
+    }
+
+    /**
+     * Sets the outline paint for the annotation.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @see #getOutlinePaint()
+     *
+     * @since 1.0.13
+     */
+    public void setOutlinePaint(Paint paint) {
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
+        this.outlinePaint = paint;
+    }
+
+    /**
+     * Returns the outline stroke for the annotation.
+     *
+     * @return The outline stroke (never <code>null</code>).
+     *
+     * @see #setOutlineStroke(Stroke)
+     *
+     * @since 1.0.13
+     */
+    public Stroke getOutlineStroke() {
+        return this.outlineStroke;
+    }
+
+    /**
+     * Sets the outline stroke for the annotation.
+     *
+     * @param stroke  the stroke (<code>null</code> not permitted).
+     *
+     * @see #getOutlineStroke()
+     *
+     * @since 1.0.13
+     */
+    public void setOutlineStroke(Stroke stroke) {
+        if (stroke == null) {
+            throw new IllegalArgumentException("Null 'stroke' argument.");
+        }
+        this.outlineStroke = stroke;
+    }
+
+    /**
+     * Returns the flag that controls whether or not the outline is drawn.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.13
+     */
+    public boolean isOutlineVisible() {
+        return outlineVisible;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the outline is drawn.
+     *
+     * @param visible  the new flag value.
+     *
+     * @since 1.0.13
+     */
+    public void setOutlineVisible(boolean visible) {
+        this.outlineVisible = visible;
+    }
+    
+    /**
      * Draws the annotation.
      *
      * @param g2  the graphics device.
@@ -379,13 +522,22 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             anchorY = tempAnchor;
         }
 
+        Shape hotspot = TextUtilities.calculateRotatedStringBounds(
+                getText(), g2, anchorX, anchorY, getTextAnchor(),
+                getRotationAngle(), getRotationAnchor());
+        if (this.backgroundPaint != null) {
+            g2.setPaint(this.backgroundPaint);
+            g2.fill(hotspot);
+        }
         g2.setFont(getFont());
         g2.setPaint(getPaint());
         TextUtilities.drawRotatedString(getText(), g2, anchorX, anchorY,
                 getTextAnchor(), getRotationAngle(), getRotationAnchor());
-        Shape hotspot = TextUtilities.calculateRotatedStringBounds(
-                getText(), g2, anchorX, anchorY, getTextAnchor(),
-                getRotationAngle(), getRotationAnchor());
+        if (this.outlineVisible) {
+            g2.setStroke(this.outlineStroke);
+            g2.setPaint(this.outlinePaint);
+            g2.draw(hotspot);
+        }
 
         String toolTip = getToolTipText();
         String url = getURL();
@@ -407,9 +559,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             return true;
         }
         if (!(obj instanceof XYTextAnnotation)) {
-            return false;
-        }
-        if (!super.equals(obj)) {
             return false;
         }
         XYTextAnnotation that = (XYTextAnnotation) obj;
@@ -437,7 +586,19 @@ public class XYTextAnnotation extends AbstractXYAnnotation
         if (!this.textAnchor.equals(that.textAnchor)) {
             return false;
         }
-        return true;
+        if (this.outlineVisible != that.outlineVisible) {
+            return false;
+        }
+        if (!PaintUtilities.equal(this.backgroundPaint, that.backgroundPaint)) {
+            return false;
+        }
+        if (!PaintUtilities.equal(this.outlinePaint, that.outlinePaint)) {
+            return false;
+        }
+        if (!(this.outlineStroke.equals(that.outlineStroke))) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
     /**
@@ -482,6 +643,9 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         SerialUtilities.writePaint(this.paint, stream);
+        SerialUtilities.writePaint(this.backgroundPaint, stream);
+        SerialUtilities.writePaint(this.outlinePaint, stream);
+        SerialUtilities.writeStroke(this.outlineStroke, stream);
     }
 
     /**
@@ -496,6 +660,9 @@ public class XYTextAnnotation extends AbstractXYAnnotation
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.paint = SerialUtilities.readPaint(stream);
+        this.backgroundPaint = SerialUtilities.readPaint(stream);
+        this.outlinePaint = SerialUtilities.readPaint(stream);
+        this.outlineStroke = SerialUtilities.readStroke(stream);
     }
 
 }
