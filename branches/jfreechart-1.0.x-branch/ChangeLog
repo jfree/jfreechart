@@ -1,3 +1,14 @@
+2009-02-13  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/jxlayer/Crosshair.java: New file,
+    * source/org/jfree/chart/jxlayer/CrosshairLabelGenerator.java: New file,
+    * source/org/jfree/chart/jxlayer/CrosshairLayerUI.java: New file,
+    * source/org/jfree/chart/jxlayer/DefaultCrosshairLabelGenerator.java:
+    New file,
+    * source/org/jfree/chart/jxlayer/package.html: New file,
+    * tests/org/jfree/chart/jxlayer/junit/CrosshairTests.java: New tests,
+    * tests/org/jfree/chart/jxlayer/junit/JXLayerPackageTests.java: Likewise.
+
 2009-02-12  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/annotations/XYPointerAnnotation.java
