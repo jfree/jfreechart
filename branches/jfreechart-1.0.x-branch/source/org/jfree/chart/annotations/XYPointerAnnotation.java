@@ -411,6 +411,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
                 + this.labelOffset);
         double labelY = j2DY + Math.sin(this.angle) * (this.baseRadius
                 + this.labelOffset);
+        g2.setFont(getFont());
         Shape hotspot = TextUtilities.calculateRotatedStringBounds(
                 getText(), g2, (float) labelX, (float) labelY, getTextAnchor(),
                 getRotationAngle(), getRotationAnchor());
@@ -418,7 +419,6 @@ public class XYPointerAnnotation extends XYTextAnnotation
             g2.setPaint(getBackgroundPaint());
             g2.fill(hotspot);
         }
-        g2.setFont(getFont());
         g2.setPaint(getPaint());
         TextUtilities.drawRotatedString(getText(), g2, (float) labelX,
                 (float) labelY, getTextAnchor(), getRotationAngle(), getRotationAnchor());
