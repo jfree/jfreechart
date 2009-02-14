@@ -29,15 +29,25 @@
         <property name="itext.name" value="iText" />
         <property name="itext.version" value="2.1.3" />
         <property name="itext.jar" value="${basedir}/lib/${itext.name}-${itext.version}.jar"/>
+        <property name="jxlayer.jar" value="${basedir}/lib/jxlayer.jar"/>
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
         <property name="gnujaxp.jar" value="${basedir}/lib/gnujaxp.jar"/>
         <property name="junit.jar" value="${basedir}/lib/junit.jar"/>
         <available classname="javax.imageio.ImageIO" property="ImageIO.present"/>
+        <available classname="javax.imageio.ImageIO" property="JDK1.4+"/>
+        <available classname="java.lang.annotation.Annotation" property="JDK1.5+"/>
+        <property name="src.version" value="1.3"/>
+        <property name="target.version" value="1.3"/>
+        <available classname="java.lang.Annotation" property="src.version" value="1.5"/>
+        <available classname="java.lang.Annotation" property="target.version" value="1.5"/>
         <path id="build.classpath">
-            <pathelement location="${jcommon.jar}"/>
-            <pathelement location="${servlet.jar}"/>
-            <pathelement location="${gnujaxp.jar}"/>
+            <fileset dir="${basedir}/lib/">
+                <include name="${jcommon.name}-${jcommon.version}.jar"/>
+                <include name="servlet.jar"/>
+                <include name="jxlayer.jar" if="JDK1.5+"/>
+                <include name="gnujaxp.jar" unless="JDK1.4+"/>
+            </fileset>
         </path>
 
     </target>
@@ -54,13 +64,14 @@
                destdir="${basedir}/build"
                debug="on"
                deprecation="false"
-               source="1.3"
-               target="1.3">
+               source="${src.version}"
+               target="${target.version}">
             <classpath refid="build.classpath" />
             <include name="org/jfree/**"/>
             <exclude name="org/jfree/chart/xml/**"/>
             <exclude name="org/jfree/chart/encoders/SunPNGEncoderAdapter.java" unless="ImageIO.present"/>
-            <exclude name="org/jfree/chart/encoders/SunJPEGEncoderAdapter.java" unless="ImageIO.present"/>        	
+            <exclude name="org/jfree/chart/encoders/SunJPEGEncoderAdapter.java" unless="ImageIO.present"/>
+            <exclude name="org/jfree/chart/jxlayer/**" unless="JDK1.5+"/>
         </javac>
 
         <!-- copy across gorilla.jpg -->
@@ -113,9 +124,9 @@
                destdir="${basedir}/build"
                debug="on"
                deprecation="false"
-               source="1.3"
-               target="1.3">
-            <classpath refid="build.experimental.classpath" />
+               source="${src.version}"
+               target="${target.version}">
+               <classpath refid="build.experimental.classpath" />
             <include name="org/jfree/experimental/**"/>
             <exclude name="org/jfree/experimental/**/junit/*"/>
         </javac>
@@ -145,6 +156,7 @@
             <classpath refid="build.classpath" />
             <packageset dir="${basedir}/source" defaultexcludes="yes">
                 <include name="org/jfree/**"/>
+                <exclude name="org/jfree/chart/jxlayer/**" unless="JDK1.5+"/>
                 <exclude name="org/jfree/chart/xml/**"/>
             </packageset>
         </javadoc>
