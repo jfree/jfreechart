@@ -255,7 +255,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Sets the stroke for the crosshair line and sends a property change event
      * with the name "stroke" to all registered listeners.
      *
-     * @param paint  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke (<code>null</code> not permitted).
      */
     public void setStroke(Stroke stroke) {
         Stroke old = this.stroke;
@@ -610,6 +610,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @throws java.lang.CloneNotSupportedException
      */
     public Object clone() throws CloneNotSupportedException {
+        // FIXME: clone generator
         return super.clone();
     }
 
