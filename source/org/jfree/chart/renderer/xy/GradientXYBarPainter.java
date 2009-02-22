@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * GradientXYBarPainter.java
  * -------------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008, 2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 19-Jun-2008 : Version 1 (DG);
+ * 22-Feb-2009 : Fixed bug drawing outlines (DG);
  *
  */
 
@@ -176,11 +177,9 @@ public class GradientXYBarPainter implements XYBarPainter, Serializable {
         }
 
         // draw the outline...
-        if (renderer.isDrawBarOutline()
-                /*&& state.getBarWidth() > renderer.BAR_OUTLINE_WIDTH_THRESHOLD*/) {
+        if (renderer.isDrawBarOutline()) {
             Stroke stroke = renderer.getItemOutlineStroke(row, column);
-
-            Paint paint = renderer.getItemPaint(row, column);
+            Paint paint = renderer.getItemOutlinePaint(row, column);
             if (stroke != null && paint != null) {
                 g2.setStroke(stroke);
                 g2.setPaint(paint);
