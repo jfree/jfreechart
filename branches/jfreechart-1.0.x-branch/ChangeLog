@@ -1,3 +1,9 @@
+2009-02-27  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/RendererUtilities.java
+    (findLiveItemsLowerBound): Added argument checks,
+    (findLiveItemsUpperBound): Correct calculation of mid.
+
 2009-02-22  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/GradientXYBarPainter.java
