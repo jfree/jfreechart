@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * DefaultPlotEditor.java
  * ----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -39,6 +39,7 @@
  * 24-Nov-2005 : Version 1, based on PlotPropertyEditPanel.java (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 27-Feb-2009 : Fixed bug 2612649, NullPointerException (DG);
  *
  */
 
@@ -95,7 +96,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
     /** The paint (color) used to fill the background of the plot. */
     private PaintSample backgroundPaintSample;
 
-    /** The stroke (pen) used to draw the outline of the plot. */
+    /** The stroke used to draw the outline of the plot. */
     private StrokeSample outlineStrokeSample;
 
     /** The paint (color) used to draw the outline of the plot. */
@@ -172,7 +173,6 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * @param plot  the plot, which should be changed.
      */
     public DefaultPlotEditor(Plot plot) {
-
         this.plotInsets = plot.getInsets();
         this.backgroundPaintSample = new PaintSample(plot.getBackgroundPaint());
         this.outlineStrokeSample = new StrokeSample(plot.getOutlineStroke());
@@ -205,29 +205,24 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
 
         setLayout(new BorderLayout());
 
-        this.availableStrokeSamples = new StrokeSample[3];
-        this.availableStrokeSamples[0]
-                = new StrokeSample(new BasicStroke(1.0f));
-        this.availableStrokeSamples[1]
-                = new StrokeSample(new BasicStroke(2.0f));
-        this.availableStrokeSamples[2]
-                = new StrokeSample(new BasicStroke(3.0f));
+        this.availableStrokeSamples = new StrokeSample[4];
+        this.availableStrokeSamples[0] = new StrokeSample(null);
+        this.availableStrokeSamples[1] = new StrokeSample(
+                new BasicStroke(1.0f));
+        this.availableStrokeSamples[2] = new StrokeSample(
+                new BasicStroke(2.0f));
+        this.availableStrokeSamples[3] = new StrokeSample(
+                new BasicStroke(3.0f));
 
         // create a panel for the settings...
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(
-            BorderFactory.createTitledBorder(
-                BorderFactory.createEtchedBorder(),
-                plot.getPlotType() + localizationResources.getString(":")
-            )
-        );
+        panel.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createEtchedBorder(), plot.getPlotType()
+                + localizationResources.getString(":")));
 
         JPanel general = new JPanel(new BorderLayout());
-        general.setBorder(
-            BorderFactory.createTitledBorder(
-                localizationResources.getString("General")
-            )
-        );
+        general.setBorder(BorderFactory.createTitledBorder(
+                localizationResources.getString("General")));
 
         JPanel interior = new JPanel(new LCBLayout(7));
         interior.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
@@ -244,9 +239,8 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
 //        interior.add(this.insetsTextField);
 //        interior.add(button);
 
-        interior.add(
-            new JLabel(localizationResources.getString("Outline_stroke"))
-        );
+        interior.add(new JLabel(localizationResources.getString(
+                "Outline_stroke")));
         JButton button = new JButton(localizationResources.getString(
                 "Select..."));
         button.setActionCommand("OutlineStroke");
@@ -254,18 +248,16 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         interior.add(this.outlineStrokeSample);
         interior.add(button);
 
-        interior.add(
-            new JLabel(localizationResources.getString("Outline_Paint"))
-        );
+        interior.add(new JLabel(localizationResources.getString(
+                "Outline_Paint")));
         button = new JButton(localizationResources.getString("Select..."));
         button.setActionCommand("OutlinePaint");
         button.addActionListener(this);
         interior.add(this.outlinePaintSample);
         interior.add(button);
 
-        interior.add(
-            new JLabel(localizationResources.getString("Background_paint"))
-        );
+        interior.add(new JLabel(localizationResources.getString(
+                "Background_paint")));
         button = new JButton(localizationResources.getString("Select..."));
         button.setActionCommand("BackgroundPaint");
         button.addActionListener(this);
@@ -273,13 +265,12 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         interior.add(button);
 
         if (this.plotOrientation != null) {
-            boolean isVertical
-                = this.plotOrientation.equals(PlotOrientation.VERTICAL);
-            int index
-                = isVertical ? ORIENTATION_VERTICAL : ORIENTATION_HORIZONTAL;
-            interior.add(
-                new JLabel(localizationResources.getString("Orientation"))
-            );
+            boolean isVertical = this.plotOrientation.equals(
+                    PlotOrientation.VERTICAL);
+            int index = isVertical ? ORIENTATION_VERTICAL
+                    : ORIENTATION_HORIZONTAL;
+            interior.add(new JLabel(localizationResources.getString(
+                    "Orientation")));
             this.orientationCombo = new JComboBox(orientationNames);
             this.orientationCombo.setSelectedIndex(index);
             this.orientationCombo.setActionCommand("Orientation");
@@ -289,9 +280,8 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         }
 
         if (this.drawLines != null) {
-            interior.add(
-                new JLabel(localizationResources.getString("Draw_lines"))
-            );
+            interior.add(new JLabel(localizationResources.getString(
+                    "Draw_lines")));
             this.drawLinesCheckBox = new JCheckBox();
             this.drawLinesCheckBox.setSelected(this.drawLines.booleanValue());
             this.drawLinesCheckBox.setActionCommand("DrawLines");
@@ -301,9 +291,8 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         }
 
         if (this.drawShapes != null) {
-            interior.add(
-                new JLabel(localizationResources.getString("Draw_shapes"))
-            );
+            interior.add(new JLabel(localizationResources.getString(
+                    "Draw_shapes")));
             this.drawShapesCheckBox = new JCheckBox();
             this.drawShapesCheckBox.setSelected(this.drawShapes.booleanValue());
             this.drawShapesCheckBox.setActionCommand("DrawShapes");
@@ -328,16 +317,13 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         else if (plot instanceof XYPlot) {
             domainAxis = ((XYPlot) plot).getDomainAxis();
         }
-        this.domainAxisPropertyPanel
-            = DefaultAxisEditor.getInstance(domainAxis);
+        this.domainAxisPropertyPanel = DefaultAxisEditor.getInstance(
+                domainAxis);
         if (this.domainAxisPropertyPanel != null) {
             this.domainAxisPropertyPanel.setBorder(
-                BorderFactory.createEmptyBorder(2, 2, 2, 2)
-            );
-            tabs.add(
-                localizationResources.getString("Domain_Axis"),
-                this.domainAxisPropertyPanel
-            );
+                    BorderFactory.createEmptyBorder(2, 2, 2, 2));
+            tabs.add(localizationResources.getString("Domain_Axis"),
+                    this.domainAxisPropertyPanel);
         }
 
         Axis rangeAxis = null;
@@ -348,16 +334,12 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             rangeAxis = ((XYPlot) plot).getRangeAxis();
         }
 
-        this.rangeAxisPropertyPanel
-            = DefaultAxisEditor.getInstance(rangeAxis);
+        this.rangeAxisPropertyPanel = DefaultAxisEditor.getInstance(rangeAxis);
         if (this.rangeAxisPropertyPanel != null) {
             this.rangeAxisPropertyPanel.setBorder(
-                BorderFactory.createEmptyBorder(2, 2, 2, 2)
-            );
-            tabs.add(
-                localizationResources.getString("Range_Axis"),
-                this.rangeAxisPropertyPanel
-            );
+                    BorderFactory.createEmptyBorder(2, 2, 2, 2));
+            tabs.add(localizationResources.getString("Range_Axis"),
+                    this.rangeAxisPropertyPanel);
         }
 
 //dmo: added this panel for colorbar control. (start dmo additions)
@@ -366,16 +348,13 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             colorBar = ((ContourPlot) plot).getColorBar();
         }
 
-        this.colorBarAxisPropertyPanel
-            = DefaultColorBarEditor.getInstance(colorBar);
+        this.colorBarAxisPropertyPanel = DefaultColorBarEditor.getInstance(
+                colorBar);
         if (this.colorBarAxisPropertyPanel != null) {
             this.colorBarAxisPropertyPanel.setBorder(
-                BorderFactory.createEmptyBorder(2, 2, 2, 2)
-            );
-            tabs.add(
-                localizationResources.getString("Color_Bar"),
-                this.colorBarAxisPropertyPanel
-            );
+                    BorderFactory.createEmptyBorder(2, 2, 2, 2));
+            tabs.add(localizationResources.getString("Color_Bar"),
+                    this.colorBarAxisPropertyPanel);
         }
 //dmo: (end dmo additions)
 
@@ -409,7 +388,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
     /**
      * Returns the current outline stroke.
      *
-     * @return The current outline stroke.
+     * @return The current outline stroke (possibly <code>null</code>).
      */
     public Stroke getOutlineStroke() {
         return this.outlineStrokeSample.getStroke();
@@ -478,10 +457,8 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      */
     private void attemptBackgroundPaintSelection() {
         Color c;
-        c = JColorChooser.showDialog(
-            this, localizationResources.getString("Background_Color"),
-            Color.blue
-        );
+        c = JColorChooser.showDialog(this, localizationResources.getString(
+                "Background_Color"), Color.blue);
         if (c != null) {
             this.backgroundPaintSample.setPaint(c);
         }
@@ -491,11 +468,11 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * Allow the user to change the outline stroke.
      */
     private void attemptOutlineStrokeSelection() {
-        StrokeChooserPanel panel
-            = new StrokeChooserPanel(null, this.availableStrokeSamples);
+        StrokeChooserPanel panel = new StrokeChooserPanel(
+                this.outlineStrokeSample, this.availableStrokeSamples);
         int result = JOptionPane.showConfirmDialog(this, panel,
-            localizationResources.getString("Stroke_Selection"),
-            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+                localizationResources.getString("Stroke_Selection"),
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if (result == JOptionPane.OK_OPTION) {
             this.outlineStrokeSample.setStroke(panel.getSelectedStroke());
@@ -508,9 +485,8 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      */
     private void attemptOutlinePaintSelection() {
         Color c;
-        c = JColorChooser.showDialog(
-            this, localizationResources.getString("Outline_Color"), Color.blue
-        );
+        c = JColorChooser.showDialog(this, localizationResources.getString(
+                "Outline_Color"), Color.blue);
         if (c != null) {
             this.outlinePaintSample.setPaint(c);
         }
@@ -637,8 +613,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
                 XYItemRenderer r = p.getRenderer();
                 if (r instanceof StandardXYItemRenderer) {
                     ((StandardXYItemRenderer) r).setPlotLines(
-                        this.drawLines.booleanValue()
-                    );
+                            this.drawLines.booleanValue());
                 }
             }
         }
