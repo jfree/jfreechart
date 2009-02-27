@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * DefaultNumberAxisEditor.java
  * ----------------------------
- * (C) Copyright 2005-2008, Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2009, Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Arnaud Lelievre;
@@ -37,6 +37,7 @@
  * 24-Nov-2005 : Version 1, based on NumberAxisPropertyEditor (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 27-Feb-2009 : Fixed bug 2612649, NullPointerException (DG);
  *
  */
 
@@ -108,7 +109,7 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
             = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.editor.LocalizationBundle");
+                "org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * Standard constructor: builds a property panel for the specified axis.
@@ -140,20 +141,17 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
         range.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 
         range.add(new JPanel());
-        this.autoRangeCheckBox = new JCheckBox(
-            localizationResources.getString("Auto-adjust_range"), this.autoRange
-        );
+        this.autoRangeCheckBox = new JCheckBox(localizationResources.getString(
+                "Auto-adjust_range"), this.autoRange);
         this.autoRangeCheckBox.setActionCommand("AutoRangeOnOff");
         this.autoRangeCheckBox.addActionListener(this);
         range.add(this.autoRangeCheckBox);
         range.add(new JPanel());
 
-        range.add(
-            new JLabel(localizationResources.getString("Minimum_range_value"))
-        );
-        this.minimumRangeValue = new JTextField(
-            Double.toString(this.minimumValue)
-        );
+        range.add(new JLabel(localizationResources.getString(
+                "Minimum_range_value")));
+        this.minimumRangeValue = new JTextField(Double.toString(
+                this.minimumValue));
         this.minimumRangeValue.setEnabled(!this.autoRange);
         this.minimumRangeValue.setActionCommand("MinimumRange");
         this.minimumRangeValue.addActionListener(this);
@@ -161,12 +159,10 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
         range.add(this.minimumRangeValue);
         range.add(new JPanel());
 
-        range.add(
-            new JLabel(localizationResources.getString("Maximum_range_value"))
-        );
-        this.maximumRangeValue = new JTextField(
-            Double.toString(this.maximumValue)
-        );
+        range.add(new JLabel(localizationResources.getString(
+                "Maximum_range_value")));
+        this.maximumRangeValue = new JTextField(Double.toString(
+                this.maximumValue));
         this.maximumRangeValue.setEnabled(!this.autoRange);
         this.maximumRangeValue.setActionCommand("MaximumRange");
         this.maximumRangeValue.addActionListener(this);
@@ -236,13 +232,11 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
      * Handle a grid stroke selection.
      */
     private void attemptGridStrokeSelection() {
-        StrokeChooserPanel panel = new StrokeChooserPanel(
-            null, this.availableStrokeSamples
-        );
-        int result = JOptionPane.showConfirmDialog(
-            this, panel, localizationResources.getString("Stroke_Selection"),
-            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE
-        );
+        StrokeChooserPanel panel = new StrokeChooserPanel(this.gridStrokeSample,
+                this.availableStrokeSamples);
+        int result = JOptionPane.showConfirmDialog(this, panel,
+                localizationResources.getString("Stroke_Selection"),
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if (result == JOptionPane.OK_OPTION) {
             this.gridStrokeSample.setStroke(panel.getSelectedStroke());
@@ -254,9 +248,8 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
      */
     private void attemptGridPaintSelection() {
         Color c;
-        c = JColorChooser.showDialog(
-            this, localizationResources.getString("Grid_Color"), Color.blue
-        );
+        c = JColorChooser.showDialog(this, localizationResources.getString(
+                "Grid_Color"), Color.blue);
         if (c != null) {
             this.gridPaintSample.setPaint(c);
         }
