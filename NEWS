@@ -20,6 +20,7 @@ memory for each ChartPanel used in your application).
 
 Bug Fixes:
 
+2617557 : StandardDialScale ignored tickLabelPaint;
 2564636 : Month constructor ignores Locale;
 2490803 : PeriodAxis.setRange() method doesn't take into account that the axis
           displays whole periods;

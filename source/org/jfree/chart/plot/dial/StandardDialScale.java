@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * StandardDialScale.java
  * ----------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 17-Nov-2006 : Added flags for tick label visibility (DG);
  * 24-Oct-2007 : Added tick label formatter (DG);
  * 19-Nov-2007 : Added some missing accessor methods (DG);
+ * 27-Feb-2009 : Fixed bug 2617557: tickLabelPaint ignored (DG);
  *
  */
 
@@ -798,6 +799,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
             if (this.tickLabelsVisible) {
                 if (!firstLabel || this.firstTickLabelVisible) {
                     g2.setFont(this.tickLabelFont);
+                    g2.setPaint(this.tickLabelPaint);
                     TextUtilities.drawAlignedString(
                             this.tickLabelFormatter.format(v), g2,
                             (float) pt2.getX(), (float) pt2.getY(),

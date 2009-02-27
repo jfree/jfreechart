@@ -1,5 +1,11 @@
 2009-02-27  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 2617557:
+    * source/org/jfree/chart/plot/dial/StandardDialScale.java
+    (draw): Use tickLabelPaint.
+
+2009-02-27  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/RendererUtilities.java
     (findLiveItemsLowerBound): Added argument checks,
     (findLiveItemsUpperBound): Correct calculation of mid.
