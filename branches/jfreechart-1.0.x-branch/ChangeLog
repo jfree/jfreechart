@@ -1,5 +1,10 @@
 2009-02-27  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/xy/XYSeriesCollection.java
+    (getDomainOrder): New method override.
+
+2009-02-27  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 2583891:
     * swt/org/jfree/experimental/swt/SWTGraphics2D.java
     (fillPolygon): Implemented.

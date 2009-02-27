@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * XYSeriesCollection.java
  * -----------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
@@ -52,6 +52,8 @@
  * 08-May-2007 : Added indexOf(XYSeries) method (DG);
  * 03-Dec-2007 : Added getSeries(Comparable) method (DG);
  * 22-Apr-2008 : Implemented PublicCloneable (DG);
+ * 27-Feb-2009 : Overridden getDomainOrder() to detect when all series are
+ *               sorted in ascending order (DG);
  *
  */
 
@@ -63,6 +65,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.jfree.data.DomainInfo;
+import org.jfree.data.DomainOrder;
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -110,20 +113,34 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
+     * Returns the order of the domain (X) values, if this is known.
+     *
+     * @return The domain order.
+     */
+    public DomainOrder getDomainOrder() {
+        int seriesCount = getSeriesCount();
+        for (int i = 0; i < seriesCount; i++) {
+            XYSeries s = getSeries(i);
+            if (!s.getAutoSort()) {
+                return DomainOrder.NONE;  // we can't be sure of the order
+            }
+        }
+        return DomainOrder.ASCENDING;
+    }
+
+    /**
      * Adds a series to the collection and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
      */
     public void addSeries(XYSeries series) {
-
         if (series == null) {
             throw new IllegalArgumentException("Null 'series' argument.");
         }
         this.data.add(series);
         series.addChangeListener(this);
         fireDatasetChanged();
-
     }
 
     /**
