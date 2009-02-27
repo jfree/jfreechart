@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * CombinationDataset.java
  * -----------------------
- * (C) Copyright 2001-2008, by Bill Kelemen.
+ * (C) Copyright 2001-2009, by Bill Kelemen.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   -;
@@ -46,6 +46,8 @@ package org.jfree.data.general;
  * Interface that describes the new methods that any combined dataset needs to
  * implement. A combined dataset object will combine one or more datasets and
  * expose a sub-set or union of the combined datasets.
+ *
+ * @deprecated 1.0.13
  */
 public interface CombinationDataset {
 

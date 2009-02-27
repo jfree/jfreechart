@@ -1,5 +1,9 @@
 2009-02-27  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/general/CombinationDataset.java: Deprecated.
+
+2009-02-27  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 2612649:
     * source/org/jfree/chart/editor/DefaultPlotEditor.java
     (DefaultPlotEditor): Added null Stroke to available options,
