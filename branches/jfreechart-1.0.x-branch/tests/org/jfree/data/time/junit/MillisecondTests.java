@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * MillisecondTests.java
  * ---------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -132,17 +132,18 @@ public class MillisecondTests extends TestCase {
      * constructor.
      */
     public void testDateConstructor1() {
-
         TimeZone zone = TimeZone.getTimeZone("GMT");
-        Millisecond m1 = new Millisecond(new Date(1016729759122L), zone);
-        Millisecond m2 = new Millisecond(new Date(1016729759123L), zone);
+        Locale locale = Locale.getDefault();  // locale should not matter here
+        Millisecond m1 = new Millisecond(new Date(1016729759122L), zone,
+                locale);
+        Millisecond m2 = new Millisecond(new Date(1016729759123L), zone,
+                locale);
 
         assertEquals(122, m1.getMillisecond());
         assertEquals(1016729759122L, m1.getLastMillisecond(zone));
 
         assertEquals(123, m2.getMillisecond());
         assertEquals(1016729759123L, m2.getFirstMillisecond(zone));
-
     }
 
     /**
@@ -151,44 +152,41 @@ public class MillisecondTests extends TestCase {
      * constructor.
      */
     public void testDateConstructor2() {
-
         TimeZone zone = TimeZone.getTimeZone("Europe/Tallinn");
-        Millisecond m1 = new Millisecond(new Date(1016722559122L), zone);
-        Millisecond m2 = new Millisecond(new Date(1016722559123L), zone);
+        Locale locale = Locale.getDefault();  // locale should not matter here
+        Millisecond m1 = new Millisecond(new Date(1016722559122L), zone,
+                locale);
+        Millisecond m2 = new Millisecond(new Date(1016722559123L), zone,
+                locale);
 
         assertEquals(122, m1.getMillisecond());
         assertEquals(1016722559122L, m1.getLastMillisecond(zone));
 
         assertEquals(123, m2.getMillisecond());
         assertEquals(1016722559123L, m2.getFirstMillisecond(zone));
-
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         Millisecond m1 = new Millisecond();
         Millisecond m2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
             out.writeObject(m1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             m2 = (Millisecond) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(m1, m2);
-
     }
 
     /**

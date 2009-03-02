@@ -52,6 +52,7 @@
  * 08-Apr-2008 : Notify listeners in setRange(Range, boolean, boolean) - fixes
  *               bug 1932146 (DG);
  * 16-Jan-2009 : Fixed bug 2490803, a problem in the setRange() method (DG);
+ * 02-Mar-2009 : Added locale - see patch 2569670 by Benjamin Bignell (DG);
  *
  */
 
@@ -78,6 +79,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.chart.event.AxisChangeEvent;
@@ -120,7 +122,15 @@ public class PeriodAxis extends ValueAxis
     private TimeZone timeZone;
 
     /**
-     * A calendar used for date manipulations in the current time zone.
+     * The locale (never <code>null</code>).
+     * 
+     * @since 1.0.13
+     */
+    private Locale locale;
+
+    /**
+     * A calendar used for date manipulations in the current time zone and
+     * locale.
      */
     private Calendar calendar;
 
@@ -183,7 +193,7 @@ public class PeriodAxis extends ValueAxis
      */
     public PeriodAxis(String label,
                       RegularTimePeriod first, RegularTimePeriod last) {
-        this(label, first, last, TimeZone.getDefault());
+        this(label, first, last, TimeZone.getDefault(), Locale.getDefault());
     }
 
     /**
@@ -195,17 +205,45 @@ public class PeriodAxis extends ValueAxis
      * @param last  the last time period in the axis range
      *              (<code>null</code> not permitted).
      * @param timeZone  the time zone (<code>null</code> not permitted).
+     *
+     * @deprecated As of version 1.0.13, you should use the constructor that
+     *     specifies a Locale also.
      */
     public PeriodAxis(String label,
                       RegularTimePeriod first, RegularTimePeriod last,
                       TimeZone timeZone) {
+        this(label, first, last, timeZone, Locale.getDefault());
+    }
 
+    /**
+     * Creates a new axis.
+     *
+     * @param label  the axis label (<code>null</code> permitted).
+     * @param first  the first time period in the axis range
+     *               (<code>null</code> not permitted).
+     * @param last  the last time period in the axis range
+     *              (<code>null</code> not permitted).
+     * @param timeZone  the time zone (<code>null</code> not permitted).
+     * @param locale  the locale (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    public PeriodAxis(String label, RegularTimePeriod first,
+            RegularTimePeriod last, TimeZone timeZone, Locale locale) {
         super(label, null);
+        if (timeZone == null) {
+            throw new IllegalArgumentException("Null 'timeZone' argument.");
+        }
+        if (locale == null) {
+            throw new IllegalArgumentException("Null 'locale' argument.");
+        }
         this.first = first;
         this.last = last;
         this.timeZone = timeZone;
-        // FIXME: this calendar may need a locale as well
-        this.calendar = Calendar.getInstance(timeZone);
+        this.locale = locale;
+        this.calendar = Calendar.getInstance(timeZone, locale);
+        this.first.peg(this.calendar);
+        this.last.peg(this.calendar);
         this.autoRangeTimePeriodClass = first.getClass();
         this.majorTickTimePeriodClass = first.getClass();
         this.minorTickMarksVisible = false;
@@ -214,10 +252,9 @@ public class PeriodAxis extends ValueAxis
         setAutoRange(true);
         this.labelInfo = new PeriodAxisLabelInfo[2];
         this.labelInfo[0] = new PeriodAxisLabelInfo(Month.class,
-                new SimpleDateFormat("MMM"));
+                new SimpleDateFormat("MMM", locale));
         this.labelInfo[1] = new PeriodAxisLabelInfo(Year.class,
-                new SimpleDateFormat("yyyy"));
-
+                new SimpleDateFormat("yyyy", locale));
     }
 
     /**
@@ -240,6 +277,7 @@ public class PeriodAxis extends ValueAxis
             throw new IllegalArgumentException("Null 'first' argument.");
         }
         this.first = first;
+        this.first.peg(this.calendar);
         notifyListeners(new AxisChangeEvent(this));
     }
 
@@ -263,6 +301,7 @@ public class PeriodAxis extends ValueAxis
             throw new IllegalArgumentException("Null 'last' argument.");
         }
         this.last = last;
+        this.last.peg(this.calendar);
         notifyListeners(new AxisChangeEvent(this));
     }
 
@@ -287,9 +326,21 @@ public class PeriodAxis extends ValueAxis
             throw new IllegalArgumentException("Null 'zone' argument.");
         }
         this.timeZone = zone;
-        // FIXME: this calendar may need a locale as well
-        this.calendar = Calendar.getInstance(zone);
+        this.calendar = Calendar.getInstance(zone, this.locale);
+        this.first.peg(this.calendar);
+        this.last.peg(this.calendar);
         notifyListeners(new AxisChangeEvent(this));
+    }
+
+    /**
+     * Returns the locale for this axis.
+     *
+     * @return The locale (never (<code>null</code>).
+     *
+     * @since 1.0.13
+     */
+    public Locale getLocale() {
+        return this.locale;
     }
 
     /**
@@ -513,11 +564,12 @@ public class PeriodAxis extends ValueAxis
         long upper = Math.round(range.getUpperBound());
         long lower = Math.round(range.getLowerBound());
         this.first = createInstance(this.autoRangeTimePeriodClass,
-                new Date(lower), this.timeZone);
+                new Date(lower), this.timeZone, this.locale);
         this.last = createInstance(this.autoRangeTimePeriodClass,
-                new Date(upper), this.timeZone);
+                new Date(upper), this.timeZone, this.locale);
         super.setRange(new Range(this.first.getFirstMillisecond(),
-                this.last.getLastMillisecond() + 1.0), turnOffAutoRange, notify);
+                this.last.getLastMillisecond() + 1.0), turnOffAutoRange,
+                notify);
     }
 
     /**
@@ -671,9 +723,8 @@ public class PeriodAxis extends ValueAxis
         double y0 = state.getCursor();
         double insideLength = getTickMarkInsideLength();
         double outsideLength = getTickMarkOutsideLength();
-        RegularTimePeriod t = RegularTimePeriod.createInstance(
-                this.majorTickTimePeriodClass, this.first.getStart(),
-                getTimeZone());
+        RegularTimePeriod t = createInstance(this.majorTickTimePeriodClass, 
+                this.first.getStart(), getTimeZone(), this.locale);
         long t0 = t.getFirstMillisecond(this.calendar);
         Line2D inside = null;
         Line2D outside = null;
@@ -699,9 +750,9 @@ public class PeriodAxis extends ValueAxis
             }
             // draw minor tick marks
             if (this.minorTickMarksVisible) {
-                RegularTimePeriod tminor = RegularTimePeriod.createInstance(
+                RegularTimePeriod tminor = createInstance(
                         this.minorTickTimePeriodClass, new Date(t0),
-                        getTimeZone());
+                        getTimeZone(), this.locale);
                 long tt0 = tminor.getFirstMillisecond(this.calendar);
                 while (tt0 < t.getLastMillisecond(this.calendar)
                         && tt0 < lastOnAxis) {
@@ -1026,9 +1077,9 @@ public class PeriodAxis extends ValueAxis
             long upper = Math.round(r.getUpperBound());
             long lower = Math.round(r.getLowerBound());
             this.first = createInstance(this.autoRangeTimePeriodClass,
-                    new Date(lower), this.timeZone);
+                    new Date(lower), this.timeZone, this.locale);
             this.last = createInstance(this.autoRangeTimePeriodClass,
-                    new Date(upper), this.timeZone);
+                    new Date(upper), this.timeZone, this.locale);
             setRange(r, false, false);
         }
 
@@ -1045,45 +1096,47 @@ public class PeriodAxis extends ValueAxis
         if (obj == this) {
             return true;
         }
-        if (obj instanceof PeriodAxis && super.equals(obj)) {
-            PeriodAxis that = (PeriodAxis) obj;
-            if (!this.first.equals(that.first)) {
-                return false;
-            }
-            if (!this.last.equals(that.last)) {
-                return false;
-            }
-            if (!this.timeZone.equals(that.timeZone)) {
-                return false;
-            }
-            if (!this.autoRangeTimePeriodClass.equals(
-                    that.autoRangeTimePeriodClass)) {
-                return false;
-            }
-            if (!(isMinorTickMarksVisible()
-                    == that.isMinorTickMarksVisible())) {
-                return false;
-            }
-            if (!this.majorTickTimePeriodClass.equals(
-                    that.majorTickTimePeriodClass)) {
-                return false;
-            }
-            if (!this.minorTickTimePeriodClass.equals(
-                    that.minorTickTimePeriodClass)) {
-                return false;
-            }
-            if (!this.minorTickMarkPaint.equals(that.minorTickMarkPaint)) {
-                return false;
-            }
-            if (!this.minorTickMarkStroke.equals(that.minorTickMarkStroke)) {
-                return false;
-            }
-            if (!Arrays.equals(this.labelInfo, that.labelInfo)) {
-                return false;
-            }
-            return true;
+        if (!(obj instanceof PeriodAxis)) {
+            return false;
         }
-        return false;
+        PeriodAxis that = (PeriodAxis) obj;
+        if (!this.first.equals(that.first)) {
+            return false;
+        }
+        if (!this.last.equals(that.last)) {
+            return false;
+        }
+        if (!this.timeZone.equals(that.timeZone)) {
+            return false;
+        }
+        if (!this.locale.equals(that.locale)) {
+            return false;
+        }
+        if (!this.autoRangeTimePeriodClass.equals(
+                that.autoRangeTimePeriodClass)) {
+            return false;
+        }
+        if (!(isMinorTickMarksVisible() == that.isMinorTickMarksVisible())) {
+            return false;
+        }
+        if (!this.majorTickTimePeriodClass.equals(
+                that.majorTickTimePeriodClass)) {
+            return false;
+        }
+        if (!this.minorTickTimePeriodClass.equals(
+                that.minorTickTimePeriodClass)) {
+            return false;
+        }
+        if (!this.minorTickMarkPaint.equals(that.minorTickMarkPaint)) {
+            return false;
+        }
+        if (!this.minorTickMarkStroke.equals(that.minorTickMarkStroke)) {
+            return false;
+        }
+        if (!Arrays.equals(this.labelInfo, that.labelInfo)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
     /**
@@ -1127,20 +1180,29 @@ public class PeriodAxis extends ValueAxis
      * @param periodClass  the class.
      * @param millisecond  the time.
      * @param zone  the time zone.
+     * @param locale  the locale.
      *
      * @return The time period.
      */
-    private RegularTimePeriod createInstance(Class periodClass,
-                                             Date millisecond, TimeZone zone) {
+    private RegularTimePeriod createInstance(Class periodClass, 
+            Date millisecond, TimeZone zone, Locale locale) {
         RegularTimePeriod result = null;
         try {
             Constructor c = periodClass.getDeclaredConstructor(new Class[] {
-                    Date.class, TimeZone.class});
+                    Date.class, TimeZone.class, Locale.class});
             result = (RegularTimePeriod) c.newInstance(new Object[] {
-                    millisecond, zone});
+                    millisecond, zone, locale});
         }
         catch (Exception e) {
-            // do nothing
+            try {
+                Constructor c = periodClass.getDeclaredConstructor(new Class[] {
+                        Date.class});
+                result = (RegularTimePeriod) c.newInstance(new Object[] {
+                        millisecond});
+            }
+            catch (Exception e2) {
+                // do nothing
+            }
         }
         return result;
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * SecondTests.java
  * ----------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -127,17 +127,16 @@ public class SecondTests extends TestCase {
      * Use this to check the Second constructor.
      */
     public void testDateConstructor1() {
-
         TimeZone zone = TimeZone.getTimeZone("GMT");
-        Second s1 = new Second(new Date(1016729758999L), zone);
-        Second s2 = new Second(new Date(1016729759000L), zone);
+        Locale locale = Locale.getDefault();  // locale shouldn't matter here
+        Second s1 = new Second(new Date(1016729758999L), zone, locale);
+        Second s2 = new Second(new Date(1016729759000L), zone, locale);
 
         assertEquals(58, s1.getSecond());
         assertEquals(1016729758999L, s1.getLastMillisecond(zone));
 
         assertEquals(59, s2.getSecond());
         assertEquals(1016729759000L, s2.getFirstMillisecond(zone));
-
     }
 
     /**
@@ -145,44 +144,39 @@ public class SecondTests extends TestCase {
      * java.util.Date(1016751359000L). Use this to check the Second constructor.
      */
     public void testDateConstructor2() {
-
         TimeZone zone = TimeZone.getTimeZone("America/Chicago");
-        Second s1 = new Second(new Date(1016751358999L), zone);
-        Second s2 = new Second(new Date(1016751359000L), zone);
+        Locale locale = Locale.getDefault();  // locale shouldn't matter here
+        Second s1 = new Second(new Date(1016751358999L), zone, locale);
+        Second s2 = new Second(new Date(1016751359000L), zone, locale);
 
         assertEquals(58, s1.getSecond());
         assertEquals(1016751358999L, s1.getLastMillisecond(zone));
 
         assertEquals(59, s2.getSecond());
         assertEquals(1016751359000L, s2.getFirstMillisecond(zone));
-
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         Second s1 = new Second();
         Second s2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
             out.writeObject(s1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             s2 = (Second) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(s1, s2);
-
     }
 
     /**

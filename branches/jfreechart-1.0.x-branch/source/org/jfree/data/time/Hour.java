@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Hour.java
  * ---------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -58,6 +58,7 @@
  * 04-Apr-2007 : In Hour(Date, TimeZone), peg milliseconds using specified
  *               time zone (DG);
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
+ * 02-Mar-2009 : Added new constructor with Locale (DG);
  *
  */
 
@@ -66,6 +67,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -139,7 +141,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      */
     public Hour(Date time) {
         // defer argument checking...
-        this(time, TimeZone.getDefault());
+        this(time, TimeZone.getDefault(), Locale.getDefault());
     }
 
     /**
@@ -148,19 +150,38 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @param time  the date-time (<code>null</code> not permitted).
      * @param zone  the time zone (<code>null</code> not permitted).
+     *
+     * @deprecated As of 1.0.13, use the constructor that specifies the locale
+     *     also.
      */
     public Hour(Date time, TimeZone zone) {
-        // FIXME:  need a locale as well as a timezone
+        this(time, zone, Locale.getDefault());
+    }
+
+    /**
+     * Constructs a new instance, based on the supplied date/time evaluated
+     * in the specified time zone.
+     *
+     * @param time  the date-time (<code>null</code> not permitted).
+     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param locale  the locale (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    public Hour(Date time, TimeZone zone, Locale locale) {
         if (time == null) {
             throw new IllegalArgumentException("Null 'time' argument.");
         }
         if (zone == null) {
             throw new IllegalArgumentException("Null 'zone' argument.");
         }
-        Calendar calendar = Calendar.getInstance(zone);
+        if (locale == null) {
+            throw new IllegalArgumentException("Null 'locale' argument.");
+        }
+        Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
-        this.day = new Day(time, zone);
+        this.day = new Day(time, zone, locale);
         peg(calendar);
     }
 
@@ -256,7 +277,6 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @return The hour preceding this one.
      */
     public RegularTimePeriod previous() {
-
         Hour result;
         if (this.hour != FIRST_HOUR_IN_DAY) {
             result = new Hour(this.hour - 1, this.day);
@@ -271,7 +291,6 @@ public class Hour extends RegularTimePeriod implements Serializable {
             }
         }
         return result;
-
     }
 
     /**
@@ -280,7 +299,6 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @return The hour following this one.
      */
     public RegularTimePeriod next() {
-
         Hour result;
         if (this.hour != LAST_HOUR_IN_DAY) {
             result = new Hour(this.hour + 1, this.day);
@@ -295,7 +313,6 @@ public class Hour extends RegularTimePeriod implements Serializable {
             }
         }
         return result;
-
     }
 
     /**
@@ -413,7 +430,6 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     public int compareTo(Object o1) {
-
         int result;
 
         // CASE 1 : Comparing to another Hour object
@@ -441,7 +457,6 @@ public class Hour extends RegularTimePeriod implements Serializable {
         }
 
         return result;
-
     }
 
     /**
@@ -455,7 +470,6 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *         otherwise.
      */
     public static Hour parseHour(String s) {
-
         Hour result = null;
         s = s.trim();
 
@@ -474,7 +488,6 @@ public class Hour extends RegularTimePeriod implements Serializable {
         }
 
         return result;
-
     }
 
 }

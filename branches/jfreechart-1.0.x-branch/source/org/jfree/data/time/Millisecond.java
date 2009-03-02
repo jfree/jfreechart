@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * Millisecond.java
  * ----------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -53,6 +53,7 @@
  *               method:
  *               see http://www.jfree.org/phpBB2/viewtopic.php?t=24805 (DG);
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
+ * 02-Mar-2009 : Added new constructor with Locale (DG);
  *
  */
 
@@ -61,6 +62,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -146,7 +148,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @see #Millisecond(Date, TimeZone)
      */
     public Millisecond(Date time) {
-        this(time, TimeZone.getDefault());
+        this(time, TimeZone.getDefault(), Locale.getDefault());
     }
 
     /**
@@ -154,16 +156,31 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      *
      * @param time  the instant in time.
      * @param zone  the time zone.
+     *
+     * @deprecated As of 1.0.13, use the constructor that specifies the locale
+     *     also.
      */
     public Millisecond(Date time, TimeZone zone) {
-        // FIXME:  need a locale as well as a timezone
-        Calendar calendar = Calendar.getInstance(zone);
+        this(time, zone, Locale.getDefault());
+    }
+
+    /**
+     * Creates a millisecond.
+     *
+     * @param time  the date-time (<code>null</code> not permitted).
+     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param locale  the locale (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    public Millisecond(Date time, TimeZone zone, Locale locale) {
+        Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         this.millisecond = calendar.get(Calendar.MILLISECOND);
         this.second = (byte) calendar.get(Calendar.SECOND);
         this.minute = (byte) calendar.get(Calendar.MINUTE);
         this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
-        this.day = new Day(time, zone);
+        this.day = new Day(time, zone, locale);
         peg(calendar);
     }
 
@@ -233,9 +250,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @return The millisecond preceding this one.
      */
     public RegularTimePeriod previous() {
-
         RegularTimePeriod result = null;
-
         if (this.millisecond != FIRST_MILLISECOND_IN_SECOND) {
             result = new Millisecond(this.millisecond - 1, getSecond());
         }
@@ -246,7 +261,6 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
             }
         }
         return result;
-
     }
 
     /**
@@ -255,7 +269,6 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @return The millisecond following this one.
      */
     public RegularTimePeriod next() {
-
         RegularTimePeriod result = null;
         if (this.millisecond != LAST_MILLISECOND_IN_SECOND) {
             result = new Millisecond(this.millisecond + 1, getSecond());
@@ -267,7 +280,6 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
             }
         }
         return result;
-
     }
 
     /**
@@ -346,7 +358,6 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     public int compareTo(Object obj) {
-
         int result;
         long difference;
 
@@ -386,7 +397,6 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
         }
 
         return result;
-
     }
 
     /**
