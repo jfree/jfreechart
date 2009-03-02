@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * XYStepRenderer.java
  * -------------------
- * (C) Copyright 2002-2008, by Roger Studner and Contributors.
+ * (C) Copyright 2002-2009, by Roger Studner and Contributors.
  *
  * Original Author:  Roger Studner;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -227,7 +227,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
         double transY1 = (Double.isNaN(y1) ? Double.NaN
                 : rangeAxis.valueToJava2D(y1, dataArea, yAxisLocation));
 
-        if (pass== 0 && item > 0) {
+        if (pass==0 && item > 0) {
             // get the previous data point...
             double x0 = dataset.getXValue(series, item - 1);
             double y0 = dataset.getYValue(series, item - 1);
