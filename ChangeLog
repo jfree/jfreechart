@@ -1,6 +1,17 @@
 2009-03-02  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/PeriodAxis.java
+    (draw): Check tickMarksVisible and tickLabelsVisible,
+    (drawTickMarksHorizontal): Removed unnecessary calendar references,
+    (drawTickLabels): Likewise,
+    (valueToJava2D): Likewise,
+    (java2DtoValue): Likewise,
+    * source/org/jfree/chart/axis/PeriodAxisLabelInfo.java
+    (createInstance): Deprecated and added new method with locale argument.
+
+2009-03-02  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/axis/PeriodAxis.java
     (locale): New field,
     (PeriodAxis(String, RegularTimePeriod, RegularTimePeriod)): Delegate to
     new constructor,

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * PeriodAxisLabelInfo.java
  * ------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  * 01-Mar-2005 : Modified constructors to accept DateFormat (DG);
  * 20-May-2005 : Added default constants and null argument checks in the
  *               constructor (DG);
+ * 02-Mar-2009 : Updated createInstance to use locale (DG);
  *
  */
 
@@ -56,6 +57,7 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.data.time.RegularTimePeriod;
@@ -266,14 +268,33 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      * @param zone  the time zone.
      *
      * @return The time period.
+     *
+     * @deprecated As of 1.0.13, use the method that specifies the locale also.
      */
     public RegularTimePeriod createInstance(Date millisecond, TimeZone zone) {
+        return createInstance(millisecond, zone, Locale.getDefault());
+    }
+
+    /**
+     * Creates a time period that includes the specified millisecond, assuming
+     * the given time zone.
+     *
+     * @param millisecond  the time.
+     * @param zone  the time zone.
+     * @param locale  the locale.
+     *
+     * @return The time period.
+     *
+     * @since 1.0.13.
+     */
+    public RegularTimePeriod createInstance(Date millisecond, TimeZone zone,
+            Locale locale) {
         RegularTimePeriod result = null;
         try {
             Constructor c = this.periodClass.getDeclaredConstructor(
-                    new Class[] {Date.class, TimeZone.class});
+                    new Class[] {Date.class, TimeZone.class, Locale.class});
             result = (RegularTimePeriod) c.newInstance(new Object[] {
-                    millisecond, zone});
+                    millisecond, zone, locale});
         }
         catch (Exception e) {
             // do nothing
