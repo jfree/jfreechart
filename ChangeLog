@@ -1,3 +1,43 @@
+2009-03-02  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/axis/PeriodAxis.java
+    (locale): New field,
+    (PeriodAxis(String, RegularTimePeriod, RegularTimePeriod)): Delegate to
+    new constructor,
+    (PeriodAxis(String, RegularTimePeriod, RegularTimePeriod, TimeZone)):
+    Deprecated,
+    (PeriodAxis(String, RegularTimePeriod, RegularTimePeriod, TimeZone, Locale)):
+    New constructor,
+    (setFirst): Peg the time period,
+    (setLast): Likewise,
+    (setTimeZone): Peg first and last,
+    (getLocale): New method,
+    (setRange): Use locale,
+    (drawTickMarksHorizontal): Likewise,
+    (autoAdjustRange): Likewise,
+    (equals): Check locale field,
+    (createInstance): Added locale,
+    * source/org/jfree/data/time/Day.java
+    (Day(Date)): Delegate to new constructor,
+    (Day(Date, TimeZone)): Deprecated,
+    (Day(Date, TimeZone, Locale)): New constructor,
+    * source/org/jfree/data/time/Hour.java
+    (Hour(Date)): Delegate to new constructor,
+    (Hour(Date, TimeZone)): Deprecated,
+    (Hour(Date, TimeZone, Locale)): New constructor,
+    * source/org/jfree/data/time/Millisecond.java
+    (Millisecond(Date)): Delegate to new constructor,
+    (Millisecond(Date, TimeZone)): Deprecated,
+    (Millisecond(Date, TimeZone, Locale)): New constructor,
+    * source/org/jfree/data/time/Minute.java
+    (Minute(Date)): Delegate to new constructor,
+    (Minute(Date, TimeZone)): Deprecated,
+    (Minute(Date, TimeZone, Locale)): New constructor,
+    * source/org/jfree/data/time/Second.java
+    (Second(Date)): Delegate to new constructor,
+    (Second(Date, TimeZone)): Deprecated,
+    (Second(Date, TimeZone, Locale)): New constructor.
+
 2009-02-27  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/xy/XYSeriesCollection.java

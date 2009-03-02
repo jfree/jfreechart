@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Second.java
  * -----------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -54,6 +54,7 @@
  * 05-Oct-2006 : Updated API docs (DG);
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
+ * 02-Mar-2009 : Added new constructor with Locale (DG);
  *
  */
 
@@ -62,6 +63,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -145,7 +147,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @see #Second(Date, TimeZone)
      */
     public Second(Date time) {
-        this(time, TimeZone.getDefault());
+        this(time, TimeZone.getDefault(), Locale.getDefault());
     }
 
     /**
@@ -153,15 +155,30 @@ public class Second extends RegularTimePeriod implements Serializable {
      *
      * @param time  the instant in time.
      * @param zone  the time zone.
+     *
+     * @deprecated As of 1.0.13, use the constructor that specifies the locale
+     *     also.
      */
     public Second(Date time, TimeZone zone) {
-        // FIXME:  need a locale as well as a time zone
-        Calendar calendar = Calendar.getInstance(zone);
+        this(time, zone, Locale.getDefault());
+    }
+
+    /**
+     * Creates a new second based on the supplied time and time zone.
+     *
+     * @param time  the time (<code>null</code> not permitted).
+     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param locale  the locale (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    public Second(Date time, TimeZone zone, Locale locale) {
+        Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         this.second = (byte) calendar.get(Calendar.SECOND);
         this.minute = (byte) calendar.get(Calendar.MINUTE);
         this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
-        this.day = new Day(time, zone);
+        this.day = new Day(time, zone, locale);
         peg(calendar);
     }
 
@@ -229,7 +246,6 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @return The second preceding this one.
      */
     public RegularTimePeriod previous() {
-
         Second result = null;
         if (this.second != FIRST_SECOND_IN_MINUTE) {
             result = new Second(this.second - 1, getMinute());
@@ -241,7 +257,6 @@ public class Second extends RegularTimePeriod implements Serializable {
             }
         }
         return result;
-
     }
 
     /**
@@ -250,7 +265,6 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @return The second following this one.
      */
     public RegularTimePeriod next() {
-
         Second result = null;
         if (this.second != LAST_SECOND_IN_MINUTE) {
             result = new Second(this.second + 1, getMinute());
@@ -262,7 +276,6 @@ public class Second extends RegularTimePeriod implements Serializable {
             }
         }
         return result;
-
     }
 
     /**
@@ -373,7 +386,6 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     public int compareTo(Object o1) {
-
         int result;
 
         // CASE 1 : Comparing to another Second object
@@ -406,7 +418,6 @@ public class Second extends RegularTimePeriod implements Serializable {
         }
 
         return result;
-
     }
 
     /**
@@ -419,16 +430,13 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @return The second, or <code>null</code> if the string is not parseable.
      */
     public static Second parseSecond(String s) {
-
         Second result = null;
         s = s.trim();
-
         String daystr = s.substring(0, Math.min(10, s.length()));
         Day day = Day.parseDay(daystr);
         if (day != null) {
-            String hmsstr = s.substring(
-                Math.min(daystr.length() + 1, s.length()), s.length()
-            );
+            String hmsstr = s.substring(Math.min(daystr.length() + 1,
+                    s.length()), s.length());
             hmsstr = hmsstr.trim();
 
             int l = hmsstr.length();
@@ -450,9 +458,7 @@ public class Second extends RegularTimePeriod implements Serializable {
                 }
             }
         }
-
         return result;
-
     }
 
 }

@@ -38,6 +38,7 @@
  * 07-Jan-2005 : Added test for hashCode() method (DG);
  * 08-Apr-2008 : Added test1932146() (DG);
  * 16-Jan-2009 : Added test2490803() (DG);
+ * 02-Mar-2009 : Added testEqualsWithLocale (DG);
  *
  */
 
@@ -178,6 +179,26 @@ public class PeriodAxisTests extends TestCase implements AxisChangeListener {
     }
 
     /**
+     * Confirm that the equals() method can distinguish the locale field (which
+     * is new in version 1.0.13).
+     */
+    public void testEqualsWithLocale() {
+        PeriodAxis a1 = new PeriodAxis("Test", new Year(2000), new Year(2009),
+                TimeZone.getDefault(), Locale.JAPAN);
+        PeriodAxis a2 = new PeriodAxis("Test", new Year(2000), new Year(2009),
+                TimeZone.getDefault(), Locale.JAPAN);
+        assertTrue(a1.equals(a2));
+        assertTrue(a2.equals(a1));
+
+        a1 = new PeriodAxis("Test", new Year(2000), new Year(2009),
+                TimeZone.getDefault(), Locale.UK);
+        assertFalse(a1.equals(a2));
+        a2 = new PeriodAxis("Test", new Year(2000), new Year(2009),
+                TimeZone.getDefault(), Locale.UK);
+        assertTrue(a1.equals(a2));
+    }
+
+        /**
      * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashCode() {

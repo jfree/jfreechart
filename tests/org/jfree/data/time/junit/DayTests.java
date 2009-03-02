@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * DayTests.java
  * -------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -124,17 +124,16 @@ public class DayTests extends TestCase {
      * Use this to check the day constructor.
      */
     public void testDateConstructor1() {
-
         TimeZone zone = TimeZone.getTimeZone("GMT");
-        Day d1 = new Day(new Date(1078099199999L), zone);
-        Day d2 = new Day(new Date(1078099200000L), zone);
+        Locale locale = Locale.UK;
+        Day d1 = new Day(new Date(1078099199999L), zone, locale);
+        Day d2 = new Day(new Date(1078099200000L), zone, locale);
 
         assertEquals(MonthConstants.FEBRUARY, d1.getMonth());
         assertEquals(1078099199999L, d1.getLastMillisecond(zone));
 
         assertEquals(MonthConstants.MARCH, d2.getMonth());
         assertEquals(1078099200000L, d2.getFirstMillisecond(zone));
-
     }
 
     /**
@@ -143,17 +142,16 @@ public class DayTests extends TestCase {
      * constructor.
      */
     public void testDateConstructor2() {
-
         TimeZone zone = TimeZone.getTimeZone("Europe/Helsinki");
-        Day d1 = new Day(new Date(1078091999999L), zone);
-        Day d2 = new Day(new Date(1078092000000L), zone);
+        Locale locale = Locale.getDefault();  // locale shouldn't matter here
+        Day d1 = new Day(new Date(1078091999999L), zone, locale);
+        Day d2 = new Day(new Date(1078092000000L), zone, locale);
 
         assertEquals(MonthConstants.FEBRUARY, d1.getMonth());
         assertEquals(1078091999999L, d1.getLastMillisecond(zone));
 
         assertEquals(MonthConstants.MARCH, d2.getMonth());
         assertEquals(1078092000000L, d2.getFirstMillisecond(zone));
-
     }
 
     /**
@@ -161,11 +159,9 @@ public class DayTests extends TestCase {
      * should be null.
      */
     public void test1Jan1900Previous() {
-
         Day jan1st1900 = new Day(1, MonthConstants.JANUARY, 1900);
         Day previous = (Day) jan1st1900.previous();
         assertNull(previous);
-
     }
 
     /**
@@ -173,11 +169,9 @@ public class DayTests extends TestCase {
      * be 2 January 1900.
      */
     public void test1Jan1900Next() {
-
         Day jan1st1900 = new Day(1, MonthConstants.JANUARY, 1900);
         Day next = (Day) jan1st1900.next();
         assertEquals(2, next.getDayOfMonth());
-
     }
 
     /**
@@ -185,11 +179,9 @@ public class DayTests extends TestCase {
      * should be 30 December 9999.
      */
     public void test31Dec9999Previous() {
-
         Day dec31st9999 = new Day(31, MonthConstants.DECEMBER, 9999);
         Day previous = (Day) dec31st9999.previous();
         assertEquals(30, previous.getDayOfMonth());
-
     }
 
     /**
@@ -197,11 +189,9 @@ public class DayTests extends TestCase {
      * be null.
      */
     public void test31Dec9999Next() {
-
         Day dec31st9999 = new Day(31, MonthConstants.DECEMBER, 9999);
         Day next = (Day) dec31st9999.next();
         assertNull(next);
-
     }
 
     /**
@@ -214,7 +204,6 @@ public class DayTests extends TestCase {
      * @throws ParseException on parsing errors.
      */
     public void testParseDay() throws ParseException {
-
         GregorianCalendar gc = new GregorianCalendar(2001, 12, 31);
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Date reference = format.parse("31/12/2001");
@@ -227,14 +216,12 @@ public class DayTests extends TestCase {
         // test 2...
         Day d = Day.parseDay("2001-12-31");
         assertEquals(37256, d.getSerialDate().toSerial());
-
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         Day d1 = new Day(15, 4, 2000);
         Day d2 = null;
 
@@ -244,17 +231,15 @@ public class DayTests extends TestCase {
             out.writeObject(d1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             d2 = (Day) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(d1, d2);
-
     }
 
     /**

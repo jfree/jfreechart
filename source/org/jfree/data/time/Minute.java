@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Minute.java
  * -----------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -59,6 +59,7 @@
  * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
  * 11-Dec-2006 : Fix for previous() - bug 1611872 (DG);
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
+ * 02-Mar-2009 : Added new constructor that specifies Locale (DG);
  *
  */
 
@@ -67,6 +68,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -132,7 +134,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      */
     public Minute(Date time) {
         // defer argument checking
-        this(time, TimeZone.getDefault());
+        this(time, TimeZone.getDefault(), Locale.getDefault());
     }
 
     /**
@@ -140,21 +142,39 @@ public class Minute extends RegularTimePeriod implements Serializable {
      *
      * @param time  the time (<code>null</code> not permitted).
      * @param zone  the time zone (<code>null</code> not permitted).
+     *
+     * @deprecated As of 1.0.13, use the constructor that specifies the locale
+     *     also.
      */
     public Minute(Date time, TimeZone zone) {
-        // FIXME:  need a locale as well as a timezone
+        this(time, zone, Locale.getDefault());
+    }
+
+    /**
+     * Constructs a new Minute, based on the supplied date/time and timezone.
+     *
+     * @param time  the time (<code>null</code> not permitted).
+     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param locale  the locale (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    public Minute(Date time, TimeZone zone, Locale locale) {
         if (time == null) {
             throw new IllegalArgumentException("Null 'time' argument.");
         }
         if (zone == null) {
             throw new IllegalArgumentException("Null 'zone' argument.");
         }
-        Calendar calendar = Calendar.getInstance(zone);
+        if (locale == null) {
+            throw new IllegalArgumentException("Null 'locale' argument.");
+        }
+        Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         int min = calendar.get(Calendar.MINUTE);
         this.minute = (byte) min;
         this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
-        this.day = new Day(time, zone);
+        this.day = new Day(time, zone, locale);
         peg(calendar);
     }
 
@@ -167,11 +187,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      * @param month  the month (1-12).
      * @param year  the year (1900-9999).
      */
-    public Minute(int minute,
-                  int hour,
-                  int day,
-                  int month,
-                  int year) {
+    public Minute(int minute, int hour, int day, int month, int year) {
         this(minute, new Hour(hour, new Day(day, month, year)));
     }
 
@@ -284,7 +300,6 @@ public class Minute extends RegularTimePeriod implements Serializable {
      * @return The minute following this one.
      */
     public RegularTimePeriod next() {
-
         Minute result;
         if (this.minute != LAST_MINUTE_IN_HOUR) {
             result = new Minute(this.minute + 1, getHour());
@@ -299,7 +314,6 @@ public class Minute extends RegularTimePeriod implements Serializable {
             }
         }
         return result;
-
     }
 
     /**
@@ -324,7 +338,6 @@ public class Minute extends RegularTimePeriod implements Serializable {
      *     <code>null</code>.
      */
     public long getFirstMillisecond(Calendar calendar) {
-
         int year = this.day.getYear();
         int month = this.day.getMonth() - 1;
         int day = this.day.getDayOfMonth();
@@ -335,7 +348,6 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
         //return calendar.getTimeInMillis();  // this won't work for JDK 1.3
         return calendar.getTime().getTime();
-
     }
 
     /**
@@ -350,7 +362,6 @@ public class Minute extends RegularTimePeriod implements Serializable {
      *     <code>null</code>.
      */
     public long getLastMillisecond(Calendar calendar) {
-
         int year = this.day.getYear();
         int month = this.day.getMonth() - 1;
         int day = this.day.getDayOfMonth();
@@ -361,7 +372,6 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
         //return calendar.getTimeInMillis();  // this won't work for JDK 1.3
         return calendar.getTime().getTime();
-
     }
 
     /**
@@ -420,7 +430,6 @@ public class Minute extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     public int compareTo(Object o1) {
-
         int result;
 
         // CASE 1 : Comparing to another Minute object
@@ -448,7 +457,6 @@ public class Minute extends RegularTimePeriod implements Serializable {
         }
 
         return result;
-
     }
 
     /**
@@ -462,7 +470,6 @@ public class Minute extends RegularTimePeriod implements Serializable {
      *      otherwise.
      */
     public static Minute parseMinute(String s) {
-
         Minute result = null;
         s = s.trim();
 
@@ -488,9 +495,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
                 }
             }
         }
-
         return result;
-
     }
 
 }
