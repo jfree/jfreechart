@@ -1,10 +1,10 @@
 ********************************
-*  JFREECHART: Version 1.0.12  *
+*  JFREECHART: Version 1.0.13  *
 ********************************
 
-31 December 2008
+? March 2009
 
-(C)opyright 2000-2008, by Object Refinery Limited and Contributors.
+(C)opyright 2000-2009, by Object Refinery Limited and Contributors.
 
 -----------------
 1.  INTRODUCTION
@@ -38,7 +38,7 @@ message in the JFreeChart forum.
 3.  DOCUMENTATION
 -----------------
 You can download installation instructions
-(jfreechart-1.0.12-install.pdf) from the JFreeChart home
+(jfreechart-1.0.13-install.pdf) from the JFreeChart home
 page or the project page on SourceForge.
 
 Further documentation for JFreeChart (the JFreeChart Developer Guide) is
@@ -143,7 +143,7 @@ A demo application that shows a selection of the charts that can be
 generated is included in the JFreeChart distribution.   To run the
 demo (using JDK 1.3.1 or later), use the following command:
 
-    java -jar jfreechart-1.0.12-demo.jar
+    java -jar jfreechart-1.0.13-demo.jar
 
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
@@ -183,7 +183,10 @@ please post a bug report.
 --------------
 A list of changes in recent versions:
 
-1.0.12 : (19-Dec-2008)
+1.0.13 : (??-Mar-2009)
+        - see the NEWS and ChangeLog files for details.
+
+1.0.12 : (31-Dec-2008)
         - added support for minor tick marks, mapping datasets to more than
           one axis, and numerous bug fixes - see the NEWS and ChangeLog files
           for details.
