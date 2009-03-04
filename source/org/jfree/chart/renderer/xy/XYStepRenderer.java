@@ -227,7 +227,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
         double transY1 = (Double.isNaN(y1) ? Double.NaN
                 : rangeAxis.valueToJava2D(y1, dataArea, yAxisLocation));
 
-        if (pass==0 && item > 0) {
+        if (pass == 0 && item > 0) {
             // get the previous data point...
             double x0 = dataset.getXValue(series, item - 1);
             double y0 = dataset.getYValue(series, item - 1);
