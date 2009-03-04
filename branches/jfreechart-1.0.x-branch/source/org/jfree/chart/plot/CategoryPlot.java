@@ -2123,8 +2123,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns the paint for the minor grid lines (if any) plotted against the range
-     * axis.
+     * Returns the paint for the minor grid lines (if any) plotted against the 
+     * range axis.
      *
      * @return The paint (never <code>null</code>).
      *
@@ -3645,7 +3645,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
             double y = getRangeCrosshairValue();
             Paint paint = getRangeCrosshairPaint();
             Stroke stroke = getRangeCrosshairStroke();
-            drawRangeCrosshair(g2, dataArea, getOrientation(), y, yAxis, stroke, paint);
+            drawRangeCrosshair(g2, dataArea, getOrientation(), y, yAxis,
+                    stroke, paint);
         }
 
         // draw an outline around the plot area...
