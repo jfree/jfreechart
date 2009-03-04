@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * MovingAverage.java
  * ------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Benoit Xhenseval;
@@ -71,27 +71,24 @@ public class MovingAverage {
      * @return A collection of moving average time series.
      */
     public static TimeSeriesCollection createMovingAverage(
-        TimeSeriesCollection source, String suffix, int periodCount,
-        int skip) {
+            TimeSeriesCollection source, String suffix, int periodCount,
+            int skip) {
 
         if (source == null) {
             throw new IllegalArgumentException("Null 'source' argument.");
         }
-
         if (periodCount < 1) {
             throw new IllegalArgumentException("periodCount must be greater "
                     + "than or equal to 1.");
         }
 
         TimeSeriesCollection result = new TimeSeriesCollection();
-
         for (int i = 0; i < source.getSeriesCount(); i++) {
             TimeSeries sourceSeries = source.getSeries(i);
             TimeSeries maSeries = createMovingAverage(sourceSeries,
                     sourceSeries.getKey() + suffix, periodCount, skip);
             result.addSeries(maSeries);
         }
-
         return result;
 
     }
@@ -115,14 +112,13 @@ public class MovingAverage {
         if (source == null) {
             throw new IllegalArgumentException("Null source.");
         }
-
         if (periodCount < 1) {
             throw new IllegalArgumentException("periodCount must be greater " +
                     "than or equal to 1.");
 
         }
 
-        TimeSeries result = new TimeSeries(name, source.getTimePeriodClass());
+        TimeSeries result = new TimeSeries(name);
 
         if (source.getItemCount() > 0) {
 
@@ -202,13 +198,12 @@ public class MovingAverage {
         if (source == null) {
             throw new IllegalArgumentException("Null 'source'.");
         }
-
         if (pointCount < 2) {
             throw new IllegalArgumentException("periodCount must be greater " +
                     "than or equal to 2.");
         }
 
-        TimeSeries result = new TimeSeries(name, source.getTimePeriodClass());
+        TimeSeries result = new TimeSeries(name);
         double rollingSumForPeriod = 0.0;
         for (int i = 0; i < source.getItemCount(); i++) {
             // get the current data item...
