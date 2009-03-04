@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * StandardChartTheme.java
  * -----------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008, 2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -253,16 +253,16 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         theme.shadowPaint = Color.darkGray;
         theme.itemLabelPaint = Color.white;
         theme.drawingSupplier = new DefaultDrawingSupplier(
-                new Paint[] { Color.decode("0xFFFF00"),
+                new Paint[] {Color.decode("0xFFFF00"),
                         Color.decode("0x0036CC"), Color.decode("0xFF0000"),
                         Color.decode("0xFFFF7F"), Color.decode("0x6681CC"),
                         Color.decode("0xFF7F7F"), Color.decode("0xFFFFBF"),
                         Color.decode("0x99A6CC"), Color.decode("0xFFBFBF"),
                         Color.decode("0xA9A938"), Color.decode("0x2D4587")},
-                new Paint[] { Color.decode("0xFFFF00"),
+                new Paint[] {Color.decode("0xFFFF00"),
                         Color.decode("0x0036CC")},
-                new Stroke[] { new BasicStroke(2.0f)},
-                new Stroke[] { new BasicStroke(0.5f)},
+                new Stroke[] {new BasicStroke(2.0f)},
+                new Stroke[] {new BasicStroke(0.5f)},
                 DefaultDrawingSupplier.DEFAULT_SHAPE_SEQUENCE);
         theme.wallPaint = Color.darkGray;
         theme.errorIndicatorPaint = Color.lightGray;
