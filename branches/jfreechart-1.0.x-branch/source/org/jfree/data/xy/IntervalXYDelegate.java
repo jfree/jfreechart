@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * IntervalXYDelegate.java
  * -----------------------
- * (C) Copyright 2004-2008, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2009, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -46,6 +46,7 @@
  * 06-Oct-2005 : Implemented DatasetChangeListener to recalculate
  *               autoIntervalWidth (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 06-Mar-2009 : Implemented hashCode() (DG);
  *
  */
 
@@ -53,6 +54,7 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
@@ -181,7 +183,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      * aligned with the x-value at the lower end of the interval, and for a
      * value of 1.0, the interval is aligned with the x-value at the upper
      * end of the interval.
-     *
+     * <br><br>
      * Note that changing the interval position factor amounts to changing the
      * data values represented by the dataset.  Therefore, the dataset that is
      * using this delegate is responsible for generating the
@@ -210,7 +212,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     /**
      * Sets the fixed interval width and, as a side effect, sets the
      * <code>autoWidth</code> flag to <code>false</code>.
-     *
+     * <br><br>
      * Note that changing the interval width amounts to changing the data
      * values represented by the dataset.  Therefore, the dataset
      * that is using this delegate is responsible for generating the
@@ -380,7 +382,9 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     public void datasetChanged(DatasetChangeEvent e) {
         // TODO: by coding the event with some information about what changed
         // in the dataset, we could make the recalculation of the interval
-        // more efficient in some cases...
+        // more efficient in some cases (for instance, if the change is
+        // just an update to a y-value, then the x-interval doesn't need
+        // updating)...
         if (this.autoWidth) {
             this.autoIntervalWidth = recalculateInterval();
         }
@@ -422,7 +426,11 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     }
 
     /**
-     * Tests the delegate for equality with an arbitrary object.
+     * Tests the delegate for equality with an arbitrary object.  The
+     * equality test considers two delegates to be equal if they would
+     * calculate the same intervals for any given dataset (for this reason, the
+     * dataset itself is NOT included in the equality test, because it is just
+     * a reference back to the current 'owner' of the delegate).
      *
      * @param obj  the object (<code>null</code> permitted).
      *
@@ -455,6 +463,19 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      */
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     *
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int hash = 5;
+        hash = HashUtilities.hashCode(hash, this.autoWidth);
+        hash = HashUtilities.hashCode(hash, this.intervalPositionFactor);
+        hash = HashUtilities.hashCode(hash, this.fixedIntervalWidth);
+        return hash;
     }
 
 }

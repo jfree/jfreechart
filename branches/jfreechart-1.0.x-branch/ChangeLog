@@ -1,5 +1,12 @@
 2009-03-06  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/xy/IntervalXYDelegate.java
+    (hashCode): Implemented,
+    * source/org/jfree/data/xy/XYSeriesCollection.java
+    (equals): Include interval delegate.
+
+2009-03-06  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/xy/XYSeries.java
     (minX): New field,
     (maxX): Likewise,

@@ -86,6 +86,15 @@ public class XYSeriesCollectionTests extends TestCase {
         super(name);
     }
 
+    private static final double EPSILON = 0.0000000001;
+    
+    public void testConstructor() {
+        XYSeriesCollection xysc = new XYSeriesCollection();
+        assertEquals(0, xysc.getSeriesCount());
+        assertEquals(1.0, xysc.getIntervalWidth());
+        assertEquals(0.5, xysc.getIntervalPositionFactor(), EPSILON);
+    }
+
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
@@ -103,9 +112,24 @@ public class XYSeriesCollectionTests extends TestCase {
 
         c1.addSeries(new XYSeries("Empty Series"));
         assertFalse(c1.equals(c2));
-
         c2.addSeries(new XYSeries("Empty Series"));
         assertTrue(c1.equals(c2));
+
+        c1.setIntervalWidth(5.0);
+        assertFalse(c1.equals(c2));
+        c2.setIntervalWidth(5.0);
+        assertTrue(c1.equals(c2));
+
+        c1.setIntervalPositionFactor(0.75);
+        assertFalse(c1.equals(c2));
+        c2.setIntervalPositionFactor(0.75);
+        assertTrue(c1.equals(c2));
+
+        c1.setAutoWidth(true);
+        assertFalse(c1.equals(c2));
+        c2.setAutoWidth(true);
+        assertTrue(c1.equals(c2));
+
     }
 
     /**
