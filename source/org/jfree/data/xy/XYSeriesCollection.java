@@ -55,6 +55,7 @@
  * 27-Feb-2009 : Overridden getDomainOrder() to detect when all series are
  *               sorted in ascending order (DG);
  * 06-Mar-2009 : Implemented RangeInfo (DG);
+ * 06-Mar-2009 : Fixed equals() implementation (DG);
  *
  */
 
@@ -65,6 +66,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.Range;
@@ -389,15 +391,6 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @return A boolean.
      */
     public boolean equals(Object obj) {
-        /*
-         * XXX
-         *
-         * what about  the interval delegate...?
-         * The interval width etc wasn't considered
-         * before, hence i did not add it here (AS)
-         *
-         */
-
         if (obj == this) {
             return true;
         }
@@ -405,6 +398,9 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
             return false;
         }
         XYSeriesCollection that = (XYSeriesCollection) obj;
+        if (!this.intervalDelegate.equals(that.intervalDelegate)) {
+            return false;
+        }
         return ObjectUtilities.equal(this.data, that.data);
     }
 
@@ -429,8 +425,10 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @return A hash code.
      */
     public int hashCode() {
-        // Same question as for equals (AS)
-        return (this.data != null ? this.data.hashCode() : 0);
+        int hash = 5;
+        hash = HashUtilities.hashCode(hash, this.intervalDelegate);
+        hash = HashUtilities.hashCode(hash, this.data);
+        return hash;
     }
 
     /**
