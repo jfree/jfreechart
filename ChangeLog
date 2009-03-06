@@ -1,3 +1,36 @@
+2009-03-06  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/xy/XYSeries.java
+    (minX): New field,
+    (maxX): Likewise,
+    (minY): Likewise,
+    (maxY): Likewise,
+    (XYSeries): Initialise new fields,
+    (getMinX): New method,
+    (getMaxX): Likewise,
+    (getMinY): Likewise,
+    (getMaxY): Likewise,
+    (updateBoundsForAddedItem): Likewise,
+    (updateBoundsForRemovedItem): Likewise,
+    (findBoundsByIteration): Likewise,
+    (setMaximumItemcount): Refresh mins and maxes,
+    (add): Likewise,
+    (delete): Likewise,
+    (remove): Likewise,
+    (clear): Reset mins and maxes,
+    (update): Update minY and maxY,
+    (minIgnoreNaN): New method,
+    (maxIgnoreNaN): Likewise,
+    (update): Delegate to updateByIndex();
+    (addOrUpdate): Update mins and maxes,
+    * source/org/jfree/data/xy/XYSeriesCollection.java: Implemented RangeInfo,
+    (getDomainLowerBound): Use cached value in underlying series,
+    (getDomainUpperBound): Likewise,
+    (getDomainBounds): Likewise,
+    (getRangeBounds): Implemented,
+    (getRangeLowerBound): Likewise,
+    (getRangeUpperBound): Likewise.
+
 2009-03-02  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/PeriodAxis.java

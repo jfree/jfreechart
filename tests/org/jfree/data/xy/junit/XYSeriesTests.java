@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYSeriesTests.java
  * ------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  * 31-Oct-2007 : New hashCode() test (DG);
  * 01-May-2008 : Added testAddOrUpdate3() (DG);
  * 24-Nov-2008 : Added testBug1955483() (DG);
+ * 06-Mar-2009 : Added tests for cached bounds values (DG);
  *
  */
 
@@ -88,7 +89,6 @@ public class XYSeriesTests extends TestCase {
      * Confirm that the equals method can distinguish all the required fields.
      */
     public void testEquals() {
-
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
         XYSeries s2 = new XYSeries("Series");
@@ -98,10 +98,13 @@ public class XYSeriesTests extends TestCase {
 
         s1.setKey("Series X");
         assertFalse(s1.equals(s2));
-
         s2.setKey("Series X");
         assertTrue(s1.equals(s2));
 
+        s1.add(2.0, 2.2);
+        assertFalse(s1.equals(s2));
+        s2.add(2.0, 2.2);
+        assertTrue(s1.equals(s2));
     }
 
     /**
@@ -201,11 +204,9 @@ public class XYSeriesTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
         XYSeries s2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -221,7 +222,6 @@ public class XYSeriesTests extends TestCase {
             e.printStackTrace();
         }
         assertEquals(s1, s2);
-
     }
 
     /**
@@ -233,6 +233,9 @@ public class XYSeriesTests extends TestCase {
         s1.add(2.0, 2.0);
         s1.add(3.0, 3.0);
         assertEquals(0, s1.indexOf(new Double(1.0)));
+        assertEquals(1, s1.indexOf(new Double(2.0)));
+        assertEquals(2, s1.indexOf(new Double(3.0)));
+        assertEquals(-4, s1.indexOf(new Double(99.9)));
     }
 
     /**
@@ -249,22 +252,58 @@ public class XYSeriesTests extends TestCase {
     }
 
     /**
+     * A check for the indexOf(Number) method when the series has duplicate
+     * x-values.
+     */
+    public void testIndexOf3() {
+        XYSeries s1 = new XYSeries("Series 1");
+        s1.add(1.0, 1.0);
+        s1.add(2.0, 2.0);
+        s1.add(2.0, 3.0);
+        assertEquals(0, s1.indexOf(new Double(1.0)));
+        assertEquals(1, s1.indexOf(new Double(2.0)));
+    }
+
+    /**
      * Simple test for the remove() method.
      */
     public void testRemove() {
-
         XYSeries s1 = new XYSeries("Series 1");
         s1.add(1.0, 1.0);
         s1.add(2.0, 2.0);
         s1.add(3.0, 3.0);
-
         assertEquals(3, s1.getItemCount());
+
         s1.remove(new Double(2.0));
         assertEquals(new Double(3.0), s1.getX(1));
 
         s1.remove(0);
         assertEquals(new Double(3.0), s1.getX(0));
+    }
 
+    /**
+     * Some checks for the remove(int) method.
+     */
+    public void testRemove2() {
+        XYSeries s1 = new XYSeries("S1");
+        s1.add(1.0, 1.1);
+        s1.add(2.0, 2.2);
+        s1.add(3.0, 3.3);
+        s1.add(4.0, 4.4);
+        s1.add(5.0, 5.5);
+        s1.add(6.0, 6.6);
+        assertEquals(6, s1.getItemCount());
+        assertEquals(1.0, s1.getMinX(), EPSILON);
+        assertEquals(6.0, s1.getMaxX(), EPSILON);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+        assertEquals(6.6, s1.getMaxY(), EPSILON);
+
+        s1.remove(5);
+        assertEquals(5, s1.getItemCount());
+        assertEquals(1.0, s1.getMinX(), EPSILON);
+        assertEquals(5.0, s1.getMaxX(), EPSILON);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+        assertEquals(5.5, s1.getMaxY(), EPSILON);
     }
 
     private static final double EPSILON = 0.0000000001;
@@ -420,6 +459,45 @@ public class XYSeriesTests extends TestCase {
     }
 
     /**
+     * Check that the item bounds are determined correctly when there is a
+     * maximum item count.
+     */
+    public void testSetMaximumItemCount3() {
+        XYSeries s1 = new XYSeries("S1");
+        s1.add(1.0, 1.1);
+        s1.add(2.0, 2.2);
+        s1.add(3.0, 3.3);
+        s1.add(4.0, 4.4);
+        s1.add(5.0, 5.5);
+        s1.add(6.0, 6.6);
+        s1.setMaximumItemCount(2);
+        assertEquals(5.0, s1.getX(0).doubleValue(), EPSILON);
+        assertEquals(6.0, s1.getX(1).doubleValue(), EPSILON);
+        assertEquals(5.0, s1.getMinX(), EPSILON);
+        assertEquals(6.0, s1.getMaxX(), EPSILON);
+        assertEquals(5.5, s1.getMinY(), EPSILON);
+        assertEquals(6.6, s1.getMaxY(), EPSILON);
+    }
+
+    /**
+     * Check that the item bounds are determined correctly when there is a
+     * maximum item count.
+     */
+    public void testSetMaximumItemCount4() {
+        XYSeries s1 = new XYSeries("S1");
+        s1.setMaximumItemCount(2);
+        s1.add(1.0, 1.1);
+        s1.add(2.0, 2.2);
+        s1.add(3.0, 3.3);
+        assertEquals(2.0, s1.getX(0).doubleValue(), EPSILON);
+        assertEquals(3.0, s1.getX(1).doubleValue(), EPSILON);
+        assertEquals(2.0, s1.getMinX(), EPSILON);
+        assertEquals(3.0, s1.getMaxX(), EPSILON);
+        assertEquals(2.2, s1.getMinY(), EPSILON);
+        assertEquals(3.3, s1.getMaxY(), EPSILON);
+    }
+
+    /**
      * Some checks for the toArray() method.
      */
     public void testToArray() {
@@ -480,6 +558,224 @@ public class XYSeriesTests extends TestCase {
         assertEquals(new Double(1.0), series.getY(0));
         assertEquals(new Double(2.0), series.getY(1));
         assertEquals(2, series.getItemCount());
+    }
+
+    /**
+     * Some checks for the delete(int, int) method.
+     */
+    public void testDelete() {
+        XYSeries s1 = new XYSeries("S1");
+        s1.add(1.0, 1.1);
+        s1.add(2.0, 2.2);
+        s1.add(3.0, 3.3);
+        s1.add(4.0, 4.4);
+        s1.add(5.0, 5.5);
+        s1.add(6.0, 6.6);
+        s1.delete(2, 5);
+        assertEquals(2, s1.getItemCount());
+        assertEquals(1.0, s1.getX(0).doubleValue(), EPSILON);
+        assertEquals(2.0, s1.getX(1).doubleValue(), EPSILON);
+        assertEquals(1.0, s1.getMinX(), EPSILON);
+        assertEquals(2.0, s1.getMaxX(), EPSILON);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+        assertEquals(2.2, s1.getMaxY(), EPSILON);
+    }
+
+    /**
+     * Some checks for the getMinX() method.
+     */
+    public void testGetMinX() {
+        XYSeries s1 = new XYSeries("S1");
+        assertTrue(Double.isNaN(s1.getMinX()));
+
+        s1.add(1.0, 1.1);
+        assertEquals(1.0, s1.getMinX(), EPSILON);
+
+        s1.add(2.0, 2.2);
+        assertEquals(1.0, s1.getMinX(), EPSILON);
+
+        s1.add(Double.NaN, 99.9);
+        assertEquals(1.0, s1.getMinX(), EPSILON);
+
+        s1.add(-1.0, -1.1);
+        assertEquals(-1.0, s1.getMinX(), EPSILON);
+
+        s1.add(0.0, null);
+        assertEquals(-1.0, s1.getMinX(), EPSILON);
+    }
+
+    /**
+     * Some checks for the getMaxX() method.
+     */
+    public void testGetMaxX() {
+        XYSeries s1 = new XYSeries("S1");
+        assertTrue(Double.isNaN(s1.getMaxX()));
+
+        s1.add(1.0, 1.1);
+        assertEquals(1.0, s1.getMaxX(), EPSILON);
+
+        s1.add(2.0, 2.2);
+        assertEquals(2.0, s1.getMaxX(), EPSILON);
+
+        s1.add(Double.NaN, 99.9);
+        assertEquals(2.0, s1.getMaxX(), EPSILON);
+
+        s1.add(-1.0, -1.1);
+        assertEquals(2.0, s1.getMaxX(), EPSILON);
+
+        s1.add(0.0, null);
+        assertEquals(2.0, s1.getMaxX(), EPSILON);
+    }
+
+    /**
+     * Some checks for the getMinY() method.
+     */
+    public void testGetMinY() {
+        XYSeries s1 = new XYSeries("S1");
+        assertTrue(Double.isNaN(s1.getMinY()));
+
+        s1.add(1.0, 1.1);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+
+        s1.add(2.0, 2.2);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+
+        s1.add(Double.NaN, 99.9);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+
+        s1.add(-1.0, -1.1);
+        assertEquals(-1.1, s1.getMinY(), EPSILON);
+
+        s1.add(0.0, null);
+        assertEquals(-1.1, s1.getMinY(), EPSILON);
+   }
+
+    /**
+     * Some checks for the getMaxY() method.
+     */
+    public void testGetMaxY() {
+        XYSeries s1 = new XYSeries("S1");
+        assertTrue(Double.isNaN(s1.getMaxY()));
+
+        s1.add(1.0, 1.1);
+        assertEquals(1.1, s1.getMaxY(), EPSILON);
+
+        s1.add(2.0, 2.2);
+        assertEquals(2.2, s1.getMaxY(), EPSILON);
+
+        s1.add(Double.NaN, 99.9);
+        assertEquals(99.9, s1.getMaxY(), EPSILON);
+
+        s1.add(-1.0, -1.1);
+        assertEquals(99.9, s1.getMaxY(), EPSILON);
+        
+        s1.add(0.0, null);
+        assertEquals(99.9, s1.getMaxY(), EPSILON);
+    }
+
+    /**
+     * A test for the clear method.
+     */
+    public void testClear() {
+        XYSeries s1 = new XYSeries("S1");
+        s1.add(1.0, 1.1);
+        s1.add(2.0, 2.2);
+        s1.add(3.0, 3.3);
+
+        assertEquals(3, s1.getItemCount());
+
+        s1.clear();
+        assertEquals(0, s1.getItemCount());
+        assertTrue(Double.isNaN(s1.getMinX()));
+        assertTrue(Double.isNaN(s1.getMaxX()));
+        assertTrue(Double.isNaN(s1.getMinY()));
+        assertTrue(Double.isNaN(s1.getMaxY()));
+    }
+
+    /**
+     * Some checks for the updateByIndex() method.
+     */
+    public void testUpdateByIndex() {
+        XYSeries s1 = new XYSeries("S1");
+        s1.add(1.0, 1.1);
+        s1.add(2.0, 2.2);
+        s1.add(3.0, 3.3);
+
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+        assertEquals(3.3, s1.getMaxY(), EPSILON);
+
+        s1.updateByIndex(0, -5.0);
+        assertEquals(-5.0, s1.getMinY(), EPSILON);
+        assertEquals(3.3, s1.getMaxY(), EPSILON);
+
+        s1.updateByIndex(0, null);
+        assertEquals(2.2, s1.getMinY(), EPSILON);
+        assertEquals(3.3, s1.getMaxY(), EPSILON);
+
+        s1.updateByIndex(2, null);
+        assertEquals(2.2, s1.getMinY(), EPSILON);
+        assertEquals(2.2, s1.getMaxY(), EPSILON);
+
+        s1.updateByIndex(1, null);
+        assertTrue(Double.isNaN(s1.getMinY()));
+        assertTrue(Double.isNaN(s1.getMaxY()));
+    }
+
+    /**
+     * Some checks for the updateByIndex() method.
+     */
+    public void testUpdateByIndex2() {
+        XYSeries s1 = new XYSeries("S1");
+        s1.add(1.0, Double.NaN);
+
+        assertTrue(Double.isNaN(s1.getMinY()));
+        assertTrue(Double.isNaN(s1.getMaxY()));
+
+        s1.updateByIndex(0, 1.0);
+        assertEquals(1.0, s1.getMinY(), EPSILON);
+        assertEquals(1.0, s1.getMaxY(), EPSILON);
+
+        s1.updateByIndex(0, 2.0);
+        assertEquals(2.0, s1.getMinY(), EPSILON);
+        assertEquals(2.0, s1.getMaxY(), EPSILON);
+
+        s1.add(-1.0, -1.0);
+        s1.updateByIndex(0, 0.0);
+        assertEquals(0.0, s1.getMinY(), EPSILON);
+        assertEquals(2.0, s1.getMaxY(), EPSILON);
+    }
+
+    /**
+     * Some checks for the updateByIndex() method.
+     */
+    public void testUpdateByIndex3() {
+        XYSeries s1 = new XYSeries("S1");
+        s1.add(1.0, 1.1);
+        s1.add(2.0, 2.2);
+        s1.add(3.0, 3.3);
+
+        s1.updateByIndex(1, 2.05);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+        assertEquals(3.3, s1.getMaxY(), EPSILON);
+    }
+
+    /**
+     * Some checks for the update(Number, Number) method.
+     */
+    public void testUpdateXY() {
+        XYSeries s1 = new XYSeries("S1");
+        s1.add(1.0, Double.NaN);
+
+        assertTrue(Double.isNaN(s1.getMinY()));
+        assertTrue(Double.isNaN(s1.getMaxY()));
+
+        s1.update(new Double(1.0), 1.0);
+        assertEquals(1.0, s1.getMinY(), EPSILON);
+        assertEquals(1.0, s1.getMaxY(), EPSILON);
+
+        s1.update(new Double(1.0), 2.0);
+        assertEquals(2.0, s1.getMinY(), EPSILON);
+        assertEquals(2.0, s1.getMaxY(), EPSILON);
     }
 
 }

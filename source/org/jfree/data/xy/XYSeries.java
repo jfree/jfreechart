@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * XYSeries.java
  * -------------
- * (C) Copyright 2001-2008, Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2009, Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
@@ -71,6 +71,7 @@
  * 01-May-2008 : Fixed bug 1955483 in addOrUpdate() method, thanks to
  *               Ted Schwartz (DG);
  * 24-Nov-2008 : Further fix for 1955483 (DG);
+ * 06-Mar-2009 : Added minX, maxX, minY and maxY fields (DG);
  *
  */
 
@@ -78,6 +79,7 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.jfree.data.general.Series;
@@ -107,11 +109,26 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     /** The maximum number of items for the series. */
     private int maximumItemCount = Integer.MAX_VALUE;
 
-    /** A flag that controls whether the items are automatically sorted. */
+    /**
+     * A flag that controls whether the items are automatically sorted
+     * (by x-value ascending).
+     */
     private boolean autoSort;
 
     /** A flag that controls whether or not duplicate x-values are allowed. */
     private boolean allowDuplicateXValues;
+
+    /** The lowest x-value in the series, excluding Double.NaN values. */
+    private double minX;
+
+    /** The highest x-value in the series, excluding Double.NaN values. */
+    private double maxX;
+
+    /** The lowest y-value in the series, excluding Double.NaN values. */
+    private double minY;
+
+    /** The highest y-value in the series, excluding Double.NaN values. */
+    private double maxY;
 
     /**
      * Creates a new empty series.  By default, items added to the series will
@@ -146,13 +163,151 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
      */
-    public XYSeries(Comparable key,
-                    boolean autoSort,
-                    boolean allowDuplicateXValues) {
+    public XYSeries(Comparable key, boolean autoSort,
+            boolean allowDuplicateXValues) {
         super(key);
         this.data = new java.util.ArrayList();
         this.autoSort = autoSort;
         this.allowDuplicateXValues = allowDuplicateXValues;
+        this.minX = Double.NaN;
+        this.maxX = Double.NaN;
+        this.minY = Double.NaN;
+        this.maxY = Double.NaN;
+    }
+
+    /**
+     * Returns the smallest x-value in the series, ignoring any Double.NaN
+     * values.  This method returns Double.NaN if there is no smallest x-value
+     * (for example, when the series is empty).
+     *
+     * @return The smallest x-value.
+     *
+     * @see #getMaxX()
+     *
+     * @since 1.0.13
+     */
+    public double getMinX() {
+        return minX;
+    }
+
+    /**
+     * Returns the largest x-value in the series, ignoring any Double.NaN
+     * values.  This method returns Double.NaN if there is no largest x-value
+     * (for example, when the series is empty).
+     *
+     * @return The largest x-value.
+     *
+     * @see #getMinX()
+     *
+     * @since 1.0.13
+     */
+    public double getMaxX() {
+        return maxX;
+    }
+
+    /**
+     * Returns the smallest y-value in the series, ignoring any null and
+     * Double.NaN values.  This method returns Double.NaN if there is no
+     * smallest y-value (for example, when the series is empty).
+     *
+     * @return The smallest y-value.
+     *
+     * @see #getMaxY()
+     *
+     * @since 1.0.13
+     */
+    public double getMinY() {
+        return minY;
+    }
+
+    /**
+     * Returns the largest y-value in the series, ignoring any Double.NaN
+     * values.  This method returns Double.NaN if there is no largest y-value
+     * (for example, when the series is empty).
+     *
+     * @return The largest y-value.
+     *
+     * @see #getMinY()
+     *
+     * @since 1.0.13
+     */
+    public double getMaxY() {
+        return maxY;
+    }
+
+    /**
+     * Updates the cached values for the minimum and maximum data values.
+     *
+     * @param item  the item added (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    private void updateBoundsForAddedItem(XYDataItem item) {
+        double x = item.getXValue();
+        this.minX = minIgnoreNaN(this.minX, x);
+        this.maxX = maxIgnoreNaN(this.maxX, x);
+        if (item.getY() != null) {
+            double y = item.getYValue();
+            this.minY = minIgnoreNaN(this.minY, y);
+            this.maxY = maxIgnoreNaN(this.maxY, y);
+        }
+    }
+
+    /**
+     * Updates the cached values for the minimum and maximum data values on
+     * the basis that the specified item has just been removed.
+     *
+     * @param item  the item added (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    private void updateBoundsForRemovedItem(XYDataItem item) {
+        boolean itemContributesToXBounds = false;
+        boolean itemContributesToYBounds = false;
+        double x = item.getXValue();
+        if (!Double.isNaN(x)) {
+            if (x <= this.minX || x >= this.maxX) {
+                itemContributesToXBounds = true;
+            }
+        }
+        if (item.getY() != null) {
+            double y = item.getYValue();
+            if (!Double.isNaN(y)) {
+                if (y <= this.minY || y >= this.maxY) {
+                    itemContributesToYBounds = true;
+                }
+            }
+        }
+        if (itemContributesToYBounds) {
+            findBoundsByIteration();
+        }
+        else if (itemContributesToXBounds) {
+            if (getAutoSort()) {
+                this.minX = getX(0).doubleValue();
+                this.maxX = getX(getItemCount() - 1).doubleValue();
+            }
+            else {
+                findBoundsByIteration();
+            }
+        }
+    }
+
+    /**
+     * Finds the bounds of the x and y values for the series, by iterating
+     * through all the data items.
+     *
+     * @since 1.0.13
+     */
+    private void findBoundsByIteration() {
+        this.minX = Double.NaN;
+        this.maxX = Double.NaN;
+        this.minY = Double.NaN;
+        this.maxY = Double.NaN;
+        Iterator iterator = this.data.iterator();
+        while (iterator.hasNext()) {
+            XYDataItem item = (XYDataItem) iterator.next();
+            updateBoundsForAddedItem(item);
+        }
     }
 
     /**
@@ -180,6 +335,8 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Returns the number of items in the series.
      *
      * @return The item count.
+     *
+     * @see #getItems()
      */
     public int getItemCount() {
         return this.data.size();
@@ -200,6 +357,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * The default value is <code>Integer.MAX_VALUE</code>.
      *
      * @return The maximum item count.
+     *
      * @see #setMaximumItemCount(int)
      */
     public int getMaximumItemCount() {
@@ -216,18 +374,16 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Typically this value is set before the series is populated with data,
      * but if it is applied later, it may cause some items to be removed from
      * the series (in which case a {@link SeriesChangeEvent} will be sent to
-     * all registered listeners.
+     * all registered listeners).
      *
      * @param maximum  the maximum number of items for the series.
      */
     public void setMaximumItemCount(int maximum) {
         this.maximumItemCount = maximum;
-        boolean dataRemoved = false;
-        while (this.data.size() > maximum) {
-            this.data.remove(0);
-            dataRemoved = true;
-        }
-        if (dataRemoved) {
+        int remove = this.data.size() - maximum;
+        if (remove > 0) {
+            this.data.subList(0, remove).clear();
+            findBoundsByIteration();
             fireSeriesChanged();
         }
     }
@@ -343,11 +499,9 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *                listeners.
      */
     public void add(XYDataItem item, boolean notify) {
-
         if (item == null) {
             throw new IllegalArgumentException("Null 'item' argument.");
         }
-
         if (this.autoSort) {
             int index = Collections.binarySearch(this.data, item);
             if (index < 0) {
@@ -357,8 +511,8 @@ public class XYSeries extends Series implements Cloneable, Serializable {
                 if (this.allowDuplicateXValues) {
                     // need to make sure we are adding *after* any duplicates
                     int size = this.data.size();
-                    while (index < size
-                           && item.compareTo(this.data.get(index)) == 0) {
+                    while (index < size && item.compareTo(
+                            this.data.get(index)) == 0) {
                         index++;
                     }
                     if (index < this.data.size()) {
@@ -384,8 +538,10 @@ public class XYSeries extends Series implements Cloneable, Serializable {
             }
             this.data.add(item);
         }
+        updateBoundsForAddedItem(item);
         if (getItemCount() > this.maximumItemCount) {
-            this.data.remove(0);
+            XYDataItem removed = (XYDataItem) this.data.remove(0);
+            updateBoundsForRemovedItem(removed);
         }
         if (notify) {
             fireSeriesChanged();
@@ -400,9 +556,8 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param end  the end index (zero-based).
      */
     public void delete(int start, int end) {
-        for (int i = start; i <= end; i++) {
-            this.data.remove(start);
-        }
+        this.data.subList(start, end + 1).clear();
+        findBoundsByIteration();
         fireSeriesChanged();
     }
 
@@ -415,14 +570,17 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return The item removed.
      */
     public XYDataItem remove(int index) {
-        XYDataItem result = (XYDataItem) this.data.remove(index);
+        XYDataItem removed = (XYDataItem) this.data.remove(index);
+        updateBoundsForRemovedItem(removed);
         fireSeriesChanged();
-        return result;
+        return removed;
     }
 
     /**
-     * Removes the item with the specified x-value and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
+     * Removes an item with the specified x-value and sends a
+     * {@link SeriesChangeEvent} to all registered listeners.  Note that when
+     * a series permits multiple items with the same x-value, this method
+     * could remove any one of the items with that x-value.
      *
      * @param x  the x-value.
 
@@ -433,11 +591,16 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Removes all data items from the series.
+     * Removes all data items from the series and sends a
+     * {@link SeriesChangeEvent} to all registered listeners.
      */
     public void clear() {
         if (this.data.size() > 0) {
             this.data.clear();
+            this.minX = Double.NaN;
+            this.maxX = Double.NaN;
+            this.minY = Double.NaN;
+            this.maxY = Double.NaN;
             fireSeriesChanged();
         }
     }
@@ -487,8 +650,70 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      */
     public void update(int index, Number y) {
         XYDataItem item = getDataItem(index);
+
+        // figure out if we need to iterate through all the y-values
+        boolean iterate = false;
+        double oldY = item.getYValue();
+        if (!Double.isNaN(oldY)) {
+            iterate = oldY <= this.minY || oldY >= this.maxY;
+        }
         item.setY(y);
+
+        if (iterate) {
+            findBoundsByIteration();
+        }
+        else if (y != null) {
+            double yy = y.doubleValue();
+            this.minY = minIgnoreNaN(this.minY, yy);    
+            this.maxY = maxIgnoreNaN(this.maxY, yy);
+        }
         fireSeriesChanged();
+    }
+
+    /**
+     * A function to find the minimum of two values, but ignoring any
+     * Double.NaN values.
+     *
+     * @param a  the first value.
+     * @param b  the second value.
+     *
+     * @return The minimum of the two values.
+     */
+    private double minIgnoreNaN(double a, double b) {
+        if (Double.isNaN(a)) {
+            return b;
+        }
+        else {
+            if (Double.isNaN(b)) {
+                return a;
+            }
+            else {
+                return Math.min(a, b);
+            }
+        }
+    }
+
+    /**
+     * A function to find the maximum of two values, but ignoring any
+     * Double.NaN values.
+     *
+     * @param a  the first value.
+     * @param b  the second value.
+     *
+     * @return The maximum of the two values.
+     */
+    private double maxIgnoreNaN(double a, double b) {
+        if (Double.isNaN(a)) {
+            return b;
+        }
+        else {
+            if (Double.isNaN(b)) {
+                return a;
+            }
+            else {
+                return Math.max(a, b);
+            }
+        }
     }
 
     /**
@@ -519,9 +744,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
             throw new SeriesException("No observation for x = " + x);
         }
         else {
-            XYDataItem item = getDataItem(index);
-            item.setY(y);
-            fireSeriesChanged();
+            updateByIndex(index, y);
         }
     }
 
@@ -570,22 +793,41 @@ public class XYSeries extends Series implements Cloneable, Serializable {
             catch (CloneNotSupportedException e) {
                 throw new SeriesException("Couldn't clone XYDataItem!");
             }
+            // figure out if we need to iterate through all the y-values
+            boolean iterate = false;
+            double oldY = existing.getYValue();
+            if (!Double.isNaN(oldY)) {
+                iterate = oldY <= this.minY || oldY >= this.maxY;
+            }
             existing.setY(y);
+
+            if (iterate) {
+                findBoundsByIteration();
+            }
+            else if (y != null) {
+                double yy = y.doubleValue();
+                this.minY = minIgnoreNaN(this.minY, yy);
+                this.maxY = minIgnoreNaN(this.maxY, yy);
+            }
         }
         else {
             // if the series is sorted, the negative index is a result from
             // Collections.binarySearch() and tells us where to insert the
             // new item...otherwise it will be just -1 and we should just
             // append the value to the list...
+            XYDataItem item = new XYDataItem(x, y);
             if (this.autoSort) {
-                this.data.add(-index - 1, new XYDataItem(x, y));
+                this.data.add(-index - 1, item);
             }
             else {
-                this.data.add(new XYDataItem(x, y));
+                this.data.add(item);
             }
+            updateBoundsForAddedItem(item);
+
             // check if this addition will exceed the maximum item count...
             if (getItemCount() > this.maximumItemCount) {
-                this.data.remove(0);
+                XYDataItem removed = (XYDataItem) this.data.remove(0);
+                updateBoundsForRemovedItem(removed);
             }
         }
         fireSeriesChanged();
@@ -664,7 +906,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
     public XYSeries createCopy(int start, int end)
-        throws CloneNotSupportedException {
+            throws CloneNotSupportedException {
 
         XYSeries copy = (XYSeries) super.clone();
         copy.data = new java.util.ArrayList();
