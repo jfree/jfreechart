@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * XYSeriesCollectionTests.java
  * ----------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  * 08-May-2007 : Added testIndexOf() (DG);
  * 03-Dec-2007 : Added testGetSeriesByKey() (DG);
  * 22-Apr-2008 : Added testPublicCloneable (DG);
+ * 06-Mar-2009 : Added testGetDomainBounds (DG);
  *
  */
 
@@ -56,6 +57,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -293,6 +295,66 @@ public class XYSeriesCollectionTests extends TestCase {
 
         XYSeries s2b = new XYSeries("S2");
         assertEquals(0, dataset.indexOf(s2b));
+    }
+
+    /**
+     * Some checks for the getDomainBounds() method.
+     */
+    public void testGetDomainBounds() {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        Range r = dataset.getDomainBounds(false);
+        assertNull(r);
+        r = dataset.getDomainBounds(true);
+        assertNull(r);
+
+        XYSeries series = new XYSeries("S1");
+        dataset.addSeries(series);
+        r = dataset.getDomainBounds(false);
+        assertNull(r);
+        r = dataset.getDomainBounds(true);
+        assertNull(r);
+
+        series.add(1.0, 1.1);
+        r = dataset.getDomainBounds(false);
+        assertEquals(new Range(1.0, 1.0), r);
+        r = dataset.getDomainBounds(true);
+        assertEquals(new Range(0.5, 1.5), r);
+
+        series.add(-1.0, -1.1);
+        r = dataset.getDomainBounds(false);
+        assertEquals(new Range(-1.0, 1.0), r);
+        r = dataset.getDomainBounds(true);
+        assertEquals(new Range(-1.5, 1.5), r);
+    }
+
+    /**
+     * Some checks for the getRangeBounds() method.
+     */
+    public void testGetRangeBounds() {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        Range r = dataset.getRangeBounds(false);
+        assertNull(r);
+        r = dataset.getRangeBounds(true);
+        assertNull(r);
+
+        XYSeries series = new XYSeries("S1");
+        dataset.addSeries(series);
+        r = dataset.getRangeBounds(false);
+        assertNull(r);
+        r = dataset.getRangeBounds(true);
+        assertNull(r);
+
+        series.add(1.0, 1.1);
+        r = dataset.getRangeBounds(false);
+        assertEquals(new Range(1.1, 1.1), r);
+        r = dataset.getRangeBounds(true);
+        assertEquals(new Range(1.1, 1.1), r);
+
+        series.add(-1.0, -1.1);
+        r = dataset.getRangeBounds(false);
+        assertEquals(new Range(-1.1, 1.1), r);
+        r = dataset.getRangeBounds(true);
+        assertEquals(new Range(-1.1, 1.1), r);
     }
 
 }
