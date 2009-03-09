@@ -283,8 +283,8 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
                 if ((Math.abs(x - s.lastX) > s.dX)) {
                     s.seriesPath.lineTo(x, y);
                     if (s.lowY < s.highY) {
-                        s.intervalPath.moveTo(s.lastX, s.lowY);
-                        s.intervalPath.lineTo(s.lastX, s.highY);
+                        s.intervalPath.moveTo((float) s.lastX, (float) s.lowY);
+                        s.intervalPath.lineTo((float) s.lastX, (float) s.highY);
                     }
                     s.lastX = x;
                     s.openY = y;
