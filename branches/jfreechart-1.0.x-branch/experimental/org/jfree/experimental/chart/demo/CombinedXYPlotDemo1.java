@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * CombinedXYPlotDemo1.java
  * ------------------------
- * (C) Copyright 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008, 2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   ;
@@ -164,7 +164,7 @@ public class CombinedXYPlotDemo1 extends ApplicationFrame {
     private static IntervalXYDataset createDataset1() {
 
         // create dataset 1...
-        TimeSeries series1 = new TimeSeries("Series 1", Month.class);
+        TimeSeries series1 = new TimeSeries("Series 1");
         series1.add(new Month(1, 2005), 7627.743);
         series1.add(new Month(2, 2005), 7713.138);
         series1.add(new Month(3, 2005), 6776.939);
@@ -205,7 +205,7 @@ public class CombinedXYPlotDemo1 extends ApplicationFrame {
     private static IntervalXYDataset createDataset2() {
         TimeSeriesCollection dataset = new TimeSeriesCollection();
 
-        TimeSeries series1 = new TimeSeries("Series 2", Month.class);
+        TimeSeries series1 = new TimeSeries("Series 2");
         series1.add(new Month(1, 2005), 1200);
         series1.add(new Month(2, 2005), 1400);
         series1.add(new Month(3, 2005), 1500);
