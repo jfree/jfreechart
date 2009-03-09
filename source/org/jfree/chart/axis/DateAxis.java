@@ -1090,7 +1090,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         Date previous = previousStandardDate(date, unit);
         Calendar calendar = Calendar.getInstance(this.timeZone, this.locale);
         calendar.setTime(previous);
-        calendar.add(unit.getCalendarField(), unit.getCount());
+        calendar.add(unit.getCalendarField(), unit.getMultiple());
         return calendar.getTime();
     }
 
