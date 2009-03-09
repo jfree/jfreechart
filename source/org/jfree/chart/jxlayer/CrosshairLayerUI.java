@@ -82,6 +82,7 @@ public class CrosshairLayerUI extends AbstractLayerUI
         super();
         this.chartPanel = panel;
         this.xCrosshairs = new java.util.ArrayList();
+        this.yCrosshairs = new java.util.ArrayList();
     }
 
     /**
