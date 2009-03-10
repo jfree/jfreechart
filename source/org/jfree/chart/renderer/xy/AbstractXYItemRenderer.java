@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -105,6 +105,7 @@
  *               account when the incoming area is null (DG);
  * 02-Jun-2008 : Added isPointInRect() method (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
+ * 09-Mar-2009 : Added getAnnotations() method (DG);
  *
  */
 
@@ -123,6 +124,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -603,6 +605,21 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         this.foregroundAnnotations.clear();
         this.backgroundAnnotations.clear();
         fireChangeEvent();
+    }
+
+    /**
+     * Returns a collection of the annotations that are assigned to the
+     * renderer.
+     *
+     * @return A collection of annotations (possibly empty but never
+     *     <code>null</code>).
+     * 
+     * @since 1.0.13
+     */
+    public Collection getAnnotations() {
+        List result = new java.util.ArrayList(this.foregroundAnnotations);
+        result.addAll(this.backgroundAnnotations);
+        return result;
     }
 
     /**

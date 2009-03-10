@@ -213,6 +213,7 @@
  *               1868749 by Andrew Mickish (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 10-Mar-2009 : Allow some annotations to contribute to axis autoRange (DG);
  *
  */
 
@@ -248,6 +249,7 @@ import java.util.TreeMap;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.annotations.XYAnnotation;
+import org.jfree.chart.annotations.XYAnnotationBoundsInfo;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.AxisCollection;
 import org.jfree.chart.axis.AxisLocation;
@@ -604,6 +606,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         this.datasetToDomainAxesMap = new TreeMap();
         this.datasetToRangeAxesMap = new TreeMap();
 
+        this.annotations = new java.util.ArrayList();
+
         this.datasets.set(0, dataset);
         if (dataset != null) {
             dataset.addChangeListener(this);
@@ -667,8 +671,6 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
         this.rangeCrosshairValue = 0.0;
         this.rangeCrosshairStroke = DEFAULT_CROSSHAIR_STROKE;
         this.rangeCrosshairPaint = DEFAULT_CROSSHAIR_PAINT;
-
-        this.annotations = new java.util.ArrayList();
 
     }
 
@@ -4385,6 +4387,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
 
         Range result = null;
         List mappedDatasets = new ArrayList();
+        List includedAnnotations = new ArrayList();
         boolean isDomainAxis = true;
 
         // is it a domain axis?
@@ -4393,6 +4396,16 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             isDomainAxis = true;
             mappedDatasets.addAll(getDatasetsMappedToDomainAxis(
                     new Integer(domainIndex)));
+            if (domainIndex == 0) {
+                // grab the plot's annotations
+                Iterator iterator = this.annotations.iterator();
+                while (iterator.hasNext()) {
+                    XYAnnotation annotation = (XYAnnotation) iterator.next();
+                    if (annotation instanceof XYAnnotationBoundsInfo) {
+                        includedAnnotations.add(annotation);
+                    }
+                }
+            }
         }
 
         // or is it a range axis?
@@ -4401,6 +4414,15 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
             isDomainAxis = false;
             mappedDatasets.addAll(getDatasetsMappedToRangeAxis(
                     new Integer(rangeIndex)));
+            if (rangeIndex == 0) {
+                Iterator iterator = this.annotations.iterator();
+                while (iterator.hasNext()) {
+                    XYAnnotation annotation = (XYAnnotation) iterator.next();
+                    if (annotation instanceof XYAnnotationBoundsInfo) {
+                        includedAnnotations.add(annotation);
+                    }
+                }
+            }
         }
 
         // iterate through the datasets that map to the axis and get the union
@@ -4428,8 +4450,35 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                                 DatasetUtilities.findRangeBounds(d));
                     }
                 }
+                // FIXME: the XYItemRenderer interface doesn't specify the
+                // getAnnotations() method but it should
+                if (r instanceof AbstractXYItemRenderer) {
+                    AbstractXYItemRenderer rr = (AbstractXYItemRenderer) r;
+                    Collection c = rr.getAnnotations();
+                    Iterator i = c.iterator();
+                    while (i.hasNext()) {
+                        XYAnnotation a = (XYAnnotation) i.next();
+                        if (a instanceof XYAnnotationBoundsInfo) {
+                            includedAnnotations.add(a);
+                        }
+                    }
+                }
             }
         }
+
+        Iterator it = includedAnnotations.iterator();
+        while (it.hasNext()) {
+            XYAnnotationBoundsInfo xyabi = (XYAnnotationBoundsInfo) it.next();
+            if (xyabi.getIncludeInDataBounds()) {
+                if (isDomainAxis) {
+                    result = Range.combine(result, xyabi.getXRange());
+                }
+                else {
+                    result = Range.combine(result, xyabi.getYRange());
+                }
+            }
+        }
+
         return result;
 
     }
