@@ -308,6 +308,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
      *
      * @param dataset  the dataset (<code>null</code> not permitted).
      * @param category  the category key (<code>null</code> not permitted).
+     * @param includedRows  the included rows.
      * @param base  the base value.
      * @param asPercentages  a flag that controls whether the values in the
      *     list are converted to percentages of the total.
