@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * SlidingCategoryDataset.java
  * ---------------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008, 2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 08-May-2008 : Version 1 (DG);
+ * 15-Mar-2009 : Fixed bug in getColumnKeys() method (DG);
  *
  */
 
@@ -199,7 +200,7 @@ public class SlidingCategoryDataset extends AbstractDataset
     public List getColumnKeys() {
         List result = new java.util.ArrayList();
         int last = lastCategoryIndex();
-        for (int i = this.firstCategoryIndex; i < last; i++) {
+        for (int i = this.firstCategoryIndex; i <= last; i++) {
             result.add(this.underlying.getColumnKey(i));
         }
         return Collections.unmodifiableList(result);

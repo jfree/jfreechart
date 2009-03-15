@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * SlidingCategoryDatasetTests.java
  * --------------------------------
- * (C) Copyright 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008, 2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 08-May-2008 : Version 1 (DG);
+ * 15-Mar-2009 : Added testGetColumnKeys() (DG);
  *
  */
 
@@ -46,6 +47,7 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -271,6 +273,28 @@ public class SlidingCategoryDatasetTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
+    }
+
+    /**
+     * Some checks for the getColumnKeys() method.
+     */
+    public void testGetColumnKeys() {
+        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
+        underlying.addValue(1.0, "R1", "C1");
+        underlying.addValue(2.0, "R1", "C2");
+        underlying.addValue(3.0, "R1", "C3");
+        underlying.addValue(4.0, "R1", "C4");
+        SlidingCategoryDataset dataset = new SlidingCategoryDataset(underlying,
+                1, 2);
+        List keys = dataset.getColumnKeys();
+        assertTrue(keys.contains("C2"));
+        assertTrue(keys.contains("C3"));
+        assertEquals(2, keys.size());
+
+        dataset.setFirstCategoryIndex(3);
+        keys = dataset.getColumnKeys();
+        assertTrue(keys.contains("C4"));
+        assertEquals(1, keys.size());
     }
 
 }
