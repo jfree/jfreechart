@@ -187,7 +187,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.13
      */
     public double getMinX() {
-        return minX;
+        return this.minX;
     }
 
     /**
@@ -202,7 +202,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.13
      */
     public double getMaxX() {
-        return maxX;
+        return this.maxX;
     }
 
     /**
@@ -217,7 +217,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.13
      */
     public double getMinY() {
-        return minY;
+        return this.minY;
     }
 
     /**
@@ -232,7 +232,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.13
      */
     public double getMaxY() {
-        return maxY;
+        return this.maxY;
     }
 
     /**
@@ -664,7 +664,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         }
         else if (y != null) {
             double yy = y.doubleValue();
-            this.minY = minIgnoreNaN(this.minY, yy);    
+            this.minY = minIgnoreNaN(this.minY, yy);
             this.maxY = maxIgnoreNaN(this.maxY, yy);
         }
         fireSeriesChanged();
