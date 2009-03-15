@@ -1792,8 +1792,8 @@ public abstract class ChartFactory {
         if (urls) {
             urlGenerator = new StandardXYURLGenerator();
         }
-        XYItemRenderer renderer
-            = new XYStepRenderer(toolTipGenerator, urlGenerator);
+        XYItemRenderer renderer = new XYStepRenderer(toolTipGenerator,
+                urlGenerator);
 
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, null);
         plot.setRenderer(renderer);
