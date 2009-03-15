@@ -1,3 +1,8 @@
+2009-03-15  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/category/SlidingCategoryDataset.java
+    (getColumnKeys): Fixed loop index.
+
 2009-03-10  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/annotations/XYAnnotationBoundsInfo.java:
