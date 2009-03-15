@@ -49,7 +49,7 @@ import org.jfree.util.PublicCloneable;
  *
  * @since 1.0.13
  */
-public class DefaultHeatMapDataset extends AbstractDataset 
+public class DefaultHeatMapDataset extends AbstractDataset
         implements HeatMapDataset, Cloneable, PublicCloneable, Serializable {
 
     /** The number of samples in this dataset for the x-dimension. */
@@ -267,9 +267,9 @@ public class DefaultHeatMapDataset extends AbstractDataset
 
     /**
      * Tests this dataset for equality with an arbitrary object.
-     * 
+     *
      * @param obj  the object (<code>null</code> permitted).
-     * 
+     *
      * @return A boolean.
      */
     public boolean equals(Object obj) {
@@ -314,7 +314,7 @@ public class DefaultHeatMapDataset extends AbstractDataset
      */
     public Object clone() throws CloneNotSupportedException {
         DefaultHeatMapDataset clone = (DefaultHeatMapDataset) super.clone();
-        clone.zValues = DataUtilities.clone(zValues);
+        clone.zValues = DataUtilities.clone(this.zValues);
         return clone;
     }
 
