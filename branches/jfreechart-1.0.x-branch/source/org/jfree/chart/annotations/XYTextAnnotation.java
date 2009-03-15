@@ -474,7 +474,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @since 1.0.13
      */
     public boolean isOutlineVisible() {
-        return outlineVisible;
+        return this.outlineVisible;
     }
 
     /**
@@ -487,7 +487,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     public void setOutlineVisible(boolean visible) {
         this.outlineVisible = visible;
     }
-    
+
     /**
      * Draws the annotation.
      *
