@@ -178,9 +178,9 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the flag that indicates whether or not the crosshair is 
+     * Returns the flag that indicates whether or not the crosshair is
      * currently visible.
-     * 
+     *
      * @return A boolean.
      */
     public boolean isVisible() {
@@ -206,7 +206,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @return The crosshair value.
      */
     public double getValue() {
-        return value;
+        return this.value;
     }
 
     /**
@@ -494,7 +494,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @return The label outline stroke (never <code>null</code>).
      */
     public Stroke getLabelOutlineStroke() {
-        return labelOutlineStroke;
+        return this.labelOutlineStroke;
     }
 
     /**
