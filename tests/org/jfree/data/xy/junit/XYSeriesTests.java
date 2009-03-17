@@ -668,7 +668,7 @@ public class XYSeriesTests extends TestCase {
 
         s1.add(-1.0, -1.1);
         assertEquals(99.9, s1.getMaxY(), EPSILON);
-        
+
         s1.add(0.0, null);
         assertEquals(99.9, s1.getMaxY(), EPSILON);
     }
@@ -704,7 +704,7 @@ public class XYSeriesTests extends TestCase {
         assertEquals(1.1, s1.getMinY(), EPSILON);
         assertEquals(3.3, s1.getMaxY(), EPSILON);
 
-        s1.updateByIndex(0, -5.0);
+        s1.updateByIndex(0, new Double(-5.0));
         assertEquals(-5.0, s1.getMinY(), EPSILON);
         assertEquals(3.3, s1.getMaxY(), EPSILON);
 
@@ -731,16 +731,16 @@ public class XYSeriesTests extends TestCase {
         assertTrue(Double.isNaN(s1.getMinY()));
         assertTrue(Double.isNaN(s1.getMaxY()));
 
-        s1.updateByIndex(0, 1.0);
+        s1.updateByIndex(0, new Double(1.0));
         assertEquals(1.0, s1.getMinY(), EPSILON);
         assertEquals(1.0, s1.getMaxY(), EPSILON);
 
-        s1.updateByIndex(0, 2.0);
+        s1.updateByIndex(0, new Double(2.0));
         assertEquals(2.0, s1.getMinY(), EPSILON);
         assertEquals(2.0, s1.getMaxY(), EPSILON);
 
         s1.add(-1.0, -1.0);
-        s1.updateByIndex(0, 0.0);
+        s1.updateByIndex(0, new Double(0.0));
         assertEquals(0.0, s1.getMinY(), EPSILON);
         assertEquals(2.0, s1.getMaxY(), EPSILON);
     }
@@ -754,7 +754,7 @@ public class XYSeriesTests extends TestCase {
         s1.add(2.0, 2.2);
         s1.add(3.0, 3.3);
 
-        s1.updateByIndex(1, 2.05);
+        s1.updateByIndex(1, new Double(2.05));
         assertEquals(1.1, s1.getMinY(), EPSILON);
         assertEquals(3.3, s1.getMaxY(), EPSILON);
     }
@@ -769,11 +769,11 @@ public class XYSeriesTests extends TestCase {
         assertTrue(Double.isNaN(s1.getMinY()));
         assertTrue(Double.isNaN(s1.getMaxY()));
 
-        s1.update(new Double(1.0), 1.0);
+        s1.update(new Double(1.0), new Double(1.0));
         assertEquals(1.0, s1.getMinY(), EPSILON);
         assertEquals(1.0, s1.getMaxY(), EPSILON);
 
-        s1.update(new Double(1.0), 2.0);
+        s1.update(new Double(1.0), new Double(2.0));
         assertEquals(2.0, s1.getMinY(), EPSILON);
         assertEquals(2.0, s1.getMaxY(), EPSILON);
     }
