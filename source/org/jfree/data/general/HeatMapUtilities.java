@@ -50,7 +50,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  * A utility class for the {@link HeatMapDataset}.
- * 
+ *
  * @since 1.0.13
  */
 public abstract class HeatMapUtilities {
@@ -61,6 +61,7 @@ public abstract class HeatMapUtilities {
      *
      * @param dataset  the dataset (<code>null</code> not permitted).
      * @param row  the row (y) index.
+     * @param seriesName  the series name/key (<code>null</code> not permitted).
      *
      * @return The dataset.
      */
