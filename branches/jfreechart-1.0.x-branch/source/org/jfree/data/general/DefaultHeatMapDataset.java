@@ -257,6 +257,7 @@ public class DefaultHeatMapDataset extends AbstractDataset
      * @param xIndex  the x-index.
      * @param yIndex  the y-index.
      * @param z  the new z-value.
+     * @param notify  notify listeners?
      */
     public void setZValue(int xIndex, int yIndex, double z, boolean notify) {
         this.zValues[xIndex][yIndex] = z;
