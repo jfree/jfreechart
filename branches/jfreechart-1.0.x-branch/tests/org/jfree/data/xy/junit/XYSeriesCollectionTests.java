@@ -87,11 +87,14 @@ public class XYSeriesCollectionTests extends TestCase {
     }
 
     private static final double EPSILON = 0.0000000001;
-    
+
+    /**
+     * Some checks for the constructor.
+     */
     public void testConstructor() {
         XYSeriesCollection xysc = new XYSeriesCollection();
         assertEquals(0, xysc.getSeriesCount());
-        assertEquals(1.0, xysc.getIntervalWidth());
+        assertEquals(1.0, xysc.getIntervalWidth(), EPSILON);
         assertEquals(0.5, xysc.getIntervalPositionFactor(), EPSILON);
     }
 
