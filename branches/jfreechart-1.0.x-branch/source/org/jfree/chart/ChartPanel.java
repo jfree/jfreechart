@@ -146,7 +146,8 @@
  * 13-Jan-2009 : Fixed zooming methods to trigger only one plot
  *               change event (DG);
  * 16-Jan-2009 : Use XOR for zoom rectangle only if useBuffer is false (DG);
- * 
+ * 18-Mar-2009 : Added mouse wheel support (DG);
+ *
  */
 
 package org.jfree.chart;
@@ -180,6 +181,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.EventListener;
 import java.util.ResourceBundle;
 
@@ -1185,6 +1189,104 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     public void setZoomOutlinePaint(Paint paint) {
         this.zoomOutlinePaint = paint;
+    }
+
+    /**
+     * The mouse wheel handler.  This will be an instance of MouseWheelHandler
+     * but we can't reference that class directly because it depends on JRE 1.4
+     * and we still want to support JRE 1.3.1.
+     */
+    private Object mouseWheelHandler;
+
+    /**
+     * Returns <code>true</code> if the mouse wheel handler is enabled, and
+     * <code>false</code> otherwise.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.13
+     */
+    public boolean isMouseWheelEnabled() {
+        return this.mouseWheelHandler != null;
+    }
+
+    /**
+     * Enables or disables mouse wheel support for the panel.
+     * Note that this method does nothing when running JFreeChart on JRE 1.3.1,
+     * because that older version of the Java runtime does not support
+     * mouse wheel events.
+     *
+     * @param flag  a boolean.
+     *
+     * @since 1.0.13
+     */
+    public void setMouseWheelEnabled(boolean flag) {
+        if (flag && this.mouseWheelHandler == null) {
+            // use reflection to instantiate a mouseWheelHandler because to
+            // continue supporting JRE 1.3.1 we cannot depend on the
+            // MouseWheelListener interface directly
+            try {
+                Class c = Class.forName("org.jfree.chart.MouseWheelHandler");
+                Constructor cc = c.getConstructor(new Class[] {
+                        ChartPanel.class});
+                Object mwh = cc.newInstance(new Object[] {this});
+                this.mouseWheelHandler = mwh;
+            }
+            catch (ClassNotFoundException e) {
+                // the class isn't there, so we must have compiled JFreeChart
+                // with JDK 1.3.1 - thus, we can't have mouse wheel support
+            }
+            catch (SecurityException e) {
+                e.printStackTrace();
+            }
+            catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+            catch (InstantiationException e) {
+                e.printStackTrace();
+            }
+            catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+
+            if (this.mouseWheelHandler != null) {
+                // use reflection to deregister the mouseWheelHandler
+                try {
+                    Class mwl = Class.forName(
+                            "java.awt.event.MouseWheelListener");
+                    Class c2 = ChartPanel.class;
+                    Method m = c2.getMethod("removeMouseWheelListener",
+                            new Class[] {mwl});
+                    m.invoke(this, this.mouseWheelHandler);
+                }
+                catch (ClassNotFoundException e) {
+                    // must be running on JRE 1.3.1, so just ignore this
+                }
+                catch (SecurityException e) {
+                    e.printStackTrace();
+                }
+                catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+                catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                }
+                catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**

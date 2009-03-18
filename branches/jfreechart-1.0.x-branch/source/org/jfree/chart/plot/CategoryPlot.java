@@ -166,6 +166,7 @@
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
  * 21-Jan-2009 : Added rangeMinorGridlinesVisible flag (DG);
+ * 18-Mar-2009 : Modified anchored zoom behaviour (DG);
  *
  */
 
@@ -402,7 +403,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     /**
      * A flag that controls whether or not gridlines are shown for the minor
      * tick values on the primary range axis.
-     * 
+     *
      * @since 1.0.13
      */
     private boolean rangeMinorGridlinesVisible;
@@ -609,7 +610,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         this.rangeMinorGridlinesVisible = false;
         this.rangeMinorGridlineStroke = DEFAULT_GRIDLINE_STROKE;
         this.rangeMinorGridlinePaint = Color.white;
-        
+
         this.foregroundDomainMarkers = new HashMap();
         this.backgroundDomainMarkers = new HashMap();
         this.foregroundRangeMarkers = new HashMap();
@@ -2123,7 +2124,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns the paint for the minor grid lines (if any) plotted against the 
+     * Returns the paint for the minor grid lines (if any) plotted against the
      * range axis.
      *
      * @return The paint (never <code>null</code>).
@@ -3939,7 +3940,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
                 else {
                     // we'll have to use the method in the interface, but
                     // this doesn't have the paint and stroke settings...
-                    r.drawRangeGridline(g2, this, axis, dataArea, 
+                    r.drawRangeGridline(g2, this, axis, dataArea,
                             tick.getValue());
                 }
             }
@@ -4553,7 +4554,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
                     }
                     double anchorY = rangeAxis.java2DToValue(sourceY,
                             info.getDataArea(), getRangeAxisEdge());
-                    rangeAxis.resizeRange(factor, anchorY);
+                    rangeAxis.resizeRange2(factor, anchorY);
                 }
                 else {
                     rangeAxis.resizeRange(factor);
@@ -4946,7 +4947,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
         this.rangeMinorGridlinePaint = SerialUtilities.readPaint(stream);
         this.rangeZeroBaselineStroke = SerialUtilities.readStroke(stream);
         this.rangeZeroBaselinePaint = SerialUtilities.readPaint(stream);
-        
+
         for (int i = 0; i < this.domainAxes.size(); i++) {
             CategoryAxis xAxis = (CategoryAxis) this.domainAxes.get(i);
             if (xAxis != null) {

@@ -214,6 +214,8 @@
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
  * 10-Mar-2009 : Allow some annotations to contribute to axis autoRange (DG);
+ * 18-Mar-2009 : Modified anchored zoom behaviour and fixed bug in 
+ *               "process visible range" rendering (DG);
  *
  */
 
@@ -3710,8 +3712,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                             int[] itemBounds = RendererUtilities.findLiveItems(
                                     dataset, series, xAxis.getLowerBound(),
                                     xAxis.getUpperBound());
-                            firstItem = itemBounds[0];
-                            lastItem = itemBounds[1];
+                            firstItem = Math.max(itemBounds[0] - 1, 0);
+                            lastItem = Math.min(itemBounds[1] + 1, lastItem);
                         }
                         state.startSeriesPass(dataset, series, firstItem,
                                 lastItem, pass, passCount);
@@ -3736,8 +3738,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                             int[] itemBounds = RendererUtilities.findLiveItems(
                                     dataset, series, xAxis.getLowerBound(),
                                     xAxis.getUpperBound());
-                            firstItem = itemBounds[0];
-                            lastItem = itemBounds[1];
+                            firstItem = Math.max(itemBounds[0] - 1, 0);
+                            lastItem = Math.min(itemBounds[1] + 1, lastItem);
                         }
                         state.startSeriesPass(dataset, series, firstItem,
                                 lastItem, pass, passCount);
@@ -3884,13 +3886,13 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                 while (iterator.hasNext()) {
                     paintLine = false;
                     ValueTick tick = (ValueTick) iterator.next();
-                    if ((tick.getTickType() == TickType.MINOR) 
+                    if ((tick.getTickType() == TickType.MINOR)
                             && isRangeMinorGridlinesVisible()) {
                         gridStroke = getRangeMinorGridlineStroke();
                         gridPaint = getRangeMinorGridlinePaint();
                         paintLine = true;
                     }
-                    else if ((tick.getTickType() == TickType.MAJOR) 
+                    else if ((tick.getTickType() == TickType.MAJOR)
                             && isRangeGridlinesVisible()) {
                         gridStroke = getRangeGridlineStroke();
                         gridPaint = getRangeGridlinePaint();
@@ -4948,7 +4950,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                     }
                     double anchorX = domainAxis.java2DToValue(sourceX,
                             info.getDataArea(), getDomainAxisEdge());
-                    domainAxis.resizeRange(factor, anchorX);
+                    domainAxis.resizeRange2(factor, anchorX);
                 }
                 else {
                     domainAxis.resizeRange(factor);
@@ -5025,7 +5027,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
                     }
                     double anchorY = rangeAxis.java2DToValue(sourceY,
                             info.getDataArea(), getRangeAxisEdge());
-                    rangeAxis.resizeRange(factor, anchorY);
+                    rangeAxis.resizeRange2(factor, anchorY);
                 }
                 else {
                     rangeAxis.resizeRange(factor);

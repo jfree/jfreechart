@@ -74,6 +74,7 @@ public class BarChartDemo1 extends ApplicationFrame {
         JFreeChart chart = createChart(dataset);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setFillZoomRectangle(true);
+        chartPanel.setMouseWheelEnabled(true);
         chartPanel.setPreferredSize(new Dimension(500, 270));
         setContentPane(chartPanel);
     }
