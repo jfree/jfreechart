@@ -1,3 +1,22 @@
+2009-03-18  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/ChartPanel.java
+    (mouseWheelHandler): New field,
+    (isMouseWheelEnabled): New method,
+    (setMouseWheelEnabled): Likewise,
+    * source/org/jfree/chart/MouseWheelHandler.java: New class,
+    * source/org/jfree/chart/axis/ValueAxis.java
+    (resizeRange2): New method,
+    * source/org/jfree/chart/demo/BarChartDemo1.java
+    (BarChartDemo1): Enable mouse wheel,
+    * source/org/jfree/chart/demo/TimeSeriesChartDemo1.java
+    (createDemoPanel): Enable mouse wheel,
+    * source/org/jfree/chart/plot/CategoryPlot.java
+    (zoomRangeAxes): Modify anchored zoom behaviour,
+    * source/org/jfree/chart/plot/XYPlot.java
+    (zoomDomainAxes): Likewise,
+    (zoomRangeAxes): Likewise.
+
 2009-03-15  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/category/SlidingCategoryDataset.java

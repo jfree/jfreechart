@@ -100,7 +100,8 @@
  * 02-Aug-2007 : Check for major tick when drawing label (DG);
  * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  * 21-Jan-2009 : Updated default behaviour of minor ticks (DG);
- * 
+ * 18-Mar-2008 : Added resizeRange2() method which provides more natural 
+ *               anchored zooming for mouse wheel support (DG);
  */
 
 package org.jfree.chart.axis;
@@ -262,7 +263,7 @@ public abstract class ValueAxis extends Axis
     /** An index into an array of standard tick values. */
     private int autoTickIndex;
 
-    /** 
+    /**
      * The number of minor ticks per major tick unit.  This is an override
      * field, if the value is > 0 it is used, otherwise the axis refers to the
      * minorTickCount in the current tickUnit.
@@ -703,7 +704,7 @@ public abstract class ValueAxis extends Axis
             }
 
             if ((isTickMarksVisible() && tick.getTickType().equals(
-                    TickType.MAJOR)) || (isMinorTickMarksVisible() 
+                    TickType.MAJOR)) || (isMinorTickMarksVisible()
                     && tick.getTickType().equals(TickType.MINOR))) {
 
                 double ol = (tick.getTickType().equals(TickType.MINOR)) ?
@@ -1419,9 +1420,9 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Returns the number of minor tick marks to display.
-     * 
+     *
      * @return The number of minor tick marks to display.
-     * 
+     *
      * @see #setMinorTickCount(int)
      *
      * @since 1.0.12
@@ -1429,13 +1430,13 @@ public abstract class ValueAxis extends Axis
     public int getMinorTickCount() {
         return this.minorTickCount;
     }
-    
+
     /**
      * Sets the number of minor tick marks to display, and sends an
      * {@link AxisChangeEvent} to all registered listeners.
-     * 
+     *
      * @param count  the count.
-     * 
+     *
      * @see #getMinorTickCount()
      *
      * @since 1.0.12
@@ -1552,6 +1553,34 @@ public abstract class ValueAxis extends Axis
             double halfLength = this.range.getLength() * percent / 2;
             Range adjusted = new Range(anchorValue - halfLength,
                     anchorValue + halfLength);
+            setRange(adjusted);
+        }
+        else {
+            setAutoRange(true);
+        }
+    }
+
+    /**
+     * Increases or decreases the axis range by the specified percentage about
+     * the specified anchor value and sends an {@link AxisChangeEvent} to all
+     * registered listeners.
+     * <P>
+     * To double the length of the axis range, use 200% (2.0).
+     * To halve the length of the axis range, use 50% (0.5).
+     *
+     * @param percent  the resize factor.
+     * @param anchorValue  the new central value after the resize.
+     *
+     * @see #resizeRange(double)
+     *
+     * @since 1.0.13
+     */
+    public void resizeRange2(double percent, double anchorValue) {
+        if (percent > 0.0) {
+            double left = anchorValue - getLowerBound();
+            double right = getUpperBound() - anchorValue;
+            Range adjusted = new Range(anchorValue - left * percent,
+                    anchorValue + right * percent);
             setRange(adjusted);
         }
         else {
