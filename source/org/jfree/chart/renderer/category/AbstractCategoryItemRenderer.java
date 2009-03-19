@@ -858,8 +858,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param dataArea  the area for plotting data (not yet adjusted for any 3D
      *                  effect).
      * @param value  the value at which the grid line should be drawn.
-     * @param paint  the paint.
-     * @param stroke  the stroke.
+     * @param paint  the paint (<code>null</code> not permitted).
+     * @param stroke  the stroke (<code>null</code> not permitted).
      *
      * @see #drawRangeGridline
      *
