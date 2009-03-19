@@ -1153,7 +1153,7 @@ public abstract class Plot implements AxisChangeListener,
      *     EntityCollection.
      * @param toolTip  the tool tip (defined in the respective Plot
      *     subclass) (<code>null</code> permitted).
-     * @param urlTextTip  the url (defined in the respective Plot subclass)
+     * @param urlText  the url (defined in the respective Plot subclass)
      *     (<code>null</code> permitted).
      *
      *  @since 1.0.13
