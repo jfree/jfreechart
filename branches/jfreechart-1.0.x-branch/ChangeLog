@@ -1,5 +1,15 @@
 2009-03-19  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 2690293:
+    * source/org/jfree/chart/imagemap/DynamicDriveToolTipTagFragmentGenerator.java
+    (generateToolTipFragment): Use javascriptEscape(),
+    * source/org/jfree/chart/imagemap/OverLIBToolTipTagFragmentGenerator.java
+    (generateToolTipFragment): Likewise,
+    * source/org/jfree/chart/imagemap/ImageMapUtilities.java
+    (javascriptEscape): New method.
+
+2009-03-19  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/ChartPanel.java
     (panW): New field,
     (panH): Likewise,
