@@ -31,7 +31,7 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Laurence Vanhelsuwe;
- *                   Peter Kolb (patch 1934255);
+ *                   Peter Kolb (patches 1934255 and 2603321);
  *
  * Changes
  * -------
@@ -94,6 +94,7 @@
  * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  * 21-Jan-2009 : Default minor tick counts will now come from the tick unit
  *               collection (DG);
+ * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 
  */
 
@@ -647,12 +648,9 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return The axis state (never <code>null</code>).
      */
-    public AxisState draw(Graphics2D g2,
-                          double cursor,
-                          Rectangle2D plotArea,
-                          Rectangle2D dataArea,
-                          RectangleEdge edge,
-                          PlotRenderingInfo plotState) {
+    public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
+            Rectangle2D dataArea, RectangleEdge edge,
+            PlotRenderingInfo plotState) {
 
         AxisState state = null;
         // if the axis is not visible, don't draw it...
@@ -678,7 +676,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
 
         // draw the axis label...
         state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
-
+        createAndAddEntity(cursor, state, dataArea, edge, plotState);
         return state;
 
     }

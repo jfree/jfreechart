@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * LegendTitle.java
  * ----------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
@@ -54,6 +54,7 @@
  * 16-Mar-2007 : Updated border drawing for changes in AbstractBlock (DG);
  * 18-May-2007 : Pass seriesKey and dataset to legend item block (DG);
  * 15-Aug-2008 : Added getWrapper() method (DG);
+ * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  *
  */
 
@@ -76,12 +77,17 @@ import org.jfree.chart.block.Arrangement;
 import org.jfree.chart.block.Block;
 import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.block.BlockFrame;
+import org.jfree.chart.block.BlockResult;
 import org.jfree.chart.block.BorderArrangement;
 import org.jfree.chart.block.CenterArrangement;
 import org.jfree.chart.block.ColumnArrangement;
+import org.jfree.chart.block.EntityBlockParams;
 import org.jfree.chart.block.FlowArrangement;
 import org.jfree.chart.block.LabelBlock;
 import org.jfree.chart.block.RectangleConstraint;
+import org.jfree.chart.entity.EntityCollection;
+import org.jfree.chart.entity.StandardEntityCollection;
+import org.jfree.chart.entity.TitleEntity;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleAnchor;
@@ -521,6 +527,13 @@ public class LegendTitle extends Title
      */
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         Rectangle2D target = (Rectangle2D) area.clone();
+        Rectangle2D hotspot = (Rectangle2D) area.clone();
+        StandardEntityCollection sec = null;
+        if (params instanceof EntityBlockParams
+                && ((EntityBlockParams) params).getGenerateEntities()) {
+			sec = new StandardEntityCollection();
+            sec.add(new TitleEntity(hotspot,this));
+        }
         target = trimMargin(target);
         if (this.backgroundPaint != null) {
             g2.setPaint(this.backgroundPaint);
@@ -534,7 +547,15 @@ public class LegendTitle extends Title
             container = this.items;
         }
         target = trimPadding(target);
-        return container.draw(g2, target, params);
+        Object val = container.draw(g2, target, params);
+        if (val instanceof BlockResult){
+        	EntityCollection ec = ((BlockResult) val).getEntityCollection();
+        	if (ec != null && sec != null){
+        		sec.addAll(ec);
+        		((BlockResult) val).setEntityCollection(sec);
+        	}
+        }
+        return val;
     }
 
     /**

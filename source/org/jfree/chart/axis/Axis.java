@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,12 @@
  * ---------
  * Axis.java
  * ---------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bill Kelemen;
  *                   Nicolas Brodu;
- *                   Peter Kolb (patch 1934255);
+ *                   Peter Kolb (patches 1934255 and 2603321);
  *                   Andrew Mickish (patch 1870189);
  *
  * Changes
@@ -81,6 +81,7 @@
  * 06-Jun-2008 : Added setTickLabelInsets(RectangleInsets, boolean) (DG);
  * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  * 26-Sep-2008 : Added fireChangeEvent() method (DG);
+ * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  *
  */
 
@@ -107,6 +108,8 @@ import java.util.List;
 
 import javax.swing.event.EventListenerList;
 
+import org.jfree.chart.entity.AxisEntity;
+import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.event.AxisChangeListener;
 import org.jfree.chart.plot.Plot;
@@ -1048,10 +1051,53 @@ public abstract class Axis implements Cloneable, Serializable {
      *
      * @return The list of ticks.
      */
-    public abstract List refreshTicks(Graphics2D g2,
-                                      AxisState state,
-                                      Rectangle2D dataArea,
-                                      RectangleEdge edge);
+    public abstract List refreshTicks(Graphics2D g2, AxisState state,
+            Rectangle2D dataArea, RectangleEdge edge);
+
+    /**
+     * Created an entity for the axis.
+     *
+     * @param cursor  the initial cursor value.
+     * @param state  the axis state after completion of the drawing with a
+     *     possibly updated cursor position.
+     * @param dataArea  the data area.
+     * @param edge  the edge.
+     * @param plotState  the PlotRenderingInfo from which a reference to the
+     *     entity collection can be obtained.
+     *
+     * @since 1.0.13
+     */
+	protected void createAndAddEntity(double cursor, AxisState state,
+            Rectangle2D dataArea, RectangleEdge edge,
+            PlotRenderingInfo plotState){
+
+		if (plotState == null || plotState.getOwner() == null) {
+            return;  // no need to create entity if we can´t save it anyways...
+        }
+		Rectangle2D hotspot = null;
+		if (edge.equals(RectangleEdge.TOP)){
+			hotspot = new Rectangle2D.Double(dataArea.getX(),
+                    state.getCursor(), dataArea.getWidth(),
+                    cursor - state.getCursor());
+		}
+		else if(edge.equals(RectangleEdge.BOTTOM)) {
+			hotspot = new Rectangle2D.Double(dataArea.getX(), cursor,
+                    dataArea.getWidth(), state.getCursor() - cursor);
+		}
+		else if(edge.equals(RectangleEdge.LEFT)) {
+			hotspot = new Rectangle2D.Double(state.getCursor(),
+                    dataArea.getY(), cursor - state.getCursor(),
+                    dataArea.getHeight());
+		}
+		else if(edge.equals(RectangleEdge.RIGHT)){
+			hotspot = new Rectangle2D.Double(cursor, dataArea.getY(),
+                    state.getCursor() - cursor, dataArea.getHeight());
+		}
+		EntityCollection e = plotState.getOwner().getEntityCollection();
+		if (e != null) {
+            e.add(new AxisEntity(hotspot, this));
+        }
+	}
 
     /**
      * Registers an object for notification of changes to the axis.

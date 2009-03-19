@@ -31,7 +31,7 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrew Mickish (patch 1868745);
- *                   Peter Kolb (patch 1934255);
+ *                   Peter Kolb (patches 1934255 and 2603321);
  *
  * Changes
  * -------
@@ -52,6 +52,7 @@
  * 14-Jan-2009 : Fetch minor ticks from TickUnit, and corrected
  *               createLogTickUnits() (DG);
  * 21-Jan-2009 : No need to call setMinorTickCount() in constructor (DG);
+ * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 
  */
 
@@ -453,6 +454,7 @@ public class LogAxis extends ValueAxis {
         }
         state = drawTickMarksAndLabels(g2, cursor, plotArea, dataArea, edge);
         state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        createAndAddEntity(cursor, state, dataArea, edge, plotState);
         return state;
     }
 

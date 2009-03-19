@@ -43,7 +43,7 @@
  *                   Sergei Ivanov;
  *                   Richard West, Advanced Micro Devices, Inc.;
  *                   Ulrich Voigt - patches 1997549 and 2686040;
- *                   Peter Kolb - patch 1934255;
+ *                   Peter Kolb - patches 1934255 and 2603321;
  *                   Andrew Mickish - patch 1868749;
  *
  * Changes (from 21-Jun-2001)
@@ -218,6 +218,7 @@
  *               "process visible range" rendering (DG);
  * 19-Mar-2009 : Added panning support based on patch 2686040 by Ulrich
  *               Voigt (DG);
+ * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  *
  */
 
@@ -3132,11 +3133,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param info  collects chart drawing information (<code>null</code>
      *              permitted).
      */
-    public void draw(Graphics2D g2,
-                     Rectangle2D area,
-                     Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info) {
+    public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
+            PlotState parentState, PlotRenderingInfo info) {
 
         // if the plot area is too small, just return...
         boolean b1 = (area.getWidth() <= MINIMUM_WIDTH_TO_DRAW);
@@ -3157,7 +3155,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         AxisSpace space = calculateAxisSpace(g2, area);
         Rectangle2D dataArea = space.shrink(area, null);
         this.axisOffset.trim(dataArea);
-
+        createAndAddEntity((Rectangle2D) dataArea.clone(), info, null, null);
         if (info != null) {
             info.setDataArea(dataArea);
         }
