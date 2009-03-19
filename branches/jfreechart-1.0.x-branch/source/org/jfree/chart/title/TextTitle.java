@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,12 @@
  * --------------
  * TextTitle.java
  * --------------
- * (C) Copyright 2000-2008, by David Berry and Contributors.
+ * (C) Copyright 2000-2009, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Nicolas Brodu;
+ *                   Peter Kolb - patch 2603321;
  *
  * Changes (from 18-Sep-2001)
  * --------------------------
@@ -76,6 +77,8 @@
  * 19-Dec-2007 : Implemented some of the missing arrangement options (DG);
  * 28-Apr-2008 : Added option for maximum lines, and fixed minor bugs in
  *               equals() method (DG);
+ * 19-Mar-2009 : Changed ChartEntity to TitleEntity - see patch 2603321 by
+ *               Peter Kolb (DG);
  *
  */
 
@@ -98,6 +101,7 @@ import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
+import org.jfree.chart.entity.TitleEntity;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
@@ -696,7 +700,8 @@ public class TextTitle extends Title
         if (params instanceof EntityBlockParams) {
             EntityBlockParams p = (EntityBlockParams) params;
             if (p.getGenerateEntities()) {
-                entity = new ChartEntity(area, this.toolTipText, this.urlText);
+                entity = new TitleEntity(area, this, this.toolTipText,
+                        this.urlText);
             }
         }
         area = trimBorder(area);

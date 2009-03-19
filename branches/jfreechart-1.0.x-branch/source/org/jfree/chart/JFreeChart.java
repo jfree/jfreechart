@@ -36,6 +36,7 @@
  *                   Christian W. Zuckschwerdt;
  *                   Klaus Rheinwald;
  *                   Nicolas Brodu;
+ *                   Peter Kolb (patch 2603321);
  *
  * NOTE: The above list of contributors lists only the people that have
  * contributed to this source file (JFreeChart.java) - for a list of ALL
@@ -144,6 +145,7 @@
  * 19-Sep-2008 : Check for title visibility (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  *
  */
 
@@ -186,6 +188,7 @@ import org.jfree.chart.block.LengthConstraintType;
 import org.jfree.chart.block.LineBorder;
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.entity.EntityCollection;
+import org.jfree.chart.entity.JFreeChartEntity;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.event.ChartProgressEvent;
@@ -1144,11 +1147,17 @@ public class JFreeChart implements Drawable,
 
         notifyListeners(new ChartProgressEvent(this, this,
                 ChartProgressEvent.DRAWING_STARTED, 0));
-
+        
+        EntityCollection entities = null;
         // record the chart area, if info is requested...
         if (info != null) {
             info.clear();
             info.setChartArea(chartArea);
+            entities = info.getEntityCollection();
+        }
+        if (entities != null) {
+        	entities.add(new JFreeChartEntity((Rectangle2D) chartArea.clone(),
+                    this));
         }
 
         // ensure no drawing occurs outside chart area...
@@ -1196,10 +1205,6 @@ public class JFreeChart implements Drawable,
         nonTitleArea.setRect(chartArea);
         this.padding.trim(nonTitleArea);
 
-        EntityCollection entities = null;
-        if (info != null) {
-            entities = info.getEntityCollection();
-        }
         if (this.title != null) {
             EntityCollection e = drawTitle(this.title, g2, nonTitleArea,
                     (entities != null));

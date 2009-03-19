@@ -1,5 +1,34 @@
 2009-03-19  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/entity/AxisEntity.java: New class,
+    * source/org/jfree/chart/entity/JFreeChartEntity.java: New class,
+    * source/org/jfree/chart/entity/PlotEntity.java: New class,
+    * source/org/jfree/chart/entity/TitleEntity.java: New class,
+    * source/org/jfree/chart/axis/Axis.java:
+    (createAndAddEntity): New method,
+    * source/org/jfree/chart/axis/CategoryAxis.java:
+    (draw): Add an entity for the axis,
+    * source/org/jfree/chart/axis/DateAxis.java:
+    (draw): Add an entity for the axis,
+    * source/org/jfree/chart/axis/LogAxis.java:
+    (draw): Add an entity for the axis,
+    * source/org/jfree/chart/axis/NumberAxis.java:
+    (draw): Add an entity for the axis,
+    * source/org/jfree/chart/plot/CategoryPlot.java:
+    (draw): Add an entity for the plot,
+    * source/org/jfree/chart/plot/Plot.java:
+    (createAndAddEntity): New method,
+    * source/org/jfree/chart/plot/XYPlot.java:
+    (draw): Add an entity for the plot,
+    * source/org/jfree/chart/JFreeChart.java:
+    (draw): Add an entity for the chart,
+    * source/org/jfree/chart/title/LegendTitle.java:
+    (draw): Add an entity for the title,
+   * source/org/jfree/chart/title/TextTitle.java:
+    (draw): Likewise.
+
+2009-03-19  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 2690293:
     * source/org/jfree/chart/imagemap/DynamicDriveToolTipTagFragmentGenerator.java
     (generateToolTipFragment): Use javascriptEscape(),

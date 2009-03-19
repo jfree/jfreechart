@@ -36,7 +36,7 @@
  *                   Bill Kelemen;
  *                   Pawel Pabis;
  *                   Chris Boek;
- *                   Peter Kolb (patch 1934255);
+ *                   Peter Kolb (patches 1934255 and 2603321);
  *                   Andrew Mickish (patch 1870189);
  *                   Fawad Halim (bug 2201869);
  *
@@ -124,6 +124,7 @@
  * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  * 25-Nov-2008 : Added bug fix 2201869 by Fawad Halim (DG);
  * 21-Jan-2009 : Check tickUnit for minor tick count (DG);
+ * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  *
  */
 
@@ -1832,12 +1833,9 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return The axis state (never <code>null</code>).
      */
-    public AxisState draw(Graphics2D g2,
-                          double cursor,
-                          Rectangle2D plotArea,
-                          Rectangle2D dataArea,
-                          RectangleEdge edge,
-                          PlotRenderingInfo plotState) {
+    public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
+            Rectangle2D dataArea, RectangleEdge edge,
+            PlotRenderingInfo plotState) {
 
         // if the axis is not visible, don't draw it...
         if (!isVisible()) {
@@ -1856,7 +1854,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         // draw the axis label (note that 'state' is passed in *and*
         // returned)...
         state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
-
+        createAndAddEntity(cursor, state, dataArea, edge, plotState);
         return state;
 
     }

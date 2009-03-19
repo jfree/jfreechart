@@ -34,6 +34,7 @@
  *                   Arnaud Lelievre;
  *                   Richard West, Advanced Micro Devices, Inc.;
  *                   Ulrich Voigt - patch 2686040;
+ *                   Peter Kolb - patch 2603321;
  *
  * Changes
  * -------
@@ -168,8 +169,8 @@
  *               Jess Thrysoee (DG);
  * 21-Jan-2009 : Added rangeMinorGridlinesVisible flag (DG);
  * 18-Mar-2009 : Modified anchored zoom behaviour (DG);
- * 19-Mar-2009 : Implemented Pannable interface - see patch
- *               2686040 (DG);
+ * 19-Mar-2009 : Implemented Pannable interface - see patch 2686040 (DG);
+ * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  *
  */
 
@@ -3482,10 +3483,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param state  collects info as the chart is drawn (possibly
      *               <code>null</code>).
      */
-    public void draw(Graphics2D g2, Rectangle2D area,
-                     Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo state) {
+    public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
+            PlotState parentState, PlotRenderingInfo state) {
 
         // if the plot area is too small, just return...
         boolean b1 = (area.getWidth() <= MINIMUM_WIDTH_TO_DRAW);
@@ -3513,6 +3512,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         this.axisOffset.trim(dataArea);
 
         state.setDataArea(dataArea);
+        createAndAddEntity((Rectangle2D) dataArea.clone(), state, null, null);
 
         // if there is a renderer, it draws the background, otherwise use the
         // default background...

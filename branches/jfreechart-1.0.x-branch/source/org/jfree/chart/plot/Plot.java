@@ -37,6 +37,7 @@
  *                   Nicolas Brodu;
  *                   Michal Krause;
  *                   Richard West, Advanced Micro Devices, Inc.;
+ *                   Peter Kolb - patch 2603321;
  *
  * Changes
  * -------
@@ -123,6 +124,7 @@
  * 25-Mar-2008 : Added fireChangeEvent() method - see patch 1914411 (DG);
  * 15-Aug-2008 : Added setDrawingSupplier() method with notify flag (DG);
  * 13-Jan-2009 : Added notify flag (DG);
+ * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  *
  */
 
@@ -153,6 +155,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.LegendItemSource;
 import org.jfree.chart.axis.AxisLocation;
+import org.jfree.chart.entity.EntityCollection;
+import org.jfree.chart.entity.PlotEntity;
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.event.AxisChangeListener;
 import org.jfree.chart.event.ChartChangeEventType;
@@ -1139,6 +1143,30 @@ public abstract class Plot implements AxisChangeListener,
         }
         g2.setClip(savedClip);
     }
+
+    /**
+     * Creates a plot entity that contains a reference to the plot and the
+     * data area as shape.
+     *
+     * @param dataArea  the data area used as hot spot for the entity.
+     * @param plotState  the plot rendering info containing a reference to the
+     *     EntityCollection.
+     * @param toolTip  the tool tip (defined in the respective Plot
+     *     subclass) (<code>null</code> permitted).
+     * @param urlTextTip  the url (defined in the respective Plot subclass)
+     *     (<code>null</code> permitted).
+     *
+     *  @since 1.0.13
+     */
+ 	protected void createAndAddEntity(Rectangle2D dataArea,
+            PlotRenderingInfo plotState, String toolTip, String urlText){
+		if (plotState != null && plotState.getOwner() != null) {
+			EntityCollection e = plotState.getOwner().getEntityCollection();
+			if (e != null) {
+                e.add(new PlotEntity(dataArea, this, toolTip, urlText));
+            }
+		}
+	}
 
     /**
      * Handles a 'click' on the plot.  Since the plot does not maintain any
