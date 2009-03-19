@@ -1,5 +1,32 @@
 2009-03-19  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/ChartPanel.java
+    (panW): New field,
+    (panH): Likewise,
+    (panLast): Likewise,
+    (mousePressed): Check for start of panning,
+    (mouseDragged): Handle panning if it was started in mousePressed(),
+    (mouseReleased): Reset panning,
+    * source/org/jfree/chart/plot/CategoryPlot.java: Implemented Pannable,
+    (rangePannable): New field,
+    (isDomainPannable): New method,
+    (isRangePannable): Likewise,
+    (setRangePannable): Likewise,
+    (panDomainAxes): Likewise,
+    (panRangeAxes): Likewise,
+    * source/org/jfree/chart/plot/Pannable.java: New interface,
+    * source/org/jfree/chart/plot/XYPlot.java: Implemented Pannable,
+    (domainPannable): New field,
+    (rangePannable): Likewise,
+    (isDomainPannable): New method,
+    (setDomainPannable): Likewise,
+    (isRangePannable): Likewise,
+    (setRangePannable): Likewise,
+    (panDomainAxes): Likewise,
+    (panRangeAxes): Likewise.
+
+2009-03-19  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/BarRenderer3D.java
     (drawRangeLine): New method override.
 
