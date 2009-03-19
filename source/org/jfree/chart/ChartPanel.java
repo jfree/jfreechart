@@ -41,6 +41,7 @@
  *                   Matthias Rose;
  *                   Onno vd Akker;
  *                   Sergei Ivanov;
+ *                   Ulrich Voigt - patch 2686040;
  *
  * Changes (from 28-Jun-2001)
  * --------------------------
@@ -147,6 +148,8 @@
  *               change event (DG);
  * 16-Jan-2009 : Use XOR for zoom rectangle only if useBuffer is false (DG);
  * 18-Mar-2009 : Added mouse wheel support (DG);
+ * 19-Mar-2009 : Added panning on mouse drag support - based on Ulrich 
+ *               Voigt's patch 2686040 (DG);
  *
  */
 
@@ -154,6 +157,7 @@ package org.jfree.chart;
 
 import java.awt.AWTEvent;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -165,6 +169,7 @@ import java.awt.Point;
 import java.awt.Transparency;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -205,6 +210,7 @@ import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.event.ChartProgressEvent;
 import org.jfree.chart.event.ChartProgressListener;
+import org.jfree.chart.plot.Pannable;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -473,6 +479,15 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     protected static ResourceBundle localizationResources
             = ResourceBundleWrapper.getBundle(
                     "org.jfree.chart.LocalizationBundle");
+
+    /** 
+     * Temporary storage for the width and height of the chart 
+     * drawing area during panning.
+     */
+    private double panW, panH;
+
+    /** The last mouse position during panning. */
+    private Point panLast;
 
     /**
      * Constructs a panel that displays the specified chart.
@@ -1700,7 +1715,25 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param e  The mouse event.
      */
     public void mousePressed(MouseEvent e) {
-        if (this.zoomRectangle == null) {
+        Plot plot = this.chart.getPlot();
+        int mods = e.getModifiers();
+        if ((mods & InputEvent.CTRL_MASK) == InputEvent.CTRL_MASK) {
+            // can we pan this plot?
+            if (plot instanceof Pannable) {
+                Rectangle2D screenDataArea = getScreenDataArea(e.getX(),
+                        e.getY());
+                if (screenDataArea != null && screenDataArea.contains(
+                        e.getPoint())) {
+                    this.panW = screenDataArea.getWidth();
+                    this.panH = screenDataArea.getHeight();
+                    this.panLast = e.getPoint();
+                    setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+                }
+                // the actual panning occurs later in the mouseDragged() 
+                // method
+            }
+        }
+        else if (this.zoomRectangle == null) {
             Rectangle2D screenDataArea = getScreenDataArea(e.getX(), e.getY());
             if (screenDataArea != null) {
                 this.zoomPoint = getPointInRectangle(e.getX(), e.getY(),
@@ -1744,6 +1777,32 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (this.popup != null && this.popup.isShowing()) {
             return;
         }
+
+        // handle panning if we have a start point
+        if (this.panLast != null) {
+            double dx = e.getX() - this.panLast.getX();
+            double dy = e.getY() - this.panLast.getY();
+            if (dx == 0.0 && dy == 0.0) {
+                return;
+            }
+            double wPercent = dx / this.panW;
+            double hPercent = dy / this.panH;
+            boolean old = this.chart.getPlot().isNotify();
+            this.chart.getPlot().setNotify(false);
+            Pannable p = (Pannable) this.chart.getPlot();
+            if (p.getOrientation() == PlotOrientation.VERTICAL) {
+                p.panDomainAxes(wPercent, this.info.getPlotInfo(), this.panLast);
+                p.panRangeAxes(hPercent, this.info.getPlotInfo(), this.panLast);
+            }
+            else {
+                p.panDomainAxes(-hPercent, this.info.getPlotInfo(), this.panLast);
+                p.panRangeAxes(-wPercent, this.info.getPlotInfo(), this.panLast);
+            }
+            this.panLast = e.getPoint();
+            this.chart.getPlot().setNotify(old);
+            return;
+        }
+
         // if no initial zoom point was set, ignore dragging...
         if (this.zoomPoint == null) {
             return;
@@ -1813,7 +1872,14 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     public void mouseReleased(MouseEvent e) {
 
-        if (this.zoomRectangle != null) {
+        // if we've been panning, we need to reset now that the mouse is 
+        // released...
+        if (this.panLast != null) {
+            this.panLast = null;
+            setCursor(Cursor.getDefaultCursor());
+        }
+
+        else if (this.zoomRectangle != null) {
             boolean hZoom = false;
             boolean vZoom = false;
             if (this.orientation == PlotOrientation.HORIZONTAL) {
