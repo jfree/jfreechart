@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * BarRenderer3D.java
  * ------------------
- * (C) Copyright 2001-2008, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2001-2009, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -91,6 +91,7 @@
  * 17-Jan-2007 : Fixed bug in drawDomainGridline() method (DG);
  * 03-Apr-2007 : Fixed bugs in drawBackground() method (DG);
  * 16-Oct-2007 : Fixed bug in range marker drawing (DG);
+ * 19-Mar-2009 : Override for drawRangeLine() method (DG);
  *
  */
 
@@ -455,11 +456,8 @@ public class BarRenderer3D extends BarRenderer
      * @param value  the value at which the grid line should be drawn.
      *
      */
-    public void drawRangeGridline(Graphics2D g2,
-                                  CategoryPlot plot,
-                                  ValueAxis axis,
-                                  Rectangle2D dataArea,
-                                  double value) {
+    public void drawRangeGridline(Graphics2D g2, CategoryPlot plot,
+            ValueAxis axis, Rectangle2D dataArea, double value) {
 
         Range range = axis.getRange();
 
@@ -498,6 +496,64 @@ public class BarRenderer3D extends BarRenderer
         Stroke stroke = plot.getRangeGridlineStroke();
         g2.setPaint(paint != null ? paint : Plot.DEFAULT_OUTLINE_PAINT);
         g2.setStroke(stroke != null ? stroke : Plot.DEFAULT_OUTLINE_STROKE);
+        g2.draw(line1);
+        g2.draw(line2);
+
+    }
+
+    /**
+     * Draws a line perpendicular to the range axis.
+     *
+     * @param g2  the graphics device.
+     * @param plot  the plot.
+     * @param axis  the value axis.
+     * @param dataArea  the area for plotting data (not yet adjusted for any 3D
+     *                  effect).
+     * @param value  the value at which the grid line should be drawn.
+     * @param paint  the paint.
+     * @param stroke  the stroke.
+     *
+     * @see #drawRangeGridline
+     *
+     * @since 1.0.13
+     */
+    public void drawRangeLine(Graphics2D g2, CategoryPlot plot, ValueAxis axis,
+            Rectangle2D dataArea, double value, Paint paint, Stroke stroke) {
+
+        Range range = axis.getRange();
+        if (!range.contains(value)) {
+            return;
+        }
+
+        Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(),
+                dataArea.getY() + getYOffset(), dataArea.getWidth()
+                - getXOffset(), dataArea.getHeight() - getYOffset());
+
+        Line2D line1 = null;
+        Line2D line2 = null;
+        PlotOrientation orientation = plot.getOrientation();
+        if (orientation == PlotOrientation.HORIZONTAL) {
+            double x0 = axis.valueToJava2D(value, adjusted,
+                    plot.getRangeAxisEdge());
+            double x1 = x0 + getXOffset();
+            double y0 = dataArea.getMaxY();
+            double y1 = y0 - getYOffset();
+            double y2 = dataArea.getMinY();
+            line1 = new Line2D.Double(x0, y0, x1, y1);
+            line2 = new Line2D.Double(x1, y1, x1, y2);
+        }
+        else if (orientation == PlotOrientation.VERTICAL) {
+            double y0 = axis.valueToJava2D(value, adjusted,
+                    plot.getRangeAxisEdge());
+            double y1 = y0 - getYOffset();
+            double x0 = dataArea.getMinX();
+            double x1 = x0 + getXOffset();
+            double x2 = dataArea.getMaxX();
+            line1 = new Line2D.Double(x0, y0, x1, y1);
+            line2 = new Line2D.Double(x1, y1, x2, y1);
+        }
+        g2.setPaint(paint);
+        g2.setStroke(stroke);
         g2.draw(line1);
         g2.draw(line2);
 
