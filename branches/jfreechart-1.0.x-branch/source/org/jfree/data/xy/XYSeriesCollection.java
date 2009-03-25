@@ -671,7 +671,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
             }
             else {
                 if (!Double.isNaN(hiY)) {
-                    result = Math.min(result, hiY);
+                    result = Math.max(result, hiY);
                 }
             }
         }
