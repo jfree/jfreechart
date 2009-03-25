@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * JFreeChartTestSuite.java
  * ------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,6 +46,7 @@
  * 08-Jun-2005 : Added tests for org.jfree.chart.needle package (DG);
  * 26-Jan-2007 : Added tests for org.jfree.data.time.ohlc package (DG);
  * 24-Oct-2007 : Added tests for org.jfree.chart.plot.dial package (DG);
+ * 25-Mar-2009 : Added missing test suite (org.jfree.data.general) (DG);
  *
  */
 
@@ -70,6 +71,7 @@ import org.jfree.chart.title.junit.TitlePackageTests;
 import org.jfree.chart.urls.junit.UrlsPackageTests;
 import org.jfree.data.category.junit.DataCategoryPackageTests;
 import org.jfree.data.gantt.junit.DataGanttPackageTests;
+import org.jfree.data.general.junit.DataGeneralPackageTests;
 import org.jfree.data.junit.DataPackageTests;
 import org.jfree.data.statistics.junit.DataStatisticsPackageTests;
 import org.jfree.data.time.junit.DataTimePackageTests;
@@ -105,12 +107,13 @@ public class JFreeChartTestSuite extends TestCase {
         suite.addTest(UrlsPackageTests.suite());
         suite.addTest(DataPackageTests.suite());
         suite.addTest(DataCategoryPackageTests.suite());
+        suite.addTest(DataGanttPackageTests.suite());
+        suite.addTest(DataGeneralPackageTests.suite());
         suite.addTest(DataStatisticsPackageTests.suite());
         suite.addTest(DataTimePackageTests.suite());
         suite.addTest(OHLCPackageTests.suite());
         suite.addTest(DataXYPackageTests.suite());
-        suite.addTest(DataGanttPackageTests.suite());
-        return suite;
+         return suite;
     }
 
     /**
