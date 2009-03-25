@@ -44,6 +44,7 @@
  * 04-Dec-2007 : Added htmlEscape() method, and escape 'name' in
  *               getImageMap() (DG);
  * 19-Mar-2009 : Added javascriptEscape() method - see bug 2690293 by FH (DG);
+ * 25-Mar-2009 : Reimplemented javascriptEscape() (DG);
  *
  */
 
@@ -242,8 +243,7 @@ public class ImageMapUtilities {
 
     /**
      * Returns a string that is equivalent to the input string, but with
-     * special characters converted to HTML escape sequences, and quotes
-     * escaped for use in javascript string literals
+     * special characters converted to JavaScript escape sequences.
      *
      * @param input  the string to escape (<code>null</code> not permitted).
      *
@@ -252,6 +252,26 @@ public class ImageMapUtilities {
      * @since 1.0.13
      */
     public static String javascriptEscape(String input) {
-    	return htmlEscape(input.replaceAll("\'", "\\'"));
+        if (input == null) {
+            throw new IllegalArgumentException("Null 'input' argument.");
+        }
+        StringBuffer result = new StringBuffer();
+        int length = input.length();
+        for (int i = 0; i < length; i++) {
+            char c = input.charAt(i);
+            if (c == '\"') {
+                result.append("\\\"");
+            }
+            else if (c == '\'') {
+                result.append("\\'");
+            }
+            else if (c == '\\') {
+                result.append("\\\\");
+            }
+            else {
+                result.append(c);
+            }
+        }
+        return result.toString();
     }
 }
