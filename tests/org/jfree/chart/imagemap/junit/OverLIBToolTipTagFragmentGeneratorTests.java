@@ -24,20 +24,17 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
- * -------------------------
- * ImageMapPackageTests.java
- * -------------------------
- * (C) Copyright 2007-2009, by Object Refinery Limited.
+ * --------------------------------------------
+ * OverLIBToolTipTagFragmentGeneratorTests.java
+ * --------------------------------------------
+ * (C) Copyright 2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 05-Dec-2007 : Version 1 (DG);
- * 25-Mar-2009 : Added DynamicDriveToolTipTagFragmentGeneratorTests, 
- *               ImageMapUtilitiesTests and
- *               OverLIBToolTipTagFragmentGeneratorTests (DG);
+ * Changes
+ * -------
+ * 25-Mar-2009 : Version 1 (DG);
  *
  */
 
@@ -47,45 +44,43 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.chart.imagemap.OverLIBToolTipTagFragmentGenerator;
+
 /**
- * A collection of tests for the org.jfree.chart.imagemap package.
- * <P>
- * These tests can be run using JUnit (http://www.junit.org).
+ * Tests for the {@link OverLIBToolTipTagFragmentGenerator} class.
  */
-public class ImageMapPackageTests extends TestCase {
+public class OverLIBToolTipTagFragmentGeneratorTests extends TestCase {
 
     /**
-     * Returns a test suite to the JUnit test runner.
+     * Returns the tests as a test suite.
      *
      * @return The test suite.
      */
     public static Test suite() {
-        TestSuite suite = new TestSuite("org.jfree.chart.imagemap");
-        suite.addTestSuite(DynamicDriveToolTipTagFragmentGeneratorTests.class);
-        suite.addTestSuite(ImageMapUtilitiesTests.class);
-        suite.addTestSuite(OverLIBToolTipTagFragmentGeneratorTests.class);
-        suite.addTestSuite(StandardToolTipTagFragmentGeneratorTests.class);
-        suite.addTestSuite(StandardURLTagFragmentGeneratorTests.class);
-        return suite;
+        return new TestSuite(OverLIBToolTipTagFragmentGeneratorTests.class);
     }
 
     /**
-     * Constructs the test suite.
+     * Constructs a new set of tests.
      *
-     * @param name  the suite name.
+     * @param name  the name of the tests.
      */
-    public ImageMapPackageTests(String name) {
+    public OverLIBToolTipTagFragmentGeneratorTests(String name) {
         super(name);
     }
 
     /**
-     * Runs the test suite using JUnit's text-based runner.
-     *
-     * @param args  ignored.
+     * Some checks for the generateURLFragment() method.
      */
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
+    public void testGenerateURLFragment() {
+        OverLIBToolTipTagFragmentGenerator g
+                = new OverLIBToolTipTagFragmentGenerator();
+        assertEquals(" onMouseOver=\"return overlib('abc');\""
+                + " onMouseOut=\"return nd();\"",
+                g.generateToolTipFragment("abc"));
+        assertEquals(" onMouseOver=\"return overlib("
+                + "'It\\'s \\\"A\\\", 100.0');\" onMouseOut=\"return nd();\"",
+                g.generateToolTipFragment("It\'s \"A\", 100.0"));
     }
 
 }
-
