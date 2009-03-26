@@ -36,6 +36,7 @@
  * -------
  * 18-Mar-2003 : Version 1 (DG);
  * 29-Jan-2009 : Updated testEquals() (DG);
+ * 26-Mar-2009 : Updated testEquals() for new panning fields (DG);
  *
  */
 
@@ -135,6 +136,16 @@ public class FastScatterPlotTests extends TestCase {
         plot1.setRangeGridlineStroke(s2);
         assertFalse(plot1.equals(plot2));
         plot2.setRangeGridlineStroke(s2);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setDomainPannable(true);
+        assertFalse(plot1.equals(plot2));
+        plot2.setDomainPannable(true);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRangePannable(true);
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangePannable(true);
         assertTrue(plot1.equals(plot2));
 
     }

@@ -1,3 +1,20 @@
+2009-03-26  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/plot/FastScatterPlot.java: Implemented Pannable,
+    (domainPannable): New field,
+    (rangePannable): Likewise,
+    (zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): Use new
+    resizeRange2() method,
+    (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): Likewise,
+    plus use correct mouse coordinate,
+    (isDomainPannable): New method,
+    (setDomainPannable): Likewise,
+    (isRangePannable): Likewise,
+    (setRangePannable): Likewise,
+    (panDomainAxes): Likewise,
+    (panRangeAxes): Likewise,
+    (equals): Updated for new fields.
+
 2009-03-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/imagemap/ImageMapUtilities.java
