@@ -641,7 +641,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
         this.annotations = new java.util.ArrayList();
         
-        this.rangePannable = true;
+        this.rangePannable = false;
     }
 
     /**
