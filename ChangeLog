@@ -1,5 +1,10 @@
 2009-03-26  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/axis/ValueAxis.java
+    (equals): Only check range if autoRange is false.
+
+2009-03-26  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/event/RendererChangeEvent.java
     (seriesVisibilityChanged): New field,
     (RendererChangeEvent(Object)): Delegate to new constructor,

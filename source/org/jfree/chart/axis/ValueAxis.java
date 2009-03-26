@@ -102,6 +102,8 @@
  * 21-Jan-2009 : Updated default behaviour of minor ticks (DG);
  * 18-Mar-2008 : Added resizeRange2() method which provides more natural 
  *               anchored zooming for mouse wheel support (DG);
+ * 26-Mar-2009 : In equals(), only check current range if autoRange is
+ *               false (DG);
  */
 
 package org.jfree.chart.axis;
@@ -1655,7 +1657,8 @@ public abstract class ValueAxis extends Axis
         if (this.inverted != that.inverted) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.range, that.range)) {
+        // if autoRange is true, then the current range is irrelevant
+        if (!this.autoRange && !ObjectUtilities.equal(this.range, that.range)) {
             return false;
         }
         if (this.autoRange != that.autoRange) {
@@ -1736,7 +1739,6 @@ public abstract class ValueAxis extends Axis
         this.downArrow = SerialUtilities.readShape(stream);
         this.leftArrow = SerialUtilities.readShape(stream);
         this.rightArrow = SerialUtilities.readShape(stream);
-
     }
 
 }
