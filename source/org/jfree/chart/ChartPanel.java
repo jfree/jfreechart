@@ -150,6 +150,8 @@
  * 18-Mar-2009 : Added mouse wheel support (DG);
  * 19-Mar-2009 : Added panning on mouse drag support - based on Ulrich 
  *               Voigt's patch 2686040 (DG);
+ * 26-Mar-2009 : Changed fillZoomRectangle default to true, and only change
+ *               cursor for CTRL-mouse-click if panning is enabled (DG);
  *
  */
 
@@ -372,7 +374,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private transient Rectangle2D zoomRectangle = null;
 
     /** Controls if the zoom rectangle is drawn as an outline or filled. */
-    private boolean fillZoomRectangle = false;
+    private boolean fillZoomRectangle = true;
 
     /** The minimum distance required to drag the mouse to trigger a zoom. */
     private int zoomTriggerDistance;
@@ -1720,14 +1722,17 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if ((mods & InputEvent.CTRL_MASK) == InputEvent.CTRL_MASK) {
             // can we pan this plot?
             if (plot instanceof Pannable) {
-                Rectangle2D screenDataArea = getScreenDataArea(e.getX(),
-                        e.getY());
-                if (screenDataArea != null && screenDataArea.contains(
-                        e.getPoint())) {
-                    this.panW = screenDataArea.getWidth();
-                    this.panH = screenDataArea.getHeight();
-                    this.panLast = e.getPoint();
-                    setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+                Pannable pannable = (Pannable) plot;
+                if (pannable.isDomainPannable() || pannable.isRangePannable()) {
+                    Rectangle2D screenDataArea = getScreenDataArea(e.getX(),
+                            e.getY());
+                    if (screenDataArea != null && screenDataArea.contains(
+                            e.getPoint())) {
+                        this.panW = screenDataArea.getWidth();
+                        this.panH = screenDataArea.getHeight();
+                        this.panLast = e.getPoint();
+                        setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+                    }
                 }
                 // the actual panning occurs later in the mouseDragged() 
                 // method
