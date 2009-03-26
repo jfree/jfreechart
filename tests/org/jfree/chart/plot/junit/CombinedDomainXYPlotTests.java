@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -293,8 +293,8 @@ public class CombinedDomainXYPlotTests extends TestCase
         XYPlot subplot1 = new XYPlot(data1, null, rangeAxis1, renderer1);
         subplot1.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
 
-        XYTextAnnotation annotation
-            = new XYTextAnnotation("Hello!", 50.0, 10000.0);
+        XYTextAnnotation annotation = new XYTextAnnotation("Hello!", 50.0,
+                10000.0);
         annotation.setFont(new Font("SansSerif", Font.PLAIN, 9));
         annotation.setRotationAngle(Math.PI / 4.0);
         subplot1.addAnnotation(annotation);
@@ -308,8 +308,8 @@ public class CombinedDomainXYPlotTests extends TestCase
         subplot2.setRangeAxisLocation(AxisLocation.TOP_OR_LEFT);
 
         // parent plot...
-        CombinedDomainXYPlot plot
-            = new CombinedDomainXYPlot(new NumberAxis("Domain"));
+        CombinedDomainXYPlot plot = new CombinedDomainXYPlot(
+                new NumberAxis("Domain"));
         plot.setGap(10.0);
 
         // add the subplots...
