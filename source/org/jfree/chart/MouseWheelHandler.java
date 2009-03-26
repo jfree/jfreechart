@@ -35,7 +35,8 @@
  * Changes
  * -------
  * 18-Mar-2009 : Version 1, based on ideas by UV in patch 2686040 (DG);
- *
+ * 26-Mar-2009 : Implemented Serializable (DG);
+ * 
  */
 
 package org.jfree.chart;
@@ -44,6 +45,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.Point2D;
 
+import java.io.Serializable;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
@@ -55,7 +57,7 @@ import org.jfree.chart.plot.Zoomable;
  *
  * @since 1.0.13
  */
-class MouseWheelHandler implements MouseWheelListener {
+class MouseWheelHandler implements MouseWheelListener, Serializable {
 
     /** The chart panel. */
     private ChartPanel chartPanel;
