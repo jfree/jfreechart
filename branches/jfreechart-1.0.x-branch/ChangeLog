@@ -1,5 +1,9 @@
 2009-03-26  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/MouseWheelHandler.java: Implemented Serializable.
+
+2009-03-26  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/plot/FastScatterPlot.java: Implemented Pannable,
     (domainPannable): New field,
     (rangePannable): Likewise,
