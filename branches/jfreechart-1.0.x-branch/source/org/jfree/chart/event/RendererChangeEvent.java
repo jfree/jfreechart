@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * RendererChangeEvent.java
  * ------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,15 +37,15 @@
  * 23-Oct-2003 : Version 1 (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 04-Apr-2007 : Fixed typo in API docs (DG);
+ * 26-Mar-2009 : Added flag to signal visible series change (DG);
  *
  */
 
 package org.jfree.chart.event;
 
 /**
- * An event that can be forwarded to any
- * {@link org.jfree.chart.event.RendererChangeListener} to signal a change to
- * a renderer.
+ * An event that can be forwarded to any {@link RendererChangeListener} to
+ * signal a change to a renderer.
  */
 public class RendererChangeEvent extends ChartChangeEvent {
 
@@ -53,13 +53,35 @@ public class RendererChangeEvent extends ChartChangeEvent {
     private Object renderer;
 
     /**
+     * A flag that indicates whether this event relates to a change in the
+     * series visibility.  If so, the receiver (if it is a plot) may want to
+     * update the axis bounds.
+     *
+     * @since 1.0.13
+     */
+    private boolean seriesVisibilityChanged;
+
+    /**
      * Creates a new event.
      *
      * @param renderer  the renderer that generated the event.
      */
     public RendererChangeEvent(Object renderer) {
+        this(renderer, false);
+    }
+
+    /**
+     * Creates a new event.
+     *
+     * @param renderer  the renderer that generated the event.
+     * @param seriesVisibilityChanged  a flag that indicates whether or not
+     *         the event relates to a change in the series visibility flags.
+     */
+    public RendererChangeEvent(Object renderer,
+            boolean seriesVisibilityChanged) {
         super(renderer);
         this.renderer = renderer;
+        this.seriesVisibilityChanged = seriesVisibilityChanged;
     }
 
     /**
@@ -69,6 +91,18 @@ public class RendererChangeEvent extends ChartChangeEvent {
      */
     public Object getRenderer() {
         return this.renderer;
+    }
+
+    /**
+     * Returns the flag that indicates whether or not the event relates to
+     * a change in series visibility.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.13
+     */
+    public boolean getSeriesVisibilityChanged() {
+        return this.seriesVisibilityChanged;
     }
 
 }
