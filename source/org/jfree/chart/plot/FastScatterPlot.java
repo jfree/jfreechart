@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * FastScatterPlot.java
  * --------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Arnaud Lelievre;
@@ -58,6 +58,7 @@
  * 25-Mar-2008 : Make use of new fireChangeEvent() method (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 26-Mar-2009 : Implemented Pannable, and fixed bug in zooming (DG);
  *
  */
 
@@ -100,7 +101,7 @@ import org.jfree.util.PaintUtilities;
 /**
  * A fast scatter plot.
  */
-public class FastScatterPlot extends Plot implements ValueAxisPlot,
+public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
         Zoomable, Cloneable, Serializable {
 
     /** For serialization. */
@@ -149,6 +150,22 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
 
     /** The paint used to draw the range grid-lines. */
     private transient Paint rangeGridlinePaint;
+
+    /**
+     * A flag that controls whether or not panning is enabled for the domain
+     * axis.
+     *
+     * @since 1.0.13
+     */
+    private boolean domainPannable;
+
+    /**
+     * A flag that controls whether or not panning is enabled for the range
+     * axis.
+     *
+     * @since 1.0.13
+     */
+    private boolean rangePannable;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
@@ -730,7 +747,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     private Range calculateYDataRange(float[][] data) {
 
         Range result = null;
-
         if (data != null) {
             float lowest = Float.POSITIVE_INFINITY;
             float highest = Float.NEGATIVE_INFINITY;
@@ -784,7 +800,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             double sourceX = source.getX();
             double anchorX = this.domainAxis.java2DToValue(sourceX,
                     info.getDataArea(), RectangleEdge.BOTTOM);
-            this.domainAxis.resizeRange(factor, anchorX);
+            this.domainAxis.resizeRange2(factor, anchorX);
         }
         else {
             this.domainAxis.resizeRange(factor);
@@ -837,10 +853,10 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
         if (useAnchor) {
             // get the source coordinate - this plot has always a VERTICAL
             // orientation
-            double sourceX = source.getX();
-            double anchorX = this.rangeAxis.java2DToValue(sourceX,
+            double sourceY = source.getY();
+            double anchorY = this.rangeAxis.java2DToValue(sourceY,
                     info.getDataArea(), RectangleEdge.LEFT);
-            this.rangeAxis.resizeRange(factor, anchorX);
+            this.rangeAxis.resizeRange2(factor, anchorY);
         }
         else {
             this.rangeAxis.resizeRange(factor);
@@ -882,6 +898,100 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
+     * Returns <code>true</code> if panning is enabled for the domain axes,
+     * and <code>false</code> otherwise.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.13
+     */
+    public boolean isDomainPannable() {
+        return this.domainPannable;
+    }
+
+    /**
+     * Sets the flag that enables or disables panning of the plot along the
+     * domain axes.
+     *
+     * @param pannable  the new flag value.
+     *
+     * @since 1.0.13
+     */
+    public void setDomainPannable(boolean pannable) {
+        this.domainPannable = pannable;
+    }
+
+    /**
+     * Returns <code>true</code> if panning is enabled for the range axes,
+     * and <code>false</code> otherwise.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.13
+     */
+    public boolean isRangePannable() {
+        return this.rangePannable;
+    }
+
+    /**
+     * Sets the flag that enables or disables panning of the plot along
+     * the range axes.
+     *
+     * @param pannable  the new flag value.
+     *
+     * @since 1.0.13
+     */
+    public void setRangePannable(boolean pannable) {
+        this.rangePannable = pannable;
+    }
+
+    /**
+     * Pans the domain axes by the specified percentage.
+     *
+     * @param percent  the distance to pan (as a percentage of the axis length).
+     * @param info the plot info
+     * @param source the source point where the pan action started.
+     *
+     * @since 1.0.13
+     */
+    public void panDomainAxes(double percent, PlotRenderingInfo info,
+            Point2D source) {
+        if (!isDomainPannable() || this.domainAxis == null) {
+            return;
+        }
+        double length = this.domainAxis.getRange().getLength();
+        double adj = -percent * length;
+        if (this.domainAxis.isInverted()) {
+            adj = -adj;
+        }
+        this.domainAxis.setRange(this.domainAxis.getLowerBound() + adj,
+                this.domainAxis.getUpperBound() + adj);
+    }
+
+    /**
+     * Pans the range axes by the specified percentage.
+     *
+     * @param percent  the distance to pan (as a percentage of the axis length).
+     * @param info the plot info
+     * @param source the source point where the pan action started.
+     *
+     * @since 1.0.13
+     */
+    public void panRangeAxes(double percent, PlotRenderingInfo info,
+            Point2D source) {
+        if (!isRangePannable() || this.rangeAxis == null) {
+            return;
+        }
+        double length = this.rangeAxis.getRange().getLength();
+        double adj = percent * length;
+        if (this.rangeAxis.isInverted()) {
+            adj = -adj;
+        }
+        this.rangeAxis.setRange(this.rangeAxis.getLowerBound() + adj,
+                this.rangeAxis.getUpperBound() + adj);
+    }
+
+    /**
      * Tests an arbitrary object for equality with this plot.  Note that
      * <code>FastScatterPlot</code> carries its data around with it (rather
      * than referencing a dataset), and the data is included in the
@@ -902,6 +1012,12 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
             return false;
         }
         FastScatterPlot that = (FastScatterPlot) obj;
+        if (this.domainPannable != that.domainPannable) {
+            return false;
+        }
+        if (this.rangePannable != that.rangePannable) {
+            return false;
+        }
         if (!ArrayUtilities.equal(this.data, that.data)) {
             return false;
         }
@@ -950,23 +1066,19 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot,
     public Object clone() throws CloneNotSupportedException {
 
         FastScatterPlot clone = (FastScatterPlot) super.clone();
-
         if (this.data != null) {
             clone.data = ArrayUtilities.clone(this.data);
         }
-
         if (this.domainAxis != null) {
             clone.domainAxis = (ValueAxis) this.domainAxis.clone();
             clone.domainAxis.setPlot(clone);
             clone.domainAxis.addChangeListener(clone);
         }
-
         if (this.rangeAxis != null) {
             clone.rangeAxis = (ValueAxis) this.rangeAxis.clone();
             clone.rangeAxis.setPlot(clone);
             clone.rangeAxis.addChangeListener(clone);
         }
-
         return clone;
 
     }
