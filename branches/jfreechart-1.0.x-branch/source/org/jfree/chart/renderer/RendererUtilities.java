@@ -138,7 +138,7 @@ public class RendererUtilities {
             int index = 0;
             // skip any items that don't need including...
             double x = dataset.getXValue(series, index);
-            while (index < itemCount && x < xLow || x > xHigh) {
+            while (index < itemCount && (x < xLow || x > xHigh)) {
                 index++;
                 if (index < itemCount) {
                     x = dataset.getXValue(series, index);
@@ -232,7 +232,7 @@ public class RendererUtilities {
             int index = itemCount - 1;
             // skip any items that don't need including...
             double x = dataset.getXValue(series, index);
-            while (index >= 0 && x < xLow || x > xHigh) {
+            while (index >= 0 && (x < xLow || x > xHigh)) {
                 index--;
                 if (index >= 0) {
                     x = dataset.getXValue(series, index);
