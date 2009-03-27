@@ -570,7 +570,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @since 1.0.13
      */
-    private boolean domainPannable = true;
+    private boolean domainPannable;
 
     /**
      * A flag that controls whether or not panning is enabled for the range
@@ -578,7 +578,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @since 1.0.13
      */
-    private boolean rangePannable = true;
+    private boolean rangePannable;
 
     /**
      * Creates a new <code>XYPlot</code> instance with no dataset, no axes and
@@ -4527,6 +4527,12 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param event  the event.
      */
     public void rendererChanged(RendererChangeEvent event) {
+        // if the event was caused by a change to series visibility, then
+        // the axis ranges might need updating...
+        if (event.getSeriesVisibilityChanged()) {
+            configureDomainAxes();
+            configureRangeAxes();
+        }
         fireChangeEvent();
     }
 
@@ -4999,6 +5005,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             axis.setRange(axis.getLowerBound() + adj,
                     axis.getUpperBound() + adj);
         }
+        configureRangeAxes();
     }
 
     /**

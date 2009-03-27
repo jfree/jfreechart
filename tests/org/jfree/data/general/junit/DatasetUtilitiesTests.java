@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * DatasetUtilitiesTests.java
  * --------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,11 +43,15 @@
  * 28-Mar-2008 : Added and renamed various tests (DG);
  * 08-Oct-2008 : New tests to support patch 2131001 and related 
  *               changes (DG);
+ * 25-Mar-2009 : Added tests for new iterateToFindRangeBounds() method (DG);
  *
  */
 
 package org.jfree.data.general.junit;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -62,6 +66,8 @@ import org.jfree.data.function.LineFunction2D;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.data.statistics.BoxAndWhiskerItem;
+import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
 import org.jfree.data.xy.DefaultIntervalXYDataset;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.DefaultXYDataset;
@@ -996,6 +1002,141 @@ public class DatasetUtilitiesTests extends TestCase {
         dataset.addSeries(s2);
 
         return dataset;
+    }
+
+    /**
+     * Some checks for the iteratorToFindRangeBounds(XYDataset...) method.
+     */
+    public void testIterateToFindRangeBounds1_XYDataset() {
+        // null dataset throws IllegalArgumentException
+        boolean pass = false;
+        try {
+            DatasetUtilities.iterateToFindRangeBounds(null, new ArrayList(),
+                    new Range(0.0, 1.0), true);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+
+        // null list throws IllegalArgumentException
+        pass = false;
+        try {
+            DatasetUtilities.iterateToFindRangeBounds(new XYSeriesCollection(),
+                    null, new Range(0.0, 1.0), true);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        
+        // null range throws IllegalArgumentException
+        pass = false;
+        try {
+            DatasetUtilities.iterateToFindRangeBounds(new XYSeriesCollection(),
+                    new ArrayList(), null, true);
+        }
+        catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+    }
+
+    /**
+     * Some tests for the iterateToFindRangeBounds() method.
+     */
+    public void testIterateToFindRangeBounds2_XYDataset() {
+        List visibleSeriesKeys = new ArrayList();
+        Range xRange = new Range(0.0, 10.0);
+
+        // empty dataset returns null
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        Range r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false);
+        assertNull(r);
+
+        // add an empty series
+        XYSeries s1 = new XYSeries("A");
+        dataset.addSeries(s1);
+        visibleSeriesKeys.add("A");
+        r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false);
+        assertNull(r);
+
+        // check a null value
+        s1.add(1.0, null);
+        r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false);
+        assertNull(r);
+
+        // check a NaN
+        s1.add(2.0, Double.NaN);
+        r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false);
+        assertNull(r);
+
+        // check a regular value
+        s1.add(3.0, 5.0);
+        r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false);
+        assertEquals(new Range(5.0, 5.0), r);
+
+        // check another regular value
+        s1.add(4.0, 6.0);
+        r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false);
+        assertEquals(new Range(5.0, 6.0), r);
+
+        // add a second series
+        XYSeries s2 = new XYSeries("B");
+        dataset.addSeries(s2);
+        r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false);
+        assertEquals(new Range(5.0, 6.0), r);
+        visibleSeriesKeys.add("B");
+        r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false);
+        assertEquals(new Range(5.0, 6.0), r);
+
+        // add a value to the second series
+        s2.add(5.0, 15.0);
+        r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false);
+        assertEquals(new Range(5.0, 15.0), r);
+
+        // add a value that isn't in the xRange
+        s2.add(15.0, 150.0);
+        r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false);
+        assertEquals(new Range(5.0, 15.0), r);
+
+        r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, new Range(0.0, 20.0), false);
+        assertEquals(new Range(5.0, 150.0), r);
+    }
+
+    /**
+     * Some checks for the iterateToFindRangeBounds() method when applied to
+     * a BoxAndWhiskerXYDataset.
+     */
+    public void testIterateToFindRangeBounds_BoxAndWhiskerXYDataset() {
+        DefaultBoxAndWhiskerXYDataset dataset
+                = new DefaultBoxAndWhiskerXYDataset("Series 1");
+        List visibleSeriesKeys = new ArrayList();
+        visibleSeriesKeys.add("Series 1");
+        Range xRange = new Range(Double.NEGATIVE_INFINITY,
+                Double.POSITIVE_INFINITY);
+        assertNull(DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false));
+
+        dataset.add(new Date(50L), new BoxAndWhiskerItem(5.0, 4.9, 2.0, 8.0,
+                1.0, 9.0, 0.0, 10.0, new ArrayList()));
+        assertEquals(new Range(5.0, 5.0),
+                DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, false));
+        assertEquals(new Range(1.0, 9.0),
+                DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, xRange, true));
     }
 
 }

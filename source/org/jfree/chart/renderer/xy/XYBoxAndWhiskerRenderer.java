@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * XYBoxAndWhiskerRenderer.java
  * ----------------------------
- * (C) Copyright 2003-2008, by David Browning and Contributors.
+ * (C) Copyright 2003-2009, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
@@ -70,6 +70,7 @@
  * 13-Jun-2007 : Replaced deprecated method call (DG);
  * 03-Jan-2008 : Check visibility of average marker before drawing it (DG);
  * 27-Mar-2008 : If boxPaint is null, revert to itemPaint (DG);
+ * 27-Mar-2009 : Added findRangeBounds() method override (DG);
  *
  */
 
@@ -104,6 +105,8 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.Outlier;
 import org.jfree.chart.renderer.OutlierList;
 import org.jfree.chart.renderer.OutlierListCollection;
+import org.jfree.data.Range;
+import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.statistics.BoxAndWhiskerXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
@@ -270,6 +273,21 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
         }
         this.artifactPaint = paint;
         fireChangeEvent();
+    }
+
+    /**
+     * Returns the range of values the renderer requires to display all the
+     * items from the specified dataset.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     *         or empty).
+     *
+     * @see #findDomainBounds(XYDataset)
+     */
+    public Range findRangeBounds(XYDataset dataset) {
+        return findRangeBounds(dataset, true);
     }
 
     /**
