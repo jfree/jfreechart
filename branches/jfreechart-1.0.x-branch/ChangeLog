@@ -1,3 +1,43 @@
+2009-03-27  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/plot/XYPlot.java
+    (domainPannable): Change default to false,
+    (rangePannable): Likewise,
+    (rendererChanged): If series visibility changes, configure the axes,
+    (panDomainAxes): Reconfigure the range axes,
+    * source/org/jfree/chart/renderer/AbstractRenderer.java
+    (dataBoundsIncludesVisibleSeriesOnly): New field,
+    (setSeriesVisible(Boolean, boolean): Modified generated RendererEvent,
+    (setSeriesVisible(int, Boolean, boolean): Likewise,
+    (setBaseSeriesVisible): Likewise,
+    (getDataBoundsIncludesVisibleSeriesOnly): New method,
+    (setDataBoundsIncludesVisibleSeriesOnly): Likewise,
+    (equals): Updated for new field,
+    * source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+    (findRangeBounds(CategoryDataset)): Delegate to new method,
+    (findRangeBounds(CategoryDataset, boolean)): Handle hidden series,
+    * source/org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
+    (findDomainBounds(XYDataset)): Delegate to new method,
+    (findDomainBounds(XYDataset, boolean)): Handle hidden series,
+    (findRangeBounds(XYDataset)): Delegate to new method,
+    (findRangeBounds(XYDataset, boolean)): Handle hidden series,
+    * source/org/jfree/chart/renderer/xy/CandlestickRenderer.java
+    (findRangeBounds): Call new inherited method,
+    * source/org/jfree/chart/renderer/xy/DeviationRenderer.java
+    (findRangeBounds): Call new inherited method,
+    * source/org/jfree/chart/renderer/xy/XYBoxAndWhiskerRenderer.java
+    (findRangeBounds): New method override,
+    * source/org/jfree/data/general/DatasetUtilities.java
+    (findDomainBounds(XYDataset, List, boolean)): New method,
+    (findRangeBounds(CategoryDataset, List, boolean)): Likewise,
+    (findRangeBounds(XYDataset, List, Rangee, boolean)): Likewise,
+    (iterateToFindRangeBounds(CategoryDataset, List, boolean)): Likewise,
+    (iterateToFindDomainBounds(XYDataset, List, boolean)): Likewise,
+    (iterateToFindRangeBounds(XYDataset, List, Range, boolean)): Likewise,
+    * source/org/jfree/data/category/CategoryRangeInfo.java: New interface,
+    * source/org/jfree/data/xy/XYDomainInfo.java: Likewise,
+    * source/org/jfree/data/xy/XYRangeInfo.java: Likewise.
+
 2009-03-26  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartPanel.java

@@ -99,7 +99,9 @@
  * 25-Nov-2008 : Fixed bug in findRangeBounds() method (DG);
  * 14-Jan-2009 : Update initialise() to store visible series indices (PK);
  * 21-Jan-2009 : Added drawRangeLine() method (DG);
- *
+ * 27-Mar-2009 : Added new findRangeBounds() method to account for hidden
+ *               series (DG);
+ * 
  */
 
 package org.jfree.chart.renderer.category;
@@ -117,6 +119,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.CategoryAxis;
@@ -688,10 +692,39 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *         <code>null</code> or empty).
      */
     public Range findRangeBounds(CategoryDataset dataset) {
+        return findRangeBounds(dataset, false);
+    }
+
+    /**
+     * Returns the range of values the renderer requires to display all the
+     * items from the specified dataset.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     *         or empty).
+     *
+     * @since 1.0.13
+     */
+    protected Range findRangeBounds(CategoryDataset dataset,
+            boolean includeInterval) {
         if (dataset == null) {
             return null;
         }
-        return DatasetUtilities.findRangeBounds(dataset);
+        if (getDataBoundsIncludesVisibleSeriesOnly()) {
+            List visibleSeriesKeys = new ArrayList();
+            int seriesCount = dataset.getRowCount();
+            for (int s = 0; s < seriesCount; s++) {
+                if (isSeriesVisible(s)) {
+                    visibleSeriesKeys.add(dataset.getRowKey(s));
+                }
+            }
+            return DatasetUtilities.findRangeBounds(dataset,
+                    visibleSeriesKeys, includeInterval);
+        }
+        else {
+            return DatasetUtilities.findRangeBounds(dataset, includeInterval);
+        }
     }
 
     /**
@@ -1418,15 +1451,12 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param negative  indicates a negative value (which affects the item
      *                  label position).
      */
-    protected void drawItemLabel(Graphics2D g2,
-                                 PlotOrientation orientation,
-                                 CategoryDataset dataset,
-                                 int row, int column,
-                                 double x, double y,
-                                 boolean negative) {
+    protected void drawItemLabel(Graphics2D g2, PlotOrientation orientation,
+            CategoryDataset dataset, int row, int column,
+            double x, double y, boolean negative) {
 
-        CategoryItemLabelGenerator generator
-            = getItemLabelGenerator(row, column);
+        CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
+                column);
         if (generator != null) {
             Font labelFont = getItemLabelFont(row, column);
             Paint paint = getItemLabelPaint(row, column);

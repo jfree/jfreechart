@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * DeviationRenderer.java
  * ----------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,7 +37,8 @@
  * 21-Feb-2007 : Version 1 (DG);
  * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
  * 11-Apr-2008 : New override for findRangeBounds() (DG);
- *
+ * 27-Mar-2009 : Updated findRangeBounds() to call new inherited method (DG);
+ * 
  */
 
 package org.jfree.chart.renderer.xy;
@@ -178,12 +179,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      *         or empty).
      */
     public Range findRangeBounds(XYDataset dataset) {
-        if (dataset != null) {
-            return DatasetUtilities.findRangeBounds(dataset, true);
-        }
-        else {
-            return null;
-        }
+        return findRangeBounds(dataset, true);
     }
 
     /**

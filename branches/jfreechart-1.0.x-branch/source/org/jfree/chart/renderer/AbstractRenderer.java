@@ -82,8 +82,10 @@
  * 17-Jun-2008 : Added legendShape, legendTextFont and legendTextPaint
  *               attributes (DG);
  * 18-Aug-2008 : Added clearSeriesPaints() and clearSeriesStrokes() (DG);
- * 28-Jan-2009 / Equals method doesn't test Shape equality correctly (DG);
- * 
+ * 28-Jan-2009 : Equals method doesn't test Shape equality correctly (DG);
+ * 27-Mar-2009 : Added dataBoundsIncludesVisibleSeriesOnly attribute, and
+ *               updated renderer events for series visibility changes (DG);
+ *
  */
 
 package org.jfree.chart.renderer;
@@ -470,6 +472,14 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     private transient Paint baseLegendTextPaint;
 
+    /**
+     * A flag that controls whether or not the renderer will include the
+     * non-visible series when calculating the data bounds.
+     *
+     * @since 1.0.13
+     */
+    private boolean dataBoundsIncludesVisibleSeriesOnly = true;
+
     /** Storage for registered change listeners. */
     private transient EventListenerList listenerList;
 
@@ -655,7 +665,12 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     public void setSeriesVisible(Boolean visible, boolean notify) {
         this.seriesVisible = visible;
         if (notify) {
-            fireChangeEvent();
+            // we create an event with a special flag set...the purpose of 
+            // this is to communicate to the plot (the default receiver of
+            // the event) that series visibility has changed so the axis
+            // ranges might need updating...
+            RendererChangeEvent e = new RendererChangeEvent(this, true);
+            notifyListeners(e);
         }
     }
 
@@ -699,7 +714,12 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     public void setSeriesVisible(int series, Boolean visible, boolean notify) {
         this.seriesVisibleList.setBoolean(series, visible);
         if (notify) {
-            fireChangeEvent();
+            // we create an event with a special flag set...the purpose of
+            // this is to communicate to the plot (the default receiver of
+            // the event) that series visibility has changed so the axis
+            // ranges might need updating...
+            RendererChangeEvent e = new RendererChangeEvent(this, true);
+            notifyListeners(e);
         }
     }
 
@@ -739,7 +759,12 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     public void setBaseSeriesVisible(boolean visible, boolean notify) {
         this.baseSeriesVisible = visible;
         if (notify) {
-            fireChangeEvent();
+            // we create an event with a special flag set...the purpose of
+            // this is to communicate to the plot (the default receiver of
+            // the event) that series visibility has changed so the axis
+            // ranges might need updating...
+            RendererChangeEvent e = new RendererChangeEvent(this, true);
+            notifyListeners(e);
         }
     }
 
@@ -3385,6 +3410,32 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         fireChangeEvent();
     }
 
+    /**
+     * Returns the flag that controls whether or not the data bounds reported
+     * by this renderer will exclude non-visible series.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.13
+     */
+    public boolean getDataBoundsIncludesVisibleSeriesOnly() {
+        return this.dataBoundsIncludesVisibleSeriesOnly;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the data bounds reported
+     * by this renderer will exclude non-visible series and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param visibleOnly  include only visible series.
+     *
+     * @since 1.0.13
+     */
+    public void setDataBoundsIncludesVisibleSeriesOnly(boolean visibleOnly) {
+        this.dataBoundsIncludesVisibleSeriesOnly = visibleOnly;
+        notifyListeners(new RendererChangeEvent(this, true));
+    }
+
     /** The adjacent offset. */
     private static final double ADJ = Math.cos(Math.PI / 6.0);
 
@@ -3601,6 +3652,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
             return false;
         }
         AbstractRenderer that = (AbstractRenderer) obj;
+        if (this.dataBoundsIncludesVisibleSeriesOnly
+                != that.dataBoundsIncludesVisibleSeriesOnly) {
+            return false;
+        }
         if (!ObjectUtilities.equal(this.seriesVisible, that.seriesVisible)) {
             return false;
         }

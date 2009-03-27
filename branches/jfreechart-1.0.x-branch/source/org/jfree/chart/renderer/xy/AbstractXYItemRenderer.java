@@ -106,7 +106,9 @@
  * 02-Jun-2008 : Added isPointInRect() method (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  * 09-Mar-2009 : Added getAnnotations() method (DG);
- *
+ * 27-Mar-2009 : Added new findDomainBounds() and findRangeBounds() methods to
+ *               take account of hidden series (DG);
+ * 
  */
 
 package org.jfree.chart.renderer.xy;
@@ -124,6 +126,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -734,11 +737,38 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @see #findRangeBounds(XYDataset)
      */
     public Range findDomainBounds(XYDataset dataset) {
-        if (dataset != null) {
-            return DatasetUtilities.findDomainBounds(dataset, false);
+        return findDomainBounds(dataset, false);
+    }
+
+    /**
+     * Returns the lower and upper bounds (range) of the x-values in the
+     * specified dataset.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     *         or empty).
+     *
+     * @since 1.0.13
+     */
+    protected Range findDomainBounds(XYDataset dataset,
+            boolean includeInterval) {
+        if (dataset == null) {
+            return null;
+        }
+        if (getDataBoundsIncludesVisibleSeriesOnly()) {
+            List visibleSeriesKeys = new ArrayList();
+            int seriesCount = dataset.getSeriesCount();
+            for (int s = 0; s < seriesCount; s++) {
+                if (isSeriesVisible(s)) {
+                    visibleSeriesKeys.add(dataset.getSeriesKey(s));
+                }
+            }
+            return DatasetUtilities.findDomainBounds(dataset,
+                    visibleSeriesKeys, includeInterval);
         }
         else {
-            return null;
+            return DatasetUtilities.findDomainBounds(dataset, includeInterval);
         }
     }
 
@@ -754,11 +784,51 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @see #findDomainBounds(XYDataset)
      */
     public Range findRangeBounds(XYDataset dataset) {
-        if (dataset != null) {
-            return DatasetUtilities.findRangeBounds(dataset, false);
+        return findRangeBounds(dataset, false);
+    }
+
+    /**
+     * Returns the range of values the renderer requires to display all the
+     * items from the specified dataset.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     *         or empty).
+     *
+     * @since 1.0.13
+     */
+    protected Range findRangeBounds(XYDataset dataset,
+            boolean includeInterval) {
+        if (dataset == null) {
+            return null;
+        }
+        if (getDataBoundsIncludesVisibleSeriesOnly()) {
+            List visibleSeriesKeys = new ArrayList();
+            int seriesCount = dataset.getSeriesCount();
+            for (int s = 0; s < seriesCount; s++) {
+                if (isSeriesVisible(s)) {
+                    visibleSeriesKeys.add(dataset.getSeriesKey(s));
+                }
+            }
+            ValueAxis xAxis = null;
+            int index = plot.getIndexOf(this);
+            if (index >= 0) {
+                xAxis = plot.getDomainAxisForDataset(index);
+            }
+            Range xRange = null;
+            if (xAxis != null) {
+                xRange = xAxis.getRange();
+            }
+            else {
+                xRange = new Range(Double.NEGATIVE_INFINITY,
+                        Double.POSITIVE_INFINITY);
+            }
+            return DatasetUtilities.findRangeBounds(dataset,
+                    visibleSeriesKeys, xRange, includeInterval);
         }
         else {
-            return null;
+            return DatasetUtilities.findRangeBounds(dataset, includeInterval);
         }
     }
 
