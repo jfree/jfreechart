@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 19-Apr-2007 : Version 1 (DG);
+ * 27-Mar-2009 : Fixed results for unsorted datasets (DG);
  *
  */
 
@@ -136,11 +137,14 @@ public class RendererUtilities {
             // range...
             int index = 0;
             // skip any items that don't need including...
-            while (index < itemCount && dataset.getXValue(series, index)
-                    < xLow) {
+            double x = dataset.getXValue(series, index);
+            while (index < itemCount && x < xLow || x > xHigh) {
                 index++;
+                if (index < itemCount) {
+                    x = dataset.getXValue(series, index);
+                }
             }
-            return Math.max(0, index - 1);
+            return Math.min(Math.max(0, index), itemCount - 1);
         }
     }
 
@@ -227,11 +231,14 @@ public class RendererUtilities {
             // range...
             int index = itemCount - 1;
             // skip any items that don't need including...
-            while (index >= 0 && dataset.getXValue(series, index)
-                    > xHigh) {
+            double x = dataset.getXValue(series, index);
+            while (index >= 0 && x < xLow || x > xHigh) {
                 index--;
+                if (index >= 0) {
+                    x = dataset.getXValue(series, index);
+                }
             }
-            return Math.min(itemCount - 1, index + 1);
+            return Math.max(index, 0);
         }
     }
 
@@ -253,6 +260,9 @@ public class RendererUtilities {
         // like it matters...
         int i0 = findLiveItemsLowerBound(dataset, series, xLow, xHigh);
         int i1 = findLiveItemsUpperBound(dataset, series, xLow, xHigh);
+        if (i0 > i1) {
+            i0 = i1;
+        }
         return new int[] {i0, i1};
     }
 
