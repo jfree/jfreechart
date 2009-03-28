@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * LookupPaintScale.java
  * ---------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 31-Jan-2007 : Fixed serialization support (DG);
  * 09-Mar-2007 : Fixed cloning (DG);
  * 14-Jun-2007 : Use double primitive in PaintItem (DG);
+ * 28-Mar-2009 : Made PaintItem inner class static (DG);
  *
  */
 
@@ -68,7 +69,7 @@ public class LookupPaintScale
     /**
      * Stores the paint for a value.
      */
-    class PaintItem implements Comparable, Serializable {
+    static class PaintItem implements Comparable, Serializable {
 
         /** For serialization. */
         static final long serialVersionUID = 698920578512361570L;
