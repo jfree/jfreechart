@@ -811,16 +811,21 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                     visibleSeriesKeys.add(dataset.getSeriesKey(s));
                 }
             }
-            ValueAxis xAxis = null;
-            int index = plot.getIndexOf(this);
-            if (index >= 0) {
-                xAxis = plot.getDomainAxisForDataset(index);
-            }
+            // the bounds should be calculated using just the items within
+            // the current range of the x-axis...if there is one
             Range xRange = null;
-            if (xAxis != null) {
-                xRange = xAxis.getRange();
+            XYPlot p = getPlot();
+            if (p != null) {
+                ValueAxis xAxis = null;
+                int index = p.getIndexOf(this);
+                if (index >= 0) {
+                    xAxis = plot.getDomainAxisForDataset(index);
+                }
+                if (xAxis != null) {
+                    xRange = xAxis.getRange();
+                }
             }
-            else {
+            if (xRange == null) {
                 xRange = new Range(Double.NEGATIVE_INFINITY,
                         Double.POSITIVE_INFINITY);
             }
