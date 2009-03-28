@@ -1,5 +1,10 @@
 2009-03-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/renderer/LookupPaintScale.java
+    (PaintItem): Changed to static.
+
+2009-03-28  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/renderer/xy/AbstractXYItemRenderer.java
     (findRangeBounds): Handle case where plot is null.
 
