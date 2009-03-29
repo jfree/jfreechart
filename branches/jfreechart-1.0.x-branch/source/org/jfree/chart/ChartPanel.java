@@ -235,7 +235,12 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /** For serialization. */
     private static final long serialVersionUID = 6046366297214274674L;
 
-    /** Default setting for buffer usage. */
+    /**
+     * Default setting for buffer usage.  The default has been changed to
+     * <code>true</code> from version 1.0.13 onwards, because of a severe
+     * performance problem with drawing the zoom rectangle using XOR (which
+     * now happens only when the buffer is NOT used).
+     */
     public static final boolean DEFAULT_BUFFER_USED = true;
 
     /** The default panel width. */
@@ -517,11 +522,20 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Constructs a panel containing a chart.
+     * Constructs a panel containing a chart.  The <code>useBuffer</code> flag
+     * controls whether or not an offscreen <code>BufferedImage</code> is
+     * maintained for the chart.  If the buffer is used, more memory is
+     * consumed, but panel repaints will be a lot quicker in cases where the
+     * chart itself hasn't changed (for example, when another frame is moved
+     * to reveal the panel).  WARNING: If you set the <code>useBuffer</code>
+     * flag to false, note that the mouse zooming rectangle will (in that case)
+     * be drawn using XOR, and there is a SEVERE performance problem with that
+     * on JRE6 on Windows.
      *
      * @param chart  the chart.
      * @param useBuffer  a flag controlling whether or not an off-screen buffer
-     *                   is used.
+     *                   is used (read the warning above before setting this
+     *                   to <code>false</code>).
      */
     public ChartPanel(JFreeChart chart, boolean useBuffer) {
 
