@@ -53,7 +53,8 @@
  *               createLogTickUnits() (DG);
  * 21-Jan-2009 : No need to call setMinorTickCount() in constructor (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
- * 
+ * 30-Mar-2009 : Added pan(double) method (DG);
+ *
  */
 
 package org.jfree.chart.axis;
@@ -810,6 +811,26 @@ public class LogAxis extends ValueAxis {
             adjusted = new Range(calculateValue(logA), calculateValue(logB));
         }
         setRange(adjusted);
+    }
+
+    /**
+     * Slides the axis range by the specified percentage.
+     *
+     * @param percent  the percentage.
+     *
+     * @since 1.0.13
+     */
+    public void pan(double percent) {
+        Range range = getRange();
+        double lower = range.getLowerBound();
+        double upper = range.getUpperBound();
+        double log1 = calculateLog(lower);
+        double log2 = calculateLog(upper);
+        double length = log2 - log1;
+        double adj = length * percent;
+        log1 = log1 + adj;
+        log2 = log2 + adj;
+        setRange(calculateValue(log1), calculateValue(log2));
     }
 
     /**
