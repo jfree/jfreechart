@@ -1,3 +1,13 @@
+2009-03-30  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/axis/LogAxis.java
+    (pan): New method,
+    * source/org/jfree/chart/axis/ValueAxis.java
+    (pan): Likewise,
+    * source/org/jfree/chart/plot/XYPlot.java
+    (panDomainAxes): Delegate to axes,
+    (panRangeAxes): Delegate to axes.
+
 2009-03-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/renderer/LookupPaintScale.java

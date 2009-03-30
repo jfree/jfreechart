@@ -100,10 +100,12 @@
  * 02-Aug-2007 : Check for major tick when drawing label (DG);
  * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  * 21-Jan-2009 : Updated default behaviour of minor ticks (DG);
- * 18-Mar-2008 : Added resizeRange2() method which provides more natural 
+ * 18-Mar-2008 : Added resizeRange2() method which provides more natural
  *               anchored zooming for mouse wheel support (DG);
  * 26-Mar-2009 : In equals(), only check current range if autoRange is
  *               false (DG);
+ * 30-Mar-2009 : Added pan(double) method (DG);
+ *
  */
 
 package org.jfree.chart.axis;
@@ -1609,6 +1611,22 @@ public abstract class ValueAxis extends Axis
                     start + length * upperPercent);
         }
         setRange(adjusted);
+    }
+
+    /**
+     * Slides the axis range by the specified percentage.
+     *
+     * @param percent  the percentage.
+     *
+     * @since 1.0.13
+     */
+    public void pan(double percent) {
+        Range range = getRange();
+        double length = range.getLength();
+        double adj = length * percent;
+        double lower = range.getLowerBound() + adj;
+        double upper = range.getUpperBound() + adj;
+        setRange(lower, upper);
     }
 
     /**

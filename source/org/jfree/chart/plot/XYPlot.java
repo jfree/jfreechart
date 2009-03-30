@@ -219,6 +219,7 @@
  * 19-Mar-2009 : Added panning support based on patch 2686040 by Ulrich
  *               Voigt (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
+ * 30-Mar-2009 : Delegate panning to axes (DG);
  *
  */
 
@@ -4997,15 +4998,11 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             if (axis == null) {
                 continue;
             }
-            double length = axis.getRange().getLength();
-            double adj = -percent * length;
             if (axis.isInverted()) {
-                adj = -adj;
+                percent = -percent;
             }
-            axis.setRange(axis.getLowerBound() + adj,
-                    axis.getUpperBound() + adj);
+            axis.pan(percent);
         }
-        configureRangeAxes();
     }
 
     /**
@@ -5028,13 +5025,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             if (axis == null) {
                 continue;
             }
-            double length = axis.getRange().getLength();
-            double adj = percent * length;
             if (axis.isInverted()) {
-                adj = -adj;
+                percent = -percent;
             }
-            axis.setRange(axis.getLowerBound() + adj,
-                    axis.getUpperBound() + adj);
+            axis.pan(percent);
         }
     }
 
