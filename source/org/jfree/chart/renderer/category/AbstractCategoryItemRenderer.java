@@ -101,6 +101,7 @@
  * 21-Jan-2009 : Added drawRangeLine() method (DG);
  * 27-Mar-2009 : Added new findRangeBounds() method to account for hidden
  *               series (DG);
+ * 01-Apr-2009 : Added new addEntity() method (DG);
  * 
  */
 
@@ -114,6 +115,7 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -1744,12 +1746,17 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param dataset  the dataset.
      * @param row  the row index.
      * @param column  the column index.
-     * @param hotspot  the hotspot.
+     * @param hotspot  the hotspot (<code>null</code> not permitted).
      */
     protected void addItemEntity(EntityCollection entities,
                                  CategoryDataset dataset, int row, int column,
                                  Shape hotspot) {
-
+        if (hotspot == null) {
+            throw new IllegalArgumentException("Null 'hotspot' argument.");
+        }
+        if (!getItemCreateEntity(row, column)) {
+            return;
+        }
         String tip = null;
         CategoryToolTipGenerator tipster = getToolTipGenerator(row, column);
         if (tipster != null) {
@@ -1763,7 +1770,54 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         CategoryItemEntity entity = new CategoryItemEntity(hotspot, tip, url,
                 dataset, dataset.getRowKey(row), dataset.getColumnKey(column));
         entities.add(entity);
+    }
 
+    /**
+     * Adds an entity to the collection.
+     *
+     * @param entities  the entity collection being populated.
+     * @param hotspot  the entity area (if <code>null</code> a default will be
+     *              used).
+     * @param dataset  the dataset.
+     * @param row  the series.
+     * @param column  the item.
+     * @param entityX  the entity's center x-coordinate in user space (only
+     *                 used if <code>area</code> is <code>null</code>).
+     * @param entityY  the entity's center y-coordinate in user space (only
+     *                 used if <code>area</code> is <code>null</code>).
+     *
+     * @since 1.0.13
+     */
+    protected void addEntity(EntityCollection entities, Shape hotspot,
+                             CategoryDataset dataset, int row, int column,
+                             double entityX, double entityY) {
+        if (!getItemCreateEntity(row, column)) {
+            return;
+        }
+        Shape s = hotspot;
+        if (hotspot == null) {
+            double r = getDefaultEntityRadius();
+            double w = r * 2;
+            if (getPlot().getOrientation() == PlotOrientation.VERTICAL) {
+                s = new Ellipse2D.Double(entityX - r, entityY - r, w, w);
+            }
+            else {
+                s = new Ellipse2D.Double(entityY - r, entityX - r, w, w);
+            }
+        }
+        String tip = null;
+        CategoryToolTipGenerator generator = getToolTipGenerator(row, column);
+        if (generator != null) {
+            tip = generator.generateToolTip(dataset, row, column);
+        }
+        String url = null;
+        CategoryURLGenerator urlster = getItemURLGenerator(row, column);
+        if (urlster != null) {
+            url = urlster.generateURL(dataset, row, column);
+        }
+        CategoryItemEntity entity = new CategoryItemEntity(s, tip, url,
+                dataset, row, column);
+        entities.add(entity);
     }
 
 }

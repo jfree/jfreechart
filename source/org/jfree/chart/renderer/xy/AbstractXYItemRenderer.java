@@ -108,6 +108,7 @@
  * 09-Mar-2009 : Added getAnnotations() method (DG);
  * 27-Mar-2009 : Added new findDomainBounds() and findRangeBounds() methods to
  *               take account of hidden series (DG);
+ * 01-Apr-2009 : Moved defaultEntityRadius up to superclass (DG);
  * 
  */
 
@@ -223,9 +224,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     private List foregroundAnnotations;
 
-    /** The default radius for the entity 'hotspot' */
-    private int defaultEntityRadius;
-
     /** The legend item label generator. */
     private XYSeriesLabelGenerator legendItemLabelGenerator;
 
@@ -248,7 +246,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         this.urlGenerator = null;
         this.backgroundAnnotations = new java.util.ArrayList();
         this.foregroundAnnotations = new java.util.ArrayList();
-        this.defaultEntityRadius = 3;
         this.legendItemLabelGenerator = new StandardXYSeriesLabelGenerator(
                 "{0}");
     }
@@ -623,30 +620,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         List result = new java.util.ArrayList(this.foregroundAnnotations);
         result.addAll(this.backgroundAnnotations);
         return result;
-    }
-
-    /**
-     * Returns the radius of the circle used for the default entity area
-     * when no area is specified.
-     *
-     * @return A radius.
-     *
-     * @see #setDefaultEntityRadius(int)
-     */
-    public int getDefaultEntityRadius() {
-        return this.defaultEntityRadius;
-    }
-
-    /**
-     * Sets the radius of the circle used for the default entity area
-     * when no area is specified.
-     *
-     * @param radius  the radius.
-     *
-     * @see #getDefaultEntityRadius()
-     */
-    public void setDefaultEntityRadius(int radius) {
-        this.defaultEntityRadius = radius;
     }
 
     /**
@@ -1625,9 +1598,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         if (!this.backgroundAnnotations.equals(that.backgroundAnnotations)) {
             return false;
         }
-        if (this.defaultEntityRadius != that.defaultEntityRadius) {
-            return false;
-        }
         if (!ObjectUtilities.equal(this.legendItemLabelGenerator,
                 that.legendItemLabelGenerator)) {
             return false;
@@ -1834,16 +1804,13 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         }
         Shape hotspot = area;
         if (hotspot == null) {
-            double w = this.defaultEntityRadius * 2;
+            double r = getDefaultEntityRadius();
+            double w = r * 2;
             if (getPlot().getOrientation() == PlotOrientation.VERTICAL) {
-                hotspot = new Ellipse2D.Double(
-                        entityX - this.defaultEntityRadius,
-                        entityY - this.defaultEntityRadius, w, w);
+                hotspot = new Ellipse2D.Double(entityX - r, entityY - r, w, w);
             }
             else {
-                hotspot = new Ellipse2D.Double(
-                        entityY - this.defaultEntityRadius,
-                        entityX - this.defaultEntityRadius, w, w);
+                hotspot = new Ellipse2D.Double(entityY - r, entityX - r, w, w);
             }
         }
         String tip = null;

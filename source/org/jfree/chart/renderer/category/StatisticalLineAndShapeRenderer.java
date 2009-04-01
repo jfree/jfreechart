@@ -52,7 +52,8 @@
  * 23-Jan-2009 : Observe useFillPaint and drawOutlines flags (PK);
  * 23-Jan-2009 : In drawItem, divide code into passes (DG);
  * 05-Feb-2009 : Added errorIndicatorStroke field (DG);
- *
+ * 01-Apr-2009 : Added override for findRangeBounds(), and fixed NPE in
+ *               creating item entities (DG);
  */
 
 package org.jfree.chart.renderer.category;
@@ -75,6 +76,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.StatisticalCategoryDataset;
 import org.jfree.io.SerialUtilities;
@@ -185,6 +187,19 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
     public void setErrorIndicatorStroke(Stroke stroke) {
         this.errorIndicatorStroke = stroke;
         fireChangeEvent();
+    }
+
+    /**
+     * Returns the range of values the renderer requires to display all the
+     * items from the specified dataset.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (or <code>null</code> if the dataset is
+     *         <code>null</code> or empty).
+     */
+    public Range findRangeBounds(CategoryDataset dataset) {
+        return findRangeBounds(dataset, true);
     }
 
     /**
@@ -403,7 +418,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
             // add an item entity, if this information is being collected
             EntityCollection entities = state.getEntityCollection();
             if (entities != null) {
-                addItemEntity(entities, dataset, row, column, hotspot);
+                addEntity(entities, hotspot, dataset, row, column, x1, y1);
             }
         }
 
