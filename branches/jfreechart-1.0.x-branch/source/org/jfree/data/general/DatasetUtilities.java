@@ -114,6 +114,8 @@
  * 12-Feb-2009 : Added sampleFunction2DToSeries() method (DG);
  * 27-Mar-2009 : Added new methods to find domain and range bounds taking into
  *               account hidden series (DG);
+ * 01-Apr-2009 : Handle a StatisticalCategoryDataset in
+ *               iterateToFindRangeBounds() (DG);
  *
  */
 
@@ -134,6 +136,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.function.Function2D;
 import org.jfree.data.statistics.BoxAndWhiskerXYDataset;
+import org.jfree.data.statistics.StatisticalCategoryDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.data.xy.TableXYDataset;
@@ -1004,6 +1007,7 @@ public final class DatasetUtilities {
      * @param dataset  the dataset (<code>null</code> not permitted).
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
+     * @param visibleSeriesKeys  the visible series keys.
      *
      * @return The range (possibly <code>null</code>).
      *
@@ -1040,6 +1044,36 @@ public final class DatasetUtilities {
                     }
                     if (uvalue != null && !Double.isNaN(uvalue.doubleValue())) {
                         maximum = Math.max(maximum, uvalue.doubleValue());
+                    }
+                }
+            }
+        }
+        else if (includeInterval 
+                && dataset instanceof StatisticalCategoryDataset) {
+            // handle the special case where the dataset has y-intervals that
+            // we want to measure
+            StatisticalCategoryDataset scd
+                    = (StatisticalCategoryDataset) dataset;
+            Iterator iterator = visibleSeriesKeys.iterator();
+            while (iterator.hasNext()) {
+                Comparable seriesKey = (Comparable) iterator.next();
+                int series = dataset.getRowIndex(seriesKey);
+                for (int column = 0; column < columnCount; column++) {
+                    Number meanN = scd.getMeanValue(series, column);
+                    if (meanN != null) {
+                        double std = 0.0;
+                        Number stdN = scd.getStdDevValue(series, column);
+                        if (stdN != null) {
+                            std = stdN.doubleValue();
+                            if (Double.isNaN(std)) {
+                                std = 0.0;
+                            }
+                        }
+                        double mean = meanN.doubleValue();
+                        if (!Double.isNaN(mean)) {
+                            minimum = Math.min(minimum, mean - std);
+                            maximum = Math.max(maximum, mean + std);
+                        }
                     }
                 }
             }

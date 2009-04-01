@@ -1,5 +1,10 @@
 2009-04-01  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/general/DatasetUtilities.java
+    (iterateToFindRangeBounds): Handle StatisticalCategoryDataset.
+
+2009-04-01  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
     (addItemEntity): Check getItemCreateEntity(),
     (addEntity): New method,
