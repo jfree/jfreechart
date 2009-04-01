@@ -1,3 +1,11 @@
+2009-04-01  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/ChartPanel.java
+    (panMask): New field,
+    (ChartPanel): Initialise panMask differently on MacOSX,
+    (mousePressed): Use panMask field,
+    (mouseDragged): Fixed signs on drag percents.
+
 2009-03-30  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/LogAxis.java
