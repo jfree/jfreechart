@@ -48,7 +48,8 @@
  * 26-Jan-2006 : Fixed equals() method (bug 1415480) (DG);
  * 06-Mar-2007 : Added argument checks, re-implemented hashCode() method (DG);
  * 12-Feb-2009 : Added background paint and outline paint/stroke (DG);
- *
+ * 01-Apr-2009 : Fixed bug in hotspot calculation (DG);
+ * 
  */
 
 package org.jfree.chart.annotations;
@@ -522,6 +523,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             anchorY = tempAnchor;
         }
 
+        g2.setFont(getFont());
         Shape hotspot = TextUtilities.calculateRotatedStringBounds(
                 getText(), g2, anchorX, anchorY, getTextAnchor(),
                 getRotationAngle(), getRotationAnchor());
@@ -529,7 +531,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             g2.setPaint(this.backgroundPaint);
             g2.fill(hotspot);
         }
-        g2.setFont(getFont());
         g2.setPaint(getPaint());
         TextUtilities.drawRotatedString(getText(), g2, anchorX, anchorY,
                 getTextAnchor(), getRotationAngle(), getRotationAnchor());
