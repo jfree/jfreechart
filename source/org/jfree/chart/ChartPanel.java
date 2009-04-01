@@ -152,6 +152,8 @@
  *               Voigt's patch 2686040 (DG);
  * 26-Mar-2009 : Changed fillZoomRectangle default to true, and only change
  *               cursor for CTRL-mouse-click if panning is enabled (DG);
+ * 01-Apr-2009 : Fixed panning, and added different mouse event mask for
+ *               MacOSX (DG);
  *
  */
 
@@ -497,6 +499,13 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private Point panLast;
 
     /**
+     * The mask for mouse events to trigger panning.
+     *
+     * @since 1.0.13
+     */
+    private int panMask = InputEvent.CTRL_MASK;
+
+    /**
      * Constructs a panel that displays the specified chart.
      *
      * @param chart  the chart.
@@ -670,6 +679,14 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.zoomAroundAnchor = false;
         this.zoomOutlinePaint = Color.blue;
         this.zoomFillPaint = new Color(0, 0, 255, 63);
+
+        this.panMask = InputEvent.CTRL_MASK;
+        // for MacOSX we can't use the CTRL key for mouse drags, see:
+        // http://developer.apple.com/qa/qa2004/qa1362.html
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.startsWith("mac os x")) {
+            this.panMask = InputEvent.ALT_MASK;
+        }
     }
 
     /**
@@ -1733,7 +1750,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     public void mousePressed(MouseEvent e) {
         Plot plot = this.chart.getPlot();
         int mods = e.getModifiers();
-        if ((mods & InputEvent.CTRL_MASK) == InputEvent.CTRL_MASK) {
+        if ((mods & this.panMask) == this.panMask) {
             // can we pan this plot?
             if (plot instanceof Pannable) {
                 Pannable pannable = (Pannable) plot;
@@ -1804,18 +1821,22 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             if (dx == 0.0 && dy == 0.0) {
                 return;
             }
-            double wPercent = dx / this.panW;
+            double wPercent = -dx / this.panW;
             double hPercent = dy / this.panH;
             boolean old = this.chart.getPlot().isNotify();
             this.chart.getPlot().setNotify(false);
             Pannable p = (Pannable) this.chart.getPlot();
             if (p.getOrientation() == PlotOrientation.VERTICAL) {
-                p.panDomainAxes(wPercent, this.info.getPlotInfo(), this.panLast);
-                p.panRangeAxes(hPercent, this.info.getPlotInfo(), this.panLast);
+                p.panDomainAxes(wPercent, this.info.getPlotInfo(),
+                        this.panLast);
+                p.panRangeAxes(hPercent, this.info.getPlotInfo(),
+                        this.panLast);
             }
             else {
-                p.panDomainAxes(-hPercent, this.info.getPlotInfo(), this.panLast);
-                p.panRangeAxes(-wPercent, this.info.getPlotInfo(), this.panLast);
+                p.panDomainAxes(hPercent, this.info.getPlotInfo(),
+                        this.panLast);
+                p.panRangeAxes(wPercent, this.info.getPlotInfo(),
+                        this.panLast);
             }
             this.panLast = e.getPoint();
             this.chart.getPlot().setNotify(old);
