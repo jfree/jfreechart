@@ -85,7 +85,8 @@
  * 28-Jan-2009 : Equals method doesn't test Shape equality correctly (DG);
  * 27-Mar-2009 : Added dataBoundsIncludesVisibleSeriesOnly attribute, and
  *               updated renderer events for series visibility changes (DG);
- *
+ * 01-Apr-2009 : Factored up the defaultEntityRadius field from the
+ *               AbstractXYItemRenderer class (DG);
  */
 
 package org.jfree.chart.renderer;
@@ -480,6 +481,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     private boolean dataBoundsIncludesVisibleSeriesOnly = true;
 
+    /** The default radius for the entity 'hotspot' */
+    private int defaultEntityRadius;
+
     /** Storage for registered change listeners. */
     private transient EventListenerList listenerList;
 
@@ -554,6 +558,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.createEntities = null;
         this.createEntitiesList = new BooleanList();
         this.baseCreateEntities = true;
+
+        this.defaultEntityRadius = 3;
 
         this.legendShape = new ShapeList();
         this.baseLegendShape = null;
@@ -3195,6 +3201,30 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
+     * Returns the radius of the circle used for the default entity area
+     * when no area is specified.
+     *
+     * @return A radius.
+     *
+     * @see #setDefaultEntityRadius(int)
+     */
+    public int getDefaultEntityRadius() {
+        return this.defaultEntityRadius;
+    }
+
+    /**
+     * Sets the radius of the circle used for the default entity area
+     * when no area is specified.
+     *
+     * @param radius  the radius.
+     *
+     * @see #getDefaultEntityRadius()
+     */
+    public void setDefaultEntityRadius(int radius) {
+        this.defaultEntityRadius = radius;
+    }
+
+    /**
      * Performs a lookup for the legend shape.
      *
      * @param series  the series index.
@@ -3654,6 +3684,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         AbstractRenderer that = (AbstractRenderer) obj;
         if (this.dataBoundsIncludesVisibleSeriesOnly
                 != that.dataBoundsIncludesVisibleSeriesOnly) {
+            return false;
+        }
+        if (this.defaultEntityRadius != that.defaultEntityRadius) {
             return false;
         }
         if (!ObjectUtilities.equal(this.seriesVisible, that.seriesVisible)) {
