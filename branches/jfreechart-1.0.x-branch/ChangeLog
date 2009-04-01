@@ -1,5 +1,10 @@
 2009-04-01  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/annotation/XYTextAnnotation.java
+    (draw): Set font before calculating hotspot area.
+
+2009-04-01  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/general/DatasetUtilities.java
     (iterateToFindRangeBounds): Handle StatisticalCategoryDataset.
 
