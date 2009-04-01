@@ -68,6 +68,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
 import org.jfree.data.xy.DefaultIntervalXYDataset;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.DefaultXYDataset;
@@ -1137,6 +1138,26 @@ public class DatasetUtilitiesTests extends TestCase {
         assertEquals(new Range(1.0, 9.0),
                 DatasetUtilities.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, xRange, true));
+    }
+
+    /**
+     * Some checks for the iterateToFindRangeBounds(CategoryDataset...)
+     * method.
+     */
+    public void testIterateToFindRangeBounds_StatisticalCategoryDataset() {
+        DefaultStatisticalCategoryDataset dataset
+                = new DefaultStatisticalCategoryDataset();
+        List visibleSeriesKeys = new ArrayList();
+        assertNull(DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, false));
+        dataset.add(1.0, 0.5, "R1", "C1");
+        visibleSeriesKeys.add("R1");
+        assertEquals(new Range(1.0, 1.0),
+                DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, false));
+        assertEquals(new Range(0.5, 1.5),
+                DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, true));
     }
 
 }
