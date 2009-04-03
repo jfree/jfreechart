@@ -672,11 +672,17 @@ public final class DatasetUtilities {
     }
 
     /**
+     * Returns the bounds of the x-values in the specified <code>dataset</code>
+     * taking into account only the visible series and including any x-interval
+     * if requested.
      *
-     * @param dataset
-     * @param visibleSeriesKeys
-     * @param includeInterval
-     * @return
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param visibleSeriesKeys  the visible series keys (<code>null</code>
+     *     not permitted).
+     * @param includeInterval  include the x-interval (if any)?
+     *
+     * @return The bounds (or <code>null</code> if the dataset contains no
+     *     values.
      *
      * @since 1.0.13
      */
