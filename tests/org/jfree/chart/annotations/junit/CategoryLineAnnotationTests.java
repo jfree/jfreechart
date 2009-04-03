@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * CategoryLineAnnotationTests.java
  * --------------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -87,10 +87,10 @@ public class CategoryLineAnnotationTests extends TestCase {
 
         BasicStroke s1 = new BasicStroke(1.0f);
         BasicStroke s2 = new BasicStroke(2.0f);
-        CategoryLineAnnotation a1 = new CategoryLineAnnotation(
-            "Category 1", 1.0, "Category 2", 2.0, Color.red, s1);
-        CategoryLineAnnotation a2 = new CategoryLineAnnotation(
-            "Category 1", 1.0, "Category 2", 2.0, Color.red, s1);
+        CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1",
+                1.0, "Category 2", 2.0, Color.red, s1);
+        CategoryLineAnnotation a2 = new CategoryLineAnnotation("Category 1",
+                1.0, "Category 2", 2.0, Color.red, s1);
         assertTrue(a1.equals(a2));
         assertTrue(a2.equals(a1));
 
@@ -135,12 +135,10 @@ public class CategoryLineAnnotationTests extends TestCase {
      * Two objects that are equal are required to return the same hashCode.
      */
     public void testHashcode() {
-        CategoryLineAnnotation a1 = new CategoryLineAnnotation(
-            "Category 1", 1.0, "Category 2", 2.0, Color.red,
-            new BasicStroke(1.0f));
-        CategoryLineAnnotation a2 = new CategoryLineAnnotation(
-            "Category 1", 1.0, "Category 2", 2.0, Color.red,
-            new BasicStroke(1.0f));
+        CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1", 
+                1.0, "Category 2", 2.0, Color.red, new BasicStroke(1.0f));
+        CategoryLineAnnotation a2 = new CategoryLineAnnotation("Category 1", 
+                1.0, "Category 2", 2.0, Color.red, new BasicStroke(1.0f));
         assertTrue(a1.equals(a2));
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
@@ -151,9 +149,8 @@ public class CategoryLineAnnotationTests extends TestCase {
      * Confirm that cloning works.
      */
     public void testCloning() {
-        CategoryLineAnnotation a1 = new CategoryLineAnnotation(
-            "Category 1", 1.0, "Category 2", 2.0, Color.red,
-            new BasicStroke(1.0f));
+        CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1", 
+                1.0, "Category 2", 2.0, Color.red, new BasicStroke(1.0f));
         CategoryLineAnnotation a2 = null;
         try {
             a2 = (CategoryLineAnnotation) a1.clone();
@@ -180,12 +177,9 @@ public class CategoryLineAnnotationTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
-        CategoryLineAnnotation a1 = new CategoryLineAnnotation(
-            "Category 1", 1.0, "Category 2", 2.0, Color.red,
-            new BasicStroke(1.0f));
+        CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1", 
+                1.0, "Category 2", 2.0, Color.red, new BasicStroke(1.0f));
         CategoryLineAnnotation a2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -193,8 +187,7 @@ public class CategoryLineAnnotationTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             a2 = (CategoryLineAnnotation) in.readObject();
             in.close();
         }
@@ -202,7 +195,6 @@ public class CategoryLineAnnotationTests extends TestCase {
             e.printStackTrace();
         }
         assertEquals(a1, a2);
-
     }
 
 }
