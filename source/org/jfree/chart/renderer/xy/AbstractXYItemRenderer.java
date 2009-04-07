@@ -181,27 +181,11 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     /** The plot. */
     private XYPlot plot;
 
-    /**
-     * The item label generator for ALL series.
-     *
-     * @deprecated This field is redundant, use itemLabelGeneratorList and
-     *     baseItemLabelGenerator instead.  Deprecated as of version 1.0.6.
-     */
-    private XYItemLabelGenerator itemLabelGenerator;
-
     /** A list of item label generators (one per series). */
     private ObjectList itemLabelGeneratorList;
 
     /** The base item label generator. */
     private XYItemLabelGenerator baseItemLabelGenerator;
-
-    /**
-     * The tool tip generator for ALL series.
-     *
-     * @deprecated This field is redundant, use tooltipGeneratorList and
-     *     baseToolTipGenerator instead.  Deprecated as of version 1.0.6.
-     */
-    private XYToolTipGenerator toolTipGenerator;
 
     /** A list of tool tip generators (one per series). */
     private ObjectList toolTipGeneratorList;
@@ -347,40 +331,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns the item label generator override.
-     *
-     * @return The generator (possibly <code>null</code>).
-     *
-     * @since 1.0.5
-     *
-     * @see #setItemLabelGenerator(XYItemLabelGenerator)
-     *
-     * @deprecated As of version 1.0.6, this override setting should not be
-     *     used.  You can use the base setting instead
-     *     ({@link #getBaseItemLabelGenerator()}).
-     */
-    public XYItemLabelGenerator getItemLabelGenerator() {
-        return this.itemLabelGenerator;
-    }
-
-    /**
-     * Sets the item label generator for ALL series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param generator  the generator (<code>null</code> permitted).
-     *
-     * @see #getItemLabelGenerator()
-     *
-     * @deprecated As of version 1.0.6, this override setting should not be
-     *     used.  You can use the base setting instead
-     *     ({@link #setBaseItemLabelGenerator(XYItemLabelGenerator)}).
-     */
-    public void setItemLabelGenerator(XYItemLabelGenerator generator) {
-        this.itemLabelGenerator = generator;
-        fireChangeEvent();
-    }
-
-    /**
      * Sets the item label generator for a series and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
@@ -438,40 +388,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             generator = this.baseToolTipGenerator;
         }
         return generator;
-    }
-
-    /**
-     * Returns the override tool tip generator.
-     *
-     * @return The tool tip generator (possible <code>null</code>).
-     *
-     * @since 1.0.5
-     *
-     * @see #setToolTipGenerator(XYToolTipGenerator)
-     *
-     * @deprecated As of version 1.0.6, this override setting should not be
-     *     used.  You can use the base setting instead
-     *     ({@link #getBaseToolTipGenerator()}).
-     */
-    public XYToolTipGenerator getToolTipGenerator() {
-        return this.toolTipGenerator;
-    }
-
-    /**
-     * Sets the tool tip generator for ALL series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param generator  the generator (<code>null</code> permitted).
-     *
-     * @see #getToolTipGenerator()
-     *
-     * @deprecated As of version 1.0.6, this override setting should not be
-     *     used.  You can use the base setting instead
-     *     ({@link #setBaseToolTipGenerator(XYToolTipGenerator)}).
-     */
-    public void setToolTipGenerator(XYToolTipGenerator generator) {
-        this.toolTipGenerator = generator;
-        fireChangeEvent();
     }
 
     /**
@@ -1636,31 +1552,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *                        but the method does nothing in that case).
      * @param x  the x-value (in data space).
      * @param y  the y-value (in data space).
-     * @param transX  the x-value translated to Java2D space.
-     * @param transY  the y-value translated to Java2D space.
-     * @param orientation  the plot orientation (<code>null</code> not
-     *                     permitted).
-     *
-     * @deprecated Use {@link #updateCrosshairValues(CrosshairState, double,
-     *         double, int, int, double, double, PlotOrientation)} -- see bug
-     *         report 1086307.
-     */
-    protected void updateCrosshairValues(CrosshairState crosshairState,
-            double x, double y, double transX, double transY,
-            PlotOrientation orientation) {
-        updateCrosshairValues(crosshairState, x, y, 0, 0, transX, transY,
-                orientation);
-    }
-
-    /**
-     * Considers the current (x, y) coordinate and updates the crosshair point
-     * if it meets the criteria (usually means the (x, y) coordinate is the
-     * closest to the anchor point so far).
-     *
-     * @param crosshairState  the crosshair state (<code>null</code> permitted,
-     *                        but the method does nothing in that case).
-     * @param x  the x-value (in data space).
-     * @param y  the y-value (in data space).
      * @param domainAxisIndex  the index of the domain axis for the point.
      * @param rangeAxisIndex  the index of the range axis for the point.
      * @param transX  the x-value translated to Java2D space.
@@ -1845,5 +1736,117 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         return (x >= rect.getMinX() && x <= rect.getMaxX()
                 && y >= rect.getMinY() && y <= rect.getMaxY());
     }
+
+    // === DEPRECATED CODE ===
+
+    /**
+     * The item label generator for ALL series.
+     *
+     * @deprecated This field is redundant, use itemLabelGeneratorList and
+     *     baseItemLabelGenerator instead.  Deprecated as of version 1.0.6.
+     */
+    private XYItemLabelGenerator itemLabelGenerator;
+
+    /**
+     * The tool tip generator for ALL series.
+     *
+     * @deprecated This field is redundant, use tooltipGeneratorList and
+     *     baseToolTipGenerator instead.  Deprecated as of version 1.0.6.
+     */
+    private XYToolTipGenerator toolTipGenerator;
+
+    /**
+     * Returns the item label generator override.
+     *
+     * @return The generator (possibly <code>null</code>).
+     *
+     * @since 1.0.5
+     *
+     * @see #setItemLabelGenerator(XYItemLabelGenerator)
+     *
+     * @deprecated As of version 1.0.6, this override setting should not be
+     *     used.  You can use the base setting instead
+     *     ({@link #getBaseItemLabelGenerator()}).
+     */
+    public XYItemLabelGenerator getItemLabelGenerator() {
+        return this.itemLabelGenerator;
+    }
+
+    /**
+     * Sets the item label generator for ALL series and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param generator  the generator (<code>null</code> permitted).
+     *
+     * @see #getItemLabelGenerator()
+     *
+     * @deprecated As of version 1.0.6, this override setting should not be
+     *     used.  You can use the base setting instead
+     *     ({@link #setBaseItemLabelGenerator(XYItemLabelGenerator)}).
+     */
+    public void setItemLabelGenerator(XYItemLabelGenerator generator) {
+        this.itemLabelGenerator = generator;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the override tool tip generator.
+     *
+     * @return The tool tip generator (possible <code>null</code>).
+     *
+     * @since 1.0.5
+     *
+     * @see #setToolTipGenerator(XYToolTipGenerator)
+     *
+     * @deprecated As of version 1.0.6, this override setting should not be
+     *     used.  You can use the base setting instead
+     *     ({@link #getBaseToolTipGenerator()}).
+     */
+    public XYToolTipGenerator getToolTipGenerator() {
+        return this.toolTipGenerator;
+    }
+
+    /**
+     * Sets the tool tip generator for ALL series and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param generator  the generator (<code>null</code> permitted).
+     *
+     * @see #getToolTipGenerator()
+     *
+     * @deprecated As of version 1.0.6, this override setting should not be
+     *     used.  You can use the base setting instead
+     *     ({@link #setBaseToolTipGenerator(XYToolTipGenerator)}).
+     */
+    public void setToolTipGenerator(XYToolTipGenerator generator) {
+        this.toolTipGenerator = generator;
+        fireChangeEvent();
+    }
+
+    /**
+     * Considers the current (x, y) coordinate and updates the crosshair point
+     * if it meets the criteria (usually means the (x, y) coordinate is the
+     * closest to the anchor point so far).
+     *
+     * @param crosshairState  the crosshair state (<code>null</code> permitted,
+     *                        but the method does nothing in that case).
+     * @param x  the x-value (in data space).
+     * @param y  the y-value (in data space).
+     * @param transX  the x-value translated to Java2D space.
+     * @param transY  the y-value translated to Java2D space.
+     * @param orientation  the plot orientation (<code>null</code> not
+     *                     permitted).
+     *
+     * @deprecated Use {@link #updateCrosshairValues(CrosshairState, double,
+     *         double, int, int, double, double, PlotOrientation)} -- see bug
+     *         report 1086307.
+     */
+    protected void updateCrosshairValues(CrosshairState crosshairState,
+            double x, double y, double transX, double transY,
+            PlotOrientation orientation) {
+        updateCrosshairValues(crosshairState, x, y, 0, 0, transX, transY,
+                orientation);
+    }
+
 
 }
