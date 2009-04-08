@@ -1728,7 +1728,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             url = urlster.generateURL(dataset, row, column);
         }
         CategoryItemEntity entity = new CategoryItemEntity(s, tip, url,
-                dataset, row, column);
+                dataset, dataset.getRowKey(row), dataset.getColumnKey(column));
         entities.add(entity);
     }
 
