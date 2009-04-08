@@ -42,6 +42,7 @@
  *                   Onno vd Akker;
  *                   Sergei Ivanov;
  *                   Ulrich Voigt - patch 2686040;
+ *                   Alessandro Borges - patch 1460845;
  *
  * Changes (from 28-Jun-2001)
  * --------------------------
@@ -154,6 +155,8 @@
  *               cursor for CTRL-mouse-click if panning is enabled (DG);
  * 01-Apr-2009 : Fixed panning, and added different mouse event mask for
  *               MacOSX (DG);
+ * 08-Apr-2009 : Added copy to clipboard support, based on patch 1460845
+ *               by Alessandro Borges (DG);
  *
  */
 
@@ -170,7 +173,9 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Paint;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.Transparency;
+import java.awt.datatransfer.Clipboard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -268,6 +273,13 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /** Properties action command. */
     public static final String PROPERTIES_COMMAND = "PROPERTIES";
+
+    /**
+     * Copy action command.
+     *
+     * @since 1.0.13
+     */
+    public static final String COPY_COMMAND = "COPY";
 
     /** Save action command. */
     public static final String SAVE_COMMAND = "SAVE";
@@ -548,20 +560,15 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     public ChartPanel(JFreeChart chart, boolean useBuffer) {
 
-        this(chart,
-             DEFAULT_WIDTH,
-             DEFAULT_HEIGHT,
-             DEFAULT_MINIMUM_DRAW_WIDTH,
-             DEFAULT_MINIMUM_DRAW_HEIGHT,
-             DEFAULT_MAXIMUM_DRAW_WIDTH,
-             DEFAULT_MAXIMUM_DRAW_HEIGHT,
-             useBuffer,
-             true,  // properties
-             true,  // save
-             true,  // print
-             true,  // zoom
-             true   // tooltips
-             );
+        this(chart, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_MINIMUM_DRAW_WIDTH,
+                DEFAULT_MINIMUM_DRAW_HEIGHT, DEFAULT_MAXIMUM_DRAW_WIDTH,
+                DEFAULT_MAXIMUM_DRAW_HEIGHT, useBuffer,
+                true,  // properties
+                true,  // save
+                true,  // print
+                true,  // zoom
+                true   // tooltips
+                );
 
     }
 
@@ -628,19 +635,45 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param tooltips  a flag indicating whether or not tooltips should be
      *                  enabled for the chart.
      */
-    public ChartPanel(JFreeChart chart,
-                      int width,
-                      int height,
-                      int minimumDrawWidth,
-                      int minimumDrawHeight,
-                      int maximumDrawWidth,
-                      int maximumDrawHeight,
-                      boolean useBuffer,
-                      boolean properties,
-                      boolean save,
-                      boolean print,
-                      boolean zoom,
-                      boolean tooltips) {
+    public ChartPanel(JFreeChart chart, int width, int height,
+            int minimumDrawWidth, int minimumDrawHeight, int maximumDrawWidth,
+            int maximumDrawHeight, boolean useBuffer, boolean properties,
+            boolean save, boolean print, boolean zoom, boolean tooltips) {
+
+        this(chart, width, height, minimumDrawWidth, minimumDrawHeight,
+                maximumDrawWidth, maximumDrawHeight, useBuffer, properties,
+                true, save, print, zoom, tooltips);
+    }
+
+    /**
+     * Constructs a JFreeChart panel.
+     *
+     * @param chart  the chart.
+     * @param width  the preferred width of the panel.
+     * @param height  the preferred height of the panel.
+     * @param minimumDrawWidth  the minimum drawing width.
+     * @param minimumDrawHeight  the minimum drawing height.
+     * @param maximumDrawWidth  the maximum drawing width.
+     * @param maximumDrawHeight  the maximum drawing height.
+     * @param useBuffer  a flag that indicates whether to use the off-screen
+     *                   buffer to improve performance (at the expense of
+     *                   memory).
+     * @param properties  a flag indicating whether or not the chart property
+     *                    editor should be available via the popup menu.
+     * @param save  a flag indicating whether or not save options should be
+     *              available via the popup menu.
+     * @param print  a flag indicating whether or not the print option
+     *               should be available via the popup menu.
+     * @param zoom  a flag indicating whether or not zoom options should be
+     *              added to the popup menu.
+     * @param tooltips  a flag indicating whether or not tooltips should be
+     *                  enabled for the chart.
+     */
+    public ChartPanel(JFreeChart chart, int width, int height,
+           int minimumDrawWidth, int minimumDrawHeight, int maximumDrawWidth,
+           int maximumDrawHeight, boolean useBuffer, boolean properties,
+           boolean copy, boolean save, boolean print, boolean zoom,
+           boolean tooltips) {
 
         setChart(chart);
         this.chartMouseListeners = new EventListenerList();
@@ -656,8 +689,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
         // set up popup menu...
         this.popup = null;
-        if (properties || save || print || zoom) {
-            this.popup = createPopupMenu(properties, save, print, zoom);
+        if (properties || copy || save || print || zoom) {
+            this.popup = createPopupMenu(properties, copy, save, print, zoom);
         }
 
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
@@ -1656,6 +1689,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (command.equals(PROPERTIES_COMMAND)) {
             doEditChartProperties();
         }
+        else if (command.equals(COPY_COMMAND)) {
+            doCopy();
+        }
         else if (command.equals(SAVE_COMMAND)) {
             try {
                 doSaveAs();
@@ -2598,6 +2634,19 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
+     * Copies the current chart to the system clipboard.
+     * 
+     * @since 1.0.13
+     */
+    public void doCopy() {
+        Clipboard systemClipboard
+                = Toolkit.getDefaultToolkit().getSystemClipboard();
+        ChartTransferable selection = new ChartTransferable(this.chart, 
+                getWidth(), getHeight());
+        systemClipboard.setContents(selection, null);
+    }
+
+    /**
      * Opens a file chooser and gives the user an opportunity to save the chart
      * in PNG format.
      *
@@ -2723,10 +2772,26 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @return The popup menu.
      */
+    protected JPopupMenu createPopupMenu(boolean properties, boolean save,
+            boolean print, boolean zoom) {
+        return createPopupMenu(properties, false, save, print, zoom);
+    }
+
+    /**
+     * Creates a popup menu for the panel.
+     *
+     * @param properties  include a menu item for the chart property editor.
+     * @param copy include a menu item for copying to the clipboard.
+     * @param save  include a menu item for saving the chart.
+     * @param print  include a menu item for printing the chart.
+     * @param zoom  include menu items for zooming.
+     *
+     * @return The popup menu.
+     *
+     * @since 1.0.13
+     */
     protected JPopupMenu createPopupMenu(boolean properties,
-                                         boolean save,
-                                         boolean print,
-                                         boolean zoom) {
+            boolean copy, boolean save, boolean print, boolean zoom) {
 
         JPopupMenu result = new JPopupMenu("Chart:");
         boolean separator = false;
@@ -2738,6 +2803,19 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             propertiesItem.addActionListener(this);
             result.add(propertiesItem);
             separator = true;
+        }
+
+        if (copy) {
+            if (separator) {
+                result.addSeparator();
+                separator = false;
+            }
+            JMenuItem copyItem = new JMenuItem(
+                    localizationResources.getString("Copy"));
+            copyItem.setActionCommand(COPY_COMMAND);
+            copyItem.addActionListener(this);
+            result.add(copyItem);
+            separator = !save;
         }
 
         if (save) {
