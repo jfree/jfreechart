@@ -1,3 +1,23 @@
+2009-04-09  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/ChartPanel.java: Implemented OverlayChangeListener,
+    (overlays): New field,
+    (ChartPanel): Initialise new field,
+    (addOverlay): New method,
+    (removeOverlay): New method,
+    (overlayChanged): New method,
+    (paintComponent): Draw overlays,
+    * source/org/jfree/chart/event/OverlayChangeEvent.java: New file,
+    * source/org/jfree/chart/event/OverlayChangeListener.java: New file,
+    * source/org/jfree/chart/panel/AbstractOverlay.java: New file,
+    * source/org/jfree/chart/panel/CrosshairOverlay.java: New file,
+    * source/org/jfree/chart/panel/Overlay.java: New file,
+    * source/org/jfree/chart/labels/CrosshairLabelGenerator.java: New file,
+    * source/org/jfree/chart/labels/StandardCrosshairLabelGenerator.java:
+    New file,
+    * source/org/jfree/chart/jxlayer/CrosshairLayerUI.java: Refactored class
+    locations.
+
 2009-04-08  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartTransferable.java : New file,

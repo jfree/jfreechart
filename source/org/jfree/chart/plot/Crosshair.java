@@ -38,7 +38,7 @@
  *
  */
 
-package org.jfree.chart.jxlayer;
+package org.jfree.chart.plot;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -52,15 +52,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.labels.CrosshairLabelGenerator;
+import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
- * A crosshair that will be displayed by a {@link CrosshairLayerUI}.  Note
- * that JXLayer requires JRE 1.5 or later, so this class will only be built
- * into JFreeChart if you compile with JDK 1.5 or later.
+ * A crosshair for display on a plot.
  *
  * @since 1.0.13
  */
@@ -164,8 +164,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         this.paint = paint;
         this.stroke = stroke;
         this.labelVisible = false;
-        this.labelGenerator = new DefaultCrosshairLabelGenerator();
-        this.labelAnchor = RectangleAnchor.TOP_RIGHT;
+        this.labelGenerator = new StandardCrosshairLabelGenerator();
+        this.labelAnchor = RectangleAnchor.BOTTOM_LEFT;
         this.labelXOffset = 3.0;
         this.labelYOffset = 3.0;
         this.labelFont = new Font("Tahoma", Font.PLAIN, 12);
@@ -668,6 +668,5 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         this.labelOutlinePaint = SerialUtilities.readPaint(stream);
         this.pcs = new PropertyChangeSupport(this);
     }
-
 
 }

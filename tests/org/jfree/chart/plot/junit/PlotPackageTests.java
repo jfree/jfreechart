@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * PlotPackageTests.java
  * ---------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@
  * 19-Aug-2005 : Added CategoryMarkerTests (DG);
  * 05-Sep-2006 : Added MarkerTests (DG);
  * 21-Nov-2007 : Added PieLabelRecordTests (DG);
+ * 09-Apr-2009 : Added CrosshairTests (DG);
  *
  */
 
@@ -74,6 +75,7 @@ public class PlotPackageTests extends TestCase {
         suite.addTestSuite(CombinedRangeXYPlotTests.class);
         suite.addTestSuite(CompassPlotTests.class);
         suite.addTestSuite(ContourPlotTests.class);
+        suite.addTestSuite(CrosshairTests.class);
         suite.addTestSuite(DefaultDrawingSupplierTests.class);
         suite.addTestSuite(FastScatterPlotTests.class);
         suite.addTestSuite(IntervalMarkerTests.class);
