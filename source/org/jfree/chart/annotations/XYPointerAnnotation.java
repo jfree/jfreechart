@@ -385,14 +385,14 @@ public class XYPointerAnnotation extends XYTextAnnotation
         double arrowBaseY = endY + Math.sin(this.angle) * this.arrowLength;
 
         double arrowLeftX = arrowBaseX
-            + Math.cos(this.angle + Math.PI / 2.0) * this.arrowWidth;
+                + Math.cos(this.angle + Math.PI / 2.0) * this.arrowWidth;
         double arrowLeftY = arrowBaseY
-            + Math.sin(this.angle + Math.PI / 2.0) * this.arrowWidth;
+                + Math.sin(this.angle + Math.PI / 2.0) * this.arrowWidth;
 
         double arrowRightX = arrowBaseX
-            - Math.cos(this.angle + Math.PI / 2.0) * this.arrowWidth;
+                - Math.cos(this.angle + Math.PI / 2.0) * this.arrowWidth;
         double arrowRightY = arrowBaseY
-            - Math.sin(this.angle + Math.PI / 2.0) * this.arrowWidth;
+                - Math.sin(this.angle + Math.PI / 2.0) * this.arrowWidth;
 
         GeneralPath arrow = new GeneralPath();
         arrow.moveTo((float) endX, (float) endY);
@@ -421,7 +421,8 @@ public class XYPointerAnnotation extends XYTextAnnotation
         }
         g2.setPaint(getPaint());
         TextUtilities.drawRotatedString(getText(), g2, (float) labelX,
-                (float) labelY, getTextAnchor(), getRotationAngle(), getRotationAnchor());
+                (float) labelY, getTextAnchor(), getRotationAngle(),
+                getRotationAnchor());
         if (isOutlineVisible()) {
             g2.setStroke(getOutlineStroke());
             g2.setPaint(getOutlinePaint());
