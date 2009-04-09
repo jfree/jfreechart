@@ -40,6 +40,7 @@
 
 package org.jfree.chart.jxlayer;
 
+import org.jfree.chart.plot.Crosshair;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Line2D;

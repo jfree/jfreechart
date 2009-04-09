@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
- * -----------------------------------
- * DefaultCrosshairLabelGenerator.java
- * -----------------------------------
+ * ------------
+ * Overlay.java
+ * ------------
  * (C) Copyright 2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -34,60 +34,44 @@
  *
  * Changes:
  * --------
- * 13-Feb-2009 : Version 1 (DG);
+ * 09-Apr-2009 : Version 1 (DG);
  *
  */
+package org.jfree.chart.panel;
 
-package org.jfree.chart.jxlayer;
-
-import java.io.Serializable;
+import java.awt.Graphics2D;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.event.OverlayChangeListener;
 
 /**
- * A default label generator.
+ * Defines the interface for an overlay that can be added to a
+ * {@link ChartPanel}.
  *
  * @since 1.0.13
  */
-public class DefaultCrosshairLabelGenerator implements CrosshairLabelGenerator,
-        Serializable {
-
-    // TODO : add a number formatter and a template string
-    //        and implement equals, cloning and serialization
-    /**
-     * Creates a new instance.
-     */
-    public DefaultCrosshairLabelGenerator() {
-        super();
-    }
+public interface Overlay {
 
     /**
-     * Returns a string that can be used as the label for a crosshair.
+     * Paints the crosshairs in the layer.
      *
-     * @param crosshair  the crosshair (<code>null</code> not permitted).
-     *
-     * @return The label (possibly <code>null</code>).
+     * @param g2  the graphics target.
+     * @param chartPanel  the chart panel.
+     * @param dataArea  the data area.
      */
-    public String generateLabel(Crosshair crosshair) {
-        return Double.toString(crosshair.getValue());
-    }
+    public void paintOverlay(Graphics2D g2, ChartPanel chartPanel);
 
     /**
-     * Tests this generator for equality with an arbitrary object.
+     * Registers a change listener with the overlay.
      * 
-     * @param obj  the object (<code>null</code> permitted).
-     * 
-     * @return A boolean.
+     * @param listener  the listener.
      */
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (!(obj instanceof DefaultCrosshairLabelGenerator)) {
-            return false;
-        }
-        return true;
-    }
+    public void addChangeListener(OverlayChangeListener listener);
 
-    public int hashCode() {
-        return 7;
-    }
+    /**
+     * Deregisters a listener from the overlay.
+     * 
+     * @param listener  the listener.
+     */
+    public void removeChangeListener(OverlayChangeListener listener);
+
 }

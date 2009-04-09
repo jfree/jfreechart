@@ -38,7 +38,9 @@
  *
  */
 
-package org.jfree.chart.jxlayer;
+package org.jfree.chart.labels;
+
+import org.jfree.chart.plot.Crosshair;
 
 /**
  * A label generator for crosshairs.

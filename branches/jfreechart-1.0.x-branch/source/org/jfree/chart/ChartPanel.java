@@ -157,6 +157,7 @@
  *               MacOSX (DG);
  * 08-Apr-2009 : Added copy to clipboard support, based on patch 1460845
  *               by Alessandro Borges (DG);
+ * 09-Apr-2009 : Added overlay support (DG);
  *
  */
 
@@ -199,6 +200,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.EventListener;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
@@ -219,6 +222,9 @@ import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.event.ChartProgressEvent;
 import org.jfree.chart.event.ChartProgressListener;
+import org.jfree.chart.panel.Overlay;
+import org.jfree.chart.event.OverlayChangeEvent;
+import org.jfree.chart.event.OverlayChangeListener;
 import org.jfree.chart.plot.Pannable;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -237,7 +243,7 @@ import org.jfree.ui.ExtensionFileFilter;
  */
 public class ChartPanel extends JPanel implements ChartChangeListener,
         ChartProgressListener, ActionListener, MouseListener,
-        MouseMotionListener, Printable, Serializable {
+        MouseMotionListener, OverlayChangeListener, Printable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 6046366297214274674L;
@@ -518,6 +524,13 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private int panMask = InputEvent.CTRL_MASK;
 
     /**
+     * A list of overlays for the panel.
+     *
+     * @since 1.0.13
+     */
+    private List overlays;
+
+    /**
      * Constructs a panel that displays the specified chart.
      *
      * @param chart  the chart.
@@ -720,6 +733,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (osName.startsWith("mac os x")) {
             this.panMask = InputEvent.ALT_MASK;
         }
+
+        this.overlays = new java.util.ArrayList();
     }
 
     /**
@@ -1371,6 +1386,51 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
+     * Add an overlay to the panel.
+     *
+     * @param overlay  the overlay (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    public void addOverlay(Overlay overlay) {
+        if (overlay == null) {
+            throw new IllegalArgumentException("Null 'overlay' argument.");
+        }
+        this.overlays.add(overlay);
+        overlay.addChangeListener(this);
+        repaint();
+    }
+
+    /**
+     * Removes an overlay from the panel.
+     *
+     * @param overlay  the overlay to remove (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    public void removeOverlay(Overlay overlay) {
+        if (overlay == null) {
+            throw new IllegalArgumentException("Null 'overlay' argument.");
+        }
+        boolean removed = this.overlays.remove(overlay);
+        if (removed) {
+            overlay.removeChangeListener(this);
+            repaint();
+        }
+    }
+
+    /**
+     * Handles a change to an overlay by repainting the panel.
+     *
+     * @param event  the event.
+     *
+     * @since 1.0.13
+     */
+    public void overlayChanged(OverlayChangeEvent event) {
+        repaint();
+    }
+
+    /**
      * Switches the display of tooltips for the panel on or off.  Note that
      * tooltips can only be displayed if the chart has been configured to
      * generate tooltip items.
@@ -1628,6 +1688,12 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             this.chart.draw(g2, chartArea, this.anchor, this.info);
             g2.setTransform(saved);
 
+        }
+
+        Iterator iterator = this.overlays.iterator();
+        while (iterator.hasNext()) {
+            Overlay overlay = (Overlay) iterator.next();
+            overlay.paintOverlay(g2, this);
         }
 
         // redraw the zoom rectangle (if present) - if useBuffer is false,

@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
- * ------------------------
- * JXLayerPackageTests.java
- * ------------------------
+ * --------------------------
+ * OverlayChangeListener.java
+ * --------------------------
  * (C) Copyright 2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -34,51 +34,26 @@
  *
  * Changes:
  * --------
- * 13-Feb-2009 : Version 1 (DG);
+ * 09-Apr-2009 : Version 1 (DG);
  *
  */
 
-package org.jfree.chart.jxlayer.junit;
+package org.jfree.chart.event;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.util.EventListener;
 
 /**
- * A collection of tests for the <code>org.jfree.chart.jxlayer</code> package.
- * <P>
- * These tests can be run using JUnit (http://www.junit.org).
+ * A listener for changes to an {@link Overlay}.
+ *
+ * @since 1.0.13
  */
-public class JXLayerPackageTests extends TestCase {
+public interface OverlayChangeListener extends EventListener {
 
     /**
-     * Returns a test suite to the JUnit test runner.
+     * This method is called to notify a listener of a change event.
      *
-     * @return The test suite.
+     * @param event  the event.
      */
-    public static Test suite() {
-        TestSuite suite = new TestSuite("org.jfree.chart.jxlayer");
-        suite.addTestSuite(CrosshairTests.class);
-        return suite;
-    }
-
-    /**
-     * Constructs the test suite.
-     *
-     * @param name  the suite name.
-     */
-    public JXLayerPackageTests(String name) {
-        super(name);
-    }
-
-    /**
-     * Runs the test suite using JUnit's text-based runner.
-     *
-     * @param args  ignored.
-     */
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
+    public void overlayChanged(OverlayChangeEvent event);
 
 }
-
