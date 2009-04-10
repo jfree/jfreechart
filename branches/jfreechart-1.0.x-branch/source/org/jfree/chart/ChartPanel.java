@@ -158,6 +158,7 @@
  * 08-Apr-2009 : Added copy to clipboard support, based on patch 1460845
  *               by Alessandro Borges (DG);
  * 09-Apr-2009 : Added overlay support (DG);
+ * 10-Apr-2009 : Set chartBuffer background to match ChartPanel (DG);
  *
  */
 
@@ -174,6 +175,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Paint;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.datatransfer.Clipboard;
@@ -673,6 +675,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *                   memory).
      * @param properties  a flag indicating whether or not the chart property
      *                    editor should be available via the popup menu.
+     * @param copy  a flag indicating whether or not a copy option should be
+     *              available via the popup menu.
      * @param save  a flag indicating whether or not save options should be
      *              available via the popup menu.
      * @param print  a flag indicating whether or not the print option
@@ -681,6 +685,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *              added to the popup menu.
      * @param tooltips  a flag indicating whether or not tooltips should be
      *                  enabled for the chart.
+     *
+     * @since 1.0.13
      */
     public ChartPanel(JFreeChart chart, int width, int height,
            int minimumDrawWidth, int minimumDrawHeight, int maximumDrawWidth,
@@ -1622,10 +1628,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         // are we using the chart buffer?
         if (this.useBuffer) {
 
-            // if buffer is being refreshed, it needs clearing unless it is
-            // new - use the following flag to track this...
-            boolean clearBuffer = true;
-
             // do we need to resize the buffer?
             if ((this.chartBuffer == null)
                     || (this.chartBufferWidth != available.getWidth())
@@ -1637,7 +1639,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                         this.chartBufferWidth, this.chartBufferHeight,
                         Transparency.TRANSLUCENT);
                 this.refreshBuffer = true;
-                clearBuffer = false;  // buffer is new, no clearing required
             }
 
             // do we need to redraw the buffer?
@@ -1650,10 +1651,10 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
                 Graphics2D bufferG2 = (Graphics2D)
                         this.chartBuffer.getGraphics();
-                if (clearBuffer) {
-                    bufferG2.clearRect(0, 0, this.chartBufferWidth,
-                            this.chartBufferHeight);
-                }
+                Rectangle r = new Rectangle(0, 0, this.chartBufferWidth,
+                        this.chartBufferHeight);
+                bufferG2.setPaint(getBackground());
+                bufferG2.fill(r);
                 if (scale) {
                     AffineTransform saved = bufferG2.getTransform();
                     AffineTransform st = AffineTransform.getScaleInstance(
