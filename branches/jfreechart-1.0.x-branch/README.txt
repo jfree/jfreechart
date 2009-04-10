@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.13  *
 ********************************
 
-? March 2009
+10 April 2009
 
 (C)opyright 2000-2009, by Object Refinery Limited and Contributors.
 
@@ -64,13 +64,13 @@ JFreeChart has the following dependencies:
 
 (a)  JDK 1.3.1 or higher - JFreeChart requires the Java2D and Collections
 APIs, so it definitely won't work with JDK 1.1 (with a small amount of effort
-you can get it to compile and run with JDK 1.2).  If you are using JFreeChart 
-to create applets, this means that you cannot rely on the JVM integrated with
-Microsoft's Internet Explorer - your users will need to have the Java 2
-plug-in installed.  Most other browsers (e.g. Firefox, Mozilla, Netscape, 
-Konqueror) support JRE 1.4, 1.5 or 1.6.
+you can probably get it to compile and run with JDK 1.2).  If you are using
+JFreeChart to create applets, this means that you cannot rely on the JVM
+integrated with Microsoft's Internet Explorer - your users will need to have
+the Java 2 plug-in installed.  Most other browsers (e.g. Firefox, Mozilla,
+Netscape, Konqueror) support JRE 1.4, 1.5 or 1.6.
 
-(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.15) 
+(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.16)
 is included in the JFreeChart distribution.  You can obtain the complete
 source code for JCommon from:
 
@@ -119,9 +119,9 @@ We read all questions posted in the forum, and respond to as many as we can
 in the time available.  Unfortunately, there are too many questions to answer
 them all.
 
-Previously we offered commercial support options, but this has been 
-discontinued as there wasn't sufficient uptake to meet the cost of 
-providing this service.
+Priority support is offered (in a separate forum at www.object-refinery.com) to
+companies and institutions that have purchased a site licence for the
+JFreeChart Developer Guide.
 
 --------------------
 6.  ANT BUILD SCRIPT
@@ -133,8 +133,9 @@ For more information about Ant:
 
     http://ant.apache.org/
 
-Please note that you will need to obtain the servlet.jar file (see the
-DEPENDENCIES section above) before running the Ant script.
+If you want to rebuild the JFreeChart jar file, we highly recommend that you
+use this script as it includes certain files (for example, .properties files)
+that you MUST have in the jar file for JFreeChart to function correctly.
 
 ------------------------
 7.  THE DEMO APPLICATION
@@ -160,9 +161,6 @@ and is available to download from:
 JFreeChart has some known limitations that will hopefully be addressed in 
 the future:
 
-    - with the XYPlot class, when the bounds of the range axis are calculated
-      automatically, all of the data is used, not just the subset that is 
-      visible on the chart;
     - some renderers do not respect the series visibility flags yet;
     - the chart property editors (accessible by right-clicking on the chart
       panel) are horribly out of date and probably shouldn't be used;
@@ -173,7 +171,10 @@ the future:
       problematic;
     - there is no support for writing charts to JPEG format on JDK 1.3.  JPEG 
       is not a good format for charts in any case, and it is usually better to 
-      use PNG format.
+      use PNG format;
+    - copying charts to the clipboard (supported by the ChartPanel class) will
+      not work if you are running on a very old version of the Java runtime
+      (version 1.3.1).
     
 If there are other items that you think should be listed here,
 please post a bug report.
@@ -183,8 +184,10 @@ please post a bug report.
 --------------
 A list of changes in recent versions:
 
-1.0.13 : (??-Mar-2009)
-        - see the NEWS and ChangeLog files for details.
+1.0.13 : (10-Apr-2009)
+        - there are some significant new features in this release, as well
+          as performance enhancements and bug fixes - see the NEWS and
+          ChangeLog files for details.
 
 1.0.12 : (31-Dec-2008)
         - added support for minor tick marks, mapping datasets to more than
