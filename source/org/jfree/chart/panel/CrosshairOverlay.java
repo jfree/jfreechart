@@ -64,6 +64,7 @@ import org.jfree.text.TextUtilities;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.TextAnchor;
+import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -184,7 +185,6 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      *
      * @param g2  the graphics target.
      * @param chartPanel  the chart panel.
-     * @param dataArea  the data area.
      */
     public void paintOverlay(Graphics2D g2, ChartPanel chartPanel) {
         Shape savedClip = g2.getClip();
@@ -543,7 +543,10 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      *     with the cloning.
      */
     public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+        CrosshairOverlay clone = (CrosshairOverlay) super.clone();
+        clone.xCrosshairs = (List) ObjectUtilities.deepClone(this.xCrosshairs);
+        clone.yCrosshairs = (List) ObjectUtilities.deepClone(this.yCrosshairs);
+        return clone;
     }
 
 }
