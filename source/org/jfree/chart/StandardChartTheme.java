@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 14-Aug-2008 : Version 1 (DG);
+ * 10-Apr-2009 : Added getter/setter for smallFont (DG);
  *
  */
 
@@ -370,6 +371,9 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @see #getLargeFont()
      */
     public void setLargeFont(Font font) {
+        if (font == null) {
+            throw new IllegalArgumentException("Null 'font' argument.");
+        }
         this.largeFont = font;
     }
 
@@ -392,7 +396,39 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @see #getRegularFont()
      */
     public void setRegularFont(Font font) {
+        if (font == null) {
+            throw new IllegalArgumentException("Null 'font' argument.");
+        }
         this.regularFont = font;
+    }
+
+    /**
+     * Returns the small font.
+     *
+     * @return The small font (never <code>null</code>).
+     *
+     * @see #setSmallFont(Font)
+     *
+     * @since 1.0.13
+     */
+    public Font getSmallFont() {
+        return this.smallFont;
+    }
+
+    /**
+     * Sets the small font for this theme.
+     *
+     * @param font  the font (<code>null</code> not permitted).
+     *
+     * @see #getSmallFont()
+     *
+     * @since 1.0.13
+     */
+    public void setSmallFont(Font font) {
+        if (font == null) {
+            throw new IllegalArgumentException("Null 'font' argument.");
+        }
+        this.smallFont = font;
     }
 
     /**
