@@ -24,17 +24,15 @@
         <property name="jfreechart.version" value="1.0.13" />
         <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
-        <property name="jcommon.version" value="1.0.15" />
+        <property name="jcommon.version" value="1.0.16" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="itext.name" value="iText" />
-        <property name="itext.version" value="2.1.3" />
+        <property name="itext.version" value="2.1.5" />
         <property name="itext.jar" value="${basedir}/lib/${itext.name}-${itext.version}.jar"/>
-        <property name="jxlayer.jar" value="${basedir}/lib/jxlayer.jar"/>
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
         <property name="gnujaxp.jar" value="${basedir}/lib/gnujaxp.jar"/>
         <property name="junit.jar" value="${basedir}/lib/junit.jar"/>
-        <available classname="javax.imageio.ImageIO" property="ImageIO.present"/>
         <available classname="javax.imageio.ImageIO" property="JDK1.4+"/>
         <available classname="java.lang.annotation.Annotation" property="JDK1.5+"/>
         <property name="src.version" value="1.3"/>
@@ -45,7 +43,6 @@
             <fileset dir="${basedir}/lib/">
                 <include name="${jcommon.name}-${jcommon.version}.jar"/>
                 <include name="servlet.jar"/>
-                <include name="jxlayer.jar" if="JDK1.5+"/>
                 <include name="gnujaxp.jar" unless="JDK1.4+"/>
             </fileset>
         </path>
@@ -69,10 +66,9 @@
             <classpath refid="build.classpath" />
             <include name="org/jfree/**"/>
             <exclude name="org/jfree/chart/xml/**"/>
-            <exclude name="org/jfree/chart/encoders/SunPNGEncoderAdapter.java" unless="ImageIO.present"/>
-            <exclude name="org/jfree/chart/encoders/SunJPEGEncoderAdapter.java" unless="ImageIO.present"/>
+            <exclude name="org/jfree/chart/encoders/SunPNGEncoderAdapter.java" unless="JDK1.4+"/>
+            <exclude name="org/jfree/chart/encoders/SunJPEGEncoderAdapter.java" unless="JDK1.4+"/>
             <exclude name="org/jfree/chart/MouseWheelHandler.java" unless="JDK1.4+"/>
-            <exclude name="org/jfree/chart/jxlayer/**" unless="JDK1.5+"/>
         </javac>
 
         <!-- copy across gorilla.jpg -->
@@ -116,7 +112,6 @@
         <path id="build.experimental.classpath">
             <pathelement location="${jcommon.jar}"/>
             <pathelement location="${servlet.jar}"/>
-            <pathelement location="${gnujaxp.jar}"/>
             <pathelement location="${basedir}/${jfreechart.name}-${jfreechart.version}.jar"/>
         </path>
 
@@ -157,7 +152,6 @@
             <classpath refid="build.classpath" />
             <packageset dir="${basedir}/source" defaultexcludes="yes">
                 <include name="org/jfree/**"/>
-                <exclude name="org/jfree/chart/jxlayer/**" unless="JDK1.5+"/>
                 <exclude name="org/jfree/chart/xml/**"/>
             </packageset>
         </javadoc>
@@ -239,7 +233,7 @@
         <!-- copy across lib files -->
         <copy file="${jcommon.jar}" tofile="${basedir}/distribution/lib/${jcommon.name}-${jcommon.version}.jar" />
         <copy file="${basedir}/lib/swtgraphics2d.jar" tofile="${basedir}/distribution/lib/swtgraphics2d.jar" failonerror="false" />
-        <copy file="${basedir}/lib/jfreechart-${jfreechart.version}-swt.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-swt.jar" />
+        <copy file="${basedir}/lib/jfreechart-${jfreechart.version}-swt.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-swt.jar"  failonerror="false" />
         <copy file="${servlet.jar}" tofile="${basedir}/distribution/lib/servlet.jar" />
         <copy file="${gnujaxp.jar}" tofile="${basedir}/distribution/lib/gnujaxp.jar" />
         <copy file="${junit.jar}" tofile="${basedir}/distribution/lib/junit.jar" />
