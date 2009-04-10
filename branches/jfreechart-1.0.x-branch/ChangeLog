@@ -1,5 +1,11 @@
 2009-04-09  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/StandardChartTheme.java
+    (getSmallFont): New method,
+    (setSmallFont): Likewise.
+
+2009-04-09  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/ChartPanel.java: Implemented OverlayChangeListener,
     (overlays): New field,
     (ChartPanel): Initialise new field,
