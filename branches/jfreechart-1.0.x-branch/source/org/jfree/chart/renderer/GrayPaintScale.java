@@ -165,6 +165,8 @@ public class GrayPaintScale
         v = Math.min(v, this.upperBound);
         int g = (int) ((v - this.lowerBound) / (this.upperBound
                 - this.lowerBound) * 255.0);
+        // FIXME:  it probably makes sense to allocate an array of 256 Colors
+        // and lazily populate this array...
         return new Color(g, g, g, this.alpha);
     }
 
