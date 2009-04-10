@@ -1,3 +1,9 @@
+2009-04-10  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 2740447:
+    * source/org/jfree/chart/ChartPanel.java
+    (paintComponent): Set chartBuffer background to match panel.
+
 2009-04-09  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/StandardChartTheme.java
