@@ -1,27 +1,40 @@
 JFreeChart 1.0.13
 -----------------
-?? ??? 2009
+10 April 2009
 
 This release contains:
 
-- added support for panning and mouse-wheel zooming in the ChartPanel class;
+- updates to the ChartPanel class to support copying charts to the clipboard, 
+  panning and mouse-wheel zooming, and an overlay mechanism that supports
+  crosshairs;
 - enhancements to the auto-range calculation for axes, providing the ability
   to use subranges only and also to skip hidden series;
 - updates for many of the CategoryItemRenderer implementations to ensure that
   they respect the 'seriesVisible' flags;
 - an improvement to the TimeSeries class so that it is no longer necessary to
   specify the time period type in the constructor;
-- some important fixes in the LogAxis class;
-- StatisticalLineAndShapeRenderer has a new 'errorIndicatorStroke' field;
-- XYErrorRenderer has new 'errorIndicatorStroke' field;
+- a new SamplingXYLineRenderer for improving the performance of time series
+  charts with large datasets;
+- the XYSeries/XYSeriesCollection classes now cache the minimum and maximum
+  data values to improve the performance of charts with large datasets;
+- entities are now created for the chart, data area and axes, allowing mouse
+  clicks to be detected for these regions;
+- added a bar alignment factor to the XYBarRenderer class;
+- a new 'errorIndicatorStroke' field for the StatisticalLineAndShapeRenderer 
+  and XYErrorRenderer classes;
+- added a new HeatMapDataset interface, DefaultHeatMapDataset implementation,
+  and a HeatMapUtilities class to make it easier to create heat map charts;
+- there is a new flag to allow an XYDataImageAnnotation to be included in the
+  automatic range calculation for the axes;
 - additional attributes in the XYTextAnnotation class;
+- added a sampleFunction2DToSeries() method to the DatasetUtilities class;
 - some changes to the ChartPanel class that help to work around a regression in
-  JRE 1.6.0_10.  Regarding this final point:
+  JRE 1.6.0_10 relating to drawing in XOR mode.  Regarding this final point:
      * the default value for the useBuffer flag has changed to true, which means
        that all charts will, by default, be rendered into an off-screen image
        before being displayed in the ChartPanel;
-     * the zoom rectangle is drawn using XOR *only* when the useBuffer flag has
-       been set to false.
+     * the zoom rectangle is drawn using XOR mode *only* when the useBuffer
+       flag has been set to false.
   For most usage, this should improve performance (but at the cost of using more
   memory for each ChartPanel used in your application);
 
@@ -36,8 +49,12 @@ Bug Fixes:
 2490803 : PeriodAxis.setRange() method doesn't take into account that the axis
           displays whole periods;
 
-In addition, a bug in the SlidingCategoryDataset class has been fixed, and the
-correct outline paint is used by GradientXYBarPainter.
+In addition, a bug in the SlidingCategoryDataset class has been fixed, the
+correct outline paint is now used by GradientXYBarPainter, a new method
+has been added to the ImageMapUtilities class to escape special characters
+in Javascript strings to avoid problems with the OverLIB and DynamicDrive
+tooltips, and there are some important fixes in the LogAxis class.
+
 
 JFreeChart 1.0.12
 -----------------
