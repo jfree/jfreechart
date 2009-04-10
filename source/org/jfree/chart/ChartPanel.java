@@ -1361,7 +1361,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     Class c2 = ChartPanel.class;
                     Method m = c2.getMethod("removeMouseWheelListener",
                             new Class[] {mwl});
-                    m.invoke(this, this.mouseWheelHandler);
+                    m.invoke(this, new Object[] {this.mouseWheelHandler});
                 }
                 catch (ClassNotFoundException e) {
                     // must be running on JRE 1.3.1, so just ignore this
