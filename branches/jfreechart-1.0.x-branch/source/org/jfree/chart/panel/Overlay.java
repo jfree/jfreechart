@@ -56,7 +56,6 @@ public interface Overlay {
      *
      * @param g2  the graphics target.
      * @param chartPanel  the chart panel.
-     * @param dataArea  the data area.
      */
     public void paintOverlay(Graphics2D g2, ChartPanel chartPanel);
 
