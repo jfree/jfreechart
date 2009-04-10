@@ -2,29 +2,42 @@ JFreeChart 1.0.13
 -----------------
 ?? ??? 2009
 
-This release contains enhancements to many of the CategoryItemRenderer
-implementations to ensure that they respect the 'seriesVisible' flags, some
-important fixes in the LogAxis class, an improvement to the TimeSeries class
-so that it is no longer necessary to specify the time period type in the
-constructor, plus some changes to the ChartPanel class that help to
-work around a regression in JRE 1.6.0_10.  Regarding this final point:
+This release contains:
 
-- the default value for the useBuffer flag has changed to true, which means
-  that all charts will, by default, be rendered into an off-screen image
-  before being displayed in the ChartPanel;
-- the zoom rectangle is drawn using XOR *only* when the useBuffer flag has
-  been set to false.
-
-For most usage, this should improve performance (but at the cost of using more
-memory for each ChartPanel used in your application).
+- added support for panning and mouse-wheel zooming in the ChartPanel class;
+- enhancements to the auto-range calculation for axes, providing the ability
+  to use subranges only and also to skip hidden series;
+- updates for many of the CategoryItemRenderer implementations to ensure that
+  they respect the 'seriesVisible' flags;
+- an improvement to the TimeSeries class so that it is no longer necessary to
+  specify the time period type in the constructor;
+- some important fixes in the LogAxis class;
+- StatisticalLineAndShapeRenderer has a new 'errorIndicatorStroke' field;
+- XYErrorRenderer has new 'errorIndicatorStroke' field;
+- additional attributes in the XYTextAnnotation class;
+- some changes to the ChartPanel class that help to work around a regression in
+  JRE 1.6.0_10.  Regarding this final point:
+     * the default value for the useBuffer flag has changed to true, which means
+       that all charts will, by default, be rendered into an off-screen image
+       before being displayed in the ChartPanel;
+     * the zoom rectangle is drawn using XOR *only* when the useBuffer flag has
+       been set to false.
+  For most usage, this should improve performance (but at the cost of using more
+  memory for each ChartPanel used in your application);
 
 Bug Fixes:
 
+2690293 : Problem with Javascript escape characters;
 2617557 : StandardDialScale ignored tickLabelPaint;
+2612649 : Stroke selection in plot property editor;
+2583891 : SWTGraphics2D.fillPolygon() not implemented;
 2564636 : Month constructor ignores Locale;
+2502355 : ChartPanel sending multiple events;
 2490803 : PeriodAxis.setRange() method doesn't take into account that the axis
           displays whole periods;
-          
+
+In addition, a bug in the SlidingCategoryDataset class has been fixed, and the
+correct outline paint is used by GradientXYBarPainter.
 
 JFreeChart 1.0.12
 -----------------
