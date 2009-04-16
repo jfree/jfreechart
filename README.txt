@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.13  *
 ********************************
 
-10 April 2009
+17 April 2009
 
 (C)opyright 2000-2009, by Object Refinery Limited and Contributors.
 
@@ -184,7 +184,7 @@ please post a bug report.
 --------------
 A list of changes in recent versions:
 
-1.0.13 : (10-Apr-2009)
+1.0.13 : (17-Apr-2009)
         - there are some significant new features in this release, as well
           as performance enhancements and bug fixes - see the NEWS and
           ChangeLog files for details.
