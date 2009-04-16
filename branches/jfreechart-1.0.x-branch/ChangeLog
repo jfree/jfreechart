@@ -1,3 +1,16 @@
+2009-04-16  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/StandardChartTheme.java
+    (baselinePaint): New field,
+    (createDarknessTheme): Modify baselinePaint,
+    (StandardChartTheme): Initialise baselinePaint,
+    (getBaselinePaint): New method,
+    (setBaselinePaint): Likewise,
+    (applyToCategoryPlot): Apply baselinePaint,
+    (applyToXYPlot): Likewise,
+    (writeObject): Updated for new field,
+    (readObject): Likewise.
+
 2009-04-10  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 2740447:

@@ -174,6 +174,13 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /** The range grid line paint. */
     private transient Paint rangeGridlinePaint;
 
+    /** 
+     * The baseline paint (used for domain and range zero baselines)
+     * 
+     * @since 1.0.13
+     */
+    private transient Paint baselinePaint;
+
     /** The crosshair paint. */
     private transient Paint crosshairPaint;
 
@@ -247,6 +254,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         theme.chartBackgroundPaint = Color.black;
         theme.plotBackgroundPaint = Color.black;
         theme.plotOutlinePaint = Color.yellow;
+        theme.baselinePaint = Color.white;
         theme.crosshairPaint = Color.red;
         theme.labelLinkPaint = Color.lightGray;
         theme.tickLabelPaint = Color.white;
@@ -314,6 +322,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.axisOffset = new RectangleInsets(4, 4, 4, 4);
         this.domainGridlinePaint = Color.white;
         this.rangeGridlinePaint = Color.white;
+        this.baselinePaint = Color.black;
         this.crosshairPaint = Color.blue;
         this.axisLabelPaint = Color.darkGray;
         this.tickLabelPaint = Color.darkGray;
@@ -704,6 +713,31 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.rangeGridlinePaint = paint;
+    }
+
+    /**
+     * Returns the baseline paint.
+     * 
+     * @return The baseline paint.
+     * 
+     * @since 1.0.13
+     */
+    public Paint getBaselinePaint() {
+        return this.baselinePaint;
+    }
+
+    /**
+     * Sets the baseline paint.
+     *
+     * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @since 1.0.13
+     */
+    public void setBaselinePaint(Paint paint) {
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
+        this.baselinePaint = paint;
     }
 
     /**
@@ -1286,11 +1320,12 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         plot.setAxisOffset(this.axisOffset);
         plot.setDomainGridlinePaint(this.domainGridlinePaint);
         plot.setRangeGridlinePaint(this.rangeGridlinePaint);
+        plot.setRangeZeroBaselinePaint(this.baselinePaint);
 
         // process all domain axes
         int domainAxisCount = plot.getDomainAxisCount();
         for (int i = 0; i < domainAxisCount; i++) {
-            CategoryAxis axis = (CategoryAxis) plot.getDomainAxis(i);
+            CategoryAxis axis = plot.getDomainAxis(i);
             if (axis != null) {
                 applyToCategoryAxis(axis);
             }
@@ -1343,6 +1378,8 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      */
     protected void applyToXYPlot(XYPlot plot) {
         plot.setAxisOffset(this.axisOffset);
+        plot.setDomainZeroBaselinePaint(this.baselinePaint);
+        plot.setRangeZeroBaselinePaint(this.baselinePaint);
         plot.setDomainGridlinePaint(this.domainGridlinePaint);
         plot.setRangeGridlinePaint(this.rangeGridlinePaint);
         plot.setDomainCrosshairPaint(this.crosshairPaint);
@@ -1350,7 +1387,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         // process all domain axes
         int domainAxisCount = plot.getDomainAxisCount();
         for (int i = 0; i < domainAxisCount; i++) {
-            ValueAxis axis = (ValueAxis) plot.getDomainAxis(i);
+            ValueAxis axis = plot.getDomainAxis(i);
             if (axis != null) {
                 applyToValueAxis(axis);
             }
@@ -1793,6 +1830,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         SerialUtilities.writePaint(this.plotBackgroundPaint, stream);
         SerialUtilities.writePaint(this.plotOutlinePaint, stream);
         SerialUtilities.writePaint(this.labelLinkPaint, stream);
+        SerialUtilities.writePaint(this.baselinePaint, stream);
         SerialUtilities.writePaint(this.domainGridlinePaint, stream);
         SerialUtilities.writePaint(this.rangeGridlinePaint, stream);
         SerialUtilities.writePaint(this.crosshairPaint, stream);
@@ -1826,6 +1864,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.plotBackgroundPaint = SerialUtilities.readPaint(stream);
         this.plotOutlinePaint = SerialUtilities.readPaint(stream);
         this.labelLinkPaint = SerialUtilities.readPaint(stream);
+        this.baselinePaint = SerialUtilities.readPaint(stream);
         this.domainGridlinePaint = SerialUtilities.readPaint(stream);
         this.rangeGridlinePaint = SerialUtilities.readPaint(stream);
         this.crosshairPaint = SerialUtilities.readPaint(stream);
