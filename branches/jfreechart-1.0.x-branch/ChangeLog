@@ -1,5 +1,16 @@
 2009-04-16  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 2686872 by Peter Kolb:
+    * source/org/jfree/chart/title/PaintScaleLegend.java: Implemented
+    AxisChangeListener,
+    (PaintScaleLegend): Register as axis change listener,
+    (setAxis): Deregister as change listener on old axis, register as listener
+    on new axis,
+    (axisChanged): New method,
+    (draw): Check isStripOutlineVisible flag.
+
+2009-04-16  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/StandardChartTheme.java
     (baselinePaint): New field,
     (createDarknessTheme): Modify baselinePaint,
