@@ -69,8 +69,6 @@ public class AbstractOverlay {
      * @param listener  the listener (<code>null</code> not permitted).
      *
      * @see #removeChangeListener(OverlayChangeListener)
-     *
-     * @since 1.0.13
      */
     public void addChangeListener(OverlayChangeListener listener) {
         if (listener == null) {
