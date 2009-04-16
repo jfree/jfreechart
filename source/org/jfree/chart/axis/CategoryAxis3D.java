@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * CategoryAxis3D.java
  * -------------------
- * (C) Copyright 2003-2008, by Klaus Rheinwald and Contributors.
+ * (C) Copyright 2003-2009, by Klaus Rheinwald and Contributors.
  *
  * Original Author:  Klaus Rheinwald;
  * Contributor(s):   Tin Luu,
@@ -49,6 +49,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 18-Aug-2006 : Fix for bug drawing category labels, thanks to Adriaan
  *               Joubert (1277726) (DG);
+ * 16-Apr-2009 : Draw axis line and tick marks (DG);
  *
  */
 
@@ -144,8 +145,14 @@ public class CategoryAxis3D extends CategoryAxis
             adjustedDataArea.setRect(dataArea);
         }
 
+        if (isAxisLineVisible()) {
+            drawAxisLine(g2, cursor, adjustedDataArea, edge);
+        }
         // draw the category labels and axis label
         AxisState state = new AxisState(cursor);
+        if (isTickMarksVisible()) {
+            drawTickMarks(g2, cursor, adjustedDataArea, edge, state);
+        }
         state = drawCategoryLabels(g2, plotArea, adjustedDataArea, edge,
                 state, plotState);
         state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
