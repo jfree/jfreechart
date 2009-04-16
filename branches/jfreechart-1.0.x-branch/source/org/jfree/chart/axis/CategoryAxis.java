@@ -92,6 +92,7 @@
  * 14-Jan-2009 : Added new variant of getCategorySeriesMiddle() to make it
  *               simpler for renderers with hidden series (PK);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
+ * 16-Apr-2009 : Added tick mark drawing (DG);
  *
  */
 
@@ -101,6 +102,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -208,8 +210,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         this.categoryMargin = DEFAULT_CATEGORY_MARGIN;
         this.maximumCategoryLabelLines = 1;
         this.maximumCategoryLabelWidthRatio = 0.0f;
-
-        setTickMarksVisible(false);  // not supported by this axis type yet
 
         this.categoryLabelPositionOffset = 4;
         this.categoryLabelPositions = CategoryLabelPositions.STANDARD;
@@ -926,9 +926,12 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         if (isAxisLineVisible()) {
             drawAxisLine(g2, cursor, dataArea, edge);
         }
+        AxisState state = new AxisState(cursor);
+        if (isTickMarksVisible()) {
+            drawTickMarks(g2, cursor, dataArea, edge, state);
+        }
 
         // draw the category labels and axis label
-        AxisState state = new AxisState(cursor);
         state = drawCategoryLabels(g2, plotArea, dataArea, edge, state,
                 plotState);
         state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
@@ -1158,6 +1161,75 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         state.setMax(max);
         return ticks;
 
+    }
+
+    /**
+     * Draws the tick marks.
+     *
+     * @since 1.0.13
+     */
+    public void drawTickMarks(Graphics2D g2, double cursor,
+            Rectangle2D dataArea, RectangleEdge edge, AxisState state) {
+
+        Plot p = getPlot();
+        if (p == null) {
+            return;
+        }
+        CategoryPlot plot = (CategoryPlot) p;
+        double il = getTickMarkInsideLength();
+        double ol = getTickMarkOutsideLength();
+        Line2D line = new Line2D.Double();
+        List categories = plot.getCategoriesForAxis(this);
+        g2.setPaint(getTickMarkPaint());
+        g2.setStroke(getTickMarkStroke());
+        if (edge.equals(RectangleEdge.TOP)) {
+            Iterator iterator = categories.iterator();
+            while (iterator.hasNext()) {
+                Comparable key = (Comparable) iterator.next();
+                double x = getCategoryMiddle(key, categories, dataArea, edge);
+                line.setLine(x, cursor, x, cursor + il);
+                g2.draw(line);
+                line.setLine(x, cursor, x, cursor - ol);
+                g2.draw(line);
+            }
+            state.cursorUp(ol);
+        }
+        else if (edge.equals(RectangleEdge.BOTTOM)) {
+            Iterator iterator = categories.iterator();
+            while (iterator.hasNext()) {
+                Comparable key = (Comparable) iterator.next();
+                double x = getCategoryMiddle(key, categories, dataArea, edge);
+                line.setLine(x, cursor, x, cursor - il);
+                g2.draw(line);
+                line.setLine(x, cursor, x, cursor + ol);
+                g2.draw(line);
+            }
+            state.cursorDown(ol);
+        }
+        else if (edge.equals(RectangleEdge.LEFT)) {
+            Iterator iterator = categories.iterator();
+            while (iterator.hasNext()) {
+                Comparable key = (Comparable) iterator.next();
+                double y = getCategoryMiddle(key, categories, dataArea, edge);
+                line.setLine(cursor, y, cursor + il, y);
+                g2.draw(line);
+                line.setLine(cursor, y, cursor - ol, y);
+                g2.draw(line);
+            }
+            state.cursorLeft(ol);
+        }
+        else if (edge.equals(RectangleEdge.RIGHT)) {
+            Iterator iterator = categories.iterator();
+            while (iterator.hasNext()) {
+                Comparable key = (Comparable) iterator.next();
+                double y = getCategoryMiddle(key, categories, dataArea, edge);
+                line.setLine(cursor, y, cursor - il, y);
+                g2.draw(line);
+                line.setLine(cursor, y, cursor + ol, y);
+                g2.draw(line);
+            }
+            state.cursorRight(ol);
+        }
     }
 
     /**

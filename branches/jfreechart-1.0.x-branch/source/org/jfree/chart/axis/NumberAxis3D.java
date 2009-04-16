@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * NumberAxis3D.java
  * -----------------
- * (C) Copyright 2001-2008, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2001-2009, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -63,6 +63,7 @@
  * 07-Nov-2003 : Modified refreshTicks method signature (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 18-Jan-2006 : Fixed bug 1408904 (axis assumes CategoryPlot) (DG):
+ * 16-Apr-2009 : Changed axis line visibility default (DG);
  *
  */
 
@@ -103,7 +104,6 @@ public class NumberAxis3D extends NumberAxis implements Serializable {
      */
     public NumberAxis3D(String label) {
         super(label);
-        setAxisLineVisible(false);
     }
 
     /**
