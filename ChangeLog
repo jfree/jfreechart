@@ -1,5 +1,10 @@
 2009-04-16  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/title/PaintScaleLegend.java
+    (draw): Adjusted fill rectangles.
+
+2009-04-16  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/axis/CategoryAxis.java
     (CategoryAxis): Leave tick marks visible by default,
     (draw): Call drawTickMarks(),
