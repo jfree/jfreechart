@@ -92,7 +92,7 @@
         </copy>
 
         <!-- make the jar -->
-        <jar jarfile="${basedir}/${jfreechart.name}-${jfreechart.version}.jar"
+        <jar jarfile="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"
              basedir="${basedir}/build" >
         </jar>
 
@@ -112,7 +112,7 @@
         <path id="build.experimental.classpath">
             <pathelement location="${jcommon.jar}"/>
             <pathelement location="${servlet.jar}"/>
-            <pathelement location="${basedir}/${jfreechart.name}-${jfreechart.version}.jar"/>
+            <pathelement location="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
         </path>
 
         <!-- compile the source -->
@@ -128,7 +128,7 @@
         </javac>
 
         <!-- make the jar -->
-        <jar jarfile="${basedir}/${jfreechart.name}-${jfreechart.version}-experimental.jar"
+        <jar jarfile="${basedir}/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar"
              basedir="${basedir}/build" >
         </jar>
 
@@ -195,8 +195,8 @@
         <copy file="${basedir}/licence-LGPL.txt" tofile="${basedir}/distribution/licence-LGPL.txt" />
 
         <!-- copy across runtime jar file and demo jar file -->
-        <copy file="${basedir}/${jfreechart.name}-${jfreechart.version}.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}.jar" />
-        <copy file="${basedir}/${jfreechart.name}-${jfreechart.version}-experimental.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar" />
+        <copy file="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}.jar" />
+        <copy file="${basedir}/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar" />
         <copy file="${basedir}/${jfreechart.name}-${jfreechart.version}-demo.jar" tofile="${basedir}/distribution/${jfreechart.name}-${jfreechart.version}-demo.jar" failonerror="false" />
     
         <!-- copy across source files -->
@@ -309,7 +309,7 @@
     </copy>
     
     <!-- copy across runtime jar file -->
-    <copy file="${jfreechart.name}-${jfreechart.version}.jar" tofile="distribution/${jfreechart.name}-${jfreechart.version}.jar"/>
+    <copy file="lib/${jfreechart.name}-${jfreechart.version}.jar" tofile="distribution/${jfreechart.name}-${jfreechart.version}.jar"/>
 
     <!-- make the jar -->
     <jar jarfile="${jfreechart-bundle-file}" basedir="distribution"/>
