@@ -4,15 +4,14 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.0.12" />
+        <property name="jfreechart.version" value="1.0.13" />
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.16" />
         <property name="builddir" value="${basedir}/build" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="jfreechart.jar" value="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
     	<!-- Edit the next line to link to the swt library you want, see README file in the swt folder -->
-        <property name="swt.jar" value="${basedir}/libswt/swt-M20070212-1330-win32-win32-x86/swt.jar"/>
-        <available classname="javax.imageio.ImageIO" property="ImageIO.present"/>
+        <property name="swt.jar" value="/home/dgilbert/swt-3.4-gtk-linux-x86/swt.jar"/>
         <path id="build.classpath">
             <pathelement location="${jcommon.jar}"/>
             <pathelement location="${jfreechart.jar}"/>
