@@ -55,7 +55,7 @@ has been added to the ImageMapUtilities class to escape special characters
 in Javascript strings to avoid problems with the OverLIB and DynamicDrive
 tooltips, and there are some important fixes in the LogAxis class.
 
-This release passes 2110 JUnit test (0 failures) on JRE 1.6.0_12.
+This release passes 2110 JUnit tests (0 failures) on JRE 1.6.0_12.
 
 
 JFreeChart 1.0.12
