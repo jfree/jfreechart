@@ -556,7 +556,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
                             RectangleEdge.TOP);
                     double vv1 = this.axis.valueToJava2D(v + increment, target,
                             RectangleEdge.TOP);
-                    double ww = Math.abs(vv1 - vv0);
+                    double ww = Math.abs(vv1 - vv0) + 1.0;
                     r.setRect(Math.min(vv0, vv1), target.getMaxY()
                             - this.stripWidth, ww, this.stripWidth);
                     g2.setPaint(p);
@@ -581,7 +581,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
                             RectangleEdge.BOTTOM);
                     double vv1 = this.axis.valueToJava2D(v + increment, target,
                             RectangleEdge.BOTTOM);
-                    double ww = Math.abs(vv1 - vv0);
+                    double ww = Math.abs(vv1 - vv0) + 1.0;
                     r.setRect(Math.min(vv0, vv1), target.getMinY(), ww,
                             this.stripWidth);
                     g2.setPaint(p);
@@ -610,7 +610,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
                             RectangleEdge.LEFT);
                     double vv1 = this.axis.valueToJava2D(v + increment, target,
                             RectangleEdge.LEFT);
-                    double hh = Math.abs(vv1 - vv0);
+                    double hh = Math.abs(vv1 - vv0) + 1.0;
                     r.setRect(target.getMaxX() - this.stripWidth,
                             Math.min(vv0, vv1), this.stripWidth, hh);
                     g2.setPaint(p);
@@ -635,7 +635,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
                             RectangleEdge.LEFT);
                     double vv1 = this.axis.valueToJava2D(v + increment, target,
                             RectangleEdge.LEFT);
-                    double hh = Math.abs(vv1 - vv0);
+                    double hh = Math.abs(vv1 - vv0) + 1.0;
                     r.setRect(target.getMinX(), Math.min(vv0, vv1),
                             this.stripWidth, hh);
                     g2.setPaint(p);
