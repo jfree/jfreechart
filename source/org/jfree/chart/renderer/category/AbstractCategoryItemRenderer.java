@@ -614,6 +614,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * items from the specified dataset.
      *
      * @param dataset  the dataset (<code>null</code> permitted).
+     * @param includeInterval  include the y-interval if the dataset has one.
      *
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
