@@ -1046,7 +1046,13 @@ public final class DatasetUtilities {
                 int itemCount = dataset.getColumnCount();
                 for (int item = 0; item < itemCount; item++) {
                     Number lvalue = bx.getMinRegularValue(series, item);
+                    if (lvalue == null) {
+                        lvalue = bx.getValue(series, item);
+                    }
                     Number uvalue = bx.getMaxRegularValue(series, item);
+                    if (uvalue == null) {
+                        uvalue = bx.getValue(series, item);
+                    }
                     if (lvalue != null) {
                         minimum = Math.min(minimum, lvalue.doubleValue());
                     }
