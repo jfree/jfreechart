@@ -135,6 +135,7 @@ import org.jfree.data.category.CategoryRangeInfo;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.function.Function2D;
+import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerXYDataset;
 import org.jfree.data.statistics.StatisticalCategoryDataset;
 import org.jfree.data.xy.IntervalXYDataset;
@@ -1033,7 +1034,30 @@ public final class DatasetUtilities {
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
         int columnCount = dataset.getColumnCount();
-        if (includeInterval && dataset instanceof IntervalCategoryDataset) {
+        if (includeInterval
+                && dataset instanceof BoxAndWhiskerCategoryDataset) {
+            // handle special case of BoxAndWhiskerDataset
+            BoxAndWhiskerCategoryDataset bx
+                    = (BoxAndWhiskerCategoryDataset) dataset;
+            Iterator iterator = visibleSeriesKeys.iterator();
+            while (iterator.hasNext()) {
+                Comparable seriesKey = (Comparable) iterator.next();
+                int series = dataset.getRowIndex(seriesKey);
+                int itemCount = dataset.getColumnCount();
+                for (int item = 0; item < itemCount; item++) {
+                    Number lvalue = bx.getMinRegularValue(series, item);
+                    Number uvalue = bx.getMaxRegularValue(series, item);
+                    if (lvalue != null) {
+                        minimum = Math.min(minimum, lvalue.doubleValue());
+                    }
+                    if (uvalue != null) {
+                        maximum = Math.max(maximum, uvalue.doubleValue());
+                    }
+                }
+            }
+        }
+        else if (includeInterval
+                && dataset instanceof IntervalCategoryDataset) {
             // handle the special case where the dataset has y-intervals that
             // we want to measure
             IntervalCategoryDataset icd = (IntervalCategoryDataset) dataset;
