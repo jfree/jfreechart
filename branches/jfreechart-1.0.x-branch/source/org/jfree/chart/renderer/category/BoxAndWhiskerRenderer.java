@@ -107,6 +107,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.renderer.Outlier;
 import org.jfree.chart.renderer.OutlierList;
 import org.jfree.chart.renderer.OutlierListCollection;
+import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
 import org.jfree.io.SerialUtilities;
@@ -392,6 +393,18 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         result.setSeriesIndex(series);
         return result;
 
+    }
+
+    /**
+     * Returns the range of values from the specified dataset that the
+     * renderer will require to display all the data.
+     *
+     * @param dataset  the dataset.
+     *
+     * @return The range.
+     */
+    public Range findRangeBounds(CategoryDataset dataset) {
+        return super.findRangeBounds(dataset, true);
     }
 
     /**
