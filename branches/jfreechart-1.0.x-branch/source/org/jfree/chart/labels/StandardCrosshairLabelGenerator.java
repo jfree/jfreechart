@@ -24,9 +24,9 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
- * -----------------------------------
- * DefaultCrosshairLabelGenerator.java
- * -----------------------------------
+ * ------------------------------------
+ * StandardCrosshairLabelGenerator.java
+ * ------------------------------------
  * (C) Copyright 2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
