@@ -1,5 +1,11 @@
 2009-04-27  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/panel/CrosshairOverlay.java
+    (addDomainCrosshair): Fire change event,
+    (addRangeCrosshair): Likewise.
+
+2009-04-27  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/annotation/XYPointerAnnotation.java
     (draw): Altered drawing of arrow line.
 
