@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * ResourceBundleWrapper.java
  * --------------------------
- * (C)opyright 2008, by Jess Thrysoee and Contributors.
+ * (C)opyright 2008, 2009, by Jess Thrysoee and Contributors.
  *
  * Original Author:  Jess Thrysoee;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -72,7 +72,7 @@ public class ResourceBundleWrapper {
     /**
      * A special class loader with no code base lookup.  This field may be
      * <code>null</code> (the field is only initialised if removeCodeBase() is
-     * called from an applet.
+     * called from an applet).
      */
     private static URLClassLoader noCodeBaseClassLoader;
 
