@@ -182,6 +182,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * currently visible.
      *
      * @return A boolean.
+     *
+     * @see #setVisible(boolean)
      */
     public boolean isVisible() {
         return this.visible;
@@ -193,6 +195,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * listeners.
      *
      * @param visible  the new flag value.
+     *
+     * @see #isVisible()
      */
     public void setVisible(boolean visible) {
         boolean old = this.visible;
@@ -204,6 +208,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the crosshair value.
      *
      * @return The crosshair value.
+     *
+     * @see #setValue(double)
      */
     public double getValue() {
         return this.value;
@@ -214,6 +220,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * 'value' to all registered listeners.
      *
      * @param value  the value.
+     *
+     * @see #getValue()
      */
     public void setValue(double value) {
         Double oldValue = new Double(this.value);
@@ -225,6 +233,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the paint for the crosshair line.
      *
      * @return The paint (never <code>null</code>).
+     *
+     * @see #setPaint(java.awt.Paint)
      */
     public Paint getPaint() {
         return this.paint;
@@ -235,6 +245,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * with the name "paint" to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @see #getPaint()
      */
     public void setPaint(Paint paint) {
         Paint old = this.paint;
@@ -246,6 +258,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the stroke for the crosshair line.
      *
      * @return The stroke (never <code>null</code>).
+     *
+     * @see #setStroke(java.awt.Stroke)
      */
     public Stroke getStroke() {
         return this.stroke;
@@ -256,6 +270,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * with the name "stroke" to all registered listeners.
      *
      * @param stroke  the stroke (<code>null</code> not permitted).
+     *
+     * @see #getStroke()
      */
     public void setStroke(Stroke stroke) {
         Stroke old = this.stroke;
@@ -268,6 +284,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * this crosshair.
      *
      * @return A boolean.
+     *
+     * @see #setLabelVisible(boolean)
      */
     public boolean isLabelVisible() {
         return this.labelVisible;
@@ -279,6 +297,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * 'labelVisible') to all registered listeners.
      *
      * @param visible  the new flag value.
+     *
+     * @see #isLabelVisible()
      */
     public void setLabelVisible(boolean visible) {
         boolean old = this.labelVisible;
@@ -290,6 +310,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the crosshair label generator.
      *
      * @return The label crosshair generator (never <code>null</code>).
+     *
+     * @see #setLabelGenerator(org.jfree.chart.labels.CrosshairLabelGenerator)
      */
     public CrosshairLabelGenerator getLabelGenerator() {
         return this.labelGenerator;
@@ -300,6 +322,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * (with the name 'labelGenerator') to all registered listeners.
      *
      * @param generator  the new generator (<code>null</code> not permitted).
+     *
+     * @see #getLabelGenerator()
      */
     public void setLabelGenerator(CrosshairLabelGenerator generator) {
         if (generator == null) {
@@ -314,6 +338,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the label anchor point.
      *
      * @return the label anchor point (never <code>null</code>.
+     *
+     * @see #setLabelAnchor(org.jfree.ui.RectangleAnchor)
      */
     public RectangleAnchor getLabelAnchor() {
         return this.labelAnchor;
@@ -324,6 +350,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * name 'labelAnchor') to all registered listeners.
      *
      * @param anchor  the anchor (<code>null</code> not permitted).
+     *
+     * @see #getLabelAnchor()
      */
     public void setLabelAnchor(RectangleAnchor anchor) {
         RectangleAnchor old = this.labelAnchor;
@@ -335,6 +363,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the x-offset for the label (in Java2D units).
      *
      * @return The x-offset.
+     *
+     * @see #setLabelXOffset(double)
      */
     public double getLabelXOffset() {
         return this.labelXOffset;
@@ -345,6 +375,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * 'labelXOffset') to all registered listeners.
      *
      * @param offset  the new offset.
+     *
+     * @see #getLabelXOffset()
      */
     public void setLabelXOffset(double offset) {
         Double old = new Double(this.labelXOffset);
@@ -356,6 +388,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the y-offset for the label (in Java2D units).
      *
      * @return The y-offset.
+     *
+     * @see #setLabelYOffset(double)
      */
     public double getLabelYOffset() {
         return this.labelYOffset;
@@ -366,6 +400,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * 'labelYOffset') to all registered listeners.
      *
      * @param offset  the new offset.
+     *
+     * @see #getLabelYOffset()
      */
     public void setLabelYOffset(double offset) {
         Double old = new Double(this.labelYOffset);
@@ -377,6 +413,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the label font.
      *
      * @return The label font (never <code>null</code>).
+     *
+     * @see #setLabelFont(java.awt.Font)
      */
     public Font getLabelFont() {
         return this.labelFont;
@@ -387,6 +425,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * 'labelFont') to all registered listeners.
      *
      * @param font  the font (<code>null</code> not permitted).
+     *
+     * @see #getLabelFont()
      */
     public void setLabelFont(Font font) {
         if (font == null) {
@@ -401,6 +441,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the label paint.
      *
      * @return The label paint (never <code>null</code>).
+     *
+     * @see #setLabelPaint
      */
     public Paint getLabelPaint() {
         return this.labelPaint;
@@ -411,6 +453,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * 'labelPaint') to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @see #getLabelPaint()
      */
     public void setLabelPaint(Paint paint) {
         if (paint == null) {
@@ -425,6 +469,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the label background paint.
      *
      * @return The label background paint (possibly <code>null</code>).
+     *
+     * @see #setLabelBackgroundPaint(java.awt.Paint)
      */
     public Paint getLabelBackgroundPaint() {
         return this.labelBackgroundPaint;
@@ -435,6 +481,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * the name 'labelBackgroundPaint') to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> permitted).
+     *
+     * @see #getLabelBackgroundPaint()
      */
     public void setLabelBackgroundPaint(Paint paint) {
         Paint old = this.labelBackgroundPaint;
@@ -446,6 +494,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the flag that controls the visibility of the label outline.
      *
      * @return A boolean.
+     *
+     * @see #setLabelOutlineVisible(boolean)
      */
     public boolean isLabelOutlineVisible() {
         return this.labelOutlineVisible;
@@ -457,6 +507,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * all registered listeners.
      *
      * @param visible  the new flag value.
+     *
+     * @see #isLabelOutlineVisible()
      */
     public void setLabelOutlineVisible(boolean visible) {
         boolean old = this.labelOutlineVisible;
@@ -468,6 +520,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the label outline paint.
      *
      * @return The label outline paint (never <code>null</code>).
+     *
+     * @see #setLabelOutlinePaint(java.awt.Paint)
      */
     public Paint getLabelOutlinePaint() {
         return this.labelOutlinePaint;
@@ -478,6 +532,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * name "labelOutlinePaint") to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
+     *
+     * @see #getLabelOutlinePaint()
      */
     public void setLabelOutlinePaint(Paint paint) {
         if (paint == null) {
@@ -492,6 +548,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Returns the label outline stroke.
      *
      * @return The label outline stroke (never <code>null</code>).
+     *
+     * @see #setLabelOutlineStroke(java.awt.Stroke)
      */
     public Stroke getLabelOutlineStroke() {
         return this.labelOutlineStroke;
@@ -502,6 +560,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * the name 'labelOutlineStroke') to all registered listeners.
      *
      * @param stroke  the stroke (<code>null</code> not permitted).
+     *
+     * @see #getLabelOutlineStroke()
      */
     public void setLabelOutlineStroke(Stroke stroke) {
         if (stroke == null) {
@@ -618,6 +678,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Adds a property change listener.
      *
      * @param l  the listener.
+     *
+     * @see #removePropertyChangeListener(java.beans.PropertyChangeListener)
      */
     public void addPropertyChangeListener(PropertyChangeListener l) {
         this.pcs.addPropertyChangeListener(l);
@@ -627,6 +689,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * Removes a property change listener.
      *
      * @param l  the listener.
+     *
+     * @see #addPropertyChangeListener(java.beans.PropertyChangeListener) 
      */
     public void removePropertyChangeListener(PropertyChangeListener l) {
         this.pcs.removePropertyChangeListener(l);
