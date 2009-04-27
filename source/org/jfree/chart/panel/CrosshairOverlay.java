@@ -91,9 +91,13 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     }
 
     /**
-     * Adds a crosshair against the domain axis.
+     * Adds a crosshair against the domain axis and sends an
+     * {@link OverlayChangeEvent} to all registered listeners.
      *
-     * @param crosshair  the crosshair.
+     * @param crosshair  the crosshair (<code>null</code> not permitted).
+     *
+     * @see #removeDomainCrosshair(org.jfree.chart.plot.Crosshair)
+     * @see #addRangeCrosshair(org.jfree.chart.plot.Crosshair)
      */
     public void addDomainCrosshair(Crosshair crosshair) {
         if (crosshair == null) {
@@ -101,8 +105,17 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         }
         this.xCrosshairs.add(crosshair);
         crosshair.addPropertyChangeListener(this);
+        fireOverlayChanged();
     }
 
+    /**
+     * Removes a domain axis crosshair and sends an {@link OverlayChangeEvent}
+     * to all registered listeners.
+     *
+     * @param crosshair  the crosshair (<code>null</code> not permitted).
+     *
+     * @see #addDomainCrosshair(org.jfree.chart.plot.Crosshair)
+     */
     public void removeDomainCrosshair(Crosshair crosshair) {
         if (crosshair == null) {
             throw new IllegalArgumentException("Null 'crosshair' argument.");
@@ -113,6 +126,10 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         }
     }
 
+    /**
+     * Clears all the domain crosshairs from the overlay and sends an
+     * {@link OverlayChangeEvent} to all registered listeners.
+     */
     public void clearDomainCrosshairs() {
         if (this.xCrosshairs.isEmpty()) {
             return;  // nothing to do
@@ -125,15 +142,21 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         }
         fireOverlayChanged();
     }
-    
+
+    /**
+     * Returns a new list containing the domain crosshairs for this overlay.
+     *
+     * @return A list of crosshairs.
+     */
     public List getDomainCrosshairs() {
         return new ArrayList(this.xCrosshairs);
     }
 
     /**
-     * Adds a crosshair against the range axis.
+     * Adds a crosshair against the range axis and sends an
+     * {@link OverlayChangeEvent} to all registered listeners.
      *
-     * @param crosshair  the crosshair.
+     * @param crosshair  the crosshair (<code>null</code> not permitted).
      */
     public void addRangeCrosshair(Crosshair crosshair) {
         if (crosshair == null) {
@@ -141,8 +164,17 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         }
         this.yCrosshairs.add(crosshair);
         crosshair.addPropertyChangeListener(this);
+        fireOverlayChanged();
     }
 
+    /**
+     * Removes a range axis crosshair and sends an {@link OverlayChangeEvent}
+     * to all registered listeners.
+     *
+     * @param crosshair  the crosshair (<code>null</code> not permitted).
+     *
+     * @see #addRangeCrosshair(org.jfree.chart.plot.Crosshair)
+     */
     public void removeRangeCrosshair(Crosshair crosshair) {
         if (crosshair == null) {
             throw new IllegalArgumentException("Null 'crosshair' argument.");
@@ -153,6 +185,10 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         }
     }
 
+    /**
+     * Clears all the range crosshairs from the overlay and sends an
+     * {@link OverlayChangeEvent} to all registered listeners.
+     */
     public void clearRangeCrosshairs() {
         if (this.yCrosshairs.isEmpty()) {
             return;  // nothing to do
@@ -166,6 +202,11 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         fireOverlayChanged();
     }
 
+    /**
+     * Returns a new list containing the range crosshairs for this overlay.
+     *
+     * @return A list of crosshairs.
+     */
     public List getRangeCrosshairs() {
         return new ArrayList(this.yCrosshairs);
     }
