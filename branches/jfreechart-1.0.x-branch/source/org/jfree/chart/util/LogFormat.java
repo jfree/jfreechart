@@ -197,7 +197,7 @@ public class LogFormat extends NumberFormat {
         StringBuffer result = new StringBuffer();
         if (this.showBase) {
             result.append(this.baseLabel);
-            result.append("^");
+            result.append(this.powerLabel);
         }
         result.append(this.formatter.format(calculateLog(number)));
         return result;
