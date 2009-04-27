@@ -4461,6 +4461,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean.
      *
+     * @see #isRangePannable()
+     *
      * @since 1.0.13
      */
     public boolean isDomainPannable() {
@@ -4473,6 +4475,9 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean.
      *
+     * @see #setRangePannable(boolean)
+     * @see #isDomainPannable()
+     *
      * @since 1.0.13
      */
     public boolean isRangePannable() {
@@ -4484,6 +4489,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * the range axes.
      *
      * @param pannable  the new flag value.
+     *
+     * @see #isRangePannable() 
      *
      * @since 1.0.13
      */
