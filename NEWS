@@ -1,3 +1,11 @@
+JFreeChart 1.0.14
+-----------------
+
+Bug Fixes:
+
+2781844 : XYPointerAnnotation arrow drawing;
+
+
 JFreeChart 1.0.13
 -----------------
 20 April 2009
