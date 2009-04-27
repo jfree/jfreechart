@@ -1,3 +1,8 @@
+2009-04-27  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/annotation/XYPointerAnnotation.java
+    (draw): Altered drawing of arrow line.
+
 ----------  JFREECHART 1.0.13 RELEASED ------------------------
 
 2009-04-20  David Gilbert  <david.gilbert@object-refinery.com>
