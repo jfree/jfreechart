@@ -200,6 +200,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
         public void startSeriesPass(XYDataset dataset, int series,
                 int firstItem, int lastItem, int pass, int passCount) {
             this.seriesPath.reset();
+            this.intervalPath.reset();
             this.lastPointGood = false;
             super.startSeriesPass(dataset, series, firstItem, lastItem, pass,
                     passCount);
