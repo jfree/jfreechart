@@ -1,5 +1,10 @@
 2009-04-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/xy/SamplingXYLineRenderer.java
+    (State.startSeriesPass): Reset interval path.
+
+2009-04-28  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/chart/renderer/AbstractRenderer.java
     (legendShape): Renamed legendShapeList,
     (treatLegendShapeAsLine): New field,
