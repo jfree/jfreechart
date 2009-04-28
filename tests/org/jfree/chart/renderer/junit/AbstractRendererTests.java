@@ -40,6 +40,7 @@
  * 28-Feb-2007 : Added checks for cloning (DG);
  * 17-Jun-2008 : Added new fields to testEquals() and testCloning() (DG);
  * 28-Jan-2009 : Updated testEquals() (DG);
+ * 28-Apr-2009 : Updated testEquals() (DG);
  *
  */
 
@@ -77,6 +78,8 @@ import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.ui.TextAnchor;
 
 /**
@@ -443,6 +446,26 @@ public class AbstractRendererTests extends TestCase {
                 3.0f, 4.0f, Color.red));
         assertTrue(r1.equals(r2));
 
+    }
+
+    private static class TestRenderer extends XYLineAndShapeRenderer {
+        public void setTreatLegendShapeAsLine(boolean flag) {
+            super.setTreatLegendShapeAsLine(flag);
+        }
+    }
+
+    /**
+     * Check that the treatLegendShapeAsLine flag is included in the equals()
+     * comparison.
+     */
+    public void testEquals2() {
+        TestRenderer r1 = new TestRenderer();
+        TestRenderer r2 = new TestRenderer();
+        assertTrue(r1.equals(r2));
+        r1.setTreatLegendShapeAsLine(true);
+        assertFalse(r1.equals(r2));
+        r2.setTreatLegendShapeAsLine(true);
+        assertTrue(r1.equals(r2));
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * LegendItem.java
  * ---------------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -57,6 +57,7 @@
  * 23-Apr-2008 : Added new constructor and implemented Cloneable (DG);
  * 17-Jun-2008 : Added optional labelFont and labelPaint attributes (DG);
  * 15-Oct-2008 : Added new constructor (DG);
+ * 28-Apr-2009 : Added various setter methods (DG);
  *
  */
 
@@ -708,37 +709,96 @@ public class LegendItem implements Cloneable, Serializable {
     /**
      * Returns the description for the legend item.
      *
-     * @return The description.
+     * @return The description (possibly <code>null</code>).
+     *
+     * @see #setDescription(java.lang.String) 
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
+     * Sets the description for this legend item.
+     *
+     * @param text  the description (<code>null</code> permitted).
+     *
+     * @see #getDescription()
+     * @since 1.0.14
+     */
+    public void setDescription(String text) {
+        this.description = text;
+    }
+
+    /**
      * Returns the tool tip text.
      *
      * @return The tool tip text (possibly <code>null</code>).
+     *
+     * @see #setToolTipText(java.lang.String) 
      */
     public String getToolTipText() {
         return this.toolTipText;
     }
 
     /**
+     * Sets the tool tip text for this legend item.
+     *
+     * @param text  the text (<code>null</code> permitted).
+     *
+     * @see #getToolTipText()
+     * @since 1.0.14
+     */
+    public void setToolTipText(String text) {
+        this.toolTipText = text;
+    }
+
+    /**
      * Returns the URL text.
      *
      * @return The URL text (possibly <code>null</code>).
+     *
+     * @see #setURLText(java.lang.String) 
      */
     public String getURLText() {
         return this.urlText;
     }
 
     /**
+     * Sets the URL text.
+     *
+     * @param text  the text (<code>null</code> permitted).
+     *
+     * @see #getURLText()
+     *
+     * @since 1.0.14
+     */
+    public void setURLText(String text) {
+        this.urlText = text;
+    }
+
+    /**
      * Returns a flag that indicates whether or not the shape is visible.
      *
      * @return A boolean.
+     *
+     * @see #setShapeVisible(boolean)
      */
     public boolean isShapeVisible() {
         return this.shapeVisible;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the shape is visible.
+     *
+     * @param visible  the new flag value.
+     *
+     * @see #isShapeVisible()
+     * @see #isLineVisible()
+     *
+     * @since 1.0.14
+     */
+    public void setShapeVisible(boolean visible) {
+        this.shapeVisible = visible;
     }
 
     /**
@@ -746,9 +806,26 @@ public class LegendItem implements Cloneable, Serializable {
      * item.
      *
      * @return The shape (never <code>null</code>).
+     *
+     * @see #setShape(java.awt.Shape) 
      */
     public Shape getShape() {
         return this.shape;
+    }
+
+    /**
+     * Sets the shape for the legend item.
+     *
+     * @param shape  the shape (<code>null</code> not permitted).
+     *
+     * @see #getShape()
+     * @since 1.0.14
+     */
+    public void setShape(Shape shape) {
+        if (shape == null) {
+            throw new IllegalArgumentException("Null 'shape' argument.");
+        }
+        this.shape = shape;
     }
 
     /**
@@ -852,27 +929,75 @@ public class LegendItem implements Cloneable, Serializable {
      * Returns the outline stroke.
      *
      * @return The outline stroke (never <code>null</code>).
+     *
+     * @see #setOutlineStroke(java.awt.Stroke) 
      */
     public Stroke getOutlineStroke() {
         return this.outlineStroke;
     }
 
     /**
+     * Sets the outline stroke.
+     *
+     * @param stroke  the stroke (never <code>null</code>).
+     *
+     * @see #getOutlineStroke()
+     *
+     * @since 1.0.14
+     */
+    public void setOutlineStroke(Stroke stroke) {
+        this.outlineStroke = stroke;
+    }
+
+    /**
      * Returns a flag that indicates whether or not the line is visible.
      *
      * @return A boolean.
+     *
+     * @see #setLineVisible(boolean) 
      */
     public boolean isLineVisible() {
         return this.lineVisible;
     }
 
     /**
+     * Sets the flag that controls whether or not the line shape is visible for
+     * this legend item.
+     *
+     * @param visible  the new flag value.
+     *
+     * @see #isLineVisible()
+     * @since 1.0.14
+     */
+    public void setLineVisible(boolean visible) {
+        this.lineVisible = visible;
+    }
+
+    /**
      * Returns the line.
      *
      * @return The line (never <code>null</code>).
+     *
+     * @see #setLine(java.awt.Shape)
+     * @see #isLineVisible() 
      */
     public Shape getLine() {
         return this.line;
+    }
+
+    /**
+     * Sets the line.
+     *
+     * @param line  the line (<code>null</code> not permitted).
+     *
+     * @see #getLine()
+     * @since 1.0.14
+     */
+    public void setLine(Shape line) {
+        if (line == null) {
+            throw new IllegalArgumentException("Null 'line' argument.");
+        }
+        this.line = line;
     }
 
     /**
