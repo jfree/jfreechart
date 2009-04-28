@@ -1,3 +1,29 @@
+2009-04-28  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/AbstractRenderer.java
+    (legendShape): Renamed legendShapeList,
+    (treatLegendShapeAsLine): New field,
+    (AbstractRenderer): Initialise new field,
+    (getTreatLegendShapeAsLine): New method,
+    (setTreatLegendShapeAsLine): Likewise,
+    (equals): Check treatLegendShapeAsLine field,
+    * source/org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
+    (getLegendItem): Use different legend item if 'treatLegendShapeAsLine' flag
+    is set,
+    * source/org/jfree/chart/LegendItem.java
+    (setDescription): New method,
+    (setToolTipText): Likewise,
+    (setURLText): Likewise,
+    (setShapeVisible): Likewise,
+    (setShape): Likewise,
+    (setOutlineStroke): Likewise,
+    (setLineVisible): Likewise,
+    (setLine): Likewise,
+    * source/org/jfree/chart/renderer/xy/SamplingXYLineRenderer.java
+    (SamplingXYLineRenderer): Configure renderer for lines in legend item,
+    (getLegendLine): Deprecated,
+    (setLegendLine): Likewise.
+
 2009-04-27  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/util/LogFormat.java
