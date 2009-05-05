@@ -159,6 +159,7 @@
  *               by Alessandro Borges (DG);
  * 09-Apr-2009 : Added overlay support (DG);
  * 10-Apr-2009 : Set chartBuffer background to match ChartPanel (DG);
+ * 05-May-2009 : Match scaling (and insets) in doCopy() (DG);
  *
  */
 
@@ -2708,8 +2709,12 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     public void doCopy() {
         Clipboard systemClipboard
                 = Toolkit.getDefaultToolkit().getSystemClipboard();
-        ChartTransferable selection = new ChartTransferable(this.chart, 
-                getWidth(), getHeight());
+        Insets insets = getInsets();
+        int w = getWidth() - insets.left - insets.right;
+        int h = getHeight() - insets.top - insets.bottom;
+        ChartTransferable selection = new ChartTransferable(this.chart, w, h,
+                getMinimumDrawWidth(), getMinimumDrawHeight(),
+                getMaximumDrawWidth(), getMaximumDrawHeight(), true);
         systemClipboard.setContents(selection, null);
     }
 

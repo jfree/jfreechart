@@ -1,3 +1,17 @@
+2009-05-05  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/ChartPanel.java
+    (doCopy): Account for insets, and pass scaling parameters to
+    ChartTransferable,
+    * source/org/jfree/chart/ChartTransferable.java
+    (minDrawWidth): New field,
+    (minDrawHeight): Likewise,
+    (maxDrawWidth): Likewise,
+    (maxDrawHeight): Likewise,
+    (ChartTransferable): New constructor,
+    (getTransferData): Delegate to new utility method,
+    (createBufferedImage): New method that can apply scaling.
+
 2009-04-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/SamplingXYLineRenderer.java
