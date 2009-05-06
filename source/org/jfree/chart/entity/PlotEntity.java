@@ -96,7 +96,8 @@ public class PlotEntity extends ChartEntity {
      * @param urlText  the URL text for HTML image maps (<code>null</code>
      *                 permitted).
      */
-    public PlotEntity(Shape area, Plot plot, String toolTipText, String urlText) {
+    public PlotEntity(Shape area, Plot plot, String toolTipText,
+            String urlText) {
         super(area, toolTipText, urlText);
         if (plot == null) {
             throw new IllegalArgumentException("Null 'plot' argument.");
