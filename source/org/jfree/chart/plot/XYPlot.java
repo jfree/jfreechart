@@ -220,7 +220,9 @@
  *               Voigt (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 30-Mar-2009 : Delegate panning to axes (DG);
- *
+ * 10-May-2009 : Added check for fixedLegendItems in equals(), and code to
+ *               handle cloning (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -5469,6 +5471,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         if (!ObjectUtilities.equal(this.annotations, that.annotations)) {
             return false;
         }
+        if (!ObjectUtilities.equal(this.fixedLegendItems,
+                that.fixedLegendItems)) {
+            return false;
+        }
         if (!PaintUtilities.equal(this.domainTickBandPaint,
                 that.domainTickBandPaint)) {
             return false;
@@ -5565,7 +5571,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             clone.fixedRangeAxisSpace = (AxisSpace) ObjectUtilities.clone(
                     this.fixedRangeAxisSpace);
         }
-
+        if (this.fixedLegendItems != null) {
+            clone.fixedLegendItems
+                    = (LegendItemCollection) this.fixedLegendItems.clone();
+        }
         clone.quadrantOrigin = (Point2D) ObjectUtilities.clone(
                 this.quadrantOrigin);
         clone.quadrantPaint = (Paint[]) this.quadrantPaint.clone();
