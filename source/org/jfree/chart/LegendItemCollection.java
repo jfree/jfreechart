@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * LegendItemCollection.java
  * -------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -81,7 +81,8 @@ public class LegendItemCollection implements Cloneable, Serializable {
     /**
      * Adds the legend items from another collection to this collection.
      *
-     * @param collection  the other collection.
+     * @param collection  the other collection (<code>null</code> not
+     *     permitted).
      */
     public void addAll(LegendItemCollection collection) {
         this.items.addAll(collection.items);
