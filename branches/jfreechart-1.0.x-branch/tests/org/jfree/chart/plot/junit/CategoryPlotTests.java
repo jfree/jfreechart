@@ -673,15 +673,8 @@ public class CategoryPlotTests extends TestCase {
     public void testSerialization3() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         JFreeChart chart = ChartFactory.createBarChart(
-            "Test Chart",
-            "Category Axis",
-            "Value Axis",
-            dataset,
-            PlotOrientation.VERTICAL,
-            true,
-            true,
-            false
-        );
+                "Test Chart", "Category Axis", "Value Axis", dataset,
+                PlotOrientation.VERTICAL, true, true, false);
         JFreeChart chart2 = null;
 
         // serialize and deserialize the chart....
@@ -718,15 +711,8 @@ public class CategoryPlotTests extends TestCase {
     public void testSerialization4() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         JFreeChart chart = ChartFactory.createBarChart(
-            "Test Chart",
-            "Category Axis",
-            "Value Axis",
-            dataset,
-            PlotOrientation.VERTICAL,
-            true,
-            true,
-            false
-        );
+                "Test Chart", "Category Axis", "Value Axis",
+                dataset, PlotOrientation.VERTICAL, true, true, false);
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         plot.addRangeMarker(new ValueMarker(1.1), Layer.FOREGROUND);
         plot.addRangeMarker(new IntervalMarker(2.2, 3.3), Layer.BACKGROUND);
@@ -1050,6 +1036,5 @@ public class CategoryPlotTests extends TestCase {
         plot.mapDatasetToRangeAxes(0, axisIndices);
         assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
     }
-
 
 }
