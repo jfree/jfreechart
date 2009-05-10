@@ -105,6 +105,7 @@ public class LegendItemCollectionTests extends TestCase {
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
         c1.add(item1);
+        assertFalse(c1.equals(c2));
         c2.add(item2);
         assertTrue(c1.equals(c2));
 
