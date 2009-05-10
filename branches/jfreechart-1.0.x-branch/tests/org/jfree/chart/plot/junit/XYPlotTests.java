@@ -44,6 +44,7 @@
  * 24-May-2007 : Added testDrawSeriesWithZeroItems() (DG);
  * 07-Apr-2008 : Added testRemoveDomainMarker() and
  *               testRemoveRangeMarker() (DG);
+ * 10-May-2009 : Extended testEquals(), added testCloning3() (DG);
  *
  */
 
@@ -72,6 +73,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.AxisLocation;
@@ -338,6 +340,12 @@ public class XYPlotTests extends TestCase {
         plot2.addRangeMarker(1, new ValueMarker(99.0), Layer.BACKGROUND);
         assertTrue(plot1.equals(plot2));
 
+        // fixed legend items
+        plot1.setFixedLegendItems(new LegendItemCollection());
+        assertFalse(plot1.equals(plot2));
+        plot2.setFixedLegendItems(new LegendItemCollection());
+        assertTrue(plot1.equals(plot2));
+
         // weight
         plot1.setWeight(3);
         assertFalse(plot1.equals(plot2));
@@ -468,6 +476,31 @@ public class XYPlotTests extends TestCase {
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
+    }
+
+    /**
+     * Tests cloning for a plot where the fixed legend items have been
+     * specified.
+     */
+    public void testCloning3() {
+        XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
+                new NumberAxis("Range Axis"), new StandardXYItemRenderer());
+        LegendItemCollection c1 = new LegendItemCollection();
+        p1.setFixedLegendItems(c1);
+        XYPlot p2 = null;
+        try {
+            p2 = (XYPlot) p1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(p1 != p2);
+        assertTrue(p1.getClass() == p2.getClass());
+        assertTrue(p1.equals(p2));
+
+        // verify independence of fixed legend item collection
+        c1.add(new LegendItem("X"));
+        assertFalse(p1.equals(p2));
     }
 
     /**
