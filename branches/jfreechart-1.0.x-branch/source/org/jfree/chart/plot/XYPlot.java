@@ -2118,8 +2118,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns the paint for the minor grid lines (if any) plotted against the range
-     * axis.
+     * Returns the paint for the minor grid lines (if any) plotted against the 
+     * range axis.
      *
      * @return The paint (never <code>null</code>).
      *
