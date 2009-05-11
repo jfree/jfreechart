@@ -80,9 +80,9 @@ public class GradientXYBarPainter implements XYBarPainter, Serializable {
     /**
      * Creates a new instance.
      *
-     * @param g1
-     * @param g2
-     * @param g3
+     * @param g1  the division between regions 1 and 2.
+     * @param g2  the division between regions 2 and 3.
+     * @param g3  the division between regions 3 and 4.
      */
     public GradientXYBarPainter(double g1, double g2, double g3) {
         this.g1 = g1;
