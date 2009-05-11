@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * SlidingGanttCategoryDataset.java
  * --------------------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008, 2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -499,7 +499,8 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
         if (c != -1) {
-            return this.underlying.getStartValue(r, c + this.firstCategoryIndex);
+            return this.underlying.getStartValue(r,
+                    c + this.firstCategoryIndex);
         }
         else {
             throw new UnknownKeyException("Unknown columnKey: " + columnKey);
