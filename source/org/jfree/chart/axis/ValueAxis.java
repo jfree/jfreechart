@@ -711,11 +711,13 @@ public abstract class ValueAxis extends Axis
                     TickType.MAJOR)) || (isMinorTickMarksVisible()
                     && tick.getTickType().equals(TickType.MINOR))) {
 
-                double ol = (tick.getTickType().equals(TickType.MINOR)) ?
-                    getMinorTickMarkOutsideLength() : getTickMarkOutsideLength();
+                double ol = (tick.getTickType().equals(TickType.MINOR)) 
+                        ? getMinorTickMarkOutsideLength()
+                        : getTickMarkOutsideLength();
 
-                double il = (tick.getTickType().equals(TickType.MINOR)) ?
-                    getMinorTickMarkInsideLength() : getTickMarkInsideLength();
+                double il = (tick.getTickType().equals(TickType.MINOR)) 
+                        ? getMinorTickMarkInsideLength()
+                        : getTickMarkInsideLength();
 
                 float xx = (float) valueToJava2D(tick.getValue(), dataArea,
                         edge);
