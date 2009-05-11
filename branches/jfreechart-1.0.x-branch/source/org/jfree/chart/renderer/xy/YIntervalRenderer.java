@@ -260,8 +260,6 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
      * @param item  the item index (zero-based).
      * @param x  the x coordinate (in Java2D space).
      * @param y  the y coordinate (in Java2D space).
-     * @param negative  indicates a negative value (which affects the item
-     *                  label position).
      */
     private void drawAdditionalItemLabel(Graphics2D g2,
             PlotOrientation orientation, XYDataset dataset, int series,
