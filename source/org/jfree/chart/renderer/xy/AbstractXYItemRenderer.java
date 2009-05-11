@@ -636,6 +636,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * specified dataset.
      *
      * @param dataset  the dataset (<code>null</code> permitted).
+     * @param includeInterval  include the interval (if any) for the dataset?
      *
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
@@ -683,6 +684,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * items from the specified dataset.
      *
      * @param dataset  the dataset (<code>null</code> permitted).
+     * @param includeInterval  include the interval (if any) for the dataset?
      *
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
