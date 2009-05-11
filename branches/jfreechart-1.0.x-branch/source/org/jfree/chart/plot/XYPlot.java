@@ -3856,12 +3856,14 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             while (iterator.hasNext()) {
                 paintLine = false;
                 ValueTick tick = (ValueTick) iterator.next();
-                if ((tick.getTickType() == TickType.MINOR) && isDomainMinorGridlinesVisible()){
+                if ((tick.getTickType() == TickType.MINOR) 
+                        && isDomainMinorGridlinesVisible()) {
                     gridStroke = getDomainMinorGridlineStroke();
                     gridPaint = getDomainMinorGridlinePaint();
                     paintLine = true;
                 }
-                else if ((tick.getTickType() == TickType.MAJOR) && isDomainGridlinesVisible()){
+                else if ((tick.getTickType() == TickType.MAJOR) 
+                        && isDomainGridlinesVisible()) {
                     gridStroke = getDomainGridlineStroke();
                     gridPaint = getDomainGridlinePaint();
                     paintLine = true;
