@@ -1178,7 +1178,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
             for (int minorTick = 1; minorTick < minorTickSpaces; minorTick++) {
                 double minorTickValue = lowestTickValue 
                         - size * minorTick / minorTickSpaces;
-                if (getRange().contains(minorTickValue)){
+                if (getRange().contains(minorTickValue)) {
                     result.add(new NumberTick(TickType.MINOR, minorTickValue,
                             "", TextAnchor.TOP_CENTER, TextAnchor.CENTER,
                             0.0));
@@ -1221,13 +1221,13 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                 Tick tick = new NumberTick(new Double(currentTickValue),
                         tickLabel, anchor, rotationAnchor, angle);
                 result.add(tick);
-                double nextTickValue = lowestTickValue + ((i + 1)* size);
+                double nextTickValue = lowestTickValue + ((i + 1) * size);
                 for (int minorTick = 1; minorTick < minorTickSpaces;
                         minorTick++) {
                     double minorTickValue = currentTickValue
                             + (nextTickValue - currentTickValue)
                             * minorTick / minorTickSpaces;
-                    if (getRange().contains(minorTickValue)){
+                    if (getRange().contains(minorTickValue)) {
                         result.add(new NumberTick(TickType.MINOR,
                                 minorTickValue, "", TextAnchor.TOP_CENTER,
                                 TextAnchor.CENTER, 0.0));
@@ -1271,10 +1271,10 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
             if (minorTickSpaces <= 0) {
                 minorTickSpaces = tu.getMinorTickCount();
             }
-            for (int minorTick = 1; minorTick < minorTickSpaces; minorTick++){
+            for (int minorTick = 1; minorTick < minorTickSpaces; minorTick++) {
                 double minorTickValue = lowestTickValue
                         - size * minorTick / minorTickSpaces;
-                if (getRange().contains(minorTickValue)){
+                if (getRange().contains(minorTickValue)) {
                     result.add(new NumberTick(TickType.MINOR, minorTickValue,
                             "", TextAnchor.TOP_CENTER, TextAnchor.CENTER,
                             0.0));
@@ -1322,13 +1322,13 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                         tickLabel, anchor, rotationAnchor, angle);
                 result.add(tick);
 
-                double nextTickValue = lowestTickValue + ((i + 1)* size);
+                double nextTickValue = lowestTickValue + ((i + 1) * size);
                 for (int minorTick = 1; minorTick < minorTickSpaces;
-                        minorTick++){
+                        minorTick++) {
                     double minorTickValue = currentTickValue
                             + (nextTickValue - currentTickValue)
                             * minorTick / minorTickSpaces;
-                    if (getRange().contains(minorTickValue)){
+                    if (getRange().contains(minorTickValue)) {
                         result.add(new NumberTick(TickType.MINOR,
                                 minorTickValue, "", TextAnchor.TOP_CENTER,
                                 TextAnchor.CENTER, 0.0));
