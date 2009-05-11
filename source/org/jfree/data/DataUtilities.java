@@ -155,13 +155,13 @@ public abstract class DataUtilities {
         double total = 0.0;
         int rowCount = data.getRowCount();
         for (int v = 0; v < validRows.length; v++) {
-        	int row = validRows[v];
-        	if (row < rowCount) {
-	            Number n = data.getValue(row, column);
-	            if (n != null) {
-	                total += n.doubleValue();
-	            }
-        	}
+            int row = validRows[v];
+            if (row < rowCount) {
+                Number n = data.getValue(row, column);
+                if (n != null) {
+                    total += n.doubleValue();
+                }
+            }
         }
         return total;
     }
@@ -210,13 +210,13 @@ public abstract class DataUtilities {
         double total = 0.0;
         int colCount = data.getColumnCount();
         for (int v = 0; v < validCols.length; v++) {
-        	int col = validCols[v];
-        	if (col < colCount) {
-	            Number n = data.getValue(row, col);
-	            if (n != null) {
-	                total += n.doubleValue();
-	            }
-        	}
+            int col = validCols[v];
+            if (col < colCount) {
+                Number n = data.getValue(row, col);
+                if (n != null) {
+                    total += n.doubleValue();
+                }
+            }
         }
         return total;
     }
