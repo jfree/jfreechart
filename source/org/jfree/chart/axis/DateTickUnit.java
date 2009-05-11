@@ -325,8 +325,8 @@ public class DateTickUnit extends TickUnit implements Serializable {
             return count;
         }
         else {
-            throw new IllegalArgumentException("The 'unit' argument has a " +
-            		"value that is not recognised.");
+            throw new IllegalArgumentException("The 'unit' argument has a " 
+                    + "value that is not recognised.");
         }
 
     }
