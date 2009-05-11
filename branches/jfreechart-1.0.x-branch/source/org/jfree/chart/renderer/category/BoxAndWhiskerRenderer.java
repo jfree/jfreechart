@@ -792,8 +792,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             if (yMedian != null) {
                 double yyMedian = rangeAxis.valueToJava2D(
                         yMedian.doubleValue(), dataArea, location);
-                g2.draw(new Line2D.Double(xx, yyMedian, xx + state.getBarWidth(),
-                        yyMedian));
+                g2.draw(new Line2D.Double(xx, yyMedian, 
+                        xx + state.getBarWidth(), yyMedian));
             }
         }
 
