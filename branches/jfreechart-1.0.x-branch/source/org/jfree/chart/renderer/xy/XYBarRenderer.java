@@ -1250,9 +1250,8 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         if (this.useYInterval != that.useYInterval) {
             return false;
         }
-        if (!ObjectUtilities.equal(
-            this.gradientPaintTransformer, that.gradientPaintTransformer)
-        ) {
+        if (!ObjectUtilities.equal(this.gradientPaintTransformer,
+                that.gradientPaintTransformer)) {
             return false;
         }
         if (!ShapeUtilities.equal(this.legendBar, that.legendBar)) {
