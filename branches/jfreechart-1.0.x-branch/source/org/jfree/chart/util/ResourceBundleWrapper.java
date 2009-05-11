@@ -99,7 +99,7 @@ public class ResourceBundleWrapper {
 
         URL[] urls = urlClassLoader.getURLs();
         for (int i = 0; i < urls.length; i++) {
-            if (! urls[i].sameFile(codeBase)) {
+            if (!urls[i].sameFile(codeBase)) {
                 urlsNoBase.add(urls[i]);
             }
         }
