@@ -644,8 +644,9 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the flag that indicates whether or not the minor tick marks are showing
-     * and sends an {@link AxisChangeEvent} to all registered listeners.
+     * Sets the flag that indicates whether or not the minor tick marks are 
+     * showing and sends an {@link AxisChangeEvent} to all registered
+     * listeners.
      *
      * @param flag  the flag.
      *
@@ -1419,7 +1420,8 @@ public abstract class Axis implements Cloneable, Serializable {
         if (this.minorTickMarkInsideLength != that.minorTickMarkInsideLength) {
             return false;
         }
-        if (this.minorTickMarkOutsideLength != that.minorTickMarkOutsideLength) {
+        if (this.minorTickMarkOutsideLength
+                != that.minorTickMarkOutsideLength) {
             return false;
         }
         if (this.fixedDimension != that.fixedDimension) {
