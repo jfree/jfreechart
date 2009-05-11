@@ -399,8 +399,8 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @return A string.
      */
     public String toString() {
-    	return "[" + this.hour + "," + getDayOfMonth() + "/" + getMonth() + "/"
-    	        + getYear() + "]";
+        return "[" + this.hour + "," + getDayOfMonth() + "/" + getMonth() + "/"
+                + getYear() + "]";
     }
  
     /**
