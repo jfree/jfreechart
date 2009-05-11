@@ -1866,7 +1866,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                         this.panW = screenDataArea.getWidth();
                         this.panH = screenDataArea.getHeight();
                         this.panLast = e.getPoint();
-                        setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+                        setCursor(Cursor.getPredefinedCursor(
+                                Cursor.MOVE_CURSOR));
                     }
                 }
                 // the actual panning occurs later in the mouseDragged() 
