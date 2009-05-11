@@ -395,8 +395,8 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
             // current data point...
             double x1;
             if (this.useSeriesOffset) {
-                x1 = domainAxis.getCategorySeriesMiddle(column,dataset.getColumnCount(),
-						visibleRow, visibleRowCount,
+                x1 = domainAxis.getCategorySeriesMiddle(column, 
+                        dataset.getColumnCount(), visibleRow, visibleRowCount,
                         this.itemMargin, dataArea, plot.getDomainAxisEdge());
             }
             else {
