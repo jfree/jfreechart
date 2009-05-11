@@ -531,8 +531,8 @@ public class LegendTitle extends Title
         StandardEntityCollection sec = null;
         if (params instanceof EntityBlockParams
                 && ((EntityBlockParams) params).getGenerateEntities()) {
-			sec = new StandardEntityCollection();
-            sec.add(new TitleEntity(hotspot,this));
+            sec = new StandardEntityCollection();
+            sec.add(new TitleEntity(hotspot, this));
         }
         target = trimMargin(target);
         if (this.backgroundPaint != null) {
@@ -548,12 +548,12 @@ public class LegendTitle extends Title
         }
         target = trimPadding(target);
         Object val = container.draw(g2, target, params);
-        if (val instanceof BlockResult){
-        	EntityCollection ec = ((BlockResult) val).getEntityCollection();
-        	if (ec != null && sec != null){
-        		sec.addAll(ec);
-        		((BlockResult) val).setEntityCollection(sec);
-        	}
+        if (val instanceof BlockResult) {
+            EntityCollection ec = ((BlockResult) val).getEntityCollection();
+            if (ec != null && sec != null) {
+                sec.addAll(ec);
+                ((BlockResult) val).setEntityCollection(sec);
+            }
         }
         return val;
     }
