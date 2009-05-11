@@ -1125,7 +1125,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *         time zone.
      */
     public static TickUnitSource createStandardDateTickUnits(TimeZone zone) {
-    	return createStandardDateTickUnits(zone, Locale.getDefault());
+        return createStandardDateTickUnits(zone, Locale.getDefault());
     }
 
     /**
@@ -1143,13 +1143,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public static TickUnitSource createStandardDateTickUnits(TimeZone zone,
-    		Locale locale) {
+            Locale locale) {
 
         if (zone == null) {
             throw new IllegalArgumentException("Null 'zone' argument.");
         }
         if (locale == null) {
-        	throw new IllegalArgumentException("Null 'locale' argument.");
+            throw new IllegalArgumentException("Null 'locale' argument.");
         }
         TickUnits units = new TickUnits();
 
@@ -1685,7 +1685,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 tickDate = unit.addToDate(tickDate, this.timeZone);
                 long nextTickTime = tickDate.getTime();
                 for (int minorTick = 1; minorTick < minorTickSpaces;
-                        minorTick++){
+                        minorTick++) {
                     long minorTickTime = currentTickTime
                             + (nextTickTime - currentTickTime)
                             * minorTick / minorTickSpaces;
@@ -1797,7 +1797,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 tickDate = unit.addToDate(tickDate, this.timeZone);
                 long nextTickTime = tickDate.getTime();
                 for (int minorTick = 1; minorTick < minorTickSpaces;
-                        minorTick++){
+                        minorTick++) {
                     long minorTickTime = currentTickTime
                             + (nextTickTime - currentTickTime)
                             * minorTick / minorTickSpaces;
