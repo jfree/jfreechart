@@ -113,8 +113,8 @@ public class MovingAverage {
             throw new IllegalArgumentException("Null source.");
         }
         if (periodCount < 1) {
-            throw new IllegalArgumentException("periodCount must be greater " +
-                    "than or equal to 1.");
+            throw new IllegalArgumentException("periodCount must be greater " 
+                    + "than or equal to 1.");
 
         }
 
@@ -199,8 +199,8 @@ public class MovingAverage {
             throw new IllegalArgumentException("Null 'source'.");
         }
         if (pointCount < 2) {
-            throw new IllegalArgumentException("periodCount must be greater " +
-                    "than or equal to 2.");
+            throw new IllegalArgumentException("periodCount must be greater " 
+                    + "than or equal to 2.");
         }
 
         TimeSeries result = new TimeSeries(name);
