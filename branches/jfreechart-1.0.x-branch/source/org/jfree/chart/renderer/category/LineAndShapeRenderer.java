@@ -922,7 +922,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
         if (visibleRow < 0) {
             return;
         }
-		int visibleRowCount = state.getVisibleSeriesCount();
+        int visibleRowCount = state.getVisibleSeriesCount();
 
         PlotOrientation orientation = plot.getOrientation();
 
