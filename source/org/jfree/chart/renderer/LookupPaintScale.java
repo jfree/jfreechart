@@ -91,8 +91,12 @@ public class LookupPaintScale
             this.paint = paint;
         }
 
-        /* (non-Javadoc)
-         * @see java.lang.Comparable#compareTo(java.lang.Object)
+        /**
+         * Compares this item to an arbitrary object.
+         *
+         * @param obj  the object.
+         *
+         * @return An int defining the relative order of the objects.
          */
         public int compareTo(Object obj) {
             PaintItem that = (PaintItem) obj;
