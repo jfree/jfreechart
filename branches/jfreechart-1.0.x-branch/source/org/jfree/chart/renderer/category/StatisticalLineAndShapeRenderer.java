@@ -245,7 +245,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         if (visibleRow < 0) {
             return;
         }
-		int visibleRowCount = state.getVisibleSeriesCount();
+        int visibleRowCount = state.getVisibleSeriesCount();
 
         StatisticalCategoryDataset statDataset
                 = (StatisticalCategoryDataset) dataset;
@@ -260,7 +260,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         if (getUseSeriesOffset()) {
             x1 = domainAxis.getCategorySeriesMiddle(column,
                     dataset.getColumnCount(),
-					visibleRow, visibleRowCount,
+                    visibleRow, visibleRowCount,
                     getItemMargin(), dataArea, plot.getDomainAxisEdge());
         }
         else {
