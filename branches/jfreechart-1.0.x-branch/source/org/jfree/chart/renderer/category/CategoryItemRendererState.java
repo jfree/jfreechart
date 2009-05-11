@@ -169,17 +169,17 @@ public class CategoryItemRendererState extends RendererState {
      * @since 1.0.13
      */
     public int getVisibleSeriesIndex(int rowIndex) {
-    	if (this.visibleSeries == null) {
-    	    return rowIndex;
-    	}
-		int index = -1;
-		for (int vRow = 0; vRow < this.visibleSeries.length ; vRow++){
-			if (this.visibleSeries[vRow] == rowIndex) {
-				index = vRow;
-				break;
-			}
-		}
-		return index;
+        if (this.visibleSeries == null) {
+            return rowIndex;
+        }
+        int index = -1;
+        for (int vRow = 0; vRow < this.visibleSeries.length; vRow++) {
+            if (this.visibleSeries[vRow] == rowIndex) {
+                index = vRow;
+                break;
+            }
+        }
+        return index;
     }
 
     /**
@@ -191,10 +191,10 @@ public class CategoryItemRendererState extends RendererState {
      * @since 1.0.13
      */
     public int getVisibleSeriesCount() {
-    	if (this.visibleSeries == null) {
-    	    return -1;
-    	}
-    	return this.visibleSeries.length;
+        if (this.visibleSeries == null) {
+            return -1;
+        }
+        return this.visibleSeries.length;
     }
 
     /**
