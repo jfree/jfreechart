@@ -1158,15 +1158,15 @@ public abstract class Plot implements AxisChangeListener,
      *
      *  @since 1.0.13
      */
- 	protected void createAndAddEntity(Rectangle2D dataArea,
-            PlotRenderingInfo plotState, String toolTip, String urlText){
-		if (plotState != null && plotState.getOwner() != null) {
-			EntityCollection e = plotState.getOwner().getEntityCollection();
-			if (e != null) {
+     protected void createAndAddEntity(Rectangle2D dataArea,
+            PlotRenderingInfo plotState, String toolTip, String urlText) {
+        if (plotState != null && plotState.getOwner() != null) {
+            EntityCollection e = plotState.getOwner().getEntityCollection();
+            if (e != null) {
                 e.add(new PlotEntity(dataArea, this, toolTip, urlText));
             }
-		}
-	}
+        }
+    }
 
     /**
      * Handles a 'click' on the plot.  Since the plot does not maintain any
