@@ -583,11 +583,11 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         CategoryItemRendererState state = createState(info);
         int[] visibleSeriesTemp = new int[this.rowCount];
         int visibleSeriesCount = 0;
-        for (int row = 0; row < this.rowCount; row++){
-        	if (isSeriesVisible(row)) {
-        		visibleSeriesTemp[visibleSeriesCount] = row;
-        		visibleSeriesCount++;
-        	}
+        for (int row = 0; row < this.rowCount; row++) {
+            if (isSeriesVisible(row)) {
+                visibleSeriesTemp[visibleSeriesCount] = row;
+                visibleSeriesCount++;
+            }
         }
         int[] visibleSeries = new int[visibleSeriesCount];
         System.arraycopy(visibleSeriesTemp, 0, visibleSeries, 0,
