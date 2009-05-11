@@ -1156,7 +1156,7 @@ public class JFreeChart implements Drawable,
             entities = info.getEntityCollection();
         }
         if (entities != null) {
-        	entities.add(new JFreeChartEntity((Rectangle2D) chartArea.clone(),
+            entities.add(new JFreeChartEntity((Rectangle2D) chartArea.clone(),
                     this));
         }
 
