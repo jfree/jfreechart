@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * XYDrawableAnnotation.java
  * -------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -168,7 +168,7 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
                 this.displayWidth * this.drawScaleFactor,
                 this.displayHeight * this.drawScaleFactor);
 
-        g2.scale(1/this.drawScaleFactor, 1/this.drawScaleFactor);
+        g2.scale(1 / this.drawScaleFactor, 1 / this.drawScaleFactor);
         g2.translate((j2DX - this.displayWidth / 2.0) * this.drawScaleFactor,
                 (j2DY - this.displayHeight / 2.0) * this.drawScaleFactor);
         this.drawable.draw(g2, drawArea);
