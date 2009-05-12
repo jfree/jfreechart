@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYShapeRenderer.java
  * --------------------
- * (C) Copyright 2008, by Andreas Haumer, xS+S and Contributors.
+ * (C) Copyright 2008, 2009 by Andreas Haumer, xS+S and Contributors.
  *
  * Original Author:  Martin Hoeller (x Software + Systeme  xS+S - Andreas
  *                       Haumer);
@@ -98,7 +98,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
     /** Auto generated serial version id. */
     private static final long serialVersionUID = 8320552104211173221L;
 
-    /** The paint scale. */
+    /** The paint scale (never null). */
     private PaintScale paintScale;
 
     /** A flag that controls whether or not the shape outlines are drawn. */
@@ -119,10 +119,10 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
     /** Flag indicating if guide lines should be drawn for every item. */
     private boolean guideLinesVisible;
 
-    /** The paint used for drawing the guide lines. */
+    /** The paint used for drawing the guide lines (never null). */
     private transient Paint guideLinePaint;
 
-    /** The stroke used for drawing the guide lines. */
+    /** The stroke used for drawing the guide lines (never null). */
     private transient Stroke guideLineStroke;
 
     /**
@@ -528,8 +528,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
             return false;
         }
         XYShapeRenderer that = (XYShapeRenderer) obj;
-        if ((this.paintScale == null && that.paintScale != null)
-                || (!this.paintScale.equals(that.paintScale))) {
+        if (!this.paintScale.equals(that.paintScale)) {
             return false;
         }
         if (this.drawOutlines != that.drawOutlines) {
@@ -544,13 +543,12 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
         if (this.guideLinesVisible != that.guideLinesVisible) {
             return false;
         }
-        if ((this.guideLinePaint == null && that.guideLinePaint != null)
-                || (!this.guideLinePaint.equals(that.guideLinePaint)))
+        if (!this.guideLinePaint.equals(that.guideLinePaint)) {
             return false;
-        if ((this.guideLineStroke == null && that.guideLineStroke != null)
-                || (!this.guideLineStroke.equals(that.guideLineStroke)))
+        }
+        if (!this.guideLineStroke.equals(that.guideLineStroke)) {
             return false;
-
+        }
         return super.equals(obj);
     }
 
