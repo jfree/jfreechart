@@ -44,12 +44,14 @@
  * 08-Oct-2008 : New tests to support patch 2131001 and related 
  *               changes (DG);
  * 25-Mar-2009 : Added tests for new iterateToFindRangeBounds() method (DG);
- *
+ * 16-May-2009 : Added
+ *               testIterateToFindRangeBounds_MultiValueCategoryDataset() (DG);
  */
 
 package org.jfree.data.general.junit;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import junit.framework.Test;
@@ -68,7 +70,9 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
+import org.jfree.data.statistics.DefaultMultiValueCategoryDataset;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+import org.jfree.data.statistics.MultiValueCategoryDataset;
 import org.jfree.data.xy.DefaultIntervalXYDataset;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.DefaultXYDataset;
@@ -1156,6 +1160,41 @@ public class DatasetUtilitiesTests extends TestCase {
                 DatasetUtilities.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, false));
         assertEquals(new Range(0.5, 1.5),
+                DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, true));
+    }
+
+    /**
+     * Some checks for the iterateToFindRangeBounds(CategoryDataset...) method
+     * with a {@link MultiValueCategoryDataset}.
+     */
+    public void testIterateToFindRangeBounds_MultiValueCategoryDataset() {
+        DefaultMultiValueCategoryDataset dataset
+                = new DefaultMultiValueCategoryDataset();
+        List visibleSeriesKeys = new ArrayList();
+        assertNull(DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, true));
+        List values = Arrays.asList(new Double[] {new Double(1.0)});
+        dataset.add(values, "R1", "C1");
+        visibleSeriesKeys.add("R1");
+        assertEquals(new Range(1.0, 1.0),
+                DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, true));
+
+        values = Arrays.asList(new Double[] {new Double(2.0), new Double(3.0)});
+        dataset.add(values, "R1", "C2");
+        assertEquals(new Range(1.0, 3.0),
+                DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, true));
+
+        values = Arrays.asList(new Double[] {new Double(-1.0),
+                new Double(-2.0)});
+        dataset.add(values, "R2", "C1");
+        assertEquals(new Range(1.0, 3.0),
+                DatasetUtilities.iterateToFindRangeBounds(dataset,
+                visibleSeriesKeys, true));
+        visibleSeriesKeys.add("R2");
+        assertEquals(new Range(-2.0, 3.0),
                 DatasetUtilities.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
     }
