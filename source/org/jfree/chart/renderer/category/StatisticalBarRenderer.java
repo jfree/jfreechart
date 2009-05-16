@@ -32,7 +32,7 @@
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
- *                   Peter Kolb (patch 2497611);
+ *                   Peter Kolb (patches 2497611, 2791407);
  *
  * Changes
  * -------
@@ -54,6 +54,8 @@
  * 14-Nov-2007 : Added errorIndicatorStroke, and fixed bugs with drawBarOutline
  *               and gradientPaintTransformer attributes being ignored (DG);
  * 14-Jan-2009 : Added support for seriesVisible flags (PK);
+ * 16-May-2009 : Added findRangeBounds() override to take into account the
+ *               dataset interval (PK);
  *
  */
 
@@ -79,6 +81,7 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.StatisticalCategoryDataset;
 import org.jfree.io.SerialUtilities;
@@ -178,6 +181,20 @@ public class StatisticalBarRenderer extends BarRenderer
     public void setErrorIndicatorStroke(Stroke stroke) {
         this.errorIndicatorStroke = stroke;
         fireChangeEvent();
+    }
+
+    /**
+     * Returns the range of values the renderer requires to display all the
+     * items from the specified dataset. This takes into account the range
+     * between the min/max values, possibly ignoring invisible series.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (or <code>null</code> if the dataset is
+     *         <code>null</code> or empty).
+     */
+    public Range findRangeBounds(CategoryDataset dataset) {
+         return findRangeBounds(dataset, true);
     }
 
     /**

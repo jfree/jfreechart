@@ -31,7 +31,7 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
- *                   Peter Kolb (patch 2497611);
+ *                   Peter Kolb (patches 2497611, 2791407);
  *
  * Changes
  * -------
@@ -122,7 +122,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.DatasetUtilities;
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextUtilities;
 import org.jfree.ui.GradientPaintTransformer;
@@ -895,15 +894,17 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * the base value for the bars should be included in the range.
      *
      * @param dataset  the dataset (<code>null</code> permitted).
+     * @param includeInterval  include the interval if the dataset has one?
      *
      * @return The range (or <code>null</code> if the dataset is
      *         <code>null</code> or empty).
      */
-    public Range findRangeBounds(CategoryDataset dataset) {
+    public Range findRangeBounds(CategoryDataset dataset,
+            boolean includeInterval) {
         if (dataset == null) {
             return null;
         }
-        Range result = DatasetUtilities.findRangeBounds(dataset);
+        Range result = super.findRangeBounds(dataset, includeInterval);
         if (result != null) {
             if (this.includeBaseInRange) {
                 result = Range.expandToInclude(result, this.base);
