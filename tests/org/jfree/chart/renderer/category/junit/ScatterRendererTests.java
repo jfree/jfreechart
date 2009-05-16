@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * ScatterRendererTests.java
  * -------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 08-Oct-2007 : Version 1 (DG);
  * 11-Oct-2007 : Renamed ScatterRenderer (DG);
  * 23-Apr-2008 : Added testPublicCloneable() (DG);
+ * 16-May-2009 : Added testFindRangeBounds() (DG);
  *
  */
 
@@ -49,11 +50,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
+import java.util.Arrays;
+import java.util.List;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.renderer.category.ScatterRenderer;
+import org.jfree.data.Range;
+import org.jfree.data.statistics.DefaultMultiValueCategoryDataset;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -202,10 +207,8 @@ public class ScatterRendererTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         ScatterRenderer r1 = new ScatterRenderer();
         ScatterRenderer r2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -221,7 +224,39 @@ public class ScatterRendererTests extends TestCase {
             e.printStackTrace();
         }
         assertEquals(r1, r2);
-
     }
+
+    /**
+     * Some checks for the findRangeBounds() method.
+     */
+    public void testFindRangeBounds() {
+        ScatterRenderer r = new ScatterRenderer();
+        assertNull(r.findRangeBounds(null));
+
+        // an empty dataset should return a null range
+        DefaultMultiValueCategoryDataset dataset
+                = new DefaultMultiValueCategoryDataset();
+        assertNull(r.findRangeBounds(dataset));
+
+        List values = Arrays.asList(new double[] {1.0});
+        dataset.add(values, "R1", "C1");
+        assertEquals(new Range(1.0, 1.0), r.findRangeBounds(dataset));
+
+        values = Arrays.asList(new double[] {2.0, 2.2});
+        dataset.add(values, "R1", "C2");
+        assertEquals(new Range(1.0, 2.2), r.findRangeBounds(dataset));
+
+        values = Arrays.asList(new double[] {-3.0, -3.2});
+        dataset.add(values, "R1", "C3");
+        assertEquals(new Range(-3.2, 2.2), r.findRangeBounds(dataset));
+
+        values = Arrays.asList(new double[] {6.0});
+        dataset.add(values, "R2", "C1");
+        assertEquals(new Range(-3.2, 6.0), r.findRangeBounds(dataset));
+
+        r.setSeriesVisible(1, Boolean.FALSE);
+        assertEquals(new Range(-3.2, 2.2), r.findRangeBounds(dataset));
+    }
+
 
 }
