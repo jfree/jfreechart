@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------------
  * StatisticalLineAndShapeRendererTests.java
  * -----------------------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 15-Jun-2005 : Version 1 (DG);
  * 25-Sep-2006 : Added test1562759() (DG);
  * 23-Apr-2008 : Added testPublicCloneable() (DG);
+ * 16-May-2009 : Added testFindRangeBounds() (DG);
  *
  */
 
@@ -59,6 +60,7 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.StatisticalLineAndShapeRenderer;
+import org.jfree.data.Range;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
 import org.jfree.util.PublicCloneable;
 
@@ -208,6 +210,36 @@ public class StatisticalLineAndShapeRendererTests extends TestCase {
         r = new StatisticalLineAndShapeRenderer(false, true);
         assertFalse(r.getBaseLinesVisible());
         assertTrue(r.getBaseShapesVisible());
+    }
+
+    /**
+     * Some checks for the findRangeBounds() method.
+     */
+    public void testFindRangeBounds() {
+        StatisticalLineAndShapeRenderer r
+                = new StatisticalLineAndShapeRenderer();
+        assertNull(r.findRangeBounds(null));
+
+        // an empty dataset should return a null range
+        DefaultStatisticalCategoryDataset dataset
+                = new DefaultStatisticalCategoryDataset();
+        assertNull(r.findRangeBounds(dataset));
+
+        dataset.add(1.0, 0.5, "R1", "C1");
+        assertEquals(new Range(0.5, 1.5), r.findRangeBounds(dataset));
+
+        dataset.add(-2.0, 0.2, "R1", "C2");
+        assertEquals(new Range(-2.2, 1.5), r.findRangeBounds(dataset));
+
+        dataset.add(null, null, "R1", "C3");
+        assertEquals(new Range(-2.2, 1.5), r.findRangeBounds(dataset));
+
+        dataset.add(5.0, 1.0, "R2", "C3");
+        assertEquals(new Range(-2.2, 6.0), r.findRangeBounds(dataset));
+
+        // check that the series visible flag is observed
+        r.setSeriesVisible(1, Boolean.FALSE);
+        assertEquals(new Range(-2.2, 1.5), r.findRangeBounds(dataset));
     }
 
 }
