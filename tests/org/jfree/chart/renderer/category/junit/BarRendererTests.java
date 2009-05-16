@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * BarRendererTests.java
  * ---------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@
  * 11-May-2007 : Added testGetLegendItem() (DG);
  * 23-Apr-2008 : Added testPublicCloneable() (DG);
  * 25-Nov-2008 : Added testFindRangeBounds (DG);
+ * 16-May-2009 : Added series visibility check in testFindRangeBounds() (DG);
  *
  */
 
@@ -335,6 +336,12 @@ public class BarRendererTests extends TestCase {
         assertEquals(new Range(-2.0, 1.0), r.findRangeBounds(dataset));
 
         dataset.addValue(null, "R1", "C3");
+        assertEquals(new Range(-2.0, 1.0), r.findRangeBounds(dataset));
+
+        dataset.addValue(-6.0, "R2", "C1");
+        assertEquals(new Range(-6.0, 1.0), r.findRangeBounds(dataset));
+
+        r.setSeriesVisible(1, Boolean.FALSE);
         assertEquals(new Range(-2.0, 1.0), r.findRangeBounds(dataset));
     }
 
