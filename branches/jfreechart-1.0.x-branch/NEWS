@@ -1,6 +1,10 @@
 JFreeChart 1.0.14
 -----------------
 
+Patches:
+
+2791407 : Fixes for findRangeBounds() in various renderers.
+
 Bug Fixes:
 
 2781844 : XYPointerAnnotation arrow drawing;

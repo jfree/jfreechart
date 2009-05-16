@@ -32,7 +32,7 @@
  * Original Author:  Jeremy Bowman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
- *                   Peter Kolb (patch 2497611);
+ *                   Peter Kolb (patch 2497611, 2791407);
  *
  * Changes
  * -------
@@ -59,6 +59,8 @@
  * 24-Jun-2008 : Added new barPainter mechanism (DG);
  * 07-Oct-2008 : Override equals() method to fix minor bug (DG);
  * 14-Jan-2009 : Added support for seriesVisible flags (PK);
+ * 16-May-2009 : The findRangeBounds() method needs to include the dataset
+ *               interval (DG);
  *
  */
 
@@ -73,6 +75,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.ui.RectangleEdge;
@@ -97,6 +100,20 @@ public class IntervalBarRenderer extends BarRenderer {
      */
     public IntervalBarRenderer() {
         super();
+    }
+
+    /**
+     * Returns the range of values from the specified dataset.  For this
+     * renderer, this is equivalent to calling
+     * <code>findRangeBounds(dataset, true)</code>.
+     *
+     * @param dataset  the dataset (<code>null</code> permitted).
+     *
+     * @return The range (or <code>null</code> if the dataset is
+     *         <code>null</code> or empty).
+     */
+    public Range findRangeBounds(CategoryDataset dataset) {
+        return findRangeBounds(dataset, true);
     }
 
     /**
