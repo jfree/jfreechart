@@ -620,8 +620,8 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
                     g2.setPaint(this.stripOutlinePaint);
                     g2.setStroke(this.stripOutlineStroke);
                     g2.draw(new Rectangle2D.Double(target.getMaxX()
-                            - this.stripWidth, target.getMinY(), this.stripWidth,
-                            target.getHeight()));
+                            - this.stripWidth, target.getMinY(), 
+                            this.stripWidth, target.getHeight()));
                 }
                 this.axis.draw(g2, target.getMaxX() - this.stripWidth
                         - this.axisOffset, target, target, RectangleEdge.LEFT,
