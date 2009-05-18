@@ -115,8 +115,8 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
      * @return The label (possibly <code>null</code>).
      */
     public String generateLabel(Crosshair crosshair) {
-        Object[] v = new Object[] { this.numberFormat.format(
-                crosshair.getValue()) };
+        Object[] v = new Object[] {this.numberFormat.format(
+                crosshair.getValue())};
         String result = MessageFormat.format(this.labelTemplate, v);
         return result;
     }
