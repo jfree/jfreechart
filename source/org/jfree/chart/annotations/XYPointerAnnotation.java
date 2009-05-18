@@ -47,6 +47,7 @@
  *               Skunk (DG);
  * 12-Feb-2009 : Added support for rotated label, plus background and
  *               outline (DG);
+ * 18-May-2009 : Fixed typo in hashCode() method (DG);
  *
  */
 
@@ -500,7 +501,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
         result = result * 37 + this.arrowStroke.hashCode();
         temp = Double.doubleToLongBits(this.labelOffset);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        return super.hashCode();
+        return result;
     }
 
     /**
