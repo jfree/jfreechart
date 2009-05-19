@@ -53,6 +53,7 @@
  *               applied (DG);
  * 04-Feb-2009 : Updated findRangeBounds to handle null dataset consistently
  *               with other renderers (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -397,7 +398,7 @@ public class WaterfallBarRenderer extends BarRenderer {
         }
         Rectangle2D bar = new Rectangle2D.Double(rectX, rectY, rectWidth,
                 rectHeight);
-        Paint seriesPaint = getFirstBarPaint();
+        Paint seriesPaint;
         if (column == 0) {
             seriesPaint = getFirstBarPaint();
         }
