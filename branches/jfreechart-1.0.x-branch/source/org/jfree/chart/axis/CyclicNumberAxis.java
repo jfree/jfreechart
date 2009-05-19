@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CyclicNumberAxis.java
  * ---------------------
- * (C) Copyright 2003-2008, by Nicolas Brodu and Contributors.
+ * (C) Copyright 2003-2009, by Nicolas Brodu and Contributors.
  *
  * Original Author:  Nicolas Brodu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -43,6 +43,7 @@
  *               (for consistency with other classes) and removed unused
  *               parameters (DG);
  * 08-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -992,9 +993,8 @@ public class CyclicNumberAxis extends NumberAxis {
             return ret;
         }
 
-        double ol = getTickMarkOutsideLength();
+        double ol;
         FontMetrics fm = g2.getFontMetrics(getTickLabelFont());
-
         if (isVerticalTickLabels()) {
             ol = fm.getMaxAdvance();
         }
