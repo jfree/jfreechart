@@ -61,6 +61,7 @@
  * 14-Jan-2009 : Added support for seriesVisible flags (PK);
  * 16-May-2009 : The findRangeBounds() method needs to include the dataset
  *               interval (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -213,9 +214,6 @@ public class IntervalBarRenderer extends BarRenderer {
             double temp = java2dValue1;
             java2dValue1 = java2dValue0;
             java2dValue0 = temp;
-            Number tempNum = value1;
-            value1 = value0;
-            value0 = tempNum;
         }
 
         // BAR WIDTH
