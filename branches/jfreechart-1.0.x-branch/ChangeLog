@@ -1,3 +1,11 @@
+2009-05-19  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/time/TimeSeriesCollection.java: Implemented
+    XYDomainInfo,
+    (getDomainBounds(List, boolean)): New method,
+    * tests/org/jfree/data/time/junit/TimeSeriesCollectionTests.java
+    (testFindDomainBounds): New test method.
+
 2009-05-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYLineAndShapeRenderer.java
