@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * XYStepAreaRenderer.java
  * -----------------------
- * (C) Copyright 2003-2008, by Matthias Rose and Contributors.
+ * (C) Copyright 2003-2009, by Matthias Rose and Contributors.
  *
  * Original Author:  Matthias Rose (based on XYAreaRenderer.java);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -49,6 +49,7 @@
  * 14-Feb-2007 : Added equals() method override (DG);
  * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
  * 14-May-2008 : Call addEntity() from within drawItem() (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -406,8 +407,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
         }
 
         double transX0 = 0;
-        double transY0 = restrictValueToDataArea(getRangeBase(), plot,
-                dataArea);
+        double transY0;
 
         double x0;
         double y0;
