@@ -77,6 +77,7 @@
  *               by x-value (ascending) (DG);
  * 08-May-2007 : Added indexOf(TimeSeries) method (DG);
  * 18-Jan-2008 : Changed getSeries(String) to getSeries(Comparable) (DG);
+ * 19-May-2009 : Implemented XYDomainInfo (DG);
  *
  */
 
@@ -97,6 +98,7 @@ import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.xy.AbstractIntervalXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYDomainInfo;
 import org.jfree.util.ObjectUtilities;
 
 /**
@@ -106,7 +108,8 @@ import org.jfree.util.ObjectUtilities;
  * use with the {@link org.jfree.chart.plot.XYPlot} class.
  */
 public class TimeSeriesCollection extends AbstractIntervalXYDataset
-        implements XYDataset, IntervalXYDataset, DomainInfo, Serializable {
+        implements XYDataset, IntervalXYDataset, DomainInfo, XYDomainInfo,
+        Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 834149929022371137L;
@@ -602,6 +605,42 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
         Iterator iterator = this.data.iterator();
         while (iterator.hasNext()) {
             TimeSeries series = (TimeSeries) iterator.next();
+            int count = series.getItemCount();
+            if (count > 0) {
+                RegularTimePeriod start = series.getTimePeriod(0);
+                RegularTimePeriod end = series.getTimePeriod(count - 1);
+                Range temp;
+                if (!includeInterval) {
+                    temp = new Range(getX(start), getX(end));
+                }
+                else {
+                    temp = new Range(
+                            start.getFirstMillisecond(this.workingCalendar),
+                            end.getLastMillisecond(this.workingCalendar));
+                }
+                result = Range.combine(result, temp);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Returns the bounds of the domain values for the specified series.
+     * 
+     * @param visibleSeriesKeys  a list of keys for the visible series.
+     * @param includeInterval  include the x-interval?
+     * 
+     * @return A range.
+     * 
+     * @since 1.0.13
+     */
+    public Range getDomainBounds(List visibleSeriesKeys,
+            boolean includeInterval) {
+        Range result = null;
+        Iterator iterator = visibleSeriesKeys.iterator();
+        while (iterator.hasNext()) {
+            Comparable seriesKey = (Comparable) iterator.next();
+            TimeSeries series = getSeries(seriesKey);
             int count = series.getItemCount();
             if (count > 0) {
                 RegularTimePeriod start = series.getTimePeriod(0);
