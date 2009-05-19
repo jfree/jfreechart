@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * JDBCXYDataset.java
  * ------------------
- * (C) Copyright 2002-2008, by Bryan Scott and Contributors.
+ * (C) Copyright 2002-2009, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -66,6 +66,7 @@
  *               release (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 17-Oct-2006 : Deprecated unused methods - see bug 1578293 (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -373,11 +374,10 @@ public class JDBCXYDataset extends AbstractXYDataset
                 this.minValue = 0.0;
             }
             else {
-                ArrayList row = (ArrayList) this.rows.get(0);
                 this.maxValue = Double.NEGATIVE_INFINITY;
                 this.minValue = Double.POSITIVE_INFINITY;
                 for (int rowNum = 0; rowNum < this.rows.size(); ++rowNum) {
-                    row = (ArrayList) this.rows.get(rowNum);
+                    ArrayList row = (ArrayList) this.rows.get(rowNum);
                     for (int column = 1; column < numberOfColumns; column++) {
                         Object testValue = row.get(column);
                         if (testValue != null) {
