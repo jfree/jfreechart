@@ -36,6 +36,7 @@
  * -------
  * 19-Apr-2007 : Version 1 (DG);
  * 27-Mar-2009 : Fixed results for unsorted datasets (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -127,7 +128,6 @@ public class RendererUtilities {
                 else {
                     high = mid;
                 }
-                mid = (low + high) / 2;
             }
             return high;
         }
