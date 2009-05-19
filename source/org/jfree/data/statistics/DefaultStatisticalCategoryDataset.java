@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------------
  * DefaultStatisticalCategoryDataset.java
  * --------------------------------------
- * (C) Copyright 2002-2008, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2009, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -50,6 +50,7 @@
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  * 28-Sep-2007 : Fixed cloning bug (DG);
  * 02-Oct-2007 : Fixed bug updating cached range values (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -549,15 +550,13 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
         int columnCount = this.data.getColumnCount();
         for (int r = 0; r < rowCount; r++) {
             for (int c = 0; c < columnCount; c++) {
-                double m = Double.NaN;
-                double sd = Double.NaN;
                 MeanAndStandardDeviation masd = (MeanAndStandardDeviation)
                         this.data.getObject(r, c);
                 if (masd == null) {
                     continue;
                 }
-                m = masd.getMeanValue();
-                sd = masd.getStandardDeviationValue();
+                double m = masd.getMeanValue();
+                double sd = masd.getStandardDeviationValue();
 
                 if (!Double.isNaN(m)) {
 
