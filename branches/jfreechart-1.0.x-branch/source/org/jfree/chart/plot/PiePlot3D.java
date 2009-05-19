@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PiePlot3D.java
  * --------------
- * (C) Copyright 2000-2008, by Object Refinery and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery and Contributors.
  *
  * Original Author:  Tomer Peretz;
  * Contributor(s):   Richard Atkinson;
@@ -78,6 +78,7 @@
  *               debug code - see debug flags in PiePlot class (DG);
  * 20-Mar-2008 : Fixed bug 1920854 - multiple redraws of the section
  *               labels (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -450,8 +451,6 @@ public class PiePlot3D extends PiePlot implements Serializable {
         // draw the bottom circle
         int[] xs;
         int[] ys;
-        arc = new Arc2D.Double(arcX, arcY + depth, pieArea.getWidth(),
-                pieArea.getHeight() - depth, 0, 360, Arc2D.PIE);
 
         int categoryCount = arcList.size();
         for (int categoryIndex = 0; categoryIndex < categoryCount;
