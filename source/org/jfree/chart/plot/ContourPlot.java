@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ContourPlot.java
  * ----------------
- * (C) Copyright 2002-2008, by David M. O'Donnell and Contributors.
+ * (C) Copyright 2002-2009, by David M. O'Donnell and Contributors.
  *
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -64,6 +64,7 @@
  * 31-Jan-2007 : Deprecated (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -652,7 +653,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
 
         if (this.colorBar != null) {
             cursor = 0.0;
-            cursor = this.colorBar.draw(g2, cursor, adjustedPlotArea, dataArea,
+            this.colorBar.draw(g2, cursor, adjustedPlotArea, dataArea,
                     colorBarArea, this.colorBarLocation);
         }
         Shape originalClip = g2.getClip();
