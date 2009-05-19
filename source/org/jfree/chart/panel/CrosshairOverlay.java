@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 09-Apr-2009 : Version 1 (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -394,7 +395,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 || anchor == RectangleAnchor.BOTTOM
                 || anchor == RectangleAnchor.BOTTOM_RIGHT);
         Rectangle rect = line.getBounds();
-        Point2D pt = RectangleAnchor.coordinates(rect, anchor);
+        
         // we expect the line to be vertical or horizontal
         if (line.getX1() == line.getX2()) {  // vertical
             x = line.getX1();
