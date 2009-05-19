@@ -55,6 +55,7 @@
  * 02-Mar-2009 : Added locale - see patch 2569670 by Benjamin Bignell (DG);
  * 02-Mar-2009 : Fixed draw() method to check tickMarksVisible and
  *               tickLabelsVisible (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -722,7 +723,7 @@ public class PeriodAxis extends ValueAxis
                                            Rectangle2D dataArea,
                                            RectangleEdge edge) {
         List ticks = new ArrayList();
-        double x0 = dataArea.getX();
+        double x0;
         double y0 = state.getCursor();
         double insideLength = getTickMarkInsideLength();
         double outsideLength = getTickMarkOutsideLength();
