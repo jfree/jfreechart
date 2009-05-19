@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * JDBCPieDataset.java
  * -------------------
- * (C) Copyright 2002-2008, by Bryan Scott and Contributors.
+ * (C) Copyright 2002-2009, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott; Andy
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -52,6 +52,7 @@
  * 04-Dec-2003 : Added missing Javadocs (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 
@@ -181,7 +182,7 @@ public class JDBCPieDataset extends DefaultPieDataset {
             }
 
             int columnType = metaData.getColumnType(2);
-            double value = Double.NaN;
+            double value;
             while (resultSet.next()) {
                 Comparable key = resultSet.getString(1);
                 switch (columnType) {
@@ -206,8 +207,7 @@ public class JDBCPieDataset extends DefaultPieDataset {
 
                     default:
                         System.err.println(
-                            "JDBCPieDataset - unknown data type"
-                        );
+                                "JDBCPieDataset - unknown data type");
                         break;
                 }
             }
