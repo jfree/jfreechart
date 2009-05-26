@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * OHLCSeriesTests.java
  * --------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 04-Dec-2006 : Version 1, based on XYSeriesTests (DG);
  * 27-Nov-2007 : Added testClear() method (DG);
+ * 23-May-2009 : Added testHashCode() (DG);
  *
  */
 
@@ -124,6 +125,20 @@ public class OHLCSeriesTests extends TestCase
         assertFalse(s1.equals(s2));
         s2.remove(new Year(2008));
         assertTrue(s2.equals(s1));
+    }
+
+    /**
+     * Two objects that are equal are required to return the same hashCode.
+     */
+    public void testHashcode() {
+        OHLCSeries s1 = new OHLCSeries("Test");
+        s1.add(new Year(2009), 1.0, 3.0, 2.0, 1.4);
+        OHLCSeries s2 = new OHLCSeries("Test");
+        s2.add(new Year(2009), 1.0, 3.0, 2.0, 1.4);
+        assertTrue(s1.equals(s2));
+        int h1 = s1.hashCode();
+        int h2 = s2.hashCode();
+        assertEquals(h1, h2);
     }
 
     /**

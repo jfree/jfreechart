@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * OHLCSeriesCollection.java
  * -------------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,8 @@
  * -------
  * 04-Dec-2006 : Version 1 (DG);
  * 10-Jul-2008 : Added accessor methods for xPosition attribute (DG);
+ * 23-May-2009 : Added hashCode() implementation (DG);
+ *
  */
 
 package org.jfree.data.time.ohlc;
@@ -43,6 +45,7 @@ package org.jfree.data.time.ohlc;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimePeriodAnchor;
@@ -385,6 +388,20 @@ public class OHLCSeriesCollection extends AbstractXYDataset
             return false;
         }
         return ObjectUtilities.equal(this.data, that.data);
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     *
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = 137;
+        result = HashUtilities.hashCode(result, this.xPosition);
+        for (int i = 0; i < this.data.size(); i++) {
+            result = HashUtilities.hashCode(result, this.data.get(i));
+        }
+        return result;
     }
 
     /**
