@@ -46,6 +46,7 @@
  * 21-Nov-2007 : Added testBug1832432() and testClone2() (DG);
  * 10-Jan-2008 : Added testBug1864222() (DG);
  * 13-Jan-2009 : Added testEquals3() and testRemoveAgedItems3() (DG);
+ * 26-May-2009 : Added various tests for min/maxY values (DG);
  *
  */
 
@@ -298,6 +299,41 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         catch (IllegalArgumentException e) {
             // expected
         }
+    }
+
+    /**
+     * Some checks for the delete(int, int) method.
+     */
+    public void testDelete3() {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.add(new Year(2011), 1.1);
+        s1.add(new Year(2012), 2.2);
+        s1.add(new Year(2013), 3.3);
+        s1.add(new Year(2014), 4.4);
+        s1.add(new Year(2015), 5.5);
+        s1.add(new Year(2016), 6.6);
+        s1.delete(2, 5);
+        assertEquals(2, s1.getItemCount());
+        assertEquals(new Year(2011), s1.getTimePeriod(0));
+        assertEquals(new Year(2012), s1.getTimePeriod(1));
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+        assertEquals(2.2, s1.getMaxY(), EPSILON);
+    }
+
+    /**
+     * Check that the item bounds are determined correctly when there is a
+     * maximum item count and a new value is added.
+     */
+    public void testDelete_RegularTimePeriod() {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.add(new Year(2010), 1.1);
+        s1.add(new Year(2011), 2.2);
+        s1.add(new Year(2012), 3.3);
+        s1.add(new Year(2013), 4.4);
+        s1.delete(new Year(2010));
+        s1.delete(new Year(2013));
+        assertEquals(2.2, s1.getMinY(), EPSILON);
+        assertEquals(3.3, s1.getMaxY(), EPSILON);
     }
 
     /**
@@ -569,20 +605,20 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
      * from the series if necessary.
      */
     public void testSetMaximumItemCount() {
-
         TimeSeries s1 = new TimeSeries("S1", Year.class);
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-
         assertTrue(s1.getItemCount() == 5);
+
         s1.setMaximumItemCount(3);
         assertTrue(s1.getItemCount() == 3);
         TimeSeriesDataItem item = s1.getDataItem(0);
         assertTrue(item.getPeriod().equals(new Year(2002)));
-
+        assertEquals(16.89, s1.getMinY(), EPSILON);
+        assertEquals(19.32, s1.getMaxY(), EPSILON);
     }
 
     /**
@@ -599,6 +635,39 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertEquals(2, s1.getItemCount());
         s1.addOrUpdate(new Year(2002), 103.0);
         assertEquals(2, s1.getItemCount());
+    }
+
+    /**
+     * Test the add branch of the addOrUpdate() method.
+     */
+    public void testAddOrUpdate2() {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.setMaximumItemCount(2);
+        s1.addOrUpdate(new Year(2010), 1.1);
+        s1.addOrUpdate(new Year(2011), 2.2);
+        s1.addOrUpdate(new Year(2012), 3.3);
+        assertEquals(2, s1.getItemCount());
+        assertEquals(2.2, s1.getMinY(), EPSILON);
+        assertEquals(3.3, s1.getMaxY(), EPSILON);
+    }
+
+    /**
+     * Test that the addOrUpdate() method won't allow multiple time period
+     * classes.
+     */
+    public void testAddOrUpdate3() {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.addOrUpdate(new Year(2010), 1.1);
+        assertEquals(Year.class, s1.getTimePeriodClass());
+
+        boolean pass = false;
+        try {
+            s1.addOrUpdate(new Month(1, 2009), 0.0);
+        }
+        catch (SeriesException e) {
+            pass = true;
+        }
+        assertTrue(pass);
     }
 
     /**
@@ -810,7 +879,39 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             pass = false;
         }
         assertTrue(pass);
+    }
 
+    /**
+     * Check that the item bounds are determined correctly when there is a
+     * maximum item count.
+     */
+    public void testRemoveAgedItems4() {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.setMaximumItemAge(2);
+        s1.add(new Year(2010), 1.1);
+        s1.add(new Year(2011), 2.2);
+        s1.add(new Year(2012), 3.3);
+        s1.add(new Year(2013), 2.5);
+        assertEquals(3, s1.getItemCount());
+        assertEquals(2.2, s1.getMinY(), EPSILON);
+        assertEquals(3.3, s1.getMaxY(), EPSILON);
+    }
+
+    /**
+     * Check that the item bounds are determined correctly after a call to
+     * removeAgedItems().
+     */
+    public void testRemoveAgedItems5() {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.setMaximumItemAge(4);
+        s1.add(new Year(2010), 1.1);
+        s1.add(new Year(2011), 2.2);
+        s1.add(new Year(2012), 3.3);
+        s1.add(new Year(2013), 2.5);
+        s1.removeAgedItems(new Year(2015).getMiddleMillisecond(), true);
+        assertEquals(3, s1.getItemCount());
+        assertEquals(2.2, s1.getMinY(), EPSILON);
+        assertEquals(3.3, s1.getMaxY(), EPSILON);
     }
 
     /**
@@ -858,6 +959,109 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             pass = false;
         }
         assertTrue(pass);
+    }
+
+    private static final double EPSILON = 0.0000000001;
+
+    /**
+     * Some checks for the getMinY() method.
+     */
+    public void testGetMinY() {
+        TimeSeries s1 = new TimeSeries("S1");
+        assertTrue(Double.isNaN(s1.getMinY()));
+
+        s1.add(new Year(2008), 1.1);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+
+        s1.add(new Year(2009), 2.2);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+
+        s1.add(new Year(2000), 99.9);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+
+        s1.add(new Year(2002), -1.1);
+        assertEquals(-1.1, s1.getMinY(), EPSILON);
+
+        s1.add(new Year(2003), null);
+        assertEquals(-1.1, s1.getMinY(), EPSILON);
+
+        s1.addOrUpdate(new Year(2002), null);
+        assertEquals(1.1, s1.getMinY(), EPSILON);
+   }
+
+    /**
+     * Some checks for the getMaxY() method.
+     */
+    public void testGetMaxY() {
+        TimeSeries s1 = new TimeSeries("S1");
+        assertTrue(Double.isNaN(s1.getMaxY()));
+
+        s1.add(new Year(2008), 1.1);
+        assertEquals(1.1, s1.getMaxY(), EPSILON);
+
+        s1.add(new Year(2009), 2.2);
+        assertEquals(2.2, s1.getMaxY(), EPSILON);
+
+        s1.add(new Year(2000), 99.9);
+        assertEquals(99.9, s1.getMaxY(), EPSILON);
+
+        s1.add(new Year(2002), -1.1);
+        assertEquals(99.9, s1.getMaxY(), EPSILON);
+
+        s1.add(new Year(2003), null);
+        assertEquals(99.9, s1.getMaxY(), EPSILON);
+
+        s1.addOrUpdate(new Year(2000), null);
+        assertEquals(2.2, s1.getMaxY(), EPSILON);
+    }
+
+    /**
+     * A test for the clear method.
+     */
+    public void testClear() {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.add(new Year(2009), 1.1);
+        s1.add(new Year(2010), 2.2);
+
+        assertEquals(2, s1.getItemCount());
+
+        s1.clear();
+        assertEquals(0, s1.getItemCount());
+        assertTrue(Double.isNaN(s1.getMinY()));
+        assertTrue(Double.isNaN(s1.getMaxY()));
+    }
+
+    /**
+     * Check that the item bounds are determined correctly when there is a
+     * maximum item count and a new value is added.
+     */
+    public void testAdd() {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.setMaximumItemCount(2);
+        s1.add(new Year(2010), 1.1);
+        s1.add(new Year(2011), 2.2);
+        s1.add(new Year(2012), 3.3);
+        assertEquals(2, s1.getItemCount());
+        assertEquals(2.2, s1.getMinY(), EPSILON);
+        assertEquals(3.3, s1.getMaxY(), EPSILON);
+    }
+
+    /**
+     * Some checks for the update(RegularTimePeriod...method).
+     */
+    public void testUpdate_RegularTimePeriod() {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.add(new Year(2010), 1.1);
+        s1.add(new Year(2011), 2.2);
+        s1.add(new Year(2012), 3.3);
+        s1.update(new Year(2012), 4.4);
+        assertEquals(4.4, s1.getMaxY(), EPSILON);
+        s1.update(new Year(2010), 0.5);
+        assertEquals(0.5, s1.getMinY(), EPSILON);
+        s1.update(new Year(2012), null);
+        assertEquals(2.2, s1.getMaxY(), EPSILON);
+        s1.update(new Year(2010), null);
+        assertEquals(2.2, s1.getMinY(), EPSILON);
     }
 
 }
