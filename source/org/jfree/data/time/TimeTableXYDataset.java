@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * TimeTableXYDataset.java
  * -----------------------
- * (C) Copyright 2004-2008, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2009, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -49,6 +49,7 @@
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 25-Jul-2007 : Added clear() method by Rob Eden, see patch 1752205 (DG);
  * 04-Jun-2008 : Updated Javadocs (DG);
+ * 26-May-2009 : Peg to time zone if RegularTimePeriod is used (DG);
  *
  */
 
@@ -231,6 +232,14 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      */
     public void add(TimePeriod period, Number y, String seriesName,
                     boolean notify) {
+        // here's a quirk - the API has been defined in terms of a plain
+        // TimePeriod, which cannot make use of the timezone and locale
+        // specified in the constructor...so we only do the time zone
+        // pegging if the period is an instanceof RegularTimePeriod
+        if (period instanceof RegularTimePeriod) {
+            RegularTimePeriod p = (RegularTimePeriod) period;
+            p.peg(this.workingCalendar);
+        }
         this.values.addValue(y, period, seriesName);
         if (notify) {
             fireDatasetChanged();
