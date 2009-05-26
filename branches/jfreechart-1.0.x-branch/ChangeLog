@@ -1,3 +1,39 @@
+2009-05-26  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/time/TimeSeries.java
+    (minY): New field,
+    (maxY): Likewise,
+    (TimeSeries(Comparable, String, String)): Initialise new fields,
+    (getMinY): New method,
+    (getMaxY): Likewise,
+    (add(TimeSeriesDataItem, boolean)): Update min/maxY,
+    (update(RegularTimePeriod, Number)): Delegate,
+    (update(int, Number)): Update bounds,
+    (addOrUpdate): Update bounds,
+    (removeAgedItems): Likewise,
+    (clear): Clear bounds,
+    (delete(RegularTimePeriod)): Update bounds,
+    (delete(int, int)): Delegate to new method,
+    (delete(int, int, boolean)): New method,
+    (updateBoundsForAddedItem): New method,
+    (updateBoundsForRemovedItem): Likewise,
+    (findBoundsByIteration): Likewise,
+    (minIgnoreNaN): Likewise,
+    (maxIgnoreNaN): Likewise,
+    * tests/org/jfree/data/time/junit/TimeSeriesTests.java
+    (testDelete3): New test,
+    (testDelete_RegularTimePeriod): Likewise,
+    (testSetMaximumItemCount): Updated to check min/maxY,
+    (testAddOrUpdate2): New method,
+    (testAddOrUpdate3): Likewise,
+    (testRemoveAgedItems4): Likewise,
+    (testRemoveAgedItems5): Likewise,
+    (testGetMinY): Likewise,
+    (testGetMaxY): Likewise,
+    (testClear): Likewise,
+    (testAdd): Likewise,
+    (testUpdate_RegularTimePeriod): Likewise.
+
 2009-05-19  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/TimeSeriesCollection.java: Implemented
