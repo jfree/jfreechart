@@ -78,6 +78,7 @@
  * 08-May-2007 : Added indexOf(TimeSeries) method (DG);
  * 18-Jan-2008 : Changed getSeries(String) to getSeries(Comparable) (DG);
  * 19-May-2009 : Implemented XYDomainInfo (DG);
+ * 26-May-2009 : Implemented XYRangeInfo (DG);
  *
  */
 
@@ -99,6 +100,7 @@ import org.jfree.data.xy.AbstractIntervalXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYDomainInfo;
+import org.jfree.data.xy.XYRangeInfo;
 import org.jfree.util.ObjectUtilities;
 
 /**
@@ -109,7 +111,7 @@ import org.jfree.util.ObjectUtilities;
  */
 public class TimeSeriesCollection extends AbstractIntervalXYDataset
         implements XYDataset, IntervalXYDataset, DomainInfo, XYDomainInfo,
-        Serializable {
+        XYRangeInfo, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 834149929022371137L;
@@ -656,6 +658,32 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
                 }
                 result = Range.combine(result, temp);
             }
+        }
+        return result;
+    }
+
+    /**
+     * Returns the bounds for the y-values in the dataset.
+     *
+     * @param visibleSeriesKeys  the visible series keys.
+     * @param xRange  the x-range (<code>null</code> not permitted).
+     * @param includeInterval  ignored.
+     *
+     * @return The bounds.
+     *
+     * @since 1.0.14
+     */
+    public Range getRangeBounds(List visibleSeriesKeys, Range xRange,
+            boolean includeInterval) {
+        Range result = null;
+        Iterator iterator = visibleSeriesKeys.iterator();
+        while (iterator.hasNext()) {
+            Comparable seriesKey = (Comparable) iterator.next();
+            TimeSeries series = getSeries(seriesKey);
+            Range r = null;
+            r = new Range(series.getMinY(), series.getMaxY());
+            // FIXME: Here we are ignoring the xRange
+            result = Range.combine(result, r);
         }
         return result;
     }

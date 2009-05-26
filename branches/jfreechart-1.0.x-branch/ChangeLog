@@ -1,5 +1,11 @@
 2009-05-26  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/time/TimeSeriesCollection.java: Implemented
+    XYRangeInfo,
+    (getRangeBounds): New method.
+
+2009-05-26  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/time/TimeSeries.java
     (minY): New field,
     (maxY): Likewise,
