@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * OHLCSeriesCollectionTests.java
  * ------------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -179,6 +179,24 @@ public class OHLCSeriesCollectionTests extends TestCase {
         catch (IndexOutOfBoundsException e) {
             assertTrue(false);  // wrong outcome
         }
+    }
+
+    /**
+     * Two objects that are equal are required to return the same hashCode.
+     */
+    public void testHashcode() {
+        OHLCSeriesCollection c1 = new OHLCSeriesCollection();
+        OHLCSeries s1 = new OHLCSeries("S");
+        s1.add(new Year(2009), 1.0, 4.0, 0.5, 2.0);
+        c1.addSeries(s1);
+        OHLCSeriesCollection c2 = new OHLCSeriesCollection();
+        OHLCSeries s2 = new OHLCSeries("S");
+        s2.add(new Year(2009), 1.0, 4.0, 0.5, 2.0);
+        c2.addSeries(s2);
+        assertTrue(c1.equals(c2));
+        int h1 = c1.hashCode();
+        int h2 = c2.hashCode();
+        assertEquals(h1, h2);
     }
 
 }
