@@ -1,5 +1,11 @@
 2009-05-26  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 1937486:
+    * source/org/jfree/chart/renderer/category/AreaRenderer.java
+    (drawItem): Handle AreaRendererEndType.LEVEL.
+
+2009-05-26  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/time/TimeSeriesCollection.java: Implemented
     XYRangeInfo,
     (getRangeBounds): New method.

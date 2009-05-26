@@ -27,7 +27,7 @@
  * -----------------
  * AreaRenderer.java
  * -----------------
- * (C) Copyright 2002-2008, by Jon Iles and Contributors.
+ * (C) Copyright 2002-2009, by Jon Iles and Contributors.
  *
  * Original Author:  Jon Iles;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -66,7 +66,8 @@
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  * 26-Jun-2008 : Added crosshair support (DG);
- *
+ * 26-May-2009 : Support AreaRendererEndType.LEVEL (DG);
+ * 
  */
 
 package org.jfree.chart.renderer.category;
@@ -260,6 +261,9 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
             double yy1 = value.doubleValue();
 
             double yy0 = 0.0;
+            if (this.endType == AreaRendererEndType.LEVEL) {
+                yy0 = yy1;
+            }
             if (column > 0) {
                 Number n0 = dataset.getValue(row, column - 1);
                 if (n0 != null) {
@@ -273,6 +277,9 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
                 if (n2 != null) {
                     yy2 = (n2.doubleValue() + yy1) / 2.0;
                 }
+            }
+            else if (this.endType == AreaRendererEndType.LEVEL) {
+                yy2 = yy1;
             }
 
             RectangleEdge edge = plot.getRangeAxisEdge();
