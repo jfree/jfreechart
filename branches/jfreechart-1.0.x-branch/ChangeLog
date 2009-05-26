@@ -1,5 +1,11 @@
 2009-05-26  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/time/TimeTableXYDataset.java
+    (add): If period is a RegularTimePeriod, peg it to the timezone and locale
+    specified in the constructor.
+
+2009-05-26  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 1937486:
     * source/org/jfree/chart/renderer/category/AreaRenderer.java
     (drawItem): Handle AreaRendererEndType.LEVEL.
