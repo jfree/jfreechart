@@ -216,119 +216,112 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         CategoryItemRendererState state,
-                         Rectangle2D dataArea,
-                         CategoryPlot plot,
-                         CategoryAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         CategoryDataset dataset,
-                         int row,
-                         int column,
-                         int pass) {
+    public void drawItem(Graphics2D g2, CategoryItemRendererState state,
+            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+            ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
+            int pass) {
 
-        // do nothing if item is not visible
+        // do nothing if item is not visible or null
         if (!getItemVisible(row, column)) {
             return;
         }
-
-        // plot non-null values only...
         Number value = dataset.getValue(row, column);
-        if (value != null) {
-            PlotOrientation orientation = plot.getOrientation();
-            RectangleEdge axisEdge = plot.getDomainAxisEdge();
-            int count = dataset.getColumnCount();
-            float x0 = (float) domainAxis.getCategoryStart(column, count,
-                    dataArea, axisEdge);
-            float x1 = (float) domainAxis.getCategoryMiddle(column, count,
-                    dataArea, axisEdge);
-            float x2 = (float) domainAxis.getCategoryEnd(column, count,
-                    dataArea, axisEdge);
+        if (value == null) {
+            return;
+        }
+        PlotOrientation orientation = plot.getOrientation();
+        RectangleEdge axisEdge = plot.getDomainAxisEdge();
+        int count = dataset.getColumnCount();
+        float x0 = (float) domainAxis.getCategoryStart(column, count, dataArea,
+                axisEdge);
+        float x1 = (float) domainAxis.getCategoryMiddle(column, count,
+                dataArea, axisEdge);
+        float x2 = (float) domainAxis.getCategoryEnd(column, count, dataArea,
+                axisEdge);
 
-            x0 = Math.round(x0);
-            x1 = Math.round(x1);
-            x2 = Math.round(x2);
+        x0 = Math.round(x0);
+        x1 = Math.round(x1);
+        x2 = Math.round(x2);
 
-            if (this.endType == AreaRendererEndType.TRUNCATE) {
-                if (column == 0) {
-                    x0 = x1;
-                }
-                else if (column == getColumnCount() - 1) {
-                    x2 = x1;
-                }
+        if (this.endType == AreaRendererEndType.TRUNCATE) {
+            if (column == 0) {
+                x0 = x1;
             }
-
-            double yy1 = value.doubleValue();
-
-            double yy0 = 0.0;
-            if (this.endType == AreaRendererEndType.LEVEL) {
-                yy0 = yy1;
+            else if (column == getColumnCount() - 1) {
+                x2 = x1;
             }
-            if (column > 0) {
-                Number n0 = dataset.getValue(row, column - 1);
-                if (n0 != null) {
-                    yy0 = (n0.doubleValue() + yy1) / 2.0;
-                }
+        }
+
+        double yy1 = value.doubleValue();
+
+        double yy0 = 0.0;
+        if (this.endType == AreaRendererEndType.LEVEL) {
+            yy0 = yy1;
+        }
+        if (column > 0) {
+            Number n0 = dataset.getValue(row, column - 1);
+            if (n0 != null) {
+                yy0 = (n0.doubleValue() + yy1) / 2.0;
             }
+        }
 
-            double yy2 = 0.0;
-            if (column < dataset.getColumnCount() - 1) {
-                Number n2 = dataset.getValue(row, column + 1);
-                if (n2 != null) {
-                    yy2 = (n2.doubleValue() + yy1) / 2.0;
-                }
+        double yy2 = 0.0;
+        if (column < dataset.getColumnCount() - 1) {
+            Number n2 = dataset.getValue(row, column + 1);
+            if (n2 != null) {
+                yy2 = (n2.doubleValue() + yy1) / 2.0;
             }
-            else if (this.endType == AreaRendererEndType.LEVEL) {
-                yy2 = yy1;
-            }
+        }
+        else if (this.endType == AreaRendererEndType.LEVEL) {
+            yy2 = yy1;
+        }
 
-            RectangleEdge edge = plot.getRangeAxisEdge();
-            float y0 = (float) rangeAxis.valueToJava2D(yy0, dataArea, edge);
-            float y1 = (float) rangeAxis.valueToJava2D(yy1, dataArea, edge);
-            float y2 = (float) rangeAxis.valueToJava2D(yy2, dataArea, edge);
-            float yz = (float) rangeAxis.valueToJava2D(0.0, dataArea, edge);
+        RectangleEdge edge = plot.getRangeAxisEdge();
+        float y0 = (float) rangeAxis.valueToJava2D(yy0, dataArea, edge);
+        float y1 = (float) rangeAxis.valueToJava2D(yy1, dataArea, edge);
+        float y2 = (float) rangeAxis.valueToJava2D(yy2, dataArea, edge);
+        float yz = (float) rangeAxis.valueToJava2D(0.0, dataArea, edge);
 
-            g2.setPaint(getItemPaint(row, column));
-            g2.setStroke(getItemStroke(row, column));
+        g2.setPaint(getItemPaint(row, column));
+        g2.setStroke(getItemStroke(row, column));
 
-            GeneralPath area = new GeneralPath();
+        GeneralPath area = new GeneralPath();
 
-            if (orientation == PlotOrientation.VERTICAL) {
-                area.moveTo(x0, yz);
-                area.lineTo(x0, y0);
-                area.lineTo(x1, y1);
-                area.lineTo(x2, y2);
-                area.lineTo(x2, yz);
-            }
-            else if (orientation == PlotOrientation.HORIZONTAL) {
-                area.moveTo(yz, x0);
-                area.lineTo(y0, x0);
-                area.lineTo(y1, x1);
-                area.lineTo(y2, x2);
-                area.lineTo(yz, x2);
-            }
-            area.closePath();
+        if (orientation == PlotOrientation.VERTICAL) {
+            area.moveTo(x0, yz);
+            area.lineTo(x0, y0);
+            area.lineTo(x1, y1);
+            area.lineTo(x2, y2);
+            area.lineTo(x2, yz);
+        }
+        else if (orientation == PlotOrientation.HORIZONTAL) {
+            area.moveTo(yz, x0);
+            area.lineTo(y0, x0);
+            area.lineTo(y1, x1);
+            area.lineTo(y2, x2);
+            area.lineTo(yz, x2);
+        }
+        area.closePath();
 
-            g2.setPaint(getItemPaint(row, column));
-            g2.fill(area);
+        g2.setPaint(getItemPaint(row, column));
+        g2.fill(area);
 
-            // draw the item labels if there are any...
-            if (isItemLabelVisible(row, column)) {
-                drawItemLabel(g2, orientation, dataset, row, column, x1, y1,
-                        (value.doubleValue() < 0.0));
-            }
+        // draw the item labels if there are any...
+        if (isItemLabelVisible(row, column)) {
+            drawItemLabel(g2, orientation, dataset, row, column, x1, y1,
+                    (value.doubleValue() < 0.0));
+        }
 
-            // submit the current data point as a crosshair candidate
-            int datasetIndex = plot.indexOf(dataset);
-            updateCrosshairValues(state.getCrosshairState(),
-                    dataset.getRowKey(row), dataset.getColumnKey(column),
-                    yy1, datasetIndex, x1, y1, orientation);
+        // submit the current data point as a crosshair candidate
+        int datasetIndex = plot.indexOf(dataset);
+        updateCrosshairValues(state.getCrosshairState(), 
+                dataset.getRowKey(row), dataset.getColumnKey(column), yy1,
+                datasetIndex, x1, y1, orientation);
 
-            // add an item entity, if this information is being collected
-            EntityCollection entities = state.getEntityCollection();
-            if (entities != null) {
-                addItemEntity(entities, dataset, row, column, area);
-            }
+        // add an item entity, if this information is being collected
+        EntityCollection entities = state.getEntityCollection();
+        if (entities != null) {
+            addItemEntity(entities, dataset, row, column, area);
         }
 
     }
