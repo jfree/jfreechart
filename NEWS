@@ -1,5 +1,9 @@
 JFreeChart 1.0.14
 -----------------
+NOT YET RELEASED
+
+This release contains some performance improvements in the TimeSeriesCollection
+class and numerous bug fixes.
 
 Patches:
 
@@ -8,6 +12,13 @@ Patches:
 Bug Fixes:
 
 2781844 : XYPointerAnnotation arrow drawing;
+1937486 : AreaRenderer doesn't respect AreaRendererEndType.LEVEL;
+
+Also fixed:
+- scaling issues for charts copied to the clipboard;
+- use of timezone in TimeTableXYDataset constructor;
+- item label positioning for the AreaRenderer class when the plot has an
+  horizontal orientation.
 
 
 JFreeChart 1.0.13
