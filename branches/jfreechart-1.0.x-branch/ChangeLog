@@ -1,3 +1,8 @@
+2009-05-27  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/AreaRenderer.java
+    (drawItem): Use correct item label anchor for horizontal orientation.
+
 2009-05-26  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/TimeTableXYDataset.java

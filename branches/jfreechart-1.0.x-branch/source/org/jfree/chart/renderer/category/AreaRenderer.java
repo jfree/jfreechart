@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -67,6 +67,7 @@
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  * 26-Jun-2008 : Added crosshair support (DG);
  * 26-May-2009 : Support AreaRendererEndType.LEVEL (DG);
+ * 27-May-2009 : Fixed item label anchor for horizontal orientation (DG);
  * 
  */
 
@@ -281,7 +282,8 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
         float y1 = (float) rangeAxis.valueToJava2D(yy1, dataArea, edge);
         float y2 = (float) rangeAxis.valueToJava2D(yy2, dataArea, edge);
         float yz = (float) rangeAxis.valueToJava2D(0.0, dataArea, edge);
-
+        double labelXX = x1;
+        double labelYY = y1;
         g2.setPaint(getItemPaint(row, column));
         g2.setStroke(getItemStroke(row, column));
 
@@ -300,6 +302,9 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
             area.lineTo(y1, x1);
             area.lineTo(y2, x2);
             area.lineTo(yz, x2);
+            double temp = labelXX;
+            labelXX = labelYY;
+            labelYY = temp;
         }
         area.closePath();
 
@@ -308,8 +313,8 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
 
         // draw the item labels if there are any...
         if (isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, orientation, dataset, row, column, x1, y1,
-                    (value.doubleValue() < 0.0));
+            drawItemLabel(g2, orientation, dataset, row, column, labelXX,
+                    labelYY, (value.doubleValue() < 0.0));
         }
 
         // submit the current data point as a crosshair candidate
