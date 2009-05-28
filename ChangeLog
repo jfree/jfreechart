@@ -1,5 +1,15 @@
 2009-05-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/function/PowerFunction2D.java: Implemented
+    Serializable,
+    (getA): New method,
+    (getB): Likewise,
+    (equals): New method override,
+    (hashCode): Likewise,
+    * tests/org/jfree/data/function/junit/PowerFunction2DTests.java: New file.
+
+2009-05-28  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/function/NormalDistributionFunction2D.java:
     Implemented Serializable,
     (equals): New method override,

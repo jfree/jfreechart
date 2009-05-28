@@ -61,6 +61,7 @@ public class DataFunctionPackageTests extends TestCase {
         suite.addTestSuite(LineFunction2DTests.class);
         suite.addTestSuite(NormalDistributionFunction2DTests.class);
         suite.addTestSuite(PolynomialFunction2DTests.class);
+        suite.addTestSuite(PowerFunction2DTests.class);
         return suite;
     }
 
