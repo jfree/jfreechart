@@ -232,9 +232,8 @@ public class CategoryToPieDatasetTests extends TestCase {
             out.writeObject(d1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             d2 = (CategoryToPieDataset) in.readObject();
             in.close();
         }
