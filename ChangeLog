@@ -1,3 +1,15 @@
+2009-05-29  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch 2795746 by Peter Kolb:
+    * source/org/jfree/data/function/PolynomialFunction2D;java: New file,
+    * source/org/jfree/data/statistics/Regression.java
+    (getPolynomialRegression): New method,
+    (calculateSubmatrix): New private method,
+    * tests/org/jfree/data/function/junit/DataFunctionPackageTests.java:
+    New test file,
+    * tests/org/jfree/data/function/junit/PolynomialFunction2DTests.java:
+    Likewise.
+
 2009-05-27  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/category/AreaRenderer.java
