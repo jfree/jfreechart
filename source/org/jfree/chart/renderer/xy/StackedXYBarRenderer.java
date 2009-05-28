@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * StackedXYBarRenderer.java
  * -------------------------
- * (C) Copyright 2004-2008, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2009, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -49,6 +49,7 @@
  * 15-Mar-2007 : Added renderAsPercentages option (DG);
  * 24-Jun-2008 : Added new barPainter mechanism (DG);
  * 23-Sep-2008 : Check shadow visibility before drawing shadow (DG);
+ * 28-May-2009 : Fixed bar positioning with inverted domain axis (DG);
  *
  */
 
@@ -345,12 +346,12 @@ public class StackedXYBarRenderer extends XYBarRenderer {
         PlotOrientation orientation = plot.getOrientation();
         if (orientation == PlotOrientation.HORIZONTAL) {
             bar = new Rectangle2D.Double(Math.min(translatedBase,
-                    translatedValue), translatedEndX, translatedHeight,
-                    translatedWidth);
+                    translatedValue), Math.min(translatedEndX,
+                    translatedStartX), translatedHeight, translatedWidth);
         }
         else if (orientation == PlotOrientation.VERTICAL) {
-            bar = new Rectangle2D.Double(translatedStartX,
-                    Math.min(translatedBase, translatedValue),
+            bar = new Rectangle2D.Double(Math.min(translatedStartX,
+                    translatedEndX), Math.min(translatedBase, translatedValue),
                     translatedWidth, translatedHeight);
         }
         boolean positive = (value > 0.0);

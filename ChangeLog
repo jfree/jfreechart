@@ -1,4 +1,9 @@
-2009-05-29  David Gilbert  <david.gilbert@object-refinery.com>
+2009-05-28  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/xy/StackedXYBarRenderer.java
+    (drawItem): Fixed bar alignment for inverted domain axis.
+
+2009-05-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 2795746 by Peter Kolb:
     * source/org/jfree/data/function/PolynomialFunction2D;java: New file,
