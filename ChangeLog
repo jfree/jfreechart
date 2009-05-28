@@ -1,5 +1,14 @@
 2009-05-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/function/NormalDistributionFunction2D.java:
+    Implemented Serializable,
+    (equals): New method override,
+    (hashCode): Likewise,
+    * tests/org/jfree/data/function/junit/NormalDistributionFunction2DTests.java:
+    New file.
+
+2009-05-28  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/function/LineFunction2D.java: Implemented
     Serializable,
     (getIntercept): New method,

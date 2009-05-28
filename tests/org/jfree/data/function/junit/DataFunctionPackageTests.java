@@ -59,6 +59,7 @@ public class DataFunctionPackageTests extends TestCase {
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.data.function");
         suite.addTestSuite(LineFunction2DTests.class);
+        suite.addTestSuite(NormalDistributionFunction2DTests.class);
         suite.addTestSuite(PolynomialFunction2DTests.class);
         return suite;
     }
