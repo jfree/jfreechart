@@ -47,6 +47,7 @@
  * 26-Jan-2007 : Added tests for org.jfree.data.time.ohlc package (DG);
  * 24-Oct-2007 : Added tests for org.jfree.chart.plot.dial package (DG);
  * 25-Mar-2009 : Added missing test suite (org.jfree.data.general) (DG);
+ * 28-May-2009 : Added tests for org.jfree.data.function package (DG);
  *
  */
 

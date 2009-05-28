@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * LineFunction2D.java
  * -------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,15 +35,21 @@
  * Changes:
  * --------
  * 01-Oct-2002 : Version 1 (DG);
+ * 28-May-2009 : Added accessor methods for co-efficients, implemented
+ *               equals() and hashCode(), and added Serialization support (DG);
  *
  */
 
 package org.jfree.data.function;
 
+import java.io.Serializable;
+
+import org.jfree.chart.HashUtilities;
+
 /**
  * A function in the form y = a + bx.
  */
-public class LineFunction2D implements Function2D {
+public class LineFunction2D implements Function2D, Serializable {
 
     /** The intercept. */
     private double a;
@@ -63,6 +69,28 @@ public class LineFunction2D implements Function2D {
     }
 
     /**
+     * Returns the 'a' coefficient that was specified in the constructor.
+     *
+     * @return The 'a' coefficient.
+     *
+     * @since 1.0.14
+     */
+    public double getIntercept() {
+        return this.a;
+    }
+
+    /**
+     * Returns the 'b' coefficient that was specified in the constructor.
+     *
+     * @return The 'b' coefficient.
+     *
+     * @since 1.0.14
+     */
+    public double getSlope() {
+        return this.b;
+    }
+
+    /**
      * Returns the function value.
      *
      * @param x  the x-value.
@@ -73,4 +101,36 @@ public class LineFunction2D implements Function2D {
         return this.a + this.b * x;
     }
 
+    /**
+     * Tests this function for equality with an arbitrary object.
+     *
+     * @param obj  the object (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (!(obj instanceof LineFunction2D)) {
+            return false;
+        }
+        LineFunction2D that = (LineFunction2D) obj;
+        if (this.a != that.a) {
+            return false;
+        }
+        if (this.b != that.b) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = 29;
+        result = HashUtilities.hashCode(result, this.a);
+        result = HashUtilities.hashCode(result, this.b);
+        return result;
+    }
 }
