@@ -2,11 +2,13 @@ JFreeChart 1.0.14
 -----------------
 NOT YET RELEASED
 
-This release contains some performance improvements in the TimeSeriesCollection
-class and numerous bug fixes.
+This release contains support for fitting polynomial functions to a data 
+series, some performance improvements in the TimeSeriesCollection class and
+numerous bug fixes.
 
 Patches:
 
+2795746 : Support for polynomial regression;
 2791407 : Fixes for findRangeBounds() in various renderers.
 
 Bug Fixes:
