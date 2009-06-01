@@ -160,7 +160,8 @@
  * 09-Apr-2009 : Added overlay support (DG);
  * 10-Apr-2009 : Set chartBuffer background to match ChartPanel (DG);
  * 05-May-2009 : Match scaling (and insets) in doCopy() (DG);
- *
+ * 01-Jun-2009 : Check for null chart in mousePressed() method (DG);
+ * 
  */
 
 package org.jfree.chart;
@@ -1852,6 +1853,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param e  The mouse event.
      */
     public void mousePressed(MouseEvent e) {
+        if (this.chart == null) {
+            return;
+        }
         Plot plot = this.chart.getPlot();
         int mods = e.getModifiers();
         if ((mods & this.panMask) == this.panMask) {
