@@ -51,6 +51,7 @@
  *               see patch 1943021 from Brian Cabana (DG);
  * 30-Dec-2008 : Added legendItemShape field, and fixed cloning bug (DG);
  * 09-Jan-2009 : See ignoreNullValues to true for sub-chart (DG);
+ * 01-Jun-2009 : Set series key in getLegendItems() (DG);
  *
  */
 
@@ -570,28 +571,31 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
         else if (this.dataExtractOrder == TableOrder.BY_COLUMN) {
             keys = this.dataset.getRowKeys();
         }
-
-        if (keys != null) {
-            int section = 0;
-            Iterator iterator = keys.iterator();
-            while (iterator.hasNext()) {
-                Comparable key = (Comparable) iterator.next();
-                String label = key.toString();  // TODO: use a generator here
-                String description = label;
-                Paint paint = (Paint) this.sectionPaints.get(key);
-                LegendItem item = new LegendItem(label, description, null,
-                        null, getLegendItemShape(), paint,
-                        Plot.DEFAULT_OUTLINE_STROKE, paint);
-                item.setDataset(getDataset());
-                result.add(item);
-                section++;
-            }
+        if (keys == null) {
+            return result;
+        }
+        int section = 0;
+        Iterator iterator = keys.iterator();
+        while (iterator.hasNext()) {
+            Comparable key = (Comparable) iterator.next();
+            String label = key.toString();  // TODO: use a generator here
+            String description = label;
+            Paint paint = (Paint) this.sectionPaints.get(key);
+            LegendItem item = new LegendItem(label, description, null,
+                    null, getLegendItemShape(), paint,
+                    Plot.DEFAULT_OUTLINE_STROKE, paint);
+            item.setSeriesKey(key);
+            item.setSeriesIndex(section);
+            item.setDataset(getDataset());
+            result.add(item);
+            section++;
         }
         if (this.limit > 0.0) {
-            result.add(new LegendItem(this.aggregatedItemsKey.toString(),
+            LegendItem a = new LegendItem(this.aggregatedItemsKey.toString(),
                     this.aggregatedItemsKey.toString(), null, null,
                     getLegendItemShape(), this.aggregatedItemsPaint,
-                    Plot.DEFAULT_OUTLINE_STROKE, this.aggregatedItemsPaint));
+                    Plot.DEFAULT_OUTLINE_STROKE, this.aggregatedItemsPaint);
+            result.add(a);
         }
         return result;
     }

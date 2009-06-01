@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * MultiplePiePlotTests.java
  * -------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,8 @@
  * 06-Apr-2006 : Added tests for new fields (DG);
  * 18-Apr-2008 : Added testConstructor() (DG);
  * 30-Dec-2008 : Updated for new legendItemShape field (DG);
+ * 01-Jun-2009 : Added test for getLegendItems() bug, series key is not
+ *               set (DG);
  *
  */
 
@@ -58,6 +60,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.LegendItem;
+import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.plot.MultiplePiePlot;
@@ -205,6 +210,34 @@ public class MultiplePiePlotTests extends TestCase
             e.printStackTrace();
         }
         assertEquals(p1, p2);
+    }
+
+    /**
+     * Fetches the legend items and checks the values.
+     */
+    public void testGetLegendItems() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(35.0, "S1", "C1");
+        dataset.addValue(45.0, "S1", "C2");
+        dataset.addValue(55.0, "S2", "C1");
+        dataset.addValue(15.0, "S2", "C2");
+        MultiplePiePlot plot = new MultiplePiePlot(dataset);
+        JFreeChart chart = new JFreeChart(plot);
+        LegendItemCollection legendItems = plot.getLegendItems();
+        assertEquals(2, legendItems.getItemCount());
+        LegendItem item1 = legendItems.get(0);
+        assertEquals("S1", item1.getLabel());
+        assertEquals("S1", item1.getSeriesKey());
+        assertEquals(0, item1.getSeriesIndex());
+        assertEquals(dataset, item1.getDataset());
+        assertEquals(0, item1.getDatasetIndex());
+
+        LegendItem item2 = legendItems.get(1);
+        assertEquals("S2", item2.getLabel());
+        assertEquals("S2", item2.getSeriesKey());
+        assertEquals(1, item2.getSeriesIndex());
+        assertEquals(dataset, item2.getDataset());
+        assertEquals(0, item2.getDatasetIndex());
     }
 
 }
