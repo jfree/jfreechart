@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * SpiderWebPlotTests.java
  * -----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,8 @@
  * 10-Jun-2005 : Version 1 (DG);
  * 01-Jun-2006 : Added testDrawWithNullInfo() method (DG);
  * 05-Feb-2007 : Added more checks to testCloning (DG);
+ * 01-Jun-2009 : Added test for getLegendItems() bug, series key is not
+ *               set (DG);
  *
  */
 
@@ -63,6 +65,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.LegendItem;
+import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.SpiderWebPlot;
@@ -367,6 +371,34 @@ public class SpiderWebPlotTests extends TestCase {
             success = false;
         }
         assertTrue(success);
+    }
+
+    /**
+     * Fetches the legend items and checks the values.
+     */
+    public void testGetLegendItems() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(35.0, "S1", "C1");
+        dataset.addValue(45.0, "S1", "C2");
+        dataset.addValue(55.0, "S2", "C1");
+        dataset.addValue(15.0, "S2", "C2");
+        SpiderWebPlot plot = new SpiderWebPlot(dataset);
+        JFreeChart chart = new JFreeChart(plot);
+        LegendItemCollection legendItems = plot.getLegendItems();
+        assertEquals(2, legendItems.getItemCount());
+        LegendItem item1 = legendItems.get(0);
+        assertEquals("S1", item1.getLabel());
+        assertEquals("S1", item1.getSeriesKey());
+        assertEquals(0, item1.getSeriesIndex());
+        assertEquals(dataset, item1.getDataset());
+        assertEquals(0, item1.getDatasetIndex());
+
+        LegendItem item2 = legendItems.get(1);
+        assertEquals("S2", item2.getLabel());
+        assertEquals("S2", item2.getSeriesKey());
+        assertEquals(1, item2.getSeriesIndex());
+        assertEquals(dataset, item2.getDataset());
+        assertEquals(0, item2.getDatasetIndex());
     }
 
 }

@@ -64,7 +64,8 @@
  * 18-May-2007 : Set dataset for LegendItem (DG);
  * 02-Jun-2008 : Fixed bug with chart entities using TableOrder.BY_COLUMN (DG);
  * 02-Jun-2008 : Fixed bug with null dataset (DG);
- *
+ * 01-Jun-2009 : Set series key in getLegendItems() (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -1071,16 +1072,15 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a collection of legend items for the radar chart.
+     * Returns a collection of legend items for the spider web chart.
      *
-     * @return The legend items.
+     * @return The legend items (never <code>null</code>).
      */
     public LegendItemCollection getLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
         if (getDataset() == null) {
             return result;
         }
-
         List keys = null;
         if (this.dataExtractOrder == TableOrder.BY_ROW) {
             keys = this.dataset.getRowKeys();
@@ -1088,27 +1088,28 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         else if (this.dataExtractOrder == TableOrder.BY_COLUMN) {
             keys = this.dataset.getColumnKeys();
         }
-
-        if (keys != null) {
-            int series = 0;
-            Iterator iterator = keys.iterator();
-            Shape shape = getLegendItemShape();
-
-            while (iterator.hasNext()) {
-                String label = iterator.next().toString();
-                String description = label;
-
-                Paint paint = getSeriesPaint(series);
-                Paint outlinePaint = getSeriesOutlinePaint(series);
-                Stroke stroke = getSeriesOutlineStroke(series);
-                LegendItem item = new LegendItem(label, description,
-                        null, null, shape, paint, stroke, outlinePaint);
-                item.setDataset(getDataset());
-                result.add(item);
-                series++;
-            }
+        if (keys == null) {
+            return result;
         }
-
+        
+        int series = 0;
+        Iterator iterator = keys.iterator();
+        Shape shape = getLegendItemShape();
+        while (iterator.hasNext()) {
+            Comparable key = (Comparable) iterator.next();
+            String label = key.toString();
+            String description = label;
+            Paint paint = getSeriesPaint(series);
+            Paint outlinePaint = getSeriesOutlinePaint(series);
+            Stroke stroke = getSeriesOutlineStroke(series);
+            LegendItem item = new LegendItem(label, description,
+                    null, null, shape, paint, stroke, outlinePaint);
+            item.setDataset(getDataset());
+            item.setSeriesKey(key);
+            item.setSeriesIndex(series);
+            result.add(item);
+            series++;
+        }
         return result;
     }
 
