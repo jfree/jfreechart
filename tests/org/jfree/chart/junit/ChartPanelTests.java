@@ -36,7 +36,7 @@
  * -------
  * 13-Jul-2004 : Version 1 (DG);
  * 12-Jan-2009 : Added test2502355() (DG);
- *
+ * 08-Jun-2009 : Added testSetMouseWheelEnabled() (DG);
  */
 
 package org.jfree.chart.junit;
@@ -334,4 +334,20 @@ public class ChartPanelTests extends TestCase
         assertEquals(1, this.chartChangeEvents.size());
     }
 
+    /**
+     * In version 1.0.13 there is a bug where enabling the mouse wheel handler
+     * twice would in fact disable it.
+     */
+    public void testSetMouseWheelEnabled() {
+        DefaultXYDataset dataset = new DefaultXYDataset();
+        JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
+                "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
+        ChartPanel panel = new ChartPanel(chart);
+        panel.setMouseWheelEnabled(true);
+        assertTrue(panel.isMouseWheelEnabled());
+        panel.setMouseWheelEnabled(true);
+        assertTrue(panel.isMouseWheelEnabled());
+        panel.setMouseWheelEnabled(false);
+        assertFalse(panel.isMouseWheelEnabled());
+    }
 }
