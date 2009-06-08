@@ -161,7 +161,7 @@
  * 10-Apr-2009 : Set chartBuffer background to match ChartPanel (DG);
  * 05-May-2009 : Match scaling (and insets) in doCopy() (DG);
  * 01-Jun-2009 : Check for null chart in mousePressed() method (DG);
- * 
+ * 08-Jun-2009 : Fixed bug in setMouseWheelEnabled() (DG);
  */
 
 package org.jfree.chart;
@@ -1359,36 +1359,33 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                 e.printStackTrace();
             }
         }
-        else {
-
-            if (this.mouseWheelHandler != null) {
-                // use reflection to deregister the mouseWheelHandler
-                try {
-                    Class mwl = Class.forName(
-                            "java.awt.event.MouseWheelListener");
-                    Class c2 = ChartPanel.class;
-                    Method m = c2.getMethod("removeMouseWheelListener",
-                            new Class[] {mwl});
-                    m.invoke(this, new Object[] {this.mouseWheelHandler});
-                }
-                catch (ClassNotFoundException e) {
-                    // must be running on JRE 1.3.1, so just ignore this
-                }
-                catch (SecurityException e) {
-                    e.printStackTrace();
-                }
-                catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
-                catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                }
-                catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-                catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
+        else if (!flag && this.mouseWheelHandler != null) {
+            // use reflection to deregister the mouseWheelHandler
+            try {
+                Class mwl = Class.forName("java.awt.event.MouseWheelListener");
+                Class c2 = ChartPanel.class;
+                Method m = c2.getMethod("removeMouseWheelListener",
+                        new Class[] {mwl});
+                m.invoke(this, new Object[] {this.mouseWheelHandler});
+                this.mouseWheelHandler = null;
+            }
+            catch (ClassNotFoundException e) {
+                // must be running on JRE 1.3.1, so just ignore this
+            }
+            catch (SecurityException e) {
+                e.printStackTrace();
+            }
+            catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+            catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            catch (InvocationTargetException e) {
+                e.printStackTrace();
             }
         }
     }
