@@ -79,6 +79,7 @@
  * 18-Jan-2008 : Changed getSeries(String) to getSeries(Comparable) (DG);
  * 19-May-2009 : Implemented XYDomainInfo (DG);
  * 26-May-2009 : Implemented XYRangeInfo (DG);
+ * 09-Jun-2009 : Apply some short-cuts to series value lookups (DG);
  *
  */
 
@@ -423,8 +424,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      */
     public double getXValue(int series, int item) {
         TimeSeries s = (TimeSeries) this.data.get(series);
-        TimeSeriesDataItem i = s.getDataItem(item);
-        RegularTimePeriod period = i.getPeriod();
+        RegularTimePeriod period = s.getTimePeriod(item);
         return getX(period);
     }
 
@@ -438,8 +438,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      */
     public Number getX(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
-        TimeSeriesDataItem dp = ts.getDataItem(item);
-        RegularTimePeriod period = dp.getPeriod();
+        RegularTimePeriod period = ts.getTimePeriod(item);
         return new Long(getX(period));
     }
 
@@ -474,8 +473,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      */
     public synchronized Number getStartX(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
-        TimeSeriesDataItem dp = ts.getDataItem(item);
-        return new Long(dp.getPeriod().getFirstMillisecond(
+        return new Long(ts.getTimePeriod(item).getFirstMillisecond(
                 this.workingCalendar));
     }
 
@@ -489,8 +487,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      */
     public synchronized Number getEndX(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
-        TimeSeriesDataItem dp = ts.getDataItem(item);
-        return new Long(dp.getPeriod().getLastMillisecond(
+        return new Long(ts.getTimePeriod(item).getLastMillisecond(
                 this.workingCalendar));
     }
 
@@ -504,8 +501,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      */
     public Number getY(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
-        TimeSeriesDataItem dp = ts.getDataItem(item);
-        return dp.getValue();
+        return ts.getValue(item);
     }
 
     /**

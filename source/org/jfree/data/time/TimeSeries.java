@@ -77,6 +77,9 @@
  * 13-Jan-2009 : Fixed constructors so that timePeriodClass doesn't need to
  *               be specified in advance (DG);
  * 26-May-2009 : Added cache for minY and maxY values (DG);
+ * 09-Jun-2009 : Ensure that TimeSeriesDataItem objects used in underlying
+ *               storage are cloned to keep series isolated from external
+ *               changes (DG);
  *
  */
 
@@ -253,6 +256,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @return The list of data items.
      */
     public List getItems() {
+        // FIXME: perhaps we should clone the data list
         return Collections.unmodifiableList(this.data);
     }
 
@@ -366,20 +370,23 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a data item for the series.
-     *
-     * @param index  the item index (zero-based).
-     *
+     * Returns a data item from the dataset.  Note that the returned object
+     * is a clone of the item in the series, so modifying it will have no 
+     * effect on the data series.
+     * 
+     * @param index  the item index.
+     * 
      * @return The data item.
-     *
-     * @see #getDataItem(RegularTimePeriod)
      */
     public TimeSeriesDataItem getDataItem(int index) {
-        return (TimeSeriesDataItem) this.data.get(index);
+        TimeSeriesDataItem item = (TimeSeriesDataItem) this.data.get(index);
+        return (TimeSeriesDataItem) item.clone();
     }
 
     /**
-     * Returns the data item for a specific period.
+     * Returns the data item for a specific period.  Note that the returned
+     * object is a clone of the item in the series, so modifying it will have
+     * no effect on the data series.
      *
      * @param period  the period of interest (<code>null</code> not allowed).
      *
@@ -389,6 +396,46 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @see #getDataItem(int)
      */
     public TimeSeriesDataItem getDataItem(RegularTimePeriod period) {
+        int index = getIndex(period);
+        if (index >= 0) {
+            return getDataItem(index);
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Returns a data item for the series.  This method returns the object
+     * that is used for the underlying storage - you should not modify the
+     * contents of the returned value unless you know what you are doing.
+     *
+     * @param index  the item index (zero-based).
+     *
+     * @return The data item.
+     *
+     * @see #getDataItem(int)
+     *
+     * @since 1.0.14
+     */
+    TimeSeriesDataItem getRawDataItem(int index) {
+        return (TimeSeriesDataItem) this.data.get(index);
+    }
+
+    /**
+     * Returns a data item for the series.  This method returns the object
+     * that is used for the underlying storage - you should not modify the
+     * contents of the returned value unless you know what you are doing.
+     *
+     * @param period  the item index (zero-based).
+     *
+     * @return The data item.
+     *
+     * @see #getDataItem(RegularTimePeriod)
+     *
+     * @since 1.0.14
+     */
+    TimeSeriesDataItem getRawDataItem(RegularTimePeriod period) {
         int index = getIndex(period);
         if (index >= 0) {
             return (TimeSeriesDataItem) this.data.get(index);
@@ -406,7 +453,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @return The time period.
      */
     public RegularTimePeriod getTimePeriod(int index) {
-        return getDataItem(index).getPeriod();
+        return getRawDataItem(index).getPeriod();
     }
 
     /**
@@ -478,7 +525,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @return The value (possibly <code>null</code>).
      */
     public Number getValue(int index) {
-        return getDataItem(index).getValue();
+        return getRawDataItem(index).getValue();
     }
 
     /**
@@ -522,6 +569,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (item == null) {
             throw new IllegalArgumentException("Null 'item' argument.");
         }
+        item = (TimeSeriesDataItem) item.clone();
         Class c = item.getPeriod().getClass();
         if (this.timePeriodClass == null) {
             this.timePeriodClass = c;
@@ -696,7 +744,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         TimeSeries overwritten = new TimeSeries("Overwritten values from: "
                 + getKey());
         for (int i = 0; i < series.getItemCount(); i++) {
-            TimeSeriesDataItem item = series.getDataItem(i);
+            TimeSeriesDataItem item = series.getRawDataItem(i);
             TimeSeriesDataItem oldItem = addOrUpdate(item.getPeriod(),
                     item.getValue());
             if (oldItem != null) {
@@ -1062,18 +1110,18 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     /**
      * Tests the series for equality with an arbitrary object.
      *
-     * @param object  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against (<code>null</code> permitted).
      *
      * @return A boolean.
      */
-    public boolean equals(Object object) {
-        if (object == this) {
+    public boolean equals(Object obj) {
+        if (obj == this) {
             return true;
         }
-        if (!(object instanceof TimeSeries)) {
+        if (!(obj instanceof TimeSeries)) {
             return false;
         }
-        TimeSeries that = (TimeSeries) object;
+        TimeSeries that = (TimeSeries) obj;
         if (!ObjectUtilities.equal(getDomainDescription(),
                 that.getDomainDescription())) {
             return false;
@@ -1096,12 +1144,10 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (count != that.getItemCount()) {
             return false;
         }
-        for (int i = 0; i < count; i++) {
-            if (!getDataItem(i).equals(that.getDataItem(i))) {
-                return false;
-            }
+        if (!ObjectUtilities.equal(this.data, that.data)) {
+            return false;
         }
-        return super.equals(object);
+        return super.equals(obj);
     }
 
     /**
@@ -1120,15 +1166,15 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         // the first, middle and last items...
         int count = getItemCount();
         if (count > 0) {
-            TimeSeriesDataItem item = getDataItem(0);
+            TimeSeriesDataItem item = getRawDataItem(0);
             result = 29 * result + item.hashCode();
         }
         if (count > 1) {
-            TimeSeriesDataItem item = getDataItem(count - 1);
+            TimeSeriesDataItem item = getRawDataItem(count - 1);
             result = 29 * result + item.hashCode();
         }
         if (count > 2) {
-            TimeSeriesDataItem item = getDataItem(count / 2);
+            TimeSeriesDataItem item = getRawDataItem(count / 2);
             result = 29 * result + item.hashCode();
         }
         result = 29 * result + this.maximumItemCount;

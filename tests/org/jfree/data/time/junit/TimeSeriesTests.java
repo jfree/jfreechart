@@ -47,7 +47,8 @@
  * 10-Jan-2008 : Added testBug1864222() (DG);
  * 13-Jan-2009 : Added testEquals3() and testRemoveAgedItems3() (DG);
  * 26-May-2009 : Added various tests for min/maxY values (DG);
- *
+ * 09-Jun-2009 : Added testAdd_TimeSeriesDataItem (DG);
+ * 
  */
 
 package org.jfree.data.time.junit;
@@ -1062,6 +1063,19 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         assertEquals(2.2, s1.getMaxY(), EPSILON);
         s1.update(new Year(2010), null);
         assertEquals(2.2, s1.getMinY(), EPSILON);
+    }
+
+    /**
+     * Create a TimeSeriesDataItem, add it to a TimeSeries.  Now, modifying
+     * the original TimeSeriesDataItem should NOT affect the TimeSeries.
+     */
+    public void testAdd_TimeSeriesDataItem() {
+        TimeSeriesDataItem item = new TimeSeriesDataItem(new Year(2009), 1.0);
+        TimeSeries series = new TimeSeries("S1");
+        series.add(item);
+        assertTrue(item.equals(series.getDataItem(0)));
+        item.setValue(new Double(99.9));
+        assertFalse(item.equals(series.getDataItem(0)));
     }
 
 }

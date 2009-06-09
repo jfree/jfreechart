@@ -1,5 +1,30 @@
 2009-06-09  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/time/TimeSeries.java
+    (getDataItem(int)): Return a clone,
+    (getDataItem(RegularTimePeriod)): Likewise,
+    (getRawDataItem(int)): New method,
+    (getRawDataItem(RegularTimePeriod)): Likewise,
+    (getTimePeriod): Call getRawDataItem(),
+    (getValue): Likewise,
+    (add(TimeSeriesDataItem, boolean)): Clone the item,
+    (addAndOrUpdate): Call getRawDataItem(),
+    (equals): Tidied up,
+    (hashCode): Call getRawDataItem(),
+    * source/org/jfree/data/time/MovingAverage.java
+    (createMovingAverage): Updates for changes in TimeSeries.java
+    (createPointMovingAverage): Likewise,
+    * source/org/jfree/data/time/TimeSeriesCollection.java
+    (getXValue): Use direct method in TimeSeries,
+    (getX): Likewise,
+    (getStartX): Likewise,
+    (getEndX): Likewise,
+    (getY): Likewise,
+    * source/org/jfree/data/time/TimeSeriesDataItem.java
+    (equals): Cleanup.
+
+2009-06-09  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 2802014:
     * source/org/jfree/chart/plot/dial/DialValueIndicator.java
     (maxTemplateValue): New field,
