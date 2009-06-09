@@ -43,6 +43,7 @@
  *               getYValue() (DG);
  * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
  *               release (DG);
+ * 09-Jun-2009 : Tidied up some calls to TimeSeries (DG);
  *
  */
 
@@ -125,14 +126,12 @@ public class MovingAverage {
             // if the initial averaging period is to be excluded, then
             // calculate the index of the
             // first data item to have an average calculated...
-            long firstSerial
-                    = source.getDataItem(0).getPeriod().getSerialIndex() + skip;
+            long firstSerial = source.getTimePeriod(0).getSerialIndex() + skip;
 
             for (int i = source.getItemCount() - 1; i >= 0; i--) {
 
                 // get the current data item...
-                TimeSeriesDataItem current = source.getDataItem(i);
-                RegularTimePeriod period = current.getPeriod();
+                RegularTimePeriod period = source.getTimePeriod(i);
                 long serial = period.getSerialIndex();
 
                 if (serial >= firstSerial) {
@@ -145,7 +144,7 @@ public class MovingAverage {
 
                     while ((offset < periodCount) && (!finished)) {
                         if ((i - offset) >= 0) {
-                            TimeSeriesDataItem item = source.getDataItem(
+                            TimeSeriesDataItem item = source.getRawDataItem(
                                     i - offset);
                             RegularTimePeriod p = item.getPeriod();
                             Number v = item.getValue();
@@ -207,13 +206,14 @@ public class MovingAverage {
         double rollingSumForPeriod = 0.0;
         for (int i = 0; i < source.getItemCount(); i++) {
             // get the current data item...
-            TimeSeriesDataItem current = source.getDataItem(i);
+            TimeSeriesDataItem current = source.getRawDataItem(i);
             RegularTimePeriod period = current.getPeriod();
+            // FIXME: what if value is null on next line?
             rollingSumForPeriod += current.getValue().doubleValue();
 
             if (i > pointCount - 1) {
                 // remove the point i-periodCount out of the rolling sum.
-                TimeSeriesDataItem startOfMovingAvg = source.getDataItem(
+                TimeSeriesDataItem startOfMovingAvg = source.getRawDataItem(
                         i - pointCount);
                 rollingSumForPeriod -= startOfMovingAvg.getValue()
                         .doubleValue();
@@ -301,7 +301,6 @@ public class MovingAverage {
         }
         if (skip < 0.0) {
             throw new IllegalArgumentException("skip must be >= 0.0.");
-
         }
 
         XYSeries result = new XYSeries(name);
