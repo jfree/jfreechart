@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DialValueIndicator.java
  * -----------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 03-Nov-2006 : Version 1 (DG);
  * 17-Oct-2007 : Updated equals() (DG);
  * 24-Oct-2007 : Added default constructor and missing event notification (DG);
+ * 09-Jun-2009 : Improved indicator resizing, fixes bug 2802014 (DG);
  *
  */
 
@@ -48,6 +49,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Point2D;
@@ -66,6 +68,7 @@ import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.Size2D;
 import org.jfree.ui.TextAnchor;
+import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 
@@ -94,6 +97,15 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
 
     /** The template value. */
     private Number templateValue;
+
+    /**
+     * A data value that will be formatted to determine the maximum size of
+     * the indicator bounds.  If this is null, the indicator bounds can grow
+     * as large as necessary to contain the actual data value.
+     *
+     * @since 1.0.14
+     */
+    private Number maxTemplateValue;
 
     /** The formatter. */
     private NumberFormat formatter;
@@ -140,6 +152,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.radius = 0.3;
         this.frameAnchor = RectangleAnchor.CENTER;
         this.templateValue = new Double(100.0);
+        this.maxTemplateValue = null;
         this.formatter = new DecimalFormat("0.0");
         this.font = new Font("Dialog", Font.BOLD, 14);
         this.paint = Color.black;
@@ -276,6 +289,35 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
             throw new IllegalArgumentException("Null 'value' argument.");
         }
         this.templateValue = value;
+        notifyListeners(new DialLayerChangeEvent(this));
+    }
+
+    /**
+     * Returns the template value for the maximum size of the indicator
+     * bounds.
+     *
+     * @return The template value (possibly <code>null</code>).
+     *
+     * @since 1.0.14
+     *
+     * @see #setMaxTemplateValue(java.lang.Number)
+     */
+    public Number getMaxTemplateValue() {
+        return this.maxTemplateValue;
+    }
+
+    /**
+     * Sets the template value for the maximum size of the indicator bounds
+     * and sends a {@link DialLayerChangeEvent} to all registered listeners.
+     *
+     * @param value  the value (<code>null</code> permitted).
+     *
+     * @since 1.0.14
+     *
+     * @see #getMaxTemplateValue()
+     */
+    public void setMaxTemplateValue(Number value) {
+        this.maxTemplateValue = value;
         notifyListeners(new DialLayerChangeEvent(this));
     }
 
@@ -549,15 +591,34 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         Arc2D arc = new Arc2D.Double(f, this.angle, 0.0, Arc2D.OPEN);
         Point2D pt = arc.getStartPoint();
 
-        // calculate the bounds of the template value
+        // the indicator bounds is calculated from the templateValue (which
+        // determines the minimum size), the maxTemplateValue (which, if
+        // specified, provides a maximum size) and the actual value
         FontMetrics fm = g2.getFontMetrics(this.font);
+        double value = plot.getValue(this.datasetIndex);
+        String valueStr = this.formatter.format(value);
+        Rectangle2D valueBounds = TextUtilities.getTextBounds(valueStr, g2, fm);
+
+        // calculate the bounds of the template value
         String s = this.formatter.format(this.templateValue);
         Rectangle2D tb = TextUtilities.getTextBounds(s, g2, fm);
+        double minW = tb.getWidth();
+        double minH = tb.getHeight();
+
+        double maxW = Double.MAX_VALUE;
+        double maxH = Double.MAX_VALUE;
+        if (this.maxTemplateValue != null) {
+            s = this.formatter.format(this.maxTemplateValue);
+            tb = TextUtilities.getTextBounds(s, g2, fm);
+            maxW = Math.max(tb.getWidth(), minW);
+            maxH = Math.max(tb.getHeight(), minH);
+        }
+        double w = fixToRange(valueBounds.getWidth(), minW, maxW);
+        double h = fixToRange(valueBounds.getHeight(), minH, maxH);
 
         // align this rectangle to the frameAnchor
-        Rectangle2D bounds = RectangleAnchor.createRectangle(new Size2D(
-                tb.getWidth(), tb.getHeight()), pt.getX(), pt.getY(),
-                this.frameAnchor);
+        Rectangle2D bounds = RectangleAnchor.createRectangle(new Size2D(w, h),
+                pt.getX(), pt.getY(), this.frameAnchor);
 
         // add the insets
         Rectangle2D fb = this.insets.createOutsetRectangle(bounds);
@@ -571,16 +632,42 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         g2.setPaint(this.outlinePaint);
         g2.draw(fb);
 
-
         // now find the text anchor point
-        double value = plot.getValue(this.datasetIndex);
-        String valueStr = this.formatter.format(value);
+        Shape savedClip = g2.getClip();
+        g2.clip(fb);
+
         Point2D pt2 = RectangleAnchor.coordinates(bounds, this.valueAnchor);
         g2.setPaint(this.paint);
         g2.setFont(this.font);
         TextUtilities.drawAlignedString(valueStr, g2, (float) pt2.getX(),
                 (float) pt2.getY(), this.textAnchor);
+        g2.setClip(savedClip);
 
+    }
+
+    /**
+     * A utility method that adjusts a value, if necessary, to be within a 
+     * specified range.
+     * 
+     * @param x  the value.
+     * @param minX  the minimum value in the range.
+     * @param maxX  the maximum value in the range.
+     * 
+     * @return The adjusted value.
+     */
+    private double fixToRange(double x, double minX, double maxX) {
+        if (minX > maxX) {
+            throw new IllegalArgumentException("Requires 'minX' <= 'maxX'.");
+        }
+        if (x < minX) {
+            return minX;
+        }
+        else if (x > maxX) {
+            return maxX;
+        }
+        else {
+            return x;
+        }
     }
 
     /**
@@ -613,6 +700,10 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         if (!this.templateValue.equals(that.templateValue)) {
             return false;
         }
+        if (!ObjectUtilities.equal(this.maxTemplateValue,
+                that.maxTemplateValue)) {
+            return false;
+        }
         if (!this.font.equals(that.font)) {
             return false;
         }
@@ -637,7 +728,6 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         if (!this.textAnchor.equals(that.textAnchor)) {
             return false;
         }
-
         return super.equals(obj);
     }
 
