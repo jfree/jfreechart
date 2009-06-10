@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * XYDataItem.java
  * ---------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 30-Nov-2007 : Implemented getXValue() and getYValue(), plus toString() for
  *               debugging use (DG);
+ * 10-Jun-2009 : Reimplemented cloning (DG);
  *
  */
 
@@ -50,7 +51,8 @@ import java.io.Serializable;
 import org.jfree.util.ObjectUtilities;
 
 /**
- * Represents one (x, y) data item for an {@link XYSeries}.
+ * Represents one (x, y) data item for an {@link XYSeries}.  Note that
+ * subclasses are REQUIRED to support cloning.
  */
 public class XYDataItem implements Cloneable, Comparable, Serializable {
 
@@ -208,12 +210,16 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      * Returns a clone of this object.
      *
      * @return A clone.
-     *
-     * @throws CloneNotSupportedException not thrown by this class, but
-     *         subclasses may differ.
      */
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Object clone() {
+        Object clone = null;
+        try {
+            clone = super.clone();
+        }
+        catch (CloneNotSupportedException e) { // won't get here...
+            e.printStackTrace();
+        }
+        return clone;
     }
 
     /**

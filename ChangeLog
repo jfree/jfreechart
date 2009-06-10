@@ -1,5 +1,26 @@
 2009-06-10  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/xy/XYDataItem.java
+    (clone): Rewritten so it doesn't declare CloneNotSupportedException,
+    * source/org/jfree/data/xy/XYSeries.java
+    (add(XYDataItem, boolean)): Clone item before adding,
+    (getDataItem(int)): Return a clone,
+    (getRawDataItem): New method,
+    (getX): Call getRawDataItem(),
+    (getY): Likewise,
+    (update): Likewise,
+    (addOrUpdate(Number, Number)): Delegate to new method,
+    (addOrUpdate(XYDataItem)): New method,
+    (hashCode): Call getRawDataItem(),
+    * source/org/jfree/data/XYSeriesCollection.java
+    (getX): Simplified,
+    (getY): Likewise,
+    * source/org/jfree/data/DefaultTableXYDataset.java
+    (getX): Simplified,
+    (getY): Likewise.
+
+2009-06-10  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/time/TimeSeries.java
     (addOrUpdate(RegularTimePeriod, Number)): Delegate to new method,
     (addOrUpdate(TimeSeriesDataItem)): New method.
