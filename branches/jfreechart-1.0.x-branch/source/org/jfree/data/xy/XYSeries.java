@@ -72,7 +72,9 @@
  *               Ted Schwartz (DG);
  * 24-Nov-2008 : Further fix for 1955483 (DG);
  * 06-Mar-2009 : Added minX, maxX, minY and maxY fields (DG);
- *
+ * 10-Jun-2009 : Make clones to isolate XYDataItem instances used
+ *               for data storage (DG);
+ * 
  */
 
 package org.jfree.data.xy;
@@ -502,6 +504,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         if (item == null) {
             throw new IllegalArgumentException("Null 'item' argument.");
         }
+        item = (XYDataItem) item.clone();
         if (this.autoSort) {
             int index = Collections.binarySearch(this.data, item);
             if (index < 0) {
@@ -613,6 +616,20 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return The data item with the specified index.
      */
     public XYDataItem getDataItem(int index) {
+        XYDataItem item = (XYDataItem) this.data.get(index);
+        return (XYDataItem) item.clone();
+    }
+
+    /**
+     * Return the data item with the specified index.
+     *
+     * @param index  the index.
+     *
+     * @return The data item with the specified index.
+     *
+     * @since 1.0.14
+     */
+    XYDataItem getRawDataItem(int index) {
         return (XYDataItem) this.data.get(index);
     }
 
@@ -624,7 +641,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return The x-value (never <code>null</code>).
      */
     public Number getX(int index) {
-        return getDataItem(index).getX();
+        return getRawDataItem(index).getX();
     }
 
     /**
@@ -635,7 +652,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return The y-value (possibly <code>null</code>).
      */
     public Number getY(int index) {
-        return getDataItem(index).getY();
+        return getRawDataItem(index).getY();
     }
 
     /**
@@ -649,7 +666,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *         confusion with the {@link #update(Number, Number)} method.
      */
     public void update(int index, Number y) {
-        XYDataItem item = getDataItem(index);
+        XYDataItem item = getRawDataItem(index);
 
         // figure out if we need to iterate through all the y-values
         boolean iterate = false;
@@ -774,38 +791,50 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *         item was overwritten.
      */
     public XYDataItem addOrUpdate(Number x, Number y) {
-        if (x == null) {
-            throw new IllegalArgumentException("Null 'x' argument.");
+        // defer argument checking
+        return addOrUpdate(new XYDataItem(x, y));
+    }
+
+    /**
+     * Adds or updates an item in the series and sends a
+     * {@link SeriesChangeEvent} to all registered listeners.
+     *
+     * @param x  the x-value (<code>null</code> not permitted).
+     * @param y  the y-value (<code>null</code> permitted).
+     *
+     * @return A copy of the overwritten data item, or <code>null</code> if no
+     *         item was overwritten.
+     *
+     * @since 1.0.14
+     */
+    public XYDataItem addOrUpdate(XYDataItem item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Null 'item' argument.");
         }
         if (this.allowDuplicateXValues) {
-            add(x, y);
+            add(item);
             return null;
         }
 
         // if we get to here, we know that duplicate X values are not permitted
         XYDataItem overwritten = null;
-        int index = indexOf(x);
+        int index = indexOf(item.getX());
         if (index >= 0) {
             XYDataItem existing = (XYDataItem) this.data.get(index);
-            try {
-                overwritten = (XYDataItem) existing.clone();
-            }
-            catch (CloneNotSupportedException e) {
-                throw new SeriesException("Couldn't clone XYDataItem!");
-            }
+            overwritten = (XYDataItem) existing.clone();
             // figure out if we need to iterate through all the y-values
             boolean iterate = false;
             double oldY = existing.getYValue();
             if (!Double.isNaN(oldY)) {
                 iterate = oldY <= this.minY || oldY >= this.maxY;
             }
-            existing.setY(y);
+            existing.setY(item.getY());
 
             if (iterate) {
                 findBoundsByIteration();
             }
-            else if (y != null) {
-                double yy = y.doubleValue();
+            else if (item.getY() != null) {
+                double yy = item.getY().doubleValue();
                 this.minY = minIgnoreNaN(this.minY, yy);
                 this.maxY = minIgnoreNaN(this.maxY, yy);
             }
@@ -815,7 +844,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
             // Collections.binarySearch() and tells us where to insert the
             // new item...otherwise it will be just -1 and we should just
             // append the value to the list...
-            XYDataItem item = new XYDataItem(x, y);
+            item = (XYDataItem) item.clone();
             if (this.autoSort) {
                 this.data.add(-index - 1, item);
             }
@@ -971,15 +1000,15 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         // the first, middle and last items...
         int count = getItemCount();
         if (count > 0) {
-            XYDataItem item = getDataItem(0);
+            XYDataItem item = getRawDataItem(0);
             result = 29 * result + item.hashCode();
         }
         if (count > 1) {
-            XYDataItem item = getDataItem(count - 1);
+            XYDataItem item = getRawDataItem(count - 1);
             result = 29 * result + item.hashCode();
         }
         if (count > 2) {
-            XYDataItem item = getDataItem(count / 2);
+            XYDataItem item = getRawDataItem(count / 2);
             result = 29 * result + item.hashCode();
         }
         result = 29 * result + this.maximumItemCount;
