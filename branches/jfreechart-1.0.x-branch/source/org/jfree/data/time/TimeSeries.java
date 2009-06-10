@@ -80,6 +80,7 @@
  * 09-Jun-2009 : Ensure that TimeSeriesDataItem objects used in underlying
  *               storage are cloned to keep series isolated from external
  *               changes (DG);
+ * 10-Jun-2009 : Added addOrUpdate(TimeSeriesDataItem) method (DG);
  *
  */
 
@@ -772,8 +773,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
 
     /**
      * Adds or updates an item in the times series and sends a
-     * {@link org.jfree.data.general.SeriesChangeEvent} to all registered
-     * listeners.
+     * {@link SeriesChangeEvent} to all registered listeners.
      *
      * @param period  the time period to add/update (<code>null</code> not
      *                permitted).
@@ -784,27 +784,42 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      */
     public TimeSeriesDataItem addOrUpdate(RegularTimePeriod period,
                                           Number value) {
+        return addOrUpdate(new TimeSeriesDataItem(period, value));
+    }
 
-        if (period == null) {
+    /**
+     * Adds or updates an item in the times series and sends a
+     * {@link SeriesChangeEvent} to all registered listeners.
+     *
+     * @param item  the data item (<code>null</code> not permitted).
+     *
+     * @return A copy of the overwritten data item, or <code>null</code> if no
+     *         item was overwritten.
+     *
+     * @since 1.0.14
+     */
+    public TimeSeriesDataItem addOrUpdate(TimeSeriesDataItem item) {
+
+        if (item == null) {
             throw new IllegalArgumentException("Null 'period' argument.");
         }
+        Class periodClass = item.getPeriod().getClass();
         if (this.timePeriodClass == null) {
-            this.timePeriodClass = period.getClass();
+            this.timePeriodClass = periodClass;
         }
-        else if (!this.timePeriodClass.equals(period.getClass())) {
+        else if (!this.timePeriodClass.equals(periodClass)) {
             String msg = "You are trying to add data where the time "
-                    + "period class is " + period.getClass().getName()
+                    + "period class is " + periodClass.getName()
                     + ", but the TimeSeries is expecting an instance of "
                     + this.timePeriodClass.getName() + ".";
             throw new SeriesException(msg);
         }
         TimeSeriesDataItem overwritten = null;
-
-        TimeSeriesDataItem key = new TimeSeriesDataItem(period, value);
-        int index = Collections.binarySearch(this.data, key);
+        int index = Collections.binarySearch(this.data, item);
         if (index >= 0) {
             TimeSeriesDataItem existing
                     = (TimeSeriesDataItem) this.data.get(index);
+            overwritten = (TimeSeriesDataItem) existing.clone();
             // figure out if we need to iterate through all the y-values
             // to find the revised minY / maxY
             boolean iterate = false;
@@ -813,19 +828,18 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             if (!Double.isNaN(oldY)) {
                 iterate = oldY <= this.minY || oldY >= this.maxY;
             }
-            existing.setValue(value);
+            existing.setValue(item.getValue());
             if (iterate) {
                 findBoundsByIteration();
             }
-            else if (value != null) {
-                double yy = value.doubleValue();
+            else if (item.getValue() != null) {
+                double yy = item.getValue().doubleValue();
                 this.minY = minIgnoreNaN(this.minY, yy);
                 this.maxY = minIgnoreNaN(this.maxY, yy);
             }
-            overwritten = (TimeSeriesDataItem) existing.clone();
         }
         else {
-            TimeSeriesDataItem item = new TimeSeriesDataItem(period, value);
+            item = (TimeSeriesDataItem) item.clone();
             this.data.add(-index - 1, item);
             updateBoundsForAddedItem(item);
 

@@ -1,3 +1,9 @@
+2009-06-10  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/time/TimeSeries.java
+    (addOrUpdate(RegularTimePeriod, Number)): Delegate to new method,
+    (addOrUpdate(TimeSeriesDataItem)): New method.
+
 2009-06-09  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/TimeSeries.java
