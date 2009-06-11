@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * XYAreaRenderer.java
  * -------------------
- * (C) Copyright 2002-2008, by Hari and Contributors.
+ * (C) Copyright 2002-2009, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -75,12 +75,15 @@
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 17-Jun-2008 : Apply legend font and paint attributes (DG);
  * 31-Dec-2008 : Fix for bug 2471906 - dashed outlines performance issue (DG);
+ * 11-Jun-2009 : Added a useFillPaint flag and a GradientPaintTransformer for
+ *               the paint under the series (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
 import java.awt.BasicStroke;
+import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Polygon;
@@ -94,6 +97,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.jfree.chart.HashUtilities;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -107,6 +111,8 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
+import org.jfree.ui.GradientPaintTransformer;
+import org.jfree.ui.StandardGradientPaintTransformer;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.ShapeUtilities;
 
@@ -188,6 +194,22 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     private transient Shape legendArea;
 
     /**
+     * A flag that can be set to specify that the fill paint should be used
+     * to fill the area under the renderer.
+     * 
+     * @since 1.0.14
+     */
+    private boolean useFillPaint;
+
+    /**
+     * A transformer that is applied to the paint used to fill under the
+     * area *if* it is an instance of GradientPaint.
+     *
+     * @since 1.0.14
+     */
+    private GradientPaintTransformer gradientTransformer;
+
+    /**
      * Constructs a new renderer.
      */
     public XYAreaRenderer() {
@@ -247,7 +269,8 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
         area.lineTo(-3.0f, -2.0f);
         area.closePath();
         this.legendArea = area;
-
+        this.useFillPaint = false;
+        this.gradientTransformer = new StandardGradientPaintTransformer();
     }
 
     /**
@@ -322,6 +345,59 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
             throw new IllegalArgumentException("Null 'area' argument.");
         }
         this.legendArea = area;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the flag that controls whether the series fill paint is used to
+     * fill the area under the line.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.14
+     */
+    public boolean getUseFillPaint() {
+        return this.useFillPaint;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the series fill paint is
+     * used to fill the area under the line and sends a
+     * {@link RendererChangeEvent} to all listeners.
+     *
+     * @param use  the new flag value.
+     *
+     * @since 1.0.14
+     */
+    public void setUseFillPaint(boolean use) {
+        this.useFillPaint = use;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the gradient paint transformer.
+     *
+     * @return The gradient paint transformer (never <code>null</code>).
+     *
+     * @since 1.0.14
+     */
+    public GradientPaintTransformer getGradientTransformer() {
+        return this.gradientTransformer;
+    }
+
+    /**
+     * Sets the gradient paint transformer and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param transformer  the transformer (<code>null</code> not permitted).
+     *
+     * @since 1.0.14
+     */
+    public void setGradientTransformer(GradientPaintTransformer transformer) {
+        if (transformer == null) {
+            throw new IllegalArgumentException("Null 'transformer' argument.");
+        }
+        this.gradientTransformer = transformer;
         fireChangeEvent();
     }
 
@@ -551,6 +627,15 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
                 areaState.area.addPoint((int) transZero, (int) transX1);
             }
 
+            if (this.useFillPaint) {
+                paint = lookupSeriesFillPaint(series);
+            }
+            if (paint instanceof GradientPaint) {
+                GradientPaint gp = (GradientPaint) paint;
+                GradientPaint adjGP = this.gradientTransformer.transform(gp,
+                        dataArea);
+                g2.setPaint(adjGP);
+            }
             g2.fill(areaState.area);
 
             // draw an outline around the Area.
@@ -638,10 +723,30 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
         if (this.showOutline != that.showOutline) {
             return false;
         }
+        if (this.useFillPaint != that.useFillPaint) {
+            return false;
+        }
+        if (!this.gradientTransformer.equals(that.gradientTransformer)) {
+            return false;
+        }
         if (!ShapeUtilities.equal(this.legendArea, that.legendArea)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     *
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result = super.hashCode();
+        result = HashUtilities.hashCode(result, this.plotArea);
+        result = HashUtilities.hashCode(result, this.plotLines);
+        result = HashUtilities.hashCode(result, this.plotShapes);
+        result = HashUtilities.hashCode(result, this.useFillPaint);
+        return result;
     }
 
     /**
