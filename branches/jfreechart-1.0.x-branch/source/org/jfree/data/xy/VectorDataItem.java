@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * VectorDataItem.java
  * -------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited.
+ * (C) Copyright 2007-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -54,7 +54,7 @@ import org.jfree.data.ComparableObjectItem;
 public class VectorDataItem extends ComparableObjectItem {
 
     /**
-     * Creates a new instance of <code>YIntervalItem</code>.
+     * Creates a new instance of <code>VectorDataItem</code>.
      *
      * @param x  the x-value.
      * @param y  the y-value.
