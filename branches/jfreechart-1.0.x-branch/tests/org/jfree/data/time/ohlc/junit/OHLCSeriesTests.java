@@ -37,6 +37,7 @@
  * 04-Dec-2006 : Version 1, based on XYSeriesTests (DG);
  * 27-Nov-2007 : Added testClear() method (DG);
  * 23-May-2009 : Added testHashCode() (DG);
+ * 17-Jun-2009 : Added testRemove_int() (DG);
  *
  */
 
@@ -214,6 +215,21 @@ public class OHLCSeriesTests extends TestCase
 
         s1.remove(new Year(2006));
         assertEquals(new Year(2011), s1.getPeriod(0));
+    }
+
+    /**
+     * A check for the remove(int) method.
+     */
+    public void testRemove_int() {
+        OHLCSeries s1 = new OHLCSeries("s1");
+        s1.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
+        s1.add(new Year(2011), 2.1, 4.1, 1.1, 3.1);
+        s1.add(new Year(2010), 2.2, 4.2, 1.2, 3.2);
+        assertEquals(3, s1.getItemCount());
+
+        s1.remove(s1.getItemCount() - 1);
+        assertEquals(2, s1.getItemCount());
+        assertEquals(new Year(2010), s1.getPeriod(1));
     }
 
     /**

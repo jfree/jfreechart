@@ -1,3 +1,8 @@
+2009-06-17  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/time/ohlc/OHLCSeries.java
+    (remove(int)): New method override.
+
 2009-06-11  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYAreaRenderer.java
