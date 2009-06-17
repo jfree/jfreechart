@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * OHLCSeries.java
  * ---------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 04-Dec-2006 : Version 1 (DG);
+ * 17-Jun-2009 : Added remove(int) method (DG);
  *
  */
 
@@ -45,7 +46,7 @@ import org.jfree.data.ComparableObjectSeries;
 import org.jfree.data.time.RegularTimePeriod;
 
 /**
- * A list of (RegularTimePeriod, open, high, low, close) data items.
+ * A list of ({@link RegularTimePeriod}, open, high, low, close) data items.
  *
  * @since 1.0.4
  *
@@ -72,7 +73,7 @@ public class OHLCSeries extends ComparableObjectSeries {
      * @return The time period.
      */
     public RegularTimePeriod getPeriod(int index) {
-        final OHLCItem item = (OHLCItem) getDataItem(index);
+        OHLCItem item = (OHLCItem) getDataItem(index);
         return item.getPeriod();
     }
 
@@ -106,6 +107,17 @@ public class OHLCSeries extends ComparableObjectSeries {
             }
         }
         super.add(new OHLCItem(period, open, high, low, close), true);
+    }
+
+    /**
+     * Removes the item with the specified index.
+     *
+     * @param index  the item index.
+     *
+     * @since 1.0.14
+     */
+    public ComparableObjectItem remove(int index) {
+        return super.remove(index);
     }
 
 }
