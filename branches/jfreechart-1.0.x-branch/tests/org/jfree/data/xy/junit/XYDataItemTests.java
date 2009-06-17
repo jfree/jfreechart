@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYDataItemTests.java
  * --------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -100,12 +100,7 @@ public class XYDataItemTests extends TestCase {
     public void testCloning() {
         XYDataItem i1 = new XYDataItem(1.0, 1.1);
         XYDataItem i2 = null;
-        try {
-            i2 = (XYDataItem) i1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("XYDataItemTests.testCloning: failed to clone.");
-        }
+        i2 = (XYDataItem) i1.clone();
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
@@ -126,13 +121,12 @@ public class XYDataItemTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             i2 = (XYDataItem) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(i1, i2);
 
