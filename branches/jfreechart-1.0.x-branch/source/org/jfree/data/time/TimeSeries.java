@@ -1338,6 +1338,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         this.data = new java.util.ArrayList();
         this.maximumItemCount = Integer.MAX_VALUE;
         this.maximumItemAge = Long.MAX_VALUE;
+        this.minY = Double.NaN;
+        this.maxY = Double.NaN;
     }
 
 }
