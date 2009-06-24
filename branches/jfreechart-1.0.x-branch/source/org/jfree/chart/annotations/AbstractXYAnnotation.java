@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,17 @@
  * -------------------------
  * AbstractXYAnnotation.java
  * -------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Peter Kolb (patch 2809117);
  *
  * Changes:
  * --------
  * 29-Sep-2004 : Version 1 (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 06-Mar-2007 : Implemented hashCode() (DG);
+ * 24-Jun-2009 : Now extends AbstractAnnotation (see patch 2809117 by PK) (DG);
  *
  */
 
@@ -57,7 +58,8 @@ import org.jfree.util.ObjectUtilities;
  * The interface that must be supported by annotations that are to be added to
  * an {@link XYPlot}.
  */
-public abstract class AbstractXYAnnotation implements XYAnnotation {
+public abstract class AbstractXYAnnotation extends AbstractAnnotation
+        implements XYAnnotation {
 
     /** The tool tip text. */
     private String toolTipText;
@@ -69,6 +71,7 @@ public abstract class AbstractXYAnnotation implements XYAnnotation {
      * Creates a new instance that has no tool tip or URL specified.
      */
     protected AbstractXYAnnotation() {
+        super();
         this.toolTipText = null;
         this.url = null;
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ----------------------
  * XYTitleAnnotation.java
  * ----------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrew Mickish;
+ *                   Peter Kolb (patch 2809117);
  *
  * Changes:
  * --------
@@ -39,6 +40,7 @@
  * 26-Feb-2008 : Fixed NullPointerException when drawing chart with a null
  *               ChartRenderingInfo - see patch 1901599 by Andrew Mickish (DG);
  * 03-Sep-2008 : Moved from experimental to main (DG);
+ * 24-Jun-2009 : Fire change events (see patch 2809117 by PK) (DG);
  *
  */
 
@@ -126,6 +128,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
      */
     public XYTitleAnnotation(double x, double y, Title title,
             RectangleAnchor anchor) {
+        super();
         if (title == null) {
             throw new IllegalArgumentException("Null 'title' argument.");
         }
@@ -196,12 +199,14 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the maximum width.
+     * Sets the maximum width and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param max  the maximum width (0.0 or less means no maximum).
      */
     public void setMaxWidth(double max) {
         this.maxWidth = max;
+        fireAnnotationChanged();
     }
 
     /**
@@ -214,12 +219,14 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the maximum height.
+     * Sets the maximum height and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param max  the maximum height.
      */
     public void setMaxHeight(double max) {
         this.maxHeight = max;
+        fireAnnotationChanged();
     }
 
     /**

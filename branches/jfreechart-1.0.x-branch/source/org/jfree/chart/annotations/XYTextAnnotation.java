@@ -27,10 +27,10 @@
  * ---------------------
  * XYTextAnnotation.java
  * ---------------------
- * (C) Copyright 2002-2009, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Peter Kolb (patch 2809117);
  *
  * Changes:
  * --------
@@ -49,7 +49,8 @@
  * 06-Mar-2007 : Added argument checks, re-implemented hashCode() method (DG);
  * 12-Feb-2009 : Added background paint and outline paint/stroke (DG);
  * 01-Apr-2009 : Fixed bug in hotspot calculation (DG);
- * 
+ * 24-Jun-2009 : Fire change events (see patch 2809117) (DG);
+ *
  */
 
 package org.jfree.chart.annotations;
@@ -168,6 +169,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @param y  the y-coordinate (in data space).
      */
     public XYTextAnnotation(String text, double x, double y) {
+        super();
         if (text == null) {
             throw new IllegalArgumentException("Null 'text' argument.");
         }
@@ -224,7 +226,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the font for the annotation.
+     * Sets the font for the annotation and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param font  the font (<code>null</code> not permitted).
      *
@@ -235,6 +238,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             throw new IllegalArgumentException("Null 'font' argument.");
         }
         this.font = font;
+        fireAnnotationChanged();
     }
 
     /**
@@ -249,7 +253,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the paint for the annotation.
+     * Sets the paint for the annotation and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
      *
@@ -260,6 +265,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.paint = paint;
+        fireAnnotationChanged();
     }
 
     /**
@@ -275,7 +281,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
 
     /**
      * Sets the text anchor (the point on the text bounding rectangle that is
-     * aligned to the (x, y) coordinate of the annotation).
+     * aligned to the (x, y) coordinate of the annotation) and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param anchor  the anchor point (<code>null</code> not permitted).
      *
@@ -286,6 +293,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             throw new IllegalArgumentException("Null 'anchor' argument.");
         }
         this.textAnchor = anchor;
+        fireAnnotationChanged();
     }
 
     /**
@@ -300,7 +308,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the rotation anchor point.
+     * Sets the rotation anchor point and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param anchor  the anchor (<code>null</code> not permitted).
      *
@@ -311,6 +320,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             throw new IllegalArgumentException("Null 'anchor' argument.");
         }
         this.rotationAnchor = anchor;
+        fireAnnotationChanged();
     }
 
     /**
@@ -325,7 +335,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the rotation angle.  The angle is measured clockwise in radians.
+     * Sets the rotation angle and sends an {@link AnnotationChangeEvent} to
+     * all registered listeners.  The angle is measured clockwise in radians.
      *
      * @param angle  the angle (in radians).
      *
@@ -333,6 +344,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     public void setRotationAngle(double angle) {
         this.rotationAngle = angle;
+        fireAnnotationChanged();
     }
 
     /**
@@ -349,7 +361,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
 
     /**
      * Sets the x coordinate for the text anchor point (measured against the
-     * domain axis).
+     * domain axis) and sends an {@link AnnotationChangeEvent} to all
+     * registered listeners.
      *
      * @param x  the x coordinate (in data space).
      *
@@ -357,6 +370,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     public void setX(double x) {
         this.x = x;
+        fireAnnotationChanged();
     }
 
     /**
@@ -373,7 +387,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
 
     /**
      * Sets the y coordinate for the text anchor point (measured against the
-     * range axis).
+     * range axis) and sends an {@link AnnotationChangeEvent} to all registered
+     * listeners.
      *
      * @param y  the y coordinate.
      *
@@ -381,6 +396,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     public void setY(double y) {
         this.y = y;
+        fireAnnotationChanged();
     }
 
     /**
@@ -397,7 +413,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the background paint for the annotation.
+     * Sets the background paint for the annotation and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> permitted).
      *
@@ -407,6 +424,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     public void setBackgroundPaint(Paint paint) {
         this.backgroundPaint = paint;
+        fireAnnotationChanged();
     }
 
     /**
@@ -423,7 +441,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the outline paint for the annotation.
+     * Sets the outline paint for the annotation and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
      *
@@ -436,6 +455,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.outlinePaint = paint;
+        fireAnnotationChanged();
     }
 
     /**
@@ -452,7 +472,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the outline stroke for the annotation.
+     * Sets the outline stroke for the annotation and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param stroke  the stroke (<code>null</code> not permitted).
      *
@@ -465,6 +486,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             throw new IllegalArgumentException("Null 'stroke' argument.");
         }
         this.outlineStroke = stroke;
+        fireAnnotationChanged();
     }
 
     /**
@@ -479,7 +501,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     }
 
     /**
-     * Sets the flag that controls whether or not the outline is drawn.
+     * Sets the flag that controls whether or not the outline is drawn and
+     * sends an {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.
      *
@@ -487,6 +510,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     public void setOutlineVisible(boolean visible) {
         this.outlineVisible = visible;
+        fireAnnotationChanged();
     }
 
     /**

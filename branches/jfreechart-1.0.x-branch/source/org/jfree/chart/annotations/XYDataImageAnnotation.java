@@ -30,7 +30,7 @@
  * (C) Copyright 2008, 2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Peter Kolb (patch 2809117);
  *
  * Changes:
  * --------
@@ -131,6 +131,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     public XYDataImageAnnotation(Image image, double x, double y, double w,
             double h, boolean includeInDataBounds) {
 
+        super();
         if (image == null) {
             throw new IllegalArgumentException("Null 'image' argument.");
         }

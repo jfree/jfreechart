@@ -24,47 +24,43 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
- * -----------------------
- * CategoryAnnotation.java
- * -----------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited.
+ * ---------------
+ * Annotation.java
+ * ---------------
+ * (C) Copyright 2009, by Object Refinery Limited and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  Peter Kolb (see patch 2809117);
+ * Contributor(s):   ;
  *
  * Changes:
  * --------
- * 02-Apr-2003 : Version 1 (DG);
- * 02-Jul-2003 : Eliminated Annotation base interface (DG);
- * 24-Jun-2009 : Now extends Annotation (see patch 2809117 by PK) (DG);
+ * 20-Jun-2009 : Version 1 (PK);
  *
  */
 
 package org.jfree.chart.annotations;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.event.AnnotationChangeListener;
 
 /**
- * The interface that must be supported by annotations that are to be added to
- * a {@link CategoryPlot}.
+ * The base interface for annotations.  All annotations should support the
+ * {@link AnnotationChangeEvent} mechanism by allowing listeners to register
+ * and receive notification of any changes to the annotation.
  */
-public interface CategoryAnnotation extends Annotation {
+public interface Annotation {
 
     /**
-     * Draws the annotation.
+     * Registers an object for notification of changes to the annotation.
      *
-     * @param g2  the graphics device.
-     * @param plot  the plot.
-     * @param dataArea  the data area.
-     * @param domainAxis  the domain axis.
-     * @param rangeAxis  the range axis.
+     * @param listener  the object to register.
      */
-    public void draw(Graphics2D g2, CategoryPlot plot, Rectangle2D dataArea,
-                     CategoryAxis domainAxis, ValueAxis rangeAxis);
+    public void addChangeListener(AnnotationChangeListener listener);
+
+    /**
+     * Deregisters an object for notification of changes to the annotation.
+     *
+     * @param listener  the object to deregister.
+     */
+    public void removeChangeListener(AnnotationChangeListener listener);
 
 }

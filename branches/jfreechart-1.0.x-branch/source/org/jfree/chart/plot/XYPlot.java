@@ -43,7 +43,7 @@
  *                   Sergei Ivanov;
  *                   Richard West, Advanced Micro Devices, Inc.;
  *                   Ulrich Voigt - patches 1997549 and 2686040;
- *                   Peter Kolb - patches 1934255 and 2603321;
+ *                   Peter Kolb - patches 1934255, 2603321 and 2809117;
  *                   Andrew Mickish - patch 1868749;
  *
  * Changes (from 21-Jun-2001)
@@ -222,7 +222,9 @@
  * 30-Mar-2009 : Delegate panning to axes (DG);
  * 10-May-2009 : Added check for fixedLegendItems in equals(), and code to
  *               handle cloning (DG);
- * 
+ * 24-Jun-2009 : Added support for annotation events - see patch 2809117
+ *               by PK (DG);
+ *
  */
 
 package org.jfree.chart.plot;
@@ -266,6 +268,7 @@ import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.TickType;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.axis.ValueTick;
+import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.event.ChartChangeEventType;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -2948,6 +2951,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             throw new IllegalArgumentException("Null 'annotation' argument.");
         }
         this.annotations.add(annotation);
+        annotation.addChangeListener(this);
         if (notify) {
             fireChangeEvent();
         }
@@ -2984,6 +2988,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             throw new IllegalArgumentException("Null 'annotation' argument.");
         }
         boolean removed = this.annotations.remove(annotation);
+        annotation.removeChangeListener(this);
         if (removed && notify) {
             fireChangeEvent();
         }
@@ -3010,6 +3015,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #addAnnotation(XYAnnotation)
      */
     public void clearAnnotations() {
+        for(int i = 0; i < this.annotations.size(); i++){
+            XYAnnotation annotation = (XYAnnotation) this.annotations.get(i);
+            annotation.removeChangeListener(this);
+        }
         this.annotations.clear();
         fireChangeEvent();
     }
@@ -4504,6 +4513,24 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
 
         return result;
 
+    }
+
+    /**
+     * Receives notification of a change to an {@link Annotation} added to
+     * this plot.
+     *
+     * @param event  information about the event (not used here).
+     *
+     * @since 1.0.14
+     */
+    public void annotationChanged(AnnotationChangeEvent event) {
+        if (getParent() != null) {
+            getParent().annotationChanged(event);
+        }
+        else {
+            PlotChangeEvent e = new PlotChangeEvent(this);
+            notifyListeners(e);
+        }
     }
 
     /**

@@ -34,7 +34,7 @@
  *                   Arnaud Lelievre;
  *                   Richard West, Advanced Micro Devices, Inc.;
  *                   Ulrich Voigt - patch 2686040;
- *                   Peter Kolb - patch 2603321;
+ *                   Peter Kolb - patches 2603321 and 2809117;
  *
  * Changes
  * -------
@@ -171,6 +171,8 @@
  * 18-Mar-2009 : Modified anchored zoom behaviour (DG);
  * 19-Mar-2009 : Implemented Pannable interface - see patch 2686040 (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
+ * 24-Jun-2009 : Implemented AnnotationChangeListener (see patch 2809117 by
+ *               PK) (DG);
  *
  */
 
@@ -217,6 +219,8 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.TickType;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.axis.ValueTick;
+import org.jfree.chart.event.AnnotationChangeEvent;
+import org.jfree.chart.event.AnnotationChangeListener;
 import org.jfree.chart.event.ChartChangeEventType;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -246,8 +250,8 @@ import org.jfree.util.SortOrder;
  * renders each data item using a {@link CategoryItemRenderer}.
  */
 public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
-        Zoomable, RendererChangeListener, Cloneable, PublicCloneable,
-        Serializable {
+        Zoomable, AnnotationChangeListener, RendererChangeListener, 
+        Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -3537691700434728188L;
@@ -2279,6 +2283,24 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
+     * Receives notification of a change to an {@link Annotation} added to
+     * this plot.
+     *
+     * @param event  information about the event (not used here).
+     *
+     * @since 1.0.14
+     */
+    public void annotationChanged(AnnotationChangeEvent event) {
+        if (getParent() != null) {
+            getParent().annotationChanged(event);
+        }
+        else {
+            PlotChangeEvent e = new PlotChangeEvent(this);
+            notifyListeners(e);
+        }
+    }
+
+    /**
      * Receives notification of a change to the plot's dataset.
      * <P>
      * The range axis bounds will be recalculated if necessary.
@@ -3299,6 +3321,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             throw new IllegalArgumentException("Null 'annotation' argument.");
         }
         this.annotations.add(annotation);
+        annotation.addChangeListener(this);
         if (notify) {
             fireChangeEvent();
         }
@@ -3335,6 +3358,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             throw new IllegalArgumentException("Null 'annotation' argument.");
         }
         boolean removed = this.annotations.remove(annotation);
+        annotation.removeChangeListener(this);
         if (removed && notify) {
             fireChangeEvent();
         }
@@ -3346,6 +3370,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * registered listeners.
      */
     public void clearAnnotations() {
+        for(int i = 0; i < this.annotations.size(); i++) {
+            CategoryAnnotation annotation 
+                    = (CategoryAnnotation) this.annotations.get(i);
+            annotation.removeChangeListener(this);
+        }
         this.annotations.clear();
         fireChangeEvent();
     }
