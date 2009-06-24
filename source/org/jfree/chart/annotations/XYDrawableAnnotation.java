@@ -117,6 +117,7 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
     public XYDrawableAnnotation(double x, double y, double displayWidth,
             double displayHeight, double drawScaleFactor, Drawable drawable) {
 
+        super();
         if (drawable == null) {
             throw new IllegalArgumentException("Null 'drawable' argument.");
         }

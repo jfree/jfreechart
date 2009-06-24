@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * ----------------------
  * XYShapeAnnotation.java
  * ----------------------
- * (C) Copyright 2003-2008, by Ondax, Inc. and Contributors.
+ * (C) Copyright 2003-2009, by Ondax, Inc. and Contributors.
  *
  * Original Author:  Greg Steckman (for Ondax, Inc.);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *                   Peter Kolb (patch 2809117);
  *
  * Changes:
  * --------
@@ -134,6 +135,7 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
      */
     public XYShapeAnnotation(Shape shape, Stroke stroke, Paint outlinePaint,
                              Paint fillPaint) {
+        super();
         if (shape == null) {
             throw new IllegalArgumentException("Null 'shape' argument.");
         }

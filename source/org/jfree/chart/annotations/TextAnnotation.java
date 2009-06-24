@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * -------------------
  * TextAnnotation.java
  * -------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Peter Kolb (patch 2809117);
  *
  * Changes:
  * --------
@@ -46,6 +46,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 16-Jan-2007 : Added argument checks, fixed hashCode() method and updated
  *               API docs (DG);
+ * 24-Jun-2009 : Fire change events (see patch 2809117 by PK) (DG);
  *
  */
 
@@ -69,7 +70,7 @@ import org.jfree.util.PaintUtilities;
  * A base class for text annotations.  This class records the content but not
  * the location of the annotation.
  */
-public class TextAnnotation implements Serializable {
+public class TextAnnotation extends AbstractAnnotation implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7008912287533127432L;
@@ -114,6 +115,7 @@ public class TextAnnotation implements Serializable {
      * @param text  the text (<code>null</code> not permitted).
      */
     protected TextAnnotation(String text) {
+        super();
         if (text == null) {
             throw new IllegalArgumentException("Null 'text' argument.");
         }
@@ -162,7 +164,8 @@ public class TextAnnotation implements Serializable {
     }
 
     /**
-     * Sets the font for the annotation.
+     * Sets the font for the annotation and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param font  the font (<code>null</code> not permitted).
      *
@@ -173,6 +176,7 @@ public class TextAnnotation implements Serializable {
             throw new IllegalArgumentException("Null 'font' argument.");
         }
         this.font = font;
+        fireAnnotationChanged();
     }
 
     /**
@@ -187,7 +191,8 @@ public class TextAnnotation implements Serializable {
     }
 
     /**
-     * Sets the paint for the annotation.
+     * Sets the paint for the annotation and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
      *
@@ -198,6 +203,7 @@ public class TextAnnotation implements Serializable {
             throw new IllegalArgumentException("Null 'paint' argument.");
         }
         this.paint = paint;
+        fireAnnotationChanged();
     }
 
     /**
@@ -213,7 +219,8 @@ public class TextAnnotation implements Serializable {
 
     /**
      * Sets the text anchor (the point on the text bounding rectangle that is
-     * aligned to the (x, y) coordinate of the annotation).
+     * aligned to the (x, y) coordinate of the annotation) and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param anchor  the anchor point (<code>null</code> not permitted).
      *
@@ -224,6 +231,7 @@ public class TextAnnotation implements Serializable {
             throw new IllegalArgumentException("Null 'anchor' argument.");
         }
         this.textAnchor = anchor;
+        fireAnnotationChanged();
     }
 
     /**
@@ -238,7 +246,8 @@ public class TextAnnotation implements Serializable {
     }
 
     /**
-     * Sets the rotation anchor point.
+     * Sets the rotation anchor point and sends an
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param anchor  the anchor (<code>null</code> not permitted).
      *
@@ -246,6 +255,7 @@ public class TextAnnotation implements Serializable {
      */
     public void setRotationAnchor(TextAnchor anchor) {
         this.rotationAnchor = anchor;
+        fireAnnotationChanged();
     }
 
     /**
@@ -260,7 +270,8 @@ public class TextAnnotation implements Serializable {
     }
 
     /**
-     * Sets the rotation angle.  The angle is measured clockwise in radians.
+     * Sets the rotation angle and sends an {@link AnnotationChangeEvent} to
+     * all registered listeners.  The angle is measured clockwise in radians.
      *
      * @param angle  the angle (in radians).
      *
@@ -268,6 +279,7 @@ public class TextAnnotation implements Serializable {
      */
     public void setRotationAngle(double angle) {
         this.rotationAngle = angle;
+        fireAnnotationChanged();
     }
 
     /**

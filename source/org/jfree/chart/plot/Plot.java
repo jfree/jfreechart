@@ -37,7 +37,7 @@
  *                   Nicolas Brodu;
  *                   Michal Krause;
  *                   Richard West, Advanced Micro Devices, Inc.;
- *                   Peter Kolb - patch 2603321;
+ *                   Peter Kolb - patches 2603321, 2809117;
  *
  * Changes
  * -------
@@ -125,6 +125,8 @@
  * 15-Aug-2008 : Added setDrawingSupplier() method with notify flag (DG);
  * 13-Jan-2009 : Added notify flag (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
+ * 24-Jun-2009 : Implemented AnnotationChangeListener (see patch 2809117 by
+ *               PK) (DG);
  *
  */
 
@@ -157,6 +159,8 @@ import org.jfree.chart.LegendItemSource;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PlotEntity;
+import org.jfree.chart.event.AnnotationChangeEvent;
+import org.jfree.chart.event.AnnotationChangeListener;
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.event.AxisChangeListener;
 import org.jfree.chart.event.ChartChangeEventType;
@@ -185,8 +189,8 @@ import org.jfree.util.PublicCloneable;
  * provides facilities common to most plot types.
  */
 public abstract class Plot implements AxisChangeListener,
-        DatasetChangeListener, MarkerChangeListener, LegendItemSource,
-        PublicCloneable, Cloneable, Serializable {
+        DatasetChangeListener, AnnotationChangeListener, MarkerChangeListener,
+        LegendItemSource, PublicCloneable, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -8831571430103671324L;
@@ -1190,6 +1194,18 @@ public abstract class Plot implements AxisChangeListener,
      */
     public void zoom(double percent) {
         // do nothing by default.
+    }
+
+    /**
+     * Receives notification of a change to an {@link Annotation} added to
+     * this plot.
+     *
+     * @param event  information about the event (not used here).
+     *
+     * @since 1.0.14
+     */
+    public void annotationChanged(AnnotationChangeEvent event) {
+        fireChangeEvent();
     }
 
     /**
