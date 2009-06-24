@@ -174,9 +174,9 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /** The range grid line paint. */
     private transient Paint rangeGridlinePaint;
 
-    /** 
+    /**
      * The baseline paint (used for domain and range zero baselines)
-     * 
+     *
      * @since 1.0.13
      */
     private transient Paint baselinePaint;
@@ -717,9 +717,9 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
 
     /**
      * Returns the baseline paint.
-     * 
+     *
      * @return The baseline paint.
-     * 
+     *
      * @since 1.0.13
      */
     public Paint getBaselinePaint() {
