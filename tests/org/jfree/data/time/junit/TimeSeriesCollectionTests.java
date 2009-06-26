@@ -152,12 +152,33 @@ public class TimeSeriesCollectionTests extends TestCase {
     }
 
     /**
+     * Some checks for the {@link TimeSeriesCollection#removeSeries(int)}
+     * method.
+     */
+    public void testRemoveSeries_int() {
+        TimeSeriesCollection c1 = new TimeSeriesCollection();
+        TimeSeries s1 = new TimeSeries("Series 1");
+        TimeSeries s2 = new TimeSeries("Series 2");
+        TimeSeries s3 = new TimeSeries("Series 3");
+        TimeSeries s4 = new TimeSeries("Series 4");
+        c1.addSeries(s1);
+        c1.addSeries(s2);
+        c1.addSeries(s3);
+        c1.addSeries(s4);
+        c1.removeSeries(2);
+        assertTrue(c1.getSeries(2).equals(s4));
+        c1.removeSeries(0);
+        assertTrue(c1.getSeries(0).equals(s2));
+        assertEquals(2, c1.getSeriesCount());
+    }
+
+    /**
      * Test the getSurroundingItems() method to ensure it is returning the
      * values we expect.
      */
     public void testGetSurroundingItems() {
 
-        TimeSeries series = new TimeSeries("Series 1", Day.class);
+        TimeSeries series = new TimeSeries("Series 1");
         TimeSeriesCollection collection = new TimeSeriesCollection(series);
         collection.setXPosition(TimePeriodAnchor.MIDDLE);
 
@@ -229,10 +250,8 @@ public class TimeSeriesCollectionTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         TimeSeriesCollection c1 = new TimeSeriesCollection(createSeries());
         TimeSeriesCollection c2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
@@ -240,16 +259,14 @@ public class TimeSeriesCollectionTests extends TestCase {
             out.close();
 
             ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+                    new ByteArrayInputStream(buffer.toByteArray()));
             c2 = (TimeSeriesCollection) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(c1, c2);
-
     }
 
     /**
@@ -315,10 +332,10 @@ public class TimeSeriesCollectionTests extends TestCase {
     }
 
     private static final double EPSILON = 0.0000000001;
-    
+
     /**
      * This method provides a check for the bounds calculated using the
-     * {@link DatasetUtilities#findDomainBounds(org.jfree.data.xy.XYDataset, 
+     * {@link DatasetUtilities#findDomainBounds(org.jfree.data.xy.XYDataset,
      * java.util.List, boolean)} method.
      */
     public void testFindDomainBounds() {
@@ -355,9 +372,35 @@ public class TimeSeriesCollectionTests extends TestCase {
         r = DatasetUtilities.findDomainBounds(dataset, visibleSeriesKeys, true);
         assertEquals(1199142000000.0, r.getLowerBound(), EPSILON);
         assertEquals(1293836399999.0, r.getUpperBound(), EPSILON);
-        
+
         // restore the default time zone
         TimeZone.setDefault(saved);
+    }
+
+    /**
+     * Basic checks for cloning.
+     */
+    public void testCloning() {
+        TimeSeries s1 = new TimeSeries("Series");
+        s1.add(new Year(2009), 1.1);
+        TimeSeriesCollection c1 = new TimeSeriesCollection();
+        c1.addSeries(s1);
+        TimeSeriesCollection c2 = null;
+        try {
+            c2 = (TimeSeriesCollection) c1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(c1 != c2);
+        assertTrue(c1.getClass() == c2.getClass());
+        assertTrue(c1.equals(c2));
+
+        // check independence
+        s1.setDescription("XYZ");
+        assertFalse(c1.equals(c2));
+        c2.getSeries(0).setDescription("XYZ");
+        assertTrue(c1.equals(c2));
     }
 
 }

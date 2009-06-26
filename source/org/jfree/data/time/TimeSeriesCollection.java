@@ -80,6 +80,7 @@
  * 19-May-2009 : Implemented XYDomainInfo (DG);
  * 26-May-2009 : Implemented XYRangeInfo (DG);
  * 09-Jun-2009 : Apply some short-cuts to series value lookups (DG);
+ * 26-Jun-2009 : Fixed clone() (DG);
  *
  */
 
@@ -106,7 +107,7 @@ import org.jfree.util.ObjectUtilities;
 
 /**
  * A collection of time series objects.  This class implements the
- * {@link org.jfree.data.xy.XYDataset} interface, as well as the extended
+ * {@link XYDataset} interface, as well as the extended
  * {@link IntervalXYDataset} interface.  This makes it a convenient dataset for
  * use with the {@link org.jfree.chart.plot.XYPlot} class.
  */
@@ -624,12 +625,12 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
 
     /**
      * Returns the bounds of the domain values for the specified series.
-     * 
+     *
      * @param visibleSeriesKeys  a list of keys for the visible series.
      * @param includeInterval  include the x-interval?
-     * 
+     *
      * @return A range.
-     * 
+     *
      * @since 1.0.13
      */
     public Range getDomainBounds(List visibleSeriesKeys,
@@ -725,6 +726,20 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
                 ? this.xPosition.hashCode() : 0);
         result = 29 * result + (this.domainIsPointsInTime ? 1 : 0);
         return result;
+    }
+
+    /**
+     * Returns a clone of this time series collection.
+     *
+     * @return A clone.
+     *
+     * @throws java.lang.CloneNotSupportedException
+     */
+    public Object clone() throws CloneNotSupportedException {
+        TimeSeriesCollection clone = (TimeSeriesCollection) super.clone();
+        clone.data = (List) ObjectUtilities.deepClone(this.data);
+        clone.workingCalendar = (Calendar) this.workingCalendar.clone();
+        return clone;
     }
 
 }
