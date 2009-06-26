@@ -37,6 +37,7 @@
  * 04-Dec-2006 : Version 1 (DG);
  * 10-Jul-2008 : Added accessor methods for xPosition attribute (DG);
  * 23-May-2009 : Added hashCode() implementation (DG);
+ * 26-Jun-2009 : Added removeSeries() methods (DG);
  *
  */
 
@@ -367,6 +368,69 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     public double getVolumeValue(int series, int item) {
         return Double.NaN;
+    }
+
+    /**
+     * Removes the series with the specified index and sends a
+     * {@link DatasetChangeEvent} to all registered listeners.
+     *
+     * @param index  the series index.
+     *
+     * @since 1.0.14
+     */
+    public void removeSeries(int index) {
+        OHLCSeries series = getSeries(index);
+        if (series != null) {
+            removeSeries(series);
+        }
+    }
+
+    /**
+     * Removes the specified series from the dataset and sends a
+     * {@link DatasetChangeEvent} to all registered listeners.
+     *
+     * @param series  the series (<code>null</code> not permitted).
+     *
+     * @return <code>true</code> if the series was removed, and
+     *     <code>false</code> otherwise.
+     *
+     * @since 1.0.14
+     */
+    public boolean removeSeries(OHLCSeries series) {
+        if (series == null) {
+            throw new IllegalArgumentException("Null 'series' argument.");
+        }
+        boolean removed = this.data.remove(series);
+        if (removed) {
+            series.removeChangeListener(this);
+            fireDatasetChanged();
+        }
+        return removed;
+    }
+
+    /**
+     * Removes all the series from the collection and sends a
+     * {@link DatasetChangeEvent} to all registered listeners.
+     *
+     * @since 1.0.14
+     */
+    public void removeAllSeries() {
+
+        if (this.data.size() == 0) {
+            return;  // nothing to do
+        }
+
+        // deregister the collection as a change listener to each series in the
+        // collection
+        for (int i = 0; i < this.data.size(); i++) {
+            OHLCSeries series = (OHLCSeries) this.data.get(i);
+            series.removeChangeListener(this);
+        }
+
+        // remove all the series from the collection and notify listeners.
+        this.data.clear();
+        fireDatasetChanged();
+
     }
 
     /**
