@@ -93,7 +93,8 @@
  *               simpler for renderers with hidden series (PK);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 16-Apr-2009 : Added tick mark drawing (DG);
- *
+ * 29-Jun-2009 : Fixed bug where axis entity is hiding label entities (DG);
+ * 
  */
 
 package org.jfree.chart.axis;
@@ -931,11 +932,12 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             drawTickMarks(g2, cursor, dataArea, edge, state);
         }
 
+        createAndAddEntity(cursor, state, dataArea, edge, plotState);
+
         // draw the category labels and axis label
         state = drawCategoryLabels(g2, plotArea, dataArea, edge, state,
                 plotState);
         state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
-        createAndAddEntity(cursor, state, dataArea, edge, plotState);
         return state;
 
     }
