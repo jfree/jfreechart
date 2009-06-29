@@ -147,6 +147,7 @@
  *               Jess Thrysoee (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
+ * 29-Jun-2009 : Check visibility flag in main title (DG);
  *
  */
 
@@ -1206,7 +1207,7 @@ public class JFreeChart implements Drawable,
         nonTitleArea.setRect(chartArea);
         this.padding.trim(nonTitleArea);
 
-        if (this.title != null) {
+        if (this.title != null && this.title.isVisible()) {
             EntityCollection e = drawTitle(this.title, g2, nonTitleArea,
                     (entities != null));
             if (e != null) {
