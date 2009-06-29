@@ -1,3 +1,102 @@
+2009-06-29  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/axis/CategoryAxis.java
+    (draw):  Add axis entity before drawing labels.
+
+2009-06-26  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/time/TimeSeriesCollection.java
+    (clone): New method override.
+
+2009-06-26  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/data/time/ohlc/OHLCSeriesCollection.java
+    (removeSeries(int)): New method,
+    (removeSeries(OHLCSeries)): Likewise,
+    (removeAllSeries): Likewise.
+
+2009-06-24  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch 2809117 by Peter Kolb:
+    * source/org/jfree/chart/annotations/AbstractAnnotation.java: New file,
+    * source/org/jfree/chart/annotations/AbstractXYAnnotation.java:
+    Now extends AbstractAnnotation,
+    * source/org/jfree/chart/annotations/Annotation.java: New file,
+    * source/org/jfree/chart/annotations/CategoryAnnotation.java:
+    Now extends Annotation,
+    * source/org/jfree/chart/annotations/CategoryLineAnnotation.java
+    Now extends AbstractAnnotation,
+    (setCategory1): Fire change event,
+    (setValue1): Likewise,
+    (setCategory2): Likewise,
+    (setValue2): Likewise,
+    (setPaint): Likewise,
+    (setStroke): Likewise,
+    * source/org/jfree/chart/annotations/CategoryPointerAnnotation.java
+    (setAngle): Fire change event,
+    (setTipRadius): Likewise,
+    (setBaseRadius): Likewise,
+    (setLabelOffset): Likewise,
+    (setArrowLength): Likewise,
+    (setArrowWidth): Likewise,
+    (setArrowStroke): Likewise,
+    (setArrowPaint): Likewise,
+    * source/org/jfree/chart/annotations/CategoryTextAnnotation.java
+    (setCategory): Fire change event,
+    (setCategoryAnchor): Likewise,
+    (setValue): Likewise,
+    * source/org/jfree/chart/annotations/TextAnnotation.java
+    (setFont): Fire change event,
+    (setPaint): Likewise,
+    (setTextAnchor): Likewise,
+    (setRotationAnchor): Likewise,
+    (setRotationAngle): Likewise,
+    * source/org/jfree/chart/annotations/XYAnnotation.java:
+    Now extends Annotation,
+    * source/org/jfree/chart/annotations/XYPointerAnnotation.java
+    (setAngle): Fire change event,
+    (setTipRadius): Likewise,
+    (setBaseRadius): Likewise,
+    (setLabelOffset): Likewise,
+    (setArrowLength): Likewise,
+    (setArrowWidth): Likewise,
+    (setArrowStroke): Likewise,
+    (setArrowPaint): Likewise,
+    * source/org/jfree/chart/annotations/XYTextAnnotation.java
+    (setFont): Fire change event,
+    (setPaint): Likewise,
+    (setTextAnchor): Likewise,
+    (setRotationAnchor): Likewise,
+    (setRotationAngle): Likewise,
+    (setX): Likewise,
+    (setY): Likewise,
+    (setBackgroundPaint): Likewise,
+    (setOutlinePaint): Likewise,
+    (setOutlineStroke): Likewise,
+    (setOutlineVisible): Likewise,
+    * source/org/jfree/chart/annotations/XYTitleAnnotation.java
+    (setMaxWidth): Fire change event,
+    (setMaxHeight): Likewise,
+    * source/org/jfree/chart/event/AnnotationChangeEvent.java: New file,
+    * source/org/jfree/chart/event/AnnotationChangeListener.java: New file,
+    * source/org/jfree/chart/plot/CategoryPlot.java
+    (annotationChanged): New method,
+    (addAnnotation): Add listener,
+    (removeAnnotation): Clear listener,
+    (clearAnnotations): Clear listeners,
+    * source/org/jfree/chart/plot/Plot.java
+    (annotationChanged): New method,
+    * source/org/jfree/chart/plot/XYPlot.java
+    (annotationChanged): New method,
+    (addAnnotation): Add listener,
+    (removeAnnotation): Clear listener,
+    (clearAnnotations): Clear listeners,
+    * source/org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
+    (annotationChanged): New method,
+    (addAnnotation): Add listener,
+    (removeAnnotation): Clear listener,
+    (removeAnnotations): Clear listeners.
+
 2009-06-17  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/ohlc/OHLCSeries.java
