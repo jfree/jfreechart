@@ -162,12 +162,16 @@
  * 05-May-2009 : Match scaling (and insets) in doCopy() (DG);
  * 01-Jun-2009 : Check for null chart in mousePressed() method (DG);
  * 08-Jun-2009 : Fixed bug in setMouseWheelEnabled() (DG);
+ * 06-Jul-2009 : Clear off-screen buffer to fully transparent (DG);
+ * 
  */
 
 package org.jfree.chart;
 
 import java.awt.AWTEvent;
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -1648,12 +1652,17 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                 Rectangle2D bufferArea = new Rectangle2D.Double(
                         0, 0, this.chartBufferWidth, this.chartBufferHeight);
 
+                // make the background of the buffer clear and transparent
                 Graphics2D bufferG2 = (Graphics2D)
                         this.chartBuffer.getGraphics();
+                Composite savedComposite = bufferG2.getComposite();
+                bufferG2.setComposite(AlphaComposite.getInstance(
+                        AlphaComposite.CLEAR, 0.0f));
                 Rectangle r = new Rectangle(0, 0, this.chartBufferWidth,
                         this.chartBufferHeight);
-                bufferG2.setPaint(getBackground());
                 bufferG2.fill(r);
+                bufferG2.setComposite(savedComposite);
+                
                 if (scale) {
                     AffineTransform saved = bufferG2.getTransform();
                     AffineTransform st = AffineTransform.getScaleInstance(

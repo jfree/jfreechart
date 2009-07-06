@@ -1,3 +1,8 @@
+2009-07-06  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/ChartPanel.java
+    (paintComponent): Clear off screen buffer to fully transparent.
+
 2009-06-29  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/JFreeChart.java
