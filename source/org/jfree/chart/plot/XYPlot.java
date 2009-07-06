@@ -224,6 +224,7 @@
  *               handle cloning (DG);
  * 24-Jun-2009 : Added support for annotation events - see patch 2809117
  *               by PK (DG);
+ * 06-Jul-2009 : Fix for cloning of renderers - see bug 2817504 (DG)
  *
  */
 
@@ -5580,7 +5581,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             XYItemRenderer renderer2 = (XYItemRenderer) this.renderers.get(i);
             if (renderer2 instanceof PublicCloneable) {
                 PublicCloneable pc = (PublicCloneable) renderer2;
-                clone.renderers.set(i, pc.clone());
+                XYItemRenderer rc = (XYItemRenderer) pc.clone();
+                clone.renderers.set(i, rc);
+                rc.setPlot(clone);
+                rc.addChangeListener(clone);
             }
         }
         clone.foregroundDomainMarkers = (Map) ObjectUtilities.clone(

@@ -173,6 +173,7 @@
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 24-Jun-2009 : Implemented AnnotationChangeListener (see patch 2809117 by
  *               PK) (DG);
+ * 06-Jul-2009 : Fix for cloning of renderers - see bug 2817504 (DG)
  *
  */
 
@@ -4978,6 +4979,17 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         clone.datasetToRangeAxesMap.putAll(this.datasetToRangeAxesMap);
 
         clone.renderers = (ObjectList) this.renderers.clone();
+        for (int i = 0; i < this.renderers.size(); i++) {
+            CategoryItemRenderer renderer2 = (CategoryItemRenderer)
+                    this.renderers.get(i);
+            if (renderer2 instanceof PublicCloneable) {
+                PublicCloneable pc = (PublicCloneable) renderer2;
+                CategoryItemRenderer rc = (CategoryItemRenderer) pc.clone();
+                clone.renderers.set(i, rc);
+                rc.setPlot(clone);
+                rc.addChangeListener(clone);
+            }
+        }
         if (this.fixedDomainAxisSpace != null) {
             clone.fixedDomainAxisSpace = (AxisSpace) ObjectUtilities.clone(
                     this.fixedDomainAxisSpace);
