@@ -45,6 +45,7 @@
  * 07-Apr-2008 : Added testRemoveDomainMarker() and
  *               testRemoveRangeMarker() (DG);
  * 10-May-2009 : Extended testEquals(), added testCloning3() (DG);
+ * 06-Jul-2009 : Added testBug2817504() (DG);
  *
  */
 
@@ -546,6 +547,30 @@ public class XYPlotTests extends TestCase {
         assertFalse(p1.equals(p2));
         p2.setQuadrantPaint(1, Color.red);
         assertTrue(p1.equals(p2));
+    }
+
+    /**
+     * Renderers that belong to the plot are being cloned but they are
+     * retaining a reference to the original plot.
+     */
+    public void testBug2817504() {
+        XYPlot p1 = new XYPlot();
+        XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
+        p1.setRenderer(r1);
+        XYPlot p2 = null;
+        try {
+            p2 = (XYPlot) p1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(p1 != p2);
+        assertTrue(p1.getClass() == p2.getClass());
+        assertTrue(p1.equals(p2));
+
+        // check for independence
+        XYLineAndShapeRenderer r2 = (XYLineAndShapeRenderer) p2.getRenderer();
+        assertTrue(r2.getPlot() == p2);
     }
 
     /**
