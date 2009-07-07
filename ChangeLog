@@ -1,3 +1,14 @@
+2009-07-07  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/renderer/category/StackedBarRenderer3D.java
+    (ignoreZeroValues): New flag,
+    (getIgnoreZeroValues): New method,
+    (setIgnoreZeroValues): Likewise,
+    (createStackedValueList): Removed static modifier and check value of new
+    flag,
+    (equals): Check value of new flag,
+    (hashCode): New method override.
+
 2009-07-06  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/CategoryPlot.java
