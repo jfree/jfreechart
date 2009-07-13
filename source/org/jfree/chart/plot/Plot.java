@@ -127,6 +127,7 @@
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 24-Jun-2009 : Implemented AnnotationChangeListener (see patch 2809117 by
  *               PK) (DG);
+ * 13-Jul-2009 : Plot background image should be clipped if necessary (DG);
  *
  */
 
@@ -1090,19 +1091,23 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getBackgroundImageAlpha()
      */
     public void drawBackgroundImage(Graphics2D g2, Rectangle2D area) {
-        if (this.backgroundImage != null) {
-            Composite originalComposite = g2.getComposite();
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-                    this.backgroundImageAlpha));
-            Rectangle2D dest = new Rectangle2D.Double(0.0, 0.0,
-                    this.backgroundImage.getWidth(null),
-                    this.backgroundImage.getHeight(null));
-            Align.align(dest, area, this.backgroundImageAlignment);
-            g2.drawImage(this.backgroundImage, (int) dest.getX(),
-                    (int) dest.getY(), (int) dest.getWidth() + 1,
-                    (int) dest.getHeight() + 1, null);
-            g2.setComposite(originalComposite);
+        if (this.backgroundImage == null) {
+            return;  // nothing to do
         }
+        Composite savedComposite = g2.getComposite();
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+                this.backgroundImageAlpha));
+        Rectangle2D dest = new Rectangle2D.Double(0.0, 0.0,
+                this.backgroundImage.getWidth(null),
+                this.backgroundImage.getHeight(null));
+        Align.align(dest, area, this.backgroundImageAlignment);
+        Shape savedClip = g2.getClip();
+        g2.clip(area);
+        g2.drawImage(this.backgroundImage, (int) dest.getX(),
+                (int) dest.getY(), (int) dest.getWidth() + 1,
+                (int) dest.getHeight() + 1, null);
+        g2.setClip(savedClip);
+        g2.setComposite(savedComposite);
     }
 
     /**
