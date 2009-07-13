@@ -45,6 +45,7 @@
  *               testCloning2() and testCloning3() (DG);
  * 26-Jun-2008 : Updated testEquals() (DG);
  * 21-Jan-2009 : Updated testEquals() for new fields (DG);
+ * 10-Jul-2009 : Updated testEquals() for new field (DG);
  *
  */
 
@@ -95,6 +96,7 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.DefaultCategoryItemRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -491,6 +493,18 @@ public class CategoryPlotTests extends TestCase {
         plot2.setRangeZeroBaselineStroke(new BasicStroke(1.23f));
         assertTrue(plot1.equals(plot2));
 
+        // shadowGenerator
+        plot1.setShadowGenerator(new DefaultShadowGenerator(5, Color.gray,
+                0.6f, 4, -Math.PI / 4));
+        assertFalse(plot1.equals(plot2));
+        plot2.setShadowGenerator(new DefaultShadowGenerator(5, Color.gray,
+                0.6f, 4, -Math.PI / 4));
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setShadowGenerator(null);
+        assertFalse(plot1.equals(plot2));
+        plot2.setShadowGenerator(null);
+        assertTrue(plot1.equals(plot2));
     }
 
     /**
