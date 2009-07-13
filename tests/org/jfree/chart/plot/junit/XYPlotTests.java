@@ -92,6 +92,7 @@ import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -435,6 +436,19 @@ public class XYPlotTests extends TestCase {
         plot1.mapDatasetToRangeAxes(0, axisIndices);
         assertFalse(plot1.equals(plot2));
         plot2.mapDatasetToRangeAxes(0, axisIndices);
+        assertTrue(plot1.equals(plot2));
+        
+        // shadowGenerator
+        plot1.setShadowGenerator(new DefaultShadowGenerator(5, Color.gray,
+                0.6f, 4, -Math.PI / 4));
+        assertFalse(plot1.equals(plot2));
+        plot2.setShadowGenerator(new DefaultShadowGenerator(5, Color.gray,
+                0.6f, 4, -Math.PI / 4));
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setShadowGenerator(null);
+        assertFalse(plot1.equals(plot2));
+        plot2.setShadowGenerator(null);
         assertTrue(plot1.equals(plot2));
     }
 
