@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * PiePlot.java
  * ------------
- * (C) Copyright 2000-2008, by Andrzej Porebski and Contributors.
+ * (C) Copyright 2000-2009, by Andrzej Porebski and Contributors.
  *
  * Original Author:  Andrzej Porebski;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -162,6 +162,7 @@
  *               by Christoph Beck (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 10-Jul-2009 : Added optional drop shadow generator (DG);
  *
  */
 
@@ -175,6 +176,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Arc2D;
@@ -184,6 +186,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.QuadCurve2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -205,7 +208,9 @@ import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.urls.PieURLGenerator;
+import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -241,7 +246,7 @@ import org.jfree.util.UnitType;
  * in a clockwise direction, but these settings can be changed;</li>
  * <li>negative values in the dataset are ignored;</li>
  * <li>there are utility methods for creating a {@link PieDataset} from a
- * {@link org.jfree.data.category.CategoryDataset};</li>
+ * {@link CategoryDataset};</li>
  * </ol>
  *
  * @see Plot
@@ -502,6 +507,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     private double minimumArcAngleToDraw;
 
+    /**
+     * The shadow generator for the plot (<code>null</code> permitted).
+     * 
+     * @since 1.0.14
+     */
+    private ShadowGenerator shadowGenerator;
+
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
             = ResourceBundleWrapper.getBundle(
@@ -595,6 +607,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
         this.ignoreNullValues = false;
         this.ignoreZeroValues = false;
+
+        this.shadowGenerator = new DefaultShadowGenerator();
     }
 
     /**
@@ -2326,6 +2340,33 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
+     * Returns the shadow generator for the plot, if any.
+     * 
+     * @return The shadow generator (possibly <code>null</code>).
+     * 
+     * @since 1.0.14
+     */
+    public ShadowGenerator getShadowGenerator() {
+        return this.shadowGenerator;
+    }
+
+    /**
+     * Sets the shadow generator for the plot and sends a
+     * {@link PlotChangeEvent} to all registered listeners.  Note that this is
+     * a btmap drop-shadow generation facility and is separate from the
+     * vector based show option that is controlled via the
+     * {@link setShadowPaint()} method.
+     *
+     * @param generator  the generator (<code>null</code> permitted).
+     *
+     * @since 1.0.14
+     */
+    public void setShadowGenerator(ShadowGenerator generator) {
+        this.shadowGenerator = generator;
+        fireChangeEvent();
+    }
+
+    /**
      * Initialises the drawing procedure.  This method will be called before
      * the first item is rendered, giving the plot an opportunity to initialise
      * any state information it wants to maintain.
@@ -2388,7 +2429,28 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 getForegroundAlpha()));
 
         if (!DatasetUtilities.isEmptyOrNull(this.dataset)) {
+            Graphics2D savedG2 = g2;
+            Rectangle2D savedDataArea = area;
+            BufferedImage dataImage = null;
+            if (this.shadowGenerator != null) {
+                dataImage = new BufferedImage((int) area.getWidth(),
+                    (int) area.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                g2 = dataImage.createGraphics();
+                g2.setRenderingHints(savedG2.getRenderingHints());
+                area = new Rectangle(0, 0, dataImage.getWidth(), dataImage.getHeight());
+            }
             drawPie(g2, area, info);
+            if (this.shadowGenerator != null) {
+                BufferedImage shadowImage = this.shadowGenerator.createDropShadow(dataImage);
+                g2 = savedG2;
+                area = savedDataArea;
+                g2.drawImage(shadowImage, (int) savedDataArea.getX() 
+                        + this.shadowGenerator.calculateOffsetX(),
+                        (int) savedDataArea.getY()
+                        + this.shadowGenerator.calculateOffsetY(), null);
+                g2.drawImage(dataImage, (int) savedDataArea.getX(),
+                        (int) savedDataArea.getY(), null);
+            }
         }
         else {
             drawNoDataMessage(g2, area);
@@ -2580,7 +2642,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                     Arc2D.PIE);
 
             if (currentPass == 0) {
-                if (this.shadowPaint != null) {
+                if (this.shadowPaint != null && this.shadowGenerator == null) {
                     Shape shadowArc = ShapeUtilities.createTranslatedShape(
                             arc, (float) this.shadowXOffset,
                             (float) this.shadowYOffset);
@@ -2694,7 +2756,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                         bounds);
                 Shape bg = ShapeUtilities.createTranslatedShape(out,
                         x - bounds.getCenterX(), y - bounds.getCenterY());
-                if (this.labelShadowPaint != null) {
+                if (this.labelShadowPaint != null
+                        && this.shadowGenerator == null) {
                     Shape shadow = ShapeUtilities.createTranslatedShape(bg,
                             this.shadowXOffset, this.shadowYOffset);
                     g2.setPaint(this.labelShadowPaint);
@@ -2827,7 +2890,12 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 labelBox.setBackgroundPaint(this.labelBackgroundPaint);
                 labelBox.setOutlinePaint(this.labelOutlinePaint);
                 labelBox.setOutlineStroke(this.labelOutlineStroke);
-                labelBox.setShadowPaint(this.labelShadowPaint);
+                if (this.shadowGenerator == null) {
+                    labelBox.setShadowPaint(this.labelShadowPaint);
+                }
+                else {
+                    labelBox.setShadowPaint(null);
+                }
                 labelBox.setInteriorGap(this.labelPadding);
                 double theta = Math.toRadians(
                         leftKeys.getValue(i).doubleValue());
@@ -2883,7 +2951,12 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 labelBox.setBackgroundPaint(this.labelBackgroundPaint);
                 labelBox.setOutlinePaint(this.labelOutlinePaint);
                 labelBox.setOutlineStroke(this.labelOutlineStroke);
-                labelBox.setShadowPaint(this.labelShadowPaint);
+                if (this.shadowGenerator == null) {
+                    labelBox.setShadowPaint(this.labelShadowPaint);
+                }
+                else {
+                    labelBox.setShadowPaint(null);
+                }
                 labelBox.setInteriorGap(this.labelPadding);
                 double theta = Math.toRadians(keys.getValue(i).doubleValue());
                 double baseY = state.getPieCenterY()
@@ -3186,9 +3259,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 that.sectionOutlinePaintMap)) {
             return false;
         }
-        if (!PaintUtilities.equal(
-            this.baseSectionOutlinePaint, that.baseSectionOutlinePaint
-        )) {
+        if (!PaintUtilities.equal(this.baseSectionOutlinePaint,
+                that.baseSectionOutlinePaint)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.sectionOutlineStroke,
@@ -3199,9 +3271,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 that.sectionOutlineStrokeMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(
-            this.baseSectionOutlineStroke, that.baseSectionOutlineStroke
-        )) {
+        if (!ObjectUtilities.equal(this.baseSectionOutlineStroke,
+                that.baseSectionOutlineStroke)) {
             return false;
         }
         if (!PaintUtilities.equal(this.shadowPaint, that.shadowPaint)) {
@@ -3308,6 +3379,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         }
         if (this.autoPopulateSectionOutlineStroke
                 != that.autoPopulateSectionOutlineStroke) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.shadowGenerator,
+                that.shadowGenerator)) {
             return false;
         }
         // can't find any difference...

@@ -174,6 +174,7 @@
  * 24-Jun-2009 : Implemented AnnotationChangeListener (see patch 2809117 by
  *               PK) (DG);
  * 06-Jul-2009 : Fix for cloning of renderers - see bug 2817504 (DG)
+ * 10-Jul-2009 : Added optional drop shadow generator (DG);
  *
  */
 
@@ -186,15 +187,18 @@ import java.awt.Composite;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -206,7 +210,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeMap;
-
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.annotations.CategoryAnnotation;
@@ -229,7 +232,9 @@ import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.category.AbstractCategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRendererState;
+import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.Dataset;
@@ -541,6 +546,13 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     private boolean rangePannable;
 
     /**
+     * The shadow generator for the plot (<code>null</code> permitted).
+     * 
+     * @since 1.0.14
+     */
+    private ShadowGenerator shadowGenerator;
+
+    /**
      * Default constructor.
      */
     public CategoryPlot() {
@@ -647,6 +659,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         this.annotations = new java.util.ArrayList();
         
         this.rangePannable = false;
+        this.shadowGenerator = new DefaultShadowGenerator();
     }
 
     /**
@@ -3381,6 +3394,33 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
+     * Returns the shadow generator for the plot, if any.
+     *
+     * @return The shadow generator (possibly <code>null</code>).
+     *
+     * @since 1.0.14
+     */
+    public ShadowGenerator getShadowGenerator() {
+        return this.shadowGenerator;
+    }
+
+    /**
+     * Sets the shadow generator for the plot and sends a
+     * {@link PlotChangeEvent} to all registered listeners.  Note that this is
+     * a btmap drop-shadow generation facility and is separate from the
+     * vector based show option that is controlled via the
+     * {@link setShadowPaint()} method.
+     *
+     * @param generator  the generator (<code>null</code> permitted).
+     *
+     * @since 1.0.14
+     */
+    public void setShadowGenerator(ShadowGenerator generator) {
+        this.shadowGenerator = generator;
+        fireChangeEvent();
+    }
+
+    /**
      * Calculates the space required for the domain axis/axes.
      *
      * @param g2  the graphics device.
@@ -3482,6 +3522,21 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
+     * Trims a rectangle to integer coordinates.
+     *
+     * @param rect  the incoming rectangle.
+     *
+     * @return A rectangle with integer coordinates.
+     */
+    private Rectangle integerise(Rectangle2D rect) {
+        int x0 = (int) Math.ceil(rect.getMinX());
+        int y0 = (int) Math.ceil(rect.getMinY());
+        int x1 = (int) Math.floor(rect.getMaxX());
+        int y1 = (int) Math.floor(rect.getMaxY());
+        return new Rectangle(x0, y0, (x1 - x0), (y1 - y0));
+    }
+
+    /**
      * Calculates the space required for the axes.
      *
      * @param g2  the graphics device.
@@ -3540,7 +3595,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         AxisSpace space = calculateAxisSpace(g2, area);
         Rectangle2D dataArea = space.shrink(area, null);
         this.axisOffset.trim(dataArea);
-
+        dataArea = integerise(dataArea);
+        if (dataArea.isEmpty()) {
+            return;
+        }
         state.setDataArea(dataArea);
         createAndAddEntity((Rectangle2D) dataArea.clone(), state, null, null);
 
@@ -3607,6 +3665,18 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             drawZeroRangeBaseline(g2, dataArea);
         }
 
+        Graphics2D savedG2 = g2;
+        Rectangle2D savedDataArea = dataArea;
+        BufferedImage dataImage = null;
+        if (this.shadowGenerator != null) {
+            dataImage = new BufferedImage((int) dataArea.getWidth(),
+                    (int)dataArea.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            g2 = dataImage.createGraphics();
+            g2.setRenderingHints(savedG2.getRenderingHints());
+            dataArea = new Rectangle(0, 0, dataImage.getWidth(),
+                    dataImage.getHeight());
+        }
+
         // draw the markers...
         for (int i = 0; i < this.renderers.size(); i++) {
             drawDomainMarkers(g2, dataArea, i, Layer.BACKGROUND);
@@ -3647,6 +3717,18 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         // draw the annotations (if any)...
         drawAnnotations(g2, dataArea);
 
+        if (this.shadowGenerator != null) {
+            BufferedImage shadowImage = this.shadowGenerator.createDropShadow(
+                    dataImage);
+            g2 = savedG2;
+            dataArea = savedDataArea;
+            g2.drawImage(shadowImage, (int) savedDataArea.getX() 
+                    + this.shadowGenerator.calculateOffsetX(),
+                    (int) savedDataArea.getY() 
+                    + this.shadowGenerator.calculateOffsetY(), null);
+            g2.drawImage(dataImage, (int) savedDataArea.getX(),
+                    (int) savedDataArea.getY(), null);
+        }
         g2.setClip(savedClip);
         g2.setComposite(originalComposite);
 
@@ -4756,7 +4838,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return A boolean.
      */
     public boolean equals(Object obj) {
-
         if (obj == this) {
             return true;
         }
@@ -4930,8 +5011,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
                 that.rangeZeroBaselineStroke)) {
             return false;
         }
+        if (!ObjectUtilities.equal(this.shadowGenerator,
+                that.shadowGenerator)) {
+            return false;
+        }
         return super.equals(obj);
-
     }
 
     /**

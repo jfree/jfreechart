@@ -79,7 +79,8 @@
  * 20-Mar-2008 : Fixed bug 1920854 - multiple redraws of the section
  *               labels (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- *
+ * 10-Jul-2009 : Added drop shaow support (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -92,6 +93,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Arc2D;
@@ -99,6 +101,7 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -243,6 +246,18 @@ public class PiePlot3D extends PiePlot implements Serializable {
         Shape savedClip = g2.getClip();
         g2.clip(plotArea);
 
+        Graphics2D savedG2 = g2;
+        Rectangle2D savedDataArea = plotArea;
+        BufferedImage dataImage = null;
+        if (getShadowGenerator() != null) {
+            dataImage = new BufferedImage((int) plotArea.getWidth(),
+                (int) plotArea.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            g2 = dataImage.createGraphics();
+            g2.setRenderingHints(savedG2.getRenderingHints());
+            plotArea = new Rectangle(0, 0, dataImage.getWidth(),
+                    dataImage.getHeight());
+            originalPlotArea = (Rectangle) plotArea.clone();
+        }
         // adjust the plot area by the interior spacing value
         double gapPercent = getInteriorGap();
         double labelPercent = 0.0;
@@ -583,6 +598,19 @@ public class PiePlot3D extends PiePlot implements Serializable {
         else {
             drawLabels(g2, keys, totalValue, adjustedPlotArea, linkArea,
                     state);
+        }
+
+        if (getShadowGenerator() != null) {
+            BufferedImage shadowImage = getShadowGenerator().createDropShadow(dataImage);
+            g2 = savedG2;
+            plotArea = savedDataArea;
+            originalPlotArea = savedDataArea;
+            g2.drawImage(shadowImage, (int) savedDataArea.getX() 
+                    + getShadowGenerator().calculateOffsetX(),
+                    (int) savedDataArea.getY() 
+                    + getShadowGenerator().calculateOffsetY(), null);
+            g2.drawImage(dataImage, (int) savedDataArea.getX(),
+                    (int) savedDataArea.getY(), null);
         }
 
         g2.setClip(savedClip);
