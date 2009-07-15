@@ -147,7 +147,6 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * Sets the category for the start of the line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     *
      * @param category  the category (<code>null</code> not permitted).
      *
      * @see #getCategory1()
