@@ -3027,55 +3027,56 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     protected void displayPopupMenu(int x, int y) {
 
-        if (this.popup != null) {
-
-            // go through each zoom menu item and decide whether or not to
-            // enable it...
-            Plot plot = this.chart.getPlot();
-            boolean isDomainZoomable = false;
-            boolean isRangeZoomable = false;
-            if (plot instanceof Zoomable) {
-                Zoomable z = (Zoomable) plot;
-                isDomainZoomable = z.isDomainZoomable();
-                isRangeZoomable = z.isRangeZoomable();
-            }
-
-            if (this.zoomInDomainMenuItem != null) {
-                this.zoomInDomainMenuItem.setEnabled(isDomainZoomable);
-            }
-            if (this.zoomOutDomainMenuItem != null) {
-                this.zoomOutDomainMenuItem.setEnabled(isDomainZoomable);
-            }
-            if (this.zoomResetDomainMenuItem != null) {
-                this.zoomResetDomainMenuItem.setEnabled(isDomainZoomable);
-            }
-
-            if (this.zoomInRangeMenuItem != null) {
-                this.zoomInRangeMenuItem.setEnabled(isRangeZoomable);
-            }
-            if (this.zoomOutRangeMenuItem != null) {
-                this.zoomOutRangeMenuItem.setEnabled(isRangeZoomable);
-            }
-
-            if (this.zoomResetRangeMenuItem != null) {
-                this.zoomResetRangeMenuItem.setEnabled(isRangeZoomable);
-            }
-
-            if (this.zoomInBothMenuItem != null) {
-                this.zoomInBothMenuItem.setEnabled(isDomainZoomable
-                        && isRangeZoomable);
-            }
-            if (this.zoomOutBothMenuItem != null) {
-                this.zoomOutBothMenuItem.setEnabled(isDomainZoomable
-                        && isRangeZoomable);
-            }
-            if (this.zoomResetBothMenuItem != null) {
-                this.zoomResetBothMenuItem.setEnabled(isDomainZoomable
-                        && isRangeZoomable);
-            }
-
-            this.popup.show(this, x, y);
+        if (this.popup == null) {
+            return;
         }
+
+        // go through each zoom menu item and decide whether or not to
+        // enable it...
+        boolean isDomainZoomable = false;
+        boolean isRangeZoomable = false;
+        Plot plot = (this.chart != null ? this.chart.getPlot() : null);
+        if (plot instanceof Zoomable) {
+            Zoomable z = (Zoomable) plot;
+            isDomainZoomable = z.isDomainZoomable();
+            isRangeZoomable = z.isRangeZoomable();
+        }
+
+        if (this.zoomInDomainMenuItem != null) {
+            this.zoomInDomainMenuItem.setEnabled(isDomainZoomable);
+        }
+        if (this.zoomOutDomainMenuItem != null) {
+            this.zoomOutDomainMenuItem.setEnabled(isDomainZoomable);
+        }
+        if (this.zoomResetDomainMenuItem != null) {
+            this.zoomResetDomainMenuItem.setEnabled(isDomainZoomable);
+        }
+
+        if (this.zoomInRangeMenuItem != null) {
+            this.zoomInRangeMenuItem.setEnabled(isRangeZoomable);
+        }
+        if (this.zoomOutRangeMenuItem != null) {
+            this.zoomOutRangeMenuItem.setEnabled(isRangeZoomable);
+        }
+
+        if (this.zoomResetRangeMenuItem != null) {
+            this.zoomResetRangeMenuItem.setEnabled(isRangeZoomable);
+        }
+
+        if (this.zoomInBothMenuItem != null) {
+            this.zoomInBothMenuItem.setEnabled(isDomainZoomable
+                    && isRangeZoomable);
+        }
+        if (this.zoomOutBothMenuItem != null) {
+            this.zoomOutBothMenuItem.setEnabled(isDomainZoomable
+                    && isRangeZoomable);
+        }
+        if (this.zoomResetBothMenuItem != null) {
+            this.zoomResetBothMenuItem.setEnabled(isDomainZoomable
+                    && isRangeZoomable);
+        }
+
+        this.popup.show(this, x, y);
 
     }
 
