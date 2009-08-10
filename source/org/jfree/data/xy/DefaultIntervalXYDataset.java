@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * DefaultIntervalXYDataset.java
  * -----------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  *               as an existing series (see bug 1589392) (DG);
  * 28-Nov-2006 : New override for clone() (DG);
  * 22-Apr-2008 : Implemented PublicCloneable (DG);
+ * 10-Aug-2009 : Fixed typo in Javadocs - see bug 2830419 (DG);
  *
  */
 
@@ -397,8 +398,9 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
      *
      * @param seriesKey  the series key (<code>null</code> not permitted).
      * @param data  the data (must be an array with length 6, containing six
-     *     arrays of equal length, the first containing the x-values and the
-     *     second containing the y-values).
+     *     arrays of equal length, the first three containing the x-values
+     *     (x, xLow and xHigh) and the last three containing the y-values
+     *     (y, yLow and yHigh)).
      */
     public void addSeries(Comparable seriesKey, double[][] data) {
         if (seriesKey == null) {
@@ -417,7 +419,7 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
                 || length != data[3].length || length != data[4].length
                 || length != data[5].length) {
             throw new IllegalArgumentException(
-                "The 'data' array must contain two arrays with equal length.");
+                "The 'data' array must contain six arrays with equal length.");
         }
         int seriesIndex = indexOf(seriesKey);
         if (seriesIndex == -1) {  // add a new series
