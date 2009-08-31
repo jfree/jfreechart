@@ -204,7 +204,8 @@ public abstract class Plot implements AxisChangeListener,
             = new RectangleInsets(4.0, 8.0, 4.0, 8.0);
 
     /** The default outline stroke. */
-    public static final Stroke DEFAULT_OUTLINE_STROKE = new BasicStroke(0.5f);
+    public static final Stroke DEFAULT_OUTLINE_STROKE = new BasicStroke(0.5f,
+            BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
 
     /** The default outline color. */
     public static final Paint DEFAULT_OUTLINE_PAINT = Color.gray;
