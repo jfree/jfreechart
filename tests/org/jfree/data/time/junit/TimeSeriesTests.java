@@ -48,6 +48,7 @@
  * 13-Jan-2009 : Added testEquals3() and testRemoveAgedItems3() (DG);
  * 26-May-2009 : Added various tests for min/maxY values (DG);
  * 09-Jun-2009 : Added testAdd_TimeSeriesDataItem (DG);
+ * 31-Aug-2009 : Added new test for createCopy() method (DG);
  * 
  */
 
@@ -341,32 +342,27 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
-        TimeSeries s1 = new TimeSeries("A test", Year.class);
+        TimeSeries s1 = new TimeSeries("A test");
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
         TimeSeries s2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
             out.writeObject(s1);
             out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             s2 = (TimeSeries) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertTrue(s1.equals(s2));
-
     }
 
     /**
@@ -600,6 +596,28 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
         }
     }
 
+    /**
+     * Checks that the min and max y values are updated correctly when copying
+     * a subset.
+     *
+     * @throws java.lang.CloneNotSupportedException
+     */
+    public void testCreateCopy3() throws CloneNotSupportedException {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.add(new Year(2009), 100.0);
+        s1.add(new Year(2010), 101.0);
+        s1.add(new Year(2011), 102.0);
+        assertEquals(100.0, s1.getMinY(), EPSILON);
+        assertEquals(102.0, s1.getMaxY(), EPSILON);
+        
+        TimeSeries s2 = s1.createCopy(0, 1);
+        assertEquals(100.0, s2.getMinY(), EPSILON);
+        assertEquals(101.0, s2.getMaxY(), EPSILON);
+
+        TimeSeries s3 = s1.createCopy(1, 2);
+        assertEquals(101.0, s3.getMinY(), EPSILON);
+        assertEquals(102.0, s3.getMaxY(), EPSILON);
+    }
 
     /**
      * Test the setMaximumItemCount() method to ensure that it removes items

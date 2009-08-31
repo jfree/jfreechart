@@ -81,7 +81,8 @@
  *               storage are cloned to keep series isolated from external
  *               changes (DG);
  * 10-Jun-2009 : Added addOrUpdate(TimeSeriesDataItem) method (DG);
- *
+ * 31-Aug-2009 : Clear minY and maxY cache values in createCopy (DG);
+ * 
  */
 
 package org.jfree.data.time;
@@ -1041,7 +1042,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      */
     public TimeSeries createCopy(int start, int end)
             throws CloneNotSupportedException {
-
         if (start < 0) {
             throw new IllegalArgumentException("Requires start >= 0.");
         }
@@ -1049,7 +1049,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             throw new IllegalArgumentException("Requires start <= end.");
         }
         TimeSeries copy = (TimeSeries) super.clone();
-
+        copy.minY = Double.NaN;
+        copy.maxY = Double.NaN;
         copy.data = new java.util.ArrayList();
         if (this.data.size() > 0) {
             for (int index = start; index <= end; index++) {
