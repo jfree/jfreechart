@@ -1,3 +1,9 @@
+2009-09-01  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 2840132:
+    * source/org/jfree/chart/renderer/AbstractXYItemRenderer.java
+    (drawAnnotations): Set renderer index.
+
 2009-08-31  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/TimeSeries.java

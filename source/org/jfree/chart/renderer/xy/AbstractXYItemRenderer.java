@@ -114,6 +114,8 @@
  *               'treatLegendShapeAsLine' flag (DG);
  * 24-Jun-2009 : Added support for annotation events - see patch 2809117
  *               by PK (DG);
+ * 01-Sep-2009 : Bug 2840132 - set renderer index when drawing
+ *               annotations (DG);
  * 
  */
 
@@ -1716,8 +1718,9 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         }
         while (iterator.hasNext()) {
             XYAnnotation annotation = (XYAnnotation) iterator.next();
+            int index = this.plot.getIndexOf(this);
             annotation.draw(g2, this.plot, dataArea, domainAxis, rangeAxis,
-                    0, info);
+                    index, info);
         }
 
     }

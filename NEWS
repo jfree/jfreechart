@@ -13,10 +13,12 @@ Patches:
 
 Bug Fixes:
 
+2840132 : AbstractXYItemRenderer drawAnnotations doesn't set renderer index;
 2781844 : XYPointerAnnotation arrow drawing;
 1937486 : AreaRenderer doesn't respect AreaRendererEndType.LEVEL;
 
 Also fixed:
+- cached minY and maxY in TimeSeries.createCopy();
 - scaling issues for charts copied to the clipboard;
 - use of timezone in TimeTableXYDataset constructor;
 - item label positioning for the AreaRenderer class when the plot has an
