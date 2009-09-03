@@ -163,6 +163,7 @@
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
  * 10-Jul-2009 : Added optional drop shadow generator (DG);
+ * 03-Sep-2009 : Fixed bug where sinmpleLabelOffset is ignored (DG);
  *
  */
 
@@ -2353,7 +2354,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Sets the shadow generator for the plot and sends a
      * {@link PlotChangeEvent} to all registered listeners.  Note that this is
-     * a btmap drop-shadow generation facility and is separate from the
+     * a bitmap drop-shadow generation facility and is separate from the
      * vector based show option that is controlled via the
      * {@link setShadowPaint()} method.
      *
@@ -2710,9 +2711,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
                 1.0f));
 
-        RectangleInsets labelInsets = new RectangleInsets(UnitType.RELATIVE,
-                0.18, 0.18, 0.18, 0.18);
-        Rectangle2D labelsArea = labelInsets.createInsetRectangle(pieArea);
+        Rectangle2D labelsArea = this.simpleLabelOffset.createInsetRectangle(
+                pieArea);
         double runningTotal = 0.0;
         Iterator iterator = keys.iterator();
         while (iterator.hasNext()) {
