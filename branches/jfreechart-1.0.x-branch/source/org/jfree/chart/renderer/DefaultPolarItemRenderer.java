@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,12 @@
  * -----------------------------
  * DefaultPolarItemRenderer.java
  * -----------------------------
- * (C) Copyright 2004-2008, by Solution Engineering, Inc. and
+ * (C) Copyright 2004-2009, by Solution Engineering, Inc. and
  *     Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *                   Martin Hoeller (patch 2850344);
  *
  * Changes
  * -------
@@ -46,6 +47,7 @@
  * 14-Mar-2007 : Fixed clone() method (DG);
  * 04-May-2007 : Fixed lookup for series paint and stroke (DG);
  * 18-May-2007 : Set dataset for LegendItem (DG);
+ * 03-Sep-2009 : Applied patch 2850344 by Martin Hoeller (DG);
  *
  */
 
@@ -72,9 +74,9 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.text.TextUtilities;
-import org.jfree.ui.TextAnchor;
 import org.jfree.util.BooleanList;
 import org.jfree.util.BooleanUtilities;
+import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that can be used with the {@link PolarPlot} class.
@@ -89,10 +91,37 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     private BooleanList seriesFilled;
 
     /**
+     * Flag that controls whether an outline is drawn for filled series or
+     * not.
+     *
+     * @since 1.0.14
+     */
+    private boolean drawOutlineWhenFilled;
+
+    /**
+     * The composite to use when filling series.
+     * 
+     * @since 1.0.14
+     */
+    private Composite fillComposite;
+
+    /**
+     * Flag that controls whether item shapes are visible or not.
+     * 
+     * @since 1.0.14
+     */
+    private boolean shapesVisible;
+    
+    
+    /**
      * Creates a new instance of DefaultPolarItemRenderer
      */
     public DefaultPolarItemRenderer() {
         this.seriesFilled = new BooleanList();
+        this.drawOutlineWhenFilled = true;
+        this.fillComposite = AlphaComposite.getInstance(
+                AlphaComposite.SRC_OVER, 0.3f);
+        this.shapesVisible = true;
     }
 
     /**
@@ -115,6 +144,85 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      */
     public PolarPlot getPlot() {
         return this.plot;
+    }
+
+    /**
+     * Returns <code>true</code> if the renderer will draw an outline around
+     * a filled polygon, <code>false/<code> otherwise.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.14
+     */
+    public boolean getDrawOutlineWhenFilled() {
+        return this.drawOutlineWhenFilled;
+    }
+
+    /**
+     * Set the flag that controls whether the outline around a filled
+     * polygon will be drawn or not and sends a {@link RendererChangeEvent}
+     * to all registered listeners.
+     *
+     * @param drawOutlineWhenFilled  the flag.
+     *
+     * @since 1.0.14
+     */
+    public void setDrawOutlineWhenFilled(boolean drawOutlineWhenFilled) {
+        this.drawOutlineWhenFilled = drawOutlineWhenFilled;
+        fireChangeEvent();
+    }
+
+    /**
+     * Get the composite that is used for filling.
+     *
+     * @return The composite (never <code>null</code>).
+     *
+     * @since 1.0.14
+     */
+    public Composite getFillComposite() {
+        return this.fillComposite;
+    }
+
+    /**
+     * Set the composite which will be used for filling polygons and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param composite  the composite to use (<code>null</code> not
+     *         permitted).
+     *
+     * @since 1.0.14
+     */
+    public void setFillComposite(Composite composite) {
+        if (composite == null) {
+            throw new IllegalArgumentException("Null 'composite' argument.");
+        }
+        this.fillComposite = composite;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns <code>true</tt> if a shape will be drawn for every item, or
+     * <code>false</code> if not.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.14
+     */
+    public boolean getShapesVisible() {
+        return this.shapesVisible;
+    }
+
+    /**
+     * Set the flag that controls whether a shape will be drawn for every
+     * item, or not and sends a {@link RendererChangeEvent} to all registered
+     * listeners.
+     *
+     * @param visible  the flag.
+     *
+     * @since 1.0.14
+     */
+    public void setShapesVisible(boolean shapesVisible) {
+        this.shapesVisible = shapesVisible;
     }
 
     /**
@@ -176,7 +284,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                            int seriesIndex) {
 
         Polygon poly = new Polygon();
-        int numPoints = dataset.getItemCount(seriesIndex);
+        final int numPoints = dataset.getItemCount(seriesIndex);
         for (int i = 0; i < numPoints; i++) {
             double theta = dataset.getXValue(seriesIndex, i);
             double radius = dataset.getYValue(seriesIndex, i);
@@ -188,13 +296,34 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         g2.setStroke(lookupSeriesStroke(seriesIndex));
         if (isSeriesFilled(seriesIndex)) {
             Composite savedComposite = g2.getComposite();
-            g2.setComposite(AlphaComposite.getInstance(
-                    AlphaComposite.SRC_OVER, 0.5f));
+            g2.setComposite(this.fillComposite);
             g2.fill(poly);
             g2.setComposite(savedComposite);
+            if (this.drawOutlineWhenFilled) {
+                // draw the outline of the filled polygon
+                g2.setPaint(lookupSeriesOutlinePaint(seriesIndex));
+                g2.draw(poly);
+            }
         }
         else {
+            // just the lines, no filling
             g2.draw(poly);
+        }
+        
+        // draw the item shapes
+        if (this.shapesVisible) {
+            for (int i = 0; i < numPoints; i++) {
+                final int x = poly.xpoints[i];
+                final int y = poly.ypoints[i];
+                final Shape shape = ShapeUtilities.createTranslatedShape(
+                        getItemShape(seriesIndex, i), x,  y);
+
+                g2.setPaint(lookupSeriesFillPaint(seriesIndex));
+                g2.fill(shape);
+                g2.setPaint(lookupSeriesOutlinePaint(seriesIndex));
+                g2.setStroke(lookupSeriesOutlineStroke(seriesIndex));
+                g2.draw(shape);
+            }
         }
     }
 
@@ -223,8 +352,9 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         Iterator iterator = ticks.iterator();
         while (iterator.hasNext()) {
             NumberTick tick = (NumberTick) iterator.next();
+            double tickVal = tick.getNumber().doubleValue();
             Point p = plot.translateValueThetaRadiusToJava2D(
-                    tick.getNumber().doubleValue(), maxRadius, dataArea);
+                    tickVal, maxRadius, dataArea);
             g2.setPaint(plot.getAngleGridlinePaint());
             g2.drawLine(center.x, center.y, p.x, p.y);
             if (plot.isAngleLabelsVisible()) {
@@ -232,7 +362,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                 int y = p.y;
                 g2.setPaint(plot.getAngleLabelPaint());
                 TextUtilities.drawAlignedString(tick.getText(), g2, x, y,
-                        TextAnchor.CENTER);
+                        tick.getTextAnchor());
             }
         }
      }
@@ -319,6 +449,15 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         }
         DefaultPolarItemRenderer that = (DefaultPolarItemRenderer) obj;
         if (!this.seriesFilled.equals(that.seriesFilled)) {
+            return false;
+        }
+        if (this.drawOutlineWhenFilled != that.drawOutlineWhenFilled) {
+            return false;
+        }
+        if (!this.fillComposite.equals(that.fillComposite)) {
+            return false;
+        }
+        if (this.shapesVisible != that.shapesVisible) {
             return false;
         }
         return super.equals(obj);
