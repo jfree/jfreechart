@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,11 +27,11 @@
  * --------------
  * PolarPlot.java
  * --------------
- * (C) Copyright 2004-2008, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2009, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *                   Martin Hoeller (patch 1871902);
+ *                   Martin Hoeller (patches 1871902 and 2850344);
  *
  * Changes
  * -------
@@ -48,6 +48,7 @@
  *               Martin Hoeller) (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 03-Sep-2009 : Applied patch 2850344 by Martin Hoeller (DG);
  *
  */
 
@@ -110,8 +111,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     private static final long serialVersionUID = 3794383185924179525L;
 
     /** The default margin. */
-    private static final int MARGIN = 20;
-
+    private static final int DEFAULT_MARGIN = 20;
+   
     /** The annotation margin. */
     private static final double ANNOTATION_MARGIN = 7.0;
 
@@ -187,6 +188,13 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /** The annotations for the plot. */
     private List cornerTextItems = new ArrayList();
 
+    /** 
+     * The actual margin.
+     *
+     * @since 1.0.14
+     */
+    private int margin;
+    
     /**
      * Default constructor.
      */
@@ -232,6 +240,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         this.radiusGridlinesVisible = true;
         this.radiusGridlineStroke = DEFAULT_GRIDLINE_STROKE;
         this.radiusGridlinePaint = DEFAULT_GRIDLINE_PAINT;
+        this.margin = DEFAULT_MARGIN;
     }
 
     /**
@@ -667,6 +676,30 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         this.radiusGridlinePaint = paint;
         fireChangeEvent();
     }
+    
+    /**
+     * Returns the margin around the plot area.
+     * 
+     * @return The actual margin.
+     *
+     * @since 1.0.14
+     */
+    public int getMargin() {
+        return this.margin;
+    }
+
+    /**
+     * Set the margin around the plot area and sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @param margin The new margin.
+     *
+     * @since 1.0.14
+     */
+    public void setMargin(int margin) {
+        this.margin = margin;
+        fireChangeEvent();
+    }
 
     /**
      * Generates a list of tick values for the angular tick marks.
@@ -679,9 +712,35 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         List ticks = new ArrayList();
         for (double currentTickVal = 0.0; currentTickVal < 360.0;
                 currentTickVal += this.angleTickUnit.getSize()) {
+            TextAnchor ta = TextAnchor.CENTER;
+            if (currentTickVal == 0.0 || currentTickVal == 360.0) {
+                ta = TextAnchor.BOTTOM_CENTER;
+            }
+            else if (currentTickVal > 0.0 && currentTickVal < 90.0) {
+                ta = TextAnchor.BOTTOM_LEFT;
+            }
+            else if (currentTickVal == 90.0) {
+                ta = TextAnchor.CENTER_LEFT;
+            }
+            else if (currentTickVal > 90.0 && currentTickVal < 180.0) {
+                ta = TextAnchor.TOP_LEFT;
+            }
+            else if (currentTickVal == 180) {
+                ta = TextAnchor.TOP_CENTER;
+            }
+            else if (currentTickVal > 180.0 && currentTickVal < 270.0) {
+                ta = TextAnchor.TOP_RIGHT;
+            }
+            else if (currentTickVal == 270) {
+                ta = TextAnchor.CENTER_RIGHT;
+            }
+            else if (currentTickVal > 270.0 && currentTickVal < 360.0) {
+                ta = TextAnchor.BOTTOM_RIGHT;
+            }
+
             NumberTick tick = new NumberTick(new Double(currentTickVal),
                 this.angleTickUnit.valueToString(currentTickVal),
-                TextAnchor.CENTER, TextAnchor.CENTER, 0.0);
+                ta, TextAnchor.CENTER, 0.0);
             ticks.add(tick);
         }
         return ticks;
@@ -736,9 +795,9 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
         // draw the plot background and axes...
         drawBackground(g2, dataArea);
-        double h = Math.min(dataArea.getWidth() / 2.0,
-                dataArea.getHeight() / 2.0) - MARGIN;
-        Rectangle2D quadrant = new Rectangle2D.Double(dataArea.getCenterX(),
+        double h = Math.min(dataArea.getWidth() / 2.0, 
+                dataArea.getHeight() / 2.0) - this.margin;
+        Rectangle2D quadrant = new Rectangle2D.Double(dataArea.getCenterX(), 
                 dataArea.getCenterY(), h, h);
         AxisState state = drawAxis(g2, area, quadrant);
         if (this.renderer != null) {
@@ -1043,6 +1102,9 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (!this.cornerTextItems.equals(that.cornerTextItems)) {
             return false;
         }
+        if (this.margin != that.margin) {
+            return false;
+        }
         return super.equals(obj);
     }
 
@@ -1073,7 +1135,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
 
         clone.cornerTextItems = new ArrayList(this.cornerTextItems);
-
+       
         return clone;
     }
 
@@ -1271,10 +1333,10 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
         double radians = Math.toRadians(angleDegrees - 90.0);
 
-        double minx = dataArea.getMinX() + MARGIN;
-        double maxx = dataArea.getMaxX() - MARGIN;
-        double miny = dataArea.getMinY() + MARGIN;
-        double maxy = dataArea.getMaxY() - MARGIN;
+        double minx = dataArea.getMinX() + this.margin;
+        double maxx = dataArea.getMaxX() - this.margin;
+        double miny = dataArea.getMinY() + this.margin;
+        double maxy = dataArea.getMaxY() - this.margin;
 
         double lengthX = maxx - minx;
         double lengthY = maxy - miny;
