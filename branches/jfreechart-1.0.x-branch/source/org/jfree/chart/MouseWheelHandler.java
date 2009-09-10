@@ -31,12 +31,15 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Ulrich Voigt - patch 2686040;
+ *                   Jim Goodwin - bug fix;
  *
  * Changes
  * -------
  * 18-Mar-2009 : Version 1, based on ideas by UV in patch 2686040 (DG);
  * 26-Mar-2009 : Implemented Serializable (DG);
- * 
+ * 10-Sep-2009 : Bug fix by Jim Goodwin to respect domain/rangeZoomable flags
+ *               in the ChartPanel (DG)
+ *
  */
 
 package org.jfree.chart;
@@ -66,7 +69,7 @@ class MouseWheelHandler implements MouseWheelListener, Serializable {
     double zoomFactor;
 
     /**
-     * Creates a new instance.
+     * Creates a new instance for the specified chart panel.
      *
      * @param chartPanel  the chart panel (<code>null</code> not permitted).
      */
@@ -126,38 +129,30 @@ class MouseWheelHandler implements MouseWheelListener, Serializable {
      * @param e  the mouse wheel event.
      */
     private void handleZoomable(Zoomable zoomable, MouseWheelEvent e) {
-        Plot plot = (Plot) zoomable;
+        // don't zoom unless the mouse pointer is in the plot's data area
         ChartRenderingInfo info = this.chartPanel.getChartRenderingInfo();
         PlotRenderingInfo pinfo = info.getPlotInfo();
         Point2D p = this.chartPanel.translateScreenToJava2D(e.getPoint());
         if (!pinfo.getDataArea().contains(p)) {
             return;
         }
-        int clicks = e.getWheelRotation();
-        int direction = 0;
-        if (clicks < 0) {
-            direction = -1;
-        }
-        else if (clicks > 0) {
-            direction = 1;
-        }
 
-        boolean old = plot.isNotify();
-
+        Plot plot = (Plot) zoomable;
         // do not notify while zooming each axis
+        boolean notifyState = plot.isNotify();
         plot.setNotify(false);
-        double increment = 1.0 + this.zoomFactor;
-        if (direction > 0) {
-            zoomable.zoomDomainAxes(increment, pinfo, p, true);
-            zoomable.zoomRangeAxes(increment, pinfo, p, true);
+        int clicks = e.getWheelRotation();
+        double zf = 1.0 + this.zoomFactor;
+        if (clicks < 0) {
+            zf = 1.0 / zf;
         }
-        else if (direction < 0) {
-            zoomable.zoomDomainAxes(1.0 / increment, pinfo, p, true);
-            zoomable.zoomRangeAxes(1.0 / increment, pinfo, p, true);
+        if (chartPanel.isDomainZoomable()) {
+            zoomable.zoomDomainAxes(zf, pinfo, p, true);
         }
-        // set the old notify status
-        plot.setNotify(old);
-
+        if (chartPanel.isRangeZoomable()) {
+            zoomable.zoomRangeAxes(zf, pinfo, p, true);
+        }
+        plot.setNotify(notifyState);  // this generates the change event too
     }
 
 }
