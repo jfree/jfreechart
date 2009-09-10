@@ -46,6 +46,8 @@
  * 25-Mar-2009 : Added tests for new iterateToFindRangeBounds() method (DG);
  * 16-May-2009 : Added
  *               testIterateToFindRangeBounds_MultiValueCategoryDataset() (DG);
+ * 10-Sep-2009 : Added tests for bug 2849731 (DG);
+ *
  */
 
 package org.jfree.data.general.junit;
@@ -1199,4 +1201,60 @@ public class DatasetUtilitiesTests extends TestCase {
                 visibleSeriesKeys, true));
     }
 
+    /**
+     * Some checks for the iterateRangeBounds() method when passed an
+     * IntervalCategoryDataset.
+     */
+    public void testIterateRangeBounds_IntervalCategoryDataset() {
+        TestIntervalCategoryDataset d = new TestIntervalCategoryDataset();
+        d.addItem(1.0, 2.0, 3.0, "R1", "C1");
+        assertEquals(new Range(1.0, 3.0),
+                DatasetUtilities.iterateRangeBounds(d));
+
+        d = new TestIntervalCategoryDataset();
+        d.addItem(2.5, 2.0, 3.0, "R1", "C1");
+        assertEquals(new Range(2.0, 3.0),
+                DatasetUtilities.iterateRangeBounds(d));
+
+        d = new TestIntervalCategoryDataset();
+        d.addItem(4.0, 2.0, 3.0, "R1", "C1");
+        assertEquals(new Range(2.0, 4.0),
+                DatasetUtilities.iterateRangeBounds(d));
+
+        d = new TestIntervalCategoryDataset();
+        d.addItem(null, 2.0, 3.0, "R1", "C1");
+        assertEquals(new Range(2.0, 3.0),
+                DatasetUtilities.iterateRangeBounds(d));
+
+        // try some nulls
+        d = new TestIntervalCategoryDataset();
+        d.addItem(null, null, null, "R1", "C1");
+        assertNull(DatasetUtilities.iterateRangeBounds(d));
+
+        d = new TestIntervalCategoryDataset();
+        d.addItem(1.0, null, null, "R1", "C1");
+        assertEquals(new Range(1.0, 1.0),
+                DatasetUtilities.iterateRangeBounds(d));
+
+        d = new TestIntervalCategoryDataset();
+        d.addItem(null, 1.0, null, "R1", "C1");
+        assertEquals(new Range(1.0, 1.0),
+                DatasetUtilities.iterateRangeBounds(d));
+
+        d = new TestIntervalCategoryDataset();
+        d.addItem(null, null, 1.0, "R1", "C1");
+        assertEquals(new Range(1.0, 1.0),
+                DatasetUtilities.iterateRangeBounds(d));
+}
+
+    /**
+     * A test for bug 2849731.
+     */
+    public void testBug2849731() {
+        TestIntervalCategoryDataset d = new TestIntervalCategoryDataset();
+        d.addItem(2.5, 2.0, 3.0, "R1", "C1");
+        d.addItem(4.0, null, null, "R2", "C1");
+        assertEquals(new Range(2.0, 4.0),
+                DatasetUtilities.iterateRangeBounds(d));
+    }
 }

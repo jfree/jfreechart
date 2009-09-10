@@ -36,7 +36,7 @@
  *                   Andreas Schroeder;
  *                   Rafal Skalny (patch 1925366);
  *                   Jerome David (patch 2131001);
- *                   Peter Kolb (patch 27914070;
+ *                   Peter Kolb (patch 2791407);
  *
  * Changes (from 18-Sep-2001)
  * --------------------------
@@ -119,6 +119,7 @@
  *               iterateToFindRangeBounds() (DG);
  * 16-May-2009 : Patch 2791407 - fix iterateToFindRangeBounds for
  *               MultiValueCategoryDataset (PK);
+ * 10-Sep-2009 : Fix bug 2849731 for IntervalCategoryDataset (DG);
  *
  */
 
@@ -974,16 +975,27 @@ public final class DatasetUtilities {
             // handle the special case where the dataset has y-intervals that
             // we want to measure
             IntervalCategoryDataset icd = (IntervalCategoryDataset) dataset;
-            Number lvalue, uvalue;
+            Number value, lvalue, uvalue;
             for (int row = 0; row < rowCount; row++) {
                 for (int column = 0; column < columnCount; column++) {
-                    lvalue = icd.getStartValue(row, column);
-                    uvalue = icd.getEndValue(row, column);
-                    if (lvalue != null && !Double.isNaN(lvalue.doubleValue())) {
-                        minimum = Math.min(minimum, lvalue.doubleValue());
+                    value = icd.getValue(row, column);
+                    double v;
+                    if ((value != null)
+                            && !Double.isNaN(v = value.doubleValue())) {
+                        minimum = Math.min(v, minimum);
+                        maximum = Math.max(v, maximum);
                     }
-                    if (uvalue != null && !Double.isNaN(uvalue.doubleValue())) {
-                        maximum = Math.max(maximum, uvalue.doubleValue());
+                    lvalue = icd.getStartValue(row, column);
+                    if (lvalue != null
+                            && !Double.isNaN(v = lvalue.doubleValue())) {
+                        minimum = Math.min(v, minimum);
+                        maximum = Math.max(v, maximum);
+                    }
+                    uvalue = icd.getEndValue(row, column);
+                    if (uvalue != null
+                            && !Double.isNaN(v = uvalue.doubleValue())) {
+                        minimum = Math.min(v, minimum);
+                        maximum = Math.max(v, maximum);
                     }
                 }
             }

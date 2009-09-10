@@ -1,5 +1,12 @@
 2009-09-10  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug 2849731:
+    * source/org/jfree/chart/DatasetUtilities.java
+    (iterateRangeBounds(CategoryDataset, boolean)): For IntervalCategoryDataset
+    look at regular value, and account for nulls.
+
+2009-09-10  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug fix by Jim Goodwin:
     * source/org/jfree/chart/MouseWheelHandler.java
     (handleZoomable): Respect domain/rangeZoomable fields in ChartPanel.
