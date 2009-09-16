@@ -749,12 +749,19 @@ public final class DatasetUtilities {
             for (int series = 0; series < seriesCount; series++) {
                 int itemCount = dataset.getItemCount(series);
                 for (int item = 0; item < itemCount; item++) {
+                    double value = intervalXYData.getXValue(series, item);
                     lvalue = intervalXYData.getStartXValue(series, item);
                     uvalue = intervalXYData.getEndXValue(series, item);
+                    if (!Double.isNaN(value)) {
+                        minimum = Math.min(minimum, value);
+                        maximum = Math.max(maximum, value);
+                    }
                     if (!Double.isNaN(lvalue)) {
                         minimum = Math.min(minimum, lvalue);
+                        maximum = Math.max(maximum, lvalue);
                     }
                     if (!Double.isNaN(uvalue)) {
+                        minimum = Math.min(minimum, uvalue);
                         maximum = Math.max(maximum, uvalue);
                     }
                 }
@@ -1236,12 +1243,19 @@ public final class DatasetUtilities {
             for (int series = 0; series < seriesCount; series++) {
                 int itemCount = dataset.getItemCount(series);
                 for (int item = 0; item < itemCount; item++) {
+                    double value = ixyd.getYValue(series, item);
                     double lvalue = ixyd.getStartYValue(series, item);
                     double uvalue = ixyd.getEndYValue(series, item);
+                    if (!Double.isNaN(value)) {
+                        minimum = Math.min(minimum, value);
+                        maximum = Math.max(maximum, value);
+                    }
                     if (!Double.isNaN(lvalue)) {
                         minimum = Math.min(minimum, lvalue);
+                        maximum = Math.max(maximum, lvalue);
                     }
                     if (!Double.isNaN(uvalue)) {
+                        minimum = Math.min(minimum, uvalue);
                         maximum = Math.max(maximum, uvalue);
                     }
                 }

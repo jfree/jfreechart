@@ -81,6 +81,8 @@ import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYIntervalSeries;
+import org.jfree.data.xy.XYIntervalSeriesCollection;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.data.xy.YIntervalSeries;
@@ -1245,7 +1247,7 @@ public class DatasetUtilitiesTests extends TestCase {
         d.addItem(null, null, 1.0, "R1", "C1");
         assertEquals(new Range(1.0, 1.0),
                 DatasetUtilities.iterateRangeBounds(d));
-}
+    }
 
     /**
      * A test for bug 2849731.
@@ -1257,4 +1259,50 @@ public class DatasetUtilitiesTests extends TestCase {
         assertEquals(new Range(2.0, 4.0),
                 DatasetUtilities.iterateRangeBounds(d));
     }
+
+    /**
+     * Another test for bug 2849731.
+     */
+    public void testBug2849731_2() {
+        XYIntervalSeriesCollection d = new XYIntervalSeriesCollection();
+        XYIntervalSeries s = new XYIntervalSeries("S1");
+        s.add(1.0, Double.NaN, Double.NaN, Double.NaN, 1.5, Double.NaN);
+        d.addSeries(s);
+        Range r = DatasetUtilities.iterateDomainBounds(d);
+        assertEquals(1.0, r.getLowerBound(), EPSILON);
+        assertEquals(1.0, r.getUpperBound(), EPSILON);
+
+        s.add(1.0, 1.5, Double.NaN, Double.NaN, 1.5, Double.NaN);
+        r = DatasetUtilities.iterateDomainBounds(d);
+        assertEquals(1.0, r.getLowerBound(), EPSILON);
+        assertEquals(1.5, r.getUpperBound(), EPSILON);
+
+        s.add(1.0, Double.NaN, 0.5, Double.NaN, 1.5, Double.NaN);
+        r = DatasetUtilities.iterateDomainBounds(d);
+        assertEquals(0.5, r.getLowerBound(), EPSILON);
+        assertEquals(1.5, r.getUpperBound(), EPSILON);
+    }
+    /**
+     * Yet another test for bug 2849731.
+     */
+    public void testBug2849731_3() {
+        XYIntervalSeriesCollection d = new XYIntervalSeriesCollection();
+        XYIntervalSeries s = new XYIntervalSeries("S1");
+        s.add(1.0, Double.NaN, Double.NaN, 1.5, Double.NaN, Double.NaN);
+        d.addSeries(s);
+        Range r = DatasetUtilities.iterateRangeBounds(d);
+        assertEquals(1.5, r.getLowerBound(), EPSILON);
+        assertEquals(1.5, r.getUpperBound(), EPSILON);
+
+        s.add(1.0, 1.5, Double.NaN, Double.NaN, Double.NaN, 2.5);
+        r = DatasetUtilities.iterateRangeBounds(d);
+        assertEquals(1.5, r.getLowerBound(), EPSILON);
+        assertEquals(2.5, r.getUpperBound(), EPSILON);
+
+        s.add(1.0, Double.NaN, 0.5, Double.NaN, 3.5, Double.NaN);
+        r = DatasetUtilities.iterateRangeBounds(d);
+        assertEquals(1.5, r.getLowerBound(), EPSILON);
+        assertEquals(3.5, r.getUpperBound(), EPSILON);
+    }
+
 }
