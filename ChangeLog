@@ -1,5 +1,17 @@
 2009-09-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 2868608 by Peter Becker:
+    * source/org/jfree/chart/renderer/BoxAndWhiskerRenderer.java
+    (whiskerWidth): New field,
+    (BoxAndWhiskerRenderer): Set new field default,
+    (getWhiskerWidth): New method,
+    (setWhiskerWidth): Likewise,
+    (drawHorizontalItem): Use new field,
+    (drawVerticalItem): Likewise,
+    (equals): Check new flag.
+
+2009-09-28  David Gilbert  <david.gilbert@object-refinery.com>
+
     Patch 2868585 by Peter Becker:
     * source/org/jfree/chart/renderer/BoxAndWhiskerRenderer.java
     (useOutlinePaintForWhiskers): New field,

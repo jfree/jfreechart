@@ -34,7 +34,7 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Tim Bardzil;
  *                   Rob Van der Sanden (patches 1866446 and 1888422);
- *                   Peter Becker (patch 2868585);
+ *                   Peter Becker (patches 2868585 and 2868608);
  *
  * Changes
  * -------
@@ -78,6 +78,8 @@
  * 28-Sep-2009 : Added fireChangeEvent() to setMedianVisible (DG);
  * 28-Sep-2009 : Added useOutlinePaintForWhiskers flag, see patch 2868585
  *               by Peter Becker (DG);
+ * 28-Sep-2009 : Added whiskerWidth attribute, see patch 2868608 by Peter
+ *               Becker (DG);
  *
  */
 
@@ -175,6 +177,13 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     private boolean useOutlinePaintForWhiskers;
 
     /**
+     * The width of the whiskers as fraction of the bar width.
+     *
+     * @since 1.0.14
+     */
+    private double whiskerWidth;
+
+    /**
      * Default constructor.
      */
     public BoxAndWhiskerRenderer() {
@@ -185,6 +194,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         this.medianVisible = true;
         this.meanVisible = true;
         this.useOutlinePaintForWhiskers = false;
+        this.whiskerWidth = 1.0;
         setBaseLegendShape(new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0));
     }
 
@@ -388,6 +398,42 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             return;
         }
         this.useOutlinePaintForWhiskers = flag;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the width of the whiskers as fraction of the bar width.
+     *
+     * @return The width of the whiskers.
+     *
+     * @see #setWhiskerWidth(double)
+     *
+     * @since 1.0.14
+     */
+    public double getWhiskerWidth() {
+        return this.whiskerWidth;
+    }
+
+    /**
+     * Sets the width of the whiskers as a fraction of the bar width and sends
+     * a {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param width  a value between 0 and 1 indicating how wide the
+     *     whisker is supposed to be compared to the bar.
+     * @see #getWhiskerWidth()
+     * @see CategoryItemRendererState#getBarWidth()
+     *
+     * @since 1.0.14
+     */
+    public void setWhiskerWidth(double width) {
+        if (width < 0 || width > 1) {
+            throw new IllegalArgumentException(
+                    "Value for whisker width out of range");
+        }
+        if (width == this.whiskerWidth) {
+            return;
+        }
+        this.whiskerWidth = width;
         fireChangeEvent();
     }
 
@@ -632,6 +678,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             double xxMin = rangeAxis.valueToJava2D(xMin.doubleValue(), dataArea,
                     location);
             double yymid = yy + state.getBarWidth() / 2.0;
+			double halfW = (state.getBarWidth() / 2.0) * this.whiskerWidth;
 
             // draw the box...
             box = new Rectangle2D.Double(Math.min(xxQ1, xxQ3), yy,
@@ -646,13 +693,13 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             }
             // draw the upper shadow...
             g2.draw(new Line2D.Double(xxMax, yymid, xxQ3, yymid));
-            g2.draw(new Line2D.Double(xxMax, yy, xxMax,
-                    yy + state.getBarWidth()));
+            g2.draw(new Line2D.Double(xxMax, yymid - halfW, xxMax,
+                    yymid + halfW));
 
             // draw the lower shadow...
             g2.draw(new Line2D.Double(xxMin, yymid, xxQ1, yymid));
-            g2.draw(new Line2D.Double(xxMin, yy, xxMin,
-                    yy + state.getBarWidth()));
+            g2.draw(new Line2D.Double(xxMin, yymid - halfW, xxMin,
+                    yy + halfW));
 
             g2.setStroke(getItemOutlineStroke(row, column));
             g2.setPaint(outlinePaint);
@@ -779,6 +826,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             double yyMin = rangeAxis.valueToJava2D(yMin.doubleValue(),
                     dataArea, location);
             double xxmid = xx + state.getBarWidth() / 2.0;
+			double halfW = (state.getBarWidth() / 2.0) * this.whiskerWidth;
 
             // draw the body...
             box = new Rectangle2D.Double(xx, Math.min(yyQ1, yyQ3),
@@ -793,13 +841,11 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             }
             // draw the upper shadow...
             g2.draw(new Line2D.Double(xxmid, yyMax, xxmid, yyQ3));
-            g2.draw(new Line2D.Double(xx, yyMax, xx + state.getBarWidth(),
-                    yyMax));
+            g2.draw(new Line2D.Double(xx - halfW, yyMax, xx + halfW, yyMax));
 
             // draw the lower shadow...
             g2.draw(new Line2D.Double(xxmid, yyMin, xxmid, yyQ1));
-            g2.draw(new Line2D.Double(xx, yyMin, xx + state.getBarWidth(),
-                    yyMin));
+            g2.draw(new Line2D.Double(xx - halfW, yyMin, xx + halfW, yyMin));
 
             g2.setStroke(getItemOutlineStroke(row, column));
             g2.setPaint(outlinePaint);
@@ -1024,6 +1070,9 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         }
         if (this.useOutlinePaintForWhiskers
                 != that.useOutlinePaintForWhiskers) {
+            return false;
+        }
+        if (this.whiskerWidth != that.whiskerWidth) {
             return false;
         }
         if (!PaintUtilities.equal(this.artifactPaint, that.artifactPaint)) {
