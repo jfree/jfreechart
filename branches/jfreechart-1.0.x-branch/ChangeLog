@@ -1,5 +1,16 @@
 2009-09-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Patch 2868585 by Peter Becker:
+    * source/org/jfree/chart/renderer/BoxAndWhiskerRenderer.java
+    (useOutlinePaintForWhiskers): New field,
+    (getUseOutlinePaintForWhiskers): New method,
+    (setUseOutlinePaintForWhiskers): Likewise,
+    (drawHorizontalItem): Use new flag,
+    (drawVerticalItem): Likewise,
+    (equals): Check new flag.
+
+2009-09-28  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 2868557:
     * source/org/jfree/chart/renderer/BoxAndWhiskerRenderer.java
     (setMedianVisible): Fire change event.
