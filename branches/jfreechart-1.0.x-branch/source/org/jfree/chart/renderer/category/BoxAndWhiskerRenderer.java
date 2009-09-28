@@ -74,6 +74,8 @@
  * 02-Oct-2008 : Check item visibility in drawItem() method (DG);
  * 21-Jan-2009 : Added flags to control visibility of mean and median
  *               indicators (DG);
+ * 28-Sep-2009 : Added fireChangeEvent() to setMedianVisible (DG);
+ *
  */
 
 package org.jfree.chart.renderer.category;
@@ -340,7 +342,11 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @since 1.0.13
      */
     public void setMedianVisible(boolean visible) {
+        if (this.medianVisible == visible) {
+            return;
+        }
         this.medianVisible = visible;
+        fireChangeEvent();
     }
 
     /**
