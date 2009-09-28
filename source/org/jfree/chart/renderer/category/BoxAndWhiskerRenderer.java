@@ -34,6 +34,7 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Tim Bardzil;
  *                   Rob Van der Sanden (patches 1866446 and 1888422);
+ *                   Peter Becker (patch 2868585);
  *
  * Changes
  * -------
@@ -75,6 +76,8 @@
  * 21-Jan-2009 : Added flags to control visibility of mean and median
  *               indicators (DG);
  * 28-Sep-2009 : Added fireChangeEvent() to setMedianVisible (DG);
+ * 28-Sep-2009 : Added useOutlinePaintForWhiskers flag, see patch 2868585
+ *               by Peter Becker (DG);
  *
  */
 
@@ -163,6 +166,15 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     private boolean meanVisible;
 
     /**
+     * A flag that, if <code>true</code>, causes the whiskers to be drawn
+     * using the outline paint for the series.  The default value is
+     * <code>false</code> and in that case the regular series paint is used.
+     *
+     * @since 1.0.14
+     */
+    private boolean useOutlinePaintForWhiskers;
+
+    /**
      * Default constructor.
      */
     public BoxAndWhiskerRenderer() {
@@ -172,6 +184,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         this.maximumBarWidth = 1.0;
         this.medianVisible = true;
         this.meanVisible = true;
+        this.useOutlinePaintForWhiskers = false;
         setBaseLegendShape(new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0));
     }
 
@@ -350,6 +363,35 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
+     * Returns the flag that, if <code>true</code>, causes the whiskers to
+     * be drawn using the series outline paint.
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.14
+     */
+    public boolean getUseOutlinePaintForWhiskers() {
+        return useOutlinePaintForWhiskers;
+    }
+
+    /**
+     * Sets the flag that, if <code>true</code>, causes the whiskers to
+     * be drawn using the series outline paint, and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @@param flag  the new flag value.
+     *
+     * @since 1.0.14
+     */
+    public void setUseOutlinePaintForWhiskers(boolean flag) {
+        if (this.useOutlinePaintForWhiskers == flag) {
+            return;
+        }
+        this.useOutlinePaintForWhiskers = flag;
+        fireChangeEvent();
+    }
+
+    /**
      * Returns a legend item for a series.
      *
      * @param datasetIndex  the dataset index (zero-based).
@@ -487,16 +529,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         CategoryItemRendererState state,
-                         Rectangle2D dataArea,
-                         CategoryPlot plot,
-                         CategoryAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         CategoryDataset dataset,
-                         int row,
-                         int column,
-                         int pass) {
+    public void drawItem(Graphics2D g2, CategoryItemRendererState state,
+        Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+        ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
+        int pass) {
 
         // do nothing if item is not visible
         if (!getItemVisible(row, column)) {
@@ -538,15 +574,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      */
-    public void drawHorizontalItem(Graphics2D g2,
-                                   CategoryItemRendererState state,
-                                   Rectangle2D dataArea,
-                                   CategoryPlot plot,
-                                   CategoryAxis domainAxis,
-                                   ValueAxis rangeAxis,
-                                   CategoryDataset dataset,
-                                   int row,
-                                   int column) {
+    public void drawHorizontalItem(Graphics2D g2, 
+            CategoryItemRendererState state, Rectangle2D dataArea,
+            CategoryPlot plot, CategoryAxis domainAxis, ValueAxis rangeAxis,
+            CategoryDataset dataset, int row, int column) {
 
         BoxAndWhiskerCategoryDataset bawDataset
                 = (BoxAndWhiskerCategoryDataset) dataset;
@@ -602,6 +633,17 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
                     location);
             double yymid = yy + state.getBarWidth() / 2.0;
 
+            // draw the box...
+            box = new Rectangle2D.Double(Math.min(xxQ1, xxQ3), yy,
+                    Math.abs(xxQ1 - xxQ3), state.getBarWidth());
+            if (this.fillBox) {
+                g2.fill(box);
+            }
+
+            Paint outlinePaint = getItemOutlinePaint(row, column);
+            if (this.useOutlinePaintForWhiskers) {
+                g2.setPaint(outlinePaint);
+            }
             // draw the upper shadow...
             g2.draw(new Line2D.Double(xxMax, yymid, xxQ3, yymid));
             g2.draw(new Line2D.Double(xxMax, yy, xxMax,
@@ -612,14 +654,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             g2.draw(new Line2D.Double(xxMin, yy, xxMin,
                     yy + state.getBarWidth()));
 
-            // draw the box...
-            box = new Rectangle2D.Double(Math.min(xxQ1, xxQ3), yy,
-                    Math.abs(xxQ1 - xxQ3), state.getBarWidth());
-            if (this.fillBox) {
-                g2.fill(box);
-            }
             g2.setStroke(getItemOutlineStroke(row, column));
-            g2.setPaint(getItemOutlinePaint(row, column));
+            g2.setPaint(outlinePaint);
             g2.draw(box);
         }
 
@@ -681,15 +717,9 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      */
-    public void drawVerticalItem(Graphics2D g2,
-                                 CategoryItemRendererState state,
-                                 Rectangle2D dataArea,
-                                 CategoryPlot plot,
-                                 CategoryAxis domainAxis,
-                                 ValueAxis rangeAxis,
-                                 CategoryDataset dataset,
-                                 int row,
-                                 int column) {
+    public void drawVerticalItem(Graphics2D g2, CategoryItemRendererState state,
+        Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+        ValueAxis rangeAxis, CategoryDataset dataset, int row, int column) {
 
         BoxAndWhiskerCategoryDataset bawDataset
                 = (BoxAndWhiskerCategoryDataset) dataset;
@@ -750,6 +780,17 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
                     dataArea, location);
             double xxmid = xx + state.getBarWidth() / 2.0;
 
+            // draw the body...
+            box = new Rectangle2D.Double(xx, Math.min(yyQ1, yyQ3),
+                    state.getBarWidth(), Math.abs(yyQ1 - yyQ3));
+            if (this.fillBox) {
+                g2.fill(box);
+            }
+
+            Paint outlinePaint = getItemOutlinePaint(row, column);
+            if (this.useOutlinePaintForWhiskers) {
+                g2.setPaint(outlinePaint);
+            }
             // draw the upper shadow...
             g2.draw(new Line2D.Double(xxmid, yyMax, xxmid, yyQ3));
             g2.draw(new Line2D.Double(xx, yyMax, xx + state.getBarWidth(),
@@ -760,14 +801,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             g2.draw(new Line2D.Double(xx, yyMin, xx + state.getBarWidth(),
                     yyMin));
 
-            // draw the body...
-            box = new Rectangle2D.Double(xx, Math.min(yyQ1, yyQ3),
-                    state.getBarWidth(), Math.abs(yyQ1 - yyQ3));
-            if (this.fillBox) {
-                g2.fill(box);
-            }
             g2.setStroke(getItemOutlineStroke(row, column));
-            g2.setPaint(getItemOutlinePaint(row, column));
+            g2.setPaint(outlinePaint);
             g2.draw(box);
         }
 
@@ -985,6 +1020,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             return false;
         }
         if (this.medianVisible != that.medianVisible) {
+            return false;
+        }
+        if (this.useOutlinePaintForWhiskers
+                != that.useOutlinePaintForWhiskers) {
             return false;
         }
         if (!PaintUtilities.equal(this.artifactPaint, that.artifactPaint)) {
