@@ -141,8 +141,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     private double itemMargin;
 
     /**
-     * The maximum bar width as percentage of the available space in the plot,
-     * where 0.05 is five percent.
+     * The maximum bar width as percentage of the available space in the plot.
+     * Take care with the encoding - for example, 0.05 is five percent.
      */
     private double maximumBarWidth;
 
@@ -252,7 +252,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Returns the maximum bar width as a percentage of the available drawing
-     * space.
+     * space.  Take care with the encoding, for example 0.10 is ten percent.
      *
      * @return The maximum bar width.
      *
@@ -269,7 +269,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * available space for all bars, and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
-     * @param percent  the maximum Bar Width (a percentage).
+     * @param percent  the maximum bar width (a percentage, where 0.10 is ten
+     *     percent).
      *
      * @see #getMaximumBarWidth()
      *
