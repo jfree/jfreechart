@@ -1,4 +1,10 @@
-2009-09-10  David Gilbert  <david.gilbert@object-refinery.com>
+2009-09-28  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 2868557:
+    * source/org/jfree/chart/renderer/BoxAndWhiskerRenderer.java
+    (setMedianVisible): Fire change event.
+
+2009-09-16  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 2849731:
     * source/org/jfree/chart/DatasetUtilities.java
