@@ -8,16 +8,25 @@ numerous bug fixes.
 
 Patches:
 
+2868608 : Whisker width attribute for BoxAndWhiskerRenderer (by Peter Becker);
+2868585 : Added useOutlinePaint flag for BoxAndWhiskerRenderer (by
+          Peter Becker);
+2850344 : PolarPlot enhancements (by Martin Hoeller);
 2795746 : Support for polynomial regression;
 2791407 : Fixes for findRangeBounds() in various renderers.
 
 Bug Fixes:
 
+2876406 : TimeTableXYDataset should support Comparable for series keys;
+2868557 : BoxAndWhiskerRenderer should fire change event in setMedianVisible();
+2849731 : For IntervalCategoryDataset and IntervalXYDataset, fix 
+          iterateRangeBounds() in DatasetUtilities;
 2840132 : AbstractXYItemRenderer drawAnnotations doesn't set renderer index;
 2781844 : XYPointerAnnotation arrow drawing;
 1937486 : AreaRenderer doesn't respect AreaRendererEndType.LEVEL;
 
 Also fixed:
+- use of simple label offset in PiePlot;
 - cached minY and maxY in TimeSeries.createCopy();
 - scaling issues for charts copied to the clipboard;
 - use of timezone in TimeTableXYDataset constructor;
