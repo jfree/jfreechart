@@ -1,3 +1,10 @@
+2009-11-02  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 2876406:
+    * source/org/jfree/data/time/TimeTableXYDataset.java
+    (add): Changed String parameter to Comparable,
+    (remove): Likewise.
+
 2009-09-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 2868608 by Peter Becker:
@@ -31,7 +38,7 @@
 
     Bug 2849731:
     * source/org/jfree/chart/DatasetUtilities.java
-    (iterateRangeBounds(XYDataste, boolean)): For IntervalXYDataset, include
+    (iterateRangeBounds(XYDataset, boolean)): For IntervalXYDataset, include
     regular value and account for nulls / Double.NaN.
 
 2009-09-10  David Gilbert  <david.gilbert@object-refinery.com>
