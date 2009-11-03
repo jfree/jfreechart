@@ -2218,25 +2218,18 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return The legend items.
      */
     public LegendItemCollection getLegendItems() {
-        LegendItemCollection result = this.fixedLegendItems;
-        if (result == null) {
-            result = new LegendItemCollection();
-            // get the legend items for the datasets...
-            int count = this.datasets.size();
-            for (int datasetIndex = 0; datasetIndex < count; datasetIndex++) {
-                CategoryDataset dataset = getDataset(datasetIndex);
-                if (dataset != null) {
-                    CategoryItemRenderer renderer = getRenderer(datasetIndex);
-                    if (renderer != null) {
-                        int seriesCount = dataset.getRowCount();
-                        for (int i = 0; i < seriesCount; i++) {
-                            LegendItem item = renderer.getLegendItem(
-                                    datasetIndex, i);
-                            if (item != null) {
-                                result.add(item);
-                            }
-                        }
-                    }
+        if (this.fixedLegendItems != null) {
+            return this.fixedLegendItems;
+        }
+        LegendItemCollection result = new LegendItemCollection();
+        // get the legend items for the datasets...
+        int count = this.datasets.size();
+        for (int datasetIndex = 0; datasetIndex < count; datasetIndex++) {
+            CategoryDataset dataset = getDataset(datasetIndex);
+            if (dataset != null) {
+                CategoryItemRenderer renderer = getRenderer(datasetIndex);
+                if (renderer != null) {
+                    result.addAll(renderer.getLegendItems());
                 }
             }
         }
