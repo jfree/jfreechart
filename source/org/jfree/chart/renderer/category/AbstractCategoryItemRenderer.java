@@ -158,6 +158,7 @@ import org.jfree.ui.RectangleInsets;
 import org.jfree.util.ObjectList;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
+import org.jfree.util.SortOrder;
 
 /**
  * An abstract base class that you can use to implement a new
@@ -1553,14 +1554,17 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #getLegendItem(int, int)
      */
     public LegendItemCollection getLegendItems() {
-        if (this.plot == null) {
-            return new LegendItemCollection();
-        }
         LegendItemCollection result = new LegendItemCollection();
+        if (this.plot == null) {
+            return result;
+        }
         int index = this.plot.getIndexOf(this);
         CategoryDataset dataset = this.plot.getDataset(index);
         if (dataset != null) {
-            int seriesCount = dataset.getRowCount();
+            return result;
+        }
+        int seriesCount = dataset.getRowCount();
+        if (plot.getRowRenderingOrder().equals(SortOrder.ASCENDING)) {
             for (int i = 0; i < seriesCount; i++) {
                 if (isSeriesVisibleInLegend(i)) {
                     LegendItem item = getLegendItem(index, i);
@@ -1569,7 +1573,16 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
                     }
                 }
             }
-
+        }
+        else {
+            for (int i = seriesCount - 1; i >= 0; i--) {
+                if (isSeriesVisibleInLegend(i)) {
+                    LegendItem item = getLegendItem(index, i);
+                    if (item != null) {
+                        result.add(item);
+                    }
+                }
+            }
         }
         return result;
     }
