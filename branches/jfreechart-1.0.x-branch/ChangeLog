@@ -1,3 +1,12 @@
+2009-11-04  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * source/org/jfree/chart/MouseWheelHandler.java
+    (mouseWheelMoved): Handle PiePlot,
+    * source/org/jfree/chart/demo/PieChartDemo1.java
+    (createDemoPanel): Enable mouse wheel,
+    * source/org/jfree/chart/plot/PiePlot.java
+    (handleMouseWheelRotation): New method.
+
 2009-11-03  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/AbstractCategoryItemRenderer.java

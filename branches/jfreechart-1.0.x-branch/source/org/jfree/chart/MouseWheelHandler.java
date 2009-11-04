@@ -38,7 +38,8 @@
  * 18-Mar-2009 : Version 1, based on ideas by UV in patch 2686040 (DG);
  * 26-Mar-2009 : Implemented Serializable (DG);
  * 10-Sep-2009 : Bug fix by Jim Goodwin to respect domain/rangeZoomable flags
- *               in the ChartPanel (DG)
+ *               in the ChartPanel (DG);
+ * 04-Nov-2009 : Pass mouse wheel notification to PiePlot (DG);
  *
  */
 
@@ -49,6 +50,7 @@ import java.awt.event.MouseWheelListener;
 import java.awt.geom.Point2D;
 
 import java.io.Serializable;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
@@ -117,9 +119,10 @@ class MouseWheelHandler implements MouseWheelListener, Serializable {
             Zoomable zoomable = (Zoomable) plot;
             handleZoomable(zoomable, e);
         }
-        // TODO:  here we could handle non-zoomable plots in interesting
-        // ways (for example, the wheel could rotate a PiePlot or just zoom
-        // in on the whole panel).
+        else if (plot instanceof PiePlot) {
+            PiePlot pp = (PiePlot) plot;
+            pp.handleMouseWheelRotation(e.getWheelRotation());
+        }
     }
 
     /**
