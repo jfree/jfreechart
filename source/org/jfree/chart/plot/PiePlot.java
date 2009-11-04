@@ -164,7 +164,8 @@
  *               Jess Thrysoee (DG);
  * 10-Jul-2009 : Added optional drop shadow generator (DG);
  * 03-Sep-2009 : Fixed bug where sinmpleLabelOffset is ignored (DG);
- *
+ * 04-Nov-2009 : Add mouse wheel rotation support (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -2365,6 +2366,18 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     public void setShadowGenerator(ShadowGenerator generator) {
         this.shadowGenerator = generator;
         fireChangeEvent();
+    }
+
+    /**
+     * Handles a mouse wheel rotation (this method is intended for use by the
+     * {@link MouseWheelHandler} class).
+     *
+     * @param rotateClicks  the number of rotate clicks on the the mouse wheel.
+     *
+     * @since 1.0.14
+     */
+    public void handleMouseWheelRotation(int rotateClicks) {
+        setStartAngle(this.startAngle + rotateClicks * 4.0);
     }
 
     /**

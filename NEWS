@@ -3,8 +3,8 @@ JFreeChart 1.0.14
 NOT YET RELEASED
 
 This release contains support for fitting polynomial functions to a data 
-series, some performance improvements in the TimeSeriesCollection class and
-numerous bug fixes.
+series, some performance improvements in the TimeSeriesCollection class, 
+mouse wheel rotation of pie charts, and numerous bug fixes.
 
 Patches:
 
