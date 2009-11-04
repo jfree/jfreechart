@@ -519,6 +519,30 @@ public class XYPlotTests extends TestCase {
     }
 
     /**
+     * Tests cloning to ensure that the cloned plot is registered as a listener
+     * on the cloned renderer.
+     */
+    public void testCloning4() {
+        XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
+        XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
+                new NumberAxis("Range Axis"), r1);
+        XYPlot p2 = null;
+        try {
+            p2 = (XYPlot) p1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(p1 != p2);
+        assertTrue(p1.getClass() == p2.getClass());
+        assertTrue(p1.equals(p2));
+
+        // verify that the plot is listening to the cloned renderer
+        XYLineAndShapeRenderer r2 = (XYLineAndShapeRenderer) p2.getRenderer();
+        assertTrue(r2.hasListener(p2));
+    }
+
+    /**
      * Confirm that cloning captures the quadrantOrigin field.
      */
     public void testCloning_QuadrantOrigin() {
