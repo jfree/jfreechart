@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * PolarItemRenderer.java
  * ----------------------
- * (C) Copyright 2004-2008, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2009, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -52,7 +52,8 @@ import org.jfree.chart.plot.PolarPlot;
 import org.jfree.data.xy.XYDataset;
 
 /**
- * The interface for a renderer that can be used by the {@link PolarPlot} class.
+ * The interface for a renderer that can be used by the {@link PolarPlot} 
+ * class.
  */
 public interface PolarItemRenderer {
 
@@ -66,12 +67,9 @@ public interface PolarItemRenderer {
      * @param dataset  the dataset.
      * @param seriesIndex  the series index.
      */
-    public void drawSeries(Graphics2D g2,
-                           Rectangle2D dataArea,
-                           PlotRenderingInfo info,
-                           PolarPlot plot,
-                           XYDataset dataset,
-                           int seriesIndex);
+    public void drawSeries(Graphics2D g2, Rectangle2D dataArea,
+            PlotRenderingInfo info, PolarPlot plot, XYDataset dataset,
+            int seriesIndex);
 
     /**
      * Draw the angular gridlines - the spokes.
@@ -81,10 +79,8 @@ public interface PolarItemRenderer {
      * @param ticks  the ticks.
      * @param dataArea  the data area.
      */
-    public void drawAngularGridLines(Graphics2D g2,
-                                     PolarPlot plot,
-                                     List ticks,
-                                     Rectangle2D dataArea);
+    public void drawAngularGridLines(Graphics2D g2, PolarPlot plot,
+            List ticks, Rectangle2D dataArea);
 
     /**
      * Draw the radial gridlines - the rings.
@@ -95,11 +91,8 @@ public interface PolarItemRenderer {
      * @param ticks  the ticks.
      * @param dataArea  the data area.
      */
-    public void drawRadialGridLines(Graphics2D g2,
-                                    PolarPlot plot,
-                                    ValueAxis radialAxis,
-                                    List ticks,
-                                    Rectangle2D dataArea);
+    public void drawRadialGridLines(Graphics2D g2, PolarPlot plot,
+            ValueAxis radialAxis, List ticks, Rectangle2D dataArea);
 
     /**
      * Return the legend for the given series.
@@ -118,10 +111,8 @@ public interface PolarItemRenderer {
     public PolarPlot getPlot();
 
     /**
-     * Sets the plot that this renderer is assigned to.
-     * <P>
-     * This method will be called by the plot class...you do not need to call
-     * it yourself.
+     * Sets the plot that this renderer is assigned to.  This method will be
+     * called by the plot class...you do not need to call it yourself.
      *
      * @param plot  the plot.
      */
@@ -140,6 +131,5 @@ public interface PolarItemRenderer {
      * @param listener  the listener.
      */
     public void removeChangeListener(RendererChangeListener listener);
-
 
 }

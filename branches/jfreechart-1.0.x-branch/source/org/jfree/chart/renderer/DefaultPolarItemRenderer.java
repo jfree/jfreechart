@@ -48,6 +48,7 @@
  * 04-May-2007 : Fixed lookup for series paint and stroke (DG);
  * 18-May-2007 : Set dataset for LegendItem (DG);
  * 03-Sep-2009 : Applied patch 2850344 by Martin Hoeller (DG);
+ * 27-Nov-2009 : Updated for modification to PolarItemRenderer interface (DG);
  *
  */
 
@@ -276,20 +277,17 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param dataset  the dataset.
      * @param seriesIndex  the series index.
      */
-    public void drawSeries(Graphics2D g2,
-                           Rectangle2D dataArea,
-                           PlotRenderingInfo info,
-                           PolarPlot plot,
-                           XYDataset dataset,
-                           int seriesIndex) {
+    public void drawSeries(Graphics2D g2, Rectangle2D dataArea,
+            PlotRenderingInfo info, PolarPlot plot, XYDataset dataset,
+            int seriesIndex) {
 
         Polygon poly = new Polygon();
+        ValueAxis axis = plot.getAxisForDataset(plot.indexOf(dataset));
         final int numPoints = dataset.getItemCount(seriesIndex);
         for (int i = 0; i < numPoints; i++) {
             double theta = dataset.getXValue(seriesIndex, i);
             double radius = dataset.getYValue(seriesIndex, i);
-            Point p = plot.translateValueThetaRadiusToJava2D(theta, radius,
-                    dataArea);
+            Point p = plot.translateToJava2D(theta, radius, axis, dataArea);
             poly.addPoint(p.x, p.y);
         }
         g2.setPaint(lookupSeriesPaint(seriesIndex));
@@ -335,18 +333,15 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param ticks  the ticks.
      * @param dataArea  the data area.
      */
-    public void drawAngularGridLines(Graphics2D g2,
-                                     PolarPlot plot,
-                                     List ticks,
-                                     Rectangle2D dataArea) {
+    public void drawAngularGridLines(Graphics2D g2, PolarPlot plot,
+                List ticks, Rectangle2D dataArea) {
 
         g2.setFont(plot.getAngleLabelFont());
         g2.setStroke(plot.getAngleGridlineStroke());
         g2.setPaint(plot.getAngleGridlinePaint());
 
         double axisMin = plot.getAxis().getLowerBound();
-        double maxRadius = plot.getMaxRadius();
-
+        double maxRadius = plot.getAxis().getUpperBound();
         Point center = plot.translateValueThetaRadiusToJava2D(axisMin, axisMin,
                 dataArea);
         Iterator iterator = ticks.iterator();
