@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * HistogramDatasetTests.java
  * --------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2009, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 08-Jun-2005 : Added test for getSeriesKey(int) bug (DG);
  * 03-Aug-2006 : Added testAddSeries() and testBinBoundaries() method (DG);
  * 22-May-2008 : Added testAddSeries2() and enhanced testCloning() (DG);
+ * 08-Dec-2009 : Added test2902842() for patch at SourceForge (DG);
  *
  */
 
@@ -54,12 +55,15 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.data.general.DatasetChangeEvent;
+import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.statistics.HistogramDataset;
 
 /**
  * Tests for the {@link HistogramDataset} class.
  */
-public class HistogramDatasetTests extends TestCase {
+public class HistogramDatasetTests extends TestCase
+        implements DatasetChangeListener {
 
     /**
      * Returns the tests as a test suite.
@@ -254,6 +258,32 @@ public class HistogramDatasetTests extends TestCase {
         assertEquals(-0.5, d.getStartXValue(0, 1), EPSILON);
         assertEquals(0.0, d.getEndXValue(0, 1), EPSILON);
         assertEquals(3.0, d.getYValue(0, 1), EPSILON);
+    }
+
+    /**
+     * A test to show the limitation addressed by patch 2902842.
+     */
+    public void test2902842() {
+        this.lastEvent = null;
+        double[] values = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
+        HistogramDataset hd = new HistogramDataset();
+        hd.addChangeListener(this);
+        hd.addSeries("S1", values, 5);
+        assertNotNull(this.lastEvent);
+    }
+
+    /**
+     * A reference to the last event received by the datasetChanged() method.
+     */
+    private DatasetChangeEvent lastEvent;
+
+    /**
+     * Receives event notification.
+     *
+     * @param event  the event.
+     */
+    public void datasetChanged(DatasetChangeEvent event) {
+        this.lastEvent = event;
     }
 
 }
