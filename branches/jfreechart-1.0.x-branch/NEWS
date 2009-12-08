@@ -2,12 +2,15 @@ JFreeChart 1.0.14
 -----------------
 NOT YET RELEASED
 
-This release contains support for fitting polynomial functions to a data 
-series, some performance improvements in the TimeSeriesCollection class, 
-mouse wheel rotation of pie charts, and numerous bug fixes.
+This release contains support for multiple axes with PolarPlot, fitting
+polynomial functions to a data series, some performance improvements in the
+TimeSeriesCollection class, mouse wheel rotation of pie charts, and numerous
+bug fixes.
 
 Patches:
 
+2902842 : HistogramDataset.addSeries() fires change change event (by
+          Thomas A Caswell);
 2868608 : Whisker width attribute for BoxAndWhiskerRenderer (by Peter Becker);
 2868585 : Added useOutlinePaint flag for BoxAndWhiskerRenderer (by
           Peter Becker);
