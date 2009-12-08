@@ -1,5 +1,10 @@
 2009-08-12  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/xy/XYBoxAndWhiskerRenderer.java
+    (drawVerticalItems): Check for null outliers.
+
+2009-08-12  David Gilbert  <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/statistics/HistogramDataset.java
     (addSeries): Fire dataset change event.
 

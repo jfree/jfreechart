@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * XYBoxAndWhiskerRendererTests.java
  * ---------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 23-Apr-2004 : Extended testEquals() method (DG);
  * 27-Mar-2008 : Extended testEquals() some more (DG);
  * 22-Apr-2008 : Added testPublicCloneable (DG);
+ * 08-Dec-2008 : Added test2909215() (DG);
  *
  */
 
@@ -45,6 +46,9 @@ package org.jfree.chart.renderer.xy.junit;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -52,11 +56,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
+import java.util.ArrayList;
+import java.util.Date;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer;
+import org.jfree.data.statistics.BoxAndWhiskerItem;
+import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -86,7 +96,6 @@ public class XYBoxAndWhiskerRendererTests extends TestCase {
      * Check that the equals() method distinguishes all fields.
      */
     public void testEquals() {
-
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         XYBoxAndWhiskerRenderer r2 = new XYBoxAndWhiskerRenderer();
         assertEquals(r1, r2);
@@ -125,7 +134,6 @@ public class XYBoxAndWhiskerRendererTests extends TestCase {
         assertFalse(r1.equals(r2));
         r2.setBoxPaint(null);
         assertEquals(r1, r2);
-
     }
 
     /**
@@ -169,27 +177,47 @@ public class XYBoxAndWhiskerRendererTests extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         XYBoxAndWhiskerRenderer r2 = null;
-
         try {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(buffer);
             out.writeObject(r1);
             out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             r2 = (XYBoxAndWhiskerRenderer) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         assertEquals(r1, r2);
+    }
 
+    /**
+     * A test for bug report 2909215.
+     */
+    public void test2909215() {
+        DefaultBoxAndWhiskerXYDataset d1 = new DefaultBoxAndWhiskerXYDataset(
+                "Series");
+        d1.add(new Date(1L), new BoxAndWhiskerItem(new Double(1.0),
+                new Double(2.0), new Double(3.0), new Double(4.0),
+                new Double(5.0), new Double(6.0), null, null, null));
+        JFreeChart chart = ChartFactory.createBoxAndWhiskerChart("Title", "X",
+                "Y", d1, true);
+        try {
+            BufferedImage image = new BufferedImage(400, 200,
+                    BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2 = image.createGraphics();
+            chart.draw(g2, new Rectangle2D.Double(0, 0, 400, 200), null, null);
+            g2.dispose();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        assertTrue(true);
     }
 
 }
