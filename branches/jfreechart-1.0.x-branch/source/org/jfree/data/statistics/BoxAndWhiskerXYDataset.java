@@ -146,12 +146,13 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
     public Number getMaxOutlier(int series, int item);
 
     /**
-     * Returns an array of outliers for the specified series and item.
+     * Returns a list of outliers for the specified series and item.
      *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return The array of outliers for the specified series and item.
+     * @return The list of outliers for the specified series and item
+     *         (possibly <code>null</code>).
      */
     public List getOutliers(int series, int item);
 
