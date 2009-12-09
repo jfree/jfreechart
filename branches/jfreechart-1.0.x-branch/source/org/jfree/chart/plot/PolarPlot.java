@@ -50,6 +50,7 @@
  *               Jess Thrysoee (DG);
  * 03-Sep-2009 : Applied patch 2850344 by Martin Hoeller (DG);
  * 27-Nov-2009 : Added support for multiple datasets, renderers and axes (DG);
+ * 09-Dec-2009 : Extended getLegendItems() to handle multiple datasets (DG);
  *
  */
 
@@ -202,6 +203,12 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     private int margin;
     
+    /**
+     * An optional collection of legend items that can be returned by the
+     * getLegendItems() method.
+     */
+    private LegendItemCollection fixedLegendItems;
+
     /**
      * Storage for the mapping between datasets/renderers and range axes.  The
      * keys in the map are Integer objects, corresponding to the dataset
@@ -947,6 +954,35 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
+     * Returns the fixed legend items, if any.
+     *
+     * @return The legend items (possibly <code>null</code>).
+     *
+     * @see #setFixedLegendItems(LegendItemCollection)
+     *
+     * @since 1.0.14
+     */
+    public LegendItemCollection getFixedLegendItems() {
+        return this.fixedLegendItems;
+    }
+
+    /**
+     * Sets the fixed legend items for the plot.  Leave this set to
+     * <code>null</code> if you prefer the legend items to be created
+     * automatically.
+     *
+     * @param items  the legend items (<code>null</code> permitted).
+     *
+     * @see #getFixedLegendItems()
+     *
+     * @since 1.0.14
+     */
+    public void setFixedLegendItems(LegendItemCollection items) {
+        this.fixedLegendItems = items;
+        fireChangeEvent();
+    }
+
+    /**
      * Add text to be displayed in the lower right hand corner and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
@@ -1127,6 +1163,20 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         return valueAxis;
     }
     
+    /**
+     * Returns the index of the specified renderer, or <code>-1</code> if the
+     * renderer is not assigned to this plot.
+     *
+     * @param renderer  the renderer (<code>null</code> permitted).
+     *
+     * @return The renderer index.
+     *
+     * @since 1.0.14
+     */
+    public int getIndexOf(PolarItemRenderer renderer) {
+        return this.renderers.indexOf(renderer);
+    }
+
     /**
      * Draws the plot on a Java 2D graphics device (such as the screen or a
      * printer).
@@ -1462,13 +1512,15 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @return The legend items.
      */
     public LegendItemCollection getLegendItems() {
-        // FIXME : handle multiple datasets
+        if (this.fixedLegendItems != null) {
+            return this.fixedLegendItems;
+        }
         LegendItemCollection result = new LegendItemCollection();
-        XYDataset dataset = getDataset(0);
-        PolarItemRenderer renderer = getRenderer(0);
-        // get the legend items for the main m_Dataset...
-        if (dataset != null) {
-            if (renderer != null) {
+        int count = this.datasets.size();
+        for (int datasetIndex = 0; datasetIndex < count; datasetIndex++) {
+            XYDataset dataset = getDataset(datasetIndex);
+            PolarItemRenderer renderer = getRenderer(datasetIndex);
+            if (dataset != null && renderer != null) {
                 int seriesCount = dataset.getSeriesCount();
                 for (int i = 0; i < seriesCount; i++) {
                     LegendItem item = renderer.getLegendItem(i);
@@ -1542,6 +1594,10 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             return false;
         }
         if (this.margin != that.margin) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.fixedLegendItems,
+                that.fixedLegendItems)) {
             return false;
         }
         return super.equals(obj);

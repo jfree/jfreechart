@@ -409,20 +409,21 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      */
     public LegendItem getLegendItem(int series) {
         LegendItem result = null;
-        PolarPlot polarPlot = getPlot();
-        if (polarPlot != null) {
-            XYDataset dataset = polarPlot.getDataset();
-            if (dataset != null) {
-                String label = dataset.getSeriesKey(series).toString();
-                String description = label;
-                Shape shape = lookupSeriesShape(series);
-                Paint paint = lookupSeriesPaint(series);
-                Paint outlinePaint = lookupSeriesOutlinePaint(series);
-                Stroke outlineStroke = lookupSeriesOutlineStroke(series);
-                result = new LegendItem(label, description, null, null,
-                        shape, paint, outlineStroke, outlinePaint);
-                result.setDataset(dataset);
-            }
+        PolarPlot plot = getPlot();
+        if (plot == null) {
+            return null;
+        }
+        XYDataset dataset = plot.getDataset(plot.getIndexOf(this));
+        if (dataset != null) {
+            String label = dataset.getSeriesKey(series).toString();
+            String description = label;
+            Shape shape = lookupSeriesShape(series);
+            Paint paint = lookupSeriesPaint(series);
+            Paint outlinePaint = lookupSeriesOutlinePaint(series);
+            Stroke outlineStroke = lookupSeriesOutlineStroke(series);
+            result = new LegendItem(label, description, null, null,
+                    shape, paint, outlineStroke, outlinePaint);
+            result.setDataset(dataset);
         }
         return result;
     }

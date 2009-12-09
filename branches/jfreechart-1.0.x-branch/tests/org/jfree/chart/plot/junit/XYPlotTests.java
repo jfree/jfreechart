@@ -450,6 +450,15 @@ public class XYPlotTests extends TestCase {
         assertFalse(plot1.equals(plot2));
         plot2.setShadowGenerator(null);
         assertTrue(plot1.equals(plot2));
+
+        LegendItemCollection lic1 = new LegendItemCollection();
+        lic1.add(new LegendItem("XYZ", Color.red));
+        plot1.setFixedLegendItems(lic1);
+        assertFalse(plot1.equals(plot2));
+        LegendItemCollection lic2 = new LegendItemCollection();
+        lic2.add(new LegendItem("XYZ", Color.red));
+        plot2.setFixedLegendItems(lic2);
+        assertTrue(plot1.equals(plot2));
     }
 
     /**
@@ -847,9 +856,8 @@ public class XYPlotTests extends TestCase {
             out.writeObject(chart);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             chart2 = (JFreeChart) in.readObject();
             in.close();
         }
