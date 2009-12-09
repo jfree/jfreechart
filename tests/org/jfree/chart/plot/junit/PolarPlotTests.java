@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * PolarPlotTests.java
  * -------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 08-Jun-2005 : Extended testEquals() (DG);
  * 07-Feb-2007 : Extended testEquals() and testCloning() (DG);
  * 17-Feb-2008 : Tests for new angleTickUnit field (DG);
+ * 09-Dec-2009 : Added new tests (DG);
  *
  */
 
@@ -59,11 +60,15 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.jfree.chart.LegendItem;
+import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.renderer.DefaultPolarItemRenderer;
 import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  * Some tests for the {@link PolarPlot} class.
@@ -86,6 +91,53 @@ public class PolarPlotTests extends TestCase {
      */
     public PolarPlotTests(String name) {
         super(name);
+    }
+
+    /**
+     * Some checks for the getLegendItems() method.
+     */
+    public void testGetLegendItems() {
+        XYSeriesCollection d = new XYSeriesCollection();
+        d.addSeries(new XYSeries("A"));
+        d.addSeries(new XYSeries("B"));
+        DefaultPolarItemRenderer r = new DefaultPolarItemRenderer();
+        PolarPlot plot = new PolarPlot();
+        plot.setDataset(d);
+        plot.setRenderer(r);
+        LegendItemCollection items = plot.getLegendItems();
+        assertEquals(2, items.getItemCount());
+        LegendItem item1 = (LegendItem) items.get(0);
+        assertEquals("A", item1.getLabel());
+        LegendItem item2 = (LegendItem) items.get(1);
+        assertEquals("B", item2.getLabel());
+    }
+
+    /**
+     * Some checks for the getLegendItems() method with multiple datasets.
+     */
+    public void testGetLegendItems2() {
+        XYSeriesCollection d1 = new XYSeriesCollection();
+        d1.addSeries(new XYSeries("A"));
+        d1.addSeries(new XYSeries("B"));
+        XYSeriesCollection d2 = new XYSeriesCollection();
+        d2.addSeries(new XYSeries("C"));
+        d2.addSeries(new XYSeries("D"));
+        DefaultPolarItemRenderer r = new DefaultPolarItemRenderer();
+        PolarPlot plot = new PolarPlot();
+        plot.setDataset(d1);
+        plot.setDataset(1, d2);
+        plot.setRenderer(r);
+        plot.setRenderer(1, new DefaultPolarItemRenderer());
+        LegendItemCollection items = plot.getLegendItems();
+        assertEquals(4, items.getItemCount());
+        LegendItem item1 = (LegendItem) items.get(0);
+        assertEquals("A", item1.getLabel());
+        LegendItem item2 = (LegendItem) items.get(1);
+        assertEquals("B", item2.getLabel());
+        LegendItem item3 = (LegendItem) items.get(2);
+        assertEquals("C", item3.getLabel());
+        LegendItem item4 = (LegendItem) items.get(3);
+        assertEquals("D", item4.getLabel());
     }
 
     /**
@@ -162,6 +214,20 @@ public class PolarPlotTests extends TestCase {
         plot1.addCornerTextItem("XYZ");
         assertFalse(plot1.equals(plot2));
         plot2.addCornerTextItem("XYZ");
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setMargin(6);
+        assertFalse(plot1.equals(plot2));
+        plot2.setMargin(6);
+        assertTrue(plot1.equals(plot2));
+
+        LegendItemCollection lic1 = new LegendItemCollection();
+        lic1.add(new LegendItem("XYZ", Color.red));
+        plot1.setFixedLegendItems(lic1);
+        assertFalse(plot1.equals(plot2));
+        LegendItemCollection lic2 = new LegendItemCollection();
+        lic2.add(new LegendItem("XYZ", Color.red));
+        plot2.setFixedLegendItems(lic2);
         assertTrue(plot1.equals(plot2));
     }
 
