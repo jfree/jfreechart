@@ -1,4 +1,4 @@
-2009-08-12  David Gilbert  <david.gilbert@object-refinery.com>
+2009-12-09  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/DefaultPolarItemRenderer.java
     (getLegendItem): Handle multiple datasets,
@@ -10,12 +10,12 @@
     (getLegendItems): Handle multiple datasets,
     (equals): Updated for new fields.
 
-2009-08-12  David Gilbert  <david.gilbert@object-refinery.com>
+2009-12-08  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYBoxAndWhiskerRenderer.java
     (drawVerticalItems): Check for null outliers.
 
-2009-08-12  David Gilbert  <david.gilbert@object-refinery.com>
+2009-12-08  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/statistics/HistogramDataset.java
     (addSeries): Fire dataset change event.
