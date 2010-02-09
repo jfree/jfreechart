@@ -1,3 +1,9 @@
+2010-02-09  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 2947660:
+    * source/org/jfree/chart/renderer/category/AbstractCategoryRenderer.java
+    (getLegendItems): Fix null check.
+
 2009-12-09  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/DefaultPolarItemRenderer.java
