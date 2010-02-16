@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2010, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYShapeRenderer.java
  * --------------------
- * (C) Copyright 2008, 2009 by Andreas Haumer, xS+S and Contributors.
+ * (C) Copyright 2008-2010 by Andreas Haumer, xS+S and Contributors.
  *
  * Original Author:  Martin Hoeller (x Software + Systeme  xS+S - Andreas
  *                       Haumer);
@@ -37,6 +37,7 @@
  * --------
  * 17-Sep-2008 : Version 1, based on a contribution from Martin Hoeller with
  *               amendments by David Gilbert (DG);
+ * 16-Feb-2010 : Added findZBounds() (patch 2952086) (MH);
  *
  */
 
@@ -371,6 +372,23 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
             double offset = 0; // TODO getSeriesShape(n).getBounds().height / 2;
             return new Range(r.getLowerBound() + offset, r.getUpperBound()
                     + offset);
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Return the range of z-values in the specified dataset.
+     *  
+     * @param dataset  the dataset (<code>null</code> permitted).
+     * 
+     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     *         or empty).
+     */
+    public Range findZBounds(XYZDataset dataset) {
+        if (dataset != null) {
+            return DatasetUtilities.findZBounds(dataset);
         }
         else {
             return null;

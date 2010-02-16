@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2010, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,15 @@
  * -------------------------
  * XYShapeRendererTests.java
  * -------------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2010, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Martin Hoeller (patch 2952086);
  *
  * Changes
  * -------
  * 17-Sep-2008 : Version 1 (DG);
+ * 16-Feb-2010 : Added testFindZBounds() (MH);
  *
  */
 
@@ -54,6 +55,9 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.xy.XYShapeRenderer;
+import org.jfree.data.Range;
+import org.jfree.data.xy.DefaultXYZDataset;
+import org.jfree.data.xy.XYZDataset;
 
 /**
  * Tests for the {@link XYShapeRenderer} class.
@@ -159,4 +163,37 @@ public class XYShapeRendererTests extends TestCase {
         assertEquals(r1, r2);
     }
 
+    /**
+     * Check if finding the bounds in z-dimension of an XYZDataset works. 
+     */
+    public void testFindZBounds() {
+        XYShapeRenderer r = new XYShapeRenderer();
+        assertNull(r.findZBounds(null));
+        
+        DefaultXYZDataset dataset = new DefaultXYZDataset();
+        Range range;
+
+        double data1[][] = { {1,1,1}, {1,1,1}, {1,2,3} };
+        dataset.addSeries("series1", data1);
+        range = r.findZBounds(dataset);
+        assertNotNull(range);
+        assertEquals(1d, range.getLowerBound());
+        assertEquals(3d, range.getUpperBound());
+
+        double data2[][] = { {1,1,1}, {1,1,1}, {-1,-2,-3} };
+        dataset.removeSeries("series1");
+        dataset.addSeries("series2", data2);
+        range = r.findZBounds(dataset);
+        assertNotNull(range);
+        assertEquals(-3d, range.getLowerBound());
+        assertEquals(-1d, range.getUpperBound());
+
+        double data3[][] = { {1,1,1}, {1,1,1}, {-1.2,2.9,3.8} };
+        dataset.removeSeries("series2");
+        dataset.addSeries("series3", data3);
+        range = r.findZBounds(dataset);
+        assertNotNull(range);
+        assertEquals(-1.2d, range.getLowerBound());
+        assertEquals(3.8d, range.getUpperBound());
+    }
 }

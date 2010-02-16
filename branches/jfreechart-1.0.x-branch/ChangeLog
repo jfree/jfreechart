@@ -1,3 +1,15 @@
+2010-02-16  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch 2952086 by Martin Hoeller:
+    * source/org/jfree/chart/renderer/xy/XYShapeRenderer.java
+    (findZBounds): New method,
+    * source/org/jfree/data/general/DatasetUtilities.java
+    (findZBounds(XYZDataset): New method,
+    (findZBounds(XYZDataset, boolean)): Likewise,
+    (findZBounds(XYZDataset, List, Range, boolean)): Likewise,
+    * tests/org/jfree/chart/renderer/xy/junit/XYShapeRendererTests.java
+    (testFindZBounds): New method.
+
 2010-02-09  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 2946521:
