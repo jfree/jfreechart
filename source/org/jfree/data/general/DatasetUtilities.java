@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2010, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * DatasetUtilities.java
  * ---------------------
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2010, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski (bug fix);
@@ -37,6 +37,8 @@
  *                   Rafal Skalny (patch 1925366);
  *                   Jerome David (patch 2131001);
  *                   Peter Kolb (patch 2791407);
+ *                   Martin Hoeller (patch 2952086);
+ * 
  *
  * Changes (from 18-Sep-2001)
  * --------------------------
@@ -120,7 +122,8 @@
  * 16-May-2009 : Patch 2791407 - fix iterateToFindRangeBounds for
  *               MultiValueCategoryDataset (PK);
  * 10-Sep-2009 : Fix bug 2849731 for IntervalCategoryDataset (DG);
- *
+ * 16-Feb-2010 : Patch 2952086 - find z-bounds (MH);
+ * 
  */
 
 package org.jfree.data.general;
@@ -151,6 +154,7 @@ import org.jfree.data.xy.XYDomainInfo;
 import org.jfree.data.xy.XYRangeInfo;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.data.xy.XYZDataset;
 import org.jfree.util.ArrayUtilities;
 
 /**
@@ -1300,6 +1304,111 @@ public final class DatasetUtilities {
     }
 
     /**
+     * Returns the range of values in the z-dimension for the dataset. This
+     * method is the partner for the {@link #findRangeBounds(XYDataset)}
+     * and {@link #findDomainBounds(XYDataset)} methods.
+     *
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     *
+     * @return The range (possibly <code>null</code>).
+     */
+    public static Range findZBounds(XYZDataset dataset) {
+        return findZBounds(dataset, true);
+    }
+
+    /**
+     * Returns the range of values in the z-dimension for the dataset.  This
+     * method is the partner for the
+     * {@link #findRangeBounds(XYDataset, boolean)} and
+     * {@link #findDomainBounds(XYDataset, boolean)} methods.
+     *
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param includeInterval  a flag that determines whether or not the
+     *                         z-interval is taken into account.
+     *
+     * @return The range (possibly <code>null</code>).
+     */
+    public static Range findZBounds(XYZDataset dataset,
+                                        boolean includeInterval) {
+        if (dataset == null) {
+            throw new IllegalArgumentException("Null 'dataset' argument.");
+        }
+        Range result = iterateZBounds(dataset, includeInterval);
+        return result;
+    }
+
+    /**
+     * Finds the bounds of the z-values in the specified dataset, including
+     * only those series that are listed in visibleSeriesKeys, and those items
+     * whose x-values fall within the specified range.
+     *
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param visibleSeriesKeys  the keys for the visible series
+     *     (<code>null</code> not permitted).
+     * @param xRange  the x-range (<code>null</code> not permitted).
+     * @param includeInterval  include the z-interval (if the dataset has a
+     *     z-interval).
+     *
+     * @return The data bounds.
+     */
+    public static Range findZBounds(XYZDataset dataset,
+            List visibleSeriesKeys, Range xRange, boolean includeInterval) {
+        if (dataset == null) {
+            throw new IllegalArgumentException("Null 'dataset' argument.");
+        }
+        Range result = iterateToFindZBounds(dataset, visibleSeriesKeys,
+                    xRange, includeInterval);
+        return result;
+    }
+
+    /**
+     * Iterates over the data item of the xyz dataset to find
+     * the z-dimension bounds.
+     *
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     *
+     * @return The range (possibly <code>null</code>).
+     */
+    public static Range iterateZBounds(XYZDataset dataset) {
+        return iterateZBounds(dataset, true);
+    }
+
+    /**
+     * Iterates over the data items of the xyz dataset to find
+     * the z-dimension bounds.
+     *
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param includeInterval  include the z-interval (if the dataset has a
+     *     z-interval.
+     *
+     * @return The range (possibly <code>null</code>).
+     */
+    public static Range iterateZBounds(XYZDataset dataset,
+            boolean includeInterval) {
+        double minimum = Double.POSITIVE_INFINITY;
+        double maximum = Double.NEGATIVE_INFINITY;
+        int seriesCount = dataset.getSeriesCount();
+
+        for (int series = 0; series < seriesCount; series++) {
+            int itemCount = dataset.getItemCount(series);
+            for (int item = 0; item < itemCount; item++) {
+                double value = dataset.getZValue(series, item);
+                if (!Double.isNaN(value)) {
+                    minimum = Math.min(minimum, value);
+                    maximum = Math.max(maximum, value);
+                }
+            }
+        }
+
+        if (minimum == Double.POSITIVE_INFINITY) {
+            return null;
+        }
+        else {
+            return new Range(minimum, maximum);
+        }
+    }
+
+    /**
      * Returns the range of x-values in the specified dataset for the
      * data items belonging to the visible series.
      * 
@@ -1496,6 +1605,63 @@ public final class DatasetUtilities {
                 }
             }
         }
+        if (minimum == Double.POSITIVE_INFINITY) {
+            return null;
+        }
+        else {
+            return new Range(minimum, maximum);
+        }
+    }
+
+    /**
+     * Returns the range of z-values in the specified dataset for the
+     * data items belonging to the visible series and with x-values in the
+     * given range.
+     *
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param visibleSeriesKeys  the visible series keys (<code>null</code> not
+     *     permitted).
+     * @param xRange  the x-range (<code>null</code> not permitted).
+     * @param includeInterval  a flag that determines whether or not the
+     *     z-interval for the dataset is included (this only applies if the
+     *     dataset has an interval, which is currently not supported).
+     *
+     * @return The y-range (possibly <code>null</code>).
+     */
+    public static Range iterateToFindZBounds(XYZDataset dataset,
+            List visibleSeriesKeys, Range xRange, boolean includeInterval) {
+    
+        if (dataset == null) {
+            throw new IllegalArgumentException("Null 'dataset' argument.");
+        }
+        if (visibleSeriesKeys == null) {
+            throw new IllegalArgumentException(
+                    "Null 'visibleSeriesKeys' argument.");
+        }
+        if (xRange == null) {
+            throw new IllegalArgumentException("Null 'xRange' argument");
+        }
+    
+        double minimum = Double.POSITIVE_INFINITY;
+        double maximum = Double.NEGATIVE_INFINITY;
+    
+        Iterator iterator = visibleSeriesKeys.iterator();
+        while (iterator.hasNext()) {
+            Comparable seriesKey = (Comparable) iterator.next();
+            int series = dataset.indexOf(seriesKey);
+            int itemCount = dataset.getItemCount(series);
+            for (int item = 0; item < itemCount; item++) {
+                double x = dataset.getXValue(series, item);
+                double z = dataset.getZValue(series, item);
+                if (xRange.contains(x)) {
+                    if (!Double.isNaN(z)) {
+                        minimum = Math.min(minimum, z);
+                        maximum = Math.max(maximum, z);
+                    }
+                }
+            }
+        }
+
         if (minimum == Double.POSITIVE_INFINITY) {
             return null;
         }
