@@ -1,3 +1,9 @@
+2010-03-30  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch 2954302:
+    * source/org/jfree/chart/annotation/CategoryPointerAnnotation.java
+    (draw): Modified calculation of pointer line.
+
 2010-02-16  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 2952086 by Martin Hoeller:
