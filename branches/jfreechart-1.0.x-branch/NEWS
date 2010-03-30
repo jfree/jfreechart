@@ -9,6 +9,7 @@ bug fixes.
 
 Patches:
 
+2954302 : CategoryPointerAnnotation line calculation;
 2902842 : HistogramDataset.addSeries() fires change change event (by
           Thomas A Caswell);
 2868608 : Whisker width attribute for BoxAndWhiskerRenderer (by Peter Becker);
