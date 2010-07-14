@@ -138,7 +138,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     static class XYAreaRendererState extends XYItemRendererState {
 
         /** Working storage for the area under one series. */
-        public Polygon area;
+        public GeneralPath area;
 
         /** Working line that can be recycled. */
         public Line2D line;
@@ -150,7 +150,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
          */
         public XYAreaRendererState(PlotRenderingInfo info) {
             super(info);
-            this.area = new Polygon();
+            this.area = new GeneralPath();
             this.line = new Line2D.Double();
         }
 
@@ -535,51 +535,50 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
         double transZero = rangeAxis.valueToJava2D(0.0, dataArea,
                 plot.getRangeAxisEdge());
-        Polygon hotspot = null;
+        GeneralPath hotspot = new GeneralPath();
         if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
-            hotspot = new Polygon();
-            hotspot.addPoint((int) transZero,
-                    (int) ((transX0 + transX1) / 2.0));
-            hotspot.addPoint((int) ((transY0 + transY1) / 2.0),
-                    (int) ((transX0 + transX1) / 2.0));
-            hotspot.addPoint((int) transY1, (int) transX1);
-            hotspot.addPoint((int) ((transY1 + transY2) / 2.0),
-                    (int) ((transX1 + transX2) / 2.0));
-            hotspot.addPoint((int) transZero,
-                    (int) ((transX1 + transX2) / 2.0));
+            hotspot.moveTo(transZero,
+                    ((transX0 + transX1) / 2.0));
+            hotspot.lineTo(((transY0 + transY1) / 2.0),
+                    ((transX0 + transX1) / 2.0));
+            hotspot.lineTo(transY1, transX1);
+            hotspot.lineTo(((transY1 + transY2) / 2.0),
+                    ((transX1 + transX2) / 2.0));
+            hotspot.lineTo(transZero,
+                    ((transX1 + transX2) / 2.0));
         }
         else {  // vertical orientation
-            hotspot = new Polygon();
-            hotspot.addPoint((int) ((transX0 + transX1) / 2.0),
-                    (int) transZero);
-            hotspot.addPoint((int) ((transX0 + transX1) / 2.0),
-                    (int) ((transY0 + transY1) / 2.0));
-            hotspot.addPoint((int) transX1, (int) transY1);
-            hotspot.addPoint((int) ((transX1 + transX2) / 2.0),
-                    (int) ((transY1 + transY2) / 2.0));
-            hotspot.addPoint((int) ((transX1 + transX2) / 2.0),
-                    (int) transZero);
+            hotspot.moveTo(((transX0 + transX1) / 2.0),
+                    transZero);
+            hotspot.lineTo(((transX0 + transX1) / 2.0),
+                    ((transY0 + transY1) / 2.0));
+            hotspot.lineTo(transX1, transY1);
+            hotspot.lineTo(((transX1 + transX2) / 2.0),
+                    ((transY1 + transY2) / 2.0));
+            hotspot.lineTo(((transX1 + transX2) / 2.0),
+                    transZero);
         }
+        hotspot.closePath();
 
         if (item == 0) {  // create a new area polygon for the series
-            areaState.area = new Polygon();
+            areaState.area = new GeneralPath();
             // the first point is (x, 0)
             double zero = rangeAxis.valueToJava2D(0.0, dataArea,
                     plot.getRangeAxisEdge());
             if (plot.getOrientation() == PlotOrientation.VERTICAL) {
-                areaState.area.addPoint((int) transX1, (int) zero);
+                areaState.area.moveTo(transX1, zero);
             }
             else if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
-                areaState.area.addPoint((int) zero, (int) transX1);
+                areaState.area.moveTo(zero, transX1);
             }
         }
 
         // Add each point to Area (x, y)
         if (plot.getOrientation() == PlotOrientation.VERTICAL) {
-            areaState.area.addPoint((int) transX1, (int) transY1);
+            areaState.area.lineTo(transX1, transY1);
         }
         else if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
-            areaState.area.addPoint((int) transY1, (int) transX1);
+            areaState.area.lineTo(transY1, transX1);
         }
 
         PlotOrientation orientation = plot.getOrientation();
@@ -620,11 +619,13 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
             if (orientation == PlotOrientation.VERTICAL) {
                 // Add the last point (x,0)
-                areaState.area.addPoint((int) transX1, (int) transZero);
+                areaState.area.lineTo(transX1, transZero);
+                areaState.area.closePath();
             }
             else if (orientation == PlotOrientation.HORIZONTAL) {
                 // Add the last point (x,0)
-                areaState.area.addPoint((int) transZero, (int) transX1);
+                areaState.area.lineTo(transZero, transX1);
+                areaState.area.closePath();
             }
 
             if (this.useFillPaint) {
