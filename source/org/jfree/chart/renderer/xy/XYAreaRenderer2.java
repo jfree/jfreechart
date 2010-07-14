@@ -82,7 +82,6 @@ package org.jfree.chart.renderer.xy;
 
 import java.awt.Graphics2D;
 import java.awt.Paint;
-import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.GeneralPath;
@@ -345,31 +344,30 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
 
         double transZero = rangeAxis.valueToJava2D(0.0, dataArea,
                 plot.getRangeAxisEdge());
-        Polygon hotspot = null;
+        GeneralPath hotspot = new GeneralPath();
         if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
-            hotspot = new Polygon();
-            hotspot.addPoint((int) transZero,
-                    (int) ((transX0 + transX1) / 2.0));
-            hotspot.addPoint((int) ((transY0 + transY1) / 2.0),
-                    (int) ((transX0 + transX1) / 2.0));
-            hotspot.addPoint((int) transY1, (int) transX1);
-            hotspot.addPoint((int) ((transY1 + transY2) / 2.0),
-                    (int) ((transX1 + transX2) / 2.0));
-            hotspot.addPoint((int) transZero,
-                    (int) ((transX1 + transX2) / 2.0));
+            hotspot.moveTo(transZero,
+                    ((transX0 + transX1) / 2.0));
+            hotspot.lineTo(((transY0 + transY1) / 2.0),
+                    ((transX0 + transX1) / 2.0));
+            hotspot.lineTo(transY1, transX1);
+            hotspot.lineTo(((transY1 + transY2) / 2.0),
+                    ((transX1 + transX2) / 2.0));
+            hotspot.lineTo(transZero,
+                    ((transX1 + transX2) / 2.0));
         }
         else {  // vertical orientation
-            hotspot = new Polygon();
-            hotspot.addPoint((int) ((transX0 + transX1) / 2.0),
-                    (int) transZero);
-            hotspot.addPoint((int) ((transX0 + transX1) / 2.0),
-                    (int) ((transY0 + transY1) / 2.0));
-            hotspot.addPoint((int) transX1, (int) transY1);
-            hotspot.addPoint((int) ((transX1 + transX2) / 2.0),
-                    (int) ((transY1 + transY2) / 2.0));
-            hotspot.addPoint((int) ((transX1 + transX2) / 2.0),
-                    (int) transZero);
+            hotspot.moveTo(((transX0 + transX1) / 2.0),
+                    transZero);
+            hotspot.lineTo(((transX0 + transX1) / 2.0),
+                    ((transY0 + transY1) / 2.0));
+            hotspot.lineTo(transX1, transY1);
+            hotspot.lineTo(((transX1 + transX2) / 2.0),
+                    ((transY1 + transY2) / 2.0));
+            hotspot.lineTo(((transX1 + transX2) / 2.0),
+                    transZero);
         }
+        hotspot.closePath();
 
         PlotOrientation orientation = plot.getOrientation();
         Paint paint = getItemPaint(series, item);
