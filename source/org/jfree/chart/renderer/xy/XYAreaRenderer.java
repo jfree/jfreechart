@@ -675,7 +675,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
         // collect entity and tool tip information...
         EntityCollection entities = state.getEntityCollection();
-        if (entities != null && hotspot != null) {
+        if (entities != null) {
             addEntity(entities, hotspot, dataset, series, item, 0.0, 0.0);
         }
 
