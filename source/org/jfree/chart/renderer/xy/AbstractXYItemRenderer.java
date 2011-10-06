@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -35,6 +35,7 @@
  *                   Tim Bardzil;
  *                   Sergei Ivanov;
  *                   Peter Kolb (patch 2809117);
+ *                   Martin Krauskopf;
  *
  * Changes:
  * --------
@@ -116,6 +117,7 @@
  *               by PK (DG);
  * 01-Sep-2009 : Bug 2840132 - set renderer index when drawing
  *               annotations (DG);
+ * 06-Oct-2011 : Add utility methods to work with 1.4 API in GeneralPath (MK)
  * 
  */
 
@@ -130,6 +132,7 @@ import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -141,6 +144,7 @@ import java.util.List;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -1787,6 +1791,36 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         //       ShapeUtilities class
         return (x >= rect.getMinX() && x <= rect.getMaxX()
                 && y >= rect.getMinY() && y <= rect.getMaxY());
+    }
+
+    /**
+     * Utility method delegating to {@link GeneralPath#moveTo} taking double as
+     * parameters.
+     *
+     * @param hotspot  the region under construction (<code>null</code> not 
+     *           permitted);
+     * @param x  the x coordinate;
+     * @param y  the y coordinate;
+     *
+     * @since 1.0.14
+     */
+    protected static void moveTo(GeneralPath hotspot, double x, double y) {
+        hotspot.moveTo((float) x, (float) y);
+    }
+
+    /**
+     * Utility method delegating to {@link GeneralPath#lineTo} taking double as
+     * parameters.
+     *
+     * @param hotspot  the region under construction (<code>null</code> not 
+     *           permitted);
+     * @param x  the x coordinate;
+     * @param y  the y coordinate;
+     *
+     * @since 1.0.14
+     */
+    protected static void lineTo(GeneralPath hotspot, double x, double y) {
+        hotspot.lineTo((float) x, (float) y);
     }
 
     // === DEPRECATED CODE ===

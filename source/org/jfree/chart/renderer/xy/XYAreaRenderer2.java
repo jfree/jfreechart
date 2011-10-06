@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,13 @@
  * --------------------
  * XYAreaRenderer2.java
  * --------------------
- * (C) Copyright 2004-2008, by Hari and Contributors.
+ * (C) Copyright 2004-2011, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
+ *                   Martin Krauskopf;
  *
  * Changes:
  * --------
@@ -75,6 +76,7 @@
  * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 17-Jun-2008 : Apply legend font and paint attributes (DG);
+ * 06-Oct-2011 : Avoid GeneralPath methods requiring Java 1.5 (MK);
  *
  */
 
@@ -346,26 +348,22 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
                 plot.getRangeAxisEdge());
         GeneralPath hotspot = new GeneralPath();
         if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
-            hotspot.moveTo(transZero,
-                    ((transX0 + transX1) / 2.0));
-            hotspot.lineTo(((transY0 + transY1) / 2.0),
-                    ((transX0 + transX1) / 2.0));
-            hotspot.lineTo(transY1, transX1);
-            hotspot.lineTo(((transY1 + transY2) / 2.0),
-                    ((transX1 + transX2) / 2.0));
-            hotspot.lineTo(transZero,
-                    ((transX1 + transX2) / 2.0));
+            moveTo(hotspot, transZero, ((transX0 + transX1) / 2.0));
+            lineTo(hotspot, ((transY0 + transY1) / 2.0),
+                            ((transX0 + transX1) / 2.0));
+            lineTo(hotspot, transY1, transX1);
+            lineTo(hotspot, ((transY1 + transY2) / 2.0),
+                            ((transX1 + transX2) / 2.0));
+            lineTo(hotspot, transZero, ((transX1 + transX2) / 2.0));
         }
         else {  // vertical orientation
-            hotspot.moveTo(((transX0 + transX1) / 2.0),
-                    transZero);
-            hotspot.lineTo(((transX0 + transX1) / 2.0),
-                    ((transY0 + transY1) / 2.0));
-            hotspot.lineTo(transX1, transY1);
-            hotspot.lineTo(((transX1 + transX2) / 2.0),
-                    ((transY1 + transY2) / 2.0));
-            hotspot.lineTo(((transX1 + transX2) / 2.0),
-                    transZero);
+            moveTo(hotspot, ((transX0 + transX1) / 2.0), transZero);
+            lineTo(hotspot, ((transX0 + transX1) / 2.0),
+                            ((transY0 + transY1) / 2.0));
+            lineTo(hotspot, transX1, transY1);
+            lineTo(hotspot, ((transX1 + transX2) / 2.0),
+                            ((transY1 + transY2) / 2.0));
+            lineTo(hotspot, ((transX1 + transX2) / 2.0), transZero);
         }
         hotspot.closePath();
 
@@ -393,7 +391,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
         // collect entity and tool tip information...
         if (state.getInfo() != null) {
             EntityCollection entities = state.getEntityCollection();
-            if (entities != null && hotspot != null) {
+            if (entities != null) {
                 String tip = null;
                 XYToolTipGenerator generator = getToolTipGenerator(series,
                         item);
