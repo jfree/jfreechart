@@ -1,5 +1,15 @@
 2011-10-06  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
+    (lineTo): New method;
+    (moveTo): New method;
+    * source/org/jfree/chart/renderer/xy/XYAreaRenderer.java
+    (drawItem): Replace GeneralPath lineTo() and moveTo();
+    * source/org/jfree/chart/renderer/xy/XYAreaRenderer2.java
+    (drawItem): Replace GeneralPath lineTo() and moveTo();
+
+2011-10-06  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug 3418287
     * tests/org/jfree/chart/util/junit/RelativeDateFormatTests.java
     (setUp): New method;

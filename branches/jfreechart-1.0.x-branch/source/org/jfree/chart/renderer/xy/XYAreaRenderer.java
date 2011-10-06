@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,13 @@
  * -------------------
  * XYAreaRenderer.java
  * -------------------
- * (C) Copyright 2002-2009, by Hari and Contributors.
+ * (C) Copyright 2002-2011, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
+ *                   Martin Krauskopf;
  *
  * Changes:
  * --------
@@ -77,6 +78,7 @@
  * 31-Dec-2008 : Fix for bug 2471906 - dashed outlines performance issue (DG);
  * 11-Jun-2009 : Added a useFillPaint flag and a GradientPaintTransformer for
  *               the paint under the series (DG);
+ * 06-Oct-2011 : Avoid GeneralPath methods requiring Java 1.5 (MK);
  *
  */
 
@@ -86,7 +88,6 @@ import java.awt.BasicStroke;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Paint;
-import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Area;
@@ -537,26 +538,22 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
                 plot.getRangeAxisEdge());
         GeneralPath hotspot = new GeneralPath();
         if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
-            hotspot.moveTo(transZero,
-                    ((transX0 + transX1) / 2.0));
-            hotspot.lineTo(((transY0 + transY1) / 2.0),
-                    ((transX0 + transX1) / 2.0));
-            hotspot.lineTo(transY1, transX1);
-            hotspot.lineTo(((transY1 + transY2) / 2.0),
-                    ((transX1 + transX2) / 2.0));
-            hotspot.lineTo(transZero,
-                    ((transX1 + transX2) / 2.0));
+            moveTo(hotspot, transZero, ((transX0 + transX1) / 2.0));
+            lineTo(hotspot, ((transY0 + transY1) / 2.0), 
+                            ((transX0 + transX1) / 2.0));
+            lineTo(hotspot, transY1, transX1);
+            lineTo(hotspot, ((transY1 + transY2) / 2.0), 
+                            ((transX1 + transX2) / 2.0));
+            lineTo(hotspot, transZero, ((transX1 + transX2) / 2.0));
         }
         else {  // vertical orientation
-            hotspot.moveTo(((transX0 + transX1) / 2.0),
-                    transZero);
-            hotspot.lineTo(((transX0 + transX1) / 2.0),
-                    ((transY0 + transY1) / 2.0));
-            hotspot.lineTo(transX1, transY1);
-            hotspot.lineTo(((transX1 + transX2) / 2.0),
-                    ((transY1 + transY2) / 2.0));
-            hotspot.lineTo(((transX1 + transX2) / 2.0),
-                    transZero);
+            moveTo(hotspot, ((transX0 + transX1) / 2.0), transZero);
+            lineTo(hotspot, ((transX0 + transX1) / 2.0),
+                            ((transY0 + transY1) / 2.0));
+            lineTo(hotspot, transX1, transY1);
+            lineTo(hotspot, ((transX1 + transX2) / 2.0),
+                            ((transY1 + transY2) / 2.0));
+            lineTo(hotspot, ((transX1 + transX2) / 2.0), transZero);
         }
         hotspot.closePath();
 
@@ -566,19 +563,19 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
             double zero = rangeAxis.valueToJava2D(0.0, dataArea,
                     plot.getRangeAxisEdge());
             if (plot.getOrientation() == PlotOrientation.VERTICAL) {
-                areaState.area.moveTo(transX1, zero);
+                moveTo(areaState.area, transX1, zero);
             }
             else if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
-                areaState.area.moveTo(zero, transX1);
+                moveTo(areaState.area, zero, transX1);
             }
         }
 
         // Add each point to Area (x, y)
         if (plot.getOrientation() == PlotOrientation.VERTICAL) {
-            areaState.area.lineTo(transX1, transY1);
+            lineTo(areaState.area, transX1, transY1);
         }
         else if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
-            areaState.area.lineTo(transY1, transX1);
+            lineTo(areaState.area, transY1, transX1);
         }
 
         PlotOrientation orientation = plot.getOrientation();
@@ -619,12 +616,12 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
             if (orientation == PlotOrientation.VERTICAL) {
                 // Add the last point (x,0)
-                areaState.area.lineTo(transX1, transZero);
+                lineTo(areaState.area, transX1, transZero);
                 areaState.area.closePath();
             }
             else if (orientation == PlotOrientation.HORIZONTAL) {
                 // Add the last point (x,0)
-                areaState.area.lineTo(transZero, transX1);
+                lineTo(areaState.area, transZero, transX1);
                 areaState.area.closePath();
             }
 
