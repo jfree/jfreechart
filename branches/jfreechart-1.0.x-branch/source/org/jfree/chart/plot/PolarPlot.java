@@ -764,7 +764,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /**
      * Returns <code>true</code> if the angular gridlines are visible, and
-     * <code>false<code> otherwise.
+     * <code>false</code> otherwise.
      *
      * @return <code>true</code> or <code>false</code>.
      *
@@ -1311,7 +1311,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         double centerX = plotArea.getCenterX();
         double centerY = plotArea.getCenterY();
         double r = Math.min(plotArea.getWidth() / 2.0,
-                plotArea.getHeight() / 2.0) - margin;
+                plotArea.getHeight() / 2.0) - this.margin;
         double x = centerX - r;
         double y = centerY - r;
 
