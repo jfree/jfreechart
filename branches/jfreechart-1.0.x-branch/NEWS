@@ -21,6 +21,7 @@ Patches:
 
 Bug Fixes:
 
+3418287 : RelativeDateFormatTest.java is locale dependent;
 2876406 : TimeTableXYDataset should support Comparable for series keys;
 2868557 : BoxAndWhiskerRenderer should fire change event in setMedianVisible();
 2849731 : For IntervalCategoryDataset and IntervalXYDataset, fix 

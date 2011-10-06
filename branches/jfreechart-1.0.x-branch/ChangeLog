@@ -1,3 +1,10 @@
+2011-10-06  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 3418287
+    * tests/org/jfree/chart/util/junit/RelativeDateFormatTests.java
+    (setUp): New method;
+    (tearDown): New method.
+
 2010-03-30  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 2954302:
