@@ -49,7 +49,12 @@
  * 18-May-2007 : Set dataset for LegendItem (DG);
  * 03-Sep-2009 : Applied patch 2850344 by Martin Hoeller (DG);
  * 27-Nov-2009 : Updated for modification to PolarItemRenderer interface (DG);
- *
+ * 03-Oct-2011 : Fixed potential NPE in equals() (MH);
+ * 03-Oct-2011 : Added flag to connectFirstAndLastPoint (MH);
+ * 03-Oct-2011 : Added tooltip and URL generator support (MH);
+ * 03-Oct-2011 : Added some configuration options for the legend (MH);
+ * 03-Oct-2011 : Added support for PolarPlot's angleOffset and direction (MH);
+ * 
  */
 
 package org.jfree.chart.renderer;
@@ -59,24 +64,41 @@ import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
+import java.awt.geom.PathIterator;
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.List;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.NumberTick;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.entity.EntityCollection;
+import org.jfree.chart.entity.XYItemEntity;
+import org.jfree.chart.event.RendererChangeEvent;
+import org.jfree.chart.labels.XYSeriesLabelGenerator;
+import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.DrawingSupplier;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PolarPlot;
+import org.jfree.chart.renderer.xy.AbstractXYItemRenderer;
+import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextUtilities;
 import org.jfree.util.BooleanList;
 import org.jfree.util.BooleanUtilities;
+import org.jfree.util.ObjectList;
+import org.jfree.util.ObjectUtilities;
+import org.jfree.util.PublicCloneable;
 import org.jfree.util.ShapeUtilities;
 
 /**
@@ -104,7 +126,22 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.14
      */
-    private Composite fillComposite;
+    private transient Composite fillComposite;
+
+    /**
+     * A flag that controls whether the fill paint is used for filling
+     * shapes.
+     * 
+     * @since 1.0.14
+     */
+    private boolean useFillPaint;
+
+    /**
+     * The shape that is used to represent a line in the legend.
+     * 
+     * @since 1.0.14
+     */
+    private transient Shape legendLine;
 
     /**
      * Flag that controls whether item shapes are visible or not.
@@ -112,8 +149,51 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @since 1.0.14
      */
     private boolean shapesVisible;
+
+    /**
+     * Flag that controls if the first and last point of the dataset should be
+     * connected or not.
+     * 
+     *  @since 1.0.14
+     */
+    private boolean connectFirstAndLastPoint;
     
-    
+    /**
+     * A list of tool tip generators (one per series).
+     * 
+     * @since 1.0.14
+     */
+    private ObjectList toolTipGeneratorList;
+
+    /**
+     * The base tool tip generator.
+     * 
+     * @since 1.0.14
+     */
+    private XYToolTipGenerator baseToolTipGenerator;
+
+    /**
+     * The URL text generator.
+     * 
+     * @since 1.0.14
+     */
+    private XYURLGenerator urlGenerator;
+
+    /**
+     * The legend item tool tip generator.
+     * 
+     * @since 1.0.14
+     */
+    private XYSeriesLabelGenerator legendItemToolTipGenerator;
+
+    /**
+     * The legend item URL generator.
+     * 
+     * @since 1.0.14
+     */
+    private XYSeriesLabelGenerator legendItemURLGenerator;
+
+
     /**
      * Creates a new instance of DefaultPolarItemRenderer
      */
@@ -122,7 +202,15 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         this.drawOutlineWhenFilled = true;
         this.fillComposite = AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER, 0.3f);
+        this.useFillPaint = false;     // use item paint for fills by default
+        this.legendLine = new Line2D.Double(-7.0, 0.0, 7.0, 0.0);
         this.shapesVisible = true;
+        this.connectFirstAndLastPoint = true;
+        
+        this.toolTipGeneratorList = new ObjectList();
+        this.urlGenerator = null;
+        this.legendItemToolTipGenerator = null;
+        this.legendItemURLGenerator = null;
     }
 
     /**
@@ -149,7 +237,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
     /**
      * Returns <code>true</code> if the renderer will draw an outline around
-     * a filled polygon, <code>false/<code> otherwise.
+     * a filled polygon, <code>false</code> otherwise.
      *
      * @return A boolean.
      *
@@ -202,7 +290,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns <code>true</tt> if a shape will be drawn for every item, or
+     * Returns <code>true</code> if a shape will be drawn for every item, or
      * <code>false</code> if not.
      *
      * @return A boolean.
@@ -224,6 +312,35 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      */
     public void setShapesVisible(boolean shapesVisible) {
         this.shapesVisible = shapesVisible;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns <code>true</code> if first and last point of a series will be
+     * connected, <code>false</code> otherwise.
+     * 
+     * @return The current status of the flag.
+     * 
+     * @since 1.0.14
+     */
+    public boolean getConnectFirstAndLastPoint()
+    {
+        return connectFirstAndLastPoint;
+    }
+
+    /**
+     * Set the flag that controls whether the first and last point of a series
+     * will be connected or not and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     * 
+     * @param connect the flag.
+     * 
+     * @since 1.0.14
+     */
+    public void setConnectFirstAndLastPoint(boolean connect)
+    {
+        this.connectFirstAndLastPoint = connect;
+        fireChangeEvent();
     }
 
     /**
@@ -268,6 +385,108 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
+     * Returns <code>true</code> if the renderer should use the fill paint
+     * setting to fill shapes, and <code>false</code> if it should just
+     * use the regular paint.
+     *
+     * @return A boolean.
+     *
+     * @see #setUseFillPaint(boolean)
+     * @since 1.0.14
+     */
+    public boolean getUseFillPaint() {
+        return this.useFillPaint;
+    }
+
+    /**
+     * Sets the flag that controls whether the fill paint is used to fill
+     * shapes, and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param flag  the flag.
+     *
+     * @see #getUseFillPaint()
+     * @since 1.0.14
+     */
+    public void setUseFillPaint(boolean flag) {
+        this.useFillPaint = flag;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the shape used to represent a line in the legend.
+     *
+     * @return The legend line (never <code>null</code>).
+     *
+     * @see #setLegendLine(Shape)
+     */
+    public Shape getLegendLine() {
+        return this.legendLine;
+    }
+
+    /**
+     * Sets the shape used as a line in each legend item and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param line  the line (<code>null</code> not permitted).
+     *
+     * @see #getLegendLine()
+     */
+    public void setLegendLine(Shape line) {
+        if (line == null) {
+            throw new IllegalArgumentException("Null 'line' argument.");
+        }
+        this.legendLine = line;
+        fireChangeEvent();
+    }
+
+    /**
+     * Adds an entity to the collection.
+     *
+     * @param entities  the entity collection being populated.
+     * @param area  the entity area (if <code>null</code> a default will be
+     *              used).
+     * @param dataset  the dataset.
+     * @param series  the series.
+     * @param item  the item.
+     * @param entityX  the entity's center x-coordinate in user space (only
+     *                 used if <code>area</code> is <code>null</code>).
+     * @param entityY  the entity's center y-coordinate in user space (only
+     *                 used if <code>area</code> is <code>null</code>).
+     */
+    // this method was copied from AbstractXYItemRenderer on 03-Oct-2011
+    protected void addEntity(EntityCollection entities, Shape area,
+                             XYDataset dataset, int series, int item,
+                             double entityX, double entityY) {
+        if (!getItemCreateEntity(series, item)) {
+            return;
+        }
+        Shape hotspot = area;
+        if (hotspot == null) {
+            double r = getDefaultEntityRadius();
+            double w = r * 2;
+            if (getPlot().getOrientation() == PlotOrientation.VERTICAL) {
+                hotspot = new Ellipse2D.Double(entityX - r, entityY - r, w, w);
+            }
+            else {
+                hotspot = new Ellipse2D.Double(entityY - r, entityX - r, w, w);
+            }
+        }
+        String tip = null;
+        XYToolTipGenerator generator = getToolTipGenerator(series, item);
+        if (generator != null) {
+            tip = generator.generateToolTip(dataset, series, item);
+        }
+        String url = null;
+        if (getURLGenerator() != null) {
+            url = getURLGenerator().generateURL(dataset, series, item);
+        }
+        XYItemEntity entity = new XYItemEntity(hotspot, dataset, series, item,
+                tip, url);
+        entities.add(entity);
+    }
+
+    /**
      * Plots the data for a given series.
      *
      * @param g2  the drawing surface.
@@ -281,15 +500,25 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
             PlotRenderingInfo info, PolarPlot plot, XYDataset dataset,
             int seriesIndex) {
 
-        Polygon poly = new Polygon();
+        
+        GeneralPath poly = null;
         ValueAxis axis = plot.getAxisForDataset(plot.indexOf(dataset));
         final int numPoints = dataset.getItemCount(seriesIndex);
         for (int i = 0; i < numPoints; i++) {
             double theta = dataset.getXValue(seriesIndex, i);
             double radius = dataset.getYValue(seriesIndex, i);
             Point p = plot.translateToJava2D(theta, radius, axis, dataArea);
-            poly.addPoint(p.x, p.y);
+            if (poly == null) {
+                poly = new GeneralPath();
+                poly.moveTo(p.x, p.y);
+            }
+            else
+                poly.lineTo(p.x, p.y);
         }
+
+        if (getConnectFirstAndLastPoint())
+            poly.closePath();
+
         g2.setPaint(lookupSeriesPaint(seriesIndex));
         g2.setStroke(lookupSeriesStroke(seriesIndex));
         if (isSeriesFilled(seriesIndex)) {
@@ -310,17 +539,45 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         
         // draw the item shapes
         if (this.shapesVisible) {
-            for (int i = 0; i < numPoints; i++) {
-                final int x = poly.xpoints[i];
-                final int y = poly.ypoints[i];
-                final Shape shape = ShapeUtilities.createTranslatedShape(
-                        getItemShape(seriesIndex, i), x,  y);
+            // setup for collecting optional entity info...
+            EntityCollection entities = null;
+            if (info != null) {
+                entities = info.getOwner().getEntityCollection();
+            }
 
-                g2.setPaint(lookupSeriesFillPaint(seriesIndex));
+            PathIterator pi = poly.getPathIterator(null);
+            int i = 0;
+            while (!pi.isDone()) {
+                final float[] coords = new float[6];
+                final int segType = pi.currentSegment(coords);
+                pi.next();
+                if (segType != PathIterator.SEG_LINETO &&
+                        segType != PathIterator.SEG_MOVETO)
+                    continue;
+                final int x = Math.round(coords[0]);
+                final int y = Math.round(coords[1]);
+                final Shape shape = ShapeUtilities.createTranslatedShape(
+                        getItemShape(seriesIndex, i++), x,  y);
+
+                Paint paint;
+                if (useFillPaint)
+                    paint = lookupSeriesFillPaint(seriesIndex);
+                else
+                    paint = lookupSeriesPaint(seriesIndex);
+                g2.setPaint(paint);
                 g2.fill(shape);
-                g2.setPaint(lookupSeriesOutlinePaint(seriesIndex));
-                g2.setStroke(lookupSeriesOutlineStroke(seriesIndex));
-                g2.draw(shape);
+                if (isSeriesFilled(seriesIndex) && drawOutlineWhenFilled) {
+                    g2.setPaint(lookupSeriesOutlinePaint(seriesIndex));
+                    g2.setStroke(lookupSeriesOutlineStroke(seriesIndex));
+                    g2.draw(shape);
+                }
+
+                // add an entity for the item, but only if it falls within the
+                // data area...
+                if (entities != null &&
+                        AbstractXYItemRenderer.isPointInRect(dataArea, x, y)) {
+                    addEntity(entities, shape, dataset, seriesIndex, i-1, x, y);
+                }
             }
         }
     }
@@ -388,7 +645,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         Iterator iterator = ticks.iterator();
         while (iterator.hasNext()) {
             NumberTick tick = (NumberTick) iterator.next();
-            Point p = plot.translateValueThetaRadiusToJava2D(90.0,
+            double angleDegrees = plot.isCounterClockwise() ? plot.getAngleOffset() : -plot.getAngleOffset();
+            Point p = plot.translateValueThetaRadiusToJava2D(angleDegrees,
                     tick.getNumber().doubleValue(), dataArea);
             int r = p.x - center.x;
             int upperLeftX = center.x - r;
@@ -414,18 +672,161 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
             return null;
         }
         XYDataset dataset = plot.getDataset(plot.getIndexOf(this));
-        if (dataset != null) {
-            String label = dataset.getSeriesKey(series).toString();
-            String description = label;
-            Shape shape = lookupSeriesShape(series);
-            Paint paint = lookupSeriesPaint(series);
-            Paint outlinePaint = lookupSeriesOutlinePaint(series);
-            Stroke outlineStroke = lookupSeriesOutlineStroke(series);
-            result = new LegendItem(label, description, null, null,
-                    shape, paint, outlineStroke, outlinePaint);
-            result.setDataset(dataset);
+        if (dataset == null) {
+            return null;
         }
+        
+        String toolTipText = null;
+        if (getLegendItemToolTipGenerator() != null) {
+            toolTipText = getLegendItemToolTipGenerator().generateLabel(
+                    dataset, series);
+        }
+        String urlText = null;
+        if (getLegendItemURLGenerator() != null) {
+            urlText = getLegendItemURLGenerator().generateLabel(dataset,
+                    series);
+        }
+
+        String label = dataset.getSeriesKey(series).toString();
+        String description = label;
+        Shape shape = lookupSeriesShape(series);
+        Paint paint;
+        if (useFillPaint)
+            paint = lookupSeriesFillPaint(series);
+        else
+            paint = lookupSeriesPaint(series);
+        Stroke stroke = lookupSeriesStroke(series);
+        Paint outlinePaint = lookupSeriesOutlinePaint(series);
+        Stroke outlineStroke = lookupSeriesOutlineStroke(series);
+        boolean shapeOutlined = isSeriesFilled(series)
+                && this.drawOutlineWhenFilled;
+        result = new LegendItem(label, description, toolTipText, urlText,
+                getShapesVisible(), shape, /* shapeFilled=*/ true, paint,
+                shapeOutlined, outlinePaint, outlineStroke, 
+                /* lineVisible= */ true, this.legendLine, stroke, paint);
+        result.setToolTipText(toolTipText);
+        result.setURLText(urlText);
+        result.setDataset(dataset);
+
         return result;
+    }
+
+    /**
+     * @since 1.0.14
+     */
+    public XYToolTipGenerator getToolTipGenerator(int series, int item)
+    {
+        XYToolTipGenerator generator
+            = (XYToolTipGenerator) this.toolTipGeneratorList.get(series);
+        if (generator == null) {
+            generator = this.baseToolTipGenerator;
+        }
+        return generator;
+    }
+
+    /**
+     * @since 1.0.14
+     */
+    public XYToolTipGenerator getSeriesToolTipGenerator(int series)
+    {
+        return (XYToolTipGenerator) this.toolTipGeneratorList.get(series);
+    }
+
+    /**
+     * @since 1.0.14
+     */
+    public void setSeriesToolTipGenerator(int series,
+            XYToolTipGenerator generator)
+    {
+        this.toolTipGeneratorList.set(series, generator);
+        fireChangeEvent();
+    }
+
+    /**
+     * @since 1.0.14
+     */
+    public XYToolTipGenerator getBaseToolTipGenerator()
+    {
+        return this.baseToolTipGenerator;
+    }
+
+    /**
+     * @since 1.0.14
+     */
+    public void setBaseToolTipGenerator(XYToolTipGenerator generator)
+    {
+        this.baseToolTipGenerator = generator;
+        fireChangeEvent();
+    }
+
+    /**
+     * @since 1.0.14
+     */
+    public XYURLGenerator getURLGenerator()
+    {
+        return this.urlGenerator;
+    }
+
+    /**
+     * @since 1.0.14
+     */
+    public void setURLGenerator(XYURLGenerator urlGenerator)
+    {
+        this.urlGenerator = urlGenerator;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the legend item tool tip generator.
+     *
+     * @return The tool tip generator (possibly <code>null</code>).
+     *
+     * @see #setLegendItemToolTipGenerator(XYSeriesLabelGenerator)
+     * @since 1.0.14
+     */
+    public XYSeriesLabelGenerator getLegendItemToolTipGenerator() {
+        return this.legendItemToolTipGenerator;
+    }
+
+    /**
+     * Sets the legend item tool tip generator and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param generator  the generator (<code>null</code> permitted).
+     *
+     * @see #getLegendItemToolTipGenerator()
+     * @since 1.0.14
+     */
+    public void setLegendItemToolTipGenerator(
+            XYSeriesLabelGenerator generator) {
+        this.legendItemToolTipGenerator = generator;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the legend item URL generator.
+     *
+     * @return The URL generator (possibly <code>null</code>).
+     *
+     * @see #setLegendItemURLGenerator(XYSeriesLabelGenerator)
+     * @since 1.0.14
+     */
+    public XYSeriesLabelGenerator getLegendItemURLGenerator() {
+        return this.legendItemURLGenerator;
+    }
+
+    /**
+     * Sets the legend item URL generator and sends a
+     * {@link RendererChangeEvent} to all registered listeners.
+     *
+     * @param generator  the generator (<code>null</code> permitted).
+     *
+     * @see #getLegendItemURLGenerator()
+     * @since 1.0.14
+     */
+    public void setLegendItemURLGenerator(XYSeriesLabelGenerator generator) {
+        this.legendItemURLGenerator = generator;
+        fireChangeEvent();
     }
 
     /**
@@ -450,10 +851,37 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         if (this.drawOutlineWhenFilled != that.drawOutlineWhenFilled) {
             return false;
         }
-        if (!this.fillComposite.equals(that.fillComposite)) {
+        if (!ObjectUtilities.equal(this.fillComposite, that.fillComposite)) {
+            return false;
+        }
+        if (this.useFillPaint != that.useFillPaint) {
+            return false;
+        }
+        if (!ShapeUtilities.equal(this.legendLine, that.legendLine)) {
             return false;
         }
         if (this.shapesVisible != that.shapesVisible) {
+            return false;
+        }
+        if (this.connectFirstAndLastPoint != that.connectFirstAndLastPoint) {
+            return false;
+        }
+        if (!this.toolTipGeneratorList.equals(that.toolTipGeneratorList)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.baseToolTipGenerator,
+                that.baseToolTipGenerator)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.urlGenerator, that.urlGenerator)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.legendItemToolTipGenerator,
+                that.legendItemToolTipGenerator)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.legendItemURLGenerator,
+                that.legendItemURLGenerator)) {
             return false;
         }
         return super.equals(obj);
@@ -469,8 +897,54 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     public Object clone() throws CloneNotSupportedException {
         DefaultPolarItemRenderer clone
                 = (DefaultPolarItemRenderer) super.clone();
+        if (this.legendLine != null) {
+            clone.legendLine = ShapeUtilities.clone(this.legendLine);
+        }
         clone.seriesFilled = (BooleanList) this.seriesFilled.clone();
+        clone.toolTipGeneratorList
+                = (ObjectList) this.toolTipGeneratorList.clone();
+        if (clone.baseToolTipGenerator instanceof PublicCloneable) {
+            clone.baseToolTipGenerator = (XYToolTipGenerator)
+                    ObjectUtilities.clone(this.baseToolTipGenerator);
+        }
+        if (clone.urlGenerator instanceof PublicCloneable) {
+            clone.urlGenerator = (XYURLGenerator)
+                    ObjectUtilities.clone(this.urlGenerator);
+        }
+        if (clone.legendItemToolTipGenerator instanceof PublicCloneable) {
+            clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
+                    ObjectUtilities.clone(this.legendItemToolTipGenerator);
+        }
+        if (clone.legendItemURLGenerator instanceof PublicCloneable) {
+            clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
+                    ObjectUtilities.clone(this.legendItemURLGenerator);
+        }
         return clone;
     }
 
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        this.legendLine = SerialUtilities.readShape(stream);
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+        SerialUtilities.writeShape(this.legendLine, stream);
+    }
 }
