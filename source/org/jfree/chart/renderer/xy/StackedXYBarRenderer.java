@@ -50,7 +50,7 @@
  * 24-Jun-2008 : Added new barPainter mechanism (DG);
  * 23-Sep-2008 : Check shadow visibility before drawing shadow (DG);
  * 28-May-2009 : Fixed bar positioning with inverted domain axis (DG);
- *
+ * 07-Act-2011 : Fix for Bug #3035289: Patch #3035325 (MH);
  */
 
 package org.jfree.chart.renderer.xy;
@@ -246,6 +246,10 @@ public class StackedXYBarRenderer extends XYBarRenderer {
                          CrosshairState crosshairState,
                          int pass) {
 
+        if (!getItemVisible(series, item)) {
+            return;
+        }
+
         if (!(dataset instanceof IntervalXYDataset
                 && dataset instanceof TableXYDataset)) {
             String message = "dataset (type " + dataset.getClass().getName()
@@ -290,7 +294,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
 
         for (int i = 0; i < series; i++) {
             double v = dataset.getYValue(i, item);
-            if (!Double.isNaN(v)) {
+            if (!Double.isNaN(v) && isSeriesVisible(i)) {
                 if (this.renderAsPercentages) {
                     v = v / total;
                 }
