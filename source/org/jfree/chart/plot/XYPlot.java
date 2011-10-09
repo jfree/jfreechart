@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * XYPlot.java
  * -----------
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Craig MacFarlane;
@@ -282,7 +282,6 @@ import org.jfree.chart.renderer.RendererUtilities;
 import org.jfree.chart.renderer.xy.AbstractXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRendererState;
-import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
@@ -1787,7 +1786,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
 
     /**
      * Returns <code>true</code> if the domain gridlines are visible, and
-     * <code>false<code> otherwise.
+     * <code>false</code> otherwise.
      *
      * @return <code>true</code> or <code>false</code>.
      *
@@ -1817,7 +1816,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
 
     /**
      * Returns <code>true</code> if the domain minor gridlines are visible, and
-     * <code>false<code> otherwise.
+     * <code>false</code> otherwise.
      *
      * @return <code>true</code> or <code>false</code>.
      *
@@ -1984,7 +1983,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
 
     /**
      * Returns <code>true</code> if the range axis grid is visible, and
-     * <code>false<code> otherwise.
+     * <code>false</code> otherwise.
      *
      * @return A boolean.
      *
@@ -2070,7 +2069,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
 
     /**
      * Returns <code>true</code> if the range axis minor grid is visible, and
-     * <code>false<code> otherwise.
+     * <code>false</code> otherwise.
      *
      * @return A boolean.
      *
