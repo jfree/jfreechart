@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * FastScatterPlot.java
  * --------------------
- * (C) Copyright 2002-2009, by Object Refinery Limited.
+ * (C) Copyright 2002-2011, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Arnaud Lelievre;
@@ -352,7 +352,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Returns <code>true</code> if the domain gridlines are visible, and
-     * <code>false<code> otherwise.
+     * <code>false</code> otherwise.
      *
      * @return <code>true</code> or <code>false</code>.
      *
@@ -437,7 +437,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Returns <code>true</code> if the range axis grid is visible, and
-     * <code>false<code> otherwise.
+     * <code>false</code> otherwise.
      *
      * @return <code>true</code> or <code>false</code>.
      *
