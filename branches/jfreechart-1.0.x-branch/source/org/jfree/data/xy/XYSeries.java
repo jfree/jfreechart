@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * XYSeries.java
  * -------------
- * (C) Copyright 2001-2009, Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2011, Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
@@ -700,14 +700,10 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         if (Double.isNaN(a)) {
             return b;
         }
-        else {
-            if (Double.isNaN(b)) {
-                return a;
-            }
-            else {
-                return Math.min(a, b);
-            }
+        if (Double.isNaN(b)) {
+            return a;
         }
+        return Math.min(a, b);
     }
 
     /**
@@ -723,14 +719,10 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         if (Double.isNaN(a)) {
             return b;
         }
-        else {
-            if (Double.isNaN(b)) {
-                return a;
-            }
-            else {
-                return Math.max(a, b);
-            }
+        if (Double.isNaN(b)) {
+            return a;
         }
+        return Math.max(a, b);
     }
 
     /**
@@ -760,9 +752,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         if (index < 0) {
             throw new SeriesException("No observation for x = " + x);
         }
-        else {
-            updateByIndex(index, y);
-        }
+        updateByIndex(index, y);
     }
 
     /**
@@ -799,8 +789,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Adds or updates an item in the series and sends a
      * {@link SeriesChangeEvent} to all registered listeners.
      *
-     * @param x  the x-value (<code>null</code> not permitted).
-     * @param y  the y-value (<code>null</code> permitted).
+     * @param item  the data item (<code>null</code> not permitted).
      *
      * @return A copy of the overwritten data item, or <code>null</code> if no
      *         item was overwritten.
