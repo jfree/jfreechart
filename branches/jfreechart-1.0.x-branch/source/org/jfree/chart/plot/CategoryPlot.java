@@ -2089,7 +2089,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Returns <code>true</code> if the range axis minor grid is visible, and
-     * <code>false<code> otherwise.
+     * <code>false</code> otherwise.
      *
      * @return A boolean.
      *
