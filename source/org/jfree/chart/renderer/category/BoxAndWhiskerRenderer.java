@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * BoxAndWhiskerRenderer.java
  * --------------------------
- * (C) Copyright 2003-2009, by David Browning and Contributors.
+ * (C) Copyright 2003-2011, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for the Australian Institute of Marine
  *                   Science);
@@ -381,7 +381,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @since 1.0.14
      */
     public boolean getUseOutlinePaintForWhiskers() {
-        return useOutlinePaintForWhiskers;
+        return this.useOutlinePaintForWhiskers;
     }
 
     /**
@@ -389,7 +389,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * be drawn using the series outline paint, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @@param flag  the new flag value.
+     * @param flag  the new flag value.
      *
      * @since 1.0.14
      */
