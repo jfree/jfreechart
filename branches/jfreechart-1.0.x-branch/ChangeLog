@@ -1,5 +1,10 @@
 2011-10-10  Martin Hoeller  <martin.hoeller@xss.co.at>
 
+    Bug 3165708:
+    * org/jfree/chart/PolarChartPanel.java: localization fix
+
+2011-10-10  Martin Hoeller  <martin.hoeller@xss.co.at>
+
     Bug 3353913:
     * org/jfree/chart/plot/CompassPlot.java: localization fix
     * org/jfree/chart/plot/PiePlot3D.java: localization fix
