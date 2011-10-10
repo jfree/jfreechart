@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * PiePlot.java
  * ------------
- * (C) Copyright 2000-2009, by Andrzej Porebski and Contributors.
+ * (C) Copyright 2000-2011, by Andrzej Porebski and Contributors.
  *
  * Original Author:  Andrzej Porebski;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -248,7 +248,7 @@ import org.jfree.util.UnitType;
  * in a clockwise direction, but these settings can be changed;</li>
  * <li>negative values in the dataset are ignored;</li>
  * <li>there are utility methods for creating a {@link PieDataset} from a
- * {@link CategoryDataset};</li>
+ * {@link org.jfree.data.category.CategoryDataset};</li>
  * </ol>
  *
  * @see Plot
@@ -2354,10 +2354,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the shadow generator for the plot and sends a
-     * {@link PlotChangeEvent} to all registered listeners.  Note that this is
-     * a bitmap drop-shadow generation facility and is separate from the
-     * vector based show option that is controlled via the
-     * {@link setShadowPaint()} method.
+     * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param generator  the generator (<code>null</code> permitted).
      *
@@ -2370,7 +2367,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Handles a mouse wheel rotation (this method is intended for use by the
-     * {@link MouseWheelHandler} class).
+     * {@link org.jfree.chart.MouseWheelHandler} class).
      *
      * @param rotateClicks  the number of rotate clicks on the the mouse wheel.
      *
@@ -3092,19 +3089,17 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (explodePercent == 0.0) {
             return unexploded;
         }
-        else {
-            Arc2D arc1 = new Arc2D.Double(unexploded, angle, extent / 2,
-                    Arc2D.OPEN);
-            Point2D point1 = arc1.getEndPoint();
-            Arc2D.Double arc2 = new Arc2D.Double(exploded, angle, extent / 2,
-                    Arc2D.OPEN);
-            Point2D point2 = arc2.getEndPoint();
-            double deltaX = (point1.getX() - point2.getX()) * explodePercent;
-            double deltaY = (point1.getY() - point2.getY()) * explodePercent;
-            return new Rectangle2D.Double(unexploded.getX() - deltaX,
-                    unexploded.getY() - deltaY, unexploded.getWidth(),
-                    unexploded.getHeight());
-        }
+        Arc2D arc1 = new Arc2D.Double(unexploded, angle, extent / 2, 
+                Arc2D.OPEN);
+        Point2D point1 = arc1.getEndPoint();
+        Arc2D.Double arc2 = new Arc2D.Double(exploded, angle, extent / 2,
+                Arc2D.OPEN);
+        Point2D point2 = arc2.getEndPoint();
+        double deltaX = (point1.getX() - point2.getX()) * explodePercent;
+        double deltaY = (point1.getY() - point2.getY()) * explodePercent;
+        return new Rectangle2D.Double(unexploded.getX() - deltaX,
+                unexploded.getY() - deltaY, unexploded.getWidth(),
+                unexploded.getHeight());
     }
 
     /**
