@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * XYTitleAnnotation.java
  * ----------------------
- * (C) Copyright 2007-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrew Mickish;
@@ -57,6 +57,7 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.block.BlockParams;
 import org.jfree.chart.block.EntityBlockResult;
 import org.jfree.chart.block.RectangleConstraint;
+import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
