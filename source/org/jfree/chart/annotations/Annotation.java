@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * Annotation.java
  * ---------------
- * (C) Copyright 2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009, 2011 by Object Refinery Limited and Contributors.
  *
  * Original Author:  Peter Kolb (see patch 2809117);
  * Contributor(s):   ;
@@ -40,6 +40,7 @@
 
 package org.jfree.chart.annotations;
 
+import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.event.AnnotationChangeListener;
 
 /**
