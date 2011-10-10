@@ -95,7 +95,6 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.PolarItemRenderer;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.data.general.Dataset;
@@ -736,9 +735,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @return The offset for the angles.
      * @since 1.0.14
      */
-    public double getAngleOffset()
-    {
-        return angleOffset;
+    public double getAngleOffset() {
+        return this.angleOffset;
     }
 
     /**
@@ -751,8 +749,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @param offset The offset
      * @since 1.0.14
      */
-    public void setAngleOffset(double offset)
-    {
+    public void setAngleOffset(double offset) {
         this.angleOffset = offset;
         fireChangeEvent();
     }
