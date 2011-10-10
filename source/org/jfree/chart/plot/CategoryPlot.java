@@ -3399,10 +3399,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Sets the shadow generator for the plot and sends a
-     * {@link PlotChangeEvent} to all registered listeners.  Note that this is
-     * a btmap drop-shadow generation facility and is separate from the
-     * vector based show option that is controlled via the
-     * {@link setShadowPaint()} method.
+     * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param generator  the generator (<code>null</code> permitted).
      *

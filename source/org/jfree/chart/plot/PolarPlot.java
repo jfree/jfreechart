@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PolarPlot.java
  * --------------
- * (C) Copyright 2004-2009, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2011, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -86,7 +86,6 @@ import java.util.TreeMap;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.Axis;
-import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.NumberTick;
 import org.jfree.chart.axis.NumberTickUnit;
@@ -491,9 +490,6 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @param location  the location (<code>null</code> not permitted).
      * @param notify  notify listeners?
      *
-     * @see #getRangeAxisLocation(int)
-     * @see #setDomainAxisLocation(int, AxisLocation, boolean)
-     *
      * @since 1.0.14
      */
     public void setAxisLocation(int index, PolarAxisLocation location,
@@ -638,7 +634,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      *
      * @return The renderer (possibly <code>null</code>).
      *
-     * @see #setRenderer(int, XYItemRenderer)
+     * @see #setRenderer(int, PolarItemRenderer)
      *
      * @since 1.0.14
      */
@@ -768,9 +764,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      *         <code>false</code> otherwise.
      * @since 1.0.14
      */
-    public boolean isCounterClockwise()
-    {
-        return counterClockwise;
+    public boolean isCounterClockwise() {
+        return this.counterClockwise;
     }
 
     /**
@@ -1444,7 +1439,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /**
      * Draws the axis with the specified index.
      *
-     * @param axisIndex  the axis index.
+     * @param axis  the axis.
+     * @param location  the axis location.
      * @param g2  the graphics target.
      * @param plotArea  the plot area.
      *
