@@ -1,10 +1,10 @@
 ********************************
-*  JFREECHART: Version 1.0.13  *
+*  JFREECHART: Version 1.0.14  *
 ********************************
 
-20 April 2009
+x November 2011
 
-(C)opyright 2000-2009, by Object Refinery Limited and Contributors.
+(C)opyright 2000-2011, by Object Refinery Limited and Contributors.
 
 -----------------
 1.  INTRODUCTION
