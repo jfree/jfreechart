@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * DefaultPolarItemRenderer.java
  * -----------------------------
- * (C) Copyright 2004-2009, by Solution Engineering, Inc. and
+ * (C) Copyright 2004-2011, by Solution Engineering, Inc. and
  *     Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
@@ -323,9 +323,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.14
      */
-    public boolean getConnectFirstAndLastPoint()
-    {
-        return connectFirstAndLastPoint;
+    public boolean getConnectFirstAndLastPoint() {
+        return this.connectFirstAndLastPoint;
     }
 
     /**
@@ -566,7 +565,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                     paint = lookupSeriesPaint(seriesIndex);
                 g2.setPaint(paint);
                 g2.fill(shape);
-                if (isSeriesFilled(seriesIndex) && drawOutlineWhenFilled) {
+                if (isSeriesFilled(seriesIndex) && this.drawOutlineWhenFilled) {
                     g2.setPaint(lookupSeriesOutlinePaint(seriesIndex));
                     g2.setStroke(lookupSeriesOutlineStroke(seriesIndex));
                     g2.draw(shape);
@@ -691,10 +690,12 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         String description = label;
         Shape shape = lookupSeriesShape(series);
         Paint paint;
-        if (useFillPaint)
+        if (this.useFillPaint) {
             paint = lookupSeriesFillPaint(series);
-        else
+        }
+        else {
             paint = lookupSeriesPaint(series);
+        }
         Stroke stroke = lookupSeriesStroke(series);
         Paint outlinePaint = lookupSeriesOutlinePaint(series);
         Stroke outlineStroke = lookupSeriesOutlineStroke(series);
