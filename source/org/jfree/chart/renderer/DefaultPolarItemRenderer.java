@@ -310,8 +310,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      *
      * @since 1.0.14
      */
-    public void setShapesVisible(boolean shapesVisible) {
-        this.shapesVisible = shapesVisible;
+    public void setShapesVisible(boolean visible) {
+        this.shapesVisible = visible;
         fireChangeEvent();
     }
 
