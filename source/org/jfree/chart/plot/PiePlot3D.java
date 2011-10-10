@@ -36,6 +36,7 @@
  *                   Christian W. Zuckschwerdt;
  *                   Arnaud Lelievre;
  *                   Dave Crane;
+ *                   Martin Hoeller;
  *
  * Changes
  * -------
@@ -80,6 +81,7 @@
  *               labels (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  * 10-Jul-2009 : Added drop shaow support (DG);
+ * 10-Oct-2011 : localization fix: bug #3353913 (MH);
  * 
  */
 
@@ -356,7 +358,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
 
         // if too any elements
         if (dataset.getKeys().size() > plotArea.getWidth()) {
-            String text = "Too many elements";
+            String text = localizationResources.getString("Too_many_elements");
             Font sfont = new Font("dialog", Font.BOLD, 10);
             g2.setFont(sfont);
             FontMetrics fm = g2.getFontMetrics(sfont);

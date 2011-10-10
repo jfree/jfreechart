@@ -1,55 +1,83 @@
+2011-10-10  Martin Hoeller  <martin.hoeller@xss.co.at>
+
+    Bug 3353913:
+    * org/jfree/chart/plot/CompassPlot.java: localization fix
+    * org/jfree/chart/plot/PiePlot3D.java: localization fix
+    * org/jfree/chart/plot/LocalizationBundle_de.properties: addition
+    * org/jfree/chart/plot/LocalizationBundle_ru.properties: addition
+    * org/jfree/chart/plot/LocalizationBundle_nl.properties: addition
+    * org/jfree/chart/plot/LocalizationBundle_pl.properties: addition
+    * org/jfree/chart/plot/LocalizationBundle_zh_CN.properties: addition
+    * org/jfree/chart/plot/LocalizationBundle_es.properties: addition
+    * org/jfree/chart/plot/LocalizationBundle_pt_PT.properties: addition
+    * org/jfree/chart/plot/LocalizationBundle_fr.properties: addition
+    * org/jfree/chart/plot/LocalizationBundle.properties: addition
+    * org/jfree/chart/ChartPanel.java: localization fix
+    * org/jfree/chart/LocalizationBundle_de.properties: addition
+    * org/jfree/chart/LocalizationBundle_zh_TW.properties: addition
+    * org/jfree/chart/LocalizationBundle_zh_CN.properties: addition
+    * org/jfree/chart/LocalizationBundle_pt_BR.properties: addition
+    * org/jfree/chart/LocalizationBundle_es.properties: addition
+    * org/jfree/chart/LocalizationBundle_ru.properties: addition
+    * org/jfree/chart/LocalizationBundle_pt_PT.properties: addition
+    * org/jfree/chart/LocalizationBundle_fr.properties: addition
+    * org/jfree/chart/LocalizationBundle_nl.properties: addition
+    * org/jfree/chart/LocalizationBundle_pl.properties: addition
+    * org/jfree/chart/LocalizationBundle_it.properties: addition
+    * org/jfree/chart/LocalizationBundle.properties: addition
+
 2011-10-07  Martin Hoeller  <martin.hoeller@xss.co.at>
 
     Bug 3035289/Patch 3035325:
     * source/org/jfree/chart/renderer/xy/StackedXYBarRenderer.java
-      (drawItem): check if series and item are visible
+    (drawItem): check if series and item are visible
 
 2011-10-07  Martin Hoeller  <martin.hoeller@xss.co.at>
 
     * source/org/jfree/chart/renderer/PolarItemRenderer.java
-      (useFillPaint): New field,
-      (legendLine): Likewise;
-      (connectFirstAndLastPoint): New method,
-      (toolTipGeneratorList): Likewise,
-      (baseToolTipGenerator): Likewise,
-      (urlGenerator): Likewise,
-      (legendItemToolTipGenerator): Likewise,
-      (legendItemURLGenerator): Likewise,
-      (getConnectFirstAndLastPoint): Likewise,
-      (setConnectFirstAndLastPoint): Likewise,
-      (getUseFillPaint): Likewise,
-      (setUseFillPaint): Likewise,
-      (getLegendLine): Likewise,
-      (setLegendLine): Likewise,
-      (getToolTipGenerator): Likewise,
-      (getSeriesToolTipGenerator): Likewise,
-      (setSeriesToolTipGenerator): Likewise,
-      (getBaseToolTipGenerator): Likewise,
-      (setBaseToolTipGenerator): Likewise,
-      (getURLGenerator): Likewise,
-      (setURLGenerator): Likewise,
-      (getLegendItemToolTipGenerator): Likewise,
-      (setLegendItemToolTipGenerator): Likewise,
-      (getLegendItemURLGenerator): Likewise,
-      (setLegendItemURLGenerator): Likewise.
+    (useFillPaint): New field,
+    (legendLine): Likewise;
+    (connectFirstAndLastPoint): New method,
+    (toolTipGeneratorList): Likewise,
+    (baseToolTipGenerator): Likewise,
+    (urlGenerator): Likewise,
+    (legendItemToolTipGenerator): Likewise,
+    (legendItemURLGenerator): Likewise,
+    (getConnectFirstAndLastPoint): Likewise,
+    (setConnectFirstAndLastPoint): Likewise,
+    (getUseFillPaint): Likewise,
+    (setUseFillPaint): Likewise,
+    (getLegendLine): Likewise,
+    (setLegendLine): Likewise,
+    (getToolTipGenerator): Likewise,
+    (getSeriesToolTipGenerator): Likewise,
+    (setSeriesToolTipGenerator): Likewise,
+    (getBaseToolTipGenerator): Likewise,
+    (setBaseToolTipGenerator): Likewise,
+    (getURLGenerator): Likewise,
+    (setURLGenerator): Likewise,
+    (getLegendItemToolTipGenerator): Likewise,
+    (setLegendItemToolTipGenerator): Likewise,
+    (getLegendItemURLGenerator): Likewise,
+    (setLegendItemURLGenerator): Likewise.
     * source/org/jfree/chart/renderer/DefaultPolarItemRenderer.java
-      (getToolTipGenerator): New method,
-      (getSeriesToolTipGenerator): Likewise,
-      (setSeriesToolTipGenerator): Likewise,
-      (getBaseToolTipGenerator): Likewise,
-      (setBaseToolTipGenerator): Likewise,
-      (getURLGenerator): Likewise,
-      (setURLGenerator): Likewise.
+    (getToolTipGenerator): New method,
+    (getSeriesToolTipGenerator): Likewise,
+    (setSeriesToolTipGenerator): Likewise,
+    (getBaseToolTipGenerator): Likewise,
+    (setBaseToolTipGenerator): Likewise,
+    (getURLGenerator): Likewise,
+    (setURLGenerator): Likewise.
     * source/org/jfree/chart/plot/PolarPlot.java
-      (angleOffset): New field,
-      (counterClockwise): Likewise;
-      (getAxisCount): New method,
-      (getDatasetCount): Likewise,
-      (getAngleOffset): Likewise,
-      (setAngleOffset): Likewise,
-      (isCounterClockwise): Likewise,
-      (setCounterClockwise): Likewise,
-      (getAxisIndex): Likewise,
+    (angleOffset): New field,
+    (counterClockwise): Likewise;
+    (getAxisCount): New method,
+    (getDatasetCount): Likewise,
+    (getAngleOffset): Likewise,
+    (setAngleOffset): Likewise,
+    (isCounterClockwise): Likewise,
+    (setCounterClockwise): Likewise,
+    (getAxisIndex): Likewise,
 
 2011-10-06  David Gilbert  <david.gilbert@object-refinery.com>
 
