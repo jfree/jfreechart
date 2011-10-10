@@ -43,6 +43,7 @@
  *                   Sergei Ivanov;
  *                   Ulrich Voigt - patch 2686040;
  *                   Alessandro Borges - patch 1460845;
+ *                   Martin Hoeller;
  *
  * Changes (from 28-Jun-2001)
  * --------------------------
@@ -163,7 +164,7 @@
  * 01-Jun-2009 : Check for null chart in mousePressed() method (DG);
  * 08-Jun-2009 : Fixed bug in setMouseWheelEnabled() (DG);
  * 06-Jul-2009 : Clear off-screen buffer to fully transparent (DG);
- * 
+ * 10-Oct-2011 : localization fix: bug #3353913 (MH);
  */
 
 package org.jfree.chart;
@@ -2876,7 +2877,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     protected JPopupMenu createPopupMenu(boolean properties,
             boolean copy, boolean save, boolean print, boolean zoom) {
 
-        JPopupMenu result = new JPopupMenu("Chart:");
+        JPopupMenu result = new JPopupMenu(localizationResources.getString("Chart") + ":");
         boolean separator = false;
 
         if (properties) {

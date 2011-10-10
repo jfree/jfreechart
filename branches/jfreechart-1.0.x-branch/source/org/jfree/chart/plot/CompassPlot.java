@@ -33,6 +33,7 @@
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Arnaud Lelievre;
+ *                   Martin Hoeller;
  *
  * Changes:
  * --------
@@ -59,6 +60,7 @@
  * 20-Mar-2007 : Fixed serialization (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 10-Oct-2011 : localization fix: bug #3353913 (MH);
  *
  */
 
@@ -665,10 +667,10 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
         innerRadius = radius - 42;
         Font f = getCompassFont(radius);
         g2.setFont(f);
-        g2.drawString("N", midX - 5, midY - innerRadius + f.getSize());
-        g2.drawString("S", midX - 5, midY + innerRadius - 5);
-        g2.drawString("W", midX - innerRadius + 5, midY + 5);
-        g2.drawString("E", midX + innerRadius - f.getSize(), midY + 5);
+        g2.drawString(localizationResources.getString("N"), midX - 5, midY - innerRadius + f.getSize());
+        g2.drawString(localizationResources.getString("S"), midX - 5, midY + innerRadius - 5);
+        g2.drawString(localizationResources.getString("W"), midX - innerRadius + 5, midY + 5);
+        g2.drawString(localizationResources.getString("E"), midX + innerRadius - f.getSize(), midY + 5);
 
         // plot the data (unless the dataset is null)...
         y1 = radius / 2;
