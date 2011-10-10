@@ -1,3 +1,9 @@
+2011-10-11  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug 3237879:
+    * org/jfree/chart/plot/RingPlot.java
+    (drawItem): Check sectionOutlineVisible flag.
+
 2011-10-10  Martin Hoeller  <martin.hoeller@xss.co.at>
 
     Bug 3165708:
