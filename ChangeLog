@@ -1,5 +1,10 @@
 2011-10-11  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * org/jfree/data/time/TimeSeries.java
+    (update(RegularTimePeriod, double)): new method.
+
+2011-10-11  David Gilbert  <david.gilbert@object-refinery.com>
+
     Patch 3421088:
     * org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
     (drawVerticalItem): bugfix for misaligned whiskers.
