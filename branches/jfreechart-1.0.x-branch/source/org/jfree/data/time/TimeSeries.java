@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * TimeSeries.java
  * ---------------
- * (C) Copyright 2001-2009, by Object Refinery Limited.
+ * (C) Copyright 2001-2011, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bryan Scott;
@@ -402,9 +402,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (index >= 0) {
             return getDataItem(index);
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -442,9 +440,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (index >= 0) {
             return (TimeSeriesDataItem) this.data.get(index);
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -543,9 +539,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (index >= 0) {
             return getValue(index);
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -687,6 +681,19 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         // defer argument checking...
         TimeSeriesDataItem item = new TimeSeriesDataItem(period, value);
         add(item, notify);
+    }
+
+    /**
+     * Updates (changes) the value for a time period.  Throws a
+     * {@link SeriesException} if the period does not exist.
+     *
+     * @param period  the period (<code>null</code> not permitted).
+     * @param value  the value.
+     * 
+     * @since 1.0.14
+     */
+    public void update(RegularTimePeriod period, double value) {
+      update(period, new Double(value));
     }
 
     /**
@@ -1116,10 +1123,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             copy.data = new java.util.ArrayList();
             return copy;
         }
-        else {
-            return createCopy(startIndex, endIndex);
-        }
-
+        return createCopy(startIndex, endIndex);
     }
 
     /**
@@ -1262,14 +1266,10 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (Double.isNaN(a)) {
             return b;
         }
-        else {
-            if (Double.isNaN(b)) {
-                return a;
-            }
-            else {
-                return Math.min(a, b);
-            }
+        if (Double.isNaN(b)) {
+            return a;
         }
+        return Math.min(a, b);
     }
 
     /**
@@ -1285,13 +1285,11 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (Double.isNaN(a)) {
             return b;
         }
+        if (Double.isNaN(b)) {
+            return a;
+        }
         else {
-            if (Double.isNaN(b)) {
-                return a;
-            }
-            else {
-                return Math.max(a, b);
-            }
+            return Math.max(a, b);
         }
     }
 
