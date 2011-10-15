@@ -1,3 +1,9 @@
+2011-10-15  David Gilbert <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/renderer/xy/XYLineAndShapeRenderer.java
+    (getLegendItem):  Added early returns to reduce indentation, updated
+    Javadoc.
+
 2011-10-13  Martin Hoeller <martin.hoeller@xss.co.at>
 
     * pom.xml added
