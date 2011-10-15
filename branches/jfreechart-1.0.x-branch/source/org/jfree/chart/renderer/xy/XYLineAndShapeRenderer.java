@@ -1217,65 +1217,62 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @param datasetIndex  the dataset index (zero-based).
      * @param series  the series index (zero-based).
      *
-     * @return A legend item for the series.
+     * @return A legend item for the series (possibly <code>null</code).
      */
     public LegendItem getLegendItem(int datasetIndex, int series) {
-
         XYPlot plot = getPlot();
         if (plot == null) {
             return null;
         }
 
-        LegendItem result = null;
         XYDataset dataset = plot.getDataset(datasetIndex);
-        if (dataset != null) {
-            if (getItemVisible(series, 0)) {
-                String label = getLegendItemLabelGenerator().generateLabel(
-                        dataset, series);
-                String description = label;
-                String toolTipText = null;
-                if (getLegendItemToolTipGenerator() != null) {
-                    toolTipText = getLegendItemToolTipGenerator().generateLabel(
-                            dataset, series);
-                }
-                String urlText = null;
-                if (getLegendItemURLGenerator() != null) {
-                    urlText = getLegendItemURLGenerator().generateLabel(
-                            dataset, series);
-                }
-                boolean shapeIsVisible = getItemShapeVisible(series, 0);
-                Shape shape = lookupLegendShape(series);
-                boolean shapeIsFilled = getItemShapeFilled(series, 0);
-                Paint fillPaint = (this.useFillPaint
-                    ? lookupSeriesFillPaint(series)
-                    : lookupSeriesPaint(series));
-                boolean shapeOutlineVisible = this.drawOutlines;
-                Paint outlinePaint = (this.useOutlinePaint
-                    ? lookupSeriesOutlinePaint(series)
-                    : lookupSeriesPaint(series));
-                Stroke outlineStroke = lookupSeriesOutlineStroke(series);
-                boolean lineVisible = getItemLineVisible(series, 0);
-                Stroke lineStroke = lookupSeriesStroke(series);
-                Paint linePaint = lookupSeriesPaint(series);
-                result = new LegendItem(label, description, toolTipText,
-                        urlText, shapeIsVisible, shape, shapeIsFilled,
-                        fillPaint, shapeOutlineVisible, outlinePaint,
-                        outlineStroke, lineVisible, this.legendLine,
-                        lineStroke, linePaint);
-                result.setLabelFont(lookupLegendTextFont(series));
-                Paint labelPaint = lookupLegendTextPaint(series);
-                if (labelPaint != null) {
-                    result.setLabelPaint(labelPaint);
-                }
-                result.setSeriesKey(dataset.getSeriesKey(series));
-                result.setSeriesIndex(series);
-                result.setDataset(dataset);
-                result.setDatasetIndex(datasetIndex);
-            }
+        if (dataset == null) {
+            return null;
         }
-
+        
+        if (!getItemVisible(series, 0)) {
+            return null;
+        }
+        String label = getLegendItemLabelGenerator().generateLabel(dataset,
+                series);
+        String description = label;
+        String toolTipText = null;
+        if (getLegendItemToolTipGenerator() != null) {
+            toolTipText = getLegendItemToolTipGenerator().generateLabel(
+                    dataset, series);
+        }
+        String urlText = null;
+        if (getLegendItemURLGenerator() != null) {
+            urlText = getLegendItemURLGenerator().generateLabel(dataset,
+                    series);
+        }
+        boolean shapeIsVisible = getItemShapeVisible(series, 0);
+        Shape shape = lookupLegendShape(series);
+        boolean shapeIsFilled = getItemShapeFilled(series, 0);
+        Paint fillPaint = (this.useFillPaint ? lookupSeriesFillPaint(series)
+                : lookupSeriesPaint(series));
+        boolean shapeOutlineVisible = this.drawOutlines;
+        Paint outlinePaint = (this.useOutlinePaint ? lookupSeriesOutlinePaint(
+                series) : lookupSeriesPaint(series));
+        Stroke outlineStroke = lookupSeriesOutlineStroke(series);
+        boolean lineVisible = getItemLineVisible(series, 0);
+        Stroke lineStroke = lookupSeriesStroke(series);
+        Paint linePaint = lookupSeriesPaint(series);
+        LegendItem result = new LegendItem(label, description, toolTipText,
+                urlText, shapeIsVisible, shape, shapeIsFilled, fillPaint,
+                shapeOutlineVisible, outlinePaint, outlineStroke, lineVisible,
+                this.legendLine, lineStroke, linePaint);
+        result.setLabelFont(lookupLegendTextFont(series));
+        Paint labelPaint = lookupLegendTextPaint(series);
+        if (labelPaint != null) {
+            result.setLabelPaint(labelPaint);
+        }
+        result.setSeriesKey(dataset.getSeriesKey(series));
+        result.setSeriesIndex(series);
+        result.setDataset(dataset);
+        result.setDatasetIndex(datasetIndex);
+        
         return result;
-
     }
 
     /**
