@@ -193,6 +193,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -2354,7 +2356,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the shadow generator for the plot and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * {@link PlotChangeEvent} to all registered listeners.  Note that this is
+     * a bitmap drop-shadow generation facility and is separate from the
+     * vector based show option that is controlled via the
+     * {@link setShadowPaint()} method.
      *
      * @param generator  the generator (<code>null</code> permitted).
      *
@@ -2663,7 +2668,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             }
             else if (currentPass == 1) {
                 Comparable key = getSectionKey(section);
-                Paint paint = lookupSectionPaint(key);
+                Paint paint = lookupSectionPaint(key, state);
                 g2.setPaint(paint);
                 g2.fill(arc);
 
@@ -3089,7 +3094,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (explodePercent == 0.0) {
             return unexploded;
         }
-        Arc2D arc1 = new Arc2D.Double(unexploded, angle, extent / 2, 
+        Arc2D arc1 = new Arc2D.Double(unexploded, angle, extent / 2,
                 Arc2D.OPEN);
         Point2D point1 = arc1.getEndPoint();
         Arc2D.Double arc2 = new Arc2D.Double(exploded, angle, extent / 2,
@@ -3203,6 +3208,104 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         TextBox tb = record.getLabel();
         tb.draw(g2, (float) targetX, (float) targetY, RectangleAnchor.LEFT);
 
+    }
+
+    /**
+     * Returns the center for the specified section.
+     * Checks to see if the section is exploded and recalculates the
+     * new center if so.
+     *
+     * @param state  PiePlotState
+     * @param key  section key.
+     *
+     * @return The center for the specified section.
+     *
+     * @since 1.0.14
+     */
+    protected Point2D getArcCenter(PiePlotState state, Comparable key) {
+        Point2D center = new Point2D.Double(state.getPieCenterX(), state
+            .getPieCenterY());
+
+        double ep = getExplodePercent(key);
+        double mep = getMaximumExplodePercent();
+        if (mep > 0.0) {
+            ep = ep / mep;
+        }
+        if (ep != 0) {
+            Rectangle2D pieArea = state.getPieArea();
+            Rectangle2D expPieArea = state.getExplodedPieArea();
+            double angle1, angle2;
+            Number n = this.dataset.getValue(key);
+            double value = n.doubleValue();
+
+            if (this.direction == Rotation.CLOCKWISE) {
+                angle1 = state.getLatestAngle();
+                angle2 = angle1 - value / state.getTotal() * 360.0;
+            } else if (this.direction == Rotation.ANTICLOCKWISE) {
+                angle1 = state.getLatestAngle();
+                angle2 = angle1 + value / state.getTotal() * 360.0;
+            } else {
+                throw new IllegalStateException("Rotation type not recognised.");
+            }
+            double angle = (angle2 - angle1);
+
+            Arc2D arc1 = new Arc2D.Double(pieArea, angle1, angle / 2,
+                    Arc2D.OPEN);
+            Point2D point1 = arc1.getEndPoint();
+            Arc2D.Double arc2 = new Arc2D.Double(expPieArea, angle1, angle / 2,
+                    Arc2D.OPEN);
+            Point2D point2 = arc2.getEndPoint();
+            double deltaX = (point1.getX() - point2.getX()) * ep;
+            double deltaY = (point1.getY() - point2.getY()) * ep;
+
+            center = new Point2D.Double(state.getPieCenterX() - deltaX,
+                     state.getPieCenterY() - deltaY);
+
+        }
+        return center;
+    }
+
+    /**
+     * Returns the paint for the specified section. This is equivalent to
+     * <code>lookupSectionPaint(section)</code>.
+     * Checks to see if the user set the Paint to be of type RadialGradientPaint
+     * If so it adjusts the center and radius to match the Pie
+     *
+     * @param key  the section key.
+     * @param state  PiePlotState.
+     *
+     * @return The paint for the specified section.
+     *
+     * @since 1.0.14
+     */
+    protected Paint lookupSectionPaint(Comparable key, PiePlotState state) {
+        Paint paint = lookupSectionPaint(key, getAutoPopulateSectionPaint());
+        // If using JDK 1.6 or later the passed Paint Object can be a RadialGradientPaint
+        // We need to adjust the radius and center for this object to match the Pie.
+        try {
+            Class c = Class.forName("java.awt.RadialGradientPaint");
+            Constructor cc = c.getConstructor(new Class[] {
+                    Point2D.class, float.class, float[].class, Color[].class});
+
+             if (c.isInstance(paint)) {
+                 // User did pass a RadialGradientPaint object
+                 Method m = c.getMethod("getFractions", new Class[] {});
+                 Object fractions = m.invoke(paint, new Object[] {});
+                 m = c.getMethod("getColors", new Class[] {});
+                 Object clrs = m.invoke(paint, new Object[] {});
+                 Point2D center = getArcCenter(state, key);
+                 float radius = (new Float(state.getPieHRadius())).floatValue();
+
+                 Paint radialPaint = (Paint) cc.newInstance(new Object[] {
+                         (Object) center, (Object) new Float(radius),
+                         fractions, clrs});
+                 // return the new RadialGradientPaint
+                 return radialPaint;
+             }
+        } catch (Exception e) {
+        }
+        // Return whatever it was
+        return paint;
     }
 
     /**
