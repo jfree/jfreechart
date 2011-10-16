@@ -54,7 +54,7 @@
  * 03-Oct-2011 : Added tooltip and URL generator support (MH);
  * 03-Oct-2011 : Added some configuration options for the legend (MH);
  * 03-Oct-2011 : Added support for PolarPlot's angleOffset and direction (MH);
- * 
+ * 16-Oct-2011 : Fixed serialization problems with fillComposite (MH);
  */
 
 package org.jfree.chart.renderer;
@@ -511,12 +511,14 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                 poly = new GeneralPath();
                 poly.moveTo(p.x, p.y);
             }
-            else
+            else {
                 poly.lineTo(p.x, p.y);
+            }
         }
 
-        if (getConnectFirstAndLastPoint())
+        if (getConnectFirstAndLastPoint()) {
             poly.closePath();
+        }
 
         g2.setPaint(lookupSeriesPaint(seriesIndex));
         g2.setStroke(lookupSeriesStroke(seriesIndex));
@@ -935,6 +937,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.legendLine = SerialUtilities.readShape(stream);
+        this.fillComposite = SerialUtilities.readComposite(stream);
     }
 
     /**
@@ -947,5 +950,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         SerialUtilities.writeShape(this.legendLine, stream);
+        SerialUtilities.writeComposite(this.fillComposite, stream);
     }
 }
