@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * XYSeriesCollection.java
  * -----------------------
- * (C) Copyright 2001-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
@@ -62,18 +62,23 @@
 
 package org.jfree.data.xy;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyVetoException;
+import java.beans.VetoableChangeListener;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.DatasetChangeEvent;
+import org.jfree.data.general.Series;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 
@@ -82,8 +87,8 @@ import org.jfree.util.PublicCloneable;
  * dataset.
  */
 public class XYSeriesCollection extends AbstractIntervalXYDataset
-        implements IntervalXYDataset, DomainInfo, RangeInfo, PublicCloneable,
-                   Serializable {
+        implements IntervalXYDataset, DomainInfo, RangeInfo, 
+        VetoableChangeListener, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -7590013825931496766L;
@@ -113,6 +118,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         if (series != null) {
             this.data.add(series);
             series.addChangeListener(this);
+            series.addVetoableChangeListener(this);
         }
     }
 
@@ -137,13 +143,20 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * to all registered listeners.
      *
      * @param series  the series (<code>null</code> not permitted).
+     * 
+     * @throws IllegalArgumentException if the key for the series is null or
+     *     not unique within the dataset.
      */
     public void addSeries(XYSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
+        ParamChecks.nullNotPermitted(series, "series");
+        if (getSeriesIndex(series.getKey()) >= 0) {
+            throw new IllegalArgumentException(
+                "This dataset already contains a series with the key " 
+                + series.getKey());
         }
         this.data.add(series);
         series.addChangeListener(this);
+        series.addVetoableChangeListener(this);
         fireDatasetChanged();
     }
 
@@ -177,6 +190,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         }
         if (this.data.contains(series)) {
             series.removeChangeListener(this);
+            series.removeVetoableChangeListener(this);
             this.data.remove(series);
             fireDatasetChanged();
         }
@@ -192,6 +206,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         for (int i = 0; i < this.data.size(); i++) {
           XYSeries series = (XYSeries) this.data.get(i);
           series.removeChangeListener(this);
+          series.removeVetoableChangeListener(this);
         }
 
         // Remove all the series from the collection and notify listeners.
@@ -291,6 +306,28 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     public Comparable getSeriesKey(int series) {
         // defer argument checking
         return getSeries(series).getKey();
+    }
+
+    /**
+     * Returns the index of the series with the specified key, or -1 if no
+     * series has that key.
+     * 
+     * @param key  the key (<code>null</code> not permitted).
+     * 
+     * @return The index.
+     * 
+     * @since 1.0.14
+     */
+    public int getSeriesIndex(Comparable key) {
+        ParamChecks.nullNotPermitted(key, "key");
+        int seriesCount = getSeriesCount();
+        for (int i = 0; i < seriesCount; i++) {
+            XYSeries series = (XYSeries) this.data.get(i);
+            if (key.equals(series.getKey())) {
+            	return i;
+            }
+    	}
+    	return -1;
     }
 
     /**
@@ -442,23 +479,21 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         if (includeInterval) {
             return this.intervalDelegate.getDomainLowerBound(includeInterval);
         }
-        else {
-            double result = Double.NaN;
-            int seriesCount = getSeriesCount();
-            for (int s = 0; s < seriesCount; s++) {
-                XYSeries series = getSeries(s);
-                double lowX = series.getMinX();
-                if (Double.isNaN(result)) {
-                    result = lowX;
-                }
-                else {
-                    if (!Double.isNaN(lowX)) {
-                        result = Math.min(result, lowX);
-                    }
+        double result = Double.NaN;
+        int seriesCount = getSeriesCount();
+        for (int s = 0; s < seriesCount; s++) {
+            XYSeries series = getSeries(s);
+            double lowX = series.getMinX();
+            if (Double.isNaN(result)) {
+                result = lowX;
+            }
+            else {
+                if (!Double.isNaN(lowX)) {
+                    result = Math.min(result, lowX);
                 }
             }
-            return result;
         }
+        return result;
     }
 
     /**
@@ -675,6 +710,37 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
             }
         }
         return result;
+    }
+
+    /**
+     * Receives notification that the key for one of the series in the 
+     * collection has changed, and vetos it if the key is already present in 
+     * the collection.
+     * 
+     * @param e  the event.
+     * 
+     * @since 1.0.14
+     */
+    @Override
+    public void vetoableChange(PropertyChangeEvent e)
+            throws PropertyVetoException {
+        // if it is not the series name, then we have no interest
+        if (!"Key".equals(e.getPropertyName())) {
+            return;
+        }
+        
+        // to be defensive, let's check that the source series does in fact
+        // belong to this collection
+        Series s = (Series) e.getSource();
+        if (getSeries(s.getKey()) == null) {
+            throw new IllegalStateException("Receiving events from a series " +
+                    "that does not belong to this collection.");
+        }
+        // check if the new series name already exists for another series
+        Comparable key = (Comparable) e.getNewValue();
+        if (this.getSeries(key) != null) {
+            throw new PropertyVetoException("Duplicate key2", e);
+        }
     }
 
 }
