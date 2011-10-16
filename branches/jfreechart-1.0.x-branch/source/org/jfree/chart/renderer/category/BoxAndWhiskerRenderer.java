@@ -681,7 +681,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             double xxMin = rangeAxis.valueToJava2D(xMin.doubleValue(), dataArea,
                     location);
             double yymid = yy + state.getBarWidth() / 2.0;
-			double halfW = (state.getBarWidth() / 2.0) * this.whiskerWidth;
+            double halfW = (state.getBarWidth() / 2.0) * this.whiskerWidth;
 
             // draw the box...
             box = new Rectangle2D.Double(Math.min(xxQ1, xxQ3), yy,
@@ -829,7 +829,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             double yyMin = rangeAxis.valueToJava2D(yMin.doubleValue(),
                     dataArea, location);
             double xxmid = xx + state.getBarWidth() / 2.0;
-			double halfW = (state.getBarWidth() / 2.0) * this.whiskerWidth;
+            double halfW = (state.getBarWidth() / 2.0) * this.whiskerWidth;
 
             // draw the body...
             box = new Rectangle2D.Double(xx, Math.min(yyQ1, yyQ3),
