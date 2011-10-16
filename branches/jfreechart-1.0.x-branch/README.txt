@@ -70,7 +70,7 @@ integrated with Microsoft's Internet Explorer - your users will need to have
 the Java 2 plug-in installed.  Most other browsers (e.g. Firefox, Mozilla,
 Netscape, Konqueror) support JRE 1.4, 1.5 or 1.6.
 
-(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.16)
+(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.17)
 is included in the JFreeChart distribution.  You can obtain the complete
 source code for JCommon from:
 
