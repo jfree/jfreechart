@@ -94,9 +94,9 @@ public class RelativeDateFormatTests extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
         Locale.setDefault(this.savedLocale);
-	}
+    }
 
-	/**
+    /**
      * Some checks for the formatting.
      */
     public void testFormat() {
