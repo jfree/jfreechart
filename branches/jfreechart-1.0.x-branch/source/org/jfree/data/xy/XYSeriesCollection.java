@@ -324,10 +324,10 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         for (int i = 0; i < seriesCount; i++) {
             XYSeries series = (XYSeries) this.data.get(i);
             if (key.equals(series.getKey())) {
-            	return i;
+                return i;
             }
-    	}
-    	return -1;
+        }
+        return -1;
     }
 
     /**
