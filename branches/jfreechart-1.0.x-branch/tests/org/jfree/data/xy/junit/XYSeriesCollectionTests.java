@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * XYSeriesCollectionTests.java
  * ----------------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,6 +41,7 @@
  * 03-Dec-2007 : Added testGetSeriesByKey() (DG);
  * 22-Apr-2008 : Added testPublicCloneable (DG);
  * 06-Mar-2009 : Added testGetDomainBounds (DG);
+ * 17-May-2010 : Added checks for duplicate series names (DG);
  *
  */
 
@@ -149,6 +150,8 @@ public class XYSeriesCollectionTests extends TestCase {
         }
         catch (CloneNotSupportedException e) {
             e.printStackTrace();
+            assertTrue(false);
+            return;
         }
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
@@ -163,7 +166,7 @@ public class XYSeriesCollectionTests extends TestCase {
      * Verify that this class implements {@link PublicCloneable}.
      */
     public void testPublicCloneable() {
-        XYSeriesCollection c1 = new XYSeriesCollection();
+        Object c1 = new XYSeriesCollection();
         assertTrue(c1 instanceof PublicCloneable);
     }
 
@@ -266,6 +269,27 @@ public class XYSeriesCollectionTests extends TestCase {
             pass = true;
         }
         assertTrue(pass);
+    }
+    
+    /**
+     * Some basic checks for the addSeries() method.
+     */
+    public void testAddSeries() {
+        XYSeriesCollection c = new XYSeriesCollection();
+        XYSeries s1 = new XYSeries("s1");
+        c.addSeries(s1);
+
+        // the dataset should prevent the addition of a series with the
+        // same name as an existing series in the dataset
+        XYSeries s2 = new XYSeries("s1");
+        boolean pass = false;
+        try {
+            c.addSeries(s2);
+        } catch (RuntimeException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+        assertEquals(1, c.getSeriesCount());
     }
 
     /**
@@ -384,4 +408,23 @@ public class XYSeriesCollectionTests extends TestCase {
         assertEquals(new Range(-1.1, 1.1), r);
     }
 
+    /**
+     * A check that the dataset prevents renaming a series to the name of an 
+     * existing series in the dataset.
+     */
+    public void testRenameSeries() {
+        XYSeries s1 = new XYSeries("S1");
+        XYSeries s2 = new XYSeries("S2");
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(s1);
+        dataset.addSeries(s2);
+        boolean pass = false;
+        try {
+            s2.setKey("S1");
+        }
+        catch (RuntimeException e) {
+           pass = true;
+        }
+        assertTrue(pass);
+    }
 }
