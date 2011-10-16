@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2010, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * DatasetUtilities.java
  * ---------------------
- * (C) Copyright 2000-2010, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski (bug fix);
@@ -38,7 +38,6 @@
  *                   Jerome David (patch 2131001);
  *                   Peter Kolb (patch 2791407);
  *                   Martin Hoeller (patch 2952086);
- * 
  *
  * Changes (from 18-Sep-2001)
  * --------------------------
@@ -1125,14 +1124,14 @@ public final class DatasetUtilities {
                     List values = mvcd.getValues(series, column);
                     Iterator valueIterator = values.iterator();
                     while (valueIterator.hasNext()) {
-                    	Object o = valueIterator.next();
-						if (o instanceof Number){
-							double v = ((Number) o).doubleValue();
-							if (!Double.isNaN(v)){
-	                            minimum = Math.min(minimum, v);
-	                            maximum = Math.max(maximum, v);
-							}
-						}
+                        Object o = valueIterator.next();
+                        if (o instanceof Number){
+                            double v = ((Number) o).doubleValue();
+                            if (!Double.isNaN(v)){
+                                minimum = Math.min(minimum, v);
+                                maximum = Math.max(maximum, v);
+                            }
+                        }
                     }
                }
             }
