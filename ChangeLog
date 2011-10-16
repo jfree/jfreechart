@@ -1,18 +1,25 @@
 2011-10-16  David Gilbert <david.gilbert@object-refinery.com>
 
+    * org/jfree/chart/plot/PiePlot.java
+    (drawItem): Use new Paint lookup,
+    (getArcCenter): New protected method,
+    (lookupSectionPaint): Handle GradientPaint.
+
+2011-10-16  David Gilbert <david.gilbert@object-refinery.com>
+
     * org/jfree/chart/util/ParamChecks.java: New class;
     * org/jfree/data/general/Series.java
     (vetoableChangeSupport): New field,
-    (Series(Comparable, String)): Initialise vetoableChangeSupport;
-    (setKey): Fire vetoable property change;
-    (clone): Initialise vetoableChangeSupport;
+    (Series(Comparable, String)): Initialise vetoableChangeSupport,
+    (setKey): Fire vetoable property change,
+    (clone): Initialise vetoableChangeSupport,
     (addVetoableChangeListener): New method;
     * org/jfree/data/xy/XYSeriesCollection.java
-    (XYSeriesCollection(XYSeries)): Register listener;
-    (addSeries): Check for duplicate key, register listener;
-    (removeSeries): Deregister listener;
-    (removeAllSeries): Likewise;
-    (getSeriesIndex): New method;
+    (XYSeriesCollection(XYSeries)): Register listener,
+    (addSeries): Check for duplicate key, register listener,
+    (removeSeries): Deregister listener,
+    (removeAllSeries): Likewise,
+    (getSeriesIndex): New method,
     (vetoableChange): New method.
 
 2011-10-16  Martin Hoeller <martin.hoeller@xss.co.at>
