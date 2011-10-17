@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryAxis.java
  * -----------------
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Pady Srinivasan (patch 1217634);
@@ -489,7 +489,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Adds a tooltip to the specified category and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param category  the category (<code>null<code> not permitted).
+     * @param category  the category (<code>null</code> not permitted).
      * @param tooltip  the tooltip text (<code>null</code> permitted).
      *
      * @see #removeCategoryLabelToolTip(Comparable)
@@ -524,7 +524,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Removes the tooltip for the specified category and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param category  the category (<code>null<code> not permitted).
+     * @param category  the category (<code>null</code> not permitted).
      *
      * @see #addCategoryLabelToolTip(Comparable, String)
      * @see #clearCategoryLabelToolTips()

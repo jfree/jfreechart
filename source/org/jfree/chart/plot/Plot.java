@@ -830,7 +830,7 @@ public abstract class Plot implements AxisChangeListener,
     /**
      * Returns the color used to draw the outline of the plot area.
      *
-     * @return The color (possibly <code>null<code>).
+     * @return The color (possibly <code>null</code>).
      *
      * @see #setOutlinePaint(Paint)
      */

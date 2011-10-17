@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * StandardChartTheme.java
  * -----------------------
- * (C) Copyright 2008, 2009, by Object Refinery Limited.
+ * (C) Copyright 2008-2011, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -681,7 +681,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the domain grid line paint.
      *
-     * @return The domain grid line paint (never <code>null<code>).
+     * @return The domain grid line paint (never <code>null</code>).
      *
      * @see #setDomainGridlinePaint(Paint)
      */

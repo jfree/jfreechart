@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * NumberAxis.java
  * ---------------
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Laurence Vanhelsuwe;
@@ -396,7 +396,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * The marker band is optional, leave it set to <code>null</code> if you
      * don't require it.
      *
-     * @param band the new band (<code>null<code> permitted).
+     * @param band the new band (<code>null</code> permitted).
      *
      * @see #getMarkerBand()
      */
