@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * AbstractRenderer.java
  * ---------------------
- * (C) Copyright 2002-2009, by Object Refinery Limited.
+ * (C) Copyright 2002-2011, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -2005,7 +2005,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index (zero based).
      *
-     * @return The paint (possibly <code>null<code>).
+     * @return The paint (possibly <code>null</code>).
      *
      * @see #setSeriesItemLabelPaint(int, Paint)
      */
@@ -2048,7 +2048,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the base item label paint.
      *
-     * @return The paint (never <code>null<code>).
+     * @return The paint (never <code>null</code>).
      *
      * @see #setBaseItemLabelPaint(Paint)
      */
