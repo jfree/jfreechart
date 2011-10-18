@@ -160,7 +160,7 @@ public abstract class Series implements Cloneable, Serializable {
             // keep doing this
             this.propertyChangeSupport.firePropertyChange("Key", old, key);
         } catch (PropertyVetoException e) {
-            throw new IllegalArgumentException(e.getMessage(), e);
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
