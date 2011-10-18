@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -81,7 +81,8 @@
  *               labels (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  * 10-Jul-2009 : Added drop shaow support (DG);
- * 10-Oct-2011 : localization fix: bug #3353913 (MH);
+ * 10-Oct-2011 : Localization fix: bug #3353913 (MH);
+ * 18-Oct-2011 : Fix tooltip offset with shadow generator (DG);
  * 
  */
 
@@ -249,16 +250,14 @@ public class PiePlot3D extends PiePlot implements Serializable {
         g2.clip(plotArea);
 
         Graphics2D savedG2 = g2;
-        Rectangle2D savedDataArea = plotArea;
         BufferedImage dataImage = null;
         if (getShadowGenerator() != null) {
             dataImage = new BufferedImage((int) plotArea.getWidth(),
                 (int) plotArea.getHeight(), BufferedImage.TYPE_INT_ARGB);
             g2 = dataImage.createGraphics();
+            g2.translate(-plotArea.getX(), -plotArea.getY());
             g2.setRenderingHints(savedG2.getRenderingHints());
-            plotArea = new Rectangle(0, 0, dataImage.getWidth(),
-                    dataImage.getHeight());
-            originalPlotArea = (Rectangle) plotArea.clone();
+            originalPlotArea = (Rectangle2D) plotArea.clone();
         }
         // adjust the plot area by the interior spacing value
         double gapPercent = getInteriorGap();
@@ -603,16 +602,15 @@ public class PiePlot3D extends PiePlot implements Serializable {
         }
 
         if (getShadowGenerator() != null) {
-            BufferedImage shadowImage = getShadowGenerator().createDropShadow(dataImage);
+            BufferedImage shadowImage 
+                    = getShadowGenerator().createDropShadow(dataImage);
             g2 = savedG2;
-            plotArea = savedDataArea;
-            originalPlotArea = savedDataArea;
-            g2.drawImage(shadowImage, (int) savedDataArea.getX() 
+            g2.drawImage(shadowImage, (int) plotArea.getX() 
                     + getShadowGenerator().calculateOffsetX(),
-                    (int) savedDataArea.getY() 
+                    (int) plotArea.getY() 
                     + getShadowGenerator().calculateOffsetY(), null);
-            g2.drawImage(dataImage, (int) savedDataArea.getX(),
-                    (int) savedDataArea.getY(), null);
+            g2.drawImage(dataImage, (int) plotArea.getX(),
+                    (int) plotArea.getY(), null);
         }
 
         g2.setClip(savedClip);

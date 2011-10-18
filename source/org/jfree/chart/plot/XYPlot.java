@@ -226,6 +226,7 @@
  *               by PK (DG);
  * 06-Jul-2009 : Fix for cloning of renderers - see bug 2817504 (DG)
  * 10-Jul-2009 : Added optional drop shadow generator (DG);
+ * 18-Oct-2011 : Fix tooltip offset with shadow renderer (DG);
  *
  */
 
@@ -3315,15 +3316,13 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         }
 
         Graphics2D savedG2 = g2;
-        Rectangle2D savedDataArea = dataArea;
         BufferedImage dataImage = null;
         if (this.shadowGenerator != null) {
             dataImage = new BufferedImage((int) dataArea.getWidth(),
                     (int)dataArea.getHeight(), BufferedImage.TYPE_INT_ARGB);
             g2 = dataImage.createGraphics();
+            g2.translate(-dataArea.getX(), -dataArea.getY());
             g2.setRenderingHints(savedG2.getRenderingHints());
-            dataArea = new Rectangle(0, 0, dataImage.getWidth(),
-                    dataImage.getHeight());
         }
 
         // draw the markers that are associated with a specific renderer...
@@ -3466,13 +3465,12 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             BufferedImage shadowImage
                     = this.shadowGenerator.createDropShadow(dataImage);
             g2 = savedG2;
-            dataArea = savedDataArea;
-            g2.drawImage(shadowImage, (int) savedDataArea.getX() 
+            g2.drawImage(shadowImage, (int) dataArea.getX() 
                     + this.shadowGenerator.calculateOffsetX(),
-                    (int) savedDataArea.getY() 
+                    (int) dataArea.getY() 
                     + this.shadowGenerator.calculateOffsetY(), null);
-            g2.drawImage(dataImage, (int) savedDataArea.getX(),
-                    (int) savedDataArea.getY(), null);
+            g2.drawImage(dataImage, (int) dataArea.getX(),
+                    (int) dataArea.getY(), null);
         }
         g2.setClip(originalClip);
         g2.setComposite(originalComposite);
