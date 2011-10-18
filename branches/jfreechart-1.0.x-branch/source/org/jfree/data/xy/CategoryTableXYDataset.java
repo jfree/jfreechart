@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * CategoryTableXYDataset.java
  * ---------------------------
- * (C) Copyright 2004-2008, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2011, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -43,6 +43,7 @@
  * 05-Oct-2005 : Made the interval delegate a dataset change listener (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 22-Apr-2008 : Implemented PublicCloneable, and fixed clone() method (DG);
+ * 18-Oct-2011 : Fixed bug 3190615 - added clear() method (DG);
  *
  */
 
@@ -141,6 +142,16 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
         }
     }
 
+    /**
+     * Clears all data from the dataset and sends a {@link DatasetChangeEvent}
+     * to all registered listeners.
+     * 
+     * @since 1.0.14
+     */
+    public void clear() {
+        this.values.clear();
+        fireDatasetChanged();
+    }
 
     /**
      * Returns the number of series in the collection.
