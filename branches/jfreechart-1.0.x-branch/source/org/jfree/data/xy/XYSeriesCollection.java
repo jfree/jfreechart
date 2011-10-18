@@ -721,7 +721,6 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * 
      * @since 1.0.14
      */
-    @Override
     public void vetoableChange(PropertyChangeEvent e)
             throws PropertyVetoException {
         // if it is not the series name, then we have no interest
