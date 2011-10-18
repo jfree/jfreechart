@@ -9,7 +9,19 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="jfreechart-1.0.x" default="default" basedir=".">
     <description>Builds, tests, and runs the project jfreechart-1.0.x.</description>
+
+    <!--
+    The following "link" to the JFreeChart test target makes NetBeans IDE
+    integration work. Without the link running tests from within NB will do
+    nothing (no tests run, no "Test Results" window, etc.)
+    NOTE(mkrauskopf): likely there is better solution which I did not found.
+    -->
+    <target name="test">
+        <ant antfile="${basedir}/ant/build.xml" target="test" />
+    </target>
+
     <import file="nbproject/build-impl.xml"/>
+
     <!--
 
     There exist several targets which are by default empty and which can be 
