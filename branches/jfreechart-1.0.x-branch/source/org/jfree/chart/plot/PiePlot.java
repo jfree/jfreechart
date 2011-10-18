@@ -165,6 +165,7 @@
  * 10-Jul-2009 : Added optional drop shadow generator (DG);
  * 03-Sep-2009 : Fixed bug where sinmpleLabelOffset is ignored (DG);
  * 04-Nov-2009 : Add mouse wheel rotation support (DG);
+ * 18-Oct-2011 : Fixed tooltip offset with shadow generator (DG);
  * 
  */
 
@@ -2446,26 +2447,24 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
         if (!DatasetUtilities.isEmptyOrNull(this.dataset)) {
             Graphics2D savedG2 = g2;
-            Rectangle2D savedDataArea = area;
             BufferedImage dataImage = null;
             if (this.shadowGenerator != null) {
                 dataImage = new BufferedImage((int) area.getWidth(),
                     (int) area.getHeight(), BufferedImage.TYPE_INT_ARGB);
                 g2 = dataImage.createGraphics();
+                g2.translate(-area.getX(), -area.getY());
                 g2.setRenderingHints(savedG2.getRenderingHints());
-                area = new Rectangle(0, 0, dataImage.getWidth(), dataImage.getHeight());
             }
             drawPie(g2, area, info);
             if (this.shadowGenerator != null) {
                 BufferedImage shadowImage = this.shadowGenerator.createDropShadow(dataImage);
                 g2 = savedG2;
-                area = savedDataArea;
-                g2.drawImage(shadowImage, (int) savedDataArea.getX() 
-                        + this.shadowGenerator.calculateOffsetX(),
-                        (int) savedDataArea.getY()
+                g2.drawImage(shadowImage, (int) area.getX() 
+                        + this.shadowGenerator.calculateOffsetX(), 
+                        (int) area.getY()
                         + this.shadowGenerator.calculateOffsetY(), null);
-                g2.drawImage(dataImage, (int) savedDataArea.getX(),
-                        (int) savedDataArea.getY(), null);
+                g2.drawImage(dataImage, (int) area.getX(), (int) area.getY(), 
+                        null);
             }
         }
         else {
