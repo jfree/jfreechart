@@ -57,6 +57,8 @@ import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.xy.XYShapeRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultXYZDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  * Tests for the {@link XYShapeRenderer} class.
@@ -171,7 +173,7 @@ public class XYShapeRendererTests extends TestCase {
     public void testFindZBounds() {
         XYShapeRenderer r = new XYShapeRenderer();
         assertNull(r.findZBounds(null));
-        
+
         DefaultXYZDataset dataset = new DefaultXYZDataset();
         Range range;
 
@@ -198,4 +200,29 @@ public class XYShapeRendererTests extends TestCase {
         assertEquals(-1.2d, range.getLowerBound(), EPSILON);
         assertEquals(3.8d, range.getUpperBound(), EPSILON);
     }
+
+    /**
+     * Test for bug 3026341.
+     */
+    public void test3026341() {
+        XYShapeRenderer renderer = new XYShapeRenderer();
+        assertNull(renderer.findRangeBounds(null));
+
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeries series = new XYSeries("S1");
+        series.add(1.0, null);
+        dataset.addSeries(series);
+        Range r = renderer.findRangeBounds(dataset);
+        assertNull(r);
+
+        // test findDomainBounds as well
+        r = renderer.findDomainBounds(dataset);
+        assertEquals(r.getLowerBound(), 1.0, EPSILON);
+        assertEquals(r.getUpperBound(), 1.0, EPSILON);
+
+        dataset.removeAllSeries();
+        r = renderer.findDomainBounds(dataset);
+        assertNull(r);
+    }
+
 }

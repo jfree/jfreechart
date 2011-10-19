@@ -1,3 +1,10 @@
+2011-10-19  David Gilbert <david.gilbert@object-refinery.com>
+
+    Bug 3026341:
+    * org/jfree/chart/renderer/xy/XYShapeRenderer.java
+    (findDomainBounds): Check for null,
+    (findRangeBounds): Likewise.
+
 2011-10-18  David Gilbert <david.gilbert@object-refinery.com>
 
     Bug 3190615:
