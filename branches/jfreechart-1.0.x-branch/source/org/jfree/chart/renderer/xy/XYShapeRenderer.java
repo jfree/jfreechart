@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2010, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYShapeRenderer.java
  * --------------------
- * (C) Copyright 2008-2010 by Andreas Haumer, xS+S and Contributors.
+ * (C) Copyright 2008-2011 by Andreas Haumer, xS+S and Contributors.
  *
  * Original Author:  Martin Hoeller (x Software + Systeme  xS+S - Andreas
  *                       Haumer);
@@ -38,6 +38,7 @@
  * 17-Sep-2008 : Version 1, based on a contribution from Martin Hoeller with
  *               amendments by David Gilbert (DG);
  * 16-Feb-2010 : Added findZBounds() (patch 2952086) (MH);
+ * 19-Oct-2011 : Fixed NPE in findRangeBounds() (bug 3026341) (DG);
  *
  */
 
@@ -346,15 +347,16 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      *         or empty).
      */
     public Range findDomainBounds(XYDataset dataset) {
-        if (dataset != null) {
-            Range r = DatasetUtilities.findDomainBounds(dataset, false);
-            double offset = 0; // TODO getSeriesShape(n).getBounds().width / 2;
-            return new Range(r.getLowerBound() + offset,
-                             r.getUpperBound() + offset);
-        }
-        else {
+        if (dataset == null) {
             return null;
         }
+        Range r = DatasetUtilities.findDomainBounds(dataset, false);
+        if (r == null) {
+            return null;
+        }
+        double offset = 0; // TODO getSeriesShape(n).getBounds().width / 2;
+        return new Range(r.getLowerBound() + offset,
+                         r.getUpperBound() + offset);
     }
 
     /**
@@ -367,15 +369,16 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      *         or empty).
      */
     public Range findRangeBounds(XYDataset dataset) {
-        if (dataset != null) {
-            Range r = DatasetUtilities.findRangeBounds(dataset, false);
-            double offset = 0; // TODO getSeriesShape(n).getBounds().height / 2;
-            return new Range(r.getLowerBound() + offset, r.getUpperBound()
-                    + offset);
-        }
-        else {
+        if (dataset == null) {
             return null;
         }
+        Range r = DatasetUtilities.findRangeBounds(dataset, false);
+        if (r == null) {
+            return null;
+        }
+        double offset = 0; // TODO getSeriesShape(n).getBounds().height / 2;
+        return new Range(r.getLowerBound() + offset, r.getUpperBound()
+                + offset);
     }
 
     /**
