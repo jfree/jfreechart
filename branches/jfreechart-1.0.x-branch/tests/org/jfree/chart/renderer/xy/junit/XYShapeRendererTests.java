@@ -36,6 +36,7 @@
  * -------
  * 17-Sep-2008 : Version 1 (DG);
  * 16-Feb-2010 : Added testFindZBounds() (MH);
+ * 19-Oct-2011 : Added test3026341() (DG);
  *
  */
 

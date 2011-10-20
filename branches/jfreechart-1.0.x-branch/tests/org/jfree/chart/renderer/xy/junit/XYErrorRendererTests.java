@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * XYErrorRendererTests.java
  * -------------------------
- * (C) Copyright 2006-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -232,4 +232,20 @@ public class XYErrorRendererTests extends TestCase {
         assertEquals(r1, r2);
     }
 
+    /**
+     * Some checks for the findDomainBounds() method.
+     */
+    public void testFindDomainBounds() {
+        XYErrorRenderer r = new XYErrorRenderer();
+        assertNull(r.findDomainBounds(null));
+    }
+
+
+    /**
+     * Some checks for the findRangeBounds() method.
+     */
+    public void testFindRangeBounds() {
+        XYErrorRenderer r = new XYErrorRenderer();
+        assertNull(r.findRangeBounds(null));
+    }
 }

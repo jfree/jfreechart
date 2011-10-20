@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * XYBlockRendererTests.java
  * -------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 05-Jul-2006 : Version 1 (DG);
  * 09-Mar-2007 : Added independence check to testCloning (DG);
  * 22-Apr-2008 : Added testPublicCloneable (DG);
+ * 20-Oct-2011 : Added testFindDomainBounds() and testFindRangeBounds() (DG);
  *
  */
 
@@ -59,12 +60,16 @@ import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.xy.XYBlockRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultXYZDataset;
+import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.data.xy.XYSeries;
 import org.jfree.util.PublicCloneable;
 
 /**
  * Tests for the {@link XYBlockRenderer} class.
  */
 public class XYBlockRendererTests extends TestCase {
+
+    private static final double EPSILON = 0.0000000001;
 
     /**
      * Returns the tests as a test suite.
@@ -208,4 +213,39 @@ public class XYBlockRendererTests extends TestCase {
         assertTrue(range == null);
     }
 
+    /**
+     * Some tests for the findRangeBounds() method.
+     */
+    public void testFindRangeBounds() {
+        XYBlockRenderer renderer = new XYBlockRenderer();
+        assertNull(renderer.findRangeBounds(null));
+
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeries series = new XYSeries("S1");
+        series.add(1.0, null);
+        dataset.addSeries(series);
+        Range r = renderer.findRangeBounds(dataset);
+        assertNull(r);
+    }
+    
+    /**
+     * Some tests for the findDomainBounds() method.
+     */
+    public void testFindDomainBounds() {
+        XYBlockRenderer renderer = new XYBlockRenderer();
+        assertNull(renderer.findRangeBounds(null));
+
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeries series = new XYSeries("S1");
+        series.add(1.0, null);
+        dataset.addSeries(series);
+        Range r = renderer.findDomainBounds(dataset);
+        assertEquals(0.5, r.getLowerBound(), EPSILON);
+        assertEquals(1.5, r.getUpperBound(), EPSILON);
+
+        dataset.removeAllSeries();
+        r = renderer.findDomainBounds(dataset);
+        assertNull(r);
+    }    
+           
 }
