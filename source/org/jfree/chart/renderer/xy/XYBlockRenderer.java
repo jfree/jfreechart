@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYBlockRenderer.java
  * --------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2011, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -290,19 +290,15 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @see #findRangeBounds(XYDataset)
      */
     public Range findDomainBounds(XYDataset dataset) {
-        if (dataset != null) {
-            Range r = DatasetUtilities.findDomainBounds(dataset, false);
-            if (r == null) {
-                return null;
-            }
-            else {
-                return new Range(r.getLowerBound() + this.xOffset,
-                        r.getUpperBound() + this.blockWidth + this.xOffset);
-            }
-        }
-        else {
+        if (dataset == null) {
             return null;
         }
+        Range r = DatasetUtilities.findDomainBounds(dataset, false);
+        if (r == null) {
+            return null;
+        }
+        return new Range(r.getLowerBound() + this.xOffset,
+                         r.getUpperBound() + this.blockWidth + this.xOffset);
     }
 
     /**
