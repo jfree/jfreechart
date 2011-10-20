@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------------
  * DefaultStatisticalCategoryDataset.java
  * --------------------------------------
- * (C) Copyright 2002-2009, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2011, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -51,6 +51,7 @@
  * 28-Sep-2007 : Fixed cloning bug (DG);
  * 02-Oct-2007 : Fixed bug updating cached range values (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
+ * 20-Oct-2011 : Fixed getRangeBounds() bug 3072674 (DG);
  *
  */
 
@@ -633,7 +634,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @see #getRangeUpperBound(boolean)
      */
     public double getRangeLowerBound(boolean includeInterval) {
-        if (includeInterval) {
+        if (includeInterval && !Double.isNaN(this.minimumRangeValueIncStdDev)) {
             return this.minimumRangeValueIncStdDev;
         }
         else {
@@ -652,7 +653,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @see #getRangeLowerBound(boolean)
      */
     public double getRangeUpperBound(boolean includeInterval) {
-        if (includeInterval) {
+        if (includeInterval && !Double.isNaN(this.maximumRangeValueIncStdDev)) {
             return this.maximumRangeValueIncStdDev;
         }
         else {
@@ -661,7 +662,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Returns the range of the values in this dataset's range.
+     * Returns the bounds of the values in this dataset's y-values.
      *
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
@@ -669,22 +670,12 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @return The range.
      */
     public Range getRangeBounds(boolean includeInterval) {
-        Range result = null;
-        if (includeInterval) {
-            if (!Double.isNaN(this.minimumRangeValueIncStdDev)
-                    && !Double.isNaN(this.maximumRangeValueIncStdDev)) {
-                result = new Range(this.minimumRangeValueIncStdDev,
-                        this.maximumRangeValueIncStdDev);
-            }
+        double lower = getRangeLowerBound(includeInterval);
+        double upper = getRangeUpperBound(includeInterval);
+        if (Double.isNaN(lower) && Double.isNaN(upper)) {
+            return null;
         }
-        else {
-            if (!Double.isNaN(this.minimumRangeValue)
-                    && !Double.isNaN(this.maximumRangeValue)) {
-                result = new Range(this.minimumRangeValue,
-                        this.maximumRangeValue);
-            }
-        }
-        return result;
+        return new Range(lower, upper);
     }
 
     /**

@@ -1,5 +1,13 @@
 2011-10-19  David Gilbert <david.gilbert@object-refinery.com>
 
+    Bug 3072674:
+    * org/jfree/data/statistics/DefaultStatisticalCategoryDataset.java
+    (getRangeLowerBound): Check for NaN,
+    (getRangeUpperBound): Likewise,
+    (getRangeBounds): Call getRangeLowerBound() and getRangeUpperBound().
+
+2011-10-19  David Gilbert <david.gilbert@object-refinery.com>
+
     Bug 3026341:
     * org/jfree/chart/renderer/xy/XYShapeRenderer.java
     (findDomainBounds): Check for null,

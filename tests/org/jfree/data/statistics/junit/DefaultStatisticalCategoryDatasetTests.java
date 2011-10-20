@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------------------
  * DefaultStatisticalCategoryDatasetTests.java
  * -------------------------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -301,6 +301,21 @@ public class DefaultStatisticalCategoryDatasetTests extends TestCase {
         assertEquals(1.4, data.getRangeUpperBound(false), EPSILON);
         assertEquals(1.2, data.getRangeLowerBound(true), EPSILON);
         assertEquals(1.6, data.getRangeUpperBound(true), EPSILON);
+    }
+
+    /**
+     * A test for bug 3072674.
+     */
+    public void test3072674() {
+        DefaultStatisticalCategoryDataset dataset
+                = new DefaultStatisticalCategoryDataset();
+        dataset.add(1.0, Double.NaN, "R1", "C1");
+        assertEquals(1.0, dataset.getRangeLowerBound(true), EPSILON);
+        assertEquals(1.0, dataset.getRangeUpperBound(true), EPSILON);
+        
+        Range r = dataset.getRangeBounds(true);
+        assertEquals(1.0, r.getLowerBound(), EPSILON);
+        assertEquals(1.0, r.getUpperBound(), EPSILON);
     }
 
 
