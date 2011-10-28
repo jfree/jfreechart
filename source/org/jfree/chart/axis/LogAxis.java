@@ -54,6 +54,7 @@
  * 21-Jan-2009 : No need to call setMinorTickCount() in constructor (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 30-Mar-2009 : Added pan(double) method (DG);
+ * 28-Oct-2011 : Fixed endless loop for 0 TickUnit, # 3429707 (MH);
  *
  */
 
@@ -516,7 +517,9 @@ public class LogAxis extends ValueAxis {
         double start = Math.floor(calculateLog(getLowerBound()));
         double end = Math.ceil(calculateLog(getUpperBound()));
         double current = start;
-        while (current <= end) {
+        boolean hasTicks = (this.tickUnit.getSize() > 0.0)
+                           && !Double.isInfinite(start);
+        while (hasTicks && current <= end) {
             double v = calculateValue(current);
             if (range.contains(v)) {
                 ticks.add(new NumberTick(TickType.MAJOR, v, createTickLabel(v),
@@ -568,7 +571,9 @@ public class LogAxis extends ValueAxis {
         double start = Math.floor(calculateLog(getLowerBound()));
         double end = Math.ceil(calculateLog(getUpperBound()));
         double current = start;
-        while (current <= end) {
+        boolean hasTicks = (this.tickUnit.getSize() > 0.0)
+                           && !Double.isInfinite(start);
+        while (hasTicks && current <= end) {
             double v = calculateValue(current);
             if (range.contains(v)) {
                 ticks.add(new NumberTick(TickType.MAJOR, v, createTickLabel(v),
