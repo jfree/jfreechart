@@ -1,5 +1,12 @@
 2011-10-28  Martin Hoeller <martin.hoeller@xss.co.at>
 
+    Bug 3428870:
+    * org/jfree/chart/renderer/category/StatisticalBarRenderer.java
+    (drawHorizontalItem): Fixed offset problem with maximalBarWidth,
+    (drawVerticalItem): Likewise;
+
+2011-10-28  Martin Hoeller <martin.hoeller@xss.co.at>
+
     Bug 3429707:
     * org/jfree/chart/annotations/TextAnnotation.java
     (setRotationAnchor): Added missing argument check, Bug #3428870;
