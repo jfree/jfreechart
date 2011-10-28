@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
+ *                   Martin Hoeller;
  *
  * Changes:
  * --------
@@ -47,7 +48,8 @@
  * 16-Jan-2007 : Added argument checks, fixed hashCode() method and updated
  *               API docs (DG);
  * 24-Jun-2009 : Fire change events (see patch 2809117 by PK) (DG);
- *
+ * 28-Oct-2011 : Added missing argument check, Bug #3428870 (MH);
+ * 
  */
 
 package org.jfree.chart.annotations;
@@ -255,6 +257,9 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * @see #getRotationAnchor()
      */
     public void setRotationAnchor(TextAnchor anchor) {
+        if (anchor == null) {
+            throw new IllegalArgumentException("Null 'anchor' argument.");
+        }
         this.rotationAnchor = anchor;
         fireAnnotationChanged();
     }
