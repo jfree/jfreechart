@@ -33,6 +33,7 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
  *                   Peter Kolb (patches 2497611, 2791407);
+ *                   Martin Hoeller;
  *
  * Changes
  * -------
@@ -56,6 +57,7 @@
  * 14-Jan-2009 : Added support for seriesVisible flags (PK);
  * 16-May-2009 : Added findRangeBounds() override to take into account the
  *               dataset interval (PK);
+ * 28-Oct-2011 : Fixed problem with maximalBarWidth, bug #2810220 (MH);
  *
  */
 
@@ -270,11 +272,9 @@ public class StatisticalBarRenderer extends BarRenderer
                                       int row,
                                       int column) {
 
-        RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
-
         // BAR Y
-        double rectY = domainAxis.getCategoryStart(column, getColumnCount(),
-                dataArea, xAxisLocation);
+        double rectY = calculateBarW0(plot, PlotOrientation.HORIZONTAL,
+                dataArea, domainAxis, state, row, column);
 
         int seriesCount = state.getVisibleSeriesCount() >= 0
                 ? state.getVisibleSeriesCount() : getRowCount();
@@ -431,11 +431,9 @@ public class StatisticalBarRenderer extends BarRenderer
                                     int row,
                                     int column) {
 
-        RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
-
         // BAR X
-        double rectX = domainAxis.getCategoryStart(column, getColumnCount(),
-                dataArea, xAxisLocation);
+        double rectX = calculateBarW0(plot, PlotOrientation.VERTICAL,
+                dataArea, domainAxis, state, row, column);
 
         int seriesCount = state.getVisibleSeriesCount() >= 0
                 ? state.getVisibleSeriesCount() : getRowCount();
