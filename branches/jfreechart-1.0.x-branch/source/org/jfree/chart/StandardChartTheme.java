@@ -37,6 +37,7 @@
  * 14-Aug-2008 : Version 1 (DG);
  * 10-Apr-2009 : Added getter/setter for smallFont (DG);
  * 10-Jul-2009 : Added shadowGenerator field (DG);
+ * 29-Oct-2011 : Fixed Eclipse warnings (DG);
  *
  */
 
@@ -1349,7 +1350,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         // process all range axes
         int rangeAxisCount = plot.getRangeAxisCount();
         for (int i = 0; i < rangeAxisCount; i++) {
-            ValueAxis axis = (ValueAxis) plot.getRangeAxis(i);
+            ValueAxis axis = plot.getRangeAxis(i);
             if (axis != null) {
                 applyToValueAxis(axis);
             }
@@ -1413,7 +1414,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         // process all range axes
         int rangeAxisCount = plot.getRangeAxisCount();
         for (int i = 0; i < rangeAxisCount; i++) {
-            ValueAxis axis = (ValueAxis) plot.getRangeAxis(i);
+            ValueAxis axis = plot.getRangeAxis(i);
             if (axis != null) {
                 applyToValueAxis(axis);
             }
