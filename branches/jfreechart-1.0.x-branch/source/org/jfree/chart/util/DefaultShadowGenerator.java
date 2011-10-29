@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * DefaultShadowGenerator.java
  * ---------------------------
- * (C) Copyright 2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009, 2011 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 10-Jul-2009 : Version 1 (DG);
+ * 29-Oct-2011 : Fixed Eclipse warnings (DG);
  *
  */
 
@@ -56,6 +57,8 @@ import org.jfree.chart.HashUtilities;
  * @since 1.0.14
  */
 public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
+
+    private static final long serialVersionUID = 2732993885591386064L;
 
     /** The shadow size. */
     private int shadowSize;
@@ -180,7 +183,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
                 BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2 = subject.createGraphics();
-        g2.drawImage(source, null, shadowSize, shadowSize);
+        g2.drawImage(source, null, this.shadowSize, this.shadowSize);
         g2.dispose();
         applyShadow(subject);
         return subject;
@@ -195,30 +198,30 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
         int dstWidth = image.getWidth();
         int dstHeight = image.getHeight();
 
-        int left = (shadowSize - 1) >> 1;
-        int right = shadowSize - left;
+        int left = (this.shadowSize - 1) >> 1;
+        int right = this.shadowSize - left;
         int xStart = left;
         int xStop = dstWidth - right;
         int yStart = left;
         int yStop = dstHeight - right;
 
-        int shadowRgb = shadowColor.getRGB() & 0x00FFFFFF;
+        int shadowRgb = this.shadowColor.getRGB() & 0x00FFFFFF;
 
-        int[] aHistory = new int[shadowSize];
+        int[] aHistory = new int[this.shadowSize];
         int historyIdx = 0;
 
         int aSum;
 
         int[] dataBuffer = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
         int lastPixelOffset = right * dstWidth;
-        float sumDivider = shadowOpacity / shadowSize;
+        float sumDivider = this.shadowOpacity / this.shadowSize;
 
         // horizontal pass
 
         for (int y = 0, bufferOffset = 0; y < dstHeight; y++, bufferOffset = y * dstWidth) {
             aSum = 0;
             historyIdx = 0;
-            for (int x = 0; x < shadowSize; x++, bufferOffset++) {
+            for (int x = 0; x < this.shadowSize; x++, bufferOffset++) {
                 int a = dataBuffer[bufferOffset] >>> 24;
                 aHistory[x] = a;
                 aSum += a;
@@ -238,8 +241,8 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
                 aHistory[historyIdx] = a;
                 aSum += a;
 
-                if (++historyIdx >= shadowSize) {
-                    historyIdx -= shadowSize;
+                if (++historyIdx >= this.shadowSize) {
+                    historyIdx -= this.shadowSize;
                 }
             }
         }
@@ -248,7 +251,8 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
         for (int x = 0, bufferOffset = 0; x < dstWidth; x++, bufferOffset = x) {
             aSum = 0;
             historyIdx = 0;
-            for (int y = 0; y < shadowSize; y++, bufferOffset += dstWidth) {
+            for (int y = 0; y < this.shadowSize; y++,
+                    bufferOffset += dstWidth) {
                 int a = dataBuffer[bufferOffset] >>> 24;
                 aHistory[y] = a;
                 aSum += a;
@@ -268,8 +272,8 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
                 aHistory[historyIdx] = a;
                 aSum += a;
 
-                if (++historyIdx >= shadowSize) {
-                    historyIdx -= shadowSize;
+                if (++historyIdx >= this.shadowSize) {
+                    historyIdx -= this.shadowSize;
                 }
             }
         }
