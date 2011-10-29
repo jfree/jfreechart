@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYSplineRenderer.java
  * ---------------------
- * (C) Copyright 2007-2009, by Klaus Rheinwald and Contributors.
+ * (C) Copyright 2007-2011, by Klaus Rheinwald and Contributors.
  *
  * Original Author:  Klaus Rheinwald;
  * Contributor(s):   Tobias von Petersdorff (tvp@math.umd.edu,
@@ -359,7 +359,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
             if (this.x != that.x) {
                 return false;
             }
-            /*&& y == ((ControlPoint) obj).y*/;
+            /*&& y == ((ControlPoint) obj).y;*/
             return true;
         }
 
