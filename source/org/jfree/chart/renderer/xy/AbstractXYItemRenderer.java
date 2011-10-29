@@ -697,9 +697,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             return DatasetUtilities.findDomainBounds(dataset,
                     visibleSeriesKeys, includeInterval);
         }
-        else {
-            return DatasetUtilities.findDomainBounds(dataset, includeInterval);
-        }
+        return DatasetUtilities.findDomainBounds(dataset, includeInterval);
     }
 
     /**
@@ -750,7 +748,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 ValueAxis xAxis = null;
                 int index = p.getIndexOf(this);
                 if (index >= 0) {
-                    xAxis = plot.getDomainAxisForDataset(index);
+                    xAxis = this.plot.getDomainAxisForDataset(index);
                 }
                 if (xAxis != null) {
                     xRange = xAxis.getRange();
@@ -763,9 +761,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             return DatasetUtilities.findRangeBounds(dataset,
                     visibleSeriesKeys, xRange, includeInterval);
         }
-        else {
-            return DatasetUtilities.findRangeBounds(dataset, includeInterval);
-        }
+        return DatasetUtilities.findRangeBounds(dataset, includeInterval);
     }
 
     /**
@@ -1288,6 +1284,9 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             else if (orientation == PlotOrientation.VERTICAL) {
                 line = new Line2D.Double(dataArea.getMinX(), v,
                         dataArea.getMaxX(), v);
+            }
+            else {
+                throw new IllegalStateException("Unknown orientation.");
             }
 
             final Composite originalComposite = g2.getComposite();
