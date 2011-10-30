@@ -2,6 +2,14 @@
 
 2011-10-30  David Gilbert <david.gilbert@object-refinery.com>
 
+    * org/jfree/chart/renderer/category/IntervalBarRenderer.java
+    (drawInterval): Fix calculation of bar edge;
+    * org/jfree/chart/renderer/category/StatisticalBarRenderer.java
+    (drawHorizontalItem): Fix calculation of bar edge;
+    (drawVerticalItem): Likewise;
+    
+2011-10-30  David Gilbert <david.gilbert@object-refinery.com>
+
     * org/jfree/chart/StandardChartTheme.java
     (StandardChartTheme(String, boolean)): New method.
 

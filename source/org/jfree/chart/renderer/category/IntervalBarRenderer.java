@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * IntervalBarRenderer.java
  * ------------------------
- * (C) Copyright 2002-2009, by Jeremy Bowman.
+ * (C) Copyright 2002-2011, by Jeremy Bowman.
  *
  * Original Author:  Jeremy Bowman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -62,7 +62,7 @@
  * 16-May-2009 : The findRangeBounds() method needs to include the dataset
  *               interval (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- *
+ * 30-Oct-2011 : Fixed alignment when setMaximumBarWidth is applied (DG);
  */
 
 package org.jfree.chart.renderer.category;
@@ -181,17 +181,11 @@ public class IntervalBarRenderer extends BarRenderer {
         if (visibleRow < 0) {
             return;
         }
-        int seriesCount = state.getVisibleSeriesCount() >= 0
-                ? state.getVisibleSeriesCount() : getRowCount();
-
-        int categoryCount = getColumnCount();
 
         PlotOrientation orientation = plot.getOrientation();
-
         double rectX = 0.0;
         double rectY = 0.0;
 
-        RectangleEdge domainAxisLocation = plot.getDomainAxisEdge();
         RectangleEdge rangeAxisLocation = plot.getRangeAxisEdge();
 
         // Y0
@@ -225,37 +219,17 @@ public class IntervalBarRenderer extends BarRenderer {
         RectangleEdge barBase = RectangleEdge.LEFT;
         if (orientation == PlotOrientation.HORIZONTAL) {
             // BAR Y
-            rectY = domainAxis.getCategoryStart(column, getColumnCount(),
-                    dataArea, domainAxisLocation);
-            if (seriesCount > 1) {
-                double seriesGap = dataArea.getHeight() * getItemMargin()
-                                   / (categoryCount * (seriesCount - 1));
-                rectY = rectY + visibleRow * (state.getBarWidth() + seriesGap);
-            }
-            else {
-                rectY = rectY + visibleRow * state.getBarWidth();
-            }
-
             rectX = java2dValue0;
-
+            rectY = calculateBarW0(getPlot(), orientation, dataArea, 
+                    domainAxis, state, visibleRow, column);
             rectHeight = state.getBarWidth();
             rectWidth = Math.abs(java2dValue1 - java2dValue0);
             barBase = RectangleEdge.LEFT;
         }
         else if (orientation == PlotOrientation.VERTICAL) {
             // BAR X
-            rectX = domainAxis.getCategoryStart(column, getColumnCount(),
-                    dataArea, domainAxisLocation);
-
-            if (seriesCount > 1) {
-                double seriesGap = dataArea.getWidth() * getItemMargin()
-                                   / (categoryCount * (seriesCount - 1));
-                rectX = rectX + visibleRow * (state.getBarWidth() + seriesGap);
-            }
-            else {
-                rectX = rectX + visibleRow * state.getBarWidth();
-            }
-
+            rectX = calculateBarW0(getPlot(), orientation, dataArea, 
+                    domainAxis, state, visibleRow, column);
             rectY = java2dValue0;
             barBase = RectangleEdge.BOTTOM;
         }
