@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
   <pomVersion>3</pomVersion>
   <id>jfreechart</id>
