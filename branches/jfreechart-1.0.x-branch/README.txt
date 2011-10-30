@@ -365,7 +365,7 @@ A list of changes in recent versions:
            distribution;
 
 0.9.12 : (11-Sep-2003)
-         - extended box-and-whisker plots to work with the CategoryPlot	class
+         - extended box-and-whisker plots to work with the CategoryPlot class
            as well as the XYPlot class (based on work by David Browning);
          - added a new LayeredBarRenderer (by Arnaud Lelievre);
          - added support for stacked area charts with the XYPlot class (thanks
