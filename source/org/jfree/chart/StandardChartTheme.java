@@ -235,7 +235,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             = SymbolAxis.DEFAULT_GRID_BAND_ALTERNATE_PAINT;
 
     /**
-     * The shadow generator.
+     * The shadow generator (can be null).
      * 
      * @since 1.0.14
      */
@@ -314,6 +314,19 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @param name  the name of the theme (<code>null</code> not permitted).
      */
     public StandardChartTheme(String name) {
+        this(name, false);
+    }
+
+    /**
+     * Creates a new default instance.
+     *
+     * @param name  the name of the theme (<code>null</code> not permitted).
+     * @param shadow  a flag that controls whether a shadow generator is 
+     *                included.
+     *
+     * @since 1.0.14
+     */
+    public StandardChartTheme(String name, boolean shadow) {
         if (name == null) {
             throw new IllegalArgumentException("Null 'name' argument.");
         }
@@ -347,7 +360,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.thermometerPaint = Color.white;
         this.wallPaint = BarRenderer3D.DEFAULT_WALL_PAINT;
         this.errorIndicatorPaint = Color.black;
-        this.shadowGenerator = new DefaultShadowGenerator();
+        this.shadowGenerator = shadow ? new DefaultShadowGenerator() : null;
     }
 
     /**

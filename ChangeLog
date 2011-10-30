@@ -1,3 +1,10 @@
+----------  JFREECHART 1.0.14 RELEASED ------------------------
+
+2011-10-30  David Gilbert <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/StandardChartTheme.java
+    (StandardChartTheme(String, boolean)): New method.
+
 2011-10-28  Martin Hoeller <martin.hoeller@xss.co.at>
 
     Bug 2810220:

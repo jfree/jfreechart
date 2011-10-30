@@ -2,10 +2,10 @@ JFreeChart 1.0.14
 -----------------
 30 October 2011
 
-This release contains support for multiple axes with PolarPlot, fitting
-polynomial functions to a data series, some performance improvements in the
-TimeSeriesCollection class, mouse wheel rotation of pie charts, improved Maven
-support and numerous bug fixes.
+This release contains support for multiple axes with PolarPlot, optional
+drop-shadows in plot rendering, fitting polynomial functions to a data series, 
+some performance improvements in the TimeSeriesCollection class, mouse wheel 
+rotation of pie charts, improved Maven support and numerous bug fixes.
 
 Patches:
 

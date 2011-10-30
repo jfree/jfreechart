@@ -49,6 +49,7 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
@@ -67,6 +68,15 @@ import org.jfree.ui.RefineryUtilities;
  * lines) at each data point.
  */
 public class TimeSeriesChartDemo1 extends ApplicationFrame {
+
+    private static final long serialVersionUID = 1L;
+
+    {
+        // set a theme using the new shadow generator feature available in
+        // 1.0.14 - for backwards compatibility it is not enabled by default
+        ChartFactory.setChartTheme(new StandardChartTheme("JFree/Shadow",
+                true));
+    }
 
     /**
      * A demonstration application showing how to create a simple time series
