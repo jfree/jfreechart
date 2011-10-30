@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.14  *
 ********************************
 
-x November 2011
+30 October 2011
 
 (C)opyright 2000-2011, by Object Refinery Limited and Contributors.
 
@@ -38,7 +38,7 @@ message in the JFreeChart forum.
 3.  DOCUMENTATION
 -----------------
 You can download installation instructions
-(jfreechart-1.0.13-install.pdf) from the JFreeChart home
+(jfreechart-1.0.14-install.pdf) from the JFreeChart home
 page or the project page on SourceForge.
 
 Further documentation for JFreeChart (the JFreeChart Developer Guide) is
@@ -53,9 +53,8 @@ the project.  Please help us to continue developing free software.
 
 API documentation files in HTML format are available on-line.  If you wish 
 to keep a local copy of the API files, you can regenerate them directly
-from the source code.  You can do this using the 'javadoc' or 'gjdoc' 
-utilities directly, or with the Ant script (build.xml) included in the
-distribution.
+from the source code.  You can do this using the 'javadoc' utility directly, 
+or with the Ant script (build.xml) included in the distribution.
 
 -----------------
 4.  DEPENDENCIES
@@ -67,8 +66,8 @@ APIs, so it definitely won't work with JDK 1.1 (with a small amount of effort
 you can probably get it to compile and run with JDK 1.2).  If you are using
 JFreeChart to create applets, this means that you cannot rely on the JVM
 integrated with Microsoft's Internet Explorer - your users will need to have
-the Java 2 plug-in installed.  Most other browsers (e.g. Firefox, Mozilla,
-Netscape, Konqueror) support JRE 1.4, 1.5 or 1.6.
+the Java 2 plug-in installed.  Most other browsers (e.g. Firefox, Safari and
+Chrome) offer good support for modern JREs.
 
 (b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.17)
 is included in the JFreeChart distribution.  You can obtain the complete
@@ -113,15 +112,11 @@ The JUnit tests included with JFreeChart have been created using JUnit
 -----------
 Support questions can be posted in the free support forum at
 
-    http://www.jfree.org/phpBB2/viewforum.php?f=3
-    
+    http://www.jfree.org/forum/viewforum.php?f=3
+
 We read all questions posted in the forum, and respond to as many as we can
 in the time available.  Unfortunately, there are too many questions to answer
 them all.
-
-Priority support is offered (in a separate forum at www.object-refinery.com) to
-companies and institutions that have purchased a site licence for the
-JFreeChart Developer Guide.
 
 --------------------
 6.  ANT BUILD SCRIPT
@@ -144,7 +139,7 @@ A demo application that shows a selection of the charts that can be
 generated is included in the JFreeChart distribution.   To run the
 demo (using JDK 1.3.1 or later), use the following command:
 
-    java -jar jfreechart-1.0.13-demo.jar
+    java -jar jfreechart-1.0.14-demo.jar
 
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
@@ -183,6 +178,13 @@ please post a bug report.
 9.  WHAT's NEW
 --------------
 A list of changes in recent versions:
+
+1.0.14 : (30-Oct-2011)
+        - added support for multiple axes in PolarPlot, performance 
+          improvements in the TimeSeriesCollection class, mouse wheel rotation
+          in the PiePlot class, improved Maven support, a range of other
+          minor functional enhancements and numerous bug fixes - see the NEWS 
+          and ChangeLog files for details.
 
 1.0.13 : (17-Apr-2009)
         - there are some significant new features in this release, as well
