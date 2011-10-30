@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * StatisticalBarRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2009, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2011, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -58,6 +58,7 @@
  * 16-May-2009 : Added findRangeBounds() override to take into account the
  *               dataset interval (PK);
  * 28-Oct-2011 : Fixed problem with maximalBarWidth, bug #2810220 (MH);
+ * 30-Oct-2011 : Additional change for bug #2810220 (DG);
  *
  */
 
@@ -273,20 +274,8 @@ public class StatisticalBarRenderer extends BarRenderer
                                       int column) {
 
         // BAR Y
-        double rectY = calculateBarW0(plot, PlotOrientation.HORIZONTAL,
-                dataArea, domainAxis, state, row, column);
-
-        int seriesCount = state.getVisibleSeriesCount() >= 0
-                ? state.getVisibleSeriesCount() : getRowCount();
-        int categoryCount = getColumnCount();
-        if (seriesCount > 1) {
-            double seriesGap = dataArea.getHeight() * getItemMargin()
-                               / (categoryCount * (seriesCount - 1));
-            rectY = rectY + visibleRow * (state.getBarWidth() + seriesGap);
-        }
-        else {
-            rectY = rectY + visibleRow * state.getBarWidth();
-        }
+        double rectY = calculateBarW0(plot, PlotOrientation.HORIZONTAL, 
+                dataArea, domainAxis, state, visibleRow, column);
 
         // BAR X
         Number meanValue = dataset.getMeanValue(row, column);
@@ -432,20 +421,8 @@ public class StatisticalBarRenderer extends BarRenderer
                                     int column) {
 
         // BAR X
-        double rectX = calculateBarW0(plot, PlotOrientation.VERTICAL,
-                dataArea, domainAxis, state, row, column);
-
-        int seriesCount = state.getVisibleSeriesCount() >= 0
-                ? state.getVisibleSeriesCount() : getRowCount();
-        int categoryCount = getColumnCount();
-        if (seriesCount > 1) {
-            double seriesGap = dataArea.getWidth() * getItemMargin()
-                               / (categoryCount * (seriesCount - 1));
-            rectX = rectX + visibleRow * (state.getBarWidth() + seriesGap);
-        }
-        else {
-            rectX = rectX + visibleRow * state.getBarWidth();
-        }
+        double rectX = calculateBarW0(plot, PlotOrientation.VERTICAL, dataArea,
+                domainAxis, state, visibleRow, column);
 
         // BAR Y
         Number meanValue = dataset.getMeanValue(row, column);
