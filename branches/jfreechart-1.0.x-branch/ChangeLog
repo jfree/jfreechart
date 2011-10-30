@@ -2166,10 +2166,10 @@
 
 2008-09-24  David Gilbert  <david.gilbert@object-refinery.com>
 
-	Bug 2113627 
-	* source/org/jfree/chart/renderer/xy/XYStepRenderer.java
-	(drawItem): Draw item labels in second pass only, add chart
-	entity info in first pass only.
+    Bug 2113627 
+    * source/org/jfree/chart/renderer/xy/XYStepRenderer.java
+    (drawItem): Draw item labels in second pass only, add chart
+    entity info in first pass only.
 
 2008-09-23  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -2326,7 +2326,7 @@
 
 2008-09-01  David Gilbert  <david.gilbert@object-refinery.com>
 
-	Bug 2078057:
+    Bug 2078057:
     * source/org/jfree/chart/axis/DateAxis.java
     (previousStandardDate): For month option, peg in case of 
     non-default time zone,
