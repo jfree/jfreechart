@@ -1,14 +1,16 @@
 JFreeChart 1.0.14
 -----------------
-NOT YET RELEASED
+30 October 2011
 
 This release contains support for multiple axes with PolarPlot, fitting
 polynomial functions to a data series, some performance improvements in the
-TimeSeriesCollection class, mouse wheel rotation of pie charts, and numerous
-bug fixes.
+TimeSeriesCollection class, mouse wheel rotation of pie charts, improved Maven
+support and numerous bug fixes.
 
 Patches:
 
+3421088 : Bugfix for misalignment in BoxAndWhiskerRenderer;
+2952086 : Enhancement for finding bounds in XYZDatasets;
 2954302 : CategoryPointerAnnotation line calculation;
 2902842 : HistogramDataset.addSeries() fires change change event (by
           Thomas A Caswell);
@@ -21,13 +23,25 @@ Patches:
 
 Bug Fixes:
 
+3429707 : LogAxis endless loop;
+3428870 : Missing argument check in TextAnnotation;
 3418287 : RelativeDateFormatTest.java is locale dependent;
+3353913 : Localisation fixes for ChartPanel, CompassPlot and PiePlot3D;
 3237879 : RingPlot should respect getSectionOutlineVisible();
+3190615 : Added missing clear() method in CategoryTableXYDataset;
+3165708 : PolarChartPanel localisation fix;
+3072674 : Bad handling of NaN in DefaultStatisticalCategoryDataset;
+3035289 : StackedXYBarRenderer should respect series/item visible flags;
+3026341 : Check for null in getDomain/RangeBounds() for XYShapeRenderer;
+2947660 : AbstractCategoryRenderer fix null check in getLegendItems();
+2946521 : StandardDialScale check majorTickIncrement argument;
 2876406 : TimeTableXYDataset should support Comparable for series keys;
 2868557 : BoxAndWhiskerRenderer should fire change event in setMedianVisible();
 2849731 : For IntervalCategoryDataset and IntervalXYDataset, fix 
           iterateRangeBounds() in DatasetUtilities;
 2840132 : AbstractXYItemRenderer drawAnnotations doesn't set renderer index;
+2810220 : Offset problem in StatisticalBarRenderer;
+2802014 : Dial value border too small;
 2781844 : XYPointerAnnotation arrow drawing;
 1937486 : AreaRenderer doesn't respect AreaRendererEndType.LEVEL;
 
@@ -36,6 +50,11 @@ Also fixed:
 - cached minY and maxY in TimeSeries.createCopy();
 - scaling issues for charts copied to the clipboard;
 - use of timezone in TimeTableXYDataset constructor;
+- duplicate series names in XYSeriesCollection;
+- HistogramDataset fires a change event in addSeries();
+- check visibility of main chart title before drawing it;
+- fixed serialization of PowerFunction2D, NormalDistributionFunction2D,
+  and LineFunction2D;
 - item label positioning for the AreaRenderer class when the plot has an
   horizontal orientation.
 
