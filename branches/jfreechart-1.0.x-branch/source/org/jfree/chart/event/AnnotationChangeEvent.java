@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * --------------------------
@@ -41,6 +41,7 @@
 package org.jfree.chart.event;
 
 import org.jfree.chart.annotations.Annotation;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * An event that can be forwarded to any {@link AnnotationChangeListener} to
@@ -50,19 +51,21 @@ import org.jfree.chart.annotations.Annotation;
  */
 public class AnnotationChangeEvent extends ChartChangeEvent {
 
-    /** The plot that generated the event. */
+    /** The annotation that generated the event. */
     private Annotation annotation;
 
     /**
      * Creates a new <code>AnnotationChangeEvent</code> instance.
      *
-     * @param annotation  the annotation that triggered the event 
+     * @param source  the event source.
+     * @param annotation  the annotation that triggered the event
      *     (<code>null</code> not permitted).
      *
      * @since 1.0.14
      */
     public AnnotationChangeEvent(Object source, Annotation annotation) {
         super(source);
+        ParamChecks.nullNotPermitted(annotation, "annotation");
         this.annotation = annotation;
     }
 
