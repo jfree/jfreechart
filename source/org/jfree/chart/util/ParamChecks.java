@@ -60,7 +60,7 @@ public class ParamChecks {
      *
      * @since 1.0.14
      */
-    public static final void nullNotPermitted(Object param, String name) {
+    public static void nullNotPermitted(Object param, String name) {
         if (param == null) {
             throw new IllegalArgumentException("Null '" + name + "' argument");
         }
