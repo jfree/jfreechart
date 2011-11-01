@@ -1488,15 +1488,15 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             clone.baseToolTipGenerator = (XYToolTipGenerator) pc.clone();
         }
 
-        if (clone.legendItemLabelGenerator instanceof PublicCloneable) {
+        if (this.legendItemLabelGenerator instanceof PublicCloneable) {
             clone.legendItemLabelGenerator = (XYSeriesLabelGenerator)
                     ObjectUtilities.clone(this.legendItemLabelGenerator);
         }
-        if (clone.legendItemToolTipGenerator instanceof PublicCloneable) {
+        if (this.legendItemToolTipGenerator instanceof PublicCloneable) {
             clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
                     ObjectUtilities.clone(this.legendItemToolTipGenerator);
         }
-        if (clone.legendItemURLGenerator instanceof PublicCloneable) {
+        if (this.legendItemURLGenerator instanceof PublicCloneable) {
             clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
                     ObjectUtilities.clone(this.legendItemURLGenerator);
         }
@@ -1505,19 +1505,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 this.foregroundAnnotations);
         clone.backgroundAnnotations = (List) ObjectUtilities.deepClone(
                 this.backgroundAnnotations);
-
-        if (clone.legendItemLabelGenerator instanceof PublicCloneable) {
-            clone.legendItemLabelGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtilities.clone(this.legendItemLabelGenerator);
-        }
-        if (clone.legendItemToolTipGenerator instanceof PublicCloneable) {
-            clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtilities.clone(this.legendItemToolTipGenerator);
-        }
-        if (clone.legendItemURLGenerator instanceof PublicCloneable) {
-            clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtilities.clone(this.legendItemURLGenerator);
-        }
 
         return clone;
     }

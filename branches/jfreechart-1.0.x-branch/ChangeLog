@@ -1,5 +1,11 @@
 ----------  JFREECHART 1.0.14 RELEASED ------------------------
 
+2011-11-01  David Gilbert <david.gilbert@object-refinery.com>
+
+    Bug 3432020:
+    * org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
+    (clone): Remove duplicated lines.
+
 2011-10-30  David Gilbert <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/renderer/category/IntervalBarRenderer.java
