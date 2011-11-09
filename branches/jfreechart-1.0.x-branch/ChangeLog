@@ -2,6 +2,13 @@
 
 2011-11-09  Martin Hoeller <martin.hoeller@xss.co.at>
 
+    Translations provided by Petr Kopac:
+    * org/jfree/chart/LocalizationBundle_cs.properties: New file;
+    * org/jfree/chart/plot/LocalizationBundle_cs.properties: New file;
+    * org/jfree/chart/editor/LocalizationBundle_cs.properties: New file;
+
+2011-11-09  Martin Hoeller <martin.hoeller@xss.co.at>
+
     Bug 3433405:
     * org/jfree/chart/renderer/category/LineRenderer3D.java
     (drawItem): Fixed eventually wrong item label position;

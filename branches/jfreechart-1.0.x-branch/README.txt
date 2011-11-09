@@ -809,6 +809,7 @@ below:
     - Christian W. Zuckschwerdt
     - Hari 
     - Sam (oldman)
+    - Petr Kopac
 
 It is possible that I have missed someone on this list, if that
 applies to you, please e-mail me. 
