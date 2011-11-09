@@ -1,5 +1,11 @@
 ----------  JFREECHART 1.0.14 RELEASED ------------------------
 
+2011-11-09  Martin Hoeller <martin.hoeller@xss.co.at>
+
+    Bug 3433405:
+    * org/jfree/chart/renderer/category/LineRenderer3D.java
+    (drawItem): Fixed eventually wrong item label position;
+
 2011-11-01  David Gilbert <david.gilbert@object-refinery.com>
 
     Bug 3432020:

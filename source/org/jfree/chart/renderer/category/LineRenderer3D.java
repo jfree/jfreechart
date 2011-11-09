@@ -47,6 +47,7 @@
  *               argument check to setWallPaint() (DG);
  * 03-Apr-2007 : Fixed bugs in drawBackground() method (DG);
  * 16-Oct-2007 : Fixed bug in range marker drawing (DG);
+ * 09-Nov-2011 : Fixed bug 3433405 - wrong item label position (MH);
  *
  */
 
@@ -598,8 +599,14 @@ public class LineRenderer3D extends LineAndShapeRenderer
 
         // draw the item label if there is one...
         if (isItemLabelVisible(row, column)) {
-            drawItemLabel(g2, orientation, dataset, row, column, x1, y1,
-                    (value < 0.0));
+            if (orientation == PlotOrientation.HORIZONTAL) {
+                drawItemLabel(g2, orientation, dataset, row, column, y1, x1,
+                        (value < 0.0));
+            }
+            else if (orientation == PlotOrientation.VERTICAL) {
+                drawItemLabel(g2, orientation, dataset, row, column, x1, y1,
+                        (value < 0.0));
+            }
         }
 
         // add an item entity, if this information is being collected

@@ -23,6 +23,7 @@ Patches:
 
 Bug Fixes:
 
+3433405 : LineChart3D - Problem with Item Labels;
 3429707 : LogAxis endless loop;
 3428870 : Missing argument check in TextAnnotation;
 3418287 : RelativeDateFormatTest.java is locale dependent;
