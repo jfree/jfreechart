@@ -1,5 +1,16 @@
 ----------  JFREECHART 1.0.14 RELEASED ------------------------
 
+2011-11-12  Martin Hoeller <martin.hoeller@xss.co.at>
+
+    Bug 3432721:
+    * org/jfree/chart/plot/PolarPlot.java
+    (translateToJava2D): Fix calculation to work with any axis,
+    (translateValueThetaRadiusToJava2D): eliminate duplicate code;
+    * tests/org/jfree/chart/plot/PolarPlotTests.java
+    (testTranslateToJava2D_NumberAxis): New method,
+    (testTranslateToJava2D_NumberAxisAndMargin): New method,
+    (testTranslateToJava2D_LogAxis): New method;
+
 2011-11-09  Martin Hoeller <martin.hoeller@xss.co.at>
 
     Translations provided by Petr Kopac:

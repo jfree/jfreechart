@@ -2,10 +2,10 @@ JFreeChart 1.0.14
 -----------------
 30 October 2011
 
-This release contains support for multiple axes with PolarPlot, optional
-drop-shadows in plot rendering, fitting polynomial functions to a data series, 
-some performance improvements in the TimeSeriesCollection class, mouse wheel 
-rotation of pie charts, improved Maven support and numerous bug fixes.
+This release contains support for multiple and logarithmic axes with PolarPlot,
+optional drop-shadows in plot rendering, fitting polynomial functions to a data
+series, some performance improvements in the TimeSeriesCollection class, mouse
+wheel rotation of pie charts, improved Maven support and numerous bug fixes.
 
 Patches:
 
@@ -23,6 +23,7 @@ Patches:
 
 Bug Fixes:
 
+3432721 : PolarPlot doesn't work with logarithmic axis;
 3433405 : LineChart3D - Problem with Item Labels;
 3429707 : LogAxis endless loop;
 3428870 : Missing argument check in TextAnnotation;
