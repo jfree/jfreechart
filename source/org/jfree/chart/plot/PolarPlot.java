@@ -53,7 +53,8 @@
  * 09-Dec-2009 : Extended getLegendItems() to handle multiple datasets (DG);
  * 25-Jun-2010 : Better support for multiple axes (MH);
  * 03-Oct-2011 : Added support for angleOffset and direction (MH);
- *
+ * 12-Nov-2011 : Fixed bug 3432721, log-axis doesn't work (MH);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -222,7 +223,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     private List cornerTextItems = new ArrayList();
 
     /** 
-     * The actual margin.
+     * The actual margin in pixels.
      *
      * @since 1.0.14
      */
@@ -1027,7 +1028,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /**
      * Returns the margin around the plot area.
      * 
-     * @return The actual margin.
+     * @return The actual margin in pixels.
      *
      * @since 1.0.14
      */
@@ -1039,7 +1040,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * Set the margin around the plot area and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      * 
-     * @param margin The new margin.
+     * @param margin The new margin in pixels.
      *
      * @since 1.0.14
      */
@@ -2063,25 +2064,22 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         double miny = dataArea.getMinY() + this.margin;
         double maxy = dataArea.getMaxY() - this.margin;
 
-        double lengthX = maxx - minx;
-        double lengthY = maxy - miny;
-        double length = Math.min(lengthX, lengthY);
+        double halfWidth = (maxx - minx) / 2.0;
+        double halfHeight = (maxy - miny) / 2.0;
 
-        double midX = minx + lengthX / 2.0;
-        double midY = miny + lengthY / 2.0;
+        double midX = minx + halfWidth;
+        double midY = miny + halfHeight;
+        
+        double l = Math.min(halfWidth, halfHeight);
+        Rectangle2D quadrant = new Rectangle2D.Double(midX, midY, l, l);
 
         double axisMin = axis.getLowerBound();
-        double axisMax =  axis.getUpperBound();
         double adjustedRadius = Math.max(radius, axisMin);
-
-        double xv = length / 2.0 * Math.cos(radians);
-        double yv = length / 2.0 * Math.sin(radians);
-
-        float x = (float) (midX + (xv * (adjustedRadius - axisMin)
-                / (axisMax - axisMin)));
-        float y = (float) (midY + (yv * (adjustedRadius - axisMin)
-                / (axisMax - axisMin)));
-
+       
+        double length = axis.valueToJava2D(adjustedRadius, quadrant, RectangleEdge.BOTTOM) - midX;
+        float x = (float) (midX + Math.cos(radians) * length);
+        float y = (float) (midY + Math.sin(radians) * length);
+        
         int ix = Math.round(x);
         int iy = Math.round(y);
 
@@ -2107,40 +2105,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     public Point translateValueThetaRadiusToJava2D(double angleDegrees,
             double radius, Rectangle2D dataArea) {
 
-        if (counterClockwise)
-            angleDegrees = -angleDegrees;
-        double radians = Math.toRadians(angleDegrees + this.angleOffset);
-
-        double minx = dataArea.getMinX() + this.margin;
-        double maxx = dataArea.getMaxX() - this.margin;
-        double miny = dataArea.getMinY() + this.margin;
-        double maxy = dataArea.getMaxY() - this.margin;
-
-        double lengthX = maxx - minx;
-        double lengthY = maxy - miny;
-        double length = Math.min(lengthX, lengthY);
-
-        double midX = minx + lengthX / 2.0;
-        double midY = miny + lengthY / 2.0;
-
-        double axisMin = getAxis().getLowerBound();
-        double axisMax =  getAxis().getUpperBound();
-        double adjustedRadius = Math.max(radius, axisMin);
-
-        double xv = length / 2.0 * Math.cos(radians);
-        double yv = length / 2.0 * Math.sin(radians);
-
-        float x = (float) (midX + (xv * (adjustedRadius - axisMin)
-                / (axisMax - axisMin)));
-        float y = (float) (midY + (yv * (adjustedRadius - axisMin)
-                / (axisMax - axisMin)));
-
-        int ix = Math.round(x);
-        int iy = Math.round(y);
-
-        Point p = new Point(ix, iy);
-        return p;
-
+        return translateToJava2D(angleDegrees, radius, getAxis(), dataArea);
     }
 
     /**
