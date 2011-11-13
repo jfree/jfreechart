@@ -1,5 +1,11 @@
 ----------  JFREECHART 1.0.14 RELEASED ------------------------
 
+2011-11-13  David Gilbert <david.gilbert@object-refinery.com>
+
+    Patch 3435734 by Martin Hoeller:
+    * org/jfree/chart/renderer/category/LineRenderer3D.java
+    (drawItem): Draw lines in pass 0 and item labels in pass 1;
+
 2011-11-12  Martin Hoeller <martin.hoeller@xss.co.at>
 
     Bug 3432721:
