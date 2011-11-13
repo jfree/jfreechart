@@ -27,10 +27,11 @@
  * -------------------
  * LineRenderer3D.java
  * -------------------
- * (C) Copyright 2004-2008, by Tobias Selb and Contributors.
+ * (C) Copyright 2004-2011, by Tobias Selb and Contributors.
  *
  * Original Author:  Tobias Selb (http://www.uepselon.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *                   Martin Hoeller (patch 3435374);
  *
  * Changes
  * -------
@@ -48,6 +49,7 @@
  * 03-Apr-2007 : Fixed bugs in drawBackground() method (DG);
  * 16-Oct-2007 : Fixed bug in range marker drawing (DG);
  * 09-Nov-2011 : Fixed bug 3433405 - wrong item label position (MH);
+ * 13-Nov-2011 : Fixed item labels overlapped by line - patch 3435374 (MH);
  *
  */
 
@@ -120,7 +122,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * Creates a new renderer.
      */
     public LineRenderer3D() {
-        super(true, false);  //Create a line renderer only
+        super(true, false);  // create a line renderer only
         this.xOffset = DEFAULT_X_OFFSET;
         this.yOffset = DEFAULT_Y_OFFSET;
         this.wallPaint = DEFAULT_WALL_PAINT;
@@ -189,7 +191,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
     }
 
     /**
-     * Sets the paint used to hightlight the left and bottom walls in the plot
+     * Sets the paint used to highlight the left and bottom walls in the plot
      * background, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
@@ -550,7 +552,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
             shape = ShapeUtilities.createTranslatedShape(shape, x1, y1);
         }
 
-        if (getItemLineVisible(row, column)) {
+        if (pass == 0 && getItemLineVisible(row, column)) {
             if (column != 0) {
 
                 Number previousValue = dataset.getValue(row, column - 1);
@@ -598,7 +600,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
         }
 
         // draw the item label if there is one...
-        if (isItemLabelVisible(row, column)) {
+        if (pass == 1 && isItemLabelVisible(row, column)) {
             if (orientation == PlotOrientation.HORIZONTAL) {
                 drawItemLabel(g2, orientation, dataset, row, column, y1, x1,
                         (value < 0.0));

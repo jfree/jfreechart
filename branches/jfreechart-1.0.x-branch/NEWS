@@ -1,6 +1,6 @@
 JFreeChart 1.0.14
 -----------------
-30 October 2011
+13 November 2011
 
 This release contains support for multiple and logarithmic axes with PolarPlot,
 optional drop-shadows in plot rendering, fitting polynomial functions to a data
@@ -9,6 +9,7 @@ wheel rotation of pie charts, improved Maven support and numerous bug fixes.
 
 Patches:
 
+3435734 : Fix lines overlapping item labels (by Martin Hoeller);
 3421088 : Bugfix for misalignment in BoxAndWhiskerRenderer;
 2952086 : Enhancement for finding bounds in XYZDatasets;
 2954302 : CategoryPointerAnnotation line calculation;
