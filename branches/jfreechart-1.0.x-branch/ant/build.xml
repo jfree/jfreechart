@@ -189,7 +189,7 @@
         <copy file="${basedir}/README.txt" tofile="${basedir}/distribution/README.txt" />
         <copy file="${basedir}/NEWS" tofile="${basedir}/distribution/NEWS" />
         <copy file="${basedir}/ChangeLog" tofile="${basedir}/distribution/ChangeLog" />
-        <copy file="${basedir}/maven-jfreechart-project.xml" tofile="${basedir}/distribution/maven-jfreechart-project.xml" />
+        <copy file="${basedir}/pom.xml" tofile="${basedir}/distribution/pom.xml" />
 
         <!-- copy across LICENCE -->
         <copy file="${basedir}/licence-LGPL.txt" tofile="${basedir}/distribution/licence-LGPL.txt" />
