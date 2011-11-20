@@ -95,7 +95,7 @@ public class DateTitle extends TextTitle implements Serializable {
      * <P>
      * The date style should be one of:  <code>SHORT</code>,
      * <code>MEDIUM</code>, <code>LONG</code> or <code>FULL</code>
-     * (defined in <code>java.util.DateFormat<code>).
+     * (defined in <code>java.util.DateFormat</code>).
      *
      * @param style  the date style.
      */
