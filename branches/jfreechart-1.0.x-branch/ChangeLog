@@ -1,5 +1,12 @@
 ----------  JFREECHART 1.0.14 RELEASED ------------------------
 
+2011-11-20  David Gilbert <david.gilbert@object-refinery.com>
+
+    Bug 3440237:
+    * org/jfree/chart/plot/CategoryPlot.java
+    (CategoryPlot): initialise shadow generator as null;
+    (PiePlot): likewise;
+
 2011-11-13  David Gilbert <david.gilbert@object-refinery.com>
 
     Patch 3435734 by Martin Hoeller:

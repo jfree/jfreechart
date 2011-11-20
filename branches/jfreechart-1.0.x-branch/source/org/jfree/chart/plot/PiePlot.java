@@ -166,6 +166,7 @@
  * 03-Sep-2009 : Fixed bug where sinmpleLabelOffset is ignored (DG);
  * 04-Nov-2009 : Add mouse wheel rotation support (DG);
  * 18-Oct-2011 : Fixed tooltip offset with shadow generator (DG);
+ * 20-Nov-2011 : Initialise shadow generator as null (DG);
  * 
  */
 
@@ -213,7 +214,6 @@ import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.urls.PieURLGenerator;
-import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.DefaultKeyedValues;
@@ -613,7 +613,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         this.ignoreNullValues = false;
         this.ignoreZeroValues = false;
 
-        this.shadowGenerator = new DefaultShadowGenerator();
+        this.shadowGenerator = null;
     }
 
     /**

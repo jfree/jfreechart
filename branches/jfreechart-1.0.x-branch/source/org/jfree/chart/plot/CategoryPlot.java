@@ -177,6 +177,7 @@
  * 10-Jul-2009 : Added optional drop shadow generator (DG);
  * 27-Sep-2011 : Fixed annotation import (DG);
  * 18-Oct-2011 : Fixed tooltip offset with shadow generator (DG);
+ * 20-Nov-2011 : Initialise shadow generator as null (DG);
  *
  */
 
@@ -233,7 +234,6 @@ import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.category.AbstractCategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRendererState;
-import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
@@ -660,7 +660,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         this.annotations = new java.util.ArrayList();
         
         this.rangePannable = false;
-        this.shadowGenerator = new DefaultShadowGenerator();
+        this.shadowGenerator = null;
     }
 
     /**
