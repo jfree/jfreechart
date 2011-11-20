@@ -311,7 +311,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
 
     /**
      * Draws the grid bands.  Alternate bands are colored using
-     * <CODE>gridBandPaint<CODE> (<CODE>DEFAULT_GRID_BAND_PAINT</CODE> by
+     * <CODE>gridBandPaint</CODE> (<CODE>DEFAULT_GRID_BAND_PAINT</CODE> by
      * default).
      *
      * @param g2  the graphics device.
@@ -348,9 +348,9 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * @param dataArea  the area within which the plot should be drawn
      *                  (a subset of the drawArea).
      * @param firstGridBandIsDark  True: the first grid band takes the
-     *                             color of <CODE>gridBandPaint<CODE>.
+     *                             color of <CODE>gridBandPaint</CODE>.
      *                             False: the second grid band takes the
-     *                             color of <CODE>gridBandPaint<CODE>.
+     *                             color of <CODE>gridBandPaint</CODE>.
      * @param ticks  the ticks.
      */
     protected void drawGridBandsHorizontal(Graphics2D g2,
@@ -405,9 +405,9 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * @param plotArea  the area within which the plot should be drawn (a
      *                  subset of the drawArea).
      * @param firstGridBandIsDark  True: the first grid band takes the
-     *                             color of <CODE>gridBandPaint<CODE>.
+     *                             color of <CODE>gridBandPaint</CODE>.
      *                             False: the second grid band takes the
-     *                             color of <CODE>gridBandPaint<CODE>.
+     *                             color of <CODE>gridBandPaint</CODE>.
      * @param ticks  a list of ticks.
      */
     protected void drawGridBandsVertical(Graphics2D g2,
