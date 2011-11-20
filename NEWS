@@ -1,6 +1,6 @@
 JFreeChart 1.0.14
 -----------------
-13 November 2011
+20 November 2011
 
 This release contains support for multiple and logarithmic axes with PolarPlot,
 optional drop-shadows in plot rendering, fitting polynomial functions to a data
@@ -24,6 +24,7 @@ Patches:
 
 Bug Fixes:
 
+3440237 : Shadows always visible;
 3432721 : PolarPlot doesn't work with logarithmic axis;
 3433405 : LineChart3D - Problem with Item Labels;
 3429707 : LogAxis endless loop;
