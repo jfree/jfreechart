@@ -109,7 +109,7 @@ public class DateTitle extends TextTitle implements Serializable {
      * <p>
      * The date style should be one of:  <code>SHORT</code>,
      * <code>MEDIUM</code>, <code>LONG</code> or <code>FULL</code> (defined
-     * in <code>java.util.DateFormat<code>).
+     * in <code>java.util.DateFormat</code>).
      * <P>
      * For the locale, you can use <code>Locale.getDefault()</code> for the
      * default locale.
@@ -163,7 +163,7 @@ public class DateTitle extends TextTitle implements Serializable {
      * <P>
      * The date style should be one of:  <code>SHORT</code>,
      * <code>MEDIUM</code>, <code>LONG</code> or <code>FULL</code> (defined
-     * in <code>java.util.DateFormat<code>).
+     * in <code>java.util.DateFormat</code>).
      * <P>
      * For the locale, you can use <code>Locale.getDefault()</code> for the
      * default locale.
