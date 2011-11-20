@@ -2360,7 +2360,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * {@link PlotChangeEvent} to all registered listeners.  Note that this is
      * a bitmap drop-shadow generation facility and is separate from the
      * vector based show option that is controlled via the
-     * {@link #setShadowPaint()} method.
+     * {@link #setShadowPaint(java.awt.Paint)} method.
      *
      * @param generator  the generator (<code>null</code> permitted).
      *
