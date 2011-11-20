@@ -213,7 +213,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @return The object (possibly <code>null</code>).
      *
-     * @throws IllegalArgumentException if <code>rowKey<code> or
+     * @throws IllegalArgumentException if <code>rowKey</code> or
      *         <code>columnKey</code> is <code>null</code>.
      * @throws UnknownKeyException if <code>rowKey</code> or
      *         <code>columnKey</code> is not recognised.
