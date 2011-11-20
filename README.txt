@@ -179,7 +179,7 @@ please post a bug report.
 --------------
 A list of changes in recent versions:
 
-1.0.14 : (13-Nov-2011)
+1.0.14 : (20-Nov-2011)
         - added support for multiple axes in PolarPlot, performance 
           improvements in the TimeSeriesCollection class, mouse wheel rotation
           in the PiePlot class, improved Maven support, a range of other
