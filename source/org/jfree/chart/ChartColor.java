@@ -141,7 +141,7 @@ public class ChartColor extends Color {
 
     /**
      * Convenience method to return an array of <code>Paint</code> objects that
-     * represent the pre-defined colors in the <code>Color<code> and
+     * represent the pre-defined colors in the <code>Color</code> and
      * <code>ChartColor</code> objects.
      *
      * @return An array of objects with the <code>Paint</code> interface.
