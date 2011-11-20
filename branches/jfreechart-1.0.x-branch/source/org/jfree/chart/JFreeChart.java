@@ -1741,7 +1741,7 @@ public class JFreeChart implements Drawable,
 
 /**
  * Information about the JFreeChart project.  One instance of this class is
- * assigned to <code>JFreeChart.INFO<code>.
+ * assigned to <code>JFreeChart.INFO</code>.
  */
 class JFreeChartInfo extends ProjectInfo {
 
