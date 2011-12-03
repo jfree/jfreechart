@@ -147,6 +147,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.urls.CategoryURLGenerator;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
@@ -262,9 +263,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #getPlot()
      */
     public void setPlot(CategoryPlot plot) {
-        if (plot == null) {
-            throw new IllegalArgumentException("Null 'plot' argument.");
-        }
+        ParamChecks.nullNotPermitted(plot, "plot");
         this.plot = plot;
     }
 
@@ -1609,9 +1608,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     public void setLegendItemLabelGenerator(
             CategorySeriesLabelGenerator generator) {
-        if (generator == null) {
-            throw new IllegalArgumentException("Null 'generator' argument.");
-        }
+        ParamChecks.nullNotPermitted(generator, "generator");
         this.legendItemLabelGenerator = generator;
         fireChangeEvent();
     }
@@ -1678,9 +1675,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     protected void addItemEntity(EntityCollection entities,
                                  CategoryDataset dataset, int row, int column,
                                  Shape hotspot) {
-        if (hotspot == null) {
-            throw new IllegalArgumentException("Null 'hotspot' argument.");
-        }
+        ParamChecks.nullNotPermitted(hotspot, "hotspot");
         if (!getItemCreateEntity(row, column)) {
             return;
         }
