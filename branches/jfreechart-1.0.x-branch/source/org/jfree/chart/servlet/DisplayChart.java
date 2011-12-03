@@ -39,7 +39,8 @@
  *               ServletUtilities.java (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- *
+ * 03-Dec-2011 : Fixed path disclosure vulnerability - see bug 2879650 (DG);
+ * 
  */
 
 package org.jfree.chart.servlet;
@@ -113,8 +114,9 @@ public class DisplayChart extends HttpServlet {
         //  Check the file exists
         File file = new File(System.getProperty("java.io.tmpdir"), filename);
         if (!file.exists()) {
-            throw new ServletException("File '" + file.getAbsolutePath()
-                    + "' does not exist");
+            throw new ServletException(
+                    "Unable to display the chart with the filename '" 
+                    + filename + "'.");
         }
 
         //  Check that the graph being served was created by the current user

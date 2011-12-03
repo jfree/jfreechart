@@ -2,9 +2,15 @@ JFreeChart 1.0.15
 -----------------
 Not yet released
 
+This release also fixes a minor security flaw in the DisplayChart class, 
+detected and reported by OSI Security:
+
+http://www.osisecurity.com.au/advisories/jfreechart-path-disclosure
+
 Bug Fixes:
 
 3446965 : TimeSeries calculates range incorrectly in addOrUpdate();
+2879650 : Path disclosure vulnerability in DisplayChart servlet;
 
 
 JFreeChart 1.0.14
