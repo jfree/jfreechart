@@ -39,7 +39,7 @@
  * 17-Oct-2007 : Fixed listener registration/deregistration bugs (DG);
  * 24-Oct-2007 : Maintain pointers in their own list, so they can be
  *               drawn after other layers (DG);
- * 15-Feb-2007 : Fixed clipping bug (1873160) (DG);
+ * 15-Feb-2008 : Fixed clipping bug (1873160) (DG);
  *
  */
 
