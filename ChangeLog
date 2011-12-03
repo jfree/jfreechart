@@ -1,3 +1,9 @@
+2011-12-03  David Gilbert <david.gilbert@object-refinery.com>
+
+    Bug 3446965:
+    * org/jfree/data/time/TimeSeries.java
+    (addOrUpdate): correct update of this.maxY.
+
 ----------  JFREECHART 1.0.14 RELEASED ------------------------
 
 2011-11-20  David Gilbert <david.gilbert@object-refinery.com>

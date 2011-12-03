@@ -49,6 +49,7 @@
  * 26-May-2009 : Added various tests for min/maxY values (DG);
  * 09-Jun-2009 : Added testAdd_TimeSeriesDataItem (DG);
  * 31-Aug-2009 : Added new test for createCopy() method (DG);
+ * 03-Dec-2011 : Added testBug3446965() (DG);
  * 
  */
 
@@ -1002,6 +1003,19 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
             pass = false;
         }
         assertTrue(pass);
+    }
+
+    /**
+     * Test for bug report 3446965.
+     */
+    public void testBug3446965() {
+        TimeSeries s = new TimeSeries("s");
+        s.addOrUpdate(new Year(2011), 100.0);
+        s.addOrUpdate(new Year(2012), 150.0);
+        s.addOrUpdate(new Year(2013), 200.0);
+        s.addOrUpdate(new Year(2012), 250.0);  // this line triggers the defect
+        assertEquals(100.0, s.getMinY(), EPSILON);
+        assertEquals(250.0, s.getMaxY(), EPSILON);
     }
 
     private static final double EPSILON = 0.0000000001;
