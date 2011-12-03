@@ -82,6 +82,8 @@
  *               changes (DG);
  * 10-Jun-2009 : Added addOrUpdate(TimeSeriesDataItem) method (DG);
  * 31-Aug-2009 : Clear minY and maxY cache values in createCopy (DG);
+ * 03-Dec-2011 : Fixed bug 3446965 which affects the y-range calculation for 
+ *               the series (DG);
  * 
  */
 
@@ -843,7 +845,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             else if (item.getValue() != null) {
                 double yy = item.getValue().doubleValue();
                 this.minY = minIgnoreNaN(this.minY, yy);
-                this.maxY = minIgnoreNaN(this.maxY, yy);
+                this.maxY = maxIgnoreNaN(this.maxY, yy);
             }
         }
         else {

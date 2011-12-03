@@ -1,3 +1,12 @@
+JFreeChart 1.0.15
+-----------------
+Not yet released
+
+Bug Fixes:
+
+3446965 : TimeSeries calculates range incorrectly in addOrUpdate();
+
+
 JFreeChart 1.0.14
 -----------------
 20 November 2011
