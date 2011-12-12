@@ -40,6 +40,7 @@
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
  * 27-Feb-2009 : Fixed bug 2612649, NullPointerException (DG);
+ * 03-Nov-2011 : Added support for DefaultPolarPlotEditor (MH);
  *
  */
 
@@ -70,6 +71,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.ContourPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
@@ -173,6 +175,11 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * @param plot  the plot, which should be changed.
      */
     public DefaultPlotEditor(Plot plot) {
+        JPanel panel = createPlotPanel(plot);
+        add(panel);
+    }
+    
+    protected JPanel createPlotPanel(Plot plot) {
         this.plotInsets = plot.getInsets();
         this.backgroundPaintSample = new PaintSample(plot.getBackgroundPaint());
         this.outlineStrokeSample = new StrokeSample(plot.getOutlineStroke());
@@ -307,6 +314,15 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         appearance.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         appearance.add(general, BorderLayout.NORTH);
 
+        JTabbedPane tabs = createPlotTabs(plot);
+        tabs.add(localizationResources.getString("Appearance"), appearance);
+        panel.add(tabs);
+        
+        return panel;
+    }
+
+    protected JTabbedPane createPlotTabs(Plot plot)
+    {
         JTabbedPane tabs = new JTabbedPane();
         tabs.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 
@@ -333,6 +349,9 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         else if (plot instanceof XYPlot) {
             rangeAxis = ((XYPlot) plot).getRangeAxis();
         }
+        else if (plot instanceof PolarPlot) {
+            rangeAxis = ((PolarPlot) plot).getAxis();
+        }
 
         this.rangeAxisPropertyPanel = DefaultAxisEditor.getInstance(rangeAxis);
         if (this.rangeAxisPropertyPanel != null) {
@@ -358,10 +377,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         }
 //dmo: (end dmo additions)
 
-        tabs.add(localizationResources.getString("Appearance"), appearance);
-        panel.add(tabs);
-
-        add(panel);
+        return tabs;
     }
 
     /**
@@ -582,6 +598,10 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             else if (plot instanceof XYPlot) {
                 XYPlot p = (XYPlot) plot;
                 rangeAxis = p.getRangeAxis();
+            }
+            else if (plot instanceof PolarPlot) {
+                PolarPlot p = (PolarPlot) plot;
+                rangeAxis = p.getAxis();
             }
             if (rangeAxis != null) {
                 this.rangeAxisPropertyPanel.setAxisProperties(rangeAxis);

@@ -1,3 +1,28 @@
+2011-11-12  Martin Hoeller <martin.hoeller@xss.co.at>
+
+    Improvements to axis and plot editors:
+    * org/jfree/chart/editor/DefaultValueAxisEditor.java: New file;
+    * org/jfree/chart/editor/DefaultLogAxisEditor.java: New file;
+    * org/jfree/chart/editor/DefaultPolarPlotEditor.java: New file;
+    * org/jfree/chart/editor/DefaultChartEditor.java:
+    (constructor): added support for DefaultPolarPlotEditor;
+    * org/jfree/chart/editor/DefaultAxisEditor.java
+    (constructor): added support for DefaultLogAxisEditor;
+    * org/jfree/chart/editor/DefaultNumberAxisEditor.java: refactoring;
+    * org/jfree/chart/editor/DefaultPlotEditor.java
+    (createPlotPanel): new method,
+    (createPlotTabs): new method;
+    * org/jfree/chart/editor/LocalizationBundle_ru.properties: addition
+    * org/jfree/chart/editor/LocalizationBundle_pt_PT.properties: addition
+    * org/jfree/chart/editor/LocalizationBundle_de.properties: addition
+    * org/jfree/chart/editor/LocalizationBundle_zh_CN.properties: addition
+    * org/jfree/chart/editor/LocalizationBundle_pt_BR.properties: addition
+    * org/jfree/chart/editor/LocalizationBundle_es.properties: addition
+    * org/jfree/chart/editor/LocalizationBundle_fr.properties: addition
+    * org/jfree/chart/editor/LocalizationBundle_nl.properties: addition
+    * org/jfree/chart/editor/LocalizationBundle_pl.properties: addition
+    * org/jfree/chart/editor/LocalizationBundle.properties: addition
+
 2011-12-03  David Gilbert <david.gilbert@object-refinery.com>
 
     Bug 2879650:
