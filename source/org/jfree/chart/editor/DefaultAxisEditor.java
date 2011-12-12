@@ -62,6 +62,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import org.jfree.chart.axis.Axis;
+import org.jfree.chart.axis.LogAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.layout.LCBLayout;
@@ -153,6 +154,9 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
             // appropriate panel
             if (axis instanceof NumberAxis) {
                 return new DefaultNumberAxisEditor((NumberAxis) axis);
+            }
+            if (axis instanceof LogAxis) {
+                return new DefaultLogAxisEditor((LogAxis) axis);
             }
             else {
                 return new DefaultAxisEditor(axis);

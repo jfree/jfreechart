@@ -38,78 +38,36 @@
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
  * 27-Feb-2009 : Fixed bug 2612649, NullPointerException (DG);
- *
+ * 03-Nov-2011 : Refactoring to use new DefaultValueAxisEditor (MH);
  */
 
 package org.jfree.chart.editor;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
-import javax.swing.JColorChooser;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.layout.LCBLayout;
-import org.jfree.ui.PaintSample;
-import org.jfree.ui.StrokeChooserPanel;
-import org.jfree.ui.StrokeSample;
 
 /**
  * A panel for editing the properties of a value axis.
  */
-class DefaultNumberAxisEditor extends DefaultAxisEditor
-        implements FocusListener {
+class DefaultNumberAxisEditor extends DefaultValueAxisEditor
+    implements FocusListener {
 
-    /** A flag that indicates whether or not the axis range is determined
-     *  automatically.
-     */
-    private boolean autoRange;
+    private double manualTickUnitValue;
 
-    /** The lowest value in the axis range. */
-    private double minimumValue;
+    private JTextField manualTickUnit;
 
-    /** The highest value in the axis range. */
-    private double maximumValue;
-
-    /** A checkbox that indicates whether or not the axis range is determined
-     *  automatically.
-     */
-    private JCheckBox autoRangeCheckBox;
-
-    /** A text field for entering the minimum value in the axis range. */
-    private JTextField minimumRangeValue;
-
-    /** A text field for entering the maximum value in the axis range. */
-    private JTextField maximumRangeValue;
-
-    /** The paint selected for drawing the gridlines. */
-    private PaintSample gridPaintSample;
-
-    /** The stroke selected for drawing the gridlines. */
-    private StrokeSample gridStrokeSample;
-
-    /** An array of stroke samples to choose from (since I haven't written a
-     *  decent StrokeChooser component yet).
-     */
-    private StrokeSample[] availableStrokeSamples;
-
-    /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                "org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * Standard constructor: builds a property panel for the specified axis.
@@ -120,85 +78,37 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
 
         super(axis);
 
-        this.autoRange = axis.isAutoRange();
-        this.minimumValue = axis.getLowerBound();
-        this.maximumValue = axis.getUpperBound();
-
-        this.gridPaintSample = new PaintSample(Color.blue);
-        this.gridStrokeSample = new StrokeSample(new BasicStroke(1.0f));
-
-        this.availableStrokeSamples = new StrokeSample[3];
-        this.availableStrokeSamples[0] = new StrokeSample(
-                new BasicStroke(1.0f));
-        this.availableStrokeSamples[1] = new StrokeSample(
-                new BasicStroke(2.0f));
-        this.availableStrokeSamples[2] = new StrokeSample(
-                new BasicStroke(3.0f));
-
-        JTabbedPane other = getOtherTabs();
-
-        JPanel range = new JPanel(new LCBLayout(3));
-        range.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
-
-        range.add(new JPanel());
-        this.autoRangeCheckBox = new JCheckBox(localizationResources.getString(
-                "Auto-adjust_range"), this.autoRange);
-        this.autoRangeCheckBox.setActionCommand("AutoRangeOnOff");
-        this.autoRangeCheckBox.addActionListener(this);
-        range.add(this.autoRangeCheckBox);
-        range.add(new JPanel());
-
-        range.add(new JLabel(localizationResources.getString(
-                "Minimum_range_value")));
-        this.minimumRangeValue = new JTextField(Double.toString(
-                this.minimumValue));
-        this.minimumRangeValue.setEnabled(!this.autoRange);
-        this.minimumRangeValue.setActionCommand("MinimumRange");
-        this.minimumRangeValue.addActionListener(this);
-        this.minimumRangeValue.addFocusListener(this);
-        range.add(this.minimumRangeValue);
-        range.add(new JPanel());
-
-        range.add(new JLabel(localizationResources.getString(
-                "Maximum_range_value")));
-        this.maximumRangeValue = new JTextField(Double.toString(
-                this.maximumValue));
-        this.maximumRangeValue.setEnabled(!this.autoRange);
-        this.maximumRangeValue.setActionCommand("MaximumRange");
-        this.maximumRangeValue.addActionListener(this);
-        this.maximumRangeValue.addFocusListener(this);
-        range.add(this.maximumRangeValue);
-        range.add(new JPanel());
-
-        other.add(localizationResources.getString("Range"), range);
-
+        this.manualTickUnitValue = axis.getTickUnit().getSize();
+        validateTickUnit();
     }
 
-    /**
-     * Returns the current setting of the auto-range property.
-     *
-     * @return <code>true</code> if auto range is enabled.
-     */
-    public boolean isAutoRange() {
-        return this.autoRange;
-    }
+    protected JPanel createTickUnitPanel()
+    {
+        JPanel tickUnitPanel = new JPanel(new LCBLayout(3));
+        tickUnitPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 
-    /**
-     * Returns the current setting of the minimum value in the axis range.
-     *
-     * @return The current setting of the minimum value in the axis range.
-     */
-    public double getMinimumValue() {
-        return this.minimumValue;
-    }
+        tickUnitPanel.add(new JPanel());
+        JCheckBox autoTickUnitSelectionCheckBox = new JCheckBox(
+                localizationResources.getString("Auto-TickUnit_Selection"),
+                isAutoTickUnitSelection());
+        autoTickUnitSelectionCheckBox.setActionCommand("AutoTickOnOff");
+        autoTickUnitSelectionCheckBox.addActionListener(this);
+        setAutoTickUnitSelectionCheckBox(autoTickUnitSelectionCheckBox);
+        tickUnitPanel.add(getAutoTickUnitSelectionCheckBox());
+        tickUnitPanel.add(new JPanel());
 
-    /**
-     * Returns the current setting of the maximum value in the axis range.
-     *
-     * @return The current setting of the maximum value in the axis range.
-     */
-    public double getMaximumValue() {
-        return this.maximumValue;
+        tickUnitPanel.add(new JLabel(localizationResources.getString(
+                "Manual_TickUnit_value")));
+        this.manualTickUnit = new JTextField(Double.toString(
+                this.manualTickUnitValue));
+        this.manualTickUnit.setEnabled(!isAutoTickUnitSelection());
+        this.manualTickUnit.setActionCommand("TickUnitValue");
+        this.manualTickUnit.addActionListener(this);
+        this.manualTickUnit.addFocusListener(this);
+        tickUnitPanel.add(this.manualTickUnit);
+        tickUnitPanel.add(new JPanel());
+
+        return tickUnitPanel;
     }
 
     /**
@@ -207,20 +117,8 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
      */
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
-        if (command.equals("GridStroke")) {
-            attemptGridStrokeSelection();
-        }
-        else if (command.equals("GridPaint")) {
-            attemptGridPaintSelection();
-        }
-        else if (command.equals("AutoRangeOnOff")) {
-            toggleAutoRange();
-        }
-        else if (command.equals("MinimumRange")) {
-            validateMinimum();
-        }
-        else if (command.equals("MaximumRange")) {
-            validateMaximum();
+        if (command.equals("TickUnitValue")) {
+            validateTickUnit();
         }
         else {
             // pass to the super-class for handling
@@ -228,109 +126,37 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
         }
     }
 
-    /**
-     * Handle a grid stroke selection.
-     */
-    private void attemptGridStrokeSelection() {
-        StrokeChooserPanel panel = new StrokeChooserPanel(this.gridStrokeSample,
-                this.availableStrokeSamples);
-        int result = JOptionPane.showConfirmDialog(this, panel,
-                localizationResources.getString("Stroke_Selection"),
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-        if (result == JOptionPane.OK_OPTION) {
-            this.gridStrokeSample.setStroke(panel.getSelectedStroke());
-        }
-    }
-
-    /**
-     * Handle a grid paint selection.
-     */
-    private void attemptGridPaintSelection() {
-        Color c;
-        c = JColorChooser.showDialog(this, localizationResources.getString(
-                "Grid_Color"), Color.blue);
-        if (c != null) {
-            this.gridPaintSample.setPaint(c);
-        }
-    }
-
-    /**
-     * Does nothing.
-     *
-     * @param event  the event.
-     */
-    public void focusGained(FocusEvent event) {
-        // don't need to do anything
-    }
-
-    /**
-     *  Revalidates minimum/maximum range.
-     *
-     *  @param event  the event.
-     */
     public void focusLost(FocusEvent event) {
-        if (event.getSource() == this.minimumRangeValue) {
-            validateMinimum();
-        }
-        else if (event.getSource() == this.maximumRangeValue) {
-            validateMaximum();
+        super.focusLost(event);
+        if (event.getSource() == this.manualTickUnit) {
+            validateTickUnit();
         }
     }
 
-    /**
-     *  Toggle the auto range setting.
-     */
-    public void toggleAutoRange() {
-        this.autoRange = this.autoRangeCheckBox.isSelected();
-        if (this.autoRange) {
-            this.minimumRangeValue.setText(Double.toString(this.minimumValue));
-            this.minimumRangeValue.setEnabled(false);
-            this.maximumRangeValue.setText(Double.toString(this.maximumValue));
-            this.maximumRangeValue.setEnabled(false);
+    public void toggleAutoTick() {
+        super.toggleAutoTick();
+        if (isAutoTickUnitSelection()) {
+            this.manualTickUnit.setText(Double.toString(this.manualTickUnitValue));
+            this.manualTickUnit.setEnabled(false);
         }
         else {
-            this.minimumRangeValue.setEnabled(true);
-            this.maximumRangeValue.setEnabled(true);
+            this.manualTickUnit.setEnabled(true);
         }
     }
 
-    /**
-     * Revalidate the range minimum.
-     */
-    public void validateMinimum() {
-        double newMin;
+    public void validateTickUnit() {
+        double newTickUnit;
         try {
-            newMin = Double.parseDouble(this.minimumRangeValue.getText());
-            if (newMin >= this.maximumValue) {
-                newMin = this.minimumValue;
-            }
+            newTickUnit = Double.parseDouble(this.manualTickUnit.getText());
         }
         catch (NumberFormatException e) {
-            newMin = this.minimumValue;
+            newTickUnit = this.manualTickUnitValue;
         }
 
-        this.minimumValue = newMin;
-        this.minimumRangeValue.setText(Double.toString(this.minimumValue));
-    }
-
-    /**
-     * Revalidate the range maximum.
-     */
-    public void validateMaximum() {
-        double newMax;
-        try {
-            newMax = Double.parseDouble(this.maximumRangeValue.getText());
-            if (newMax <= this.minimumValue) {
-                newMax = this.maximumValue;
-            }
+        if (newTickUnit > 0.0) {
+            this.manualTickUnitValue = newTickUnit;
         }
-        catch (NumberFormatException e) {
-            newMax = this.maximumValue;
-        }
-
-        this.maximumValue = newMax;
-        this.maximumRangeValue.setText(Double.toString(this.maximumValue));
+        this.manualTickUnit.setText(Double.toString(this.manualTickUnitValue));
     }
 
     /**
@@ -342,10 +168,8 @@ class DefaultNumberAxisEditor extends DefaultAxisEditor
     public void setAxisProperties(Axis axis) {
         super.setAxisProperties(axis);
         NumberAxis numberAxis = (NumberAxis) axis;
-        numberAxis.setAutoRange(this.autoRange);
-        if (!this.autoRange) {
-            numberAxis.setRange(this.minimumValue, this.maximumValue);
+        if (!isAutoTickUnitSelection()) {
+            numberAxis.setTickUnit(new NumberTickUnit(manualTickUnitValue));
         }
     }
-
 }

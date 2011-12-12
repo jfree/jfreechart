@@ -61,6 +61,7 @@ import javax.swing.JTextField;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.title.Title;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.layout.LCBLayout;
@@ -182,7 +183,12 @@ class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
         this.titleEditor.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         tabs.addTab(localizationResources.getString("Title"), this.titleEditor);
 
-        this.plotEditor = new DefaultPlotEditor(plot);
+        if (plot instanceof PolarPlot) {
+            this.plotEditor = new DefaultPolarPlotEditor((PolarPlot) plot);
+        }
+        else {
+            this.plotEditor = new DefaultPlotEditor(plot);
+        }
         this.plotEditor.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         tabs.addTab(localizationResources.getString("Plot"), this.plotEditor);
 
