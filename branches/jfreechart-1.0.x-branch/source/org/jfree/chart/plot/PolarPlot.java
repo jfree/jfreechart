@@ -54,7 +54,8 @@
  * 25-Jun-2010 : Better support for multiple axes (MH);
  * 03-Oct-2011 : Added support for angleOffset and direction (MH);
  * 12-Nov-2011 : Fixed bug 3432721, log-axis doesn't work (MH);
- * 
+ * 12-Dec-2011 : Added support for radiusMinorGridilnesVisible (MH);
+ *
  */
 
 package org.jfree.chart.plot;
@@ -90,8 +91,10 @@ import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.NumberTick;
 import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.axis.TickType;
 import org.jfree.chart.axis.TickUnit;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.axis.ValueTick;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
@@ -219,6 +222,12 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /** The paint used to draw the radius grid-lines. */
     private transient Paint radiusGridlinePaint;
 
+    /**
+     * A flag that controls whether the radial minor grid-lines are visible.
+     * @since 1.0.15
+     */
+    private boolean radiusMinorGridlinesVisible;
+    
     /** The annotations for the plot. */
     private List cornerTextItems = new ArrayList();
 
@@ -304,6 +313,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         this.angleGridlinePaint = DEFAULT_GRIDLINE_PAINT;
 
         this.radiusGridlinesVisible = true;
+        this.radiusMinorGridlinesVisible = true;
         this.radiusGridlineStroke = DEFAULT_GRIDLINE_STROKE;
         this.radiusGridlinePaint = DEFAULT_GRIDLINE_PAINT;
         this.margin = DEFAULT_MARGIN;
@@ -1026,6 +1036,30 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
     
     /**
+     * Return the current value of the flag indicating if radial minor
+     * grid-lines will be drawn or not.
+     * 
+     * @return Returns <code>true</code> if radial minor grid-lines are drawn.
+     * @since 1.0.15
+     */
+    public boolean isRadiusMinorGridlinesVisible()
+    {
+        return radiusMinorGridlinesVisible;
+    }
+
+    /**
+     * Set the flag that determines if radial minor grid-lines will be drawn.
+     *
+     * @param flag <code>true</code> to draw the radial minor grid-lines,
+     *             <code>false</code> to hide them.
+     * @since 1.0.15
+     */
+    public void setRadiusMinorGridlinesVisible(boolean flag)
+    {
+        this.radiusMinorGridlinesVisible = flag;
+    }
+
+    /**
      * Returns the margin around the plot area.
      * 
      * @return The actual margin in pixels.
@@ -1573,10 +1607,33 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             Stroke gridStroke = getRadiusGridlineStroke();
             Paint gridPaint = getRadiusGridlinePaint();
             if ((gridStroke != null) && (gridPaint != null)) {
+                List ticks = buildRadialTicks(radialTicks);
                 renderer.drawRadialGridLines(g2, this, getAxis(),
-                        radialTicks, dataArea);
+                        ticks, dataArea);
             }
         }
+    }
+
+    /**
+     * Create a list of ticks based on the given list and plot properties.
+     * Only ticks of a specific type may be in the result list.
+     * 
+     * @param allTicks A list of all available ticks for the primary axis.
+     *        <code>null</code> not permitted.
+     * @return Ticks to use for radial gridlines.
+     * @since 1.0.15
+     */
+    protected List buildRadialTicks(List allTicks)
+    {
+        List ticks = new ArrayList();
+        Iterator it = allTicks.iterator();
+        while (it.hasNext()) {
+            ValueTick tick = (ValueTick) it.next();
+            if (isRadiusMinorGridlinesVisible() ||
+                    TickType.MAJOR.equals(tick.getTickType()))
+                ticks.add(tick);
+        }
+        return ticks;
     }
 
     /**
@@ -1790,6 +1847,10 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
         if (!PaintUtilities.equal(this.radiusGridlinePaint,
                 that.radiusGridlinePaint)) {
+            return false;
+        }
+        if (this.radiusMinorGridlinesVisible !=
+            that.radiusMinorGridlinesVisible) {
             return false;
         }
         if (!this.cornerTextItems.equals(that.cornerTextItems)) {
