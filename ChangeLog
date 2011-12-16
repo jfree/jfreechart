@@ -1,3 +1,13 @@
+2011-12-16  Martin Hoeller <martin.hoeller@xss.co.at>
+
+    Add support to hide minor gridlines for PolarPlot:
+    * org/jfree/chart/plot/PolarPlot.java
+    (radiusMinorGridlinesVisible): New field,
+    (isRadiusMinorGridlinesVisible): New method,
+    (setRadiusMinorGridlinesVisible): Likewise,
+    (buildRadialTicks): Likewise,
+    (drawGridlines): Updated to support new flag;
+
 2011-11-12  Martin Hoeller <martin.hoeller@xss.co.at>
 
     Improvements to axis and plot editors:
