@@ -27,7 +27,7 @@
  * ------------------
  * XYBarRenderer.java
  * ------------------
- * (C) Copyright 2001-2009, by Object Refinery Limited.
+ * (C) Copyright 2001-2011, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -731,50 +731,51 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @return A legend item for the series.
      */
     public LegendItem getLegendItem(int datasetIndex, int series) {
-        LegendItem result = null;
         XYPlot xyplot = getPlot();
-        if (xyplot != null) {
-            XYDataset dataset = xyplot.getDataset(datasetIndex);
-            if (dataset != null) {
-                XYSeriesLabelGenerator lg = getLegendItemLabelGenerator();
-                String label = lg.generateLabel(dataset, series);
-                String description = label;
-                String toolTipText = null;
-                if (getLegendItemToolTipGenerator() != null) {
-                    toolTipText = getLegendItemToolTipGenerator().generateLabel(
-                            dataset, series);
-                }
-                String urlText = null;
-                if (getLegendItemURLGenerator() != null) {
-                    urlText = getLegendItemURLGenerator().generateLabel(
-                            dataset, series);
-                }
-                Shape shape = this.legendBar;
-                Paint paint = lookupSeriesPaint(series);
-                Paint outlinePaint = lookupSeriesOutlinePaint(series);
-                Stroke outlineStroke = lookupSeriesOutlineStroke(series);
-                if (this.drawBarOutline) {
-                    result = new LegendItem(label, description, toolTipText,
-                            urlText, shape, paint, outlineStroke, outlinePaint);
-                }
-                else {
-                    result = new LegendItem(label, description, toolTipText,
-                            urlText, shape, paint);
-                }
-                result.setLabelFont(lookupLegendTextFont(series));
-                Paint labelPaint = lookupLegendTextPaint(series);
-                if (labelPaint != null) {
-                    result.setLabelPaint(labelPaint);
-                }
-                result.setDataset(dataset);
-                result.setDatasetIndex(datasetIndex);
-                result.setSeriesKey(dataset.getSeriesKey(series));
-                result.setSeriesIndex(series);
-                if (getGradientPaintTransformer() != null) {
-                    result.setFillPaintTransformer(
-                            getGradientPaintTransformer());
-                }
-            }
+        if (xyplot == null) {
+            return null;
+        }
+        XYDataset dataset = xyplot.getDataset(datasetIndex);
+        if (dataset == null) {
+            return null;
+        }
+        LegendItem result = null;
+        XYSeriesLabelGenerator lg = getLegendItemLabelGenerator();
+        String label = lg.generateLabel(dataset, series);
+        String description = label;
+        String toolTipText = null;
+        if (getLegendItemToolTipGenerator() != null) {
+            toolTipText = getLegendItemToolTipGenerator().generateLabel(
+                    dataset, series);
+        }
+        String urlText = null;
+        if (getLegendItemURLGenerator() != null) {
+            urlText = getLegendItemURLGenerator().generateLabel(dataset, 
+                    series);
+        }
+        Shape shape = this.legendBar;
+        Paint paint = lookupSeriesPaint(series);
+        Paint outlinePaint = lookupSeriesOutlinePaint(series);
+        Stroke outlineStroke = lookupSeriesOutlineStroke(series);
+        if (this.drawBarOutline) {
+            result = new LegendItem(label, description, toolTipText,
+                    urlText, shape, paint, outlineStroke, outlinePaint);
+        }
+        else {
+            result = new LegendItem(label, description, toolTipText, urlText, 
+                    shape, paint);
+        }
+        result.setLabelFont(lookupLegendTextFont(series));
+        Paint labelPaint = lookupLegendTextPaint(series);
+        if (labelPaint != null) {
+            result.setLabelPaint(labelPaint);
+        }
+        result.setDataset(dataset);
+        result.setDatasetIndex(datasetIndex);
+        result.setSeriesKey(dataset.getSeriesKey(series));
+        result.setSeriesIndex(series);
+        if (getGradientPaintTransformer() != null) {
+            result.setFillPaintTransformer(getGradientPaintTransformer());
         }
         return result;
     }
