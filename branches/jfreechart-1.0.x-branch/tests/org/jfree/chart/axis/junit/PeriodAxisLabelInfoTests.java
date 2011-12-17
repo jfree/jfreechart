@@ -54,6 +54,9 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -215,4 +218,14 @@ public class PeriodAxisLabelInfoTests extends TestCase {
         assertTrue(b);
     }
 
+    /**
+     * A test for the createInstance() method.
+     */
+    public void testCreateInstance() {
+        PeriodAxisLabelInfo info = new PeriodAxisLabelInfo(Day.class, 
+                new SimpleDateFormat("d"));
+        Day d = (Day) info.createInstance(new Date(0L), 
+                TimeZone.getTimeZone("GMT"), Locale.UK);
+        assertEquals(new Day(1, 1, 1970), d);
+    }
 }
