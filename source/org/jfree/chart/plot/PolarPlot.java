@@ -1042,9 +1042,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @return Returns <code>true</code> if radial minor grid-lines are drawn.
      * @since 1.0.15
      */
-    public boolean isRadiusMinorGridlinesVisible()
-    {
-        return radiusMinorGridlinesVisible;
+    public boolean isRadiusMinorGridlinesVisible() {
+        return this.radiusMinorGridlinesVisible;
     }
 
     /**
@@ -1054,8 +1053,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      *             <code>false</code> to hide them.
      * @since 1.0.15
      */
-    public void setRadiusMinorGridlinesVisible(boolean flag)
-    {
+    public void setRadiusMinorGridlinesVisible(boolean flag) {
         this.radiusMinorGridlinesVisible = flag;
     }
 
@@ -1189,14 +1187,16 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         TextAnchor ta = TextAnchor.CENTER;
 
         // normalize angle
-        double offset = angleOffset;
-        while (offset < 0.0)
+        double offset = this.angleOffset;
+        while (offset < 0.0) {
             offset += 360.0;
-        double normalizedAngle = (((counterClockwise ? -1 : 1) * angleDegrees)
-                + offset) % 360;
-        while (counterClockwise && (normalizedAngle < 0.0))
+        }
+        double normalizedAngle = (((this.counterClockwise ? -1 : 1) 
+                * angleDegrees) + offset) % 360;
+        while (this.counterClockwise && (normalizedAngle < 0.0)) {
             normalizedAngle += 360.0;
-        
+        }
+
         if (normalizedAngle == 0.0) {
             ta = TextAnchor.CENTER_LEFT;
         }
