@@ -27,7 +27,7 @@
  * -------------------
  * PolarPlotTests.java
  * -------------------
- * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2011, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,7 +40,8 @@
  * 17-Feb-2008 : Tests for new angleTickUnit field (DG);
  * 09-Dec-2009 : Added new tests (DG);
  * 12-Nov-2011 : Added tests for translateToJava2D (MH);
- *
+ * 17-Dec-2011 : Updated testEquals() (DG);
+ * 
  */
 
 package org.jfree.chart.plot.junit;
@@ -111,9 +112,9 @@ public class PolarPlotTests extends TestCase {
         plot.setRenderer(r);
         LegendItemCollection items = plot.getLegendItems();
         assertEquals(2, items.getItemCount());
-        LegendItem item1 = (LegendItem) items.get(0);
+        LegendItem item1 = items.get(0);
         assertEquals("A", item1.getLabel());
-        LegendItem item2 = (LegendItem) items.get(1);
+        LegendItem item2 = items.get(1);
         assertEquals("B", item2.getLabel());
     }
 
@@ -135,13 +136,13 @@ public class PolarPlotTests extends TestCase {
         plot.setRenderer(1, new DefaultPolarItemRenderer());
         LegendItemCollection items = plot.getLegendItems();
         assertEquals(4, items.getItemCount());
-        LegendItem item1 = (LegendItem) items.get(0);
+        LegendItem item1 = items.get(0);
         assertEquals("A", item1.getLabel());
-        LegendItem item2 = (LegendItem) items.get(1);
+        LegendItem item2 = items.get(1);
         assertEquals("B", item2.getLabel());
-        LegendItem item3 = (LegendItem) items.get(2);
+        LegendItem item3 = items.get(2);
         assertEquals("C", item3.getLabel());
-        LegendItem item4 = (LegendItem) items.get(3);
+        LegendItem item4 = items.get(3);
         assertEquals("D", item4.getLabel());
     }
 
@@ -214,6 +215,11 @@ public class PolarPlotTests extends TestCase {
         plot1.setRadiusGridlinesVisible(false);
         assertFalse(plot1.equals(plot2));
         plot2.setRadiusGridlinesVisible(false);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRadiusMinorGridlinesVisible(false);
+        assertFalse(plot1.equals(plot2));
+        plot2.setRadiusMinorGridlinesVisible(false);
         assertTrue(plot1.equals(plot2));
 
         plot1.addCornerTextItem("XYZ");
