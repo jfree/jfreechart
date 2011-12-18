@@ -523,8 +523,8 @@ public class CategoryPlotTests extends TestCase {
             p2 = (CategoryPlot) p1.clone();
         }
         catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            System.err.println("Failed to clone.");
+            fail("Cloning failed.");
+            return;
         }
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
@@ -573,7 +573,8 @@ public class CategoryPlotTests extends TestCase {
             p2 = (CategoryPlot) p1.clone();
         }
         catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+            fail("Cloning failed.");
+            return;
         }
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
@@ -602,7 +603,8 @@ public class CategoryPlotTests extends TestCase {
             p2 = (CategoryPlot) p1.clone();
         }
         catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+            fail("Cloning failed.");
+            return;
         }
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
@@ -635,7 +637,8 @@ public class CategoryPlotTests extends TestCase {
             p2 = (CategoryPlot) p1.clone();
         }
         catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+            fail("Cloning failed.");
+            return;
         }
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
@@ -729,6 +732,7 @@ public class CategoryPlotTests extends TestCase {
         }
         catch (Exception e) {
             fail(e.toString());
+            return;
         }
 
         // now check that the chart is usable...
@@ -770,6 +774,7 @@ public class CategoryPlotTests extends TestCase {
         }
         catch (Exception e) {
             fail(e.toString());
+            return;
         }
         assertEquals(chart, chart2);
 
@@ -818,6 +823,7 @@ public class CategoryPlotTests extends TestCase {
         }
         catch (Exception e) {
             fail(e.toString());
+            return;
         }
         assertEquals(p1, p2);
 
@@ -868,7 +874,7 @@ public class CategoryPlotTests extends TestCase {
         plot.setRangeAxis(new NumberAxis("Y"));
         plot.setRenderer(new BarRenderer());
         plot.setDataset(new DefaultCategoryDataset());
-        assertTrue(plot != null);
+        assertTrue(true); // we didn't get an exception so all is good
     }
 
     /**
