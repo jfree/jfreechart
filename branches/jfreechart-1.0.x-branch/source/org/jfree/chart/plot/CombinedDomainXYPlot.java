@@ -91,6 +91,7 @@
  * 28-Apr-2008 : Fixed zooming problem (see bug 1950037) (DG);
  * 11-Aug-2008 : Don't store totalWeight of subplots, calculate it as
  *               required (DG);
+ * 21-Dec-2011 : Apply patch 3447161 by Ulrich Voigt and Martin Hoeller (MH);
  *
  */
 
@@ -558,6 +559,33 @@ public class CombinedDomainXYPlot extends XYPlot
         }
     }
 
+    /**
+     * Pans all range axes by the specified percentage.
+     *
+     * @param panRange the distance to pan (as a percentage of the axis length).
+     * @param info the plot info
+     * @param source the source point where the pan action started.
+     *
+     * @since 1.0.15
+     */
+    public void panRangeAxes(double panRange, PlotRenderingInfo info,
+            Point2D source) {
+
+        XYPlot subplot = findSubplot(info, source);
+        if (subplot != null) {
+            PlotRenderingInfo subplotInfo = info.getSubplotInfo(
+                    info.getSubplotIndex(source));
+            if (subplotInfo == null) {
+                return;
+            }
+
+            for (int i = 0; i < subplot.getRangeAxisCount(); i++) {
+                ValueAxis rangeAxis = subplot.getRangeAxis(i);
+                rangeAxis.pan(panRange);
+            }
+        }
+    }
+    
     /**
      * Returns the subplot (if any) that contains the (x, y) point (specified
      * in Java2D space).
