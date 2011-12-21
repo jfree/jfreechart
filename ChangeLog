@@ -1,3 +1,11 @@
+2011-12-21  Martin Hoeller <martin.hoeller@xss.co.at>
+
+    Patch 3447161 by Ulrich Voigt/Martin Hoeller:
+    * org/jfree/chart/plot/CombinedDomainXYPlot.java:
+    (panRangeAxes): new method;
+    * org/jfree/chart/plot/CombinedRangeXYPlot.java
+    (panDomainAxes): new method;
+
 2011-12-16  Martin Hoeller <martin.hoeller@xss.co.at>
 
     Add support to hide minor gridlines for PolarPlot:
