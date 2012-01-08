@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * RangeTests.java
  * ---------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sergei Ivanov;
@@ -90,7 +90,7 @@ public class RangeTests extends TestCase {
             fail("Lower bound cannot be greater than the upper");
         }
         catch (Exception e) {
-            // ignore
+            // expected
         }
     }
 
@@ -112,6 +112,7 @@ public class RangeTests extends TestCase {
         r2 = new Range(0.0, 2.0);
         assertFalse(r1.equals(r2));
 
+        // a Range object cannot be equal to a different object type
         assertFalse(r1.equals(new Double(0.0)));
     }
 
@@ -313,18 +314,17 @@ public class RangeTests extends TestCase {
             out.writeObject(r1);
             out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
+            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                    buffer.toByteArray()));
             r2 = (Range) in.readObject();
             in.close();
         }
         catch (Exception e) {
-            System.out.println(e.toString());
             fail("Serialization is not supported");
         }
         assertEquals(r1, r2);
 
     }
+
 
 }
