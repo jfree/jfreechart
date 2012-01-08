@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * TimeSeriesCollectionTests.java
  * ------------------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited.
+ * (C) Copyright 2003-2012, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 04-Dec-2003 : Added a test for the getSurroundingItems() method (DG);
  * 08-May-2007 : Added testIndexOf() method (DG);
  * 18-May-2009 : Added testFindDomainBounds() (DG);
+ * 08-Jan-2012 : Added testBug3445507() (DG);
  *
  */
 
@@ -50,6 +51,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 import junit.framework.Test;
@@ -92,7 +94,6 @@ public class TimeSeriesCollectionTests extends TestCase {
      * Some tests for the equals() method.
      */
     public void testEquals() {
-
         TimeSeriesCollection c1 = new TimeSeriesCollection();
         TimeSeriesCollection c2 = new TimeSeriesCollection();
 
@@ -130,7 +131,6 @@ public class TimeSeriesCollectionTests extends TestCase {
      * Tests the remove series method.
      */
     public void testRemoveSeries() {
-
         TimeSeriesCollection c1 = new TimeSeriesCollection();
 
         TimeSeries s1 = new TimeSeries("Series 1");
@@ -148,7 +148,6 @@ public class TimeSeriesCollectionTests extends TestCase {
         TimeSeries s = c1.getSeries(2);
         boolean b1 = s.equals(s4);
         assertTrue(b1);
-
     }
 
     /**
@@ -177,7 +176,6 @@ public class TimeSeriesCollectionTests extends TestCase {
      * values we expect.
      */
     public void testGetSurroundingItems() {
-
         TimeSeries series = new TimeSeries("Series 1");
         TimeSeriesCollection collection = new TimeSeriesCollection(series);
         collection.setXPosition(TimePeriodAnchor.MIDDLE);
@@ -243,7 +241,6 @@ public class TimeSeriesCollectionTests extends TestCase {
         result = collection.getSurroundingItems(0, end3);
         assertTrue(result[0] == 0);
         assertTrue(result[1] == 1);
-
     }
 
     /**
@@ -401,6 +398,31 @@ public class TimeSeriesCollectionTests extends TestCase {
         assertFalse(c1.equals(c2));
         c2.getSeries(0).setDescription("XYZ");
         assertTrue(c1.equals(c2));
+    }
+
+    /**
+     * A test to cover bug 3445507.
+     */
+    public void testBug3445507() {
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.add(new Year(2011), null);
+        s1.add(new Year(2012), null);
+
+        TimeSeries s2 = new TimeSeries("S2");
+        s2.add(new Year(2011), 5.0);
+        s2.add(new Year(2012), 6.0);
+
+        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        dataset.addSeries(s1);
+        dataset.addSeries(s2);
+
+        List keys = new ArrayList();
+        keys.add("S1");
+        keys.add("S2");
+        Range r = dataset.getRangeBounds(keys, new Range(
+                Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY), false);
+        assertEquals(5.0, r.getLowerBound(), EPSILON);
+        assertEquals(6.0, r.getUpperBound(), EPSILON);
     }
 
 }
