@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * StandardDialScale.java
  * ----------------------
- * (C) Copyright 2006-2010, by Object Refinery Limited.
+ * (C) Copyright 2006-2012, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  * 19-Nov-2007 : Added some missing accessor methods (DG);
  * 27-Feb-2009 : Fixed bug 2617557: tickLabelPaint ignored (DG);
  * 09-Feb-2010 : Fixed bug 2946521 (DG);
+ * 08-Jan-2012 : Added missing angleToValue() implementation (DG);
  *
  */
 
@@ -860,14 +861,16 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     /**
      * Converts the given angle to a data value, based on this scale.
      *
-     * @param angle  the angle.
+     * @param angle  the angle (in degrees).
      *
      * @return The data value.
      *
      * @see #valueToAngle(double)
      */
     public double angleToValue(double angle) {
-        return Double.NaN;  // FIXME
+        double range = this.upperBound - this.lowerBound;
+        double unit = range / this.extent;
+        return (angle - this.startAngle) * unit;
     }
 
     /**
