@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * XYSeriesCollectionTests.java
  * ----------------------------
- * (C) Copyright 2003-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@
  * 22-Apr-2008 : Added testPublicCloneable (DG);
  * 06-Mar-2009 : Added testGetDomainBounds (DG);
  * 17-May-2010 : Added checks for duplicate series names (DG);
+ * 08-Jan-2012 : Added testBug3445507() (DG);
  *
  */
 
@@ -426,5 +427,27 @@ public class XYSeriesCollectionTests extends TestCase {
            pass = true;
         }
         assertTrue(pass);
+    }
+
+    /**
+     * A test to cover bug 3445507.  The issue does not affact
+     * XYSeriesCollection.
+     */
+    public void testBug3445507() {
+        XYSeries s1 = new XYSeries("S1");
+        s1.add(1.0, null);
+        s1.add(2.0, null);
+
+        XYSeries s2 = new XYSeries("S2");
+        s1.add(1.0, 5.0);
+        s1.add(2.0, 6.0);
+
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(s1);
+        dataset.addSeries(s2);
+
+        Range r = dataset.getRangeBounds(false);
+        assertEquals(5.0, r.getLowerBound());
+        assertEquals(6.0, r.getUpperBound());
     }
 }
