@@ -447,7 +447,7 @@ public class XYSeriesCollectionTests extends TestCase {
         dataset.addSeries(s2);
 
         Range r = dataset.getRangeBounds(false);
-        assertEquals(5.0, r.getLowerBound());
-        assertEquals(6.0, r.getUpperBound());
+        assertEquals(5.0, r.getLowerBound(), EPSILON);
+        assertEquals(6.0, r.getUpperBound(), EPSILON);
     }
 }
