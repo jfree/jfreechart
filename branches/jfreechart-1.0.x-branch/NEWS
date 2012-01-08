@@ -7,6 +7,10 @@ detected and reported by OSI Security:
 
 http://www.osisecurity.com.au/advisories/jfreechart-path-disclosure
 
+Patches:
+
+3463807 : ChartComposite does not dispose popup (by Sebastiao Correia);
+
 Bug Fixes:
 
 3446965 : TimeSeries calculates range incorrectly in addOrUpdate();

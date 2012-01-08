@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,12 +27,13 @@
  * -------------------
  * ChartComposite.java
  * -------------------
- * (C) Copyright 2006-2008, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006-2012, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Cedric Chabanois (cchabanois AT no-log.org);
  *                   Christoph Beck;
+ *                   Sebastiao Correia (patch 3463807);
  *
  * Changes
  * -------
@@ -70,6 +71,7 @@
  * 11-Jul-2008 : Bug 1994355 fix (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 08-Jan-2012 : Dispose popup-menu (patch 3463807 by Sebastiao Correia) (DG)
  *
  */
 
@@ -145,12 +147,9 @@ import org.jfree.experimental.swt.SWTUtils;
  * notification is received.
  */
 public class ChartComposite extends Composite implements ChartChangeListener,
-                                                         ChartProgressListener,
-                                                         PaintListener,
-                                                         SelectionListener,
-                                                         MouseListener,
-                                                         MouseMoveListener,
-                                                         Printable {
+        ChartProgressListener, PaintListener, SelectionListener,
+        MouseListener, MouseMoveListener, Printable {
+
     /** Default setting for buffer usage. */
     public static final boolean DEFAULT_BUFFER_USED = false;
 
@@ -1897,11 +1896,18 @@ public class ChartComposite extends Composite implements ChartChangeListener,
      * Disposes the control.
      */
     public void dispose() {
-        if (this.chartBuffer != null) this.chartBuffer.dispose();
         // de-register the composite as a listener for the chart.
         if (this.chart != null) {
             this.chart.removeChangeListener(this);
             this.chart.removeProgressListener(this);
+        }
+
+        if (this.chartBuffer != null) {
+            this.chartBuffer.dispose();
+        }
+
+        if (this.popup != null) {
+            this.popup.dispose();
         }
         super.dispose();
     }
