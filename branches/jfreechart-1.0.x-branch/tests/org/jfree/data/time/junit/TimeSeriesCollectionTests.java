@@ -425,4 +425,30 @@ public class TimeSeriesCollectionTests extends TestCase {
         assertEquals(6.0, r.getUpperBound(), EPSILON);
     }
 
+    /**
+     * Some checks for the getRangeBounds() method.
+     */
+    public void testGetRangeBounds() {
+        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        Range r = dataset.getRangeBounds(false);
+        assertNull(r);
+
+        TimeSeries s1 = new TimeSeries("S1");
+        dataset.addSeries(s1);
+        r = dataset.getRangeBounds(false);
+        assertTrue(Double.isNaN(r.getLowerBound()));
+        assertTrue(Double.isNaN(r.getUpperBound()));
+
+        s1.add(new Year(2012), 1.0);
+        r = dataset.getRangeBounds(false);
+        assertEquals(1.0, r.getLowerBound(), EPSILON);
+        assertEquals(1.0, r.getUpperBound(), EPSILON);
+
+        TimeSeries s2 = new TimeSeries("S2");
+        dataset.addSeries(s2);
+        r = dataset.getRangeBounds(false);
+        assertEquals(1.0, r.getLowerBound(), EPSILON);
+        assertEquals(1.0, r.getUpperBound(), EPSILON);
+    }
+
 }
