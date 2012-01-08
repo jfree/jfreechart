@@ -1,5 +1,12 @@
 2012-01-08  David Gilbert <david.gilbert@object-refinery.com>
 
+    Bug 3445507:
+    * source/org/jfree/data/time/TimeSeriesCollection.java
+    (getRangeBounds(boolean)): New method,
+    (getRangeBounds(List, Range, boolean)): Fix combining of ranges.
+
+2012-01-08  David Gilbert <david.gilbert@object-refinery.com>
+
     * source/org/jfree/data/Range.java
     (combineIgnoringNaN): New method.
 

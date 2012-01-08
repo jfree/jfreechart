@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * TimeSeriesCollection.java
  * -------------------------
- * (C) Copyright 2001-2009, by Object Refinery Limited.
+ * (C) Copyright 2001-2012, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -81,6 +81,7 @@
  * 26-May-2009 : Implemented XYRangeInfo (DG);
  * 09-Jun-2009 : Apply some short-cuts to series value lookups (DG);
  * 26-Jun-2009 : Fixed clone() (DG);
+ * 08-Jan-2012 : Fixed getRangeBounds() method (bug 3445507) (DG);
  *
  */
 
@@ -661,6 +662,27 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
 
     /**
      * Returns the bounds for the y-values in the dataset.
+     * 
+     * @param includeInterval  ignored for this dataset.
+     * 
+     * @return The range of value in the dataset (possibly <code>null</code>).
+     *
+     * @since 1.0.15
+     */
+    public Range getRangeBounds(boolean includeInterval) {
+        Range result = null;
+        Iterator iterator = this.data.iterator();
+        while (iterator.hasNext()) {
+            TimeSeries series = (TimeSeries) iterator.next();
+            Range r = null;
+            r = new Range(series.getMinY(), series.getMaxY());
+            result = Range.combineIgnoringNaN(result, r);
+        }
+        return result;
+    }
+
+    /**
+     * Returns the bounds for the y-values in the dataset.
      *
      * @param visibleSeriesKeys  the visible series keys.
      * @param xRange  the x-range (<code>null</code> not permitted).
@@ -680,7 +702,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
             Range r = null;
             r = new Range(series.getMinY(), series.getMaxY());
             // FIXME: Here we are ignoring the xRange
-            result = Range.combine(result, r);
+            result = Range.combineIgnoringNaN(result, r);
         }
         return result;
     }

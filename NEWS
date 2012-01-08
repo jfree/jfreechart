@@ -14,6 +14,7 @@ Patches:
 Bug Fixes:
 
 3446965 : TimeSeries calculates range incorrectly in addOrUpdate();
+3445507 : TimeSeriesCollection.findRangeBounds() regression;
 2879650 : Path disclosure vulnerability in DisplayChart servlet;
 
 
