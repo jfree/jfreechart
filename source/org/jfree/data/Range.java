@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------
  * Range.java
  * ----------
- * (C) Copyright 2002-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chuanhao Chiu;
@@ -56,6 +56,7 @@
  * 11-Jan-2006 : Added new method expandToInclude(Range, double) (DG);
  * 18-Dec-2007 : New methods intersects(Range) and scale(...) thanks to Sergei
  *               Ivanov (DG);
+ * 08-Jan-2012 : New method combineIgnoringNaN() (DG);
  *
  */
 
@@ -214,18 +215,54 @@ public strictfp class Range implements Serializable {
         if (range1 == null) {
             return range2;
         }
-        else {
-            if (range2 == null) {
-                return range1;
-            }
-            else {
-                double l = Math.min(range1.getLowerBound(),
-                        range2.getLowerBound());
-                double u = Math.max(range1.getUpperBound(),
-                        range2.getUpperBound());
-                return new Range(l, u);
-            }
+        if (range2 == null) {
+            return range1;
         }
+        double l = Math.min(range1.getLowerBound(), range2.getLowerBound());
+        double u = Math.max(range1.getUpperBound(), range2.getUpperBound());
+        return new Range(l, u);
+    }
+
+    /**
+     * Combines two ranges.  This method has a special handling for Double.NaN.
+     *
+     * @param range1  the first range (<code>null</code> permitted).
+     * @param range2  the second range (<code>null</code> permitted).
+     *
+     * @return A new range (possibly <code>null</code>).
+     *
+     * @since 1.0.15
+     */
+    public static Range combineIgnoringNaN(Range range1, Range range2) {
+        if (range1 == null) {
+            return range2;
+        }
+        if (range2 == null) {
+            return range1;
+        }
+        double l = min(range1.getLowerBound(), range2.getLowerBound());
+        double u = max(range1.getUpperBound(), range2.getUpperBound());
+        return new Range(l, u);
+    }
+
+    private static double min(double d1, double d2) {
+        if (Double.isNaN(d1)) {
+            return d2;
+        }
+        if (Double.isNaN(d2)) {
+            return d1;
+        }
+        return Math.min(d1, d2);
+    }
+
+    private static double max(double d1, double d2) {
+        if (Double.isNaN(d1)) {
+            return d2;
+        }
+        if (Double.isNaN(d2)) {
+            return d1;
+        }
+        return Math.max(d1, d2);
     }
 
     /**

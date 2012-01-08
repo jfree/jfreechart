@@ -1,5 +1,10 @@
 2012-01-08  David Gilbert <david.gilbert@object-refinery.com>
 
+    * source/org/jfree/data/Range.java
+    (combineIgnoringNaN): New method.
+
+2012-01-08  David Gilbert <david.gilbert@object-refinery.com>
+
     Patch 3463807 by Sebastiao Correia
     * swt/org/jfree/experimental/chart/swt/ChartComposite.java
     (dispose): Dispose the popup if not null.
