@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * SimpleDialScaleTests.java
  * -------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 03-Nov-2006 : Version 1 (DG);
  * 24-Oct-2007 : Updated for API changes (DG);
+ * 08-Jan-2012 : Added tests for valueToAngle() and angleToValue();
  *
  */
 
@@ -291,4 +292,39 @@ public class StandardDialScaleTests extends TestCase {
         assertEquals(s1, s2);
     }
 
+    private static final double EPSILON = 0.0000000001;
+
+    /**
+     * Some checks for the valueToAngle() method.
+     */
+    public void testValueToAngle() {
+        StandardDialScale s = new StandardDialScale();
+        assertEquals(175.0, s.valueToAngle(0.0), EPSILON);
+        assertEquals(90.0, s.valueToAngle(50.0), EPSILON);
+        assertEquals(5.0, s.valueToAngle(100.0), EPSILON);
+        assertEquals(192.0, s.valueToAngle(-10.0), EPSILON);
+        assertEquals(-12.0, s.valueToAngle(110.0), EPSILON);
+
+        s = new StandardDialScale(0, 20, 180, -180.0, 10, 3);
+        assertEquals(180.0, s.valueToAngle(0.0), EPSILON);
+        assertEquals(90.0, s.valueToAngle(10.0), EPSILON);
+        assertEquals(0.0, s.valueToAngle(20.0), EPSILON);
+    }
+
+    /**
+     * Some checks for the angleToValue() method.
+     */
+    public void testAngleToValue() {
+        StandardDialScale s = new StandardDialScale();
+        assertEquals(0.0, s.angleToValue(175.0), EPSILON);
+        assertEquals(50.0, s.angleToValue(90.0), EPSILON);
+        assertEquals(100.0, s.angleToValue(5.0), EPSILON);
+        assertEquals(-10.0, s.angleToValue(192.0), EPSILON);
+        assertEquals(110.0, s.angleToValue(-12.0), EPSILON);
+
+        s = new StandardDialScale(0, 20, 180, -180.0, 10, 3);
+        assertEquals(0.0, s.angleToValue(180.0), EPSILON);
+        assertEquals(10.0, s.angleToValue(90.0), EPSILON);
+        assertEquals(20.0, s.angleToValue(0.0), EPSILON);
+    }
 }
