@@ -1,3 +1,8 @@
+2012-02-08  Martin Hoeller <martin.hoeller@xss.co.at>
+
+    Bug 3484408
+    * ant/build.xml: fixed maven-bundle task.
+
 2012-01-08  David Gilbert <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/dial/StandardDialScale.java
