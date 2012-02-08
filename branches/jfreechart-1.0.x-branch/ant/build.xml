@@ -304,7 +304,7 @@
          <token key="JCOMMON.VERSION" value="${jcommon.version}"/>
        </replacetokens>
     </filterchain>
-    <copy file="maven-jfreechart-project.xml" tofile="distribution/project.xml">
+    <copy file="pom.xml" tofile="distribution/pom.xml">
     <filterchain refid="version.filters"/>
     </copy>
 
