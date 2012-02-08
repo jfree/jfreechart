@@ -125,6 +125,7 @@
  * 25-Nov-2008 : Added bug fix 2201869 by Fawad Halim (DG);
  * 21-Jan-2009 : Check tickUnit for minor tick count (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
+ * 08-Feb-2012 : Bugfix for endless-loop, bug 3484403 by rbrabe (MH);
  *
  */
 
@@ -1620,10 +1621,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         Date tickDate = calculateLowestVisibleTickValue(unit);
         Date upperDate = getMaximumDate();
 
+        boolean hasRolled = false;
         while (tickDate.before(upperDate)) {
             // could add a flag to make the following correction optional...
-            tickDate = correctTickDateForPosition(tickDate, unit,
-                    this.tickMarkPosition);
+            if (!hasRolled) {
+                tickDate = correctTickDateForPosition(tickDate, unit,
+                     this.tickMarkPosition);
+            }
 
             long lowestTickTime = tickDate.getTime();
             long distance = unit.addToDate(tickDate, this.timeZone).getTime()
@@ -1680,6 +1684,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 Tick tick = new DateTick(tickDate, tickLabel, anchor,
                         rotationAnchor, angle);
                 result.add(tick);
+                hasRolled = false;
 
                 long currentTickTime = tickDate.getTime();
                 tickDate = unit.addToDate(tickDate, this.timeZone);
@@ -1701,6 +1706,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             }
             else {
                 tickDate = unit.rollDate(tickDate, this.timeZone);
+                hasRolled = true;
                 continue;
             }
 
@@ -1733,11 +1739,14 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         Date tickDate = calculateLowestVisibleTickValue(unit);
         Date upperDate = getMaximumDate();
 
+        boolean hasRolled = false;
         while (tickDate.before(upperDate)) {
 
             // could add a flag to make the following correction optional...
-            tickDate = correctTickDateForPosition(tickDate, unit,
+            if (!hasRolled) {
+                tickDate = correctTickDateForPosition(tickDate, unit,
                     this.tickMarkPosition);
+            }
 
             long lowestTickTime = tickDate.getTime();
             long distance = unit.addToDate(tickDate, this.timeZone).getTime()
@@ -1793,6 +1802,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 Tick tick = new DateTick(tickDate, tickLabel, anchor,
                         rotationAnchor, angle);
                 result.add(tick);
+                hasRolled = false;
+
                 long currentTickTime = tickDate.getTime();
                 tickDate = unit.addToDate(tickDate, this.timeZone);
                 long nextTickTime = tickDate.getTime();
@@ -1812,6 +1823,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             }
             else {
                 tickDate = unit.rollDate(tickDate, this.timeZone);
+                hasRolled = true;
             }
         }
         return result;

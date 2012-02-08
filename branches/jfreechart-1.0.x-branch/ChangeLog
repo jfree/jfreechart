@@ -1,6 +1,13 @@
 2012-02-08  Martin Hoeller <martin.hoeller@xss.co.at>
 
-    Bug 3484408
+    Bug 3484403:
+    * org/jfree/chart/axis/DateAxis
+    (refreshTicksHorizontal): Fix endless loop,
+    (refreshTicksVertical): Likewise;
+
+2012-02-08  Martin Hoeller <martin.hoeller@xss.co.at>
+
+    Bug 3484408:
     * ant/build.xml: fixed maven-bundle task.
 
 2012-01-08  David Gilbert <david.gilbert@object-refinery.com>
