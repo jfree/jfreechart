@@ -810,6 +810,8 @@ below:
     - Hari 
     - Sam (oldman)
     - Petr Kopac
+    - Patrick Schlott
+    - Christoph Schroeder
 
 It is possible that I have missed someone on this list, if that
 applies to you, please e-mail me. 
