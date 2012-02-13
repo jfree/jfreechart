@@ -32,6 +32,9 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard West, Advanced Micro Devices, Inc. (major rewrite
  *                   of difference drawing algorithm);
+ *                   Patrick Schlott
+ *                   Christoph Schroeder
+ *                   Martin Hoeller
  *
  * Changes:
  * --------
@@ -71,6 +74,8 @@
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 05-Nov-2007 : Draw item labels if visible (RW);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
+ * 13-Feb-2012 : Applied patch 3450234 for bug 3425881 by Patrick Schlott and
+ *               Christoph Schroeder (MH);
  *
  */
 
@@ -693,32 +698,45 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
                         l_polygonYs.add(b_useMinuend ? l_minuendCurY
                                 : l_subtrahendCurY);
                     }
-
-                    // compute slope components
-                    double l_slopeA = l_numeratorA / l_denominator;
-                    double l_slopeB = l_numeratorB / l_denominator;
-
-                    // check if the line segments intersect
-                    if ((0 < l_slopeA) && (l_slopeA <= 1) && (0 < l_slopeB)
-                            && (l_slopeB <= 1)) {
-                        // compute the point of intersection
-                        double l_xi = l_x1 + (l_slopeA * (l_x2 - l_x1));
-                        double l_yi = l_y1 + (l_slopeA * (l_y2 - l_y1));
-
-                        l_intersectX            = new Double(l_xi);
-                        l_intersectY            = new Double(l_yi);
-                        b_intersect             = true;
-                        b_minuendAtIntersect    = ((l_xi == l_x2)
-                                && (l_yi == l_y2));
-                        b_subtrahendAtIntersect = ((l_xi == l_x4)
-                                && (l_yi == l_y4));
-
-                        // advance minuend and subtrahend to intesect
-                        l_minuendCurX    = l_intersectX;
-                        l_minuendCurY    = l_intersectY;
-                        l_subtrahendCurX = l_intersectX;
-                        l_subtrahendCurY = l_intersectY;
+                }
+                
+                // compute slope components
+                double l_slopeA = l_numeratorA / l_denominator;
+                double l_slopeB = l_numeratorB / l_denominator;
+                
+                // test if both grahphs have a vertical rise at the same x-value
+                boolean b_vertical = (l_x1 == l_x2) && (l_x3 == l_x4) && (l_x2 == l_x4);
+                
+                // check if the line segments intersect
+                if (((0 < l_slopeA) && (l_slopeA <= 1) && (0 < l_slopeB)
+                        && (l_slopeB <= 1))|| b_vertical) {
+                	
+                    // compute the point of intersection
+                    double l_xi;
+                    double l_yi;
+                    if(b_vertical){
+                        b_colinear = false;
+                        l_xi = l_x2;
+                        l_yi = l_x4;
                     }
+                    else{
+                        l_xi = l_x1 + (l_slopeA * (l_x2 - l_x1));
+                        l_yi = l_y1 + (l_slopeA * (l_y2 - l_y1));                    		
+                    }
+
+                    l_intersectX            = new Double(l_xi);
+                    l_intersectY            = new Double(l_yi);
+                    b_intersect             = true;
+                    b_minuendAtIntersect    = ((l_xi == l_x2)
+                            && (l_yi == l_y2));
+                    b_subtrahendAtIntersect = ((l_xi == l_x4)
+                            && (l_yi == l_y4));
+
+                    // advance minuend and subtrahend to intesect
+                    l_minuendCurX    = l_intersectX;
+                    l_minuendCurY    = l_intersectY;
+                    l_subtrahendCurX = l_intersectX;
+                    l_subtrahendCurY = l_intersectY;
                 }
             }
 

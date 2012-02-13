@@ -1863,6 +1863,8 @@ class JFreeChartInfo extends ProjectInfo {
                         "Christian.Zuckschwerdt@Informatik.Uni-Oldenburg.de"),
                 new Contributor("Hari", "-"),
                 new Contributor("Sam (oldman)", "-"),
+                new Contributor("Patrick Schlott", "-"),
+                new Contributor("Christoph Schroeder", "-")
             }
         ));
 
