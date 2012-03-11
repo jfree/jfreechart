@@ -36,7 +36,7 @@
  * -------
  * 25-Feb-2005 : Version 1 (DG);
  * 16-Mar-2005 : Extended testEquals() (DG);
- *
+ * 11-Mar-2012 : Extended testEquals() (MH);
  */
 
 package org.jfree.chart.title.junit;
@@ -60,6 +60,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleEdge;
+import org.jfree.util.SortOrder;
 
 /**
  * Some tests for the {@link LegendTitle} class.
@@ -120,6 +121,11 @@ public class LegendTitleTests extends TestCase {
         t1.setItemFont(new Font("Dialog", Font.PLAIN, 19));
         assertFalse(t1.equals(t2));
         t2.setItemFont(new Font("Dialog", Font.PLAIN, 19));
+        assertTrue(t1.equals(t2));
+
+        t1.setSortOrder(SortOrder.DESCENDING);
+        assertFalse(t1.equals(t2));
+        t2.setSortOrder(SortOrder.DESCENDING);
         assertTrue(t1.equals(t2));
     }
 
@@ -191,5 +197,4 @@ public class LegendTitleTests extends TestCase {
         assertTrue(t1.equals(t2));
         assertTrue(t2.getSources()[0].equals(plot));
     }
-
 }

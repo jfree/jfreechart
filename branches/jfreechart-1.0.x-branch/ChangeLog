@@ -1,3 +1,15 @@
+2012-03-11  Martin Hoeller <martin.hoeller@xss.co.at>
+
+    Patch 3500621 by Simon Kaczor
+    * org/jfree/chart/title/LegendTitle
+    (sortOrder): New field,
+    (getSortOrder): New method,
+    (setSortOrder): Likewise,
+    (fetchLgendItems): Updated to support new sort order,
+    (equals): Likewise.
+    * tests/org/jfree/chart/title/LegendTitle
+    (testEquals): Adapted for new field.
+
 2012-02-13  Martin Hoeller <martin.hoeller@xss.co.at>
 
     Bug 3425881/Patch 3450234 by Patrick Schlott/Christoph Schroeder,

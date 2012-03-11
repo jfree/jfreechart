@@ -55,7 +55,7 @@
  * 18-May-2007 : Pass seriesKey and dataset to legend item block (DG);
  * 15-Aug-2008 : Added getWrapper() method (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
- *
+ * 11-Mar-2012 : Added sort-order support - patch 3500621 by Simon Kaczor (MH);
  */
 
 package org.jfree.chart.title;
@@ -96,6 +96,7 @@ import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.Size2D;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
+import org.jfree.util.SortOrder;
 
 /**
  * A chart title that displays a legend for the data in the chart.
@@ -168,6 +169,12 @@ public class LegendTitle extends Title
     private BlockContainer wrapper;
 
     /**
+     * Whether to render legend items in ascending or descending order.
+     * @since 1.0.15
+     */
+    private SortOrder sortOrder;
+
+    /**
      * Constructs a new (empty) legend for the specified source.
      *
      * @param source  the source.
@@ -199,6 +206,7 @@ public class LegendTitle extends Title
         this.itemFont = DEFAULT_ITEM_FONT;
         this.itemPaint = DEFAULT_ITEM_PAINT;
         this.itemLabelPadding = new RectangleInsets(2.0, 2.0, 2.0, 2.0);
+        this.sortOrder = SortOrder.ASCENDING;
     }
 
     /**
@@ -396,6 +404,31 @@ public class LegendTitle extends Title
     }
 
     /**
+     * Gets the order used to display legend items.
+     * 
+     * @return The order (never <code>null</code>).
+     * @since 1.0.15
+     */
+    public SortOrder getSortOrder() {
+        return this.sortOrder;
+    }
+
+    /**
+     * Sets the order used to display legend items.
+     * 
+     * @param order Specifies ascending or descending order (<code>null</code>
+     *              not permitted).
+     * @since 1.0.15
+     */
+    public void setSortOrder(SortOrder order) {
+        if (order == null) {
+            throw new IllegalArgumentException("Null 'order' argument.");
+        }
+        this.sortOrder = order;
+        notifyListeners(new TitleChangeEvent(this));
+    }
+
+    /**
      * Fetches the latest legend items.
      */
     protected void fetchLegendItems() {
@@ -407,16 +440,34 @@ public class LegendTitle extends Title
         else {
             this.items.setArrangement(this.vLayout);
         }
-        for (int s = 0; s < this.sources.length; s++) {
-            LegendItemCollection legendItems = this.sources[s].getLegendItems();
-            if (legendItems != null) {
-                for (int i = 0; i < legendItems.getItemCount(); i++) {
-                    LegendItem item = legendItems.get(i);
-                    Block block = createLegendItemBlock(item);
-                    this.items.add(block);
+
+        if (this.sortOrder.equals(SortOrder.ASCENDING)) {
+            for (int s = 0; s < this.sources.length; s++) {
+                LegendItemCollection legendItems =
+                    this.sources[s].getLegendItems();
+                if (legendItems != null) {
+                    for (int i = 0; i < legendItems.getItemCount(); i++) {
+                        addItemBlock(legendItems.get(i));
+                    }
                 }
             }
         }
+        else {
+            for (int s = this.sources.length - 1; s >= 0; s--) {
+                LegendItemCollection legendItems =
+                    this.sources[s].getLegendItems();
+                if (legendItems != null) {
+                    for (int i = legendItems.getItemCount()-1; i >= 0; i--) {
+                        addItemBlock(legendItems.get(i));
+                    }
+                }
+            }
+        }
+    }
+
+    private void addItemBlock(LegendItem item) {
+        Block block = createLegendItemBlock(item);
+        this.items.add(block);
     }
 
     /**
@@ -618,6 +669,9 @@ public class LegendTitle extends Title
             return false;
         }
         if (!this.vLayout.equals(that.vLayout)) {
+            return false;
+        }
+        if (!this.sortOrder.equals(that.sortOrder)) {
             return false;
         }
         return true;
