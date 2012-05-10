@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYBarRenderer.java
  * ------------------
- * (C) Copyright 2001-2011, by Object Refinery Limited.
+ * (C) Copyright 2001-2012, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -96,6 +96,8 @@
  * 24-Jun-2008 : Added new barPainter mechanism (DG);
  * 03-Feb-2009 : Added defaultShadowsVisible flag (DG);
  * 05-Feb-2009 : Added barAlignmentFactor (DG);
+ * 10-May-2012 : Fix findDomainBounds() and findRangeBounds() to account for
+ *               non-visible series (DG);
  *
  */
 
@@ -1179,12 +1181,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      *         <code>null</code> or empty).
      */
     public Range findDomainBounds(XYDataset dataset) {
-        if (dataset != null) {
-            return DatasetUtilities.findDomainBounds(dataset, true);
-        }
-        else {
-            return null;
-        }
+        return findDomainBounds(dataset, true);
     }
 
     /**
@@ -1198,13 +1195,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      *         <code>null</code> or empty).
      */
     public Range findRangeBounds(XYDataset dataset) {
-        if (dataset != null) {
-            return DatasetUtilities.findRangeBounds(dataset,
-                    this.useYInterval);
-        }
-        else {
-            return null;
-        }
+        return findRangeBounds(dataset, this.useYInterval);
     }
 
     /**

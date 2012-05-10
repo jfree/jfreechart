@@ -1,3 +1,13 @@
+2012-05-10  David Gilbert <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/renderer/xy/XYBarRenderer.java
+    (findDomainBounds): call new method in super-class to take account of
+    non-visible series,
+    (findRangeBounds): likewise;
+    * tests/org/jfree/chart/renderer/xy/junit/XYBarRendererTests.java
+    (testFindDomainBounds2): new test;
+    (testFindRangeBounds2): Likewise.
+
 2012-03-11  Martin Hoeller <martin.hoeller@xss.co.at>
 
     Patch 3500621 by Simon Kaczor
