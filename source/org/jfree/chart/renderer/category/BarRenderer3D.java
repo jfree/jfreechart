@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * BarRenderer3D.java
  * ------------------
- * (C) Copyright 2001-2009, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2001-2012, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -36,6 +36,7 @@
  *                   Richard Atkinson;
  *                   Rich Unger;
  *                   Christian W. Zuckschwerdt;
+ *                   DaveLaw (dave ATT davelaw DOTT de) - patch 3204823;
  *
  * Changes
  * -------
@@ -92,7 +93,8 @@
  * 03-Apr-2007 : Fixed bugs in drawBackground() method (DG);
  * 16-Oct-2007 : Fixed bug in range marker drawing (DG);
  * 19-Mar-2009 : Override for drawRangeLine() method (DG);
- *
+ * 11-Jun-2012 : Utilise new PaintAlpha class - patch 3204823 from DaveLaw (DG);
+ * 
  */
 
 package org.jfree.chart.renderer.category;
@@ -128,6 +130,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
+import org.jfree.chart.util.PaintAlpha;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
@@ -727,9 +730,7 @@ public class BarRenderer3D extends BarRenderer
             bar3dRight.lineTo((float) x3, (float) y2);
             bar3dRight.closePath();
 
-            if (itemPaint instanceof Color) {
-                g2.setPaint(((Color) itemPaint).darker());
-            }
+            g2.setPaint(PaintAlpha.darker(itemPaint));
             g2.fill(bar3dRight);
         }
 
@@ -749,9 +750,7 @@ public class BarRenderer3D extends BarRenderer
             if (bar3dRight != null) {
                 g2.draw(bar3dRight);
             }
-            if (bar3dTop != null) {
-                g2.draw(bar3dTop);
-            }
+            g2.draw(bar3dTop);
         }
 
         CategoryItemLabelGenerator generator

@@ -1,3 +1,15 @@
+2012-06-11  David Gilbert <david.gilbert@object-refinery.com>
+
+    Patch 3204823 by DaveLaw
+    * org/jfree/chart/plot/PiePlot3D.java
+    (drawSide): Use new PaintAlpha class,
+    * org/jfree/chart/renderer/category/BarRenderer3D.java
+    (drawItem): Likewise,
+    * org/jfree/chart/renderer/category/StackedBarRenderer3D.java
+    (drawStackHorizontal): Likewise,
+    (drawStackVertical): Likewise,
+    * org/jfree/chart/util/PaintAlpha.java: New class.
+
 2012-05-10  David Gilbert <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/renderer/xy/XYBarRenderer.java
