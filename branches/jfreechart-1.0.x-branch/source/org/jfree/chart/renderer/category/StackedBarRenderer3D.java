@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,13 +27,14 @@
  * -------------------------
  * StackedBarRenderer3D.java
  * -------------------------
- * (C) Copyright 2000-2009, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2000-2012, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
  *                   Max Herfort (patch 1459313);
+ *                   DaveLaw (dave ATT davelaw DOTT de) (patch 3204823);
  *
  * Changes
  * -------
@@ -85,6 +86,7 @@
  *               dataset (DG);
  * 04-Feb-2009 : Handle seriesVisible flag (DG);
  * 07-Jul-2009 : Added flag for handling zero values (DG);
+ * 11-Jun-2012 : Use new PaintAlpha class (patch 3204823 from DaveLaw) (DG);
  *
  */
 
@@ -109,6 +111,7 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.util.PaintAlpha;
 import org.jfree.data.DataUtilities;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
@@ -261,9 +264,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
         if (this.renderAsPercentages) {
             return new Range(0.0, 1.0);
         }
-        else {
-            return DatasetUtilities.findStackedRangeBounds(dataset);
-        }
+        return DatasetUtilities.findStackedRangeBounds(dataset);
     }
 
     /**
@@ -512,10 +513,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
             Shape[] faces = createHorizontalBlock(barX0, barW, vv0, vv1,
                     inverted);
             Paint fillPaint = getItemPaint(series, column);
-            Paint fillPaintDark = fillPaint;
-            if (fillPaintDark instanceof Color) {
-                fillPaintDark = ((Color) fillPaint).darker();
-            }
+            Paint fillPaintDark = PaintAlpha.darker(fillPaint);
             boolean drawOutlines = isDrawBarOutline();
             Paint outlinePaint = fillPaint;
             if (drawOutlines) {
@@ -708,10 +706,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
             Shape[] faces = createVerticalBlock(barX0, barW, vv0, vv1,
                     inverted);
             Paint fillPaint = getItemPaint(series, column);
-            Paint fillPaintDark = fillPaint;
-            if (fillPaintDark instanceof Color) {
-                fillPaintDark = ((Color) fillPaint).darker();
-            }
+            Paint fillPaintDark = PaintAlpha.darker(fillPaint);
             boolean drawOutlines = isDrawBarOutline();
             Paint outlinePaint = fillPaint;
             if (drawOutlines) {

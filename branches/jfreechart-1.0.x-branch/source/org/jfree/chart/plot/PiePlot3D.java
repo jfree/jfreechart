@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PiePlot3D.java
  * --------------
- * (C) Copyright 2000-2009, by Object Refinery and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery and Contributors.
  *
  * Original Author:  Tomer Peretz;
  * Contributor(s):   Richard Atkinson;
@@ -37,6 +37,7 @@
  *                   Arnaud Lelievre;
  *                   Dave Crane;
  *                   Martin Hoeller;
+ *                   DaveLaw (dave ATT davelaw DOTT de);
  *
  * Changes
  * -------
@@ -83,6 +84,7 @@
  * 10-Jul-2009 : Added drop shaow support (DG);
  * 10-Oct-2011 : Localization fix: bug #3353913 (MH);
  * 18-Oct-2011 : Fix tooltip offset with shadow generator (DG);
+ * 11-Jun-2012 : Utilise new PaintAlpha class (patch 3204823 from DaveLaw) (DG);
  * 
  */
 
@@ -96,7 +98,6 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Polygon;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Arc2D;
@@ -114,6 +115,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.PieToolTipGenerator;
+import org.jfree.chart.util.PaintAlpha;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.PieDataset;
 import org.jfree.ui.RectangleInsets;
@@ -186,8 +188,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
 
     /**
      * Returns a flag that controls whether or not the sides of the pie chart
-     * are rendered using a darker colour.  This is only applied if the
-     * section colour is an instance of {@link java.awt.Color}.
+     * are rendered using a darker colour.
      *
      * @return A boolean.
      *
@@ -202,8 +203,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
     /**
      * Sets a flag that controls whether or not the sides of the pie chart
      * are rendered using a darker colour, and sends a {@link PlotChangeEvent}
-     * to all registered listeners.  This is only applied if the
-     * section colour is an instance of {@link java.awt.Color}.
+     * to all registered listeners.
      *
      * @param darker true to darken the sides, false to use the default
      *         behaviour.
@@ -645,11 +645,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
                             boolean drawBack) {
 
         if (getDarkerSides()) {
-            if (paint instanceof Color) {
-                Color c = (Color) paint;
-                c = c.darker();
-                paint = c;
-            }
+             paint = PaintAlpha.darker(paint);
         }
 
         double start = arc.getAngleStart();
