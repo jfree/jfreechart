@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * PiePlot.java
  * ------------
- * (C) Copyright 2000-2011, by Andrzej Porebski and Contributors.
+ * (C) Copyright 2000-2012, by Andrzej Porebski and Contributors.
  *
  * Original Author:  Andrzej Porebski;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -167,6 +167,7 @@
  * 04-Nov-2009 : Add mouse wheel rotation support (DG);
  * 18-Oct-2011 : Fixed tooltip offset with shadow generator (DG);
  * 20-Nov-2011 : Initialise shadow generator as null (DG);
+ * 01-Jul-2012 : General label once only in drawSimpleLabels() (DG);
  * 
  */
 
@@ -2731,7 +2732,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         Iterator iterator = keys.iterator();
         while (iterator.hasNext()) {
             Comparable key = (Comparable) iterator.next();
-            boolean include = true;
+            boolean include;
             double v = 0.0;
             Number n = getDataset().getValue(key);
             if (n == null) {
@@ -2754,11 +2755,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 int x = (int) arc.getEndPoint().getX();
                 int y = (int) arc.getEndPoint().getY();
 
-                PieSectionLabelGenerator labelGenerator = getLabelGenerator();
-                if (labelGenerator == null) {
+                PieSectionLabelGenerator myLabelGenerator = getLabelGenerator();
+                if (myLabelGenerator == null) {
                     continue;
                 }
-                String label = labelGenerator.generateSectionLabel(
+                String label = myLabelGenerator.generateSectionLabel(
                         this.dataset, key);
                 if (label == null) {
                     continue;
@@ -2790,8 +2791,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
                 g2.setPaint(this.labelPaint);
                 g2.setFont(this.labelFont);
-                TextUtilities.drawAlignedString(getLabelGenerator()
-                        .generateSectionLabel(getDataset(), key), g2, x, y,
+                TextUtilities.drawAlignedString(label, g2, x, y,
                         TextAnchor.CENTER);
 
             }
@@ -2827,7 +2827,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         Iterator iterator = keys.iterator();
         while (iterator.hasNext()) {
             Comparable key = (Comparable) iterator.next();
-            boolean include = true;
+            boolean include;
             double v = 0.0;
             Number n = this.dataset.getValue(key);
             if (n == null) {
