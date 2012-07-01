@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * DeviationRenderer.java
  * ----------------------
- * (C) Copyright 2007-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,8 @@
  * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
  * 11-Apr-2008 : New override for findRangeBounds() (DG);
  * 27-Mar-2009 : Updated findRangeBounds() to call new inherited method (DG);
+ * 01-Jul-2012 : Provide initial size for GeneralPath in drawItem(), as 
+ *               suggested by Milan Ramaiya in bug 3521736 (DG);
  * 
  */
 
@@ -311,7 +313,9 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
                 g2.setComposite(AlphaComposite.getInstance(
                         AlphaComposite.SRC_OVER, this.alpha));
                 g2.setPaint(getItemFillPaint(series, item));
-                GeneralPath area = new GeneralPath();
+                GeneralPath area = new GeneralPath(GeneralPath.WIND_NON_ZERO,
+                        drState.lowerCoordinates.size() 
+                        + drState.upperCoordinates.size());
                 double[] coords = (double[]) drState.lowerCoordinates.get(0);
                 area.moveTo((float) coords[0], (float) coords[1]);
                 for (int i = 1; i < drState.lowerCoordinates.size(); i++) {
