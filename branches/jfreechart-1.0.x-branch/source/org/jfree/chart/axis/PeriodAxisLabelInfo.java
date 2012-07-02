@@ -127,11 +127,9 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      * @param dateFormat  the date format (<code>null</code> not permitted).
      */
     public PeriodAxisLabelInfo(Class periodClass, DateFormat dateFormat) {
-        this(
-            periodClass, dateFormat, DEFAULT_INSETS, DEFAULT_FONT,
+        this(periodClass, dateFormat, DEFAULT_INSETS, DEFAULT_FONT,
             DEFAULT_LABEL_PAINT, true, DEFAULT_DIVIDER_STROKE,
-            DEFAULT_DIVIDER_PAINT
-        );
+            DEFAULT_DIVIDER_PAINT);
     }
 
     /**
