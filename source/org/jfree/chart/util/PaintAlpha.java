@@ -404,13 +404,13 @@ public class PaintAlpha {
         /*
          * Buffered Images may have properties, but NEVER disclose them!
          * Nevertheless, just in case someone implements getPropertyNames() one day...
-         */
-        Hashtable<String, Object> props = null;
-        
-        if (image.getPropertyNames() != null) { // ALWAYS null
-            props = new Hashtable<String, Object>();
-            for (String s : image.getPropertyNames()) {
-                props.put(s, image.getProperty(s));
+         */        
+        Hashtable props = null;
+        String[] propNames = image.getPropertyNames();
+        if (propNames != null) { // ALWAYS null
+            props = new Hashtable();
+            for (int i = 0; i < propNames.length; i++) {
+                props.put(propNames[i], image.getProperty(propNames[i]));
             }
         } 
         return new BufferedImage(image.getColorModel(), ras, 
