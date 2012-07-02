@@ -1,3 +1,10 @@
+2012-07-02  David Gilbert <david.gilbert@object-refinery.com>
+
+    Translations by Leo Leung:
+    * org/jfree/chart/LocalisationBundle_ja.properties: New translation file;
+    * org/jfree/chart/editor/LocalisationBundle_ja.properties: Likewise;
+    * org/jfree/chart/plot/LocalisationBundle_ja.properties: Likewise.
+
 2012-07-01  David Gilbert <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/plot/PiePlot.java
