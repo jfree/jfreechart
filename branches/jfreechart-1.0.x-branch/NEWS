@@ -2,8 +2,8 @@ JFreeChart 1.0.15
 -----------------
 Not yet released
 
-This release also fixes a minor security flaw in the DisplayChart class, 
-detected and reported by OSI Security:
+Added localisation files for Japanese.  This release also fixes a minor 
+security flaw in the DisplayChart class, detected and reported by OSI Security:
 
 http://www.osisecurity.com.au/advisories/jfreechart-path-disclosure
 
