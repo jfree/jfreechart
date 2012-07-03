@@ -1,17 +1,22 @@
 ********************************
-*  JFREECHART: Version 1.0.14  *
+*  JFREECHART: Version 1.0.15  *
 ********************************
 
-20 November 2011
+?? July 2012 (NOT YET RELEASED)
 
-(C)opyright 2000-2011, by Object Refinery Limited and Contributors.
+(C)opyright 2000-2012, by Object Refinery Limited and Contributors.
 
 -----------------
 1.  INTRODUCTION
 -----------------
 JFreeChart is a free chart library for the Java(tm) platform.  It runs 
-on the Java 2 Platform (JDK 1.3 or later) and uses the Java 2D API for 
+on the Java 2 Platform (JRE 1.4.2 or later) and uses the Java 2D API for 
 drawing.
+
+******************************************************************************** 
+* IMPORTANT NOTICE:                                                            *
+* The next release of JFreeChart (1.0.16) will require JRE/JDK 1.6.0 or later. * 
+********************************************************************************
 
 JFreeChart is licensed under the terms of the GNU Lesser General
 Public Licence (LGPL).  A copy of the licence is included in the
@@ -38,7 +43,7 @@ message in the JFreeChart forum.
 3.  DOCUMENTATION
 -----------------
 You can download installation instructions
-(jfreechart-1.0.14-install.pdf) from the JFreeChart home
+(jfreechart-1.0.15-install.pdf) from the JFreeChart home
 page or the project page on SourceForge.
 
 Further documentation for JFreeChart (the JFreeChart Developer Guide) is
@@ -61,10 +66,10 @@ or with the Ant script (build.xml) included in the distribution.
 -----------------
 JFreeChart has the following dependencies:
 
-(a)  JDK 1.3.1 or higher - JFreeChart requires the Java2D and Collections
+(a)  JRE/JDK 1.4.2 or higher - JFreeChart requires the Java2D and Collections
 APIs, so it definitely won't work with JDK 1.1 (with a small amount of effort
-you can probably get it to compile and run with JDK 1.2).  If you are using
-JFreeChart to create applets, this means that you cannot rely on the JVM
+you can probably get it to compile and run with JDK 1.2 or 1.3).  If you are 
+using JFreeChart to create applets, this means that you cannot rely on the JVM
 integrated with Microsoft's Internet Explorer - your users will need to have
 the Java 2 plug-in installed.  Most other browsers (e.g. Firefox, Safari and
 Chrome) offer good support for modern JREs.
@@ -77,27 +82,14 @@ source code for JCommon from:
 
 JCommon is licensed under the terms of the GNU Lesser General Public Licence.
 
-(c)  GNU JAXP (JDK 1.3 only) - a free implementation of the standard XML 
-processing APIs for Java.
-
-    http://www.gnu.org/software/classpathx/jaxp/
-
-Classes in the org.jfree.data.xml package require this library, or
-another JAXP v1.1 compliant parser.  The gnujaxp.jar file (from the
-gnujaxp-1.0beta1.zip distribution) is included with JFreeChart.  GNU
-JAXP is licensed under the terms of the GNU General Public License
-with an additional library exception.
-
-THIS LIBRARY IS ONLY REQUIRED BY JFREECHART IF YOU ARE USING JDK 1.3.
-
-(d)  servlet.jar - classes in the org.jfree.chart.servlet
+(c)  servlet.jar - classes in the org.jfree.chart.servlet
 package require this file.  The JFreeChart distribution includes the 
 servlet.jar file distributed with Tomcat 4.1.31.  Applicable license 
 terms are published at:  
 
     http://java.sun.com/products/servlet/LICENSE   
 
-(e)  JUnit - a unit testing framework (the junit.jar runtime file is
+(d)  JUnit - a unit testing framework (the junit.jar runtime file is
 included in the distribution).  JUnit is licensed under the terms
 of the IBM Common Public License.  You can find out more about JUnit
 and/or download the latest version from:
@@ -106,6 +98,10 @@ and/or download the latest version from:
 
 The JUnit tests included with JFreeChart have been created using JUnit
 4.3.1.
+
+In the distribution, we also include iText-2.1.5.jar.  This is only required by
+the JFreeChart demo applications, and is not a direct dependency for 
+JFreeChart.
 
 -----------
 5.  SUPPORT
@@ -137,9 +133,9 @@ that you MUST have in the jar file for JFreeChart to function correctly.
 ------------------------
 A demo application that shows a selection of the charts that can be
 generated is included in the JFreeChart distribution.   To run the
-demo (using JDK 1.3.1 or later), use the following command:
+demo (using JDK 1.4.2 or later), use the following command:
 
-    java -jar jfreechart-1.0.14-demo.jar
+    java -jar jfreechart-1.0.15-demo.jar
 
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
@@ -164,12 +160,6 @@ the future:
       the axis margins;
     - tick labels on a DateAxis that uses a SegmentedTimeline can be 
       problematic;
-    - there is no support for writing charts to JPEG format on JDK 1.3.  JPEG 
-      is not a good format for charts in any case, and it is usually better to 
-      use PNG format;
-    - copying charts to the clipboard (supported by the ChartPanel class) will
-      not work if you are running on a very old version of the Java runtime
-      (version 1.3.1).
     
 If there are other items that you think should be listed here,
 please post a bug report.
@@ -178,6 +168,9 @@ please post a bug report.
 9.  WHAT's NEW
 --------------
 A list of changes in recent versions:
+
+1.0.15 : (??-Jul-2012)
+        - see the NEWS and ChangeLog files for details.
 
 1.0.14 : (20-Nov-2011)
         - added support for multiple axes in PolarPlot, performance 
