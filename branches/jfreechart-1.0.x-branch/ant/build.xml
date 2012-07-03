@@ -1,9 +1,8 @@
 <!-- An ANT build file for JFreeChart -->
 
 <!-- Written by David Gilbert. -->
-<!-- 2-Jan-2003 -->
 
-<!-- Tested with Ant 1.6.5 -->
+<!-- Tested recently with Ant 1.8.2 -->
 <!-- To run this script, you need to make sure the libraries used by -->
 <!-- JFreeChart are copied to the ../lib directory (or edit the -->
 <!-- initialise task to point to the appropriate jar files). -->
@@ -21,7 +20,7 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.0.14" />
+        <property name="jfreechart.version" value="1.0.15" />
         <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.17" />
@@ -31,19 +30,15 @@
         <property name="itext.jar" value="${basedir}/lib/${itext.name}-${itext.version}.jar"/>
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
-        <property name="gnujaxp.jar" value="${basedir}/lib/gnujaxp.jar"/>
         <property name="junit.jar" value="${basedir}/lib/junit.jar"/>
-        <available classname="javax.imageio.ImageIO" property="JDK1.4+"/>
-        <available classname="java.lang.annotation.Annotation" property="JDK1.5+"/>
-        <property name="src.version" value="1.3"/>
-        <property name="target.version" value="1.3"/>
+        <property name="src.version" value="1.4"/>
+        <property name="target.version" value="1.4"/>
         <available classname="java.lang.Annotation" property="src.version" value="1.5"/>
         <available classname="java.lang.Annotation" property="target.version" value="1.5"/>
         <path id="build.classpath">
             <fileset dir="${basedir}/lib/">
                 <include name="${jcommon.name}-${jcommon.version}.jar"/>
                 <include name="servlet.jar"/>
-                <include name="gnujaxp.jar" unless="JDK1.4+"/>
             </fileset>
         </path>
 
@@ -66,9 +61,6 @@
             <classpath refid="build.classpath" />
             <include name="org/jfree/**"/>
             <exclude name="org/jfree/chart/xml/**"/>
-            <exclude name="org/jfree/chart/encoders/SunPNGEncoderAdapter.java" unless="JDK1.4+"/>
-            <exclude name="org/jfree/chart/encoders/SunJPEGEncoderAdapter.java" unless="JDK1.4+"/>
-            <exclude name="org/jfree/chart/MouseWheelHandler.java" unless="JDK1.4+"/>
         </javac>
 
         <!-- copy across gorilla.jpg -->
@@ -235,7 +227,6 @@
         <copy file="${basedir}/lib/swtgraphics2d.jar" tofile="${basedir}/distribution/lib/swtgraphics2d.jar" failonerror="false" />
         <copy file="${basedir}/lib/jfreechart-${jfreechart.version}-swt.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-swt.jar"  failonerror="false" />
         <copy file="${servlet.jar}" tofile="${basedir}/distribution/lib/servlet.jar" />
-        <copy file="${gnujaxp.jar}" tofile="${basedir}/distribution/lib/gnujaxp.jar" />
         <copy file="${junit.jar}" tofile="${basedir}/distribution/lib/junit.jar" />
         <copy file="${itext.jar}" tofile="${basedir}/distribution/lib/${itext.name}-${itext.version}.jar" />
 
@@ -327,8 +318,8 @@
         <mkdir dir="${basedir}/build-tests"/>
         <javac srcdir="${basedir}/tests"
                destdir="${basedir}/build-tests"
-               source="1.3"
-               target="1.3"
+               source="1.4"
+               target="1.4"
                debug="true"
                deprecation="false"
                optimize="false">
