@@ -748,7 +748,9 @@ below:
     - Xun Kang
     - Bill Kelemen
     - Norbert Kiesel
+    - Petr Kopac
     - Gideon Krause
+    - Dave Law;
     - Pierre-Marie Le Biot
     - Arnaud Lelievre
     - Wolfgang Lenhard
@@ -777,7 +779,9 @@ below:
     - Scott Sams
     - Michel Santos
     - Thierry Saura
+    - Patrick Schlott
     - Andreas Schneider
+    - Christoph Schroeder
     - Jean-Luc SCHWAB
     - Bryan Scott
     - Tobias Selb
@@ -803,9 +807,6 @@ below:
     - Christian W. Zuckschwerdt
     - Hari 
     - Sam (oldman)
-    - Petr Kopac
-    - Patrick Schlott
-    - Christoph Schroeder
 
 It is possible that I have missed someone on this list, if that
 applies to you, please e-mail me. 
