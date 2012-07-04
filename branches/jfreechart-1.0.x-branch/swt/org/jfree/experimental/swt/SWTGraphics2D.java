@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * SWTGraphics2D.java
  * ------------------
- * (C) Copyright 2006-2008, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006-2012, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   Cedric Chabanois (cchabanois AT no-log.org);
@@ -53,6 +53,7 @@
  * 27-Nov-2007 : Implemented a couple of drawImage() methods (DG);
  * 18-Nov-2008 : Check for GradientPaint in setPaint() method (DG);
  * 27-Feb-2009 : Implemented fillPolygon() - see bug 2583891 (DG);
+ * 04-Jul-2012 : Fixed get/setStroke() - see bug 3514487 (DG);
  *
  */
 
@@ -72,9 +73,9 @@ import java.awt.Image;
 import java.awt.Paint;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.RenderingHints.Key;
 import java.awt.Shape;
 import java.awt.Stroke;
-import java.awt.RenderingHints.Key;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
@@ -379,8 +380,9 @@ public class SWTGraphics2D extends Graphics2D {
      * @see #setStroke(Stroke)
      */
     public Stroke getStroke() {
-        return new BasicStroke(this.gc.getLineWidth(), this.gc.getLineCap(),
-                this.gc.getLineJoin());
+        return new BasicStroke(this.gc.getLineWidth(), 
+                toAwtLineCap(this.gc.getLineCap()),
+                toAwtLineJoin(this.gc.getLineJoin()));
     }
 
     /**
@@ -394,34 +396,9 @@ public class SWTGraphics2D extends Graphics2D {
     public void setStroke(Stroke stroke) {
         if (stroke instanceof BasicStroke) {
             BasicStroke bs = (BasicStroke) stroke;
-            // linewidth
             this.gc.setLineWidth((int) bs.getLineWidth());
-
-            // line join
-            switch (bs.getLineJoin()) {
-                case BasicStroke.JOIN_BEVEL :
-                    this.gc.setLineJoin(SWT.JOIN_BEVEL);
-                    break;
-                case BasicStroke.JOIN_MITER :
-                    this.gc.setLineJoin(SWT.JOIN_MITER);
-                    break;
-                case BasicStroke.JOIN_ROUND :
-                    this.gc.setLineJoin(SWT.JOIN_ROUND);
-                    break;
-            }
-
-            // line cap
-            switch (bs.getEndCap()) {
-                case BasicStroke.CAP_BUTT :
-                    this.gc.setLineCap(SWT.CAP_FLAT);
-                    break;
-                case BasicStroke.CAP_ROUND :
-                    this.gc.setLineCap(SWT.CAP_ROUND);
-                    break;
-                case BasicStroke.CAP_SQUARE :
-                    this.gc.setLineCap(SWT.CAP_SQUARE);
-                    break;
-            }
+            this.gc.setLineJoin(toSwtLineJoin(bs.getLineJoin()));
+            this.gc.setLineCap(toSwtLineCap(bs.getEndCap()));
 
             // set the line style to solid by default
             this.gc.setLineStyle(SWT.LINE_SOLID);
@@ -1395,4 +1372,95 @@ public class SWTGraphics2D extends Graphics2D {
         return awtTransform;
     }
 
+    /**
+     * Returns the AWT line cap corresponding to the specified SWT line cap.
+     * 
+     * @param swtLineCap  the SWT line cap.
+     * 
+     * @return The AWT line cap.
+     */
+    private int toAwtLineCap(int swtLineCap) {
+    	if (swtLineCap == SWT.CAP_FLAT) {
+    		return BasicStroke.CAP_BUTT;
+    	}
+    	else if (swtLineCap == SWT.CAP_ROUND) {
+    		return BasicStroke.CAP_ROUND;
+    	}
+    	else if (swtLineCap == SWT.CAP_SQUARE) {
+    		return BasicStroke.CAP_SQUARE;    		
+    	}
+    	else {
+    		throw new IllegalArgumentException("SWT LineCap " + swtLineCap 
+    				+ " not recognised");
+    	}
+    }
+
+    /**
+     * Returns the AWT line join corresponding to the specified SWT line join.
+     * 
+     * @param swtLineJoin  the SWT line join.
+     * 
+     * @return The AWT line join.
+     */
+    private int toAwtLineJoin(int swtLineJoin) {
+    	if (swtLineJoin == SWT.JOIN_BEVEL) {
+    		return BasicStroke.JOIN_BEVEL;
+    	}
+    	else if (swtLineJoin == SWT.JOIN_MITER) {
+    		return BasicStroke.JOIN_MITER;
+    	}
+    	else if (swtLineJoin == SWT.JOIN_ROUND) {
+    		return BasicStroke.JOIN_ROUND;    		
+    	}
+    	else {
+    		throw new IllegalArgumentException("SWT LineJoin " + swtLineJoin 
+    				+ " not recognised");
+    	}
+    }
+
+    /**
+     * Returns the SWT line cap corresponding to the specified AWT line cap.
+     * 
+     * @param awtLineCap  the AWT line cap.
+     * 
+     * @return The SWT line cap.
+     */
+    private int toSwtLineCap(int awtLineCap) {
+    	if (awtLineCap == BasicStroke.CAP_BUTT) {
+    		return SWT.CAP_FLAT;
+    	}
+    	else if (awtLineCap == BasicStroke.CAP_ROUND) {
+    		return SWT.CAP_ROUND;
+    	}
+    	else if (awtLineCap == BasicStroke.CAP_SQUARE) {
+    		return SWT.CAP_SQUARE;    		
+    	}
+    	else {
+    		throw new IllegalArgumentException("AWT LineCap " + awtLineCap 
+    				+ " not recognised");
+    	}
+    }
+
+    /**
+     * Returns the SWT line join corresponding to the specified AWT line join.
+     * 
+     * @param awtLineJoin  the AWT line join.
+     * 
+     * @return The SWT line join.
+     */
+    private int toSwtLineJoin(int awtLineJoin) {
+    	if (awtLineJoin == BasicStroke.JOIN_BEVEL) {
+    		return SWT.JOIN_BEVEL;
+    	}
+    	else if (awtLineJoin == BasicStroke.JOIN_MITER) {
+    		return SWT.JOIN_MITER;
+    	}
+    	else if (awtLineJoin == BasicStroke.JOIN_ROUND) {
+    		return SWT.JOIN_ROUND;    		
+    	}
+    	else {
+    		throw new IllegalArgumentException("AWT LineJoin " + awtLineJoin 
+    				+ " not recognised");
+    	}
+    }
 }
