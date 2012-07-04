@@ -19,7 +19,8 @@ Patches:
 
 Bug Fixes:
 
-3521736 : DeviationRenderer optimisation (by Milan Ramaiya); 
+3521736 : DeviationRenderer optimisation (by Milan Ramaiya);
+3514487 : SWTGraphics2D get/setStroke() problem;
 3484408 : Maven fixes (Martin Hoeller);
 3484403 : DateAxis endless loop (by Martin Hoeller);
 3446965 : TimeSeries calculates range incorrectly in addOrUpdate();
