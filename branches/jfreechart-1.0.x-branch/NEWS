@@ -26,6 +26,7 @@ Bug Fixes:
 3446965 : TimeSeries calculates range incorrectly in addOrUpdate();
 3445507 : TimeSeriesCollection.findRangeBounds() regression;
 3425881 : XYDifferenceRenderer fix (by Patrick Schlott/Christoph Schroeder);
+2963199 : SWT print job (by Jonas Rüttimann);
 2879650 : Path disclosure vulnerability in DisplayChart servlet;
 
 
