@@ -34,6 +34,7 @@
  *                   Cedric Chabanois (cchabanois AT no-log.org);
  *                   Christoph Beck;
  *                   Sebastiao Correia (patch 3463807);
+ *                   Jonas Rüttimann (bug fix 2963199);
  *
  * Changes
  * -------
@@ -72,6 +73,7 @@
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
  * 08-Jan-2012 : Dispose popup-menu (patch 3463807 by Sebastiao Correia) (DG)
+ * 05-Jul-2012 : Fix SWT print (bug 2963199 by Jonas Rüttimann);
  *
  */
 
@@ -85,7 +87,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
 import java.util.EventListener;
@@ -117,7 +118,6 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.MessageBox;
 import org.jfree.chart.ChartMouseEvent;
 import org.jfree.chart.ChartMouseListener;
 import org.jfree.chart.ChartRenderingInfo;
@@ -1280,24 +1280,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
      * Creates a print job for the chart.
      */
     public void createChartPrintJob() {
-        //FIXME try to replace swing print stuff by swt
-        PrinterJob job = PrinterJob.getPrinterJob();
-        PageFormat pf = job.defaultPage();
-        PageFormat pf2 = job.pageDialog(pf);
-        if (pf2 != pf) {
-            job.setPrintable(this, pf2);
-            if (job.printDialog()) {
-                try {
-                    job.print();
-                }
-                catch (PrinterException e) {
-                    MessageBox messageBox = new MessageBox(
-                            this.canvas.getShell(), SWT.OK | SWT.ICON_ERROR);
-                    messageBox.setMessage(e.getMessage());
-                    messageBox.open();
-                }
-            }
-        }
+        new ChartPrintJob("PlotPrint").print(this);
     }
 
     /**
