@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -1330,6 +1330,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         }
         else if (!flag && this.mouseWheelHandler != null) {
             this.removeMouseWheelListener(this.mouseWheelHandler);
+            this.mouseWheelHandler = null;
         } 
     }
 
