@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Week.java
  * ---------
- * (C) Copyright 2001-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aimin Han;
@@ -67,6 +67,7 @@
  *               instances (DG);
  * 19-Dec-2007 : Fixed bug in deprecated constructor (DG);
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
+ * 05-Jul-2012 : Replaced getTime().getTime() with getTimeInMillis() (DG);
  *
  */
 
@@ -391,8 +392,7 @@ public class Week extends RegularTimePeriod implements Serializable {
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
-        //return c.getTimeInMillis();  // this won't work for JDK 1.3
-        return c.getTime().getTime();
+        return c.getTimeInMillis();
     }
 
     /**
@@ -416,8 +416,7 @@ public class Week extends RegularTimePeriod implements Serializable {
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
-        //return c.getTimeInMillis();  // this won't work for JDK 1.3
-        return c.getTime().getTime() - 1;
+        return c.getTimeInMillis();
     }
 
     /**

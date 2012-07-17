@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Year.java
  * ---------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2012, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -56,6 +56,7 @@
  * 16-Sep-2008 : Extended range of valid years, and deprecated
  *               DEFAULT_TIME_ZONE (DG);
  * 25-Nov-2008 : Added new constructor with Locale (DG);
+ * 05-Jul-2012 : Removed JRE 1.3.1 code (DG);
  *
  */
 
@@ -267,9 +268,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     public long getFirstMillisecond(Calendar calendar) {
         calendar.set(this.year, Calendar.JANUARY, 1, 0, 0, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-        // in the following line, we'd rather call calendar.getTimeInMillis()
-        // to avoid object creation, but that isn't supported in Java 1.3.1
-        return calendar.getTime().getTime();
+        return calendar.getTimeInMillis();
     }
 
     /**
@@ -286,9 +285,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     public long getLastMillisecond(Calendar calendar) {
         calendar.set(this.year, Calendar.DECEMBER, 31, 23, 59, 59);
         calendar.set(Calendar.MILLISECOND, 999);
-        // in the following line, we'd rather call calendar.getTimeInMillis()
-        // to avoid object creation, but that isn't supported in Java 1.3.1
-        return calendar.getTime().getTime();
+        return calendar.getTimeInMillis();
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------
  * Month.java
  * ----------
- * (C) Copyright 2001-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chris Boek;
@@ -60,6 +60,7 @@
  *               extended range in Year (DG);
  * 25-Nov-2008 : Added new constructor with Locale (DG);
  * 04-Feb-2009 : Fix for new constructor with Locale - bug 2564636 (DG);
+ * 05-Jul-2012 : Removed JDK 1.3.1 supporting code (DG);
  *
  */
 
@@ -411,9 +412,7 @@ public class Month extends RegularTimePeriod implements Serializable {
     public long getFirstMillisecond(Calendar calendar) {
         calendar.set(this.year, this.month - 1, 1, 0, 0, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-        // in the following line, we'd rather call calendar.getTimeInMillis()
-        // to avoid object creation, but that isn't supported in Java 1.3.1
-        return calendar.getTime().getTime();
+        return calendar.getTimeInMillis();
     }
 
     /**
@@ -431,9 +430,7 @@ public class Month extends RegularTimePeriod implements Serializable {
         int eom = SerialDate.lastDayOfMonth(this.month, this.year);
         calendar.set(this.year, this.month - 1, eom, 23, 59, 59);
         calendar.set(Calendar.MILLISECOND, 999);
-        // in the following line, we'd rather call calendar.getTimeInMillis()
-        // to avoid object creation, but that isn't supported in Java 1.3.1
-        return calendar.getTime().getTime();
+        return calendar.getTimeInMillis();
     }
 
     /**
