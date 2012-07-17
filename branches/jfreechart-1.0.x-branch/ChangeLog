@@ -1,3 +1,8 @@
+2012-07-17  David Gilbert <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/renderer/AbstractRenderer.java
+    Remove use of BooleanUtilities throughout.
+
 2012-07-12  David Gilbert <david.gilbert@object-refinery.com>
 
     (from Leo Leung)
