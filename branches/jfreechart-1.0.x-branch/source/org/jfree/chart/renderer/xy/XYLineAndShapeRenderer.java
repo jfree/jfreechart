@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -65,6 +65,7 @@
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  * 19-Sep-2008 : Fixed bug with drawSeriesLineAsPath - patch by Greg Darke (DG);
  * 18-May-2009 : Clip lines in drawPrimaryLine() (DG);
+ * 05-Jul-2012 : Removed JDK 1.3.1 code (DG);
  * 
  */
 
@@ -95,7 +96,6 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.util.BooleanList;
-import org.jfree.util.BooleanUtilities;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.ShapeUtilities;
@@ -331,8 +331,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public void setLinesVisible(boolean visible) {
-        // we use BooleanUtilities here to preserve JRE 1.3.1 compatibility
-        setLinesVisible(BooleanUtilities.valueOf(visible));
+        setLinesVisible(Boolean.valueOf(visible));
     }
 
     /**
@@ -373,7 +372,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @see #getSeriesLinesVisible(int)
      */
     public void setSeriesLinesVisible(int series, boolean visible) {
-        setSeriesLinesVisible(series, BooleanUtilities.valueOf(visible));
+        setSeriesLinesVisible(series, Boolean.valueOf(visible));
     }
 
     /**
@@ -495,7 +494,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public void setShapesVisible(boolean visible) {
-        setShapesVisible(BooleanUtilities.valueOf(visible));
+        setShapesVisible(Boolean.valueOf(visible));
     }
 
     /**
@@ -522,7 +521,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @see #getSeriesShapesVisible(int)
      */
     public void setSeriesShapesVisible(int series, boolean visible) {
-        setSeriesShapesVisible(series, BooleanUtilities.valueOf(visible));
+        setSeriesShapesVisible(series, Boolean.valueOf(visible));
     }
 
     /**
@@ -600,7 +599,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @deprecated As of 1.0.7, use the per-series and base level settings.
      */
     public void setShapesFilled(boolean filled) {
-        setShapesFilled(BooleanUtilities.valueOf(filled));
+        setShapesFilled(Boolean.valueOf(filled));
     }
 
     /**
@@ -640,7 +639,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @see #getSeriesShapesFilled(int)
      */
     public void setSeriesShapesFilled(int series, boolean flag) {
-        setSeriesShapesFilled(series, BooleanUtilities.valueOf(flag));
+        setSeriesShapesFilled(series, Boolean.valueOf(flag));
     }
 
     /**
