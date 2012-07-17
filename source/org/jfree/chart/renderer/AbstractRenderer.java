@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * AbstractRenderer.java
  * ---------------------
- * (C) Copyright 2002-2011, by Object Refinery Limited.
+ * (C) Copyright 2002-2012, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -89,6 +89,7 @@
  *               AbstractXYItemRenderer class (DG);
  * 28-Apr-2009 : Added flag to allow a renderer to treat the legend shape as
  *               a line (DG);
+ * 05-Jul-2012 : No need for BooleanUtilities now that min JDK = 1.4.2 (DG);
  *
  */
 
@@ -123,7 +124,6 @@ import org.jfree.chart.title.LegendTitle;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.BooleanList;
-import org.jfree.util.BooleanUtilities;
 import org.jfree.util.ObjectList;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintList;
@@ -480,7 +480,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
     /**
      * Returns a boolean that indicates whether or not the specified item
-     * should be drawn (this is typically used to hide an entire series).
+     * should be drawn.
      *
      * @param series  the series index.
      * @param item  the item index.
@@ -493,7 +493,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
     /**
      * Returns a boolean that indicates whether or not the specified series
-     * should be drawn.
+     * should be drawn.  In fact this method should be named 
+     * lookupSeriesVisible() to be consistent with the other series
+     * attributes and avoid confusion with the getSeriesVisible() method.
      *
      * @param series  the series index.
      *
@@ -722,7 +724,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     // PAINT
 
     /**
-     * Returns the paint used to fill data items as they are drawn.
+     * Returns the paint used to color data items as they are drawn.
      * <p>
      * The default implementation passes control to the
      * <code>lookupSeriesPaint()</code> method. You can override this method
@@ -738,7 +740,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the paint used to fill an item drawn by the renderer.
+     * Returns the paint used to color an item drawn by the renderer.
      *
      * @param series  the series index (zero-based).
      *
@@ -770,7 +772,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the paint used to fill an item drawn by the renderer.
+     * Returns the paint used to color an item drawn by the renderer.
      *
      * @param series  the series index (zero-based).
      *
@@ -988,7 +990,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base fill paint.
+     * Returns the base (or default) fill paint.
      *
      * @return The paint (never <code>null</code>).
      *
@@ -1154,7 +1156,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base outline paint.
+     * Returns the base (or default) outline paint.
      *
      * @return The paint (never <code>null</code>).
      *
@@ -1334,7 +1336,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base stroke.
+     * Returns the base (or default) stroke.
      *
      * @return The base stroke (never <code>null</code>).
      *
@@ -1498,7 +1500,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base outline stroke.
+     * Returns the base (or default) outline stroke.
      *
      * @return The stroke (never <code>null</code>).
      *
@@ -1575,8 +1577,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns a shape used to represent a data item.
      * <p>
-     * The default implementation passes control to the getSeriesShape method.
-     * You can override this method if you require different behaviour.
+     * The default implementation passes control to the 
+     * {@link #lookupSeriesShape(int)} method. You can override this method if 
+     * you require different behaviour.
      *
      * @param row  the row (or series) index (zero-based).
      * @param column  the column (or category) index (zero-based).
@@ -1663,7 +1666,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base shape.
+     * Returns the base (or default) shape.
      *
      * @return The shape (never <code>null</code>).
      *
@@ -1783,7 +1786,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param visible  the flag.
      */
     public void setSeriesItemLabelsVisible(int series, boolean visible) {
-        setSeriesItemLabelsVisible(series, BooleanUtilities.valueOf(visible));
+        setSeriesItemLabelsVisible(series, Boolean.valueOf(visible));
     }
 
     /**
@@ -1838,7 +1841,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getBaseItemLabelsVisible()
      */
     public void setBaseItemLabelsVisible(boolean visible) {
-        setBaseItemLabelsVisible(BooleanUtilities.valueOf(visible));
+        setBaseItemLabelsVisible(Boolean.valueOf(visible));
     }
 
     /**
@@ -3821,7 +3824,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *     Boolean)} and {@link #setBaseItemLabelsVisible(boolean)}.
      */
     public void setItemLabelsVisible(boolean visible) {
-        setItemLabelsVisible(BooleanUtilities.valueOf(visible));
+        setItemLabelsVisible(Boolean.valueOf(visible));
         // The following alternative is only supported in JDK 1.4 - we support
         // JDK 1.3.1 onwards
         // setItemLabelsVisible(Boolean.valueOf(visible));
