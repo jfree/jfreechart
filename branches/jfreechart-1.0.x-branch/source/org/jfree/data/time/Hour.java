@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Hour.java
  * ---------
- * (C) Copyright 2001-2009, by Object Refinery Limited.
+ * (C) Copyright 2001-2012, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -59,6 +59,7 @@
  *               time zone (DG);
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
  * 02-Mar-2009 : Added new constructor with Locale (DG);
+ * 05-Jul-2012 : Replaced getTime().getTime() with getTimeInMillis() (DG);
  *
  */
 
@@ -340,8 +341,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
         int dom = this.day.getDayOfMonth();
         calendar.set(year, month, dom, this.hour, 0, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-        //return calendar.getTimeInMillis();  // this won't work for JDK 1.3
-        return calendar.getTime().getTime();
+        return calendar.getTimeInMillis();
     }
 
     /**
@@ -360,8 +360,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
         int dom = this.day.getDayOfMonth();
         calendar.set(year, month, dom, this.hour, 59, 59);
         calendar.set(Calendar.MILLISECOND, 999);
-        //return calendar.getTimeInMillis();  // this won't work for JDK 1.3
-        return calendar.getTime().getTime();
+        return calendar.getTimeInMillis();
     }
 
     /**

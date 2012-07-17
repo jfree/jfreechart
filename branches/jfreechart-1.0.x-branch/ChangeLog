@@ -1,5 +1,27 @@
 2012-07-17  David Gilbert <david.gilbert@object-refinery.com>
 
+    * org/jfree/data/time/Month.java
+    (getFirstMillisecond): Use getTimeInMillis();
+    (getLastMillisecond): Likewise;
+    * org/jfree/data/time/Year.java
+    Likewise;
+    * org/jfree/data/time/Quarter.java
+    Likewise;
+    * org/jfree/data/time/Week.java
+    Likewise;
+    * org/jfree/data/time/Day.java
+    Likewise,
+    * org/jfree/data/time/Hour.java
+    Likewise,
+    * org/jfree/data/time/Minute.java
+    Likewise,
+    * org/jfree/data/time/Second.java
+    Likewise;
+    * org/jfree/data/time/Millisecond.java
+    Likewise.
+
+2012-07-17  David Gilbert <david.gilbert@object-refinery.com>
+
     * org/jfree/chart/renderer/AbstractRenderer.java
     Remove use of BooleanUtilities throughout;
     * org/jfree/chart/renderer/xy/XYLineAndShapeRenderer.java
