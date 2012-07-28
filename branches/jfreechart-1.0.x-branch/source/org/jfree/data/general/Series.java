@@ -141,7 +141,8 @@ public abstract class Series implements Cloneable, Serializable {
      * Sets the key for the series and sends a <code>VetoableChangeEvent</code>
      * (with the property name "Key") to all registered listeners.  For 
      * backwards compatibility, this method also fires a regular 
-     * <code>PropertyChangeEvent</code>.
+     * <code>PropertyChangeEvent</code>.  If the key change is vetoed this 
+     * method will throw an IllegalArgumentException.
      *
      * @param key  the key (<code>null</code> not permitted).
      *
@@ -160,7 +161,7 @@ public abstract class Series implements Cloneable, Serializable {
             // keep doing this
             this.propertyChangeSupport.firePropertyChange("Key", old, key);
         } catch (PropertyVetoException e) {
-            throw new IllegalArgumentException(e.getMessage());
+            throw new IllegalArgumentException(e);
         }
     }
 
