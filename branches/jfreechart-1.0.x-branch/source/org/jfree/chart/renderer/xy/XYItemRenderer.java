@@ -359,7 +359,7 @@ public interface XYItemRenderer extends LegendItemSource {
     //// PAINT ////////////////////////////////////////////////////////////////
 
     /**
-     * Returns the paint used to fill data items as they are drawn.
+     * Returns the paint used to color data items as they are drawn.
      *
      * @param row  the row (or series) index (zero-based).
      * @param column  the column (or category) index (zero-based).
@@ -369,7 +369,7 @@ public interface XYItemRenderer extends LegendItemSource {
     public Paint getItemPaint(int row, int column);
 
     /**
-     * Returns the paint used to fill an item drawn by the renderer.
+     * Returns the paint used to color an item drawn by the renderer.
      *
      * @param series  the series index (zero-based).
      *
@@ -393,7 +393,7 @@ public interface XYItemRenderer extends LegendItemSource {
     // FIXME: add setSeriesPaint(int, Paint, boolean)?
 
     /**
-     * Returns the base paint.
+     * Returns the base (or default) paint.
      *
      * @return The base paint (never <code>null</code>).
      *
@@ -499,7 +499,7 @@ public interface XYItemRenderer extends LegendItemSource {
     // FIXME: add setSeriesOutlinePaint(int, Paint, boolean)?
 
     /**
-     * Returns the base outline paint.
+     * Returns the base (or default) outline paint.
      *
      * @return The paint (never <code>null</code>).
      *
@@ -556,7 +556,7 @@ public interface XYItemRenderer extends LegendItemSource {
     // FIXME: add setSeriesStroke(int, Stroke, boolean) ?
 
     /**
-     * Returns the base stroke.
+     * Returns the base (or default) stroke.
      *
      * @return The base stroke (never <code>null</code>).
      *
