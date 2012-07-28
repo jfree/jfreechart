@@ -731,13 +731,13 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         // to be defensive, let's check that the source series does in fact
         // belong to this collection
         Series s = (Series) e.getSource();
-        if (getSeries(s.getKey()) == null) {
+        if (getSeriesIndex(s.getKey()) == -1) {
             throw new IllegalStateException("Receiving events from a series " +
                     "that does not belong to this collection.");
         }
         // check if the new series name already exists for another series
         Comparable key = (Comparable) e.getNewValue();
-        if (this.getSeries(key) != null) {
+        if (getSeriesIndex(key) >= 0) {
             throw new PropertyVetoException("Duplicate key2", e);
         }
     }

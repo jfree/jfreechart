@@ -43,6 +43,7 @@
  * 06-Mar-2009 : Added testGetDomainBounds (DG);
  * 17-May-2010 : Added checks for duplicate series names (DG);
  * 08-Jan-2012 : Added testBug3445507() (DG);
+ * 28-Jul-2012 : Added testSeriesRename() (DG);
  *
  */
 
@@ -430,7 +431,7 @@ public class XYSeriesCollectionTests extends TestCase {
     }
 
     /**
-     * A test to cover bug 3445507.  The issue does not affact
+     * A test to cover bug 3445507.  The issue does not affect
      * XYSeriesCollection.
      */
     public void testBug3445507() {
@@ -449,5 +450,31 @@ public class XYSeriesCollectionTests extends TestCase {
         Range r = dataset.getRangeBounds(false);
         assertEquals(5.0, r.getLowerBound(), EPSILON);
         assertEquals(6.0, r.getUpperBound(), EPSILON);
+    }
+ 
+    /**
+     * Test that a series belonging to a collection can be renamed (in fact, 
+     * because of a bug this was not possible in JFreeChart 1.0.14).
+     */
+    public void testSeriesRename() {
+        // first check that a valid renaming works
+        XYSeries series1 = new XYSeries("A");
+        XYSeries series2 = new XYSeries("B");
+        XYSeriesCollection collection = new XYSeriesCollection();
+        collection.addSeries(series1);
+        collection.addSeries(series2);
+        series1.setKey("C");
+        assertEquals("C", collection.getSeries(0).getKey());
+        
+        // next, check that setting a duplicate key fails
+        try {
+            series2.setKey("C");
+        }
+        catch (IllegalArgumentException e) {
+            // expected
+        }
+        assertEquals("B", series2.getKey());  // the series name should not 
+        // change because "C" is already the key for the other series in the
+        // collection
     }
 }
