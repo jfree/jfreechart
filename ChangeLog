@@ -1,3 +1,10 @@
+2012-08-23  David Gilbert <david.gilbert@object-refinery.com>
+
+    Bug 3561093:
+    * org/jfree/chart/renderer/RendererUtilities.java
+    (findLiveItemsLowerBound): changed while loop expression,
+    (findLiveItemsUpperBound): likewise.
+
 2012-07-28  David Gilbert <david.gilbert@object-refinery.com>
 
     * org/jfree/data/general/Series.java

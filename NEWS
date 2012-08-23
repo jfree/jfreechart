@@ -19,6 +19,7 @@ Patches:
 
 Bug Fixes:
 
+3561093 : Rendering anomaly for XYPlots;
 3521736 : DeviationRenderer optimisation (by Milan Ramaiya);
 3514487 : SWTGraphics2D get/setStroke() problem;
 3484408 : Maven fixes (Martin Hoeller);

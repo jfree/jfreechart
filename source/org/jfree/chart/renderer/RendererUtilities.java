@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * RendererUtilities.java
  * ----------------------
- * (C) Copyright 2007-2009, by Object Refinery Limited.
+ * (C) Copyright 2007-2012, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 19-Apr-2007 : Version 1 (DG);
  * 27-Mar-2009 : Fixed results for unsorted datasets (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
+ * 23-Aug-2012 : Fixed rendering anomaly bug 3561093 (DG);
  *
  */
 
@@ -138,7 +139,7 @@ public class RendererUtilities {
             int index = 0;
             // skip any items that don't need including...
             double x = dataset.getXValue(series, index);
-            while (index < itemCount && (x < xLow || x > xHigh)) {
+            while (index < itemCount && x < xLow) {
                 index++;
                 if (index < itemCount) {
                     x = dataset.getXValue(series, index);
@@ -232,7 +233,7 @@ public class RendererUtilities {
             int index = itemCount - 1;
             // skip any items that don't need including...
             double x = dataset.getXValue(series, index);
-            while (index >= 0 && (x < xLow || x > xHigh)) {
+            while (index >= 0 && x > xHigh) {
                 index--;
                 if (index >= 0) {
                     x = dataset.getXValue(series, index);
