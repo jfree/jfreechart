@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * RendererUtilitiesTests.java
  * ---------------------------
- * (C) Copyright 2007-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 19-Apr-2007 : Version 1 (DG);
+ * 23-Aug-2012 : Added test3561093() (DG);
  *
  */
 
@@ -47,6 +48,8 @@ import junit.framework.TestSuite;
 import org.jfree.chart.renderer.RendererUtilities;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  * Some checks for the {@link RendererUtilities} class.
@@ -305,7 +308,7 @@ public class RendererUtilitiesTests extends TestCase {
                 2.2));
         assertEquals(1, RendererUtilities.findLiveItemsUpperBound(d, 2, 2.0,
                 3.3));
-        assertEquals(0, RendererUtilities.findLiveItemsUpperBound(d, 2, 3.0,
+        assertEquals(1, RendererUtilities.findLiveItemsUpperBound(d, 2, 3.0,
                 4.4));
 
         // check a series with three items
@@ -314,9 +317,9 @@ public class RendererUtilitiesTests extends TestCase {
                 1.1));
         assertEquals(2, RendererUtilities.findLiveItemsUpperBound(d, 3, 1.0,
                 2.2));
-        assertEquals(1, RendererUtilities.findLiveItemsUpperBound(d, 3, 2.0,
+        assertEquals(2, RendererUtilities.findLiveItemsUpperBound(d, 3, 2.0,
                 3.3));
-        assertEquals(0, RendererUtilities.findLiveItemsUpperBound(d, 3, 3.0,
+        assertEquals(2, RendererUtilities.findLiveItemsUpperBound(d, 3, 3.0,
                 4.4));
 
         // check a series with four items
@@ -326,11 +329,11 @@ public class RendererUtilitiesTests extends TestCase {
                 1.1));
         assertEquals(3, RendererUtilities.findLiveItemsUpperBound(d, 4, 1.0,
                 2.2));
-        assertEquals(1, RendererUtilities.findLiveItemsUpperBound(d, 4, 2.0,
+        assertEquals(3, RendererUtilities.findLiveItemsUpperBound(d, 4, 2.0,
                 3.3));
-        assertEquals(0, RendererUtilities.findLiveItemsUpperBound(d, 4, 3.0,
+        assertEquals(3, RendererUtilities.findLiveItemsUpperBound(d, 4, 3.0,
                 4.4));
-        assertEquals(0, RendererUtilities.findLiveItemsUpperBound(d, 4, 4.0,
+        assertEquals(3, RendererUtilities.findLiveItemsUpperBound(d, 4, 4.0,
                 5.5));
     }
 
@@ -483,6 +486,29 @@ public class RendererUtilitiesTests extends TestCase {
                 5.0));
         assertEquals(0, RendererUtilities.findLiveItemsUpperBound(d, 5, 3.0,
                 5.0));
+    }
+
+    /**
+     * Checks the bounds calculation for a series where the x-ordering is not
+     * known.  See bug 3561093.
+     */
+    public void test3561093() {
+        XYSeries s = new XYSeries("S1", false);
+        s.add(0.0, 0.0);
+        s.add(21.0, 0.0);
+        s.add(2.0, 0.0);
+        s.add(23.0, 0.0);
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(s);
+        
+        assertEquals(1, RendererUtilities.findLiveItemsLowerBound(dataset, 0, 
+                10.0, 20.0));
+        assertEquals(2, RendererUtilities.findLiveItemsUpperBound(dataset, 0, 
+                10.0, 20.0));
+        
+        int[] bounds = RendererUtilities.findLiveItems(dataset, 0, 10.0, 20.0);
+        assertEquals(1, bounds[0]);
+        assertEquals(2, bounds[1]);
     }
 
 }
