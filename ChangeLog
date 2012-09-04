@@ -1,3 +1,10 @@
+2012-09-04  David Gilbert <david.gilbert@object-refinery.com>
+
+    Bug 3555275:
+    * org/jfree/chart/axis/ValueAxis.java
+    (reserveSpace): Return correct value for axes with a fixed dimension
+    specified.  
+
 2012-08-23  David Gilbert <david.gilbert@object-refinery.com>
 
     Bug 3561093:

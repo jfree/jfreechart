@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * ValueAxis.java
  * --------------
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jonathan Nash;
@@ -105,6 +105,7 @@
  * 26-Mar-2009 : In equals(), only check current range if autoRange is
  *               false (DG);
  * 30-Mar-2009 : Added pan(double) method (DG);
+ * 03-Sep-2012 : Fix reserveSpace() method, bug 3555275 (DG);
  *
  */
 
@@ -798,7 +799,8 @@ public abstract class ValueAxis extends Axis
         // if the axis has a fixed dimension, return it...
         double dimension = getFixedDimension();
         if (dimension > 0.0) {
-            space.ensureAtLeast(dimension, edge);
+            space.add(dimension, edge);
+            return space;
         }
 
         // calculate the max size of the tick labels (if visible)...
