@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.15  *
 ********************************
 
-?? August 2012 (NOT YET RELEASED)
+?? September 2012 (NOT YET RELEASED)
 
 (C)opyright 2000-2012, by Object Refinery Limited and Contributors.
 
@@ -169,7 +169,7 @@ please post a bug report.
 --------------
 A list of changes in recent versions:
 
-1.0.15 : (??-Aug-2012)
+1.0.15 : (??-Sep-2012)
         - see the NEWS and ChangeLog files for details.
 
 1.0.14 : (20-Nov-2011)
@@ -743,6 +743,7 @@ below:
     - Jon Iles
     - Wolfgang Irler
     - Sergei Ivanov
+    - Nina Jeliazkova
     - Adriaan Joubert
     - Darren Jung
     - Xun Kang

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * ValueAxisTests.java
  * -------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 13-Aug-2003 : Version 1 (DG);
  * 22-Mar-2007 : Extended testEquals() for new field (DG);
+ * 04-Sep-2012 : Added test3555275() (DG);
  *
  */
 
@@ -43,21 +44,28 @@ package org.jfree.chart.axis.junit;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.Range;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.ui.RectangleInsets;
 
 /**
  * Tests for the {@link ValueAxis} class.
@@ -242,6 +250,30 @@ public class ValueAxisTests extends TestCase {
         domainAxis.setUpperMargin(0.10);
         r = domainAxis.getRange();
         assertEquals(120.0, r.getLength(), EPSILON);
+    }
+    
+    /**
+     * A test for bug 3555275 (where the fixed axis space is calculated 
+     * incorrectly).
+     */
+    public void test3555275() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        JFreeChart chart = ChartFactory.createLineChart("Title", "X", "Y",
+                dataset, PlotOrientation.VERTICAL, true, false, false);
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        plot.setInsets(RectangleInsets.ZERO_INSETS);
+        plot.setAxisOffset(RectangleInsets.ZERO_INSETS);
+        ValueAxis yAxis = plot.getRangeAxis();
+        yAxis.setFixedDimension(100.0);
+        BufferedImage image = new BufferedImage(500, 300, 
+                BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        ChartRenderingInfo info = new ChartRenderingInfo();
+        chart.draw(g2, new Rectangle2D.Double(0, 0, 500, 300), info);
+        g2.dispose();
+        Rectangle2D rect = info.getPlotInfo().getDataArea();
+        double x = rect.getMinX();
+        assertEquals(100.0, x, 1.0);
     }
 
 }
