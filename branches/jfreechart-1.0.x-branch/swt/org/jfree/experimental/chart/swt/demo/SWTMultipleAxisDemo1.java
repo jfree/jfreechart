@@ -6,22 +6,22 @@
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * -------------------------
@@ -35,7 +35,7 @@
  * Changes
  * -------
  * 23-Aug-2006 : New class (HP);
- * 
+ *
  */
 
 package org.jfree.experimental.chart.swt.demo;
@@ -73,57 +73,55 @@ public class SWTMultipleAxisDemo1
 {
     /**
      * Creates the demo chart.
-     * 
+     *
      * @return The chart.
      */
     private static JFreeChart createChart() {
 
-        XYDataset dataset1 = createDataset("Series 1", 100.0, new Minute(), 
+        XYDataset dataset1 = createDataset("Series 1", 100.0, new Minute(),
                 200);
-        
+
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
-            "Multiple Axis Demo 3", 
-            "Time of Day", 
+            "Multiple Axis Demo 3",
+            "Time of Day",
             "Primary Range Axis",
-            dataset1, 
-            true, 
-            true, 
+            dataset1,
+            true,
+            true,
             false
         );
 
         chart.setBackgroundPaint(Color.white);
         chart.setBorderVisible(true);
         chart.setBorderPaint(Color.BLACK);
-        TextTitle subtitle = new TextTitle("Four datasets and four range axes.");  
+        TextTitle subtitle = new TextTitle("Four datasets and four range axes.");
         chart.addSubtitle(subtitle);
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.setOrientation(PlotOrientation.VERTICAL);
         plot.setBackgroundPaint(Color.lightGray);
         plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinePaint(Color.white);
-        
+
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
-        plot.getRangeAxis().setFixedDimension(15.0);
         XYItemRenderer renderer = plot.getRenderer();
         renderer.setSeriesPaint(0, Color.black);
-       
+
         // AXIS 2
         NumberAxis axis2 = new NumberAxis("Range Axis 2");
-        axis2.setFixedDimension(10.0);
         axis2.setAutoRangeIncludesZero(false);
         axis2.setLabelPaint(Color.red);
         axis2.setTickLabelPaint(Color.red);
         plot.setRangeAxis(1, axis2);
         plot.setRangeAxisLocation(1, AxisLocation.BOTTOM_OR_LEFT);
 
-        XYDataset dataset2 = createDataset("Series 2", 1000.0, new Minute(), 
+        XYDataset dataset2 = createDataset("Series 2", 1000.0, new Minute(),
                 170);
         plot.setDataset(1, dataset2);
         plot.mapDatasetToRangeAxis(1, 1);
         XYItemRenderer renderer2 = new StandardXYItemRenderer();
         renderer2.setSeriesPaint(0, Color.red);
         plot.setRenderer(1, renderer2);
-        
+
         // AXIS 3
         NumberAxis axis3 = new NumberAxis("Range Axis 3");
         axis3.setLabelPaint(Color.blue);
@@ -131,7 +129,7 @@ public class SWTMultipleAxisDemo1
         //axis3.setPositiveArrowVisible(true);
         plot.setRangeAxis(2, axis3);
 
-        XYDataset dataset3 = createDataset("Series 3", 10000.0, new Minute(), 
+        XYDataset dataset3 = createDataset("Series 3", 10000.0, new Minute(),
                 170);
         plot.setDataset(2, dataset3);
         plot.mapDatasetToRangeAxis(2, 2);
@@ -139,26 +137,26 @@ public class SWTMultipleAxisDemo1
         renderer3.setSeriesPaint(0, Color.blue);
         plot.setRenderer(2, renderer3);
 
-        // AXIS 4        
+        // AXIS 4
         NumberAxis axis4 = new NumberAxis("Range Axis 4");
         axis4.setLabelPaint(Color.green);
         axis4.setTickLabelPaint(Color.green);
         plot.setRangeAxis(3, axis4);
-        
+
         XYDataset dataset4 = createDataset("Series 4", 25.0, new Minute(), 200);
         plot.setDataset(3, dataset4);
         plot.mapDatasetToRangeAxis(3, 3);
-        
+
         XYItemRenderer renderer4 = new StandardXYItemRenderer();
-        renderer4.setSeriesPaint(0, Color.green);        
+        renderer4.setSeriesPaint(0, Color.green);
         plot.setRenderer(3, renderer4);
-                
+
         return chart;
     }
-    
+
     /**
      * Creates a sample dataset.
-     * 
+     *
      * @param name  the dataset name.
      * @param base  the starting value.
      * @param start  the starting period.
@@ -166,14 +164,14 @@ public class SWTMultipleAxisDemo1
      *
      * @return The dataset.
      */
-    private static XYDataset createDataset(String name, double base, 
+    private static XYDataset createDataset(String name, double base,
                                            RegularTimePeriod start, int count) {
 
         TimeSeries series = new TimeSeries(name);
         RegularTimePeriod period = start;
         double value = base;
         for (int i = 0; i < count; i++) {
-            series.add(period, value);    
+            series.add(period, value);
             period = period.next();
             value = value * (1 + (Math.random() - 0.495) / 10.0);
         }
@@ -187,20 +185,20 @@ public class SWTMultipleAxisDemo1
 
     /**
      * Creates a panel for the demo (used by SuperDemo.java).
-     * 
+     *
      * @return A panel.
      */
     public static JPanel createDemoPanel() {
         JFreeChart chart = createChart();
         return new ChartPanel(chart);
     }
-    
+
     /**
      * Starting point for the demonstration application.
      *
      * @param args  ignored.
      */
-    public static void main(String[] args) 
+    public static void main(String[] args)
     {
         final JFreeChart chart = createChart();
         final Display display = new Display();
