@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * -------------------------------
@@ -123,9 +123,11 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     }
 
     /**
-     * Returns the space between subplots.
+     * Returns the space between subplots.  The default value is 5.0.
      *
      * @return The gap (in Java2D units).
+     *
+     * @see #setGap(double)
      */
     public double getGap() {
         return this.gap;
@@ -136,6 +138,8 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param gap  the gap between subplots (in Java2D units).
+     *
+     * @see #getGap()
      */
     public void setGap(double gap) {
         this.gap = gap;
@@ -423,7 +427,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * @param info  collects information about the drawing (<code>null</code>
      *              permitted).
      */
-    public void draw(Graphics2D g2,
+     public void draw(Graphics2D g2,
                      Rectangle2D area,
                      Point2D anchor,
                      PlotState parentState,
