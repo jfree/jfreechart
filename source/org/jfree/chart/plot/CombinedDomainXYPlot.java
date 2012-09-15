@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,13 +21,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * -------------------------
  * CombinedDomainXYPlot.java
  * -------------------------
- * (C) Copyright 2001-2008, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-2012, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -112,6 +112,7 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
@@ -153,12 +154,10 @@ public class CombinedDomainXYPlot extends XYPlot
      */
     public CombinedDomainXYPlot(ValueAxis domainAxis) {
 
-        super(
-            null,        // no data in the parent plot
-            domainAxis,
-            null,        // no range axis
-            null         // no rendereer
-        );
+        super(null,        // no data in the parent plot
+              domainAxis,
+              null,        // no range axis
+              null);       // no renderer
 
         this.subplots = new java.util.ArrayList();
 
@@ -180,14 +179,12 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param orientation  the orientation (<code>null</code> not allowed).
      */
     public void setOrientation(PlotOrientation orientation) {
-
         super.setOrientation(orientation);
         Iterator iterator = this.subplots.iterator();
         while (iterator.hasNext()) {
             XYPlot plot = (XYPlot) iterator.next();
             plot.setOrientation(orientation);
         }
-
     }
 
     /**
@@ -219,6 +216,8 @@ public class CombinedDomainXYPlot extends XYPlot
      * Returns the gap between subplots, measured in Java2D units.
      *
      * @return The gap (in Java2D units).
+     *
+     * @see #setGap(double)
      */
     public double getGap() {
         return this.gap;
@@ -229,6 +228,8 @@ public class CombinedDomainXYPlot extends XYPlot
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param gap  the gap between subplots (in Java2D units).
+     *
+     * @see #getGap()
      */
     public void setGap(double gap) {
         this.gap = gap;
@@ -262,10 +263,7 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param weight  the weight (must be >= 1).
      */
     public void add(XYPlot subplot, int weight) {
-
-        if (subplot == null) {
-            throw new IllegalArgumentException("Null 'subplot' argument.");
-        }
+        ParamChecks.nullNotPermitted(subplot, "subplot");
         if (weight <= 0) {
             throw new IllegalArgumentException("Require weight >= 1.");
         }
@@ -273,7 +271,7 @@ public class CombinedDomainXYPlot extends XYPlot
         // store the plot and its weight
         subplot.setParent(this);
         subplot.setWeight(weight);
-        subplot.setInsets(new RectangleInsets(0.0, 0.0, 0.0, 0.0), false);
+        subplot.setInsets(RectangleInsets.ZERO_INSETS, false);
         subplot.setDomainAxis(null);
         subplot.addChangeListener(this);
         this.subplots.add(subplot);
@@ -292,9 +290,7 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param subplot  the subplot (<code>null</code> not permitted).
      */
     public void remove(XYPlot subplot) {
-        if (subplot == null) {
-            throw new IllegalArgumentException(" Null 'subplot' argument.");
-        }
+        ParamChecks.nullNotPermitted(subplot, "subplot");
         int position = -1;
         int size = this.subplots.size();
         int i = 0;
@@ -424,11 +420,8 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param info  collects chart drawing information (<code>null</code>
      *              permitted).
      */
-    public void draw(Graphics2D g2,
-                     Rectangle2D area,
-                     Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info) {
+    public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
+            PlotState parentState, PlotRenderingInfo info) {
 
         // set up info collection...
         if (info != null) {
@@ -585,7 +578,7 @@ public class CombinedDomainXYPlot extends XYPlot
             }
         }
     }
-    
+
     /**
      * Returns the subplot (if any) that contains the (x, y) point (specified
      * in Java2D space).
@@ -596,12 +589,8 @@ public class CombinedDomainXYPlot extends XYPlot
      * @return A subplot (possibly <code>null</code>).
      */
     public XYPlot findSubplot(PlotRenderingInfo info, Point2D source) {
-        if (info == null) {
-            throw new IllegalArgumentException("Null 'info' argument.");
-        }
-        if (source == null) {
-            throw new IllegalArgumentException("Null 'source' argument.");
-        }
+        ParamChecks.nullNotPermitted(info, "info");
+        ParamChecks.nullNotPermitted(source, "source");
         XYPlot result = null;
         int subplotIndex = info.getSubplotIndex(source);
         if (subplotIndex >= 0) {
@@ -620,17 +609,14 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param renderer the new renderer.
      */
     public void setRenderer(XYItemRenderer renderer) {
-
         super.setRenderer(renderer);  // not strictly necessary, since the
                                       // renderer set for the
                                       // parent plot is not used
-
         Iterator iterator = this.subplots.iterator();
         while (iterator.hasNext()) {
             XYPlot plot = (XYPlot) iterator.next();
             plot.setRenderer(renderer);
         }
-
     }
 
     /**
