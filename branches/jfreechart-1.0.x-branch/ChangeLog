@@ -1,9 +1,16 @@
+2012-09-15  David Gilbert <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/plot/CombinedDomainXYPlot.java
+    (add(XYPlot, int)): Use ParamChecks class,
+    (remove): Likewise,
+    (findSubPlot): Likewise.
+
 2012-09-04  David Gilbert <david.gilbert@object-refinery.com>
 
     Bug 3555275:
     * org/jfree/chart/axis/ValueAxis.java
     (reserveSpace): Return correct value for axes with a fixed dimension
-    specified.  
+    specified.
 
 2012-08-23  David Gilbert <david.gilbert@object-refinery.com>
 
@@ -268,7 +275,7 @@
     * org/jfree/chart/renderer/category/StatisticalBarRenderer.java
     (drawHorizontalItem): Fix calculation of bar edge;
     (drawVerticalItem): Likewise;
-    
+
 2011-10-30  David Gilbert <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/StandardChartTheme.java
@@ -2032,7 +2039,7 @@
     (setExponentFormat): Likewise,
     (equals): Test formatter field,
     * tests/org/jfree/chart/util/junit/LogFormatTests.java
-    (testEquals): Check formatter field.    
+    (testEquals): Check formatter field.
 
 2009-01-13  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -2296,7 +2303,7 @@
     * source/org/jfree/chart/util/LineUtilities.java: New file,
     * tests/org/jfree/chart/util/junit/LineUtilitiesTests.java: Likewise.
 
-2008-10-27  David Gilbert  <david.gilbert@object-refinery.com> 
+2008-10-27  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/CategoryAxis.java
     (refreshTicks): Set correct for for category label.
@@ -2353,7 +2360,7 @@
 2008-09-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 1934255 (incorporating 1870189):
-    * source/org/jfree/chart/axis/Axis.java 
+    * source/org/jfree/chart/axis/Axis.java
     (minorTickMarksVisible): New field,
     (minorTickMarkInsideLength): New field,
     (minorTickMarkOutsideLength): New field,
@@ -2419,7 +2426,7 @@
     (testEquals): Updated for new field,
     * tests/org/jfree/chart/plot/junit/XYPlotTests.java
     (testEquals): Updated for new fields.
-    
+
 2008-09-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/HighLowRenderer.java
@@ -2427,7 +2434,7 @@
 
 2008-09-24  David Gilbert  <david.gilbert@object-refinery.com>
 
-    Bug 2113627 
+    Bug 2113627
     * source/org/jfree/chart/renderer/xy/XYStepRenderer.java
     (drawItem): Draw item labels in second pass only, add chart
     entity info in first pass only.
@@ -2477,7 +2484,7 @@
     (equals): Check new fields,
     (writeObject): Handle crosshairPaint,
     (readObject): Likewise.
-    
+
 2008-09-19  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/JFreeChart.java
@@ -2487,7 +2494,7 @@
     (isVisible): New method,
     (setVisible): Likewise,
     (equals): Check visible flag.
-    
+
 2008-08-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/DateAxis.java
@@ -2495,9 +2502,9 @@
     (DateAxis(String, TimeZone, Locale)): New constructor,
     (setTimeZone): Updated to use new locale field,
     (previousStandardDate): Likewise,
-    (createStandardDateTickUnits(TimeZone)): Deprecated, 
+    (createStandardDateTickUnits(TimeZone)): Deprecated,
     (createStandardDateTickUnits(TimeZone, Locale)): New method.
-    
+
 2008-09-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartPanel.java
@@ -2589,7 +2596,7 @@
 
     Bug 2078057:
     * source/org/jfree/chart/axis/DateAxis.java
-    (previousStandardDate): For month option, peg in case of 
+    (previousStandardDate): For month option, peg in case of
     non-default time zone,
     * source/org/jfree/data/time/Month.java
     (previous): Added API doc comments,
@@ -2625,7 +2632,7 @@
 
     Bug 2031407:
     * source/org/jfree/chart/renderer/category/StackedBarRenderer3D.java
-    (createStackedValueList): Encode series with negative values using -1 
+    (createStackedValueList): Encode series with negative values using -1
     offset,
     (drawStackHorizontal): Account for -1 offset,
     (drawStackVertical): Likewise.
@@ -2794,7 +2801,7 @@
     Patch 2006826:
     * source/org/jfree/chart/title/CompositeTitle.java
     (draw(Graphics2D, Rectangle2D)): Delegate to other draw method,
-    (draw(Graphics2D, Rectangle2D, Parameters)): Modified implementation to 
+    (draw(Graphics2D, Rectangle2D, Parameters)): Modified implementation to
     return result from BlockContainer.
 
 2008-07-02  David Gilbert  <david.gilbert@object-refinery.com>
@@ -2811,7 +2818,7 @@
     field,
     (getAutoPopulateSectionOutlinePaint): New method,
     (setAutoPopulateSectionOutlinePaint): Likewise,
-    (lookupSectionOutlineStroke(Comparable)): 
+    (lookupSectionOutlineStroke(Comparable)):
     Use autoPopulateSectionOutlineStroke field,
     (getAutoPopulateSectionOutlineStroke): New method,
     (setAutoPopulateSectionOutlineStroke): Likewise,
@@ -2826,7 +2833,7 @@
 2008-06-26  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/CategoryAxis.java
-    (getCategoryMiddle(Comparable, List, Rectangle2D, RectangleEdge)): 
+    (getCategoryMiddle(Comparable, List, Rectangle2D, RectangleEdge)):
     New method,
     * source/org/jfree/chart/plot/CategoryCrosshairState.java: New file,
     * source/org/jfree/chart/plot/CategoryPlot.java
@@ -2891,7 +2898,7 @@
     (drawItem): Update crosshair state,
     * tests/org/jfree/chart/plot/junit/CategoryPlotTests.java
     (testEquals): Updated for new fields.
-    
+
 2008-06-24  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/category/BarPainter.java: New file,
@@ -2917,7 +2924,7 @@
     * source/org/jfree/chart/renderer/category/GanttRenderer.java
     (drawTask): Use new barPainter,
     (drawTasks): Likewise,
-    * source/org/jfree/chart/renderer/category/GradientBarPainter.java: 
+    * source/org/jfree/chart/renderer/category/GradientBarPainter.java:
     New file,
     * source/org/jfree/chart/renderer/category/GroupedStackedBarRenderer.java
     (drawItem): Use new barPainter,
@@ -2926,7 +2933,7 @@
     * source/org/jfree/chart/renderer/category/StackedBarRenderer.java
     (getPassCount): Now returns 3,
     (drawItem): Use new barPainter,
-    * source/org/jfree/chart/renderer/category/StandardBarPainter.java: 
+    * source/org/jfree/chart/renderer/category/StandardBarPainter.java:
     New file,
     * source/org/jfree/chart/renderer/xy/ClusteredXYBarRenderer.java
     (getPassCount): Now returns 2,
@@ -2962,7 +2969,7 @@
     New file,
     * tests/org/jfree/chart/renderer/category/junit/RendererCategoryPackageTests.java
     (suite): Included new test classes,
-    * tests/org/jfree/chart/renderer/category/junit/StandardBarPainterTests.java: 
+    * tests/org/jfree/chart/renderer/category/junit/StandardBarPainterTests.java:
     New file,
     * tests/org/jfree/chart/renderer/xy/junit/GradientXYBarPainterTests.java:
     New file,
@@ -2972,7 +2979,7 @@
     New file,
     * tests/org/jfree/chart/renderer/xy/junit/XYBarRendererTests.java
     (testEquals): Updated for new fields.
-    
+
 2008-06-19  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYBarRenderer.java
@@ -2997,7 +3004,7 @@
     (drawScaleFactor): New field,
     (width): Renamed displayWidth,
     (height): Renamed displayHeight,
-    (XYDrawableAnnotation(double, double, double, double, double, Drawable)): 
+    (XYDrawableAnnotation(double, double, double, double, double, Drawable)):
     New constructor,
     (draw): Apply scaling transform,
     (equals): Check drawScaleFactor field,
@@ -3153,7 +3160,7 @@
     * source/org/jfree/data/time/FixedMillisecond.java
     (time): Changed from Date to long.
 
-2008-05-26  David Gilbert  <david.gilbert@object-refinery.com> 
+2008-05-26  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/labels/AbstractXYItemLabelGenerator.java
     (getNullYString): New method,
@@ -3188,13 +3195,13 @@
 2008-05-14  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
-    (addEntity): If area is null, take into account the plot orientation for 
+    (addEntity): If area is null, take into account the plot orientation for
     the generated hotspot,
     * source/org/jfree/chart/renderer/xy/XYStepRenderer.java
     (drawItem): Use addEntity().
 
 2008-05-13  David Gilbert  <david.gilbert@object-refinery.com>
-    
+
     Bugs 1962467 and 1962472:
     * source/org/jfree/chart/renderer/xy/CandlestickRenderer.java
     (drawItem): Use hotspot that includes high and low values, and use
@@ -3204,9 +3211,9 @@
 
     * source/org/jfree/data/category/SlidingCategoryDataset.java: New class,
     * source/org/jfree/data/gantt/SlidingGanttCategoryDatsaet.java: Likewise,
-    * tests/org/jfree/data/category/SlidingCategoryDatasetTests.java: 
+    * tests/org/jfree/data/category/SlidingCategoryDatasetTests.java:
     New tests,
-    * tests/org/jfree/data/gantt/SlidingGanttCategoryDatasetTests.java: 
+    * tests/org/jfree/data/gantt/SlidingGanttCategoryDatasetTests.java:
     Likewise.
 
 2008-05-12  David Gilbert  <david.gilbert@object-refinery.com>
@@ -3231,8 +3238,8 @@
     * source/org/jfree/chart/ChartPanel.java
     (chartMouseListeners): Marked this field transient,
     (chartBuffer): Likewise,
-    (writeObject): New method, 
-    (readObject): Likewise.    
+    (writeObject): New method,
+    (readObject): Likewise.
 
 2008-05-08  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -3260,7 +3267,7 @@
     * experimental/org/jfree/experimental/chart/plot/CombinedCategoryPlot.java:
     Likewise,
     * experimental/org/jfree/experimental/chart/plot/CombinedXYPlot.java:
-    Likewise.    
+    Likewise.
 
 2008-05-05  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -3297,13 +3304,13 @@
 
     Bug 1950037:
     * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java
-    (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): 
+    (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)):
     New method override,
     * source/org/jfree/chart/plot/CombinedDomainXYPlot.java
-    (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): 
+    (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)):
     New method override,
     * source/org/jfree/chart/plot/CombinedRangeXYPlot.java
-    (zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): 
+    (zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)):
     New method override.
 
 2008-04-23  David Gilbert  <david.gilbert@object-refinery.com>
@@ -3382,7 +3389,7 @@
 
 2008-04-22  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/data/xy/CategoryTableXYDataset.java: 
+    * source/org/jfree/data/xy/CategoryTableXYDataset.java:
     Implemented PublicCloneable, plus
     (clone): New method override.
 
@@ -3411,7 +3418,7 @@
 
     * source/org/jfree/chart/urls/CustomXYURLGenerator.java
     (clone): Implemented,
-    * tests/org/jfree/chart/urls/junit/CustomPieURLGeneratorTests.java: 
+    * tests/org/jfree/chart/urls/junit/CustomPieURLGeneratorTests.java:
     New file,
     * tests/org/jfree/chart/urls/junit/CustomXYURLGeneratorTests.java
     (testEquals): New test method,
@@ -3426,7 +3433,7 @@
     * source/org/jfree/chart/renderer/xy/YIntervalRenderer.java
     (findRangeBounds): Likewise.
 
-2008-04-10  David Gilbert  <david.gilbert@object-refinery.com> 
+2008-04-10  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/xy/XIntervalSeriesCollection.java
     (getStartXValue): New method override,
@@ -3542,7 +3549,7 @@
 
     * source/org/jfree/chart/labels/HighLowItemLabelGenerator.java:
     (hashCode): Implemented,
-    * source/org/jfree/chart/labels/MultipleXYSeriesLabelGenerator.java: 
+    * source/org/jfree/chart/labels/MultipleXYSeriesLabelGenerator.java:
     Likewise,
     * source/org/jfree/chart/labels/StandardCategorySeriesLabelGenerator.java:
     Likewise,
@@ -3566,7 +3573,7 @@
     (iterateRangeBounds(XYDataset, boolean)): Likewise,
     * tests/org/jfree/data/general/junit/DatasetUtilitiesTests.java
     (testFindRangeBounds3): New test,
-    (testIterateCategoryRangeBounds): Renamed 
+    (testIterateCategoryRangeBounds): Renamed
     testIterateRangeBounds_CategoryDataset(),
     (testIterateRangeBounds2_CategoryDataset): New method,
     (testIterateRangeBounds3_CategoryDataset): Likewise,
@@ -3591,7 +3598,7 @@
     iterateRangeBounds(),
     (iterateXYRangeBounds): Deprecated,
     (iterateRangeBounds(XYDataset)): New method,
-    (iterateRangeBounds(XYDataset, boolean)): Likewise. 
+    (iterateRangeBounds(XYDataset, boolean)): Likewise.
 
 2008-03-28  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -3669,7 +3676,7 @@
     Patch 1913751:
     * source/org/jfree/chart/plot/CategoryPlot.java
     (addDomainMarker(int, CategoryMarker, Layer, boolean)): New method,
-    (removeDomainMarker(int, Marker, Layer, boolean)): Likewise,    
+    (removeDomainMarker(int, Marker, Layer, boolean)): Likewise,
     (addRangeMarker(int, CategoryMarker, Layer, boolean)): Likewise,
     (removeRangeMarker(int, Marker, Layer, boolean)): Likewise,
     (addAnnotation(CategoryAnnotation, boolean)): Likewise,
@@ -3719,7 +3726,7 @@
 
     Bug 1897580:
     * source/org/jfree/data/DefaultIntervalCategoryDataset.java
-    (DefaultIntervalCategoryDataset(Comparable[], Comparable[], Number[][], 
+    (DefaultIntervalCategoryDataset(Comparable[], Comparable[], Number[][],
     Number[][]): Initialise seriesKeys and categoryKeys to empty arrays instead
     of null for empty dataset,
     (setCategoryKeys): Fixed argument check to handle empty dataset.
@@ -3746,7 +3753,7 @@
     * org/jfree/chart/plot/PolarPlot.java
     (DEFAULT_ANGLE_TICK_UNIT_SIZE): New field,
     (angleTickUnit): Likewise,
-    (PolarPlot(XYDataset, ValueAxis, PolarItemRenderer)): Initialise 
+    (PolarPlot(XYDataset, ValueAxis, PolarItemRenderer)): Initialise
     angleTickUnit,
     (getAngleTickUnit): New method,
     (setAngleTickUnit): Likewise,
@@ -3779,7 +3786,7 @@
     (format): Apply positive prefix, and fix formatting for negative values,
     (equals): Handle new fields,
     (hashCode): Use positivePrefix.
-    
+
 2008-02-15  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug 1873160:
@@ -3814,7 +3821,7 @@
 
     Patch 1888422 (Rob Van der Sanden):
     * source/org/jfree/chart/renderer/category/BoxAndWhiskerRenderer.java
-    (drawHorizontalItem): Use correct data area dimension for series gap 
+    (drawHorizontalItem): Use correct data area dimension for series gap
     calculation.
 
 2008-01-28  David Gilbert  <david.gilbert@object-refinery.com>
@@ -3901,7 +3908,7 @@
     (testGetFirstMillisecondWithTimeZone): Control the default locale, and
     modify expected result accordingly,
     (testGetLastMillisecondWithTimeZone): Likewise.
-    
+
 2007-12-19  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/title/TextTitle.java
@@ -3923,7 +3930,7 @@
     (testHashCode): Likewise,
     (testExpand): Additional checks,
     (testShift): New test,
-    (testScale): Likewise.    
+    (testScale): Likewise.
 
 2007-12-18  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -3940,14 +3947,14 @@
 2007-12-05  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/entity/ChartEntity.java
-    (getImageMapAreaTag): Don't escape tooltips and urls, delegate that to 
+    (getImageMapAreaTag): Don't escape tooltips and urls, delegate that to
     the tag generators,
     * source/org/jfree/chart/imagemap/StandardURLTagFragmentGenerator.java
     (generateURLFragment): Encode the url text,
     * tests/org/jfree/chart/imagemap/junit/ImageMapPackageTests.java: New file,
-    * tests/org/jfree/chart/imagemap/junit/StandardToolTipTagFragmentGeneratorTests.java: 
+    * tests/org/jfree/chart/imagemap/junit/StandardToolTipTagFragmentGeneratorTests.java:
     Likewise,
-    * tests/org/jfree/chart/imagemap/junit/StandardURLTagFragmentGeneratorTests.java: 
+    * tests/org/jfree/chart/imagemap/junit/StandardURLTagFragmentGeneratorTests.java:
     Likewise.
 
 2007-12-05  David Gilbert  <david.gilbert@object-refinery.com>
@@ -3977,8 +3984,8 @@
 
     * source/org/jfree/chart/JFreeChart.java
     (createBufferedImage(int, int, ChartRenderingInfo)): Change image type,
-    (createBufferedImage(int, int, double, double, ChartRenderingInfo)): 
-    Likewise. 
+    (createBufferedImage(int, int, double, double, ChartRenderingInfo)):
+    Likewise.
 
 2007-12-04  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -4039,7 +4046,7 @@
     (testClear): Likewise,
     * tests/org/jfree/data/xy/junit/YIntervalSeriesTests.java
     (testClear): Likewise.
- 
+
 2007-11-27  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/CombinedDomainXYPlot.java
@@ -4055,7 +4062,7 @@
 2007-11-27  David Gilbert  <david.gilbert@object-refinery.com>
 
     * swt/org/jfree/experimental/swt/SWTGraphics2D.java:
-    (drawImage(BufferedImage, BufferedImageOp, int, int)): Updated for method 
+    (drawImage(BufferedImage, BufferedImageOp, int, int)): Updated for method
     moved to SWTUtils,
     (drawImage(Image, int, int, ImageObserver)): Implemented,
     (drawImage(Image, int, int, int, int, ImageObserver)): Likewise,
@@ -4065,7 +4072,7 @@
     * swt/org/jfree/experimental/swt/SWTUtils.java:
     (convertAWTImageToSWT): New method,
     (convertToSWT(BufferedImage)): Moved from SWTGraphics2D.java.
-    
+
 ----------  JFREECHART 1.0.8 RELEASED ------------------------
 
 2007-11-23  David Gilbert  <david.gilbert@object-refinery.com>
@@ -4101,7 +4108,7 @@
     * source/org/jfree/chart/needle/PointerNeedle.java
     * source/org/jfree/chart/needle/ShipNeedle.java
     * source/org/jfree/chart/needle/WindNeedle.java:
-    Implemented hashCode() method.  
+    Implemented hashCode() method.
 
 2007-11-22  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -4146,7 +4153,7 @@
     * source/org/jfree/chart/renderer/category/StatisticalBarRenderer.java
     * source/org/jfree/chart/renderer/category/StatisticalLineAndShapeRenderer.java:
     Replaced calls to notifyListeners() with fireChangeEvent().
-    
+
 2007-11-22  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/xy/XYSeries.java
@@ -4218,7 +4225,7 @@
     (setGapThreshold): Likewise,
     (setPlotImages): Likewise,
     (setLegendLine): Likewise.
-    
+
 2007-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/PiePlot.java
@@ -4380,7 +4387,7 @@
     (TimeSeries(String, String, String, Class)): Likewise.
 
 2007-11-05  David Gilbert  <david.gilbert@object-refinery.com>
-    
+
     * source/org/jfree/chart/plot/XYPlot.java
     (setFixedDomainAxisSpace): Fire change event,
     (setFixedRangeAxisSpace): Likewise.
@@ -4401,7 +4408,7 @@
     (removeRangeMarker(Marker)): New method,
     (removeRangeMarker(Marker, Layer)): Likewise,
     (removeRangeMarker(int, Marker, Layer)): Likewise.
-    
+
 2007-11-05  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 1823697 by Richard West:
@@ -4435,7 +4442,7 @@
     (sortByValue): Likewise,
     (hashCode): Likewise,
     (clone): Likewise.
-    
+
 2007-10-31  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/ComparableObjectSeries.java
@@ -4447,7 +4454,7 @@
 
 2007-10-29  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/plot/dial/SimpleDialFrame.java: 
+    * source/org/jfree/chart/plot/dial/SimpleDialFrame.java:
     Renamed StandardDialFrame.java.
 
 2007-10-26  David Gilbert  <david.gilbert@object-refinery.com>
@@ -4478,7 +4485,7 @@
     * source/org/jfree/chart/plot/CategoryPlot.java
     (getDomainAxisIndex): Added argument check,
     (getRangeAxisIndex): Likewise.
-    
+
 2007-10-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/StandardTickUnitSource.java:
@@ -4554,7 +4561,7 @@
     (minorTickStroke): Likewise,
     (tickLabelFormatter): Likewise,
     (StandardDialScale): Updated for modified constructor signature,
-    (StandardDialScale(double, double, double, double)): Added two new 
+    (StandardDialScale(double, double, double, double)): Added two new
     arguments to signature,
     (setMajorTickLength): Added argument check,
     (setMinorTickCount): Likewise,
@@ -4568,7 +4575,7 @@
     (hashCode): Implemented,
     (writeObject): Handle new fields,
     (readObject): Likewise.
-    
+
 2007-10-23  David Gilbert  <david.gilbert@object-refinery.com>
 
     * swt/org/jfree/experimental/swt/SWTGraphics2D.java
@@ -4621,9 +4628,9 @@
 
 2007-10-22  Henry Proudhon  <henry.proudhon@insa-lyon.fr>
 
-    * source/swt/org/jfree/experimental/chart/swt/ChartComposite.java: 
+    * source/swt/org/jfree/experimental/chart/swt/ChartComposite.java:
     (chart): Made the chart field be private again,
-    (ChartComposite): Refactored class, now implements PaintListener, 
+    (ChartComposite): Refactored class, now implements PaintListener,
     MouseListener and MouseMovedListener,
     (zoom): Fixed bug with multiple plots,
     (addChartMouseListener): Implemented,
@@ -4703,7 +4710,7 @@
     (setMajorTickIncrement): Likewise,
     (setTickLabelPaint): Likewise,
     (equals): Updated.
-    
+
 2007-10-16  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/labels/AbstractXYItemLabelGenerator.java:
@@ -4765,11 +4772,11 @@
 
 2007-10-08  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/renderer/category/MultiShapeRenderer.java: 
+    * source/org/jfree/chart/renderer/category/MultiShapeRenderer.java:
     New file,
     * source/org/jfree/data/statistics/DefaultMultiValueCategoryDataset.java:
     Likewise,
-    * source/org/jfree/data/statistics/MultiValueCategoryDataset.java: 
+    * source/org/jfree/data/statistics/MultiValueCategoryDataset.java:
     Likewise,
     * tests/org/jfree/chart/renderer/category/junit/MultiShapeRendererTests.java:
     Likewise,
@@ -4779,7 +4786,7 @@
     (suite): Added DefaultMultiValueCategoryDatasetTests,
     * tests/org/jfree/data/statistics/junit/DefaultMultiValueCategoryDatasetTests.java:
     New file.
-    
+
 2007-10-08  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/ValueMarker.java
@@ -4792,7 +4799,7 @@
 
     * source/org/jfree/chart/renderer/xy/CandlestickRenderer.java
     (volumePaint): New field,
-    (CandlestickRenderer(double, boolean, XYToolTipGenerator)): Initialise new 
+    (CandlestickRenderer(double, boolean, XYToolTipGenerator)): Initialise new
     field,
     (getVolumePaint): New method,
     (setVolumePaint): Likewise,
@@ -4860,10 +4867,10 @@
 2007-10-03  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/KeyedObjects2D.java
-    (getObject(Comparable, Comparable)): Check arguments for null or 
+    (getObject(Comparable, Comparable)): Check arguments for null or
     unrecognised keys,
     (setObject(Object, Comparable, Comparable): Check for null arguments,
-    (removeObject): Check if row or column needs removing, 
+    (removeObject): Check if row or column needs removing,
     (removeRow(Comparable)): Check for unrecognised key,
     (removeColumn(Comparable)): Likewise,
     * tests/org/jfree/data/junit/KeyedObjects2DTests.java
@@ -4928,12 +4935,12 @@
     (testAdd): New test method,
     (testGetRangeLowerBound): Likewise,
     (testGetRangeUpperBound): Likewise,
-    (testGetRangeBounds2): Likewise.    
+    (testGetRangeBounds2): Likewise.
 
 2007-10-02  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/statistics/BoxAndWhiskerItem.java
-    (BoxAndWhiskerItem(double, double, double, double, double, double, 
+    (BoxAndWhiskerItem(double, double, double, double, double, double,
     double, double, List)): New constructor,
     * source/org/jfree/data/statistics/DefaultBoxAndWhiskerCategoryDataset.java
     (minimumRangeValue): Changed from Number to double,
@@ -4973,7 +4980,7 @@
     (testCloning): Check independence,
     * tests/org/jfree/data/statistics/junit/DefaultStatisticalCategoryDatasetTests.java
     (testCloning): Check independence.
-    
+
 2007-09-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/category/MinMaxCategoryRenderer.java
@@ -5106,17 +5113,17 @@
     (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): Likewise,
     * source/org/jfree/chart/XYPlot.java
     (zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
-    (zoomDomainAxes(double, PlotRenderingInfo, Point2D)): Delegate to new 
+    (zoomDomainAxes(double, PlotRenderingInfo, Point2D)): Delegate to new
     method,
     (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
     (zoomRangeAxes(double, PlotRenderingInfo, Point2D)): Delegate to new method,
     * source/org/jfree/chart/plot/Zoomable.java
     (zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)): New method,
-    (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): Likewise. 
+    (zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)): Likewise.
 
 2007-09-21  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/data/statistics/SimpleHistogramDataset.java: 
+    * source/org/jfree/data/statistics/SimpleHistogramDataset.java:
     API doc updates.
 
 2007-08-28  David Gilbert  <david.gilbert@object-refinery.com>
@@ -5161,7 +5168,7 @@
 
     * experimental/org/jfree/experimental/chart/axis/LogAxis.java
     (LogAxis(String)): Leave tick marks visible,
-    (autoAdjustRange): Apply margins to log scale, and don't allow auto-range 
+    (autoAdjustRange): Apply margins to log scale, and don't allow auto-range
     to go below minimum value,
     (refreshTicksHorizontal): Improved handling of ticks and labels,
     (refreshTicksVertical): Likewise,
@@ -5176,7 +5183,7 @@
     (createLogTickUnits): New method,
     and moved to source/org/jfree/chart/axis/,
     * source/org/jfree/chart/axis/NumberTick.java
-    (NumberTick(TickType, double, String, TextAnchor, TextAnchor, double)): 
+    (NumberTick(TickType, double, String, TextAnchor, TextAnchor, double)):
     New constructor,
     * source/org/jfree/chart/axis/NumberTickUnit.java
     (NumberTickUnit(double, NumberFormat, int)): New constructor,
@@ -5219,7 +5226,7 @@
 
 2007-07-25  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/renderer/xy/XYSplineAndShapeRenderer.java: 
+    * source/org/jfree/chart/renderer/xy/XYSplineAndShapeRenderer.java:
     New file, contributed by Klaus Rheinwald.
 
 2007-07-25  David Gilbert  <david.gilbert@object-refinery.com>
@@ -5235,7 +5242,7 @@
     (readObject): Likewise,
     * tests/org/jfree/chart/axis/junit/SymbolAxisTests.java
     (testEquals): Added check for new field.
-    
+
 2007-07-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/demo/PieChartDemo1.java
@@ -5261,7 +5268,7 @@
     (equals): Updated for new fields,
     * source/org/jfree/chart/plot/PiePlot3D.java
     (draw): Updated for simple labels.
-    
+
 2007-07-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/CombinedRangeXYPlot.java
@@ -5284,7 +5291,7 @@
     (firstMondayAfter1900): New method,
     (newMondayThroughFridayTimeline): Use new method for first monday,
     (newFifteenMinuteTimeline): Likewise,
-    * tests/org/jfree/chart/axis/junit/SegmentedTimelineTests2.java: 
+    * tests/org/jfree/chart/axis/junit/SegmentedTimelineTests2.java:
     Save and restore time zone in all tests.
 
 2007-07-11  David Gilbert  <david.gilbert@object-refinery.com>
@@ -5317,7 +5324,7 @@
 
     * source/org/jfree/chart/ChartFactory.java
     (createPieChart(String, PieDataset, boolean, boolean, Locale)): New method,
-    (createPieChart(String, PieDataset, PieDataset, int, boolean, boolean, 
+    (createPieChart(String, PieDataset, PieDataset, int, boolean, boolean,
         boolean, Locale, boolean, boolean)) : Likewise,
     (createRingChart(String, PieDataset, boolean, boolean, Locale)): Likewise,
     (createPieChart3D(String, PieDataset, boolean, boolean, Locale)): Likewise,
@@ -5365,9 +5372,9 @@
 
 2007-06-14  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/plot/AbstractPieLabelDistributor.java: 
+    * source/org/jfree/chart/plot/AbstractPieLabelDistributor.java:
     New file,
-    * source/org/jfree/chart/plot/PieLabelDistributor.java: Now extends 
+    * source/org/jfree/chart/plot/PieLabelDistributor.java: Now extends
     AbstractPieLabelDistributor,
     * source/org/jfree/chart/plot/PieLabelRecord: Implemented Serializable,
     * source/org/jfree/chart/plot/PiePlot.java
@@ -5397,7 +5404,7 @@
 2007-06-14  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/category/StatisticalLineAndShapeRenderer.java
-    (drawItem): If dataset is not a StatisticalCategoryDataset, revert to 
+    (drawItem): If dataset is not a StatisticalCategoryDataset, revert to
     the super class drawing behaviour.
 
 2007-06-14  David Gilbert  <david.gilbert@object-refinery.com>
@@ -5452,7 +5459,7 @@
     (lookupSeriesShape): New method,
     (getAutoPopulateSeriesShape): New method,
     (setAutoPopulateSeriesShape): New method.
-    
+
 2007-06-13  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYBubbleRenderer.java
@@ -5523,7 +5530,7 @@
 2007-06-08  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYLineAndShapeRenderer.java
-    (drawSecondaryPass): Only add entity if data point is within the 
+    (drawSecondaryPass): Only add entity if data point is within the
     visible data area.
 
 2007-06-07  David Gilbert  <david.gilbert@object-refinery.com>
@@ -5539,7 +5546,7 @@
 2007-06-06  Henry Proudhon  <henry.proudhon@insa-lyon.fr>
 
     * swt/org/jfree/experimental/chart/swt/ChartComposite.java
-    (getToolTipText): Fixed minor issues with tooltips. bug reported and fix proposed 
+    (getToolTipText): Fixed minor issues with tooltips. bug reported and fix proposed
     by Christoph Beck, bug 1726404 (HP);
 
 2007-06-06  David Gilbert  <david.gilbert@object-refinery.com>
@@ -5618,7 +5625,7 @@
 
     Translations provided by Leonardo Alves Machado:
     * source/org/jfree/chart/LocalizationBundle_pt_BR.properties: New file,
-    * source/org/jfree/chart/editor/LocalizationBundle_pt_BR.properties: 
+    * source/org/jfree/chart/editor/LocalizationBundle_pt_BR.properties:
     Likewise.
 
 2007-05-24  David Gilbert  <david.gilbert@object-refinery.com>
@@ -5658,7 +5665,7 @@
     * source/org/jfree/chart/renderer/xy/StackedXYAreaRenderer.java
     (initialise): Disable visible items optimisation,
     * tests/org/jfree/chart/plot/junit/XYPlotTests.java
-    (testDrawSeriesWithZeroItems): New test.    
+    (testDrawSeriesWithZeroItems): New test.
 
 2007-05-24  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -5675,9 +5682,9 @@
     * swt/org/jfree/experimental/chart/swt/ChartComposite.java
     Integrated a patch by Cédric Chabanois to remove resources leaks.
     * swt/org/jfree/experimental/swt/SWTGraphics2D.java
-    Removed resource leaks by adding a resource pool thanks to a patch 
+    Removed resource leaks by adding a resource pool thanks to a patch
     sent by Cédric Chabanois.
-    
+
 2007-05-21  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/statistics/SimpleHistogramDataset.java
@@ -5690,7 +5697,7 @@
 2007-05-19  Henry Proudhon <henry.proudhon@insa-lyon.fr>
 
     * swt/org/jfree/experimental/chart/swt/ChartComposite.java
-    (paintControl): corrected bug with scaling when the drawing region 
+    (paintControl): corrected bug with scaling when the drawing region
     is larger than maximum draw width/height.
 
 2007-05-19  Henry Proudhon <henry.proudhon@insa-lyon.fr>
@@ -5714,7 +5721,7 @@
     (categoryIndex): Deprecated,
     (rowKey): New field,
     (columnKey): Likewise,
-    (CategoryItemEntity(Shape, String, String, CategoryDataset, int, Object, int)): 
+    (CategoryItemEntity(Shape, String, String, CategoryDataset, int, Object, int)):
     Deprecated,
     (CategoryItemEntity(Shape, String, String, CategoryDataset, Comparable, Comparable)):
     New constructor,
@@ -5836,7 +5843,7 @@
     (testGetLegendItemSeriesIndex): Likewise,
     * tests/org/jfree/chart/renderer/xy/junit/YIntervalRendererTests.java
     (testGetLegendItemSeriesIndex): Likewise.
-    
+
 2007-05-17  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/category/AreaRenderer.java
@@ -5955,7 +5962,7 @@
 2007-05-03  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/DateAxis.java
-    (previousStandardDate): Fixed boundary cases for 
+    (previousStandardDate): Fixed boundary cases for
     MILLISECOND, SECOND and MONTH units,
     * tests/org/jfree/chart/axis/junit/DateAxisTests.java
     (testPreviousStandardDateYear): Removed,
@@ -5979,13 +5986,13 @@
     (testPreviousStandardDateSecondB): Likewise,
     (testPreviousStandardDateMillisecondA): Likewise,
     (testPreviousStandardDateMillisecondB): Likewise.
-    
+
 2007-05-03  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/ThermometerPlot.java
     (subrangePaint): Made transient,
     (ThermometerPlot(ValueDataset)): Set axis field directly,
-    (setRangeAxis): Added null argument check, and event 
+    (setRangeAxis): Added null argument check, and event
     notification,
     (setPadding): Added null argument check,
     (setUnits(String)): Deprecated,
@@ -6151,12 +6158,12 @@
     (lookupSeriesPaint): New method,
     (setPaint(Paint)): Deprecated,
     (setPaint(Paint, boolean)): Likewise,
-    (getSeriesPaint(int)): Reimplemented to return series 
+    (getSeriesPaint(int)): Reimplemented to return series
     paint only, not a lookup,
-    (getItemFillPaint): Call new lookupSeriesFillPaint() 
+    (getItemFillPaint): Call new lookupSeriesFillPaint()
     method,
     (lookupSeriesFillPaint): New method,
-    (getSeriesFillPaint(int)): Reimplemented to return 
+    (getSeriesFillPaint(int)): Reimplemented to return
     series fill paint only, not a lookup,
     (setFillPaint(Paint)): Deprecated,
     (setFillPaint(Paint, boolean)): Likewise,
@@ -6167,7 +6174,7 @@
     outline paint only, not a lookup,
     (setOutlinePaint(Paint)): Deprecated,
     (setOutlinePaint(Paint, boolean)): Likewise,
-    (getItemStroke): Call new lookupSeriesOutlineStroke() 
+    (getItemStroke): Call new lookupSeriesOutlineStroke()
     method,
     (lookupSeriesStroke): New method,
     (setStroke(Stroke)): Deprecated,
@@ -6231,7 +6238,7 @@
     (setShape): Deprecated,
     * source/org/jfree/chart/renderer/xy/XYLineAndShapeRenderer.java
     (getLegendItem): Likewise.
-    
+
 2007-04-19  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/PiePlot.java
@@ -6283,7 +6290,7 @@
     * source/org/jfree/chart/axis/DateAxis.java
     (setMinimumDate): Handle case where new minimum date is on or after
     the existing maximum date,
-    (setMaximumDate): Handle case where new maximum date is on or before 
+    (setMaximumDate): Handle case where new maximum date is on or before
     the existing minimum date,
     * tests/org/jfree/chart/axis/junit/DateAxisTests.java
     (testSetMaximumDate): Added new check,
@@ -6306,7 +6313,7 @@
 2007-04-17  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/urls/TimeSeriesURLGenerator.java
-    (TimeSeriesURLGenerator(DateFormat, String, String, String)): Added 
+    (TimeSeriesURLGenerator(DateFormat, String, String, String)): Added
     null argument checks,
     (getDateFormat): New method,
     (getPrefix): New method,
@@ -6334,17 +6341,17 @@
     (restoreAutoRangeBounds): Likewise,
     * source/org/jfree/chart/plot/CombinedDomainCategoryPlot.java
     (findSubplot): Added null argument checks,
-    (zoomRangeAxes(double, PlotRenderingInfo, Point2D)): If not in 
+    (zoomRangeAxes(double, PlotRenderingInfo, Point2D)): If not in
     subplot, zoom for all subplots,
     (zoomRangeAxes(double, double, PlotRenderingInfo, Point2D)): Likewise,
     * source/org/jfree/chart/plot/CombinedDomainXYPlot.java
     (findSubplot): Added null argument checks,
-    (zoomRangeAxes(double, PlotRenderingInfo, Point2D)): If not in 
+    (zoomRangeAxes(double, PlotRenderingInfo, Point2D)): If not in
     subplot, zoom for all subplots,
     (zoomRangeAxes(double, double, PlotRenderingInfo, Point2D)): Likewise,
     * source/org/jfree/chart/plot/CombinedRangeXYPlot.java
     (findSubplot): Added null argument checks,
-    (zoomDomainAxes(double, PlotRenderingInfo, Point2D)): If not in 
+    (zoomDomainAxes(double, PlotRenderingInfo, Point2D)): If not in
     subplot, zoom for all subplots,
     (zoomDomainAxes(double, double, PlotRenderingInfo, Point2D)): Likewise,
     * source/org/jfree/chart/plot/PlotRenderingInfo.java
@@ -6363,7 +6370,7 @@
     * swt/org/jfree/experimental/chart/swt/ChartComposite.java:
     Fixed redraw problem (no need to call forceRedraw() anymore).
     * swt/org/jfree/experimental/swt/SWTGraphics2D.java:
-    Fixed some issues with disposing SWT ressources. Thanks to silent 
+    Fixed some issues with disposing SWT ressources. Thanks to silent
     for pointing this out.
 
 2007-04-04  Chris Boek  <chris.boek@gmail.com>
@@ -6605,13 +6612,13 @@
 2007-03-19  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartUtilities.java
-    (saveChartAsPNG(File, JFreeChart, int, int, ChartRenderingInfo)): Wrap 
+    (saveChartAsPNG(File, JFreeChart, int, int, ChartRenderingInfo)): Wrap
     writeChartAsPNG in try-finally,
-    (saveChartAsPNG(File, JFreeChart, int, int, ChartRenderingInfo, 
+    (saveChartAsPNG(File, JFreeChart, int, int, ChartRenderingInfo,
     boolean, int)): Likewise,
-    (saveChartAsJPEG(File, JFreeChart, int, int, ChartRenderingInfo)): 
+    (saveChartAsJPEG(File, JFreeChart, int, int, ChartRenderingInfo)):
     Likewise,
-    (saveChartAsJPEG(File, float, JFreeChart, int, int, 
+    (saveChartAsJPEG(File, float, JFreeChart, int, int,
     ChartRenderingInfo)): Likewise.
 
 2007-03-16  David Gilbert  <david.gilbert@object-refinery.com>
@@ -6619,7 +6626,7 @@
     * source/org/jfree/chart/JFreeChart.java
     (JFreeChart(String, Plot, Font, boolean)): Changed initial legend
     border,
-    * source/org/jfree/chart/block/AbstractBlock.java: implemented 
+    * source/org/jfree/chart/block/AbstractBlock.java: implemented
     Cloneable,
     (border): Changed type to BlockFrame,
     (getBorder): Deprecated,
@@ -6713,7 +6720,7 @@
     (DEFAULT_CROSSHAIR_VISIBLE): New field,
     (DEFAULT_CROSSHAIR_STROKE): Likewise,
     (DEFAULT_CROSSHAIR_PAINT): Likewise,
-    (CategoryPlot(CategoryDataset, CategoryAxis, ValueAxis, CategoryItemRenderer)): 
+    (CategoryPlot(CategoryDataset, CategoryAxis, ValueAxis, CategoryItemRenderer)):
     Initialise crosshair fields,
     (setRangeCrosshairStroke): Check for null stroke,
     (setRangeCrosshairPaint): Check for null paint,
@@ -6876,11 +6883,11 @@
     (drawHorizontalAxisTrace): Added Graphics2D parameter,
     (drawVerticalAxisTrace): Likewise,
     (displayPopupMenu): Fixed logical AND typo.
-    
+
 2007-03-05  Sergei Ivanov  <sergei_ivanov@users.sourceforge.net>
 
     * source/org/jfree/chart/renderer/xy/XYBarRenderer.java
-    (drawItem): Reworked bar calculation to fix bug when rendering 
+    (drawItem): Reworked bar calculation to fix bug when rendering
     against LogarithmicAxis.
 
 2007-03-05  David Gilbert  <david.gilbert@object-refinery.com>
@@ -6916,7 +6923,7 @@
 
     * source/org/jfree/chart/axis/LogarithmicAxis.java
     (switchedPow10): New method,
-    (adjustedLog10): Modified for clarity, 
+    (adjustedLog10): Modified for clarity,
     (adjustedPow10): New method,
     (autoAdjustRange): Reformatting only,
     (valueToJava2D): Likewise,
@@ -6940,7 +6947,7 @@
 2007-03-02  Sergei Ivanov  <sergei_ivanov@users.sourceforge.net>
 
     * source/org/jfree/chart/plot/XYPlot.java
-    (draw): Updated crosshair drawing to take account of orientation 
+    (draw): Updated crosshair drawing to take account of orientation
     correctly (see bug 1671645).
 
 2007-03-01  Sergei Ivanov  <sergei_ivanov@users.sourceforge.net>
@@ -6991,12 +6998,12 @@
     (setPositiveItemLabelPosition(ItemLabelPosition, boolean)): Likewise,
     (setSeriesPositiveItemLabelPosition(int, ItemLabelPosition, boolean)):
     Likewise,
-    (setBasePositiveItemLabelPosition(ItemLabelPosition, boolean)): 
+    (setBasePositiveItemLabelPosition(ItemLabelPosition, boolean)):
     Likewise,
     (setNegativeItemLabelPosition(ItemLabelPosition, boolean)): Likewise,
     (setSeriesNegativeItemLabelPosition(int, ItemLabelPosition, boolean)):
     Likewise,
-    (setBaseNegativeItemLabelPosition(ItemLabelPosition, boolean)): 
+    (setBaseNegativeItemLabelPosition(ItemLabelPosition, boolean)):
     Likewise,
     (setItemLabelAnchorOffset): Likewise,
     (setCreateEntities(Boolean, boolean)): Likewise,
@@ -7014,7 +7021,7 @@
 2007-02-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/XYPlot.java
-    (setRangeAxisLocation(int, AxisLocation, boolean)): Fixed 
+    (setRangeAxisLocation(int, AxisLocation, boolean)): Fixed
     copy-and-paste error.
 
 2007-02-27  David Gilbert  <david.gilbert@object-refinery.com>
@@ -7032,7 +7039,7 @@
     (setDomainAxisLocation(AxisLocation, boolean)): Likewise,
     (setDomainAxisLocation(int, AxisLocation)): Likewise,
     (setDomainAxisLocation(int, AxisLocation, boolean)): New method,
-    (setRangeAxisLocation(AxisLocation)): Delegate, 
+    (setRangeAxisLocation(AxisLocation)): Delegate,
     (setRangeAxisLocation(AxisLocation, boolean)): Likewise,
     (setRangeAxisLocation(int, AxisLocation)): Likewise,
     (setRangeAxisLocation(int, AxisLocation, boolean)): New method.
@@ -7185,7 +7192,7 @@
 2007-02-09  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYBarRenderer.java
-    (getLegendItem): Check drawBarOutline flag, 
+    (getLegendItem): Check drawBarOutline flag,
     (clone): Make a copy of the legendBar shape,
     * tests/org/jfree/chart/renderer/xy/junit/XYBarRendererTests.java
     (testCloning): Added independence check.
@@ -7212,7 +7219,7 @@
     (setAngleLabelPaint): Check for null argument,
     (equals): Check cornerTextItems list,
     (clone): Clone the cornerTextItems list,
-    (translateValueThetaRadiusToJava2D): Don't let value go below axis 
+    (translateValueThetaRadiusToJava2D): Don't let value go below axis
     minimum,
     * tests/org/jfree/chart/plot/junit/PolarPlotTests.java
     (testEquals): Added check for corner text items,
@@ -7235,9 +7242,9 @@
     * source/org/jfree/chart/plot/CrosshairState.java
     (domainAxisIndex): New field,
     (rangeAxisIndex): New fields,
-    (updateCrosshairPoint(double, double, double, double, 
+    (updateCrosshairPoint(double, double, double, double,
     PlotOrientation)): Deprecated,
-    (updateCrosshairPoint(double, double, int, int, double, double, 
+    (updateCrosshairPoint(double, double, int, int, double, double,
     PlotOrientation)): New method,
     (updateCrosshairX(double)): Deprecated,
     (updateCrosshairX(double, int)): New method,
@@ -7255,7 +7262,7 @@
     * source/org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
     (updateCrosshairValues(CrosshairState, double, double, double, double,
     PlotOrientation): Deprecated,
-    (updateCrosshairValues(CrosshairState, double, double, int, int, 
+    (updateCrosshairValues(CrosshairState, double, double, int, int,
     double, double, PlotOrientation): New method,
     * source/org/jfree/chart/renderer/xy/StackedXYAreaRenderer.java
     (drawItem): Call revised updateCrosshairValues() method,
@@ -7278,7 +7285,7 @@
     * source/org/jfree/chart/renderer/xy/XYStepAreaRenderer.java
     (drawItem): Likewise,
     * source/org/jfree/chart/renderer/xy/XYStepRenderer.java
-    (drawItem): Likewise.   
+    (drawItem): Likewise.
 
 2007-02-06  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -7359,7 +7366,7 @@
     * experimental/org/jfree/experimental/chart/demo/XYTitleAnnotationDemo1.java:
     New file,
     * experimental/org/jfree/experimental/chart/util/XYCoordinateType.java:
-    New file.   
+    New file.
 
 2007-02-02  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -7378,9 +7385,9 @@
     (StandardXYItemLabelGenerator(String, NumberFormat, DateFormat)): Made
     public,
     * source/org/jfree/chart/labels/StandardXYToolTipGenerator.java:
-    (StandardXYToolTIpGenerator(String, NumberFormat, DateFormat)): 
+    (StandardXYToolTIpGenerator(String, NumberFormat, DateFormat)):
     Likewise.
-    
+
 2007-02-02  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYBarRenderer.java
@@ -7430,19 +7437,19 @@
     New file,
     * tests/org/jfree/chart/title/junit/TitlePackageTests.java
     (suite): Added new tests.
-    
+
 2007-01-31  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * org/jfree/chart/renderer/GrayPaintScale.java: Moved from 
+    * org/jfree/chart/renderer/GrayPaintScale.java: Moved from
     experimental,
     * org/jfree/chart/renderer/LookupPaintScale.java: Likewise,
     * org/jfree/chart/renderer/PaintScale.java: Likewise,
     * org/jfree/chart/title/PaintScaleLegend.java: Likewise,
-    * experimental/org/jfree/experimental/chart/renderer/GrayPaintScale.java: 
+    * experimental/org/jfree/experimental/chart/renderer/GrayPaintScale.java:
     Moved to main API,
-    * experimental/org/jfree/experimental/chart/renderer/LookupPaintScale.java: 
+    * experimental/org/jfree/experimental/chart/renderer/LookupPaintScale.java:
     Likewise,
-    * experimental/org/jfree/experimental/chart/renderer/PaintScale.java: 
+    * experimental/org/jfree/experimental/chart/renderer/PaintScale.java:
     Likewise,
     * experimental/org/jfree/experimental/chart/title/PaintScaleLegend.java:
     Likewise,
@@ -7502,30 +7509,30 @@
 2007-01-31  Henry Proudhon  <henry.proudhon@insa-lyon.fr>
 
     * swt/org/jfree/experimental/chart/swt/ChartComposite.java:
-    Fixed some issues with the trace lines, fixed cross hair not being 
+    Fixed some issues with the trace lines, fixed cross hair not being
     drawn, added getter and setter methods for the trace lines.
     * swt/org/jfree/experimental/chart/swt/demo/SWTTimeSeries.java:
-    New class to test the cross hair.       
+    New class to test the cross hair.
     * swt/org/jfree/experimental/swt/SWTGraphics2D.java:
-    Moved the dummy JPanel to SWTUtils.java, implemented the drawLine 
+    Moved the dummy JPanel to SWTUtils.java, implemented the drawLine
     method.
     * swt/org/jfree/experimental/swt/SWTUtils.java: Moved the dummy JPanel
     from SWTGraphics2D.java, added a new convert method for mouse events.
 
 2007-01-30  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * experimental/org/jfree/experimental/chart/demo/VectorPlotDemo1.java: 
+    * experimental/org/jfree/experimental/chart/demo/VectorPlotDemo1.java:
     New file,
-    * experimental/org/jfree/experimental/chart/renderer/xy/VectorRenderer.java: 
+    * experimental/org/jfree/experimental/chart/renderer/xy/VectorRenderer.java:
     New file,
-    * experimental/org/jfree/experimental/chart/renderer/xy/junit/VectorRendererTests.java: 
-    New file.   
+    * experimental/org/jfree/experimental/chart/renderer/xy/junit/VectorRendererTests.java:
+    New file.
 
 2007-01-30  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * experimental/org/jfree/experimental/data/xy/Vector.java: 
+    * experimental/org/jfree/experimental/data/xy/Vector.java:
     New file,
-    * experimental/org/jfree/experimental/data/xy/VectorDataItem.java: 
+    * experimental/org/jfree/experimental/data/xy/VectorDataItem.java:
     New file,
     * experimental/org/jfree/experimental/data/xy/VectorSeries.java:
     New file,
@@ -7571,7 +7578,7 @@
 2007-01-29  Henry Proudhon  <henry.proudhon@insa-lyon.fr>
 
     * swt/org/jfree/experimental/swt/SWTGraphics2D.java
-    (fillRect): switch between foregroung and background colors to correct 
+    (fillRect): switch between foregroung and background colors to correct
     bug in FastScatterPlotDemo.
 
 2007-01-26  David Gilbert  <david.gilbert@object-refinery.com>
@@ -7581,7 +7588,7 @@
 
 2007-01-25  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/data/xy/DefaultXYDataset.java: 
+    * source/org/jfree/data/xy/DefaultXYDataset.java:
     Implemented PublicCloneable,
     * source/org/jfree/data/xy/XYBarDataset.java
     (getUnderlyingDataset): New method,
@@ -7596,7 +7603,7 @@
 2007-01-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/labels/AbstractXYItemLabelGenerator.java
-    (AbstractXYItemLabelGenerator(String, NumberFormat, DateFormat)): 
+    (AbstractXYItemLabelGenerator(String, NumberFormat, DateFormat)):
     New constructor,
     (clone): Clone date formatters,
     * source/org/jfree/chart/labels/StandardXYItemLabelGenerator.java
@@ -7622,7 +7629,7 @@
     (XYDifferenceRenderer()): Initialise roundXCoordinates,
     (getRoundXCoordinates): New method,
     (setRoundXCoordinates): Likewise,
-    (drawItemPass0): Perform optional rounding of x-coordinates in Java2D 
+    (drawItemPass0): Perform optional rounding of x-coordinates in Java2D
     space,
     (equals): Check roundXCoordinates field,
     (clone): Clone the legendLine shape,
@@ -7641,7 +7648,7 @@
     * experimental/org/jfree/experimental/chart/title/PaintScaleLegend.java:
     (stripOutlineVisible): New field,
     (backgroundPaint): Don't initialise here,
-    (PaintScaleLegend): Update initialisation, 
+    (PaintScaleLegend): Update initialisation,
     (isStripOutlineVisible): New method,
     (setStripOutlineVisible): Likewise,
     (getBackgroundPaint): Likewise,
@@ -7688,7 +7695,7 @@
 2007-01-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/DefaultKeyedValues2D.java
-    (getValue(Comparable, Comparable)): Handle case where row doesn't 
+    (getValue(Comparable, Comparable)): Handle case where row doesn't
     explicitly define a value for a valid column key,
     * tests/org/jfree/data/junit/DefaultKeyedValues2DTests.java
     (testSparsePopulation): New test method.
@@ -7696,7 +7703,7 @@
 2007-01-17  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartFactory.java
-    (createBoxAndWhiskerChart(String, String, String, 
+    (createBoxAndWhiskerChart(String, String, String,
     BoxAndWhiskerCategoryDataset, boolean): New method,
     * source/org/jfree/chart/JFreeChart.java
     (JFreeChartInfo()): Added new contributor.
@@ -7768,7 +7775,7 @@
     * source/org/jfree/chart/imagemap/DynamicDriveToolTipTagFragmentGenerator.java:
     Removed @author tag from API docs,
     * source/org/jfree/chart/imagemap/ImageMapUtilities: Likewise,
-    * source/org/jfree/chart/imagemap/OverLIBToolTipTagFragmentGenerator.java: 
+    * source/org/jfree/chart/imagemap/OverLIBToolTipTagFragmentGenerator.java:
     Likewise,
     * source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java:
     Likewise,
@@ -7844,12 +7851,12 @@
 
 2006-12-27  Thomas Morgner  <taqua@users.sourceforge.net>
 
-    * source/org/jfree/chart/servlet/ChartDeleter.java: Implemented 
+    * source/org/jfree/chart/servlet/ChartDeleter.java: Implemented
     Serializable.
 
 2006-12-19  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/ChartUtilities.java: API doc updates and 
+    * source/org/jfree/chart/ChartUtilities.java: API doc updates and
     source reformatting.
 
 2006-12-13  David Gilbert  <david.gilbert@object-refinery.com>
@@ -7896,7 +7903,7 @@
 
     * swt/org/jfree/experimental/chart/swt/ChartComposite.java
     (MouseUp event) fix popup menu location, patch sent by Fabrizio Giustina.
-    
+
 2006-12-11  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/Minute.java
@@ -7967,7 +7974,7 @@
     * source/org/jfree/chart/annotation/XYImageAnnotation.java
     (anchor): New field,
     (XYImageAnnotation(double, double, Image)): Delegated,
-    (XYImageAnnotation(double, double, Image, RectangleAnchor)): New 
+    (XYImageAnnotation(double, double, Image, RectangleAnchor)): New
     constructor,
     (getX): New method,
     (getY): New method,
@@ -8019,11 +8026,11 @@
 2006-11-30  Henry Proudhon <henry.proudhon AT insa-lyon.fr>
 
     * swt/org/jfree/experimental/chart/swt/ChartComposite.java
-    (ChartComposite): Modified mouse and paint listener to improve zoom 
+    (ChartComposite): Modified mouse and paint listener to improve zoom
     handling,
-    (getPointInRectangle, zoom, scale, getScreenDataArea): Signature 
+    (getPointInRectangle, zoom, scale, getScreenDataArea): Signature
     methods have been modified (Rectangle2D -> Rectangle).
-     
+
 2006-11-30  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/StackedXYAreaRenderer2.java
@@ -8153,7 +8160,7 @@
     (StandardPieURLGenerator()): Delegated,
     (StandardPieURLGenerator(String)): Likewise,
     (StandardPieURLGenerator(String, String)): Likewise,
-    (StandardPieURLGenerator(String, String, String)): Added argument 
+    (StandardPieURLGenerator(String, String, String)): Added argument
     checks,
     (equals): Reimplemented,
     * tests/org/jfree/chart/plot/junit/PiePlotTests.java
@@ -8212,23 +8219,23 @@
 
 2006-11-22  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/plot/XYPlot.java: Added API doc cross 
+    * source/org/jfree/chart/plot/XYPlot.java: Added API doc cross
     references.
 
 2006-11-22  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/CategoryPlot.java
-    (setColumnRenderingOrder): Added argument check, event notification, 
+    (setColumnRenderingOrder): Added argument check, event notification,
     and updated API docs,
     (setRowRenderingOrder): Likewise.
 
 2006-11-20  David Gilbert  <david.gilbert@object-refinery.com>
 
     * ant/build.xml
-    (initialise): Updated JFreeChart version, restructured iText 
+    (initialise): Updated JFreeChart version, restructured iText
     definitions,
     (fill-distribution): Updated iText reference, simplified copy for
-    build.xml and added copy for build-swt.xml file. 
+    build.xml and added copy for build-swt.xml file.
 
 ----------  JFREECHART 1.0.3 RELEASED ------------------------
 
@@ -8309,7 +8316,7 @@
 
     * swt/README: New file,
     * ant/build-swt.xml: New file.
-    
+
 2006-11-14  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/ThermometerPlot.java
@@ -8318,14 +8325,14 @@
 2006-11-14  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/SegmentedTimeline.java
-    (toTimelineValue): Iterate through exception segments to avoid 
+    (toTimelineValue): Iterate through exception segments to avoid
     potential stack overflow.
 
 2006-11-10  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/plot/FastScatterPlot.java
     (FastScatterPlot()): Use default axes,
-    (FastScatterPlot(double[][], ValueAxis, ValueAxis)): Throw 
+    (FastScatterPlot(double[][], ValueAxis, ValueAxis)): Throw
     IllegalArgumentException if domainAxis or rangeAxis is null,
     (setDomainAxis): New method,
     (setRangeAxis): New method,
@@ -8432,7 +8439,7 @@
     (hasListener): New method,
     * experimental/org/jfree/experimental/chart/plot/dial/DialLayerChangeEvent.java: New file,
     * experimental/org/jfree/experimental/chart/plot/dial/DialLayerChangeListener.java: New file,
-    * experimental/org/jfree/experimental/chart/plot/dial/DialPlot.java: 
+    * experimental/org/jfree/experimental/chart/plot/dial/DialPlot.java:
     Implemented DialLayerChangeListener,
     * experimental/org/jfree/experimental/chart/plot/dial/DialPointer.java:
     Now extends AbstractDialLayer,
@@ -8447,15 +8454,15 @@
     (setFont): Likewise,
     (setPaint): Likewise,
     (setLabel): Likewise,
-    * experimental/org/jfree/experimental/chart/plot/dial/DialValueIndicator.java: 
+    * experimental/org/jfree/experimental/chart/plot/dial/DialValueIndicator.java:
     Now extends AbstractDialLayer,
     (setRadius): Notify listeners,
-    * experimental/org/jfree/experimental/chart/plot/dial/SimpleDialFrame.java: 
+    * experimental/org/jfree/experimental/chart/plot/dial/SimpleDialFrame.java:
     (setRadius): Notify listeners,
     (setBackgroundPaint): Likewise,
     (setForegroundPaint): Likewise,
     (setStroke): Likewise,
-    * experimental/org/jfree/experimental/chart/plot/dial/StandardDialFrame.java: 
+    * experimental/org/jfree/experimental/chart/plot/dial/StandardDialFrame.java:
     (setBackgroundPaint): Notify listeners,
     (setForegroundPaint): Likewise,
     (setStroke): Likewise,
@@ -8482,7 +8489,7 @@
     (setMinorTickLength): Likewise,
     (setTickLabelOffset): Likewise,
     (setTickLabelFont): Likewise,
-    (setTickLabelPaint): Likewise.  
+    (setTickLabelPaint): Likewise.
 
 2006-11-06  David Gilbert  <david.gilbert@object-refinery.com>
 
@@ -8514,7 +8521,7 @@
     * tests/org/jfree/experimental/chart/plot/dial/junit/StandardDialFrameTests.java: New file,
     * tests/org/jfree/experimental/chart/plot/dial/junit/StandardDialRangeTests.java: New file,
     * tests/org/jfree/experimental/chart/plot/dial/junit/StandardDialScaleTests.java: New file.
-    
+
 2006-11-03  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/HashcodeUtilities.java: New file,
@@ -8801,7 +8808,7 @@
     * source/org/jfree/data/time/Millisecond.java
     (day): New field,
     (hour): New field,
-    (minute): New field, 
+    (minute): New field,
     (second): Changed type,
     (firstMillisecond): New field,
     (Millisecond(int, Second)): Reimplemented,
@@ -8941,7 +8948,7 @@
 
 2006-10-06  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/data/xy/DefaultXYZDataset.java: Fixed API doc 
+    * source/org/jfree/data/xy/DefaultXYZDataset.java: Fixed API doc
     warnings.
 
 2006-10-05  David Gilbert  <david.gilbert@object-refinery.com>
@@ -9083,7 +9090,7 @@
 
 2006-10-05  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/data/xy/DefaultXYDataset.java: Fixed API doc 
+    * source/org/jfree/data/xy/DefaultXYDataset.java: Fixed API doc
     warnings.
 
 2006-10-03  David Gilbert  <david.gilbert@object-refinery.com>
@@ -9128,7 +9135,7 @@
     (setArrowPaint): Check for null argument,
     * source/org/jfree/chart/annotations/junit/AnnotationsPackageTests.java
     (suite): Added CategoryPointerAnnotationTests,
-    * source/org/jfree/chart/annotations/junit/CategoryPointerAnnotationTests.java: 
+    * source/org/jfree/chart/annotations/junit/CategoryPointerAnnotationTests.java:
     New file.
 
 2006-10-02  David Gilbert  <david.gilbert@object-refinery.com>
@@ -9242,7 +9249,7 @@
 2006-09-13  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/servlet/ServletUtilities.java
-    (sendTempFile(File, HttpServletResponse, String)): Specify English 
+    (sendTempFile(File, HttpServletResponse, String)): Specify English
     locale for response header date format.
 
 2006-09-13  David Gilbert  <david.gilbert@object-refinery.com>
@@ -9336,7 +9343,7 @@
 2006-09-04  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartPanel.java
-    (actionPerformed): Updated for method name change, 
+    (actionPerformed): Updated for method name change,
     (attemptEditChartProperties): Renamed doEditChartProperties() and
     made public.
 
@@ -9345,7 +9352,7 @@
     * source/org/jfree/chart/axis/NumberAxis.java
     (autoAdjustRange): Check for lower == upper after applying auto range
     minimum size and adjust if necessary.
-    
+
 2006-09-01  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/time/TimeSeries.java
@@ -9367,7 +9374,7 @@
 2006-08-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/JFreeChart.java
-    (JFreeChartInfo.getLogo): Load image from jar file in a way that works 
+    (JFreeChartInfo.getLogo): Load image from jar file in a way that works
     for Java Web Start also.
 
 2006-08-25  David Gilbert  <david.gilbert@object-refinery.com>
@@ -9389,17 +9396,17 @@
 
 2006-08-24  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/experimental/chart/swt/editor/SWTAxisEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTAxisEditor.java:
     Made package private,
-    * source/org/jfree/experimental/chart/swt/editor/SWTNumberAxisEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTNumberAxisEditor.java:
     Likewise,
-    * source/org/jfree/experimental/chart/swt/editor/SWTOtherEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTOtherEditor.java:
     Likewise,
-    * source/org/jfree/experimental/chart/swt/editor/SWTPlotAppearanceEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTPlotAppearanceEditor.java:
     Likewise,
-    * source/org/jfree/experimental/chart/swt/editor/SWTPlotEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTPlotEditor.java:
     Likewise,
-    * source/org/jfree/experimental/chart/swt/editor/SWTStrokeCanvas.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTStrokeCanvas.java:
     Likewise,
     * source/org/jfree/experimental/chart/swt/editor/SWTTitleEditor.java: Likewise.
 
@@ -9407,21 +9414,21 @@
 
     * source/org/jfree/experimental/chart/swt/ChartComposite.java
     (attemptEditChartProperties): Implemented,
-    * source/org/jfree/experimental/chart/swt/editor/SWTAxisEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTAxisEditor.java:
     New file,
-    * source/org/jfree/experimental/chart/swt/editor/SWTChartEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTChartEditor.java:
     New file,
-    * source/org/jfree/experimental/chart/swt/editor/SWTNumberAxisEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTNumberAxisEditor.java:
     New file,
-    * source/org/jfree/experimental/chart/swt/editor/SWTOtherEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTOtherEditor.java:
     New file,
-    * source/org/jfree/experimental/chart/swt/editor/SWTPlotAppearanceEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTPlotAppearanceEditor.java:
     New file,
-    * source/org/jfree/experimental/chart/swt/editor/SWTPlotEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTPlotEditor.java:
     New file,
-    * source/org/jfree/experimental/chart/swt/editor/SWTStrokeCanvas.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTStrokeCanvas.java:
     New file,
-    * source/org/jfree/experimental/chart/swt/editor/SWTTitleEditor.java: 
+    * source/org/jfree/experimental/chart/swt/editor/SWTTitleEditor.java:
     New file,
     * source/org/jfree/experimental/swt/SWTPaintCanvas.java: New file.
 
@@ -9441,7 +9448,7 @@
 
 2006-08-23  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/experimental/chart/swt/ChartComposite.java: 
+    * source/org/jfree/experimental/chart/swt/ChartComposite.java:
     New file,
     * source/org/jfree/experimental/chart/swt/demo/SWTBarChartDemo1.java:
     New file,
@@ -9455,11 +9462,11 @@
 2006-08-23  David Gilbert  <david.gilbert@object-refinery.com>
 
     * ant/build.xml: Added 'compile-experimental' target,
-    * source/org/jfree/experimental/chart/demo/XYBlockChartDemo1.java: 
+    * source/org/jfree/experimental/chart/demo/XYBlockChartDemo1.java:
     New file,
-    * source/org/jfree/experimental/chart/demo/XYBlockChartDemo2.java: 
+    * source/org/jfree/experimental/chart/demo/XYBlockChartDemo2.java:
     New file,
-    * source/org/jfree/experimental/chart/demo/XYBlockChartDemo3.java: 
+    * source/org/jfree/experimental/chart/demo/XYBlockChartDemo3.java:
     New file,
     * source/org/jfree/experimental/chart/renderer/GrayPaintScale.java:
     New file,
@@ -9471,9 +9478,9 @@
     New file,
     * source/org/jfree/experimental/chart/renderer/junit/LookupPaintScaleTests.java:
     New file,
-    * source/org/jfree/experimental/chart/renderer/xy/XYBlockRenderer.java: 
+    * source/org/jfree/experimental/chart/renderer/xy/XYBlockRenderer.java:
     New file,
-    * source/org/jfree/experimental/chart/renderer/xy/junit/XYBlockRendererTests.java: 
+    * source/org/jfree/experimental/chart/renderer/xy/junit/XYBlockRendererTests.java:
     New file.
 
 2006-08-23  David Gilbert  <david.gilbert@object-refinery.com>
@@ -9500,9 +9507,9 @@
 2006-08-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/CategoryAxis.java
-    (drawCategoryLabels(Graphics2D, Rectangle2D, RectangleEdge, AxisState, 
+    (drawCategoryLabels(Graphics2D, Rectangle2D, RectangleEdge, AxisState,
     PlotRenderingInfo)): Deprecated,
-    (drawCategoryLabels(Graphics2D, Rectangle2D, Rectangle2D, 
+    (drawCategoryLabels(Graphics2D, Rectangle2D, Rectangle2D,
     RectangleEdge, AxisState, PlotRenderingInfo)): New method,
     * source/org/jfree/chart/axis/CategoryAxis3D.java
     (draw): Call new drawCategoryLabels() method,
@@ -9582,7 +9589,7 @@
     (minimumRangeValueIncStdDev): New field,
     (maximumRangeValueIncStdDev): Likewise,
     (DefaultStatisticalCategoryDataset): Updated initialization code,
-    (add): Modified code to update ranges, 
+    (add): Modified code to update ranges,
     (getRangeBounds): Create the range as required,
     * source/org/jfree/data/statistics/junit/DefaultStatisticalCategoryDatasetTests.java
     (testGetRangeBounds): New test method.
@@ -9597,7 +9604,7 @@
 
 2006-08-03  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/data/statistics/HistogramDataset.java: 
+    * source/org/jfree/data/statistics/HistogramDataset.java:
     API doc updates.
 
 2006-08-02  David Gilbert  <david.gilbert@object-refinery.com>
@@ -9607,7 +9614,7 @@
 
 2006-08-02  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/needle/ArrowNeedle.java: Minor API doc 
+    * source/org/jfree/chart/needle/ArrowNeedle.java: Minor API doc
     updates,
     * source/org/jfree/chart/needle/LineNeedle.java: Likewise,
     * source/org/jfree/chart/needle/LongNeedle.java: Likewise,
@@ -9645,7 +9652,7 @@
     * source/org/jfree/data/DefaultKeyedValues.java
     (getIndex): Check for null argument,
     * source/org/jfree/data/general/DefaultPieDataset.java
-    (getKey(int)): Throw IndexOutOfBounds if key exceeds getItemCount() 
+    (getKey(int)): Throw IndexOutOfBounds if key exceeds getItemCount()
     - 1,
     * source/org/jfree/data/general/junit/DefaultPieDatasetTests.java
     (testGetKey): New method,
@@ -9670,7 +9677,7 @@
 
     * source/org/jfree/data/xy/XYSeries.java
     (add(Number, Number, boolean)): Removed redundant argument check.
-    
+
 2006-07-26  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/junit/NumberAxisTests.java
@@ -9777,7 +9784,7 @@
     (suite): Added DefaultWindDatasetTests,
     * source/org/jfree/data/xy/junit/DefaultWindDatasetTests.java:
     New file.
-    
+
 2006-07-12  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/xy/DefaultXYZDataset.java: New file,
@@ -9827,7 +9834,7 @@
 
 2006-07-06  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/data/general/AbstractSeriesDataset.java: API doc 
+    * source/org/jfree/data/general/AbstractSeriesDataset.java: API doc
     updates,
     * source/org/jfree/data/general/SeriesDataset.java: Likewise.
 
@@ -9841,19 +9848,19 @@
 2006-07-06  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/CyclicXYItemRenderer.java
-    (drawItem):  Swapped all calls to dataset methods returning Number 
+    (drawItem):  Swapped all calls to dataset methods returning Number
     instances, to corresponding methods that return doubles.
 
 2006-07-06  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYStepAreaRenderer.java
-    (drawItem):  Swapped all calls to dataset methods returning Number 
+    (drawItem):  Swapped all calls to dataset methods returning Number
     instances, to corresponding methods that return doubles.
 
 2006-07-06  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/HighLowRenderer.java
-    (drawItem): Swapped all calls to dataset methods returning Number 
+    (drawItem): Swapped all calls to dataset methods returning Number
     instances, to corresponding methods that return doubles.
 
 2006-07-06  David Gilbert  <david.gilbert@object-refinery.com>
@@ -9874,7 +9881,7 @@
 
 2006-07-03  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/plot/Marker.java: Reformatting and API doc 
+    * source/org/jfree/chart/plot/Marker.java: Reformatting and API doc
     updates.
 
 2006-06-30  David Gilbert  <david.gilbert@object-refinery.com>
@@ -9890,7 +9897,7 @@
 2006-06-21  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/ClusteredXYBarRenderer.java
-    (drawItem): Check orientation when adjusting for margin, call new 
+    (drawItem): Check orientation when adjusting for margin, call new
     drawItemLabel() method in superclass.
 
 2006-06-21  David Gilbert  <david.gilbert@object-refinery.com>
@@ -9946,11 +9953,11 @@
 
 2006-05-24  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/data/time/TimeSeries.java: 
+    * source/org/jfree/data/time/TimeSeries.java:
     (delete(RegularTimePeriod)): Do nothing for unknown time period,
     (delete(int, int)): Added argument check,
     (createCopy(int, int)): Added argument checks,
-    (createCopy(RegularTimePeriod, RegularTimePeriod)): Added argument 
+    (createCopy(RegularTimePeriod, RegularTimePeriod)): Added argument
     checks, and special handling for range containing no observations,
     * source/org/jfree/data/time/junit/TimeSeriesTests.java:
     (testDelete2): Added new cases,
@@ -9973,10 +9980,10 @@
 2006-05-03  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/labels/AbstractCategoryItemLabelGenerator.java
-    (AbstractCategoryItemLabelGenerator(String, NumberFormat, NumberFormat)): 
+    (AbstractCategoryItemLabelGenerator(String, NumberFormat, NumberFormat)):
     New constructor,
     * source/org/jfree/chart/labels/StandardCategoryItemLabelGenerator.java
-    (StandardCategoryItemLabelGenerator(String, NumberFormat, NumberFormat)): 
+    (StandardCategoryItemLabelGenerator(String, NumberFormat, NumberFormat)):
     New constructor,
     (equals): New method,
     * source/org/jfree/chart/labels/StandardCategorySeriesLabelGenerator.java
@@ -10037,8 +10044,8 @@
     (setAggregatedItemsKey): Likewise,
     (getAggregatedItemsPaint): Likewise,
     (setAggregatedItemsPaint): Likewise,
-    (draw): Call prefetchSectionPaints(), use new field for 
-    aggregatedItemsKey, and update section colors in pie plot before 
+    (draw): Call prefetchSectionPaints(), use new field for
+    aggregatedItemsKey, and update section colors in pie plot before
     drawing,
     (prefetchSectionPaints): New utility method,
     (getLegendItems): Call prefetchSectionPaints(), and add item for
@@ -10080,7 +10087,7 @@
 2006-04-05  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch 1459313 by Max Herfort:
-    
+
     * source/org/jfree/chart/renderer/category/StackedBarRenderer3D.java
     (renderAsPercentages): New field,
     (StackedBarRenderer3D()): Delegate to new constructor,
@@ -10144,19 +10151,19 @@
     * NEWS: Updated for 1.0.1 release,
     * ant/build.xml: Updated version number,
     * source/org/jfree/chart/JFreeChart.java: Reformatted,
-    * source/org/jfree/chart/resources/JFreeChartResources.java: 
+    * source/org/jfree/chart/resources/JFreeChartResources.java:
     (CONTENTS): Updated version number.
 
 2006-01-27  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/labels/AbstractXYItemLabelGenerator.java
     (createItemArray): Updated API docs,
-    * source/org/jfree/chart/labels/BubbleXYItemLabelGenerator.java: New 
+    * source/org/jfree/chart/labels/BubbleXYItemLabelGenerator.java: New
     file,
-    * source/org/jfree/chart/labels/StandardXYZItemLabelGenerator.java: 
+    * source/org/jfree/chart/labels/StandardXYZItemLabelGenerator.java:
     Removed,
     * source/org/jfree/chart/labels/XYZItemLabelGenerator.java: Likewise,
-    * source/org/jfree/chart/labels/junit/BubbleXYItemLabelGeneratorTests.java: 
+    * source/org/jfree/chart/labels/junit/BubbleXYItemLabelGeneratorTests.java:
     New tests,
     * source/org/jfree/chart/labels/junit/LabelsPackageTests.java
     (suite): Renamed test,
@@ -10222,7 +10229,7 @@
 2006-01-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/axis/NumberAxis3D.java
-    (draw): Check plot is a CategoryPlot before casting (fixes bug 
+    (draw): Check plot is a CategoryPlot before casting (fixes bug
     1408904).
 
 2006-01-11  David Gilbert  <david.gilbert@object-refinery.com>
@@ -10263,7 +10270,7 @@
 
 2006-01-10  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/servlet/ServletUtilities.java: Updated API 
+    * source/org/jfree/chart/servlet/ServletUtilities.java: Updated API
     docs and reformatted source code.
 
 2006-01-09  David Gilbert  <david.gilbert@object-refinery.com>
@@ -10328,7 +10335,7 @@
     (arrangeRR): Account for rotated title in left or right positions,
     fixes bug 1379331,
     (hashCode): Reformatted.
-    
+
 2005-12-10  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/XYDifferenceRenderer.java:
@@ -10376,7 +10383,7 @@
 
     * source/org/jfree/chart/ChartPanel.java
     (chartChanged): Don't update domainZoomable and rangeZoomable.
-    
+
 2005-12-02  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/renderer/xy/StackedXYAreaRenderer.java
@@ -10563,23 +10570,23 @@
 2005-11-28  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/LegendItem.java:
-    (LegendItem(String, AttributedString, String, String, String, Shape, 
+    (LegendItem(String, AttributedString, String, String, String, Shape,
     Paint)): Removed AttributedString argument,
-    (LegendItem(String, AttributedString, String, String, String, Shape, 
+    (LegendItem(String, AttributedString, String, String, String, Shape,
     Paint, Stroke, Paint)): Likewise,
-    (LegendItem(String, AttributedString, String, String, String, Shape, 
+    (LegendItem(String, AttributedString, String, String, String, Shape,
     Stroke, Paint)): Likewise,
-    (LegendItem(String, AttributedString, String, String, String, boolean, 
-    Shape, boolean, Paint, boolean, Paint, Stroke, boolean, Shape, Stroke, 
+    (LegendItem(String, AttributedString, String, String, String, boolean,
+    Shape, boolean, Paint, boolean, Paint, Stroke, boolean, Shape, Stroke,
     Paint)): Likewise,
-    (LegendItem(AttributedString, String, String, String, Shape, Paint)): 
+    (LegendItem(AttributedString, String, String, String, Shape, Paint)):
     New constructor,
-    (LegendItem(AttributedString, String, String, String, Shape, Paint, 
+    (LegendItem(AttributedString, String, String, String, Shape, Paint,
     Stroke, Paint)): Likewise,
-    (LegendItem(AttributedString, String, String, String, Shape, Stroke, 
+    (LegendItem(AttributedString, String, String, String, Shape, Stroke,
     Paint)): Likewise,
-    (LegendItem(AttributedString, String, String, String, boolean, 
-    Shape, boolean, Paint, boolean, Paint, Stroke, boolean, Shape, Stroke, 
+    (LegendItem(AttributedString, String, String, String, boolean,
+    Shape, boolean, Paint, boolean, Paint, Stroke, boolean, Shape, Stroke,
     Paint)): Likewise,
     (characterIteratorToString): New method,
     * source/org/jfree/chart/junit/LegendItemCollectionTests.java
@@ -10657,9 +10664,9 @@
 2005-11-24  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/ChartPanel.java
-    (attemptEditChartProperties): Use ChartEditorManager to get 
+    (attemptEditChartProperties): Use ChartEditorManager to get
     ChartEditor,
-    * source/org/jfree/chart/axis/ColorBar.java: Update imports for moved 
+    * source/org/jfree/chart/axis/ColorBar.java: Update imports for moved
     classes,
     * source/org/jfree/chart/axis/junit/ColorBarTests.java: Likewise,
     * source/org/jfree/chart/editor/ChartEditor.java: New file,
@@ -10696,7 +10703,7 @@
 
 2005-11-24  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/encoders/KeypointPNGEncoderAdapter.java: 
+    * source/org/jfree/chart/encoders/KeypointPNGEncoderAdapter.java:
     Updated API docs.
 
 2005-11-24  David Gilbert  <david.gilbert@object-refinery.com>
@@ -10742,7 +10749,7 @@
 
 2005-11-23  David Gilbert  <david.gilbert@object-refinery.com>
 
-    These changes are based on patch 1217634 by Pady Srinivasan (with 
+    These changes are based on patch 1217634 by Pady Srinivasan (with
     significant modifications).
 
     * source/org/jfree/chart/axis/CategoryAxis.java
@@ -10771,8 +10778,8 @@
     (testSerialization): Strengthened test.
 
 2005-11-22  David Gilbert  <david.gilbert@object-refinery.com>
-        
-    * source/org/jfree/chart/LocalisationBundle_de.properties: 
+
+    * source/org/jfree/chart/LocalisationBundle_de.properties:
     Minor correction (see patch 1315259),
     * source/org/jfree/chart/ui/LocalisationBundle_de.properties:
     Corrections and additions (see patch 1315258).
@@ -10839,7 +10846,7 @@
     (getMinIcon): Updated API docs,
     (setMinIcon): Check for null argument, send change event,
     (drawItem): Refactored (for removed fields).
-    
+
 2005-11-16  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/data/statistics/HistogramDataset.java
@@ -10869,7 +10876,7 @@
     (drawArcForInterval): Updated for refactored methods,
     (fillArc): Changed from private to protected,
     (drawTicks): Make use of new tickSize field,
-    (drawTick(Graphics2D, Rectangle2D, double)): Updated for refactored 
+    (drawTick(Graphics2D, Rectangle2D, double)): Updated for refactored
     methods,
     (drawTick(Graphics2D, Rectangle2D, double, boolean, Paint, boolean,
     String)): Removed special case code for drawing the value label, and
@@ -10904,7 +10911,7 @@
     * source/org/jfree/chart/title/ImageTitle.java
     (height): removed field,
     (width): removed field,
-    (ImageTitle(Image, int, int, RectangleEdge, HorizontalAlignment, 
+    (ImageTitle(Image, int, int, RectangleEdge, HorizontalAlignment,
     VerticalAlignment, RectangleInsets)): set width and height for block,
     (drawHorizontal): use block width and height,
     (drawVertical): use block width and height,
@@ -10916,7 +10923,7 @@
     * ant/build.xml: exclude SunJPEGEncoderAdapter.java from the build if
     ImageIO is not present,
     * source/org/jfree/chart/encoders/ImageEncoderFactory.java
-    (init): only add 'jpeg' encoder if JFreeChart was compiled, and is 
+    (init): only add 'jpeg' encoder if JFreeChart was compiled, and is
     being run, with JDK 1.4 or later,
     * source/org/jfree/chart/encoders/SunJPEGEncoderAdapter.java
     (encode): use ImageIO, not com.sun.* classes.
@@ -10941,7 +10948,7 @@
 
 2005-11-01  David Gilbert  <david.gilbert@object-refinery.com>
 
-    * source/org/jfree/chart/renderer/xy/HighLow.java: Removed unused 
+    * source/org/jfree/chart/renderer/xy/HighLow.java: Removed unused
     class.
 
 2005-10-27  David Gilbert  <david.gilbert@object-refinery.com>
@@ -10960,7 +10967,7 @@
     getItem(),
     (getStartValue(Comparable, Comparable)): likewise,
     (getEndValue(Comparable, Comparable)): likewise,
-    (setStartValue(int, Object, Number)): changed signature to (int, 
+    (setStartValue(int, Object, Number)): changed signature to (int,
     Comparable, Number),
     (setEndValue(int, Object, Number)): likewise,
     (getCategoryIndex(Object)): changed signature to (Comparable),
@@ -11044,7 +11051,7 @@
     (setIntervalWidth): update for renamed method,
     (equals): implemented,
     * source/org/jfree/data/xy/DefaultTableXYDataset.java
-    (DefaultTableXYDataset(boolean)): register interval delegate as a 
+    (DefaultTableXYDataset(boolean)): register interval delegate as a
     listener,
     (removeAllSeries): remove class to seriesRemoved,
     (removeSeries(XYSeries)): likewise,
@@ -11052,7 +11059,7 @@
     (removeAllValuesForX): likewise,
     (getDomainBounds): only pass to delegate if the interval is included,
     (setIntervalWidth): update for renamed method,
-    * source/org/jfree/data/xy/IntervalXYDelegate.java: now implements 
+    * source/org/jfree/data/xy/IntervalXYDelegate.java: now implements
     DatasetChangeListener,
     (intervalWidth): renamed fixedIntervalWidth,
     (lowerBound): removed,
@@ -11069,15 +11076,15 @@
     (datasetChanged): new method, recalculates auto interval width,
     (itemAdded): removed,
     (itemRemoved): removed,
-    (recalculateIntervalWidth): new implementation, 
+    (recalculateIntervalWidth): new implementation,
     renamed recalculateInterval(),
-    (calculateSeries): renamed calculateIntervalForSeries(), new 
+    (calculateSeries): renamed calculateIntervalForSeries(), new
     implementation,
     (seriesAdded): removed,
     (seriesRemoved): removed,
     (equals): updated for renamed field,
     * source/org/jfree/data/xy/XYSeriesCollection.java
-    (XYSeriesCollection(XYSeries)): register interval delegate as a 
+    (XYSeriesCollection(XYSeries)): register interval delegate as a
     listener,
     (addSeries): removed call to seriesAdded(),
     (removeSeries(int)): removed call to seriesRemoved(),
@@ -11085,7 +11092,7 @@
     (removeAllSeries): likewise,
     (getDomainBounds): only pass to delegate if the interval is included,
     (setIntervalWidth): updated for renamed method,
-    * source/org/jfree/data/xy/junit/CategoryTableXYDatasetTests.java: new 
+    * source/org/jfree/data/xy/junit/CategoryTableXYDatasetTests.java: new
     tests,
     * source/org/jfree/data/xy/junit/DataXYPackageTests.java
     (suite): added CategoryTableXYDatsaetTests.class),
@@ -11102,7 +11109,7 @@
 2005-10-03  David Gilbert  <david.gilbert@object-refinery.com>
 
     * source/org/jfree/chart/JFreeChart.java
-    (drawTitle): check for positive area width and height, otherwise 
+    (drawTitle): check for positive area width and height, otherwise
     return null (fixes bug 1306022).
 
 2005-09-30  David Gilbert  <david.gilbert@object-refinery.com>
