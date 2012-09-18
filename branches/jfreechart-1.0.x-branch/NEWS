@@ -23,6 +23,7 @@ Bug Fixes:
 3555275 : ValueAxis.reserveSpace() problem for axes with fixed dimension;
 3521736 : DeviationRenderer optimisation (by Milan Ramaiya);
 3514487 : SWTGraphics2D get/setStroke() problem;
+3508799 : DefaultPolarItemRenderer does not populate seriesKey in LegendItem;
 3484408 : Maven fixes (Martin Hoeller);
 3484403 : DateAxis endless loop (by Martin Hoeller);
 3446965 : TimeSeries calculates range incorrectly in addOrUpdate();

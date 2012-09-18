@@ -1,3 +1,9 @@
+2012-09-18  David Gilbert <david.gilbert@object-refinery.com>
+
+    Bug 3508799:
+    * org/jfree/chart/renderer/DefaultPolarItemRenderer.java
+    (getLegendItem): Populate seriesKey.
+
 2012-09-15  David Gilbert <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/plot/CombinedDomainXYPlot.java

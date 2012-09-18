@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * DefaultPolarItemRenderer.java
  * -----------------------------
- * (C) Copyright 2004-2011, by Solution Engineering, Inc. and
+ * (C) Copyright 2004-2012, by Solution Engineering, Inc. and
  *     Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
@@ -55,6 +55,8 @@
  * 03-Oct-2011 : Added some configuration options for the legend (MH);
  * 03-Oct-2011 : Added support for PolarPlot's angleOffset and direction (MH);
  * 16-Oct-2011 : Fixed serialization problems with fillComposite (MH);
+ * 18-Sep-2012 : Fixed bug 3508799: seriesKey always null in LegendItem (DG);
+ * 
  */
 
 package org.jfree.chart.renderer;
@@ -336,8 +338,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.14
      */
-    public void setConnectFirstAndLastPoint(boolean connect)
-    {
+    public void setConnectFirstAndLastPoint(boolean connect) {
         this.connectFirstAndLastPoint = connect;
         fireChangeEvent();
     }
@@ -453,7 +454,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param entityY  the entity's center y-coordinate in user space (only
      *                 used if <code>area</code> is <code>null</code>).
      */
-    // this method was copied from AbstractXYItemRenderer on 03-Oct-2011
     protected void addEntity(EntityCollection entities, Shape area,
                              XYDataset dataset, int series, int item,
                              double entityX, double entityY) {
@@ -499,7 +499,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
             PlotRenderingInfo info, PolarPlot plot, XYDataset dataset,
             int seriesIndex) {
 
-        
         GeneralPath poly = null;
         ValueAxis axis = plot.getAxisForDataset(plot.indexOf(dataset));
         final int numPoints = dataset.getItemCount(seriesIndex);
@@ -553,18 +552,21 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                 final int segType = pi.currentSegment(coords);
                 pi.next();
                 if (segType != PathIterator.SEG_LINETO &&
-                        segType != PathIterator.SEG_MOVETO)
+                        segType != PathIterator.SEG_MOVETO) {
                     continue;
+                }
                 final int x = Math.round(coords[0]);
                 final int y = Math.round(coords[1]);
                 final Shape shape = ShapeUtilities.createTranslatedShape(
                         getItemShape(seriesIndex, i++), x,  y);
 
                 Paint paint;
-                if (useFillPaint)
+                if (useFillPaint) {
                     paint = lookupSeriesFillPaint(seriesIndex);
-                else
+                }
+                else {
                     paint = lookupSeriesPaint(seriesIndex);
+                }
                 g2.setPaint(paint);
                 g2.fill(shape);
                 if (isSeriesFilled(seriesIndex) && this.drawOutlineWhenFilled) {
@@ -618,7 +620,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                         tick.getTextAnchor());
             }
         }
-     }
+    }
 
     /**
      * Draw the radial gridlines - the rings.
@@ -688,7 +690,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                     series);
         }
 
-        String label = dataset.getSeriesKey(series).toString();
+        Comparable seriesKey = dataset.getSeriesKey(series);
+        String label = seriesKey.toString();
         String description = label;
         Shape shape = lookupSeriesShape(series);
         Paint paint;
@@ -710,6 +713,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         result.setToolTipText(toolTipText);
         result.setURLText(urlText);
         result.setDataset(dataset);
+        result.setSeriesKey(seriesKey);
 
         return result;
     }
@@ -717,8 +721,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * @since 1.0.14
      */
-    public XYToolTipGenerator getToolTipGenerator(int series, int item)
-    {
+    public XYToolTipGenerator getToolTipGenerator(int series, int item) {
         XYToolTipGenerator generator
             = (XYToolTipGenerator) this.toolTipGeneratorList.get(series);
         if (generator == null) {
@@ -730,8 +733,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * @since 1.0.14
      */
-    public XYToolTipGenerator getSeriesToolTipGenerator(int series)
-    {
+    public XYToolTipGenerator getSeriesToolTipGenerator(int series) {
         return (XYToolTipGenerator) this.toolTipGeneratorList.get(series);
     }
 
@@ -739,8 +741,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @since 1.0.14
      */
     public void setSeriesToolTipGenerator(int series,
-            XYToolTipGenerator generator)
-    {
+            XYToolTipGenerator generator) {
         this.toolTipGeneratorList.set(series, generator);
         fireChangeEvent();
     }
@@ -748,16 +749,14 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * @since 1.0.14
      */
-    public XYToolTipGenerator getBaseToolTipGenerator()
-    {
+    public XYToolTipGenerator getBaseToolTipGenerator() {
         return this.baseToolTipGenerator;
     }
 
     /**
      * @since 1.0.14
      */
-    public void setBaseToolTipGenerator(XYToolTipGenerator generator)
-    {
+    public void setBaseToolTipGenerator(XYToolTipGenerator generator) {
         this.baseToolTipGenerator = generator;
         fireChangeEvent();
     }
@@ -765,16 +764,14 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * @since 1.0.14
      */
-    public XYURLGenerator getURLGenerator()
-    {
+    public XYURLGenerator getURLGenerator() {
         return this.urlGenerator;
     }
 
     /**
      * @since 1.0.14
      */
-    public void setURLGenerator(XYURLGenerator urlGenerator)
-    {
+    public void setURLGenerator(XYURLGenerator urlGenerator) {
         this.urlGenerator = urlGenerator;
         fireChangeEvent();
     }
