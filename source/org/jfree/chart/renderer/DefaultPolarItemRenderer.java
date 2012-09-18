@@ -714,6 +714,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         result.setURLText(urlText);
         result.setDataset(dataset);
         result.setSeriesKey(seriesKey);
+        result.setSeriesIndex(series);
 
         return result;
     }
