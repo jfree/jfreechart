@@ -33,6 +33,7 @@
  * Contributor(s):   Cedric Chabanois (cchabanois AT no-log.org);
  *                   David Gilbert (for Object Refinery Limited);
  *                   Ronnie Duan (see bug report 2583891);
+ *                   Kevin Xu (parts of patch 3506228);
  *
  * Changes
  * -------
@@ -54,6 +55,7 @@
  * 18-Nov-2008 : Check for GradientPaint in setPaint() method (DG);
  * 27-Feb-2009 : Implemented fillPolygon() - see bug 2583891 (DG);
  * 04-Jul-2012 : Fixed get/setStroke() - see bug 3514487 (DG);
+ * 18-Sep-2012 : Fixed missing text - see bug 3482106 and patch 3506228 (DG);
  *
  */
 
@@ -943,7 +945,16 @@ public class SWTGraphics2D extends Graphics2D {
      * @param y  the y-coordinate.
      */
     public void drawString(AttributedCharacterIterator iterator, int x, int y) {
-        // TODO Auto-generated method stub
+        // for now we simply want to extract the chars from the iterator
+        // and call an unstyled text renderer
+        StringBuffer sb = new StringBuffer();
+        int numChars = iterator.getEndIndex() - iterator.getBeginIndex();
+        char c = iterator.first();
+        for (int i = 0; i < numChars; i++) {
+            sb.append(c);
+            c = iterator.next();
+        }
+        drawString(new String(sb),x,y);
     }
 
     /**
@@ -955,7 +966,7 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void drawString(AttributedCharacterIterator iterator, float x,
             float y) {
-        // TODO Auto-generated method stub
+        drawString(iterator, (int) x, (int) y);
     }
 
     /**
