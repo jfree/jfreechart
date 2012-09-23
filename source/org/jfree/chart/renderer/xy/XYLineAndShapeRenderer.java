@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * ---------------------------
@@ -66,7 +66,7 @@
  * 19-Sep-2008 : Fixed bug with drawSeriesLineAsPath - patch by Greg Darke (DG);
  * 18-May-2009 : Clip lines in drawPrimaryLine() (DG);
  * 05-Jul-2012 : Removed JDK 1.3.1 code (DG);
- * 
+ *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -919,7 +919,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
             // setup for collecting optional entity info...
             EntityCollection entities = null;
-            if (info != null) {
+            if (info != null && info.getOwner() != null) {
                 entities = info.getOwner().getEntityCollection();
             }
 
@@ -1228,7 +1228,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         if (dataset == null) {
             return null;
         }
-        
+
         if (!getItemVisible(series, 0)) {
             return null;
         }
@@ -1270,7 +1270,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         result.setSeriesIndex(series);
         result.setDataset(dataset);
         result.setDatasetIndex(datasetIndex);
-        
+
         return result;
     }
 
