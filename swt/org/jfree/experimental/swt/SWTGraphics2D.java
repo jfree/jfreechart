@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * ------------------
@@ -382,7 +382,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @see #setStroke(Stroke)
      */
     public Stroke getStroke() {
-        return new BasicStroke(this.gc.getLineWidth(), 
+        return new BasicStroke(this.gc.getLineWidth(),
                 toAwtLineCap(this.gc.getLineCap()),
                 toAwtLineJoin(this.gc.getLineJoin()));
     }
@@ -1385,93 +1385,93 @@ public class SWTGraphics2D extends Graphics2D {
 
     /**
      * Returns the AWT line cap corresponding to the specified SWT line cap.
-     * 
+     *
      * @param swtLineCap  the SWT line cap.
-     * 
+     *
      * @return The AWT line cap.
      */
     private int toAwtLineCap(int swtLineCap) {
-    	if (swtLineCap == SWT.CAP_FLAT) {
-    		return BasicStroke.CAP_BUTT;
-    	}
-    	else if (swtLineCap == SWT.CAP_ROUND) {
-    		return BasicStroke.CAP_ROUND;
-    	}
-    	else if (swtLineCap == SWT.CAP_SQUARE) {
-    		return BasicStroke.CAP_SQUARE;    		
-    	}
-    	else {
-    		throw new IllegalArgumentException("SWT LineCap " + swtLineCap 
-    				+ " not recognised");
-    	}
+        if (swtLineCap == SWT.CAP_FLAT) {
+            return BasicStroke.CAP_BUTT;
+        }
+        else if (swtLineCap == SWT.CAP_ROUND) {
+            return BasicStroke.CAP_ROUND;
+        }
+        else if (swtLineCap == SWT.CAP_SQUARE) {
+            return BasicStroke.CAP_SQUARE;
+        }
+        else {
+            throw new IllegalArgumentException("SWT LineCap " + swtLineCap
+                + " not recognised");
+        }
     }
 
     /**
      * Returns the AWT line join corresponding to the specified SWT line join.
-     * 
+     *
      * @param swtLineJoin  the SWT line join.
-     * 
+     *
      * @return The AWT line join.
      */
     private int toAwtLineJoin(int swtLineJoin) {
-    	if (swtLineJoin == SWT.JOIN_BEVEL) {
-    		return BasicStroke.JOIN_BEVEL;
-    	}
-    	else if (swtLineJoin == SWT.JOIN_MITER) {
-    		return BasicStroke.JOIN_MITER;
-    	}
-    	else if (swtLineJoin == SWT.JOIN_ROUND) {
-    		return BasicStroke.JOIN_ROUND;    		
-    	}
-    	else {
-    		throw new IllegalArgumentException("SWT LineJoin " + swtLineJoin 
-    				+ " not recognised");
-    	}
+        if (swtLineJoin == SWT.JOIN_BEVEL) {
+            return BasicStroke.JOIN_BEVEL;
+        }
+        else if (swtLineJoin == SWT.JOIN_MITER) {
+            return BasicStroke.JOIN_MITER;
+        }
+        else if (swtLineJoin == SWT.JOIN_ROUND) {
+            return BasicStroke.JOIN_ROUND;
+        }
+        else {
+            throw new IllegalArgumentException("SWT LineJoin " + swtLineJoin
+                + " not recognised");
+        }
     }
 
     /**
      * Returns the SWT line cap corresponding to the specified AWT line cap.
-     * 
+     *
      * @param awtLineCap  the AWT line cap.
-     * 
+     *
      * @return The SWT line cap.
      */
     private int toSwtLineCap(int awtLineCap) {
-    	if (awtLineCap == BasicStroke.CAP_BUTT) {
-    		return SWT.CAP_FLAT;
-    	}
-    	else if (awtLineCap == BasicStroke.CAP_ROUND) {
-    		return SWT.CAP_ROUND;
-    	}
-    	else if (awtLineCap == BasicStroke.CAP_SQUARE) {
-    		return SWT.CAP_SQUARE;    		
-    	}
-    	else {
-    		throw new IllegalArgumentException("AWT LineCap " + awtLineCap 
-    				+ " not recognised");
-    	}
+        if (awtLineCap == BasicStroke.CAP_BUTT) {
+            return SWT.CAP_FLAT;
+        }
+        else if (awtLineCap == BasicStroke.CAP_ROUND) {
+            return SWT.CAP_ROUND;
+        }
+        else if (awtLineCap == BasicStroke.CAP_SQUARE) {
+            return SWT.CAP_SQUARE;
+        }
+        else {
+            throw new IllegalArgumentException("AWT LineCap " + awtLineCap
+                + " not recognised");
+        }
     }
 
     /**
      * Returns the SWT line join corresponding to the specified AWT line join.
-     * 
+     *
      * @param awtLineJoin  the AWT line join.
-     * 
+     *
      * @return The SWT line join.
      */
     private int toSwtLineJoin(int awtLineJoin) {
-    	if (awtLineJoin == BasicStroke.JOIN_BEVEL) {
-    		return SWT.JOIN_BEVEL;
-    	}
-    	else if (awtLineJoin == BasicStroke.JOIN_MITER) {
-    		return SWT.JOIN_MITER;
-    	}
-    	else if (awtLineJoin == BasicStroke.JOIN_ROUND) {
-    		return SWT.JOIN_ROUND;    		
-    	}
-    	else {
-    		throw new IllegalArgumentException("AWT LineJoin " + awtLineJoin 
-    				+ " not recognised");
-    	}
+        if (awtLineJoin == BasicStroke.JOIN_BEVEL) {
+            return SWT.JOIN_BEVEL;
+        }
+        else if (awtLineJoin == BasicStroke.JOIN_MITER) {
+            return SWT.JOIN_MITER;
+        }
+        else if (awtLineJoin == BasicStroke.JOIN_ROUND) {
+            return SWT.JOIN_ROUND;
+        }
+        else {
+            throw new IllegalArgumentException("AWT LineJoin " + awtLineJoin
+                + " not recognised");
+        }
     }
 }
