@@ -10,7 +10,7 @@
         <property name="builddir" value="${basedir}/build" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="jfreechart.jar" value="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
-    	<!-- Edit the next line to link to the swt library you want, see README file in the swt folder -->
+        <!-- Edit the next line to link to the swt library you want, see README file in the swt folder -->
         <property name="swt.jar" value="your/path/to/swt-3.4/swt.jar"/>
         <path id="build.classpath">
             <pathelement location="${jcommon.jar}"/>
@@ -48,7 +48,7 @@
 
     </target>
 
-	<!-- Compile the JFreeChart SWT classes -->
+    <!-- Compile the JFreeChart SWT classes -->
     <target name="compile-swt" depends="initialise"
             description="Compile and package the JFreeChart SWT source code.">
 
