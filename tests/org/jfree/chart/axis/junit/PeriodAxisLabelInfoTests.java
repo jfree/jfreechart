@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * -----------------------------
@@ -65,6 +65,7 @@ import junit.framework.TestSuite;
 import org.jfree.chart.axis.PeriodAxisLabelInfo;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Month;
+import org.jfree.data.time.Year;
 import org.jfree.ui.RectangleInsets;
 
 /**
@@ -186,7 +187,7 @@ public class PeriodAxisLabelInfoTests extends TestCase {
             info2 = (PeriodAxisLabelInfo) info1.clone();
         }
         catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+            fail(e.getMessage());
         }
         assertTrue(info1 != info2);
         assertTrue(info1.getClass() == info2.getClass());
@@ -212,7 +213,7 @@ public class PeriodAxisLabelInfoTests extends TestCase {
             in.close();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            fail(e.getMessage());
         }
         boolean b = info1.equals(info2);
         assertTrue(b);
@@ -222,10 +223,15 @@ public class PeriodAxisLabelInfoTests extends TestCase {
      * A test for the createInstance() method.
      */
     public void testCreateInstance() {
-        PeriodAxisLabelInfo info = new PeriodAxisLabelInfo(Day.class, 
+        TimeZone zone = TimeZone.getTimeZone("GMT");
+        PeriodAxisLabelInfo info = new PeriodAxisLabelInfo(Day.class,
                 new SimpleDateFormat("d"));
-        Day d = (Day) info.createInstance(new Date(0L), 
-                TimeZone.getTimeZone("GMT"), Locale.UK);
+        Day d = (Day) info.createInstance(new Date(0L), zone, Locale.UK);
         assertEquals(new Day(1, 1, 1970), d);
+
+        info = new PeriodAxisLabelInfo(Year.class, new SimpleDateFormat("YYYY"));
+        Year y = (Year) info.createInstance(new Date(0L), zone, Locale.UK);
+        assertEquals(new Year(1970), y);
     }
+
 }
