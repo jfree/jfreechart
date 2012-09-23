@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * -----------------
@@ -257,7 +257,7 @@ import org.jfree.util.SortOrder;
  * renders each data item using a {@link CategoryItemRenderer}.
  */
 public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
-        Zoomable, AnnotationChangeListener, RendererChangeListener, 
+        Zoomable, AnnotationChangeListener, RendererChangeListener,
         Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
@@ -539,7 +539,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     private LegendItemCollection fixedLegendItems;
 
     /**
-     * A flag that controls whether or not panning is enabled for the 
+     * A flag that controls whether or not panning is enabled for the
      * range axis/axes.
      *
      * @since 1.0.13
@@ -548,7 +548,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * The shadow generator for the plot (<code>null</code> permitted).
-     * 
+     *
      * @since 1.0.14
      */
     private ShadowGenerator shadowGenerator;
@@ -658,7 +658,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         this.rangeCrosshairPaint = DEFAULT_CROSSHAIR_PAINT;
 
         this.annotations = new java.util.ArrayList();
-        
+
         this.rangePannable = false;
         this.shadowGenerator = null;
     }
@@ -1245,12 +1245,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     public RectangleEdge getRangeAxisEdge(int index) {
         AxisLocation location = getRangeAxisLocation(index);
-        RectangleEdge result = Plot.resolveRangeAxisLocation(location,
-                this.orientation);
-        if (result == null) {
-            result = RectangleEdge.opposite(getRangeAxisEdge(0));
-        }
-        return result;
+        return Plot.resolveRangeAxisLocation(location, this.orientation);
     }
 
     /**
@@ -3379,7 +3374,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     public void clearAnnotations() {
         for(int i = 0; i < this.annotations.size(); i++) {
-            CategoryAnnotation annotation 
+            CategoryAnnotation annotation
                     = (CategoryAnnotation) this.annotations.get(i);
             annotation.removeChangeListener(this);
         }
@@ -3710,9 +3705,9 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             BufferedImage shadowImage = this.shadowGenerator.createDropShadow(
                     dataImage);
             g2 = savedG2;
-            g2.drawImage(shadowImage, (int) dataArea.getX() 
+            g2.drawImage(shadowImage, (int) dataArea.getX()
                     + this.shadowGenerator.calculateOffsetX(),
-                    (int) dataArea.getY() 
+                    (int) dataArea.getY()
                     + this.shadowGenerator.calculateOffsetY(), null);
             g2.drawImage(dataImage, (int) dataArea.getX(),
                     (int) dataArea.getY(), null);
@@ -4590,7 +4585,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param pannable  the new flag value.
      *
-     * @see #isRangePannable() 
+     * @see #isRangePannable()
      *
      * @since 1.0.13
      */
