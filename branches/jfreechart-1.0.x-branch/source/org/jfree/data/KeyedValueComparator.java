@@ -70,8 +70,8 @@ public class KeyedValueComparator implements Comparator, Serializable {
      */
     public KeyedValueComparator(KeyedValueComparatorType type,
                                 SortOrder order) {
-        ParamChecks.nullNotPermitted(type, "Null 'type' argument.");
-        ParamChecks.nullNotPermitted(order, "Null 'order' argument.");
+        ParamChecks.nullNotPermitted(type, "type");
+        ParamChecks.nullNotPermitted(order, "order");
         this.type = type;
         this.order = order;
     }
