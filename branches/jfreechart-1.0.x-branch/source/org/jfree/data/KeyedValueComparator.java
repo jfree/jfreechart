@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,13 +21,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * -------------------------
  * KeyedValueComparator.java
  * -------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2012, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,12 +37,15 @@
  * 05-Mar-2003 : Version 1 (DG);
  * 27-Aug-2003 : Moved SortOrder from org.jfree.data --> org.jfree.util (DG);
  * 12-Jan-2005 : Added accessor methods (DG);
+ * 23-Sep-2012 : Make this class serializable (DG);
  *
  */
 
 package org.jfree.data;
 
+import java.io.Serializable;
 import java.util.Comparator;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.SortOrder;
 
@@ -50,7 +53,7 @@ import org.jfree.util.SortOrder;
  * A utility class that can compare and order two {@link KeyedValue} instances
  * and sort them into ascending or descending order by key or by value.
  */
-public class KeyedValueComparator implements Comparator {
+public class KeyedValueComparator implements Comparator, Serializable {
 
     /** The comparator type. */
     private KeyedValueComparatorType type;
@@ -67,9 +70,8 @@ public class KeyedValueComparator implements Comparator {
      */
     public KeyedValueComparator(KeyedValueComparatorType type,
                                 SortOrder order) {
-        if (order == null) {
-            throw new IllegalArgumentException("Null 'order' argument.");
-        }
+        ParamChecks.nullNotPermitted(type, "Null 'type' argument.");
+        ParamChecks.nullNotPermitted(order, "Null 'order' argument.");
         this.type = type;
         this.order = order;
     }

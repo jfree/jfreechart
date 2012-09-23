@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,13 +21,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * -----------------------------
  * KeyedValueComparatorType.java
  * -----------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2012, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,17 +35,19 @@
  * Changes:
  * --------
  * 05-Mar-2003 : Version 1 (DG);
+ * 23-Sep-2012 : Make this class serializable (DG);
  *
  */
 
 package org.jfree.data;
 
+import java.io.Serializable;
 
 /**
  * Used to indicate the type of a {@link KeyedValueComparator} : 'by key' or
  * 'by value'.
  */
-public final class KeyedValueComparatorType {
+public final class KeyedValueComparatorType implements Serializable {
 
     /** An object representing 'by key' sorting. */
     public static final KeyedValueComparatorType BY_KEY
