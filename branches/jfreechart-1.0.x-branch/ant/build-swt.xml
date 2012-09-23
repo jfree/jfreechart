@@ -4,9 +4,9 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.0.14" />
+        <property name="jfreechart.version" value="1.0.15" />
         <property name="jcommon.name" value="jcommon" />
-        <property name="jcommon.version" value="1.0.17" />
+        <property name="jcommon.version" value="1.0.18" />
         <property name="builddir" value="${basedir}/build" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="jfreechart.jar" value="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
@@ -19,7 +19,7 @@
         </path>
 
     </target>
-	
+
     <!-- Compile the JFreeChart SWT classes -->
     <target name="compile-swtgraphics" depends="initialise"
             description="Compile and package some utility SWT source code.">
@@ -28,7 +28,7 @@
         <mkdir dir="${basedir}/build" />
 
         <!-- compile the source -->
-        <javac srcdir="${basedir}/swt" 
+        <javac srcdir="${basedir}/swt"
                destdir="${basedir}/build"
                debug="on"
                deprecation="on"
@@ -56,7 +56,7 @@
         <mkdir dir="${basedir}/build" />
 
         <!-- compile the source -->
-        <javac srcdir="${basedir}/swt" 
+        <javac srcdir="${basedir}/swt"
                destdir="${basedir}/build"
                debug="on"
                deprecation="on"
@@ -77,11 +77,11 @@
     </target>
 
     <!-- ALL -->
-    <target name="all" 
+    <target name="all"
             depends="compile-swtgraphics,compile-swt"
             description="Compiles and package in jar files all the SWT related code in JFreeChart.">
 
     </target>
 
 </project>
- 
+
