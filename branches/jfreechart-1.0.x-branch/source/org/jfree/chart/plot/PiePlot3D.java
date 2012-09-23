@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * --------------
@@ -85,7 +85,7 @@
  * 10-Oct-2011 : Localization fix: bug #3353913 (MH);
  * 18-Oct-2011 : Fix tooltip offset with shadow generator (DG);
  * 11-Jun-2012 : Utilise new PaintAlpha class (patch 3204823 from DaveLaw) (DG);
- * 
+ *
  */
 
 package org.jfree.chart.plot;
@@ -380,7 +380,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
         // get a list of keys...
         List sectionKeys = dataset.getKeys();
 
-        if (sectionKeys.size() == 0) {
+        if (sectionKeys.isEmpty()) {
             return;
         }
 
@@ -602,12 +602,12 @@ public class PiePlot3D extends PiePlot implements Serializable {
         }
 
         if (getShadowGenerator() != null) {
-            BufferedImage shadowImage 
+            BufferedImage shadowImage
                     = getShadowGenerator().createDropShadow(dataImage);
             g2 = savedG2;
-            g2.drawImage(shadowImage, (int) plotArea.getX() 
+            g2.drawImage(shadowImage, (int) plotArea.getX()
                     + getShadowGenerator().calculateOffsetX(),
-                    (int) plotArea.getY() 
+                    (int) plotArea.getY()
                     + getShadowGenerator().calculateOffsetY(), null);
             g2.drawImage(dataImage, (int) plotArea.getX(),
                     (int) plotArea.getY(), null);
