@@ -23,7 +23,7 @@
         <property name="jfreechart.version" value="1.0.15" />
         <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
-        <property name="jcommon.version" value="1.0.17" />
+        <property name="jcommon.version" value="1.0.18" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="itext.name" value="iText" />
         <property name="itext.version" value="2.1.5" />
@@ -190,7 +190,7 @@
         <copy file="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}.jar" />
         <copy file="${basedir}/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar" />
         <copy file="${basedir}/${jfreechart.name}-${jfreechart.version}-demo.jar" tofile="${basedir}/distribution/${jfreechart.name}-${jfreechart.version}-demo.jar" failonerror="false" />
-    
+
         <!-- copy across source files -->
         <copy todir="${basedir}/distribution/source">
             <fileset dir="${basedir}/source">
@@ -366,7 +366,7 @@
     </target>
 
     <!-- ALL -->
-    <target name="all" 
+    <target name="all"
             depends="compile,compile-experimental,zip-javadocs,zip,targz,maven-bundle"
             description="Compiles JFreeChart, builds the jar files, generates the Javadoc HTML pages and creates distribution files (.zip and .tar.gz).">
 

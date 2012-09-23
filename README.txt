@@ -9,13 +9,13 @@
 -----------------
 1.  INTRODUCTION
 -----------------
-JFreeChart is a free chart library for the Java(tm) platform.  It runs 
-on the Java 2 Platform (JRE 1.4.2 or later) and uses the Java 2D API for 
+JFreeChart is a free chart library for the Java(tm) platform.  It runs
+on the Java 2 Platform (JRE 1.4.2 or later) and uses the Java 2D API for
 drawing.
 
-******************************************************************************** 
+********************************************************************************
 * IMPORTANT NOTICE:                                                            *
-* The next release of JFreeChart (1.0.16) will require JRE/JDK 1.6.0 or later. * 
+* The next release of JFreeChart (1.0.16) will require JRE/JDK 1.6.0 or later. *
 ********************************************************************************
 
 JFreeChart is licensed under the terms of the GNU Lesser General
@@ -56,9 +56,9 @@ information, please see:
 Sales of the JFreeChart Developer Guide are an important source of funding for
 the project.  Please help us to continue developing free software.
 
-API documentation files in HTML format are available on-line.  If you wish 
+API documentation files in HTML format are available on-line.  If you wish
 to keep a local copy of the API files, you can regenerate them directly
-from the source code.  You can do this using the 'javadoc' utility directly, 
+from the source code.  You can do this using the 'javadoc' utility directly,
 or with the Ant script (build.xml) included in the distribution.
 
 -----------------
@@ -68,13 +68,13 @@ JFreeChart has the following dependencies:
 
 (a)  JRE/JDK 1.4.2 or higher - JFreeChart requires the Java2D and Collections
 APIs, so it definitely won't work with JDK 1.1 (with a small amount of effort
-you can probably get it to compile and run with JDK 1.2 or 1.3).  If you are 
+you can probably get it to compile and run with JDK 1.2 or 1.3).  If you are
 using JFreeChart to create applets, this means that you cannot rely on the JVM
 integrated with Microsoft's Internet Explorer - your users will need to have
 the Java 2 plug-in installed.  Most other browsers (e.g. Firefox, Safari and
 Chrome) offer good support for modern JREs.
 
-(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.17)
+(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.18)
 is included in the JFreeChart distribution.  You can obtain the complete
 source code for JCommon from:
 
@@ -83,11 +83,11 @@ source code for JCommon from:
 JCommon is licensed under the terms of the GNU Lesser General Public Licence.
 
 (c)  servlet.jar - classes in the org.jfree.chart.servlet
-package require this file.  The JFreeChart distribution includes the 
-servlet.jar file distributed with Tomcat 4.1.31.  Applicable license 
-terms are published at:  
+package require this file.  The JFreeChart distribution includes the
+servlet.jar file distributed with Tomcat 4.1.31.  Applicable license
+terms are published at:
 
-    http://java.sun.com/products/servlet/LICENSE   
+    http://java.sun.com/products/servlet/LICENSE
 
 (d)  JUnit - a unit testing framework (the junit.jar runtime file is
 included in the distribution).  JUnit is licensed under the terms
@@ -100,7 +100,7 @@ The JUnit tests included with JFreeChart have been created using JUnit
 4.3.1.
 
 In the distribution, we also include iText-2.1.5.jar.  This is only required by
-the JFreeChart demo applications, and is not a direct dependency for 
+the JFreeChart demo applications, and is not a direct dependency for
 JFreeChart.
 
 -----------
@@ -149,18 +149,18 @@ and is available to download from:
 ---------------
 8.  LIMITATIONS
 ---------------
-JFreeChart has some known limitations that will hopefully be addressed in 
+JFreeChart has some known limitations that will hopefully be addressed in
 the future:
 
     - some renderers do not respect the series visibility flags yet;
     - the chart property editors (accessible by right-clicking on the chart
       panel) are horribly out of date and probably shouldn't be used;
-    - item labels (if displayed) are not taken into account for the 
+    - item labels (if displayed) are not taken into account for the
       automatically calculated axis range.  As a workaround, you can increase
       the axis margins;
-    - tick labels on a DateAxis that uses a SegmentedTimeline can be 
+    - tick labels on a DateAxis that uses a SegmentedTimeline can be
       problematic;
-    
+
 If there are other items that you think should be listed here,
 please post a bug report.
 
@@ -173,10 +173,10 @@ A list of changes in recent versions:
         - see the NEWS and ChangeLog files for details.
 
 1.0.14 : (20-Nov-2011)
-        - added support for multiple axes in PolarPlot, performance 
+        - added support for multiple axes in PolarPlot, performance
           improvements in the TimeSeriesCollection class, mouse wheel rotation
           in the PiePlot class, improved Maven support, a range of other
-          minor functional enhancements and numerous bug fixes - see the NEWS 
+          minor functional enhancements and numerous bug fixes - see the NEWS
           and ChangeLog files for details.
 
 1.0.13 : (17-Apr-2009)
@@ -190,50 +190,50 @@ A list of changes in recent versions:
           for details.
 
 1.0.11 : (18-Sep-2008)
-        - this release includes a new chart theming mechanism, and numerous 
+        - this release includes a new chart theming mechanism, and numerous
           other feature enhancements and bug fixes - see the NEWS and ChangeLog
           files for details.
-          
+
 1.0.10 : (8-Jun-2008)
-        - another general maintenance release - see the NEWS and ChangeLog 
+        - another general maintenance release - see the NEWS and ChangeLog
           files for more details.
 
 1.0.9 : (4-Jan-2008)
         - this release fixes a security advisory with respect to the HTML
-          image maps generated by JFreeChart - see the NEWS file for more 
+          image maps generated by JFreeChart - see the NEWS file for more
           information.  In addition, a number of bugs have been fixed.
 
 1.0.8 : (23-Nov-2007)
-        - primarily a bug fix release.  See the NEWS and ChangeLog files for a 
+        - primarily a bug fix release.  See the NEWS and ChangeLog files for a
           more detailed description of the changes in this release.
 
 1.0.7 : (14-Nov-2007)
-        - See the NEWS and ChangeLog files for a more detailed description of 
+        - See the NEWS and ChangeLog files for a more detailed description of
           the changes in this release.
 
-1.0.6 : (15-Jun-2007) 
+1.0.6 : (15-Jun-2007)
         - the VectorRenderer and associated dataset classes have been promoted
           to the standard API from the 'experimental' source tree.  See the
-          NEWS and ChangeLog files for a more detailed description of the 
+          NEWS and ChangeLog files for a more detailed description of the
           changes in this release.
-          
-1.0.5 : (23-Mar-2007) 
-        - this release contains a new DeviationRenderer, enhancements to a 
-          number of existing classes and numerous bug fixes, see the NEWS 
+
+1.0.5 : (23-Mar-2007)
+        - this release contains a new DeviationRenderer, enhancements to a
+          number of existing classes and numerous bug fixes, see the NEWS
           and ChangeLog files for details.
 
 1.0.4 : (9-Feb-2007)
-        - this release contains both new features and bug fixes, see the NEWS 
+        - this release contains both new features and bug fixes, see the NEWS
           and ChangeLog files for details.
 
-1.0.3 : (17-Nov-2006) 
+1.0.3 : (17-Nov-2006)
         - this release contains a new DialPlot class (in 'experimental') that
           will hopefully replace the MeterPlot class, once the API has been
           polished a little, plus many other new features and bug fixes.  See
           the NEWS and ChangeLog files for details.
 
 1.0.2 : (25-Aug-2006)
-        - this release contains both new features and bug fixes, see the NEWS 
+        - this release contains both new features and bug fixes, see the NEWS
           and ChangeLog files for details.
 
 1.0.1 : (27-Jan-2006)
@@ -242,27 +242,27 @@ A list of changes in recent versions:
 
 1.0.0 : (2-Dec-2005)
         - the first stable release of the JFreeChart class library, all future
-          releases in the 1.0.x series will aim to maintain backward 
+          releases in the 1.0.x series will aim to maintain backward
           compatibility with this release;
         - see the ChangeLog file for a detailed list of changes.
 
 1.0.0-rc3 : (28-Nov-2005)
         - the third "release candidate" for version 1.0.0, this release
           fixes some issues with the 1.0.0-rc2 release (mainly concerning
-          packaging of resource bundles for localisation).  
+          packaging of resource bundles for localisation).
         - if no significant problems are reported in the next few days,
           the 1.0.0 "final" release will be posted on 2-Dec-2005.
 
 1.0.0-rc2 : (25-Nov-2005)
             - the second "release candidate" for version 1.0.0.  If no problems
               are reported, 1.0.0 "final" will be released on 2-Dec-2005.
-            - see the ChangeLog file for a detailed list of changes in this 
+            - see the ChangeLog file for a detailed list of changes in this
               release.
 
 1.0.0-rc1 : (2-Jun-2005)
-            - this is a "release candidate" for version 1.0.0.  If no 
-              significant API problems are reported, this release will be 
-              re-released as version 1.0.0. 
+            - this is a "release candidate" for version 1.0.0.  If no
+              significant API problems are reported, this release will be
+              re-released as version 1.0.0.
             - see CHANGELOG.txt for further details.
 
 1.0.0-pre2 : (10-Mar-2005)
@@ -270,20 +270,20 @@ A list of changes in recent versions:
 
 1.0.0-pre1 : (29-Nov-2004)
          - see CHANGELOG.txt for further details.
- 
-0.9.21 : (9-Sep-2004) 
+
+0.9.21 : (9-Sep-2004)
          - added new axes: PeriodAxis and ModuloAxis.
          - split org.jfree.data and org.jfree.chart.renderer into
            subpackages for 'category' and 'xy' charts.
          - Sun PNG encoder is now used, if available.
-         - a new demo application makes it easier to preview the 
+         - a new demo application makes it easier to preview the
            chart types that JFreeChart can create.
          - added a new series visibility flag to the AbstractRenderer
            class.
          - added support for GradientPaint in interval markers.
          - see CHANGELOG.txt for further details.
-         
-0.9.20 : (7-Jun-2004) 
+
+0.9.20 : (7-Jun-2004)
          - primarily bug fixes, see CHANGELOG.txt for further details.
 
 0.9.19 : (28-May-2004)
@@ -329,7 +329,7 @@ A list of changes in recent versions:
          - added a cyclic axis;
          - added localisation files for _ru;
 
-0.9.14 : (17-Nov-2003) 
+0.9.14 : (17-Nov-2003)
          - implemented zooming for the FastScatterPlot class;
          - added item label support for stacked bar charts, and new fall back
            options for item labels that don't fit within bars;
@@ -383,7 +383,7 @@ A list of changes in recent versions:
 API changes in this release are minimal and have been implemented using
 deprecation, so code written against 0.9.10 should recompile.
 
-0.9.10 : (25-Jul-2003) 
+0.9.10 : (25-Jul-2003)
          - added support for multiple secondary axes, datasets and
            renderers;
          - minor feature enhancements and bug fixes;
@@ -414,7 +414,7 @@ BE FIXED FOR THE NEXT RELEASE.
         - added new XYDifferenceRenderer;
         - added support for colored bands between gridlines in XYPlot;
         - added new XYDrawableAnnotation class;
-        - added a new attribute to control the order of dataset rendering in 
+        - added a new attribute to control the order of dataset rendering in
           a CategoryPlot;
         - extended the value label mechanism for the renderers, to allow
           better (per series) control over label generation, positioning and
@@ -423,7 +423,7 @@ BE FIXED FOR THE NEXT RELEASE.
           CategoryItemLabelGenerator, since it is now being used to generated
           item labels as well as tooltips;
         - there is now support for horizontal stacked 3D bar charts;
-        - added support for range markers against secondary axis in a 
+        - added support for range markers against secondary axis in a
           CategoryPlot;
         - added labels to domain and range markers;
         - added a new HistogramDataset class (contributed by Jelai Wang) to
@@ -451,13 +451,13 @@ BE FIXED FOR THE NEXT RELEASE.
         - changed package naming from com.jrefinery.* to org.jfree.*;
         - added new TimePeriodValuesCollection class;
         - added MIME type code to ServletUtilities class;
-        - reversed the order of PieDataset and KeyedValuesDataset in 
+        - reversed the order of PieDataset and KeyedValuesDataset in
           the class hierarchy;
         - reversed the order of CategoryDataset and KeyedValues2DDataset
           in the class hierarchy;
         - minor bug fixes;
 
-0.9.7 : (11-Apr-2003) 
+0.9.7 : (11-Apr-2003)
         - added a new ValueDataset interface and DefaultValueDataset
           class, and changed the CompassPlot class to use this instead
           of MeterDataset;
@@ -511,7 +511,7 @@ BE FIXED FOR THE NEXT RELEASE.
         - modified the CategoryDataset interface to be more
           symmetrical, data is organised in rows and columns (as
           before) but can now be accessed by row/column index or
-          row/column key.   
+          row/column key.
         - added support for reading PieDatasets and CategoryDatasets
           from XML files.
         - created separate packages for the axes
@@ -524,15 +524,15 @@ BE FIXED FOR THE NEXT RELEASE.
           lookup tables from a common source (necessary to coordinate
           complex combined charts).
         - the chart legend can now display shapes corresponding to
-          series. 
+          series.
         - moved responsibility for category distribution to the
           CategoryAxis class, which tidies up the code in the
-          CategoryPlot classes.  
+          CategoryPlot classes.
         - gridlines are now controlled by the CategoryPlot and XYPlot
           classes, not the axes (included in this change is the
           addition of gridlines for the CategoryPlot domain values).
         - changed the list of titles in the JFreeChart class to a
-          title and a list of subtitles.  
+          title and a list of subtitles.
         - added new renderers for XYPlot (XYBubbleRenderer and
           YIntervalRenderer).
         - modified Gantt chart to display sub-tasks.
@@ -706,7 +706,7 @@ BE FIXED FOR THE NEXT RELEASE.
 10.  CONTRIBUTORS
 ----------------
 JFreeChart wouldn't be half the library that it is today without the
-contributions (large and small) that have been made by the developers listed 
+contributions (large and small) that have been made by the developers listed
 below:
 
     - Eric Alexander
@@ -806,11 +806,11 @@ below:
     - Matthew Wright
     - Benoit Xhenseval
     - Christian W. Zuckschwerdt
-    - Hari 
+    - Hari
     - Sam (oldman)
 
 It is possible that I have missed someone on this list, if that
-applies to you, please e-mail me. 
+applies to you, please e-mail me.
 
 Dave Gilbert (david.gilbert@object-refinery.com)
 JFreeChart Project Leader
