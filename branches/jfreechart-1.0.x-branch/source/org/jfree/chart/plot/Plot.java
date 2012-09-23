@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,13 +21,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sylvain Vieujot;
@@ -748,9 +748,10 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getBackgroundImageAlpha()
      */
     public void setBackgroundImageAlpha(float alpha) {
-        if (alpha < 0.0f || alpha > 1.0f)
+        if (alpha < 0.0f || alpha > 1.0f) {
             throw new IllegalArgumentException(
                     "The 'alpha' value must be in the range 0.0f to 1.0f.");
+        }
         if (this.backgroundImageAlpha != alpha) {
             this.backgroundImageAlpha = alpha;
             fireChangeEvent();

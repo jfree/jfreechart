@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * ------------------
@@ -65,7 +65,7 @@
  * 02-Jun-2008 : Fixed bug with chart entities using TableOrder.BY_COLUMN (DG);
  * 02-Jun-2008 : Fixed bug with null dataset (DG);
  * 01-Jun-2009 : Set series key in getLegendItems() (DG);
- * 
+ *
  */
 
 package org.jfree.chart.plot;
@@ -1091,7 +1091,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         if (keys == null) {
             return result;
         }
-        
+
         int series = 0;
         Iterator iterator = keys.iterator();
         Shape shape = getLegendItemShape();
@@ -1178,8 +1178,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
             }
 
             // ensure we have a maximum value to use on the axes
-            if (this.maxValue == DEFAULT_MAX_VALUE)
+            if (this.maxValue == DEFAULT_MAX_VALUE) {
                 calculateMaxValue(seriesCount, catCount);
+            }
 
             // Next, setup the plot area
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,13 +21,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * ------------------------
  * CombinedRangeXYPlot.java
  * ------------------------
- * (C) Copyright 2001-2008, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-2012, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -114,6 +114,7 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
@@ -173,7 +174,9 @@ public class CombinedRangeXYPlot extends XYPlot
     /**
      * Returns the space between subplots.
      *
-     * @return The gap
+     * @return The gap.
+     *
+     * @see #setGap(double)
      */
     public double getGap() {
         return this.gap;
@@ -182,7 +185,9 @@ public class CombinedRangeXYPlot extends XYPlot
     /**
      * Sets the amount of space between subplots.
      *
-     * @param gap  the gap between subplots
+     * @param gap  the gap between subplots.
+     *
+     * @see #getGap()
      */
     public void setGap(double gap) {
         this.gap = gap;
@@ -208,12 +213,11 @@ public class CombinedRangeXYPlot extends XYPlot
      * You must ensure that the subplot has a non-null domain axis.  The range
      * axis for the subplot will be set to <code>null</code>.
      *
-     * @param subplot  the subplot.
+     * @param subplot  the subplot (<code>null</code> not permitted).
      * @param weight  the weight (must be 1 or greater).
      */
     public void add(XYPlot subplot, int weight) {
-
-        // verify valid weight
+        ParamChecks.nullNotPermitted(subplot, "subplot");
         if (weight <= 0) {
             String msg = "The 'weight' must be positive.";
             throw new IllegalArgumentException(msg);
@@ -237,9 +241,7 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param subplot  the subplot (<code>null</code> not permitted).
      */
     public void remove(XYPlot subplot) {
-        if (subplot == null) {
-            throw new IllegalArgumentException(" Null 'subplot' argument.");
-        }
+        ParamChecks.nullNotPermitted(subplot, "subplot");
         int position = -1;
         int size = this.subplots.size();
         int i = 0;
@@ -370,11 +372,8 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param info  collects chart drawing information (<code>null</code>
      *              permitted).
      */
-    public void draw(Graphics2D g2,
-                     Rectangle2D area,
-                     Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info) {
+    public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
+            PlotState parentState, PlotRenderingInfo info) {
 
         // set up info collection...
         if (info != null) {
@@ -507,7 +506,7 @@ public class CombinedRangeXYPlot extends XYPlot
             }
         }
     }
-    
+
     /**
      * Pans all domain axes by the specified percentage.
      *
@@ -534,7 +533,7 @@ public class CombinedRangeXYPlot extends XYPlot
             }
         }
     }
-    
+
     /**
      * Returns the subplot (if any) that contains the (x, y) point (specified
      * in Java2D space).
@@ -545,12 +544,8 @@ public class CombinedRangeXYPlot extends XYPlot
      * @return A subplot (possibly <code>null</code>).
      */
     public XYPlot findSubplot(PlotRenderingInfo info, Point2D source) {
-        if (info == null) {
-            throw new IllegalArgumentException("Null 'info' argument.");
-        }
-        if (source == null) {
-            throw new IllegalArgumentException("Null 'source' argument.");
-        }
+        ParamChecks.nullNotPermitted(info, "info");
+        ParamChecks.nullNotPermitted(source, "source");
         XYPlot result = null;
         int subplotIndex = info.getSubplotIndex(source);
         if (subplotIndex >= 0) {
@@ -569,17 +564,14 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param renderer the new renderer.
      */
     public void setRenderer(XYItemRenderer renderer) {
-
         super.setRenderer(renderer);  // not strictly necessary, since the
                                       // renderer set for the
                                       // parent plot is not used
-
         Iterator iterator = this.subplots.iterator();
         while (iterator.hasNext()) {
             XYPlot plot = (XYPlot) iterator.next();
             plot.setRenderer(renderer);
         }
-
     }
 
     /**
@@ -588,15 +580,12 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param orientation  the orientation.
      */
     public void setOrientation(PlotOrientation orientation) {
-
         super.setOrientation(orientation);
-
         Iterator iterator = this.subplots.iterator();
         while (iterator.hasNext()) {
             XYPlot plot = (XYPlot) iterator.next();
             plot.setOrientation(orientation);
         }
-
     }
 
     /**
@@ -646,7 +635,6 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param info  object containing information about the plot dimensions.
      */
     public void handleClick(int x, int y, PlotRenderingInfo info) {
-
         Rectangle2D dataArea = info.getDataArea();
         if (dataArea.contains(x, y)) {
             for (int i = 0; i < this.subplots.size(); i++) {
@@ -655,7 +643,6 @@ public class CombinedRangeXYPlot extends XYPlot
                 subplot.handleClick(x, y, subplotInfo);
             }
         }
-
     }
 
     /**
