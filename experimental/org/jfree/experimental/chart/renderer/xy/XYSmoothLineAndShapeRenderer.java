@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * ---------------------------------
@@ -219,8 +219,12 @@ public class XYSmoothLineAndShapeRenderer extends XYLineAndShapeRenderer {
 
         // Reference: http://www.antigrain.com/research/bezier_interpolation/
 
-        if (point0 == null) point0 = point1; //new Point2D.Double(0, 0);
-        if (point3 == null) point3 = point2; //new Point2D.Double(0, 0);
+        if (point0 == null) {
+            point0 = point1;
+        } //new Point2D.Double(0, 0);
+        if (point3 == null) {
+            point3 = point2;
+        } //new Point2D.Double(0, 0);
 
         Point2D.Double c1 = new Point2D.Double(
                (point0.x + point1.x) / 2.0, (point0.y + point1.y) / 2.0);
