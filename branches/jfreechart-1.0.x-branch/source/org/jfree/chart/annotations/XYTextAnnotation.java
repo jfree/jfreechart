@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYTextAnnotation.java
  * ---------------------
- * (C) Copyright 2002-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -75,6 +75,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextUtilities;
 import org.jfree.ui.RectangleEdge;
@@ -171,9 +172,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     public XYTextAnnotation(String text, double x, double y) {
         super();
-        if (text == null) {
-            throw new IllegalArgumentException("Null 'text' argument.");
-        }
+        ParamChecks.nullNotPermitted(text, "text");
         this.text = text;
         this.font = DEFAULT_FONT;
         this.paint = DEFAULT_PAINT;
@@ -209,10 +208,9 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getText()
      */
     public void setText(String text) {
-        if (text == null) {
-            throw new IllegalArgumentException("Null 'text' argument.");
-        }
+        ParamChecks.nullNotPermitted(text, "text");
         this.text = text;
+        fireAnnotationChanged();
     }
 
     /**
@@ -235,9 +233,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getFont()
      */
     public void setFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.font = font;
         fireAnnotationChanged();
     }
@@ -262,9 +258,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.paint = paint;
         fireAnnotationChanged();
     }
@@ -290,9 +284,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getTextAnchor()
      */
     public void setTextAnchor(TextAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.textAnchor = anchor;
         fireAnnotationChanged();
     }
@@ -317,9 +309,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getRotationAnchor()
      */
     public void setRotationAnchor(TextAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.rotationAnchor = anchor;
         fireAnnotationChanged();
     }
@@ -452,9 +442,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @since 1.0.13
      */
     public void setOutlinePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.outlinePaint = paint;
         fireAnnotationChanged();
     }
@@ -483,9 +471,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @since 1.0.13
      */
     public void setOutlineStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.outlineStroke = stroke;
         fireAnnotationChanged();
     }
@@ -528,8 +514,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     public void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
                      ValueAxis domainAxis, ValueAxis rangeAxis,
-                     int rendererIndex,
-                     PlotRenderingInfo info) {
+                     int rendererIndex, PlotRenderingInfo info) {
 
         PlotOrientation orientation = plot.getOrientation();
         RectangleEdge domainEdge = Plot.resolveDomainAxisLocation(
@@ -634,8 +619,8 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     public int hashCode() {
         int result = 193;
-        result = 37 * this.text.hashCode();
-        result = 37 * this.font.hashCode();
+        result = 37 * result + this.text.hashCode();
+        result = 37 * result + this.font.hashCode();
         result = 37 * result + HashUtilities.hashCodeForPaint(this.paint);
         long temp = Double.doubleToLongBits(this.x);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
