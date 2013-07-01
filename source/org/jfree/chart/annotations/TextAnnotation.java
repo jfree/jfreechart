@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * TextAnnotation.java
  * -------------------
- * (C) Copyright 2002-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -49,6 +49,7 @@
  *               API docs (DG);
  * 24-Jun-2009 : Fire change events (see patch 2809117 by PK) (DG);
  * 28-Oct-2011 : Added missing argument check, Bug #3428870 (MH);
+ * 01-Jul-2013 : Added missing AnnotationChangeEvent for setText() (DG);
  * 
  */
 
@@ -64,6 +65,7 @@ import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.event.AnnotationChangeEvent;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.ObjectUtilities;
@@ -119,9 +121,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      */
     protected TextAnnotation(String text) {
         super();
-        if (text == null) {
-            throw new IllegalArgumentException("Null 'text' argument.");
-        }
+        ParamChecks.nullNotPermitted(text, "text");
         this.text = text;
         this.font = DEFAULT_FONT;
         this.paint = DEFAULT_PAINT;
@@ -142,17 +142,17 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     }
 
     /**
-     * Sets the text for the annotation.
+     * Sets the text for the annotation and sends an 
+     * {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param text  the text (<code>null</code> not permitted).
      *
      * @see #getText()
      */
     public void setText(String text) {
-        if (text == null) {
-            throw new IllegalArgumentException("Null 'text' argument.");
-        }
+        ParamChecks.nullNotPermitted(text, "text");
         this.text = text;
+        fireAnnotationChanged();
     }
 
     /**
@@ -175,9 +175,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * @see #getFont()
      */
     public void setFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.font = font;
         fireAnnotationChanged();
     }
@@ -202,9 +200,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.paint = paint;
         fireAnnotationChanged();
     }
@@ -230,9 +226,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * @see #getTextAnchor()
      */
     public void setTextAnchor(TextAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.textAnchor = anchor;
         fireAnnotationChanged();
     }
@@ -257,9 +251,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * @see #getRotationAnchor()
      */
     public void setRotationAnchor(TextAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.rotationAnchor = anchor;
         fireAnnotationChanged();
     }

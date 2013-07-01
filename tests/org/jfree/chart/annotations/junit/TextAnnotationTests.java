@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * TextAnnotationTests.java
  * ------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Martin Hoeller;
@@ -37,6 +37,7 @@
  * 19-Aug-2003 : Version 1 (DG);
  * 07-Jan-2005 : Added testHashCode() method (DG);
  * 28-Oct-2011 : Added testSetRotationAnchor() method for bug #3428870 (MH);
+ * 01-Jul-2013 : Added testChangeEvents() (DG);
  * 
  */
 
@@ -52,12 +53,15 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.annotations.CategoryTextAnnotation;
 import org.jfree.chart.annotations.TextAnnotation;
+import org.jfree.chart.event.AnnotationChangeEvent;
+import org.jfree.chart.event.AnnotationChangeListener;
 import org.jfree.ui.TextAnchor;
 
 /**
  * Tests for the {@link TextAnnotation} class.
  */
-public class TextAnnotationTests extends TestCase {
+public class TextAnnotationTests extends TestCase 
+        implements AnnotationChangeListener {
 
     /**
      * Returns the tests as a test suite.
@@ -150,4 +154,50 @@ public class TextAnnotationTests extends TestCase {
             // ok, exception is expected
         }
     }
+ 
+    /**
+     * Some tests to ensure that change events are generated as expected.
+     */
+    public void testChangeEvents() {
+        TextAnnotation a = new CategoryTextAnnotation("Test", "A", 1.0);
+        a.addChangeListener(this);
+        this.lastEvent = null;
+        a.setText("B");
+        assertNotNull(this.lastEvent);
+                this.lastEvent = null;
+        a.setText("B");
+        assertNotNull(this.lastEvent);
+        
+        this.lastEvent = null;
+        a.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        assertNotNull(this.lastEvent);
+
+        this.lastEvent = null;
+        a.setPaint(Color.BLUE);
+        assertNotNull(this.lastEvent);
+        
+        this.lastEvent = null;
+        a.setTextAnchor(TextAnchor.CENTER_LEFT);
+        assertNotNull(this.lastEvent);
+        
+        this.lastEvent = null;
+        a.setRotationAnchor(TextAnchor.CENTER_LEFT);
+        assertNotNull(this.lastEvent);
+
+        this.lastEvent = null;
+        a.setRotationAngle(123.4);
+        assertNotNull(this.lastEvent);
+   }
+
+    private AnnotationChangeEvent lastEvent;
+    
+    /**
+     * Receives notification of a change to an annotation.
+     * 
+     * @param event  the event. 
+     */
+    public void annotationChanged(AnnotationChangeEvent event) {
+        this.lastEvent = event;  
+    }
+ 
 }
