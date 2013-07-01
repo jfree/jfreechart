@@ -1,3 +1,8 @@
+2013-07-01  David Gilbert <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/annotation/TextAnnotation.java
+    (setText): Fire change event.
+
 2012-09-18  David Gilbert <david.gilbert@object-refinery.com>
 
     Bug 3508799:
