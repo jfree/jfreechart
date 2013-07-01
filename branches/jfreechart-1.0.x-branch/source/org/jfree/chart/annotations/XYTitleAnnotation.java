@@ -63,6 +63,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.Title;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.XYCoordinateType;
 import org.jfree.data.Range;
 import org.jfree.ui.RectangleAnchor;
@@ -130,12 +131,8 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     public XYTitleAnnotation(double x, double y, Title title,
             RectangleAnchor anchor) {
         super();
-        if (title == null) {
-            throw new IllegalArgumentException("Null 'title' argument.");
-        }
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(title, "title");
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.coordinateType = XYCoordinateType.RELATIVE;
         this.x = x;
         this.y = y;
@@ -246,8 +243,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
      */
     public void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
                      ValueAxis domainAxis, ValueAxis rangeAxis,
-                     int rendererIndex,
-                     PlotRenderingInfo info) {
+                     int rendererIndex, PlotRenderingInfo info) {
 
         PlotOrientation orientation = plot.getOrientation();
         AxisLocation domainAxisLocation = plot.getDomainAxisLocation();
@@ -258,8 +254,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
                 rangeAxisLocation, orientation);
         Range xRange = domainAxis.getRange();
         Range yRange = rangeAxis.getRange();
-        double anchorX = 0.0;
-        double anchorY = 0.0;
+        double anchorX, anchorY;
         if (this.coordinateType == XYCoordinateType.RELATIVE) {
             anchorX = xRange.getLowerBound() + (this.x * xRange.getLength());
             anchorY = yRange.getLowerBound() + (this.y * yRange.getLength());
