@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * LegendItem.java
  * ---------------
- * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -58,6 +58,7 @@
  * 17-Jun-2008 : Added optional labelFont and labelPaint attributes (DG);
  * 15-Oct-2008 : Added new constructor (DG);
  * 28-Apr-2009 : Added various setter methods (DG);
+ * 01-Jul-2013 : Use ParamChecks class (DG);
  *
  */
 
@@ -77,6 +78,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.AttributedString;
 import java.text.CharacterIterator;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.general.Dataset;
 import org.jfree.io.SerialUtilities;
@@ -336,22 +338,11 @@ public class LegendItem implements Cloneable, Serializable {
                       boolean lineVisible, Shape line,
                       Stroke lineStroke, Paint linePaint) {
 
-        if (label == null) {
-            throw new IllegalArgumentException("Null 'label' argument.");
-        }
-        if (fillPaint == null) {
-            throw new IllegalArgumentException("Null 'fillPaint' argument.");
-        }
-        if (lineStroke == null) {
-            throw new IllegalArgumentException("Null 'lineStroke' argument.");
-        }
-        if (outlinePaint == null) {
-            throw new IllegalArgumentException("Null 'outlinePaint' argument.");
-        }
-        if (outlineStroke == null) {
-            throw new IllegalArgumentException(
-                    "Null 'outlineStroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(label, "label");
+        ParamChecks.nullNotPermitted(fillPaint, "fillPaint");
+        ParamChecks.nullNotPermitted(lineStroke, "lineStroke");
+        ParamChecks.nullNotPermitted(outlinePaint, "outlinePaint");
+        ParamChecks.nullNotPermitted(outlineStroke, "outlineStroke");
         this.label = label;
         this.labelPaint = null;
         this.attributedLabel = null;
@@ -481,28 +472,13 @@ public class LegendItem implements Cloneable, Serializable {
                       boolean lineVisible, Shape line, Stroke lineStroke,
                       Paint linePaint) {
 
-        if (label == null) {
-            throw new IllegalArgumentException("Null 'label' argument.");
-        }
-        if (fillPaint == null) {
-            throw new IllegalArgumentException("Null 'fillPaint' argument.");
-        }
-        if (lineStroke == null) {
-            throw new IllegalArgumentException("Null 'lineStroke' argument.");
-        }
-        if (line == null) {
-            throw new IllegalArgumentException("Null 'line' argument.");
-        }
-        if (linePaint == null) {
-            throw new IllegalArgumentException("Null 'linePaint' argument.");
-        }
-        if (outlinePaint == null) {
-            throw new IllegalArgumentException("Null 'outlinePaint' argument.");
-        }
-        if (outlineStroke == null) {
-            throw new IllegalArgumentException(
-                "Null 'outlineStroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(label, "label");
+        ParamChecks.nullNotPermitted(fillPaint, "fillPaint");
+        ParamChecks.nullNotPermitted(lineStroke, "lineStroke");
+        ParamChecks.nullNotPermitted(line, "line");
+        ParamChecks.nullNotPermitted(linePaint, "linePaint");
+        ParamChecks.nullNotPermitted(outlinePaint, "outlinePaint");
+        ParamChecks.nullNotPermitted(outlineStroke, "outlineStroke");
         this.label = characterIteratorToString(label.getIterator());
         this.attributedLabel = label;
         this.description = description;
@@ -822,9 +798,7 @@ public class LegendItem implements Cloneable, Serializable {
      * @since 1.0.14
      */
     public void setShape(Shape shape) {
-        if (shape == null) {
-            throw new IllegalArgumentException("Null 'shape' argument.");
-        }
+        ParamChecks.nullNotPermitted(shape, "shape");
         this.shape = shape;
     }
 
@@ -854,9 +828,7 @@ public class LegendItem implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setFillPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.fillPaint = paint;
     }
 
@@ -896,9 +868,7 @@ public class LegendItem implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setLinePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.linePaint = paint;
     }
 
@@ -919,9 +889,7 @@ public class LegendItem implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setOutlinePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.outlinePaint = paint;
     }
 
@@ -994,9 +962,7 @@ public class LegendItem implements Cloneable, Serializable {
      * @since 1.0.14
      */
     public void setLine(Shape line) {
-        if (line == null) {
-            throw new IllegalArgumentException("Null 'line' argument.");
-        }
+        ParamChecks.nullNotPermitted(line, "line");
         this.line = line;
     }
 
@@ -1025,9 +991,7 @@ public class LegendItem implements Cloneable, Serializable {
      * @see #getFillPaintTransformer()
      */
     public void setFillPaintTransformer(GradientPaintTransformer transformer) {
-        if (transformer == null) {
-            throw new IllegalArgumentException("Null 'transformer' attribute.");
-        }
+        ParamChecks.nullNotPermitted(transformer, "transformer");
         this.fillPaintTransformer = transformer;
     }
 
@@ -1043,7 +1007,7 @@ public class LegendItem implements Cloneable, Serializable {
             return true;
         }
         if (!(obj instanceof LegendItem)) {
-                return false;
+            return false;
         }
         LegendItem that = (LegendItem) obj;
         if (this.datasetIndex != that.datasetIndex) {
