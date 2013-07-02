@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * LabelBlock.java
  * ---------------
- * (C) Copyright 2004-2009, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
@@ -45,6 +45,7 @@
  * 20-Jul-2006 : Fixed entity area in draw() method (DG);
  * 16-Mar-2007 : Fixed serialization when using GradientPaint (DG);
  * 10-Feb-2009 : Added alignment fields (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -63,6 +64,7 @@ import java.io.ObjectOutputStream;
 
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.StandardEntityCollection;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextBlock;
 import org.jfree.text.TextBlockAnchor;
@@ -176,9 +178,7 @@ public class LabelBlock extends AbstractBlock
      * @see #getFont()
      */
     public void setFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.font = font;
         this.label = TextUtilities.createTextBlock(this.text, font, this.paint);
     }
@@ -202,9 +202,7 @@ public class LabelBlock extends AbstractBlock
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.paint = paint;
         this.label = TextUtilities.createTextBlock(this.text, this.font,
                 this.paint);
@@ -274,9 +272,7 @@ public class LabelBlock extends AbstractBlock
      * @since 1.0.13
      */
     public void setContentAlignmentPoint(TextBlockAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.contentAlignmentPoint = anchor;
     }
 

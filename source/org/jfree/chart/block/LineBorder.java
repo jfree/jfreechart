@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * LineBorder.java
  * ---------------
- * (C) Copyright 2007, 2008, by Christo Zietsman and Contributors.
+ * (C) Copyright 2007-2013, by Christo Zietsman and Contributors.
  *
  * Original Author:  Christo Zietsman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -37,6 +37,7 @@
  * 16-Mar-2007 : Version 1, contributed by Christo Zietsman with
  *               modifications by DG (DG);
  * 13-Jun-2007 : Don't draw if area doesn't have positive dimensions (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -53,6 +54,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleInsets;
@@ -94,15 +96,9 @@ public class LineBorder implements BlockFrame, Serializable {
      * @param insets  the insets (<code>null</code> not permitted).
      */
     public LineBorder(Paint paint, Stroke stroke, RectangleInsets insets) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
-        if (insets == null) {
-            throw new IllegalArgumentException("Null 'insets' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
+        ParamChecks.nullNotPermitted(stroke, "stroke");
+        ParamChecks.nullNotPermitted(insets, "insets");
         this.paint = paint;
         this.stroke = stroke;
         this.insets = insets;
