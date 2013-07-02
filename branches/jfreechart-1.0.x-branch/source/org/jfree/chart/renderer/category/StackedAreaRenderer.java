@@ -409,6 +409,7 @@ public class StackedAreaRenderer extends AreaRenderer
      * @param dataset  the dataset (<code>null</code> not permitted).
      * @param series  the series index.
      * @param index  the item index.
+     * @param validRows  the valid rows.
      *
      * @return An array containing the cumulative negative and positive values
      *     for all series values up to but excluding <code>series</code>
