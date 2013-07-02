@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * AbstractBlock.java
  * ------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,6 +43,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 16-Mar-2007 : Changed border from BlockBorder to BlockFrame, updated
  *               equals(), and implemented Cloneable (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
@@ -204,9 +206,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @see #getMargin()
      */
     public void setMargin(RectangleInsets margin) {
-        if (margin == null) {
-            throw new IllegalArgumentException("Null 'margin' argument.");
-        }
+        ParamChecks.nullNotPermitted(margin, "margin");
         this.margin = margin;
     }
 
@@ -220,8 +220,8 @@ public class AbstractBlock implements Cloneable, Serializable {
      *
      * @see #getMargin()
      */
-    public void setMargin(double top, double left, double bottom,
-                          double right) {
+    public void setMargin(double top, double left, double bottom, 
+            double right) {
         setMargin(new RectangleInsets(top, left, bottom, right));
     }
 
@@ -289,9 +289,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @see #getFrame()
      */
     public void setFrame(BlockFrame frame) {
-        if (frame == null) {
-            throw new IllegalArgumentException("Null 'frame' argument.");
-        }
+        ParamChecks.nullNotPermitted(frame, "frame");
         this.frame = frame;
     }
 
@@ -315,9 +313,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @see #getPadding()
      */
     public void setPadding(RectangleInsets padding) {
-        if (padding == null) {
-            throw new IllegalArgumentException("Null 'padding' argument.");
-        }
+        ParamChecks.nullNotPermitted(padding, "padding");
         this.padding = padding;
     }
 
@@ -403,9 +399,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @see #getBounds()
      */
     public void setBounds(Rectangle2D bounds) {
-        if (bounds == null) {
-            throw new IllegalArgumentException("Null 'bounds' argument.");
-        }
+        ParamChecks.nullNotPermitted(bounds, "bounds");
         this.bounds = bounds;
     }
 
@@ -454,9 +448,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @return The content constraint.
      */
     protected RectangleConstraint toContentConstraint(RectangleConstraint c) {
-        if (c == null) {
-            throw new IllegalArgumentException("Null 'c' argument.");
-        }
+        ParamChecks.nullNotPermitted(c, "c");
         if (c.equals(RectangleConstraint.NONE)) {
             return c;
         }
@@ -468,10 +460,8 @@ public class AbstractBlock implements Cloneable, Serializable {
         double hh = trimToContentHeight(h);
         Range wwr = trimToContentWidth(wr);
         Range hhr = trimToContentHeight(hr);
-        return new RectangleConstraint(
-            ww, wwr, c.getWidthConstraintType(),
-            hh, hhr, c.getHeightConstraintType()
-        );
+        return new RectangleConstraint(ww, wwr, c.getWidthConstraintType(),
+            hh, hhr, c.getHeightConstraintType());
     }
 
     private Range trimToContentWidth(Range r) {
