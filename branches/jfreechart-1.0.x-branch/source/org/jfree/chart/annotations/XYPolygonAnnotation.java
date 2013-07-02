@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XYPolygonAnnotation.java
  * ------------------------
- * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 09-Feb-2005 : Version 1 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -59,6 +60,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.util.ObjectUtilities;
@@ -130,13 +132,10 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * @param fillPaint  the paint used to fill the shape (<code>null</code>
      *                   permitted).
      */
-    public XYPolygonAnnotation(double[] polygon,
-                               Stroke stroke,
-                               Paint outlinePaint, Paint fillPaint) {
+    public XYPolygonAnnotation(double[] polygon, Stroke stroke, 
+            Paint outlinePaint, Paint fillPaint) {
         super();
-        if (polygon == null) {
-            throw new IllegalArgumentException("Null 'polygon' argument.");
-        }
+        ParamChecks.nullNotPermitted(polygon, "polygon");
         if (polygon.length % 2 != 0) {
             throw new IllegalArgumentException("The 'polygon' array must "
                     + "contain an even number of items.");
