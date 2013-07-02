@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PeriodAxis.java
  * ---------------
- * (C) Copyright 2004-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -56,6 +56,7 @@
  * 02-Mar-2009 : Fixed draw() method to check tickMarksVisible and
  *               tickLabelsVisible (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -89,6 +90,7 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Month;
@@ -234,12 +236,8 @@ public class PeriodAxis extends ValueAxis
     public PeriodAxis(String label, RegularTimePeriod first,
             RegularTimePeriod last, TimeZone timeZone, Locale locale) {
         super(label, null);
-        if (timeZone == null) {
-            throw new IllegalArgumentException("Null 'timeZone' argument.");
-        }
-        if (locale == null) {
-            throw new IllegalArgumentException("Null 'locale' argument.");
-        }
+        ParamChecks.nullNotPermitted(timeZone, "timeZone");
+        ParamChecks.nullNotPermitted(locale, "locale");
         this.first = first;
         this.last = last;
         this.timeZone = timeZone;
@@ -276,9 +274,7 @@ public class PeriodAxis extends ValueAxis
      * @param first  the time period (<code>null</code> not permitted).
      */
     public void setFirst(RegularTimePeriod first) {
-        if (first == null) {
-            throw new IllegalArgumentException("Null 'first' argument.");
-        }
+        ParamChecks.nullNotPermitted(first, "first");
         this.first = first;
         this.first.peg(this.calendar);
         notifyListeners(new AxisChangeEvent(this));
@@ -300,9 +296,7 @@ public class PeriodAxis extends ValueAxis
      * @param last  the time period (<code>null</code> not permitted).
      */
     public void setLast(RegularTimePeriod last) {
-        if (last == null) {
-            throw new IllegalArgumentException("Null 'last' argument.");
-        }
+        ParamChecks.nullNotPermitted(last, "last");
         this.last = last;
         this.last.peg(this.calendar);
         notifyListeners(new AxisChangeEvent(this));
@@ -325,9 +319,7 @@ public class PeriodAxis extends ValueAxis
      * @param zone  the time zone (<code>null</code> not permitted).
      */
     public void setTimeZone(TimeZone zone) {
-        if (zone == null) {
-            throw new IllegalArgumentException("Null 'zone' argument.");
-        }
+        ParamChecks.nullNotPermitted(zone, "zone");
         this.timeZone = zone;
         this.calendar = Calendar.getInstance(zone, this.locale);
         this.first.peg(this.calendar);
@@ -364,9 +356,7 @@ public class PeriodAxis extends ValueAxis
      * @param c  the class (<code>null</code> not permitted).
      */
     public void setAutoRangeTimePeriodClass(Class c) {
-        if (c == null) {
-            throw new IllegalArgumentException("Null 'c' argument.");
-        }
+        ParamChecks.nullNotPermitted(c, "c");
         this.autoRangeTimePeriodClass = c;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -388,9 +378,7 @@ public class PeriodAxis extends ValueAxis
      *           expected).
      */
     public void setMajorTickTimePeriodClass(Class c) {
-        if (c == null) {
-            throw new IllegalArgumentException("Null 'c' argument.");
-        }
+        ParamChecks.nullNotPermitted(c, "c");
         this.majorTickTimePeriodClass = c;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -434,9 +422,7 @@ public class PeriodAxis extends ValueAxis
      *           expected).
      */
     public void setMinorTickTimePeriodClass(Class c) {
-        if (c == null) {
-            throw new IllegalArgumentException("Null 'c' argument.");
-        }
+        ParamChecks.nullNotPermitted(c, "c");
         this.minorTickTimePeriodClass = c;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -459,9 +445,7 @@ public class PeriodAxis extends ValueAxis
      * @param stroke  the stroke (<code>null</code> not permitted).
      */
     public void setMinorTickMarkStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.minorTickMarkStroke = stroke;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -484,9 +468,7 @@ public class PeriodAxis extends ValueAxis
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public void setMinorTickMarkPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.minorTickMarkPaint = paint;
         notifyListeners(new AxisChangeEvent(this));
     }
