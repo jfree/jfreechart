@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * RelativeDateFormat.java
  * -----------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Michael Siemer;
@@ -41,6 +41,7 @@
  *               modifications (DG);
  * 01-Sep-2008 : Added new fields for hour and minute formatting, based on
  *               patch 2033092 (DG);
+ * 02-Jul-2013 : Use ParamChecks, and fix NB warnings (DG);
  *
  */
 
@@ -287,9 +288,7 @@ public class RelativeDateFormat extends DateFormat {
      * @since 1.0.10
      */
     public void setPositivePrefix(String prefix) {
-        if (prefix == null) {
-            throw new IllegalArgumentException("Null 'prefix' argument.");
-        }
+        ParamChecks.nullNotPermitted(prefix, "prefix");
         this.positivePrefix = prefix;
     }
 
@@ -301,9 +300,7 @@ public class RelativeDateFormat extends DateFormat {
      * @since 1.0.11
      */
     public void setDayFormatter(NumberFormat formatter) {
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
+        ParamChecks.nullNotPermitted(formatter, "formatter");
         this.dayFormatter = formatter;
     }
 
@@ -326,9 +323,7 @@ public class RelativeDateFormat extends DateFormat {
      * @see #getDaySuffix()
      */
     public void setDaySuffix(String suffix) {
-        if (suffix == null) {
-            throw new IllegalArgumentException("Null 'suffix' argument.");
-        }
+        ParamChecks.nullNotPermitted(suffix, "suffix");
         this.daySuffix = suffix;
     }
 
@@ -340,9 +335,7 @@ public class RelativeDateFormat extends DateFormat {
      * @since 1.0.11
      */
     public void setHourFormatter(NumberFormat formatter) {
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
+        ParamChecks.nullNotPermitted(formatter, "formatter");
         this.hourFormatter = formatter;
     }
 
@@ -365,9 +358,7 @@ public class RelativeDateFormat extends DateFormat {
      * @see #getHourSuffix()
      */
     public void setHourSuffix(String suffix) {
-        if (suffix == null) {
-            throw new IllegalArgumentException("Null 'suffix' argument.");
-        }
+        ParamChecks.nullNotPermitted(suffix, "suffix");
         this.hourSuffix = suffix;
     }
 
@@ -379,9 +370,7 @@ public class RelativeDateFormat extends DateFormat {
      * @since 1.0.11
      */
     public void setMinuteFormatter(NumberFormat formatter) {
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
+        ParamChecks.nullNotPermitted(formatter, "formatter");
         this.minuteFormatter = formatter;
     }
 
@@ -404,9 +393,7 @@ public class RelativeDateFormat extends DateFormat {
      * @see #getMinuteSuffix()
      */
     public void setMinuteSuffix(String suffix) {
-        if (suffix == null) {
-            throw new IllegalArgumentException("Null 'suffix' argument.");
-        }
+        ParamChecks.nullNotPermitted(suffix, "suffix");
         this.minuteSuffix = suffix;
     }
 
@@ -429,9 +416,7 @@ public class RelativeDateFormat extends DateFormat {
      * @see #getSecondSuffix()
      */
     public void setSecondSuffix(String suffix) {
-        if (suffix == null) {
-            throw new IllegalArgumentException("Null 'suffix' argument.");
-        }
+        ParamChecks.nullNotPermitted(suffix, "suffix");
         this.secondSuffix = suffix;
     }
 
@@ -441,9 +426,7 @@ public class RelativeDateFormat extends DateFormat {
      * @param formatter  the formatter (<code>null</code> not permitted).
      */
     public void setSecondFormatter(NumberFormat formatter) {
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
+        ParamChecks.nullNotPermitted(formatter, "formatter");
         this.secondFormatter = formatter;
     }
 
@@ -480,16 +463,17 @@ public class RelativeDateFormat extends DateFormat {
 
         toAppendTo.append(signPrefix);
         if (days != 0 || this.showZeroDays) {
-            toAppendTo.append(this.dayFormatter.format(days) + getDaySuffix());
+            toAppendTo.append(this.dayFormatter.format(days))
+                    .append(getDaySuffix());
         }
         if (hours != 0 || this.showZeroHours) {
-            toAppendTo.append(this.hourFormatter.format(hours)
-                    + getHourSuffix());
+            toAppendTo.append(this.hourFormatter.format(hours))
+                    .append(getHourSuffix());
         }
-        toAppendTo.append(this.minuteFormatter.format(minutes)
-                + getMinuteSuffix());
-        toAppendTo.append(this.secondFormatter.format(seconds)
-                + getSecondSuffix());
+        toAppendTo.append(this.minuteFormatter.format(minutes))
+                .append(getMinuteSuffix());
+        toAppendTo.append(this.secondFormatter.format(seconds))
+                .append(getSecondSuffix());
         return toAppendTo;
     }
 
