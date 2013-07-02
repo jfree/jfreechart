@@ -1074,7 +1074,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
                 result = (DrawingSupplier) pc.clone();
             }
             catch (CloneNotSupportedException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
         return result;
