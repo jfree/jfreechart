@@ -648,7 +648,7 @@ public abstract class ChartUtilities {
             ChartRenderingInfo info, boolean useOverLibForToolTips)
             throws IOException {
 
-        ToolTipTagFragmentGenerator toolTipTagFragmentGenerator = null;
+        ToolTipTagFragmentGenerator toolTipTagFragmentGenerator;
         if (useOverLibForToolTips) {
             toolTipTagFragmentGenerator
                     = new OverLIBToolTipTagFragmentGenerator();
