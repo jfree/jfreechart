@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CyclicNumberAxis.java
  * ---------------------
- * (C) Copyright 2003-2009, by Nicolas Brodu and Contributors.
+ * (C) Copyright 2003-2013, by Nicolas Brodu and Contributors.
  *
  * Original Author:  Nicolas Brodu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -44,6 +44,7 @@
  *               parameters (DG);
  * 08-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -66,6 +67,7 @@ import java.util.List;
 
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextUtilities;
@@ -237,9 +239,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public void setAdvanceLinePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.advanceLinePaint = paint;
     }
 
@@ -259,9 +259,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * @param stroke  the stroke (<code>null</code> not permitted).
      */
     public void setAdvanceLineStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.advanceLineStroke = stroke;
     }
 
@@ -309,9 +307,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * @param edge  the side of the rectangle on which the axis is displayed.
      */
     protected void selectHorizontalAutoTickUnit(Graphics2D g2,
-                                                Rectangle2D drawArea,
-                                                Rectangle2D dataArea,
-                                                RectangleEdge edge) {
+            Rectangle2D drawArea, Rectangle2D dataArea, RectangleEdge edge) {
 
         double tickLabelWidth
             = estimateMaximumTickLabelWidth(g2, getTickUnit());
@@ -321,9 +317,8 @@ public class CyclicNumberAxis extends NumberAxis {
                    * tickLabelWidth / dataArea.getWidth();
 
         setTickUnit(
-            (NumberTickUnit) getStandardTickUnits().getCeilingTickUnit(n),
-            false, false
-        );
+                (NumberTickUnit) getStandardTickUnits().getCeilingTickUnit(n),
+                false, false);
 
      }
 
@@ -336,9 +331,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * @param edge  the side of the rectangle on which the axis is displayed.
      */
     protected void selectVerticalAutoTickUnit(Graphics2D g2,
-                                                Rectangle2D drawArea,
-                                                Rectangle2D dataArea,
-                                                RectangleEdge edge) {
+            Rectangle2D drawArea, Rectangle2D dataArea, RectangleEdge edge) {
 
         double tickLabelWidth
             = estimateMaximumTickLabelWidth(g2, getTickUnit());
@@ -349,9 +342,7 @@ public class CyclicNumberAxis extends NumberAxis {
 
         setTickUnit(
             (NumberTickUnit) getStandardTickUnits().getCeilingTickUnit(n),
-            false, false
-        );
-
+            false, false);
      }
 
     /**
@@ -421,9 +412,8 @@ public class CyclicNumberAxis extends NumberAxis {
      *
      * @return A list of ticks.
      */
-    protected List refreshTicksHorizontal(Graphics2D g2,
-                                          Rectangle2D dataArea,
-                                          RectangleEdge edge) {
+    protected List refreshTicksHorizontal(Graphics2D g2, Rectangle2D dataArea,
+            RectangleEdge edge) {
 
         List result = new java.util.ArrayList();
 
@@ -470,8 +460,8 @@ public class CyclicNumberAxis extends NumberAxis {
                 tickLabel = getTickUnit().valueToString(currentTickValue);
             }
             float x = (float) xx;
-            TextAnchor anchor = null;
-            TextAnchor rotationAnchor = null;
+            TextAnchor anchor;
+            TextAnchor rotationAnchor;
             double angle = 0.0;
             if (isVerticalTickLabels()) {
                 if (edge == RectangleEdge.TOP) {
@@ -574,9 +564,8 @@ public class CyclicNumberAxis extends NumberAxis {
      *
      * @return A list of ticks.
      */
-    protected List refreshVerticalTicks(Graphics2D g2,
-                                        Rectangle2D dataArea,
-                                        RectangleEdge edge) {
+    protected List refreshVerticalTicks(Graphics2D g2, Rectangle2D dataArea,
+            RectangleEdge edge) {
 
         List result = new java.util.ArrayList();
         result.clear();
@@ -624,8 +613,8 @@ public class CyclicNumberAxis extends NumberAxis {
             }
 
             float y = (float) yy;
-            TextAnchor anchor = null;
-            TextAnchor rotationAnchor = null;
+            TextAnchor anchor;
+            TextAnchor rotationAnchor;
             double angle = 0.0;
             if (isVerticalTickLabels()) {
 
@@ -709,8 +698,7 @@ public class CyclicNumberAxis extends NumberAxis {
 
             CycleBoundTick tick = new CycleBoundTick(
                 this.boundMappedToLastCycle, new Double(currentTickValue),
-                tickLabel, anchor, rotationAnchor, angle
-            );
+                tickLabel, anchor, rotationAnchor, angle);
             if (currentTickValue == cycleBound) {
                 this.internalMarkerCycleBoundTick = tick;
             }
