@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * HashUtilities.java
  * ------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited;
+ * (C) Copyright 2006-2013, by Object Refinery Limited;
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -72,7 +72,7 @@ public class HashUtilities {
         if (p == null) {
             return 0;
         }
-        int result = 0;
+        int result;
         // handle GradientPaint as a special case
         if (p instanceof GradientPaint) {
             GradientPaint gp = (GradientPaint) p;
