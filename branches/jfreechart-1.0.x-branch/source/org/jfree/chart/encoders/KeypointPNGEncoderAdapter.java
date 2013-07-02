@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * KeypointPNGEncoderAdapter.java
  * ------------------------------
- * (C) Copyright 2004-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 01-Aug-2004 : Initial version (RA);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -46,6 +47,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import com.keypoint.PngEncoder;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Adapter class for the Keypoint PNG Encoder.  The ImageEncoderFactory will
@@ -110,9 +112,7 @@ public class KeypointPNGEncoderAdapter implements ImageEncoder {
      * @throws IOException
      */
     public byte[] encode(BufferedImage bufferedImage) throws IOException {
-        if (bufferedImage == null) {
-            throw new IllegalArgumentException("Null 'image' argument.");
-        }
+        ParamChecks.nullNotPermitted(bufferedImage, "bufferedImage");
         PngEncoder encoder = new PngEncoder(bufferedImage, this.encodingAlpha,
                 0, this.quality);
         return encoder.pngEncode();
@@ -128,12 +128,8 @@ public class KeypointPNGEncoderAdapter implements ImageEncoder {
      */
     public void encode(BufferedImage bufferedImage, OutputStream outputStream)
         throws IOException {
-        if (bufferedImage == null) {
-            throw new IllegalArgumentException("Null 'image' argument.");
-        }
-        if (outputStream == null) {
-            throw new IllegalArgumentException("Null 'outputStream' argument.");
-        }
+        ParamChecks.nullNotPermitted(bufferedImage, "bufferedImage");
+        ParamChecks.nullNotPermitted(outputStream, "outputStream");
         PngEncoder encoder = new PngEncoder(bufferedImage, this.encodingAlpha,
                 0, this.quality);
         outputStream.write(encoder.pngEncode());
