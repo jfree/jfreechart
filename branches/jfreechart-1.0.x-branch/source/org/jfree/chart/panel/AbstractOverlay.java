@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * AbstractOverlay.java
  * --------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 09-Apr-2009 : Version 1 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -45,6 +46,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.event.OverlayChangeListener;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A base class for implementing overlays for a {@link ChartPanel}.
@@ -71,9 +73,7 @@ public class AbstractOverlay {
      * @see #removeChangeListener(OverlayChangeListener)
      */
     public void addChangeListener(OverlayChangeListener listener) {
-        if (listener == null) {
-            throw new IllegalArgumentException("Null 'listener' argument.");
-        }
+        ParamChecks.nullNotPermitted(listener, "listener");
         this.changeListeners.add(OverlayChangeListener.class, listener);
     }
 
@@ -85,9 +85,7 @@ public class AbstractOverlay {
      * @see #addChangeListener(OverlayChangeListener)
      */
     public void removeChangeListener(OverlayChangeListener listener) {
-        if (listener == null) {
-            throw new IllegalArgumentException("Null 'listener' argument.");
-        }
+        ParamChecks.nullNotPermitted(listener, "listener");
         this.changeListeners.remove(OverlayChangeListener.class, listener);
     }
 
