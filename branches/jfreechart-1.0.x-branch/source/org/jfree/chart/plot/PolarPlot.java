@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PolarPlot.java
  * --------------
- * (C) Copyright 2004-2011, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2013, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -55,7 +55,8 @@
  * 03-Oct-2011 : Added support for angleOffset and direction (MH);
  * 12-Nov-2011 : Fixed bug 3432721, log-axis doesn't work (MH);
  * 12-Dec-2011 : Added support for radiusMinorGridilnesVisible (MH);
- *
+ * 02-Jul-2013 : Use ParamChecks (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -99,6 +100,7 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.PolarItemRenderer;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.data.general.Dataset;
@@ -504,9 +506,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setAxisLocation(int index, PolarAxisLocation location,
             boolean notify) {
-        if (location == null) {
-            throw new IllegalArgumentException("Null 'location' argument.");
-        }
+        ParamChecks.nullNotPermitted(location, "location");
         this.axisLocations.set(index, location);
         if (notify) {
             fireChangeEvent();
@@ -733,9 +733,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.10
      */
     public void setAngleTickUnit(TickUnit unit) {
-        if (unit == null) {
-            throw new IllegalArgumentException("Null 'unit' argument.");
-        }
+        ParamChecks.nullNotPermitted(unit, "unit");
         this.angleTickUnit = unit;
         fireChangeEvent();
     }
@@ -836,9 +834,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #getAngleLabelFont()
      */
     public void setAngleLabelFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.angleLabelFont = font;
         fireChangeEvent();
     }
@@ -861,9 +857,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public void setAngleLabelPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.angleLabelPaint = paint;
         fireChangeEvent();
     }
@@ -1119,9 +1113,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #removeCornerTextItem(String)
      */
     public void addCornerTextItem(String text) {
-        if (text == null) {
-            throw new IllegalArgumentException("Null 'text' argument.");
-        }
+        ParamChecks.nullNotPermitted(text, "text");
         this.cornerTextItems.add(text);
         fireChangeEvent();
     }
@@ -1301,7 +1293,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.14
      */
     public ValueAxis getAxisForDataset(int index) {
-        ValueAxis valueAxis = null;
+        ValueAxis valueAxis;
         List axisIndices = (List) this.datasetToAxesMap.get(
                 new Integer(index));
         if (axisIndices != null) {
@@ -1670,9 +1662,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.14
      */
     private List getDatasetsMappedToAxis(Integer axisIndex) {
-        if (axisIndex == null) {
-            throw new IllegalArgumentException("Null 'axisIndex' argument.");
-        }
+        ParamChecks.nullNotPermitted(axisIndex, "axisIndex");
         List result = new ArrayList();
         for (int i = 0; i < this.datasets.size(); i++) {
             List mappedAxes = (List) this.datasetToAxesMap.get(new Integer(i));
