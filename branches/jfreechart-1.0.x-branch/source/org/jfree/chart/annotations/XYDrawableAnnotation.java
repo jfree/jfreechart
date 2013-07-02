@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * XYDrawableAnnotation.java
  * -------------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited.
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
  * 30-Sep-2004 : Added support for tool tips and URLs (DG);
  * 18-Jun-2008 : Added scaling factor (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -53,6 +54,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.ui.Drawable;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.util.ObjectUtilities;
@@ -118,9 +120,7 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
             double displayHeight, double drawScaleFactor, Drawable drawable) {
 
         super();
-        if (drawable == null) {
-            throw new IllegalArgumentException("Null 'drawable' argument.");
-        }
+        ParamChecks.nullNotPermitted(drawable, "drawable");
         this.x = x;
         this.y = y;
         this.displayWidth = displayWidth;
