@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * CategoryLabelPosition.java
  * --------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,12 +40,14 @@
  * 07-Jan-2005 : Fixed bug in equals() method (DG);
  * 11-Jan-2005 : Removed deprecated constructor in preparation for the 1.0.0
  *               release (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.text.TextBlockAnchor;
 import org.jfree.ui.RectangleAnchor;
@@ -115,9 +117,8 @@ public class CategoryLabelPosition implements Serializable {
      *                    category space or the range space).
      */
     public CategoryLabelPosition(RectangleAnchor categoryAnchor,
-                                 TextBlockAnchor labelAnchor,
-                                 CategoryLabelWidthType widthType,
-                                 float widthRatio) {
+            TextBlockAnchor labelAnchor, CategoryLabelWidthType widthType,
+            float widthRatio) {
         // argument checking delegated...
         this(categoryAnchor, labelAnchor, TextAnchor.CENTER, 0.0, widthType,
                 widthRatio);
@@ -140,27 +141,13 @@ public class CategoryLabelPosition implements Serializable {
      *                    category space or the range space).
      */
     public CategoryLabelPosition(RectangleAnchor categoryAnchor,
-                                 TextBlockAnchor labelAnchor,
-                                 TextAnchor rotationAnchor,
-                                 double angle,
-                                 CategoryLabelWidthType widthType,
-                                 float widthRatio) {
+            TextBlockAnchor labelAnchor, TextAnchor rotationAnchor, 
+            double angle, CategoryLabelWidthType widthType, float widthRatio) {
 
-        if (categoryAnchor == null) {
-            throw new IllegalArgumentException(
-                    "Null 'categoryAnchor' argument.");
-        }
-        if (labelAnchor == null) {
-            throw new IllegalArgumentException(
-                    "Null 'labelAnchor' argument.");
-        }
-        if (rotationAnchor == null) {
-            throw new IllegalArgumentException(
-                    "Null 'rotationAnchor' argument.");
-        }
-        if (widthType == null) {
-            throw new IllegalArgumentException("Null 'widthType' argument.");
-        }
+        ParamChecks.nullNotPermitted(categoryAnchor, "categoryAnchor");
+        ParamChecks.nullNotPermitted(labelAnchor, "labelAnchor");
+        ParamChecks.nullNotPermitted(rotationAnchor, "rotationAnchor");
+        ParamChecks.nullNotPermitted(widthType, "widthType");
 
         this.categoryAnchor = categoryAnchor;
         this.labelAnchor = labelAnchor;
