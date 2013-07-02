@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * AxisLocation.java
  * -----------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nick Guenther;
@@ -40,6 +40,7 @@
  * 24-Mar-2004 : Added static getOpposite() method (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 22-Mar-2007 : Added getOpposite() method, suggested by Nick Guenther (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -47,6 +48,7 @@ package org.jfree.chart.axis;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Used to indicate the location of an axis on a 2D plot, prior to knowing the
@@ -137,9 +139,7 @@ public final class AxisLocation implements Serializable {
      * @return The opposite location.
      */
     public static AxisLocation getOpposite(AxisLocation location) {
-        if (location == null) {
-            throw new IllegalArgumentException("Null 'location' argument.");
-        }
+        ParamChecks.nullNotPermitted(location, "location");
         AxisLocation result = null;
         if (location == AxisLocation.TOP_OR_LEFT) {
             result = AxisLocation.BOTTOM_OR_RIGHT;
