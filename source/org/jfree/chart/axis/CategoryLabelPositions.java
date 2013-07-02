@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * CategoryLabelPositions.java
  * ---------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,12 +37,14 @@
  * 06-Jan-2004 : Version 1 (DG);
  * 17-Feb-2004 : Added equals() method (DG);
  * 05-Nov-2004 : Adjusted settings for UP_90 and DOWN_90 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.text.TextBlockAnchor;
 import org.jfree.ui.RectangleAnchor;
@@ -62,19 +64,15 @@ public class CategoryLabelPositions implements Serializable {
     public static final CategoryLabelPositions
         STANDARD = new CategoryLabelPositions(
             new CategoryLabelPosition(
-                RectangleAnchor.BOTTOM, TextBlockAnchor.BOTTOM_CENTER
-            ), // TOP
+                RectangleAnchor.BOTTOM, TextBlockAnchor.BOTTOM_CENTER), // TOP
             new CategoryLabelPosition(
-                RectangleAnchor.TOP, TextBlockAnchor.TOP_CENTER
-            ), // BOTTOM
+                RectangleAnchor.TOP, TextBlockAnchor.TOP_CENTER), // BOTTOM
             new CategoryLabelPosition(
                 RectangleAnchor.RIGHT, TextBlockAnchor.CENTER_RIGHT,
-                CategoryLabelWidthType.RANGE, 0.30f
-            ), // LEFT
+                CategoryLabelWidthType.RANGE, 0.30f), // LEFT
             new CategoryLabelPosition(
                 RectangleAnchor.LEFT, TextBlockAnchor.CENTER_LEFT,
-                CategoryLabelWidthType.RANGE, 0.30f
-            ) // RIGHT
+                CategoryLabelWidthType.RANGE, 0.30f) // RIGHT
         );
 
     /** UP_90 category label positions. */
@@ -83,23 +81,19 @@ public class CategoryLabelPositions implements Serializable {
             new CategoryLabelPosition(
                 RectangleAnchor.BOTTOM, TextBlockAnchor.CENTER_LEFT,
                 TextAnchor.CENTER_LEFT, -Math.PI / 2.0,
-                CategoryLabelWidthType.RANGE, 0.30f
-            ), // TOP
+                CategoryLabelWidthType.RANGE, 0.30f), // TOP
             new CategoryLabelPosition(
                 RectangleAnchor.TOP, TextBlockAnchor.CENTER_RIGHT,
                 TextAnchor.CENTER_RIGHT, -Math.PI / 2.0,
-                CategoryLabelWidthType.RANGE, 0.30f
-            ), // BOTTOM
+                CategoryLabelWidthType.RANGE, 0.30f), // BOTTOM
             new CategoryLabelPosition(
                 RectangleAnchor.RIGHT, TextBlockAnchor.BOTTOM_CENTER,
                 TextAnchor.BOTTOM_CENTER, -Math.PI / 2.0,
-                CategoryLabelWidthType.CATEGORY, 0.9f
-            ), // LEFT
+                CategoryLabelWidthType.CATEGORY, 0.9f), // LEFT
             new CategoryLabelPosition(
                 RectangleAnchor.LEFT, TextBlockAnchor.TOP_CENTER,
                 TextAnchor.TOP_CENTER, -Math.PI / 2.0,
-                CategoryLabelWidthType.CATEGORY, 0.90f
-            ) // RIGHT
+                CategoryLabelWidthType.CATEGORY, 0.90f) // RIGHT
         );
 
     /** DOWN_90 category label positions. */
@@ -108,23 +102,19 @@ public class CategoryLabelPositions implements Serializable {
             new CategoryLabelPosition(
                 RectangleAnchor.BOTTOM, TextBlockAnchor.CENTER_RIGHT,
                 TextAnchor.CENTER_RIGHT, Math.PI / 2.0,
-                CategoryLabelWidthType.RANGE, 0.30f
-            ), // TOP
+                CategoryLabelWidthType.RANGE, 0.30f), // TOP
             new CategoryLabelPosition(
                 RectangleAnchor.TOP, TextBlockAnchor.CENTER_LEFT,
                 TextAnchor.CENTER_LEFT, Math.PI / 2.0,
-                CategoryLabelWidthType.RANGE, 0.30f
-            ), // BOTTOM
+                CategoryLabelWidthType.RANGE, 0.30f), // BOTTOM
             new CategoryLabelPosition(
                 RectangleAnchor.RIGHT, TextBlockAnchor.TOP_CENTER,
                 TextAnchor.TOP_CENTER, Math.PI / 2.0,
-                CategoryLabelWidthType.CATEGORY, 0.90f
-            ), // LEFT
+                CategoryLabelWidthType.CATEGORY, 0.90f), // LEFT
             new CategoryLabelPosition(
                 RectangleAnchor.LEFT, TextBlockAnchor.BOTTOM_CENTER,
                 TextAnchor.BOTTOM_CENTER, Math.PI / 2.0,
-                CategoryLabelWidthType.CATEGORY, 0.90f
-            ) // RIGHT
+                CategoryLabelWidthType.CATEGORY, 0.90f) // RIGHT
         );
 
     /** UP_45 category label positions. */
@@ -149,23 +139,19 @@ public class CategoryLabelPositions implements Serializable {
             new CategoryLabelPosition(
                 RectangleAnchor.BOTTOM, TextBlockAnchor.BOTTOM_LEFT,
                 TextAnchor.BOTTOM_LEFT, -angle,
-                CategoryLabelWidthType.RANGE, 0.50f
-            ), // TOP
+                CategoryLabelWidthType.RANGE, 0.50f), // TOP
             new CategoryLabelPosition(
                 RectangleAnchor.TOP, TextBlockAnchor.TOP_RIGHT,
                 TextAnchor.TOP_RIGHT, -angle,
-                CategoryLabelWidthType.RANGE, 0.50f
-            ), // BOTTOM
+                CategoryLabelWidthType.RANGE, 0.50f), // BOTTOM
             new CategoryLabelPosition(
                 RectangleAnchor.RIGHT, TextBlockAnchor.BOTTOM_RIGHT,
                 TextAnchor.BOTTOM_RIGHT, -angle,
-                CategoryLabelWidthType.RANGE, 0.50f
-            ), // LEFT
+                CategoryLabelWidthType.RANGE, 0.50f), // LEFT
             new CategoryLabelPosition(
                 RectangleAnchor.LEFT, TextBlockAnchor.TOP_LEFT,
                 TextAnchor.TOP_LEFT, -angle,
-                CategoryLabelWidthType.RANGE, 0.50f
-            ) // RIGHT
+                CategoryLabelWidthType.RANGE, 0.50f) // RIGHT
         );
     }
 
@@ -183,23 +169,19 @@ public class CategoryLabelPositions implements Serializable {
             new CategoryLabelPosition(
                 RectangleAnchor.BOTTOM, TextBlockAnchor.BOTTOM_RIGHT,
                 TextAnchor.BOTTOM_RIGHT, angle,
-                CategoryLabelWidthType.RANGE, 0.50f
-            ), // TOP
+                CategoryLabelWidthType.RANGE, 0.50f), // TOP
             new CategoryLabelPosition(
                 RectangleAnchor.TOP, TextBlockAnchor.TOP_LEFT,
                 TextAnchor.TOP_LEFT, angle,
-                CategoryLabelWidthType.RANGE, 0.50f
-            ), // BOTTOM
+                CategoryLabelWidthType.RANGE, 0.50f), // BOTTOM
             new CategoryLabelPosition(
                 RectangleAnchor.RIGHT, TextBlockAnchor.TOP_RIGHT,
                 TextAnchor.TOP_RIGHT, angle,
-                CategoryLabelWidthType.RANGE, 0.50f
-            ), // LEFT
+                CategoryLabelWidthType.RANGE, 0.50f), // LEFT
             new CategoryLabelPosition(
                 RectangleAnchor.LEFT, TextBlockAnchor.BOTTOM_LEFT,
                 TextAnchor.BOTTOM_LEFT, angle,
-                CategoryLabelWidthType.RANGE, 0.50f
-            ) // RIGHT
+                CategoryLabelWidthType.RANGE, 0.50f) // RIGHT
         );
     }
 
@@ -250,28 +232,18 @@ public class CategoryLabelPositions implements Serializable {
      *               (<code>null</code> not permitted).
      */
     public CategoryLabelPositions(CategoryLabelPosition top,
-                                  CategoryLabelPosition bottom,
-                                  CategoryLabelPosition left,
-                                  CategoryLabelPosition right) {
+            CategoryLabelPosition bottom, CategoryLabelPosition left,
+            CategoryLabelPosition right) {
 
-        if (top == null) {
-            throw new IllegalArgumentException("Null 'top' argument.");
-        }
-        if (bottom == null) {
-            throw new IllegalArgumentException("Null 'bottom' argument.");
-        }
-        if (left == null) {
-            throw new IllegalArgumentException("Null 'left' argument.");
-        }
-        if (right == null) {
-            throw new IllegalArgumentException("Null 'right' argument.");
-        }
+        ParamChecks.nullNotPermitted(top, "top");
+        ParamChecks.nullNotPermitted(bottom, "bottom");
+        ParamChecks.nullNotPermitted(left, "left");
+        ParamChecks.nullNotPermitted(right, "right");
 
         this.positionForAxisAtTop = top;
         this.positionForAxisAtBottom = bottom;
         this.positionForAxisAtLeft = left;
         this.positionForAxisAtRight = right;
-
     }
 
     /**
@@ -311,19 +283,13 @@ public class CategoryLabelPositions implements Serializable {
     public static CategoryLabelPositions replaceTopPosition(
             CategoryLabelPositions base, CategoryLabelPosition top) {
 
-        if (base == null) {
-            throw new IllegalArgumentException("Null 'base' argument.");
-        }
-        if (top == null) {
-            throw new IllegalArgumentException("Null 'top' argument.");
-        }
+        ParamChecks.nullNotPermitted(base, "base");
+        ParamChecks.nullNotPermitted(top, "top");
 
-        return new CategoryLabelPositions(
-            top,
+        return new CategoryLabelPositions(top,
             base.getLabelPosition(RectangleEdge.BOTTOM),
             base.getLabelPosition(RectangleEdge.LEFT),
-            base.getLabelPosition(RectangleEdge.RIGHT)
-        );
+            base.getLabelPosition(RectangleEdge.RIGHT));
     }
 
     /**
@@ -338,19 +304,14 @@ public class CategoryLabelPositions implements Serializable {
     public static CategoryLabelPositions replaceBottomPosition(
             CategoryLabelPositions base, CategoryLabelPosition bottom) {
 
-        if (base == null) {
-            throw new IllegalArgumentException("Null 'base' argument.");
-        }
-        if (bottom == null) {
-            throw new IllegalArgumentException("Null 'bottom' argument.");
-        }
+        ParamChecks.nullNotPermitted(base, "base");
+        ParamChecks.nullNotPermitted(bottom, "bottom");
 
         return new CategoryLabelPositions(
             base.getLabelPosition(RectangleEdge.TOP),
             bottom,
             base.getLabelPosition(RectangleEdge.LEFT),
-            base.getLabelPosition(RectangleEdge.RIGHT)
-        );
+            base.getLabelPosition(RectangleEdge.RIGHT));
     }
 
     /**
@@ -365,19 +326,14 @@ public class CategoryLabelPositions implements Serializable {
     public static CategoryLabelPositions replaceLeftPosition(
             CategoryLabelPositions base, CategoryLabelPosition left) {
 
-        if (base == null) {
-            throw new IllegalArgumentException("Null 'base' argument.");
-        }
-        if (left == null) {
-            throw new IllegalArgumentException("Null 'left' argument.");
-        }
+        ParamChecks.nullNotPermitted(base, "base");
+        ParamChecks.nullNotPermitted(left, "left");
 
         return new CategoryLabelPositions(
             base.getLabelPosition(RectangleEdge.TOP),
             base.getLabelPosition(RectangleEdge.BOTTOM),
             left,
-            base.getLabelPosition(RectangleEdge.RIGHT)
-        );
+            base.getLabelPosition(RectangleEdge.RIGHT));
     }
 
     /**
@@ -392,19 +348,13 @@ public class CategoryLabelPositions implements Serializable {
     public static CategoryLabelPositions replaceRightPosition(
             CategoryLabelPositions base, CategoryLabelPosition right) {
 
-        if (base == null) {
-            throw new IllegalArgumentException("Null 'base' argument.");
-        }
-        if (right == null) {
-            throw new IllegalArgumentException("Null 'right' argument.");
-        }
-
+        ParamChecks.nullNotPermitted(base, "base");
+        ParamChecks.nullNotPermitted(right, "right");
         return new CategoryLabelPositions(
             base.getLabelPosition(RectangleEdge.TOP),
             base.getLabelPosition(RectangleEdge.BOTTOM),
             base.getLabelPosition(RectangleEdge.LEFT),
-            right
-        );
+            right);
     }
 
     /**
