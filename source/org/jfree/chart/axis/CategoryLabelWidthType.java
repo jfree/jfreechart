@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * CategoryLabelWidthType.java
  * ---------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 24-Mar-2004 : Version 1 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -42,6 +43,7 @@ package org.jfree.chart.axis;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Represents the width types for a category label.
@@ -52,14 +54,12 @@ public final class CategoryLabelWidthType implements Serializable {
     private static final long serialVersionUID = -6976024792582949656L;
 
     /** Percentage of category. */
-    public static final CategoryLabelWidthType
-        CATEGORY = new CategoryLabelWidthType(
-            "CategoryLabelWidthType.CATEGORY"
-        );
+    public static final CategoryLabelWidthType CATEGORY 
+            = new CategoryLabelWidthType("CategoryLabelWidthType.CATEGORY");
 
     /** Percentage of range. */
-    public static final CategoryLabelWidthType
-        RANGE = new CategoryLabelWidthType("CategoryLabelWidthType.RANGE");
+    public static final CategoryLabelWidthType RANGE 
+            = new CategoryLabelWidthType("CategoryLabelWidthType.RANGE");
 
     /** The name. */
     private String name;
@@ -70,9 +70,7 @@ public final class CategoryLabelWidthType implements Serializable {
      * @param name  the name (<code>null</code> not permitted).
      */
     private CategoryLabelWidthType(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Null 'name' argument.");
-        }
+        ParamChecks.nullNotPermitted(name, "name");
         this.name = name;
     }
 
