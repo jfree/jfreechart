@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * NumberTickUnit.java
  * -------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,6 +43,7 @@
  * 05-Jul-2005 : Added equals() implementation (DG);
  * 05-Sep-2005 : Implemented hashCode(), thanks to Thomas Morgner (DG);
  * 02-Aug-2007 : Added new constructor with minorTickCount (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -50,6 +51,7 @@ package org.jfree.chart.axis;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A numerical tick unit.
@@ -80,9 +82,7 @@ public class NumberTickUnit extends TickUnit implements Serializable {
      */
     public NumberTickUnit(double size, NumberFormat formatter) {
         super(size);
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
+        ParamChecks.nullNotPermitted(formatter, "formatter");
         this.formatter = formatter;
     }
 
@@ -99,9 +99,7 @@ public class NumberTickUnit extends TickUnit implements Serializable {
     public NumberTickUnit(double size, NumberFormat formatter,
             int minorTickCount) {
         super(size, minorTickCount);
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
+        ParamChecks.nullNotPermitted(formatter, "formatter");
         this.formatter = formatter;
     }
 
