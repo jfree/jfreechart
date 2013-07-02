@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * RectangleConstraint.java
  * ------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,6 +44,7 @@
 
 package org.jfree.chart.block;
 
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.ui.Size2D;
 
@@ -137,12 +138,8 @@ public class RectangleConstraint {
                                LengthConstraintType widthConstraintType,
                                double h, Range heightRange,
                                LengthConstraintType heightConstraintType) {
-        if (widthConstraintType == null) {
-            throw new IllegalArgumentException("Null 'widthType' argument.");
-        }
-        if (heightConstraintType == null) {
-            throw new IllegalArgumentException("Null 'heightType' argument.");
-        }
+        ParamChecks.nullNotPermitted(widthConstraintType, "widthConstraintType");
+        ParamChecks.nullNotPermitted(heightConstraintType, "heightConstraintType");
         this.width = w;
         this.widthRange = widthRange;
         this.widthConstraintType = widthConstraintType;
@@ -276,9 +273,7 @@ public class RectangleConstraint {
      * @return A new constraint.
      */
     public RectangleConstraint toRangeWidth(Range range) {
-        if (range == null) {
-            throw new IllegalArgumentException("Null 'range' argument.");
-        }
+        ParamChecks.nullNotPermitted(range, "range");
         return new RectangleConstraint(range.getUpperBound(), range,
                 LengthConstraintType.RANGE, this.height, this.heightRange,
                 this.heightConstraintType);
@@ -293,9 +288,7 @@ public class RectangleConstraint {
      * @return A new constraint.
      */
     public RectangleConstraint toRangeHeight(Range range) {
-        if (range == null) {
-            throw new IllegalArgumentException("Null 'range' argument.");
-        }
+        ParamChecks.nullNotPermitted(range, "range");
         return new RectangleConstraint(this.width, this.widthRange,
                 this.widthConstraintType, range.getUpperBound(), range,
                 LengthConstraintType.RANGE);
