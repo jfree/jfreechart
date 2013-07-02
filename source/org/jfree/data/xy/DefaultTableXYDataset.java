@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * DefaultTableXYDataset.java
  * --------------------------
- * (C) Copyright 2003-2009, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   Jody Brownell;
@@ -57,6 +57,7 @@
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 22-Apr-2008 : Implemented PublicCloneable (DG);
  * 10-Jun-2009 : Simplified getX() and getY() (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -66,6 +67,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
@@ -141,9 +143,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * @param series  the series (<code>null</code> not permitted).
      */
     public void addSeries(XYSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         if (series.getAllowDuplicateXValues()) {
             throw new IllegalArgumentException(
                 "Cannot accept XYSeries that allow duplicate values. "
@@ -163,9 +163,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * @param series  the series (<code>null</code> not permitted).
      */
     private void updateXPoints(XYSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' not permitted.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         HashSet seriesXPoints = new HashSet();
         boolean savedState = this.propagateEvents;
         this.propagateEvents = false;
@@ -370,22 +368,15 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * @param series  the series (<code>null</code> not permitted).
      */
     public void removeSeries(XYSeries series) {
-
-        // check arguments...
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
-
-        // remove the series...
+        ParamChecks.nullNotPermitted(series, "series");
         if (this.data.contains(series)) {
             series.removeChangeListener(this);
             this.data.remove(series);
-            if (this.data.size() == 0) {
+            if (this.data.isEmpty()) {
                 this.xPoints.clear();
             }
             fireDatasetChanged();
         }
-
     }
 
     /**
@@ -405,7 +396,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
         XYSeries s = (XYSeries) this.data.get(series);
         s.removeChangeListener(this);
         this.data.remove(series);
-        if (this.data.size() == 0) {
+        if (this.data.isEmpty()) {
             this.xPoints.clear();
         }
         else if (this.autoPrune) {
@@ -421,9 +412,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * @param x  the x-value.
      */
     public void removeAllValuesForX(Number x) {
-        if (x == null) {
-            throw new IllegalArgumentException("Null 'x' argument.");
-        }
+        ParamChecks.nullNotPermitted(x, "x");
         boolean savedState = this.propagateEvents;
         this.propagateEvents = false;
         for (int s = 0; s < this.data.size(); s++) {
