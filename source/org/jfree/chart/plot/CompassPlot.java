@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * CompassPlot.java
  * ----------------
- * (C) Copyright 2002-2008, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2013, by the Australian Antarctic Division and
  * Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -61,6 +61,7 @@
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
  * 10-Oct-2011 : localization fix: bug #3353913 (MH);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -96,6 +97,7 @@ import org.jfree.chart.needle.PlumNeedle;
 import org.jfree.chart.needle.PointerNeedle;
 import org.jfree.chart.needle.ShipNeedle;
 import org.jfree.chart.needle.WindNeedle;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.general.DefaultValueDataset;
 import org.jfree.data.general.ValueDataset;
@@ -254,9 +256,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelFont(Font font) {
         // FIXME: this attribute is not used - deprecate?
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' not allowed.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.labelFont = font;
         fireChangeEvent();
     }
@@ -281,9 +281,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @see #getRosePaint()
      */
     public void setRosePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.rosePaint = paint;
         fireChangeEvent();
     }
@@ -309,9 +307,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @see #getRoseCenterPaint()
      */
     public void setRoseCenterPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.roseCenterPaint = paint;
         fireChangeEvent();
     }
@@ -337,9 +333,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @see #getRoseHighlightPaint()
      */
     public void setRoseHighlightPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.roseHighlightPaint = paint;
         fireChangeEvent();
     }
@@ -574,8 +568,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
                      PlotState parentState,
                      PlotRenderingInfo info) {
 
-        int outerRadius = 0;
-        int innerRadius = 0;
+        int outerRadius, innerRadius;
         int x1, y1, x2, y2;
         double a;
 
@@ -679,8 +672,8 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
             (midX - x1), (midY - y1), (2 * x1), (2 * y1)
         );
         int x = this.seriesNeedle.length;
-        int current = 0;
-        double value = 0;
+        int current;
+        double value;
         int i = (this.datasets.length - 1);
         for (; i >= 0; --i) {
             ValueDataset data = this.datasets[i];
