@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Tick.java
  * ---------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -40,18 +40,20 @@
  * 26-Mar-2003 : Implemented Serializable (DG);
  * 12-Sep-2003 : Implemented Cloneable (NB);
  * 07-Nov-2003 : Added subclasses for particular types of ticks (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.ObjectUtilities;
 
 /**
- * The base class used to represent labelled ticks along an axis.
+ * The base class used to represent labeled ticks along an axis.
  */
 public abstract class Tick implements Serializable, Cloneable {
 
@@ -81,14 +83,8 @@ public abstract class Tick implements Serializable, Cloneable {
      */
     public Tick(String text, TextAnchor textAnchor, TextAnchor rotationAnchor,
                 double angle) {
-        if (textAnchor == null) {
-            throw new IllegalArgumentException("Null 'textAnchor' argument.");
-        }
-        if (rotationAnchor == null) {
-            throw new IllegalArgumentException(
-                "Null 'rotationAnchor' argument."
-            );
-        }
+        ParamChecks.nullNotPermitted(textAnchor, "textAnchor");
+        ParamChecks.nullNotPermitted(rotationAnchor, "rotationAnchor");
         this.text = text;
         this.textAnchor = textAnchor;
         this.rotationAnchor = rotationAnchor;
