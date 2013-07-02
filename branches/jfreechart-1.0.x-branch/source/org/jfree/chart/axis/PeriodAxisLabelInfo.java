@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * PeriodAxisLabelInfo.java
  * ------------------------
- * (C) Copyright 2004-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  * 20-May-2005 : Added default constants and null argument checks in the
  *               constructor (DG);
  * 02-Mar-2009 : Updated createInstance to use locale (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -59,6 +60,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.io.SerialUtilities;
@@ -149,32 +151,15 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      *                      (<code>null</code> not permitted).
      */
     public PeriodAxisLabelInfo(Class periodClass, DateFormat dateFormat,
-                               RectangleInsets padding,
-                               Font labelFont, Paint labelPaint,
-                               boolean drawDividers, Stroke dividerStroke,
-                               Paint dividerPaint) {
-        if (periodClass == null) {
-            throw new IllegalArgumentException("Null 'periodClass' argument.");
-        }
-        if (dateFormat == null) {
-            throw new IllegalArgumentException("Null 'dateFormat' argument.");
-        }
-        if (padding == null) {
-            throw new IllegalArgumentException("Null 'padding' argument.");
-        }
-        if (labelFont == null) {
-            throw new IllegalArgumentException("Null 'labelFont' argument.");
-        }
-        if (labelPaint == null) {
-            throw new IllegalArgumentException("Null 'labelPaint' argument.");
-        }
-        if (dividerStroke == null) {
-            throw new IllegalArgumentException(
-                    "Null 'dividerStroke' argument.");
-        }
-        if (dividerPaint == null) {
-            throw new IllegalArgumentException("Null 'dividerPaint' argument.");
-        }
+            RectangleInsets padding, Font labelFont, Paint labelPaint,
+            boolean drawDividers, Stroke dividerStroke, Paint dividerPaint) {
+        ParamChecks.nullNotPermitted(periodClass, "periodClass");
+        ParamChecks.nullNotPermitted(dateFormat, "dateFormat");
+        ParamChecks.nullNotPermitted(padding, "padding");
+        ParamChecks.nullNotPermitted(labelFont, "labelFont");
+        ParamChecks.nullNotPermitted(labelPaint, "labelPaint");
+        ParamChecks.nullNotPermitted(dividerStroke, "dividerStroke");
+        ParamChecks.nullNotPermitted(dividerPaint, "dividerPaint");
         this.periodClass = periodClass;
         this.dateFormat = dateFormat;
         this.padding = padding;
