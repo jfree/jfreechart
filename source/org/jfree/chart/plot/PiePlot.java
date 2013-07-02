@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * PiePlot.java
  * ------------
- * (C) Copyright 2000-2012, by Andrzej Porebski and Contributors.
+ * (C) Copyright 2000-2013, by Andrzej Porebski and Contributors.
  *
  * Original Author:  Andrzej Porebski;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -168,6 +168,7 @@
  * 18-Oct-2011 : Fixed tooltip offset with shadow generator (DG);
  * 20-Nov-2011 : Initialise shadow generator as null (DG);
  * 01-Jul-2012 : General label once only in drawSimpleLabels() (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -181,7 +182,6 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Arc2D;
@@ -215,6 +215,7 @@ import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.urls.PieURLGenerator;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.DefaultKeyedValues;
@@ -727,9 +728,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getDirection()
      */
     public void setDirection(Rotation direction) {
-        if (direction == null) {
-            throw new IllegalArgumentException("Null 'direction' argument.");
-        }
+        ParamChecks.nullNotPermitted(direction, "direction");
         this.direction = direction;
         fireChangeEvent();
 
@@ -1078,9 +1077,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getBaseSectionPaint()
      */
     public void setBaseSectionPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.baseSectionPaint = paint;
         fireChangeEvent();
     }
@@ -1293,9 +1290,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getBaseSectionOutlinePaint()
      */
     public void setBaseSectionOutlinePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.baseSectionOutlinePaint = paint;
         fireChangeEvent();
     }
@@ -1482,9 +1477,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getBaseSectionOutlineStroke()
      */
     public void setBaseSectionOutlineStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.baseSectionOutlineStroke = stroke;
         fireChangeEvent();
     }
@@ -1627,9 +1620,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getExplodePercent(Comparable)
      */
     public void setExplodePercent(Comparable key, double percent) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         if (this.explodePercentages == null) {
             this.explodePercentages = new TreeMap();
         }
@@ -1784,9 +1775,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public void setLabelLinkStyle(PieLabelLinkStyle style) {
-        if (style == null) {
-            throw new IllegalArgumentException("Null 'style' argument.");
-        }
+        ParamChecks.nullNotPermitted(style, "style");
         this.labelLinkStyle = style;
         fireChangeEvent();
     }
@@ -1838,9 +1827,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelLinkPaint()
      */
     public void setLabelLinkPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.labelLinkPaint = paint;
         fireChangeEvent();
     }
@@ -1865,9 +1852,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelLinkStroke()
      */
     public void setLabelLinkStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.labelLinkStroke = stroke;
         fireChangeEvent();
     }
@@ -1907,9 +1892,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelFont()
      */
     public void setLabelFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.labelFont = font;
         fireChangeEvent();
     }
@@ -1934,9 +1917,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelPaint()
      */
     public void setLabelPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.labelPaint = paint;
         fireChangeEvent();
     }
@@ -2061,9 +2042,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelPadding()
      */
     public void setLabelPadding(RectangleInsets padding) {
-        if (padding == null) {
-            throw new IllegalArgumentException("Null 'padding' argument.");
-        }
+        ParamChecks.nullNotPermitted(padding, "padding");
         this.labelPadding = padding;
         fireChangeEvent();
     }
@@ -2118,9 +2097,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getSimpleLabelOffset()
      */
     public void setSimpleLabelOffset(RectangleInsets offset) {
-        if (offset == null) {
-            throw new IllegalArgumentException("Null 'offset' argument.");
-        }
+        ParamChecks.nullNotPermitted(offset, "offset");
         this.simpleLabelOffset = offset;
         fireChangeEvent();
     }
@@ -2146,9 +2123,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.6
      */
     public void setLabelDistributor(AbstractPieLabelDistributor distributor) {
-        if (distributor == null) {
-            throw new IllegalArgumentException("Null 'distributor' argument.");
-        }
+        ParamChecks.nullNotPermitted(distributor, "distributor");
         this.labelDistributor = distributor;
         fireChangeEvent();
     }
@@ -2258,9 +2233,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLegendItemShape()
      */
     public void setLegendItemShape(Shape shape) {
-        if (shape == null) {
-            throw new IllegalArgumentException("Null 'shape' argument.");
-        }
+        ParamChecks.nullNotPermitted(shape, "shape");
         this.legendItemShape = shape;
         fireChangeEvent();
     }
@@ -2285,9 +2258,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLegendLabelGenerator()
      */
     public void setLegendLabelGenerator(PieSectionLabelGenerator generator) {
-        if (generator == null) {
-            throw new IllegalArgumentException("Null 'generator' argument.");
-        }
+        ParamChecks.nullNotPermitted(generator, "generator");
         this.legendLabelGenerator = generator;
         fireChangeEvent();
     }
