@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ContourPlot.java
  * ----------------
- * (C) Copyright 2002-2009, by David M. O'Donnell and Contributors.
+ * (C) Copyright 2002-2013, by David M. O'Donnell and Contributors.
  *
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -65,6 +65,7 @@
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
+ * 02-Jul-2013 : Fix NB warnings (DG);
  *
  */
 
@@ -972,8 +973,6 @@ public class ContourPlot extends Plot implements ContourValuePlot,
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, antiAlias);
 
-        return;
-
     }
 
     /**
@@ -1099,8 +1098,6 @@ public class ContourPlot extends Plot implements ContourValuePlot,
 
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, antiAlias);
-
-        return;
 
     }
 
