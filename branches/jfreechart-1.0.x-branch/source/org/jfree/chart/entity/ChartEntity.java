@@ -84,6 +84,7 @@ import java.io.Serializable;
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
@@ -136,9 +137,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      *                 permitted).
      */
     public ChartEntity(Shape area, String toolTipText, String urlText) {
-        if (area == null) {
-            throw new IllegalArgumentException("Null 'area' argument.");
-        }
+        ParamChecks.nullNotPermitted(area, "area");
         this.area = area;
         this.toolTipText = toolTipText;
         this.urlText = urlText;
@@ -163,9 +162,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * @param area  the area (<code>null</code> not permitted).
      */
     public void setArea(Shape area) {
-        if (area == null) {
-            throw new IllegalArgumentException("Null 'area' argument.");
-        }
+        ParamChecks.nullNotPermitted(area, "area");
         this.area = area;
     }
 
@@ -248,9 +245,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * @return Upper left and lower right corner of a rectangle.
      */
     private String getRectCoords(Rectangle2D rectangle) {
-        if (rectangle == null) {
-            throw new IllegalArgumentException("Null 'rectangle' argument.");
-        }
+        ParamChecks.nullNotPermitted(rectangle, "rectangle");
         int x1 = (int) rectangle.getX();
         int y1 = (int) rectangle.getY();
         int x2 = x1 + (int) rectangle.getWidth();
@@ -275,9 +270,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * @return The coordinates for a given shape as string.
      */
     private String getPolyCoords(Shape shape) {
-        if (shape == null) {
-            throw new IllegalArgumentException("Null 'shape' argument.");
-        }
+        ParamChecks.nullNotPermitted(shape, "shape");
         StringBuffer result = new StringBuffer();
         boolean first = true;
         float[] coords = new float[6];
