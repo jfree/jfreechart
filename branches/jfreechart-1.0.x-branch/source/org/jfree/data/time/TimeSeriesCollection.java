@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * TimeSeriesCollection.java
  * -------------------------
- * (C) Copyright 2001-2012, by Object Refinery Limited.
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -82,6 +82,7 @@
  * 09-Jun-2009 : Apply some short-cuts to series value lookups (DG);
  * 26-Jun-2009 : Fixed clone() (DG);
  * 08-Jan-2012 : Fixed getRangeBounds() method (bug 3445507) (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -94,6 +95,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
@@ -252,9 +254,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param anchor  the anchor position (<code>null</code> not permitted).
      */
     public void setXPosition(TimePeriodAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.xPosition = anchor;
         notifyListeners(new DatasetChangeEvent(this, this));
     }
@@ -288,9 +288,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @since 1.0.6
      */
     public int indexOf(TimeSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         return this.data.indexOf(series);
     }
 
@@ -350,9 +348,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series (<code>null</code> not permitted).
      */
     public void addSeries(TimeSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
         fireDatasetChanged();
@@ -365,9 +361,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series (<code>null</code> not permitted).
      */
     public void removeSeries(TimeSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         this.data.remove(series);
         series.removeChangeListener(this);
         fireDatasetChanged();
