@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * NumberAxis.java
  * ---------------
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Laurence Vanhelsuwe;
@@ -95,6 +95,7 @@
  * 21-Jan-2009 : Default minor tick counts will now come from the tick unit
  *               collection (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -116,6 +117,7 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.RangeType;
 import org.jfree.ui.RectangleEdge;
@@ -223,9 +225,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #getRangeType()
      */
     public void setRangeType(RangeType rangeType) {
-        if (rangeType == null) {
-            throw new IllegalArgumentException("Null 'rangeType' argument.");
-        }
+        ParamChecks.nullNotPermitted(rangeType, "rangeType");
         this.rangeType = rangeType;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -341,9 +341,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
     public void setTickUnit(NumberTickUnit unit, boolean notify,
                             boolean turnOffAutoSelect) {
 
-        if (unit == null) {
-            throw new IllegalArgumentException("Null 'unit' argument.");
-        }
+        ParamChecks.nullNotPermitted(unit, "unit");
         this.tickUnit = unit;
         if (turnOffAutoSelect) {
             setAutoTickUnitSelection(false, false);
@@ -596,11 +594,9 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #calculateHighestVisibleTickValue()
      */
     protected double calculateLowestVisibleTickValue() {
-
         double unit = getTickUnit().getSize();
         double index = Math.ceil(getRange().getLowerBound() / unit);
         return index * unit;
-
     }
 
     /**
@@ -611,11 +607,9 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #calculateLowestVisibleTickValue()
      */
     protected double calculateHighestVisibleTickValue() {
-
         double unit = getTickUnit().getSize();
         double index = Math.floor(getRange().getUpperBound() / unit);
         return index * unit;
-
     }
 
     /**
@@ -624,12 +618,10 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @return The number of visible ticks on the axis.
      */
     protected int calculateVisibleTickCount() {
-
         double unit = getTickUnit().getSize();
         Range range = getRange();
         return (int) (Math.floor(range.getUpperBound() / unit)
                       - Math.ceil(range.getLowerBound() / unit) + 1);
-
     }
 
     /**
@@ -965,7 +957,6 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @return The maximum height.
      */
     protected double estimateMaximumTickLabelHeight(Graphics2D g2) {
-
         RectangleInsets tickLabelInsets = getTickLabelInsets();
         double result = tickLabelInsets.getTop() + tickLabelInsets.getBottom();
 
@@ -973,7 +964,6 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         FontRenderContext frc = g2.getFontRenderContext();
         result += tickLabelFont.getLineMetrics("123", frc).getHeight();
         return result;
-
     }
 
     /**
@@ -1008,8 +998,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
             Range range = getRange();
             double lower = range.getLowerBound();
             double upper = range.getUpperBound();
-            String lowerStr = "";
-            String upperStr = "";
+            String lowerStr, upperStr;
             NumberFormat formatter = getNumberFormatOverride();
             if (formatter != null) {
                 lowerStr = formatter.format(lower);
@@ -1037,9 +1026,8 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @param dataArea  the area defined by the axes.
      * @param edge  the axis location.
      */
-    protected void selectAutoTickUnit(Graphics2D g2,
-                                      Rectangle2D dataArea,
-                                      RectangleEdge edge) {
+    protected void selectAutoTickUnit(Graphics2D g2, Rectangle2D dataArea,
+            RectangleEdge edge) {
 
         if (RectangleEdge.isTopOrBottom(edge)) {
             selectHorizontalAutoTickUnit(g2, dataArea, edge);
@@ -1060,8 +1048,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @param edge  the axis location.
      */
    protected void selectHorizontalAutoTickUnit(Graphics2D g2,
-                                               Rectangle2D dataArea,
-                                               RectangleEdge edge) {
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         double tickLabelWidth = estimateMaximumTickLabelWidth(g2,
                 getTickUnit());
@@ -1096,9 +1083,8 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @param dataArea  the area in which the plot should be drawn.
      * @param edge  the axis location.
      */
-    protected void selectVerticalAutoTickUnit(Graphics2D g2,
-                                              Rectangle2D dataArea,
-                                              RectangleEdge edge) {
+    protected void selectVerticalAutoTickUnit(Graphics2D g2, 
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         double tickLabelHeight = estimateMaximumTickLabelHeight(g2);
 
@@ -1135,10 +1121,8 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A list of ticks.
      *
      */
-    public List refreshTicks(Graphics2D g2,
-                             AxisState state,
-                             Rectangle2D dataArea,
-                             RectangleEdge edge) {
+    public List refreshTicks(Graphics2D g2, AxisState state, 
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         List result = new java.util.ArrayList();
         if (RectangleEdge.isTopOrBottom(edge)) {
@@ -1300,8 +1284,8 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                     tickLabel = getTickUnit().valueToString(currentTickValue);
                 }
 
-                TextAnchor anchor = null;
-                TextAnchor rotationAnchor = null;
+                TextAnchor anchor;
+                TextAnchor rotationAnchor;
                 double angle = 0.0;
                 if (isVerticalTickLabels()) {
                     if (edge == RectangleEdge.LEFT) {
