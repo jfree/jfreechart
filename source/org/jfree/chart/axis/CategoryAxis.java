@@ -1146,6 +1146,12 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
     /**
      * Draws the tick marks.
+     * 
+     * @param g2  the graphics target.
+     * @param cursor  the    cursor position (an offset when drawing multiple axes)
+     * @param dataArea  the area for plotting the data.
+     * @param edge  the location of the axis.
+     * @param state  the axis state.
      *
      * @since 1.0.13
      */
