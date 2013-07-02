@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * CategoryItemEntity.java
  * -----------------------
- * (C) Copyright 2002-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -47,6 +47,7 @@
  * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 18-May-2007 : Updated to use row and column keys to identify item (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -54,6 +55,7 @@ package org.jfree.chart.entity;
 
 import java.awt.Shape;
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.util.ObjectUtilities;
@@ -127,9 +129,7 @@ public class CategoryItemEntity extends ChartEntity
                               int series, Object category, int categoryIndex) {
 
         super(area, toolTipText, urlText);
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
+        ParamChecks.nullNotPermitted(dataset, "dataset");
         this.dataset = dataset;
         this.series = series;
         this.category = category;
@@ -153,9 +153,7 @@ public class CategoryItemEntity extends ChartEntity
     public CategoryItemEntity(Shape area, String toolTipText, String urlText,
             CategoryDataset dataset, Comparable rowKey, Comparable columnKey) {
         super(area, toolTipText, urlText);
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
+        ParamChecks.nullNotPermitted(dataset, "dataset");
         this.dataset = dataset;
         this.rowKey = rowKey;
         this.columnKey = columnKey;
@@ -187,9 +185,7 @@ public class CategoryItemEntity extends ChartEntity
      * @see #getDataset()
      */
     public void setDataset(CategoryDataset dataset) {
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
+        ParamChecks.nullNotPermitted(dataset, "dataset");
         this.dataset = dataset;
     }
 
