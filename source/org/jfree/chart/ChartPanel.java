@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -167,6 +167,7 @@
  * 10-Oct-2011 : localization fix: bug #3353913 (MH);
  * 05-Jul-2012 : Remove reflection for MouseWheelListener - only needed for 
  *               JRE 1.3.1 (DG);
+ * 02-Jul-2013 : Use ParamChecks class (DG);
  * 
  */
 
@@ -239,6 +240,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.ExtensionFileFilter;
@@ -1266,9 +1268,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     public void setZoomFillPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.zoomFillPaint = paint;
     }
 
@@ -1342,9 +1342,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     public void addOverlay(Overlay overlay) {
-        if (overlay == null) {
-            throw new IllegalArgumentException("Null 'overlay' argument.");
-        }
+        ParamChecks.nullNotPermitted(overlay, "overlay");
         this.overlays.add(overlay);
         overlay.addChangeListener(this);
         repaint();
@@ -1358,9 +1356,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     public void removeOverlay(Overlay overlay) {
-        if (overlay == null) {
-            throw new IllegalArgumentException("Null 'overlay' argument.");
-        }
+        ParamChecks.nullNotPermitted(overlay, "overlay");
         boolean removed = this.overlays.remove(overlay);
         if (removed) {
             overlay.removeChangeListener(this);
@@ -1912,8 +1908,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             drawZoomRectangle(g2, true);
         }
 
-        boolean hZoom = false;
-        boolean vZoom = false;
+        boolean hZoom, vZoom;
         if (this.orientation == PlotOrientation.HORIZONTAL) {
             hZoom = this.rangeZoomable;
             vZoom = this.domainZoomable;
@@ -2751,9 +2746,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param listener  the listener (<code>null</code> not permitted).
      */
     public void addChartMouseListener(ChartMouseListener listener) {
-        if (listener == null) {
-            throw new IllegalArgumentException("Null 'listener' argument.");
-        }
+        ParamChecks.nullNotPermitted(listener, "listener");
         this.chartMouseListeners.add(ChartMouseListener.class, listener);
     }
 
