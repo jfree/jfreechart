@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sylvain Vieujot;
@@ -128,7 +128,8 @@
  * 24-Jun-2009 : Implemented AnnotationChangeListener (see patch 2809117 by
  *               PK) (DG);
  * 13-Jul-2009 : Plot background image should be clipped if necessary (DG);
- *
+ * 02-Jul-2013 : Use ParamChecks (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -170,6 +171,7 @@ import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.general.DatasetGroup;
@@ -395,9 +397,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessageFont()
      */
     public void setNoDataMessageFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.noDataMessageFont = font;
         fireChangeEvent();
     }
@@ -423,9 +423,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessagePaint()
      */
     public void setNoDataMessagePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.noDataMessagePaint = paint;
         fireChangeEvent();
     }
@@ -533,9 +531,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #setInsets(RectangleInsets)
      */
     public void setInsets(RectangleInsets insets, boolean notify) {
-        if (insets == null) {
-            throw new IllegalArgumentException("Null 'insets' argument.");
-        }
+        ParamChecks.nullNotPermitted(insets, "insets");
         if (!this.insets.equals(insets)) {
             this.insets = insets;
             if (notify) {
@@ -1050,9 +1046,7 @@ public abstract class Plot implements AxisChangeListener,
      */
     protected void fillBackground(Graphics2D g2, Rectangle2D area,
             PlotOrientation orientation) {
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         if (this.backgroundPaint == null) {
             return;
         }
@@ -1436,15 +1430,10 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveDomainAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        if (location == null) {
-            throw new IllegalArgumentException("Null 'location' argument.");
-        }
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(location, "location");
+        ParamChecks.nullNotPermitted(orientation, "orientation");
 
         RectangleEdge result = null;
-
         if (location == AxisLocation.TOP_OR_RIGHT) {
             if (orientation == PlotOrientation.HORIZONTAL) {
                 result = RectangleEdge.RIGHT;
@@ -1496,15 +1485,10 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveRangeAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        if (location == null) {
-            throw new IllegalArgumentException("Null 'location' argument.");
-        }
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(location, "location");
+        ParamChecks.nullNotPermitted(orientation, "orientation");
 
         RectangleEdge result = null;
-
         if (location == AxisLocation.TOP_OR_RIGHT) {
             if (orientation == PlotOrientation.HORIZONTAL) {
                 result = RectangleEdge.TOP;
