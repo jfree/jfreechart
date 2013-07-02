@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * OHLCSeriesCollection.java
  * -------------------------
- * (C) Copyright 2006-2009, by Object Refinery Limited.
+ * (C) Copyright 2006-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 10-Jul-2008 : Added accessor methods for xPosition attribute (DG);
  * 23-May-2009 : Added hashCode() implementation (DG);
  * 26-Jun-2009 : Added removeSeries() methods (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -47,6 +48,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimePeriodAnchor;
@@ -99,9 +101,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * @since 1.0.11
      */
     public void setXPosition(TimePeriodAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.xPosition = anchor;
         notifyListeners(new DatasetChangeEvent(this, this));
     }
@@ -113,9 +113,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * @param series  the series (<code>null</code> not permitted).
      */
     public void addSeries(OHLCSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
         fireDatasetChanged();
@@ -397,9 +395,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * @since 1.0.14
      */
     public boolean removeSeries(OHLCSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         boolean removed = this.data.remove(series);
         if (removed) {
             series.removeChangeListener(this);
@@ -416,7 +412,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     public void removeAllSeries() {
 
-        if (this.data.size() == 0) {
+        if (this.data.isEmpty()) {
             return;  // nothing to do
         }
 
