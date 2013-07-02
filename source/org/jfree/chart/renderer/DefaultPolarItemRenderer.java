@@ -719,6 +719,9 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Returns the tooltip generator for the specified series and item.
      * 
+     * @param series  the series index.
+     * @param item  the item index.
+     * 
      * @return The tooltip generator (possibly <code>null</code>).
      * 
      * @since 1.0.14
