@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * MinMaxCategoryRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  Tomer Peretz;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -54,6 +54,7 @@
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 09-Mar-2007 : Fixed problem with horizontal rendering (DG);
  * 28-Sep-2007 : Added equals() method override (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -84,6 +85,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.util.PaintUtilities;
@@ -171,7 +173,6 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
             this.plotLines = draw;
             fireChangeEvent();
         }
-
     }
 
     /**
@@ -196,9 +197,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getGroupPaint()
      */
     public void setGroupPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.groupPaint = paint;
         fireChangeEvent();
     }
@@ -223,9 +222,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @param stroke the new stroke (<code>null</code> not permitted).
      */
     public void setGroupStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.groupStroke = stroke;
         fireChangeEvent();
     }
@@ -250,9 +247,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getObjectIcon()
      */
     public void setObjectIcon(Icon icon) {
-        if (icon == null) {
-            throw new IllegalArgumentException("Null 'icon' argument.");
-        }
+        ParamChecks.nullNotPermitted(icon, "icon");
         this.objectIcon = icon;
         fireChangeEvent();
     }
@@ -279,9 +274,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getMaxIcon()
      */
     public void setMaxIcon(Icon icon) {
-        if (icon == null) {
-            throw new IllegalArgumentException("Null 'icon' argument.");
-        }
+        ParamChecks.nullNotPermitted(icon, "icon");
         this.maxIcon = icon;
         fireChangeEvent();
     }
@@ -308,9 +301,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getMinIcon()
      */
     public void setMinIcon(Icon icon) {
-        if (icon == null) {
-            throw new IllegalArgumentException("Null 'icon' argument.");
-        }
+        ParamChecks.nullNotPermitted(icon, "icon");
         this.minIcon = icon;
         fireChangeEvent();
     }
@@ -342,10 +333,10 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
                     dataArea, plot.getDomainAxisEdge());
             double y1 = rangeAxis.valueToJava2D(value.doubleValue(), dataArea,
                     plot.getRangeAxisEdge());
+            Shape hotspot = new Rectangle2D.Double(x1 - 4, y1 - 4, 8.0, 8.0);
+
             g2.setPaint(getItemPaint(row, column));
             g2.setStroke(getItemStroke(row, column));
-            Shape shape = null;
-            shape = new Rectangle2D.Double(x1 - 4, y1 - 4, 8.0, 8.0);
 
             PlotOrientation orient = plot.getOrientation();
             if (orient == PlotOrientation.VERTICAL) {
@@ -418,8 +409,8 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
 
             // add an item entity, if this information is being collected
             EntityCollection entities = state.getEntityCollection();
-            if (entities != null && shape != null) {
-                addItemEntity(entities, dataset, row, column, shape);
+            if (entities != null) {
+                addItemEntity(entities, dataset, row, column, hotspot);
             }
         }
     }
