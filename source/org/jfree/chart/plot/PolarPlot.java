@@ -1171,11 +1171,12 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /**
      * Calculate the text position for the given degrees.
      *
+     * @param angleDegrees  the angle in degrees.
+     * 
      * @return The optimal text anchor.
      * @since 1.0.14
      */
-    protected TextAnchor calculateTextAnchor(double angleDegrees)
-    {
+    protected TextAnchor calculateTextAnchor(double angleDegrees) {
         TextAnchor ta = TextAnchor.CENTER;
 
         // normalize angle
@@ -2098,6 +2099,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      *
      * @param angleDegrees  the angle in degrees.
      * @param radius  the radius.
+     * @param axis  the axis.
      * @param dataArea  the data area.
      *
      * @return A point in Java2D space.
