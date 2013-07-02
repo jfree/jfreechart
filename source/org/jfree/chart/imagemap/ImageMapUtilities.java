@@ -175,8 +175,8 @@ public class ImageMapUtilities {
             URLTagFragmentGenerator urlTagFragmentGenerator) {
 
         StringBuffer sb = new StringBuffer();
-        sb.append("<map id=\"" + htmlEscape(name) + "\" name=\""
-                + htmlEscape(name) + "\">");
+        sb.append("<map id=\"").append(htmlEscape(name));
+        sb.append("\" name=\"").append(htmlEscape(name)).append("\">");
         sb.append(StringUtils.getLineSeparator());
         EntityCollection entities = info.getEntityCollection();
         if (entities != null) {
