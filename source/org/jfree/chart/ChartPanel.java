@@ -1970,8 +1970,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         }
 
         else if (this.zoomRectangle != null) {
-            boolean hZoom = false;
-            boolean vZoom = false;
+            boolean hZoom, vZoom;
             if (this.orientation == PlotOrientation.HORIZONTAL) {
                 hZoom = this.rangeZoomable;
                 vZoom = this.domainZoomable;
@@ -2824,7 +2823,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (copy) {
             if (separator) {
                 result.addSeparator();
-                separator = false;
             }
             JMenuItem copyItem = new JMenuItem(
                     localizationResources.getString("Copy"));
@@ -2837,7 +2835,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (save) {
             if (separator) {
                 result.addSeparator();
-                separator = false;
             }
             JMenuItem saveItem = new JMenuItem(
                     localizationResources.getString("Save_as..."));
@@ -2850,7 +2847,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (print) {
             if (separator) {
                 result.addSeparator();
-                separator = false;
             }
             JMenuItem printItem = new JMenuItem(
                     localizationResources.getString("Print..."));
@@ -2863,7 +2859,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (zoom) {
             if (separator) {
                 result.addSeparator();
-                separator = false;
             }
 
             JMenu zoomInMenu = new JMenu(
