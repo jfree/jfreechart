@@ -148,9 +148,7 @@ public class CategoryTextAnnotation extends TextAnnotation
      * @see #getCategoryAnchor()
      */
     public void setCategoryAnchor(CategoryAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.categoryAnchor = anchor;
         fireAnnotationChanged();
     }
