@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * Statistics.java
  * ---------------
- * (C) Copyright 2000-2008, by Matthew Wright and Contributors.
+ * (C) Copyright 2000-2013, by Matthew Wright and Contributors.
  *
  * Original Author:  Matthew Wright;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -43,6 +43,7 @@
  * 02-Jun-2004 : Fixed bug in calculateMedian() method (DG);
  * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
  *               release (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -53,6 +54,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A utility class that provides some common statistical functions.
@@ -87,9 +89,7 @@ public abstract class Statistics {
     public static double calculateMean(Number[] values,
             boolean includeNullAndNaN) {
 
-        if (values == null) {
-            throw new IllegalArgumentException("Null 'values' argument.");
-        }
+        ParamChecks.nullNotPermitted(values, "values");
         double sum = 0.0;
         double current;
         int counter = 0;
@@ -138,9 +138,7 @@ public abstract class Statistics {
     public static double calculateMean(Collection values,
             boolean includeNullAndNaN) {
 
-        if (values == null) {
-            throw new IllegalArgumentException("Null 'values' argument.");
-        }
+        ParamChecks.nullNotPermitted(values, "values");
         int count = 0;
         double total = 0.0;
         Iterator iterator = values.iterator();
@@ -307,9 +305,7 @@ public abstract class Statistics {
      * @return The standard deviation of a set of numbers.
      */
     public static double getStdDev(Number[] data) {
-        if (data == null) {
-            throw new IllegalArgumentException("Null 'data' array.");
-        }
+        ParamChecks.nullNotPermitted(data, "data");
         if (data.length == 0) {
             throw new IllegalArgumentException("Zero length 'data' array.");
         }
@@ -334,12 +330,8 @@ public abstract class Statistics {
      */
     public static double[] getLinearFit(Number[] xData, Number[] yData) {
 
-        if (xData == null) {
-            throw new IllegalArgumentException("Null 'xData' argument.");
-        }
-        if (yData == null) {
-            throw new IllegalArgumentException("Null 'yData' argument.");
-        }
+        ParamChecks.nullNotPermitted(xData, "xData");
+        ParamChecks.nullNotPermitted(yData, "yData");
         if (xData.length != yData.length) {
             throw new IllegalArgumentException(
                 "Statistics.getLinearFit(): array lengths must be equal.");
@@ -364,13 +356,8 @@ public abstract class Statistics {
      * @return The slope.
      */
     public static double getSlope(Number[] xData, Number[] yData) {
-
-        if (xData == null) {
-            throw new IllegalArgumentException("Null 'xData' argument.");
-        }
-        if (yData == null) {
-            throw new IllegalArgumentException("Null 'yData' argument.");
-        }
+        ParamChecks.nullNotPermitted(xData, "xData");
+        ParamChecks.nullNotPermitted(yData, "yData");
         if (xData.length != yData.length) {
             throw new IllegalArgumentException("Array lengths must be equal.");
         }
@@ -411,12 +398,8 @@ public abstract class Statistics {
      * @return The correlation.
      */
     public static double getCorrelation(Number[] data1, Number[] data2) {
-        if (data1 == null) {
-            throw new IllegalArgumentException("Null 'data1' argument.");
-        }
-        if (data2 == null) {
-            throw new IllegalArgumentException("Null 'data2' argument.");
-        }
+        ParamChecks.nullNotPermitted(data1, "data1");
+        ParamChecks.nullNotPermitted(data2, "data2");
         if (data1.length != data2.length) {
             throw new IllegalArgumentException(
                 "'data1' and 'data2' arrays must have same length."
@@ -457,9 +440,8 @@ public abstract class Statistics {
      * @return A double[][] the length of the data set in the first dimension,
      *         with two doubles for x and y in the second dimension
      */
-    public static double[][] getMovingAverage(Number[] xData,
-                                              Number[] yData,
-                                              int period) {
+    public static double[][] getMovingAverage(Number[] xData, Number[] yData,
+            int period) {
 
         // check arguments...
         if (xData.length != yData.length) {
@@ -468,8 +450,7 @@ public abstract class Statistics {
 
         if (period > xData.length) {
             throw new IllegalArgumentException(
-                "Period can't be longer than dataset."
-            );
+                "Period can't be longer than dataset.");
         }
 
         double[][] result = new double[xData.length - period][2];
