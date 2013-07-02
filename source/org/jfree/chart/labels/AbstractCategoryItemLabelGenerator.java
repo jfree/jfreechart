@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------------
  * AbstractCategoryItemLabelGenerator.java
  * ---------------------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 03-May-2006 : Added new constructor (DG);
  * 23-Nov-2007 : Implemented hashCode() (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -51,6 +52,7 @@ import java.text.MessageFormat;
 import java.text.NumberFormat;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.DataUtilities;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.util.ObjectUtilities;
@@ -120,16 +122,9 @@ public abstract class AbstractCategoryItemLabelGenerator
      */
     protected AbstractCategoryItemLabelGenerator(String labelFormat,
             NumberFormat formatter, NumberFormat percentFormatter) {
-        if (labelFormat == null) {
-            throw new IllegalArgumentException("Null 'labelFormat' argument.");
-        }
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
-        if (percentFormatter == null) {
-            throw new IllegalArgumentException(
-                    "Null 'percentFormatter' argument.");
-        }
+        ParamChecks.nullNotPermitted(labelFormat, "labelFormat");
+        ParamChecks.nullNotPermitted(formatter, "formatter");
+        ParamChecks.nullNotPermitted(percentFormatter, "percentFormatter");
         this.labelFormat = labelFormat;
         this.numberFormat = formatter;
         this.percentFormat = percentFormatter;
@@ -145,13 +140,9 @@ public abstract class AbstractCategoryItemLabelGenerator
      * @param formatter  the date formatter (<code>null</code> not permitted).
      */
     protected AbstractCategoryItemLabelGenerator(String labelFormat,
-                                                 DateFormat formatter) {
-        if (labelFormat == null) {
-            throw new IllegalArgumentException("Null 'labelFormat' argument.");
-        }
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
+            DateFormat formatter) {
+        ParamChecks.nullNotPermitted(labelFormat, "labelFormat");
+        ParamChecks.nullNotPermitted(formatter, "formatter");
         this.labelFormat = labelFormat;
         this.numberFormat = null;
         this.percentFormat = NumberFormat.getPercentInstance();
@@ -221,10 +212,8 @@ public abstract class AbstractCategoryItemLabelGenerator
      */
     protected String generateLabelString(CategoryDataset dataset,
                                          int row, int column) {
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
-        String result = null;
+        ParamChecks.nullNotPermitted(dataset, "dataset");
+        String result;
         Object[] items = createItemArray(dataset, row, column);
         result = MessageFormat.format(this.labelFormat, items);
         return result;
