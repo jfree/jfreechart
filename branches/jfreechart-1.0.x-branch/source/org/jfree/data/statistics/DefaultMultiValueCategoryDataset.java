@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------------
  * DefaultMultiValueCategoryDataset.java
  * -------------------------------------
- * (C) Copyright 2007, 2008, by David Forslund and Contributors.
+ * (C) Copyright 2007-2013, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -36,6 +36,8 @@
  * -------
  * 08-Oct-2007 : Version 1, see patch 1780779 (DG);
  * 06-Nov-2007 : Return EMPTY_LIST not null from getValues() (DG);
+ * 02-JUL-2013 : Use ParamChecks (DG);
+ * 
  */
 
 package org.jfree.data.statistics;
@@ -44,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;
@@ -101,15 +104,9 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      */
     public void add(List values, Comparable rowKey, Comparable columnKey) {
 
-        if (values == null) {
-            throw new IllegalArgumentException("Null 'values' argument.");
-        }
-        if (rowKey == null) {
-            throw new IllegalArgumentException("Null 'rowKey' argument.");
-        }
-        if (columnKey == null) {
-            throw new IllegalArgumentException("Null 'columnKey' argument.");
-        }
+        ParamChecks.nullNotPermitted(values, "values");
+        ParamChecks.nullNotPermitted(rowKey, "rowKey");
+        ParamChecks.nullNotPermitted(columnKey, "columnKey");
         List vlist = new ArrayList(values.size());
         Iterator iterator = values.listIterator();
         while (iterator.hasNext()) {
