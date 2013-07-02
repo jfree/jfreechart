@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * AbstractCategoryItemRenderer.java
  * ---------------------------------
- * (C) Copyright 2002-2010, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -103,6 +103,7 @@
  *               series (DG);
  * 01-Apr-2009 : Added new addEntity() method (DG);
  * 09-Feb-2010 : Fixed bug 2947660 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -321,7 +322,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #getSeriesItemLabelGenerator(int)
      */
     public void setSeriesItemLabelGenerator(int series,
-                                        CategoryItemLabelGenerator generator) {
+            CategoryItemLabelGenerator generator) {
         this.itemLabelGeneratorList.set(series, generator);
         fireChangeEvent();
     }
@@ -367,7 +368,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     public CategoryToolTipGenerator getToolTipGenerator(int row, int column) {
 
-        CategoryToolTipGenerator result = null;
+        CategoryToolTipGenerator result;
         if (this.toolTipGenerator != null) {
             result = this.toolTipGenerator;
         }
@@ -404,7 +405,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #getSeriesToolTipGenerator(int)
      */
     public void setSeriesToolTipGenerator(int series,
-                                          CategoryToolTipGenerator generator) {
+            CategoryToolTipGenerator generator) {
         this.toolTipGeneratorList.set(series, generator);
         fireChangeEvent();
     }
@@ -485,7 +486,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #getSeriesItemURLGenerator(int)
      */
     public void setSeriesItemURLGenerator(int series,
-                                          CategoryURLGenerator generator) {
+            CategoryURLGenerator generator) {
         this.itemURLGeneratorList.set(series, generator);
         fireChangeEvent();
     }
@@ -566,10 +567,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @return The renderer state.
      */
     public CategoryItemRendererState initialise(Graphics2D g2,
-                                                Rectangle2D dataArea,
-                                                CategoryPlot plot,
-                                                int rendererIndex,
-                                                PlotRenderingInfo info) {
+            Rectangle2D dataArea, CategoryPlot plot, int rendererIndex,
+            PlotRenderingInfo info) {
 
         setPlot(plot);
         CategoryDataset data = plot.getDataset(rendererIndex);
@@ -673,12 +672,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param plot  the plot.
      * @param dataArea  the data area.
      */
-    public void drawBackground(Graphics2D g2,
-                               CategoryPlot plot,
-                               Rectangle2D dataArea) {
-
+    public void drawBackground(Graphics2D g2, CategoryPlot plot,
+            Rectangle2D dataArea) {
         plot.drawBackground(g2, dataArea);
-
     }
 
     /**
@@ -690,12 +686,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param plot  the plot.
      * @param dataArea  the data area.
      */
-    public void drawOutline(Graphics2D g2,
-                            CategoryPlot plot,
-                            Rectangle2D dataArea) {
-
+    public void drawOutline(Graphics2D g2, CategoryPlot plot,
+            Rectangle2D dataArea) {
         plot.drawOutline(g2, dataArea);
-
     }
 
     /**
@@ -714,10 +707,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #drawRangeGridline(Graphics2D, CategoryPlot, ValueAxis,
      *     Rectangle2D, double)
      */
-    public void drawDomainGridline(Graphics2D g2,
-                                   CategoryPlot plot,
-                                   Rectangle2D dataArea,
-                                   double value) {
+    public void drawDomainGridline(Graphics2D g2, CategoryPlot plot,
+           Rectangle2D dataArea, double value) {
 
         Line2D line = null;
         PlotOrientation orientation = plot.getOrientation();
@@ -744,7 +735,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         g2.setStroke(stroke);
 
         g2.draw(line);
-
     }
 
     /**
@@ -759,11 +749,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #drawDomainGridline(Graphics2D, CategoryPlot, Rectangle2D, double)
      */
-    public void drawRangeGridline(Graphics2D g2,
-                                  CategoryPlot plot,
-                                  ValueAxis axis,
-                                  Rectangle2D dataArea,
-                                  double value) {
+    public void drawRangeGridline(Graphics2D g2, CategoryPlot plot,
+            ValueAxis axis, Rectangle2D dataArea, double value) {
 
         Range range = axis.getRange();
         if (!range.contains(value)) {
@@ -854,11 +841,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #drawRangeMarker(Graphics2D, CategoryPlot, ValueAxis, Marker,
      *     Rectangle2D)
      */
-    public void drawDomainMarker(Graphics2D g2,
-                                 CategoryPlot plot,
-                                 CategoryAxis axis,
-                                 CategoryMarker marker,
-                                 Rectangle2D dataArea) {
+    public void drawDomainMarker(Graphics2D g2, CategoryPlot plot,
+            CategoryAxis axis, CategoryMarker marker, Rectangle2D dataArea) {
 
         Comparable category = marker.getKey();
         CategoryDataset dataset = plot.getDataset(plot.getIndexOf(this));
@@ -872,7 +856,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
                 AlphaComposite.SRC_OVER, marker.getAlpha()));
 
         PlotOrientation orientation = plot.getOrientation();
-        Rectangle2D bounds = null;
+        Rectangle2D bounds;
         if (marker.getDrawAsLine()) {
             double v = axis.getCategoryMiddle(columnIndex,
                     dataset.getColumnCount(), dataArea,
@@ -940,11 +924,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #drawDomainMarker(Graphics2D, CategoryPlot, CategoryAxis,
      *     CategoryMarker, Rectangle2D)
      */
-    public void drawRangeMarker(Graphics2D g2,
-                                CategoryPlot plot,
-                                ValueAxis axis,
-                                Marker marker,
-                                Rectangle2D dataArea) {
+    public void drawRangeMarker(Graphics2D g2, CategoryPlot plot,
+            ValueAxis axis, Marker marker, Rectangle2D dataArea) {
 
         if (marker instanceof ValueMarker) {
             ValueMarker vm = (ValueMarker) marker;
@@ -1111,12 +1092,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @return The coordinates for drawing the marker label.
      */
     protected Point2D calculateDomainMarkerTextAnchorPoint(Graphics2D g2,
-                                      PlotOrientation orientation,
-                                      Rectangle2D dataArea,
-                                      Rectangle2D markerArea,
-                                      RectangleInsets markerOffset,
-                                      LengthAdjustmentType labelOffsetType,
-                                      RectangleAnchor anchor) {
+            PlotOrientation orientation, Rectangle2D dataArea,
+            Rectangle2D markerArea, RectangleInsets markerOffset,
+            LengthAdjustmentType labelOffsetType, RectangleAnchor anchor) {
 
         Rectangle2D anchorRect = null;
         if (orientation == PlotOrientation.HORIZONTAL) {
@@ -1145,12 +1123,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @return The coordinates for drawing the marker label.
      */
     protected Point2D calculateRangeMarkerTextAnchorPoint(Graphics2D g2,
-                                      PlotOrientation orientation,
-                                      Rectangle2D dataArea,
-                                      Rectangle2D markerArea,
-                                      RectangleInsets markerOffset,
-                                      LengthAdjustmentType labelOffsetType,
-                                      RectangleAnchor anchor) {
+            PlotOrientation orientation, Rectangle2D dataArea,
+            Rectangle2D markerArea, RectangleInsets markerOffset,
+            LengthAdjustmentType labelOffsetType, RectangleAnchor anchor) {
 
         Rectangle2D anchorRect = null;
         if (orientation == PlotOrientation.HORIZONTAL) {
@@ -1337,9 +1312,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             int datasetIndex,
             double transX, double transY, PlotOrientation orientation) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
 
         if (crosshairState != null) {
             if (this.plot.isRangeCrosshairLockedOnData()) {
@@ -1673,8 +1646,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param hotspot  the hotspot (<code>null</code> not permitted).
      */
     protected void addItemEntity(EntityCollection entities,
-                                 CategoryDataset dataset, int row, int column,
-                                 Shape hotspot) {
+            CategoryDataset dataset, int row, int column, Shape hotspot) {
         ParamChecks.nullNotPermitted(hotspot, "hotspot");
         if (!getItemCreateEntity(row, column)) {
             return;
@@ -1831,6 +1803,5 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         this.itemURLGenerator = generator;
         fireChangeEvent();
     }
-
 
 }
