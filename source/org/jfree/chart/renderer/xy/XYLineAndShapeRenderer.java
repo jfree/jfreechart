@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * XYLineAndShapeRenderer.java
  * ---------------------------
- * (C) Copyright 2004-2009, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -66,6 +66,7 @@
  * 19-Sep-2008 : Fixed bug with drawSeriesLineAsPath - patch by Greg Darke (DG);
  * 18-May-2009 : Clip lines in drawPrimaryLine() (DG);
  * 05-Jul-2012 : Removed JDK 1.3.1 code (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -92,6 +93,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.LineUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
@@ -419,9 +421,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @see #getLegendLine()
      */
     public void setLegendLine(Shape line) {
-        if (line == null) {
-            throw new IllegalArgumentException("Null 'line' argument.");
-        }
+        ParamChecks.nullNotPermitted(line, "line");
         this.legendLine = line;
         fireChangeEvent();
     }
@@ -883,18 +883,10 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset,
-                         int series,
-                         int item,
-                         CrosshairState crosshairState,
-                         int pass) {
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+        Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+        ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+        int series, int item, CrosshairState crosshairState, int pass) {
 
         // do nothing if item is not visible
         if (!getItemVisible(series, item)) {
@@ -1126,14 +1118,10 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @param crosshairState  the crosshair state.
      * @param entities the entity collection.
      */
-    protected void drawSecondaryPass(Graphics2D g2, XYPlot plot,
-                                     XYDataset dataset,
-                                     int pass, int series, int item,
-                                     ValueAxis domainAxis,
-                                     Rectangle2D dataArea,
-                                     ValueAxis rangeAxis,
-                                     CrosshairState crosshairState,
-                                     EntityCollection entities) {
+    protected void drawSecondaryPass(Graphics2D g2, XYPlot plot, 
+            XYDataset dataset, int pass, int series, int item,
+            ValueAxis domainAxis, Rectangle2D dataArea, ValueAxis rangeAxis,
+            CrosshairState crosshairState, EntityCollection entities) {
 
         Shape entityArea = null;
 
