@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * PaintMap.java
  * -------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 27-Sep-2006 : Version 1 (DG);
  * 17-Jan-2007 : Changed TreeMap to HashMap, so that different classes that
  *               implement Comparable can be used as keys (DG);
+ * 02-Jul-2013 : Use ParamChecks class (DG);
  *
  */
 
@@ -51,6 +52,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.io.SerialUtilities;
 import org.jfree.util.PaintUtilities;
@@ -92,9 +94,7 @@ public class PaintMap implements Cloneable, Serializable {
      *     <code>null</code>.
      */
     public Paint getPaint(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         return (Paint) this.store.get(key);
     }
 
@@ -122,9 +122,7 @@ public class PaintMap implements Cloneable, Serializable {
      *     <code>null</code>.
      */
     public void put(Comparable key, Paint paint) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         this.store.put(key, paint);
     }
 
