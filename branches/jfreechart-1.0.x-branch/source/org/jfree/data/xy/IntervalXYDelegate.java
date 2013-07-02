@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * IntervalXYDelegate.java
  * -----------------------
- * (C) Copyright 2004-2009, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2013, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -47,6 +47,7 @@
  *               autoIntervalWidth (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 06-Mar-2009 : Implemented hashCode() (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -55,6 +56,7 @@ package org.jfree.data.xy;
 import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
@@ -129,9 +131,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      *                   calculated automatically.
      */
     public IntervalXYDelegate(XYDataset dataset, boolean autoWidth) {
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
+        ParamChecks.nullNotPermitted(dataset, "dataset");
         this.dataset = dataset;
         this.autoWidth = autoWidth;
         this.intervalPositionFactor = 0.5;
