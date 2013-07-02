@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * TimeSeries.java
  * ---------------
- * (C) Copyright 2001-2011, by Object Refinery Limited.
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bryan Scott;
@@ -84,6 +84,7 @@
  * 31-Aug-2009 : Clear minY and maxY cache values in createCopy (DG);
  * 03-Dec-2011 : Fixed bug 3446965 which affects the y-range calculation for 
  *               the series (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -98,6 +99,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -509,9 +511,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @return The index.
      */
     public int getIndex(RegularTimePeriod period) {
-        if (period == null) {
-            throw new IllegalArgumentException("Null 'period' argument.");
-        }
+        ParamChecks.nullNotPermitted(period, "period");
         TimeSeriesDataItem dummy = new TimeSeriesDataItem(
               period, Integer.MIN_VALUE);
         return Collections.binarySearch(this.data, dummy);
@@ -564,9 +564,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @param notify  notify listeners?
      */
     public void add(TimeSeriesDataItem item, boolean notify) {
-        if (item == null) {
-            throw new IllegalArgumentException("Null 'item' argument.");
-        }
+        ParamChecks.nullNotPermitted(item, "item");
         item = (TimeSeriesDataItem) item.clone();
         Class c = item.getPeriod().getClass();
         if (this.timePeriodClass == null) {
@@ -810,9 +808,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      */
     public TimeSeriesDataItem addOrUpdate(TimeSeriesDataItem item) {
 
-        if (item == null) {
-            throw new IllegalArgumentException("Null 'period' argument.");
-        }
+        ParamChecks.nullNotPermitted(item, "item");
         Class periodClass = item.getPeriod().getClass();
         if (this.timePeriodClass == null) {
             this.timePeriodClass = periodClass;
@@ -1094,12 +1090,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     public TimeSeries createCopy(RegularTimePeriod start, RegularTimePeriod end)
         throws CloneNotSupportedException {
 
-        if (start == null) {
-            throw new IllegalArgumentException("Null 'start' argument.");
-        }
-        if (end == null) {
-            throw new IllegalArgumentException("Null 'end' argument.");
-        }
+        ParamChecks.nullNotPermitted(start, "start");
+        ParamChecks.nullNotPermitted(end, "end");
         if (start.compareTo(end) > 0) {
             throw new IllegalArgumentException(
                     "Requires start on or before end.");
