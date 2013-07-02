@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * AxisSpace.java
  * --------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,6 +41,7 @@
  * 07-Jan-2005 : Updated equals() method (DG);
  * 11-Jan-2005 : Removed deprecated methods in preparation for 1.0.0
  *               release (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -48,6 +49,7 @@ package org.jfree.chart.axis;
 
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.ui.RectangleEdge;
 import org.jfree.util.PublicCloneable;
@@ -161,9 +163,7 @@ public class AxisSpace implements Cloneable, PublicCloneable, Serializable {
      * @param edge  the edge (<code>null</code> not permitted).
      */
     public void add(double space, RectangleEdge edge) {
-        if (edge == null) {
-            throw new IllegalArgumentException("Null 'edge' argument.");
-        }
+        ParamChecks.nullNotPermitted(edge, "edge");
         if (edge == RectangleEdge.TOP) {
             this.top += space;
         }
