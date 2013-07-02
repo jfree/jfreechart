@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * Crosshair.java
  * --------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 13-Feb-2009 : Version 1 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import java.io.Serializable;
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.labels.CrosshairLabelGenerator;
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.util.PaintUtilities;
@@ -153,12 +155,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @param stroke  the line stroke (<code>null</code> not permitted).
      */
     public Crosshair(double value, Paint paint, Stroke stroke) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.visible = true;
         this.value = value;
         this.paint = paint;
@@ -326,9 +324,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelGenerator()
      */
     public void setLabelGenerator(CrosshairLabelGenerator generator) {
-        if (generator == null) {
-            throw new IllegalArgumentException("Null 'generator' argument.");
-        }
+        ParamChecks.nullNotPermitted(generator, "generator");
         CrosshairLabelGenerator old = this.labelGenerator;
         this.labelGenerator = generator;
         this.pcs.firePropertyChange("labelGenerator", old, generator);
@@ -429,9 +425,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelFont()
      */
     public void setLabelFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         Font old = this.labelFont;
         this.labelFont = font;
         this.pcs.firePropertyChange("labelFont", old, font);
@@ -457,9 +451,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelPaint()
      */
     public void setLabelPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         Paint old = this.labelPaint;
         this.labelPaint = paint;
         this.pcs.firePropertyChange("labelPaint", old, paint);
@@ -536,9 +528,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelOutlinePaint()
      */
     public void setLabelOutlinePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         Paint old = this.labelOutlinePaint;
         this.labelOutlinePaint = paint;
         this.pcs.firePropertyChange("labelOutlinePaint", old, paint);
@@ -564,9 +554,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelOutlineStroke()
      */
     public void setLabelOutlineStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         Stroke old = this.labelOutlineStroke;
         this.labelOutlineStroke = stroke;
         this.pcs.firePropertyChange("labelOutlineStroke", old, stroke);
