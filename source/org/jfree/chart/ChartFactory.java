@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * ChartFactory.java
  * -----------------
- * (C) Copyright 2001-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Serge V. Grachov;
@@ -119,7 +119,8 @@
  * 23-Oct-2008 : Check for legacy theme in setChartTheme() and reset default
  *               bar painters (DG);
  * 20-Dec-2008 : In createStackedAreaChart(), set category margin to 0.0 (DG);
- *
+ * 02-Jul-2013 : Use ParamChecks class (DG);
+ * 
  */
 
 package org.jfree.chart;
@@ -199,6 +200,7 @@ import org.jfree.chart.urls.StandardPieURLGenerator;
 import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.chart.urls.StandardXYZURLGenerator;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -254,9 +256,7 @@ public abstract class ChartFactory {
      * @since 1.0.11
      */
     public static void setChartTheme(ChartTheme theme) {
-        if (theme == null) {
-            throw new IllegalArgumentException("Null 'theme' argument.");
-        }
+        ParamChecks.nullNotPermitted(theme, "theme");
         currentTheme = theme;
 
         // here we do a check to see if the user is installing the "Legacy"
@@ -320,11 +320,8 @@ public abstract class ChartFactory {
      *
      * @return A pie chart.
      */
-    public static JFreeChart createPieChart(String title,
-                                            PieDataset dataset,
-                                            boolean legend,
-                                            boolean tooltips,
-                                            boolean urls) {
+    public static JFreeChart createPieChart(String title, PieDataset dataset,
+            boolean legend, boolean tooltips, boolean urls) {
 
         PiePlot plot = new PiePlot(dataset);
         plot.setLabelGenerator(new StandardPieSectionLabelGenerator());
@@ -448,9 +445,8 @@ public abstract class ChartFactory {
                 JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
 
         if (subTitle) {
-            TextTitle subtitle = null;
-            subtitle = new TextTitle("Bright " + (greenForIncrease ? "red"
-                    : "green") + "=change >=-" + percentDiffForMaxScale
+            TextTitle subtitle = new TextTitle("Bright " + (greenForIncrease 
+                    ? "red" : "green") + "=change >=-" + percentDiffForMaxScale
                     + "%, Bright " + (!greenForIncrease ? "red" : "green")
                     + "=change >=+" + percentDiffForMaxScale + "%",
                     new Font("SansSerif", Font.PLAIN, 10));
@@ -498,16 +494,10 @@ public abstract class ChartFactory {
      *
      * @return A pie chart.
      */
-    public static JFreeChart createPieChart(String title,
-                                            PieDataset dataset,
-                                            PieDataset previousDataset,
-                                            int percentDiffForMaxScale,
-                                            boolean greenForIncrease,
-                                            boolean legend,
-                                            boolean tooltips,
-                                            boolean urls,
-                                            boolean subTitle,
-                                            boolean showDifference) {
+    public static JFreeChart createPieChart(String title, PieDataset dataset,
+            PieDataset previousDataset, int percentDiffForMaxScale,
+            boolean greenForIncrease, boolean legend, boolean tooltips, 
+            boolean urls, boolean subTitle, boolean showDifference) {
 
         PiePlot plot = new PiePlot(dataset);
         plot.setLabelGenerator(new StandardPieSectionLabelGenerator());
@@ -631,11 +621,8 @@ public abstract class ChartFactory {
      *
      * @return A ring chart.
      */
-    public static JFreeChart createRingChart(String title,
-                                             PieDataset dataset,
-                                             boolean legend,
-                                             boolean tooltips,
-                                             boolean urls) {
+    public static JFreeChart createRingChart(String title, PieDataset dataset,
+            boolean legend, boolean tooltips, boolean urls) {
 
         RingPlot plot = new RingPlot(dataset);
         plot.setLabelGenerator(new StandardPieSectionLabelGenerator());
@@ -669,15 +656,10 @@ public abstract class ChartFactory {
      * @return A chart.
      */
     public static JFreeChart createMultiplePieChart(String title,
-                                                    CategoryDataset dataset,
-                                                    TableOrder order,
-                                                    boolean legend,
-                                                    boolean tooltips,
-                                                    boolean urls) {
+            CategoryDataset dataset, TableOrder order, boolean legend,
+            boolean tooltips, boolean urls) {
 
-        if (order == null) {
-            throw new IllegalArgumentException("Null 'order' argument.");
-        }
+        ParamChecks.nullNotPermitted(order, "order");
         MultiplePiePlot plot = new MultiplePiePlot(dataset);
         plot.setDataExtractOrder(order);
         plot.setBackgroundPaint(null);
@@ -721,6 +703,7 @@ public abstract class ChartFactory {
     public static JFreeChart createPieChart3D(String title, PieDataset dataset,
             boolean legend, boolean tooltips, Locale locale) {
 
+        ParamChecks.nullNotPermitted(locale, "locale");
         PiePlot3D plot = new PiePlot3D(dataset);
         plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
         if (tooltips) {
@@ -746,11 +729,8 @@ public abstract class ChartFactory {
      *
      * @return A pie chart.
      */
-    public static JFreeChart createPieChart3D(String title,
-                                              PieDataset dataset,
-                                              boolean legend,
-                                              boolean tooltips,
-                                              boolean urls) {
+    public static JFreeChart createPieChart3D(String title, PieDataset dataset,
+            boolean legend, boolean tooltips, boolean urls) {
 
         PiePlot3D plot = new PiePlot3D(dataset);
         plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
@@ -783,15 +763,10 @@ public abstract class ChartFactory {
      * @return A chart.
      */
     public static JFreeChart createMultiplePieChart3D(String title,
-                                                      CategoryDataset dataset,
-                                                      TableOrder order,
-                                                      boolean legend,
-                                                      boolean tooltips,
-                                                      boolean urls) {
+            CategoryDataset dataset, TableOrder order, boolean legend,
+            boolean tooltips, boolean urls) {
 
-        if (order == null) {
-            throw new IllegalArgumentException("Null 'order' argument.");
-        }
+        ParamChecks.nullNotPermitted(order, "order");
         MultiplePiePlot plot = new MultiplePiePlot(dataset);
         plot.setDataExtractOrder(order);
         plot.setBackgroundPaint(null);
@@ -847,17 +822,11 @@ public abstract class ChartFactory {
      * @return A bar chart.
      */
     public static JFreeChart createBarChart(String title,
-                                            String categoryAxisLabel,
-                                            String valueAxisLabel,
-                                            CategoryDataset dataset,
-                                            PlotOrientation orientation,
-                                            boolean legend,
-                                            boolean tooltips,
-                                            boolean urls) {
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         ValueAxis valueAxis = new NumberAxis(valueAxisLabel);
 
@@ -919,17 +888,11 @@ public abstract class ChartFactory {
      * @return A stacked bar chart.
      */
     public static JFreeChart createStackedBarChart(String title,
-                                                   String domainAxisLabel,
-                                                   String rangeAxisLabel,
-                                                   CategoryDataset dataset,
-                                                   PlotOrientation orientation,
-                                                   boolean legend,
-                                                   boolean tooltips,
-                                                   boolean urls) {
+            String domainAxisLabel, String rangeAxisLabel,
+            CategoryDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
 
         CategoryAxis categoryAxis = new CategoryAxis(domainAxisLabel);
         ValueAxis valueAxis = new NumberAxis(rangeAxisLabel);
@@ -975,17 +938,11 @@ public abstract class ChartFactory {
      * @return A bar chart with a 3D effect.
      */
     public static JFreeChart createBarChart3D(String title,
-                                              String categoryAxisLabel,
-                                              String valueAxisLabel,
-                                              CategoryDataset dataset,
-                                              PlotOrientation orientation,
-                                              boolean legend,
-                                              boolean tooltips,
-                                              boolean urls) {
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis3D(categoryAxisLabel);
         ValueAxis valueAxis = new NumberAxis3D(valueAxisLabel);
 
@@ -1039,17 +996,11 @@ public abstract class ChartFactory {
      * @return A stacked bar chart with a 3D effect.
      */
     public static JFreeChart createStackedBarChart3D(String title,
-                                                    String categoryAxisLabel,
-                                                    String valueAxisLabel,
-                                                    CategoryDataset dataset,
-                                                    PlotOrientation orientation,
-                                                    boolean legend,
-                                                    boolean tooltips,
-                                                    boolean urls) {
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis3D(categoryAxisLabel);
         ValueAxis valueAxis = new NumberAxis3D(valueAxisLabel);
 
@@ -1103,17 +1054,11 @@ public abstract class ChartFactory {
      * @return An area chart.
      */
     public static JFreeChart createAreaChart(String title,
-                                             String categoryAxisLabel,
-                                             String valueAxisLabel,
-                                             CategoryDataset dataset,
-                                             PlotOrientation orientation,
-                                             boolean legend,
-                                             boolean tooltips,
-                                             boolean urls) {
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         categoryAxis.setCategoryMargin(0.0);
 
@@ -1165,9 +1110,7 @@ public abstract class ChartFactory {
             CategoryDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         categoryAxis.setCategoryMargin(0.0);
         ValueAxis valueAxis = new NumberAxis(valueAxisLabel);
@@ -1213,17 +1156,11 @@ public abstract class ChartFactory {
      * @return A line chart.
      */
     public static JFreeChart createLineChart(String title,
-                                             String categoryAxisLabel,
-                                             String valueAxisLabel,
-                                             CategoryDataset dataset,
-                                             PlotOrientation orientation,
-                                             boolean legend,
-                                             boolean tooltips,
-                                             boolean urls) {
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         ValueAxis valueAxis = new NumberAxis(valueAxisLabel);
 
@@ -1267,17 +1204,11 @@ public abstract class ChartFactory {
      * @return A line chart.
      */
     public static JFreeChart createLineChart3D(String title,
-                                               String categoryAxisLabel,
-                                               String valueAxisLabel,
-                                               CategoryDataset dataset,
-                                               PlotOrientation orientation,
-                                               boolean legend,
-                                               boolean tooltips,
-                                               boolean urls) {
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis3D(categoryAxisLabel);
         ValueAxis valueAxis = new NumberAxis3D(valueAxisLabel);
 
@@ -1320,12 +1251,9 @@ public abstract class ChartFactory {
      * @return A Gantt chart.
      */
     public static JFreeChart createGanttChart(String title,
-                                              String categoryAxisLabel,
-                                              String dateAxisLabel,
-                                              IntervalCategoryDataset dataset,
-                                              boolean legend,
-                                              boolean tooltips,
-                                              boolean urls) {
+            String categoryAxisLabel, String dateAxisLabel,
+            IntervalCategoryDataset dataset, boolean legend, boolean tooltips,
+            boolean urls) {
 
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         DateAxis dateAxis = new DateAxis(dateAxisLabel);
@@ -1372,17 +1300,11 @@ public abstract class ChartFactory {
      * @return A waterfall chart.
      */
     public static JFreeChart createWaterfallChart(String title,
-                                                  String categoryAxisLabel,
-                                                  String valueAxisLabel,
-                                                  CategoryDataset dataset,
-                                                  PlotOrientation orientation,
-                                                  boolean legend,
-                                                  boolean tooltips,
-                                                  boolean urls) {
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         categoryAxis.setCategoryMargin(0.0);
 
@@ -1441,11 +1363,8 @@ public abstract class ChartFactory {
      *
      * @return A chart.
      */
-    public static JFreeChart createPolarChart(String title,
-                                              XYDataset dataset,
-                                              boolean legend,
-                                              boolean tooltips,
-                                              boolean urls) {
+    public static JFreeChart createPolarChart(String title, XYDataset dataset,
+            boolean legend, boolean tooltips, boolean urls) {
 
         PolarPlot plot = new PolarPlot();
         plot.setDataset(dataset);
@@ -1485,9 +1404,7 @@ public abstract class ChartFactory {
             String yAxisLabel, XYDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
@@ -1538,20 +1455,13 @@ public abstract class ChartFactory {
      *
      * @return An XY bar chart.
      */
-    public static JFreeChart createXYBarChart(String title,
-                                              String xAxisLabel,
-                                              boolean dateAxis,
-                                              String yAxisLabel,
-                                              IntervalXYDataset dataset,
-                                              PlotOrientation orientation,
-                                              boolean legend,
-                                              boolean tooltips,
-                                              boolean urls) {
+    public static JFreeChart createXYBarChart(String title, String xAxisLabel,
+            boolean dateAxis, String yAxisLabel, IntervalXYDataset dataset,
+            PlotOrientation orientation, boolean legend, boolean tooltips,
+            boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
-        ValueAxis domainAxis = null;
+        ParamChecks.nullNotPermitted(orientation, "orientation");
+        ValueAxis domainAxis;
         if (dateAxis) {
             domainAxis = new DateAxis(xAxisLabel);
         }
@@ -1607,18 +1517,11 @@ public abstract class ChartFactory {
      *
      * @return An XY area chart.
      */
-    public static JFreeChart createXYAreaChart(String title,
-                                               String xAxisLabel,
-                                               String yAxisLabel,
-                                               XYDataset dataset,
-                                               PlotOrientation orientation,
-                                               boolean legend,
-                                               boolean tooltips,
-                                               boolean urls) {
+    public static JFreeChart createXYAreaChart(String title, String xAxisLabel,
+            String yAxisLabel, XYDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
@@ -1664,17 +1567,11 @@ public abstract class ChartFactory {
      * @return A stacked XY area chart.
      */
     public static JFreeChart createStackedXYAreaChart(String title,
-                                                    String xAxisLabel,
-                                                    String yAxisLabel,
-                                                    TableXYDataset dataset,
-                                                    PlotOrientation orientation,
-                                                    boolean legend,
-                                                    boolean tooltips,
-                                                    boolean urls) {
+            String xAxisLabel, String yAxisLabel, TableXYDataset dataset,
+            PlotOrientation orientation, boolean legend, boolean tooltips,
+            boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         xAxis.setLowerMargin(0.0);
@@ -1720,18 +1617,11 @@ public abstract class ChartFactory {
      *
      * @return The chart.
      */
-    public static JFreeChart createXYLineChart(String title,
-                                               String xAxisLabel,
-                                               String yAxisLabel,
-                                               XYDataset dataset,
-                                               PlotOrientation orientation,
-                                               boolean legend,
-                                               boolean tooltips,
-                                               boolean urls) {
+    public static JFreeChart createXYLineChart(String title, String xAxisLabel,
+            String yAxisLabel, XYDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
@@ -1767,18 +1657,11 @@ public abstract class ChartFactory {
      *
      * @return A chart.
      */
-    public static JFreeChart createXYStepChart(String title,
-                                               String xAxisLabel,
-                                               String yAxisLabel,
-                                               XYDataset dataset,
-                                               PlotOrientation orientation,
-                                               boolean legend,
-                                               boolean tooltips,
-                                               boolean urls) {
+    public static JFreeChart createXYStepChart(String title, String xAxisLabel,
+            String yAxisLabel, XYDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         DateAxis xAxis = new DateAxis(xAxisLabel);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
         yAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
@@ -1822,18 +1705,12 @@ public abstract class ChartFactory {
      *
      * @return A chart.
      */
-    public static JFreeChart createXYStepAreaChart(String title,
-                                                   String xAxisLabel,
-                                                   String yAxisLabel,
-                                                   XYDataset dataset,
-                                                   PlotOrientation orientation,
-                                                   boolean legend,
-                                                   boolean tooltips,
-                                                   boolean urls) {
+    public static JFreeChart createXYStepAreaChart(String title, 
+            String xAxisLabel, String yAxisLabel, XYDataset dataset,
+            PlotOrientation orientation, boolean legend, boolean tooltips,
+            boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
@@ -1884,12 +1761,8 @@ public abstract class ChartFactory {
      * @return A time series chart.
      */
     public static JFreeChart createTimeSeriesChart(String title,
-                                                   String timeAxisLabel,
-                                                   String valueAxisLabel,
-                                                   XYDataset dataset,
-                                                   boolean legend,
-                                                   boolean tooltips,
-                                                   boolean urls) {
+            String timeAxisLabel, String valueAxisLabel, XYDataset dataset,
+            boolean legend, boolean tooltips, boolean urls) {
 
         ValueAxis timeAxis = new DateAxis(timeAxisLabel);
         timeAxis.setLowerMargin(0.02);  // reduce the default margins
@@ -1936,10 +1809,8 @@ public abstract class ChartFactory {
      * @return A candlestick chart.
      */
     public static JFreeChart createCandlestickChart(String title,
-                                                    String timeAxisLabel,
-                                                    String valueAxisLabel,
-                                                    OHLCDataset dataset,
-                                                    boolean legend) {
+            String timeAxisLabel, String valueAxisLabel, OHLCDataset dataset,
+            boolean legend) {
 
         ValueAxis timeAxis = new DateAxis(timeAxisLabel);
         NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
@@ -1966,10 +1837,8 @@ public abstract class ChartFactory {
      * @return A high-low-open-close chart.
      */
     public static JFreeChart createHighLowChart(String title,
-                                                String timeAxisLabel,
-                                                String valueAxisLabel,
-                                                OHLCDataset dataset,
-                                                boolean legend) {
+            String timeAxisLabel, String valueAxisLabel, OHLCDataset dataset,
+            boolean legend) {
 
         ValueAxis timeAxis = new DateAxis(timeAxisLabel);
         NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
@@ -2002,11 +1871,8 @@ public abstract class ChartFactory {
      * @return A high-low-open-close chart.
      */
     public static JFreeChart createHighLowChart(String title,
-                                                String timeAxisLabel,
-                                                String valueAxisLabel,
-                                                OHLCDataset dataset,
-                                                Timeline timeline,
-                                                boolean legend) {
+            String timeAxisLabel, String valueAxisLabel, OHLCDataset dataset,
+            Timeline timeline, boolean legend) {
 
         DateAxis timeAxis = new DateAxis(timeAxisLabel);
         timeAxis.setTimeline(timeline);
@@ -2039,18 +1905,11 @@ public abstract class ChartFactory {
      *
      * @return A bubble chart.
      */
-    public static JFreeChart createBubbleChart(String title,
-                                               String xAxisLabel,
-                                               String yAxisLabel,
-                                               XYZDataset dataset,
-                                               PlotOrientation orientation,
-                                               boolean legend,
-                                               boolean tooltips,
-                                               boolean urls) {
+    public static JFreeChart createBubbleChart(String title, String xAxisLabel,
+            String yAxisLabel, XYZDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
@@ -2098,9 +1957,7 @@ public abstract class ChartFactory {
             PlotOrientation orientation, boolean legend, boolean tooltips,
             boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         ValueAxis yAxis = new NumberAxis(yAxisLabel);
@@ -2173,10 +2030,8 @@ public abstract class ChartFactory {
      * @return A box and whisker chart.
      */
     public static JFreeChart createBoxAndWhiskerChart(String title,
-                                                 String timeAxisLabel,
-                                                 String valueAxisLabel,
-                                                 BoxAndWhiskerXYDataset dataset,
-                                                 boolean legend) {
+            String timeAxisLabel, String valueAxisLabel,
+            BoxAndWhiskerXYDataset dataset, boolean legend) {
 
         ValueAxis timeAxis = new DateAxis(timeAxisLabel);
         NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
@@ -2204,13 +2059,9 @@ public abstract class ChartFactory {
      * @return A wind plot.
      *
      */
-    public static JFreeChart createWindPlot(String title,
-                                            String xAxisLabel,
-                                            String yAxisLabel,
-                                            WindDataset dataset,
-                                            boolean legend,
-                                            boolean tooltips,
-                                            boolean urls) {
+    public static JFreeChart createWindPlot(String title, String xAxisLabel,
+            String yAxisLabel, WindDataset dataset, boolean legend,
+            boolean tooltips, boolean urls) {
 
         ValueAxis xAxis = new DateAxis(xAxisLabel);
         ValueAxis yAxis = new NumberAxis(yAxisLabel);
@@ -2245,15 +2096,10 @@ public abstract class ChartFactory {
      * @return A wafer map chart.
      */
     public static JFreeChart createWaferMapChart(String title,
-                                                 WaferMapDataset dataset,
-                                                 PlotOrientation orientation,
-                                                 boolean legend,
-                                                 boolean tooltips,
-                                                 boolean urls) {
+            WaferMapDataset dataset, PlotOrientation orientation,
+            boolean legend, boolean tooltips, boolean urls) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         WaferMapPlot plot = new WaferMapPlot(dataset);
         WaferMapRenderer renderer = new WaferMapRenderer();
         plot.setRenderer(renderer);
