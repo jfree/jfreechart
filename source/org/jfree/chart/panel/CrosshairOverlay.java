@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CrosshairOverlay.java
  * ---------------------
- * (C) Copyright 2011, by Object Refinery Limited.
+ * (C) Copyright 2011-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * --------
  * 09-Apr-2009 : Version 1 (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -62,6 +63,7 @@ import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.text.TextUtilities;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleEdge;
@@ -102,9 +104,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @see #addRangeCrosshair(org.jfree.chart.plot.Crosshair)
      */
     public void addDomainCrosshair(Crosshair crosshair) {
-        if (crosshair == null) {
-            throw new IllegalArgumentException("Null 'crosshair' argument.");
-        }
+        ParamChecks.nullNotPermitted(crosshair, "crosshair");
         this.xCrosshairs.add(crosshair);
         crosshair.addPropertyChangeListener(this);
         fireOverlayChanged();
@@ -119,9 +119,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @see #addDomainCrosshair(org.jfree.chart.plot.Crosshair)
      */
     public void removeDomainCrosshair(Crosshair crosshair) {
-        if (crosshair == null) {
-            throw new IllegalArgumentException("Null 'crosshair' argument.");
-        }
+        ParamChecks.nullNotPermitted(crosshair, "crosshair");
         if (this.xCrosshairs.remove(crosshair)) {
             crosshair.removePropertyChangeListener(this);
             fireOverlayChanged();
@@ -161,9 +159,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @param crosshair  the crosshair (<code>null</code> not permitted).
      */
     public void addRangeCrosshair(Crosshair crosshair) {
-        if (crosshair == null) {
-            throw new IllegalArgumentException("Null 'crosshair' argument.");
-        }
+        ParamChecks.nullNotPermitted(crosshair, "crosshair");
         this.yCrosshairs.add(crosshair);
         crosshair.addPropertyChangeListener(this);
         fireOverlayChanged();
@@ -178,9 +174,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @see #addRangeCrosshair(org.jfree.chart.plot.Crosshair)
      */
     public void removeRangeCrosshair(Crosshair crosshair) {
-        if (crosshair == null) {
-            throw new IllegalArgumentException("Null 'crosshair' argument.");
-        }
+        ParamChecks.nullNotPermitted(crosshair, "crosshair");
         if (this.yCrosshairs.remove(crosshair)) {
             crosshair.removePropertyChangeListener(this);
             fireOverlayChanged();
@@ -381,8 +375,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      */
     private Point2D calculateLabelPoint(Line2D line, RectangleAnchor anchor,
             double deltaX, double deltaY) {
-        double x = 0.0;
-        double y = 0.0;
+        double x, y;
         boolean left = (anchor == RectangleAnchor.BOTTOM_LEFT 
                 || anchor == RectangleAnchor.LEFT 
                 || anchor == RectangleAnchor.TOP_LEFT);
