@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * ChartUtilities.java
  * -------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Wolfgang Irler;
@@ -72,6 +72,7 @@
  *               methods (DG);
  * 10-Jan-2008 : Fix bug 1868251 - don't create image with transparency when
  *               saving to JPEG format (DG);
+ * 02-Jul-2013 : Use ParamChecks class (DG);
  *
  */
 
@@ -96,6 +97,7 @@ import org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.StandardURLTagFragmentGenerator;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A collection of utility methods for JFreeChart.  Includes methods for
@@ -177,9 +179,7 @@ public abstract class ChartUtilities {
             int width, int height,  ChartRenderingInfo info)
             throws IOException {
 
-        if (chart == null) {
-            throw new IllegalArgumentException("Null 'chart' argument.");
-        }
+        ParamChecks.nullNotPermitted(chart, "chart");
         BufferedImage bufferedImage
                 = chart.createBufferedImage(width, height, info);
         EncoderUtil.writeBufferedImage(bufferedImage, ImageFormat.PNG, out);
@@ -206,12 +206,8 @@ public abstract class ChartUtilities {
             int width, int height, ChartRenderingInfo info,
             boolean encodeAlpha, int compression) throws IOException {
 
-        if (out == null) {
-            throw new IllegalArgumentException("Null 'out' argument.");
-        }
-        if (chart == null) {
-            throw new IllegalArgumentException("Null 'chart' argument.");
-        }
+        ParamChecks.nullNotPermitted(out, "out");
+        ParamChecks.nullNotPermitted(chart, "chart");
         BufferedImage chartImage = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_ARGB, info);
         ChartUtilities.writeBufferedImageAsPNG(out, chartImage, encodeAlpha,
@@ -235,12 +231,8 @@ public abstract class ChartUtilities {
             JFreeChart chart, int width, int height, int widthScaleFactor,
             int heightScaleFactor) throws IOException {
 
-        if (out == null) {
-            throw new IllegalArgumentException("Null 'out' argument.");
-        }
-        if (chart == null) {
-            throw new IllegalArgumentException("Null 'chart' argument.");
-        }
+        ParamChecks.nullNotPermitted(out, "out");
+        ParamChecks.nullNotPermitted(chart, "chart");
 
         double desiredWidth = width * widthScaleFactor;
         double desiredHeight = height * heightScaleFactor;
@@ -312,9 +304,7 @@ public abstract class ChartUtilities {
             int width, int height, ChartRenderingInfo info)
         throws IOException {
 
-        if (file == null) {
-            throw new IllegalArgumentException("Null 'file' argument.");
-        }
+        ParamChecks.nullNotPermitted(file, "file");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
             ChartUtilities.writeChartAsPNG(out, chart, width, height, info);
@@ -344,13 +334,8 @@ public abstract class ChartUtilities {
            int width, int height, ChartRenderingInfo info, boolean encodeAlpha,
            int compression) throws IOException {
 
-        if (file == null) {
-            throw new IllegalArgumentException("Null 'file' argument.");
-        }
-        if (chart == null) {
-            throw new IllegalArgumentException("Null 'chart' argument.");
-        }
-
+        ParamChecks.nullNotPermitted(file, "file");
+        ParamChecks.nullNotPermitted(chart, "chart");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
             writeChartAsPNG(out, chart, width, height, info, encodeAlpha,
@@ -420,9 +405,8 @@ public abstract class ChartUtilities {
             int width, int height, ChartRenderingInfo info)
             throws IOException {
 
-        if (chart == null) {
-            throw new IllegalArgumentException("Null 'chart' argument.");
-        }
+        ParamChecks.nullNotPermitted(out, "out");
+        ParamChecks.nullNotPermitted(chart, "chart");
         BufferedImage image = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB, info);
         EncoderUtil.writeBufferedImage(image, ImageFormat.JPEG, out);
@@ -448,9 +432,8 @@ public abstract class ChartUtilities {
             JFreeChart chart, int width, int height, ChartRenderingInfo info)
             throws IOException {
 
-        if (chart == null) {
-            throw new IllegalArgumentException("Null 'chart' argument.");
-        }
+        ParamChecks.nullNotPermitted(out, "out");
+        ParamChecks.nullNotPermitted(chart, "chart");
         BufferedImage image = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB, info);
         EncoderUtil.writeBufferedImage(image, ImageFormat.JPEG, out, quality);
@@ -511,12 +494,8 @@ public abstract class ChartUtilities {
     public static void saveChartAsJPEG(File file, JFreeChart chart,
             int width, int height, ChartRenderingInfo info) throws IOException {
 
-        if (file == null) {
-            throw new IllegalArgumentException("Null 'file' argument.");
-        }
-        if (chart == null) {
-            throw new IllegalArgumentException("Null 'chart' argument.");
-        }
+        ParamChecks.nullNotPermitted(file, "file");
+        ParamChecks.nullNotPermitted(chart, "chart");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
             writeChartAsJPEG(out, chart, width, height, info);
@@ -546,13 +525,8 @@ public abstract class ChartUtilities {
             JFreeChart chart, int width, int height,
             ChartRenderingInfo info) throws IOException {
 
-        if (file == null) {
-            throw new IllegalArgumentException("Null 'file' argument.");
-        }
-        if (chart == null) {
-            throw new IllegalArgumentException("Null 'chart' argument.");
-        }
-
+        ParamChecks.nullNotPermitted(file, "file");
+        ParamChecks.nullNotPermitted(chart, "chart");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(
                 file));
         try {
@@ -654,8 +628,7 @@ public abstract class ChartUtilities {
      * @throws IOException if there is an I/O problem.
      */
     public static byte[] encodeAsPNG(BufferedImage image, boolean encodeAlpha,
-                                     int compression)
-            throws IOException {
+            int compression) throws IOException {
         return EncoderUtil.encode(image, ImageFormat.PNG, compression,
                 encodeAlpha);
     }
@@ -671,11 +644,9 @@ public abstract class ChartUtilities {
      *
      * @throws IOException if there are any I/O errors.
      */
-    public static void writeImageMap(PrintWriter writer,
-                                     String name,
-                                     ChartRenderingInfo info,
-                                     boolean useOverLibForToolTips)
-        throws IOException {
+    public static void writeImageMap(PrintWriter writer, String name,
+            ChartRenderingInfo info, boolean useOverLibForToolTips)
+            throws IOException {
 
         ToolTipTagFragmentGenerator toolTipTagFragmentGenerator = null;
         if (useOverLibForToolTips) {
