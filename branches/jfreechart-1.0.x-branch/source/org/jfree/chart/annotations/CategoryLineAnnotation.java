@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * CategoryLineAnnotation.java
  * ---------------------------
- * (C) Copyright 2005-2011, by Object Refinery Limited.
+ * (C) Copyright 2005-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -39,6 +39,7 @@
  * 06-Mar-2007 : Reimplemented hashCode() (DG);
  * 23-Apr-2008 : Implemented PublicCloneable (DG);
  * 24-Jun-2009 : Now extends AbstractAnnotation (see patch 2809117 by PK) (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -63,6 +64,7 @@ import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
@@ -113,18 +115,10 @@ public class CategoryLineAnnotation extends AbstractAnnotation
                                   Comparable category2, double value2,
                                   Paint paint, Stroke stroke) {
         super();
-        if (category1 == null) {
-            throw new IllegalArgumentException("Null 'category1' argument.");
-        }
-        if (category2 == null) {
-            throw new IllegalArgumentException("Null 'category2' argument.");
-        }
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(category1, "category1");
+        ParamChecks.nullNotPermitted(category2, "category2");
+        ParamChecks.nullNotPermitted(paint, "paint");
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.category1 = category1;
         this.value1 = value1;
         this.category2 = category2;
@@ -153,9 +147,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * @see #getCategory1()
      */
     public void setCategory1(Comparable category) {
-        if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");
-        }
+        ParamChecks.nullNotPermitted(category, "category");
         this.category1 = category;
         fireAnnotationChanged();
     }
@@ -204,9 +196,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * @see #getCategory2()
      */
     public void setCategory2(Comparable category) {
-        if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");
-        }
+        ParamChecks.nullNotPermitted(category, "category");
         this.category2 = category;
         fireAnnotationChanged();
     }
@@ -255,9 +245,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.paint = paint;
         fireAnnotationChanged();
     }
@@ -282,9 +270,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * @see #getStroke()
      */
     public void setStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.stroke = stroke;
         fireAnnotationChanged();
     }
