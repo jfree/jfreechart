@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,7 +28,7 @@
  * ThermometerPlot.java
  * --------------------
  *
- * (C) Copyright 2000-2008, by Bryan Scott and Contributors.
+ * (C) Copyright 2000-2013, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott (based on MeterPlot by Hari).
  * Contributor(s):   David Gilbert (for Object Refinery Limited).
@@ -87,6 +87,7 @@
  *               by Julien Henry (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -118,6 +119,7 @@ import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -475,9 +477,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getRangeAxis()
      */
     public void setRangeAxis(ValueAxis axis) {
-        if (axis == null) {
-            throw new IllegalArgumentException("Null 'axis' argument.");
-        }
+        ParamChecks.nullNotPermitted(axis, "axis");
         // plot is registered as a listener with the existing axis...
         this.rangeAxis.removeChangeListener(this);
 
@@ -568,9 +568,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getPadding()
      */
     public void setPadding(RectangleInsets padding) {
-        if (padding == null) {
-            throw new IllegalArgumentException("Null 'padding' argument.");
-        }
+        ParamChecks.nullNotPermitted(padding, "padding");
         this.padding = padding;
         fireChangeEvent();
     }
@@ -772,9 +770,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getValueFont()
      */
     public void setValueFont(Font f) {
-        if (f == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(f, "f");
         if (!this.valueFont.equals(f)) {
             this.valueFont = f;
             fireChangeEvent();
@@ -801,9 +797,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getValuePaint()
      */
     public void setValuePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         if (!this.valuePaint.equals(paint)) {
             this.valuePaint = paint;
             fireChangeEvent();
@@ -819,9 +813,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param formatter  the new formatter (<code>null</code> not permitted).
      */
     public void setValueFormat(NumberFormat formatter) {
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
+        ParamChecks.nullNotPermitted(formatter, "formatter");
         this.valueFormat = formatter;
         fireChangeEvent();
     }
@@ -846,9 +838,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getMercuryPaint()
      */
     public void setMercuryPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.mercuryPaint = paint;
         fireChangeEvent();
     }
