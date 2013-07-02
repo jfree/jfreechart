@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * TimePeriodValue.java
  * --------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,12 +37,14 @@
  * 22-Apr-2003 : Version 1 (DG);
  * 03-Oct-2006 : Added null argument check to constructor (DG);
  * 07-Apr-2008 : Added a toString() override for debugging (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.data.time;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Represents a time period and an associated value.
@@ -68,9 +70,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      *     <code>null</code>.
      */
     public TimePeriodValue(TimePeriod period, Number value) {
-        if (period == null) {
-            throw new IllegalArgumentException("Null 'period' argument.");
-        }
+        ParamChecks.nullNotPermitted(period, "period");
         this.period = period;
         this.value = value;
     }
@@ -174,7 +174,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
             clone = super.clone();
         }
         catch (CloneNotSupportedException e) { // won't get here...
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return clone;
     }
