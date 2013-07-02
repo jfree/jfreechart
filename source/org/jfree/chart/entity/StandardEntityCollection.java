@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * StandardEntityCollection.java
  * -----------------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,6 +44,7 @@
  * 20-May-2005 : Fixed bug 1113521 - inefficiency in getEntity() method (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 01-Dec-2006 : Implemented PublicCloneable and fixed clone() method (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -54,6 +55,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
@@ -112,9 +114,7 @@ public class StandardEntityCollection implements EntityCollection,
      * @param entity  the entity (<code>null</code> not permitted).
      */
     public void add(ChartEntity entity) {
-        if (entity == null) {
-            throw new IllegalArgumentException("Null 'entity' argument.");
-        }
+        ParamChecks.nullNotPermitted(entity, "entity");
         this.entities.add(entity);
     }
 
