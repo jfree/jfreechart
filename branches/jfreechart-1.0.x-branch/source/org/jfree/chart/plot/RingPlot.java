@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * RingPlot.java
  * -------------
- * (C) Copyright 2004-2011, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limtied);
  * Contributor(s):   Christoph Beck (bug 2121818);
@@ -46,6 +46,7 @@
  * 23-Sep-2008 : Fix for bug 2121818 by Christoph Beck (DG);
  * 13-Jul-2009 : Added support for shadow generator (DG);
  * 11-Oct-2011 : Check sectionOutlineVisible - bug 3237879 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -71,6 +72,7 @@ import org.jfree.chart.entity.PieSectionEntity;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.urls.PieURLGenerator;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.PieDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleInsets;
@@ -185,9 +187,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @see #getSeparatorStroke()
      */
     public void setSeparatorStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.separatorStroke = stroke;
         fireChangeEvent();
     }
@@ -212,9 +212,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @see #getSeparatorPaint()
      */
     public void setSeparatorPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.separatorPaint = paint;
         fireChangeEvent();
     }
@@ -519,9 +517,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      */
     private Line2D extendLine(Line2D line, double startPercent,
                               double endPercent) {
-        if (line == null) {
-            throw new IllegalArgumentException("Null 'line' argument.");
-        }
+        ParamChecks.nullNotPermitted(line, "line");
         double x1 = line.getX1();
         double x2 = line.getX2();
         double deltaX = x2 - x1;
