@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * QuarterDateFormat.java
  * ----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 08-Jun-2007 : Added Greek symbols, and support for reversing the date - see
  *               patch 1577221 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -55,6 +56,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A formatter that formats dates to show the year and quarter (for example,
@@ -126,9 +128,7 @@ public class QuarterDateFormat extends DateFormat
      */
     public QuarterDateFormat(TimeZone zone, String[] quarterSymbols,
             boolean quarterFirst) {
-        if (zone == null) {
-            throw new IllegalArgumentException("Null 'zone' argument.");
-        }
+        ParamChecks.nullNotPermitted(zone, "zone");
         this.calendar = new GregorianCalendar(zone);
         this.quarters = quarterSymbols;
         this.quarterFirst = quarterFirst;
