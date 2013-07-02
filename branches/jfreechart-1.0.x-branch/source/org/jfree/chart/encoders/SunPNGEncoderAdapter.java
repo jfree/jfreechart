@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * SunPNGEncoderAdapter.java
  * -------------------------
- * (C) Copyright 2004-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 01-Aug-2004 : Initial version (RA);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -47,6 +48,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Adapter class for the Sun PNG Encoder.  The ImageEncoderFactory will only
@@ -117,13 +119,9 @@ public class SunPNGEncoderAdapter implements ImageEncoder {
      * @throws IOException
      */
     public void encode(BufferedImage bufferedImage, OutputStream outputStream)
-        throws IOException {
-        if (bufferedImage == null) {
-            throw new IllegalArgumentException("Null 'image' argument.");
-        }
-        if (outputStream == null) {
-            throw new IllegalArgumentException("Null 'outputStream' argument.");
-        }
+            throws IOException {
+        ParamChecks.nullNotPermitted(bufferedImage, "bufferedImage");
+        ParamChecks.nullNotPermitted(outputStream, "outputStream");
         ImageIO.write(bufferedImage, ImageFormat.PNG, outputStream);
     }
 
