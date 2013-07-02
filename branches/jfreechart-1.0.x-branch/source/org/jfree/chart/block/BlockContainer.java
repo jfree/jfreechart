@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * BlockContainer.java
  * -------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 20-Jul-2006 : Perform translation directly on drawing area, not via
  *               Graphics2D (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -57,6 +58,7 @@ import java.util.List;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.ui.Size2D;
 import org.jfree.util.PublicCloneable;
 
@@ -90,9 +92,7 @@ public class BlockContainer extends AbstractBlock
      *                     permitted).
      */
     public BlockContainer(Arrangement arrangement) {
-        if (arrangement == null) {
-            throw new IllegalArgumentException("Null 'arrangement' argument.");
-        }
+        ParamChecks.nullNotPermitted(arrangement, "arrangement");
         this.arrangement = arrangement;
         this.blocks = new ArrayList();
     }
@@ -112,9 +112,7 @@ public class BlockContainer extends AbstractBlock
      * @param arrangement  the arrangement (<code>null</code> not permitted).
      */
     public void setArrangement(Arrangement arrangement) {
-        if (arrangement == null) {
-            throw new IllegalArgumentException("Null 'arrangement' argument.");
-        }
+        ParamChecks.nullNotPermitted(arrangement, "arrangement");
         this.arrangement = arrangement;
     }
 
@@ -201,7 +199,7 @@ public class BlockContainer extends AbstractBlock
      */
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         // check if we need to collect chart entities from the container
-        EntityBlockParams ebp = null;
+        EntityBlockParams ebp;
         StandardEntityCollection sec = null;
         if (params instanceof EntityBlockParams) {
             ebp = (EntityBlockParams) params;
