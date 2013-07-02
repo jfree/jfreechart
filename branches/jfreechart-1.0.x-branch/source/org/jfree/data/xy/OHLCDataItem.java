@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * OHLCDataItem.java
  * -----------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 03-Dec-2003 : Version 1 (DG);
  * 29-Apr-2005 : Added equals() method (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -43,6 +44,7 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.Date;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Represents a single (open-high-low-close) data item in
@@ -83,15 +85,9 @@ public class OHLCDataItem implements Comparable, Serializable {
      * @param close  the close value.
      * @param volume  the volume.
      */
-    public OHLCDataItem(Date date,
-                        double open,
-                        double high,
-                        double low,
-                        double close,
-                        double volume) {
-        if (date == null) {
-            throw new IllegalArgumentException("Null 'date' argument.");
-        }
+    public OHLCDataItem(Date date, double open, double high, double low,
+            double close, double volume) {
+        ParamChecks.nullNotPermitted(date, "date");
         this.date = date;
         this.open = new Double(open);
         this.high = new Double(high);
@@ -112,7 +108,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the open value.
      *
-     * @return The open value.
+     * @return The open value (never <code>null</code>).
      */
     public Number getOpen() {
         return this.open;
@@ -121,7 +117,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the high value.
      *
-     * @return The high value.
+     * @return The high value (never <code>null</code>).
      */
     public Number getHigh() {
         return this.high;
@@ -130,7 +126,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the low value.
      *
-     * @return The low value.
+     * @return The low value (never <code>null</code>).
      */
     public Number getLow() {
         return this.low;
@@ -139,7 +135,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the close value.
      *
-     * @return The close value.
+     * @return The close value (never <code>null</code>).
      */
     public Number getClose() {
         return this.close;
@@ -148,7 +144,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the volume.
      *
-     * @return The volume.
+     * @return The volume (never <code>null</code>).
      */
     public Number getVolume() {
         return this.volume;
