@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * ValueAxis.java
  * --------------
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jonathan Nash;
@@ -106,6 +106,7 @@
  *               false (DG);
  * 30-Mar-2009 : Added pan(double) method (DG);
  * 03-Sep-2012 : Fix reserveSpace() method, bug 3555275 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -129,6 +130,7 @@ import java.util.List;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextUtilities;
@@ -443,9 +445,7 @@ public abstract class ValueAxis extends Axis
      * @see #getUpArrow()
      */
     public void setUpArrow(Shape arrow) {
-        if (arrow == null) {
-            throw new IllegalArgumentException("Null 'arrow' argument.");
-        }
+        ParamChecks.nullNotPermitted(arrow, "arrow");
         this.upArrow = arrow;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -472,9 +472,7 @@ public abstract class ValueAxis extends Axis
      * @see #getDownArrow()
      */
     public void setDownArrow(Shape arrow) {
-        if (arrow == null) {
-            throw new IllegalArgumentException("Null 'arrow' argument.");
-        }
+        ParamChecks.nullNotPermitted(arrow, "arrow");
         this.downArrow = arrow;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -501,9 +499,7 @@ public abstract class ValueAxis extends Axis
      * @see #getLeftArrow()
      */
     public void setLeftArrow(Shape arrow) {
-        if (arrow == null) {
-            throw new IllegalArgumentException("Null 'arrow' argument.");
-        }
+        ParamChecks.nullNotPermitted(arrow, "arrow");
         this.leftArrow = arrow;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -530,9 +526,7 @@ public abstract class ValueAxis extends Axis
      * @see #getRightArrow()
      */
     public void setRightArrow(Shape arrow) {
-        if (arrow == null) {
-            throw new IllegalArgumentException("Null 'arrow' argument.");
-        }
+        ParamChecks.nullNotPermitted(arrow, "arrow");
         this.rightArrow = arrow;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -1075,9 +1069,7 @@ public abstract class ValueAxis extends Axis
      * @since 1.0.5
      */
     public void setDefaultAutoRange(Range range) {
-        if (range == null) {
-            throw new IllegalArgumentException("Null 'range' argument.");
-        }
+        ParamChecks.nullNotPermitted(range, "range");
         this.defaultAutoRange = range;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -1268,11 +1260,9 @@ public abstract class ValueAxis extends Axis
      *
      * @see #getRange()
      */
-    public void setRange(Range range, boolean turnOffAutoRange,
-                         boolean notify) {
-        if (range == null) {
-            throw new IllegalArgumentException("Null 'range' argument.");
-        }
+    public void setRange(Range range, boolean turnOffAutoRange, 
+            boolean notify) {
+        ParamChecks.nullNotPermitted(range, "range");
         if (turnOffAutoRange) {
             this.autoRange = false;
         }
@@ -1323,9 +1313,7 @@ public abstract class ValueAxis extends Axis
      */
     public void setRangeWithMargins(Range range, boolean turnOffAutoRange,
                                     boolean notify) {
-        if (range == null) {
-            throw new IllegalArgumentException("Null 'range' argument.");
-        }
+        ParamChecks.nullNotPermitted(range, "range");
         setRange(Range.expand(range, getLowerMargin(), getUpperMargin()),
                 turnOffAutoRange, notify);
     }
