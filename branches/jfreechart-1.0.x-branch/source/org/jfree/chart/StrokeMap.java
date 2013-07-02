@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * StrokeMap.java
  * --------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 27-Sep-2006 : Version 1 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -49,6 +50,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.io.SerialUtilities;
 import org.jfree.util.ObjectUtilities;
@@ -90,9 +92,7 @@ public class StrokeMap implements Cloneable, Serializable {
      *     <code>null</code>.
      */
     public Stroke getStroke(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         return (Stroke) this.store.get(key);
     }
 
@@ -117,9 +117,7 @@ public class StrokeMap implements Cloneable, Serializable {
      * @param stroke  the stroke.
      */
     public void put(Comparable key, Stroke stroke) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         this.store.put(key, stroke);
     }
 
