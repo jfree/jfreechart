@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * CategoryMarker.java
  * -------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -38,6 +38,7 @@
  * 19-Aug-2005 : Implemented equals(), fixed bug in constructor (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 05-Sep-2006 : Added MarkerChangeListener support (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -50,6 +51,7 @@ import java.awt.Stroke;
 import java.io.Serializable;
 
 import org.jfree.chart.event.MarkerChangeEvent;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.ui.LengthAdjustmentType;
 
 /**
@@ -126,9 +128,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      * @since 1.0.3
      */
     public void setKey(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         this.key = key;
         notifyListeners(new MarkerChangeEvent(this));
     }
