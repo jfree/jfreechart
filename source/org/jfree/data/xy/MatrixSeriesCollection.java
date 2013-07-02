@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * MatrixSeriesCollection.java
  * ---------------------------
- * (C) Copyright 2003-2008, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-2013, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -47,6 +47,7 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
@@ -113,9 +114,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
         if ((seriesIndex < 0) || (seriesIndex > getSeriesCount())) {
             throw new IllegalArgumentException("Index outside valid range.");
         }
-
         MatrixSeries series = (MatrixSeries) this.seriesList.get(seriesIndex);
-
         return series;
     }
 
@@ -204,15 +203,10 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * Notifies all registered listeners that the dataset has changed.
      * </p>
      *
-     * @param series the series.
-     *
-     * @throws IllegalArgumentException
+     * @param series the series (<code>null</code> not permitted).
      */
     public void addSeries(MatrixSeries series) {
-        // check arguments...
-        if (series == null) {
-            throw new IllegalArgumentException("Cannot add null series.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         // FIXME: Check that there isn't already a series with the same key
 
         // add the series...
@@ -295,17 +289,10 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * Notifies all registered listeners that the dataset has changed.
      * </p>
      *
-     * @param series the series.
-     *
-     * @throws IllegalArgumentException
+     * @param series the series (<code>null</code>).
      */
     public void removeSeries(MatrixSeries series) {
-        // check arguments...
-        if (series == null) {
-            throw new IllegalArgumentException("Cannot remove null series.");
-        }
-
-        // remove the series...
+        ParamChecks.nullNotPermitted(series, "series");
         if (this.seriesList.contains(series)) {
             series.removeChangeListener(this);
             this.seriesList.remove(series);
