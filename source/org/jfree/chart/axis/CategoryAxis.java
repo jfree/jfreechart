@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryAxis.java
  * -----------------
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Pady Srinivasan (patch 1217634);
@@ -94,6 +94,7 @@
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 16-Apr-2009 : Added tick mark drawing (DG);
  * 29-Jun-2009 : Fixed bug where axis entity is hiding label entities (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -122,6 +123,7 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.G2TextMeasurer;
@@ -392,9 +394,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #getCategoryLabelPositions()
      */
     public void setCategoryLabelPositions(CategoryLabelPositions positions) {
-        if (positions == null) {
-            throw new IllegalArgumentException("Null 'positions' argument.");
-        }
+        ParamChecks.nullNotPermitted(positions, "positions");
         this.categoryLabelPositions = positions;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -409,9 +409,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #setTickLabelFont(Comparable, Font)
      */
     public Font getTickLabelFont(Comparable category) {
-        if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");
-        }
+        ParamChecks.nullNotPermitted(category, "category");
         Font result = (Font) this.tickLabelFontMap.get(category);
         // if there is no specific font, use the general one...
         if (result == null) {
@@ -430,9 +428,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #getTickLabelFont(Comparable)
      */
     public void setTickLabelFont(Comparable category, Font font) {
-        if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");
-        }
+        ParamChecks.nullNotPermitted(category, "category");
         if (font == null) {
             this.tickLabelFontMap.remove(category);
         }
@@ -452,9 +448,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #setTickLabelPaint(Paint)
      */
     public Paint getTickLabelPaint(Comparable category) {
-        if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");
-        }
+        ParamChecks.nullNotPermitted(category, "category");
         Paint result = (Paint) this.tickLabelPaintMap.get(category);
         // if there is no specific paint, use the general one...
         if (result == null) {
@@ -473,9 +467,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #getTickLabelPaint(Comparable)
      */
     public void setTickLabelPaint(Comparable category, Paint paint) {
-        if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");
-        }
+        ParamChecks.nullNotPermitted(category, "category");
         if (paint == null) {
             this.tickLabelPaintMap.remove(category);
         }
@@ -495,9 +487,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #removeCategoryLabelToolTip(Comparable)
      */
     public void addCategoryLabelToolTip(Comparable category, String tooltip) {
-        if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");
-        }
+        ParamChecks.nullNotPermitted(category, "category");
         this.categoryLabelToolTips.put(category, tooltip);
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -514,9 +504,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #removeCategoryLabelToolTip(Comparable)
      */
     public String getCategoryLabelToolTip(Comparable category) {
-        if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");
-        }
+        ParamChecks.nullNotPermitted(category, "category");
         return (String) this.categoryLabelToolTips.get(category);
     }
 
@@ -530,9 +518,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #clearCategoryLabelToolTips()
      */
     public void removeCategoryLabelToolTip(Comparable category) {
-        if (category == null) {
-            throw new IllegalArgumentException("Null 'category' argument.");
-        }
+        ParamChecks.nullNotPermitted(category, "category");
         this.categoryLabelToolTips.remove(category);
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -680,9 +666,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      */
     public double getCategoryMiddle(Comparable category,
             List categories, Rectangle2D area, RectangleEdge edge) {
-        if (categories == null) {
-            throw new IllegalArgumentException("Null 'categories' argument.");
-        }
+        ParamChecks.nullNotPermitted(categories, "categories");
         int categoryIndex = categories.indexOf(category);
         int categoryCount = categories.size();
         return getCategoryMiddle(categoryIndex, categoryCount, area, edge);
@@ -984,16 +968,11 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return The updated axis state (never <code>null</code>).
      */
-    protected AxisState drawCategoryLabels(Graphics2D g2,
-                                           Rectangle2D plotArea,
-                                           Rectangle2D dataArea,
-                                           RectangleEdge edge,
-                                           AxisState state,
-                                           PlotRenderingInfo plotState) {
+    protected AxisState drawCategoryLabels(Graphics2D g2, Rectangle2D plotArea,
+            Rectangle2D dataArea, RectangleEdge edge, AxisState state,
+            PlotRenderingInfo plotState) {
 
-        if (state == null) {
-            throw new IllegalArgumentException("Null 'state' argument.");
-        }
+        ParamChecks.nullNotPermitted(state, "state");
 
         if (isTickLabelsVisible()) {
             List ticks = refreshTicks(g2, state, plotArea, edge);
