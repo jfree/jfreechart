@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * LogAxis.java
  * ------------
- * (C) Copyright 2006-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrew Mickish (patch 1868745);
@@ -55,6 +55,7 @@
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 30-Mar-2009 : Added pan(double) method (DG);
  * 28-Oct-2011 : Fixed endless loop for 0 TickUnit, # 3429707 (MH);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -77,6 +78,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
 import org.jfree.chart.util.LogFormat;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
@@ -221,9 +223,7 @@ public class LogAxis extends ValueAxis {
     public void setTickUnit(NumberTickUnit unit, boolean notify,
                             boolean turnOffAutoSelect) {
 
-        if (unit == null) {
-            throw new IllegalArgumentException("Null 'unit' argument.");
-        }
+        ParamChecks.nullNotPermitted(unit, "unit");
         this.tickUnit = unit;
         if (turnOffAutoSelect) {
             setAutoTickUnitSelection(false, false);
@@ -444,7 +444,7 @@ public class LogAxis extends ValueAxis {
             Rectangle2D dataArea, RectangleEdge edge,
             PlotRenderingInfo plotState) {
 
-        AxisState state = null;
+        AxisState state;
         // if the axis is not visible, don't draw it...
         if (!isVisible()) {
             state = new AxisState(cursor);
@@ -771,8 +771,7 @@ public class LogAxis extends ValueAxis {
             Range range = getRange();
             double lower = range.getLowerBound();
             double upper = range.getUpperBound();
-            String lowerStr = "";
-            String upperStr = "";
+            String lowerStr, upperStr;
             NumberFormat formatter = getNumberFormatOverride();
             if (formatter != null) {
                 lowerStr = formatter.format(lower);
@@ -804,7 +803,7 @@ public class LogAxis extends ValueAxis {
         double log1 = calculateLog(start);
         double log2 = calculateLog(end);
         double length = log2 - log1;
-        Range adjusted = null;
+        Range adjusted;
         if (isInverted()) {
             double logA = log1 + length * (1 - upperPercent);
             double logB = log1 + length * (1 - lowerPercent);
