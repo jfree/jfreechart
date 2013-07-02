@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * DateTickUnit.java
  * -----------------
- * (C) Copyright 2000-2009, by Object Refinery Limited.
+ * (C) Copyright 2000-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chris Boek;
@@ -50,6 +50,7 @@
  * 09-Jun-2008 : Deprecated addToDate(Date) (DG);
  * 09-Jan-2009 : Replaced the unit and rollUnit fields with an enumerated
  *               type (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -60,6 +61,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.ObjectUtilities;
 
@@ -136,9 +138,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
             DateTickUnitType rollUnitType, int rollMultiple,
             DateFormat formatter) {
         super(DateTickUnit.getMillisecondCount(unitType, multiple));
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
+        ParamChecks.nullNotPermitted(formatter, "formatter");
         if (multiple <= 0) {
             throw new IllegalArgumentException("Requires 'multiple' > 0.");
         }
@@ -365,9 +365,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @since 1.0.13
      */
     private static int unitTypeToInt(DateTickUnitType unitType) {
-        if (unitType == null) {
-            throw new IllegalArgumentException("Null 'unitType' argument.");
-        }
+        ParamChecks.nullNotPermitted(unitType, "unitType");
         if (unitType.equals(DateTickUnitType.YEAR)) {
             return YEAR;
         }
