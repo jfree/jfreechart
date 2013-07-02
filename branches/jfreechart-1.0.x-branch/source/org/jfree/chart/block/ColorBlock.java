@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ColorBlock.java
  * ---------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  * 16-Mar-2007 : Implemented equals() and fixed serialization (DG);
  * 08-Apr-2008 : Added code for margin, border and padding in draw()
  *               method (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -51,6 +52,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.Size2D;
@@ -75,9 +77,7 @@ public class ColorBlock extends AbstractBlock implements Block {
      * @param height  the height.
      */
     public ColorBlock(Paint paint, double width, double height) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.paint = paint;
         setWidth(width);
         setHeight(height);
