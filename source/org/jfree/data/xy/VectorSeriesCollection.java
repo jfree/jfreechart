@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * VectorSeriesCollection.java
  * ---------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited.
+ * (C) Copyright 2007-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  *               methods (DG);
  * 25-May-2007 : Moved from experimental to the main source tree (DG);
  * 22-Apr-2008 : Implemented PublicCloneable (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -46,6 +47,7 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.ObjectUtilities;
@@ -76,9 +78,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      * @param series  the series (<code>null</code> not permitted).
      */
     public void addSeries(VectorSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
         fireDatasetChanged();
@@ -94,9 +94,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      *         removed.
      */
     public boolean removeSeries(VectorSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         boolean removed = this.data.remove(series);
         if (removed) {
             series.removeChangeListener(this);
@@ -175,9 +173,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      * @return The series index.
      */
     public int indexOf(VectorSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         return this.data.indexOf(series);
     }
 
