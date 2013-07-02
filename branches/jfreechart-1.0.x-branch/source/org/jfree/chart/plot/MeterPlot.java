@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * MeterPlot.java
  * --------------
- * (C) Copyright 2000-2008, by Hari and Contributors.
+ * (C) Copyright 2000-2013, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -81,6 +81,7 @@
  * 29-Nov-2007 : Fixed serialization bug with dialOutlinePaint (DG);
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -115,6 +116,7 @@ import java.util.ResourceBundle;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -276,9 +278,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #getDialShape()
      */
     public void setDialShape(DialShape shape) {
-        if (shape == null) {
-            throw new IllegalArgumentException("Null 'shape' argument.");
-        }
+        ParamChecks.nullNotPermitted(shape, "shape");
         this.shape = shape;
         fireChangeEvent();
     }
@@ -333,9 +333,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #getRange()
      */
     public void setRange(Range range) {
-        if (range == null) {
-            throw new IllegalArgumentException("Null 'range' argument.");
-        }
+        ParamChecks.nullNotPermitted(range, "range");
         if (!(range.getLength() > 0.0)) {
             throw new IllegalArgumentException(
                     "Range length must be positive.");
@@ -392,9 +390,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #getTickPaint()
      */
     public void setTickPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.tickPaint = paint;
         fireChangeEvent();
     }
@@ -443,9 +439,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #getNeedlePaint()
      */
     public void setNeedlePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.needlePaint = paint;
         fireChangeEvent();
     }
@@ -496,9 +490,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #getTickLabelFont()
      */
     public void setTickLabelFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         if (!this.tickLabelFont.equals(font)) {
             this.tickLabelFont = font;
             fireChangeEvent();
@@ -525,9 +517,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #getTickLabelPaint()
      */
     public void setTickLabelPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         if (!this.tickLabelPaint.equals(paint)) {
             this.tickLabelPaint = paint;
             fireChangeEvent();
@@ -554,9 +544,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #getTickLabelFormat()
      */
     public void setTickLabelFormat(NumberFormat format) {
-        if (format == null) {
-            throw new IllegalArgumentException("Null 'format' argument.");
-        }
+        ParamChecks.nullNotPermitted(format, "format");
         this.tickLabelFormat = format;
         fireChangeEvent();
     }
@@ -581,9 +569,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #getValueFont()
      */
     public void setValueFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.valueFont = font;
         fireChangeEvent();
     }
@@ -608,9 +594,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #getValuePaint()
      */
     public void setValuePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.valuePaint = paint;
         fireChangeEvent();
     }
@@ -752,9 +736,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #clearIntervals()
      */
     public void addInterval(MeterInterval interval) {
-        if (interval == null) {
-            throw new IllegalArgumentException("Null 'interval' argument.");
-        }
+        ParamChecks.nullNotPermitted(interval, "interval");
         this.intervals.add(interval);
         fireChangeEvent();
     }
@@ -1006,11 +988,9 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      *              dial.
      */
     protected void fillArc(Graphics2D g2, Rectangle2D area,
-                           double minValue, double maxValue, Paint paint,
-                           boolean dial) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument");
-        }
+            double minValue, double maxValue, Paint paint, boolean dial) {
+
+        ParamChecks.nullNotPermitted(paint, "paint");
         double startAngle = valueToAngle(maxValue);
         double endAngle = valueToAngle(minValue);
         double extent = endAngle - startAngle;
