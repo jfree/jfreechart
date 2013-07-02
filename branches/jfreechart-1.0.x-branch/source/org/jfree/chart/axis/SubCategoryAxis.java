@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * SubCategoryAxis.java
  * --------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Adriaan Joubert;
@@ -45,6 +45,7 @@
  *               addSubCategory() (DG);
  * 13-Nov-2008 : Fix NullPointerException when dataset is null - see bug
  *               report 2275695 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -67,6 +68,7 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextUtilities;
@@ -108,9 +110,7 @@ public class SubCategoryAxis extends CategoryAxis
      * @param subCategory  the sub-category (<code>null</code> not permitted).
      */
     public void addSubCategory(Comparable subCategory) {
-        if (subCategory == null) {
-            throw new IllegalArgumentException("Null 'subcategory' axis.");
-        }
+        ParamChecks.nullNotPermitted(subCategory, "subCategory");
         this.subCategories.add(subCategory);
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -135,9 +135,7 @@ public class SubCategoryAxis extends CategoryAxis
      * @see #getSubLabelFont()
      */
     public void setSubLabelFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.subLabelFont = font;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -162,9 +160,7 @@ public class SubCategoryAxis extends CategoryAxis
      * @see #getSubLabelPaint()
      */
     public void setSubLabelPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.subLabelPaint = paint;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -180,9 +176,8 @@ public class SubCategoryAxis extends CategoryAxis
      *
      * @return The space required to draw the axis.
      */
-    public AxisSpace reserveSpace(Graphics2D g2, Plot plot,
-                                  Rectangle2D plotArea,
-                                  RectangleEdge edge, AxisSpace space) {
+    public AxisSpace reserveSpace(Graphics2D g2, Plot plot, 
+            Rectangle2D plotArea, RectangleEdge edge, AxisSpace space) {
 
         // create a new space object if one wasn't supplied...
         if (space == null) {
@@ -223,7 +218,7 @@ public class SubCategoryAxis extends CategoryAxis
             Comparable subcategory = (Comparable) iterator.next();
             String label = subcategory.toString();
             Rectangle2D bounds = TextUtilities.getTextBounds(label, g2, fm);
-            double dim = 0.0;
+            double dim;
             if (RectangleEdge.isLeftOrRight(edge)) {
                 dim = bounds.getWidth();
             }
@@ -251,12 +246,9 @@ public class SubCategoryAxis extends CategoryAxis
      *
      * @return The axis state (never <code>null</code>).
      */
-    public AxisState draw(Graphics2D g2,
-                          double cursor,
-                          Rectangle2D plotArea,
-                          Rectangle2D dataArea,
-                          RectangleEdge edge,
-                          PlotRenderingInfo plotState) {
+    public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
+            Rectangle2D dataArea, RectangleEdge edge, 
+            PlotRenderingInfo plotState) {
 
         // if the axis is not visible, don't draw it...
         if (!isVisible()) {
@@ -294,15 +286,10 @@ public class SubCategoryAxis extends CategoryAxis
      * @return The updated axis state (never <code>null</code>).
      */
     protected AxisState drawSubCategoryLabels(Graphics2D g2,
-                                              Rectangle2D plotArea,
-                                              Rectangle2D dataArea,
-                                              RectangleEdge edge,
-                                              AxisState state,
-                                              PlotRenderingInfo plotState) {
+            Rectangle2D plotArea, Rectangle2D dataArea, RectangleEdge edge,
+            AxisState state, PlotRenderingInfo plotState) {
 
-        if (state == null) {
-            throw new IllegalArgumentException("Null 'state' argument.");
-        }
+        ParamChecks.nullNotPermitted(state, "state");
 
         g2.setFont(this.subLabelFont);
         g2.setPaint(this.subLabelPaint);
@@ -358,8 +345,7 @@ public class SubCategoryAxis extends CategoryAxis
             int subCategoryCount = this.subCategories.size();
             float width = (float) ((x1 - x0) / subCategoryCount);
             float height = (float) ((y1 - y0) / subCategoryCount);
-            float xx = 0.0f;
-            float yy = 0.0f;
+            float xx, yy;
             for (int i = 0; i < subCategoryCount; i++) {
                 if (RectangleEdge.isTopOrBottom(edge)) {
                     xx = (float) (x0 + (i + 0.5) * width);
