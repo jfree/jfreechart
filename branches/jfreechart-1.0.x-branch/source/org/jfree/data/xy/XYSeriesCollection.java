@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * XYSeriesCollection.java
  * -----------------------
- * (C) Copyright 2001-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
@@ -57,6 +57,7 @@
  * 06-Mar-2009 : Implemented RangeInfo (DG);
  * 06-Mar-2009 : Fixed equals() implementation (DG);
  * 10-Jun-2009 : Simplified code in getX() and getY() methods (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -185,9 +186,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series (<code>null</code> not permitted).
      */
     public void removeSeries(XYSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         if (this.data.contains(series)) {
             series.removeChangeListener(this);
             series.removeVetoableChangeListener(this);
@@ -243,9 +242,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @since 1.0.6
      */
     public int indexOf(XYSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         return this.data.indexOf(series);
     }
 
@@ -279,9 +276,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @since 1.0.9
      */
     public XYSeries getSeries(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         Iterator iterator = this.data.iterator();
         while (iterator.hasNext()) {
             XYSeries series = (XYSeries) iterator.next();
