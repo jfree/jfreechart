@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * SunJPEGEncoderAdapter.java
  * --------------------------
- * (C) Copyright 2004-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -41,6 +41,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 20-Jul-2006 : Pass quality setting to ImageIO. Also increased default
  *               value to 0.95 (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -57,6 +58,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Adapter class for the Sun JPEG Encoder.  The {@link ImageEncoderFactory}
@@ -155,12 +157,8 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
      */
     public void encode(BufferedImage bufferedImage, OutputStream outputStream)
             throws IOException {
-        if (bufferedImage == null) {
-            throw new IllegalArgumentException("Null 'image' argument.");
-        }
-        if (outputStream == null) {
-            throw new IllegalArgumentException("Null 'outputStream' argument.");
-        }
+        ParamChecks.nullNotPermitted(bufferedImage, "bufferedImage");
+        ParamChecks.nullNotPermitted(outputStream, "outputStream");
         Iterator iterator = ImageIO.getImageWritersByFormatName("jpeg");
         ImageWriter writer = (ImageWriter) iterator.next();
         ImageWriteParam p = writer.getDefaultWriteParam();
