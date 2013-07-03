@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * StandardPieURLGenerator.java
  * ----------------------------
- * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -45,12 +45,14 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 24-Nov-2006 : Fixed equals() method and added argument checks (DG);
  * 17-Apr-2007 : Encode section key in generateURL() (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.chart.urls;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.ObjectUtilities;
@@ -109,16 +111,10 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
      * @param indexParameterName  the index parameter name (<code>null</code>
      *     permitted).
      */
-    public StandardPieURLGenerator(String prefix,
-                                   String categoryParameterName,
-                                   String indexParameterName) {
-        if (prefix == null) {
-            throw new IllegalArgumentException("Null 'prefix' argument.");
-        }
-        if (categoryParameterName == null) {
-            throw new IllegalArgumentException(
-                    "Null 'categoryParameterName' argument.");
-        }
+    public StandardPieURLGenerator(String prefix, String categoryParameterName,
+            String indexParameterName) {
+        ParamChecks.nullNotPermitted(prefix, "prefix");
+        ParamChecks.nullNotPermitted(categoryParameterName, "categoryParameterName");
         this.prefix = prefix;
         this.categoryParameterName = categoryParameterName;
         this.indexParameterName = indexParameterName;
