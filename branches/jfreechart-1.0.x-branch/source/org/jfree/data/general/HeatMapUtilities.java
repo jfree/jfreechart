@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * HeatMapUtilities.java
  * ---------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 28-Jan-2009 : Version 1 (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -44,6 +45,7 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.image.BufferedImage;
 import org.jfree.chart.renderer.PaintScale;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -109,12 +111,8 @@ public abstract class HeatMapUtilities {
     public static BufferedImage createHeatMapImage(HeatMapDataset dataset,
             PaintScale paintScale) {
 
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
-        if (paintScale == null) {
-            throw new IllegalArgumentException("Null 'paintScale' argument.");
-        }
+        ParamChecks.nullNotPermitted(dataset, "dataset");
+        ParamChecks.nullNotPermitted(paintScale, "paintScale");
         int xCount = dataset.getXSampleCount();
         int yCount = dataset.getYSampleCount();
         BufferedImage image = new BufferedImage(xCount, yCount,
