@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * DatasetGroup.java
  * -----------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,12 +37,14 @@
  * 07-Oct-2002 : Version 1 (DG);
  * 26-Mar-2003 : Implemented Serializable (DG);
  * 20-Aug-2003 : Implemented Cloneable (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.data.general;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A class that is used to group datasets (currently not used for any specific
@@ -70,9 +72,7 @@ public class DatasetGroup implements Cloneable, Serializable {
      * @param id  the identification for the group.
      */
     public DatasetGroup(String id) {
-        if (id == null) {
-            throw new IllegalArgumentException("Null 'id' argument.");
-        }
+        ParamChecks.nullNotPermitted(id, "id");
         this.id = id;
     }
 
