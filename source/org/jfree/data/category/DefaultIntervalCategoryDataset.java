@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------
  * DefaultIntervalCategoryDataset.java
  * -----------------------------------
- * (C) Copyright 2002-2008, by Jeremy Bowman and Contributors.
+ * (C) Copyright 2002-2013, by Jeremy Bowman and Contributors.
  *
  * Original Author:  Jeremy Bowman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -42,6 +42,7 @@
  *               1897580 (DG)
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -52,6 +53,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.DataUtilities;
@@ -277,9 +279,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @see #setCategoryKeys(Comparable[])
      */
     public void setSeriesKeys(Comparable[] seriesKeys) {
-        if (seriesKeys == null) {
-            throw new IllegalArgumentException("Null 'seriesKeys' argument.");
-        }
+        ParamChecks.nullNotPermitted(seriesKeys, "seriesKeys");
         if (seriesKeys.length != getSeriesCount()) {
             throw new IllegalArgumentException(
                     "The number of series keys does not match the data.");
@@ -335,9 +335,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @see #setSeriesKeys(Comparable[])
      */
     public void setCategoryKeys(Comparable[] categoryKeys) {
-        if (categoryKeys == null) {
-            throw new IllegalArgumentException("Null 'categoryKeys' argument.");
-        }
+        ParamChecks.nullNotPermitted(categoryKeys, "categoryKeys");
         if (categoryKeys.length != getCategoryCount()) {
             throw new IllegalArgumentException(
                     "The number of categories does not match the data.");
@@ -625,9 +623,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @see #getCategoryIndex(Comparable)
      */
     public int getColumnIndex(Comparable columnKey) {
-        if (columnKey == null) {
-            throw new IllegalArgumentException("Null 'columnKey' argument.");
-        }
+        ParamChecks.nullNotPermitted(columnKey, "columnKey");
         return getCategoryIndex(columnKey);
     }
 
@@ -789,9 +785,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @return A clone of the array.
      */
     private static Number[][] clone(Number[][] array) {
-        if (array == null) {
-            throw new IllegalArgumentException("Null 'array' argument.");
-        }
+        ParamChecks.nullNotPermitted(array, "array");
         Number[][] result = new Number[array.length][];
         for (int i = 0; i < array.length; i++) {
             Number[] child = array[i];
