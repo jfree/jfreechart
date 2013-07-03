@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * DialPointer.java
  * ----------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  *               and added argument checks (DG);
  * 23-Nov-2007 : Added fillPaint and outlinePaint attributes to
  *               DialPointer.Pointer (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -61,6 +62,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
@@ -257,9 +259,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * @see #getPaint()
          */
         public void setPaint(Paint paint) {
-            if (paint == null) {
-                throw new IllegalArgumentException("Null 'paint' argument.");
-            }
+            ParamChecks.nullNotPermitted(paint, "paint");
             this.paint = paint;
             notifyListeners(new DialLayerChangeEvent(this));
         }
@@ -284,9 +284,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * @see #getStroke()
          */
         public void setStroke(Stroke stroke) {
-            if (stroke == null) {
-                throw new IllegalArgumentException("Null 'stroke' argument.");
-            }
+            ParamChecks.nullNotPermitted(stroke, "stroke");
             this.stroke = stroke;
             notifyListeners(new DialLayerChangeEvent(this));
         }
@@ -479,9 +477,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * @since 1.0.8
          */
         public void setFillPaint(Paint paint) {
-            if (paint == null) {
-                throw new IllegalArgumentException("Null 'paint' argument.");
-            }
+            ParamChecks.nullNotPermitted(paint, "paint");
             this.fillPaint = paint;
             notifyListeners(new DialLayerChangeEvent(this));
         }
@@ -510,9 +506,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * @since 1.0.8
          */
         public void setOutlinePaint(Paint paint) {
-            if (paint == null) {
-                throw new IllegalArgumentException("Null 'paint' argument.");
-            }
+            ParamChecks.nullNotPermitted(paint, "paint");
             this.outlinePaint = paint;
             notifyListeners(new DialLayerChangeEvent(this));
         }
