@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * LegendGraphic.java
  * ------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,6 +45,7 @@
  *               display gradient paint correctly, updated equals() and
  *               corrected clone() (DG);
  * 01-Aug-2007 : Updated API docs (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -65,6 +66,7 @@ import org.jfree.chart.block.AbstractBlock;
 import org.jfree.chart.block.Block;
 import org.jfree.chart.block.LengthConstraintType;
 import org.jfree.chart.block.RectangleConstraint;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.RectangleAnchor;
@@ -152,12 +154,8 @@ public class LegendGraphic extends AbstractBlock
      * @param fillPaint  the fill paint (<code>null</code> not permitted).
      */
     public LegendGraphic(Shape shape, Paint fillPaint) {
-        if (shape == null) {
-            throw new IllegalArgumentException("Null 'shape' argument.");
-        }
-        if (fillPaint == null) {
-            throw new IllegalArgumentException("Null 'fillPaint' argument.");
-        }
+        ParamChecks.nullNotPermitted(shape, "shape");
+        ParamChecks.nullNotPermitted(fillPaint, "fillPaint");
         this.shapeVisible = true;
         this.shape = shape;
         this.shapeAnchor = RectangleAnchor.CENTER;
@@ -285,9 +283,7 @@ public class LegendGraphic extends AbstractBlock
      * @see #getFillPaintTransformer()
      */
     public void setFillPaintTransformer(GradientPaintTransformer transformer) {
-        if (transformer == null) {
-            throw new IllegalArgumentException("Null 'transformer' argument.");
-        }
+        ParamChecks.nullNotPermitted(transformer, "transformer");
         this.fillPaintTransformer = transformer;
     }
 
@@ -378,9 +374,7 @@ public class LegendGraphic extends AbstractBlock
      * @see #setShapeAnchor(RectangleAnchor)
      */
     public void setShapeAnchor(RectangleAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.shapeAnchor = anchor;
     }
 
@@ -404,9 +398,7 @@ public class LegendGraphic extends AbstractBlock
      * @see #getShapeLocation()
      */
     public void setShapeLocation(RectangleAnchor location) {
-        if (location == null) {
-            throw new IllegalArgumentException("Null 'location' argument.");
-        }
+        ParamChecks.nullNotPermitted(location, "location");
         this.shapeLocation = location;
     }
 
