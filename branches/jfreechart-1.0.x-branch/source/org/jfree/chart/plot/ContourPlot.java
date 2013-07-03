@@ -793,13 +793,13 @@ public class ContourPlot extends Plot implements ContourValuePlot,
                                 CrosshairState crosshairState) {
 
         // setup for collecting optional entity info...
-        Rectangle2D.Double entityArea = null;
+        Rectangle2D.Double entityArea;
         EntityCollection entities = null;
         if (info != null) {
             entities = info.getOwner().getEntityCollection();
         }
 
-        Rectangle2D.Double rect = null;
+        Rectangle2D.Double rect;
         rect = new Rectangle2D.Double();
 
         //turn off anti-aliasing when filling rectangles
@@ -828,17 +828,17 @@ public class ContourPlot extends Plot implements ContourValuePlot,
             horizInverted = ((NumberAxis) horizontalAxis).isInverted();
         }
         double transX = 0.0;
-        double transXm1 = 0.0;
-        double transXp1 = 0.0;
-        double transDXm1 = 0.0;
+        double transXm1;
+        double transXp1;
+        double transDXm1;
         double transDXp1 = 0.0;
         double transDX = 0.0;
-        double transY = 0.0;
-        double transYm1 = 0.0;
-        double transYp1 = 0.0;
-        double transDYm1 = 0.0;
+        double transY;
+        double transYm1;
+        double transYp1;
+        double transDYm1;
         double transDYp1 = 0.0;
-        double transDY = 0.0;
+        double transDY;
         int iMax = xIndex[xIndex.length - 1];
         for (int k = 0; k < x.length; k++) {
             int i = xIndex[k];
@@ -1000,7 +1000,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
                               CrosshairState crosshairState) {
 
         // setup for collecting optional entity info...
-        RectangularShape entityArea = null;
+        RectangularShape entityArea;
         EntityCollection entities = null;
         if (info != null) {
             entities = info.getOwner().getEntityCollection();
@@ -1030,10 +1030,10 @@ public class ContourPlot extends Plot implements ContourValuePlot,
             y[i] = yNumber[i].doubleValue();
         }
 
-        double transX = 0.0;
-        double transDX = 0.0;
-        double transY = 0.0;
-        double transDY = 0.0;
+        double transX;
+        double transDX;
+        double transY;
+        double transDY;
         double size = dataArea.getWidth() * this.ptSizePct;
         for (int k = 0; k < x.length; k++) {
 
@@ -1728,8 +1728,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * @return The range.
      */
     public Range visibleRange(ContourDataset data, Range x, Range y) {
-        Range range = null;
-        range = data.getZValueRange(x, y);
+        Range range = data.getZValueRange(x, y);
         return range;
     }
 
