@@ -398,7 +398,6 @@ public class ServletUtilities {
         else {
             throw new FileNotFoundException(file.getAbsolutePath());
         }
-        return;
     }
 
     /**
