@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------
  * Range.java
  * ----------
- * (C) Copyright 2002-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chuanhao Chiu;
@@ -63,6 +63,7 @@
 package org.jfree.data;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Represents an immutable range of values.
@@ -304,9 +305,7 @@ public strictfp class Range implements Serializable {
      */
     public static Range expand(Range range,
                                double lowerMargin, double upperMargin) {
-        if (range == null) {
-            throw new IllegalArgumentException("Null 'range' argument.");
-        }
+        ParamChecks.nullNotPermitted(range, "range");
         double length = range.getLength();
         double lower = range.getLowerBound() - length * lowerMargin;
         double upper = range.getUpperBound() + length * upperMargin;
@@ -342,9 +341,7 @@ public strictfp class Range implements Serializable {
      */
     public static Range shift(Range base, double delta,
                               boolean allowZeroCrossing) {
-        if (base == null) {
-            throw new IllegalArgumentException("Null 'base' argument.");
-        }
+        ParamChecks.nullNotPermitted(base, "base");
         if (allowZeroCrossing) {
             return new Range(base.getLowerBound() + delta,
                     base.getUpperBound() + delta);
@@ -388,9 +385,7 @@ public strictfp class Range implements Serializable {
      * @since 1.0.9
      */
     public static Range scale(Range base, double factor) {
-        if (base == null) {
-            throw new IllegalArgumentException("Null 'base' argument.");
-        }
+        ParamChecks.nullNotPermitted(base, "base");
         if (factor < 0) {
             throw new IllegalArgumentException("Negative 'factor' argument.");
         }
