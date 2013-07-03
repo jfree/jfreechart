@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * CompositeTitle.java
  * -------------------
- * (C) Copyright 2005-2008, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2013, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Eric Penfold (patch 2006826);
@@ -42,6 +42,7 @@
  * 02-Jul-2008 : Applied patch 2006826 by Eric Penfold, to enable chart
  *               entities to be generated (DG);
  * 09-Jul-2008 : Added backgroundPaint field (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -59,6 +60,7 @@ import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.block.BorderArrangement;
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.event.TitleChangeEvent;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.Size2D;
 import org.jfree.util.PaintUtilities;
@@ -94,9 +96,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      * @param container  the container (<code>null</code> not permitted).
      */
     public CompositeTitle(BlockContainer container) {
-        if (container == null) {
-            throw new IllegalArgumentException("Null 'container' argument.");
-        }
+        ParamChecks.nullNotPermitted(container, "container");
         this.container = container;
         this.backgroundPaint = null;
     }
@@ -141,9 +141,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      * @param container  the container (<code>null</code> not permitted).
      */
     public void setTitleContainer(BlockContainer container) {
-        if (container == null) {
-            throw new IllegalArgumentException("Null 'container' argument.");
-        }
+        ParamChecks.nullNotPermitted(container, "container");
         this.container = container;
     }
 
