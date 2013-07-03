@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * LineRenderer3D.java
  * -------------------
- * (C) Copyright 2004-2011, by Tobias Selb and Contributors.
+ * (C) Copyright 2004-2013, by Tobias Selb and Contributors.
  *
  * Original Author:  Tobias Selb (http://www.uepselon.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -50,6 +50,7 @@
  * 16-Oct-2007 : Fixed bug in range marker drawing (DG);
  * 09-Nov-2011 : Fixed bug 3433405 - wrong item label position (MH);
  * 13-Nov-2011 : Fixed item labels overlapped by line - patch 3435374 (MH);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -80,6 +81,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Marker;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.ValueMarker;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
@@ -200,9 +202,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @see #getWallPaint()
      */
     public void setWallPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.wallPaint = paint;
         fireChangeEvent();
     }
