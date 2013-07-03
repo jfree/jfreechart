@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * TimeSeriesDataItem.java
  * -----------------------
- * (C) Copyright 2001-2009, by Object Refinery Limited.
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,11 +43,14 @@
  *               com.jrefinery.data.time package, implemented Serializable (DG)
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 09-Jun-2009 : Tidied up equals() (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
+ * 
  */
 
 package org.jfree.data.time;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.util.ObjectUtilities;
 
 /**
@@ -93,9 +96,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
      * @param value  the value (<code>null</code> permitted).
      */
     public TimeSeriesDataItem(RegularTimePeriod period, Number value) {
-        if (period == null) {
-            throw new IllegalArgumentException("Null 'period' argument.");
-        }
+        ParamChecks.nullNotPermitted(period, "period");
         this.period = period;
         this.value = value;
     }
