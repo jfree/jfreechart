@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * DefaultKeyedValue.java
  * ----------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,12 +43,14 @@
  * 11-Jun-2007 : Added toString() method to help with debugging (DG);
  * 15-Feb-2008 : Prevent null key (DG);
  * 07-Apr-2008 : Removed to-do item (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.data;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.PublicCloneable;
 
@@ -76,9 +78,7 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
      * @param value  the value (<code>null</code> permitted).
      */
     public DefaultKeyedValue(Comparable key, Number value) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         this.key = key;
         this.value = value;
     }
