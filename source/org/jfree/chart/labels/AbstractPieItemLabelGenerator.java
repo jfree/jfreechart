@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------
  * AbstractPieItemLabelGenerator.java
  * ----------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 03-May-2006 : Fixed bug 1480978, a problem in the clone() method (DG);
  * 23-Nov-2007 : Implemented hashCode() (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -49,6 +50,7 @@ import java.text.MessageFormat;
 import java.text.NumberFormat;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.PieDataset;
 
@@ -79,24 +81,14 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      * @param percentFormat  the format object for the percentages
      *                       (<code>null</code> not permitted).
      */
-    protected AbstractPieItemLabelGenerator(String labelFormat,
-                                            NumberFormat numberFormat,
-                                            NumberFormat percentFormat) {
-
-        if (labelFormat == null) {
-            throw new IllegalArgumentException("Null 'labelFormat' argument.");
-        }
-        if (numberFormat == null) {
-            throw new IllegalArgumentException("Null 'numberFormat' argument.");
-        }
-        if (percentFormat == null) {
-            throw new IllegalArgumentException(
-                    "Null 'percentFormat' argument.");
-        }
+    protected AbstractPieItemLabelGenerator(String labelFormat, 
+            NumberFormat numberFormat, NumberFormat percentFormat) {
+        ParamChecks.nullNotPermitted(labelFormat, "labelFormat");
+        ParamChecks.nullNotPermitted(numberFormat, "numberFormat");
+        ParamChecks.nullNotPermitted(percentFormat, "percentFormat");
         this.labelFormat = labelFormat;
         this.numberFormat = numberFormat;
         this.percentFormat = percentFormat;
-
     }
 
     /**
