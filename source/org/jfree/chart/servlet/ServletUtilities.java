@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * ServletUtilities.java
  * ---------------------
- * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   J?rgen Hoffman;
@@ -51,6 +51,7 @@
  * 10-Jan-2006 : Updated API docs and reformatted (DG);
  * 13-Sep-2006 : Format date in response header in English, not locale default
  *               (see bug 1557141) (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -73,6 +74,7 @@ import javax.servlet.http.HttpSession;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Utility class used for servlet related JFreeChart operations.
@@ -100,9 +102,7 @@ public class ServletUtilities {
      * @param prefix  the prefix (<code>null</code> not permitted).
      */
     public static void setTempFilePrefix(String prefix) {
-        if (prefix == null) {
-            throw new IllegalArgumentException("Null 'prefix' argument.");
-        }
+        ParamChecks.nullNotPermitted(prefix, "prefix");
         ServletUtilities.tempFilePrefix = prefix;
     }
 
@@ -123,9 +123,7 @@ public class ServletUtilities {
      * @param prefix  the prefix (<code>null</code> not permitted).
      */
     public static void setTempOneTimeFilePrefix(String prefix) {
-        if (prefix == null) {
-            throw new IllegalArgumentException("Null 'prefix' argument.");
-        }
+        ParamChecks.nullNotPermitted(prefix, "prefix");
         ServletUtilities.tempOneTimeFilePrefix = prefix;
     }
 
@@ -174,9 +172,7 @@ public class ServletUtilities {
     public static String saveChartAsPNG(JFreeChart chart, int width, int height,
             ChartRenderingInfo info, HttpSession session) throws IOException {
 
-        if (chart == null) {
-            throw new IllegalArgumentException("Null 'chart' argument.");
-        }
+        ParamChecks.nullNotPermitted(chart, "chart");
         ServletUtilities.createTempDir();
         String prefix = ServletUtilities.tempFilePrefix;
         if (session == null) {
@@ -248,10 +244,7 @@ public class ServletUtilities {
             int height, ChartRenderingInfo info, HttpSession session)
             throws IOException {
 
-        if (chart == null) {
-            throw new IllegalArgumentException("Null 'chart' argument.");
-        }
-
+        ParamChecks.nullNotPermitted(chart, "chart");
         ServletUtilities.createTempDir();
         String prefix = ServletUtilities.tempFilePrefix;
         if (session == null) {
