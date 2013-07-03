@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * KeyedObject2D.java
  * ------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  *               Serializable (DG);
  * 03-Oct-2007 : Updated getObject() to handle modified behaviour in
  *               KeyedObjects class, added clear() method (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -48,6 +49,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A data structure that stores zero, one or many objects, where each object is
@@ -147,9 +149,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @see #getRowKey(int)
      */
     public int getRowIndex(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         return this.rowKeys.indexOf(key);
     }
 
@@ -188,9 +188,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @see #getColumnKey(int)
      */
     public int getColumnIndex(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         return this.columnKeys.indexOf(key);
     }
 
@@ -219,12 +217,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *         <code>columnKey</code> is not recognised.
      */
     public Object getObject(Comparable rowKey, Comparable columnKey) {
-        if (rowKey == null) {
-            throw new IllegalArgumentException("Null 'rowKey' argument.");
-        }
-        if (columnKey == null) {
-            throw new IllegalArgumentException("Null 'columnKey' argument.");
-        }
+        ParamChecks.nullNotPermitted(rowKey, "rowKey");
+        ParamChecks.nullNotPermitted(columnKey, "columnKey");
         int row = this.rowKeys.indexOf(rowKey);
         if (row < 0) {
             throw new UnknownKeyException("Row key (" + rowKey
@@ -266,13 +260,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      */
     public void setObject(Object object, Comparable rowKey,
             Comparable columnKey) {
-
-        if (rowKey == null) {
-            throw new IllegalArgumentException("Null 'rowKey' argument.");
-        }
-        if (columnKey == null) {
-            throw new IllegalArgumentException("Null 'columnKey' argument.");
-        }
+        ParamChecks.nullNotPermitted(rowKey, "rowKey");
+        ParamChecks.nullNotPermitted(columnKey, "columnKey");
         KeyedObjects row;
         int rowIndex = this.rowKeys.indexOf(rowKey);
         if (rowIndex >= 0) {
@@ -288,7 +277,6 @@ public class KeyedObjects2D implements Cloneable, Serializable {
         if (columnIndex < 0) {
             this.columnKeys.add(columnKey);
         }
-
     }
 
     /**
