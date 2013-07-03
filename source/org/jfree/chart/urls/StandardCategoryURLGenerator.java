@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * StandardCategoryURLGenerator.java
  * ---------------------------------
- * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -49,12 +49,14 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  * 17-Apr-2007 : Use new URLUtilities class to encode URLs (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.chart.urls;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.util.ObjectUtilities;
@@ -91,9 +93,7 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
      * @param prefix  the prefix to the URL (<code>null</code> not permitted).
      */
     public StandardCategoryURLGenerator(String prefix) {
-        if (prefix == null) {
-            throw new IllegalArgumentException("Null 'prefix' argument.");
-        }
+        ParamChecks.nullNotPermitted(prefix, "prefix");
         this.prefix = prefix;
     }
 
@@ -106,21 +106,12 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
      * @param categoryParameterName  the name of the category parameter to go in
      *                               each URL (<code>null</code> not permitted).
      */
-    public StandardCategoryURLGenerator(String prefix,
-                                        String seriesParameterName,
-                                        String categoryParameterName) {
+    public StandardCategoryURLGenerator(String prefix, 
+            String seriesParameterName, String categoryParameterName) {
 
-        if (prefix == null) {
-            throw new IllegalArgumentException("Null 'prefix' argument.");
-        }
-        if (seriesParameterName == null) {
-            throw new IllegalArgumentException(
-                    "Null 'seriesParameterName' argument.");
-        }
-        if (categoryParameterName == null) {
-            throw new IllegalArgumentException(
-                    "Null 'categoryParameterName' argument.");
-        }
+        ParamChecks.nullNotPermitted(prefix, "prefix");
+        ParamChecks.nullNotPermitted(seriesParameterName, "seriesParameterName");
+        ParamChecks.nullNotPermitted(categoryParameterName, "categoryParameterName");
         this.prefix = prefix;
         this.seriesParameterName = seriesParameterName;
         this.categoryParameterName = categoryParameterName;
