@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * RendererUtilities.java
  * ----------------------
- * (C) Copyright 2007-2012, by Object Refinery Limited.
+ * (C) Copyright 2007-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,11 +38,13 @@
  * 27-Mar-2009 : Fixed results for unsorted datasets (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  * 23-Aug-2012 : Fixed rendering anomaly bug 3561093 (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.chart.renderer;
 
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.xy.XYDataset;
 
@@ -70,9 +72,7 @@ public class RendererUtilities {
      */
     public static int findLiveItemsLowerBound(XYDataset dataset, int series,
             double xLow, double xHigh) {
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
+        ParamChecks.nullNotPermitted(dataset, "dataset");
         if (xLow >= xHigh) {
             throw new IllegalArgumentException("Requires xLow < xHigh.");
         }
@@ -166,9 +166,7 @@ public class RendererUtilities {
      */
     public static int findLiveItemsUpperBound(XYDataset dataset, int series,
             double xLow, double xHigh) {
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
+        ParamChecks.nullNotPermitted(dataset, "dataset");
         if (xLow >= xHigh) {
             throw new IllegalArgumentException("Requires xLow < xHigh.");
         }
