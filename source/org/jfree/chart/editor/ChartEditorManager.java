@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * ChartEditorManager.java
  * -----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   ;
@@ -35,12 +35,14 @@
  * Changes
  * -------
  * 24-Nov-2005 : Version 1 (DG);
- *
+ * 03-Jul-2013 : Use ParamChecks (DG);
+ * 
  */
 
 package org.jfree.chart.editor;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * The central point for obtaining {@link ChartEditor} instances for editing
@@ -75,9 +77,7 @@ public class ChartEditorManager {
      * @param f  the new factory (<code>null</code> not permitted).
      */
     public static void setChartEditorFactory(ChartEditorFactory f) {
-        if (f == null) {
-            throw new IllegalArgumentException("Null 'f' argument.");
-        }
+        ParamChecks.nullNotPermitted(f, "f");
         factory = f;
     }
 
