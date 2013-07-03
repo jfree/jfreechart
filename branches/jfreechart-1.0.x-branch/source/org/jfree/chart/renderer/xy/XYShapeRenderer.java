@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYShapeRenderer.java
  * --------------------
- * (C) Copyright 2008-2011 by Andreas Haumer, xS+S and Contributors.
+ * (C) Copyright 2008-2013 by Andreas Haumer, xS+S and Contributors.
  *
  * Original Author:  Martin Hoeller (x Software + Systeme  xS+S - Andreas
  *                       Haumer);
@@ -39,6 +39,7 @@
  *               amendments by David Gilbert (DG);
  * 16-Feb-2010 : Added findZBounds() (patch 2952086) (MH);
  * 19-Oct-2011 : Fixed NPE in findRangeBounds() (bug 3026341) (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -67,6 +68,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.PaintScale;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.XYDataset;
@@ -163,9 +165,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @see #getPaintScale()
      */
     public void setPaintScale(PaintScale scale) {
-        if (scale == null) {
-            throw new IllegalArgumentException("Null 'scale' argument.");
-        }
+        ParamChecks.nullNotPermitted(scale, "scale");
         this.paintScale = scale;
         notifyListeners(new RendererChangeEvent(this));
     }
@@ -303,9 +303,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @see #getGuideLinePaint()
      */
     public void setGuideLinePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.guideLinePaint = paint;
         fireChangeEvent();
     }
@@ -330,9 +328,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @see #getGuideLineStroke()
      */
     public void setGuideLineStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.guideLineStroke = stroke;
         fireChangeEvent();
     }
