@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * TimePeriodValues.java
  * ---------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@
  * 03-Oct-2006 : Fixed NullPointerException in equals(), fire change event in 
  *               add() method, updated API docs (DG);
  * 07-Apr-2008 : Fixed bug with maxMiddleIndex in updateBounds() (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -50,6 +51,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -237,9 +239,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * @param item  the item (<code>null</code> not permitted).
      */
     public void add(TimePeriodValue item) {
-        if (item == null) {
-            throw new IllegalArgumentException("Null item not allowed.");
-        }
+        ParamChecks.nullNotPermitted(item, "item");
         this.data.add(item);
         updateBounds(item.getPeriod(), this.data.size() - 1);
         fireSeriesChanged();
