@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * DefaultShadowGenerator.java
  * ---------------------------
- * (C) Copyright 2009, 2011 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2013 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * --------
  * 10-Jul-2009 : Version 1 (DG);
  * 29-Oct-2011 : Fixed Eclipse warnings (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -93,9 +94,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      */
     public DefaultShadowGenerator(int size, Color color, float opacity,
             int distance, double angle) {
-        if (color == null) {
-            throw new IllegalArgumentException("Null 'color' argument.");
-        }
+        ParamChecks.nullNotPermitted(color, "color");
         this.shadowSize = size;
         this.shadowColor = color;
         this.shadowOpacity = opacity;
