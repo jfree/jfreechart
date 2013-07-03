@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------
  * StandardXYSeriesLabelGenerator.java
  * -----------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 24-Nov-2006 : Fixed equals() method and updated API docs (DG);
  * 31-Mar-2008 : Added hashCode() method to appease FindBugs (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -47,6 +48,7 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.PublicCloneable;
 
@@ -83,9 +85,7 @@ public class StandardXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      * @param format  the format pattern (<code>null</code> not permitted).
      */
     public StandardXYSeriesLabelGenerator(String format) {
-        if (format == null) {
-            throw new IllegalArgumentException("Null 'format' argument.");
-        }
+        ParamChecks.nullNotPermitted(format, "format");
         this.formatPattern = format;
     }
 
@@ -99,9 +99,7 @@ public class StandardXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      * @return A series label.
      */
     public String generateLabel(XYDataset dataset, int series) {
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
+        ParamChecks.nullNotPermitted(dataset, "dataset");
         String label = MessageFormat.format(
             this.formatPattern, createItemArray(dataset, series)
         );
