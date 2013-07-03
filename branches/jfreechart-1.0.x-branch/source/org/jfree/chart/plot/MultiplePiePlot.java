@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * MultiplePiePlot.java
  * --------------------
- * (C) Copyright 2004-2009, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Brian Cabana (patch 1943021);
@@ -52,6 +52,7 @@
  * 30-Dec-2008 : Added legendItemShape field, and fixed cloning bug (DG);
  * 09-Jan-2009 : See ignoreNullValues to true for sub-chart (DG);
  * 01-Jun-2009 : Set series key in getLegendItems() (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -81,6 +82,7 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.title.TextTitle;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.CategoryToPieDataset;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -229,9 +231,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @see #getPieChart()
      */
     public void setPieChart(JFreeChart pieChart) {
-        if (pieChart == null) {
-            throw new IllegalArgumentException("Null 'pieChart' argument.");
-        }
+        ParamChecks.nullNotPermitted(pieChart, "pieChart");
         if (!(pieChart.getPlot() instanceof PiePlot)) {
             throw new IllegalArgumentException("The 'pieChart' argument must "
                     + "be a chart based on a PiePlot.");
@@ -256,9 +256,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @param order  the order (<code>null</code> not permitted).
      */
     public void setDataExtractOrder(TableOrder order) {
-        if (order == null) {
-            throw new IllegalArgumentException("Null 'order' argument");
-        }
+        ParamChecks.nullNotPermitted(order, "order");
         this.dataExtractOrder = order;
         fireChangeEvent();
     }
@@ -305,9 +303,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.2
      */
     public void setAggregatedItemsKey(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         this.aggregatedItemsKey = key;
         fireChangeEvent();
     }
@@ -333,9 +329,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.2
      */
     public void setAggregatedItemsPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.aggregatedItemsPaint = paint;
         fireChangeEvent();
     }
@@ -374,9 +368,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.12
      */
     public void setLegendItemShape(Shape shape) {
-        if (shape == null) {
-            throw new IllegalArgumentException("Null 'shape' argument.");
-        }
+        ParamChecks.nullNotPermitted(shape, "shape");
         this.legendItemShape = shape;
         fireChangeEvent();
     }
