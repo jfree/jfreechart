@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * AbstractXYItemLabelGenerator.java
  * ---------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,6 +49,7 @@
  * 23-Nov-2007 : Implemented hashCode() (DG);
  * 26-May-2008 : Added accessor methods for nullYString and updated equals()
  *               method (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -61,6 +62,7 @@ import java.text.NumberFormat;
 import java.util.Date;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.ObjectUtilities;
 
@@ -108,23 +110,15 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      * @param yFormat  the format object for the y values (<code>null</code>
      *                 not permitted).
      */
-    protected AbstractXYItemLabelGenerator(String formatString,
-                                           NumberFormat xFormat,
-                                           NumberFormat yFormat) {
+    protected AbstractXYItemLabelGenerator(String formatString, 
+            NumberFormat xFormat, NumberFormat yFormat) {
 
-        if (formatString == null) {
-            throw new IllegalArgumentException("Null 'formatString' argument.");
-        }
-        if (xFormat == null) {
-            throw new IllegalArgumentException("Null 'xFormat' argument.");
-        }
-        if (yFormat == null) {
-            throw new IllegalArgumentException("Null 'yFormat' argument.");
-        }
+        ParamChecks.nullNotPermitted(formatString, "formatString");
+        ParamChecks.nullNotPermitted(xFormat, "xFormat");
+        ParamChecks.nullNotPermitted(yFormat, "yFormat");
         this.formatString = formatString;
         this.xFormat = xFormat;
         this.yFormat = yFormat;
-
     }
 
     /**
@@ -137,13 +131,11 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      * @param yFormat  the format object for the y values (<code>null</code>
      *                 not permitted).
      */
-    protected AbstractXYItemLabelGenerator(String formatString,
-                                           DateFormat xFormat,
-                                           NumberFormat yFormat) {
+    protected AbstractXYItemLabelGenerator(String formatString, 
+            DateFormat xFormat, NumberFormat yFormat) {
 
         this(formatString, NumberFormat.getInstance(), yFormat);
         this.xDateFormat = xFormat;
-
     }
 
     /**
@@ -177,15 +169,13 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      * @param yFormat  the format object for the y values (<code>null</code>
      *                 not permitted).
      */
-    protected AbstractXYItemLabelGenerator(String formatString,
-                                           DateFormat xFormat,
-                                           DateFormat yFormat) {
+    protected AbstractXYItemLabelGenerator(String formatString, 
+            DateFormat xFormat, DateFormat yFormat) {
 
         this(formatString, NumberFormat.getInstance(),
                 NumberFormat.getInstance());
         this.xDateFormat = xFormat;
         this.yDateFormat = yFormat;
-
     }
 
     /**
