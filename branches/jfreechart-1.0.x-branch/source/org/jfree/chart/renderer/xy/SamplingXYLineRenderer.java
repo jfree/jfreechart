@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * SamplingXYLineRenderer.java
  * ---------------------------
- * (C) Copyright 2008, 2009, by Object Refinery Limited.
+ * (C) Copyright 2008-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  *               getLegendLine() and setLegendLine() - these methods
  *               are unnecessary because a mechanism already exists in the
  *               superclass for specifying a custom legend shape (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -61,6 +62,7 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
@@ -116,9 +118,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
      * use the {@link #setBaseLegendShape(java.awt.Shape)} method instead.
      */
     public void setLegendLine(Shape line) {
-        if (line == null) {
-            throw new IllegalArgumentException("Null 'line' argument.");
-        }
+        ParamChecks.nullNotPermitted(line, "line");
         this.legendLine = line;
         fireChangeEvent();
     }
