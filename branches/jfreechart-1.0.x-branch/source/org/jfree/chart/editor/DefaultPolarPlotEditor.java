@@ -89,6 +89,13 @@ public class DefaultPolarPlotEditor extends DefaultPlotEditor
         this.manualTickUnit.setText(Double.toString(this.manualTickUnitValue));
     }
 
+    /**
+     * Creates a tabbed pane for editing the plot attributes.
+     * 
+     * @param plot  the plot.
+     * 
+     * @return A tabbed pane. 
+     */
     protected JTabbedPane createPlotTabs(Plot plot) {
         JTabbedPane tabs = super.createPlotTabs(plot);
         // TODO find a better localization key
@@ -161,6 +168,9 @@ public class DefaultPolarPlotEditor extends DefaultPlotEditor
         }
     }
 
+    /**
+     * Validates the angle offset entered by the user.
+     */
     public void validateAngleOffset() {
         double newOffset;
         try {
@@ -173,6 +183,9 @@ public class DefaultPolarPlotEditor extends DefaultPlotEditor
         this.angleOffset.setText(Double.toString(this.angleOffsetValue));
     }
 
+    /**
+     * Validates the tick unit entered by the user.
+     */
     public void validateTickUnit() {
         double newTickUnit;
         try {
