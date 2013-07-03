@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * StandardXYZToolTipGenerator.java
  * --------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 11-May-2003 : Version 1, split from StandardXYZItemLabelGenerator (DG);
  * 15-Jul-2004 : Switched getZ() and getZValue() methods (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -45,6 +46,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
@@ -100,14 +102,10 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
      * @param zFormat  the format object for the z values (<code>null</code>
      *                 not permitted).
      */
-    public StandardXYZToolTipGenerator(String formatString,
-                                       NumberFormat xFormat,
-                                       NumberFormat yFormat,
-                                       NumberFormat zFormat) {
+    public StandardXYZToolTipGenerator(String formatString, 
+            NumberFormat xFormat, NumberFormat yFormat, NumberFormat zFormat) {
         super(formatString, xFormat, yFormat);
-        if (zFormat == null) {
-            throw new IllegalArgumentException("Null 'zFormat' argument.");
-        }
+        ParamChecks.nullNotPermitted(zFormat, "zFormat");
         this.zFormat = zFormat;
     }
 
@@ -122,14 +120,10 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
      * @param zFormat  the format object for the z values (<code>null</code>
      *                 not permitted).
      */
-    public StandardXYZToolTipGenerator(String formatString,
-                                       DateFormat xFormat,
-                                       DateFormat yFormat,
-                                       DateFormat zFormat) {
+    public StandardXYZToolTipGenerator(String formatString, DateFormat xFormat,
+            DateFormat yFormat, DateFormat zFormat) {
         super(formatString, xFormat, yFormat);
-        if (zFormat == null) {
-            throw new IllegalArgumentException("Null 'zFormat' argument.");
-        }
+        ParamChecks.nullNotPermitted(zFormat, "zFormat");
         this.zDateFormat = zFormat;
     }
 
