@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * DefaultKeyedValues2D.java
  * -------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andreas Schroeder;
@@ -52,7 +52,8 @@
  * 21-Nov-2007 : Fixed bug (1835955) in removeColumn(Comparable) method (DG);
  * 23-Nov-2007 : Added argument checks to removeRow(Comparable) to make it
  *               consistent with the removeRow(Comparable) method (DG);
- *
+ * 03-Jul-2013 : Use ParamChecks (DG);
+ * 
  */
 
 package org.jfree.data;
@@ -61,6 +62,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
@@ -179,9 +181,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #getColumnIndex(Comparable)
      */
     public int getRowIndex(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         if (this.sortRowKeys) {
             return Collections.binarySearch(this.rowKeys, key);
         }
@@ -227,9 +227,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #getRowIndex(Comparable)
      */
     public int getColumnIndex(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         return this.columnKeys.indexOf(key);
     }
 
@@ -258,12 +256,8 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #removeValue(Comparable, Comparable)
      */
     public Number getValue(Comparable rowKey, Comparable columnKey) {
-        if (rowKey == null) {
-            throw new IllegalArgumentException("Null 'rowKey' argument.");
-        }
-        if (columnKey == null) {
-            throw new IllegalArgumentException("Null 'columnKey' argument.");
-        }
+        ParamChecks.nullNotPermitted(rowKey, "rowKey");
+        ParamChecks.nullNotPermitted(columnKey, "columnKey");
 
         // check that the column key is defined in the 2D structure
         if (!(this.columnKeys.contains(columnKey))) {
@@ -425,9 +419,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      *         table.
      */
     public void removeRow(Comparable rowKey) {
-        if (rowKey == null) {
-            throw new IllegalArgumentException("Null 'rowKey' argument.");
-        }
+        ParamChecks.nullNotPermitted(rowKey, "rowKey");
         int index = getRowIndex(rowKey);
         if (index >= 0) {
             removeRow(index);
@@ -464,9 +456,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #removeRow(Comparable)
      */
     public void removeColumn(Comparable columnKey) {
-        if (columnKey == null) {
-            throw new IllegalArgumentException("Null 'columnKey' argument.");
-        }
+        ParamChecks.nullNotPermitted(columnKey, "columnKey");
         if (!this.columnKeys.contains(columnKey)) {
             throw new UnknownKeyException("Unknown key: " + columnKey);
         }
