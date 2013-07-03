@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * KeyedObjects.java
  * -----------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 11-Jan-2005 : Minor tidy up (DG);
  * 28-Sep-2007 : Clean up equals() method (DG);
  * 03-Oct-2007 : Make method behaviour consistent with DefaultKeyedValues (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -46,6 +47,7 @@ package org.jfree.data;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.PublicCloneable;
 
@@ -124,9 +126,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * @see #getKey(int)
      */
     public int getIndex(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         int i = 0;
         Iterator iterator = this.data.iterator();
         while (iterator.hasNext()) {
@@ -224,9 +224,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
         if (position < 0 || position > this.data.size()) {
             throw new IllegalArgumentException("'position' out of bounds.");
         }
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         int pos = getIndex(key);
         if (pos >= 0) {
             this.data.remove(pos);
