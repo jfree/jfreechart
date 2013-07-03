@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * SimpleHistogramDataset.java
  * ---------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sergei Ivanov;
@@ -37,6 +37,7 @@
  * 10-Jan-2005 : Version 1 (DG);
  * 21-May-2007 : Added clearObservations() and removeAllBins() (SI);
  * 10-Jul-2007 : Added null argument check to constructor (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -47,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.DomainOrder;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -86,9 +88,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      * @param key  the series key (<code>null</code> not permitted).
      */
     public SimpleHistogramDataset(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         this.key = key;
         this.bins = new ArrayList();
         this.adjustForBinSize = true;
