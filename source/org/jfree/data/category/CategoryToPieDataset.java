@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * CategoryToPieDataset.java
  * -------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -43,6 +43,7 @@
  * 26-Jul-2006 : Added serialVersionUID, changed constructor to allow null
  *               for source, and added getSource(), getExtractType() and
  *               getExtractIndex() methods - see feature request 1477915 (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -50,6 +51,7 @@ package org.jfree.data.category;
 
 import java.util.Collections;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.general.AbstractDataset;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -88,12 +90,9 @@ public class CategoryToPieDataset extends AbstractDataset
      *                 not permitted).
      * @param index  the row or column index.
      */
-    public CategoryToPieDataset(CategoryDataset source,
-                                TableOrder extract,
-                                int index) {
-        if (extract == null) {
-            throw new IllegalArgumentException("Null 'extract' argument.");
-        }
+    public CategoryToPieDataset(CategoryDataset source, TableOrder extract,
+            int index) {
+        ParamChecks.nullNotPermitted(extract, "extract");
         this.source = source;
         if (this.source != null) {
             this.source.addChangeListener(this);
