@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * StandardXYURLGenerator.java
  * ---------------------------
- * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -43,12 +43,14 @@
  * 13-Jan-2005 : Modified for XHTML 1.0 compliance (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.chart.urls;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.ObjectUtilities;
@@ -108,20 +110,11 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
      * @param itemParameterName  the name of the item parameter to go in each
      *                           URL (<code>null</code> not permitted).
      */
-    public StandardXYURLGenerator(String prefix,
-                                  String seriesParameterName,
-                                  String itemParameterName) {
-        if (prefix == null) {
-            throw new IllegalArgumentException("Null 'prefix' argument.");
-        }
-        if (seriesParameterName == null) {
-            throw new IllegalArgumentException(
-                    "Null 'seriesParameterName' argument.");
-        }
-        if (itemParameterName == null) {
-            throw new IllegalArgumentException(
-                    "Null 'itemParameterName' argument.");
-        }
+    public StandardXYURLGenerator(String prefix, String seriesParameterName,
+            String itemParameterName) {
+        ParamChecks.nullNotPermitted(prefix, "prefix");
+        ParamChecks.nullNotPermitted(seriesParameterName, "seriesParameterName");
+        ParamChecks.nullNotPermitted(itemParameterName, "itemParameterName");
         this.prefix = prefix;
         this.seriesParameterName = seriesParameterName;
         this.itemParameterName = itemParameterName;
