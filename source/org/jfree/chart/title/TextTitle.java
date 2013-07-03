@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * TextTitle.java
  * --------------
- * (C) Copyright 2000-2009, by David Berry and Contributors.
+ * (C) Copyright 2000-2013, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -79,6 +79,7 @@
  *               equals() method (DG);
  * 19-Mar-2009 : Changed ChartEntity to TitleEntity - see patch 2603321 by
  *               Peter Kolb (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -103,6 +104,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.entity.TitleEntity;
 import org.jfree.chart.event.TitleChangeEvent;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.G2TextMeasurer;
@@ -264,9 +266,7 @@ public class TextTitle extends Title
      * @param text  the text (<code>null</code> not permitted).
      */
     public void setText(String text) {
-        if (text == null) {
-            throw new IllegalArgumentException("Null 'text' argument.");
-        }
+        ParamChecks.nullNotPermitted(text, "text");
         if (!this.text.equals(text)) {
             this.text = text;
             notifyListeners(new TitleChangeEvent(this));
@@ -292,9 +292,7 @@ public class TextTitle extends Title
      * @param alignment  the alignment (<code>null</code> not permitted).
      */
     public void setTextAlignment(HorizontalAlignment alignment) {
-        if (alignment == null) {
-            throw new IllegalArgumentException("Null 'alignment' argument.");
-        }
+        ParamChecks.nullNotPermitted(alignment, "alignment");
         this.textAlignment = alignment;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -319,9 +317,7 @@ public class TextTitle extends Title
      * @see #getFont()
      */
     public void setFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         if (!this.font.equals(font)) {
             this.font = font;
             notifyListeners(new TitleChangeEvent(this));
@@ -348,9 +344,7 @@ public class TextTitle extends Title
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         if (!this.paint.equals(paint)) {
             this.paint = paint;
             notifyListeners(new TitleChangeEvent(this));
