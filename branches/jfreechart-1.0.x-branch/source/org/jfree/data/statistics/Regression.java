@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * Regression.java
  * ---------------
- * (C) Copyright 2002-2009, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2795746);
@@ -40,11 +40,13 @@
  *               getYValue() (DG);
  * 29-May-2009 : Added support for polynomial regression, see patch 2795746
  *               by Peter Kolb (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.data.statistics;
 
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -245,10 +247,9 @@ public abstract class Regression {
      *
      * @since 1.0.14
      */
-    public static double[] getPolynomialRegression(XYDataset dataset, int series, int order) {
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
+    public static double[] getPolynomialRegression(XYDataset dataset, 
+            int series, int order) {
+        ParamChecks.nullNotPermitted(dataset, "dataset");
         int itemCount = dataset.getItemCount(series);
         if (itemCount < order + 1) {
             throw new IllegalArgumentException("Not enough data.");
