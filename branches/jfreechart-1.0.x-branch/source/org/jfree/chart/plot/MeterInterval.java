@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * MeterInterval.java
  * ------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 22-Mar-2005 : Version 1 (DG);
  * 29-Mar-2005 : Fixed serialization (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -49,6 +50,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
@@ -101,12 +103,8 @@ public class MeterInterval implements Serializable {
      */
     public MeterInterval(String label, Range range, Paint outlinePaint,
                          Stroke outlineStroke, Paint backgroundPaint) {
-        if (label == null) {
-            throw new IllegalArgumentException("Null 'label' argument.");
-        }
-        if (range == null) {
-            throw new IllegalArgumentException("Null 'range' argument.");
-        }
+        ParamChecks.nullNotPermitted(label, "label");
+        ParamChecks.nullNotPermitted(range, "range");
         this.label = label;
         this.range = range;
         this.outlinePaint = outlinePaint;
