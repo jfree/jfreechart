@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * PaintScaleLegend.java
  * ---------------------
- * (C) Copyright 2007-2009, by Object Refinery Limited.
+ * (C) Copyright 2007-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb - see patch 2686872;
@@ -38,6 +38,7 @@
  * 18-Jun-2008 : Fixed bug drawing scale with log axis (DG);
  * 16-Apr-2009 : Patch 2686872 implementing AxisChangeListener, and fix for
  *               ignored stripOutlineVisible flag (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -64,6 +65,7 @@ import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.PaintScale;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleEdge;
@@ -130,9 +132,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @param axis  the axis (<code>null</code> not permitted).
      */
     public PaintScaleLegend(PaintScale scale, ValueAxis axis) {
-        if (axis == null) {
-            throw new IllegalArgumentException("Null 'axis' argument.");
-        }
+        ParamChecks.nullNotPermitted(axis, "axis");
         this.scale = scale;
         this.axis = axis;
         this.axis.addChangeListener(this);
@@ -167,9 +167,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @see #getScale()
      */
     public void setScale(PaintScale scale) {
-        if (scale == null) {
-            throw new IllegalArgumentException("Null 'scale' argument.");
-        }
+        ParamChecks.nullNotPermitted(scale, "scale");
         this.scale = scale;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -194,9 +192,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @see #getAxis()
      */
     public void setAxis(ValueAxis axis) {
-        if (axis == null) {
-            throw new IllegalArgumentException("Null 'axis' argument.");
-        }
+        ParamChecks.nullNotPermitted(axis, "axis");
         this.axis.removeChangeListener(this);
         this.axis = axis;
         this.axis.addChangeListener(this);
@@ -223,9 +219,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @see #getAxisLocation()
      */
     public void setAxisLocation(AxisLocation location) {
-        if (location == null) {
-            throw new IllegalArgumentException("Null 'location' argument.");
-        }
+        ParamChecks.nullNotPermitted(location, "location");
         this.axisLocation = location;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -322,9 +316,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @see #getStripOutlinePaint()
      */
     public void setStripOutlinePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.stripOutlinePaint = paint;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -349,9 +341,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @see #getStripOutlineStroke()
      */
     public void setStripOutlineStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.stripOutlineStroke = stroke;
         notifyListeners(new TitleChangeEvent(this));
     }
