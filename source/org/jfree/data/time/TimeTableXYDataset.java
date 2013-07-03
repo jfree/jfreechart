@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * TimeTableXYDataset.java
  * -----------------------
- * (C) Copyright 2004-2009, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2013, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -51,6 +51,7 @@
  * 04-Jun-2008 : Updated Javadocs (DG);
  * 26-May-2009 : Peg to time zone if RegularTimePeriod is used (DG);
  * 02-Nov-2009 : Changed String to Comparable in add methods (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -60,6 +61,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.DefaultKeyedValues2D;
 import org.jfree.data.DomainInfo;
@@ -135,12 +137,8 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      * @param locale  the locale to use (<code>null</code> not permitted).
      */
     public TimeTableXYDataset(TimeZone zone, Locale locale) {
-        if (zone == null) {
-            throw new IllegalArgumentException("Null 'zone' argument.");
-        }
-        if (locale == null) {
-            throw new IllegalArgumentException("Null 'locale' argument.");
-        }
+        ParamChecks.nullNotPermitted(zone, "zone");
+        ParamChecks.nullNotPermitted(locale, "locale");
         this.values = new DefaultKeyedValues2D(true);
         this.workingCalendar = Calendar.getInstance(zone, locale);
         this.xPosition = TimePeriodAnchor.START;
@@ -198,9 +196,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      * @see #getXPosition()
      */
     public void setXPosition(TimePeriodAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.xPosition = anchor;
         notifyListeners(new DatasetChangeEvent(this, this));
     }
