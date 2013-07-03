@@ -756,7 +756,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     protected double calculateCategorySize(int categoryCount, Rectangle2D area,
                                            RectangleEdge edge) {
 
-        double result = 0.0;
+        double result;
         double available = 0.0;
 
         if ((edge == RectangleEdge.TOP) || (edge == RectangleEdge.BOTTOM)) {
@@ -860,8 +860,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
         // get the axis label size and update the space object...
         Rectangle2D labelEnclosure = getLabelEnclosure(g2, edge);
-        double labelHeight = 0.0;
-        double labelWidth = 0.0;
+        double labelHeight, labelWidth;
         if (RectangleEdge.isTopOrBottom(edge)) {
             labelHeight = labelEnclosure.getHeight();
             space.add(labelHeight + tickLabelHeight
@@ -1104,7 +1103,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 r = position.getWidthRatio();
             }
 
-            float l = 0.0f;
+            float l;
             if (position.getWidthType() == CategoryLabelWidthType.CATEGORY) {
                 l = (float) calculateCategorySize(categories.size(), dataArea,
                         edge);
