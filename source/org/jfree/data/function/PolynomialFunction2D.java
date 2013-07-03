@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * PolynomialFunction2D.java
  * -------------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2013, by Object Refinery Limited.
  *
  * Original Author:  Peter Kolb;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -36,6 +36,7 @@
  * --------
  * 23-Mar-2009 : Version 1, patch 2795746 (PK);
  * 28-May-2009 : Integrated in JFreeChart with modifications (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -44,6 +45,7 @@ package org.jfree.data.function;
 import java.io.Serializable;
 import java.util.Arrays;
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A function in the form <code>y = a0 + a1 * x + a2 * x^2 + ... + an *
@@ -64,9 +66,7 @@ public class PolynomialFunction2D implements Function2D, Serializable {
      *         (<code>null</code> not permitted).
      */
     public PolynomialFunction2D(double[] coefficients) {
-        if (coefficients == null) {
-            throw new IllegalArgumentException("Null 'coefficients' argument");
-        }
+        ParamChecks.nullNotPermitted(coefficients, "coefficients");
         this.coefficients = (double[]) coefficients.clone();
     }
 
