@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * LegendTitle.java
  * ----------------
- * (C) Copyright 2002-2009, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
@@ -56,6 +56,8 @@
  * 15-Aug-2008 : Added getWrapper() method (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 11-Mar-2012 : Added sort-order support - patch 3500621 by Simon Kaczor (MH);
+ * 03-Jul-2013 : Use ParamChecks (DG);
+ * 
  */
 
 package org.jfree.chart.title;
@@ -89,6 +91,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.entity.TitleEntity;
 import org.jfree.chart.event.TitleChangeEvent;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleEdge;
@@ -225,9 +228,7 @@ public class LegendTitle extends Title
      * @param sources  the sources (<code>null</code> not permitted).
      */
     public void setSources(LegendItemSource[] sources) {
-        if (sources == null) {
-            throw new IllegalArgumentException("Null 'sources' argument.");
-        }
+        ParamChecks.nullNotPermitted(sources, "sources");
         this.sources = sources;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -267,9 +268,7 @@ public class LegendTitle extends Title
      * @param edge  the edge (<code>null</code> not permitted).
      */
     public void setLegendItemGraphicEdge(RectangleEdge edge) {
-        if (edge == null) {
-            throw new IllegalArgumentException("Null 'edge' argument.");
-        }
+        ParamChecks.nullNotPermitted(edge, "edge");
         this.legendItemGraphicEdge = edge;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -289,9 +288,7 @@ public class LegendTitle extends Title
      * @param anchor  the anchor point (<code>null</code> not permitted).
      */
     public void setLegendItemGraphicAnchor(RectangleAnchor anchor) {
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' point.");
-        }
+        ParamChecks.nullNotPermitted(anchor, "anchor");
         this.legendItemGraphicAnchor = anchor;
     }
 
@@ -329,9 +326,7 @@ public class LegendTitle extends Title
      * @param padding  the padding (<code>null</code> not permitted).
      */
     public void setLegendItemGraphicPadding(RectangleInsets padding) {
-        if (padding == null) {
-            throw new IllegalArgumentException("Null 'padding' argument.");
-        }
+        ParamChecks.nullNotPermitted(padding, "padding");
         this.legendItemGraphicPadding = padding;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -352,9 +347,7 @@ public class LegendTitle extends Title
      * @param font  the font (<code>null</code> not permitted).
      */
     public void setItemFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.itemFont = font;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -374,9 +367,7 @@ public class LegendTitle extends Title
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public void setItemPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.itemPaint = paint;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -396,9 +387,7 @@ public class LegendTitle extends Title
      * @param padding  the padding (<code>null</code> not permitted).
      */
     public void setItemLabelPadding(RectangleInsets padding) {
-        if (padding == null) {
-            throw new IllegalArgumentException("Null 'padding' argument.");
-        }
+        ParamChecks.nullNotPermitted(padding, "padding");
         this.itemLabelPadding = padding;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -421,9 +410,7 @@ public class LegendTitle extends Title
      * @since 1.0.15
      */
     public void setSortOrder(SortOrder order) {
-        if (order == null) {
-            throw new IllegalArgumentException("Null 'order' argument.");
-        }
+        ParamChecks.nullNotPermitted(order, "order");
         this.sortOrder = order;
         notifyListeners(new TitleChangeEvent(this));
     }
