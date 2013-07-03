@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Week.java
  * ---------
- * (C) Copyright 2001-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aimin Han;
@@ -68,6 +68,7 @@
  * 19-Dec-2007 : Fixed bug in deprecated constructor (DG);
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
  * 05-Jul-2012 : Replaced getTime().getTime() with getTimeInMillis() (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -78,6 +79,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A calendar week.  All years are considered to have 53 weeks, numbered from 1
@@ -192,15 +194,9 @@ public class Week extends RegularTimePeriod implements Serializable {
      * @since 1.0.7
      */
     public Week(Date time, TimeZone zone, Locale locale) {
-        if (time == null) {
-            throw new IllegalArgumentException("Null 'time' argument.");
-        }
-        if (zone == null) {
-            throw new IllegalArgumentException("Null 'zone' argument.");
-        }
-        if (locale == null) {
-            throw new IllegalArgumentException("Null 'locale' argument.");
-        }
+        ParamChecks.nullNotPermitted(time, "time");
+        ParamChecks.nullNotPermitted(zone, "zone");
+        ParamChecks.nullNotPermitted(locale, "locale");
         Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
 
