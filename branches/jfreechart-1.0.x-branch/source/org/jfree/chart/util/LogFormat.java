@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * LogFormat.java
  * --------------
- * (C) Copyright 2007-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,6 +39,7 @@
  *               attribute as per Feature Request 1886036 (DG);
  * 14-Jan-2009 : Added default constructor, and accessor methods for
  *               exponent formatter (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -113,12 +114,8 @@ public class LogFormat extends NumberFormat {
      */
     public LogFormat(double base, String baseLabel, String powerLabel,
             boolean showBase) {
-        if (baseLabel == null) {
-            throw new IllegalArgumentException("Null 'baseLabel' argument.");
-        }
-        if (powerLabel == null) {
-            throw new IllegalArgumentException("Null 'powerLabel' argument.");
-        }
+        ParamChecks.nullNotPermitted(baseLabel, "baseLabel");
+        ParamChecks.nullNotPermitted(powerLabel, "powerLabel");
         this.base = base;
         this.baseLog = Math.log(this.base);
         this.baseLabel = baseLabel;
@@ -145,9 +142,7 @@ public class LogFormat extends NumberFormat {
      * @since 1.0.13
      */
     public void setExponentFormat(NumberFormat format) {
-        if (format == null) {
-            throw new IllegalArgumentException("Null 'format' argument.");
-        }
+        ParamChecks.nullNotPermitted(format, "format");
         this.formatter = format;
     }
 
