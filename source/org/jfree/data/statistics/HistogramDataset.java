@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * HistogramDataset.java
  * ---------------------
- * (C) Copyright 2003-2009, by Jelai Wang and Contributors.
+ * (C) Copyright 2003-2013, by Jelai Wang and Contributors.
  *
  * Original Author:  Jelai Wang (jelaiw AT mindspring.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -56,6 +56,7 @@
  * 22-May-2008 : Implemented clone() method override (DG);
  * 08-Dec-2009 : Fire change event in addSeries() - see patch 2902842
  *               contributed by Thomas A Caswell (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -66,6 +67,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.xy.AbstractIntervalXYDataset;
@@ -116,9 +118,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @param type  the type (<code>null</code> not permitted).
      */
     public void setType(HistogramType type) {
-        if (type == null) {
-            throw new IllegalArgumentException("Null 'type' argument");
-        }
+        ParamChecks.nullNotPermitted(type, "type");
         this.type = type;
         fireDatasetChanged();
     }
@@ -153,13 +153,9 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     public void addSeries(Comparable key, double[] values, int bins,
             double minimum, double maximum) {
 
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
-        if (values == null) {
-            throw new IllegalArgumentException("Null 'values' argument.");
-        }
-        else if (bins < 1) {
+        ParamChecks.nullNotPermitted(key, "key");
+        ParamChecks.nullNotPermitted(values, "values");
+        if (bins < 1) {
             throw new IllegalArgumentException(
                     "The 'bins' value must be at least 1.");
         }
