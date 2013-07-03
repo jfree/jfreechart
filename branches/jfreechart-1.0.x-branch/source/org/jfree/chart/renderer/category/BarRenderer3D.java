@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * BarRenderer3D.java
  * ------------------
- * (C) Copyright 2001-2012, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2001-2013, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -94,6 +94,7 @@
  * 16-Oct-2007 : Fixed bug in range marker drawing (DG);
  * 19-Mar-2009 : Override for drawRangeLine() method (DG);
  * 11-Jun-2012 : Utilise new PaintAlpha class - patch 3204823 from DaveLaw (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -131,6 +132,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.util.PaintAlpha;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
@@ -246,9 +248,7 @@ public class BarRenderer3D extends BarRenderer
      * @see #getWallPaint()
      */
     public void setWallPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.wallPaint = paint;
         fireChangeEvent();
     }
