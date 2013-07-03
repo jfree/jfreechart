@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * AreaRenderer.java
  * -----------------
- * (C) Copyright 2002-2009, by Jon Iles and Contributors.
+ * (C) Copyright 2002-2013, by Jon Iles and Contributors.
  *
  * Original Author:  Jon Iles;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -68,6 +68,7 @@
  * 26-Jun-2008 : Added crosshair support (DG);
  * 26-May-2009 : Support AreaRendererEndType.LEVEL (DG);
  * 27-May-2009 : Fixed item label anchor for horizontal orientation (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -89,6 +90,7 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.AreaRendererEndType;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.util.PublicCloneable;
@@ -141,9 +143,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      * @see #getEndType()
      */
     public void setEndType(AreaRendererEndType type) {
-        if (type == null) {
-            throw new IllegalArgumentException("Null 'type' argument.");
-        }
+        ParamChecks.nullNotPermitted(type, "type");
         this.endType = type;
         fireChangeEvent();
     }
