@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Series.java
  * -----------
- * (C) Copyright 2001-2011, by Object Refinery Limited.
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -50,6 +50,8 @@
  * 04-May-2006 : Updated API docs (DG);
  * 26-Sep-2007 : Added isEmpty() and getItemCount() methods (DG);
  * 16-Oct-2011 : Added vetoable property change support for series name (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
+ * 
  */
 
 package org.jfree.data.general;
@@ -115,9 +117,7 @@ public abstract class Series implements Cloneable, Serializable {
      * @param description  the series description (<code>null</code> permitted).
      */
     protected Series(Comparable key, String description) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         this.key = key;
         this.description = description;
         this.listeners = new EventListenerList();
