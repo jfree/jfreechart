@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * StandardDialScale.java
  * ----------------------
- * (C) Copyright 2006-2012, by Object Refinery Limited.
+ * (C) Copyright 2006-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,6 +41,7 @@
  * 27-Feb-2009 : Fixed bug 2617557: tickLabelPaint ignored (DG);
  * 09-Feb-2010 : Fixed bug 2946521 (DG);
  * 08-Jan-2012 : Added missing angleToValue() implementation (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -62,6 +63,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextUtilities;
@@ -439,9 +441,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @see #getMajorTickPaint()
      */
     public void setMajorTickPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.majorTickPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -466,9 +466,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @see #getMajorTickStroke()
      */
     public void setMajorTickStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.majorTickStroke = stroke;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -550,9 +548,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @see #getMinorTickPaint()
      */
     public void setMinorTickPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.minorTickPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -581,9 +577,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @since 1.0.8
      */
     public void setMinorTickStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.minorTickStroke = stroke;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -632,9 +626,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @see #getTickLabelFont()
      */
     public void setTickLabelFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         this.tickLabelFont = font;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -657,9 +649,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public void setTickLabelPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.tickLabelPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -712,9 +702,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @see #getTickLabelFormatter()
      */
     public void setTickLabelFormatter(NumberFormat formatter) {
-        if (formatter == null) {
-            throw new IllegalArgumentException("Null 'formatter' argument.");
-        }
+        ParamChecks.nullNotPermitted(formatter, "formatter");
         this.tickLabelFormatter = formatter;
         notifyListeners(new DialLayerChangeEvent(this));
     }
