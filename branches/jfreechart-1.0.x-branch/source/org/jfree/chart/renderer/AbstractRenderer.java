@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * AbstractRenderer.java
  * ---------------------
- * (C) Copyright 2002-2012, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -90,6 +90,7 @@
  * 28-Apr-2009 : Added flag to allow a renderer to treat the legend shape as
  *               a line (DG);
  * 05-Jul-2012 : No need for BooleanUtilities now that min JDK = 1.4.2 (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -121,6 +122,7 @@ import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.LegendTitle;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.BooleanList;
@@ -1023,9 +1025,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getBaseFillPaint()
      */
     public void setBaseFillPaint(Paint paint, boolean notify) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.baseFillPaint = paint;
         if (notify) {
             fireChangeEvent();
@@ -1189,9 +1189,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getBaseOutlinePaint()
      */
     public void setBaseOutlinePaint(Paint paint, boolean notify) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.baseOutlinePaint = paint;
         if (notify) {
             fireChangeEvent();
@@ -1369,9 +1367,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getBaseStroke()
      */
     public void setBaseStroke(Stroke stroke, boolean notify) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.baseStroke = stroke;
         if (notify) {
             fireChangeEvent();
@@ -1533,9 +1529,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getBaseOutlineStroke()
      */
     public void setBaseOutlineStroke(Stroke stroke, boolean notify) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.baseOutlineStroke = stroke;
         if (notify) {
             fireChangeEvent();
@@ -1699,9 +1693,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getBaseShape()
      */
     public void setBaseShape(Shape shape, boolean notify) {
-        if (shape == null) {
-            throw new IllegalArgumentException("Null 'shape' argument.");
-        }
+        ParamChecks.nullNotPermitted(shape, "shape");
         this.baseShape = shape;
         if (notify) {
             fireChangeEvent();
@@ -1959,9 +1951,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getBaseItemLabelFont()
      */
     public void setBaseItemLabelFont(Font font) {
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
+        ParamChecks.nullNotPermitted(font, "font");
         setBaseItemLabelFont(font, true);
     }
 
@@ -2083,9 +2073,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getBaseItemLabelPaint()
      */
     public void setBaseItemLabelPaint(Paint paint, boolean notify) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.baseItemLabelPaint = paint;
         if (notify) {
             fireChangeEvent();
@@ -2201,10 +2189,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getBasePositiveItemLabelPosition()
      */
     public void setBasePositiveItemLabelPosition(ItemLabelPosition position,
-                                                 boolean notify) {
-        if (position == null) {
-            throw new IllegalArgumentException("Null 'position' argument.");
-        }
+            boolean notify) {
+        ParamChecks.nullNotPermitted(position, "position");
         this.basePositiveItemLabelPosition = position;
         if (notify) {
             fireChangeEvent();
@@ -2322,10 +2308,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getBaseNegativeItemLabelPosition()
      */
     public void setBaseNegativeItemLabelPosition(ItemLabelPosition position,
-                                                 boolean notify) {
-        if (position == null) {
-            throw new IllegalArgumentException("Null 'position' argument.");
-        }
+            boolean notify) {
+        ParamChecks.nullNotPermitted(position, "position");
         this.baseNegativeItemLabelPosition = position;
         if (notify) {
             fireChangeEvent();
@@ -2893,9 +2877,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #removeChangeListener(RendererChangeListener)
      */
     public void addChangeListener(RendererChangeListener listener) {
-        if (listener == null) {
-            throw new IllegalArgumentException("Null 'listener' argument.");
-        }
+        ParamChecks.nullNotPermitted(listener, "listener");
         this.listenerList.add(RendererChangeListener.class, listener);
     }
 
@@ -2908,9 +2890,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #addChangeListener(RendererChangeListener)
      */
     public void removeChangeListener(RendererChangeListener listener) {
-        if (listener == null) {
-            throw new IllegalArgumentException("Null 'listener' argument.");
-        }
+        ParamChecks.nullNotPermitted(listener, "listener");
         this.listenerList.remove(RendererChangeListener.class, listener);
     }
 
