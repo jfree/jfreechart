@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -118,6 +118,7 @@
  * 01-Sep-2009 : Bug 2840132 - set renderer index when drawing
  *               annotations (DG);
  * 06-Oct-2011 : Add utility methods to work with 1.4 API in GeneralPath (MK)
+ * 03-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -168,6 +169,7 @@ import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.XYDataset;
@@ -494,9 +496,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param layer  the layer (<code>null</code> not permitted).
      */
     public void addAnnotation(XYAnnotation annotation, Layer layer) {
-        if (annotation == null) {
-            throw new IllegalArgumentException("Null 'annotation' argument.");
-        }
+        ParamChecks.nullNotPermitted(annotation, "annotation");
         if (layer.equals(Layer.FOREGROUND)) {
             this.foregroundAnnotations.add(annotation);
             annotation.addChangeListener(this);
@@ -598,9 +598,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @see #getLegendItemLabelGenerator()
      */
     public void setLegendItemLabelGenerator(XYSeriesLabelGenerator generator) {
-        if (generator == null) {
-            throw new IllegalArgumentException("Null 'generator' argument.");
-        }
+        ParamChecks.nullNotPermitted(generator, "generator");
         this.legendItemLabelGenerator = generator;
         fireChangeEvent();
     }
@@ -1606,10 +1604,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             double x, double y, int domainAxisIndex, int rangeAxisIndex,
             double transX, double transY, PlotOrientation orientation) {
 
-        if (orientation == null) {
-            throw new IllegalArgumentException("Null 'orientation' argument.");
-        }
-
+        ParamChecks.nullNotPermitted(orientation, "orientation");
         if (crosshairState != null) {
             // do we need to update the crosshair values?
             if (this.plot.isDomainCrosshairLockedOnData()) {
