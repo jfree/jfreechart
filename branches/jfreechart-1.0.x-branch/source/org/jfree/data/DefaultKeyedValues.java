@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DefaultKeyedValues.java
  * -----------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Thomas Morgner;
@@ -54,6 +54,7 @@
  * 31-Oct-2007 : Performance improvements by using separate lists for keys and
  *               values (TM);
  * 21-Nov-2007 : Fixed bug in removeValue() method from previous patch (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -65,6 +66,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.SortOrder;
@@ -146,9 +148,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      *     <code>null</code>.
      */
     public int getIndex(Comparable key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         final Integer i = (Integer) this.indexMap.get(key);
         if (i == null) {
             return -1;  // key not found
@@ -225,9 +225,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      * @param value  the value (<code>null</code> permitted).
      */
     public void setValue(Comparable key, Number value) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         int keyIndex = getIndex(key);
         if (keyIndex >= 0) {
             this.keys.set(keyIndex, key);
@@ -270,9 +268,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
         if (position < 0 || position > getItemCount()) {
             throw new IllegalArgumentException("'position' out of bounds.");
         }
-        if (key == null) {
-            throw new IllegalArgumentException("Null 'key' argument.");
-        }
+        ParamChecks.nullNotPermitted(key, "key");
         int pos = getIndex(key);
         if (pos == position) {
             this.keys.set(pos, key);
