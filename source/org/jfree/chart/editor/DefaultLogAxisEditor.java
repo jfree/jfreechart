@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
+ * -------------------------
  * DefaultLogAxisEditor.java
- * ----------------------
- * (C) Copyright 2005-2011, by Object Refinery Limited and Contributors.
+ * -------------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Martin Hoeller;
  * Contributor(s):   -;
@@ -60,21 +60,23 @@ public class DefaultLogAxisEditor extends DefaultValueAxisEditor {
 
     private JTextField manualTickUnit;
 
-
     /**
      * Standard constructor: builds a property panel for the specified axis.
      *
      * @param axis  the axis, which should be changed.
      */
-    public DefaultLogAxisEditor(LogAxis axis)
-    {
+    public DefaultLogAxisEditor(LogAxis axis) {
         super(axis);
         this.manualTickUnitValue = axis.getTickUnit().getSize();
         manualTickUnit.setText(Double.toString(this.manualTickUnitValue));
     }
     
-    protected JPanel createTickUnitPanel()
-    {
+    /**
+     * Creates a panel for editing the tick unit.
+     * 
+     * @return A panel.
+     */
+    protected JPanel createTickUnitPanel() {
         JPanel tickUnitPanel = super.createTickUnitPanel();
 
         tickUnitPanel.add(new JLabel(localizationResources.getString(
@@ -93,6 +95,7 @@ public class DefaultLogAxisEditor extends DefaultValueAxisEditor {
 
     /**
      * Handles actions from within the property panel.
+     * 
      * @param event an event.
      */
     public void actionPerformed(ActionEvent event) {
@@ -113,6 +116,9 @@ public class DefaultLogAxisEditor extends DefaultValueAxisEditor {
         }
     }
 
+    /**
+     * Toggles the auto-tick-unit setting.
+     */
     public void toggleAutoTick() {
         super.toggleAutoTick();
         if (isAutoTickUnitSelection()) {
@@ -124,6 +130,9 @@ public class DefaultLogAxisEditor extends DefaultValueAxisEditor {
         }
     }
 
+    /**
+     * Validates the tick unit entered.
+     */
     public void validateTickUnit() {
         double newTickUnit;
         try {
