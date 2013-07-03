@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------
  * Title.java
  * ----------
- * (C) Copyright 2000-2008, by David Berry and Contributors.
+ * (C) Copyright 2000-2013, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -55,6 +55,7 @@
  * 02-Feb-2005 : Changed Spacer --> RectangleInsets for padding (DG);
  * 03-May-2005 : Fixed problem in equals() method (DG);
  * 19-Sep-2008 : Added visibility flag (DG);
+ * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -73,6 +74,7 @@ import org.jfree.chart.block.AbstractBlock;
 import org.jfree.chart.block.Block;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.event.TitleChangeListener;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
@@ -173,27 +175,14 @@ public abstract class Title extends AbstractBlock
      * @param padding  the amount of space to leave around the outside of the
      *                 title (<code>null</code> not permitted).
      */
-    protected Title(RectangleEdge position,
-                    HorizontalAlignment horizontalAlignment,
-                    VerticalAlignment verticalAlignment,
-                    RectangleInsets padding) {
+    protected Title(RectangleEdge position, 
+            HorizontalAlignment horizontalAlignment, 
+            VerticalAlignment verticalAlignment, RectangleInsets padding) {
 
-        // check arguments...
-        if (position == null) {
-            throw new IllegalArgumentException("Null 'position' argument.");
-        }
-        if (horizontalAlignment == null) {
-            throw new IllegalArgumentException(
-                    "Null 'horizontalAlignment' argument.");
-        }
-
-        if (verticalAlignment == null) {
-            throw new IllegalArgumentException(
-                    "Null 'verticalAlignment' argument.");
-        }
-        if (padding == null) {
-            throw new IllegalArgumentException("Null 'spacer' argument.");
-        }
+        ParamChecks.nullNotPermitted(position, "position");
+        ParamChecks.nullNotPermitted(horizontalAlignment, "horizontalAlignment");
+        ParamChecks.nullNotPermitted(verticalAlignment, "verticalAlignment");
+        ParamChecks.nullNotPermitted(padding, "padding");
 
         this.visible = true;
         this.position = position;
@@ -202,7 +191,6 @@ public abstract class Title extends AbstractBlock
         setPadding(padding);
         this.listenerList = new EventListenerList();
         this.notify = true;
-
     }
 
     /**
@@ -250,9 +238,7 @@ public abstract class Title extends AbstractBlock
      * @param position  the position (<code>null</code> not permitted).
      */
     public void setPosition(RectangleEdge position) {
-        if (position == null) {
-            throw new IllegalArgumentException("Null 'position' argument.");
-        }
+        ParamChecks.nullNotPermitted(position, "position");
         if (this.position != position) {
             this.position = position;
             notifyListeners(new TitleChangeEvent(this));
@@ -276,9 +262,7 @@ public abstract class Title extends AbstractBlock
      *                   permitted).
      */
     public void setHorizontalAlignment(HorizontalAlignment alignment) {
-        if (alignment == null) {
-            throw new IllegalArgumentException("Null 'alignment' argument.");
-        }
+        ParamChecks.nullNotPermitted(alignment, "alignment");
         if (this.horizontalAlignment != alignment) {
             this.horizontalAlignment = alignment;
             notifyListeners(new TitleChangeEvent(this));
@@ -302,9 +286,7 @@ public abstract class Title extends AbstractBlock
      *                   <code>null</code> not permitted).
      */
     public void setVerticalAlignment(VerticalAlignment alignment) {
-        if (alignment == null) {
-            throw new IllegalArgumentException("Null 'alignment' argument.");
-        }
+        ParamChecks.nullNotPermitted(alignment, "alignment");
         if (this.verticalAlignment != alignment) {
             this.verticalAlignment = alignment;
             notifyListeners(new TitleChangeEvent(this));
