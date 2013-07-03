@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYTaskDataset.java
  * ------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 17-Sep-2008 : Version 1 (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -44,6 +45,7 @@ import java.util.Date;
 
 import org.jfree.chart.axis.SymbolAxis;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.time.TimePeriod;
@@ -78,9 +80,7 @@ public class XYTaskDataset extends AbstractXYDataset
      * @param tasks  the underlying dataset (<code>null</code> not permitted).
      */
     public XYTaskDataset(TaskSeriesCollection tasks) {
-        if (tasks == null) {
-            throw new IllegalArgumentException("Null 'tasks' argument.");
-        }
+        ParamChecks.nullNotPermitted(tasks, "tasks");
         this.underlying = tasks;
         this.seriesWidth = 0.8;
         this.underlying.addChangeListener(this);
