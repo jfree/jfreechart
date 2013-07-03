@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Task.java
  * ---------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 16-Sep-2003 : Added percentage complete (DG);
  * 30-Jul-2004 : Added clone() and equals() methods and implemented
  *               Serializable (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -46,6 +47,7 @@ package org.jfree.data.gantt;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.time.SimpleTimePeriod;
 import org.jfree.data.time.TimePeriod;
@@ -81,9 +83,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
      * @param duration  the task duration (<code>null</code> permitted).
      */
     public Task(String description, TimePeriod duration) {
-        if (description == null) {
-            throw new IllegalArgumentException("Null 'description' argument.");
-        }
+        ParamChecks.nullNotPermitted(description, "description");
         this.description = description;
         this.duration = duration;
         this.percentComplete = null;
@@ -117,9 +117,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
      * @param description  the description (<code>null</code> not permitted).
      */
     public void setDescription(String description) {
-        if (description == null) {
-            throw new IllegalArgumentException("Null 'description' argument.");
-        }
+        ParamChecks.nullNotPermitted(description, "description");
         this.description = description;
     }
 
@@ -174,9 +172,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
      * @param subtask  the subtask (<code>null</code> not permitted).
      */
     public void addSubtask(Task subtask) {
-        if (subtask == null) {
-            throw new IllegalArgumentException("Null 'subtask' argument.");
-        }
+        ParamChecks.nullNotPermitted(subtask, "subtask");
         this.subtasks.add(subtask);
     }
 
