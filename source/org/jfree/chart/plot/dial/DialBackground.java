@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * DialBackground.java
  * -------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 03-Nov-2006 : Version 1 (DG);
  * 16-Oct-2007 : The equals() method needs to call super.equals() (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -52,6 +53,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.StandardGradientPaintTransformer;
@@ -98,9 +100,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      *     <code>null</code>.
      */
     public DialBackground(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.paint = paint;
         this.gradientPaintTransformer = new StandardGradientPaintTransformer();
     }
@@ -125,9 +125,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.paint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -154,9 +152,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      * @see #getGradientPaintTransformer()
      */
     public void setGradientPaintTransformer(GradientPaintTransformer t) {
-        if (t == null) {
-            throw new IllegalArgumentException("Null 't' argument.");
-        }
+        ParamChecks.nullNotPermitted(t, "t");
         this.gradientPaintTransformer = t;
         notifyListeners(new DialLayerChangeEvent(this));
     }
