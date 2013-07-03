@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * DataUtilities.java
  * ------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited and contributors.
+ * (C) Copyright 2003-2013, by Object Refinery Limited and contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2511330);
@@ -42,12 +42,14 @@
  * 28-Jan-2009 : Added equal(double[][], double[][]) method (DG);
  * 28-Jan-2009 : Added clone(double[][]) method (DG);
  * 04-Feb-2009 : Added calculateColumnTotal/RowTotal variants (PK);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.data;
 
 import java.util.Arrays;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.DatasetUtilities;
 
 /**
@@ -97,9 +99,7 @@ public abstract class DataUtilities {
      * @since 1.0.13
      */
     public static double[][] clone(double[][] source) {
-        if (source == null) {
-            throw new IllegalArgumentException("Null 'source' argument.");
-        }
+        ParamChecks.nullNotPermitted(source, "source");
         double[][] clone = new double[source.length][];
         for (int i = 0; i < source.length; i++) {
             if (source[i] != null) {
@@ -121,9 +121,7 @@ public abstract class DataUtilities {
      * @return The total of the values in the specified column.
      */
     public static double calculateColumnTotal(Values2D data, int column) {
-        if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");
-        }
+        ParamChecks.nullNotPermitted(data, "data");
         double total = 0.0;
         int rowCount = data.getRowCount();
         for (int r = 0; r < rowCount; r++) {
@@ -147,11 +145,9 @@ public abstract class DataUtilities {
      *
      * @since 1.0.13
      */
-     public static double calculateColumnTotal(Values2D data, int column,
+    public static double calculateColumnTotal(Values2D data, int column,
              int[] validRows) {
-        if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");
-        }
+        ParamChecks.nullNotPermitted(data, "data");
         double total = 0.0;
         int rowCount = data.getRowCount();
         for (int v = 0; v < validRows.length; v++) {
@@ -176,9 +172,7 @@ public abstract class DataUtilities {
      * @return The total of the values in the specified row.
      */
     public static double calculateRowTotal(Values2D data, int row) {
-        if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");
-        }
+        ParamChecks.nullNotPermitted(data, "data");
         double total = 0.0;
         int columnCount = data.getColumnCount();
         for (int c = 0; c < columnCount; c++) {
@@ -202,11 +196,9 @@ public abstract class DataUtilities {
      *
      * @since 1.0.13
      */
-     public static double calculateRowTotal(Values2D data, int row,
+    public static double calculateRowTotal(Values2D data, int row,
              int[] validCols) {
-        if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");
-        }
+        ParamChecks.nullNotPermitted(data, "data");
         double total = 0.0;
         int colCount = data.getColumnCount();
         for (int v = 0; v < validCols.length; v++) {
@@ -230,9 +222,7 @@ public abstract class DataUtilities {
      * @return An array of <code>Double</code>.
      */
     public static Number[] createNumberArray(double[] data) {
-        if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");
-        }
+        ParamChecks.nullNotPermitted(data, "data");
         Number[] result = new Number[data.length];
         for (int i = 0; i < data.length; i++) {
             result[i] = new Double(data[i]);
@@ -249,9 +239,7 @@ public abstract class DataUtilities {
      * @return An array of <code>Double</code>.
      */
     public static Number[][] createNumberArray2D(double[][] data) {
-        if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");
-        }
+        ParamChecks.nullNotPermitted(data, "data");
         int l1 = data.length;
         Number[][] result = new Number[l1][];
         for (int i = 0; i < l1; i++) {
@@ -271,9 +259,7 @@ public abstract class DataUtilities {
      * @return The cumulative percentages.
      */
     public static KeyedValues getCumulativePercentages(KeyedValues data) {
-        if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");
-        }
+        ParamChecks.nullNotPermitted(data, "data");
         DefaultKeyedValues result = new DefaultKeyedValues();
         double total = 0.0;
         for (int i = 0; i < data.getItemCount(); i++) {
