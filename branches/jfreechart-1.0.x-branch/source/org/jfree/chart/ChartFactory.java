@@ -564,9 +564,8 @@ public abstract class ChartFactory {
                 JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
 
         if (subTitle) {
-            TextTitle subtitle = null;
-            subtitle = new TextTitle("Bright " + (greenForIncrease ? "red"
-                    : "green") + "=change >=-" + percentDiffForMaxScale
+            TextTitle subtitle = new TextTitle("Bright " + (greenForIncrease 
+                    ? "red" : "green") + "=change >=-" + percentDiffForMaxScale
                     + "%, Bright " + (!greenForIncrease ? "red" : "green")
                     + "=change >=+" + percentDiffForMaxScale + "%",
                     new Font("SansSerif", Font.PLAIN, 10));
