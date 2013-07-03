@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * DisplayChart.java
  * -----------------
- * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -84,7 +84,7 @@ public class DisplayChart extends HttpServlet {
      * @throws ServletException never.
      */
     public void init() throws ServletException {
-        return;
+        // nothing to do
     }
 
     /**
@@ -150,7 +150,6 @@ public class DisplayChart extends HttpServlet {
         else {
             throw new ServletException("Chart image not found");
         }
-        return;
     }
 
 }
