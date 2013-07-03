@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * DefaultHighLowDataset.java
  * --------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,6 +43,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 28-Nov-2006 : Added equals() method override (DG);
  * 22-Apr-2008 : Implemented PublicCloneable (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -50,6 +51,7 @@ package org.jfree.data.xy;
 
 import java.util.Arrays;
 import java.util.Date;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.PublicCloneable;
 
@@ -101,12 +103,8 @@ public class DefaultHighLowDataset extends AbstractXYDataset
             double[] high, double[] low, double[] open, double[] close,
             double[] volume) {
 
-        if (seriesKey == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
-        if (date == null) {
-            throw new IllegalArgumentException("Null 'date' argument.");
-        }
+        ParamChecks.nullNotPermitted(seriesKey, "seriesKey");
+        ParamChecks.nullNotPermitted(date, "date");
         this.seriesKey = seriesKey;
         this.date = date;
         this.high = createNumberArray(high);
