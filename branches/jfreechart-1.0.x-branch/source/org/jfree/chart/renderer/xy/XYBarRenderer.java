@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYBarRenderer.java
  * ------------------
- * (C) Copyright 2001-2012, by Object Refinery Limited.
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -98,6 +98,7 @@
  * 05-Feb-2009 : Added barAlignmentFactor (DG);
  * 10-May-2012 : Fix findDomainBounds() and findRangeBounds() to account for
  *               non-visible series (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -127,6 +128,7 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.IntervalXYDataset;
@@ -181,9 +183,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @since 1.0.11
      */
     public static void setDefaultBarPainter(XYBarPainter painter) {
-        if (painter == null) {
-            throw new IllegalArgumentException("Null 'painter' argument.");
-        }
+        ParamChecks.nullNotPermitted(painter, "painter");
         XYBarRenderer.defaultBarPainter = painter;
     }
 
@@ -505,9 +505,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @see #getLegendBar()
      */
     public void setLegendBar(Shape bar) {
-        if (bar == null) {
-            throw new IllegalArgumentException("Null 'bar' argument.");
-        }
+        ParamChecks.nullNotPermitted(bar, "bar");
         this.legendBar = bar;
         fireChangeEvent();
     }
@@ -590,9 +588,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @since 1.0.11
      */
     public void setBarPainter(XYBarPainter painter) {
-        if (painter == null) {
-            throw new IllegalArgumentException("Null 'painter' argument.");
-        }
+        ParamChecks.nullNotPermitted(painter, "painter");
         this.barPainter = painter;
         fireChangeEvent();
     }
