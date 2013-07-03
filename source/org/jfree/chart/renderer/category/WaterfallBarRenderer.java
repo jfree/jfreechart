@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * WaterfallBarRenderer.java
  * -------------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Darshan Shah;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -54,6 +54,7 @@
  * 04-Feb-2009 : Updated findRangeBounds to handle null dataset consistently
  *               with other renderers (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -77,6 +78,7 @@ import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.AbstractRenderer;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
@@ -146,25 +148,13 @@ public class WaterfallBarRenderer extends BarRenderer {
      * @param lastBarPaint  the color of the last bar (<code>null</code> not
      *                      permitted).
      */
-    public WaterfallBarRenderer(Paint firstBarPaint,
-                                Paint positiveBarPaint,
-                                Paint negativeBarPaint,
-                                Paint lastBarPaint) {
+    public WaterfallBarRenderer(Paint firstBarPaint, Paint positiveBarPaint,
+            Paint negativeBarPaint, Paint lastBarPaint) {
         super();
-        if (firstBarPaint == null) {
-            throw new IllegalArgumentException("Null 'firstBarPaint' argument");
-        }
-        if (positiveBarPaint == null) {
-            throw new IllegalArgumentException(
-                    "Null 'positiveBarPaint' argument");
-        }
-        if (negativeBarPaint == null) {
-            throw new IllegalArgumentException(
-                    "Null 'negativeBarPaint' argument");
-        }
-        if (lastBarPaint == null) {
-            throw new IllegalArgumentException("Null 'lastBarPaint' argument");
-        }
+        ParamChecks.nullNotPermitted(firstBarPaint, "firstBarPaint");
+        ParamChecks.nullNotPermitted(positiveBarPaint, "positiveBarPaint");
+        ParamChecks.nullNotPermitted(negativeBarPaint, "negativeBarPaint");
+        ParamChecks.nullNotPermitted(lastBarPaint, "lastBarPaint");
         this.firstBarPaint = firstBarPaint;
         this.lastBarPaint = lastBarPaint;
         this.positiveBarPaint = positiveBarPaint;
@@ -190,9 +180,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public void setFirstBarPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.firstBarPaint = paint;
         fireChangeEvent();
     }
@@ -213,9 +201,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public void setLastBarPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.lastBarPaint = paint;
         fireChangeEvent();
     }
@@ -235,9 +221,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public void setPositiveBarPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.positiveBarPaint = paint;
         fireChangeEvent();
     }
@@ -258,9 +242,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public void setNegativeBarPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.negativeBarPaint = paint;
         fireChangeEvent();
     }
