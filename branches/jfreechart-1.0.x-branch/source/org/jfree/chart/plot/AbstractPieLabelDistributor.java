@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * AbstractPieLabelDistributor.java
  * --------------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,13 +35,15 @@
  * Changes
  * -------
  * 14-Jun-2007 : Version 1 (DG);
- *
+ * 03-Jul-2013 : Use ParamChecks (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
 
 import java.io.Serializable;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A base class for handling the distribution of pie section labels.  Create
@@ -78,9 +80,7 @@ public abstract class AbstractPieLabelDistributor implements Serializable {
      * @param record  the label record (<code>null</code> not permitted).
      */
     public void addPieLabelRecord(PieLabelRecord record) {
-        if (record == null) {
-            throw new IllegalArgumentException("Null 'record' argument.");
-        }
+        ParamChecks.nullNotPermitted(record, "record");
         this.labels.add(record);
     }
 
