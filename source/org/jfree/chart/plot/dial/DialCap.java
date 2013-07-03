@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * DialCap.java
  * ------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -54,6 +54,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
@@ -155,9 +156,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      * @see #getFillPaint()
      */
     public void setFillPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.fillPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -182,9 +181,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      * @see #getOutlinePaint()
      */
     public void setOutlinePaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.outlinePaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -209,9 +206,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      * @see #getOutlineStroke()
      */
     public void setOutlineStroke(Stroke stroke) {
-        if (stroke == null) {
-            throw new IllegalArgumentException("Null 'stroke' argument.");
-        }
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.outlineStroke = stroke;
         notifyListeners(new DialLayerChangeEvent(this));
     }
