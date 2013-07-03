@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DefaultWindDataset.java
  * -----------------------
- * (C) Copyright 2001-2008, by Achilleus Mantzios and Contributors.
+ * (C) Copyright 2001-2013, by Achilleus Mantzios and Contributors.
  *
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -41,6 +41,7 @@
  *               getYValue() (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  * 22-Apr-2008 : Implemented PublicCloneable (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -51,6 +52,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.PublicCloneable;
 
@@ -126,9 +128,7 @@ public class DefaultWindDataset extends AbstractXYDataset
      * @throws NullPointerException if <code>data</code> is <code>null</code>.
      */
     public DefaultWindDataset(List seriesKeys, Object[][][] data) {
-        if (seriesKeys == null) {
-            throw new IllegalArgumentException("Null 'seriesKeys' argument.");
-        }
+        ParamChecks.nullNotPermitted(seriesKeys, "seriesKeys");
         if (seriesKeys.size() != data.length) {
             throw new IllegalArgumentException("The number of series keys does "
                     + "not match the number of series in the data array.");
