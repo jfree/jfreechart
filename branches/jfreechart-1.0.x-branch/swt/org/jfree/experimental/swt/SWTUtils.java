@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * SWTUtils.java
  * -------------
- * (C) Copyright 2006, 2007, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006-2013, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   Rainer Blessing;
@@ -46,6 +46,7 @@
  * 27-Nov-2007 : Moved convertToSWT() method from SWTGraphics2D and added
  *               convertAWTImageToSWT() (DG);
  * 01-Jul-2008 : Simplify AWT/SWT font style conversions (HP);
+ * 03-Jul-2012 : Use ParamChecks (DG);
  *
  */
 
@@ -75,6 +76,7 @@ import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Utility class gathering some useful and general method.
@@ -381,9 +383,7 @@ public class SWTUtils {
      * @return Image data.
      */
     public static ImageData convertAWTImageToSWT(Image image) {
-        if (image == null) {
-            throw new IllegalArgumentException("Null 'image' argument.");
-        }
+        ParamChecks.nullNotPermitted(image, "image");
         int w = image.getWidth(null);
         int h = image.getHeight(null);
         if (w == -1 || h == -1) {
