@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYAreaRenderer2.java
  * --------------------
- * (C) Copyright 2004-2011, by Hari and Contributors.
+ * (C) Copyright 2004-2013, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -77,6 +77,7 @@
  * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
  * 17-Jun-2008 : Apply legend font and paint attributes (DG);
  * 06-Oct-2011 : Avoid GeneralPath methods requiring Java 1.5 (MK);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -104,6 +105,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
 import org.jfree.util.PublicCloneable;
@@ -221,9 +223,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
      * @see #getLegendArea()
      */
     public void setLegendArea(Shape area) {
-        if (area == null) {
-            throw new IllegalArgumentException("Null 'area' argument.");
-        }
+        ParamChecks.nullNotPermitted(area, "area");
         this.legendArea = area;
         fireChangeEvent();
     }
