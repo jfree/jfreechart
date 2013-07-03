@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------
  * MultipleXYSeriesLabelGenerator.java
  * -----------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,6 +38,7 @@
  * 18-Apr-2005 : Use StringBuffer (DG);
  * 20-Feb-2007 : Fixed for equals() and cloning() (DG);
  * 31-Mar-2008 : Added hashCode() method to appease FindBugs (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -52,6 +53,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.PublicCloneable;
 
@@ -90,9 +92,7 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      * @param format  the format pattern (<code>null</code> not permitted).
      */
     public MultipleXYSeriesLabelGenerator(String format) {
-        if (format == null) {
-            throw new IllegalArgumentException("Null 'format' argument.");
-        }
+        ParamChecks.nullNotPermitted(format, "format");
         this.formatPattern = format;
         this.additionalFormatPattern = "\n{0}";
         this.seriesLabelLists = new HashMap();
@@ -134,9 +134,7 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      * @return A series label.
      */
     public String generateLabel(XYDataset dataset, int series) {
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
+        ParamChecks.nullNotPermitted(dataset, "dataset");
         StringBuffer label = new StringBuffer();
         label.append(MessageFormat.format(this.formatPattern,
                 createItemArray(dataset, series)));
