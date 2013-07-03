@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Hour.java
  * ---------
- * (C) Copyright 2001-2012, by Object Refinery Limited.
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -60,6 +60,7 @@
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
  * 02-Mar-2009 : Added new constructor with Locale (DG);
  * 05-Jul-2012 : Replaced getTime().getTime() with getTimeInMillis() (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -70,6 +71,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * Represents an hour in a specific day.  This class is immutable, which is a
@@ -112,9 +114,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @param day  the day (<code>null</code> not permitted).
      */
     public Hour(int hour, Day day) {
-        if (day == null) {
-            throw new IllegalArgumentException("Null 'day' argument.");
-        }
+        ParamChecks.nullNotPermitted(day, "day");
         this.hour = (byte) hour;
         this.day = day;
         peg(Calendar.getInstance());
@@ -170,15 +170,9 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @since 1.0.13
      */
     public Hour(Date time, TimeZone zone, Locale locale) {
-        if (time == null) {
-            throw new IllegalArgumentException("Null 'time' argument.");
-        }
-        if (zone == null) {
-            throw new IllegalArgumentException("Null 'zone' argument.");
-        }
-        if (locale == null) {
-            throw new IllegalArgumentException("Null 'locale' argument.");
-        }
+        ParamChecks.nullNotPermitted(time, "time");
+        ParamChecks.nullNotPermitted(zone, "zone");
+        ParamChecks.nullNotPermitted(locale, "locale");
         Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
