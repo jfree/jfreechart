@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * TaskSeriesCollection.java
  * -------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Thomas Schuster;
@@ -45,6 +45,7 @@
  * 18-Jan-2006 : Added new methods getSeries(int) and
  *               getSeries(Comparable) (DG);
  * 09-May-2008 : Fixed cloning bug (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -53,6 +54,7 @@ package org.jfree.data.gantt;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.general.AbstractSeriesDataset;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -201,9 +203,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @return The column index.
      */
     public int getColumnIndex(Comparable columnKey) {
-        if (columnKey == null) {
-            throw new IllegalArgumentException("Null 'columnKey' argument.");
-        }
+        ParamChecks.nullNotPermitted(columnKey, "columnKey");
         return this.keys.indexOf(columnKey);
     }
 
@@ -247,9 +247,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param series  the series (<code>null</code> not permitted).
      */
     public void add(TaskSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
 
@@ -274,9 +272,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param series  the series.
      */
     public void remove(TaskSeries series) {
-        if (series == null) {
-            throw new IllegalArgumentException("Null 'series' argument.");
-        }
+        ParamChecks.nullNotPermitted(series, "series");
         if (this.data.contains(series)) {
             series.removeChangeListener(this);
             this.data.remove(series);
