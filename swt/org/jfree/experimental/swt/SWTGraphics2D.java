@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * SWTGraphics2D.java
  * ------------------
- * (C) Copyright 2006-2012, by Henry Proudhon and Contributors.
+ * (C) Copyright 2006-2013, by Henry Proudhon and Contributors.
  *
  * Original Author:  Henry Proudhon (henry.proudhon AT ensmp.fr);
  * Contributor(s):   Cedric Chabanois (cchabanois AT no-log.org);
@@ -56,6 +56,7 @@
  * 27-Feb-2009 : Implemented fillPolygon() - see bug 2583891 (DG);
  * 04-Jul-2012 : Fixed get/setStroke() - see bug 3514487 (DG);
  * 18-Sep-2012 : Fixed missing text - see bug 3482106 and patch 3506228 (DG);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -102,6 +103,7 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.Resource;
 import org.eclipse.swt.graphics.Transform;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * This is a class utility to draw Graphics2D stuff on a swt composite.
@@ -1119,9 +1121,7 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public boolean drawImage(Image image, int x, int y, Color bgcolor,
             ImageObserver observer) {
-        if (image == null) {
-            throw new IllegalArgumentException("Null 'image' argument.");
-        }
+        ParamChecks.nullNotPermitted(image, "image");
         int w = image.getWidth(null);
         int h = image.getHeight(null);
         if (w == -1 || h == -1) {
@@ -1148,9 +1148,7 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public boolean drawImage(Image image, int x, int y, int width, int height,
             Color bgcolor, ImageObserver observer) {
-        if (image == null) {
-            throw new IllegalArgumentException("Null 'image' argument.");
-        }
+        ParamChecks.nullNotPermitted(image, "image");
         int w = image.getWidth(null);
         int h = image.getHeight(null);
         if (w == -1 || h == -1) {
