@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * BoxAndWhiskerRenderer.java
  * --------------------------
- * (C) Copyright 2003-2011, by David Browning and Contributors.
+ * (C) Copyright 2003-2013, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for the Australian Institute of Marine
  *                   Science);
@@ -83,6 +83,7 @@
  * 28-Sep-2009 : Added whiskerWidth attribute, see patch 2868608 by Peter
  *               Becker (DG);
  * 11-Oct-2011 : applied patch #3421088 from Martin Krauskopf to fix bug (MH);
+ * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -117,6 +118,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.renderer.Outlier;
 import org.jfree.chart.renderer.OutlierList;
 import org.jfree.chart.renderer.OutlierListCollection;
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
@@ -222,9 +224,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @see #getArtifactPaint()
      */
     public void setArtifactPaint(Paint paint) {
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        ParamChecks.nullNotPermitted(paint, "paint");
         this.artifactPaint = paint;
         fireChangeEvent();
     }
