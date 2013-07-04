@@ -57,6 +57,7 @@
  * 16-Oct-2011 : Fixed serialization problems with fillComposite (MH);
  * 18-Sep-2012 : Fixed bug 3508799: seriesKey always null in LegendItem (DG);
  * 01-Jul-2013 : Remove deprecated method calls (DG);
+ * 04-Jul-2013 : Fix rendering bug when axis is inverted (DG);
  * 
  */
 
@@ -601,14 +602,20 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         g2.setPaint(plot.getAngleGridlinePaint());
 
         ValueAxis axis = plot.getAxis();
-        double axisMin = axis.getLowerBound();
-        double maxRadius = axis.getUpperBound();
-        Point center = plot.translateToJava2D(0, axisMin, axis, dataArea);
+        double centerValue, outerValue;
+        if (axis.isInverted()) {
+            outerValue = axis.getLowerBound();
+            centerValue = axis.getUpperBound();
+        } else {
+            outerValue = axis.getUpperBound();
+            centerValue = axis.getLowerBound();
+        }
+        Point center = plot.translateToJava2D(0, centerValue, axis, dataArea);
         Iterator iterator = ticks.iterator();
         while (iterator.hasNext()) {
             NumberTick tick = (NumberTick) iterator.next();
             double tickVal = tick.getNumber().doubleValue();
-            Point p = plot.translateToJava2D(tickVal, maxRadius, axis, 
+            Point p = plot.translateToJava2D(tickVal, outerValue, axis, 
                     dataArea);
             g2.setPaint(plot.getAngleGridlinePaint());
             g2.drawLine(center.x, center.y, p.x, p.y);
@@ -634,12 +641,18 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     public void drawRadialGridLines(Graphics2D g2, PolarPlot plot, 
             ValueAxis radialAxis, List ticks, Rectangle2D dataArea) {
 
+        ParamChecks.nullNotPermitted(radialAxis, "radialAxis");
         g2.setFont(radialAxis.getTickLabelFont());
         g2.setPaint(plot.getRadiusGridlinePaint());
         g2.setStroke(plot.getRadiusGridlineStroke());
 
-        double axisMin = radialAxis.getLowerBound();
-        Point center = plot.translateToJava2D(0, axisMin, radialAxis, dataArea);
+        double centerValue;
+        if (radialAxis.isInverted()) {
+            centerValue = radialAxis.getUpperBound();
+        } else {
+            centerValue = radialAxis.getLowerBound();
+        }
+        Point center = plot.translateToJava2D(0, centerValue, radialAxis, dataArea);
 
         Iterator iterator = ticks.iterator();
         while (iterator.hasNext()) {
