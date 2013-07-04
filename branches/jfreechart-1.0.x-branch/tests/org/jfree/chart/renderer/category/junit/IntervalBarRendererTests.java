@@ -60,7 +60,6 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.IntervalBarRenderer;
 import org.jfree.data.Range;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.category.DefaultIntervalCategoryDataset;
 import org.jfree.util.PublicCloneable;
 
@@ -154,7 +153,7 @@ public class IntervalBarRendererTests extends TestCase {
             in.close();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         assertEquals(r1, r2);
     }
