@@ -1,10 +1,11 @@
 JFreeChart 1.0.15
 -----------------
-Not yet released
+4-July-2013
 
 Added support for non-visible series in XYBarRenderer, minor gridlines in 
-PolarPlot, legend item ordering, chart editor enhancements; updates to 
-StandardDialScale, localisation files for Japanese.  
+PolarPlot, legend item ordering, chart editor enhancements, updates to 
+StandardDialScale, localisation files for Japanese and refactored parameter
+checks.  
 
 This release also fixes a minor security flaw in the DisplayChart class, 
 detected and reported by OSI Security:
@@ -32,6 +33,8 @@ Bug Fixes:
 3425881 : XYDifferenceRenderer fix (by Patrick Schlott/Christoph Schroeder);
 2963199 : SWT print job (by Jonas Rüttimann);
 2879650 : Path disclosure vulnerability in DisplayChart servlet;
+
+Also fixed a rendering issue for polar charts using an inverted axis.
 
 
 JFreeChart 1.0.14
