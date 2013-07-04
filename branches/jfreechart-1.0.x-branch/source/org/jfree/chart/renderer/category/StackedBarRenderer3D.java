@@ -27,7 +27,7 @@
  * -------------------------
  * StackedBarRenderer3D.java
  * -------------------------
- * (C) Copyright 2000-2012, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2000-2013, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
