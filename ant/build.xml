@@ -86,6 +86,14 @@
         <!-- make the jar -->
         <jar jarfile="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"
              basedir="${basedir}/build" >
+            <manifest>
+                <attribute name="Specification-Title" value="JFreeChart" />
+                <attribute name="Specification-Version" value="${jfreechart.version}" />
+                <attribute name="Specification-Vendor" value="jfree.org" />
+                <attribute name="Implementation-Title" value="JFreeChart" />
+                <attribute name="Implementation-Version" value="${jfreechart.version}" />
+                <attribute name="Implementation-Vendor" value="jfree.org" />
+            </manifest>
         </jar>
 
         <!-- delete the temp directory -->
