@@ -1,3 +1,9 @@
+2013-07-04  David Gilbert <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/renderer/DefaultPolarItemRenderer.java
+    (drawAngularGridLines): Check for inverted axis,
+    (drawRadialGridLines): Likewise.
+
 2013-07-01  David Gilbert <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/annotation/TextAnnotation.java
