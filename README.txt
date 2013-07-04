@@ -2,9 +2,9 @@
 *  JFREECHART: Version 1.0.15  *
 ********************************
 
-?? September 2012 (NOT YET RELEASED)
+4 July 2013
 
-(C)opyright 2000-2012, by Object Refinery Limited and Contributors.
+(C)opyright 2000-2013, by Object Refinery Limited and Contributors.
 
 -----------------
 1.  INTRODUCTION
@@ -169,7 +169,7 @@ please post a bug report.
 --------------
 A list of changes in recent versions:
 
-1.0.15 : (??-Sep-2012)
+1.0.15 : (4-Jul-2013)
         - see the NEWS and ChangeLog files for details.
 
 1.0.14 : (20-Nov-2011)
