@@ -115,7 +115,6 @@ public class PeriodAxisTests extends TestCase implements AxisChangeListener {
      * Confirm that the equals() method can distinguish all the required fields.
      */
     public void testEquals() {
-
         PeriodAxis a1 = new PeriodAxis("Test");
         PeriodAxis a2 = new PeriodAxis("Test");
         assertTrue(a1.equals(a2));
@@ -175,7 +174,6 @@ public class PeriodAxisTests extends TestCase implements AxisChangeListener {
         assertFalse(a1.equals(a2));
         a2.setMinorTickMarkPaint(Color.blue);
         assertTrue(a1.equals(a2));
-
     }
 
     /**
@@ -260,7 +258,6 @@ public class PeriodAxisTests extends TestCase implements AxisChangeListener {
         assertFalse(a1.equals(a2));
         a2.setTimeZone(new SimpleTimeZone(123, "Bogus"));
         assertTrue(a1.equals(a2));
-
     }
 
     /**
