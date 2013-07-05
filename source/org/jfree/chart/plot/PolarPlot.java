@@ -54,8 +54,9 @@
  * 25-Jun-2010 : Better support for multiple axes (MH);
  * 03-Oct-2011 : Added support for angleOffset and direction (MH);
  * 12-Nov-2011 : Fixed bug 3432721, log-axis doesn't work (MH);
- * 12-Dec-2011 : Added support for radiusMinorGridilnesVisible (MH);
+ * 12-Dec-2011 : Added support for radiusMinorGridlinesVisible (MH);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 05-Jul-2013 : Fire change event from setRadiusMinorGridlinesVisible (DG);
  * 
  */
 
@@ -1041,7 +1042,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Set the flag that determines if radial minor grid-lines will be drawn.
+     * Set the flag that determines if radial minor grid-lines will be drawn,
+     * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param flag <code>true</code> to draw the radial minor grid-lines,
      *             <code>false</code> to hide them.
@@ -1049,6 +1051,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setRadiusMinorGridlinesVisible(boolean flag) {
         this.radiusMinorGridlinesVisible = flag;
+        fireChangeEvent();
     }
 
     /**
