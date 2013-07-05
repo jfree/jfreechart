@@ -51,7 +51,9 @@ import org.jfree.chart.plot.CategoryPlot;
 
 /**
  * The interface that must be supported by annotations that are to be added to
- * a {@link CategoryPlot}.
+ * a {@link CategoryPlot}. Note that, in JFreeChart 1.0.14, a non-compatible 
+ * change has been made to this interface (it now extends the Annotation
+ * interface to support change notifications).
  */
 public interface CategoryAnnotation extends Annotation {
 
