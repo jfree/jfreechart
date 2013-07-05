@@ -56,9 +56,11 @@ import org.jfree.chart.plot.XYPlot;
 
 /**
  * The interface that must be supported by annotations that are to be added to
- * an {@link XYPlot}.
+ * an {@link XYPlot}.  Note that, in JFreeChart 1.0.14, a non-compatible 
+ * change has been made to this interface (it now extends the Annotation
+ * interface to support change notifications).
  */
-public interface XYAnnotation extends Annotation{
+public interface XYAnnotation extends Annotation {
 
     /**
      * Draws the annotation.
@@ -74,7 +76,6 @@ public interface XYAnnotation extends Annotation{
      */
     public void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
                      ValueAxis domainAxis, ValueAxis rangeAxis,
-                     int rendererIndex,
-                     PlotRenderingInfo info);
+                     int rendererIndex, PlotRenderingInfo info);
 
 }
