@@ -668,8 +668,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
         Iterator iterator = this.data.iterator();
         while (iterator.hasNext()) {
             TimeSeries series = (TimeSeries) iterator.next();
-            Range r = null;
-            r = new Range(series.getMinY(), series.getMaxY());
+            Range r = new Range(series.getMinY(), series.getMaxY());
             result = Range.combineIgnoringNaN(result, r);
         }
         return result;
