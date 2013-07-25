@@ -277,7 +277,7 @@ public class PeriodAxis extends ValueAxis
         ParamChecks.nullNotPermitted(first, "first");
         this.first = first;
         this.first.peg(this.calendar);
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -299,7 +299,7 @@ public class PeriodAxis extends ValueAxis
         ParamChecks.nullNotPermitted(last, "last");
         this.last = last;
         this.last.peg(this.calendar);
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -324,7 +324,7 @@ public class PeriodAxis extends ValueAxis
         this.calendar = Calendar.getInstance(zone, this.locale);
         this.first.peg(this.calendar);
         this.last.peg(this.calendar);
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -358,7 +358,7 @@ public class PeriodAxis extends ValueAxis
     public void setAutoRangeTimePeriodClass(Class c) {
         ParamChecks.nullNotPermitted(c, "c");
         this.autoRangeTimePeriodClass = c;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -380,7 +380,7 @@ public class PeriodAxis extends ValueAxis
     public void setMajorTickTimePeriodClass(Class c) {
         ParamChecks.nullNotPermitted(c, "c");
         this.majorTickTimePeriodClass = c;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -402,7 +402,7 @@ public class PeriodAxis extends ValueAxis
      */
     public void setMinorTickMarksVisible(boolean visible) {
         this.minorTickMarksVisible = visible;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -424,7 +424,7 @@ public class PeriodAxis extends ValueAxis
     public void setMinorTickTimePeriodClass(Class c) {
         ParamChecks.nullNotPermitted(c, "c");
         this.minorTickTimePeriodClass = c;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -447,7 +447,7 @@ public class PeriodAxis extends ValueAxis
     public void setMinorTickMarkStroke(Stroke stroke) {
         ParamChecks.nullNotPermitted(stroke, "stroke");
         this.minorTickMarkStroke = stroke;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -470,7 +470,7 @@ public class PeriodAxis extends ValueAxis
     public void setMinorTickMarkPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
         this.minorTickMarkPaint = paint;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -490,7 +490,7 @@ public class PeriodAxis extends ValueAxis
      */
     public void setMinorTickMarkInsideLength(float length) {
         this.minorTickMarkInsideLength = length;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -510,7 +510,7 @@ public class PeriodAxis extends ValueAxis
      */
     public void setMinorTickMarkOutsideLength(float length) {
         this.minorTickMarkOutsideLength = length;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -530,7 +530,7 @@ public class PeriodAxis extends ValueAxis
      */
     public void setLabelInfo(PeriodAxisLabelInfo[] info) {
         this.labelInfo = info;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -601,8 +601,7 @@ public class PeriodAxis extends ValueAxis
 
         // get the axis label size and update the space object...
         Rectangle2D labelEnclosure = getLabelEnclosure(g2, edge);
-        double labelHeight = 0.0;
-        double labelWidth = 0.0;
+        double labelHeight, labelWidth;
         double tickLabelBandsDimension = 0.0;
 
         for (int i = 0; i < this.labelInfo.length; i++) {
@@ -717,7 +716,7 @@ public class PeriodAxis extends ValueAxis
         long firstOnAxis = getFirst().getFirstMillisecond();
         long lastOnAxis = getLast().getLastMillisecond() + 1;
         while (t0 <= lastOnAxis) {
-            ticks.add(new NumberTick(new Double(t0), "", TextAnchor.CENTER,
+            ticks.add(new NumberTick(Double.valueOf(t0), "", TextAnchor.CENTER,
                     TextAnchor.CENTER, 0.0));
             x0 = valueToJava2D(t0, dataArea, edge);
             if (edge == RectangleEdge.TOP) {
@@ -1016,7 +1015,7 @@ public class PeriodAxis extends ValueAxis
     public double java2DToValue(double java2DValue, Rectangle2D area,
             RectangleEdge edge) {
 
-        double result = Double.NaN;
+        double result;
         double min = 0.0;
         double max = 0.0;
         double axisMin = this.first.getFirstMillisecond();
