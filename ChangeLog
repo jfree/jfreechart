@@ -1,3 +1,18 @@
+2013-07-25  David Gilbert <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/axis/PeriodAxisLabelInfo.java
+    (PeriodAxisLabelInfo): clone dateFormat,
+    (getDateFormat): return clone,
+    * org/jfree/chart/axis/PeriodAxis.java
+    (drawTickLabels): fetch dateFormat only once.
+
+2013-07-05  David Gilbert <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/plot/PolarPlot.java
+    (setRadiusMinorGridlinesVisible): Fire change event.
+
+----------  JFREECHART 1.0.14 RELEASED ------------------------
+
 2013-07-04  David Gilbert <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/renderer/DefaultPolarItemRenderer.java
