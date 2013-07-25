@@ -806,8 +806,7 @@ public class PeriodAxis extends ValueAxis
      * @return The updated axis state.
      */
     protected AxisState drawTickLabels(int band, Graphics2D g2, AxisState state,
-                                       Rectangle2D dataArea,
-                                       RectangleEdge edge) {
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         // work out the initial gap
         double delta1 = 0.0;
@@ -831,10 +830,9 @@ public class PeriodAxis extends ValueAxis
                 new Date(axisMin), this.timeZone, this.locale);
         RegularTimePeriod p2 = this.labelInfo[band].createInstance(
                 new Date(axisMax), this.timeZone, this.locale);
-        String label1 = this.labelInfo[band].getDateFormat().format(
-                new Date(p1.getMiddleMillisecond()));
-        String label2 = this.labelInfo[band].getDateFormat().format(
-                new Date(p2.getMiddleMillisecond()));
+        DateFormat df = this.labelInfo[band].getDateFormat();
+        String label1 = df.format(new Date(p1.getMiddleMillisecond()));
+        String label2 = df.format(new Date(p2.getMiddleMillisecond()));
         Rectangle2D b1 = TextUtilities.getTextBounds(label1, g2,
                 g2.getFontMetrics());
         Rectangle2D b2 = TextUtilities.getTextBounds(label2, g2,
@@ -866,7 +864,6 @@ public class PeriodAxis extends ValueAxis
         while (p.getFirstMillisecond() <= axisMax) {
             float x = (float) valueToJava2D(p.getMiddleMillisecond(), dataArea,
                     edge);
-            DateFormat df = this.labelInfo[band].getDateFormat();
             String label = df.format(new Date(p.getMiddleMillisecond()));
             long first = p.getFirstMillisecond();
             long last = p.getLastMillisecond();

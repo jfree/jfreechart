@@ -72,11 +72,6 @@ import org.jfree.ui.RectangleInsets;
  */
 public class PeriodAxisLabelInfo implements Cloneable, Serializable {
 
-    // TODO: this class is mostly immutable, so implementing Cloneable isn't
-    // really necessary.  But there is still a hole in that you can get the
-    // dateFormat and modify it.  We could return a copy, but that would slow
-    // things down. Needs resolving.
-
     /** For serialization. */
     private static final long serialVersionUID = 5710451740920277357L;
 
@@ -161,7 +156,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
         ParamChecks.nullNotPermitted(dividerStroke, "dividerStroke");
         ParamChecks.nullNotPermitted(dividerPaint, "dividerPaint");
         this.periodClass = periodClass;
-        this.dateFormat = dateFormat;
+        this.dateFormat = (DateFormat) dateFormat.clone();
         this.padding = padding;
         this.labelFont = labelFont;
         this.labelPaint = labelPaint;
@@ -181,12 +176,12 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the date formatter.
+     * Returns a copy of the date formatter.
      *
-     * @return The date formatter (never <code>null</code>).
+     * @return A copy of the date formatter (never <code>null</code>).
      */
     public DateFormat getDateFormat() {
-        return this.dateFormat;
+        return (DateFormat) this.dateFormat.clone();
     }
 
     /**
@@ -334,8 +329,8 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      */
     public int hashCode() {
         int result = 41;
-        result = 37 * this.periodClass.hashCode();
-        result = 37 * this.dateFormat.hashCode();
+        result = result + 37 * this.periodClass.hashCode();
+        result = result + 37 * this.dateFormat.hashCode();
         return result;
     }
 
