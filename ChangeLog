@@ -1,5 +1,12 @@
 2013-07-25  David Gilbert <david.gilbert@object-refinery.com>
 
+    Bug 1107:
+    * org/jfree/chart/axis/PeriodAxis.java
+    (PeriodAxis): Use timezone when creating default PeriodAxisLabelInfo,
+    (drawTickLabels): Apply timezone to date formatter.
+
+2013-07-25  David Gilbert <david.gilbert@object-refinery.com>
+
     * org/jfree/chart/axis/PeriodAxisLabelInfo.java
     (PeriodAxisLabelInfo): clone dateFormat,
     (getDateFormat): return clone,
@@ -11,7 +18,7 @@
     * org/jfree/chart/plot/PolarPlot.java
     (setRadiusMinorGridlinesVisible): Fire change event.
 
-----------  JFREECHART 1.0.14 RELEASED ------------------------
+----------  JFREECHART 1.0.15 RELEASED ------------------------
 
 2013-07-04  David Gilbert <david.gilbert@object-refinery.com>
 
