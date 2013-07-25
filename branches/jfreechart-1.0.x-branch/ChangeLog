@@ -1,5 +1,18 @@
 2013-07-25  David Gilbert <david.gilbert@object-refinery.com>
 
+    * org/jfree/chart/axis/CategoryAxis.java
+    (categoryLabelURLs): New field,
+    (CategoryAxis): Initialise URL storage,
+    (addCategoryLabelURL): New method,
+    (getCategoryLabelURL): Likewise,
+    (removeCategoryLabelURL): Likewise,
+    (clearCategoryLabelURLs): Likewise,
+    (drawCategoryLabels): Add URL info,
+    (clone): Clone URLs,
+    (equals): Test URLs.
+
+2013-07-25  David Gilbert <david.gilbert@object-refinery.com>
+
     Bug 1107:
     * org/jfree/chart/axis/PeriodAxis.java
     (PeriodAxis): Use timezone when creating default PeriodAxisLabelInfo,
