@@ -27,7 +27,7 @@
  * ----------------------
  * CategoryAxisTests.java
  * ----------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -131,6 +131,12 @@ public class CategoryAxisTests extends TestCase {
         a1.addCategoryLabelToolTip("Test", "Check");
         assertFalse(a1.equals(a2));
         a2.addCategoryLabelToolTip("Test", "Check");
+        assertTrue(a1.equals(a2));
+
+        // categoryLabelURLs
+        a1.addCategoryLabelURL("Test", "http://www.jfree.org/");
+        assertFalse(a1.equals(a2));
+        a2.addCategoryLabelURL("Test", "http://www.jfree.org/");
         assertTrue(a1.equals(a2));
 
         // tickLabelFont
