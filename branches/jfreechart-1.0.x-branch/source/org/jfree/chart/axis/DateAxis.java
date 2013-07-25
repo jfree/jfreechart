@@ -126,8 +126,7 @@
  * 21-Jan-2009 : Check tickUnit for minor tick count (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 08-Feb-2012 : Bugfix for endless-loop, bug 3484403 by rbrabe (MH);
- * 02-Jul-2013 : Use ParamChecks (DG);
- *
+ * 25-Jul-2013 : Update event notification to use fireChangeEvent() (DG);
  */
 
 package org.jfree.chart.axis;
@@ -420,7 +419,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             this.timeZone = zone;
             setStandardTickUnits(createStandardDateTickUnits(zone,
                     this.locale));
-            notifyListeners(new AxisChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -434,17 +433,15 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the underlying timeline to use for this axis.
-     * <P>
-     * If the timeline is changed, an {@link AxisChangeEvent} is sent to all
-     * registered listeners.
+     * Sets the underlying timeline to use for this axis.  If the timeline is 
+     * changed, an {@link AxisChangeEvent} is sent to all registered listeners.
      *
      * @param timeline  the timeline.
      */
     public void setTimeline(Timeline timeline) {
         if (this.timeline != timeline) {
             this.timeline = timeline;
-            notifyListeners(new AxisChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -480,7 +477,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the tick unit attribute.
+     * Sets the tick unit attribute and, if requested, sends an 
+     * {@link AxisChangeEvent} to all registered listeners.
      *
      * @param unit  the new tick unit.
      * @param notify  notify registered listeners?
@@ -496,7 +494,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             setAutoTickUnitSelection(false, false);
         }
         if (notify) {
-            notifyListeners(new AxisChangeEvent(this));
+            fireChangeEvent();
         }
 
     }
@@ -512,14 +510,15 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the date format override.  If this is non-null, then it will be
+     * Sets the date format override and sends an {@link AxisChangeEvent} to 
+     * all registered listeners.  If this is non-null, then it will be
      * used to format the dates on the axis.
      *
      * @param formatter  the date formatter (<code>null</code> permitted).
      */
     public void setDateFormatOverride(DateFormat formatter) {
         this.dateFormatOverride = formatter;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -628,7 +627,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             maxDate = new Date(newMinMillis + length);
         }
         setRange(new DateRange(date, maxDate), true, false);
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -676,7 +675,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             minDate = new Date(newMaxMillis - length);
         }
         setRange(new DateRange(minDate, maximumDate), true, false);
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -697,7 +696,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     public void setTickMarkPosition(DateTickMarkPosition position) {
         ParamChecks.nullNotPermitted(position, "position");
         this.tickMarkPosition = position;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
