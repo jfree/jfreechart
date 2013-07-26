@@ -35,6 +35,7 @@
  *                   Christoph Beck;
  *                   Sebastiao Correia (patch 3463807);
  *                   Jonas Rüttimann (bug fix 2963199);
+ *                   Bernard Sarter;
  *
  * Changes
  * -------
@@ -74,6 +75,7 @@
  *               Jess Thrysoee (DG);
  * 08-Jan-2012 : Dispose popup-menu (patch 3463807 by Sebastiao Correia) (DG)
  * 05-Jul-2012 : Fix SWT print (bug 2963199 by Jonas Rüttimann);
+ * 26-Jul-2013 : Fix memory leak (patch in forum from Bernard Sarter) (DG);
  *
  */
 
@@ -96,6 +98,7 @@ import javax.swing.event.EventListenerList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlListener;
+import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.HelpListener;
@@ -536,6 +539,15 @@ public class ChartComposite extends Composite implements ChartChangeListener,
         this.canvas.addPaintListener(this);
         this.canvas.addMouseListener(this);
         this.canvas.addMouseMoveListener(this);
+        this.canvas.addDisposeListener(new DisposeListener() {
+            public void widgetDisposed(DisposeEvent e) {
+                org.eclipse.swt.graphics.Image img;
+                img = (org.eclipse.swt.graphics.Image) canvas.getData("double-buffer-image");
+                if (img != null) {
+                    img.dispose();
+                }
+            }
+        });
 
         // set up popup menu...
         this.popup = null;
