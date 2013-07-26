@@ -1,3 +1,13 @@
+JFreeChart 1.0.16
+-----------------
+Not yet released
+
+Bug Fixes:
+1107 : Fixed TimeZone issue in PeriodAxis.
+
+Also fixed a memory leak in the SWT ChartComposite class.
+
+
 JFreeChart 1.0.15
 -----------------
 4-July-2013
