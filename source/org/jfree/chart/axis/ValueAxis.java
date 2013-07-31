@@ -61,7 +61,7 @@
  * 04-Oct-2002 : Moved standardTickUnits from NumberAxis --> ValueAxis (DG);
  * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
  * 19-Nov-2002 : Removed grid settings (now controlled by the plot) (DG);
- * 27-Nov-2002 : Moved the 'inverted' attributed from NumberAxis to
+ * 27-Nov-2002 : Moved the 'inverted' attribute from NumberAxis to
  *               ValueAxis (DG);
  * 03-Jan-2003 : Small fix to ensure auto-range minimum is observed
  *               immediately (DG);
@@ -367,7 +367,7 @@ public abstract class ValueAxis extends Axis
     public void setVerticalTickLabels(boolean flag) {
         if (this.verticalTickLabels != flag) {
             this.verticalTickLabels = flag;
-            notifyListeners(new AxisChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -394,7 +394,7 @@ public abstract class ValueAxis extends Axis
      */
     public void setPositiveArrowVisible(boolean visible) {
         this.positiveArrowVisible = visible;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -420,7 +420,7 @@ public abstract class ValueAxis extends Axis
      */
     public void setNegativeArrowVisible(boolean visible) {
         this.negativeArrowVisible = visible;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -447,7 +447,7 @@ public abstract class ValueAxis extends Axis
     public void setUpArrow(Shape arrow) {
         ParamChecks.nullNotPermitted(arrow, "arrow");
         this.upArrow = arrow;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -474,7 +474,7 @@ public abstract class ValueAxis extends Axis
     public void setDownArrow(Shape arrow) {
         ParamChecks.nullNotPermitted(arrow, "arrow");
         this.downArrow = arrow;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -501,7 +501,7 @@ public abstract class ValueAxis extends Axis
     public void setLeftArrow(Shape arrow) {
         ParamChecks.nullNotPermitted(arrow, "arrow");
         this.leftArrow = arrow;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -528,7 +528,7 @@ public abstract class ValueAxis extends Axis
     public void setRightArrow(Shape arrow) {
         ParamChecks.nullNotPermitted(arrow, "arrow");
         this.rightArrow = arrow;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -540,7 +540,7 @@ public abstract class ValueAxis extends Axis
      * @param edge  the edge.
      */
     protected void drawAxisLine(Graphics2D g2, double cursor,
-                                Rectangle2D dataArea, RectangleEdge edge) {
+            Rectangle2D dataArea, RectangleEdge edge) {
         Line2D axisLine = null;
         if (edge == RectangleEdge.TOP) {
             axisLine = new Line2D.Double(dataArea.getX(), cursor,
@@ -640,10 +640,8 @@ public abstract class ValueAxis extends Axis
      *
      * @return The x and y coordinates of the anchor point.
      */
-    protected float[] calculateAnchorPoint(ValueTick tick,
-                                           double cursor,
-                                           Rectangle2D dataArea,
-                                           RectangleEdge edge) {
+    protected float[] calculateAnchorPoint(ValueTick tick, double cursor,
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         RectangleInsets insets = getTickLabelInsets();
         float[] result = new float[2];
@@ -776,9 +774,8 @@ public abstract class ValueAxis extends Axis
      * @return The space required to draw the axis (including pre-reserved
      *         space).
      */
-    public AxisSpace reserveSpace(Graphics2D g2, Plot plot,
-                                  Rectangle2D plotArea,
-                                  RectangleEdge edge, AxisSpace space) {
+    public AxisSpace reserveSpace(Graphics2D g2, Plot plot, 
+            Rectangle2D plotArea, RectangleEdge edge, AxisSpace space) {
 
         // create a new space object if one wasn't supplied...
         if (space == null) {
@@ -815,14 +812,12 @@ public abstract class ValueAxis extends Axis
 
         // get the axis label size and update the space object...
         Rectangle2D labelEnclosure = getLabelEnclosure(g2, edge);
-        double labelHeight = 0.0;
-        double labelWidth = 0.0;
         if (RectangleEdge.isTopOrBottom(edge)) {
-            labelHeight = labelEnclosure.getHeight();
+            double labelHeight = labelEnclosure.getHeight();
             space.add(labelHeight + tickLabelHeight, edge);
         }
         else if (RectangleEdge.isLeftOrRight(edge)) {
-            labelWidth = labelEnclosure.getWidth();
+            double labelWidth = labelEnclosure.getWidth();
             space.add(labelWidth + tickLabelWidth, edge);
         }
 
@@ -841,10 +836,8 @@ public abstract class ValueAxis extends Axis
      *
      * @return The height of the tallest tick label.
      */
-    protected double findMaximumTickLabelHeight(List ticks,
-                                                Graphics2D g2,
-                                                Rectangle2D drawArea,
-                                                boolean vertical) {
+    protected double findMaximumTickLabelHeight(List ticks, Graphics2D g2,
+            Rectangle2D drawArea, boolean vertical) {
 
         RectangleInsets insets = getTickLabelInsets();
         Font font = getTickLabelFont();
@@ -884,10 +877,8 @@ public abstract class ValueAxis extends Axis
      *
      * @return The width of the tallest tick label.
      */
-    protected double findMaximumTickLabelWidth(List ticks,
-                                               Graphics2D g2,
-                                               Rectangle2D drawArea,
-                                               boolean vertical) {
+    protected double findMaximumTickLabelWidth(List ticks, Graphics2D g2,
+            Rectangle2D drawArea, boolean vertical) {
 
         RectangleInsets insets = getTickLabelInsets();
         Font font = getTickLabelFont();
@@ -940,12 +931,10 @@ public abstract class ValueAxis extends Axis
      * @see #isInverted()
      */
     public void setInverted(boolean flag) {
-
         if (this.inverted != flag) {
             this.inverted = flag;
-            notifyListeners(new AxisChangeEvent(this));
+            fireChangeEvent();
         }
-
     }
 
     /**
@@ -989,7 +978,7 @@ public abstract class ValueAxis extends Axis
                 autoAdjustRange();
             }
             if (notify) {
-                notifyListeners(new AxisChangeEvent(this));
+                fireChangeEvent();
             }
         }
     }
@@ -1039,7 +1028,7 @@ public abstract class ValueAxis extends Axis
                 autoAdjustRange();
             }
             if (notify) {
-                notifyListeners(new AxisChangeEvent(this));
+                fireChangeEvent();
             }
         }
 
@@ -1071,7 +1060,7 @@ public abstract class ValueAxis extends Axis
     public void setDefaultAutoRange(Range range) {
         ParamChecks.nullNotPermitted(range, "range");
         this.defaultAutoRange = range;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1104,7 +1093,7 @@ public abstract class ValueAxis extends Axis
         if (isAutoRange()) {
             autoAdjustRange();
         }
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1137,7 +1126,7 @@ public abstract class ValueAxis extends Axis
         if (isAutoRange()) {
             autoAdjustRange();
         }
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1163,7 +1152,7 @@ public abstract class ValueAxis extends Axis
         if (isAutoRange()) {
             autoAdjustRange();
         }
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1268,7 +1257,7 @@ public abstract class ValueAxis extends Axis
         }
         this.range = range;
         if (notify) {
-            notifyListeners(new AxisChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -1381,7 +1370,7 @@ public abstract class ValueAxis extends Axis
         if (this.autoTickUnitSelection != flag) {
             this.autoTickUnitSelection = flag;
             if (notify) {
-                notifyListeners(new AxisChangeEvent(this));
+                fireChangeEvent();
             }
         }
     }
@@ -1411,7 +1400,7 @@ public abstract class ValueAxis extends Axis
      */
     public void setStandardTickUnits(TickUnitSource source) {
         this.standardTickUnits = source;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1439,7 +1428,7 @@ public abstract class ValueAxis extends Axis
      */
     public void setMinorTickCount(int count) {
         this.minorTickCount = count;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -1488,9 +1477,8 @@ public abstract class ValueAxis extends Axis
      *
      * @see #valueToJava2D(double, Rectangle2D, RectangleEdge)
      */
-    public abstract double java2DToValue(double java2DValue,
-                                         Rectangle2D area,
-                                         RectangleEdge edge);
+    public abstract double java2DToValue(double java2DValue, Rectangle2D area, 
+            RectangleEdge edge);
 
     /**
      * Automatically sets the axis range to fit the range of values in the
@@ -1507,12 +1495,10 @@ public abstract class ValueAxis extends Axis
      * @param value  the center value.
      */
     public void centerRange(double value) {
-
         double central = this.range.getCentralValue();
         Range adjusted = new Range(this.range.getLowerBound() + value - central,
                 this.range.getUpperBound() + value - central);
         setRange(adjusted);
-
     }
 
     /**
@@ -1593,7 +1579,7 @@ public abstract class ValueAxis extends Axis
     public void zoomRange(double lowerPercent, double upperPercent) {
         double start = this.range.getLowerBound();
         double length = this.range.getLength();
-        Range adjusted = null;
+        Range adjusted;
         if (isInverted()) {
             adjusted = new Range(start + (length * (1 - upperPercent)),
                                  start + (length * (1 - lowerPercent)));
@@ -1613,11 +1599,11 @@ public abstract class ValueAxis extends Axis
      * @since 1.0.13
      */
     public void pan(double percent) {
-        Range range = getRange();
+        Range r = getRange();
         double length = range.getLength();
         double adj = length * percent;
-        double lower = range.getLowerBound() + adj;
-        double upper = range.getUpperBound() + adj;
+        double lower = r.getLowerBound() + adj;
+        double upper = r.getUpperBound() + adj;
         setRange(lower, upper);
     }
 
