@@ -200,7 +200,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     public void setGridBandsVisible(boolean flag) {
         if (this.gridBandsVisible != flag) {
             this.gridBandsVisible = flag;
-            notifyListeners(new AxisChangeEvent(this));
+            fireChangeEvent();
         }
     }
 
@@ -227,7 +227,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     public void setGridBandPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
         this.gridBandPaint = paint;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -258,7 +258,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     public void setGridBandAlternatePaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
         this.gridBandAlternatePaint = paint;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -641,9 +641,8 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      *
      * @return The ticks.
      */
-    protected List refreshTicksVertical(Graphics2D g2,
-                                        Rectangle2D dataArea,
-                                        RectangleEdge edge) {
+    protected List refreshTicksVertical(Graphics2D g2, Rectangle2D dataArea,
+            RectangleEdge edge) {
 
         List ticks = new java.util.ArrayList();
 
