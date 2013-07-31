@@ -150,7 +150,7 @@ public class LogAxis extends ValueAxis {
         }
         this.base = base;
         this.baseLog = Math.log(base);
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -177,7 +177,7 @@ public class LogAxis extends ValueAxis {
             throw new IllegalArgumentException("Requires 'value' > 0.0.");
         }
         this.smallestValue = value;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
@@ -229,7 +229,7 @@ public class LogAxis extends ValueAxis {
             setAutoTickUnitSelection(false, false);
         }
         if (notify) {
-            notifyListeners(new AxisChangeEvent(this));
+            fireChangeEvent();
         }
 
     }
@@ -256,7 +256,7 @@ public class LogAxis extends ValueAxis {
      */
     public void setNumberFormatOverride(NumberFormat formatter) {
         this.numberFormatOverride = formatter;
-        notifyListeners(new AxisChangeEvent(this));
+        fireChangeEvent();
     }
 
     /**
