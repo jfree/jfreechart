@@ -1,6 +1,21 @@
 2013-08-01  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/axis/Axis.java
+    (labelLocation): New field,
+    (Axis): Initialise new field,
+    (getLabelLocation): New method,
+    (setLabelLocation): Likewise,
+    (labelLocationX): Likewise,
+    (labelLocationY): Likewise,
+    (labelAnchorH): Likewise,
+    (labelAnchorV): Likewise,
+    (drawLabel): Take into account position,
+    (drawAttributedLabel): Likewise,
+    * org/jfree/chart/axis/AxisLabelLocation.java: New class.
+
+2013-08-01  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/axis/Axis.java
     (attributedLabel): New field,
     (setLabel): Simplified,
     (getAttributedLabel): New method,
