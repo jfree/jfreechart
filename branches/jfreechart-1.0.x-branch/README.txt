@@ -90,10 +90,6 @@ and/or download the latest version from:
 The JUnit tests included with JFreeChart have been created using JUnit
 4.3.1.
 
-In the distribution, we also include iText-2.1.5.jar.  This is only required by
-the JFreeChart demo applications, and is not a direct dependency for
-JFreeChart.
-
 -----------
 5.  SUPPORT
 -----------
