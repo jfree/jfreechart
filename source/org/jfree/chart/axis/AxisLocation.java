@@ -116,7 +116,6 @@ public final class AxisLocation implements Serializable {
      * @return A boolean.
      */
     public boolean equals(Object obj) {
-
         if (this == obj) {
             return true;
         }
@@ -128,7 +127,13 @@ public final class AxisLocation implements Serializable {
             return false;
         }
         return true;
+    }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 83 * hash + this.name.hashCode();
+        return hash;
     }
 
     /**
