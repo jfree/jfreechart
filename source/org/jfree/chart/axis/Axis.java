@@ -211,6 +211,9 @@ public abstract class Axis implements Cloneable, Serializable {
 
     /** The label angle. */
     private double labelAngle;
+    
+    /** The axis label location (new in 1.0.16). */
+    private AxisLabelLocation labelLocation;
 
     /** A flag that controls whether or not the axis line is visible. */
     private boolean axisLineVisible;
@@ -307,6 +310,7 @@ public abstract class Axis implements Cloneable, Serializable {
         this.labelPaint = DEFAULT_AXIS_LABEL_PAINT;
         this.labelInsets = DEFAULT_AXIS_LABEL_INSETS;
         this.labelAngle = 0.0;
+        this.labelLocation = AxisLabelLocation.MIDDLE;
 
         this.axisLineVisible = true;
         this.axisLinePaint = DEFAULT_AXIS_LINE_PAINT;
@@ -330,7 +334,6 @@ public abstract class Axis implements Cloneable, Serializable {
         this.plot = null;
 
         this.listenerList = new EventListenerList();
-
     }
 
     /**
@@ -559,6 +562,32 @@ public abstract class Axis implements Cloneable, Serializable {
      */
     public void setLabelAngle(double angle) {
         this.labelAngle = angle;
+        fireChangeEvent();
+    }
+    
+    /**
+     * Returns the location of the axis label.  The default is
+     * {@link AxisLabelLocation#MIDDLE}.
+     * 
+     * @return The location of the axis label (never <code>null</code>). 
+     * 
+     * @since 1.0.16
+     */
+    public AxisLabelLocation getLabelLocation() {
+        return this.labelLocation;
+    }
+    
+    /**
+     * Sets the axis label location and sends an {@link AxisChangeEvent} to
+     * all registered listeners.
+     * 
+     * @param location  the new location (<code>null</code> not permitted).
+     * 
+     * @since 1.0.16
+     */
+    public void setLabelLocation(AxisLabelLocation location) {
+        ParamChecks.nullNotPermitted(location, "location");
+        this.labelLocation = location;
         fireChangeEvent();
     }
 
@@ -1233,6 +1262,62 @@ public abstract class Axis implements Cloneable, Serializable {
         return result;
     }
 
+    protected double labelLocationX(AxisLabelLocation location, 
+            Rectangle2D dataArea) {
+        if (location.equals(AxisLabelLocation.HIGH_END)) {
+            return dataArea.getMaxX();
+        }
+        if (location.equals(AxisLabelLocation.MIDDLE)) {
+            return dataArea.getCenterX();
+        }
+        if (location.equals(AxisLabelLocation.LOW_END)) {
+            return dataArea.getMinX();
+        }
+        throw new RuntimeException("Unexpected AxisLabelLocation: " + location);
+    }
+    
+    protected double labelLocationY(AxisLabelLocation location, 
+            Rectangle2D dataArea) {
+        if (location.equals(AxisLabelLocation.HIGH_END)) {
+            return dataArea.getMinY();
+        }
+        if (location.equals(AxisLabelLocation.MIDDLE)) {
+            return dataArea.getCenterY();
+        }
+        if (location.equals(AxisLabelLocation.LOW_END)) {
+            return dataArea.getMaxY();
+        }
+        throw new RuntimeException("Unexpected AxisLabelLocation: " + location);
+    }
+    
+    protected TextAnchor labelAnchorH(AxisLabelLocation location, 
+            Rectangle2D dataArea) {
+        if (location.equals(AxisLabelLocation.HIGH_END)) {
+            return TextAnchor.CENTER_RIGHT;
+        }
+        if (location.equals(AxisLabelLocation.MIDDLE)) {
+            return TextAnchor.CENTER;
+        }
+        if (location.equals(AxisLabelLocation.LOW_END)) {
+            return TextAnchor.CENTER_LEFT;
+        }
+        throw new RuntimeException("Unexpected AxisLabelLocation: " + location);
+    }
+    
+    protected TextAnchor labelAnchorV(AxisLabelLocation location, 
+            Rectangle2D dataArea) {
+        if (location.equals(AxisLabelLocation.HIGH_END)) {
+            return TextAnchor.CENTER_RIGHT;
+        }
+        if (location.equals(AxisLabelLocation.MIDDLE)) {
+            return TextAnchor.CENTER;
+        }
+        if (location.equals(AxisLabelLocation.LOW_END)) {
+            return TextAnchor.CENTER_LEFT;
+        }
+        throw new RuntimeException("Unexpected AxisLabelLocation: " + location);
+    }
+
     /**
      * Draws the axis label.
      *
@@ -1269,12 +1354,12 @@ public abstract class Axis implements Cloneable, Serializable {
                     labelBounds.getCenterY());
             Shape rotatedLabelBounds = t.createTransformedShape(labelBounds);
             labelBounds = rotatedLabelBounds.getBounds2D();
-            double labelx = dataArea.getCenterX();
+            double labelx = labelLocationX(this.labelLocation, dataArea);
             double labely = state.getCursor() - insets.getBottom()
                             - labelBounds.getHeight() / 2.0;
+            TextAnchor anchor = labelAnchorH(this.labelLocation, dataArea);
             TextUtilities.drawRotatedString(label, g2, (float) labelx,
-                    (float) labely, TextAnchor.CENTER, getLabelAngle(),
-                    TextAnchor.CENTER);
+                    (float) labely, anchor, getLabelAngle(), TextAnchor.CENTER);
             state.cursorUp(insets.getTop() + labelBounds.getHeight()
                     + insets.getBottom());
         }
@@ -1284,12 +1369,12 @@ public abstract class Axis implements Cloneable, Serializable {
                     labelBounds.getCenterY());
             Shape rotatedLabelBounds = t.createTransformedShape(labelBounds);
             labelBounds = rotatedLabelBounds.getBounds2D();
-            double labelx = dataArea.getCenterX();
+            double labelx = labelLocationX(this.labelLocation, dataArea);
             double labely = state.getCursor()
                             + insets.getTop() + labelBounds.getHeight() / 2.0;
+            TextAnchor anchor = labelAnchorH(this.labelLocation, dataArea);
             TextUtilities.drawRotatedString(label, g2, (float) labelx,
-                    (float) labely, TextAnchor.CENTER, getLabelAngle(),
-                    TextAnchor.CENTER);
+                    (float) labely, anchor, getLabelAngle(), TextAnchor.CENTER);
             state.cursorDown(insets.getTop() + labelBounds.getHeight()
                     + insets.getBottom());
         }
@@ -1301,15 +1386,15 @@ public abstract class Axis implements Cloneable, Serializable {
             labelBounds = rotatedLabelBounds.getBounds2D();
             double labelx = state.getCursor()
                             - insets.getRight() - labelBounds.getWidth() / 2.0;
-            double labely = dataArea.getCenterY();
+            double labely = labelLocationY(this.labelLocation, dataArea);
+            TextAnchor anchor = labelAnchorV(this.labelLocation, dataArea);
             TextUtilities.drawRotatedString(label, g2, (float) labelx,
-                    (float) labely, TextAnchor.CENTER,
-                    getLabelAngle() - Math.PI / 2.0, TextAnchor.CENTER);
+                    (float) labely, anchor, getLabelAngle() - Math.PI / 2.0, 
+                    anchor);
             state.cursorLeft(insets.getLeft() + labelBounds.getWidth()
                     + insets.getRight());
         }
         else if (edge == RectangleEdge.RIGHT) {
-
             AffineTransform t = AffineTransform.getRotateInstance(
                     getLabelAngle() + Math.PI / 2.0,
                     labelBounds.getCenterX(), labelBounds.getCenterY());
@@ -1317,13 +1402,13 @@ public abstract class Axis implements Cloneable, Serializable {
             labelBounds = rotatedLabelBounds.getBounds2D();
             double labelx = state.getCursor()
                             + insets.getLeft() + labelBounds.getWidth() / 2.0;
-            double labely = dataArea.getY() + dataArea.getHeight() / 2.0;
+            double labely = labelLocationY(this.labelLocation, dataArea);
+            TextAnchor anchor = labelAnchorV(this.labelLocation, dataArea);
             TextUtilities.drawRotatedString(label, g2, (float) labelx,
-                    (float) labely, TextAnchor.CENTER,
-                    getLabelAngle() + Math.PI / 2.0, TextAnchor.CENTER);
+                    (float) labely, anchor, getLabelAngle() + Math.PI / 2.0, 
+                    anchor);
             state.cursorRight(insets.getLeft() + labelBounds.getWidth()
                     + insets.getRight());
-
         }
 
         return state;
@@ -1368,12 +1453,12 @@ public abstract class Axis implements Cloneable, Serializable {
                     labelBounds.getCenterY());
             Shape rotatedLabelBounds = t.createTransformedShape(labelBounds);
             labelBounds = rotatedLabelBounds.getBounds2D();
-            double labelx = dataArea.getCenterX();
+            double labelx = labelLocationX(this.labelLocation, dataArea);
             double labely = state.getCursor() - insets.getBottom()
                             - labelBounds.getHeight() / 2.0;
+            TextAnchor anchor = labelAnchorH(this.labelLocation, dataArea);
             AttrStringUtils.drawRotatedString(label, g2, (float) labelx,
-                    (float) labely, TextAnchor.CENTER, getLabelAngle(),
-                    TextAnchor.CENTER);
+                    (float) labely, anchor, getLabelAngle(), TextAnchor.CENTER);
             state.cursorUp(insets.getTop() + labelBounds.getHeight()
                     + insets.getBottom());
         }
@@ -1383,12 +1468,12 @@ public abstract class Axis implements Cloneable, Serializable {
                     labelBounds.getCenterY());
             Shape rotatedLabelBounds = t.createTransformedShape(labelBounds);
             labelBounds = rotatedLabelBounds.getBounds2D();
-            double labelx = dataArea.getCenterX();
+            double labelx = labelLocationX(this.labelLocation, dataArea);
             double labely = state.getCursor()
                             + insets.getTop() + labelBounds.getHeight() / 2.0;
+            TextAnchor anchor = labelAnchorH(this.labelLocation, dataArea);
             AttrStringUtils.drawRotatedString(label, g2, (float) labelx,
-                    (float) labely, TextAnchor.CENTER, getLabelAngle(),
-                    TextAnchor.CENTER);
+                    (float) labely, anchor, getLabelAngle(), TextAnchor.CENTER);
             state.cursorDown(insets.getTop() + labelBounds.getHeight()
                     + insets.getBottom());
         }
@@ -1400,10 +1485,11 @@ public abstract class Axis implements Cloneable, Serializable {
             labelBounds = rotatedLabelBounds.getBounds2D();
             double labelx = state.getCursor()
                             - insets.getRight() - labelBounds.getWidth() / 2.0;
-            double labely = dataArea.getCenterY();
+            double labely = labelLocationY(this.labelLocation, dataArea);
+            TextAnchor anchor = labelAnchorV(this.labelLocation, dataArea);
             AttrStringUtils.drawRotatedString(label, g2, (float) labelx,
-                    (float) labely, TextAnchor.CENTER,
-                    getLabelAngle() - Math.PI / 2.0, TextAnchor.CENTER);
+                    (float) labely, anchor, getLabelAngle() - Math.PI / 2.0, 
+                    anchor);
             state.cursorLeft(insets.getLeft() + labelBounds.getWidth()
                     + insets.getRight());
         }
@@ -1415,10 +1501,11 @@ public abstract class Axis implements Cloneable, Serializable {
             labelBounds = rotatedLabelBounds.getBounds2D();
             double labelx = state.getCursor()
                             + insets.getLeft() + labelBounds.getWidth() / 2.0;
-            double labely = dataArea.getY() + dataArea.getHeight() / 2.0;
+            double labely = labelLocationY(this.labelLocation, dataArea);
+            TextAnchor anchor = labelAnchorV(this.labelLocation, dataArea);
             AttrStringUtils.drawRotatedString(label, g2, (float) labelx,
-                    (float) labely, TextAnchor.CENTER,
-                    getLabelAngle() + Math.PI / 2.0, TextAnchor.CENTER);
+                    (float) labely, anchor, getLabelAngle() + Math.PI / 2.0, 
+                    anchor);
             state.cursorRight(insets.getLeft() + labelBounds.getWidth()
                     + insets.getRight());
         }
