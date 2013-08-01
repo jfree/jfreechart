@@ -95,7 +95,8 @@
  * 16-Apr-2009 : Added tick mark drawing (DG);
  * 29-Jun-2009 : Fixed bug where axis entity is hiding label entities (DG);
  * 25-Jul-2013 : Added support for URLs on category labels (DG);
- * 
+ * 01-Aug-2013 : Added attributedLabel override to support superscripts,
+ *               subscripts and more (DG);
  */
 
 package org.jfree.chart.axis;
@@ -222,7 +223,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         this.tickLabelPaintMap = new HashMap();
         this.categoryLabelToolTips = new HashMap();
         this.categoryLabelURLs = new HashMap();
-
     }
 
     /**
@@ -650,9 +650,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #getCategoryMiddle(int, int, Rectangle2D, RectangleEdge)
      * @see #getCategoryEnd(int, int, Rectangle2D, RectangleEdge)
      */
-    public double getCategoryStart(int category, int categoryCount,
-                                   Rectangle2D area,
-                                   RectangleEdge edge) {
+    public double getCategoryStart(int category, int categoryCount, 
+            Rectangle2D area, RectangleEdge edge) {
 
         double result = 0.0;
         if ((edge == RectangleEdge.TOP) || (edge == RectangleEdge.BOTTOM)) {
@@ -669,7 +668,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
         result = result + category * (categorySize + categoryGapWidth);
         return result;
-
     }
 
     /**
@@ -686,7 +684,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #getCategoryEnd(int, int, Rectangle2D, RectangleEdge)
      */
     public double getCategoryMiddle(int category, int categoryCount,
-                                    Rectangle2D area, RectangleEdge edge) {
+            Rectangle2D area, RectangleEdge edge) {
 
         if (category < 0 || category >= categoryCount) {
             throw new IllegalArgumentException("Invalid category index: "
@@ -711,11 +709,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #getCategoryMiddle(int, int, Rectangle2D, RectangleEdge)
      */
     public double getCategoryEnd(int category, int categoryCount,
-                                 Rectangle2D area, RectangleEdge edge) {
-
+            Rectangle2D area, RectangleEdge edge) {
         return getCategoryStart(category, categoryCount, area, edge)
                + calculateCategorySize(categoryCount, area, edge);
-
     }
 
     /**
@@ -825,8 +821,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @return The category size.
      */
     protected double calculateCategorySize(int categoryCount, Rectangle2D area,
-                                           RectangleEdge edge) {
-
+            RectangleEdge edge) {
         double result;
         double available = 0.0;
 
@@ -846,7 +841,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             result = available * (1 - getLowerMargin() - getUpperMargin());
         }
         return result;
-
     }
 
     /**
@@ -876,9 +870,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         if (categoryCount > 1) {
             result = available * getCategoryMargin() / (categoryCount - 1);
         }
-
         return result;
-
     }
 
     /**
@@ -892,9 +884,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return The space required to draw the axis.
      */
-    public AxisSpace reserveSpace(Graphics2D g2, Plot plot,
-                                  Rectangle2D plotArea,
-                                  RectangleEdge edge, AxisSpace space) {
+    public AxisSpace reserveSpace(Graphics2D g2, Plot plot, 
+            Rectangle2D plotArea, RectangleEdge edge, AxisSpace space) {
 
         // create a new space object if one wasn't supplied...
         if (space == null) {
@@ -942,7 +933,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                     + this.categoryLabelPositionOffset, edge);
         }
         return space;
-
     }
 
     /**
@@ -990,37 +980,15 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         // draw the category labels and axis label
         state = drawCategoryLabels(g2, plotArea, dataArea, edge, state,
                 plotState);
-        state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        if (getAttributedLabel() != null) {
+            state = drawAttributedLabel(getAttributedLabel(), g2, plotArea, 
+                    dataArea, edge, state);
+            
+        } else {
+            state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        }
         return state;
 
-    }
-
-    /**
-     * Draws the category labels and returns the updated axis state.
-     *
-     * @param g2  the graphics device (<code>null</code> not permitted).
-     * @param dataArea  the area inside the axes (<code>null</code> not
-     *                  permitted).
-     * @param edge  the axis location (<code>null</code> not permitted).
-     * @param state  the axis state (<code>null</code> not permitted).
-     * @param plotState  collects information about the plot (<code>null</code>
-     *                   permitted).
-     *
-     * @return The updated axis state (never <code>null</code>).
-     *
-     * @deprecated Use {@link #drawCategoryLabels(Graphics2D, Rectangle2D,
-     *     Rectangle2D, RectangleEdge, AxisState, PlotRenderingInfo)}.
-     */
-    protected AxisState drawCategoryLabels(Graphics2D g2,
-                                           Rectangle2D dataArea,
-                                           RectangleEdge edge,
-                                           AxisState state,
-                                           PlotRenderingInfo plotState) {
-
-        // this method is deprecated because we really need the plotArea
-        // when drawing the labels - see bug 1277726
-        return drawCategoryLabels(g2, dataArea, dataArea, edge, state,
-                plotState);
     }
 
     /**
@@ -1149,10 +1117,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return A list of ticks.
      */
-    public List refreshTicks(Graphics2D g2,
-                             AxisState state,
-                             Rectangle2D dataArea,
-                             RectangleEdge edge) {
+    public List refreshTicks(Graphics2D g2, AxisState state, 
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         List ticks = new java.util.ArrayList();
 
@@ -1299,7 +1265,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @return A label.
      */
     protected TextBlock createLabel(Comparable category, float width,
-                                    RectangleEdge edge, Graphics2D g2) {
+            RectangleEdge edge, Graphics2D g2) {
         TextBlock label = TextUtilities.createTextBlock(category.toString(),
                 getTickLabelFont(category), getTickLabelPaint(category), width,
                 this.maximumCategoryLabelLines, new G2TextMeasurer(g2));
@@ -1317,7 +1283,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      */
     protected double calculateTextBlockWidth(TextBlock block,
             CategoryLabelPosition position, Graphics2D g2) {
-
         RectangleInsets insets = getTickLabelInsets();
         Size2D size = block.calculateDimensions(g2);
         Rectangle2D box = new Rectangle2D.Double(0.0, 0.0, size.getWidth(),
@@ -1327,7 +1292,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         double w = rotatedBox.getBounds2D().getWidth() + insets.getLeft()
                 + insets.getRight();
         return w;
-
     }
 
     /**
@@ -1340,9 +1304,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @return The height.
      */
     protected double calculateTextBlockHeight(TextBlock block,
-                                              CategoryLabelPosition position,
-                                              Graphics2D g2) {
-
+            CategoryLabelPosition position, Graphics2D g2) {
         RectangleInsets insets = getTickLabelInsets();
         Size2D size = block.calculateDimensions(g2);
         Rectangle2D box = new Rectangle2D.Double(0.0, 0.0, size.getWidth(),
@@ -1352,7 +1314,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         double h = rotatedBox.getBounds2D().getHeight()
                    + insets.getTop() + insets.getBottom();
         return h;
-
     }
 
     /**
@@ -1435,10 +1396,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @return A hash code.
      */
     public int hashCode() {
-        if (getLabel() != null) {
-            return getLabel().hashCode();
-        }
-        return 0;
+        return super.hashCode();
     }
 
     /**
@@ -1550,6 +1508,30 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             }
         }
         return true;
+    }
+
+    /**
+     * Draws the category labels and returns the updated axis state.
+     *
+     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param dataArea  the area inside the axes (<code>null</code> not
+     *                  permitted).
+     * @param edge  the axis location (<code>null</code> not permitted).
+     * @param state  the axis state (<code>null</code> not permitted).
+     * @param plotState  collects information about the plot (<code>null</code>
+     *                   permitted).
+     *
+     * @return The updated axis state (never <code>null</code>).
+     *
+     * @deprecated Use {@link #drawCategoryLabels(Graphics2D, Rectangle2D,
+     *     Rectangle2D, RectangleEdge, AxisState, PlotRenderingInfo)}.
+     */
+    protected AxisState drawCategoryLabels(Graphics2D g2, Rectangle2D dataArea,
+            RectangleEdge edge, AxisState state, PlotRenderingInfo plotState) {
+        // this method is deprecated because we really need the plotArea
+        // when drawing the labels - see bug 1277726
+        return drawCategoryLabels(g2, dataArea, dataArea, edge, state,
+                plotState);
     }
 
 }

@@ -83,7 +83,8 @@
  * 26-Sep-2008 : Added fireChangeEvent() method (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
- *
+ * 01-Aug-2013 : Added attributedLabel override to support superscripts,
+ *               subscripts and more (DG);
  */
 
 package org.jfree.chart.axis;
@@ -96,6 +97,7 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -103,6 +105,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.AttributedString;
 import java.util.Arrays;
 import java.util.EventListener;
 import java.util.List;
@@ -115,12 +118,14 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.event.AxisChangeListener;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.util.AttrStringUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.text.TextUtilities;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.TextAnchor;
+import org.jfree.util.AttributedStringUtilities;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 
@@ -188,6 +193,12 @@ public abstract class Axis implements Cloneable, Serializable {
 
     /** The label for the axis. */
     private String label;
+    
+    /** 
+     * An attributed label for the axis (overrides label if non-null).
+     * We have to use this override method to preserve the API compatibility.
+     */
+    private transient AttributedString attributedLabel;
 
     /** The font for displaying the axis label. */
     private Font labelFont;
@@ -373,23 +384,65 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #setLabelPaint(Paint)
      */
     public void setLabel(String label) {
-
-        String existing = this.label;
-        if (existing != null) {
-            if (!existing.equals(label)) {
-                this.label = label;
-                fireChangeEvent();
-            }
-        }
-        else {
-            if (label != null) {
-                this.label = label;
-                fireChangeEvent();
-            }
-        }
-
+        this.label = label;
+        fireChangeEvent();
     }
 
+    /**
+     * Returns the attributed label.  The default value is <code>null</code>.
+     * 
+     * @return The attributed label (possibly <code>null</code>).
+     * 
+     * @since 1.0.16
+     */
+    public AttributedString getAttributedLabel() {
+        return this.attributedLabel;    
+    }
+    
+    /**
+     * Sets the attributed label for the axis and sends an 
+     * {@link AxisChangeEvent} to all registered listeners.  This is a 
+     * convenience method that converts the string into an 
+     * AttributedString using the current font attributes.
+     * 
+     * @param label  the label (<code>null</<code> permitted).
+     * 
+     * @since 1.0.16
+     */
+    public void setAttributedLabel(String label) {
+        setAttributedLabel(createAttributedLabel(label));    
+    }
+    
+    /**
+     * Sets the attributed label for the axis and sends an 
+     * {@link AxisChangeEvent} to all registered listeners.
+     * 
+     * @param label  the label (<code>null</code> permitted).
+     * 
+     * @since 1.0.16
+     */
+    public void setAttributedLabel(AttributedString label) {
+        this.attributedLabel = label;
+        fireChangeEvent();
+    }
+    
+    /**
+     * Creates and returns an <code>AttributedString</code> with the specified
+     * text and the labelFont and labelPaint applied as attributes.
+     * 
+     * @param label  the label (<code>null</code> permitted).
+     * 
+     * @return An attributed string or <code>null</code>.
+     */
+    private AttributedString createAttributedLabel(String label) {
+        if (label == null) {
+            return null;
+        }
+        AttributedString s = new AttributedString(label);
+        s.addAttributes(this.labelFont.getAttributes(), 0, label.length());
+        return s;
+    }
+    
     /**
      * Returns the font for the axis label.
      *
@@ -1149,12 +1202,21 @@ public abstract class Axis implements Cloneable, Serializable {
      * @return The enclosing rectangle.
      */
     protected Rectangle2D getLabelEnclosure(Graphics2D g2, RectangleEdge edge) {
-
         Rectangle2D result = new Rectangle2D.Double();
-        String axisLabel = getLabel();
-        if (axisLabel != null && !axisLabel.equals("")) {
-            FontMetrics fm = g2.getFontMetrics(getLabelFont());
-            Rectangle2D bounds = TextUtilities.getTextBounds(axisLabel, g2, fm);
+        Rectangle2D bounds = null;;
+        if (this.attributedLabel != null) {
+            TextLayout layout = new TextLayout(
+                    this.attributedLabel.getIterator(), 
+                    g2.getFontRenderContext());
+            bounds = layout.getBounds();
+        } else {
+            String axisLabel = getLabel();
+            if (axisLabel != null && !axisLabel.equals("")) {
+                FontMetrics fm = g2.getFontMetrics(getLabelFont());
+                bounds = TextUtilities.getTextBounds(axisLabel, g2, fm);
+            }
+        }
+        if (bounds != null) {
             RectangleInsets insets = getLabelInsets();
             bounds = insets.createOutsetRectangle(bounds);
             double angle = getLabelAngle();
@@ -1168,9 +1230,7 @@ public abstract class Axis implements Cloneable, Serializable {
             Shape labelBounds = transformer.createTransformedShape(bounds);
             result = labelBounds.getBounds2D();
         }
-
         return result;
-
     }
 
     /**
@@ -1271,6 +1331,101 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
+     * Draws the axis label.
+     *
+     * @param label  the label text.
+     * @param g2  the graphics device.
+     * @param plotArea  the plot area.
+     * @param dataArea  the area inside the axes.
+     * @param edge  the location of the axis.
+     * @param state  the axis state (<code>null</code> not permitted).
+     *
+     * @return Information about the axis.
+     * 
+     * @since 1.0.16
+     */
+    protected AxisState drawAttributedLabel(AttributedString label, 
+            Graphics2D g2, Rectangle2D plotArea, Rectangle2D dataArea, 
+            RectangleEdge edge, AxisState state) {
+
+        // it is unlikely that 'state' will be null, but check anyway...
+        ParamChecks.nullNotPermitted(state, "state");
+
+        if (label == null) {
+            return state;
+        }
+
+        RectangleInsets insets = getLabelInsets();
+        g2.setFont(getLabelFont());
+        g2.setPaint(getLabelPaint());
+        TextLayout layout = new TextLayout(this.attributedLabel.getIterator(),
+                g2.getFontRenderContext());
+        Rectangle2D labelBounds = layout.getBounds();
+
+        if (edge == RectangleEdge.TOP) {
+            AffineTransform t = AffineTransform.getRotateInstance(
+                    getLabelAngle(), labelBounds.getCenterX(),
+                    labelBounds.getCenterY());
+            Shape rotatedLabelBounds = t.createTransformedShape(labelBounds);
+            labelBounds = rotatedLabelBounds.getBounds2D();
+            double labelx = dataArea.getCenterX();
+            double labely = state.getCursor() - insets.getBottom()
+                            - labelBounds.getHeight() / 2.0;
+            AttrStringUtils.drawRotatedString(label, g2, (float) labelx,
+                    (float) labely, TextAnchor.CENTER, getLabelAngle(),
+                    TextAnchor.CENTER);
+            state.cursorUp(insets.getTop() + labelBounds.getHeight()
+                    + insets.getBottom());
+        }
+        else if (edge == RectangleEdge.BOTTOM) {
+            AffineTransform t = AffineTransform.getRotateInstance(
+                    getLabelAngle(), labelBounds.getCenterX(),
+                    labelBounds.getCenterY());
+            Shape rotatedLabelBounds = t.createTransformedShape(labelBounds);
+            labelBounds = rotatedLabelBounds.getBounds2D();
+            double labelx = dataArea.getCenterX();
+            double labely = state.getCursor()
+                            + insets.getTop() + labelBounds.getHeight() / 2.0;
+            AttrStringUtils.drawRotatedString(label, g2, (float) labelx,
+                    (float) labely, TextAnchor.CENTER, getLabelAngle(),
+                    TextAnchor.CENTER);
+            state.cursorDown(insets.getTop() + labelBounds.getHeight()
+                    + insets.getBottom());
+        }
+        else if (edge == RectangleEdge.LEFT) {
+            AffineTransform t = AffineTransform.getRotateInstance(
+                    getLabelAngle() - Math.PI / 2.0, labelBounds.getCenterX(),
+                    labelBounds.getCenterY());
+            Shape rotatedLabelBounds = t.createTransformedShape(labelBounds);
+            labelBounds = rotatedLabelBounds.getBounds2D();
+            double labelx = state.getCursor()
+                            - insets.getRight() - labelBounds.getWidth() / 2.0;
+            double labely = dataArea.getCenterY();
+            AttrStringUtils.drawRotatedString(label, g2, (float) labelx,
+                    (float) labely, TextAnchor.CENTER,
+                    getLabelAngle() - Math.PI / 2.0, TextAnchor.CENTER);
+            state.cursorLeft(insets.getLeft() + labelBounds.getWidth()
+                    + insets.getRight());
+        }
+        else if (edge == RectangleEdge.RIGHT) {
+            AffineTransform t = AffineTransform.getRotateInstance(
+                    getLabelAngle() + Math.PI / 2.0,
+                    labelBounds.getCenterX(), labelBounds.getCenterY());
+            Shape rotatedLabelBounds = t.createTransformedShape(labelBounds);
+            labelBounds = rotatedLabelBounds.getBounds2D();
+            double labelx = state.getCursor()
+                            + insets.getLeft() + labelBounds.getWidth() / 2.0;
+            double labely = dataArea.getY() + dataArea.getHeight() / 2.0;
+            AttrStringUtils.drawRotatedString(label, g2, (float) labelx,
+                    (float) labely, TextAnchor.CENTER,
+                    getLabelAngle() + Math.PI / 2.0, TextAnchor.CENTER);
+            state.cursorRight(insets.getLeft() + labelBounds.getWidth()
+                    + insets.getRight());
+        }
+        return state;
+    }
+
+    /**
      * Draws an axis line at the current cursor position and edge.
      *
      * @param g2  the graphics device.
@@ -1341,6 +1496,10 @@ public abstract class Axis implements Cloneable, Serializable {
         if (!ObjectUtilities.equal(this.label, that.label)) {
             return false;
         }
+        if (!AttributedStringUtilities.equal(this.attributedLabel, 
+                that.attributedLabel)) {
+            return false;
+        }
         if (!ObjectUtilities.equal(this.labelFont, that.labelFont)) {
             return false;
         }
@@ -1406,6 +1565,15 @@ public abstract class Axis implements Cloneable, Serializable {
         }
         return true;
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        if (this.label != null) {
+            hash = 83 * hash + this.label.hashCode();
+        }
+        return hash;
+    }
 
     /**
      * Provides serialization support.
@@ -1416,6 +1584,7 @@ public abstract class Axis implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
+        SerialUtilities.writeAttributedString(this.attributedLabel, stream);
         SerialUtilities.writePaint(this.labelPaint, stream);
         SerialUtilities.writePaint(this.tickLabelPaint, stream);
         SerialUtilities.writeStroke(this.axisLineStroke, stream);
@@ -1435,6 +1604,7 @@ public abstract class Axis implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
+        this.attributedLabel = SerialUtilities.readAttributedString(stream);
         this.labelPaint = SerialUtilities.readPaint(stream);
         this.tickLabelPaint = SerialUtilities.readPaint(stream);
         this.axisLineStroke = SerialUtilities.readStroke(stream);

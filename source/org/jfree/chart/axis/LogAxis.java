@@ -56,8 +56,8 @@
  * 30-Mar-2009 : Added pan(double) method (DG);
  * 28-Oct-2011 : Fixed endless loop for 0 TickUnit, # 3429707 (MH);
  * 02-Jul-2013 : Use ParamChecks (DG);
- *
- */
+ * 01-Aug-2013 : Added attributedLabel override to support superscripts,
+ *               subscripts and more (DG); */
 
 package org.jfree.chart.axis;
 
@@ -221,7 +221,7 @@ public class LogAxis extends ValueAxis {
      * @see #getTickUnit()
      */
     public void setTickUnit(NumberTickUnit unit, boolean notify,
-                            boolean turnOffAutoSelect) {
+            boolean turnOffAutoSelect) {
 
         ParamChecks.nullNotPermitted(unit, "unit");
         this.tickUnit = unit;
@@ -455,7 +455,13 @@ public class LogAxis extends ValueAxis {
             return state;
         }
         state = drawTickMarksAndLabels(g2, cursor, plotArea, dataArea, edge);
-        state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        if (getAttributedLabel() != null) {
+            state = drawAttributedLabel(getAttributedLabel(), g2, plotArea, 
+                    dataArea, edge, state);
+            
+        } else {
+            state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        }
         createAndAddEntity(cursor, state, dataArea, edge, plotState);
         return state;
     }
@@ -474,7 +480,6 @@ public class LogAxis extends ValueAxis {
      */
     public List refreshTicks(Graphics2D g2, AxisState state,
             Rectangle2D dataArea, RectangleEdge edge) {
-
         List result = new java.util.ArrayList();
         if (RectangleEdge.isTopOrBottom(edge)) {
             result = refreshTicksHorizontal(g2, dataArea, edge);
@@ -483,7 +488,6 @@ public class LogAxis extends ValueAxis {
             result = refreshTicksVertical(g2, dataArea, edge);
         }
         return result;
-
     }
 
     /**
@@ -687,9 +691,8 @@ public class LogAxis extends ValueAxis {
      *
      * @since 1.0.7
      */
-    protected void selectVerticalAutoTickUnit(Graphics2D g2,
-                                              Rectangle2D dataArea,
-                                              RectangleEdge edge) {
+    protected void selectVerticalAutoTickUnit(Graphics2D g2, 
+            Rectangle2D dataArea, RectangleEdge edge) {
 
         double tickLabelHeight = estimateMaximumTickLabelHeight(g2);
 
@@ -752,8 +755,8 @@ public class LogAxis extends ValueAxis {
      *
      * @since 1.0.7
      */
-    protected double estimateMaximumTickLabelWidth(Graphics2D g2,
-                                                   TickUnit unit) {
+    protected double estimateMaximumTickLabelWidth(Graphics2D g2, 
+            TickUnit unit) {
 
         RectangleInsets tickLabelInsets = getTickLabelInsets();
         double result = tickLabelInsets.getLeft() + tickLabelInsets.getRight();

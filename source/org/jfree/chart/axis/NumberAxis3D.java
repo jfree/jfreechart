@@ -64,7 +64,8 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 18-Jan-2006 : Fixed bug 1408904 (axis assumes CategoryPlot) (DG):
  * 16-Apr-2009 : Changed axis line visibility default (DG);
- *
+ * 01-Aug-2013 : Added attributedLabel override to support superscripts,
+ *               subscripts and more (DG); *
  */
 
 package org.jfree.chart.axis;
@@ -167,9 +168,12 @@ public class NumberAxis3D extends NumberAxis implements Serializable {
         AxisState info = drawTickMarksAndLabels(g2, cursor, plotArea,
                 adjustedDataArea, edge);
 
-        // draw the axis label...
-        info = drawLabel(getLabel(), g2, plotArea, dataArea, edge, info);
-
+        if (getAttributedLabel() != null) {
+            info = drawAttributedLabel(getAttributedLabel(), g2, plotArea, 
+                    dataArea, edge, info);
+        } else {
+            info = drawLabel(getLabel(), g2, plotArea, dataArea, edge, info);
+        }
         return info;
 
     }

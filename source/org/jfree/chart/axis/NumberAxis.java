@@ -96,6 +96,8 @@
  *               collection (DG);
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 01-Aug-2013 : Added attributedLabel override to support superscripts,
+ *               subscripts and more (DG);
  * 
  */
 
@@ -339,7 +341,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @param turnOffAutoSelect  turn off the auto-tick selection?
      */
     public void setTickUnit(NumberTickUnit unit, boolean notify,
-                            boolean turnOffAutoSelect) {
+            boolean turnOffAutoSelect) {
 
         ParamChecks.nullNotPermitted(unit, "unit");
         this.tickUnit = unit;
@@ -519,7 +521,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #java2DToValue(double, Rectangle2D, RectangleEdge)
      */
     public double valueToJava2D(double value, Rectangle2D area,
-                                RectangleEdge edge) {
+            RectangleEdge edge) {
 
         Range range = getRange();
         double axisMin = range.getLowerBound();
@@ -559,7 +561,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #valueToJava2D(double, Rectangle2D, RectangleEdge)
      */
     public double java2DToValue(double java2DValue, Rectangle2D area,
-                                RectangleEdge edge) {
+            RectangleEdge edge) {
 
         Range range = getRange();
         double axisMin = range.getLowerBound();
@@ -658,16 +660,13 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         // draw the tick marks and labels...
         state = drawTickMarksAndLabels(g2, cursor, plotArea, dataArea, edge);
 
-//        // draw the marker band (if there is one)...
-//        if (getMarkerBand() != null) {
-//            if (edge == RectangleEdge.BOTTOM) {
-//                cursor = cursor - getMarkerBand().getHeight(g2);
-//            }
-//            getMarkerBand().draw(g2, plotArea, dataArea, 0, cursor);
-//        }
-
-        // draw the axis label...
-        state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        if (getAttributedLabel() != null) {
+            state = drawAttributedLabel(getAttributedLabel(), g2, plotArea, 
+                    dataArea, edge, state);
+            
+        } else {
+            state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        }
         createAndAddEntity(cursor, state, dataArea, edge, plotState);
         return state;
 
@@ -1186,8 +1185,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                 else {
                     tickLabel = getTickUnit().valueToString(currentTickValue);
                 }
-                TextAnchor anchor = null;
-                TextAnchor rotationAnchor = null;
+                TextAnchor anchor, rotationAnchor;
                 double angle = 0.0;
                 if (isVerticalTickLabels()) {
                     anchor = TextAnchor.CENTER_RIGHT;
@@ -1389,12 +1387,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A hash code.
      */
     public int hashCode() {
-        if (getLabel() != null) {
-            return getLabel().hashCode();
-        }
-        else {
-            return 0;
-        }
+        return super.hashCode();
     }
 
 }

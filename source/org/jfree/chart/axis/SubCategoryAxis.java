@@ -46,7 +46,8 @@
  * 13-Nov-2008 : Fix NullPointerException when dataset is null - see bug
  *               report 2275695 (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
- *
+ * 01-Aug-2013 : Added attributedLabel override to support superscripts,
+ *               subscripts and more (DG); *
  */
 
 package org.jfree.chart.axis;
@@ -63,6 +64,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
@@ -265,8 +267,12 @@ public class SubCategoryAxis extends CategoryAxis
                 plotState);
         state = drawCategoryLabels(g2, plotArea, dataArea, edge, state,
                 plotState);
-        state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
-
+        if (getAttributedLabel() != null) {
+            state = drawAttributedLabel(getAttributedLabel(), g2, plotArea, 
+                    dataArea, edge, state);
+        } else {
+            state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        } 
         return state;
 
     }
@@ -405,6 +411,11 @@ public class SubCategoryAxis extends CategoryAxis
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     /**
