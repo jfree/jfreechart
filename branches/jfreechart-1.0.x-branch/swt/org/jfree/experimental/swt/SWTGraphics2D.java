@@ -82,6 +82,7 @@ import java.awt.Stroke;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -147,6 +148,7 @@ public class SWTGraphics2D extends Graphics2D {
         this.gc = gc;
         this.hints = new RenderingHints(null);
         this.composite = AlphaComposite.getInstance(AlphaComposite.SRC, 1.0f);
+        setStroke(new BasicStroke());
     }
 
     /**
@@ -256,12 +258,15 @@ public class SWTGraphics2D extends Graphics2D {
      * support, the paint used is the <code>Color</code> returned by
      * <code>getColor1()</code>).
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint (<code>null</code> permitted, ignored).
      *
      * @see #getPaint()
      * @see #setColor(Color)
      */
     public void setPaint(Paint paint) {
+        if (paint == null) {
+            return;  // to be consistent with other Graphics2D implementations
+        }
         if (paint instanceof Color) {
             setColor((Color) paint);
         }
@@ -291,11 +296,14 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Sets the current color for this graphics context.
      *
-     * @param color  the color.
+     * @param color  the color (<code>null</code> permitted but ignored).
      *
      * @see #getColor()
      */
     public void setColor(Color color) {
+        if (color == null) {
+            return;
+        }
         org.eclipse.swt.graphics.Color swtColor = getSwtColorFromPool(color);
         this.gc.setForeground(swtColor);
         // handle transparency and compositing.
@@ -312,23 +320,25 @@ public class SWTGraphics2D extends Graphics2D {
         }
     }
 
+    private Color backgroundColor;
+    
     /**
      * Sets the background colour.
      *
      * @param color  the colour.
      */
     public void setBackground(Color color) {
-        org.eclipse.swt.graphics.Color swtColor = getSwtColorFromPool(color);
-        this.gc.setBackground(swtColor);
+        // since this is only used by clearRect(), we don't update the GC yet
+        this.backgroundColor = color;
     }
 
     /**
      * Returns the background colour.
      *
-     * @return The background colour.
+     * @return The background colour (possibly <code>null</code>)..
      */
     public Color getBackground() {
-        return SWTUtils.toAwtColor(this.gc.getBackground());
+        return this.backgroundColor;
     }
 
     /**
@@ -362,9 +372,12 @@ public class SWTGraphics2D extends Graphics2D {
      * Sets the current composite.  This implementation currently supports
      * only the {@link AlphaComposite} class.
      *
-     * @param comp  the composite.
+     * @param comp  the composite (<code>null</code> not permitted).
      */
     public void setComposite(Composite comp) {
+        if (comp == null) {
+            throw new IllegalArgumentException("Null 'comp' argument.");
+        }
         this.composite = comp;
         if (comp instanceof AlphaComposite) {
             AlphaComposite acomp = (AlphaComposite) comp;
@@ -398,6 +411,9 @@ public class SWTGraphics2D extends Graphics2D {
      * @see #getStroke()
      */
     public void setStroke(Stroke stroke) {
+        if (stroke == null) {
+            throw new IllegalArgumentException("Null 'stroke' argument.");
+        }
         if (stroke instanceof BasicStroke) {
             BasicStroke bs = (BasicStroke) stroke;
             this.gc.setLineWidth((int) bs.getLineWidth());
@@ -455,7 +471,9 @@ public class SWTGraphics2D extends Graphics2D {
      */
     public void clipRect(int x, int y, int width, int height) {
         org.eclipse.swt.graphics.Rectangle clip = this.gc.getClipping();
-        clip.intersects(x, y, width, height);
+        org.eclipse.swt.graphics.Rectangle r 
+                = new org.eclipse.swt.graphics.Rectangle(x, y, width, height);
+        clip.intersect(r);
         this.gc.setClipping(clip);
     }
 
@@ -560,11 +578,9 @@ public class SWTGraphics2D extends Graphics2D {
      * @param theta  the angle of rotation.
      */
     public void rotate(double theta) {
-        Transform swtTransform = new Transform(this.gc.getDevice());
-        this.gc.getTransform(swtTransform);
-        swtTransform.rotate((float) (theta * 180 / Math.PI));
-        this.gc.setTransform(swtTransform);
-        swtTransform.dispose();
+        AffineTransform t = getTransform();
+        t.rotate(theta);
+        setTransform(t);
     }
 
     /**
@@ -573,7 +589,9 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics2D#rotate(double, double, double)
      */
     public void rotate(double theta, double x, double y) {
-        // TODO Auto-generated method stub
+        translate(x, y);
+        rotate(theta);
+        translate(-x, -y);
     }
 
     /**
@@ -597,13 +615,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @param shearY  the y-factor.
      */
     public void shear(double shearX, double shearY) {
-        Transform swtTransform = new Transform(this.gc.getDevice());
-        this.gc.getTransform(swtTransform);
-        Transform shear = new Transform(this.gc.getDevice(), 1f, (float) shearX,
-                (float) shearY, 1f, 0, 0);
-        swtTransform.multiply(shear);
-        this.gc.setTransform(swtTransform);
-        swtTransform.dispose();
+        transform(AffineTransform.getShearInstance(shearX, shearY));
     }
 
     /**
@@ -776,8 +788,12 @@ public class SWTGraphics2D extends Graphics2D {
      * @see #fillRect(int, int, int, int)
      */
     public void clearRect(int x, int y, int width, int height) {
+        Color bgcolor = getBackground();
+        if (bgcolor == null) {
+            return;  // we can't do anything
+        }
         Paint saved = getPaint();
-        setPaint(getBackground());
+        setPaint(bgcolor);
         fillRect(x, y, width, height);
         setPaint(saved);
     }
@@ -907,12 +923,14 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /**
-     * Not implemented - see {@link Graphics2D#drawGlyphVector(GlyphVector,
-     * float, float)}.
+     * Draws the specified glyph vector at the location <code>(x, y)</code>.
+     * 
+     * @param g  the glyph vector (<code>null</code> not permitted).
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
      */
     public void drawGlyphVector(GlyphVector g, float x, float y) {
-        // TODO Auto-generated method stub
-
+        fill(g.getOutline(x, y));
     }
 
     /**
@@ -923,8 +941,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @see java.awt.Graphics#drawString(java.lang.String, int, int)
      */
     public void drawString(String text, int x, int y) {
-        float fm = this.gc.getFontMetrics().getAscent();
-        this.gc.drawString(text, x, (int) (y - fm), true);
+        drawString(text, (float) x, (float) y);
     }
 
     /**
@@ -935,6 +952,9 @@ public class SWTGraphics2D extends Graphics2D {
      * @param y  the y-coordinate.
      */
     public void drawString(String text, float x, float y) {
+        if (text == null) {
+            throw new NullPointerException("Null 'text' argument.");
+        }
         float fm = this.gc.getFontMetrics().getAscent();
         this.gc.drawString(text, (int) x, (int) (y - fm), true);
     }
@@ -972,13 +992,33 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /**
-     * Not implemented - see {@link Graphics2D#hit(Rectangle, Shape, boolean)}.
-     *
-     * @return <code>false</code>.
+     * Returns <code>true</code> if the rectangle (in device space) intersects
+     * with the shape (the interior, if <code>onStroke</code> is false, 
+     * otherwise the stroked outline of the shape).
+     * 
+     * @param rect  a rectangle (in device space).
+     * @param s the shape.
+     * @param onStroke  test the stroked outline only?
+     * 
+     * @return A boolean. 
      */
-    public boolean hit(Rectangle rect, Shape text, boolean onStroke) {
-        // TODO Auto-generated method stub
-        return false;
+    @Override
+    public boolean hit(Rectangle rect, Shape s, boolean onStroke) {
+        AffineTransform transform = getTransform();
+        Shape ts;
+        if (onStroke) {
+            Stroke stroke = getStroke();
+            ts = transform.createTransformedShape(stroke.createStrokedShape(s));
+        } else {
+            ts = transform.createTransformedShape(s);
+        }
+        if (!rect.getBounds2D().intersects(ts.getBounds2D())) {
+            return false;
+        }
+        Area a1 = new Area(rect);
+        Area a2 = new Area(ts);
+        a1.intersect(a2);
+        return !a1.isEmpty();
     }
 
     /**
