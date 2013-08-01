@@ -879,7 +879,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
         switch (unit.getUnit()) {
 
-            case (DateTickUnit.MILLISECOND) :
+            case DateTickUnit.MILLISECOND :
                 years = calendar.get(Calendar.YEAR);
                 months = calendar.get(Calendar.MONTH);
                 days = calendar.get(Calendar.DATE);
@@ -895,7 +895,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 }
                 return mm;
 
-            case (DateTickUnit.SECOND) :
+            case DateTickUnit.SECOND :
                 years = calendar.get(Calendar.YEAR);
                 months = calendar.get(Calendar.MONTH);
                 days = calendar.get(Calendar.DATE);
@@ -919,7 +919,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 }
                 return dd;
 
-            case (DateTickUnit.MINUTE) :
+            case DateTickUnit.MINUTE :
                 years = calendar.get(Calendar.YEAR);
                 months = calendar.get(Calendar.MONTH);
                 days = calendar.get(Calendar.DATE);
@@ -942,7 +942,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 }
                 return d0;
 
-            case (DateTickUnit.HOUR) :
+            case DateTickUnit.HOUR :
                 years = calendar.get(Calendar.YEAR);
                 months = calendar.get(Calendar.MONTH);
                 days = calendar.get(Calendar.DATE);
@@ -967,7 +967,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 }
                 return d1;
 
-            case (DateTickUnit.DAY) :
+            case DateTickUnit.DAY :
                 years = calendar.get(Calendar.YEAR);
                 months = calendar.get(Calendar.MONTH);
                 if (this.tickMarkPosition == DateTickMarkPosition.START) {
@@ -996,7 +996,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 }
                 return d2;
 
-            case (DateTickUnit.MONTH) :
+            case DateTickUnit.MONTH :
                 years = calendar.get(Calendar.YEAR);
                 calendar.clear(Calendar.MILLISECOND);
                 calendar.set(years, value, 1, 0, 0, 0);
@@ -1015,7 +1015,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 }
                 return standardDate;
 
-            case(DateTickUnit.YEAR) :
+            case DateTickUnit.YEAR :
                 if (this.tickMarkPosition == DateTickMarkPosition.START) {
                     months = 0;
                     days = 1;
@@ -1537,17 +1537,17 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             DateTickMarkPosition position) {
         Date result = time;
         switch (unit.getUnit()) {
-            case (DateTickUnit.MILLISECOND) :
-            case (DateTickUnit.SECOND) :
-            case (DateTickUnit.MINUTE) :
-            case (DateTickUnit.HOUR) :
-            case (DateTickUnit.DAY) :
+            case DateTickUnit.MILLISECOND :
+            case DateTickUnit.SECOND :
+            case DateTickUnit.MINUTE :
+            case DateTickUnit.HOUR :
+            case DateTickUnit.DAY :
                 break;
-            case (DateTickUnit.MONTH) :
+            case DateTickUnit.MONTH :
                 result = calculateDateForPosition(new Month(time,
                         this.timeZone, this.locale), position);
                 break;
-            case(DateTickUnit.YEAR) :
+            case DateTickUnit.YEAR :
                 result = calculateDateForPosition(new Year(time,
                         this.timeZone, this.locale), position);
                 break;
