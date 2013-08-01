@@ -2,8 +2,9 @@ JFreeChart 1.0.16
 -----------------
 Not yet released
 
-Improved the consistency of the SWTGraphics2D implementation, plus various
-bug fixes.
+Provided subscript/superscript support for axis labels (via AttributedString), 
+added URLs to labels on CategoryAxis, improved the consistency of the 
+SWTGraphics2D implementation, and various bug fixes.
 
 Bug Fixes:
 1107 : Fixed TimeZone issue in PeriodAxis.

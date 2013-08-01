@@ -127,6 +127,9 @@
  * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
  * 08-Feb-2012 : Bugfix for endless-loop, bug 3484403 by rbrabe (MH);
  * 25-Jul-2013 : Update event notification to use fireChangeEvent() (DG);
+ * 01-Aug-2013 : Added attributedLabel override to support superscripts,
+ *               subscripts and more (DG);
+ * 
  */
 
 package org.jfree.chart.axis;
@@ -639,7 +642,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #getMinimumDate()
      */
     public Date getMaximumDate() {
-        Date result = null;
+        Date result;
         Range range = getRange();
         if (range instanceof DateRange) {
             DateRange r = (DateRange) range;
@@ -733,7 +736,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @return The coordinate corresponding to the supplied data value.
      */
     public double valueToJava2D(double value, Rectangle2D area,
-                                RectangleEdge edge) {
+            RectangleEdge edge) {
 
         value = this.timeline.toTimelineValue((long) value);
 
@@ -766,7 +769,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             }
         }
         return result;
-
     }
 
     /**
@@ -780,8 +782,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return The coordinate corresponding to the supplied date.
      */
-    public double dateToJava2D(Date date, Rectangle2D area,
-                               RectangleEdge edge) {
+    public double dateToJava2D(Date date, Rectangle2D area, 
+            RectangleEdge edge) {
         double value = date.getTime();
         return valueToJava2D(value, area, edge);
     }
@@ -798,8 +800,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return A data value.
      */
-    public double java2DToValue(double java2DValue, Rectangle2D area,
-                                RectangleEdge edge) {
+    public double java2DToValue(double java2DValue, Rectangle2D area, 
+            RectangleEdge edge) {
 
         DateRange range = (DateRange) getRange();
         double axisMin = this.timeline.toTimelineValue(range.getLowerMillis());
@@ -1096,25 +1098,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     public static TickUnitSource createStandardDateTickUnits() {
         return createStandardDateTickUnits(TimeZone.getDefault(),
                 Locale.getDefault());
-    }
-
-    /**
-     * Returns a collection of standard date tick units.  This collection will
-     * be used by default, but you are free to create your own collection if
-     * you want to (see the
-     * {@link ValueAxis#setStandardTickUnits(TickUnitSource)} method inherited
-     * from the {@link ValueAxis} class).
-     *
-     * @param zone  the time zone (<code>null</code> not permitted).
-     *
-     * @return A collection of standard date tick units.
-     *
-     * @deprecated Since 1.0.11, use {@link #createStandardDateTickUnits(
-     *         TimeZone, Locale)} to explicitly set the locale as well as the
-     *         time zone.
-     */
-    public static TickUnitSource createStandardDateTickUnits(TimeZone zone) {
-        return createStandardDateTickUnits(zone, Locale.getDefault());
     }
 
     /**
@@ -1425,8 +1408,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return The estimated maximum width of the tick labels.
      */
-    private double estimateMaximumTickLabelWidth(Graphics2D g2,
-                                                 DateTickUnit unit) {
+    private double estimateMaximumTickLabelWidth(Graphics2D g2, 
+            DateTickUnit unit) {
 
         RectangleInsets tickLabelInsets = getTickLabelInsets();
         double result = tickLabelInsets.getLeft() + tickLabelInsets.getRight();
@@ -1841,7 +1824,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
         // draw the axis label (note that 'state' is passed in *and*
         // returned)...
-        state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        if (getAttributedLabel() != null) {
+            state = drawAttributedLabel(getAttributedLabel(), g2, plotArea, 
+                    dataArea, edge, state);
+            
+        } else {
+            state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        }
         createAndAddEntity(cursor, state, dataArea, edge, plotState);
         return state;
 
@@ -1915,12 +1904,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A hash code.
      */
     public int hashCode() {
-        if (getLabel() != null) {
-            return getLabel().hashCode();
-        }
-        else {
-            return 0;
-        }
+        return super.hashCode();
     }
 
     /**
@@ -1940,6 +1924,25 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         }
         // 'tickMarkPosition' is immutable : no need to clone
         return clone;
+    }
+ 
+    /**
+     * Returns a collection of standard date tick units.  This collection will
+     * be used by default, but you are free to create your own collection if
+     * you want to (see the
+     * {@link ValueAxis#setStandardTickUnits(TickUnitSource)} method inherited
+     * from the {@link ValueAxis} class).
+     *
+     * @param zone  the time zone (<code>null</code> not permitted).
+     *
+     * @return A collection of standard date tick units.
+     *
+     * @deprecated Since 1.0.11, use {@link #createStandardDateTickUnits(
+     *         TimeZone, Locale)} to explicitly set the locale as well as the
+     *         time zone.
+     */
+    public static TickUnitSource createStandardDateTickUnits(TimeZone zone) {
+        return createStandardDateTickUnits(zone, Locale.getDefault());
     }
 
 }

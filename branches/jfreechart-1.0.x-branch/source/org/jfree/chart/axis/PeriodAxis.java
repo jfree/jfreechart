@@ -58,6 +58,8 @@
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
  * 25-Jul-2013 : Fix for axis timezone and label formatting, bug 1107 (DG);
+ * 01-Aug-2013 : Added attributedLabel override to support superscripts,
+ *               subscripts and more (DG);
  *
  */
 
@@ -215,9 +217,8 @@ public class PeriodAxis extends ValueAxis
      * @deprecated As of version 1.0.13, you should use the constructor that
      *     specifies a Locale also.
      */
-    public PeriodAxis(String label,
-                      RegularTimePeriod first, RegularTimePeriod last,
-                      TimeZone timeZone) {
+    public PeriodAxis(String label, RegularTimePeriod first, 
+            RegularTimePeriod last, TimeZone timeZone) {
         this(label, first, last, timeZone, Locale.getDefault());
     }
 
@@ -547,8 +548,8 @@ public class PeriodAxis extends ValueAxis
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      */
-    public void setRange(Range range, boolean turnOffAutoRange,
-                         boolean notify) {
+    public void setRange(Range range, boolean turnOffAutoRange, 
+            boolean notify) {
         long upper = Math.round(range.getUpperBound());
         long lower = Math.round(range.getLowerBound());
         this.first = createInstance(this.autoRangeTimePeriodClass,
@@ -583,9 +584,8 @@ public class PeriodAxis extends ValueAxis
      * @return The space required to draw the axis (including pre-reserved
      *         space).
      */
-    public AxisSpace reserveSpace(Graphics2D g2, Plot plot,
-                                  Rectangle2D plotArea, RectangleEdge edge,
-                                  AxisSpace space) {
+    public AxisSpace reserveSpace(Graphics2D g2, Plot plot, 
+            Rectangle2D plotArea, RectangleEdge edge, AxisSpace space) {
         // create a new space object if one wasn't supplied...
         if (space == null) {
             space = new AxisSpace();
@@ -667,10 +667,13 @@ public class PeriodAxis extends ValueAxis
             }
         }
 
-        // draw the axis label (note that 'state' is passed in *and*
-        // returned)...
-        axisState = drawLabel(getLabel(), g2, plotArea, dataArea, edge,
-                axisState);
+        if (getAttributedLabel() != null) {
+            axisState = drawAttributedLabel(getAttributedLabel(), g2, plotArea, 
+                    dataArea, edge, axisState);
+        } else {
+            axisState = drawLabel(getLabel(), g2, plotArea, dataArea, edge, 
+                    axisState);
+        } 
         return axisState;
 
     }
@@ -683,9 +686,8 @@ public class PeriodAxis extends ValueAxis
      * @param dataArea  the data area.
      * @param edge  the edge.
      */
-    protected void drawTickMarks(Graphics2D g2, AxisState state,
-                                 Rectangle2D dataArea,
-                                 RectangleEdge edge) {
+    protected void drawTickMarks(Graphics2D g2, AxisState state, 
+            Rectangle2D dataArea, RectangleEdge edge) {
         if (RectangleEdge.isTopOrBottom(edge)) {
             drawTickMarksHorizontal(g2, state, dataArea, edge);
         }
@@ -704,8 +706,7 @@ public class PeriodAxis extends ValueAxis
      * @param edge  the edge.
      */
     protected void drawTickMarksHorizontal(Graphics2D g2, AxisState state,
-                                           Rectangle2D dataArea,
-                                           RectangleEdge edge) {
+            Rectangle2D dataArea, RectangleEdge edge) {
         List ticks = new ArrayList();
         double x0;
         double y0 = state.getCursor();
@@ -792,8 +793,7 @@ public class PeriodAxis extends ValueAxis
      * @param edge  the edge.
      */
     protected void drawTickMarksVertical(Graphics2D g2, AxisState state,
-                                         Rectangle2D dataArea,
-                                         RectangleEdge edge) {
+            Rectangle2D dataArea, RectangleEdge edge) {
         // FIXME:  implement this...
     }
 
@@ -1129,12 +1129,7 @@ public class PeriodAxis extends ValueAxis
      * @return A hash code.
      */
     public int hashCode() {
-        if (getLabel() != null) {
-            return getLabel().hashCode();
-        }
-        else {
-            return 0;
-        }
+        return super.hashCode();
     }
 
     /**

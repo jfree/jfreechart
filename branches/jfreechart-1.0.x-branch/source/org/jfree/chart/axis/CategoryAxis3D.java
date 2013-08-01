@@ -27,7 +27,7 @@
  * -------------------
  * CategoryAxis3D.java
  * -------------------
- * (C) Copyright 2003-2009, by Klaus Rheinwald and Contributors.
+ * (C) Copyright 2003-2013, by Klaus Rheinwald and Contributors.
  *
  * Original Author:  Klaus Rheinwald;
  * Contributor(s):   Tin Luu,
@@ -50,6 +50,8 @@
  * 18-Aug-2006 : Fix for bug drawing category labels, thanks to Adriaan
  *               Joubert (1277726) (DG);
  * 16-Apr-2009 : Draw axis line and tick marks (DG);
+ * 01-Aug-2013 : Added attributedLabel override to support superscripts,
+ *               subscripts and more (DG);
  *
  */
 
@@ -69,8 +71,8 @@ import org.jfree.ui.RectangleEdge;
  * An axis that displays categories and has a 3D effect.
  * Used for bar charts and line charts.
  */
-public class CategoryAxis3D extends CategoryAxis
-        implements Cloneable, Serializable {
+public class CategoryAxis3D extends CategoryAxis implements Cloneable, 
+        Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 4114732251353700972L;
@@ -107,12 +109,9 @@ public class CategoryAxis3D extends CategoryAxis
      *
      * @return The axis state (never <code>null</code>).
      */
-    public AxisState draw(Graphics2D g2,
-                          double cursor,
-                          Rectangle2D plotArea,
-                          Rectangle2D dataArea,
-                          RectangleEdge edge,
-                          PlotRenderingInfo plotState) {
+    public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
+            Rectangle2D dataArea, RectangleEdge edge, 
+            PlotRenderingInfo plotState) {
 
         // if the axis is not visible, don't draw it...
         if (!isVisible()) {
@@ -155,10 +154,14 @@ public class CategoryAxis3D extends CategoryAxis
         }
         state = drawCategoryLabels(g2, plotArea, adjustedDataArea, edge,
                 state, plotState);
-        state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
-
+        if (getAttributedLabel() != null) {
+            state = drawAttributedLabel(getAttributedLabel(), g2, plotArea, 
+                    dataArea, edge, state);
+            
+        } else {
+            state = drawLabel(getLabel(), g2, plotArea, dataArea, edge, state);
+        }
         return state;
-
     }
 
     /**
@@ -172,11 +175,9 @@ public class CategoryAxis3D extends CategoryAxis
      *
      * @return The coordinate.
      */
-    public double getCategoryJava2DCoordinate(CategoryAnchor anchor,
-                                              int category,
-                                              int categoryCount,
-                                              Rectangle2D area,
-                                              RectangleEdge edge) {
+    public double getCategoryJava2DCoordinate(CategoryAnchor anchor, 
+            int category, int categoryCount, Rectangle2D area, 
+            RectangleEdge edge) {
 
         double result = 0.0;
         Rectangle2D adjustedArea = area;
