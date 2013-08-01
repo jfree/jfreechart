@@ -159,8 +159,7 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
      *         subclasses (if any) might.
      */
     public Object clone() throws CloneNotSupportedException {
-        DefaultKeyedValue clone = (DefaultKeyedValue) super.clone();
-        return clone;
+        return (DefaultKeyedValue) super.clone();
     }
 
     /**
