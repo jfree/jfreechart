@@ -1,3 +1,23 @@
+2013-08-01  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/experimental/swt/SWTGraphics2D.java
+    (SWTGraphics2D): Set default stroke,
+    (setPaint): Do nothing for null,
+    (setColor): Likewise,
+    (setBackground): Store color for later, don't update GC now,
+    (getBackground): Return stored color,
+    (setComposite): Throw IllegalArgumentException for null,
+    (setStroke): Likewise,
+    (clipRect): Fix to apply intersect operation,
+    (rotate(double)): Reimplemented,
+    (rotate(double, double, double)): Implemented,
+    (shear): Reimplemented,
+    (clearRect): Do nothing if background color is null,
+    (drawGlyphVector): Implemented,
+    (drawString(String, int, int)): Delegate,
+    (drawString(String, float, float)): Check for null string,
+    (hit): Implemented.
+
 2013-07-25  David Gilbert <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/axis/CategoryAxis.java
