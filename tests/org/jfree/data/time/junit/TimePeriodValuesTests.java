@@ -101,72 +101,36 @@ public class TimePeriodValuesTests extends TestCase {
      * Common test setup.
      */
     protected void setUp() {
-
         this.seriesA = new TimePeriodValues("Series A");
-        try {
-            this.seriesA.add(new Year(2000), new Integer(102000));
-            this.seriesA.add(new Year(2001), new Integer(102001));
-            this.seriesA.add(new Year(2002), new Integer(102002));
-            this.seriesA.add(new Year(2003), new Integer(102003));
-            this.seriesA.add(new Year(2004), new Integer(102004));
-            this.seriesA.add(new Year(2005), new Integer(102005));
-        }
-        catch (SeriesException e) {
-            System.err.println("Problem creating series.");
-        }
+        this.seriesA.add(new Year(2000), new Integer(102000));
+        this.seriesA.add(new Year(2001), new Integer(102001));
+        this.seriesA.add(new Year(2002), new Integer(102002));
+        this.seriesA.add(new Year(2003), new Integer(102003));
+        this.seriesA.add(new Year(2004), new Integer(102004));
+        this.seriesA.add(new Year(2005), new Integer(102005));
 
         this.seriesB = new TimePeriodValues("Series B");
-        try {
-            this.seriesB.add(new Year(2006), new Integer(202006));
-            this.seriesB.add(new Year(2007), new Integer(202007));
-            this.seriesB.add(new Year(2008), new Integer(202008));
-        }
-        catch (SeriesException e) {
-            System.err.println("Problem creating series.");
-        }
+        this.seriesB.add(new Year(2006), new Integer(202006));
+        this.seriesB.add(new Year(2007), new Integer(202007));
+        this.seriesB.add(new Year(2008), new Integer(202008));
 
         this.seriesC = new TimePeriodValues("Series C");
-        try {
-            this.seriesC.add(new Year(1999), new Integer(301999));
-            this.seriesC.add(new Year(2000), new Integer(302000));
-            this.seriesC.add(new Year(2002), new Integer(302002));
-        }
-        catch (SeriesException e) {
-            System.err.println("Problem creating series.");
-        }
-
+        this.seriesC.add(new Year(1999), new Integer(301999));
+        this.seriesC.add(new Year(2000), new Integer(302000));
+        this.seriesC.add(new Year(2002), new Integer(302002));
     }
 
     /**
      * Set up a quarter equal to Q1 1900.  Request the previous quarter, it 
      * should be null.
      */
-    public void testClone() {
-
+    public void testClone() throws CloneNotSupportedException {
         TimePeriodValues series = new TimePeriodValues("Test Series");
-
         RegularTimePeriod jan1st2002 = new Day(1, MonthConstants.JANUARY, 2002);
-        try {
-            series.add(jan1st2002, new Integer(42));
-        }
-        catch (SeriesException e) {
-            System.err.println("Problem adding to collection.");
-        }
-
-        TimePeriodValues clone = null;
-        try {
-            clone = (TimePeriodValues) series.clone();
-            clone.setKey("Clone Series");
-            try {
-                clone.update(0, new Integer(10));
-            }
-            catch (SeriesException e) {
-                System.err.println("Problem updating series.");
-            }
-        }
-        catch (CloneNotSupportedException e) {
-            assertTrue(false);
-        }
+        series.add(jan1st2002, new Integer(42));
+        TimePeriodValues clone = (TimePeriodValues) series.clone();
+        clone.setKey("Clone Series");
+        clone.update(0, new Integer(10));
 
         int seriesValue = series.getValue(0).intValue();
         int cloneValue = clone.getValue(0).intValue();
@@ -175,25 +139,16 @@ public class TimePeriodValuesTests extends TestCase {
         assertEquals(10, cloneValue);
         assertEquals("Test Series", series.getKey());
         assertEquals("Clone Series", clone.getKey());
-
     }
 
     /**
      * Add a value to series A for 1999.  It should be added at index 0.
      */
     public void testAddValue() {
-
         TimePeriodValues tpvs = new TimePeriodValues("Test");
-        try {
-            tpvs.add(new Year(1999), new Integer(1));
-        }
-        catch (SeriesException e) {
-            System.err.println("Problem adding to series.");
-        }
-
+        tpvs.add(new Year(1999), new Integer(1));
         int value = tpvs.getValue(0).intValue();
         assertEquals(1, value);
-
     }
 
     /**
