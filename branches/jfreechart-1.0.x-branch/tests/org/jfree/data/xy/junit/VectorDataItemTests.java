@@ -42,6 +42,7 @@ package org.jfree.data.xy.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -122,15 +123,9 @@ public class VectorDataItemTests extends TestCase {
     /**
      * Check cloning.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         VectorDataItem v1 = new VectorDataItem(1.0, 2.0, 3.0, 4.0);
-        VectorDataItem v2 = null;
-        try {
-            v2 = (VectorDataItem) v1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        VectorDataItem v2 = (VectorDataItem) v1.clone();
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
@@ -139,23 +134,18 @@ public class VectorDataItemTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         VectorDataItem v1 = new VectorDataItem(1.0, 2.0, 3.0, 4.0);
-        VectorDataItem v2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(v1);
-            out.close();
+        VectorDataItem v2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(v1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            v2 = (VectorDataItem) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        v2 = (VectorDataItem) in.readObject();
+        in.close();
         assertEquals(v1, v2);
     }
 
