@@ -80,10 +80,6 @@ public class LineUtilitiesTests extends TestCase {
         if (Math.abs(line.getY1() - y1) > epsilon) { result = false; }
         if (Math.abs(line.getX2() - x2) > epsilon) { result = false; }
         if (Math.abs(line.getY2() - y2) > epsilon) { result = false; }
-        if (result == false) {
-            System.out.println(line.getX1() + ", " + line.getY1() + ", "
-                    + line.getX2() + ", " + line.getY2());
-        }
         return result;
     }
 
