@@ -57,6 +57,7 @@ package org.jfree.data.time.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -172,18 +173,12 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
     /**
      * Another test of the clone() method.
      */
-    public void testClone2() {
+    public void testClone2() throws CloneNotSupportedException {
         TimeSeries s1 = new TimeSeries("S1", Year.class);
         s1.add(new Year(2007), 100.0);
         s1.add(new Year(2008), null);
         s1.add(new Year(2009), 200.0);
-        TimeSeries s2 = null;
-        try {
-            s2 = (TimeSeries) s1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        TimeSeries s2 = (TimeSeries) s1.clone();
         assertTrue(s1.equals(s2));
 
         // check independence
@@ -292,27 +287,22 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws ClassNotFoundException, IOException {
         TimeSeries s1 = new TimeSeries("A test");
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-        TimeSeries s2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(s1);
-            out.close();
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            s2 = (TimeSeries) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        TimeSeries s2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(s1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        s2 = (TimeSeries) in.readObject();
+        in.close();
         assertTrue(s1.equals(s2));
     }
 
@@ -668,16 +658,15 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
      * A test for the bug report 1075255.
      */
     public void testBug1075255() {
-        TimeSeries ts = new TimeSeries("dummy", FixedMillisecond.class);
+        TimeSeries ts = new TimeSeries("dummy");
         ts.add(new FixedMillisecond(0L), 0.0);
-        TimeSeries ts2 = new TimeSeries("dummy2", FixedMillisecond.class);
+        TimeSeries ts2 = new TimeSeries("dummy2");
         ts2.add(new FixedMillisecond(0L), 1.0);
         try {
             ts.addAndOrUpdate(ts2);
         }
         catch (Exception e) {
-            e.printStackTrace();
-            assertTrue(false);
+            fail("No exceptions should be thrown.");
         }
         assertEquals(1, ts.getItemCount());
     }
@@ -685,15 +674,9 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
     /**
      * A test for bug 1832432.
      */
-    public void testBug1832432() {
+    public void testBug1832432() throws CloneNotSupportedException {
         TimeSeries s1 = new TimeSeries("Series");
-        TimeSeries s2 = null;
-        try {
-            s2 = (TimeSeries) s1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        TimeSeries s2 = (TimeSeries) s1.clone();
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
