@@ -150,7 +150,6 @@ public class LayeredBarRendererTests extends TestCase {
      * no exceptions are thrown (particularly by code in the renderer).
      */
     public void testDrawWithNullInfo() {
-        boolean success = false;
         try {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             dataset.addValue(1.0, "S1", "C1");
@@ -160,13 +159,10 @@ public class LayeredBarRendererTests extends TestCase {
             JFreeChart chart = new JFreeChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-            success = true;
         }
         catch (NullPointerException e) {
-            e.printStackTrace();
-            success = false;
+            fail("No exception should be thrown.");
         }
-        assertTrue(success);
     }
 
 }

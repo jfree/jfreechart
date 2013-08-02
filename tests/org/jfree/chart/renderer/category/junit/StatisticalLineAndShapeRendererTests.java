@@ -166,7 +166,6 @@ public class StatisticalLineAndShapeRendererTests extends TestCase {
      * no exceptions are thrown (particularly by code in the renderer).
      */
     public void testDrawWithNullInfo() {
-        boolean success = false;
         try {
             DefaultStatisticalCategoryDataset dataset
                 = new DefaultStatisticalCategoryDataset();
@@ -178,13 +177,10 @@ public class StatisticalLineAndShapeRendererTests extends TestCase {
             JFreeChart chart = new JFreeChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-            success = true;
         }
         catch (NullPointerException e) {
-            e.printStackTrace();
-            success = false;
+            fail("No exception should be thrown.");
         }
-        assertTrue(success);
     }
 
     /**

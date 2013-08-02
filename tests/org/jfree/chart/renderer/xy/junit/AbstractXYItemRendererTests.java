@@ -122,18 +122,12 @@ public class AbstractXYItemRendererTests extends TestCase {
     /**
      * Check that the legendItemLabelGenerator is cloned.
      */
-    public void testCloning_LegendItemLabelGenerator() {
+    public void testCloning_LegendItemLabelGenerator() throws CloneNotSupportedException {
         StandardXYSeriesLabelGenerator generator
                 = new StandardXYSeriesLabelGenerator("Series {0}");
         XYBarRenderer r1 = new XYBarRenderer();
         r1.setLegendItemLabelGenerator(generator);
-        XYBarRenderer r2 = null;
-        try {
-            r2 = (XYBarRenderer) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYBarRenderer r2 = (XYBarRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -146,18 +140,14 @@ public class AbstractXYItemRendererTests extends TestCase {
     /**
      * Check that the legendItemToolTipGenerator is cloned.
      */
-    public void testCloning_LegendItemToolTipGenerator() {
+    public void testCloning_LegendItemToolTipGenerator() 
+            throws CloneNotSupportedException {
         StandardXYSeriesLabelGenerator generator
                 = new StandardXYSeriesLabelGenerator("Series {0}");
         XYBarRenderer r1 = new XYBarRenderer();
         r1.setLegendItemToolTipGenerator(generator);
-        XYBarRenderer r2 = null;
-        try {
-            r2 = (XYBarRenderer) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYBarRenderer r2 = (XYBarRenderer) r1.clone();
+
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -170,18 +160,13 @@ public class AbstractXYItemRendererTests extends TestCase {
     /**
      * Check that the legendItemURLGenerator is cloned.
      */
-    public void testCloning_LegendItemURLGenerator() {
+    public void testCloning_LegendItemURLGenerator() 
+            throws CloneNotSupportedException {
         StandardXYSeriesLabelGenerator generator
                 = new StandardXYSeriesLabelGenerator("Series {0}");
         XYBarRenderer r1 = new XYBarRenderer();
         r1.setLegendItemURLGenerator(generator);
-        XYBarRenderer r2 = null;
-        try {
-            r2 = (XYBarRenderer) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYBarRenderer r2 = (XYBarRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
