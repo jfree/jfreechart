@@ -43,6 +43,7 @@ package org.jfree.chart.annotations.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -126,16 +127,10 @@ public class XYTitleAnnotationTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
-        XYTitleAnnotation a2 = null;
-        try {
-            a2 = (XYTitleAnnotation) a1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYTitleAnnotation a2 = (XYTitleAnnotation) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -144,24 +139,19 @@ public class XYTitleAnnotationTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
-        XYTitleAnnotation a2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(a1);
-            out.close();
+        XYTitleAnnotation a2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(a1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            a2 = (XYTitleAnnotation) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        a2 = (XYTitleAnnotation) in.readObject();
+        in.close();
         assertEquals(a1, a2);
     }
     
@@ -170,7 +160,6 @@ public class XYTitleAnnotationTests extends TestCase {
      * no exceptions are thrown.
      */
     public void testDrawWithNullInfo() {
-        boolean success = false;
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();
         
@@ -195,13 +184,10 @@ public class XYTitleAnnotationTests extends TestCase {
             JFreeChart chart = new JFreeChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
                     null);
-            success = true;
         }
         catch (NullPointerException e) {
-            e.printStackTrace();
-            success = false;
+            fail("There should be no exception.");
         }
-        assertTrue(success);
     }
 
 }

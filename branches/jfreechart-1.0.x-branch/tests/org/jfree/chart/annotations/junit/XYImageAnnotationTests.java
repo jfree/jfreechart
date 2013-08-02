@@ -108,16 +108,10 @@ public class XYImageAnnotationTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         XYImageAnnotation a1 = new XYImageAnnotation(10.0, 20.0,
                 JFreeChart.INFO.getLogo());
-        XYImageAnnotation a2 = null;
-        try {
-            a2 = (XYImageAnnotation) a1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYImageAnnotation a2 = (XYImageAnnotation) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
