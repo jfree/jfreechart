@@ -48,6 +48,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -205,16 +206,10 @@ public class StandardDialScaleTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
-        StandardDialScale s2 = null;
-        try {
-            s2 = (StandardDialScale) s1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        StandardDialScale s2 = (StandardDialScale) s1.clone();
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -225,13 +220,7 @@ public class StandardDialScaleTests extends TestCase {
         s1.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.white));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
-        s2 = null;
-        try {
-            s2 = (StandardDialScale) s1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        s2 = (StandardDialScale) s1.clone();
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -246,25 +235,18 @@ public class StandardDialScaleTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
-        StandardDialScale s2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(s1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            s2 = (StandardDialScale) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        StandardDialScale s2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(s1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        s2 = (StandardDialScale) in.readObject();
+        in.close();
         assertEquals(s1, s2);
 
         // try a customised instance
@@ -273,22 +255,16 @@ public class StandardDialScaleTests extends TestCase {
         s1.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.white));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
-        s2 = null;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(s1);
-            out.close();
+        buffer = new ByteArrayOutputStream();
+        out = new ObjectOutputStream(buffer);
+        out.writeObject(s1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            s2 = (StandardDialScale) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        s2 = (StandardDialScale) in.readObject();
+        in.close();
         assertEquals(s1, s2);
     }
 

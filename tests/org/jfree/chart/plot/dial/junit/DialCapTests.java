@@ -45,6 +45,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -137,16 +138,11 @@ public class DialCapTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = null;
-        try {
-            c2 = (DialCap) c1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        DialCap c2 = (DialCap) c1.clone();
+
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -158,13 +154,7 @@ public class DialCapTests extends TestCase {
         c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.white,
                 3.0f, 4.0f, Color.gray));
         c1.setOutlineStroke(new BasicStroke(2.0f));
-        c2 = null;
-        try {
-            c2 = (DialCap) c1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        c2 = (DialCap) c1.clone();
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -180,25 +170,20 @@ public class DialCapTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = null;
+        DialCap c2;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(c1);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(c1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            c2 = (DialCap) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        c2 = (DialCap) in.readObject();
+        in.close();
         assertEquals(c1, c2);
 
         // test a custom instance
@@ -208,22 +193,16 @@ public class DialCapTests extends TestCase {
         c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.white,
                 3.0f, 4.0f, Color.gray));
         c1.setOutlineStroke(new BasicStroke(2.0f));
-        c2 = null;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(c1);
-            out.close();
+        buffer = new ByteArrayOutputStream();
+        out = new ObjectOutputStream(buffer);
+        out.writeObject(c1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            c2 = (DialCap) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        c2 = (DialCap) in.readObject();
+        in.close();
         assertEquals(c1, c2);
     }
 
