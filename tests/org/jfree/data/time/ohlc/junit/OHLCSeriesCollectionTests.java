@@ -44,6 +44,7 @@ package org.jfree.data.time.ohlc.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -118,18 +119,12 @@ public class OHLCSeriesCollectionTests extends TestCase
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         OHLCSeriesCollection c1 = new OHLCSeriesCollection();
         OHLCSeries s1 = new OHLCSeries("Series");
         s1.add(new Year(2006), 1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        OHLCSeriesCollection c2 = null;
-        try {
-            c2 = (OHLCSeriesCollection) c1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        OHLCSeriesCollection c2 = (OHLCSeriesCollection) c1.clone();
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -142,27 +137,21 @@ public class OHLCSeriesCollectionTests extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         OHLCSeriesCollection c1 = new OHLCSeriesCollection();
         OHLCSeries s1 = new OHLCSeries("Series");
         s1.add(new Year(2006), 1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        OHLCSeriesCollection c2 = null;
+        OHLCSeriesCollection c2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(c1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(c1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            c2 = (OHLCSeriesCollection) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(
+                new ByteArrayInputStream(buffer.toByteArray()));
+        c2 = (OHLCSeriesCollection) in.readObject();
+        in.close();
         assertEquals(c1, c2);
     }
 

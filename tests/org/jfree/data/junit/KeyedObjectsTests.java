@@ -111,13 +111,7 @@ public class KeyedObjectsTests extends TestCase {
         Object obj1 = new ArrayList();
         KeyedObjects ko1 = new KeyedObjects();
         ko1.addObject("K1", obj1);
-        KeyedObjects ko2 = null;
-        try {
-            ko2 = (KeyedObjects) ko1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        KeyedObjects ko2 = (KeyedObjects) ko1.clone();
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
