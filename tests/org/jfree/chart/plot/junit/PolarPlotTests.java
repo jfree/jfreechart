@@ -55,6 +55,7 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -245,7 +246,7 @@ public class PolarPlotTests extends TestCase {
     /**
      * Some basic checks for the clone() method.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         PolarPlot p1 = new PolarPlot();
         PolarPlot p2 = null;
         try {
@@ -266,14 +267,7 @@ public class PolarPlotTests extends TestCase {
 
         p1 = new PolarPlot(new DefaultXYDataset(), new NumberAxis("A1"),
                 new DefaultPolarItemRenderer());
-        p2 = null;
-        try {
-            p2 = (PolarPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            System.err.println("Failed to clone.");
-        }
+        p2 = (PolarPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -283,13 +277,12 @@ public class PolarPlotTests extends TestCase {
         assertFalse(p1.equals(p2));
         p2.getAxis().setLabel("ABC");
         assertTrue(p1.equals(p2));
-
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
 
         PolarPlot p1 = new PolarPlot();
         p1.setAngleGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
@@ -298,24 +291,17 @@ public class PolarPlotTests extends TestCase {
                 4.0f, Color.blue));
         p1.setRadiusGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.blue));
-        PolarPlot p2 = null;
+        PolarPlot p2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(p1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(p1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            p2 = (PolarPlot) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(
+                new ByteArrayInputStream(buffer.toByteArray()));
+        p2 = (PolarPlot) in.readObject();
+        in.close();
         assertEquals(p1, p2);
-
     }
 
     public void testTranslateToJava2D_NumberAxis() {

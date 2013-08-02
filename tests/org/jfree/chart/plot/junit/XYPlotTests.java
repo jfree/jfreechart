@@ -481,7 +481,7 @@ public class XYPlotTests extends TestCase {
     /**
      * Tests cloning for a more complex plot.
      */
-    public void testCloning2() {
+    public void testCloning2() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         p1.setRangeAxis(1, new NumberAxis("Range Axis 2"));
@@ -490,13 +490,7 @@ public class XYPlotTests extends TestCase {
         p1.mapDatasetToDomainAxes(0, axisIndices);
         p1.mapDatasetToRangeAxes(0, axisIndices);
         p1.setRenderer(1, new XYBarRenderer());
-        XYPlot p2 = null;
-        try {
-            p2 = (XYPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYPlot p2 = (XYPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -506,18 +500,12 @@ public class XYPlotTests extends TestCase {
      * Tests cloning for a plot where the fixed legend items have been
      * specified.
      */
-    public void testCloning3() {
+    public void testCloning3() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         LegendItemCollection c1 = new LegendItemCollection();
         p1.setFixedLegendItems(c1);
-        XYPlot p2 = null;
-        try {
-            p2 = (XYPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYPlot p2 = (XYPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -531,17 +519,11 @@ public class XYPlotTests extends TestCase {
      * Tests cloning to ensure that the cloned plot is registered as a listener
      * on the cloned renderer.
      */
-    public void testCloning4() {
+    public void testCloning4() throws CloneNotSupportedException {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), r1);
-        XYPlot p2 = null;
-        try {
-            p2 = (XYPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYPlot p2 = (XYPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -554,17 +536,11 @@ public class XYPlotTests extends TestCase {
     /**
      * Confirm that cloning captures the quadrantOrigin field.
      */
-    public void testCloning_QuadrantOrigin() {
+    public void testCloning_QuadrantOrigin() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot();
         Point2D p = new Point2D.Double(1.2, 3.4);
         p1.setQuadrantOrigin(p);
-        XYPlot p2 = null;
-        try {
-            p2 = (XYPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYPlot p2 = (XYPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -574,17 +550,11 @@ public class XYPlotTests extends TestCase {
     /**
      * Confirm that cloning captures the quadrantOrigin field.
      */
-    public void testCloning_QuadrantPaint() {
+    public void testCloning_QuadrantPaint() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot();
         p1.setQuadrantPaint(3, new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
-        XYPlot p2 = null;
-        try {
-            p2 = (XYPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYPlot p2 = (XYPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -600,17 +570,11 @@ public class XYPlotTests extends TestCase {
      * Renderers that belong to the plot are being cloned but they are
      * retaining a reference to the original plot.
      */
-    public void testBug2817504() {
+    public void testBug2817504() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot();
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
         p1.setRenderer(r1);
-        XYPlot p2 = null;
-        try {
-            p2 = (XYPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYPlot p2 = (XYPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -623,7 +587,7 @@ public class XYPlotTests extends TestCase {
     /**
      * Tests the independence of the clones.
      */
-    public void testCloneIndependence() {
+    public void testCloneIndependence() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         p1.setDomainAxis(1, new NumberAxis("Domain Axis 2"));
@@ -631,14 +595,7 @@ public class XYPlotTests extends TestCase {
         p1.setRangeAxis(1, new NumberAxis("Range Axis 2"));
         p1.setRangeAxisLocation(1, AxisLocation.TOP_OR_RIGHT);
         p1.setRenderer(1, new XYBarRenderer());
-        XYPlot p2 = null;
-        try {
-            p2 = (XYPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            System.err.println("Failed to clone.");
-        }
+        XYPlot p2 = (XYPlot) p1.clone();
         assertTrue(p1.equals(p2));
 
         p1.getDomainAxis().setLabel("Label");
