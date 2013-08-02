@@ -44,6 +44,7 @@ package org.jfree.data.category.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -198,8 +199,7 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         double[] starts_S1 = new double[] {0.1, 0.2, 0.3};
         double[] starts_S2 = new double[] {0.3, 0.4, 0.5};
         double[] ends_S1 = new double[] {0.5, 0.6, 0.7};
@@ -208,30 +208,22 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
         double[][] ends = new double[][] {ends_S1, ends_S2};
         DefaultIntervalCategoryDataset d1
                 = new DefaultIntervalCategoryDataset(starts, ends);
-        DefaultIntervalCategoryDataset d2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(d1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            d2 = (DefaultIntervalCategoryDataset) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        DefaultIntervalCategoryDataset d2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(d1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        d2 = (DefaultIntervalCategoryDataset) in.readObject();
+        in.close();
         assertEquals(d1, d2);
-
     }
 
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         double[] starts_S1 = new double[] {0.1, 0.2, 0.3};
         double[] starts_S2 = new double[] {0.3, 0.4, 0.5};
         double[] ends_S1 = new double[] {0.5, 0.6, 0.7};
@@ -244,12 +236,7 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
                 DataUtilities.createNumberArray2D(starts),
                 DataUtilities.createNumberArray2D(ends));
         DefaultIntervalCategoryDataset d2 = null;
-        try {
-            d2 = (DefaultIntervalCategoryDataset) d1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        d2 = (DefaultIntervalCategoryDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -264,17 +251,12 @@ public class DefaultIntervalCategoryDatasetTests extends TestCase {
     /**
      * A check to ensure that an empty dataset can be cloned.
      */
-    public void testCloning2() {
+    public void testCloning2() throws CloneNotSupportedException {
         DefaultIntervalCategoryDataset d1
                 = new DefaultIntervalCategoryDataset(new double[0][0],
                     new double[0][0]);
         DefaultIntervalCategoryDataset d2 = null;
-        try {
-            d2 = (DefaultIntervalCategoryDataset) d1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        d2 = (DefaultIntervalCategoryDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));

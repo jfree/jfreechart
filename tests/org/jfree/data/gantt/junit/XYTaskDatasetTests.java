@@ -42,6 +42,7 @@ package org.jfree.data.gantt.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -119,19 +120,13 @@ public class XYTaskDatasetTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         TaskSeries s1 = new TaskSeries("Series");
         s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
-        XYTaskDataset d2 = null;
-        try {
-            d2 = (XYTaskDataset) d1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYTaskDataset d2 = (XYTaskDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -148,27 +143,22 @@ public class XYTaskDatasetTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         TaskSeries s1 = new TaskSeries("Series");
         s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
-        XYTaskDataset d2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(d1);
-            out.close();
+        XYTaskDataset d2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(d1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            d2 = (XYTaskDataset) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        d2 = (XYTaskDataset) in.readObject();
+        in.close();
         assertEquals(d1, d2);
 
         // basic check for independence

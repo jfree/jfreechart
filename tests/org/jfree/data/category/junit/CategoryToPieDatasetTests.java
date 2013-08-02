@@ -43,6 +43,7 @@ package org.jfree.data.category.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -218,28 +219,21 @@ public class CategoryToPieDatasetTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         DefaultCategoryDataset underlying = new DefaultCategoryDataset();
         underlying.addValue(1.1, "R1", "C1");
         underlying.addValue(2.2, "R1", "C2");
         CategoryToPieDataset d1 = new CategoryToPieDataset(underlying,
                 TableOrder.BY_COLUMN, 1);
-        CategoryToPieDataset d2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(d1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            d2 = (CategoryToPieDataset) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        CategoryToPieDataset d2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(d1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        d2 = (CategoryToPieDataset) in.readObject();
+        in.close();
         assertEquals(d1, d2);
 
         // regular equality for the datasets doesn't check the fields, just

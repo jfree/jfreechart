@@ -464,7 +464,7 @@ public class TaskSeriesCollectionTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         TaskSeries s1 = new TaskSeries("S1");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
@@ -475,13 +475,7 @@ public class TaskSeriesCollectionTests extends TestCase {
         c1.add(s1);
         c1.add(s2);
 
-        TaskSeriesCollection c2 = null;
-        try {
-            c2 = (TaskSeriesCollection) c1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        TaskSeriesCollection c2 = (TaskSeriesCollection) c1.clone();
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
