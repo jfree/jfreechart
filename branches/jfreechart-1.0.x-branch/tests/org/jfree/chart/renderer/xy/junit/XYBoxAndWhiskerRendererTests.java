@@ -51,6 +51,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -170,22 +171,17 @@ public class XYBoxAndWhiskerRendererTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
-        XYBoxAndWhiskerRenderer r2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            r2 = (XYBoxAndWhiskerRenderer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        XYBoxAndWhiskerRenderer r2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        r2 = (XYBoxAndWhiskerRenderer) in.readObject();
+        in.close();
         assertEquals(r1, r2);
     }
 
@@ -208,10 +204,8 @@ public class XYBoxAndWhiskerRendererTests extends TestCase {
             g2.dispose();
         }
         catch (Exception e) {
-            e.printStackTrace();
-            assertTrue(false);
+            fail("No exception should be thrown.");
         }
-        assertTrue(true);
     }
 
 }

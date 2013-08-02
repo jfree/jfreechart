@@ -46,6 +46,7 @@ package org.jfree.chart.renderer.xy.junit;
 import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -135,17 +136,11 @@ public class XYBlockRendererTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         XYBlockRenderer r1 = new XYBlockRenderer();
         LookupPaintScale scale1 = new LookupPaintScale();
         r1.setPaintScale(scale1);
-        XYBlockRenderer r2 = null;
-        try {
-            r2 = (XYBlockRenderer) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYBlockRenderer r2 = (XYBlockRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -169,23 +164,18 @@ public class XYBlockRendererTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         XYBlockRenderer r1 = new XYBlockRenderer();
-        XYBlockRenderer r2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
+        XYBlockRenderer r2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            r2 = (XYBlockRenderer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        r2 = (XYBlockRenderer) in.readObject();
+        in.close();
         assertEquals(r1, r2);
     }
 

@@ -122,17 +122,11 @@ public class XYAreaRenderer2Tests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         XYAreaRenderer2 r1 = new XYAreaRenderer2();
         Rectangle rect = new Rectangle(1, 2, 3, 4);
         r1.setLegendArea(rect);
-        XYAreaRenderer2 r2 = null;
-        try {
-            r2 = (XYAreaRenderer2) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYAreaRenderer2 r2 = (XYAreaRenderer2) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -181,7 +175,6 @@ public class XYAreaRenderer2Tests extends TestCase {
      * no exceptions are thrown (particularly by code in the renderer).
      */
     public void testDrawWithNullInfo() {
-        boolean success = false;
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();
 
@@ -204,13 +197,10 @@ public class XYAreaRenderer2Tests extends TestCase {
             JFreeChart chart = new JFreeChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-            success = true;
         }
         catch (NullPointerException e) {
-            e.printStackTrace();
-            success = false;
+            fail("No exception should be thrown.");
         }
-        assertTrue(success);
     }
 
     /**

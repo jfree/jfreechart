@@ -48,6 +48,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -146,15 +147,9 @@ public class StackedXYAreaRenderer2Tests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
-        StackedXYAreaRenderer2 r2 = null;
-        try {
-            r2 = (StackedXYAreaRenderer2) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        StackedXYAreaRenderer2 r2 = (StackedXYAreaRenderer2) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -171,23 +166,18 @@ public class StackedXYAreaRenderer2Tests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
-        StackedXYAreaRenderer2 r2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
+        StackedXYAreaRenderer2 r2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            r2 = (StackedXYAreaRenderer2) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        r2 = (StackedXYAreaRenderer2) in.readObject();
+        in.close();
         assertEquals(r1, r2);
     }
 

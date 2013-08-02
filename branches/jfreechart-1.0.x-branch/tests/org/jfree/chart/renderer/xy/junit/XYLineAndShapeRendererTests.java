@@ -48,6 +48,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -206,17 +207,11 @@ public class XYLineAndShapeRendererTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         Rectangle2D legendShape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
         r1.setLegendLine(legendShape);
-        XYLineAndShapeRenderer r2 = null;
-        try {
-            r2 = (XYLineAndShapeRenderer) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYLineAndShapeRenderer r2 = (XYLineAndShapeRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -253,26 +248,18 @@ public class XYLineAndShapeRendererTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
-        XYLineAndShapeRenderer r2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            r2 = (XYLineAndShapeRenderer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        XYLineAndShapeRenderer r2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        r2 = (XYLineAndShapeRenderer) in.readObject();
+        in.close();
         assertEquals(r1, r2);
-
     }
 
     /**
