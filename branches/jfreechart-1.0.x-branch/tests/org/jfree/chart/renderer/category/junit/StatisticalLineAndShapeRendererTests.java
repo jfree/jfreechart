@@ -46,6 +46,7 @@ package org.jfree.chart.renderer.category.junit;
 import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -121,16 +122,11 @@ public class StatisticalLineAndShapeRendererTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         StatisticalLineAndShapeRenderer r1
                 = new StatisticalLineAndShapeRenderer();
-        StatisticalLineAndShapeRenderer r2 = null;
-        try {
-            r2 = (StatisticalLineAndShapeRenderer) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        StatisticalLineAndShapeRenderer r2 = (StatisticalLineAndShapeRenderer) 
+                r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -148,28 +144,21 @@ public class StatisticalLineAndShapeRendererTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         StatisticalLineAndShapeRenderer r1
             = new StatisticalLineAndShapeRenderer();
-        StatisticalLineAndShapeRenderer r2 = null;
+        StatisticalLineAndShapeRenderer r2;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            r2 = (StatisticalLineAndShapeRenderer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        ObjectInput in = new ObjectInputStream(
+                new ByteArrayInputStream(buffer.toByteArray()));
+        r2 = (StatisticalLineAndShapeRenderer) in.readObject();
+        in.close();
         assertEquals(r1, r2);
-
     }
 
     /**
