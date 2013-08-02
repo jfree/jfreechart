@@ -1652,8 +1652,7 @@ public abstract class Axis implements Cloneable, Serializable {
         }
         return true;
     }
-    
-    @Override
+
     public int hashCode() {
         int hash = 3;
         if (this.label != null) {

@@ -413,7 +413,6 @@ public class SubCategoryAxis extends CategoryAxis
         return false;
     }
 
-    @Override
     public int hashCode() {
         return super.hashCode();
     }
