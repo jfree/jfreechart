@@ -157,7 +157,6 @@ public class IntervalBarRendererTests extends TestCase {
      * no exceptions are thrown (particularly by code in the renderer).
      */
     public void testDrawWithNullInfo() {
-        boolean success = false;
         try {
             double[][] starts = new double[][] {{0.1, 0.2, 0.3},
                     {0.3, 0.4, 0.5}};
@@ -171,13 +170,10 @@ public class IntervalBarRendererTests extends TestCase {
             JFreeChart chart = new JFreeChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-            success = true;
         }
         catch (NullPointerException e) {
-            e.printStackTrace();
-            success = false;
+            fail("No exception should be thrown.");
         }
-        assertTrue(success);
     }
 
     /**

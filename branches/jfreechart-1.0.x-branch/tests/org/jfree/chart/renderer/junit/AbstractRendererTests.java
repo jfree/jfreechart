@@ -58,6 +58,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -471,7 +472,7 @@ public class AbstractRendererTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
         Rectangle2D shape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         Rectangle2D baseShape = new Rectangle2D.Double(11.0, 12.0, 13.0, 14.0);
@@ -481,13 +482,7 @@ public class AbstractRendererTests extends TestCase {
         r1.setBaseLegendTextFont(new Font("Dialog", Font.PLAIN, 3));
         r1.setBaseLegendTextPaint(new Color(1, 2, 3));
 
-        LineAndShapeRenderer r2 = null;
-        try {
-            r2 = (LineAndShapeRenderer) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -620,18 +615,12 @@ public class AbstractRendererTests extends TestCase {
     /**
      * A check for cloning.
      */
-    public void testCloning2() {
+    public void testCloning2() throws CloneNotSupportedException {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
         r1.setBasePaint(Color.blue);
         r1.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
-        LineAndShapeRenderer r2 = null;
-        try {
-            r2 = (LineAndShapeRenderer) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -911,37 +900,28 @@ public class AbstractRendererTests extends TestCase {
      * test for a bug that was reported where the listener list is 'null' after
      * deserialization.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         BarRenderer r1 = new BarRenderer();
         r1.setBaseLegendTextFont(new Font("Dialog", Font.PLAIN, 4));
         r1.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.green));
         r1.setBaseLegendShape(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        BarRenderer r2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            r2 = (BarRenderer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        BarRenderer r2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        r2 = (BarRenderer) in.readObject();
+        in.close();
         assertEquals(r1, r2);
         try {
             r2.notifyListeners(new RendererChangeEvent(r2));
         }
         catch (NullPointerException e) {
-            assertTrue(false);  // failed
+            fail("No exception should be thrown.");  // failed
         }
-
     }
 
     /**
