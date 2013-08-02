@@ -61,6 +61,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -464,15 +465,9 @@ public class XYPlotTests extends TestCase {
     /**
      * Confirm that basic cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot();
-        XYPlot p2 = null;
-        try {
-            p2 = (XYPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYPlot p2 = (XYPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -738,7 +733,7 @@ public class XYPlotTests extends TestCase {
      * method following deserialization.  This test has been written to
      * reproduce the bug (now fixed).
      */
-    public void testSerialization3() {
+    public void testSerialization3() throws IOException, ClassNotFoundException {
 
         XYSeriesCollection dataset = new XYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYLineChart(
@@ -751,42 +746,32 @@ public class XYPlotTests extends TestCase {
             true,
             false
         );
-        JFreeChart chart2 = null;
+        JFreeChart chart2;
 
         // serialize and deserialize the chart....
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(chart);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            chart2 = (JFreeChart) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(chart);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        chart2 = (JFreeChart) in.readObject();
+        in.close();
 
         assertEquals(chart, chart2);
-        boolean passed = true;
         try {
             chart2.createBufferedImage(300, 200);
         }
         catch (Exception e) {
-            passed = false;
-            e.printStackTrace();
+            fail("No exception should be thrown.");
         }
-        assertTrue(passed);
     }
 
     /**
      * A test to reproduce a bug in serialization: the domain and/or range
      * markers for a plot are not being serialized.
      */
-    public void testSerialization4() {
+    public void testSerialization4() throws IOException, ClassNotFoundException {
 
         XYSeriesCollection dataset = new XYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYLineChart(
@@ -804,34 +789,26 @@ public class XYPlotTests extends TestCase {
         plot.addDomainMarker(new IntervalMarker(2.0, 3.0), Layer.BACKGROUND);
         plot.addRangeMarker(new ValueMarker(4.0), Layer.FOREGROUND);
         plot.addRangeMarker(new IntervalMarker(5.0, 6.0), Layer.BACKGROUND);
-        JFreeChart chart2 = null;
+        JFreeChart chart2;
 
         // serialize and deserialize the chart....
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(chart);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(chart);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            chart2 = (JFreeChart) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        chart2 = (JFreeChart) in.readObject();
+        in.close();
 
         assertEquals(chart, chart2);
-        boolean passed = true;
         try {
             chart2.createBufferedImage(300, 200);
         }
         catch (Exception e) {
-            passed = false;
-            e.printStackTrace();
+            fail("No exception should be thrown.");
         }
-        assertTrue(passed);
     }
 
     /**
@@ -1055,20 +1032,16 @@ public class XYPlotTests extends TestCase {
                 dataset, PlotOrientation.VERTICAL, true, false, false);
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.setRenderer(1, new XYLineAndShapeRenderer());
-        boolean success = false;
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
             g2.dispose();
-            success = true;
         }
         catch (Exception e) {
-            e.printStackTrace();
-            success = false;
+            fail("No exception should be thrown.");
         }
-        assertTrue(success);
     }
 
     /**
@@ -1081,20 +1054,16 @@ public class XYPlotTests extends TestCase {
                 dataset, PlotOrientation.VERTICAL, true, false, false);
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.setRenderer(null);
-        boolean success = false;
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
             g2.dispose();
-            success = true;
         }
         catch (Exception e) {
-            e.printStackTrace();
-            success = false;
+            fail("No exception should be thrown.");
         }
-        assertTrue(success);
     }
 
     /**
@@ -1107,20 +1076,16 @@ public class XYPlotTests extends TestCase {
         dataset.addSeries("Series 2", new double[][] {{}, {}});
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
-        boolean success = false;
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
             g2.dispose();
-            success = true;
         }
         catch (Exception e) {
-            e.printStackTrace();
-            success = false;
+            fail("No exception should be thrown.");
         }
-        assertTrue(success);
     }
 
     /**

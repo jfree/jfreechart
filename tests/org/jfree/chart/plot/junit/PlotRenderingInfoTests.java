@@ -113,16 +113,10 @@ public class PlotRenderingInfoTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
         p1.setPlotArea(new Rectangle2D.Double());
-        PlotRenderingInfo p2 = null;
-        try {
-            p2 = (PlotRenderingInfo) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        PlotRenderingInfo p2 = (PlotRenderingInfo) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));

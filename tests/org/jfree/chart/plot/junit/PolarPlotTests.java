@@ -248,13 +248,7 @@ public class PolarPlotTests extends TestCase {
      */
     public void testCloning() throws CloneNotSupportedException {
         PolarPlot p1 = new PolarPlot();
-        PolarPlot p2 = null;
-        try {
-            p2 = (PolarPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        PolarPlot p2 = (PolarPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
