@@ -102,18 +102,10 @@ public class BlockContainerTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         BlockContainer c1 = new BlockContainer(new FlowArrangement());
         c1.add(new EmptyBlock(1.2, 3.4));
-
-        BlockContainer c2 = null;
-
-        try {
-            c2 = (BlockContainer) c1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        BlockContainer c2 = (BlockContainer) c1.clone();
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
