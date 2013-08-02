@@ -122,15 +122,9 @@ public class DefaultKeyedValueTests extends TestCase {
     /**
      * Some checks for the clone() method.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValue v1 = new DefaultKeyedValue("Test", new Double(45.5));
-        DefaultKeyedValue v2 = null;
-        try {
-            v2 = (DefaultKeyedValue) v1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        DefaultKeyedValue v2 = (DefaultKeyedValue) v1.clone();
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));

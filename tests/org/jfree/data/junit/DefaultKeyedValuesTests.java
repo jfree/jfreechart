@@ -48,6 +48,7 @@ package org.jfree.data.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -296,18 +297,12 @@ public class DefaultKeyedValuesTests extends TestCase {
     /**
      * Some checks for the clone() method.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         v1.addValue("V1", new Integer(1));
         v1.addValue("V2", null);
         v1.addValue("V3", new Integer(3));
-        DefaultKeyedValues v2 = null;
-        try {
-            v2 = (DefaultKeyedValues) v1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        DefaultKeyedValues v2 = (DefaultKeyedValues) v1.clone();
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
@@ -506,32 +501,23 @@ public class DefaultKeyedValuesTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         v1.addValue("Key 1", new Double(23));
         v1.addValue("Key 2", null);
         v1.addValue("Key 3", new Double(42));
 
-        DefaultKeyedValues v2 = null;
+        DefaultKeyedValues v2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(v1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(v1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            v2 = (DefaultKeyedValues) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        v2 = (DefaultKeyedValues) in.readObject();
+        in.close();
         assertEquals(v1, v2);
-
     }
 
 }
