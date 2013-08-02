@@ -48,6 +48,7 @@ package org.jfree.data.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -112,18 +113,12 @@ public class DefaultKeyedValues2DTests extends TestCase {
     /**
      * Some checks for the clone() method.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValues2D v1 = new DefaultKeyedValues2D();
         v1.setValue(new Integer(1), "V1", "C1");
         v1.setValue(null, "V2", "C1");
         v1.setValue(new Integer(3), "V3", "C2");
-        DefaultKeyedValues2D v2 = null;
-        try {
-            v2 = (DefaultKeyedValues2D) v1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        DefaultKeyedValues2D v2 = (DefaultKeyedValues2D) v1.clone();
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
@@ -136,32 +131,24 @@ public class DefaultKeyedValues2DTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         DefaultKeyedValues2D kv2D1 = new DefaultKeyedValues2D();
         kv2D1.addValue(new Double(234.2), "Row1", "Col1");
         kv2D1.addValue(null, "Row1", "Col2");
         kv2D1.addValue(new Double(345.9), "Row2", "Col1");
         kv2D1.addValue(new Double(452.7), "Row2", "Col2");
 
-        DefaultKeyedValues2D kv2D2 = null;
+        DefaultKeyedValues2D kv2D2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(kv2D1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(kv2D1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            kv2D2 = (DefaultKeyedValues2D) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        kv2D2 = (DefaultKeyedValues2D) in.readObject();
+        in.close();
         assertEquals(kv2D1, kv2D2);
-
     }
 
     /**

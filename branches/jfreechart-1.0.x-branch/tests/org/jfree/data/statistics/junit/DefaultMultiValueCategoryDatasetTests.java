@@ -42,6 +42,7 @@ package org.jfree.data.statistics.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -196,29 +197,21 @@ public class DefaultMultiValueCategoryDatasetTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         DefaultMultiValueCategoryDataset d1
                 = new DefaultMultiValueCategoryDataset();
         DefaultMultiValueCategoryDataset d2
                 = new DefaultMultiValueCategoryDataset();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(d1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(d1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            d2 = (DefaultMultiValueCategoryDataset) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        d2 = (DefaultMultiValueCategoryDataset) in.readObject();
+        in.close();
         assertEquals(d1, d2);
-
     }
 
     /**
@@ -254,16 +247,11 @@ public class DefaultMultiValueCategoryDatasetTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         DefaultMultiValueCategoryDataset d1
                 = new DefaultMultiValueCategoryDataset();
-        DefaultMultiValueCategoryDataset d2 = null;
-        try {
-            d2 = (DefaultMultiValueCategoryDataset) d1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        DefaultMultiValueCategoryDataset d2 
+                = (DefaultMultiValueCategoryDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -272,12 +260,7 @@ public class DefaultMultiValueCategoryDatasetTests extends TestCase {
         List values = new ArrayList();
         values.add(new Integer(99));
         d1.add(values, "R1", "C1");
-        try {
-            d2 = (DefaultMultiValueCategoryDataset) d1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        d2 = (DefaultMultiValueCategoryDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
