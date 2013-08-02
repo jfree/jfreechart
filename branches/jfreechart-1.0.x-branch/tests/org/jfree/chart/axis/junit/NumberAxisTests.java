@@ -50,6 +50,7 @@ package org.jfree.chart.axis.junit;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -100,15 +101,9 @@ public class NumberAxisTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         NumberAxis a1 = new NumberAxis("Test");
-        NumberAxis a2 = null;
-        try {
-            a2 = (NumberAxis) a1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        NumberAxis a2 = (NumberAxis) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -197,27 +192,19 @@ public class NumberAxisTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         NumberAxis a1 = new NumberAxis("Test Axis");
-        NumberAxis a2 = null;
+        NumberAxis a2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(a1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(a1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            a2 = (NumberAxis) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        a2 = (NumberAxis) in.readObject();
+        in.close();
         assertEquals(a1, a2);
-
     }
 
     /**

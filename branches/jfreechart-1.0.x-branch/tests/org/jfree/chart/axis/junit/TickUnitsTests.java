@@ -42,6 +42,7 @@ package org.jfree.chart.axis.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -80,41 +81,27 @@ public class TickUnitsTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         TickUnits t1 = (TickUnits) NumberAxis.createIntegerTickUnits();
-        TickUnits t2 = null;
+        TickUnits t2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(t1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(t1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            t2 = (TickUnits) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        t2 = (TickUnits) in.readObject();
+        in.close();
         assertEquals(t1, t2);
-
     }
 
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         TickUnits t1 = (TickUnits) NumberAxis.createIntegerTickUnits();
-        TickUnits t2 = null;
-        try {
-            t2 = (TickUnits) t1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        TickUnits t2 = (TickUnits) t1.clone();
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
         assertTrue(t1.equals(t2));

@@ -49,6 +49,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -132,16 +133,10 @@ public class SubCategoryAxisTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         SubCategoryAxis a1 = new SubCategoryAxis("Test");
         a1.addSubCategory("SubCategoryA");
-        SubCategoryAxis a2 = null;
-        try {
-            a2 = (SubCategoryAxis) a1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        SubCategoryAxis a2 = (SubCategoryAxis) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -150,24 +145,19 @@ public class SubCategoryAxisTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         SubCategoryAxis a1 = new SubCategoryAxis("Test Axis");
         a1.addSubCategory("SubCategoryA");
-        SubCategoryAxis a2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(a1);
-            out.close();
+        SubCategoryAxis a2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(a1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            a2 = (SubCategoryAxis) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        a2 = (SubCategoryAxis) in.readObject();
+        in.close();
         assertEquals(a1, a2);
     }
 
@@ -180,20 +170,16 @@ public class SubCategoryAxisTests extends TestCase {
                 true, false, false);
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         plot.setDomainAxis(new SubCategoryAxis("SubCategoryAxis"));
-        boolean success = false;
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
             g2.dispose();
-            success = true;
         }
         catch (Exception e) {
-            e.printStackTrace();
-            success = false;
+            fail("There should be no exception.");
         }
-        assertTrue(success);
     }
 
 }

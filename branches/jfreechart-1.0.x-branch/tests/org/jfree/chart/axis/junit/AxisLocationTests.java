@@ -43,6 +43,7 @@ package org.jfree.chart.axis.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -103,23 +104,17 @@ public class AxisLocationTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         AxisLocation location1 = AxisLocation.BOTTOM_OR_RIGHT;
-        AxisLocation location2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(location1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            location2 = (AxisLocation) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        AxisLocation location2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(location1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(
+                new ByteArrayInputStream(buffer.toByteArray()));
+        location2 = (AxisLocation) in.readObject();
+        in.close();
         assertEquals(location1, location2);
         boolean same = location1 == location2;
         assertEquals(true, same);

@@ -95,15 +95,9 @@ public class ValueAxisTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         ValueAxis a1 = new NumberAxis("Test");
-        ValueAxis a2 = null;
-        try {
-            a2 = (NumberAxis) a1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        ValueAxis a2 = (NumberAxis) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
