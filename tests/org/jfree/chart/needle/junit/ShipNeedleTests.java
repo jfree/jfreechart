@@ -42,6 +42,7 @@ package org.jfree.chart.needle.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -89,16 +90,9 @@ public class ShipNeedleTests extends TestCase {
     /**
      * Check that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         ShipNeedle n1 = new ShipNeedle();
-        ShipNeedle n2 = null;
-        try {
-            n2 = (ShipNeedle) n1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            System.err.println("Failed to clone.");
-        }
+        ShipNeedle n2 = (ShipNeedle) n1.clone();
         assertTrue(n1 != n2);
         assertTrue(n1.getClass() == n2.getClass());
         assertTrue(n1.equals(n2));
@@ -107,23 +101,17 @@ public class ShipNeedleTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         ShipNeedle n1 = new ShipNeedle();
-        ShipNeedle n2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(n1);
-            out.close();
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            n2 = (ShipNeedle) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ShipNeedle n2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(n1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        n2 = (ShipNeedle) in.readObject();
+        in.close();
         assertTrue(n1.equals(n2));
     }
 

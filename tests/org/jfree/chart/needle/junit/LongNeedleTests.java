@@ -27,7 +27,7 @@
  * --------------------
  * LongNeedleTests.java
  * --------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@ package org.jfree.chart.needle.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -88,16 +89,9 @@ public class LongNeedleTests extends TestCase {
     /**
      * Check that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         LongNeedle n1 = new LongNeedle();
-        LongNeedle n2 = null;
-        try {
-            n2 = (LongNeedle) n1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            System.err.println("Failed to clone.");
-        }
+        LongNeedle n2 = (LongNeedle) n1.clone();
         assertTrue(n1 != n2);
         assertTrue(n1.getClass() == n2.getClass());
         assertTrue(n1.equals(n2));
@@ -106,23 +100,17 @@ public class LongNeedleTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         LongNeedle n1 = new LongNeedle();
         LongNeedle n2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(n1);
-            out.close();
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            n2 = (LongNeedle) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(n1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(
+                new ByteArrayInputStream(buffer.toByteArray()));
+        n2 = (LongNeedle) in.readObject();
+        in.close();
         assertTrue(n1.equals(n2));
     }
 
