@@ -27,7 +27,7 @@
  * ---------------
  * DomainInfo.java
  * ---------------
- * (C) Copyright 2000-2009, by Object Refinery Limited.
+ * (C) Copyright 2000-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,6 +43,7 @@
  * 17-Nov-2004 : Added 'includeInterval' argument to all methods (DG);
  * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
  *               release (DG);
+ * 02-Aug-2013 : Updated Javadocs from David Tonhofer (bug 1117) (DG);
  *
  */
 
@@ -50,7 +51,9 @@ package org.jfree.data;
 
 /**
  * An interface (optional) that can be implemented by a dataset to assist in
- * determining the minimum and maximum values.
+ * determining the minimum and maximum values.  If not present, 
+ * {@link DatasetUtilities} will iterate over all the values in the dataset to
+ * get the bounds.
  */
 public interface DomainInfo {
 
@@ -60,7 +63,8 @@ public interface DomainInfo {
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
      *
-     * @return The minimum value.
+     * @return The minimum value or <code>Double.NaN</code> if there are no 
+     *     values.
      */
     public double getDomainLowerBound(boolean includeInterval);
 
@@ -70,7 +74,8 @@ public interface DomainInfo {
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
      *
-     * @return The maximum value.
+     * @return The maximum value or <code>Double.NaN</code> if there are no 
+     *     values.
      */
     public double getDomainUpperBound(boolean includeInterval);
 
