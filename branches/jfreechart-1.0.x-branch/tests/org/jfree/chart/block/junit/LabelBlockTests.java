@@ -47,6 +47,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -139,17 +140,10 @@ public class LabelBlockTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), Color.red);
-        LabelBlock b2 = null;
-
-        try {
-            b2 = (LabelBlock) b1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        LabelBlock b2 = (LabelBlock) b1.clone();
         assertTrue(b1 != b2);
         assertTrue(b1.getClass() == b2.getClass());
         assertTrue(b1.equals(b2));
@@ -158,26 +152,20 @@ public class LabelBlockTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.blue);
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), gp);
-        LabelBlock b2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(b1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            b2 = (LabelBlock) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        LabelBlock b2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(b1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        b2 = (LabelBlock) in.readObject();
+        in.close();
         assertEquals(b1, b2);
     }
 
