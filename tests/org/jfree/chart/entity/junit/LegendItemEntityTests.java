@@ -44,6 +44,7 @@ package org.jfree.chart.entity.junit;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -124,17 +125,10 @@ public class LegendItemEntityTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         LegendItemEntity e1 = new LegendItemEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0));
-        LegendItemEntity e2 = null;
-
-        try {
-            e2 = (LegendItemEntity) e1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        LegendItemEntity e2 = (LegendItemEntity) e1.clone();
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
         assertTrue(e1.equals(e2));
@@ -143,24 +137,18 @@ public class LegendItemEntityTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         LegendItemEntity e1 = new LegendItemEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0));
-        LegendItemEntity e2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(e1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            e2 = (LegendItemEntity) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        LegendItemEntity e2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(e1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        e2 = (LegendItemEntity) in.readObject();
+        in.close();
         assertEquals(e1, e2);
     }
 
