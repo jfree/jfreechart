@@ -43,6 +43,7 @@ package org.jfree.chart.junit;
 import java.awt.BasicStroke;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -148,73 +149,50 @@ public class StrokeMapTests extends TestCase {
     /**
      * Some checks for cloning.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         StrokeMap m1 = new StrokeMap();
-        StrokeMap m2 = null;
-        try {
-            m2 = (StrokeMap) m1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        StrokeMap m2 = (StrokeMap) m1.clone();
         assertTrue(m1.equals(m2));
 
         m1.put("K1", new BasicStroke(1.1f));
         m1.put("K2", new BasicStroke(2.2f));
-        try {
-            m2 = (StrokeMap) m1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        m2 = (StrokeMap) m1.clone();
         assertTrue(m1.equals(m2));
     }
 
     /**
      * A check for serialization.
      */
-    public void testSerialization1() {
+    public void testSerialization1() throws IOException, ClassNotFoundException {
         StrokeMap m1 = new StrokeMap();
-        StrokeMap m2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(m1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            m2 = (StrokeMap) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        StrokeMap m2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(m1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        m2 = (StrokeMap) in.readObject();
+        in.close();
         assertEquals(m1, m2);
     }
 
     /**
      * A check for serialization.
      */
-    public void testSerialization2() {
+    public void testSerialization2() throws IOException, ClassNotFoundException {
         StrokeMap m1 = new StrokeMap();
         m1.put("K1", new BasicStroke(1.1f));
         m1.put("K2", new BasicStroke(2.2f));
-        StrokeMap m2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(m1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            m2 = (StrokeMap) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        StrokeMap m2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(m1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        m2 = (StrokeMap) in.readObject();
+        in.close();
         assertEquals(m1, m2);
     }
 

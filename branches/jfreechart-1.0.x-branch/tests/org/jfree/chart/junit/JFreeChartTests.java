@@ -52,6 +52,7 @@ import java.awt.GradientPaint;
 import java.awt.RenderingHints;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -287,8 +288,7 @@ public class JFreeChartTests extends TestCase implements ChartChangeListener {
     /**
      * Serialize a pie chart, restore it, and check for equality.
      */
-    public void testSerialization1() {
-
+    public void testSerialization1() throws IOException, ClassNotFoundException {
         DefaultPieDataset data = new DefaultPieDataset();
         data.setValue("Type 1", 54.5);
         data.setValue("Type 2", 23.9);
@@ -296,22 +296,16 @@ public class JFreeChartTests extends TestCase implements ChartChangeListener {
 
         JFreeChart c1 = ChartFactory.createPieChart("Test", data, true, true,
                 true);
-        JFreeChart c2 = null;
+        JFreeChart c2;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(c1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            c2 = (JFreeChart) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(c1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        c2 = (JFreeChart) in.readObject();
+        in.close();
         assertEquals(c1, c2);
         LegendTitle lt2 = c2.getLegend();
         assertTrue(lt2.getSources()[0] == c2.getPlot());
@@ -320,8 +314,7 @@ public class JFreeChartTests extends TestCase implements ChartChangeListener {
     /**
      * Serialize a 3D pie chart, restore it, and check for equality.
      */
-    public void testSerialization2() {
-
+    public void testSerialization2() throws IOException, ClassNotFoundException {
         DefaultPieDataset data = new DefaultPieDataset();
         data.setValue("Type 1", 54.5);
         data.setValue("Type 2", 23.9);
@@ -329,30 +322,23 @@ public class JFreeChartTests extends TestCase implements ChartChangeListener {
 
         JFreeChart c1 = ChartFactory.createPieChart3D("Test", data, true, true,
                 true);
-        JFreeChart c2 = null;
+        JFreeChart c2;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(c1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            c2 = (JFreeChart) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(c1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        c2 = (JFreeChart) in.readObject();
+        in.close();
         assertEquals(c1, c2);
-
     }
 
     /**
      * Serialize a bar chart, restore it, and check for equality.
      */
-    public void testSerialization3() {
+    public void testSerialization3() throws IOException, ClassNotFoundException {
 
         // row keys...
         String series1 = "First";
@@ -411,30 +397,22 @@ public class JFreeChartTests extends TestCase implements ChartChangeListener {
             false
         );
 
-        JFreeChart c2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(c1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            c2 = (JFreeChart) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        JFreeChart c2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(c1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        c2 = (JFreeChart) in.readObject();
+        in.close();
         assertEquals(c1, c2);
-
     }
 
     /**
      * Serialize a time seroes chart, restore it, and check for equality.
      */
-    public void testSerialization4() {
+    public void testSerialization4() throws IOException, ClassNotFoundException {
 
         RegularTimePeriod t = new Day();
         TimeSeries series = new TimeSeries("Series 1");
@@ -446,24 +424,18 @@ public class JFreeChartTests extends TestCase implements ChartChangeListener {
 
         JFreeChart c1 = ChartFactory.createTimeSeriesChart("Test", "Date",
                 "Value", dataset, true, true, true);
-        JFreeChart c2 = null;
+        JFreeChart c2;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(c1);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(c1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            c2 = (JFreeChart) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        c2 = (JFreeChart) in.readObject();
+        in.close();
         assertEquals(c1, c2);
-
     }
 
     /**
