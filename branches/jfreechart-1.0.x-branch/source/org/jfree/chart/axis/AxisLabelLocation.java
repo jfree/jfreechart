@@ -108,7 +108,6 @@ public final class AxisLabelLocation implements Serializable {
         return true;
     }
 
-    @Override
     public int hashCode() {
         int hash = 5;
         hash = 83 * hash + this.name.hashCode();
