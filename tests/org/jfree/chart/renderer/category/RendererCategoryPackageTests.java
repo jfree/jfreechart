@@ -60,30 +60,30 @@ public class RendererCategoryPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.chart.renderer.category");
-        suite.addTestSuite(AbstractCategoryItemRendererTests.class);
-        suite.addTestSuite(AreaRendererTests.class);
-        suite.addTestSuite(BarRendererTests.class);
-        suite.addTestSuite(BarRenderer3DTests.class);
-        suite.addTestSuite(BoxAndWhiskerRendererTests.class);
-        suite.addTestSuite(CategoryStepRendererTests.class);
-        suite.addTestSuite(DefaultCategoryItemRendererTests.class);
-        suite.addTestSuite(GanttRendererTests.class);
-        suite.addTestSuite(GradientBarPainterTests.class);
-        suite.addTestSuite(GroupedStackedBarRendererTests.class);
-        suite.addTestSuite(IntervalBarRendererTests.class);
-        suite.addTestSuite(LayeredBarRendererTests.class);
-        suite.addTestSuite(LevelRendererTests.class);
-        suite.addTestSuite(LineAndShapeRendererTests.class);
-        suite.addTestSuite(LineRenderer3DTests.class);
-        suite.addTestSuite(MinMaxCategoryRendererTests.class);
-        suite.addTestSuite(ScatterRendererTests.class);
-        suite.addTestSuite(StackedAreaRendererTests.class);
-        suite.addTestSuite(StackedBarRendererTests.class);
-        suite.addTestSuite(StackedBarRenderer3DTests.class);
-        suite.addTestSuite(StandardBarPainterTests.class);
-        suite.addTestSuite(StatisticalBarRendererTests.class);
-        suite.addTestSuite(StatisticalLineAndShapeRendererTests.class);
-        suite.addTestSuite(WaterfallBarRendererTests.class);
+        suite.addTestSuite(AbstractCategoryItemRendererTest.class);
+        suite.addTestSuite(AreaRendererTest.class);
+        suite.addTestSuite(BarRendererTest.class);
+        suite.addTestSuite(BarRenderer3DTest.class);
+        suite.addTestSuite(BoxAndWhiskerRendererTest.class);
+        suite.addTestSuite(CategoryStepRendererTest.class);
+        suite.addTestSuite(DefaultCategoryItemRendererTest.class);
+        suite.addTestSuite(GanttRendererTest.class);
+        suite.addTestSuite(GradientBarPainterTest.class);
+        suite.addTestSuite(GroupedStackedBarRendererTest.class);
+        suite.addTestSuite(IntervalBarRendererTest.class);
+        suite.addTestSuite(LayeredBarRendererTest.class);
+        suite.addTestSuite(LevelRendererTest.class);
+        suite.addTestSuite(LineAndShapeRendererTest.class);
+        suite.addTestSuite(LineRenderer3DTest.class);
+        suite.addTestSuite(MinMaxCategoryRendererTest.class);
+        suite.addTestSuite(ScatterRendererTest.class);
+        suite.addTestSuite(StackedAreaRendererTest.class);
+        suite.addTestSuite(StackedBarRendererTest.class);
+        suite.addTestSuite(StackedBarRenderer3DTest.class);
+        suite.addTestSuite(StandardBarPainterTest.class);
+        suite.addTestSuite(StatisticalBarRendererTest.class);
+        suite.addTestSuite(StatisticalLineAndShapeRendererTest.class);
+        suite.addTestSuite(WaterfallBarRendererTest.class);
         return suite;
     }
 

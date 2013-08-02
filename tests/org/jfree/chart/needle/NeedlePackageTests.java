@@ -58,16 +58,16 @@ public class NeedlePackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.chart.needle");
-        suite.addTestSuite(ArrowNeedleTests.class);
-        suite.addTestSuite(LineNeedleTests.class);
-        suite.addTestSuite(LongNeedleTests.class);
-        suite.addTestSuite(MeterNeedleTests.class);
-        suite.addTestSuite(MiddlePinNeedleTests.class);
-        suite.addTestSuite(PinNeedleTests.class);
-        suite.addTestSuite(PlumNeedleTests.class);
-        suite.addTestSuite(PointerNeedleTests.class);
-        suite.addTestSuite(ShipNeedleTests.class);
-        suite.addTestSuite(WindNeedleTests.class);
+        suite.addTestSuite(ArrowNeedleTest.class);
+        suite.addTestSuite(LineNeedleTest.class);
+        suite.addTestSuite(LongNeedleTest.class);
+        suite.addTestSuite(MeterNeedleTest.class);
+        suite.addTestSuite(MiddlePinNeedleTest.class);
+        suite.addTestSuite(PinNeedleTest.class);
+        suite.addTestSuite(PlumNeedleTest.class);
+        suite.addTestSuite(PointerNeedleTest.class);
+        suite.addTestSuite(ShipNeedleTest.class);
+        suite.addTestSuite(WindNeedleTest.class);
         return suite;
     }
 

@@ -64,18 +64,18 @@ public class DataStatisticsPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.data.statistics");
-        suite.addTestSuite(BoxAndWhiskerCalculatorTests.class);
-        suite.addTestSuite(BoxAndWhiskerItemTests.class);
-        suite.addTestSuite(DefaultBoxAndWhiskerCategoryDatasetTests.class);
-        suite.addTestSuite(DefaultBoxAndWhiskerXYDatasetTests.class);
-        suite.addTestSuite(DefaultStatisticalCategoryDatasetTests.class);
-        suite.addTestSuite(HistogramBinTests.class);
-        suite.addTestSuite(HistogramDatasetTests.class);
-        suite.addTestSuite(MeanAndStandardDeviationTests.class);
-        suite.addTestSuite(RegressionTests.class);
-        suite.addTestSuite(SimpleHistogramBinTests.class);
-        suite.addTestSuite(SimpleHistogramDatasetTests.class);
-        suite.addTestSuite(StatisticsTests.class);
+        suite.addTestSuite(BoxAndWhiskerCalculatorTest.class);
+        suite.addTestSuite(BoxAndWhiskerItemTest.class);
+        suite.addTestSuite(DefaultBoxAndWhiskerCategoryDatasetTest.class);
+        suite.addTestSuite(DefaultBoxAndWhiskerXYDatasetTest.class);
+        suite.addTestSuite(DefaultStatisticalCategoryDatasetTest.class);
+        suite.addTestSuite(HistogramBinTest.class);
+        suite.addTestSuite(HistogramDatasetTest.class);
+        suite.addTestSuite(MeanAndStandardDeviationTest.class);
+        suite.addTestSuite(RegressionTest.class);
+        suite.addTestSuite(SimpleHistogramBinTest.class);
+        suite.addTestSuite(SimpleHistogramDatasetTest.class);
+        suite.addTestSuite(StatisticsTest.class);
         return suite;
     }
 

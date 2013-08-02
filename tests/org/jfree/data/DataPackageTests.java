@@ -68,19 +68,19 @@ public class DataPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.data");
-        suite.addTestSuite(ComparableObjectItemTests.class);
-        suite.addTestSuite(ComparableObjectSeriesTests.class);
-        suite.addTestSuite(DataUtilitiesTests.class);
-        suite.addTestSuite(DefaultKeyedValueTests.class);
-        suite.addTestSuite(DefaultKeyedValuesTests.class);
-        suite.addTestSuite(DefaultKeyedValues2DTests.class);
-        suite.addTestSuite(DomainOrderTests.class);
-        suite.addTestSuite(KeyedObjectTests.class);
-        suite.addTestSuite(KeyedObjectsTests.class);
-        suite.addTestSuite(KeyedObjects2DTests.class);
-        suite.addTestSuite(KeyToGroupMapTests.class);
-        suite.addTestSuite(RangeTests.class);
-        suite.addTestSuite(RangeTypeTests.class);
+        suite.addTestSuite(ComparableObjectItemTest.class);
+        suite.addTestSuite(ComparableObjectSeriesTest.class);
+        suite.addTestSuite(DataUtilitiesTest.class);
+        suite.addTestSuite(DefaultKeyedValueTest.class);
+        suite.addTestSuite(DefaultKeyedValuesTest.class);
+        suite.addTestSuite(DefaultKeyedValues2DTest.class);
+        suite.addTestSuite(DomainOrderTest.class);
+        suite.addTestSuite(KeyedObjectTest.class);
+        suite.addTestSuite(KeyedObjectsTest.class);
+        suite.addTestSuite(KeyedObjects2DTest.class);
+        suite.addTestSuite(KeyToGroupMapTest.class);
+        suite.addTestSuite(RangeTest.class);
+        suite.addTestSuite(RangeTypeTest.class);
         return suite;
     }
 

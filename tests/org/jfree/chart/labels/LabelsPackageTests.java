@@ -61,27 +61,27 @@ public class LabelsPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.chart.labels");
-        suite.addTestSuite(BoxAndWhiskerToolTipGeneratorTests.class);
-        suite.addTestSuite(BoxAndWhiskerXYToolTipGeneratorTests.class);
-        suite.addTestSuite(BubbleXYItemLabelGeneratorTests.class);
-        suite.addTestSuite(CustomXYItemLabelGeneratorTests.class);
-        suite.addTestSuite(HighLowItemLabelGeneratorTests.class);
-        suite.addTestSuite(IntervalCategoryItemLabelGeneratorTests.class);
-        suite.addTestSuite(IntervalCategoryToolTipGeneratorTests.class);
-        suite.addTestSuite(ItemLabelAnchorTests.class);
-        suite.addTestSuite(ItemLabelPositionTests.class);
-        suite.addTestSuite(MultipleXYSeriesLabelGeneratorTests.class);
-        suite.addTestSuite(StandardCategoryItemLabelGeneratorTests.class);
-        suite.addTestSuite(StandardCategorySeriesLabelGeneratorTests.class);
-        suite.addTestSuite(StandardCategoryToolTipGeneratorTests.class);
-        suite.addTestSuite(StandardContourToolTipGeneratorTests.class);
-        suite.addTestSuite(StandardPieSectionLabelGeneratorTests.class);
-        suite.addTestSuite(StandardPieToolTipGeneratorTests.class);
-        suite.addTestSuite(StandardXYItemLabelGeneratorTests.class);
-        suite.addTestSuite(StandardXYSeriesLabelGeneratorTests.class);
-        suite.addTestSuite(StandardXYToolTipGeneratorTests.class);
-        suite.addTestSuite(StandardXYZToolTipGeneratorTests.class);
-        suite.addTestSuite(SymbolicXYItemLabelGeneratorTests.class);
+        suite.addTestSuite(BoxAndWhiskerToolTipGeneratorTest.class);
+        suite.addTestSuite(BoxAndWhiskerXYToolTipGeneratorTest.class);
+        suite.addTestSuite(BubbleXYItemLabelGeneratorTest.class);
+        suite.addTestSuite(CustomXYItemLabelGeneratorTest.class);
+        suite.addTestSuite(HighLowItemLabelGeneratorTest.class);
+        suite.addTestSuite(IntervalCategoryItemLabelGeneratorTest.class);
+        suite.addTestSuite(IntervalCategoryToolTipGeneratorTest.class);
+        suite.addTestSuite(ItemLabelAnchorTest.class);
+        suite.addTestSuite(ItemLabelPositionTest.class);
+        suite.addTestSuite(MultipleXYSeriesLabelGeneratorTest.class);
+        suite.addTestSuite(StandardCategoryItemLabelGeneratorTest.class);
+        suite.addTestSuite(StandardCategorySeriesLabelGeneratorTest.class);
+        suite.addTestSuite(StandardCategoryToolTipGeneratorTest.class);
+        suite.addTestSuite(StandardContourToolTipGeneratorTest.class);
+        suite.addTestSuite(StandardPieSectionLabelGeneratorTest.class);
+        suite.addTestSuite(StandardPieToolTipGeneratorTest.class);
+        suite.addTestSuite(StandardXYItemLabelGeneratorTest.class);
+        suite.addTestSuite(StandardXYSeriesLabelGeneratorTest.class);
+        suite.addTestSuite(StandardXYToolTipGeneratorTest.class);
+        suite.addTestSuite(StandardXYZToolTipGeneratorTest.class);
+        suite.addTestSuite(SymbolicXYItemLabelGeneratorTest.class);
         return suite;
     }
 

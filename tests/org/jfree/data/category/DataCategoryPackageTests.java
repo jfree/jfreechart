@@ -63,10 +63,10 @@ public class DataCategoryPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.data.category");
-        suite.addTestSuite(CategoryToPieDatasetTests.class);
-        suite.addTestSuite(DefaultCategoryDatasetTests.class);
-        suite.addTestSuite(DefaultIntervalCategoryDatasetTests.class);
-        suite.addTestSuite(SlidingCategoryDatasetTests.class);
+        suite.addTestSuite(CategoryToPieDatasetTest.class);
+        suite.addTestSuite(DefaultCategoryDatasetTest.class);
+        suite.addTestSuite(DefaultIntervalCategoryDatasetTest.class);
+        suite.addTestSuite(SlidingCategoryDatasetTest.class);
         return suite;
     }
 

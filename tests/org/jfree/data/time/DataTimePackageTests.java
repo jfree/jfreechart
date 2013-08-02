@@ -60,27 +60,27 @@ public class DataTimePackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.data.time");
-        suite.addTestSuite(DateRangeTests.class);
-        suite.addTestSuite(DayTests.class);
-        suite.addTestSuite(FixedMillisecondTests.class);
-        suite.addTestSuite(HourTests.class);
-        suite.addTestSuite(MinuteTests.class);
-        suite.addTestSuite(MillisecondTests.class);
-        suite.addTestSuite(MonthTests.class);
-        suite.addTestSuite(MovingAverageTests.class);
-        suite.addTestSuite(QuarterTests.class);
-        suite.addTestSuite(SecondTests.class);
-        suite.addTestSuite(SimpleTimePeriodTests.class);
-        suite.addTestSuite(TimePeriodAnchorTests.class);
-        suite.addTestSuite(TimePeriodValueTests.class);
-        suite.addTestSuite(TimePeriodValuesTests.class);
-        suite.addTestSuite(TimePeriodValuesCollectionTests.class);
-        suite.addTestSuite(TimeSeriesCollectionTests.class);
-        suite.addTestSuite(TimeSeriesTests.class);
-        suite.addTestSuite(TimeSeriesDataItemTests.class);
-        suite.addTestSuite(TimeTableXYDatasetTests.class);
-        suite.addTestSuite(WeekTests.class);
-        suite.addTestSuite(YearTests.class);
+        suite.addTestSuite(DateRangeTest.class);
+        suite.addTestSuite(DayTest.class);
+        suite.addTestSuite(FixedMillisecondTest.class);
+        suite.addTestSuite(HourTest.class);
+        suite.addTestSuite(MinuteTest.class);
+        suite.addTestSuite(MillisecondTest.class);
+        suite.addTestSuite(MonthTest.class);
+        suite.addTestSuite(MovingAverageTest.class);
+        suite.addTestSuite(QuarterTest.class);
+        suite.addTestSuite(SecondTest.class);
+        suite.addTestSuite(SimpleTimePeriodTest.class);
+        suite.addTestSuite(TimePeriodAnchorTest.class);
+        suite.addTestSuite(TimePeriodValueTest.class);
+        suite.addTestSuite(TimePeriodValuesTest.class);
+        suite.addTestSuite(TimePeriodValuesCollectionTest.class);
+        suite.addTestSuite(TimeSeriesCollectionTest.class);
+        suite.addTestSuite(TimeSeriesTest.class);
+        suite.addTestSuite(TimeSeriesDataItemTest.class);
+        suite.addTestSuite(TimeTableXYDatasetTest.class);
+        suite.addTestSuite(WeekTest.class);
+        suite.addTestSuite(YearTest.class);
         return suite;
     }
 
