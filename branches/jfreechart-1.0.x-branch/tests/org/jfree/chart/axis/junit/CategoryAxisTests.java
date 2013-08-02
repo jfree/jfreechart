@@ -47,6 +47,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -176,15 +177,9 @@ public class CategoryAxisTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         CategoryAxis a1 = new CategoryAxis("Test");
-        CategoryAxis a2 = null;
-        try {
-            a2 = (CategoryAxis) a1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        CategoryAxis a2 = (CategoryAxis) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -194,18 +189,12 @@ public class CategoryAxisTests extends TestCase {
      * Confirm that cloning works.  This test customises the font and paint
      * per category label.
      */
-    public void testCloning2() {
+    public void testCloning2() throws CloneNotSupportedException {
         CategoryAxis a1 = new CategoryAxis("Test");
         a1.setTickLabelFont("C1", new Font("Dialog", Font.PLAIN, 15));
         a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.white));
-        CategoryAxis a2 = null;
-        try {
-            a2 = (CategoryAxis) a1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        CategoryAxis a2 = (CategoryAxis) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -232,27 +221,21 @@ public class CategoryAxisTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         CategoryAxis a1 = new CategoryAxis("Test Axis");
         a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.white));
-        CategoryAxis a2 = null;
+        CategoryAxis a2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(a1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(a1);
-            out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        a2 = (CategoryAxis) in.readObject();
+        in.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            a2 = (CategoryAxis) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
         assertEquals(a1, a2);
     }
 
