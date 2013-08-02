@@ -91,18 +91,12 @@ public class KeyedObjectsTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         KeyedObjects ko1 = new KeyedObjects();
         ko1.addObject("V1", new Integer(1));
         ko1.addObject("V2", null);
         ko1.addObject("V3", new Integer(3));
-        KeyedObjects ko2 = null;
-        try {
-            ko2 = (KeyedObjects) ko1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        KeyedObjects ko2 = (KeyedObjects) ko1.clone();
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));

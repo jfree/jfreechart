@@ -42,6 +42,7 @@ package org.jfree.data.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -109,24 +110,18 @@ public class DomainOrderTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         DomainOrder d1 = DomainOrder.ASCENDING;
-        DomainOrder d2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(d1);
-            out.close();
+        DomainOrder d2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(d1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            d2 = (DomainOrder) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        d2 = (DomainOrder) in.readObject();
+        in.close();
         assertEquals(d1, d2);
         boolean same = d1 == d2;
         assertEquals(true, same);

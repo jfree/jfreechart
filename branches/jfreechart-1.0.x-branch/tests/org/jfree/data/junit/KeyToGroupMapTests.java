@@ -42,6 +42,7 @@ package org.jfree.data.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -215,7 +216,6 @@ public class KeyToGroupMapTests extends TestCase {
         boolean pass = false;
         try {
             Comparable g = m1.getGroup(null);
-            System.out.println(g);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -241,16 +241,10 @@ public class KeyToGroupMapTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         KeyToGroupMap m1 = new KeyToGroupMap("Test");
         m1.mapKeyToGroup("K1", "G1");
-        KeyToGroupMap m2 = null;
-        try {
-            m2 = (KeyToGroupMap) m1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        KeyToGroupMap m2 = (KeyToGroupMap) m1.clone();
         assertTrue(m1 != m2);
         assertTrue(m1.getClass() == m2.getClass());
         assertTrue(m1.equals(m2));
@@ -265,28 +259,20 @@ public class KeyToGroupMapTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         KeyToGroupMap m1 = new KeyToGroupMap("Test");
-        KeyToGroupMap m2 = null;
+        KeyToGroupMap m2;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(m1);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(m1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            m2 = (KeyToGroupMap) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        m2 = (KeyToGroupMap) in.readObject();
+        in.close();
         assertEquals(m1, m2);
-
     }
 
 }
