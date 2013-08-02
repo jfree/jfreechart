@@ -42,6 +42,7 @@ package org.jfree.chart.needle.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -88,16 +89,9 @@ public class PinNeedleTests extends TestCase {
     /**
      * Check that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         PinNeedle n1 = new PinNeedle();
-        PinNeedle n2 = null;
-        try {
-            n2 = (PinNeedle) n1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            System.err.println("Failed to clone.");
-        }
+        PinNeedle n2 = (PinNeedle) n1.clone();
         assertTrue(n1 != n2);
         assertTrue(n1.getClass() == n2.getClass());
         assertTrue(n1.equals(n2));
@@ -106,23 +100,17 @@ public class PinNeedleTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         PinNeedle n1 = new PinNeedle();
         PinNeedle n2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(n1);
-            out.close();
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            n2 = (PinNeedle) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(n1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        n2 = (PinNeedle) in.readObject();
+        in.close();
         assertTrue(n1.equals(n2));
     }
 
