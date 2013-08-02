@@ -44,6 +44,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -124,15 +125,9 @@ public class DateTitleTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         DateTitle t1 = new DateTitle();
-        DateTitle t2 = null;
-        try {
-            t2 = (DateTitle) t1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("DateTitleTests.testCloning: failed to clone.");
-        }
+        DateTitle t2 = (DateTitle) t1.clone();
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
         assertTrue(t1.equals(t2));
@@ -141,27 +136,19 @@ public class DateTitleTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         DateTitle t1 = new DateTitle();
-        DateTitle t2 = null;
+        DateTitle t2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(t1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(t1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            t2 = (DateTitle) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(
+                new ByteArrayInputStream(buffer.toByteArray()));
+        t2 = (DateTitle) in.readObject();
+        in.close();
         assertEquals(t1, t2);
-
     }
 
 }
