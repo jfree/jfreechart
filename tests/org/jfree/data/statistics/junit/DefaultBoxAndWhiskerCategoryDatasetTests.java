@@ -46,6 +46,7 @@ package org.jfree.data.statistics.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -107,8 +108,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         DefaultBoxAndWhiskerCategoryDataset d1
                 = new DefaultBoxAndWhiskerCategoryDataset();
         d1.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
@@ -116,42 +116,30 @@ public class DefaultBoxAndWhiskerCategoryDatasetTests extends TestCase {
                 new Double(6.0), new Double(7.0), new Double(8.0),
                 new ArrayList()), "ROW1", "COLUMN1");
         DefaultBoxAndWhiskerCategoryDataset d2 = null;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(d1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(d1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            d2 = (DefaultBoxAndWhiskerCategoryDataset) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        d2 = (DefaultBoxAndWhiskerCategoryDataset) in.readObject();
+        in.close();
         assertEquals(d1, d2);
-
     }
 
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         DefaultBoxAndWhiskerCategoryDataset d1
                 = new DefaultBoxAndWhiskerCategoryDataset();
         d1.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
                 new Double(3.0), new Double(4.0), new Double(5.0),
                 new Double(6.0), new Double(7.0), new Double(8.0),
                 new ArrayList()), "ROW1", "COLUMN1");
-        DefaultBoxAndWhiskerCategoryDataset d2 = null;
-        try {
-            d2 = (DefaultBoxAndWhiskerCategoryDataset) d1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        DefaultBoxAndWhiskerCategoryDataset d2 
+                = (DefaultBoxAndWhiskerCategoryDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));

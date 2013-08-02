@@ -44,6 +44,7 @@ package org.jfree.data.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -97,18 +98,12 @@ public class KeyedObjects2DTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         KeyedObjects2D o1 = new KeyedObjects2D();
         o1.setObject(new Integer(1), "V1", "C1");
         o1.setObject(null, "V2", "C1");
         o1.setObject(new Integer(3), "V3", "C2");
-        KeyedObjects2D o2 = null;
-        try {
-            o2 = (KeyedObjects2D) o1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        KeyedObjects2D o2 = (KeyedObjects2D) o1.clone();
         assertTrue(o1 != o2);
         assertTrue(o1.getClass() == o2.getClass());
         assertTrue(o1.equals(o2));
@@ -121,32 +116,24 @@ public class KeyedObjects2DTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         KeyedObjects2D ko2D1 = new KeyedObjects2D();
         ko2D1.addObject(new Double(234.2), "Row1", "Col1");
         ko2D1.addObject(null, "Row1", "Col2");
         ko2D1.addObject(new Double(345.9), "Row2", "Col1");
         ko2D1.addObject(new Double(452.7), "Row2", "Col2");
 
-        KeyedObjects2D ko2D2 = null;
+        KeyedObjects2D ko2D2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(ko2D1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(ko2D1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            ko2D2 = (KeyedObjects2D) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        ko2D2 = (KeyedObjects2D) in.readObject();
+        in.close();
         assertEquals(ko2D1, ko2D2);
-
     }
 
     /**

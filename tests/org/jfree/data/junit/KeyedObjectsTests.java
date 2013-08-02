@@ -44,6 +44,7 @@ package org.jfree.data.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -105,7 +106,7 @@ public class KeyedObjectsTests extends TestCase {
     /**
      * Confirm special features of cloning.
      */
-    public void testCloning2() {
+    public void testCloning2() throws CloneNotSupportedException {
         // case 1 - object is mutable but not PublicCloneable
         Object obj1 = new ArrayList();
         KeyedObjects ko1 = new KeyedObjects();
@@ -128,13 +129,7 @@ public class KeyedObjectsTests extends TestCase {
         obj1 = new DefaultPieDataset();
         ko1 = new KeyedObjects();
         ko1.addObject("K1", obj1);
-        ko2 = null;
-        try {
-            ko2 = (KeyedObjects) ko1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        ko2 = (KeyedObjects) ko1.clone();
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
@@ -186,31 +181,23 @@ public class KeyedObjectsTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
 
         KeyedObjects ko1 = new KeyedObjects();
         ko1.addObject("Key 1", "Object 1");
         ko1.addObject("Key 2", null);
         ko1.addObject("Key 3", "Object 2");
 
-        KeyedObjects ko2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(ko1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            ko2 = (KeyedObjects) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        KeyedObjects ko2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(ko1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        ko2 = (KeyedObjects) in.readObject();
+        in.close();
         assertEquals(ko1, ko2);
-
     }
 
     /**

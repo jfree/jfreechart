@@ -42,6 +42,7 @@ package org.jfree.data.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -117,16 +118,10 @@ public class ComparableObjectItemTests extends TestCase {
     /**
      * Some checks for the clone() method.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
-        ComparableObjectItem item2 = null;
-        try {
-            item2 = (ComparableObjectItem) item1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        ComparableObjectItem item2 = (ComparableObjectItem) item1.clone();
         assertTrue(item1 != item2);
         assertTrue(item1.getClass() == item2.getClass());
         assertTrue(item1.equals(item2));
@@ -135,24 +130,19 @@ public class ComparableObjectItemTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
-        ComparableObjectItem item2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(item1);
-            out.close();
+        ComparableObjectItem item2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(item1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            item2 = (ComparableObjectItem) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        item2 = (ComparableObjectItem) in.readObject();
+        in.close();
         assertEquals(item1, item2);
     }
 
