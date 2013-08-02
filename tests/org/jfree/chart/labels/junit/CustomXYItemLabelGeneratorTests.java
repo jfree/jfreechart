@@ -44,6 +44,7 @@ package org.jfree.chart.labels.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -83,15 +84,9 @@ public class CustomXYItemLabelGeneratorTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
-        CustomXYToolTipGenerator g2 = null;
-        try {
-            g2 = (CustomXYToolTipGenerator) g1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        CustomXYToolTipGenerator g2 = (CustomXYToolTipGenerator) g1.clone();
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -108,8 +103,7 @@ public class CustomXYItemLabelGeneratorTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         List t1 = new java.util.ArrayList();
         t1.add("Tooltip A1");
         t1.add("Tooltip A2");
@@ -123,24 +117,16 @@ public class CustomXYItemLabelGeneratorTests extends TestCase {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
         g1.addToolTipSeries(t1);
         g1.addToolTipSeries(t2);
-        CustomXYToolTipGenerator g2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(g1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            g2 = (CustomXYToolTipGenerator) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        CustomXYToolTipGenerator g2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(g1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        g2 = (CustomXYToolTipGenerator) in.readObject();
+        in.close();
         assertEquals(g1, g2);
-
     }
 
 }

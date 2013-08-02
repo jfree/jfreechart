@@ -44,6 +44,7 @@ package org.jfree.chart.labels.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -123,16 +124,11 @@ public class IntervalCategoryItemLabelGeneratorTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         IntervalCategoryItemLabelGenerator g1
                 = new IntervalCategoryItemLabelGenerator();
-        IntervalCategoryItemLabelGenerator g2 = null;
-        try {
-            g2 = (IntervalCategoryItemLabelGenerator) g1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        IntervalCategoryItemLabelGenerator g2 
+                = (IntervalCategoryItemLabelGenerator) g1.clone();
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -150,29 +146,21 @@ public class IntervalCategoryItemLabelGeneratorTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         IntervalCategoryItemLabelGenerator g1
                 = new IntervalCategoryItemLabelGenerator("{3} - {4}",
                 DateFormat.getInstance());
-        IntervalCategoryItemLabelGenerator g2 = null;
+        IntervalCategoryItemLabelGenerator g2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(g1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(g1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            g2 = (IntervalCategoryItemLabelGenerator) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        g2 = (IntervalCategoryItemLabelGenerator) in.readObject();
+        in.close();
         assertEquals(g1, g2);
-
     }
 
 }
