@@ -51,6 +51,7 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -288,38 +289,26 @@ public class StandardChartThemeTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         StandardChartTheme t1 = new StandardChartTheme("Name");
-        StandardChartTheme t2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(t1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            t2 = (StandardChartTheme) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        StandardChartTheme t2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(t1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(
+                new ByteArrayInputStream(buffer.toByteArray()));
+        t2 = (StandardChartTheme) in.readObject();
+        in.close();
         assertTrue(t1.equals(t2));
     }
 
     /**
      * Basic checks for cloning.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         StandardChartTheme t1 = new StandardChartTheme("Name");
-        StandardChartTheme t2 = null;
-        try {
-            t2 = (StandardChartTheme) t1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        StandardChartTheme t2 = (StandardChartTheme) t1.clone();
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
         assertTrue(t1.equals(t2));

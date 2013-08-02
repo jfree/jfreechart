@@ -45,6 +45,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -111,15 +112,9 @@ public class ChartRenderingInfoTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
-        ChartRenderingInfo i2 = null;
-        try {
-            i2 = (ChartRenderingInfo) i1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        ChartRenderingInfo i2 = (ChartRenderingInfo) i1.clone();
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
@@ -142,54 +137,38 @@ public class ChartRenderingInfoTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
         i1.setChartArea(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        ChartRenderingInfo i2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(i1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            i2 = (ChartRenderingInfo) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ChartRenderingInfo i2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(i1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        i2 = (ChartRenderingInfo) in.readObject();
+        in.close();
         assertEquals(i1, i2);
-
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization2() {
-
+    public void testSerialization2() throws IOException, ClassNotFoundException {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
         i1.getPlotInfo().setDataArea(new Rectangle2D.Double(1.0, 2.0, 3.0,
                 4.0));
-        ChartRenderingInfo i2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(i1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            i2 = (ChartRenderingInfo) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ChartRenderingInfo i2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(i1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        i2 = (ChartRenderingInfo) in.readObject();
+        in.close();
         assertEquals(i1, i2);
         assertEquals(i2, i2.getPlotInfo().getOwner());
-
     }
 }

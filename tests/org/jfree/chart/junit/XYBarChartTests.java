@@ -103,8 +103,6 @@ public class XYBarChartTests extends TestCase {
      * are thrown (a problem that was occurring at one point).
      */
     public void testDrawWithNullInfo() {
-
-        boolean success = false;
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
@@ -112,14 +110,10 @@ public class XYBarChartTests extends TestCase {
             this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
                     null);
             g2.dispose();
-            success = true;
         }
         catch (Exception e) {
-          success = false;
-          e.printStackTrace();
+          fail("No exception should be triggered.");
         }
-        assertTrue(success);
-
     }
 
     /**

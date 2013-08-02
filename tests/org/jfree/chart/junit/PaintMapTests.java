@@ -45,6 +45,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -152,75 +153,54 @@ public class PaintMapTests extends TestCase {
     /**
      * Some checks for cloning.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         PaintMap m1 = new PaintMap();
-        PaintMap m2 = null;
-        try {
-            m2 = (PaintMap) m1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        PaintMap m2 = (PaintMap) m1.clone();
         assertTrue(m1.equals(m2));
 
         m1.put("K1", Color.red);
         m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
                 Color.yellow));
-        try {
-            m2 = (PaintMap) m1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        m2 = (PaintMap) m1.clone();
         assertTrue(m1.equals(m2));
     }
 
     /**
      * A check for serialization.
      */
-    public void testSerialization1() {
+    public void testSerialization1() throws IOException, 
+            ClassNotFoundException {
         PaintMap m1 = new PaintMap();
-        PaintMap m2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(m1);
-            out.close();
+        PaintMap m2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(m1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            m2 = (PaintMap) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        m2 = (PaintMap) in.readObject();
+        in.close();
         assertEquals(m1, m2);
     }
 
     /**
      * A check for serialization.
      */
-    public void testSerialization2() {
+    public void testSerialization2() throws IOException, ClassNotFoundException {
         PaintMap m1 = new PaintMap();
         m1.put("K1", Color.red);
         m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
                 Color.yellow));
-        PaintMap m2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(m1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            m2 = (PaintMap) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        PaintMap m2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(m1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        m2 = (PaintMap) in.readObject();
+        in.close();
         assertEquals(m1, m2);
     }
 
