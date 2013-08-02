@@ -42,6 +42,7 @@ package org.jfree.chart.axis.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -119,23 +120,17 @@ public class NumberTickUnitTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         NumberTickUnit t1 = new NumberTickUnit(1.23, new DecimalFormat("0.00"));
-        NumberTickUnit t2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(t1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            t2 = (NumberTickUnit) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        NumberTickUnit t2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(t1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        t2 = (NumberTickUnit) in.readObject();
+        in.close();
         assertEquals(t1, t2);
     }
 

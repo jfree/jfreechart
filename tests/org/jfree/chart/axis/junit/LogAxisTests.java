@@ -46,6 +46,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -93,15 +94,9 @@ public class LogAxisTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         LogAxis a1 = new LogAxis("Test");
-        LogAxis a2 = null;
-        try {
-            a2 = (LogAxis) a1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        LogAxis a2 = (LogAxis) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -174,27 +169,19 @@ public class LogAxisTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         LogAxis a1 = new LogAxis("Test Axis");
-        LogAxis a2 = null;
+        LogAxis a2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(a1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(a1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            a2 = (LogAxis) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        a2 = (LogAxis) in.readObject();
+        in.close();
         assertEquals(a1, a2);
-
     }
 
     /**

@@ -44,6 +44,7 @@ package org.jfree.chart.axis.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -817,7 +818,7 @@ public class SegmentedTimelineTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         verifySerialization(this.msTimeline);
         verifySerialization(this.ms2Timeline);
         verifySerialization(this.ms2BaseTimeline);
@@ -829,23 +830,17 @@ public class SegmentedTimelineTests extends TestCase {
      * Tests serialization of an instance.
      * @param a1 The timeline to verify the serialization
      */
-    private void verifySerialization(SegmentedTimeline a1) {
-        SegmentedTimeline a2 = null;
+    private void verifySerialization(SegmentedTimeline a1) throws IOException, ClassNotFoundException {
+        SegmentedTimeline a2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(a1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(a1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            a2 = (SegmentedTimeline) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        a2 = (SegmentedTimeline) in.readObject();
+        in.close();
         assertEquals(a1, a2);
     }
 
@@ -978,15 +973,9 @@ public class SegmentedTimelineTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         SegmentedTimeline l1 = new SegmentedTimeline(1000, 5, 2);
-        SegmentedTimeline l2 = null;
-        try {
-            l2 = (SegmentedTimeline) l1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        SegmentedTimeline l2 = (SegmentedTimeline) l1.clone();
         assertTrue(l1 != l2);
         assertTrue(l1.getClass() == l2.getClass());
         assertTrue(l1.equals(l2));
@@ -1039,28 +1028,20 @@ public class SegmentedTimelineTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization2() {
-
+    public void testSerialization2() throws IOException, ClassNotFoundException {
         SegmentedTimeline l1 = new SegmentedTimeline(1000, 5, 2);
-        SegmentedTimeline l2 = null;
+        SegmentedTimeline l2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(l1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(l1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            l2 = (SegmentedTimeline) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        l2 = (SegmentedTimeline) in.readObject();
+        in.close();
         boolean b = l1.equals(l2);
         assertTrue(b);
-
     }
 
     //////////////////////////////////////////////////////////////////////////

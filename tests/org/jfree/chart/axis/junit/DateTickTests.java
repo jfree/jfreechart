@@ -42,6 +42,7 @@ package org.jfree.chart.axis.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -147,16 +148,10 @@ public class DateTickTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         DateTick t1 = new DateTick(new Date(0L), "Label", TextAnchor.CENTER,
                 TextAnchor.CENTER, 10.0);
-        DateTick t2 = null;
-        try {
-            t2 = (DateTick) t1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        DateTick t2 = (DateTick) t1.clone();
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
         assertTrue(t1.equals(t2));
@@ -165,26 +160,21 @@ public class DateTickTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
 
         DateTick t1 = new DateTick(new Date(0L), "Label", TextAnchor.CENTER,
                 TextAnchor.CENTER, 10.0);
-        DateTick t2 = null;
+        DateTick t2;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(t1);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(t1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            t2 = (DateTick) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        t2 = (DateTick) in.readObject();
+        in.close();
         assertEquals(t1, t2);
 
     }
