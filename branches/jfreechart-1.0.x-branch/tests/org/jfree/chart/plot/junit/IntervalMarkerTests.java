@@ -43,6 +43,7 @@ package org.jfree.chart.plot.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -127,15 +128,9 @@ public class IntervalMarkerTests
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
-        IntervalMarker m2 = null;
-        try {
-            m2 = (IntervalMarker) m1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        IntervalMarker m2 = (IntervalMarker) m1.clone();
         assertTrue(m1 != m2);
         assertTrue(m1.getClass() == m2.getClass());
         assertTrue(m1.equals(m2));
@@ -144,27 +139,19 @@ public class IntervalMarkerTests
    /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
-        IntervalMarker m2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(m1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            m2 = (IntervalMarker) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        IntervalMarker m2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(m1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        m2 = (IntervalMarker) in.readObject();
+        in.close();
         boolean b = m1.equals(m2);
         assertTrue(b);
-
     }
 
     private static final double EPSILON = 0.0000000001;

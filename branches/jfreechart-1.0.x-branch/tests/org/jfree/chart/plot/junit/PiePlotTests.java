@@ -57,6 +57,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -455,15 +456,9 @@ public class PiePlotTests extends TestCase {
     /**
      * Some basic checks for the clone() method.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         PiePlot p1 = new PiePlot();
-        PiePlot p2 = null;
-        try {
-            p2 = (PiePlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        PiePlot p2 = (PiePlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -472,17 +467,11 @@ public class PiePlotTests extends TestCase {
     /**
      * Check cloning of the urlGenerator field.
      */
-    public void testCloning_URLGenerator() {
+    public void testCloning_URLGenerator() throws CloneNotSupportedException {
         CustomPieURLGenerator generator = new CustomPieURLGenerator();
         PiePlot p1 = new PiePlot();
         p1.setURLGenerator(generator);
-        PiePlot p2 = null;
-        try {
-            p2 = (PiePlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        PiePlot p2 = (PiePlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -494,17 +483,11 @@ public class PiePlotTests extends TestCase {
     /**
      * Check cloning of the legendItemShape field.
      */
-    public void testCloning_LegendItemShape() {
+    public void testCloning_LegendItemShape() throws CloneNotSupportedException {
         Rectangle shape = new Rectangle(-4, -4, 8, 8);
         PiePlot p1 = new PiePlot();
         p1.setLegendItemShape(shape);
-        PiePlot p2 = null;
-        try {
-            p2 = (PiePlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        PiePlot p2 = (PiePlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -517,18 +500,12 @@ public class PiePlotTests extends TestCase {
     /**
      * Check cloning of the legendLabelGenerator field.
      */
-    public void testCloning_LegendLabelGenerator() {
+    public void testCloning_LegendLabelGenerator() throws CloneNotSupportedException {
         StandardPieSectionLabelGenerator generator
                 = new StandardPieSectionLabelGenerator();
         PiePlot p1 = new PiePlot();
         p1.setLegendLabelGenerator(generator);
-        PiePlot p2 = null;
-        try {
-            p2 = (PiePlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        PiePlot p2 = (PiePlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -541,18 +518,12 @@ public class PiePlotTests extends TestCase {
     /**
      * Check cloning of the legendLabelToolTipGenerator field.
      */
-    public void testCloning_LegendLabelToolTipGenerator() {
+    public void testCloning_LegendLabelToolTipGenerator() throws CloneNotSupportedException {
         StandardPieSectionLabelGenerator generator
                 = new StandardPieSectionLabelGenerator();
         PiePlot p1 = new PiePlot();
         p1.setLegendLabelToolTipGenerator(generator);
-        PiePlot p2 = null;
-        try {
-            p2 = (PiePlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        PiePlot p2 = (PiePlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -565,17 +536,11 @@ public class PiePlotTests extends TestCase {
     /**
      * Check cloning of the legendLabelURLGenerator field.
      */
-    public void testCloning_LegendLabelURLGenerator() {
+    public void testCloning_LegendLabelURLGenerator() throws CloneNotSupportedException {
         CustomPieURLGenerator generator = new CustomPieURLGenerator();
         PiePlot p1 = new PiePlot();
         p1.setLegendLabelURLGenerator(generator);
-        PiePlot p2 = null;
-        try {
-            p2 = (PiePlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        PiePlot p2 = (PiePlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -588,23 +553,18 @@ public class PiePlotTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         PiePlot p1 = new PiePlot(null);
-        PiePlot p2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(p1);
-            out.close();
+        PiePlot p2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(p1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            p2 = (PiePlot) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        p2 = (PiePlot) in.readObject();
+        in.close();
         assertEquals(p1, p2);
     }
 

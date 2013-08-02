@@ -48,6 +48,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -219,15 +220,9 @@ public class MeterPlotTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         MeterPlot p1 = new MeterPlot();
-        MeterPlot p2 = null;
-        try {
-            p2 = (MeterPlot) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        MeterPlot p2 = (MeterPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -252,7 +247,7 @@ public class MeterPlotTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization1() {
+    public void testSerialization1() throws IOException, ClassNotFoundException {
         MeterPlot p1 = new MeterPlot(null);
         p1.setDialBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
@@ -264,44 +259,32 @@ public class MeterPlotTests extends TestCase {
                 3.0f, 4.0f, Color.blue));
         p1.setTickPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
-        MeterPlot p2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(p1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                     new ByteArrayInputStream(buffer.toByteArray()));
-            p2 = (MeterPlot) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        MeterPlot p2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(p1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        p2 = (MeterPlot) in.readObject();
+        in.close();
         assertEquals(p1, p2);
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization2() {
+    public void testSerialization2() throws IOException, ClassNotFoundException {
         MeterPlot p1 = new MeterPlot(new DefaultValueDataset(1.23));
-        MeterPlot p2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(p1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                     new ByteArrayInputStream(buffer.toByteArray()));
-            p2 = (MeterPlot) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        MeterPlot p2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(p1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        p2 = (MeterPlot) in.readObject();
+        in.close();
         assertEquals(p1, p2);
 
     }

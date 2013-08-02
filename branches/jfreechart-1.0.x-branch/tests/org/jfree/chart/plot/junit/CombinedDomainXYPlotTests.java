@@ -47,6 +47,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -144,15 +145,9 @@ public class CombinedDomainXYPlotTests extends TestCase
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         CombinedDomainXYPlot plot1 = createPlot();
-        CombinedDomainXYPlot plot2 = null;
-        try {
-            plot2 = (CombinedDomainXYPlot) plot1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        CombinedDomainXYPlot plot2 = (CombinedDomainXYPlot) plot1.clone();
         assertTrue(plot1 != plot2);
         assertTrue(plot1.getClass() == plot2.getClass());
         assertTrue(plot1.equals(plot2));
@@ -161,23 +156,18 @@ public class CombinedDomainXYPlotTests extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         CombinedDomainXYPlot plot1 = createPlot();
-        CombinedDomainXYPlot plot2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(plot1);
-            out.close();
+        CombinedDomainXYPlot plot2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(plot1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            plot2 = (CombinedDomainXYPlot) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        plot2 = (CombinedDomainXYPlot) in.readObject();
+        in.close();
         assertEquals(plot1, plot2);
     }
 
