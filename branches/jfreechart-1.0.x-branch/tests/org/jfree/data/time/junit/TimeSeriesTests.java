@@ -117,40 +117,23 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
      * Common test setup.
      */
     protected void setUp() {
-
         this.seriesA = new TimeSeries("Series A", Year.class);
-        try {
-            this.seriesA.add(new Year(2000), new Integer(102000));
-            this.seriesA.add(new Year(2001), new Integer(102001));
-            this.seriesA.add(new Year(2002), new Integer(102002));
-            this.seriesA.add(new Year(2003), new Integer(102003));
-            this.seriesA.add(new Year(2004), new Integer(102004));
-            this.seriesA.add(new Year(2005), new Integer(102005));
-        }
-        catch (SeriesException e) {
-            System.err.println("Problem creating series.");
-        }
+        this.seriesA.add(new Year(2000), new Integer(102000));
+        this.seriesA.add(new Year(2001), new Integer(102001));
+        this.seriesA.add(new Year(2002), new Integer(102002));
+        this.seriesA.add(new Year(2003), new Integer(102003));
+        this.seriesA.add(new Year(2004), new Integer(102004));
+        this.seriesA.add(new Year(2005), new Integer(102005));
 
         this.seriesB = new TimeSeries("Series B", Year.class);
-        try {
-            this.seriesB.add(new Year(2006), new Integer(202006));
-            this.seriesB.add(new Year(2007), new Integer(202007));
-            this.seriesB.add(new Year(2008), new Integer(202008));
-        }
-        catch (SeriesException e) {
-            System.err.println("Problem creating series.");
-        }
+        this.seriesB.add(new Year(2006), new Integer(202006));
+        this.seriesB.add(new Year(2007), new Integer(202007));
+        this.seriesB.add(new Year(2008), new Integer(202008));
 
         this.seriesC = new TimeSeries("Series C", Year.class);
-        try {
-            this.seriesC.add(new Year(1999), new Integer(301999));
-            this.seriesC.add(new Year(2000), new Integer(302000));
-            this.seriesC.add(new Year(2002), new Integer(302002));
-        }
-        catch (SeriesException e) {
-            System.err.println("Problem creating series.");
-        }
-
+        this.seriesC.add(new Year(1999), new Integer(301999));
+        this.seriesC.add(new Year(2000), new Integer(302000));
+        this.seriesC.add(new Year(2002), new Integer(302002));
     }
 
     /**
@@ -166,49 +149,24 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
     /**
      * Check that cloning works.
      */
-    public void testClone() {
+    public void testClone() throws CloneNotSupportedException {
 
         TimeSeries series = new TimeSeries("Test Series");
-
         RegularTimePeriod jan1st2002 = new Day(1, MonthConstants.JANUARY, 2002);
-        try {
-            series.add(jan1st2002, new Integer(42));
-        }
-        catch (SeriesException e) {
-            System.err.println("Problem adding to series.");
-        }
+        series.add(jan1st2002, new Integer(42));
 
-        TimeSeries clone = null;
-        try {
-            clone = (TimeSeries) series.clone();
-            clone.setKey("Clone Series");
-            try {
-                clone.update(jan1st2002, new Integer(10));
-            }
-            catch (SeriesException e) {
-                e.printStackTrace();
-            }
-        }
-        catch (CloneNotSupportedException e) {
-            assertTrue(false);
-        }
+        TimeSeries clone;
+        clone = (TimeSeries) series.clone();
+        clone.setKey("Clone Series");
+        clone.update(jan1st2002, new Integer(10));
 
         int seriesValue = series.getValue(jan1st2002).intValue();
-        int cloneValue = Integer.MAX_VALUE;
-        if (clone != null) {
-            cloneValue = clone.getValue(jan1st2002).intValue();
-        }
+        int cloneValue = clone.getValue(jan1st2002).intValue();
 
         assertEquals(42, seriesValue);
         assertEquals(10, cloneValue);
         assertEquals("Test Series", series.getKey());
-        if (clone != null) {
-            assertEquals("Clone Series", clone.getKey());
-        }
-        else {
-            assertTrue(false);
-        }
-
+        assertEquals("Clone Series", clone.getKey());
     }
 
     /**
@@ -239,17 +197,9 @@ public class TimeSeriesTests extends TestCase implements SeriesChangeListener {
      * Add a value to series A for 1999.  It should be added at index 0.
      */
     public void testAddValue() {
-
-        try {
-            this.seriesA.add(new Year(1999), new Integer(1));
-        }
-        catch (SeriesException e) {
-            System.err.println("Problem adding to series.");
-        }
-
+        this.seriesA.add(new Year(1999), new Integer(1));
         int value = this.seriesA.getValue(0).intValue();
         assertEquals(1, value);
-
     }
 
     /**
