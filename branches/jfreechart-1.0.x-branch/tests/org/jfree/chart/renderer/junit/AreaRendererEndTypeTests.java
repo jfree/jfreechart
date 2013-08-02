@@ -27,7 +27,7 @@
  * -----------------------------
  * AreaRendererEndTypeTests.java
  * -----------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@ package org.jfree.chart.renderer.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -90,26 +91,17 @@ public class AreaRendererEndTypeTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         AreaRendererEndType t1 = AreaRendererEndType.TAPER;
-        AreaRendererEndType t2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(t1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            t2 = (AreaRendererEndType) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        AreaRendererEndType t2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(t1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        t2 = (AreaRendererEndType) in.readObject();
+        in.close();
         assertEquals(t1, t2);
         boolean same = t1 == t2;
         assertEquals(true, same);
