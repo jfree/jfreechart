@@ -44,6 +44,7 @@ package org.jfree.data.gantt.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -497,7 +498,7 @@ public class TaskSeriesCollectionTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
 
         TaskSeries s1 = new TaskSeries("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
@@ -508,22 +509,16 @@ public class TaskSeriesCollectionTests extends TestCase {
         TaskSeriesCollection c1 = new TaskSeriesCollection();
         c1.add(s1);
         c1.add(s2);
-        TaskSeriesCollection c2 = null;
+        TaskSeriesCollection c2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(c1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(c1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            c2 = (TaskSeriesCollection) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        c2 = (TaskSeriesCollection) in.readObject();
+        in.close();
         assertEquals(c1, c2);
 
     }
