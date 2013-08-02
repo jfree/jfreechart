@@ -27,7 +27,7 @@
  * ----------------------
  * ColorPaletteTests.java
  * ----------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -73,15 +73,9 @@ public class ColorPaletteTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         ColorPalette p1 = new GreyPalette();
-        ColorPalette p2 = null;
-        try {
-            p2 = (ColorPalette) p1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        ColorPalette p2 = (ColorPalette) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));

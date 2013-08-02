@@ -48,6 +48,7 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -191,16 +192,9 @@ public class DefaultDrawingSupplierTests extends TestCase {
     /**
      * Some basic checks for the clone() method.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         DefaultDrawingSupplier r1 = new DefaultDrawingSupplier();
-        DefaultDrawingSupplier r2 = null;
-        try {
-            r2 = (DefaultDrawingSupplier) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            System.err.println("Failed to clone.");
-        }
+        DefaultDrawingSupplier r2 = (DefaultDrawingSupplier) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -209,28 +203,19 @@ public class DefaultDrawingSupplierTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         DefaultDrawingSupplier r1 = new DefaultDrawingSupplier();
-        DefaultDrawingSupplier r2 = null;
+        DefaultDrawingSupplier r2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            r2 = (DefaultDrawingSupplier) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        r2 = (DefaultDrawingSupplier) in.readObject();
+        in.close();
         assertEquals(r1, r2);
-
     }
 
 }
