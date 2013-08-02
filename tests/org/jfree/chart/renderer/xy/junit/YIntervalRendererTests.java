@@ -46,6 +46,7 @@ package org.jfree.chart.renderer.xy.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -192,15 +193,9 @@ public class YIntervalRendererTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         YIntervalRenderer r1 = new YIntervalRenderer();
-        YIntervalRenderer r2 = null;
-        try {
-            r2 = (YIntervalRenderer) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        YIntervalRenderer r2 = (YIntervalRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -243,27 +238,19 @@ public class YIntervalRendererTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         YIntervalRenderer r1 = new YIntervalRenderer();
-        YIntervalRenderer r2 = null;
+        YIntervalRenderer r2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            r2 = (YIntervalRenderer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        r2 = (YIntervalRenderer) in.readObject();
+        in.close();
         assertEquals(r1, r2);
-
     }
 
     /**

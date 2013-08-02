@@ -44,6 +44,7 @@ package org.jfree.chart.renderer.xy.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -140,24 +141,19 @@ public class XYStepRendererTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         XYStepRenderer r1 = new XYStepRenderer();
         r1.setStepPoint(0.123);
-        XYStepRenderer r2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
+        XYStepRenderer r2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            r2 = (XYStepRenderer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        r2 = (XYStepRenderer) in.readObject();
+        in.close();
         assertEquals(r1, r2);
     }
 
@@ -166,7 +162,6 @@ public class XYStepRendererTests extends TestCase {
      * no exceptions are thrown (particularly by code in the renderer).
      */
     public void testDrawWithNullInfo() {
-        boolean success = false;
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();
 
@@ -189,13 +184,10 @@ public class XYStepRendererTests extends TestCase {
             JFreeChart chart = new JFreeChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-            success = true;
         }
         catch (NullPointerException e) {
-            e.printStackTrace();
-            success = false;
+            fail("No exception should be thrown.");
         }
-        assertTrue(success);
     }
 
     /**
@@ -203,7 +195,6 @@ public class XYStepRendererTests extends TestCase {
      * sure that no exceptions are thrown.
      */
     public void testDrawWithNullValue() {
-        boolean success = false;
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();
 
@@ -226,13 +217,10 @@ public class XYStepRendererTests extends TestCase {
             JFreeChart chart = new JFreeChart(plot);
             /* BufferedImage image = */ chart.createBufferedImage(300, 200,
                     null);
-            success = true;
         }
         catch (NullPointerException e) {
-            e.printStackTrace();
-            success = false;
+            fail("No exception should be thrown.");
         }
-        assertTrue(success);
     }
 
 }

@@ -48,6 +48,7 @@ package org.jfree.chart.renderer.xy.junit;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -202,17 +203,11 @@ public class XYBarRendererTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         XYBarRenderer r1 = new XYBarRenderer();
         Rectangle2D rect = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         r1.setLegendBar(rect);
-        XYBarRenderer r2 = null;
-        try {
-            r2 = (XYBarRenderer) r1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        XYBarRenderer r2 = (XYBarRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -235,54 +230,37 @@ public class XYBarRendererTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         XYBarRenderer r1 = new XYBarRenderer();
-        XYBarRenderer r2 = null;
+        XYBarRenderer r2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            r2 = (XYBarRenderer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        r2 = (XYBarRenderer) in.readObject();
+        in.close();
         assertEquals(r1, r2);
-
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization2() {
-
+    public void testSerialization2() throws IOException, ClassNotFoundException {
         XYBarRenderer r1 = new XYBarRenderer();
         r1.setPositiveItemLabelPositionFallback(new ItemLabelPosition());
-        XYBarRenderer r2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            r2 = (XYBarRenderer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        XYBarRenderer r2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(r1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        r2 = (XYBarRenderer) in.readObject();
+        in.close();
         assertEquals(r1, r2);
-
     }
 
     /**
