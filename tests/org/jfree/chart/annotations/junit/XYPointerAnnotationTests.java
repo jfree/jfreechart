@@ -27,7 +27,7 @@
  * -----------------------------
  * XYPointerAnnotationTests.java
  * -----------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,6 +49,7 @@ import java.awt.Color;
 import java.awt.Stroke;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -178,16 +179,10 @@ public class XYPointerAnnotationTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         XYPointerAnnotation a1 = new XYPointerAnnotation("Label", 10.0, 20.0,
                 Math.PI);
-        XYPointerAnnotation a2 = null;
-        try {
-            a2 = (XYPointerAnnotation) a1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        XYPointerAnnotation a2 = a2 = (XYPointerAnnotation) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -205,28 +200,22 @@ public class XYPointerAnnotationTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
 
         XYPointerAnnotation a1 = new XYPointerAnnotation("Label", 10.0, 20.0,
                 Math.PI);
         XYPointerAnnotation a2 = null;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(a1);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(a1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            a2 = (XYPointerAnnotation) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        a2 = (XYPointerAnnotation) in.readObject();
+        in.close();
         assertEquals(a1, a2);
-
     }
 
 }
