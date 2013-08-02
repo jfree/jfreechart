@@ -128,16 +128,10 @@ public class DefaultOHLCDatasetTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
-        DefaultOHLCDataset d2 = null;
-        try {
-            d2 = (DefaultOHLCDataset) d1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        DefaultOHLCDataset d2 = (DefaultOHLCDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -146,7 +140,7 @@ public class DefaultOHLCDatasetTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning2() {
+    public void testCloning2() throws CloneNotSupportedException {
         OHLCDataItem item1 = new OHLCDataItem(new Date(1L), 1.0, 2.0, 3.0, 4.0,
                 5.0);
         OHLCDataItem item2 = new OHLCDataItem(new Date(2L), 6.0, 7.0, 8.0, 9.0,
@@ -154,13 +148,7 @@ public class DefaultOHLCDatasetTests extends TestCase {
         // create an array of items in reverse order
         OHLCDataItem[] items = new OHLCDataItem[] {item2, item1};
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1", items);
-        DefaultOHLCDataset d2 = null;
-        try {
-            d2 = (DefaultOHLCDataset) d1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        DefaultOHLCDataset d2 = (DefaultOHLCDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
