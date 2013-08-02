@@ -46,6 +46,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -179,16 +180,10 @@ public class PaintScaleLegendTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
-        PaintScaleLegend l2 = null;
-        try {
-            l2 = (PaintScaleLegend) l1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        PaintScaleLegend l2 = (PaintScaleLegend) l1.clone();
         assertTrue(l1 != l2);
         assertTrue(l1.getClass() == l2.getClass());
         assertTrue(l1.equals(l2));
@@ -197,24 +192,18 @@ public class PaintScaleLegendTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
-        PaintScaleLegend l2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(l1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            l2 = (PaintScaleLegend) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        PaintScaleLegend l2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(l1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        l2 = (PaintScaleLegend) in.readObject();
+        in.close();
         assertEquals(l1, l2);
     }
 

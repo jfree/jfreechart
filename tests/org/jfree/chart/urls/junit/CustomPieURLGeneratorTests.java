@@ -43,6 +43,7 @@ package org.jfree.chart.urls.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -99,18 +100,12 @@ public class CustomPieURLGeneratorTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         Map m1 = new HashMap();
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
-        CustomPieURLGenerator g2 = null;
-        try {
-            g2 = (CustomPieURLGenerator) g1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        CustomPieURLGenerator g2 = (CustomPieURLGenerator) g1.clone();
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -133,27 +128,20 @@ public class CustomPieURLGeneratorTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         Map m1 = new HashMap();
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
-        CustomPieURLGenerator g2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(g1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            g2 = (CustomPieURLGenerator) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        CustomPieURLGenerator g2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(g1);
+        out.close();
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        g2 = (CustomPieURLGenerator) in.readObject();
+        in.close();
         assertEquals(g1, g2);
     }
 
