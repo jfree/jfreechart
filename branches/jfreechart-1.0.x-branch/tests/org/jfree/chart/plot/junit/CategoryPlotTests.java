@@ -61,6 +61,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -652,7 +653,7 @@ public class CategoryPlotTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         CategoryAxis domainAxis = new CategoryAxis("Domain");
         NumberAxis rangeAxis = new NumberAxis("Range");
@@ -660,21 +661,16 @@ public class CategoryPlotTests extends TestCase {
         CategoryPlot p1 = new CategoryPlot(dataset, domainAxis, rangeAxis,
                 renderer);
         p1.setOrientation(PlotOrientation.HORIZONTAL);
-        CategoryPlot p2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(p1);
-            out.close();
+        CategoryPlot p2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(p1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            p2 = (CategoryPlot) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        p2 = (CategoryPlot) in.readObject();
+        in.close();
         assertTrue(p1.equals(p2));
     }
 
@@ -711,46 +707,37 @@ public class CategoryPlotTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization3() {
+    public void testSerialization3() throws IOException, ClassNotFoundException {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         JFreeChart chart = ChartFactory.createBarChart(
                 "Test Chart", "Category Axis", "Value Axis", dataset,
                 PlotOrientation.VERTICAL, true, true, false);
-        JFreeChart chart2 = null;
+        JFreeChart chart2;
 
         // serialize and deserialize the chart....
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(chart);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(chart);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            chart2 = (JFreeChart) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-            return;
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        chart2 = (JFreeChart) in.readObject();
+        in.close();
 
         // now check that the chart is usable...
-        boolean passed = true;
         try {
             chart2.createBufferedImage(300, 200);
         }
         catch (Exception e) {
-            passed = false;
-            e.printStackTrace();
+            fail("No exception should be thrown.");
         }
-        assertTrue(passed);
     }
 
     /**
      * This test ensures that a plot with markers is serialized correctly.
      */
-    public void testSerialization4() {
+    public void testSerialization4() throws IOException, ClassNotFoundException {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         JFreeChart chart = ChartFactory.createBarChart(
                 "Test Chart", "Category Axis", "Value Axis",
@@ -761,33 +748,24 @@ public class CategoryPlotTests extends TestCase {
         JFreeChart chart2 = null;
 
         // serialize and deserialize the chart....
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(chart);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(chart);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            chart2 = (JFreeChart) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-            return;
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        chart2 = (JFreeChart) in.readObject();
+        in.close();
         assertEquals(chart, chart2);
 
         // now check that the chart is usable...
-        boolean passed = true;
         try {
             chart2.createBufferedImage(300, 200);
         }
         catch (Exception e) {
-            passed = false;
-            e.printStackTrace();
+            fail("No exception should be thrown.");
         }
-        assertTrue(passed);
     }
 
     /**
@@ -917,20 +895,16 @@ public class CategoryPlotTests extends TestCase {
                 dataset, PlotOrientation.VERTICAL, true, false, false);
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         plot.setRenderer(1, new LineAndShapeRenderer());
-        boolean success = false;
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
             g2.dispose();
-            success = true;
         }
         catch (Exception e) {
-            e.printStackTrace();
-            success = false;
+            fail("No exception should be thrown.");
         }
-        assertTrue(success);
     }
 
     /**

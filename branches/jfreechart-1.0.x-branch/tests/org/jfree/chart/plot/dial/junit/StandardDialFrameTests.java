@@ -46,6 +46,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -138,15 +139,9 @@ public class StandardDialFrameTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = null;
-        try {
-            f2 = (StandardDialFrame) f1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        StandardDialFrame f2 = (StandardDialFrame) f1.clone();
         assertTrue(f1 != f2);
         assertTrue(f1.getClass() == f2.getClass());
         assertTrue(f1.equals(f2));
@@ -161,24 +156,18 @@ public class StandardDialFrameTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = null;
+        StandardDialFrame f2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(f1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(f1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            f2 = (StandardDialFrame) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        f2 = (StandardDialFrame) in.readObject();
+        in.close();
         assertEquals(f1, f2);
     }
 

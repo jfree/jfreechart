@@ -47,6 +47,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -198,16 +199,10 @@ public class DialValueIndicatorTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         // test a default instance
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = null;
-        try {
-            i2 = (DialValueIndicator) i1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        DialValueIndicator i2 = (DialValueIndicator) i1.clone();
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
@@ -223,28 +218,21 @@ public class DialValueIndicatorTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
         // test a default instance
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = null;
+        DialValueIndicator i2;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(i1);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(i1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            i2 = (DialValueIndicator) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        i2 = (DialValueIndicator) in.readObject();
+        in.close();
         assertEquals(i1, i2);
-
-        // test a custom instance
     }
 
 }
