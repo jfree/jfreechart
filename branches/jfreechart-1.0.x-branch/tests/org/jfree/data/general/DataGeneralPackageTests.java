@@ -60,13 +60,13 @@ public class DataGeneralPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.data.general");
-        suite.addTestSuite(DatasetGroupTests.class);
-        suite.addTestSuite(DatasetUtilitiesTests.class);
-        suite.addTestSuite(DefaultHeatMapDatasetTests.class);
-        suite.addTestSuite(DefaultKeyedValueDatasetTests.class);
-        suite.addTestSuite(DefaultKeyedValuesDatasetTests.class);
-        suite.addTestSuite(DefaultKeyedValues2DDatasetTests.class);
-        suite.addTestSuite(DefaultPieDatasetTests.class);
+        suite.addTestSuite(DatasetGroupTest.class);
+        suite.addTestSuite(DatasetUtilitiesTest.class);
+        suite.addTestSuite(DefaultHeatMapDatasetTest.class);
+        suite.addTestSuite(DefaultKeyedValueDatasetTest.class);
+        suite.addTestSuite(DefaultKeyedValuesDatasetTest.class);
+        suite.addTestSuite(DefaultKeyedValues2DDatasetTest.class);
+        suite.addTestSuite(DefaultPieDatasetTest.class);
         return suite;
     }
 

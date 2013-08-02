@@ -58,10 +58,10 @@ public class OHLCPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.data.time.ohlc");
-        suite.addTestSuite(OHLCItemTests.class);
-        suite.addTestSuite(OHLCSeriesCollectionTests.class);
-        suite.addTestSuite(OHLCSeriesTests.class);
-        suite.addTestSuite(OHLCTests.class);
+        suite.addTestSuite(OHLCItemTest.class);
+        suite.addTestSuite(OHLCSeriesCollectionTest.class);
+        suite.addTestSuite(OHLCSeriesTest.class);
+        suite.addTestSuite(OHLCTest.class);
         return suite;
     }
 

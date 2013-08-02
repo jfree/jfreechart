@@ -62,15 +62,15 @@ public class TitlePackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.chart.title");
-        suite.addTestSuite(CompositeTitleTests.class);
-        suite.addTestSuite(DateTitleTests.class);
-        suite.addTestSuite(ImageTitleTests.class);
-        suite.addTestSuite(LegendGraphicTests.class);
-        suite.addTestSuite(LegendTitleTests.class);
-        suite.addTestSuite(PaintScaleLegendTests.class);
-        suite.addTestSuite(ShortTextTitleTests.class);
-        suite.addTestSuite(TextTitleTests.class);
-        suite.addTestSuite(TitleTests.class);
+        suite.addTestSuite(CompositeTitleTest.class);
+        suite.addTestSuite(DateTitleTest.class);
+        suite.addTestSuite(ImageTitleTest.class);
+        suite.addTestSuite(LegendGraphicTest.class);
+        suite.addTestSuite(LegendTitleTest.class);
+        suite.addTestSuite(PaintScaleLegendTest.class);
+        suite.addTestSuite(ShortTextTitleTest.class);
+        suite.addTestSuite(TextTitleTest.class);
+        suite.addTestSuite(TitleTest.class);
         return suite;
     }
 

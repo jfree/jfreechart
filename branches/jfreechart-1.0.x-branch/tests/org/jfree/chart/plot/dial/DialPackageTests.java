@@ -59,17 +59,17 @@ public class DialPackageTests extends TestCase {
     public static Test suite() {
         TestSuite suite = new TestSuite(
                 "org.jfree.experimental.chart.plot.dial");
-        suite.addTestSuite(AbstractDialLayerTests.class);
-        suite.addTestSuite(DialBackgroundTests.class);
-        suite.addTestSuite(DialCapTests.class);
-        suite.addTestSuite(DialPlotTests.class);
-        suite.addTestSuite(DialPointerTests.class);
-        suite.addTestSuite(DialTextAnnotationTests.class);
-        suite.addTestSuite(DialValueIndicatorTests.class);
-        suite.addTestSuite(StandardDialFrameTests.class);
-        suite.addTestSuite(ArcDialFrameTests.class);
-        suite.addTestSuite(StandardDialRangeTests.class);
-        suite.addTestSuite(StandardDialScaleTests.class);
+        suite.addTestSuite(AbstractDialLayerTest.class);
+        suite.addTestSuite(DialBackgroundTest.class);
+        suite.addTestSuite(DialCapTest.class);
+        suite.addTestSuite(DialPlotTest.class);
+        suite.addTestSuite(DialPointerTest.class);
+        suite.addTestSuite(DialTextAnnotationTest.class);
+        suite.addTestSuite(DialValueIndicatorTest.class);
+        suite.addTestSuite(StandardDialFrameTest.class);
+        suite.addTestSuite(ArcDialFrameTest.class);
+        suite.addTestSuite(StandardDialRangeTest.class);
+        suite.addTestSuite(StandardDialScaleTest.class);
         return suite;
     }
 

@@ -62,11 +62,11 @@ public class DataGanttPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.data.gantt");
-        suite.addTestSuite(SlidingGanttCategoryDatasetTests.class);
-        suite.addTestSuite(TaskTests.class);
-        suite.addTestSuite(TaskSeriesTests.class);
-        suite.addTestSuite(TaskSeriesCollectionTests.class);
-        suite.addTestSuite(XYTaskDatasetTests.class);
+        suite.addTestSuite(SlidingGanttCategoryDatasetTest.class);
+        suite.addTestSuite(TaskTest.class);
+        suite.addTestSuite(TaskSeriesTest.class);
+        suite.addTestSuite(TaskSeriesCollectionTest.class);
+        suite.addTestSuite(XYTaskDatasetTest.class);
         return suite;
     }
 

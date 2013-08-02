@@ -64,13 +64,13 @@ public class UrlsPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.chart.urls");
-        suite.addTestSuite(CustomCategoryURLGeneratorTests.class);
-        suite.addTestSuite(CustomPieURLGeneratorTests.class);
-        suite.addTestSuite(CustomXYURLGeneratorTests.class);
-        suite.addTestSuite(StandardCategoryURLGeneratorTests.class);
-        suite.addTestSuite(StandardPieURLGeneratorTests.class);
-        suite.addTestSuite(StandardXYURLGeneratorTests.class);
-        suite.addTestSuite(TimeSeriesURLGeneratorTests.class);
+        suite.addTestSuite(CustomCategoryURLGeneratorTest.class);
+        suite.addTestSuite(CustomPieURLGeneratorTest.class);
+        suite.addTestSuite(CustomXYURLGeneratorTest.class);
+        suite.addTestSuite(StandardCategoryURLGeneratorTest.class);
+        suite.addTestSuite(StandardPieURLGeneratorTest.class);
+        suite.addTestSuite(StandardXYURLGeneratorTest.class);
+        suite.addTestSuite(TimeSeriesURLGeneratorTest.class);
         return suite;
     }
 

@@ -60,14 +60,14 @@ public class EntityPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.chart.entity");
-        suite.addTestSuite(CategoryItemEntityTests.class);
-        suite.addTestSuite(CategoryLabelEntityTests.class);
-        suite.addTestSuite(ContourEntityTests.class);
-        suite.addTestSuite(LegendItemEntityTests.class);
-        suite.addTestSuite(PieSectionEntityTests.class);
-        suite.addTestSuite(StandardEntityCollectionTests.class);
-        suite.addTestSuite(TickLabelEntityTests.class);
-        suite.addTestSuite(XYItemEntityTests.class);
+        suite.addTestSuite(CategoryItemEntityTest.class);
+        suite.addTestSuite(CategoryLabelEntityTest.class);
+        suite.addTestSuite(ContourEntityTest.class);
+        suite.addTestSuite(LegendItemEntityTest.class);
+        suite.addTestSuite(PieSectionEntityTest.class);
+        suite.addTestSuite(StandardEntityCollectionTest.class);
+        suite.addTestSuite(TickLabelEntityTest.class);
+        suite.addTestSuite(XYItemEntityTest.class);
         return suite;
     }
 
