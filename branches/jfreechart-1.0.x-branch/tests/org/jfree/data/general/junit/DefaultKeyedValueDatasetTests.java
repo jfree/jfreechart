@@ -42,6 +42,7 @@ package org.jfree.data.general.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -101,16 +102,10 @@ public class DefaultKeyedValueDatasetTests extends TestCase {
     /**
      * Confirm that cloning works.
      */
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValueDataset d1
             = new DefaultKeyedValueDataset("Test", new Double(45.5));
-        DefaultKeyedValueDataset d2 = null;
-        try {
-            d2 = (DefaultKeyedValueDataset) d1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        DefaultKeyedValueDataset d2 = (DefaultKeyedValueDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -119,16 +114,10 @@ public class DefaultKeyedValueDatasetTests extends TestCase {
     /**
      * Confirm that the clone is independent of the original.
      */
-    public void testCloneIndependence() {
+    public void testCloneIndependence() throws CloneNotSupportedException {
         DefaultKeyedValueDataset d1
             = new DefaultKeyedValueDataset("Key", new Double(10.0));
-        DefaultKeyedValueDataset d2 = null;
-        try {
-            d2 = (DefaultKeyedValueDataset) d1.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.err.println("Failed to clone.");
-        }
+        DefaultKeyedValueDataset d2 = (DefaultKeyedValueDataset) d1.clone();
         assertTrue(d1.equals(d2));
         d2.updateValue(new Double(99.9));
         assertFalse(d1.equals(d2));
@@ -139,27 +128,19 @@ public class DefaultKeyedValueDatasetTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
-
+    public void testSerialization() throws IOException, ClassNotFoundException {
         DefaultKeyedValueDataset d1
             = new DefaultKeyedValueDataset("Test", new Double(25.3));
-        DefaultKeyedValueDataset d2 = null;
+        DefaultKeyedValueDataset d2;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(d1);
+        out.close();
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(d1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            d2 = (DefaultKeyedValueDataset) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        d2 = (DefaultKeyedValueDataset) in.readObject();
+        in.close();
         assertEquals(d1, d2);
     }
 
