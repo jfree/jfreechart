@@ -42,6 +42,7 @@ package org.jfree.data.statistics.junit;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -100,32 +101,24 @@ public class BoxAndWhiskerItemTests extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() {
+    public void testSerialization() throws IOException, ClassNotFoundException {
 
-        BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(
-            new Double(1.0), new Double(2.0), new Double(3.0), new Double(4.0),
-            new Double(5.0), new Double(6.0), new Double(7.0), new Double(8.0),
-            new ArrayList()
-        );
-        BoxAndWhiskerItem i2 = null;
+        BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(new Double(1.0), 
+                new Double(2.0), new Double(3.0), new Double(4.0),
+                new Double(5.0), new Double(6.0), new Double(7.0), 
+                new Double(8.0), new ArrayList());
+        BoxAndWhiskerItem i2;
 
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(i1);
-            out.close();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutput out = new ObjectOutputStream(buffer);
+        out.writeObject(i1);
+        out.close();
 
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            i2 = (BoxAndWhiskerItem) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
+                buffer.toByteArray()));
+        i2 = (BoxAndWhiskerItem) in.readObject();
+        in.close();
         assertEquals(i1, i2);
-
     }
 
 }
