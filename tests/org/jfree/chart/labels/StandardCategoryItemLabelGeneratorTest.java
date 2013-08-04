@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------------------
- * StandardCategoryItemLabelGeneratorTests.java
- * --------------------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -------------------------------------------
+ * StandardCategoryItemLabelGeneratorTest.java
+ * -------------------------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,13 +43,6 @@
 
 package org.jfree.chart.labels;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -57,9 +50,8 @@ import java.text.SimpleDateFormat;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
-import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.PublicCloneable;
 
@@ -179,19 +171,12 @@ public class StandardCategoryItemLabelGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         StandardCategoryItemLabelGenerator g1
                 = new StandardCategoryItemLabelGenerator("{2}",
                 DateFormat.getInstance());
-        StandardCategoryItemLabelGenerator g2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        g2 = (StandardCategoryItemLabelGenerator) in.readObject();
-        in.close();
+        StandardCategoryItemLabelGenerator g2 = (StandardCategoryItemLabelGenerator) 
+                TestUtilities.serialised(g1);
         assertEquals(g1, g2);
     }
 

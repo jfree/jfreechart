@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------------
- * CustomXYItemLabelGeneratorTests.java
- * ------------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -----------------------------------
+ * CustomXYItemLabelGeneratorTest.java
+ * -----------------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,20 +42,13 @@
 
 package org.jfree.chart.labels;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.labels.CustomXYToolTipGenerator;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -103,7 +96,7 @@ public class CustomXYItemLabelGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         List t1 = new java.util.ArrayList();
         t1.add("Tooltip A1");
         t1.add("Tooltip A2");
@@ -117,15 +110,8 @@ public class CustomXYItemLabelGeneratorTest extends TestCase {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
         g1.addToolTipSeries(t1);
         g1.addToolTipSeries(t2);
-        CustomXYToolTipGenerator g2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        g2 = (CustomXYToolTipGenerator) in.readObject();
-        in.close();
+        CustomXYToolTipGenerator g2 = (CustomXYToolTipGenerator) 
+                TestUtilities.serialised(g1);
         assertEquals(g1, g2);
     }
 

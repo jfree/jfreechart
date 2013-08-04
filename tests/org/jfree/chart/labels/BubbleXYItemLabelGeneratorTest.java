@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------------
- * BubbleXYItemLabelGeneratorTests.java
- * ------------------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * -----------------------------------
+ * BubbleXYItemLabelGeneratorTest.java
+ * -----------------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,13 +41,6 @@
 
 package org.jfree.chart.labels;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -56,8 +49,8 @@ import java.text.SimpleDateFormat;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.labels.BubbleXYItemLabelGenerator;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.util.PublicCloneable;
@@ -190,17 +183,10 @@ public class BubbleXYItemLabelGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         BubbleXYItemLabelGenerator g1 = new BubbleXYItemLabelGenerator();
-        BubbleXYItemLabelGenerator g2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        g2 = (BubbleXYItemLabelGenerator) in.readObject();
-        in.close();
+        BubbleXYItemLabelGenerator g2 = (BubbleXYItemLabelGenerator) 
+                TestUtilities.serialised(g1);
         assertEquals(g1, g2);
     }
 
