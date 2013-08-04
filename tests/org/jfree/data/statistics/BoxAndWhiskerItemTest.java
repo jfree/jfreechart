@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------
- * BoxAndWhiskerItemTests.java
- * ---------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * BoxAndWhiskerItemTest.java
+ * --------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,20 +40,12 @@
 
 package org.jfree.data.statistics;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.statistics.BoxAndWhiskerItem;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link BoxAndWhiskerItem} class.
@@ -95,29 +87,17 @@ public class BoxAndWhiskerItemTest extends TestCase {
         );
         assertTrue(i1.equals(i2));
         assertTrue(i2.equals(i1));
-
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
-
+    public void testSerialization() {
         BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(new Double(1.0), 
                 new Double(2.0), new Double(3.0), new Double(4.0),
                 new Double(5.0), new Double(6.0), new Double(7.0), 
                 new Double(8.0), new ArrayList());
-        BoxAndWhiskerItem i2;
-
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(i1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        i2 = (BoxAndWhiskerItem) in.readObject();
-        in.close();
+        BoxAndWhiskerItem i2 = (BoxAndWhiskerItem) TestUtilities.serialised(i1);
         assertEquals(i1, i2);
     }
 

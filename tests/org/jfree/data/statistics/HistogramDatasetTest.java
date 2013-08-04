@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------
- * HistogramDatasetTests.java
- * --------------------------
- * (C) Copyright 2004-2009, by Object Refinery Limited.
+ * -------------------------
+ * HistogramDatasetTest.java
+ * -------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,21 +44,13 @@
 
 package org.jfree.data.statistics;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
-import org.jfree.data.statistics.HistogramDataset;
 
 /**
  * Tests for the {@link HistogramDataset} class.
@@ -141,19 +133,11 @@ public class HistogramDatasetTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         double[] values = {1.0, 2.0, 3.0, 4.0, 6.0, 12.0, 5.0, 6.3, 4.5};
         HistogramDataset d1 = new HistogramDataset();
         d1.addSeries("Series 1", values, 5);
-        HistogramDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (HistogramDataset) in.readObject();
-        in.close();
+        HistogramDataset d2 = (HistogramDataset) TestUtilities.serialised(d1);
         assertEquals(d1, d2);
 
         // simple check for independence
