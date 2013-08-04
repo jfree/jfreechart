@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------
- * XYTaskDatasetTests.java
- * -----------------------
- * (C) Copyright 2008, by Object Refinery Limited and Contributors.
+ * ----------------------
+ * XYTaskDatasetTest.java
+ * ----------------------
+ * (C) Copyright 2008-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,23 +40,12 @@
 
 package org.jfree.data.gantt;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.gantt.Task;
-import org.jfree.data.gantt.TaskSeries;
-import org.jfree.data.gantt.TaskSeriesCollection;
-import org.jfree.data.gantt.XYTaskDataset;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link XYTaskDataset} class.
@@ -143,22 +132,13 @@ public class XYTaskDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         TaskSeries s1 = new TaskSeries("Series");
         s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
-        XYTaskDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (XYTaskDataset) in.readObject();
-        in.close();
+        XYTaskDataset d2 = (XYTaskDataset) TestUtilities.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence

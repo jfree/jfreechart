@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------
- * TaskSeriesCollectionTests.java
- * ------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * -----------------------------
+ * TaskSeriesCollectionTest.java
+ * -----------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,22 +42,13 @@
 
 package org.jfree.data.gantt;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.gantt.Task;
-import org.jfree.data.gantt.TaskSeries;
-import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
 
 /**
@@ -492,8 +483,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
-
+    public void testSerialization() {
         TaskSeries s1 = new TaskSeries("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
@@ -503,18 +493,9 @@ public class TaskSeriesCollectionTest extends TestCase {
         TaskSeriesCollection c1 = new TaskSeriesCollection();
         c1.add(s1);
         c1.add(s2);
-        TaskSeriesCollection c2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(c1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        c2 = (TaskSeriesCollection) in.readObject();
-        in.close();
+        TaskSeriesCollection c2 = (TaskSeriesCollection) 
+                TestUtilities.serialised(c1);
         assertEquals(c1, c2);
-
     }
 
     /**
