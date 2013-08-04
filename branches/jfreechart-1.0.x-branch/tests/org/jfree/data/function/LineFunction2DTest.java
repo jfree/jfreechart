@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * LineFunction2DTests.java
- * ------------------------
- * (C) Copyright 2009, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * LineFunction2DTest.java
+ * -----------------------
+ * (C) Copyright 2009-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.data.function;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.function.LineFunction2D;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link LineFunction2D} class.
@@ -106,17 +97,9 @@ public class LineFunction2DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         LineFunction2D f1 = new LineFunction2D(1.0, 2.0);
-        LineFunction2D f2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(f1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        f2 = (LineFunction2D) in.readObject();
-        in.close();
+        LineFunction2D f2 = (LineFunction2D) TestUtilities.serialised(f1);
         assertEquals(f1, f2);
     }
 

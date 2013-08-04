@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------------
- * NormalDistributionFunction2DTests.java
- * --------------------------------------
- * (C) Copyright 2009, by Object Refinery Limited and Contributors.
+ * -------------------------------------
+ * NormalDistributionFunction2DTest.java
+ * -------------------------------------
+ * (C) Copyright 2009-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,20 +40,13 @@
 
 package org.jfree.data.function;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.function.LineFunction2D;
-import org.jfree.data.function.NormalDistributionFunction2D;
 
 /**
  * Tests for the {@link NormalDistributionFunction2D} class.
@@ -111,16 +104,8 @@ public class NormalDistributionFunction2DTest extends TestCase {
     public void testSerialization() throws IOException, ClassNotFoundException {
         NormalDistributionFunction2D f1 = new NormalDistributionFunction2D(1.0,
                 2.0);
-        NormalDistributionFunction2D f2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(f1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        f2 = (NormalDistributionFunction2D) in.readObject();
-        in.close();
+        NormalDistributionFunction2D f2 = (NormalDistributionFunction2D) 
+                TestUtilities.serialised(f1);
         assertEquals(f1, f2);
     }
 
