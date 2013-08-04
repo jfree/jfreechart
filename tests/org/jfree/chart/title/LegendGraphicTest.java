@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------
- * LegendGraphicTests.java
- * -----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * ----------------------
+ * LegendGraphicTest.java
+ * ----------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,19 +46,12 @@ import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.title.LegendGraphic;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.StandardGradientPaintTransformer;
@@ -237,20 +230,12 @@ public class LegendGraphicTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         Stroke s = new BasicStroke(1.23f);
-        LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.black);
+        LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0, 
+                3.0, 4.0), Color.black);
         g1.setOutlineStroke(s);
-        LegendGraphic g2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        g2 = (LegendGraphic) in.readObject();
-        in.close();
+        LegendGraphic g2 = (LegendGraphic) TestUtilities.serialised(g1);
         assertTrue(g1.equals(g2));
     }
 
