@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------------
- * CategoryLabelEntityTests.java
- * -----------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * ----------------------------
+ * CategoryLabelEntityTest.java
+ * ----------------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,19 +41,11 @@
 package org.jfree.chart.entity;
 
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.entity.CategoryLabelEntity;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link CategoryLabelEntity} class.
@@ -126,18 +118,10 @@ public class CategoryLabelEntityTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         CategoryLabelEntity e1 = new CategoryLabelEntity("A",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
-        CategoryLabelEntity e2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(e1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        e2 = (CategoryLabelEntity) in.readObject();
-        in.close();
+        CategoryLabelEntity e2 = (CategoryLabelEntity) TestUtilities.serialised(e1);
         assertEquals(e1, e2);
     }
 

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * XYItemEntityTests.java
- * ----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * ---------------------
+ * XYItemEntityTest.java
+ * ---------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,19 +41,12 @@
 package org.jfree.chart.entity;
 
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.data.time.TimeSeriesCollection;
 
 /**
@@ -131,18 +124,10 @@ public class XYItemEntityTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
                 3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
-        XYItemEntity e2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(e1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        e2 = (XYItemEntity) in.readObject();
-        in.close();
+        XYItemEntity e2 = (XYItemEntity) TestUtilities.serialised(e1);
         assertEquals(e1, e2);
     }
 
