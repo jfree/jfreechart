@@ -43,7 +43,6 @@ package org.jfree.chart.axis;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -163,7 +162,7 @@ public class ExtendedCategoryAxisTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
         a1.setSubLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.blue));

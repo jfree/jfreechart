@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------
- * LineUtilitiesTests.java
- * -----------------------
- * (C) Copyright 2008, by Object Refinery Limited and Contributors.
+ * ----------------------
+ * LineUtilitiesTest.java
+ * ----------------------
+ * (C) Copyright 2008-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,8 +46,6 @@ import java.awt.geom.Rectangle2D;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.util.LineUtilities;
 
 /**
  * Tests for the {@link LineUtilities} class.

@@ -41,7 +41,6 @@
 
 package org.jfree.chart.axis;
 
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -96,7 +95,7 @@ public class DateTickUnitTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DateTickUnit a1 = new DateTickUnit(DateTickUnit.DAY, 7);
         DateTickUnit a2 = (DateTickUnit) TestUtilities.serialised(a1);
         assertEquals(a1, a2);

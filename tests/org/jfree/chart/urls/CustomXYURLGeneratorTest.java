@@ -43,7 +43,6 @@
 
 package org.jfree.chart.urls;
 
-import java.io.IOException;
 import java.util.List;
 
 import junit.framework.Test;
@@ -132,7 +131,7 @@ public class CustomXYURLGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
 
         List u1 = new java.util.ArrayList();
         u1.add("URL A1");

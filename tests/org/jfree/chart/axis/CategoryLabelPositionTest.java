@@ -41,7 +41,6 @@
 
 package org.jfree.chart.axis;
 
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -160,7 +159,7 @@ public class CategoryLabelPositionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         CategoryLabelPosition p1 = new CategoryLabelPosition();
         CategoryLabelPosition p2 = (CategoryLabelPosition) TestUtilities.serialised(p1);
         assertEquals(p1, p2);

@@ -40,7 +40,6 @@
 
 package org.jfree.chart.block;
 
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -124,7 +123,7 @@ public class ColumnArrangementTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         FlowArrangement f1 = new FlowArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);
         FlowArrangement f2 = (FlowArrangement) TestUtilities.serialised(f1);

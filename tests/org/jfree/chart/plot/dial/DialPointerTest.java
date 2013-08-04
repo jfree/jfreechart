@@ -43,7 +43,6 @@ package org.jfree.chart.plot.dial;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -165,7 +164,7 @@ public class DialPointerTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         // test a default instance
         DialPointer i1 = new DialPointer.Pin(1);
         DialPointer i2 = (DialPointer) TestUtilities.serialised(i1);

@@ -24,9 +24,9 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * ColorPaletteTests.java
- * ----------------------
+ * ---------------------
+ * ColorPaletteTest.java
+ * ---------------------
  * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -44,8 +44,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.jfree.chart.plot.ColorPalette;
-import org.jfree.chart.plot.GreyPalette;
 
 /**
  * Tests for the <code>ColorPalette</code> class.

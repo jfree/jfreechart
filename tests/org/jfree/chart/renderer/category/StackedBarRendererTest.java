@@ -41,7 +41,6 @@
 
 package org.jfree.chart.renderer.category;
 
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -124,7 +123,7 @@ public class StackedBarRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         StackedBarRenderer r1 = new StackedBarRenderer();
         StackedBarRenderer r2 = (StackedBarRenderer) 
                 TestUtilities.serialised(r1);

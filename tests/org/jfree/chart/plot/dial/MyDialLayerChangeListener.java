@@ -27,7 +27,7 @@
  * ------------------------------
  * MyDialLayerChangeListener.java
  * ------------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,9 +39,6 @@
  */
 
 package org.jfree.chart.plot.dial;
-
-import org.jfree.chart.plot.dial.DialLayerChangeEvent;
-import org.jfree.chart.plot.dial.DialLayerChangeListener;
 
 /**
  * A dial layer change listener.

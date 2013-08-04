@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * GanttChartTests.java
- * --------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * -------------------
+ * GanttChartTest.java
+ * -------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;

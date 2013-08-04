@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------
- * BarChartTests.java
- * ------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * -----------------
+ * BarChartTest.java
+ * -----------------
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;

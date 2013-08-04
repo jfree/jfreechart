@@ -43,7 +43,6 @@
 
 package org.jfree.data.category;
 
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -219,7 +218,7 @@ public class DefaultCategoryDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultCategoryDataset d1 = new DefaultCategoryDataset();
         d1.setValue(23.4, "R1", "C1");
         DefaultCategoryDataset d2 = (DefaultCategoryDataset) 

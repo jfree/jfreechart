@@ -42,7 +42,6 @@
 package org.jfree.chart.axis;
 
 import java.awt.Font;
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -127,7 +126,7 @@ public class MarkerAxisBandTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         MarkerAxisBand a1 = new MarkerAxisBand(null, 1.0, 1.0, 1.0, 1.0, null);
         MarkerAxisBand a2 = (MarkerAxisBand) TestUtilities.serialised(a1);
         assertEquals(a1, a2);

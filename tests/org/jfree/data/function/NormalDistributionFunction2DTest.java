@@ -40,7 +40,6 @@
 
 package org.jfree.data.function;
 
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -101,7 +100,7 @@ public class NormalDistributionFunction2DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         NormalDistributionFunction2D f1 = new NormalDistributionFunction2D(1.0,
                 2.0);
         NormalDistributionFunction2D f2 = (NormalDistributionFunction2D) 

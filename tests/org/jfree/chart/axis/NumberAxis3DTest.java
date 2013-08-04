@@ -40,7 +40,6 @@
 
 package org.jfree.chart.axis;
 
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -73,7 +72,7 @@ public class NumberAxis3DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         NumberAxis3D a1 = new NumberAxis3D("Test Axis");
         NumberAxis3D a2 = (NumberAxis3D) TestUtilities.serialised(a1);
         assertEquals(a1, a2);

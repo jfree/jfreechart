@@ -42,13 +42,6 @@
 
 package org.jfree.chart.axis;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -818,7 +811,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         verifySerialization(this.msTimeline);
         verifySerialization(this.ms2Timeline);
         verifySerialization(this.ms2BaseTimeline);
@@ -830,17 +823,8 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests serialization of an instance.
      * @param a1 The timeline to verify the serialization
      */
-    private void verifySerialization(SegmentedTimeline a1) throws IOException, ClassNotFoundException {
-        SegmentedTimeline a2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        a2 = (SegmentedTimeline) in.readObject();
-        in.close();
+    private void verifySerialization(SegmentedTimeline a1) {
+        SegmentedTimeline a2 = (SegmentedTimeline) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 
