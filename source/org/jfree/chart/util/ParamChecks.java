@@ -62,7 +62,7 @@ public class ParamChecks {
      */
     public static void nullNotPermitted(Object param, String name) {
         if (param == null) {
-            throw new IllegalArgumentException("Null '" + name + "' argument");
+            throw new IllegalArgumentException("Null '" + name + "' argument.");
         }
     }
 }
