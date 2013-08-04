@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------
- * CategoryTextAnnotationTests.java
- * --------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -------------------------------
+ * CategoryTextAnnotationTest.java
+ * -------------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,19 +42,12 @@
 
 package org.jfree.chart.annotations;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.annotations.CategoryTextAnnotation;
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.util.PublicCloneable;
 
@@ -150,19 +143,10 @@ public class CategoryTextAnnotationTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test", 
                 "Category", 1.0);
-        CategoryTextAnnotation a2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        a2 = (CategoryTextAnnotation) in.readObject();
-        in.close();
+        CategoryTextAnnotation a2 = (CategoryTextAnnotation) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 

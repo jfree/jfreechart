@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------
- * XYTextAnnotationTests.java
- * --------------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
+ * -------------------------
+ * XYTextAnnotationTest.java
+ * -------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,19 +48,12 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.PublicCloneable;
 
@@ -203,20 +196,11 @@ public class XYTextAnnotationTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYTextAnnotation a1 = new XYTextAnnotation("Text", 10.0, 20.0);
         a1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.blue));
-        XYTextAnnotation a2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        a2 = (XYTextAnnotation) in.readObject();
-        in.close();
+        XYTextAnnotation a2 = (XYTextAnnotation) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 
