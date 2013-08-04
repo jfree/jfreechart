@@ -27,7 +27,7 @@
  * --------------------
  * ChartPanelTests.java
  * --------------------
- * (C) Copyright 2004-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,33 +41,27 @@
 
 package org.jfree.chart;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import java.awt.geom.Rectangle2D;
 import java.util.EventListener;
 import java.util.List;
 
 import javax.swing.event.CaretListener;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartMouseEvent;
-import org.jfree.chart.ChartMouseListener;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.DefaultXYDataset;
+import org.junit.Test;
 
 /**
  * Tests for the {@link ChartPanel} class.
  */
-public class ChartPanelTest extends TestCase
-        implements ChartChangeListener, ChartMouseListener {
+public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
 
     private List chartChangeEvents = new java.util.ArrayList();
 
@@ -82,26 +76,9 @@ public class ChartPanelTest extends TestCase
     }
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ChartPanelTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ChartPanelTest(String name) {
-        super(name);
-    }
-
-    /**
      * Test that the constructor will accept a null chart.
      */
+    @Test
     public void testConstructor1() {
         ChartPanel panel = new ChartPanel(null);
         assertEquals(null, panel.getChart());
@@ -110,6 +87,7 @@ public class ChartPanelTest extends TestCase
     /**
      * Test that it is possible to set the panel's chart to null.
      */
+    @Test
     public void testSetChart() {
         JFreeChart chart = new JFreeChart(new XYPlot());
         ChartPanel panel = new ChartPanel(chart);
@@ -120,6 +98,7 @@ public class ChartPanelTest extends TestCase
     /**
      * Check the behaviour of the getListeners() method.
      */
+    @Test
     public void testGetListeners() {
         ChartPanel p = new ChartPanel(null);
         p.addChartMouseListener(this);
@@ -176,6 +155,7 @@ public class ChartPanelTest extends TestCase
      * Checks that a call to the zoom() method generates just one
      * ChartChangeEvent.
      */
+    @Test
     public void test2502355_zoom() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
@@ -191,6 +171,7 @@ public class ChartPanelTest extends TestCase
      * Checks that a call to the zoomInBoth() method generates just one
      * ChartChangeEvent.
      */
+    @Test
     public void test2502355_zoomInBoth() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
@@ -206,6 +187,7 @@ public class ChartPanelTest extends TestCase
      * Checks that a call to the zoomOutBoth() method generates just one
      * ChartChangeEvent.
      */
+    @Test
     public void test2502355_zoomOutBoth() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
@@ -221,6 +203,7 @@ public class ChartPanelTest extends TestCase
      * Checks that a call to the restoreAutoBounds() method generates just one
      * ChartChangeEvent.
      */
+    @Test
     public void test2502355_restoreAutoBounds() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
@@ -236,6 +219,7 @@ public class ChartPanelTest extends TestCase
      * Checks that a call to the zoomInDomain() method, for a plot with more
      * than one domain axis, generates just one ChartChangeEvent.
      */
+    @Test
     public void test2502355_zoomInDomain() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
@@ -253,6 +237,7 @@ public class ChartPanelTest extends TestCase
      * Checks that a call to the zoomInRange() method, for a plot with more
      * than one range axis, generates just one ChartChangeEvent.
      */
+    @Test
     public void test2502355_zoomInRange() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
@@ -270,6 +255,7 @@ public class ChartPanelTest extends TestCase
      * Checks that a call to the zoomOutDomain() method, for a plot with more
      * than one domain axis, generates just one ChartChangeEvent.
      */
+    @Test
     public void test2502355_zoomOutDomain() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
@@ -287,6 +273,7 @@ public class ChartPanelTest extends TestCase
      * Checks that a call to the zoomOutRange() method, for a plot with more
      * than one range axis, generates just one ChartChangeEvent.
      */
+    @Test
     public void test2502355_zoomOutRange() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
@@ -304,6 +291,7 @@ public class ChartPanelTest extends TestCase
      * Checks that a call to the restoreAutoDomainBounds() method, for a plot
      * with more than one range axis, generates just one ChartChangeEvent.
      */
+    @Test
     public void test2502355_restoreAutoDomainBounds() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
@@ -321,6 +309,7 @@ public class ChartPanelTest extends TestCase
      * Checks that a call to the restoreAutoRangeBounds() method, for a plot
      * with more than one range axis, generates just one ChartChangeEvent.
      */
+    @Test
     public void test2502355_restoreAutoRangeBounds() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
@@ -338,6 +327,7 @@ public class ChartPanelTest extends TestCase
      * In version 1.0.13 there is a bug where enabling the mouse wheel handler
      * twice would in fact disable it.
      */
+    @Test
     public void testSetMouseWheelEnabled() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",

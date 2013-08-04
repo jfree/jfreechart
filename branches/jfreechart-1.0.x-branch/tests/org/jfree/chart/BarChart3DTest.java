@@ -24,9 +24,9 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * BarChart3DTests.java
- * --------------------
+ * -------------------
+ * BarChart3DTest.java
+ * -------------------
  * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -44,6 +44,7 @@
 package org.jfree.chart;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -143,7 +144,7 @@ public class BarChart3DTest {
                 = new StandardCategoryToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
         CategoryToolTipGenerator tt2 = renderer.getToolTipGenerator(0, 0);
-        assertTrue(tt2 == tt);
+        assertSame(tt2, tt);
     }
 
     /**
@@ -158,16 +159,15 @@ public class BarChart3DTest {
                 = new StandardCategoryURLGenerator();
         renderer.setSeriesItemURLGenerator(0, url1);
         CategoryURLGenerator url2 = renderer.getItemURLGenerator(0, 0);
-        assertTrue(url2 == url1);
+        assertSame(url2, url1);
     }
 
     /**
-     * Create a horizontal bar chart with sample data in the range -3 to +3.
+     * Create a bar chart with sample data in the range -3 to +3.
      *
      * @return The chart.
      */
     private static JFreeChart createBarChart3D() {
-
         Number[][] data = new Integer[][]
             {{new Integer(-3), new Integer(-2)},
              {new Integer(-1), new Integer(1)},
@@ -175,7 +175,6 @@ public class BarChart3DTest {
 
         CategoryDataset dataset = DatasetUtilities.createCategoryDataset("S",
                 "C", data);
-
         return ChartFactory.createBarChart3D("Bar Chart 3D", "Domain", "Range",
                 dataset, PlotOrientation.HORIZONTAL, true, true, true);
 
@@ -188,7 +187,7 @@ public class BarChart3DTest {
     static class LocalListener implements ChartChangeListener {
 
         /** A flag. */
-        private boolean flag = false;
+        private boolean flag;
 
         /**
          * Event handler.

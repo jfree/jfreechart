@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------
- * LegendItemCollectionTests.java
- * ------------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * -----------------------------
+ * LegendItemCollectionTest.java
+ * -----------------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -53,45 +53,27 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Tests for the {@link LegendItemCollection} class.
  */
-public class LegendItemCollectionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LegendItemCollectionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public LegendItemCollectionTest(String name) {
-        super(name);
-    }
+public class LegendItemCollectionTest  {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
 
         LegendItemCollection c1 = new LegendItemCollection();
         LegendItemCollection c2 = new LegendItemCollection();
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c1));
+        assertEquals(c1, c2);
+        assertEquals(c2, c1);
 
         LegendItem item1 = new LegendItem("Label", "Description",
                 "ToolTip", "URL", true,
@@ -108,42 +90,35 @@ public class LegendItemCollectionTest extends TestCase {
         c1.add(item1);
         assertFalse(c1.equals(c2));
         c2.add(item2);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
     }
-
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() throws IOException, ClassNotFoundException {
         LegendItemCollection c1 = new LegendItemCollection();
         c1.add(new LegendItem("Item", "Description", "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.red));
-        LegendItemCollection c2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(c1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        c2 = (LegendItemCollection) in.readObject();
-        in.close();
+        LegendItemCollection c2 = (LegendItemCollection) TestUtilities.serialised(c1);
         assertEquals(c1, c2);
     }
 
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         LegendItemCollection c1 = new LegendItemCollection();
         LegendItem item1 = new LegendItem("Item 1");
         c1.add(item1);
         LegendItemCollection c2 = (LegendItemCollection) c1.clone();
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
 
         Rectangle2D item1Shape = (Rectangle2D) item1.getShape();
         item1Shape.setRect(1.0, 2.0, 3.0, 4.0);
