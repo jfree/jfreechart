@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------
- * OHLCItemTests.java
- * ------------------
- * (C) Copyright 2006-2009, by Object Refinery Limited and Contributors.
+ * -----------------
+ * OHLCItemTest.java
+ * -----------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,20 +41,12 @@
 
 package org.jfree.data.time.ohlc;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.time.Year;
-import org.jfree.data.time.ohlc.OHLCItem;
 
 /**
  * Tests for the {@link OHLCItem} class.
@@ -147,17 +139,9 @@ public class OHLCItemTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         OHLCItem item1 = new OHLCItem(new Year(2006), 2.0, 4.0, 1.0, 3.0);
-        OHLCItem item2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(item1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        item2 = (OHLCItem) in.readObject();
-        in.close();
+        OHLCItem item2 = (OHLCItem) TestUtilities.serialised(item1);
         assertEquals(item1, item2);
     }
 
