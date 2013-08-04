@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------------
- * CustomCategoryURLGeneratorTests.java
- * ------------------------------------
- * (C) Copyright 2008, by Object Refinery Limited and Contributors.
+ * -----------------------------------
+ * CustomCategoryURLGeneratorTest.java
+ * -----------------------------------
+ * (C) Copyright 2008-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,20 +40,13 @@
 
 package org.jfree.chart.urls;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.urls.CustomCategoryURLGenerator;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -135,7 +128,7 @@ public class CustomCategoryURLGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
 
         List u1 = new java.util.ArrayList();
         u1.add("URL A1");
@@ -148,19 +141,10 @@ public class CustomCategoryURLGeneratorTest extends TestCase {
         u2.add("URL B3");
 
         CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
-        CustomCategoryURLGenerator g2;
-
         g1.addURLSeries(u1);
         g1.addURLSeries(u2);
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        g2 = (CustomCategoryURLGenerator) in.readObject();
-        in.close();
+        CustomCategoryURLGenerator g2 = (CustomCategoryURLGenerator) 
+                TestUtilities.serialised(g1);
         assertEquals(g1, g2);
     }
 

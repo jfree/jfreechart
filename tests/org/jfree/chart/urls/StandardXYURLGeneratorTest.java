@@ -52,6 +52,7 @@ import java.io.ObjectOutputStream;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.util.PublicCloneable;
@@ -82,18 +83,10 @@ public class StandardXYURLGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
-
+    public void testSerialization() {
         StandardXYURLGenerator g1 = new StandardXYURLGenerator("index.html?");
-        StandardXYURLGenerator g2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        g2 = (StandardXYURLGenerator) in.readObject();
-        in.close();
+        StandardXYURLGenerator g2 = (StandardXYURLGenerator) 
+                TestUtilities.serialised(g1);
         assertEquals(g1, g2);
     }
 
