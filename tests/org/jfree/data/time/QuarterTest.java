@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------
- * QuarterTests.java
- * -----------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * ----------------
+ * QuarterTest.java
+ * ----------------
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,13 +45,6 @@
 
 package org.jfree.data.time;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -61,10 +54,7 @@ import java.util.TimeZone;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.time.Quarter;
-import org.jfree.data.time.TimePeriodFormatException;
-import org.jfree.data.time.Year;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {link Quarter} class.
@@ -244,17 +234,9 @@ public class QuarterTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         Quarter q1 = new Quarter(4, 1999);
-        Quarter q2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(q1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        q2 = (Quarter) in.readObject();
-        in.close();
+        Quarter q2 = (Quarter) TestUtilities.serialised(q1);
         assertEquals(q1, q2);
     }
 

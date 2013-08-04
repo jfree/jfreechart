@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * DateRangeTests.java
- * -------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * ------------------
+ * DateRangeTest.java
+ * ------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,20 +41,12 @@
 
 package org.jfree.data.time;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.time.DateRange;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Some tests for the {@link DateRange} class.
@@ -102,17 +94,9 @@ public class DateRangeTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DateRange r1 = new DateRange(new Date(1000L), new Date(2000L));
-        DateRange r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (DateRange) in.readObject();
-        in.close();
+        DateRange r2 = (DateRange) TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

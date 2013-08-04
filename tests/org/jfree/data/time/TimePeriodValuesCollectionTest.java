@@ -45,24 +45,12 @@
 
 package org.jfree.data.time;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
-import org.jfree.data.time.Day;
-import org.jfree.data.time.SimpleTimePeriod;
-import org.jfree.data.time.TimePeriodAnchor;
-import org.jfree.data.time.TimePeriodValues;
-import org.jfree.data.time.TimePeriodValuesCollection;
 
 /**
  * Some tests for the {@link TimePeriodValuesCollection} class.
@@ -146,18 +134,10 @@ public class TimePeriodValuesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
-        TimePeriodValuesCollection c2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(c1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        c2 = (TimePeriodValuesCollection) in.readObject();
-        in.close();
+        TimePeriodValuesCollection c2 = (TimePeriodValuesCollection) 
+                TestUtilities.serialised(c1);
         assertEquals(c1, c2);
     }
 

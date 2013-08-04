@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------
- * TimeSeriesDataItemTests.java
- * ----------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * ---------------------------
+ * TimeSeriesDataItemTest.java
+ * ---------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,20 +40,10 @@
 
 package org.jfree.data.time;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.time.Day;
-import org.jfree.data.time.TimeSeriesDataItem;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link TimeSeriesDataItem} class.
@@ -119,19 +109,11 @@ public class TimeSeriesDataItemTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         TimeSeriesDataItem item1 = new TimeSeriesDataItem(new Day(23, 9, 2001), 
                 99.7);
-        TimeSeriesDataItem item2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(item1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        item2 = (TimeSeriesDataItem) in.readObject();
-        in.close();
+        TimeSeriesDataItem item2 = (TimeSeriesDataItem) 
+                TestUtilities.serialised(item1);
         assertEquals(item1, item2);
     }
 
