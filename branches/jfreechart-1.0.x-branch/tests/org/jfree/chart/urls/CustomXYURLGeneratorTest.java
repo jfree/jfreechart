@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------
- * CustomXYURLGeneratorTests.java
- * ------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -----------------------------
+ * CustomXYURLGeneratorTest.java
+ * -----------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,20 +43,14 @@
 
 package org.jfree.chart.urls;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.urls.CustomXYURLGenerator;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -151,18 +145,10 @@ public class CustomXYURLGeneratorTest extends TestCase {
         u2.add("URL B3");
 
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
-        CustomXYURLGenerator g2;
-
         g1.addURLSeries(u1);
         g1.addURLSeries(u2);
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        g2 = (CustomXYURLGenerator) in.readObject();
-        in.close();
+        CustomXYURLGenerator g2 = (CustomXYURLGenerator) 
+                TestUtilities.serialised(g1);
         assertEquals(g1, g2);
     }
 

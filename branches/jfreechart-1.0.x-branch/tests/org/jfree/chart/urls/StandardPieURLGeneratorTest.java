@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------------
- * StandardPieURLGeneratorTests.java
- * ---------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * --------------------------------
+ * StandardPieURLGeneratorTest.java
+ * --------------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,19 +44,12 @@
 
 package org.jfree.chart.urls;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.urls.StandardPieURLGenerator;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.util.PublicCloneable;
 
@@ -130,19 +123,11 @@ public class StandardPieURLGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         StandardPieURLGenerator g1 = new StandardPieURLGenerator(
                 "index.html?", "cat");
-        StandardPieURLGenerator g2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        g2 = (StandardPieURLGenerator) in.readObject();
-        in.close();
+        StandardPieURLGenerator g2 = (StandardPieURLGenerator) 
+                TestUtilities.serialised(g1);
         assertEquals(g1, g2);
     }
 
