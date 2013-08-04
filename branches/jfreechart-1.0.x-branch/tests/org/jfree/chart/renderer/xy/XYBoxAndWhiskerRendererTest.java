@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------------
- * XYBoxAndWhiskerRendererTests.java
- * ---------------------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
+ * --------------------------------
+ * XYBoxAndWhiskerRendererTest.java
+ * --------------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,15 +49,6 @@ import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
-import java.util.ArrayList;
 import java.util.Date;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -65,7 +56,7 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer;
+import org.jfree.chart.TestUtilities;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
 import org.jfree.util.PublicCloneable;
@@ -171,17 +162,10 @@ public class XYBoxAndWhiskerRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
-        XYBoxAndWhiskerRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (XYBoxAndWhiskerRenderer) in.readObject();
-        in.close();
+        XYBoxAndWhiskerRenderer r2 = (XYBoxAndWhiskerRenderer) 
+                TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------
- * XYBubbleRendererTests.java
- * --------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -------------------------
+ * XYBubbleRendererTest.java
+ * -------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,23 +43,15 @@
 
 package org.jfree.chart.renderer.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYBubbleRenderer;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.util.PublicCloneable;
 
@@ -134,18 +126,9 @@ public class XYBubbleRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYBubbleRenderer r1 = new XYBubbleRenderer();
-        XYBubbleRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (XYBubbleRenderer) in.readObject();
-        in.close();
+        XYBubbleRenderer r2 = (XYBubbleRenderer) TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

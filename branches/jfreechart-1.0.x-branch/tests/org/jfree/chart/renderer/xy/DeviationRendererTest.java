@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------
- * DeviationRendererTests.java
- * ---------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * DeviationRendererTest.java
+ * --------------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,19 +41,13 @@
 
 package org.jfree.chart.renderer.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.renderer.xy.DeviationRenderer;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -133,16 +127,7 @@ public class DeviationRendererTest extends TestCase {
      */
     public void testSerialization() throws IOException, ClassNotFoundException {
         DeviationRenderer r1 = new DeviationRenderer();
-        DeviationRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (DeviationRenderer) in.readObject();
-        in.close();
+        DeviationRenderer r2 = (DeviationRenderer) TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------------
- * CandlestickRendererTests.java
- * -----------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * ----------------------------
+ * CandlestickRendererTest.java
+ * ----------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,20 +48,14 @@ package org.jfree.chart.renderer.xy;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.renderer.xy.CandlestickRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultOHLCDataset;
 import org.jfree.data.xy.OHLCDataItem;
@@ -215,15 +209,8 @@ public class CandlestickRendererTest extends TestCase {
      */
     public void testSerialization() throws IOException, ClassNotFoundException {
         CandlestickRenderer r1 = new CandlestickRenderer();
-        CandlestickRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (CandlestickRenderer) in.readObject();
-        in.close();
+        CandlestickRenderer r2 = (CandlestickRenderer) 
+                TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

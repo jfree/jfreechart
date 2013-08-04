@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------
- * XYLineAndShapeRendererTests.java
- * --------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * -------------------------------
+ * XYLineAndShapeRendererTest.java
+ * -------------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,13 +46,6 @@ package org.jfree.chart.renderer.xy;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -61,10 +54,10 @@ import junit.framework.TestSuite;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.urls.TimeSeriesURLGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.xy.TableXYDataset;
@@ -248,17 +241,10 @@ public class XYLineAndShapeRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
-        XYLineAndShapeRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (XYLineAndShapeRenderer) in.readObject();
-        in.close();
+        XYLineAndShapeRenderer r2 = (XYLineAndShapeRenderer) 
+                TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

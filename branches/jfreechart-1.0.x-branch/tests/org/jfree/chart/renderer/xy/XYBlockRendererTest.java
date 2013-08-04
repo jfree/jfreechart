@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------
- * XYBlockRendererTests.java
- * -------------------------
- * (C) Copyright 2006-2011, by Object Refinery Limited and Contributors.
+ * ------------------------
+ * XYBlockRendererTest.java
+ * ------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,21 +44,14 @@
 package org.jfree.chart.renderer.xy;
 
 import java.awt.Color;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.renderer.GrayPaintScale;
 import org.jfree.chart.renderer.LookupPaintScale;
-import org.jfree.chart.renderer.xy.XYBlockRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -164,18 +157,9 @@ public class XYBlockRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYBlockRenderer r1 = new XYBlockRenderer();
-        XYBlockRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (XYBlockRenderer) in.readObject();
-        in.close();
+        XYBlockRenderer r2 = (XYBlockRenderer) TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

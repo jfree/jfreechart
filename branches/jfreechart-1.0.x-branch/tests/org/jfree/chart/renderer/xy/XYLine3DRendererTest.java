@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------
- * XYLine3DRendererTests.java
- * --------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited.
+ * -------------------------
+ * XYLine3DRendererTest.java
+ * -------------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,19 +43,12 @@ package org.jfree.chart.renderer.xy;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.renderer.xy.XYLine3DRenderer;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -143,20 +136,11 @@ public class XYLine3DRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYLine3DRenderer r1 = new XYLine3DRenderer();
         r1.setWallPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.blue));
-        XYLine3DRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (XYLine3DRenderer) in.readObject();
-        in.close();
+        XYLine3DRenderer r2 = (XYLine3DRenderer) TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 
