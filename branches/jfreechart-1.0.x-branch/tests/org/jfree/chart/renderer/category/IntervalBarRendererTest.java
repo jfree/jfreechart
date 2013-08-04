@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------------
- * IntervalBarRendererTests.java
- * -----------------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
+ * ----------------------------
+ * IntervalBarRendererTest.java
+ * ----------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,23 +42,15 @@
 
 package org.jfree.chart.renderer.category;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.IntervalBarRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultIntervalCategoryDataset;
 import org.jfree.util.PublicCloneable;
@@ -135,20 +127,7 @@ public class IntervalBarRendererTest extends TestCase {
      */
     public void testSerialization() {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
-        IntervalBarRenderer r2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            r2 = (IntervalBarRenderer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        IntervalBarRenderer r2 = (IntervalBarRenderer) TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

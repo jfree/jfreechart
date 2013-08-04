@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------
- * MinMaxCategoryRendererTests.java
- * --------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -------------------------------
+ * MinMaxCategoryRendererTest.java
+ * -------------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,23 +45,17 @@ package org.jfree.chart.renderer.category;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.PublicCloneable;
 
@@ -150,16 +144,8 @@ public class MinMaxCategoryRendererTest extends TestCase {
      */
     public void testSerialization() throws IOException, ClassNotFoundException {
         MinMaxCategoryRenderer r1 = new MinMaxCategoryRenderer();
-        MinMaxCategoryRenderer r2;
-
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        r2 = (MinMaxCategoryRenderer) in.readObject();
-        in.close();
+        MinMaxCategoryRenderer r2 = (MinMaxCategoryRenderer) 
+                TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -51,6 +51,7 @@ import java.io.ObjectOutputStream;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.util.PublicCloneable;
@@ -114,15 +115,8 @@ public class StandardBarPainterTest extends TestCase {
      */
     public void testSerialization() throws IOException, ClassNotFoundException {
         StandardBarPainter p1 = new StandardBarPainter();
-        StandardBarPainter p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (StandardBarPainter) in.readObject();
-        in.close();
+        StandardBarPainter p2 = (StandardBarPainter) 
+                TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 
