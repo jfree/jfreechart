@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------------
- * BoxAndWhiskerCalculatorTests.java
- * ---------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * --------------------------------
+ * BoxAndWhiskerCalculatorTest.java
+ * --------------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,9 +46,6 @@ import java.util.List;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.statistics.BoxAndWhiskerCalculator;
-import org.jfree.data.statistics.BoxAndWhiskerItem;
 
 /**
  * Tests for the {@link BoxAndWhiskerCalculator} class.
