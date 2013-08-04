@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------
- * BarRendererTests.java
- * ---------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
+ * --------------------
+ * BarRendererTest.java
+ * --------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,13 +49,6 @@
 package org.jfree.chart.renderer.category;
 
 import java.awt.Color;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -63,14 +56,13 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.GradientBarPainter;
 import org.jfree.chart.renderer.RendererChangeDetector;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -232,18 +224,9 @@ public class BarRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         BarRenderer r1 = new BarRenderer();
-        BarRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (BarRenderer) in.readObject();
-        in.close();
+        BarRenderer r2 = (BarRenderer) TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 
