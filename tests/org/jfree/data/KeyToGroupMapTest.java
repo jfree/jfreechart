@@ -40,19 +40,10 @@
 
 package org.jfree.data;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.KeyToGroupMap;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link KeyToGroupMap} class.
@@ -259,19 +250,9 @@ public class KeyToGroupMapTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         KeyToGroupMap m1 = new KeyToGroupMap("Test");
-        KeyToGroupMap m2;
-
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(m1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        m2 = (KeyToGroupMap) in.readObject();
-        in.close();
+        KeyToGroupMap m2 = (KeyToGroupMap) TestUtilities.serialised(m1);
         assertEquals(m1, m2);
     }
 

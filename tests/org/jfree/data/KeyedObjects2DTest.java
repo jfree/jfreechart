@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * KeyedObjects2DTests.java
- * ------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * KeyedObjects2DTest.java
+ * -----------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,20 +42,10 @@
 
 package org.jfree.data;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.KeyedObjects2D;
-import org.jfree.data.UnknownKeyException;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link KeyedObjects2D} class.
@@ -116,23 +106,14 @@ public class KeyedObjects2DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         KeyedObjects2D ko2D1 = new KeyedObjects2D();
         ko2D1.addObject(new Double(234.2), "Row1", "Col1");
         ko2D1.addObject(null, "Row1", "Col2");
         ko2D1.addObject(new Double(345.9), "Row2", "Col1");
         ko2D1.addObject(new Double(452.7), "Row2", "Col2");
 
-        KeyedObjects2D ko2D2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(ko2D1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        ko2D2 = (KeyedObjects2D) in.readObject();
-        in.close();
+        KeyedObjects2D ko2D2 = (KeyedObjects2D) TestUtilities.serialised(ko2D1);
         assertEquals(ko2D1, ko2D2);
     }
 

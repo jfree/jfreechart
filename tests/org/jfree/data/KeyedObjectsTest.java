@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * KeyedObjectsTests.java
- * ----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * ---------------------
+ * KeyedObjectsTest.java
+ * ---------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,21 +42,13 @@
 
 package org.jfree.data;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.KeyedObjects;
-import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.DefaultPieDataset;
 
 /**
@@ -175,22 +167,12 @@ public class KeyedObjectsTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
-
+    public void testSerialization() {
         KeyedObjects ko1 = new KeyedObjects();
         ko1.addObject("Key 1", "Object 1");
         ko1.addObject("Key 2", null);
         ko1.addObject("Key 3", "Object 2");
-
-        KeyedObjects ko2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(ko1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        ko2 = (KeyedObjects) in.readObject();
-        in.close();
+        KeyedObjects ko2 = (KeyedObjects) TestUtilities.serialised(ko1);
         assertEquals(ko1, ko2);
     }
 

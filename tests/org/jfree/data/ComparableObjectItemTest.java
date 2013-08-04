@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------
- * ComparableObjectItemTests.java
- * ------------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * -----------------------------
+ * ComparableObjectItemTest.java
+ * -----------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,11 @@
 
 package org.jfree.data;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.ComparableObjectItem;
 
 /**
  * Tests for the {@link ComparableObjectItem} class.
@@ -130,19 +122,11 @@ public class ComparableObjectItemTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
-        ComparableObjectItem item2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(item1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        item2 = (ComparableObjectItem) in.readObject();
-        in.close();
+        ComparableObjectItem item2 = (ComparableObjectItem) 
+                TestUtilities.serialised(item1);
         assertEquals(item1, item2);
     }
 

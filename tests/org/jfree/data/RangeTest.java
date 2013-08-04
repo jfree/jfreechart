@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------
- * RangeTests.java
- * ---------------
- * (C) Copyright 2003-2012, by Object Refinery Limited and Contributors.
+ * --------------
+ * RangeTest.java
+ * --------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sergei Ivanov;
@@ -42,18 +42,10 @@
 
 package org.jfree.data;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.Range;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link Range} class.
@@ -305,26 +297,9 @@ public class RangeTest extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         Range r1 = new Range(25.0, 133.42);
-        Range r2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(r1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            r2 = (Range) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail("Serialization is not supported");
-        }
+        Range r2 = (Range) TestUtilities.serialised(r1);
         assertEquals(r1, r2);
-
     }
 
     private static final double EPSILON = 0.0000000001;
