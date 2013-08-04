@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------
- * ColumnArrangementTests.java
- * ---------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * ColumnArrangementTest.java
+ * --------------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,20 +40,13 @@
 
 package org.jfree.chart.block;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.block.ColumnArrangement;
-import org.jfree.chart.block.FlowArrangement;
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.VerticalAlignment;
 
@@ -134,16 +127,7 @@ public class ColumnArrangementTest extends TestCase {
     public void testSerialization() throws IOException, ClassNotFoundException {
         FlowArrangement f1 = new FlowArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        FlowArrangement f2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(f1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        f2 = (FlowArrangement) in.readObject();
-        in.close();
+        FlowArrangement f2 = (FlowArrangement) TestUtilities.serialised(f1);
         assertEquals(f1, f2);
     }
 

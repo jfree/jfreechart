@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------
- * BlockBorderTests.java
- * ---------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * --------------------
+ * BlockBorderTest.java
+ * --------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,18 +43,12 @@ package org.jfree.chart.block;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.block.BlockBorder;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.UnitType;
 
@@ -124,22 +118,8 @@ public class BlockBorderTest extends TestCase {
         BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
                 4.0), new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.yellow));
-        BlockBorder b2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(b1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            b2 = (BlockBorder) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
-        assertTrue(b1.equals(b2));
+        BlockBorder b2 = (BlockBorder) TestUtilities.serialised(b1);
+        assertEquals(b1, b2);
     }
 
 }

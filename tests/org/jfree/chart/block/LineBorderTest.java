@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * LineBorderTests.java
- * --------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * -------------------
+ * LineBorderTest.java
+ * -------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,18 +43,12 @@ package org.jfree.chart.block;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.block.LineBorder;
 import org.jfree.ui.RectangleInsets;
 
 /**
@@ -129,22 +123,8 @@ public class LineBorderTest extends TestCase {
         LineBorder b1 = new LineBorder(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.yellow), new BasicStroke(1.0f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
-        LineBorder b2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(b1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            b2 = (LineBorder) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
-        assertTrue(b1.equals(b2));
+        LineBorder b2 = (LineBorder) TestUtilities.serialised(b1);
+        assertEquals(b1, b2);
     }
 
 }

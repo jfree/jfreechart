@@ -27,7 +27,7 @@
  * --------------------
  * ColorBlockTests.java
  * --------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,18 +43,11 @@ package org.jfree.chart.block;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.block.ColorBlock;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link ColorBlock} class.
@@ -139,21 +132,7 @@ public class ColorBlockTest extends TestCase {
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.blue);
         ColorBlock b1 = new ColorBlock(gp, 1.0, 2.0);
-        ColorBlock b2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(b1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            b2 = (ColorBlock) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
+        ColorBlock b2 = (ColorBlock) TestUtilities.serialised(b1);
         assertEquals(b1, b2);
     }
 

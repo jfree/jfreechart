@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------
- * GridArrangementTests.java
- * -------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * ------------------------
+ * GridArrangementTest.java
+ * ------------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,24 +41,12 @@
 
 package org.jfree.chart.block;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.block.Block;
-import org.jfree.chart.block.BlockContainer;
-import org.jfree.chart.block.EmptyBlock;
-import org.jfree.chart.block.GridArrangement;
-import org.jfree.chart.block.LengthConstraintType;
-import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.data.Range;
 import org.jfree.ui.Size2D;
 
@@ -116,17 +104,9 @@ public class GridArrangementTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         GridArrangement f1 = new GridArrangement(33, 44);
-        GridArrangement f2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(f1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        f2 = (GridArrangement) in.readObject();
-        in.close();
+        GridArrangement f2 = (GridArrangement) TestUtilities.serialised(f1);
         assertEquals(f1, f2);
     }
 

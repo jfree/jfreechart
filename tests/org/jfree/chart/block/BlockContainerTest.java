@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * BlockContainerTests.java
- * ------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * BlockContainerTest.java
+ * -----------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,21 +40,10 @@
 
 package org.jfree.chart.block;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.block.BlockContainer;
-import org.jfree.chart.block.ColumnArrangement;
-import org.jfree.chart.block.EmptyBlock;
-import org.jfree.chart.block.FlowArrangement;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link BlockContainer} class.
@@ -117,22 +106,7 @@ public class BlockContainerTest extends TestCase {
     public void testSerialization() {
         BlockContainer c1 = new BlockContainer();
         c1.add(new EmptyBlock(1.2, 3.4));
-        BlockContainer c2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(c1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray())
-            );
-            c2 = (BlockContainer) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
+        BlockContainer c2 = (BlockContainer) TestUtilities.serialised(c1);
         assertEquals(c1, c2);
     }
 
