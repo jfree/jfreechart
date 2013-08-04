@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------------------
- * XIntervalSeriesCollectionTests.java
- * -----------------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * ----------------------------------
+ * XIntervalSeriesCollectionTest.java
+ * ----------------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,20 +42,11 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.xy.XIntervalSeries;
-import org.jfree.data.xy.XIntervalSeriesCollection;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -135,19 +126,12 @@ public class XIntervalSeriesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XIntervalSeriesCollection c1 = new XIntervalSeriesCollection();
         XIntervalSeries s1 = new XIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
-        XIntervalSeriesCollection c2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(c1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        c2 = (XIntervalSeriesCollection) in.readObject();
-        in.close();
+        XIntervalSeriesCollection c2 = (XIntervalSeriesCollection) 
+                TestUtilities.serialised(c1);
         assertEquals(c1, c2);
     }
 

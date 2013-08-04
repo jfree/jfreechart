@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------
- * XYSeriesCollectionTests.java
- * ----------------------------
- * (C) Copyright 2003-2012, by Object Refinery Limited and Contributors.
+ * ---------------------------
+ * XYSeriesCollectionTest.java
+ * ---------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,22 +49,13 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -114,28 +105,28 @@ public class XYSeriesCollectionTest extends TestCase {
         s2.add(1.0, 1.1);
         XYSeriesCollection c2 = new XYSeriesCollection();
         c2.addSeries(s2);
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c1));
+        assertEquals(c1, c2);
+        assertEquals(c2, c1);
 
         c1.addSeries(new XYSeries("Empty Series"));
         assertFalse(c1.equals(c2));
         c2.addSeries(new XYSeries("Empty Series"));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setIntervalWidth(5.0);
         assertFalse(c1.equals(c2));
         c2.setIntervalWidth(5.0);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setIntervalPositionFactor(0.75);
         assertFalse(c1.equals(c2));
         c2.setIntervalPositionFactor(0.75);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.setAutoWidth(true);
         assertFalse(c1.equals(c2));
         c2.setAutoWidth(true);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
     }
 
@@ -148,9 +139,9 @@ public class XYSeriesCollectionTest extends TestCase {
         XYSeriesCollection c1 = new XYSeriesCollection();
         c1.addSeries(s1);
         XYSeriesCollection c2 = (XYSeriesCollection) c1.clone();
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
 
         // check independence
         s1.setDescription("XYZ");
@@ -168,21 +159,13 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
         XYSeriesCollection c1 = new XYSeriesCollection();
         c1.addSeries(s1);
-        XYSeriesCollection c2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(c1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        c2 = (XYSeriesCollection) in.readObject();
-        in.close();
+        XYSeriesCollection c2 = (XYSeriesCollection) 
+                TestUtilities.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -213,23 +196,21 @@ public class XYSeriesCollectionTest extends TestCase {
         c.addSeries(s1);
         assertEquals("s1", c.getSeries(0).getKey());
 
-        boolean pass = false;
         try {
             c.getSeries(-1);
+            fail("Should have thrown IndexOutOfBoundsException on negative key");
         }
         catch (IllegalArgumentException e) {
-            pass = true;
+            assertEquals("Series index out of bounds", e.getMessage());
         }
-        assertTrue(pass);
 
-        pass = false;
         try {
             c.getSeries(1);
+            fail("Should have thrown IndexOutOfBoundsException on key out of range");
         }
         catch (IllegalArgumentException e) {
-            pass = true;
+            assertEquals("Series index out of bounds", e.getMessage());
         }
-        assertTrue(pass);
     }
 
     /**
@@ -241,23 +222,21 @@ public class XYSeriesCollectionTest extends TestCase {
         c.addSeries(s1);
         assertEquals("s1", c.getSeries("s1").getKey());
 
-        boolean pass = false;
         try {
             c.getSeries("s2");
+            fail("Should have thrown UnknownKeyException on unknown key");
         }
         catch (UnknownKeyException e) {
-            pass = true;
+            assertEquals("Key not found: s2", e.getMessage());
         }
-        assertTrue(pass);
 
-        pass = false;
         try {
             c.getSeries(null);
+            fail("Should have thrown IndexOutOfBoundsException on null key");
         }
         catch (IllegalArgumentException e) {
-            pass = true;
+            assertEquals("Null 'key' argument.", e.getMessage());
         }
-        assertTrue(pass);
     }
     
     /**
@@ -271,13 +250,12 @@ public class XYSeriesCollectionTest extends TestCase {
         // the dataset should prevent the addition of a series with the
         // same name as an existing series in the dataset
         XYSeries s2 = new XYSeries("s1");
-        boolean pass = false;
         try {
             c.addSeries(s2);
-        } catch (RuntimeException e) {
-            pass = true;
+            fail("Should have thrown IllegalArgumentException on duplicate key");
+        } catch (IllegalArgumentException e) {
+            assertEquals("This dataset already contains a series with the key s1", e.getMessage());
         }
-        assertTrue(pass);
         assertEquals(1, c.getSeriesCount());
     }
 
@@ -292,23 +270,21 @@ public class XYSeriesCollectionTest extends TestCase {
         assertEquals(0, c.getSeriesCount());
         c.addSeries(s1);
 
-        boolean pass = false;
         try {
             c.removeSeries(-1);
+            fail("Should have thrown IndexOutOfBoundsException on negative key");
         }
         catch (IllegalArgumentException e) {
-            pass = true;
+            assertEquals("Series index out of bounds.", e.getMessage());
         }
-        assertTrue(pass);
 
-        pass = false;
         try {
             c.removeSeries(1);
+            fail("Should have thrown IndexOutOfBoundsException on key out of range");
         }
         catch (IllegalArgumentException e) {
-            pass = true;
+            assertEquals("Series index out of bounds.", e.getMessage());
         }
-        assertTrue(pass);
     }
 
     /**
@@ -407,14 +383,14 @@ public class XYSeriesCollectionTest extends TestCase {
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(s1);
         dataset.addSeries(s2);
-        boolean pass = false;
+
         try {
             s2.setKey("S1");
+            fail("Should have thrown IndexOutOfBoundsException on negative key");
         }
-        catch (RuntimeException e) {
-           pass = true;
+        catch (IllegalArgumentException e) {
+           assertEquals("java.beans.PropertyVetoException: Duplicate key", e.getMessage());
         }
-        assertTrue(pass);
     }
 
     /**

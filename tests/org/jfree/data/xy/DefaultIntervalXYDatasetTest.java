@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------------
- * DefaultIntervalXYDatasetTests.java
- * ----------------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * ---------------------------------
+ * DefaultIntervalXYDatasetTest.java
+ * ---------------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,19 +42,11 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.xy.DefaultIntervalXYDataset;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -285,31 +277,15 @@ public class DefaultIntervalXYDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
-        DefaultIntervalXYDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        d2 = (DefaultIntervalXYDataset) in.readObject();
-        in.close();
+        DefaultIntervalXYDataset d2 = (DefaultIntervalXYDataset) 
+                TestUtilities.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
-        buffer = new ByteArrayOutputStream();
-        out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-
-        in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (DefaultIntervalXYDataset) in.readObject();
-        in.close();
+        d2 = (DefaultIntervalXYDataset) TestUtilities.serialised(d1);
         assertEquals(d1, d2);
     }
 

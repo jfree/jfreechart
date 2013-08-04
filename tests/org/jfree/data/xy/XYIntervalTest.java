@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * XYIntervalTests.java
- * --------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * -------------------
+ * XYIntervalTest.java
+ * -------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.xy.XYInterval;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link XYInterval} class.
@@ -122,18 +113,9 @@ public class XYIntervalTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYInterval i1 = new XYInterval(1.0, 2.0, 3.0, 2.5, 3.5);
-        XYInterval i2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(i1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        i2 = (XYInterval) in.readObject();
-        in.close();
+        XYInterval i2 = (XYInterval) TestUtilities.serialised(i1);
         assertEquals(i1, i2);
     }
 

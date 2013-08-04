@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * XYBarDatasetTests.java
- * ----------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * ---------------------
+ * XYBarDatasetTest.java
+ * ---------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,20 +41,11 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.xy.DefaultXYDataset;
-import org.jfree.data.xy.XYBarDataset;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -141,23 +132,14 @@ public class XYBarDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultXYDataset d1 = new DefaultXYDataset();
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] y1 = new double[] {4.0, 5.0, 6.0};
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
         XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
-        XYBarDataset bd2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(bd1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        bd2 = (XYBarDataset) in.readObject();
-        in.close();
+        XYBarDataset bd2 = (XYBarDataset) TestUtilities.serialised(bd1);
         assertEquals(bd1, bd2);
     }
 

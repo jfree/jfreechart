@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * OHLCDataItemTests.java
- * ----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * ---------------------
+ * OHLCDataItemTest.java
+ * ---------------------
+ * (C) Copyright 2005-2013 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,20 +40,12 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.xy.OHLCDataItem;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link OHLCDataItem} class.
@@ -105,20 +97,10 @@ public class OHLCDataItemTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         OHLCDataItem i1 = new OHLCDataItem(new Date(1L), 1.0, 2.0, 3.0, 4.0, 
                 5.0);
-        OHLCDataItem i2;
-
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(i1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        i2 = (OHLCDataItem) in.readObject();
-        in.close();
+        OHLCDataItem i2 = (OHLCDataItem) TestUtilities.serialised(i1);
         assertEquals(i1, i2);
     }
 

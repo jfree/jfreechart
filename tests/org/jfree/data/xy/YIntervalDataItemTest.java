@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------
- * YIntervalDataItemTests.java
- * ---------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * YIntervalDataItemTest.java
+ * --------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.xy.YIntervalDataItem;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link YIntervalDataItem} class.
@@ -138,18 +129,10 @@ public class YIntervalDataItemTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         YIntervalDataItem item1 = new YIntervalDataItem(1.0, 2.0, 1.5, 2.5);
-        YIntervalDataItem item2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(item1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        item2 = (YIntervalDataItem) in.readObject();
-        in.close();
+        YIntervalDataItem item2 = (YIntervalDataItem) 
+                TestUtilities.serialised(item1);
         assertEquals(item1, item2);
     }
 

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------
- * CategoryTableXYDatasetTests.java
- * --------------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * -------------------------------
+ * CategoryTableXYDatasetTest.java
+ * -------------------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,19 +41,11 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.xy.CategoryTableXYDataset;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -164,24 +156,13 @@ public class CategoryTableXYDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
-
+    public void testSerialization() {
         CategoryTableXYDataset d1 = new CategoryTableXYDataset();
         d1.add(1.0, 1.1, "Series 1");
         d1.add(2.0, 2.2, "Series 1");
-
-        CategoryTableXYDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (CategoryTableXYDataset) in.readObject();
-        in.close();
+        CategoryTableXYDataset d2 = (CategoryTableXYDataset) 
+                TestUtilities.serialised(d1);
         assertEquals(d1, d2);
-
     }
 
     private static final double EPSILON = 0.0000000001;
