@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------
- * AbstractDialLayerTests.java
- * ---------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * AbstractDialLayerTest.java
+ * --------------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,20 +40,10 @@
 
 package org.jfree.chart.plot.dial;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.plot.dial.AbstractDialLayer;
-import org.jfree.chart.plot.dial.DialCap;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link AbstractDialLayer} class.
@@ -114,18 +104,10 @@ public class AbstractDialLayerTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(c1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        c2 = (DialCap) in.readObject();
-        in.close();
+        DialCap c2 = (DialCap) TestUtilities.serialised(c1);
         assertEquals(c1, c2);
 
         // check that the listener lists are independent

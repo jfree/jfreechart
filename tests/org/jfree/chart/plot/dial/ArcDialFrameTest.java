@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * ArcDialFrameTests.java
- * ----------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * ---------------------
+ * ArcDialFrameTest.java
+ * ---------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,19 +44,11 @@ package org.jfree.chart.plot.dial;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.plot.dial.ArcDialFrame;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link ArcDialFrame} class.
@@ -174,18 +166,9 @@ public class ArcDialFrameTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         ArcDialFrame f1 = new ArcDialFrame();
-        ArcDialFrame f2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(f1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        f2 = (ArcDialFrame) in.readObject();
-        in.close();
+        ArcDialFrame f2 = (ArcDialFrame) TestUtilities.serialised(f1);
         assertEquals(f1, f2);
     }
 

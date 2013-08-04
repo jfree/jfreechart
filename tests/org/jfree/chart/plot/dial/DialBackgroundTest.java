@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * DialBackgroundTests.java
- * ------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * DialBackgroundTest.java
+ * -----------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,19 +42,12 @@ package org.jfree.chart.plot.dial;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.plot.dial.DialBackground;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.StandardGradientPaintTransformer;
 
@@ -157,18 +150,10 @@ public class DialBackgroundTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         // test a default instance
         DialBackground b1 = new DialBackground();
-        DialBackground b2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(b1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        b2 = (DialBackground) in.readObject();
-        in.close();
+        DialBackground b2 = (DialBackground) TestUtilities.serialised(b1);
         assertEquals(b1, b2);
 
         // test a customised instance
@@ -178,15 +163,7 @@ public class DialBackgroundTest extends TestCase {
         b1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
 
-        buffer = new ByteArrayOutputStream();
-        out = new ObjectOutputStream(buffer);
-        out.writeObject(b1);
-        out.close();
-
-        in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        b2 = (DialBackground) in.readObject();
-        in.close();
+        b2 = (DialBackground) TestUtilities.serialised(b1);
         assertEquals(b1, b2);
     }
 
