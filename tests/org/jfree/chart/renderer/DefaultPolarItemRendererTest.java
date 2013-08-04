@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------------
- * DefaultPolarItemRendererTests.java
- * ----------------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * ---------------------------------
+ * DefaultPolarItemRendererTest.java
+ * ---------------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,19 +41,10 @@
 
 package org.jfree.chart.renderer;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.renderer.DefaultPolarItemRenderer;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link DefaultPolarItemRenderer} class.
@@ -125,17 +116,10 @@ public class DefaultPolarItemRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultPolarItemRenderer r1 = new DefaultPolarItemRenderer();
-        DefaultPolarItemRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (DefaultPolarItemRenderer) in.readObject();
-        in.close();
+        DefaultPolarItemRenderer r2 = (DefaultPolarItemRenderer) 
+                TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

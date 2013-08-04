@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------
- * OutlierTests.java
- * -----------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * ----------------
+ * OutlierTest.java
+ * ----------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,9 +46,6 @@ import java.io.Serializable;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.renderer.Outlier;
-
 
 /**
  * Tests for the {@link Outlier} class.

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------
- * LookupPaintScaleTests.java
- * --------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * -------------------------
+ * LookupPaintScaleTest.java
+ * -------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,19 +45,11 @@ package org.jfree.chart.renderer;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.renderer.LookupPaintScale;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link LookupPaintScale} class.
@@ -134,31 +126,16 @@ public class LookupPaintScaleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         LookupPaintScale g1 = new LookupPaintScale();
-        LookupPaintScale g2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        g2 = (LookupPaintScale) in.readObject();
-        in.close();
+        LookupPaintScale g2 = (LookupPaintScale) TestUtilities.serialised(g1);
         assertEquals(g1, g2);
 
         g1 = new LookupPaintScale(1.0, 2.0, new GradientPaint(1.0f, 2.0f,
                 Color.red, 3.0f, 4.0f, Color.yellow));
         g1.add(1.5, new GradientPaint(1.1f, 2.2f, Color.red, 3.3f, 4.4f,
                 Color.blue));
-        buffer = new ByteArrayOutputStream();
-        out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-        in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        g2 = (LookupPaintScale) in.readObject();
-        in.close();
+        g2 = (LookupPaintScale) TestUtilities.serialised(g1);
         assertEquals(g1, g2);
     }
 

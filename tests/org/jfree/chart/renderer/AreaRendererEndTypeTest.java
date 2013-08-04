@@ -24,9 +24,9 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------------
- * AreaRendererEndTypeTests.java
- * -----------------------------
+ * ----------------------------
+ * AreaRendererEndTypeTest.java
+ * ----------------------------
  * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -40,19 +40,10 @@
 
 package org.jfree.chart.renderer;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.renderer.AreaRendererEndType;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link AreaRendererEndType} class.
@@ -91,17 +82,9 @@ public class AreaRendererEndTypeTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         AreaRendererEndType t1 = AreaRendererEndType.TAPER;
-        AreaRendererEndType t2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(t1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        t2 = (AreaRendererEndType) in.readObject();
-        in.close();
+        AreaRendererEndType t2 = (AreaRendererEndType) TestUtilities.serialised(t1);
         assertEquals(t1, t2);
         boolean same = t1 == t2;
         assertEquals(true, same);
