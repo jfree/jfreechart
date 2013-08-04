@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * DateTitleTests.java
- * -------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * ------------------
+ * DateTitleTest.java
+ * ------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,19 +42,12 @@ package org.jfree.chart.title;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.title.DateTitle;
 
 /**
  * Tests for the {@link DateTitle} class.
@@ -136,18 +129,9 @@ public class DateTitleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DateTitle t1 = new DateTitle();
-        DateTitle t2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(t1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        t2 = (DateTitle) in.readObject();
-        in.close();
+        DateTitle t2 = (DateTitle) TestUtilities.serialised(t1);
         assertEquals(t1, t2);
     }
 

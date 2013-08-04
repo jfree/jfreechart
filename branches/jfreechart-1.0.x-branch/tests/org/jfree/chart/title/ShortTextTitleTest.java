@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * ShortTextTitleTests.java
- * ------------------------
- * (C) Copyright 2008, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * ShortTextTitleTest.java
+ * -----------------------
+ * (C) Copyright 2008-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.chart.title;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.title.ShortTextTitle;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link ShortTextTitle} class.
@@ -117,17 +108,9 @@ public class ShortTextTitleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
-        ShortTextTitle t2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(t1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        t2 = (ShortTextTitle) in.readObject();
-        in.close();
+        ShortTextTitle t2 = (ShortTextTitle) TestUtilities.serialised(t1);
         assertEquals(t1, t2);
     }
 
