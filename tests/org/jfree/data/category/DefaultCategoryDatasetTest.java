@@ -43,20 +43,14 @@
 
 package org.jfree.data.category;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.UnknownKeyException;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -228,15 +222,8 @@ public class DefaultCategoryDatasetTest extends TestCase {
     public void testSerialization() throws IOException, ClassNotFoundException {
         DefaultCategoryDataset d1 = new DefaultCategoryDataset();
         d1.setValue(23.4, "R1", "C1");
-        DefaultCategoryDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (DefaultCategoryDataset) in.readObject();
-        in.close();
+        DefaultCategoryDataset d2 = (DefaultCategoryDataset) 
+                TestUtilities.serialised(d1);
         assertEquals(d1, d2);
     }
 

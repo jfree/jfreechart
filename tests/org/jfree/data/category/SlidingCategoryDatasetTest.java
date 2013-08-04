@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------
- * SlidingCategoryDatasetTests.java
- * --------------------------------
- * (C) Copyright 2008, 2009, by Object Refinery Limited and Contributors.
+ * -------------------------------
+ * SlidingCategoryDatasetTest.java
+ * -------------------------------
+ * (C) Copyright 2008-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,22 +41,15 @@
 
 package org.jfree.data.category;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.UnknownKeyException;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.category.SlidingCategoryDataset;
 
 /**
  * Tests for the {@link SlidingCategoryDataset} class.
@@ -142,15 +135,8 @@ public class SlidingCategoryDatasetTest extends TestCase {
         u1.addValue(1.0, "R1", "C1");
         u1.addValue(2.0, "R1", "C2");
         SlidingCategoryDataset d1 = new SlidingCategoryDataset(u1, 0, 5);
-        SlidingCategoryDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (SlidingCategoryDataset) in.readObject();
-        in.close();
+        SlidingCategoryDataset d2 = (SlidingCategoryDataset) 
+                TestUtilities.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------------------
- * DefaultIntervalCategoryDatasetTests.java
- * ----------------------------------------
- * (C) Copyright 2007-2009, by Object Refinery Limited and Contributors.
+ * ---------------------------------------
+ * DefaultIntervalCategoryDatasetTest.java
+ * ---------------------------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,22 +42,15 @@
 
 package org.jfree.data.category;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.DataUtilities;
 import org.jfree.data.UnknownKeyException;
-import org.jfree.data.category.DefaultIntervalCategoryDataset;
 
 /**
  * Tests for the {@link DefaultIntervalCategoryDataset} class.
@@ -199,7 +192,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         double[] starts_S1 = new double[] {0.1, 0.2, 0.3};
         double[] starts_S2 = new double[] {0.3, 0.4, 0.5};
         double[] ends_S1 = new double[] {0.5, 0.6, 0.7};
@@ -208,15 +201,8 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
         double[][] ends = new double[][] {ends_S1, ends_S2};
         DefaultIntervalCategoryDataset d1
                 = new DefaultIntervalCategoryDataset(starts, ends);
-        DefaultIntervalCategoryDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (DefaultIntervalCategoryDataset) in.readObject();
-        in.close();
+        DefaultIntervalCategoryDataset d2 = (DefaultIntervalCategoryDataset) 
+                TestUtilities.serialised(d1);
         assertEquals(d1, d2);
     }
 
