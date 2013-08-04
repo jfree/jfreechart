@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------
- * PlotRenderingInfoTests.java
- * ---------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * PlotRenderingInfoTest.java
+ * --------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,20 +42,14 @@ package org.jfree.chart.plot;
 
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link PlotRenderingInfo} class.
@@ -136,18 +130,9 @@ public class PlotRenderingInfoTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
-        PlotRenderingInfo p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (PlotRenderingInfo) in.readObject();
-        in.close();
+        PlotRenderingInfo p2 = (PlotRenderingInfo) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 

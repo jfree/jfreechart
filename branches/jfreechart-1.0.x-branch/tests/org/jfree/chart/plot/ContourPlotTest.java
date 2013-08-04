@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------
- * ContourPlotTests.java
- * ---------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * --------------------
+ * ContourPlotTest.java
+ * --------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.chart.plot;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.plot.ContourPlot;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the <code>ContourPlot</code> class.
@@ -80,18 +71,9 @@ public class ContourPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         ContourPlot p1 = new ContourPlot(null, null, null, null);
-        ContourPlot p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (ContourPlot) in.readObject();
-        in.close();
+        ContourPlot p2 = (ContourPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 

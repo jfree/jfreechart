@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * PolarPlotTests.java
- * -------------------
- * (C) Copyright 2005-2011, by Object Refinery Limited and Contributors.
+ * ------------------
+ * PolarPlotTest.java
+ * ------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -53,13 +53,6 @@ import java.awt.GradientPaint;
 import java.awt.Point;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -67,11 +60,11 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.LogAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.renderer.DefaultPolarItemRenderer;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.XYSeries;
@@ -276,8 +269,7 @@ public class PolarPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
-
+    public void testSerialization() {
         PolarPlot p1 = new PolarPlot();
         p1.setAngleGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.blue));
@@ -285,16 +277,7 @@ public class PolarPlotTest extends TestCase {
                 4.0f, Color.blue));
         p1.setRadiusGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.blue));
-        PolarPlot p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        p2 = (PolarPlot) in.readObject();
-        in.close();
+        PolarPlot p2 = (PolarPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 

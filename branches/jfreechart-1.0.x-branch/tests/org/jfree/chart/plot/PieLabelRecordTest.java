@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * PieLabelRecordTests.java
- * ------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * PieLabelRecordTest.java
+ * -----------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,20 +40,11 @@
 
 package org.jfree.chart.plot;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.plot.CategoryMarker;
-import org.jfree.chart.plot.PieLabelRecord;
 import org.jfree.text.TextBox;
 
 /**
@@ -139,18 +130,10 @@ public class PieLabelRecordTest extends TestCase {
    /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         PieLabelRecord p1 = new PieLabelRecord("A", 1.0, 2.0, new TextBox("B"),
                 3.0, 4.0, 5.0);
-        PieLabelRecord p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (PieLabelRecord) in.readObject();
-        in.close();
+        PieLabelRecord p2 = (PieLabelRecord) TestUtilities.serialised(p1);
         boolean b = p1.equals(p2);
         assertTrue(b);
     }

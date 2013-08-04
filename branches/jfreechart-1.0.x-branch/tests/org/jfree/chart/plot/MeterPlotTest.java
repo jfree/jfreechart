@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * MeterPlotTests.java
- * -------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * ------------------
+ * MeterPlotTest.java
+ * ------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,22 +46,13 @@ package org.jfree.chart.plot;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.plot.DialShape;
-import org.jfree.chart.plot.MeterInterval;
-import org.jfree.chart.plot.MeterPlot;
 import org.jfree.data.Range;
 import org.jfree.data.general.DefaultValueDataset;
 
@@ -247,7 +238,7 @@ public class MeterPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization1() throws IOException, ClassNotFoundException {
+    public void testSerialization1() {
         MeterPlot p1 = new MeterPlot(null);
         p1.setDialBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
@@ -259,32 +250,16 @@ public class MeterPlotTest extends TestCase {
                 3.0f, 4.0f, Color.blue));
         p1.setTickPaint(new GradientPaint(1.0f, 2.0f, Color.red,
                 3.0f, 4.0f, Color.blue));
-        MeterPlot p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (MeterPlot) in.readObject();
-        in.close();
+        MeterPlot p2 = (MeterPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization2() throws IOException, ClassNotFoundException {
+    public void testSerialization2() {
         MeterPlot p1 = new MeterPlot(new DefaultValueDataset(1.23));
-        MeterPlot p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (MeterPlot) in.readObject();
-        in.close();
+        MeterPlot p2 = (MeterPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
 
     }

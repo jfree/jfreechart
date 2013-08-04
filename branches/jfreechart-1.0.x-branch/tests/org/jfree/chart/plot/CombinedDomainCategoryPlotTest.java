@@ -58,6 +58,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.event.ChartChangeEvent;
@@ -146,17 +147,10 @@ public class CombinedDomainCategoryPlotTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         CombinedDomainCategoryPlot plot1 = createPlot();
-        CombinedDomainCategoryPlot plot2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(plot1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        plot2 = (CombinedDomainCategoryPlot) in.readObject();
-        in.close();
+        CombinedDomainCategoryPlot plot2 = (CombinedDomainCategoryPlot) 
+                TestUtilities.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 

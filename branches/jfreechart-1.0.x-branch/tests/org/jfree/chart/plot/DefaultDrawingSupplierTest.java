@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------
- * DefaultDrawingSupplierTests.java
- * --------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -------------------------------
+ * DefaultDrawingSupplierTest.java
+ * -------------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,19 +46,11 @@ import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.plot.DefaultDrawingSupplier;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link DefaultDrawingSupplier} class.
@@ -203,18 +195,10 @@ public class DefaultDrawingSupplierTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultDrawingSupplier r1 = new DefaultDrawingSupplier();
-        DefaultDrawingSupplier r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (DefaultDrawingSupplier) in.readObject();
-        in.close();
+        DefaultDrawingSupplier r2 = (DefaultDrawingSupplier) 
+                TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

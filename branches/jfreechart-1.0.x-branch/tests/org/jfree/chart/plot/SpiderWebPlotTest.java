@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------
- * SpiderWebPlotTests.java
- * -----------------------
- * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
+ * ----------------------
+ * SpiderWebPlotTest.java
+ * ----------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -52,13 +52,6 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
 
 import junit.framework.Test;
@@ -68,9 +61,9 @@ import junit.framework.TestSuite;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
-import org.jfree.chart.plot.SpiderWebPlot;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.Rotation;
@@ -317,17 +310,9 @@ public class SpiderWebPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
-        SpiderWebPlot p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (SpiderWebPlot) in.readObject();
-        in.close();
+        SpiderWebPlot p2 = (SpiderWebPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * IntervalMarkerTests.java
- * ------------------------
- * (C) Copyright 2004-2007, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * IntervalMarkerTest.java
+ * -----------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,21 +41,14 @@
 
 package org.jfree.chart.plot;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
-import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.StandardGradientPaintTransformer;
@@ -63,9 +56,8 @@ import org.jfree.ui.StandardGradientPaintTransformer;
 /**
  * Tests for the {@link IntervalMarker} class.
  */
-public class IntervalMarkerTest
-    extends TestCase
-    implements MarkerChangeListener {
+public class IntervalMarkerTest extends TestCase implements 
+        MarkerChangeListener {
 
     MarkerChangeEvent lastEvent;
 
@@ -139,19 +131,10 @@ public class IntervalMarkerTest
    /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
-        IntervalMarker m2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(m1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        m2 = (IntervalMarker) in.readObject();
-        in.close();
-        boolean b = m1.equals(m2);
-        assertTrue(b);
+        IntervalMarker m2 = (IntervalMarker) TestUtilities.serialised(m1);
+        assertEquals(m1, m2);
     }
 
     private static final double EPSILON = 0.0000000001;
