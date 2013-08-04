@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------
- * AbstractBlockTests.java
- * -----------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * ----------------------
+ * AbstractBlockTest.java
+ * ----------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,20 +42,12 @@ package org.jfree.chart.block;
 
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.block.AbstractBlock;
-import org.jfree.chart.block.BlockBorder;
-import org.jfree.chart.block.EmptyBlock;
 import org.jfree.ui.RectangleInsets;
 
 /**
@@ -166,21 +158,7 @@ public class AbstractBlockTest extends TestCase {
      */
     public void testSerialization() {
         EmptyBlock b1 = new EmptyBlock(1.0, 2.0);
-        EmptyBlock b2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(b1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            b2 = (EmptyBlock) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
+        EmptyBlock b2 = (EmptyBlock) TestUtilities.serialised(b1);
         assertEquals(b1, b2);
     }
 

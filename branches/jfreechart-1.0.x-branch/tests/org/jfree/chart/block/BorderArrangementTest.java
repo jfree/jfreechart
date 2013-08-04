@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------
- * BorderArrangementTests.java
- * ---------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * BorderArrangementTest.java
+ * --------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,23 +42,12 @@ package org.jfree.chart.block;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.block.Block;
-import org.jfree.chart.block.BlockContainer;
-import org.jfree.chart.block.BorderArrangement;
-import org.jfree.chart.block.EmptyBlock;
-import org.jfree.chart.block.LengthConstraintType;
-import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.Size2D;
@@ -136,21 +125,7 @@ public class BorderArrangementTest extends TestCase {
      */
     public void testSerialization() {
         BorderArrangement b1 = new BorderArrangement();
-        BorderArrangement b2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(b1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            b2 = (BorderArrangement) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
+        BorderArrangement b2 = (BorderArrangement) TestUtilities.serialised(b1);
         assertEquals(b1, b2);
     }
 
