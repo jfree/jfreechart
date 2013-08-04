@@ -24,9 +24,9 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * LongNeedleTests.java
- * --------------------
+ * -------------------
+ * LongNeedleTest.java
+ * -------------------
  * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -40,19 +40,10 @@
 
 package org.jfree.chart.needle;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.needle.LongNeedle;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link LongNeedle} class.
@@ -100,17 +91,9 @@ public class LongNeedleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         LongNeedle n1 = new LongNeedle();
-        LongNeedle n2 = null;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(n1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        n2 = (LongNeedle) in.readObject();
-        in.close();
+        LongNeedle n2 = (LongNeedle) TestUtilities.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 
