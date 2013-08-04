@@ -41,46 +41,30 @@
 
 package org.jfree.chart;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests for a pie chart.
  *
  */
-public class PieChartTest extends TestCase {
+public class PieChartTest  {
 
     /** A chart. */
     private JFreeChart pieChart;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(PieChartTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public PieChartTest(String name) {
-        super(name);
-    }
-
-    /**
      * Common test setup.
      */
-    protected void setUp() {
+    @Before
+    public void setUp() {
 
         this.pieChart = createPieChart();
 
@@ -91,6 +75,7 @@ public class PieChartTest extends TestCase {
      * receive notification of a chart change event, and (of course) the
      * dataset should be null.
      */
+    @Test
     public void testReplaceDatasetOnPieChart() {
         LocalListener l = new LocalListener();
         this.pieChart.addChangeListener(l);
@@ -106,19 +91,11 @@ public class PieChartTest extends TestCase {
      * @return The pie chart.
      */
     private static JFreeChart createPieChart() {
-        // create a dataset...
         DefaultPieDataset data = new DefaultPieDataset();
         data.setValue("Java", new Double(43.2));
         data.setValue("Visual Basic", new Double(0.0));
         data.setValue("C/C++", new Double(17.5));
-
-        // create the chart...
-        return ChartFactory.createPieChart("Pie Chart",  // chart title
-                                           data,         // data
-                                           true,         // include legend
-                                           true,
-                                           false
-                                           );
+        return ChartFactory.createPieChart("Pie Chart", data);
     }
 
     /**
@@ -128,7 +105,7 @@ public class PieChartTest extends TestCase {
     static class LocalListener implements ChartChangeListener {
 
         /** A flag. */
-        private boolean flag = false;
+        private boolean flag;
 
         /**
          * Event handler.

@@ -40,58 +40,42 @@
 
 package org.jfree.chart;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Some tests for a line chart with a 3D effect.
  */
-public class LineChart3DTest extends TestCase {
+public class LineChart3DTest  {
 
     /** A chart. */
     private JFreeChart chart;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LineChart3DTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public LineChart3DTest(String name) {
-        super(name);
-    }
-
-    /**
      * Common test setup.
      */
-    protected void setUp() {
+    @Before
+    public void setUp() {
         this.chart = createLineChart3D();
     }
 
@@ -99,28 +83,22 @@ public class LineChart3DTest extends TestCase {
      * Draws the chart with a null info object to make sure that no exceptions
      * are thrown (a problem that was occurring at one point).
      */
+    @Test
     public void testDrawWithNullInfo() {
 
-        boolean success = false;
-        try {
-            BufferedImage image = new BufferedImage(200 , 100,
-                    BufferedImage.TYPE_INT_RGB);
-            Graphics2D g2 = image.createGraphics();
-            this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
-                    null);
-            g2.dispose();
-            success = true;
-        }
-        catch (Exception e) {
-            success = false;
-        }
-        assertTrue(success);
-
+        BufferedImage image = new BufferedImage(200 , 100,
+                BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
+                null);
+        g2.dispose();
+        //FIXME we should really assert a value here
     }
 
     /**
      * Replaces the chart's dataset and then checks that the new dataset is OK.
      */
+    @Test
     public void testReplaceDataset() {
 
         // create a dataset...
@@ -150,6 +128,7 @@ public class LineChart3DTest extends TestCase {
      * Check that setting a tool tip generator for a series does override the
      * default generator.
      */
+    @Test
     public void testSetSeriesToolTipGenerator() {
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
@@ -157,13 +136,14 @@ public class LineChart3DTest extends TestCase {
                 = new StandardCategoryToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
         CategoryToolTipGenerator tt2 = renderer.getToolTipGenerator(0, 0);
-        assertTrue(tt2 == tt);
+        assertSame(tt2, tt);
     }
 
     /**
      * Check that setting a URL generator for a series does override the
      * default generator.
      */
+    @Test
     public void testSetSeriesURLGenerator() {
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
@@ -171,7 +151,7 @@ public class LineChart3DTest extends TestCase {
                 = new StandardCategoryURLGenerator();
         renderer.setSeriesItemURLGenerator(0, url1);
         CategoryURLGenerator url2 = renderer.getItemURLGenerator(0, 0);
-        assertTrue(url2 == url1);
+        assertSame(url2, url1);
     }
 
     /**
@@ -180,8 +160,6 @@ public class LineChart3DTest extends TestCase {
      * @return The chart.
      */
     private static JFreeChart createLineChart3D() {
-
-        // create a dataset...
         Number[][] data = new Integer[][]
             {{new Integer(-3), new Integer(-2)},
              {new Integer(-1), new Integer(1)},
@@ -189,18 +167,8 @@ public class LineChart3DTest extends TestCase {
 
         CategoryDataset dataset = DatasetUtilities.createCategoryDataset("S",
                 "C", data);
-
-        // create the chart...
-        return ChartFactory.createLineChart3D(
-            "Line Chart",
-            "Domain", "Range",
-            dataset,
-            PlotOrientation.HORIZONTAL,
-            true,     // include legend
-            true,
-            true
-        );
-
+        return ChartFactory.createLineChart3D("Line Chart", "Domain", "Range",
+            dataset);
     }
 
     /**
@@ -210,7 +178,7 @@ public class LineChart3DTest extends TestCase {
     static class LocalListener implements ChartChangeListener {
 
         /** A flag. */
-        private boolean flag = false;
+        private boolean flag;
 
         /**
          * Event handler.
