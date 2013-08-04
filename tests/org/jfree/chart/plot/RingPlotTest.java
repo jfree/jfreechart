@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------
- * RingPlotTests.java
- * ------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * -----------------
+ * RingPlotTest.java
+ * -----------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,19 +45,11 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.plot.RingPlot;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link RingPlot} class.
@@ -150,21 +142,12 @@ public class RingPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         RingPlot p1 = new RingPlot(null);
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.yellow,
                 3.0f, 4.0f, Color.red);
         p1.setSeparatorPaint(gp);
-        RingPlot p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (RingPlot) in.readObject();
-        in.close();
+        RingPlot p2 = (RingPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 

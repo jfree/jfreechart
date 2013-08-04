@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------
- * FastScatterPlotTests.java
- * -------------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
+ * ------------------------
+ * FastScatterPlotTest.java
+ * ------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,22 +46,15 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.plot.FastScatterPlot;
 
 /**
  * Tests for the {@link FastScatterPlot} class.
@@ -207,20 +200,12 @@ public class FastScatterPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         float[][] data = createData();
         ValueAxis domainAxis = new NumberAxis("X");
         ValueAxis rangeAxis = new NumberAxis("Y");
         FastScatterPlot p1 = new FastScatterPlot(data, domainAxis, rangeAxis);
-        FastScatterPlot p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (FastScatterPlot) in.readObject();
-        in.close();
+        FastScatterPlot p2 = (FastScatterPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------
- * MultiplePiePlotTests.java
- * -------------------------
- * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
+ * ------------------------
+ * MultiplePiePlotTest.java
+ * ------------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,13 +48,6 @@ package org.jfree.chart.plot;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -64,9 +57,9 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
-import org.jfree.chart.plot.MultiplePiePlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.TableOrder;
 
@@ -185,19 +178,11 @@ public class MultiplePiePlotTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         MultiplePiePlot p1 = new MultiplePiePlot(null);
         p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
                 3.0f, 4.0f, Color.red));
-        MultiplePiePlot p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (MultiplePiePlot) in.readObject();
-        in.close();
+        MultiplePiePlot p2 = (MultiplePiePlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 

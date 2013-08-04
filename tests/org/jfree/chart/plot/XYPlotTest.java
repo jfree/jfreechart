@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------
- * XYPlotTests.java
- * ----------------
- * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
+ * ---------------
+ * XYPlotTest.java
+ * ---------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -61,7 +61,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -77,17 +76,13 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.event.MarkerChangeListener;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
-import org.jfree.chart.plot.IntervalMarker;
-import org.jfree.chart.plot.Marker;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.ValueMarker;
-import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.DefaultXYItemRenderer;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
@@ -666,30 +661,13 @@ public class XYPlotTest extends TestCase {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization1() {
-
         XYDataset data = new XYSeriesCollection();
         NumberAxis domainAxis = new NumberAxis("Domain");
         NumberAxis rangeAxis = new NumberAxis("Range");
         StandardXYItemRenderer renderer = new StandardXYItemRenderer();
         XYPlot p1 = new XYPlot(data, domainAxis, rangeAxis, renderer);
-        XYPlot p2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(p1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            p2 = (XYPlot) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
+        XYPlot p2 = (XYPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
-
     }
 
     /**
@@ -697,30 +675,13 @@ public class XYPlotTest extends TestCase {
      * uses a {@link DateAxis} and a {@link StandardXYToolTipGenerator}.
      */
     public void testSerialization2() {
-
         IntervalXYDataset data1 = createDataset1();
         XYItemRenderer renderer1 = new XYBarRenderer(0.20);
         renderer1.setBaseToolTipGenerator(
                 StandardXYToolTipGenerator.getTimeSeriesInstance());
         XYPlot p1 = new XYPlot(data1, new DateAxis("Date"), null, renderer1);
-        XYPlot p2 = null;
-
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(p1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            p2 = (XYPlot) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
+        XYPlot p2 = (XYPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
-
     }
 
     /**
@@ -733,31 +694,12 @@ public class XYPlotTest extends TestCase {
      * method following deserialization.  This test has been written to
      * reproduce the bug (now fixed).
      */
-    public void testSerialization3() throws IOException, ClassNotFoundException {
+    public void testSerialization3() {
 
         XYSeriesCollection dataset = new XYSeriesCollection();
-        JFreeChart chart = ChartFactory.createXYLineChart(
-            "Test Chart",
-            "Domain Axis",
-            "Range Axis",
-            dataset,
-            PlotOrientation.VERTICAL,
-            true,
-            true,
-            false
-        );
-        JFreeChart chart2;
-
-        // serialize and deserialize the chart....
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(chart);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        chart2 = (JFreeChart) in.readObject();
-        in.close();
-
+        JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
+                "Domain Axis", "Range Axis", dataset);
+        JFreeChart chart2 = (JFreeChart) TestUtilities.serialised(chart);
         assertEquals(chart, chart2);
         try {
             chart2.createBufferedImage(300, 200);
@@ -771,37 +713,17 @@ public class XYPlotTest extends TestCase {
      * A test to reproduce a bug in serialization: the domain and/or range
      * markers for a plot are not being serialized.
      */
-    public void testSerialization4() throws IOException, ClassNotFoundException {
+    public void testSerialization4() {
 
         XYSeriesCollection dataset = new XYSeriesCollection();
-        JFreeChart chart = ChartFactory.createXYLineChart(
-            "Test Chart",
-            "Domain Axis",
-            "Range Axis",
-            dataset,
-            PlotOrientation.VERTICAL,
-            true,
-            true,
-            false
-        );
+        JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
+                "Domain Axis", "Range Axis", dataset);
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.addDomainMarker(new ValueMarker(1.0), Layer.FOREGROUND);
         plot.addDomainMarker(new IntervalMarker(2.0, 3.0), Layer.BACKGROUND);
         plot.addRangeMarker(new ValueMarker(4.0), Layer.FOREGROUND);
         plot.addRangeMarker(new IntervalMarker(5.0, 6.0), Layer.BACKGROUND);
-        JFreeChart chart2;
-
-        // serialize and deserialize the chart....
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(chart);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        chart2 = (JFreeChart) in.readObject();
-        in.close();
-
+        JFreeChart chart2 = (JFreeChart) TestUtilities.serialised(chart);
         assertEquals(chart, chart2);
         try {
             chart2.createBufferedImage(300, 200);

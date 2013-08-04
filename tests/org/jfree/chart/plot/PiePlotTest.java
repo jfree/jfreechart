@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------
- * PiePlotTests.java
- * -----------------
- * (C) Copyright 2003-2009, by Object Refinery Limited and Contributors.
+ * ----------------
+ * PiePlotTest.java
+ * ----------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -55,13 +55,6 @@ import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.AttributedString;
 
 import junit.framework.Test;
@@ -71,11 +64,10 @@ import junit.framework.TestSuite;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieToolTipGenerator;
-import org.jfree.chart.plot.PieLabelLinkStyle;
-import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.urls.CustomPieURLGenerator;
 import org.jfree.chart.urls.StandardPieURLGenerator;
 import org.jfree.chart.util.DefaultShadowGenerator;
@@ -553,18 +545,9 @@ public class PiePlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         PiePlot p1 = new PiePlot(null);
-        PiePlot p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (PiePlot) in.readObject();
-        in.close();
+        PiePlot p2 = (PiePlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 

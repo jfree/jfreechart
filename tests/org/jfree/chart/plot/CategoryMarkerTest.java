@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * CategoryMarkerTests.java
- * ------------------------
- * (C) Copyright 2005-2007, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * CategoryMarkerTest.java
+ * -----------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,20 +43,14 @@ package org.jfree.chart.plot;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
-import org.jfree.chart.plot.CategoryMarker;
 
 /**
  * Some tests for the {@link CategoryMarker} class.
@@ -173,28 +167,11 @@ public class CategoryMarkerTest extends TestCase
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-
         CategoryMarker m1 = new CategoryMarker("A", new GradientPaint(1.0f,
                 2.0f, Color.white, 3.0f, 4.0f, Color.yellow),
                 new BasicStroke(1.1f));
-        CategoryMarker m2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(m1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            m2 = (CategoryMarker) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
-        boolean b = m1.equals(m2);
-        assertTrue(b);
-
+        CategoryMarker m2 = (CategoryMarker) TestUtilities.serialised(m1);
+        assertEquals(m1, m2);
     }
 
     /**

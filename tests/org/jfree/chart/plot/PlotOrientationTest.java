@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------
- * PlotOrientationTests.java
- * -------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * ------------------------
+ * PlotOrientationTest.java
+ * ------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.chart.plot;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link PlotOrientation} class.
@@ -95,17 +86,10 @@ public class PlotOrientationTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         PlotOrientation orientation1 = PlotOrientation.HORIZONTAL;
-        PlotOrientation orientation2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(orientation1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        orientation2 = (PlotOrientation) in.readObject();
-        in.close();
+        PlotOrientation orientation2 = (PlotOrientation) 
+                TestUtilities.serialised(orientation1);
         assertEquals(orientation1, orientation2);
         boolean same = orientation1 == orientation2;
         assertEquals(true, same);

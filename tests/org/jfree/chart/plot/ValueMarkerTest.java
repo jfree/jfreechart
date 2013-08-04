@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------
- * ValueMarkerTests.java
- * ---------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * --------------------
+ * ValueMarkerTest.java
+ * --------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -61,11 +61,10 @@ import java.io.ObjectOutputStream;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
-import org.jfree.chart.plot.Marker;
-import org.jfree.chart.plot.ValueMarker;
 import org.jfree.ui.LengthAdjustmentType;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleInsets;
@@ -198,19 +197,10 @@ public class ValueMarkerTest
    /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         ValueMarker m1 = new ValueMarker(25.0);
-        ValueMarker m2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(m1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        m2 = (ValueMarker) in.readObject();
-        in.close();
-        boolean b = m1.equals(m2);
-        assertTrue(b);
+        ValueMarker m2 = (ValueMarker) TestUtilities.serialised(m1);
+        assertEquals(m1, m2);
     }
 
     private static final double EPSILON = 0.000000001;
