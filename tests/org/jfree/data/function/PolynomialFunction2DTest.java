@@ -40,20 +40,13 @@
 
 package org.jfree.data.function;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import java.util.Arrays;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.function.PolynomialFunction2D;
 
 /**
  * Tests for the {@link PolynomialFunction2D} class.
@@ -138,18 +131,11 @@ public class PolynomialFunction2DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         PolynomialFunction2D f1 = new PolynomialFunction2D(new double[] {1.0,
                 2.0});
-        PolynomialFunction2D f2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(f1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-               buffer.toByteArray()));
-        f2 = (PolynomialFunction2D) in.readObject();
-        in.close();
+        PolynomialFunction2D f2 = (PolynomialFunction2D) 
+                TestUtilities.serialised(f1);
         assertEquals(f1, f2);
     }
 
