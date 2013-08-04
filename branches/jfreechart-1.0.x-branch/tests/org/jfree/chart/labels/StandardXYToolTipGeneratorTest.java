@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------------
- * StandardXYToolTipGeneratorTests.java
- * ------------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * -----------------------------------
+ * StandardXYToolTipGeneratorTest.java
+ * -----------------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,13 +41,6 @@
 
 package org.jfree.chart.labels;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -56,8 +49,8 @@ import java.text.SimpleDateFormat;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -175,18 +168,10 @@ public class StandardXYToolTipGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
-
+    public void testSerialization() {
         StandardXYToolTipGenerator g1 = new StandardXYToolTipGenerator();
-        StandardXYToolTipGenerator g2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(g1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        g2 = (StandardXYToolTipGenerator) in.readObject();
-        in.close();
+        StandardXYToolTipGenerator g2 = (StandardXYToolTipGenerator) 
+                TestUtilities.serialised(g1);
         assertEquals(g1, g2);
     }
 
