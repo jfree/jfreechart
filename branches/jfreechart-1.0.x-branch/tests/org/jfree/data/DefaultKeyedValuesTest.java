@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------
- * DefaultKeyedValuesTests.java
- * ----------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * ---------------------------
+ * DefaultKeyedValuesTest.java
+ * ---------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,21 +46,13 @@
 
 package org.jfree.data;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.DefaultKeyedValues;
-import org.jfree.data.UnknownKeyException;
 import org.jfree.util.SortOrder;
 
 /**
@@ -501,22 +493,14 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         v1.addValue("Key 1", new Double(23));
         v1.addValue("Key 2", null);
         v1.addValue("Key 3", new Double(42));
 
-        DefaultKeyedValues v2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(v1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        v2 = (DefaultKeyedValues) in.readObject();
-        in.close();
+        DefaultKeyedValues v2 = (DefaultKeyedValues) 
+                TestUtilities.serialised(v1);
         assertEquals(v1, v2);
     }
 

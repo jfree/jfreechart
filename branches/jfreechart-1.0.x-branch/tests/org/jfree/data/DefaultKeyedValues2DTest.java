@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------
- * DefaultKeyedValues2DTests.java
- * ------------------------------
- * (C) Copyright 2003-2008 by Object Refinery Limited and Contributors.
+ * -----------------------------
+ * DefaultKeyedValues2DTest.java
+ * -----------------------------
+ * (C) Copyright 2003-2013 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,20 +46,10 @@
 
 package org.jfree.data;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.DefaultKeyedValues2D;
-import org.jfree.data.UnknownKeyException;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link DefaultKeyedValues2D} class.
@@ -131,23 +121,15 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultKeyedValues2D kv2D1 = new DefaultKeyedValues2D();
         kv2D1.addValue(new Double(234.2), "Row1", "Col1");
         kv2D1.addValue(null, "Row1", "Col2");
         kv2D1.addValue(new Double(345.9), "Row2", "Col1");
         kv2D1.addValue(new Double(452.7), "Row2", "Col2");
 
-        DefaultKeyedValues2D kv2D2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(kv2D1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        kv2D2 = (DefaultKeyedValues2D) in.readObject();
-        in.close();
+        DefaultKeyedValues2D kv2D2 = (DefaultKeyedValues2D) 
+                TestUtilities.serialised(kv2D1);
         assertEquals(kv2D1, kv2D2);
     }
 
