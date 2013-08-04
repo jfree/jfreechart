@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * LogFormatTests.java
- * -------------------
- * (C) Copyright 2008, 2009, by Object Refinery Limited and Contributors.
+ * ------------------
+ * LogFormatTest.java
+ * ------------------
+ * (C) Copyright 2008-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,20 +41,12 @@
 
 package org.jfree.chart.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.util.LogFormat;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link LogFormat} class.
@@ -134,18 +126,9 @@ public class LogFormatTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
-        LogFormat f2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(f1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        f2 = (LogFormat) in.readObject();
-        in.close();
+        LogFormat f2 = (LogFormat) TestUtilities.serialised(f1);
         assertEquals(f1, f2);
     }
 
