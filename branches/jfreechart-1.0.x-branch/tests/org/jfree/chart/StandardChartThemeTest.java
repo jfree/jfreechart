@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------
- * StandardChartThemeTests.java
- * ----------------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * ---------------------------
+ * StandardChartThemeTest.java
+ * ---------------------------
+ * (C) Copyright 2008-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,19 +49,12 @@ import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.plot.PieLabelLinkStyle;
 import org.jfree.chart.renderer.category.StandardBarPainter;
@@ -291,15 +284,7 @@ public class StandardChartThemeTest extends TestCase {
      */
     public void testSerialization() throws IOException, ClassNotFoundException {
         StandardChartTheme t1 = new StandardChartTheme("Name");
-        StandardChartTheme t2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(t1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        t2 = (StandardChartTheme) in.readObject();
-        in.close();
+        StandardChartTheme t2 = (StandardChartTheme) TestUtilities.serialised(t1);
         assertTrue(t1.equals(t2));
     }
 

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------
- * PaintMapTests.java
- * ------------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * -----------------
+ * PaintMapTest.java
+ * -----------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,19 +43,12 @@ package org.jfree.chart;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.jfree.chart.PaintMap;
 
 /**
  * Some tests for the {@link PaintMap} class.
@@ -171,16 +164,7 @@ public class PaintMapTest extends TestCase {
     public void testSerialization1() throws IOException, 
             ClassNotFoundException {
         PaintMap m1 = new PaintMap();
-        PaintMap m2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(m1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        m2 = (PaintMap) in.readObject();
-        in.close();
+        PaintMap m2 = (PaintMap) TestUtilities.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -192,15 +176,7 @@ public class PaintMapTest extends TestCase {
         m1.put("K1", Color.red);
         m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
                 Color.yellow));
-        PaintMap m2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(m1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        m2 = (PaintMap) in.readObject();
-        in.close();
+        PaintMap m2 = (PaintMap) TestUtilities.serialised(m1);
         assertEquals(m1, m2);
     }
 

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * StrokeMapTests.java
- * -------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * ------------------
+ * StrokeMapTest.java
+ * ------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,19 +41,12 @@
 package org.jfree.chart;
 
 import java.awt.BasicStroke;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.jfree.chart.StrokeMap;
 
 /**
  * Some tests for the {@link StrokeMap} class.
@@ -165,15 +158,7 @@ public class StrokeMapTest extends TestCase {
      */
     public void testSerialization1() throws IOException, ClassNotFoundException {
         StrokeMap m1 = new StrokeMap();
-        StrokeMap m2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(m1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        m2 = (StrokeMap) in.readObject();
-        in.close();
+        StrokeMap m2 = (StrokeMap) TestUtilities.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -184,15 +169,7 @@ public class StrokeMapTest extends TestCase {
         StrokeMap m1 = new StrokeMap();
         m1.put("K1", new BasicStroke(1.1f));
         m1.put("K2", new BasicStroke(2.2f));
-        StrokeMap m2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(m1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        m2 = (StrokeMap) in.readObject();
-        in.close();
+        StrokeMap m2 = (StrokeMap) TestUtilities.serialised(m1);
         assertEquals(m1, m2);
     }
 

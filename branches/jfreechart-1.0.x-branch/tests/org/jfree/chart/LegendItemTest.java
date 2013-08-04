@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * LegendItemTests.java
- * --------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * -------------------
+ * LegendItemTest.java
+ * -------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -52,13 +52,7 @@ import java.awt.GradientPaint;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.AttributedString;
 
 import org.jfree.ui.GradientPaintTransformType;
@@ -343,15 +337,7 @@ public class LegendItemTest {
         as.addAttribute(TextAttribute.FONT, new Font("Dialog", Font.PLAIN, 12));
         LegendItem item1 = new LegendItem(as, "Description", "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.red);
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(item1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        LegendItem item2 = (LegendItem) in.readObject();
-        in.close();
+        LegendItem item2 = (LegendItem) TestUtilities.serialised(item1);
         assertEquals(item1, item2);
     }
 
