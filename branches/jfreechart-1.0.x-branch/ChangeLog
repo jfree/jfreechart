@@ -1,3 +1,27 @@
+2013-08-04  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/ChartFactory.java
+    (createPieChart): Simplified version (less parameters),
+    (createPieChart3D): Likewise, 
+    (createBarChart): Likewise, 
+    (createStackedBarChart): Likewise,
+    (createBarChart3D): Likewise,
+    (createStackedBarChart3D): Likewise,
+    (createAreaChart): Likewise,
+    (createStackedAreaChart): Likewise,
+    (createLineChart): Likewise,
+    (createLineChart3D): Likewise,
+    (createGanttChart): Likewise,
+    (createScatterPlot): Likewise,
+    (createXYBarChart): Likewise,
+    (createXYAreaChart): Likewise,
+    (createStackedXYAreaChart): Likewise,
+    (createXYLineChart): Likewise,
+    (createXYStepChart): Likewise,
+    (createXYStepAreaChart): Likewise,
+    (createTimeSeriesChart): Likewise,
+    (createBubbleChart): Likewise.
+
 2013-08-01  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/axis/Axis.java
