@@ -41,7 +41,6 @@
 package org.jfree.chart;
 
 import java.awt.BasicStroke;
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -156,7 +155,7 @@ public class StrokeMapTest extends TestCase {
     /**
      * A check for serialization.
      */
-    public void testSerialization1() throws IOException, ClassNotFoundException {
+    public void testSerialization1() {
         StrokeMap m1 = new StrokeMap();
         StrokeMap m2 = (StrokeMap) TestUtilities.serialised(m1);
         assertEquals(m1, m2);
@@ -165,7 +164,7 @@ public class StrokeMapTest extends TestCase {
     /**
      * A check for serialization.
      */
-    public void testSerialization2() throws IOException, ClassNotFoundException {
+    public void testSerialization2() {
         StrokeMap m1 = new StrokeMap();
         m1.put("K1", new BasicStroke(1.1f));
         m1.put("K2", new BasicStroke(2.2f));

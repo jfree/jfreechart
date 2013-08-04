@@ -43,7 +43,6 @@ package org.jfree.chart;
 
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
-import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -118,7 +117,7 @@ public class ChartRenderingInfoTest  {
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
         i1.setChartArea(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         ChartRenderingInfo i2 = (ChartRenderingInfo) TestUtilities.serialised(i1);
@@ -129,7 +128,7 @@ public class ChartRenderingInfoTest  {
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
-    public void testSerialization2() throws IOException, ClassNotFoundException {
+    public void testSerialization2() {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
         i1.getPlotInfo().setDataArea(new Rectangle2D.Double(1.0, 2.0, 3.0,
                 4.0));

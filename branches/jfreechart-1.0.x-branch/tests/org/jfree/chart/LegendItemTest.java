@@ -52,7 +52,6 @@ import java.awt.GradientPaint;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.io.IOException;
 import java.text.AttributedString;
 
 import org.jfree.ui.GradientPaintTransformType;
@@ -312,7 +311,7 @@ public class LegendItemTest {
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         LegendItem item1 = new LegendItem("Item", "Description",
                 "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), new GradientPaint(
@@ -332,7 +331,7 @@ public class LegendItemTest {
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
-    public void testSerialization2() throws IOException, ClassNotFoundException {
+    public void testSerialization2() {
         AttributedString as = new AttributedString("Test String");
         as.addAttribute(TextAttribute.FONT, new Font("Dialog", Font.PLAIN, 12));
         LegendItem item1 = new LegendItem(as, "Description", "ToolTip", "URL",

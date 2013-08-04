@@ -49,7 +49,6 @@ import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -282,7 +281,7 @@ public class StandardChartThemeTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         StandardChartTheme t1 = new StandardChartTheme("Name");
         StandardChartTheme t2 = (StandardChartTheme) TestUtilities.serialised(t1);
         assertTrue(t1.equals(t2));
