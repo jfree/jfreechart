@@ -314,6 +314,23 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A pie chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createPieChart(String title, PieDataset dataset) {
+        return createPieChart(title, dataset, true, true, false);
+    }
+    
+    /**
+     * Creates a pie chart with default settings.
+     * <P>
+     * The chart object returned by this method uses a {@link PiePlot} instance
+     * as the plot.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
@@ -722,6 +739,23 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A pie chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createPieChart3D(String title,
+            PieDataset dataset) {
+        return createPieChart3D(title, dataset, true, true, false);
+    }
+    
+    /**
+     * Creates a 3D pie chart using the specified dataset.  The chart object
+     * returned by this method uses a {@link PiePlot3D} instance as the
+     * plot.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param legend  a flag specifying whether or not a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
@@ -801,6 +835,31 @@ public abstract class ChartFactory {
     }
 
     /**
+     * Creates a bar chart with a vertical orientation.  The chart object
+     * returned by this method uses a {@link CategoryPlot} instance as the
+     * plot, with a {@link CategoryAxis} for the domain axis, a
+     * {@link NumberAxis} as the range axis, and a {@link BarRenderer} as the
+     * renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param categoryAxisLabel  the label for the category axis
+     *                           (<code>null</code> permitted).
+     * @param valueAxisLabel  the label for the value axis
+     *                        (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A bar chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createBarChart(String title,
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset) {
+        return createBarChart(title, categoryAxisLabel, valueAxisLabel, dataset,
+                PlotOrientation.VERTICAL, true, true, false);
+    }
+ 
+    /**
      * Creates a bar chart.  The chart object returned by this method uses a
      * {@link CategoryPlot} instance as the plot, with a {@link CategoryAxis}
      * for the domain axis, a {@link NumberAxis} as the range axis, and a
@@ -878,6 +937,31 @@ public abstract class ChartFactory {
      * @param rangeAxisLabel  the label for the value axis
      *                        (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A stacked bar chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createStackedBarChart(String title,
+            String domainAxisLabel, String rangeAxisLabel,
+            CategoryDataset dataset) {
+        return createStackedBarChart(title, domainAxisLabel, rangeAxisLabel,
+                dataset, PlotOrientation.VERTICAL, true, true, false);
+    }
+    
+    /**
+     * Creates a stacked bar chart with default settings.  The chart object
+     * returned by this method uses a {@link CategoryPlot} instance as the
+     * plot, with a {@link CategoryAxis} for the domain axis, a
+     * {@link NumberAxis} as the range axis, and a {@link StackedBarRenderer}
+     * as the renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param domainAxisLabel  the label for the category axis
+     *                         (<code>null</code> permitted).
+     * @param rangeAxisLabel  the label for the value axis
+     *                        (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param orientation  the orientation of the chart (horizontal or
      *                     vertical) (<code>null</code> not permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -916,6 +1000,30 @@ public abstract class ChartFactory {
 
     }
 
+    /**
+     * Creates a bar chart with a 3D effect. The chart object returned by this
+     * method uses a {@link CategoryPlot} instance as the plot, with a
+     * {@link CategoryAxis3D} for the domain axis, a {@link NumberAxis3D} as
+     * the range axis, and a {@link BarRenderer3D} as the renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param categoryAxisLabel  the label for the category axis
+     *                           (<code>null</code> permitted).
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
+     *                        permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A bar chart with a 3D effect.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createBarChart3D(String title,
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset) {
+        return createBarChart3D(title, categoryAxisLabel, valueAxisLabel,
+                dataset, PlotOrientation.VERTICAL, true, true, false);
+    }
+    
     /**
      * Creates a bar chart with a 3D effect. The chart object returned by this
      * method uses a {@link CategoryPlot} instance as the plot, with a
@@ -973,6 +1081,31 @@ public abstract class ChartFactory {
 
     }
 
+    /**
+     * Creates a stacked bar chart with a 3D effect and default settings. The
+     * chart object returned by this method uses a {@link CategoryPlot}
+     * instance as the plot, with a {@link CategoryAxis3D} for the domain axis,
+     * a {@link NumberAxis3D} as the range axis, and a
+     * {@link StackedBarRenderer3D} as the renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param categoryAxisLabel  the label for the category axis
+     *                           (<code>null</code> permitted).
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
+     *                        permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A stacked bar chart with a 3D effect.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createStackedBarChart3D(String title,
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset) {
+        return createStackedBarChart3D(title, categoryAxisLabel, valueAxisLabel,
+                dataset, PlotOrientation.VERTICAL, true, true, false);
+    }
+    
     /**
      * Creates a stacked bar chart with a 3D effect and default settings. The
      * chart object returned by this method uses a {@link CategoryPlot}
@@ -1044,6 +1177,30 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  the label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return An area chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createAreaChart(String title,
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset) {
+        return createAreaChart(title, categoryAxisLabel, valueAxisLabel,
+                dataset, PlotOrientation.VERTICAL, true, true, false);
+    }
+            
+    /**
+     * Creates an area chart with default settings.  The chart object returned
+     * by this method uses a {@link CategoryPlot} instance as the plot, with a
+     * {@link CategoryAxis} for the domain axis, a {@link NumberAxis} as the
+     * range axis, and an {@link AreaRenderer} as the renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param categoryAxisLabel  the label for the category axis
+     *                           (<code>null</code> permitted).
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
+     *                        permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param orientation  the plot orientation (<code>null</code> not
      *                     permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -1083,6 +1240,31 @@ public abstract class ChartFactory {
 
     }
 
+    /**
+     * Creates a stacked area chart with default settings.  The chart object
+     * returned by this method uses a {@link CategoryPlot} instance as the
+     * plot, with a {@link CategoryAxis} for the domain axis, a
+     * {@link NumberAxis} as the range axis, and a {@link StackedAreaRenderer}
+     * as the renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param categoryAxisLabel  the label for the category axis
+     *                           (<code>null</code> permitted).
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
+     *                        permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A stacked area chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createStackedAreaChart(String title,
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset) {
+        return createStackedAreaChart(title, categoryAxisLabel, valueAxisLabel,
+                dataset, PlotOrientation.VERTICAL, true, true, false);
+    }
+    
     /**
      * Creates a stacked area chart with default settings.  The chart object
      * returned by this method uses a {@link CategoryPlot} instance as the
@@ -1146,6 +1328,30 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  the label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A line chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createLineChart(String title,
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset) {
+        return createLineChart(title, categoryAxisLabel, valueAxisLabel,
+                dataset, PlotOrientation.VERTICAL, true, true, false);
+    }
+    
+    /**
+     * Creates a line chart with default settings.  The chart object returned
+     * by this method uses a {@link CategoryPlot} instance as the plot, with a
+     * {@link CategoryAxis} for the domain axis, a {@link NumberAxis} as the
+     * range axis, and a {@link LineAndShapeRenderer} as the renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param categoryAxisLabel  the label for the category axis
+     *                           (<code>null</code> permitted).
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
+     *                        permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param orientation  the chart orientation (horizontal or vertical)
      *                     (<code>null</code> not permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -1194,6 +1400,30 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  the label for the value axis (<code>null</code>
      *                        permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A line chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createLineChart3D(String title,
+            String categoryAxisLabel, String valueAxisLabel,
+            CategoryDataset dataset) {
+        return createLineChart3D(title, categoryAxisLabel, valueAxisLabel,
+                dataset, PlotOrientation.VERTICAL, true, true, false);
+    }    
+        
+    /**
+     * Creates a line chart with default settings. The chart object returned by
+     * this method uses a {@link CategoryPlot} instance as the plot, with a
+     * {@link CategoryAxis3D} for the domain axis, a {@link NumberAxis3D} as
+     * the range axis, and a {@link LineRenderer3D} as the renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param categoryAxisLabel  the label for the category axis
+     *                           (<code>null</code> permitted).
+     * @param valueAxisLabel  the label for the value axis (<code>null</code>
+     *                        permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param orientation  the chart orientation (horizontal or vertical)
      *                     (<code>null</code> not permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -1230,6 +1460,31 @@ public abstract class ChartFactory {
 
     }
 
+    /**
+     * Creates a Gantt chart using the supplied attributes plus default values
+     * where required.  The chart object returned by this method uses a
+     * {@link CategoryPlot} instance as the plot, with a {@link CategoryAxis}
+     * for the domain axis, a {@link DateAxis} as the range axis, and a
+     * {@link GanttRenderer} as the renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param categoryAxisLabel  the label for the category axis
+     *                           (<code>null</code> permitted).
+     * @param dateAxisLabel  the label for the date axis
+     *                       (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A Gantt chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createGanttChart(String title,
+            String categoryAxisLabel, String dateAxisLabel,
+            IntervalCategoryDataset dataset) {
+        return createGanttChart(title, categoryAxisLabel, dateAxisLabel,
+                dataset, true, true, false);
+    }
+    
     /**
      * Creates a Gantt chart using the supplied attributes plus default values
      * where required.  The chart object returned by this method uses a
@@ -1379,6 +1634,28 @@ public abstract class ChartFactory {
         return chart;
 
     }
+    
+    /**
+     * Creates a scatter plot with default settings.  The chart object
+     * returned by this method uses an {@link XYPlot} instance as the plot,
+     * with a {@link NumberAxis} for the domain axis, a  {@link NumberAxis}
+     * as the range axis, and an {@link XYLineAndShapeRenderer} as the
+     * renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
+     * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A scatter plot.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createScatterPlot(String title, String xAxisLabel,
+            String yAxisLabel, XYDataset dataset) {
+        return createScatterPlot(title, xAxisLabel, yAxisLabel, dataset,
+                PlotOrientation.VERTICAL, true, true, false);
+    }
 
     /**
      * Creates a scatter plot with default settings.  The chart object
@@ -1433,6 +1710,30 @@ public abstract class ChartFactory {
 
     }
 
+    /**
+     * Creates and returns a default instance of an XY bar chart.
+     * <P>
+     * The chart object returned by this method uses an {@link XYPlot} instance
+     * as the plot, with a {@link DateAxis} for the domain axis, a
+     * {@link NumberAxis} as the range axis, and a {@link XYBarRenderer} as the
+     * renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
+     * @param dateAxis  make the domain axis display dates?
+     * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return An XY bar chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createXYBarChart(String title, String xAxisLabel,
+            boolean dateAxis, String yAxisLabel, IntervalXYDataset dataset) {
+        return createXYBarChart(title, xAxisLabel, dateAxis, yAxisLabel,
+                dataset, PlotOrientation.VERTICAL, true, true, false);
+    }
+    
     /**
      * Creates and returns a default instance of an XY bar chart.
      * <P>
@@ -1508,6 +1809,28 @@ public abstract class ChartFactory {
      * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return An XY area chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createXYAreaChart(String title,String xAxisLabel,
+            String yAxisLabel, XYDataset dataset) {
+        return createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset);
+    }
+    
+    /**
+     * Creates an area chart using an {@link XYDataset}.
+     * <P>
+     * The chart object returned by this method uses an {@link XYPlot} instance
+     * as the plot, with a {@link NumberAxis} for the domain axis, a
+     * {@link NumberAxis} as the range axis, and a {@link XYAreaRenderer} as
+     * the renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
+     * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -1547,6 +1870,27 @@ public abstract class ChartFactory {
 
     }
 
+    /**
+     * Creates a stacked XY area plot.  The chart object returned by this
+     * method uses an {@link XYPlot} instance as the plot, with a
+     * {@link NumberAxis} for the domain axis, a {@link NumberAxis} as the
+     * range axis, and a {@link StackedXYAreaRenderer2} as the renderer.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
+     * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A stacked XY area chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createStackedXYAreaChart(String title,
+            String xAxisLabel, String yAxisLabel, TableXYDataset dataset) {
+        return createStackedXYAreaChart(title, xAxisLabel, yAxisLabel,
+                dataset, PlotOrientation.VERTICAL, true, true, false);
+    }
+    
     /**
      * Creates a stacked XY area plot.  The chart object returned by this
      * method uses an {@link XYPlot} instance as the plot, with a
@@ -1608,6 +1952,23 @@ public abstract class ChartFactory {
      * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return The chart.
+     */
+    public static JFreeChart createXYLineChart(String title,
+            String xAxisLabel, String yAxisLabel, XYDataset dataset) {
+        return createXYLineChart(title, xAxisLabel, yAxisLabel, dataset,
+                PlotOrientation.VERTICAL, true, true, false);
+    }
+
+    /**
+     * Creates a line chart (based on an {@link XYDataset}) with default
+     * settings.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
+     * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -1641,6 +2002,24 @@ public abstract class ChartFactory {
 
     }
 
+    /**
+     * Creates a stepped XY plot with default settings.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
+     * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createXYStepChart(String title, String xAxisLabel,
+            String yAxisLabel, XYDataset dataset) {
+        return createXYStepChart(title, xAxisLabel, yAxisLabel, dataset,
+                PlotOrientation.VERTICAL, true, true, false);
+    }
+    
     /**
      * Creates a stepped XY plot with default settings.
      *
@@ -1696,6 +2075,24 @@ public abstract class ChartFactory {
      * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
      * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
      * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createXYStepAreaChart(String title,
+            String xAxisLabel, String yAxisLabel, XYDataset dataset) {
+        return createXYStepAreaChart(title, xAxisLabel, yAxisLabel, dataset,
+                PlotOrientation.VERTICAL, true, true, false);   
+    }
+ 
+    /**
+     * Creates a filled stepped XY plot with default settings.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
+     * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     (<code>null</code> NOT permitted).
      * @param legend  a flag specifying whether or not a legend is required.
@@ -1738,6 +2135,32 @@ public abstract class ChartFactory {
         return chart;
     }
 
+    /**
+     * Creates and returns a time series chart.  A time series chart is an
+     * {@link XYPlot} with a {@link DateAxis} for the x-axis and a
+     * {@link NumberAxis} for the y-axis.  The default renderer is an
+     * {@link XYLineAndShapeRenderer}.
+     * <P>
+     * A convenient dataset to use with this chart is a
+     * {@link org.jfree.data.time.TimeSeriesCollection}.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param timeAxisLabel  a label for the time axis (<code>null</code>
+     *                       permitted).
+     * @param valueAxisLabel  a label for the value axis (<code>null</code>
+     *                        permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A time series chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createTimeSeriesChart(String title, 
+            String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
+        return createTimeSeriesChart(title, timeAxisLabel, valueAxisLabel, 
+                dataset, true, true, false);
+    }
+    
     /**
      * Creates and returns a time series chart.  A time series chart is an
      * {@link XYPlot} with a {@link DateAxis} for the x-axis and a
@@ -1886,6 +2309,27 @@ public abstract class ChartFactory {
 
     }
 
+    /**
+     * Creates a bubble chart with default settings.  The chart is composed of
+     * an {@link XYPlot}, with a {@link NumberAxis} for the domain axis,
+     * a {@link NumberAxis} for the range axis, and an {@link XYBubbleRenderer}
+     * to draw the data items.
+     *
+     * @param title  the chart title (<code>null</code> permitted).
+     * @param xAxisLabel  a label for the X-axis (<code>null</code> permitted).
+     * @param yAxisLabel  a label for the Y-axis (<code>null</code> permitted).
+     * @param dataset  the dataset for the chart (<code>null</code> permitted).
+     *
+     * @return A bubble chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createBubbleChart(String title, String xAxisLabel,
+            String yAxisLabel, XYZDataset dataset) {
+        return createBubbleChart(title, xAxisLabel, yAxisLabel, dataset,
+                PlotOrientation.VERTICAL, true, true, false);
+    }
+    
     /**
      * Creates a bubble chart with default settings.  The chart is composed of
      * an {@link XYPlot}, with a {@link NumberAxis} for the domain axis,
