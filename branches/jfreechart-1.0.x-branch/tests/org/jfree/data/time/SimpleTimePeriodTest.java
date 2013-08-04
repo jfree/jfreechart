@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------
- * SimpleTimePeriodTests.java
- * --------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * -------------------------
+ * SimpleTimePeriodTest.java
+ * -------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,20 +42,12 @@
 
 package org.jfree.data.time;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.time.SimpleTimePeriod;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link SimpleTimePeriod} class.
@@ -123,18 +115,10 @@ public class SimpleTimePeriodTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         SimpleTimePeriod p1 = new SimpleTimePeriod(new Date(1000L),
                 new Date(1001L));
-        SimpleTimePeriod p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        p2 = (SimpleTimePeriod) in.readObject();
-            in.close();
+        SimpleTimePeriod p2 = (SimpleTimePeriod) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 

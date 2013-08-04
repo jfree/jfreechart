@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------
- * FixedMillisecondTests.java
- * --------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * -------------------------
+ * FixedMillisecondTest.java
+ * -------------------------
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,20 +43,12 @@
 
 package org.jfree.data.time;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.time.FixedMillisecond;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link FixedMillisecond} class.
@@ -84,17 +76,9 @@ public class FixedMillisecondTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         FixedMillisecond m1 = new FixedMillisecond();
-        FixedMillisecond m2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(m1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        m2 = (FixedMillisecond) in.readObject();
-        in.close();
+        FixedMillisecond m2 = (FixedMillisecond) TestUtilities.serialised(m1);
         assertEquals(m1, m2);
     }
 

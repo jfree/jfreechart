@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------
- * YearTests.java
- * --------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * -------------
+ * YearTest.java
+ * -------------
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,13 +47,6 @@
 
 package org.jfree.data.time;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -63,9 +56,7 @@ import java.util.TimeZone;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.time.TimePeriodFormatException;
-import org.jfree.data.time.Year;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link Year} class.
@@ -236,17 +227,9 @@ public class YearTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         Year y1 = new Year(1999);
-        Year y2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(y1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        y2 = (Year) in.readObject();
-        in.close();
+        Year y2 = (Year) TestUtilities.serialised(y1);
         assertEquals(y1, y2);
     }
 

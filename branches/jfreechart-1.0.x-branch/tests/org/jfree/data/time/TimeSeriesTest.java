@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * TimeSeriesTests.java
- * --------------------
- * (C) Copyright 2001-2009, by Object Refinery Limited.
+ * -------------------
+ * TimeSeriesTest.java
+ * -------------------
+ * (C) Copyright 2001-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -55,28 +55,15 @@
 
 package org.jfree.data.time;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.jfree.data.general.SeriesException;
-import org.jfree.data.time.Day;
-import org.jfree.data.time.FixedMillisecond;
-import org.jfree.data.time.Month;
-import org.jfree.data.time.RegularTimePeriod;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesDataItem;
-import org.jfree.data.time.Year;
 import org.jfree.date.MonthConstants;
 
 /**
@@ -201,12 +188,10 @@ public class TimeSeriesTest extends TestCase implements SeriesChangeListener {
      * Tests the retrieval of values.
      */
     public void testGetValue() {
-
         Number value1 = this.seriesA.getValue(new Year(1999));
         assertNull(value1);
         int value2 = this.seriesA.getValue(new Year(2000)).intValue();
         assertEquals(102000, value2);
-
     }
 
     /**
@@ -287,22 +272,14 @@ public class TimeSeriesTest extends TestCase implements SeriesChangeListener {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws ClassNotFoundException, IOException {
+    public void testSerialization() {
         TimeSeries s1 = new TimeSeries("A test");
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-        TimeSeries s2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(s1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        s2 = (TimeSeries) in.readObject();
-        in.close();
+        TimeSeries s2 = (TimeSeries) TestUtilities.serialised(s1);
         assertTrue(s1.equals(s2));
     }
 
