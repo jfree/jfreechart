@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------
- * SimpleDialScaleTests.java
- * -------------------------
- * (C) Copyright 2006-2012, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * StandardDialScaleTest.java
+ * --------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,19 +46,11 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.plot.dial.StandardDialScale;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link StandardDialScale} class.
@@ -235,18 +227,10 @@ public class StandardDialScaleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
-        StandardDialScale s2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(s1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        s2 = (StandardDialScale) in.readObject();
-        in.close();
+        StandardDialScale s2 = (StandardDialScale) TestUtilities.serialised(s1);
         assertEquals(s1, s2);
 
         // try a customised instance
@@ -256,15 +240,7 @@ public class StandardDialScaleTest extends TestCase {
                 4.0f, Color.white));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
 
-        buffer = new ByteArrayOutputStream();
-        out = new ObjectOutputStream(buffer);
-        out.writeObject(s1);
-        out.close();
-
-        in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        s2 = (StandardDialScale) in.readObject();
-        in.close();
+        s2 = (StandardDialScale) TestUtilities.serialised(s1);
         assertEquals(s1, s2);
     }
 

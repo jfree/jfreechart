@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------
- * DialPlotTests.java
- * ------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * -----------------
+ * DialPlotTest.java
+ * -----------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,26 +42,14 @@ package org.jfree.chart.plot.dial;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
-import org.jfree.chart.plot.dial.ArcDialFrame;
-import org.jfree.chart.plot.dial.DialBackground;
-import org.jfree.chart.plot.dial.DialCap;
-import org.jfree.chart.plot.dial.DialPlot;
-import org.jfree.chart.plot.dial.StandardDialFrame;
-import org.jfree.chart.plot.dial.StandardDialScale;
 
 /**
  * Tests for the {@link DialPlot} class.
@@ -185,17 +173,9 @@ public class DialPlotTest extends TestCase implements PlotChangeListener {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DialPlot p1 = new DialPlot();
-        DialPlot p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (DialPlot) in.readObject();
-        in.close();
+        DialPlot p2 = (DialPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 

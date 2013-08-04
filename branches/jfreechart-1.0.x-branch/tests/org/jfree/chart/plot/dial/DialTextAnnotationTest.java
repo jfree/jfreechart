@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------
- * DialTextAnnotationTests.java
- * ----------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * ---------------------------
+ * DialTextAnnotationTest.java
+ * ---------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,19 +43,11 @@ package org.jfree.chart.plot.dial;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.plot.dial.DialTextAnnotation;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link DialTextAnnotation} class.
@@ -160,19 +152,10 @@ public class DialTextAnnotationTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         // test a default instance
         DialTextAnnotation a1 = new DialTextAnnotation("A1");
-        DialTextAnnotation a2;
-
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        a2 = (DialTextAnnotation) in.readObject();
-        in.close();
+        DialTextAnnotation a2 = (DialTextAnnotation) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
 
         // test a custom instance
@@ -180,15 +163,7 @@ public class DialTextAnnotationTest extends TestCase {
         a1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
                 Color.blue));
 
-        buffer = new ByteArrayOutputStream();
-        out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-
-        in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        a2 = (DialTextAnnotation) in.readObject();
-        in.close();
+        a2 = (DialTextAnnotation) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 
