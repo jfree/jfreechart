@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * VectorSeriesTests.java
- * ----------------------
- * (C) Copyright 2007, by Object Refinery Limited and Contributors.
+ * ---------------------
+ * VectorSeriesTest.java
+ * ---------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,22 +42,14 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
-import org.jfree.data.xy.VectorSeries;
-import org.jfree.data.xy.XYCoordinate;
 
 /**
  * Tests for the {@link VectorSeries} class.
@@ -156,18 +148,10 @@ public class VectorSeriesTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         VectorSeries s1 = new VectorSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
-        VectorSeries s2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(s1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        s2 = (VectorSeries) in.readObject();
-        in.close();
+        VectorSeries s2 = (VectorSeries) TestUtilities.serialised(s1);
         assertEquals(s1, s2);
     }
 

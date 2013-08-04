@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------
- * MatrixSeriesCollectionTests.java
- * --------------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * -------------------------------
+ * MatrixSeriesCollectionTest.java
+ * -------------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,20 +41,11 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.xy.MatrixSeries;
-import org.jfree.data.xy.MatrixSeriesCollection;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -132,21 +123,13 @@ public class MatrixSeriesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         MatrixSeries s1 = new MatrixSeries("Series", 2, 3);
         s1.update(0, 0, 1.1);
         MatrixSeriesCollection c1 = new MatrixSeriesCollection();
         c1.addSeries(s1);
-        MatrixSeriesCollection c2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(c1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        c2 = (MatrixSeriesCollection) in.readObject();
-        in.close();
+        MatrixSeriesCollection c2 = (MatrixSeriesCollection) 
+                TestUtilities.serialised(c1);
         assertEquals(c1, c2);
     }
 

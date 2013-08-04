@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * VectorDataItemTests.java
- * ------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * VectorDataItemTest.java
+ * -----------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.xy.VectorDataItem;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link VectorDataItem} class.
@@ -134,18 +125,9 @@ public class VectorDataItemTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         VectorDataItem v1 = new VectorDataItem(1.0, 2.0, 3.0, 4.0);
-        VectorDataItem v2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(v1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        v2 = (VectorDataItem) in.readObject();
-        in.close();
+        VectorDataItem v2 = (VectorDataItem) TestUtilities.serialised(v1);
         assertEquals(v1, v2);
     }
 

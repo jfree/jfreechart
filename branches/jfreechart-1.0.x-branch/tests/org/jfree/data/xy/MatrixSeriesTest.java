@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * MatrixSeriesTests.java
- * ----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * ---------------------
+ * MatrixSeriesTest.java
+ * ---------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,11 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.xy.MatrixSeries;
 
 /**
  * Tests for the {@link MatrixSeries} class.
@@ -128,20 +120,11 @@ public class MatrixSeriesTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         MatrixSeries m1 = new MatrixSeries("Test", 8, 3);
         m1.update(0, 0, 11.0);
         m1.update(7, 2, 22.0);
-        MatrixSeries m2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(m1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        m2 = (MatrixSeries) in.readObject();
-        in.close();
+        MatrixSeries m2 = (MatrixSeries) TestUtilities.serialised(m1);
         assertEquals(m1, m2);
     }
 

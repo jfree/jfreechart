@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * TableXYDatasetTests.java
- * ------------------------
- * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.
+ * -----------------------
+ * TableXYDatasetTest.java
+ * -----------------------
+ * (C) Copyright 2003-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -49,20 +49,12 @@
 
 package org.jfree.data.xy;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.xy.DefaultTableXYDataset;
-import org.jfree.data.xy.XYSeries;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -129,18 +121,11 @@ public class TableXYDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         d1.addSeries(createSeries2());
-        DefaultTableXYDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (DefaultTableXYDataset) in.readObject();
-        in.close();
+        DefaultTableXYDataset d2 = (DefaultTableXYDataset) 
+                TestUtilities.serialised(d1);
         assertEquals(d1, d2);
     }
 
