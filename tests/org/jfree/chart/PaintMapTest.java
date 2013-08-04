@@ -41,41 +41,24 @@
 
 package org.jfree.chart;
 
+import org.junit.Test;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.IOException;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 /**
  * Some tests for the {@link PaintMap} class.
  */
-public class PaintMapTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(PaintMapTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public PaintMapTest(String name) {
-        super(name);
-    }
+public class PaintMapTest  {
 
     /**
      * Some checks for the getPaint() method.
      */
+    @Test
     public void testGetPaint() {
         PaintMap m1 = new PaintMap();
         assertEquals(null, m1.getPaint("A"));
@@ -85,84 +68,86 @@ public class PaintMapTest extends TestCase {
         assertEquals(null, m1.getPaint("A"));
 
         // a null key should throw an IllegalArgumentException
-        boolean pass = false;
         try {
             m1.getPaint(null);
+            fail("IllegalArgumentException should have been thrown on passing null value");
         }
         catch (IllegalArgumentException e) {
-            pass = true;
+            assertEquals("Null 'key' argument.", e.getMessage());
         }
-        assertTrue(pass);
     }
 
     /**
      * Some checks for the put() method.
      */
+    @Test
     public void testPut() {
         PaintMap m1 = new PaintMap();
         m1.put("A", Color.red);
         assertEquals(Color.red, m1.getPaint("A"));
 
         // a null key should throw an IllegalArgumentException
-        boolean pass = false;
+
         try {
             m1.put(null, Color.blue);
+            fail("IllegalArgumentException should have been thrown on null key");
         }
         catch (IllegalArgumentException e) {
-            pass = true;
+            assertEquals("Null 'key' argument.", e.getMessage());
         }
-        assertTrue(pass);
     }
 
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         PaintMap m1 = new PaintMap();
         PaintMap m2 = new PaintMap();
-        assertTrue(m1.equals(m1));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m1);
+        assertEquals(m1, m2);
         assertFalse(m1.equals(null));
         assertFalse(m1.equals("ABC"));
 
         m1.put("K1", Color.red);
         assertFalse(m1.equals(m2));
         m2.put("K1", Color.red);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
                 Color.yellow));
         assertFalse(m1.equals(m2));
         m2.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
                 Color.yellow));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.put("K2", null);
         assertFalse(m1.equals(m2));
         m2.put("K2", null);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**
      * Some checks for cloning.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         PaintMap m1 = new PaintMap();
         PaintMap m2 = (PaintMap) m1.clone();
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.put("K1", Color.red);
         m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
                 Color.yellow));
         m2 = (PaintMap) m1.clone();
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**
      * A check for serialization.
      */
-    public void testSerialization1() throws IOException, 
-            ClassNotFoundException {
+    @Test
+    public void testSerialization1() {
         PaintMap m1 = new PaintMap();
         PaintMap m2 = (PaintMap) TestUtilities.serialised(m1);
         assertEquals(m1, m2);
@@ -171,6 +156,7 @@ public class PaintMapTest extends TestCase {
     /**
      * A check for serialization.
      */
+    @Test
     public void testSerialization2() {
         PaintMap m1 = new PaintMap();
         m1.put("K1", Color.red);
@@ -185,6 +171,7 @@ public class PaintMapTest extends TestCase {
      *
      * http://www.jfree.org/phpBB2/viewtopic.php?t=19980
      */
+    @Test
     public void testKeysOfDifferentClasses() {
         PaintMap m = new PaintMap();
         m.put("ABC", Color.red);

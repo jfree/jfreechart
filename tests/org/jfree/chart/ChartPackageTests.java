@@ -63,12 +63,6 @@ public class ChartPackageTests extends TestCase {
      */
     public static Test suite() {
         TestSuite suite = new TestSuite("org.jfree.chart");
-        suite.addTestSuite(LineChartTest.class);
-        suite.addTestSuite(LineChart3DTest.class);
-        suite.addTestSuite(MeterChartTest.class);
-        suite.addTestSuite(PaintMapTest.class);
-        suite.addTestSuite(PieChartTest.class);
-        suite.addTestSuite(PieChart3DTest.class);
         suite.addTestSuite(ScatterPlotTest.class);
         suite.addTestSuite(StackedAreaChartTest.class);
         suite.addTestSuite(StackedBarChartTest.class);
