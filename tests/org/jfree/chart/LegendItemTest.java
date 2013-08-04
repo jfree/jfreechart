@@ -61,40 +61,25 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.text.AttributedString;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import org.jfree.chart.LegendItem;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.StandardGradientPaintTransformer;
+
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNotSame;
+
 
 /**
  * Tests for the {@link LegendItem} class.
  */
-public class LegendItemTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LegendItemTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public LegendItemTest(String name) {
-        super(name);
-    }
+public class LegendItemTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
 
         LegendItem item1 = new LegendItem("Label", "Description",
@@ -109,8 +94,8 @@ public class LegendItemTest extends TestCase {
                 true, Color.red, true, Color.blue, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
-        assertTrue(item1.equals(item2));
-        assertTrue(item2.equals(item1));
+        assertEquals(item1, item2);
+        assertEquals(item2, item1);
 
         item1 = new LegendItem("Label2", "Description", "ToolTip", "URL",
                 true, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true,
@@ -123,7 +108,7 @@ public class LegendItemTest extends TestCase {
                 true, Color.red, true, Color.blue, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", true, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
@@ -136,7 +121,7 @@ public class LegendItemTest extends TestCase {
                 true, Color.red, true, Color.blue, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
@@ -149,7 +134,7 @@ public class LegendItemTest extends TestCase {
                 true, Color.red, true, Color.blue, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
@@ -162,7 +147,7 @@ public class LegendItemTest extends TestCase {
                 true, Color.red, true, Color.blue, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
@@ -175,7 +160,7 @@ public class LegendItemTest extends TestCase {
                 false, Color.red, true, Color.blue, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip", "URL",
                 false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0), false,
@@ -188,7 +173,7 @@ public class LegendItemTest extends TestCase {
                 Color.black, true, Color.blue, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
@@ -201,7 +186,7 @@ public class LegendItemTest extends TestCase {
                 Color.black, false, Color.blue, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip", "URL",
                 false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0), false,
@@ -214,7 +199,7 @@ public class LegendItemTest extends TestCase {
                 Color.black, false, Color.yellow, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip", "URL",
                 false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0), false,
@@ -227,7 +212,7 @@ public class LegendItemTest extends TestCase {
                 Color.black, false, Color.yellow, new BasicStroke(2.1f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
@@ -240,7 +225,7 @@ public class LegendItemTest extends TestCase {
                 false, Color.black, false, Color.yellow, new BasicStroke(2.1f),
                 false, new Line2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(2.1f),  Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
@@ -253,7 +238,7 @@ public class LegendItemTest extends TestCase {
                 false, Color.black, false, Color.yellow, new BasicStroke(2.1f),
                 false, new Line2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(2.1f), Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
@@ -266,7 +251,7 @@ public class LegendItemTest extends TestCase {
                 false, Color.black, false, Color.yellow, new BasicStroke(2.1f),
                 false, new Line2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(3.3f), Color.green);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new LegendItem("Label2", "Description2", "ToolTip", "URL",
                 false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0), false,
@@ -281,7 +266,7 @@ public class LegendItemTest extends TestCase {
                 false, new Line2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(3.3f),
                 Color.white);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // fillPaintTransformer
         item1.setFillPaintTransformer(new StandardGradientPaintTransformer(
@@ -289,19 +274,19 @@ public class LegendItemTest extends TestCase {
         assertFalse(item1.equals(item2));
         item2.setFillPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // labelFont
         item1.setLabelFont(new Font("Dialog", Font.PLAIN, 13));
         assertFalse(item1.equals(item2));
         item2.setLabelFont(new Font("Dialog", Font.PLAIN, 13));
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // labelPaint
         item1.setLabelPaint(Color.red);
         assertFalse(item1.equals(item2));
         item2.setLabelPaint(Color.red);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // fillPaint
         item1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.green, 3.0f,
@@ -309,7 +294,7 @@ public class LegendItemTest extends TestCase {
         assertFalse(item1.equals(item2));
         item2.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.green, 3.0f,
                 4.0f, Color.blue));
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // outlinePaint
         item1.setOutlinePaint(new GradientPaint(1.1f, 2.2f, Color.green, 3.3f,
@@ -317,7 +302,7 @@ public class LegendItemTest extends TestCase {
         assertFalse(item1.equals(item2));
         item2.setOutlinePaint(new GradientPaint(1.1f, 2.2f, Color.green, 3.3f,
                 4.4f, Color.blue));
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         // linePaint
         item1.setLinePaint(new GradientPaint(0.1f, 0.2f, Color.green, 0.3f,
@@ -325,13 +310,14 @@ public class LegendItemTest extends TestCase {
         assertFalse(item1.equals(item2));
         item2.setLinePaint(new GradientPaint(0.1f, 0.2f, Color.green, 0.3f,
                 0.4f, Color.blue));
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() throws IOException, ClassNotFoundException {
         LegendItem item1 = new LegendItem("Item", "Description",
                 "ToolTip", "URL",
@@ -344,27 +330,19 @@ public class LegendItemTest extends TestCase {
         item1.setLinePaint(new GradientPaint(1.0f, 2.0f, Color.white, 3.0f,
                 4.0f, Color.red));
         LegendItem item2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(item1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        item2 = (LegendItem) in.readObject();
-        in.close();
-        assertTrue(item1.equals(item2));
+        item2 = (LegendItem) TestUtilities.serialised(item1);
+        assertEquals(item1, item2);
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization2() throws IOException, ClassNotFoundException {
         AttributedString as = new AttributedString("Test String");
         as.addAttribute(TextAttribute.FONT, new Font("Dialog", Font.PLAIN, 12));
         LegendItem item1 = new LegendItem(as, "Description", "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.red);
-        LegendItem item2;
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         ObjectOutput out = new ObjectOutputStream(buffer);
         out.writeObject(item1);
@@ -372,7 +350,7 @@ public class LegendItemTest extends TestCase {
 
         ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
                 buffer.toByteArray()));
-        item2 = (LegendItem) in.readObject();
+        LegendItem item2 = (LegendItem) in.readObject();
         in.close();
         assertEquals(item1, item2);
     }
@@ -380,15 +358,17 @@ public class LegendItemTest extends TestCase {
     /**
      * Basic checks for cloning.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         LegendItem item1 = new LegendItem("Item");
         LegendItem item2 = (LegendItem) item1.clone();
-        assertTrue(item1 != item2);
-        assertTrue(item1.getClass() == item2.getClass());
-        assertTrue(item1.equals(item2));
+
+        assertNotSame(item1, item2);
+        assertSame(item1.getClass(), item2.getClass());
+        assertEquals(item1, item2);
 
         // the clone references the same dataset as the original
-        assertTrue(item1.getDataset() == item2.getDataset());
+        assertSame(item1.getDataset(), item2.getDataset());
     }
 
 }
