@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------------
- * DefaultHeatMapDatasetTests.java
- * -------------------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * ------------------------------
+ * DefaultHeatMapDatasetTest.java
+ * ------------------------------
+ * (C) Copyright 2009-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.data.general;
 
-import org.jfree.data.general.DefaultHeatMapDataset;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetChangeListener;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Somes tests for the {@link DefaultHeatMapDataset} class.
@@ -202,24 +193,15 @@ public class DefaultHeatMapDatasetTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultHeatMapDataset d1 = new DefaultHeatMapDataset(2, 3, -1.0, 4.0,
                 -2.0, 5.0);
         d1.setZValue(0, 0, 10.0);
         d1.setZValue(0, 1, Double.NEGATIVE_INFINITY);
         d1.setZValue(0, 2, Double.POSITIVE_INFINITY);
         d1.setZValue(1, 0, Double.NaN);
-
-        DefaultHeatMapDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (DefaultHeatMapDataset) in.readObject();
-        in.close();
+        DefaultHeatMapDataset d2 = (DefaultHeatMapDataset) 
+                TestUtilities.serialised(d1);
         assertEquals(d1, d2);
     }
 

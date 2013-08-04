@@ -27,7 +27,7 @@
  * --------------------------------
  * TestIntervalCategoryDataset.java
  * --------------------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,8 +46,6 @@ import java.util.List;
 import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.category.IntervalCategoryDataset;
-import org.jfree.data.general.AbstractDataset;
-import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.PublicCloneable;
 /**
  * A test implementation of the {@link IntervalCategoryDataset} interface.

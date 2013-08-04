@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * PieDatasetTests.java
- * --------------------
- * (C) Copyright 2003-2007, by Object Refinery Limited and Contributors.
+ * -------------------
+ * PieDatasetTest.java
+ * -------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,21 +42,10 @@
 
 package org.jfree.data.general;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetChangeListener;
-import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link org.jfree.data.general.PieDataset} class.
@@ -178,23 +167,14 @@ public class DefaultPieDatasetTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultPieDataset d1 = new DefaultPieDataset();
         d1.setValue("C1", new Double(234.2));
         d1.setValue("C2", null);
         d1.setValue("C3", new Double(345.9));
         d1.setValue("C4", new Double(452.7));
 
-        DefaultPieDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (DefaultPieDataset) in.readObject();
-        in.close();
+        DefaultPieDataset d2 = (DefaultPieDataset) TestUtilities.serialised(d1);
         assertEquals(d1, d2);
     }
 
