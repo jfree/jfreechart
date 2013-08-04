@@ -50,7 +50,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.RenderingHints;
-import java.io.IOException;
 import java.util.List;
 
 import org.jfree.chart.event.ChartChangeEvent;
@@ -259,7 +258,7 @@ public class JFreeChartTest implements ChartChangeListener {
      * Serialize a pie chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization1() throws IOException, ClassNotFoundException {
+    public void testSerialization1() {
         DefaultPieDataset data = new DefaultPieDataset();
         data.setValue("Type 1", 54.5);
         data.setValue("Type 2", 23.9);
@@ -276,7 +275,7 @@ public class JFreeChartTest implements ChartChangeListener {
      * Serialize a 3D pie chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization2() throws IOException, ClassNotFoundException {
+    public void testSerialization2() {
         DefaultPieDataset data = new DefaultPieDataset();
         data.setValue("Type 1", 54.5);
         data.setValue("Type 2", 23.9);
@@ -290,7 +289,7 @@ public class JFreeChartTest implements ChartChangeListener {
      * Serialize a bar chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization3() throws IOException, ClassNotFoundException {
+    public void testSerialization3() {
 
         // row keys...
         String series1 = "First";
@@ -348,7 +347,7 @@ public class JFreeChartTest implements ChartChangeListener {
      * Serialize a time seroes chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization4() throws IOException, ClassNotFoundException {
+    public void testSerialization4() {
 
         RegularTimePeriod t = new Day();
         TimeSeries series = new TimeSeries("Series 1");
