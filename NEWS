@@ -2,7 +2,8 @@ JFreeChart 1.0.16
 -----------------
 Not yet released
 
-Provided subscript/superscript support for axis labels (via AttributedString), 
+Provided subscript/superscript support for axis labels (via AttributedString),
+new axis label positioning options, simplified ChartFactory methods,
 added URLs to labels on CategoryAxis, improved the consistency of the 
 SWTGraphics2D implementation, and various bug fixes.
 
