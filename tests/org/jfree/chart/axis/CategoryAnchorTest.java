@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * CategoryAnchorTests.java
- * ------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * CategoryAnchorTest.java
+ * -----------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,19 +41,10 @@
 
 package org.jfree.chart.axis;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.axis.CategoryAnchor;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link CategoryAnchor} class.
@@ -104,17 +95,9 @@ public class CategoryAnchorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         CategoryAnchor a1 = CategoryAnchor.MIDDLE;
-        CategoryAnchor a2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        a2 = (CategoryAnchor) in.readObject();
-        in.close();
+        CategoryAnchor a2 = (CategoryAnchor) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
         assertTrue(a1 == a2);
     }

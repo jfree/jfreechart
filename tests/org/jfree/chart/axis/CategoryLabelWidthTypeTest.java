@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------
- * CategoryLabelWidthTypeTests.java
- * --------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * -------------------------------
+ * CategoryLabelWidthTypeTest.java
+ * -------------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.chart.axis;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.axis.CategoryLabelWidthType;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link CategoryLabelWidthType} class.
@@ -102,18 +93,9 @@ public class CategoryLabelWidthTypeTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         CategoryLabelWidthType w1 = CategoryLabelWidthType.RANGE;
-        CategoryLabelWidthType w2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(w1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        w2 = (CategoryLabelWidthType) in.readObject();
-        in.close();
+        CategoryLabelWidthType w2 = (CategoryLabelWidthType) TestUtilities.serialised(w1);
         assertEquals(w1, w2);
         assertTrue(w1 == w2);
     }

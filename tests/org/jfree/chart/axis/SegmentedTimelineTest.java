@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------
- * SegmentedTimelineTests.java
- * ----------------------------
- * (C) Copyright 2003-2008, by Bill Kelemen and Contributors.
+ * ---------------------------
+ * SegmentedTimelineTest.java
+ * ---------------------------
+ * (C) Copyright 2003-2013, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -61,8 +61,8 @@ import java.util.Iterator;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.axis.SegmentedTimeline;
 
 /**
  * JUnit Tests for the {@link SegmentedTimeline} class.
@@ -1028,20 +1028,10 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization2() throws IOException, ClassNotFoundException {
+    public void testSerialization2() {
         SegmentedTimeline l1 = new SegmentedTimeline(1000, 5, 2);
-        SegmentedTimeline l2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(l1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        l2 = (SegmentedTimeline) in.readObject();
-        in.close();
-        boolean b = l1.equals(l2);
-        assertTrue(b);
+        SegmentedTimeline l2 = (SegmentedTimeline) TestUtilities.serialised(l1);
+        assertEquals(l1, l2);
     }
 
     //////////////////////////////////////////////////////////////////////////

@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------
- * MonthDateFormatTests.java
- * -------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * ------------------------
+ * MonthDateFormatTest.java
+ * ------------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,12 +40,6 @@
 
 package org.jfree.chart.axis;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -53,8 +47,7 @@ import java.util.TimeZone;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.axis.MonthDateFormat;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Some tests for the {@link MonthDateFormat} class.
@@ -164,21 +157,7 @@ public class MonthDateFormatTest extends TestCase {
      */
     public void testSerialization() {
         MonthDateFormat mf1 = new MonthDateFormat();
-        MonthDateFormat mf2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(mf1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(
-                    new ByteArrayInputStream(buffer.toByteArray()));
-            mf2 = (MonthDateFormat) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
+        MonthDateFormat mf2 = (MonthDateFormat) TestUtilities.serialised(mf1);
         assertTrue(mf1.equals(mf2));
     }
 

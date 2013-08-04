@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------------
- * CategoryLabelPositionTests.java
- * -------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * ------------------------------
+ * CategoryLabelPositionTest.java
+ * ------------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,20 +41,13 @@
 
 package org.jfree.chart.axis;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.axis.CategoryLabelPosition;
-import org.jfree.chart.axis.CategoryLabelWidthType;
 import org.jfree.text.TextBlockAnchor;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.TextAnchor;
@@ -169,15 +162,7 @@ public class CategoryLabelPositionTest extends TestCase {
      */
     public void testSerialization() throws IOException, ClassNotFoundException {
         CategoryLabelPosition p1 = new CategoryLabelPosition();
-        CategoryLabelPosition p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        p2 = (CategoryLabelPosition) in.readObject();
-        in.close();
+        CategoryLabelPosition p2 = (CategoryLabelPosition) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
 
