@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------
- * CrosshairOverlayTests.java
- * --------------------------
- * (C) Copyright 2009, by Object Refinery Limited and Contributors.
+ * -------------------------
+ * CrosshairOverlayTest.java
+ * -------------------------
+ * (C) Copyright 2009-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,19 +43,12 @@ package org.jfree.chart.panel;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.panel.CrosshairOverlay;
 import org.jfree.chart.plot.Crosshair;
 
 /**
@@ -93,21 +86,13 @@ public class CrosshairOverlayTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         CrosshairOverlay o1 = new CrosshairOverlay();
         o1.addDomainCrosshair(new Crosshair(99.9));
         o1.addRangeCrosshair(new Crosshair(1.23, new GradientPaint(1.0f, 2.0f,
                 Color.red, 3.0f, 4.0f, Color.blue), new BasicStroke(1.1f)));
-        CrosshairOverlay o2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(o1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        o2 = (CrosshairOverlay) in.readObject();
-            in.close();
-        assertTrue(o1.equals(o2));
+        CrosshairOverlay o2 = (CrosshairOverlay) TestUtilities.serialised(o1);
+        assertEquals(o1, o2);
     }
 
     /**
