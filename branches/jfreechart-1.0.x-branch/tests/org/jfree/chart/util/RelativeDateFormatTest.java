@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------
- * RelativeDateFormatTests.java
- * ----------------------------
- * (C) Copyright 2006-2011, by Object Refinery Limited and Contributors.
+ * ---------------------------
+ * RelativeDateFormatTest.java
+ * ---------------------------
+ * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -51,8 +51,6 @@ import java.util.Locale;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.util.RelativeDateFormat;
 
 /**
  * Tests for the {@link RelativeDateFormat} class.

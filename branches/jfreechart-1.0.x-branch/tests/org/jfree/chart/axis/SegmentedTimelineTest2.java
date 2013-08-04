@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------
- * SegmentedTimelineTests2.java
- * ----------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * ---------------------------
+ * SegmentedTimelineTest2.java
+ * ---------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,8 +47,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import junit.framework.TestCase;
-
-import org.jfree.chart.axis.SegmentedTimeline;
 
 /**
  * Some tests for the {@link SegmentedTimeline} class.

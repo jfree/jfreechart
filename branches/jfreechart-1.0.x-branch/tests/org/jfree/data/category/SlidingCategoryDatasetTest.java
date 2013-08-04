@@ -41,7 +41,6 @@
 
 package org.jfree.data.category;
 
-import java.io.IOException;
 import java.util.List;
 
 import junit.framework.Test;
@@ -130,7 +129,7 @@ public class SlidingCategoryDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultCategoryDataset u1 = new DefaultCategoryDataset();
         u1.addValue(1.0, "R1", "C1");
         u1.addValue(2.0, "R1", "C2");

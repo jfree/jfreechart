@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------------
- * ChartRenderingInfoTests.java
- * ----------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * ---------------------------
+ * ChartRenderingInfoTest.java
+ * ---------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;

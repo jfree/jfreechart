@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * SymbolicAxisTests.java
- * ----------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * ---------------------
+ * SymbolicAxisTest.java
+ * ---------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,7 +42,6 @@
 package org.jfree.chart.axis;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -75,7 +74,7 @@ public class SymbolAxisTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         String[] tickLabels = new String[] {"One", "Two", "Three"};
         SymbolAxis a1 = new SymbolAxis("Test Axis", tickLabels);
         SymbolAxis a2 = (SymbolAxis) TestUtilities.serialised(a1);

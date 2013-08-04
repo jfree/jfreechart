@@ -48,7 +48,6 @@ package org.jfree.chart.renderer.xy;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.IOException;
 import java.util.Date;
 
 import junit.framework.Test;
@@ -207,7 +206,7 @@ public class CandlestickRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         CandlestickRenderer r1 = new CandlestickRenderer();
         CandlestickRenderer r2 = (CandlestickRenderer) 
                 TestUtilities.serialised(r1);

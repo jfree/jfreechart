@@ -52,7 +52,6 @@ package org.jfree.chart.axis;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -290,7 +289,7 @@ public class DateAxisTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DateAxis a1 = new DateAxis("Test Axis");
         DateAxis a2 = (DateAxis) TestUtilities.serialised(a1);
         assertEquals(a1, a2);

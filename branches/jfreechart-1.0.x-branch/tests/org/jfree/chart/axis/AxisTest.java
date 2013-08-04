@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
- * --------------
- * AxisTests.java
- * --------------
- * (C) Copyright 2003-2012, by Object Refinery Limited and Contributors.
+ * -------------
+ * AxisTest.java
+ * -------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -52,8 +52,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.jfree.chart.axis.Axis;
-import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.ui.RectangleInsets;
 
 /**

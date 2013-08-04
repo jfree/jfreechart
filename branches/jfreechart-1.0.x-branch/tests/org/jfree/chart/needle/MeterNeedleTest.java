@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------
- * MeterNeedleTests.java
- * ---------------------
- * (C) Copyright 2005, 2007, by Object Refinery Limited and Contributors.
+ * --------------------
+ * MeterNeedleTest.java
+ * --------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,8 +49,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.jfree.chart.needle.LineNeedle;
-import org.jfree.chart.needle.MeterNeedle;
 
 /**
  * Tests for the {@link MeterNeedle} class.

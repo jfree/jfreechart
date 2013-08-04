@@ -41,8 +41,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import java.io.IOException;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -125,7 +123,7 @@ public class DeviationRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DeviationRenderer r1 = new DeviationRenderer();
         DeviationRenderer r2 = (DeviationRenderer) TestUtilities.serialised(r1);
         assertEquals(r1, r2);

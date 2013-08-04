@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------------
- * StandardXYURLGeneratorTests.java
- * --------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * -------------------------------
+ * StandardXYURLGeneratorTest.java
+ * -------------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,20 +41,11 @@
 
 package org.jfree.chart.urls;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.util.PublicCloneable;
 
 /**

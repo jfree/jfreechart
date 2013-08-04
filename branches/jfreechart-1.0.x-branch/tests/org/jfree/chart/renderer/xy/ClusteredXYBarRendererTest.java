@@ -43,7 +43,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -132,7 +131,7 @@ public class ClusteredXYBarRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
         ClusteredXYBarRenderer r2 = (ClusteredXYBarRenderer) 
                 TestUtilities.serialised(r1);

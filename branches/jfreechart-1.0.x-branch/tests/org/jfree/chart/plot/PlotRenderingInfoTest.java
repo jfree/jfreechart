@@ -42,7 +42,6 @@ package org.jfree.chart.plot;
 
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

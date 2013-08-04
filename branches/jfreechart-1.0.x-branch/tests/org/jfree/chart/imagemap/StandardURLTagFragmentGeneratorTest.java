@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------------------------
- * StandardURLTagFragmentGeneratorTests.java
- * -----------------------------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * ----------------------------------------
+ * StandardURLTagFragmentGeneratorTest.java
+ * ----------------------------------------
+ * (C) Copyright 2007-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,8 +43,6 @@ package org.jfree.chart.imagemap;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.imagemap.StandardURLTagFragmentGenerator;
 
 /**
  * Tests for the {@link StandardURLTagFragmentGeneratorTests} class.

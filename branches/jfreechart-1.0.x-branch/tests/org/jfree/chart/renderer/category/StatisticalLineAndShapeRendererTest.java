@@ -44,7 +44,6 @@
 package org.jfree.chart.renderer.category;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -138,7 +137,7 @@ public class StatisticalLineAndShapeRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         StatisticalLineAndShapeRenderer r1
                 = new StatisticalLineAndShapeRenderer();
         StatisticalLineAndShapeRenderer r2 = (StatisticalLineAndShapeRenderer) 

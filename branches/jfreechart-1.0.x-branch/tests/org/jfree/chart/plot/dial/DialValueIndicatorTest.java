@@ -45,7 +45,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -212,9 +211,10 @@ public class DialValueIndicatorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = (DialValueIndicator) TestUtilities.serialised(i1);
+        DialValueIndicator i2 = (DialValueIndicator) 
+                TestUtilities.serialised(i1);
         assertEquals(i1, i2);
     }
 

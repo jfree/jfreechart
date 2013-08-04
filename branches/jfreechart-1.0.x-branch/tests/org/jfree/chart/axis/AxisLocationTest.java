@@ -41,7 +41,6 @@
 
 package org.jfree.chart.axis;
 
-import java.io.IOException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -97,7 +96,7 @@ public class AxisLocationTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         AxisLocation location1 = AxisLocation.BOTTOM_OR_RIGHT;
         AxisLocation location2 = (AxisLocation) TestUtilities.serialised(location1);
         assertEquals(location1, location2);
