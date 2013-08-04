@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------
- * XYDifferenceRendererTests.java
- * ------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -----------------------------
+ * XYDifferenceRendererTest.java
+ * -----------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,13 +49,6 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -63,9 +56,9 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYDifferenceRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.util.PublicCloneable;
@@ -185,18 +178,11 @@ public class XYDifferenceRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.red,
                 Color.blue, false);
-        XYDifferenceRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray()));
-        r2 = (XYDifferenceRenderer) in.readObject();
-        in.close();
+        XYDifferenceRenderer r2 = (XYDifferenceRenderer) 
+                TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

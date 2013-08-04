@@ -25,9 +25,9 @@
  * Other names may be trademarks of their respective owners.]
  *
  * -------------------------------
- * StackedXYAreaRenderer2Tests.java
+ * StackedXYAreaRenderer2Test.java
  * -------------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,13 +46,6 @@ package org.jfree.chart.renderer.xy;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -60,10 +53,10 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.StackedXYAreaRenderer2;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.TableXYDataset;
@@ -166,18 +159,10 @@ public class StackedXYAreaRenderer2Test extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
-        StackedXYAreaRenderer2 r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (StackedXYAreaRenderer2) in.readObject();
-        in.close();
+        StackedXYAreaRenderer2 r2 = (StackedXYAreaRenderer2) 
+                TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 

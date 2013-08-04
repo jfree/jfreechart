@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------------
- * StackedXYAreaRendererTests.java
- * -------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * ------------------------------
+ * StackedXYAreaRendererTest.java
+ * ------------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,13 +49,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -63,11 +56,10 @@ import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
-import org.jfree.chart.renderer.xy.XYAreaRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.TableXYDataset;
@@ -154,19 +146,12 @@ public class StackedXYAreaRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         r1.setShapePaint(Color.red);
         r1.setShapeStroke(new BasicStroke(1.23f));
-        StackedXYAreaRenderer r2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(r1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        r2 = (StackedXYAreaRenderer) in.readObject();
-        in.close();
+        StackedXYAreaRenderer r2 = (StackedXYAreaRenderer) 
+                TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }
 
