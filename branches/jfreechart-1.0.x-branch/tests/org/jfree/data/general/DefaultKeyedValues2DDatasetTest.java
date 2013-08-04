@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------------------
- * DefaultKeyedValues2DDatasetTests.java
- * -------------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * ------------------------------------
+ * DefaultKeyedValues2DDatasetTest.java
+ * ------------------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.data.general;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.data.general.DefaultKeyedValues2DDataset;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link DefaultKeyedValues2DDataset} class.
@@ -95,23 +86,15 @@ public class DefaultKeyedValues2DDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DefaultKeyedValues2DDataset d1 = new DefaultKeyedValues2DDataset();
         d1.addValue(new Double(234.2), "Row1", "Col1");
         d1.addValue(null, "Row1", "Col2");
         d1.addValue(new Double(345.9), "Row2", "Col1");
         d1.addValue(new Double(452.7), "Row2", "Col2");
 
-        DefaultKeyedValues2DDataset d2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(d1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        d2 = (DefaultKeyedValues2DDataset) in.readObject();
-        in.close();
+        DefaultKeyedValues2DDataset d2 = (DefaultKeyedValues2DDataset) 
+                TestUtilities.serialised(d1);
         assertEquals(d1, d2);
     }
 
