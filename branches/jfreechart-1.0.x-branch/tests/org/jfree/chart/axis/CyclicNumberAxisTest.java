@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * CyclicAxisTests.java
- * --------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -------------------
+ * CyclicAxisTest.java
+ * -------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Nicolas Brodu
  * Contributor(s):   -;
@@ -47,19 +47,12 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.axis.CyclicNumberAxis;
 
 /**
  * Tests for the {@link CyclicNumberAxis} class.
@@ -160,18 +153,9 @@ public class CyclicNumberAxisTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         CyclicNumberAxis a1 = new CyclicNumberAxis(10, 0, "Test Axis");
-        CyclicNumberAxis a2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        a2 = (CyclicNumberAxis) in.readObject();
-        in.close();
+        CyclicNumberAxis a2 = (CyclicNumberAxis) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 

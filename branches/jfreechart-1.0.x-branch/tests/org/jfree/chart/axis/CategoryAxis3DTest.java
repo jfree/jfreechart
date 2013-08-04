@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * CategoryAxis3DTests.java
- * ------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * CategoryAxis3DTest.java
+ * -----------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,12 @@
 
 package org.jfree.chart.axis;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.axis.CategoryAxis3D;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link CategoryAxis3D} class.
@@ -93,15 +86,7 @@ public class CategoryAxis3DTest extends TestCase {
      */
     public void testSerialization() throws IOException, ClassNotFoundException {
         CategoryAxis3D a1 = new CategoryAxis3D("Test Axis");
-        CategoryAxis3D a2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        a2 = (CategoryAxis3D) in.readObject();
-        in.close();
+        CategoryAxis3D a2 = (CategoryAxis3D) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 

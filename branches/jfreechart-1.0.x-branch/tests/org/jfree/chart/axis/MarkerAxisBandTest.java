@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * MarkerAxisBandTests.java
- * ------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * MarkerAxisBandTest.java
+ * -----------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,19 +42,13 @@
 package org.jfree.chart.axis;
 
 import java.awt.Font;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.axis.MarkerAxisBand;
 
 /**
  * Tests for the {@link MarkerAxisBand} class.
@@ -135,15 +129,7 @@ public class MarkerAxisBandTest extends TestCase {
      */
     public void testSerialization() throws IOException, ClassNotFoundException {
         MarkerAxisBand a1 = new MarkerAxisBand(null, 1.0, 1.0, 1.0, 1.0, null);
-        MarkerAxisBand a2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        a2 = (MarkerAxisBand) in.readObject();
-        in.close();
+        MarkerAxisBand a2 = (MarkerAxisBand) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 

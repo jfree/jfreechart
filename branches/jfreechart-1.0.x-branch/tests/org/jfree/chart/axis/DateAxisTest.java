@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------
- * DateAxisTests.java
- * ------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * -----------------
+ * DateAxisTest.java
+ * -----------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -52,13 +52,7 @@ package org.jfree.chart.axis;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -71,13 +65,8 @@ import java.util.TimeZone;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.axis.AxisState;
-import org.jfree.chart.axis.DateAxis;
-import org.jfree.chart.axis.DateTick;
-import org.jfree.chart.axis.DateTickMarkPosition;
-import org.jfree.chart.axis.DateTickUnit;
-import org.jfree.chart.axis.SegmentedTimeline;
 import org.jfree.data.time.DateRange;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
@@ -303,16 +292,7 @@ public class DateAxisTest extends TestCase {
      */
     public void testSerialization() throws IOException, ClassNotFoundException {
         DateAxis a1 = new DateAxis("Test Axis");
-        DateAxis a2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        a2 = (DateAxis) in.readObject();
-        in.close();
+        DateAxis a2 = (DateAxis) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 

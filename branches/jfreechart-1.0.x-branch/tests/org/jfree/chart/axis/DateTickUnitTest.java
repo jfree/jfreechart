@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * DateTickUnitTests.java
- * ----------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * ---------------------
+ * DateTickUnitTest.java
+ * ---------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,19 +41,13 @@
 
 package org.jfree.chart.axis;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.axis.DateTickUnit;
 
 /**
  * Tests for the {@link DateTickUnit} class.
@@ -104,16 +98,7 @@ public class DateTickUnitTest extends TestCase {
      */
     public void testSerialization() throws IOException, ClassNotFoundException {
         DateTickUnit a1 = new DateTickUnit(DateTickUnit.DAY, 7);
-        DateTickUnit a2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        a2 = (DateTickUnit) in.readObject();
-        in.close();
+        DateTickUnit a2 = (DateTickUnit) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 

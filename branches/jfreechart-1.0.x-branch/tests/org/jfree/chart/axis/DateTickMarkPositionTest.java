@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------
- * DateTickMarkPositionTests.java
- * ------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * -----------------------------
+ * DateTickMarkPositionTest.java
+ * -----------------------------
+ * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,19 +40,10 @@
 
 package org.jfree.chart.axis;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.axis.DateTickMarkPosition;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link DateTickMarkPosition} class.
@@ -106,18 +97,9 @@ public class DateTickMarkPositionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         DateTickMarkPosition p1 = DateTickMarkPosition.MIDDLE;
-        DateTickMarkPosition p2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(p1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        p2 = (DateTickMarkPosition) in.readObject();
-        in.close();
+        DateTickMarkPosition p2 = (DateTickMarkPosition) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
         assertTrue(p1 == p2);
     }

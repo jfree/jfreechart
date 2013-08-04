@@ -42,19 +42,12 @@
 package org.jfree.chart.axis;
 
 import java.awt.Color;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.axis.SymbolAxis;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link SymbolAxis} class.
@@ -85,15 +78,7 @@ public class SymbolAxisTest extends TestCase {
     public void testSerialization() throws IOException, ClassNotFoundException {
         String[] tickLabels = new String[] {"One", "Two", "Three"};
         SymbolAxis a1 = new SymbolAxis("Test Axis", tickLabels);
-        SymbolAxis a2;
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-        ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                buffer.toByteArray()));
-        a2 = (SymbolAxis) in.readObject();
-        in.close();
+        SymbolAxis a2 = (SymbolAxis) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 

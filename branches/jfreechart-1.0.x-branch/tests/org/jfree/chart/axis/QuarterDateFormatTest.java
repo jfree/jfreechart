@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------
- * QuarterDateFormatTests.java
- * ---------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * QuarterDateFormatTest.java
+ * --------------------------
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,19 +41,12 @@
 
 package org.jfree.chart.axis;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.TimeZone;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.jfree.chart.axis.QuarterDateFormat;
+import org.jfree.chart.TestUtilities;
 
 /**
  * Tests for the {@link QuarterDateFormat} class.
@@ -144,22 +137,8 @@ public class QuarterDateFormatTest extends TestCase {
     public void testSerialization() {
         QuarterDateFormat qf1 = new QuarterDateFormat(TimeZone.getTimeZone(
                 "GMT"), new String[] {"1", "2", "3", "4"});
-        QuarterDateFormat qf2 = null;
-        try {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            ObjectOutput out = new ObjectOutputStream(buffer);
-            out.writeObject(qf1);
-            out.close();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(
-                    buffer.toByteArray()));
-            qf2 = (QuarterDateFormat) in.readObject();
-            in.close();
-        }
-        catch (Exception e) {
-            fail(e.toString());
-        }
-        assertTrue(qf1.equals(qf2));
+        QuarterDateFormat qf2 = (QuarterDateFormat) TestUtilities.serialised(qf1);
+        assertEquals(qf1, qf2);
     }
 
 }
