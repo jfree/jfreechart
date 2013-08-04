@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------
- * XYDrawableAnnotationTests.java
- * ------------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * -----------------------------
+ * XYDrawableAnnotationTest.java
+ * -----------------------------
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,20 +45,13 @@ package org.jfree.chart.annotations;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jfree.chart.TestUtilities;
 
-import org.jfree.chart.annotations.XYDrawableAnnotation;
 import org.jfree.ui.Drawable;
 import org.jfree.util.PublicCloneable;
 
@@ -210,20 +203,10 @@ public class XYDrawableAnnotationTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testSerialization() {
         XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
                 200.0, new TestDrawable());
-        XYDrawableAnnotation a2 = null;
-
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutput out = new ObjectOutputStream(buffer);
-        out.writeObject(a1);
-        out.close();
-
-        ObjectInput in = new ObjectInputStream(
-                new ByteArrayInputStream(buffer.toByteArray()));
-        a2 = (XYDrawableAnnotation) in.readObject();
-        in.close();
+        XYDrawableAnnotation a2 = (XYDrawableAnnotation) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 
