@@ -43,39 +43,22 @@ package org.jfree.data.gantt;
 
 import java.util.Date;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 /**
  * Tests for the {@link TaskSeries} class.
  */
-public class TaskSeriesTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(TaskSeriesTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public TaskSeriesTest(String name) {
-        super(name);
-    }
+public class TaskSeriesTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
-
         TaskSeries s1 = new TaskSeries("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
@@ -89,12 +72,12 @@ public class TaskSeriesTest extends TestCase {
         assertFalse(s1.equals(s2));
         s2.add(new Task("T3", new Date(22), new Date(33)));
         assertTrue(s1.equals(s2));
-
     }
 
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         TaskSeries s1 = new TaskSeries("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
@@ -114,6 +97,7 @@ public class TaskSeriesTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         TaskSeries s1 = new TaskSeries("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
@@ -125,6 +109,7 @@ public class TaskSeriesTest extends TestCase {
     /**
      * Some checks for the getTask() method.
      */
+    @Test
     public void testGetTask() {
         TaskSeries s1 = new TaskSeries("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));

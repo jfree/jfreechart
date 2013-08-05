@@ -42,37 +42,21 @@ package org.jfree.data.gantt;
 
 import java.util.Date;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for the {@link SlidingGanttCategoryDataset} class.
  */
-public class SlidingGanttCategoryDatasetTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(SlidingGanttCategoryDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public SlidingGanttCategoryDatasetTest(String name) {
-        super(name);
-    }
+public class SlidingGanttCategoryDatasetTest {
 
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         TaskSeries s1 = new TaskSeries("Series");
         s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
@@ -111,6 +95,7 @@ public class SlidingGanttCategoryDatasetTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         TaskSeries s1 = new TaskSeries("Series");
         s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
@@ -137,6 +122,7 @@ public class SlidingGanttCategoryDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         TaskSeries s1 = new TaskSeries("Series");
         s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
