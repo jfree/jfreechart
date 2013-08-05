@@ -41,37 +41,22 @@
 
 package org.jfree.data.time.ohlc;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link OHLC} class.
  */
-public class OHLCTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(OHLCTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public OHLCTest(String name) {
-        super(name);
-    }
+public class OHLCTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         OHLC i1 = new OHLC(2.0, 4.0, 1.0, 3.0);
         OHLC i2 = new OHLC(2.0, 4.0, 1.0, 3.0);
@@ -101,6 +86,7 @@ public class OHLCTest extends TestCase {
     /**
      * This class is immutable.
      */
+    @Test
     public void testCloning() {
         OHLC i1 = new OHLC(2.0, 4.0, 1.0, 3.0);
         assertFalse(i1 instanceof Cloneable);
@@ -109,6 +95,7 @@ public class OHLCTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         OHLC i1 = new OHLC(2.0, 4.0, 1.0, 3.0);
         OHLC i2 = (OHLC) TestUtilities.serialised(i1);
@@ -118,6 +105,7 @@ public class OHLCTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         OHLC i1 = new OHLC(2.0, 4.0, 1.0, 3.0);
         OHLC i2 = new OHLC(2.0, 4.0, 1.0, 3.0);
