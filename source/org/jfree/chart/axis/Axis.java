@@ -392,21 +392,27 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the attributed label.  The default value is <code>null</code>.
+     * Returns the attributed label (the returned value is a copy, so 
+     * modifying it will not impact the state of the axis).  The default value 
+     * is <code>null</code>.
      * 
      * @return The attributed label (possibly <code>null</code>).
      * 
      * @since 1.0.16
      */
     public AttributedString getAttributedLabel() {
-        return this.attributedLabel;    
+        if (this.attributedLabel != null) {
+            return new AttributedString(this.attributedLabel.getIterator());
+        } else {
+            return null;
+        }
     }
     
     /**
      * Sets the attributed label for the axis and sends an 
      * {@link AxisChangeEvent} to all registered listeners.  This is a 
      * convenience method that converts the string into an 
-     * AttributedString using the current font attributes.
+     * <code>AttributedString</code> using the current font attributes.
      * 
      * @param label  the label (<code>null</<code> permitted).
      * 
@@ -425,7 +431,11 @@ public abstract class Axis implements Cloneable, Serializable {
      * @since 1.0.16
      */
     public void setAttributedLabel(AttributedString label) {
-        this.attributedLabel = label;
+        if (label != null) {
+            this.attributedLabel = new AttributedString(label.getIterator());
+        } else {
+            this.attributedLabel = null;
+        }
         fireChangeEvent();
     }
     
@@ -436,8 +446,10 @@ public abstract class Axis implements Cloneable, Serializable {
      * @param label  the label (<code>null</code> permitted).
      * 
      * @return An attributed string or <code>null</code>.
+     * 
+     * @since 1.0.16
      */
-    private AttributedString createAttributedLabel(String label) {
+    public AttributedString createAttributedLabel(String label) {
         if (label == null) {
             return null;
         }
@@ -1597,6 +1609,9 @@ public abstract class Axis implements Cloneable, Serializable {
             return false;
         }
         if (this.labelAngle != that.labelAngle) {
+            return false;
+        }
+        if (!this.labelLocation.equals(that.labelLocation)) {
             return false;
         }
         if (this.axisLineVisible != that.axisLineVisible) {
