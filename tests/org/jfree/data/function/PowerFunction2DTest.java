@@ -40,39 +40,23 @@
 
 package org.jfree.data.function;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for the {@link PowerFunction2D} class.
  */
-public class PowerFunction2DTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(PowerFunction2DTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public PowerFunction2DTest(String name) {
-        super(name);
-    }
+public class PowerFunction2DTest {
 
     private static final double EPSILON = 0.000000001;
 
     /**
      * Some tests for the constructor.
      */
+    @Test
     public void testConstructor() {
         PowerFunction2D f = new PowerFunction2D(1.0, 2.0);
         assertEquals(1.0, f.getA(), EPSILON);
@@ -82,6 +66,7 @@ public class PowerFunction2DTest extends TestCase {
     /**
      * For datasets, the equals() method just checks keys and values.
      */
+    @Test
     public void testEquals() {
         PowerFunction2D f1 = new PowerFunction2D(1.0, 2.0);
         PowerFunction2D f2 = new PowerFunction2D(1.0, 2.0);
@@ -95,6 +80,7 @@ public class PowerFunction2DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         PowerFunction2D f1 = new PowerFunction2D(1.0, 2.0);
         PowerFunction2D f2 = (PowerFunction2D) TestUtilities.serialised(f1);
@@ -105,6 +91,7 @@ public class PowerFunction2DTest extends TestCase {
      * Objects that are equal should have the same hash code otherwise FindBugs
      * will tell on us...
      */
+    @Test
     public void testHashCode() {
         PowerFunction2D f1 = new PowerFunction2D(1.0, 2.0);
         PowerFunction2D f2 = new PowerFunction2D(1.0, 2.0);
