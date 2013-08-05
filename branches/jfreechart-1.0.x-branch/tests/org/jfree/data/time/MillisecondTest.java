@@ -46,54 +46,33 @@
 
 package org.jfree.data.time;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.date.MonthConstants;
+import org.junit.Test;
 
 /**
  * Tests for the {@link Millisecond} class.
  */
-public class MillisecondTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MillisecondTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MillisecondTest(String name) {
-        super(name);
-    }
-
-    /**
-     * Common test setup.
-     */
-    protected void setUp() {
-        // no setup
-    }
+public class MillisecondTest {
 
     /**
      * Check that a {@link Millisecond} instance is equal to itself.
      *
      * SourceForge Bug ID: 558850.
      */
+    @Test
     public void testEqualsSelf() {
         Millisecond millisecond = new Millisecond();
         assertTrue(millisecond.equals(millisecond));
@@ -102,6 +81,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Tests the equals method.
      */
+    @Test
     public void testEquals() {
         Day day1 = new Day(29, MonthConstants.MARCH, 2002);
         Hour hour1 = new Hour(15, day1);
@@ -121,6 +101,7 @@ public class MillisecondTest extends TestCase {
      * java.util.Date(1016729759123L).  Use this to check the Millisecond
      * constructor.
      */
+    @Test
     public void testDateConstructor1() {
         TimeZone zone = TimeZone.getTimeZone("GMT");
         Locale locale = Locale.getDefault();  // locale should not matter here
@@ -141,6 +122,7 @@ public class MillisecondTest extends TestCase {
      * java.util.Date(1016722559123L).  Use this to check the Millisecond
      * constructor.
      */
+    @Test
     public void testDateConstructor2() {
         TimeZone zone = TimeZone.getTimeZone("Europe/Tallinn");
         Locale locale = Locale.getDefault();  // locale should not matter here
@@ -159,6 +141,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         Millisecond m1 = new Millisecond();
         Millisecond m2 = (Millisecond) TestUtilities.serialised(m1);
@@ -168,6 +151,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         Millisecond m1 = new Millisecond(599, 23, 45, 7, 9, 10, 2007);
         Millisecond m2 = new Millisecond(599, 23, 45, 7, 9, 10, 2007);
@@ -181,6 +165,7 @@ public class MillisecondTest extends TestCase {
      * A test for bug report 943985 - the calculation for the middle
      * millisecond is incorrect for odd milliseconds.
      */
+    @Test
     public void test943985() {
         Millisecond ms = new Millisecond(new java.util.Date(4));
         assertEquals(ms.getFirstMillisecond(), ms.getMiddleMillisecond());
@@ -194,6 +179,7 @@ public class MillisecondTest extends TestCase {
      * The {@link Millisecond} class is immutable, so should not be
      * {@link Cloneable}.
      */
+    @Test
     public void testNotCloneable() {
         Millisecond m = new Millisecond(599, 23, 45, 7, 9, 10, 2007);
         assertFalse(m instanceof Cloneable);
@@ -202,6 +188,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond() method.
      */
+    @Test
     public void testGetFirstMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
@@ -216,6 +203,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetFirstMillisecondWithTimeZone() {
         Millisecond m = new Millisecond(500, 50, 59, 15, 1, 4, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
@@ -235,6 +223,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetFirstMillisecondWithCalendar() {
         Millisecond m = new Millisecond(500, 55, 40, 2, 15, 4, 2000);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
@@ -255,6 +244,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond() method.
      */
+    @Test
     public void testGetLastMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
@@ -269,6 +259,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetLastMillisecondWithTimeZone() {
         Millisecond m = new Millisecond(750, 55, 1, 2, 7, 7, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
@@ -288,6 +279,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetLastMillisecondWithCalendar() {
         Millisecond m = new Millisecond(250, 50, 45, 21, 21, 4, 2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
@@ -308,6 +300,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Some checks for the getSerialIndex() method.
      */
+    @Test
     public void testGetSerialIndex() {
         Millisecond m = new Millisecond(500, 1, 1, 1, 1, 1, 2000);
         assertEquals(3155850061500L, m.getSerialIndex());
@@ -319,6 +312,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Some checks for the testNext() method.
      */
+    @Test
     public void testNext() {
         Millisecond m = new Millisecond(555, 55, 30, 1, 12, 12, 2000);
         m = (Millisecond) m.next();
@@ -336,6 +330,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Some checks for the getStart() method.
      */
+    @Test
     public void testGetStart() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.ITALY);
@@ -350,6 +345,7 @@ public class MillisecondTest extends TestCase {
     /**
      * Some checks for the getEnd() method.
      */
+    @Test
     public void testGetEnd() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.ITALY);

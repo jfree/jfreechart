@@ -41,39 +41,24 @@
 
 package org.jfree.data.time;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Date;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Some tests for the {@link DateRange} class.
  */
-public class DateRangeTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DateRangeTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DateRangeTest(String name) {
-        super(name);
-    }
+public class DateRangeTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         DateRange r1 = new DateRange(new Date(1000L), new Date(2000L));
         DateRange r2 = new DateRange(new Date(1000L), new Date(2000L));
@@ -94,6 +79,7 @@ public class DateRangeTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DateRange r1 = new DateRange(new Date(1000L), new Date(2000L));
         DateRange r2 = (DateRange) TestUtilities.serialised(r1);
@@ -104,6 +90,7 @@ public class DateRangeTest extends TestCase {
      * The {@link DateRange} class is immutable, so it doesn't need to
      * be cloneable.
      */
+    @Test
     public void testClone() {
         DateRange r1 = new DateRange(new Date(1000L), new Date(2000L));
         assertFalse(r1 instanceof Cloneable);
@@ -112,6 +99,7 @@ public class DateRangeTest extends TestCase {
     /**
      * Confirm that a DateRange is immutable.
      */
+    @Test
     public void testImmutable() {
         Date d1 = new Date(10L);
         Date d2 = new Date(20L);

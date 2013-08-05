@@ -45,21 +45,25 @@
 
 package org.jfree.data.time;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Tests for the {link Quarter} class.
  */
-public class QuarterTest extends TestCase {
+public class QuarterTest {
 
     /** A quarter. */
     private Quarter q1Y1900;
@@ -74,27 +78,10 @@ public class QuarterTest extends TestCase {
     private Quarter q4Y9999;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(QuarterTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public QuarterTest(String name) {
-        super(name);
-    }
-
-    /**
      * Common test setup.
      */
-    protected void setUp() {
+    @Before
+    public void setUp() {
         this.q1Y1900 = new Quarter(1, 1900);
         this.q2Y1900 = new Quarter(2, 1900);
         this.q3Y9999 = new Quarter(3, 9999);
@@ -106,6 +93,7 @@ public class QuarterTest extends TestCase {
      *
      * SourceForge Bug ID: 558850.
      */
+    @Test
     public void testEqualsSelf() {
         Quarter quarter = new Quarter();
         assertTrue(quarter.equals(quarter));
@@ -114,6 +102,7 @@ public class QuarterTest extends TestCase {
     /**
      * Tests the equals method.
      */
+    @Test
     public void testEquals() {
         Quarter q1 = new Quarter(2, 2002);
         Quarter q2 = new Quarter(2, 2002);
@@ -124,6 +113,7 @@ public class QuarterTest extends TestCase {
      * In GMT, the end of Q1 2002 is java.util.Date(1017619199999L).  Use this
      * to check the quarter constructor.
      */
+    @Test
     public void testDateConstructor1() {
 
         TimeZone zone = TimeZone.getTimeZone("GMT");
@@ -142,6 +132,7 @@ public class QuarterTest extends TestCase {
      * In Istanbul, the end of Q1 2002 is java.util.Date(1017608399999L).  Use
      * this to check the quarter constructor.
      */
+    @Test
     public void testDateConstructor2() {
 
         TimeZone zone = TimeZone.getTimeZone("Europe/Istanbul");
@@ -160,6 +151,7 @@ public class QuarterTest extends TestCase {
      * Set up a quarter equal to Q1 1900.  Request the previous quarter, it
      * should be null.
      */
+    @Test
     public void testQ1Y1900Previous() {
         Quarter previous = (Quarter) this.q1Y1900.previous();
         assertNull(previous);
@@ -169,6 +161,7 @@ public class QuarterTest extends TestCase {
      * Set up a quarter equal to Q1 1900.  Request the next quarter, it should
      * be Q2 1900.
      */
+    @Test
     public void testQ1Y1900Next() {
         Quarter next = (Quarter) this.q1Y1900.next();
         assertEquals(this.q2Y1900, next);
@@ -178,6 +171,7 @@ public class QuarterTest extends TestCase {
      * Set up a quarter equal to Q4 9999.  Request the previous quarter, it
      * should be Q3 9999.
      */
+    @Test
     public void testQ4Y9999Previous() {
         Quarter previous = (Quarter) this.q4Y9999.previous();
         assertEquals(this.q3Y9999, previous);
@@ -187,6 +181,7 @@ public class QuarterTest extends TestCase {
      * Set up a quarter equal to Q4 9999.  Request the next quarter, it should
      * be null.
      */
+    @Test
     public void testQ4Y9999Next() {
         Quarter next = (Quarter) this.q4Y9999.next();
         assertNull(next);
@@ -195,6 +190,7 @@ public class QuarterTest extends TestCase {
     /**
      * Test the string parsing code...
      */
+    @Test
     public void testParseQuarter() {
 
         Quarter quarter = null;
@@ -234,6 +230,7 @@ public class QuarterTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         Quarter q1 = new Quarter(4, 1999);
         Quarter q2 = (Quarter) TestUtilities.serialised(q1);
@@ -243,6 +240,7 @@ public class QuarterTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         Quarter q1 = new Quarter(2, 2003);
         Quarter q2 = new Quarter(2, 2003);
@@ -256,6 +254,7 @@ public class QuarterTest extends TestCase {
      * The {@link Quarter} class is immutable, so should not be
      * {@link Cloneable}.
      */
+    @Test
     public void testNotCloneable() {
         Quarter q = new Quarter(2, 2003);
         assertFalse(q instanceof Cloneable);
@@ -265,6 +264,7 @@ public class QuarterTest extends TestCase {
      * Some tests for the constructor with (int, int) arguments.  Covers bug
      * report 1377239.
      */
+    @Test
     public void testConstructor() {
         boolean pass = false;
         try {
@@ -288,6 +288,7 @@ public class QuarterTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond() method.
      */
+    @Test
     public void testGetFirstMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
@@ -302,6 +303,7 @@ public class QuarterTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetFirstMillisecondWithTimeZone() {
         Quarter q = new Quarter(2, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
@@ -321,6 +323,7 @@ public class QuarterTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetFirstMillisecondWithCalendar() {
         Quarter q = new Quarter(1, 2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
@@ -341,6 +344,7 @@ public class QuarterTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond() method.
      */
+    @Test
     public void testGetLastMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
@@ -355,6 +359,7 @@ public class QuarterTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetLastMillisecondWithTimeZone() {
         Quarter q = new Quarter(2, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
@@ -374,6 +379,7 @@ public class QuarterTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetLastMillisecondWithCalendar() {
         Quarter q = new Quarter(3, 2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
@@ -394,6 +400,7 @@ public class QuarterTest extends TestCase {
     /**
      * Some checks for the getSerialIndex() method.
      */
+    @Test
     public void testGetSerialIndex() {
         Quarter q = new Quarter(1, 2000);
         assertEquals(8001L, q.getSerialIndex());
@@ -404,6 +411,7 @@ public class QuarterTest extends TestCase {
     /**
      * Some checks for the testNext() method.
      */
+    @Test
     public void testNext() {
         Quarter q = new Quarter(1, 2000);
         q = (Quarter) q.next();
@@ -416,6 +424,7 @@ public class QuarterTest extends TestCase {
     /**
      * Some checks for the getStart() method.
      */
+    @Test
     public void testGetStart() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.ITALY);
@@ -430,6 +439,7 @@ public class QuarterTest extends TestCase {
     /**
      * Some checks for the getEnd() method.
      */
+    @Test
     public void testGetEnd() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.ITALY);

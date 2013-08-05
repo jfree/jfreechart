@@ -49,6 +49,11 @@
 
 package org.jfree.data.time;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,48 +62,22 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.date.MonthConstants;
+import org.junit.Test;
 
 /**
  * Tests for the {@link Day} class.
  */
-public class DayTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DayTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DayTest(String name) {
-        super(name);
-    }
-
-    /**
-     * Common test setup.
-     */
-    protected void setUp() {
-        // no setup required
-    }
+public class DayTest {
 
     /**
      * Check that a Day instance is equal to itself.
      *
      * SourceForge Bug ID: 558850.
      */
+    @Test
     public void testEqualsSelf() {
         Day day = new Day();
         assertTrue(day.equals(day));
@@ -107,6 +86,7 @@ public class DayTest extends TestCase {
     /**
      * Tests the equals method.
      */
+    @Test
     public void testEquals() {
         Day day1 = new Day(29, MonthConstants.MARCH, 2002);
         Day day2 = new Day(29, MonthConstants.MARCH, 2002);
@@ -117,6 +97,7 @@ public class DayTest extends TestCase {
      * In GMT, the end of 29 Feb 2004 is java.util.Date(1,078,099,199,999L).
      * Use this to check the day constructor.
      */
+    @Test
     public void testDateConstructor1() {
         TimeZone zone = TimeZone.getTimeZone("GMT");
         Locale locale = Locale.UK;
@@ -135,6 +116,7 @@ public class DayTest extends TestCase {
      * java.util.Date(1,078,091,999,999L).  Use this to check the Day
      * constructor.
      */
+    @Test
     public void testDateConstructor2() {
         TimeZone zone = TimeZone.getTimeZone("Europe/Helsinki");
         Locale locale = Locale.getDefault();  // locale shouldn't matter here
@@ -152,6 +134,7 @@ public class DayTest extends TestCase {
      * Set up a day equal to 1 January 1900.  Request the previous day, it
      * should be null.
      */
+    @Test
     public void test1Jan1900Previous() {
         Day jan1st1900 = new Day(1, MonthConstants.JANUARY, 1900);
         Day previous = (Day) jan1st1900.previous();
@@ -162,6 +145,7 @@ public class DayTest extends TestCase {
      * Set up a day equal to 1 January 1900.  Request the next day, it should
      * be 2 January 1900.
      */
+    @Test
     public void test1Jan1900Next() {
         Day jan1st1900 = new Day(1, MonthConstants.JANUARY, 1900);
         Day next = (Day) jan1st1900.next();
@@ -172,6 +156,7 @@ public class DayTest extends TestCase {
      * Set up a day equal to 31 December 9999.  Request the previous day, it
      * should be 30 December 9999.
      */
+    @Test
     public void test31Dec9999Previous() {
         Day dec31st9999 = new Day(31, MonthConstants.DECEMBER, 9999);
         Day previous = (Day) dec31st9999.previous();
@@ -182,6 +167,7 @@ public class DayTest extends TestCase {
      * Set up a day equal to 31 December 9999.  Request the next day, it should
      * be null.
      */
+    @Test
     public void test31Dec9999Next() {
         Day dec31st9999 = new Day(31, MonthConstants.DECEMBER, 9999);
         Day next = (Day) dec31st9999.next();
@@ -197,6 +183,7 @@ public class DayTest extends TestCase {
      *
      * @throws ParseException on parsing errors.
      */
+    @Test
     public void testParseDay() throws ParseException {
         GregorianCalendar gc = new GregorianCalendar(2001, 12, 31);
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -215,6 +202,7 @@ public class DayTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         Day d1 = new Day(15, 4, 2000);
         Day d2 = (Day) TestUtilities.serialised(d1);
@@ -224,6 +212,7 @@ public class DayTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         Day d1 = new Day(1, 2, 2003);
         Day d2 = new Day(1, 2, 2003);
@@ -236,6 +225,7 @@ public class DayTest extends TestCase {
     /**
      * The {@link Day} class is immutable, so should not be {@link Cloneable}.
      */
+    @Test
     public void testNotCloneable() {
         Day d = new Day(1, 2, 2003);
         assertFalse(d instanceof Cloneable);
@@ -244,6 +234,7 @@ public class DayTest extends TestCase {
     /**
      * Some checks for the getSerialIndex() method.
      */
+    @Test
     public void testGetSerialIndex() {
         Day d = new Day(1, 1, 1900);
         assertEquals(2, d.getSerialIndex());
@@ -254,6 +245,7 @@ public class DayTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond() method.
      */
+    @Test
     public void testGetFirstMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
@@ -268,6 +260,7 @@ public class DayTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetFirstMillisecondWithTimeZone() {
         Day d = new Day(26, 4, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
@@ -287,6 +280,7 @@ public class DayTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetFirstMillisecondWithCalendar() {
         Day d = new Day(1, 12, 2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
@@ -307,6 +301,7 @@ public class DayTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond() method.
      */
+    @Test
     public void testGetLastMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
@@ -321,6 +316,7 @@ public class DayTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetLastMillisecondWithTimeZone() {
         Day d = new Day(1, 2, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
@@ -340,6 +336,7 @@ public class DayTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetLastMillisecondWithCalendar() {
 
         Day d = new Day(4, 5, 2001);
@@ -361,6 +358,7 @@ public class DayTest extends TestCase {
     /**
      * Some checks for the testNext() method.
      */
+    @Test
     public void testNext() {
         Day d = new Day(25, 12, 2000);
         d = (Day) d.next();
@@ -374,6 +372,7 @@ public class DayTest extends TestCase {
     /**
      * Some checks for the getStart() method.
      */
+    @Test
     public void testGetStart() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.ITALY);
@@ -388,6 +387,7 @@ public class DayTest extends TestCase {
     /**
      * Some checks for the getEnd() method.
      */
+    @Test
     public void testGetEnd() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.ITALY);

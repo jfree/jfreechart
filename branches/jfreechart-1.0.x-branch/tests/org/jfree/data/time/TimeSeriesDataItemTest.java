@@ -40,63 +40,39 @@
 
 package org.jfree.data.time;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link TimeSeriesDataItem} class.
  */
-public class TimeSeriesDataItemTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(TimeSeriesDataItemTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public TimeSeriesDataItemTest(String name) {
-        super(name);
-    }
-
-    /**
-     * Common test setup.
-     */
-    protected void setUp() {
-        // no setup
-    }
+public class TimeSeriesDataItemTest {
 
     /**
      * Test that an instance is equal to itself.
      *
      * SourceForge Bug ID: 558850.
      */
+    @Test
     public void testEqualsSelf() {
-        TimeSeriesDataItem item = new TimeSeriesDataItem(
-            new Day(23, 9, 2001), 99.7
-        );
+        TimeSeriesDataItem item = new TimeSeriesDataItem(new Day(23, 9, 2001), 
+                99.7);
         assertTrue(item.equals(item));
     }
 
     /**
      * Test the equals() method.
      */
+    @Test
     public void testEquals() {
-        TimeSeriesDataItem item1 = new TimeSeriesDataItem(
-            new Day(23, 9, 2001), 99.7
-        );
-        TimeSeriesDataItem item2 = new TimeSeriesDataItem(
-            new Day(23, 9, 2001), 99.7
-        );
+        TimeSeriesDataItem item1 = new TimeSeriesDataItem(new Day(23, 9, 2001), 
+                99.7);
+        TimeSeriesDataItem item2 = new TimeSeriesDataItem(new Day(23, 9, 2001), 
+                99.7);
         assertTrue(item1.equals(item2));
         assertTrue(item2.equals(item1));
 
@@ -109,6 +85,7 @@ public class TimeSeriesDataItemTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         TimeSeriesDataItem item1 = new TimeSeriesDataItem(new Day(23, 9, 2001), 
                 99.7);

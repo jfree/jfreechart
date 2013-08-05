@@ -42,21 +42,24 @@
 
 package org.jfree.data.time;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.util.Date;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.jfree.date.MonthConstants;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * A collection of test cases for the {@link TimePeriodValues} class.
  */
-public class TimePeriodValuesTest extends TestCase {
+public class TimePeriodValuesTest {
 
     /** Series A. */
     private TimePeriodValues seriesA;
@@ -67,28 +70,12 @@ public class TimePeriodValuesTest extends TestCase {
     /** Series C. */
     private TimePeriodValues seriesC;
 
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(TimePeriodValuesTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public TimePeriodValuesTest(String name) {
-        super(name);
-    }
 
     /**
      * Common test setup.
      */
-    protected void setUp() {
+    @Before
+    public void setUp() {
         this.seriesA = new TimePeriodValues("Series A");
         this.seriesA.add(new Year(2000), new Integer(102000));
         this.seriesA.add(new Year(2001), new Integer(102001));
@@ -112,6 +99,7 @@ public class TimePeriodValuesTest extends TestCase {
      * Set up a quarter equal to Q1 1900.  Request the previous quarter, it 
      * should be null.
      */
+    @Test
     public void testClone() throws CloneNotSupportedException {
         TimePeriodValues series = new TimePeriodValues("Test Series");
         RegularTimePeriod jan1st2002 = new Day(1, MonthConstants.JANUARY, 2002);
@@ -132,6 +120,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * Add a value to series A for 1999.  It should be added at index 0.
      */
+    @Test
     public void testAddValue() {
         TimePeriodValues tpvs = new TimePeriodValues("Test");
         tpvs.add(new Year(1999), new Integer(1));
@@ -142,6 +131,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         TimePeriodValues s1 = new TimePeriodValues("A test");
         s1.add(new Year(2000), 13.75);
@@ -156,6 +146,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * Tests the equals method.
      */
+    @Test
     public void testEquals() {
         TimePeriodValues s1 = new TimePeriodValues("Time Series 1");
         TimePeriodValues s2 = new TimePeriodValues("Time Series 2");
@@ -207,6 +198,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * A test for bug report 1161329.
      */
+    @Test
     public void test1161329() {
         TimePeriodValues tpv = new TimePeriodValues("Test");
         RegularTimePeriod t = new Day();
@@ -224,6 +216,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * Some checks for the add() methods.
      */
+    @Test
     public void testAdd() {
         TimePeriodValues tpv = new TimePeriodValues("Test");
         MySeriesChangeListener listener = new MySeriesChangeListener();
@@ -247,6 +240,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * Some tests for the getMinStartIndex() method.
      */
+    @Test
     public void testGetMinStartIndex() {
         TimePeriodValues s = new TimePeriodValues("Test");
         assertEquals(-1, s.getMinStartIndex());
@@ -261,6 +255,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * Some tests for the getMaxStartIndex() method.
      */
+    @Test
     public void testGetMaxStartIndex() {
         TimePeriodValues s = new TimePeriodValues("Test");
         assertEquals(-1, s.getMaxStartIndex());
@@ -275,6 +270,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * Some tests for the getMinMiddleIndex() method.
      */
+    @Test
     public void testGetMinMiddleIndex() {
         TimePeriodValues s = new TimePeriodValues("Test");
         assertEquals(-1, s.getMinMiddleIndex());
@@ -289,6 +285,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * Some tests for the getMaxMiddleIndex() method.
      */
+    @Test
     public void testGetMaxMiddleIndex() {
         TimePeriodValues s = new TimePeriodValues("Test");
         assertEquals(-1, s.getMaxMiddleIndex());
@@ -305,6 +302,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * Some tests for the getMinEndIndex() method.
      */
+    @Test
     public void getMinEndIndex() {
         TimePeriodValues s = new TimePeriodValues("Test");
         assertEquals(-1, s.getMinEndIndex());
@@ -319,6 +317,7 @@ public class TimePeriodValuesTest extends TestCase {
     /**
      * Some tests for the getMaxEndIndex() method.
      */
+    @Test
     public void getMaxEndIndex() {
         TimePeriodValues s = new TimePeriodValues("Test");
         assertEquals(-1, s.getMaxEndIndex());
