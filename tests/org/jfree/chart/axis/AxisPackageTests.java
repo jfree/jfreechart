@@ -67,7 +67,6 @@ public class AxisPackageTests extends TestCase {
         TestSuite suite = new TestSuite("org.jfree.chart.axis");
         suite.addTestSuite(AxisLocationTest.class);
         suite.addTestSuite(AxisSpaceTest.class);
-        suite.addTestSuite(AxisTest.class);
         suite.addTestSuite(CategoryAnchorTest.class);
         suite.addTestSuite(CategoryAxisTest.class);
         suite.addTestSuite(CategoryAxis3DTest.class);
