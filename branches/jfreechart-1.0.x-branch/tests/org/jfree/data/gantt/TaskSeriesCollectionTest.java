@@ -44,35 +44,18 @@ package org.jfree.data.gantt;
 
 import java.util.Date;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.time.SimpleTimePeriod;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for the {@link TaskSeriesCollection} class.
  */
-public class TaskSeriesCollectionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(TaskSeriesCollectionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public TaskSeriesCollectionTest(String name) {
-        super(name);
-    }
+public class TaskSeriesCollectionTest {
 
     /**
      * Creates a sample collection for testing purposes.
@@ -174,6 +157,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * A test for the getSeriesCount() method.
      */
+    @Test
     public void testGetSeriesCount() {
         TaskSeriesCollection c = createCollection1();
         assertEquals(2, c.getSeriesCount());
@@ -182,6 +166,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the getSeriesKey() method.
      */
+    @Test
     public void testGetSeriesKey() {
         TaskSeriesCollection c = createCollection1();
         assertEquals("S1", c.getSeriesKey(0));
@@ -191,6 +176,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * A test for the getRowCount() method.
      */
+    @Test
     public void testGetRowCount() {
         TaskSeriesCollection c = createCollection1();
         assertEquals(2, c.getRowCount());
@@ -199,6 +185,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the getRowKey() method.
      */
+    @Test
     public void testGetRowKey() {
         TaskSeriesCollection c = createCollection1();
         assertEquals("S1", c.getRowKey(0));
@@ -208,6 +195,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the getRowIndex() method.
      */
+    @Test
     public void testGetRowIndex() {
         TaskSeriesCollection c = createCollection1();
         assertEquals(0, c.getRowIndex("S1"));
@@ -217,6 +205,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the getValue() method.
      */
+    @Test
     public void testGetValue() {
         TaskSeriesCollection c = createCollection1();
         assertEquals(new Long(1L), c.getValue("S1", "Task 1"));
@@ -234,6 +223,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the getStartValue() method.
      */
+    @Test
     public void testGetStartValue() {
         TaskSeriesCollection c = createCollection1();
         assertEquals(new Long(1L), c.getStartValue("S1", "Task 1"));
@@ -258,6 +248,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the getStartValue() method for sub-intervals.
      */
+    @Test
     public void testGetStartValue2() {
         TaskSeriesCollection c = createCollection2();
         assertEquals(new Long(10L), c.getStartValue("S1", "Task 1", 0));
@@ -287,6 +278,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * A check for a null task duration.
      */
+    @Test
     public void testGetStartValue3() {
         TaskSeriesCollection c = new TaskSeriesCollection();
         TaskSeries s = new TaskSeries("Series 1");
@@ -299,6 +291,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the getEndValue() method.
      */
+    @Test
     public void testGetEndValue() {
         TaskSeriesCollection c = createCollection1();
         assertEquals(new Long(2L), c.getEndValue("S1", "Task 1"));
@@ -323,6 +316,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the getEndValue() method for sub-intervals.
      */
+    @Test
     public void testGetEndValue2() {
         TaskSeriesCollection c = createCollection2();
         assertEquals(new Long(15L), c.getEndValue("S1", "Task 1", 0));
@@ -352,6 +346,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * A check for a null task duration.
      */
+    @Test
     public void testGetEndValue3() {
         TaskSeriesCollection c = new TaskSeriesCollection();
         TaskSeries s = new TaskSeries("Series 1");
@@ -364,6 +359,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the getPercentComplete() method.
      */
+    @Test
     public void testGetPercentComplete() {
         TaskSeriesCollection c = createCollection2();
         assertEquals(new Double(0.10), c.getPercentComplete("S1", "Task 1"));
@@ -397,6 +393,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * A test for the getColumnCount() method.
      */
+    @Test
     public void testGetColumnCount() {
         TaskSeriesCollection c = createCollection1();
         assertEquals(3, c.getColumnCount());
@@ -415,6 +412,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the getColumnIndex() method.
      */
+    @Test
     public void testGetColumnIndex() {
         TaskSeriesCollection c = createCollection1();
         assertEquals(0, c.getColumnIndex("Task 1"));
@@ -425,6 +423,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
 
         TaskSeries s1 = new TaskSeries("S");
@@ -455,6 +454,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         TaskSeries s1 = new TaskSeries("S1");
         s1.add(new Task("T1", new Date(1), new Date(2)));
@@ -483,6 +483,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         TaskSeries s1 = new TaskSeries("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
@@ -501,6 +502,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * A test for bug report 697153.
      */
+    @Test
     public void test697153() {
 
         TaskSeries s1 = new TaskSeries("S1");
@@ -534,6 +536,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * A test for bug report 800324.
      */
+    @Test
     public void test800324() {
         TaskSeries s1 = new TaskSeries("S1");
         s1.add(new Task("Task 1", new SimpleTimePeriod(new Date(),
@@ -578,6 +581,7 @@ public class TaskSeriesCollectionTest extends TestCase {
      * translate the index values to key values *before* accessing the tasks
      * in the series.
      */
+    @Test
     public void testGetSubIntervalCount() {
         TaskSeriesCollection tsc = createCollection3();
         assertEquals(1, tsc.getSubIntervalCount(0, 0));
@@ -589,6 +593,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some basic tests for the getSeries() methods.
      */
+    @Test
     public void testGetSeries() {
         TaskSeries s1 = new TaskSeries("S1");
         TaskSeries s2 = new TaskSeries("S2");
@@ -616,6 +621,7 @@ public class TaskSeriesCollectionTest extends TestCase {
     /**
      * Some basic checks for the remove() method.
      */
+    @Test
     public void testRemove() {
         TaskSeriesCollection c = new TaskSeriesCollection();
         TaskSeries s1 = new TaskSeries("S1");
