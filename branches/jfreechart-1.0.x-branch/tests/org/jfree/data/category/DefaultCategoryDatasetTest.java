@@ -43,41 +43,25 @@
 
 package org.jfree.data.category;
 
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.data.UnknownKeyException;
 import org.jfree.util.PublicCloneable;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DefaultCategoryDataset} class.
  */
-public class DefaultCategoryDatasetTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultCategoryDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultCategoryDatasetTest(String name) {
-        super(name);
-    }
+public class DefaultCategoryDatasetTest {
 
     /**
      * Some checks for the getValue() method.
      */
+    @Test
     public void testGetValue() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         d.addValue(1.0, "R1", "C1");
