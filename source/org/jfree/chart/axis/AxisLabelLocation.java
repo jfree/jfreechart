@@ -57,11 +57,11 @@ public final class AxisLabelLocation implements Serializable {
     public static final AxisLabelLocation HIGH_END = new AxisLabelLocation(
             "HIGH_END");
     
-    /** Axis label at the top or left. */
+    /** Axis label at the middle. */
     public static final AxisLabelLocation MIDDLE = new AxisLabelLocation(
             "MIDDLE");
     
-    /** Axis label at the top or left. */
+    /** Axis label at the bottom. */
     public static final AxisLabelLocation LOW_END = new AxisLabelLocation(
             "LOW_END");
 
