@@ -42,37 +42,23 @@
 
 package org.jfree.data;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link Range} class.
  */
-public class RangeTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(RangeTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public RangeTest(String name) {
-        super(name);
-    }
+public class RangeTest {
 
     /**
      * Confirm that the constructor initializes all the required fields.
      */
+    @Test
     public void testConstructor() {
         Range r1 = new Range(0.1, 1000.0);
         assertEquals(r1.getLowerBound(), 0.1, 0.0d);
@@ -90,6 +76,7 @@ public class RangeTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
 
         Range r1 = new Range(0.0, 1.0);
@@ -112,6 +99,7 @@ public class RangeTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         Range a1 = new Range(1.0, 100.0);
         Range a2 = new Range(1.0, 100.0);
@@ -125,6 +113,7 @@ public class RangeTest extends TestCase {
     /**
      * Simple tests for the contains() method.
      */
+    @Test
     public void testContains() {
         Range r1 = new Range(0.0, 1.0);
         assertFalse(r1.contains(Double.NaN));
@@ -140,6 +129,7 @@ public class RangeTest extends TestCase {
     /**
      * Tests the constrain() method for various values.
      */
+    @Test
     public void testConstrain() {
         Range r1 = new Range(0.0, 1.0);
 
@@ -171,6 +161,7 @@ public class RangeTest extends TestCase {
     /**
      * Simple tests for the intersects() method.
      */
+    @Test
     public void testIntersects() {
         Range r1 = new Range(0.0, 1.0);
         assertFalse(r1.intersects(-2.0, -1.0));
@@ -191,6 +182,7 @@ public class RangeTest extends TestCase {
     /**
      * A simple test for the expand() method.
      */
+    @Test
     public void testExpand() {
         Range r1 = new Range(0.0, 100.0);
         Range r2 = Range.expand(r1, 0.10, 0.10);
@@ -217,6 +209,7 @@ public class RangeTest extends TestCase {
     /**
      * A simple test for the scale() method.
      */
+    @Test
     public void testShift() {
         Range r1 = new Range(10.0, 20.0);
         Range r2 = Range.shift(r1, 20.0);
@@ -263,6 +256,7 @@ public class RangeTest extends TestCase {
     /**
      * A simple test for the scale() method.
      */
+    @Test
     public void testScale() {
         Range r1 = new Range(0.0, 100.0);
         Range r2 = Range.scale(r1, 0.10);
@@ -296,6 +290,7 @@ public class RangeTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         Range r1 = new Range(25.0, 133.42);
         Range r2 = (Range) TestUtilities.serialised(r1);
@@ -307,6 +302,7 @@ public class RangeTest extends TestCase {
     /**
      * Some checks for the combine method.
      */
+    @Test
     public void testCombine() {
         Range r1 = new Range(1.0, 2.0);
         Range r2 = new Range(1.5, 2.5);
@@ -330,6 +326,7 @@ public class RangeTest extends TestCase {
     /**
      * Some checks for the combineIgnoringNaN() method.
      */
+    @Test
     public void testCombineIgnoringNaN() {
         Range r1 = new Range(1.0, 2.0);
         Range r2 = new Range(1.5, 2.5);

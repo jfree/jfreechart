@@ -46,37 +46,22 @@
 
 package org.jfree.data;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DefaultKeyedValues2D} class.
  */
-public class DefaultKeyedValues2DTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultKeyedValues2DTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultKeyedValues2DTest(String name) {
-        super(name);
-    }
+public class DefaultKeyedValues2DTest {
 
     /**
      * Some checks for the getValue() method.
      */
+    @Test
     public void testGetValue() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         d.addValue(new Double(1.0), "R1", "C1");
@@ -103,6 +88,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Some checks for the clone() method.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValues2D v1 = new DefaultKeyedValues2D();
         v1.setValue(new Integer(1), "V1", "C1");
@@ -121,6 +107,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultKeyedValues2D kv2D1 = new DefaultKeyedValues2D();
         kv2D1.addValue(new Double(234.2), "Row1", "Col1");
@@ -136,6 +123,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         DefaultKeyedValues2D d1 = new DefaultKeyedValues2D();
         DefaultKeyedValues2D d2 = new DefaultKeyedValues2D();
@@ -152,6 +140,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
      * Populates a data structure with sparse entries, then checks that
      * the unspecified entries return null.
      */
+    @Test
     public void testSparsePopulation() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         d.addValue(new Integer(11), "R1", "C1");
@@ -166,6 +155,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Some basic checks for the getRowCount() method.
      */
+    @Test
     public void testRowCount() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         assertEquals(0, d.getRowCount());
@@ -178,6 +168,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Some basic checks for the getColumnCount() method.
      */
+    @Test
     public void testColumnCount() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         assertEquals(0, d.getColumnCount());
@@ -192,6 +183,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Some basic checks for the getValue(int, int) method.
      */
+    @Test
     public void testGetValue2() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         boolean pass = false;
@@ -222,6 +214,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Some basic checks for the getRowKey() method.
      */
+    @Test
     public void testGetRowKey() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         boolean pass = false;
@@ -249,6 +242,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Some basic checks for the getColumnKey() method.
      */
+    @Test
     public void testGetColumnKey() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         boolean pass = false;
@@ -268,6 +262,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Some basic checks for the removeValue() method.
      */
+    @Test
     public void testRemoveValue() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         d.removeValue("R1", "C1");
@@ -285,6 +280,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * A test for bug 1690654.
      */
+    @Test
     public void testRemoveValueBug1690654() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         d.addValue(new Double(1.0), "R1", "C1");
@@ -300,6 +296,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Some basic checks for the removeRow() method.
      */
+    @Test
     public void testRemoveRow() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         boolean pass = false;
@@ -315,6 +312,7 @@ public class DefaultKeyedValues2DTest extends TestCase {
     /**
      * Some basic checks for the removeColumn(Comparable) method.
      */
+    @Test
     public void testRemoveColumnByKey() {
         DefaultKeyedValues2D d = new DefaultKeyedValues2D();
         d.addValue(new Double(1.0), "R1", "C1");

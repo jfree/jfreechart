@@ -47,47 +47,23 @@
 package org.jfree.data;
 
 import java.util.List;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.util.SortOrder;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DefaultKeyedValues} class.
  */
-public class DefaultKeyedValuesTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultKeyedValuesTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultKeyedValuesTest(String name) {
-        super(name);
-    }
-
-    /**
-     * Common test setup.
-     */
-    protected void setUp() {
-        // no setup required
-    }
+public class DefaultKeyedValuesTest {
 
     /**
      * Checks that a new instance is empty.
      */
+    @Test
     public void testConstructor() {
         DefaultKeyedValues d = new DefaultKeyedValues();
         assertEquals(0, d.getItemCount());
@@ -96,6 +72,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Some checks for the getItemCount() method.
      */
+    @Test
     public void testGetItemCount() {
         DefaultKeyedValues d = new DefaultKeyedValues();
         assertEquals(0, d.getItemCount());
@@ -110,6 +87,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Some checks for the getKeys() method.
      */
+    @Test
     public void testGetKeys() {
         DefaultKeyedValues d = new DefaultKeyedValues();
         List keys = d.getKeys();
@@ -131,6 +109,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * A simple test for the clear() method.
      */
+    @Test
     public void testClear() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         v1.addValue("A", 1.0);
@@ -143,6 +122,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Some checks for the getValue() methods.
      */
+    @Test
     public void testGetValue() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         try {
@@ -178,6 +158,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Some checks for the getKey() methods.
      */
+    @Test
     public void testGetKey() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         try {
@@ -204,6 +185,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Some checks for the getIndex() methods.
      */
+    @Test
     public void testGetIndex() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         assertEquals(-1, v1.getIndex("K1"));
@@ -228,6 +210,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Another check for the getIndex(Comparable) method.
      */
+    @Test
     public void testGetIndex2() {
         DefaultKeyedValues v = new DefaultKeyedValues();
         assertEquals(-1, v.getIndex("K1"));
@@ -239,6 +222,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Some checks for the addValue() method.
      */
+    @Test
     public void testAddValue() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         v1.addValue("A", 1.0);
@@ -265,6 +249,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Some checks for the insertValue() method.
      */
+    @Test
     public void testInsertValue() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         v1.insertValue(0, "A", 1.0);
@@ -289,6 +274,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Some checks for the clone() method.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         v1.addValue("V1", new Integer(1));
@@ -307,6 +293,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Check that inserting and retrieving values works as expected.
      */
+    @Test
     public void testInsertAndRetrieve() {
 
         DefaultKeyedValues data = new DefaultKeyedValues();
@@ -338,6 +325,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Some tests for the removeValue() method.
      */
+    @Test
     public void testRemoveValue() {
         DefaultKeyedValues data = new DefaultKeyedValues();
         data.addValue("A", new Double(1.0));
@@ -361,6 +349,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Tests sorting of data by key (ascending).
      */
+    @Test
     public void testSortByKeyAscending() {
 
         DefaultKeyedValues data = new DefaultKeyedValues();
@@ -394,6 +383,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Tests sorting of data by key (descending).
      */
+    @Test
     public void testSortByKeyDescending() {
 
         DefaultKeyedValues data = new DefaultKeyedValues();
@@ -427,6 +417,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Tests sorting of data by value (ascending).
      */
+    @Test
     public void testSortByValueAscending() {
 
         DefaultKeyedValues data = new DefaultKeyedValues();
@@ -460,6 +451,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Tests sorting of data by key (descending).
      */
+    @Test
     public void testSortByValueDescending() {
 
         DefaultKeyedValues data = new DefaultKeyedValues();
@@ -493,6 +485,7 @@ public class DefaultKeyedValuesTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         v1.addValue("Key 1", new Double(23));

@@ -40,88 +40,75 @@
 
 package org.jfree.data;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
-
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.fail;
 
 /**
  * Tests for the {@link ComparableObjectItem} class.
  */
-public class ComparableObjectItemTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ComparableObjectItemTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ComparableObjectItemTest(String name) {
-        super(name);
-    }
+public class ComparableObjectItemTest {
 
     /**
      * Some checks for the constructor.
      */
+    @Test
     public void testConstructor() {
         // check null argument 1
-        boolean pass = false;
         try {
             /* ComparableObjectItem item1 = */ new ComparableObjectItem(null,
                     "XYZ");
+            fail("There should be an exception.");
         }
         catch (IllegalArgumentException e) {
-            pass = true;
+            // expected
         }
-        assertTrue(pass);
     }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
         ComparableObjectItem item2 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
-        assertTrue(item1.equals(item2));
-        assertTrue(item2.equals(item1));
+        assertEquals(item1, item2);
 
         item1 = new ComparableObjectItem(new Integer(2), "XYZ");
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new ComparableObjectItem(new Integer(2), "XYZ");
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
 
         item1 = new ComparableObjectItem(new Integer(2), null);
-        assertFalse(item1.equals(item2));
+        assertNotEquals(item1, item2);
         item2 = new ComparableObjectItem(new Integer(2), null);
-        assertTrue(item1.equals(item2));
+        assertEquals(item1, item2);
     }
 
     /**
      * Some checks for the clone() method.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
         ComparableObjectItem item2 = (ComparableObjectItem) item1.clone();
-        assertTrue(item1 != item2);
-        assertTrue(item1.getClass() == item2.getClass());
-        assertTrue(item1.equals(item2));
+        assertNotSame(item1, item2);
+        assertSame(item1.getClass(), item2.getClass());
+        assertEquals(item1, item2);
     }
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
@@ -133,6 +120,7 @@ public class ComparableObjectItemTest extends TestCase {
     /**
      * Some checks for the compareTo() method.
      */
+    @Test
     public void testCompareTo() {
         ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");

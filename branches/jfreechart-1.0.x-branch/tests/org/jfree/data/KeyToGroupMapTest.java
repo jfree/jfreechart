@@ -40,37 +40,21 @@
 
 package org.jfree.data;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 /**
  * Tests for the {@link KeyToGroupMap} class.
  */
-public class KeyToGroupMapTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(KeyToGroupMapTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public KeyToGroupMapTest(String name) {
-        super(name);
-    }
+public class KeyToGroupMapTest {
 
     /**
      * Tests the mapKeyToGroup() method.
      */
+    @Test
     public void testMapKeyToGroup() {
         KeyToGroupMap m1 = new KeyToGroupMap("G1");
 
@@ -102,6 +86,7 @@ public class KeyToGroupMapTest extends TestCase {
      * Tests that the getGroupCount() method returns the correct values under
      * various circumstances.
      */
+    @Test
     public void testGroupCount() {
         KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
 
@@ -135,6 +120,7 @@ public class KeyToGroupMapTest extends TestCase {
      * Tests that the getKeyCount() method returns the correct values under
      * various circumstances.
      */
+    @Test
     public void testKeyCount() {
         KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
 
@@ -169,6 +155,7 @@ public class KeyToGroupMapTest extends TestCase {
     /**
      * Tests the getGroupIndex() method.
      */
+    @Test
     public void testGetGroupIndex() {
         KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
 
@@ -190,6 +177,7 @@ public class KeyToGroupMapTest extends TestCase {
     /**
      * Tests the getGroup() method.
      */
+    @Test
     public void testGetGroup() {
         KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
 
@@ -217,6 +205,7 @@ public class KeyToGroupMapTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
         KeyToGroupMap m2 = new KeyToGroupMap("Default Group");
@@ -232,6 +221,7 @@ public class KeyToGroupMapTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         KeyToGroupMap m1 = new KeyToGroupMap("Test");
         m1.mapKeyToGroup("K1", "G1");
@@ -250,6 +240,7 @@ public class KeyToGroupMapTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         KeyToGroupMap m1 = new KeyToGroupMap("Test");
         KeyToGroupMap m2 = (KeyToGroupMap) TestUtilities.serialised(m1);
