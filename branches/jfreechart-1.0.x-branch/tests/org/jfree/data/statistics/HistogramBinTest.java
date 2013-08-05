@@ -40,52 +40,33 @@
 
 package org.jfree.data.statistics;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link HistogramBin} class.
  */
-public class HistogramBinTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(HistogramBinTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public HistogramBinTest(String name) {
-        super(name);
-    }
+public class HistogramBinTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
-
         double start = 10.0;
         double end = 20.0;
         HistogramBin b1 = new HistogramBin(start, end);
         HistogramBin b2 = new HistogramBin(start, end);
-
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b1));
-
+        assertEquals(b1, b2);
     }
 
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         double start = 10.0;
         double end = 20.0;
@@ -99,6 +80,7 @@ public class HistogramBinTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         double start = 10.0;
         double end = 20.0;

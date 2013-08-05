@@ -44,43 +44,28 @@
 
 package org.jfree.data.statistics;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
+import org.junit.Test;
 
 /**
  * Tests for the {@link HistogramDataset} class.
  */
-public class HistogramDatasetTest extends TestCase
-        implements DatasetChangeListener {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(HistogramDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public HistogramDatasetTest(String name) {
-        super(name);
-    }
+public class HistogramDatasetTest implements DatasetChangeListener {
 
     private static final double EPSILON = 0.0000000001;
 
     /**
      * Some checks that the correct values are assigned to bins.
      */
+    @Test
     public void testBins() {
         double[] values = {1.0, 2.0, 3.0, 4.0, 6.0, 12.0, 5.0, 6.3, 4.5};
         HistogramDataset hd = new HistogramDataset();
@@ -95,6 +80,7 @@ public class HistogramDatasetTest extends TestCase
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         double[] values = {1.0, 2.0, 3.0, 4.0, 6.0, 12.0, 5.0, 6.3, 4.5};
         HistogramDataset d1 = new HistogramDataset();
@@ -114,6 +100,7 @@ public class HistogramDatasetTest extends TestCase
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         double[] values = {1.0, 2.0, 3.0, 4.0, 6.0, 12.0, 5.0, 6.3, 4.5};
         HistogramDataset d1 = new HistogramDataset();
@@ -133,6 +120,7 @@ public class HistogramDatasetTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         double[] values = {1.0, 2.0, 3.0, 4.0, 6.0, 12.0, 5.0, 6.3, 4.5};
         HistogramDataset d1 = new HistogramDataset();
@@ -151,6 +139,7 @@ public class HistogramDatasetTest extends TestCase
      * A test for a bug reported in the forum where the series name isn't being
      * returned correctly.
      */
+    @Test
     public void testGetSeriesKey() {
         double[] values = {1.0, 2.0, 3.0, 4.0, 6.0, 12.0, 5.0, 6.3, 4.5};
         HistogramDataset d1 = new HistogramDataset();
@@ -161,6 +150,7 @@ public class HistogramDatasetTest extends TestCase
     /**
      * Some checks for the addSeries() method.
      */
+    @Test
     public void testAddSeries() {
         double[] values = {-1.0, 0.0, 0.1, 0.9, 1.0, 1.1, 1.9, 2.0, 3.0};
         HistogramDataset d = new HistogramDataset();
@@ -177,6 +167,7 @@ public class HistogramDatasetTest extends TestCase
     /**
      * Another check for the addSeries() method.
      */
+    @Test
     public void testAddSeries2() {
         double[] values = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
         HistogramDataset hd = new HistogramDataset();
@@ -201,6 +192,7 @@ public class HistogramDatasetTest extends TestCase
     /**
      * This test is derived from a reported bug.
      */
+    @Test
     public void testBinBoundaries() {
         double[] values = {-5.000000000000286E-5};
         int bins = 1260;
@@ -219,6 +211,7 @@ public class HistogramDatasetTest extends TestCase
      * Some checks for bug 1553088.  An IndexOutOfBoundsException is thrown
      * when a data value is *very* close to the upper limit of the last bin.
      */
+    @Test
     public void test1553088() {
         double[] values = {-1.0, 0.0, -Double.MIN_VALUE, 3.0};
         HistogramDataset d = new HistogramDataset();
@@ -235,6 +228,7 @@ public class HistogramDatasetTest extends TestCase
     /**
      * A test to show the limitation addressed by patch 2902842.
      */
+    @Test
     public void test2902842() {
         this.lastEvent = null;
         double[] values = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};

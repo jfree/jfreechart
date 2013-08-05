@@ -44,42 +44,27 @@
 
 package org.jfree.data.statistics;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.util.ArrayList;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DefaultBoxAndWhiskerCategoryDataset} class.
  */
-public class DefaultBoxAndWhiskerCategoryDatasetTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultBoxAndWhiskerCategoryDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultBoxAndWhiskerCategoryDatasetTest(String name) {
-        super(name);
-    }
+public class DefaultBoxAndWhiskerCategoryDatasetTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         DefaultBoxAndWhiskerCategoryDataset d1
                 = new DefaultBoxAndWhiskerCategoryDataset();
@@ -100,6 +85,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultBoxAndWhiskerCategoryDataset d1
                 = new DefaultBoxAndWhiskerCategoryDataset();
@@ -115,6 +101,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultBoxAndWhiskerCategoryDataset d1
                 = new DefaultBoxAndWhiskerCategoryDataset();
@@ -139,6 +126,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest extends TestCase {
     /**
      * A simple test for bug report 1701822.
      */
+    @Test
     public void test1701822() {
         DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset();
@@ -163,6 +151,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the add() method.
      */
+    @Test
     public void testAdd() {
         DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset();
@@ -193,6 +182,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the add() method.
      */
+    @Test
     public void testAddUpdatesCachedRange() {
         DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset();
@@ -228,6 +218,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest extends TestCase {
     /**
      * Some basic checks for the constructor.
      */
+    @Test
     public void testConstructor() {
         DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset();
@@ -240,6 +231,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getRangeBounds() method.
      */
+    @Test
     public void testGetRangeBounds() {
         DefaultBoxAndWhiskerCategoryDataset d1
                 = new DefaultBoxAndWhiskerCategoryDataset();
@@ -269,6 +261,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the remove method.
      */
+    @Test
     public void testRemove() {
         DefaultBoxAndWhiskerCategoryDataset data
                 = new DefaultBoxAndWhiskerCategoryDataset();

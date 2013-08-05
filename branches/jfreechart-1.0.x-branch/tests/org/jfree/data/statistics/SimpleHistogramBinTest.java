@@ -40,37 +40,22 @@
 
 package org.jfree.data.statistics;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link SimpleHistogramBin} class.
  */
-public class SimpleHistogramBinTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(SimpleHistogramBinTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public SimpleHistogramBinTest(String name) {
-        super(name);
-    }
+public class SimpleHistogramBinTest {
 
     /**
      * Some checks for the accepts() method.
      */
+    @Test
     public void testAccepts() {
         SimpleHistogramBin bin1 = new SimpleHistogramBin(1.0, 2.0);
         assertFalse(bin1.accepts(0.0));
@@ -93,6 +78,7 @@ public class SimpleHistogramBinTest extends TestCase {
     /**
      * Some checks for the overlapsWith() method.
      */
+    @Test
     public void testOverlapsWidth() {
         SimpleHistogramBin b1 = new SimpleHistogramBin(1.0, 2.0);
         SimpleHistogramBin b2 = new SimpleHistogramBin(2.0, 3.0);
@@ -115,6 +101,7 @@ public class SimpleHistogramBinTest extends TestCase {
     /**
      * Ensure that the equals() method can distinguish all fields.
      */
+    @Test
     public void testEquals() {
         SimpleHistogramBin b1 = new SimpleHistogramBin(1.0, 2.0);
         SimpleHistogramBin b2 = new SimpleHistogramBin(1.0, 2.0);
@@ -150,6 +137,7 @@ public class SimpleHistogramBinTest extends TestCase {
     /**
      * Some checks for the clone() method.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         SimpleHistogramBin b1 = new SimpleHistogramBin(1.1, 2.2, false, true);
         b1.setItemCount(99);
@@ -166,6 +154,7 @@ public class SimpleHistogramBinTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         SimpleHistogramBin b1 = new SimpleHistogramBin(1.0, 2.0, false, true);
         b1.setItemCount(123);
