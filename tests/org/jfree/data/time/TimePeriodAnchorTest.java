@@ -40,37 +40,20 @@
 
 package org.jfree.data.time;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link TimePeriodAnchor} class.
  */
-public class TimePeriodAnchorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(TimePeriodAnchorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public TimePeriodAnchorTest(String name) {
-        super(name);
-    }
+public class TimePeriodAnchorTest {
 
     /**
      * Test the equals() method.
      */
+    @Test
     public void testEquals() {
         assertTrue(TimePeriodAnchor.START.equals(TimePeriodAnchor.START));
         assertTrue(TimePeriodAnchor.MIDDLE.equals(TimePeriodAnchor.MIDDLE));
@@ -80,6 +63,7 @@ public class TimePeriodAnchorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for identity.
      */
+    @Test
     public void testSerialization() {
         TimePeriodAnchor a1 = TimePeriodAnchor.START;
         TimePeriodAnchor a2 = (TimePeriodAnchor) TestUtilities.serialised(a1);

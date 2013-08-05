@@ -45,47 +45,26 @@
 
 package org.jfree.data.time;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
+import org.junit.Test;
 
 /**
  * Some tests for the {@link TimePeriodValuesCollection} class.
  */
-public class TimePeriodValuesCollectionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(TimePeriodValuesCollectionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public TimePeriodValuesCollectionTest(String name) {
-        super(name);
-    }
-
-    /**
-     * Common test setup.
-     */
-    protected void setUp() {
-        // no setup
-    }
+public class TimePeriodValuesCollectionTest {
 
     /**
      * A test for bug report 1161340.  I wasn't able to reproduce the problem
      * with this test.
      */
+    @Test
     public void test1161340() {
         TimePeriodValuesCollection dataset = new TimePeriodValuesCollection();
         TimePeriodValues v1 = new TimePeriodValues("V1");
@@ -106,6 +85,7 @@ public class TimePeriodValuesCollectionTest extends TestCase {
     /**
      * Tests the equals() method.
      */
+    @Test
     public void testEquals() {
         
         TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
@@ -134,6 +114,7 @@ public class TimePeriodValuesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
         TimePeriodValuesCollection c2 = (TimePeriodValuesCollection) 
@@ -144,6 +125,7 @@ public class TimePeriodValuesCollectionTest extends TestCase {
     /**
      * Some basic checks for the getSeries() method.
      */
+    @Test
     public void testGetSeries() {
         TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
         TimePeriodValues s1 = new TimePeriodValues("Series 1");
@@ -174,6 +156,7 @@ public class TimePeriodValuesCollectionTest extends TestCase {
     /**
      * Some checks for the getDomainBounds() method.
      */
+    @Test
     public void testGetDomainBoundsWithoutInterval() {
         // check empty dataset
         TimePeriodValuesCollection dataset = new TimePeriodValuesCollection();
@@ -201,6 +184,7 @@ public class TimePeriodValuesCollectionTest extends TestCase {
      * 
      * @see #testGetDomainBoundsWithoutInterval()
      */
+    @Test 
     public void testGetDomainBoundsWithInterval() {
         // check empty dataset
         TimePeriodValuesCollection dataset = new TimePeriodValuesCollection();

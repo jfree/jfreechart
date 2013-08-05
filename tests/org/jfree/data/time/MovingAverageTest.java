@@ -41,45 +41,26 @@
 
 package org.jfree.data.time;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
 
 import org.jfree.date.MonthConstants;
+import org.junit.Test;
 
 /**
  * Tests for the {@link MovingAverage} class.
  */
-public class MovingAverageTest extends TestCase {
+public class MovingAverageTest {
 
     private static final double EPSILON = 0.0000000001;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MovingAverageTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MovingAverageTest(String name) {
-        super(name);
-    }
-
-    /**
      * A test for the values calculated from a time series.
      */
+    @Test
     public void test1() {
         TimeSeries source = createDailyTimeSeries1();
-        TimeSeries maverage = MovingAverage.createMovingAverage(
-            source, "Moving Average", 3, 3
-        );
+        TimeSeries maverage = MovingAverage.createMovingAverage(source, 
+                "Moving Average", 3, 3);
 
         // the moving average series has 7 items, the first three
         // days (11, 12, 13 August are skipped)
@@ -106,7 +87,6 @@ public class MovingAverageTest extends TestCase {
      * @return A sample series.
      */
     private TimeSeries createDailyTimeSeries1() {
-
         TimeSeries series = new TimeSeries("Series 1", Day.class);
         series.add(new Day(11, MonthConstants.AUGUST, 2003), 11.2);
         series.add(new Day(13, MonthConstants.AUGUST, 2003), 13.8);
@@ -118,7 +98,6 @@ public class MovingAverageTest extends TestCase {
         series.add(new Day(27, MonthConstants.AUGUST, 2003), 10.7);
         series.add(new Day(28, MonthConstants.AUGUST, 2003), 14.3);
         return series;
-
     }
 
 }

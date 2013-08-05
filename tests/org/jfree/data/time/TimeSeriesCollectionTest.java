@@ -44,43 +44,29 @@
 
 package org.jfree.data.time;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
+import org.junit.Test;
 
 /**
  * A collection of test cases for the {@link TimeSeriesCollection} class.
  */
-public class TimeSeriesCollectionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(TimeSeriesCollectionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public TimeSeriesCollectionTest(String name) {
-        super(name);
-    }
+public class TimeSeriesCollectionTest {
 
     /**
      * Some tests for the equals() method.
      */
+    @Test
     public void testEquals() {
         TimeSeriesCollection c1 = new TimeSeriesCollection();
         TimeSeriesCollection c2 = new TimeSeriesCollection();
@@ -118,6 +104,7 @@ public class TimeSeriesCollectionTest extends TestCase {
     /**
      * Tests the remove series method.
      */
+    @Test
     public void testRemoveSeries() {
         TimeSeriesCollection c1 = new TimeSeriesCollection();
 
@@ -142,6 +129,7 @@ public class TimeSeriesCollectionTest extends TestCase {
      * Some checks for the {@link TimeSeriesCollection#removeSeries(int)}
      * method.
      */
+    @Test
     public void testRemoveSeries_int() {
         TimeSeriesCollection c1 = new TimeSeriesCollection();
         TimeSeries s1 = new TimeSeries("Series 1");
@@ -163,6 +151,7 @@ public class TimeSeriesCollectionTest extends TestCase {
      * Test the getSurroundingItems() method to ensure it is returning the
      * values we expect.
      */
+    @Test
     public void testGetSurroundingItems() {
         TimeSeries series = new TimeSeries("Series 1");
         TimeSeriesCollection collection = new TimeSeriesCollection(series);
@@ -234,6 +223,7 @@ public class TimeSeriesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         TimeSeriesCollection c1 = new TimeSeriesCollection(createSeries());
         TimeSeriesCollection c2 = (TimeSeriesCollection) 
@@ -262,6 +252,7 @@ public class TimeSeriesCollectionTest extends TestCase {
     /**
      * A test for bug report 1170825.
      */
+    @Test
     public void test1170825() {
         TimeSeries s1 = new TimeSeries("Series1");
         TimeSeriesCollection dataset = new TimeSeriesCollection();
@@ -280,6 +271,7 @@ public class TimeSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the indexOf() method.
      */
+    @Test
     public void testIndexOf() {
         TimeSeries s1 = new TimeSeries("S1");
         TimeSeries s2 = new TimeSeries("S2");
@@ -310,6 +302,7 @@ public class TimeSeriesCollectionTest extends TestCase {
      * {@link DatasetUtilities#findDomainBounds(org.jfree.data.xy.XYDataset,
      * java.util.List, boolean)} method.
      */
+    @Test
     public void testFindDomainBounds() {
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         List visibleSeriesKeys = new java.util.ArrayList();
@@ -352,6 +345,7 @@ public class TimeSeriesCollectionTest extends TestCase {
     /**
      * Basic checks for cloning.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         TimeSeries s1 = new TimeSeries("Series");
         s1.add(new Year(2009), 1.1);
@@ -372,6 +366,7 @@ public class TimeSeriesCollectionTest extends TestCase {
     /**
      * A test to cover bug 3445507.
      */
+    @Test
     public void testBug3445507() {
         TimeSeries s1 = new TimeSeries("S1");
         s1.add(new Year(2011), null);
@@ -397,6 +392,7 @@ public class TimeSeriesCollectionTest extends TestCase {
     /**
      * Some checks for the getRangeBounds() method.
      */
+    @Test
     public void testGetRangeBounds() {
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         Range r = dataset.getRangeBounds(false);

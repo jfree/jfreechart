@@ -47,54 +47,33 @@
 
 package org.jfree.data.time;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.date.MonthConstants;
+import org.junit.Test;
 
 /**
  * Tests for the {@link Minute} class.
  */
-public class MinuteTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MinuteTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MinuteTest(String name) {
-        super(name);
-    }
-
-    /**
-     * Common test setup.
-     */
-    protected void setUp() {
-        // no setup
-    }
+public class MinuteTest {
 
     /**
      * Check that a Minute instance is equal to itself.
      *
      * SourceForge Bug ID: 558850.
      */
+    @Test
     public void testEqualsSelf() {
         Minute minute = new Minute();
         assertTrue(minute.equals(minute));
@@ -103,6 +82,7 @@ public class MinuteTest extends TestCase {
     /**
      * Tests the equals method.
      */
+    @Test
     public void testEquals() {
         Day day1 = new Day(29, MonthConstants.MARCH, 2002);
         Hour hour1 = new Hour(15, day1);
@@ -117,6 +97,7 @@ public class MinuteTest extends TestCase {
      * In GMT, the 4.55pm on 21 Mar 2002 is java.util.Date(1016729700000L).
      * Use this to check the Minute constructor.
      */
+    @Test
     public void testDateConstructor1() {
         TimeZone zone = TimeZone.getTimeZone("GMT");
         Locale locale = Locale.getDefault(); // locale should not matter here
@@ -135,6 +116,7 @@ public class MinuteTest extends TestCase {
      * java.util.Date(1,014,281,700,000L). Use this to check the Minute
      * constructor.
      */
+    @Test
     public void testDateConstructor2() {
         TimeZone zone = TimeZone.getTimeZone("Asia/Singapore");
         Locale locale = Locale.getDefault(); // locale should not matter here
@@ -151,6 +133,7 @@ public class MinuteTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         Minute m1 = new Minute();
         Minute m2 = (Minute) TestUtilities.serialised(m1);
@@ -160,6 +143,7 @@ public class MinuteTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         Minute m1 = new Minute(45, 5, 1, 2, 2003);
         Minute m2 = new Minute(45, 5, 1, 2, 2003);
@@ -173,6 +157,7 @@ public class MinuteTest extends TestCase {
      * The {@link Minute} class is immutable, so should not be
      * {@link Cloneable}.
      */
+    @Test
     public void testNotCloneable() {
         Minute m = new Minute(45, 5, 1, 2, 2003);
         assertFalse(m instanceof Cloneable);
@@ -181,6 +166,7 @@ public class MinuteTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond() method.
      */
+    @Test
     public void testGetFirstMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
@@ -195,6 +181,7 @@ public class MinuteTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetFirstMillisecondWithTimeZone() {
         Minute m = new Minute(59, 15, 1, 4, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
@@ -214,6 +201,7 @@ public class MinuteTest extends TestCase {
     /**
      * Some checks for the getFirstMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetFirstMillisecondWithCalendar() {
         Minute m = new Minute(40, 2, 15, 4, 2000);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
@@ -234,6 +222,7 @@ public class MinuteTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond() method.
      */
+    @Test
     public void testGetLastMillisecond() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
@@ -248,6 +237,7 @@ public class MinuteTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetLastMillisecondWithTimeZone() {
         Minute m = new Minute(1, 2, 7, 7, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
@@ -267,6 +257,7 @@ public class MinuteTest extends TestCase {
     /**
      * Some checks for the getLastMillisecond(TimeZone) method.
      */
+    @Test
     public void testGetLastMillisecondWithCalendar() {
         Minute m = new Minute(45, 21, 21, 4, 2001);
         GregorianCalendar calendar = new GregorianCalendar(Locale.GERMANY);
@@ -287,6 +278,7 @@ public class MinuteTest extends TestCase {
     /**
      * Some checks for the getSerialIndex() method.
      */
+    @Test
     public void testGetSerialIndex() {
         Minute m = new Minute(1, 1, 1, 1, 2000);
         assertEquals(52597501L, m.getSerialIndex());
@@ -297,6 +289,7 @@ public class MinuteTest extends TestCase {
     /**
      * Some checks for the testNext() method.
      */
+    @Test
     public void testNext() {
         Minute m = new Minute(30, 1, 12, 12, 2000);
         m = (Minute) m.next();
@@ -312,6 +305,7 @@ public class MinuteTest extends TestCase {
     /**
      * Some checks for the getStart() method.
      */
+    @Test
     public void testGetStart() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.ITALY);
@@ -329,6 +323,7 @@ public class MinuteTest extends TestCase {
     /**
      * Some checks for the getEnd() method.
      */
+    @Test
     public void testGetEnd() {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.ITALY);
@@ -346,6 +341,7 @@ public class MinuteTest extends TestCase {
     /**
      * Test for bug 1611872 - previous() fails for first minute in hour.
      */
+    @Test
     public void test1611872() {
         Minute m1 = new Minute(0, 10, 15, 4, 2000);
         Minute m2 = (Minute) m1.previous();

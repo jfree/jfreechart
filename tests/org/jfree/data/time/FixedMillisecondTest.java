@@ -43,39 +43,24 @@
 
 package org.jfree.data.time;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Date;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link FixedMillisecond} class.
  */
-public class FixedMillisecondTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(FixedMillisecondTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public FixedMillisecondTest(String name) {
-        super(name);
-    }
+public class FixedMillisecondTest {
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         FixedMillisecond m1 = new FixedMillisecond();
         FixedMillisecond m2 = (FixedMillisecond) TestUtilities.serialised(m1);
@@ -85,6 +70,7 @@ public class FixedMillisecondTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         FixedMillisecond m1 = new FixedMillisecond(500000L);
         FixedMillisecond m2 = new FixedMillisecond(500000L);
@@ -98,6 +84,7 @@ public class FixedMillisecondTest extends TestCase {
      * The {@link FixedMillisecond} class is immutable, so should not be
      * {@link Cloneable}.
      */
+    @Test
     public void testNotCloneable() {
         FixedMillisecond m = new FixedMillisecond(500000L);
         assertFalse(m instanceof Cloneable);
@@ -106,6 +93,7 @@ public class FixedMillisecondTest extends TestCase {
     /**
      * A check for immutability.
      */
+    @Test
     public void testImmutability() {
         Date d = new Date(20L);
         FixedMillisecond fm = new FixedMillisecond(d);
