@@ -384,9 +384,6 @@ public class SWTGraphics2D extends Graphics2D {
             int alpha = (int) (acomp.getAlpha() * 0xFF);
             this.gc.setAlpha(alpha);
         }
-        else {
-            System.out.println("warning, can only handle alpha composite at the moment.");
-        }
     }
 
     /**
