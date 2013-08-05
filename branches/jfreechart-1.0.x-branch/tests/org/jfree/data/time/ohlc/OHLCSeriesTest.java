@@ -43,21 +43,24 @@
 
 package org.jfree.data.time.ohlc;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.jfree.data.general.SeriesException;
 import org.jfree.data.time.Year;
+import org.junit.Test;
 
 /**
  * Tests for the {@link OHLCSeries} class.
  */
-public class OHLCSeriesTest extends TestCase
-        implements SeriesChangeListener {
+public class OHLCSeriesTest implements SeriesChangeListener {
 
     SeriesChangeEvent lastEvent;
 
@@ -71,26 +74,9 @@ public class OHLCSeriesTest extends TestCase
     }
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(OHLCSeriesTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public OHLCSeriesTest(String name) {
-        super(name);
-    }
-
-    /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         OHLCSeries s1 = new OHLCSeries("s1");
         OHLCSeries s2 = new OHLCSeries("s1");
@@ -124,6 +110,7 @@ public class OHLCSeriesTest extends TestCase
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         OHLCSeries s1 = new OHLCSeries("Test");
         s1.add(new Year(2009), 1.0, 3.0, 2.0, 1.4);
@@ -138,6 +125,7 @@ public class OHLCSeriesTest extends TestCase
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         OHLCSeries s1 = new OHLCSeries("s1");
         s1.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
@@ -150,6 +138,7 @@ public class OHLCSeriesTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         OHLCSeries s1 = new OHLCSeries("s1");
         s1.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
@@ -160,6 +149,7 @@ public class OHLCSeriesTest extends TestCase
     /**
      * Simple test for the indexOf() method.
      */
+    @Test
     public void testIndexOf() {
         OHLCSeries s1 = new OHLCSeries("s1");
         s1.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
@@ -173,6 +163,7 @@ public class OHLCSeriesTest extends TestCase
     /**
      * Simple test for the remove() method.
      */
+    @Test
     public void testRemove() {
         OHLCSeries s1 = new OHLCSeries("s1");
         s1.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
@@ -190,6 +181,7 @@ public class OHLCSeriesTest extends TestCase
     /**
      * A check for the remove(int) method.
      */
+    @Test
     public void testRemove_int() {
         OHLCSeries s1 = new OHLCSeries("s1");
         s1.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
@@ -205,6 +197,7 @@ public class OHLCSeriesTest extends TestCase
     /**
      * If you add a duplicate period, an exception should be thrown.
      */
+    @Test
     public void testAdditionOfDuplicatePeriod() {
         OHLCSeries s1 = new OHLCSeries("s1");
         s1.add(new Year(2006), 1.0, 1.0, 1.0, 1.0);
@@ -221,6 +214,7 @@ public class OHLCSeriesTest extends TestCase
     /**
      * A simple check that the maximumItemCount attribute is working.
      */
+    @Test
     public void testSetMaximumItemCount() {
         OHLCSeries s1 = new OHLCSeries("s1");
         assertEquals(Integer.MAX_VALUE, s1.getMaximumItemCount());
@@ -236,6 +230,7 @@ public class OHLCSeriesTest extends TestCase
     /**
      * Check that the maximum item count can be applied retrospectively.
      */
+    @Test
     public void testSetMaximumItemCount2() {
         OHLCSeries s1 = new OHLCSeries("s1");
         s1.add(new Year(2006), 1.0, 1.1, 1.1, 1.1);
@@ -249,6 +244,7 @@ public class OHLCSeriesTest extends TestCase
     /**
      * Some checks for the clear() method.
      */
+    @Test
     public void testClear() {
         OHLCSeries s1 = new OHLCSeries("S1");
         s1.addChangeListener(this);
