@@ -43,37 +43,21 @@ package org.jfree.chart.util;
 
 import java.text.DecimalFormat;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for the {@link LogFormat} class.
  */
-public class LogFormatTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LogFormatTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public LogFormatTest(String name) {
-        super(name);
-    }
+public class LogFormatTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
         LogFormat f2 = new LogFormat(10.0, "10", true);

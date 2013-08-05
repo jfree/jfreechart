@@ -42,33 +42,13 @@ package org.jfree.chart.util;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 /**
  * Tests for the {@link LineUtilities} class.
  */
-public class LineUtilitiesTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LineUtilitiesTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public LineUtilitiesTest(String name) {
-        super(name);
-    }
+public class LineUtilitiesTest {
 
     private boolean lineEquals(Line2D line, double x1, double y1, double x2,
             double y2) {
@@ -81,6 +61,7 @@ public class LineUtilitiesTest extends TestCase {
         return result;
     }
 
+    @Test
     public void testClipLine() {
         Rectangle2D rect = new Rectangle2D.Double(1.0, 1.0, 1.0, 1.0);
         Line2D line = new Line2D.Double();

@@ -47,41 +47,25 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for the {@link RelativeDateFormat} class.
  */
-public class RelativeDateFormatTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(RelativeDateFormatTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public RelativeDateFormatTest(String name) {
-        super(name);
-    }
+public class RelativeDateFormatTest {
 
     private Locale savedLocale;
 
     /**
      * Set a known locale for the tests.
      */
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         this.savedLocale = Locale.getDefault();
         Locale.setDefault(Locale.UK);
     }
@@ -89,14 +73,15 @@ public class RelativeDateFormatTest extends TestCase {
     /**
      * Restore the default locale after the tests complete.
      */
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @After
+    public void tearDown() throws Exception {
         Locale.setDefault(this.savedLocale);
     }
 
     /**
      * Some checks for the formatting.
      */
+    @Test
     public void testFormat() {
         RelativeDateFormat rdf = new RelativeDateFormat();
         String s = rdf.format(new Date(2 * 60L * 60L * 1000L + 122500L));
