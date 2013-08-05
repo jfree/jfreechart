@@ -40,18 +40,20 @@
 
 package org.jfree.data.general;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
+import org.junit.Test;
 
 /**
  * Somes tests for the {@link DefaultHeatMapDataset} class.
  *
  * @since 1.0.13
  */
-public class DefaultHeatMapDatasetTest extends TestCase
-        implements DatasetChangeListener {
+public class DefaultHeatMapDatasetTest implements DatasetChangeListener {
 
     /** The last event received. */
     private DatasetChangeEvent lastEvent;
@@ -65,29 +67,12 @@ public class DefaultHeatMapDatasetTest extends TestCase
         this.lastEvent = event;
     }
 
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultHeatMapDatasetTest.class);
-    }
-
     private static final double EPSILON = 0.0000000001;
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultHeatMapDatasetTest(String name) {
-        super(name);
-    }
 
     /**
      * Some general tests.
      */
+    @Test
     public void testGeneral() {
         DefaultHeatMapDataset d = new DefaultHeatMapDataset(10, 5, 0.0, 9.0,
                 0.0, 5.0);
@@ -110,6 +95,7 @@ public class DefaultHeatMapDatasetTest extends TestCase
     /**
      * Some tests for the equals() method.
      */
+    @Test
     public void testEquals() {
         DefaultHeatMapDataset d1 = new DefaultHeatMapDataset(5, 10, 1.0, 2.0,
                 3.0, 4.0);
@@ -171,6 +157,7 @@ public class DefaultHeatMapDatasetTest extends TestCase
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultHeatMapDataset d1 = new DefaultHeatMapDataset(2, 3, -1.0, 4.0,
                 -2.0, 5.0);
@@ -193,6 +180,7 @@ public class DefaultHeatMapDatasetTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultHeatMapDataset d1 = new DefaultHeatMapDataset(2, 3, -1.0, 4.0,
                 -2.0, 5.0);
@@ -203,15 +191,6 @@ public class DefaultHeatMapDatasetTest extends TestCase
         DefaultHeatMapDataset d2 = (DefaultHeatMapDataset) 
                 TestUtilities.serialised(d1);
         assertEquals(d1, d2);
-    }
-
-    /**
-     * Runs the test suite using JUnit's text-based runner.
-     *
-     * @param args  ignored.
-     */
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
     }
 
 }

@@ -40,37 +40,20 @@
 
 package org.jfree.data.general;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for the {@link DefaultKeyedValues2DDataset} class.
  */
-public class DefaultKeyedValues2DDatasetTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultKeyedValues2DDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultKeyedValues2DDatasetTest(String name) {
-        super(name);
-    }
+public class DefaultKeyedValues2DDatasetTest {
 
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValues2DDataset d1 = new DefaultKeyedValues2DDataset();
         d1.setValue(new Integer(1), "V1", "C1");

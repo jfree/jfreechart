@@ -40,37 +40,19 @@
 
 package org.jfree.data.general;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for the {@link DatasetGroup} class.
  */
-public class DatasetGroupTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DatasetGroupTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DatasetGroupTest(String name) {
-        super(name);
-    }
+public class DatasetGroupTest {
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DatasetGroup g1 = new DatasetGroup();
         DatasetGroup g2 = (DatasetGroup) TestUtilities.serialised(g1);

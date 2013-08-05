@@ -40,37 +40,23 @@
 
 package org.jfree.data.general;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
+
+import org.junit.Test;
 
 /**
  * Tests for the {@link DefaultKeyedValueDataset} class.
  */
-public class DefaultKeyedValueDatasetTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultKeyedValueDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultKeyedValueDatasetTest(String name) {
-        super(name);
-    }
+public class DefaultKeyedValueDatasetTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
 
         DefaultKeyedValueDataset d1
@@ -93,6 +79,7 @@ public class DefaultKeyedValueDatasetTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValueDataset d1
             = new DefaultKeyedValueDataset("Test", new Double(45.5));
@@ -105,6 +92,7 @@ public class DefaultKeyedValueDatasetTest extends TestCase {
     /**
      * Confirm that the clone is independent of the original.
      */
+    @Test
     public void testCloneIndependence() throws CloneNotSupportedException {
         DefaultKeyedValueDataset d1
             = new DefaultKeyedValueDataset("Key", new Double(10.0));
@@ -119,6 +107,7 @@ public class DefaultKeyedValueDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultKeyedValueDataset d1
             = new DefaultKeyedValueDataset("Test", new Double(25.3));
