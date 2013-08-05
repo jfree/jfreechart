@@ -40,37 +40,22 @@
 
 package org.jfree.data;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertSame;
 
 /**
  * Tests for the {@link DomainOrder} class.
  */
-public class DomainOrderTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DomainOrderTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DomainOrderTest(String name) {
-        super(name);
-    }
+public class DomainOrderTest {
 
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         assertEquals(DomainOrder.NONE, DomainOrder.NONE);
         assertEquals(DomainOrder.ASCENDING, DomainOrder.ASCENDING);
@@ -89,6 +74,7 @@ public class DomainOrderTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         DomainOrder d1 = DomainOrder.ASCENDING;
         DomainOrder d2 = DomainOrder.ASCENDING;
@@ -101,6 +87,7 @@ public class DomainOrderTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DomainOrder d1 = DomainOrder.ASCENDING;
         DomainOrder d2 = (DomainOrder) TestUtilities.serialised(d1);

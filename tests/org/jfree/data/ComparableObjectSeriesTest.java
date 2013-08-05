@@ -41,15 +41,17 @@
 
 package org.jfree.data;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests for the {@link ComparableObjectSeries} class.
  */
-public class ComparableObjectSeriesTest extends TestCase {
+public class ComparableObjectSeriesTest {
 
     static class MyComparableObjectSeries extends ComparableObjectSeries {
         /**
@@ -81,26 +83,9 @@ public class ComparableObjectSeriesTest extends TestCase {
     }
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ComparableObjectSeriesTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ComparableObjectSeriesTest(String name) {
-        super(name);
-    }
-
-    /**
      * Some checks for the constructor.
      */
+    @Test
     public void testConstructor1() {
         ComparableObjectSeries s1 = new ComparableObjectSeries("s1");
         assertEquals("s1", s1.getKey());
@@ -124,6 +109,7 @@ public class ComparableObjectSeriesTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("A");
         MyComparableObjectSeries s2 = new MyComparableObjectSeries("A");
@@ -132,37 +118,37 @@ public class ComparableObjectSeriesTest extends TestCase {
 
         // key
         s1 = new MyComparableObjectSeries("B");
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new MyComparableObjectSeries("B");
         assertTrue(s1.equals(s2));
 
         // autoSort
         s1 = new MyComparableObjectSeries("B", false, true);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new MyComparableObjectSeries("B", false, true);
         assertTrue(s1.equals(s2));
 
         // allowDuplicateXValues
         s1 = new MyComparableObjectSeries("B", false, false);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new MyComparableObjectSeries("B", false, false);
         assertTrue(s1.equals(s2));
 
         // add a value
         s1.add(new Integer(1), "ABC");
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(new Integer(1), "ABC");
         assertTrue(s1.equals(s2));
 
         // add another value
         s1.add(new Integer(0), "DEF");
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(new Integer(0), "DEF");
         assertTrue(s1.equals(s2));
 
         // remove an item
         s1.remove(new Integer(1));
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.remove(new Integer(1));
         assertTrue(s1.equals(s2));
     }
@@ -170,6 +156,7 @@ public class ComparableObjectSeriesTest extends TestCase {
     /**
      * Some checks for the clone() method.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("A");
         s1.add(new Integer(1), "ABC");
@@ -182,6 +169,7 @@ public class ComparableObjectSeriesTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("A");
         s1.add(new Integer(1), "ABC");
@@ -193,6 +181,7 @@ public class ComparableObjectSeriesTest extends TestCase {
     /**
      * Some simple checks for the hashCode() method.
      */
+    @Test
     public void testHashCode() {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("Test");
         MyComparableObjectSeries s2 = new MyComparableObjectSeries("Test");

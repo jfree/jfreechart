@@ -43,28 +43,20 @@
 
 package org.jfree.data;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import org.junit.Test;
 
 /**
  * Some tests for the {@link DataUtilities} class.
  */
-public class DataUtilitiesTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DataUtilitiesTest.class);
-    }
+public class DataUtilitiesTest {
 
     /**
      * Tests the createNumberArray2D() method.
      */
+    @Test
     public void testCreateNumberArray2D() {
         double[][] d = new double[2][];
         d[0] = new double[] {1.1, 2.2, 3.3, 4.4};
@@ -80,6 +72,7 @@ public class DataUtilitiesTest extends TestCase {
     /**
      * Some checks for the calculateColumnTotal() method.
      */
+    @Test
     public void testCalculateColumnTotal() {
         DefaultKeyedValues2D table = new DefaultKeyedValues2D();
         table.addValue(new Double(1.0), "R0", "C0");
@@ -95,6 +88,7 @@ public class DataUtilitiesTest extends TestCase {
     /**
      * Some checks for the calculateColumnTotal() method.
      */
+    @Test
     public void testCalculateColumnTotal2() {
         DefaultKeyedValues2D table = new DefaultKeyedValues2D();
         table.addValue(new Double(1.0), "R0", "C0");
@@ -127,6 +121,7 @@ public class DataUtilitiesTest extends TestCase {
     /**
      * Some checks for the calculateRowTotal() method.
      */
+    @Test
     public void testCalculateRowTotal() {
         DefaultKeyedValues2D table = new DefaultKeyedValues2D();
         table.addValue(new Double(1.0), "R0", "C0");
@@ -142,6 +137,7 @@ public class DataUtilitiesTest extends TestCase {
     /**
      * Some checks for the calculateRowTotal() method.
      */
+    @Test
     public void testCalculateRowTotal2() {
         DefaultKeyedValues2D table = new DefaultKeyedValues2D();
         table.addValue(new Double(1.0), "R0", "C0");
@@ -175,6 +171,7 @@ public class DataUtilitiesTest extends TestCase {
     /**
      * Some tests for the equal(double[][], double[][]) method.
      */
+    @Test
     public void testEqual() {
         assertTrue(DataUtilities.equal(null, null));
         
@@ -223,6 +220,7 @@ public class DataUtilitiesTest extends TestCase {
     /**
      * Some tests for the clone() method.
      */
+    @Test
     public void testClone() {
         double[][] a = new double[1][];
         double[][] b = DataUtilities.clone(a);
@@ -242,15 +240,6 @@ public class DataUtilitiesTest extends TestCase {
         assertFalse(DataUtilities.equal(a, b));
         b[0][0] = 99.9;
         assertTrue(DataUtilities.equal(a, b));
-    }
-
-    /**
-     * Runs the test suite using JUnit's text-based runner.
-     *
-     * @param args  ignored.
-     */
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
     }
 
 }
