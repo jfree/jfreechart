@@ -44,40 +44,24 @@ package org.jfree.data.category;
 
 import java.util.List;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.DataUtilities;
 import org.jfree.data.UnknownKeyException;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Tests for the {@link DefaultIntervalCategoryDataset} class.
  */
-public class DefaultIntervalCategoryDatasetTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultIntervalCategoryDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultIntervalCategoryDatasetTest(String name) {
-        super(name);
-    }
+public class DefaultIntervalCategoryDatasetTest {
 
     /**
      * Some checks for the getValue() method.
      */
+    @Test
     public void testGetValue() {
         double[] starts_S1 = new double[] {0.1, 0.2, 0.3};
         double[] starts_S2 = new double[] {0.3, 0.4, 0.5};
@@ -140,6 +124,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some tests for the getRowCount() method.
      */
+    @Test
     public void testGetRowAndColumnCount() {
         double[] starts_S1 = new double[] {0.1, 0.2, 0.3};
         double[] starts_S2 = new double[] {0.3, 0.4, 0.5};
@@ -157,6 +142,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         double[] starts_S1A = new double[] {0.1, 0.2, 0.3};
         double[] starts_S2A = new double[] {0.3, 0.4, 0.5};
@@ -192,6 +178,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         double[] starts_S1 = new double[] {0.1, 0.2, 0.3};
         double[] starts_S2 = new double[] {0.3, 0.4, 0.5};
@@ -209,6 +196,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         double[] starts_S1 = new double[] {0.1, 0.2, 0.3};
         double[] starts_S2 = new double[] {0.3, 0.4, 0.5};
@@ -237,6 +225,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * A check to ensure that an empty dataset can be cloned.
      */
+    @Test
     public void testCloning2() throws CloneNotSupportedException {
         DefaultIntervalCategoryDataset d1
                 = new DefaultIntervalCategoryDataset(new double[0][0],
@@ -251,6 +240,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some basic checks for the setStartValue() method.
      */
+    @Test
     public void testSetStartValue() {
         double[] starts_S1 = new double[] {0.1, 0.2, 0.3};
         double[] starts_S2 = new double[] {0.3, 0.4, 0.5};
@@ -289,6 +279,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some basic checks for the setEndValue() method.
      */
+    @Test
     public void testSetEndValue() {
         double[] starts_S1 = new double[] {0.1, 0.2, 0.3};
         double[] starts_S2 = new double[] {0.3, 0.4, 0.5};
@@ -327,6 +318,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getSeriesCount() method.
      */
+    @Test
     public void testGetSeriesCount() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -338,6 +330,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getCategoryCount() method.
      */
+    @Test
     public void testGetCategoryCount() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -349,6 +342,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getSeriesIndex() method.
      */
+    @Test
     public void testGetSeriesIndex() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -360,6 +354,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getRowIndex() method.
      */
+    @Test
     public void testGetRowIndex() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -371,6 +366,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the setSeriesKeys() method.
      */
+    @Test
     public void testSetSeriesKeys() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -389,6 +385,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getCategoryIndex() method.
      */
+    @Test
     public void testGetCategoryIndex() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -400,6 +397,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getColumnIndex() method.
      */
+    @Test
     public void testGetColumnIndex() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -411,6 +409,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the setCategoryKeys() method.
      */
+    @Test
     public void testSetCategoryKeys() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -429,6 +428,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getColumnKeys() method.
      */
+    @Test
     public void testGetColumnKeys() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -441,6 +441,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getRowKeys() method.
      */
+    @Test
     public void testGetRowKeys() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -453,6 +454,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getColumnCount() method.
      */
+    @Test
     public void testGetColumnCount() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
@@ -464,6 +466,7 @@ public class DefaultIntervalCategoryDatasetTest extends TestCase {
     /**
      * Some checks for the getRowCount() method.
      */
+    @Test
     public void testGetRowCount() {
         // check an empty dataset
         DefaultIntervalCategoryDataset empty
