@@ -43,10 +43,12 @@
  */
 
 package org.jfree.data.statistics;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
@@ -55,25 +57,7 @@ import org.jfree.data.UnknownKeyException;
 /**
  * Tests for the {@link DefaultStatisticalCategoryDataset} class.
  */
-public class DefaultStatisticalCategoryDatasetTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultStatisticalCategoryDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultStatisticalCategoryDatasetTest(String name) {
-        super(name);
-    }
+public class DefaultStatisticalCategoryDatasetTest {
 
     /**
      * Some checks for the getRangeBounds() method.

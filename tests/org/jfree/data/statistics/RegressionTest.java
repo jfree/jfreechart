@@ -41,53 +41,34 @@
 
 package org.jfree.data.statistics;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
 
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.junit.Test;
 
 /**
  * Tests for the {@link Regression} class.
  */
-public class RegressionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(RegressionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public RegressionTest(String name) {
-        super(name);
-    }
+public class RegressionTest {
 
     /**
      * Checks the results of an OLS regression on sample dataset 1.
      */
+    @Test
     public void testOLSRegression1a() {
-
         double[][] data = createSampleData1();
         double[] result1 = Regression.getOLSRegression(data);
         assertEquals(.25680930, result1[0], 0.0000001);
         assertEquals(0.72792106, result1[1], 0.0000001);
-
     }
 
     /**
      * Checks the results of an OLS regression on sample dataset 1 AFTER
      * converting it to an XYSeries.
      */
+    @Test
     public void testOLSRegression1b() {
 
         double[][] data = createSampleData1();
@@ -107,6 +88,7 @@ public class RegressionTest extends TestCase {
     /**
      * Checks the results of a power regression on sample dataset 1.
      */
+    @Test
     public void testPowerRegression1a() {
 
         double[][] data = createSampleData1();
@@ -120,6 +102,7 @@ public class RegressionTest extends TestCase {
      * Checks the results of a power regression on sample dataset 1 AFTER
      * converting it to an XYSeries.
      */
+    @Test
     public void testPowerRegression1b() {
 
         double[][] data = createSampleData1();
@@ -139,6 +122,7 @@ public class RegressionTest extends TestCase {
     /**
      * Checks the results of an OLS regression on sample dataset 2.
      */
+    @Test
     public void testOLSRegression2a() {
 
         double[][] data = createSampleData2();
@@ -152,6 +136,7 @@ public class RegressionTest extends TestCase {
      * Checks the results of an OLS regression on sample dataset 2 AFTER
      * converting it to an XYSeries.
      */
+    @Test
     public void testOLSRegression2b() {
 
         double[][] data = createSampleData2();
@@ -171,19 +156,19 @@ public class RegressionTest extends TestCase {
     /**
      * Checks the results of a power regression on sample dataset 2.
      */
+    @Test
     public void testPowerRegression2a() {
-
         double[][] data = createSampleData2();
         double[] result = Regression.getPowerRegression(data);
         assertEquals(106.1241681, result[0], 0.0000001);
         assertEquals(-0.8466615, result[1], 0.0000001);
-
     }
 
     /**
      * Checks the results of a power regression on sample dataset 2 AFTER
      * converting it to an XYSeries.
      */
+    @Test
     public void testPowerRegression2b() {
 
         double[][] data = createSampleData2();

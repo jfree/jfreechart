@@ -40,37 +40,22 @@
 
 package org.jfree.data.statistics;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link MeanAndStandardDeviation} class.
  */
-public class MeanAndStandardDeviationTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MeanAndStandardDeviationTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MeanAndStandardDeviationTest(String name) {
-        super(name);
-    }
+public class MeanAndStandardDeviationTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         MeanAndStandardDeviation m1 = new MeanAndStandardDeviation(1.2, 3.4);
         MeanAndStandardDeviation m2 = new MeanAndStandardDeviation(1.2, 3.4);
@@ -91,6 +76,7 @@ public class MeanAndStandardDeviationTest extends TestCase {
     /**
      * Immutable class - should not be cloneable.
      */
+    @Test
     public void testCloning() {
         MeanAndStandardDeviation m1 = new MeanAndStandardDeviation(1.2, 3.4);
         assertFalse(m1 instanceof Cloneable);
@@ -99,6 +85,7 @@ public class MeanAndStandardDeviationTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         MeanAndStandardDeviation m1 = new MeanAndStandardDeviation(1.2, 3.4);
         MeanAndStandardDeviation m2 = (MeanAndStandardDeviation) 
