@@ -92,7 +92,6 @@ public final class DomainOrder implements Serializable {
      * @return A boolean.
      */
     public boolean equals(Object obj) {
-
         if (this == obj) {
             return true;
         }
