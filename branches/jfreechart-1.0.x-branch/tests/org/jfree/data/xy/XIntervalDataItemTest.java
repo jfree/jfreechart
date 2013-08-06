@@ -40,41 +40,24 @@
 
 package org.jfree.data.xy;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
-
+import org.junit.Test;
 
 /**
  * Tests for the {@link XIntervalDataItem} class.
  */
-public class XIntervalDataItemTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XIntervalDataItemTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XIntervalDataItemTest(String name) {
-        super(name);
-    }
+public class XIntervalDataItemTest {
 
     private static final double EPSILON = 0.00000000001;
 
     /**
      * Some checks for the constructor.
      */
+    @Test
     public void testConstructor1() {
         XIntervalDataItem item1 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
         assertEquals(new Double(1.0), item1.getX());
@@ -86,6 +69,7 @@ public class XIntervalDataItemTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         XIntervalDataItem item1 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
         XIntervalDataItem item2 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
@@ -121,6 +105,7 @@ public class XIntervalDataItemTest extends TestCase {
     /**
      * Some checks for the clone() method.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XIntervalDataItem item1 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
         XIntervalDataItem item2 = (XIntervalDataItem) item1.clone();
@@ -132,6 +117,7 @@ public class XIntervalDataItemTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XIntervalDataItem item1 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
         XIntervalDataItem item2 = (XIntervalDataItem) TestUtilities.serialised(item1);

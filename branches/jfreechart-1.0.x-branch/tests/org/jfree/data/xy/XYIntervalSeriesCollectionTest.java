@@ -43,39 +43,24 @@
 
 package org.jfree.data.xy;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYIntervalSeriesCollection} class.
  */
-public class XYIntervalSeriesCollectionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYIntervalSeriesCollectionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYIntervalSeriesCollectionTest(String name) {
-        super(name);
-    }
+public class XYIntervalSeriesCollectionTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
         XYIntervalSeriesCollection c2 = new XYIntervalSeriesCollection();
@@ -101,6 +86,7 @@ public class XYIntervalSeriesCollectionTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
         XYIntervalSeries s1 = new XYIntervalSeries("Series");
@@ -120,6 +106,7 @@ public class XYIntervalSeriesCollectionTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
         assertTrue(c1 instanceof PublicCloneable);
@@ -128,6 +115,7 @@ public class XYIntervalSeriesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
         XYIntervalSeries s1 = new XYIntervalSeries("Series");
@@ -146,6 +134,7 @@ public class XYIntervalSeriesCollectionTest extends TestCase {
     /**
      * Some basic checks for the removeSeries() method.
      */
+    @Test
     public void testRemoveSeries() {
         XYIntervalSeriesCollection c = new XYIntervalSeriesCollection();
         XYIntervalSeries s1 = new XYIntervalSeries("s1");
@@ -177,6 +166,7 @@ public class XYIntervalSeriesCollectionTest extends TestCase {
      * A test for bug report 1170825 (originally affected XYSeriesCollection,
      * this test is just copied over).
      */
+    @Test
     public void test1170825() {
         XYIntervalSeries s1 = new XYIntervalSeries("Series1");
         XYIntervalSeriesCollection dataset = new XYIntervalSeriesCollection();

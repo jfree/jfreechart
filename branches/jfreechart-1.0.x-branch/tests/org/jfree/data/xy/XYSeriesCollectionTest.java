@@ -49,43 +49,32 @@
 
 package org.jfree.data.xy;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.fail
+        ;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYSeriesCollection} class.
  */
-public class XYSeriesCollectionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYSeriesCollectionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYSeriesCollectionTest(String name) {
-        super(name);
-    }
+public class XYSeriesCollectionTest {
 
     private static final double EPSILON = 0.0000000001;
 
     /**
      * Some checks for the constructor.
      */
+    @Test
     public void testConstructor() {
         XYSeriesCollection xysc = new XYSeriesCollection();
         assertEquals(0, xysc.getSeriesCount());
@@ -96,6 +85,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
@@ -133,6 +123,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
@@ -151,6 +142,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         Object c1 = new XYSeriesCollection();
         assertTrue(c1 instanceof PublicCloneable);
@@ -159,6 +151,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
@@ -172,6 +165,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * A test for bug report 1170825.
      */
+    @Test
     public void test1170825() {
         XYSeries s1 = new XYSeries("Series1");
         XYSeriesCollection dataset = new XYSeriesCollection();
@@ -190,6 +184,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Some basic checks for the getSeries() method.
      */
+    @Test
     public void testGetSeries() {
         XYSeriesCollection c = new XYSeriesCollection();
         XYSeries s1 = new XYSeries("s1");
@@ -216,6 +211,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Some checks for the getSeries(Comparable) method.
      */
+    @Test
     public void testGetSeriesByKey() {
         XYSeriesCollection c = new XYSeriesCollection();
         XYSeries s1 = new XYSeries("s1");
@@ -242,6 +238,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Some basic checks for the addSeries() method.
      */
+    @Test
     public void testAddSeries() {
         XYSeriesCollection c = new XYSeriesCollection();
         XYSeries s1 = new XYSeries("s1");
@@ -262,6 +259,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Some basic checks for the removeSeries() method.
      */
+    @Test
     public void testRemoveSeries() {
         XYSeriesCollection c = new XYSeriesCollection();
         XYSeries s1 = new XYSeries("s1");
@@ -290,6 +288,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Some tests for the indexOf() method.
      */
+    @Test
     public void testIndexOf() {
         XYSeries s1 = new XYSeries("S1");
         XYSeries s2 = new XYSeries("S2");
@@ -316,6 +315,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Some checks for the getDomainBounds() method.
      */
+    @Test
     public void testGetDomainBounds() {
         XYSeriesCollection dataset = new XYSeriesCollection();
         Range r = dataset.getDomainBounds(false);
@@ -346,6 +346,7 @@ public class XYSeriesCollectionTest extends TestCase {
     /**
      * Some checks for the getRangeBounds() method.
      */
+    @Test
     public void testGetRangeBounds() {
         XYSeriesCollection dataset = new XYSeriesCollection();
         Range r = dataset.getRangeBounds(false);
@@ -377,6 +378,7 @@ public class XYSeriesCollectionTest extends TestCase {
      * A check that the dataset prevents renaming a series to the name of an 
      * existing series in the dataset.
      */
+    @Test
     public void testRenameSeries() {
         XYSeries s1 = new XYSeries("S1");
         XYSeries s2 = new XYSeries("S2");
@@ -397,6 +399,7 @@ public class XYSeriesCollectionTest extends TestCase {
      * A test to cover bug 3445507.  The issue does not affect
      * XYSeriesCollection.
      */
+    @Test
     public void testBug3445507() {
         XYSeries s1 = new XYSeries("S1");
         s1.add(1.0, null);
@@ -419,6 +422,7 @@ public class XYSeriesCollectionTest extends TestCase {
      * Test that a series belonging to a collection can be renamed (in fact, 
      * because of a bug this was not possible in JFreeChart 1.0.14).
      */
+    @Test
     public void testSeriesRename() {
         // first check that a valid renaming works
         XYSeries series1 = new XYSeries("A");

@@ -41,41 +41,26 @@
 
 package org.jfree.data.xy;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.time.Day;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for {@link DefaultWindDataset}.
  */
-public class DefaultWindDatasetTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultWindDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultWindDatasetTest(String name) {
-        super(name);
-    }
+public class DefaultWindDatasetTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         DefaultWindDataset d1 = new DefaultWindDataset();
         DefaultWindDataset d2 = new DefaultWindDataset();
@@ -91,6 +76,7 @@ public class DefaultWindDatasetTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultWindDataset d1 = new DefaultWindDataset();
         DefaultWindDataset d2 = (DefaultWindDataset) d1.clone();
@@ -109,6 +95,7 @@ public class DefaultWindDatasetTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         DefaultWindDataset d1 = new DefaultWindDataset();
         assertTrue(d1 instanceof PublicCloneable);
@@ -117,6 +104,7 @@ public class DefaultWindDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultWindDataset d1 = new DefaultWindDataset();
         DefaultWindDataset d2 = (DefaultWindDataset) TestUtilities.serialised(d1);
@@ -131,6 +119,7 @@ public class DefaultWindDatasetTest extends TestCase {
     /**
      * Some checks for the getSeriesKey(int) method.
      */
+    @Test
     public void testGetSeriesKey() {
         DefaultWindDataset d = createSampleDataset1();
         assertEquals("Series 1", d.getSeriesKey(0));
@@ -159,6 +148,7 @@ public class DefaultWindDatasetTest extends TestCase {
     /**
      * Some checks for the indexOf(Comparable) method.
      */
+    @Test
     public void testIndexOf() {
         DefaultWindDataset d = createSampleDataset1();
         assertEquals(0, d.indexOf("Series 1"));

@@ -42,39 +42,24 @@
 
 package org.jfree.data.xy;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XIntervalSeriesCollection} class.
  */
-public class XIntervalSeriesCollectionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XIntervalSeriesCollectionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XIntervalSeriesCollectionTest(String name) {
-        super(name);
-    }
+public class XIntervalSeriesCollectionTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         XIntervalSeriesCollection c1 = new XIntervalSeriesCollection();
         XIntervalSeriesCollection c2 = new XIntervalSeriesCollection();
@@ -100,6 +85,7 @@ public class XIntervalSeriesCollectionTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XIntervalSeriesCollection c1 = new XIntervalSeriesCollection();
         XIntervalSeries s1 = new XIntervalSeries("Series");
@@ -118,6 +104,7 @@ public class XIntervalSeriesCollectionTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         XIntervalSeriesCollection c1 = new XIntervalSeriesCollection();
         assertTrue(c1 instanceof PublicCloneable);
@@ -126,6 +113,7 @@ public class XIntervalSeriesCollectionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XIntervalSeriesCollection c1 = new XIntervalSeriesCollection();
         XIntervalSeries s1 = new XIntervalSeries("Series");
@@ -138,6 +126,7 @@ public class XIntervalSeriesCollectionTest extends TestCase {
     /**
      * Some basic checks for the removeSeries() method.
      */
+    @Test
     public void testRemoveSeries() {
         XIntervalSeriesCollection c = new XIntervalSeriesCollection();
         XIntervalSeries s1 = new XIntervalSeries("s1");
@@ -169,6 +158,7 @@ public class XIntervalSeriesCollectionTest extends TestCase {
      * A test for bug report 1170825 (originally affected XYSeriesCollection,
      * this test is just copied over).
      */
+    @Test
     public void test1170825() {
         XIntervalSeries s1 = new XIntervalSeries("Series1");
         XIntervalSeriesCollection dataset = new XIntervalSeriesCollection();

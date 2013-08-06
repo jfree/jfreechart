@@ -40,37 +40,22 @@
 
 package org.jfree.data.xy;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link YInterval} class.
  */
-public class YIntervalTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(YIntervalTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public YIntervalTest(String name) {
-        super(name);
-    }
+public class YIntervalTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         YInterval i1 = new YInterval(1.0, 0.5, 1.5);
         YInterval i2 = new YInterval(1.0, 0.5, 1.5);
@@ -95,6 +80,7 @@ public class YIntervalTest extends TestCase {
     /**
      * This class is immutable.
      */
+    @Test
     public void testCloning() {
         YInterval i1 = new YInterval(1.0, 0.5, 1.5);
         assertFalse(i1 instanceof Cloneable);
@@ -103,6 +89,7 @@ public class YIntervalTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         YInterval i1 = new YInterval(1.0, 0.5, 1.5);
         YInterval i2 = (YInterval) TestUtilities.serialised(i1);
