@@ -42,45 +42,30 @@
 
 package org.jfree.data.xy;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Date;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DefaultOHLCDataset} class.
  */
-public class DefaultOHLCDatasetTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultOHLCDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultOHLCDatasetTest(String name) {
-        super(name);
-    }
+public class DefaultOHLCDatasetTest {
 
     private static final double EPSILON = 0.0000000001;
 
     /**
      * A small test for the data range calculated on this dataset.
      */
+    @Test
     public void testDataRange() {
         OHLCDataItem[] data = new OHLCDataItem[3];
         data[0] = new OHLCDataItem(new Date(11L), 2.0, 4.0, 1.0, 3.0, 100.0);
@@ -95,6 +80,7 @@ public class DefaultOHLCDatasetTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
@@ -120,6 +106,7 @@ public class DefaultOHLCDatasetTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
@@ -132,6 +119,7 @@ public class DefaultOHLCDatasetTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning2() throws CloneNotSupportedException {
         OHLCDataItem item1 = new OHLCDataItem(new Date(1L), 1.0, 2.0, 3.0, 4.0,
                 5.0);
@@ -152,6 +140,7 @@ public class DefaultOHLCDatasetTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
@@ -161,6 +150,7 @@ public class DefaultOHLCDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);

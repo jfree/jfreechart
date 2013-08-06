@@ -40,37 +40,22 @@
 
 package org.jfree.data.xy;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYDataItem} class.
  */
-public class XYDataItemTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYDataItemTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYDataItemTest(String name) {
-        super(name);
-    }
+public class XYDataItemTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         XYDataItem i1 = new XYDataItem(1.0, 1.1);
         XYDataItem i2 = new XYDataItem(1.0, 1.1);
@@ -87,10 +72,10 @@ public class XYDataItemTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() {
         XYDataItem i1 = new XYDataItem(1.0, 1.1);
-        XYDataItem i2 = null;
-        i2 = (XYDataItem) i1.clone();
+        XYDataItem i2 = (XYDataItem) i1.clone();
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
@@ -99,6 +84,7 @@ public class XYDataItemTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYDataItem i1 = new XYDataItem(1.0, 1.1);
         XYDataItem i2 = (XYDataItem) TestUtilities.serialised(i1);

@@ -43,41 +43,25 @@
 
 package org.jfree.data.xy;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DefaultTableXYDataset} class.
  */
-public class DefaultTableXYDatasetTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultTableXYDatasetTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultTableXYDatasetTest(String name) {
-        super(name);
-    }
+public class DefaultTableXYDatasetTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
-
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         XYSeries s1 = new XYSeries("Series 1", true, false);
         s1.add(1.0, 1.1);
@@ -98,12 +82,12 @@ public class DefaultTableXYDatasetTest extends TestCase {
 
         s2.add(3.0, 3.3);
         assertTrue(d1.equals(d2));
-
     }
 
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         XYSeries s1 = new XYSeries("Series 1", true, false);
@@ -124,6 +108,7 @@ public class DefaultTableXYDatasetTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         assertTrue(d1 instanceof PublicCloneable);
@@ -132,6 +117,7 @@ public class DefaultTableXYDatasetTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         XYSeries s1 = new XYSeries("Series 1", true, false);
@@ -151,6 +137,7 @@ public class DefaultTableXYDatasetTest extends TestCase {
      * recalculation of the interval width, if it is being automatically
      * calculated.
      */
+    @Test
     public void testAddSeries() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         d1.setAutoWidth(true);
@@ -191,6 +178,7 @@ public class DefaultTableXYDatasetTest extends TestCase {
     /**
      * Some basic checks for the getSeries() method.
      */
+    @Test
     public void testGetSeries() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         XYSeries s1 = new XYSeries("Series 1", true, false);

@@ -42,19 +42,22 @@
 
 package org.jfree.data.xy;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYIntervalSeries} class.
  */
-public class XYIntervalSeriesTest extends TestCase
-        implements SeriesChangeListener {
+public class XYIntervalSeriesTest implements SeriesChangeListener {
 
     SeriesChangeEvent lastEvent;
 
@@ -68,28 +71,10 @@ public class XYIntervalSeriesTest extends TestCase
     }
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYIntervalSeriesTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYIntervalSeriesTest(String name) {
-        super(name);
-    }
-
-    /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
-
         XYIntervalSeries s1 = new XYIntervalSeries("s1");
         XYIntervalSeries s2 = new XYIntervalSeries("s1");
         assertTrue(s1.equals(s2));
@@ -129,12 +114,12 @@ public class XYIntervalSeriesTest extends TestCase
         assertFalse(s1.equals(s2));
         s2.remove(new Double(1.0));
         assertTrue(s2.equals(s1));
-
     }
 
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYIntervalSeries s1 = new XYIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.01);
@@ -147,6 +132,7 @@ public class XYIntervalSeriesTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYIntervalSeries s1 = new XYIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.1);
@@ -157,6 +143,7 @@ public class XYIntervalSeriesTest extends TestCase
     /**
      * Simple test for the indexOf() method.
      */
+    @Test
     public void testIndexOf() {
         XYIntervalSeries s1 = new XYIntervalSeries("Series 1");
         s1.add(1.0, 1.0, 1.0, 2.0, 1.9, 2.1);
@@ -168,6 +155,7 @@ public class XYIntervalSeriesTest extends TestCase
     /**
      * A check for the indexOf() method for an unsorted series.
      */
+    @Test
     public void testIndexOf2() {
         XYIntervalSeries s1 = new XYIntervalSeries("Series 1", false, true);
         s1.add(1.0, 1.0, 1.0, 2.0, 1.9, 2.1);
@@ -181,6 +169,7 @@ public class XYIntervalSeriesTest extends TestCase
     /**
      * Simple test for the remove() method.
      */
+    @Test
     public void testRemove() {
         XYIntervalSeries s1 = new XYIntervalSeries("Series 1");
         s1.add(1.0, 1.0, 1.0, 2.0, 1.9, 2.1);
@@ -201,6 +190,7 @@ public class XYIntervalSeriesTest extends TestCase
      * When items are added with duplicate x-values, we expect them to remain
      * in the order they were added.
      */
+    @Test
     public void testAdditionOfDuplicateXValues() {
         XYIntervalSeries s1 = new XYIntervalSeries("Series 1");
         s1.add(1.0, 1.0, 1.0, 1.0, 1.0, 1.0);
@@ -218,6 +208,7 @@ public class XYIntervalSeriesTest extends TestCase
     /**
      * Some checks for the add() method for an UNSORTED series.
      */
+    @Test
     public void testAdd() {
         XYIntervalSeries series = new XYIntervalSeries("Series", false, true);
         series.add(5.0, 5.50, 5.50, 5.50, 5.50, 5.50);
@@ -239,6 +230,7 @@ public class XYIntervalSeriesTest extends TestCase
     /**
      * A simple check that the maximumItemCount attribute is working.
      */
+    @Test
     public void testSetMaximumItemCount() {
         XYIntervalSeries s1 = new XYIntervalSeries("S1");
         assertEquals(Integer.MAX_VALUE, s1.getMaximumItemCount());
@@ -254,6 +246,7 @@ public class XYIntervalSeriesTest extends TestCase
     /**
      * Check that the maximum item count can be applied retrospectively.
      */
+    @Test
     public void testSetMaximumItemCount2() {
         XYIntervalSeries s1 = new XYIntervalSeries("S1");
         s1.add(1.0, 1.1, 1.1, 1.1, 1.1, 1.1);
@@ -267,6 +260,7 @@ public class XYIntervalSeriesTest extends TestCase
     /**
      * Some checks for the new accessor methods added in 1.0.5.
      */
+    @Test
     public void testValues() {
         XYIntervalSeries s1 = new XYIntervalSeries("S1");
         s1.add(2.0, 1.0, 3.0, 5.0, 4.0, 6.0);
@@ -281,6 +275,7 @@ public class XYIntervalSeriesTest extends TestCase
     /**
      * Some checks for the clear() method.
      */
+    @Test
     public void testClear() {
         XYIntervalSeries s1 = new XYIntervalSeries("S1");
         s1.addChangeListener(this);
