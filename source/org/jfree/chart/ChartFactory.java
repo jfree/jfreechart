@@ -1816,7 +1816,8 @@ public abstract class ChartFactory {
      */
     public static JFreeChart createXYAreaChart(String title,String xAxisLabel,
             String yAxisLabel, XYDataset dataset) {
-        return createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset);
+        return createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, 
+                PlotOrientation.VERTICAL, true, true, false);
     }
     
     /**
