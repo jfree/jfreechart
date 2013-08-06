@@ -44,10 +44,9 @@
 
 package org.jfree.chart.renderer.category;
 
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -58,33 +57,17 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.AreaRendererEndType;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link AreaRenderer} class.
  */
-public class AreaRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(AreaRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public AreaRendererTest(String name) {
-        super(name);
-    }
+public class AreaRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         AreaRenderer r1 = new AreaRenderer();
         AreaRenderer r2 = new AreaRenderer();
@@ -99,6 +82,7 @@ public class AreaRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         AreaRenderer r1 = new AreaRenderer();
         AreaRenderer r2 = new AreaRenderer();
@@ -111,6 +95,7 @@ public class AreaRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         AreaRenderer r1 = new AreaRenderer();
         AreaRenderer r2 = (AreaRenderer) r1.clone();
@@ -122,6 +107,7 @@ public class AreaRendererTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         AreaRenderer r1 = new AreaRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -130,6 +116,7 @@ public class AreaRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         AreaRenderer r1 = new AreaRenderer();
         AreaRenderer r2 = (AreaRenderer) TestUtilities.serialised(r1);
@@ -140,6 +127,7 @@ public class AreaRendererTest extends TestCase {
      * A check for the datasetIndex and seriesIndex fields in the LegendItem
      * returned by the getLegendItem() method.
      */
+    @Test
     public void testGetLegendItemSeriesIndex() {
         DefaultCategoryDataset dataset0 = new DefaultCategoryDataset();
         dataset0.addValue(21.0, "R1", "C1");

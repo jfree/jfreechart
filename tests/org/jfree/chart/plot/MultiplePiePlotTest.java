@@ -45,13 +45,14 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -62,24 +63,15 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.TableOrder;
+import org.junit.Test;
 
 /**
  * Some tests for the {@link MultiplePiePlot} class.
  */
-public class MultiplePiePlotTest extends TestCase
-        implements PlotChangeListener {
+public class MultiplePiePlotTest implements PlotChangeListener {
 
     /** The last event received. */
     PlotChangeEvent lastEvent;
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MultiplePiePlotTest.class);
-    }
 
     /**
      * Receives a plot change event and records it.  Some tests will use this
@@ -92,17 +84,9 @@ public class MultiplePiePlotTest extends TestCase
     }
 
     /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MultiplePiePlotTest(String name) {
-        super(name);
-    }
-
-    /**
      * Some checks for the constructors.
      */
+    @Test
     public void testConstructor() {
         MultiplePiePlot plot = new MultiplePiePlot();
         assertNull(plot.getDataset());
@@ -117,6 +101,7 @@ public class MultiplePiePlotTest extends TestCase
     /**
      * Check that the equals() method distinguishes the required fields.
      */
+    @Test
     public void testEquals() {
         MultiplePiePlot p1 = new MultiplePiePlot();
         MultiplePiePlot p2 = new MultiplePiePlot();
@@ -161,6 +146,7 @@ public class MultiplePiePlotTest extends TestCase
     /**
      * Some basic checks for the clone() method.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         MultiplePiePlot p1 = new MultiplePiePlot();
         Rectangle2D rect = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
@@ -178,6 +164,7 @@ public class MultiplePiePlotTest extends TestCase
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         MultiplePiePlot p1 = new MultiplePiePlot(null);
         p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
@@ -189,6 +176,7 @@ public class MultiplePiePlotTest extends TestCase
     /**
      * Fetches the legend items and checks the values.
      */
+    @Test
     public void testGetLegendItems() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(35.0, "S1", "C1");

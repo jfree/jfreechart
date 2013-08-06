@@ -43,11 +43,13 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+
 import java.awt.Color;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.renderer.GrayPaintScale;
@@ -57,35 +59,19 @@ import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYBlockRenderer} class.
  */
-public class XYBlockRendererTest extends TestCase {
+public class XYBlockRendererTest {
 
     private static final double EPSILON = 0.0000000001;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYBlockRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYBlockRendererTest(String name) {
-        super(name);
-    }
-
-    /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
 
         // default instances
@@ -117,6 +103,7 @@ public class XYBlockRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         XYBlockRenderer r1 = new XYBlockRenderer();
         XYBlockRenderer r2 = new XYBlockRenderer();
@@ -129,6 +116,7 @@ public class XYBlockRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYBlockRenderer r1 = new XYBlockRenderer();
         LookupPaintScale scale1 = new LookupPaintScale();
@@ -149,6 +137,7 @@ public class XYBlockRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         XYBlockRenderer r1 = new XYBlockRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -157,6 +146,7 @@ public class XYBlockRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYBlockRenderer r1 = new XYBlockRenderer();
         XYBlockRenderer r2 = (XYBlockRenderer) TestUtilities.serialised(r1);
@@ -166,6 +156,7 @@ public class XYBlockRendererTest extends TestCase {
     /**
      * A simple test for bug 1766646.
      */
+    @Test
     public void testBug1766646A() {
         XYBlockRenderer r = new XYBlockRenderer();
         Range range = r.findDomainBounds(null);
@@ -178,6 +169,7 @@ public class XYBlockRendererTest extends TestCase {
     /**
      * A simple test for bug 1766646.
      */
+    @Test
     public void testBug1766646B() {
         XYBlockRenderer r = new XYBlockRenderer();
         Range range = r.findRangeBounds(null);
@@ -190,6 +182,7 @@ public class XYBlockRendererTest extends TestCase {
     /**
      * Some tests for the findRangeBounds() method.
      */
+    @Test
     public void testFindRangeBounds() {
         XYBlockRenderer renderer = new XYBlockRenderer();
         assertNull(renderer.findRangeBounds(null));
@@ -205,6 +198,7 @@ public class XYBlockRendererTest extends TestCase {
     /**
      * Some tests for the findDomainBounds() method.
      */
+    @Test
     public void testFindDomainBounds() {
         XYBlockRenderer renderer = new XYBlockRenderer();
         assertNull(renderer.findRangeBounds(null));

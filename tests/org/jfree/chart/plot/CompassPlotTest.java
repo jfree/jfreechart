@@ -41,43 +41,28 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.general.DefaultValueDataset;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CompassPlot} class.
  */
-public class CompassPlotTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CompassPlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CompassPlotTest(String name) {
-        super(name);
-    }
+public class CompassPlotTest {
 
     /**
      * Test the equals() method.
      */
+    @Test
     public void testEquals() {
         CompassPlot plot1 = new CompassPlot();
         CompassPlot plot2 = new CompassPlot();
@@ -129,6 +114,7 @@ public class CompassPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         CompassPlot p1 = new CompassPlot(null);
         p1.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
@@ -144,6 +130,7 @@ public class CompassPlotTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         CompassPlot p1 = new CompassPlot(new DefaultValueDataset(15.0));
         CompassPlot p2 = (CompassPlot) p1.clone();

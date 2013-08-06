@@ -40,36 +40,21 @@
 
 package org.jfree.chart.needle;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link ArrowNeedle} class.
  */
-public class ArrowNeedleTest extends TestCase {
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ArrowNeedleTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ArrowNeedleTest(String name) {
-        super(name);
-    }
+public class ArrowNeedleTest {
 
     /**
      * Check that the equals() method can distinguish all fields.
      */
+    @Test
     public void testEquals() {
        ArrowNeedle n1 = new ArrowNeedle(false);
        ArrowNeedle n2 = new ArrowNeedle(false);
@@ -85,6 +70,7 @@ public class ArrowNeedleTest extends TestCase {
     /**
      * Check that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         ArrowNeedle n1 = new ArrowNeedle(false);
         ArrowNeedle n2 = (ArrowNeedle) n1.clone();
@@ -96,6 +82,7 @@ public class ArrowNeedleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         ArrowNeedle n1 = new ArrowNeedle(false);
         ArrowNeedle n2 = (ArrowNeedle) TestUtilities.serialised(n1);

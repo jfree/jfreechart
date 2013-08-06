@@ -40,42 +40,26 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link PlotRenderingInfo} class.
  */
-public class PlotRenderingInfoTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(PlotRenderingInfoTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public PlotRenderingInfoTest(String name) {
-        super(name);
-    }
+public class PlotRenderingInfoTest {
 
     /**
      * Test the equals() method.
      */
+    @Test
     public void testEquals() {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
         PlotRenderingInfo p2 = new PlotRenderingInfo(new ChartRenderingInfo());
@@ -106,6 +90,7 @@ public class PlotRenderingInfoTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
         p1.setPlotArea(new Rectangle2D.Double());
@@ -129,6 +114,7 @@ public class PlotRenderingInfoTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
         PlotRenderingInfo p2 = (PlotRenderingInfo) TestUtilities.serialised(p1);

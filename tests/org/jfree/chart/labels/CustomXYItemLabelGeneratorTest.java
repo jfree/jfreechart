@@ -42,41 +42,25 @@
 
 package org.jfree.chart.labels;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CustomXYToolTipGenerator} class.
  */
-public class CustomXYItemLabelGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CustomXYItemLabelGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CustomXYItemLabelGeneratorTest(String name) {
-        super(name);
-    }
+public class CustomXYItemLabelGeneratorTest {
 
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
         CustomXYToolTipGenerator g2 = (CustomXYToolTipGenerator) g1.clone();
@@ -88,6 +72,7 @@ public class CustomXYItemLabelGeneratorTest extends TestCase {
     /**
      * Check to ensure that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
         assertTrue(g1 instanceof PublicCloneable);
@@ -96,6 +81,7 @@ public class CustomXYItemLabelGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         List t1 = new java.util.ArrayList();
         t1.add("Tooltip A1");

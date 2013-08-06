@@ -42,11 +42,14 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
+
 import java.awt.Color;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.renderer.LookupPaintScale;
@@ -54,33 +57,17 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYShapeRenderer} class.
  */
-public class XYShapeRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYShapeRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYShapeRendererTest(String name) {
-        super(name);
-    }
+public class XYShapeRendererTest {
 
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         XYShapeRenderer r1 = new XYShapeRenderer();
         XYShapeRenderer r2 = new XYShapeRenderer();

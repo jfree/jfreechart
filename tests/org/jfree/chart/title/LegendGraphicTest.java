@@ -40,6 +40,10 @@
 
 package org.jfree.chart.title;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -47,41 +51,22 @@ import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.StandardGradientPaintTransformer;
+import org.junit.Test;
 
 /**
  * Tests for the {@link LegendGraphic} class.
  */
-public class LegendGraphicTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LegendGraphicTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public LegendGraphicTest(String name) {
-        super(name);
-    }
+public class LegendGraphicTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0,
                 3.0, 4.0), Color.black);
@@ -181,6 +166,7 @@ public class LegendGraphicTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0,
                 3.0, 4.0), Color.black);
@@ -195,6 +181,7 @@ public class LegendGraphicTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         Rectangle r = new Rectangle(1, 2, 3, 4);
         LegendGraphic g1 = new LegendGraphic(r, Color.black);
@@ -211,6 +198,7 @@ public class LegendGraphicTest extends TestCase {
     /**
      * A test for cloning - checks that the line shape is cloned correctly.
      */
+    @Test
     public void testCloning2() throws CloneNotSupportedException {
         Rectangle r = new Rectangle(1, 2, 3, 4);
         LegendGraphic g1 = new LegendGraphic(r, Color.black);
@@ -230,6 +218,7 @@ public class LegendGraphicTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         Stroke s = new BasicStroke(1.23f);
         LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0, 

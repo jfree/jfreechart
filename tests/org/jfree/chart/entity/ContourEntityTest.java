@@ -40,39 +40,24 @@
 
 package org.jfree.chart.entity;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.geom.Rectangle2D;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the <code>ContourEntity</code> class.
  */
-public class ContourEntityTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ContourEntityTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ContourEntityTest(String name) {
-        super(name);
-    }
+public class ContourEntityTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         ContourEntity e1 = new ContourEntity(
             new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL"
@@ -106,6 +91,7 @@ public class ContourEntityTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         ContourEntity e1 = new ContourEntity(new Rectangle2D.Double(1.0, 2.0, 
                 3.0, 4.0), "ToolTip", "URL");
@@ -118,6 +104,7 @@ public class ContourEntityTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         ContourEntity e1 = new ContourEntity(new Rectangle2D.Double(1.0, 2.0, 
                 3.0, 4.0), "ToolTip", "URL");

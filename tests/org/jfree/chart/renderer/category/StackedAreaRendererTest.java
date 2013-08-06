@@ -42,41 +42,27 @@
 
 package org.jfree.chart.renderer.category;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
- * Tests for the {@link StackedAreaRendererTests} class.
+ * Tests for the {@link StackedAreaRenderer} class.
  */
-public class StackedAreaRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StackedAreaRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StackedAreaRendererTest(String name) {
-        super(name);
-    }
+public class StackedAreaRendererTest {
 
     /**
      * Some checks for the findRangeBounds() method.
      */
+    @Test
     public void testFindRangeBounds() {
         StackedAreaRenderer r = new StackedAreaRenderer();
         assertNull(r.findRangeBounds(null));
@@ -104,6 +90,7 @@ public class StackedAreaRendererTest extends TestCase {
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         StackedAreaRenderer r1 = new StackedAreaRenderer();
         StackedAreaRenderer r2 = new StackedAreaRenderer();
@@ -118,6 +105,7 @@ public class StackedAreaRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         StackedAreaRenderer r1 = new StackedAreaRenderer();
         StackedAreaRenderer r2 = new StackedAreaRenderer();
@@ -130,6 +118,7 @@ public class StackedAreaRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StackedAreaRenderer r1 = new StackedAreaRenderer();
         StackedAreaRenderer r2 = (StackedAreaRenderer) r1.clone();
@@ -141,6 +130,7 @@ public class StackedAreaRendererTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         StackedAreaRenderer r1 = new StackedAreaRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -149,6 +139,7 @@ public class StackedAreaRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StackedAreaRenderer r1 = new StackedAreaRenderer();
         StackedAreaRenderer r2 = (StackedAreaRenderer) 

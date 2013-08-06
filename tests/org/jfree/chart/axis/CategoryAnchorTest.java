@@ -41,37 +41,22 @@
 
 package org.jfree.chart.axis;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CategoryAnchor} class.
  */
-public class CategoryAnchorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CategoryAnchorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CategoryAnchorTest(String name) {
-        super(name);
-    }
-
+public class CategoryAnchorTest {
+    
     /**
      * Check that the equals() method distinguishes known instances.
      */
+    @Test
     public void testEquals() {
         assertEquals(CategoryAnchor.START, CategoryAnchor.START);
         assertEquals(CategoryAnchor.MIDDLE, CategoryAnchor.MIDDLE);
@@ -83,6 +68,7 @@ public class CategoryAnchorTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         CategoryAnchor a1 = CategoryAnchor.START;
         CategoryAnchor a2 = CategoryAnchor.START;
@@ -95,6 +81,7 @@ public class CategoryAnchorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         CategoryAnchor a1 = CategoryAnchor.MIDDLE;
         CategoryAnchor a2 = (CategoryAnchor) TestUtilities.serialised(a1);

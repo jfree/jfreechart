@@ -42,6 +42,9 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -51,41 +54,21 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.ui.Align;
 import org.jfree.ui.RectangleInsets;
+import org.junit.Test;
 
 /**
  * Some tests for the {@link Plot} class.
  */
-public class PlotTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(PlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public PlotTest(String name) {
-        super(name);
-    }
+public class PlotTest {
 
     /**
      * Check that the equals() method can distinguish all fields (note that
      * the dataset is NOT considered in the equals() method).
      */
+    @Test
     public void testEquals() {
         PiePlot plot1 = new PiePlot();
         PiePlot plot2 = new PiePlot();

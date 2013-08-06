@@ -40,37 +40,22 @@
 
 package org.jfree.chart.axis;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DateTickMarkPosition} class.
  */
-public class DateTickMarkPositionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DateTickMarkPositionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DateTickMarkPositionTest(String name) {
-        super(name);
-    }
+public class DateTickMarkPositionTest {
 
     /**
      * Test equals() method.
      */
+    @Test
     public void testEquals() {
         assertEquals(DateTickMarkPosition.START, DateTickMarkPosition.START);
         assertEquals(DateTickMarkPosition.MIDDLE, DateTickMarkPosition.MIDDLE);
@@ -85,6 +70,7 @@ public class DateTickMarkPositionTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         DateTickMarkPosition a1 = DateTickMarkPosition.END;
         DateTickMarkPosition a2 = DateTickMarkPosition.END;
@@ -97,6 +83,7 @@ public class DateTickMarkPositionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DateTickMarkPosition p1 = DateTickMarkPosition.MIDDLE;
         DateTickMarkPosition p2 = (DateTickMarkPosition) TestUtilities.serialised(p1);

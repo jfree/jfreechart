@@ -41,43 +41,27 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.awt.geom.Rectangle2D;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYSplineRenderer} class.
  */
-public class XYSplineRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYSplineRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYSplineRendererTest(String name) {
-        super(name);
-    }
+public class XYSplineRendererTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
-
         XYSplineRenderer r1 = new XYSplineRenderer();
         XYSplineRenderer r2 = new XYSplineRenderer();
         assertEquals(r1, r2);
@@ -92,6 +76,7 @@ public class XYSplineRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         XYSplineRenderer r1 = new XYSplineRenderer();
         XYSplineRenderer r2 = new XYSplineRenderer();
@@ -104,6 +89,7 @@ public class XYSplineRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         Rectangle2D legendShape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         XYSplineRenderer r1 = new XYSplineRenderer();
@@ -117,6 +103,7 @@ public class XYSplineRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         XYSplineRenderer r1 = new XYSplineRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -125,6 +112,7 @@ public class XYSplineRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYSplineRenderer r1 = new XYSplineRenderer();
         XYSplineRenderer r2 = (XYSplineRenderer) TestUtilities.serialised(r1);

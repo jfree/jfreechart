@@ -45,12 +45,14 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+
 import java.awt.Color;
 import java.util.Date;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
@@ -58,33 +60,17 @@ import org.jfree.data.xy.DefaultOHLCDataset;
 import org.jfree.data.xy.OHLCDataItem;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link HighLowRenderer} class.
  */
-public class HighLowRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(HighLowRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public HighLowRendererTest(String name) {
-        super(name);
-    }
+public class HighLowRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         HighLowRenderer r1 = new HighLowRenderer();
         HighLowRenderer r2 = new HighLowRenderer();
@@ -124,6 +110,7 @@ public class HighLowRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         HighLowRenderer r1 = new HighLowRenderer();
         HighLowRenderer r2 = new HighLowRenderer();
@@ -136,6 +123,7 @@ public class HighLowRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         HighLowRenderer r1 = new HighLowRenderer();
         r1.setCloseTickPaint(Color.green);
@@ -148,6 +136,7 @@ public class HighLowRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         HighLowRenderer r1 = new HighLowRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -156,6 +145,7 @@ public class HighLowRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         HighLowRenderer r1 = new HighLowRenderer();
         r1.setCloseTickPaint(Color.green);
@@ -166,6 +156,7 @@ public class HighLowRendererTest extends TestCase {
     /**
      * Some checks for the findRangeBounds() method.
      */
+    @Test
     public void testFindRangeBounds() {
         HighLowRenderer renderer = new HighLowRenderer();
 

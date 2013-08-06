@@ -41,10 +41,10 @@
 
 package org.jfree.chart.annotations;
 
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtilities;
@@ -54,33 +54,17 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYTitleAnnotation} class.
  */
-public class XYTitleAnnotationTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYTitleAnnotationTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYTitleAnnotationTest(String name) {
-        super(name);
-    }
+public class XYTitleAnnotationTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
@@ -107,6 +91,7 @@ public class XYTitleAnnotationTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode. 
      */
+    @Test
     public void testHashCode() {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
@@ -120,6 +105,7 @@ public class XYTitleAnnotationTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
@@ -132,6 +118,7 @@ public class XYTitleAnnotationTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
@@ -143,6 +130,7 @@ public class XYTitleAnnotationTest extends TestCase {
      * Draws the chart with a <code>null</code> info object to make sure that 
      * no exceptions are thrown.
      */
+    @Test
     public void testDrawWithNullInfo() {
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();

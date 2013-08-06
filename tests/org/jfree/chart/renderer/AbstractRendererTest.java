@@ -46,6 +46,13 @@
 
 package org.jfree.chart.renderer;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -57,9 +64,6 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.axis.CategoryAxis;
@@ -74,33 +78,17 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.ui.TextAnchor;
+import org.junit.Test;
 
 /**
  * Tests for the {@link AbstractRenderer} class.
  */
-public class AbstractRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(AbstractRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public AbstractRendererTest(String name) {
-        super(name);
-    }
+public class AbstractRendererTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         // have to use a concrete subclass...
         BarRenderer r1 = new BarRenderer();
@@ -451,6 +439,7 @@ public class AbstractRendererTest extends TestCase {
      * Check that the treatLegendShapeAsLine flag is included in the equals()
      * comparison.
      */
+    @Test
     public void testEquals2() {
         TestRenderer r1 = new TestRenderer();
         TestRenderer r2 = new TestRenderer();
@@ -464,6 +453,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
         Rectangle2D shape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
@@ -607,6 +597,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * A check for cloning.
      */
+    @Test
     public void testCloning2() throws CloneNotSupportedException {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
         r1.setBasePaint(Color.blue);
@@ -627,6 +618,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Test that setting the series visibility for ALL series does in fact work.
      */
+    @Test
     public void testSetSeriesVisible() {
         BarRenderer r = new BarRenderer();
         r.setSeriesVisible(Boolean.TRUE);
@@ -636,6 +628,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Test that setting the paint for ALL series does in fact work.
      */
+    @Test
     public void testSetPaint() {
         BarRenderer r = new BarRenderer();
         r.setPaint(Color.orange);
@@ -645,6 +638,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Test that setting the outline paint for ALL series does in fact work.
      */
+    @Test
     public void testSetOutlinePaint() {
         BarRenderer r = new BarRenderer();
         r.setOutlinePaint(Color.orange);
@@ -654,6 +648,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Test that setting the stroke for ALL series does in fact work.
      */
+    @Test
     public void testSetStroke() {
         BarRenderer r = new BarRenderer();
         Stroke s = new BasicStroke(10.0f);
@@ -664,6 +659,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Test that setting the outline stroke for ALL series does in fact work.
      */
+    @Test
     public void testSetOutlineStroke() {
         BarRenderer r = new BarRenderer();
         Stroke s = new BasicStroke(10.0f);
@@ -674,6 +670,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Test that setting the shape for ALL series does in fact work.
      */
+    @Test
     public void testSetShape() {
         BarRenderer r = new BarRenderer();
         Shape s = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
@@ -685,6 +682,7 @@ public class AbstractRendererTest extends TestCase {
      * Test that setting the item label visibility for ALL series does in fact
      * work.
      */
+    @Test
     public void testSetItemLabelsVisible() {
         BarRenderer r = new BarRenderer();
         r.setItemLabelsVisible(true);
@@ -695,6 +693,7 @@ public class AbstractRendererTest extends TestCase {
      * Test that setting the font for ALL series does in fact work (it was
      * broken at one point).
      */
+    @Test
     public void testSetItemLabelFont() {
         BarRenderer r = new BarRenderer();
         r.setItemLabelFont(new Font("SansSerif", Font.PLAIN, 33));
@@ -706,6 +705,7 @@ public class AbstractRendererTest extends TestCase {
      * Test that setting the paint for ALL series does in fact work (it was
      * broken at one point).
      */
+    @Test
     public void testSetItemLabelPaint() {
         BarRenderer r = new BarRenderer();
         r.setItemLabelPaint(Color.green);
@@ -716,6 +716,7 @@ public class AbstractRendererTest extends TestCase {
      * Test that setting the positive item label position for ALL series does
      * in fact work.
      */
+    @Test
     public void testSetPositiveItemLabelPosition() {
         BarRenderer r = new BarRenderer();
         r.setPositiveItemLabelPosition(new ItemLabelPosition(
@@ -729,6 +730,7 @@ public class AbstractRendererTest extends TestCase {
      * Test that setting the negative item label position for ALL series does
      * in fact work.
      */
+    @Test
     public void testSetNegativeItemLabelPosition() {
         BarRenderer r = new BarRenderer();
         r.setNegativeItemLabelPosition(new ItemLabelPosition(
@@ -741,6 +743,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Tests each setter method to ensure that it sends an event notification.
      */
+    @Test
     public void testEventNotification() {
 
         RendererChangeDetector detector = new RendererChangeDetector();
@@ -892,6 +895,7 @@ public class AbstractRendererTest extends TestCase {
      * test for a bug that was reported where the listener list is 'null' after
      * deserialization.
      */
+    @Test
     public void testSerialization() {
         BarRenderer r1 = new BarRenderer();
         r1.setBaseLegendTextFont(new Font("Dialog", Font.PLAIN, 4));
@@ -911,6 +915,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Some checks for the autoPopulate flag default values.
      */
+    @Test
     public void testAutoPopulateFlagDefaults() {
         BarRenderer r = new BarRenderer();
         assertEquals(true, r.getAutoPopulateSeriesPaint());
@@ -924,6 +929,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Some checks for the paint lookup mechanism.
      */
+    @Test
     public void testPaintLookup() {
         BarRenderer r = new BarRenderer();
         assertEquals(Color.blue, r.getBasePaint());
@@ -945,6 +951,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Some checks for the fill paint lookup mechanism.
      */
+    @Test
     public void testFillPaintLookup() {
         BarRenderer r = new BarRenderer();
         assertEquals(Color.white, r.getBaseFillPaint());
@@ -966,6 +973,7 @@ public class AbstractRendererTest extends TestCase {
     /**
      * Some checks for the outline paint lookup mechanism.
      */
+    @Test
     public void testOutlinePaintLookup() {
         BarRenderer r = new BarRenderer();
         assertEquals(Color.gray, r.getBaseOutlinePaint());

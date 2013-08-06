@@ -46,14 +46,14 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
@@ -69,33 +69,17 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.UnitType;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StandardXYItemRenderer} class.
  */
-public class StandardXYItemRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StandardXYItemRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StandardXYItemRendererTest(String name) {
-        super(name);
-    }
+public class StandardXYItemRendererTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
         StandardXYItemRenderer r2 = new StandardXYItemRenderer();
@@ -160,6 +144,7 @@ public class StandardXYItemRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
         StandardXYItemRenderer r2 = new StandardXYItemRenderer();
@@ -172,6 +157,7 @@ public class StandardXYItemRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
         Rectangle2D rect1 = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
@@ -196,6 +182,7 @@ public class StandardXYItemRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -204,6 +191,7 @@ public class StandardXYItemRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
         StandardXYItemRenderer r2 = (StandardXYItemRenderer) 
@@ -215,6 +203,7 @@ public class StandardXYItemRendererTest extends TestCase {
      * A check for the datasetIndex and seriesIndex fields in the LegendItem
      * returned by the getLegendItem() method.
      */
+    @Test
     public void testGetLegendItemSeriesIndex() {
         XYSeriesCollection d1 = new XYSeriesCollection();
         XYSeries s1 = new XYSeries("S1");
@@ -250,6 +239,7 @@ public class StandardXYItemRendererTest extends TestCase {
      * A check to ensure that an item that falls outside the plot's data area
      * does NOT generate an item entity.
      */
+    @Test
     public void testNoDisplayedItem() {
         XYSeriesCollection dataset = new XYSeriesCollection();
         XYSeries s1 = new XYSeries("S1");

@@ -43,42 +43,26 @@
 
 package org.jfree.chart.annotations;
 
-import java.awt.Image;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.awt.Image;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYImageAnnotation} class.
  */
-public class XYImageAnnotationTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYImageAnnotationTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYImageAnnotationTest(String name) {
-        super(name);
-    }
+public class XYImageAnnotationTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         Image image = JFreeChart.INFO.getLogo();
         XYImageAnnotation a1 = new XYImageAnnotation(10.0, 20.0, image);
@@ -94,6 +78,7 @@ public class XYImageAnnotationTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         Image image = JFreeChart.INFO.getLogo();
         XYImageAnnotation a1 = new XYImageAnnotation(10.0, 20.0, image);
@@ -107,6 +92,7 @@ public class XYImageAnnotationTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYImageAnnotation a1 = new XYImageAnnotation(10.0, 20.0,
                 JFreeChart.INFO.getLogo());
@@ -119,6 +105,7 @@ public class XYImageAnnotationTest extends TestCase {
     /**
      * Checks that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         XYImageAnnotation a1 = new XYImageAnnotation(10.0, 20.0,
                 JFreeChart.INFO.getLogo());

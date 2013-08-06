@@ -42,50 +42,34 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtilities;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.junit.Test;
 
 /**
  * Tests for the {@link SubCategoryAxis} class.
  */
-public class SubCategoryAxisTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(SubCategoryAxisTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public SubCategoryAxisTest(String name) {
-        super(name);
-    }
+public class SubCategoryAxisTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
-
         SubCategoryAxis a1 = new SubCategoryAxis("Test");
         SubCategoryAxis a2 = new SubCategoryAxis("Test");
         assertTrue(a1.equals(a2));
@@ -108,12 +92,12 @@ public class SubCategoryAxisTest extends TestCase {
         assertFalse(a1.equals(a2));
         a2.setSubLabelPaint(Color.red);
         assertTrue(a1.equals(a2));
-
     }
 
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         SubCategoryAxis a1 = new SubCategoryAxis("Test");
         SubCategoryAxis a2 = new SubCategoryAxis("Test");
@@ -126,6 +110,7 @@ public class SubCategoryAxisTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         SubCategoryAxis a1 = new SubCategoryAxis("Test");
         a1.addSubCategory("SubCategoryA");
@@ -138,6 +123,7 @@ public class SubCategoryAxisTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         SubCategoryAxis a1 = new SubCategoryAxis("Test Axis");
         a1.addSubCategory("SubCategoryA");
@@ -148,6 +134,7 @@ public class SubCategoryAxisTest extends TestCase {
     /**
      * A check for the NullPointerException in bug 2275695.
      */
+    @Test
     public void test2275695() {
         JFreeChart chart = ChartFactory.createStackedBarChart("Test",
                 "Category", "Value", null, PlotOrientation.VERTICAL,

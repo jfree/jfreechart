@@ -41,41 +41,26 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.awt.Color;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link VectorRenderer} class.
  */
-public class VectorRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(VectorRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public VectorRendererTest(String name) {
-        super(name);
-    }
+public class VectorRendererTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         // default instances
         VectorRenderer r1 = new VectorRenderer();
@@ -93,6 +78,7 @@ public class VectorRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         VectorRenderer r1 = new VectorRenderer();
         VectorRenderer r2 = new VectorRenderer();
@@ -105,6 +91,7 @@ public class VectorRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         VectorRenderer r1 = new VectorRenderer();
         VectorRenderer r2 = (VectorRenderer) r1.clone();
@@ -116,6 +103,7 @@ public class VectorRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         VectorRenderer r1 = new VectorRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -124,6 +112,7 @@ public class VectorRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         VectorRenderer r1 = new VectorRenderer();
         VectorRenderer r2 = (VectorRenderer) TestUtilities.serialised(r1);

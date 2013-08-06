@@ -42,39 +42,23 @@
 
 package org.jfree.chart.renderer.category;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DefaultCategoryItemRenderer} class.
  */
-public class DefaultCategoryItemRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultCategoryItemRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultCategoryItemRendererTest(String name) {
-        super(name);
-    }
+public class DefaultCategoryItemRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
         DefaultCategoryItemRenderer r2 = new DefaultCategoryItemRenderer();
@@ -84,6 +68,7 @@ public class DefaultCategoryItemRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
         DefaultCategoryItemRenderer r2 = new DefaultCategoryItemRenderer();
@@ -96,6 +81,7 @@ public class DefaultCategoryItemRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
         DefaultCategoryItemRenderer r2 = (DefaultCategoryItemRenderer) 
@@ -108,6 +94,7 @@ public class DefaultCategoryItemRendererTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -116,6 +103,7 @@ public class DefaultCategoryItemRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
         DefaultCategoryItemRenderer r2 = (DefaultCategoryItemRenderer) 

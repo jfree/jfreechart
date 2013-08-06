@@ -40,41 +40,26 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Some tests for the {@link MonthDateFormat} class.
  */
-public class MonthDateFormatTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MonthDateFormatTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MonthDateFormatTest(String name) {
-        super(name);
-    }
+public class MonthDateFormatTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         MonthDateFormat mf1 = new MonthDateFormat();
         MonthDateFormat mf2 = new MonthDateFormat();
@@ -131,6 +116,7 @@ public class MonthDateFormatTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         MonthDateFormat mf1 = new MonthDateFormat();
         MonthDateFormat mf2 = new MonthDateFormat();
@@ -143,6 +129,7 @@ public class MonthDateFormatTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() {
         MonthDateFormat mf1 = new MonthDateFormat();
         MonthDateFormat mf2 = null;
@@ -155,6 +142,7 @@ public class MonthDateFormatTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         MonthDateFormat mf1 = new MonthDateFormat();
         MonthDateFormat mf2 = (MonthDateFormat) TestUtilities.serialised(mf1);

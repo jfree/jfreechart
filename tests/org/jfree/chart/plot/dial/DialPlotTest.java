@@ -40,21 +40,25 @@
 
 package org.jfree.chart.plot.dial;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DialPlot} class.
  */
-public class DialPlotTest extends TestCase implements PlotChangeListener {
+public class DialPlotTest implements PlotChangeListener {
 
     /** The last plot change event received. */
     private PlotChangeEvent lastEvent;
@@ -68,28 +72,10 @@ public class DialPlotTest extends TestCase implements PlotChangeListener {
         this.lastEvent = event;
     }
 
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DialPlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DialPlotTest(String name) {
-        super(name);
-    }
-
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         DialPlot p1 = new DialPlot();
         DialPlot p2 = new DialPlot();
@@ -149,6 +135,7 @@ public class DialPlotTest extends TestCase implements PlotChangeListener {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         DialPlot p1 = new DialPlot();
         DialPlot p2 = new DialPlot();
@@ -161,6 +148,7 @@ public class DialPlotTest extends TestCase implements PlotChangeListener {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DialPlot p1 = new DialPlot();
         DialPlot p2 = (DialPlot) p1.clone();
@@ -173,6 +161,7 @@ public class DialPlotTest extends TestCase implements PlotChangeListener {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DialPlot p1 = new DialPlot();
         DialPlot p2 = (DialPlot) TestUtilities.serialised(p1);
@@ -182,6 +171,7 @@ public class DialPlotTest extends TestCase implements PlotChangeListener {
     /**
      * Check the notification event mechanism for the dial background.
      */
+    @Test
     public void testBackgroundListener() {
         DialPlot p = new DialPlot();
         DialBackground b1 = new DialBackground(Color.red);
@@ -203,6 +193,7 @@ public class DialPlotTest extends TestCase implements PlotChangeListener {
     /**
      * Check the notification event mechanism for the dial cap.
      */
+    @Test
     public void testCapListener() {
         DialPlot p = new DialPlot();
         DialCap c1 = new DialCap();
@@ -224,6 +215,7 @@ public class DialPlotTest extends TestCase implements PlotChangeListener {
     /**
      * Check the notification event mechanism for the dial frame.
      */
+    @Test
     public void testFrameListener() {
         DialPlot p = new DialPlot();
         ArcDialFrame f1 = new ArcDialFrame();
@@ -245,6 +237,7 @@ public class DialPlotTest extends TestCase implements PlotChangeListener {
     /**
      * Check the notification event mechanism for the dial scales.
      */
+    @Test
     public void testScaleListener() {
         DialPlot p = new DialPlot();
         StandardDialScale s1 = new StandardDialScale();
@@ -266,6 +259,7 @@ public class DialPlotTest extends TestCase implements PlotChangeListener {
     /**
      * Check the notification event mechanism for a layer.
      */
+    @Test
     public void testLayerListener() {
         DialPlot p = new DialPlot();
         DialBackground b1 = new DialBackground(Color.red);

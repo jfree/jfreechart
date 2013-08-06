@@ -43,45 +43,30 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.text.DecimalFormat;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.ui.RectangleInsets;
+import org.junit.Test;
 
 /**
  * Tests for the {@link ThermometerPlot} class.
  */
-public class ThermometerPlotTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ThermometerPlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ThermometerPlotTest(String name) {
-        super(name);
-    }
+public class ThermometerPlotTest {
 
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         ThermometerPlot p1 = new ThermometerPlot();
         ThermometerPlot p2 = new ThermometerPlot();
@@ -192,6 +177,7 @@ public class ThermometerPlotTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         ThermometerPlot p1 = new ThermometerPlot();
         ThermometerPlot p2 = (ThermometerPlot) p1.clone();
@@ -203,6 +189,7 @@ public class ThermometerPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         ThermometerPlot p1 = new ThermometerPlot();
         ThermometerPlot p2 = (ThermometerPlot) TestUtilities.serialised(p1);
@@ -212,6 +199,7 @@ public class ThermometerPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization2() {
         ThermometerPlot p1 = new ThermometerPlot();
         p1.setSubrangePaint(1, new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
@@ -223,6 +211,7 @@ public class ThermometerPlotTest extends TestCase {
     /**
      * Some checks for the setUnits() method.
      */
+    @Test
     public void testSetUnits() {
         ThermometerPlot p1 = new ThermometerPlot();
         assertEquals(ThermometerPlot.UNITS_CELCIUS, p1.getUnits());

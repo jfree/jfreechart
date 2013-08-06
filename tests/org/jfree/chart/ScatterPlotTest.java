@@ -41,57 +41,41 @@
 
 package org.jfree.chart;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.labels.XYToolTipGenerator;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Tests for a scatter plot.
  */
-public class ScatterPlotTest extends TestCase {
+public class ScatterPlotTest {
 
     /** A chart. */
     private JFreeChart chart;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ScatterPlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ScatterPlotTest(String name) {
-        super(name);
-    }
-
-    /**
      * Common test setup.
      */
-    protected void setUp() {
+    @Before
+    public void setUp() {
         this.chart = createChart();
     }
 
@@ -99,6 +83,7 @@ public class ScatterPlotTest extends TestCase {
      * Draws the chart with a null info object to make sure that no exceptions
      * are thrown (a problem that was occurring at one point).
      */
+    @Test
     public void testDrawWithNullInfo() {
         try {
             BufferedImage image = new BufferedImage(200 , 100,
@@ -116,6 +101,7 @@ public class ScatterPlotTest extends TestCase {
     /**
      * Replaces the dataset and checks that it has changed as expected.
      */
+    @Test
     public void testReplaceDataset() {
 
         // create a dataset...
@@ -143,6 +129,7 @@ public class ScatterPlotTest extends TestCase {
      * Check that setting a tool tip generator for a series does override the
      * default generator.
      */
+    @Test
     public void testSetSeriesToolTipGenerator() {
         XYPlot plot = (XYPlot) this.chart.getPlot();
         XYItemRenderer renderer = plot.getRenderer();
@@ -158,26 +145,13 @@ public class ScatterPlotTest extends TestCase {
      * @return The chart.
      */
     private static JFreeChart createChart() {
-
-        // create a dataset...
         XYSeries series1 = new XYSeries("Series 1");
         series1.add(1.0, 1.0);
         series1.add(2.0, 2.0);
         series1.add(3.0, 3.0);
         XYDataset dataset = new XYSeriesCollection(series1);
-
-        // create the chart...
-        return ChartFactory.createScatterPlot(
-            "Scatter Plot",  // chart title
-            "Domain",
-            "Range",
-            dataset,         // data
-            PlotOrientation.VERTICAL,
-            true,            // include legend
-            true,            // tooltips
-            false            // urls
-        );
-
+        return ChartFactory.createScatterPlot("Scatter Plot", "Domain",
+                "Range", dataset);
     }
 
     /**

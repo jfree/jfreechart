@@ -40,37 +40,21 @@
 
 package org.jfree.chart.axis;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CategoryLabelWidthType} class.
  */
-public class CategoryLabelWidthTypeTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CategoryLabelWidthTypeTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CategoryLabelWidthTypeTest(String name) {
-        super(name);
-    }
+public class CategoryLabelWidthTypeTest {
 
     /**
      * Confirm that the equals() method distinguishes the known values.
      */
+    @Test
     public void testEquals() {
         assertEquals(CategoryLabelWidthType.CATEGORY,
                 CategoryLabelWidthType.CATEGORY);
@@ -81,6 +65,7 @@ public class CategoryLabelWidthTypeTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         CategoryLabelWidthType a1 = CategoryLabelWidthType.CATEGORY;
         CategoryLabelWidthType a2 = CategoryLabelWidthType.CATEGORY;
@@ -93,6 +78,7 @@ public class CategoryLabelWidthTypeTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         CategoryLabelWidthType w1 = CategoryLabelWidthType.RANGE;
         CategoryLabelWidthType w2 = (CategoryLabelWidthType) TestUtilities.serialised(w1);

@@ -44,43 +44,28 @@
 
 package org.jfree.chart.labels;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.text.AttributedString;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StandardPieSectionLabelGenerator} class.
  */
-public class StandardPieSectionLabelGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StandardPieSectionLabelGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StandardPieSectionLabelGeneratorTest(String name) {
-        super(name);
-    }
+public class StandardPieSectionLabelGeneratorTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         StandardPieSectionLabelGenerator g1
                 = new StandardPieSectionLabelGenerator();
@@ -131,6 +116,7 @@ public class StandardPieSectionLabelGeneratorTest extends TestCase {
     /**
      * Simple check that hashCode is implemented.
      */
+    @Test
     public void testHashCode() {
         StandardPieSectionLabelGenerator g1
                 = new StandardPieSectionLabelGenerator();
@@ -143,6 +129,7 @@ public class StandardPieSectionLabelGeneratorTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardPieSectionLabelGenerator g1
                 = new StandardPieSectionLabelGenerator();
@@ -156,6 +143,7 @@ public class StandardPieSectionLabelGeneratorTest extends TestCase {
     /**
      * Check to ensure that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         StandardPieSectionLabelGenerator g1
                 = new StandardPieSectionLabelGenerator();
@@ -165,21 +153,13 @@ public class StandardPieSectionLabelGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StandardPieSectionLabelGenerator g1
                 = new StandardPieSectionLabelGenerator();
         StandardPieSectionLabelGenerator g2 = (StandardPieSectionLabelGenerator) 
                 TestUtilities.serialised(g1);
         assertEquals(g1, g2);
-    }
-
-    /**
-     * Runs the test suite using JUnit's text-based runner.
-     *
-     * @param args  ignored.
-     */
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
     }
 
 }

@@ -45,11 +45,12 @@
 
 package org.jfree.chart.renderer.xy;
 
-import java.awt.geom.Rectangle2D;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -62,33 +63,17 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.StandardGradientPaintTransformer;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYAreaRenderer} class.
  */
-public class XYAreaRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYAreaRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYAreaRendererTest(String name) {
-        super(name);
-    }
+public class XYAreaRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         XYAreaRenderer r1 = new XYAreaRenderer();
         XYAreaRenderer r2 = new XYAreaRenderer();
@@ -145,6 +130,7 @@ public class XYAreaRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         XYAreaRenderer r1 = new XYAreaRenderer();
         XYAreaRenderer r2 = new XYAreaRenderer();
@@ -160,6 +146,7 @@ public class XYAreaRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYAreaRenderer r1 = new XYAreaRenderer();
         Rectangle2D rect1 = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
@@ -179,6 +166,7 @@ public class XYAreaRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         XYAreaRenderer r1 = new XYAreaRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -187,6 +175,7 @@ public class XYAreaRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYAreaRenderer r1 = new XYAreaRenderer();
         XYAreaRenderer r2 = (XYAreaRenderer) TestUtilities.serialised(r1);
@@ -197,6 +186,7 @@ public class XYAreaRendererTest extends TestCase {
      * Draws the chart with a <code>null</code> info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
+    @Test
     public void testDrawWithNullInfo() {
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();
@@ -230,6 +220,7 @@ public class XYAreaRendererTest extends TestCase {
      * A check for the datasetIndex and seriesIndex fields in the LegendItem
      * returned by the getLegendItem() method.
      */
+    @Test
     public void testGetLegendItemSeriesIndex() {
         XYSeriesCollection d1 = new XYSeriesCollection();
         XYSeries s1 = new XYSeries("S1");

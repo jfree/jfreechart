@@ -40,37 +40,20 @@
 
 package org.jfree.chart.renderer;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link AreaRendererEndType} class.
  */
-public class AreaRendererEndTypeTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(AreaRendererEndTypeTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public AreaRendererEndTypeTest(String name) {
-        super(name);
-    }
+public class AreaRendererEndTypeTest {
 
     /**
      * A test for the equals() method.
      */
+    @Test
     public void testEquals() {
         assertEquals(AreaRendererEndType.LEVEL, AreaRendererEndType.LEVEL);
         assertEquals(AreaRendererEndType.TAPER, AreaRendererEndType.TAPER);
@@ -82,6 +65,7 @@ public class AreaRendererEndTypeTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         AreaRendererEndType t1 = AreaRendererEndType.TAPER;
         AreaRendererEndType t2 = (AreaRendererEndType) TestUtilities.serialised(t1);

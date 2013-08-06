@@ -41,45 +41,28 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.text.TextBlock;
 import org.jfree.text.TextBlockAnchor;
 import org.jfree.text.TextLine;
 import org.jfree.ui.TextAnchor;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CategoryTick} class.
  */
-public class CategoryTickTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CategoryTickTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CategoryTickTest(String name) {
-        super(name);
-    }
+public class CategoryTickTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
-
         Comparable c1 = "C1";
         Comparable c2 = "C2";
         TextBlock tb1 = new TextBlock();
@@ -125,6 +108,7 @@ public class CategoryTickTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         Comparable c1 = "C1";
         TextBlock tb1 = new TextBlock();
@@ -144,11 +128,10 @@ public class CategoryTickTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
-        CategoryTick t1 = new CategoryTick(
-            "C1", new TextBlock(), TextBlockAnchor.CENTER,
-            TextAnchor.CENTER, 1.5f
-        );
+        CategoryTick t1 = new CategoryTick("C1", new TextBlock(), 
+                TextBlockAnchor.CENTER, TextAnchor.CENTER, 1.5f);
         CategoryTick t2 = (CategoryTick) t1.clone();
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
@@ -158,6 +141,7 @@ public class CategoryTickTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         CategoryTick t1 = new CategoryTick("C1", new TextBlock(),
                 TextBlockAnchor.CENTER, TextAnchor.CENTER, 1.5f);

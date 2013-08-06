@@ -45,14 +45,14 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -62,33 +62,17 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYDifferenceRenderer} class.
  */
-public class XYDifferenceRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYDifferenceRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYDifferenceRendererTest(String name) {
-        super(name);
-    }
+public class XYDifferenceRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(
                 Color.red, Color.blue, false);
@@ -136,6 +120,7 @@ public class XYDifferenceRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         XYDifferenceRenderer r1
             = new XYDifferenceRenderer(Color.red, Color.blue, false);
@@ -150,6 +135,7 @@ public class XYDifferenceRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.red,
                 Color.blue, false);
@@ -170,6 +156,7 @@ public class XYDifferenceRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -178,6 +165,7 @@ public class XYDifferenceRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.red,
                 Color.blue, false);
@@ -190,6 +178,7 @@ public class XYDifferenceRendererTest extends TestCase {
      * A check for the datasetIndex and seriesIndex fields in the LegendItem
      * returned by the getLegendItem() method.
      */
+    @Test
     public void testGetLegendItemSeriesIndex() {
         XYSeriesCollection d1 = new XYSeriesCollection();
         XYSeries s1 = new XYSeries("S1");

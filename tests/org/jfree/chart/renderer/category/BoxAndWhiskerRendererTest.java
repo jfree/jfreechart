@@ -48,6 +48,13 @@
 
 package org.jfree.chart.renderer.category;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
@@ -55,10 +62,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
@@ -72,33 +75,17 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link BoxAndWhiskerRenderer} class.
  */
-public class BoxAndWhiskerRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BoxAndWhiskerRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public BoxAndWhiskerRendererTest(String name) {
-        super(name);
-    }
+public class BoxAndWhiskerRendererTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
         BoxAndWhiskerRenderer r2 = new BoxAndWhiskerRenderer();
@@ -140,6 +127,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
         BoxAndWhiskerRenderer r2 = new BoxAndWhiskerRenderer();
@@ -152,6 +140,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
         BoxAndWhiskerRenderer r2 = (BoxAndWhiskerRenderer) r1.clone();
@@ -163,6 +152,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -171,6 +161,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
         BoxAndWhiskerRenderer r2 = (BoxAndWhiskerRenderer) 
@@ -182,6 +173,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
      * Draws the chart with a <code>null</code> info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
+    @Test
     public void testDrawWithNullInfo() {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
@@ -205,6 +197,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * A check for bug 1572478 (for the vertical orientation).
      */
+    @Test
     public void testBug1572478Vertical() {
         DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset() {
@@ -247,6 +240,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * A check for bug 1572478 (for the horizontal orientation).
      */
+    @Test
     public void testBug1572478Horizontal() {
         DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset() {
@@ -290,6 +284,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Some checks for the getLegendItem() method.
      */
+    @Test
     public void testGetLegendItem() {
         DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset();
@@ -314,6 +309,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
      * A check for the datasetIndex and seriesIndex fields in the LegendItem
      * returned by the getLegendItem() method.
      */
+    @Test
     public void testGetLegendItemSeriesIndex() {
         DefaultCategoryDataset dataset0 = new DefaultCategoryDataset();
         dataset0.addValue(21.0, "R1", "C1");
@@ -336,6 +332,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Draws a chart where the dataset contains a null mean value.
      */
+    @Test
     public void testDrawWithNullMean() {
         boolean success = false;
         try {
@@ -363,6 +360,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Draws a chart where the dataset contains a null median value.
      */
+    @Test
     public void testDrawWithNullMedian() {
         boolean success = false;
         try {
@@ -390,6 +388,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Draws a chart where the dataset contains a null Q1 value.
      */
+    @Test
     public void testDrawWithNullQ1() {
         boolean success = false;
         try {
@@ -417,6 +416,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Draws a chart where the dataset contains a null Q3 value.
      */
+    @Test
     public void testDrawWithNullQ3() {
         boolean success = false;
         try {
@@ -444,6 +444,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Draws a chart where the dataset contains a null min regular value.
      */
+    @Test
     public void testDrawWithNullMinRegular() {
         boolean success = false;
         try {
@@ -471,6 +472,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Draws a chart where the dataset contains a null max regular value.
      */
+    @Test
     public void testDrawWithNullMaxRegular() {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
@@ -495,6 +497,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Draws a chart where the dataset contains a null min outlier value.
      */
+    @Test
     public void testDrawWithNullMinOutlier() {
         boolean success = false;
         try {
@@ -522,6 +525,7 @@ public class BoxAndWhiskerRendererTest extends TestCase {
     /**
      * Draws a chart where the dataset contains a null max outlier value.
      */
+    @Test
     public void testDrawWithNullMaxOutlier() {
         boolean success = false;
         try {

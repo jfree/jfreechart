@@ -41,17 +41,18 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * Some tests for the {@link SegmentedTimeline} class.
  */
-public class SegmentedTimelineTest2 extends TestCase {
+public class SegmentedTimelineTest2 {
 
     /**
      * Constructor
@@ -64,6 +65,7 @@ public class SegmentedTimelineTest2 extends TestCase {
      * Test 1 checks 9am Friday 26 March 2004 converts to a timeline value and
      * back again correctly.  This is prior to Daylight Saving.
      */
+    @Test
     public void test1() {
         TimeZone savedZone = TimeZone.getDefault();
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
@@ -95,6 +97,7 @@ public class SegmentedTimelineTest2 extends TestCase {
      * Test 2 checks 9.15am Friday 26 March 2004 converts to a timeline value
      * and back again correctly.  This is prior to Daylight Saving.
      */
+    @Test
     public void test2() {
         TimeZone savedZone = TimeZone.getDefault();
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
@@ -115,10 +118,8 @@ public class SegmentedTimelineTest2 extends TestCase {
         Calendar cal2 = Calendar.getInstance(Locale.UK);
         cal2.setTime(new Date(ms));
         Date reverted = cal2.getTime();
-        assertTrue(
-            "test2", value == (900000 * 34 + 900000)
-            && date.getTime() == reverted.getTime()
-        );
+        assertTrue("test2", value == (900000 * 34 + 900000)
+                && date.getTime() == reverted.getTime());
         TimeZone.setDefault(savedZone);
      }
 
@@ -126,6 +127,7 @@ public class SegmentedTimelineTest2 extends TestCase {
      * Test 3 checks 9.30am Friday 26 March 2004 converts to a timeline value
      * and back again correctly.  This is prior to Daylight Saving.
      */
+    @Test
     public void test3() {
         TimeZone savedZone = TimeZone.getDefault();
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
@@ -146,10 +148,8 @@ public class SegmentedTimelineTest2 extends TestCase {
         Calendar cal2 = Calendar.getInstance(Locale.UK);
         cal2.setTime(new Date(ms));
         Date reverted = cal2.getTime();
-        assertTrue(
-            "test2", value == (900000 * 34 + 900000 * 2)
-            && date.getTime() == reverted.getTime()
-        );
+        assertTrue("test3", value == (900000 * 34 + 900000 * 2)
+                && date.getTime() == reverted.getTime());
         TimeZone.setDefault(savedZone);
     }
 
@@ -158,6 +158,7 @@ public class SegmentedTimelineTest2 extends TestCase {
      * a timeline value and back again correctly.  This is prior to Daylight
      * Saving.
      */
+    @Test
     public void test4() {
         TimeZone savedZone = TimeZone.getDefault();
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
@@ -177,10 +178,8 @@ public class SegmentedTimelineTest2 extends TestCase {
         Calendar cal2 = Calendar.getInstance(Locale.UK);
         cal2.setTime(new Date(ms));
         Date reverted = cal2.getTime();
-        assertTrue(
-            "test4", value == (900000 * 34 + 900000 * 2 + 1)
-            && date.getTime() == reverted.getTime()
-        );
+        assertTrue("test4", value == (900000 * 34 + 900000 * 2 + 1)
+                && date.getTime() == reverted.getTime());
         TimeZone.setDefault(savedZone);
     }
 
@@ -190,6 +189,7 @@ public class SegmentedTimelineTest2 extends TestCase {
      * expect it to map to 9am, Friday 26 March 2004.  This is prior to
      * Daylight Saving.
      */
+    @Test
     public void test5() {
         TimeZone savedZone = TimeZone.getDefault();
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
@@ -218,10 +218,8 @@ public class SegmentedTimelineTest2 extends TestCase {
         expectedReverted.set(Calendar.SECOND, 0);
         expectedReverted.set(Calendar.MILLISECOND, 0);
 
-        assertTrue(
-            "test5", value == (900000 * 34)
-            && expectedReverted.getTime().getTime() == reverted.getTime()
-        );
+        assertTrue("test5", value == (900000 * 34)
+                && expectedReverted.getTime().getTime() == reverted.getTime());
         TimeZone.setDefault(savedZone);
     }
 
@@ -231,6 +229,7 @@ public class SegmentedTimelineTest2 extends TestCase {
      * excluded from the timeline, so we expect the value to map to 9am on
      * Monday 29 March 2004. This is during daylight saving.
      */
+    @Test
     public void test6() {
         TimeZone savedZone = TimeZone.getDefault();
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
@@ -260,10 +259,8 @@ public class SegmentedTimelineTest2 extends TestCase {
         expectedReverted.set(Calendar.SECOND, 0);
         expectedReverted.set(Calendar.MILLISECOND, 0);
 
-        assertTrue(
-            "test6", value == (900000 * 34 * 2)
-            && expectedReverted.getTime().getTime() == reverted.getTime()
-        );
+        assertTrue("test6", value == (900000 * 34 * 2)
+                && expectedReverted.getTime().getTime() == reverted.getTime());
         TimeZone.setDefault(savedZone);
     }
 
@@ -271,6 +268,7 @@ public class SegmentedTimelineTest2 extends TestCase {
      * Test 7 checks 9am Monday 29 March 2004 converts to a timeline value and
      * back again correctly.  This is during Daylight Saving.
      */
+    @Test
     public void test7() {
         TimeZone savedZone = TimeZone.getDefault();
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
@@ -301,16 +299,15 @@ public class SegmentedTimelineTest2 extends TestCase {
         expectedReverted.set(Calendar.SECOND, 0);
         expectedReverted.set(Calendar.MILLISECOND, 0);
 
-        assertTrue(
-            "test7", value == (900000 * 34 * 2)
-            && expectedReverted.getTime().getTime() == reverted.getTime()
-        );
+        assertTrue("test7", value == (900000 * 34 * 2)
+                && expectedReverted.getTime().getTime() == reverted.getTime());
         TimeZone.setDefault(savedZone);
     }
 
     /**
      * Test 8.
      */
+    @Test
     public void test8() {
         TimeZone savedZone = TimeZone.getDefault();
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/London"));
@@ -352,10 +349,8 @@ public class SegmentedTimelineTest2 extends TestCase {
         expectedReverted.set(Calendar.SECOND, 0);
         expectedReverted.set(Calendar.MILLISECOND, 0);
 
-        assertTrue(
-            "test8", value == (900000 * 34 * 2 + 900000 * (4 - 1))
-            && expectedReverted.getTime().getTime() == reverted.getTime()
-        );
+        assertTrue("test8", value == (900000 * 34 * 2 + 900000 * (4 - 1))
+                && expectedReverted.getTime().getTime() == reverted.getTime());
         TimeZone.setDefault(savedZone);
     }
 

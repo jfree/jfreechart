@@ -44,6 +44,11 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -53,10 +58,6 @@ import java.text.AttributedString;
 import org.jfree.chart.TestUtilities;
 import org.jfree.ui.RectangleInsets;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 import org.junit.Test;
 
 /**
@@ -82,7 +83,6 @@ public class AxisTest  {
      */
     @Test
     public void testEquals() {
-
         Axis a1 = new CategoryAxis("Test");
         Axis a2 = new CategoryAxis("Test");
         assertEquals(a1, a2);

@@ -38,8 +38,10 @@
  *
  */
 
-
 package org.jfree.chart;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -50,44 +52,23 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.plot.PieLabelLinkStyle;
 import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.chart.renderer.xy.StandardXYBarPainter;
 import org.jfree.ui.RectangleInsets;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StandardChartTheme} class.
  */
-public class StandardChartThemeTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StandardChartThemeTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StandardChartThemeTest(String name) {
-        super(name);
-    }
+public class StandardChartThemeTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
-
         StandardChartTheme t1 = new StandardChartTheme("Name");
         StandardChartTheme t2 = new StandardChartTheme("Name");
         assertTrue(t1.equals(t2));
@@ -281,6 +262,7 @@ public class StandardChartThemeTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StandardChartTheme t1 = new StandardChartTheme("Name");
         StandardChartTheme t2 = (StandardChartTheme) TestUtilities.serialised(t1);
@@ -290,6 +272,7 @@ public class StandardChartThemeTest extends TestCase {
     /**
      * Basic checks for cloning.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardChartTheme t1 = new StandardChartTheme("Name");
         StandardChartTheme t2 = (StandardChartTheme) t1.clone();

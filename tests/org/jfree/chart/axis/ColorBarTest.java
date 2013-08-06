@@ -41,39 +41,23 @@
 
 package org.jfree.chart.axis;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.plot.GreyPalette;
+import org.junit.Test;
 
 /**
  * Tests for the <code>ColorBar</code> class.
  */
-public class ColorBarTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ColorBarTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ColorBarTest(String name) {
-        super(name);
-    }
+public class ColorBarTest {
 
     /**
      * Check that the equals() method can distinguish all fields.
      */
+    @Test
     public void testEquals() {
         ColorBar c1 = new ColorBar("Test");
         ColorBar c2 = new ColorBar("Test");
@@ -93,6 +77,7 @@ public class ColorBarTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         ColorBar c1 = new ColorBar("Test");
         ColorBar c2 = new ColorBar("Test");
@@ -105,6 +90,7 @@ public class ColorBarTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         ColorBar c1 = new ColorBar("Test");
         ColorBar c2 = (ColorBar) c1.clone();
@@ -116,6 +102,7 @@ public class ColorBarTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         ColorBar a1 = new ColorBar("Test Axis");
         ColorBar a2 = (ColorBar) TestUtilities.serialised(a1);

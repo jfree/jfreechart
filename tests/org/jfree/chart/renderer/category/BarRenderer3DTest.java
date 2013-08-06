@@ -43,42 +43,27 @@
 
 package org.jfree.chart.renderer.category;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link BarRenderer3D} class.
  */
-public class BarRenderer3DTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BarRenderer3DTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public BarRenderer3DTest(String name) {
-        super(name);
-    }
+public class BarRenderer3DTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         BarRenderer3D r1 = new BarRenderer3D(1.0, 2.0);
         BarRenderer3D r2 = new BarRenderer3D(1.0, 2.0);
@@ -105,6 +90,7 @@ public class BarRenderer3DTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         BarRenderer3D r1 = new BarRenderer3D();
         BarRenderer3D r2 = new BarRenderer3D();
@@ -117,6 +103,7 @@ public class BarRenderer3DTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         BarRenderer3D r1 = new BarRenderer3D();
         BarRenderer3D r2 = (BarRenderer3D) r1.clone();
@@ -128,6 +115,7 @@ public class BarRenderer3DTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         BarRenderer3D r1 = new BarRenderer3D();
         assertTrue(r1 instanceof PublicCloneable);
@@ -136,6 +124,7 @@ public class BarRenderer3DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         BarRenderer3D r1 = new BarRenderer3D();
         r1.setWallPaint(new GradientPaint(1.0f, 2.0f, Color.red, 4.0f, 3.0f,

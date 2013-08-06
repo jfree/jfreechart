@@ -40,36 +40,20 @@
 
 package org.jfree.chart.needle;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link LongNeedle} class.
  */
-public class LongNeedleTest extends TestCase {
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LongNeedleTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public LongNeedleTest(String name) {
-        super(name);
-    }
+public class LongNeedleTest {
 
     /**
      * Check that the equals() method can distinguish all fields.
      */
+    @Test
     public void testEquals() {
        LongNeedle n1 = new LongNeedle();
        LongNeedle n2 = new LongNeedle();
@@ -80,6 +64,7 @@ public class LongNeedleTest extends TestCase {
     /**
      * Check that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         LongNeedle n1 = new LongNeedle();
         LongNeedle n2 = (LongNeedle) n1.clone();
@@ -91,6 +76,7 @@ public class LongNeedleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         LongNeedle n1 = new LongNeedle();
         LongNeedle n2 = (LongNeedle) TestUtilities.serialised(n1);

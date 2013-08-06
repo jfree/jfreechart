@@ -42,16 +42,16 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
@@ -64,35 +64,19 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RectangleInsets;
+import org.junit.Test;
 
 /**
  * Tests for the {@link ValueAxis} class.
  */
-public class ValueAxisTest extends TestCase {
+public class ValueAxisTest {
 
     private static final double EPSILON = 0.000000001;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ValueAxisTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ValueAxisTest(String name) {
-        super(name);
-    }
-
-    /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         ValueAxis a1 = new NumberAxis("Test");
         ValueAxis a2 = (NumberAxis) a1.clone();
@@ -104,6 +88,7 @@ public class ValueAxisTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
 
         NumberAxis a1 = new NumberAxis("Test");
@@ -225,16 +210,15 @@ public class ValueAxisTest extends TestCase {
      * Tests the the lower and upper margin settings produce the expected
      * results.
      */
+    @Test
     public void testAxisMargins() {
         XYSeries series = new XYSeries("S1");
         series.add(100.0, 1.1);
         series.add(200.0, 2.2);
         XYSeriesCollection dataset = new XYSeriesCollection(series);
         dataset.setIntervalWidth(0.0);
-        JFreeChart chart = ChartFactory.createScatterPlot(
-            "Title", "X", "Y", dataset, PlotOrientation.VERTICAL,
-            false, false, false
-        );
+        JFreeChart chart = ChartFactory.createScatterPlot("Title", "X", "Y", 
+                dataset);
         ValueAxis domainAxis = ((XYPlot) chart.getPlot()).getDomainAxis();
         Range r = domainAxis.getRange();
         assertEquals(110.0, r.getLength(), EPSILON);
@@ -248,6 +232,7 @@ public class ValueAxisTest extends TestCase {
      * A test for bug 3555275 (where the fixed axis space is calculated 
      * incorrectly).
      */
+    @Test
     public void test3555275() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         JFreeChart chart = ChartFactory.createLineChart("Title", "X", "Y",

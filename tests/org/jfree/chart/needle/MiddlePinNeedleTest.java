@@ -40,37 +40,20 @@
 
 package org.jfree.chart.needle;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link MiddlePinNeedle} class.
  */
-public class MiddlePinNeedleTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MiddlePinNeedleTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MiddlePinNeedleTest(String name) {
-        super(name);
-    }
+public class MiddlePinNeedleTest {
 
     /**
      * Check that the equals() method can distinguish all fields.
      */
+    @Test
     public void testEquals() {
        MiddlePinNeedle n1 = new MiddlePinNeedle();
        MiddlePinNeedle n2 = new MiddlePinNeedle();
@@ -81,6 +64,7 @@ public class MiddlePinNeedleTest extends TestCase {
     /**
      * Check that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         MiddlePinNeedle n1 = new MiddlePinNeedle();
         MiddlePinNeedle n2 = (MiddlePinNeedle) n1.clone();
@@ -92,6 +76,7 @@ public class MiddlePinNeedleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         MiddlePinNeedle n1 = new MiddlePinNeedle();
         MiddlePinNeedle n2 = (MiddlePinNeedle) TestUtilities.serialised(n1);

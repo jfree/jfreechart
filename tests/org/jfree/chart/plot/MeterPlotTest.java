@@ -43,46 +43,31 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.text.DecimalFormat;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
 import org.jfree.data.general.DefaultValueDataset;
+import org.junit.Test;
 
 /**
  * Tests for the {@link MeterPlot} class.
  */
-public class MeterPlotTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MeterPlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MeterPlotTest(String name) {
-        super(name);
-    }
+public class MeterPlotTest {
 
     /**
      * Test the equals method to ensure that it can distinguish the required
      * fields.  Note that the dataset is NOT considered in the equals test.
      */
+    @Test
     public void testEquals() {
         MeterPlot plot1 = new MeterPlot();
         MeterPlot plot2 = new MeterPlot();
@@ -211,6 +196,7 @@ public class MeterPlotTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         MeterPlot p1 = new MeterPlot();
         MeterPlot p2 = (MeterPlot) p1.clone();
@@ -238,6 +224,7 @@ public class MeterPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization1() {
         MeterPlot p1 = new MeterPlot(null);
         p1.setDialBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
@@ -257,6 +244,7 @@ public class MeterPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization2() {
         MeterPlot p1 = new MeterPlot(new DefaultValueDataset(1.23));
         MeterPlot p2 = (MeterPlot) TestUtilities.serialised(p1);

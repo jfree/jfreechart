@@ -42,43 +42,26 @@
 
 package org.jfree.chart.annotations;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CategoryTextAnnotation} class.
  */
-public class CategoryTextAnnotationTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CategoryTextAnnotationTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CategoryTextAnnotationTest(String name) {
-        super(name);
-    }
+public class CategoryTextAnnotationTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
-
         CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test", 
                 "Category", 1.0);
         CategoryTextAnnotation a2 = new CategoryTextAnnotation("Test", 
@@ -102,12 +85,12 @@ public class CategoryTextAnnotationTest extends TestCase {
         assertFalse(a1.equals(a2));
         a2.setValue(0.15);
         assertTrue(a1.equals(a2));
-
     }
 
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test", 
                 "Category", 1.0);
@@ -122,6 +105,7 @@ public class CategoryTextAnnotationTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         CategoryTextAnnotation a1 = new CategoryTextAnnotation(
                 "Test", "Category", 1.0);
@@ -134,6 +118,7 @@ public class CategoryTextAnnotationTest extends TestCase {
     /**
      * Checks that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         CategoryTextAnnotation a1 = new CategoryTextAnnotation(
                 "Test", "Category", 1.0);
@@ -143,6 +128,7 @@ public class CategoryTextAnnotationTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test", 
                 "Category", 1.0);

@@ -40,37 +40,20 @@
 
 package org.jfree.chart.labels;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the <code>StandardContourToolTipGenerator</code> class.
  */
-public class StandardContourToolTipGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StandardContourToolTipGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StandardContourToolTipGeneratorTest(String name) {
-        super(name);
-    }
+public class StandardContourToolTipGeneratorTest {
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StandardContourToolTipGenerator g1
             = new StandardContourToolTipGenerator();

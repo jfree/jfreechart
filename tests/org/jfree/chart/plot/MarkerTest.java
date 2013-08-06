@@ -40,15 +40,16 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.Arrays;
 import java.util.EventListener;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
@@ -56,35 +57,19 @@ import org.jfree.ui.LengthAdjustmentType;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.TextAnchor;
+import org.junit.Test;
 
 /**
  * Tests for the {@link Marker} class.
  */
-public class MarkerTest extends TestCase implements MarkerChangeListener {
+public class MarkerTest implements MarkerChangeListener {
 
     MarkerChangeEvent lastEvent;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MarkerTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MarkerTest(String name) {
-        super(name);
-    }
-
-    /**
      * Some checks for the getPaint() and setPaint() methods.
      */
+    @Test
     public void testGetSetPaint() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -109,6 +94,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Some checks for the getStroke() and setStroke() methods.
      */
+    @Test
     public void testGetSetStroke() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -133,6 +119,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Some checks for the getOutlinePaint() and setOutlinePaint() methods.
      */
+    @Test
     public void testGetSetOutlinePaint() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -152,6 +139,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Some checks for the getOutlineStroke() and setOutlineStroke() methods.
      */
+    @Test
     public void testGetSetOutlineStroke() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -173,6 +161,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Some checks for the getAlpha() and setAlpha() methods.
      */
+    @Test
     public void testGetSetAlpha() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -188,6 +177,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Some checks for the getLabel() and setLabel() methods.
      */
+    @Test
     public void testGetSetLabel() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -207,6 +197,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Some checks for the getLabelFont() and setLabelFont() methods.
      */
+    @Test
     public void testGetSetLabelFont() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -231,6 +222,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Some checks for the getLabelPaint() and setLabelPaint() methods.
      */
+    @Test
     public void testGetSetLabelPaint() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -255,6 +247,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Some checks for the getLabelAnchor() and setLabelAnchor() methods.
      */
+    @Test
     public void testGetSetLabelAnchor() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -279,6 +272,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Some checks for the getLabelOffset() and setLabelOffset() methods.
      */
+    @Test
     public void testGetSetLabelOffset() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -304,6 +298,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
      * Some checks for the getLabelOffsetType() and setLabelOffsetType()
      * methods.
      */
+    @Test
     public void testGetSetLabelOffsetType() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -329,6 +324,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
      * Some checks for the getLabelTextAnchor() and setLabelTextAnchor()
      * methods.
      */
+    @Test
     public void testGetSetLabelTextAnchor() {
         // we use ValueMarker for the tests, because we need a concrete
         // subclass...
@@ -353,6 +349,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Checks that a CategoryPlot deregisters listeners when clearing markers.
      */
+    @Test
     public void testListenersWithCategoryPlot() {
         CategoryPlot plot = new CategoryPlot();
         CategoryMarker marker1 = new CategoryMarker("X");
@@ -376,6 +373,7 @@ public class MarkerTest extends TestCase implements MarkerChangeListener {
     /**
      * Checks that an XYPlot deregisters listeners when clearing markers.
      */
+    @Test
     public void testListenersWithXYPlot() {
         XYPlot plot = new XYPlot();
         ValueMarker marker1 = new ValueMarker(1.0);

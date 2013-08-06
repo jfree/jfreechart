@@ -43,41 +43,26 @@
 
 package org.jfree.chart.urls;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.util.List;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CustomXYURLGenerator} class.
  */
-public class CustomXYURLGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CustomXYURLGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CustomXYURLGeneratorTest(String name) {
-        super(name);
-    }
+public class CustomXYURLGeneratorTest {
 
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
         CustomXYURLGenerator g2 = new CustomXYURLGenerator();
@@ -99,6 +84,7 @@ public class CustomXYURLGeneratorTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
         List u1 = new java.util.ArrayList();
@@ -123,6 +109,7 @@ public class CustomXYURLGeneratorTest extends TestCase {
     /**
      * Checks that the class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
         assertTrue(g1 instanceof PublicCloneable);
@@ -131,8 +118,8 @@ public class CustomXYURLGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
-
         List u1 = new java.util.ArrayList();
         u1.add("URL A1");
         u1.add("URL A2");
@@ -154,6 +141,7 @@ public class CustomXYURLGeneratorTest extends TestCase {
     /**
      * Some checks for the addURLSeries() method.
      */
+    @Test
     public void testAddURLSeries() {
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
         // you can add a null list - it would have been better if this

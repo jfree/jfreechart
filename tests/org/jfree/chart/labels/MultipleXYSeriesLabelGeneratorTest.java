@@ -41,39 +41,24 @@
 
 package org.jfree.chart.labels;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link MultipleXYSeriesLabelGenerator} class.
  */
-public class MultipleXYSeriesLabelGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MultipleXYSeriesLabelGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MultipleXYSeriesLabelGeneratorTest(String name) {
-        super(name);
-    }
+public class MultipleXYSeriesLabelGeneratorTest {
 
     /**
      * A series of tests for the equals() method.
      */
+    @Test
     public void testEquals() {
         MultipleXYSeriesLabelGenerator g1
                 = new MultipleXYSeriesLabelGenerator();
@@ -96,6 +81,7 @@ public class MultipleXYSeriesLabelGeneratorTest extends TestCase {
     /**
      * Simple check that hashCode is implemented.
      */
+    @Test
     public void testHashCode() {
         MultipleXYSeriesLabelGenerator g1
                 = new MultipleXYSeriesLabelGenerator();
@@ -108,6 +94,7 @@ public class MultipleXYSeriesLabelGeneratorTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         MultipleXYSeriesLabelGenerator g1
                 = new MultipleXYSeriesLabelGenerator();
@@ -127,6 +114,7 @@ public class MultipleXYSeriesLabelGeneratorTest extends TestCase {
     /**
      * Check to ensure that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         MultipleXYSeriesLabelGenerator g1
                 = new MultipleXYSeriesLabelGenerator();
@@ -136,6 +124,7 @@ public class MultipleXYSeriesLabelGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         MultipleXYSeriesLabelGenerator g1
                 = new MultipleXYSeriesLabelGenerator();

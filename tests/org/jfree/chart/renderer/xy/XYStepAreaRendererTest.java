@@ -44,10 +44,10 @@
 
 package org.jfree.chart.renderer.xy;
 
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtilities;
@@ -56,33 +56,17 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYStepAreaRenderer} class.
  */
-public class XYStepAreaRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYStepAreaRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYStepAreaRendererTest(String name) {
-        super(name);
-    }
+public class XYStepAreaRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
         XYStepAreaRenderer r2 = new XYStepAreaRenderer();
@@ -117,6 +101,7 @@ public class XYStepAreaRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
         XYStepAreaRenderer r2 = new XYStepAreaRenderer();
@@ -129,6 +114,7 @@ public class XYStepAreaRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
         XYStepAreaRenderer r2 = (XYStepAreaRenderer) r1.clone();
@@ -140,6 +126,7 @@ public class XYStepAreaRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -148,6 +135,7 @@ public class XYStepAreaRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
         XYStepAreaRenderer r2 = (XYStepAreaRenderer) 
@@ -159,6 +147,7 @@ public class XYStepAreaRendererTest extends TestCase {
      * Draws the chart with a <code>null</code> info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
+    @Test
     public void testDrawWithNullInfo() {
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();

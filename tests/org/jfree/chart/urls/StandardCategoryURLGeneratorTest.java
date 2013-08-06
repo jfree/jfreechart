@@ -42,40 +42,25 @@
 
 package org.jfree.chart.urls;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StandardCategoryURLGenerator} class.
  */
-public class StandardCategoryURLGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StandardCategoryURLGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StandardCategoryURLGeneratorTest(String name) {
-        super(name);
-    }
+public class StandardCategoryURLGeneratorTest {
 
     /**
      * Some tests for the generateURL() method.
      */
+    @Test
     public void testGenerateURL() {
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -96,6 +81,7 @@ public class StandardCategoryURLGeneratorTest extends TestCase {
      * Checks that the class does not implement PublicCloneable (the generator
      * is immutable, so cloning is not necessary).
      */
+    @Test
     public void testPublicCloneable() {
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator();
         assertFalse(g1 instanceof PublicCloneable);
@@ -104,6 +90,7 @@ public class StandardCategoryURLGeneratorTest extends TestCase {
     /**
      * Some tests for the equals() method.
      */
+    @Test
     public void testEquals() {
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator();
         StandardCategoryURLGenerator g2 = new StandardCategoryURLGenerator();
@@ -128,6 +115,7 @@ public class StandardCategoryURLGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator(
                 "index.html?");

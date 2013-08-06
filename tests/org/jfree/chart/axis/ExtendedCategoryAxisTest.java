@@ -40,41 +40,27 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link ExtendedCategoryAxis} class.
  */
-public class ExtendedCategoryAxisTest extends TestCase {
+public class ExtendedCategoryAxisTest {
 
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ExtendedCategoryAxisTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ExtendedCategoryAxisTest(String name) {
-        super(name);
-    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
 
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
@@ -100,6 +86,7 @@ public class ExtendedCategoryAxisTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
         ExtendedCategoryAxis a2 = new ExtendedCategoryAxis("Test");
@@ -112,6 +99,7 @@ public class ExtendedCategoryAxisTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
         ExtendedCategoryAxis a2 = (ExtendedCategoryAxis) a1.clone();
@@ -130,6 +118,7 @@ public class ExtendedCategoryAxisTest extends TestCase {
      * Confirm that cloning works.  This test customises the font and paint
      * per category label.
      */
+    @Test
     public void testCloning2() throws CloneNotSupportedException {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
         a1.setTickLabelFont("C1", new Font("Dialog", Font.PLAIN, 15));
@@ -162,11 +151,13 @@ public class ExtendedCategoryAxisTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
         a1.setSubLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
                 4.0f, Color.blue));
-        ExtendedCategoryAxis a2 = (ExtendedCategoryAxis) TestUtilities.serialised(a1);
+        ExtendedCategoryAxis a2 = (ExtendedCategoryAxis) 
+                TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }
 

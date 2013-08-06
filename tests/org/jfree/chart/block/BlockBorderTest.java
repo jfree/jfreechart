@@ -41,43 +41,28 @@
 
 package org.jfree.chart.block;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.UnitType;
+import org.junit.Test;
 
 /**
  * Tests for the {@link BlockBorder} class.
  */
-public class BlockBorderTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BlockBorderTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public BlockBorderTest(String name) {
-        super(name);
-    }
+public class BlockBorderTest {
 
     /**
      * Confirm that the equals() method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
                 4.0), Color.red);
@@ -106,6 +91,7 @@ public class BlockBorderTest extends TestCase {
     /**
      * Immutable - cloning not necessary.
      */
+    @Test
     public void testCloning() {
         BlockBorder b1 = new BlockBorder();
         assertFalse(b1 instanceof Cloneable);
@@ -114,6 +100,7 @@ public class BlockBorderTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
                 4.0), new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,

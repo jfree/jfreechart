@@ -42,41 +42,27 @@
 
 package org.jfree.chart.renderer.category;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+
 import java.awt.Color;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link WaterfallBarRenderer} class.
  */
-public class WaterfallBarRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(WaterfallBarRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public WaterfallBarRendererTest(String name) {
-        super(name);
-    }
+public class WaterfallBarRendererTest {
 
     /**
      * Some tests for the findRangeBounds() method.
      */
+    @Test
     public void testFindRangeBounds() {
         WaterfallBarRenderer r = new WaterfallBarRenderer();
         assertNull(r.findRangeBounds(null));
@@ -85,6 +71,7 @@ public class WaterfallBarRendererTest extends TestCase {
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
         WaterfallBarRenderer r2 = new WaterfallBarRenderer();
@@ -119,6 +106,7 @@ public class WaterfallBarRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
         WaterfallBarRenderer r2 = new WaterfallBarRenderer();
@@ -131,6 +119,7 @@ public class WaterfallBarRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
         WaterfallBarRenderer r2 = (WaterfallBarRenderer) r1.clone();
@@ -149,6 +138,7 @@ public class WaterfallBarRendererTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -157,6 +147,7 @@ public class WaterfallBarRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
         WaterfallBarRenderer r2 = (WaterfallBarRenderer) 

@@ -42,41 +42,26 @@
 
 package org.jfree.chart.renderer;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Color;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link GrayPaintScale} class.
  */
-public class GrayPaintScaleTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(GrayPaintScaleTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public GrayPaintScaleTest(String name) {
-        super(name);
-    }
+public class GrayPaintScaleTest {
 
     private static final double EPSILON = 0.000000001;
 
     /**
      * Simple check for the default constructor.
      */
+    @Test
     public void testConstructor() {
         GrayPaintScale gps = new GrayPaintScale();
         assertEquals(0.0, gps.getLowerBound(), EPSILON);
@@ -87,6 +72,7 @@ public class GrayPaintScaleTest extends TestCase {
     /**
      * Some checks for the getPaint() method.
      */
+    @Test
     public void testGetPaint() {
         GrayPaintScale gps = new GrayPaintScale();
         Color c = (Color) gps.getPaint(0.0);
@@ -105,6 +91,7 @@ public class GrayPaintScaleTest extends TestCase {
     /**
      * A test for the equals() method.
      */
+    @Test
     public void testEquals() {
         GrayPaintScale g1 = new GrayPaintScale();
         GrayPaintScale g2 = new GrayPaintScale();
@@ -133,6 +120,7 @@ public class GrayPaintScaleTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         GrayPaintScale g1 = new GrayPaintScale();
         GrayPaintScale g2 = (GrayPaintScale) g1.clone();
@@ -144,6 +132,7 @@ public class GrayPaintScaleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         GrayPaintScale g1 = new GrayPaintScale();
         GrayPaintScale g2 = (GrayPaintScale) TestUtilities.serialised(g1);

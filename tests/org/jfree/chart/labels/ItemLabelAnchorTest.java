@@ -40,37 +40,21 @@
 
 package org.jfree.chart.labels;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link ItemLabelAnchor} class.
  */
-public class ItemLabelAnchorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ItemLabelAnchorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ItemLabelAnchorTest(String name) {
-        super(name);
-    }
+public class ItemLabelAnchorTest {
 
     /**
      * Test the equals() method.
      */
+    @Test
     public void testEquals() {
         assertTrue(ItemLabelAnchor.INSIDE1.equals(ItemLabelAnchor.INSIDE1));
         assertFalse(ItemLabelAnchor.INSIDE1.equals(ItemLabelAnchor.INSIDE2));
@@ -79,6 +63,7 @@ public class ItemLabelAnchorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for identity.
      */
+    @Test
     public void testSerialization() {
         ItemLabelAnchor a1 = ItemLabelAnchor.INSIDE1;
         ItemLabelAnchor a2 = (ItemLabelAnchor) TestUtilities.serialised(a1);

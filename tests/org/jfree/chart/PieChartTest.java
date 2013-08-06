@@ -65,9 +65,7 @@ public class PieChartTest  {
      */
     @Before
     public void setUp() {
-
         this.pieChart = createPieChart();
-
     }
 
     /**

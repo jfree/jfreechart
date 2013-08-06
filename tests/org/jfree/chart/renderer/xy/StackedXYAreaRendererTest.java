@@ -45,14 +45,15 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -65,33 +66,17 @@ import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StackedXYAreaRenderer} class.
  */
-public class StackedXYAreaRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StackedXYAreaRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StackedXYAreaRendererTest(String name) {
-        super(name);
-    }
+public class StackedXYAreaRendererTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         StackedXYAreaRenderer r2 = new StackedXYAreaRenderer();
@@ -115,6 +100,7 @@ public class StackedXYAreaRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         StackedXYAreaRenderer r2 = new StackedXYAreaRenderer();
@@ -127,6 +113,7 @@ public class StackedXYAreaRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         StackedXYAreaRenderer r2 = (StackedXYAreaRenderer) r1.clone();
@@ -138,6 +125,7 @@ public class StackedXYAreaRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -146,6 +134,7 @@ public class StackedXYAreaRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StackedXYAreaRenderer r1 = new StackedXYAreaRenderer();
         r1.setShapePaint(Color.red);
@@ -158,9 +147,10 @@ public class StackedXYAreaRendererTest extends TestCase {
     /**
      * Check that the renderer is calculating the range bounds correctly.
      */
+    @Test
     public void testFindRangeBounds() {
         TableXYDataset dataset
-                = RendererXYPackageTests.createTestTableXYDataset();
+                = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
                 false, false, false);
@@ -175,6 +165,7 @@ public class StackedXYAreaRendererTest extends TestCase {
      * Draws the chart with a <code>null</code> info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
+    @Test
     public void testDrawWithNullInfo() {
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();
@@ -207,6 +198,7 @@ public class StackedXYAreaRendererTest extends TestCase {
     /**
      * A test for bug 1593156.
      */
+    @Test
     public void testBug1593156() {
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();

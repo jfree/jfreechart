@@ -40,37 +40,20 @@
 
 package org.jfree.chart.plot;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the <code>ContourPlot</code> class.
  */
-public class ContourPlotTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ContourPlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ContourPlotTest(String name) {
-        super(name);
-    }
+public class ContourPlotTest {
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         ContourPlot p1 = new ContourPlot(null, null, null, null);
         ContourPlot p2 = (ContourPlot) TestUtilities.serialised(p1);

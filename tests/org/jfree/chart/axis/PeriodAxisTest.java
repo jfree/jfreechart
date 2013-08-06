@@ -44,6 +44,10 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;
@@ -53,9 +57,6 @@ import java.util.Locale;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.event.AxisChangeEvent;
@@ -68,11 +69,12 @@ import org.jfree.data.time.Month;
 import org.jfree.data.time.Quarter;
 import org.jfree.data.time.Second;
 import org.jfree.data.time.Year;
+import org.junit.Test;
 
 /**
  * Tests for the {@link PeriodAxis} class.
  */
-public class PeriodAxisTest extends TestCase implements AxisChangeListener {
+public class PeriodAxisTest implements AxisChangeListener {
 
     /** The last event received. */
     private AxisChangeEvent lastEvent;
@@ -87,26 +89,9 @@ public class PeriodAxisTest extends TestCase implements AxisChangeListener {
     }
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(PeriodAxisTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public PeriodAxisTest(String name) {
-        super(name);
-    }
-
-    /**
      * Confirm that the equals() method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         PeriodAxis a1 = new PeriodAxis("Test");
         PeriodAxis a2 = new PeriodAxis("Test");
@@ -173,6 +158,7 @@ public class PeriodAxisTest extends TestCase implements AxisChangeListener {
      * Confirm that the equals() method can distinguish the locale field (which
      * is new in version 1.0.13).
      */
+    @Test
     public void testEqualsWithLocale() {
         PeriodAxis a1 = new PeriodAxis("Test", new Year(2000), new Year(2009),
                 TimeZone.getDefault(), Locale.JAPAN);
@@ -189,9 +175,10 @@ public class PeriodAxisTest extends TestCase implements AxisChangeListener {
         assertTrue(a1.equals(a2));
     }
 
-        /**
+    /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         PeriodAxis a1 = new PeriodAxis("Test");
         PeriodAxis a2 = new PeriodAxis("Test");
@@ -204,6 +191,7 @@ public class PeriodAxisTest extends TestCase implements AxisChangeListener {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         PeriodAxis a1 = new PeriodAxis("Test");
         PeriodAxis a2 = (PeriodAxis) a1.clone();
@@ -250,6 +238,7 @@ public class PeriodAxisTest extends TestCase implements AxisChangeListener {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         PeriodAxis a1 = new PeriodAxis("Test Axis");
         PeriodAxis a2 = (PeriodAxis) TestUtilities.serialised(a1);
@@ -260,6 +249,7 @@ public class PeriodAxisTest extends TestCase implements AxisChangeListener {
     /**
      * A test for bug 1932146.
      */
+    @Test
     public void test1932146() {
         PeriodAxis axis = new PeriodAxis("TestAxis");
         axis.addChangeListener(this);
@@ -275,6 +265,7 @@ public class PeriodAxisTest extends TestCase implements AxisChangeListener {
      * periods, the range set for the axis will most likely be wider than the
      * one specified).
      */
+    @Test
     public void test2490803() {
         Locale savedLocale = Locale.getDefault();
         TimeZone savedTimeZone = TimeZone.getDefault();

@@ -40,43 +40,27 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Date;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.ui.TextAnchor;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DateTick} class.
  */
-public class DateTickTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DateTickTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DateTickTest(String name) {
-        super(name);
-    }
+public class DateTickTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
-
         Date d1 = new Date(0L);
         Date d2 = new Date(1L);
         String l1 = "Label 1";
@@ -118,12 +102,12 @@ public class DateTickTest extends TestCase {
         assertFalse(t1.equals(t2));
         t2 = new DateTick(TickType.MINOR, d1, l1, ta1, ta1, Math.PI);
         assertTrue(t1.equals(t2));
-
     }
 
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         Date d1 = new Date(0L);
         String l1 = "Label 1";
@@ -140,6 +124,7 @@ public class DateTickTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DateTick t1 = new DateTick(new Date(0L), "Label", TextAnchor.CENTER,
                 TextAnchor.CENTER, 10.0);
@@ -152,6 +137,7 @@ public class DateTickTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DateTick t1 = new DateTick(new Date(0L), "Label", TextAnchor.CENTER,
                 TextAnchor.CENTER, 10.0);

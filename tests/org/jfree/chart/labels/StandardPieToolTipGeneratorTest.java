@@ -47,42 +47,27 @@
 
 package org.jfree.chart.labels;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StandardPieToolTipGenerator} class.
  */
-public class StandardPieToolTipGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StandardPieToolTipGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StandardPieToolTipGeneratorTest(String name) {
-        super(name);
-    }
+public class StandardPieToolTipGeneratorTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         StandardPieToolTipGenerator g1 = new StandardPieToolTipGenerator();
         StandardPieToolTipGenerator g2 = new StandardPieToolTipGenerator();
@@ -125,6 +110,7 @@ public class StandardPieToolTipGeneratorTest extends TestCase {
     /**
      * Simple check that hashCode is implemented.
      */
+    @Test
     public void testHashCode() {
         StandardPieToolTipGenerator g1
                 = new StandardPieToolTipGenerator();
@@ -137,6 +123,7 @@ public class StandardPieToolTipGeneratorTest extends TestCase {
     /**
      * Some checks for cloning.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardPieToolTipGenerator g1 = new StandardPieToolTipGenerator();
         StandardPieToolTipGenerator g2 = (StandardPieToolTipGenerator) 
@@ -151,6 +138,7 @@ public class StandardPieToolTipGeneratorTest extends TestCase {
     /**
      * Check to ensure that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         StandardPieToolTipGenerator g1 = new StandardPieToolTipGenerator();
         assertTrue(g1 instanceof PublicCloneable);
@@ -159,6 +147,7 @@ public class StandardPieToolTipGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StandardPieToolTipGenerator g1 = new StandardPieToolTipGenerator();
         StandardPieToolTipGenerator g2 = (StandardPieToolTipGenerator)

@@ -42,6 +42,10 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.text.Format;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -51,16 +55,16 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
-
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * JUnit Tests for the {@link SegmentedTimeline} class.
  */
-public class SegmentedTimelineTest extends TestCase {
+@Ignore
+public class SegmentedTimelineTest {
 
     /** These constants control test cycles in the validateXXXX methods. */
     private static final int TEST_CYCLE_START = 0;
@@ -158,30 +162,13 @@ public class SegmentedTimelineTest extends TestCase {
     }
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(SegmentedTimelineTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public SegmentedTimelineTest(String name) {
-        super(name);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
      * @throws Exception if there is a problem.
      */
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         // setup our test timelines
         //
         // Legend for comments below:
@@ -275,16 +262,6 @@ public class SegmentedTimelineTest extends TestCase {
         this.monday9am = (Calendar) cal.clone();
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @throws Exception if there is a problem.
-     */
-    protected void tearDown() throws Exception {
-        // does nothing
-    }
-
     //////////////////////////////////////////////////////////////////////////
     // test construction process
     //////////////////////////////////////////////////////////////////////////
@@ -293,6 +270,7 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests that the new method that created the msTimeline segmented
      * timeline did so correctly.
      */
+    @Test
     public void testMsSegmentedTimeline() {
         // verify attributes set during object construction
         assertEquals(1, this.msTimeline.getSegmentSize());
@@ -305,6 +283,7 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests that the new method that created the ms2Timeline segmented
      * timeline did so correctly.
      */
+    @Test
     public void testMs2SegmentedTimeline() {
         // verify attributes set during object construction
         assertEquals(1, this.ms2Timeline.getSegmentSize());
@@ -318,6 +297,7 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests that the factory method that creates Monday through Friday
      * segmented timeline does so correctly.
      */
+    @Test
     public void testMondayThroughFridaySegmentedTimeline() {
         // verify attributes set during object construction
         assertEquals(SegmentedTimeline.DAY_SEGMENT_SIZE,
@@ -332,6 +312,7 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests that the factory method that creates a 15-min 9:00 AM  4:00 PM
      * segmented axis does so correctly.
      */
+    @Test
     public void testFifteenMinSegmentedTimeline() {
         assertEquals(SegmentedTimeline.FIFTEEN_MINUTE_SEGMENT_SIZE,
                 this.fifteenMinTimeline.getSegmentSize());
@@ -350,6 +331,7 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests one segment of the ms timeline. Internal indices
      * inside one segment as well as adjacent segments are verified.
      */
+    @Test
     public void testMsSegment() {
         verifyOneSegment(this.msTimeline);
     }
@@ -358,6 +340,7 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests one segment of the ms timeline. Internal indices
      * inside one segment as well as adjacent segments are verified.
      */
+    @Test
     public void testMs2Segment() {
         verifyOneSegment(this.ms2Timeline);
     }
@@ -366,6 +349,7 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests one segment of the Monday through Friday timeline. Internal indices
      * inside one segment as well as adjacent segments are verified.
      */
+    @Test
     public void testMondayThroughFridaySegment() {
         verifyOneSegment(this.mondayFridayTimeline);
     }
@@ -374,6 +358,7 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests one segment of the Fifteen timeline. Internal indices
      * inside one segment as well as adjacent segments are verified.
      */
+    @Test
     public void testFifteenMinSegment() {
         verifyOneSegment(this.fifteenMinTimeline);
     }
@@ -458,6 +443,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Tests the inc methods on the msTimeline.
      */
+    @Test
     public void testMsInc() {
         verifyInc(this.msTimeline);
     }
@@ -465,6 +451,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Tests the inc methods on the msTimeline.
      */
+    @Test
     public void testMs2Inc() {
         verifyInc(this.ms2Timeline);
     }
@@ -472,6 +459,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Tests the inc methods on the Monday through Friday timeline.
      */
+    @Test
     public void testMondayThroughFridayInc() {
         verifyInc(this.mondayFridayTimeline);
     }
@@ -479,6 +467,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Tests the inc methods on the Fifteen minute timeline.
      */
+    @Test
     public void testFifteenMinInc() {
         verifyInc(this.fifteenMinTimeline);
     }
@@ -550,6 +539,7 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests that the msTimeline's included and excluded
      * segments are being calculated correctly.
      */
+    @Test
     public void testMsIncludedAndExcludedSegments() {
         verifyIncludedAndExcludedSegments(this.msTimeline, 0);
     }
@@ -558,6 +548,7 @@ public class SegmentedTimelineTest extends TestCase {
      * Tests that the ms2Timeline's included and excluded
      * segments are being calculated correctly.
      */
+    @Test
     public void testMs2IncludedAndExcludedSegments() {
         verifyIncludedAndExcludedSegments(this.ms2Timeline, 1);
     }
@@ -567,6 +558,7 @@ public class SegmentedTimelineTest extends TestCase {
      * segments are being calculated correctly. The test is performed starting
      * on the first monday after 1/1/2000 and for five years.
      */
+    @Test
     public void testMondayThroughFridayIncludedAndExcludedSegments() {
         verifyIncludedAndExcludedSegments(this.mondayFridayTimeline,
                 this.monday.getTime().getTime());
@@ -577,6 +569,7 @@ public class SegmentedTimelineTest extends TestCase {
      * segments are being calculated correctly. The test is performed starting
      * on the first monday after 1/1/2000 and for five years.
      */
+    @Test
     public void testFifteenMinIncludedAndExcludedSegments() {
         verifyIncludedAndExcludedSegments(this.fifteenMinTimeline,
                 this.monday9am.getTime().getTime());
@@ -623,6 +616,7 @@ public class SegmentedTimelineTest extends TestCase {
      *
      * @throws ParseException if there is a parsing error.
      */
+    @Test
     public void testMsExceptionSegments() throws ParseException {
         verifyExceptionSegments(this.msTimeline, MS_EXCEPTIONS, NUMBER_FORMAT);
     }
@@ -632,6 +626,7 @@ public class SegmentedTimelineTest extends TestCase {
      *
      * @throws ParseException if there is a parsing error.
      */
+    @Test
     public void testMs2BaseTimelineExceptionSegments() throws ParseException {
         verifyExceptionSegments(this.ms2BaseTimeline,
                 MS2_BASE_TIMELINE_EXCEPTIONS, NUMBER_FORMAT);
@@ -642,6 +637,7 @@ public class SegmentedTimelineTest extends TestCase {
      *
      * @throws ParseException if there is a parsing error.
      */
+    @Test
     public void testMondayThoughFridayExceptionSegments()
         throws ParseException {
         verifyExceptionSegments(this.mondayFridayTimeline,
@@ -653,6 +649,7 @@ public class SegmentedTimelineTest extends TestCase {
      *
      * @throws ParseException if there is a parsing error.
      */
+    @Test
     public void testFifteenMinExceptionSegments() throws ParseException {
         verifyExceptionSegments(this.fifteenMinTimeline,
                 FIFTEEN_MIN_EXCEPTIONS, DATE_TIME_FORMAT);
@@ -706,6 +703,7 @@ public class SegmentedTimelineTest extends TestCase {
      *
      * @throws ParseException if there is a parsing error.
      */
+    @Test
     public void testMsTranslations() throws ParseException {
         verifyFillInExceptions(this.msTimeline, MS_EXCEPTIONS, NUMBER_FORMAT);
         verifyTranslations(this.msTimeline, 0);
@@ -716,6 +714,7 @@ public class SegmentedTimelineTest extends TestCase {
      *
      * @throws ParseException if there is a parsing error.
      */
+    @Test
     public void testMs2BaseTimelineTranslations() throws ParseException {
         verifyFillInExceptions(this.ms2BaseTimeline,
                 MS2_BASE_TIMELINE_EXCEPTIONS, NUMBER_FORMAT);
@@ -727,6 +726,7 @@ public class SegmentedTimelineTest extends TestCase {
      *
      * @throws ParseException if there is a parsing error.
      */
+    @Test
     public void testMs2Translations() throws ParseException {
         fillInBaseTimelineExceptions(this.ms2Timeline,
                 MS2_BASE_TIMELINE_EXCEPTIONS, NUMBER_FORMAT);
@@ -739,7 +739,8 @@ public class SegmentedTimelineTest extends TestCase {
      *
      * @throws ParseException if there is a parsing error.
      */
-    public void textMondayThroughFridayTranslations() throws ParseException {
+    @Test
+    public void testMondayThroughFridayTranslations() throws ParseException {
         verifyFillInExceptions(this.mondayFridayTimeline, US_HOLIDAYS,
                 DATE_FORMAT);
         verifyTranslations(this.mondayFridayTimeline,
@@ -751,6 +752,7 @@ public class SegmentedTimelineTest extends TestCase {
      *
      * @throws ParseException if there is a parsing error.
      */
+    @Test
     public void testFifteenMinTranslations() throws ParseException {
         verifyFillInExceptions(this.fifteenMinTimeline,
                 FIFTEEN_MIN_EXCEPTIONS, DATE_TIME_FORMAT);
@@ -811,6 +813,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         verifySerialization(this.msTimeline);
         verifySerialization(this.ms2Timeline);
@@ -957,6 +960,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         SegmentedTimeline l1 = new SegmentedTimeline(1000, 5, 2);
         SegmentedTimeline l2 = (SegmentedTimeline) l1.clone();
@@ -968,6 +972,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
 
         SegmentedTimeline l1 = new SegmentedTimeline(1000, 5, 2);
@@ -1000,6 +1005,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         SegmentedTimeline l1 = new SegmentedTimeline(1000, 5, 2);
         SegmentedTimeline l2 = new SegmentedTimeline(1000, 5, 2);
@@ -1012,6 +1018,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization2() {
         SegmentedTimeline l1 = new SegmentedTimeline(1000, 5, 2);
         SegmentedTimeline l2 = (SegmentedTimeline) TestUtilities.serialised(l1);
@@ -1025,6 +1032,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Tests a basic segmented timeline.
      */
+    @Test
     public void testBasicSegmentedTimeline() {
         SegmentedTimeline stl = new SegmentedTimeline(10, 2, 3);
         stl.setStartTime(946684800000L);  // 1-Jan-2000
@@ -1060,6 +1068,7 @@ public class SegmentedTimelineTest extends TestCase {
     /**
      * Tests a basic time line with one exception.
      */
+    @Test
     public void testSegmentedTimelineWithException1() {
         SegmentedTimeline stl = new SegmentedTimeline(10, 2, 3);
         stl.setStartTime(946684800000L);  // 1-Jan-2000
@@ -1094,24 +1103,6 @@ public class SegmentedTimelineTest extends TestCase {
         assertEquals(946684800069L, stl.toMillisecond(29));
         assertEquals(946684800100L, stl.toMillisecond(30));
 
-    }
-
-    //////////////////////////////////////////////////////////////////////////
-    // main method only for debug
-    //////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Only use to debug JUnit suite.
-     *
-     * @param args  ignored.
-     *
-     * @throws Exception if there is some problem.
-     */
-    public static void main(String[] args) throws Exception {
-        SegmentedTimelineTest test = new SegmentedTimelineTest("Test");
-        test.setUp();
-        test.testMondayThoughFridayExceptionSegments();
-        test.tearDown();
     }
 
 }

@@ -40,37 +40,22 @@
 
 package org.jfree.chart.title;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link ShortTextTitle} class.
  */
-public class ShortTextTitleTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ShortTextTitleTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ShortTextTitleTest(String name) {
-        super(name);
-    }
+public class ShortTextTitleTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
         ShortTextTitle t2 = new ShortTextTitle("ABC");
@@ -85,6 +70,7 @@ public class ShortTextTitleTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
         ShortTextTitle t2 = new ShortTextTitle("ABC");
@@ -97,6 +83,7 @@ public class ShortTextTitleTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
         ShortTextTitle t2 = (ShortTextTitle) t1.clone();
@@ -108,6 +95,7 @@ public class ShortTextTitleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
         ShortTextTitle t2 = (ShortTextTitle) TestUtilities.serialised(t1);

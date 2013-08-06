@@ -40,46 +40,31 @@
 
 package org.jfree.chart.block;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.Size2D;
+import org.junit.Test;
 
 /**
  * Tests for the {@link BorderArrangement} class.
  */
-public class BorderArrangementTest extends TestCase {
+public class BorderArrangementTest {
 
     private static final double EPSILON = 0.0000000001;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BorderArrangementTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public BorderArrangementTest(String name) {
-        super(name);
-    }
-
-    /**
      * Confirm that the equals() method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         BorderArrangement b1 = new BorderArrangement();
         BorderArrangement b2 = new BorderArrangement();
@@ -115,6 +100,7 @@ public class BorderArrangementTest extends TestCase {
     /**
      * Immutable - cloning is not necessary.
      */
+    @Test
     public void testCloning() {
         BorderArrangement b1 = new BorderArrangement();
         assertFalse(b1 instanceof Cloneable);
@@ -123,6 +109,7 @@ public class BorderArrangementTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         BorderArrangement b1 = new BorderArrangement();
         BorderArrangement b2 = (BorderArrangement) TestUtilities.serialised(b1);
@@ -132,6 +119,7 @@ public class BorderArrangementTest extends TestCase {
     /**
      * Run some checks on sizing.
      */
+    @Test
     public void testSizing() {
         BlockContainer container = new BlockContainer(new BorderArrangement());
         BufferedImage image = new BufferedImage(200, 100,
@@ -792,6 +780,7 @@ public class BorderArrangementTest extends TestCase {
      * blocks that is too wide, by default, for the available space, wasn't
      * shrinking the centre block as expected.
      */
+    @Test  
     public void testBugX() {
         RectangleConstraint constraint = new RectangleConstraint(
                 new Range(0.0, 200.0), new Range(0.0, 100.0));
@@ -814,8 +803,6 @@ public class BorderArrangementTest extends TestCase {
         size = container.arrange(g2, constraint);
         assertEquals(200.0, size.width, EPSILON);
         assertEquals(6.0, size.height, EPSILON);
-
-
     }
 }
 

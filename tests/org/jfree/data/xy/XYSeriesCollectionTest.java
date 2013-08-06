@@ -388,10 +388,11 @@ public class XYSeriesCollectionTest {
 
         try {
             s2.setKey("S1");
-            fail("Should have thrown IndexOutOfBoundsException on negative key");
+            fail("Should have thrown IllegalArgumentException on negative key");
         }
         catch (IllegalArgumentException e) {
-           assertEquals("java.beans.PropertyVetoException: Duplicate key", e.getMessage());
+           assertEquals("java.beans.PropertyVetoException: Duplicate key2", 
+                   e.getMessage());
         }
     }
 
@@ -436,6 +437,7 @@ public class XYSeriesCollectionTest {
         // next, check that setting a duplicate key fails
         try {
             series2.setKey("C");
+            fail("Expected an IllegalArgumentException.");
         }
         catch (IllegalArgumentException e) {
             // expected
