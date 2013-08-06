@@ -70,15 +70,6 @@ import org.jfree.chart.renderer.RendererPackageTests;
 import org.jfree.chart.renderer.xy.RendererXYPackageTests;
 import org.jfree.chart.title.TitlePackageTests;
 import org.jfree.chart.urls.UrlsPackageTests;
-import org.jfree.data.category.DataCategoryPackageTests;
-import org.jfree.data.function.DataFunctionPackageTests;
-import org.jfree.data.gantt.DataGanttPackageTests;
-import org.jfree.data.general.DataGeneralPackageTests;
-import org.jfree.data.DataPackageTests;
-import org.jfree.data.statistics.DataStatisticsPackageTests;
-import org.jfree.data.time.DataTimePackageTests;
-import org.jfree.data.time.ohlc.OHLCPackageTests;
-import org.jfree.data.xy.DataXYPackageTests;
 
 /**
  * A test suite for the JFreeChart class library that can be run using
@@ -107,15 +98,6 @@ public class JFreeChartTestSuite extends TestCase {
         suite.addTest(RendererXYPackageTests.suite());
         suite.addTest(TitlePackageTests.suite());
         suite.addTest(UrlsPackageTests.suite());
-        suite.addTest(DataPackageTests.suite());
-        suite.addTest(DataCategoryPackageTests.suite());
-        suite.addTest(DataFunctionPackageTests.suite());
-        suite.addTest(DataGanttPackageTests.suite());
-        suite.addTest(DataGeneralPackageTests.suite());
-        suite.addTest(DataStatisticsPackageTests.suite());
-        suite.addTest(DataTimePackageTests.suite());
-        suite.addTest(OHLCPackageTests.suite());
-        suite.addTest(DataXYPackageTests.suite());
          return suite;
     }
 
