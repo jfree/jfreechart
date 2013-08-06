@@ -42,9 +42,11 @@
 
 package org.jfree.chart.renderer.category;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtilities;
@@ -54,33 +56,17 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultIntervalCategoryDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link IntervalBarRenderer} class.
  */
-public class IntervalBarRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(IntervalBarRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public IntervalBarRendererTest(String name) {
-        super(name);
-    }
+public class IntervalBarRendererTest {
 
     /**
      * Problem that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
         IntervalBarRenderer r2 = new IntervalBarRenderer();
@@ -94,6 +80,7 @@ public class IntervalBarRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
         IntervalBarRenderer r2 = new IntervalBarRenderer();
@@ -106,6 +93,7 @@ public class IntervalBarRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
         IntervalBarRenderer r2 = (IntervalBarRenderer) r1.clone();
@@ -117,6 +105,7 @@ public class IntervalBarRendererTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -125,6 +114,7 @@ public class IntervalBarRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
         IntervalBarRenderer r2 = (IntervalBarRenderer) TestUtilities.serialised(r1);
@@ -135,6 +125,7 @@ public class IntervalBarRendererTest extends TestCase {
      * Draws the chart with a <code>null</code> info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
+    @Test
     public void testDrawWithNullInfo() {
         try {
             double[][] starts = new double[][] {{0.1, 0.2, 0.3},
@@ -158,6 +149,7 @@ public class IntervalBarRendererTest extends TestCase {
     /**
      * Some checks for the findRangeBounds() method.
      */
+    @Test
     public void testFindRangeBounds() {
         IntervalBarRenderer r = new IntervalBarRenderer();
         assertNull(r.findRangeBounds(null));

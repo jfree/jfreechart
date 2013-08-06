@@ -44,12 +44,14 @@
 
 package org.jfree.chart.renderer.category;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtilities;
@@ -60,33 +62,17 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.Range;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StatisticalBarRenderer} class.
  */
-public class StatisticalBarRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StatisticalBarRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StatisticalBarRendererTest(String name) {
-        super(name);
-    }
+public class StatisticalBarRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
         StatisticalBarRenderer r2 = new StatisticalBarRenderer();
@@ -106,6 +92,7 @@ public class StatisticalBarRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
         StatisticalBarRenderer r2 = new StatisticalBarRenderer();
@@ -118,6 +105,7 @@ public class StatisticalBarRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
         StatisticalBarRenderer r2 = (StatisticalBarRenderer) r1.clone();
@@ -129,6 +117,7 @@ public class StatisticalBarRendererTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -137,6 +126,7 @@ public class StatisticalBarRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
         StatisticalBarRenderer r2 = (StatisticalBarRenderer) 
@@ -148,6 +138,7 @@ public class StatisticalBarRendererTest extends TestCase {
      * Draws the chart with a <code>null</code> info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
+    @Test
     public void testDrawWithNullInfo() {
         try {
             DefaultStatisticalCategoryDataset dataset
@@ -171,6 +162,7 @@ public class StatisticalBarRendererTest extends TestCase {
      * no exceptions are thrown (particularly by code in the renderer).  See
      * bug report 1779941.
      */
+    @Test
     public void testDrawWithNullMeanVertical() {
         try {
             DefaultStatisticalCategoryDataset dataset
@@ -194,6 +186,7 @@ public class StatisticalBarRendererTest extends TestCase {
      * no exceptions are thrown (particularly by code in the renderer).  See
      * bug report 1779941.
      */
+    @Test
     public void testDrawWithNullMeanHorizontal() {
         try {
             DefaultStatisticalCategoryDataset dataset
@@ -218,6 +211,7 @@ public class StatisticalBarRendererTest extends TestCase {
      * that no exceptions are thrown (particularly by code in the renderer).
      * See bug report 1779941.
      */
+    @Test
     public void testDrawWithNullDeviationVertical() {
         try {
             DefaultStatisticalCategoryDataset dataset
@@ -241,6 +235,7 @@ public class StatisticalBarRendererTest extends TestCase {
      * that no exceptions are thrown (particularly by code in the renderer).
      * See bug report 1779941.
      */
+    @Test
     public void testDrawWithNullDeviationHorizontal() {
         try {
             DefaultStatisticalCategoryDataset dataset
@@ -263,6 +258,7 @@ public class StatisticalBarRendererTest extends TestCase {
     /**
      * Some checks for the findRangeBounds() method.
      */
+    @Test
     public void testFindRangeBounds() {
         StatisticalBarRenderer r = new StatisticalBarRenderer();
         assertNull(r.findRangeBounds(null));

@@ -43,12 +43,12 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -59,33 +59,17 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.Range;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StackedXYBarRenderer} class.
  */
-public class StackedXYBarRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StackedXYBarRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StackedXYBarRendererTest(String name) {
-        super(name);
-    }
+public class StackedXYBarRendererTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         StackedXYBarRenderer r2 = new StackedXYBarRenderer();
@@ -101,6 +85,7 @@ public class StackedXYBarRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         StackedXYBarRenderer r2 = new StackedXYBarRenderer();
@@ -118,6 +103,7 @@ public class StackedXYBarRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         StackedXYBarRenderer r2 = (StackedXYBarRenderer) r1.clone();
@@ -129,6 +115,7 @@ public class StackedXYBarRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -137,6 +124,7 @@ public class StackedXYBarRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         r1.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
@@ -149,9 +137,10 @@ public class StackedXYBarRendererTest extends TestCase {
     /**
      * Check that the renderer is calculating the domain bounds correctly.
      */
+    @Test
     public void testFindDomainBounds() {
         TableXYDataset dataset
-                = RendererXYPackageTests.createTestTableXYDataset();
+                = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset,
                 PlotOrientation.VERTICAL, false, false, false);
@@ -169,9 +158,10 @@ public class StackedXYBarRendererTest extends TestCase {
     /**
      * Check that the renderer is calculating the range bounds correctly.
      */
+    @Test
     public void testFindRangeBounds() {
         TableXYDataset dataset
-                = RendererXYPackageTests.createTestTableXYDataset();
+                = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset,
                 PlotOrientation.VERTICAL, false, false, false);

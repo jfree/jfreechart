@@ -44,13 +44,13 @@
 
 package org.jfree.chart;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.ChartChangeEvent;
@@ -65,37 +65,22 @@ import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Tests for a stacked bar chart.
  */
-public class StackedBarChartTest extends TestCase {
+public class StackedBarChartTest {
 
     /** A chart. */
     private JFreeChart chart;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StackedBarChartTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StackedBarChartTest(String name) {
-        super(name);
-    }
-
-    /**
      * Common test setup.
      */
-    protected void setUp() {
+    @Before
+    public void setUp() {
         this.chart = createChart();
     }
 
@@ -103,10 +88,8 @@ public class StackedBarChartTest extends TestCase {
      * Draws the chart with a null info object to make sure that no exceptions
      * are thrown (a problem that was occurring at one point).
      */
+    @Test
     public void testDrawWithNullInfo() {
-
-        boolean success = false;
-
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
@@ -114,19 +97,16 @@ public class StackedBarChartTest extends TestCase {
             this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
                     null);
             g2.dispose();
-            success = true;
         }
         catch (Exception e) {
-          success = false;
+          fail("There should be no exception.");
         }
-
-        assertTrue(success);
-
     }
 
     /**
      * Replaces the dataset and checks that it has changed as expected.
      */
+    @Test
     public void testReplaceDataset() {
 
         // create a dataset...
@@ -156,6 +136,7 @@ public class StackedBarChartTest extends TestCase {
      * Check that setting a tool tip generator for a series does override the
      * default generator.
      */
+    @Test
     public void testSetSeriesToolTipGenerator() {
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
@@ -170,6 +151,7 @@ public class StackedBarChartTest extends TestCase {
      * Check that setting a URL generator for a series does override the
      * default generator.
      */
+    @Test
     public void testSetSeriesURLGenerator() {
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
@@ -186,8 +168,6 @@ public class StackedBarChartTest extends TestCase {
      * @return The chart.
      */
     private static JFreeChart createChart() {
-
-        // create a dataset...
         Number[][] data = new Integer[][]
             {{new Integer(-3), new Integer(-2)},
              {new Integer(-1), new Integer(1)},
@@ -195,8 +175,6 @@ public class StackedBarChartTest extends TestCase {
 
         CategoryDataset dataset = DatasetUtilities.createCategoryDataset("S",
                 "C", data);
-
-        // create the chart...
         return ChartFactory.createStackedBarChart(
             "Stacked Bar Chart",  // chart title
             "Domain", "Range",

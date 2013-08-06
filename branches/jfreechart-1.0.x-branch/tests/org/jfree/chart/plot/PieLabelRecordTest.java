@@ -40,39 +40,23 @@
 
 package org.jfree.chart.plot;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.text.TextBox;
+import org.junit.Test;
 
 /**
- * Some tests for the {@link CategoryMarker} class.
+ * Some tests for the {@link PieLabelRecord} class.
  */
-public class PieLabelRecordTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(PieLabelRecordTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public PieLabelRecordTest(String name) {
-        super(name);
-    }
+public class PieLabelRecordTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         PieLabelRecord p1 = new PieLabelRecord("A", 1.0, 2.0, new TextBox("B"),
                 3.0, 4.0, 5.0);
@@ -121,6 +105,7 @@ public class PieLabelRecordTest extends TestCase {
     /**
      * Confirm that cloning is not implemented.
      */
+    @Test
     public void testCloning() {
         PieLabelRecord p1 = new PieLabelRecord("A", 1.0, 2.0, new TextBox("B"),
                 3.0, 4.0, 5.0);
@@ -130,6 +115,7 @@ public class PieLabelRecordTest extends TestCase {
    /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         PieLabelRecord p1 = new PieLabelRecord("A", 1.0, 2.0, new TextBox("B"),
                 3.0, 4.0, 5.0);

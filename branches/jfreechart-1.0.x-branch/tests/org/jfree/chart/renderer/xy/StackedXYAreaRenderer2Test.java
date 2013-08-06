@@ -43,13 +43,14 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -61,34 +62,18 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StackedXYAreaRenderer2} class.
  */
-public class StackedXYAreaRenderer2Test extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StackedXYAreaRenderer2Test.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StackedXYAreaRenderer2Test(String name) {
-        super(name);
-    }
+public class StackedXYAreaRenderer2Test {
 
     /**
      * Test chart drawing with an empty dataset to ensure that this special
      * case doesn't cause any exceptions.
      */
+    @Test
     public void testDrawWithEmptyDataset() {
         boolean success = false;
         JFreeChart chart = ChartFactory.createStackedXYAreaChart("title", "x",
@@ -113,6 +98,7 @@ public class StackedXYAreaRenderer2Test extends TestCase {
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
         StackedXYAreaRenderer2 r2 = new StackedXYAreaRenderer2();
@@ -128,6 +114,7 @@ public class StackedXYAreaRenderer2Test extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
         StackedXYAreaRenderer2 r2 = new StackedXYAreaRenderer2();
@@ -140,6 +127,7 @@ public class StackedXYAreaRenderer2Test extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
         StackedXYAreaRenderer2 r2 = (StackedXYAreaRenderer2) r1.clone();
@@ -151,6 +139,7 @@ public class StackedXYAreaRenderer2Test extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
         assertTrue(r1 instanceof PublicCloneable);
@@ -159,6 +148,7 @@ public class StackedXYAreaRenderer2Test extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
         StackedXYAreaRenderer2 r2 = (StackedXYAreaRenderer2) 
@@ -169,9 +159,10 @@ public class StackedXYAreaRenderer2Test extends TestCase {
     /**
      * Check that the renderer is calculating the range bounds correctly.
      */
+    @Test
     public void testFindRangeBounds() {
         TableXYDataset dataset
-                = RendererXYPackageTests.createTestTableXYDataset();
+                = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
                 false, false, false);

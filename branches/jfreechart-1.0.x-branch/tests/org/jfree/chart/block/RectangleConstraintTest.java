@@ -40,41 +40,23 @@
 
 package org.jfree.chart.block;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
 
 import org.jfree.data.Range;
 import org.jfree.ui.Size2D;
+import org.junit.Test;
 
 /**
  * Tests for the {@link RectangleConstraint} class.
  */
-public class RectangleConstraintTest extends TestCase {
+public class RectangleConstraintTest {
 
     private static final double EPSILON = 0.0000000001;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(RectangleConstraintTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public RectangleConstraintTest(String name) {
-        super(name);
-    }
-
-    /**
      * Run some checks on the constrained size calculation.
      */
+    @Test
     public void testCalculateConstrainedSize() {
         Size2D s;
 
@@ -152,6 +134,5 @@ public class RectangleConstraintTest extends TestCase {
         s = c9.calculateConstrainedSize(new Size2D(1.2, 3.4));
         assertEquals(s.width, 1.2, EPSILON);
         assertEquals(s.height, 9.9, EPSILON);
-
     }
 }

@@ -41,42 +41,27 @@
 
 package org.jfree.chart.renderer.category;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link LineRenderer3D} class.
  */
-public class LineRenderer3DTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LineRenderer3DTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public LineRenderer3DTest(String name) {
-        super(name);
-    }
+public class LineRenderer3DTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         LineRenderer3D r1 = new LineRenderer3D();
         LineRenderer3D r2 = new LineRenderer3D();
@@ -103,6 +88,7 @@ public class LineRenderer3DTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         LineRenderer3D r1 = new LineRenderer3D();
         LineRenderer3D r2 = new LineRenderer3D();
@@ -115,6 +101,7 @@ public class LineRenderer3DTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         LineRenderer3D r1 = new LineRenderer3D();
         LineRenderer3D r2 = (LineRenderer3D) r1.clone();
@@ -127,6 +114,7 @@ public class LineRenderer3DTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         LineRenderer3D r1 = new LineRenderer3D();
         assertTrue(r1 instanceof PublicCloneable);
@@ -231,6 +219,7 @@ public class LineRenderer3DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         LineRenderer3D r1 = new LineRenderer3D();
         LineRenderer3D r2 = (LineRenderer3D) TestUtilities.serialised(r1);

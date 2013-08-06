@@ -41,47 +41,32 @@
 
 package org.jfree.chart.title;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.util.SortOrder;
+import org.junit.Test;
 
 /**
  * Some tests for the {@link LegendTitle} class.
  */
-public class LegendTitleTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LegendTitleTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public LegendTitleTest(String name) {
-        super(name);
-    }
+public class LegendTitleTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         XYPlot plot1 = new XYPlot();
         LegendTitle t1 = new LegendTitle(plot1);
@@ -126,6 +111,7 @@ public class LegendTitleTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         XYPlot plot1 = new XYPlot();
         LegendTitle t1 = new LegendTitle(plot1);
@@ -139,6 +125,7 @@ public class LegendTitleTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYPlot plot = new XYPlot();
         Rectangle2D bounds1 = new Rectangle2D.Double(10.0, 20.0, 30.0, 40.0);
@@ -161,6 +148,7 @@ public class LegendTitleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYPlot plot = new XYPlot();
         LegendTitle t1 = new LegendTitle(plot);

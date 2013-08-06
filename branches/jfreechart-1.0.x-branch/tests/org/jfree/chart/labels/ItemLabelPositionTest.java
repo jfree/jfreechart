@@ -41,37 +41,20 @@
 
 package org.jfree.chart.labels;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link ItemLabelPosition} class.
  */
-public class ItemLabelPositionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ItemLabelPositionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ItemLabelPositionTest(String name) {
-        super(name);
-    }
+public class ItemLabelPositionTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         ItemLabelPosition p1 = new ItemLabelPosition();
         ItemLabelPosition p2 = new ItemLabelPosition();
@@ -81,6 +64,7 @@ public class ItemLabelPositionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         ItemLabelPosition p1 = new ItemLabelPosition();
         ItemLabelPosition p2 = (ItemLabelPosition) TestUtilities.serialised(p1);

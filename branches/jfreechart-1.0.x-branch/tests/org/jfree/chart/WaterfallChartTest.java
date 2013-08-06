@@ -40,13 +40,12 @@
 
 package org.jfree.chart;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
@@ -57,37 +56,22 @@ import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Some tests for a waterfall chart.
  */
-public class WaterfallChartTest extends TestCase {
+public class WaterfallChartTest {
 
     /** A chart. */
     private JFreeChart chart;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(WaterfallChartTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public WaterfallChartTest(String name) {
-        super(name);
-    }
-
-    /**
      * Common test setup.
      */
-    protected void setUp() {
+    @Before
+    public void setUp() {
         this.chart = createWaterfallChart();
     }
 
@@ -95,10 +79,8 @@ public class WaterfallChartTest extends TestCase {
      * Draws the chart with a null info object to make sure that no exceptions
      * are thrown (a problem that was occurring at one point).
      */
+    @Test
     public void testDrawWithNullInfo() {
-
-        boolean success = false;
-
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
@@ -106,20 +88,17 @@ public class WaterfallChartTest extends TestCase {
             this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
                     null);
             g2.dispose();
-            success = true;
         }
         catch (Exception e) {
-            success = false;
+            fail("There should be no exception.");
         }
-
-        assertTrue(success);
-
     }
 
     /**
      * Check that setting a tool tip generator for a series does override the
      * default generator.
      */
+    @Test
     public void testSetSeriesToolTipGenerator() {
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
@@ -134,6 +113,7 @@ public class WaterfallChartTest extends TestCase {
      * Check that setting a URL generator for a series does override the
      * default generator.
      */
+    @Test
     public void testSetSeriesURLGenerator() {
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
@@ -150,8 +130,6 @@ public class WaterfallChartTest extends TestCase {
      * @return The chart.
      */
     private static JFreeChart createWaterfallChart() {
-
-        // create a dataset...
         Number[][] data = new Integer[][]
             {{new Integer(-3), new Integer(-2)},
              {new Integer(-1), new Integer(1)},
@@ -159,8 +137,6 @@ public class WaterfallChartTest extends TestCase {
 
         CategoryDataset dataset = DatasetUtilities.createCategoryDataset("S",
                 "C", data);
-
-        // create the chart...
         return ChartFactory.createWaterfallChart(
             "Waterfall Chart",
             "Domain", "Range",

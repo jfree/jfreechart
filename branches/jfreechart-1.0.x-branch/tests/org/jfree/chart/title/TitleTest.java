@@ -41,42 +41,25 @@
 
 package org.jfree.chart.title;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.VerticalAlignment;
+import org.junit.Test;
 
 /**
  * Tests for the abstract {@link Title} class.
  */
-public class TitleTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(TitleTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public TitleTest(String name) {
-        super(name);
-    }
+public class TitleTest {
 
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
-
         // use the TextTitle class because it is a concrete subclass
         Title t1 = new TextTitle();
         Title t2 = new TextTitle();
@@ -101,12 +84,12 @@ public class TitleTest extends TestCase {
         assertFalse(t1.equals(t2));
         t2.setVisible(false);
         assertTrue(t1.equals(t2));
-
     }
 
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         TextTitle t1 = new TextTitle();
         TextTitle t2 = new TextTitle();

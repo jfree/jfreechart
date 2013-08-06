@@ -40,39 +40,22 @@
 
 package org.jfree.chart;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.awt.BasicStroke;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
+import org.junit.Test;
 
 /**
  * Some tests for the {@link StrokeMap} class.
  */
-public class StrokeMapTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StrokeMapTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StrokeMapTest(String name) {
-        super(name);
-    }
+public class StrokeMapTest {
 
     /**
      * Some checks for the getStroke() method.
      */
+    @Test
     public void testGetStroke() {
         StrokeMap m1 = new StrokeMap();
         assertEquals(null, m1.getStroke("A"));
@@ -95,6 +78,7 @@ public class StrokeMapTest extends TestCase {
     /**
      * Some checks for the put() method.
      */
+    @Test
     public void testPut() {
         StrokeMap m1 = new StrokeMap();
         m1.put("A", new BasicStroke(1.1f));
@@ -114,6 +98,7 @@ public class StrokeMapTest extends TestCase {
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         StrokeMap m1 = new StrokeMap();
         StrokeMap m2 = new StrokeMap();
@@ -141,6 +126,7 @@ public class StrokeMapTest extends TestCase {
     /**
      * Some checks for cloning.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StrokeMap m1 = new StrokeMap();
         StrokeMap m2 = (StrokeMap) m1.clone();
@@ -155,6 +141,7 @@ public class StrokeMapTest extends TestCase {
     /**
      * A check for serialization.
      */
+    @Test
     public void testSerialization1() {
         StrokeMap m1 = new StrokeMap();
         StrokeMap m2 = (StrokeMap) TestUtilities.serialised(m1);
@@ -164,6 +151,7 @@ public class StrokeMapTest extends TestCase {
     /**
      * A check for serialization.
      */
+    @Test
     public void testSerialization2() {
         StrokeMap m1 = new StrokeMap();
         m1.put("K1", new BasicStroke(1.1f));

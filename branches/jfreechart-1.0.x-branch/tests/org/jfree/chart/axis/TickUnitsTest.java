@@ -40,37 +40,21 @@
 
 package org.jfree.chart.axis;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link TickUnits} class.
  */
-public class TickUnitsTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(TickUnitsTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public TickUnitsTest(String name) {
-        super(name);
-    }
+public class TickUnitsTest {
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         TickUnits t1 = (TickUnits) NumberAxis.createIntegerTickUnits();
         TickUnits t2 = (TickUnits) TestUtilities.serialised(t1);
@@ -80,6 +64,7 @@ public class TickUnitsTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         TickUnits t1 = (TickUnits) NumberAxis.createIntegerTickUnits();
         TickUnits t2 = (TickUnits) t1.clone();
@@ -91,6 +76,7 @@ public class TickUnitsTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         TickUnits t1 = (TickUnits) NumberAxis.createIntegerTickUnits();
         TickUnits t2 = (TickUnits) NumberAxis.createIntegerTickUnits();

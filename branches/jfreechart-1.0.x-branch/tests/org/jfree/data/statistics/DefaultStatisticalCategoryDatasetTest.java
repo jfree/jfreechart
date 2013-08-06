@@ -53,6 +53,7 @@ import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DefaultStatisticalCategoryDataset} class.
@@ -62,6 +63,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * Some checks for the getRangeBounds() method.
      */
+    @Test
     public void testGetRangeBounds() {
         DefaultStatisticalCategoryDataset d
                 = new DefaultStatisticalCategoryDataset();
@@ -102,6 +104,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         DefaultStatisticalCategoryDataset d1
                 = new DefaultStatisticalCategoryDataset();
@@ -115,6 +118,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * Some checks for cloning.
      */
+    @Test
     public void testCloning() {
         DefaultStatisticalCategoryDataset d1
                 = new DefaultStatisticalCategoryDataset();
@@ -141,6 +145,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * Check serialization of a default instance.
      */
+    @Test
     public void testSerialization1() {
         DefaultStatisticalCategoryDataset d1
             = new DefaultStatisticalCategoryDataset();
@@ -156,6 +161,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * Check serialization of a more complex instance.
      */
+    @Test
     public void testSerialization2() {
         DefaultStatisticalCategoryDataset d1
             = new DefaultStatisticalCategoryDataset();
@@ -170,6 +176,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * Some checks for the add() method.
      */
+    @Test
     public void testAdd() {
         DefaultStatisticalCategoryDataset d1
                 = new DefaultStatisticalCategoryDataset();
@@ -186,6 +193,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * Some checks for the getRangeLowerBound() method.
      */
+    @Test
     public void testGetRangeLowerBound() {
         DefaultStatisticalCategoryDataset d1
                 = new DefaultStatisticalCategoryDataset();
@@ -197,6 +205,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * Some checks for the getRangeUpperBound() method.
      */
+    @Test
     public void testGetRangeUpperBound() {
         DefaultStatisticalCategoryDataset d1
                 = new DefaultStatisticalCategoryDataset();
@@ -208,6 +217,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * Some checks for the getRangeBounds() method.
      */
+    @Test
     public void testGetRangeBounds2() {
         DefaultStatisticalCategoryDataset d1
                 = new DefaultStatisticalCategoryDataset();
@@ -223,6 +233,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * Some checks for the remove method.
      */
+    @Test
     public void testRemove() {
         DefaultStatisticalCategoryDataset data
                 = new DefaultStatisticalCategoryDataset();
@@ -257,6 +268,7 @@ public class DefaultStatisticalCategoryDatasetTest {
     /**
      * A test for bug 3072674.
      */
+    @Test
     public void test3072674() {
         DefaultStatisticalCategoryDataset dataset
                 = new DefaultStatisticalCategoryDataset();

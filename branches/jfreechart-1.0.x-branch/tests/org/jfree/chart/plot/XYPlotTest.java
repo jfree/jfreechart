@@ -51,6 +51,11 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -61,10 +66,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -94,29 +95,12 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.date.MonthConstants;
 import org.jfree.ui.Layer;
 import org.jfree.ui.RectangleInsets;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYPlot} class.
  */
-public class XYPlotTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYPlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYPlotTest(String name) {
-        super(name);
-    }
+public class XYPlotTest {
 
 // FIXME: the getDatasetCount() method is returning a count of the slots
 // available for datasets, rather than the number of datasets actually
@@ -132,6 +116,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
 
         XYPlot plot1 = new XYPlot();
@@ -454,6 +439,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Confirm that basic cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot();
         XYPlot p2 = (XYPlot) p1.clone();
@@ -465,6 +451,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Tests cloning for a more complex plot.
      */
+    @Test
     public void testCloning2() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
@@ -484,6 +471,7 @@ public class XYPlotTest extends TestCase {
      * Tests cloning for a plot where the fixed legend items have been
      * specified.
      */
+    @Test
     public void testCloning3() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
@@ -503,6 +491,7 @@ public class XYPlotTest extends TestCase {
      * Tests cloning to ensure that the cloned plot is registered as a listener
      * on the cloned renderer.
      */
+    @Test
     public void testCloning4() throws CloneNotSupportedException {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
@@ -520,6 +509,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Confirm that cloning captures the quadrantOrigin field.
      */
+    @Test
     public void testCloning_QuadrantOrigin() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot();
         Point2D p = new Point2D.Double(1.2, 3.4);
@@ -534,6 +524,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Confirm that cloning captures the quadrantOrigin field.
      */
+    @Test
     public void testCloning_QuadrantPaint() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot();
         p1.setQuadrantPaint(3, new GradientPaint(1.0f, 2.0f, Color.red,
@@ -554,6 +545,7 @@ public class XYPlotTest extends TestCase {
      * Renderers that belong to the plot are being cloned but they are
      * retaining a reference to the original plot.
      */
+    @Test
     public void testBug2817504() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot();
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
@@ -571,6 +563,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Tests the independence of the clones.
      */
+    @Test
     public void testCloneIndependence() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
@@ -638,6 +631,7 @@ public class XYPlotTest extends TestCase {
      * Setting a null renderer should be allowed, but is generating a null
      * pointer exception in 0.9.7.
      */
+    @Test
     public void testSetNullRenderer() {
         boolean failed = false;
         try {
@@ -654,6 +648,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization1() {
         XYDataset data = new XYSeriesCollection();
         NumberAxis domainAxis = new NumberAxis("Domain");
@@ -668,6 +663,7 @@ public class XYPlotTest extends TestCase {
      * Serialize an instance, restore it, and check for equality.  This test
      * uses a {@link DateAxis} and a {@link StandardXYToolTipGenerator}.
      */
+    @Test
     public void testSerialization2() {
         IntervalXYDataset data1 = createDataset1();
         XYItemRenderer renderer1 = new XYBarRenderer(0.20);
@@ -688,6 +684,7 @@ public class XYPlotTest extends TestCase {
      * method following deserialization.  This test has been written to
      * reproduce the bug (now fixed).
      */
+    @Test
     public void testSerialization3() {
 
         XYSeriesCollection dataset = new XYSeriesCollection();
@@ -707,6 +704,7 @@ public class XYPlotTest extends TestCase {
      * A test to reproduce a bug in serialization: the domain and/or range
      * markers for a plot are not being serialized.
      */
+    @Test
     public void testSerialization4() {
 
         XYSeriesCollection dataset = new XYSeriesCollection();
@@ -732,6 +730,7 @@ public class XYPlotTest extends TestCase {
      * with the dataset(s) and axes after deserialization.  See patch 1209475
      * at SourceForge.
      */
+    @Test
     public void testSerialization5() {
         XYSeriesCollection dataset1 = new XYSeriesCollection();
         NumberAxis domainAxis1 = new NumberAxis("Domain 1");
@@ -774,6 +773,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Some checks for the getRendererForDataset() method.
      */
+    @Test
     public void testGetRendererForDataset() {
         XYDataset d0 = new XYSeriesCollection();
         XYDataset d1 = new XYSeriesCollection();
@@ -798,6 +798,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Some checks for the getLegendItems() method.
      */
+    @Test
     public void testGetLegendItems() {
         // check the case where there is a secondary dataset that doesn't
         // have a renderer (i.e. falls back to renderer 0)
@@ -859,6 +860,7 @@ public class XYPlotTest extends TestCase {
      * A test for a bug where setting the renderer doesn't register the plot
      * as a RendererChangeListener.
      */
+    @Test
     public void testSetRenderer() {
         XYPlot plot = new XYPlot();
         XYItemRenderer renderer = new XYLineAndShapeRenderer();
@@ -874,6 +876,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Some checks for the removeAnnotation() method.
      */
+    @Test
     public void testRemoveAnnotation() {
         XYPlot plot = new XYPlot();
         XYTextAnnotation a1 = new XYTextAnnotation("X", 1.0, 2.0);
@@ -897,6 +900,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Some tests for the addDomainMarker() method(s).
      */
+    @Test
     public void testAddDomainMarker() {
         XYPlot plot = new XYPlot();
         Marker m = new ValueMarker(1.0);
@@ -912,6 +916,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Some tests for the addRangeMarker() method(s).
      */
+    @Test
     public void testAddRangeMarker() {
         XYPlot plot = new XYPlot();
         Marker m = new ValueMarker(1.0);
@@ -928,6 +933,7 @@ public class XYPlotTest extends TestCase {
      * A test for bug 1654215 (where a renderer is added to the plot without
      * a corresponding dataset and it throws an exception at drawing time).
      */
+    @Test
     public void test1654215() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
@@ -950,6 +956,7 @@ public class XYPlotTest extends TestCase {
      * A test for drawing range grid lines when there is no primary renderer.
      * In 1.0.4, this is throwing a NullPointerException.
      */
+    @Test
     public void testDrawRangeGridlines() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
@@ -972,6 +979,7 @@ public class XYPlotTest extends TestCase {
      * A test for drawing a plot where a series has zero items.  With
      * JFreeChart 1.0.5+cvs this was throwing an exception at one point.
      */
+    @Test
     public void testDrawSeriesWithZeroItems() {
         DefaultXYDataset dataset = new DefaultXYDataset();
         dataset.addSeries("Series 1", new double[][] {{1.0, 2.0}, {3.0, 4.0}});
@@ -994,6 +1002,7 @@ public class XYPlotTest extends TestCase {
      * Check that removing a marker that isn't assigned to the plot returns
      * false.
      */
+    @Test
     public void testRemoveDomainMarker() {
         XYPlot plot = new XYPlot();
         assertFalse(plot.removeDomainMarker(new ValueMarker(0.5)));
@@ -1003,6 +1012,7 @@ public class XYPlotTest extends TestCase {
      * Check that removing a marker that isn't assigned to the plot returns
      * false.
      */
+    @Test
     public void testRemoveRangeMarker() {
         XYPlot plot = new XYPlot();
         assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
@@ -1011,6 +1021,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Some tests for the getDomainAxisForDataset() method.
      */
+    @Test
     public void testGetDomainAxisForDataset() {
         XYDataset dataset = new XYSeriesCollection();
         NumberAxis xAxis = new NumberAxis("X");
@@ -1062,6 +1073,7 @@ public class XYPlotTest extends TestCase {
     /**
      * Some tests for the getRangeAxisForDataset() method.
      */
+    @Test
     public void testGetRangeAxisForDataset() {
         XYDataset dataset = new XYSeriesCollection();
         NumberAxis xAxis = new NumberAxis("X");

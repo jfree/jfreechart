@@ -41,40 +41,25 @@
 
 package org.jfree.chart.plot.dial;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DialPointer} class.
  */
-public class DialPointerTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DialPointerTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DialPointerTest(String name) {
-        super(name);
-    }
+public class DialPointerTest {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         DialPointer i1 = new DialPointer.Pin(1);
         DialPointer i2 = new DialPointer.Pin(1);
@@ -96,6 +81,7 @@ public class DialPointerTest extends TestCase {
     /**
      * Check the equals() method for the DialPointer.Pin class.
      */
+    @Test
     public void testEqualsPin() {
         DialPointer.Pin p1 = new DialPointer.Pin();
         DialPointer.Pin p2 = new DialPointer.Pin();
@@ -116,6 +102,7 @@ public class DialPointerTest extends TestCase {
     /**
      * Check the equals() method for the DialPointer.Pointer class.
      */
+    @Test
     public void testEqualsPointer() {
         DialPointer.Pointer p1 = new DialPointer.Pointer();
         DialPointer.Pointer p2 = new DialPointer.Pointer();
@@ -135,6 +122,7 @@ public class DialPointerTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         DialPointer i1 = new DialPointer.Pin(1);
         DialPointer i2 = new DialPointer.Pin(1);
@@ -147,6 +135,7 @@ public class DialPointerTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DialPointer i1 = new DialPointer.Pin(1);
         DialPointer i2 = (DialPointer) i1.clone();
@@ -164,6 +153,7 @@ public class DialPointerTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         // test a default instance
         DialPointer i1 = new DialPointer.Pin(1);
@@ -174,6 +164,7 @@ public class DialPointerTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization2() {
         DialPointer i1 = new DialPointer.Pointer(1);
         DialPointer i2 = (DialPointer) TestUtilities.serialised(i1);

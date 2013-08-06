@@ -41,39 +41,23 @@
 
 package org.jfree.chart.urls;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StandardXYURLGenerator} class.
  */
-public class StandardXYURLGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StandardXYURLGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StandardXYURLGeneratorTest(String name) {
-        super(name);
-    }
+public class StandardXYURLGeneratorTest {
 
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StandardXYURLGenerator g1 = new StandardXYURLGenerator("index.html?");
         StandardXYURLGenerator g2 = (StandardXYURLGenerator) 
@@ -85,10 +69,10 @@ public class StandardXYURLGeneratorTest extends TestCase {
      * Checks that the class does not implement PublicCloneable (the generator
      * is immutable).
      */
+    @Test
     public void testPublicCloneable() {
         StandardXYURLGenerator g1 = new StandardXYURLGenerator("index.html?");
         assertFalse(g1 instanceof PublicCloneable);
     }
-
 
 }

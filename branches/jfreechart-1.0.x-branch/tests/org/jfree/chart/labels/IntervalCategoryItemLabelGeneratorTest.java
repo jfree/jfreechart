@@ -42,43 +42,28 @@
 
 package org.jfree.chart.labels;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link IntervalCategoryItemLabelGenerator} class.
  */
-public class IntervalCategoryItemLabelGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(IntervalCategoryItemLabelGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public IntervalCategoryItemLabelGeneratorTest(String name) {
-        super(name);
-    }
+public class IntervalCategoryItemLabelGeneratorTest {
 
     /**
      * Tests the equals() method.
      */
+    @Test
     public void testEquals() {
         IntervalCategoryItemLabelGenerator g1
                 = new IntervalCategoryItemLabelGenerator();
@@ -105,6 +90,7 @@ public class IntervalCategoryItemLabelGeneratorTest extends TestCase {
     /**
      * Simple check that hashCode is implemented.
      */
+    @Test
     public void testHashCode() {
         IntervalCategoryItemLabelGenerator g1
                 = new IntervalCategoryItemLabelGenerator();
@@ -117,6 +103,7 @@ public class IntervalCategoryItemLabelGeneratorTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         IntervalCategoryItemLabelGenerator g1
                 = new IntervalCategoryItemLabelGenerator();
@@ -130,6 +117,7 @@ public class IntervalCategoryItemLabelGeneratorTest extends TestCase {
     /**
      * Check to ensure that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         IntervalCategoryItemLabelGenerator g1
                 = new IntervalCategoryItemLabelGenerator();
@@ -139,6 +127,7 @@ public class IntervalCategoryItemLabelGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         IntervalCategoryItemLabelGenerator g1
                 = new IntervalCategoryItemLabelGenerator("{3} - {4}",

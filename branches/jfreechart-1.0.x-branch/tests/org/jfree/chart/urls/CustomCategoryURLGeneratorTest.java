@@ -40,41 +40,26 @@
 
 package org.jfree.chart.urls;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.util.List;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CustomCategoryURLGenerator} class.
  */
-public class CustomCategoryURLGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CustomCategoryURLGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CustomCategoryURLGeneratorTest(String name) {
-        super(name);
-    }
+public class CustomCategoryURLGeneratorTest {
 
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
         CustomCategoryURLGenerator g2 = new CustomCategoryURLGenerator();
@@ -96,6 +81,7 @@ public class CustomCategoryURLGeneratorTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
         List u1 = new java.util.ArrayList();
@@ -120,6 +106,7 @@ public class CustomCategoryURLGeneratorTest extends TestCase {
     /**
      * Checks that the class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
         assertTrue(g1 instanceof PublicCloneable);
@@ -128,6 +115,7 @@ public class CustomCategoryURLGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
 
         List u1 = new java.util.ArrayList();
@@ -151,6 +139,7 @@ public class CustomCategoryURLGeneratorTest extends TestCase {
     /**
      * Some checks for the addURLSeries() method.
      */
+    @Test
     public void testAddURLSeries() {
         CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
         // you can add a null list - it would have been better if this

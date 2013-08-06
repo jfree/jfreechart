@@ -40,41 +40,25 @@
 
 package org.jfree.chart.block;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.VerticalAlignment;
+import org.junit.Test;
 
 /**
  * Tests for the {@link ColumnArrangement} class.
  */
-public class ColumnArrangementTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ColumnArrangementTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ColumnArrangementTest(String name) {
-        super(name);
-    }
+public class ColumnArrangementTest {
 
     /**
      * Confirm that the equals() method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         ColumnArrangement c1 = new ColumnArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);
@@ -115,6 +99,7 @@ public class ColumnArrangementTest extends TestCase {
     /**
      * Immutable - cloning is not necessary.
      */
+    @Test
     public void testCloning() {
         FlowArrangement f1 = new FlowArrangement();
         assertFalse(f1 instanceof Cloneable);
@@ -123,6 +108,7 @@ public class ColumnArrangementTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         FlowArrangement f1 = new FlowArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);

@@ -41,42 +41,27 @@
 
 package org.jfree.chart.urls;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CustomPieURLGenerator} class.
  */
-public class CustomPieURLGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CustomPieURLGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CustomPieURLGeneratorTest(String name) {
-        super(name);
-    }
+public class CustomPieURLGeneratorTest {
 
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         CustomPieURLGenerator g2 = new CustomPieURLGenerator();
@@ -93,6 +78,7 @@ public class CustomPieURLGeneratorTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         Map m1 = new HashMap();
@@ -113,6 +99,7 @@ public class CustomPieURLGeneratorTest extends TestCase {
     /**
      * Checks that the class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         assertTrue(g1 instanceof PublicCloneable);
@@ -121,6 +108,7 @@ public class CustomPieURLGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
         Map m1 = new HashMap();

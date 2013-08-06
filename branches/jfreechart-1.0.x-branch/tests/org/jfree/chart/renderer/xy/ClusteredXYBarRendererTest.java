@@ -43,43 +43,27 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultIntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link ClusteredXYBarRenderer} class.
  */
-public class ClusteredXYBarRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ClusteredXYBarRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public ClusteredXYBarRendererTest(String name) {
-        super(name);
-    }
+public class ClusteredXYBarRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
         ClusteredXYBarRenderer r2 = new ClusteredXYBarRenderer();
@@ -100,6 +84,7 @@ public class ClusteredXYBarRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
         ClusteredXYBarRenderer r2 = new ClusteredXYBarRenderer();
@@ -112,6 +97,7 @@ public class ClusteredXYBarRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
         ClusteredXYBarRenderer r2 = (ClusteredXYBarRenderer) r1.clone();
@@ -123,6 +109,7 @@ public class ClusteredXYBarRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -131,6 +118,7 @@ public class ClusteredXYBarRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
         ClusteredXYBarRenderer r2 = (ClusteredXYBarRenderer) 
@@ -144,6 +132,7 @@ public class ClusteredXYBarRendererTest extends TestCase {
      * Some checks for the findDomainBounds() method (which requires special
      * handling when the centerBarAtStartValue flag is set to true).
      */
+    @Test
     public void testFindDomainBounds() {
         AbstractXYItemRenderer renderer = new ClusteredXYBarRenderer();
         XYDataset dataset = createSampleDataset1();

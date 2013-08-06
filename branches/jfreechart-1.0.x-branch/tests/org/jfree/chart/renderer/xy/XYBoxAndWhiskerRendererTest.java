@@ -44,15 +44,17 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Date;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -60,33 +62,17 @@ import org.jfree.chart.TestUtilities;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYBoxAndWhiskerRenderer} class.
  */
-public class XYBoxAndWhiskerRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYBoxAndWhiskerRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYBoxAndWhiskerRendererTest(String name) {
-        super(name);
-    }
+public class XYBoxAndWhiskerRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         XYBoxAndWhiskerRenderer r2 = new XYBoxAndWhiskerRenderer();
@@ -131,6 +117,7 @@ public class XYBoxAndWhiskerRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         XYBoxAndWhiskerRenderer r2 = new XYBoxAndWhiskerRenderer();
@@ -143,6 +130,7 @@ public class XYBoxAndWhiskerRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         XYBoxAndWhiskerRenderer r2 = (XYBoxAndWhiskerRenderer) r1.clone();
@@ -154,6 +142,7 @@ public class XYBoxAndWhiskerRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -162,6 +151,7 @@ public class XYBoxAndWhiskerRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         XYBoxAndWhiskerRenderer r2 = (XYBoxAndWhiskerRenderer) 
@@ -172,6 +162,7 @@ public class XYBoxAndWhiskerRendererTest extends TestCase {
     /**
      * A test for bug report 2909215.
      */
+    @Test
     public void test2909215() {
         DefaultBoxAndWhiskerXYDataset d1 = new DefaultBoxAndWhiskerXYDataset(
                 "Series");

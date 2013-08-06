@@ -49,10 +49,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYSeries;
@@ -63,55 +59,7 @@ import org.jfree.data.xy.XYSeriesCollection;
  * <P>
  * These tests can be run using JUnit (http://www.junit.org).
  */
-public class RendererXYPackageTests extends TestCase {
-
-    /**
-     * Returns a test suite to the JUnit test runner.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        TestSuite suite = new TestSuite("org.jfree.chart.renderer.xy");
-        suite.addTestSuite(AbstractXYItemRendererTest.class);
-        suite.addTestSuite(CandlestickRendererTest.class);
-        suite.addTestSuite(ClusteredXYBarRendererTest.class);
-        suite.addTestSuite(DeviationRendererTest.class);
-        suite.addTestSuite(GradientXYBarPainterTest.class);
-        suite.addTestSuite(HighLowRendererTest.class);
-        suite.addTestSuite(StackedXYAreaRendererTest.class);
-        suite.addTestSuite(StackedXYAreaRenderer2Test.class);
-        suite.addTestSuite(StackedXYBarRendererTest.class);
-        suite.addTestSuite(StandardXYBarPainterTest.class);
-        suite.addTestSuite(StandardXYItemRendererTest.class);
-        suite.addTestSuite(VectorRendererTest.class);
-        suite.addTestSuite(WindItemRendererTest.class);
-        suite.addTestSuite(XYAreaRendererTest.class);
-        suite.addTestSuite(XYAreaRenderer2Test.class);
-        suite.addTestSuite(XYBarRendererTest.class);
-        suite.addTestSuite(XYBlockRendererTest.class);
-        suite.addTestSuite(XYBoxAndWhiskerRendererTest.class);
-        suite.addTestSuite(XYBubbleRendererTest.class);
-        suite.addTestSuite(XYDifferenceRendererTest.class);
-        suite.addTestSuite(XYDotRendererTest.class);
-        suite.addTestSuite(XYErrorRendererTest.class);
-        suite.addTestSuite(XYLineAndShapeRendererTest.class);
-        suite.addTestSuite(XYLine3DRendererTest.class);
-        suite.addTestSuite(XYShapeRendererTest.class);
-        suite.addTestSuite(XYSplineRendererTest.class);
-        suite.addTestSuite(XYStepRendererTest.class);
-        suite.addTestSuite(XYStepAreaRendererTest.class);
-        suite.addTestSuite(YIntervalRendererTest.class);
-        return suite;
-    }
-
-    /**
-     * Constructs the test suite.
-     *
-     * @param name  the suite name.
-     */
-    public RendererXYPackageTests(String name) {
-        super(name);
-    }
+public class RendererXYPackageUtils {
 
     /**
      * Creates and returns a sample dataset for testing purposes.
@@ -147,15 +95,6 @@ public class RendererXYPackageTests extends TestCase {
         result.addSeries(series1);
         result.addSeries(series2);
         return result;
-    }
-
-    /**
-     * Runs the test suite using JUnit's text-based runner.
-     *
-     * @param args  ignored.
-     */
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
     }
 
 }

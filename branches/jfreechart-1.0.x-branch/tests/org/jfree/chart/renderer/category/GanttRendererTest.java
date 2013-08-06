@@ -42,42 +42,27 @@
 
 package org.jfree.chart.renderer.category;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link GanttRenderer} class.
  */
-public class GanttRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(GanttRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public GanttRendererTest(String name) {
-        super(name);
-    }
+public class GanttRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         GanttRenderer r1 = new GanttRenderer();
         GanttRenderer r2 = new GanttRenderer();
@@ -107,6 +92,7 @@ public class GanttRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         GanttRenderer r1 = new GanttRenderer();
         GanttRenderer r2 = new GanttRenderer();
@@ -119,6 +105,7 @@ public class GanttRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         GanttRenderer r1 = new GanttRenderer();
         GanttRenderer r2 = (GanttRenderer) r1.clone();
@@ -130,6 +117,7 @@ public class GanttRendererTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         GanttRenderer r1 = new GanttRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -138,6 +126,7 @@ public class GanttRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         GanttRenderer r1 = new GanttRenderer();
         r1.setCompletePaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,

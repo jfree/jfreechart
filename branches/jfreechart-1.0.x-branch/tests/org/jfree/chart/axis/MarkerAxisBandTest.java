@@ -41,40 +41,24 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Font;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
-
+import org.junit.Test;
 
 /**
  * Tests for the {@link MarkerAxisBand} class.
  */
-public class MarkerAxisBandTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MarkerAxisBandTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public MarkerAxisBandTest(String name) {
-        super(name);
-    }
+public class MarkerAxisBandTest {
 
     /**
      * Test that the equals() method can distinguish all fields.
      */
+    @Test
     public void testEquals() {
         Font font1 = new Font("SansSerif", Font.PLAIN, 12);
         Font font2 = new Font("SansSerif", Font.PLAIN, 14);
@@ -112,6 +96,7 @@ public class MarkerAxisBandTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         Font font1 = new Font("SansSerif", Font.PLAIN, 12);
 
@@ -126,6 +111,7 @@ public class MarkerAxisBandTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         MarkerAxisBand a1 = new MarkerAxisBand(null, 1.0, 1.0, 1.0, 1.0, null);
         MarkerAxisBand a2 = (MarkerAxisBand) TestUtilities.serialised(a1);

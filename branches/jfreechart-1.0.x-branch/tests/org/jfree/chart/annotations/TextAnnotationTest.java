@@ -43,47 +43,31 @@
 
 package org.jfree.chart.annotations;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.event.AnnotationChangeListener;
 import org.jfree.ui.TextAnchor;
+import org.junit.Test;
 
 /**
  * Tests for the {@link TextAnnotation} class.
  */
-public class TextAnnotationTest extends TestCase 
-        implements AnnotationChangeListener {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(TextAnnotationTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public TextAnnotationTest(String name) {
-        super(name);
-    }
+public class TextAnnotationTest implements AnnotationChangeListener {
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
-
         TextAnnotation a1 = new CategoryTextAnnotation("Test", "Category", 1.0);
         TextAnnotation a2 = new CategoryTextAnnotation("Test", "Category", 1.0);
         assertTrue(a1.equals(a2));
@@ -125,12 +109,12 @@ public class TextAnnotationTest extends TestCase
         assertFalse(a1.equals(a2));
         a2.setRotationAngle(Math.PI);
         assertTrue(a1.equals(a2));
-
     }
 
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         TextAnnotation a1 = new CategoryTextAnnotation("Test", "Category", 1.0);
         TextAnnotation a2 = new CategoryTextAnnotation("Test", "Category", 1.0);
@@ -143,6 +127,7 @@ public class TextAnnotationTest extends TestCase
     /**
      * Test null-argument (Bug #3428870).
      */
+    @Test
     public void testSetRotationAnchor() {
         TextAnnotation a = new CategoryTextAnnotation("Test", "Category", 1.0);
         try {
@@ -156,6 +141,7 @@ public class TextAnnotationTest extends TestCase
     /**
      * Some tests to ensure that change events are generated as expected.
      */
+    @Test
     public void testChangeEvents() {
         TextAnnotation a = new CategoryTextAnnotation("Test", "A", 1.0);
         a.addChangeListener(this);

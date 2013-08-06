@@ -45,11 +45,11 @@
 
 package org.jfree.chart.renderer.xy;
 
-import java.awt.geom.Rectangle2D;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -69,33 +69,17 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.StandardGradientPaintTransformer;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link XYBarRenderer} class.
  */
-public class XYBarRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYBarRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYBarRendererTest(String name) {
-        super(name);
-    }
+public class XYBarRendererTest {
 
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
 
         // default instances
@@ -183,6 +167,7 @@ public class XYBarRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         XYBarRenderer r1 = new XYBarRenderer();
         XYBarRenderer r2 = new XYBarRenderer();
@@ -195,6 +180,7 @@ public class XYBarRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYBarRenderer r1 = new XYBarRenderer();
         Rectangle2D rect = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
@@ -214,6 +200,7 @@ public class XYBarRendererTest extends TestCase {
     /**
      * Verify that this class implements {@link PublicCloneable}.
      */
+    @Test
     public void testPublicCloneable() {
         XYBarRenderer r1 = new XYBarRenderer();
         assertTrue(r1 instanceof PublicCloneable);
@@ -222,6 +209,7 @@ public class XYBarRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYBarRenderer r1 = new XYBarRenderer();
         XYBarRenderer r2 = (XYBarRenderer) TestUtilities.serialised(r1);
@@ -231,6 +219,7 @@ public class XYBarRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization2() {
         XYBarRenderer r1 = new XYBarRenderer();
         r1.setPositiveItemLabelPositionFallback(new ItemLabelPosition());
@@ -241,9 +230,10 @@ public class XYBarRendererTest extends TestCase {
     /**
      * Check that the renderer is calculating the domain bounds correctly.
      */
+    @Test
     public void testFindDomainBounds() {
         XYSeriesCollection dataset
-                = RendererXYPackageTests.createTestXYSeriesCollection();
+                = RendererXYPackageUtils.createTestXYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYBarChart("Test Chart", "X",
                 false, "Y", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
@@ -261,6 +251,7 @@ public class XYBarRendererTest extends TestCase {
      * A test for the findDomainBounds method to ensure it correctly accounts 
      * for the series visibility.
      */
+    @Test
     public void testFindDomainBounds2() {
         XYIntervalSeries s1 = new XYIntervalSeries("S1");
         s1.add(1.0, 0.5, 1.5, 10.0, 9.5, 10.5);
@@ -288,6 +279,7 @@ public class XYBarRendererTest extends TestCase {
     /**
      * A simple test for the findRangeBounds() method.
      */
+    @Test
     public void testFindRangeBounds() {
         DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
         double[] x = {1.0, 2.0, 3.0, 4.0};
@@ -314,6 +306,7 @@ public class XYBarRendererTest extends TestCase {
      * A test for the findRangeBounds method to ensure it correctly accounts 
      * for the series visibility.
      */
+    @Test
     public void testFindRangeBounds2() {
         XYIntervalSeries s1 = new XYIntervalSeries("S1");
         s1.add(1.0, 0.5, 1.5, 10.0, 9.5, 10.5);
@@ -341,6 +334,7 @@ public class XYBarRendererTest extends TestCase {
      * A check for the datasetIndex and seriesIndex fields in the LegendItem
      * returned by the getLegendItem() method.
      */
+    @Test
     public void testGetLegendItemSeriesIndex() {
         XYSeriesCollection d1 = new XYSeriesCollection();
         XYSeries s1 = new XYSeries("S1");

@@ -41,41 +41,26 @@
 
 package org.jfree.chart.labels;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.text.DecimalFormat;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link BoxAndWhiskerToolTipGenerator} class.
  */
-public class BoxAndWhiskerToolTipGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BoxAndWhiskerToolTipGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public BoxAndWhiskerToolTipGeneratorTest(String name) {
-        super(name);
-    }
+public class BoxAndWhiskerToolTipGeneratorTest {
 
     /**
      * A series of tests for the equals() method.
      */
+    @Test
     public void testEquals() {
 
         // standard test
@@ -105,6 +90,7 @@ public class BoxAndWhiskerToolTipGeneratorTest extends TestCase {
     /**
      * Simple check that hashCode is implemented.
      */
+    @Test
     public void testHashCode() {
         BoxAndWhiskerToolTipGenerator g1 = new BoxAndWhiskerToolTipGenerator();
         BoxAndWhiskerToolTipGenerator g2 = new BoxAndWhiskerToolTipGenerator();
@@ -115,6 +101,7 @@ public class BoxAndWhiskerToolTipGeneratorTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         BoxAndWhiskerToolTipGenerator g1 = new BoxAndWhiskerToolTipGenerator();
         BoxAndWhiskerToolTipGenerator g2 = (BoxAndWhiskerToolTipGenerator) g1.clone();
@@ -126,6 +113,7 @@ public class BoxAndWhiskerToolTipGeneratorTest extends TestCase {
     /**
      * Check to ensure that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         BoxAndWhiskerToolTipGenerator g1 = new BoxAndWhiskerToolTipGenerator();
         assertTrue(g1 instanceof PublicCloneable);
@@ -134,6 +122,7 @@ public class BoxAndWhiskerToolTipGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         BoxAndWhiskerToolTipGenerator g1 = new BoxAndWhiskerToolTipGenerator();
         BoxAndWhiskerToolTipGenerator g2 = (BoxAndWhiskerToolTipGenerator) 

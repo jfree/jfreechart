@@ -41,46 +41,31 @@
 
 package org.jfree.chart.labels;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link BubbleXYItemLabelGenerator} class.
  */
-public class BubbleXYItemLabelGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BubbleXYItemLabelGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public BubbleXYItemLabelGeneratorTest(String name) {
-        super(name);
-    }
+public class BubbleXYItemLabelGeneratorTest {
 
     /**
      * A series of tests for the equals() method.
      */
+    @Test
     public void testEquals() {
 
         // some setup...
@@ -152,6 +137,7 @@ public class BubbleXYItemLabelGeneratorTest extends TestCase {
     /**
      * Simple check that hashCode is implemented.
      */
+    @Test
     public void testHashCode() {
         BubbleXYItemLabelGenerator g1
                 = new BubbleXYItemLabelGenerator();
@@ -164,6 +150,7 @@ public class BubbleXYItemLabelGeneratorTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         BubbleXYItemLabelGenerator g1 = new BubbleXYItemLabelGenerator();
         BubbleXYItemLabelGenerator g2 = (BubbleXYItemLabelGenerator) g1.clone();
@@ -175,6 +162,7 @@ public class BubbleXYItemLabelGeneratorTest extends TestCase {
     /**
      * Check to ensure that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         BubbleXYItemLabelGenerator g1 = new BubbleXYItemLabelGenerator();
         assertTrue(g1 instanceof PublicCloneable);
@@ -183,6 +171,7 @@ public class BubbleXYItemLabelGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         BubbleXYItemLabelGenerator g1 = new BubbleXYItemLabelGenerator();
         BubbleXYItemLabelGenerator g2 = (BubbleXYItemLabelGenerator) 
@@ -193,6 +182,7 @@ public class BubbleXYItemLabelGeneratorTest extends TestCase {
     /**
      * Some checks for the testGenerateLabel() method.
      */
+    @Test
     public void testGenerateLabel() {
         // check handling when the dataset is a regular XYDataset, not an
         // XYZDataset...

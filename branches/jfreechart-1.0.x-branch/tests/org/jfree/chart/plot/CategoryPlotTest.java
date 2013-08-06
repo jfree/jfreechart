@@ -51,6 +51,11 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -61,10 +66,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -91,33 +92,17 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.Layer;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.SortOrder;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CategoryPlot} class.
  */
-public class CategoryPlotTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CategoryPlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CategoryPlotTest(String name) {
-        super(name);
-    }
+public class CategoryPlotTest {
 
     /**
      * Some checks for the constructor.
      */
+    @Test
     public void testConstructor() {
         CategoryPlot plot = new CategoryPlot();
         assertEquals(RectangleInsets.ZERO_INSETS, plot.getAxisOffset());
@@ -126,6 +111,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * A test for a bug reported in the forum.
      */
+    @Test
     public void testAxisRange() {
         DefaultCategoryDataset datasetA = new DefaultCategoryDataset();
         DefaultCategoryDataset datasetB = new DefaultCategoryDataset();
@@ -142,6 +128,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Test that the equals() method differentiates all the required fields.
      */
+    @Test
     public void testEquals() {
 
         CategoryPlot plot1 = new CategoryPlot();
@@ -498,6 +485,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() {
         CategoryPlot p1 = new CategoryPlot();
         p1.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.white,
@@ -550,6 +538,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Some more cloning checks.
      */
+    @Test
     public void testCloning2() {
         AxisSpace da1 = new AxisSpace();
         AxisSpace ra1 = new AxisSpace();
@@ -582,6 +571,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Some more cloning checks.
      */
+    @Test
     public void testCloning3() {
         LegendItemCollection c1 = new LegendItemCollection();
         CategoryPlot p1 = new CategoryPlot();
@@ -616,6 +606,7 @@ public class CategoryPlotTest extends TestCase {
      * Renderers that belong to the plot are being cloned but they are
      * retaining a reference to the original plot.
      */
+    @Test
     public void testBug2817504() {
         CategoryPlot p1 = new CategoryPlot();
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
@@ -640,6 +631,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         CategoryAxis domainAxis = new CategoryAxis("Domain");
@@ -655,6 +647,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization2() {
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         CategoryAxis domainAxis = new CategoryAxis("Domain");
@@ -670,6 +663,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization3() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         JFreeChart chart = ChartFactory.createBarChart(
@@ -689,6 +683,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * This test ensures that a plot with markers is serialized correctly.
      */
+    @Test
     public void testSerialization4() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         JFreeChart chart = ChartFactory.createBarChart(
@@ -714,6 +709,7 @@ public class CategoryPlotTest extends TestCase {
      * with the dataset(s) and axes after deserialization.  See patch 1209475
      * at SourceForge.
      */
+    @Test
     public void testSerialization5() {
         DefaultCategoryDataset dataset1 = new DefaultCategoryDataset();
         CategoryAxis domainAxis1 = new CategoryAxis("Domain 1");
@@ -758,6 +754,7 @@ public class CategoryPlotTest extends TestCase {
      * A test for a bug where setting the renderer doesn't register the plot
      * as a RendererChangeListener.
      */
+    @Test
     public void testSetRenderer() {
         CategoryPlot plot = new CategoryPlot();
         CategoryItemRenderer renderer = new LineAndShapeRenderer();
@@ -773,6 +770,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * A test for bug report 1169972.
      */
+    @Test
     public void test1169972() {
         CategoryPlot plot = new CategoryPlot(null, null, null, null);
         plot.setDomainAxis(new CategoryAxis("C"));
@@ -785,6 +783,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Some tests for the addDomainMarker() method(s).
      */
+    @Test
     public void testAddDomainMarker() {
         CategoryPlot plot = new CategoryPlot();
         CategoryMarker m = new CategoryMarker("C1");
@@ -800,6 +799,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Some tests for the addRangeMarker() method(s).
      */
+    @Test
     public void testAddRangeMarker() {
         CategoryPlot plot = new CategoryPlot();
         Marker m = new ValueMarker(1.0);
@@ -816,6 +816,7 @@ public class CategoryPlotTest extends TestCase {
      * A test for bug 1654215 (where a renderer is added to the plot without
      * a corresponding dataset and it throws an exception at drawing time).
      */
+    @Test
     public void test1654215() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         JFreeChart chart = ChartFactory.createLineChart("Title", "X", "Y",
@@ -837,6 +838,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Some checks for the getDomainAxisIndex() method.
      */
+    @Test
     public void testGetDomainAxisIndex() {
         CategoryAxis domainAxis1 = new CategoryAxis("X1");
         CategoryAxis domainAxis2 = new CategoryAxis("X2");
@@ -861,6 +863,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Some checks for the getRangeAxisIndex() method.
      */
+    @Test
     public void testGetRangeAxisIndex() {
         CategoryAxis domainAxis1 = new CategoryAxis("X1");
         NumberAxis rangeAxis1 = new NumberAxis("Y1");
@@ -886,6 +889,7 @@ public class CategoryPlotTest extends TestCase {
      * Check that removing a marker that isn't assigned to the plot returns
      * false.
      */
+    @Test
     public void testRemoveDomainMarker() {
         CategoryPlot plot = new CategoryPlot();
         assertFalse(plot.removeDomainMarker(new CategoryMarker("Category 1")));
@@ -895,6 +899,7 @@ public class CategoryPlotTest extends TestCase {
      * Check that removing a marker that isn't assigned to the plot returns
      * false.
      */
+    @Test
     public void testRemoveRangeMarker() {
         CategoryPlot plot = new CategoryPlot();
         assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
@@ -903,6 +908,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Some tests for the getDomainAxisForDataset() method.
      */
+    @Test
     public void testGetDomainAxisForDataset() {
         CategoryDataset dataset = new DefaultCategoryDataset();
         CategoryAxis xAxis = new CategoryAxis("X");
@@ -944,6 +950,7 @@ public class CategoryPlotTest extends TestCase {
     /**
      * Some tests for the getRangeAxisForDataset() method.
      */
+    @Test
     public void testGetRangeAxisForDataset() {
         CategoryDataset dataset = new DefaultCategoryDataset();
         CategoryAxis xAxis = new CategoryAxis("X");

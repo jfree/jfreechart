@@ -43,10 +43,9 @@
 
 package org.jfree.chart.renderer.category;
 
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -56,33 +55,17 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CategoryStepRenderer} class.
  */
-public class CategoryStepRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CategoryStepRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CategoryStepRendererTest(String name) {
-        super(name);
-    }
+public class CategoryStepRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         CategoryStepRenderer r1 = new CategoryStepRenderer(false);
         CategoryStepRenderer r2 = new CategoryStepRenderer(false);
@@ -97,6 +80,7 @@ public class CategoryStepRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         CategoryStepRenderer r1 = new CategoryStepRenderer(false);
         CategoryStepRenderer r2 = (CategoryStepRenderer) r1.clone();
@@ -108,6 +92,7 @@ public class CategoryStepRendererTest extends TestCase {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         CategoryStepRenderer r1 = new CategoryStepRenderer(false);
         assertTrue(r1 instanceof PublicCloneable);
@@ -116,6 +101,7 @@ public class CategoryStepRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         CategoryStepRenderer r1 = new CategoryStepRenderer();
         CategoryStepRenderer r2 = (CategoryStepRenderer) 
@@ -127,6 +113,7 @@ public class CategoryStepRendererTest extends TestCase {
      * A check for the datasetIndex and seriesIndex fields in the LegendItem
      * returned by the getLegendItem() method.
      */
+    @Test
     public void testGetLegendItemSeriesIndex() {
         DefaultCategoryDataset dataset0 = new DefaultCategoryDataset();
         dataset0.addValue(21.0, "R1", "C1");

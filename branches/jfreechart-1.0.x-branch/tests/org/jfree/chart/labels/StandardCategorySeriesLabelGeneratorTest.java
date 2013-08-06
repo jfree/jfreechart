@@ -41,40 +41,25 @@
 
 package org.jfree.chart.labels;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link StandardCategorySeriesLabelGenerator} class.
  */
-public class StandardCategorySeriesLabelGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StandardCategorySeriesLabelGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StandardCategorySeriesLabelGeneratorTest(String name) {
-        super(name);
-    }
+public class StandardCategorySeriesLabelGeneratorTest {
 
     /**
      * Some checks for the generalLabel() method.
      */
+    @Test
     public void testGenerateLabel() {
         StandardCategorySeriesLabelGenerator g
                 = new StandardCategorySeriesLabelGenerator("{0}");
@@ -90,6 +75,7 @@ public class StandardCategorySeriesLabelGeneratorTest extends TestCase {
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator();
@@ -107,6 +93,7 @@ public class StandardCategorySeriesLabelGeneratorTest extends TestCase {
     /**
      * Simple check that hashCode is implemented.
      */
+    @Test
     public void testHashCode() {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator();
@@ -119,6 +106,7 @@ public class StandardCategorySeriesLabelGeneratorTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator("{1}");
@@ -132,6 +120,7 @@ public class StandardCategorySeriesLabelGeneratorTest extends TestCase {
     /**
      * Check to ensure that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator("{1}");
@@ -141,6 +130,7 @@ public class StandardCategorySeriesLabelGeneratorTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator("{2}");

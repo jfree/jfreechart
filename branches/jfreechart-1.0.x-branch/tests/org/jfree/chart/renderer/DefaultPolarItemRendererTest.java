@@ -41,37 +41,22 @@
 
 package org.jfree.chart.renderer;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link DefaultPolarItemRenderer} class.
  */
-public class DefaultPolarItemRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DefaultPolarItemRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public DefaultPolarItemRendererTest(String name) {
-        super(name);
-    }
+public class DefaultPolarItemRendererTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         DefaultPolarItemRenderer r1 = new DefaultPolarItemRenderer();
         DefaultPolarItemRenderer r2 = new DefaultPolarItemRenderer();
@@ -87,6 +72,7 @@ public class DefaultPolarItemRendererTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         DefaultPolarItemRenderer r1 = new DefaultPolarItemRenderer();
         DefaultPolarItemRenderer r2 = new DefaultPolarItemRenderer();
@@ -99,6 +85,7 @@ public class DefaultPolarItemRendererTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultPolarItemRenderer r1 = new DefaultPolarItemRenderer();
         DefaultPolarItemRenderer r2 = (DefaultPolarItemRenderer) r1.clone();
@@ -116,6 +103,7 @@ public class DefaultPolarItemRendererTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultPolarItemRenderer r1 = new DefaultPolarItemRenderer();
         DefaultPolarItemRenderer r2 = (DefaultPolarItemRenderer) 

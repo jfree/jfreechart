@@ -46,6 +46,11 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -56,10 +61,6 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -74,33 +75,17 @@ import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
+import org.junit.Test;
 
 /**
  * Some tests for the {@link PiePlot} class.
  */
-public class PiePlotTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(PiePlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public PiePlotTest(String name) {
-        super(name);
-    }
+public class PiePlotTest {
 
     /**
      * Test the equals() method.
      */
+    @Test
     public void testEquals() {
 
         PiePlot plot1 = new PiePlot();
@@ -448,6 +433,7 @@ public class PiePlotTest extends TestCase {
     /**
      * Some basic checks for the clone() method.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         PiePlot p1 = new PiePlot();
         PiePlot p2 = (PiePlot) p1.clone();
@@ -459,6 +445,7 @@ public class PiePlotTest extends TestCase {
     /**
      * Check cloning of the urlGenerator field.
      */
+    @Test
     public void testCloning_URLGenerator() throws CloneNotSupportedException {
         CustomPieURLGenerator generator = new CustomPieURLGenerator();
         PiePlot p1 = new PiePlot();
@@ -475,6 +462,7 @@ public class PiePlotTest extends TestCase {
     /**
      * Check cloning of the legendItemShape field.
      */
+    @Test
     public void testCloning_LegendItemShape() throws CloneNotSupportedException {
         Rectangle shape = new Rectangle(-4, -4, 8, 8);
         PiePlot p1 = new PiePlot();
@@ -492,6 +480,7 @@ public class PiePlotTest extends TestCase {
     /**
      * Check cloning of the legendLabelGenerator field.
      */
+    @Test
     public void testCloning_LegendLabelGenerator() throws CloneNotSupportedException {
         StandardPieSectionLabelGenerator generator
                 = new StandardPieSectionLabelGenerator();
@@ -510,6 +499,7 @@ public class PiePlotTest extends TestCase {
     /**
      * Check cloning of the legendLabelToolTipGenerator field.
      */
+    @Test
     public void testCloning_LegendLabelToolTipGenerator() throws CloneNotSupportedException {
         StandardPieSectionLabelGenerator generator
                 = new StandardPieSectionLabelGenerator();
@@ -528,6 +518,7 @@ public class PiePlotTest extends TestCase {
     /**
      * Check cloning of the legendLabelURLGenerator field.
      */
+    @Test
     public void testCloning_LegendLabelURLGenerator() throws CloneNotSupportedException {
         CustomPieURLGenerator generator = new CustomPieURLGenerator();
         PiePlot p1 = new PiePlot();
@@ -545,6 +536,7 @@ public class PiePlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         PiePlot p1 = new PiePlot(null);
         PiePlot p2 = (PiePlot) TestUtilities.serialised(p1);
@@ -554,6 +546,7 @@ public class PiePlotTest extends TestCase {
     /**
      * Some checks for the getLegendItems() method.
      */
+    @Test
     public void testGetLegendItems() {
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Item 1", 1.0);
@@ -587,6 +580,7 @@ public class PiePlotTest extends TestCase {
      * Check that the default base section paint is not null, and that you
      * can never set it to null.
      */
+    @Test
     public void testGetBaseSectionPaint() {
         PiePlot plot = new PiePlot();
         assertNotNull(plot.getBaseSectionPaint());
@@ -614,6 +608,7 @@ public class PiePlotTest extends TestCase {
     /**
      * Draws a pie chart where the label generator returns null.
      */
+    @Test
     public void testDrawWithNullLegendLabels() {
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("L1", 12.0);

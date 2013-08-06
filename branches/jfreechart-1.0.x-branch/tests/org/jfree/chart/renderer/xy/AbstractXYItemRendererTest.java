@@ -41,38 +41,20 @@
 
 package org.jfree.chart.renderer.xy;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.labels.StandardXYSeriesLabelGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.junit.Test;
 
 /**
  * Tests for the {@link AbstractXYItemRenderer} class.
  */
-public class AbstractXYItemRendererTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(AbstractXYItemRendererTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public AbstractXYItemRendererTest(String name) {
-        super(name);
-    }
+public class AbstractXYItemRendererTest {
 
     /**
      * Creates a test dataset.
@@ -94,6 +76,7 @@ public class AbstractXYItemRendererTest extends TestCase {
     /**
      * Some checks for the findDomainBounds() method.
      */
+    @Test
     public void testFindDomainBounds() {
         AbstractXYItemRenderer renderer = new StandardXYItemRenderer();
 
@@ -110,6 +93,7 @@ public class AbstractXYItemRendererTest extends TestCase {
     /**
      * Some checks for the findRangeBounds() method.
      */
+    @Test
     public void testFindRangeBounds() {
         AbstractXYItemRenderer renderer = new StandardXYItemRenderer();
         // check that a null dataset returns null bounds
@@ -119,6 +103,7 @@ public class AbstractXYItemRendererTest extends TestCase {
     /**
      * Check that the legendItemLabelGenerator is cloned.
      */
+    @Test
     public void testCloning_LegendItemLabelGenerator() throws CloneNotSupportedException {
         StandardXYSeriesLabelGenerator generator
                 = new StandardXYSeriesLabelGenerator("Series {0}");
@@ -137,6 +122,7 @@ public class AbstractXYItemRendererTest extends TestCase {
     /**
      * Check that the legendItemToolTipGenerator is cloned.
      */
+    @Test
     public void testCloning_LegendItemToolTipGenerator() 
             throws CloneNotSupportedException {
         StandardXYSeriesLabelGenerator generator
@@ -157,6 +143,7 @@ public class AbstractXYItemRendererTest extends TestCase {
     /**
      * Check that the legendItemURLGenerator is cloned.
      */
+    @Test
     public void testCloning_LegendItemURLGenerator() 
             throws CloneNotSupportedException {
         StandardXYSeriesLabelGenerator generator
@@ -172,6 +159,5 @@ public class AbstractXYItemRendererTest extends TestCase {
         assertTrue(r1.getLegendItemURLGenerator()
                 != r2.getLegendItemURLGenerator());
     }
-
 
 }

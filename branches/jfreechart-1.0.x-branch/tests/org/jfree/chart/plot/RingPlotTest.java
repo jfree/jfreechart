@@ -41,42 +41,28 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link RingPlot} class.
  */
-public class RingPlotTest extends TestCase {
+public class RingPlotTest {
 
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(RingPlotTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public RingPlotTest(String name) {
-        super(name);
-    }
 
     /**
      * Some checks for the equals() method.
      */
+    @Test
     public void testEquals() {
 
         RingPlot plot1 = new RingPlot(null);
@@ -128,6 +114,7 @@ public class RingPlotTest extends TestCase {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         RingPlot p1 = new RingPlot(null);
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.yellow,
@@ -142,6 +129,7 @@ public class RingPlotTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         RingPlot p1 = new RingPlot(null);
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.yellow,

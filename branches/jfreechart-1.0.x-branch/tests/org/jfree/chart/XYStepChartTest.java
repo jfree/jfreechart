@@ -40,13 +40,13 @@
 
 package org.jfree.chart;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.ChartChangeEvent;
@@ -60,37 +60,22 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Some tests for an XY step plot.
  */
-public class XYStepChartTest extends TestCase {
+public class XYStepChartTest {
 
     /** A chart. */
     private JFreeChart chart;
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(XYStepChartTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public XYStepChartTest(String name) {
-        super(name);
-    }
-
-    /**
      * Common test setup.
      */
-    protected void setUp() {
+    @Before
+    public void setUp() {
         this.chart = createChart();
     }
 
@@ -98,6 +83,7 @@ public class XYStepChartTest extends TestCase {
      * Draws the chart with a null info object to make sure that no exceptions
      * are thrown (a problem that was occurring at one point).
      */
+    @Test
     public void testDrawWithNullInfo() {
         try {
             BufferedImage image = new BufferedImage(200 , 100,
@@ -115,6 +101,7 @@ public class XYStepChartTest extends TestCase {
     /**
      * Replaces the dataset and checks that it has changed as expected.
      */
+    @Test
     public void testReplaceDataset() {
 
         // create a dataset...
@@ -142,6 +129,7 @@ public class XYStepChartTest extends TestCase {
      * Check that setting a tool tip generator for a series does override the
      * default generator.
      */
+    @Test
     public void testSetSeriesToolTipGenerator() {
         XYPlot plot = (XYPlot) this.chart.getPlot();
         XYItemRenderer renderer = plot.getRenderer();

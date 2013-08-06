@@ -40,40 +40,24 @@
 
 package org.jfree.chart.renderer.xy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 /**
  * Tests for the {@link GradientXYBarPainter} class.
  */
-public class GradientXYBarPainterTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(GradientXYBarPainterTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public GradientXYBarPainterTest(String name) {
-        super(name);
-    }
+public class GradientXYBarPainterTest {
 
     /**
      * Check that the equals() method distinguishes all fields.
      */
+    @Test
     public void testEquals() {
         GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
         GradientXYBarPainter p2 = new GradientXYBarPainter(0.1, 0.2, 0.3);
@@ -98,6 +82,7 @@ public class GradientXYBarPainterTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
         GradientXYBarPainter p2 = new GradientXYBarPainter(0.1, 0.2, 0.3);
@@ -111,6 +96,7 @@ public class GradientXYBarPainterTest extends TestCase {
      * Confirm that cloning isn't implemented (it isn't required, because
      * instances of the class are immutable).
      */
+    @Test
     public void testCloning() {
         GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
         assertFalse(p1 instanceof Cloneable);
@@ -120,6 +106,7 @@ public class GradientXYBarPainterTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
         GradientXYBarPainter p2 = (GradientXYBarPainter) 

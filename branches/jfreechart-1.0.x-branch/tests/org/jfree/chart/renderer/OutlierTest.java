@@ -40,41 +40,25 @@
 
 package org.jfree.chart.renderer;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.geom.Point2D;
 import java.io.Serializable;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
 
 /**
  * Tests for the {@link Outlier} class.
  */
-public class OutlierTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(OutlierTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public OutlierTest(String name) {
-        super(name);
-    }
+public class OutlierTest {
 
     private static final double EPSILON = 0.000000001;
 
     /**
      * Simple check for the default constructor.
      */
+    @Test
     public void testConstructor() {
         Outlier out = new Outlier(1.0, 2.0, 3.0);
         assertEquals(-2.0, out.getX(), EPSILON);
@@ -85,6 +69,7 @@ public class OutlierTest extends TestCase {
     /**
      * A test for the equals() method.
      */
+    @Test
     public void testEquals() {
         Outlier out1 = new Outlier(1.0, 2.0, 3.0);
         Outlier out2 = new Outlier(1.0, 2.0, 3.0);
@@ -110,6 +95,7 @@ public class OutlierTest extends TestCase {
     /**
      * Confirm that cloning is not implemented.
      */
+    @Test
     public void testCloning() {
         Outlier out1 = new Outlier(1.0, 2.0, 3.0);
         assertFalse(out1 instanceof Cloneable);
@@ -118,6 +104,7 @@ public class OutlierTest extends TestCase {
     /**
      * Confirm that serialization is not implemented.
      */
+    @Test
     public void testSerialization() {
         Outlier out1 = new Outlier(1.0, 2.0, 3.0);
         assertFalse(out1 instanceof Serializable);

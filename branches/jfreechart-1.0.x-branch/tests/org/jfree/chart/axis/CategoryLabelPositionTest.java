@@ -41,42 +41,26 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.text.TextBlockAnchor;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.TextAnchor;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CategoryLabelPosition} class.
  */
-public class CategoryLabelPositionTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CategoryLabelPositionTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CategoryLabelPositionTest(String name) {
-        super(name);
-    }
-
+public class CategoryLabelPositionTest {
+    
     /**
      * Check that the equals() method can distinguish all fields.
      */
+    @Test
     public void testEquals() {
         CategoryLabelPosition p1 = new CategoryLabelPosition(
                 RectangleAnchor.BOTTOM_LEFT, TextBlockAnchor.CENTER_RIGHT,
@@ -147,6 +131,7 @@ public class CategoryLabelPositionTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         CategoryLabelPosition a1 = new CategoryLabelPosition();
         CategoryLabelPosition a2 = new CategoryLabelPosition();
@@ -159,6 +144,7 @@ public class CategoryLabelPositionTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         CategoryLabelPosition p1 = new CategoryLabelPosition();
         CategoryLabelPosition p2 = (CategoryLabelPosition) TestUtilities.serialised(p1);

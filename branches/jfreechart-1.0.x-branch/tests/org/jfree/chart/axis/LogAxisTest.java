@@ -41,13 +41,13 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -59,33 +59,17 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RectangleEdge;
+import org.junit.Test;
 
 /**
  * Tests for the {@link LogAxis} class.
  */
-public class LogAxisTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LogAxisTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public LogAxisTest(String name) {
-        super(name);
-    }
+public class LogAxisTest {
 
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         LogAxis a1 = new LogAxis("Test");
         LogAxis a2 = (LogAxis) a1.clone();
@@ -97,6 +81,7 @@ public class LogAxisTest extends TestCase {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         LogAxis a1 = new LogAxis("Test");
         LogAxis a2 = new LogAxis("Test");
@@ -121,6 +106,7 @@ public class LogAxisTest extends TestCase {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         LogAxis a1 = new LogAxis("Test");
         LogAxis a2 = new LogAxis("Test");
@@ -135,6 +121,7 @@ public class LogAxisTest extends TestCase {
     /**
      * Test the translation of Java2D values to data values.
      */
+    @Test
     public void testTranslateJava2DToValue() {
         LogAxis axis = new LogAxis();
         axis.setRange(50.0, 100.0);
@@ -161,6 +148,7 @@ public class LogAxisTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         LogAxis a1 = new LogAxis("Test Axis");
         LogAxis a2 = (LogAxis) TestUtilities.serialised(a1);
@@ -171,20 +159,13 @@ public class LogAxisTest extends TestCase {
      * A simple test for the auto-range calculation looking at a
      * LogAxis used as the range axis for a CategoryPlot.
      */
+    @Test
     public void testAutoRange1() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
-        JFreeChart chart = ChartFactory.createBarChart(
-            "Test",
-            "Categories",
-            "Value",
-            dataset,
-            PlotOrientation.VERTICAL,
-            false,
-            false,
-            false
-        );
+        JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
+                "Value", dataset);
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
@@ -197,6 +178,7 @@ public class LogAxisTest extends TestCase {
      * NumberAxis used as the range axis for a CategoryPlot.  In this
      * case, the original dataset is replaced with a new dataset.
      */
+    @Test
     public void testAutoRange3() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.setValue(100.0, "Row 1", "Column 1");
@@ -223,6 +205,7 @@ public class LogAxisTest extends TestCase {
      * Checks that the auto-range for the domain axis on an XYPlot is
      * working as expected.
      */
+    @Test
     public void testXYAutoRange1() {
         XYSeries series = new XYSeries("Series 1");
         series.add(1.0, 1.0);
@@ -230,16 +213,8 @@ public class LogAxisTest extends TestCase {
         series.add(3.0, 3.0);
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series);
-        JFreeChart chart = ChartFactory.createScatterPlot(
-            "Test",
-            "X",
-            "Y",
-            dataset,
-            PlotOrientation.VERTICAL,
-            false,
-            false,
-            false
-        );
+        JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
+                dataset);
         XYPlot plot = (XYPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
@@ -251,6 +226,7 @@ public class LogAxisTest extends TestCase {
      * Checks that the auto-range for the range axis on an XYPlot is
      * working as expected.
      */
+    @Test
     public void testXYAutoRange2() {
         XYSeries series = new XYSeries("Series 1");
         series.add(1.0, 1.0);
@@ -258,16 +234,8 @@ public class LogAxisTest extends TestCase {
         series.add(3.0, 3.0);
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series);
-        JFreeChart chart = ChartFactory.createScatterPlot(
-            "Test",
-            "X",
-            "Y",
-            dataset,
-            PlotOrientation.VERTICAL,
-            false,
-            false,
-            false
-        );
+        JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
+                dataset);
         XYPlot plot = (XYPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
@@ -278,6 +246,7 @@ public class LogAxisTest extends TestCase {
     /**
      * Some checks for the setLowerBound() method.
      */
+    @Test
     public void testSetLowerBound() {
         LogAxis axis = new LogAxis("X");
         axis.setRange(0.0, 10.0);
@@ -291,6 +260,7 @@ public class LogAxisTest extends TestCase {
     /**
      * Checks the default value for the tickMarksVisible flag.
      */
+    @Test
     public void testTickMarksVisibleDefault() {
         LogAxis axis = new LogAxis("Log Axis");
         assertTrue(axis.isTickMarksVisible());
@@ -299,6 +269,7 @@ public class LogAxisTest extends TestCase {
     /**
      * Checks that a TickUnit with a size of 0 doesn't crash.
      */
+    @Test
     public void testrefreshTicksWithZeroTickUnit() {
         LogAxis axis = new LogAxis();
         AxisState state = new AxisState();

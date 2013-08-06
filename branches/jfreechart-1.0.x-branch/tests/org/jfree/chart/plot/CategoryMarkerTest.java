@@ -40,23 +40,25 @@
 
 package org.jfree.chart.plot;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
+import org.junit.Test;
 
 /**
  * Some tests for the {@link CategoryMarker} class.
  */
-public class CategoryMarkerTest extends TestCase
-        implements MarkerChangeListener {
+public class CategoryMarkerTest implements MarkerChangeListener {
 
     MarkerChangeEvent lastEvent;
 
@@ -70,26 +72,9 @@ public class CategoryMarkerTest extends TestCase
     }
 
     /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CategoryMarkerTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CategoryMarkerTest(String name) {
-        super(name);
-    }
-
-    /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         CategoryMarker m1 = new CategoryMarker("A");
         CategoryMarker m2 = new CategoryMarker("A");
@@ -153,6 +138,7 @@ public class CategoryMarkerTest extends TestCase
     /**
      * Check cloning.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         CategoryMarker m1 = new CategoryMarker("A", new GradientPaint(1.0f,
                 2.0f, Color.white, 3.0f, 4.0f, Color.yellow),
@@ -166,6 +152,7 @@ public class CategoryMarkerTest extends TestCase
    /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         CategoryMarker m1 = new CategoryMarker("A", new GradientPaint(1.0f,
                 2.0f, Color.white, 3.0f, 4.0f, Color.yellow),
@@ -177,6 +164,7 @@ public class CategoryMarkerTest extends TestCase
     /**
      * Some checks for the getKey() and setKey() methods.
      */
+    @Test
     public void testGetSetKey() {
         CategoryMarker m = new CategoryMarker("X");
         m.addChangeListener(this);
@@ -199,6 +187,7 @@ public class CategoryMarkerTest extends TestCase
     /**
      * Some checks for the getDrawAsLine() and setDrawAsLine() methods.
      */
+    @Test
     public void testGetSetDrawAsLine() {
         CategoryMarker m = new CategoryMarker("X");
         m.addChangeListener(this);

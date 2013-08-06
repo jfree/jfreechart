@@ -40,37 +40,18 @@
 
 package org.jfree.chart.imagemap;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 /**
- * Tests for the {@link StandardToolTipTagFragmentGeneratorTests} class.
+ * Tests for the {@link StandardToolTipTagFragmentGenerator} class.
  */
-public class StandardToolTipTagFragmentGeneratorTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(StandardToolTipTagFragmentGeneratorTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public StandardToolTipTagFragmentGeneratorTest(String name) {
-        super(name);
-    }
+public class StandardToolTipTagFragmentGeneratorTest {
 
     /**
      * Some checks for the generateURLFragment() method.
      */
+    @Test
     public void testGenerateURLFragment() {
         StandardToolTipTagFragmentGenerator g
                 = new StandardToolTipTagFragmentGenerator();

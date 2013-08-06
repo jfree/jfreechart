@@ -40,38 +40,21 @@
 
 package org.jfree.chart.axis;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link CategoryAxis3D} class.
  */
-public class CategoryAxis3DTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(CategoryAxis3DTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public CategoryAxis3DTest(String name) {
-        super(name);
-    }
+public class CategoryAxis3DTest {
 
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         CategoryAxis3D a1 = new CategoryAxis3D("Test");
         CategoryAxis3D a2 = (CategoryAxis3D) a1.clone();
@@ -83,6 +66,7 @@ public class CategoryAxis3DTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         CategoryAxis3D a1 = new CategoryAxis3D("Test Axis");
         CategoryAxis3D a2 = (CategoryAxis3D) TestUtilities.serialised(a1);

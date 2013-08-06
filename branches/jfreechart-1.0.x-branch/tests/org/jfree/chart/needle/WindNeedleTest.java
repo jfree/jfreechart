@@ -40,37 +40,20 @@
 
 package org.jfree.chart.needle;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+
 import org.jfree.chart.TestUtilities;
+import org.junit.Test;
 
 /**
  * Tests for the {@link WindNeedle} class.
  */
-public class WindNeedleTest extends TestCase {
-
-    /**
-     * Returns the tests as a test suite.
-     *
-     * @return The test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(WindNeedleTest.class);
-    }
-
-    /**
-     * Constructs a new set of tests.
-     *
-     * @param name  the name of the tests.
-     */
-    public WindNeedleTest(String name) {
-        super(name);
-    }
+public class WindNeedleTest {
 
     /**
      * Check that the equals() method can distinguish all fields.
      */
+    @Test
     public void testEquals() {
        WindNeedle n1 = new WindNeedle();
        WindNeedle n2 = new WindNeedle();
@@ -81,6 +64,7 @@ public class WindNeedleTest extends TestCase {
     /**
      * Check that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         WindNeedle n1 = new WindNeedle();
         WindNeedle n2 = (WindNeedle) n1.clone();
@@ -92,6 +76,7 @@ public class WindNeedleTest extends TestCase {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         WindNeedle n1 = new WindNeedle();
         WindNeedle n2 = (WindNeedle) TestUtilities.serialised(n1);
