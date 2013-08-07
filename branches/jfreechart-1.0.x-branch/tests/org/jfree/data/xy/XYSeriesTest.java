@@ -645,6 +645,22 @@ public class XYSeriesTest {
         s1.add(0.0, null);
         assertEquals(99.9, s1.getMaxY(), EPSILON);
     }
+    
+    /**
+     * A test for a bug reported in the forum:
+     * 
+     * http://www.jfree.org/forum/viewtopic.php?f=3&t=116601
+     */
+    @Test
+    public void testGetMaxY2() {
+        XYSeries series = new XYSeries(1, true, false);
+        series.addOrUpdate(1, 20);
+        series.addOrUpdate(2, 30);
+        series.addOrUpdate(3, 40);
+        assertEquals(40.0, series.getMaxY(), EPSILON);
+        series.addOrUpdate(2, 22);
+        assertEquals(40.0, series.getMaxY(), EPSILON);        
+    }
 
     /**
      * A test for the clear method.
