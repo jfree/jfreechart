@@ -823,7 +823,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
             else if (item.getY() != null) {
                 double yy = item.getY().doubleValue();
                 this.minY = minIgnoreNaN(this.minY, yy);
-                this.maxY = minIgnoreNaN(this.maxY, yy);
+                this.maxY = maxIgnoreNaN(this.maxY, yy);
             }
         }
         else {
