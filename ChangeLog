@@ -1,3 +1,9 @@
+2013-08-10  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/data/general/DatasetUtilities.java
+    (findYValue): New method,
+    (findItemIndicesForX): Likewise.
+
 2013-08-04  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/ChartFactory.java
