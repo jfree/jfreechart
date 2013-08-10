@@ -137,7 +137,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     /**
      * Creates a new empty series.  By default, items added to the series will
      * be sorted into ascending order by x-value, and duplicate x-values will
-     * be allowed (these defaults can be modified with another constructor.
+     * be allowed (these defaults can be modified with another constructor).
      *
      * @param key  the series key (<code>null</code> not permitted).
      */
