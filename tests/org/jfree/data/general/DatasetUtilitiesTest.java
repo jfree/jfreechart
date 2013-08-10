@@ -1339,5 +1339,83 @@ public class DatasetUtilitiesTest {
         assertEquals(1.5, r.getLowerBound(), EPSILON);
         assertEquals(3.5, r.getUpperBound(), EPSILON);
     }
+    
+    /**
+     * Check the findYValue() method with a dataset that is in ascending order 
+     * of x-values.
+     */
+    @Test
+    public void testFindYValue() {
+        XYSeries series = new XYSeries("S1");
+        XYSeriesCollection dataset = new XYSeriesCollection(series);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 100.0)));
+        
+        series.add(1.0, 5.0);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 0.0)));
+        assertEquals(5.0, DatasetUtilities.findYValue(dataset, 0, 1.0), EPSILON);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 2.0)));
+        
+        series.add(2.0, 10.0);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 0.0)));
+        assertEquals(5.0, DatasetUtilities.findYValue(dataset, 0, 1.0), EPSILON);
+        assertEquals(6.25, DatasetUtilities.findYValue(dataset, 0, 1.25), EPSILON);
+        assertEquals(7.5, DatasetUtilities.findYValue(dataset, 0, 1.5), EPSILON);
+        assertEquals(10.0, DatasetUtilities.findYValue(dataset, 0, 2.0), EPSILON);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 3.0)));
+    }
+    
+    /**
+     * Check the findYValue() method with a dataset that is not sorted.
+     */
+    @Test
+    public void testFindYValueNonSorted() {
+        XYSeries series = new XYSeries("S1", false);
+        XYSeriesCollection dataset = new XYSeriesCollection(series);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 100.0)));
+        
+        series.add(1.0, 5.0);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 0.0)));
+        assertEquals(5.0, DatasetUtilities.findYValue(dataset, 0, 1.0), EPSILON);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 2.0)));
+        
+        series.add(0.0, 10.0);
+        series.add(4.0, 20.0);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, -0.5)));
+        assertEquals(10.0, DatasetUtilities.findYValue(dataset, 0, 0.0), EPSILON);
+        assertEquals(5.0, DatasetUtilities.findYValue(dataset, 0, 1.0), EPSILON);
+        assertEquals(15.0, DatasetUtilities.findYValue(dataset, 0, 2.0), EPSILON);
+        assertEquals(20.0, DatasetUtilities.findYValue(dataset, 0, 4.0), EPSILON);
+        assertEquals(17.5, DatasetUtilities.findYValue(dataset, 0, 3.0), EPSILON);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 5.0)));        
+    }
+    
+    /**
+     * Check the findYValue() method with a dataset that allows duplicate
+     * values.
+     */
+    @Test
+    public void testFindYValueWithDuplicates() {
+        XYSeries series = new XYSeries("S1", true, true);
+        XYSeriesCollection dataset = new XYSeriesCollection(series);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 100.0)));
+        
+        series.add(1.0, 5.0);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 0.0)));
+        assertEquals(5.0, DatasetUtilities.findYValue(dataset, 0, 1.0), EPSILON);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 2.0)));
+        
+        series.add(1.0, 10.0);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 0.0)));
+        assertEquals(5.0, DatasetUtilities.findYValue(dataset, 0, 1.0), EPSILON);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 2.0)));
+        
+        series.add(2.0, 10.0);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 0.0)));
+        assertEquals(5.0, DatasetUtilities.findYValue(dataset, 0, 1.0), EPSILON);
+        assertEquals(10.0, DatasetUtilities.findYValue(dataset, 0, 1.25), EPSILON);
+        assertEquals(10.0, DatasetUtilities.findYValue(dataset, 0, 1.5), EPSILON);
+        assertEquals(10.0, DatasetUtilities.findYValue(dataset, 0, 2.0), EPSILON);
+        assertTrue(Double.isNaN(DatasetUtilities.findYValue(dataset, 0, 3.0)));
+    }
 
 }
