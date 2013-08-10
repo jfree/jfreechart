@@ -134,6 +134,7 @@ import java.util.List;
 import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.DomainInfo;
+import org.jfree.data.DomainOrder;
 import org.jfree.data.KeyToGroupMap;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.Range;
@@ -2252,6 +2253,151 @@ public final class DatasetUtilities {
         }
         else {
             return null;
+        }
+    }
+
+    /**
+     * Returns the interpolated value of y that corresponds to the specified
+     * x-value in the given series.  If the x-value falls outside the range of
+     * x-values for the dataset, this method returns <code>Double.NaN</code>.
+     * 
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param series  the series index.
+     * @param x  the x-value.
+     * 
+     * @return The y value.
+     * 
+     * @since 1.0.16
+     */
+    public static double findYValue(XYDataset dataset, int series, double x) {
+        // delegate null check on dataset
+        int[] indices = findItemIndicesForX(dataset, series, x);
+        if (indices[0] == -1) {
+            return Double.NaN;
+        }
+        if (indices[0] == indices[1]) {
+            return dataset.getYValue(series, indices[0]);
+        }
+        double x0 = dataset.getXValue(series, indices[0]);
+        double x1 = dataset.getXValue(series, indices[1]);
+        double y0 = dataset.getYValue(series, indices[0]);
+        double y1 = dataset.getYValue(series, indices[1]);
+        return y0 + (y1 - y0) * (x - x0) / (x1 - x0);
+    }
+    
+    /**
+     * Finds the indices of the the items in the dataset that span the 
+     * specified x-value.  There are three cases for the return value:
+     * <ul>
+     * <li>there is an exact match for the x-value at index i 
+     * (returns <code>int[] {i, i}</code>);</li>
+     * <li>the x-value falls between two (adjacent) items at index i and i+1 
+     * (returns <code>int[] {i, i+1}</code>);</li>
+     * <li>the x-value falls outside the domain bounds, in which case the 
+     *    method returns <code>int[] {-1, -1}</code>.</li>
+     * </ul>
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param series  the series index.
+     * @param x  the x-value.
+     *
+     * @return The indices of the two items that span the x-value.
+     *
+     * @since 1.0.16
+     * 
+     * @see #findYValue(org.jfree.data.xy.XYDataset, int, double) 
+     */
+    public static int[] findItemIndicesForX(XYDataset dataset, int series,
+            double x) {
+        ParamChecks.nullNotPermitted(dataset, "dataset");
+        int itemCount = dataset.getItemCount(series);
+        if (itemCount == 0) {
+            return new int[] {-1, -1};
+        }
+        if (itemCount == 1) {
+            if (x == dataset.getXValue(series, 0)) {
+                return new int[] {0, 0};
+            } else {
+                return new int[] {-1, -1};
+            }
+        }
+        if (dataset.getDomainOrder() == DomainOrder.ASCENDING) {
+            int low = 0;
+            int high = itemCount - 1;
+            double lowValue = dataset.getXValue(series, low);
+            if (lowValue > x) {
+                return new int[] {-1, -1};
+            }
+            if (lowValue == x) {
+                return new int[] {low, low};
+            }
+            double highValue = dataset.getXValue(series, high);
+            if (highValue < x) {
+                return new int[] {-1, -1};
+            }
+            if (highValue == x) {
+                return new int[] {high, high};
+            }
+            int mid = (low + high) / 2;
+            while (high - low > 1) {
+                double midV = dataset.getXValue(series, mid);
+                if (x == midV) {
+                    return new int[] {mid, mid};
+                }
+                if (midV < x) {
+                    low = mid;
+                }
+                else {
+                    high = mid;
+                }
+                mid = (low + high) / 2;
+            }
+            return new int[] {low, high};
+        }
+        else if (dataset.getDomainOrder() == DomainOrder.DESCENDING) {
+            int high = 0;
+            int low = itemCount - 1;
+            double lowValue = dataset.getXValue(series, low);
+            if (lowValue > x) {
+                return new int[] {-1, -1};
+            }
+            double highValue = dataset.getXValue(series, high);
+            if (highValue < x) {
+                return new int[] {-1, -1};
+            }
+            int mid = (low + high) / 2;
+            while (high - low > 1) {
+                double midV = dataset.getXValue(series, mid);
+                if (x == midV) {
+                    return new int[] {mid, mid};
+                }
+                if (midV < x) {
+                    low = mid;
+                }
+                else {
+                    high = mid;
+                }
+                mid = (low + high) / 2;
+            }
+            return new int[] {low, high};
+        }
+        else {
+            // we don't know anything about the ordering of the x-values,
+            // so we iterate until we find the first crossing of x (if any)
+            // we know there are at least 2 items in the series at this point
+            double prev = dataset.getXValue(series, 0);
+            if (x == prev) {
+                return new int[] {0, 0}; // exact match on first item
+            }
+            for (int i = 1; i < itemCount; i++) {
+                double next = dataset.getXValue(series, i);
+                if (x == next) {
+                    return new int[] {i, i}; // exact match
+                }
+                if ((x > prev && x < next) || (x < prev && x > next)) {
+                    return new int[] {i - 1, i}; // spanning match
+                }
+            }
+            return new int[] {-1, -1}; // no crossing of x
         }
     }
 
