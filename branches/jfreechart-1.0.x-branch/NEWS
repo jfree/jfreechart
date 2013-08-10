@@ -4,8 +4,10 @@ Not yet released
 
 Provided subscript/superscript support for axis labels (via AttributedString),
 new axis label positioning options, simplified ChartFactory methods,
+added new methods to DatasetUtilities to interpolate y-values in XYDatasets,
 added URLs to labels on CategoryAxis, improved the consistency of the 
-SWTGraphics2D implementation, and various bug fixes.
+SWTGraphics2D implementation, and fixed various bugs.  All the JUnit tests
+have been upgraded to JUnit 4.
 
 Bug Fixes:
 1107 : Fixed TimeZone issue in PeriodAxis.
