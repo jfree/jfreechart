@@ -1,3 +1,8 @@
+2013-08-15  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/plot/PiePlot.java
+    (lookupSectionPaint): Replace reflection code with Java 1.6 equivalent.
+
 2013-08-10  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/data/general/DatasetUtilities.java
