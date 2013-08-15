@@ -182,6 +182,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.RadialGradientPaint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Arc2D;
@@ -196,8 +197,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -3250,31 +3249,17 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     protected Paint lookupSectionPaint(Comparable key, PiePlotState state) {
         Paint paint = lookupSectionPaint(key, getAutoPopulateSectionPaint());
-        // If using JDK 1.6 or later the passed Paint Object can be a RadialGradientPaint
-        // We need to adjust the radius and center for this object to match the Pie.
-        try {
-            Class c = Class.forName("java.awt.RadialGradientPaint");
-            Constructor cc = c.getConstructor(new Class[] {
-                    Point2D.class, float.class, float[].class, Color[].class});
-
-             if (c.isInstance(paint)) {
-                 // User did pass a RadialGradientPaint object
-                 Method m = c.getMethod("getFractions", new Class[] {});
-                 Object fractions = m.invoke(paint, new Object[] {});
-                 m = c.getMethod("getColors", new Class[] {});
-                 Object clrs = m.invoke(paint, new Object[] {});
-                 Point2D center = getArcCenter(state, key);
-                 float radius = (new Float(state.getPieHRadius())).floatValue();
-
-                 Paint radialPaint = (Paint) cc.newInstance(new Object[] {
-                         (Object) center, (Object) new Float(radius),
-                         fractions, clrs});
-                 // return the new RadialGradientPaint
-                 return radialPaint;
-             }
-        } catch (Exception e) {
+        // for a RadialGradientPaint we adjust the center and radius to match
+        // the current pie segment...
+        if (paint instanceof RadialGradientPaint) {
+            RadialGradientPaint rgp = (RadialGradientPaint) paint;
+            Point2D center = getArcCenter(state, key);
+            float radius = (float) Math.max(state.getPieHRadius(), 
+                    state.getPieWRadius());
+            float[] fractions = rgp.getFractions();
+            Color[] colors = rgp.getColors();
+            paint = new RadialGradientPaint(center, radius, fractions, colors);
         }
-        // Return whatever it was
         return paint;
     }
 
