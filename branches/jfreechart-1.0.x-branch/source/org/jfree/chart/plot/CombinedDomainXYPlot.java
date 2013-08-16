@@ -113,6 +113,7 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
@@ -185,6 +186,24 @@ public class CombinedDomainXYPlot extends XYPlot
             XYPlot plot = (XYPlot) iterator.next();
             plot.setOrientation(orientation);
         }
+    }
+
+    /**
+     * Sets the shadow generator for the plot (and all subplots) and sends
+     * a {@link PlotChangeEvent} to all registered listeners.
+     * 
+     * @param generator  the new generator (<code>null</code> permitted).
+     */
+    @Override
+    public void setShadowGenerator(ShadowGenerator generator) {
+        setNotify(false);
+        super.setShadowGenerator(generator);
+        Iterator iterator = this.subplots.iterator();
+        while (iterator.hasNext()) {
+            XYPlot plot = (XYPlot) iterator.next();
+            plot.setShadowGenerator(generator);
+        }
+        setNotify(true);
     }
 
     /**
