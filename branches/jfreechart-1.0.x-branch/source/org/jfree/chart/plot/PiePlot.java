@@ -2466,8 +2466,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (this.labelGenerator != null && !this.simpleLabels) {
             labelReserve = this.labelGap + this.maximumLabelWidth;
         }
-        double gapHorizontal = plotArea.getWidth() * (this.interiorGap
-                + labelReserve) * 2.0;
+        double gapHorizontal = plotArea.getWidth() * labelReserve * 2.0;
         double gapVertical = plotArea.getHeight() * this.interiorGap * 2.0;
 
 
@@ -2827,8 +2826,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
         // calculate the max label width from the plot dimensions, because
         // a circular pie can leave a lot more room for labels...
-        double marginX = plotArea.getX() + this.interiorGap
-                * plotArea.getWidth();
+        double marginX = plotArea.getX();
         double gap = plotArea.getWidth() * this.labelGap;
         double ww = linkArea.getX() - gap - marginX;
         float labelWidth = (float) this.labelPadding.trimWidth(ww);
@@ -2954,7 +2952,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             }
         }
         double hh = plotArea.getHeight();
-        double gap = hh * getInteriorGap();
+        double gap = 0.00; //hh * getInteriorGap();
         this.labelDistributor.distributeLabels(plotArea.getMinY() + gap,
                 hh - 2 * gap);
         for (int i = 0; i < this.labelDistributor.getItemCount(); i++) {
