@@ -255,10 +255,8 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      *                        is none).
      * @param urlGenerator  the URL generator (<code>null</code> permitted).
      */
-    public StackedXYAreaRenderer(int type,
-                                 XYToolTipGenerator labelGenerator,
-                                 XYURLGenerator urlGenerator) {
-
+    public StackedXYAreaRenderer(int type, XYToolTipGenerator labelGenerator,
+            XYURLGenerator urlGenerator) {
         super(type, labelGenerator, urlGenerator);
     }
 
@@ -327,11 +325,8 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      * @return A state object that should be passed to subsequent calls to the
      *         drawItem() method.
      */
-    public XYItemRendererState initialise(Graphics2D g2,
-                                          Rectangle2D dataArea,
-                                          XYPlot plot,
-                                          XYDataset data,
-                                          PlotRenderingInfo info) {
+    public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
+            XYPlot plot, XYDataset data, PlotRenderingInfo info) {
 
         XYItemRendererState state = new StackedXYAreaRendererState(info);
         // in the rendering process, there is special handling for item
@@ -392,18 +387,10 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      *         <code>StackedXYAreaRendererState</code> or <code>dataset</code>
      *         is not an instance of {@link TableXYDataset}.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset,
-                         int series,
-                         int item,
-                         CrosshairState crosshairState,
-                         int pass) {
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         PlotOrientation orientation = plot.getOrientation();
         StackedXYAreaRendererState areaState
@@ -431,6 +418,10 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
 
         //  Get series Paint and Stroke
         Paint seriesPaint = getItemPaint(series, item);
+        Paint seriesFillPaint = seriesPaint;
+        if (getUseFillPaint()) {
+            seriesFillPaint = getItemFillPaint(series, item);
+        }
         Stroke seriesStroke = getItemStroke(series, item);
 
         if (pass == 0) {
@@ -489,6 +480,8 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
                         areaState.getLine().setLine(transY0, transX0, transY1,
                                 transX1);
                     }
+                    g2.setPaint(seriesPaint);
+                    g2.setStroke(seriesStroke);
                     g2.draw(areaState.getLine());
                 }
             }
@@ -523,7 +516,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
                 }
 
                 //  Fill the polygon
-                g2.setPaint(seriesPaint);
+                g2.setPaint(seriesFillPaint);
                 g2.setStroke(seriesStroke);
                 g2.fill(areaState.getSeriesArea());
 
