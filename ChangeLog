@@ -1,3 +1,19 @@
+2013-08-30  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/renderer/xy/StackedXYAreaRenderer.java
+    (drawItem): Set stroke and paint for drawing lines (bugfix).
+
+2013-08-16  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/plot/CombinedDomainCategoryPlot.java
+    (setShadowGenerator): New method override,
+    * org/jfree/chart/plot/CombinedRangeCategoryPlot.java
+    (setShadowGenerator): Likewise,
+    * org/jfree/chart/plot/CombinedDomainXYPlot.java
+    (setShadowGenerator): Likewise,
+    * org/jfree/chart/plot/CombinedRangeXYPlot.java
+    (setShadowGenerator): Likewise.
+
 2013-08-15  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/plot/PiePlot.java

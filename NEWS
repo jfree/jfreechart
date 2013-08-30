@@ -14,7 +14,8 @@ have been upgraded to JUnit 4.
 Bug Fixes:
 1107 : Fixed TimeZone issue in PeriodAxis.
 
-Also fixed a memory leak in the SWT ChartComposite class.
+Also fixed a line drawing issue with the StackedXYAreaRenderer, and a memory 
+leak in the SWT ChartComposite class.
 
 
 JFreeChart 1.0.15
