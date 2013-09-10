@@ -2413,7 +2413,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * to all registered listeners.
      * <P>
      * Typically a marker will be drawn by the renderer as a line perpendicular
-     * to the range axis, however this is entirely up to the renderer.
+     * to the domain axis, however this is entirely up to the renderer.
      *
      * @param marker  the marker (<code>null</code> not permitted).
      *
@@ -2430,7 +2430,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * {@link PlotChangeEvent} to all registered listeners.
      * <P>
      * Typically a marker will be drawn by the renderer as a line perpendicular
-     * to the range axis, however this is entirely up to the renderer.
+     * to the domain axis, however this is entirely up to the renderer.
      *
      * @param marker  the marker (<code>null</code> not permitted).
      * @param layer  the layer (foreground or background).
@@ -2471,7 +2471,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
 
     /**
      * Clears the (foreground and background) domain markers for a particular
-     * renderer.
+     * renderer and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param index  the renderer index.
      *
