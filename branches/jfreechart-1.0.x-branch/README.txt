@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.16  *
 ********************************
 
-?? ??? 2013
+13 September 2013
 
 (C)opyright 2000-2013, by Object Refinery Limited and Contributors.
 
@@ -62,10 +62,11 @@ or with the Ant script (build.xml) included in the distribution.
 JFreeChart has the following dependencies:
 
 (a)  JRE/JDK 1.6.0 or higher - note that the previous release of JFreeChart
-worked with JRE/JDK 1.4.2 or later.  It may be possible to get JFreeChart 
-working on these older versions, but we are no longer actively checking.
+worked with JRE/JDK 1.4.2 or later.  With a bit of hacking, it may be possible 
+to get JFreeChart working on these older versions, but we are no longer 
+supporting it.
 
-(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.18)
+(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.20)
 is included in the JFreeChart distribution.  You can obtain the complete
 source code for JCommon from:
 
@@ -127,12 +128,6 @@ demo (using JDK 1.6.0 or later), use the following command:
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
 
-The demo application uses iText, a library for creating PDF documents.
-iText is licensed under the terms of the GNU Lesser General Public Licence
-and is available to download from:
-
-    http://www.lowagie.com/iText/
-
 ---------------
 8.  LIMITATIONS
 ---------------
@@ -156,7 +151,7 @@ please post a bug report.
 --------------
 A list of changes in recent versions:
 
-1.0.16 : (?-???-2013)
+1.0.16 : (13-Sep-2013)
         - see the NEWS and ChangeLog files for details.
 
 1.0.15 : (4-Jul-2013)

@@ -1,3 +1,38 @@
+2013-09-12  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/LocalizationBundle.properties
+    (FILE_EXISTS_CONFIRM_OVERWRITE): New entry,
+    (PDF_Files): Likewise,
+    (SVG_Files): Likewise,
+    * org/jfree/chart/ChartPanel.java
+    (SAVE_AS_PNG_COMMAND): New field,
+    (SAVE_AS_SVG_COMMAND): Likewise,
+    (SAVE_AS_PDF_COMMAND): Likewise,
+    (actionPerformed): Handle SVG and PDF options,
+    (saveAsSVG): New private method,
+    (generateSVG): New method,
+    (createSVGGraphics2D): New private method,
+    (saveAsPDF): Likewise,
+    (isOrsonPDFAvailable): Likewise,
+    (writeAsPDF): Likewise,
+    (createPopupMenu): Add SVG and PDF options when available,
+    * org/jfree/chart/plot/PiePlot.java
+    (draw): Check for KEY_SUPPRESS_SHADOW_GENERATION rendering hint,
+    * org/jfree/chart/plot/CategoryPlot.java
+    (draw): Likewise,
+    * org/jfree/chart/plot/XYPlot.java
+    (draw): Likewise.
+
+2013-09-12  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/JFreeChart.java
+    (KEY_SUPPRESS_SHADOW_GENERATION): new field.
+
+2013-09-12  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/axis/DateAxis.java
+    (zoomRange): Prevent axis range from falling below 1 millisecond.
+
 2013-08-30  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/renderer/xy/StackedXYAreaRenderer.java

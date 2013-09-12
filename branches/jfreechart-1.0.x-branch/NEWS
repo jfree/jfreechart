@@ -1,14 +1,16 @@
 JFreeChart 1.0.16
 -----------------
-Not yet released
+13 September 2013
 
-THIS RELEASE REQUIRES JDK/JRE 1.6.0 OR LATER.
+*** THIS RELEASE REQUIRES JDK/JRE 1.6.0 OR LATER. ***
 
 Provided subscript/superscript support for axis labels (via AttributedString),
 new axis label positioning options, simplified ChartFactory methods,
 added new methods to DatasetUtilities to interpolate y-values in XYDatasets,
-added URLs to labels on CategoryAxis, improved the consistency of the 
-SWTGraphics2D implementation, and fixed various bugs.  All the JUnit tests
+added URLs to labels on CategoryAxis, seamless integration with 
+JFreeSVG (http://www.jfree.org/jfreesvg/) and OrsonPDF 
+(http://www.object-refinery.com/pdf/), improved the consistency of the 
+SWTGraphics2D implementation, and fixed various bugs.  All the JUnit tests 
 have been upgraded to JUnit 4.
 
 Bug Fixes:
@@ -16,6 +18,12 @@ Bug Fixes:
 
 Also fixed a line drawing issue with the StackedXYAreaRenderer, and a memory 
 leak in the SWT ChartComposite class.
+
+IMPORTANT: Funding is vital to the continued success of the JFreeChart project.
+Please ask/persuade/beg your company to support us buy purchasing the
+JFreeChart Developer Guide and demo source code (site license options are 
+available for big companies)...and also please take a look at JFreeSVG and
+OrsonPDF, useful products that we are charging money for!
 
 
 JFreeChart 1.0.15
