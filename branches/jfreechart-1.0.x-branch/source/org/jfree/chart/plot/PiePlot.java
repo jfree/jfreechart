@@ -169,6 +169,7 @@
  * 20-Nov-2011 : Initialise shadow generator as null (DG);
  * 01-Jul-2012 : General label once only in drawSimpleLabels() (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 12-Sep-2013 : Check for KEY_SUPPRESS_SHADOW_GENERATION rendering hint (DG);
  * 
  */
 
@@ -202,6 +203,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
+import org.jfree.chart.JFreeChart;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
@@ -2394,6 +2396,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @param info  collects info about the drawing
      *              (<code>null</code> permitted).
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
                      PlotState parentState, PlotRenderingInfo info) {
 
@@ -2418,8 +2421,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
         if (!DatasetUtilities.isEmptyOrNull(this.dataset)) {
             Graphics2D savedG2 = g2;
+            boolean suppressShadow = Boolean.TRUE.equals(g2.getRenderingHint(
+                    JFreeChart.KEY_SUPPRESS_SHADOW_GENERATION));
             BufferedImage dataImage = null;
-            if (this.shadowGenerator != null) {
+            if (this.shadowGenerator != null && !suppressShadow) {
                 dataImage = new BufferedImage((int) area.getWidth(),
                     (int) area.getHeight(), BufferedImage.TYPE_INT_ARGB);
                 g2 = dataImage.createGraphics();
@@ -2427,8 +2432,9 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 g2.setRenderingHints(savedG2.getRenderingHints());
             }
             drawPie(g2, area, info);
-            if (this.shadowGenerator != null) {
-                BufferedImage shadowImage = this.shadowGenerator.createDropShadow(dataImage);
+            if (this.shadowGenerator != null && !suppressShadow) {
+                BufferedImage shadowImage 
+                        = this.shadowGenerator.createDropShadow(dataImage);
                 g2 = savedG2;
                 g2.drawImage(shadowImage, (int) area.getX() 
                         + this.shadowGenerator.calculateOffsetX(), 
@@ -2967,6 +2973,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      *
      * @return The legend items (never <code>null</code>).
      */
+    @Override
     public LegendItemCollection getLegendItems() {
 
         LegendItemCollection result = new LegendItemCollection();
@@ -3269,6 +3276,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -3461,6 +3469,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if some component of the plot does
      *         not support cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         PiePlot clone = (PiePlot) super.clone();
         if (clone.dataset != null) {

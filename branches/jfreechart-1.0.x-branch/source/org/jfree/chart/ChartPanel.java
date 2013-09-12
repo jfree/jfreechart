@@ -168,6 +168,8 @@
  * 05-Jul-2012 : Remove reflection for MouseWheelListener - only needed for 
  *               JRE 1.3.1 (DG);
  * 02-Jul-2013 : Use ParamChecks class (DG);
+ * 12-Sep-2013 : Provide auto-detection for JFreeSVG and OrsonPDF 
+ *               libraries (no compile time dependencies) (DG);
  * 
  */
 
@@ -204,11 +206,16 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.EventListener;
 import java.util.Iterator;
 import java.util.List;
@@ -223,6 +230,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.event.EventListenerList;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.jfree.chart.editor.ChartEditor;
 import org.jfree.chart.editor.ChartEditorManager;
@@ -243,7 +251,6 @@ import org.jfree.chart.plot.Zoomable;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.io.SerialUtilities;
-import org.jfree.ui.ExtensionFileFilter;
 
 /**
  * A Swing GUI component for displaying a {@link JFreeChart} object.
@@ -301,6 +308,15 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /** Save action command. */
     public static final String SAVE_COMMAND = "SAVE";
 
+    /** Action command to save as PNG. */
+    private static final String SAVE_AS_PNG_COMMAND = "SAVE_AS_PNG";
+    
+    /** Action command to save as SVG. */
+    private static final String SAVE_AS_SVG_COMMAND = "SAVE_AS_SVG";
+    
+    /** Action command to save as PDF. */
+    private static final String SAVE_AS_PDF_COMMAND = "SAVE_AS_PDF";
+    
     /** Print action command. */
     public static final String PRINT_COMMAND = "PRINT";
 
@@ -1371,6 +1387,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @since 1.0.13
      */
+    @Override
     public void overlayChanged(OverlayChangeEvent event) {
         repaint();
     }
@@ -1399,8 +1416,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @return A tool tip or <code>null</code> if no tooltip is available.
      */
+    @Override
     public String getToolTipText(MouseEvent e) {
-
         String result = null;
         if (this.info != null) {
             EntityCollection entities = this.info.getEntityCollection();
@@ -1415,7 +1432,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             }
         }
         return result;
-
     }
 
     /**
@@ -1703,13 +1719,25 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         else if (command.equals(COPY_COMMAND)) {
             doCopy();
         }
-        else if (command.equals(SAVE_COMMAND)) {
+        else if (command.equals(SAVE_AS_PNG_COMMAND)) {
             try {
                 doSaveAs();
             }
             catch (IOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "I/O error occurred.", 
+                        "Save As PNG", JOptionPane.WARNING_MESSAGE);
             }
+        }
+        else if (command.equals(SAVE_AS_SVG_COMMAND)) {
+            try {
+                saveAsSVG(null);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "I/O error occurred.", 
+                        "Save As SVG", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        else if (command.equals(SAVE_AS_PDF_COMMAND)) {
+            saveAsPDF(null);
         }
         else if (command.equals(PRINT_COMMAND)) {
             createChartPrintJob();
@@ -2670,12 +2698,12 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @throws IOException if there is an I/O error.
      */
     public void doSaveAs() throws IOException {
-
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(this.defaultDirectoryForSaveAs);
-        ExtensionFileFilter filter = new ExtensionFileFilter(
-                localizationResources.getString("PNG_Image_Files"), ".png");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    localizationResources.getString("PNG_Image_Files"), "png");
         fileChooser.addChoosableFileFilter(filter);
+        fileChooser.setFileFilter(filter);
 
         int option = fileChooser.showSaveDialog(this);
         if (option == JFileChooser.APPROVE_OPTION) {
@@ -2688,14 +2716,241 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             ChartUtilities.saveChartAsPNG(new File(filename), this.chart,
                     getWidth(), getHeight());
         }
+    }
+    
+    /**
+     * Saves the chart in SVG format (a filechooser will be displayed so that
+     * the user can specify the filename).  Note that this method only works
+     * if the JFreeSVG library is on the classpath...if this library is not 
+     * present, the method will fail.
+     */
+    private void saveAsSVG(File f) throws IOException {
+        File file = f;
+        if (file == null) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(this.defaultDirectoryForSaveAs);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    localizationResources.getString("SVG_Files"), "svg");
+            fileChooser.addChoosableFileFilter(filter);
+            fileChooser.setFileFilter(filter);
 
+            int option = fileChooser.showSaveDialog(this);
+            if (option == JFileChooser.APPROVE_OPTION) {
+                String filename = fileChooser.getSelectedFile().getPath();
+                if (isEnforceFileExtensions()) {
+                    if (!filename.endsWith(".svg")) {
+                        filename = filename + ".svg";
+                    }
+                }
+                file = new File(filename);
+                if (file.exists()) {
+                    String fileExists = localizationResources.getString(
+                            "FILE_EXISTS_CONFIRM_OVERWRITE");
+                    int response = JOptionPane.showConfirmDialog(this, 
+                            fileExists, "Save As SVG", 
+                            JOptionPane.OK_CANCEL_OPTION);
+                    if (response == JOptionPane.CANCEL_OPTION) {
+                        file = null;
+                    }
+                }
+            }
+        }
+        
+        if (file != null) {
+            // use reflection to get the SVG string
+            String svg = generateSVG(getWidth(), getHeight());
+            BufferedWriter writer = null;
+            try {
+                writer = new BufferedWriter(new FileWriter(file));
+                writer.write("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n");
+                writer.write(svg + "\n");
+                writer.flush();
+            } finally {
+                try {
+                    if (writer != null) {
+                        writer.close();
+                    }
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } 
+
+        }
+    }
+    
+    /**
+     * Generates a string containing a rendering of the chart in SVG format.
+     * This feature is only supported if the JFreeSVG library is included on 
+     * the classpath.
+     * 
+     * @return A string containing an SVG element for the current chart, or 
+     *     <code>null</code> if there is a problem with the method invocation
+     *     by reflection.
+     * 
+     * @since 1.0.16
+     */
+    public String generateSVG(int width, int height) {
+        Graphics2D g2 = createSVGGraphics2D(width, height);
+        if (g2 == null) {
+            throw new IllegalStateException("JFreeSVG library is not present.");
+        }
+        // we suppress shadow generation, because SVG is a vector format and
+        // the shadow effect is applied via bitmap effects...
+        g2.setRenderingHint(JFreeChart.KEY_SUPPRESS_SHADOW_GENERATION, true);
+        String svg = null;
+        Rectangle2D drawArea = new Rectangle2D.Double(0, 0, width, height);
+        this.chart.draw(g2, drawArea);
+        try {
+            Method m = g2.getClass().getMethod("getSVGElement");
+            svg = (String) m.invoke(g2);
+        } catch (NoSuchMethodException e) {
+            // null will be returned
+        } catch (SecurityException e) {
+            // null will be returned
+        } catch (IllegalAccessException e) {
+            // null will be returned
+        } catch (IllegalArgumentException e) {
+            // null will be returned
+        } catch (InvocationTargetException e) {
+            // null will be returned
+        }
+        return svg;
+    }
+
+    private Graphics2D createSVGGraphics2D(int w, int h) {
+        try {
+            Class svgGraphics2d = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
+            Constructor ctor = svgGraphics2d.getConstructor(int.class, int.class);
+            return (Graphics2D) ctor.newInstance(w, h);
+        } catch (ClassNotFoundException ex) {
+            return null;
+        } catch (NoSuchMethodException ex) {
+            return null;
+        } catch (SecurityException ex) {
+            return null;
+        } catch (InstantiationException ex) {
+            return null;
+        } catch (IllegalAccessException ex) {
+            return null;
+        } catch (IllegalArgumentException ex) {
+            return null;
+        } catch (InvocationTargetException ex) {
+            return null;
+        }
+    }
+
+    /**
+     * Saves the chart in PDF format (a filechooser will be displayed so that
+     * the user can specify the filename).  Note that this method only works
+     * if the OrsonPDF library is on the classpath...if this library is not
+     * present, the method will fail.
+     */
+    private void saveAsPDF(File f) {
+        File file = f;
+        if (file == null) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(this.defaultDirectoryForSaveAs);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    localizationResources.getString("PDF_Files"), "pdf");
+            fileChooser.addChoosableFileFilter(filter);
+            fileChooser.setFileFilter(filter);
+
+            int option = fileChooser.showSaveDialog(this);
+            if (option == JFileChooser.APPROVE_OPTION) {
+                String filename = fileChooser.getSelectedFile().getPath();
+                if (isEnforceFileExtensions()) {
+                    if (!filename.endsWith(".pdf")) {
+                        filename = filename + ".pdf";
+                    }
+                }
+                file = new File(filename);
+                if (file.exists()) {
+                    String fileExists = localizationResources.getString(
+                            "FILE_EXISTS_CONFIRM_OVERWRITE");
+                    int response = JOptionPane.showConfirmDialog(this, 
+                            fileExists, "Save As PDF", 
+                            JOptionPane.OK_CANCEL_OPTION);
+                    if (response == JOptionPane.CANCEL_OPTION) {
+                        file = null;
+                    }
+                }
+            }
+        }
+        
+        if (file != null) {
+            writeAsPDF(file, getWidth(), getHeight());
+        }
+    }
+
+    /**
+     * Returns <code>true</code> if OrsonPDF is on the classpath, and 
+     * <code>false</code> otherwise.  The OrsonPDF library can be found at
+     * http://www.object-refinery.com/pdf/
+     * 
+     * @return A boolean.
+     */
+    private boolean isOrsonPDFAvailable() {
+        Class pdfDocumentClass = null;
+        try {
+            pdfDocumentClass = Class.forName("com.orsonpdf.PDFDocument");
+        } catch (ClassNotFoundException e) {
+            // pdfDocument class will be null so the function will return false
+        }
+        return (pdfDocumentClass != null);
+    }
+    
+    /**
+     * Writes the current chart to the specified file in PDF format.  This 
+     * will only work when the OrsonPDF library is found on the classpath.
+     * Reflection is used to ensure there is no compile-time dependency on
+     * OrsonPDF (which is non-free software).
+     * 
+     * @param file  the output file (<code>null</code> not permitted).
+     * @param w  the chart width.
+     * @param h  the chart height.
+     */
+    private void writeAsPDF(File file, int w, int h) {
+        if (!isOrsonPDFAvailable()) {
+            throw new IllegalStateException(
+                    "OrsonPDF is not present on the classpath.");
+        }
+        ParamChecks.nullNotPermitted(file, "file");
+        try {
+            Class pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
+            Object pdfDoc = pdfDocClass.newInstance();
+            Method m = pdfDocClass.getMethod("createPage", Rectangle2D.class);
+            Rectangle2D rect = new Rectangle(w, h);
+            Object page = m.invoke(pdfDoc, rect);
+            Method m2 = page.getClass().getMethod("getGraphics2D");
+            Graphics2D g2 = (Graphics2D) m2.invoke(page);
+            // we suppress shadow generation, because PDF is a vector format and
+            // the shadow effect is applied via bitmap effects...
+            g2.setRenderingHint(JFreeChart.KEY_SUPPRESS_SHADOW_GENERATION, true);
+            Rectangle2D drawArea = new Rectangle2D.Double(0, 0, w, h);
+            this.chart.draw(g2, drawArea);
+            Method m3 = pdfDocClass.getMethod("writeToFile", File.class);
+            m3.invoke(pdfDoc, file);
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        } catch (InstantiationException ex) {
+            throw new RuntimeException(ex);
+        } catch (IllegalAccessException ex) {
+            throw new RuntimeException(ex);
+        } catch (NoSuchMethodException ex) {
+            throw new RuntimeException(ex);
+        } catch (SecurityException ex) {
+            throw new RuntimeException(ex);
+        } catch (IllegalArgumentException ex) {
+            throw new RuntimeException(ex);
+        } catch (InvocationTargetException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     /**
      * Creates a print job for the chart.
      */
     public void createChartPrintJob() {
-
         PrinterJob job = PrinterJob.getPrinterJob();
         PageFormat pf = job.defaultPage();
         PageFormat pf2 = job.pageDialog(pf);
@@ -2710,7 +2965,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                 }
             }
         }
-
     }
 
     /**
@@ -2836,11 +3090,26 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             if (separator) {
                 result.addSeparator();
             }
-            JMenuItem saveItem = new JMenuItem(
-                    localizationResources.getString("Save_as..."));
-            saveItem.setActionCommand(SAVE_COMMAND);
-            saveItem.addActionListener(this);
-            result.add(saveItem);
+            JMenu saveSubMenu = new JMenu("Save as");
+            JMenuItem pngItem = new JMenuItem("PNG...");
+            pngItem.setActionCommand("SAVE_AS_PNG");
+            pngItem.addActionListener(this);
+            saveSubMenu.add(pngItem);
+            
+            if (createSVGGraphics2D(10, 10) != null) {
+                JMenuItem svgItem = new JMenuItem("SVG...");
+                svgItem.setActionCommand("SAVE_AS_SVG");
+                svgItem.addActionListener(this);
+                saveSubMenu.add(svgItem);                
+            }
+            
+            if (isOrsonPDFAvailable()) {
+                JMenuItem pdfItem = new JMenuItem("PDF...");
+                pdfItem.setActionCommand("SAVE_AS_PDF");
+                pdfItem.addActionListener(this);
+                saveSubMenu.add(pdfItem);
+            }
+            result.add(saveSubMenu);
             separator = true;
         }
 
