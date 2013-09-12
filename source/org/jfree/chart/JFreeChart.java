@@ -272,6 +272,21 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     public static final float DEFAULT_BACKGROUND_IMAGE_ALPHA = 0.5f;
 
     /**
+     * The key for a rendering hint that can suppress the generation of a 
+     * shadow effect when drawing the chart.  The hint value must be a 
+     * Boolean.
+     * 
+     * @since 1.0.16
+     */
+    public static final RenderingHints.Key KEY_SUPPRESS_SHADOW_GENERATION
+            = new RenderingHints.Key(0) {
+        @Override
+        public boolean isCompatibleValue(Object val) {
+            return val instanceof Boolean;
+        }
+    };
+    
+    /**
      * Rendering hints that will be used for chart drawing.  This should never
      * be <code>null</code>.
      */
