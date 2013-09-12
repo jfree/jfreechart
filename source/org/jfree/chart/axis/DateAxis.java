@@ -129,6 +129,7 @@
  * 25-Jul-2013 : Update event notification to use fireChangeEvent() (DG);
  * 01-Aug-2013 : Added attributedLabel override to support superscripts,
  *               subscripts and more (DG);
+ * 12-Sep-2013 : Prevent exception when zooming in below 1 millisecond (DG);
  * 
  */
 
@@ -1837,31 +1838,43 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Zooms in on the current range.
+     * Zooms in on the current range (zoom-in stops once the axis length 
+     * reaches the equivalent of one millisecond).  
      *
      * @param lowerPercent  the new lower bound.
      * @param upperPercent  the new upper bound.
      */
+    @Override
     public void zoomRange(double lowerPercent, double upperPercent) {
         double start = this.timeline.toTimelineValue(
-            (long) getRange().getLowerBound()
-        );
-        double length = (this.timeline.toTimelineValue(
-                (long) getRange().getUpperBound())
-                - this.timeline.toTimelineValue(
-                    (long) getRange().getLowerBound()));
+                (long) getRange().getLowerBound());
+        double end = this.timeline.toTimelineValue(
+                (long) getRange().getUpperBound());
+        double length = end - start;
         Range adjusted;
         if (isInverted()) {
-            adjusted = new DateRange(this.timeline.toMillisecond((long) (start
-                    + (length * (1 - upperPercent)))),
-                    this.timeline.toMillisecond((long) (start + (length
-                    * (1 - lowerPercent)))));
+            long adjStart = (long) (start + (length * (1 - upperPercent)));
+            long adjEnd = (long) (start + (length * (1 - lowerPercent)));
+            // when zooming to sub-millisecond ranges, it can be the case that
+            // adjEnd == adjStart...and we can't have an axis with zero length
+            // so we apply this instead:
+            if (adjEnd <= adjStart) {
+                adjEnd = adjStart + 1L;
+            } 
+            adjusted = new DateRange(this.timeline.toMillisecond(adjStart),
+                    this.timeline.toMillisecond(adjEnd));
         }
         else {
-            adjusted = new DateRange(this.timeline.toMillisecond(
-                    (long) (start + length * lowerPercent)),
-                    this.timeline.toMillisecond((long) (start + length
-                    * upperPercent)));
+            long adjStart = (long) (start + length * lowerPercent);
+            long adjEnd = (long) (start + length * upperPercent);
+            // when zooming to sub-millisecond ranges, it can be the case that
+            // adjEnd == adjStart...and we can't have an axis with zero length
+            // so we apply this instead:
+            if (adjEnd <= adjStart) {
+                adjEnd = adjStart + 1L;
+            } 
+            adjusted = new DateRange(this.timeline.toMillisecond(adjStart),
+                    this.timeline.toMillisecond(adjEnd));
         }
         setRange(adjusted);
     }
