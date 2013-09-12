@@ -52,8 +52,8 @@ package org.jfree.data;
 /**
  * An interface (optional) that can be implemented by a dataset to assist in
  * determining the minimum and maximum values.  If not present, 
- * {@link DatasetUtilities} will iterate over all the values in the dataset to
- * get the bounds.
+ * {@link org.jfree.data.general.DatasetUtilities} will iterate over all the 
+ * values in the dataset to get the bounds.
  */
 public interface DomainInfo {
 
