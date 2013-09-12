@@ -1534,6 +1534,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param g  the graphics device for drawing on.
      */
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (this.chart == null) {
@@ -1675,6 +1676,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param event  details of the chart change event.
      */
+    @Override
     public void chartChanged(ChartChangeEvent event) {
         this.refreshBuffer = true;
         Plot plot = this.chart.getPlot();
@@ -1690,6 +1692,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param event  the event.
      */
+    @Override
     public void chartProgress(ChartProgressEvent event) {
         // does nothing - override if necessary
     }
@@ -1699,6 +1702,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param event  the event.
      */
+    @Override
     public void actionPerformed(ActionEvent event) {
 
         String command = event.getActionCommand();
@@ -1779,6 +1783,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param e  the mouse event.
      */
+    @Override
     public void mouseEntered(MouseEvent e) {
         if (!this.ownToolTipDelaysActive) {
             ToolTipManager ttm = ToolTipManager.sharedInstance();
@@ -1803,6 +1808,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param e  the mouse event.
      */
+    @Override
     public void mouseExited(MouseEvent e) {
         if (this.ownToolTipDelaysActive) {
             // restore original tooltip dealys
@@ -1822,6 +1828,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param e  The mouse event.
      */
+    @Override
     public void mousePressed(MouseEvent e) {
         if (this.chart == null) {
             return;
@@ -1886,6 +1893,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param e  the mouse event.
      */
+    @Override
     public void mouseDragged(MouseEvent e) {
 
         // if the popup menu has already been triggered, then ignore dragging...
@@ -1988,6 +1996,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param e  information about the event.
      */
+    @Override
     public void mouseReleased(MouseEvent e) {
 
         // if we've been panning, we need to reset now that the mouse is 
@@ -2085,6 +2094,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param event  Information about the mouse event.
      */
+    @Override
     public void mouseClicked(MouseEvent event) {
 
         Insets insets = getInsets();
@@ -2123,6 +2133,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param e  the event.
      */
+    @Override
     public void mouseMoved(MouseEvent e) {
         Graphics2D g2 = (Graphics2D) getGraphics();
         if (this.horizontalAxisTrace) {
@@ -2786,10 +2797,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @return A string containing an SVG element for the current chart, or 
      *     <code>null</code> if there is a problem with the method invocation
      *     by reflection.
-     * 
-     * @since 1.0.16
      */
-    public String generateSVG(int width, int height) {
+    private String generateSVG(int width, int height) {
         Graphics2D g2 = createSVGGraphics2D(width, height);
         if (g2 == null) {
             throw new IllegalStateException("JFreeSVG library is not present.");
@@ -2977,6 +2986,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @return The result of printing.
      */
+    @Override
     public int print(Graphics g, PageFormat pf, int pageIndex) {
 
         if (pageIndex != 0) {
@@ -3021,6 +3031,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @return An array of listeners.
      */
+    @Override
     public EventListener[] getListeners(Class listenerType) {
         if (listenerType == ChartMouseListener.class) {
             // fetch listeners from local storage
@@ -3280,6 +3291,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Updates the UI for a LookAndFeel change.
      */
+    @Override
     public void updateUI() {
         // here we need to update the UI for the popup menu, if the panel
         // has one...
