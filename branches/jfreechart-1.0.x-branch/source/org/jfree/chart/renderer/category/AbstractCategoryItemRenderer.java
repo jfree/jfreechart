@@ -237,6 +237,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @return The pass count.
      */
+    @Override
     public int getPassCount() {
         return 1;
     }
@@ -250,6 +251,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #setPlot(CategoryPlot)
      */
+    @Override
     public CategoryPlot getPlot() {
         return this.plot;
     }
@@ -263,6 +265,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #getPlot()
      */
+    @Override
     public void setPlot(CategoryPlot plot) {
         ParamChecks.nullNotPermitted(plot, "plot");
         this.plot = plot;
@@ -281,6 +284,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @return The generator (possibly <code>null</code>).
      */
+    @Override
     public CategoryItemLabelGenerator getItemLabelGenerator(int row,
             int column) {
         return getSeriesItemLabelGenerator(row);
@@ -295,6 +299,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #setSeriesItemLabelGenerator(int, CategoryItemLabelGenerator)
      */
+    @Override
     public CategoryItemLabelGenerator getSeriesItemLabelGenerator(int series) {
 
         // return the generator for ALL series, if there is one...
@@ -321,6 +326,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #getSeriesItemLabelGenerator(int)
      */
+    @Override
     public void setSeriesItemLabelGenerator(int series,
             CategoryItemLabelGenerator generator) {
         this.itemLabelGeneratorList.set(series, generator);
@@ -334,6 +340,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #setBaseItemLabelGenerator(CategoryItemLabelGenerator)
      */
+    @Override
     public CategoryItemLabelGenerator getBaseItemLabelGenerator() {
         return this.baseItemLabelGenerator;
     }
@@ -346,6 +353,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #getBaseItemLabelGenerator()
      */
+    @Override
     public void setBaseItemLabelGenerator(
             CategoryItemLabelGenerator generator) {
         this.baseItemLabelGenerator = generator;
@@ -366,6 +374,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @return The generator (possibly <code>null</code>).
      */
+    @Override
     public CategoryToolTipGenerator getToolTipGenerator(int row, int column) {
 
         CategoryToolTipGenerator result;
@@ -391,6 +400,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #setSeriesToolTipGenerator(int, CategoryToolTipGenerator)
      */
+    @Override
     public CategoryToolTipGenerator getSeriesToolTipGenerator(int series) {
         return (CategoryToolTipGenerator) this.toolTipGeneratorList.get(series);
     }
@@ -404,6 +414,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #getSeriesToolTipGenerator(int)
      */
+    @Override
     public void setSeriesToolTipGenerator(int series,
             CategoryToolTipGenerator generator) {
         this.toolTipGeneratorList.set(series, generator);
@@ -417,6 +428,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #setBaseToolTipGenerator(CategoryToolTipGenerator)
      */
+    @Override
     public CategoryToolTipGenerator getBaseToolTipGenerator() {
         return this.baseToolTipGenerator;
     }
@@ -429,6 +441,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #getBaseToolTipGenerator()
      */
+    @Override
     public void setBaseToolTipGenerator(CategoryToolTipGenerator generator) {
         this.baseToolTipGenerator = generator;
         fireChangeEvent();
@@ -446,6 +459,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @return The URL generator.
      */
+    @Override
     public CategoryURLGenerator getItemURLGenerator(int row, int column) {
         return getSeriesItemURLGenerator(row);
     }
@@ -459,6 +473,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #setSeriesItemURLGenerator(int, CategoryURLGenerator)
      */
+    @Override
     public CategoryURLGenerator getSeriesItemURLGenerator(int series) {
 
         // return the generator for ALL series, if there is one...
@@ -485,6 +500,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #getSeriesItemURLGenerator(int)
      */
+    @Override
     public void setSeriesItemURLGenerator(int series,
             CategoryURLGenerator generator) {
         this.itemURLGeneratorList.set(series, generator);
@@ -498,6 +514,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #setBaseItemURLGenerator(CategoryURLGenerator)
      */
+    @Override
     public CategoryURLGenerator getBaseItemURLGenerator() {
         return this.baseItemURLGenerator;
     }
@@ -510,6 +527,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #getBaseItemURLGenerator()
      */
+    @Override
     public void setBaseItemURLGenerator(CategoryURLGenerator generator) {
         this.baseItemURLGenerator = generator;
         fireChangeEvent();
@@ -566,6 +584,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @return The renderer state.
      */
+    @Override
     public CategoryItemRendererState initialise(Graphics2D g2,
             Rectangle2D dataArea, CategoryPlot plot, int rendererIndex,
             PlotRenderingInfo info) {
@@ -605,6 +624,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @return The range (or <code>null</code> if the dataset is
      *         <code>null</code> or empty).
      */
+    @Override
     public Range findRangeBounds(CategoryDataset dataset) {
         return findRangeBounds(dataset, false);
     }
@@ -656,6 +676,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @since 1.0.11
      */
+    @Override
     public double getItemMiddle(Comparable rowKey, Comparable columnKey,
             CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
             RectangleEdge edge) {
@@ -672,6 +693,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param plot  the plot.
      * @param dataArea  the data area.
      */
+    @Override
     public void drawBackground(Graphics2D g2, CategoryPlot plot,
             Rectangle2D dataArea) {
         plot.drawBackground(g2, dataArea);
@@ -686,6 +708,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param plot  the plot.
      * @param dataArea  the data area.
      */
+    @Override
     public void drawOutline(Graphics2D g2, CategoryPlot plot,
             Rectangle2D dataArea) {
         plot.drawOutline(g2, dataArea);
@@ -707,6 +730,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #drawRangeGridline(Graphics2D, CategoryPlot, ValueAxis,
      *     Rectangle2D, double)
      */
+    @Override
     public void drawDomainGridline(Graphics2D g2, CategoryPlot plot,
            Rectangle2D dataArea, double value) {
 
@@ -749,6 +773,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #drawDomainGridline(Graphics2D, CategoryPlot, Rectangle2D, double)
      */
+    @Override
     public void drawRangeGridline(Graphics2D g2, CategoryPlot plot,
             ValueAxis axis, Rectangle2D dataArea, double value) {
 
@@ -841,6 +866,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #drawRangeMarker(Graphics2D, CategoryPlot, ValueAxis, Marker,
      *     Rectangle2D)
      */
+    @Override
     public void drawDomainMarker(Graphics2D g2, CategoryPlot plot,
             CategoryAxis axis, CategoryMarker marker, Rectangle2D dataArea) {
 
@@ -924,6 +950,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @see #drawDomainMarker(Graphics2D, CategoryPlot, CategoryAxis,
      *     CategoryMarker, Rectangle2D)
      */
+    @Override
     public void drawRangeMarker(Graphics2D g2, CategoryPlot plot,
             ValueAxis axis, Marker marker, Rectangle2D dataArea) {
 
@@ -1152,6 +1179,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #getLegendItems()
      */
+    @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
 
         CategoryPlot p = getPlot();
@@ -1204,6 +1232,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
 
         if (obj == this) {
@@ -1270,6 +1299,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @return The hash code.
      */
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         return result;
@@ -1280,6 +1310,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @return The drawing supplier (possibly <code>null</code>).
      */
+    @Override
     public DrawingSupplier getDrawingSupplier() {
         DrawingSupplier result = null;
         CategoryPlot cp = getPlot();
@@ -1352,7 +1383,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             g2.setFont(labelFont);
             g2.setPaint(paint);
             String label = generator.generateLabel(dataset, row, column);
-            ItemLabelPosition position = null;
+            ItemLabelPosition position;
             if (!negative) {
                 position = getPositiveItemLabelPosition(row, column);
             }
@@ -1379,6 +1410,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *         belonging to the renderer does not support cloning (for example,
      *         an item label generator).
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
 
         AbstractCategoryItemRenderer clone
@@ -1526,6 +1558,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @see #getLegendItem(int, int)
      */
+    @Override
     public LegendItemCollection getLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
         if (this.plot == null) {
@@ -1748,6 +1781,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *     CategoryItemLabelGenerator)} and
      *     {@link #setBaseItemLabelGenerator(CategoryItemLabelGenerator)}.
      */
+    @Override
     public void setItemLabelGenerator(CategoryItemLabelGenerator generator) {
         this.itemLabelGenerator = generator;
         fireChangeEvent();
@@ -1765,6 +1799,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *     It is sufficient to rely on {@link #getSeriesToolTipGenerator(int)}
      *     and {@link #getBaseToolTipGenerator()}.
      */
+    @Override
     public CategoryToolTipGenerator getToolTipGenerator() {
         return this.toolTipGenerator;
     }
@@ -1783,6 +1818,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *     CategoryToolTipGenerator)} and
      *     {@link #setBaseToolTipGenerator(CategoryToolTipGenerator)}.
      */
+    @Override
     public void setToolTipGenerator(CategoryToolTipGenerator generator) {
         this.toolTipGenerator = generator;
         fireChangeEvent();
@@ -1799,6 +1835,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *     CategoryURLGenerator)} and
      *     {@link #setBaseItemURLGenerator(CategoryURLGenerator)}.
      */
+    @Override
     public void setItemURLGenerator(CategoryURLGenerator generator) {
         this.itemURLGenerator = generator;
         fireChangeEvent();
