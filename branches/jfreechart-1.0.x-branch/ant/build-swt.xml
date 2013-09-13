@@ -4,14 +4,14 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.0.15" />
+        <property name="jfreechart.version" value="1.0.16" />
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.20" />
         <property name="builddir" value="${basedir}/build" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="jfreechart.jar" value="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
         <!-- Edit the next line to link to the swt library you want, see README file in the swt folder -->
-        <property name="swt.jar" value="your/path/to/swt-3.4/swt.jar"/>
+        <property name="swt.jar" value="/Users/dgilbert/swt-4/swt.jar"/>
         <path id="build.classpath">
             <pathelement location="${jcommon.jar}"/>
             <pathelement location="${jfreechart.jar}"/>
@@ -32,8 +32,8 @@
                destdir="${basedir}/build"
                debug="on"
                deprecation="on"
-               source="1.3"
-               target="1.3">
+               source="1.6"
+               target="1.6">
             <classpath refid="build.classpath" />
             <include name="org/jfree/experimental/swt/**/*.java"/>
         </javac>
@@ -60,8 +60,8 @@
                destdir="${basedir}/build"
                debug="on"
                deprecation="on"
-               source="1.3"
-               target="1.3">
+               source="1.6"
+               target="1.6">
             <classpath refid="build.classpath" />
             <include name="org/jfree/experimental/chart/**/*.java"/>
         </javac>
