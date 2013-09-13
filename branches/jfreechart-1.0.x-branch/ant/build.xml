@@ -25,14 +25,16 @@
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.20" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
+        <property name="jfreesvg.name" value="jfreesvg" />
+        <property name="jfreesvg.version" value="1.2" />
+        <property name="orsonpdf.name" value="orsonpdf" />
+        <property name="orsonpdf.version" value="1.2-eval" />
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
         <property name="junit.jar" value="${basedir}/lib/junit-4.11.jar"/>
         <property name="hamcrest.jar" value="${basedir}/lib/hamcrest-core-1.3.jar"/>
         <property name="src.version" value="1.6"/>
         <property name="target.version" value="1.6"/>
-        <available classname="java.lang.Annotation" property="src.version" value="1.5"/>
-        <available classname="java.lang.Annotation" property="target.version" value="1.5"/>
         <path id="build.classpath">
             <fileset dir="${basedir}/lib/">
                 <include name="${jcommon.name}-${jcommon.version}.jar"/>
@@ -231,10 +233,12 @@
         <!-- copy across lib files -->
         <copy file="${jcommon.jar}" tofile="${basedir}/distribution/lib/${jcommon.name}-${jcommon.version}.jar" />
         <copy file="${basedir}/lib/swtgraphics2d.jar" tofile="${basedir}/distribution/lib/swtgraphics2d.jar" failonerror="false" />
-        <copy file="${basedir}/lib/jfreechart-${jfreechart.version}-swt.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-swt.jar"  failonerror="false" />
+        <copy file="${basedir}/lib/jfreechart-${jfreechart.version}-swt.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-swt.jar" failonerror="false" />
         <copy file="${servlet.jar}" tofile="${basedir}/distribution/lib/servlet.jar" />
         <copy file="${junit.jar}" tofile="${basedir}/distribution/lib/junit-4.11.jar" />
         <copy file="${hamcrest.jar}" tofile="${basedir}/distribution/lib/hamcrest-core-1.3.jar" />
+        <copy file="${basedir}/lib/${jfreesvg.name}-${jfreesvg.version}.jar" tofile="${basedir}/distribution/lib/${jfreesvg.name}-${jfreesvg.version}.jar" />
+        <copy file="${basedir}/lib/${orsonpdf.name}-${orsonpdf.version}.jar" tofile="${basedir}/distribution/lib/${orsonpdf.name}-${orsonpdf.version}.jar" />
 
         <!-- copy across ant build files -->
         <copy file="${basedir}/ant/build.xml" tofile="${basedir}/distribution/ant/build.xml" />
