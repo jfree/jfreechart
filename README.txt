@@ -31,7 +31,7 @@ The latest version of this class library can be obtained from:
 
     http://www.jfree.org/jfreechart/
 
-If you have an comments, suggestions or bugs to report, please post a
+If you have any comments, suggestions or bugs to report, please post a
 message in the JFreeChart forum.
 
 -----------------
@@ -127,6 +127,10 @@ demo (using JDK 1.6.0 or later), use the following command:
 
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
+
+The demo application also links to the JFreeSVG and OrsonPDF libraries, to 
+provide export facilities to the SVG and PDF formats.  These fast, lightweight 
+libraries are not free, licenses can be purchased from Object Refinery Limited. 
 
 ---------------
 8.  LIMITATIONS
