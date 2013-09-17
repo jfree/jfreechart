@@ -27,7 +27,7 @@
  * -----------------------
  * GradientBarPainter.java
  * -----------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * --------
  * 19-Jun-2008 : Version 1 (DG);
  * 15-Aug-2008 : Use outline paint and shadow paint (DG);
+ * 17-Sep-2013 : Fix coordinate error in gradient (DG);
  *
  */
 
@@ -155,7 +156,7 @@ public class GradientBarPainter implements BarPainter, Serializable {
                     this.g3);
             GradientPaint gp = new GradientPaint(0.0f,
                     (float) regions[0].getMinY(), c0, 0.0f,
-                    (float) regions[0].getMaxX(), Color.white);
+                    (float) regions[0].getMaxY(), Color.white);
             g2.setPaint(gp);
             g2.fill(regions[0]);
 
