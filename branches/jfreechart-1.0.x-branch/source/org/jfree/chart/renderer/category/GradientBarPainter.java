@@ -102,6 +102,7 @@ public class GradientBarPainter implements BarPainter, Serializable {
      * @param base  indicates which side of the rectangle is the base of the
      *              bar.
      */
+    @Override
     public void paintBar(Graphics2D g2, BarRenderer renderer, int row,
             int column, RectangularShape bar, RectangleEdge base) {
 
@@ -118,8 +119,8 @@ public class GradientBarPainter implements BarPainter, Serializable {
             c1 = gp.getColor2();
         }
         else {
-            c0 = Color.blue;
-            c1 = Color.blue.brighter();
+            c0 = Color.BLUE;
+            c1 = Color.BLUE.brighter();
         }
 
         // as a special case, if the bar colour has alpha == 0, we draw
@@ -132,12 +133,12 @@ public class GradientBarPainter implements BarPainter, Serializable {
             Rectangle2D[] regions = splitVerticalBar(bar, this.g1, this.g2,
                     this.g3);
             GradientPaint gp = new GradientPaint((float) regions[0].getMinX(),
-                    0.0f, c0, (float) regions[0].getMaxX(), 0.0f, Color.white);
+                    0.0f, c0, (float) regions[0].getMaxX(), 0.0f, Color.WHITE);
             g2.setPaint(gp);
             g2.fill(regions[0]);
 
             gp = new GradientPaint((float) regions[1].getMinX(), 0.0f,
-                    Color.white, (float) regions[1].getMaxX(), 0.0f, c0);
+                    Color.WHITE, (float) regions[1].getMaxX(), 0.0f, c0);
             g2.setPaint(gp);
             g2.fill(regions[1]);
 
@@ -156,12 +157,12 @@ public class GradientBarPainter implements BarPainter, Serializable {
                     this.g3);
             GradientPaint gp = new GradientPaint(0.0f,
                     (float) regions[0].getMinY(), c0, 0.0f,
-                    (float) regions[0].getMaxY(), Color.white);
+                    (float) regions[0].getMaxY(), Color.WHITE);
             g2.setPaint(gp);
             g2.fill(regions[0]);
 
             gp = new GradientPaint(0.0f, (float) regions[1].getMinY(),
-                    Color.white, 0.0f, (float) regions[1].getMaxY(), c0);
+                    Color.WHITE, 0.0f, (float) regions[1].getMaxY(), c0);
             g2.setPaint(gp);
             g2.fill(regions[1]);
 
@@ -203,6 +204,7 @@ public class GradientBarPainter implements BarPainter, Serializable {
      *              bar.
      * @param pegShadow  peg the shadow to the base of the bar?
      */
+    @Override
     public void paintBarShadow(Graphics2D g2, BarRenderer renderer, int row,
             int column, RectangularShape bar, RectangleEdge base,
             boolean pegShadow) {
@@ -341,6 +343,7 @@ public class GradientBarPainter implements BarPainter, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -366,6 +369,7 @@ public class GradientBarPainter implements BarPainter, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int hash = 37;
         hash = HashUtilities.hashCode(hash, this.g1);
