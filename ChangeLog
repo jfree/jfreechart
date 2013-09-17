@@ -1,3 +1,10 @@
+2013-09-17  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/renderer/category/GradientBarPainter.java
+    (paintBar): Fix coordinate bug for gradient paint.
+
+----------  JFREECHART 1.0.16 RELEASED ------------------------
+
 2013-09-12  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/LocalizationBundle.properties
