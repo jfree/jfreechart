@@ -1737,7 +1737,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the order in which the columns are rendered.  The default value
      * is <code>SortOrder.ASCENDING</code>.
      *
-     * @return The column rendering order (never <code>null</code).
+     * @return The column rendering order (never <code>null</code>).
      *
      * @see #setColumnRenderingOrder(SortOrder)
      */
@@ -2314,6 +2314,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param event  the event.
      */
+    @Override
     public void rendererChanged(RendererChangeEvent event) {
         Plot parent = getParent();
         if (parent != null) {
