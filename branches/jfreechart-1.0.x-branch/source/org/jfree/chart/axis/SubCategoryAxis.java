@@ -47,7 +47,7 @@
  *               report 2275695 (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
  * 01-Aug-2013 : Added attributedLabel override to support superscripts,
- *               subscripts and more (DG); *
+ *               subscripts and more (DG);
  */
 
 package org.jfree.chart.axis;
@@ -64,7 +64,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
@@ -178,6 +177,7 @@ public class SubCategoryAxis extends CategoryAxis
      *
      * @return The space required to draw the axis.
      */
+    @Override
     public AxisSpace reserveSpace(Graphics2D g2, Plot plot, 
             Rectangle2D plotArea, RectangleEdge edge, AxisSpace space) {
 
@@ -248,6 +248,7 @@ public class SubCategoryAxis extends CategoryAxis
      *
      * @return The axis state (never <code>null</code>).
      */
+    @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
             Rectangle2D dataArea, RectangleEdge edge, 
             PlotRenderingInfo plotState) {
@@ -393,6 +394,7 @@ public class SubCategoryAxis extends CategoryAxis
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -413,6 +415,12 @@ public class SubCategoryAxis extends CategoryAxis
         return false;
     }
 
+    /**
+     * Returns a hashcode for this instance.
+     * 
+     * @return A hashcode for this instance. 
+     */
+    @Override
     public int hashCode() {
         return super.hashCode();
     }
