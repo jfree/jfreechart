@@ -167,7 +167,7 @@
                 <version>2.10</version>
                 <configuration>
                     <includes>
-                        <include>**/*Tests.java</include>
+                        <include>**/*Test.java</include>
                     </includes>
                     <excludes>
                         <exclude>**/JFreeChartTestSuite.java</exclude>
