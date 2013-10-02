@@ -391,8 +391,7 @@ public class XYSeriesCollectionTest {
             fail("Should have thrown IllegalArgumentException on negative key");
         }
         catch (IllegalArgumentException e) {
-           assertEquals("java.beans.PropertyVetoException: Duplicate key2", 
-                   e.getMessage());
+           assertEquals("Duplicate key2", e.getMessage());
         }
     }
 
