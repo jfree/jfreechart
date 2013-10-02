@@ -222,7 +222,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.source.level>1.3</project.source.level>
-        <project.target.level>1.3</project.target.level>
+        <project.source.level>1.6</project.source.level>
+        <project.target.level>1.6</project.target.level>
     </properties>
 </project>
