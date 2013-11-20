@@ -794,6 +794,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
          */
         public State(PlotRenderingInfo info) {
             super(info);
+            this.seriesPath = new GeneralPath();
         }
 
         /**
@@ -853,16 +854,10 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      *
      * @return The renderer state.
      */
-    public XYItemRendererState initialise(Graphics2D g2,
-                                          Rectangle2D dataArea,
-                                          XYPlot plot,
-                                          XYDataset data,
-                                          PlotRenderingInfo info) {
-
-        State state = new State(info);
-        state.seriesPath = new GeneralPath();
-        return state;
-
+    @Override
+    public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
+            XYPlot plot, XYDataset data, PlotRenderingInfo info) {
+        return new State(info);
     }
 
     /**
@@ -883,10 +878,11 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, XYItemRendererState state,
-        Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
-        ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
-        int series, int item, CrosshairState crosshairState, int pass) {
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         // do nothing if item is not visible
         if (!getItemVisible(series, item)) {
@@ -1052,15 +1048,9 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @param dataArea  the area within which the data is being drawn.
      */
     protected void drawPrimaryLineAsPath(XYItemRendererState state,
-                                         Graphics2D g2, XYPlot plot,
-                                         XYDataset dataset,
-                                         int pass,
-                                         int series,
-                                         int item,
-                                         ValueAxis domainAxis,
-                                         ValueAxis rangeAxis,
-                                         Rectangle2D dataArea) {
-
+            Graphics2D g2, XYPlot plot, XYDataset dataset, int pass,
+            int series, int item, ValueAxis domainAxis, ValueAxis rangeAxis,
+            Rectangle2D dataArea) {
 
         RectangleEdge xAxisLocation = plot.getDomainAxisEdge();
         RectangleEdge yAxisLocation = plot.getRangeAxisEdge();
