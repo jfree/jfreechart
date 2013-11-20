@@ -52,12 +52,12 @@ import org.junit.Test;
 /**
  * Some tests for the {@link SegmentedTimeline} class.
  */
-public class SegmentedTimelineTest2 {
+public class SegmentedTimelineAdditionalTest {
 
     /**
      * Constructor
      */
-    public SegmentedTimelineTest2() {
+    public SegmentedTimelineAdditionalTest() {
         super();
     }
 
