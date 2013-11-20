@@ -428,6 +428,7 @@ public abstract class ChartFactory {
                     plot.setSectionPaint(key, Color.red);
                 }
                 if (showDifference) {
+                    assert series != null; // suppresses compiler warning
                     series.setValue(key + " (+100%)", newValue);
                 }
             }
@@ -447,6 +448,7 @@ public abstract class ChartFactory {
                     plot.setSectionPaint(key, new Color((int) shade, 0, 0));
                 }
                 if (showDifference) {
+                    assert series != null; // suppresses compiler warning
                     series.setValue(key + " (" + (percentChange >= 0 ? "+" : "")
                             + NumberFormat.getPercentInstance().format(
                             percentChange / 100.0) + ")", newValue);
@@ -547,6 +549,7 @@ public abstract class ChartFactory {
                     plot.setSectionPaint(key, Color.red);
                 }
                 if (showDifference) {
+                    assert series != null; // suppresses compiler warning
                     series.setValue(key + " (+100%)", newValue);
                 }
             }
@@ -566,6 +569,7 @@ public abstract class ChartFactory {
                     plot.setSectionPaint(key, new Color((int) shade, 0, 0));
                 }
                 if (showDifference) {
+                    assert series != null; // suppresses compiler warning
                     series.setValue(key + " (" + (percentChange >= 0 ? "+" : "")
                             + NumberFormat.getPercentInstance().format(
                             percentChange / 100.0) + ")", newValue);
