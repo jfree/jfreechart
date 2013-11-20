@@ -1119,6 +1119,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @param g2  the graphics device.
      * @param area  the area within which the chart should be drawn.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
         draw(g2, area, null, null);
     }
@@ -1214,7 +1215,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (this.title != null && this.title.isVisible()) {
             EntityCollection e = drawTitle(this.title, g2, nonTitleArea,
                     (entities != null));
-            if (e != null) {
+            if (e != null && entities != null) {
                 entities.addAll(e);
             }
         }
@@ -1225,7 +1226,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             if (currentTitle.isVisible()) {
                 EntityCollection e = drawTitle(currentTitle, g2, nonTitleArea,
                         (entities != null));
-                if (e != null) {
+                if (e != null && entities != null) {
                     entities.addAll(e);
                 }
             }
@@ -1565,6 +1566,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *
      * @param event  information about the chart title change.
      */
+    @Override
     public void titleChanged(TitleChangeEvent event) {
         event.setChart(this);
         notifyListeners(event);
@@ -1576,6 +1578,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *
      * @param event  information about the plot change.
      */
+    @Override
     public void plotChanged(PlotChangeEvent event) {
         event.setChart(this);
         notifyListeners(event);
@@ -1588,6 +1591,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1703,6 +1707,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *
      * @throws CloneNotSupportedException if the chart is not cloneable.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         JFreeChart chart = (JFreeChart) super.clone();
 
@@ -1873,8 +1878,8 @@ class JFreeChartInfo extends ProjectInfo {
      *
      * @return The JFreeChart logo.
      */
+    @Override
     public Image getLogo() {
-
         Image logo = super.getLogo();
         if (logo == null) {
             URL imageURL = this.getClass().getClassLoader().getResource(
@@ -1887,7 +1892,6 @@ class JFreeChartInfo extends ProjectInfo {
             }
         }
         return logo;
-
     }
 
 }
