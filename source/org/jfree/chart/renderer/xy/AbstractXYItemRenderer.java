@@ -302,8 +302,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     @Override
     public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
             XYPlot plot, XYDataset data, PlotRenderingInfo info) {
-        XYItemRendererState state = new XYItemRendererState(info);
-        return state;
+        return new XYItemRendererState(info);
     }
 
     // ITEM LABEL GENERATOR
