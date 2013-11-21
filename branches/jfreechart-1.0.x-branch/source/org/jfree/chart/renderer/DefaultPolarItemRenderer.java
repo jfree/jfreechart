@@ -224,6 +224,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      *
      * @see #getPlot()
      */
+    @Override
     public void setPlot(PolarPlot plot) {
         this.plot = plot;
     }
@@ -235,6 +236,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      *
      * @see #setPlot(PolarPlot)
      */
+    @Override
     public PolarPlot getPlot() {
         return this.plot;
     }
@@ -348,6 +350,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      *
      * @return The drawing supplier.
      */
+    @Override
     public DrawingSupplier getDrawingSupplier() {
         DrawingSupplier result = null;
         PolarPlot p = getPlot();
@@ -493,6 +496,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param dataset  the dataset.
      * @param seriesIndex  the series index.
      */
+    @Override
     public void drawSeries(Graphics2D g2, Rectangle2D dataArea,
             PlotRenderingInfo info, PolarPlot plot, XYDataset dataset,
             int seriesIndex) {
@@ -515,7 +519,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                 poly.lineTo(p.x, p.y);
             }
         }
-
+        assert poly != null;
         if (getConnectFirstAndLastPoint()) {
             poly.closePath();
         }
@@ -594,6 +598,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param ticks  the ticks (<code>null</code> not permitted).
      * @param dataArea  the data area.
      */
+    @Override
     public void drawAngularGridLines(Graphics2D g2, PolarPlot plot,
                 List ticks, Rectangle2D dataArea) {
 
@@ -638,6 +643,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param ticks  the ticks (<code>null</code> not permitted).
      * @param dataArea  the data area.
      */
+    @Override
     public void drawRadialGridLines(Graphics2D g2, PolarPlot plot, 
             ValueAxis radialAxis, List ticks, Rectangle2D dataArea) {
 
@@ -678,6 +684,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      *
      * @return The legend item.
      */
+    @Override
     public LegendItem getLegendItem(int series) {
         LegendItem result;
         PolarPlot plot = getPlot();
@@ -739,6 +746,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.14
      */
+    @Override
     public XYToolTipGenerator getToolTipGenerator(int series, int item) {
         XYToolTipGenerator generator
             = (XYToolTipGenerator) this.toolTipGeneratorList.get(series);
@@ -755,6 +763,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      *
      * @since 1.0.14
      */
+    @Override
     public XYToolTipGenerator getSeriesToolTipGenerator(int series) {
         return (XYToolTipGenerator) this.toolTipGeneratorList.get(series);
     }
@@ -767,6 +776,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.14
      */
+    @Override
     public void setSeriesToolTipGenerator(int series,
             XYToolTipGenerator generator) {
         this.toolTipGeneratorList.set(series, generator);
@@ -780,6 +790,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.14
      */
+    @Override
     public XYToolTipGenerator getBaseToolTipGenerator() {
         return this.baseToolTipGenerator;
     }
@@ -792,6 +803,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.14
      */
+    @Override
     public void setBaseToolTipGenerator(XYToolTipGenerator generator) {
         this.baseToolTipGenerator = generator;
         fireChangeEvent();
@@ -804,6 +816,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.14
      */
+    @Override
     public XYURLGenerator getURLGenerator() {
         return this.urlGenerator;
     }
@@ -815,6 +828,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.14
      */
+    @Override
     public void setURLGenerator(XYURLGenerator urlGenerator) {
         this.urlGenerator = urlGenerator;
         fireChangeEvent();
@@ -881,6 +895,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @return <code>true</code> if this renderer is equal to <code>obj</code>,
      *     and <code>false</code> otherwise.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -938,6 +953,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      *
      * @throws CloneNotSupportedException if the renderer cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         DefaultPolarItemRenderer clone
                 = (DefaultPolarItemRenderer) super.clone();
