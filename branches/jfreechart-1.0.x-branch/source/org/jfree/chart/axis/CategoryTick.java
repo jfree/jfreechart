@@ -116,6 +116,7 @@ public class CategoryTick extends Tick {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -141,6 +142,7 @@ public class CategoryTick extends Tick {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 41;
         result = 37 * result + this.category.hashCode();

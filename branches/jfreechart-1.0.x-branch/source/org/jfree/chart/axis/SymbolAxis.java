@@ -268,8 +268,9 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * @param dataArea  the area in which the plot and axes should be drawn.
      * @param edge  the edge along which the axis is drawn.
      */
+    @Override
     protected void selectAutoTickUnit(Graphics2D g2, Rectangle2D dataArea,
-                                      RectangleEdge edge) {
+            RectangleEdge edge) {
         throw new UnsupportedOperationException();
     }
 
@@ -289,6 +290,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      *
      * @return The axis state (never <code>null</code>).
      */
+    @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
             Rectangle2D dataArea, RectangleEdge edge, 
             PlotRenderingInfo plotState) {
@@ -443,6 +445,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     /**
      * Rescales the axis to ensure that all data is visible.
      */
+    @Override
     protected void autoAdjustRange() {
 
         Plot plot = getPlot();
@@ -526,6 +529,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      *
      * @return A list of ticks.
      */
+    @Override
     public List refreshTicks(Graphics2D g2, AxisState state,
             Rectangle2D dataArea, RectangleEdge edge) {
         List ticks = null;
@@ -548,6 +552,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      *
      * @return The ticks.
      */
+    @Override
     protected List refreshTicksHorizontal(Graphics2D g2, Rectangle2D dataArea,
             RectangleEdge edge) {
 
@@ -641,6 +646,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      *
      * @return The ticks.
      */
+    @Override
     protected List refreshTicksVertical(Graphics2D g2, Rectangle2D dataArea,
             RectangleEdge edge) {
 
@@ -692,8 +698,8 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                     previousDrawnTickLabelLength = tickLabelLength;
                 }
 
-                TextAnchor anchor = null;
-                TextAnchor rotationAnchor = null;
+                TextAnchor anchor;
+                TextAnchor rotationAnchor;
                 double angle = 0.0;
                 if (isVerticalTickLabels()) {
                     anchor = TextAnchor.BOTTOM_CENTER;
@@ -749,6 +755,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

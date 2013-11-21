@@ -82,6 +82,7 @@ public final class AxisLabelLocation implements Serializable {
      *
      * @return The string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
@@ -94,6 +95,7 @@ public final class AxisLabelLocation implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -108,6 +110,12 @@ public final class AxisLabelLocation implements Serializable {
         return true;
     }
 
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code. 
+     */
+    @Override
     public int hashCode() {
         int hash = 5;
         hash = 83 * hash + this.name.hashCode();

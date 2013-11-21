@@ -287,6 +287,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -327,6 +328,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 41;
         result = result + 37 * this.periodClass.hashCode();
@@ -341,6 +343,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         PeriodAxisLabelInfo clone = (PeriodAxisLabelInfo) super.clone();
         return clone;

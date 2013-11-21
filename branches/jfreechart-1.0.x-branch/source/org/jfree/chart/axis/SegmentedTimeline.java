@@ -589,6 +589,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @return The timeline value.
      */
+    @Override
     public long toTimelineValue(long millisecond) {
 
         long result;
@@ -652,6 +653,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @return The timeline value (in milliseconds).
      */
+    @Override
     public long toTimelineValue(Date date) {
         return toTimelineValue(getTime(date));
         //return toTimelineValue(dateDomainValue.getTime());
@@ -664,6 +666,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @return The domain value (in milliseconds).
      */
+    @Override
     public long toMillisecond(long timelineValue) {
 
         // calculate the result as if no exceptions
@@ -741,6 +744,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @return <code>true</code> if value is contained in the timeline.
      */
+    @Override
     public boolean containsDomainValue(long millisecond) {
         Segment segment = getSegment(millisecond);
         return segment.inIncludeSegments();
@@ -753,6 +757,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @return <code>true</code> if value is contained in the timeline
      */
+    @Override
     public boolean containsDomainValue(Date date) {
         return containsDomainValue(getTime(date));
     }
@@ -767,8 +772,9 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @return <code>true</code> if the range is contained in the timeline
      */
+    @Override
     public boolean containsDomainRange(long domainValueStart,
-                                       long domainValueEnd) {
+            long domainValueEnd) {
         if (domainValueEnd < domainValueStart) {
             throw new IllegalArgumentException(
                     "domainValueEnd (" + domainValueEnd
@@ -799,8 +805,9 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @return <code>true</code> if the range is contained in the timeline
      */
+    @Override
     public boolean containsDomainRange(Date dateDomainValueStart,
-                                       Date dateDomainValueEnd) {
+            Date dateDomainValueEnd) {
         return containsDomainRange(getTime(dateDomainValueStart),
                 getTime(dateDomainValueEnd));
     }
@@ -1096,6 +1103,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @return <code>true</code> or <code>false</code>
      */
+    @Override
     public boolean equals(Object o) {
         if (o instanceof SegmentedTimeline) {
             SegmentedTimeline other = (SegmentedTimeline) o;
@@ -1118,6 +1126,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 19;
         result = 37 * result
@@ -1216,6 +1225,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException ??.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         SegmentedTimeline clone = (SegmentedTimeline) super.clone();
         return clone;
@@ -1442,6 +1452,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          *
          * @return <code>true</code> if we are the same segment
          */
+        @Override
         public boolean equals(Object object) {
             if (object instanceof Segment) {
                 Segment other = (Segment) object;
@@ -1479,6 +1490,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          * @return -1: this < object, 0: this.equal(object) and
          *         +1: this > object
          */
+        @Override
         public int compareTo(Object object) {
             Segment other = (Segment) object;
             if (this.before(other)) {
@@ -1651,6 +1663,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          *
          * @return The segment count.
          */
+        @Override
         public long getSegmentCount() {
             return this.segmentCount;
         }
@@ -1664,6 +1677,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          *
          * @return The intersection.
          */
+        @Override
         public Segment intersect(long from, long to) {
 
             // Segment fromSegment = getSegment(from);
@@ -1690,6 +1704,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          *
          * @return <code>true</code> or </code>false</code>.
          */
+        @Override
         public boolean inIncludeSegments() {
             for (Segment segment = getSegment(this.segmentStart);
                 segment.getSegmentStart() < this.segmentEnd;
@@ -1706,6 +1721,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          *
          * @return <code>true</code> or </code>false</code>.
          */
+        @Override
         public boolean inExcludeSegments() {
             for (Segment segment = getSegment(this.segmentStart);
                 segment.getSegmentStart() < this.segmentEnd;

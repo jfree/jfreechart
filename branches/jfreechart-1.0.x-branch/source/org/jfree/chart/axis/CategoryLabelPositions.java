@@ -365,8 +365,8 @@ public class CategoryLabelPositions implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
-
         if (this == obj) {
             return true;
         }
@@ -388,9 +388,7 @@ public class CategoryLabelPositions implements Serializable {
         if (!this.positionForAxisAtRight.equals(that.positionForAxisAtRight)) {
             return false;
         }
-
         return true;
-
     }
 
     /**
@@ -398,6 +396,7 @@ public class CategoryLabelPositions implements Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 19;
         result = 37 * result + this.positionForAxisAtTop.hashCode();

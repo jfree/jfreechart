@@ -126,6 +126,7 @@ public abstract class ValueTick extends Tick {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

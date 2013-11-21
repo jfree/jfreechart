@@ -393,6 +393,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @return A boolean.
      */
+    @Override
     public boolean isMinorTickMarksVisible() {
         return this.minorTickMarksVisible;
     }
@@ -404,6 +405,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @param visible  the flag.
      */
+    @Override
     public void setMinorTickMarksVisible(boolean visible) {
         this.minorTickMarksVisible = visible;
         fireChangeEvent();
@@ -482,6 +484,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @return The length.
      */
+    @Override
     public float getMinorTickMarkInsideLength() {
         return this.minorTickMarkInsideLength;
     }
@@ -492,6 +495,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @param length  the length.
      */
+    @Override
     public void setMinorTickMarkInsideLength(float length) {
         this.minorTickMarkInsideLength = length;
         fireChangeEvent();
@@ -502,6 +506,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @return The length.
      */
+    @Override
     public float getMinorTickMarkOutsideLength() {
         return this.minorTickMarkOutsideLength;
     }
@@ -512,6 +517,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @param length  the length.
      */
+    @Override
     public void setMinorTickMarkOutsideLength(float length) {
         this.minorTickMarkOutsideLength = length;
         fireChangeEvent();
@@ -548,6 +554,7 @@ public class PeriodAxis extends ValueAxis
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      */
+    @Override
     public void setRange(Range range, boolean turnOffAutoRange, 
             boolean notify) {
         long upper = Math.round(range.getUpperBound());
@@ -565,6 +572,7 @@ public class PeriodAxis extends ValueAxis
      * Configures the axis to work with the current plot.  Override this method
      * to perform any special processing (such as auto-rescaling).
      */
+    @Override
     public void configure() {
         if (this.isAutoRange()) {
             autoAdjustRange();
@@ -584,6 +592,7 @@ public class PeriodAxis extends ValueAxis
      * @return The space required to draw the axis (including pre-reserved
      *         space).
      */
+    @Override
     public AxisSpace reserveSpace(Graphics2D g2, Plot plot, 
             Rectangle2D plotArea, RectangleEdge edge, AxisSpace space) {
         // create a new space object if one wasn't supplied...
@@ -650,6 +659,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @return The axis state (never <code>null</code>).
      */
+    @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
             Rectangle2D dataArea, RectangleEdge edge,
             PlotRenderingInfo plotState) {
@@ -952,6 +962,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @return The list of ticks.
      */
+    @Override
     public List refreshTicks(Graphics2D g2, AxisState state,
             Rectangle2D dataArea, RectangleEdge edge) {
         return Collections.EMPTY_LIST;
@@ -969,6 +980,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @return The Java2D coordinate.
      */
+    @Override
     public double valueToJava2D(double value, Rectangle2D area,
             RectangleEdge edge) {
 
@@ -1013,6 +1025,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @return The data value.
      */
+    @Override
     public double java2DToValue(double java2DValue, Rectangle2D area,
             RectangleEdge edge) {
 
@@ -1043,6 +1056,7 @@ public class PeriodAxis extends ValueAxis
     /**
      * Rescales the axis to ensure that all data is visible.
      */
+    @Override
     protected void autoAdjustRange() {
 
         Plot plot = getPlot();
@@ -1076,6 +1090,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1128,6 +1143,7 @@ public class PeriodAxis extends ValueAxis
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return super.hashCode();
     }
@@ -1140,6 +1156,7 @@ public class PeriodAxis extends ValueAxis
      * @throws CloneNotSupportedException  this class is cloneable, but
      *         subclasses may not be.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         PeriodAxis clone = (PeriodAxis) super.clone();
         clone.timeZone = (TimeZone) this.timeZone.clone();

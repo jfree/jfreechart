@@ -274,6 +274,7 @@ public class LogarithmicAxis extends NumberAxis {
      *
      * @param range  the new range.
      */
+    @Override
     public void setRange(Range range) {
         super.setRange(range);      // call parent method
         setupSmallLogFlag();        // setup flag based on bounds values
@@ -502,6 +503,7 @@ public class LogarithmicAxis extends NumberAxis {
     /**
      * Rescales the axis to ensure that all data is visible.
      */
+    @Override
     public void autoAdjustRange() {
 
         Plot plot = getPlot();
@@ -621,6 +623,7 @@ public class LogarithmicAxis extends NumberAxis {
      *
      * @return The Java2D coordinate.
      */
+    @Override
     public double valueToJava2D(double value, Rectangle2D plotArea,
                                 RectangleEdge edge) {
 
@@ -663,6 +666,7 @@ public class LogarithmicAxis extends NumberAxis {
      *
      * @return The data value.
      */
+    @Override
     public double java2DToValue(double java2DValue, Rectangle2D plotArea,
                                 RectangleEdge edge) {
 
@@ -697,6 +701,7 @@ public class LogarithmicAxis extends NumberAxis {
      * @param lowerPercent  the new lower bound.
      * @param upperPercent  the new upper bound.
      */
+    @Override
     public void zoomRange(double lowerPercent, double upperPercent) {
         double startLog = switchedLog10(getRange().getLowerBound());
         double lengthLog = switchedLog10(getRange().getUpperBound()) - startLog;
@@ -704,10 +709,8 @@ public class LogarithmicAxis extends NumberAxis {
 
         if (isInverted()) {
             adjusted = new Range(
-                    switchedPow10(
-                            startLog + (lengthLog * (1 - upperPercent))),
-                    switchedPow10(
-                            startLog + (lengthLog * (1 - lowerPercent))));
+                    switchedPow10(startLog + (lengthLog * (1 - upperPercent))),
+                    switchedPow10(startLog + (lengthLog * (1 - lowerPercent))));
         }
         else {
             adjusted = new Range(
@@ -728,9 +731,9 @@ public class LogarithmicAxis extends NumberAxis {
      *
      * @return A list of ticks.
      */
-    protected List refreshTicksHorizontal(Graphics2D g2,
-                                          Rectangle2D dataArea,
-                                          RectangleEdge edge) {
+    @Override
+    protected List refreshTicksHorizontal(Graphics2D g2, Rectangle2D dataArea,
+            RectangleEdge edge) {
 
         List ticks = new java.util.ArrayList();
         Range range = getRange();
@@ -833,8 +836,8 @@ public class LogarithmicAxis extends NumberAxis {
 
                 if (currentTickValue >= lowerBoundVal - SMALL_LOG_VALUE) {
                     //tick value not below lowest data value
-                    TextAnchor anchor = null;
-                    TextAnchor rotationAnchor = null;
+                    TextAnchor anchor;
+                    TextAnchor rotationAnchor;
                     double angle = 0.0;
                     if (isVerticalTickLabels()) {
                         anchor = TextAnchor.CENTER_RIGHT;
@@ -877,9 +880,9 @@ public class LogarithmicAxis extends NumberAxis {
      *
      * @return A list of ticks.
      */
-    protected List refreshTicksVertical(Graphics2D g2,
-                                        Rectangle2D dataArea,
-                                        RectangleEdge edge) {
+    @Override
+    protected List refreshTicksVertical(Graphics2D g2, Rectangle2D dataArea,
+            RectangleEdge edge) {
 
         List ticks = new java.util.ArrayList();
 
@@ -1023,8 +1026,8 @@ public class LogarithmicAxis extends NumberAxis {
 
                 if (tickVal >= lowerBoundVal - SMALL_LOG_VALUE) {
                     //tick value not below lowest data value
-                    TextAnchor anchor = null;
-                    TextAnchor rotationAnchor = null;
+                    TextAnchor anchor;
+                    TextAnchor rotationAnchor;
                     double angle = 0.0;
                     if (isVerticalTickLabels()) {
                         if (edge == RectangleEdge.LEFT) {

@@ -219,6 +219,7 @@ public class CategoryLabelPosition implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -253,6 +254,7 @@ public class CategoryLabelPosition implements Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 19;
         result = 37 * result + this.categoryAnchor.hashCode();
