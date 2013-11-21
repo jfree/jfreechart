@@ -44,7 +44,8 @@ import org.jfree.data.ComparableObjectItem;
 import org.jfree.data.time.RegularTimePeriod;
 
 /**
- * An item representing data in the form (period, open, high, low, close).
+ * An item representing data in the form <code>(time-period, open, high, low, 
+ * close)</code>.
  *
  * @since 1.0.4
  */
