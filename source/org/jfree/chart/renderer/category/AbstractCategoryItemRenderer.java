@@ -895,6 +895,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             else if (orientation == PlotOrientation.VERTICAL) {
                 line = new Line2D.Double(v, dataArea.getMinY(), v,
                         dataArea.getMaxY());
+            } else {
+                throw new IllegalStateException();
             }
             g2.setPaint(marker.getPaint());
             g2.setStroke(marker.getStroke());
@@ -978,6 +980,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             else if (orientation == PlotOrientation.VERTICAL) {
                 line = new Line2D.Double(dataArea.getMinX(), v,
                         dataArea.getMaxX(), v);
+            } else {
+                throw new IllegalStateException();
             }
 
             g2.setPaint(marker.getPaint());
