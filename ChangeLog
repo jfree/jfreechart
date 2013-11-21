@@ -1,5 +1,24 @@
 2013-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * org/jfree/data/time/ohlc/OHLCSeries.java
+    (add(OHLCItem)): New method.
+
+2013-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/data/general/AbstractDataset.java
+    (notify): New flag,
+    (AbstractDataset): Initialise notify to true,
+    (getNotify): New method,
+    (setNotify): Likewise,
+    (fireDatasetChanged): Only fire change if notify flag is true.
+
+2013-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/data/xy/XYSeriesCollection.java
+    (removeSeries(int)): Ensure VetoableListener is deregistered.
+
+2013-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
     * org/jfree/data/time/TimeSeriesCollection.java
     (getSeriesIndex): New method,
     (addSeries): Register VetoableListener,
