@@ -27,10 +27,10 @@
  * -----------------------
  * AbstractAnnotation.java
  * -----------------------
- * (C) Copyright 2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Peter Kolb (see patch 2809117);
- * Contributor(s):   ;
+ * Contributor(s):   -;
  *
  * Changes:
  * --------
@@ -86,6 +86,7 @@ public abstract class AbstractAnnotation implements Annotation, Cloneable,
      *
      * @see #removeChangeListener(AnnotationChangeListener)
      */
+    @Override
     public void addChangeListener(AnnotationChangeListener listener) {
         this.listenerList.add(AnnotationChangeListener.class, listener);
     }
@@ -98,6 +99,7 @@ public abstract class AbstractAnnotation implements Annotation, Cloneable,
      *
      * @see #addChangeListener(AnnotationChangeListener)
      */
+    @Override
     public void removeChangeListener(AnnotationChangeListener listener) {
         this.listenerList.remove(AnnotationChangeListener.class, listener);
     }
@@ -188,6 +190,7 @@ public abstract class AbstractAnnotation implements Annotation, Cloneable,
      * @throws CloneNotSupportedException  if the annotation does not support
      *                                     cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         AbstractAnnotation clone = (AbstractAnnotation) super.clone();
         clone.listenerList = new EventListenerList();

@@ -204,6 +204,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * @param rendererIndex  the renderer index.
      * @param info  the plot rendering info.
      */
+    @Override
     public void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
                      ValueAxis domainAxis, ValueAxis rangeAxis,
                      int rendererIndex, PlotRenderingInfo info) {
@@ -268,6 +269,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -301,6 +303,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         result = 37 * result + HashUtilities.hashCodeForDoubleArray(
@@ -322,6 +325,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * @throws CloneNotSupportedException not thrown by this class, but may be
      *                                    by subclasses.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

@@ -27,7 +27,7 @@
  * --------------------
  * XYBoxAnnotation.java
  * --------------------
- * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (see patch 2809117);
@@ -159,6 +159,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
      * @param rendererIndex  the renderer index.
      * @param info  the plot rendering info.
      */
+    @Override
     public void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
                      ValueAxis domainAxis, ValueAxis rangeAxis,
                      int rendererIndex, PlotRenderingInfo info) {
@@ -207,6 +208,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -249,6 +251,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result;
         long temp;
@@ -271,6 +274,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
      * @throws CloneNotSupportedException not thrown by this class, but may be
      *                                    by subclasses.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
