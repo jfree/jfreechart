@@ -1,5 +1,11 @@
 2013-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug #1084:
+    * org/jfree/chart/block/BorderArrangement.java
+    (add): Treat key that is not a RectangleEdge as null.
+
+2013-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
     Bug #1109:
     * org/jfree/chart/renderer/category/WaterfallBarRenderer.java
     (drawItem): Use positive bar paint when difference is 0.
