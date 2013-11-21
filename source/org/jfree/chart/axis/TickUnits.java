@@ -125,8 +125,8 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
      *
      * @return A tick unit that is larger than the supplied unit.
      */
+    @Override
     public TickUnit getLargerTickUnit(TickUnit unit) {
-
         int index = Collections.binarySearch(this.tickUnits, unit);
         if (index >= 0) {
             index = index + 1;
@@ -137,7 +137,6 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
 
         return (TickUnit) this.tickUnits.get(Math.min(index,
                 this.tickUnits.size() - 1));
-
     }
 
     /**
@@ -148,8 +147,8 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
      *
      * @return A unit from the collection.
      */
+    @Override
     public TickUnit getCeilingTickUnit(TickUnit unit) {
-
         int index = Collections.binarySearch(this.tickUnits, unit);
         if (index >= 0) {
             return (TickUnit) this.tickUnits.get(index);
@@ -159,7 +158,6 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
             return (TickUnit) this.tickUnits.get(Math.min(index,
                     this.tickUnits.size() - 1));
         }
-
     }
 
     /**
@@ -170,6 +168,7 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
      *
      * @return A unit from the collection.
      */
+    @Override
     public TickUnit getCeilingTickUnit(double size) {
         return getCeilingTickUnit(new NumberTickUnit(size,
                 NumberFormat.getInstance()));
@@ -183,6 +182,7 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
      * @throws CloneNotSupportedException if an item in the collection does not
      *         support cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         TickUnits clone = (TickUnits) super.clone();
         clone.tickUnits = new java.util.ArrayList(this.tickUnits);
@@ -196,6 +196,7 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

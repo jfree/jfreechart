@@ -313,6 +313,7 @@ public class AxisSpace implements Cloneable, PublicCloneable, Serializable {
      * @throws CloneNotSupportedException This class won't throw this exception,
      *         but subclasses (if any) might.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -324,6 +325,7 @@ public class AxisSpace implements Cloneable, PublicCloneable, Serializable {
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -352,6 +354,7 @@ public class AxisSpace implements Cloneable, PublicCloneable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 23;
         long l = Double.doubleToLongBits(this.top);
@@ -370,6 +373,7 @@ public class AxisSpace implements Cloneable, PublicCloneable, Serializable {
      *
      * @return A string.
      */
+    @Override
     public String toString() {
         return super.toString() + "[left=" + this.left + ",right=" + this.right
                     + ",top=" + this.top + ",bottom=" + this.bottom + "]";

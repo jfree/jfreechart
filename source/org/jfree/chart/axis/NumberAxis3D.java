@@ -122,6 +122,7 @@ public class NumberAxis3D extends NumberAxis implements Serializable {
      *
      * @return The updated cursor value.
      */
+    @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
             Rectangle2D dataArea, RectangleEdge edge,
             PlotRenderingInfo plotState) {

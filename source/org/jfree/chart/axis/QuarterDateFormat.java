@@ -149,6 +149,7 @@ public class QuarterDateFormat extends DateFormat
      *
      * @return The formatted date.
      */
+    @Override
     public StringBuffer format(Date date, StringBuffer toAppendTo,
                                FieldPosition fieldPosition) {
         this.calendar.setTime(date);
@@ -176,6 +177,7 @@ public class QuarterDateFormat extends DateFormat
      *
      * @return <code>null</code>, as this method has not been implemented.
      */
+    @Override
     public Date parse(String source, ParsePosition pos) {
         return null;
     }
@@ -187,6 +189,7 @@ public class QuarterDateFormat extends DateFormat
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

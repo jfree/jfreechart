@@ -165,6 +165,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
      *
      * @return A label.
      */
+    @Override
     protected TextBlock createLabel(Comparable category, float width,
                                     RectangleEdge edge, Graphics2D g2) {
         TextBlock label = super.createLabel(category, width, edge, g2);
@@ -194,6 +195,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -221,6 +223,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
      *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         ExtendedCategoryAxis clone = (ExtendedCategoryAxis) super.clone();
         clone.sublabels = new HashMap(this.sublabels);

@@ -297,6 +297,7 @@ public class LogAxis extends ValueAxis {
      *
      * @return A value along the axis scale.
      */
+    @Override
     public double java2DToValue(double java2DValue, Rectangle2D area,
             RectangleEdge edge) {
 
@@ -314,7 +315,7 @@ public class LogAxis extends ValueAxis {
             min = area.getMaxY();
             max = area.getY();
         }
-        double log = 0.0;
+        double log;
         if (isInverted()) {
             log = axisMax - (java2DValue - min) / (max - min)
                     * (axisMax - axisMin);
@@ -337,6 +338,7 @@ public class LogAxis extends ValueAxis {
      *
      * @return The Java2D coordinate corresponding to <code>value</code>.
      */
+    @Override
     public double valueToJava2D(double value, Rectangle2D area,
             RectangleEdge edge) {
 
@@ -369,6 +371,7 @@ public class LogAxis extends ValueAxis {
      * Configures the axis.  This method is typically called when an axis
      * is assigned to a new plot.
      */
+    @Override
     public void configure() {
         if (isAutoRange()) {
             autoAdjustRange();
@@ -379,6 +382,7 @@ public class LogAxis extends ValueAxis {
      * Adjusts the axis range to match the data range that the axis is
      * required to display.
      */
+    @Override
     protected void autoAdjustRange() {
         Plot plot = getPlot();
         if (plot == null) {
@@ -440,6 +444,7 @@ public class LogAxis extends ValueAxis {
      *
      * @return The axis state (never <code>null</code>).
      */
+    @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
             Rectangle2D dataArea, RectangleEdge edge,
             PlotRenderingInfo plotState) {
@@ -478,6 +483,7 @@ public class LogAxis extends ValueAxis {
      * @return A list of ticks.
      *
      */
+    @Override
     public List refreshTicks(Graphics2D g2, AxisState state,
             Rectangle2D dataArea, RectangleEdge edge) {
         List result = new java.util.ArrayList();
@@ -799,6 +805,7 @@ public class LogAxis extends ValueAxis {
      * @param lowerPercent  the new lower bound.
      * @param upperPercent  the new upper bound.
      */
+    @Override
     public void zoomRange(double lowerPercent, double upperPercent) {
         Range range = getRange();
         double start = range.getLowerBound();
@@ -827,6 +834,7 @@ public class LogAxis extends ValueAxis {
      *
      * @since 1.0.13
      */
+    @Override
     public void pan(double percent) {
         Range range = getRange();
         double lower = range.getLowerBound();
@@ -866,6 +874,7 @@ public class LogAxis extends ValueAxis {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -888,6 +897,7 @@ public class LogAxis extends ValueAxis {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         long temp = Double.doubleToLongBits(this.base);

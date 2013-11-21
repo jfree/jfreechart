@@ -539,6 +539,7 @@ public abstract class ValueAxis extends Axis
      * @param dataArea  the data area.
      * @param edge  the edge.
      */
+    @Override
     protected void drawAxisLine(Graphics2D g2, double cursor,
             Rectangle2D dataArea, RectangleEdge edge) {
         Line2D axisLine = null;
@@ -774,6 +775,7 @@ public abstract class ValueAxis extends Axis
      * @return The space required to draw the axis (including pre-reserved
      *         space).
      */
+    @Override
     public AxisSpace reserveSpace(Graphics2D g2, Plot plot, 
             Rectangle2D plotArea, RectangleEdge edge, AxisSpace space) {
 
@@ -1636,6 +1638,7 @@ public abstract class ValueAxis extends Axis
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1699,6 +1702,7 @@ public abstract class ValueAxis extends Axis
      * @throws CloneNotSupportedException if some component of the axis does
      *         not support cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         ValueAxis clone = (ValueAxis) super.clone();
         return clone;

@@ -884,6 +884,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return The space required to draw the axis.
      */
+    @Override
     public AxisSpace reserveSpace(Graphics2D g2, Plot plot, 
             Rectangle2D plotArea, RectangleEdge edge, AxisSpace space) {
 
@@ -938,6 +939,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     /**
      * Configures the axis against the current plot.
      */
+    @Override
     public void configure() {
         // nothing required
     }
@@ -958,6 +960,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return The axis state (never <code>null</code>).
      */
+    @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
             Rectangle2D dataArea, RectangleEdge edge,
             PlotRenderingInfo plotState) {
@@ -1117,6 +1120,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return A list of ticks.
      */
+    @Override
     public List refreshTicks(Graphics2D g2, AxisState state, 
             Rectangle2D dataArea, RectangleEdge edge) {
 
@@ -1324,6 +1328,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if some component of the axis does
      *         not support cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         CategoryAxis clone = (CategoryAxis) super.clone();
         clone.tickLabelFontMap = new HashMap(this.tickLabelFontMap);
@@ -1340,6 +1345,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1395,6 +1401,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return super.hashCode();
     }

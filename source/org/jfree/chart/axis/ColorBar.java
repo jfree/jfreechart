@@ -191,7 +191,6 @@ public class ColorBar implements Cloneable, Serializable {
                        Rectangle2D plotArea, Rectangle2D dataArea,
                        Rectangle2D reservedArea, RectangleEdge edge) {
 
-
         Rectangle2D colorBarArea = null;
 
         double thickness = calculateBarThickness(dataArea, edge);
@@ -199,7 +198,7 @@ public class ColorBar implements Cloneable, Serializable {
             thickness = this.colorBarThickness;  // allow fixed thickness
         }
 
-        double length = 0.0;
+        double length;
         if (RectangleEdge.isLeftOrRight(edge)) {
             length = dataArea.getHeight();
         }
@@ -234,6 +233,7 @@ public class ColorBar implements Cloneable, Serializable {
         drawColorBar(g2, colorBarArea, edge);
 
         AxisState state = null;
+        assert colorBarArea != null; // suppresses compiler warnings
         if (edge == RectangleEdge.TOP) {
             cursor = colorBarArea.getMinY();
             state = this.axis.draw(g2, cursor, reservedArea, colorBarArea,
@@ -254,6 +254,7 @@ public class ColorBar implements Cloneable, Serializable {
             state = this.axis.draw(g2, cursor, reservedArea, colorBarArea,
                     RectangleEdge.RIGHT, null);
         }
+        assert state != null; // suppresses compiler warning
         return state.getCursor();
 
     }
@@ -394,8 +395,8 @@ public class ColorBar implements Cloneable, Serializable {
      * @return The thickness.
      */
     private double calculateBarThickness(Rectangle2D plotArea,
-                                         RectangleEdge edge) {
-        double result = 0.0;
+            RectangleEdge edge) {
+        double result;
         if (RectangleEdge.isLeftOrRight(edge)) {
             result = plotArea.getWidth() * this.colorBarThicknessPercent;
         }
@@ -413,12 +414,11 @@ public class ColorBar implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if some component of the color bar
      *         does not support cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
-
         ColorBar clone = (ColorBar) super.clone();
         clone.axis = (ValueAxis) this.axis.clone();
         return clone;
-
     }
 
     /**
@@ -428,8 +428,8 @@ public class ColorBar implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
-
         if (obj == this) {
             return true;
         }
@@ -456,7 +456,6 @@ public class ColorBar implements Cloneable, Serializable {
             return false;
         }
         return true;
-
     }
 
     /**
@@ -464,6 +463,7 @@ public class ColorBar implements Cloneable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return this.axis.hashCode();
     }
