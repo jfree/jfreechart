@@ -82,6 +82,7 @@ public class ShortTextTitle extends TextTitle {
      *
      * @return The dimensions for the title.
      */
+    @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         RectangleConstraint cc = toContentConstraint(constraint);
         LengthConstraintType w = cc.getWidthConstraintType();
@@ -121,6 +122,7 @@ public class ShortTextTitle extends TextTitle {
                 throw new RuntimeException("Not yet implemented.");
             }
         }
+        assert contentSize != null;
         if (contentSize.width <= 0.0 || contentSize.height <= 0.0) {
             return new Size2D(0.0, 0.0);
         }
@@ -138,6 +140,7 @@ public class ShortTextTitle extends TextTitle {
      *
      * @return The content size.
      */
+    @Override
     protected Size2D arrangeNN(Graphics2D g2) {
         Range max = new Range(0.0, Float.MAX_VALUE);
         return arrangeRR(g2, max, max);
@@ -152,6 +155,7 @@ public class ShortTextTitle extends TextTitle {
      *
      * @return The content size.
      */
+    @Override
     protected Size2D arrangeRN(Graphics2D g2, Range widthRange) {
         Size2D s = arrangeNN(g2);
         if (widthRange.contains(s.getWidth())) {
@@ -172,6 +176,7 @@ public class ShortTextTitle extends TextTitle {
      *
      * @return The content size.
      */
+    @Override
     protected Size2D arrangeFN(Graphics2D g2, double w) {
         g2.setFont(getFont());
         FontMetrics fm = g2.getFontMetrics(getFont());
@@ -193,6 +198,7 @@ public class ShortTextTitle extends TextTitle {
      *
      * @return The content size.
      */
+    @Override
     protected Size2D arrangeRR(Graphics2D g2, Range widthRange,
             Range heightRange) {
 
@@ -217,6 +223,7 @@ public class ShortTextTitle extends TextTitle {
      *
      * @return <code>null</code>.
      */
+    @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         if (area.isEmpty()) {
             return null;
@@ -229,7 +236,6 @@ public class ShortTextTitle extends TextTitle {
         g2.setPaint(getPaint());
         TextUtilities.drawAlignedString(getText(), g2, (float) area.getMinX(),
                 (float) area.getMinY(), TextAnchor.TOP_LEFT);
-
         return null;
     }
 

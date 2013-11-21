@@ -401,6 +401,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      *
      * @since 1.0.13
      */
+    @Override
     public void axisChanged(AxisChangeEvent event) {
         if (this.axis == event.getAxis()) {
             notifyListeners(new TitleChangeEvent(this));
@@ -416,6 +417,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      *
      * @return The block size (in Java2D units, never <code>null</code>).
      */
+    @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         RectangleConstraint cc = toContentConstraint(constraint);
         LengthConstraintType w = cc.getWidthConstraintType();
@@ -455,6 +457,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
                 throw new RuntimeException("Not yet implemented.");
             }
         }
+        assert contentSize != null; // suppress compiler warning
         return new Size2D(calculateTotalWidth(contentSize.getWidth()),
                 calculateTotalHeight(contentSize.getHeight()));
     }
@@ -507,6 +510,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @param g2  the graphics target (<code>null</code> not permitted).
      * @param area  the drawing area (<code>null</code> not permitted).
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
         draw(g2, area, null);
     }
@@ -520,8 +524,8 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      *
      * @return <code>null</code>.
      */
+    @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
-
         Rectangle2D target = (Rectangle2D) area.clone();
         target = trimMargin(target);
         if (this.backgroundPaint != null) {
@@ -653,6 +657,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof PaintScaleLegend)) {
             return false;
