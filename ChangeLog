@@ -1,3 +1,24 @@
+2013-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/utils/HMSNumberFormat.java: New class.
+
+2013-11-20  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/renderer/xy/XYSplineRenderer.java
+    (FillType): New enumeration of fill types,
+    (XYSplineState): New class,
+    (fillType): New attribute,
+    (gradientPaintTransformer): Likewise,
+    (XYSplineRenderer(int, FillType)): New constructor,
+    (getFillType): New method,
+    (setFillType): Likewise,
+    (getGradientPaintTransformer): Likewise,
+    (setGradientPaintTransformer): Likewise,
+    (initialise): Use new XYSplineState class,
+    (drawPrimaryLineAsPath): Add filling options,
+    (equals): Check new attributes,
+    (ControlPoint): Removed.
+
 2013-09-17  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/renderer/category/GradientBarPainter.java
