@@ -53,6 +53,8 @@
  * 11-Sep-2003 : Cloning Fixes (NB);
  * 01-Jun-2005 : Added hasListener() method for unit testing (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 21-Nov-2013 : Added notify flag to allow suppressing change events 
+ *               temporarily (DG);
  *
  */
 
@@ -86,6 +88,12 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
 
     /** Storage for registered change listeners. */
     private transient EventListenerList listenerList;
+    
+    /** 
+     * A flag that can be used to temporarily suppress dataset change event
+     * notifications.
+     */
+    private boolean notify;
 
     /**
      * Constructs a dataset. By default, the dataset is assigned to its own
@@ -94,6 +102,7 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
     protected AbstractDataset() {
         this.group = new DatasetGroup();
         this.listenerList = new EventListenerList();
+        this.notify = true;
     }
 
     /**
@@ -121,6 +130,37 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
         this.group = group;
     }
 
+    /**
+     * Returns the value of the notify flag.  The default value is 
+     * <code>true</code>.  If this is <code>false</code>, calls to the 
+     * {@link #fireDatasetChanged()} method will NOT trigger a dataset
+     * change event.
+     * 
+     * @return A boolean.
+     * 
+     * @since 1.0.17
+     */
+    public boolean getNotify() {
+        return this.notify;
+    }
+    
+    /**
+     * Sets the notify flag, which controls whether or not the {@link #fireDatasetChanged()}
+     * method notifies listeners.  Setting this flag to <code>true</code> will
+     * trigger a <code>DatasetChangeEvent</code> because there may be 
+     * queued up changes.
+     * 
+     * @param notify  the new flag value.
+     * 
+     * @since 1.0.17
+     */
+    public void setNotify(boolean notify) {
+        this.notify = notify;
+        if (notify) {
+            fireDatasetChanged();
+        }    
+    }
+    
     /**
      * Registers an object to receive notification of changes to the dataset.
      *
@@ -164,12 +204,16 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
     }
 
     /**
-     * Notifies all registered listeners that the dataset has changed.
+     * Notifies all registered listeners that the dataset has changed, 
+     * provided that the <code>notify</code> flag has not been set to 
+     * <code>false</code>.
      *
      * @see #addChangeListener(DatasetChangeListener)
      */
     protected void fireDatasetChanged() {
-        notifyListeners(new DatasetChangeEvent(this, this));
+        if (this.notify) {
+            notifyListeners(new DatasetChangeEvent(this, this));
+        }
     }
 
     /**
