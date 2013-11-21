@@ -500,6 +500,7 @@ public class LegendGraphic extends AbstractBlock
      *
      * @return The block size (in Java2D units, never <code>null</code>).
      */
+    @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         RectangleConstraint contentConstraint = toContentConstraint(constraint);
         LengthConstraintType w = contentConstraint.getWidthConstraintType();
@@ -535,16 +536,13 @@ public class LegendGraphic extends AbstractBlock
                 throw new RuntimeException("Not yet implemented.");
             }
             else if (h == LengthConstraintType.FIXED) {
-                contentSize = new Size2D(
-                    contentConstraint.getWidth(),
-                    contentConstraint.getHeight()
-                );
+                contentSize = new Size2D(contentConstraint.getWidth(),
+                        contentConstraint.getHeight());
             }
         }
-        return new Size2D(
-            calculateTotalWidth(contentSize.getWidth()),
-            calculateTotalHeight(contentSize.getHeight())
-        );
+        assert contentSize != null;
+        return new Size2D(calculateTotalWidth(contentSize.getWidth()),
+                calculateTotalHeight(contentSize.getHeight()));
     }
 
     /**
@@ -573,6 +571,7 @@ public class LegendGraphic extends AbstractBlock
      * @param g2  the graphics device.
      * @param area  the area.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
 
         area = trimMargin(area);
@@ -611,7 +610,6 @@ public class LegendGraphic extends AbstractBlock
                 g2.draw(s);
             }
         }
-
     }
 
     /**
@@ -623,6 +621,7 @@ public class LegendGraphic extends AbstractBlock
      *
      * @return Always <code>null</code>.
      */
+    @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         draw(g2, area);
         return null;
@@ -636,6 +635,7 @@ public class LegendGraphic extends AbstractBlock
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof LegendGraphic)) {
             return false;
@@ -692,6 +692,7 @@ public class LegendGraphic extends AbstractBlock
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         result = 37 * result + ObjectUtilities.hashCode(this.fillPaint);
@@ -706,6 +707,7 @@ public class LegendGraphic extends AbstractBlock
      *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         LegendGraphic clone = (LegendGraphic) super.clone();
         clone.shape = ShapeUtilities.clone(this.shape);
