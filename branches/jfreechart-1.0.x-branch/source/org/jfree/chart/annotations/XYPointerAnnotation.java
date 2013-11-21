@@ -374,6 +374,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      * @param rendererIndex  the renderer index.
      * @param info  the plot rendering info.
      */
+    @Override
     public void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
             ValueAxis domainAxis, ValueAxis rangeAxis, int rendererIndex, 
             PlotRenderingInfo info) {
@@ -459,6 +460,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -499,6 +501,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         long temp = Double.doubleToLongBits(this.angle);
@@ -525,6 +528,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      *
      * @throws CloneNotSupportedException  if the annotation can't be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

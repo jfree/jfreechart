@@ -27,7 +27,7 @@
  * -------------------------
  * AbstractXYAnnotation.java
  * -------------------------
- * (C) Copyright 2004-2009, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -135,6 +135,7 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      * @param info  if supplied, this info object will be populated with
      *              entity information.
      */
+    @Override
     public abstract void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
                               ValueAxis domainAxis, ValueAxis rangeAxis,
                               int rendererIndex,
@@ -172,6 +173,7 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -194,6 +196,7 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         if (this.toolTipText != null) {
