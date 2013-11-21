@@ -471,6 +471,7 @@ public class TextTitle extends Title
      *
      * @return The block size (in Java2D units, never <code>null</code>).
      */
+    @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         RectangleConstraint cc = toContentConstraint(constraint);
         LengthConstraintType w = cc.getWidthConstraintType();
@@ -510,6 +511,7 @@ public class TextTitle extends Title
                 throw new RuntimeException("Not yet implemented.");
             }
         }
+        assert contentSize != null; // suppress compiler warning
         return new Size2D(calculateTotalWidth(contentSize.getWidth()),
                 calculateTotalHeight(contentSize.getHeight()));
     }
@@ -665,6 +667,7 @@ public class TextTitle extends Title
      * @param g2  the graphics device.
      * @param area  the area allocated for the title.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
         draw(g2, area, null);
     }
@@ -681,6 +684,7 @@ public class TextTitle extends Title
      * @return An {@link EntityCollection} containing a chart entity for the
      *         title, or <code>null</code>.
      */
+    @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         if (this.content == null) {
             return null;
@@ -822,6 +826,7 @@ public class TextTitle extends Title
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -865,6 +870,7 @@ public class TextTitle extends Title
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         result = 29 * result + (this.text != null ? this.text.hashCode() : 0);
@@ -882,6 +888,7 @@ public class TextTitle extends Title
      *
      * @throws CloneNotSupportedException never.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
