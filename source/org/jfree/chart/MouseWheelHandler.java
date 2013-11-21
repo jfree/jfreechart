@@ -27,7 +27,7 @@
  * ----------------------
  * MouseWheelHandler.java
  * ----------------------
- * (C) Copyright 2009 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2013 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Ulrich Voigt - patch 2686040;
@@ -109,6 +109,7 @@ class MouseWheelHandler implements MouseWheelListener, Serializable {
      *
      * @param e  the event.
      */
+    @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         JFreeChart chart = this.chartPanel.getChart();
         if (chart == null) {

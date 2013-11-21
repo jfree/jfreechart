@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * ChartSelection.java
- * -------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * ----------------------
+ * ChartTransferable.java
+ * ----------------------
+ * (C) Copyright 2009-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -172,6 +172,7 @@ public class ChartTransferable implements Transferable {
      * 
      * @return The data flavors supported.
      */
+    @Override
     public DataFlavor[] getTransferDataFlavors() {
         return new DataFlavor[] {this.imageFlavor};
     }
@@ -183,6 +184,7 @@ public class ChartTransferable implements Transferable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean isDataFlavorSupported(DataFlavor flavor) {
         return this.imageFlavor.equals(flavor);
     }
@@ -197,6 +199,7 @@ public class ChartTransferable implements Transferable {
      * @throws java.awt.datatransfer.UnsupportedFlavorException
      * @throws java.io.IOException
      */
+    @Override
     public Object getTransferData(DataFlavor flavor)
             throws UnsupportedFlavorException, IOException {
         

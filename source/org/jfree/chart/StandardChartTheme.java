@@ -303,6 +303,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      */
     public static ChartTheme createLegacyTheme() {
         StandardChartTheme theme = new StandardChartTheme("Legacy") {
+            @Override
             public void apply(JFreeChart chart) {
                 // do nothing at all
             }
@@ -1097,6 +1098,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      *
      * @param chart  the chart (<code>null</code> not permitted).
      */
+    @Override
     public void apply(JFreeChart chart) {
         ParamChecks.nullNotPermitted(chart, "chart");
         TextTitle title = chart.getTitle();
@@ -1650,6 +1652,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1770,6 +1773,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      *
      * @throws CloneNotSupportedException if the theme cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
