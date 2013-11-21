@@ -170,6 +170,7 @@ public class BorderArrangement implements Arrangement, Serializable {
                         constraint.getHeightRange(), g2);
             }
         }
+        assert contentSize != null; 
         return new Size2D(container.calculateTotalWidth(contentSize.getWidth()),
                 container.calculateTotalHeight(contentSize.getHeight()));
     }
