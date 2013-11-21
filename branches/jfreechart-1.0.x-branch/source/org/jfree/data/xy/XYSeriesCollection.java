@@ -128,6 +128,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The domain order.
      */
+    @Override
     public DomainOrder getDomainOrder() {
         int seriesCount = getSeriesCount();
         for (int i = 0; i < seriesCount; i++) {
@@ -218,6 +219,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The series count.
      */
+    @Override
     public int getSeriesCount() {
         return this.data.size();
     }
@@ -298,6 +300,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     specified range.
      */
+    @Override
     public Comparable getSeriesKey(int series) {
         // defer argument checking
         return getSeries(series).getKey();
@@ -335,6 +338,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
      */
+    @Override
     public int getItemCount(int series) {
         // defer argument checking
         return getSeries(series).getItemCount();
@@ -348,6 +352,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The value.
      */
+    @Override
     public Number getX(int series, int item) {
         XYSeries s = (XYSeries) this.data.get(series);
         return s.getX(item);
@@ -361,6 +366,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The starting X value.
      */
+    @Override
     public Number getStartX(int series, int item) {
         return this.intervalDelegate.getStartX(series, item);
     }
@@ -373,6 +379,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The ending X value.
      */
+    @Override
     public Number getEndX(int series, int item) {
         return this.intervalDelegate.getEndX(series, item);
     }
@@ -385,6 +392,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The value (possibly <code>null</code>).
      */
+    @Override
     public Number getY(int series, int index) {
         XYSeries s = (XYSeries) this.data.get(series);
         return s.getY(index);
@@ -398,6 +406,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The starting Y value.
      */
+    @Override
     public Number getStartY(int series, int item) {
         return getY(series, item);
     }
@@ -410,6 +419,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The ending Y value.
      */
+    @Override
     public Number getEndY(int series, int item) {
         return getY(series, item);
     }
@@ -421,6 +431,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -442,6 +453,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @throws CloneNotSupportedException if there is a problem.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         XYSeriesCollection clone = (XYSeriesCollection) super.clone();
         clone.data = (List) ObjectUtilities.deepClone(this.data);
@@ -455,6 +467,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int hash = 5;
         hash = HashUtilities.hashCode(hash, this.intervalDelegate);
@@ -470,6 +483,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The minimum value.
      */
+    @Override
     public double getDomainLowerBound(boolean includeInterval) {
         if (includeInterval) {
             return this.intervalDelegate.getDomainLowerBound(includeInterval);
@@ -499,6 +513,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The maximum value.
      */
+    @Override
     public double getDomainUpperBound(boolean includeInterval) {
         if (includeInterval) {
             return this.intervalDelegate.getDomainUpperBound(includeInterval);
@@ -531,6 +546,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @return The range (or <code>null</code> if the dataset contains no
      *     values).
      */
+    @Override
     public Range getDomainBounds(boolean includeInterval) {
         if (includeInterval) {
             return this.intervalDelegate.getDomainBounds(includeInterval);
@@ -614,7 +630,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Sets the flag that indicates wether the interval width is automatically
+     * Sets the flag that indicates whether the interval width is automatically
      * calculated or not.
      *
      * @param b  a boolean.
@@ -632,6 +648,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @return The range (or <code>null</code> if the dataset contains no
      *     values).
      */
+    @Override
     public Range getRangeBounds(boolean includeInterval) {
         double lower = Double.POSITIVE_INFINITY;
         double upper = Double.NEGATIVE_INFINITY;
@@ -663,6 +680,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The minimum value.
      */
+    @Override
     public double getRangeLowerBound(boolean includeInterval) {
         double result = Double.NaN;
         int seriesCount = getSeriesCount();
@@ -689,6 +707,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The maximum value.
      */
+    @Override
     public double getRangeUpperBound(boolean includeInterval) {
         double result = Double.NaN;
         int seriesCount = getSeriesCount();
@@ -716,6 +735,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * 
      * @since 1.0.14
      */
+    @Override
     public void vetoableChange(PropertyChangeEvent e)
             throws PropertyVetoException {
         // if it is not the series name, then we have no interest
