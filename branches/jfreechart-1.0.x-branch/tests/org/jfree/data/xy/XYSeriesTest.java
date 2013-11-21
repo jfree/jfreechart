@@ -799,5 +799,11 @@ public class XYSeriesTest {
         // the key to anything we want...
         c.removeSeries(s1);
         s1.setKey("S2");
+        
+        // check that removing by index also works
+        s1.setKey("S1");
+        c.addSeries(s1);
+        c.removeSeries(1);
+        s1.setKey("S2");
     }
 }
