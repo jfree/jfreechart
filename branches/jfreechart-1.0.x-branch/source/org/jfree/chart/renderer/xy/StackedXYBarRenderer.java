@@ -165,6 +165,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      *
      * @return <code>2</code>.
      */
+    @Override
     public int getPassCount() {
         return 3;
     }
@@ -183,11 +184,9 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      *
      * @return A state object.
      */
-    public XYItemRendererState initialise(Graphics2D g2,
-                                          Rectangle2D dataArea,
-                                          XYPlot plot,
-                                          XYDataset data,
-                                          PlotRenderingInfo info) {
+    @Override
+    public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
+            XYPlot plot, XYDataset data, PlotRenderingInfo info) {
         return new XYBarRendererState(info);
     }
 
@@ -200,6 +199,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
      */
+    @Override
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset != null) {
             if (this.renderAsPercentages) {
@@ -233,18 +233,11 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset,
-                         int series,
-                         int item,
-                         CrosshairState crosshairState,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         if (!getItemVisible(series, item)) {
             return;
@@ -357,6 +350,8 @@ public class StackedXYBarRenderer extends XYBarRenderer {
             bar = new Rectangle2D.Double(Math.min(translatedStartX,
                     translatedEndX), Math.min(translatedBase, translatedValue),
                     translatedWidth, translatedHeight);
+        } else {
+            throw new IllegalStateException();
         }
         boolean positive = (value > 0.0);
         boolean inverted = rangeAxis.isInverted();
@@ -417,6 +412,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -436,6 +432,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         result = result * 37 + (this.renderAsPercentages ? 1 : 0);
