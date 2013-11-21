@@ -235,6 +235,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return {@link DomainOrder#ASCENDING}
      */
+    @Override
     public DomainOrder getDomainOrder() {
         return DomainOrder.ASCENDING;
     }
@@ -277,6 +278,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The series count.
      */
+    @Override
     public int getSeriesCount() {
         return this.data.size();
     }
@@ -339,6 +341,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The key for a series.
      */
+    @Override
     public Comparable getSeriesKey(int series) {
         // check arguments...delegated
         // fetch the series name...
@@ -435,6 +438,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The item count.
      */
+    @Override
     public int getItemCount(int series) {
         return getSeries(series).getItemCount();
     }
@@ -447,6 +451,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The x-value.
      */
+    @Override
     public double getXValue(int series, int item) {
         TimeSeries s = (TimeSeries) this.data.get(series);
         RegularTimePeriod period = s.getTimePeriod(item);
@@ -461,6 +466,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The value.
      */
+    @Override
     public Number getX(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
         RegularTimePeriod period = ts.getTimePeriod(item);
@@ -496,6 +502,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The value.
      */
+    @Override
     public synchronized Number getStartX(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
         return new Long(ts.getTimePeriod(item).getFirstMillisecond(
@@ -510,6 +517,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The value.
      */
+    @Override
     public synchronized Number getEndX(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
         return new Long(ts.getTimePeriod(item).getLastMillisecond(
@@ -524,6 +532,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The value (possibly <code>null</code>).
      */
+    @Override
     public Number getY(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
         return ts.getValue(item);
@@ -537,6 +546,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The value (possibly <code>null</code>).
      */
+    @Override
     public Number getStartY(int series, int item) {
         return getY(series, item);
     }
@@ -549,6 +559,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The value (possibly <code>null</code>).
      */
+    @Override
     public Number getEndY(int series, int item) {
         return getY(series, item);
     }
@@ -589,6 +600,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The minimum value.
      */
+    @Override
     public double getDomainLowerBound(boolean includeInterval) {
         double result = Double.NaN;
         Range r = getDomainBounds(includeInterval);
@@ -606,6 +618,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The maximum value.
      */
+    @Override
     public double getDomainUpperBound(boolean includeInterval) {
         double result = Double.NaN;
         Range r = getDomainBounds(includeInterval);
@@ -623,6 +636,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The range.
      */
+    @Override
     public Range getDomainBounds(boolean includeInterval) {
         Range result = null;
         Iterator iterator = this.data.iterator();
@@ -657,6 +671,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @since 1.0.13
      */
+    @Override
     public Range getDomainBounds(List visibleSeriesKeys,
             boolean includeInterval) {
         Range result = null;
@@ -714,6 +729,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @since 1.0.14
      */
+    @Override
     public Range getRangeBounds(List visibleSeriesKeys, Range xRange,
             boolean includeInterval) {
         Range result = null;
@@ -721,8 +737,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
         while (iterator.hasNext()) {
             Comparable seriesKey = (Comparable) iterator.next();
             TimeSeries series = getSeries(seriesKey);
-            Range r = null;
-            r = new Range(series.getMinY(), series.getMaxY());
+            Range r = new Range(series.getMinY(), series.getMaxY());
             // FIXME: Here we are ignoring the xRange
             result = Range.combineIgnoringNaN(result, r);
         }
@@ -767,6 +782,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -792,6 +808,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @return The hashcode
      */
+    @Override
     public int hashCode() {
         int result;
         result = this.data.hashCode();
@@ -810,6 +827,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      *
      * @throws java.lang.CloneNotSupportedException
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         TimeSeriesCollection clone = (TimeSeriesCollection) super.clone();
         clone.data = (List) ObjectUtilities.deepClone(this.data);
