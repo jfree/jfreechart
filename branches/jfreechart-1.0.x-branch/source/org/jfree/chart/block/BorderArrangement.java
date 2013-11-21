@@ -27,7 +27,7 @@
  * ----------------------
  * BorderArrangement.java
  * ----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,6 +41,7 @@
  * 13-May-2005 : Fixed bugs in the arrange() method (DG);
  * 08-Apr-2008 : Fixed bug in arrangeFF() method where width is too small for
  *               left and right blocks (DG);
+ * 21-Nov-2013 : Fixed bug #1084 (DG);
  *
  */
 
@@ -87,14 +88,17 @@ public class BorderArrangement implements Arrangement, Serializable {
 
     /**
      * Adds a block to the arrangement manager at the specified edge.
+     * If the key is not an instance of {@link RectangleEdge} the block will
+     * be added in the center.
      *
      * @param block  the block (<code>null</code> permitted).
      * @param key  the edge (an instance of {@link RectangleEdge}) or
      *             <code>null</code> for the center block.
      */
+    @Override
     public void add(Block block, Object key) {
 
-        if (key == null) {
+        if (!(key instanceof RectangleEdge)) { // catches null also
             this.centerBlock = block;
         }
         else {
@@ -124,9 +128,9 @@ public class BorderArrangement implements Arrangement, Serializable {
      *
      * @return The block size.
      */
-    public Size2D arrange(BlockContainer container,
-                          Graphics2D g2,
-                          RectangleConstraint constraint) {
+    @Override
+    public Size2D arrange(BlockContainer container, Graphics2D g2,
+            RectangleConstraint constraint) {
         RectangleConstraint contentConstraint
                 = container.toContentConstraint(constraint);
         Size2D contentSize = null;
@@ -487,6 +491,7 @@ public class BorderArrangement implements Arrangement, Serializable {
     /**
      * Clears the layout.
      */
+    @Override
     public void clear() {
         this.centerBlock = null;
         this.topBlock = null;
@@ -502,6 +507,7 @@ public class BorderArrangement implements Arrangement, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
