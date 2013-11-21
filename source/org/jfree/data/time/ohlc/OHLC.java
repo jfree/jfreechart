@@ -45,8 +45,8 @@ import java.io.Serializable;
 import org.jfree.chart.HashUtilities;
 
 /**
- * A high low data record (immutable).  This class is used internally by the
- * {@link OHLCItem} class.
+ * A data record containing open-high-low-close data (immutable).  This class 
+ * is used internally by the {@link OHLCItem} class.
  *
  * @since 1.0.4
  */
@@ -122,6 +122,7 @@ public class OHLC implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -150,6 +151,7 @@ public class OHLC implements Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         result = HashUtilities.hashCode(result, this.open);
