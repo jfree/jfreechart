@@ -384,14 +384,10 @@ public class WaterfallBarRenderer extends BarRenderer {
             seriesPaint = getLastBarPaint();
         }
         else {
-            if (valDiff < 0.0) {
-                seriesPaint = getNegativeBarPaint();
-            }
-            else if (valDiff > 0.0) {
+            if (valDiff >= 0.0) {
                 seriesPaint = getPositiveBarPaint();
-            }
-            else {
-                seriesPaint = getLastBarPaint();
+            } else {
+                seriesPaint = getNegativeBarPaint();
             }
         }
         if (getGradientPaintTransformer() != null
