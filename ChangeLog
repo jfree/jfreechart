@@ -1,5 +1,11 @@
 2013-11-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+    Bug #1109:
+    * org/jfree/chart/renderer/category/WaterfallBarRenderer.java
+    (drawItem): Use positive bar paint when difference is 0.
+
+2013-11-21  David Gilbert  <david.gilbert@object-refinery.com>
+
     * org/jfree/chart/utils/HMSNumberFormat.java: New class.
 
 2013-11-20  David Gilbert  <david.gilbert@object-refinery.com>
