@@ -58,6 +58,8 @@
  * 06-Mar-2009 : Fixed equals() implementation (DG);
  * 10-Jun-2009 : Simplified code in getX() and getY() methods (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 21-Nov-2013 : Fixed bug where removeSeries(int) was not deregistering 
+ *               vetoable listener (DG);
  *
  */
 
@@ -172,12 +174,10 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
         if ((series < 0) || (series >= getSeriesCount())) {
             throw new IllegalArgumentException("Series index out of bounds.");
         }
-
-        // fetch the series, remove the change listener, then remove the series.
-        XYSeries ts = (XYSeries) this.data.get(series);
-        ts.removeChangeListener(this);
-        this.data.remove(series);
-        fireDatasetChanged();
+        XYSeries s = (XYSeries) this.data.get(series);
+        if (s != null) {
+            removeSeries(s);
+        }
     }
 
     /**
