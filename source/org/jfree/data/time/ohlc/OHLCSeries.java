@@ -27,7 +27,7 @@
  * ---------------
  * OHLCSeries.java
  * ---------------
- * (C) Copyright 2006-2009, by Object Refinery Limited.
+ * (C) Copyright 2006-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,11 +36,13 @@
  * -------
  * 04-Dec-2006 : Version 1 (DG);
  * 17-Jun-2009 : Added remove(int) method (DG);
+ * 21-Nov-2013 : Added add(OHLCItem) method - feature request #385 (DG);
  *
  */
 
 package org.jfree.data.time.ohlc;
 
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.ComparableObjectItem;
 import org.jfree.data.ComparableObjectSeries;
 import org.jfree.data.time.RegularTimePeriod;
@@ -84,6 +86,7 @@ public class OHLCSeries extends ComparableObjectSeries {
      *
      * @return The data item.
      */
+    @Override
     public ComparableObjectItem getDataItem(int index) {
         return super.getDataItem(index);
     }
@@ -108,6 +111,20 @@ public class OHLCSeries extends ComparableObjectSeries {
         }
         super.add(new OHLCItem(period, open, high, low, close), true);
     }
+    
+    /**
+     * Adds a data item to the series.  The values from the item passed to
+     * this method will be copied into a new object.
+     * 
+     * @param item  the item (<code>null</code> not permitted).
+     * 
+     * @since 1.0.17
+     */
+    public void add(OHLCItem item) {
+        ParamChecks.nullNotPermitted(item, "item");
+        add(item.getPeriod(), item.getOpenValue(), item.getHighValue(),
+                item.getLowValue(), item.getCloseValue());
+    }
 
     /**
      * Removes the item with the specified index.
@@ -116,6 +133,7 @@ public class OHLCSeries extends ComparableObjectSeries {
      *
      * @since 1.0.14
      */
+    @Override
     public ComparableObjectItem remove(int index) {
         return super.remove(index);
     }
