@@ -88,6 +88,9 @@
 
 package org.jfree.data.time;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyVetoException;
+import java.beans.VetoableChangeListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -101,6 +104,7 @@ import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
+import org.jfree.data.general.Series;
 import org.jfree.data.xy.AbstractIntervalXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -116,7 +120,7 @@ import org.jfree.util.ObjectUtilities;
  */
 public class TimeSeriesCollection extends AbstractIntervalXYDataset
         implements XYDataset, IntervalXYDataset, DomainInfo, XYDomainInfo,
-        XYRangeInfo, Serializable {
+        XYRangeInfo, VetoableChangeListener, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 834149929022371137L;
@@ -342,6 +346,28 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
+     * Returns the index of the series with the specified key, or -1 if no
+     * series has that key.
+     * 
+     * @param key  the key (<code>null</code> not permitted).
+     * 
+     * @return The index.
+     * 
+     * @since 1.0.17
+     */
+    public int getSeriesIndex(Comparable key) {
+        ParamChecks.nullNotPermitted(key, "key");
+        int seriesCount = getSeriesCount();
+        for (int i = 0; i < seriesCount; i++) {
+            TimeSeries series = (TimeSeries) this.data.get(i);
+            if (key.equals(series.getKey())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * Adds a series to the collection and sends a {@link DatasetChangeEvent} to
      * all registered listeners.
      *
@@ -351,6 +377,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
         ParamChecks.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
+        series.addVetoableChangeListener(this);
         fireDatasetChanged();
     }
 
@@ -364,6 +391,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
         ParamChecks.nullNotPermitted(series, "series");
         this.data.remove(series);
         series.removeChangeListener(this);
+        series.removeVetoableChangeListener(this);
         fireDatasetChanged();
     }
 
@@ -390,6 +418,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
         for (int i = 0; i < this.data.size(); i++) {
             TimeSeries series = (TimeSeries) this.data.get(i);
             series.removeChangeListener(this);
+            series.removeVetoableChangeListener(this);
         }
 
         // remove all the series from the collection and notify listeners.
@@ -698,6 +727,37 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
             result = Range.combineIgnoringNaN(result, r);
         }
         return result;
+    }
+
+    /**
+     * Receives notification that the key for one of the series in the 
+     * collection has changed, and vetos it if the key is already present in 
+     * the collection.
+     * 
+     * @param e  the event.
+     * 
+     * @since 1.0.17
+     */
+    @Override
+    public void vetoableChange(PropertyChangeEvent e)
+            throws PropertyVetoException {
+        // if it is not the series name, then we have no interest
+        if (!"Key".equals(e.getPropertyName())) {
+            return;
+        }
+        
+        // to be defensive, let's check that the source series does in fact
+        // belong to this collection
+        Series s = (Series) e.getSource();
+        if (getSeriesIndex(s.getKey()) == -1) {
+            throw new IllegalStateException("Receiving events from a series " +
+                    "that does not belong to this collection.");
+        }
+        // check if the new series name already exists for another series
+        Comparable key = (Comparable) e.getNewValue();
+        if (getSeriesIndex(key) >= 0) {
+            throw new PropertyVetoException("Duplicate key2", e);
+        }
     }
 
     /**
