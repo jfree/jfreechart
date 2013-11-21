@@ -27,7 +27,7 @@
  * -------------
  * ClipPath.java
  * -------------
- * (C) Copyright 2003-2008, by David M. O'Donnell and Contributors.
+ * (C) Copyright 2003-2013, by David M. O'Donnell and Contributors.
  *
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -429,6 +429,7 @@ public class ClipPath implements Cloneable {
      *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         ClipPath clone = (ClipPath) super.clone();
         clone.xValue = (double[]) this.xValue.clone();

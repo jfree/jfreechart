@@ -27,7 +27,7 @@
  * --------------------
  * PolarChartPanel.java
  * --------------------
- * (C) Copyright 2004-2008, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2013, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -124,6 +124,7 @@ public class PolarChartPanel extends ChartPanel {
      *
      * @param chart  The chart.
      */
+    @Override
     public void setChart(JFreeChart chart) {
         checkChart(chart);
         super.setChart(chart);
@@ -139,10 +140,9 @@ public class PolarChartPanel extends ChartPanel {
      *
      * @return The popup menu.
      */
-    protected JPopupMenu createPopupMenu(boolean properties,
-                                         boolean save,
-                                         boolean print,
-                                         boolean zoom) {
+    @Override
+    protected JPopupMenu createPopupMenu(boolean properties, boolean save,
+            boolean print, boolean zoom) {
 
        JPopupMenu result = super.createPopupMenu(properties, save, print, zoom);
        int zoomInIndex = getPopupMenuItem(result,
@@ -197,6 +197,7 @@ public class PolarChartPanel extends ChartPanel {
      *
      * @param event  the event.
      */
+    @Override
     public void actionPerformed(ActionEvent event) {
        String command = event.getActionCommand();
 

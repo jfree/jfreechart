@@ -27,7 +27,7 @@
  * -------------------------
  * LegendItemCollection.java
  * -------------------------
- * (C) Copyright 2002-2009, by Object Refinery Limited.
+ * (C) Copyright 2002-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -124,6 +124,7 @@ public class LegendItemCollection implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -146,6 +147,7 @@ public class LegendItemCollection implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if an item in the collection is not
      *         cloneable.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         LegendItemCollection clone = (LegendItemCollection) super.clone();
         clone.items = (List) ObjectUtilities.deepClone(this.items);
