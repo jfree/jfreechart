@@ -135,6 +135,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      *
      * @return <code>2</code>.
      */
+    @Override
     public int getPassCount() {
         return 2;
     }
@@ -146,6 +147,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      *
      * @return The bounds (possibly <code>null</code>).
      */
+    @Override
     public Range findDomainBounds(XYDataset dataset) {
         if (dataset == null) {
             return null;
@@ -219,16 +221,11 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset, int series, int item,
-                         CrosshairState crosshairState,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, XYItemRendererState state, 
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset, 
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         IntervalXYDataset intervalDataset = (IntervalXYDataset) dataset;
 
@@ -295,6 +292,8 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
             double ry = Math.min(yy0, yy1);
             double rh = intervalH;
             bar = new Rectangle2D.Double(rx, ry, rw, rh);
+        } else {
+            throw new IllegalStateException();
         }
         boolean positive = (y1 > 0.0);
         boolean inverted = rangeAxis.isInverted();
@@ -352,6 +351,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -373,6 +373,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

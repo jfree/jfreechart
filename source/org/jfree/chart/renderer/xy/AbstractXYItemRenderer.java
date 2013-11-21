@@ -1098,6 +1098,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             else if (orientation == PlotOrientation.VERTICAL) {
                 line = new Line2D.Double(v, dataArea.getMinY(), v,
                         dataArea.getMaxY());
+            } else {
+                throw new IllegalStateException();
             }
 
             final Composite originalComposite = g2.getComposite();

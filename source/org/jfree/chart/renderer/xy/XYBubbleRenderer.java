@@ -170,6 +170,7 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, XYItemRendererState state,
             Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
             ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
@@ -198,8 +199,8 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
             double transY = rangeAxis.valueToJava2D(y, dataArea,
                     rangeAxisLocation);
 
-            double transDomain = 0.0;
-            double transRange = 0.0;
+            double transDomain;
+            double transRange;
             double zero;
 
             switch(getScaleType()) {
@@ -237,6 +238,8 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
             else if (orientation == PlotOrientation.HORIZONTAL) {
                 circle = new Ellipse2D.Double(transY - transRange / 2.0,
                         transX - transDomain / 2.0, transRange, transDomain);
+            } else {
+                throw new IllegalStateException();
             }
             g2.setPaint(getItemPaint(series, item));
             g2.fill(circle);
@@ -256,9 +259,9 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
             }
 
             // add an entity if this info is being collected
-            EntityCollection entities = null;
             if (info != null) {
-                entities = info.getOwner().getEntityCollection();
+                EntityCollection entities 
+                        = info.getOwner().getEntityCollection();
                 if (entities != null && circle.intersects(dataArea)) {
                     addEntity(entities, circle, dataset, series, item,
                             circle.getCenterX(), circle.getCenterY());
@@ -282,6 +285,7 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
      *
      * @return A legend item for the series.
      */
+    @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
         LegendItem result = null;
         XYPlot plot = getPlot();
@@ -332,6 +336,7 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -353,6 +358,7 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
      *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
