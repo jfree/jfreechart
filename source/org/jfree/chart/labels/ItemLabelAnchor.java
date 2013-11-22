@@ -27,7 +27,7 @@
  * --------------------
  * ItemLabelAnchor.java
  * --------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2013, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -173,6 +173,7 @@ public final class ItemLabelAnchor implements Serializable {
      *
      * @return The string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
@@ -185,22 +186,19 @@ public final class ItemLabelAnchor implements Serializable {
      *
      * @return A boolean.
      */
-    public boolean equals(Object o) {
-
-        if (this == o) {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (!(o instanceof ItemLabelAnchor)) {
+        if (!(obj instanceof ItemLabelAnchor)) {
             return false;
         }
-
-        ItemLabelAnchor order = (ItemLabelAnchor) o;
-        if (!this.name.equals(order.toString())) {
+        ItemLabelAnchor that = (ItemLabelAnchor) obj;
+        if (!this.name.equals(that.toString())) {
             return false;
         }
-
         return true;
-
     }
 
     /**

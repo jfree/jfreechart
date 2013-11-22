@@ -77,12 +77,13 @@ public class StandardContourToolTipGenerator implements ContourToolTipGenerator,
      *
      * @return The tooltip text.
      */
+    @Override
     public String generateToolTip(ContourDataset data, int item) {
 
         double x = data.getXValue(0, item);
         double y = data.getYValue(0, item);
         double z = data.getZValue(0, item);
-        String xString = null;
+        String xString;
 
         if (data.isDateAxis(0)) {
             SimpleDateFormat formatter
@@ -116,22 +117,20 @@ public class StandardContourToolTipGenerator implements ContourToolTipGenerator,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
-
         if (obj == this) {
             return true;
         }
-
         if (!(obj instanceof StandardContourToolTipGenerator)) {
             return false;
         }
         StandardContourToolTipGenerator that
-            = (StandardContourToolTipGenerator) obj;
+                = (StandardContourToolTipGenerator) obj;
         if (this.valueForm != null) {
             return this.valueForm.equals(that.valueForm);
         }
         return false;
-
     }
 
 }

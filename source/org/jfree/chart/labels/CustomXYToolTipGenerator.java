@@ -140,10 +140,9 @@ public class CustomXYToolTipGenerator implements XYToolTipGenerator,
      *
      * @return The tooltip text.
      */
+    @Override
     public String generateToolTip(XYDataset data, int series, int item) {
-
         return getToolTipText(series, item);
-
     }
 
     /**
@@ -153,16 +152,16 @@ public class CustomXYToolTipGenerator implements XYToolTipGenerator,
      *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
-
         CustomXYToolTipGenerator clone
             = (CustomXYToolTipGenerator) super.clone();
         if (this.toolTipSeries != null) {
             clone.toolTipSeries = new java.util.ArrayList(this.toolTipSeries);
         }
         return clone;
-
     }
+
     /**
      * Tests if this object is equal to another.
      *
@@ -170,12 +169,11 @@ public class CustomXYToolTipGenerator implements XYToolTipGenerator,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
-
         if (obj == this) {
             return true;
         }
-
         if (obj instanceof CustomXYToolTipGenerator) {
             CustomXYToolTipGenerator generator = (CustomXYToolTipGenerator) obj;
             boolean result = true;
@@ -193,9 +191,7 @@ public class CustomXYToolTipGenerator implements XYToolTipGenerator,
             }
             return result;
         }
-
         return false;
-
     }
 
 }

@@ -105,6 +105,7 @@ public class IntervalCategoryItemLabelGenerator
      *
      * @return The items (never <code>null</code>).
      */
+    @Override
     protected Object[] createItemArray(CategoryDataset dataset,
                                        int row, int column) {
         Object[] result = new Object[5];

@@ -102,6 +102,7 @@ public class IntervalCategoryToolTipGenerator
      *
      * @return The items (never <code>null</code>).
      */
+    @Override
     protected Object[] createItemArray(CategoryDataset dataset,
                                        int row, int column) {
         Object[] result = new Object[5];
@@ -139,6 +140,7 @@ public class IntervalCategoryToolTipGenerator
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

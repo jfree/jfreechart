@@ -122,6 +122,7 @@ public class BoxAndWhiskerXYToolTipGenerator extends StandardXYToolTipGenerator
      *
      * @return The items (never <code>null</code>).
      */
+    @Override
     protected Object[] createItemArray(XYDataset dataset, int series,
                                        int item) {
         Object[] result = new Object[8];
@@ -154,6 +155,7 @@ public class BoxAndWhiskerXYToolTipGenerator extends StandardXYToolTipGenerator
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

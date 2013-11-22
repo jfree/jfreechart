@@ -114,6 +114,7 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
      *
      * @return The label (possibly <code>null</code>).
      */
+    @Override
     public String generateLabel(Crosshair crosshair) {
         Object[] v = new Object[] {this.numberFormat.format(
                 crosshair.getValue())};
@@ -128,6 +129,7 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
      * 
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -151,6 +153,7 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
      *
      * @return A hash code for this instance.
      */
+    @Override
     public int hashCode() {
         return this.labelTemplate.hashCode();
     }

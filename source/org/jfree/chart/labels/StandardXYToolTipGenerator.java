@@ -161,6 +161,7 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
      *
      * @return The tooltip text (possibly <code>null</code>).
      */
+    @Override
     public String generateToolTip(XYDataset dataset, int series, int item) {
         return generateLabelString(dataset, series, item);
     }
@@ -172,6 +173,7 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -189,6 +191,7 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
      *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

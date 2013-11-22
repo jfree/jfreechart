@@ -77,6 +77,7 @@ public class SymbolicXYItemLabelGenerator implements XYItemLabelGenerator,
      *
      * @return The tool tip text (possibly <code>null</code>).
      */
+    @Override
     public String generateToolTip(XYDataset data, int series, int item) {
 
         String xStr, yStr;
@@ -113,6 +114,7 @@ public class SymbolicXYItemLabelGenerator implements XYItemLabelGenerator,
      *
      * @return The label (possibly <code>null</code>).
      */
+    @Override
     public String generateLabel(XYDataset dataset, int series, int category) {
         return null;  //TODO: implement this method properly
     }
@@ -141,6 +143,7 @@ public class SymbolicXYItemLabelGenerator implements XYItemLabelGenerator,
      *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -152,6 +155,7 @@ public class SymbolicXYItemLabelGenerator implements XYItemLabelGenerator,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -167,6 +171,7 @@ public class SymbolicXYItemLabelGenerator implements XYItemLabelGenerator,
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 127;
         return result;
