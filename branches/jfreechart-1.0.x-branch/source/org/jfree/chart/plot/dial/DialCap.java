@@ -217,6 +217,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      *
      * @return <code>true</code>.
      */
+    @Override
     public boolean isClippedToWindow() {
         return true;
     }
@@ -231,6 +232,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      * @param frame  the dial frame (ignored here).
      * @param view  the view rectangle (<code>null</code> not permitted).
      */
+    @Override
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
             Rectangle2D view) {
 
@@ -254,6 +256,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -282,6 +285,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      *
      * @return The hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         result = 37 * result + HashUtilities.hashCodeForPaint(this.fillPaint);
@@ -299,6 +303,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      * @throws CloneNotSupportedException if some attribute of the cap cannot
      *     be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

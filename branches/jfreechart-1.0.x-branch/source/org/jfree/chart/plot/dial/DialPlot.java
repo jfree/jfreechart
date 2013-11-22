@@ -525,6 +525,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * @param info  used to collect plot rendering info (<code>null</code>
      *     permitted).
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
             PlotState parentState, PlotRenderingInfo info) {
 
@@ -721,6 +722,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void dialLayerChanged(DialLayerChangeEvent event) {
         fireChangeEvent();
     }
@@ -734,6 +736,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -777,6 +780,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      *
      * @return The hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         result = 37 * result + ObjectUtilities.hashCode(this.background);
@@ -798,6 +802,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      *
      * @return <code>"DialPlot"</code>
      */
+    @Override
     public String getPlotType() {
         return "DialPlot";
     }

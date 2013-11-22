@@ -299,6 +299,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      *
      * @return <code>true</code>.
      */
+    @Override
     public boolean isClippedToWindow() {
         return true;
     }
@@ -311,6 +312,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      * @param frame  the dial's reference frame (in Java2D space).
      * @param view  the dial's view rectangle (in Java2D space).
      */
+    @Override
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
             Rectangle2D view) {
 
@@ -345,6 +347,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -379,6 +382,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      *
      * @return The hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         long temp = Double.doubleToLongBits(this.lowerBound);
@@ -401,6 +405,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      * @throws CloneNotSupportedException if any of the attributes of this
      *     instance cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

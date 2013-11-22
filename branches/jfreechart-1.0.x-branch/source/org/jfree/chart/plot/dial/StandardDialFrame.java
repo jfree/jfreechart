@@ -216,6 +216,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      *
      * @return The shape of the dial's window.
      */
+    @Override
     public Shape getWindow(Rectangle2D frame) {
         Rectangle2D f = DialPlot.rectangleByRadius(frame, this.radius,
                 this.radius);
@@ -229,6 +230,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      *
      * @return A boolean.
      */
+    @Override
     public boolean isClippedToWindow() {
         return false;
     }
@@ -242,6 +244,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * @param frame  the frame (<code>null</code> not permitted).
      * @param view  the view (<code>null</code> not permitted).
      */
+    @Override
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
             Rectangle2D view) {
 
@@ -271,6 +274,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -299,6 +303,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      *
      * @return The hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         long temp = Double.doubleToLongBits(this.radius);
@@ -319,6 +324,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * @throws CloneNotSupportedException if any of the frame's attributes
      *     cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
