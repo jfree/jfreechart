@@ -235,6 +235,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @see #getLastMillisecond()
      */
+    @Override
     public long getFirstMillisecond() {
         return this.firstMillisecond;
     }
@@ -249,6 +250,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @see #getFirstMillisecond()
      */
+    @Override
     public long getLastMillisecond() {
         return this.lastMillisecond;
     }
@@ -261,6 +263,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @since 1.0.3
      */
+    @Override
     public void peg(Calendar calendar) {
         this.firstMillisecond = getFirstMillisecond(calendar);
         this.lastMillisecond = getLastMillisecond(calendar);
@@ -271,6 +274,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @return The hour preceding this one.
      */
+    @Override
     public RegularTimePeriod previous() {
         Hour result;
         if (this.hour != FIRST_HOUR_IN_DAY) {
@@ -293,6 +297,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @return The hour following this one.
      */
+    @Override
     public RegularTimePeriod next() {
         Hour result;
         if (this.hour != LAST_HOUR_IN_DAY) {
@@ -315,6 +320,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @return The serial index number.
      */
+    @Override
     public long getSerialIndex() {
         return this.day.getSerialIndex() * 24L + this.hour;
     }
@@ -329,6 +335,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
+    @Override
     public long getFirstMillisecond(Calendar calendar) {
         int year = this.day.getYear();
         int month = this.day.getMonth() - 1;
@@ -348,6 +355,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
+    @Override
     public long getLastMillisecond(Calendar calendar) {
         int year = this.day.getYear();
         int month = this.day.getMonth() - 1;
@@ -368,6 +376,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @return <code>true</code> if the hour and day value of the object
      *      is the same as this.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -391,6 +400,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @return A string.
      */
+    @Override
     public String toString() {
         return "[" + this.hour + "," + getDayOfMonth() + "/" + getMonth() + "/"
                 + getYear() + "]";
@@ -405,6 +415,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 17;
         result = 37 * result + this.hour;
@@ -422,6 +433,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @return negative == before, zero == same, positive == after.
      */
+    @Override
     public int compareTo(Object o1) {
         int result;
 

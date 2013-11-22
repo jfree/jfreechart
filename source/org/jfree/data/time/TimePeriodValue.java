@@ -126,6 +126,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -153,6 +154,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      *
      * @return The hashcode
      */
+    @Override
     public int hashCode() {
         int result;
         result = (this.period != null ? this.period.hashCode() : 0);
@@ -168,6 +170,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      *
      * @return A clone.
      */
+    @Override
     public Object clone() {
         Object clone = null;
         try {
@@ -185,6 +188,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      *
      * @return A string.
      */
+    @Override
     public String toString() {
         return "TimePeriodValue[" + getPeriod() + "," + getValue() + "]";
     }

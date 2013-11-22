@@ -149,6 +149,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -171,6 +172,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result;
         result = (this.period != null ? this.period.hashCode() : 0);
@@ -190,6 +192,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
      * @return An integer indicating the order of the data item object
      *         relative to another object.
      */
+    @Override
     public int compareTo(Object o1) {
 
         int result;
@@ -218,6 +221,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
      *
      * @return A clone of the data item.
      */
+    @Override
     public Object clone() {
         Object clone = null;
         try {

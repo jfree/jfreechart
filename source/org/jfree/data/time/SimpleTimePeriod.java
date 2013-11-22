@@ -96,6 +96,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      *
      * @return The start date/time (never <code>null</code>).
      */
+    @Override
     public Date getStart() {
         return new Date(this.start);
     }
@@ -116,6 +117,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      *
      * @return The end date/time (never <code>null</code>).
      */
+    @Override
     public Date getEnd() {
         return new Date(this.end);
     }
@@ -140,6 +142,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -168,6 +171,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      * @throws ClassCastException if <code>obj</code> is not an instance of
      *                            {@link TimePeriod}.
      */
+    @Override
     public int compareTo(Object obj) {
         TimePeriod that = (TimePeriod) obj;
         long t0 = getStart().getTime();
@@ -212,6 +216,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 17;
         result = 37 * result + (int) this.start;

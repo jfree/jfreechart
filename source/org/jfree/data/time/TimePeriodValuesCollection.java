@@ -142,6 +142,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The series count.
      */
+    @Override
     public int getSeriesCount() {
         return this.data.size();
     }
@@ -167,6 +168,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The key for a series.
      */
+    @Override
     public Comparable getSeriesKey(int series) {
         // defer argument checking
         return getSeries(series).getKey();
@@ -220,6 +222,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The number of items in the specified series.
      */
+    @Override
     public int getItemCount(int series) {
         return getSeries(series).getItemCount();
     }
@@ -232,6 +235,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The x-value for the specified series and item.
      */
+    @Override
     public Number getX(int series, int item) {
         TimePeriodValues ts = (TimePeriodValues) this.data.get(series);
         TimePeriodValue dp = ts.getDataItem(item);
@@ -272,6 +276,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The starting X value for the specified series and item.
      */
+    @Override
     public Number getStartX(int series, int item) {
         TimePeriodValues ts = (TimePeriodValues) this.data.get(series);
         TimePeriodValue dp = ts.getDataItem(item);
@@ -286,6 +291,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The ending X value for the specified series and item.
      */
+    @Override
     public Number getEndX(int series, int item) {
         TimePeriodValues ts = (TimePeriodValues) this.data.get(series);
         TimePeriodValue dp = ts.getDataItem(item);
@@ -300,6 +306,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The y-value for the specified series and item.
      */
+    @Override
     public Number getY(int series, int item) {
         TimePeriodValues ts = (TimePeriodValues) this.data.get(series);
         TimePeriodValue dp = ts.getDataItem(item);
@@ -314,6 +321,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The starting Y value for the specified series and item.
      */
+    @Override
     public Number getStartY(int series, int item) {
         return getY(series, item);
     }
@@ -326,6 +334,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The ending Y value for the specified series and item.
      */
+    @Override
     public Number getEndY(int series, int item) {
         return getY(series, item);
     }
@@ -338,6 +347,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The minimum value.
      */
+    @Override
     public double getDomainLowerBound(boolean includeInterval) {
         double result = Double.NaN;
         Range r = getDomainBounds(includeInterval);
@@ -355,6 +365,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The maximum value.
      */
+    @Override
     public double getDomainUpperBound(boolean includeInterval) {
         double result = Double.NaN;
         Range r = getDomainBounds(includeInterval);
@@ -372,6 +383,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return The range.
      */
+    @Override
     public Range getDomainBounds(boolean includeInterval) {
         boolean interval = includeInterval || this.domainIsPointsInTime;
         Range result = null;
@@ -427,6 +439,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
