@@ -347,17 +347,14 @@ public abstract class Regression {
                 if (result[i][0] != 0) {
                     found = true;
                     double[] temp = result[0];
-                    for (int j = 0; j < result[i].length; j++) {
-                        result[0][j] = result[i][j];
-                    }
-                    for (int j = 0; j < temp.length; j++) {
-                        result[i][j] = temp[j];
-                    }
+                    System.arraycopy(result[i], 0, result[0], 0, 
+                            result[i].length);
+                    System.arraycopy(temp, 0, result[i], 0, temp.length);
                     break;
                 }
             }
             if (!found) {
-                System.out.println("Equation has no solution!");
+                //System.out.println("Equation has no solution!");
                 return new double[equations - 1][coefficients - 1];
             }
         }
