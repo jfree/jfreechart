@@ -48,6 +48,7 @@ public class JFreeChartResources extends ListResourceBundle {
      *
      * @return The resources.
      */
+    @Override
     public Object[][] getContents() {
         return CONTENTS;
     }
