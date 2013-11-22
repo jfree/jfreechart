@@ -59,7 +59,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
@@ -264,6 +263,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * @return The range, or <code>null</code> if the dataset is
      *     <code>null</code>.
      */
+    @Override
     public Range findDomainBounds(XYDataset dataset) {
         // include the interval if there is one
         return findDomainBounds(dataset, true);
@@ -278,6 +278,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * @return The range, or <code>null</code> if the dataset is
      *     <code>null</code>.
      */
+    @Override
     public Range findRangeBounds(XYDataset dataset) {
         // include the interval if there is one
         return findRangeBounds(dataset, true);
@@ -299,6 +300,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * @param crosshairState  the crosshair state.
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, XYItemRendererState state,
             Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
             ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
@@ -319,8 +321,8 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
                 double yy = rangeAxis.valueToJava2D(y, dataArea,
                         plot.getRangeAxisEdge());
                 Line2D line;
-                Line2D cap1 = null;
-                Line2D cap2 = null;
+                Line2D cap1;
+                Line2D cap2;
                 double adj = this.capLength / 2.0;
                 if (orientation == PlotOrientation.VERTICAL) {
                     line = new Line2D.Double(xx0, yy, xx1, yy);
@@ -359,8 +361,8 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
                 double xx = domainAxis.valueToJava2D(x, dataArea,
                         plot.getDomainAxisEdge());
                 Line2D line;
-                Line2D cap1 = null;
-                Line2D cap2 = null;
+                Line2D cap1;
+                Line2D cap2;
                 double adj = this.capLength / 2.0;
                 if (orientation == PlotOrientation.VERTICAL) {
                     line = new Line2D.Double(xx, yy0, xx, yy1);
@@ -400,6 +402,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
