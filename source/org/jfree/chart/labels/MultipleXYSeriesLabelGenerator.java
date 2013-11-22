@@ -133,9 +133,10 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      *
      * @return A series label.
      */
+    @Override
     public String generateLabel(XYDataset dataset, int series) {
         ParamChecks.nullNotPermitted(dataset, "dataset");
-        StringBuffer label = new StringBuffer();
+        StringBuilder label = new StringBuilder();
         label.append(MessageFormat.format(this.formatPattern,
                 createItemArray(dataset, series)));
         Integer key = new Integer(series);
@@ -174,6 +175,7 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         MultipleXYSeriesLabelGenerator clone
                 = (MultipleXYSeriesLabelGenerator) super.clone();
@@ -200,6 +202,7 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -227,6 +230,7 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 127;
         result = HashUtilities.hashCode(result, this.formatPattern);
