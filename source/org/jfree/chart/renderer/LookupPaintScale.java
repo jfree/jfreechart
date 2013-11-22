@@ -100,6 +100,7 @@ public class LookupPaintScale
          *
          * @return An int defining the relative order of the objects.
          */
+        @Override
         public int compareTo(Object obj) {
             PaintItem that = (PaintItem) obj;
             double d1 = this.value;
@@ -120,6 +121,7 @@ public class LookupPaintScale
          *
          * @return A boolean.
          */
+        @Override
         public boolean equals(Object obj) {
             if (obj == this) {
                 return true;
@@ -224,6 +226,7 @@ public class LookupPaintScale
      *
      * @see #getUpperBound()
      */
+    @Override
     public double getLowerBound() {
         return this.lowerBound;
     }
@@ -235,6 +238,7 @@ public class LookupPaintScale
      *
      * @see #getLowerBound()
      */
+    @Override
     public double getUpperBound() {
         return this.upperBound;
     }
@@ -283,6 +287,7 @@ public class LookupPaintScale
      *
      * @see #getDefaultPaint()
      */
+    @Override
     public Paint getPaint(double value) {
 
         // handle value outside bounds...
@@ -334,6 +339,7 @@ public class LookupPaintScale
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -365,6 +371,7 @@ public class LookupPaintScale
      * @throws CloneNotSupportedException if there is a problem cloning the
      *     instance.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         LookupPaintScale clone = (LookupPaintScale) super.clone();
         clone.lookupTable = new java.util.ArrayList(this.lookupTable);

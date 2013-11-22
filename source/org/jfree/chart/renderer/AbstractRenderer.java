@@ -2948,6 +2948,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -3150,6 +3151,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @return The hashcode.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         result = HashUtilities.hashCode(result, this.seriesVisibleList);
@@ -3192,6 +3194,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if some component of the renderer
      *         does not support cloning.
      */
+    @Override
     protected Object clone() throws CloneNotSupportedException {
         AbstractRenderer clone = (AbstractRenderer) super.clone();
 
