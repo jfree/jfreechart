@@ -132,10 +132,9 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
      * @param rendererIndex  the renderer index.
      * @param state  the renderer state.
      */
-    protected void calculateBarWidth(CategoryPlot plot,
-                                     Rectangle2D dataArea,
-                                     int rendererIndex,
-                                     CategoryItemRendererState state) {
+    @Override
+    protected void calculateBarWidth(CategoryPlot plot, Rectangle2D dataArea,
+            int rendererIndex, CategoryItemRendererState state) {
 
         // calculate the bar width - this calculation differs from the
         // BarRenderer calculation because the bars are layered on top of one
@@ -185,16 +184,11 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         CategoryItemRendererState state,
-                         Rectangle2D dataArea,
-                         CategoryPlot plot,
-                         CategoryAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         CategoryDataset data,
-                         int row,
-                         int column,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, CategoryItemRendererState state,
+            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+            ValueAxis rangeAxis, CategoryDataset data, int row, int column,
+            int pass) {
 
         PlotOrientation orientation = plot.getOrientation();
         if (orientation == PlotOrientation.HORIZONTAL) {
@@ -285,7 +279,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
 
         // draw the bar...
         double shift = 0.0;
-        double rectHeight = 0.0;
+        double rectHeight;
         double widthFactor = 1.0;
         double seriesBarWidth = getSeriesBarWidth(row);
         if (!Double.isNaN(seriesBarWidth)) {
@@ -410,7 +404,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
         double transY2 = rangeAxis.valueToJava2D(value, dataArea, edge);
         double rectY = Math.min(transY2, transY1);
 
-        double rectWidth = 0.0;
+        double rectWidth;
         double rectHeight = Math.abs(transY2 - transY1);
 
         // draw the bar...

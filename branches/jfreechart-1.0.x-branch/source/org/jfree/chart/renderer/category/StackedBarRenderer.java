@@ -199,6 +199,7 @@ public class StackedBarRenderer extends BarRenderer
      *
      * @return The number of passes required by the renderer.
      */
+    @Override
     public int getPassCount() {
         return 3;
     }
@@ -211,6 +212,7 @@ public class StackedBarRenderer extends BarRenderer
      *
      * @return The range (or <code>null</code> if the dataset is empty).
      */
+    @Override
     public Range findRangeBounds(CategoryDataset dataset) {
         if (dataset == null) {
             return null;
@@ -231,10 +233,9 @@ public class StackedBarRenderer extends BarRenderer
      * @param rendererIndex  the renderer index.
      * @param state  the renderer state.
      */
-    protected void calculateBarWidth(CategoryPlot plot,
-                                     Rectangle2D dataArea,
-                                     int rendererIndex,
-                                     CategoryItemRendererState state) {
+    @Override
+    protected void calculateBarWidth(CategoryPlot plot, Rectangle2D dataArea,
+            int rendererIndex, CategoryItemRendererState state) {
 
         // calculate the bar width
         CategoryAxis xAxis = plot.getDomainAxisForDataset(rendererIndex);
@@ -282,16 +283,11 @@ public class StackedBarRenderer extends BarRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         CategoryItemRendererState state,
-                         Rectangle2D dataArea,
-                         CategoryPlot plot,
-                         CategoryAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         CategoryDataset dataset,
-                         int row,
-                         int column,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, CategoryItemRendererState state,
+            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+            ValueAxis rangeAxis, CategoryDataset dataset, int row,
+            int column, int pass) {
 
         if (!isSeriesVisible(row)) {
             return;
@@ -374,7 +370,7 @@ public class StackedBarRenderer extends BarRenderer
         double barLength = Math.max(Math.abs(translatedValue - translatedBase),
                 getMinimumBarLength());
 
-        Rectangle2D bar = null;
+        Rectangle2D bar;
         if (orientation == PlotOrientation.HORIZONTAL) {
             bar = new Rectangle2D.Double(barL0, barW0, barLength,
                     state.getBarWidth());
@@ -417,6 +413,7 @@ public class StackedBarRenderer extends BarRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

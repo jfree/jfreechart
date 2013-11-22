@@ -156,6 +156,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      *
      * @return The legend item.
      */
+    @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
 
         // if there is no plot, there is no dataset to access...
@@ -217,6 +218,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, CategoryItemRendererState state,
             Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
             ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
@@ -338,6 +340,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -359,6 +362,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      *
      * @throws CloneNotSupportedException  should not happen.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

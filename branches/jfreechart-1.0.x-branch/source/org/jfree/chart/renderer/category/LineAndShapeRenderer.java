@@ -821,6 +821,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      *
      * @return The legend item.
      */
+    @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
 
         CategoryPlot cp = getPlot();
@@ -878,6 +879,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      *
      * @return The pass count (<code>2</code> for this renderer).
      */
+    @Override
     public int getPassCount() {
         return 2;
     }
@@ -896,6 +898,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, CategoryItemRendererState state,
             Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
             ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
@@ -1042,6 +1045,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
 
         if (obj == this) {
@@ -1101,6 +1105,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      *
      * @throws CloneNotSupportedException  should not happen.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         LineAndShapeRenderer clone = (LineAndShapeRenderer) super.clone();
         clone.seriesLinesVisible

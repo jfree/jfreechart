@@ -196,6 +196,7 @@ public class StatisticalBarRenderer extends BarRenderer
      * @return The range (or <code>null</code> if the dataset is
      *         <code>null</code> or empty).
      */
+    @Override
     public Range findRangeBounds(CategoryDataset dataset) {
          return findRangeBounds(dataset, true);
     }
@@ -215,16 +216,10 @@ public class StatisticalBarRenderer extends BarRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         CategoryItemRendererState state,
-                         Rectangle2D dataArea,
-                         CategoryPlot plot,
-                         CategoryAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         CategoryDataset data,
-                         int row,
-                         int column,
-                         int pass) {
+    public void drawItem(Graphics2D g2, CategoryItemRendererState state,
+            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+            ValueAxis rangeAxis, CategoryDataset data, int row, int column,
+            int pass) {
 
         int visibleRow = state.getVisibleSeriesIndex(row);
         if (visibleRow < 0) {
@@ -368,7 +363,7 @@ public class StatisticalBarRenderer extends BarRenderer
             else {
                 g2.setStroke(getItemOutlineStroke(row, column));
             }
-            Line2D line = null;
+            Line2D line;
             line = new Line2D.Double(lowVal, rectY + rectHeight / 2.0d,
                                      highVal, rectY + rectHeight / 2.0d);
             g2.draw(line);
@@ -516,7 +511,7 @@ public class StatisticalBarRenderer extends BarRenderer
                 g2.setStroke(getItemOutlineStroke(row, column));
             }
 
-            Line2D line = null;
+            Line2D line;
             line = new Line2D.Double(rectX + rectWidth / 2.0d, lowVal,
                                      rectX + rectWidth / 2.0d, highVal);
             g2.draw(line);
@@ -549,6 +544,7 @@ public class StatisticalBarRenderer extends BarRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

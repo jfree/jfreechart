@@ -256,6 +256,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
      *
      * @return The range (or <code>null</code> if the dataset is empty).
      */
+    @Override
     public Range findRangeBounds(CategoryDataset dataset) {
         if (dataset == null) {
             return null;
@@ -274,10 +275,9 @@ public class StackedBarRenderer3D extends BarRenderer3D
      * @param rendererIndex  the renderer index.
      * @param state  the renderer state.
      */
-    protected void calculateBarWidth(CategoryPlot plot,
-                                     Rectangle2D dataArea,
-                                     int rendererIndex,
-                                     CategoryItemRendererState state) {
+    @Override
+    protected void calculateBarWidth(CategoryPlot plot, Rectangle2D dataArea,
+            int rendererIndex, CategoryItemRendererState state) {
 
         // calculate the bar width
         CategoryAxis domainAxis = getDomainAxis(plot, rendererIndex);
@@ -417,6 +417,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, CategoryItemRendererState state,
             Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
             ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
@@ -491,7 +492,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
             int index = (inverted ? blockCount - k - 1 : k);
             Object[] prev = (Object[]) values.get(index);
             Object[] curr = (Object[]) values.get(index + 1);
-            int series = 0;
+            int series;
             if (curr[0] == null) {
                 series = -((Integer) prev[0]).intValue() - 1;
             }
@@ -684,7 +685,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
             int index = (inverted ? blockCount - k - 1 : k);
             Object[] prev = (Object[]) values.get(index);
             Object[] curr = (Object[]) values.get(index + 1);
-            int series = 0;
+            int series;
             if (curr[0] == null) {
                 series = -((Integer) prev[0]).intValue() - 1;
             }
@@ -847,6 +848,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -869,6 +871,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
      * 
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int hash = super.hashCode();
         hash = HashUtilities.hashCode(hash, this.renderAsPercentages);
