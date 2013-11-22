@@ -75,6 +75,13 @@ public class DirectionalGradientPaintTransformer
         implements GradientPaintTransformer {
     
     /**
+     * Default constructor.
+     */
+    public DirectionalGradientPaintTransformer() {
+        super();    
+    }
+    
+    /**
      * Transforms a <code>GradientPaint</code> instance to fit some target 
      * shape.
      * 
