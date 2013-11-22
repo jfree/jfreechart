@@ -27,16 +27,17 @@
  * ---------------
  * PaintAlpha.java
  * ---------------
- * (C) Copyright 2011 by DaveLaw and Contributors.
+ * (C) Copyright 2011-2013 by DaveLaw and Contributors.
  *
  * Original Author:  DaveLaw (dave ATT davelaw D0TT de);
- * Contributor(s):   could this be you?;
+ * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  * Changes
  * -------
  * 09-Mar-2011 : Written (DaveLaw)
- * 03-Jul-2012 : JDK 1.6 References made reflective for JDK 1.3 compatibility (
- *               DaveLaw)
+ * 03-Jul-2012 : JDK 1.6 References made reflective for JDK 1.3 compatibility 
+ *               (DaveLaw);
+ * 16-Sep-2013 : Removed reflection since we are requiring JDK 1.6 now (DG)
  *
  */
 
@@ -44,15 +45,13 @@ package org.jfree.chart.util;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
+import java.awt.LinearGradientPaint;
 import java.awt.Paint;
+import java.awt.RadialGradientPaint;
 import java.awt.TexturePaint;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.IndexColorModel;
 import java.awt.image.WritableRaster;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Hashtable;
 
 /**
@@ -78,6 +77,8 @@ import java.util.Hashtable;
  * method which is needed to darken objects of type {@link TexturePaint}.
  *
  * @author  DaveLaw
+ * 
+ * @since 1.0.15
  */
 public class PaintAlpha {
     // TODO Revert to SVN revision 2469 in JFreeChart 1.0.16
@@ -133,16 +134,25 @@ public class PaintAlpha {
         if (paint instanceof GradientPaint) {
             return darker((GradientPaint) paint);
         }
-        if (paint.getClass().getName().equals("java.awt.LinearGradientPaint")) {
-            // TODO -> instanceof
-            return darkerLinearGradientPaint(paint);
+        if (paint instanceof LinearGradientPaint) {
+            return darkerLinearGradientPaint((LinearGradientPaint) paint);
         }
-        if (paint.getClass().getName().equals("java.awt.RadialGradientPaint")) {
-            // TODO -> instanceof
-            return darkerRadialGradientPaint(paint);
+        if (paint instanceof RadialGradientPaint) {
+            return darkerRadialGradientPaint((RadialGradientPaint) paint);
         }
         if (paint instanceof TexturePaint) {
-            return darker((TexturePaint) paint, true);
+            try {
+                return darkerTexturePaint((TexturePaint) paint);
+            }
+            catch (Exception e) {
+                /*
+                 * Lots can go wrong while fiddling with Images, Color Models
+                 * & such!  If anything at all goes awry, just return the original
+                 * TexturePaint.  (TexturePaint's are immutable anyway, so no harm
+                 * done)
+                 */
+                return paint;
+            }
         }
         return paint;
     }
@@ -165,9 +175,9 @@ public class PaintAlpha {
     }
 
     /**
-     * Create a new Gradient with its colours darkened.
+     * Create a new <code>GradientPaint</code> with its colors darkened.
      *
-     * @param paint a <code>GradientPaint</code>
+     * @param paint  the gradient paint (<code>null</code> not permitted).
      *
      * @return a darker version of the <code>GradientPaint</code>
      */
@@ -185,46 +195,15 @@ public class PaintAlpha {
      *
      * @return a darker version of the <code>LinearGradientPaint</code>
      */
-    private static final Paint darkerLinearGradientPaint(Paint paint) {
-        // TODO Rename->darker & change Paint->LinearGradientPaint
-        try {
-            final Color[] paintColours = (Color[]) invokeZeroArgumentMethod(
-                    paint, "getColors");
-
-            for (int i = 0; i < paintColours.length; i++) {
-                paintColours[i] = darker(paintColours[i]);
-            }
-
-            final Constructor[] constructors
-                    = paint.getClass().getConstructors();
-
-            for (int i = 0; i < constructors.length; i++) {
-
-                final Class[] args = constructors[i].getParameterTypes();
-
-                if (args.length == 7
-                        &&  args[args.length-1].equals(AffineTransform.class)) {
-
-                    return (Paint) constructors[i].newInstance(new Object[] {
-                        (Point2D) invokeZeroArgumentMethod(paint, "getStartPoint"),
-                        (Point2D) invokeZeroArgumentMethod(paint, "getEndPoint"),
-                        (float[]) invokeZeroArgumentMethod(paint, "getFractions"),
-                        paintColours,
-                        (Object) invokeZeroArgumentMethod(paint, "getCycleMethod"),
-                        (Object) invokeZeroArgumentMethod(paint, "getColorSpace"),
-                        (AffineTransform) invokeZeroArgumentMethod(paint,
-                            "getTransform") });
-                    }
-                }
-            } catch (IllegalArgumentException e) {
-            } catch (SecurityException e) {
-            } catch (IllegalAccessException e) {
-            } catch (InvocationTargetException e) {
-            } catch (NoSuchMethodException e) {
-            } catch (InstantiationException e) {
+    private static Paint darkerLinearGradientPaint(LinearGradientPaint paint) {
+        final Color[] paintColors = paint.getColors();
+        for (int i = 0; i < paintColors.length; i++) {
+            paintColors[i] = darker(paintColors[i]);
         }
-        throw new UnsupportedOperationException(
-                "Probably new Constructor signatures in newer JDK");
+        return new LinearGradientPaint(paint.getStartPoint(),
+                paint.getEndPoint(), paint.getFractions(), paintColors,
+                paint.getCycleMethod(), paint.getColorSpace(), 
+                paint.getTransform());
     }
 
     /**
@@ -234,114 +213,30 @@ public class PaintAlpha {
      *
      * @return a darker version of the <code>RadialGradientPaint</code>
      */
-    private static final Paint darkerRadialGradientPaint(Paint paint) {
-        // TODO Rename->darker & change Paint->RadialGradientPaint
-        try {
-            final Color[] paintColours
-                    = (Color[]) invokeZeroArgumentMethod(paint, "getColors");
-
-            for (int i = 0; i < paintColours.length; i++) {
-                paintColours[i] = darker(paintColours[i]);
-            }
-
-            final Constructor[] constructors
-                    = paint.getClass().getConstructors();
-
-            for (int i = 0; i < constructors.length; i++) {
-
-                final Class[] args = constructors[i].getParameterTypes();
-
-                if (     args.length == 8
-                &&  args[args.length-1].equals(AffineTransform.class)) {
-
-                    return (Paint) constructors[i].newInstance(new Object[] {
-                        (Point2D) invokeZeroArgumentMethod(paint, "getCenterPoint"),
-                        (Float) invokeZeroArgumentMethod(paint, "getRadius"),
-                        (Point2D) invokeZeroArgumentMethod(paint, "getFocusPoint"),
-                        (float[]) invokeZeroArgumentMethod(paint, "getFractions"),
-                        paintColours,
-                        (Object) invokeZeroArgumentMethod(paint, "getCycleMethod"),
-                        (Object) invokeZeroArgumentMethod(paint, "getColorSpace"),
-                        (AffineTransform) invokeZeroArgumentMethod(paint,
-                            "getTransform") });
-                }
-            }
-        } catch (IllegalArgumentException e) {
-        } catch (SecurityException e) {
-        } catch (IllegalAccessException e) {
-        } catch (InvocationTargetException e) {
-        } catch (NoSuchMethodException e) {
-        } catch (InstantiationException e) {
+    private static Paint darkerRadialGradientPaint(RadialGradientPaint paint) {
+        final Color[] paintColors = paint.getColors();
+        for (int i = 0; i < paintColors.length; i++) {
+            paintColors[i] = darker(paintColors[i]);
         }
-        throw new UnsupportedOperationException(
-                "Probably new Constructor signatures in newer JDK");
+        return new RadialGradientPaint(paint.getCenterPoint(), 
+                paint.getRadius(), paint.getFocusPoint(), 
+                paint.getFractions(), paintColors, paint.getCycleMethod(),
+                paint.getColorSpace(), paint.getTransform());
     }
 
     /**
-     * Convenience method to invoke the zero argument <code>methodName</code>
-     * method of <code>object</code> via Reflection.
-     *
-     * @param object
-     * @param methodName
-     *
-     * @return the result
-     *
-     * @throws IllegalArgumentException
-     * @throws SecurityException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws NoSuchMethodException
-     */
-    private static final Object invokeZeroArgumentMethod(Object object,
-            String methodName) throws IllegalArgumentException,
-            SecurityException, IllegalAccessException,
-            InvocationTargetException, NoSuchMethodException {
-        return object.getClass().getMethod(methodName,
-                new Class[] {}).invoke(object, new Object[] {});
-    }
-
-    /**
-     * Create a new <code>TexturePaint</code> with its colours darkened.
+     * Create a new <code>TexturePaint</code> with its colors darkened.
      * <p>
      * This entails cloning the underlying <code>BufferedImage</code>,
-     * then darkening each colour-pixel individually!
-     *
-     * @param paint a <code>TexturePaint</code>
-     *
-     * @param ignoreThisDummyArgument which is just to guarantee a unique
-     *        method signature
-     *
-     * @return a darker version of the <code>TexturePaint</code>
-     */
-    private static TexturePaint darker(TexturePaint paint,
-            boolean ignoreThisDummyArgument) {
-        try {
-            return darker(paint);
-        }
-        catch (Exception e) {
-            /*
-             * Lots can go wrong while fiddling with Images, Colour Models
-             * & such!  If anything at all goes awry, just return the original
-             * TexturePaint.  (TexturePaint's are immutable anyway, so no harm
-             * done)
-             */
-            return paint;
-        }
-    }
-
-    /**
-     * Create a new <code>TexturePaint</code> with its colours darkened.
-     * <p>
-     * This entails cloning the underlying <code>BufferedImage</code>,
-     * then darkening each colour-pixel individually!
+     * then darkening each color-pixel individually!
      *
      * @param paint a <code>TexturePaint</code>
      *
      * @return a darker version of the <code>TexturePaint</code>
      */
-    private static TexturePaint darker(TexturePaint paint) {
+    private static TexturePaint darkerTexturePaint(TexturePaint paint) {
         /**
-         * Colour Models with pre-multiplied Alpha tested OK without any
+         * Color Models with pre-multiplied Alpha tested OK without any
          * special logic
          *
          * BufferedImage.TYPE_INT_ARGB_PRE:    // Type 03: tested OK 2011.02.27
@@ -365,16 +260,16 @@ public class PaintAlpha {
         /* (pix-buffer is large enough for all pixels of one row) */
 
         /**
-         * Indexed Colour Models (sort of a Palette) CANNOT be simply
+         * Indexed Color Models (sort of a Palette) CANNOT be simply
          * multiplied (the pixel-value is just an index into the Palette).
          *
-         * Fortunately, IndexColorModel.getComponents(..) resolves the colours.
-         * The resolved colours can then be multiplied by our FACTOR.
+         * Fortunately, IndexColorModel.getComponents(..) resolves the colors.
+         * The resolved colors can then be multiplied by our FACTOR.
          * IndexColorModel.getDataElement(..) then tries to map the computed
-         * colour to the "nearest" in the Palette.
+         * color to the "nearest" in the Palette.
          *
-         * It is quite possible that the "nearest" colour is the ORIGINAL
-         * colour!  In the worst case, the returned Image will be identical to
+         * It is quite possible that the "nearest" color is the ORIGINAL
+         * color!  In the worst case, the returned Image will be identical to
          * the original.
          *
          * Applies to following Image Types:
@@ -407,7 +302,7 @@ public class PaintAlpha {
         }
 
         /**
-         * For the other 2 Colour Models, java.awt.image.ComponentColorModel and
+         * For the other 2 Color Models, java.awt.image.ComponentColorModel and
          * java.awt.image.DirectColorModel, the order of subpixels returned by
          * ras.getPixels(..) was observed to correspond to the following...
          */
@@ -447,7 +342,7 @@ public class PaintAlpha {
             return new TexturePaint(img, paint.getAnchorRect());
             /**
              * Above, we multiplied every pixel by our FACTOR because the
-             * applicable Image Types consist only of colour or grey channels:
+             * applicable Image Types consist only of color or grey channels:
              *
              * BufferedImage.TYPE_INT_RGB:        // Type 01: tested OK 2011.02.27
              * BufferedImage.TYPE_INT_BGR:        // Type 04: tested OK 2011.02.27
@@ -467,9 +362,9 @@ public class PaintAlpha {
     /**
      * Clone a {@link BufferedImage}.
      * <p>
-     * Note: when constructing the clone, the original Colour Model Object is
+     * Note: when constructing the clone, the original Color Model Object is
      * reused.<br>  That keeps things simple & should not be a problem, as all
-     * known Colour Models<br>
+     * known Color Models<br>
      * ({@link java.awt.image.IndexColorModel     IndexColorModel},
      *  {@link java.awt.image.DirectColorModel    DirectColorModel},
      *  {@link java.awt.image.ComponentColorModel ComponentColorModel}) are
@@ -477,7 +372,7 @@ public class PaintAlpha {
      *
      * @param image original BufferedImage to clone
      *
-     * @return a new BufferedImage reusing the original's Colour Model &
+     * @return a new BufferedImage reusing the original's Color Model &
      *         containing a clone of its pixels
      */
     public static BufferedImage cloneImage(BufferedImage image) {
