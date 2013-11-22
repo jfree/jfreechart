@@ -341,6 +341,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      *
      * @return The number of passes required by the renderer.
      */
+    @Override
     public int getPassCount() {
         return 2;
     }

@@ -130,6 +130,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
      *
      * @return The pass count.
      */
+    @Override
     public int getPassCount() {
         return 1;
     }
@@ -197,6 +198,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
          * @param pass  the current pass index.
          * @param passCount  the number of passes.
          */
+        @Override
         public void startSeriesPass(XYDataset dataset, int series,
                 int firstItem, int lastItem, int pass, int passCount) {
             this.seriesPath.reset();
@@ -224,6 +226,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
      *
      * @return The renderer state.
      */
+    @Override
     public XYItemRendererState initialise(Graphics2D g2,
             Rectangle2D dataArea, XYPlot plot, XYDataset data,
             PlotRenderingInfo info) {
@@ -258,18 +261,11 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset,
-                         int series,
-                         int item,
-                         CrosshairState crosshairState,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, XYItemRendererState state, 
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         // do nothing if item is not visible
         if (!getItemVisible(series, item)) {
@@ -349,6 +345,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
      *
      * @throws CloneNotSupportedException if the clone cannot be created.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         SamplingXYLineRenderer clone = (SamplingXYLineRenderer) super.clone();
         if (this.legendLine != null) {
@@ -364,6 +361,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

@@ -97,6 +97,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
      *
      * @return The 3D effect.
      */
+    @Override
     public double getXOffset() {
         return this.xOffset;
     }
@@ -106,6 +107,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
      *
      * @return The 3D effect.
      */
+    @Override
     public double getYOffset() {
         return this.yOffset;
     }
@@ -161,6 +163,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
      *
      * @return The pass count.
      */
+    @Override
     public int getPassCount() {
         return 3;
     }
@@ -172,6 +175,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
      *
      * @return A boolean.
      */
+    @Override
     protected boolean isLinePass(int pass) {
         return pass == 0 || pass == 1;
     }
@@ -183,6 +187,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
      *
      * @return A boolean.
      */
+    @Override
     protected boolean isItemPass(int pass) {
         return pass == 2;
     }
@@ -207,11 +212,9 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
      * @param item  the item index (zero-based).
      * @param shape  the shape.
      */
-    protected void drawFirstPassShape(Graphics2D g2,
-                                      int pass,
-                                      int series,
-                                      int item,
-                                      Shape shape) {
+    @Override
+    protected void drawFirstPassShape(Graphics2D g2, int pass, int series,
+            int item, Shape shape) {
         if (isShadowPass(pass)) {
             if (getWallPaint() != null) {
                 g2.setStroke(getItemStroke(series, item));
@@ -234,6 +237,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

@@ -80,6 +80,7 @@ public class StandardXYBarPainter implements XYBarPainter, Serializable {
      * @param base  indicates which side of the rectangle is the base of the
      *              bar.
      */
+    @Override
     public void paintBar(Graphics2D g2, XYBarRenderer renderer, int row,
             int column, RectangularShape bar, RectangleEdge base) {
 
@@ -117,6 +118,7 @@ public class StandardXYBarPainter implements XYBarPainter, Serializable {
      *              bar.
      * @param pegShadow  peg the shadow to the base of the bar?
      */
+    @Override
     public void paintBarShadow(Graphics2D g2, XYBarRenderer renderer, int row,
             int column, RectangularShape bar, RectangleEdge base,
             boolean pegShadow) {
@@ -197,6 +199,7 @@ public class StandardXYBarPainter implements XYBarPainter, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -212,6 +215,7 @@ public class StandardXYBarPainter implements XYBarPainter, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int hash = 37;
         // no fields to compute...

@@ -413,6 +413,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      *
      * @return A state object for use by the renderer.
      */
+    @Override
     public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
             XYPlot plot, XYDataset data, PlotRenderingInfo info) {
         XYAreaRendererState state = new XYAreaRendererState(info);
@@ -432,6 +433,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      *
      * @return A legend item for the series.
      */
+    @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
         LegendItem result = null;
         XYPlot xyplot = getPlot();
@@ -486,6 +488,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, XYItemRendererState state,
             Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
             ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
@@ -582,7 +585,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
         g2.setPaint(paint);
         g2.setStroke(stroke);
 
-        Shape shape = null;
+        Shape shape;
         if (getPlotShapes()) {
             shape = getItemShape(series, item);
             if (orientation == PlotOrientation.VERTICAL) {
@@ -686,6 +689,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         XYAreaRenderer clone = (XYAreaRenderer) super.clone();
         clone.legendArea = ShapeUtilities.clone(this.legendArea);
@@ -699,6 +703,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -736,6 +741,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         result = HashUtilities.hashCode(result, this.plotArea);

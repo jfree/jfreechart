@@ -289,6 +289,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
      */
+    @Override
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset != null) {
             return DatasetUtilities.findRangeBounds(dataset, true);
@@ -316,18 +317,11 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset,
-                         int series,
-                         int item,
-                         CrosshairState crosshairState,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         double x = dataset.getXValue(series, item);
         if (!domainAxis.getRange().contains(x)) {
@@ -459,6 +453,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -470,6 +465,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
