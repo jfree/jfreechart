@@ -141,6 +141,7 @@ public class CategoryToPieDataset extends AbstractDataset
      *
      * @return The item count.
      */
+    @Override
     public int getItemCount() {
         int result = 0;
         if (this.source != null) {
@@ -164,6 +165,7 @@ public class CategoryToPieDataset extends AbstractDataset
      * @throws IndexOutOfBoundsException if <code>item</code> is not in the
      *     range <code>0</code> to <code>getItemCount() - 1</code>.
      */
+    @Override
     public Number getValue(int item) {
         Number result = null;
         if (item < 0 || item >= getItemCount()) {
@@ -191,6 +193,7 @@ public class CategoryToPieDataset extends AbstractDataset
      * @throws IndexOutOfBoundsException if <code>index</code> is not in the
      *     specified range.
      */
+    @Override
     public Comparable getKey(int index) {
         Comparable result = null;
         if (index < 0 || index >= getItemCount()) {
@@ -214,6 +217,7 @@ public class CategoryToPieDataset extends AbstractDataset
      *
      * @return The index for the key, or <code>-1</code>.
      */
+    @Override
     public int getIndex(Comparable key) {
         int result = -1;
         if (this.source != null) {
@@ -235,6 +239,7 @@ public class CategoryToPieDataset extends AbstractDataset
      *
      * @return The keys.
      */
+    @Override
     public List getKeys() {
         List result = Collections.EMPTY_LIST;
         if (this.source != null) {
@@ -257,6 +262,7 @@ public class CategoryToPieDataset extends AbstractDataset
      *
      * @return The value (possibly <code>null</code>).
      */
+    @Override
     public Number getValue(Comparable key) {
         Number result = null;
         int keyIndex = getIndex(key);
@@ -278,6 +284,7 @@ public class CategoryToPieDataset extends AbstractDataset
      * @param event  the event (ignored, a new event with this dataset as the
      *     source is sent to the listeners).
      */
+    @Override
     public void datasetChanged(DatasetChangeEvent event) {
         fireDatasetChanged();
     }
@@ -291,6 +298,7 @@ public class CategoryToPieDataset extends AbstractDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
