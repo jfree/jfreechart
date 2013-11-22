@@ -224,6 +224,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A short string describing the plot type.
      */
+    @Override
     public String getPlotType() {
         return localizationResources.getString("Fast_Scatter_Plot");
     }
@@ -257,6 +258,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return The orientation (always {@link PlotOrientation#VERTICAL}).
      */
+    @Override
     public PlotOrientation getOrientation() {
         return PlotOrientation.VERTICAL;
     }
@@ -514,9 +516,9 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param info  collects chart drawing information (<code>null</code>
      *              permitted).
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info) {
+                     PlotState parentState, PlotRenderingInfo info) {
 
         // set up info collection...
         if (info != null) {
@@ -677,6 +679,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return The range (possibly <code>null</code>).
      */
+    @Override
     public Range getDataRange(ValueAxis axis) {
         Range result = null;
         if (axis == this.domainAxis) {
@@ -757,6 +760,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param info  the plot rendering info.
      * @param source  the source point.
      */
+    @Override
     public void zoomDomainAxes(double factor, PlotRenderingInfo info,
                                Point2D source) {
         this.domainAxis.resizeRange(factor);
@@ -774,6 +778,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @since 1.0.7
      */
+    @Override
     public void zoomDomainAxes(double factor, PlotRenderingInfo info,
                                Point2D source, boolean useAnchor) {
 
@@ -801,6 +806,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param info  the plot rendering info.
      * @param source  the source point.
      */
+    @Override
     public void zoomDomainAxes(double lowerPercent, double upperPercent,
                                PlotRenderingInfo info, Point2D source) {
         this.domainAxis.zoomRange(lowerPercent, upperPercent);
@@ -813,8 +819,9 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param info  the plot rendering info.
      * @param source  the source point.
      */
-    public void zoomRangeAxes(double factor,
-                              PlotRenderingInfo info, Point2D source) {
+    @Override
+    public void zoomRangeAxes(double factor, PlotRenderingInfo info, 
+            Point2D source) {
         this.rangeAxis.resizeRange(factor);
     }
 
@@ -830,6 +837,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @since 1.0.7
      */
+    @Override
     public void zoomRangeAxes(double factor, PlotRenderingInfo info,
                               Point2D source, boolean useAnchor) {
 
@@ -857,6 +865,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param info  the plot rendering info.
      * @param source  the source point.
      */
+    @Override
     public void zoomRangeAxes(double lowerPercent, double upperPercent,
                               PlotRenderingInfo info, Point2D source) {
         this.rangeAxis.zoomRange(lowerPercent, upperPercent);
@@ -867,6 +876,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean.
      */
+    @Override
     public boolean isDomainZoomable() {
         return true;
     }
@@ -876,6 +886,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean.
      */
+    @Override
     public boolean isRangeZoomable() {
         return true;
     }
@@ -888,6 +899,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @since 1.0.13
      */
+    @Override
     public boolean isDomainPannable() {
         return this.domainPannable;
     }
@@ -912,6 +924,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @since 1.0.13
      */
+    @Override
     public boolean isRangePannable() {
         return this.rangePannable;
     }
@@ -937,6 +950,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @since 1.0.13
      */
+    @Override
     public void panDomainAxes(double percent, PlotRenderingInfo info,
             Point2D source) {
         if (!isDomainPannable() || this.domainAxis == null) {
@@ -960,6 +974,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @since 1.0.13
      */
+    @Override
     public void panRangeAxes(double percent, PlotRenderingInfo info,
             Point2D source) {
         if (!isRangePannable() || this.rangeAxis == null) {
@@ -984,6 +999,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1046,6 +1062,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @throws CloneNotSupportedException if some component of the plot does
      *                                    not support cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
 
         FastScatterPlot clone = (FastScatterPlot) super.clone();

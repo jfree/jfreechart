@@ -162,6 +162,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;

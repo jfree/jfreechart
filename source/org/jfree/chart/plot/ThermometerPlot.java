@@ -1142,6 +1142,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
                      PlotState parentState,
                      PlotRenderingInfo info) {
@@ -1151,8 +1152,8 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         RoundRectangle2D mercuryStem = new RoundRectangle2D.Double();
         Ellipse2D outerBulb = new Ellipse2D.Double();
         Ellipse2D innerBulb = new Ellipse2D.Double();
-        String temp = null;
-        FontMetrics metrics = null;
+        String temp;
+        FontMetrics metrics;
         if (info != null) {
             info.setPlotArea(area);
         }
@@ -1269,7 +1270,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
                     drawWidth += getColumnDiameter();
                 }
                 Rectangle2D drawArea;
-                double cursor = 0;
+                double cursor;
 
                 switch (this.axisLocation) {
                     case RIGHT:
@@ -1346,6 +1347,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @param percent  the zoom percentage.
      */
+    @Override
     public void zoom(double percent) {
         // intentionally blank
    }
@@ -1355,6 +1357,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @return A short string describing the type of plot.
      */
+    @Override
     public String getPlotType() {
         return localizationResources.getString("Thermometer_Plot");
     }
@@ -1364,6 +1367,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @param event  the dataset change event.
      */
+    @Override
     public void datasetChanged(DatasetChangeEvent event) {
         if (this.dataset != null) {
             Number vn = this.dataset.getValue();
@@ -1422,6 +1426,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @return The range of data displayed.
      */
+    @Override
     public Range getDataRange(ValueAxis axis) {
        return new Range(this.lowerBound, this.upperBound);
     }
@@ -1445,6 +1450,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @return <code>null</code>.
      */
+    @Override
     public LegendItemCollection getLegendItems() {
         return null;
     }
@@ -1454,6 +1460,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @return The orientation (always {@link PlotOrientation#VERTICAL}).
      */
+    @Override
     public PlotOrientation getOrientation() {
         return PlotOrientation.VERTICAL;
     }
@@ -1515,6 +1522,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1633,6 +1641,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @throws CloneNotSupportedException  if the plot cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
 
         ThermometerPlot clone = (ThermometerPlot) super.clone();
@@ -1705,6 +1714,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param state  the plot state.
      * @param source  the source point.
      */
+    @Override
     public void zoomDomainAxes(double factor, PlotRenderingInfo state,
                                Point2D source) {
         // no domain axis to zoom
@@ -1721,6 +1731,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @since 1.0.7
      */
+    @Override
     public void zoomDomainAxes(double factor, PlotRenderingInfo state,
                                Point2D source, boolean useAnchor) {
         // no domain axis to zoom
@@ -1733,6 +1744,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param state  the plot state.
      * @param source  the source point.
      */
+    @Override
     public void zoomRangeAxes(double factor, PlotRenderingInfo state,
                               Point2D source) {
         this.rangeAxis.resizeRange(factor);
@@ -1749,6 +1761,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @since 1.0.7
      */
+    @Override
     public void zoomRangeAxes(double factor, PlotRenderingInfo state,
                               Point2D source, boolean useAnchor) {
         double anchorY = this.getRangeAxis().java2DToValue(source.getY(),
@@ -1764,6 +1777,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param state  the plot state.
      * @param source  the source point.
      */
+    @Override
     public void zoomDomainAxes(double lowerPercent, double upperPercent,
                                PlotRenderingInfo state, Point2D source) {
         // no domain axis to zoom
@@ -1777,6 +1791,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param state  the plot state.
      * @param source  the source point.
      */
+    @Override
     public void zoomRangeAxes(double lowerPercent, double upperPercent,
                               PlotRenderingInfo state, Point2D source) {
         this.rangeAxis.zoomRange(lowerPercent, upperPercent);
@@ -1787,6 +1802,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @return A boolean.
      */
+    @Override
     public boolean isDomainZoomable() {
         return false;
     }
@@ -1796,6 +1812,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @return A boolean.
      */
+    @Override
     public boolean isRangeZoomable() {
         return true;
     }

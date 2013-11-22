@@ -136,7 +136,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
      * @return The color.
      */
     public Color getColorLinear(double value) {
-        int izV = 0;
+        int izV;
         if (this.stepped) {
             int index = Arrays.binarySearch(this.tickValues, value);
             if (index < 0) {
@@ -165,7 +165,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
      * @return The color.
      */
     public Color getColorLog(double value) {
-        int izV = 0;
+        int izV;
         double minZtmp = this.minZ;
         double maxZtmp = this.maxZ;
         if (this.minZ <= 0.0) {
@@ -389,6 +389,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -440,6 +441,7 @@ public abstract class ColorPalette implements Cloneable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result;
         long temp;
@@ -462,11 +464,10 @@ public abstract class ColorPalette implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException never.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
-
         ColorPalette clone = (ColorPalette) super.clone();
         return clone;
-
     }
 
 }

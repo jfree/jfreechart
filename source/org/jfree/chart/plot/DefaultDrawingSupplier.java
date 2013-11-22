@@ -208,6 +208,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      *
      * @return The paint.
      */
+    @Override
     public Paint getNextPaint() {
         Paint result
             = this.paintSequence[this.paintIndex % this.paintSequence.length];
@@ -220,6 +221,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      *
      * @return The paint.
      */
+    @Override
     public Paint getNextOutlinePaint() {
         Paint result = this.outlinePaintSequence[
                 this.outlinePaintIndex % this.outlinePaintSequence.length];
@@ -234,6 +236,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      *
      * @since 1.0.6
      */
+    @Override
     public Paint getNextFillPaint() {
         Paint result = this.fillPaintSequence[this.fillPaintIndex
                 % this.fillPaintSequence.length];
@@ -246,6 +249,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      *
      * @return The stroke.
      */
+    @Override
     public Stroke getNextStroke() {
         Stroke result = this.strokeSequence[
                 this.strokeIndex % this.strokeSequence.length];
@@ -258,6 +262,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      *
      * @return The stroke.
      */
+    @Override
     public Stroke getNextOutlineStroke() {
         Stroke result = this.outlineStrokeSequence[
                 this.outlineStrokeIndex % this.outlineStrokeSequence.length];
@@ -270,6 +275,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      *
      * @return The shape.
      */
+    @Override
     public Shape getNextShape() {
         Shape result = this.shapeSequence[
                 this.shapeIndex % this.shapeSequence.length];
@@ -289,8 +295,8 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
 
         double size = 6.0;
         double delta = size / 2.0;
-        int[] xpoints = null;
-        int[] ypoints = null;
+        int[] xpoints;
+        int[] ypoints;
 
         // square
         result[0] = new Rectangle2D.Double(-delta, -delta, size, size);
@@ -342,18 +348,15 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
-
         if (obj == this) {
             return true;
         }
-
         if (!(obj instanceof DefaultDrawingSupplier)) {
             return false;
         }
-
         DefaultDrawingSupplier that = (DefaultDrawingSupplier) obj;
-
         if (!Arrays.equals(this.paintSequence, that.paintSequence)) {
             return false;
         }
@@ -387,7 +390,6 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
             return false;
         }
         return true;
-
     }
 
     /**
@@ -539,6 +541,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      * @throws CloneNotSupportedException if a component of the supplier does
      *                                    not support cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         DefaultDrawingSupplier clone = (DefaultDrawingSupplier) super.clone();
         return clone;

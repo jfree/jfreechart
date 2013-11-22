@@ -84,6 +84,7 @@ public final class SeriesRenderingOrder implements Serializable {
      *
      * @return The string (never <code>null</code>).
      */
+    @Override
     public String toString() {
         return this.name;
     }
@@ -96,6 +97,7 @@ public final class SeriesRenderingOrder implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -115,6 +117,7 @@ public final class SeriesRenderingOrder implements Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return this.name.hashCode();
     }

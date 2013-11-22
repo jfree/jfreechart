@@ -2987,7 +2987,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         while (iterator.hasNext()) {
             Comparable key = (Comparable) iterator.next();
             Number n = this.dataset.getValue(key);
-            boolean include = true;
+            boolean include;
             if (n == null) {
                 include = !this.ignoreNullValues;
             }
@@ -3042,6 +3042,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      *
      * @return The plot type.
      */
+    @Override
     public String getPlotType() {
         return localizationResources.getString("Pie_Plot");
     }

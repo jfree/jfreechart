@@ -102,6 +102,7 @@ public final class PolarAxisLocation implements Serializable {
      *
      * @return The string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
@@ -114,6 +115,7 @@ public final class PolarAxisLocation implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

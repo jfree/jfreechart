@@ -213,6 +213,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -240,6 +241,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         PlotRenderingInfo clone = (PlotRenderingInfo) super.clone();
         if (this.plotArea != null) {
