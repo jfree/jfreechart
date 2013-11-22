@@ -135,12 +135,13 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * A constant for the number of milliseconds in one hour.
      */
-    private static long MILLISECONDS_IN_ONE_HOUR = 60 * 60 * 1000L;
+    private static final long MILLISECONDS_IN_ONE_HOUR = 60 * 60 * 1000L;
 
     /**
      * A constant for the number of milliseconds in one day.
      */
-    private static long MILLISECONDS_IN_ONE_DAY = 24 * MILLISECONDS_IN_ONE_HOUR;
+    private static final long MILLISECONDS_IN_ONE_DAY 
+            = 24 * MILLISECONDS_IN_ONE_HOUR;
 
     /**
      * Creates a new instance with base milliseconds set to zero.
@@ -440,6 +441,7 @@ public class RelativeDateFormat extends DateFormat {
      *
      * @return The formatted date.
      */
+    @Override
     public StringBuffer format(Date date, StringBuffer toAppendTo,
                                FieldPosition fieldPosition) {
         long currentMillis = date.getTime();
@@ -485,6 +487,7 @@ public class RelativeDateFormat extends DateFormat {
      *
      * @return <code>null</code>, as this method has not been implemented.
      */
+    @Override
     public Date parse(String source, ParsePosition pos) {
         return null;
     }
@@ -496,6 +499,7 @@ public class RelativeDateFormat extends DateFormat {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -551,6 +555,7 @@ public class RelativeDateFormat extends DateFormat {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         result = 37 * result
@@ -569,6 +574,7 @@ public class RelativeDateFormat extends DateFormat {
      *
      * @return A clone.
      */
+    @Override
     public Object clone() {
         RelativeDateFormat clone = (RelativeDateFormat) super.clone();
         clone.dayFormatter = (NumberFormat) this.dayFormatter.clone();
