@@ -153,6 +153,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      *
      * @return The x-offset.
      */
+    @Override
     public int calculateOffsetX() {
         return (int) (Math.cos(this.angle) * this.distance) - this.shadowSize;
     }
@@ -163,6 +164,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      *
      * @return The y-offset.
      */
+    @Override
     public int calculateOffsetY() {
         return -(int) (Math.sin(this.angle) * this.distance) - this.shadowSize;
     }
@@ -175,6 +177,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      *
      * @return A new image containing the shadow.
      */
+    @Override
     public BufferedImage createDropShadow(BufferedImage source) {
         BufferedImage subject = new BufferedImage(
                 source.getWidth() + this.shadowSize * 2,
@@ -207,7 +210,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
         int shadowRgb = this.shadowColor.getRGB() & 0x00FFFFFF;
 
         int[] aHistory = new int[this.shadowSize];
-        int historyIdx = 0;
+        int historyIdx;
 
         int aSum;
 
@@ -285,6 +288,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      * 
      * @return The object.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -316,6 +320,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      * 
      * @return The hash code.
      */
+    @Override
     public int hashCode() {
         int hash = HashUtilities.hashCode(17, this.shadowSize);
         hash = HashUtilities.hashCode(hash, this.shadowColor);
