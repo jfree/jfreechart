@@ -216,6 +216,7 @@ public class StatisticalBarRenderer extends BarRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, CategoryItemRendererState state,
             Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
             ValueAxis rangeAxis, CategoryDataset data, int row, int column,
