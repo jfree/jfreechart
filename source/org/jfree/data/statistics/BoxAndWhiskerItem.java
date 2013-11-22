@@ -240,6 +240,7 @@ public class BoxAndWhiskerItem implements Serializable {
      *
      * @return A string representation of this instance.
      */
+    @Override
     public String toString() {
         return super.toString() + "[mean=" + this.mean + ",median="
                 + this.median + ",q1=" + this.q1 + ",q3=" + this.q3 + "]";
@@ -252,6 +253,7 @@ public class BoxAndWhiskerItem implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
 
         if (obj == this) {
