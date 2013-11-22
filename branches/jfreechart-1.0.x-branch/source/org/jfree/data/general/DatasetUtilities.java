@@ -824,7 +824,7 @@ public final class DatasetUtilities {
     public static Range findRangeBounds(CategoryDataset dataset,
             List visibleSeriesKeys, boolean includeInterval) {
         ParamChecks.nullNotPermitted(dataset, "dataset");
-        Range result = null;
+        Range result;
         if (dataset instanceof CategoryRangeInfo) {
             CategoryRangeInfo info = (CategoryRangeInfo) dataset;
             result = info.getRangeBounds(visibleSeriesKeys, includeInterval);
