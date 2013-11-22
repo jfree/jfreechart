@@ -53,7 +53,8 @@ import org.jfree.io.SerialUtilities;
 import org.jfree.util.ObjectUtilities;
 
 /**
- * A class that captures information about an Axis of a chart.
+ * A class that captures information about an {@link Axis} belonging to a 
+ * chart.
  *
  * @since 1.0.13
  */
@@ -120,11 +121,12 @@ public class AxisEntity extends ChartEntity {
      *
      * @return A string.
      */
+    @Override
     public String toString() {
-        StringBuffer buf = new StringBuffer("AxisEntity: ");
-        buf.append("tooltip = ");
-        buf.append(getToolTipText());
-        return buf.toString();
+        StringBuilder sb = new StringBuilder("AxisEntity: ");
+        sb.append("tooltip = ");
+        sb.append(getToolTipText());
+        return sb.toString();
     }
 
     /**
@@ -134,6 +136,7 @@ public class AxisEntity extends ChartEntity {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -162,6 +165,7 @@ public class AxisEntity extends ChartEntity {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 39;
         result = HashUtilities.hashCode(result, getToolTipText());
@@ -177,6 +181,7 @@ public class AxisEntity extends ChartEntity {
      * @throws CloneNotSupportedException if there is a problem cloning the
      *         entity.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
