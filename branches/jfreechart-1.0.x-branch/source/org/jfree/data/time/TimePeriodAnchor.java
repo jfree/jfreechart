@@ -82,6 +82,7 @@ public final class TimePeriodAnchor implements Serializable {
      *
      * @return The string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
@@ -94,6 +95,7 @@ public final class TimePeriodAnchor implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
 
         if (this == obj) {
@@ -116,6 +118,7 @@ public final class TimePeriodAnchor implements Serializable {
      *
      * @return The hashcode
      */
+    @Override
     public int hashCode() {
         return this.name.hashCode();
     }

@@ -182,6 +182,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *
      * @see #getLastMillisecond()
      */
+    @Override
     public long getFirstMillisecond() {
         return this.firstMillisecond;
     }
@@ -196,6 +197,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *
      * @see #getFirstMillisecond()
      */
+    @Override
     public long getLastMillisecond() {
         return this.lastMillisecond;
     }
@@ -208,6 +210,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *
      * @since 1.0.3
      */
+    @Override
     public void peg(Calendar calendar) {
         this.firstMillisecond = getFirstMillisecond(calendar);
         this.lastMillisecond = getLastMillisecond(calendar);
@@ -219,6 +222,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @return The year preceding this one (or <code>null</code> if the
      *         current year is -9999).
      */
+    @Override
     public RegularTimePeriod previous() {
         if (this.year > Year.MINIMUM_YEAR) {
             return new Year(this.year - 1);
@@ -234,6 +238,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @return The year following this one (or <code>null</code> if the current
      *         year is 9999).
      */
+    @Override
     public RegularTimePeriod next() {
         if (this.year < Year.MAXIMUM_YEAR) {
             return new Year(this.year + 1);
@@ -250,6 +255,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *
      * @return The serial index number.
      */
+    @Override
     public long getSerialIndex() {
         return this.year;
     }
@@ -265,6 +271,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
+    @Override
     public long getFirstMillisecond(Calendar calendar) {
         calendar.set(this.year, Calendar.JANUARY, 1, 0, 0, 0);
         calendar.set(Calendar.MILLISECOND, 0);
@@ -282,6 +289,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @throws NullPointerException if <code>calendar</code> is
      *     <code>null</code>.
      */
+    @Override
     public long getLastMillisecond(Calendar calendar) {
         calendar.set(this.year, Calendar.DECEMBER, 31, 23, 59, 59);
         calendar.set(Calendar.MILLISECOND, 999);
@@ -299,6 +307,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @return <code>true</code> if the year of this and the object are the
      *         same.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -319,6 +328,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 17;
         int c = this.year;
@@ -336,6 +346,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *
      * @return negative == before, zero == same, positive == after.
      */
+    @Override
     public int compareTo(Object o1) {
 
         int result;
@@ -370,6 +381,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *
      * @return A string representing the year.
      */
+    @Override
     public String toString() {
         return Integer.toString(this.year);
     }
