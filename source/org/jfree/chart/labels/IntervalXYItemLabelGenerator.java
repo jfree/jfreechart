@@ -148,6 +148,7 @@ public class IntervalXYItemLabelGenerator extends AbstractXYItemLabelGenerator
      * @return An array of seven items from the dataset formatted as
      *         <code>String</code> objects (never <code>null</code>).
      */
+    @Override
     protected Object[] createItemArray(XYDataset dataset, int series,
                                        int item) {
 
@@ -197,7 +198,7 @@ public class IntervalXYItemLabelGenerator extends AbstractXYItemLabelGenerator
                 result[4] = ynf.format(y);
             }
         }
-        if (Double.isNaN(ys)
+        if (Double.isNaN(ys) && intervalDataset != null
                 && intervalDataset.getStartY(series, item) == null) {
             result[5] = getNullYString();
         }
@@ -209,7 +210,7 @@ public class IntervalXYItemLabelGenerator extends AbstractXYItemLabelGenerator
                 result[5] = ynf.format(ys);
             }
         }
-        if (Double.isNaN(ye)
+        if (Double.isNaN(ye) && intervalDataset != null
                 && intervalDataset.getEndY(series, item) == null) {
             result[6] = getNullYString();
         }
@@ -233,6 +234,7 @@ public class IntervalXYItemLabelGenerator extends AbstractXYItemLabelGenerator
      *
      * @return The label text (possibly <code>null</code>).
      */
+    @Override
     public String generateLabel(XYDataset dataset, int series, int item) {
         return generateLabelString(dataset, series, item);
     }
@@ -244,6 +246,7 @@ public class IntervalXYItemLabelGenerator extends AbstractXYItemLabelGenerator
      *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -255,6 +258,7 @@ public class IntervalXYItemLabelGenerator extends AbstractXYItemLabelGenerator
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
