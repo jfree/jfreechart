@@ -116,6 +116,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
      * @return An integer indicating the order of this data pair object
      *      relative to another object.
      */
+    @Override
     public int compareTo(Object o1) {
 
         int result;
@@ -146,6 +147,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
      * @throws CloneNotSupportedException not thrown by this class, but
      *         subclasses may differ.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -158,6 +160,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -180,6 +183,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result;
         result = this.x.hashCode();

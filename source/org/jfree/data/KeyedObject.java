@@ -109,6 +109,7 @@ public class KeyedObject implements Cloneable, PublicCloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         KeyedObject clone = (KeyedObject) super.clone();
         if (this.object instanceof PublicCloneable) {
@@ -125,6 +126,7 @@ public class KeyedObject implements Cloneable, PublicCloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
 
         if (obj == this) {

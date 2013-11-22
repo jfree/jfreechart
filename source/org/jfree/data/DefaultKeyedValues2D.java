@@ -497,6 +497,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object o) {
 
         if (o == null) {
@@ -550,6 +551,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result;
         result = this.rowKeys.hashCode();
@@ -566,6 +568,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @throws CloneNotSupportedException  this class will not throw this
      *         exception, but subclasses (if any) might.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         DefaultKeyedValues2D clone = (DefaultKeyedValues2D) super.clone();
         // for the keys, a shallow copy should be fine because keys

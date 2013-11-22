@@ -79,6 +79,7 @@ public final class DomainOrder implements Serializable {
      *
      * @return The string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
@@ -91,6 +92,7 @@ public final class DomainOrder implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -110,6 +112,7 @@ public final class DomainOrder implements Serializable {
      *
      * @return The hashcode
      */
+    @Override
     public int hashCode() {
         return this.name.hashCode();
     }

@@ -431,6 +431,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -478,6 +479,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @return A hashcode.
      */
+    @Override
     public int hashCode() {
         int result;
         result = this.rowKeys.hashCode();
@@ -494,6 +496,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @throws CloneNotSupportedException  this class will not throw this
      *         exception, but subclasses (if any) might.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         KeyedObjects2D clone = (KeyedObjects2D) super.clone();
         clone.columnKeys = new java.util.ArrayList(this.columnKeys);

@@ -74,6 +74,7 @@ public final class KeyedValueComparatorType implements Serializable {
      *
      * @return The string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
@@ -86,6 +87,7 @@ public final class KeyedValueComparatorType implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -107,6 +109,7 @@ public final class KeyedValueComparatorType implements Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return this.name.hashCode();
     }

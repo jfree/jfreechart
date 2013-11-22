@@ -286,6 +286,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         KeyedObjects clone = (KeyedObjects) super.clone();
         clone.data = new java.util.ArrayList();
@@ -304,6 +305,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
 
         if (obj == this) {
@@ -346,6 +348,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return (this.data != null ? this.data.hashCode() : 0);
     }

@@ -400,6 +400,7 @@ public strictfp class Range implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Range)) {
             return false;
@@ -419,6 +420,7 @@ public strictfp class Range implements Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result;
         long temp;
@@ -435,6 +437,7 @@ public strictfp class Range implements Serializable {
      * @return A String "Range[lower,upper]" where lower=lower range and
      *         upper=upper range.
      */
+    @Override
     public String toString() {
         return ("Range[" + this.lower + "," + this.upper + "]");
     }
