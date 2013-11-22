@@ -339,6 +339,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      *
      * @return The plot type.
      */
+    @Override
     public String getPlotType() {
         return "Multiple Pie Plot";
          // TODO: need to fetch this from localised resources
@@ -383,12 +384,9 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing.
      */
-    public void draw(Graphics2D g2,
-                     Rectangle2D area,
-                     Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info) {
-
+    @Override
+    public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
+            PlotState parentState, PlotRenderingInfo info) {
 
         // adjust the drawing area for the plot insets (if any)...
         RectangleInsets insets = getInsets();
@@ -402,7 +400,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
             return;
         }
 
-        int pieCount = 0;
+        int pieCount;
         if (this.dataExtractOrder == TableOrder.BY_ROW) {
             pieCount = this.dataset.getRowCount();
         }
@@ -438,7 +436,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
             rect.setBounds(x + xoffset + (width * column), y + (height * row),
                     width, height);
 
-            String title = null;
+            String title;
             if (this.dataExtractOrder == TableOrder.BY_ROW) {
                 title = this.dataset.getRowKey(pieIndex).toString();
             }
@@ -447,7 +445,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
             }
             this.pieChart.setTitle(title);
 
-            PieDataset piedataset = null;
+            PieDataset piedataset;
             PieDataset dd = new CategoryToPieDataset(this.dataset,
                     this.dataExtractOrder, pieIndex);
             if (this.limit > 0.0) {
@@ -480,6 +478,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
             }
             this.pieChart.draw(g2, rect, subinfo);
             if (info != null) {
+                assert subinfo != null;
                 info.getOwner().getEntityCollection().addAll(
                         subinfo.getEntityCollection());
                 info.addSubplotInfo(subinfo.getPlotInfo());
@@ -548,6 +547,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      *
      * @return The legend items.
      */
+    @Override
     public LegendItemCollection getLegendItems() {
 
         LegendItemCollection result = new LegendItemCollection();
@@ -601,6 +601,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @return <code>true</code> if this plot is equal to <code>obj</code>, and
      *     <code>false</code> otherwise.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -642,6 +643,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if some component of the plot does
      *         not support cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         MultiplePiePlot clone = (MultiplePiePlot) super.clone();
         clone.pieChart = (JFreeChart) this.pieChart.clone();
