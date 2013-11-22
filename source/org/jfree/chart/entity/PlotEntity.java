@@ -120,11 +120,12 @@ public class PlotEntity extends ChartEntity {
      *
      * @return A string.
      */
+    @Override
     public String toString() {
-        StringBuffer buf = new StringBuffer("PlotEntity: ");
-        buf.append("tooltip = ");
-        buf.append(getToolTipText());
-        return buf.toString();
+        StringBuilder sb = new StringBuilder("PlotEntity: ");
+        sb.append("tooltip = ");
+        sb.append(getToolTipText());
+        return sb.toString();
     }
 
     /**
@@ -134,6 +135,7 @@ public class PlotEntity extends ChartEntity {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -162,6 +164,7 @@ public class PlotEntity extends ChartEntity {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 39;
         result = HashUtilities.hashCode(result, getToolTipText());
@@ -177,6 +180,7 @@ public class PlotEntity extends ChartEntity {
      * @throws CloneNotSupportedException if there is a problem cloning the
      *         entity.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
