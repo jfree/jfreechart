@@ -185,6 +185,7 @@ public class XYIntervalSeries extends ComparableObjectSeries {
      *
      * @return The data item.
      */
+    @Override
     public ComparableObjectItem getDataItem(int index) {
         return super.getDataItem(index);
     }

@@ -158,6 +158,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The series count.
      */
+    @Override
     public int getSeriesCount() {
         return this.values.getColumnCount();
     }
@@ -169,6 +170,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The key for a series.
      */
+    @Override
     public Comparable getSeriesKey(int series) {
         return this.values.getColumnKey(series);
     }
@@ -178,6 +180,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The item count.
      */
+    @Override
     public int getItemCount() {
         return this.values.getRowCount();
     }
@@ -190,6 +193,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The item count.
      */
+    @Override
     public int getItemCount(int series) {
         return getItemCount();  // all series have the same number of items in
                                 // this dataset
@@ -203,6 +207,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The value.
      */
+    @Override
     public Number getX(int series, int item) {
         return (Number) this.values.getRowKey(item);
     }
@@ -215,6 +220,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The starting X value.
      */
+    @Override
     public Number getStartX(int series, int item) {
         return this.intervalDelegate.getStartX(series, item);
     }
@@ -227,6 +233,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The ending X value.
      */
+    @Override
     public Number getEndX(int series, int item) {
         return this.intervalDelegate.getEndX(series, item);
     }
@@ -239,6 +246,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The y value (possibly <code>null</code>).
      */
+    @Override
     public Number getY(int series, int item) {
         return this.values.getValue(item, series);
     }
@@ -251,6 +259,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The starting Y value.
      */
+    @Override
     public Number getStartY(int series, int item) {
         return getY(series, item);
     }
@@ -263,6 +272,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The ending Y value.
      */
+    @Override
     public Number getEndY(int series, int item) {
         return getY(series, item);
     }
@@ -275,6 +285,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The minimum value.
      */
+    @Override
     public double getDomainLowerBound(boolean includeInterval) {
         return this.intervalDelegate.getDomainLowerBound(includeInterval);
     }
@@ -287,6 +298,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The maximum value.
      */
+    @Override
     public double getDomainUpperBound(boolean includeInterval) {
         return this.intervalDelegate.getDomainUpperBound(includeInterval);
     }
@@ -299,6 +311,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return The range.
      */
+    @Override
     public Range getDomainBounds(boolean includeInterval) {
         if (includeInterval) {
             return this.intervalDelegate.getDomainBounds(includeInterval);
@@ -377,6 +390,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof CategoryTableXYDataset)) {
             return false;
@@ -399,6 +413,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * @throws CloneNotSupportedException if there is some reason that cloning
      *     cannot be performed.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         CategoryTableXYDataset clone = (CategoryTableXYDataset) super.clone();
         clone.values = (DefaultKeyedValues2D) this.values.clone();

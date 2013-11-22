@@ -172,6 +172,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      * @return An integer indicating the order of this data pair object
      *      relative to another object.
      */
+    @Override
     public int compareTo(Object o1) {
 
         int result;
@@ -211,6 +212,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      *
      * @return A clone.
      */
+    @Override
     public Object clone() {
         Object clone = null;
         try {
@@ -230,6 +232,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -252,6 +255,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result;
         result = this.x.hashCode();
@@ -265,6 +269,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      *
      * @return A string.
      */
+    @Override
     public String toString() {
         return "[" + getXValue() + ", " + getYValue() + "]";
     }

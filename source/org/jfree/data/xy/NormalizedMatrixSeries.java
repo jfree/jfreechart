@@ -89,6 +89,7 @@ public class NormalizedMatrixSeries extends MatrixSeries {
      *
      * @see org.jfree.data.xy.MatrixSeries#getItem(int)
      */
+    @Override
     public Number getItem(int itemIndex) {
         int i = getItemRow(itemIndex);
         int j = getItemColumn(itemIndex);
@@ -133,6 +134,7 @@ public class NormalizedMatrixSeries extends MatrixSeries {
      *
      * @see #get(int, int)
      */
+    @Override
     public void update(int i, int j, double mij) {
         this.m_totalSum -= get(i, j);
         this.m_totalSum += mij;
@@ -143,6 +145,7 @@ public class NormalizedMatrixSeries extends MatrixSeries {
     /**
      * @see org.jfree.data.xy.MatrixSeries#zeroAll()
      */
+    @Override
     public void zeroAll() {
         this.m_totalSum = 0;
         super.zeroAll();

@@ -99,6 +99,7 @@ public class XYCoordinate implements Comparable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -121,6 +122,7 @@ public class XYCoordinate implements Comparable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         long temp = Double.doubleToLongBits(this.x);
@@ -136,6 +138,7 @@ public class XYCoordinate implements Comparable, Serializable {
      *
      * @return A string.
      */
+    @Override
     public String toString() {
         return "(" + this.x + ", " + this.y + ")";
     }
@@ -147,6 +150,7 @@ public class XYCoordinate implements Comparable, Serializable {
      *
      * @return An integer indicating the relative order of the items.
      */
+    @Override
     public int compareTo(Object obj) {
         if (!(obj instanceof XYCoordinate)) {
             throw new IllegalArgumentException("Incomparable object.");

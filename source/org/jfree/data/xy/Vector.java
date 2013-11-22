@@ -112,6 +112,7 @@ public class Vector implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -134,6 +135,7 @@ public class Vector implements Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         long temp = Double.doubleToLongBits(this.x);
