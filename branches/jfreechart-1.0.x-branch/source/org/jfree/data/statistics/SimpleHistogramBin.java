@@ -201,6 +201,7 @@ public class SimpleHistogramBin implements Comparable,
      * @return An integer indicating the relative ordering of the this bin and
      *         the given object.
      */
+    @Override
     public int compareTo(Object obj) {
         if (!(obj instanceof SimpleHistogramBin)) {
             return 0;
@@ -229,6 +230,7 @@ public class SimpleHistogramBin implements Comparable,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof SimpleHistogramBin)) {
             return false;
@@ -259,6 +261,7 @@ public class SimpleHistogramBin implements Comparable,
      *
      * @throws CloneNotSupportedException not thrown by this class.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

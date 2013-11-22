@@ -297,6 +297,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      *
      * @return The series count.
      */
+    @Override
     public int getSeriesCount() {
         return this.list.size();
     }
@@ -312,6 +313,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
+    @Override
     public Comparable getSeriesKey(int series) {
         Map map = (Map) this.list.get(series);
         return (Comparable) map.get("key");
@@ -328,6 +330,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
+    @Override
     public int getItemCount(int series) {
         return getBins(series).size();
     }
@@ -347,6 +350,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
+    @Override
     public Number getX(int series, int item) {
         List bins = getBins(series);
         HistogramBin bin = (HistogramBin) bins.get(item);
@@ -367,6 +371,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
+    @Override
     public Number getY(int series, int item) {
         List bins = getBins(series);
         HistogramBin bin = (HistogramBin) bins.get(item);
@@ -399,6 +404,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
+    @Override
     public Number getStartX(int series, int item) {
         List bins = getBins(series);
         HistogramBin bin = (HistogramBin) bins.get(item);
@@ -417,6 +423,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
+    @Override
     public Number getEndX(int series, int item) {
         List bins = getBins(series);
         HistogramBin bin = (HistogramBin) bins.get(item);
@@ -437,6 +444,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
+    @Override
     public Number getStartY(int series, int item) {
         return getY(series, item);
     }
@@ -455,6 +463,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws IndexOutOfBoundsException if <code>series</code> is outside the
      *     specified range.
      */
+    @Override
     public Number getEndY(int series, int item) {
         return getY(series, item);
     }
@@ -466,6 +475,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -490,6 +500,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      *
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         HistogramDataset clone = (HistogramDataset) super.clone();
         int seriesCount = getSeriesCount();

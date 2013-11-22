@@ -145,6 +145,7 @@ public class MeanAndStandardDeviation implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -171,6 +172,7 @@ public class MeanAndStandardDeviation implements Serializable {
      *
      * @since 1.0.7
      */
+    @Override
     public String toString() {
         return "[" + this.mean + ", " + this.standardDeviation + "]";
     }
