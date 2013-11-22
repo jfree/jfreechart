@@ -166,6 +166,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      *
      * @return A short string describing the type of plot.
      */
+    @Override
     public String getPlotType() {
         return ("WMAP_Plot");
     }
@@ -230,6 +231,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      * @param state  the plot state.
      * @param info  the plot rendering info.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
                      PlotState state,
                      PlotRenderingInfo info) {
@@ -279,8 +281,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
         double chipWidth = 1d;
         double chipHeight = 1d;
         if (plotArea.getWidth() != plotArea.getHeight()) {
-            double major = 0d;
-            double minor = 0d;
+            double major, minor;
             if (plotArea.getWidth() > plotArea.getHeight()) {
                 major = plotArea.getWidth();
                 minor = plotArea.getHeight();
@@ -343,8 +344,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
         double upperLeftY = plotArea.getY();
         //get major dimension
         if (plotArea.getWidth() != plotArea.getHeight()) {
-            double major = 0d;
-            double minor = 0d;
+            double major, minor;
             if (plotArea.getWidth() > plotArea.getHeight()) {
                 major = plotArea.getWidth();
                 minor = plotArea.getHeight();
@@ -381,7 +381,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
         // calculate and draw the notch
         // horizontal orientation is considered notch right
         // vertical orientation is considered notch down
-        Arc2D notch = null;
+        Arc2D notch;
         Rectangle2D waferFrame = waferEdge.getFrame();
         double notchDiameter = waferFrame.getWidth() * 0.04;
         if (this.orientation == PlotOrientation.HORIZONTAL) {
@@ -416,6 +416,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      *
      * @return The legend items.
      */
+    @Override
     public LegendItemCollection getLegendItems() {
         return this.renderer.getLegendCollection();
     }
@@ -425,6 +426,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      *
      * @param event  the event.
      */
+    @Override
     public void rendererChanged(RendererChangeEvent event) {
         fireChangeEvent();
     }

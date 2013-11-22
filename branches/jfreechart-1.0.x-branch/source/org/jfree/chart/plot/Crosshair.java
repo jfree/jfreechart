@@ -567,6 +567,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -630,6 +631,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = HashUtilities.hashCode(hash, this.visible);
@@ -657,6 +659,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      *
      * @throws java.lang.CloneNotSupportedException
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         // FIXME: clone generator
         return super.clone();

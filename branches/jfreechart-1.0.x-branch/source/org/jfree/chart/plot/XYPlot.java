@@ -723,6 +723,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @return A short string describing the type of plot.
      */
+    @Override
     public String getPlotType() {
         return localizationResources.getString("XY_Plot");
     }
@@ -734,6 +735,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @see #setOrientation(PlotOrientation)
      */
+    @Override
     public PlotOrientation getOrientation() {
         return this.orientation;
     }
@@ -3943,7 +3945,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             ValueAxis axis = getRangeAxis();
             if (axis != null) {
                 Iterator iterator = ticks.iterator();
-                boolean paintLine = false;
+                boolean paintLine;
                 while (iterator.hasNext()) {
                     paintLine = false;
                     ValueTick tick = (ValueTick) iterator.next();
@@ -5072,6 +5074,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @since 1.0.13
      */
+    @Override
     public void panRangeAxes(double percent, PlotRenderingInfo info,
             Point2D source) {
         if (!isRangePannable()) {

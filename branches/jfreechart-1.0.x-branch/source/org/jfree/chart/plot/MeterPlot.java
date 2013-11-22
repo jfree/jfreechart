@@ -757,6 +757,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      *
      * @return A collection of legend items.
      */
+    @Override
     public LegendItemCollection getLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
         Iterator iterator = this.intervals.iterator();
@@ -785,9 +786,9 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info) {
+                     PlotState parentState, PlotRenderingInfo info) {
 
         if (info != null) {
             info.setPlotArea(area);
@@ -1086,8 +1087,8 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         g2.setPaint(this.tickPaint);
         g2.setStroke(new BasicStroke(2.0f));
 
-        double valueP2X = 0;
-        double valueP2Y = 0;
+        double valueP2X;
+        double valueP2Y;
 
         double radius = (meterArea.getWidth() / 2) + DEFAULT_BORDER_SIZE;
         double radius1 = radius - 15;
@@ -1163,6 +1164,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      *
      * @return A string describing the type of plot.
      */
+    @Override
     public String getPlotType() {
         return localizationResources.getString("Meter_Plot");
     }
@@ -1174,6 +1176,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      *
      * @param percent   The zoom percentage.
      */
+    @Override
     public void zoom(double percent) {
         // intentionally blank
     }
@@ -1186,6 +1189,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1303,6 +1307,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @throws CloneNotSupportedException if some component of the plot cannot
      *         be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         MeterPlot clone = (MeterPlot) super.clone();
         clone.tickLabelFormat = (NumberFormat) this.tickLabelFormat.clone();

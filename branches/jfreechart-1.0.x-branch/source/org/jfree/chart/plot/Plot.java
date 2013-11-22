@@ -614,7 +614,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #setDrawingSupplier(DrawingSupplier)
      */
     public DrawingSupplier getDrawingSupplier() {
-        DrawingSupplier result = null;
+        DrawingSupplier result;
         Plot p = getParent();
         if (p != null) {
             result = p.getDrawingSupplier();
@@ -895,6 +895,7 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @return The legend items for the plot (possibly <code>null</code>).
      */
+    @Override
     public LegendItemCollection getLegendItems() {
         return null;
     }
@@ -1204,6 +1205,7 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @since 1.0.14
      */
+    @Override
     public void annotationChanged(AnnotationChangeEvent event) {
         fireChangeEvent();
     }
@@ -1213,6 +1215,7 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @param event  information about the event (not used here).
      */
+    @Override
     public void axisChanged(AxisChangeEvent event) {
         fireChangeEvent();
     }
@@ -1225,6 +1228,7 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @param event  information about the event (not used here).
      */
+    @Override
     public void datasetChanged(DatasetChangeEvent event) {
         PlotChangeEvent newEvent = new PlotChangeEvent(this);
         newEvent.setType(ChartChangeEventType.DATASET_UPDATED);
@@ -1239,6 +1243,7 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @since 1.0.3
      */
+    @Override
     public void markerChanged(MarkerChangeEvent event) {
         fireChangeEvent();
     }
@@ -1298,6 +1303,7 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1366,6 +1372,7 @@ public abstract class Plot implements AxisChangeListener,
      * @throws CloneNotSupportedException if some component of the plot does not
      *         support cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
 
         Plot clone = (Plot) super.clone();

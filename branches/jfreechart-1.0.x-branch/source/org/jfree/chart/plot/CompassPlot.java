@@ -564,9 +564,9 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info) {
+                     PlotState parentState, PlotRenderingInfo info) {
 
         int outerRadius, innerRadius;
         int x1, y1, x2, y2;
@@ -698,6 +698,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      *
      * @return A string describing the plot.
      */
+    @Override
     public String getPlotType() {
         return localizationResources.getString("Compass_Plot");
     }
@@ -708,6 +709,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      *
      * @return The legend items.
      */
+    @Override
     public LegendItemCollection getLegendItems() {
         return null;
     }
@@ -717,6 +719,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      *
      * @param percent  the zoom amount.
      */
+    @Override
     public void zoom(double percent) {
         // no zooming possible
     }
@@ -744,6 +747,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -796,6 +800,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @throws CloneNotSupportedException  this class will not throw this
      *         exception, but subclasses (if any) might.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
 
         CompassPlot clone = (CompassPlot) super.clone();

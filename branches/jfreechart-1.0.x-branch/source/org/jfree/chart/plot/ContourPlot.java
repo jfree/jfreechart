@@ -557,9 +557,9 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * @param info  collects chart drawing information (<code>null</code>
      *              permitted).
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info) {
+                     PlotState parentState, PlotRenderingInfo info) {
 
         // if the plot area is too small, just return...
         boolean b1 = (area.getWidth() <= MINIMUM_WIDTH_TO_DRAW);
@@ -1153,6 +1153,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * @param y  y-coordinate, where the click occured.
      * @param info  An object for collection dimension information.
      */
+    @Override
     public void handleClick(int x, int y, PlotRenderingInfo info) {
 
 /*        // set the anchor value for the horizontal axis...
@@ -1183,6 +1184,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      *
      * @param percent  The amount of the zoom.
      */
+    @Override
     public void zoom(double percent) {
 
         if (percent > 0) {
@@ -1206,6 +1208,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      *
      * @return A short string describing the type of plot.
      */
+    @Override
     public String getPlotType() {
         return localizationResources.getString("Contour_Plot");
     }
@@ -1217,6 +1220,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      *
      * @return The range for an axis.
      */
+    @Override
     public Range getDataRange(ValueAxis axis) {
 
         if (this.dataset == null) {
@@ -1231,9 +1235,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
         else if (axis == getRangeAxis()) {
             result = DatasetUtilities.findRangeBounds(this.dataset);
         }
-
         return result;
-
     }
 
     /**
@@ -1241,18 +1243,15 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      *
      * @return The range for the Contours (z-axis).
      */
+    @Override
     public Range getContourDataRange() {
-
         Range result = null;
-
         ContourDataset data = getDataset();
-
         if (data != null) {
             Range h = getDomainAxis().getRange();
             Range v = getRangeAxis().getRange();
             result = this.visibleRange(data, h, v);
         }
-
         return result;
     }
 
@@ -1263,6 +1262,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      *
      * @param event  Information about the property change.
      */
+    @Override
     public void propertyChange(PropertyChangeEvent event) {
         fireChangeEvent();
     }
@@ -1275,6 +1275,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      *
      * @param event  Information about the event (not used here).
      */
+    @Override
     public void datasetChanged(DatasetChangeEvent event) {
         if (this.domainAxis != null) {
             this.domainAxis.configure();
@@ -1706,6 +1707,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      *
      * @param event  information about the event.
      */
+    @Override
     public void axisChanged(AxisChangeEvent event) {
         Object source = event.getSource();
         if (source.equals(this.rangeAxis) || source.equals(this.domainAxis)) {
@@ -1820,6 +1822,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * Extends plot cloning to this plot type
      * @see org.jfree.chart.plot.Plot#clone()
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         ContourPlot clone = (ContourPlot) super.clone();
 

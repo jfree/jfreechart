@@ -329,6 +329,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      *
      * @return The plot type.
      */
+    @Override
     public String getPlotType() {
         // return localizationResources.getString("Radar_Plot");
         return ("Spider Web Plot");
@@ -1054,6 +1055,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      *
      * @return The legend items (never <code>null</code>).
      */
+    @Override
     public LegendItemCollection getLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
         if (getDataset() == null) {
@@ -1121,6 +1123,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
             PlotState parentState, PlotRenderingInfo info) {
 
@@ -1144,7 +1147,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                 getForegroundAlpha()));
 
         if (!DatasetUtilities.isEmptyOrNull(this.dataset)) {
-            int seriesCount = 0, catCount = 0;
+            int seriesCount, catCount;
 
             if (this.dataExtractOrder == TableOrder.BY_ROW) {
                 seriesCount = this.dataset.getRowCount();
@@ -1221,8 +1224,8 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param catCount  the number of categories
      */
     private void calculateMaxValue(int seriesCount, int catCount) {
-        double v = 0;
-        Number nV = null;
+        double v;
+        Number nV;
 
         for (int seriesIndex = 0; seriesIndex < seriesCount; seriesIndex++) {
             for (int catIndex = 0; catIndex < catCount; catIndex++) {
@@ -1309,7 +1312,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                     g2.draw(head);
 
                     if (entities != null) {
-                        int row = 0; int col = 0;
+                        int row, col;
                         if (this.dataExtractOrder == TableOrder.BY_ROW) {
                             row = series;
                             col = cat;
@@ -1401,7 +1404,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                              int cat, double startAngle, double extent) {
         FontRenderContext frc = g2.getFontRenderContext();
 
-        String label = null;
+        String label;
         if (this.dataExtractOrder == TableOrder.BY_ROW) {
             // if series are in rows, then the categories are the column keys
             label = this.labelGenerator.generateColumnLabel(this.dataset, cat);
@@ -1477,6 +1480,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1581,6 +1585,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if the plot cannot be cloned for
      *         any reason.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         SpiderWebPlot clone = (SpiderWebPlot) super.clone();
         clone.legendItemShape = ShapeUtilities.clone(this.legendItemShape);

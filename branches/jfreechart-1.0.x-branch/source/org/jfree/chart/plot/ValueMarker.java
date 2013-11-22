@@ -137,6 +137,7 @@ public class ValueMarker extends Marker {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

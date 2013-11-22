@@ -567,6 +567,7 @@ public abstract class Marker implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -621,6 +622,7 @@ public abstract class Marker implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException never.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

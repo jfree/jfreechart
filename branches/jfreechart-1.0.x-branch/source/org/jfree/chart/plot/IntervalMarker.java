@@ -194,6 +194,7 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -226,6 +227,7 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * @throws CloneNotSupportedException Not thrown by this class, but the
      *         exception is declared for the use of subclasses.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
