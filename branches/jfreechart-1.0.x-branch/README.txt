@@ -1,8 +1,8 @@
 ********************************
-*  JFREECHART: Version 1.0.16  *
+*  JFREECHART: Version 1.0.17  *
 ********************************
 
-13 September 2013
+22 November 2013
 
 (C)opyright 2000-2013, by Object Refinery Limited and Contributors.
 
@@ -38,7 +38,7 @@ message in the JFreeChart forum.
 3.  DOCUMENTATION
 -----------------
 You can download installation instructions
-(jfreechart-1.0.16-install.pdf) from the JFreeChart home
+(jfreechart-1.0.17-install.pdf) from the JFreeChart home
 page or the project page on SourceForge.
 
 Further documentation for JFreeChart (the JFreeChart Developer Guide) is
@@ -66,7 +66,7 @@ worked with JRE/JDK 1.4.2 or later.  With a bit of hacking, it may be possible
 to get JFreeChart working on these older versions, but we are no longer 
 supporting it.
 
-(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.20)
+(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.21)
 is included in the JFreeChart distribution.  You can obtain the complete
 source code for JCommon from:
 
@@ -123,7 +123,7 @@ A demo application that shows a selection of the charts that can be
 generated is included in the JFreeChart distribution.   To run the
 demo (using JDK 1.6.0 or later), use the following command:
 
-    java -jar jfreechart-1.0.16-demo.jar
+    java -jar jfreechart-1.0.17-demo.jar
 
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
@@ -155,11 +155,17 @@ please post a bug report.
 --------------
 A list of changes in recent versions:
 
-1.0.16 : (13-Sep-2013)
+1.0.17 : (22-Nov-2013)
         - see the NEWS and ChangeLog files for details.
 
+1.0.16 : (13-Sep-2013)
+        - bumped the required JRE to 1.6, enhanced axis labelling, provided
+          integration with JFreeSVG and OrsonPDF for vector output, and fixed 
+          bugs.
+
 1.0.15 : (4-Jul-2013)
-        - see the NEWS and ChangeLog files for details.
+        - various minor feature enhancements and a range of bug fixes, see the 
+          NEWS and ChangeLog files for details.
 
 1.0.14 : (20-Nov-2011)
         - added support for multiple axes in PolarPlot, performance
