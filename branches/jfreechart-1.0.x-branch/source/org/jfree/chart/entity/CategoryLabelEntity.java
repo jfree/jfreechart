@@ -87,6 +87,7 @@ public class CategoryLabelEntity extends TickLabelEntity {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -106,6 +107,7 @@ public class CategoryLabelEntity extends TickLabelEntity {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         result = HashUtilities.hashCode(result, this.key);
@@ -118,12 +120,13 @@ public class CategoryLabelEntity extends TickLabelEntity {
      *
      * @return A string representation of this entity.
      */
+    @Override
     public String toString() {
-        StringBuffer buf = new StringBuffer("CategoryLabelEntity: ");
-        buf.append("category=");
-        buf.append(this.key);
-        buf.append(", tooltip=").append(getToolTipText());
-        buf.append(", url=").append(getURLText());
-        return buf.toString();
+        StringBuilder sb = new StringBuilder("CategoryLabelEntity: ");
+        sb.append("category=");
+        sb.append(this.key);
+        sb.append(", tooltip=").append(getToolTipText());
+        sb.append(", url=").append(getURLText());
+        return sb.toString();
     }
 }
