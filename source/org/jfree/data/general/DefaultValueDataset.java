@@ -94,6 +94,7 @@ public class DefaultValueDataset extends AbstractDataset
      *
      * @return The value (possibly <code>null</code>).
      */
+    @Override
     public Number getValue() {
         return this.value;
     }
@@ -116,6 +117,7 @@ public class DefaultValueDataset extends AbstractDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -132,6 +134,7 @@ public class DefaultValueDataset extends AbstractDataset
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return (this.value != null ? this.value.hashCode() : 0);
     }

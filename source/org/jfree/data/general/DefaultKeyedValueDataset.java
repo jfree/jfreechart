@@ -92,6 +92,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
      *
      * @return The key.
      */
+    @Override
     public Comparable getKey() {
         Comparable result = null;
         if (this.data != null) {
@@ -105,6 +106,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
      *
      * @return The value (possibly <code>null</code>).
      */
+    @Override
     public Number getValue() {
         Number result = null;
         if (this.data != null) {
@@ -144,6 +146,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -172,6 +175,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return (this.data != null ? this.data.hashCode() : 0);
     }
@@ -184,6 +188,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
      * @throws CloneNotSupportedException This class will not throw this
      *         exception, but subclasses (if any) might.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         DefaultKeyedValueDataset clone
                 = (DefaultKeyedValueDataset) super.clone();
