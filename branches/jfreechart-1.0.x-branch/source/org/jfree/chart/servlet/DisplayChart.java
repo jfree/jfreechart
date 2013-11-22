@@ -83,6 +83,7 @@ public class DisplayChart extends HttpServlet {
      *
      * @throws ServletException never.
      */
+    @Override
     public void init() throws ServletException {
         // nothing to do
     }
@@ -96,6 +97,7 @@ public class DisplayChart extends HttpServlet {
      * @throws ServletException ??.
      * @throws IOException ??.
      */
+    @Override
     public void service(HttpServletRequest request,
                         HttpServletResponse response)
             throws ServletException, IOException {
