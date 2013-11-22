@@ -112,6 +112,7 @@ public class ContourEntity extends ChartEntity
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -133,6 +134,7 @@ public class ContourEntity extends ChartEntity
      *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

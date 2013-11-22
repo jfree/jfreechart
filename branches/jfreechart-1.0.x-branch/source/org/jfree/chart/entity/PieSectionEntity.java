@@ -204,6 +204,7 @@ public class PieSectionEntity extends ChartEntity
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -232,6 +233,7 @@ public class PieSectionEntity extends ChartEntity
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         result = HashUtilities.hashCode(result, this.pieIndex);
@@ -244,6 +246,7 @@ public class PieSectionEntity extends ChartEntity
      *
      * @return A string representing the entity.
      */
+    @Override
     public String toString() {
         return "PieSection: " + this.pieIndex + ", " + this.sectionIndex + "("
                               + this.sectionKey.toString() + ")";

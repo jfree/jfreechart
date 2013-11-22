@@ -152,6 +152,7 @@ public class XYItemEntity extends ChartEntity {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -175,6 +176,7 @@ public class XYItemEntity extends ChartEntity {
      *
      * @return A string.
      */
+    @Override
     public String toString() {
         return "XYItemEntity: series = " + getSeriesIndex() + ", item = "
             + getItem() + ", dataset = " + getDataset();
