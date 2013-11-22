@@ -130,7 +130,6 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
@@ -707,6 +706,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      *
      * @return A state object.
      */
+    @Override
     public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
             XYPlot plot, XYDataset dataset, PlotRenderingInfo info) {
 
@@ -728,6 +728,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      *
      * @return A legend item for the series.
      */
+    @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
         XYPlot xyplot = getPlot();
         if (xyplot == null) {
@@ -737,7 +738,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         if (dataset == null) {
             return null;
         }
-        LegendItem result = null;
+        LegendItem result;
         XYSeriesLabelGenerator lg = getLegendItemLabelGenerator();
         String label = lg.generateLabel(dataset, series);
         String description = label;
@@ -796,18 +797,11 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset,
-                         int series,
-                         int item,
-                         CrosshairState crosshairState,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         if (!getItemVisible(series, item)) {
             return;
@@ -989,7 +983,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         g2.setPaint(paint);
 
         // find out where to place the label...
-        ItemLabelPosition position = null;
+        ItemLabelPosition position;
         if (!negative) {
             position = getPositiveItemLabelPosition(series, item);
         }
@@ -1176,6 +1170,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @return The range (<code>null</code> if the dataset is
      *         <code>null</code> or empty).
      */
+    @Override
     public Range findDomainBounds(XYDataset dataset) {
         return findDomainBounds(dataset, true);
     }
@@ -1190,6 +1185,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @return The range (<code>null</code> if the dataset is
      *         <code>null</code> or empty).
      */
+    @Override
     public Range findRangeBounds(XYDataset dataset) {
         return findRangeBounds(dataset, this.useYInterval);
     }
@@ -1201,6 +1197,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         XYBarRenderer result = (XYBarRenderer) super.clone();
         if (this.gradientPaintTransformer != null) {
@@ -1218,6 +1215,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

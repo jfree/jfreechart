@@ -112,7 +112,6 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.data.xy.XYDataset;
@@ -569,6 +568,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
      */
+    @Override
     public Range findRangeBounds(XYDataset dataset) {
         return findRangeBounds(dataset, true);
     }
@@ -589,11 +589,9 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      *
      * @return The number of passes the renderer requires.
      */
-    public XYItemRendererState initialise(Graphics2D g2,
-                                          Rectangle2D dataArea,
-                                          XYPlot plot,
-                                          XYDataset dataset,
-                                          PlotRenderingInfo info) {
+    @Override
+    public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
+            XYPlot plot, XYDataset dataset, PlotRenderingInfo info) {
 
         // calculate the maximum allowed candle width from the axis...
         ValueAxis axis = plot.getDomainAxis();
@@ -644,18 +642,11 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset,
-                         int series,
-                         int item,
-                         CrosshairState crosshairState,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         boolean horiz;
         PlotOrientation orientation = plot.getOrientation();
@@ -827,8 +818,8 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         }
 
         // draw the body
-        Rectangle2D body = null;
-        Rectangle2D hotspot = null;
+        Rectangle2D body;
+        Rectangle2D hotspot;
         double length = Math.abs(yyHigh - yyLow);
         double base = Math.min(yyHigh, yyLow);
         if (horiz) {
@@ -883,6 +874,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -932,6 +924,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
