@@ -49,6 +49,8 @@ import org.jfree.ui.TextAnchor;
 
 /**
  * Some <code>AttributedString</code> utilities.
+ * 
+ * @since 1.0.16
  */
 public class AttrStringUtils {
    
@@ -65,6 +67,8 @@ public class AttrStringUtils {
      * @param angle  the angle.
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
+     * 
+     * @since 1.0.16
      */
     public static void drawRotatedString(AttributedString text, Graphics2D g2, 
             double angle, float x, float y) {
@@ -77,11 +81,13 @@ public class AttrStringUtils {
      * 
      * @param text  the attributed string (<code>null</code> not permitted).
      * @param g2  the graphics output target.
-     * @param textX
-     * @param textY
-     * @param angle
-     * @param rotateX
-     * @param rotateY 
+     * @param textX  the x-coordinate for the text.
+     * @param textY  the y-coordinate for the text.
+     * @param angle  the rotation angle (in radians).
+     * @param rotateX  the x-coordinate for the rotation point.
+     * @param rotateY  the y-coordinate for the rotation point.
+     * 
+     * @since 1.0.16
      */
     public static void drawRotatedString(AttributedString text, Graphics2D g2, 
             float textX, float textY, double angle, float rotateX, 
@@ -100,19 +106,23 @@ public class AttrStringUtils {
     }
     
     /**
+     * Draws the string anchored to <code>(x, y)</code>, rotated by the 
+     * specified angle about <code>(rotationX, rotationY)</code>.
      * 
-     * @param text
-     * @param g2
-     * @param x
-     * @param y
-     * @param textAnchor
-     * @param angle
-     * @param rotationX
-     * @param rotationY 
+     * @param text  the text (<code>null</code> not permitted).
+     * @param g2  the graphics target.
+     * @param x  the x-coordinate for the text location.
+     * @param y  the y-coordinate for the text location.
+     * @param textAnchor  the text anchor point.
+     * @param angle  the rotation (in radians).
+     * @param rotationX  the x-coordinate for the rotation point.
+     * @param rotationY  the y-coordinate for the rotation point.
+     * 
+     * @since 1.0.16
      */
     public static void drawRotatedString(AttributedString text, Graphics2D g2, 
             float x, float y, TextAnchor textAnchor, 
-            final double angle, float rotationX, float rotationY) {
+            double angle, float rotationX, float rotationY) {
         ParamChecks.nullNotPermitted(text, "text");
         float[] textAdj = deriveTextBoundsAnchorOffsets(g2, text, textAnchor, 
                 null);
@@ -121,14 +131,17 @@ public class AttrStringUtils {
     }
 
     /**
+     * Draws a rotated string.
      * 
-     * @param text
-     * @param g2
-     * @param x
-     * @param y
-     * @param textAnchor
-     * @param angle
-     * @param rotationAnchor 
+     * @param text  the text to draw.
+     * @param g2  the graphics target.
+     * @param x  the x-coordinate for the text location.
+     * @param y  the y-coordinate for the text location.
+     * @param textAnchor  the text anchor point.
+     * @param angle  the rotation (in radians).
+     * @param rotationAnchor  the rotation anchor point.
+     * 
+     * @since 1.0.16
      */
     public static void drawRotatedString(AttributedString text, Graphics2D g2,
             float x, float y, TextAnchor textAnchor,
