@@ -100,7 +100,7 @@ public class ImageMapUtilities {
             String name, ChartRenderingInfo info,
             boolean useOverLibForToolTips) throws IOException {
 
-        ToolTipTagFragmentGenerator toolTipTagFragmentGenerator = null;
+        ToolTipTagFragmentGenerator toolTipTagFragmentGenerator;
         if (useOverLibForToolTips) {
             toolTipTagFragmentGenerator
                     = new OverLIBToolTipTagFragmentGenerator();
@@ -174,7 +174,7 @@ public class ImageMapUtilities {
             ToolTipTagFragmentGenerator toolTipTagFragmentGenerator,
             URLTagFragmentGenerator urlTagFragmentGenerator) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("<map id=\"").append(htmlEscape(name));
         sb.append("\" name=\"").append(htmlEscape(name)).append("\">");
         sb.append(StringUtils.getLineSeparator());
@@ -212,7 +212,7 @@ public class ImageMapUtilities {
      */
     public static String htmlEscape(String input) {
         ParamChecks.nullNotPermitted(input, "input");
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         int length = input.length();
         for (int i = 0; i < length; i++) {
             char c = input.charAt(i);
@@ -253,7 +253,7 @@ public class ImageMapUtilities {
      */
     public static String javascriptEscape(String input) {
         ParamChecks.nullNotPermitted(input, "input");
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         int length = input.length();
         for (int i = 0; i < length; i++) {
             char c = input.charAt(i);
