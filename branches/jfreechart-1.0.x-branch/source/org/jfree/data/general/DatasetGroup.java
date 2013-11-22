@@ -92,6 +92,7 @@ public class DatasetGroup implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException not by this class.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -103,6 +104,7 @@ public class DatasetGroup implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

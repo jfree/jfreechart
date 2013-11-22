@@ -68,6 +68,7 @@ public abstract class AbstractSeriesDataset extends AbstractDataset
      *
      * @return The series count.
      */
+    @Override
     public abstract int getSeriesCount();
 
     /**
@@ -82,6 +83,7 @@ public abstract class AbstractSeriesDataset extends AbstractDataset
      *
      * @return The series key.
      */
+    @Override
     public abstract Comparable getSeriesKey(int series);
 
     /**
@@ -91,6 +93,7 @@ public abstract class AbstractSeriesDataset extends AbstractDataset
      *
      * @return The index.
      */
+    @Override
     public int indexOf(Comparable seriesKey) {
         int seriesCount = getSeriesCount();
         for (int s = 0; s < seriesCount; s++) {
@@ -106,6 +109,7 @@ public abstract class AbstractSeriesDataset extends AbstractDataset
      *
      * @param event  information about the change.
      */
+    @Override
     public void seriesChanged(SeriesChangeEvent event) {
         fireDatasetChanged();
     }

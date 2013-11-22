@@ -106,6 +106,7 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @return The item count.
      */
+    @Override
     public int getItemCount() {
         return this.data.getItemCount();
     }
@@ -116,6 +117,7 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @return The categories in the dataset.
      */
+    @Override
     public List getKeys() {
         return Collections.unmodifiableList(this.data.getKeys());
     }
@@ -131,6 +133,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @throws IndexOutOfBoundsException if <code>item</code> is not in the
      *     specified range.
      */
+    @Override
     public Comparable getKey(int item) {
         return this.data.getKey(item);
     }
@@ -145,6 +148,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @throws IllegalArgumentException if <code>key</code> is
      *     <code>null</code>.
      */
+    @Override
     public int getIndex(Comparable key) {
         return this.data.getIndex(key);
     }
@@ -156,14 +160,13 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @return The value (possibly <code>null</code>).
      */
+    @Override
     public Number getValue(int item) {
-
         Number result = null;
         if (getItemCount() > item) {
             result = this.data.getValue(item);
         }
         return result;
-
     }
 
     /**
@@ -175,6 +178,7 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @throws UnknownKeyException if the key is not recognised.
      */
+    @Override
     public Number getValue(Comparable key) {
         ParamChecks.nullNotPermitted(key, "key");
         return this.data.getValue(key);
@@ -304,6 +308,7 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -347,6 +352,7 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return this.data.hashCode();
     }
@@ -359,6 +365,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @throws CloneNotSupportedException This class will not throw this
      *         exception, but subclasses (if any) might.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         DefaultPieDataset clone = (DefaultPieDataset) super.clone();
         clone.data = (DefaultKeyedValues) this.data.clone();
