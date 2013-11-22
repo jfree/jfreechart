@@ -158,6 +158,7 @@ class DefaultColorBarEditor extends DefaultNumberAxisEditor {
      *
      * @param event  the event.
      */
+    @Override
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
         if (command.equals("PaletteChoice")) {

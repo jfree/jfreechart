@@ -96,10 +96,12 @@ public class DefaultPolarPlotEditor extends DefaultPlotEditor
      * 
      * @return A tabbed pane. 
      */
+    @Override
     protected JTabbedPane createPlotTabs(Plot plot) {
         JTabbedPane tabs = super.createPlotTabs(plot);
         // TODO find a better localization key
-        tabs.insertTab(localizationResources.getString("General1"), null, createPlotPanel(), null, 0);
+        tabs.insertTab(localizationResources.getString("General1"), null, 
+                createPlotPanel(), null, 0);
         tabs.setSelectedIndex(0);
         return tabs;
     }
@@ -136,6 +138,7 @@ public class DefaultPolarPlotEditor extends DefaultPlotEditor
      *
      * @param event  the event.
      */
+    @Override
     public void focusGained(FocusEvent event) {
         // don't need to do anything
     }
@@ -145,6 +148,7 @@ public class DefaultPolarPlotEditor extends DefaultPlotEditor
      *
      *  @param event  the event.
      */
+    @Override
     public void focusLost(FocusEvent event) {
         if (event.getSource() == this.angleOffset) {
             validateAngleOffset();
@@ -158,6 +162,7 @@ public class DefaultPolarPlotEditor extends DefaultPlotEditor
      * Handles actions from within the property panel.
      * @param event an event.
      */
+    @Override
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
         if (command.equals("AngleOffsetValue")) {
@@ -201,6 +206,7 @@ public class DefaultPolarPlotEditor extends DefaultPlotEditor
         this.manualTickUnit.setText(Double.toString(this.manualTickUnitValue));
     }
 
+    @Override
     public void updatePlotProperties(Plot plot) {
         super.updatePlotProperties(plot);
         PolarPlot pp = (PolarPlot) plot;

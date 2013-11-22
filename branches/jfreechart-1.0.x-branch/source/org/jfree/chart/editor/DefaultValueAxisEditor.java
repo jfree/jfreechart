@@ -264,6 +264,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
      * Handles actions from within the property panel.
      * @param event an event.
      */
+    @Override
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
         if (command.equals("GridStroke")) {
@@ -322,6 +323,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
      *
      * @param event  the event.
      */
+    @Override
     public void focusGained(FocusEvent event) {
         // don't need to do anything
     }
@@ -331,6 +333,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
      *
      *  @param event  the event.
      */
+    @Override
     public void focusLost(FocusEvent event) {
         if (event.getSource() == this.minimumRangeValue) {
             validateMinimum();
@@ -405,6 +408,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
      *
      * @param axis  the axis.
      */
+    @Override
     public void setAxisProperties(Axis axis) {
         super.setAxisProperties(axis);
         ValueAxis valueAxis = (ValueAxis) axis;

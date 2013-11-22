@@ -82,6 +82,7 @@ class DefaultNumberAxisEditor extends DefaultValueAxisEditor
         validateTickUnit();
     }
 
+    @Override
     protected JPanel createTickUnitPanel()
     {
         JPanel tickUnitPanel = new JPanel(new LCBLayout(3));
@@ -115,6 +116,7 @@ class DefaultNumberAxisEditor extends DefaultValueAxisEditor
      * Handles actions from within the property panel.
      * @param event an event.
      */
+    @Override
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
         if (command.equals("TickUnitValue")) {
@@ -126,6 +128,7 @@ class DefaultNumberAxisEditor extends DefaultValueAxisEditor
         }
     }
 
+    @Override
     public void focusLost(FocusEvent event) {
         super.focusLost(event);
         if (event.getSource() == this.manualTickUnit) {
@@ -133,6 +136,7 @@ class DefaultNumberAxisEditor extends DefaultValueAxisEditor
         }
     }
 
+    @Override
     public void toggleAutoTick() {
         super.toggleAutoTick();
         if (isAutoTickUnitSelection()) {
@@ -165,6 +169,7 @@ class DefaultNumberAxisEditor extends DefaultValueAxisEditor
      *
      * @param axis  the axis.
      */
+    @Override
     public void setAxisProperties(Axis axis) {
         super.setAxisProperties(axis);
         NumberAxis numberAxis = (NumberAxis) axis;
