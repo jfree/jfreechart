@@ -112,6 +112,7 @@ public class HexNumberFormat extends NumberFormat {
      *
      * @return The string buffer.
      */
+    @Override
     public StringBuffer format(double number, StringBuffer toAppendTo,
             FieldPosition pos) {
         return format((long) number, toAppendTo, pos);
@@ -127,6 +128,7 @@ public class HexNumberFormat extends NumberFormat {
      *
      * @return The string buffer.
      */
+    @Override
     public StringBuffer format(long number, StringBuffer toAppendTo,
             FieldPosition pos) {
         String l_hex = Long.toHexString(number).toUpperCase();
@@ -152,6 +154,7 @@ public class HexNumberFormat extends NumberFormat {
      *
      * @return Always <code>null</code>.
      */
+    @Override
     public Number parse (String source, ParsePosition parsePosition) {
         return null; // don't bother with parsing
     }
