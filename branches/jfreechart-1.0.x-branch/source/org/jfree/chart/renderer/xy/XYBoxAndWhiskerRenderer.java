@@ -109,7 +109,6 @@ import org.jfree.chart.renderer.OutlierList;
 import org.jfree.chart.renderer.OutlierListCollection;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.statistics.BoxAndWhiskerXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.io.SerialUtilities;
@@ -287,6 +286,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      *
      * @see #findDomainBounds(XYDataset)
      */
+    @Override
     public Range findRangeBounds(XYDataset dataset) {
         return findRangeBounds(dataset, true);
     }
@@ -334,6 +334,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, XYItemRendererState state,
             Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
             ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
@@ -446,7 +447,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
                 xx + width / 2));
 
         // draw the body
-        Shape box = null;
+        Shape box;
         if (yyQ1Median < yyQ3Median) {
             box = new Rectangle2D.Double(yyQ1Median, xx - width / 2,
                     yyQ3Median - yyQ1Median, width);
@@ -593,7 +594,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
                 yyMin));
 
         // draw the body
-        Shape box = null;
+        Shape box;
         if (yyQ1Median > yyQ3Median) {
             box = new Rectangle2D.Double(xx - width / 2, yyQ3Median, width,
                     yyQ1Median - yyQ3Median);
@@ -781,6 +782,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -844,6 +846,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      *
      * @throws CloneNotSupportedException  if the renderer cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

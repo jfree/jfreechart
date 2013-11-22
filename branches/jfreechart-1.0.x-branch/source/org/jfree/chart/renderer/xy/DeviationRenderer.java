@@ -60,7 +60,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.RectangleEdge;
@@ -167,6 +166,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      *
      * @param flag  ignored.
      */
+    @Override
     public void setDrawSeriesLineAsPath(boolean flag) {
         // ignore
     }
@@ -180,6 +180,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
      */
+    @Override
     public Range findRangeBounds(XYDataset dataset) {
         return findRangeBounds(dataset, true);
     }
@@ -196,6 +197,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      *
      * @return A newly initialised state object.
      */
+    @Override
     public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
             XYPlot plot, XYDataset dataset, PlotRenderingInfo info) {
         State state = new State(info);
@@ -210,6 +212,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      *
      * @return <code>3</code>.
      */
+    @Override
     public int getPassCount() {
         return 3;
     }
@@ -224,6 +227,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      *
      * @see #isLinePass(int)
      */
+    @Override
     protected boolean isItemPass(int pass) {
         return (pass == 2);
     }
@@ -238,6 +242,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      *
      * @see #isItemPass(int)
      */
+    @Override
     protected boolean isLinePass(int pass) {
         return (pass == 1);
     }
@@ -260,18 +265,11 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      *                        (<code>null</code> permitted).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset,
-                         int series,
-                         int item,
-                         CrosshairState crosshairState,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         // do nothing if item is not visible
         if (!getItemVisible(series, item)) {
@@ -374,6 +372,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
