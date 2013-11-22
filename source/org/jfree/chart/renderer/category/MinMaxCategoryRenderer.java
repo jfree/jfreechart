@@ -320,6 +320,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, CategoryItemRendererState state,
             Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
             ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
@@ -426,6 +427,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      *
      * @since 1.0.7
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -458,33 +460,35 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     private Icon getIcon(Shape shape, final Paint fillPaint,
                         final Paint outlinePaint) {
 
-      final int width = shape.getBounds().width;
-      final int height = shape.getBounds().height;
-      final GeneralPath path = new GeneralPath(shape);
-      return new Icon() {
-          public void paintIcon(Component c, Graphics g, int x, int y) {
-              Graphics2D g2 = (Graphics2D) g;
-              path.transform(AffineTransform.getTranslateInstance(x, y));
-              if (fillPaint != null) {
-                  g2.setPaint(fillPaint);
-                  g2.fill(path);
-              }
-              if (outlinePaint != null) {
-                  g2.setPaint(outlinePaint);
-                  g2.draw(path);
-              }
-              path.transform(AffineTransform.getTranslateInstance(-x, -y));
-        }
+        final int width = shape.getBounds().width;
+        final int height = shape.getBounds().height;
+        final GeneralPath path = new GeneralPath(shape);
+        return new Icon() {
+            @Override
+            public void paintIcon(Component c, Graphics g, int x, int y) {
+                Graphics2D g2 = (Graphics2D) g;
+                path.transform(AffineTransform.getTranslateInstance(x, y));
+                if (fillPaint != null) {
+                    g2.setPaint(fillPaint);
+                    g2.fill(path);
+                }
+                if (outlinePaint != null) {
+                    g2.setPaint(outlinePaint);
+                    g2.draw(path);
+                }
+                path.transform(AffineTransform.getTranslateInstance(-x, -y));
+            }
 
-        public int getIconWidth() {
-            return width;
-        }
+            @Override
+            public int getIconWidth() {
+                return width;
+            }
 
-        public int getIconHeight() {
-            return height;
-        }
-
-      };
+            @Override
+            public int getIconHeight() {
+                return height;
+            }
+        };
     }
 
     /**
@@ -502,6 +506,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
         final int height = shape.getBounds().height;
         final GeneralPath path = new GeneralPath(shape);
         return new Icon() {
+            @Override
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 Graphics2D g2 = (Graphics2D) g;
                 path.transform(AffineTransform.getTranslateInstance(x, y));
@@ -514,10 +519,12 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
                 path.transform(AffineTransform.getTranslateInstance(-x, -y));
             }
 
+            @Override
             public int getIconWidth() {
                 return width;
             }
 
+            @Override
             public int getIconHeight() {
                 return height;
             }

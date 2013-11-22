@@ -176,6 +176,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      *
      * @return The renderer state.
      */
+    @Override
     public CategoryItemRendererState initialise(Graphics2D g2,
             Rectangle2D dataArea, CategoryPlot plot, int rendererIndex,
             PlotRenderingInfo info) {
@@ -249,15 +250,12 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      *
      * @return The coordinate.
      */
-    protected double calculateBarW0(CategoryPlot plot,
-                                    PlotOrientation orientation,
-                                    Rectangle2D dataArea,
-                                    CategoryAxis domainAxis,
-                                    CategoryItemRendererState state,
-                                    int row,
-                                    int column) {
+    protected double calculateBarW0(CategoryPlot plot, 
+            PlotOrientation orientation, Rectangle2D dataArea,
+            CategoryAxis domainAxis, CategoryItemRendererState state, int row,
+            int column) {
         // calculate bar width...
-        double space = 0.0;
+        double space;
         if (orientation == PlotOrientation.HORIZONTAL) {
             space = dataArea.getHeight();
         }
@@ -301,6 +299,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, CategoryItemRendererState state,
             Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
             ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
@@ -328,9 +327,8 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
         double barL = rangeAxis.valueToJava2D(value, dataArea, edge);
 
         // draw the bar...
-        Line2D line = null;
-        double x = 0.0;
-        double y = 0.0;
+        Line2D line;
+        double x, y;
         if (orientation == PlotOrientation.HORIZONTAL) {
             x = barL;
             y = barW0 + state.getBarWidth() / 2.0;
@@ -404,6 +402,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      *
      * @since 1.0.11
      */
+    @Override
     public double getItemMiddle(Comparable rowKey, Comparable columnKey,
             CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
             RectangleEdge edge) {
@@ -418,6 +417,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -440,6 +440,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int hash = super.hashCode();
         hash = HashUtilities.hashCode(hash, this.itemMargin);

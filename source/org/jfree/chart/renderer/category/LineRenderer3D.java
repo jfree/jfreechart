@@ -138,6 +138,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @see #setXOffset(double)
      * @see #getYOffset()
      */
+    @Override
     public double getXOffset() {
         return this.xOffset;
     }
@@ -150,6 +151,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @see #setYOffset(double)
      * @see #getXOffset()
      */
+    @Override
     public double getYOffset() {
         return this.yOffset;
     }
@@ -214,6 +216,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @param plot  the plot.
      * @param dataArea  the area inside the axes.
      */
+    @Override
     public void drawBackground(Graphics2D g2, CategoryPlot plot,
                                Rectangle2D dataArea) {
 
@@ -295,6 +298,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @param plot  the plot.
      * @param dataArea  the area inside the axes.
      */
+    @Override
     public void drawOutline(Graphics2D g2, CategoryPlot plot,
                             Rectangle2D dataArea) {
 
@@ -338,10 +342,9 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @param value  the Java2D value at which the grid line should be drawn.
      *
      */
-    public void drawDomainGridline(Graphics2D g2,
-                                   CategoryPlot plot,
-                                   Rectangle2D dataArea,
-                                   double value) {
+    @Override
+    public void drawDomainGridline(Graphics2D g2, CategoryPlot plot,
+            Rectangle2D dataArea, double value) {
 
         Line2D line1 = null;
         Line2D line2 = null;
@@ -382,11 +385,9 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @param value  the value at which the grid line should be drawn.
      *
      */
-    public void drawRangeGridline(Graphics2D g2,
-                                  CategoryPlot plot,
-                                  ValueAxis axis,
-                                  Rectangle2D dataArea,
-                                  double value) {
+    @Override
+    public void drawRangeGridline(Graphics2D g2, CategoryPlot plot,
+            ValueAxis axis, Rectangle2D dataArea, double value) {
 
         Range range = axis.getRange();
 
@@ -438,11 +439,9 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @param marker  the marker.
      * @param dataArea  the area for plotting data (not including 3D effect).
      */
-    public void drawRangeMarker(Graphics2D g2,
-                                CategoryPlot plot,
-                                ValueAxis axis,
-                                Marker marker,
-                                Rectangle2D dataArea) {
+    @Override
+    public void drawRangeMarker(Graphics2D g2, CategoryPlot plot,
+            ValueAxis axis, Marker marker, Rectangle2D dataArea) {
 
         Rectangle2D adjusted = new Rectangle2D.Double(dataArea.getX(),
                 dataArea.getY() + getYOffset(),
@@ -509,16 +508,11 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         CategoryItemRendererState state,
-                         Rectangle2D dataArea,
-                         CategoryPlot plot,
-                         CategoryAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         CategoryDataset dataset,
-                         int row,
-                         int column,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, CategoryItemRendererState state,
+            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+            ValueAxis rangeAxis, CategoryDataset dataset, int row,
+            int column, int pass) {
 
         if (!getItemVisible(row, column)) {
             return;
@@ -626,6 +620,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

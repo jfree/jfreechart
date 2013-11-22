@@ -165,6 +165,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
      *
      * @return The legend item.
      */
+    @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
 
         CategoryPlot p = getPlot();
@@ -218,6 +219,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
      *
      * @return A new state instance.
      */
+    @Override
     protected CategoryItemRendererState createState(PlotRenderingInfo info) {
         return new State(info);
     }
@@ -268,16 +270,11 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         CategoryItemRendererState state,
-                         Rectangle2D dataArea,
-                         CategoryPlot plot,
-                         CategoryAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         CategoryDataset dataset,
-                         int row,
-                         int column,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, CategoryItemRendererState state,
+            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+            ValueAxis rangeAxis, CategoryDataset dataset, int row,
+            int column, int pass) {
 
         // do nothing if item is not visible
         if (!getItemVisible(row, column)) {
@@ -358,6 +355,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

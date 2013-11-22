@@ -448,6 +448,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @return The legend item (possibly <code>null</code>).
      */
+    @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
 
         CategoryPlot cp = getPlot();
@@ -501,6 +502,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @return The range.
      */
+    @Override
     public Range findRangeBounds(CategoryDataset dataset) {
         return super.findRangeBounds(dataset, true);
     }
@@ -517,11 +519,10 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @return The renderer state.
      */
-    public CategoryItemRendererState initialise(Graphics2D g2,
-                                                Rectangle2D dataArea,
-                                                CategoryPlot plot,
-                                                int rendererIndex,
-                                                PlotRenderingInfo info) {
+    @Override
+    public CategoryItemRendererState initialise(Graphics2D g2, 
+            Rectangle2D dataArea, CategoryPlot plot, int rendererIndex,
+            PlotRenderingInfo info) {
 
         CategoryItemRendererState state = super.initialise(g2, dataArea, plot,
                 rendererIndex, info);
@@ -578,6 +579,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, CategoryItemRendererState state,
         Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
         ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
@@ -711,7 +713,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
         // draw mean - SPECIAL AIMS REQUIREMENT...
         g2.setPaint(this.artifactPaint);
-        double aRadius = 0;                 // average radius
+        double aRadius;                 // average radius
         if (this.meanVisible) {
             Number xMean = bawDataset.getMeanValue(row, column);
             if (xMean != null) {
@@ -801,7 +803,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             xx = xx + offset;
         }
 
-        double yyAverage = 0.0;
+        double yyAverage;
         double yyOutlier;
 
         Paint itemPaint = getItemPaint(row, column);
@@ -1048,6 +1050,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

@@ -157,6 +157,7 @@ public class StackedAreaRenderer extends AreaRenderer
      *
      * @return The number of passes required by the renderer.
      */
+    @Override
     public int getPassCount() {
         return 2;
     }
@@ -169,6 +170,7 @@ public class StackedAreaRenderer extends AreaRenderer
      *
      * @return The range (or <code>null</code> if the dataset is empty).
      */
+    @Override
     public Range findRangeBounds(CategoryDataset dataset) {
         if (dataset == null) {
             return null;
@@ -195,23 +197,18 @@ public class StackedAreaRenderer extends AreaRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         CategoryItemRendererState state,
-                         Rectangle2D dataArea,
-                         CategoryPlot plot,
-                         CategoryAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         CategoryDataset dataset,
-                         int row,
-                         int column,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, CategoryItemRendererState state,
+            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+            ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
+            int pass) {
 
         if (!isSeriesVisible(row)) {
             return;
         }
         
         // setup for collecting optional entity info...
-        Shape entityArea = null;
+        Shape entityArea;
         EntityCollection entities = state.getEntityCollection();
 
         double y1 = 0.0;
@@ -496,6 +493,7 @@ public class StackedAreaRenderer extends AreaRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
