@@ -114,6 +114,7 @@ public class TaskSeries extends Series {
      *
      * @return The item count.
      */
+    @Override
     public int getItemCount() {
         return this.tasks.size();
     }
@@ -165,6 +166,7 @@ public class TaskSeries extends Series {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -190,6 +192,7 @@ public class TaskSeries extends Series {
      * @throws CloneNotSupportedException if there is some problem cloning
      *     the dataset.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         TaskSeries clone = (TaskSeries) super.clone();
         clone.tasks = (List) ObjectUtilities.deepClone(this.tasks);

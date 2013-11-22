@@ -156,6 +156,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The series count.
      */
+    @Override
     public int getSeriesCount() {
         return this.underlying.getSeriesCount();
     }
@@ -167,6 +168,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The name of a series.
      */
+    @Override
     public Comparable getSeriesKey(int series) {
         return this.underlying.getSeriesKey(series);
     }
@@ -178,6 +180,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The item count.
      */
+    @Override
     public int getItemCount(int series) {
         return this.underlying.getSeries(series).getItemCount();
     }
@@ -190,6 +193,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The value.
      */
+    @Override
     public double getXValue(int series, int item) {
         if (!this.transposed) {
             return getSeriesValue(series);
@@ -209,6 +213,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The start date/time.
      */
+    @Override
     public double getStartXValue(int series, int item) {
         if (!this.transposed) {
             return getSeriesStartValue(series);
@@ -228,6 +233,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The end date/time.
      */
+    @Override
     public double getEndXValue(int series, int item) {
         if (!this.transposed) {
             return getSeriesEndValue(series);
@@ -245,6 +251,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The x-value (in milliseconds).
      */
+    @Override
     public Number getX(int series, int item) {
         return new Double(getXValue(series, item));
     }
@@ -259,6 +266,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The start date/time.
      */
+    @Override
     public Number getStartX(int series, int item) {
         return new Double(getStartXValue(series, item));
     }
@@ -273,6 +281,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The end date/time.
      */
+    @Override
     public Number getEndX(int series, int item) {
         return new Double(getEndXValue(series, item));
     }
@@ -285,6 +294,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The value.
      */
+    @Override
     public double getYValue(int series, int item) {
         if (!this.transposed) {
             return getItemValue(series, item);
@@ -303,6 +313,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The y-interval start.
      */
+    @Override
     public double getStartYValue(int series, int item) {
         if (!this.transposed) {
             return getItemStartValue(series, item);
@@ -321,6 +332,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The y-interval end.
      */
+    @Override
     public double getEndYValue(int series, int item) {
         if (!this.transposed) {
             return getItemEndValue(series, item);
@@ -340,6 +352,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The y-value.
      */
+    @Override
     public Number getY(int series, int item) {
         return new Double(getYValue(series, item));
     }
@@ -353,6 +366,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The y-interval start.
      */
+    @Override
     public Number getStartY(int series, int item) {
         return new Double(getStartYValue(series, item));
     }
@@ -366,6 +380,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return The y-interval end.
      */
+    @Override
     public Number getEndY(int series, int item) {
         return new Double(getEndYValue(series, item));
     }
@@ -414,6 +429,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @param event  the event.
      */
+    @Override
     public void datasetChanged(DatasetChangeEvent event) {
         fireDatasetChanged();
     }
@@ -425,6 +441,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -452,6 +469,7 @@ public class XYTaskDataset extends AbstractXYDataset
      *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         XYTaskDataset clone = (XYTaskDataset) super.clone();
         clone.underlying = (TaskSeriesCollection) this.underlying.clone();
