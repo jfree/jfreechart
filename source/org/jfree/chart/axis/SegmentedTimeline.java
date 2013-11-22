@@ -1739,6 +1739,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          *
          * @param n Number of segments to increment.
          */
+        @Override
         public void inc(long n) {
             throw new IllegalArgumentException(
                     "Not implemented in SegmentRange");
