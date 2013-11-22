@@ -95,6 +95,7 @@ public class XYAnnotationEntity extends ChartEntity
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

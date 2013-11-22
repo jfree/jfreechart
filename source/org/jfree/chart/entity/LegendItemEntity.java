@@ -170,6 +170,7 @@ public class LegendItemEntity extends ChartEntity
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -198,6 +199,7 @@ public class LegendItemEntity extends ChartEntity
      * @throws CloneNotSupportedException if there is a problem cloning the
      *         object.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -208,6 +210,7 @@ public class LegendItemEntity extends ChartEntity
      *
      * @return A string (never <code>null</code>).
      */
+    @Override
     public String toString() {
         return "LegendItemEntity: seriesKey=" + this.seriesKey
                 + ", dataset=" + this.dataset;

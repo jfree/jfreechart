@@ -336,6 +336,7 @@ public class CategoryItemEntity extends ChartEntity
      *
      * @return A string (never <code>null</code>).
      */
+    @Override
     public String toString() {
         return "CategoryItemEntity: rowKey=" + this.rowKey
                + ", columnKey=" + this.columnKey + ", dataset=" + this.dataset;
@@ -348,6 +349,7 @@ public class CategoryItemEntity extends ChartEntity
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
