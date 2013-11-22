@@ -97,6 +97,7 @@ public class LineFunction2D implements Function2D, Serializable {
      *
      * @return The value.
      */
+    @Override
     public double getValue(double x) {
         return this.a + this.b * x;
     }
@@ -108,6 +109,7 @@ public class LineFunction2D implements Function2D, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof LineFunction2D)) {
             return false;
@@ -127,6 +129,7 @@ public class LineFunction2D implements Function2D, Serializable {
      * 
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 29;
         result = HashUtilities.hashCode(result, this.a);

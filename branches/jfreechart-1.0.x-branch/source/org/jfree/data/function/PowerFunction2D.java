@@ -96,6 +96,7 @@ public class PowerFunction2D implements Function2D, Serializable {
      *
      * @return The value.
      */
+    @Override
     public double getValue(double x) {
         return this.a * Math.pow(x, this.b);
     }
@@ -107,6 +108,7 @@ public class PowerFunction2D implements Function2D, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof PowerFunction2D)) {
             return false;
@@ -126,6 +128,7 @@ public class PowerFunction2D implements Function2D, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 29;
         result = HashUtilities.hashCode(result, this.a);

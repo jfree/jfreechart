@@ -96,6 +96,7 @@ public class PolynomialFunction2D implements Function2D, Serializable {
      *
      * @return The value.
      */
+    @Override
     public double getValue(double x) {
         double y = 0;
         for(int i = 0; i < coefficients.length; i++){
@@ -111,6 +112,7 @@ public class PolynomialFunction2D implements Function2D, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof PolynomialFunction2D)) {
             return false;
@@ -124,6 +126,7 @@ public class PolynomialFunction2D implements Function2D, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return HashUtilities.hashCodeForDoubleArray(this.coefficients);
     }
