@@ -119,6 +119,7 @@ public class CustomCategoryURLGenerator implements CategoryURLGenerator,
      *
      * @return A string containing the URL (possibly <code>null</code>).
      */
+    @Override
     public String generateURL(CategoryDataset dataset, int series, int item) {
         return getURL(series, item);
     }
@@ -143,6 +144,7 @@ public class CustomCategoryURLGenerator implements CategoryURLGenerator,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -187,6 +189,7 @@ public class CustomCategoryURLGenerator implements CategoryURLGenerator,
      *
      * @throws CloneNotSupportedException if there is a problem with cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         CustomCategoryURLGenerator clone
                 = (CustomCategoryURLGenerator) super.clone();
