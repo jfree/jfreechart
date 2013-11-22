@@ -321,6 +321,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      *
      * @return The shape of the dial's window.
      */
+    @Override
     public Shape getWindow(Rectangle2D frame) {
 
         Rectangle2D innerFrame = DialPlot.rectangleByRadius(frame,
@@ -379,6 +380,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      * @param frame  the dial's reference frame.
      * @param view  the dial's view rectangle.
      */
+    @Override
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
             Rectangle2D view) {
 
@@ -404,6 +406,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      *
      * @return <code>false</code>.
      */
+    @Override
     public boolean isClippedToWindow() {
         return false;
     }
@@ -415,6 +418,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -452,6 +456,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      *
      * @return The hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         long temp = Double.doubleToLongBits(this.startAngle);
@@ -478,6 +483,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      * @throws CloneNotSupportedException if any attribute of this instance
      *     cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

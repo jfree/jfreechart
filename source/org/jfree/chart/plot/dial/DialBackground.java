@@ -163,6 +163,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      *
      * @return <code>true</code>.
      */
+    @Override
     public boolean isClippedToWindow() {
         return true;
     }
@@ -177,6 +178,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      * @param frame  the dial frame (ignored here).
      * @param view  the view rectangle (<code>null</code> not permitted).
      */
+    @Override
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
             Rectangle2D view) {
 
@@ -196,6 +198,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -219,6 +222,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      *
      * @return The hash code.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         result = 37 * result + HashUtilities.hashCodeForPaint(this.paint);
@@ -234,6 +238,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      * @throws CloneNotSupportedException if some attribute of this instance
      *     cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
