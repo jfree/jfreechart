@@ -251,6 +251,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @return The item count.
      */
+    @Override
     public int getItemCount() {
         return this.data.size();
     }
@@ -571,7 +572,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             this.timePeriodClass = c;
         }
         else if (!this.timePeriodClass.equals(c)) {
-            StringBuffer b = new StringBuffer();
+            StringBuilder b = new StringBuilder();
             b.append("You are trying to add data where the time period class ");
             b.append("is ");
             b.append(item.getPeriod().getClass().getName());
@@ -601,7 +602,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
                     added = true;
                 }
                 else {
-                    StringBuffer b = new StringBuffer();
+                    StringBuilder b = new StringBuilder();
                     b.append("You are attempting to add an observation for ");
                     b.append("the time period ");
                     b.append(item.getPeriod().toString());
@@ -1027,6 +1028,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @throws CloneNotSupportedException not thrown by this class, but
      *         subclasses may differ.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         TimeSeries clone = (TimeSeries) super.clone();
         clone.data = (List) ObjectUtilities.deepClone(this.data);
@@ -1127,6 +1129,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1168,6 +1171,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @return The hashcode
      */
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         result = 29 * result + (this.domain != null ? this.domain.hashCode()
