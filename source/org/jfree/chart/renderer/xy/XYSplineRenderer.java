@@ -59,6 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
@@ -172,9 +173,10 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Returns the resolution of splines.
+     * Returns the number of line segments used to approximate the spline
+     * curve between data points.
      *
-     * @return Number of line segments between points.
+     * @return The number of line segments.
      *
      * @see #setPrecision(int)
      */
@@ -203,7 +205,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      *
      * @return The type of fill (never <code>null</code>).
      *
-     * @see #setFillMode(FillType)
+     * @see #setFillType(FillType) 
      * 
      * @since 1.0.17
      */
