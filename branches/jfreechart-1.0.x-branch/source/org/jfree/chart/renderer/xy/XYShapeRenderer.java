@@ -342,6 +342,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
      */
+    @Override
     public Range findDomainBounds(XYDataset dataset) {
         if (dataset == null) {
             return null;
@@ -364,6 +365,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @return The range (<code>null</code> if the dataset is <code>null</code>
      *         or empty).
      */
+    @Override
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset == null) {
             return null;
@@ -399,6 +401,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      *
      * @return <code>2</code>.
      */
+    @Override
     public int getPassCount() {
         return 2;
     }
@@ -419,12 +422,13 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @param crosshairState  the crosshair state.
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, XYItemRendererState state,
             Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
             ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
             int series, int item, CrosshairState crosshairState, int pass) {
 
-        Shape hotspot = null;
+        Shape hotspot;
         EntityCollection entities = null;
         if (info != null) {
             entities = info.getOwner().getEntityCollection();
@@ -507,7 +511,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @return The paint.
      */
     protected Paint getPaint(XYDataset dataset, int series, int item) {
-        Paint p = null;
+        Paint p;
         if (dataset instanceof XYZDataset) {
             double z = ((XYZDataset) dataset).getZValue(series, item);
             p = this.paintScale.getPaint(z);
@@ -537,6 +541,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -577,6 +582,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @throws CloneNotSupportedException if there is a problem creating the
      *     clone.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         XYShapeRenderer clone = (XYShapeRenderer) super.clone();
         if (this.paintScale instanceof PublicCloneable) {

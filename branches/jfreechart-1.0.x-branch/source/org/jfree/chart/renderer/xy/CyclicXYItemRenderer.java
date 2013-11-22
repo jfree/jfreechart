@@ -140,18 +140,11 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
      *                        (<code>null</code> permitted).
      * @param pass  the current pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset,
-                         int series,
-                         int item,
-                         CrosshairState crosshairState,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, XYItemRendererState state, 
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         if ((!getPlotLines()) || ((!(domainAxis instanceof CyclicNumberAxis))
                 && (!(rangeAxis instanceof CyclicNumberAxis))) || (item <= 0)) {
@@ -357,6 +350,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @return The domain order.
          */
+        @Override
         public DomainOrder getDomainOrder() {
             return DomainOrder.NONE;
         }
@@ -368,6 +362,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @return The item count.
          */
+        @Override
         public int getItemCount(int series) {
             return this.x.length;
         }
@@ -380,6 +375,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @return The x-value.
          */
+        @Override
         public Number getX(int series, int item) {
             return this.x[item];
         }
@@ -393,11 +389,12 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @return The x-value.
          */
+        @Override
         public double getXValue(int series, int item) {
             double result = Double.NaN;
-            Number x = getX(series, item);
-            if (x != null) {
-                result = x.doubleValue();
+            Number xx = getX(series, item);
+            if (xx != null) {
+                result = xx.doubleValue();
             }
             return result;
         }
@@ -410,6 +407,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @return The y-value.
          */
+        @Override
         public Number getY(int series, int item) {
             return this.y[item];
         }
@@ -423,11 +421,12 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @return The y-value.
          */
+        @Override
         public double getYValue(int series, int item) {
             double result = Double.NaN;
-            Number y = getY(series, item);
-            if (y != null) {
-                result = y.doubleValue();
+            Number yy = getY(series, item);
+            if (yy != null) {
+                result = yy.doubleValue();
             }
             return result;
         }
@@ -437,6 +436,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @return The series count.
          */
+        @Override
         public int getSeriesCount() {
             return this.delegateSet.getSeriesCount();
         }
@@ -448,6 +448,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @return The series name.
          */
+        @Override
         public Comparable getSeriesKey(int series) {
             return this.delegateSet.getSeriesKey(series);
         }
@@ -459,6 +460,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @return The index.
          */
+        @Override
         public int indexOf(Comparable seriesName) {
             return this.delegateSet.indexOf(seriesName);
         }
@@ -468,6 +470,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @param listener  ignored.
          */
+        @Override
         public void addChangeListener(DatasetChangeListener listener) {
             // unused in parent
         }
@@ -477,6 +480,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @param listener  ignored.
          */
+        @Override
         public void removeChangeListener(DatasetChangeListener listener) {
             // unused in parent
         }
@@ -486,6 +490,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @return The dataset group.
          */
+        @Override
         public DatasetGroup getGroup() {
             // unused but must return something, so while we are at it...
             return this.delegateSet.getGroup();
@@ -496,6 +501,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          *
          * @param group  ignored.
          */
+        @Override
         public void setGroup(DatasetGroup group) {
             // unused in parent
         }

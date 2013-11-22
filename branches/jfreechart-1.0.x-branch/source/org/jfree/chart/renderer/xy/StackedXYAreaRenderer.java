@@ -325,6 +325,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      * @return A state object that should be passed to subsequent calls to the
      *         drawItem() method.
      */
+    @Override
     public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
             XYPlot plot, XYDataset data, PlotRenderingInfo info) {
 
@@ -340,6 +341,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      *
      * @return 2.
      */
+    @Override
     public int getPassCount() {
         return 2;
     }
@@ -356,6 +358,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      * @throws ClassCastException if <code>dataset</code> is not an instance
      *         of {@link TableXYDataset}.
      */
+    @Override
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset != null) {
             return DatasetUtilities.findStackedRangeBounds(
@@ -387,6 +390,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      *         <code>StackedXYAreaRendererState</code> or <code>dataset</code>
      *         is not an instance of {@link TableXYDataset}.
      */
+    @Override
     public void drawItem(Graphics2D g2, XYItemRendererState state,
             Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
             ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
@@ -631,6 +635,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -655,6 +660,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      *
      * @throws CloneNotSupportedException if the renderer cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

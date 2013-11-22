@@ -287,6 +287,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      *
      * @see #findRangeBounds(XYDataset)
      */
+    @Override
     public Range findDomainBounds(XYDataset dataset) {
         if (dataset == null) {
             return null;
@@ -310,6 +311,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      *
      * @see #findDomainBounds(XYDataset)
      */
+    @Override
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset != null) {
             Range r = DatasetUtilities.findRangeBounds(dataset, false);
@@ -342,6 +344,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @param crosshairState  the crosshair state.
      * @param pass  the pass index.
      */
+    @Override
     public void drawItem(Graphics2D g2, XYItemRendererState state,
             Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
             ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
@@ -400,6 +403,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -431,6 +435,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @throws CloneNotSupportedException if there is a problem creating the
      *     clone.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         XYBlockRenderer clone = (XYBlockRenderer) super.clone();
         if (this.paintScale instanceof PublicCloneable) {
