@@ -62,6 +62,7 @@ public class StandardURLTagFragmentGenerator
      *
      * @return The formatted text
      */
+    @Override
     public String generateURLFragment(String urlText) {
         // the URL text should already have been escaped by the URL generator
         return " href=\"" + urlText + "\"";

@@ -27,7 +27,7 @@
  * --------------------------------------------
  * DynamicDriveToolTipTagFragmentGenerator.java
  * --------------------------------------------
- * (C) Copyright 2003-2009, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2013, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -83,6 +83,7 @@ public class DynamicDriveToolTipTagFragmentGenerator
      *
      * @return The formatted HTML area tag attribute(s).
      */
+    @Override
     public String generateToolTipFragment(String toolTipText) {
         return " onMouseOver=\"return stm(['"
             + ImageMapUtilities.javascriptEscape(this.title) + "','"
