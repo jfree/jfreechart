@@ -325,6 +325,7 @@ public abstract class Title extends AbstractBlock
      * @param area  the area allocated for the title (subclasses should not
      *              draw outside this area).
      */
+    @Override
     public abstract void draw(Graphics2D g2, Rectangle2D area);
 
     /**
@@ -339,6 +340,7 @@ public abstract class Title extends AbstractBlock
      * @throws CloneNotSupportedException not thrown by this class, but it may
      *         be thrown by subclasses.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         Title duplicate = (Title) super.clone();
         duplicate.listenerList = new EventListenerList();
@@ -390,6 +392,7 @@ public abstract class Title extends AbstractBlock
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -421,6 +424,7 @@ public abstract class Title extends AbstractBlock
      *
      * @return The hashcode.
      */
+    @Override
     public int hashCode() {
         int result = 193;
         result = 37 * result + ObjectUtilities.hashCode(this.position);

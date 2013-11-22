@@ -180,6 +180,7 @@ public class ImageTitle extends Title {
      *
      * @return The block size (in Java2D units, never <code>null</code>).
      */
+    @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         Size2D s = new Size2D(this.image.getWidth(null),
                 this.image.getHeight(null));
@@ -194,6 +195,7 @@ public class ImageTitle extends Title {
      * @param g2  the graphics device.
      * @param area  the area allocated for the title.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
         RectangleEdge position = getPosition();
         if (position == RectangleEdge.TOP || position == RectangleEdge.BOTTOM) {
@@ -219,12 +221,11 @@ public class ImageTitle extends Title {
      * @return The size of the area used by the title.
      */
     protected Size2D drawHorizontal(Graphics2D g2, Rectangle2D chartArea) {
-
-        double startY = 0.0;
-        double topSpace = 0.0;
-        double bottomSpace = 0.0;
-        double leftSpace = 0.0;
-        double rightSpace = 0.0;
+        double startY;
+        double topSpace;
+        double bottomSpace;
+        double leftSpace;
+        double rightSpace;
 
         double w = getWidth();
         double h = getHeight();
@@ -274,7 +275,7 @@ public class ImageTitle extends Title {
      */
     protected Size2D drawVertical(Graphics2D g2, Rectangle2D chartArea) {
 
-        double startX = 0.0;
+        double startX;
         double topSpace = 0.0;
         double bottomSpace = 0.0;
         double leftSpace = 0.0;
@@ -329,6 +330,7 @@ public class ImageTitle extends Title {
      *
      * @return Always <code>null</code>.
      */
+    @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         draw(g2, area);
         return null;
@@ -348,6 +350,7 @@ public class ImageTitle extends Title {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
