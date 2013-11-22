@@ -85,6 +85,7 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
      *
      * @see #setQuality(float)
      */
+    @Override
     public float getQuality() {
         return this.quality;
     }
@@ -97,6 +98,7 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
      *
      * @see #getQuality()
      */
+    @Override
     public void setQuality(float quality) {
         if (quality < 0.0f || quality > 1.0f) {
             throw new IllegalArgumentException(
@@ -111,6 +113,7 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
      *
      * @return <code>false</code>.
      */
+    @Override
     public boolean isEncodingAlpha() {
         return false;
     }
@@ -121,6 +124,7 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
      *
      * @param encodingAlpha  ignored.
      */
+    @Override
     public void setEncodingAlpha(boolean encodingAlpha) {
         //  No op
     }
@@ -137,6 +141,7 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
      * @throws NullPointerException if <code>bufferedImage</code> is
      *     <code>null</code>.
      */
+    @Override
     public byte[] encode(BufferedImage bufferedImage) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         encode(bufferedImage, outputStream);
@@ -155,6 +160,7 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
      * @throws NullPointerException if <code>bufferedImage</code> is
      *     <code>null</code>.
      */
+    @Override
     public void encode(BufferedImage bufferedImage, OutputStream outputStream)
             throws IOException {
         ParamChecks.nullNotPermitted(bufferedImage, "bufferedImage");

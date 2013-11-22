@@ -62,6 +62,7 @@ public class SunPNGEncoderAdapter implements ImageEncoder {
      *
      * @return A float representing the quality.
      */
+    @Override
     public float getQuality() {
         return 0.0f;
     }
@@ -72,6 +73,7 @@ public class SunPNGEncoderAdapter implements ImageEncoder {
      *
      * @param quality  A float representing the quality.
      */
+    @Override
     public void setQuality(float quality) {
         //  No op
     }
@@ -81,6 +83,7 @@ public class SunPNGEncoderAdapter implements ImageEncoder {
      *
      * @return Whether the encoder is encoding alpha transparency.
      */
+    @Override
     public boolean isEncodingAlpha() {
         return false;
     }
@@ -92,6 +95,7 @@ public class SunPNGEncoderAdapter implements ImageEncoder {
      * @param encodingAlpha  Whether the encoder should encode alpha
      *                       transparency.
      */
+    @Override
     public void setEncodingAlpha(boolean encodingAlpha) {
         //  No op
     }
@@ -105,6 +109,7 @@ public class SunPNGEncoderAdapter implements ImageEncoder {
      *
      * @throws IOException
      */
+    @Override
     public byte[] encode(BufferedImage bufferedImage) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         encode(bufferedImage, outputStream);
@@ -118,6 +123,7 @@ public class SunPNGEncoderAdapter implements ImageEncoder {
      * @param outputStream  The OutputStream to write the encoded image to.
      * @throws IOException
      */
+    @Override
     public void encode(BufferedImage bufferedImage, OutputStream outputStream)
             throws IOException {
         ParamChecks.nullNotPermitted(bufferedImage, "bufferedImage");
