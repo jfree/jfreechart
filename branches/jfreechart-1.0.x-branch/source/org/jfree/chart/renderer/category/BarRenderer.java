@@ -739,11 +739,10 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      *
      * @return The renderer state.
      */
-    public CategoryItemRendererState initialise(Graphics2D g2,
-                                                Rectangle2D dataArea,
-                                                CategoryPlot plot,
-                                                int rendererIndex,
-                                                PlotRenderingInfo info) {
+    @Override
+    public CategoryItemRendererState initialise(Graphics2D g2, 
+            Rectangle2D dataArea, CategoryPlot plot, int rendererIndex,
+            PlotRenderingInfo info) {
 
         CategoryItemRendererState state = super.initialise(g2, dataArea, plot,
                 rendererIndex, info);
@@ -823,15 +822,12 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      *
      * @return The coordinate.
      */
-    protected double calculateBarW0(CategoryPlot plot,
-                                    PlotOrientation orientation,
-                                    Rectangle2D dataArea,
-                                    CategoryAxis domainAxis,
-                                    CategoryItemRendererState state,
-                                    int row,
-                                    int column) {
+    protected double calculateBarW0(CategoryPlot plot, 
+            PlotOrientation orientation, Rectangle2D dataArea, 
+            CategoryAxis domainAxis, CategoryItemRendererState state,
+            int row, int column) {
         // calculate bar width...
-        double space = 0.0;
+        double space;
         if (orientation == PlotOrientation.HORIZONTAL) {
             space = dataArea.getHeight();
         }
@@ -895,6 +891,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @return The range (or <code>null</code> if the dataset is
      *         <code>null</code> or empty).
      */
+    @Override
     public Range findRangeBounds(CategoryDataset dataset,
             boolean includeInterval) {
         if (dataset == null) {
@@ -917,6 +914,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      *
      * @return The legend item (possibly <code>null</code>).
      */
+    @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
 
         CategoryPlot cp = getPlot();
@@ -981,16 +979,11 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         CategoryItemRendererState state,
-                         Rectangle2D dataArea,
-                         CategoryPlot plot,
-                         CategoryAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         CategoryDataset dataset,
-                         int row,
-                         int column,
-                         int pass) {
+    @Override
+    public void drawItem(Graphics2D g2, CategoryItemRendererState state,
+            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+            ValueAxis rangeAxis, CategoryDataset dataset, int row,
+            int column, int pass) {
 
         // nothing is drawn if the row index is not included in the list with
         // the indices of the visible rows...
@@ -1054,7 +1047,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         }
 
         // draw the bar...
-        Rectangle2D bar = null;
+        Rectangle2D bar;
         if (orientation == PlotOrientation.HORIZONTAL) {
             bar = new Rectangle2D.Double(barL0 - barL0Adj, barW0,
                     barLength + barLengthAdj, state.getBarWidth());
@@ -1143,7 +1136,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         g2.setPaint(paint);
 
         // find out where to place the label...
-        ItemLabelPosition position = null;
+        ItemLabelPosition position;
         if (!negative) {
             position = getPositiveItemLabelPosition(row, column);
         }
@@ -1328,6 +1321,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
