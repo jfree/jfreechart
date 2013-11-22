@@ -223,6 +223,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -248,6 +249,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      * @throws CloneNotSupportedException  if there is a problem cloning the
      *                                     map.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         KeyToGroupMap result = (KeyToGroupMap) super.clone();
         result.defaultGroup
