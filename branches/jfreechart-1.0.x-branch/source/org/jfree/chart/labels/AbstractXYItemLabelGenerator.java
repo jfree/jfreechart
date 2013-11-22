@@ -234,7 +234,7 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      * @return The label (possibly <code>null</code>).
      */
     public String generateLabelString(XYDataset dataset, int series, int item) {
-        String result = null;
+        String result;
         Object[] items = createItemArray(dataset, series, item);
         result = MessageFormat.format(this.formatString, items);
         return result;
@@ -297,6 +297,7 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -331,6 +332,7 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 127;
         result = HashUtilities.hashCode(result, this.formatString);
@@ -348,6 +350,7 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         AbstractXYItemLabelGenerator clone
                 = (AbstractXYItemLabelGenerator) super.clone();

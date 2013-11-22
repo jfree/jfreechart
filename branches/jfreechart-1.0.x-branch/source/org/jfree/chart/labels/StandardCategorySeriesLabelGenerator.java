@@ -94,6 +94,7 @@ public class StandardCategorySeriesLabelGenerator implements
      *
      * @return A series label.
      */
+    @Override
     public String generateLabel(CategoryDataset dataset, int series) {
         ParamChecks.nullNotPermitted(dataset, "dataset");
         String label = MessageFormat.format(this.formatPattern,
@@ -123,6 +124,7 @@ public class StandardCategorySeriesLabelGenerator implements
      *
      * @throws CloneNotSupportedException if cloning is not supported.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -134,6 +136,7 @@ public class StandardCategorySeriesLabelGenerator implements
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -154,6 +157,7 @@ public class StandardCategorySeriesLabelGenerator implements
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = 127;
         result = HashUtilities.hashCode(result, this.formatPattern);

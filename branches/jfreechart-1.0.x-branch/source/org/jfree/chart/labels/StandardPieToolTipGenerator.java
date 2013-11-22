@@ -154,6 +154,7 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
      *
      * @return The tool tip text (possibly <code>null</code>).
      */
+    @Override
     public String generateToolTip(PieDataset dataset, Comparable key) {
         return generateSectionLabel(dataset, key);
     }
@@ -165,6 +166,7 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
      *
      * @throws CloneNotSupportedException  should not happen.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

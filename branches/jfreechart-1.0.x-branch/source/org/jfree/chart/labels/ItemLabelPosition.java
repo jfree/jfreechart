@@ -158,6 +158,7 @@ public class ItemLabelPosition implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

@@ -174,6 +174,7 @@ public class StandardPieSectionLabelGenerator
      *
      * @return The label (possibly <code>null</code>).
      */
+    @Override
     public String generateSectionLabel(PieDataset dataset, Comparable key) {
         return super.generateSectionLabel(dataset, key);
     }
@@ -205,6 +206,7 @@ public class StandardPieSectionLabelGenerator
      *
      * @return An attributed label (possibly <code>null</code>).
      */
+    @Override
     public AttributedString generateAttributedSectionLabel(PieDataset dataset,
                                                            Comparable key) {
         return getAttributedLabel(dataset.getIndex(key));
@@ -217,6 +219,7 @@ public class StandardPieSectionLabelGenerator
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -242,6 +245,7 @@ public class StandardPieSectionLabelGenerator
      *
      * @throws CloneNotSupportedException  should not happen.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

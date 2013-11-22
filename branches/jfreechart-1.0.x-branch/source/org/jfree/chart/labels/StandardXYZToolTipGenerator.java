@@ -156,6 +156,7 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
      *
      * @return The tooltip text (possibly <code>null</code>).
      */
+    @Override
     public String generateToolTip(XYZDataset dataset, int series, int item) {
         return generateLabelString(dataset, series, item);
     }
@@ -169,8 +170,9 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
      *
      * @return The label (possibly <code>null</code>).
      */
+    @Override
     public String generateLabelString(XYDataset dataset, int series, int item) {
-        String result = null;
+        String result;
         Object[] items = createItemArray((XYZDataset) dataset, series, item);
         result = MessageFormat.format(getFormatString(), items);
         return result;
@@ -229,6 +231,7 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
