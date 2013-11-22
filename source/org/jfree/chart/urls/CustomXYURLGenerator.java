@@ -128,6 +128,7 @@ public class CustomXYURLGenerator implements XYURLGenerator, Cloneable,
      *
      * @return A string containing the URL (possibly <code>null</code>).
      */
+    @Override
     public String generateURL(XYDataset dataset, int series, int item) {
         return getURL(series, item);
     }
@@ -153,6 +154,7 @@ public class CustomXYURLGenerator implements XYURLGenerator, Cloneable,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -199,6 +201,7 @@ public class CustomXYURLGenerator implements XYURLGenerator, Cloneable,
      *
      * @throws CloneNotSupportedException if there is a problem with cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         CustomXYURLGenerator clone = (CustomXYURLGenerator) super.clone();
         clone.urlSeries = new java.util.ArrayList(this.urlSeries);
