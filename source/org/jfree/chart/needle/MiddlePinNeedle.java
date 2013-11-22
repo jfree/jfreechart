@@ -70,6 +70,7 @@ public class MiddlePinNeedle extends MeterNeedle
      * @param rotate  the rotation point.
      * @param angle  the angle.
      */
+    @Override
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
                               Point2D rotate, double angle) {
 
@@ -116,6 +117,7 @@ public class MiddlePinNeedle extends MeterNeedle
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object object) {
         if (object == null) {
             return false;
@@ -134,6 +136,7 @@ public class MiddlePinNeedle extends MeterNeedle
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return super.hashCode();
     }
@@ -146,6 +149,7 @@ public class MiddlePinNeedle extends MeterNeedle
      * @throws CloneNotSupportedException if the <code>MiddlePinNeedle</code>
      *     cannot be cloned (in theory, this should not happen).
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

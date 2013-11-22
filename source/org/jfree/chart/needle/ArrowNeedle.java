@@ -88,11 +88,12 @@ public class ArrowNeedle extends MeterNeedle
      * @param rotate  the rotation point.
      * @param angle  the angle.
      */
+    @Override
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
                               Point2D rotate, double angle) {
 
         Line2D shape = new Line2D.Float();
-        Shape d = null;
+        Shape d;
 
         float x = (float) (plotArea.getMinX() +  (plotArea.getWidth() / 2));
         float minY = (float) plotArea.getMinY();
@@ -138,6 +139,7 @@ public class ArrowNeedle extends MeterNeedle
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -160,6 +162,7 @@ public class ArrowNeedle extends MeterNeedle
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         result = HashUtilities.hashCode(result, this.isArrowAtTop);
@@ -174,6 +177,7 @@ public class ArrowNeedle extends MeterNeedle
      * @throws CloneNotSupportedException if the <code>ArrowNeedle</code>
      *     cannot be cloned (in theory, this should not happen).
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

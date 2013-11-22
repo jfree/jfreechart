@@ -73,6 +73,7 @@ public class WindNeedle extends ArrowNeedle
      * @param rotate  the rotation point.
      * @param angle  the angle.
      */
+    @Override
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
                               Point2D rotate, double angle) {
 
@@ -102,6 +103,7 @@ public class WindNeedle extends ArrowNeedle
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object object) {
         if (object == null) {
             return false;
@@ -120,6 +122,7 @@ public class WindNeedle extends ArrowNeedle
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return super.hashCode();
     }
