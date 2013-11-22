@@ -307,6 +307,7 @@ public class LabelBlock extends AbstractBlock
      *
      * @return The block size (in Java2D units, never <code>null</code>).
      */
+    @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         g2.setFont(this.font);
         Size2D s = this.label.calculateDimensions(g2);
@@ -320,6 +321,7 @@ public class LabelBlock extends AbstractBlock
      * @param g2  the graphics device.
      * @param area  the area.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
         draw(g2, area, null);
     }
@@ -333,6 +335,7 @@ public class LabelBlock extends AbstractBlock
      *
      * @return Always <code>null</code>.
      */
+    @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         area = trimMargin(area);
         drawBorder(g2, area);
@@ -376,6 +379,7 @@ public class LabelBlock extends AbstractBlock
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof LabelBlock)) {
             return false;
@@ -412,6 +416,7 @@ public class LabelBlock extends AbstractBlock
      *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
