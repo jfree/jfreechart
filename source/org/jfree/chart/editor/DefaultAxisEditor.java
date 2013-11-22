@@ -394,6 +394,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
      * @param event  information about the event that triggered the call to
      *      this method.
      */
+    @Override
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
         if (command.equals("SelectLabelFont")) {

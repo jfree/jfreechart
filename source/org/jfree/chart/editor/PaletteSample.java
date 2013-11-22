@@ -99,10 +99,9 @@ public class PaletteSample extends JComponent implements ListCellRenderer {
      *
      * @return The renderer.
      */
+    @Override
     public Component getListCellRendererComponent(JList list, Object value,
-                                                  int index,
-                                                  boolean isSelected,
-                                                  boolean cellHasFocus) {
+            int index, boolean isSelected, boolean cellHasFocus) {
         if (value instanceof PaletteSample) {
             PaletteSample in = (PaletteSample) value;
             setPalette(in.getPalette());
@@ -124,6 +123,7 @@ public class PaletteSample extends JComponent implements ListCellRenderer {
      *
      * @return The preferred size.
      */
+    @Override
     public Dimension getPreferredSize() {
         return this.preferredSize;
     }
@@ -133,12 +133,12 @@ public class PaletteSample extends JComponent implements ListCellRenderer {
      *
      * @param g  the graphics device.
      */
+    @Override
     public void paintComponent(Graphics g) {
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(
-            RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF
-        );
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+                RenderingHints.VALUE_ANTIALIAS_OFF);
         Dimension size = getSize();
         Insets insets = getInsets();
         double ww = size.getWidth() - insets.left - insets.right;

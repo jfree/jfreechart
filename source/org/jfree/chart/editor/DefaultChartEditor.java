@@ -238,6 +238,7 @@ class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
      *
      * @param event  a BackgroundPaint action.
      */
+    @Override
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
         if (command.equals("BackgroundPaint")) {
@@ -265,11 +266,10 @@ class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
      *
      * @param chart  the chart.
      */
+    @Override
     public void updateChart(JFreeChart chart) {
-
         this.titleEditor.setTitleProperties(chart);
         this.plotEditor.updatePlotProperties(chart.getPlot());
-
         chart.setAntiAlias(getAntiAlias());
         chart.setBackgroundPaint(getBackgroundPaint());
     }
