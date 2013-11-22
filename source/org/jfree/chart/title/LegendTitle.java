@@ -465,7 +465,7 @@ public class LegendTitle extends Title
      * @return The block.
      */
     protected Block createLegendItemBlock(LegendItem item) {
-        BlockContainer result = null;
+        BlockContainer result;
         LegendGraphic lg = new LegendGraphic(item.getShape(),
                 item.getFillPaint());
         lg.setFillPaintTransformer(item.getFillPaintTransformer());
@@ -525,6 +525,7 @@ public class LegendTitle extends Title
      *
      * @return The block size (in Java2D units, never <code>null</code>).
      */
+    @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         Size2D result = new Size2D();
         fetchLegendItems();
@@ -549,6 +550,7 @@ public class LegendTitle extends Title
      * @param g2  the graphics device.
      * @param area  the available area for the title.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
         draw(g2, area, null);
     }
@@ -563,6 +565,7 @@ public class LegendTitle extends Title
      * @return An {@link org.jfree.chart.block.EntityBlockResult} or
      *         <code>null</code>.
      */
+    @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         Rectangle2D target = (Rectangle2D) area.clone();
         Rectangle2D hotspot = (Rectangle2D) area.clone();
@@ -623,6 +626,7 @@ public class LegendTitle extends Title
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
