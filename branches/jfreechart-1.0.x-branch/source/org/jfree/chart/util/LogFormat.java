@@ -166,6 +166,7 @@ public class LogFormat extends NumberFormat {
      *
      * @return A string buffer containing the formatted value.
      */
+    @Override
     public StringBuffer format(double number, StringBuffer toAppendTo,
             FieldPosition pos) {
         StringBuffer result = new StringBuffer();
@@ -187,6 +188,7 @@ public class LogFormat extends NumberFormat {
      *
      * @return The string buffer.
      */
+    @Override
     public StringBuffer format(long number, StringBuffer toAppendTo,
             FieldPosition pos) {
         StringBuffer result = new StringBuffer();
@@ -207,6 +209,7 @@ public class LogFormat extends NumberFormat {
      *
      * @return Always <code>null</code>.
      */
+    @Override
     public Number parse (String source, ParsePosition parsePosition) {
         return null; // don't bother with parsing
     }
@@ -218,6 +221,7 @@ public class LogFormat extends NumberFormat {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -249,6 +253,7 @@ public class LogFormat extends NumberFormat {
      *
      * @return A clone.
      */
+    @Override
     public Object clone() {
         LogFormat clone = (LogFormat) super.clone();
         clone.formatter = (NumberFormat) this.formatter.clone();
