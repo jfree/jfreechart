@@ -213,6 +213,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      *
      * @param e  the event.
      */
+    @Override
     public void propertyChange(PropertyChangeEvent e) {
         fireOverlayChanged();
     }
@@ -223,6 +224,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @param g2  the graphics target.
      * @param chartPanel  the chart panel.
      */
+    @Override
     public void paintOverlay(Graphics2D g2, ChartPanel chartPanel) {
         Shape savedClip = g2.getClip();
         Rectangle2D dataArea = chartPanel.getScreenDataArea();
@@ -553,6 +555,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -578,6 +581,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @throws java.lang.CloneNotSupportedException if there is some problem
      *     with the cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         CrosshairOverlay clone = (CrosshairOverlay) super.clone();
         clone.xCrosshairs = (List) ObjectUtilities.deepClone(this.xCrosshairs);
