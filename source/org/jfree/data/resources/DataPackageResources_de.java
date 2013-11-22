@@ -54,6 +54,7 @@ public class DataPackageResources_de extends ListResourceBundle {
      *
      * @return The localised resources.
      */
+    @Override
     public Object[][] getContents() {
         return CONTENTS;
     }
