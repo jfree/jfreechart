@@ -218,6 +218,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The item count.
      */
+    @Override
     public int getItemCount(int series) {
         if (series > 0) {
             throw new IllegalArgumentException("Only one series for contour");
@@ -230,6 +231,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The maximum z-value.
      */
+    @Override
     public double getMaxZValue() {
         double zMax = -1.e20;
         for (int k = 0; k < this.zValues.length; k++) {
@@ -245,6 +247,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The minimum z-value.
      */
+    @Override
     public double getMinZValue() {
         double zMin = 1.e20;
         for (int k = 0; k < this.zValues.length; k++) {
@@ -263,6 +266,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The z range.
      */
+    @Override
     public Range getZValueRange(Range x, Range y) {
 
         double minX = x.getLowerBound();
@@ -319,6 +323,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return 1.
      */
+    @Override
     public int getSeriesCount() {
         return 1;
     }
@@ -332,6 +337,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The series name.
      */
+    @Override
     public Comparable getSeriesKey(int series) {
         if (series > 0) {
             throw new IllegalArgumentException("Only one series for contour");
@@ -344,6 +350,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The x values.
      */
+    @Override
     public int[] getXIndices() {
         return this.xIndex;
     }
@@ -353,6 +360,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The x values.
      */
+    @Override
     public Number[] getXValues() {
         return this.xValues;
     }
@@ -366,6 +374,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The x value.
      */
+    @Override
     public Number getX(int series, int item) {
         if (series > 0) {
             throw new IllegalArgumentException("Only one series for contour");
@@ -389,6 +398,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The Y values.
      */
+    @Override
     public Number[] getYValues() {
         return this.yValues;
     }
@@ -402,6 +412,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The Y value.
      */
+    @Override
     public Number getY(int series, int item) {
         if (series > 0) {
             throw new IllegalArgumentException("Only one series for contour");
@@ -414,6 +425,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The Z values.
      */
+    @Override
     public Number[] getZValues() {
         return this.zValues;
     }
@@ -427,6 +439,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The Z value.
      */
+    @Override
     public Number getZ(int series, int item) {
         if (series > 0) {
             throw new IllegalArgumentException("Only one series for contour");
@@ -439,6 +452,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return The X values.
      */
+    @Override
     public int[] indexX() {
         int[] index = new int[this.xValues.length];
         for (int k = 0; k < index.length; k++) {
@@ -495,6 +509,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean isDateAxis(int axisNumber) {
         if (axisNumber < 0 || axisNumber > 2) {
             return false; // bad axisNumber
