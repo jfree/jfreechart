@@ -91,6 +91,7 @@ public class CategoryDatasetHandler extends RootHandler implements DatasetTags {
      *
      * @throws SAXException for errors.
      */
+    @Override
     public void startElement(String namespaceURI,
                              String localName,
                              String qName,
@@ -123,6 +124,7 @@ public class CategoryDatasetHandler extends RootHandler implements DatasetTags {
      *
      * @throws SAXException for errors.
      */
+    @Override
     public void endElement(String namespaceURI,
                            String localName,
                            String qName) throws SAXException {

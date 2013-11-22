@@ -101,6 +101,7 @@ public class CategorySeriesHandler extends DefaultHandler
      *
      * @throws SAXException for errors.
      */
+    @Override
     public void startElement(String namespaceURI,
                              String localName,
                              String qName,
@@ -131,6 +132,7 @@ public class CategorySeriesHandler extends DefaultHandler
      * @param localName  the element name.
      * @param qName  the element name.
      */
+    @Override
     public void endElement(String namespaceURI,
                            String localName,
                            String qName) {

@@ -78,6 +78,7 @@ public class RootHandler extends DefaultHandler implements DatasetTags {
      *
      * @throws SAXException for errors.
      */
+    @Override
     public void characters(char[] ch, int start, int length)
         throws SAXException {
         DefaultHandler handler = getCurrentHandler();
