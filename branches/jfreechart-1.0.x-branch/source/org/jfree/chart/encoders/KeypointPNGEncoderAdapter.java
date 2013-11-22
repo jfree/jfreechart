@@ -69,6 +69,7 @@ public class KeypointPNGEncoderAdapter implements ImageEncoder {
      *
      * @return A float representing the quality.
      */
+    @Override
     public float getQuality() {
         return this.quality;
     }
@@ -81,6 +82,7 @@ public class KeypointPNGEncoderAdapter implements ImageEncoder {
      *
      * @param quality  A float representing the quality.
      */
+    @Override
     public void setQuality(float quality) {
         this.quality = (int) quality;
     }
@@ -90,6 +92,7 @@ public class KeypointPNGEncoderAdapter implements ImageEncoder {
      *
      * @return Whether the encoder is encoding alpha transparency.
      */
+    @Override
     public boolean isEncodingAlpha() {
         return this.encodingAlpha;
     }
@@ -100,6 +103,7 @@ public class KeypointPNGEncoderAdapter implements ImageEncoder {
      * @param encodingAlpha  Whether the encoder should encode alpha
      *                       transparency.
      */
+    @Override
     public void setEncodingAlpha(boolean encodingAlpha) {
         this.encodingAlpha = encodingAlpha;
     }
@@ -111,6 +115,7 @@ public class KeypointPNGEncoderAdapter implements ImageEncoder {
      * @return The byte[] that is the encoded image.
      * @throws IOException
      */
+    @Override
     public byte[] encode(BufferedImage bufferedImage) throws IOException {
         ParamChecks.nullNotPermitted(bufferedImage, "bufferedImage");
         PngEncoder encoder = new PngEncoder(bufferedImage, this.encodingAlpha,
@@ -126,6 +131,7 @@ public class KeypointPNGEncoderAdapter implements ImageEncoder {
      * @param outputStream  The OutputStream to write the encoded image to.
      * @throws IOException
      */
+    @Override
     public void encode(BufferedImage bufferedImage, OutputStream outputStream)
         throws IOException {
         ParamChecks.nullNotPermitted(bufferedImage, "bufferedImage");
