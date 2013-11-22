@@ -142,6 +142,7 @@ public class Outlier implements Comparable {
      *      is less than, equal to, or greater than the specified object.
      *
      */
+    @Override
     public int compareTo(Object o) {
         Outlier outlier = (Outlier) o;
         Point2D p1 = getPoint();
@@ -181,6 +182,7 @@ public class Outlier implements Comparable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -203,6 +205,7 @@ public class Outlier implements Comparable {
      *
      * @return A <code>String</code> representing the outlier.
      */
+    @Override
     public String toString() {
         return "{" + getX() + "," + getY() + "}";
     }

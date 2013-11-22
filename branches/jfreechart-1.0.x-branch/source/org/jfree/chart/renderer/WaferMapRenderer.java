@@ -150,6 +150,7 @@ public class WaferMapRenderer extends AbstractRenderer {
      *
      * @return The drawing supplier.
      */
+    @Override
     public DrawingSupplier getDrawingSupplier() {
         DrawingSupplier result = null;
         WaferMapPlot p = getPlot();

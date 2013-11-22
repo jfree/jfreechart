@@ -86,6 +86,7 @@ public final class AreaRendererEndType implements Serializable {
      *
      * @return The string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
@@ -98,22 +99,19 @@ public final class AreaRendererEndType implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
-
         if (this == obj) {
             return true;
         }
         if (!(obj instanceof AreaRendererEndType)) {
             return false;
         }
-
-        AreaRendererEndType t = (AreaRendererEndType) obj;
-        if (!this.name.equals(t.toString())) {
+        AreaRendererEndType that = (AreaRendererEndType) obj;
+        if (!this.name.equals(that.toString())) {
             return false;
         }
-
         return true;
-
     }
 
     /**
