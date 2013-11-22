@@ -168,6 +168,7 @@ public class CombinedRangeXYPlot extends XYPlot
      *
      * @return The type of plot.
      */
+    @Override
     public String getPlotType() {
         return localizationResources.getString("Combined_Range_XYPlot");
     }
@@ -284,6 +285,7 @@ public class CombinedRangeXYPlot extends XYPlot
      *
      * @return The space required for the axes.
      */
+    @Override
     protected AxisSpace calculateAxisSpace(Graphics2D g2,
                                            Rectangle2D plotArea) {
 
@@ -373,6 +375,7 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param info  collects chart drawing information (<code>null</code>
      *              permitted).
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
             PlotState parentState, PlotRenderingInfo info) {
 
@@ -426,6 +429,7 @@ public class CombinedRangeXYPlot extends XYPlot
      *
      * @return The legend items.
      */
+    @Override
     public LegendItemCollection getLegendItems() {
         LegendItemCollection result = getFixedLegendItems();
         if (result == null) {
@@ -450,6 +454,7 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param info  the plot rendering info (<code>null</code> not permitted).
      * @param source  the source point (<code>null</code> not permitted).
      */
+    @Override
     public void zoomDomainAxes(double factor, PlotRenderingInfo info,
                                Point2D source) {
         zoomDomainAxes(factor, info, source, false);
@@ -463,6 +468,7 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param source  the source point (<code>null</code> not permitted).
      * @param useAnchor  zoom about the anchor point?
      */
+    @Override
     public void zoomDomainAxes(double factor, PlotRenderingInfo info,
                                Point2D source, boolean useAnchor) {
         // delegate 'info' and 'source' argument checks...
@@ -489,6 +495,7 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param info  the plot rendering info (<code>null</code> not permitted).
      * @param source  the source point (<code>null</code> not permitted).
      */
+    @Override
     public void zoomDomainAxes(double lowerPercent, double upperPercent,
                                PlotRenderingInfo info, Point2D source) {
         // delegate 'info' and 'source' argument checks...
@@ -517,6 +524,7 @@ public class CombinedRangeXYPlot extends XYPlot
      *
      * @since 1.0.15
      */
+    @Override
     public void panDomainAxes(double panRange, PlotRenderingInfo info,
             Point2D source) {
 
@@ -564,6 +572,7 @@ public class CombinedRangeXYPlot extends XYPlot
      *
      * @param renderer the new renderer.
      */
+    @Override
     public void setRenderer(XYItemRenderer renderer) {
         super.setRenderer(renderer);  // not strictly necessary, since the
                                       // renderer set for the
@@ -580,6 +589,7 @@ public class CombinedRangeXYPlot extends XYPlot
      *
      * @param orientation  the orientation.
      */
+    @Override
     public void setOrientation(PlotOrientation orientation) {
         super.setOrientation(orientation);
         Iterator iterator = this.subplots.iterator();
@@ -620,6 +630,7 @@ public class CombinedRangeXYPlot extends XYPlot
      *
      * @return The range.
      */
+    @Override
     public Range getDataRange(ValueAxis axis) {
         Range result = null;
         if (this.subplots != null) {
@@ -653,6 +664,7 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param y  y-coordinate, where the click occured.
      * @param info  object containing information about the plot dimensions.
      */
+    @Override
     public void handleClick(int x, int y, PlotRenderingInfo info) {
         Rectangle2D dataArea = info.getDataArea();
         if (dataArea.contains(x, y)) {
@@ -670,6 +682,7 @@ public class CombinedRangeXYPlot extends XYPlot
      *
      * @param event  the event.
      */
+    @Override
     public void plotChanged(PlotChangeEvent event) {
         notifyListeners(event);
     }
@@ -681,6 +694,7 @@ public class CombinedRangeXYPlot extends XYPlot
      *
      * @return <code>true</code> or <code>false</code>.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -706,6 +720,7 @@ public class CombinedRangeXYPlot extends XYPlot
      * @throws CloneNotSupportedException  this class will not throw this
      *         exception, but subclasses (if any) might.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
 
         CombinedRangeXYPlot result = (CombinedRangeXYPlot) super.clone();
