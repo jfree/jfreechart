@@ -325,6 +325,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      *
      * @return The minimum value.
      */
+    @Override
     public double getDomainLowerBound(boolean includeInterval) {
         double result = Double.NaN;
         Range r = getDomainBounds(includeInterval);
@@ -342,6 +343,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      *
      * @return The maximum value.
      */
+    @Override
     public double getDomainUpperBound(boolean includeInterval) {
         double result = Double.NaN;
         Range r = getDomainBounds(includeInterval);
@@ -360,6 +362,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      *
      * @return The range.
      */
+    @Override
     public Range getDomainBounds(boolean includeInterval) {
         // first get the range without the interval, then expand it for the
         // interval width
@@ -379,6 +382,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      *
      * @param e  the event.
      */
+    @Override
     public void datasetChanged(DatasetChangeEvent e) {
         // TODO: by coding the event with some information about what changed
         // in the dataset, we could make the recalculation of the interval
@@ -436,6 +440,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -461,6 +466,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      *
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -470,6 +476,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int hash = 5;
         hash = HashUtilities.hashCode(hash, this.autoWidth);

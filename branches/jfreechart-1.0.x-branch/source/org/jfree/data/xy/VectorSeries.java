@@ -102,6 +102,7 @@ public class VectorSeries extends ComparableObjectSeries {
      *
      * @return The item removed.
      */
+    @Override
     public ComparableObjectItem remove(int index) {
         VectorDataItem result = (VectorDataItem) this.data.remove(index);
         fireSeriesChanged();
@@ -163,6 +164,7 @@ public class VectorSeries extends ComparableObjectSeries {
      *
      * @return The data item.
      */
+    @Override
     public ComparableObjectItem getDataItem(int index) {
         // overridden to make public
         return super.getDataItem(index);

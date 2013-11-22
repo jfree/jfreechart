@@ -56,6 +56,7 @@ public abstract class AbstractXYZDataset extends AbstractXYDataset
      *
      * @return The z-value.
      */
+    @Override
     public double getZValue(int series, int item) {
         double result = Double.NaN;
         Number z = getZ(series, item);

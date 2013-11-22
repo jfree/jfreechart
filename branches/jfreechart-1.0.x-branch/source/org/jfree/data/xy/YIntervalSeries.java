@@ -152,6 +152,7 @@ public class YIntervalSeries extends ComparableObjectSeries {
      *
      * @return The data item.
      */
+    @Override
     public ComparableObjectItem getDataItem(int index) {
         return super.getDataItem(index);
     }

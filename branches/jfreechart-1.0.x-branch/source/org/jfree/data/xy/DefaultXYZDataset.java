@@ -88,6 +88,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @return The series count.
      */
+    @Override
     public int getSeriesCount() {
         return this.seriesList.size();
     }
@@ -103,6 +104,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     specified range.
      */
+    @Override
     public Comparable getSeriesKey(int series) {
         if ((series < 0) || (series >= getSeriesCount())) {
             throw new IllegalArgumentException("Series index out of bounds");
@@ -118,6 +120,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @return The index, or -1.
      */
+    @Override
     public int indexOf(Comparable seriesKey) {
         return this.seriesKeys.indexOf(seriesKey);
     }
@@ -129,6 +132,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @return <code>DomainOrder.NONE</code>.
      */
+    @Override
     public DomainOrder getDomainOrder() {
         return DomainOrder.NONE;
     }
@@ -144,6 +148,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      * @throws IllegalArgumentException if <code>series</code> is not in the
      *     specified range.
      */
+    @Override
     public int getItemCount(int series) {
         if ((series < 0) || (series >= getSeriesCount())) {
             throw new IllegalArgumentException("Series index out of bounds");
@@ -169,6 +174,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @see #getX(int, int)
      */
+    @Override
     public double getXValue(int series, int item) {
         double[][] seriesData = (double[][]) this.seriesList.get(series);
         return seriesData[0][item];
@@ -191,6 +197,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @see #getXValue(int, int)
      */
+    @Override
     public Number getX(int series, int item) {
         return new Double(getXValue(series, item));
     }
@@ -212,6 +219,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @see #getY(int, int)
      */
+    @Override
     public double getYValue(int series, int item) {
         double[][] seriesData = (double[][]) this.seriesList.get(series);
         return seriesData[1][item];
@@ -234,6 +242,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @see #getX(int, int)
      */
+    @Override
     public Number getY(int series, int item) {
         return new Double(getYValue(series, item));
     }
@@ -255,6 +264,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @see #getZ(int, int)
      */
+    @Override
     public double getZValue(int series, int item) {
         double[][] seriesData = (double[][]) this.seriesList.get(series);
         return seriesData[2][item];
@@ -277,6 +287,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @see #getZ(int, int)
      */
+    @Override
     public Number getZ(int series, int item) {
         return new Double(getZValue(series, item));
     }
@@ -352,6 +363,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -390,6 +402,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result;
         result = this.seriesKeys.hashCode();
@@ -406,6 +419,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      *     dataset (for instance, if a non-cloneable object is used for a
      *     series key).
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         DefaultXYZDataset clone = (DefaultXYZDataset) super.clone();
         clone.seriesKeys = new java.util.ArrayList(this.seriesKeys);
