@@ -583,6 +583,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -623,6 +624,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if there is a problem creating the
      *         clone.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         AbstractBlock clone = (AbstractBlock) super.clone();
         clone.bounds = (Rectangle2D) ShapeUtilities.clone(this.bounds);

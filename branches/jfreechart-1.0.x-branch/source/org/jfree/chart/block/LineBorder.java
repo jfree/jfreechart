@@ -118,6 +118,7 @@ public class LineBorder implements BlockFrame, Serializable {
      *
      * @return The insets (never <code>null</code>).
      */
+    @Override
     public RectangleInsets getInsets() {
         return this.insets;
     }
@@ -137,6 +138,7 @@ public class LineBorder implements BlockFrame, Serializable {
      * @param g2  the graphics device.
      * @param area  the area.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
         double w = area.getWidth();
         double h = area.getHeight();
@@ -182,6 +184,7 @@ public class LineBorder implements BlockFrame, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

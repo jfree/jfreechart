@@ -84,6 +84,7 @@ public class GridArrangement implements Arrangement, Serializable {
      * @param block  the block.
      * @param key  the key (<code>null</code> permitted).
      */
+    @Override
     public void add(Block block, Object key) {
         // can safely ignore
     }
@@ -98,6 +99,7 @@ public class GridArrangement implements Arrangement, Serializable {
      *
      * @return The size following the arrangement.
      */
+    @Override
     public Size2D arrange(BlockContainer container, Graphics2D g2,
                           RectangleConstraint constraint) {
         LengthConstraintType w = constraint.getWidthConstraintType();
@@ -418,6 +420,7 @@ public class GridArrangement implements Arrangement, Serializable {
     /**
      * Clears any cached layout information retained by the arrangement.
      */
+    @Override
     public void clear() {
         // nothing to clear
     }
@@ -429,6 +432,7 @@ public class GridArrangement implements Arrangement, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

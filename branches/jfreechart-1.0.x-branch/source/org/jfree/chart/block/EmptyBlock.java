@@ -81,6 +81,7 @@ public class EmptyBlock extends AbstractBlock
      *
      * @return The block size (in Java2D units, never <code>null</code>).
      */
+    @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         Size2D base = new Size2D(calculateTotalWidth(getWidth()),
                 calculateTotalHeight(getHeight()));
@@ -94,6 +95,7 @@ public class EmptyBlock extends AbstractBlock
      * @param g2  the graphics device.
      * @param area  the area.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
         draw(g2, area, null);
     }
@@ -108,6 +110,7 @@ public class EmptyBlock extends AbstractBlock
      *
      * @return Always <code>null</code>.
      */
+    @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         area = trimMargin(area);
         drawBorder(g2, area);
@@ -121,6 +124,7 @@ public class EmptyBlock extends AbstractBlock
      *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

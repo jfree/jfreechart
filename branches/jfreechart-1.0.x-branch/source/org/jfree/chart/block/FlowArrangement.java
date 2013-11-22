@@ -103,6 +103,7 @@ public class FlowArrangement implements Arrangement, Serializable {
      * @param block  the block.
      * @param key  a key that controls the position of the block.
      */
+    @Override
     public void add(Block block, Object key) {
         // since the flow layout is relatively straightforward,
         // no information needs to be recorded here
@@ -120,6 +121,7 @@ public class FlowArrangement implements Arrangement, Serializable {
      *
      * @return The size of the container after arrangement of the contents.
      */
+    @Override
     public Size2D arrange(BlockContainer container, Graphics2D g2,
                           RectangleConstraint constraint) {
 
@@ -410,6 +412,7 @@ public class FlowArrangement implements Arrangement, Serializable {
     /**
      * Clears any cached information.
      */
+    @Override
     public void clear() {
         // no action required.
     }
@@ -421,6 +424,7 @@ public class FlowArrangement implements Arrangement, Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

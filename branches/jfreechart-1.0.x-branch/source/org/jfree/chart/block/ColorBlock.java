@@ -103,6 +103,7 @@ public class ColorBlock extends AbstractBlock implements Block {
      *
      * @return The block size (in Java2D units, never <code>null</code>).
      */
+    @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         return new Size2D(calculateTotalWidth(getWidth()),
                 calculateTotalHeight(getHeight()));
@@ -114,6 +115,7 @@ public class ColorBlock extends AbstractBlock implements Block {
      * @param g2  the graphics device.
      * @param area  the area.
      */
+    @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
         area = trimMargin(area);
         drawBorder(g2, area);
@@ -132,6 +134,7 @@ public class ColorBlock extends AbstractBlock implements Block {
      *
      * @return Always <code>null</code>.
      */
+    @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
         draw(g2, area);
         return null;
@@ -144,6 +147,7 @@ public class ColorBlock extends AbstractBlock implements Block {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;

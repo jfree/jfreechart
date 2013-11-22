@@ -81,6 +81,7 @@ public class BlockParams implements EntityBlockParams {
      *
      * @return A boolean.
      */
+    @Override
     public boolean getGenerateEntities() {
         return this.generateEntities;
     }
