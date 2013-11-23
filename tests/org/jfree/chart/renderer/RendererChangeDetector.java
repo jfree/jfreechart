@@ -84,6 +84,7 @@ public class RendererChangeDetector implements RendererChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void rendererChanged(RendererChangeEvent event) {
         this.notified = true;
     }
