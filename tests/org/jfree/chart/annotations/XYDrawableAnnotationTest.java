@@ -73,6 +73,7 @@ public class XYDrawableAnnotationTest {
          * @param g2  the graphics device.
          * @param area  the area in which to draw.
          */
+        @Override
         public void draw(Graphics2D g2, Rectangle2D area) {
             // do nothing
         }
@@ -81,6 +82,7 @@ public class XYDrawableAnnotationTest {
          * @param obj  the object to test against (<code>null</code> permitted).
          * @return A boolean.
          */
+        @Override
         public boolean equals(Object obj) {
             if (obj == this) {
                 return true;
@@ -97,6 +99,7 @@ public class XYDrawableAnnotationTest {
          *
          * @throws CloneNotSupportedException if there is a problem cloning.
          */
+        @Override
         public Object clone() throws CloneNotSupportedException {
             return super.clone();
         }
@@ -171,8 +174,7 @@ public class XYDrawableAnnotationTest {
     public void testCloning() throws CloneNotSupportedException {
         XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
                 200.0, new TestDrawable());
-        XYDrawableAnnotation a2 = null;
-        a2 = (XYDrawableAnnotation) a1.clone();
+        XYDrawableAnnotation a2 = (XYDrawableAnnotation) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
