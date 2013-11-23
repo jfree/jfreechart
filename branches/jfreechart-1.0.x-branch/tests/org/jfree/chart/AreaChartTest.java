@@ -186,6 +186,7 @@ public class AreaChartTest {
          *
          * @param event  the event.
          */
+        @Override
         public void chartChanged(ChartChangeEvent event) {
             this.flag = true;
         }
