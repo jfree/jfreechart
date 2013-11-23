@@ -63,7 +63,6 @@ import org.junit.Test;
 /**
  * JUnit Tests for the {@link SegmentedTimeline} class.
  */
-@Ignore
 public class SegmentedTimelineTest {
 
     /** These constants control test cycles in the validateXXXX methods. */
@@ -739,7 +738,7 @@ public class SegmentedTimelineTest {
      *
      * @throws ParseException if there is a parsing error.
      */
-    @Test
+    @Ignore
     public void testMondayThroughFridayTranslations() throws ParseException {
         verifyFillInExceptions(this.mondayFridayTimeline, US_HOLIDAYS,
                 DATE_FORMAT);
