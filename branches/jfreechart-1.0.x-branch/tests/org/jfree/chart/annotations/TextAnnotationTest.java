@@ -180,6 +180,7 @@ public class TextAnnotationTest implements AnnotationChangeListener {
      * 
      * @param event  the event. 
      */
+    @Override
     public void annotationChanged(AnnotationChangeEvent event) {
         this.lastEvent = event;  
     }
