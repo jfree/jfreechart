@@ -248,6 +248,7 @@ public class HistogramDatasetTest implements DatasetChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void datasetChanged(DatasetChangeEvent event) {
         this.lastEvent = event;
     }
