@@ -69,6 +69,7 @@ public class OHLCSeriesTest implements SeriesChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void seriesChanged(SeriesChangeEvent event) {
         this.lastEvent = event;
     }

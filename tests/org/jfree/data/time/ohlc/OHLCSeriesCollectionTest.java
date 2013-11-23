@@ -240,6 +240,7 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void datasetChanged(DatasetChangeEvent event) {
         this.lastEvent = event;
     }
