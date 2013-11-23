@@ -61,6 +61,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      *
      * @param event  the last event.
      */
+    @Override
     public void datasetChanged(DatasetChangeEvent event) {
         this.lastEvent = event;
     }

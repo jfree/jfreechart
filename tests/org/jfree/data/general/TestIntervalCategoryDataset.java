@@ -73,6 +73,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @see #getColumnCount()
      */
+    @Override
     public int getRowCount() {
         return this.data.getRowCount();
     }
@@ -84,6 +85,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @see #getRowCount()
      */
+    @Override
     public int getColumnCount() {
         return this.data.getColumnCount();
     }
@@ -99,6 +101,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #addValue(Number, Comparable, Comparable)
      * @see #removeValue(Comparable, Comparable)
      */
+    @Override
     public Number getValue(int row, int column) {
         IntervalDataItem item = (IntervalDataItem) this.data.getObject(row,
                 column);
@@ -119,6 +122,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #getRowKeys()
      * @see #getColumnKey(int)
      */
+    @Override
     public Comparable getRowKey(int row) {
         return this.data.getRowKey(row);
     }
@@ -132,6 +136,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @see #getRowKey(int)
      */
+    @Override
     public int getRowIndex(Comparable key) {
         // defer null argument check
         return this.data.getRowIndex(key);
@@ -144,6 +149,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @see #getRowKey(int)
      */
+    @Override
     public List getRowKeys() {
         return this.data.getRowKeys();
     }
@@ -157,6 +163,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @see #getColumnIndex(Comparable)
      */
+    @Override
     public Comparable getColumnKey(int column) {
         return this.data.getColumnKey(column);
     }
@@ -170,6 +177,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @see #getColumnKey(int)
      */
+    @Override
     public int getColumnIndex(Comparable key) {
         // defer null argument check
         return this.data.getColumnIndex(key);
@@ -182,6 +190,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @see #getColumnKey(int)
      */
+    @Override
     public List getColumnKeys() {
         return this.data.getColumnKeys();
     }
@@ -198,6 +207,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @see #addValue(Number, Comparable, Comparable)
      */
+    @Override
     public Number getValue(Comparable rowKey, Comparable columnKey) {
         IntervalDataItem item = (IntervalDataItem) this.data.getObject(rowKey,
                 columnKey);
@@ -357,6 +367,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -395,6 +406,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return this.data.hashCode();
     }
@@ -407,6 +419,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @throws CloneNotSupportedException if there is a problem cloning the
      *         dataset.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         TestIntervalCategoryDataset clone = (TestIntervalCategoryDataset)
                 super.clone();
@@ -414,6 +427,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
         return clone;
     }
 
+    @Override
     public Number getStartValue(int series, int category) {
         IntervalDataItem item = (IntervalDataItem) this.data.getObject(series,
                 category);
@@ -423,6 +437,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
         return item.getLowerBound();
     }
 
+    @Override
     public Number getStartValue(Comparable series, Comparable category) {
         IntervalDataItem item = (IntervalDataItem) this.data.getObject(series,
                 category);
@@ -432,6 +447,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
         return item.getLowerBound();
     }
 
+    @Override
     public Number getEndValue(int series, int category) {
         IntervalDataItem item = (IntervalDataItem) this.data.getObject(series,
                 category);
@@ -441,6 +457,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
         return item.getUpperBound();
     }
 
+    @Override
     public Number getEndValue(Comparable series, Comparable category) {
         IntervalDataItem item = (IntervalDataItem) this.data.getObject(series,
                 category);
