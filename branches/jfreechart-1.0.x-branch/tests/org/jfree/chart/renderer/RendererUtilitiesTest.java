@@ -118,6 +118,7 @@ public class RendererUtilitiesTest {
     @Test
     public void testFindLiveItemsLowerBound_Ascending() {
         DefaultXYDataset d = new DefaultXYDataset() {
+            @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
                 // only add data in ascending order by x-value
@@ -193,6 +194,7 @@ public class RendererUtilitiesTest {
     @Test
     public void testFindLiveItemsLowerBound_Descending() {
         DefaultXYDataset d = new DefaultXYDataset() {
+            @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
                 // only add data in descending order by x-value
@@ -328,6 +330,7 @@ public class RendererUtilitiesTest {
     @Test
     public void testFindLiveItemsUpperBound_Ascending() {
         DefaultXYDataset d = new DefaultXYDataset() {
+            @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
                 // only add data in ascending order by x-value
@@ -403,6 +406,7 @@ public class RendererUtilitiesTest {
     @Test
     public void testFindLiveItemsUpperBound_Descending() {
         DefaultXYDataset d = new DefaultXYDataset() {
+            @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
                 // only add data in descending order by x-value
