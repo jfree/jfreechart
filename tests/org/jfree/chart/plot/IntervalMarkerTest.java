@@ -66,6 +66,7 @@ public class IntervalMarkerTest implements MarkerChangeListener {
      *
      * @param event  the last event.
      */
+    @Override
     public void markerChanged(MarkerChangeEvent event) {
         this.lastEvent = event;
     }

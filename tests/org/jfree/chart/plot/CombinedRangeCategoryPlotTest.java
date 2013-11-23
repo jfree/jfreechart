@@ -75,6 +75,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void chartChanged(ChartChangeEvent event) {
         this.events.add(event);
     }

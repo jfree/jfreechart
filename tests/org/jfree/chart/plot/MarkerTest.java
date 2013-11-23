@@ -399,6 +399,7 @@ public class MarkerTest implements MarkerChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void markerChanged(MarkerChangeEvent event) {
         this.lastEvent = event;
     }
