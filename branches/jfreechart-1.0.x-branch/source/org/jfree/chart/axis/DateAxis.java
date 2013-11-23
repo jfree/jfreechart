@@ -130,6 +130,7 @@
  * 01-Aug-2013 : Added attributedLabel override to support superscripts,
  *               subscripts and more (DG);
  * 12-Sep-2013 : Prevent exception when zooming in below 1 millisecond (DG);
+ * 23-Nov-2013 : Deprecated DEFAULT_DATE_TICK_UNIT to fix bug #977 (DG);
  * 
  */
 
@@ -190,7 +191,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     public static final double
             DEFAULT_AUTO_RANGE_MINIMUM_SIZE_IN_MILLISECONDS = 2.0;
 
-    /** The default date tick unit. */
+    /** 
+     * The default date tick unit.
+     * 
+     * @deprecated As pointed out in bug #977, the SimpleDateFormat in this
+     *     object uses Calendar which is not thread safe...so you should 
+     *     avoid reusing this instance and create a new instance as required.
+     */
     public static final DateTickUnit DEFAULT_DATE_TICK_UNIT
             = new DateTickUnit(DateTickUnitType.DAY, 1, new SimpleDateFormat());
 
@@ -392,7 +399,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      */
     public DateAxis(String label, TimeZone zone, Locale locale) {
         super(label, DateAxis.createStandardDateTickUnits(zone, locale));
-        setTickUnit(DateAxis.DEFAULT_DATE_TICK_UNIT, false, false);
+        this.tickUnit = new DateTickUnit(DateTickUnitType.DAY, 1, 
+                new SimpleDateFormat());
         setAutoRangeMinimumSize(
                 DEFAULT_AUTO_RANGE_MINIMUM_SIZE_IN_MILLISECONDS);
         setRange(DEFAULT_DATE_RANGE, false, false);
@@ -987,18 +995,12 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 months = calendar.get(Calendar.MONTH);
                 if (this.tickMarkPosition == DateTickMarkPosition.START) {
                     hours = 0;
-                    minutes = 0;
-                    seconds = 0;
                 }
                 else if (this.tickMarkPosition == DateTickMarkPosition.MIDDLE) {
                     hours = 12;
-                    minutes = 0;
-                    seconds = 0;
                 }
                 else {
                     hours = 23;
-                    minutes = 59;
-                    seconds = 59;
                 }
                 calendar.clear(Calendar.MILLISECOND);
                 calendar.set(years, months, value, hours, 0, 0);
