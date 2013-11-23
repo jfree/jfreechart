@@ -1,3 +1,10 @@
+2013-11-23  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Bug #977:
+    * org/jfree/chart/axis/DateAxis.java 
+    (DEFAULT_DATE_TICK_UNIT): Deprecated,
+    (DateAxis): Replace DEFAULT_DATE_TICK_UNIT with new instance.
+
 2013-11-22  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/util/PaintAlpha.java
