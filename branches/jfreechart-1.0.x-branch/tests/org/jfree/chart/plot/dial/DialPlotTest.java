@@ -68,6 +68,7 @@ public class DialPlotTest implements PlotChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void plotChanged(PlotChangeEvent event) {
         this.lastEvent = event;
     }
