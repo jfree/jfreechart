@@ -80,6 +80,7 @@ public class MyPlotChangeListener implements PlotChangeListener {
      *
      * @param e  the event.
      */
+    @Override
     public void plotChanged(PlotChangeEvent e) {
         this.event = e;
     }
