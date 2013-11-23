@@ -364,6 +364,7 @@ public class TimePeriodValuesTest {
          * 
          * @param event  the event.
          */
+        @Override
         public void seriesChanged(SeriesChangeEvent event) {
             this.lastEvent = event;
         }

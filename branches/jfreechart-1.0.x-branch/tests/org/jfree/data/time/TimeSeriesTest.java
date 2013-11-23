@@ -117,6 +117,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void seriesChanged(SeriesChangeEvent event) {
         this.gotSeriesChangeEvent = true;
     }
