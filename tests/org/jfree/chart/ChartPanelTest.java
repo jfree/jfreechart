@@ -71,6 +71,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
      *
      * @param event  the event.
      */
+    @Override
     public void chartChanged(ChartChangeEvent event) {
         this.chartChangeEvents.add(event);
     }
@@ -138,6 +139,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
      *
      * @param event  the event.
      */
+    @Override
     public void chartMouseClicked(ChartMouseEvent event) {
         // ignore
     }
@@ -147,6 +149,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
      *
      * @param event  the event.
      */
+    @Override
     public void chartMouseMoved(ChartMouseEvent event) {
         // ignore
     }

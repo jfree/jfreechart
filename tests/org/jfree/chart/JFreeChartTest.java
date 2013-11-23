@@ -477,6 +477,7 @@ public class JFreeChartTest implements ChartChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void chartChanged(ChartChangeEvent event) {
         this.lastChartChangeEvent = event;
     }

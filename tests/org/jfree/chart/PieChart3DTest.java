@@ -132,6 +132,7 @@ public class PieChart3DTest  {
          *
          * @param event  the event.
          */
+        @Override
         public void chartChanged(ChartChangeEvent event) {
             this.flag = true;
         }
