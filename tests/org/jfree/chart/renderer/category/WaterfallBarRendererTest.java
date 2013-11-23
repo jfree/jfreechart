@@ -155,4 +155,44 @@ public class WaterfallBarRendererTest {
         assertEquals(r1, r2);
     }
 
+//    /**
+//     * Check that the paint object returned for a middle column with 0 
+//     * difference is the positive bar paint object
+//     */
+//    @Test
+// public void testGetSeriesPaintForDifferentValues() {
+//Color firstPaint = Color.cyan;
+//Color positivePaint = Color.green;
+//Color negativePaint = Color.red;
+//Color lastPaint = Color.blue;
+//WaterfallBarRenderer waterfallBarRenderer = new WaterfallBarRenderer(firstPaint, positivePaint, negativePaint, lastPaint);
+//
+//// Sets of tests for making sure the correct paint object is returned
+//// for different scenarios. 
+//	
+//// In the first set, the "firstPaint" object is always returned because
+//// this is first column (regardless of the value of the value difference).
+//assertSame(firstPaint, waterfallBarRenderer.getSeriesPaintObject(0, 1, 0d));
+//assertSame(firstPaint, waterfallBarRenderer.getSeriesPaintObject(0, 2, 1d));
+//assertSame(firstPaint, waterfallBarRenderer.getSeriesPaintObject(0, 2, -1d));
+//
+//// In the second set, the "positivePaint" object is returned for middle
+//// columns which are greater than or equal to 0. 
+//assertSame(positivePaint, waterfallBarRenderer.getSeriesPaintObject(1, 1, 1d));
+//assertSame(positivePaint, waterfallBarRenderer.getSeriesPaintObject(1, 1, 0d));
+//assertSame(positivePaint, waterfallBarRenderer.getSeriesPaintObject(1, 3, 0d));
+//
+//// In the third set, the "negativePaint" object is returned for middle 
+//// columns which are less than zero.
+//assertSame(negativePaint, waterfallBarRenderer.getSeriesPaintObject(1, 1, -0.5d));
+//assertSame(negativePaint, waterfallBarRenderer.getSeriesPaintObject(1, 3, -0.5d));
+//assertSame(negativePaint, waterfallBarRenderer.getSeriesPaintObject(1, 0, -0.5d));
+//		
+//// In the last set, the "lastPaint" object is returned because this is the 
+//// last column (regardless of the value of the value difference).
+//assertSame(lastPaint, waterfallBarRenderer.getSeriesPaintObject(1, 2, 0d));
+//assertSame(lastPaint, waterfallBarRenderer.getSeriesPaintObject(1, 2, 1d));
+//assertSame(lastPaint, waterfallBarRenderer.getSeriesPaintObject(1, 2, -1d));
+//}
+
 }

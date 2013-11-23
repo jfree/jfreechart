@@ -202,10 +202,12 @@ public class BoxAndWhiskerRendererTest {
         DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset() {
 
+            @Override
             public Number getQ1Value(int row, int column) {
                 return null;
             }
 
+            @Override
             public Number getQ1Value(Comparable rowKey, Comparable columnKey) {
                 return null;
             }
@@ -218,7 +220,7 @@ public class BoxAndWhiskerRendererTest {
         CategoryPlot plot = new CategoryPlot(dataset, new CategoryAxis("x"),
                 new NumberAxis("y"), new BoxAndWhiskerRenderer());
         JFreeChart chart = new JFreeChart(plot);
-        boolean success = false;
+        boolean success;
 
         try {
             BufferedImage image = new BufferedImage(200 , 100,
@@ -245,10 +247,12 @@ public class BoxAndWhiskerRendererTest {
         DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset() {
 
+            @Override
             public Number getQ1Value(int row, int column) {
                 return null;
             }
 
+            @Override
             public Number getQ1Value(Comparable rowKey, Comparable columnKey) {
                 return null;
             }
@@ -262,7 +266,7 @@ public class BoxAndWhiskerRendererTest {
                 new NumberAxis("y"), new BoxAndWhiskerRenderer());
         plot.setOrientation(PlotOrientation.HORIZONTAL);
         JFreeChart chart = new JFreeChart(plot);
-        boolean success = false;
+        boolean success;
 
         try {
             BufferedImage image = new BufferedImage(200 , 100,
@@ -334,7 +338,7 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testDrawWithNullMean() {
-        boolean success = false;
+        boolean success;
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
@@ -362,7 +366,7 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testDrawWithNullMedian() {
-        boolean success = false;
+        boolean success;
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
@@ -390,7 +394,7 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testDrawWithNullQ1() {
-        boolean success = false;
+        boolean success;
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
@@ -418,7 +422,7 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testDrawWithNullQ3() {
-        boolean success = false;
+        boolean success;
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
@@ -446,7 +450,7 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testDrawWithNullMinRegular() {
-        boolean success = false;
+        boolean success;
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
@@ -499,7 +503,7 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testDrawWithNullMinOutlier() {
-        boolean success = false;
+        boolean success;
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
@@ -527,7 +531,7 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testDrawWithNullMaxOutlier() {
-        boolean success = false;
+        boolean success;
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();

@@ -66,6 +66,7 @@ public class StackedBarRenderer3DTest {
      * Provide access to protected method.
      */
     static class MyRenderer extends StackedBarRenderer3D {
+        @Override
         public List createStackedValueList(CategoryDataset dataset,
                 Comparable category, int[] includedRows, double base,
                 boolean asPercentages) {
