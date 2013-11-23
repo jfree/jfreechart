@@ -84,6 +84,7 @@ public class PeriodAxisTest implements AxisChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void axisChanged(AxisChangeEvent event) {
         this.lastEvent = event;
     }
