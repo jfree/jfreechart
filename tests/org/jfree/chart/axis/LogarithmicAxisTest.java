@@ -71,6 +71,7 @@ public class LogarithmicAxisTest {
         /* (non-Javadoc)
          * @see org.jfree.chart.axis.LogarithmicAxis#switchedLog10(double)
          */
+        @Override
         protected double switchedLog10(double val) {
             return super.switchedLog10(val);
         }
