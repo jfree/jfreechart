@@ -1,6 +1,6 @@
 JFreeChart 1.0.17
 -----------------
-22 November 2013
+23 November 2013
 
 Enhanced XYSplineRenderer with new area fill (contributed by Klaus Rheinwald),
 added a notify flag to all datasets that extend AbstractDataset, extended 
@@ -11,6 +11,7 @@ improvements) and fixed some minor bugs.
 
 Bug Fixes:
 
+ 977 : Multithreading issue with DateAxis;
 1084 : BorderArrangement.add() possible ClassCastException;
 1099 : XYSeriesCollection.removeSeries(int) does not deregister listener;
 1109 : WaterfallBarRenderer uses wrong color for diff 0.
