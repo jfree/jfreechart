@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.17  *
 ********************************
 
-22 November 2013
+24 November 2013
 
 (C)opyright 2000-2013, by Object Refinery Limited and Contributors.
 
@@ -131,6 +131,12 @@ download when you purchase the JFreeChart Developer Guide.
 The demo application also links to the JFreeSVG and OrsonPDF libraries, to 
 provide export facilities to the SVG and PDF formats.  These fast, lightweight 
 libraries are not free, licenses can be purchased from Object Refinery Limited. 
+
+An additional tab added to the demo application in version 1.0.17 showcases
+Orson Charts 3D, a new library by Object Refinery Limited.  You can find out
+more about Orson Charts at:
+
+    http://www.object-refinery.com/orsoncharts/
 
 ---------------
 8.  LIMITATIONS

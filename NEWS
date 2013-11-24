@@ -1,6 +1,6 @@
 JFreeChart 1.0.17
 -----------------
-23 November 2013
+24 November 2013
 
 Enhanced XYSplineRenderer with new area fill (contributed by Klaus Rheinwald),
 added a notify flag to all datasets that extend AbstractDataset, extended 
@@ -30,8 +30,8 @@ And now a word from our sponsors, Object Refinery Limited...
 >    http://www.object-refinery.com/orsoncharts
 >
 > We've also added a tab to the JFreeChart demo application so you can see 
-> Orson Charts in action.  Orson Charts is not free, but provides a very
-> nice complement to the extensive 2D charting capabilities of JFreeChart.
+> Orson Charts in action.  Orson Charts is not free, but provides a superb
+> complement to the extensive 2D charting capabilities of JFreeChart.
 
 
 JFreeChart 1.0.16
