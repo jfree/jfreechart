@@ -182,7 +182,7 @@ public final class ItemLabelAnchor implements Serializable {
      * Returns <code>true</code> if this object is equal to the specified
      * object, and <code>false</code> otherwise.
      *
-     * @param o  the other object.
+     * @param obj  the other object.
      *
      * @return A boolean.
      */
