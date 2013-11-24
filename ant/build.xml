@@ -240,7 +240,7 @@
         <copy file="${hamcrest.jar}" tofile="${basedir}/distribution/lib/hamcrest-core-1.3.jar" />
         <copy file="${basedir}/lib/${jfreesvg.name}-${jfreesvg.version}.jar" tofile="${basedir}/distribution/lib/${jfreesvg.name}-${jfreesvg.version}.jar" />
         <copy file="${basedir}/lib/${orsonpdf.name}-${orsonpdf.version}.jar" tofile="${basedir}/distribution/lib/${orsonpdf.name}-${orsonpdf.version}.jar" />
-        <copy file="${basedir}/lib/orsoncharts-${orsoncharts.version}.jar" tofile="${basedir}/distribution/lib/orsoncharts-${orsoncharts.version}.jar" />
+        <copy file="${basedir}/lib/orsoncharts-${orsoncharts.version}.jar" tofile="${basedir}/distribution/lib/orsoncharts-${orsoncharts.version}.jar" failonerror="false" />
 
         <!-- copy across ant build files -->
         <copy file="${basedir}/ant/build.xml" tofile="${basedir}/distribution/ant/build.xml" />
