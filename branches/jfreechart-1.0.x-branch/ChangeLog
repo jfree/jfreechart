@@ -1,3 +1,11 @@
+2013-11-27  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/ChartPanel.java 
+    (createPopupMenu): Localise 'Save as' menu items,
+    * org/jfree/chart/LocalisationBundle.properties: Add new items.
+
+----------  JFREECHART 1.0.17 RELEASED ------------------------
+
 2013-11-23  David Gilbert  <david.gilbert@object-refinery.com>
 
     Bug #977:
