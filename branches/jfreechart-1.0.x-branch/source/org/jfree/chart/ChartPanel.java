@@ -3101,21 +3101,25 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             if (separator) {
                 result.addSeparator();
             }
-            JMenu saveSubMenu = new JMenu("Save as");
-            JMenuItem pngItem = new JMenuItem("PNG...");
+            JMenu saveSubMenu = new JMenu(localizationResources.getString(
+                    "Save_as"));
+            JMenuItem pngItem = new JMenuItem(localizationResources.getString(
+                    "PNG..."));
             pngItem.setActionCommand("SAVE_AS_PNG");
             pngItem.addActionListener(this);
             saveSubMenu.add(pngItem);
             
             if (createSVGGraphics2D(10, 10) != null) {
-                JMenuItem svgItem = new JMenuItem("SVG...");
+                JMenuItem svgItem = new JMenuItem(localizationResources.getString(
+                        "SVG..."));
                 svgItem.setActionCommand("SAVE_AS_SVG");
                 svgItem.addActionListener(this);
                 saveSubMenu.add(svgItem);                
             }
             
             if (isOrsonPDFAvailable()) {
-                JMenuItem pdfItem = new JMenuItem("PDF...");
+                JMenuItem pdfItem = new JMenuItem(
+                        localizationResources.getString("PDF..."));
                 pdfItem.setActionCommand("SAVE_AS_PDF");
                 pdfItem.addActionListener(this);
                 saveSubMenu.add(pdfItem);
