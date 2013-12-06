@@ -27,10 +27,11 @@
  * -----------------------
  * XYStepAreaRenderer.java
  * -----------------------
- * (C) Copyright 2003-2009, by Matthias Rose and Contributors.
+ * (C) Copyright 2003-2013, by Matthias Rose and Contributors.
  *
  * Original Author:  Matthias Rose (based on XYAreaRenderer.java);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *                   Lukasz Rzeszotarski;
  *
  * Changes:
  * --------
@@ -50,6 +51,7 @@
  * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
  * 14-May-2008 : Call addEntity() from within drawItem() (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
+ * 05-Dec-2013 : Added setStepPoint() method (LR);
  *
  */
 
@@ -65,7 +67,6 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
@@ -122,6 +123,14 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      * area.
      */
     private double rangeBase;
+    
+    /**
+     * The factor (from 0.0 to 1.0) that determines the position of the
+     * step.
+     *
+     * @since 1.0.18.
+     */
+    private double stepPoint;
 
     /**
      * Constructs a new renderer.
@@ -150,10 +159,8 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      *                          (<code>null</code> permitted).
      * @param urlGenerator  the URL generator (<code>null</code> permitted).
      */
-    public XYStepAreaRenderer(int type,
-                              XYToolTipGenerator toolTipGenerator,
-                              XYURLGenerator urlGenerator) {
-
+    public XYStepAreaRenderer(int type, XYToolTipGenerator toolTipGenerator,
+            XYURLGenerator urlGenerator) {
         super();
         setBaseToolTipGenerator(toolTipGenerator);
         setURLGenerator(urlGenerator);
@@ -169,6 +176,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
             this.shapesVisible = true;
         }
         this.showOutline = false;
+        this.stepPoint = 1.0;
     }
 
     /**
@@ -301,6 +309,42 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     }
 
     /**
+     * Returns the fraction of the domain position between two points on which
+     * the step is drawn.  The default is 1.0d, which means the step is drawn
+     * at the domain position of the second`point. If the stepPoint is 0.5d the
+     * step is drawn at half between the two points.
+     *
+     * @return The fraction of the domain position between two points where the
+     *         step is drawn.
+     *
+     * @see #setStepPoint(double)
+     *
+     * @since 1.0.18
+     */
+    public double getStepPoint() {
+        return stepPoint;
+    }
+     
+    /**
+     * Sets the step point and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param stepPoint  the step point (in the range 0.0 to 1.0)
+     *
+     * @see #getStepPoint()
+     *
+     * @since 1.0.18
+     */
+    public void setStepPoint(double stepPoint) {
+        if (stepPoint < 0.0d || stepPoint > 1.0d) {
+             throw new IllegalArgumentException(
+                     "Requires stepPoint in [0.0;1.0]");
+        }
+        this.stepPoint = stepPoint;
+        fireChangeEvent();
+    }
+
+    /**
      * Initialises the renderer.  Here we calculate the Java2D y-coordinate for
      * zero, since all the bars have their bases fixed at zero.
      *
@@ -325,7 +369,6 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
         return state;
 
     }
-
 
     /**
      * Draws the visual representation of a single data item.
@@ -424,11 +467,15 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
             }
             if (transY0 != transY1) {
                 // not just a horizontal bar but need to perform a 'step'.
+                double transXs = transX0 + (getStepPoint()
+                        * (transX1 - transX0));
                 if (orientation == PlotOrientation.VERTICAL) {
-                    this.pArea.addPoint((int) transX1, (int) transY0);
+                    this.pArea.addPoint((int) transXs, (int) transY0);
+                    this.pArea.addPoint((int) transXs, (int) transY1);
                 }
                 else if (orientation == PlotOrientation.HORIZONTAL) {
-                    this.pArea.addPoint((int) transY0, (int) transX1);
+                    this.pArea.addPoint((int) transY0, (int) transXs);
+                    this.pArea.addPoint((int) transY1, (int) transXs);
                 }
             }
         }
@@ -551,6 +598,9 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
             return false;
         }
         if (this.rangeBase != that.rangeBase) {
+            return false;
+        }
+        if (this.stepPoint != that.stepPoint) {
             return false;
         }
         return super.equals(obj);
