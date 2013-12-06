@@ -39,6 +39,7 @@
  *               testing XYStepAreaRenderer (MR);
  * 14-Feb-2007 : Extended testEquals() (DG);
  * 22-Apr-2008 : Added testPublicCloneable (DG);
+ * 05-Dec-2013 : Add stepPoint to equals() test (DG);
  *
  */
 
@@ -96,6 +97,12 @@ public class XYStepAreaRendererTest {
         assertFalse(r1.equals(r2));
         r2.setRangeBase(-1.0);
         assertTrue(r1.equals(r2));
+        
+        r1.setStepPoint(0.33);
+        assertFalse(r1.equals(r2));
+        r2.setStepPoint(0.33);
+        assertTrue(r1.equals(r2));
+
     }
 
     /**
