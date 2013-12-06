@@ -1,3 +1,14 @@
+2013-12-05  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch from Lukasz Rzeszotarski:
+    * org/jfree/chart/renderer/xy/XYStepAreaRenderer.java
+    (stepPoint): New field,
+    (XYStepAreaRenderer): Initialise stepPoint;
+    (getStepPoint): New method,
+    (setStepPoint): Likewise,
+    (drawItem): Calculate step point,
+    (equals): Add check for stepPoint attribute.
+
 2013-11-27  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/ChartPanel.java 
