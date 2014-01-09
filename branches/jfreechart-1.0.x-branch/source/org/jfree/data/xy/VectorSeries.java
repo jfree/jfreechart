@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * VectorSeries.java
  * -----------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited.
+ * (C) Copyright 2007-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  * 25-May-2007 : Added remove(int) and clear() methods, and moved from the
  *               experimental to the main source tree (DG);
  * 27-Nov-2007 : Removed redundant clear() method (DG);
+ * 09-Jan-2014 : Added add(VectorDataItem, boolean) method (DG);
  *
  */
 
@@ -47,7 +48,6 @@ package org.jfree.data.xy;
 
 import org.jfree.data.ComparableObjectItem;
 import org.jfree.data.ComparableObjectSeries;
-import org.jfree.data.general.SeriesChangeEvent;
 
 /**
  * A list of (x,y, deltaX, deltaY) data items.
@@ -91,7 +91,20 @@ public class VectorSeries extends ComparableObjectSeries {
      * @param deltaY  the vector y.
      */
     public void add(double x, double y, double deltaX, double deltaY) {
-        super.add(new VectorDataItem(x, y, deltaX, deltaY), true);
+        add(new VectorDataItem(x, y, deltaX, deltaY), true);
+    }
+    
+    /**
+     * Adds a data item to the series and, if requested, sends a 
+     * {@link SeriesChangeEvent} to all registered listeners.
+     * 
+     * @param item  the data item (<code>null</code> not permitted).
+     * @param notify  notify listeners?
+     * 
+     * @since 1.0.18
+     */
+    public void add(VectorDataItem item, boolean notify) {
+        super.add(item, notify);
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * YIntervalSeries.java
  * --------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
  * -------
  * 20-Oct-2006 : Version 1 (DG);
  * 20-Feb-2007 : Added getYHighValue() and getYLowValue() methods (DG);
+ * 09-Jan-2014 : Added add(YIntervalDataItem, boolean) method (DG);
  *
  */
 
@@ -80,7 +81,8 @@ public class YIntervalSeries extends ComparableObjectSeries {
     }
 
     /**
-     * Adds a data item to the series.
+     * Adds a data item to the series and sends a {@link SeriesChangeEvent} to 
+     * all registered listeners.
      *
      * @param x  the x-value.
      * @param y  the y-value.
@@ -88,7 +90,20 @@ public class YIntervalSeries extends ComparableObjectSeries {
      * @param yHigh  the upper bound of the y-interval.
      */
     public void add(double x, double y, double yLow, double yHigh) {
-        super.add(new YIntervalDataItem(x, y, yLow, yHigh), true);
+        add(new YIntervalDataItem(x, y, yLow, yHigh), true);
+    }
+    
+    /**
+     * Adds a data item to the series and, if requested, sends a 
+     * {@link SeriesChangeEvent} to all registered listeners.
+     * 
+     * @param item  the data item (<code>null</code> not permitted).
+     * @param notify  notify listeners?
+     * 
+     * @since 1.0.18
+     */
+    public void add(YIntervalDataItem item, boolean notify) {
+        super.add(item, notify);
     }
 
     /**
