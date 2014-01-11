@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -119,6 +119,7 @@
  *               annotations (DG);
  * 06-Oct-2011 : Add utility methods to work with 1.4 API in GeneralPath (MK)
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 11-Jan-2014 : Fix error in fillDomainGridBand method (DG);
  * 
  */
 
@@ -894,7 +895,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         Rectangle2D band;
         if (plot.getOrientation() == PlotOrientation.VERTICAL) {
             band = new Rectangle2D.Double(Math.min(x1, x2), dataArea.getMinY(),
-                    Math.abs(x2 - x1), dataArea.getWidth());
+                    Math.abs(x2 - x1), dataArea.getHeight());
         }
         else {
             band = new Rectangle2D.Double(dataArea.getMinX(), Math.min(x1, x2),
