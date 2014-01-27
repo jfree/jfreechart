@@ -414,7 +414,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * convenience method that converts the string into an 
      * <code>AttributedString</code> using the current font attributes.
      * 
-     * @param label  the label (<code>null</<code> permitted).
+     * @param label  the label (<code>null</code> permitted).
      * 
      * @since 1.0.16
      */
