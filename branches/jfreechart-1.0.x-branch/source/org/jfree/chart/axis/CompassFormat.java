@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,17 @@
  * ------------------
  * CompassFormat.java
  * ------------------
- * (C) Copyright 2003-2008, by Sylvain Vieujot and Contributors.
+ * (C) Copyright 2003-2014, by Sylvain Vieujot and Contributors.
  *
  * Original Author:  Sylvain Vieujot;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *                   Simon Legner (GitHub #298);
  *
  * Changes
  * -------
  * 18-Feb-2004 : Version 1 contributed by Sylvain Vieujot (DG);
- *
+ * 04-Feb-2014 : Make direction strings user-definable (SL);
+ * 
  */
 
 package org.jfree.chart.axis;
@@ -43,35 +45,52 @@ package org.jfree.chart.axis;
 import java.text.FieldPosition;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
+import org.jfree.chart.util.ParamChecks;
 
 /**
  * A formatter that displays numbers as directions.
  */
 public class CompassFormat extends NumberFormat {
 
-    /** North. */
-    private static final String N = "N";
-
-    /** East. */
-    private static final String E = "E";
-
-    /** South. */
-    private static final String S = "S";
-
-    /** West. */
-    private static final String W = "W";
-
     /** The directions. */
-    public static final String[] DIRECTIONS = {
-        N, N + N + E, N + E, E + N + E, E, E + S + E, S + E, S + S + E, S,
-        S + S + W, S + W, W + S + W, W, W + N + W, N + W, N + N + W, N
-    };
+    public final String[] directions;
 
     /**
-     * Creates a new formatter.
+     * Creates a new formatter using English identifiers.
      */
     public CompassFormat() {
+        this("N", "E", "S", "W");
+    }
+
+    /**
+     * Creates a new formatter using the specified identifiers for
+     * the base wind directions.
+     * 
+     * @since 1.0.18
+     */
+    public CompassFormat(String n, String e, String s, String w) {
+        this(new String[] {
+            n, n + n + e, n + e, e + n + e, e, e + s + e, s + e, s + s + e, s,
+            s + s + w, s + w, w + s + w, w, w + n + w, n + w, n + n + w
+        });
+    }
+
+    /**
+     * Creates a new formatter using the specified identifiers.
+     * 
+     * @param directions  an array containing 16 strings representing
+     *     the directions of a compass.
+     * 
+     * @since 1.0.18
+     */
+    public CompassFormat(String[] directions) {
         super();
+        ParamChecks.nullNotPermitted(directions, "directions");
+        if (directions.length != 16) {
+            throw new IllegalArgumentException("The 'directions' array must "
+                    + "contain exactly 16 elements");
+        }
+        this.directions = directions;
     }
 
     /**
@@ -82,14 +101,12 @@ public class CompassFormat extends NumberFormat {
      * @return A string.
      */
     public String getDirectionCode(double direction) {
-
         direction = direction % 360;
         if (direction < 0.0) {
             direction = direction + 360.0;
         }
         int index = ((int) Math.floor(direction / 11.25) + 1) / 2;
-        return DIRECTIONS[index];
-
+        return directions[index];
     }
 
     /**
