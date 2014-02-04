@@ -1,3 +1,27 @@
+2014-02-04  David Gilbert  <david.gilbert@object-refinery.com>
+
+    GitHub #298 by Simon Legner:
+    * org/jfree/chart/axis/CompassFormat.java
+    (CompassFormat()): Delegate to new constructors,
+    (CompassFormat(String, String, String, String)): New constructor,
+    (CompassFormat(String[]): Likewise.
+
+2014-01-11  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
+    (fillDomainGridBand): Fix rectangle dimension for vertical orientation.
+
+2014-01-09  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/data/xy/VectorSeries.java
+    (add(VectorDataItem, boolean)): New method,
+    * org/jfree/data/xy/XIntervalSeries.java
+    (add(XIntervalDataItem, boolean)): New method,
+    * org/jfree/data/xy/XYIntervalSeries.java
+    (add(XYIntervalDataItem, boolean)): New method,
+    * org/jfree/data/xy/YIntervalSeries.java
+    (add(YIntervalDataItem, boolean)): New method.
+
 2013-12-05  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch from Lukasz Rzeszotarski:
