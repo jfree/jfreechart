@@ -1171,11 +1171,9 @@ public class TimeSeriesTest implements SeriesChangeListener {
         Calendar calendar = new GregorianCalendar(tzone, Locale.UK);
         calendar.clear();
         calendar.set(2014, Calendar.FEBRUARY, 23, 6, 0);
-        System.out.println(calendar.getTime());
         long start = calendar.getTimeInMillis();
         calendar.clear();
         calendar.set(2014, Calendar.FEBRUARY, 24, 18, 0);
-        System.out.println(calendar.getTime());
         long end = calendar.getTimeInMillis();
         Range range = new Range(start, end);
         
