@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * TimeSeriesCollectionTest.java
  * -----------------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited.
+ * (C) Copyright 2003-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -50,7 +50,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 import org.jfree.chart.TestUtilities;
 
@@ -395,25 +400,81 @@ public class TimeSeriesCollectionTest {
     @Test
     public void testGetRangeBounds() {
         TimeSeriesCollection dataset = new TimeSeriesCollection();
-        Range r = dataset.getRangeBounds(false);
-        assertNull(r);
+        
+        // when the dataset contains no series, we expect the range to be null
+        assertNull(dataset.getRangeBounds(false));
+        assertNull(dataset.getRangeBounds(true));
 
+        // when the dataset contains one or more series, but those series
+        // contain no items, we still expect the range to be null
         TimeSeries s1 = new TimeSeries("S1");
         dataset.addSeries(s1);
-        r = dataset.getRangeBounds(false);
-        assertTrue(Double.isNaN(r.getLowerBound()));
-        assertTrue(Double.isNaN(r.getUpperBound()));
+        assertNull(dataset.getRangeBounds(false));
+        assertNull(dataset.getRangeBounds(true));
 
+        // tests with values
         s1.add(new Year(2012), 1.0);
-        r = dataset.getRangeBounds(false);
-        assertEquals(1.0, r.getLowerBound(), EPSILON);
-        assertEquals(1.0, r.getUpperBound(), EPSILON);
-
+        assertEquals(new Range(1.0, 1.0), dataset.getRangeBounds(false));
+        assertEquals(new Range(1.0, 1.0), dataset.getRangeBounds(true));
+        s1.add(new Year(2013), -1.0);
+        assertEquals(new Range(-1.0, 1.0), dataset.getRangeBounds(false));
+        assertEquals(new Range(-1.0, 1.0), dataset.getRangeBounds(true));
+        s1.add(new Year(2014), null);
+        assertEquals(new Range(-1.0, 1.0), dataset.getRangeBounds(false));
+        assertEquals(new Range(-1.0, 1.0), dataset.getRangeBounds(true));
+        
+        // adding a second series
         TimeSeries s2 = new TimeSeries("S2");
         dataset.addSeries(s2);
-        r = dataset.getRangeBounds(false);
-        assertEquals(1.0, r.getLowerBound(), EPSILON);
-        assertEquals(1.0, r.getUpperBound(), EPSILON);
+        assertEquals(new Range(-1.0, 1.0), dataset.getRangeBounds(false));
+        assertEquals(new Range(-1.0, 1.0), dataset.getRangeBounds(true));
+        
+        s2.add(new Year(2014), 5.0);
+        assertEquals(new Range(-1.0, 5.0), dataset.getRangeBounds(false));
+        assertEquals(new Range(-1.0, 5.0), dataset.getRangeBounds(true));
+        
+        dataset.removeAllSeries();
+        assertNull(dataset.getRangeBounds(false));
+        assertNull(dataset.getRangeBounds(true));
+        
+        s1 = new TimeSeries("s1");
+        s2 = new TimeSeries("s2");
+        dataset.addSeries(s1);
+        dataset.addSeries(s2);
+        assertNull(dataset.getRangeBounds(false));
+        assertNull(dataset.getRangeBounds(true));
+        
+        s2.add(new Year(2014), 100.0);
+        assertEquals(new Range(100.0, 100.0), dataset.getRangeBounds(false));
+        assertEquals(new Range(100.0, 100.0), dataset.getRangeBounds(true));
     }
 
+    @Test
+    public void testGetRangeBounds2() {
+        TimeZone tzone = TimeZone.getTimeZone("Europe/London");
+        Calendar calendar = new GregorianCalendar(tzone, Locale.UK);
+        calendar.clear();
+        calendar.set(2014, Calendar.FEBRUARY, 23, 6, 0);
+        long start = calendar.getTimeInMillis();
+        calendar.clear();
+        calendar.set(2014, Calendar.FEBRUARY, 24, 18, 0);
+        long end = calendar.getTimeInMillis();
+        Range range = new Range(start, end);
+        
+        TimeSeriesCollection collection = new TimeSeriesCollection(tzone);
+        assertNull(collection.getRangeBounds(Collections.EMPTY_LIST, range, 
+                true));
+        
+        TimeSeries s1 = new TimeSeries("S1");
+        s1.add(new Day(24, 2, 2014), 10.0);
+        collection.addSeries(s1);
+        assertEquals(new Range(10.0, 10.0), collection.getRangeBounds(
+                Arrays.asList("S1"), range, true));
+        collection.setXPosition(TimePeriodAnchor.MIDDLE);
+        assertEquals(new Range(10.0, 10.0), collection.getRangeBounds(
+                Arrays.asList("S1"), range, true));
+        collection.setXPosition(TimePeriodAnchor.END);
+        assertTrue(collection.getRangeBounds(
+                Arrays.asList("S1"), range, true).isNaNRange());
+    }
 }

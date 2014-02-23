@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * XYSeriesCollectionTest.java
  * ---------------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -55,13 +55,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.fail
-        ;
-import org.jfree.chart.TestUtilities;
+import static org.junit.Assert.fail;
 
+import org.jfree.chart.TestUtilities;
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.util.PublicCloneable;
+
 import org.junit.Test;
 
 /**
@@ -349,31 +349,120 @@ public class XYSeriesCollectionTest {
     @Test
     public void testGetRangeBounds() {
         XYSeriesCollection dataset = new XYSeriesCollection();
-        Range r = dataset.getRangeBounds(false);
-        assertNull(r);
-        r = dataset.getRangeBounds(true);
-        assertNull(r);
+        
+        // when the dataset contains no series, we expect the value range to 
+        // be null
+        assertNull(dataset.getRangeBounds(false));
+        assertNull(dataset.getRangeBounds(true));
 
+        // when the dataset contains one or more series, but those series 
+        // contain no items, we expect the value range to be null
         XYSeries series = new XYSeries("S1");
         dataset.addSeries(series);
-        r = dataset.getRangeBounds(false);
-        assertNull(r);
-        r = dataset.getRangeBounds(true);
-        assertNull(r);
+        assertNull(dataset.getRangeBounds(false));
+        assertNull(dataset.getRangeBounds(true));
 
+        // tests with values
         series.add(1.0, 1.1);
-        r = dataset.getRangeBounds(false);
-        assertEquals(new Range(1.1, 1.1), r);
-        r = dataset.getRangeBounds(true);
-        assertEquals(new Range(1.1, 1.1), r);
+        assertEquals(new Range(1.1, 1.1), dataset.getRangeBounds(false));
+        assertEquals(new Range(1.1, 1.1), dataset.getRangeBounds(true));
 
         series.add(-1.0, -1.1);
-        r = dataset.getRangeBounds(false);
-        assertEquals(new Range(-1.1, 1.1), r);
-        r = dataset.getRangeBounds(true);
-        assertEquals(new Range(-1.1, 1.1), r);
+        assertEquals(new Range(-1.1, 1.1), dataset.getRangeBounds(false));
+        assertEquals(new Range(-1.1, 1.1), dataset.getRangeBounds(true));
+        
+        series.add(0.0, null);
+        assertEquals(new Range(-1.1, 1.1), dataset.getRangeBounds(false));
+        assertEquals(new Range(-1.1, 1.1), dataset.getRangeBounds(true));
+        
+        XYSeries s2 = new XYSeries("S2");
+        dataset.addSeries(s2);
+        assertEquals(new Range(-1.1, 1.1), dataset.getRangeBounds(false));
+        assertEquals(new Range(-1.1, 1.1), dataset.getRangeBounds(true));
+        
+        s2.add(2.0, 5.0);
+        assertEquals(new Range(-1.1, 5.0), dataset.getRangeBounds(false));
+        assertEquals(new Range(-1.1, 5.0), dataset.getRangeBounds(true));
     }
 
+    @Test
+    public void testGetRangeLowerBound() {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        
+        // when the dataset contains no series, we expect the value range to 
+        // be null
+        assertTrue(Double.isNaN(dataset.getRangeLowerBound(false)));
+        assertTrue(Double.isNaN(dataset.getRangeLowerBound(true)));
+
+        // when the dataset contains one or more series, but those series 
+        // contain no items, we expect the value range to be null
+        XYSeries series = new XYSeries("S1");
+        dataset.addSeries(series);
+        assertTrue(Double.isNaN(dataset.getRangeLowerBound(false)));
+        assertTrue(Double.isNaN(dataset.getRangeLowerBound(true)));
+
+        // tests with values
+        series.add(1.0, 1.1);
+        assertEquals(1.1, dataset.getRangeLowerBound(false), EPSILON);
+        assertEquals(1.1, dataset.getRangeLowerBound(true), EPSILON);
+
+        series.add(-1.0, -1.1);
+        assertEquals(-1.1, dataset.getRangeLowerBound(false), EPSILON);
+        assertEquals(-1.1, dataset.getRangeLowerBound(true), EPSILON);
+        
+        series.add(0.0, null);
+        assertEquals(-1.1, dataset.getRangeLowerBound(false), EPSILON);
+        assertEquals(-1.1, dataset.getRangeLowerBound(true), EPSILON);
+        
+        XYSeries s2 = new XYSeries("S2");
+        dataset.addSeries(s2);
+        assertEquals(-1.1, dataset.getRangeLowerBound(false), EPSILON);
+        assertEquals(-1.1, dataset.getRangeLowerBound(true), EPSILON);
+        
+        s2.add(2.0, 5.0);
+        assertEquals(-1.1, dataset.getRangeLowerBound(false), EPSILON);
+        assertEquals(-1.1, dataset.getRangeLowerBound(true), EPSILON);
+    }
+    
+    @Test
+    public void testGetRangeUpperBound() {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        
+        // when the dataset contains no series, we expect the value range to 
+        // be null
+        assertTrue(Double.isNaN(dataset.getRangeUpperBound(false)));
+        assertTrue(Double.isNaN(dataset.getRangeUpperBound(true)));
+
+        // when the dataset contains one or more series, but those series 
+        // contain no items, we expect the value range to be null
+        XYSeries series = new XYSeries("S1");
+        dataset.addSeries(series);
+        assertTrue(Double.isNaN(dataset.getRangeUpperBound(false)));
+        assertTrue(Double.isNaN(dataset.getRangeUpperBound(true)));
+
+        // tests with values
+        series.add(1.0, 1.1);
+        assertEquals(1.1, dataset.getRangeUpperBound(false), EPSILON);
+        assertEquals(1.1, dataset.getRangeUpperBound(true), EPSILON);
+
+        series.add(-1.0, -1.1);
+        assertEquals(1.1, dataset.getRangeUpperBound(false), EPSILON);
+        assertEquals(1.1, dataset.getRangeUpperBound(true), EPSILON);
+        
+        series.add(0.0, null);
+        assertEquals(1.1, dataset.getRangeUpperBound(false), EPSILON);
+        assertEquals(1.1, dataset.getRangeUpperBound(true), EPSILON);
+        
+        XYSeries s2 = new XYSeries("S2");
+        dataset.addSeries(s2);
+        assertEquals(1.1, dataset.getRangeUpperBound(false), EPSILON);
+        assertEquals(1.1, dataset.getRangeUpperBound(true), EPSILON);
+        
+        s2.add(2.0, 5.0);
+        assertEquals(5.0, dataset.getRangeUpperBound(false), EPSILON);
+        assertEquals(5.0, dataset.getRangeUpperBound(true), EPSILON);
+    }
+    
     /**
      * A check that the dataset prevents renaming a series to the name of an 
      * existing series in the dataset.
