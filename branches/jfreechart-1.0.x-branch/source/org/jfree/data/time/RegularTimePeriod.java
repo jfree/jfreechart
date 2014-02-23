@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * RegularTimePeriod.java
  * ----------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,7 +48,8 @@
  * 06-Oct-2006 : Deprecated the WORKING_CALENDAR field and several methods,
  *               added new peg() method (DG);
  * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
- *
+ * 23-Feb-2014 : Added getMillisecond() method (DG);
+ * 
  */
 
 package org.jfree.data.time;
@@ -341,6 +342,30 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
         return m1 + (m2 - m1) / 2;
     }
 
+    /**
+     * Returns the millisecond (relative to the epoch) corresponding to the 
+     * specified <code>anchor</code> using the supplied <code>calendar</code> 
+     * (which incorporates a time zone).
+     * 
+     * @param anchor  the anchor (<code>null</code> not permitted).
+     * @param calendar  the calendar (<code>null</code> not permitted).
+     * 
+     * @return Milliseconds since the epoch.
+     * 
+     * @since 1.0.18
+     */
+    public long getMillisecond(TimePeriodAnchor anchor, Calendar calendar) {
+        if (anchor.equals(TimePeriodAnchor.START)) {
+            return getFirstMillisecond(calendar);
+        } else if (anchor.equals(TimePeriodAnchor.MIDDLE)) {
+            return getMiddleMillisecond(calendar);
+        } else if (anchor.equals(TimePeriodAnchor.END)) {
+            return getLastMillisecond(calendar);
+        } else {
+            throw new IllegalStateException("Unrecognised anchor: " + anchor);
+        }
+    }
+    
     /**
      * Returns a string representation of the time period.
      *
