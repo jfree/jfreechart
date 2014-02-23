@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * TimeSeries.java
  * ---------------
- * (C) Copyright 2001-2013, by Object Refinery Limited.
+ * (C) Copyright 2001-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bryan Scott;
@@ -93,16 +93,17 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
-import org.jfree.chart.util.ParamChecks;
 
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.data.Range;
 import org.jfree.data.general.Series;
-import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
 import org.jfree.util.ObjectUtilities;
 
@@ -333,9 +334,97 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the smallest y-value in the series, ignoring any null and
-     * Double.NaN values.  This method returns Double.NaN if there is no
-     * smallest y-value (for example, when the series is empty).
+     * Returns the range of y-values in the time series.  Any <code>null</code> 
+     * data values in the series will be ignored (except for the special case 
+     * where all data values are <code>null</code>, in which case the return 
+     * value is <code>Range(Double.NaN, Double.NaN)</code>).  If the time 
+     * series contains no items, this method will return <code>null</code>.
+     * 
+     * @return The range of y-values in the time series (possibly 
+     *     <code>null</code>).
+     * 
+     * @since 1.0.18
+     */
+    public Range findValueRange() {
+        if (this.data.isEmpty()) {
+            return null;
+        }
+        return new Range(this.minY, this.maxY);
+    }
+    
+    /**
+     * Returns the range of y-values in the time series that fall within 
+     * the specified range of x-values.  This is equivalent to
+     * <code>findValueRange(xRange, TimePeriodAnchor.MIDDLE, timeZone)</code>.
+     * 
+     * @param xRange  the subrange of x-values (<code>null</code> not 
+     *     permitted).
+     * @param timeZone  the time zone used to convert x-values to time periods
+     *     (<code>null</code> not permitted).
+     * 
+     * @return The range. 
+     * 
+     * @since 1.0.18
+     */
+    public Range findValueRange(Range xRange, TimeZone timeZone) {
+        return findValueRange(xRange, TimePeriodAnchor.MIDDLE, timeZone);
+    }
+    
+    /**
+     * Finds the range of y-values that fall within the specified range of
+     * x-values (where the x-values are interpreted as milliseconds since the
+     * epoch and converted to time periods using the specified timezone).
+     * 
+     * @param xRange  the subset of x-values to use (<coded>null</code> not
+     *     permitted).
+     * @param xAnchor  the anchor point for the x-values (<code>null</code>
+     *     not permitted).
+     * @param zone  the time zone (<code>null</code> not permitted).
+     * 
+     * @return The range of y-values.
+     * 
+     * @since 1.0.18
+     */
+    public Range findValueRange(Range xRange, TimePeriodAnchor xAnchor, 
+            TimeZone zone) {
+        ParamChecks.nullNotPermitted(xRange, "xRange");
+        ParamChecks.nullNotPermitted(xAnchor, "xAnchor");
+        ParamChecks.nullNotPermitted(zone, "zone");
+        if (this.data.isEmpty()) {
+            return null;
+        }
+        Calendar calendar = Calendar.getInstance(zone);
+        // since the items are ordered, we could be more clever here and avoid
+        // iterating over all the data
+        double lowY = Double.POSITIVE_INFINITY;
+        double highY = Double.NEGATIVE_INFINITY;
+        for (int i = 0; i < this.data.size(); i++) {
+            TimeSeriesDataItem item = (TimeSeriesDataItem) this.data.get(i);
+            long millis = item.getPeriod().getMillisecond(xAnchor, calendar);
+            if (xRange.contains(millis)) {
+                Number n = item.getValue();
+                if (n != null) {
+                    double v = n.doubleValue();
+                    lowY = Math.min(lowY, v);
+                    highY = Math.max(highY, v);
+                }
+            }
+        }
+        if (Double.isInfinite(lowY) && Double.isInfinite(highY)) {
+            if (lowY < highY) {
+                return new Range(lowY, highY);
+            } else {
+                return new Range(Double.NaN, Double.NaN);
+            }
+        }
+        return new Range(lowY, highY);
+    }
+
+    /**
+     * Returns the smallest y-value in the series, ignoring any 
+     * <code>null</code> and <code>Double.NaN</code> values.  This method 
+     * returns <code>Double.NaN</code> if there is no smallest y-value (for 
+     * example, when the series is empty).
      *
      * @return The smallest y-value.
      *
@@ -348,8 +437,9 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the largest y-value in the series, ignoring any Double.NaN
-     * values.  This method returns Double.NaN if there is no largest y-value
+     * Returns the largest y-value in the series, ignoring any 
+     * <code>null</code> and <code>Double.NaN</code> values.  This method 
+     * returns <code>Double.NaN</code> if there is no largest y-value
      * (for example, when the series is empty).
      *
      * @return The largest y-value.
@@ -732,7 +822,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         }
         item.setValue(value);
         if (iterate) {
-            findBoundsByIteration();
+            updateMinMaxYByIteration();
         }
         else if (value != null) {
             double yy = value.doubleValue();
@@ -837,7 +927,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             }
             existing.setValue(item.getValue());
             if (iterate) {
-                findBoundsByIteration();
+                updateMinMaxYByIteration();
             }
             else if (item.getValue() != null) {
                 double yy = item.getValue().doubleValue();
@@ -884,7 +974,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
                 removed = true;
             }
             if (removed) {
-                findBoundsByIteration();
+                updateMinMaxYByIteration();
                 if (notify) {
                     fireSeriesChanged();
                 }
@@ -936,7 +1026,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             removed = true;
         }
         if (removed) {
-            findBoundsByIteration();
+            updateMinMaxYByIteration();
             if (notify) {
                 fireSeriesChanged();
             }
@@ -1004,7 +1094,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         for (int i = 0; i <= (end - start); i++) {
             this.data.remove(start);
         }
-        findBoundsByIteration();
+        updateMinMaxYByIteration();
         if (this.data.isEmpty()) {
             this.timePeriodClass = null;
         }
@@ -1229,7 +1319,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             double y = yN.doubleValue();
             if (!Double.isNaN(y)) {
                 if (y <= this.minY || y >= this.maxY) {
-                    findBoundsByIteration();
+                    updateMinMaxYByIteration();
                 }
             }
         }
@@ -1241,7 +1331,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @since 1.0.14
      */
-    private void findBoundsByIteration() {
+    private void updateMinMaxYByIteration() {
         this.minY = Double.NaN;
         this.maxY = Double.NaN;
         Iterator iterator = this.data.iterator();
