@@ -1,3 +1,8 @@
+2014-02-23  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/data/time/RegularTimePeriod.java
+    (getMillisecond) : New method.
+
 2014-02-04  David Gilbert  <david.gilbert@object-refinery.com>
 
     GitHub #298 by Simon Legner:
