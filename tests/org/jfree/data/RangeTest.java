@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * RangeTest.java
  * --------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sergei Ivanov;
@@ -37,7 +37,8 @@
  * 14-Aug-2003 : Version 1 (DG);
  * 18-Dec-2007 : Additional tests from Sergei Ivanov (DG);
  * 08-Jan-2012 : Added test for combine() method (DG);
- *
+ * 23-Feb-2014 : Added isNaNRange() test (DG);
+ * 
  */
 
 package org.jfree.data;
@@ -78,7 +79,6 @@ public class RangeTest {
      */
     @Test
     public void testEquals() {
-
         Range r1 = new Range(0.0, 1.0);
         Range r2 = new Range(0.0, 1.0);
         assertEquals(r1, r2);
@@ -345,5 +345,13 @@ public class RangeTest {
         rr = Range.combineIgnoringNaN(r4, r1);
         assertEquals(1.0, rr.getLowerBound(), EPSILON);
         assertEquals(2.0, rr.getUpperBound(), EPSILON);
+    }
+    
+    @Test
+    public void testIsNaNRange() {
+        assertTrue(new Range(Double.NaN, Double.NaN).isNaNRange());
+        assertFalse(new Range(1.0, 2.0).isNaNRange());
+        assertFalse(new Range(Double.NaN, 2.0).isNaNRange());
+        assertFalse(new Range(1.0, Double.NaN).isNaNRange());
     }
 }
