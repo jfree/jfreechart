@@ -1,5 +1,19 @@
 2014-02-23  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * org/jfree/data/time/TimeSeries.java
+    (findValueRange): New method,
+    (findValueRange(Range, TimeZone): Likewise,
+    (findValueRange(Range , TimePeriodAnchor, TimeZone): Likewise,
+    (updateMinMaxYByIteration): Renamed private method (was 
+       findBoundsByIteration).
+
+2014-02-23  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/data/Range.java
+    (isNaNRange): New method.
+
+2014-02-23  David Gilbert  <david.gilbert@object-refinery.com>
+
     * org/jfree/data/time/RegularTimePeriod.java
     (getMillisecond) : New method.
 
