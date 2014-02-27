@@ -276,7 +276,7 @@ public class LogAxis extends ValueAxis {
     /**
      * Calculates the value from a given log.
      *
-     * @param log  the log value (must be > 0.0).
+     * @param log  the log value.
      *
      * @return The value with the given log.
      *
