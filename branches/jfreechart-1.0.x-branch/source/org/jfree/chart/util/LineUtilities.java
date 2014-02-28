@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * LineUtilities.java
  * ------------------
- * (C) Copyright 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008, 2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 05-Nov-2008 : Version 1 (DG);
+ * 28-Feb-2014 : Added extendLine() (DG);
  *
  */
 
@@ -139,4 +140,33 @@ public class LineUtilities {
                       // returned false from within the while loop above
 
     }
+    
+    /**
+     * Creates a new line by extending an existing line.
+     *
+     * @param line  the line (<code>null</code> not permitted).
+     * @param startPercent  the amount to extend the line at the start point
+     *                      end.
+     * @param endPercent  the amount to extend the line at the end point end.
+     *
+     * @return A new line.
+     * 
+     * @since 1.0.18
+     */
+    public static Line2D extendLine(Line2D line, double startPercent,
+                              double endPercent) {
+        ParamChecks.nullNotPermitted(line, "line");
+        double x1 = line.getX1();
+        double x2 = line.getX2();
+        double deltaX = x2 - x1;
+        double y1 = line.getY1();
+        double y2 = line.getY2();
+        double deltaY = y2 - y1;
+        x1 = x1 - (startPercent * deltaX);
+        y1 = y1 - (startPercent * deltaY);
+        x2 = x2 + (endPercent * deltaX);
+        y2 = y2 + (endPercent * deltaY);
+        return new Line2D.Double(x1, y1, x2, y2);
+    }
+
 }
