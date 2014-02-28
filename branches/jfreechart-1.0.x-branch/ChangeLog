@@ -1,5 +1,6 @@
 2014-02-28  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * org/jfree/chart/plot/CenterTextMode.java: New file,
     * org/jfree/chart/plot/RingPlot.java
     (centerTextMode): New field,
     (centerText): Likewise,
