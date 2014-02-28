@@ -73,8 +73,10 @@ import java.text.Format;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
+import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.urls.PieURLGenerator;
+import org.jfree.chart.util.LineUtilities;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.PieDataset;
 import org.jfree.io.SerialUtilities;
@@ -626,9 +628,9 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
             }
             else if (currentPass == 2) {
                 if (this.separatorsVisible) {
-                    Line2D extendedSeparator = extendLine(separator,
-                        this.innerSeparatorExtension,
-                        this.outerSeparatorExtension);
+                    Line2D extendedSeparator = LineUtilities.extendLine(
+                            separator, this.innerSeparatorExtension,
+                            this.outerSeparatorExtension);
                     g2.setStroke(this.separatorStroke);
                     g2.setPaint(this.separatorPaint);
                     g2.draw(extendedSeparator);
@@ -700,32 +702,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
             return false;
         }
         return super.equals(obj);
-    }
-
-    /**
-     * Creates a new line by extending an existing line.
-     *
-     * @param line  the line (<code>null</code> not permitted).
-     * @param startPercent  the amount to extend the line at the start point
-     *                      end.
-     * @param endPercent  the amount to extend the line at the end point end.
-     *
-     * @return A new line.
-     */
-    private Line2D extendLine(Line2D line, double startPercent,
-                              double endPercent) {
-        ParamChecks.nullNotPermitted(line, "line");
-        double x1 = line.getX1();
-        double x2 = line.getX2();
-        double deltaX = x2 - x1;
-        double y1 = line.getY1();
-        double y2 = line.getY2();
-        double deltaY = y2 - y1;
-        x1 = x1 - (startPercent * deltaX);
-        y1 = y1 - (startPercent * deltaY);
-        x2 = x2 + (endPercent * deltaX);
-        y2 = y2 + (endPercent * deltaY);
-        return new Line2D.Double(x1, y1, x2, y2);
     }
 
     /**
