@@ -73,7 +73,6 @@ import java.text.Format;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.util.LineUtilities;
@@ -323,8 +322,8 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
 
     /**
      * Sets the flag that controls whether or not separators are drawn between
-     * the sections in the chart, and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * the sections in the chart, and sends a change event to all registered 
+     * listeners.
      *
      * @param visible  the flag.
      *
@@ -348,7 +347,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
 
     /**
      * Sets the stroke used to draw the separator between sections and sends
-     * a {@link PlotChangeEvent} to all registered listeners.
+     * a change event to all registered listeners.
      *
      * @param stroke  the stroke (<code>null</code> not permitted).
      *
@@ -373,7 +372,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
 
     /**
      * Sets the paint used to draw the separator between sections and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * change event to all registered listeners.
      *
      * @param paint  the paint (<code>null</code> not permitted).
      *
@@ -401,8 +400,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     /**
      * Sets the length of the inner extension of the separator line that is
      * drawn between sections, as a percentage of the depth of the
-     * sections, and sends a {@link PlotChangeEvent} to all registered
-     * listeners.
+     * sections, and sends a change event to all registered listeners.
      *
      * @param percent  the percentage.
      *
@@ -430,8 +428,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     /**
      * Sets the length of the outer extension of the separator line that is
      * drawn between sections, as a percentage of the depth of the
-     * sections, and sends a {@link PlotChangeEvent} to all registered
-     * listeners.
+     * sections, and sends a change event to all registered listeners.
      *
      * @param percent  the percentage.
      *
