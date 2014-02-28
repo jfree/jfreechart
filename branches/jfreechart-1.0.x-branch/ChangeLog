@@ -1,3 +1,20 @@
+2014-02-28  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/plot/RingPlot.java
+    (centerTextMode): New field,
+    (centerText): Likewise,
+    (centerTextFont): Likewise,
+    (centerTextColor): Likewise,
+    (centerTextFormatter): Likewise,
+    (RingPlot(PieDataset)): Initialise new fields,
+    (get/setCenterTextMode): New methods,
+    (get/setCenterText): Likewise,
+    (get/setCenterTextFont): Likewise,
+    (get/setCenterTextColor): Likewise,
+    (get/setCenterTextFormatter): Likewise,
+    (drawItem): Draw the center text,
+    (equals): Check new fields.
+
 2014-02-23  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/data/time/TimeSeries.java
