@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * RingPlotTest.java
  * -----------------
- * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,7 +36,8 @@
  * -------
  * 09-Nov-2004 : Version 1 (DG);
  * 12-Oct-2006 : Updated testEquals() (DG);
- *
+ * 28-Feb-2014 : Add tests for new fields (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -45,13 +46,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
+import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtilities;
-import org.junit.Test;
 
 /**
  * Tests for the {@link RingPlot} class.
@@ -70,6 +74,31 @@ public class RingPlotTest {
         assertTrue(plot1.equals(plot2));
         assertTrue(plot2.equals(plot1));
 
+        plot1.setCenterTextMode(CenterTextMode.FIXED);
+        assertFalse(plot1.equals(plot2));
+        plot2.setCenterTextMode(CenterTextMode.FIXED);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setCenterText("ABC");
+        assertFalse(plot1.equals(plot2));
+        plot2.setCenterText("ABC");
+        assertTrue(plot1.equals(plot2));
+        
+        plot1.setCenterTextColor(Color.RED);
+        assertFalse(plot1.equals(plot2));
+        plot2.setCenterTextColor(Color.RED);
+        assertTrue(plot1.equals(plot2));
+        
+        plot1.setCenterTextFont(new Font(Font.SERIF, Font.PLAIN, 7));
+        assertFalse(plot1.equals(plot2));
+        plot2.setCenterTextFont(new Font(Font.SERIF, Font.PLAIN, 7));
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setCenterTextFormatter(new DecimalFormat("0.000"));
+        assertFalse(plot1.equals(plot2));
+        plot2.setCenterTextFormatter(new DecimalFormat("0.000"));
+        assertTrue(plot1.equals(plot2));
+        
         // separatorsVisible
         plot1.setSeparatorsVisible(false);
         assertFalse(plot1.equals(plot2));
@@ -108,7 +137,6 @@ public class RingPlotTest {
         assertFalse(plot1.equals(plot2));
         plot2.setSectionDepth(0.12);
         assertTrue(plot1.equals(plot2));
-
     }
 
     /**
