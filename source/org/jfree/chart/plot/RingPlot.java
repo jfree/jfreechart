@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * RingPlot.java
  * -------------
- * (C) Copyright 2004-2013, by Object Refinery Limited.
+ * (C) Copyright 2004-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limtied);
  * Contributor(s):   Christoph Beck (bug 2121818);
@@ -47,6 +47,7 @@
  * 13-Jul-2009 : Added support for shadow generator (DG);
  * 11-Oct-2011 : Check sectionOutlineVisible - bug 3237879 (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 28-Feb-2014 : Add center text feature (DG);
  *
  */
 
@@ -54,6 +55,7 @@ package org.jfree.chart.plot;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
@@ -66,16 +68,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.Format;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
-import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.PieDataset;
 import org.jfree.io.SerialUtilities;
+import org.jfree.text.TextUtilities;
 import org.jfree.ui.RectangleInsets;
+import org.jfree.ui.TextAnchor;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.Rotation;
@@ -90,6 +95,27 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     /** For serialization. */
     private static final long serialVersionUID = 1556064784129676620L;
 
+    /** The center text mode. */
+    private CenterTextMode centerTextMode = CenterTextMode.NONE;
+    
+    /** 
+     * Text to display in the middle of the chart (used for 
+     * CenterTextMode.FIXED). 
+     */
+    private String centerText;
+    
+    /**
+     * The formatter used when displaying the first data value from the
+     * dataset (CenterTextMode.VALUE).
+     */
+    private Format centerTextFormatter = new DecimalFormat("0.00");
+    
+    /** The font used to display the center text. */
+    private Font centerTextFont;
+    
+    /** The color used to display the center text. */
+    private Color centerTextColor;
+    
     /**
      * A flag that controls whether or not separators are drawn between the
      * sections of the chart.
@@ -133,14 +159,154 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      */
     public RingPlot(PieDataset dataset) {
         super(dataset);
+        this.centerTextMode = CenterTextMode.NONE;
+        this.centerText = null;
+        this.centerTextFormatter = new DecimalFormat("0.00");
+        this.centerTextFont = DEFAULT_LABEL_FONT;
+        this.centerTextColor = Color.BLACK;
         this.separatorsVisible = true;
         this.separatorStroke = new BasicStroke(0.5f);
         this.separatorPaint = Color.gray;
-        this.innerSeparatorExtension = 0.20;  // twenty percent
-        this.outerSeparatorExtension = 0.20;  // twenty percent
+        this.innerSeparatorExtension = 0.20;  // 20%
+        this.outerSeparatorExtension = 0.20;  // 20%
         this.sectionDepth = 0.20; // 20%
     }
 
+    /**
+     * Returns the mode for displaying text in the center of the plot.  The
+     * default value is {@link CenterTextMode#NONE} therefore no text
+     * will be displayed by default.
+     * 
+     * @return The mode (never <code>null</code>).
+     * 
+     * @since 1.0.18
+     */
+    public CenterTextMode getCenterTextMode() {
+        return this.centerTextMode;
+    }
+    
+    /**
+     * Sets the mode for displaying text in the center of the plot and sends 
+     * a change event to all registered listeners.  For
+     * {@link CenterTextMode#FIXED}, the display text will come from the 
+     * <code>centerText</code> attribute (see {@link #getCenterText()}).
+     * For {@link CenterTextMode#VALUE}, the center text will be the value from
+     * the first section in the dataset.
+     * 
+     * @param mode  the mode (<code>null</code> not permitted).
+     * 
+     * @since 1.0.18
+     */
+    public void setCenterTextMode(CenterTextMode mode) {
+        ParamChecks.nullNotPermitted(mode, "mode");
+        this.centerTextMode = mode;
+        fireChangeEvent();
+    }
+    
+    /**
+     * Returns the text to display in the center of the plot when the mode
+     * is {@link CenterTextMode#FIXED}.
+     * 
+     * @return The text (possibly <code>null</code>).
+     * 
+     * @since 1.0.18.
+     */
+    public String getCenterText() {
+        return this.centerText;
+    }
+    
+    /**
+     * Sets the text to display in the center of the plot and sends a
+     * change event to all registered listeners.  If the text is set to 
+     * <code>null</code>, no text will be displayed.
+     * 
+     * @param text  the text (<code>null</code> permitted).
+     * 
+     * @since 1.0.18
+     */
+    public void setCenterText(String text) {
+        this.centerText = text;
+        fireChangeEvent();
+    }
+    
+    /**
+     * Returns the formatter used to format the center text value for the mode
+     * {@link CenterTextMode#VALUE}.  The default value is 
+     * <code>DecimalFormat("0.00");</code>.
+     * 
+     * @return The formatter (never <code>null</code>).
+     * 
+     * @since 1.0.18
+     */
+    public Format getCenterTextFormatter() {
+        return this.centerTextFormatter;
+    }
+    
+    /**
+     * Sets the formatter used to format the center text value and sends a
+     * change event to all registered listeners.
+     * 
+     * @param formatter  the formatter (<code>null</code> not permitted).
+     * 
+     * @since 1.0.18
+     */
+    public void setCenterTextFormatter(Format formatter) {
+        ParamChecks.nullNotPermitted(formatter, "formatter");
+        this.centerTextFormatter = formatter;
+    }
+    
+    /**
+     * Returns the font used to display the center text.  The default value
+     * is {@link PiePlot#DEFAULT_LABEL_FONT}.
+     * 
+     * @return The font (never <code>null</code>).
+     * 
+     * @since 1.0.18
+     */
+    public Font getCenterTextFont() {
+        return this.centerTextFont;
+    }
+    
+    /**
+     * Sets the font used to display the center text and sends a change event
+     * to all registered listeners.
+     * 
+     * @param font  the font (<code>null</code> not permitted).
+     * 
+     * @since 1.0.18
+     */
+    public void setCenterTextFont(Font font) {
+        ParamChecks.nullNotPermitted(font, "font");
+        this.centerTextFont = font;
+        fireChangeEvent();
+    }
+    
+    /**
+     * Returns the color for the center text.  The default value is
+     * <code>Color.BLACK</code>.
+     * 
+     * @return The color (never <code>null</code>). 
+     * 
+     * @since 1.0.18
+     */
+    public Color getCenterTextColor() {
+        return this.centerTextColor;
+    }
+    
+    /**
+     * Sets the color for the center text and sends a change event to all 
+     * registered listeners.
+     * 
+     * @param color  the color (<code>null</code> not permitted).
+     * 
+     * @since 1.0.18
+     */
+    public void setCenterTextColor(Color color) {
+        ParamChecks.nullNotPermitted(color, "color");
+        this.centerTextColor = color;
+        fireChangeEvent();
+    }
+    
     /**
      * Returns a flag that indicates whether or not separators are drawn between
      * the sections in the chart.
@@ -319,11 +485,9 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     @Override
     public PiePlotState initialise(Graphics2D g2, Rectangle2D plotArea,
             PiePlot plot, Integer index, PlotRenderingInfo info) {
-
         PiePlotState state = super.initialise(g2, plotArea, plot, index, info);
         state.setPassesRequired(3);
         return state;
-
     }
 
     /**
@@ -418,6 +582,23 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
                     g2.setStroke(outlineStroke);
                     g2.draw(path);
                 }
+                
+                if (section == 0) {
+                    String nstr = null;
+                    if (this.centerTextMode.equals(CenterTextMode.VALUE)) {
+                        nstr = this.centerTextFormatter.format(n);
+                    } else if (this.centerTextMode.equals(CenterTextMode.FIXED)) {
+                        nstr = this.centerText;
+                    }
+                    if (nstr != null) {
+                        g2.setFont(this.centerTextFont);
+                        g2.setPaint(this.centerTextColor);
+                        TextUtilities.drawAlignedString(nstr, g2, 
+                            (float) dataArea.getCenterX(), 
+                            (float) dataArea.getCenterY(),  
+                            TextAnchor.CENTER);                        
+                    }
+                }
 
                 // add an entity for the pie section
                 if (state.getInfo() != null) {
@@ -484,6 +665,21 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
             return false;
         }
         RingPlot that = (RingPlot) obj;
+        if (!this.centerTextMode.equals(that.centerTextMode)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.centerText, that.centerText)) {
+            return false;
+        }
+        if (!this.centerTextFormatter.equals(that.centerTextFormatter)) {
+            return false;
+        }
+        if (!this.centerTextFont.equals(that.centerTextFont)) {
+            return false;
+        }
+        if (!this.centerTextColor.equals(that.centerTextColor)) {
+            return false;
+        }
         if (this.separatorsVisible != that.separatorsVisible) {
             return false;
         }
