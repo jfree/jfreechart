@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * XYPlot.java
  * -----------
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Craig MacFarlane;
@@ -228,7 +228,8 @@
  * 10-Jul-2009 : Added optional drop shadow generator (DG);
  * 18-Oct-2011 : Fix tooltip offset with shadow renderer (DG);
  * 12-Sep-2013 : Check for KEY_SUPPRESS_SHADOW_GENERATION rendering hint (DG);
- *
+ * 10-Mar-2014 : Updated Javadocs for issue #1123 (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -1592,9 +1593,9 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets the renderer for the primary dataset and sends a
-     * {@link PlotChangeEvent} to all registered listeners.  If the renderer
-     * is set to <code>null</code>, no data will be displayed.
+     * Sets the renderer for the primary dataset and sends a change event to 
+     * all registered listeners.  If the renderer is set to <code>null</code>, 
+     * no data will be displayed.
      *
      * @param renderer  the renderer (<code>null</code> permitted).
      *
@@ -1605,8 +1606,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets a renderer and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the renderer for the dataset with the specified index and sends a 
+     * change event to all registered listeners.  Note that each dataset should 
+     * have its own renderer, you should not use one renderer for multiple 
+     * datasets.
      *
      * @param index  the index.
      * @param renderer  the renderer.
@@ -1618,8 +1621,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Sets a renderer and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * Sets the renderer for the dataset with the specified index and, if 
+     * requested, sends a change event to all registered listeners.  Note that 
+     * each dataset should have its own renderer, you should not use one 
+     * renderer for multiple datasets.
      *
      * @param index  the index.
      * @param renderer  the renderer.
@@ -5654,7 +5659,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         }
         clone.quadrantOrigin = (Point2D) ObjectUtilities.clone(
                 this.quadrantOrigin);
-        clone.quadrantPaint = (Paint[]) this.quadrantPaint.clone();
+        clone.quadrantPaint = this.quadrantPaint.clone();
         return clone;
 
     }
