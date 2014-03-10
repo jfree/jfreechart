@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * DateAxis.java
  * -------------
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Jonathan Nash;
@@ -131,6 +131,7 @@
  *               subscripts and more (DG);
  * 12-Sep-2013 : Prevent exception when zooming in below 1 millisecond (DG);
  * 23-Nov-2013 : Deprecated DEFAULT_DATE_TICK_UNIT to fix bug #977 (DG);
+ * 10-Mar-2014 : Add get/setLocale() methods (DG);
  * 
  */
 
@@ -435,12 +436,34 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      */
     public void setTimeZone(TimeZone zone) {
         ParamChecks.nullNotPermitted(zone, "zone");
-        if (!this.timeZone.equals(zone)) {
-            this.timeZone = zone;
-            setStandardTickUnits(createStandardDateTickUnits(zone,
-                    this.locale));
-            fireChangeEvent();
-        }
+        this.timeZone = zone;
+        setStandardTickUnits(createStandardDateTickUnits(zone, this.locale));
+        fireChangeEvent();
+    }
+    
+    /**
+     * Returns the locale for this axis.
+     * 
+     * @return The locale (never <code>null</code>).
+     * 
+     * @since 1.0.18
+     */
+    public Locale getLocale() {
+        return this.locale;
+    }
+    
+    /**
+     * Sets the locale for the axis and sends a change event to all registered 
+     * listeners.
+     * 
+     * @param locale  the new locale (<code>null</code> not permitted).
+     */
+    public void setLocale(Locale locale) {
+        ParamChecks.nullNotPermitted(locale, "locale");
+        this.locale = locale;
+        setStandardTickUnits(createStandardDateTickUnits(this.timeZone, 
+                this.locale));
+        fireChangeEvent();
     }
 
     /**
@@ -1907,6 +1930,12 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             return false;
         }
         DateAxis that = (DateAxis) obj;
+        if (!ObjectUtilities.equal(this.timeZone, that.timeZone)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.locale, that.locale)) {
+            return false;
+        }
         if (!ObjectUtilities.equal(this.tickUnit, that.tickUnit)) {
             return false;
         }
