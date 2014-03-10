@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryPlot.java
  * -----------------
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jeremy Bowman;
@@ -180,7 +180,8 @@
  * 20-Nov-2011 : Initialise shadow generator as null (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
  * 12-Sep-2013 : Check for KEY_SUPPRESS_SHADOW_GENERATION rendering hint (DG);
- *
+ * 10-Mar-2014 : Updated Javadocs for issue #1123 (DG);
+ * 
  */
 
 package org.jfree.chart.plot;
@@ -1581,8 +1582,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Sets the renderer at index 0 (sometimes referred to as the "primary"
-     * renderer) and sends a {@link PlotChangeEvent} to all registered
-     * listeners.
+     * renderer) and sends a change event to all registered listeners.
      *
      * @param renderer  the renderer (<code>null</code> permitted.
      *
@@ -1594,8 +1594,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Sets the renderer at index 0 (sometimes referred to as the "primary"
-     * renderer) and, if requested, sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * renderer) and, if requested, sends a change event to all registered 
+     * listeners.
      * <p>
      * You can set the renderer to <code>null</code>, but this is not
      * recommended because:
@@ -1614,8 +1614,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the renderer at the specified index and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
+     * Sets the renderer to use for the dataset with the specified index and
+     * sends a change event to all registered listeners.  Note that each
+     * dataset should have its own renderer, you should not use one renderer
+     * for multiple datasets.
      *
      * @param index  the index.
      * @param renderer  the renderer (<code>null</code> permitted).
@@ -1628,8 +1630,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets a renderer.  A {@link PlotChangeEvent} is sent to all registered
-     * listeners.
+     * Sets the renderer to use for the dataset with the specified index and,
+     * if requested, sends a change event to all registered listeners.  Note 
+     * that each dataset should have its own renderer, you should not use one 
+     * renderer for multiple datasets.
      *
      * @param index  the index.
      * @param renderer  the renderer (<code>null</code> permitted).
