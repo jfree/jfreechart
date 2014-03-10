@@ -1,5 +1,11 @@
 2014-03-10  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * org/jfree/chart/axis/DateAxis.java
+    (get/setLocale): New methods,
+    (equals): Check locale and timezone fields explicitly.
+
+2014-03-10  David Gilbert  <david.gilbert@object-refinery.com>
+
     * org/jfree/chart/axis/ValueAxis.java
     (setRange): Check range length is positive.
 
