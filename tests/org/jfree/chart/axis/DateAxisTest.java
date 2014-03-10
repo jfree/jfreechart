@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * DateAxisTest.java
  * -----------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -53,6 +53,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -75,7 +77,6 @@ import org.jfree.data.time.Month;
 import org.jfree.data.time.Second;
 import org.jfree.data.time.Year;
 import org.jfree.ui.RectangleEdge;
-import org.junit.Test;
 
 /**
  * Tests for the {@link DateAxis} class.
@@ -110,6 +111,16 @@ public class DateAxisTest {
         assertTrue(a1.equals(a2));
         assertFalse(a1.equals(null));
         assertFalse(a1.equals("Some non-DateAxis object"));
+
+        a1 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.US);
+        assertFalse(a1.equals(a2));
+        a2 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.US);
+        assertTrue(a1.equals(a2));
+        
+        a1 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.FRANCE);
+        assertFalse(a1.equals(a2));
+        a2 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.FRANCE);
+        assertTrue(a1.equals(a2));
 
         // tickUnit
         a1.setTickUnit(new DateTickUnit(DateTickUnit.DAY, 7));
