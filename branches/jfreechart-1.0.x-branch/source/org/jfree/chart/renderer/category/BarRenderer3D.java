@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * BarRenderer3D.java
  * ------------------
- * (C) Copyright 2001-2013, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2001-2014, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -95,6 +95,7 @@
  * 19-Mar-2009 : Override for drawRangeLine() method (DG);
  * 11-Jun-2012 : Utilise new PaintAlpha class - patch 3204823 from DaveLaw (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 11-Mar-2014 : Check visible series (DG);
  * 
  */
 
@@ -667,6 +668,13 @@ public class BarRenderer3D extends BarRenderer
             ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
             int pass) {
 
+        // nothing is drawn if the row index is not included in the list with
+        // the indices of the visible rows...
+        int visibleRow = state.getVisibleSeriesIndex(row);
+        if (visibleRow < 0) {
+            return;
+        }
+
         // check the value we are plotting...
         Number dataValue = dataset.getValue(row, column);
         if (dataValue == null) {
@@ -683,7 +691,7 @@ public class BarRenderer3D extends BarRenderer
         PlotOrientation orientation = plot.getOrientation();
 
         double barW0 = calculateBarW0(plot, orientation, adjusted, domainAxis,
-                state, row, column);
+                state, visibleRow, column);
         double[] barL0L1 = calculateBarL0L1(value);
         if (barL0L1 == null) {
             return;  // the bar is not visible
