@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * TickUnitSource.java
  * -------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,9 +47,11 @@ package org.jfree.chart.axis;
 public interface TickUnitSource {
 
     /**
-     * Returns a tick unit that is larger than the supplied unit.
+     * Returns the smallest tick unit available in the source that is larger
+     * than <code>unit</code> or, if there is no larger unit, returns 
+     * <code>unit</code>.
      *
-     * @param unit   the unit.
+     * @param unit  the unit (<code>null</code> not permitted).
      *
      * @return A tick unit that is larger than the supplied unit.
      */
@@ -66,12 +68,13 @@ public interface TickUnitSource {
     public TickUnit getCeilingTickUnit(TickUnit unit);
 
     /**
-     * Returns the tick unit in the collection that is greater than or equal
-     * to the specified size.
+     * Returns the smallest tick unit available in the source that is greater 
+     * than or equal to the specified size.  If there is no such tick unit,
+     * the method should return the largest available tick in the source.
      *
      * @param size  the size.
      *
-     * @return A unit from the collection.
+     * @return A unit from the collection (never <code>null</code>).
      */
     public TickUnit getCeilingTickUnit(double size);
 
