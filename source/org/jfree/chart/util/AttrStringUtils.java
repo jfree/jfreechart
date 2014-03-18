@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * AttrStringUtils.java
  * --------------------
- * (C) Copyright 2013 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2013, 2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,7 +35,8 @@
  * Changes:
  * --------
  * 01-Aug-2013 : Version 1, backported from JFreeChart-FSE (DG);
- *
+ * 18-Mar-2014 : Added getTextBounds() method (DG);
+ * 
  */
 
 package org.jfree.chart.util;
@@ -56,6 +57,23 @@ public class AttrStringUtils {
    
     private AttrStringUtils() {
         // no need to instantiate this class   
+    }
+    
+    /**
+     * Returns the bounds for the attributed string.
+     * 
+     * @param text  the attributed string (<code>null</code> not permitted).
+     * @param g2  the graphics target (<code>null</code> not permitted).
+     * 
+     * @return The bounds (never <code>null</code>).
+     * 
+     * @since 1.0.18
+     */
+    public static Rectangle2D getTextBounds(AttributedString text, 
+            Graphics2D g2) {
+        TextLayout tl = new TextLayout(text.getIterator(), 
+                g2.getFontRenderContext());
+        return tl.getBounds();
     }
     
     /**
@@ -179,7 +197,8 @@ public class AttrStringUtils {
         }
 
         if (isTop(anchor)) {
-            yAdj = -descent - leading + (float) bounds.getHeight();
+            //yAdj = -descent - leading + (float) bounds.getHeight();
+            yAdj = (float) bounds.getHeight();
         }
         else if (isHalfAscent(anchor)) {
             yAdj = halfAscent;

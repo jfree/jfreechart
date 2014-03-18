@@ -107,7 +107,7 @@
  * 30-Mar-2009 : Added pan(double) method (DG);
  * 03-Sep-2012 : Fix reserveSpace() method, bug 3555275 (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
- * 10-Mar-2014 : Added setRange() check for issue #1121 (DG);
+ * 18-Mar-2014 : Updates to support attributed tick labels for LogAxis (DG);
  *
  */
 
@@ -131,6 +131,7 @@ import java.util.List;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
+import org.jfree.chart.util.AttrStringUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
@@ -669,11 +670,12 @@ public abstract class ValueAxis extends Axis
     /**
      * Draws the axis line, tick marks and tick mark labels.
      *
-     * @param g2  the graphics device.
+     * @param g2  the graphics device (<code>null</code> not permitted).
      * @param cursor  the cursor.
-     * @param plotArea  the plot area.
-     * @param dataArea  the data area.
-     * @param edge  the edge that the axis is aligned with.
+     * @param plotArea  the plot area (<code>null</code> not permitted).
+     * @param dataArea  the data area (<code>null</code> not permitted).
+     * @param edge  the edge that the axis is aligned with (<code>null</code> 
+     *     not permitted).
      *
      * @return The width or height used to draw the axis.
      */
@@ -682,11 +684,9 @@ public abstract class ValueAxis extends Axis
             RectangleEdge edge) {
 
         AxisState state = new AxisState(cursor);
-
         if (isAxisLineVisible()) {
             drawAxisLine(g2, cursor, dataArea, edge);
         }
-
         List ticks = refreshTicks(g2, state, dataArea, edge);
         state.setTicks(ticks);
         g2.setFont(getTickLabelFont());
@@ -697,9 +697,24 @@ public abstract class ValueAxis extends Axis
                 g2.setPaint(getTickLabelPaint());
                 float[] anchorPoint = calculateAnchorPoint(tick, cursor,
                         dataArea, edge);
-                TextUtilities.drawRotatedString(tick.getText(), g2,
-                        anchorPoint[0], anchorPoint[1], tick.getTextAnchor(),
-                        tick.getAngle(), tick.getRotationAnchor());
+                if (tick instanceof LogTick) {
+                    LogTick lt = (LogTick) tick;
+                    if (lt.getAttributedLabel() == null) {
+                        continue;
+                    }
+                    AttrStringUtils.drawRotatedString(lt.getAttributedLabel(), 
+                            g2, anchorPoint[0], anchorPoint[1], 
+                            tick.getTextAnchor(), tick.getAngle(), 
+                            tick.getRotationAnchor());
+                } else {
+                    if (tick.getText() == null) {
+                        continue;
+                    }
+                    TextUtilities.drawRotatedString(tick.getText(), g2,
+                            anchorPoint[0], anchorPoint[1], 
+                            tick.getTextAnchor(), tick.getAngle(), 
+                            tick.getRotationAnchor());
+                }
             }
 
             if ((isTickMarksVisible() && tick.getTickType().equals(
@@ -844,22 +859,31 @@ public abstract class ValueAxis extends Axis
 
         RectangleInsets insets = getTickLabelInsets();
         Font font = getTickLabelFont();
+        g2.setFont(font);
         double maxHeight = 0.0;
         if (vertical) {
             FontMetrics fm = g2.getFontMetrics(font);
             Iterator iterator = ticks.iterator();
             while (iterator.hasNext()) {
                 Tick tick = (Tick) iterator.next();
-                Rectangle2D labelBounds = TextUtilities.getTextBounds(
-                        tick.getText(), g2, fm);
-                if (labelBounds.getWidth() + insets.getTop()
-                        + insets.getBottom() > maxHeight) {
+                Rectangle2D labelBounds = null;
+                if (tick instanceof LogTick) {
+                    LogTick lt = (LogTick) tick;
+                    if (lt.getAttributedLabel() != null) {
+                        labelBounds = AttrStringUtils.getTextBounds(
+                                lt.getAttributedLabel(), g2);
+                    }
+                } else if (tick.getText() != null) {
+                    labelBounds = TextUtilities.getTextBounds(
+                            tick.getText(), g2, fm);
+                }
+                if (labelBounds != null && labelBounds.getWidth() 
+                        + insets.getTop() + insets.getBottom() > maxHeight) {
                     maxHeight = labelBounds.getWidth()
                                 + insets.getTop() + insets.getBottom();
                 }
             }
-        }
-        else {
+        } else {
             LineMetrics metrics = font.getLineMetrics("ABCxyz",
                     g2.getFontRenderContext());
             maxHeight = metrics.getHeight()
@@ -891,16 +915,25 @@ public abstract class ValueAxis extends Axis
             Iterator iterator = ticks.iterator();
             while (iterator.hasNext()) {
                 Tick tick = (Tick) iterator.next();
-                Rectangle2D labelBounds = TextUtilities.getTextBounds(
-                        tick.getText(), g2, fm);
-                if (labelBounds.getWidth() + insets.getLeft()
+                Rectangle2D labelBounds = null;
+                if (tick instanceof LogTick) {
+                    LogTick lt = (LogTick) tick;
+                    if (lt.getAttributedLabel() != null) {
+                        labelBounds = AttrStringUtils.getTextBounds(
+                                lt.getAttributedLabel(), g2);
+                    }
+                } else if (tick.getText() != null) {
+                    labelBounds = TextUtilities.getTextBounds(tick.getText(), 
+                            g2, fm);
+                }
+                if (labelBounds != null 
+                        && labelBounds.getWidth() + insets.getLeft()
                         + insets.getRight() > maxWidth) {
                     maxWidth = labelBounds.getWidth()
                                + insets.getLeft() + insets.getRight();
                 }
             }
-        }
-        else {
+        } else {
             LineMetrics metrics = font.getLineMetrics("ABCxyz",
                     g2.getFontRenderContext());
             maxWidth = metrics.getHeight()
