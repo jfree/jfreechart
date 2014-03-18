@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Tick.java
  * ---------
- * (C) Copyright 2000-2013, by Object Refinery Limited.
+ * (C) Copyright 2000-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -94,7 +94,7 @@ public abstract class Tick implements Serializable, Cloneable {
     /**
      * Returns the text version of the tick value.
      *
-     * @return A string (possibly <code>null</code>;
+     * @return A string (possibly <code>null</code>);
      */
     public String getText() {
         return this.text;
