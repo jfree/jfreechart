@@ -1,3 +1,39 @@
+2013-03-19  David Gilbert  <david.gilbert@object-refinery.com>
+  
+    * org/jfree/chart/axis/SymbolAxis.java
+    (drawGridBandsHorizontal): Take into account inverted axis,
+    (drawGridBandsVertical): Likewise.
+
+2013-03-18  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/utils/AttrStringUtils.java
+    (getTextBounds): New method,
+    (deriveTextBoundsAnchorOffsets): Workaround for top anchor,
+    * org/jfree/chart/axis/LogAxis.java
+    (baseSymbol): New field,
+    (baseFormatter): New field,
+    (LogAxis(String)): Instantiate new tick unit source,
+    (getBaseSymbol): New method,
+    (setBaseSymbol): New method,
+    (getBaseFormatter): New method,
+    (setBaseFormatter): New method,
+    (calculateValueNoINF): New private method,
+    (refreshTicksHorizontal): Reimplement using attributed strings,
+    (refreshTicksVertical): Likewise,
+    (selectHorizontalAutoTickUnit): Reimplemented,
+    (selectVerticalAutoTickUnit): Likewise,
+    (createTickLabel): New method,
+    (estimateMaximumTickLabelWidth): Updated for attributed strings,
+    (resizeRange): New method override,
+    (resizeRange2): Likewise,
+    (equals): Updated for new fields,
+    * org/jfree/chart/axis/LogTick.java: New file,
+    * org/jfree/chart/axis/NumberTickUnitSource.java: New file,
+    * org/jfree/chart/axis/ValueAxis.java
+    (drawTickMarksAndLabels): Updated to draw attributed string labels,
+    (findMaximumTickLabelHeight): Updated to handle LogTick,
+    (findMaximumTickLabelWidth): Likewise.
+
 2014-03-11  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/renderer/BarRenderer3D.java
