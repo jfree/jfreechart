@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * SymbolAxis.java
  * ---------------
- * (C) Copyright 2002-2013, by Anthony Boulestreau and Contributors.
+ * (C) Copyright 2002-2014, by Anthony Boulestreau and Contributors.
  *
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -76,6 +76,7 @@
  * 25-Jul-2007 : Added new field for alternate grid band paint (DG);
  * 15-Aug-2008 : Use alternate grid band paint when drawing (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 19-Mar-2014 : Fix gridbands (bug #1056) (DG);
  *
  */
 
@@ -198,10 +199,8 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * @see #isGridBandsVisible()
      */
     public void setGridBandsVisible(boolean flag) {
-        if (this.gridBandsVisible != flag) {
-            this.gridBandsVisible = flag;
-            fireChangeEvent();
-        }
+        this.gridBandsVisible = flag;
+        fireChangeEvent();
     }
 
     /**
@@ -311,41 +310,40 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * <CODE>gridBandPaint</CODE> (<CODE>DEFAULT_GRID_BAND_PAINT</CODE> by
      * default).
      *
-     * @param g2  the graphics device.
-     * @param plotArea  the area within which the chart should be drawn.
-     * @param dataArea  the area within which the plot should be drawn (a
-     *                  subset of the drawArea).
-     * @param edge  the axis location.
-     * @param ticks  the ticks.
+     * @param g2  the graphics target (<code>null</code> not permitted).
+     * @param plotArea  the area within which the plot is drawn 
+     *     (<code>null</code> not permitted).
+     * @param dataArea  the data area to which the axes are aligned 
+     *     (<code>null</code> not permitted).
+     * @param edge  the edge to which the axis is aligned (<code>null</code> not
+     *     permitted).
+     * @param ticks  the ticks (<code>null</code> not permitted).
      */
     protected void drawGridBands(Graphics2D g2, Rectangle2D plotArea,
             Rectangle2D dataArea, RectangleEdge edge, List ticks) {
-
         Shape savedClip = g2.getClip();
         g2.clip(dataArea);
         if (RectangleEdge.isTopOrBottom(edge)) {
             drawGridBandsHorizontal(g2, plotArea, dataArea, true, ticks);
-        }
-        else if (RectangleEdge.isLeftOrRight(edge)) {
+        } else if (RectangleEdge.isLeftOrRight(edge)) {
             drawGridBandsVertical(g2, plotArea, dataArea, true, ticks);
         }
         g2.setClip(savedClip);
-
     }
 
     /**
      * Draws the grid bands for the axis when it is at the top or bottom of
      * the plot.
      *
-     * @param g2  the graphics device.
-     * @param plotArea  the area within which the chart should be drawn.
-     * @param dataArea  the area within which the plot should be drawn
-     *                  (a subset of the drawArea).
+     * @param g2  the graphics target (<code>null</code> not permitted).
+     * @param plotArea  the area within which the plot is drawn (not used here).
+     * @param dataArea  the area for the data (to which the axes are aligned,
+     *     <code>null</code> not permitted).
      * @param firstGridBandIsDark  True: the first grid band takes the
      *                             color of <CODE>gridBandPaint</CODE>.
      *                             False: the second grid band takes the
      *                             color of <CODE>gridBandPaint</CODE>.
-     * @param ticks  the ticks.
+     * @param ticks  a list of ticks (<code>null</code> not permitted).
      */
     protected void drawGridBandsHorizontal(Graphics2D g2,
             Rectangle2D plotArea, Rectangle2D dataArea, 
@@ -356,13 +354,10 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         double xx1, xx2;
 
         //gets the outline stroke width of the plot
-        double outlineStrokeWidth;
-        if (getPlot().getOutlineStroke() !=  null) {
-            outlineStrokeWidth
-                = ((BasicStroke) getPlot().getOutlineStroke()).getLineWidth();
-        }
-        else {
-            outlineStrokeWidth = 1d;
+        double outlineStrokeWidth = 1.0;
+        Stroke outlineStroke = getPlot().getOutlineStroke();
+        if (outlineStroke != null && outlineStroke instanceof BasicStroke) {
+            outlineStrokeWidth = ((BasicStroke) outlineStroke).getLineWidth();
         }
 
         Iterator iterator = ticks.iterator();
@@ -380,43 +375,41 @@ public class SymbolAxis extends NumberAxis implements Serializable {
             else {
                 g2.setPaint(this.gridBandAlternatePaint);
             }
-            band = new Rectangle2D.Double(xx1, yy + outlineStrokeWidth,
-                xx2 - xx1, dataArea.getMaxY() - yy - outlineStrokeWidth);
+            band = new Rectangle2D.Double(Math.min(xx1, xx2), 
+                    yy + outlineStrokeWidth, Math.abs(xx2 - xx1), 
+                    dataArea.getMaxY() - yy - outlineStrokeWidth);
             g2.fill(band);
             currentGridBandIsDark = !currentGridBandIsDark;
         }
-        g2.setPaintMode();
     }
 
     /**
-     * Draws the grid bands for the axis when it is at the top or bottom of
-     * the plot.
+     * Draws the grid bands for an axis that is aligned to the left or
+     * right of the data area (that is, a vertical axis).
      *
-     * @param g2  the graphics device.
-     * @param drawArea  the area within which the chart should be drawn.
-     * @param plotArea  the area within which the plot should be drawn (a
-     *                  subset of the drawArea).
+     * @param g2  the graphics target (<code>null</code> not permitted).
+     * @param plotArea  the area within which the plot is drawn (not used here).
+     * @param dataArea  the area for the data (to which the axes are aligned,
+     *     <code>null</code> not permitted).
      * @param firstGridBandIsDark  True: the first grid band takes the
      *                             color of <CODE>gridBandPaint</CODE>.
      *                             False: the second grid band takes the
      *                             color of <CODE>gridBandPaint</CODE>.
-     * @param ticks  a list of ticks.
+     * @param ticks  a list of ticks (<code>null</code> not permitted).
      */
-    protected void drawGridBandsVertical(Graphics2D g2, Rectangle2D drawArea,
-            Rectangle2D plotArea, boolean firstGridBandIsDark, List ticks) {
+    protected void drawGridBandsVertical(Graphics2D g2, Rectangle2D plotArea,
+            Rectangle2D dataArea, boolean firstGridBandIsDark, 
+            List ticks) {
 
         boolean currentGridBandIsDark = firstGridBandIsDark;
-        double xx = plotArea.getX();
+        double xx = dataArea.getX();
         double yy1, yy2;
 
         //gets the outline stroke width of the plot
-        double outlineStrokeWidth;
+        double outlineStrokeWidth = 1.0;
         Stroke outlineStroke = getPlot().getOutlineStroke();
         if (outlineStroke != null && outlineStroke instanceof BasicStroke) {
             outlineStrokeWidth = ((BasicStroke) outlineStroke).getLineWidth();
-        }
-        else {
-            outlineStrokeWidth = 1d;
         }
 
         Iterator iterator = ticks.iterator();
@@ -424,9 +417,9 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         Rectangle2D band;
         while (iterator.hasNext()) {
             tick = (ValueTick) iterator.next();
-            yy1 = valueToJava2D(tick.getValue() + 0.5d, plotArea,
+            yy1 = valueToJava2D(tick.getValue() + 0.5d, dataArea,
                     RectangleEdge.LEFT);
-            yy2 = valueToJava2D(tick.getValue() - 0.5d, plotArea,
+            yy2 = valueToJava2D(tick.getValue() - 0.5d, dataArea,
                     RectangleEdge.LEFT);
             if (currentGridBandIsDark) {
                 g2.setPaint(this.gridBandPaint);
@@ -434,12 +427,12 @@ public class SymbolAxis extends NumberAxis implements Serializable {
             else {
                 g2.setPaint(this.gridBandAlternatePaint);
             }
-            band = new Rectangle2D.Double(xx + outlineStrokeWidth, yy1,
-                    plotArea.getMaxX() - xx - outlineStrokeWidth, yy2 - yy1);
+            band = new Rectangle2D.Double(xx + outlineStrokeWidth, 
+                    Math.min(yy1, yy2), dataArea.getMaxX() - xx 
+                    - outlineStrokeWidth, Math.abs(yy2 - yy1));
             g2.fill(band);
             currentGridBandIsDark = !currentGridBandIsDark;
         }
-        g2.setPaintMode();
     }
 
     /**
@@ -447,7 +440,6 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      */
     @Override
     protected void autoAdjustRange() {
-
         Plot plot = getPlot();
         if (plot == null) {
             return;  // no plot, no data
@@ -475,47 +467,37 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                 if (getAutoRangeStickyZero()) {
                     if (upper <= 0.0) {
                         upper = 0.0;
-                    }
-                    else {
+                    } else {
                         upper = upper + upperMargin;
                     }
                     if (lower >= 0.0) {
                         lower = 0.0;
-                    }
-                    else {
+                    } else {
                         lower = lower - lowerMargin;
                     }
-                }
-                else {
+                } else {
                     upper = Math.max(0.0, upper + upperMargin);
                     lower = Math.min(0.0, lower - lowerMargin);
                 }
-            }
-            else {
+            } else {
                 if (getAutoRangeStickyZero()) {
                     if (upper <= 0.0) {
                         upper = Math.min(0.0, upper + upperMargin);
-                    }
-                    else {
+                    } else {
                         upper = upper + upperMargin * range;
                     }
                     if (lower >= 0.0) {
                         lower = Math.max(0.0, lower - lowerMargin);
-                    }
-                    else {
+                    } else {
                         lower = lower - lowerMargin;
                     }
-                }
-                else {
+                } else {
                     upper = upper + upperMargin;
                     lower = lower - lowerMargin;
                 }
             }
-
             setRange(new Range(lower, upper), false, false);
-
         }
-
     }
 
     /**
@@ -535,8 +517,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         List ticks = null;
         if (RectangleEdge.isTopOrBottom(edge)) {
             ticks = refreshTicksHorizontal(g2, dataArea, edge);
-        }
-        else if (RectangleEdge.isLeftOrRight(edge)) {
+        } else if (RectangleEdge.isLeftOrRight(edge)) {
             ticks = refreshTicksVertical(g2, dataArea, edge);
         }
         return ticks;
