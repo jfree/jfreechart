@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * PaintMap.java
  * -------------
- * (C) Copyright 2006-2013, by Object Refinery Limited.
+ * (C) Copyright 2006-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -174,9 +174,12 @@ public class PaintMap implements Cloneable, Serializable {
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
+        PaintMap clone = (PaintMap) super.clone();
+        clone.store = new HashMap();
+        clone.store.putAll(this.store);
         // TODO: I think we need to make sure the keys are actually cloned,
         // whereas the paint instances are always immutable so they're OK
-        return super.clone();
+        return clone;
     }
 
     /**
