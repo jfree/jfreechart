@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------------
  * StandardPieSectionLabelGenerator.java
  * -------------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,6 +41,7 @@
  * 10-Jan-2007 : Include attributedLabels in equals() test (DG);
  * 10-Jul-2007 : Added constructors with locale parameter (DG);
  * 23-Apr-2008 : Implemented PublicCloneable (DG);
+ * 07-Apr-2014 : Fix cloning issue (DG);
  *
  */
 
@@ -52,10 +53,11 @@ import java.awt.font.TextAttribute;
 import java.io.Serializable;
 import java.text.AttributedString;
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import org.jfree.data.general.PieDataset;
-import org.jfree.util.ObjectList;
 import org.jfree.util.PublicCloneable;
 
 /**
@@ -79,9 +81,10 @@ public class StandardPieSectionLabelGenerator
     public static final String DEFAULT_SECTION_LABEL_FORMAT = "{0}";
 
     /**
-     * An optional list of attributed labels (instances of AttributedString).
+     * An optional map between item indices (Integer) and attributed labels 
+     * (instances of AttributedString).
      */
-    private ObjectList attributedLabels;
+    private Map attributedLabels;
 
     /**
      * Creates a new section label generator using
@@ -141,7 +144,7 @@ public class StandardPieSectionLabelGenerator
     public StandardPieSectionLabelGenerator(String labelFormat,
             NumberFormat numberFormat, NumberFormat percentFormat) {
         super(labelFormat, numberFormat, percentFormat);
-        this.attributedLabels = new ObjectList();
+        this.attributedLabels = new HashMap();
     }
 
     /**
@@ -163,7 +166,7 @@ public class StandardPieSectionLabelGenerator
      * @param label  the label (<code>null</code> permitted).
      */
     public void setAttributedLabel(int section, AttributedString label) {
-        this.attributedLabels.set(section, label);
+        this.attributedLabels.put(section, label);
     }
 
     /**
@@ -208,7 +211,7 @@ public class StandardPieSectionLabelGenerator
      */
     @Override
     public AttributedString generateAttributedSectionLabel(PieDataset dataset,
-                                                           Comparable key) {
+            Comparable key) {
         return getAttributedLabel(dataset.getIndex(key));
     }
 
@@ -232,10 +235,7 @@ public class StandardPieSectionLabelGenerator
         if (!this.attributedLabels.equals(that.attributedLabels)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        return true;
+        return super.equals(obj);
     }
 
     /**
@@ -247,7 +247,11 @@ public class StandardPieSectionLabelGenerator
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+        StandardPieSectionLabelGenerator clone 
+                = (StandardPieSectionLabelGenerator) super.clone();        
+        clone.attributedLabels = new HashMap();
+        clone.attributedLabels.putAll(this.attributedLabels);
+        return clone;
     }
 
 }

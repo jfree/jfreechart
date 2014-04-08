@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * PiePlot.java
  * ------------
- * (C) Copyright 2000-2013, by Andrzej Porebski and Contributors.
+ * (C) Copyright 2000-2014, by Andrzej Porebski and Contributors.
  *
  * Original Author:  Andrzej Porebski;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -3473,6 +3473,17 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         PiePlot clone = (PiePlot) super.clone();
+        clone.sectionPaintMap = (PaintMap) this.sectionPaintMap.clone();
+        clone.sectionOutlinePaintMap 
+                = (PaintMap) this.sectionOutlinePaintMap.clone();
+        clone.sectionOutlineStrokeMap 
+                = (StrokeMap) this.sectionOutlineStrokeMap.clone();
+        clone.explodePercentages 
+                = new TreeMap<Comparable<?>, Number>(this.explodePercentages);
+        if (this.labelGenerator != null) {
+            clone.labelGenerator = (PieSectionLabelGenerator) 
+                    ObjectUtilities.clone(this.labelGenerator);
+        }
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }
