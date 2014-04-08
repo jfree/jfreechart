@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * PiePlotTest.java
  * ----------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,6 +41,7 @@
  * 17-Apr-2007 : Added check for label generator that returns a null label (DG);
  * 31-Mar-2008 : Updated testEquals() (DG);
  * 10-Jul-2009 : Updated testEquals() (DG);
+ * 07-Apr-2014 : Add cloning tests (DG);
  *
  */
 
@@ -75,6 +76,8 @@ import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 /**
@@ -632,6 +635,80 @@ public class PiePlotTest {
           success = false;
         }
         assertTrue(success);
+    }
+    
+    @Test
+    public void testBug1126() throws CloneNotSupportedException {
+        DefaultPieDataset dataset1 = new DefaultPieDataset();
+        PiePlot plot1 = new PiePlot(dataset1);
+        plot1.setSectionPaint("A", Color.RED);
+        plot1.setSectionPaint("B", Color.GREEN);
+        PiePlot plot2 = (PiePlot) plot1.clone();
+        plot2.setSectionPaint("A", Color.BLUE);
+        plot2.setSectionPaint("B", Color.YELLOW);
+        assertEquals(Color.RED, plot1.getSectionPaint("A"));
+        assertEquals(Color.GREEN, plot1.getSectionPaint("B"));
+        assertEquals(Color.BLUE, plot2.getSectionPaint("A"));
+        assertEquals(Color.YELLOW, plot2.getSectionPaint("B"));
+    }
+    
+    @Test
+    public void testBug1126_b() throws CloneNotSupportedException {
+        DefaultPieDataset dataset1 = new DefaultPieDataset();
+        PiePlot plot1 = new PiePlot(dataset1);
+        plot1.setSectionOutlinePaint("A", Color.RED);
+        plot1.setSectionOutlinePaint("B", Color.GREEN);
+        PiePlot plot2 = (PiePlot) plot1.clone();
+        plot2.setSectionOutlinePaint("A", Color.BLUE);
+        plot2.setSectionOutlinePaint("B", Color.YELLOW);
+        assertEquals(Color.RED, plot1.getSectionOutlinePaint("A"));
+        assertEquals(Color.GREEN, plot1.getSectionOutlinePaint("B"));
+        assertEquals(Color.BLUE, plot2.getSectionOutlinePaint("A"));
+        assertEquals(Color.YELLOW, plot2.getSectionOutlinePaint("B"));
+    }
+    
+    @Test
+    public void testBug1126_c() throws CloneNotSupportedException {
+        DefaultPieDataset dataset1 = new DefaultPieDataset();
+        PiePlot plot1 = new PiePlot(dataset1);
+        plot1.setSectionOutlineStroke("A", new BasicStroke(5.0f));
+        plot1.setSectionOutlineStroke("B", new BasicStroke(6.0f));
+        PiePlot plot2 = (PiePlot) plot1.clone();
+        plot2.setSectionOutlineStroke("A", new BasicStroke(7.0f));
+        plot2.setSectionOutlineStroke("B", new BasicStroke(8.0f));
+        assertEquals(new BasicStroke(5.0f), plot1.getSectionOutlineStroke("A"));
+        assertEquals(new BasicStroke(6.0f), plot1.getSectionOutlineStroke("B"));
+        assertEquals(new BasicStroke(7.0f), plot2.getSectionOutlineStroke("A"));
+        assertEquals(new BasicStroke(8.0f), plot2.getSectionOutlineStroke("B"));
+    }
+    
+    @Test
+    public void testBug1126_d() throws CloneNotSupportedException {
+        DefaultPieDataset dataset1 = new DefaultPieDataset();
+        PiePlot plot1 = new PiePlot(dataset1);
+        plot1.setExplodePercent("A", 0.1);
+        plot1.setExplodePercent("B", 0.2);
+        PiePlot plot2 = (PiePlot) plot1.clone();
+        plot2.setExplodePercent("A", 0.3);
+        plot2.setExplodePercent("B", 0.4);
+        assertEquals(0.1, plot1.getExplodePercent("A"), EPSILON);
+        assertEquals(0.2, plot1.getExplodePercent("B"), EPSILON);
+        assertEquals(0.3, plot2.getExplodePercent("A"), EPSILON);
+        assertEquals(0.4, plot2.getExplodePercent("B"), EPSILON);
+    }
+    
+    private static final double EPSILON = 0.000000001;
+
+    @Test
+    public void testBug1126_e() throws CloneNotSupportedException {
+        DefaultPieDataset dataset1 = new DefaultPieDataset();
+        PiePlot plot1 = new PiePlot(dataset1);
+        plot1.setLabelGenerator(new StandardPieSectionLabelGenerator());
+        PiePlot plot2 = (PiePlot) plot1.clone();
+        StandardPieSectionLabelGenerator g2 
+                = (StandardPieSectionLabelGenerator) plot2.getLabelGenerator();
+        g2.setAttributedLabel(1, new AttributedString("TESTING"));
+        assertNotEquals(plot1, plot2);
     }
 
 }
