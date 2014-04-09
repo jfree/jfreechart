@@ -120,6 +120,7 @@
  * 06-Oct-2011 : Add utility methods to work with 1.4 API in GeneralPath (MK)
  * 03-Jul-2013 : Use ParamChecks (DG);
  * 11-Jan-2014 : Fix error in fillDomainGridBand method (DG);
+ * 07-Apr-2014 : Don't use ObjectList anymore (DG);
  * 
  */
 
@@ -141,8 +142,10 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
@@ -170,6 +173,7 @@ import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
@@ -180,7 +184,6 @@ import org.jfree.ui.Layer;
 import org.jfree.ui.LengthAdjustmentType;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectList;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 
@@ -199,13 +202,13 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     private XYPlot plot;
 
     /** A list of item label generators (one per series). */
-    private ObjectList itemLabelGeneratorList;
+    private Map<Integer, XYItemLabelGenerator> itemLabelGeneratorMap;
 
     /** The base item label generator. */
     private XYItemLabelGenerator baseItemLabelGenerator;
 
     /** A list of tool tip generators (one per series). */
-    private ObjectList toolTipGeneratorList;
+    private Map<Integer, XYToolTipGenerator> toolTipGeneratorMap;
 
     /** The base tool tip generator. */
     private XYToolTipGenerator baseToolTipGenerator;
@@ -241,9 +244,10 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     protected AbstractXYItemRenderer() {
         super();
         this.itemLabelGenerator = null;
-        this.itemLabelGeneratorList = new ObjectList();
+        this.itemLabelGeneratorMap 
+                = new HashMap<Integer, XYItemLabelGenerator>();
         this.toolTipGenerator = null;
-        this.toolTipGeneratorList = new ObjectList();
+        this.toolTipGeneratorMap = new HashMap<Integer, XYToolTipGenerator>();
         this.urlGenerator = null;
         this.backgroundAnnotations = new java.util.ArrayList();
         this.foregroundAnnotations = new java.util.ArrayList();
@@ -328,7 +332,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
 
         // otherwise look up the generator table
         XYItemLabelGenerator generator
-            = (XYItemLabelGenerator) this.itemLabelGeneratorList.get(series);
+            = (XYItemLabelGenerator) this.itemLabelGeneratorMap.get(series);
         if (generator == null) {
             generator = this.baseItemLabelGenerator;
         }
@@ -344,7 +348,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public XYItemLabelGenerator getSeriesItemLabelGenerator(int series) {
-        return (XYItemLabelGenerator) this.itemLabelGeneratorList.get(series);
+        return this.itemLabelGeneratorMap.get(series);
     }
 
     /**
@@ -356,8 +360,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void setSeriesItemLabelGenerator(int series,
-                                            XYItemLabelGenerator generator) {
-        this.itemLabelGeneratorList.set(series, generator);
+            XYItemLabelGenerator generator) {
+        this.itemLabelGeneratorMap.put(series, generator);
         fireChangeEvent();
     }
 
@@ -404,7 +408,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
 
         // otherwise look up the generator table
         XYToolTipGenerator generator
-                = (XYToolTipGenerator) this.toolTipGeneratorList.get(series);
+                = (XYToolTipGenerator) this.toolTipGeneratorMap.get(series);
         if (generator == null) {
             generator = this.baseToolTipGenerator;
         }
@@ -420,7 +424,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public XYToolTipGenerator getSeriesToolTipGenerator(int series) {
-        return (XYToolTipGenerator) this.toolTipGeneratorList.get(series);
+        return this.toolTipGeneratorMap.get(series);
     }
 
     /**
@@ -432,8 +436,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void setSeriesToolTipGenerator(int series,
-                                          XYToolTipGenerator generator) {
-        this.toolTipGeneratorList.set(series, generator);
+            XYToolTipGenerator generator) {
+        this.toolTipGeneratorMap.put(series, generator);
         fireChangeEvent();
     }
 
@@ -1476,8 +1480,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             PublicCloneable pc = (PublicCloneable) this.itemLabelGenerator;
             clone.itemLabelGenerator = (XYItemLabelGenerator) pc.clone();
         }
-        clone.itemLabelGeneratorList
-                = (ObjectList) this.itemLabelGeneratorList.clone();
+        clone.itemLabelGeneratorMap = CloneUtils.cloneMapValues(
+                this.itemLabelGeneratorMap);
         if (this.baseItemLabelGenerator != null
                 && this.baseItemLabelGenerator instanceof PublicCloneable) {
             PublicCloneable pc = (PublicCloneable) this.baseItemLabelGenerator;
@@ -1489,8 +1493,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             PublicCloneable pc = (PublicCloneable) this.toolTipGenerator;
             clone.toolTipGenerator = (XYToolTipGenerator) pc.clone();
         }
-        clone.toolTipGeneratorList
-                = (ObjectList) this.toolTipGeneratorList.clone();
+        clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(
+                this.toolTipGeneratorMap);
         if (this.baseToolTipGenerator != null
                 && this.baseToolTipGenerator instanceof PublicCloneable) {
             PublicCloneable pc = (PublicCloneable) this.baseToolTipGenerator;
@@ -1538,7 +1542,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 that.itemLabelGenerator)) {
             return false;
         }
-        if (!this.itemLabelGeneratorList.equals(that.itemLabelGeneratorList)) {
+        if (!this.itemLabelGeneratorMap.equals(that.itemLabelGeneratorMap)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.baseItemLabelGenerator,
@@ -1549,7 +1553,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 that.toolTipGenerator)) {
             return false;
         }
-        if (!this.toolTipGeneratorList.equals(that.toolTipGeneratorList)) {
+        if (!this.toolTipGeneratorMap.equals(that.toolTipGeneratorMap)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.baseToolTipGenerator,

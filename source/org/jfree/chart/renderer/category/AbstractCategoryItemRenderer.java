@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * AbstractCategoryItemRenderer.java
  * ---------------------------------
- * (C) Copyright 2002-2013, by Object Refinery Limited.
+ * (C) Copyright 2002-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -104,6 +104,7 @@
  * 01-Apr-2009 : Added new addEntity() method (DG);
  * 09-Feb-2010 : Fixed bug 2947660 (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 08-Apr-2014 : Remove use of ObjectList (DG);
  * 
  */
 
@@ -124,7 +125,9 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.CategoryAxis;
@@ -148,6 +151,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.urls.CategoryURLGenerator;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
@@ -158,7 +162,6 @@ import org.jfree.ui.LengthAdjustmentType;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectList;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.SortOrder;
@@ -180,19 +183,19 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     private CategoryPlot plot;
 
     /** A list of item label generators (one per series). */
-    private ObjectList itemLabelGeneratorList;
+    private Map<Integer, CategoryItemLabelGenerator> itemLabelGeneratorMap;
 
     /** The base item label generator. */
     private CategoryItemLabelGenerator baseItemLabelGenerator;
 
     /** A list of tool tip generators (one per series). */
-    private ObjectList toolTipGeneratorList;
+    private Map<Integer, CategoryToolTipGenerator> toolTipGeneratorMap;
 
     /** The base tool tip generator. */
     private CategoryToolTipGenerator baseToolTipGenerator;
 
     /** A list of item label generators (one per series). */
-    private ObjectList itemURLGeneratorList;
+    private Map<Integer, CategoryURLGenerator> itemURLGeneratorMap;
 
     /** The base item label generator. */
     private CategoryURLGenerator baseItemURLGenerator;
@@ -221,11 +224,13 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     protected AbstractCategoryItemRenderer() {
         this.itemLabelGenerator = null;
-        this.itemLabelGeneratorList = new ObjectList();
+        this.itemLabelGeneratorMap 
+                = new HashMap<Integer, CategoryItemLabelGenerator>();
         this.toolTipGenerator = null;
-        this.toolTipGeneratorList = new ObjectList();
+        this.toolTipGeneratorMap 
+                = new HashMap<Integer, CategoryToolTipGenerator>();
         this.itemURLGenerator = null;
-        this.itemURLGeneratorList = new ObjectList();
+        this.itemURLGeneratorMap = new HashMap<Integer, CategoryURLGenerator>();
         this.legendItemLabelGenerator
                 = new StandardCategorySeriesLabelGenerator();
     }
@@ -308,13 +313,12 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         }
 
         // otherwise look up the generator table
-        CategoryItemLabelGenerator generator = (CategoryItemLabelGenerator)
-            this.itemLabelGeneratorList.get(series);
+        CategoryItemLabelGenerator generator = this.itemLabelGeneratorMap.get(
+                series);
         if (generator == null) {
             generator = this.baseItemLabelGenerator;
         }
         return generator;
-
     }
 
     /**
@@ -329,7 +333,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     @Override
     public void setSeriesItemLabelGenerator(int series,
             CategoryItemLabelGenerator generator) {
-        this.itemLabelGeneratorList.set(series, generator);
+        this.itemLabelGeneratorMap.put(series, generator);
         fireChangeEvent();
     }
 
@@ -402,7 +406,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     @Override
     public CategoryToolTipGenerator getSeriesToolTipGenerator(int series) {
-        return (CategoryToolTipGenerator) this.toolTipGeneratorList.get(series);
+        return this.toolTipGeneratorMap.get(series);
     }
 
     /**
@@ -417,7 +421,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     @Override
     public void setSeriesToolTipGenerator(int series,
             CategoryToolTipGenerator generator) {
-        this.toolTipGeneratorList.set(series, generator);
+        this.toolTipGeneratorMap.put(series, generator);
         fireChangeEvent();
     }
 
@@ -475,20 +479,16 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     @Override
     public CategoryURLGenerator getSeriesItemURLGenerator(int series) {
-
         // return the generator for ALL series, if there is one...
         if (this.itemURLGenerator != null) {
             return this.itemURLGenerator;
         }
-
         // otherwise look up the generator table
-        CategoryURLGenerator generator
-            = (CategoryURLGenerator) this.itemURLGeneratorList.get(series);
+        CategoryURLGenerator generator = this.itemURLGeneratorMap.get(series);
         if (generator == null) {
             generator = this.baseItemURLGenerator;
         }
         return generator;
-
     }
 
     /**
@@ -503,7 +503,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
     @Override
     public void setSeriesItemURLGenerator(int series,
             CategoryURLGenerator generator) {
-        this.itemURLGeneratorList.set(series, generator);
+        this.itemURLGeneratorMap.put(series, generator);
         fireChangeEvent();
     }
 
@@ -1238,7 +1238,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     @Override
     public boolean equals(Object obj) {
-
         if (obj == this) {
             return true;
         }
@@ -1251,8 +1250,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
                 that.itemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.itemLabelGeneratorList,
-                that.itemLabelGeneratorList)) {
+        if (!ObjectUtilities.equal(this.itemLabelGeneratorMap,
+                that.itemLabelGeneratorMap)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.baseItemLabelGenerator,
@@ -1263,8 +1262,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
                 that.toolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.toolTipGeneratorList,
-                that.toolTipGeneratorList)) {
+        if (!ObjectUtilities.equal(this.toolTipGeneratorMap,
+                that.toolTipGeneratorMap)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.baseToolTipGenerator,
@@ -1275,8 +1274,8 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
                 that.itemURLGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.itemURLGeneratorList,
-                that.itemURLGeneratorList)) {
+        if (!ObjectUtilities.equal(this.itemURLGeneratorMap,
+                that.itemURLGeneratorMap)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.baseItemURLGenerator,
@@ -1416,7 +1415,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-
         AbstractCategoryItemRenderer clone
             = (AbstractCategoryItemRenderer) super.clone();
 
@@ -1432,9 +1430,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             }
         }
 
-        if (this.itemLabelGeneratorList != null) {
-            clone.itemLabelGeneratorList
-                    = (ObjectList) this.itemLabelGeneratorList.clone();
+        if (this.itemLabelGeneratorMap != null) {
+            clone.itemLabelGeneratorMap = CloneUtils.cloneMapValues(
+                    this.itemLabelGeneratorMap);
         }
 
         if (this.baseItemLabelGenerator != null) {
@@ -1461,9 +1459,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             }
         }
 
-        if (this.toolTipGeneratorList != null) {
-            clone.toolTipGeneratorList
-                    = (ObjectList) this.toolTipGeneratorList.clone();
+        if (this.toolTipGeneratorMap != null) {
+            clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(
+                    this.toolTipGeneratorMap);
         }
 
         if (this.baseToolTipGenerator != null) {
@@ -1490,9 +1488,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             }
         }
 
-        if (this.itemURLGeneratorList != null) {
-            clone.itemURLGeneratorList
-                    = (ObjectList) this.itemURLGeneratorList.clone();
+        if (this.itemURLGeneratorMap != null) {
+            clone.itemURLGeneratorMap = CloneUtils.cloneMapValues(
+                    this.itemURLGeneratorMap);
         }
 
         if (this.baseItemURLGenerator != null) {
