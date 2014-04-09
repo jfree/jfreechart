@@ -239,16 +239,34 @@ public strictfp class Range implements Serializable {
      */
     public static Range combineIgnoringNaN(Range range1, Range range2) {
         if (range1 == null) {
+            if (range2 != null && range2.isNaNRange()) {
+                return null;
+            }
             return range2;
         }
         if (range2 == null) {
+            if (range1.isNaNRange()) {
+                return null;
+            }
             return range1;
         }
         double l = min(range1.getLowerBound(), range2.getLowerBound());
         double u = max(range1.getUpperBound(), range2.getUpperBound());
+        if (Double.isNaN(l) && Double.isNaN(u)) {
+            return null;
+        }
         return new Range(l, u);
     }
     
+    /**
+     * Returns the minimum value.  If either value is NaN, the other value is 
+     * returned.  If both are NaN, NaN is returned.
+     * 
+     * @param d1  value 1.
+     * @param d2  value 2.
+     * 
+     * @return The minimum of the two values. 
+     */
     private static double min(double d1, double d2) {
         if (Double.isNaN(d1)) {
             return d2;
