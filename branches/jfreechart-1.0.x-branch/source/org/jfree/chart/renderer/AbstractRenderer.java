@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * AbstractRenderer.java
  * ---------------------
- * (C) Copyright 2002-2013, by Object Refinery Limited.
+ * (C) Copyright 2002-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -91,6 +91,7 @@
  *               a line (DG);
  * 05-Jul-2012 : No need for BooleanUtilities now that min JDK = 1.4.2 (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 09-Apr-2014 : Remove use of ObjectList (DG);
  *
  */
 
@@ -110,7 +111,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.EventListener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.event.EventListenerList;
 
@@ -122,11 +125,11 @@ import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.LegendTitle;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.BooleanList;
-import org.jfree.util.ObjectList;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PaintList;
 import org.jfree.util.PaintUtilities;
@@ -277,7 +280,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private Boolean baseItemLabelsVisible;
 
     /** The item label font list (one font per series). */
-    private ObjectList itemLabelFontList;
+    private Map<Integer, Font> itemLabelFontMap;
 
     /** The base item label font. */
     private Font baseItemLabelFont;
@@ -289,13 +292,13 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Paint baseItemLabelPaint;
 
     /** The positive item label position (per series). */
-    private ObjectList positiveItemLabelPositionList;
+    private Map<Integer, ItemLabelPosition> positiveItemLabelPositionMap;
 
     /** The fallback positive item label position. */
     private ItemLabelPosition basePositiveItemLabelPosition;
 
     /** The negative item label position (per series). */
-    private ObjectList negativeItemLabelPositionList;
+    private Map<Integer, ItemLabelPosition> negativeItemLabelPositionMap;
 
     /** The fallback negative item label position. */
     private ItemLabelPosition baseNegativeItemLabelPosition;
@@ -343,7 +346,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @since 1.0.11
      */
-    private ObjectList legendTextFont;
+    private Map<Integer, Font> legendTextFontMap;
 
     /**
      * The base legend font.
@@ -389,7 +392,6 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Default constructor.
      */
     public AbstractRenderer() {
-
         this.seriesVisible = null;
         this.seriesVisibleList = new BooleanList();
         this.baseSeriesVisible = true;
@@ -433,7 +435,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.baseItemLabelsVisible = Boolean.FALSE;
 
         this.itemLabelFont = null;
-        this.itemLabelFontList = new ObjectList();
+        this.itemLabelFontMap = new HashMap<Integer, Font>();
         this.baseItemLabelFont = new Font("SansSerif", Font.PLAIN, 10);
 
         this.itemLabelPaint = null;
@@ -441,12 +443,14 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.baseItemLabelPaint = Color.black;
 
         this.positiveItemLabelPosition = null;
-        this.positiveItemLabelPositionList = new ObjectList();
+        this.positiveItemLabelPositionMap 
+                = new HashMap<Integer, ItemLabelPosition>();
         this.basePositiveItemLabelPosition = new ItemLabelPosition(
                 ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER);
 
         this.negativeItemLabelPosition = null;
-        this.negativeItemLabelPositionList = new ObjectList();
+        this.negativeItemLabelPositionMap 
+                = new HashMap<Integer, ItemLabelPosition>();
         this.baseNegativeItemLabelPosition = new ItemLabelPosition(
                 ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_CENTER);
 
@@ -461,14 +465,13 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
         this.treatLegendShapeAsLine = false;
 
-        this.legendTextFont = new ObjectList();
+        this.legendTextFontMap = new HashMap<Integer, Font>();
         this.baseLegendTextFont = null;
 
         this.legendTextPaint = new PaintList();
         this.baseLegendTextPaint = null;
 
         this.listenerList = new EventListenerList();
-
     }
 
     /**
@@ -1896,7 +1899,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesItemLabelFont(int, Font)
      */
     public Font getSeriesItemLabelFont(int series) {
-        return (Font) this.itemLabelFontList.get(series);
+        return this.itemLabelFontMap.get(series);
     }
 
     /**
@@ -1924,7 +1927,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesItemLabelFont(int)
      */
     public void setSeriesItemLabelFont(int series, Font font, boolean notify) {
-        this.itemLabelFontList.set(series, font);
+        this.itemLabelFontMap.put(series, font);
         if (notify) {
             fireChangeEvent();
         }
@@ -2106,20 +2109,17 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesPositiveItemLabelPosition(int, ItemLabelPosition)
      */
     public ItemLabelPosition getSeriesPositiveItemLabelPosition(int series) {
-
         // return the override, if there is one...
         if (this.positiveItemLabelPosition != null) {
             return this.positiveItemLabelPosition;
         }
-
         // otherwise look up the position table
         ItemLabelPosition position = (ItemLabelPosition)
-            this.positiveItemLabelPositionList.get(series);
+            this.positiveItemLabelPositionMap.get(series);
         if (position == null) {
             position = this.basePositiveItemLabelPosition;
         }
         return position;
-
     }
 
     /**
@@ -2148,9 +2148,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesPositiveItemLabelPosition(int)
      */
     public void setSeriesPositiveItemLabelPosition(int series,
-                                                   ItemLabelPosition position,
-                                                   boolean notify) {
-        this.positiveItemLabelPositionList.set(series, position);
+            ItemLabelPosition position, boolean notify) {
+        this.positiveItemLabelPositionMap.put(series, position);
         if (notify) {
             fireChangeEvent();
         }
@@ -2225,20 +2224,17 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesNegativeItemLabelPosition(int, ItemLabelPosition)
      */
     public ItemLabelPosition getSeriesNegativeItemLabelPosition(int series) {
-
         // return the override, if there is one...
         if (this.negativeItemLabelPosition != null) {
             return this.negativeItemLabelPosition;
         }
-
         // otherwise look up the position list
-        ItemLabelPosition position = (ItemLabelPosition)
-            this.negativeItemLabelPositionList.get(series);
+        ItemLabelPosition position 
+                = this.negativeItemLabelPositionMap.get(series);
         if (position == null) {
             position = this.baseNegativeItemLabelPosition;
         }
         return position;
-
     }
 
     /**
@@ -2267,9 +2263,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesNegativeItemLabelPosition(int)
      */
     public void setSeriesNegativeItemLabelPosition(int series,
-                                                   ItemLabelPosition position,
-                                                   boolean notify) {
-        this.negativeItemLabelPositionList.set(series, position);
+            ItemLabelPosition position, boolean notify) {
+        this.negativeItemLabelPositionMap.put(series, position);
         if (notify) {
             fireChangeEvent();
         }
@@ -2606,7 +2601,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public Font getLegendTextFont(int series) {
-        return (Font) this.legendTextFont.get(series);
+        return this.legendTextFontMap.get(series);
     }
 
     /**
@@ -2619,7 +2614,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setLegendTextFont(int series, Font font) {
-        this.legendTextFont.set(series, font);
+        this.legendTextFontMap.put(series, font);
         fireChangeEvent();
     }
 
@@ -3061,8 +3056,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (!ObjectUtilities.equal(this.itemLabelFont, that.itemLabelFont)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.itemLabelFontList,
-                that.itemLabelFontList)) {
+        if (!ObjectUtilities.equal(this.itemLabelFontMap,
+                that.itemLabelFontMap)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.baseItemLabelFont,
@@ -3086,8 +3081,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                 that.positiveItemLabelPosition)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.positiveItemLabelPositionList,
-                that.positiveItemLabelPositionList)) {
+        if (!ObjectUtilities.equal(this.positiveItemLabelPositionMap,
+                that.positiveItemLabelPositionMap)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.basePositiveItemLabelPosition,
@@ -3099,8 +3094,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                 that.negativeItemLabelPosition)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.negativeItemLabelPositionList,
-                that.negativeItemLabelPositionList)) {
+        if (!ObjectUtilities.equal(this.negativeItemLabelPositionMap,
+                that.negativeItemLabelPositionMap)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.baseNegativeItemLabelPosition,
@@ -3128,7 +3123,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                 that.baseLegendShape)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.legendTextFont, that.legendTextFont)) {
+        if (!ObjectUtilities.equal(this.legendTextFontMap, 
+                that.legendTextFontMap)) {
             return false;
         }
         if (!ObjectUtilities.equal(this.baseLegendTextFont,
@@ -3254,9 +3250,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         // 'basePaint' : immutable, no need to clone reference
 
         // 'itemLabelFont' : immutable, no need to clone reference
-        if (this.itemLabelFontList != null) {
-            clone.itemLabelFontList
-                = (ObjectList) this.itemLabelFontList.clone();
+        if (this.itemLabelFontMap != null) {
+            clone.itemLabelFontMap 
+                    = CloneUtils.cloneMapValues(this.itemLabelFontMap);
         }
         // 'baseItemLabelFont' : immutable, no need to clone reference
 
@@ -3268,16 +3264,16 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         // 'baseItemLabelPaint' : immutable, no need to clone reference
 
         // 'postiveItemLabelAnchor' : immutable, no need to clone reference
-        if (this.positiveItemLabelPositionList != null) {
-            clone.positiveItemLabelPositionList
-                = (ObjectList) this.positiveItemLabelPositionList.clone();
+        if (this.positiveItemLabelPositionMap != null) {
+            clone.positiveItemLabelPositionMap = CloneUtils.cloneMapValues(
+                    this.positiveItemLabelPositionMap);
         }
         // 'baseItemLabelAnchor' : immutable, no need to clone reference
 
         // 'negativeItemLabelAnchor' : immutable, no need to clone reference
-        if (this.negativeItemLabelPositionList != null) {
-            clone.negativeItemLabelPositionList
-                = (ObjectList) this.negativeItemLabelPositionList.clone();
+        if (this.negativeItemLabelPositionMap != null) {
+            clone.negativeItemLabelPositionMap = CloneUtils.cloneMapValues(
+                    this.negativeItemLabelPositionMap);
         }
         // 'baseNegativeItemLabelAnchor' : immutable, no need to clone reference
 
@@ -3289,8 +3285,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (this.legendShapeList != null) {
             clone.legendShapeList = (ShapeList) this.legendShapeList.clone();
         }
-        if (this.legendTextFont != null) {
-            clone.legendTextFont = (ObjectList) this.legendTextFont.clone();
+        if (this.legendTextFontMap != null) {
+            clone.legendTextFontMap = CloneUtils.cloneMapValues(
+                    this.legendTextFontMap);
         }
         if (this.legendTextPaint != null) {
             clone.legendTextPaint = (PaintList) this.legendTextPaint.clone();
