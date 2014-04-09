@@ -474,7 +474,6 @@ public class TimeSeriesCollectionTest {
         assertEquals(new Range(10.0, 10.0), collection.getRangeBounds(
                 Arrays.asList("S1"), range, true));
         collection.setXPosition(TimePeriodAnchor.END);
-        assertTrue(collection.getRangeBounds(
-                Arrays.asList("S1"), range, true).isNaNRange());
+        assertNull(collection.getRangeBounds(Arrays.asList("S1"), range, true));
     }
 }

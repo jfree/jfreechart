@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * AbstractRendererTest.java
  * -------------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,11 +47,14 @@
 package org.jfree.chart.renderer;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import org.junit.Test;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -65,7 +68,6 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -78,7 +80,6 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.ui.TextAnchor;
-import org.junit.Test;
 
 /**
  * Tests for the {@link AbstractRenderer} class.
@@ -426,7 +427,50 @@ public class AbstractRendererTest {
         r2.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
                 3.0f, 4.0f, Color.red));
         assertTrue(r1.equals(r2));
+    }
 
+    @Test
+    public void testEquals_ObjectList() {
+        BarRenderer r1 = new BarRenderer();
+        r1.setSeriesItemLabelFont(0, new Font(Font.DIALOG, Font.BOLD, 10));
+        BarRenderer r2 = new BarRenderer();
+        r2.setSeriesItemLabelFont(0, new Font(Font.DIALOG, Font.BOLD, 10));
+        assertEquals(r1, r2);
+        r2.setSeriesItemLabelFont(1, new Font(Font.DIALOG, Font.PLAIN, 5));
+        assertNotEquals(r1, r2);
+    }
+    
+    @Test
+    public void testEquals_ObjectList2() {
+        BarRenderer r1 = new BarRenderer();
+        r1.setLegendTextFont(0, new Font(Font.DIALOG, Font.BOLD, 10));
+        BarRenderer r2 = new BarRenderer();
+        r2.setLegendTextFont(0, new Font(Font.DIALOG, Font.BOLD, 10));
+        assertEquals(r1, r2);
+        r2.setLegendTextFont(1, new Font(Font.DIALOG, Font.PLAIN, 5));
+        assertNotEquals(r1, r2);
+    }
+
+    @Test
+    public void testEquals_ObjectList3() {
+        BarRenderer r1 = new BarRenderer();
+        r1.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
+        BarRenderer r2 = new BarRenderer();
+        r2.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
+        assertEquals(r1, r2);
+        r2.setSeriesPositiveItemLabelPosition(1, new ItemLabelPosition(ItemLabelAnchor.INSIDE1, TextAnchor.CENTER));
+        assertNotEquals(r1, r2);
+    }
+
+    @Test
+    public void testEquals_ObjectList4() {
+        BarRenderer r1 = new BarRenderer();
+        r1.setSeriesNegativeItemLabelPosition(0, new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
+        BarRenderer r2 = new BarRenderer();
+        r2.setSeriesNegativeItemLabelPosition(0, new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
+        assertEquals(r1, r2);
+        r2.setSeriesNegativeItemLabelPosition(1, new ItemLabelPosition(ItemLabelAnchor.INSIDE1, TextAnchor.CENTER));
+        assertNotEquals(r1, r2);
     }
 
     private static class TestRenderer extends XYLineAndShapeRenderer {

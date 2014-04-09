@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * XYPlotTest.java
  * ---------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -55,6 +55,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotEquals;
+
+import org.junit.Test;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -95,7 +98,6 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.date.MonthConstants;
 import org.jfree.ui.Layer;
 import org.jfree.ui.RectangleInsets;
-import org.junit.Test;
 
 /**
  * Tests for the {@link XYPlot} class.
@@ -434,6 +436,76 @@ public class XYPlotTest {
         lic2.add(new LegendItem("XYZ", Color.red));
         plot2.setFixedLegendItems(lic2);
         assertTrue(plot1.equals(plot2));
+    }
+
+    /**
+     * This test covers a flaw in the ObjectList equals() method.
+     */
+    @Test
+    public void testEquals_ObjectList() {
+        XYPlot p1 = new XYPlot();
+        p1.setDomainAxis(new NumberAxis("A"));
+        XYPlot p2 = new XYPlot();
+        p2.setDomainAxis(new NumberAxis("A"));
+        assertEquals(p1, p2);
+        p2.setDomainAxis(1, new NumberAxis("B"));
+        assertNotEquals(p1, p2);
+    }
+    
+    /**
+     * This test covers a flaw in the ObjectList equals() method.
+     */
+    @Test
+    public void testEquals_ObjectList2() {
+        XYPlot p1 = new XYPlot();
+        p1.setDomainAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+        XYPlot p2 = new XYPlot();
+        p2.setDomainAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+        assertEquals(p1, p2);
+        p2.setDomainAxisLocation(1, AxisLocation.TOP_OR_LEFT);
+        assertNotEquals(p1, p2);
+    }
+
+    /**
+     * This test covers a flaw in the ObjectList equals() method.
+     */
+    @Test
+    public void testEquals_ObjectList3() {
+        XYPlot p1 = new XYPlot();
+        p1.setRangeAxis(new NumberAxis("A"));
+        XYPlot p2 = new XYPlot();
+        p2.setRangeAxis(new NumberAxis("A"));
+        assertEquals(p1, p2);
+        p2.setRangeAxis(1, new NumberAxis("B"));
+        assertNotEquals(p1, p2);
+    }
+    
+    /**
+     * This test covers a flaw in the ObjectList equals() method.
+     */
+    @Test
+    public void testEquals_ObjectList4() {
+        XYPlot p1 = new XYPlot();
+        p1.setRangeAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+        XYPlot p2 = new XYPlot();
+        p2.setRangeAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+        assertEquals(p1, p2);
+        p2.setRangeAxisLocation(1, AxisLocation.TOP_OR_LEFT);
+        assertNotEquals(p1, p2);
+    }
+
+    /**
+     * This test covers a flaw in the ObjectList equals() method.
+     */
+    @Test
+    public void testEquals_ObjectList5() {
+        XYPlot p1 = new XYPlot();
+        p1.setRenderer(new XYBarRenderer());
+        XYPlot p2 = new XYPlot();
+        p2.setRenderer(new XYBarRenderer());
+        assertEquals(p1, p2);
+        p2.setRenderer(1, new XYLineAndShapeRenderer());
+        assertNotEquals(p1, p2);
     }
 
     /**

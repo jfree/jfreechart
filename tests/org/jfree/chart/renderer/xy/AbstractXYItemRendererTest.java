@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * AbstractXYItemRendererTest.java
  * -------------------------------
- * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,14 +42,18 @@
 package org.jfree.chart.renderer.xy;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
+
 import org.jfree.chart.labels.StandardXYSeriesLabelGenerator;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.labels.StandardXYItemLabelGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Test;
 
 /**
  * Tests for the {@link AbstractXYItemRenderer} class.
@@ -158,6 +162,28 @@ public class AbstractXYItemRendererTest {
         // check that the generator has been cloned
         assertTrue(r1.getLegendItemURLGenerator()
                 != r2.getLegendItemURLGenerator());
+    }
+    
+    @Test
+    public void testEquals_ObjectList() {
+        XYBarRenderer r1 = new XYBarRenderer();
+        r1.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
+        XYBarRenderer r2 = new XYBarRenderer();
+        r2.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
+        assertEquals(r1, r2);
+        r2.setSeriesItemLabelGenerator(1, new StandardXYItemLabelGenerator("X"));
+        assertNotEquals(r1, r2);
+    }
+
+    @Test
+    public void testEquals_ObjectList2() {
+        XYBarRenderer r1 = new XYBarRenderer();
+        r1.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
+        XYBarRenderer r2 = new XYBarRenderer();
+        r2.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
+        assertEquals(r1, r2);
+        r2.setSeriesToolTipGenerator(1, new StandardXYToolTipGenerator());
+        assertNotEquals(r1, r2);
     }
 
 }
