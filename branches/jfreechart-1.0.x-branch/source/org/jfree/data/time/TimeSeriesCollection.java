@@ -737,8 +737,8 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
         while (iterator.hasNext()) {
             Comparable seriesKey = (Comparable) iterator.next();
             TimeSeries series = getSeries(seriesKey);
-            Range r = new Range(series.getMinY(), series.getMaxY());
-            // FIXME: Here we are ignoring the xRange
+            Range r = series.findValueRange(xRange, this.xPosition, 
+                    this.workingCalendar.getTimeZone());
             result = Range.combineIgnoringNaN(result, r);
         }
         return result;

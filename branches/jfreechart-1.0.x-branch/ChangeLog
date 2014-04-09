@@ -1,3 +1,25 @@
+2013-04-07  David Gilbert  <david.gilbert@object-refinery.com>
+ 
+    * org/jfree/data/time/TimeSeriesCollection.java
+    (getRangeBounds(List, Range, boolean)): Observe the xRange,
+    * org/jfree/data/Range.java
+    (combineIgnoringNaN): Improve NaN handling consistency.
+
+2013-04-07  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/labels/StandardPieSectionLabelGenerator.java
+    (attributedLabels): Change from ObjectList to Map,
+    (StandardPieSectionLabelGenerator): Modify initialisation of storage,
+    (setAttributedLabel): Storage changed to map,
+    (equals): Simplification,
+    (clone): Clone the attributed labels,
+    * org/jfree/chart/StrokeMap.java
+    (clone): Clone the storage,
+    * org/jfree/chart/PaintMap.java
+    (clone): Likewise,
+    * org/jfree/chart/plot/PiePlot.java
+    (clone): Clone required fields.
+
 2013-03-19  David Gilbert  <david.gilbert@object-refinery.com>
   
     * org/jfree/chart/axis/SymbolAxis.java
