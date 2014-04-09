@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CategoryPlotTest.java
  * ---------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -55,6 +55,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotEquals;
+
+import org.junit.Test;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -92,7 +95,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.Layer;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.SortOrder;
-import org.junit.Test;
 
 /**
  * Tests for the {@link CategoryPlot} class.
@@ -130,7 +132,6 @@ public class CategoryPlotTest {
      */
     @Test
     public void testEquals() {
-
         CategoryPlot plot1 = new CategoryPlot();
         CategoryPlot plot2 = new CategoryPlot();
         assertTrue(plot1.equals(plot2));
@@ -483,6 +484,76 @@ public class CategoryPlotTest {
     }
 
     /**
+     * This test covers a flaw in the ObjectList equals() method.
+     */
+    @Test
+    public void testEquals_ObjectList() {
+        CategoryPlot p1 = new CategoryPlot();
+        p1.setDomainAxis(new CategoryAxis("A"));
+        CategoryPlot p2 = new CategoryPlot();
+        p2.setDomainAxis(new CategoryAxis("A"));
+        assertEquals(p1, p2);
+        p2.setDomainAxis(1, new CategoryAxis("B"));
+        assertNotEquals(p1, p2);
+    }
+    
+    /**
+     * This test covers a flaw in the ObjectList equals() method.
+     */
+    @Test
+    public void testEquals_ObjectList2() {
+        CategoryPlot p1 = new CategoryPlot();
+        p1.setDomainAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+        CategoryPlot p2 = new CategoryPlot();
+        p2.setDomainAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+        assertEquals(p1, p2);
+        p2.setDomainAxisLocation(1, AxisLocation.TOP_OR_LEFT);
+        assertNotEquals(p1, p2);
+    }
+
+    /**
+     * This test covers a flaw in the ObjectList equals() method.
+     */
+    @Test
+    public void testEquals_ObjectList3() {
+        CategoryPlot p1 = new CategoryPlot();
+        p1.setRangeAxis(new NumberAxis("A"));
+        CategoryPlot p2 = new CategoryPlot();
+        p2.setRangeAxis(new NumberAxis("A"));
+        assertEquals(p1, p2);
+        p2.setRangeAxis(1, new NumberAxis("B"));
+        assertNotEquals(p1, p2);
+    }
+    
+    /**
+     * This test covers a flaw in the ObjectList equals() method.
+     */
+    @Test
+    public void testEquals_ObjectList4() {
+        CategoryPlot p1 = new CategoryPlot();
+        p1.setRangeAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+        CategoryPlot p2 = new CategoryPlot();
+        p2.setRangeAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+        assertEquals(p1, p2);
+        p2.setRangeAxisLocation(1, AxisLocation.TOP_OR_LEFT);
+        assertNotEquals(p1, p2);
+    }
+
+    /**
+     * This test covers a flaw in the ObjectList equals() method.
+     */
+    @Test
+    public void testEquals_ObjectList5() {
+        CategoryPlot p1 = new CategoryPlot();
+        p1.setRenderer(new BarRenderer());
+        CategoryPlot p2 = new CategoryPlot();
+        p2.setRenderer(new BarRenderer());
+        assertEquals(p1, p2);
+        p2.setRenderer(1, new LineAndShapeRenderer());
+        assertNotEquals(p1, p2);
+    }
+
+    /**
      * Confirm that cloning works.
      */
     @Test
@@ -494,7 +565,7 @@ public class CategoryPlotTest {
                 4.0f, 5.0f, Color.red));
         p1.setRangeZeroBaselinePaint(new GradientPaint(3.0f, 4.0f, Color.red,
                 5.0f, 6.0f, Color.white));
-        CategoryPlot p2 = null;
+        CategoryPlot p2;
         try {
             p2 = (CategoryPlot) p1.clone();
         }
@@ -545,7 +616,7 @@ public class CategoryPlotTest {
         CategoryPlot p1 = new CategoryPlot();
         p1.setFixedDomainAxisSpace(da1);
         p1.setFixedRangeAxisSpace(ra1);
-        CategoryPlot p2 = null;
+        CategoryPlot p2;
         try {
             p2 = (CategoryPlot) p1.clone();
         }
@@ -611,7 +682,7 @@ public class CategoryPlotTest {
         CategoryPlot p1 = new CategoryPlot();
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
         p1.setRenderer(r1);
-        CategoryPlot p2 = null;
+        CategoryPlot p2;
         try {
             p2 = (CategoryPlot) p1.clone();
         }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------------
  * AbstractCategoryItemRendererTest.java
  * -------------------------------------
- * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,11 +45,15 @@
 package org.jfree.chart.renderer.category;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.Test;
+
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import org.jfree.chart.LegendItemCollection;
@@ -61,7 +65,6 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.junit.Test;
 
 /**
  * Tests for the {@link AbstractCategoryItemRenderer} class.
@@ -164,6 +167,39 @@ public class AbstractCategoryItemRendererTest {
         r2.setLegendItemURLGenerator(
                 new StandardCategorySeriesLabelGenerator("URL"));
         assertTrue(r1.equals(r2));
+    }
+
+    @Test
+    public void testEquals_ObjectList() {
+        BarRenderer r1 = new BarRenderer();
+        r1.setSeriesItemLabelGenerator(0, new StandardCategoryItemLabelGenerator());
+        BarRenderer r2 = new BarRenderer();
+        r2.setSeriesItemLabelGenerator(0, new StandardCategoryItemLabelGenerator());
+        assertEquals(r1, r2);
+        r2.setSeriesItemLabelGenerator(1, new StandardCategoryItemLabelGenerator("X", new DecimalFormat("0.0")));
+        assertNotEquals(r1, r2);
+    }
+
+    @Test
+    public void testEquals_ObjectList2() {
+        BarRenderer r1 = new BarRenderer();
+        r1.setSeriesToolTipGenerator(0, new StandardCategoryToolTipGenerator());
+        BarRenderer r2 = new BarRenderer();
+        r2.setSeriesToolTipGenerator(0, new StandardCategoryToolTipGenerator());
+        assertEquals(r1, r2);
+        r2.setSeriesToolTipGenerator(1, new StandardCategoryToolTipGenerator("X", new DecimalFormat("0.0")));
+        assertNotEquals(r1, r2);
+    }
+
+    @Test
+    public void testEquals_ObjectList3() {
+        BarRenderer r1 = new BarRenderer();
+        r1.setSeriesItemURLGenerator(0, new StandardCategoryURLGenerator());
+        BarRenderer r2 = new BarRenderer();
+        r2.setSeriesItemURLGenerator(0, new StandardCategoryURLGenerator());
+        assertEquals(r1, r2);
+        r2.setSeriesItemURLGenerator(1, new StandardCategoryURLGenerator());
+        assertNotEquals(r1, r2);
     }
 
     /**
