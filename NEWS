@@ -1,3 +1,27 @@
+JFreeChart 1.0.18
+-----------------
+11 April 2014
+
+Modified LogAxis to support super-scripted labels, enhanced XYStepAreaRenderer 
+to support a 'stepPoint' attribute (patch from Lukasz Rzeszotarski), provided 
+configurable direction labels in CompassFormat (patch from Simon Legner), 
+added methods to add data item objects to VectorSeries, XIntervalSeries, 
+YIntervalSeries and XYIntervalSeries (for consistency with other data series
+objects), improved the TimeSeries range calculations, provided center text 
+support for the RingPlot class, updated JCommon to version 1.0.22 (this fixes
+a bug in pie label rendering).
+
+Bug Fixes:
+
+- BarRenderer3D now observes the 'visibleSeries' settings;
+- TimeSeriesCollection now takes xRange into account when calculating the
+range bounds;
+- added missing localisation for 'Save As' option on ChartPanel;
+- inverted SymbolAxis not displaying bands correctly;
+- fixed fillDomainGridBand() method in AbstractXYItemRenderer;
+- replaced ObjectList with java.util.Map to avoid bug in equals() methods.
+
+
 JFreeChart 1.0.17
 -----------------
 24 November 2013
