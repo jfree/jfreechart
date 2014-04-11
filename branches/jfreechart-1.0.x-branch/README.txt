@@ -1,10 +1,10 @@
 ********************************
-*  JFREECHART: Version 1.0.17  *
+*  JFREECHART: Version 1.0.18  *
 ********************************
 
-24 November 2013
+11 April 2014
 
-(C)opyright 2000-2013, by Object Refinery Limited and Contributors.
+(C)opyright 2000-2014, by Object Refinery Limited and Contributors.
 
 -----------------
 1.  INTRODUCTION
@@ -38,7 +38,7 @@ message in the JFreeChart forum.
 3.  DOCUMENTATION
 -----------------
 You can download installation instructions
-(jfreechart-1.0.17-install.pdf) from the JFreeChart home
+(jfreechart-1.0.18-install.pdf) from the JFreeChart home
 page or the project page on SourceForge.
 
 Further documentation for JFreeChart (the JFreeChart Developer Guide) is
@@ -66,7 +66,7 @@ worked with JRE/JDK 1.4.2 or later.  With a bit of hacking, it may be possible
 to get JFreeChart working on these older versions, but we are no longer 
 supporting it.
 
-(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.21)
+(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.22)
 is included in the JFreeChart distribution.  You can obtain the complete
 source code for JCommon from:
 
@@ -123,7 +123,7 @@ A demo application that shows a selection of the charts that can be
 generated is included in the JFreeChart distribution.   To run the
 demo (using JDK 1.6.0 or later), use the following command:
 
-    java -jar jfreechart-1.0.17-demo.jar
+    java -jar jfreechart-1.0.18-demo.jar
 
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
@@ -132,7 +132,7 @@ The demo application also links to the JFreeSVG and OrsonPDF libraries, to
 provide export facilities to the SVG and PDF formats.  These fast, lightweight 
 libraries are not free, licenses can be purchased from Object Refinery Limited. 
 
-An additional tab added to the demo application in version 1.0.17 showcases
+An additional tab added to the demo application in version 1.0.18 showcases
 Orson Charts 3D, a new library by Object Refinery Limited.  You can find out
 more about Orson Charts at:
 
@@ -160,6 +160,13 @@ please post a bug report.
 9.  WHAT's NEW
 --------------
 A list of changes in recent versions:
+
+1.0.18 : (11-Apr-2014)
+        - improved LogAxis labelling;
+        - center text support in RingPlot;
+        - 'stepPoint' attribute in the XYStepAreaRenderer;
+        - other minor improvements and bug fixes, see the NEWS and ChangeLog 
+          files for further details.
 
 1.0.17 : (22-Nov-2013)
         - see the NEWS and ChangeLog files for details.
@@ -754,6 +761,7 @@ below:
     - Gideon Krause
     - Dave Law;
     - Pierre-Marie Le Biot
+    - Simon Legner
     - Arnaud Lelievre
     - Wolfgang Lenhard
     - Leo Leung
@@ -775,9 +783,10 @@ below:
     - Viktor Rajewski
     - Eduardo Ramalho
     - Michael Rauch
-    - Cameron Riley
     - Klaus Rheinwald
+    - Cameron Riley
     - Dan Rivett
+    - Lukasz Rzeszotarski
     - Scott Sams
     - Michel Santos
     - Thierry Saura
