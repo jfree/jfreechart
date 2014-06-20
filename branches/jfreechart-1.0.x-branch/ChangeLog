@@ -1,11 +1,18 @@
-2013-04-07  David Gilbert  <david.gilbert@object-refinery.com>
+2014-06-21  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/JFreeChart.java
+    (JFreeChart): Add new rendering hint,
+    (setAntiAlias): Simplify,
+    (readObject): Update initialisation of rendering hints.
+
+2014-04-07  David Gilbert  <david.gilbert@object-refinery.com>
  
     * org/jfree/data/time/TimeSeriesCollection.java
     (getRangeBounds(List, Range, boolean)): Observe the xRange,
     * org/jfree/data/Range.java
     (combineIgnoringNaN): Improve NaN handling consistency.
 
-2013-04-07  David Gilbert  <david.gilbert@object-refinery.com>
+2014-04-07  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/labels/StandardPieSectionLabelGenerator.java
     (attributedLabels): Change from ObjectList to Map,
@@ -20,13 +27,13 @@
     * org/jfree/chart/plot/PiePlot.java
     (clone): Clone required fields.
 
-2013-03-19  David Gilbert  <david.gilbert@object-refinery.com>
+2014-03-19  David Gilbert  <david.gilbert@object-refinery.com>
   
     * org/jfree/chart/axis/SymbolAxis.java
     (drawGridBandsHorizontal): Take into account inverted axis,
     (drawGridBandsVertical): Likewise.
 
-2013-03-18  David Gilbert  <david.gilbert@object-refinery.com>
+2014-03-18  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/utils/AttrStringUtils.java
     (getTextBounds): New method,
