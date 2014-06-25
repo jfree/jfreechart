@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * PlotOrientation.java
  * --------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,6 +37,7 @@
  * 02-May-2003 : Version 1 (DG);
  * 17-Jul-2003 : Added readResolve() method (DG);
  * 21-Nov-2007 : Implemented hashCode() (DG);
+ * 14-May-2014 : Added isHorizontal() and isVertical() methods (DG);
  *
  */
 
@@ -47,6 +48,8 @@ import java.io.Serializable;
 
 /**
  * Used to indicate the orientation (horizontal or vertical) of a 2D plot.
+ * It is the direction of the y-axis that is the determinant (a conventional
+ * plot has a vertical y-axis).
  */
 public final class PlotOrientation implements Serializable {
 
@@ -73,6 +76,30 @@ public final class PlotOrientation implements Serializable {
         this.name = name;
     }
 
+    /**
+     * Returns <code>true</code> if this orientation is <code>HORIZONTAL</code>,
+     * and <code>false</code> otherwise.  
+     * 
+     * @return A boolean.
+     * 
+     * @since 1.0.18
+     */
+    public boolean isHorizontal() {
+        return this.equals(PlotOrientation.HORIZONTAL);
+    }
+    
+    /**
+     * Returns <code>true</code> if this orientation is <code>VERTICAL</code>,
+     * and <code>false</code> otherwise.
+     * 
+     * @return A boolean.
+     * 
+     * @since 1.0.18
+     */
+    public boolean isVertical() {
+        return this.equals(PlotOrientation.VERTICAL);
+    }
+    
     /**
      * Returns a string representing the object.
      *
