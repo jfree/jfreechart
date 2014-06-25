@@ -1,3 +1,9 @@
+2014-06-25  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/plot/PlotOrientation.java
+    (isHorizontal): New method,
+    (isVertical): Likewise.
+
 2014-06-21  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/JFreeChart.java
