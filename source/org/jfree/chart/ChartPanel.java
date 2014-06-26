@@ -1016,7 +1016,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Sets the flag that controls whether or not zooming is enable for the
+     * Sets the flag that controls whether or not zooming is enabled for the
      * domain axis.  A check is made to ensure that the current plot supports
      * zooming for the domain values.
      *
