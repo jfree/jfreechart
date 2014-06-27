@@ -1,3 +1,25 @@
+2014-06-27  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/fx/ChartCanvas.java: New file,
+    * org/jfree/chart/fx/ChartViewer.java: Likewise,
+    * org/jfree/chart/fx/ChartViewerSkin.java: Likewise,
+    * org/jfree/chart/fx/FXGraphics2D.java: Likewise,
+    * org/jfree/chart/fx/chart-viewer.css: Likewise,
+    * org/jfree/chart/fx/demo/BarChartFXDemo1.java: Likewise,
+    * org/jfree/chart/fx/demo/PieChartFXDemo1.java: Likewise,
+    * org/jfree/chart/fx/demo/TimeSeriesChartFXDemo1.java: Likewise,
+    * org/jfree/chart/fx/interaction/AbstractMouseHandlerFX.java: Likewise,
+    * org/jfree/chart/fx/interaction/AnchorHandlerFX.java: Likewise,
+    * org/jfree/chart/fx/interaction/ChartMouseEventFX.java: Likewise,
+    * org/jfree/chart/fx/interaction/ChartMouseListenerFX.java: Likewise,
+    * org/jfree/chart/fx/interaction/DispatchHandlerFX.java: Likewise,
+    * org/jfree/chart/fx/interaction/MouseHandlerFX.java: Likewise,
+    * org/jfree/chart/fx/interaction/PanHandlerFX.java: Likewise,
+    * org/jfree/chart/fx/interaction/ScrollHandlerFX.java: Likewise,
+    * org/jfree/chart/fx/interaction/TooltipHandlerFX.java: Likewise,
+    * org/jfree/chart/fx/interaction/ZoomHandlerFX.java: Likewise,
+    * org/jfree/chart/utils/ExportUtils.java: Likewise.
+
 2014-06-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/plot/PlotOrientation.java
