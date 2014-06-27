@@ -23,13 +23,13 @@
         <property name="jfreechart.version" value="1.0.18-pre" />
         <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
-        <property name="jcommon.version" value="1.0.21" />
+        <property name="jcommon.version" value="1.0.22" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="jfreesvg.name" value="jfreesvg" />
-        <property name="jfreesvg.version" value="1.7" />
+        <property name="jfreesvg.version" value="1.9" />
         <property name="orsonpdf.name" value="orsonpdf" />
-        <property name="orsonpdf.version" value="1.4-eval" />
-        <property name="orsoncharts.version" value="1.0-eval" />
+        <property name="orsonpdf.version" value="1.6-eval" />
+        <property name="orsoncharts.version" value="1.4-eval" />
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
         <property name="junit.jar" value="${basedir}/lib/junit-4.11.jar"/>
@@ -62,6 +62,7 @@
             <classpath refid="build.classpath" />
             <include name="org/jfree/**"/>
             <exclude name="org/jfree/chart/xml/**"/>
+            <exclude name="org/jfree/chart/fx/**"/>
         </javac>
 
         <!-- copy across gorilla.jpg -->
