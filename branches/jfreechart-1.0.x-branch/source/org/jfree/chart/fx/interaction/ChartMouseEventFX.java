@@ -45,6 +45,7 @@ import java.util.EventObject;
 import javafx.scene.input.MouseEvent;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.ChartEntity;
+import org.jfree.chart.fx.ChartViewer;
 
 /**
  * A mouse event for a chart that is displayed in a (JavaFX) 
@@ -75,11 +76,11 @@ public class ChartMouseEventFX extends EventObject implements Serializable {
     /**
      * Constructs a new event.
      *
-     * @param chart  the source chart (<code>null</code> not permitted).
+     * @param chart  the source chart ({@code null} not permitted).
      * @param trigger  the mouse event that triggered this event
-     *                 (<code>null</code> not permitted).
+     *                 ({@code null} not permitted).
      * @param entity  the chart entity (if any) under the mouse point
-     *                (<code>null</code> permitted).
+     *                ({@code null} permitted).
      */
     public ChartMouseEventFX(JFreeChart chart, MouseEvent trigger,
                            ChartEntity entity) {
@@ -92,7 +93,7 @@ public class ChartMouseEventFX extends EventObject implements Serializable {
     /**
      * Returns the chart that the mouse event relates to.
      *
-     * @return The chart (never <code>null</code>).
+     * @return The chart (never {@code null}).
      */
     public JFreeChart getChart() {
         return this.chart;
@@ -101,7 +102,7 @@ public class ChartMouseEventFX extends EventObject implements Serializable {
     /**
      * Returns the mouse event that triggered this event.
      *
-     * @return The event (never <code>null</code>).
+     * @return The event (never {@code null}).
      */
     public MouseEvent getTrigger() {
         return this.trigger;
@@ -110,7 +111,7 @@ public class ChartMouseEventFX extends EventObject implements Serializable {
     /**
      * Returns the chart entity (if any) under the mouse point.
      *
-     * @return The chart entity (possibly <code>null</code>).
+     * @return The chart entity (possibly {@code null}).
      */
     public ChartEntity getEntity() {
         return this.entity;
