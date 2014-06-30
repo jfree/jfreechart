@@ -66,6 +66,11 @@ public class CompassFormat extends NumberFormat {
      * Creates a new formatter using the specified identifiers for
      * the base wind directions.
      * 
+     * @param n  the code for NORTH.
+     * @param e  the code for EAST.
+     * @param s  the code for SOUTH.
+     * @param w  the code for WEST.
+     * 
      * @since 1.0.18
      */
     public CompassFormat(String n, String e, String s, String w) {
