@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryAxis.java
  * -----------------
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Pady Srinivasan (patch 1217634);
@@ -746,7 +746,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param category  the category (<code>null</code> not permitted).
      * @param seriesKey  the series key (<code>null</code> not permitted).
      * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param itemMargin  the item margin (0.0 <= itemMargin < 1.0);
+     * @param itemMargin  the item margin (0.0 &lt;= itemMargin &lt; 1.0);
      * @param area  the area (<code>null</code> not permitted).
      * @param edge  the edge (<code>null</code> not permitted).
      *
@@ -784,7 +784,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param categoryCount  the category count.
      * @param seriesIndex the series index.
      * @param seriesCount the series count.
-     * @param itemMargin  the item margin (0.0 <= itemMargin < 1.0);
+     * @param itemMargin  the item margin (0.0 &lt;= itemMargin &lt; 1.0);
      * @param area  the area (<code>null</code> not permitted).
      * @param edge  the edge (<code>null</code> not permitted).
      *
