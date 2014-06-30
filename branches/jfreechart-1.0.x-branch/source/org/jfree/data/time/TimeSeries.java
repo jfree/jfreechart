@@ -104,6 +104,7 @@ import java.util.TimeZone;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.general.Series;
+import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
 import org.jfree.util.ObjectUtilities;
 
@@ -375,7 +376,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * x-values (where the x-values are interpreted as milliseconds since the
      * epoch and converted to time periods using the specified timezone).
      * 
-     * @param xRange  the subset of x-values to use (<coded>null</code> not
+     * @param xRange  the subset of x-values to use (<code>null</code> not
      *     permitted).
      * @param xAnchor  the anchor point for the x-values (<code>null</code>
      *     not permitted).
@@ -1008,13 +1009,13 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             index = newest.getSerialIndex();
         }
         catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         catch (IllegalAccessException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         catch (InvocationTargetException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         // check if there are any values earlier than specified by the history
@@ -1158,7 +1159,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
                     copy.add(clone);
                 }
                 catch (SeriesException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         }
