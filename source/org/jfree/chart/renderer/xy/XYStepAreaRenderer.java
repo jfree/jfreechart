@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * XYStepAreaRenderer.java
  * -----------------------
- * (C) Copyright 2003-2013, by Matthias Rose and Contributors.
+ * (C) Copyright 2003-2014, by Matthias Rose and Contributors.
  *
  * Original Author:  Matthias Rose (based on XYAreaRenderer.java);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -67,6 +67,7 @@ import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
+import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
