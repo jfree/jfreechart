@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * CategoryLabelPositions.java
  * ---------------------------
- * (C) Copyright 2004-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -129,7 +129,7 @@ public class CategoryLabelPositions implements Serializable {
      * Creates a new instance where the category labels angled upwards by the
      * specified amount.
      *
-     * @param angle  the rotation angle (should be < Math.PI / 2.0).
+     * @param angle  the rotation angle (should be &lt; Math.PI / 2.0).
      *
      * @return A category label position specification.
      */
@@ -159,7 +159,7 @@ public class CategoryLabelPositions implements Serializable {
      * Creates a new instance where the category labels angled downwards by the
      * specified amount.
      *
-     * @param angle  the rotation angle (should be < Math.PI / 2.0).
+     * @param angle  the rotation angle (should be &lt; Math.PI / 2.0).
      *
      * @return A category label position specification.
      */
