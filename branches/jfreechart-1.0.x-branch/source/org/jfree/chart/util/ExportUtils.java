@@ -148,7 +148,7 @@ public class ExportUtils {
     }
 
     /**
-     * Writes a {@link Drawable3D} to the specified file in PDF format.  This 
+     * Writes a {@link Drawable} to the specified file in PDF format.  This 
      * will only work when the OrsonPDF library is found on the classpath.
      * Reflection is used to ensure there is no compile-time dependency on
      * OrsonPDF.
