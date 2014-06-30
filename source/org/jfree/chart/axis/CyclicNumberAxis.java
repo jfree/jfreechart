@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CyclicNumberAxis.java
  * ---------------------
- * (C) Copyright 2003-2013, by Nicolas Brodu and Contributors.
+ * (C) Copyright 2003-2014, by Nicolas Brodu and Contributors.
  *
  * Original Author:  Nicolas Brodu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -90,7 +90,7 @@ With cyclic axis, however, the time is split in
 "cycles", or "time frames", or the same duration : the period.
 
 A cycle axis cannot by definition handle a larger interval
-than the period : <pre>x1 - x0 >= period</pre>. Thus, at most a full
+than the period : <pre>x1 - x0 &gt;= period</pre>. Thus, at most a full
 period can be represented with such an axis.
 
 The cycle bound is the number between x0 and x1 which marks
@@ -98,7 +98,7 @@ the beginning of new time frame:
 <pre>
 |---------------------|----------------------------|
 x0                   cb                           x1
-<---previous cycle---><-------current cycle-------->
+&lt;---previous cycle---&gt;&lt;-------current cycle--------&gt;
 </pre>
 
 It is actually a multiple of the period, plus optionally
@@ -112,7 +112,7 @@ The visual representation of a cyclic axis is like that:
 <pre>
 |----------------------------|---------------------|
 cb                         x1|x0                  cb
-<-------current cycle--------><---previous cycle--->
+&lt;-------current cycle--------&gt;&lt;---previous cycle---&gt;
 </pre>
 
 The cycle bound is at the axis ends, then current
@@ -913,8 +913,7 @@ public class CyclicNumberAxis extends NumberAxis {
     /**
      * The cycle bound is a multiple of the period, plus optionally a start
      * offset.
-     * <P>
-     * <pre>cb = n * period + offset</pre><br>
+     * <p><pre>cb = n * period + offset</pre></p>
      *
      * @return The current offset.
      *
@@ -927,8 +926,7 @@ public class CyclicNumberAxis extends NumberAxis {
     /**
      * The cycle bound is a multiple of the period, plus optionally a start
      * offset.
-     * <P>
-     * <pre>cb = n * period + offset</pre><br>
+     * <p><pre>cb = n * period + offset</pre></p>
      *
      * @param offset The offset to set.
      *
@@ -941,8 +939,7 @@ public class CyclicNumberAxis extends NumberAxis {
     /**
      * The cycle bound is a multiple of the period, plus optionally a start
      * offset.
-     * <P>
-     * <pre>cb = n * period + offset</pre><br>
+     * <p><pre>cb = n * period + offset</pre></p>
      *
      * @return The current period.
      *
@@ -955,8 +952,7 @@ public class CyclicNumberAxis extends NumberAxis {
     /**
      * The cycle bound is a multiple of the period, plus optionally a start
      * offset.
-     * <P>
-     * <pre>cb = n * period + offset</pre><br>
+     * <p><pre>cb = n * period + offset</pre></p>
      *
      * @param period The period to set.
      *
