@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * ChartFactory.java
  * -----------------
- * (C) Copyright 2001-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Serge V. Grachov;
@@ -358,12 +358,12 @@ public abstract class ChartFactory {
     /**
      * Creates a pie chart with default settings that compares 2 datasets.
      * The colour of each section will be determined by the move from the value
-     * for the same key in <code>previousDataset</code>. ie if value1 > value2
-     * then the section will be in green (unless <code>greenForIncrease</code>
-     * is <code>false</code>, in which case it would be <code>red</code>).
-     * Each section can have a shade of red or green as the difference can be
-     * tailored between 0% (black) and percentDiffForMaxScale% (bright
-     * red/green).
+     * for the same key in <code>previousDataset</code>. ie if value1 &gt; 
+     * value2 then the section will be in green (unless 
+     * <code>greenForIncrease</code> is <code>false</code>, in which case it 
+     * would be <code>red</code>). Each section can have a shade of red or 
+     * green as the difference can be tailored between 0% (black) and 
+     * percentDiffForMaxScale% (bright red/green).
      * <p>
      * For instance if <code>percentDiffForMaxScale</code> is 10 (10%), a
      * difference of 5% will have a half shade of red/green, a difference of
@@ -478,12 +478,12 @@ public abstract class ChartFactory {
     /**
      * Creates a pie chart with default settings that compares 2 datasets.
      * The colour of each section will be determined by the move from the value
-     * for the same key in <code>previousDataset</code>. ie if value1 > value2
-     * then the section will be in green (unless <code>greenForIncrease</code>
-     * is <code>false</code>, in which case it would be <code>red</code>).
-     * Each section can have a shade of red or green as the difference can be
-     * tailored between 0% (black) and percentDiffForMaxScale% (bright
-     * red/green).
+     * for the same key in <code>previousDataset</code>. ie if value1 &gt; 
+     * value2 then the section will be in green (unless 
+     * <code>greenForIncrease</code> is <code>false</code>, in which case it 
+     * would be <code>red</code>). Each section can have a shade of red or 
+     * green as the difference can be tailored between 0% (black) and 
+     * percentDiffForMaxScale% (bright red/green).
      * <p>
      * For instance if <code>percentDiffForMaxScale</code> is 10 (10%), a
      * difference of 5% will have a half shade of red/green, a difference of
