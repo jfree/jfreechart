@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * Statistics.java
  * ---------------
- * (C) Copyright 2000-2013, by Matthew Wright and Contributors.
+ * (C) Copyright 2000-2014, by Matthew Wright and Contributors.
  *
  * Original Author:  Matthew Wright;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -63,9 +63,9 @@ public abstract class Statistics {
 
     /**
      * Returns the mean of an array of numbers.  This is equivalent to calling
-     * <code>calculateMean(values, true)</code>.
+     * {@code calculateMean(values, true)}.
      *
-     * @param values  the values (<code>null</code> not permitted).
+     * @param values  the values ({@code null} not permitted).
      *
      * @return The mean.
      */
@@ -76,9 +76,9 @@ public abstract class Statistics {
     /**
      * Returns the mean of an array of numbers.
      *
-     * @param values  the values (<code>null</code> not permitted).
+     * @param values  the values ({@code null} not permitted).
      * @param includeNullAndNaN  a flag that controls whether or not
-     *     <code>null</code> and <code>Double.NaN</code> values are included
+     *     {@code null} and {@code Double.NaN} values are included
      *     in the calculation (if either is present in the array, the result is
      *     {@link Double#NaN}).
      *
@@ -112,9 +112,9 @@ public abstract class Statistics {
     }
 
     /**
-     * Returns the mean of a collection of <code>Number</code> objects.
+     * Returns the mean of a collection of {@code Number} objects.
      *
-     * @param values  the values (<code>null</code> not permitted).
+     * @param values  the values ({@code null} not permitted).
      *
      * @return The mean.
      */
@@ -123,11 +123,11 @@ public abstract class Statistics {
     }
 
     /**
-     * Returns the mean of a collection of <code>Number</code> objects.
+     * Returns the mean of a collection of {@code Number} objects.
      *
-     * @param values  the values (<code>null</code> not permitted).
+     * @param values  the values ({@code null} not permitted).
      * @param includeNullAndNaN  a flag that controls whether or not
-     *     <code>null</code> and <code>Double.NaN</code> values are included
+     *     {@code null} and {@code Double.NaN} values are included
      *     in the calculation (if either is present in the array, the result is
      *     {@link Double#NaN}).
      *
@@ -169,13 +169,13 @@ public abstract class Statistics {
     }
 
     /**
-     * Calculates the median for a list of values (<code>Number</code> objects).
+     * Calculates the median for a list of values ({@code Number} objects).
      * The list of values will be copied, and the copy sorted, before
      * calculating the median.  To avoid this step (if your list of values
      * is already sorted), use the {@link #calculateMedian(List, boolean)}
      * method.
      *
-     * @param values  the values (<code>null</code> permitted).
+     * @param values  the values ({@code null} permitted).
      *
      * @return The median.
      */
@@ -184,11 +184,11 @@ public abstract class Statistics {
     }
 
     /**
-     * Calculates the median for a list of values (<code>Number</code> objects).
-     * If <code>copyAndSort</code> is <code>false</code>, the list is assumed
+     * Calculates the median for a list of values ({@code Number} objects).
+     * If {@code copyAndSort} is {@code false}, the list is assumed
      * to be presorted in ascending order by value.
      *
-     * @param values  the values (<code>null</code> permitted).
+     * @param values  the values ({@code null} permitted).
      * @param copyAndSort  a flag that controls whether the list of values is
      *                     copied and sorted.
      *
@@ -232,10 +232,9 @@ public abstract class Statistics {
 
     /**
      * Calculates the median for a sublist within a list of values
-     * (<code>Number</code> objects).
+     * ({@code Number} objects).
      *
-     * @param values  the values, in any order (<code>null</code> not
-     *                permitted).
+     * @param values  the values, in any order ({@code null} not permitted).
      * @param start  the start index.
      * @param end  the end index.
      *
@@ -247,10 +246,10 @@ public abstract class Statistics {
 
     /**
      * Calculates the median for a sublist within a list of values
-     * (<code>Number</code> objects).  The entire list will be sorted if the
-     * <code>ascending</code< argument is <code>false</code>.
+     * ({@code Number} objects).  The entire list will be sorted if the
+     * {@code ascending} argument is {@code false}.
      *
-     * @param values  the values (<code>null</code> not permitted).
+     * @param values  the values ({@code null} not permitted).
      * @param start  the start index.
      * @param end  the end index.
      * @param copyAndSort  a flag that that controls whether the list of values
@@ -299,7 +298,7 @@ public abstract class Statistics {
     /**
      * Returns the standard deviation of a set of numbers.
      *
-     * @param data  the data (<code>null</code> or zero length array not
+     * @param data  the data ({@code null} or zero length array not
      *     permitted).
      *
      * @return The standard deviation of a set of numbers.
@@ -323,8 +322,8 @@ public abstract class Statistics {
      * Fits a straight line to a set of (x, y) data, returning the slope and
      * intercept.
      *
-     * @param xData  the x-data (<code>null</code> not permitted).
-     * @param yData  the y-data (<code>null</code> not permitted).
+     * @param xData  the x-data ({@code null} not permitted).
+     * @param yData  the y-data ({@code null} not permitted).
      *
      * @return A double array with the intercept in [0] and the slope in [1].
      */
@@ -350,8 +349,8 @@ public abstract class Statistics {
     /**
      * Finds the slope of a regression line using least squares.
      *
-     * @param xData  the x-values (<code>null</code> not permitted).
-     * @param yData  the y-values (<code>null</code> not permitted).
+     * @param xData  the x-values ({@code null} not permitted).
+     * @param yData  the y-values ({@code null} not permitted).
      *
      * @return The slope.
      */
