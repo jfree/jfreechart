@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ImageTitle.java
  * ---------------
- * (C) Copyright 2000-2008, by David Berry and Contributors;
+ * (C) Copyright 2000-2014, by David Berry and Contributors;
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -94,7 +94,7 @@ public class ImageTitle extends Title {
     /**
      * Creates a new image title.
      *
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      */
     public ImageTitle(Image image) {
         this(image, image.getHeight(null), image.getWidth(null),
@@ -105,7 +105,7 @@ public class ImageTitle extends Title {
     /**
      * Creates a new image title.
      *
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      * @param position  the title position.
      * @param horizontalAlignment  the horizontal alignment.
      * @param verticalAlignment  the vertical alignment.
@@ -123,7 +123,7 @@ public class ImageTitle extends Title {
      * Creates a new image title with the given image scaled to the given
      * width and height in the given location.
      *
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      * @param height  the height used to draw the image.
      * @param width  the width used to draw the image.
      * @param position  the title position.
@@ -151,7 +151,7 @@ public class ImageTitle extends Title {
     /**
      * Returns the image for the title.
      *
-     * @return The image for the title (never <code>null</code>).
+     * @return The image for the title (never {@code null}).
      */
     public Image getImage() {
         return this.image;
@@ -161,7 +161,7 @@ public class ImageTitle extends Title {
      * Sets the image for the title and notifies registered listeners that the
      * title has been modified.
      *
-     * @param image  the new image (<code>null</code> not permitted).
+     * @param image  the new image ({@code null} not permitted).
      */
     public void setImage(Image image) {
         if (image == null) {
@@ -176,9 +176,9 @@ public class ImageTitle extends Title {
      * returns the block size.
      *
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
-     * @return The block size (in Java2D units, never <code>null</code>).
+     * @return The block size (in Java2D units, never {@code null}).
      */
     @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
@@ -326,9 +326,9 @@ public class ImageTitle extends Title {
      *
      * @param g2  the graphics device.
      * @param area  the area.
-     * @param params  ignored (<code>null</code> permitted).
+     * @param params  ignored ({@code null} permitted).
      *
-     * @return Always <code>null</code>.
+     * @return Always {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
@@ -337,16 +337,16 @@ public class ImageTitle extends Title {
     }
 
     /**
-     * Tests this <code>ImageTitle</code> for equality with an arbitrary
-     * object.  Returns <code>true</code> if:
+     * Tests this {@code ImageTitle} for equality with an arbitrary
+     * object.  Returns {@code true} if:
      * <ul>
-     * <li><code>obj</code> is an instance of <code>ImageTitle</code>;
-     * <li><code>obj</code> references the same image as this
-     *     <code>ImageTitle</code>;
-     * <li><code>super.equals(obj)<code> returns <code>true</code>;
+     * <li>{@code obj} is an instance of {@code ImageTitle};
+     * <li>{@code obj} references the same image as this
+     *     {@code ImageTitle};
+     * <li>{@code super.equals(obj)} returns {@code true};
      * </ul>
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
