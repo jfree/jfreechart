@@ -78,6 +78,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
@@ -105,7 +106,7 @@ public class LogAxis extends ValueAxis {
     private double baseLog = Math.log(10.0);
 
     /** 
-     * The base symbol to display (if <code>null</code> then the numerical
+     * The base symbol to display (if {@code null} then the numerical
      * value of the base is displayed).
      */
     private String baseSymbol = null;
@@ -126,16 +127,16 @@ public class LogAxis extends ValueAxis {
     private NumberFormat numberFormatOverride;
 
     /**
-     * Creates a new <code>LogAxis</code> with no label.
+     * Creates a new {@code LogAxis} with no label.
      */
     public LogAxis() {
         this(null);
     }
 
     /**
-     * Creates a new <code>LogAxis</code> with the given label.
+     * Creates a new {@code LogAxis} with the given label.
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      */
     public LogAxis(String label) {
         super(label, new NumberTickUnitSource());
@@ -145,7 +146,7 @@ public class LogAxis extends ValueAxis {
 
     /**
      * Returns the base for the logarithm calculation.  The default value is
-     * <code>10.0</code>.
+     * {@code 10.0}.
      *
      * @return The base for the logarithm calculation.
      *
@@ -174,10 +175,10 @@ public class LogAxis extends ValueAxis {
 
     /**
      * Returns the symbol used to represent the base of the logarithmic scale
-     * for the axis.  If this is <code>null</code> (the default) then the 
+     * for the axis.  If this is {@code null} (the default) then the 
      * numerical value of the base is displayed.
      * 
-     * @return The base symbol (possibly <code>null</code>).
+     * @return The base symbol (possibly {@code null}).
      * 
      * @since 1.0.18
      */
@@ -189,7 +190,7 @@ public class LogAxis extends ValueAxis {
      * Sets the symbol used to represent the base value of the logarithmic 
      * scale and sends a change event to all registered listeners.
      * 
-     * @param symbol  the symbol (<code>null</code> permitted).
+     * @param symbol  the symbol ({@code null} permitted).
      * 
      * @since 1.0.18
      */
@@ -201,9 +202,9 @@ public class LogAxis extends ValueAxis {
     /**
      * Returns the formatter used to format the base value of the logarithmic
      * scale when it is displayed numerically.  The default value is
-     * <code>new DecimalFormat("0")</code>.
+     * {@code new DecimalFormat("0")}.
      * 
-     * @return The base formatter (never <code>null</code>).
+     * @return The base formatter (never {@code null}).
      * 
      * @since 1.0.18
      */
@@ -216,7 +217,7 @@ public class LogAxis extends ValueAxis {
      * scale when it is displayed numerically and sends a change event to all
      * registered listeners.
      * 
-     * @param formatter  the formatter (<code>null</code> not permitted).
+     * @param formatter  the formatter ({@code null} not permitted).
      * 
      * @since 1.0.18
      */
@@ -271,7 +272,7 @@ public class LogAxis extends ValueAxis {
      * restore it using the {@link ValueAxis#setAutoTickUnitSelection(boolean)}
      * method).
      *
-     * @param unit  the new tick unit (<code>null</code> not permitted).
+     * @param unit  the new tick unit ({@code null} not permitted).
      *
      * @see #getTickUnit()
      */
@@ -287,7 +288,7 @@ public class LogAxis extends ValueAxis {
      * (you can restore it using the
      * {@link ValueAxis#setAutoTickUnitSelection(boolean)} method).
      *
-     * @param unit  the new tick unit (<code>null</code> not permitted).
+     * @param unit  the new tick unit ({@code null} not permitted).
      * @param notify  notify listeners?
      * @param turnOffAutoSelect  turn off the auto-tick selection?
      *
@@ -306,10 +307,10 @@ public class LogAxis extends ValueAxis {
     }
 
     /**
-     * Returns the number format override.  If this is non-<code>null</code>, 
+     * Returns the number format override.  If this is non-{@code null}, 
      * then it will be used to format the numbers on the axis.
      *
-     * @return The number formatter (possibly <code>null</code>).
+     * @return The number formatter (possibly {@code null}).
      *
      * @see #setNumberFormatOverride(NumberFormat)
      */
@@ -319,10 +320,10 @@ public class LogAxis extends ValueAxis {
 
     /**
      * Sets the number format override and sends a change event to all 
-     * registered listeners.  If this is non-<code>null</code>, then it will be
+     * registered listeners.  If this is non-{@code null}, then it will be
      * used to format the numbers on the axis.
      *
-     * @param formatter  the number formatter (<code>null</code> permitted).
+     * @param formatter  the number formatter ({@code null} permitted).
      *
      * @see #getNumberFormatOverride()
      */
@@ -372,13 +373,12 @@ public class LogAxis extends ValueAxis {
 
     /**
      * Converts a Java2D coordinate to an axis value, assuming that the
-     * axis is aligned to the specified <code>edge</code> of the 
-     * <code>area</code>.
+     * axis is aligned to the specified {@code edge} of the {@code area}.
      *
      * @param java2DValue  the Java2D coordinate.
-     * @param area  the area for plotting data (<code>null</code> not 
+     * @param area  the area for plotting data ({@code null} not 
      *     permitted).
-     * @param edge  the edge that the axis is aligned to (<code>null</code> not
+     * @param edge  the edge that the axis is aligned to ({@code null} not
      *     permitted).
      *
      * @return A value along the axis scale.
@@ -413,14 +413,14 @@ public class LogAxis extends ValueAxis {
 
     /**
      * Converts a value on the axis scale to a Java2D coordinate relative to
-     * the given <code>area</code>, based on the axis running along the
-     * specified <code>edge</code>.
+     * the given {@code area}, based on the axis running along the
+     * specified {@code edge}.
      *
      * @param value  the data value.
-     * @param area  the area (<code>null</code> not permitted).
-     * @param edge  the edge (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param edge  the edge ({@code null} not permitted).
      *
-     * @return The Java2D coordinate corresponding to <code>value</code>.
+     * @return The Java2D coordinate corresponding to {@code value}.
      */
     @Override
     public double valueToJava2D(double value, Rectangle2D area,
@@ -515,15 +515,15 @@ public class LogAxis extends ValueAxis {
      * Draws the axis on a Java 2D graphics device (such as the screen or a
      * printer).
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param cursor  the cursor location (determines where to draw the axis).
      * @param plotArea  the area within which the axes and plot should be drawn.
      * @param dataArea  the area within which the data should be drawn.
-     * @param edge  the axis location (<code>null</code> not permitted).
-     * @param plotState  collects information about the plot
-     *                   (<code>null</code> permitted).
+     * @param edge  the axis location ({@code null} not permitted).
+     * @param plotState  collects information about the plot ({@code null} 
+     *         permitted).
      *
-     * @return The axis state (never <code>null</code>).
+     * @return The axis state (never {@code null}).
      */
     @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
@@ -579,9 +579,9 @@ public class LogAxis extends ValueAxis {
     /**
      * Returns a list of ticks for an axis at the top or bottom of the chart.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
-     * @param dataArea  the data area (<code>null</code> not permitted).
-     * @param edge  the edge (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
+     * @param dataArea  the data area ({@code null} not permitted).
+     * @param edge  the edge ({@code null} not permitted).
      *
      * @return A list of ticks.
      */
@@ -636,9 +636,9 @@ public class LogAxis extends ValueAxis {
     /**
      * Returns a list of ticks for an axis at the left or right of the chart.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
-     * @param dataArea  the data area (<code>null</code> not permitted).
-     * @param edge  the edge that the axis is aligned to (<code>null</code> 
+     * @param g2  the graphics device ({@code null} not permitted).
+     * @param dataArea  the data area ({@code null} not permitted).
+     * @param edge  the edge that the axis is aligned to ({@code null} 
      *     not permitted).
      *
      * @return A list of ticks.
@@ -696,10 +696,10 @@ public class LogAxis extends ValueAxis {
      * display as many ticks as possible (selected from an array of 'standard'
      * tick units) without the labels overlapping.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
-     * @param dataArea  the area defined by the axes (<code>null</code> not 
+     * @param g2  the graphics device ({@code null} not permitted).
+     * @param dataArea  the area defined by the axes ({@code null} not 
      *     permitted).
-     * @param edge  the axis location (<code>null</code> not permitted).
+     * @param edge  the axis location ({@code null} not permitted).
      *
      * @since 1.0.7
      */
@@ -1000,9 +1000,9 @@ public class LogAxis extends ValueAxis {
     /**
      * Resizes the axis length to the specified percentage of the current
      * range and sends a change event to all registered listeners.  If 
-     * <code>percent</code> is greater than 1.0 (100 percent) then the axis
+     * {@code percent} is greater than 1.0 (100 percent) then the axis
      * range is increased (which has the effect of zooming out), while if the
-     * <code>percent</code> is less than 1.0 the axis range is decreased 
+     * {@code percent} is less than 1.0 the axis range is decreased 
      * (which has the effect of zooming in).  The resize occurs around an 
      * anchor value (which may not be in the center of the axis).  This is used
      * to support mouse wheel zooming around an arbitrary point on the plot.
@@ -1037,7 +1037,7 @@ public class LogAxis extends ValueAxis {
     /**
      * Tests this axis for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
