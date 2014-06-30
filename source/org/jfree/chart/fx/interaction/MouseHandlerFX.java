@@ -47,7 +47,7 @@ import org.jfree.chart.fx.ChartCanvas;
  * mouse events on a {@link ChartCanvas} and performs a function in response
  * to those events (typical functions include tooltip display, drag zooming,
  * mouse wheel zooming and panning).  A handler can be registered with the
- * {@ChartCanvas} as a regular handler or as an auxiliary handler.  Upon a 
+ * {@link ChartCanvas} as a regular handler or as an auxiliary handler.  Upon a 
  * mouse pressed event, the canvas will select *one* regular handler to be the
  * current "live" handler - this selection normally takes into account the
  * modifier keys that are specified for the handler.  The live handler is
@@ -68,23 +68,23 @@ public interface MouseHandlerFX {
     /**
      * Returns the ID for the handler.
      * 
-     * @return The ID (never <code>null</code>). 
+     * @return The ID (never {@code null}). 
      */
     String getID();
     
     /**
-     * Returns <code>true</code> if the mouse handler is enabled, and 
-     * <code>false</code> if it is disabled.
+     * Returns {@code true} if the mouse handler is enabled, and 
+     * {@code false} if it is disabled.
      * 
      * @return A boolean. 
      */
     boolean isEnabled();
     
     /**
-     * Returns <code>true</code> if the specified mouse event has modifier
+     * Returns {@code true} if the specified mouse event has modifier
      * keys that match this handler.
      * 
-     * @param e  the mouse event (<code>null</code> not permitted).
+     * @param e  the mouse event ({@code null} not permitted).
      * 
      * @return A boolean. 
      */
@@ -93,48 +93,48 @@ public interface MouseHandlerFX {
     /**
      * Handles a mouse moved event.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     void handleMouseMoved(ChartCanvas canvas, MouseEvent e);
     
     /**
      * Handles a mouse clicked event.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     void handleMouseClicked(ChartCanvas canvas, MouseEvent e);
     
     /**
      * Handles a mouse pressed event.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     void handleMousePressed(ChartCanvas canvas, MouseEvent e);
     
     /**
      * Handles a mouse dragged event.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     void handleMouseDragged(ChartCanvas canvas, MouseEvent e);
     
     /**
      * Handles a mouse released event.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     void handleMouseReleased(ChartCanvas canvas, MouseEvent e);
 
     /**
      * Handles a scroll event.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     void handleScroll(ChartCanvas canvas, ScrollEvent e);
     
