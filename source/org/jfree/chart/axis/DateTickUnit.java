@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * DateTickUnit.java
  * -----------------
- * (C) Copyright 2000-2013, by Object Refinery Limited.
+ * (C) Copyright 2000-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chris Boek;
@@ -101,7 +101,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * Creates a new date tick unit.
      *
      * @param unitType  the unit type (<code>null</code> not permitted).
-     * @param multiple  the multiple (of the unit type, must be > 0).
+     * @param multiple  the multiple (of the unit type, must be &gt; 0).
      *
      * @since 1.0.13
      */
@@ -113,7 +113,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * Creates a new date tick unit.
      *
      * @param unitType  the unit type (<code>null</code> not permitted).
-     * @param multiple  the multiple (of the unit type, must be > 0).
+     * @param multiple  the multiple (of the unit type, must be &gt; 0).
      * @param formatter  the date formatter (<code>null</code> not permitted).
      *
      * @since 1.0.13
@@ -170,7 +170,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
     /**
      * Returns the unit multiple.
      *
-     * @return The unit multiple (always > 0).
+     * @return The unit multiple (always &gt; 0).
      */
     public int getMultiple() {
         return this.count;
