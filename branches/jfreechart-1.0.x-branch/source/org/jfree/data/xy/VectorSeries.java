@@ -48,6 +48,7 @@ package org.jfree.data.xy;
 
 import org.jfree.data.ComparableObjectItem;
 import org.jfree.data.ComparableObjectSeries;
+import org.jfree.data.general.SeriesChangeEvent;
 
 /**
  * A list of (x,y, deltaX, deltaY) data items.
