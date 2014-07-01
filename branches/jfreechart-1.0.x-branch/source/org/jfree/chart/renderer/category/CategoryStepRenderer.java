@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,7 +28,7 @@
  * CategoryStepRenderer.java
  * -------------------------
  *
- * (C) Copyright 2004-2008, by Brian Cole and Contributors.
+ * (C) Copyright 2004-2014, by Brian Cole and Contributors.
  *
  * Original Author:  Brian Cole;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -77,7 +77,7 @@ import org.jfree.util.PublicCloneable;
  * included in the JFreeChart Demo Collection:
  * <br><br>
  * <img src="../../../../../images/CategoryStepRendererSample.png"
- * alt="CategoryStepRendererSample.png" />
+ * alt="CategoryStepRendererSample.png">
  */
 public class CategoryStepRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {
