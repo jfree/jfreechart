@@ -274,7 +274,7 @@ public abstract class ValueAxis extends Axis
 
     /**
      * The number of minor ticks per major tick unit.  This is an override
-     * field, if the value is > 0 it is used, otherwise the axis refers to the
+     * field, if the value is &gt; 0 it is used, otherwise the axis refers to the
      * minorTickCount in the current tickUnit.
      */
     private int minorTickCount;
