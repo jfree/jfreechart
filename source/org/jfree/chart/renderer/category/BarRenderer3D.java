@@ -152,7 +152,7 @@ import org.jfree.util.PublicCloneable;
  * Demo Collection:
  * <br><br>
  * <img src="../../../../../images/BarRenderer3DSample.png"
- * alt="BarRenderer3DSample.png" />
+ * alt="BarRenderer3DSample.png">
  */
 public class BarRenderer3D extends BarRenderer
         implements Effect3D, Cloneable, PublicCloneable, Serializable {
