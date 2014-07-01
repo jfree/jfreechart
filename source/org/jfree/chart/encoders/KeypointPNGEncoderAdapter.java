@@ -52,7 +52,7 @@ import org.jfree.chart.util.ParamChecks;
 /**
  * Adapter class for the Keypoint PNG Encoder.  The ImageEncoderFactory will
  * only return a reference to this class by default if the library has been
- * compiled under a JDK < 1.4 or is being run using a JDK < 1.4.
+ * compiled under a JDK &lt; 1.4 or is being run using a JDK &lt; 1.4.
  */
 public class KeypointPNGEncoderAdapter implements ImageEncoder {
 
