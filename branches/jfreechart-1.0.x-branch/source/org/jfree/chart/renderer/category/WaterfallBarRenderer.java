@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * WaterfallBarRenderer.java
  * -------------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Darshan Shah;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -103,7 +103,7 @@ import org.jfree.util.PaintUtilities;
  * Demo Collection:
  * <br><br>
  * <img src="../../../../../images/WaterfallBarRendererSample.png"
- * alt="WaterfallBarRendererSample.png" />
+ * alt="WaterfallBarRendererSample.png">
  */
 public class WaterfallBarRenderer extends BarRenderer {
 
