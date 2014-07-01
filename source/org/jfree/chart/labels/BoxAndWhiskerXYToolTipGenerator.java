@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------------
  * BoxAndWhiskerXYToolTipGenerator.java
  * ------------------------------------
- * (C) Copyright 2003-2008, by David Browning and Contributors.
+ * (C) Copyright 2003-2014, by David Browning and Contributors.
  *
  * Original Author:  David Browning;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -65,16 +65,16 @@ import org.jfree.data.xy.XYDataset;
  * The tooltip text and item label text are composed using a
  * {@link java.text.MessageFormat} object, that can aggregate some or all of
  * the following string values into a message.
- * <table>
- * <tr><td>0</td><td>Series Name</td></tr>
- * <tr><td>1</td><td>X (value or date)</td></tr>
- * <tr><td>2</td><td>Mean</td></tr>
- * <tr><td>3</td><td>Median</td></tr>
- * <tr><td>4</td><td>Minimum</td></tr>
- * <tr><td>5</td><td>Maximum</td></tr>
- * <tr><td>6</td><td>Quartile 1</td></tr>
- * <tr><td>7</td><td>Quartile 3</td></tr>
- * </table>
+ * <ul>
+ * <li>0 : Series Name</li>
+ * <li>1 : X (value or date)</li>
+ * <li>2 : Mean</li>
+ * <li>3 : Median</li>
+ * <li>4 : Minimum</li>
+ * <li>5 : Maximum</li>
+ * <li>6 : Quartile 1</li>
+ * <li>7 : Quartile 3</li>
+ * </ul>
  */
 public class BoxAndWhiskerXYToolTipGenerator extends StandardXYToolTipGenerator
         implements XYToolTipGenerator, Cloneable, Serializable {
