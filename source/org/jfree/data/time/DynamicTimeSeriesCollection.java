@@ -189,7 +189,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      */
     private boolean domainIsPointsInTime;
 
-    /** index for mapping: points to the oldest valid time & data. */
+    /** index for mapping: points to the oldest valid time and data. */
     private int oldestAt;  // as a class variable, initializes == 0
 
     /** Index of the newest data item. */
