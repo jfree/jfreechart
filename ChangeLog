@@ -1,3 +1,9 @@
+2014-07-01  David Gilbert  <david.gilbert@object-refinery.com>
+    
+    Patch #310 by Ricardo JL Rufino:
+    * org/jfree/data/time/DynamicTimeSeriesCollection.java
+    (DynamicTimeSeriesCollection): Recognise Millisecond time period.
+
 2014-06-27  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/fx/ChartCanvas.java: New file,
