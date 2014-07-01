@@ -188,7 +188,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      * Set the resolution of splines and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
-     * @param p  number of line segments between points (must be > 0).
+     * @param p  number of line segments between points (must be &gt; 0).
      *
      * @see #getPrecision()
      */
