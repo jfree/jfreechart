@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYTaskDataset.java
  * ------------------
- * (C) Copyright 2008-2013, by Object Refinery Limited.
+ * (C) Copyright 2008-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -68,7 +68,7 @@ public class XYTaskDataset extends AbstractXYDataset
     /** The underlying tasks. */
     private TaskSeriesCollection underlying;
 
-    /** The series interval width (typically 0.0 < w <= 1.0). */
+    /** The series interval width (typically 0.0 &lt; w &lt;= 1.0). */
     private double seriesWidth;
 
     /** A flag that controls whether or not the data values are transposed. */
