@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * SegmentedTimeline.java
  * -----------------------
- * (C) Copyright 2003-2008, by Bill Kelemen and Contributors.
+ * (C) Copyright 2003-2014, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -65,12 +65,10 @@ import java.util.TimeZone;
 /**
  * A {@link Timeline} that implements a "segmented" timeline with included,
  * excluded and exception segments.
- * <P>
- * A Timeline will present a series of values to be used for an axis. Each
+ * <p>A Timeline will present a series of values to be used for an axis. Each
  * Timeline must provide transformation methods between domain values and
- * timeline values.
- * <P>
- * A timeline can be used as parameter to a
+ * timeline values.</p>
+ * <p>A timeline can be used as parameter to a
  * {@link org.jfree.chart.axis.DateAxis} to define the values that this axis
  * supports. This class implements a timeline formed by segments of equal
  * length (ex. days, hours, minutes) where some segments can be included in the
@@ -78,31 +76,25 @@ import java.util.TimeZone;
  * "working hours" can be created where non-working days or non-working hours
  * respectively can be removed from the timeline, and therefore from the axis.
  * This creates a smooth plot with equal separation between all included
- * segments.
- * <P>
- * Because Timelines were created mainly for Date related axis, values are
+ * segments.</p>
+ * <p>Because Timelines were created mainly for Date related axis, values are
  * represented as longs instead of doubles. In this case, the domain value is
  * just the number of milliseconds since January 1, 1970, 00:00:00 GMT as
- * defined by the getTime() method of {@link java.util.Date}.
- * <P>
- * In this class, a segment is defined as a unit of time of fixed length.
+ * defined by the getTime() method of {@link java.util.Date}.</p>
+ * <p>In this class, a segment is defined as a unit of time of fixed length.
  * Examples of segments are: days, hours, minutes, etc. The size of a segment
  * is defined as the number of milliseconds in the segment. Some useful segment
  * sizes are defined as constants in this class: DAY_SEGMENT_SIZE,
- * HOUR_SEGMENT_SIZE, FIFTEEN_MINUTE_SEGMENT_SIZE and MINUTE_SEGMENT_SIZE.
- * <P>
- * Segments are group together to form a Segment Group. Each Segment Group will
+ * HOUR_SEGMENT_SIZE, FIFTEEN_MINUTE_SEGMENT_SIZE and MINUTE_SEGMENT_SIZE.</p>
+ * <p>Segments are group together to form a Segment Group. Each Segment Group will
  * contain a number of Segments included and a number of Segments excluded. This
- * Segment Group structure will repeat for the whole timeline.
- * <P>
- * For example, a working days SegmentedTimeline would be formed by a group of
+ * Segment Group structure will repeat for the whole timeline.</p>
+ * <p>For example, a working days SegmentedTimeline would be formed by a group of
  * 7 daily segments, where there are 5 included (Monday through Friday) and 2
- * excluded (Saturday and Sunday) segments.
- * <P>
- * Following is a diagram that explains the major attributes that define a
+ * excluded (Saturday and Sunday) segments.</p>
+ * <p>Following is a diagram that explains the major attributes that define a
  * segment.  Each box is one segment and must be of fixed length (ms, second,
- * hour, day, etc).
- * <p>
+ * hour, day, etc).</p>
  * <pre>
  * start time
  *   |
@@ -122,8 +114,7 @@ import java.util.TimeZone;
  * Legend:<br>
  * &lt;space&gt; = Included segment<br>
  * EE      = Excluded segments in the base timeline<br>
- * <p>
- * In the example, the following segment attributes are presented:
+ * <p>In the example, the following segment attributes are presented:</p>
  * <ul>
  * <li>segment size: the size of each segment in ms.
  * <li>start time: the start of the first segment of the first segment group to
@@ -131,22 +122,19 @@ import java.util.TimeZone;
  * <li>included segments: the number of segments to include in the group.
  * <li>excluded segments: the number of segments to exclude in the group.
  * </ul>
- * <p>
- * Exception Segments are allowed. These exception segments are defined as
+ * <p>Exception Segments are allowed. These exception segments are defined as
  * segments that would have been in the included segments of the Segment Group,
  * but should be excluded for special reasons. In the previous working days
- * SegmentedTimeline example, holidays would be considered exceptions.
- * <P>
- * Additionally the <code>startTime</code>, or start of the first Segment of
+ * SegmentedTimeline example, holidays would be considered exceptions.</p>
+ * <p>Additionally the {@code startTime}, or start of the first Segment of
  * the smallest segment group needs to be defined. This startTime could be
  * relative to January 1, 1970, 00:00:00 GMT or any other date. This creates a
  * point of reference to start counting Segment Groups. For example, for the
- * working days SegmentedTimeline, the <code>startTime</code> could be
+ * working days SegmentedTimeline, the {@code startTime} could be
  * 00:00:00 GMT of the first Monday after January 1, 1970. In this class, the
  * constant FIRST_MONDAY_AFTER_1900 refers to a reference point of the first
- * Monday of the last century.
- * <p>
- * A SegmentedTimeline can include a baseTimeline. This combination of
+ * Monday of the last century.</p>
+ * <p>A SegmentedTimeline can include a baseTimeline. This combination of
  * timelines allows the creation of more complex timelines. For example, in
  * order to implement a SegmentedTimeline for an intraday stock trading
  * application, where the trading period is defined as 9:00 AM through 4:00 PM
@@ -156,11 +144,10 @@ import java.util.TimeZone;
  * that maps the 9:00 AM to 4:00 PM period. Because the baseTimeline defines a
  * timeline of Monday through Friday, the resulting (combined) timeline will
  * expose the period 9:00 AM through 4:00 PM only on Monday through Friday,
- * and will remove all other intermediate intervals.
- * <P>
- * Two factory methods newMondayThroughFridayTimeline() and
+ * and will remove all other intermediate intervals.</p>
+ * <p>Two factory methods newMondayThroughFridayTimeline() and
  * newFifteenMinuteTimeline() are provided as examples to create special
- * SegmentedTimelines.
+ * SegmentedTimelines.</p>
  *
  * @see org.jfree.chart.axis.DateAxis
  */
@@ -218,7 +205,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * calculations.
      *
      * @deprecated As of 1.0.7.  When the default time zone is required,
-     *         just call <code>TimeZone.getDefault()</code>.
+     *         just call {@code TimeZone.getDefault()}.
      */
     public static TimeZone DEFAULT_TIME_ZONE = TimeZone.getDefault();
 
@@ -371,7 +358,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
     /**
      * Factory method to create a Monday through Friday SegmentedTimeline.
      * <P>
-     * The <code>startTime</code> of the resulting timeline will be midnight
+     * The {@code startTime} of the resulting timeline will be midnight
      * of the first Monday after 1/1/1900.
      *
      * @return A fully initialized SegmentedTimeline.
@@ -394,7 +381,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * In order to exclude Saturdays and Sundays it uses a baseTimeline that
      * only includes Monday through Friday days.
      * <P>
-     * The <code>startTime</code> of the resulting timeline will be 9:00 AM
+     * The {@code startTime} of the resulting timeline will be 9:00 AM
      * after the startTime of the baseTimeline. This will correspond to 9:00 AM
      * of the first Monday after 1/1/1900.
      *
@@ -539,7 +526,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
     }
 
     /**
-     * Returns our baseTimeline, or <code>null</code> if none.
+     * Returns our baseTimeline, or {@code null} if none.
      *
      * @return The base timeline.
      */
@@ -738,11 +725,11 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if a value is contained in the timeline.
+     * Returns {@code true} if a value is contained in the timeline.
      *
      * @param millisecond  the value to verify.
      *
-     * @return <code>true</code> if value is contained in the timeline.
+     * @return {@code true} if value is contained in the timeline.
      */
     @Override
     public boolean containsDomainValue(long millisecond) {
@@ -751,11 +738,11 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if a value is contained in the timeline.
+     * Returns {@code true} if a value is contained in the timeline.
      *
      * @param date  date to verify
      *
-     * @return <code>true</code> if value is contained in the timeline
+     * @return {@code true} if value is contained in the timeline
      */
     @Override
     public boolean containsDomainValue(Date date) {
@@ -763,14 +750,14 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if a range of values are contained in the
+     * Returns {@code true} if a range of values are contained in the
      * timeline. This is implemented verifying that all segments are in the
      * range.
      *
      * @param domainValueStart start of the range to verify
      * @param domainValueEnd end of the range to verify
      *
-     * @return <code>true</code> if the range is contained in the timeline
+     * @return {@code true} if the range is contained in the timeline
      */
     @Override
     public boolean containsDomainRange(long domainValueStart,
@@ -796,14 +783,14 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if a range of values are contained in the
+     * Returns {@code true} if a range of values are contained in the
      * timeline. This is implemented verifying that all segments are in the
      * range.
      *
      * @param dateDomainValueStart start of the range to verify
      * @param dateDomainValueEnd end of the range to verify
      *
-     * @return <code>true</code> if the range is contained in the timeline
+     * @return {@code true} if the range is contained in the timeline
      */
     @Override
     public boolean containsDomainRange(Date dateDomainValueStart,
@@ -820,7 +807,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * proposed exception segment will be discarded).
      * <p>
      * The segment is identified by a domainValue into any part of the segment.
-     * Therefore the segmentStart <= domainValue <= segmentEnd.
+     * Therefore the segmentStart &lt;= domainValue &lt;= segmentEnd.
      *
      * @param millisecond  domain value to treat as an exception
      */
@@ -838,7 +825,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * The segment range is identified by a domainValue that begins a valid
      * segment and ends with a domainValue that ends a valid segment.
      * Therefore the range will contain all segments whose segmentStart
-     * <= domainValue and segmentEnd <= toDomainValue.
+     * &lt;= domainValue and segmentEnd &lt;= toDomainValue.
      *
      * @param fromDomainValue  start of domain range to treat as an exception
      * @param toDomainValue  end of domain range to treat as an exception
@@ -954,7 +941,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * no action will occure (the proposed exception segment will be discarded).
      * <p>
      * The segment is identified by a domainValue into any part of the segment.
-     * Therefore the segmentStart <= domainValue <= segmentEnd.
+     * Therefore the segmentStart &lt;= domainValue &lt;= segmentEnd.
      *
      * @param date  date domain value to treat as a baseTimeline exception
      */
@@ -1053,8 +1040,8 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * Returns a segment that contains a domainValue. If the domainValue is
      * not contained in the timeline (because it is not contained in the
      * baseTimeline), a Segment that contains
-     * <code>index + segmentSize*m</code> will be returned for the smallest
-     * <code>m</code> possible.
+     * {@code index + segmentSize*m} will be returned for the smallest
+     * {@code m} possible.
      *
      * @param millisecond  index into the segment
      *
@@ -1071,8 +1058,8 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * If the date is not contained in the timeline (because it is not
      * contained in the baseTimeline), a Segment that contains
-     * <code>date + segmentSize*m</code> will be returned for the smallest
-     * <code>m</code> possible.
+     * {@code date + segmentSize*m} will be returned for the smallest
+     * {@code m} possible.
      *
      * @param date date into the segment
      *
@@ -1089,8 +1076,8 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      * @param o first object to compare
      * @param p second object to compare
      *
-     * @return <code>true</code> if both objects are equal or both
-     *         <code>null</code>, <code>false</code> otherwise.
+     * @return {@code true} if both objects are equal or both
+     *         {@code null}, {@code false} otherwise.
      */
     private boolean equals(Object o, Object p) {
         return (o == p || ((o != null) && o.equals(p)));
@@ -1101,7 +1088,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
      *
      * @param o Object to verify with us
      *
-     * @return <code>true</code> or <code>false</code>
+     * @return {@code true} or {@code false}
      */
     @Override
     public boolean equals(Object o) {
@@ -1355,7 +1342,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          *
          * @param millis  the millisecond to verify.
          *
-         * @return <code>true</code> if the millisecond is contained in the
+         * @return {@code true} if the millisecond is contained in the
          *         segment.
          */
         public boolean contains(long millis) {
@@ -1363,13 +1350,13 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         }
 
         /**
-         * Returns <code>true</code> if an interval is contained in this
+         * Returns {@code true} if an interval is contained in this
          * segment.
          *
          * @param from  the start of the interval.
          * @param to  the end of the interval.
          *
-         * @return <code>true</code> if the interval is contained in the
+         * @return {@code true} if the interval is contained in the
          *         segment.
          */
         public boolean contains(long from, long to) {
@@ -1377,11 +1364,11 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         }
 
         /**
-         * Returns <code>true</code> if a segment is contained in this segment.
+         * Returns {@code true} if a segment is contained in this segment.
          *
          * @param segment  the segment to test for inclusion
          *
-         * @return <code>true</code> if the segment is contained in this
+         * @return {@code true} if the segment is contained in this
          *         segment.
          */
         public boolean contains(Segment segment) {
@@ -1389,14 +1376,12 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         }
 
         /**
-         * Returns <code>true</code> if this segment is contained in an
-         * interval.
+         * Returns {@code true} if this segment is contained in an interval.
          *
          * @param from  the start of the interval.
          * @param to  the end of the interval.
          *
-         * @return <code>true</code> if this segment is contained in the
-         *         interval.
+         * @return {@code true} if this segment is contained in the interval.
          */
         public boolean contained(long from, long to) {
             return (from <= this.segmentStart && this.segmentEnd <= to);
@@ -1421,7 +1406,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         }
 
         /**
-         * Returns <code>true</code> if this segment is wholly before another
+         * Returns {@code true} if this segment is wholly before another
          * segment.
          *
          * @param other  the other segment.
@@ -1433,7 +1418,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         }
 
         /**
-         * Returns <code>true</code> if this segment is wholly after another
+         * Returns {@code true} if this segment is wholly after another
          * segment.
          *
          * @param other  the other segment.
@@ -1445,12 +1430,12 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         }
 
         /**
-         * Tests an object (usually another <code>Segment</code>) for equality
+         * Tests an object (usually another {@code Segment}) for equality
          * with this segment.
          *
          * @param object The other segment to compare with us
          *
-         * @return <code>true</code> if we are the same segment
+         * @return {@code true} if we are the same segment
          */
         @Override
         public boolean equals(Object object) {
@@ -1467,7 +1452,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         }
 
         /**
-         * Returns a copy of ourselves or <code>null</code> if there was an
+         * Returns a copy of ourselves or {@code null} if there was an
          * exception during cloning.
          *
          * @return A copy of this segment.
@@ -1487,8 +1472,8 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          *
          * @param object The other Segment to compare with
          *
-         * @return -1: this < object, 0: this.equal(object) and
-         *         +1: this > object
+         * @return -1: this &lt; object, 0: this.equal(object) and
+         *         +1: this &gt; object
          */
         @Override
         public int compareTo(Object object) {
@@ -1508,7 +1493,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          * Returns true if we are an included segment and we are not an
          * exception.
          *
-         * @return <code>true</code> or <code>false</code>.
+         * @return {@code true} or {@code false}.
          */
         public boolean inIncludeSegments() {
             if (getSegmentNumberRelativeToGroup()
@@ -1523,7 +1508,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         /**
          * Returns true if we are an excluded segment.
          *
-         * @return <code>true</code> or <code>false</code>.
+         * @return {@code true} or {@code false}.
          */
         public boolean inExcludeSegments() {
             return getSegmentNumberRelativeToGroup()
@@ -1556,7 +1541,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          * an excluded segment from our base. If so, it is also considered an
          * exception.
          *
-         * @return <code>true</code> if we are an exception segment.
+         * @return {@code true} if we are an exception segment.
          */
         public boolean inExceptionSegments() {
             return binarySearchExceptionSegments(this) >= 0;
@@ -1702,7 +1687,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
          * Returns true if all Segments of this SegmentRenge are an included
          * segment and are not an exception.
          *
-         * @return <code>true</code> or </code>false</code>.
+         * @return {@code true} or {@code false}.
          */
         @Override
         public boolean inIncludeSegments() {
@@ -1719,7 +1704,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
         /**
          * Returns true if we are an excluded segment.
          *
-         * @return <code>true</code> or </code>false</code>.
+         * @return {@code true} or {@code false}.
          */
         @Override
         public boolean inExcludeSegments() {
@@ -1748,7 +1733,7 @@ public class SegmentedTimeline implements Timeline, Cloneable, Serializable {
     }
 
     /**
-     * Special <code>SegmentRange</code> that came from the BaseTimeline.
+     * Special {@code SegmentRange} that came from the BaseTimeline.
      */
     protected class BaseTimelineSegmentRange extends SegmentRange {
 
