@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * CombinedRangeCategoryPlot.java
  * ------------------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited.
+ * (C) Copyright 2003-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -163,7 +163,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * axis for the subplot will be set to <code>null</code>.
      *
      * @param subplot  the subplot (<code>null</code> not permitted).
-     * @param weight  the weight (must be >= 1).
+     * @param weight  the weight (must be &gt;= 1).
      */
     public void add(CategoryPlot subplot, int weight) {
         ParamChecks.nullNotPermitted(subplot, "subplot");

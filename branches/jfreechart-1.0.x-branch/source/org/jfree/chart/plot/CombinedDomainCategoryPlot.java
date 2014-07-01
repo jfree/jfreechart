@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * CombinedDomainCategoryPlot.java
  * -------------------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited.
+ * (C) Copyright 2003-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -170,7 +170,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * must ensure that the subplot has a non-null range axis.
      *
      * @param subplot  the subplot (<code>null</code> not permitted).
-     * @param weight  the weight (must be >= 1).
+     * @param weight  the weight (must be &gt;= 1).
      */
     public void add(CategoryPlot subplot, int weight) {
         ParamChecks.nullNotPermitted(subplot, "subplot");
@@ -538,7 +538,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * axis.  NOTE: This method is intended for internal JFreeChart use, and
      * is public only so that code in the axis classes can call it.  Since,
      * for this class, the domain axis is a {@link CategoryAxis}
-     * (not a <code>ValueAxis</code}) and subplots have independent range axes,
+     * (not a {@code ValueAxis}) and subplots have independent range axes,
      * the JFreeChart code will never call this method (although this is not
      * checked/enforced).
       *
