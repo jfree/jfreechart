@@ -83,8 +83,8 @@ public strictfp class Range implements Serializable {
     /**
      * Creates a new range.
      *
-     * @param lower  the lower bound (must be <= upper bound).
-     * @param upper  the upper bound (must be >= lower bound).
+     * @param lower  the lower bound (must be &lt;= upper bound).
+     * @param upper  the upper bound (must be &gt;= lower bound).
      */
     public Range(double lower, double upper) {
         if (lower > upper) {
@@ -148,8 +148,8 @@ public strictfp class Range implements Serializable {
      * Returns <code>true</code> if the range intersects with the specified
      * range, and <code>false</code> otherwise.
      *
-     * @param b0  the lower bound (should be <= b1).
-     * @param b1  the upper bound (should be >= b0).
+     * @param b0  the lower bound (should be &lt;= b1).
+     * @param b1  the upper bound (should be &gt;= b0).
      *
      * @return A boolean.
      */
