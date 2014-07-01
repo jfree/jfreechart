@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * DateTitle.java
  * --------------
- * (C) Copyright 2000-2008, by David Berry and Contributors.
+ * (C) Copyright 2000-2014, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -64,7 +64,7 @@ import org.jfree.ui.VerticalAlignment;
  * A chart title that displays the date.
  * <p>
  * Keep in mind that a chart can have several titles, and that they can appear
- * at the top, left, right or bottom of the chart - a <code>DateTitle</code>
+ * at the top, left, right or bottom of the chart - a {@code DateTitle}
  * will commonly appear at the bottom of a chart, although you can place it
  * anywhere.
  * <P>
@@ -93,9 +93,9 @@ public class DateTitle extends TextTitle implements Serializable {
      * Creates a new chart title that displays the current date with the
      * specified style (for the default locale).
      * <P>
-     * The date style should be one of:  <code>SHORT</code>,
-     * <code>MEDIUM</code>, <code>LONG</code> or <code>FULL</code>
-     * (defined in <code>java.util.DateFormat</code>).
+     * The date style should be one of:  {@code SHORT},
+     * {@code MEDIUM}, {@code LONG} or {@code FULL}
+     * (defined in {@code java.util.DateFormat}).
      *
      * @param style  the date style.
      */
@@ -107,11 +107,11 @@ public class DateTitle extends TextTitle implements Serializable {
     /**
      * Creates a new chart title that displays the current date.
      * <p>
-     * The date style should be one of:  <code>SHORT</code>,
-     * <code>MEDIUM</code>, <code>LONG</code> or <code>FULL</code> (defined
-     * in <code>java.util.DateFormat</code>).
+     * The date style should be one of:  {@code SHORT},
+     * {@code MEDIUM}, {@code LONG} or {@code FULL} (defined
+     * in {@code java.util.DateFormat}).
      * <P>
-     * For the locale, you can use <code>Locale.getDefault()</code> for the
+     * For the locale, you can use {@code Locale.getDefault()} for the
      * default locale.
      *
      * @param style  the date style.
@@ -128,11 +128,11 @@ public class DateTitle extends TextTitle implements Serializable {
     /**
      * Creates a new chart title that displays the current date.
      * <p>
-     * The date style should be one of:  <code>SHORT</code>,
-     * <code>MEDIUM</code>, <code>LONG</code> or <code>FULL</code> (defined
-     * in <code>java.util.DateFormat<code>).
+     * The date style should be one of:  {@code SHORT},
+     * {@code MEDIUM}, {@code LONG} or {@code FULL} (defined
+     * in {@code java.util.DateFormat}).
      * <P>
-     * For the locale, you can use <code>Locale.getDefault()</code> for the
+     * For the locale, you can use {@code Locale.getDefault()} for the
      * default locale.
      *
      * @param style  the date style.
@@ -149,10 +149,8 @@ public class DateTitle extends TextTitle implements Serializable {
      *                 title (not null).
      */
     public DateTitle(int style, Locale locale, Font font, Paint paint,
-                     RectangleEdge position,
-                     HorizontalAlignment horizontalAlignment,
-                     VerticalAlignment verticalAlignment,
-                     RectangleInsets padding) {
+            RectangleEdge position, HorizontalAlignment horizontalAlignment,
+            VerticalAlignment verticalAlignment, RectangleInsets padding) {
         super(DateFormat.getDateInstance(style, locale).format(new Date()),
                 font, paint, position, horizontalAlignment, verticalAlignment,
                 padding);
@@ -161,11 +159,11 @@ public class DateTitle extends TextTitle implements Serializable {
     /**
      * Set the format of the date.
      * <P>
-     * The date style should be one of:  <code>SHORT</code>,
-     * <code>MEDIUM</code>, <code>LONG</code> or <code>FULL</code> (defined
-     * in <code>java.util.DateFormat</code>).
+     * The date style should be one of:  {@code SHORT},
+     * {@code MEDIUM}, {@code LONG} or {@code FULL} (defined
+     * in {@code java.util.DateFormat}).
      * <P>
-     * For the locale, you can use <code>Locale.getDefault()</code> for the
+     * For the locale, you can use {@code Locale.getDefault()} for the
      * default locale.
      *
      * @param style  the date style.
