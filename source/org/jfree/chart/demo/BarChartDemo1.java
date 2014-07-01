@@ -1,41 +1,42 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
- *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
- *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; either version 2.1 of the License, or
- * (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
- * License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
- * USA.
- *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
- * Other names may be trademarks of their respective owners.]
- *
- * ------------------
+/* ==================
  * BarChartDemo1.java
- * ------------------
- * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
+ * ==================
+ *
+ * Copyright (c) 2005-2014, Object Refinery Limited.
+ * All rights reserved.
+ *
+ * http://www.jfree.org/jfreechart/index.html
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *   - Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   - Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *   - Neither the name of the Object Refinery Limited nor the
+ *     names of its contributors may be used to endorse or promote products
+ *     derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+ * ARE DISCLAIMED. IN NO EVENT SHALL OBJECT REFINERY LIMITED BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   ;
+ * Contributor(s):   -;
  *
  * Changes
  * -------
  * 09-Mar-2005 : Version 1 (DG);
  * 11-Mar-2014 : Use new ChartFactory method (DG);
+ * 25-Jun-2014 : Update to use real data (DG);
  * 
  */
 
@@ -43,17 +44,16 @@ package org.jfree.chart.demo;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GradientPaint;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
@@ -66,7 +66,7 @@ public class BarChartDemo1 extends ApplicationFrame {
 
     private static final long serialVersionUID = 1L;
 
-    {
+    static {
         // set a theme using the new shadow generator feature available in
         // 1.0.14 - for backwards compatibility it is not enabled by default
         ChartFactory.setChartTheme(new StandardChartTheme("JFree/Shadow",
@@ -95,42 +95,12 @@ public class BarChartDemo1 extends ApplicationFrame {
      * @return The dataset.
      */
     private static CategoryDataset createDataset() {
-
-        // row keys...
-        String series1 = "First";
-        String series2 = "Second";
-        String series3 = "Third";
-
-        // column keys...
-        String category1 = "Category 1";
-        String category2 = "Category 2";
-        String category3 = "Category 3";
-        String category4 = "Category 4";
-        String category5 = "Category 5";
-
-        // create the dataset...
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-        dataset.addValue(1.0, series1, category1);
-        dataset.addValue(4.0, series1, category2);
-        dataset.addValue(3.0, series1, category3);
-        dataset.addValue(5.0, series1, category4);
-        dataset.addValue(5.0, series1, category5);
-
-        dataset.addValue(5.0, series2, category1);
-        dataset.addValue(7.0, series2, category2);
-        dataset.addValue(6.0, series2, category3);
-        dataset.addValue(8.0, series2, category4);
-        dataset.addValue(4.0, series2, category5);
-
-        dataset.addValue(4.0, series3, category1);
-        dataset.addValue(3.0, series3, category2);
-        dataset.addValue(2.0, series3, category3);
-        dataset.addValue(3.0, series3, category4);
-        dataset.addValue(6.0, series3, category5);
-
+        dataset.addValue(7445, "JFreeSVG", "Warm-up");
+        dataset.addValue(24448, "Batik", "Warm-up");
+        dataset.addValue(4297, "JFreeSVG", "Test");
+        dataset.addValue(21022, "Batik", "Test");
         return dataset;
-
     }
 
     /**
@@ -141,18 +111,12 @@ public class BarChartDemo1 extends ApplicationFrame {
      * @return The chart.
      */
     private static JFreeChart createChart(CategoryDataset dataset) {
-
-        // create the chart...
         JFreeChart chart = ChartFactory.createBarChart(
-            "Bar Chart Demo 1",       // chart title
-            "Category",               // domain axis label
-            "Value",                  // range axis label
-            dataset);
-
-        // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
+            "Performance: JFreeSVG vs Batik", null /* x-axis label*/, 
+                "Milliseconds" /* y-axis label */, dataset);
+        chart.addSubtitle(new TextTitle("Time to generate 1000 charts in SVG " 
+                + "format (lower bars = better performance)"));
         chart.setBackgroundPaint(Color.white);
-
-        // get a reference to the plot for further customisation...
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
 
         // ******************************************************************
@@ -163,33 +127,12 @@ public class BarChartDemo1 extends ApplicationFrame {
         //
         // ******************************************************************
 
-        // set the range axis to display integers only...
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-
-        // disable bar outlines...
         BarRenderer renderer = (BarRenderer) plot.getRenderer();
         renderer.setDrawBarOutline(false);
-
-        // set up gradient paints for series...
-        GradientPaint gp0 = new GradientPaint(0.0f, 0.0f, Color.blue,
-                0.0f, 0.0f, new Color(0, 0, 64));
-        GradientPaint gp1 = new GradientPaint(0.0f, 0.0f, Color.green,
-                0.0f, 0.0f, new Color(0, 64, 0));
-        GradientPaint gp2 = new GradientPaint(0.0f, 0.0f, Color.red,
-                0.0f, 0.0f, new Color(64, 0, 0));
-        renderer.setSeriesPaint(0, gp0);
-        renderer.setSeriesPaint(1, gp1);
-        renderer.setSeriesPaint(2, gp2);
-
-        CategoryAxis domainAxis = plot.getDomainAxis();
-        domainAxis.setCategoryLabelPositions(
-                CategoryLabelPositions.createUpRotationLabelPositions(
-                        Math.PI / 6.0));
-        // OPTIONAL CUSTOMISATION COMPLETED.
-
+        chart.getLegend().setFrame(BlockBorder.NONE);
         return chart;
-
     }
 
     /**
@@ -198,7 +141,7 @@ public class BarChartDemo1 extends ApplicationFrame {
      * @param args  ignored.
      */
     public static void main(String[] args) {
-        BarChartDemo1 demo = new BarChartDemo1("Bar Chart Demo 1");
+        BarChartDemo1 demo = new BarChartDemo1("JFreeChart: BarChartDemo1.java");
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
