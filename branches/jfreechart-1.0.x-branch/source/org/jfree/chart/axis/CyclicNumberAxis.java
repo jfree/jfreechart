@@ -913,7 +913,7 @@ public class CyclicNumberAxis extends NumberAxis {
     /**
      * The cycle bound is a multiple of the period, plus optionally a start
      * offset.
-     * <p><pre>cb = n * period + offset</pre></p>
+     * <pre>cb = n * period + offset</pre>
      *
      * @return The current offset.
      *
@@ -926,7 +926,7 @@ public class CyclicNumberAxis extends NumberAxis {
     /**
      * The cycle bound is a multiple of the period, plus optionally a start
      * offset.
-     * <p><pre>cb = n * period + offset</pre></p>
+     * <pre>cb = n * period + offset</pre>
      *
      * @param offset The offset to set.
      *
@@ -939,7 +939,7 @@ public class CyclicNumberAxis extends NumberAxis {
     /**
      * The cycle bound is a multiple of the period, plus optionally a start
      * offset.
-     * <p><pre>cb = n * period + offset</pre></p>
+     * <pre>cb = n * period + offset</pre>
      *
      * @return The current period.
      *
@@ -952,7 +952,7 @@ public class CyclicNumberAxis extends NumberAxis {
     /**
      * The cycle bound is a multiple of the period, plus optionally a start
      * offset.
-     * <p><pre>cb = n * period + offset</pre></p>
+     * <pre>cb = n * period + offset</pre>
      *
      * @param period The period to set.
      *
