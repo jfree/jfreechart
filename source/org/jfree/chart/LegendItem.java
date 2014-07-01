@@ -917,13 +917,14 @@ public class LegendItem implements Cloneable, Serializable {
     /**
      * Sets the outline stroke.
      *
-     * @param stroke  the stroke (never <code>null</code>).
+     * @param stroke  the stroke (<code>null</code> not permitted).
      *
      * @see #getOutlineStroke()
      *
      * @since 1.0.14
      */
     public void setOutlineStroke(Stroke stroke) {
+        ParamChecks.nullNotPermitted(stroke, "stroke");
         this.outlineStroke = stroke;
     }
 
