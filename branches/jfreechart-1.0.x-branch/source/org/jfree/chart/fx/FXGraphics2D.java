@@ -1602,7 +1602,7 @@ public class FXGraphics2D extends Graphics2D {
      */
     private static BufferedImage convertRenderedImage(RenderedImage img) {
         if (img instanceof BufferedImage) {
-            return (BufferedImage) img;	
+            return (BufferedImage) img;
         }
         ColorModel cm = img.getColorModel();
         int width = img.getWidth();
