@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * DefaultAxisEditor.java
  * ----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Andrzej Porebski;
@@ -145,7 +145,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
      * @param axis  the axis whose properties are to be displayed/edited in
      *              the panel.
      *
-     * @return A panel or <code>null</code< if axis is <code>null</code>.
+     * @return A panel or {@code null} if axis is {@code null}.
      */
     public static DefaultAxisEditor getInstance(Axis axis) {
 
@@ -324,7 +324,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     /**
      * Returns a flag that indicates whether or not the tick labels are visible.
      *
-     * @return <code>true</code> if ick mark labels are visible.
+     * @return {@code true} if tick mark labels are visible.
      */
     public boolean isTickLabelsVisible() {
         return this.showTickLabelsCheckBox.isSelected();
@@ -352,7 +352,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
      * Returns the current value of the flag that determines whether or not
      * tick marks are visible.
      *
-     * @return <code>true</code> if tick marks are visible.
+     * @return {@code true} if tick marks are visible.
      */
     public boolean isTickMarksVisible() {
         return this.showTickMarksCheckBox.isSelected();
