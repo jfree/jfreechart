@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * StandardCategoryURLGenerator.java
  * ---------------------------------
- * (C) Copyright 2002-2013, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2014, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -56,6 +56,8 @@
 package org.jfree.chart.urls;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.category.CategoryDataset;
@@ -110,8 +112,10 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
             String seriesParameterName, String categoryParameterName) {
 
         ParamChecks.nullNotPermitted(prefix, "prefix");
-        ParamChecks.nullNotPermitted(seriesParameterName, "seriesParameterName");
-        ParamChecks.nullNotPermitted(categoryParameterName, "categoryParameterName");
+        ParamChecks.nullNotPermitted(seriesParameterName, 
+                "seriesParameterName");
+        ParamChecks.nullNotPermitted(categoryParameterName, 
+                "categoryParameterName");
         this.prefix = prefix;
         this.seriesParameterName = seriesParameterName;
         this.categoryParameterName = categoryParameterName;
@@ -128,17 +132,21 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
      * @return The generated URL.
      */
     @Override
-    public String generateURL(CategoryDataset dataset, int series,
-                              int category) {
+    public String generateURL(CategoryDataset dataset, int series, 
+            int category) {
         String url = this.prefix;
         Comparable seriesKey = dataset.getRowKey(series);
         Comparable categoryKey = dataset.getColumnKey(category);
-        boolean firstParameter = url.indexOf("?") == -1;
+        boolean firstParameter = !url.contains("?");
         url += firstParameter ? "?" : "&amp;";
-        url += this.seriesParameterName + "=" + URLUtilities.encode(
-                seriesKey.toString(), "UTF-8");
-        url += "&amp;" + this.categoryParameterName + "="
-                + URLUtilities.encode(categoryKey.toString(), "UTF-8");
+        try {
+            url += this.seriesParameterName + "=" + URLEncoder.encode(
+                    seriesKey.toString(), "UTF-8");
+            url += "&amp;" + this.categoryParameterName + "="
+                    + URLEncoder.encode(categoryKey.toString(), "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex); // this won't happen :)
+        }
         return url;
     }
 
