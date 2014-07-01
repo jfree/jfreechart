@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------------
  * StatisticalLineAndShapeRenderer.java
  * ------------------------------------
- * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Mofeed Shahin;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -94,7 +94,7 @@ import org.jfree.util.ShapeUtilities;
  * included in the JFreeChart Demo Collection:
  * <br><br>
  * <img src="../../../../../images/StatisticalLineRendererSample.png"
- * alt="StatisticalLineRendererSample.png" />
+ * alt="StatisticalLineRendererSample.png">
  */
 public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         implements Cloneable, PublicCloneable, Serializable {

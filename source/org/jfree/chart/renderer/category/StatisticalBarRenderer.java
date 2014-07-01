@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * StatisticalBarRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2011, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2014, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -101,7 +101,7 @@ import org.jfree.util.PublicCloneable;
  * included in the JFreeChart Demo Collection:
  * <br><br>
  * <img src="../../../../../images/StatisticalBarRendererSample.png"
- * alt="StatisticalBarRendererSample.png" />
+ * alt="StatisticalBarRendererSample.png">
  */
 public class StatisticalBarRenderer extends BarRenderer
         implements CategoryItemRenderer, Cloneable, PublicCloneable,
