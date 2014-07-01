@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * BarRenderer.java
  * ----------------
- * (C) Copyright 2002-2013, by Object Refinery Limited.
+ * (C) Copyright 2002-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -139,7 +139,7 @@ import org.jfree.util.PublicCloneable;
  * program included in the JFreeChart Demo Collection:
  * <br><br>
  * <img src="../../../../../images/BarRendererSample.png"
- * alt="BarRendererSample.png" />
+ * alt="BarRendererSample.png">
  */
 public class BarRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {
@@ -446,7 +446,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * artificially increase the length of bars representing small values,
      * which may misrepresent your data.
      *
-     * @param min  the minimum bar length (in Java2D units, must be >= 0.0).
+     * @param min  the minimum bar length (in Java2D units, must be &gt;= 0.0).
      *
      * @see #getMinimumBarLength()
      */
