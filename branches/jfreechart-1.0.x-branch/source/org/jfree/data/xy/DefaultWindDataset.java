@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DefaultWindDataset.java
  * -----------------------
- * (C) Copyright 2001-2013, by Achilleus Mantzios and Contributors.
+ * (C) Copyright 2001-2014, by Achilleus Mantzios and Contributors.
  *
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -302,7 +302,7 @@ public class DefaultWindDataset extends AbstractXYDataset
      *       <code>DefaultWindDataset</code>;</li>
      *   <li>both datasets have the same number of series containing identical
      *       values.</li>
-     * <ul>
+     * </ul>
      *
      * @param obj  the object (<code>null</code> permitted).
      *

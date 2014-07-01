@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * MatrixSeriesCollection.java
  * ---------------------------
- * (C) Copyright 2003-2013, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-2014, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -108,8 +108,6 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * @param seriesIndex zero-based series index.
      *
      * @return The series.
-     *
-     * @throws IllegalArgumentException
      */
     public MatrixSeries getSeries(int seriesIndex) {
         if ((seriesIndex < 0) || (seriesIndex > getSeriesCount())) {
@@ -316,8 +314,6 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * Notifies all registered listeners that the dataset has changed.
      *
      * @param seriesIndex the series (zero based index).
-     *
-     * @throws IllegalArgumentException
      */
     public void removeSeries(int seriesIndex) {
         // check arguments...
