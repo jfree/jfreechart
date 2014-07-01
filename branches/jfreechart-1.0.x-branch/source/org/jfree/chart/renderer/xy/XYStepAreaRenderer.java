@@ -85,7 +85,7 @@ import org.jfree.util.ShapeUtilities;
  * demo collection:
  * <br><br>
  * <img src="../../../../../images/XYStepAreaRendererSample.png"
- * alt="XYStepAreaRendererSample.png" />
+ * alt="XYStepAreaRendererSample.png">
  */
 public class XYStepAreaRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {

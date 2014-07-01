@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * WindItemRenderer.java
  * ---------------------
- * (C) Copyright 2001-2008, by Achilleus Mantzios and Contributors.
+ * (C) Copyright 2001-2014, by Achilleus Mantzios and Contributors.
  *
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -81,7 +81,7 @@ import org.jfree.util.PublicCloneable;
  * program included in the JFreeChart demo collection:
  * <br><br>
  * <img src="../../../../../images/WindItemRendererSample.png"
- * alt="WindItemRendererSample.png" />
+ * alt="WindItemRendererSample.png">
  */
 public class WindItemRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {

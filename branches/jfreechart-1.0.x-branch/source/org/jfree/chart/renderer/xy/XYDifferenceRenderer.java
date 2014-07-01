@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * XYDifferenceRenderer.java
  * -------------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard West, Advanced Micro Devices, Inc. (major rewrite
@@ -122,7 +122,7 @@ import org.jfree.util.ShapeUtilities;
  * demo collection:
  * <br><br>
  * <img src="../../../../../images/XYDifferenceRendererSample.png"
- * alt="XYDifferenceRendererSample.png" />
+ * alt="XYDifferenceRendererSample.png">
  */
 public class XYDifferenceRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, PublicCloneable {

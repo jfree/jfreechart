@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYBubbleRenderer.java
  * ---------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -90,7 +90,7 @@ import org.jfree.util.PublicCloneable;
  * included in the JFreeChart demo collection:
  * <br><br>
  * <img src="../../../../../images/XYBubbleRendererSample.png"
- * alt="XYBubbleRendererSample.png" />
+ * alt="XYBubbleRendererSample.png">
  */
 public class XYBubbleRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, PublicCloneable {
