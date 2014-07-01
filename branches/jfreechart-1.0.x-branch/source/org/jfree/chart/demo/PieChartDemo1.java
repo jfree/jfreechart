@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * PieChartDemo1.java
  * ------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   ;
@@ -73,7 +73,7 @@ public class PieChartDemo1 extends ApplicationFrame {
 
     private static final long serialVersionUID = 1L;
 
-    {
+    static {
         // set a theme using the new shadow generator feature available in
         // 1.0.14 - for backwards compatibility it is not enabled by default
         ChartFactory.setChartTheme(new StandardChartTheme("JFree/Shadow",
