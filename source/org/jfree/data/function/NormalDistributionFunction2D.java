@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * NormalDistributionFunction2D.java
  * ---------------------------------
- * (C)opyright 2004-2009, by Object Refinery Limited.
+ * (C)opyright 2004-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -71,7 +71,7 @@ public class NormalDistributionFunction2D implements Function2D, Serializable {
      * Constructs a new normal distribution function.
      *
      * @param mean  the mean.
-     * @param std  the standard deviation (> 0).
+     * @param std  the standard deviation (&gt; 0).
      */
     public NormalDistributionFunction2D(double mean, double std) {
         if (std <= 0) {
