@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * DeviationRenderer.java
  * ----------------------
- * (C) Copyright 2007-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -73,7 +73,7 @@ import org.jfree.ui.RectangleEdge;
  * JFreeChart demo collection:
  * <br><br>
  * <img src="../../../../../images/DeviationRendererSample.png"
- * alt="DeviationRendererSample.png" />
+ * alt="DeviationRendererSample.png">
  *
  * @since 1.0.5
  */

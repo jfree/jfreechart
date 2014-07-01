@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYBlockRenderer.java
  * --------------------
- * (C) Copyright 2006-2013, by Object Refinery Limited.
+ * (C) Copyright 2006-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -77,7 +77,7 @@ import org.jfree.util.PublicCloneable;
  * demo collection:
  * <br><br>
  * <img src="../../../../../images/XYBlockRendererSample.png"
- * alt="XYBlockRendererSample.png" />
+ * alt="XYBlockRendererSample.png">
  *
  * @since 1.0.4
  */
@@ -133,7 +133,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * Sets the width of the blocks used to represent each data item and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param width  the new width, in data/axis units (must be > 0.0).
+     * @param width  the new width, in data/axis units (must be &gt; 0.0).
      *
      * @see #getBlockWidth()
      */
@@ -162,7 +162,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * Sets the height of the blocks used to represent each data item and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param height  the new height, in data/axis units (must be > 0.0).
+     * @param height  the new height, in data/axis units (must be &gt; 0.0).
      *
      * @see #getBlockHeight()
      */

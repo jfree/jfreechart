@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * CandlestickRenderer.java
  * ------------------------
- * (C) Copyright 2001-2013, by Object Refinery Limited.
+ * (C) Copyright 2001-2014, by Object Refinery Limited.
  *
  * Original Authors:  David Gilbert (for Object Refinery Limited);
  *                    Sylvain Vieujot;
@@ -127,7 +127,7 @@ import org.jfree.util.PublicCloneable;
  * JFreeChart demo collection:
  * <br><br>
  * <img src="../../../../../images/CandlestickRendererSample.png"
- * alt="CandlestickRendererSample.png" />
+ * alt="CandlestickRendererSample.png">
  * <P>
  * This renderer does not include code to calculate the crosshair point for the
  * plot.

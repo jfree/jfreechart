@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * XYLineAndShapeRenderer.java
  * ---------------------------
- * (C) Copyright 2004-2013, by Object Refinery Limited.
+ * (C) Copyright 2004-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -110,7 +110,7 @@ import org.jfree.util.ShapeUtilities;
  * JFreeChart demo collection:
  * <br><br>
  * <img src="../../../../../images/XYLineAndShapeRendererSample.png"
- * alt="XYLineAndShapeRendererSample.png" />
+ * alt="XYLineAndShapeRendererSample.png">
  *
  */
 public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
