@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * HeatMapDataset.java
  * -------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -54,7 +54,7 @@ public interface HeatMapDataset {
      * values are evenly spaced between {@link #getMinimumXValue()} and
      * {@link #getMaximumXValue()}.
      * 
-     * @return The number of x-values (always > 0).
+     * @return The number of x-values (always &gt; 0).
      */
     public int getXSampleCount();
 
@@ -63,7 +63,7 @@ public interface HeatMapDataset {
      * values are evenly spaced between {@link #getMinimumYValue()} and
      * {@link #getMaximumYValue()}.
      *
-     * @return The number of y-values (always > 0).
+     * @return The number of y-values (always &gt; 0).
      */
     public int getYSampleCount();
 
