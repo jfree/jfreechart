@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * CombinedDomainXYPlot.java
  * -------------------------
- * (C) Copyright 2001-2012, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-2014, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -282,7 +282,7 @@ public class CombinedDomainXYPlot extends XYPlot
      * must ensure that the subplot has a non-null range axis.
      *
      * @param subplot  the subplot (<code>null</code> not permitted).
-     * @param weight  the weight (must be >= 1).
+     * @param weight  the weight (must be &gt;= 1).
      */
     public void add(XYPlot subplot, int weight) {
         ParamChecks.nullNotPermitted(subplot, "subplot");
