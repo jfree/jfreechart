@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * DialPlot.java
  * -------------
- * (C) Copyright 2006-2013, by Object Refinery Limited.
+ * (C) Copyright 2006-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -73,7 +73,7 @@ import org.jfree.util.ObjectUtilities;
  * program included in the JFreeChart Demo Collection:
  * <br><br>
  * <img src="../../../../../images/DialPlotSample.png"
- * alt="DialPlotSample.png" />
+ * alt="DialPlotSample.png">
  *
  * @since 1.0.7
  */
@@ -700,8 +700,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * A utility method that computes a rectangle using relative radius values.
      *
-     * @param rect  the reference rectangle (<code>null</code> not permitted).
-     * @param radiusW  the width radius (must be > 0.0)
+     * @param rect  the reference rectangle ({@code null} not permitted).
+     * @param radiusW  the width radius (must be &gt; 0.0)
      * @param radiusH  the height radius.
      *
      * @return A new rectangle.

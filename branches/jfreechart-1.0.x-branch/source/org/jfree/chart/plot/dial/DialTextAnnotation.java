@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DialTextAnnotation.java
  * -----------------------
- * (C) Copyright 2006-2013, by Object Refinery Limited.
+ * (C) Copyright 2006-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -114,7 +114,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the label text.
      *
-     * @return The label text (never <code>null</code).
+     * @return The label text (never {@code null}).
      *
      * @see #setLabel(String)
      */
