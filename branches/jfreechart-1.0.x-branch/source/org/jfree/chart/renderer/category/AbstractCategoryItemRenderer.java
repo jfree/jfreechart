@@ -111,6 +111,7 @@
 package org.jfree.chart.renderer.category;
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -153,6 +154,7 @@ import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.TextUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
@@ -993,12 +995,17 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             if (label != null) {
                 Font labelFont = marker.getLabelFont();
                 g2.setFont(labelFont);
-                g2.setPaint(marker.getLabelPaint());
                 Point2D coordinates = calculateRangeMarkerTextAnchorPoint(
                         g2, orientation, dataArea, line.getBounds2D(),
                         marker.getLabelOffset(), LengthAdjustmentType.EXPAND,
                         anchor);
-                TextUtilities.drawAlignedString(label, g2,
+                Rectangle2D rect = TextUtils.calcAlignedStringBounds(label, g2, 
+                        (float) coordinates.getX(), (float) coordinates.getY(), 
+                        marker.getLabelTextAnchor());
+                g2.setPaint(marker.getLabelBackgroundColor());
+                g2.fill(rect);
+                g2.setPaint(marker.getLabelPaint());
+                TextUtils.drawAlignedString(label, g2, 
                         (float) coordinates.getX(), (float) coordinates.getY(),
                         marker.getLabelTextAnchor());
             }
