@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ContourPlot.java
  * ----------------
- * (C) Copyright 2002-2013, by David M. O'Donnell and Contributors.
+ * (C) Copyright 2002-2014, by David M. O'Donnell and Contributors.
  *
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -184,11 +184,11 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     /**
      * Defines dataArea rectangle as the ratio formed from dividing height by
      * width (of the dataArea).  Modifies plot area calculations.
-     * ratio>0 will attempt to layout the plot so that the
+     * ratio &gt; 0 will attempt to layout the plot so that the
      * dataArea.height/dataArea.width = ratio.
-     * ratio<0 will attempt to layout the plot so that the
+     * ratio &lt; 0 will attempt to layout the plot so that the
      * dataArea.height/dataArea.width in plot units (not java2D units as when
-     * ratio>0) = -1.*ratio.
+     * ratio &gt; 0) = -1.*ratio.
      */         //dmo
     private double dataAreaRatio = 0.0;  //zero when the parameter is not set
 
