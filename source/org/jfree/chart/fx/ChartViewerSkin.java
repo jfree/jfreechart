@@ -142,7 +142,7 @@ public class ChartViewerSkin extends SkinBase<ChartViewer>  {
     /**
      * Sets the visibility of the zoom rectangle.
      * 
-     * @param visible 
+     * @param visible  the new flag value.
      */
     public void setZoomRectangleVisible(boolean visible) {
         this.zoomRectangle.setVisible(visible);
