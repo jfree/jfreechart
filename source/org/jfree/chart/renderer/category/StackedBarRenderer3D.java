@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * StackedBarRenderer3D.java
  * -------------------------
- * (C) Copyright 2000-2013, by Serge V. Grachov and Contributors.
+ * (C) Copyright 2000-2014, by Serge V. Grachov and Contributors.
  *
  * Original Author:  Serge V. Grachov;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -125,7 +125,7 @@ import org.jfree.util.PublicCloneable;
  * JFreeChart Demo Collection:
  * <br><br>
  * <img src="../../../../../images/StackedBarRenderer3DSample.png"
- * alt="StackedBarRenderer3DSample.png" />
+ * alt="StackedBarRenderer3DSample.png">
  */
 public class StackedBarRenderer3D extends BarRenderer3D
         implements Cloneable, PublicCloneable, Serializable {
