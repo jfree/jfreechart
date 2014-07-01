@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * LayeredBarRenderer.java
  * -----------------------
- * (C) Copyright 2003-2009, by Arnaud Lelievre and Contributors.
+ * (C) Copyright 2003-2014, by Arnaud Lelievre and Contributors.
  *
  * Original Author:  Arnaud Lelievre (for Garden);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -78,7 +78,7 @@ import org.jfree.util.ObjectList;
  * Demo Collection:
  * <br><br>
  * <img src="../../../../../images/LayeredBarRendererSample.png"
- * alt="LayeredBarRendererSample.png" />
+ * alt="LayeredBarRendererSample.png">
  */
 public class LayeredBarRenderer extends BarRenderer implements Serializable {
 

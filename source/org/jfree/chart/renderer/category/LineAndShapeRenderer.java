@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * LineAndShapeRenderer.java
  * -------------------------
- * (C) Copyright 2001-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
@@ -123,7 +123,7 @@ import org.jfree.util.ShapeUtilities;
  * program included in the JFreeChart Demo Collection:
  * <br><br>
  * <img src="../../../../../images/LineAndShapeRendererSample.png"
- * alt="LineAndShapeRendererSample.png" />
+ * alt="LineAndShapeRendererSample.png">
  */
 public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {
@@ -798,7 +798,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * (expressed as a percentage of the overall category width), and sends
      * a {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param margin  the margin (0.0 <= margin < 1.0).
+     * @param margin  the margin (0.0 &lt;= margin &lt; 1.0).
      *
      * @see #getItemMargin()
      * @see #getUseSeriesOffset()
