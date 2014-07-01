@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * GradientBarPainter.java
  * -----------------------
- * (C) Copyright 2008-2013, by Object Refinery Limited.
+ * (C) Copyright 2008-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -81,9 +81,9 @@ public class GradientBarPainter implements BarPainter, Serializable {
     /**
      * Creates a new instance.
      *
-     * @param g1
-     * @param g2
-     * @param g3
+     * @param g1  percentage value defining the line between regions 1 and 2.
+     * @param g2  percentage value defining the line between regions 2 and 3.
+     * @param g3  percentage value defining the line between regions 3 and 4.
      */
     public GradientBarPainter(double g1, double g2, double g3) {
         this.g1 = g1;

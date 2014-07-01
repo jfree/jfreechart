@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * GanttRenderer.java
  * ------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited.
+ * (C) Copyright 2003-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -85,7 +85,7 @@ import org.jfree.util.PaintUtilities;
  * included in the JFreeChart Demo Collection:
  * <br><br>
  * <img src="../../../../../images/GanttRendererSample.png"
- * alt="GanttRendererSample.png" />
+ * alt="GanttRendererSample.png">
  */
 public class GanttRenderer extends IntervalBarRenderer
         implements Serializable {
