@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * StandardDialScale.java
  * ----------------------
- * (C) Copyright 2006-2013, by Object Refinery Limited.
+ * (C) Copyright 2006-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -198,7 +198,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      *     orientation as Java's <code>Arc2D</code> class).
      * @param extent  the extent (in degrees, counter-clockwise).
      * @param majorTickIncrement  the interval between major tick marks (must
-     *     be > 0).
+     *     be &gt; 0).
      * @param minorTickCount  the number of minor ticks between major tick
      *          marks.
      */
@@ -379,7 +379,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * Sets the increment (in data units) between major tick labels and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param increment  the increment (must be > 0).
+     * @param increment  the increment (must be &gt; 0).
      *
      * @see #getMajorTickIncrement()
      */
