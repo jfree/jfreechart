@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * BoxAndWhiskerRenderer.java
  * --------------------------
- * (C) Copyright 2003-2013, by David Browning and Contributors.
+ * (C) Copyright 2003-2014, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for the Australian Institute of Marine
  *                   Science);
@@ -135,7 +135,7 @@ import org.jfree.util.PublicCloneable;
  * JFreeChart Demo Collection:
  * <br><br>
  * <img src="../../../../../images/BoxAndWhiskerRendererSample.png"
- * alt="BoxAndWhiskerRendererSample.png" />
+ * alt="BoxAndWhiskerRendererSample.png">
  */
 public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {
