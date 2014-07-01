@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * RelativeDateFormat.java
  * -----------------------
- * (C) Copyright 2006-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Michael Siemer;
@@ -582,38 +582,4 @@ public class RelativeDateFormat extends DateFormat {
         return clone;
     }
 
-    /**
-     * Some test code.
-     *
-     * @param args  ignored.
-     */
-    public static void main(String[] args) {
-        GregorianCalendar c0 = new GregorianCalendar(2006, 10, 1, 0, 0, 0);
-        GregorianCalendar c1 = new GregorianCalendar(2006, 10, 1, 11, 37, 43);
-        c1.set(Calendar.MILLISECOND, 123);
-
-        System.out.println("Default: ");
-        RelativeDateFormat rdf = new RelativeDateFormat(c0.getTime().getTime());
-        System.out.println(rdf.format(c1.getTime()));
-        System.out.println();
-
-        System.out.println("Hide milliseconds: ");
-        rdf.setSecondFormatter(new DecimalFormat("0"));
-        System.out.println(rdf.format(c1.getTime()));
-        System.out.println();
-
-        System.out.println("Show zero day output: ");
-        rdf.setShowZeroDays(true);
-        System.out.println(rdf.format(c1.getTime()));
-        System.out.println();
-
-        System.out.println("Alternative suffixes: ");
-        rdf.setShowZeroDays(false);
-        rdf.setDaySuffix(":");
-        rdf.setHourSuffix(":");
-        rdf.setMinuteSuffix(":");
-        rdf.setSecondSuffix("");
-        System.out.println(rdf.format(c1.getTime()));
-        System.out.println();
-    }
 }
