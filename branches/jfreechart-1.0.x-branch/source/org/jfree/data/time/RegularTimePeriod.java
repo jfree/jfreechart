@@ -70,7 +70,7 @@ import org.jfree.date.MonthConstants;
  * This class is immutable, and all subclasses should be immutable also.
  */
 public abstract class RegularTimePeriod implements TimePeriod, Comparable,
-                                                   MonthConstants {
+        MonthConstants {
 
     /**
      * Creates a time period that includes the specified millisecond, assuming
@@ -83,7 +83,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * @return The time period.
      */
     public static RegularTimePeriod createInstance(Class c, Date millisecond,
-                                                   TimeZone zone) {
+            TimeZone zone) {
         RegularTimePeriod result = null;
         try {
             Constructor constructor = c.getDeclaredConstructor(
@@ -248,8 +248,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      *
      * @return The first millisecond of the time period.
      *
-     * @throws NullPointerException if <code>calendar,/code> is
-     *     </code>null</code>.
+     * @throws NullPointerException if {@code calendar} is {@code null}.
      *
      * @see #getLastMillisecond(Calendar)
      */

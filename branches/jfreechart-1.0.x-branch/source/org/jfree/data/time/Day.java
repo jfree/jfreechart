@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------
  * Day.java
  * --------
- * (C) Copyright 2001-2013, by Object Refinery Limited.
+ * (C) Copyright 2001-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -89,19 +89,19 @@ public class Day extends RegularTimePeriod implements Serializable {
 
     /** A standard date formatter. */
     protected static final DateFormat DATE_FORMAT
-        = new SimpleDateFormat("yyyy-MM-dd");
+            = new SimpleDateFormat("yyyy-MM-dd");
 
     /** A date formatter for the default locale. */
-    protected static final DateFormat
-        DATE_FORMAT_SHORT = DateFormat.getDateInstance(DateFormat.SHORT);
+    protected static final DateFormat DATE_FORMAT_SHORT 
+            = DateFormat.getDateInstance(DateFormat.SHORT);
 
     /** A date formatter for the default locale. */
-    protected static final DateFormat
-        DATE_FORMAT_MEDIUM = DateFormat.getDateInstance(DateFormat.MEDIUM);
+    protected static final DateFormat DATE_FORMAT_MEDIUM 
+            = DateFormat.getDateInstance(DateFormat.MEDIUM);
 
     /** A date formatter for the default locale. */
-    protected static final DateFormat
-        DATE_FORMAT_LONG = DateFormat.getDateInstance(DateFormat.LONG);
+    protected static final DateFormat DATE_FORMAT_LONG 
+            = DateFormat.getDateInstance(DateFormat.LONG);
 
     /** The day (uses SerialDate for convenience). */
     private SerialDate serialDate;
@@ -125,7 +125,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      *
      * @param day  the day-of-the-month.
      * @param month  the month (1 to 12).
-     * @param year  the year (1900 <= year <= 9999).
+     * @param year  the year (1900 &lt;= year &lt;= 9999).
      */
     public Day(int day, int month, int year) {
         this.serialDate = SerialDate.createInstance(day, month, year);

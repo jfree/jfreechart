@@ -81,7 +81,7 @@ import org.jfree.data.xy.IntervalXYDataset;
  * real-time applications this subclass adds the ability to append new
  * data and discard the oldest.
  * In this class, the arrays used in FastTimeSeriesCollection become FIFO's.
- * NOTE:As presented here, all data is assumed >= 0, an assumption which is
+ * NOTE:As presented here, all data is assumed &gt;= 0, an assumption which is
  * embodied only in methods associated with interface RangeInfo.
  */
 public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
@@ -675,7 +675,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      * @param  newData  the data
      * @param  insertionIndex  the index value at which to put it
      * @param  refresh  value of n in "refresh the display on every nth call"
-     *                 (ignored if <= 0 )
+     *                 (ignored if &lt;= 0 )
      */
     public void appendData(float[] newData, int insertionIndex, int refresh) {
         int nDataPoints = newData.length;
