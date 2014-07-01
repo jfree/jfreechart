@@ -288,7 +288,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * automatically removed, ensuring that the maximum item count is not
      * exceeded.
      *
-     * @param maximum  the maximum (requires >= 0).
+     * @param maximum  the maximum (requires &gt;= 0).
      *
      * @see #getMaximumItemCount()
      */
