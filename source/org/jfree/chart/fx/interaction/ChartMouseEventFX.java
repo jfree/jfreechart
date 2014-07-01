@@ -51,7 +51,7 @@ import org.jfree.chart.fx.ChartViewer;
  * A mouse event for a chart that is displayed in a (JavaFX) 
  * {@link ChartViewer}.
  *
- * @see FXChartMouseListener
+ * @see ChartMouseListenerFX
  * 
  * <p>THE API FOR THIS CLASS IS SUBJECT TO CHANGE IN FUTURE RELEASES.  This is
  * so that we can incorporate feedback on the (new) JavaFX support in 
