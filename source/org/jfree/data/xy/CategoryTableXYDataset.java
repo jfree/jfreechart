@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * CategoryTableXYDataset.java
  * ---------------------------
- * (C) Copyright 2004-2011, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2014, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -356,7 +356,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * Sets the interval width to a fixed value, and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param d  the new interval width (must be > 0).
+     * @param d  the new interval width (must be &gt; 0).
      */
     public void setIntervalWidth(double d) {
         this.intervalDelegate.setFixedIntervalWidth(d);
