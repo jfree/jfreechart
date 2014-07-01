@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.18  *
 ********************************
 
-11 April 2014
+?? July 2014
 
 (C)opyright 2000-2014, by Object Refinery Limited and Contributors.
 
@@ -133,8 +133,8 @@ provide export facilities to the SVG and PDF formats.  These fast, lightweight
 libraries are not free, licenses can be purchased from Object Refinery Limited. 
 
 An additional tab added to the demo application in version 1.0.18 showcases
-Orson Charts 3D, a new library by Object Refinery Limited.  You can find out
-more about Orson Charts at:
+Orson Charts, a new 3D chart library by Object Refinery Limited.  You can find 
+out more about Orson Charts at:
 
     http://www.object-refinery.com/orsoncharts/
 
@@ -161,7 +161,8 @@ please post a bug report.
 --------------
 A list of changes in recent versions:
 
-1.0.18 : (11-Apr-2014)
+1.0.18 : (??-Jul-2014)
+        - added JavaFX support;
         - improved LogAxis labelling;
         - center text support in RingPlot;
         - 'stepPoint' attribute in the XYStepAreaRenderer;
