@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Hour.java
  * ---------
- * (C) Copyright 2001-2013, by Object Refinery Limited.
+ * (C) Copyright 2001-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -183,7 +183,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
     /**
      * Returns the hour.
      *
-     * @return The hour (0 <= hour <= 23).
+     * @return The hour (0 &lt;= hour &lt;= 23).
      */
     public int getHour() {
         return this.hour;
