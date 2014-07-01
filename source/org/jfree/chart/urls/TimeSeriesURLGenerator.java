@@ -52,10 +52,12 @@
 package org.jfree.chart.urls;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.Date;
-import org.jfree.chart.util.ParamChecks;
 
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -165,20 +167,28 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
     @Override
     public String generateURL(XYDataset dataset, int series, int item) {
         String result = this.prefix;
-        boolean firstParameter = result.indexOf("?") == -1;
+        boolean firstParameter = !result.contains("?");
         Comparable seriesKey = dataset.getSeriesKey(series);
         if (seriesKey != null) {
             result += firstParameter ? "?" : "&amp;";
-            result += this.seriesParameterName + "=" + URLUtilities.encode(
-                    seriesKey.toString(), "UTF-8");
+            try {
+                result += this.seriesParameterName + "=" + URLEncoder.encode(
+                        seriesKey.toString(), "UTF-8");
+            } catch (UnsupportedEncodingException ex) {
+                throw new RuntimeException(ex);
+            }
             firstParameter = false;
         }
 
         long x = (long) dataset.getXValue(series, item);
         String xValue = this.dateFormat.format(new Date(x));
         result += firstParameter ? "?" : "&amp;";
-        result += this.itemParameterName + "=" + URLUtilities.encode(xValue,
-                "UTF-8");
+        try {
+            result += this.itemParameterName + "=" + URLEncoder.encode(xValue,
+                    "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex);
+        }
 
         return result;
     }
