@@ -24,9 +24,9 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
+ * ----------------------
  * DispatchHandlerFX.java
- * -------------------
+ * ----------------------
  * (C) Copyright 2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
@@ -43,6 +43,7 @@ package org.jfree.chart.fx.interaction;
 import java.awt.geom.Point2D;
 import javafx.scene.input.MouseEvent;
 import org.jfree.chart.fx.ChartCanvas;
+import org.jfree.chart.fx.ChartViewer;
 
 /**
  * Handles mouse move and click events on the {@link ChartCanvas} by 
