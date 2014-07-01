@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * StandardPieURLGenerator.java
  * ----------------------------
- * (C) Copyright 2002-2013, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2014, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -52,8 +52,10 @@
 package org.jfree.chart.urls;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ParamChecks;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
+import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.ObjectUtilities;
 
@@ -69,10 +71,10 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
     private String prefix = "index.html";
 
     /** The category parameter name. */
-    private String categoryParameterName = "category";
+    private String categoryParamName = "category";
 
     /** The pie index parameter name. */
-    private String indexParameterName = "pieIndex";
+    private String indexParamName = "pieIndex";
 
     /**
      * Default constructor.
@@ -84,7 +86,7 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
     /**
      * Creates a new generator.
      *
-     * @param prefix  the prefix (<code>null</code> not permitted).
+     * @param prefix  the prefix ({@code null} not permitted).
      */
     public StandardPieURLGenerator(String prefix) {
         this(prefix, "category");
@@ -93,38 +95,36 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
     /**
      * Creates a new generator.
      *
-     * @param prefix  the prefix (<code>null</code> not permitted).
-     * @param categoryParameterName  the category parameter name
-     *     (<code>null</code> not permitted).
+     * @param prefix  the prefix ({@code null} not permitted).
+     * @param categoryParamName  the category parameter name ({@code null} not 
+     *         permitted).
      */
-    public StandardPieURLGenerator(String prefix,
-                                   String categoryParameterName) {
-        this(prefix, categoryParameterName, "pieIndex");
+    public StandardPieURLGenerator(String prefix, String categoryParamName) {
+        this(prefix, categoryParamName, "pieIndex");
     }
 
     /**
      * Creates a new generator.
      *
-     * @param prefix  the prefix (<code>null</code> not permitted).
-     * @param categoryParameterName  the category parameter name
-     *     (<code>null</code> not permitted).
-     * @param indexParameterName  the index parameter name (<code>null</code>
-     *     permitted).
+     * @param prefix  the prefix ({@code null} not permitted).
+     * @param categoryParamName  the category parameter name ({@code null} not 
+     *         permitted).
+     * @param indexParamName  the index parameter name ({@code null} permitted).
      */
-    public StandardPieURLGenerator(String prefix, String categoryParameterName,
-            String indexParameterName) {
+    public StandardPieURLGenerator(String prefix, String categoryParamName,
+            String indexParamName) {
         ParamChecks.nullNotPermitted(prefix, "prefix");
-        ParamChecks.nullNotPermitted(categoryParameterName, "categoryParameterName");
+        ParamChecks.nullNotPermitted(categoryParamName, "categoryParamName");
         this.prefix = prefix;
-        this.categoryParameterName = categoryParameterName;
-        this.indexParameterName = indexParameterName;
+        this.categoryParamName = categoryParamName;
+        this.indexParamName = indexParamName;
     }
 
     /**
      * Generates a URL.
      *
      * @param dataset  the dataset (ignored).
-     * @param key  the item key (<code>null</code> not permitted).
+     * @param key  the item key ({@code null} not permitted).
      * @param pieIndex  the pie index.
      *
      * @return A string containing the generated URL.
@@ -133,17 +133,19 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
     public String generateURL(PieDataset dataset, Comparable key,
             int pieIndex) {
         String url = this.prefix;
-        if (url.indexOf("?") > -1) {
-            url += "&amp;" + this.categoryParameterName + "="
-                    + URLUtilities.encode(key.toString(), "UTF-8");
-        }
-        else {
-            url += "?" + this.categoryParameterName + "="
-                    + URLUtilities.encode(key.toString(), "UTF-8");
-        }
-        if (this.indexParameterName != null) {
-            url += "&amp;" + this.indexParameterName + "="
-                   + String.valueOf(pieIndex);
+        try {
+            if (url.contains("?")) {
+                url += "&amp;" + this.categoryParamName + "="
+                        + URLEncoder.encode(key.toString(), "UTF-8");
+            } else {
+                url += "?" + this.categoryParamName + "="
+                        + URLEncoder.encode(key.toString(), "UTF-8");
+            }
+            if (this.indexParamName != null) {
+                url += "&amp;" + this.indexParamName + "=" + pieIndex;
+            }
+        } catch (UnsupportedEncodingException e) {  // this won't happen :)
+            throw new RuntimeException(e);
         }
         return url;
     }
@@ -151,7 +153,7 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
     /**
      * Tests if this object is equal to another.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -167,11 +169,10 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
         if (!this.prefix.equals(that.prefix)) {
             return false;
         }
-        if (!this.categoryParameterName.equals(that.categoryParameterName)) {
+        if (!this.categoryParamName.equals(that.categoryParamName)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.indexParameterName,
-                that.indexParameterName)) {
+        if (!ObjectUtilities.equal(this.indexParamName, that.indexParamName)) {
             return false;
         }
         return true;
