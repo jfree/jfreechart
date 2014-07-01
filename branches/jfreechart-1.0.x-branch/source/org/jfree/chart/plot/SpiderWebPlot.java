@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * SpiderWebPlot.java
  * ------------------
- * (C) Copyright 2005-2013, by Heaps of Flavour Pty Ltd and Contributors.
+ * (C) Copyright 2005-2014, by Heaps of Flavour Pty Ltd and Contributors.
  *
  * Company Info:  http://www.i4-talent.com
  *
@@ -211,7 +211,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     /** The starting angle. */
     private double startAngle;
 
-    /** The direction for drawing the radar axis & plots. */
+    /** The direction for drawing the radar axis and plots. */
     private Rotation direction;
 
     /** The legend item shape. */
@@ -655,11 +655,11 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the paint for ALL series in the plot. If this is set to</code> null
-     * </code>, then a list of paints is used instead (to allow different colors
-     * to be used for each series of the radar group).
+     * Sets the paint for ALL series in the plot.  If this is set to 
+     * {@code null}, then a list of paints is used instead (to allow different 
+     * colors to be used for each series of the radar group).
      *
-     * @param paint the paint (<code>null</code> permitted).
+     * @param paint the paint ({@code null} permitted).
      *
      * @see #getSeriesPaint()
      */
@@ -753,10 +753,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the outline paint for ALL series in the plot. If this is set to
-     * </code> null</code>, then a list of paints is used instead (to allow
+     * {@code null}, then a list of paints is used instead (to allow
      * different colors to be used for each series).
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      */
     public void setSeriesOutlinePaint(Paint paint) {
         this.seriesOutlinePaint = paint;
@@ -829,10 +829,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the outline stroke for ALL series in the plot. If this is set to
-     * </code> null</code>, then a list of paints is used instead (to allow
+     * {@code null}, then a list of paints is used instead (to allow
      * different colors to be used for each series).
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      */
     public void setSeriesOutlineStroke(Stroke stroke) {
         this.seriesOutlineStroke = stroke;
