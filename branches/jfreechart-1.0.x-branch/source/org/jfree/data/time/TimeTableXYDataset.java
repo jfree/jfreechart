@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * TimeTableXYDataset.java
  * -----------------------
- * (C) Copyright 2004-2013, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2014, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -294,7 +294,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      * Returns the time period for the specified item.  Bear in mind that all
      * series share the same set of time periods.
      *
-     * @param item  the item index (0 <= i <= {@link #getItemCount()}).
+     * @param item  the item index (0 &lt;= i &lt;= {@link #getItemCount()}).
      *
      * @return The time period.
      */
