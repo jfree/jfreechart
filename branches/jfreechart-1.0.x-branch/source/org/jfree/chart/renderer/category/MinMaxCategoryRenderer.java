@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * MinMaxCategoryRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2013, by Object Refinery Limited.
+ * (C) Copyright 2002-2014, by Object Refinery Limited.
  *
  * Original Author:  Tomer Peretz;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -99,7 +99,7 @@ import org.jfree.util.PaintUtilities;
  * JFreeChart Demo Collection:
  * <br><br>
  * <img src="../../../../../images/MinMaxCategoryRendererSample.png"
- * alt="MinMaxCategoryRendererSample.png" />
+ * alt="MinMaxCategoryRendererSample.png">
  */
 public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
 
