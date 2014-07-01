@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * LineRenderer3D.java
  * -------------------
- * (C) Copyright 2004-2013, by Tobias Selb and Contributors.
+ * (C) Copyright 2004-2014, by Tobias Selb and Contributors.
  *
  * Original Author:  Tobias Selb (http://www.uepselon.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -94,7 +94,7 @@ import org.jfree.util.ShapeUtilities;
  * Demo Collection:
  * <br><br>
  * <img src="../../../../../images/LineRenderer3DSample.png"
- * alt="LineRenderer3DSample.png" />
+ * alt="LineRenderer3DSample.png">
  */
 public class LineRenderer3D extends LineAndShapeRenderer
                             implements Effect3D, Serializable {

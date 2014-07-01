@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * LogarithmicAxis.java
  * --------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Michael Duffy / Eric Thomas;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -124,8 +124,8 @@ public class LogarithmicAxis extends NumberAxis {
     protected boolean allowNegativesFlag = false;
 
     /**
-     * Flag set true make axis throw exception if any values are
-     * <= 0 and 'allowNegativesFlag' is false.
+     * Flag set true make axis throw exception if any values are &lt;= 0 and 
+     * 'allowNegativesFlag' is false.
      */
     protected boolean strictValuesFlag = true;
 
