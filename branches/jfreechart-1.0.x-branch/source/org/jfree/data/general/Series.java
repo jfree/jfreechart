@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Series.java
  * -----------
- * (C) Copyright 2001-2013, by Object Refinery Limited.
+ * (C) Copyright 2001-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -412,6 +412,8 @@ public abstract class Series implements Cloneable, Serializable {
      * @param property  the property key.
      * @param oldValue  the old value.
      * @param newValue  the new value.
+     * 
+     * @throws PropertyVetoException if the change was vetoed.
      */
     protected void fireVetoableChange(String property, Object oldValue,
             Object newValue) throws PropertyVetoException {
