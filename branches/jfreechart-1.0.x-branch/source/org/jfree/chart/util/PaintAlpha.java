@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PaintAlpha.java
  * ---------------
- * (C) Copyright 2011-2013 by DaveLaw and Contributors.
+ * (C) Copyright 2011-2014 by DaveLaw and Contributors.
  *
  * Original Author:  DaveLaw (dave ATT davelaw D0TT de);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -363,7 +363,7 @@ public class PaintAlpha {
      * Clone a {@link BufferedImage}.
      * <p>
      * Note: when constructing the clone, the original Color Model Object is
-     * reused.<br>  That keeps things simple & should not be a problem, as all
+     * reused.<br>  That keeps things simple and should not be a problem, as all
      * known Color Models<br>
      * ({@link java.awt.image.IndexColorModel     IndexColorModel},
      *  {@link java.awt.image.DirectColorModel    DirectColorModel},
@@ -372,7 +372,7 @@ public class PaintAlpha {
      *
      * @param image original BufferedImage to clone
      *
-     * @return a new BufferedImage reusing the original's Color Model &
+     * @return a new BufferedImage reusing the original's Color Model and
      *         containing a clone of its pixels
      */
     public static BufferedImage cloneImage(BufferedImage image) {
