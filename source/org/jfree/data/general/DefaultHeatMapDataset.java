@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * DefaultHeatMapDataset.java
  * --------------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -123,7 +123,7 @@ public class DefaultHeatMapDataset extends AbstractDataset
      * values are evenly spaced between {@link #getMinimumXValue()} and
      * {@link #getMaximumXValue()}.
      *
-     * @return The number of x-values (always > 0).
+     * @return The number of x-values (always &gt; 0).
      */
     @Override
     public int getXSampleCount() {
@@ -135,7 +135,7 @@ public class DefaultHeatMapDataset extends AbstractDataset
      * values are evenly spaced between {@link #getMinimumYValue()} and
      * {@link #getMaximumYValue()}.
      *
-     * @return The number of y-values (always > 0).
+     * @return The number of y-values (always &gt; 0).
      */
     @Override
     public int getYSampleCount() {
@@ -322,7 +322,8 @@ public class DefaultHeatMapDataset extends AbstractDataset
      *
      * @return A clone.
      *
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is a problem 
+     *         cloning.
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
