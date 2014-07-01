@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------------
  * DirectionalGradientPaintTransformer.java
  * ----------------------------------------
- * (C) Copyright 2013 by Peter Kolb and Contributors.
+ * (C) Copyright 2013-2014 by Peter Kolb and Contributors.
  *
  * Original Author:  Peter Kolb;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -49,7 +49,7 @@ import org.jfree.ui.GradientPaintTransformer;
  * Transforms a <code>GradientPaint</code> to range over the width of a target 
  * shape.  The orientation of the resulting <code>GradientPaint</code>
  * depend on the coordinates of the original paint:
- * <p>
+ *
  * <ul>
  * <li> If the original paint starts at 0,0 and ends at a point 0, y != 0,
  * the resulting paint will have a vertical orientation.
@@ -64,9 +64,8 @@ import org.jfree.ui.GradientPaintTransformer;
  * the upper right edge. Lines of equal color will have a 45 ∞ angle,
  * pointing downwards from left to right.
  * </ul>
- * <p>
- * In all cases, the cyclic flag of the original paint will be taken into 
- * account.
+ * <p>In all cases, the cyclic flag of the original paint will be taken into 
+ * account.</p>
  *
  * @author Peter Kolb
  * @since 1.0.17
