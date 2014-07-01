@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * LevelRenderer.java
  * ------------------
- * (C) Copyright 2004-2009, by Object Refinery Limited.
+ * (C) Copyright 2004-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2511330);
@@ -79,7 +79,7 @@ import org.jfree.util.PublicCloneable;
  * Demo Collection:
  * <br><br>
  * <img src="../../../../../images/LevelRendererSample.png"
- * alt="LevelRendererSample.png" />
+ * alt="LevelRendererSample.png">
  */
 public class LevelRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {
