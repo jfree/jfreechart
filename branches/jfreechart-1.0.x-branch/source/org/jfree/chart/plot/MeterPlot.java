@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * MeterPlot.java
  * --------------
- * (C) Copyright 2000-2013, by Hari and Contributors.
+ * (C) Copyright 2000-2014, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -357,7 +357,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the tick size and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param size  the tick size (must be > 0).
+     * @param size  the tick size (must be &gt; 0).
      *
      * @see #getTickSize()
      */
