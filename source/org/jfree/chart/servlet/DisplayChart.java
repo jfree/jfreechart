@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * DisplayChart.java
  * -----------------
- * (C) Copyright 2002-2013, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2014, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -58,16 +58,17 @@ import javax.servlet.http.HttpSession;
  * Servlet used for streaming charts to the client browser from the temporary
  * directory.  You need to add this servlet and mapping to your deployment
  * descriptor (web.xml) in order to get it to work.  The syntax is as follows:
- * <xmp>
- * <servlet>
- *    <servlet-name>DisplayChart</servlet-name>
- *    <servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
- * </servlet>
- * <servlet-mapping>
- *     <servlet-name>DisplayChart</servlet-name>
- *     <url-pattern>/servlet/DisplayChart</url-pattern>
- * </servlet-mapping>
- * </xmp>
+ * 
+ * &lt;xmp&gt;
+ * &lt;servlet&gt;
+ *    &lt;servlet-name&gt;DisplayChart&lt;/servlet-name&gt;
+ *    &lt;servlet-class&gt;org.jfree.chart.servlet.DisplayChart&lt;/servlet-class&gt;
+ * &lt;/servlet&gt;
+ * &lt;servlet-mapping&gt;
+ *     &lt;servlet-name&gt;DisplayChart&lt;/servlet-name&gt;
+ *     &lt;url-pattern&gt;/servlet/DisplayChart&lt;/url-pattern&gt;
+ * &lt;/servlet-mapping&gt;
+ * &lt;/xmp&gt;
  */
 public class DisplayChart extends HttpServlet {
 
