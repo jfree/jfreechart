@@ -1196,7 +1196,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @param datasetIndex  the dataset index (zero-based).
      * @param series  the series index (zero-based).
      *
-     * @return A legend item for the series (possibly <code>null</code).
+     * @return A legend item for the series (possibly {@code null}).
      */
     @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
