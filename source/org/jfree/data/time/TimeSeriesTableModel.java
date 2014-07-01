@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * TimeSeriesTableModel.java
  * -------------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -53,7 +53,7 @@ import org.jfree.data.general.SeriesChangeListener;
  * a <code>JTable</code>.
  */
 public class TimeSeriesTableModel extends AbstractTableModel
-                                  implements SeriesChangeListener {
+        implements SeriesChangeListener {
 
     /** The series. */
     private TimeSeries series;
@@ -87,7 +87,7 @@ public class TimeSeriesTableModel extends AbstractTableModel
      * Creates a table model based on a time series.
      *
      * @param series  the time series.
-     * @param editable  if <ocde>true</code>, the table is editable.
+     * @param editable  if {@code true}, the table is editable.
      */
     public TimeSeriesTableModel(TimeSeries series, boolean editable) {
         this.series = series;
@@ -109,7 +109,7 @@ public class TimeSeriesTableModel extends AbstractTableModel
     /**
      * Returns the column class in the table model.
      *
-     * @param column    The column index.
+     * @param column  the column index.
      *
      * @return The column class in the table model.
      */
