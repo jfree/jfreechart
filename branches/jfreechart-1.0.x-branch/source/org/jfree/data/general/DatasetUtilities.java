@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * DatasetUtilities.java
  * ---------------------
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski (bug fix);
@@ -490,7 +490,7 @@ public final class DatasetUtilities {
      * @param f  the function (<code>null</code> not permitted).
      * @param start  the start value for the range.
      * @param end  the end value for the range.
-     * @param samples  the number of sample points (must be > 1).
+     * @param samples  the number of sample points (must be &gt; 1).
      * @param seriesKey  the key to give the resulting series
      *                   (<code>null</code> not permitted).
      *
@@ -513,7 +513,7 @@ public final class DatasetUtilities {
      * @param f  the function (<code>null</code> not permitted).
      * @param start  the start value for the range.
      * @param end  the end value for the range.
-     * @param samples  the number of sample points (must be > 1).
+     * @param samples  the number of sample points (must be &gt; 1).
      * @param seriesKey  the key to give the resulting series
      *                   (<code>null</code> not permitted).
      *
