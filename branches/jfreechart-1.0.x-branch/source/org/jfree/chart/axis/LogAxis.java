@@ -160,7 +160,7 @@ public class LogAxis extends ValueAxis {
      * Sets the base for the logarithm calculation and sends a change event to
      * all registered listeners.
      *
-     * @param base  the base value (must be > 1.0).
+     * @param base  the base value (must be &gt; 1.0).
      *
      * @see #getBase()
      */
