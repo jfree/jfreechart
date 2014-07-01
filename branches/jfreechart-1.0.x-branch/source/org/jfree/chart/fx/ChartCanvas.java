@@ -195,7 +195,7 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
 
     /**
      * Returns the flag that controls whether or not tooltips are enabled.  
-     * The default value is {@code true}.  The {@link ToolTipHandlerFX} 
+     * The default value is {@code true}.  The {@link TooltipHandlerFX} 
      * class will only update the tooltip if this flag is set to 
      * {@code true}.
      * 
