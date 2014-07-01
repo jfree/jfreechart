@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * --------------------------------
  * DynamicTimeSeriesCollection.java
  * --------------------------------
- * (C) Copyright 2002-2008, by I. H. Thomae and Contributors.
+ * (C) Copyright 2002-2014, by I. H. Thomae and Contributors.
  *
  * Original Author:  I. H. Thomae (ithomae@ists.dartmouth.edu);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *                   Ricardo JL Rufino (patch #310);
  *
  * Changes
  * -------
@@ -54,6 +55,8 @@
  * 11-Jan-2004 : Removed deprecated code in preparation for the 1.0.0
  *               release (DG);
  * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * 01-Jul-2014 : Add millisecond time period - see patch #310 by Ricardo JL
+ *               Rufino (DG);
  *
  */
 
@@ -82,9 +85,7 @@ import org.jfree.data.xy.IntervalXYDataset;
  * embodied only in methods associated with interface RangeInfo.
  */
 public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
-                                         implements IntervalXYDataset,
-                                                    DomainInfo,
-                                                    RangeInfo {
+        implements IntervalXYDataset, DomainInfo, RangeInfo {
 
     /**
      * Useful constant for controlling the x-value returned for a time
@@ -228,10 +229,8 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      * @param nMoments the number of TimePeriods to be spanned.
      */
     public DynamicTimeSeriesCollection(int nSeries, int nMoments) {
-
         this(nSeries, nMoments, new Millisecond(), TimeZone.getDefault());
         this.newestAt = nMoments - 1;
-
     }
 
     /**
@@ -242,7 +241,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      * @param zone the timezone.
      */
     public DynamicTimeSeriesCollection(int nSeries, int nMoments,
-                                       TimeZone zone) {
+            TimeZone zone) {
         this(nSeries, nMoments, new Millisecond(), zone);
         this.newestAt = nMoments - 1;
     }
@@ -254,9 +253,8 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      * @param nMoments  the number of items per series.
      * @param timeSample  a time period sample.
      */
-    public DynamicTimeSeriesCollection(int nSeries,
-                                       int nMoments,
-                                       RegularTimePeriod timeSample) {
+    public DynamicTimeSeriesCollection(int nSeries, int nMoments,
+            RegularTimePeriod timeSample) {
         this(nSeries, nMoments, timeSample, TimeZone.getDefault());
     }
 
@@ -268,10 +266,8 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      * @param timeSample  a time period sample.
      * @param zone  the time zone.
      */
-    public DynamicTimeSeriesCollection(int nSeries,
-                                       int nMoments,
-                                       RegularTimePeriod timeSample,
-                                       TimeZone zone) {
+    public DynamicTimeSeriesCollection(int nSeries, int nMoments,
+            RegularTimePeriod timeSample, TimeZone zone) {
 
         // the first initialization must precede creation of the ValueSet array:
         this.maximumItemCount = nMoments;  // establishes length of each array
@@ -286,13 +282,13 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         this.timePeriodClass = timeSample.getClass();
 
         /// Expand the following for all defined TimePeriods:
-        if (this.timePeriodClass == Second.class) {
+        if (this.timePeriodClass == Millisecond.class) {
+            this.pointsInTime = new Millisecond[nMoments];
+        } else if (this.timePeriodClass == Second.class) {
             this.pointsInTime = new Second[nMoments];
-        }
-        else if (this.timePeriodClass == Minute.class) {
+        } else if (this.timePeriodClass == Minute.class) {
             this.pointsInTime = new Minute[nMoments];
-        }
-        else if (this.timePeriodClass == Hour.class) {
+        } else if (this.timePeriodClass == Hour.class) {
             this.pointsInTime = new Hour[nMoments];
         }
         ///  .. etc....
@@ -313,7 +309,6 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      * @return ??.
      */
     public synchronized long setTimeBase(RegularTimePeriod start) {
-
         if (this.pointsInTime[0] == null) {
             this.pointsInTime[0] = start;
             for (int i = 1; i < this.historyCount; i++) {
@@ -321,17 +316,14 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
             }
         }
         long oldestL = this.pointsInTime[0].getFirstMillisecond(
-            this.workingCalendar
-        );
+                this.workingCalendar);
         long nextL = this.pointsInTime[1].getFirstMillisecond(
-            this.workingCalendar
-        );
+                this.workingCalendar);
         this.deltaTime = nextL - oldestL;
         this.oldestAt = 0;
         this.newestAt = this.historyCount - 1;
         findDomainLimits();
         return this.deltaTime;
-
     }
 
     /**
@@ -339,7 +331,6 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      * because it's called from within another method that already is.
      */
     protected void findDomainLimits() {
-
         long startL = getOldestTime().getFirstMillisecond(this.workingCalendar);
         long endL;
         if (this.domainIsPointsInTime) {
@@ -351,7 +342,6 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         this.domainStart = new Long(startL);
         this.domainEnd = new Long(endL);
         this.domainRange = new Range(startL, endL);
-
     }
 
     /**
@@ -383,8 +373,8 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      * Use this as-is during setup only, or add the synchronized keyword around
      * the copy loop.
      */
-    public void addSeries(float[] values,
-                          int seriesNumber, Comparable seriesKey) {
+    public void addSeries(float[] values, int seriesNumber, 
+            Comparable seriesKey) {
 
         invalidateRangeInfo();
         int i;
@@ -426,7 +416,6 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
             this.seriesKeys[seriesNumber] = seriesKey;
         }
         fireSeriesChanged();
-
     }
 
     /**
@@ -447,7 +436,6 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      * @param value  the value.
      */
     public void addValue(int seriesNumber, int index, float value) {
-
         invalidateRangeInfo();
         if (seriesNumber >= this.valueHistory.length) {
             throw new IllegalArgumentException(
@@ -667,8 +655,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         int nDataPoints = newData.length;
         if (nDataPoints > this.valueHistory.length) {
             throw new IllegalArgumentException(
-               "More data than series to put them in"
-            );
+                    "More data than series to put them in");
         }
         int s;   // index to select the "series"
         for (s = 0; s < nDataPoints; s++) {
@@ -690,25 +677,24 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      * @param  refresh  value of n in "refresh the display on every nth call"
      *                 (ignored if <= 0 )
      */
-     public void appendData(float[] newData, int insertionIndex, int refresh) {
-         int nDataPoints = newData.length;
-         if (nDataPoints > this.valueHistory.length) {
-             throw new IllegalArgumentException(
-                 "More data than series to put them " + "in"
-             );
-         }
-         for (int s = 0; s < nDataPoints; s++) {
-             if (this.valueHistory[s] == null) {
+    public void appendData(float[] newData, int insertionIndex, int refresh) {
+        int nDataPoints = newData.length;
+        if (nDataPoints > this.valueHistory.length) {
+            throw new IllegalArgumentException(
+                    "More data than series to put them in");
+        }
+        for (int s = 0; s < nDataPoints; s++) {
+            if (this.valueHistory[s] == null) {
                 this.valueHistory[s] = new ValueSequence(this.historyCount);
-             }
-             this.valueHistory[s].enterData(insertionIndex, newData[s]);
-         }
-         if (refresh > 0) {
-             insertionIndex++;
-             if (insertionIndex % refresh == 0) {
-                 fireSeriesChanged();
-             }
-         }
+            }
+            this.valueHistory[s].enterData(insertionIndex, newData[s]);
+        }
+        if (refresh > 0) {
+            insertionIndex++;
+            if (insertionIndex % refresh == 0) {
+                fireSeriesChanged();
+            }
+        }
     }
 
     /**
