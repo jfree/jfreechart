@@ -65,4 +65,19 @@ public class ParamChecks {
             throw new IllegalArgumentException("Null '" + name + "' argument.");
         }
     }
+    
+    /**
+     * Throws an {@code IllegalArgumentException} if {@code value} is negative.
+     * 
+     * @param value  the value.
+     * @param name  the parameter name (for use in the exception message).
+     * 
+     * @since 1.0.18
+     */
+    public static void requireNonNegative(int value, String name) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Require '" + name + "' (" 
+                    + value + ") to be non-negative.");
+        }
+    }
 }
