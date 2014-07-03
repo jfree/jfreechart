@@ -1,4 +1,4 @@
-<!-- An ANT build file for JFreeChart -->
+<!-- An ANT build file for JFreeChart including JavaFX support -->
 
 <!-- Written by David Gilbert. -->
 
@@ -20,7 +20,7 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.0.18-pre-fx" />
+        <property name="jfreechart.version" value="1.0.18-fx" />
         <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.22" />
@@ -244,6 +244,7 @@
 
         <!-- copy across ant build files -->
         <copy file="${basedir}/ant/build.xml" tofile="${basedir}/distribution/ant/build.xml" />
+        <copy file="${basedir}/ant/build-fx.xml" tofile="${basedir}/distribution/ant/build-fx.xml" />
         <copy file="${basedir}/ant/build-swt.xml" tofile="${basedir}/distribution/ant/build-swt.xml" />
 
         <!-- copy across checkstyle property file -->
