@@ -1,4 +1,21 @@
 2014-07-01  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/plot/CategoryPlot.java: Numerous changes to fix iteration
+      over map based attributes,
+    * org/jfree/chart/plot/XYPlot.java: Likewise.
+
+2014-07-01  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/plot/Marker.java
+    (labelBackgroundColor): New field,
+    (Marker): Initialise new field,
+    (getLabelBackgroundColor): New method,
+    (setLabelBackgroundColor): Likewise,
+    (equals): Check new field,
+    * org/jfree/chart/renderer/AbstractCategoryItemRenderer.java
+    (drawRangeMarker): Paint background color.
+
+2014-07-01  David Gilbert  <david.gilbert@object-refinery.com>
     
     Patch #310 by Ricardo JL Rufino:
     * org/jfree/data/time/DynamicTimeSeriesCollection.java
