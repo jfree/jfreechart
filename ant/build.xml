@@ -246,6 +246,7 @@
 
         <!-- copy across ant build files -->
         <copy file="${basedir}/ant/build.xml" tofile="${basedir}/distribution/ant/build.xml" />
+        <copy file="${basedir}/ant/build-fx.xml" tofile="${basedir}/distribution/ant/build-fx.xml" />
         <copy file="${basedir}/ant/build-swt.xml" tofile="${basedir}/distribution/ant/build-swt.xml" />
 
         <!-- copy across checkstyle property file -->
