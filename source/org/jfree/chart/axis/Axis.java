@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Axis.java
  * ---------
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bill Kelemen;
@@ -157,7 +157,7 @@ public abstract class Axis implements Cloneable, Serializable {
     public static final Paint DEFAULT_AXIS_LINE_PAINT = Color.gray;
 
     /** The default axis line stroke. */
-    public static final Stroke DEFAULT_AXIS_LINE_STROKE = new BasicStroke(1.0f);
+    public static final Stroke DEFAULT_AXIS_LINE_STROKE = new BasicStroke(0.5f);
 
     /** The default tick labels visibility. */
     public static final boolean DEFAULT_TICK_LABELS_VISIBLE = true;
@@ -177,7 +177,7 @@ public abstract class Axis implements Cloneable, Serializable {
     public static final boolean DEFAULT_TICK_MARKS_VISIBLE = true;
 
     /** The default tick stroke. */
-    public static final Stroke DEFAULT_TICK_MARK_STROKE = new BasicStroke(1);
+    public static final Stroke DEFAULT_TICK_MARK_STROKE = new BasicStroke(0.5f);
 
     /** The default tick paint. */
     public static final Paint DEFAULT_TICK_MARK_PAINT = Color.gray;
@@ -290,7 +290,7 @@ public abstract class Axis implements Cloneable, Serializable {
 
     /**
      * A reference back to the plot that the axis is assigned to (can be
-     * <code>null</code>).
+     * {@code null}).
      */
     private transient Plot plot;
 
@@ -300,7 +300,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Constructs an axis, using default values where necessary.
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      */
     protected Axis(String label) {
 
@@ -366,7 +366,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Returns the label for the axis.
      *
-     * @return The label for the axis (<code>null</code> possible).
+     * @return The label for the axis ({@code null} possible).
      *
      * @see #getLabelFont()
      * @see #getLabelPaint()
@@ -380,7 +380,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the label for the axis and sends an {@link AxisChangeEvent} to all
      * registered listeners.
      *
-     * @param label  the new label (<code>null</code> permitted).
+     * @param label  the new label ({@code null} permitted).
      *
      * @see #getLabel()
      * @see #setLabelFont(Font)
@@ -394,9 +394,9 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Returns the attributed label (the returned value is a copy, so 
      * modifying it will not impact the state of the axis).  The default value 
-     * is <code>null</code>.
+     * is {@code null}.
      * 
-     * @return The attributed label (possibly <code>null</code>).
+     * @return The attributed label (possibly {@code null}).
      * 
      * @since 1.0.16
      */
@@ -414,7 +414,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * convenience method that converts the string into an 
      * <code>AttributedString</code> using the current font attributes.
      * 
-     * @param label  the label (<code>null</code> permitted).
+     * @param label  the label ({@code null} permitted).
      * 
      * @since 1.0.16
      */
@@ -426,7 +426,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the attributed label for the axis and sends an 
      * {@link AxisChangeEvent} to all registered listeners.
      * 
-     * @param label  the label (<code>null</code> permitted).
+     * @param label  the label ({@code null} permitted).
      * 
      * @since 1.0.16
      */
@@ -443,9 +443,9 @@ public abstract class Axis implements Cloneable, Serializable {
      * Creates and returns an <code>AttributedString</code> with the specified
      * text and the labelFont and labelPaint applied as attributes.
      * 
-     * @param label  the label (<code>null</code> permitted).
+     * @param label  the label ({@code null} permitted).
      * 
-     * @return An attributed string or <code>null</code>.
+     * @return An attributed string or {@code null}.
      * 
      * @since 1.0.16
      */
@@ -461,7 +461,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Returns the font for the axis label.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setLabelFont(Font)
      */
@@ -473,7 +473,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the font for the axis label and sends an {@link AxisChangeEvent}
      * to all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getLabelFont()
      */
@@ -488,7 +488,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Returns the color/shade used to draw the axis label.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setLabelPaint(Paint)
      */
@@ -500,7 +500,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the paint used to draw the axis label and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getLabelPaint()
      */
@@ -514,7 +514,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Returns the insets for the label (that is, the amount of blank space
      * that should be left around the label).
      *
-     * @return The label insets (never <code>null</code>).
+     * @return The label insets (never {@code null}).
      *
      * @see #setLabelInsets(RectangleInsets)
      */
@@ -526,7 +526,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the insets for the axis label, and sends an {@link AxisChangeEvent}
      * to all registered listeners.
      *
-     * @param insets  the insets (<code>null</code> not permitted).
+     * @param insets  the insets ({@code null} not permitted).
      *
      * @see #getLabelInsets()
      */
@@ -538,7 +538,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the insets for the axis label, and sends an {@link AxisChangeEvent}
      * to all registered listeners.
      *
-     * @param insets  the insets (<code>null</code> not permitted).
+     * @param insets  the insets ({@code null} not permitted).
      * @param notify  notify listeners?
      *
      * @since 1.0.10
@@ -581,7 +581,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Returns the location of the axis label.  The default is
      * {@link AxisLabelLocation#MIDDLE}.
      * 
-     * @return The location of the axis label (never <code>null</code>). 
+     * @return The location of the axis label (never {@code null}). 
      * 
      * @since 1.0.16
      */
@@ -593,7 +593,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the axis label location and sends an {@link AxisChangeEvent} to
      * all registered listeners.
      * 
-     * @param location  the new location (<code>null</code> not permitted).
+     * @param location  the new location ({@code null} not permitted).
      * 
      * @since 1.0.16
      */
@@ -634,7 +634,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Returns the paint used to draw the axis line.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setAxisLinePaint(Paint)
      */
@@ -646,7 +646,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the paint used to draw the axis line and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getAxisLinePaint()
      */
@@ -659,7 +659,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Returns the stroke used to draw the axis line.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setAxisLineStroke(Stroke)
      */
@@ -671,7 +671,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the stroke used to draw the axis line and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getAxisLineStroke()
      */
@@ -750,7 +750,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Returns the font used for the tick labels (if showing).
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setTickLabelFont(Font)
      */
@@ -762,7 +762,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the font for the tick labels and sends an {@link AxisChangeEvent}
      * to all registered listeners.
      *
-     * @param font  the font (<code>null</code> not allowed).
+     * @param font  the font ({@code null} not allowed).
      *
      * @see #getTickLabelFont()
      */
@@ -789,7 +789,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the paint used to draw tick labels (if they are showing) and
      * sends an {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getTickLabelPaint()
      */
@@ -802,7 +802,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Returns the insets for the tick labels.
      *
-     * @return The insets (never <code>null</code>).
+     * @return The insets (never {@code null}).
      *
      * @see #setTickLabelInsets(RectangleInsets)
      */
@@ -814,7 +814,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the insets for the tick labels and sends an {@link AxisChangeEvent}
      * to all registered listeners.
      *
-     * @param insets  the insets (<code>null</code> not permitted).
+     * @param insets  the insets ({@code null} not permitted).
      *
      * @see #getTickLabelInsets()
      */
@@ -907,7 +907,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Returns the stroke used to draw tick marks.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setTickMarkStroke(Stroke)
      */
@@ -919,7 +919,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the stroke used to draw tick marks and sends
      * an {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getTickMarkStroke()
      */
@@ -934,7 +934,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Returns the paint used to draw tick marks (if they are showing).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setTickMarkPaint(Paint)
      */
@@ -946,7 +946,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the paint used to draw tick marks and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getTickMarkPaint()
      */
@@ -1016,10 +1016,9 @@ public abstract class Axis implements Cloneable, Serializable {
 
     /**
      * Returns the plot that the axis is assigned to.  This method will return
-     * <code>null</code> if the axis is not currently assigned to a plot.
+     * {@code null} if the axis is not currently assigned to a plot.
      *
-     * @return The plot that the axis is assigned to (possibly
-     *         <code>null</code>).
+     * @return The plot that the axis is assigned to (possibly {@code null}).
      *
      * @see #setPlot(Plot)
      */
@@ -1097,22 +1096,19 @@ public abstract class Axis implements Cloneable, Serializable {
      * Draws the axis on a Java 2D graphics device (such as the screen or a
      * printer).
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param cursor  the cursor location (determines where to draw the axis).
      * @param plotArea  the area within which the axes and plot should be drawn.
      * @param dataArea  the area within which the data should be drawn.
-     * @param edge  the axis location (<code>null</code> not permitted).
+     * @param edge  the axis location ({@code null} not permitted).
      * @param plotState  collects information about the plot
-     *                   (<code>null</code> permitted).
+     *                   ({@code null} permitted).
      *
-     * @return The axis state (never <code>null</code>).
+     * @return The axis state (never {@code null}).
      */
-    public abstract AxisState draw(Graphics2D g2,
-                                   double cursor,
-                                   Rectangle2D plotArea,
-                                   Rectangle2D dataArea,
-                                   RectangleEdge edge,
-                                   PlotRenderingInfo plotState);
+    public abstract AxisState draw(Graphics2D g2, double cursor,
+            Rectangle2D plotArea, Rectangle2D dataArea, RectangleEdge edge,
+            PlotRenderingInfo plotState);
 
     /**
      * Calculates the positions of the ticks for the axis, storing the results
@@ -1336,7 +1332,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @param plotArea  the plot area.
      * @param dataArea  the area inside the axes.
      * @param edge  the location of the axis.
-     * @param state  the axis state (<code>null</code> not permitted).
+     * @param state  the axis state ({@code null} not permitted).
      *
      * @return Information about the axis.
      */
@@ -1433,7 +1429,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @param plotArea  the plot area.
      * @param dataArea  the area inside the axes.
      * @param edge  the location of the axis.
-     * @param state  the axis state (<code>null</code> not permitted).
+     * @param state  the axis state ({@code null} not permitted).
      *
      * @return Information about the axis.
      * 
@@ -1576,7 +1572,7 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * Tests this axis for equality with another object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */
