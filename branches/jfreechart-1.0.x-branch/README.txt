@@ -61,10 +61,9 @@ or with the Ant script (build.xml) included in the distribution.
 -----------------
 JFreeChart has the following dependencies:
 
-(a)  JRE/JDK 1.6.0 or higher - note that the previous release of JFreeChart
-worked with JRE/JDK 1.4.2 or later.  With a bit of hacking, it may be possible 
-to get JFreeChart working on these older versions, but we are no longer 
-supporting it.
+(a)  JRE/JDK 1.6.0 or higher.  Note that JRE/JDK 1.8 is required to use the new 
+JavaFX support (and you will need to rebuild the library using the 
+ant/build-fx.xml script).
 
 (b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.22)
 is included in the JFreeChart distribution.  You can obtain the complete
