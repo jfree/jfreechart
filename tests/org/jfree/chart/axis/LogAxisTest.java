@@ -270,7 +270,7 @@ public class LogAxisTest {
      * Checks that a TickUnit with a size of 0 doesn't crash.
      */
     @Test
-    public void testrefreshTicksWithZeroTickUnit() {
+    public void testRefreshTicksWithZeroTickUnit() {
         LogAxis axis = new LogAxis();
         AxisState state = new AxisState();
         BufferedImage image = new BufferedImage(200, 100,
