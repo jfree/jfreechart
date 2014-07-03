@@ -2,7 +2,7 @@
 *  JFREECHART: Version 1.0.18  *
 ********************************
 
-?? July 2014
+3 July 2014
 
 (C)opyright 2000-2014, by Object Refinery Limited and Contributors.
 
@@ -161,9 +161,10 @@ please post a bug report.
 --------------
 A list of changes in recent versions:
 
-1.0.18 : (??-Jul-2014)
-        - added JavaFX support;
+1.0.18 : (3-Jul-2014)
+        - added JavaFX support via FXGraphics2D;
         - improved LogAxis labelling;
+        - improved numeric tick labelling;
         - center text support in RingPlot;
         - 'stepPoint' attribute in the XYStepAreaRenderer;
         - other minor improvements and bug fixes, see the NEWS and ChangeLog 

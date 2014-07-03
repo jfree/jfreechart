@@ -1,3 +1,25 @@
+2014-07-03  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/axis/NumberTickUnitSource.java
+    (integers): New field,
+    (formatter): New field,
+    (NumberTickUnitSource(boolean)): New constructor,
+    (NumberTickUnitSource(boolean, NumberFormatter): Likewise,
+    (getCeilingTickUnit): Update for factors and integer setting,
+    (next): Add factor 2 and limits,
+    (previous): Likewise,
+    (getTickLabelFormat): Add override,
+    (equals): Take account of new fields, 
+    * org/jfree/chart/axis/LogAxis.java
+    (java2DToValue): Use minimum value if required,
+    (selectHorizontalAutoTickUnit): Likewise,
+    (selectVerticalAutoTickUnit): Likewise,
+    * org/jfree/chart/axis/NumberAxis.java
+    (createStandardTickUnits): Return a NumberTickUnitSource,
+    (createIntegerTickUnits): Likewise,
+    * org/jfree/chart/axis/ValueAxis.java
+    (zoomRange): Handle limits. 
+
 2014-07-01  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/plot/CategoryPlot.java: Numerous changes to fix iteration
