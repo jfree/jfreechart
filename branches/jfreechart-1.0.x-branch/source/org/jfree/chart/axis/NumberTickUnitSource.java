@@ -43,23 +43,51 @@ package org.jfree.chart.axis;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import org.jfree.util.ObjectUtilities;
 
 /**
  * A tick unit source implementation that returns NumberTickUnit instances 
- * that are multiples of 1 or 5 times some power of 10.
+ * that are multiples of 1, 2 or 5 times some power of 10.
  * 
  * @since 1.0.18
  */
 public class NumberTickUnitSource implements TickUnitSource, Serializable {
 
+    private boolean integers;
+    
     private int power = 0;
     
     private int factor = 1;
+    
+    /** The number formatter to use (an override, it can be null). */
+    private NumberFormat formatter;
 
     /**
      * Creates a new instance.
      */
     public NumberTickUnitSource() {
+        this(false);
+    }
+    
+    /**
+     * Creates a new instance.
+     * 
+     * @param integers  show integers only. 
+     */
+    public NumberTickUnitSource(boolean integers) {
+        this(integers, null);
+    }
+    
+    /**
+     * Creates a new instance.
+     * 
+     * @param integers  show integers only?
+     * @param formatter  a formatter for the axis tick labels ({@code null} 
+     *         permitted).
+     */
+    public NumberTickUnitSource(boolean integers, NumberFormat formatter) {
+        this.integers = integers;
+        this.formatter = formatter;
         this.power = 0;
         this.factor = 1;
     }
@@ -82,18 +110,41 @@ public class NumberTickUnitSource implements TickUnitSource, Serializable {
 
     @Override
     public TickUnit getCeilingTickUnit(double size) {
+        if (Double.isInfinite(size)) {
+            throw new IllegalArgumentException("Must be finite.");
+        }
         this.power = (int) Math.ceil(Math.log10(size));
+        if (this.integers) {
+            power = Math.max(this.power, 0);
+        }
         this.factor = 1;
+        boolean done = false;
+        // step down in size until the current size is too small or there are 
+        // no more units
+        while (!done) {
+            done = !previous();
+            if (getTickSize() < size) {
+                next();
+                done = true;
+            }
+        }
         return new NumberTickUnit(getTickSize(), getTickLabelFormat(), 
                 getMinorTickCount());
     }
     
     private boolean next() {
         if (factor == 1) {
+            factor = 2;
+            return true;
+        }
+        if (factor == 2) {
             factor = 5;
             return true;
-        } 
+        }
         if (factor == 5) {
+            if (power == 300) {
+                return false;
+            }
             power++;
             factor = 1;
             return true;
@@ -103,12 +154,19 @@ public class NumberTickUnitSource implements TickUnitSource, Serializable {
 
     private boolean previous() {
         if (factor == 1) {
+            if (this.integers && power == 0 || power == -300) {
+                return false;
+            }
             factor = 5;
             power--;
             return true;
         } 
-        if (factor == 5) {
+        if (factor == 2) {
             factor = 1;
+            return true;
+        }
+        if (factor == 5) {
+            factor = 2;
             return true;
         } 
         throw new IllegalStateException("We should never get here.");
@@ -123,8 +181,12 @@ public class NumberTickUnitSource implements TickUnitSource, Serializable {
     private DecimalFormat dfNeg2 = new DecimalFormat("0.00");
     private DecimalFormat dfNeg1 = new DecimalFormat("0.0");
     private DecimalFormat df0 = new DecimalFormat("#,##0");
-
+    private DecimalFormat df = new DecimalFormat("#.######E0");
+    
     private NumberFormat getTickLabelFormat() {
+        if (this.formatter != null) {
+            return this.formatter;
+        }
         if (power == -4) {
             return dfNeg4;
         }
@@ -140,7 +202,7 @@ public class NumberTickUnitSource implements TickUnitSource, Serializable {
         if (power >= 0 && power <= 6) {
             return df0;
         }
-        return new DecimalFormat("0.#E0");
+        return df;
     }
     
     private int getMinorTickCount() {
@@ -154,6 +216,25 @@ public class NumberTickUnitSource implements TickUnitSource, Serializable {
     
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof NumberTickUnitSource);
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof NumberTickUnitSource)) {
+            return false;
+        }
+        NumberTickUnitSource that = (NumberTickUnitSource) obj;
+        if (this.integers != that.integers) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.formatter, that.formatter)) {
+            return false;
+        }
+        if (this.power != that.power) {
+            return false;
+        }
+        if (this.factor != that.factor) {
+            return false;
+        }
+        return true;
     }
 }
