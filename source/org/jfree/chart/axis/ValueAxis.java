@@ -1621,16 +1621,18 @@ public abstract class ValueAxis extends Axis
     public void zoomRange(double lowerPercent, double upperPercent) {
         double start = this.range.getLowerBound();
         double length = this.range.getLength();
-        Range adjusted;
+        double r0, r1;
         if (isInverted()) {
-            adjusted = new Range(start + (length * (1 - upperPercent)),
-                                 start + (length * (1 - lowerPercent)));
+            r0 = start + (length * (1 - upperPercent));
+            r1 = start + (length * (1 - lowerPercent));
         }
         else {
-            adjusted = new Range(start + length * lowerPercent,
-                    start + length * upperPercent);
+            r0 = start + length * lowerPercent;
+            r1 = start + length * upperPercent;
         }
-        setRange(adjusted);
+        if ((r1 > r0) && !Double.isInfinite(r1 - r0)) {
+            setRange(new Range(r0, r1));
+        }
     }
 
     /**

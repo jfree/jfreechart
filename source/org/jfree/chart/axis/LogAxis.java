@@ -388,7 +388,8 @@ public class LogAxis extends ValueAxis {
             RectangleEdge edge) {
 
         Range range = getRange();
-        double axisMin = calculateLog(range.getLowerBound());
+        double axisMin = calculateLog(Math.max(this.smallestValue, 
+                range.getLowerBound()));
         double axisMax = calculateLog(range.getUpperBound());
 
         double min = 0.0;
@@ -730,7 +731,8 @@ public class LogAxis extends ValueAxis {
         // select a tick unit that is the next one bigger than the current
         // (log) range divided by 50
         Range range = getRange();
-        double logAxisMin = calculateLog(range.getLowerBound());
+        double logAxisMin = calculateLog(Math.max(this.smallestValue, 
+                range.getLowerBound()));
         double logAxisMax = calculateLog(range.getUpperBound());
         double size = (logAxisMax - logAxisMin) / 50;
         TickUnitSource tickUnits = getStandardTickUnits();
@@ -797,7 +799,8 @@ public class LogAxis extends ValueAxis {
         // select a tick unit that is the next one bigger than the current
         // (log) range divided by 50
         Range range = getRange();
-        double logAxisMin = calculateLog(range.getLowerBound());
+        double logAxisMin = calculateLog(Math.max(this.smallestValue, 
+                range.getLowerBound()));
         double logAxisMax = calculateLog(range.getUpperBound());
         double size = (logAxisMax - logAxisMin) / 50;
         TickUnitSource tickUnits = getStandardTickUnits();
