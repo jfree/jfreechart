@@ -1,17 +1,19 @@
 JFreeChart 1.0.18
 -----------------
-?? July 2014
+3 July 2014
 
 Added JavaFX support with a new ChartViewer control that supports tooltips,
 mouse clicks, panning, zooming and a context menu.  Modified LogAxis to 
-support super-scripted labels, enhanced XYStepAreaRenderer to support a 
-'stepPoint' attribute (patch from Lukasz Rzeszotarski), provided 
-configurable direction labels in CompassFormat (patch from Simon Legner), 
-added methods to add data item objects to VectorSeries, XIntervalSeries, 
-YIntervalSeries and XYIntervalSeries (for consistency with other data series
-objects), improved the TimeSeries range calculations, provided center text 
-support for the RingPlot class, and updated JCommon to version 1.0.22 (this 
-fixes a bug in pie label rendering).
+support super-scripted labels, improved the tick label generation for
+NumberAxis, added a new ProbabilityAxis (patch from John St. Ledger), 
+enhanced XYStepAreaRenderer to support a 'stepPoint' attribute (patch from 
+Lukasz Rzeszotarski), provided configurable direction labels in 
+CompassFormat (patch from Simon Legner), added methods to add data item 
+objects to VectorSeries, XIntervalSeries, YIntervalSeries and 
+XYIntervalSeries (for consistency with other data series objects), 
+improved the TimeSeries range calculations, provided center text support 
+for the RingPlot class, and updated JCommon to version 1.0.22 (this fixes 
+a bug in pie label rendering).
 
 Bug Fixes:
 
