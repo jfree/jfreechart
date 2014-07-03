@@ -20,7 +20,7 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.0.18-pre" />
+        <property name="jfreechart.version" value="1.0.18" />
         <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.22" />
@@ -29,7 +29,7 @@
         <property name="jfreesvg.version" value="1.9" />
         <property name="orsonpdf.name" value="orsonpdf" />
         <property name="orsonpdf.version" value="1.6-eval" />
-        <property name="orsoncharts.version" value="1.4-eval" />
+        <property name="orsoncharts.version" value="1.4-eval-nofx" />
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
         <property name="junit.jar" value="${basedir}/lib/junit-4.11.jar"/>
@@ -61,8 +61,8 @@
                target="${target.version}">
             <classpath refid="build.classpath" />
             <include name="org/jfree/**"/>
-            <exclude name="org/jfree/chart/xml/**"/>
             <exclude name="org/jfree/chart/fx/**"/>
+            <exclude name="org/jfree/chart/xml/**"/>
         </javac>
 
         <!-- copy across gorilla.jpg -->
@@ -154,6 +154,7 @@
             <classpath refid="build.classpath" />
             <packageset dir="${basedir}/source" defaultexcludes="yes">
                 <include name="org/jfree/**"/>
+                <exclude name="org/jfree/chart/fx/**"/>
                 <exclude name="org/jfree/chart/xml/**"/>
             </packageset>
         </javadoc>
