@@ -40,6 +40,7 @@
 
 package org.jfree.chart.axis;
 
+import java.text.DecimalFormat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -56,7 +57,8 @@ public class TickUnitsTest {
      */
     @Test
     public void testSerialization() {
-        TickUnits t1 = (TickUnits) NumberAxis.createIntegerTickUnits();
+        TickUnits t1 = new TickUnits();
+        t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
         TickUnits t2 = (TickUnits) TestUtilities.serialised(t1);
         assertEquals(t1, t2);
     }
@@ -66,7 +68,8 @@ public class TickUnitsTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        TickUnits t1 = (TickUnits) NumberAxis.createIntegerTickUnits();
+        TickUnits t1 = new TickUnits();
+        t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
         TickUnits t2 = (TickUnits) t1.clone();
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
@@ -78,8 +81,10 @@ public class TickUnitsTest {
      */
     @Test
     public void testEquals() {
-        TickUnits t1 = (TickUnits) NumberAxis.createIntegerTickUnits();
-        TickUnits t2 = (TickUnits) NumberAxis.createIntegerTickUnits();
+        TickUnits t1 = new TickUnits();
+        t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
+        TickUnits t2 = new TickUnits();
+        t2.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
         assertTrue(t1.equals(t2));
         assertTrue(t2.equals(t1));
     }
