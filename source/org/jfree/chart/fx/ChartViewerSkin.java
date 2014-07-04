@@ -48,6 +48,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import org.jfree.chart.ChartMouseEvent;
+import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.fx.interaction.ChartMouseListenerFX;
 import org.jfree.chart.util.ParamChecks;
@@ -87,6 +88,17 @@ public class ChartViewerSkin extends SkinBase<ChartViewer>  {
         getChildren().add(this.zoomRectangle);
     }
     
+    /**
+     * Returns the rendering info from the most recent drawing of the chart.
+     * 
+     * @return The rendering info (possibly {@code null}).
+     * 
+     * @since 1.0.19
+     */
+    public ChartRenderingInfo getRenderingInfo() {
+        return this.canvas.getRenderingInfo();
+    }
+
     /**
      * Sets the chart displayed by this control.
      * 
