@@ -53,6 +53,7 @@ import javafx.scene.control.Skinnable;
 import javafx.stage.FileChooser;
 import javafx.stage.WindowEvent;
 import org.jfree.chart.ChartMouseEvent;
+import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.fx.interaction.ChartMouseEventFX;
 import org.jfree.chart.fx.interaction.ChartMouseListenerFX;
@@ -166,6 +167,19 @@ public class ChartViewer extends Control implements Skinnable,
         if (skin != null) {
             skin.setTooltipEnabled(enabled);        
         }
+    }
+
+    /**
+     * Returns the rendering info from the most recent drawing of the chart.
+     * 
+     * @return The rendering info (possibly {@code null}). 
+     */
+    public ChartRenderingInfo getRenderingInfo() {
+        ChartViewerSkin skin = (ChartViewerSkin) getSkin();
+        if (skin != null) {
+            return skin.getRenderingInfo();
+        }
+        return null;
     }
 
     /**

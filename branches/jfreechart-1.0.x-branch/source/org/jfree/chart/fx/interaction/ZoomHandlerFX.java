@@ -238,12 +238,14 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
                 double pw1 = percentW(x + w, dataArea);
                 double ph0 = percentH(y, dataArea);
                 double ph1 = percentH(y + h, dataArea);
+                PlotRenderingInfo info 
+                        = this.viewer.getRenderingInfo().getPlotInfo();
                 if (z.getOrientation().isVertical()) {
-                    z.zoomDomainAxes(pw0, pw1, null, endPoint);
-                    z.zoomRangeAxes(1 - ph1, 1 - ph0, null, endPoint);
+                    z.zoomDomainAxes(pw0, pw1, info, endPoint);
+                    z.zoomRangeAxes(1 - ph1, 1 - ph0, info, endPoint);
                 } else {
-                    z.zoomRangeAxes(pw0, pw1, null, endPoint);
-                    z.zoomDomainAxes(1 - ph1, 1 - ph0, null, endPoint);
+                    z.zoomRangeAxes(pw0, pw1, info, endPoint);
+                    z.zoomDomainAxes(1 - ph1, 1 - ph0, info, endPoint);
                 }
                 p.setNotify(saved);
                 
