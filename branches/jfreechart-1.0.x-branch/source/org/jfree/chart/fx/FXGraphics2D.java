@@ -109,6 +109,8 @@ public class FXGraphics2D extends Graphics2D {
     
     private final GraphicsContext gc;
     
+    private int saveCount = 0;
+    
     private boolean clippingDisabled = false;
     
     /** Rendering hints (all ignored). */
@@ -1105,12 +1107,31 @@ public class FXGraphics2D extends Graphics2D {
      */
     @Override
     public void setClip(Shape shape) {
+        boolean restored = false;
+        while (this.saveCount > 0) {
+            this.gc.restore();
+            restored = true;
+            this.saveCount--;
+        }
+        if (restored) {
+            reapplyAttributes();
+        }
         // null is handled fine here...
         this.clip = this.transform.createTransformedShape(shape);
-        if (clip != null) { // FIXME: this is not the correct handling for null
+        if (clip != null) {
+            this.gc.save(); 
+            this.saveCount++;
             shapeToPath(shape);
-            //this.gc.clip();
-        }
+            this.gc.clip();
+        } 
+    }
+    
+    private void reapplyAttributes() {
+        setPaint(this.paint);
+        setBackground(this.background);
+        setStroke(this.stroke);
+        setFont(this.font);
+        setTransform(this.transform);
     }
     
     /**
@@ -1135,17 +1156,21 @@ public class FXGraphics2D extends Graphics2D {
             return;
         }
         Shape ts = this.transform.createTransformedShape(s);
+        Shape clipNew;
         if (!ts.intersects(this.clip.getBounds2D())) {
-            setClip(new Rectangle2D.Double());
+            clipNew = new Rectangle2D.Double();
         } else {
             Area a1 = new Area(ts);
             Area a2 = new Area(this.clip);
             a1.intersect(a2);
-            this.clip = new Path2D.Double(a1);
+            clipNew = new Path2D.Double(a1);
+        }
+        this.clip = clipNew;
+        if (!this.clippingDisabled) {
+            this.gc.save();
+            this.saveCount++;
             shapeToPath(this.clip);
-            if (!this.clippingDisabled) {
-                this.gc.clip();
-            }
+            this.gc.clip();
         }
     }
 
