@@ -20,7 +20,7 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.0.18-fx" />
+        <property name="jfreechart.version" value="1.0.19-fx" />
         <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.22" />
@@ -63,6 +63,13 @@
             <include name="org/jfree/**"/>
             <exclude name="org/jfree/chart/xml/**"/>
         </javac>
+
+        <!-- copy across .css files (chart-viewer.css) -->
+        <copy todir="${basedir}/build/org/jfree/chart/fx/">
+            <fileset dir="${basedir}/source/org/jfree/chart/fx/">
+                <include name="*.css" />
+            </fileset>
+        </copy>
 
         <!-- copy across gorilla.jpg -->
         <copy file="${basedir}/source/org/jfree/chart/gorilla.jpg" tofile="${basedir}/build/org/jfree/chart/gorilla.jpg" />
