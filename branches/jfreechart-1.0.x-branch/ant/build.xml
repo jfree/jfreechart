@@ -62,7 +62,6 @@
             <classpath refid="build.classpath" />
             <include name="org/jfree/**"/>
             <exclude name="org/jfree/chart/fx/**"/>
-            <exclude name="org/jfree/chart/xml/**"/>
         </javac>
 
         <!-- copy across gorilla.jpg -->
@@ -155,7 +154,6 @@
             <packageset dir="${basedir}/source" defaultexcludes="yes">
                 <include name="org/jfree/**"/>
                 <exclude name="org/jfree/chart/fx/**"/>
-                <exclude name="org/jfree/chart/xml/**"/>
             </packageset>
         </javadoc>
         <!-- copy across .png files -->
@@ -206,7 +204,6 @@
         <copy todir="${basedir}/distribution/source">
             <fileset dir="${basedir}/source">
               <exclude name="**/CVS/*"/>
-              <exclude name="org/jfree/chart/xml/**"/>
             </fileset>
         </copy>
 
