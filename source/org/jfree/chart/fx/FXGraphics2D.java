@@ -142,10 +142,6 @@ public class FXGraphics2D extends Graphics2D {
     /** The background color, presently ignored. */
     private Color background = Color.BLACK;
 
-    /** A hidden image used for font metrics. */
-    private final BufferedImage image = new BufferedImage(10, 10, 
-            BufferedImage.TYPE_INT_RGB);
-    
     /**
      * An instance that is lazily instantiated in drawLine and then 
      * subsequently reused to avoid creating a lot of garbage.
@@ -386,7 +382,7 @@ public class FXGraphics2D extends Graphics2D {
      * Returns the foreground color.  This method exists for backwards
      * compatibility in AWT, you should use the {@link #getPaint()} method.
      * 
-     * @return The foreground color (never <code>null</code>).
+     * @return The foreground color (never {@code null}).
      * 
      * @see #getPaint() 
      */
@@ -400,7 +396,7 @@ public class FXGraphics2D extends Graphics2D {
      * compatibility in AWT, you should use the 
      * {@link #setPaint(java.awt.Paint)} method.
      * 
-     * @param c  the color (<code>null</code> permitted but ignored). 
+     * @param c  the color ({@code null} permitted but ignored). 
      * 
      * @see #setPaint(java.awt.Paint) 
      */
@@ -419,7 +415,7 @@ public class FXGraphics2D extends Graphics2D {
     /**
      * Returns a JavaFX color that is equivalent to the specified AWT color.
      * 
-     * @param c  the color (<code>null</code> not permitted).
+     * @param c  the color ({@code null} not permitted).
      * 
      * @return A JavaFX color. 
      */
