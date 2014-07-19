@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 25-Jun-2014 : Version 1 (DG);
+ * 19-Jul-2014 : Add clearRect() call for each draw (DG);
  *
  */
 
@@ -47,6 +48,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -331,15 +333,17 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
      * information.
      */
     public final void draw() {
-        getGraphicsContext2D().save();
+        GraphicsContext ctx = getGraphicsContext2D();
+        ctx.save();
         double width = getWidth();
         double height = getHeight();
         if (width > 0 && height > 0) {
+            ctx.clearRect(0, 0, width, height);
             this.info = new ChartRenderingInfo();
             this.chart.draw(this.g2, new Rectangle((int) width, (int) height), 
                     this.anchor, this.info);
         }
-        getGraphicsContext2D().restore();
+        ctx.restore();
         this.anchor = null;
     }
  
