@@ -4968,8 +4968,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns <code>true</code> if panning is enabled for the range axes,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if panning is enabled for the range axis/axes,
+     * and {@code false} otherwise.  The default value is {@code false}.
      *
      * @return A boolean.
      *
@@ -4982,7 +4982,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
 
     /**
      * Sets the flag that enables or disables panning of the plot along
-     * the range axes.
+     * the range axis/axes.
      *
      * @param pannable  the new flag value.
      *
