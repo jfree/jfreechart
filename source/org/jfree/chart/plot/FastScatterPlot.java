@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * --------------------
  * FastScatterPlot.java
  * --------------------
- * (C) Copyright 2002-2013, by Object Refinery Limited.
+ * (C) Copyright 2002-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Arnaud Lelievre;
+ *                   Ulrich Voigt (patch #307);
  *
  * Changes
  * -------
@@ -60,6 +61,7 @@
  *               Jess Thrysoee (DG);
  * 26-Mar-2009 : Implemented Pannable, and fixed bug in zooming (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 21-Jul-2014 : Fix panning (patch #307 by Ulrich Voigt) (DG);
  *
  */
 
@@ -957,7 +959,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
             return;
         }
         double length = this.domainAxis.getRange().getLength();
-        double adj = -percent * length;
+        double adj = percent * length;
         if (this.domainAxis.isInverted()) {
             adj = -adj;
         }
