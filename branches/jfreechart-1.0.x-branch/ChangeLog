@@ -1,3 +1,30 @@
+2014-07-21  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/plot/CombinedDomainXYPlot.java
+    (isRangePannable): New method override,
+    (setRangePannable): Likewise,
+    (panRangeAxes): Take subplot flag into account,
+    * org/jfree/chart/plot/CombinedRangeXYPlot.java
+    (isDomainPannable): New method override,
+    (setDomainPannable): Likewise,
+    (panDomainAxes): Take subplot flag into account.
+
+2014-07-19  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/fx/ChartCanvas.java
+    (draw): Call clearRect(),
+    * org/jfree/chart/fx/FXGraphics2D.java
+    (image): Removed as not used.
+
+2014-07-04  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/fx/ChartViewerSkin.java
+    (getRenderingInfo): New method,
+    * org/jfree/chart/fx/ChartViewer.java
+    (getRenderingInfo): New method,
+    * org/jfree/chart/fx/interaction/ZoomHandlerFX.java
+    (handleMouseReleased): Fetch plot rendering info.
+
 2014-07-04  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/fx/FXGraphics2D.java
