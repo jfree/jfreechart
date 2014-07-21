@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * CombinedRangeXYPlot.java
  * ------------------------
- * (C) Copyright 2001-2012, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-2014, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -94,6 +94,8 @@
  * 11-Aug-2008 : Don't store totalWeight of subplots, calculate it as
  *               required (DG);
  * 21-Dec-2011 : Apply patch 3447161 by Ulrich Voigt and Martin Hoeller (MH);
+ * 21-Jul-2014 : Override isDomainPannable() and setDomainPannable() - motivated 
+ *               by patch #304 by Ulrich Voigt (DG);
  *
  */
 
@@ -132,7 +134,7 @@ public class CombinedRangeXYPlot extends XYPlot
     private static final long serialVersionUID = -5177814085082031168L;
 
     /** Storage for the subplot references. */
-    private List subplots;
+    private List<XYPlot> subplots;
 
     /** The gap between subplots. */
     private double gap = 5.0;
@@ -153,14 +155,11 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param rangeAxis  the shared axis.
      */
     public CombinedRangeXYPlot(ValueAxis rangeAxis) {
-
         super(null, // no data in the parent plot
               null,
               rangeAxis,
               null);
-
-        this.subplots = new java.util.ArrayList();
-
+        this.subplots = new java.util.ArrayList<XYPlot>();
     }
 
     /**
@@ -193,6 +192,35 @@ public class CombinedRangeXYPlot extends XYPlot
      */
     public void setGap(double gap) {
         this.gap = gap;
+    }
+    
+    /**
+     * Returns {@code true} if the domain is pannable for at least one subplot,
+     * and {@code false} otherwise.
+     * 
+     * @return A boolean. 
+     */
+    @Override
+    public boolean isDomainPannable() {
+        for (XYPlot subplot : this.subplots) {
+            if (subplot.isDomainPannable()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Sets the flag, on each of the subplots, that controls whether or not the 
+     * domain is pannable.
+     * 
+     * @param pannable  the new flag value. 
+     */
+    @Override
+    public void setDomainPannable(boolean pannable) {
+        for (XYPlot subplot : this.subplots) {
+            subplot.setDomainPannable(pannable);
+        }        
     }
 
     /**
@@ -529,15 +557,21 @@ public class CombinedRangeXYPlot extends XYPlot
             Point2D source) {
 
         XYPlot subplot = findSubplot(info, source);
-        if (subplot != null) {
-            PlotRenderingInfo subplotInfo = info.getSubplotInfo(
-                    info.getSubplotIndex(source));
-            if (subplotInfo == null) {
-                return;
-            }
+        if (subplot == null) {
+            return;
+        }
+        if (!subplot.isDomainPannable()) {
+            return;
+        }
+        PlotRenderingInfo subplotInfo = info.getSubplotInfo(
+                info.getSubplotIndex(source));
+        if (subplotInfo == null) {
+            return;
+        }
 
-            for (int i = 0; i < subplot.getDomainAxisCount(); i++) {
-                ValueAxis domainAxis = subplot.getDomainAxis(i);
+        for (int i = 0; i < subplot.getDomainAxisCount(); i++) {
+            ValueAxis domainAxis = subplot.getDomainAxis(i);
+            if (domainAxis != null) {
                 domainAxis.pan(panRange);
             }
         }
