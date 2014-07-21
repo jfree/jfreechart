@@ -92,7 +92,8 @@
  * 11-Aug-2008 : Don't store totalWeight of subplots, calculate it as
  *               required (DG);
  * 21-Dec-2011 : Apply patch 3447161 by Ulrich Voigt and Martin Hoeller (MH);
- *
+ * 21-Jul-2014 : Override isRangePannable() and setRangePannable() - motivated 
+ *               by patch #304 by Ulrich Voigt (DG);
  */
 
 package org.jfree.chart.plot;
@@ -130,7 +131,7 @@ public class CombinedDomainXYPlot extends XYPlot
     private static final long serialVersionUID = -7765545541261907383L;
 
     /** Storage for the subplot references. */
-    private List subplots;
+    private List<XYPlot> subplots;
 
     /** The gap between subplots. */
     private double gap = 5.0;
@@ -154,14 +155,11 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param domainAxis  the shared axis.
      */
     public CombinedDomainXYPlot(ValueAxis domainAxis) {
-
         super(null,        // no data in the parent plot
               domainAxis,
               null,        // no range axis
               null);       // no renderer
-
-        this.subplots = new java.util.ArrayList();
-
+        this.subplots = new java.util.ArrayList<XYPlot>();
     }
 
     /**
@@ -172,6 +170,59 @@ public class CombinedDomainXYPlot extends XYPlot
     @Override
     public String getPlotType() {
         return "Combined_Domain_XYPlot";
+    }
+
+    /**
+     * Returns the gap between subplots, measured in Java2D units.
+     *
+     * @return The gap (in Java2D units).
+     *
+     * @see #setGap(double)
+     */
+    public double getGap() {
+        return this.gap;
+    }
+
+    /**
+     * Sets the amount of space between subplots and sends a
+     * {@link PlotChangeEvent} to all registered listeners.
+     *
+     * @param gap  the gap between subplots (in Java2D units).
+     *
+     * @see #getGap()
+     */
+    public void setGap(double gap) {
+        this.gap = gap;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns {@code true} if the range is pannable for at least one subplot,
+     * and {@code false} otherwise.
+     * 
+     * @return A boolean. 
+     */
+    @Override
+    public boolean isRangePannable() {
+        for (XYPlot subplot : this.subplots) {
+            if (subplot.isRangePannable()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Sets the flag, on each of the subplots, that controls whether or not the 
+     * range is pannable.
+     * 
+     * @param pannable  the new flag value. 
+     */
+    @Override
+    public void setRangePannable(boolean pannable) {
+        for (XYPlot subplot : this.subplots) {
+            subplot.setRangePannable(pannable);
+        }        
     }
 
     /**
@@ -232,30 +283,6 @@ public class CombinedDomainXYPlot extends XYPlot
             }
         }
         return result;
-    }
-
-    /**
-     * Returns the gap between subplots, measured in Java2D units.
-     *
-     * @return The gap (in Java2D units).
-     *
-     * @see #setGap(double)
-     */
-    public double getGap() {
-        return this.gap;
-    }
-
-    /**
-     * Sets the amount of space between subplots and sends a
-     * {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @param gap  the gap between subplots (in Java2D units).
-     *
-     * @see #getGap()
-     */
-    public void setGap(double gap) {
-        this.gap = gap;
-        fireChangeEvent();
     }
 
     /**
@@ -584,7 +611,7 @@ public class CombinedDomainXYPlot extends XYPlot
      * Pans all range axes by the specified percentage.
      *
      * @param panRange the distance to pan (as a percentage of the axis length).
-     * @param info the plot info
+     * @param info  the plot info ({@code null} not permitted).
      * @param source the source point where the pan action started.
      *
      * @since 1.0.15
@@ -592,17 +619,21 @@ public class CombinedDomainXYPlot extends XYPlot
     @Override
     public void panRangeAxes(double panRange, PlotRenderingInfo info,
             Point2D source) {
-
         XYPlot subplot = findSubplot(info, source);
-        if (subplot != null) {
-            PlotRenderingInfo subplotInfo = info.getSubplotInfo(
-                    info.getSubplotIndex(source));
-            if (subplotInfo == null) {
-                return;
-            }
-
-            for (int i = 0; i < subplot.getRangeAxisCount(); i++) {
-                ValueAxis rangeAxis = subplot.getRangeAxis(i);
+        if (subplot == null) {
+            return;
+        }
+        if (!subplot.isRangePannable()) {
+            return;
+        }
+        PlotRenderingInfo subplotInfo = info.getSubplotInfo(
+                info.getSubplotIndex(source));
+        if (subplotInfo == null) {
+            return;
+        }
+        for (int i = 0; i < subplot.getRangeAxisCount(); i++) {
+            ValueAxis rangeAxis = subplot.getRangeAxis(i);
+            if (rangeAxis != null) {
                 rangeAxis.pan(panRange);
             }
         }
