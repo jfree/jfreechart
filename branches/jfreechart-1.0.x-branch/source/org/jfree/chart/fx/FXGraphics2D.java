@@ -663,6 +663,20 @@ public class FXGraphics2D extends Graphics2D {
                     rr.getHeight(), rr.getArcWidth(), rr.getArcHeight());
         } else if (s instanceof Rectangle2D) {
             Rectangle2D r = (Rectangle2D) s;
+            if (s instanceof Rectangle) {
+                // special case - if the underlying rectangle uses ints we
+                // need to create one that uses doubles
+                r = new Rectangle2D.Double(r.getX(), r.getY(), r.getWidth(), 
+                        r.getHeight());
+            }
+            Object hint = getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
+            if (hint != RenderingHints.VALUE_STROKE_PURE) {
+                double x = Math.rint(r.getX()) - 0.5;
+                double y = Math.rint(r.getY()) - 0.5;
+                double w = Math.floor(r.getWidth());
+                double h = Math.floor(r.getHeight());
+                r.setRect(x, y, w, h);
+            }
             this.gc.strokeRect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
         } else if (s instanceof Ellipse2D) {
             Ellipse2D e = (Ellipse2D) s;
