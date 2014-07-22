@@ -1,5 +1,16 @@
 2014-07-21  David Gilbert  <david.gilbert@object-refinery.com>
 
+    * org/jfree/chart/fx/FXGraphics2D.java
+    (draw): Check KEY_STROKE_CONTROL hint for line and rectangle drawing.
+
+2014-07-21  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch #307 by Ulrich Voigt:
+    * org/jfree/chart/plot/FastScatterPlot.java
+    (panDomainAxes): correct the direction of panning.
+
+2014-07-21  David Gilbert  <david.gilbert@object-refinery.com>
+
     * org/jfree/chart/plot/CombinedDomainXYPlot.java
     (isRangePannable): New method override,
     (setRangePannable): Likewise,
