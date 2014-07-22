@@ -900,8 +900,7 @@ public abstract class ChartFactory {
             ItemLabelPosition position2 = new ItemLabelPosition(
                     ItemLabelAnchor.OUTSIDE9, TextAnchor.CENTER_RIGHT);
             renderer.setBaseNegativeItemLabelPosition(position2);
-         }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             ItemLabelPosition position1 = new ItemLabelPosition(
                     ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER);
             renderer.setBasePositiveItemLabelPosition(position1);
