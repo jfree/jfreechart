@@ -460,11 +460,10 @@ public class JFreeChart implements Drawable, TitleChangeListener,
 
     /**
      * Sets the rendering hints for the chart.  These will be added (using the
-     * Graphics2D.addRenderingHints() method) near the start of the
-     * JFreeChart.draw() method.
+     * {@code Graphics2D.addRenderingHints()} method) near the start of the
+     * {@code JFreeChart.draw()} method.
      *
-     * @param renderingHints  the rendering hints (<code>null</code> not
-     *                        permitted).
+     * @param renderingHints  the rendering hints ({@code null} not permitted).
      *
      * @see #getRenderingHints()
      */
