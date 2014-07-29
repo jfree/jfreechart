@@ -129,6 +129,7 @@
  *               PK) (DG);
  * 13-Jul-2009 : Plot background image should be clipped if necessary (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 29-Jul-2014 : Add hint to normalise stroke for plot border (DG);
  * 
  */
 
@@ -143,6 +144,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Paint;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
@@ -1122,7 +1124,10 @@ public abstract class Plot implements AxisChangeListener,
         if ((this.outlineStroke != null) && (this.outlinePaint != null)) {
             g2.setStroke(this.outlineStroke);
             g2.setPaint(this.outlinePaint);
+            Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
+            g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
             g2.draw(area);
+            g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, saved);
         }
     }
 

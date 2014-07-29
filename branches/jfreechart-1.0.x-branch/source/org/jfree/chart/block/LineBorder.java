@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * LineBorder.java
  * ---------------
- * (C) Copyright 2007-2013, by Christo Zietsman and Contributors.
+ * (C) Copyright 2007-2014, by Christo Zietsman and Contributors.
  *
  * Original Author:  Christo Zietsman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -38,6 +38,7 @@
  *               modifications by DG (DG);
  * 13-Jun-2007 : Don't draw if area doesn't have positive dimensions (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 29-Jul-2014 : Add rendering hint to normalise stroke for border (DG);
  *
  */
 
@@ -47,6 +48,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -91,9 +93,9 @@ public class LineBorder implements BlockFrame, Serializable {
     /**
      * Creates a new border with the specified color.
      *
-     * @param paint  the color (<code>null</code> not permitted).
-     * @param stroke  the border stroke (<code>null</code> not permitted).
-     * @param insets  the insets (<code>null</code> not permitted).
+     * @param paint  the color ({@code null} not permitted).
+     * @param stroke  the border stroke ({@code null} not permitted).
+     * @param insets  the insets ({@code null} not permitted).
      */
     public LineBorder(Paint paint, Stroke stroke, RectangleInsets insets) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -107,7 +109,7 @@ public class LineBorder implements BlockFrame, Serializable {
     /**
      * Returns the paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getPaint() {
         return this.paint;
@@ -116,7 +118,7 @@ public class LineBorder implements BlockFrame, Serializable {
     /**
      * Returns the insets.
      *
-     * @return The insets (never <code>null</code>).
+     * @return The insets (never {@code null}).
      */
     @Override
     public RectangleInsets getInsets() {
@@ -126,7 +128,7 @@ public class LineBorder implements BlockFrame, Serializable {
     /**
      * Returns the stroke.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      */
     public Stroke getStroke() {
         return this.stroke;
@@ -158,6 +160,9 @@ public class LineBorder implements BlockFrame, Serializable {
         double y1 = y + t / 2.0;
         g2.setPaint(getPaint());
         g2.setStroke(getStroke());
+        Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
+                RenderingHints.VALUE_STROKE_NORMALIZE);
         Line2D line = new Line2D.Double();
         if (t > 0.0) {
             line.setLine(x0, y1, x1, y1);
@@ -175,12 +180,13 @@ public class LineBorder implements BlockFrame, Serializable {
             line.setLine(x1, y0, x1, y1);
             g2.draw(line);
         }
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, saved);
     }
 
     /**
      * Tests this border for equality with an arbitrary instance.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

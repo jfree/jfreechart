@@ -97,6 +97,8 @@
  * 25-Jul-2013 : Added support for URLs on category labels (DG);
  * 01-Aug-2013 : Added attributedLabel override to support superscripts,
  *               subscripts and more (DG);
+ * 29-Jul-2014 : Add hint to normalise stroke for tick marks (DG);
+ *
  */
 
 package org.jfree.chart.axis;
@@ -104,6 +106,7 @@ package org.jfree.chart.axis;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
@@ -1187,7 +1190,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Draws the tick marks.
      * 
      * @param g2  the graphics target.
-     * @param cursor  the    cursor position (an offset when drawing multiple axes)
+     * @param cursor  the cursor position (an offset when drawing multiple axes)
      * @param dataArea  the area for plotting the data.
      * @param edge  the location of the axis.
      * @param state  the axis state.
@@ -1208,6 +1211,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         List categories = plot.getCategoriesForAxis(this);
         g2.setPaint(getTickMarkPaint());
         g2.setStroke(getTickMarkStroke());
+        Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
+                RenderingHints.VALUE_STROKE_NORMALIZE);
         if (edge.equals(RectangleEdge.TOP)) {
             Iterator iterator = categories.iterator();
             while (iterator.hasNext()) {
@@ -1219,8 +1225,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 g2.draw(line);
             }
             state.cursorUp(ol);
-        }
-        else if (edge.equals(RectangleEdge.BOTTOM)) {
+        } else if (edge.equals(RectangleEdge.BOTTOM)) {
             Iterator iterator = categories.iterator();
             while (iterator.hasNext()) {
                 Comparable key = (Comparable) iterator.next();
@@ -1231,8 +1236,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 g2.draw(line);
             }
             state.cursorDown(ol);
-        }
-        else if (edge.equals(RectangleEdge.LEFT)) {
+        } else if (edge.equals(RectangleEdge.LEFT)) {
             Iterator iterator = categories.iterator();
             while (iterator.hasNext()) {
                 Comparable key = (Comparable) iterator.next();
@@ -1243,8 +1247,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 g2.draw(line);
             }
             state.cursorLeft(ol);
-        }
-        else if (edge.equals(RectangleEdge.RIGHT)) {
+        } else if (edge.equals(RectangleEdge.RIGHT)) {
             Iterator iterator = categories.iterator();
             while (iterator.hasNext()) {
                 Comparable key = (Comparable) iterator.next();
@@ -1256,6 +1259,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             }
             state.cursorRight(ol);
         }
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, saved);
     }
 
     /**

@@ -62,6 +62,7 @@
  * 26-Mar-2009 : Implemented Pannable, and fixed bug in zooming (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
  * 21-Jul-2014 : Fix panning (patch #307 by Ulrich Voigt) (DG);
+ * 29-Jul-2014 : Add rendering hint to normalise stroke for gridlines (DG);
  *
  */
 
@@ -73,6 +74,7 @@ import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
@@ -580,10 +582,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     public void render(Graphics2D g2, Rectangle2D dataArea,
                        PlotRenderingInfo info, CrosshairState crosshairState) {
-
-
-        //long start = System.currentTimeMillis();
-        //System.out.println("Start: " + start);
         g2.setPaint(this.paint);
 
         // if the axes use a linear scale, you can uncomment the code below and
@@ -613,10 +611,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
                 g2.fillRect(transX, transY, 1, 1);
             }
         }
-        //long finish = System.currentTimeMillis();
-        //System.out.println("Finish: " + finish);
-        //System.out.println("Time: " + (finish - start));
-
     }
 
     /**
@@ -627,22 +621,25 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param ticks  the ticks.
      */
     protected void drawDomainGridlines(Graphics2D g2, Rectangle2D dataArea,
-                                       List ticks) {
-
-        // draw the domain grid lines, if the flag says they're visible...
-        if (isDomainGridlinesVisible()) {
-            Iterator iterator = ticks.iterator();
-            while (iterator.hasNext()) {
-                ValueTick tick = (ValueTick) iterator.next();
-                double v = this.domainAxis.valueToJava2D(tick.getValue(),
-                        dataArea, RectangleEdge.BOTTOM);
-                Line2D line = new Line2D.Double(v, dataArea.getMinY(), v,
-                        dataArea.getMaxY());
-                g2.setPaint(getDomainGridlinePaint());
-                g2.setStroke(getDomainGridlineStroke());
-                g2.draw(line);
-            }
+            List ticks) {
+        if (!isDomainGridlinesVisible()) {
+            return;
         }
+        Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
+                RenderingHints.VALUE_STROKE_NORMALIZE);
+        Iterator iterator = ticks.iterator();
+        while (iterator.hasNext()) {
+            ValueTick tick = (ValueTick) iterator.next();
+            double v = this.domainAxis.valueToJava2D(tick.getValue(),
+                    dataArea, RectangleEdge.BOTTOM);
+            Line2D line = new Line2D.Double(v, dataArea.getMinY(), v,
+                    dataArea.getMaxY());
+            g2.setPaint(getDomainGridlinePaint());
+            g2.setStroke(getDomainGridlineStroke());
+            g2.draw(line);
+        }
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, saved);
     }
 
     /**
@@ -653,23 +650,27 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param ticks  the ticks.
      */
     protected void drawRangeGridlines(Graphics2D g2, Rectangle2D dataArea,
-                                      List ticks) {
+            List ticks) {
 
-        // draw the range grid lines, if the flag says they're visible...
-        if (isRangeGridlinesVisible()) {
-            Iterator iterator = ticks.iterator();
-            while (iterator.hasNext()) {
-                ValueTick tick = (ValueTick) iterator.next();
-                double v = this.rangeAxis.valueToJava2D(tick.getValue(),
-                        dataArea, RectangleEdge.LEFT);
-                Line2D line = new Line2D.Double(dataArea.getMinX(), v,
-                        dataArea.getMaxX(), v);
-                g2.setPaint(getRangeGridlinePaint());
-                g2.setStroke(getRangeGridlineStroke());
-                g2.draw(line);
-            }
+        if (!isRangeGridlinesVisible()) {
+            return;
         }
+        Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
+                RenderingHints.VALUE_STROKE_NORMALIZE);
 
+        Iterator iterator = ticks.iterator();
+        while (iterator.hasNext()) {
+            ValueTick tick = (ValueTick) iterator.next();
+            double v = this.rangeAxis.valueToJava2D(tick.getValue(),
+                    dataArea, RectangleEdge.LEFT);
+            Line2D line = new Line2D.Double(dataArea.getMinX(), v,
+                    dataArea.getMaxX(), v);
+            g2.setPaint(getRangeGridlinePaint());
+            g2.setStroke(getRangeGridlineStroke());
+            g2.draw(line);
+        }
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, saved);
     }
 
     /**
