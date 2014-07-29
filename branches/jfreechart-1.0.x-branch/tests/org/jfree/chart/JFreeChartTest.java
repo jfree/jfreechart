@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * JFreeChartTest.java
  * -------------------
- * (C) Copyright 2002-2013, by Object Refinery Limited.
+ * (C) Copyright 2002-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@
  *               null titles cannot be created (DG);
  * 24-Nov-2005 : Removed OldLegend (DG);
  * 16-May-2007 : Added some new tests (DG);
+ * 29-Jul-2014 : Added testBug942() (DG);
  *
  */
 
@@ -467,6 +468,13 @@ public class JFreeChartTest implements ChartChangeListener {
         t.setFont(new Font("Dialog", Font.BOLD, 9));
         assertNull(this.lastChartChangeEvent);
         this.lastChartChangeEvent = null;
+    }
+
+    @Test
+    public void testBug942() throws Exception {
+        final String title = "Pie Chart Demo 1\n\n\ntestnew line";
+        assertEquals(title, ChartFactory.createPieChart(title, 
+                new DefaultPieDataset()).getTitle().getText());
     }
 
     /** The last ChartChangeEvent received. */
