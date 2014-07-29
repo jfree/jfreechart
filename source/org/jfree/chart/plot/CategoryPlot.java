@@ -3957,8 +3957,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Draws the range gridlines for the plot, if they are visible.
      *
-     * @param g2  the graphics device.
-     * @param dataArea  the area inside the axes.
+     * @param g2  the graphics device ({@code null} not permitted).
+     * @param dataArea  the area inside the axes ({@code null} not permitted).
      * @param ticks  the ticks.
      *
      * @see #drawDomainGridlines(Graphics2D, Rectangle2D)
