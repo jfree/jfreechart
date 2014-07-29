@@ -76,9 +76,26 @@
 
     </target>
 
+    <!-- Generate the JFreeChart SWT source code jar -->
+    <target name="source-jar-swt" depends="initialise"
+            description="Package the JFreeChart SWT source code in a jar">
+        <!-- create a temp build directory -->
+        <mkdir dir="${basedir}/source-jar-swt"/>
+        <!-- copy source code -->
+        <copy todir="${basedir}/source-jar-swt/">
+            <fileset dir="${basedir}/swt"/>
+        </copy>
+        <!-- make the jar -->
+        <jar jarfile="${basedir}/lib/${jfreechart.name}-${jfreechart.version}-swt-src.jar"
+             basedir="${basedir}/source-jar-swt">
+        </jar>
+        <!-- delete the temp directory -->
+        <delete dir="${basedir}/source-jar-swt"/>
+    </target>
+
     <!-- ALL -->
     <target name="all"
-            depends="compile-swtgraphics,compile-swt"
+            depends="compile-swtgraphics,compile-swt,source-jar-swt"
             description="Compiles and package in jar files all the SWT related code in JFreeChart.">
 
     </target>
