@@ -43,11 +43,11 @@ package org.jfree.chart;
 import java.util.Map;
 
 /**
- * Special rendering hints that can be used internally by JFreeChart to provide
- * links between rendered items and the chart elements that they represent.
- * Most <code>Graphics2D</code> implementations will ignore these hints but
- * some, for example JFreeSVG's SVGGraphics2D class, will use the hints to
- * drive the output content.
+ * Special rendering hints that can be used internally by JFreeChart or by
+ * specialised implementations of the {@code Graphics2D} API.  For example,
+ * JFreeSVG's {@code SVGGraphics2D} class, will use the 
+ * {@code KEY_BEGIN_ELEMENT} and {@code KEY_END_ELEMENT} hints to drive the 
+ * output content.
  * 
  * @since 1.0.18
  */
