@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -556,7 +556,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     private List overlays;
-
+    
     /**
      * Constructs a panel that displays the specified chart.
      *
@@ -1541,7 +1541,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             return;
         }
         Graphics2D g2 = (Graphics2D) g.create();
-
+        
         // first determine the size of the chart rendering area...
         Dimension size = getSize();
         Insets insets = getInsets();
@@ -1624,8 +1624,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     this.chart.draw(bufferG2, chartArea, this.anchor,
                             this.info);
                     bufferG2.setTransform(saved);
-                }
-                else {
+                } else {
                     this.chart.draw(bufferG2, bufferArea, this.anchor,
                             this.info);
                 }
@@ -1635,11 +1634,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             // zap the buffer onto the panel...
             g2.drawImage(this.chartBuffer, insets.left, insets.top, this);
 
-        }
-
-        // or redrawing the chart every time...
-        else {
-
+        } else { // redrawing the chart every time...
             AffineTransform saved = g2.getTransform();
             g2.translate(insets.left, insets.top);
             if (scale) {
@@ -1668,7 +1663,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.anchor = null;
         this.verticalTraceLine = null;
         this.horizontalTraceLine = null;
-
     }
 
     /**
