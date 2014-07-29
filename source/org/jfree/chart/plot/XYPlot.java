@@ -229,7 +229,8 @@
  * 18-Oct-2011 : Fix tooltip offset with shadow renderer (DG);
  * 12-Sep-2013 : Check for KEY_SUPPRESS_SHADOW_GENERATION rendering hint (DG);
  * 10-Mar-2014 : Updated Javadocs for issue #1123 (DG);
- * 
+ * 29-Jul-2014 : Add hints to normalise stroke for crosshairs (DG);
+ *
  */
 
 package org.jfree.chart.plot;
@@ -241,6 +242,7 @@ import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
@@ -4164,25 +4166,28 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             PlotOrientation orientation, double value, ValueAxis axis,
             Stroke stroke, Paint paint) {
 
-        if (axis.getRange().contains(value)) {
-            Line2D line;
-            if (orientation == PlotOrientation.VERTICAL) {
-                double xx = axis.valueToJava2D(value, dataArea,
-                        RectangleEdge.BOTTOM);
-                line = new Line2D.Double(xx, dataArea.getMinY(), xx,
-                        dataArea.getMaxY());
-            }
-            else {
-                double yy = axis.valueToJava2D(value, dataArea,
-                        RectangleEdge.LEFT);
-                line = new Line2D.Double(dataArea.getMinX(), yy,
-                        dataArea.getMaxX(), yy);
-            }
-            g2.setStroke(stroke);
-            g2.setPaint(paint);
-            g2.draw(line);
+        if (!axis.getRange().contains(value)) {
+            return;
         }
-
+        Line2D line;
+        if (orientation == PlotOrientation.VERTICAL) {
+            double xx = axis.valueToJava2D(value, dataArea,
+                    RectangleEdge.BOTTOM);
+            line = new Line2D.Double(xx, dataArea.getMinY(), xx,
+                    dataArea.getMaxY());
+        } else {
+            double yy = axis.valueToJava2D(value, dataArea,
+                    RectangleEdge.LEFT);
+            line = new Line2D.Double(dataArea.getMinX(), yy,
+                    dataArea.getMaxX(), yy);
+        }
+        Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
+                RenderingHints.VALUE_STROKE_NORMALIZE);
+        g2.setStroke(stroke);
+        g2.setPaint(paint);
+        g2.draw(line);
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, saved);
     }
 
     /**
@@ -4230,25 +4235,27 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             PlotOrientation orientation, double value, ValueAxis axis,
             Stroke stroke, Paint paint) {
 
-        if (axis.getRange().contains(value)) {
-            Line2D line;
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                double xx = axis.valueToJava2D(value, dataArea,
-                        RectangleEdge.BOTTOM);
-                line = new Line2D.Double(xx, dataArea.getMinY(), xx,
-                        dataArea.getMaxY());
-            }
-            else {
-                double yy = axis.valueToJava2D(value, dataArea,
-                        RectangleEdge.LEFT);
-                line = new Line2D.Double(dataArea.getMinX(), yy,
-                        dataArea.getMaxX(), yy);
-            }
-            g2.setStroke(stroke);
-            g2.setPaint(paint);
-            g2.draw(line);
+        if (!axis.getRange().contains(value)) {
+            return;
         }
-
+        Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
+                RenderingHints.VALUE_STROKE_NORMALIZE);
+        Line2D line;
+        if (orientation == PlotOrientation.HORIZONTAL) {
+            double xx = axis.valueToJava2D(value, dataArea, 
+                    RectangleEdge.BOTTOM);
+            line = new Line2D.Double(xx, dataArea.getMinY(), xx,
+                    dataArea.getMaxY());
+        } else {
+            double yy = axis.valueToJava2D(value, dataArea, RectangleEdge.LEFT);
+            line = new Line2D.Double(dataArea.getMinX(), yy,
+                    dataArea.getMaxX(), yy);
+        }
+        g2.setStroke(stroke);
+        g2.setPaint(paint);
+        g2.draw(line);
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, saved);
     }
 
     /**
