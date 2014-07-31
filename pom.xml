@@ -126,6 +126,7 @@
                     <target>${project.target.level}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <excludes>
+                      <exclude>org/jfree/chart/demo/**</exclude>
                       <exclude>org/jfree/chart/fx/**</exclude>
                     </excludes>                
                 </configuration>
