@@ -179,9 +179,9 @@ the future:
 If there are other items that you think should be listed here,
 please post a bug report.
 
---------------
+---------------
 10.  WHAT's NEW
---------------
+---------------
 A list of changes in recent versions:
 
 1.0.19 : (31-Jul-2014)
@@ -192,7 +192,10 @@ A list of changes in recent versions:
         - FastScatterPlot panning direction is corrected;
         - added rendering hints to sharpen gridlines and borders in most output 
           formats;        
-        - JFreeSVG updated to version 2.0.
+        - JFreeSVG updated to version 2.0;
+        - included a preview of JSFreeChart, a 2D chart library written in
+          JavaScript that is conceptually similar to JFreeChart but runs 
+          directly in a web browser.
 
 1.0.18 : (3-Jul-2014)
         - added JavaFX support via FXGraphics2D;
