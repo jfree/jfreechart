@@ -10,7 +10,7 @@
 
     <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
-    <version>1.0.19-SNAPSHOT</version>
+    <version>1.0.19</version>
     <packaging>jar</packaging>
 
     <!-- this is required to host it on Sonatype's OSSRH -->
