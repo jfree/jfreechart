@@ -15,6 +15,10 @@ Bug Fixes:
 - added rendering hints to sharpen gridlines and borders in most output formats;
 - JFreeSVG updated to version 2.0.
 
+In this release, we have also provided a preview of JSFreeChart, a free 2D
+chart library written in JavaScript that is conceptually similar to JFreeChart
+but runs directly in browsers.
+
 
 JFreeChart 1.0.18
 -----------------
