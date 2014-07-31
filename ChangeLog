@@ -1,3 +1,28 @@
+2014-07-29  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/axis/Axis.java
+    (drawAxisLine): Add rendering hint,
+    * org/jfree/chart/axis/CategoryAxis.java
+    (drawTickMarks): Add rendering hint,
+    * org/jfree/chart/axis/ValueAxis.java
+    (drawAxisLine): Add rendering hint,
+    (drawTickMarksAndLabels): Likewise,
+    * org/jfree/chart/block/LineBorder.java
+    (draw): Add rendering hint,
+    * org/jfree/chart/plot/FastScatterPlot.java
+    (drawDomainGridlines): Add rendering hint,
+    (drawRangeGridlines): Likewise,
+    * org/jfree/chart/plot/Plot.java
+    (drawOutline): Add rendering hint,
+    * org/jfree/chart/plot/XYPlot.java
+    (drawDomainCrosshair): Add rendering hint,
+    (drawRangeCrosshair): Likewise,
+    * org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+    (drawRangeLine): Add rendering hint,
+    * org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
+    (drawDomainLine): Add rendering hint,
+    (drawRangeLine): Likewise.
+
 2014-07-21  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/fx/FXGraphics2D.java

@@ -1,8 +1,8 @@
 ********************************
-*  JFREECHART: Version 1.0.18  *
+*  JFREECHART: Version 1.0.19  *
 ********************************
 
-3 July 2014
+31 July 2014
 
 (C)opyright 2000-2014, by Object Refinery Limited and Contributors.
 
@@ -11,7 +11,8 @@
 -----------------
 JFreeChart is a free chart library for the Java(tm) platform.  It runs
 on the Java 2 Platform (JRE 1.6.0 or later) and uses the Java 2D API for
-drawing.
+drawing.  There is also JavaFX support available, but requiring JDK 1.8.0 or 
+later.
 
 JFreeChart is licensed under the terms of the GNU Lesser General
 Public Licence (LGPL).  A copy of the licence is included in the
@@ -38,8 +39,8 @@ message in the JFreeChart forum.
 3.  DOCUMENTATION
 -----------------
 You can download installation instructions
-(jfreechart-1.0.18-install.pdf) from the JFreeChart home
-page or the project page on SourceForge.
+(jfreechart-1.0.19-install.pdf) from the JFreeChart home page or the project 
+page on SourceForge.
 
 Further documentation for JFreeChart (the JFreeChart Developer Guide) is
 available to purchase from by Object Refinery Limited, a company owned and
@@ -65,9 +66,9 @@ JFreeChart has the following dependencies:
 JavaFX support (and you will need to rebuild the library using the 
 ant/build-fx.xml script).
 
-(b)  JCommon - version 1.0.0 or later.  The runtime jar file (version 1.0.22)
-is included in the JFreeChart distribution.  You can obtain the complete
-source code for JCommon from:
+(b)  JCommon - the runtime jar file (version 1.0.23) is included in the 
+JFreeChart distribution.  You can obtain the complete source code for JCommon 
+from:
 
     http://www.jfree.org/jcommon/
 
@@ -115,30 +116,53 @@ If you want to rebuild the JFreeChart jar file, we highly recommend that you
 use this script as it includes certain files (for example, .properties files)
 that you MUST have in the jar file for JFreeChart to function correctly.
 
+-----------------
+7.  MAVEN POM.XML
+-----------------
+A Maven pom.xml is included in the distribution, and you can use this to
+build JFreeChart *without* JavaFX support.  If you want to include the JavaFX
+support classes, you'll need to modify the pom.xml file accordingly.
+
+Both JFreeChart and JCommon are available on the Central Repository:
+
+<dependency>
+    <groupId>org.jfree</groupId>
+    <artifactId>jfreechart</artifactId>
+    <version>1.0.19</version>
+</dependency>
+
+<dependency>
+    <groupId>org.jfree</groupId>
+    <artifactId>jcommon</artifactId>
+    <version>1.0.23</version>
+</dependency>
+ 
 ------------------------
-7.  THE DEMO APPLICATION
+8.  THE DEMO APPLICATION
 ------------------------
 A demo application that shows a selection of the charts that can be
 generated is included in the JFreeChart distribution.   To run the
 demo (using JDK 1.6.0 or later), use the following command:
 
-    java -jar jfreechart-1.0.18-demo.jar
+    java -jar jfreechart-1.0.19-demo.jar
 
 The complete source code for the demo application is available for
 download when you purchase the JFreeChart Developer Guide.
 
 The demo application also links to the JFreeSVG and OrsonPDF libraries, to 
 provide export facilities to the SVG and PDF formats.  These fast, lightweight 
-libraries are not free, licenses can be purchased from Object Refinery Limited. 
+libraries are independent from JFreeChart.  JFreeSVG is dual licensed under
+the GNU GPLv3 and a commercial license, while OrsonPDF is commercially licensed.
+Licenses can be purchased from Object Refinery Limited. 
 
-An additional tab added to the demo application in version 1.0.18 showcases
-Orson Charts, a new 3D chart library by Object Refinery Limited.  You can find 
-out more about Orson Charts at:
+An additional tab added to the demo application showcases Orson Charts, a 
+3D chart library by Object Refinery Limited.  You can find out more about 
+Orson Charts at:
 
     http://www.object-refinery.com/orsoncharts/
 
 ---------------
-8.  LIMITATIONS
+9.  LIMITATIONS
 ---------------
 JFreeChart has some known limitations that will hopefully be addressed in
 the future:
@@ -156,9 +180,19 @@ If there are other items that you think should be listed here,
 please post a bug report.
 
 --------------
-9.  WHAT's NEW
+10.  WHAT's NEW
 --------------
 A list of changes in recent versions:
+
+1.0.19 : (31-Jul-2014)
+        - fixed clipping issues for combined plots in JavaFX;
+        - fix a memory leak in the new JavaFX ChartCanvas class;
+        - CombinedDomainXYPlot and CombinedRangeXYPlot now take into account the
+          pannable flags in the subplots;
+        - FastScatterPlot panning direction is corrected;
+        - added rendering hints to sharpen gridlines and borders in most output 
+          formats;        
+        - JFreeSVG updated to version 2.0.
 
 1.0.18 : (3-Jul-2014)
         - added JavaFX support via FXGraphics2D;
