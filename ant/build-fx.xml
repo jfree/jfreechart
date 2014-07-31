@@ -23,10 +23,10 @@
         <property name="jfreechart.version" value="1.0.19-fx" />
         <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
-        <property name="jcommon.version" value="1.0.22" />
+        <property name="jcommon.version" value="1.0.23" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="jfreesvg.name" value="jfreesvg" />
-        <property name="jfreesvg.version" value="1.9" />
+        <property name="jfreesvg.version" value="2.0" />
         <property name="orsonpdf.name" value="orsonpdf" />
         <property name="orsonpdf.version" value="1.6-eval" />
         <property name="orsoncharts.version" value="1.4-eval" />
@@ -58,7 +58,8 @@
                debug="on"
                deprecation="false"
                source="${src.version}"
-               target="${target.version}">
+               target="${target.version}"
+               includeantruntime="false">
             <classpath refid="build.classpath" />
             <include name="org/jfree/**"/>
         </javac>
@@ -128,7 +129,8 @@
                debug="on"
                deprecation="false"
                source="${src.version}"
-               target="${target.version}">
+               target="${target.version}"
+               includeantruntime="false">
                <classpath refid="build.experimental.classpath" />
             <include name="org/jfree/experimental/**"/>
             <exclude name="org/jfree/experimental/**/junit/*"/>
@@ -339,7 +341,8 @@
                target="1.6"
                debug="true"
                deprecation="false"
-               optimize="false">
+               optimize="false"
+               includeantruntime="false">
             <classpath>
                 <path refid="build.classpath"/>
                 <pathelement location="${junit.jar}"/>

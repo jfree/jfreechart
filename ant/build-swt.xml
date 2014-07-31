@@ -6,7 +6,7 @@
         <property name="jfreechart.name" value="jfreechart" />
         <property name="jfreechart.version" value="1.0.19" />
         <property name="jcommon.name" value="jcommon" />
-        <property name="jcommon.version" value="1.0.22" />
+        <property name="jcommon.version" value="1.0.23" />
         <property name="builddir" value="${basedir}/build" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="jfreechart.jar" value="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
@@ -33,7 +33,8 @@
                debug="on"
                deprecation="on"
                source="1.6"
-               target="1.6">
+               target="1.6"
+               includeantruntime="false">
             <classpath refid="build.classpath" />
             <include name="org/jfree/experimental/swt/**/*.java"/>
         </javac>
@@ -61,7 +62,8 @@
                debug="on"
                deprecation="on"
                source="1.6"
-               target="1.6">
+               target="1.6"
+               includeantruntime="false">
             <classpath refid="build.classpath" />
             <include name="org/jfree/experimental/chart/**/*.java"/>
         </javac>
