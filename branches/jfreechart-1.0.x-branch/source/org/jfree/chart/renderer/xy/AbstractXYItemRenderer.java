@@ -988,8 +988,11 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         Stroke stroke = plot.getDomainGridlineStroke();
         g2.setPaint(paint != null ? paint : Plot.DEFAULT_OUTLINE_PAINT);
         g2.setStroke(stroke != null ? stroke : Plot.DEFAULT_OUTLINE_STROKE);
+        Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
+                RenderingHints.VALUE_STROKE_NORMALIZE);
         g2.draw(line);
-
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, saved);
     }
 
     /**
