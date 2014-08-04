@@ -1,8 +1,14 @@
 2014-08-04  David Gilbert  <david.gilbert@object-refinery.com>
 
     Patch #312 by Ulrich Voigt:
+    * org/jfree/chart/renderer/xy/XYAreaRenderer.java
+    (drawItem): Restrict entity hotspot to within the plot area,
+    * org/jfree/chart/renderer/xy/XYAreaRenderer2.java
+    (drawItem): Restrict entity hotspot to within the plot area,
+    * org/jfree/chart/renderer/xy/StackedXYAreaRenderer.java
+    (drawItem): Restrict entity hotspot to within the plot area,
     * org/jfree/chart/renderer/xy/StackedXYAreaRenderer2.java
-    (drawItem): Correct the entity hotspot.
+    (drawItem): Restrict entity hotspot to within the plot area.
 
 ----------  JFREECHART 1.0.19 RELEASED ------------------------
 
