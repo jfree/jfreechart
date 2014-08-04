@@ -177,8 +177,10 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
@@ -293,6 +295,9 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      */
     private transient RenderingHints renderingHints;
 
+    /** The chart id (optional, will be used by JFreeSVG export). */
+    private String id;
+    
     /** A flag that controls whether or not the chart border is drawn. */
     private boolean borderVisible;
 
@@ -341,6 +346,14 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      */
     private boolean notify;
 
+    /** 
+     * A flag that controls whether or not rendering hints that identify
+     * chart element should be added during rendering.  This defaults to false
+     * and it should only be enabled if the output target will use the hints.
+     * JFreeSVG is one output target that supports these hints.
+     */
+    private boolean elementHinting;
+    
     /**
      * Creates a new chart based on the supplied plot.  The chart will have
      * a legend added automatically, but no title (although you can easily add
@@ -393,7 +406,9 @@ public class JFreeChart implements Drawable, TitleChangeListener,
                       boolean createLegend) {
 
         ParamChecks.nullNotPermitted(plot, "plot");
-
+        this.id = null;
+        plot.setChart(this);
+        
         // create storage for listeners...
         this.progressListeners = new EventListenerList();
         this.changeListeners = new EventListenerList();
@@ -444,9 +459,60 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         this.backgroundImage = DEFAULT_BACKGROUND_IMAGE;
         this.backgroundImageAlignment = DEFAULT_BACKGROUND_IMAGE_ALIGNMENT;
         this.backgroundImageAlpha = DEFAULT_BACKGROUND_IMAGE_ALPHA;
-
     }
 
+    /**
+     * Returns the ID for the chart.
+     * 
+     * @return The ID for the chart (possibly {@code null}).
+     * 
+     * @since 1.0.20
+     */
+    public String getID() {
+        return this.id;
+    }
+    
+    /**
+     * Sets the ID for the chart.
+     * 
+     * @param id  the id ({@code null} permitted). 
+     * 
+     * @since 1.0.20
+     */
+    public void setID(String id) {
+        this.id = id;
+    }
+    
+    /**
+     * Returns the flag that controls whether or not rendering hints 
+     * ({@link ChartHints#KEY_BEGIN_ELEMENT} and 
+     * {@link ChartHints#KEY_END_ELEMENT}) that identify chart elements are 
+     * added during rendering.  The default value is {@link false}.
+     * 
+     * @return A boolean.
+     * 
+     * @see #setElementHinting(boolean) 
+     * @since 1.0.20
+     */
+    public boolean getElementHinting() {
+        return this.elementHinting;
+    }
+    
+    /**
+     * Sets the flag that controls whether or not rendering hints 
+     * ({@link ChartHints#KEY_BEGIN_ELEMENT} and 
+     * {@link ChartHints#KEY_END_ELEMENT}) that identify chart elements are 
+     * added during rendering.
+     * 
+     * @param hinting  the new flag value.
+     * 
+     * @see #getElementHinting() 
+     * @since 1.0.20
+     */
+    public void setElementHinting(boolean hinting) {
+        this.elementHinting = hinting;
+    }
+    
     /**
      * Returns the collection of rendering hints for the chart.
      *
@@ -1142,6 +1208,15 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         notifyListeners(new ChartProgressEvent(this, this,
                 ChartProgressEvent.DRAWING_STARTED, 0));
         
+        if (this.elementHinting) {
+            Map m = new HashMap<String, String>();
+            if (this.id != null) {
+                m.put("id", this.id);
+            }
+            m.put("ref", "JFREECHART_TOP_LEVEL");            
+            g2.setRenderingHint(ChartHints.KEY_BEGIN_ELEMENT, m);            
+        }
+        
         EntityCollection entities = null;
         // record the chart area, if info is requested...
         if (info != null) {
@@ -1227,8 +1302,10 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             plotInfo = info.getPlotInfo();
         }
         this.plot.draw(g2, plotArea, anchor, null, plotInfo);
-
         g2.setClip(savedClip);
+        if (this.elementHinting) {         
+            g2.setRenderingHint(ChartHints.KEY_END_ELEMENT, Boolean.TRUE);            
+        }
 
         notifyListeners(new ChartProgressEvent(this, this,
                 ChartProgressEvent.DRAWING_FINISHED, 100));
