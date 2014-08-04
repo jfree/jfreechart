@@ -1,3 +1,11 @@
+2014-08-04  David Gilbert  <david.gilbert@object-refinery.com>
+
+    Patch #312 by Ulrich Voigt:
+    * org/jfree/chart/renderer/xy/StackedXYAreaRenderer2.java
+    (drawItem): Correct the entity hotspot.
+
+----------  JFREECHART 1.0.19 RELEASED ------------------------
+
 2014-07-29  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/axis/Axis.java
