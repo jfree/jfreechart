@@ -34,6 +34,7 @@
  *                   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
  *                   Martin Krauskopf;
+ *                   Ulrich Voigt (patch #312);
  *
  * Changes:
  * --------
@@ -78,6 +79,7 @@
  * 17-Jun-2008 : Apply legend font and paint attributes (DG);
  * 06-Oct-2011 : Avoid GeneralPath methods requiring Java 1.5 (MK);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 04-Aug-2014 : Restrict entity hotspot to plot area (patch #312) (UV);
  *
  */
 
@@ -87,6 +89,7 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -130,7 +133,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
 
     /**
      * The shape used to represent an area in each legend item (this should
-     * never be <code>null</code>).
+     * never be {@code null}).
      */
     private transient Shape legendArea;
 
@@ -144,9 +147,9 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     /**
      * Constructs a new renderer.
      *
-     * @param labelGenerator  the tool tip generator to use.  <code>null</code>
-     *                        is none.
-     * @param urlGenerator  the URL generator (null permitted).
+     * @param labelGenerator  the tool tip generator to use ({@code null} 
+     *     permitted).
+     * @param urlGenerator  the URL generator ({@code null} permitted).
      */
     public XYAreaRenderer2(XYToolTipGenerator labelGenerator,
                            XYURLGenerator urlGenerator) {
@@ -206,7 +209,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     /**
      * Returns the shape used to represent an area in the legend.
      *
-     * @return The legend area (never <code>null</code>).
+     * @return The legend area (never {@code null}).
      *
      * @see #setLegendArea(Shape)
      */
@@ -218,7 +221,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
      * Sets the shape used as an area in each legend item and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param area  the area (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
      *
      * @see #getLegendArea()
      */
@@ -289,7 +292,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -386,19 +389,25 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
         if (state.getInfo() != null) {
             EntityCollection entities = state.getEntityCollection();
             if (entities != null) {
-                String tip = null;
-                XYToolTipGenerator generator = getToolTipGenerator(series,
-                        item);
-                if (generator != null) {
-                    tip = generator.generateToolTip(dataset, series, item);
+                // limit the entity hotspot area to the data area
+                Area dataAreaHotspot = new Area(hotspot);
+                dataAreaHotspot.intersect(new Area(dataArea));
+                if (!dataAreaHotspot.isEmpty()) {
+                    String tip = null;
+                    XYToolTipGenerator generator = getToolTipGenerator(series,
+                         item);
+                    if (generator != null) {
+                        tip = generator.generateToolTip(dataset, series, item);
+                    }
+                    String url = null;
+                    if (getURLGenerator() != null) {
+                        url = getURLGenerator().generateURL(dataset, series, 
+                                item);
+                    }
+                    XYItemEntity entity = new XYItemEntity(dataAreaHotspot, 
+                            dataset, series, item, tip, url);
+                    entities.add(entity);
                 }
-                String url = null;
-                if (getURLGenerator() != null) {
-                    url = getURLGenerator().generateURL(dataset, series, item);
-                }
-                XYItemEntity entity = new XYItemEntity(hotspot, dataset,
-                        series, item, tip, url);
-                entities.add(entity);
             }
         }
 
@@ -407,7 +416,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> not permitted).
+     * @param obj  the object ({@code null} not permitted).
      *
      * @return A boolean.
      */

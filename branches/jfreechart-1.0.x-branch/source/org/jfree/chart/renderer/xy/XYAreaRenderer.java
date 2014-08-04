@@ -34,6 +34,7 @@
  *                   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
  *                   Martin Krauskopf;
+ *                   Ulrich Voigt (patch #312);
  *
  * Changes:
  * --------
@@ -80,7 +81,7 @@
  *               the paint under the series (DG);
  * 06-Oct-2011 : Avoid GeneralPath methods requiring Java 1.5 (MK);
  * 03-Jul-2013 : Use ParamChecks (DG);
- *
+ * 04-Aug-2014 : Restrict entity hotspot to plot area (patch #312) (UV);
  */
 
 package org.jfree.chart.renderer.xy;
@@ -192,7 +193,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
     /**
      * The shape used to represent an area in each legend item (this should
-     * never be <code>null</code>).
+     * never be {@code null}).
      */
     private transient Shape legendArea;
 
@@ -230,14 +231,12 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
     /**
      * Constructs a new renderer.  To specify the type of renderer, use one of
-     * the constants: <code>SHAPES</code>, <code>LINES</code>,
-     * <code>SHAPES_AND_LINES</code>, <code>AREA</code> or
-     * <code>AREA_AND_SHAPES</code>.
+     * the constants: {@code SHAPES}, {@code LINES}, {@code SHAPES_AND_LINES}, 
+     * {@code AREA} or {@code AREA_AND_SHAPES}.
      *
      * @param type  the type of renderer.
-     * @param toolTipGenerator  the tool tip generator to use
-     *                          (<code>null</code> permitted).
-     * @param urlGenerator  the URL generator (<code>null</code> permitted).
+     * @param toolTipGenerator  the tool tip generator ({@code null} permitted).
+     * @param urlGenerator  the URL generator ({@code null} permitted).
      */
     public XYAreaRenderer(int type, XYToolTipGenerator toolTipGenerator,
                           XYURLGenerator urlGenerator) {
@@ -279,7 +278,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     /**
      * Returns true if shapes are being plotted by the renderer.
      *
-     * @return <code>true</code> if shapes are being plotted by the renderer.
+     * @return {@code true} if shapes are being plotted by the renderer.
      */
     public boolean getPlotShapes() {
         return this.plotShapes;
@@ -288,7 +287,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     /**
      * Returns true if lines are being plotted by the renderer.
      *
-     * @return <code>true</code> if lines are being plotted by the renderer.
+     * @return {@code true} if lines are being plotted by the renderer.
      */
     public boolean getPlotLines() {
         return this.plotLines;
@@ -297,7 +296,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     /**
      * Returns true if Area is being plotted by the renderer.
      *
-     * @return <code>true</code> if Area is being plotted by the renderer.
+     * @return {@code true} if Area is being plotted by the renderer.
      */
     public boolean getPlotArea() {
         return this.plotArea;
@@ -331,7 +330,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     /**
      * Returns the shape used to represent an area in the legend.
      *
-     * @return The legend area (never <code>null</code>).
+     * @return The legend area (never {@code null}).
      */
     public Shape getLegendArea() {
         return this.legendArea;
@@ -341,7 +340,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * Sets the shape used as an area in each legend item and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param area  the area (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
      */
     public void setLegendArea(Shape area) {
         ParamChecks.nullNotPermitted(area, "area");
@@ -378,7 +377,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     /**
      * Returns the gradient paint transformer.
      *
-     * @return The gradient paint transformer (never <code>null</code>).
+     * @return The gradient paint transformer (never {@code null}).
      *
      * @since 1.0.14
      */
@@ -390,7 +389,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * Sets the gradient paint transformer and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param transformer  the transformer (<code>null</code> not permitted).
+     * @param transformer  the transformer ({@code null} not permitted).
      *
      * @since 1.0.14
      */
@@ -485,7 +484,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -537,45 +536,23 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
         double transZero = rangeAxis.valueToJava2D(0.0, dataArea,
                 plot.getRangeAxisEdge());
-        GeneralPath hotspot = new GeneralPath();
-        if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
-            moveTo(hotspot, transZero, ((transX0 + transX1) / 2.0));
-            lineTo(hotspot, ((transY0 + transY1) / 2.0), 
-                            ((transX0 + transX1) / 2.0));
-            lineTo(hotspot, transY1, transX1);
-            lineTo(hotspot, ((transY1 + transY2) / 2.0), 
-                            ((transX1 + transX2) / 2.0));
-            lineTo(hotspot, transZero, ((transX1 + transX2) / 2.0));
-        }
-        else {  // vertical orientation
-            moveTo(hotspot, ((transX0 + transX1) / 2.0), transZero);
-            lineTo(hotspot, ((transX0 + transX1) / 2.0),
-                            ((transY0 + transY1) / 2.0));
-            lineTo(hotspot, transX1, transY1);
-            lineTo(hotspot, ((transX1 + transX2) / 2.0),
-                            ((transY1 + transY2) / 2.0));
-            lineTo(hotspot, ((transX1 + transX2) / 2.0), transZero);
-        }
-        hotspot.closePath();
 
         if (item == 0) {  // create a new area polygon for the series
             areaState.area = new GeneralPath();
             // the first point is (x, 0)
             double zero = rangeAxis.valueToJava2D(0.0, dataArea,
                     plot.getRangeAxisEdge());
-            if (plot.getOrientation() == PlotOrientation.VERTICAL) {
+            if (plot.getOrientation().isVertical()) {
                 moveTo(areaState.area, transX1, zero);
-            }
-            else if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
+            } else if (plot.getOrientation().isHorizontal()) {
                 moveTo(areaState.area, zero, transX1);
             }
         }
 
         // Add each point to Area (x, y)
-        if (plot.getOrientation() == PlotOrientation.VERTICAL) {
+        if (plot.getOrientation().isVertical()) {
             lineTo(areaState.area, transX1, transY1);
-        }
-        else if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
+        } else if (plot.getOrientation().isHorizontal()) {
             lineTo(areaState.area, transY1, transX1);
         }
 
@@ -591,8 +568,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
             if (orientation == PlotOrientation.VERTICAL) {
                 shape = ShapeUtilities.createTranslatedShape(shape, transX1,
                         transY1);
-            }
-            else if (orientation == PlotOrientation.HORIZONTAL) {
+            } else if (orientation == PlotOrientation.HORIZONTAL) {
                 shape = ShapeUtilities.createTranslatedShape(shape, transY1,
                         transX1);
             }
@@ -603,8 +579,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
             if (item > 0) {
                 if (plot.getOrientation() == PlotOrientation.VERTICAL) {
                     areaState.line.setLine(transX0, transY0, transX1, transY1);
-                }
-                else if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
+                } else if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
                     areaState.line.setLine(transY0, transX0, transY1, transX1);
                 }
                 g2.draw(areaState.line);
@@ -619,8 +594,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
                 // Add the last point (x,0)
                 lineTo(areaState.area, transX1, transZero);
                 areaState.area.closePath();
-            }
-            else if (orientation == PlotOrientation.HORIZONTAL) {
+            } else if (orientation == PlotOrientation.HORIZONTAL) {
                 // Add the last point (x,0)
                 lineTo(areaState.area, transZero, transX1);
                 areaState.area.closePath();
@@ -677,7 +651,29 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
         // collect entity and tool tip information...
         EntityCollection entities = state.getEntityCollection();
         if (entities != null) {
-            addEntity(entities, hotspot, dataset, series, item, 0.0, 0.0);
+            GeneralPath hotspot = new GeneralPath();
+            if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
+                moveTo(hotspot, transZero, ((transX0 + transX1) / 2.0));
+                lineTo(hotspot, ((transY0 + transY1) / 2.0), ((transX0 + transX1) / 2.0));
+                lineTo(hotspot, transY1, transX1);
+                lineTo(hotspot, ((transY1 + transY2) / 2.0), ((transX1 + transX2) / 2.0));
+                lineTo(hotspot, transZero, ((transX1 + transX2) / 2.0));
+            } else { // vertical orientation
+                moveTo(hotspot, ((transX0 + transX1) / 2.0), transZero);
+                lineTo(hotspot, ((transX0 + transX1) / 2.0), ((transY0 + transY1) / 2.0));
+                lineTo(hotspot, transX1, transY1);
+                lineTo(hotspot, ((transX1 + transX2) / 2.0), ((transY1 + transY2) / 2.0));
+                lineTo(hotspot, ((transX1 + transX2) / 2.0), transZero);
+            }
+            hotspot.closePath();
+
+            // limit the entity hotspot area to the data area
+            Area dataAreaHotspot = new Area(hotspot);
+            dataAreaHotspot.intersect(new Area(dataArea));
+
+            if (dataAreaHotspot.isEmpty() == false) {
+                addEntity(entities, dataAreaHotspot, dataset, series, item, 0.0, 0.0);
+            }
         }
 
     }
