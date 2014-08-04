@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sylvain Vieujot;
@@ -238,6 +238,15 @@ public abstract class Plot implements AxisChangeListener,
     public static final Shape DEFAULT_LEGEND_ITEM_CIRCLE
             = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
 
+    /** 
+     * The chart that the plot is assigned to.  It can be {@code null} if the
+     * plot is not assigned to a chart yet, or if the plot is a subplot of a
+     * another plot.
+     * 
+     * @since 1.0.20
+     */
+    private JFreeChart chart;
+    
     /** The parent plot (<code>null</code> if this is the root plot). */
     private Plot parent;
 
@@ -306,7 +315,7 @@ public abstract class Plot implements AxisChangeListener,
      * Creates a new plot.
      */
     protected Plot() {
-
+        this.chart = null;
         this.parent = null;
         this.insets = DEFAULT_INSETS;
         this.backgroundPaint = DEFAULT_BACKGROUND_PAINT;
@@ -325,7 +334,50 @@ public abstract class Plot implements AxisChangeListener,
 
         this.notify = true;
         this.listenerList = new EventListenerList();
-
+    }
+    
+    /**
+     * Returns the chart that this plot is assigned to.  This method can
+     * return {@code null} if the plot is not yet assigned to a plot, or if the
+     * plot is a subplot of another plot.
+     * 
+     * @return The chart (possibly {@code null}).
+     * 
+     * @since 1.0.20
+     */
+    public JFreeChart getChart() {
+        return this.chart;
+    }
+    
+    /**
+     * Sets the chart that the plot is assigned to.  This method is not 
+     * intended for external use.
+     * 
+     * @param chart  the chart ({@code null} permitted).
+     * 
+     * @since 1.0.20
+     */
+    public void setChart(JFreeChart chart) {
+        this.chart = chart;
+    }
+    
+    /**
+     * Fetches the element hinting flag from the chart that this plot is 
+     * assigned to.  If the plot is not assigned (directly or indirectly) to
+     * a chart instance, this method will return {@code false}.
+     * 
+     * @return A boolean.
+     * 
+     * @since 1.0.20
+     */
+    public boolean fetchElementHintingFlag() {
+        if (this.parent != null) {
+            return this.parent.fetchElementHintingFlag();
+        }
+        if (this.chart != null) {
+            return this.chart.getElementHinting();
+        }
+        return false;
     }
 
     /**

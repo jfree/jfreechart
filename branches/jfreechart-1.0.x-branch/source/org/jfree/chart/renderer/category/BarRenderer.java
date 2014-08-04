@@ -90,6 +90,7 @@
  * 14-Jan-2009 : Added support for seriesVisible flags (PK);
  * 03-Feb-2009 : Added defaultShadowsVisible flag - see patch 2511330 (PK);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 04-Aug-2014 : Add element hinting for JFreeSVG (DG);
  *
  */
 
@@ -122,6 +123,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.data.KeyedValues2DItemKey;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.io.SerialUtilities;
@@ -1056,12 +1058,20 @@ public class BarRenderer extends AbstractCategoryItemRenderer
             bar = new Rectangle2D.Double(barW0, barL0 - barL0Adj,
                     state.getBarWidth(), barLength + barLengthAdj);
         }
+        if (state.getElementHinting()) {
+            KeyedValues2DItemKey key = new KeyedValues2DItemKey(
+                    dataset.getRowKey(row), dataset.getColumnKey(column));
+            beginElementGroup(g2, key);
+        }
         if (getShadowsVisible()) {
             this.barPainter.paintBarShadow(g2, this, row, column, bar, barBase,
                 true);
         }
         this.barPainter.paintBar(g2, this, row, column, bar, barBase);
-
+        if (state.getElementHinting()) {
+            endElementGroup(g2);
+        }
+        
         CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
                 column);
         if (generator != null && isItemLabelVisible(row, column)) {
@@ -1082,7 +1092,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         }
 
     }
-
+    
     /**
      * Calculates the available space for each series.
      *

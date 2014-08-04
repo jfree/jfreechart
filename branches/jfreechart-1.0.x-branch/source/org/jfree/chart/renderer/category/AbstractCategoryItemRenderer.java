@@ -130,6 +130,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jfree.chart.ChartHints;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.CategoryAxis;
@@ -156,6 +157,7 @@ import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.TextUtils;
+import org.jfree.data.ItemKey;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
@@ -603,6 +605,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             this.columnCount = 0;
         }
         CategoryItemRendererState state = createState(info);
+        state.setElementHinting(plot.fetchElementHintingFlag());
         int[] visibleSeriesTemp = new int[this.rowCount];
         int visibleSeriesCount = 0;
         for (int row = 0; row < this.rowCount; row++) {
@@ -616,6 +619,35 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
                 visibleSeriesCount);
         state.setVisibleSeriesArray(visibleSeries);
         return state;
+    }
+
+    /**
+     * Adds a {@code KEY_BEGIN_ELEMENT} hint to the graphics target.  This
+     * hint is recognised by <b>JFreeSVG</b>.
+     * 
+     * @param g2  the graphics target ({@code null} not permitted).
+     * @param key  the key ({@code null} not permitted).
+     * 
+     * @see #endElementGroup(java.awt.Graphics2D) 
+     * @since 1.0.20
+     */
+    protected void beginElementGroup(Graphics2D g2, ItemKey key) {
+        ParamChecks.nullNotPermitted(key, "key");
+        Map m = new HashMap(1);
+        m.put("ref", key.toJSONString());
+        g2.setRenderingHint(ChartHints.KEY_BEGIN_ELEMENT, m);        
+    }
+    
+    /**
+     * Adds a {@code KEY_END_ELEMENT} hint to the graphics target.
+     * 
+     * @param g2  the graphics target ({@code null} not permitted).
+     * 
+     * @see #beginElementGroup(java.awt.Graphics2D, org.jfree.data.ItemKey) 
+     * @since 1.0.20
+     */
+    protected void endElementGroup(Graphics2D g2) {
+        g2.setRenderingHint(ChartHints.KEY_END_ELEMENT, Boolean.TRUE);
     }
 
     /**
@@ -1680,7 +1712,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         this.legendItemURLGenerator = generator;
         fireChangeEvent();
     }
-
+    
     /**
      * Adds an entity with the specified hotspot.
      *
