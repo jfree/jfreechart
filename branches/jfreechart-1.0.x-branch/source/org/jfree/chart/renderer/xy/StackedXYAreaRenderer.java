@@ -32,6 +32,7 @@
  * Original Author:  Richard Atkinson;
  * Contributor(s):   Christian W. Zuckschwerdt;
  *                   David Gilbert (for Object Refinery Limited);
+ *                   Ulrich Voigt (patch #312);
  *
  * Changes:
  * --------
@@ -63,6 +64,7 @@
  * 22-Mar-2007 : Fire change events in setShapePaint() and setShapeStroke()
  *               methods (DG);
  * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
+ * 04-Aug-2014 : Fix entity hotspot (patch #312) (UV);
  *
  */
 
@@ -74,6 +76,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.geom.Area;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -246,14 +249,12 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
 
     /**
      * Constructs a new renderer.  To specify the type of renderer, use one of
-     * the constants: <code>SHAPES</code>, <code>LINES</code>,
-     * <code>SHAPES_AND_LINES</code>, <code>AREA</code> or
-     * <code>AREA_AND_SHAPES</code>.
+     * the constants: {@code SHAPES}, {@code LINES}, {@code SHAPES_AND_LINES}, 
+     * {@code AREA} or {@code AREA_AND_SHAPES}.
      *
      * @param type  the type of renderer.
-     * @param labelGenerator  the tool tip generator to use (<code>null</code>
-     *                        is none).
-     * @param urlGenerator  the URL generator (<code>null</code> permitted).
+     * @param labelGenerator  the tool tip generator ({@code null} permitted).
+     * @param urlGenerator  the URL generator ({@code null} permitted).
      */
     public StackedXYAreaRenderer(int type, XYToolTipGenerator labelGenerator,
             XYURLGenerator urlGenerator) {
@@ -261,10 +262,10 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
     }
 
     /**
-     * Returns the paint used for rendering shapes, or <code>null</code> if
+     * Returns the paint used for rendering shapes, or {@code null} if
      * using series paints.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setShapePaint(Paint)
      */
@@ -276,7 +277,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      * Sets the paint for rendering shapes and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param shapePaint  the paint (<code>null</code> permitted).
+     * @param shapePaint  the paint ({@code null} permitted).
      *
      * @see #getShapePaint()
      */
@@ -289,7 +290,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      * Returns the stroke used for rendering shapes, or <code>null</code> if
      * using series strokes.
      *
-     * @return The stroke (possibly <code>null</code>).
+     * @return The stroke (possibly {@code null}).
      *
      * @see #setShapeStroke(Stroke)
      */
@@ -301,7 +302,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      * Sets the stroke for rendering shapes and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param shapeStroke  the stroke (<code>null</code> permitted).
+     * @param shapeStroke  the stroke ({@code null} permitted).
      *
      * @see #getShapeStroke()
      */
@@ -350,12 +351,12 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
      * @return The range ([0.0, 0.0] if the dataset contains no values, and
-     *         <code>null</code> if the dataset is <code>null</code>).
+     *         {@code null} if the dataset is {@code null}).
      *
-     * @throws ClassCastException if <code>dataset</code> is not an instance
+     * @throws ClassCastException if {@code dataset} is not an instance
      *         of {@link TableXYDataset}.
      */
     @Override
@@ -584,20 +585,26 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
             if (state.getInfo() != null) {
                 EntityCollection entities = state.getEntityCollection();
                 if (entities != null && shape != null && !nullPoint) {
-                    String tip = null;
-                    XYToolTipGenerator generator
-                        = getToolTipGenerator(series, item);
-                    if (generator != null) {
-                        tip = generator.generateToolTip(dataset, series, item);
+                    // limit the entity hotspot area to the data area
+                    Area dataAreaHotspot = new Area(shape);
+                    dataAreaHotspot.intersect(new Area(dataArea));
+                    if (!dataAreaHotspot.isEmpty()) {
+                        String tip = null;
+                        XYToolTipGenerator generator = getToolTipGenerator(
+                                series, item);
+                        if (generator != null) {
+                            tip = generator.generateToolTip(dataset, series, 
+                                    item);
+                        }
+                        String url = null;
+                        if (getURLGenerator() != null) {
+                            url = getURLGenerator().generateURL(dataset, series, 
+                                    item);
+                        }
+                        XYItemEntity entity = new XYItemEntity(dataAreaHotspot, 
+                                dataset, series, item, tip, url);
+                        entities.add(entity);
                     }
-                    String url = null;
-                    if (getURLGenerator() != null) {
-                        url = getURLGenerator().generateURL(dataset, series,
-                                item);
-                    }
-                    XYItemEntity entity = new XYItemEntity(shape, dataset,
-                            series, item, tip, url);
-                    entities.add(entity);
                 }
             }
 
