@@ -58,7 +58,7 @@ package org.jfree.chart.renderer.xy;
 
 import java.awt.Graphics2D;
 import java.awt.Paint;
-import java.awt.Shape;
+import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
@@ -114,9 +114,9 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
     /**
      * Constructs a new renderer.
      *
-     * @param labelGenerator  the tool tip generator to use.  <code>null</code>
-     *                        is none.
-     * @param urlGenerator  the URL generator (<code>null</code> permitted).
+     * @param labelGenerator  the tool tip generator to use ({@code null} 
+     *     permitted).
+     * @param urlGenerator  the URL generator ({@code null} permitted).
      */
     public StackedXYAreaRenderer2(XYToolTipGenerator labelGenerator,
                                   XYURLGenerator urlGenerator) {
@@ -158,10 +158,10 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (or <code>null</code> if the dataset is
-     *         <code>null</code> or empty).
+     * @return The range (or {@code null} if the dataset is {@code null} or 
+     *     empty).
      */
     @Override
     public Range findRangeBounds(XYDataset dataset) {
@@ -218,7 +218,6 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
             int series, int item, CrosshairState crosshairState, int pass) {
 
         // setup for collecting optional entity info...
-        Shape entityArea;
         EntityCollection entities = null;
         if (info != null) {
             entities = info.getOwner().getEntityCollection();
@@ -300,22 +299,19 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                     left.lineTo(transX1, transStack1);
                     left.lineTo(transXLeft, transStackLeft);
                     left.lineTo(transXLeft, transYLeft);
-                }
-                else {
+                } else {
                     left.moveTo(transY1, transX1);
                     left.lineTo(transStack1, transX1);
                     left.lineTo(transStackLeft, transXLeft);
                     left.lineTo(transYLeft, transXLeft);
                 }
                 left.closePath();
-            }
-            else {
+            } else {
                 if (orientation == PlotOrientation.VERTICAL) {
                     left.moveTo(transX1, transStack1);
                     left.lineTo(transX1, transY1);
                     left.lineTo(transXLeft, transStackLeft);
-                }
-                else {
+                } else {
                     left.moveTo(transStack1, transX1);
                     left.lineTo(transY1, transX1);
                     left.lineTo(transStackLeft, transXLeft);
@@ -335,8 +331,7 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                     right.lineTo(transX1, transY1);
                     right.lineTo(transXRight, transYRight);
                     right.lineTo(transXRight, transStackRight);
-                }
-                else {
+                } else {
                     right.moveTo(transStack1, transX1);
                     right.lineTo(transY1, transX1);
                     right.lineTo(transYRight, transXRight);
@@ -349,8 +344,7 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                     right.moveTo(transX1, transStack1);
                     right.lineTo(transX1, transY1);
                     right.lineTo(transXRight, transStackRight);
-                }
-                else {
+                } else {
                     right.moveTo(transStack1, transX1);
                     right.lineTo(transY1, transX1);
                     right.lineTo(transStackRight, transXRight);
@@ -372,15 +366,13 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                     left.moveTo(transX1, transStack1);
                     left.lineTo(transX1, transY1);
                     left.lineTo(transXLeft, transStackLeft);
-                }
-                else {
+                } else {
                     left.moveTo(transStack1, transX1);
                     left.lineTo(transY1, transX1);
                     left.lineTo(transStackLeft, transXLeft);
                 }
                 left.clone();
-            }
-            else {
+            } else {
                 double yleft = (y0 + y1) / 2.0 + stackLeft[0];
                 float transYLeft = (float) rangeAxis.valueToJava2D(yleft,
                         dataArea, edge1);
@@ -389,8 +381,7 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                     left.lineTo(transX1, transStack1);
                     left.lineTo(transXLeft, transStackLeft);
                     left.lineTo(transXLeft, transYLeft);
-                }
-                else {
+                } else {
                     left.moveTo(transY1, transX1);
                     left.lineTo(transStack1, transX1);
                     left.lineTo(transStackLeft, transXLeft);
@@ -407,15 +398,13 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                     right.moveTo(transX1, transStack1);
                     right.lineTo(transX1, transY1);
                     right.lineTo(transXRight, transStackRight);
-                }
-                else {
+                } else {
                     right.moveTo(transStack1, transX1);
                     right.lineTo(transY1, transX1);
                     right.lineTo(transStackRight, transXRight);
                 }
                 right.closePath();
-            }
-            else {
+            } else {
                 double yright = (y1 + y2) / 2.0 + stackRight[0];
                 float transYRight = (float) rangeAxis.valueToJava2D(yright,
                         dataArea, edge1);
@@ -424,8 +413,7 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
                     right.lineTo(transX1, transY1);
                     right.lineTo(transXRight, transYRight);
                     right.lineTo(transXRight, transStackRight);
-                }
-                else {
+                } else {
                     right.moveTo(transStack1, transX1);
                     right.lineTo(transY1, transX1);
                     right.lineTo(transYRight, transXRight);
@@ -445,27 +433,30 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
 
         // add an entity for the item...
         if (entities != null) {
-            GeneralPath gp = new GeneralPath(left);
-            gp.append(right, false);
-            entityArea = gp;
-            addEntity(entities, entityArea, dataset, series, item,
-                    transX1, transY1);
-        }
+            // Create the entity area and limit it to the data area
+            Area dataAreaHotspot = new Area(left);
+            dataAreaHotspot.add(new Area(right));
+            dataAreaHotspot.intersect(new Area(dataArea));
 
+            if (!dataAreaHotspot.isEmpty()) {
+                addEntity(entities, dataAreaHotspot, dataset, series, item,
+                     transX1, transY1);
+            }
+        }
     }
 
     /**
      * Calculates the stacked values (one positive and one negative) of all
-     * series up to, but not including, <code>series</code> for the specified
-     * item. It returns [0.0, 0.0] if <code>series</code> is the first series.
+     * series up to, but not including, {@code series} for the specified
+     * item. It returns [0.0, 0.0] if {@code series} is the first series.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index.
      * @param index  the item index.
      *
      * @return An array containing the cumulative negative and positive values
-     *     for all series values up to but excluding <code>series</code>
-     *     for <code>index</code>.
+     *     for all series values up to but excluding {@code series}
+     *     for {@code index}.
      */
     private double[] getStackValues(TableXYDataset dataset,
                                     int series, int index) {
@@ -530,7 +521,7 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
