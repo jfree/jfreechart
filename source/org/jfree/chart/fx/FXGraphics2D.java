@@ -140,6 +140,9 @@ public class FXGraphics2D extends Graphics2D {
     
     private Font font = new Font("SansSerif", Font.PLAIN, 12);
     
+    private final FontRenderContext fontRenderContext = new FontRenderContext(
+            null, false, true);
+
     private AffineTransform transform = new AffineTransform();
 
     /** The background color, presently ignored. */
@@ -543,7 +546,7 @@ public class FXGraphics2D extends Graphics2D {
      * Maps a line join code from AWT to the corresponding JavaFX 
      * StrokeLineJoin enum value.
      * 
-     * @param c  the line join code.
+     * @param j  the line join code.
      * 
      * @return A JavaFX line join value. 
      */
@@ -826,7 +829,7 @@ public class FXGraphics2D extends Graphics2D {
      */
     @Override
     public FontRenderContext getFontRenderContext() {
-        return this.fmImage.createGraphics().getFontRenderContext();
+        return this.fontRenderContext;
     }
 
     /**
@@ -1505,14 +1508,20 @@ public class FXGraphics2D extends Graphics2D {
      * @return {@code true} if the image is drawn. 
      */
     @Override
-    public boolean drawImage(Image img, int x, int y, int width, int height, 
-            ImageObserver observer) {
-        BufferedImage img2 = new BufferedImage(width, height, 
+    public boolean drawImage(final Image img, int x, int y, int width, 
+            int height, ImageObserver observer) {
+        final BufferedImage buffered;
+        if (img instanceof BufferedImage) {
+            buffered = (BufferedImage) img;
+        } else {
+            buffered = new BufferedImage(width, height, 
                 BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = img2.createGraphics();
-        g2.drawImage(img, 0, 0, width, height, null);
-        javafx.scene.image.WritableImage fxImage = SwingFXUtils.toFXImage(img2, 
-                null);
+            final Graphics2D g2 = buffered.createGraphics();
+            g2.drawImage(img, 0, 0, width, height, null);
+            g2.dispose();
+        }
+        javafx.scene.image.WritableImage fxImage = SwingFXUtils.toFXImage(
+                buffered, null);
         this.gc.drawImage(fxImage, x, y, width, height);
         return true;
     }
