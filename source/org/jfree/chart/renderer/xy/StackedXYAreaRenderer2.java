@@ -31,7 +31,7 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited), based on
  *                   the StackedXYAreaRenderer class by Richard Atkinson;
- * Contributor(s):   -;
+ * Contributor(s):   Ulrich Voigt (patch #312);
  *
  * Changes:
  * --------
@@ -51,6 +51,7 @@
  *               Clayton) (DG);
  * 30-Nov-2006 : Added accessor methods for the roundXCoordinates flag (DG);
  * 02-Jun-2008 : Fixed bug with PlotOrientation.HORIZONTAL (DG);
+ * 04-Aug-2014 : Fix entity hotspot (patch 312) (UV);
  *
  */
 
