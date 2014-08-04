@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * KeyedValues.java
  * ----------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,7 +48,7 @@ import java.util.List;
 
 /**
  * An ordered list of (key, value) items where the keys are unique and
- * non-<code>null</code>.
+ * non-{@code null}.
  *
  * @see Values
  * @see DefaultKeyedValues
@@ -60,12 +60,12 @@ public interface KeyedValues extends Values {
      * that some implementations allow re-ordering of the data items, so the
      * result may be transient.
      *
-     * @param index  the item index (in the range <code>0</code> to
-     *     <code>getItemCount() - 1</code>).
+     * @param index  the item index (in the range {@code 0} to
+     *     {@code getItemCount() - 1}).
      *
-     * @return The key (never <code>null</code>).
+     * @return The key (never {@code null}).
      *
-     * @throws IndexOutOfBoundsException if <code>index</code> is not in the
+     * @throws IndexOutOfBoundsException if {@code index} is not in the
      *     specified range.
      */
     public Comparable getKey(int index);
@@ -73,12 +73,11 @@ public interface KeyedValues extends Values {
     /**
      * Returns the index for a given key.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
-     * @return The index, or <code>-1</code> if the key is unrecognised.
+     * @return The index, or {@code -1} if the key is unrecognised.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     * @throws IllegalArgumentException if {@code key} is {@code null}.
      */
     public int getIndex(Comparable key);
 
@@ -88,7 +87,7 @@ public interface KeyedValues extends Values {
      * reason, the key order is important - this method should return the keys
      * in order.  The returned list may be unmodifiable.
      *
-     * @return The keys (never <code>null</code>).
+     * @return The keys (never {@code null}).
      */
     public List getKeys();
 
@@ -97,7 +96,7 @@ public interface KeyedValues extends Values {
      *
      * @param key  the key.
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @throws UnknownKeyException if the key is not recognised.
      */
