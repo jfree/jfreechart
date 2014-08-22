@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * ---------------------
  * FixedMillisecond.java
  * ---------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2014, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Ulrich Voigt;
  *
  * Changes
  * -------
@@ -44,6 +44,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 06-Oct-2006 : Added peg() method (DG);
  * 28-May-2008 : Fixed immutability problem (DG);
+ * 20-Aug-2014 : Remove unnecessary Date object creation in constructors (UV);
  *
  */
 
@@ -65,13 +66,13 @@ public class FixedMillisecond extends RegularTimePeriod
     private static final long serialVersionUID = 7867521484545646931L;
 
     /** The millisecond. */
-    private long time;
+    private final long time;
 
     /**
      * Constructs a millisecond based on the current system time.
      */
     public FixedMillisecond() {
-        this(new Date());
+        this(System.currentTimeMillis());
     }
 
     /**
@@ -80,20 +81,21 @@ public class FixedMillisecond extends RegularTimePeriod
      * @param millisecond  the millisecond (same encoding as java.util.Date).
      */
     public FixedMillisecond(long millisecond) {
-        this(new Date(millisecond));
+        this.time = millisecond;
     }
 
     /**
      * Constructs a millisecond.
      *
-     * @param time  the time.
+     * @param time  the time ({@code null} not permitted).
      */
     public FixedMillisecond(Date time) {
-        this.time = time.getTime();
+        this(time.getTime());
     }
 
     /**
-     * Returns the date/time.
+     * Returns the date/time (creates a new {@code Date} instance each time 
+     * this method is called).
      *
      * @return The date/time.
      */
