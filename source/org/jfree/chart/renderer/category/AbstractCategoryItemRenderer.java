@@ -130,7 +130,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jfree.chart.ChartHints;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.CategoryAxis;
@@ -157,7 +156,7 @@ import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.TextUtils;
-import org.jfree.data.ItemKey;
+import org.jfree.data.KeyedValues2DItemKey;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
@@ -599,8 +598,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         if (data != null) {
             this.rowCount = data.getRowCount();
             this.columnCount = data.getColumnCount();
-        }
-        else {
+        } else {
             this.rowCount = 0;
             this.columnCount = 0;
         }
@@ -623,33 +621,22 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
 
     /**
      * Adds a {@code KEY_BEGIN_ELEMENT} hint to the graphics target.  This
-     * hint is recognised by <b>JFreeSVG</b>.
+     * hint is recognised by <b>JFreeSVG</b> (in theory it could be used by 
+     * other {@code Graphics2D} implementations also).
      * 
      * @param g2  the graphics target ({@code null} not permitted).
-     * @param key  the key ({@code null} not permitted).
+     * @param rowKey  the row key that identifies the element ({@code null} not
+     *     permitted).
+     * @param columnKey  the column key that identifies the element 
+     *     ({@code null} not permitted). 
      * 
-     * @see #endElementGroup(java.awt.Graphics2D) 
      * @since 1.0.20
      */
-    protected void beginElementGroup(Graphics2D g2, ItemKey key) {
-        ParamChecks.nullNotPermitted(key, "key");
-        Map m = new HashMap(1);
-        m.put("ref", key.toJSONString());
-        g2.setRenderingHint(ChartHints.KEY_BEGIN_ELEMENT, m);        
+    protected void beginElementGroup(Graphics2D g2, Comparable rowKey,
+            Comparable columnKey) {
+        beginElementGroup(g2, new KeyedValues2DItemKey(rowKey, columnKey));    
     }
     
-    /**
-     * Adds a {@code KEY_END_ELEMENT} hint to the graphics target.
-     * 
-     * @param g2  the graphics target ({@code null} not permitted).
-     * 
-     * @see #beginElementGroup(java.awt.Graphics2D, org.jfree.data.ItemKey) 
-     * @since 1.0.20
-     */
-    protected void endElementGroup(Graphics2D g2) {
-        g2.setRenderingHint(ChartHints.KEY_END_ELEMENT, Boolean.TRUE);
-    }
-
     /**
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.

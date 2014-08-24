@@ -122,7 +122,8 @@
  * 11-Jan-2014 : Fix error in fillDomainGridBand method (DG);
  * 07-Apr-2014 : Don't use ObjectList anymore (DG);
  * 29-Jul-2014 : Add rendering hint to normalise domain and range lines (DG);
- * 
+ * 24-Aug-2014 : Add beginElementGroup() method, part of JFreeSVG support (DG);
+ *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -180,6 +181,7 @@ import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYItemKey;
 import org.jfree.text.TextUtilities;
 import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.Layer;
@@ -300,7 +302,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param g2  the graphics device.
      * @param dataArea  the area inside the axes.
      * @param plot  the plot.
-     * @param data  the data.
+     * @param dataset  the dataset.
      * @param info  an optional info collection object to return data back to
      *              the caller.
      *
@@ -308,8 +310,26 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
-            XYPlot plot, XYDataset data, PlotRenderingInfo info) {
-        return new XYItemRendererState(info);
+            XYPlot plot, XYDataset dataset, PlotRenderingInfo info) {
+        XYItemRendererState state = new XYItemRendererState(info);
+        return state;
+    }
+
+    /**
+     * Adds a {@code KEY_BEGIN_ELEMENT} hint to the graphics target.  This
+     * hint is recognised by <b>JFreeSVG</b> (in theory it could be used by 
+     * other {@code Graphics2D} implementations also).
+     * 
+     * @param g2  the graphics target ({@code null} not permitted).
+     * @param seriesKey  the series key that identifies the element 
+     *     ({@code null} not permitted).
+     * @param itemIndex  the item index. 
+     * 
+     * @since 1.0.20
+     */
+    protected void beginElementGroup(Graphics2D g2, Comparable seriesKey,
+            int itemIndex) {
+        beginElementGroup(g2, new XYItemKey(seriesKey, itemIndex));    
     }
 
     // ITEM LABEL GENERATOR
