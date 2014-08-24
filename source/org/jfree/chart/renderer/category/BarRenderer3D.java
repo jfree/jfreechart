@@ -96,7 +96,8 @@
  * 11-Jun-2012 : Utilise new PaintAlpha class - patch 3204823 from DaveLaw (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
  * 11-Mar-2014 : Check visible series (DG);
- * 
+ * 24-Aug-2014 : Add element hinting (DG);
+ *
  */
 
 package org.jfree.chart.renderer.category;
@@ -255,7 +256,6 @@ public class BarRenderer3D extends BarRenderer
         this.wallPaint = paint;
         fireChangeEvent();
     }
-
 
     /**
      * Initialises the renderer and returns a state object that will be passed
@@ -705,13 +705,16 @@ public class BarRenderer3D extends BarRenderer
 
         // draw the bar...
         Rectangle2D bar;
-        if (orientation == PlotOrientation.HORIZONTAL) {
+        if (orientation.isHorizontal()) {
             bar = new Rectangle2D.Double(barL0, barW0, barLength,
                     state.getBarWidth());
-        }
-        else {
+        } else {
             bar = new Rectangle2D.Double(barW0, barL0, state.getBarWidth(),
                     barLength);
+        }
+        if (state.getElementHinting()) {
+            beginElementGroup(g2, dataset.getRowKey(row), 
+                    dataset.getColumnKey(column));
         }
         Paint itemPaint = getItemPaint(row, column);
         g2.setPaint(itemPaint);
@@ -759,9 +762,12 @@ public class BarRenderer3D extends BarRenderer
             }
             g2.draw(bar3dTop);
         }
+        if (state.getElementHinting()) {
+            endElementGroup(g2);
+        }
 
-        CategoryItemLabelGenerator generator
-            = getItemLabelGenerator(row, column);
+        CategoryItemLabelGenerator generator = getItemLabelGenerator(row, 
+                column);
         if (generator != null && isItemLabelVisible(row, column)) {
             drawItemLabel(g2, dataset, row, column, plot, generator, bar,
                     (value < 0.0));
