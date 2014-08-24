@@ -45,6 +45,7 @@
  * 23-Jan-2009 : Set more appropriate default shape in legend (DG);
  * 23-Jan-2009 : Added support for seriesVisible flags - see patch
  *               2511330 (PK)
+ * 24-Aug-2014 : Add element hinting for JFreeSVG (DG);
  *
  */
 
@@ -180,12 +181,10 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
     public CategoryItemRendererState initialise(Graphics2D g2,
             Rectangle2D dataArea, CategoryPlot plot, int rendererIndex,
             PlotRenderingInfo info) {
-
         CategoryItemRendererState state = super.initialise(g2, dataArea, plot,
                 rendererIndex, info);
         calculateItemWidth(plot, dataArea, rendererIndex, state);
         return state;
-
     }
 
     /**
@@ -210,8 +209,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
             PlotOrientation orientation = plot.getOrientation();
             if (orientation == PlotOrientation.HORIZONTAL) {
                 space = dataArea.getHeight();
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
+            } else if (orientation == PlotOrientation.VERTICAL) {
                 space = dataArea.getWidth();
             }
             double maxWidth = space * getMaximumItemWidth();
@@ -228,8 +226,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
                                      - categoryMargin - currentItemMargin);
             if ((rows * columns) > 0) {
                 state.setBarWidth(Math.min(used / (rows * columns), maxWidth));
-            }
-            else {
+            } else {
                 state.setBarWidth(Math.min(used, maxWidth));
             }
         }
@@ -256,10 +253,9 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
             int column) {
         // calculate bar width...
         double space;
-        if (orientation == PlotOrientation.HORIZONTAL) {
+        if (orientation.isHorizontal()) {
             space = dataArea.getHeight();
-        }
-        else {
+        } else {
             space = dataArea.getWidth();
         }
         double barW0 = domainAxis.getCategoryStart(column, getColumnCount(),
@@ -276,8 +272,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
                     categoryCount, seriesCount);
             barW0 = barW0 + row * (seriesW + seriesGap)
                           + (seriesW / 2.0) - (state.getBarWidth() / 2.0);
-        }
-        else {
+        } else {
             barW0 = domainAxis.getCategoryMiddle(column, getColumnCount(),
                     dataArea, plot.getDomainAxisEdge()) - state.getBarWidth()
                     / 2.0;
@@ -329,23 +324,31 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
         // draw the bar...
         Line2D line;
         double x, y;
-        if (orientation == PlotOrientation.HORIZONTAL) {
+        if (orientation.isHorizontal()) {
             x = barL;
             y = barW0 + state.getBarWidth() / 2.0;
             line = new Line2D.Double(barL, barW0, barL,
                     barW0 + state.getBarWidth());
-        }
-        else {
+        } else {
             x = barW0 + state.getBarWidth() / 2.0;
             y = barL;
             line = new Line2D.Double(barW0, barL, barW0 + state.getBarWidth(),
                     barL);
         }
+        
+        if (state.getElementHinting()) {
+            beginElementGroup(g2, dataset.getRowKey(row), 
+                    dataset.getColumnKey(column));
+        }
+        
         Stroke itemStroke = getItemStroke(row, column);
         Paint itemPaint = getItemPaint(row, column);
         g2.setStroke(itemStroke);
         g2.setPaint(itemPaint);
         g2.draw(line);
+        if (state.getElementHinting()) {
+            endElementGroup(g2);
+        }
 
         CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
                 column);

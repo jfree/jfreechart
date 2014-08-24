@@ -63,6 +63,8 @@
  *               interval (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  * 30-Oct-2011 : Fixed alignment when setMaximumBarWidth is applied (DG);
+ * 24-Aug-2014 : Add element hinting for JFreeSVG (DG);
+ *
  */
 
 package org.jfree.chart.renderer.category;
@@ -142,8 +144,7 @@ public class IntervalBarRenderer extends BarRenderer {
              IntervalCategoryDataset d = (IntervalCategoryDataset) dataset;
              drawInterval(g2, state, dataArea, plot, domainAxis, rangeAxis,
                      d, row, column);
-         }
-         else {
+         } else {
              super.drawItem(g2, state, dataArea, plot, domainAxis, rangeAxis,
                      dataset, row, column, pass);
          }
@@ -163,14 +164,9 @@ public class IntervalBarRenderer extends BarRenderer {
       * @param row  the row index (zero-based).
       * @param column  the column index (zero-based).
       */
-     protected void drawInterval(Graphics2D g2,
-                                 CategoryItemRendererState state,
-                                 Rectangle2D dataArea,
-                                 CategoryPlot plot,
-                                 CategoryAxis domainAxis,
-                                 ValueAxis rangeAxis,
-                                 IntervalCategoryDataset dataset,
-                                 int row,
+     protected void drawInterval(Graphics2D g2, CategoryItemRendererState state,
+            Rectangle2D dataArea, CategoryPlot plot, CategoryAxis domainAxis,
+            ValueAxis rangeAxis, IntervalCategoryDataset dataset, int row,
                                  int column) {
 
         int visibleRow = state.getVisibleSeriesIndex(row);
@@ -221,8 +217,7 @@ public class IntervalBarRenderer extends BarRenderer {
             rectHeight = state.getBarWidth();
             rectWidth = Math.abs(java2dValue1 - java2dValue0);
             barBase = RectangleEdge.LEFT;
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation.isVertical()) {
             // BAR X
             rectX = calculateBarW0(getPlot(), orientation, dataArea, 
                     domainAxis, state, visibleRow, column);
@@ -232,10 +227,17 @@ public class IntervalBarRenderer extends BarRenderer {
         Rectangle2D bar = new Rectangle2D.Double(rectX, rectY, rectWidth,
                 rectHeight);
         BarPainter painter = getBarPainter();
+        if (state.getElementHinting()) {
+            beginElementGroup(g2, dataset.getRowKey(row), 
+                    dataset.getColumnKey(column));
+        }
         if (getShadowsVisible()) {
             painter.paintBarShadow(g2, this, row, column, bar, barBase, false);
         }
         getBarPainter().paintBar(g2, this, row, column, bar, barBase);
+        if (state.getElementHinting()) {
+            endElementGroup(g2);
+        }
 
         CategoryItemLabelGenerator generator = getItemLabelGenerator(row,
                 column);
