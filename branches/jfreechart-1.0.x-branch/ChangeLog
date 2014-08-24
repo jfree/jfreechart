@@ -1,3 +1,18 @@
+2014-08-24  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/renderer/AbstractRenderer.java
+    (beginElementGroup): New method,
+    (endElementGroup): Likewise,
+    * org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+    (beginElementGroup): Call superclass,
+    (endElementGroup): Moved to superclass,
+    * org/jfree/chart/renderer/xy/AbstractXYItemRenderer.java
+    (beginElementGroup): New method,
+    * org/jfree/chart/renderer/xy/XYBarRenderer.java
+    (drawItem): Add element hinting,
+    * org/jfree/data/KeyedValuesItemKey.java: New file,
+    * org/jfree/data/xy/XYItemKey.java: New file.
+
 2014-08-22  David Gilbert  <david.gilbert@object-refinery.com>
 
     Change suggested by Ulrich Voigt:

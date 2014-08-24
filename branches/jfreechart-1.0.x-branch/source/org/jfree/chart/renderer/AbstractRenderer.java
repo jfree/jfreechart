@@ -92,6 +92,7 @@
  * 05-Jul-2012 : No need for BooleanUtilities now that min JDK = 1.4.2 (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
  * 09-Apr-2014 : Remove use of ObjectList (DG);
+ * 24-Aug-2014 : Add begin/endElementGroup() (DG);
  *
  */
 
@@ -100,6 +101,7 @@ package org.jfree.chart.renderer;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
@@ -117,6 +119,7 @@ import java.util.Map;
 
 import javax.swing.event.EventListenerList;
 
+import org.jfree.chart.ChartHints;
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
@@ -127,6 +130,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.data.ItemKey;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.BooleanList;
@@ -480,6 +484,36 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @return The drawing supplier.
      */
     public abstract DrawingSupplier getDrawingSupplier();
+
+    /**
+     * Adds a {@code KEY_BEGIN_ELEMENT} hint to the graphics target.  This
+     * hint is recognised by <b>JFreeSVG</b> (in theory it could be used by 
+     * other {@code Graphics2D} implementations also).
+     * 
+     * @param g2  the graphics target ({@code null} not permitted).
+     * @param key  the key ({@code null} not permitted).
+     * 
+     * @see #endElementGroup(java.awt.Graphics2D) 
+     * @since 1.0.20
+     */
+    protected void beginElementGroup(Graphics2D g2, ItemKey key) {
+        ParamChecks.nullNotPermitted(key, "key");
+        Map m = new HashMap(1);
+        m.put("ref", key.toJSONString());
+        g2.setRenderingHint(ChartHints.KEY_BEGIN_ELEMENT, m);        
+    }
+    
+    /**
+     * Adds a {@code KEY_END_ELEMENT} hint to the graphics target.
+     * 
+     * @param g2  the graphics target ({@code null} not permitted).
+     * 
+     * @see #beginElementGroup(java.awt.Graphics2D, org.jfree.data.ItemKey) 
+     * @since 1.0.20
+     */
+    protected void endElementGroup(Graphics2D g2) {
+        g2.setRenderingHint(ChartHints.KEY_END_ELEMENT, Boolean.TRUE);
+    }
 
     // SERIES VISIBLE (not yet respected by all renderers)
 

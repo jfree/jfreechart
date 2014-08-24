@@ -99,6 +99,7 @@
  * 10-May-2012 : Fix findDomainBounds() and findRangeBounds() to account for
  *               non-visible series (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 24-Aug-2014 : Add begin/endElementGroup() (DG);
  *
  */
 
@@ -813,8 +814,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         if (this.useYInterval) {
             value0 = intervalDataset.getStartYValue(series, item);
             value1 = intervalDataset.getEndYValue(series, item);
-        }
-        else {
+        } else {
             value0 = this.base;
             value1 = intervalDataset.getYValue(series, item);
         }
@@ -825,8 +825,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             if (!rangeAxis.getRange().intersects(value0, value1)) {
                 return;
             }
-        }
-        else {
+        } else {
             if (!rangeAxis.getRange().intersects(value1, value0)) {
                 return;
             }
@@ -851,8 +850,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
             if (!domainAxis.getRange().intersects(startX, endX)) {
                 return;
             }
-        }
-        else {
+        } else {
             if (!domainAxis.getRange().intersects(endX, startX)) {
                 return;
             }
@@ -884,14 +882,13 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
         Rectangle2D bar = null;
         PlotOrientation orientation = plot.getOrientation();
-        if (orientation == PlotOrientation.HORIZONTAL) {
+        if (orientation.isHorizontal()) {
             // clip left and right bounds to data area
             bottom = Math.max(bottom, dataArea.getMinX());
             top = Math.min(top, dataArea.getMaxX());
             bar = new Rectangle2D.Double(
                 bottom, left, top - bottom, translatedWidth);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation.isVertical()) {
             // clip top and bottom bounds to data area
             bottom = Math.max(bottom, dataArea.getMinY());
             top = Math.min(top, dataArea.getMaxY());
@@ -902,27 +899,31 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         boolean positive = (value1 > 0.0);
         boolean inverted = rangeAxis.isInverted();
         RectangleEdge barBase;
-        if (orientation == PlotOrientation.HORIZONTAL) {
+        if (orientation.isHorizontal()) {
             if (positive && inverted || !positive && !inverted) {
                 barBase = RectangleEdge.RIGHT;
-            }
-            else {
+            } else {
                 barBase = RectangleEdge.LEFT;
             }
-        }
-        else {
+        } else {
             if (positive && !inverted || !positive && inverted) {
                 barBase = RectangleEdge.BOTTOM;
-            }
-            else {
+            } else {
                 barBase = RectangleEdge.TOP;
             }
+        }
+        
+        if (state.getElementHinting()) {
+            beginElementGroup(g2, dataset.getSeriesKey(series), item);
         }
         if (getShadowsVisible()) {
             this.barPainter.paintBarShadow(g2, this, series, item, bar, barBase,
                 !this.useYInterval);
         }
         this.barPainter.paintBar(g2, this, series, item, bar, barBase);
+        if (state.getElementHinting()) {
+            endElementGroup(g2);
+        }
 
         if (isItemLabelVisible(series, item)) {
             XYItemLabelGenerator generator = getItemLabelGenerator(series,
@@ -986,8 +987,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         ItemLabelPosition position;
         if (!negative) {
             position = getPositiveItemLabelPosition(series, item);
-        }
-        else {
+        } else {
             position = getNegativeItemLabelPosition(series, item);
         }
 
