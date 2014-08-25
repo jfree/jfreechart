@@ -1046,15 +1046,12 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @param g2  the graphics device.
      * @param area  the plot area.
-     * @param anchor  the anchor point (<code>null</code> permitted).
-     * @param parentState  the parent state (if any).
+     * @param anchor  the anchor point ({@code null} permitted).
+     * @param parentState  the parent state (if any, {@code null} permitted).
      * @param info  carries back plot rendering info.
      */
-    public abstract void draw(Graphics2D g2,
-                              Rectangle2D area,
-                              Point2D anchor,
-                              PlotState parentState,
-                              PlotRenderingInfo info);
+    public abstract void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
+            PlotState parentState, PlotRenderingInfo info);
 
     /**
      * Draws the plot background (the background color and/or image).
