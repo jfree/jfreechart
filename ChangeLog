@@ -1,3 +1,23 @@
+2014-08-29  David Gilbert  <david.gilbert@object-refinery.com>
+
+    (Patch from Simon Legner attached to bug 1129)
+    * org/jfree/chart/ChartPanel.java
+    (actionPerformed): Localise error messages,
+    (saveAsSVG): Likewise,
+    (saveAsPDF): Likewise.
+
+2014-08-24  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/renderer/BarRenderer3D.java
+    (drawItem): Add element hinting,
+    * org/jfree/chart/renderer/IntervalBarRenderer.java
+    (drawInterval): Add element hinting,
+    * org/jfree/chart/renderer/LayeredBarRenderer.java
+    (drawHorizontalItem): Add element hinting,
+    (drawVerticalItem): Likewise,
+    * org/jfree/chart/renderer/LevelRenderer.java
+    (drawItem): Add element hinting.
+
 2014-08-24  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/renderer/AbstractRenderer.java

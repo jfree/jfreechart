@@ -44,6 +44,7 @@
  *                   Ulrich Voigt - patch 2686040;
  *                   Alessandro Borges - patch 1460845;
  *                   Martin Hoeller;
+ *                   Simon Legner - patch from bug 1129;
  *
  * Changes (from 28-Jun-2001)
  * --------------------------
@@ -170,6 +171,7 @@
  * 02-Jul-2013 : Use ParamChecks class (DG);
  * 12-Sep-2013 : Provide auto-detection for JFreeSVG and OrsonPDF 
  *               libraries (no compile time dependencies) (DG);
+ * 29-Aug-2014 : Localisation updates from patch attached to bug 1129 (SL);
  * 
  */
 
@@ -1722,16 +1724,18 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                 doSaveAs();
             }
             catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "I/O error occurred.", 
-                        "Save As PNG", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "I/O error occurred.",
+                        localizationResources.getString("Save_as_PNG"),
+                        JOptionPane.WARNING_MESSAGE);
             }
         }
         else if (command.equals(SAVE_AS_SVG_COMMAND)) {
             try {
                 saveAsSVG(null);
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "I/O error occurred.", 
-                        "Save As SVG", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "I/O error occurred.",
+                        localizationResources.getString("Save_as_SVG"),
+                        JOptionPane.WARNING_MESSAGE);
             }
         }
         else if (command.equals(SAVE_AS_PDF_COMMAND)) {
@@ -2752,7 +2756,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     String fileExists = localizationResources.getString(
                             "FILE_EXISTS_CONFIRM_OVERWRITE");
                     int response = JOptionPane.showConfirmDialog(this, 
-                            fileExists, "Save As SVG", 
+                            fileExists,
+                            localizationResources.getString("Save_as_SVG"),
                             JOptionPane.OK_CANCEL_OPTION);
                     if (response == JOptionPane.CANCEL_OPTION) {
                         file = null;
@@ -2871,7 +2876,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     String fileExists = localizationResources.getString(
                             "FILE_EXISTS_CONFIRM_OVERWRITE");
                     int response = JOptionPane.showConfirmDialog(this, 
-                            fileExists, "Save As PDF", 
+                            fileExists,
+                            localizationResources.getString("Save_as_PDF"),
                             JOptionPane.OK_CANCEL_OPTION);
                     if (response == JOptionPane.CANCEL_OPTION) {
                         file = null;
