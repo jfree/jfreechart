@@ -36,6 +36,7 @@
  *                   Kevin Frechette (for ISTI);
  *                   Nicolas Brodu;
  *                   Petr Kubanek (bug 1606205);
+ *                   Vladimir Shirokov (bug 986);
  *
  * Changes:
  * --------
@@ -94,6 +95,8 @@
  * 21-Dec-2011 : Apply patch 3447161 by Ulrich Voigt and Martin Hoeller (MH);
  * 21-Jul-2014 : Override isRangePannable() and setRangePannable() - motivated 
  *               by patch #304 by Ulrich Voigt (DG);
+ * 31-Aug-2014 : Fix range axis bounds (bug 986, patch by Vladimir 
+ *               Shirokov) (DG);
  */
 
 package org.jfree.chart.plot;
@@ -116,6 +119,8 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
+import org.jfree.data.general.DatasetChangeEvent;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.ObjectUtilities;
@@ -130,7 +135,7 @@ public class CombinedDomainXYPlot extends XYPlot
     /** For serialization. */
     private static final long serialVersionUID = -7765545541261907383L;
 
-    /** Storage for the subplot references. */
+    /** Storage for the subplot references (possibly empty but never null). */
     private List<XYPlot> subplots;
 
     /** The gap between subplots. */
@@ -234,10 +239,8 @@ public class CombinedDomainXYPlot extends XYPlot
     @Override
     public void setOrientation(PlotOrientation orientation) {
         super.setOrientation(orientation);
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            XYPlot plot = (XYPlot) iterator.next();
-            plot.setOrientation(orientation);
+        for (XYPlot p : this.subplots) {
+            p.setOrientation(orientation);
         }
     }
 
@@ -251,10 +254,8 @@ public class CombinedDomainXYPlot extends XYPlot
     public void setShadowGenerator(ShadowGenerator generator) {
         setNotify(false);
         super.setShadowGenerator(generator);
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            XYPlot plot = (XYPlot) iterator.next();
-            plot.setShadowGenerator(generator);
+        for (XYPlot p : this.subplots) {
+            p.setShadowGenerator(generator);
         }
         setNotify(true);
     }
@@ -274,13 +275,12 @@ public class CombinedDomainXYPlot extends XYPlot
      */
     @Override
     public Range getDataRange(ValueAxis axis) {
+        if (this.subplots == null) {
+            return null;
+        }
         Range result = null;
-        if (this.subplots != null) {
-            Iterator iterator = this.subplots.iterator();
-            while (iterator.hasNext()) {
-                XYPlot subplot = (XYPlot) iterator.next();
-                result = Range.combine(result, subplot.getDataRange(axis));
-            }
+        for (XYPlot p : this.subplots) {
+            result = Range.combine(result, p.getDataRange(axis));
         }
         return result;
     }
@@ -363,17 +363,12 @@ public class CombinedDomainXYPlot extends XYPlot
 
     /**
      * Returns the list of subplots.  The returned list may be empty, but is
-     * never <code>null</code>.
+     * never {@code null}.
      *
      * @return An unmodifiable list of subplots.
      */
     public List getSubplots() {
-        if (this.subplots != null) {
-            return Collections.unmodifiableList(this.subplots);
-        }
-        else {
-            return Collections.EMPTY_LIST;
-        }
+        return Collections.unmodifiableList(this.subplots);
     }
 
     /**
@@ -386,7 +381,7 @@ public class CombinedDomainXYPlot extends XYPlot
      */
     @Override
     protected AxisSpace calculateAxisSpace(Graphics2D g2,
-                                           Rectangle2D plotArea) {
+            Rectangle2D plotArea) {
 
         AxisSpace space = new AxisSpace();
         PlotOrientation orientation = getOrientation();
@@ -563,19 +558,16 @@ public class CombinedDomainXYPlot extends XYPlot
      */
     @Override
     public void zoomRangeAxes(double factor, PlotRenderingInfo state,
-                              Point2D source, boolean useAnchor) {
+            Point2D source, boolean useAnchor) {
         // delegate 'state' and 'source' argument checks...
         XYPlot subplot = findSubplot(state, source);
         if (subplot != null) {
             subplot.zoomRangeAxes(factor, state, source, useAnchor);
-        }
-        else {
+        } else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
-            Iterator iterator = getSubplots().iterator();
-            while (iterator.hasNext()) {
-                subplot = (XYPlot) iterator.next();
-                subplot.zoomRangeAxes(factor, state, source, useAnchor);
+            for (XYPlot p : this.subplots) {
+                p.zoomRangeAxes(factor, state, source, useAnchor);
             }
         }
     }
@@ -595,14 +587,11 @@ public class CombinedDomainXYPlot extends XYPlot
         XYPlot subplot = findSubplot(info, source);
         if (subplot != null) {
             subplot.zoomRangeAxes(lowerPercent, upperPercent, info, source);
-        }
-        else {
+        } else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
-            Iterator iterator = getSubplots().iterator();
-            while (iterator.hasNext()) {
-                subplot = (XYPlot) iterator.next();
-                subplot.zoomRangeAxes(lowerPercent, upperPercent, info, source);
+            for (XYPlot p : this.subplots) {
+                p.zoomRangeAxes(lowerPercent, upperPercent, info, source);
             }
         }
     }
@@ -673,10 +662,8 @@ public class CombinedDomainXYPlot extends XYPlot
         super.setRenderer(renderer);  // not strictly necessary, since the
                                       // renderer set for the
                                       // parent plot is not used
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            XYPlot plot = (XYPlot) iterator.next();
-            plot.setRenderer(renderer);
+        for (XYPlot p : this.subplots) {
+            p.setRenderer(renderer);
         }
     }
 
@@ -700,18 +687,16 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param space  the space.
      */
     protected void setFixedRangeAxisSpaceForSubplots(AxisSpace space) {
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            XYPlot plot = (XYPlot) iterator.next();
-            plot.setFixedRangeAxisSpace(space, false);
+        for (XYPlot p : this.subplots) {
+            p.setFixedRangeAxisSpace(space, false);
         }
     }
 
     /**
      * Handles a 'click' on the plot by updating the anchor values.
      *
-     * @param x  x-coordinate, where the click occured.
-     * @param y  y-coordinate, where the click occured.
+     * @param x  x-coordinate, where the click occurred.
+     * @param y  y-coordinate, where the click occurred.
      * @param info  object containing information about the plot dimensions.
      */
     @Override
@@ -722,6 +707,30 @@ public class CombinedDomainXYPlot extends XYPlot
                 XYPlot subplot = (XYPlot) this.subplots.get(i);
                 PlotRenderingInfo subplotInfo = info.getSubplotInfo(i);
                 subplot.handleClick(x, y, subplotInfo);
+            }
+        }
+    }
+
+    /**
+     * Receives notification of a change to the plot's dataset.
+     * <P>
+     * The axis ranges are updated if necessary.
+     *
+     * @param event  information about the event (not used here).
+     */
+    @Override
+    public void datasetChanged(DatasetChangeEvent event) {
+        super.datasetChanged(event);
+        if (this.subplots == null) {
+            return;  // this can happen during plot construction
+        }
+        XYDataset dataset = null;
+        if (event.getDataset() instanceof XYDataset) {
+            dataset = (XYDataset) event.getDataset();
+        }
+        for (XYPlot subplot : this.subplots) {
+            if (subplot.indexOf(dataset) >= 0) {
+                subplot.configureRangeAxes();
             }
         }
     }
