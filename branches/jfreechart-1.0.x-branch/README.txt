@@ -105,8 +105,9 @@ them all.
 --------------------
 6.  ANT BUILD SCRIPT
 --------------------
-An Ant build script (build.xml) is included in the distribution.  This
-is the same script that is used to create the JFreeChart distribution.
+An Ant build script (build.xml) is included in the distribution.  This builds
+JFreeChart for JDK/JRE 1.6 or later and *excludes* the JavaFX support classes.
+This is the same script that is used to create the JFreeChart distribution.
 
 For more information about Ant:
 
@@ -116,12 +117,16 @@ If you want to rebuild the JFreeChart jar file, we highly recommend that you
 use this script as it includes certain files (for example, .properties files)
 that you MUST have in the jar file for JFreeChart to function correctly.
 
+You can rebuild JFreechart including JavaFX support, for JDK/JRE 1.8 or later, 
+using the build-fx.xml script.
+
 -----------------
 7.  MAVEN POM.XML
 -----------------
 A Maven pom.xml is included in the distribution, and you can use this to
 build JFreeChart *without* JavaFX support.  If you want to include the JavaFX
-support classes, you'll need to modify the pom.xml file accordingly.
+support classes, you'll need to modify the pom.xml file accordingly (update
+the source level to 1.8 and remove the exclude from the maven-compiler-plugin).
 
 Both JFreeChart and JCommon are available on the Central Repository:
 
