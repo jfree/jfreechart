@@ -21,7 +21,6 @@
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
         <property name="jfreechart.version" value="1.0.20-pre" />
-        <property name="jfreechart-bundle-file" value="${jfreechart.name}-${jfreechart.version}-bundle.jar" />
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.23" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
@@ -323,33 +322,6 @@
 
     </target>
 
-  <target name="maven-bundle" depends="zip" >
-    <!-- make a temporary distribution directory -->
-    <mkdir dir="distribution"/>
-    <!-- copy across LICENCE -->
-    <copy file="licence-LGPL.txt" tofile="distribution/LICENSE.txt"/>
-
-    <filterchain id="version.filters">
-       <replacetokens>
-         <token key="VERSION" value="${jfreechart.version}"/>
-         <token key="JCOMMON.VERSION" value="${jcommon.version}"/>
-       </replacetokens>
-    </filterchain>
-    <copy file="pom.xml" tofile="distribution/pom.xml">
-    <filterchain refid="version.filters"/>
-    </copy>
-
-    <!-- copy across runtime jar file -->
-    <copy file="lib/${jfreechart.name}-${jfreechart.version}.jar" tofile="distribution/${jfreechart.name}-${jfreechart.version}.jar"/>
-
-    <!-- make the jar -->
-    <jar jarfile="${jfreechart-bundle-file}" basedir="distribution"/>
-
-    <!-- delete the temporary distribution directory -->
-    <delete dir="distribution"/>
-  </target>
-
-
     <!-- COMPILE THE JUNIT TESTS. -->
     <target name="compile-tests"
             depends="compile,compile-experimental"
@@ -410,7 +382,7 @@
 
     <!-- ALL -->
     <target name="all"
-            depends="compile,compile-experimental,zip-javadocs,zip,targz,maven-bundle,source-jar"
+            depends="compile,compile-experimental,zip-javadocs,zip,targz,source-jar"
             description="Compiles JFreeChart, builds the jar files, generates the Javadoc HTML pages and creates distribution files (.zip and .tar.gz).">
 
         <!-- delete the temporary distribution directory -->
