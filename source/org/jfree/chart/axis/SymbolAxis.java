@@ -77,6 +77,7 @@
  * 15-Aug-2008 : Use alternate grid band paint when drawing (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
  * 19-Mar-2014 : Fix gridbands (bug #1056) (DG);
+ * 08-Sep-2014 : Update Javadocs for grid bands (DG):
  *
  */
 
@@ -163,7 +164,6 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         this.gridBandAlternatePaint = DEFAULT_GRID_BAND_ALTERNATE_PAINT;
         setAutoTickUnitSelection(false, false);
         setAutoRangeStickyZero(false);
-
     }
 
     /**
@@ -178,11 +178,10 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the grid bands are showing, and
-     * <code>false</code> otherwise.
+     * Returns the flag that controls whether or not grid bands are drawn for 
+     * the axis.  The default value is {@code true}. 
      *
-     * @return <code>true</code> if the grid bands are showing, and
-     *         <code>false</code> otherwise.
+     * @return A boolean.
      *
      * @see #setGridBandsVisible(boolean)
      */
@@ -191,8 +190,12 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
-     * Sets the visibility of the grid bands and notifies registered
-     * listeners that the axis has been modified.
+     * Sets the flag that controls whether or not grid bands are drawn for this
+     * axis and notifies registered listeners that the axis has been modified.
+     * Each band is the area between two adjacent gridlines 
+     * running perpendicular to the axis.  When the bands are drawn they are 
+     * filled with the colors {@link #getGridBandPaint()} and 
+     * {@link #getGridBandAlternatePaint()} in an alternating sequence.
      *
      * @param flag  the new setting.
      *
@@ -204,9 +207,12 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
-     * Returns the paint used to color the grid bands.
+     * Returns the paint used to color grid bands (two colors are used
+     * alternately, the other is returned by 
+     * {@link #getGridBandAlternatePaint()}).  The default value is
+     * {@link #DEFAULT_GRID_BAND_PAINT}.
      *
-     * @return The grid band paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setGridBandPaint(Paint)
      * @see #isGridBandsVisible()
@@ -216,10 +222,11 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
-     * Sets the grid band paint and sends an {@link AxisChangeEvent} to
-     * all registered listeners.
+     * Sets the grid band paint and notifies registered listeners that the
+     * axis has been changed.  See the {@link #setGridBandsVisible(boolean)}
+     * method for more information about grid bands.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getGridBandPaint()
      */
@@ -230,12 +237,14 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
-     * Returns the paint used for alternate grid bands.
+     * Returns the second paint used to color grid bands (two colors are used
+     * alternately, the other is returned by {@link #getGridBandPaint()}).  
+     * The default value is {@link #DEFAULT_GRID_BAND_ALTERNATE_PAINT} 
+     * (transparent).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setGridBandAlternatePaint(Paint)
-     * @see #getGridBandPaint()
      *
      * @since 1.0.7
      */
@@ -244,10 +253,11 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
-     * Sets the paint used for alternate grid bands and sends a
-     * {@link AxisChangeEvent} to all registered listeners.
+     * Sets the grid band paint and notifies registered listeners that the
+     * axis has been changed.  See the {@link #setGridBandsVisible(boolean)}
+     * method for more information about grid bands.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getGridBandAlternatePaint()
      * @see #setGridBandPaint(Paint)
@@ -306,18 +316,17 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     }
 
     /**
-     * Draws the grid bands.  Alternate bands are colored using
-     * <CODE>gridBandPaint</CODE> (<CODE>DEFAULT_GRID_BAND_PAINT</CODE> by
-     * default).
+     * Draws the grid bands (alternate bands are colored using
+     * {@link #getGridBandPaint()} and {@link #getGridBandAlternatePaint()}.
      *
-     * @param g2  the graphics target (<code>null</code> not permitted).
+     * @param g2  the graphics target ({@code null} not permitted).
      * @param plotArea  the area within which the plot is drawn 
-     *     (<code>null</code> not permitted).
+     *     ({@code null} not permitted).
      * @param dataArea  the data area to which the axes are aligned 
-     *     (<code>null</code> not permitted).
-     * @param edge  the edge to which the axis is aligned (<code>null</code> not
+     *     ({@code null} not permitted).
+     * @param edge  the edge to which the axis is aligned ({@code null} not
      *     permitted).
-     * @param ticks  the ticks (<code>null</code> not permitted).
+     * @param ticks  the ticks ({@code null} not permitted).
      */
     protected void drawGridBands(Graphics2D g2, Rectangle2D plotArea,
             Rectangle2D dataArea, RectangleEdge edge, List ticks) {
@@ -335,15 +344,15 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * Draws the grid bands for the axis when it is at the top or bottom of
      * the plot.
      *
-     * @param g2  the graphics target (<code>null</code> not permitted).
+     * @param g2  the graphics target ({@code null} not permitted).
      * @param plotArea  the area within which the plot is drawn (not used here).
      * @param dataArea  the area for the data (to which the axes are aligned,
-     *     <code>null</code> not permitted).
+     *         {@code null} not permitted).
      * @param firstGridBandIsDark  True: the first grid band takes the
-     *                             color of <CODE>gridBandPaint</CODE>.
+     *                             color of {@code gridBandPaint}.
      *                             False: the second grid band takes the
-     *                             color of <CODE>gridBandPaint</CODE>.
-     * @param ticks  a list of ticks (<code>null</code> not permitted).
+     *                             color of {@code gridBandPaint}.
+     * @param ticks  a list of ticks ({@code null} not permitted).
      */
     protected void drawGridBandsHorizontal(Graphics2D g2,
             Rectangle2D plotArea, Rectangle2D dataArea, 
@@ -371,8 +380,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                     RectangleEdge.BOTTOM);
             if (currentGridBandIsDark) {
                 g2.setPaint(this.gridBandPaint);
-            }
-            else {
+            } else {
                 g2.setPaint(this.gridBandAlternatePaint);
             }
             band = new Rectangle2D.Double(Math.min(xx1, xx2), 
@@ -387,15 +395,15 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * Draws the grid bands for an axis that is aligned to the left or
      * right of the data area (that is, a vertical axis).
      *
-     * @param g2  the graphics target (<code>null</code> not permitted).
+     * @param g2  the graphics target ({@code null} not permitted).
      * @param plotArea  the area within which the plot is drawn (not used here).
      * @param dataArea  the area for the data (to which the axes are aligned,
-     *     <code>null</code> not permitted).
+     *         {@code null} not permitted).
      * @param firstGridBandIsDark  True: the first grid band takes the
-     *                             color of <CODE>gridBandPaint</CODE>.
+     *                             color of {@code gridBandPaint}.
      *                             False: the second grid band takes the
-     *                             color of <CODE>gridBandPaint</CODE>.
-     * @param ticks  a list of ticks (<code>null</code> not permitted).
+     *                             color of {@code gridBandPaint}.
+     * @param ticks  a list of ticks ({@code null} not permitted).
      */
     protected void drawGridBandsVertical(Graphics2D g2, Rectangle2D plotArea,
             Rectangle2D dataArea, boolean firstGridBandIsDark, 
@@ -423,8 +431,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                     RectangleEdge.LEFT);
             if (currentGridBandIsDark) {
                 g2.setPaint(this.gridBandPaint);
-            }
-            else {
+            } else {
                 g2.setPaint(this.gridBandAlternatePaint);
             }
             band = new Rectangle2D.Double(xx + outlineStrokeWidth, 
