@@ -119,7 +119,7 @@ public class ChartViewer extends Control implements Skinnable,
     }
     
     @Override
-    protected String getUserAgentStylesheet() {
+    public String getUserAgentStylesheet() {
         return ChartViewer.class.getResource("chart-viewer.css")
                 .toExternalForm();
     }
