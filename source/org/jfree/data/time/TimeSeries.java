@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * TimeSeries.java
  * ---------------
- * (C) Copyright 2001-2014, by Object Refinery Limited.
+ * (C) Copyright 2001-2015, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bryan Scott;
@@ -85,7 +85,8 @@
  * 03-Dec-2011 : Fixed bug 3446965 which affects the y-range calculation for 
  *               the series (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
- * 
+ * 06-Sep-2015 : Fix bug with Double.NaN values and findRangeBounds() (DG);
+ *
  */
 
 package org.jfree.data.time;
@@ -335,14 +336,13 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the range of y-values in the time series.  Any <code>null</code> 
-     * data values in the series will be ignored (except for the special case 
-     * where all data values are <code>null</code>, in which case the return 
-     * value is <code>Range(Double.NaN, Double.NaN)</code>).  If the time 
-     * series contains no items, this method will return <code>null</code>.
+     * Returns the range of y-values in the time series.  Any {@code null} or 
+     * {@code Double.NaN} data values in the series will be ignored (except for
+     * the special case where all data values are {@code null}, in which case 
+     * the return value is {@code Range(Double.NaN, Double.NaN)}).  If the time 
+     * series contains no items, this method will return {@code null}.
      * 
-     * @return The range of y-values in the time series (possibly 
-     *     <code>null</code>).
+     * @return The range of y-values in the time series (possibly {@code null}).
      * 
      * @since 1.0.18
      */
@@ -356,12 +356,11 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     /**
      * Returns the range of y-values in the time series that fall within 
      * the specified range of x-values.  This is equivalent to
-     * <code>findValueRange(xRange, TimePeriodAnchor.MIDDLE, timeZone)</code>.
+     * {@code findValueRange(xRange, TimePeriodAnchor.MIDDLE, timeZone)}.
      * 
-     * @param xRange  the subrange of x-values (<code>null</code> not 
-     *     permitted).
+     * @param xRange  the subrange of x-values ({@code null} not permitted).
      * @param timeZone  the time zone used to convert x-values to time periods
-     *     (<code>null</code> not permitted).
+     *     ({@code null} not permitted).
      * 
      * @return The range. 
      * 
@@ -376,11 +375,11 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * x-values (where the x-values are interpreted as milliseconds since the
      * epoch and converted to time periods using the specified timezone).
      * 
-     * @param xRange  the subset of x-values to use (<code>null</code> not
+     * @param xRange  the subset of x-values to use ({@code null} not
      *     permitted).
-     * @param xAnchor  the anchor point for the x-values (<code>null</code>
+     * @param xAnchor  the anchor point for the x-values ({@code null}
      *     not permitted).
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      * 
      * @return The range of y-values.
      * 
@@ -406,8 +405,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
                 Number n = item.getValue();
                 if (n != null) {
                     double v = n.doubleValue();
-                    lowY = Math.min(lowY, v);
-                    highY = Math.max(highY, v);
+                    lowY = minIgnoreNaN(lowY, v);
+                    highY = maxIgnoreNaN(highY, v);
                 }
             }
         }
@@ -423,8 +422,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
 
     /**
      * Returns the smallest y-value in the series, ignoring any 
-     * <code>null</code> and <code>Double.NaN</code> values.  This method 
-     * returns <code>Double.NaN</code> if there is no smallest y-value (for 
+     * {@code null} and {@code Double.NaN} values.  This method 
+     * returns {@code Double.NaN} if there is no smallest y-value (for 
      * example, when the series is empty).
      *
      * @return The smallest y-value.
@@ -439,8 +438,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
 
     /**
      * Returns the largest y-value in the series, ignoring any 
-     * <code>null</code> and <code>Double.NaN</code> values.  This method 
-     * returns <code>Double.NaN</code> if there is no largest y-value
+     * {@code null} and {@code Double.NaN} values.  This method 
+     * returns {@code Double.NaN} if there is no largest y-value
      * (for example, when the series is empty).
      *
      * @return The largest y-value.

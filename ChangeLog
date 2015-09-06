@@ -1,3 +1,14 @@
+2015-09-06  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/data/time/TimeSeries.java
+    (findValueRange): Check for Double.NaN.
+
+2014-08-31  David Gilbert  <david.gilbert@object-refinery.com>
+
+    (Bug 986 fix from Vladimir Shirokov):
+    * org/jfree/chart/plot/CombinedDomainXYPlot.java
+    (datasetChanged): New method override.
+
 2014-08-29  David Gilbert  <david.gilbert@object-refinery.com>
 
     (Patch from Simon Legner attached to bug 1129)
