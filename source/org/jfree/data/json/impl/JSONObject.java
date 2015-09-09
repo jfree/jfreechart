@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -44,7 +44,7 @@ public class JSONObject extends HashMap implements Map, JSONAware,
      * <code>JSONAware</code> or <code>JSONStreamAware</code> specific 
      * behaviours will be ignored at this top level.
      * 
-     * @see com.orsoncharts.util.json.JSONValue#writeJSONString(Object, Writer)
+     * @see org.jfree.data.json.impl.JSONValue#writeJSONString(Object, Writer)
      * 
      * @param map  the map to write (<code>null</code> permitted).
      * @param out  the output writer (<code>null</code> not permitted).
@@ -94,7 +94,7 @@ public class JSONObject extends HashMap implements Map, JSONAware,
      * If this map is also a {@link JSONAware}, <code>JSONAware</code> specific 
      * behaviours will be omitted at this top level.
      * 
-     * @see com.orsoncharts.util.json.JSONValue#toJSONString(Object)
+     * @see org.jfree.data.json.impl.JSONValue#toJSONString(Object)
      * 
      * @param map  the map (<code>null</code> permitted).
      * 
