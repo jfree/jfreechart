@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -125,8 +125,8 @@ public class JSONValue {
      * "this" as the first parameter, use JSONObject.writeJSONString(Map, 
      * Writer) or JSONArray.writeJSONString(List, Writer) instead. 
      * 
-     * @see com.orsoncharts.util.json.JSONObject#writeJSONString(Map, Writer)
-     * @see com.orsoncharts.util.json.JSONArray#writeJSONString(List, Writer)
+     * @see org.jfree.data.json.impl.JSONObject#writeJSONString(Map, Writer)
+     * @see org.jfree.data.json.impl.JSONArray#writeJSONString(List, Writer)
      * 
      * @param value  the value.
      * @param out  the output writer.
@@ -210,8 +210,8 @@ public class JSONValue {
      * "this" as the parameter, use JSONObject.toJSONString(Map) or 
      * JSONArray.toJSONString(List) instead. 
      * 
-     * @see com.orsoncharts.util.json.JSONObject#toJSONString(Map)
-     * @see com.orsoncharts.util.json.JSONArray#toJSONString(List)
+     * @see org.jfree.data.json.impl.JSONObject#toJSONString(Map)
+     * @see org.jfree.data.json.impl.JSONArray#toJSONString(List)
      * 
      * @param value the value.
      * @return JSON text, or "null" if value is null or it's an NaN or an INF 

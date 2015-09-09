@@ -49,7 +49,7 @@ public class JSONArray extends ArrayList implements List, JSONAware,
      * <code>JSONStreamAware</code> and <code>JSONAware</code> specific 
      * behaviours will be ignored at this top level.
      * 
-     * @see org.jfree.data.json.JSONValue#writeJSONString(Object, Writer)
+     * @see org.jfree.data.json.impl.JSONValue#writeJSONString(Object, Writer)
      * 
      * @param list  the list (<code>null</code> permitted).
      * @param out  the output writer (<code>null</code> not permitted).
@@ -101,7 +101,7 @@ public class JSONArray extends ArrayList implements List, JSONAware,
      * If this list is also a {@link JSONAware}, {@link JSONAware} specific 
      * behaviours will be omitted at this top level.
      * 
-     * @see org.jfree.data.json.JSONValue#toJSONString(Object)
+     * @see org.jfree.data.json.impl.JSONValue#toJSONString(Object)
      * 
      * @param list  the list (<code>null</code> permitted).
      * 
