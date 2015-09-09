@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -120,7 +120,7 @@ public class JSONUtils {
      * Returns a string containing the data in JSON format.  The format is...
      * <br><br>
      * Note that this method can be used with instances of 
-     * {@link CategorDataset}.
+     * {@link CategoryDataset}.
      * 
      * @param data  the data ({@code null} not permitted).
      * 
