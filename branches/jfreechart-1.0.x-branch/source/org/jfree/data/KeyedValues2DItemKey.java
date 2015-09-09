@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -45,7 +45,7 @@ import org.jfree.chart.util.ParamChecks;
 import org.jfree.util.ObjectUtilities;
 
 /**
- * An object that references one data item in a {@link KeyedValues3D} data
+ * An object that references one data item in a {@link KeyedValues2D} data
  * structure.  Instances of this class are immutable (subject to the caller
  * using series, row and column keys that are immutable).
  * 
@@ -64,8 +64,8 @@ public class KeyedValues2DItemKey<R extends Comparable<R>,
     /**
      * Creates a new instance.
      * 
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      */
     public KeyedValues2DItemKey(R rowKey, C columnKey) {
         ParamChecks.nullNotPermitted(rowKey, "rowKey");
@@ -77,7 +77,7 @@ public class KeyedValues2DItemKey<R extends Comparable<R>,
     /**
      * Returns the row key.
      * 
-     * @return The row key (never <code>null</code>).
+     * @return The row key (never {@code null}).
      */
     public R getRowKey() {
         return this.rowKey;
@@ -86,7 +86,7 @@ public class KeyedValues2DItemKey<R extends Comparable<R>,
     /**
      * Returns the column key.
      * 
-     * @return The column key (never <code>null</code>). 
+     * @return The column key (never {@code null}).
      */
     public C getColumnKey() {
         return this.columnKey;
@@ -104,7 +104,7 @@ public class KeyedValues2DItemKey<R extends Comparable<R>,
     /**
      * Tests this key for equality with an arbitrary object.
      * 
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      * 
      * @return A boolean. 
      */
@@ -155,4 +155,3 @@ public class KeyedValues2DItemKey<R extends Comparable<R>,
     }
 
 }
-
