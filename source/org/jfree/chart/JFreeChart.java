@@ -487,7 +487,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * Returns the flag that controls whether or not rendering hints 
      * ({@link ChartHints#KEY_BEGIN_ELEMENT} and 
      * {@link ChartHints#KEY_END_ELEMENT}) that identify chart elements are 
-     * added during rendering.  The default value is {@link false}.
+     * added during rendering.  The default value is {@code false}.
      * 
      * @return A boolean.
      * 
