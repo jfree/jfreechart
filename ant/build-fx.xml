@@ -25,7 +25,7 @@
         <property name="jcommon.version" value="1.0.23" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="jfreesvg.name" value="jfreesvg" />
-        <property name="jfreesvg.version" value="2.1" />
+        <property name="jfreesvg.version" value="3.0" />
         <property name="orsonpdf.name" value="orsonpdf" />
         <property name="orsonpdf.version" value="1.6-eval" />
         <property name="orsoncharts.version" value="1.4-eval" />
