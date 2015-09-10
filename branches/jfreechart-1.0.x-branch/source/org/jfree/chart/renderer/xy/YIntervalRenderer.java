@@ -242,9 +242,10 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
         }
 
         // add an entity for the item...
-        if (entities != null) {
-            addEntity(entities, line.getBounds(), dataset, series, item, 0.0,
-                    0.0);
+        Shape hotspot = ShapeUtilities.createLineRegion(line, 4.0f);
+        if (entities != null && hotspot.intersects(dataArea)) {
+            addEntity(entities, hotspot, dataset, series, item, xx, 
+                    (yyHigh + yyLow) / 2);
         }
 
     }
