@@ -1,7 +1,21 @@
+2015-09-11  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/fx/FXGraphics2D.java
+    Updated to match latest code on GitHub,
+    * org/jfree/chart/fx/FXGraphicsConfiguration.java
+    New file,
+    * org/jfree/chart/fx/FXGraphicsDevice.java
+    New file.
+
+2015-09-10  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/labels/IntervalXYToolTipGenerator.java
+    New file.
+
 2015-09-10  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/renderer/xy/YIntervalRenderer.java
-    (drawItem): Check item visibility.
+    (drawItem): Check item visibility and enlarge entity bounds.
 
 2015-09-09  David Gilbert  <david.gilbert@object-refinery.com>
 
