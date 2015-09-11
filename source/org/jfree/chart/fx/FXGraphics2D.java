@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * FXGraphics2D.java
  * -----------------
- * (C) Copyright 2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014, 2015 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,8 +35,8 @@
  * Changes:
  * --------
  * 20-Jun-2014 : Version 1 (DG);
+ *
  */
-
 
 package org.jfree.chart.fx;
 
@@ -81,6 +81,8 @@ import java.awt.image.ImageObserver;
 import java.awt.image.RenderedImage;
 import java.awt.image.WritableRaster;
 import java.awt.image.renderable.RenderableImage;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.AttributedCharacterIterator;
 import java.util.Hashtable;
 import java.util.Map;
@@ -113,7 +115,7 @@ public class FXGraphics2D extends Graphics2D {
     /** The number of times the graphics state has been saved. */
     private int saveCount = 0;
     
-    /** A flag to permit clipping to be disabled (since it is buggy). */
+    /** A flag to permit clipping to be disabled (because...JavaFX bugs). */
     private boolean clippingDisabled = false;
     
     /** Rendering hints. */
@@ -121,8 +123,10 @@ public class FXGraphics2D extends Graphics2D {
     
     private Shape clip;
     
+    /** Stores the AWT Paint object for get/setPaint(). */
     private Paint paint = Color.BLACK;
     
+    /** Stores the AWT Color object for get/setColor(). */
     private Color awtColor = Color.BLACK;
     
     private Composite composite = AlphaComposite.getInstance(
@@ -183,11 +187,24 @@ public class FXGraphics2D extends Graphics2D {
             BufferedImage.TYPE_INT_RGB);
 
     /**
+     * A Graphics2D instance for the hidden image that is used for font
+     * metrics.  Used in the getFontMetrics(Font f) method.
+     */
+    private final Graphics2D fmImageG2 = fmImage.createGraphics();
+
+    /** 
+     * The device configuration (this is lazily instantiated in the 
+     * getDeviceConfiguration() method).
+     */
+    private GraphicsConfiguration deviceConfiguration;
+    
+    /**
      * Throws an {@code IllegalArgumentException} if {@code arg} is
      * {@code null}.
      * 
      * @param arg  the argument to check.
-     * @param name  the name of the
+     * @param name  the name of the argument (to display in the exception 
+     *         message).
      */
     private static void nullNotPermitted(Object arg, String name) {
         if (arg == null) {
@@ -267,13 +284,19 @@ public class FXGraphics2D extends Graphics2D {
     }
     
     /**
-     * This method is not implemented yet.
-     * @return {@code null}.
+     * Returns the device configuration.
+     * 
+     * @return The device configuration (never {@code null}).
      */
     @Override
     public GraphicsConfiguration getDeviceConfiguration() {
-        // FIXME
-        return null;
+        if (this.deviceConfiguration == null) {
+            int width = (int) this.gc.getCanvas().getWidth();
+            int height = (int) this.gc.getCanvas().getHeight();
+            this.deviceConfiguration = new FXGraphicsConfiguration(width,
+                    height);
+        }
+        return this.deviceConfiguration;
     }
 
     /**
@@ -388,6 +411,9 @@ public class FXGraphics2D extends Graphics2D {
     /**
      * Returns the foreground color.  This method exists for backwards
      * compatibility in AWT, you should use the {@link #getPaint()} method.
+     * This attribute is updated by the {@link #setColor(java.awt.Color)}
+     * method, and also by the {@link #setPaint(java.awt.Paint)} method if
+     * a {@code Color} instance is passed to the method.
      * 
      * @return The foreground color (never {@code null}).
      * 
@@ -562,6 +588,66 @@ public class FXGraphics2D extends Graphics2D {
         }
     }
     
+    private double[] floatToDoubleArray(float[] f) {
+        if (f == null) {
+            return null;
+        }
+        double[] d = new double[f.length];
+        for (int i = 0; i < f.length; i++) {
+            d[i] = (double) f[i];
+        }
+        return d;
+    }
+
+    /**
+     * A utility method that calls {@code GraphicsContext.setLineDashes()} 
+     * using reflection (since this method is only available in 8u40).  On
+     * runtimes where the method is not available, this method will do nothing.
+     * 
+     * @param gc  the graphics context ({@code null} permitted).
+     * @param dashes  the dashes.
+     */
+    private void setLineDashes(GraphicsContext gc, double... dashes) {
+        if (dashes == null) {
+            dashes = new double[] { 0.0 };
+        }
+        try {
+            Method m = GraphicsContext.class.getMethod("setLineDashes", 
+                    double[].class);
+            try {
+                m.invoke(gc, dashes);
+            } catch (IllegalAccessException | IllegalArgumentException 
+                    | InvocationTargetException e) {
+                // ignore 
+            }
+        } catch (NoSuchMethodException | SecurityException e) {
+            // ignore
+        }
+    }
+    
+    /**
+     * A utility method that calls {@code GraphicsContext.setLineDashOffset()} 
+     * using reflection (since this method is only available in 8u40).  On
+     * runtimes where the method is not available, this method will do nothing.
+     * 
+     * @param gc  the graphics context ({@code null} not permitted).
+     * @param dashes  the dashes.
+     */
+    private void setLineDashOffset(GraphicsContext gc, double dashOffset) {
+        try {
+            Method m = GraphicsContext.class.getMethod("setLineDashOffset", 
+                   double.class);
+            try {
+                m.invoke(gc, dashOffset);
+            } catch (IllegalAccessException | IllegalArgumentException 
+                    | InvocationTargetException e) {
+                // ignore 
+            }
+        } catch (NoSuchMethodException | SecurityException e) {
+            // ignore
+        }
+    }
+    
     /**
      * Returns the current value for the specified hint.  Note that all hints
      * are currently ignored in this implementation.
@@ -695,13 +781,14 @@ public class FXGraphics2D extends Graphics2D {
         }
     }
 
+    private double[] coords = new double[6];
+    
     /**
      * Maps a shape to a path in the graphics context. 
      * 
      * @param s  the shape ({@code null} not permitted).
      */
     private void shapeToPath(Shape s) {
-        double[] coords = new double[6];
         this.gc.beginPath();
         PathIterator iterator = s.getPathIterator(null);
         while (!iterator.isDone()) {
@@ -1143,7 +1230,7 @@ public class FXGraphics2D extends Graphics2D {
         }
         // null is handled fine here...
         this.clip = this.transform.createTransformedShape(shape);
-        if (clip != null) {
+        if (clip != null && !this.clippingDisabled) {
             this.gc.save(); 
             this.saveCount++;
             shapeToPath(shape);
@@ -1508,8 +1595,8 @@ public class FXGraphics2D extends Graphics2D {
      * @return {@code true} if the image is drawn. 
      */
     @Override
-    public boolean drawImage(final Image img, int x, int y, int width, 
-            int height, ImageObserver observer) {
+    public boolean drawImage(final Image img, int x, int y, 
+            int width, int height, ImageObserver observer) {
         final BufferedImage buffered;
         if (img instanceof BufferedImage) {
             buffered = (BufferedImage) img;
