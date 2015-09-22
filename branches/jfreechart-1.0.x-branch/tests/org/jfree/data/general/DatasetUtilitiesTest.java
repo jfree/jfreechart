@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * DatasetUtilitiesTest.java
  * -------------------------
- * (C) Copyright 2003-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2015, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -170,6 +170,27 @@ public class DatasetUtilitiesTest {
         Range r = DatasetUtilities.findDomainBounds(dataset, false);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(3.0, r.getUpperBound(), EPSILON);
+    }
+
+    /**
+     * This test checks that the correct values are returned if the x and
+     * y values fall outside the intervals.
+     */
+    @Test
+    public void testFindDomainBounds4() {
+        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        double[] x1 = new double[] {0.8, 3.2, 3.0};
+        double[] x1Start = new double[] {0.9, 1.9, 2.9};
+        double[] x1End = new double[] {1.1, 2.1, 3.1};
+        double[] y1 = new double[] {4.0, 5.0, 6.0};
+        double[] y1Start = new double[] {1.09, 2.09, 3.09};
+        double[] y1End = new double[] {1.11, 2.11, 3.11};
+        double[][] data1 = new double[][] {x1, x1Start, x1End, y1, y1Start,
+                y1End};
+        dataset.addSeries("S1", data1);
+        Range r = DatasetUtilities.findDomainBounds(dataset);
+        assertEquals(0.8, r.getLowerBound(), EPSILON);
+        assertEquals(3.2, r.getUpperBound(), EPSILON);
     }
 
     /**
@@ -1037,6 +1058,50 @@ public class DatasetUtilitiesTest {
         dataset.addSeries(s2);
 
         return dataset;
+    }
+
+    /**
+     * This test checks that the correct values are returned if the x-values 
+     * fall outside the intervals (it is not required that they do).
+     */
+    @Test
+    public void testIterateToFindDomainBounds_IntervalXYDataset() {
+        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        double[] x1 = new double[] {0.8, 3.2, 3.0};
+        double[] x1Start = new double[] {0.9, 1.9, 2.9};
+        double[] x1End = new double[] {1.1, 2.1, 3.1};
+        double[] y1 = new double[] {4.0, 5.0, 6.0};
+        double[] y1Start = new double[] {1.09, 2.09, 3.09};
+        double[] y1End = new double[] {1.11, 2.11, 3.11};
+        double[][] data1 = new double[][] {x1, x1Start, x1End, y1, y1Start,
+                y1End};
+        dataset.addSeries("S1", data1);
+        Range r = DatasetUtilities.iterateToFindDomainBounds(dataset, 
+                Arrays.asList("S1"), true);
+        assertEquals(0.8, r.getLowerBound(), EPSILON);
+        assertEquals(3.2, r.getUpperBound(), EPSILON);
+    }
+
+    /**
+     * This test checks that the correct values are returned if the y-values
+     * fall outside the intervals (it is not required that they do).
+     */
+    @Test
+    public void testIterateToFindRangeBounds_IntervalXYDataset() {
+        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        double[] x1 = new double[] {0.8, 3.2, 3.0};
+        double[] x1Start = new double[] {0.9, 1.9, 2.9};
+        double[] x1End = new double[] {1.1, 2.1, 3.1};
+        double[] y1 = new double[] {4.0, -5.0, 6.0};
+        double[] y1Start = new double[] {1.09, 2.09, 3.09};
+        double[] y1End = new double[] {1.11, 2.11, 3.11};
+        double[][] data1 = new double[][] {x1, x1Start, x1End, y1, y1Start,
+                y1End};
+        dataset.addSeries("S1", data1);
+        Range r = DatasetUtilities.iterateToFindRangeBounds(dataset,
+                Arrays.asList("S1"), new Range(0.0, 4.0), true);
+        assertEquals(-5.0, r.getLowerBound(), EPSILON);
+        assertEquals(6.0, r.getUpperBound(), EPSILON);
     }
 
     /**

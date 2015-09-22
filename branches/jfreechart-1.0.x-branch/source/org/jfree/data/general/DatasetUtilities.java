@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * DatasetUtilities.java
  * ---------------------
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski (bug fix);
@@ -123,7 +123,8 @@
  * 10-Sep-2009 : Fix bug 2849731 for IntervalCategoryDataset (DG);
  * 16-Feb-2010 : Patch 2952086 - find z-bounds (MH);
  * 02-Jul-2013 : Use ParamChecks (DG);
- * 
+ * 22-Sep-2015 : Fix bugs in iterateToFindDomainBounds() and 
+ *               iterateToFindRangeBounds() (DG);
  */
 
 package org.jfree.data.general;
@@ -173,10 +174,10 @@ public final class DatasetUtilities {
 
     /**
      * Calculates the total of all the values in a {@link PieDataset}.  If
-     * the dataset contains negative or <code>null</code> values, they are
+     * the dataset contains negative or {@code null} values, they are
      * ignored.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      *
      * @return The total.
      */
@@ -205,13 +206,13 @@ public final class DatasetUtilities {
      * Creates a pie dataset from a table dataset by taking all the values
      * for a single row.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param rowKey  the row key.
      *
      * @return A pie dataset.
      */
     public static PieDataset createPieDatasetForRow(CategoryDataset dataset,
-                                                    Comparable rowKey) {
+            Comparable rowKey) {
         int row = dataset.getRowIndex(rowKey);
         return createPieDatasetForRow(dataset, row);
     }
@@ -220,13 +221,13 @@ public final class DatasetUtilities {
      * Creates a pie dataset from a table dataset by taking all the values
      * for a single row.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row (zero-based index).
      *
      * @return A pie dataset.
      */
     public static PieDataset createPieDatasetForRow(CategoryDataset dataset,
-                                                    int row) {
+            int row) {
         DefaultPieDataset result = new DefaultPieDataset();
         int columnCount = dataset.getColumnCount();
         for (int current = 0; current < columnCount; current++) {
@@ -240,13 +241,13 @@ public final class DatasetUtilities {
      * Creates a pie dataset from a table dataset by taking all the values
      * for a single column.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param columnKey  the column key.
      *
      * @return A pie dataset.
      */
     public static PieDataset createPieDatasetForColumn(CategoryDataset dataset,
-                                                       Comparable columnKey) {
+            Comparable columnKey) {
         int column = dataset.getColumnIndex(columnKey);
         return createPieDatasetForColumn(dataset, column);
     }
@@ -255,13 +256,13 @@ public final class DatasetUtilities {
      * Creates a pie dataset from a {@link CategoryDataset} by taking all the
      * values for a single column.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param column  the column (zero-based index).
      *
      * @return A pie dataset.
      */
     public static PieDataset createPieDatasetForColumn(CategoryDataset dataset,
-                                                       int column) {
+            int column) {
         DefaultPieDataset result = new DefaultPieDataset();
         int rowCount = dataset.getRowCount();
         for (int i = 0; i < rowCount; i++) {
@@ -277,8 +278,8 @@ public final class DatasetUtilities {
      * than the <code>percentThreshold</code>) into a single item with the
      * key "Other".
      *
-     * @param source  the source dataset (<code>null</code> not permitted).
-     * @param key  a new key for the aggregated items (<code>null</code> not
+     * @param source  the source dataset ({@code null} not permitted).
+     * @param key  a new key for the aggregated items ({@code null} not
      *             permitted).
      * @param minimumPercent  the percent threshold.
      *
@@ -297,7 +298,7 @@ public final class DatasetUtilities {
      * aggregated items are assigned the specified key.  Aggregation only
      * occurs if there are at least <code>minItems</code> items to aggregate.
      *
-     * @param source  the source dataset (<code>null</code> not permitted).
+     * @param source  the source dataset ({@code null} not permitted).
      * @param key  the key to represent the aggregated items.
      * @param minimumPercent  the percent threshold (ten percent is 0.10).
      * @param minItems  only aggregate low values if there are at least this
@@ -415,8 +416,8 @@ public final class DatasetUtilities {
      * <p>
      * Row and column keys are taken from the supplied arrays.
      *
-     * @param rowKeys  the row keys (<code>null</code> not permitted).
-     * @param columnKeys  the column keys (<code>null</code> not permitted).
+     * @param rowKeys  the row keys ({@code null} not permitted).
+     * @param columnKeys  the column keys ({@code null} not permitted).
      * @param data  the data.
      *
      * @return The dataset.
@@ -465,8 +466,8 @@ public final class DatasetUtilities {
      * Creates a {@link CategoryDataset} by copying the data from the supplied
      * {@link KeyedValues} instance.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param rowData  the row data (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param rowData  the row data ({@code null} not permitted).
      *
      * @return A dataset.
      */
@@ -487,12 +488,12 @@ public final class DatasetUtilities {
      * Creates an {@link XYDataset} by sampling the specified function over a
      * fixed range.
      *
-     * @param f  the function (<code>null</code> not permitted).
+     * @param f  the function ({@code null} not permitted).
      * @param start  the start value for the range.
      * @param end  the end value for the range.
      * @param samples  the number of sample points (must be &gt; 1).
-     * @param seriesKey  the key to give the resulting series
-     *                   (<code>null</code> not permitted).
+     * @param seriesKey  the key to give the resulting series ({@code null} not
+     *     permitted).
      *
      * @return A dataset.
      */
@@ -510,12 +511,12 @@ public final class DatasetUtilities {
      * Creates an {@link XYSeries} by sampling the specified function over a
      * fixed range.
      *
-     * @param f  the function (<code>null</code> not permitted).
+     * @param f  the function ({@code null} not permitted).
      * @param start  the start value for the range.
      * @param end  the end value for the range.
      * @param samples  the number of sample points (must be &gt; 1).
      * @param seriesKey  the key to give the resulting series
-     *                   (<code>null</code> not permitted).
+     *                   ({@code null} not permitted).
      *
      * @return A series.
      *
@@ -1376,14 +1377,14 @@ public final class DatasetUtilities {
      * Returns the range of x-values in the specified dataset for the
      * data items belonging to the visible series.
      * 
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param visibleSeriesKeys  the visible series keys (<code>null</code> not
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param visibleSeriesKeys  the visible series keys ({@code null} not
      *     permitted).
      * @param includeInterval  a flag that determines whether or not the
      *     y-interval for the dataset is included (this only applies if the
      *     dataset is an instance of IntervalXYDataset).
      * 
-     * @return The x-range (possibly <code>null</code>).
+     * @return The x-range (possibly {@code null}).
      * 
      * @since 1.0.13
      */
@@ -1404,8 +1405,13 @@ public final class DatasetUtilities {
                 int series = dataset.indexOf(seriesKey);
                 int itemCount = dataset.getItemCount(series);
                 for (int item = 0; item < itemCount; item++) {
+                    double xvalue = ixyd.getXValue(series, item);
                     double lvalue = ixyd.getStartXValue(series, item);
                     double uvalue = ixyd.getEndXValue(series, item);
+                    if (!Double.isNaN(xvalue)) {
+                        minimum = Math.min(minimum, xvalue);
+                        maximum = Math.max(maximum, xvalue);
+                    }
                     if (!Double.isNaN(lvalue)) {
                         minimum = Math.min(minimum, lvalue);
                     }
@@ -1414,8 +1420,7 @@ public final class DatasetUtilities {
                     }
                 }
             }
-        }
-        else {
+        } else {
             // standard case - plain XYDataset
             Iterator iterator = visibleSeriesKeys.iterator();
             while (iterator.hasNext()) {
@@ -1434,8 +1439,7 @@ public final class DatasetUtilities {
 
         if (minimum == Double.POSITIVE_INFINITY) {
             return null;
-        }
-        else {
+        } else {
             return new Range(minimum, maximum);
         }
     }
@@ -1445,15 +1449,15 @@ public final class DatasetUtilities {
      * data items belonging to the visible series and with x-values in the
      * given range.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param visibleSeriesKeys  the visible series keys (<code>null</code> not
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param visibleSeriesKeys  the visible series keys ({@code null} not
      *     permitted).
-     * @param xRange  the x-range (<code>null</code> not permitted).
+     * @param xRange  the x-range ({@code null} not permitted).
      * @param includeInterval  a flag that determines whether or not the
      *     y-interval for the dataset is included (this only applies if the
      *     dataset is an instance of IntervalXYDataset).
      *
-     * @return The y-range (possibly <code>null</code>).
+     * @return The y-range (possibly {@code null}).
      *
      * @since 1.0.13
      */
@@ -1525,8 +1529,13 @@ public final class DatasetUtilities {
                 for (int item = 0; item < itemCount; item++) {
                     double x = ixyd.getXValue(series, item);
                     if (xRange.contains(x)) {
+                        double yvalue = ixyd.getYValue(series, item);
                         double lvalue = ixyd.getStartYValue(series, item);
                         double uvalue = ixyd.getEndYValue(series, item);
+                        if (!Double.isNaN(yvalue)) {
+                            minimum = Math.min(minimum, yvalue);
+                            maximum = Math.max(maximum, yvalue);
+                        }
                         if (!Double.isNaN(lvalue)) {
                             minimum = Math.min(minimum, lvalue);
                         }
@@ -1536,8 +1545,7 @@ public final class DatasetUtilities {
                     }
                 }
             }
-        }
-        else {
+        } else {
             // standard case - plain XYDataset
             Iterator iterator = visibleSeriesKeys.iterator();
             while (iterator.hasNext()) {
@@ -1558,8 +1566,7 @@ public final class DatasetUtilities {
         }
         if (minimum == Double.POSITIVE_INFINITY) {
             return null;
-        }
-        else {
+        } else {
             return new Range(minimum, maximum);
         }
     }
@@ -1569,15 +1576,15 @@ public final class DatasetUtilities {
      * data items belonging to the visible series and with x-values in the
      * given range.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param visibleSeriesKeys  the visible series keys (<code>null</code> not
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param visibleSeriesKeys  the visible series keys ({@code null} not
      *     permitted).
-     * @param xRange  the x-range (<code>null</code> not permitted).
+     * @param xRange  the x-range ({@code null} not permitted).
      * @param includeInterval  a flag that determines whether or not the
      *     z-interval for the dataset is included (this only applies if the
      *     dataset has an interval, which is currently not supported).
      *
-     * @return The y-range (possibly <code>null</code>).
+     * @return The y-range (possibly {@code null}).
      */
     public static Range iterateToFindZBounds(XYZDataset dataset,
             List visibleSeriesKeys, Range xRange, boolean includeInterval) {
@@ -1607,8 +1614,7 @@ public final class DatasetUtilities {
 
         if (minimum == Double.POSITIVE_INFINITY) {
             return null;
-        }
-        else {
+        } else {
             return new Range(minimum, maximum);
         }
     }
