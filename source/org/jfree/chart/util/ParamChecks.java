@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ParamChecks.java
  * ----------------
- * (C) Copyright 2011, by Object Refinery Limited.
+ * (C) Copyright 2011-2015, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 16-Oct-2011 : Version 1 (DG);
+ * 23-Nov-2015 : Added requireInRange() method (DG);
  *
  */
 
@@ -78,6 +79,26 @@ public class ParamChecks {
         if (value < 0) {
             throw new IllegalArgumentException("Require '" + name + "' (" 
                     + value + ") to be non-negative.");
+        }
+    }
+    
+    /**
+     * Checks that the value falls within the specified range and, if it does
+     * not, throws an {@code IllegalArgumentException}.
+     * 
+     * @param value  the value.
+     * @param name  the parameter name.
+     * @param lowerBound  the lower bound of the permitted range.
+     * @param upperBound  the upper bound fo the permitted range.
+     * 
+     * @since 1.0.20
+     */
+    public static void requireInRange(int value, String name, 
+            int lowerBound, int upperBound) {
+        if (value < lowerBound) {
+            throw new IllegalArgumentException("Require '" + name + "' (" 
+                    + value + ") to be in the range " + lowerBound + " to " 
+                    + upperBound);
         }
     }
 }

@@ -1,3 +1,10 @@
+2015-11-23  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/util/ParamChecks.java
+    (requireInRange): New method,
+    * org/jfree/data/time/Second.java
+    (Second(int, Minute)) : Check argument is in range.
+
 2015-09-22  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/data/general/DatasetUtilities.java

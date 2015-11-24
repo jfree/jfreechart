@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Second.java
  * -----------
- * (C) Copyright 2001-2013, by Object Refinery Limited.
+ * (C) Copyright 2001-2015, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -112,10 +112,12 @@ public class Second extends RegularTimePeriod implements Serializable {
     /**
      * Constructs a new Second.
      *
-     * @param second  the second (0 to 24*60*60-1).
-     * @param minute  the minute (<code>null</code> not permitted).
+     * @param second  the second (0 to 59).
+     * @param minute  the minute ({@code null} not permitted).
      */
     public Second(int second, Minute minute) {
+        ParamChecks.requireInRange(second, "second", 
+                Second.FIRST_SECOND_IN_MINUTE, Second.LAST_SECOND_IN_MINUTE);
         ParamChecks.nullNotPermitted(minute, "minute");
         this.day = minute.getDay();
         this.hour = (byte) minute.getHourValue();
@@ -141,9 +143,9 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new instance from the specified date/time and the default
-     * time zone..
+     * time zone.
      *
-     * @param time  the time (<code>null</code> not permitted).
+     * @param time  the time ({@code null} not permitted).
      *
      * @see #Second(Date, TimeZone)
      */
@@ -167,9 +169,9 @@ public class Second extends RegularTimePeriod implements Serializable {
     /**
      * Creates a new second based on the supplied time and time zone.
      *
-     * @param time  the time (<code>null</code> not permitted).
-     * @param zone  the time zone (<code>null</code> not permitted).
-     * @param locale  the locale (<code>null</code> not permitted).
+     * @param time  the time ({@code null} not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -195,7 +197,7 @@ public class Second extends RegularTimePeriod implements Serializable {
     /**
      * Returns the minute.
      *
-     * @return The minute (never <code>null</code>).
+     * @return The minute (never {@code null}).
      */
     public Minute getMinute() {
         return new Minute(this.minute, new Hour(this.hour, this.day));
@@ -235,7 +237,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -299,12 +301,11 @@ public class Second extends RegularTimePeriod implements Serializable {
     /**
      * Returns the first millisecond of the minute.
      *
-     * @param calendar  the calendar/timezone (<code>null</code> not permitted).
+     * @param calendar  the calendar/timezone ({@code null} not permitted).
      *
      * @return The first millisecond.
      *
-     * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     * @throws NullPointerException if {@code calendar} is {@code null}.
      */
     @Override
     public long getFirstMillisecond(Calendar calendar) {
@@ -320,12 +321,11 @@ public class Second extends RegularTimePeriod implements Serializable {
     /**
      * Returns the last millisecond of the second.
      *
-     * @param calendar  the calendar/timezone (<code>null</code> not permitted).
+     * @param calendar  the calendar/timezone ({@code null} not permitted).
      *
      * @return The last millisecond.
      *
-     * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     * @throws NullPointerException if {@code calendar} is {@code null}.
      */
     @Override
     public long getLastMillisecond(Calendar calendar) {
@@ -338,9 +338,9 @@ public class Second extends RegularTimePeriod implements Serializable {
      * This method will return true ONLY if the object is a Second object
      * representing the same second as this instance.
      *
-     * @param obj  the object to compare (<code>null</code> permitted).
+     * @param obj  the object to compare ({@code null} permitted).
      *
-     * @return <code>true</code> if second and minute of this and the object
+     * @return {@code true} if second and minute of this and the object
      *         are the same.
      */
     @Override
@@ -438,7 +438,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      *
      * @param s  the string to parse.
      *
-     * @return The second, or <code>null</code> if the string is not parseable.
+     * @return The second, or {@code null} if the string is not parseable.
      */
     public static Second parseSecond(String s) {
         Second result = null;
