@@ -8,9 +8,9 @@
 
     <name>JFreeChart</name>
 
-    <artifactId>jfreechart</artifactId>
+    <artifactId>jfreechart-fx</artifactId>
     <groupId>org.jfree</groupId>
-    <version>1.0.19</version>
+    <version>1.0.20-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- this is required to host it on Sonatype's OSSRH -->
@@ -44,15 +44,9 @@
     <mailingLists>
         <mailingList>
             <name>JFreeChart Developer List</name>
-            <subscribe>
-        jfreechart-dev-request@lists.sourceforge.net?subject=subscribe
-            </subscribe>
-            <unsubscribe>
-        jfreechart-dev-request@lists.sourceforge.net?subject=unsubscribe
-            </unsubscribe>
-            <archive>
-        http://sourceforge.net/mailarchive/forum.php?forum=jfreechart-dev
-            </archive>
+            <subscribe>jfreechart-dev-request@lists.sourceforge.net?subject=subscribe</subscribe>
+            <unsubscribe>jfreechart-dev-request@lists.sourceforge.net?subject=unsubscribe</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jfreechart-dev</archive>
         </mailingList>
     </mailingLists>
 
@@ -78,6 +72,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>fxgraphics2d</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
@@ -94,10 +94,10 @@
     </dependencies>
 
     <distributionManagement>
-      <snapshotRepository>
-        <id>ossrh</id>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      </snapshotRepository>
+        <snapshotRepository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>    
     
     <build>
@@ -115,8 +115,7 @@
             </resource>
         </resources>
 
-        <plugins>
-          
+        <plugins>  
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -126,8 +125,8 @@
                     <target>${project.target.level}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <excludes>
-                      <exclude>org/jfree/chart/demo/**</exclude>
-                      <exclude>org/jfree/chart/fx/**</exclude>
+                        <exclude>org/jfree/chart/demo/**</exclude>
+                        <exclude>org/jfree/chart/fx/**</exclude>
                     </excludes>                
                 </configuration>
             </plugin>
@@ -240,51 +239,49 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.source.level>1.6</project.source.level>
-        <project.target.level>1.6</project.target.level>
+        <project.source.level>1.8</project.source.level>
+        <project.target.level>1.8</project.target.level>
     </properties>
 
-  <profiles>
-    <profile> 
-      <id>release</id>
-      <build>
-        <plugins>
-          <plugin>
-            <inherited>true</inherited>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.9.1</version>
-            <executions>
-              <execution>
-                <id>attach-javadoc</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <sourceFileExcludes>
-                <exclude>org/jfree/chart/fx/**</exclude>
-              </sourceFileExcludes>
-            </configuration>
-          </plugin>
-
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>2.2.1</version>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
+    <profiles>
+        <profile> 
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <inherited>true</inherited>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <sourceFileExcludes>
+                        <!--        <exclude>org/jfree/chart/fx/**</exclude> -->
+                            </sourceFileExcludes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
