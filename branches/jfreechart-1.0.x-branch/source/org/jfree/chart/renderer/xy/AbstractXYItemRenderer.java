@@ -311,7 +311,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
-            XYPlot plot, XYDataset data, PlotRenderingInfo info) {
+            XYPlot plot, XYDataset dataset, PlotRenderingInfo info) {
         return new XYItemRendererState(info);
     }
 
