@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ChartCanvas.java
  * ----------------
- * (C) Copyright 2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014-2016, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -68,6 +68,7 @@ import org.jfree.chart.fx.interaction.PanHandlerFX;
 import org.jfree.chart.fx.interaction.MouseHandlerFX;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.fx.FXGraphics2D;
 
 /**
  * A canvas for displaying a {@link JFreeChart} in JavaFX.  You can use the
@@ -87,7 +88,7 @@ import org.jfree.chart.util.ParamChecks;
  */
 public class ChartCanvas extends Canvas implements ChartChangeListener {
     
-    /** The chart being displayed in the canvas (never null). */
+    /** The chart being displayed in the canvas. */
     private JFreeChart chart;
     
     /**
@@ -129,20 +130,22 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
     private List<MouseHandlerFX> auxiliaryMouseHandlers;
     
     /**
-     * Creates a new canvas to display the supplied chart in JavaFX.
+     * Creates a new canvas to display the supplied chart in JavaFX.  If
+     * {@code chart} is null, a blank canvas will be displayed.
      * 
-     * @param chart  the chart ({@code null} not permitted). 
+     * @param chart  the chart. 
      */
     public ChartCanvas(JFreeChart chart) {
-        ParamChecks.nullNotPermitted(chart, "chart");
         this.chart = chart;
-        this.chart.addChangeListener(this);
+        if (this.chart != null) {
+            this.chart.addChangeListener(this);
+        }
         this.tooltip = null;
         this.tooltipEnabled = true;
         this.chartMouseListeners = new ArrayList<ChartMouseListenerFX>();
         
-        widthProperty().addListener(evt -> draw());
-        heightProperty().addListener(evt -> draw());
+        widthProperty().addListener(e -> draw());
+        heightProperty().addListener(e -> draw());
         this.g2 = new FXGraphics2D(getGraphicsContext2D());
         this.liveHandler = null;
         this.availableMouseHandlers = new ArrayList<MouseHandlerFX>();
@@ -156,18 +159,18 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
         this.auxiliaryMouseHandlers.add(new AnchorHandlerFX("anchor"));
         this.auxiliaryMouseHandlers.add(new DispatchHandlerFX("dispatch"));
         
-        setOnMouseMoved((MouseEvent e) -> { handleMouseMoved(e); });
-        setOnMouseClicked((MouseEvent e) -> { handleMouseClicked(e); });
-        setOnMousePressed((MouseEvent e) -> { handleMousePressed(e); });
-        setOnMouseDragged((MouseEvent e) -> { handleMouseDragged(e); });
-        setOnMouseReleased((MouseEvent e) -> { handleMouseReleased(e); });
-        setOnScroll((ScrollEvent event) -> { handleScroll(event); });
+        setOnMouseMoved(e -> handleMouseMoved(e));
+        setOnMouseClicked(e -> handleMouseClicked(e));
+        setOnMousePressed(e -> handleMousePressed(e));
+        setOnMouseDragged(e -> handleMouseDragged(e));
+        setOnMouseReleased(e -> handleMouseReleased(e));
+        setOnScroll(e -> handleScroll(e));
     }
     
     /**
      * Returns the chart that is being displayed by this node.
      * 
-     * @return The chart (never {@code null}). 
+     * @return The chart (possibly {@code null}). 
      */
     public JFreeChart getChart() {
         return this.chart;
@@ -176,13 +179,16 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
     /**
      * Sets the chart to be displayed by this node.
      * 
-     * @param chart  the chart ({@code null} not permitted). 
+     * @param chart  the chart ({@code null} permitted). 
      */
     public void setChart(JFreeChart chart) {
-        ParamChecks.nullNotPermitted(chart, "chart");
-        this.chart.removeChangeListener(this);
+        if (this.chart != null) {
+            this.chart.removeChangeListener(this);
+        }
         this.chart = chart;
-        this.chart.addChangeListener(this);
+        if (this.chart != null) {
+            this.chart.addChangeListener(this);
+        }
         draw();
     }
     
@@ -225,7 +231,9 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
      */
     public void setAnchor(Point2D anchor) {
         this.anchor = anchor;
-        this.chart.setNotify(true);  // force a redraw
+        if (this.chart != null) {
+            this.chart.setNotify(true);  // force a redraw
+        }
     }
 
     /**
@@ -340,8 +348,10 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
         if (width > 0 && height > 0) {
             ctx.clearRect(0, 0, width, height);
             this.info = new ChartRenderingInfo();
-            this.chart.draw(this.g2, new Rectangle((int) width, (int) height), 
-                    this.anchor, this.info);
+            if (this.chart != null) {
+                this.chart.draw(this.g2, new Rectangle((int) width, 
+                        (int) height), this.anchor, this.info);
+            }
         }
         ctx.restore();
         this.anchor = null;
@@ -359,8 +369,7 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
         Rectangle2D result;
         if (plotInfo.getSubplotCount() == 0) {
             result = plotInfo.getDataArea();
-        }
-        else {
+        } else {
             int subplotIndex = plotInfo.getSubplotIndex(point);
             if (subplotIndex == -1) {
                 return null;
