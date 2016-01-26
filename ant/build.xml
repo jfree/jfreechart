@@ -27,7 +27,7 @@
         <property name="jfreesvg.name" value="jfreesvg" />
         <property name="jfreesvg.version" value="3.0" />
         <property name="orsonpdf.name" value="orsonpdf" />
-        <property name="orsonpdf.version" value="1.6-eval" />
+        <property name="orsonpdf.version" value="1.7" />
         <property name="orsoncharts.version" value="1.4-eval-nofx" />
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
