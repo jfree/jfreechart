@@ -1,3 +1,9 @@
+2016-01-25  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/fx/FXGraphics2D.java: Deleted,
+    * org/jfree/chart/fx/FXGraphicsConfiguration.java: Likewise,
+    * org/jfree/chart/fx/FXGraphicsDevice.java: Likewise.
+
 2015-11-23  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/util/ParamChecks.java
