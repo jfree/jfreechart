@@ -24,10 +24,13 @@
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.23" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
+        <property name="fxgraphics2d.name" value="fxgraphics2d" />
+        <property name="fxgraphics2d.version" value="1.2.1" />
+        <property name="fxgraphics2d.jar" value="${basedir}/lib/${fxgraphics2d.name}-${fxgraphics2d.version}.jar" />
         <property name="jfreesvg.name" value="jfreesvg" />
         <property name="jfreesvg.version" value="3.0" />
         <property name="orsonpdf.name" value="orsonpdf" />
-        <property name="orsonpdf.version" value="1.6-eval" />
+        <property name="orsonpdf.version" value="1.7" />
         <property name="orsoncharts.version" value="1.4-eval" />
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
@@ -37,7 +40,8 @@
         <property name="target.version" value="1.8"/>
         <path id="build.classpath">
             <fileset dir="${basedir}/lib/">
-                <include name="${jcommon.name}-${jcommon.version}.jar"/>
+                <include name="${jcommon.name}-${jcommon.version}.jar" />
+                <include name="${fxgraphics2d.name}-${fxgraphics2d.version}.jar" />
                 <include name="servlet.jar"/>
             </fileset>
         </path>
@@ -237,6 +241,7 @@
 
         <!-- copy across lib files -->
         <copy file="${jcommon.jar}" tofile="${basedir}/distribution/lib/${jcommon.name}-${jcommon.version}.jar" />
+        <copy file="${fxgraphics2d.jar}" tofile="${basedir}/distribution/lib/${fxgraphics2d.name}-${fxgraphics2d.version}.jar" />
         <copy file="${basedir}/lib/swtgraphics2d.jar" tofile="${basedir}/distribution/lib/swtgraphics2d.jar" failonerror="false" />
         <copy file="${basedir}/lib/jfreechart-${jfreechart.version}-swt.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-swt.jar" failonerror="false" />
         <copy file="${servlet.jar}" tofile="${basedir}/distribution/lib/servlet.jar" />
@@ -308,8 +313,8 @@
         <mkdir dir="${basedir}/build-tests"/>
         <javac srcdir="${basedir}/tests"
                destdir="${basedir}/build-tests"
-               source="1.6"
-               target="1.6"
+               source="1.8"
+               target="1.8"
                debug="true"
                deprecation="false"
                optimize="false"
