@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * ChartViewerSkin.java
  * --------------------
- * (C) Copyright 2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014-2016, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,12 +35,11 @@
  * Changes:
  * --------
  * 20-Jun-2014 : Version 1 (DG);
+ *
  */
-
 
 package org.jfree.chart.fx;
 
-import org.jfree.chart.fx.interaction.ZoomHandlerFX;
 import javafx.scene.control.SkinBase;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -51,6 +50,7 @@ import org.jfree.chart.ChartMouseEvent;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.fx.interaction.ChartMouseListenerFX;
+import org.jfree.chart.fx.interaction.ZoomHandlerFX;
 import org.jfree.chart.util.ParamChecks;
 
 /**
