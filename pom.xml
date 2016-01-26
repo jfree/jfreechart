@@ -27,9 +27,9 @@
     <inceptionYear>2001</inceptionYear>
 
     <description>
-    JFreeChart is a class library, written in Java, for generating charts. 
-    Utilising the Java2D APIs, it currently supports bar charts, pie charts, 
-    line charts, XY-plots and time series plots.
+        JFreeChart is a class library, written in Java, for generating charts. 
+        Utilising the Java2D APIs, it currently supports bar charts, pie charts, 
+        line charts, XY-plots and time series plots.
     </description>
 
     <url>http://www.jfree.org/jfreechart/</url>
@@ -71,10 +71,25 @@
             <version>1.0.23</version>
         </dependency>
 
+        <!-- FXGraphics2D is used for JavaFX support. -->
         <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>fxgraphics2d</artifactId>
             <version>1.2.1</version>
+        </dependency>
+
+        <!-- JFreeSVG enables SVG export -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreesvg</artifactId>
+            <version>3.0</version>
+        </dependency>
+        
+        <!-- OrsonPDF enables PDF export -->
+        <dependency>
+            <groupId>com.orsonpdf</groupId>
+            <artifactId>orsonpdf</artifactId>
+            <version>1.7</version>
         </dependency>
 
         <dependency>
