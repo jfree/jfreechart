@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ChartViewer.java
  * ----------------
- * (C) Copyright 2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014-2016, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -77,9 +77,6 @@ public class ChartViewer extends Control implements Skinnable,
     
     /** The chart to display. */
     private JFreeChart chart;
-    
-    /** The context menu that will be attached to the canvas. */
-    private ContextMenu contextMenu;
 
     /** Does the viewer show tooltips from the chart? */
     private boolean tooltipEnabled;
@@ -88,9 +85,20 @@ public class ChartViewer extends Control implements Skinnable,
     private transient List<ChartMouseListenerFX> chartMouseListeners;
 
     /**
+     * Creates a new instance, initially with no chart to display.  This 
+     * constructor is required so that this control can be used within
+     * FXML.
+     * 
+     * @since 1.0.20
+     */
+    public ChartViewer() {
+        this(null);
+    }
+
+    /**
      * Creates a new viewer to display the supplied chart in JavaFX.
      * 
-     * @param chart  the chart ({@code null} not permitted). 
+     * @param chart  the chart ({@code null} permitted). 
      */
     public ChartViewer(JFreeChart chart) {
         this(chart, true);
@@ -99,23 +107,19 @@ public class ChartViewer extends Control implements Skinnable,
     /**
      * Creates a new viewer instance.
      * 
-     * @param chart  the chart ({@code null} not permitted).
+     * @param chart  the chart ({@code null} permitted).
      * @param contextMenuEnabled  enable the context menu?
      */
     public ChartViewer(JFreeChart chart, boolean contextMenuEnabled) {
-        ParamChecks.nullNotPermitted(chart, "chart");
         this.chart = chart;
         getStyleClass().add("chart-control");
-        this.contextMenu = createContextMenu();
-        this.contextMenu.setOnShowing((WindowEvent event) -> {
-            ChartViewer.this.setTooltipEnabled(false);
-        });
-        this.contextMenu.setOnHiding((WindowEvent event) -> {
-            ChartViewer.this.setTooltipEnabled(true);
-        });
-        setContextMenu(this.contextMenu);
+        setContextMenu(createContextMenu());
+        getContextMenu().setOnShowing(
+                e -> ChartViewer.this.setTooltipEnabled(false));
+        getContextMenu().setOnHiding(
+                e -> ChartViewer.this.setTooltipEnabled(true));
         this.tooltipEnabled = true;
-        this.chartMouseListeners = new ArrayList<ChartMouseListenerFX>();
+        this.chartMouseListeners = new ArrayList<>();
     }
     
     @Override
@@ -127,7 +131,7 @@ public class ChartViewer extends Control implements Skinnable,
     /**
      * Returns the chart that is being displayed by this node.
      * 
-     * @return The chart (never {@code null}). 
+     * @return The chart (possibly {@code null}). 
      */
     public JFreeChart getChart() {
         return this.chart;
@@ -239,25 +243,21 @@ public class ChartViewer extends Control implements Skinnable,
         Menu export = new Menu("Export As");
         
         MenuItem pngItem = new MenuItem("PNG...");
-        pngItem.setOnAction((ActionEvent e) -> { handleExportToPNG(); });        
+        pngItem.setOnAction(e -> handleExportToPNG());        
         export.getItems().add(pngItem);
         
         MenuItem jpegItem = new MenuItem("JPEG...");
-        jpegItem.setOnAction((ActionEvent e) -> { handleExportToJPEG(); });        
+        jpegItem.setOnAction(e -> handleExportToJPEG());        
         export.getItems().add(jpegItem);
         
         if (ExportUtils.isOrsonPDFAvailable()) {
             MenuItem pdfItem = new MenuItem("PDF...");
-            pdfItem.setOnAction((ActionEvent e) -> {
-                handleExportToPDF();
-            });
+            pdfItem.setOnAction(e -> handleExportToPDF());
             export.getItems().add(pdfItem);
         }
         if (ExportUtils.isJFreeSVGAvailable()) {
             MenuItem svgItem = new MenuItem("SVG...");
-            svgItem.setOnAction((ActionEvent e) -> {
-                handleExportToSVG();
-            });
+            svgItem.setOnAction(e -> handleExportToSVG());
             export.getItems().add(svgItem);        
         }
         menu.getItems().add(export);
