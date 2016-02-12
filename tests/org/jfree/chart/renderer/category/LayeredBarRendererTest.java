@@ -114,7 +114,7 @@ public class LayeredBarRendererTest {
     }
 
     /**
-     * Draws the chart with a <code>null</code> info object to make sure that
+     * Draws the chart with a {@code null} info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
     @Test

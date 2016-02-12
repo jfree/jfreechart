@@ -346,14 +346,14 @@ public class TimePeriodValuesTest {
         /**
          * Returns the last event.
          * 
-         * @return The last event (possibly <code>null</code>).
+         * @return The last event (possibly {@code null}).
          */
         public SeriesChangeEvent getLastEvent() {
             return this.lastEvent;
         }
         
         /**
-         * Clears the last event (sets it to <code>null</code>).
+         * Clears the last event (sets it to {@code null}).
          */
         public void clearLastEvent() {
             this.lastEvent = null;

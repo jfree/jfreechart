@@ -79,7 +79,7 @@ public class XYDrawableAnnotationTest {
         }
         /**
          * Tests this object for equality with an arbitrary object.
-         * @param obj  the object to test against (<code>null</code> permitted).
+         * @param obj  the object to test against ({@code null} permitted).
          * @return A boolean.
          */
         @Override

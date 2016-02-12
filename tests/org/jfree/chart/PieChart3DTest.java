@@ -90,7 +90,7 @@ public class PieChart3DTest  {
     }
 
     /**
-     * Tests that no exceptions are thrown when there is a <code>null</code>
+     * Tests that no exceptions are thrown when there is a {@code null}
      * value in the dataset.
      */
     @Test

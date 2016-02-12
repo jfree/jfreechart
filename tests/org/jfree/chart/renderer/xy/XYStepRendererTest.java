@@ -130,7 +130,7 @@ public class XYStepRendererTest {
     }
 
     /**
-     * Draws the chart with a <code>null</code> info object to make sure that
+     * Draws the chart with a {@code null} info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
     @Test
@@ -164,7 +164,7 @@ public class XYStepRendererTest {
     }
 
     /**
-     * Draws the chart with a <code>null</code> value in the dataset to make
+     * Draws the chart with a {@code null} value in the dataset to make
      * sure that no exceptions are thrown.
      */
     @Test

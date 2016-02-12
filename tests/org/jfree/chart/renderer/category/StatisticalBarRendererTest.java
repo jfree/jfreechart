@@ -135,7 +135,7 @@ public class StatisticalBarRendererTest {
     }
 
     /**
-     * Draws the chart with a <code>null</code> info object to make sure that
+     * Draws the chart with a {@code null} info object to make sure that
      * no exceptions are thrown (particularly by code in the renderer).
      */
     @Test
@@ -158,7 +158,7 @@ public class StatisticalBarRendererTest {
     }
 
     /**
-     * Draws the chart with a <code>null</code> mean value to make sure that
+     * Draws the chart with a {@code null} mean value to make sure that
      * no exceptions are thrown (particularly by code in the renderer).  See
      * bug report 1779941.
      */
@@ -182,7 +182,7 @@ public class StatisticalBarRendererTest {
     }
 
     /**
-     * Draws the chart with a <code>null</code> mean value to make sure that
+     * Draws the chart with a {@code null} mean value to make sure that
      * no exceptions are thrown (particularly by code in the renderer).  See
      * bug report 1779941.
      */
@@ -207,7 +207,7 @@ public class StatisticalBarRendererTest {
     }
 
     /**
-     * Draws the chart with a <code>null</code> standard deviation to make sure
+     * Draws the chart with a {@code null} standard deviation to make sure
      * that no exceptions are thrown (particularly by code in the renderer).
      * See bug report 1779941.
      */
@@ -231,7 +231,7 @@ public class StatisticalBarRendererTest {
     }
 
     /**
-     * Draws the chart with a <code>null</code> standard deviation to make sure
+     * Draws the chart with a {@code null} standard deviation to make sure
      * that no exceptions are thrown (particularly by code in the renderer).
      * See bug report 1779941.
      */

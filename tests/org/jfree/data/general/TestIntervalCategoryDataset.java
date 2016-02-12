@@ -96,7 +96,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @see #addValue(Number, Comparable, Comparable)
      * @see #removeValue(Comparable, Comparable)
@@ -130,7 +130,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
     /**
      * Returns the row index for a given key.
      *
-     * @param key  the row key (<code>null</code> not permitted).
+     * @param key  the row key ({@code null} not permitted).
      *
      * @return The row index.
      *
@@ -171,7 +171,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
     /**
      * Returns the column index for a given key.
      *
-     * @param key  the column key (<code>null</code> not permitted).
+     * @param key  the column key ({@code null} not permitted).
      *
      * @return The column index.
      *
@@ -198,10 +198,10 @@ public class TestIntervalCategoryDataset extends AbstractDataset
     /**
      * Returns the value for a pair of keys.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @throws UnknownKeyException if either key is not defined in the dataset.
      *
@@ -253,9 +253,9 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * Adds or updates a value in the table and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param value  the value (<code>null</code> permitted).
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param value  the value ({@code null} permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #getValue(Comparable, Comparable)
      */
@@ -271,8 +271,8 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param value  the value.
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #getValue(Comparable, Comparable)
      */
@@ -339,7 +339,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #removeRow(Comparable)
      *
@@ -363,7 +363,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

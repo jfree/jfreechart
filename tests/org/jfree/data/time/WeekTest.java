@@ -115,7 +115,7 @@ public class WeekTest {
     }
 
     /**
-     * Request the week before week 1, 1900: it should be <code>null</code>.
+     * Request the week before week 1, 1900: it should be {@code null}.
      */
     @Test
     public void testW1Y1900Previous() {
@@ -142,7 +142,7 @@ public class WeekTest {
     }
 
     /**
-     * Request the week after w52, 9999: it should be <code>null</code>.
+     * Request the week after w52, 9999: it should be {@code null}.
      */
     @Test
     public void testW52Y9999Next() {
