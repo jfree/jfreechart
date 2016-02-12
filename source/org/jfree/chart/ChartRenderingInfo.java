@@ -67,13 +67,13 @@ import org.jfree.util.PublicCloneable;
  * JFreeChart.draw() method.
  * <P>
  * An instance of the {@link JFreeChart} class can draw itself within an
- * arbitrary rectangle on any <code>Graphics2D</code>.  It is assumed that
+ * arbitrary rectangle on any {@code Graphics2D}.  It is assumed that
  * client code will sometimes render the same chart in more than one view, so
  * the {@link JFreeChart} instance does not retain any information about its
  * rendered dimensions.  This information can be useful sometimes, so you have
  * the option to collect the information at each call to
- * <code>JFreeChart.draw()</code>, by passing an instance of this
- * <code>ChartRenderingInfo</code> class.
+ * {@code JFreeChart.draw()}, by passing an instance of this
+ * {@code ChartRenderingInfo} class.
  */
 public class ChartRenderingInfo implements Cloneable, Serializable {
 

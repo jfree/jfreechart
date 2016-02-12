@@ -358,14 +358,14 @@ public abstract class ChartFactory {
     /**
      * Creates a pie chart with default settings that compares 2 datasets.
      * The colour of each section will be determined by the move from the value
-     * for the same key in <code>previousDataset</code>. ie if value1 &gt; 
+     * for the same key in {@code previousDataset}. ie if value1 &gt; 
      * value2 then the section will be in green (unless 
-     * <code>greenForIncrease</code> is {@code false}, in which case it 
-     * would be <code>red</code>). Each section can have a shade of red or 
+     * {@code greenForIncrease} is {@code false}, in which case it 
+     * would be {@code red}). Each section can have a shade of red or 
      * green as the difference can be tailored between 0% (black) and 
      * percentDiffForMaxScale% (bright red/green).
      * <p>
-     * For instance if <code>percentDiffForMaxScale</code> is 10 (10%), a
+     * For instance if {@code percentDiffForMaxScale} is 10 (10%), a
      * difference of 5% will have a half shade of red/green, a difference of
      * 10% or more will have a maximum shade/brightness of red/green.
      * <P>
@@ -478,14 +478,14 @@ public abstract class ChartFactory {
     /**
      * Creates a pie chart with default settings that compares 2 datasets.
      * The colour of each section will be determined by the move from the value
-     * for the same key in <code>previousDataset</code>. ie if value1 &gt; 
+     * for the same key in {@code previousDataset}. ie if value1 &gt; 
      * value2 then the section will be in green (unless 
-     * <code>greenForIncrease</code> is {@code false}, in which case it 
-     * would be <code>red</code>). Each section can have a shade of red or 
+     * {@code greenForIncrease} is {@code false}, in which case it 
+     * would be {@code red}). Each section can have a shade of red or 
      * green as the difference can be tailored between 0% (black) and 
      * percentDiffForMaxScale% (bright red/green).
      * <p>
-     * For instance if <code>percentDiffForMaxScale</code> is 10 (10%), a
+     * For instance if {@code percentDiffForMaxScale} is 10 (10%), a
      * difference of 5% will have a half shade of red/green, a difference of
      * 10% or more will have a maximum shade/brightness of red/green.
      * <P>

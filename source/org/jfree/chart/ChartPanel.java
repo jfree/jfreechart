@@ -585,12 +585,12 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Constructs a panel containing a chart.  The <code>useBuffer</code> flag
-     * controls whether or not an offscreen <code>BufferedImage</code> is
+     * Constructs a panel containing a chart.  The {@code useBuffer} flag
+     * controls whether or not an offscreen {@code BufferedImage} is
      * maintained for the chart.  If the buffer is used, more memory is
      * consumed, but panel repaints will be a lot quicker in cases where the
      * chart itself hasn't changed (for example, when another frame is moved
-     * to reveal the panel).  WARNING: If you set the <code>useBuffer</code>
+     * to reveal the panel).  WARNING: If you set the {@code useBuffer}
      * flag to false, note that the mouse zooming rectangle will (in that case)
      * be drawn using XOR, and there is a SEVERE performance problem with that
      * on JRE6 on Windows.
@@ -2981,8 +2981,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param g  the graphics context.
      * @param pf  the page format to use.
-     * @param pageIndex  the index of the page. If not <code>0</code>, nothing
-     *                   gets print.
+     * @param pageIndex  the index of the page. If not {@code 0}, nothing
+     *                   gets printed.
      *
      * @return The result of printing.
      */

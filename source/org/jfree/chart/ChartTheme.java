@@ -27,7 +27,7 @@
  * ---------------
  * ChartTheme.java
  * ---------------
- * (C) Copyright 2008, 2012 by Object Refinery Limited.
+ * (C) Copyright 2008-2016 by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,7 +43,7 @@ package org.jfree.chart;
 /**
  * A {@link ChartTheme} a class that can apply a style or 'theme' to a chart.
  * It can be implemented in an arbitrary manner, with the styling applied to
- * the chart via the <code>apply(JFreeChart)</code> method.  We provide one
+ * the chart via the {@code apply(JFreeChart)} method.  We provide one
  * implementation ({@link StandardChartTheme}) that just mimics the manual
  * process of calling methods to set various chart parameters.
  *
