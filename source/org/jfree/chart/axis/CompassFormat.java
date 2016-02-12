@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * CompassFormat.java
  * ------------------
- * (C) Copyright 2003-2014, by Sylvain Vieujot and Contributors.
+ * (C) Copyright 2003-2016, by Sylvain Vieujot and Contributors.
  *
  * Original Author:  Sylvain Vieujot;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);

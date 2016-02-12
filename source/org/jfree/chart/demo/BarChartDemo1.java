@@ -2,7 +2,7 @@
  * BarChartDemo1.java
  * ==================
  *
- * Copyright (c) 2005-2014, Object Refinery Limited.
+ * Copyright (c) 2005-2016, Object Refinery Limited.
  * All rights reserved.
  *
  * http://www.jfree.org/jfreechart/index.html

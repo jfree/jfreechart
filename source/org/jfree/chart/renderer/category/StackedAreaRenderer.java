@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * StackedAreaRenderer.java
  * ------------------------
- * (C) Copyright 2002-2014, by Dan Rivett (d.rivett@ukonline.co.uk) and
+ * (C) Copyright 2002-2016, by Dan Rivett (d.rivett@ukonline.co.uk) and
  *                          Contributors.
  *
  * Original Author:  Dan Rivett (adapted from AreaRenderer);
