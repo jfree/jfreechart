@@ -545,8 +545,8 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * bars is included in the range calculated by
      * {@link #findRangeBounds(CategoryDataset)}.
      *
-     * @return <code>true</code> if the base is included in the range, and
-     *         <code>false</code> otherwise.
+     * @return {@code true} if the base is included in the range, and
+     *         {@code false} otherwise.
      *
      * @since 1.0.1
      *
@@ -1302,7 +1302,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns <code>true</code> if the specified anchor point is inside a bar.
+     * Returns {@code true} if the specified anchor point is inside a bar.
      *
      * @param anchor  the anchor point.
      *

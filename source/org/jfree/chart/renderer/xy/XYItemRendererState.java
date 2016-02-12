@@ -102,7 +102,7 @@ public class XYItemRendererState extends RendererState {
     /**
      * Returns the flag that controls whether the plot passes all data
      * items in each series to the renderer, or just the visible items.  The
-     * default value is <code>true</code>.
+     * default value is {@code true}.
      *
      * @return A boolean.
      *

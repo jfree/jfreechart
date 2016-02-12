@@ -219,8 +219,8 @@ public abstract class Series implements Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the series contains no data items, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the series contains no data items, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -268,7 +268,7 @@ public abstract class Series implements Cloneable, Serializable {
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

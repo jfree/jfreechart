@@ -124,13 +124,13 @@ public class ValueMarker extends Marker {
 
     /**
      * Tests this marker for equality with an arbitrary object.  This method
-     * returns <code>true</code> if:
+     * returns {@code true} if:
      *
      * <ul>
      * <li><code>obj</code> is not {@code null};</li>
      * <li><code>obj</code> is an instance of <code>ValueMarker</code>;</li>
      * <li><code>obj</code> has the same value as this marker;</li>
-     * <li><code>super.equals(obj)</code> returns <code>true</code>.</li>
+     * <li><code>super.equals(obj)</code> returns {@code true}.</li>
      * </ul>
      *
      * @param obj  the object ({@code null} permitted).

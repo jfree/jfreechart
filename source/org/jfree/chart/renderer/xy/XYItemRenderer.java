@@ -277,8 +277,8 @@ public interface XYItemRenderer extends LegendItemSource {
     // SERIES VISIBLE IN LEGEND (not yet respected by all renderers)
 
     /**
-     * Returns <code>true</code> if the series should be shown in the legend,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if the series should be shown in the legend,
+     * and {@code false} otherwise.
      *
      * @param series  the series index.
      *
@@ -800,8 +800,8 @@ public interface XYItemRenderer extends LegendItemSource {
     //// ITEM LABELS VISIBLE //////////////////////////////////////////////////
 
     /**
-     * Returns <code>true</code> if an item label is visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if an item label is visible, and
+     * {@code false} otherwise.
      *
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
@@ -811,8 +811,8 @@ public interface XYItemRenderer extends LegendItemSource {
     public boolean isItemLabelVisible(int row, int column);
 
     /**
-     * Returns <code>true</code> if the item labels for a series are visible,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if the item labels for a series are visible,
+     * and {@code false} otherwise.
      *
      * @param series  the series index (zero-based).
      *

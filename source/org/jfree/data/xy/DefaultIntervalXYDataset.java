@@ -450,7 +450,7 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
 
     /**
      * Tests this <code>DefaultIntervalXYDataset</code> instance for equality
-     * with an arbitrary object.  This method returns <code>true</code> if and
+     * with an arbitrary object.  This method returns {@code true} if and
      * only if:
      * <ul>
      * <li><code>obj</code> is not {@code null};</li>

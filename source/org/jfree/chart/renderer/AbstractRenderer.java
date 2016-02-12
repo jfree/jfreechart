@@ -651,8 +651,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     // SERIES VISIBLE IN LEGEND (not yet respected by all renderers)
 
     /**
-     * Returns <code>true</code> if the series should be shown in the legend,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if the series should be shown in the legend,
+     * and {@code false} otherwise.
      *
      * @param series  the series index.
      *
@@ -1768,8 +1768,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     // ITEM LABEL VISIBILITY...
 
     /**
-     * Returns <code>true</code> if an item label is visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if an item label is visible, and
+     * {@code false} otherwise.
      *
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
@@ -1781,8 +1781,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the item labels for a series are visible,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if the item labels for a series are visible,
+     * and {@code false} otherwise.
      *
      * @param series  the series index (zero-based).
      *
@@ -2924,7 +2924,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the specified object is registered with
+     * Returns {@code true} if the specified object is registered with
      * the dataset as a listener.  Most applications won't need to call this
      * method, it exists mainly for use by unit testing code.
      *
@@ -2975,7 +2975,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

@@ -140,8 +140,8 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     }
 
     /**
-     * Returns <code>true</code> if the interval width is automatically
-     * calculated, and <code>false</code> otherwise.
+     * Returns {@code true} if the interval width is automatically
+     * calculated, and {@code false} otherwise.
      *
      * @return A boolean.
      */
@@ -151,7 +151,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
 
     /**
      * Sets the flag that indicates whether the interval width is automatically
-     * calculated.  If the flag is set to <code>true</code>, the interval is
+     * calculated.  If the flag is set to {@code true}, the interval is
      * recalculated.
      * <p>
      * Note: recalculating the interval amounts to changing the data values
@@ -211,7 +211,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
 
     /**
      * Sets the fixed interval width and, as a side effect, sets the
-     * <code>autoWidth</code> flag to <code>false</code>.
+     * <code>autoWidth</code> flag to {@code false}.
      * <br><br>
      * Note that changing the interval width amounts to changing the data
      * values represented by the dataset.  Therefore, the dataset

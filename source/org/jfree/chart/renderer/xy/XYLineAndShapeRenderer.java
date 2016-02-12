@@ -682,8 +682,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns <code>true</code> if outlines should be drawn for shapes, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if outlines should be drawn for shapes, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -711,8 +711,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns <code>true</code> if the renderer should use the fill paint
-     * setting to fill shapes, and <code>false</code> if it should just
+     * Returns {@code true} if the renderer should use the fill paint
+     * setting to fill shapes, and {@code false} if it should just
      * use the regular paint.
      * <p>
      * Refer to <code>XYLineAndShapeRendererDemo2.java</code> to see the
@@ -742,8 +742,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns <code>true</code> if the renderer should use the outline paint
-     * setting to draw shape outlines, and <code>false</code> if it should just
+     * Returns {@code true} if the renderer should use the outline paint
+     * setting to draw shape outlines, and {@code false} if it should just
      * use the regular paint.
      *
      * @return A boolean.
@@ -919,7 +919,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns <code>true</code> if the specified pass is the one for drawing
+     * Returns {@code true} if the specified pass is the one for drawing
      * lines.
      *
      * @param pass  the pass.
@@ -931,7 +931,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns <code>true</code> if the specified pass is the one for drawing
+     * Returns {@code true} if the specified pass is the one for drawing
      * items.
      *
      * @param pass  the pass.
@@ -1282,7 +1282,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

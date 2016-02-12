@@ -344,7 +344,7 @@ public class PeriodAxis extends ValueAxis
 
     /**
      * Returns the class used to create the first and last time periods for
-     * the axis range when the auto-range flag is set to <code>true</code>.
+     * the axis range when the auto-range flag is set to {@code true}.
      *
      * @return The class (never {@code null}).
      */
@@ -354,7 +354,7 @@ public class PeriodAxis extends ValueAxis
 
     /**
      * Sets the class used to create the first and last time periods for the
-     * axis range when the auto-range flag is set to <code>true</code> and
+     * axis range when the auto-range flag is set to {@code true} and
      * sends an {@link AxisChangeEvent} to all registered listeners.
      *
      * @param c  the class ({@code null} not permitted).
@@ -546,7 +546,7 @@ public class PeriodAxis extends ValueAxis
     /**
      * Sets the range for the axis, if requested, sends an
      * {@link AxisChangeEvent} to all registered listeners.  As a side-effect,
-     * the auto-range flag is set to <code>false</code> (optional).
+     * the auto-range flag is set to {@code false} (optional).
      *
      * @param range  the range ({@code null} not permitted).
      * @param turnOffAutoRange  a flag that controls whether or not the auto

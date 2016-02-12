@@ -126,8 +126,8 @@ public class OutlierList {
     }
 
     /**
-     * Returns <code>true</code> if the list contains multiple outliers, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the list contains multiple outliers, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      */
@@ -146,8 +146,8 @@ public class OutlierList {
     }
 
     /**
-     * Returns <code>true</code> if the outlier overlaps, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the outlier overlaps, and
+     * {@code false} otherwise.
      *
      * @param other  the outlier.
      *

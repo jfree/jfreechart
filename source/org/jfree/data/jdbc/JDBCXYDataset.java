@@ -179,8 +179,8 @@ public class JDBCXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns <code>true</code> if the dataset represents time series data,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if the dataset represents time series data,
+     * and {@code false} otherwise.
      *
      * @return A boolean.
      */

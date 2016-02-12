@@ -242,8 +242,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns <code>true</code> if the renderer will draw an outline around
-     * a filled polygon, <code>false</code> otherwise.
+     * Returns {@code true} if the renderer will draw an outline around
+     * a filled polygon, {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -294,8 +294,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns <code>true</code> if a shape will be drawn for every item, or
-     * <code>false</code> if not.
+     * Returns {@code true} if a shape will be drawn for every item, or
+     * {@code false} if not.
      *
      * @return A boolean.
      *
@@ -320,8 +320,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns <code>true</code> if first and last point of a series will be
-     * connected, <code>false</code> otherwise.
+     * Returns {@code true} if first and last point of a series will be
+     * connected, {@code false} otherwise.
      * 
      * @return The current status of the flag.
      * 
@@ -361,8 +361,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns <code>true</code> if the renderer should fill the specified
-     * series, and <code>false</code> otherwise.
+     * Returns {@code true} if the renderer should fill the specified
+     * series, and {@code false} otherwise.
      *
      * @param series  the series index (zero-based).
      *
@@ -388,8 +388,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns <code>true</code> if the renderer should use the fill paint
-     * setting to fill shapes, and <code>false</code> if it should just
+     * Returns {@code true} if the renderer should use the fill paint
+     * setting to fill shapes, and {@code false} if it should just
      * use the regular paint.
      *
      * @return A boolean.
@@ -892,8 +892,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      *
      * @param obj  the object ({@code null} not permitted).
      *
-     * @return <code>true</code> if this renderer is equal to <code>obj</code>,
-     *     and <code>false</code> otherwise.
+     * @return {@code true} if this renderer is equal to <code>obj</code>,
+     *     and {@code false} otherwise.
      */
     @Override
     public boolean equals(Object obj) {

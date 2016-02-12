@@ -309,7 +309,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      *
      * @param obj  the object to compare
      *
-     * @return <code>true</code> if milliseconds and seconds of this and object
+     * @return {@code true} if milliseconds and seconds of this and object
      *      are the same.
      */
     @Override

@@ -270,7 +270,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /**
      * Default setting for buffer usage.  The default has been changed to
-     * <code>true</code> from version 1.0.13 onwards, because of a severe
+     * {@code true} from version 1.0.13 onwards, because of a severe
      * performance problem with drawing the zoom rectangle using XOR (which
      * now happens only when the buffer is NOT used).
      */
@@ -598,7 +598,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param chart  the chart.
      * @param useBuffer  a flag controlling whether or not an off-screen buffer
      *                   is used (read the warning above before setting this
-     *                   to <code>false</code>).
+     *                   to {@code false}).
      */
     public ChartPanel(JFreeChart chart, boolean useBuffer) {
 
@@ -987,7 +987,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * A convenience method that switches on mouse-based zooming.
      *
-     * @param flag  <code>true</code> enables zooming and rectangle fill on
+     * @param flag  {@code true} enables zooming and rectangle fill on
      *              zoom.
      */
     public void setMouseZoomable(boolean flag) {
@@ -997,8 +997,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * A convenience method that switches on mouse-based zooming.
      *
-     * @param flag  <code>true</code> if zooming enabled
-     * @param fillRectangle  <code>true</code> if zoom rectangle is filled,
+     * @param flag  {@code true} if zooming enabled
+     * @param fillRectangle  {@code true} if zoom rectangle is filled,
      *                       false if rectangle is shown as outline only.
      */
     public void setMouseZoomable(boolean flag, boolean fillRectangle) {
@@ -1022,7 +1022,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * domain axis.  A check is made to ensure that the current plot supports
      * zooming for the domain values.
      *
-     * @param flag  <code>true</code> enables zooming if possible.
+     * @param flag  {@code true} enables zooming if possible.
      */
     public void setDomainZoomable(boolean flag) {
         if (flag) {
@@ -1050,7 +1050,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * A flag that controls mouse-based zooming on the vertical axis.
      *
-     * @param flag  <code>true</code> enables zooming.
+     * @param flag  {@code true} enables zooming.
      */
     public void setRangeZoomable(boolean flag) {
         if (flag) {
@@ -1078,7 +1078,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * A flag that controls how the zoom rectangle is drawn.
      *
-     * @param flag  <code>true</code> instructs to fill the rectangle on
+     * @param flag  {@code true} instructs to fill the rectangle on
      *              zoom, otherwise it will be outlined.
      */
     public void setFillZoomRectangle(boolean flag) {
@@ -1118,7 +1118,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * A flag that controls trace lines on the horizontal axis.
      *
-     * @param flag  <code>true</code> enables trace lines for the mouse
+     * @param flag  {@code true} enables trace lines for the mouse
      *      pointer on the horizontal axis.
      */
     public void setHorizontalAxisTrace(boolean flag) {
@@ -1156,7 +1156,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * A flag that controls trace lines on the vertical axis.
      *
-     * @param flag  <code>true</code> enables trace lines for the mouse
+     * @param flag  {@code true} enables trace lines for the mouse
      *              pointer on the vertical axis.
      */
     public void setVerticalAxisTrace(boolean flag) {
@@ -1211,8 +1211,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Returns <code>true</code> if file extensions should be enforced, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if file extensions should be enforced, and
+     * {@code false} otherwise.
      *
      * @return The flag.
      *
@@ -1324,8 +1324,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private MouseWheelHandler mouseWheelHandler;
 
     /**
-     * Returns <code>true</code> if the mouse wheel handler is enabled, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the mouse wheel handler is enabled, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -1399,7 +1399,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * tooltips can only be displayed if the chart has been configured to
      * generate tooltip items.
      *
-     * @param flag  <code>true</code> to enable tooltips, <code>false</code> to
+     * @param flag  {@code true} to enable tooltips, {@code false} to
      *              disable tooltips.
      */
     public void setDisplayToolTips(boolean flag) {
@@ -1521,7 +1521,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Sets the refresh buffer flag.  This flag is used to avoid unnecessary
      * redrawing of the chart when the offscreen image buffer is used.
      *
-     * @param flag  <code>true</code> indicates that the buffer should be
+     * @param flag  {@code true} indicates that the buffer should be
      *              refreshed.
      */
     public void setRefreshBuffer(boolean flag) {
@@ -2892,8 +2892,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Returns <code>true</code> if OrsonPDF is on the classpath, and 
-     * <code>false</code> otherwise.  The OrsonPDF library can be found at
+     * Returns {@code true} if OrsonPDF is on the classpath, and 
+     * {@code false} otherwise.  The OrsonPDF library can be found at
      * http://www.object-refinery.com/pdf/
      * 
      * @return A boolean.

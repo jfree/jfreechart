@@ -169,7 +169,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
     }
 
     /**
-     * Returns <code>true</code> if the specified pass involves drawing lines.
+     * Returns {@code true} if the specified pass involves drawing lines.
      *
      * @param pass  the pass.
      *
@@ -181,7 +181,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
     }
 
     /**
-     * Returns <code>true</code> if the specified pass involves drawing items.
+     * Returns {@code true} if the specified pass involves drawing items.
      *
      * @param pass  the pass.
      *
@@ -193,7 +193,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
     }
 
     /**
-     * Returns <code>true</code> if the specified pass involves drawing shadows.
+     * Returns {@code true} if the specified pass involves drawing shadows.
      *
      * @param pass  the pass.
      *

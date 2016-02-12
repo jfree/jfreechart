@@ -108,10 +108,10 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
     }
 
     /**
-     * Returns <code>false</code> always, indicating that this encoder does not
+     * Returns {@code false} always, indicating that this encoder does not
      * encode alpha transparency.
      *
-     * @return <code>false</code>.
+     * @return {@code false}.
      */
     @Override
     public boolean isEncodingAlpha() {

@@ -85,8 +85,8 @@ public final class ChartHints {
         }
     
         /**
-         * Returns <code>true</code> if <code>val</code> is a value that is
-         * compatible with this key, and <code>false</code> otherwise.
+         * Returns {@code true} if <code>val</code> is a value that is
+         * compatible with this key, and {@code false} otherwise.
          * 
          * @param val  the value.
          * 

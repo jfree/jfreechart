@@ -218,7 +218,7 @@ class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
     /**
      * Returns the current setting of the anti-alias flag.
      *
-     * @return <code>true</code> if anti-aliasing is enabled.
+     * @return {@code true} if anti-aliasing is enabled.
      */
     public boolean getAntiAlias() {
         return this.antialias.isSelected();

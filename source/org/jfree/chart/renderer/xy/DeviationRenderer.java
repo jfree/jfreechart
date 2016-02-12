@@ -162,7 +162,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
 
     /**
      * This method is overridden so that this flag cannot be changed---it is
-     * set to <code>true</code> for this renderer.
+     * set to {@code true} for this renderer.
      *
      * @param flag  ignored.
      */
@@ -218,7 +218,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Returns <code>true</code> if this is the pass where the shapes are
+     * Returns {@code true} if this is the pass where the shapes are
      * drawn.
      *
      * @param pass  the pass index.
@@ -233,7 +233,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Returns <code>true</code> if this is the pass where the lines are
+     * Returns {@code true} if this is the pass where the lines are
      * drawn.
      *
      * @param pass  the pass index.

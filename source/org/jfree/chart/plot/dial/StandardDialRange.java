@@ -294,10 +294,10 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
     }
 
     /**
-     * Returns <code>true</code> to indicate that this layer should be
+     * Returns {@code true} to indicate that this layer should be
      * clipped within the dial window.
      *
-     * @return <code>true</code>.
+     * @return {@code true}.
      */
     @Override
     public boolean isClippedToWindow() {

@@ -108,8 +108,8 @@ public final class PolarAxisLocation implements Serializable {
     }
 
     /**
-     * Returns <code>true</code> if this object is equal to the specified
-     * object, and <code>false</code> otherwise.
+     * Returns {@code true} if this object is equal to the specified
+     * object, and {@code false} otherwise.
      *
      * @param obj  the other object ({@code null} permitted).
      *

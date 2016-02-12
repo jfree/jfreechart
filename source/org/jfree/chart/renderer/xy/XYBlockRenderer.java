@@ -391,7 +391,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
 
     /**
      * Tests this <code>XYBlockRenderer</code> for equality with an arbitrary
-     * object.  This method returns <code>true</code> if and only if:
+     * object.  This method returns {@code true} if and only if:
      * <ul>
      * <li><code>obj</code> is an instance of <code>XYBlockRenderer</code> (not
      *     {@code null});</li>

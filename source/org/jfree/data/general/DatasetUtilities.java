@@ -544,8 +544,8 @@ public final class DatasetUtilities {
     }
 
     /**
-     * Returns <code>true</code> if the dataset is empty (or {@code null}),
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if the dataset is empty (or {@code null}),
+     * and {@code false} otherwise.
      *
      * @param dataset  the dataset ({@code null} permitted).
      *
@@ -577,8 +577,8 @@ public final class DatasetUtilities {
     }
 
     /**
-     * Returns <code>true</code> if the dataset is empty (or {@code null}),
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if the dataset is empty (or {@code null}),
+     * and {@code false} otherwise.
      *
      * @param dataset  the dataset ({@code null} permitted).
      *
@@ -610,8 +610,8 @@ public final class DatasetUtilities {
     }
 
     /**
-     * Returns <code>true</code> if the dataset is empty (or {@code null}),
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if the dataset is empty (or {@code null}),
+     * and {@code false} otherwise.
      *
      * @param dataset  the dataset ({@code null} permitted).
      *

@@ -321,13 +321,13 @@ public class Quarter extends RegularTimePeriod implements Serializable {
 
     /**
      * Tests the equality of this Quarter object to an arbitrary object.
-     * Returns <code>true</code> if the target is a Quarter instance
+     * Returns {@code true} if the target is a Quarter instance
      * representing the same quarter as this object.  In all other cases,
-     * returns <code>false</code>.
+     * returns {@code false}.
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> if quarter and year of this and the object are
+     * @return {@code true} if quarter and year of this and the object are
      *         the same.
      */
     @Override

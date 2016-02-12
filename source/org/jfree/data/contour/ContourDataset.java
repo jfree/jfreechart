@@ -123,7 +123,7 @@ public interface ContourDataset extends XYZDataset {
      *
      * @param axisNumber  the axis where 0-x, 1-y, and 2-z.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     public boolean isDateAxis(int axisNumber);
 

@@ -83,7 +83,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
 
     /**
      * Creates a new histogram dataset.  Note that the
-     * <code>adjustForBinSize</code> flag defaults to <code>true</code>.
+     * <code>adjustForBinSize</code> flag defaults to {@code true}.
      *
      * @param key  the series key ({@code null} not permitted).
      */

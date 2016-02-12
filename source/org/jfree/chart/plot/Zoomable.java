@@ -57,8 +57,8 @@ import org.jfree.chart.ChartPanel;
 public interface Zoomable {
 
     /**
-     * Returns <code>true</code> if the plot's domain is zoomable, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the plot's domain is zoomable, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -67,8 +67,8 @@ public interface Zoomable {
     public boolean isDomainZoomable();
 
     /**
-     * Returns <code>true</code> if the plot's range is zoomable, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the plot's range is zoomable, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *

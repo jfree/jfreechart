@@ -328,7 +328,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> if month and year of this and object are the
+     * @return {@code true} if month and year of this and object are the
      *         same.
      */
     @Override

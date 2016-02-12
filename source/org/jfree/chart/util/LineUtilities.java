@@ -57,8 +57,8 @@ public class LineUtilities {
      * @param line  the line ({@code null} not permitted).
      * @param rect  the clipping rectangle ({@code null} not permitted).
      *
-     * @return <code>true</code> if the clipped line is visible, and
-     *     <code>false</code> otherwise.
+     * @return {@code true} if the clipped line is visible, and
+     *     {@code false} otherwise.
      */
     public static boolean clipLine(Line2D line, Rectangle2D rect) {
 

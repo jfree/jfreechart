@@ -142,8 +142,8 @@ public class SimpleHistogramBin implements Comparable,
     }
 
     /**
-     * Returns <code>true</code> if the specified value belongs in the bin,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if the specified value belongs in the bin,
+     * and {@code false} otherwise.
      *
      * @param value  the value.
      *
@@ -169,8 +169,8 @@ public class SimpleHistogramBin implements Comparable,
     }
 
     /**
-     * Returns <code>true</code> if this bin overlaps with the specified bin,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if this bin overlaps with the specified bin,
+     * and {@code false} otherwise.
      *
      * @param bin  the other bin ({@code null} not permitted).
      *

@@ -109,46 +109,46 @@ public interface Timeline {
     long toMillisecond(long timelineValue);
 
     /**
-     * Returns <code>true</code> if a value is contained in the timeline values.
+     * Returns {@code true} if a value is contained in the timeline values.
      *
      * @param millisecond  the millisecond.
      *
-     * @return <code>true</code> if value is contained in the timeline and
-     *         <code>false</code> otherwise.
+     * @return {@code true} if value is contained in the timeline and
+     *         {@code false} otherwise.
      */
     boolean containsDomainValue(long millisecond);
 
     /**
-     * Returns <code>true</code> if a date is contained in the timeline values.
+     * Returns {@code true} if a date is contained in the timeline values.
      *
      * @param date  the date to verify.
      *
-     * @return <code>true</code> if value is contained in the timeline and
-     *         <code>false</code>  otherwise.
+     * @return {@code true} if value is contained in the timeline and
+     *         {@code false}  otherwise.
      */
     boolean containsDomainValue(Date date);
 
     /**
-     * Returns <code>true</code> if a range of values are contained in the
+     * Returns {@code true} if a range of values are contained in the
      * timeline.
      *
      * @param fromMillisecond  the start of the range to verify.
      * @param toMillisecond  the end of the range to verify.
      *
-     * @return <code>true</code> if the range is contained in the timeline or
-     *         <code>false</code> otherwise
+     * @return {@code true} if the range is contained in the timeline or
+     *         {@code false} otherwise
      */
     boolean containsDomainRange(long fromMillisecond, long toMillisecond);
 
     /**
-     * Returns <code>true</code> if a range of dates are contained in the
+     * Returns {@code true} if a range of dates are contained in the
      * timeline.
      *
      * @param fromDate  the start of the range to verify.
      * @param toDate  the end of the range to verify.
      *
-     * @return <code>true</code> if the range is contained in the timeline or
-     *         <code>false</code> otherwise
+     * @return {@code true} if the range is contained in the timeline or
+     *         {@code false} otherwise
      */
     boolean containsDomainRange(Date fromDate, Date toDate);
 

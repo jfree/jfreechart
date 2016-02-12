@@ -655,8 +655,8 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     }
 
     /**
-     * Returns <code>true</code> if the tick labels should be displayed,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if the tick labels should be displayed,
+     * and {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -734,10 +734,10 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     }
 
     /**
-     * Returns <code>true</code> to indicate that this layer should be
+     * Returns {@code true} to indicate that this layer should be
      * clipped within the dial window.
      *
-     * @return <code>true</code>.
+     * @return {@code true}.
      */
     @Override
     public boolean isClippedToWindow() {

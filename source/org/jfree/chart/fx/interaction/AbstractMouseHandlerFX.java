@@ -130,7 +130,7 @@ public class AbstractMouseHandlerFX implements MouseHandlerFX {
     }
     
     /**
-     * Returns <code>true</code> if the specified mouse event has modifier
+     * Returns {@code true} if the specified mouse event has modifier
      * keys that match this handler.
      * 
      * @param e  the mouse event ({@code null} not permitted).

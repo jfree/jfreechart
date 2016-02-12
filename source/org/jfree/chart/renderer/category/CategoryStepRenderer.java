@@ -119,7 +119,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
     private boolean stagger = false;
 
     /**
-     * Creates a new renderer (stagger defaults to <code>false</code>).
+     * Creates a new renderer (stagger defaults to {@code false}).
      */
     public CategoryStepRenderer() {
         this(false);

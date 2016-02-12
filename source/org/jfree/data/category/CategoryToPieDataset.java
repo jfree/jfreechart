@@ -291,7 +291,7 @@ public class CategoryToPieDataset extends AbstractDataset
 
     /**
      * Tests this dataset for equality with an arbitrary object, returning
-     * <code>true</code> if <code>obj</code> is a dataset containing the same
+     * {@code true} if <code>obj</code> is a dataset containing the same
      * keys and values in the same order as this dataset.
      *
      * @param obj  the object to test ({@code null} permitted).

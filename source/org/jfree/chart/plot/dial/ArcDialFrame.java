@@ -401,10 +401,10 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
     }
 
     /**
-     * Returns <code>false</code> to indicate that this dial layer is not
+     * Returns {@code false} to indicate that this dial layer is not
      * clipped to the dial window.
      *
-     * @return <code>false</code>.
+     * @return {@code false}.
      */
     @Override
     public boolean isClippedToWindow() {

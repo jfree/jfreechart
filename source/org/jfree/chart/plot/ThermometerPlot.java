@@ -1470,8 +1470,8 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @param d  the number to be tested.
      *
-     * @return <code>true</code> if the number is valid and finite, and
-     *         <code>false</code> otherwise.
+     * @return {@code true} if the number is valid and finite, and
+     *         {@code false} otherwise.
      */
     protected static boolean isValidNumber(double d) {
         return (!(Double.isNaN(d) || Double.isInfinite(d)));
@@ -1520,7 +1520,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {
@@ -1798,7 +1798,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns <code>false</code>.
+     * Returns {@code false}.
      *
      * @return A boolean.
      */
@@ -1808,7 +1808,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Returns <code>true</code>.
+     * Returns {@code true}.
      *
      * @return A boolean.
      */

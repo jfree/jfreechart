@@ -63,14 +63,14 @@ public interface Pannable {
     /**
      * Evaluates if the domain axis can be panned.
      *
-     * @return <code>true</code> if the domain axis is pannable.
+     * @return {@code true} if the domain axis is pannable.
      */
     public boolean isDomainPannable();
 
     /**
      * Evaluates if the range axis can be panned.
      *
-     * @return <code>true</code> if the range axis is pannable.
+     * @return {@code true} if the range axis is pannable.
      */
     public boolean isRangePannable();
 

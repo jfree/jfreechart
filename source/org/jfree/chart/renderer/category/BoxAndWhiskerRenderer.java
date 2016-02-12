@@ -173,9 +173,9 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     private boolean meanVisible;
 
     /**
-     * A flag that, if <code>true</code>, causes the whiskers to be drawn
+     * A flag that, if {@code true}, causes the whiskers to be drawn
      * using the outline paint for the series.  The default value is
-     * <code>false</code> and in that case the regular series paint is used.
+     * {@code false} and in that case the regular series paint is used.
      *
      * @since 1.0.14
      */
@@ -376,7 +376,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns the flag that, if <code>true</code>, causes the whiskers to
+     * Returns the flag that, if {@code true}, causes the whiskers to
      * be drawn using the series outline paint.
      *
      * @return A boolean.
@@ -388,7 +388,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Sets the flag that, if <code>true</code>, causes the whiskers to
+     * Sets the flag that, if {@code true}, causes the whiskers to
      * be drawn using the series outline paint, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
@@ -1048,7 +1048,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

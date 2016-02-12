@@ -208,7 +208,7 @@ public class TimeSeriesTableModel extends AbstractTableModel
      * @param row  the row number.
      * @param column  the column number.
      *
-     * @return <code>true</code> if the specified cell is editable.
+     * @return {@code true} if the specified cell is editable.
      */
     @Override
     public boolean isCellEditable(int row, int column) {

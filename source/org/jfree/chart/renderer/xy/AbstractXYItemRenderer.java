@@ -1564,7 +1564,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {
@@ -1808,7 +1808,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns <code>true</code> if the specified point (x, y) falls within or
+     * Returns {@code true} if the specified point (x, y) falls within or
      * on the boundary of the specified rectangle.
      *
      * @param rect  the rectangle ({@code null} not permitted).

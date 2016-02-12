@@ -348,10 +348,10 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>true</code> if the domain gridlines are visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the domain gridlines are visible, and
+     * {@code false} otherwise.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      *
      * @see #setDomainGridlinesVisible(boolean)
      * @see #setDomainGridlinePaint(Paint)
@@ -429,10 +429,10 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>true</code> if the range axis grid is visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the range axis grid is visible, and
+     * {@code false} otherwise.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      *
      * @see #setRangeGridlinesVisible(boolean)
      */
@@ -875,7 +875,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>true</code>.
+     * Returns {@code true}.
      *
      * @return A boolean.
      */
@@ -885,7 +885,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>true</code>.
+     * Returns {@code true}.
      *
      * @return A boolean.
      */
@@ -895,8 +895,8 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>true</code> if panning is enabled for the domain axes,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if panning is enabled for the domain axes,
+     * and {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -920,8 +920,8 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>true</code> if panning is enabled for the range axes,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if panning is enabled for the range axes,
+     * and {@code false} otherwise.
      *
      * @return A boolean.
      *

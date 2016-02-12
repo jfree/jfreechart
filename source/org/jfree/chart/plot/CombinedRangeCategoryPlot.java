@@ -517,7 +517,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

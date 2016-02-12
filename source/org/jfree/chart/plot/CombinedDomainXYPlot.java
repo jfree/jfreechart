@@ -751,7 +751,7 @@ public class CombinedDomainXYPlot extends XYPlot
      *
      * @param obj  the other object.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

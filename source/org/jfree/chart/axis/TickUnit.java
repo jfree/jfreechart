@@ -165,7 +165,7 @@ public abstract class TickUnit implements Comparable, Serializable {
      *
      * @param obj  the object.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

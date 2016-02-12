@@ -198,7 +198,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     /**
      * A flag that controls whether or not the renderer's outline paint is
      * used to draw the outline of the candlestick.  The default value is
-     * <code>false</code> to avoid a change of behaviour for existing code.
+     * {@code false} to avoid a change of behaviour for existing code.
      *
      * @since 1.0.5
      */
@@ -529,7 +529,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     /**
      * Returns the flag that controls whether or not the renderer's outline
      * paint is used to draw the candlestick outline.  The default value is
-     * <code>false</code>.
+     * {@code false}.
      *
      * @return A boolean.
      *
@@ -872,7 +872,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {
@@ -965,7 +965,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Returns a flag indicating whether or not volume bars are drawn on the
      * chart.
      *
-     * @return <code>true</code> if volume bars are drawn on the chart.
+     * @return {@code true} if volume bars are drawn on the chart.
      *
      * @deprecated As of 1.0.5, you should use the {@link #getDrawVolume()}
      *         method.

@@ -69,7 +69,7 @@ public class ChartFrame extends JFrame {
      *
      * @param title  the frame title.
      * @param chart  the chart.
-     * @param scrollPane  if <code>true</code>, put the Chart(Panel) into a
+     * @param scrollPane  if {@code true}, put the Chart(Panel) into a
      *                    JScrollPane.
      */
     public ChartFrame(String title, JFreeChart chart, boolean scrollPane) {

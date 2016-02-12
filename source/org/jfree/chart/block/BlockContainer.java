@@ -117,8 +117,8 @@ public class BlockContainer extends AbstractBlock
     }
 
     /**
-     * Returns <code>true</code> if there are no blocks in the container, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if there are no blocks in the container, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      */

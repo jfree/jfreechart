@@ -178,7 +178,7 @@ public class ChartTransferable implements Transferable {
     }
 
     /**
-     * Returns <code>true</code> if the specified flavor is supported.
+     * Returns {@code true} if the specified flavor is supported.
      *
      * @param flavor  the flavor.
      *

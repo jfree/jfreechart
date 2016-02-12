@@ -195,7 +195,7 @@ public abstract class Title extends AbstractBlock
 
     /**
      * Returns a flag that controls whether or not the title should be
-     * drawn.  The default value is <code>true</code>.
+     * drawn.  The default value is {@code true}.
      *
      * @return A boolean.
      *
@@ -390,7 +390,7 @@ public abstract class Title extends AbstractBlock
      *
      * @param obj  the object ({@code null} not permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

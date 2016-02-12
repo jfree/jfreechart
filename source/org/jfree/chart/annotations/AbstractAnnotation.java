@@ -105,7 +105,7 @@ public abstract class AbstractAnnotation implements Annotation, Cloneable,
     }
 
     /**
-     * Returns <code>true</code> if the specified object is registered with
+     * Returns {@code true} if the specified object is registered with
      * the annotation as a listener.  Most applications won't need to call this
      * method, it exists mainly for use by unit testing code.
      *

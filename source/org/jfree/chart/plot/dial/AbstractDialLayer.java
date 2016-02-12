@@ -75,8 +75,8 @@ public abstract class AbstractDialLayer implements DialLayer {
     }
 
     /**
-     * Returns <code>true</code> if this layer is visible (should be displayed),
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if this layer is visible (should be displayed),
+     * and {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -173,7 +173,7 @@ public abstract class AbstractDialLayer implements DialLayer {
     }
 
     /**
-     * Returns <code>true</code> if the specified object is registered with
+     * Returns {@code true} if the specified object is registered with
      * the dataset as a listener.  Most applications won't need to call this
      * method, it exists mainly for use by unit testing code.
      *

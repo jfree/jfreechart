@@ -236,7 +236,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     /**
      * Returns the current setting of the auto-range property.
      *
-     * @return <code>true</code> if auto range is enabled.
+     * @return {@code true} if auto range is enabled.
      */
     public boolean isAutoRange() {
         return this.autoRange;

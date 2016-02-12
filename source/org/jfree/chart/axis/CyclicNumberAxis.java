@@ -273,8 +273,8 @@ public class CyclicNumberAxis extends NumberAxis {
      * mapped successively for both axis ends. Use this function for correct
      * results in translateValueToJava2D.
      *
-     * @return <code>true</code> if the cycle bound is mapped to the last
-     *         cycle, <code>false</code> if it is bound to the current cycle
+     * @return {@code true} if the cycle bound is mapped to the last
+     *         cycle, {@code false} if it is bound to the current cycle
      *         (default)
      */
     public boolean isBoundMappedToLastCycle() {

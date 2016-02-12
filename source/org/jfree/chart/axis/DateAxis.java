@@ -261,12 +261,12 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         }
 
         /**
-         * Returns <code>true</code> if the timeline includes the specified
+         * Returns {@code true} if the timeline includes the specified
          * domain value.
          *
          * @param millisecond  the millisecond.
          *
-         * @return <code>true</code>.
+         * @return {@code true}.
          */
         @Override
         public boolean containsDomainValue(long millisecond) {
@@ -274,12 +274,12 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         }
 
         /**
-         * Returns <code>true</code> if the timeline includes the specified
+         * Returns {@code true} if the timeline includes the specified
          * domain value.
          *
          * @param date  the date.
          *
-         * @return <code>true</code>.
+         * @return {@code true}.
          */
         @Override
         public boolean containsDomainValue(Date date) {
@@ -287,13 +287,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         }
 
         /**
-         * Returns <code>true</code> if the timeline includes the specified
+         * Returns {@code true} if the timeline includes the specified
          * domain value range.
          *
          * @param from  the start value.
          * @param to  the end value.
          *
-         * @return <code>true</code>.
+         * @return {@code true}.
          */
         @Override
         public boolean containsDomainRange(long from, long to) {
@@ -301,13 +301,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
         }
 
         /**
-         * Returns <code>true</code> if the timeline includes the specified
+         * Returns {@code true} if the timeline includes the specified
          * domain value range.
          *
          * @param from  the start date.
          * @param to  the end date.
          *
-         * @return <code>true</code>.
+         * @return {@code true}.
          */
         @Override
         public boolean containsDomainRange(Date from, Date to) {
@@ -492,7 +492,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * Returns the tick unit for the axis.
      * <p>
      * Note: if the <code>autoTickUnitSelection</code> flag is
-     * <code>true</code> the tick unit may be changed while the axis is being
+     * {@code true} the tick unit may be changed while the axis is being
      * drawn, so in that case the return value from this method may be
      * irrelevant if the method is called before the axis has been drawn.
      *
@@ -507,7 +507,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
     /**
      * Sets the tick unit for the axis.  The auto-tick-unit-selection flag is
-     * set to <code>false</code>, and registered listeners are notified that
+     * set to {@code false}, and registered listeners are notified that
      * the axis has been changed.
      *
      * @param unit  the tick unit.
@@ -579,7 +579,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /**
      * Sets the range for the axis, if requested, sends an
      * {@link AxisChangeEvent} to all registered listeners.  As a side-effect,
-     * the auto-range flag is set to <code>false</code> (optional).
+     * the auto-range flag is set to {@code false} (optional).
      *
      * @param range  the range ({@code null} not permitted).
      * @param turnOffAutoRange  a flag that controls whether or not the auto
@@ -757,8 +757,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the axis hides this value, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the axis hides this value, and
+     * {@code false} otherwise.
      *
      * @param millis  the data value.
      *

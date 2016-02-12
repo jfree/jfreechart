@@ -90,8 +90,8 @@ public class PieLabelDistributor extends AbstractPieLabelDistributor {
     }
 
     /**
-     * Returns <code>true</code> if there are overlapping labels in the list,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if there are overlapping labels in the list,
+     * and {@code false} otherwise.
      *
      * @return A boolean.
      */

@@ -360,7 +360,7 @@ public abstract class ChartFactory {
      * The colour of each section will be determined by the move from the value
      * for the same key in <code>previousDataset</code>. ie if value1 &gt; 
      * value2 then the section will be in green (unless 
-     * <code>greenForIncrease</code> is <code>false</code>, in which case it 
+     * <code>greenForIncrease</code> is {@code false}, in which case it 
      * would be <code>red</code>). Each section can have a shade of red or 
      * green as the difference can be tailored between 0% (black) and 
      * percentDiffForMaxScale% (bright red/green).
@@ -480,7 +480,7 @@ public abstract class ChartFactory {
      * The colour of each section will be determined by the move from the value
      * for the same key in <code>previousDataset</code>. ie if value1 &gt; 
      * value2 then the section will be in green (unless 
-     * <code>greenForIncrease</code> is <code>false</code>, in which case it 
+     * <code>greenForIncrease</code> is {@code false}, in which case it 
      * would be <code>red</code>). Each section can have a shade of red or 
      * green as the difference can be tailored between 0% (black) and 
      * percentDiffForMaxScale% (bright red/green).

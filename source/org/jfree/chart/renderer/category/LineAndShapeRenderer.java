@@ -519,8 +519,8 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns <code>true</code> if outlines should be drawn for shapes, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if outlines should be drawn for shapes, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -720,8 +720,8 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
-     * Returns <code>true</code> if the renderer should use the fill paint
-     * setting to fill shapes, and <code>false</code> if it should just
+     * Returns {@code true} if the renderer should use the fill paint
+     * setting to fill shapes, and {@code false} if it should just
      * use the regular paint.
      *
      * @return A boolean.

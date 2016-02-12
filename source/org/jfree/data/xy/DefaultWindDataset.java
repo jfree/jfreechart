@@ -295,7 +295,7 @@ public class DefaultWindDataset extends AbstractXYDataset
 
     /**
      * Checks this <code>WindDataset</code> for equality with an arbitrary
-     * object.  This method returns <code>true</code> if and only if:
+     * object.  This method returns {@code true} if and only if:
      * <ul>
      *   <li><code>obj</code> is not {@code null};</li>
      *   <li><code>obj</code> is an instance of

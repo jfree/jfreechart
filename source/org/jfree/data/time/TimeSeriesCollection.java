@@ -203,8 +203,8 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns a flag that controls whether the domain is treated as 'points in
      * time'.  This flag is used when determining the max and min values for
-     * the domain.  If <code>true</code>, then only the x-values are considered
-     * for the max and min values.  If <code>false</code>, then the start and
+     * the domain.  If {@code true}, then only the x-values are considered
+     * for the max and min values.  If {@code false}, then the start and
      * end x-values will also be taken into consideration.
      *
      * @return The flag.

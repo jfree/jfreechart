@@ -1138,7 +1138,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns <code>true</code> if the specified anchor point is inside a bar.
+     * Returns {@code true} if the specified anchor point is inside a bar.
      *
      * @param anchor  the anchor point.
      *

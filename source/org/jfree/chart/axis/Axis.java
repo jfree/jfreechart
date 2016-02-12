@@ -340,8 +340,8 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the axis is visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the axis is visible, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -1195,7 +1195,7 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the specified object is registered with
+     * Returns {@code true} if the specified object is registered with
      * the dataset as a listener.  Most applications won't need to call this
      * method, it exists mainly for use by unit testing code.
      *
@@ -1574,7 +1574,7 @@ public abstract class Axis implements Cloneable, Serializable {
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

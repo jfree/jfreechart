@@ -347,10 +347,10 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Returns <code>true</code> if the tick labels should be rotated (to
-     * vertical), and <code>false</code> otherwise.
+     * Returns {@code true} if the tick labels should be rotated (to
+     * vertical), and {@code false} otherwise.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      *
      * @see #setVerticalTickLabels(boolean)
      */
@@ -1263,7 +1263,7 @@ public abstract class ValueAxis extends Axis
     /**
      * Sets the range for the axis and sends a change event to all registered 
      * listeners.  As a side-effect, the auto-range flag is set to
-     * <code>false</code>.
+     * {@code false}.
      *
      * @param range  the range ({@code null} not permitted).
      *
@@ -1277,7 +1277,7 @@ public abstract class ValueAxis extends Axis
     /**
      * Sets the range for the axis and, if requested, sends a change event to 
      * all registered listeners.  Furthermore, if <code>turnOffAutoRange</code>
-     * is <code>true</code>, the auto-range flag is set to <code>false</code> 
+     * is {@code true}, the auto-range flag is set to {@code false} 
      * (normally when setting the axis range manually the caller expects that
      * range to remain in force).
      *
@@ -1308,7 +1308,7 @@ public abstract class ValueAxis extends Axis
     /**
      * Sets the range for the axis and sends a change event to all registered 
      * listeners.  As a side-effect, the auto-range flag is set to
-     * <code>false</code>.
+     * {@code false}.
      *
      * @param lower  the lower axis limit.
      * @param upper  the upper axis limit.
@@ -1335,7 +1335,7 @@ public abstract class ValueAxis extends Axis
      * Sets the range for the axis after first adding the current margins to
      * the range and, if requested, sends an {@link AxisChangeEvent} to all
      * registered listeners.  As a side-effect, the auto-range flag is set to
-     * <code>false</code> (optional).
+     * {@code false} (optional).
      *
      * @param range  the range (excluding margins, {@code null} not
      *               permitted).
@@ -1354,7 +1354,7 @@ public abstract class ValueAxis extends Axis
     /**
      * Sets the axis range (after first adding the current margins to the
      * range) and sends an {@link AxisChangeEvent} to all registered listeners.
-     * As a side-effect, the auto-range flag is set to <code>false</code>.
+     * As a side-effect, the auto-range flag is set to {@code false}.
      *
      * @param lower  the lower axis limit.
      * @param upper  the upper axis limit.
@@ -1680,7 +1680,7 @@ public abstract class ValueAxis extends Axis
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

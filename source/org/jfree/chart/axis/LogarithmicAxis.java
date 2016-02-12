@@ -195,7 +195,7 @@ public class LogarithmicAxis extends NumberAxis {
      * values are less than or equal to zero; if false then the axis will
      * adjust for values less than or equal to zero as needed.
      *
-     * @return <code>true</code> if strict enforcement is enabled.
+     * @return {@code true} if strict enforcement is enabled.
      */
     public boolean getStrictValuesFlag() {
         return this.strictValuesFlag;
@@ -217,8 +217,8 @@ public class LogarithmicAxis extends NumberAxis {
     /**
      * Returns the 'expTickLabelsFlag' flag.
      *
-     * @return <code>true</code> for "1e#"-style tick labels,
-     *         <code>false</code> for log10 or regular numeric tick labels.
+     * @return {@code true} for "1e#"-style tick labels,
+     *         {@code false} for log10 or regular numeric tick labels.
      */
     public boolean getExpTickLabelsFlag() {
       return this.expTickLabelsFlag;
@@ -237,8 +237,8 @@ public class LogarithmicAxis extends NumberAxis {
     /**
      * Returns the 'log10TickLabelsFlag' flag.
      *
-     * @return <code>true</code> for "10^n"-style tick labels,
-     *         <code>false</code> for "1e#"-style or regular numeric tick
+     * @return {@code true} for "10^n"-style tick labels,
+     *         {@code false} for "1e#"-style or regular numeric tick
      *         labels.
      */
     public boolean getLog10TickLabelsFlag() {
@@ -251,8 +251,8 @@ public class LogarithmicAxis extends NumberAxis {
      * values when determining the upper and lower bounds.  The default
      * value is false.
      *
-     * @param flag <code>true</code> to make the 'autoAdjustRange()'
-     * method select the next "10^n" values, <code>false</code> to not.
+     * @param flag {@code true} to make the 'autoAdjustRange()'
+     * method select the next "10^n" values, {@code false} to not.
      */
     public void setAutoRangeNextLogFlag(boolean flag) {
         this.autoRangeNextLogFlag = flag;
@@ -261,8 +261,8 @@ public class LogarithmicAxis extends NumberAxis {
     /**
      * Returns the 'autoRangeNextLogFlag' flag.
      *
-     * @return <code>true</code> if the 'autoAdjustRange()' method will
-     * select the next "10^n" values, <code>false</code> if not.
+     * @return {@code true} if the 'autoAdjustRange()' method will
+     * select the next "10^n" values, {@code false} if not.
      */
     public boolean getAutoRangeNextLogFlag() {
         return this.autoRangeNextLogFlag;

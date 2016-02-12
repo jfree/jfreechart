@@ -405,8 +405,8 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      *
      * @param series  the series ({@code null} not permitted).
      *
-     * @return <code>true</code> if the series was removed, and
-     *     <code>false</code> otherwise.
+     * @return {@code true} if the series was removed, and
+     *     {@code false} otherwise.
      *
      * @since 1.0.14
      */

@@ -1743,10 +1743,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns <code>true</code> if the domain gridlines are visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the domain gridlines are visible, and
+     * {@code false} otherwise.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      *
      * @see #setDomainGridlinesVisible(boolean)
      */
@@ -1773,10 +1773,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns <code>true</code> if the domain minor gridlines are visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the domain minor gridlines are visible, and
+     * {@code false} otherwise.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      *
      * @see #setDomainMinorGridlinesVisible(boolean)
      *
@@ -1932,8 +1932,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns <code>true</code> if the range axis grid is visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the range axis grid is visible, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -2014,8 +2014,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns <code>true</code> if the range axis minor grid is visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the range axis minor grid is visible, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -4950,8 +4950,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns <code>true</code> if panning is enabled for the domain axes,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if panning is enabled for the domain axes,
+     * and {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -5205,7 +5205,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns <code>true</code>, indicating that the domain axis/axes for this
+     * Returns {@code true}, indicating that the domain axis/axes for this
      * plot are zoomable.
      *
      * @return A boolean.
@@ -5218,7 +5218,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns <code>true</code>, indicating that the range axis/axes for this
+     * Returns {@code true}, indicating that the range axis/axes for this
      * plot are zoomable.
      *
      * @return A boolean.
@@ -5314,7 +5314,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

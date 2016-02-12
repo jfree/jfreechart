@@ -216,7 +216,7 @@ public class XYLineAnnotation extends AbstractXYAnnotation
      *
      * @param obj  the object to test against ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

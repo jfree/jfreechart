@@ -383,7 +383,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      *
      * @param obj  the object to compare ({@code null} permitted).
      *
-     * @return <code>true</code> if the minute and hour value of this and the
+     * @return {@code true} if the minute and hour value of this and the
      *      object are the same.
      */
     @Override

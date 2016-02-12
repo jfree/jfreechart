@@ -127,9 +127,9 @@ public class StackedXYBarRenderer extends XYBarRenderer {
     }
 
     /**
-     * Returns <code>true</code> if the renderer displays each item value as
+     * Returns {@code true} if the renderer displays each item value as
      * a percentage (so that the stacked bars add to 100%), and
-     * <code>false</code> otherwise.
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *

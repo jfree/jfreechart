@@ -97,13 +97,13 @@ public class StrokeMap implements Cloneable, Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the map contains the specified key, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the map contains the specified key, and
+     * {@code false} otherwise.
      *
      * @param key  the key.
      *
-     * @return <code>true</code> if the map contains the specified key, and
-     * <code>false</code> otherwise.
+     * @return {@code true} if the map contains the specified key, and
+     * {@code false} otherwise.
      */
     public boolean containsKey(Comparable key) {
         return this.store.containsKey(key);

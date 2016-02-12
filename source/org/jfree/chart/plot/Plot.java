@@ -536,11 +536,11 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Returns <code>true</code> if this plot is part of a combined plot
+     * Returns {@code true} if this plot is part of a combined plot
      * structure (that is, {@link #getParent()} returns a non-{@code null}
-     * value), and <code>false</code> otherwise.
+     * value), and {@code false} otherwise.
      *
-     * @return <code>true</code> if this plot is part of a combined plot
+     * @return {@code true} if this plot is part of a combined plot
      *         structure.
      *
      * @see #getParent()
@@ -810,10 +810,10 @@ public abstract class Plot implements AxisChangeListener,
 
     /**
      * Returns the flag that controls whether or not the plot outline is
-     * drawn.  The default value is <code>true</code>.  Note that for
+     * drawn.  The default value is {@code true}.  Note that for
      * historical reasons, the plot's outline paint and stroke can take on
      * {@code null} values, in which case the outline will not be drawn
-     * even if this flag is set to <code>true</code>.
+     * even if this flag is set to {@code true}.
      *
      * @return The outline visibility flag.
      *
@@ -1355,7 +1355,7 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

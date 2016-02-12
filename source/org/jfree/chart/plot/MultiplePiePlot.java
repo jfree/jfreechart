@@ -598,8 +598,8 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> if this plot is equal to <code>obj</code>, and
-     *     <code>false</code> otherwise.
+     * @return {@code true} if this plot is equal to <code>obj</code>, and
+     *     {@code false} otherwise.
      */
     @Override
     public boolean equals(Object obj) {

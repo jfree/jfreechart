@@ -893,7 +893,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * <li>if {@link #getSectionPaint(int)} is non-{@code null} return
      *         it;</li>
      * <li>if {@link #getSectionPaint(int)} is {@code null} but
-     *         <code>autoPopulate</code> is <code>true</code>, attempt to fetch
+     *         <code>autoPopulate</code> is {@code true}, attempt to fetch
      *         a new paint from the drawing supplier
      *         ({@link #getDrawingSupplier()});
      * <li>if all else fails, return {@link #getBaseSectionPaint()}.
@@ -1164,7 +1164,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * <li>otherwise, if {@link #getSectionOutlinePaint(int)} is
      *         non-{@code null} return it;</li>
      * <li>if {@link #getSectionOutlinePaint(int)} is {@code null} but
-     *         <code>autoPopulate</code> is <code>true</code>, attempt to fetch
+     *         <code>autoPopulate</code> is {@code true}, attempt to fetch
      *         a new outline paint from the drawing supplier
      *         ({@link #getDrawingSupplier()});
      * <li>if all else fails, return {@link #getBaseSectionOutlinePaint()}.
@@ -1351,7 +1351,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * <li>otherwise, if {@link #getSectionOutlineStroke(int)} is
      *         non-{@code null} return it;</li>
      * <li>if {@link #getSectionOutlineStroke(int)} is {@code null} but
-     *         <code>autoPopulate</code> is <code>true</code>, attempt to fetch
+     *         <code>autoPopulate</code> is {@code true}, attempt to fetch
      *         a new outline stroke from the drawing supplier
      *         ({@link #getDrawingSupplier()});
      * <li>if all else fails, return {@link #getBaseSectionOutlineStroke()}.
@@ -3274,7 +3274,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      *
      * @param obj  the object to test against ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

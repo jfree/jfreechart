@@ -52,8 +52,8 @@ import org.jfree.data.xy.XYDataset;
 public class PlotUtilities {
 
     /**
-     * Returns <code>true</code> if all the datasets belonging to the specified
-     * plot are empty or {@code null}, and <code>false</code> otherwise.
+     * Returns {@code true} if all the datasets belonging to the specified
+     * plot are empty or {@code null}, and {@code false} otherwise.
      *
      * @param plot  the plot ({@code null} permitted).
      *

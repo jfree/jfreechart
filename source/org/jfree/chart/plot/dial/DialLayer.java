@@ -81,7 +81,7 @@ public interface DialLayer {
     public void removeChangeListener(DialLayerChangeListener listener);
 
     /**
-     * Returns <code>true</code> if the specified listener is currently
+     * Returns {@code true} if the specified listener is currently
      * registered with the this layer.
      *
      * @param listener  the listener.
@@ -91,9 +91,9 @@ public interface DialLayer {
     public boolean hasListener(EventListener listener);
 
     /**
-     * Returns <code>true</code> if the drawing should be clipped to the
+     * Returns {@code true} if the drawing should be clipped to the
      * dial window (which is defined by the {@link DialFrame}), and
-     * <code>false</code> otherwise.
+     * {@code false} otherwise.
      *
      * @return A boolean.
      */

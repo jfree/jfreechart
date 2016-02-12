@@ -296,7 +296,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     /**
      * Returns true if shapes are being plotted by the renderer.
      *
-     * @return <code>true</code> if shapes are being plotted by the renderer.
+     * @return {@code true} if shapes are being plotted by the renderer.
      *
      * @see #setBaseShapesVisible
      */
@@ -458,7 +458,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     /**
      * Returns true if lines are being plotted by the renderer.
      *
-     * @return <code>true</code> if lines are being plotted by the renderer.
+     * @return {@code true} if lines are being plotted by the renderer.
      *
      * @see #setPlotLines(boolean)
      */
@@ -534,7 +534,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     /**
      * Returns true if images are being plotted by the renderer.
      *
-     * @return <code>true</code> if images are being plotted by the renderer.
+     * @return {@code true} if images are being plotted by the renderer.
      *
      * @see #setPlotImages(boolean)
      */
@@ -562,7 +562,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * Returns a flag that controls whether or not the renderer shows
      * discontinuous lines.
      *
-     * @return <code>true</code> if lines should be discontinuous.
+     * @return {@code true} if lines should be discontinuous.
      */
     public boolean getPlotDiscontinuous() {
         return this.plotDiscontinuous;

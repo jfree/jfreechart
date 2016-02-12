@@ -323,7 +323,7 @@ public class AxisSpace implements Cloneable, PublicCloneable, Serializable {
      *
      * @param obj  the object to compare against.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {

@@ -768,8 +768,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /**
      * Get the direction for growing angle degrees.
      *
-     * @return <code>true</code> if angle increases counterclockwise,
-     *         <code>false</code> otherwise.
+     * @return {@code true} if angle increases counterclockwise,
+     *         {@code false} otherwise.
      * @since 1.0.14
      */
     public boolean isCounterClockwise() {
@@ -779,7 +779,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /**
      * Sets the flag for increasing angle degrees direction.
      *
-     * <code>true</code> for counterclockwise, <code>false</code> for
+     * {@code true} for counterclockwise, {@code false} for
      * clockwise.
      *
      * @param counterClockwise The flag.
@@ -865,10 +865,10 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Returns <code>true</code> if the angular gridlines are visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the angular gridlines are visible, and
+     * {@code false} otherwise.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      *
      * @see #setAngleGridlinesVisible(boolean)
      */
@@ -948,10 +948,10 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Returns <code>true</code> if the radius axis grid is visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the radius axis grid is visible, and
+     * {@code false} otherwise.
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      *
      * @see #setRadiusGridlinesVisible(boolean)
      */
@@ -1035,7 +1035,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * Return the current value of the flag indicating if radial minor
      * grid-lines will be drawn or not.
      *
-     * @return Returns <code>true</code> if radial minor grid-lines are drawn.
+     * @return Returns {@code true} if radial minor grid-lines are drawn.
      * @since 1.0.15
      */
     public boolean isRadiusMinorGridlinesVisible() {
@@ -1046,8 +1046,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * Set the flag that determines if radial minor grid-lines will be drawn,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param flag <code>true</code> to draw the radial minor grid-lines,
-     *             <code>false</code> to hide them.
+     * @param flag {@code true} to draw the radial minor grid-lines,
+     *             {@code false} to hide them.
      * @since 1.0.15
      */
     public void setRadiusMinorGridlinesVisible(boolean flag) {
@@ -1789,7 +1789,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> or <code>false</code>.
+     * @return {@code true} or {@code false}.
      */
     @Override
     public boolean equals(Object obj) {
@@ -2083,9 +2083,9 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Returns <code>false</code> always.
+     * Returns {@code false} always.
      *
-     * @return <code>false</code> always.
+     * @return {@code false} always.
      */
     @Override
     public boolean isDomainZoomable() {
@@ -2093,9 +2093,9 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Returns <code>true</code> to indicate that the range axis is zoomable.
+     * Returns {@code true} to indicate that the range axis is zoomable.
      *
-     * @return <code>true</code>.
+     * @return {@code true}.
      */
     @Override
     public boolean isRangeZoomable() {

@@ -435,8 +435,8 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns <code>true</code> if all the y-values for the specified x-value
-     * are {@code null} and <code>false</code> otherwise.
+     * Returns {@code true} if all the y-values for the specified x-value
+     * are {@code null} and {@code false} otherwise.
      *
      * @param x  the x-value.
      *

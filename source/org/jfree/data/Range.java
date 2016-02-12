@@ -133,20 +133,20 @@ public strictfp class Range implements Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the range contains the specified value and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the range contains the specified value and
+     * {@code false} otherwise.
      *
      * @param value  the value to lookup.
      *
-     * @return <code>true</code> if the range contains the specified value.
+     * @return {@code true} if the range contains the specified value.
      */
     public boolean contains(double value) {
         return (value >= this.lower && value <= this.upper);
     }
 
     /**
-     * Returns <code>true</code> if the range intersects with the specified
-     * range, and <code>false</code> otherwise.
+     * Returns {@code true} if the range intersects with the specified
+     * range, and {@code false} otherwise.
      *
      * @param b0  the lower bound (should be &lt;= b1).
      * @param b1  the upper bound (should be &gt;= b0).
@@ -163,8 +163,8 @@ public strictfp class Range implements Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the range intersects with the specified
-     * range, and <code>false</code> otherwise.
+     * Returns {@code true} if the range intersects with the specified
+     * range, and {@code false} otherwise.
      *
      * @param range  another range ({@code null} not permitted).
      *
@@ -437,8 +437,8 @@ public strictfp class Range implements Serializable {
     }
 
     /**
-     * Returns <code>true</code> if both the lower and upper bounds are 
-     * <code>Double.NaN</code>, and <code>false</code> otherwise.
+     * Returns {@code true} if both the lower and upper bounds are 
+     * <code>Double.NaN</code>, and {@code false} otherwise.
      * 
      * @return A boolean.
      * 

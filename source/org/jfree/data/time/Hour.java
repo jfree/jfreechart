@@ -373,7 +373,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @param obj  the object to compare ({@code null} permitted).
      *
-     * @return <code>true</code> if the hour and day value of the object
+     * @return {@code true} if the hour and day value of the object
      *      is the same as this.
      */
     @Override

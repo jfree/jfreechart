@@ -125,10 +125,10 @@ public class XYTaskDataset extends AbstractXYDataset
 
     /**
      * Returns a flag that indicates whether or not the dataset is transposed.
-     * The default is <code>false</code> which means the x-values are integers
+     * The default is {@code false} which means the x-values are integers
      * corresponding to the series indices, and the y-values are millisecond
      * values corresponding to the task date/time intervals.  If the flag
-     * is set to <code>true</code>, the x and y-values are reversed.
+     * is set to {@code true}, the x and y-values are reversed.
      *
      * @return The flag.
      *

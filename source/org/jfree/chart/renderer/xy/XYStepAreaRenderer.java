@@ -209,7 +209,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     /**
      * Returns true if shapes are being plotted by the renderer.
      *
-     * @return <code>true</code> if shapes are being plotted by the renderer.
+     * @return {@code true} if shapes are being plotted by the renderer.
      *
      * @see #setShapesVisible(boolean)
      */
@@ -258,7 +258,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     /**
      * Returns true if Area is being plotted by the renderer.
      *
-     * @return <code>true</code> if Area is being plotted by the renderer.
+     * @return {@code true} if Area is being plotted by the renderer.
      *
      * @see #setPlotArea(boolean)
      */

@@ -533,7 +533,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      *
      * @param axis The proposed axis.
      *
-     * @return <code>true</code> if the axis is compatible with the plot.
+     * @return {@code true} if the axis is compatible with the plot.
      */
     public boolean isCompatibleDomainAxis(ValueAxis axis) {
 
@@ -1801,7 +1801,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     }
 
     /**
-     * Returns <code>false</code>.
+     * Returns {@code false}.
      *
      * @return A boolean.
      */
@@ -1810,7 +1810,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     }
 
     /**
-     * Returns <code>false</code>.
+     * Returns {@code false}.
      *
      * @return A boolean.
      */

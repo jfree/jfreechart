@@ -196,10 +196,10 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     /**
      * This method should not be used.
      *
-     * @return <code>false</code> always.
+     * @return {@code false} always.
      *
      * @deprecated This method was included in the API by mistake and serves
-     *     no useful purpose.  It has always returned <code>false</code>.
+     *     no useful purpose.  It has always returned {@code false}.
      *
      */
     public boolean getPlotLines() {

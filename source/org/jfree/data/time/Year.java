@@ -298,13 +298,13 @@ public class Year extends RegularTimePeriod implements Serializable {
 
     /**
      * Tests the equality of this <code>Year</code> object to an arbitrary
-     * object.  Returns <code>true</code> if the target is a <code>Year</code>
+     * object.  Returns {@code true} if the target is a <code>Year</code>
      * instance representing the same year as this object.  In all other cases,
-     * returns <code>false</code>.
+     * returns {@code false}.
      *
      * @param obj  the object ({@code null} permitted).
      *
-     * @return <code>true</code> if the year of this and the object are the
+     * @return {@code true} if the year of this and the object are the
      *         same.
      */
     @Override

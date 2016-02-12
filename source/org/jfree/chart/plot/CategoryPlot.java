@@ -1775,7 +1775,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the flag that controls whether the domain grid-lines are visible.
      *
-     * @return The <code>true</code> or <code>false</code>.
+     * @return The {@code true} or {@code false}.
      *
      * @see #setDomainGridlinesVisible(boolean)
      */
@@ -2043,8 +2043,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>true</code> if the range axis minor grid is visible, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the range axis minor grid is visible, and
+     * {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -4508,7 +4508,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>false</code> always, because the plot cannot be panned
+     * Returns {@code false} always, because the plot cannot be panned
      * along the domain axis/axes.
      *
      * @return A boolean.
@@ -4523,8 +4523,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>true</code> if panning is enabled for the range axes,
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if panning is enabled for the range axes,
+     * and {@code false} otherwise.
      *
      * @return A boolean.
      *
@@ -4597,7 +4597,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>false</code> to indicate that the domain axes are not
+     * Returns {@code false} to indicate that the domain axes are not
      * zoomable.
      *
      * @return A boolean.
@@ -4610,7 +4610,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns <code>true</code> to indicate that the range axes are zoomable.
+     * Returns {@code true} to indicate that the range axes are zoomable.
      *
      * @return A boolean.
      *

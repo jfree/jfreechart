@@ -135,7 +135,7 @@ public class WaferMapRenderer extends AbstractRenderer {
      *
      * @param method  the method.
      *
-     * @return <code>true</code> or </code>false</code>.
+     * @return {@code true} or </code>false</code>.
      */
     private boolean isMethodValid(int method) {
         switch (method) {

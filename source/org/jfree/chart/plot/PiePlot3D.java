@@ -1021,7 +1021,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
      *
      * @param angle  the angle.
      *
-     * @return <code>true</code> if the angle is at the back of the pie.
+     * @return {@code true} if the angle is at the back of the pie.
      */
     private boolean isAngleAtBack(double angle) {
         return (Math.sin(Math.toRadians(angle)) > 0.0);
