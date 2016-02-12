@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * AbstractXYItemLabelGenerator.java
  * ---------------------------------
- * (C) Copyright 2004-2013, by Object Refinery Limited.
+ * (C) Copyright 2004-2016, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,7 +49,7 @@
  * 23-Nov-2007 : Implemented hashCode() (DG);
  * 26-May-2008 : Added accessor methods for nullYString and updated equals()
  *               method (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
+ * 03-Jul-2016 : Use ParamChecks (DG);
  *
  */
 

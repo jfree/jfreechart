@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,7 +28,7 @@
  * ThermometerPlot.java
  * --------------------
  *
- * (C) Copyright 2000-2013, by Bryan Scott and Contributors.
+ * (C) Copyright 2000-2016, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott (based on MeterPlot by Hari).
  * Contributor(s):   David Gilbert (for Object Refinery Limited).

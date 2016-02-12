@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * CategoryAxis3D.java
  * -------------------
- * (C) Copyright 2003-2013, by Klaus Rheinwald and Contributors.
+ * (C) Copyright 2003-2016, by Klaus Rheinwald and Contributors.
  *
  * Original Author:  Klaus Rheinwald;
  * Contributor(s):   Tin Luu,

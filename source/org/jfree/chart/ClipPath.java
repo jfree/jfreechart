@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * ClipPath.java
  * -------------
- * (C) Copyright 2003-2013, by David M. O'Donnell and Contributors.
+ * (C) Copyright 2003-2016, by David M. O'Donnell and Contributors.
  *
  * Original Author:  David M. O'Donnell;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);

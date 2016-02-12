@@ -35,7 +35,7 @@
  * Changes
  * -------
  * 17-Sep-2008 : Version 1 (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
+ * 03-Jul-2016 : Use ParamChecks (DG);
  *
  */
 
