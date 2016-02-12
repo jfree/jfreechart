@@ -27,7 +27,7 @@
  * ------------------
  * TestUtilities.java
  * ------------------
- * (C) Copyright 2007-2013, by Object Refinery Limited.
+ * (C) Copyright 2007-2016, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -56,8 +56,8 @@ import java.util.Iterator;
 public class TestUtilities {
 
     /**
-     * Returns <code>true</code> if the collections contains any object that
-     * is an instance of the specified class, and <code>false</code> otherwise.
+     * Returns {@code true} if the collections contains any object that
+     * is an instance of the specified class, and {@code false} otherwise.
      *
      * @param collection  the collection.
      * @param c  the class.
