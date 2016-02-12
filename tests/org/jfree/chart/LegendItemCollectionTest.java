@@ -27,7 +27,7 @@
  * -----------------------------
  * LegendItemCollectionTest.java
  * -----------------------------
- * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
